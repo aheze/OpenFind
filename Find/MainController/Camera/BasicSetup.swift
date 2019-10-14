@@ -22,13 +22,15 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         frameRect.size.height = 100
         ramReel = RAMReel(frame: frameRect, dataSource: dataSource, placeholder: "Start by typing…", attemptToDodgeKeyboard: false) {
             print("Plain:", $0)
+            self.finalTextToFind = $0
+            self.textDetectionRequest.customWords = [self.finalTextToFind, "Find app"]
         }
         
-        ramReel.hooks.append {
-            let r = Array($0.reversed())
-            let j = String(r)
-            print("Reversed:", j)
-        }
+//        ramReel.hooks.append {
+//            let r = Array($0.reversed())
+//            let j = String(r)
+//            print("Reversed:", j)
+//        }
         
         view.addSubview(ramReel.view)
         ramReel.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -56,7 +58,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
                 self.sceneView.session.pause()
                 self.stopProcessingImage == true
 //                self.classicTimer.suspend()
-                print("suspend timer")
+//                print("suspend timer")
             }
              self.view.layoutIfNeeded()
         }, completion: nil)
@@ -64,7 +66,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print("done")
+        
         ramReel.collectionView.isHidden = true
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
             
@@ -84,7 +86,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
                 self.sceneView.session.run(self.sceneConfiguration)
                 self.stopProcessingImage == false
 //                self.classicTimer.resume()
-                print("resume timer")
+//                print("resume timer")
             }
             self.view.layoutIfNeeded()
         }, completion: nil)
