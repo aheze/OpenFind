@@ -122,12 +122,26 @@
                                     <constraint firstAttribute="bottom" secondItem="Ksm-rU-iBX" secondAttribute="bottom" constant="4" id="tOd-UU-SEg"/>
                                 </constraints>
                             </view>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SjR-c7-NyL" userLabel="darkBlurEffect">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Nz0-Uk-Iae">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="tfa-HC-4HH"/>
+                                </constraints>
+                                <blurEffect style="systemChromeMaterialDark"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bCb-2s-qjS" secondAttribute="bottom" constant="15" id="5nU-oh-YvN"/>
                             <constraint firstItem="KrV-7J-ulH" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Krc-J8-R2B"/>
                             <constraint firstItem="KrV-7J-ulH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="aj0-bz-ZeP"/>
+                            <constraint firstItem="SjR-c7-NyL" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="bjg-p6-kf5"/>
+                            <constraint firstAttribute="trailing" secondItem="SjR-c7-NyL" secondAttribute="trailing" id="cvC-d9-41O"/>
+                            <constraint firstItem="SjR-c7-NyL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="d3b-Wx-Un7"/>
                             <constraint firstAttribute="trailing" secondItem="KrV-7J-ulH" secondAttribute="trailing" id="hZE-mW-HLo"/>
                             <constraint firstAttribute="bottom" secondItem="KrV-7J-ulH" secondAttribute="bottom" id="jlA-hz-Vdw"/>
                             <constraint firstItem="bCb-2s-qjS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="lvb-Kh-5K0"/>
@@ -137,6 +151,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="darkBlurEffect" destination="SjR-c7-NyL" id="0Wd-Vq-FxN"/>
+                        <outlet property="darkBlurEffectHeightConstraint" destination="tfa-HC-4HH" id="HNH-Jb-7ZA"/>
                         <outlet property="menuButton" destination="Ksm-rU-iBX" id="fhV-tI-55z"/>
                         <outlet property="modeButton" destination="McS-Ju-2hk" id="g7E-le-xIV"/>
                         <outlet property="photoButton" destination="ekO-GU-ezg" id="eqe-II-IC9"/>

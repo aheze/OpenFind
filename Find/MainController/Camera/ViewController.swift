@@ -10,12 +10,17 @@ import UIKit
 import ARKit
 import Vision
 import JJFloatingActionButton
+import RAMReel
 
 
 class ViewController: UIViewController {
 
     
     @IBOutlet weak var sceneView: ARSCNView!
+    
+    @IBOutlet weak var darkBlurEffect: UIVisualEffectView!
+    @IBOutlet weak var darkBlurEffectHeightConstraint: NSLayoutConstraint!
+    
     
     @IBOutlet weak var photoButton: UIButton!
     @IBOutlet weak var modeButton: JJFloatingActionButton!
@@ -27,6 +32,7 @@ class ViewController: UIViewController {
     ///CLASSIC MODE
     let classicTimer = RepeatingTimer(timeInterval: 1)
     var isBusyProcessingImage = false
+    var stopProcessingImage = false
     
     ///FOCUS MODE
     
@@ -41,6 +47,23 @@ class ViewController: UIViewController {
         request.usesLanguageCorrection = true
         return request
     }()
+    //ramreel
+    var dataSource: SimplePrefixQueryDataSource!
+    var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
+    let data: [String] = {
+        do {
+            guard let dataPath = Bundle.main.path(forResource: "data", ofType: "txt") else {
+                return []
+            }
+            
+            let data = try WordReader(filepath: dataPath)
+            return data.words
+        }
+        catch let error {
+            print(error)
+            return []
+        }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +76,7 @@ class ViewController: UIViewController {
         
         setUpButtons()
         setUpClassicTimer()
+        setUpRamReel()
         
         switch scanModeToggle {
             case .classic:

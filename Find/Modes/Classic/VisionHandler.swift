@@ -22,6 +22,7 @@ extension ViewController {
         var components = [Component]()
         
         for result in results {
+            if stopProcessingImage == false {
             if let observation = result as? VNRecognizedTextObservation {
                for text in observation.topCandidates(1) {
                     print(text.string)
@@ -37,6 +38,13 @@ extension ViewController {
                 }
             }
             }
+            
+            } else {
+                print("stopping loop")
+                break
+            }
         }
+        
+        
     }
 }
