@@ -8,7 +8,9 @@
 
 import UIKit
 import ARKit
+import Vision
 import JJFloatingActionButton
+
 
 class ViewController: UIViewController {
 
@@ -22,6 +24,24 @@ class ViewController: UIViewController {
     @IBOutlet weak var menuButton: JJFloatingActionButton!
     
     
+    ///CLASSIC MODE
+    let classicTimer = RepeatingTimer(timeInterval: 1)
+    var isBusyProcessingImage = false
+    
+    ///FOCUS MODE
+    
+    ///Every mode (Universal)
+    var scanModeToggle = CurrentModeToggle.classic
+    var finalTextToFind : String = ""
+    
+    lazy var textDetectionRequest: VNRecognizeTextRequest = {
+        let request = VNRecognizeTextRequest(completionHandler: self.handleDetectedText)
+        request.recognitionLevel = .fast
+        request.recognitionLanguages = ["en_GB"]
+        request.usesLanguageCorrection = true
+        return request
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +52,18 @@ class ViewController: UIViewController {
         sceneView.session.run(sceneConfiguration)
         
         setUpButtons()
+        setUpClassicTimer()
+        
+        switch scanModeToggle {
+            case .classic:
+                classicTimer.resume()
+            case .focused:
+                print("focusmode")
+            default:
+            print("WRONG MODE__________")
+        }
+        
+        
     }
     
     var statusBarHidden : Bool = false
@@ -41,6 +73,7 @@ class ViewController: UIViewController {
 
 
 }
+//MARK: AR
 extension ViewController: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
@@ -62,74 +95,6 @@ extension ViewController: ARSCNViewDelegate {
     
 }
 
-extension ViewController {
-    func setUpButtons() {
-        self.statusBarHidden = true
-        UIView.animate(withDuration: 0.3, animations: {
-            self.setNeedsStatusBarAppearanceUpdate()
-        })
-        
-        let goToHist = menuButton.addItem()
-        goToHist.titleLabel.text = "History"
-        goToHist.imageView.image = #imageLiteral(resourceName: "bhistory 2")
-        goToHist.action = { item in
-            print("hist")
-            //self.performSegue(withIdentifier: "goToHist", sender: self)
-            //self.t.suspend()
-            //self.f.suspend()
-        }
-        let goToSett = menuButton.addItem()
-        goToSett.titleLabel.text = "Settings"
-        goToSett.imageView.image = #imageLiteral(resourceName: "bsettings 2")
-        goToSett.action = { item in
-            print("settings")
-            //self.performSegue(withIdentifier: "goToSett", sender: self)
-            //self.t.suspend()
-            //self.f.suspend()
-        }
-        
-        
-        
-    let goToClassic = modeButton.addItem()
-        goToClassic.titlePosition = .trailing
-        goToClassic.titleLabel.text = "Classic mode"
-        goToClassic.imageView.image = #imageLiteral(resourceName: "bclassic 2")
-        goToClassic.action = { item in
-            print("classicmode")
-            
-             //self.scanModeToggle = .classic
-             //self.stopFinding = true
-             //self.blurScreen(mode: false)
-             //self.f.suspend()
-             //self.stopLoopTag = false
-             //self.t.resume()
-            UIView.animate(withDuration: 0.2, animations: {
-                if let tag1 = self.view.viewWithTag(1) {
-                    tag1.alpha = 0
-                }
-                if let tag2 = self.view.viewWithTag(2) {
-                    tag2.alpha = 0
-                }
-            })
 
-        }
-        let goToFocus = modeButton.addItem()
-        goToFocus.titlePosition = .trailing
-        goToFocus.titleLabel.text = "Focus mode"
-        goToFocus.imageView.image = #imageLiteral(resourceName: "bfocus 2")
-        goToFocus.action = { item in
-            //self.classicHasFoundOne = false
-            print("focusmode")
-            //self.scanModeToggle = .focused
-            //self.stopLoopTag = true
-            //self.stopFinding = false
-            //self.t.suspend()
-            //self.numberOfFocusTimes = 0
-            //self.f.resume()
-            //self.blurScreen(mode: true)
-        }
-        menuButton.overlayView.backgroundColor = UIColor.clear
-        modeButton.overlayView.backgroundColor = UIColor.clear
-    }
-}
+
 

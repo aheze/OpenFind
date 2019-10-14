@@ -14,6 +14,11 @@
 		4999AC9B2353A80A00AB06A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4999AC992353A80A00AB06A7 /* Main.storyboard */; };
 		4999AC9D2353A81100AB06A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4999AC9C2353A81100AB06A7 /* Assets.xcassets */; };
 		4999ACA02353A81100AB06A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4999AC9E2353A81100AB06A7 /* LaunchScreen.storyboard */; };
+		49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */; };
+		49F7B1522353FC970099FA62 /* ProcessImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1512353FC970099FA62 /* ProcessImage.swift */; };
+		49F7B1542353FDF40099FA62 /* VisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1532353FDF40099FA62 /* VisionHandler.swift */; };
+		49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1552353FE4B0099FA62 /* BasicSetup.swift */; };
+		49F7B1582353FE7E0099FA62 /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1572353FE7E0099FA62 /* TextComponent.swift */; };
 		E0DFC8F68C8F4CF9FF0BC59E /* Pods_Find.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BDD383BE4831A8EEB1C1806 /* Pods_Find.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +33,11 @@
 		4999AC9C2353A81100AB06A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4999AC9F2353A81100AB06A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4999ACA12353A81100AB06A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
+		49F7B1512353FC970099FA62 /* ProcessImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessImage.swift; sourceTree = "<group>"; };
+		49F7B1532353FDF40099FA62 /* VisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionHandler.swift; sourceTree = "<group>"; };
+		49F7B1552353FE4B0099FA62 /* BasicSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSetup.swift; sourceTree = "<group>"; };
+		49F7B1572353FE7E0099FA62 /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
 		7F1B04E9888AAEC98DF2E096 /* Pods-Find.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find.debug.xcconfig"; path = "Target Support Files/Pods-Find/Pods-Find.debug.xcconfig"; sourceTree = "<group>"; };
 		E05C3167AB2FF51F44B12AE3 /* Pods-Find.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find.release.xcconfig"; path = "Target Support Files/Pods-Find/Pods-Find.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -56,6 +66,8 @@
 		496937362353C1F4009CA41A /* Classic */ = {
 			isa = PBXGroup;
 			children = (
+				49F7B1512353FC970099FA62 /* ProcessImage.swift */,
+				49F7B1532353FDF40099FA62 /* VisionHandler.swift */,
 			);
 			path = Classic;
 			sourceTree = "<group>";
@@ -96,6 +108,7 @@
 			children = (
 				4999AC932353A80A00AB06A7 /* AppDelegate.swift */,
 				4999AC952353A80A00AB06A7 /* SceneDelegate.swift */,
+				49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -107,6 +120,8 @@
 				4999AC992353A80A00AB06A7 /* Main.storyboard */,
 				4999AC9E2353A81100AB06A7 /* LaunchScreen.storyboard */,
 				4969373D2353C3D8009CA41A /* ShutterButton.swift */,
+				49F7B1552353FE4B0099FA62 /* BasicSetup.swift */,
+				49F7B1572353FE7E0099FA62 /* TextComponent.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -276,7 +291,12 @@
 				4999AC982353A80A00AB06A7 /* ViewController.swift in Sources */,
 				4969373E2353C3D8009CA41A /* ShutterButton.swift in Sources */,
 				4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */,
+				49F7B1582353FE7E0099FA62 /* TextComponent.swift in Sources */,
+				49F7B1522353FC970099FA62 /* ProcessImage.swift in Sources */,
 				4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */,
+				49F7B1542353FDF40099FA62 /* VisionHandler.swift in Sources */,
+				49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */,
+				49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
