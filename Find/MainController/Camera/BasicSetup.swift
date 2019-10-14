@@ -37,9 +37,6 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
 
-        stopProcessingImage == true
-        classicTimer.suspend()
-        
         ramReel.view.bounds = view.bounds
         print("textfield")
         ramReel.collectionView.isHidden = false
@@ -56,7 +53,10 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
                 tag2.alpha = 0
             }
             } else {
-                self.classicTimer.suspend()
+                self.sceneView.session.pause()
+                self.stopProcessingImage == true
+//                self.classicTimer.suspend()
+                print("suspend timer")
             }
              self.view.layoutIfNeeded()
         }, completion: nil)
@@ -81,8 +81,10 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
                 tag2.alpha = 1
             }
             } else {
+                self.sceneView.session.run(self.sceneConfiguration)
                 self.stopProcessingImage == false
-                self.classicTimer.resume()
+//                self.classicTimer.resume()
+                print("resume timer")
             }
             self.view.layoutIfNeeded()
         }, completion: nil)
@@ -104,6 +106,7 @@ extension ViewController {
             if self.isBusyProcessingImage == false {
                 self.processImage()
             } else {
+                print("busyPROCESSING+_+_+_+_+_+")
                 return
             }
             if(false){

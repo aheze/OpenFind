@@ -33,6 +33,7 @@ class ViewController: UIViewController {
     let classicTimer = RepeatingTimer(timeInterval: 1)
     var isBusyProcessingImage = false
     var stopProcessingImage = false
+    let sceneConfiguration = ARWorldTrackingConfiguration()
     
     ///FOCUS MODE
     
@@ -70,8 +71,7 @@ class ViewController: UIViewController {
         
         //MARK: Sceneview
         sceneView.delegate = self
-        let sceneConfiguration = ARWorldTrackingConfiguration()
-        sceneConfiguration.planeDetection = .horizontal
+        sceneConfiguration.planeDetection = [.horizontal, .vertical]
         sceneView.session.run(sceneConfiguration)
         
         setUpButtons()

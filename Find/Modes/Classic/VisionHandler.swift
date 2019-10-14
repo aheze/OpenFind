@@ -45,6 +45,6 @@ extension ViewController {
             }
         }
         
-        
+      isBusyProcessingImage == false
     }
 }
