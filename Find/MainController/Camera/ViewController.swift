@@ -8,11 +8,19 @@
 
 import UIKit
 import ARKit
+import JJFloatingActionButton
 
 class ViewController: UIViewController {
 
     
     @IBOutlet weak var sceneView: ARSCNView!
+    
+    @IBOutlet weak var photoButton: UIButton!
+    @IBOutlet weak var modeButton: JJFloatingActionButton!
+    @IBOutlet weak var shutterButton: ShutterButton!
+    @IBOutlet weak var refreshButton: UIButton!
+    @IBOutlet weak var menuButton: JJFloatingActionButton!
+    
     
     
     

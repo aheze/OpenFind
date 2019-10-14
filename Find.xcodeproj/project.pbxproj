@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4969373E2353C3D8009CA41A /* ShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4969373D2353C3D8009CA41A /* ShutterButton.swift */; };
 		4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4999AC932353A80A00AB06A7 /* AppDelegate.swift */; };
 		4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4999AC952353A80A00AB06A7 /* SceneDelegate.swift */; };
 		4999AC982353A80A00AB06A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4999AC972353A80A00AB06A7 /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		1BDD383BE4831A8EEB1C1806 /* Pods_Find.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Find.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4969373D2353C3D8009CA41A /* ShutterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutterButton.swift; sourceTree = "<group>"; };
 		4999AC902353A80A00AB06A7 /* Find.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Find.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4999AC932353A80A00AB06A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4999AC952353A80A00AB06A7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +44,73 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		496937352353C1E9009CA41A /* Modes */ = {
+			isa = PBXGroup;
+			children = (
+				496937372353C1FD009CA41A /* Focused */,
+				496937362353C1F4009CA41A /* Classic */,
+			);
+			path = Modes;
+			sourceTree = "<group>";
+		};
+		496937362353C1F4009CA41A /* Classic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Classic;
+			sourceTree = "<group>";
+		};
+		496937372353C1FD009CA41A /* Focused */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Focused;
+			sourceTree = "<group>";
+		};
+		496937382353C219009CA41A /* MainController */ = {
+			isa = PBXGroup;
+			children = (
+				4969373C2353C277009CA41A /* Camera */,
+				4969373A2353C241009CA41A /* History */,
+				496937392353C228009CA41A /* Settings */,
+			);
+			path = MainController;
+			sourceTree = "<group>";
+		};
+		496937392353C228009CA41A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		4969373A2353C241009CA41A /* History */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		4969373B2353C25B009CA41A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4999AC932353A80A00AB06A7 /* AppDelegate.swift */,
+				4999AC952353A80A00AB06A7 /* SceneDelegate.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		4969373C2353C277009CA41A /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				4999AC972353A80A00AB06A7 /* ViewController.swift */,
+				4999AC992353A80A00AB06A7 /* Main.storyboard */,
+				4999AC9E2353A81100AB06A7 /* LaunchScreen.storyboard */,
+				4969373D2353C3D8009CA41A /* ShutterButton.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
 		4999AC872353A80A00AB06A7 = {
 			isa = PBXGroup;
 			children = (
@@ -63,12 +132,10 @@
 		4999AC922353A80A00AB06A7 /* Find */ = {
 			isa = PBXGroup;
 			children = (
-				4999AC932353A80A00AB06A7 /* AppDelegate.swift */,
-				4999AC952353A80A00AB06A7 /* SceneDelegate.swift */,
-				4999AC972353A80A00AB06A7 /* ViewController.swift */,
-				4999AC992353A80A00AB06A7 /* Main.storyboard */,
+				496937382353C219009CA41A /* MainController */,
+				496937352353C1E9009CA41A /* Modes */,
+				4969373B2353C25B009CA41A /* Utilities */,
 				4999AC9C2353A81100AB06A7 /* Assets.xcassets */,
-				4999AC9E2353A81100AB06A7 /* LaunchScreen.storyboard */,
 				4999ACA12353A81100AB06A7 /* Info.plist */,
 			);
 			path = Find;
@@ -88,7 +155,6 @@
 				7F1B04E9888AAEC98DF2E096 /* Pods-Find.debug.xcconfig */,
 				E05C3167AB2FF51F44B12AE3 /* Pods-Find.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -208,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4999AC982353A80A00AB06A7 /* ViewController.swift in Sources */,
+				4969373E2353C3D8009CA41A /* ShutterButton.swift in Sources */,
 				4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */,
 				4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */,
 			);
