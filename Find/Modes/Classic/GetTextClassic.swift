@@ -28,8 +28,9 @@ extension ViewController {
                 let finalPoint = CGPoint(x: newPoint.x + individualCharacterWidth, y: newPoint.y)
                 let addedWidth = CGFloat(index) * individualCharacterWidth
                 let results = sceneView.hitTest(finalPoint, types: .existingPlaneUsingExtent)
+                
                 if let hitResult = results.first {
-                    print(realComponentWidth/2000)
+                    
                     let highlight = SCNBox(width: realComponentWidth/2000, height: 0.001, length: realComponentHeight/2000, chamferRadius: 0.001)
                     let material = SCNMaterial()
                     let highlightColor : UIColor = #colorLiteral(red: 0, green: 0.7389578223, blue: 0.9509587884, alpha: 1)
@@ -37,7 +38,7 @@ extension ViewController {
                     highlight.materials = [material]
                     
                     let node = SCNNode(geometry: highlight)
-                                
+                    node.transform = SCNMatrix4(hitResult.anchor!.transform)
                     node.position = SCNVector3(
                         
                         x: hitResult.worldTransform.columns.3.x,
