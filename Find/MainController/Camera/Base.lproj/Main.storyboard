@@ -133,15 +133,51 @@
                                 </constraints>
                                 <blurEffect style="systemChromeMaterialDark"/>
                             </visualEffectView>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lbv-hN-VHM" userLabel="toolbarView">
+                                <rect key="frame" x="0.0" y="314" width="375" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TIr-d7-AB7">
+                                        <rect key="frame" x="8" y="5" width="48" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="abv-nb-Uzs"/>
+                                        </constraints>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="cancelButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tqm-ef-Rwf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ix6-Yi-RWD">
+                                        <rect key="frame" x="206" y="5" width="161" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="YCu-bw-Mgf"/>
+                                        </constraints>
+                                        <state key="normal" title="Accept Autocompletion"/>
+                                        <connections>
+                                            <action selector="autocompButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NgE-zu-6J3"/>
+                                            <action selector="cancelButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nwg-2e-evP"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ix6-Yi-RWD" secondAttribute="trailing" constant="8" id="140-bq-MQT"/>
+                                    <constraint firstAttribute="height" constant="40" id="5Mu-a2-6eO"/>
+                                    <constraint firstItem="TIr-d7-AB7" firstAttribute="leading" secondItem="Lbv-hN-VHM" secondAttribute="leading" constant="8" id="Pss-wf-EPi"/>
+                                    <constraint firstItem="ix6-Yi-RWD" firstAttribute="centerY" secondItem="Lbv-hN-VHM" secondAttribute="centerY" id="Ubv-dk-O69"/>
+                                    <constraint firstItem="TIr-d7-AB7" firstAttribute="centerY" secondItem="Lbv-hN-VHM" secondAttribute="centerY" id="fNg-br-Lvh"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Lbv-hN-VHM" secondAttribute="trailing" id="3Rc-UC-1SF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bCb-2s-qjS" secondAttribute="bottom" constant="15" id="5nU-oh-YvN"/>
                             <constraint firstItem="KrV-7J-ulH" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Krc-J8-R2B"/>
                             <constraint firstItem="KrV-7J-ulH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="aj0-bz-ZeP"/>
                             <constraint firstItem="SjR-c7-NyL" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="bjg-p6-kf5"/>
                             <constraint firstAttribute="trailing" secondItem="SjR-c7-NyL" secondAttribute="trailing" id="cvC-d9-41O"/>
                             <constraint firstItem="SjR-c7-NyL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="d3b-Wx-Un7"/>
+                            <constraint firstItem="Lbv-hN-VHM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="egK-6u-Z4D"/>
                             <constraint firstAttribute="trailing" secondItem="KrV-7J-ulH" secondAttribute="trailing" id="hZE-mW-HLo"/>
                             <constraint firstAttribute="bottom" secondItem="KrV-7J-ulH" secondAttribute="bottom" id="jlA-hz-Vdw"/>
                             <constraint firstItem="bCb-2s-qjS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="lvb-Kh-5K0"/>
@@ -151,6 +187,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="autocompButton" destination="ix6-Yi-RWD" id="PZ4-bL-JzG"/>
+                        <outlet property="cancelButton" destination="TIr-d7-AB7" id="uSo-tX-2mh"/>
                         <outlet property="darkBlurEffect" destination="SjR-c7-NyL" id="0Wd-Vq-FxN"/>
                         <outlet property="darkBlurEffectHeightConstraint" destination="tfa-HC-4HH" id="HNH-Jb-7ZA"/>
                         <outlet property="menuButton" destination="Ksm-rU-iBX" id="fhV-tI-55z"/>
@@ -159,6 +197,7 @@
                         <outlet property="refreshButton" destination="84J-Qd-mTc" id="tvM-QE-4kL"/>
                         <outlet property="sceneView" destination="KrV-7J-ulH" id="gFH-ke-p5A"/>
                         <outlet property="shutterButton" destination="V9d-sb-q19" id="CPb-yz-AXa"/>
+                        <outlet property="toolbarView" destination="Lbv-hN-VHM" id="eBt-Rj-J4E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -12,10 +12,10 @@ import Vision
 
 extension ViewController {
     func processImage() {
-        isBusyProcessingImage == true
+        isBusyProcessingImage = true
         guard let capturedImage = sceneView.session.currentFrame?.capturedImage else {
             print("no captured image")
-            isBusyProcessingImage == false
+            isBusyProcessingImage = false
             return
         }
         let requests = [textDetectionRequest]
@@ -24,10 +24,10 @@ extension ViewController {
             do {
                 try imageRequestHandler.perform(requests)
             } catch let error {
-                self.isBusyProcessingImage == false
+                self.isBusyProcessingImage = false
                 print("Error: \(error)")
             }
         }
-        
+        isBusyProcessingImage = false
     }
 }

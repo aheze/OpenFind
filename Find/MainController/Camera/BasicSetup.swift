@@ -36,14 +36,26 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         ramReel.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         ramReel.textFieldDelegate = self as UITextFieldDelegate
     }
-    
+   
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+        }
+    }
     func textFieldDidBeginEditing(_ textField: UITextField) {
-
+       
         ramReel.view.bounds = view.bounds
         print("textfield")
+        print(ramReel.collectionView.frame)
         ramReel.collectionView.isHidden = false
         darkBlurEffectHeightConstraint.constant = self.view.bounds.size.height
+        
+        self.toolbarView.isHidden = false
+        
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            self.toolbarView.alpha = 1
+            self.toolbarView.frame.origin.y -= self.keyboardHeight
             self.darkBlurEffect.alpha = 1
             if self.scanModeToggle == .focused {
             if let tag1 = self.view.viewWithTag(1) {
@@ -56,7 +68,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
             }
             } else {
                 self.sceneView.session.pause()
-                self.stopProcessingImage == true
+                self.stopProcessingImage = true
 //                self.classicTimer.suspend()
 //                print("suspend timer")
             }
@@ -69,6 +81,8 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         
         ramReel.collectionView.isHidden = true
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            self.toolbarView.frame.origin.y -= self.keyboardHeight
+            self.toolbarView.alpha = 0
             
             self.darkBlurEffect.alpha = 0.7
             self.darkBlurEffectHeightConstraint.constant = 100
@@ -84,12 +98,15 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
             }
             } else {
                 self.sceneView.session.run(self.sceneConfiguration)
-                self.stopProcessingImage == false
+                self.stopProcessingImage = false
 //                self.classicTimer.resume()
 //                print("resume timer")
             }
             self.view.layoutIfNeeded()
-        }, completion: nil)
+        }, completion: {_ in
+            self.toolbarView.isHidden = true
+        }
+        )
              print(ramReel.selectedItem)
         if ramReel.selectedItem == "" {
             ramReel.placeholder = "Type here to find!"
@@ -102,6 +119,12 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
 }
 
 extension ViewController {
+    func setUpToolBar() {
+        toolbarView.isHidden = true
+        toolbarView.alpha = 0
+        toolbarView.frame.origin.y = deviceSize.height - 40
+        print(deviceSize.height)
+    }
    
     func setUpClassicTimer() {
         classicTimer.eventHandler = {

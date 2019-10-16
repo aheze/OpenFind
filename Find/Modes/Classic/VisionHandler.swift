@@ -25,7 +25,7 @@ extension ViewController {
             if stopProcessingImage == false {
             if let observation = result as? VNRecognizedTextObservation {
                for text in observation.topCandidates(1) {
-                    print(text.string)
+//                    print(text.string)
                 let component = Component()
                 component.x = observation.boundingBox.origin.x
                 component.y = observation.boundingBox.origin.y
@@ -34,7 +34,7 @@ extension ViewController {
                 component.text = text.string
                 if component.text.contains(finalTextToFind) {
                     print("contains")
-                   // getText(isFocusMode: false, stringToFind: finalTextToFind, component: component)
+                    getTextClassic(stringToFind: finalTextToFind, component: component)
                 }
             }
             }
@@ -45,6 +45,6 @@ extension ViewController {
             }
         }
         
-      isBusyProcessingImage == false
+      
     }
 }

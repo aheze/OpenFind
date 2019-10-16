@@ -28,6 +28,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var menuButton: JJFloatingActionButton!
     
+    @IBOutlet weak var toolbarView: UIView!
+    
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var autocompButton: UIButton!
+    
+    @IBAction func cancelButtonPressed(_ sender: UIButton) {
+        print("cancel")
+    }
+    
+    @IBAction func autocompButtonPressed(_ sender: UIButton) {
+        print("autocomp")
+    }
     
     ///CLASSIC MODE
     let classicTimer = RepeatingTimer(timeInterval: 1)
@@ -40,6 +52,8 @@ class ViewController: UIViewController {
     ///Every mode (Universal)
     var scanModeToggle = CurrentModeToggle.classic
     var finalTextToFind : String = ""
+    let deviceSize = UIScreen.main.bounds.size
+    var keyboardHeight = CGFloat()
     
     lazy var textDetectionRequest: VNRecognizeTextRequest = {
         let request = VNRecognizeTextRequest(completionHandler: self.handleDetectedText)
@@ -77,6 +91,7 @@ class ViewController: UIViewController {
         setUpButtons()
         setUpClassicTimer()
         setUpRamReel()
+        setUpToolBar()
         
         switch scanModeToggle {
             case .classic:
@@ -108,7 +123,7 @@ extension ViewController: ARSCNViewDelegate {
             planeNode.position = SCNVector3(x: planeAnchor.center.x, y: 0, z: planeAnchor.center.z)
             planeNode.transform = SCNMatrix4MakeRotation(-Float.pi/2, 1, 0, 0)
             let gridMaterial = SCNMaterial()
-            gridMaterial.diffuse.contents = UIColor.white
+            gridMaterial.diffuse.contents = UIColor.white.withAlphaComponent(0.2)
             plane.materials = [gridMaterial]
             planeNode.geometry = plane
             node.addChildNode(planeNode)

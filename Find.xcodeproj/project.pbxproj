@@ -21,6 +21,7 @@
 		49F7B1582353FE7E0099FA62 /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1572353FE7E0099FA62 /* TextComponent.swift */; };
 		49F7B15A2354E6F60099FA62 /* data.txt in Resources */ = {isa = PBXBuildFile; fileRef = 49F7B1592354E6F60099FA62 /* data.txt */; };
 		49F7B15C2354E85F0099FA62 /* WordReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B15B2354E85F0099FA62 /* WordReader.swift */; };
+		49F7B15E2356954A0099FA62 /* GetTextClassic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B15D2356954A0099FA62 /* GetTextClassic.swift */; };
 		E0DFC8F68C8F4CF9FF0BC59E /* Pods_Find.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BDD383BE4831A8EEB1C1806 /* Pods_Find.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		49F7B1572353FE7E0099FA62 /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
 		49F7B1592354E6F60099FA62 /* data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.txt; sourceTree = "<group>"; };
 		49F7B15B2354E85F0099FA62 /* WordReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordReader.swift; sourceTree = "<group>"; };
+		49F7B15D2356954A0099FA62 /* GetTextClassic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTextClassic.swift; sourceTree = "<group>"; };
 		7F1B04E9888AAEC98DF2E096 /* Pods-Find.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find.debug.xcconfig"; path = "Target Support Files/Pods-Find/Pods-Find.debug.xcconfig"; sourceTree = "<group>"; };
 		E05C3167AB2FF51F44B12AE3 /* Pods-Find.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find.release.xcconfig"; path = "Target Support Files/Pods-Find/Pods-Find.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,6 +74,7 @@
 			children = (
 				49F7B1512353FC970099FA62 /* ProcessImage.swift */,
 				49F7B1532353FDF40099FA62 /* VisionHandler.swift */,
+				49F7B15D2356954A0099FA62 /* GetTextClassic.swift */,
 			);
 			path = Classic;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 			files = (
 				4999AC982353A80A00AB06A7 /* ViewController.swift in Sources */,
 				4969373E2353C3D8009CA41A /* ShutterButton.swift in Sources */,
+				49F7B15E2356954A0099FA62 /* GetTextClassic.swift in Sources */,
 				4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */,
 				49F7B1582353FE7E0099FA62 /* TextComponent.swift in Sources */,
 				49F7B1522353FC970099FA62 /* ProcessImage.swift in Sources */,
