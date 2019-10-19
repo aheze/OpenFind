@@ -41,6 +41,7 @@ class ViewController: UIViewController {
     
     @IBAction func autocompButtonPressed(_ sender: UIButton) {
         print("autocomp")
+        print("sd")
     }
     
     ///CLASSIC MODE
