@@ -20,14 +20,14 @@ extension ViewController {
         }
         let requests = [textDetectionRequest]
         let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: capturedImage, orientation: .right, options: [:])
-        DispatchQueue.global().async {
+        
             do {
                 try imageRequestHandler.perform(requests)
             } catch let error {
                 self.isBusyProcessingImage = false
                 print("Error: \(error)")
             }
-        }
+        
         isBusyProcessingImage = false
     }
 }

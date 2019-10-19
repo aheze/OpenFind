@@ -16,7 +16,6 @@ extension ViewController {
             return
         }
         guard let results = request?.results, results.count > 0 else {
-            print("No text found")
             return
         }
         var components = [Component]()
@@ -33,7 +32,6 @@ extension ViewController {
                 component.width = observation.boundingBox.width
                 component.text = text.string
                 if component.text.contains(finalTextToFind) {
-                    print("contains")
                     getTextClassic(stringToFind: finalTextToFind, component: component)
                 }
             }

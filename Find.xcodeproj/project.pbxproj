@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49517015235AC56D00E00D83 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4951700B235AC56C00E00D83 /* CollectionViewLayout.swift */; };
+		49517016235AC56D00E00D83 /* CollectionViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4951700C235AC56C00E00D83 /* CollectionViewWrapper.swift */; };
+		49517017235AC56D00E00D83 /* TextFieldReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4951700D235AC56C00E00D83 /* TextFieldReactor.swift */; };
+		49517018235AC56D00E00D83 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4951700E235AC56C00E00D83 /* Theme.swift */; };
+		49517019235AC56D00E00D83 /* DataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4951700F235AC56D00E00D83 /* DataFlow.swift */; };
+		4951701A235AC56D00E00D83 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49517011235AC56D00E00D83 /* CollectionViewCell.swift */; };
+		4951701B235AC56D00E00D83 /* RAMTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49517012235AC56D00E00D83 /* RAMTextField.swift */; };
+		4951701C235AC56D00E00D83 /* RAMReel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49517013235AC56D00E00D83 /* RAMReel.swift */; };
+		4951701D235AC56D00E00D83 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49517014235AC56D00E00D83 /* GradientView.swift */; };
+		4951701F235AC8A800E00D83 /* RAMReel.h in Sources */ = {isa = PBXBuildFile; fileRef = 49517010235AC56D00E00D83 /* RAMReel.h */; };
 		4969373E2353C3D8009CA41A /* ShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4969373D2353C3D8009CA41A /* ShutterButton.swift */; };
 		4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4999AC932353A80A00AB06A7 /* AppDelegate.swift */; };
 		4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4999AC952353A80A00AB06A7 /* SceneDelegate.swift */; };
@@ -28,6 +38,16 @@
 
 /* Begin PBXFileReference section */
 		1BDD383BE4831A8EEB1C1806 /* Pods_Find.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Find.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4951700B235AC56C00E00D83 /* CollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewLayout.swift; sourceTree = "<group>"; };
+		4951700C235AC56C00E00D83 /* CollectionViewWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewWrapper.swift; sourceTree = "<group>"; };
+		4951700D235AC56C00E00D83 /* TextFieldReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldReactor.swift; sourceTree = "<group>"; };
+		4951700E235AC56C00E00D83 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		4951700F235AC56D00E00D83 /* DataFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFlow.swift; sourceTree = "<group>"; };
+		49517010235AC56D00E00D83 /* RAMReel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAMReel.h; sourceTree = "<group>"; };
+		49517011235AC56D00E00D83 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		49517012235AC56D00E00D83 /* RAMTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMTextField.swift; sourceTree = "<group>"; };
+		49517013235AC56D00E00D83 /* RAMReel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMReel.swift; sourceTree = "<group>"; };
+		49517014235AC56D00E00D83 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		4969373D2353C3D8009CA41A /* ShutterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutterButton.swift; sourceTree = "<group>"; };
 		4999AC902353A80A00AB06A7 /* Find.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Find.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4999AC932353A80A00AB06A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +82,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4951701E235AC5F200E00D83 /* ReelSearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				49517011235AC56D00E00D83 /* CollectionViewCell.swift */,
+				4951700B235AC56C00E00D83 /* CollectionViewLayout.swift */,
+				4951700C235AC56C00E00D83 /* CollectionViewWrapper.swift */,
+				4951700F235AC56D00E00D83 /* DataFlow.swift */,
+				49517014235AC56D00E00D83 /* GradientView.swift */,
+				49517010235AC56D00E00D83 /* RAMReel.h */,
+				49517013235AC56D00E00D83 /* RAMReel.swift */,
+				49517012235AC56D00E00D83 /* RAMTextField.swift */,
+				4951700D235AC56C00E00D83 /* TextFieldReactor.swift */,
+				4951700E235AC56C00E00D83 /* Theme.swift */,
+			);
+			path = ReelSearchBar;
+			sourceTree = "<group>";
+		};
 		496937352353C1E9009CA41A /* Modes */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +165,7 @@
 		4969373C2353C277009CA41A /* Camera */ = {
 			isa = PBXGroup;
 			children = (
+				4951701E235AC5F200E00D83 /* ReelSearchBar */,
 				4999AC972353A80A00AB06A7 /* ViewController.swift */,
 				4999AC992353A80A00AB06A7 /* Main.storyboard */,
 				4999AC9E2353A81100AB06A7 /* LaunchScreen.storyboard */,
@@ -301,17 +339,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4951701F235AC8A800E00D83 /* RAMReel.h in Sources */,
+				4951701B235AC56D00E00D83 /* RAMTextField.swift in Sources */,
 				4999AC982353A80A00AB06A7 /* ViewController.swift in Sources */,
 				4969373E2353C3D8009CA41A /* ShutterButton.swift in Sources */,
+				4951701A235AC56D00E00D83 /* CollectionViewCell.swift in Sources */,
 				49F7B15E2356954A0099FA62 /* GetTextClassic.swift in Sources */,
 				4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */,
+				49517016235AC56D00E00D83 /* CollectionViewWrapper.swift in Sources */,
+				49517017235AC56D00E00D83 /* TextFieldReactor.swift in Sources */,
 				49F7B1602359363E0099FA62 /* HighlightShape.swift in Sources */,
 				49F7B1582353FE7E0099FA62 /* TextComponent.swift in Sources */,
 				49F7B1522353FC970099FA62 /* ProcessImage.swift in Sources */,
+				4951701D235AC56D00E00D83 /* GradientView.swift in Sources */,
+				49517019235AC56D00E00D83 /* DataFlow.swift in Sources */,
+				4951701C235AC56D00E00D83 /* RAMReel.swift in Sources */,
+				49517018235AC56D00E00D83 /* Theme.swift in Sources */,
 				4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */,
 				49F7B1542353FDF40099FA62 /* VisionHandler.swift in Sources */,
 				49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */,
 				49F7B15C2354E85F0099FA62 /* WordReader.swift in Sources */,
+				49517015235AC56D00E00D83 /* CollectionViewLayout.swift in Sources */,
 				49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

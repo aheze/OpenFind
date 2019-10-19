@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RAMReel
 
 enum CurrentModeToggle {
     case classic
@@ -35,6 +34,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         view.addSubview(ramReel.view)
         ramReel.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         ramReel.textFieldDelegate = self as UITextFieldDelegate
+        
     }
    
  @objc func keyboardWillShow(_ notification: Notification) {

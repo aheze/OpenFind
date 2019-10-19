@@ -10,7 +10,6 @@ import UIKit
 import ARKit
 import Vision
 import JJFloatingActionButton
-import RAMReel
 
 
 class ViewController: UIViewController {
@@ -41,7 +40,11 @@ class ViewController: UIViewController {
     
     @IBAction func autocompButtonPressed(_ sender: UIButton) {
         print("autocomp")
-        print("sd")
+        if let selectedItem = ramReel.wrapper.selectedItem {
+            ramReel.textField.text = nil
+            ramReel.textField.insertText(selectedItem.render())
+            view.endEditing(true)
+        }
     }
     
     ///CLASSIC MODE
@@ -77,6 +80,7 @@ class ViewController: UIViewController {
     //ramreel
     var dataSource: SimplePrefixQueryDataSource!
     var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
+    
     let data: [String] = {
         do {
             guard let dataPath = Bundle.main.path(forResource: "data", ofType: "txt") else {
