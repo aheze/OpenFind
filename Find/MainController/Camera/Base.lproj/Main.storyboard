@@ -133,8 +133,8 @@
                                 </constraints>
                                 <blurEffect style="systemChromeMaterialDark"/>
                             </visualEffectView>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lbv-hN-VHM" userLabel="toolbarView">
-                                <rect key="frame" x="0.0" y="314" width="375" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lbv-hN-VHM" userLabel="toolbarView">
+                                <rect key="frame" x="0.0" y="627" width="375" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TIr-d7-AB7">
                                         <rect key="frame" x="8" y="5" width="48" height="30"/>
@@ -154,7 +154,6 @@
                                         <state key="normal" title="Accept Autocompletion"/>
                                         <connections>
                                             <action selector="autocompButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NgE-zu-6J3"/>
-                                            <action selector="cancelButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nwg-2e-evP"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -174,6 +173,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bCb-2s-qjS" secondAttribute="bottom" constant="15" id="5nU-oh-YvN"/>
                             <constraint firstItem="KrV-7J-ulH" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Krc-J8-R2B"/>
                             <constraint firstItem="KrV-7J-ulH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="aj0-bz-ZeP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Lbv-hN-VHM" secondAttribute="bottom" id="ake-fG-hZW"/>
                             <constraint firstItem="SjR-c7-NyL" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="bjg-p6-kf5"/>
                             <constraint firstAttribute="trailing" secondItem="SjR-c7-NyL" secondAttribute="trailing" id="cvC-d9-41O"/>
                             <constraint firstItem="SjR-c7-NyL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="d3b-Wx-Un7"/>
@@ -197,6 +197,7 @@
                         <outlet property="refreshButton" destination="84J-Qd-mTc" id="tvM-QE-4kL"/>
                         <outlet property="sceneView" destination="KrV-7J-ulH" id="gFH-ke-p5A"/>
                         <outlet property="shutterButton" destination="V9d-sb-q19" id="CPb-yz-AXa"/>
+                        <outlet property="toolbarBottomConstraint" destination="ake-fG-hZW" id="ktb-vQ-Wtw"/>
                         <outlet property="toolbarView" destination="Lbv-hN-VHM" id="eBt-Rj-J4E"/>
                     </connections>
                 </viewController>

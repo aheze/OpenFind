@@ -37,13 +37,21 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         ramReel.textFieldDelegate = self as UITextFieldDelegate
     }
    
-    @objc func keyboardWillShow(_ notification: Notification) {
+ @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
-            keyboardHeight = keyboardRectangle.height
+            keyboardHeight = keyboardRectangle.size.height
+            print("show")
         }
     }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        autocompButton.isEnabled = true
+        autocompButton.alpha = 1
+        return true
+    }
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        autocompButton.isEnabled = false
+        autocompButton.alpha = 0.5
        
         ramReel.view.bounds = view.bounds
         print("textfield")
@@ -53,9 +61,10 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         
         self.toolbarView.isHidden = false
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
+            print(self.keyboardHeight)
             self.toolbarView.alpha = 1
-            self.toolbarView.frame.origin.y -= self.keyboardHeight
+            self.toolbarBottomConstraint.constant = self.keyboardHeight
             self.darkBlurEffect.alpha = 1
             if self.scanModeToggle == .focused {
             if let tag1 = self.view.viewWithTag(1) {
@@ -80,8 +89,8 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         ramReel.collectionView.isHidden = true
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
-            self.toolbarView.frame.origin.y -= self.keyboardHeight
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            self.toolbarBottomConstraint.constant = 0
             self.toolbarView.alpha = 0
             
             self.darkBlurEffect.alpha = 0.7

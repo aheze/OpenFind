@@ -30,11 +30,13 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var toolbarView: UIView!
     
+    @IBOutlet weak var toolbarBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var autocompButton: UIButton!
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
         print("cancel")
+        view.endEditing(true)
     }
     
     @IBAction func autocompButtonPressed(_ sender: UIButton) {
@@ -53,7 +55,16 @@ class ViewController: UIViewController {
     var scanModeToggle = CurrentModeToggle.classic
     var finalTextToFind : String = ""
     let deviceSize = UIScreen.main.bounds.size
-    var keyboardHeight = CGFloat()
+    var keyboardHeight = CGFloat() {
+        didSet {
+            if toolbarBottomConstraint.constant == 0 {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.toolbarBottomConstraint.constant = self.keyboardHeight
+                    print("keyboard: \(self.keyboardHeight)")
+                })
+            }
+        }
+    }
     
     lazy var textDetectionRequest: VNRecognizeTextRequest = {
         let request = VNRecognizeTextRequest(completionHandler: self.handleDetectedText)
@@ -80,6 +91,14 @@ class ViewController: UIViewController {
         }
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -145,6 +164,7 @@ extension ViewController: ARSCNViewDelegate {
             plane.materials = [gridMaterial]
             planeNode.geometry = plane
             node.addChildNode(planeNode)
+            print("plane detected")
         }else{
            return
         }

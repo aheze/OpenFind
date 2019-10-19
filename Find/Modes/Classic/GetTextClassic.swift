@@ -31,7 +31,10 @@ extension ViewController {
                 
                 if let hitResult = results.first {
                     
-                    let highlight = SCNBox(width: realComponentWidth/2000, height: 0.001, length: realComponentHeight/2000, chamferRadius: 0.001)
+//                    let highlight2 = SCNBox(width: realComponentWidth/2000, height: 0.001, length: realComponentHeight/2000, chamferRadius: 0.001)
+                    
+                    let sizeForHighlight = CGSize(width: realComponentWidth/2000, height: realComponentHeight/2000)
+                    let highlight = makeHighlightShape(size: sizeForHighlight)
                     let material = SCNMaterial()
                     let highlightColor : UIColor = #colorLiteral(red: 0, green: 0.7389578223, blue: 0.9509587884, alpha: 1)
                     material.diffuse.contents = highlightColor.withAlphaComponent(0.7)
@@ -45,7 +48,7 @@ extension ViewController {
                         y: hitResult.worldTransform.columns.3.y,
                         z: hitResult.worldTransform.columns.3.z
                     )
-                    
+                    node.eulerAngles.x = -.pi/2
                     sceneView.scene.rootNode.addChildNode(node)
                 }
             }
