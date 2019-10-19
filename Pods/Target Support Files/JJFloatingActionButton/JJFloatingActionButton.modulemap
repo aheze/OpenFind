@@ -1,0 +1,6 @@
+framework module JJFloatingActionButton {
+  umbrella header "JJFloatingActionButton-umbrella.h"
+
+  export *
+  module * { export * }
+}
