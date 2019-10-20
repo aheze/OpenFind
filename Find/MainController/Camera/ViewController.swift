@@ -70,6 +70,9 @@ class ViewController: UIViewController {
         }
     }
     
+    ///Save the image
+    var globalUrl : URL = URL(fileURLWithPath: "")
+    
     lazy var textDetectionRequest: VNRecognizeTextRequest = {
         let request = VNRecognizeTextRequest(completionHandler: self.handleDetectedText)
         request.recognitionLevel = .fast
@@ -109,6 +112,7 @@ class ViewController: UIViewController {
         
         //MARK: Sceneview
         sceneView.delegate = self
+        sceneView.autoenablesDefaultLighting = true
         sceneConfiguration.planeDetection = [.horizontal, .vertical]
         sceneView.session.run(sceneConfiguration)
         
@@ -116,6 +120,7 @@ class ViewController: UIViewController {
         setUpClassicTimer()
         setUpRamReel()
         setUpToolBar()
+        setUpFilePath()
         
         switch scanModeToggle {
             case .classic:

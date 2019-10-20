@@ -129,7 +129,6 @@ open class RAMReel
     Value is nil, if data source output is empty.
     */
     open var selectedItem: DataSource.ResultType? {
-        print("ohskbj")
         return textField.text.flatMap(DataSource.ResultType.parse)
         
     }
@@ -170,6 +169,7 @@ open class RAMReel
         self.textField.textColor = theme.textColor
         (self.textField as UITextField).tintColor = theme.textColor
         self.textField.keyboardAppearance = UIKeyboardAppearance.dark
+        self.textField.returnKeyType = .search
         self.gradientView.listBackgroundColor = theme.listBackgroundColor
         
         self.view.layer.mask = self.gradientView.layer

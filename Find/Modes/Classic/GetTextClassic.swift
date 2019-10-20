@@ -48,7 +48,7 @@ extension ViewController {
                         y: hitResult.worldTransform.columns.3.y,
                         z: hitResult.worldTransform.columns.3.z
                     )
-                    node.eulerAngles.x = -.pi/2
+//                    node.eulerAngles.x = -.pi/2
                     sceneView.scene.rootNode.addChildNode(node)
                 }
             }

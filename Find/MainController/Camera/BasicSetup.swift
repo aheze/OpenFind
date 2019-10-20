@@ -45,8 +45,18 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         }
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        print(range)
+        if range.lowerBound == 0, range.upperBound == 1 {
+            autocompButton.isEnabled = false
+            autocompButton.alpha = 0.5
+        } else if ramReel.wrapper.selectedItem == nil {
+        
+        autocompButton.isEnabled = false
+        autocompButton.alpha = 0.5
+        } else {
         autocompButton.isEnabled = true
         autocompButton.alpha = 1
+        }
         return true
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -128,6 +138,12 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
 }
 
 extension ViewController {
+    func setUpFilePath() {
+        guard let url = URL.createFolder(folderName: "historyImages") else {
+            print("no create")
+            return }
+        globalUrl = url
+    }
     func setUpToolBar() {
         toolbarView.isHidden = true
         toolbarView.alpha = 0

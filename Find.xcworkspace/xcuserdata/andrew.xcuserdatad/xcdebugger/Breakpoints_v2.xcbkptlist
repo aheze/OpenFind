@@ -39,48 +39,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "21CC1FB4-5D4D-48DF-A749-A21212488905"
+            uuid = "37729732-EA3A-4671-861A-7083A55FD5D7"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Find/Modes/Classic/HighlightShape.swift"
+            filePath = "../../../../../var/folders/hv/33h3rqgx4qb943pw_psvqjw00000gn/T/DD406A53-DBC8-4EF2-8A6A-E9EE19BD01DF/VisionHandler.swift/Find/Modes/Classic/VisionHandler.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "ViewController"
-            landmarkType = "21">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C980B66A-4520-40E7-84A0-EC2092B50E87"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Find/Modes/Classic/HighlightShape.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "makeHighlightShape(size:)"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "handleDetectedText(request:error:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "DFC3BBD7-7B67-488D-8910-DBC11EB97819"
+            uuid = "35E6C532-BD87-4D40-909F-833EC8B3721C"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Find/Modes/Classic/HighlightShape.swift"
+            filePath = "Find/Modes/Classic/GetTextClassic.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "makeHighlightShape(size:)"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "getTextClassic(stringToFind:component:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
