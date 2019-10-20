@@ -52,10 +52,16 @@ class ViewController: UIViewController {
     var isBusyProcessingImage = false
     var stopProcessingImage = false
     let sceneConfiguration = ARWorldTrackingConfiguration()
+    ///     classic highlights
+            var classicHighlightArray = [SCNNode]()
+            var secondClassicHighlightArray = [SCNNode]()
+            var classicHasFoundOne : Bool = false
+            var processImageNumberOfPasses = 0
     
     ///FOCUS MODE
     
     ///Every mode (Universal)
+    var statusBarHidden : Bool = false
     var scanModeToggle = CurrentModeToggle.classic
     var finalTextToFind : String = ""
     let deviceSize = UIScreen.main.bounds.size
@@ -133,8 +139,12 @@ class ViewController: UIViewController {
         
         
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        classicHasFoundOne = false
+    }
     
-    var statusBarHidden : Bool = false
+    
     override var prefersStatusBarHidden: Bool {
         return self.statusBarHidden
     }

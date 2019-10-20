@@ -30,8 +30,8 @@
             filePath = "Find/Modes/Classic/ProcessImage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "processImage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,9 +62,9 @@
             filePath = "Find/Modes/Classic/GetTextClassic.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "getTextClassic(stringToFind:component:)"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "getTextClassic(stringToFind:component:alternate:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

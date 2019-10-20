@@ -13,8 +13,14 @@ import Vision
 extension ViewController {
     func processImage() {
         isBusyProcessingImage = true
+        processImageNumberOfPasses += 1
+        print(processImageNumberOfPasses)
+        
+        
+        
         guard let capturedImage = sceneView.session.currentFrame?.capturedImage else {
             print("no captured image")
+            processImageNumberOfPasses -= 1
             isBusyProcessingImage = false
             return
         }
@@ -29,5 +35,33 @@ extension ViewController {
             }
         
         isBusyProcessingImage = false
+    }
+    func fadeHighlights() {
+        let firstFadeOutNodeAction = SCNAction.fadeOut(duration: 0.6)
+
+        if classicHasFoundOne == true {
+            
+            if classicHighlightArray.count >= 1, secondClassicHighlightArray.count >= 1 {
+            if processImageNumberOfPasses % 2 == 0 {
+                for h in classicHighlightArray {
+                    
+                    h.runAction(firstFadeOutNodeAction, completionHandler: {() in
+                        h.removeFromParentNode()
+                        //print("removeNormal")
+                    })
+                }
+            } else {
+                for h in secondClassicHighlightArray {
+                    
+                    h.runAction(firstFadeOutNodeAction, completionHandler: {
+                        () in h.removeFromParentNode()
+                        
+                        //print("removeAlternate")
+                    })
+                }
+            }
+            }
+            
+        }
     }
 }

@@ -32,7 +32,12 @@ extension ViewController {
                 component.width = observation.boundingBox.width
                 component.text = text.string
                 if component.text.contains(finalTextToFind) {
-                    getTextClassic(stringToFind: finalTextToFind, component: component)
+                    if processImageNumberOfPasses % 2 == 0 {
+                        getTextClassic(stringToFind: finalTextToFind, component: component, alternate: false)
+                        print("first")
+                    } else {
+                        getTextClassic(stringToFind: finalTextToFind, component: component, alternate: true)
+                    }
                 }
             }
             }
