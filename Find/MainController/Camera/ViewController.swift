@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var darkBlurEffect: UIVisualEffectView!
     @IBOutlet weak var darkBlurEffectHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var matchesBig: UIView!
     
     @IBOutlet weak var photoButton: UIButton!
     @IBOutlet weak var modeButton: JJFloatingActionButton!
@@ -44,6 +45,50 @@ class ViewController: UIViewController {
             ramReel.textField.text = nil
             ramReel.textField.insertText(selectedItem.render())
             view.endEditing(true)
+        }
+    }
+    
+    ///Matches HUD
+    var pipPositionViews = [PipPositionView]()
+    var initialOffset: CGPoint = .zero
+    let pipWidth: CGFloat = 86
+    let pipHeight: CGFloat = 130
+    let panRecognizer = UIPanGestureRecognizer()
+    var pipPositions: [CGPoint] {
+        return pipPositionViews.map { $0.center }
+    }
+    override func viewDidLayoutSubviews() {
+           super.viewDidLayoutSubviews  ()
+           matchesBig.center = pipPositions.last ?? .zero
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            let currentPoint = touch.location(in: matchesBig)
+            print("start")
+            for view in pipPositionViews {
+                view.isHidden = false
+                UIView.animate(withDuration: 0.2, animations: {
+                    view.alpha = 1
+                })
+                
+            }
+        }
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            let currentPoint = touch.location(in: matchesBig)
+            // do something with your currentPoint
+            print("end1")
+            for view in pipPositionViews {
+                UIView.animate(withDuration: 0.2, animations: {
+                    view.alpha = 0
+                }, completion: {
+                    _ in
+                    view.isHidden = true
+                })
+                
+            }
         }
     }
     
@@ -113,6 +158,7 @@ class ViewController: UIViewController {
             object: nil
         )
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -127,6 +173,12 @@ class ViewController: UIViewController {
         setUpRamReel()
         setUpToolBar()
         setUpFilePath()
+        setUpMatches()
+        //make sure the position views are hidden
+        for view in pipPositionViews {
+            view.isHidden = true
+            view.alpha = 0
+        }
         
         switch scanModeToggle {
             case .classic:

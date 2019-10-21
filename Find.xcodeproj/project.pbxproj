@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		49115089235D17EB00EC0C04 /* shutterPressed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49115088235D17EB00EC0C04 /* shutterPressed.swift */; };
 		4911508B235D1A3E00EC0C04 /* BasicUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4911508A235D1A3E00EC0C04 /* BasicUtilities.swift */; };
+		4911508D235D51E300EC0C04 /* MatchesHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4911508C235D51E300EC0C04 /* MatchesHUD.swift */; };
 		49517015235AC56D00E00D83 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4951700B235AC56C00E00D83 /* CollectionViewLayout.swift */; };
 		49517016235AC56D00E00D83 /* CollectionViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4951700C235AC56C00E00D83 /* CollectionViewWrapper.swift */; };
 		49517017235AC56D00E00D83 /* TextFieldReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4951700D235AC56C00E00D83 /* TextFieldReactor.swift */; };
@@ -42,6 +43,7 @@
 		1BDD383BE4831A8EEB1C1806 /* Pods_Find.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Find.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		49115088235D17EB00EC0C04 /* shutterPressed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shutterPressed.swift; sourceTree = "<group>"; };
 		4911508A235D1A3E00EC0C04 /* BasicUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicUtilities.swift; sourceTree = "<group>"; };
+		4911508C235D51E300EC0C04 /* MatchesHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHUD.swift; sourceTree = "<group>"; };
 		4951700B235AC56C00E00D83 /* CollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewLayout.swift; sourceTree = "<group>"; };
 		4951700C235AC56C00E00D83 /* CollectionViewWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewWrapper.swift; sourceTree = "<group>"; };
 		4951700D235AC56C00E00D83 /* TextFieldReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldReactor.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				49F7B1572353FE7E0099FA62 /* TextComponent.swift */,
 				49115088235D17EB00EC0C04 /* shutterPressed.swift */,
 				4951701E235AC5F200E00D83 /* ReelSearchBar */,
+				4911508C235D51E300EC0C04 /* MatchesHUD.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				4999AC982353A80A00AB06A7 /* ViewController.swift in Sources */,
 				4969373E2353C3D8009CA41A /* ShutterButton.swift in Sources */,
 				4951701A235AC56D00E00D83 /* CollectionViewCell.swift in Sources */,
+				4911508D235D51E300EC0C04 /* MatchesHUD.swift in Sources */,
 				49F7B15E2356954A0099FA62 /* GetTextClassic.swift in Sources */,
 				4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */,
 				49517016235AC56D00E00D83 /* CollectionViewWrapper.swift in Sources */,

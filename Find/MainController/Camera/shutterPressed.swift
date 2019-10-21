@@ -22,7 +22,7 @@ extension ViewController {
     }
 
     @IBAction func didTapButton(_ sender: ShutterButton) {
-      
+        
         switch sender.buttonState {
         case .normal:
             sender.buttonState = .recording

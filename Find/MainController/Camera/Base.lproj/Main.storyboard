@@ -169,6 +169,15 @@
                                     <constraint firstItem="TIr-d7-AB7" firstAttribute="centerY" secondItem="Lbv-hN-VHM" secondAttribute="centerY" id="fNg-br-Lvh"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P33-md-CCv" userLabel="MatchesBig">
+                                <rect key="frame" x="310" y="200" width="55" height="120"/>
+                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="P33-md-CCv" secondAttribute="height" multiplier="11:24" id="A83-zw-kx1"/>
+                                    <constraint firstAttribute="width" constant="55" id="Kjk-VP-9dh"/>
+                                    <constraint firstAttribute="height" constant="120" id="MiV-gG-hBI"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -185,6 +194,7 @@
                             <constraint firstAttribute="bottom" secondItem="KrV-7J-ulH" secondAttribute="bottom" id="jlA-hz-Vdw"/>
                             <constraint firstItem="bCb-2s-qjS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="lvb-Kh-5K0"/>
                             <constraint firstItem="bCb-2s-qjS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="o80-ar-Tzs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="P33-md-CCv" secondAttribute="trailing" constant="10" id="suv-SU-pRM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bCb-2s-qjS" secondAttribute="trailing" constant="15" id="txW-R1-IuB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -194,6 +204,7 @@
                         <outlet property="cancelButton" destination="TIr-d7-AB7" id="uSo-tX-2mh"/>
                         <outlet property="darkBlurEffect" destination="SjR-c7-NyL" id="0Wd-Vq-FxN"/>
                         <outlet property="darkBlurEffectHeightConstraint" destination="tfa-HC-4HH" id="HNH-Jb-7ZA"/>
+                        <outlet property="matchesBig" destination="P33-md-CCv" id="ZAI-5v-KGb"/>
                         <outlet property="menuButton" destination="Ksm-rU-iBX" id="fhV-tI-55z"/>
                         <outlet property="modeButton" destination="McS-Ju-2hk" id="g7E-le-xIV"/>
                         <outlet property="photoButton" destination="ekO-GU-ezg" id="eqe-II-IC9"/>
