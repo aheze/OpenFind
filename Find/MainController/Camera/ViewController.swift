@@ -51,8 +51,8 @@ class ViewController: UIViewController {
     ///Matches HUD
     var pipPositionViews = [PipPositionView]()
     var initialOffset: CGPoint = .zero
-    let pipWidth: CGFloat = 86
-    let pipHeight: CGFloat = 130
+    let pipWidth: CGFloat = 55
+    let pipHeight: CGFloat = 120
     let panRecognizer = UIPanGestureRecognizer()
     var pipPositions: [CGPoint] {
         return pipPositionViews.map { $0.center }
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
-            let currentPoint = touch.location(in: matchesBig)
+            if touch.view == matchesBig {
             print("start")
             for view in pipPositionViews {
                 view.isHidden = false
@@ -71,6 +71,7 @@ class ViewController: UIViewController {
                     view.alpha = 1
                 })
                 
+            }
             }
         }
     }

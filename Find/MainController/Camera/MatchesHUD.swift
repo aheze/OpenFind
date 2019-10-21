@@ -166,8 +166,9 @@ extension ViewController {
         
         matchesBig.layer.cornerRadius = 16
     
-    let horizontalSpacing: CGFloat = 23
-    let verticalSpacing: CGFloat = 25
+        let horizontalSpacing: CGFloat = 23
+        let midHorizontalSpacing: CGFloat = 25
+        let verticalSpacing: CGFloat = 200
     
         let topLeftView = addPipPositionView()
         topLeftView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalSpacing).isActive = true
@@ -177,13 +178,13 @@ extension ViewController {
         topRightView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalSpacing).isActive = true
         topRightView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: verticalSpacing).isActive = true
         
-        let bottomLeftView = addPipPositionView()
-        bottomLeftView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalSpacing).isActive = true
-        bottomLeftView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -verticalSpacing).isActive = true
+        let midLeftView = addPipPositionView()
+        midLeftView.leadingAnchor.constraint(equalTo: topLeftView.trailingAnchor, constant: midHorizontalSpacing).isActive = true
+        midLeftView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: verticalSpacing).isActive = true
         
-        let bottomRightView = addPipPositionView()
-        bottomRightView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalSpacing).isActive = true
-        bottomRightView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -verticalSpacing).isActive = true
+        let midRightView = addPipPositionView()
+        midRightView.trailingAnchor.constraint(equalTo: topRightView.leadingAnchor, constant: -midHorizontalSpacing).isActive = true
+        midRightView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: verticalSpacing).isActive = true
         
         view.addSubview(matchesBig)
         matchesBig.translatesAutoresizingMaskIntoConstraints = false
@@ -234,9 +235,9 @@ class PipPositionView: UIView {
     
     private lazy var shapeLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
-        layer.strokeColor = UIColor(white: 0.25, alpha: 1).cgColor
+        layer.strokeColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         layer.lineWidth = lineWidth
-        layer.fillColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        layer.fillColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.1)
         return layer
     }()
     
