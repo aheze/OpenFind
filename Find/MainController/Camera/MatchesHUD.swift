@@ -149,7 +149,7 @@ extension ViewController {
                     
                 }
                 self.matchesBig.center = nearestCornerPosition
-                print("center")
+                self.currentPipPosition = nearestCornerPosition
             }
             animator.startAnimation()
         default:
@@ -258,7 +258,6 @@ class PipPositionView: UIView {
     }
     
     override func layoutSubviews() {
-        print("123")
         super.layoutSubviews()
         shapeLayer.frame = bounds
         shapeLayer.path = UIBezierPath(roundedRect: bounds.insetBy(dx: lineWidth / 2, dy: lineWidth / 2), cornerRadius: 16).cgPath

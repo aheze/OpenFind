@@ -50,7 +50,6 @@ class ViewController: UIViewController {
     
     ///Matches HUD
     
-
     @IBOutlet weak var upButton: UIButton!
     @IBOutlet weak var downButton: UIButton!
     @IBAction func upHUDPressed(_ sender: UIButton) {
@@ -71,16 +70,19 @@ class ViewController: UIViewController {
     var pipPositions: [CGPoint] {
         return pipPositionViews.map { $0.center }
     }
+    var currentPipPosition : CGPoint?
     override func viewDidLayoutSubviews() {
            super.viewDidLayoutSubviews  ()
-           matchesBig.center = pipPositions.last ?? .zero
+        print("layout")
+        matchesBig.center = currentPipPosition ?? pipPositions.last ?? .zero
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
+            print("view")
             if touch.view == matchesBig {
+                print("viewYes")
                 self.matchesShouldFireTimer = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        print("Timer fired!")
                     
                     if self.matchesShouldFireTimer == true {
                         print("start")
@@ -101,6 +103,7 @@ class ViewController: UIViewController {
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
+            if touch.view == matchesBig {
             let currentPoint = touch.location(in: matchesBig)
             // do something with your currentPoint
             matchesShouldFireTimer = false
@@ -112,6 +115,7 @@ class ViewController: UIViewController {
                     _ in
                     view.isHidden = true
                 })
+            }
             }
         }
     }
@@ -210,8 +214,7 @@ class ViewController: UIViewController {
                 classicTimer.resume()
             case .focused:
                 print("focusmode")
-            default:
-            print("WRONG MODE__________")
+            
         }
         
         

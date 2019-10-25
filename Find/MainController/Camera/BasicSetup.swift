@@ -34,6 +34,8 @@ extension ViewController {
         classicTimer.eventHandler = {
             if self.isBusyProcessingImage == false {
                 self.processImage()
+                DispatchQueue.main.async {
+                }
             } else {
                 print("busyPROCESSING+_+_+_+_+_+")
                 return
@@ -224,6 +226,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
             self.view.layoutIfNeeded()
         }, completion: {_ in
             self.toolbarView.isHidden = true
+            self.view.bringSubviewToFront(self.matchesBig)
         }
         )
              print(ramReel.selectedItem)
