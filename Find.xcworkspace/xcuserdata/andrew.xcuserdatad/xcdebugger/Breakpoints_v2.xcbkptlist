@@ -30,8 +30,8 @@
             filePath = "Find/Modes/Classic/ProcessImage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "processImage()"
             landmarkType = "7">
          </BreakpointContent>

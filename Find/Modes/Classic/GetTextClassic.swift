@@ -12,7 +12,7 @@ import ARKit
 extension ViewController {
     func getTextClassic(stringToFind: String, component: Component, alternate: Bool) {
         let point = CGPoint(x: component.x, y: component.y)
-        print("point is \(point)")
+        //print("point is \(point)")
         var newPoint = CGPoint()
         newPoint.x = deviceSize.width * point.x
         newPoint.y = deviceSize.height - (deviceSize.height * point.y)
@@ -21,7 +21,7 @@ extension ViewController {
         let realComponentHeight = component.height * deviceSize.height
         let individualCharacterWidth = realComponentWidth / CGFloat(component.text.count)
     
-        print("NEWpoint is \(newPoint)")
+        //print("NEWpoint is \(newPoint)")
         let indicies = component.text.indicesOf(string: stringToFind)
         if indicies.count >= 0 {
             
@@ -59,7 +59,12 @@ extension ViewController {
 //                    node.constraints = [billboardConstraint]
                     classicHasFoundOne = true
                     sceneView.scene.rootNode.addChildNode(node)
-                    
+                    amountOfMatches += 1
+                    if matchesCanAcceptNewValue == true {
+                        DispatchQueue.main.async {
+                            self.numberLabel.text = "\(self.amountOfMatches)"
+                        }
+                    }
                     if alternate == true {
                         //print("normal---------")
                         classicHighlightArray.append(node)

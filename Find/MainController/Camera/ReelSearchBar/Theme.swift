@@ -87,7 +87,7 @@ public struct RAMTheme: Theme {
         return font
     }
     
-    /** 
+    /**
     Creates new theme with new text color.
      
     - parameter textColor: New text color.

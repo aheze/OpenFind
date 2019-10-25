@@ -8,6 +8,7 @@
 import UIKit
 import CoreGraphics
 
+
 extension CGPoint {
     
     /// Calculates the distance between two points in 2D space.
@@ -33,17 +34,17 @@ extension UISpringTimingParameters {
     
 }
 /// Base class for all interface view controllers.
-class InterfaceViewController: UIViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = UIColor(white: 0.05, alpha: 1) // reduces screen tearing on iPhone X
-        navigationItem.largeTitleDisplayMode = .never
-        
-    }
-    
-}
+//class InterfaceViewController: UIViewController {
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//        view.backgroundColor = UIColor(white: 0.05, alpha: 1) // reduces screen tearing on iPhone X
+//        navigationItem.largeTitleDisplayMode = .never
+//
+//    }
+//
+//}
 extension UIColor {
     convenience init(hex: Int, alpha: CGFloat = 1) {
         let r = CGFloat((hex & 0xFF0000) >> 16) / 255
@@ -116,9 +117,12 @@ extension ViewController {
         switch recognizer.state {
         case .began:
             initialOffset = CGPoint(x: touchPoint.x - matchesBig.center.x, y: touchPoint.y - matchesBig.center.y)
+            print("3")
         case .changed:
+            print("1")
             matchesBig.center = CGPoint(x: touchPoint.x - initialOffset.x, y: touchPoint.y - initialOffset.y)
         case .ended, .cancelled:
+            print("2")
             let decelerationRate = UIScrollView.DecelerationRate.normal.rawValue
             let velocity = recognizer.velocity(in: view)
             let projectedPosition = CGPoint(
@@ -134,6 +138,7 @@ extension ViewController {
             let animator = UIViewPropertyAnimator(duration: 0, timingParameters: timingParameters)
             animator.addAnimations {
                 print("ended")
+                self.matchesShouldFireTimer = false
                 for view in self.pipPositionViews {
                     UIView.animate(withDuration: 0.2, animations: {
                         view.alpha = 0
@@ -144,9 +149,12 @@ extension ViewController {
                     
                 }
                 self.matchesBig.center = nearestCornerPosition
+                print("center")
             }
             animator.startAnimation()
-        default: break
+        default:
+            print("12")
+            break
         }
     }
     func addPipPositionView() -> PipPositionView {
@@ -186,22 +194,14 @@ extension ViewController {
         midRightView.trailingAnchor.constraint(equalTo: topRightView.leadingAnchor, constant: -midHorizontalSpacing).isActive = true
         midRightView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: verticalSpacing).isActive = true
         
-        view.addSubview(matchesBig)
-        matchesBig.translatesAutoresizingMaskIntoConstraints = false
-        matchesBig.widthAnchor.constraint(equalToConstant: pipWidth).isActive = true
-        matchesBig.heightAnchor.constraint(equalToConstant: pipHeight).isActive = true
-        
+//        view.addSubview(matchesBig)
+//        matchesBig.translatesAutoresizingMaskIntoConstraints = false
+//        matchesBig.widthAnchor.constraint(equalToConstant: pipWidth).isActive = true
+//        matchesBig.heightAnchor.constraint(equalToConstant: pipHeight).isActive = true
+//
         panRecognizer.addTarget(self, action: #selector(pipPanned(recognizer:)))
         matchesBig.addGestureRecognizer(panRecognizer)
         
-    
-    
-   
-    
-    
-    
-    
-    
     }
     
     /// Distance traveled after decelerating to zero velocity at a constant rate.
@@ -258,6 +258,7 @@ class PipPositionView: UIView {
     }
     
     override func layoutSubviews() {
+        print("123")
         super.layoutSubviews()
         shapeLayer.frame = bounds
         shapeLayer.path = UIBezierPath(roundedRect: bounds.insetBy(dx: lineWidth / 2, dy: lineWidth / 2), cornerRadius: 16).cgPath

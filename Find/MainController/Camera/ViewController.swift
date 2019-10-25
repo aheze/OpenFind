@@ -49,6 +49,20 @@ class ViewController: UIViewController {
     }
     
     ///Matches HUD
+    
+
+    @IBOutlet weak var upButton: UIButton!
+    @IBOutlet weak var downButton: UIButton!
+    @IBAction func upHUDPressed(_ sender: UIButton) {
+        print("up")
+    }
+    @IBAction func downHUDPressed(_ sender: UIButton) {
+        print("down")
+    }
+    @IBOutlet weak var numberLabel: UILabel!
+    var amountOfMatches: Int = 0
+    var matchesCanAcceptNewValue: Bool = true
+    var matchesShouldFireTimer: Bool = true
     var pipPositionViews = [PipPositionView]()
     var initialOffset: CGPoint = .zero
     let pipWidth: CGFloat = 55
@@ -64,15 +78,24 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             if touch.view == matchesBig {
-            print("start")
-            for view in pipPositionViews {
-                view.isHidden = false
-                UIView.animate(withDuration: 0.2, animations: {
-                    view.alpha = 1
-                })
-                
+                self.matchesShouldFireTimer = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        print("Timer fired!")
+                    
+                    if self.matchesShouldFireTimer == true {
+                        print("start")
+                                for view in self.pipPositionViews {
+                            view.isHidden = false
+                            UIView.animate(withDuration: 0.2, animations: {
+                                view.alpha = 1
+                            })
+                            
+                        }
+                        
+                    }
+                }
             }
-            }
+            
         }
     }
 
@@ -80,6 +103,7 @@ class ViewController: UIViewController {
         if let touch = touches.first {
             let currentPoint = touch.location(in: matchesBig)
             // do something with your currentPoint
+            matchesShouldFireTimer = false
             print("end1")
             for view in pipPositionViews {
                 UIView.animate(withDuration: 0.2, animations: {
@@ -88,7 +112,6 @@ class ViewController: UIViewController {
                     _ in
                     view.isHidden = true
                 })
-                
             }
         }
     }
@@ -103,6 +126,7 @@ class ViewController: UIViewController {
             var secondClassicHighlightArray = [SCNNode]()
             var classicHasFoundOne : Bool = false
             var processImageNumberOfPasses = 0
+            var numberOfHighlights: Int = 0
     
     ///FOCUS MODE
     

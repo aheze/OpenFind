@@ -14,7 +14,6 @@ extension ViewController {
     func processImage() {
         isBusyProcessingImage = true
         processImageNumberOfPasses += 1
-        print(processImageNumberOfPasses)
         
         
         
@@ -33,7 +32,7 @@ extension ViewController {
                 self.isBusyProcessingImage = false
                 print("Error: \(error)")
             }
-        
+        //matchesCanAcceptNewValue = false
         isBusyProcessingImage = false
     }
     func fadeHighlights() {
