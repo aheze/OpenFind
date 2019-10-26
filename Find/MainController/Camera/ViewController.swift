@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var darkBlurEffect: UIVisualEffectView!
     @IBOutlet weak var darkBlurEffectHeightConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var matchesBig: UIView!
+    
     
     @IBOutlet weak var photoButton: UIButton!
     @IBOutlet weak var modeButton: JJFloatingActionButton!
@@ -50,6 +50,7 @@ class ViewController: UIViewController {
     
     ///Matches HUD
     
+    @IBOutlet weak var matchesBig: MatchesGradientView!
     @IBOutlet weak var upButton: UIButton!
     @IBOutlet weak var downButton: UIButton!
     @IBAction func upHUDPressed(_ sender: UIButton) {
