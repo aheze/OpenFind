@@ -78,8 +78,8 @@
             filePath = "Find/MainController/Camera/MatchesHUD.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "252"
-            endingLineNumber = "252"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "PipPositionView"
             landmarkType = "3">
          </BreakpointContent>

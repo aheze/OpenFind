@@ -171,7 +171,7 @@ extension ViewController {
 //            view.bringSubviewToFront(template)
 //        }
 //        view.bringSubviewToFront(matchesBig)
-        
+        matchesBig.cornerRadius = 14
         matchesBig.topColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
         matchesBig.bottomColor = #colorLiteral(red: 0.2124608927, green: 0.6008518903, blue: 0.8678616751, alpha: 1)
         matchesBig.bringSubviewToFront(numberLabel)
@@ -265,7 +265,7 @@ class PipPositionView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         shapeLayer.frame = bounds
-        shapeLayer.path = UIBezierPath(roundedRect: bounds.insetBy(dx: lineWidth / 2, dy: lineWidth / 2), cornerRadius: 16).cgPath
+        shapeLayer.path = UIBezierPath(roundedRect: bounds.insetBy(dx: lineWidth / 2, dy: lineWidth / 2), cornerRadius: 14).cgPath
     }
     
 }

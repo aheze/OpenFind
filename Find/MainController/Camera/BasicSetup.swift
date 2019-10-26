@@ -96,36 +96,33 @@ extension ViewController {
         goToClassic.action = { item in
             print("classicmode")
             
-             //self.scanModeToggle = .classic
-             //self.stopFinding = true
-             //self.blurScreen(mode: false)
-             //self.f.suspend()
-             //self.stopLoopTag = false
-             //self.t.resume()
-            UIView.animate(withDuration: 0.2, animations: {
-                if let tag1 = self.view.viewWithTag(1) {
-                    tag1.alpha = 0
-                }
-                if let tag2 = self.view.viewWithTag(2) {
-                    tag2.alpha = 0
-                }
-            })
-
+            if self.scanModeToggle == .focused {
+                self.scanModeToggle = .classic
+                //self.stopFinding = true
+                self.blurScreen(mode: false)
+                //self.f.suspend()
+                //self.stopLoopTag = false
+                //self.t.resume()
+            }
         }
         let goToFocus = modeButton.addItem()
         goToFocus.titlePosition = .trailing
         goToFocus.titleLabel.text = "Focus mode"
         goToFocus.imageView.image = #imageLiteral(resourceName: "bfocus 2")
         goToFocus.action = { item in
-            //self.classicHasFoundOne = false
-            print("focusmode")
-            //self.scanModeToggle = .focused
-            //self.stopLoopTag = true
-            //self.stopFinding = false
-            //self.t.suspend()
-            //self.numberOfFocusTimes = 0
-            //self.f.resume()
-            //self.blurScreen(mode: true)
+            
+            if self.scanModeToggle == .classic {
+                self.scanModeToggle = .focused
+                //self.classicHasFoundOne = false
+                print("focusmode")
+                
+                //self.stopLoopTag = true
+                //self.stopFinding = false
+                //self.t.suspend()
+                //self.numberOfFocusTimes = 0
+                //self.f.resume()
+                self.blurScreen(mode: true)
+            }
         }
         menuButton.overlayView.backgroundColor = UIColor.clear
         modeButton.overlayView.backgroundColor = UIColor.clear
@@ -181,7 +178,6 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         autocompButton.isEnabled = false
         autocompButton.alpha = 0.5
-       
         ramReel.view.bounds = view.bounds
         print("textfield")
         print(ramReel.collectionView.frame)
@@ -219,6 +215,9 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         
         ramReel.collectionView.isHidden = true
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            var frameRect = self.view.bounds
+            frameRect.size.height = 100
+            self.ramReel.view.bounds = frameRect
             self.toolbarBottomConstraint.constant = 0
             self.toolbarView.alpha = 0
             

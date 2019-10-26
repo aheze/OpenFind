@@ -28,22 +28,26 @@ extension ViewController {
         
         if toFocusMode == false {
             //to classic
-        UIView.animate(withDuration: 0.2, animations: {blurView.alpha = 1}, completion: { _ in
+            UIView.animate(withDuration: 0.2, animations: {
+                blurView.alpha = 1
+                if let tag1 = self.view.viewWithTag(1) {
+                    tag1.alpha = 0
+                }
+                if let tag2 = self.view.viewWithTag(2) {
+                    tag2.alpha = 0
+                }
+            }, completion: { _ in
+                let configuration = ARWorldTrackingConfiguration()
+                configuration.planeDetection = .horizontal
             
-            let configuration = ARWorldTrackingConfiguration()
-            configuration.planeDetection = .horizontal
-        
-            self.sceneView.session.pause()
-            self.sceneView.session.run(configuration, options: [.removeExistingAnchors, .resetTracking])
-            self.modeButton.imageView.image = #imageLiteral(resourceName: "bfocus 2")
-    
-        })
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8, execute: {
-                UIView.animate(withDuration: 0.5, animations: {blurView.alpha = 0}, completion: {_ in           blurView.removeFromSuperview()})
+                self.sceneView.session.pause()
+                self.sceneView.session.run(configuration, options: [.removeExistingAnchors, .resetTracking])
+                self.modeButton.imageView.image = #imageLiteral(resourceName: "bfocus 2")
             })
-            
-            
-            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8, execute: {
+                UIView.animate(withDuration: 0.5, animations: {blurView.alpha = 0}, completion: {_ in
+                    blurView.removeFromSuperview()})
+            })
         } else {
             if let tag1 = self.view.viewWithTag(1) {
                 print("1")
@@ -54,16 +58,15 @@ extension ViewController {
                 self.view.bringSubviewToFront(tag2)
             }
             //focusmode
-        UIView.animate(withDuration: 0.2, animations: {blurView.alpha = 1}, completion: { _ in
-            UIView.animate(withDuration: 0.2, animations: {
-                print("alpha")
-                if let tag1 = self.view.viewWithTag(1) {
-                    tag1.alpha = 1
-                }
-                if let tag2 = self.view.viewWithTag(2) {
-                    tag2.alpha = 1
-                }
-            })
+            UIView.animate(withDuration: 0.2, animations: {blurView.alpha = 1}, completion: { _ in
+                UIView.animate(withDuration: 0.2, animations: {
+                    if let tag1 = self.view.viewWithTag(1) {
+                        tag1.alpha = 1
+                    }
+                    if let tag2 = self.view.viewWithTag(2) {
+                        tag2.alpha = 1
+                    }
+                })
                 let action = SCNAction.fadeOut(duration: 1)
                 for h in self.classicHighlightArray {
                     h.runAction(action, completionHandler: {() in
@@ -77,15 +80,13 @@ extension ViewController {
                             print("remove123")
                         })
                 }
-
-            self.sceneView.session.pause()
-            self.runImageTrackingSession(with: [], runOptions: [.removeExistingAnchors, .resetTracking])
-            self.modeButton.imageView.image = #imageLiteral(resourceName: "bclassic 2")
-
-     
-        })
+                self.sceneView.session.pause()
+                self.runImageTrackingSession(with: [], runOptions: [.removeExistingAnchors, .resetTracking])
+                self.modeButton.imageView.image = #imageLiteral(resourceName: "bclassic 2")
+            })
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8, execute: {
-                UIView.animate(withDuration: 0.5, animations: {blurView.alpha = 0}, completion: {_ in           blurView.removeFromSuperview()})
+                UIView.animate(withDuration: 0.5, animations: {blurView.alpha = 0}, completion: {_ in
+                    blurView.removeFromSuperview()})
             })
         }
     }
