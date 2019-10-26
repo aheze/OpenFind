@@ -115,6 +115,7 @@ extension ViewController {
                 self.classicTimer.resume()
                 //self.stopFinding = true
                 self.blurScreen(mode: false)
+                self.focusTimer.suspend()
                 //self.f.suspend()
                 //self.stopLoopTag = false
                 //self.t.resume()
@@ -138,6 +139,7 @@ extension ViewController {
                 //self.t.suspend()
                 //self.numberOfFocusTimes = 0
                 //self.f.resume()
+                self.focusTimer.resume()
                 self.blurScreen(mode: true)
             }
         }

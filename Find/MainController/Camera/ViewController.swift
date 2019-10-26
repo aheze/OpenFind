@@ -219,10 +219,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         //MARK: Sceneview
-        sceneView.delegate = self
-        sceneView.autoenablesDefaultLighting = true
-        sceneConfiguration.planeDetection = [.horizontal, .vertical]
-        sceneView.session.run(sceneConfiguration)
+        setUpARDelegates()
+        
         
         setUpButtons()
         setUpTimers()
@@ -259,46 +257,6 @@ class ViewController: UIViewController {
     }
 
 
-}
-//MARK: AR
-extension ViewController: ARSCNViewDelegate {
-    
-    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor,
-            let planeNode = node.childNodes.first,
-            let plane = planeNode.geometry as? SCNPlane
-            else { return }
-         
-        // 2
-        let width = CGFloat(planeAnchor.extent.x)
-        let height = CGFloat(planeAnchor.extent.z)
-        plane.width = width
-        plane.height = height
-         
-        // 3
-        let x = CGFloat(planeAnchor.center.x)
-        let y = CGFloat(planeAnchor.center.y)
-        let z = CGFloat(planeAnchor.center.z)
-        planeNode.position = SCNVector3(x, y, z)
-    }
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        if anchor is ARPlaneAnchor {
-            let planeAnchor = anchor as! ARPlaneAnchor
-            let plane = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
-            let planeNode = SCNNode()
-            planeNode.position = SCNVector3(x: planeAnchor.center.x, y: 0, z: planeAnchor.center.z)
-            planeNode.transform = SCNMatrix4MakeRotation(-Float.pi/2, 1, 0, 0)
-            let gridMaterial = SCNMaterial()
-            gridMaterial.diffuse.contents = UIColor.white.withAlphaComponent(0.1)
-            plane.materials = [gridMaterial]
-            planeNode.geometry = plane
-            node.addChildNode(planeNode)
-            print("plane detected")
-        }else{
-           return
-        }
-    }
-    
 }
 
 
