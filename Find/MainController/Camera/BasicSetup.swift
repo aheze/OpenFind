@@ -47,18 +47,31 @@ extension ViewController {
         print(deviceSize.height)
     }
    
-    func setUpClassicTimer() {
+    func setUpTimers() {
         classicTimer.eventHandler = {
             if self.isBusyProcessingImage == false {
                 self.processImage()
-                DispatchQueue.main.async {
-                }
+                
             } else {
                 print("busyPROCESSING+_+_+_+_+_+")
                 return
             }
             if(false){
                 self.classicTimer.suspend() //keep strong reference
+            }
+        }
+        focusTimer.eventHandler = {
+            if self.findingInNode == false {
+                self.processImage()
+                if let pixelBuffer = self.sceneView.session.currentFrame?.capturedImage {
+                    self.search(in: pixelBuffer)
+                }
+            } else {
+                print("busyPROCESSING+_+_+_+_+_+")
+                return
+            }
+            if(false){
+                self.focusTimer.suspend() //keep strong reference
             }
         }
     }
@@ -98,6 +111,8 @@ extension ViewController {
             
             if self.scanModeToggle == .focused {
                 self.scanModeToggle = .classic
+                self.stopProcessingImage = false
+                self.classicTimer.resume()
                 //self.stopFinding = true
                 self.blurScreen(mode: false)
                 //self.f.suspend()
@@ -114,9 +129,10 @@ extension ViewController {
             
             if self.scanModeToggle == .classic {
                 self.scanModeToggle = .focused
-                //self.classicHasFoundOne = false
+                self.classicHasFoundOne = false
                 print("focus")
-                
+                self.stopProcessingImage = true
+                self.classicTimer.suspend()
                 //self.stopLoopTag = true
                 //self.stopFinding = false
                 //self.t.suspend()

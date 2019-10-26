@@ -117,7 +117,7 @@ class ViewController: UIViewController {
     }
     
     ///CLASSIC MODE
-    let classicTimer = RepeatingTimer(timeInterval: 1)
+    let classicTimer = RepeatingTimer(timeInterval: 0.8)
     var isBusyProcessingImage = false
     var stopProcessingImage = false
     let sceneConfiguration = ARWorldTrackingConfiguration()
@@ -127,8 +127,40 @@ class ViewController: UIViewController {
             var classicHasFoundOne : Bool = false
             var processImageNumberOfPasses = 0
             var numberOfHighlights: Int = 0
+    lazy var textDetectionRequest: VNRecognizeTextRequest = {
+        let request = VNRecognizeTextRequest(completionHandler: self.handleDetectedText)
+        request.recognitionLevel = .fast
+        request.recognitionLanguages = ["en_GB"]
+        request.usesLanguageCorrection = true
+        return request
+    }()
     
     ///FOCUS MODE
+    var focusTimer = RepeatingTimer(timeInterval: 1)
+    var currentCameraImage: CVPixelBuffer!
+    var focusHasFoundOne: Bool = false
+    var imagesToTrack = [ARReferenceImage]()
+    var isLookingForRect: Bool = false
+    var numberOfFocusTimes: Int = 0
+    var detectedPlanes = [SCNNode: ARImageAnchor]()
+    var blueNode = SCNNode()
+    var currentHighlightNode = SCNNode()
+    var stopTagFindingInNode : Bool = false
+    var isOnDetectedPlane : Bool = false
+    var findingInNode : Bool = false
+    var focusRepeatsCounter: Int = 0
+    var firstTimeFocusHighlight = 0
+    
+    var focusHighlightArray = [SCNNode]()
+    var secondFocusHighlightArray = [SCNNode]()
+    lazy var focusTextDetectionRequest: VNRecognizeTextRequest = {
+        let request = VNRecognizeTextRequest(completionHandler: self.handleFocusDetectedText)
+        request.recognitionLevel = .fast
+        request.recognitionLanguages = ["en_GB"]
+        request.usesLanguageCorrection = true
+        return request
+    }()
+
     
     ///Every mode (Universal)
     var statusBarHidden : Bool = false
@@ -154,13 +186,7 @@ class ViewController: UIViewController {
     ///Save the image
     var globalUrl : URL = URL(fileURLWithPath: "")
     
-    lazy var textDetectionRequest: VNRecognizeTextRequest = {
-        let request = VNRecognizeTextRequest(completionHandler: self.handleDetectedText)
-        request.recognitionLevel = .fast
-        request.recognitionLanguages = ["en_GB"]
-        request.usesLanguageCorrection = true
-        return request
-    }()
+    
     //ramreel
     var dataSource: SimplePrefixQueryDataSource!
     var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
@@ -199,7 +225,7 @@ class ViewController: UIViewController {
         sceneView.session.run(sceneConfiguration)
         
         setUpButtons()
-        setUpClassicTimer()
+        setUpTimers()
         setUpRamReel()
         setUpToolBar()
         setUpFilePath()

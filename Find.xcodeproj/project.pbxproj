@@ -13,6 +13,11 @@
 		49115090236004E800EC0C04 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4911508E235E7DF100EC0C04 /* Roboto-Light.ttf */; };
 		491150922363E0D600EC0C04 /* ChangeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491150912363E0D600EC0C04 /* ChangeMode.swift */; };
 		491150942363E3D300EC0C04 /* ARExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491150932363E3D300EC0C04 /* ARExtensions.swift */; };
+		491150962364CC2D00EC0C04 /* RectangleDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491150952364CC2D00EC0C04 /* RectangleDetector.swift */; };
+		491150982364D25D00EC0C04 /* RectangleOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491150972364D25D00EC0C04 /* RectangleOverlay.swift */; };
+		4911509A2364D27B00EC0C04 /* FindInNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491150992364D27B00EC0C04 /* FindInNode.swift */; };
+		4911509C236501D900EC0C04 /* FocusVisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4911509B236501D900EC0C04 /* FocusVisionHandler.swift */; };
+		4911509E236503C600EC0C04 /* GetTextFocused.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4911509D236503C600EC0C04 /* GetTextFocused.swift */; };
 		49517015235AC56D00E00D83 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4951700B235AC56C00E00D83 /* CollectionViewLayout.swift */; };
 		49517016235AC56D00E00D83 /* CollectionViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4951700C235AC56C00E00D83 /* CollectionViewWrapper.swift */; };
 		49517017235AC56D00E00D83 /* TextFieldReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4951700D235AC56C00E00D83 /* TextFieldReactor.swift */; };
@@ -50,6 +55,11 @@
 		4911508E235E7DF100EC0C04 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		491150912363E0D600EC0C04 /* ChangeMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMode.swift; sourceTree = "<group>"; };
 		491150932363E3D300EC0C04 /* ARExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARExtensions.swift; sourceTree = "<group>"; };
+		491150952364CC2D00EC0C04 /* RectangleDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleDetector.swift; sourceTree = "<group>"; };
+		491150972364D25D00EC0C04 /* RectangleOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleOverlay.swift; sourceTree = "<group>"; };
+		491150992364D27B00EC0C04 /* FindInNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindInNode.swift; sourceTree = "<group>"; };
+		4911509B236501D900EC0C04 /* FocusVisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusVisionHandler.swift; sourceTree = "<group>"; };
+		4911509D236503C600EC0C04 /* GetTextFocused.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTextFocused.swift; sourceTree = "<group>"; };
 		4951700B235AC56C00E00D83 /* CollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewLayout.swift; sourceTree = "<group>"; };
 		4951700C235AC56C00E00D83 /* CollectionViewWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewWrapper.swift; sourceTree = "<group>"; };
 		4951700D235AC56C00E00D83 /* TextFieldReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldReactor.swift; sourceTree = "<group>"; };
@@ -135,6 +145,11 @@
 		496937372353C1FD009CA41A /* Focused */ = {
 			isa = PBXGroup;
 			children = (
+				491150952364CC2D00EC0C04 /* RectangleDetector.swift */,
+				491150972364D25D00EC0C04 /* RectangleOverlay.swift */,
+				491150992364D27B00EC0C04 /* FindInNode.swift */,
+				4911509B236501D900EC0C04 /* FocusVisionHandler.swift */,
+				4911509D236503C600EC0C04 /* GetTextFocused.swift */,
 			);
 			path = Focused;
 			sourceTree = "<group>";
@@ -364,9 +379,11 @@
 				4969373E2353C3D8009CA41A /* ShutterButton.swift in Sources */,
 				4951701A235AC56D00E00D83 /* CollectionViewCell.swift in Sources */,
 				491150942363E3D300EC0C04 /* ARExtensions.swift in Sources */,
+				491150982364D25D00EC0C04 /* RectangleOverlay.swift in Sources */,
 				4911508D235D51E300EC0C04 /* MatchesHUD.swift in Sources */,
 				49F7B15E2356954A0099FA62 /* GetTextClassic.swift in Sources */,
 				4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */,
+				491150962364CC2D00EC0C04 /* RectangleDetector.swift in Sources */,
 				49517016235AC56D00E00D83 /* CollectionViewWrapper.swift in Sources */,
 				49517017235AC56D00E00D83 /* TextFieldReactor.swift in Sources */,
 				49F7B1602359363E0099FA62 /* HighlightShape.swift in Sources */,
@@ -374,6 +391,7 @@
 				49F7B1522353FC970099FA62 /* ProcessImage.swift in Sources */,
 				4951701D235AC56D00E00D83 /* GradientView.swift in Sources */,
 				4911508B235D1A3E00EC0C04 /* BasicUtilities.swift in Sources */,
+				4911509C236501D900EC0C04 /* FocusVisionHandler.swift in Sources */,
 				49517019235AC56D00E00D83 /* DataFlow.swift in Sources */,
 				4951701C235AC56D00E00D83 /* RAMReel.swift in Sources */,
 				49115089235D17EB00EC0C04 /* shutterPressed.swift in Sources */,
@@ -381,8 +399,10 @@
 				4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */,
 				491150922363E0D600EC0C04 /* ChangeMode.swift in Sources */,
 				49F7B1542353FDF40099FA62 /* VisionHandler.swift in Sources */,
+				4911509A2364D27B00EC0C04 /* FindInNode.swift in Sources */,
 				49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */,
 				49F7B15C2354E85F0099FA62 /* WordReader.swift in Sources */,
+				4911509E236503C600EC0C04 /* GetTextFocused.swift in Sources */,
 				49517015235AC56D00E00D83 /* CollectionViewLayout.swift in Sources */,
 				49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */,
 			);
