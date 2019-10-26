@@ -111,10 +111,11 @@ extension ViewController {
         goToFocus.imageView.image = #imageLiteral(resourceName: "bfocus 2")
         goToFocus.action = { item in
             
+            
             if self.scanModeToggle == .classic {
                 self.scanModeToggle = .focused
                 //self.classicHasFoundOne = false
-                print("focusmode")
+                print("focus")
                 
                 //self.stopLoopTag = true
                 //self.stopFinding = false
