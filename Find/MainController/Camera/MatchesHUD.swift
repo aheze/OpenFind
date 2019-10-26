@@ -117,12 +117,9 @@ extension ViewController {
         switch recognizer.state {
         case .began:
             initialOffset = CGPoint(x: touchPoint.x - matchesBig.center.x, y: touchPoint.y - matchesBig.center.y)
-            print("3")
         case .changed:
-            print("1")
             matchesBig.center = CGPoint(x: touchPoint.x - initialOffset.x, y: touchPoint.y - initialOffset.y)
         case .ended, .cancelled:
-            print("2")
             let decelerationRate = UIScrollView.DecelerationRate.normal.rawValue
             let velocity = recognizer.velocity(in: view)
             let projectedPosition = CGPoint(
@@ -153,7 +150,6 @@ extension ViewController {
             }
             animator.startAnimation()
         default:
-            print("12")
             break
         }
     }

@@ -79,14 +79,11 @@ class ViewController: UIViewController {
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
-            print("view")
             if touch.view == matchesBig {
-                print("viewYes")
                 self.matchesShouldFireTimer = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     
                     if self.matchesShouldFireTimer == true {
-                        print("start")
                                 for view in self.pipPositionViews {
                             view.isHidden = false
                             UIView.animate(withDuration: 0.2, animations: {
@@ -105,10 +102,8 @@ class ViewController: UIViewController {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             if touch.view == matchesBig {
-            let currentPoint = touch.location(in: matchesBig)
             // do something with your currentPoint
             matchesShouldFireTimer = false
-            print("end1")
             for view in pipPositionViews {
                 UIView.animate(withDuration: 0.2, animations: {
                     view.alpha = 0
@@ -150,6 +145,11 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    ///Crosshair
+    var crosshairPoint : CGPoint = CGPoint(x: 0, y: 0)
+    
+    
     
     ///Save the image
     var globalUrl : URL = URL(fileURLWithPath: "")
@@ -204,6 +204,7 @@ class ViewController: UIViewController {
         setUpToolBar()
         setUpFilePath()
         setUpMatches()
+        setUpCrosshair()
         //make sure the position views are hidden
         for view in pipPositionViews {
             view.isHidden = true
@@ -212,9 +213,10 @@ class ViewController: UIViewController {
         
         switch scanModeToggle {
             case .classic:
+                print("Classic Mode")
                 classicTimer.resume()
             case .focused:
-                print("focusmode")
+                print("Focus Mode")
             
         }
         
