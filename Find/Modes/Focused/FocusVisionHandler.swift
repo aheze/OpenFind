@@ -24,7 +24,7 @@ extension ViewController {
                 if stopTagFindingInNode == false {
                 if let observation = result as? VNRecognizedTextObservation {
                    for text in observation.topCandidates(1) {
-    //                    print(text.string)
+                    //  print(text.string)
                     let component = Component()
                     component.x = observation.boundingBox.origin.x
                     component.y = observation.boundingBox.origin.y
@@ -32,7 +32,7 @@ extension ViewController {
                     component.width = observation.boundingBox.width
                     component.text = text.string
                     if component.text.contains(finalTextToFind) {
-                        if processImageNumberOfPasses % 2 == 0 {
+                        if numberOfFocusTimes % 2 == 0 {
                             getTextFocused(stringToFind: finalTextToFind, component: component, alternate: false)
                             print("first")
                         } else {

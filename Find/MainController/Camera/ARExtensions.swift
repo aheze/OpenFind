@@ -86,7 +86,6 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         let node = SCNNode()
         if let imageAnchor = anchor as? ARImageAnchor {
-            print("asdla")
             let plane1 = SCNPlane(width: imageAnchor.referenceImage.physicalSize.width, height: imageAnchor.referenceImage.physicalSize.height)
             
             plane1.firstMaterial?.diffuse.contents = UIColor(white: 1.0, alpha: 0.8)
@@ -108,7 +107,9 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
                             DispatchQueue.global(qos: .background).async {
                                 self.findInNode(points: corners.0, buffer: corners.1)
                             }
-                        }
+                        } else {
+                            print("finding getImage")
+                    }
                     if firstTimeFocusHighlight == 0 {
                         firstTimeFocusHighlight += 1
                         var size = CGSize()
@@ -133,11 +134,9 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
         
     }
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        print("asd")
                 if scanModeToggle == .focused {
                 let results = sceneView.hitTest(crosshairPoint, options: nil)
                 if let feature = results.first {
-                    print("asdresult")
                     stopTagFindingInNode = false
                     focusTimer.suspend()
                     let planeNode = feature.node

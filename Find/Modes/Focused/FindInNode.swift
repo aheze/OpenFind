@@ -68,7 +68,11 @@ extension ViewController {
             findingInNode = false
             return
         }
+        
         let cgImageSize = CGSize(width: cgImageOrig.width, height: cgImageOrig.height)
+        focusImageSize = cgImageSize
+        extentOfPerspectiveImage = perspectiveImage.extent
+        
         let requests = [focusTextDetectionRequest]
         let imageRequestHandler = VNImageRequestHandler(cgImage: cgImageOrig, orientation: CGImagePropertyOrientation.up, options: [:])
         do {

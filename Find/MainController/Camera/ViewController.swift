@@ -151,6 +151,10 @@ class ViewController: UIViewController {
     var focusRepeatsCounter: Int = 0
     var firstTimeFocusHighlight = 0
     
+    var focusImageSize: CGSize = CGSize(width: 0, height: 0)
+    var referenceImageSizeInRealWorld: CGSize = CGSize(width: 0, height: 0)
+    var extentOfPerspectiveImage = CGRect()
+    
     var focusHighlightArray = [SCNNode]()
     var secondFocusHighlightArray = [SCNNode]()
     lazy var focusTextDetectionRequest: VNRecognizeTextRequest = {

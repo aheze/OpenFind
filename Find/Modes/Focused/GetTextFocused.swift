@@ -14,8 +14,39 @@ extension ViewController {
         let point = CGPoint(x: component.x, y: component.y)
         //print("point is \(point)")
         var newPoint = CGPoint()
-        newPoint.x = deviceSize.width * point.x
-        newPoint.y = deviceSize.height - (deviceSize.height * point.y)
+        newPoint.x = extentOfPerspectiveImage.width * point.x
+        newPoint.y = extentOfPerspectiveImage.height - (extentOfPerspectiveImage.height * point.y)
+        
+        if let theAnchor = detectedPlanes[blueNode] {
+            referenceImageSizeInRealWorld = theAnchor.referenceImage.physicalSize
+        }
+        
+        let width = component.width
+        let height = component.height
+        let realWidth = width * extentOfPerspectiveImage.width
+        let realHeight = height * extentOfPerspectiveImage.height
+        
+        let textWidth = realWidth / CGFloat(component.text.count)
+        let wordWidth = CGFloat(stringToFind.count) * textWidth
+        let textHeight = CGFloat(realHeight * 0.8)
+        
+        let focusSizeRatio = focusImageSize.width / focusImageSize.height
+       var realWorldShouldBeWidth = focusSizeRatio * referenceImageSizeInRealWorld.height
+       
+       let relativePointRatioX = point.x / focusImageSize.width
+       let relativePointRatioY = point.y / focusImageSize.height
+       newPoint.x = relativePointRatioX * realWorldShouldBeWidth
+       newPoint.y = relativePointRatioY * referenceImageSizeInRealWorld.height
+       let relativeWidth = width / focusImageSize.width
+       let newFocusWidth = relativeWidth * realWorldShouldBeWidth
+       
+       let relativeHeight = height / focusImageSize.height
+       let newFocusHeight = relativeHeight * referenceImageSizeInRealWorld.height
+                       
+        let focusTextWidth = newFocusWidth / CGFloat(component.text
+            .count)
+                       let focusWordWidth = CGFloat(stringToFind.count) * focusTextWidth
+                       let focusTextHeight = CGFloat(newFocusHeight * 0.8)
         
         let realComponentWidth = component.width * deviceSize.width
         let realComponentHeight = component.height * deviceSize.height
@@ -27,13 +58,12 @@ extension ViewController {
             
             
             for index in indicies {
-                
                 let finalPoint = CGPoint(x: newPoint.x + individualCharacterWidth, y: newPoint.y)
                 let addedWidth = CGFloat(index) * individualCharacterWidth
-                let results = sceneView.hitTest(finalPoint, types: .existingPlaneUsingExtent)
+        //        let results = sceneView.hitTest(finalPoint, types: .existingPlaneUsingExtent)
                 
-                if let hitResult = results.first {
-                    
+               // if let hitResult = results.first {
+                    print("asdfsgdsgs")
                     let realTextWidth = (individualCharacterWidth * CGFloat(stringToFind.count)) / CGFloat(2000)
                     
                     let highlight = SCNBox(width: realTextWidth, height: 0.001, length: realComponentHeight / 2000, chamferRadius: 0.001)
@@ -44,21 +74,16 @@ extension ViewController {
                     let highlightColor : UIColor = #colorLiteral(red: 0, green: 0.7389578223, blue: 0.9509587884, alpha: 1)
                     material.diffuse.contents = highlightColor.withAlphaComponent(0.95)
                     highlight.materials = [material]
-                    
-                    let node = SCNNode(geometry: highlight)
-                    node.transform = SCNMatrix4(hitResult.anchor!.transform)
-                    node.position = SCNVector3(
-                        
-                        x: hitResult.worldTransform.columns.3.x,
-                        y: hitResult.worldTransform.columns.3.y,
-                        z: hitResult.worldTransform.columns.3.z
-                    )
+                     let node = SCNNode(geometry: highlight)
+                
+                   node.position.y += Float(newPoint.x)
+                    node.position.x += Float(newPoint.y)
 //                    node.eulerAngles.x = -.pi/2
 //                    let billboardConstraint = SCNBillboardConstraint()
 //                    billboardConstraint.freeAxes = [.Y]
 //                    node.constraints = [billboardConstraint]
-                    classicHasFoundOne = true
-                    sceneView.scene.rootNode.addChildNode(node)
+                    focusHasFoundOne = true
+                blueNode.addChildNode(node)
                     amountOfMatches += 1
                     if matchesCanAcceptNewValue == true {
                         DispatchQueue.main.async {
@@ -67,7 +92,7 @@ extension ViewController {
                     }
                     if alternate == true {
                         //print("normal---------")
-                        classicHighlightArray.append(node)
+                        focusHighlightArray.append(node)
                         let action = SCNAction.fadeOpacity(to: 0.8, duration: 0.3)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                 node.runAction(action)
@@ -75,14 +100,14 @@ extension ViewController {
                         
                     } else {
                         //print("alternate-------")
-                        secondClassicHighlightArray.append(node)
+                        secondFocusHighlightArray.append(node)
                         let action = SCNAction.fadeOpacity(to: 0.8, duration: 0.3)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                 node.runAction(action)
                             }
                     }
                     fadeHighlights()
-                }
+                //}
             }
         }
         
