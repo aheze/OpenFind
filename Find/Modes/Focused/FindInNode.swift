@@ -77,9 +77,7 @@ extension ViewController {
         let imageRequestHandler = VNImageRequestHandler(cgImage: cgImageOrig, orientation: CGImagePropertyOrientation.up, options: [:])
         do {
             try imageRequestHandler.perform(requests)
-        }
-        catch {
-            findingInNode = false
+        } catch {
             print("Error occured \(error)")
         }
         

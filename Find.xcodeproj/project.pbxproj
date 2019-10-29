@@ -206,11 +206,11 @@
 				49F7B1552353FE4B0099FA62 /* BasicSetup.swift */,
 				49F7B1572353FE7E0099FA62 /* TextComponent.swift */,
 				49115088235D17EB00EC0C04 /* shutterPressed.swift */,
-				4951701E235AC5F200E00D83 /* ReelSearchBar */,
 				4911508C235D51E300EC0C04 /* MatchesHUD.swift */,
 				491150932363E3D300EC0C04 /* ARExtensions.swift */,
 				4957157B2368AF69007BF68B /* RippleEffect.swift */,
 				4957157D2368B022007BF68B /* ViewExtensions.swift */,
+				4951701E235AC5F200E00D83 /* ReelSearchBar */,
 			);
 			path = Camera;
 			sourceTree = "<group>";

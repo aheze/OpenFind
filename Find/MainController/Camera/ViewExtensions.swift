@@ -23,11 +23,11 @@ extension ViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
             if self.scanModeToggle == .focused {
-                self.stopTagFindingInNode = true
+                //self.stopTagFindingInNode = true
                 self.focusTimer.suspend()
                 self.runImageTrackingSession(with: [], runOptions: [.resetTracking, .removeExistingAnchors])
                 self.focusTimer.resume()
-                self.stopTagFindingInNode = false
+                //self.stopTagFindingInNode = false
             } else {
                 self.stopProcessingImage = true
                 self.classicTimer.suspend()

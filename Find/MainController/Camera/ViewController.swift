@@ -148,6 +148,7 @@ class ViewController: UIViewController {
     
     ///FOCUS MODE
     var focusTimer = RepeatingTimer(timeInterval: 1)
+    
     var currentCameraImage: CVPixelBuffer!
     var focusHasFoundOne: Bool = false
     var imagesToTrack = [ARReferenceImage]()
@@ -156,11 +157,14 @@ class ViewController: UIViewController {
     var detectedPlanes = [SCNNode: ARImageAnchor]()
     var blueNode = SCNNode()
     var currentHighlightNode = SCNNode()
-    var stopTagFindingInNode : Bool = false
+    
+    var stopTagFocusVision : Bool = false
+    
+    
     var isOnDetectedPlane : Bool = false
     var findingInNode : Bool = false
     var focusRepeatsCounter: Int = 0
-    var firstTimeFocusHighlight = 0
+    var firstTimeFocusHighlight = true
     
     var focusImageSize: CGSize = CGSize(width: 0, height: 0)
     var referenceImageSizeInRealWorld: CGSize = CGSize(width: 0, height: 0)

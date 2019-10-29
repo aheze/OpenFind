@@ -53,7 +53,7 @@ extension ViewController {
                 self.processImage()
                 
             } else {
-                print("busyPROCESSING+_+_+_+_+_+")
+                print("busyPROCESSINGclassic+_+_+_+_+_+")
                 return
             }
             if(false){
@@ -62,12 +62,12 @@ extension ViewController {
         }
         focusTimer.eventHandler = {
             if self.findingInNode == false {
-                self.processImage()
+                //self.processImage()
                 if let pixelBuffer = self.sceneView.session.currentFrame?.capturedImage {
                     self.search(in: pixelBuffer)
                 }
             } else {
-                print("busyPROCESSING+_+_+_+_+_+")
+                print("busyPROCESSINGfocus+_+_+_+_+_+")
                 return
             }
             if(false){

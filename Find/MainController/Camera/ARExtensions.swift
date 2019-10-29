@@ -99,71 +99,78 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
             return node
     }
     func getImage(node: SCNNode) {
-
-        if firstTimeFocusHighlight == 0 || findingInNode == false {
+        //print("findingInNode??: \(findingInNode)")
+        if findingInNode == false {
             if let anchor = detectedPlanes[node] {
                 if let corners = self.projection(from: anchor) {
-                        if findingInNode == false {
-                            DispatchQueue.global(qos: .background).async {
-                                self.findInNode(points: corners.0, buffer: corners.1)
-                            }
-                        } else {
-                            print("finding getImage")
-                    }
-                    if firstTimeFocusHighlight == 0 {
-                        firstTimeFocusHighlight += 1
-                        var size = CGSize()
-                        size.width = corners.0[2].x - corners.0[3].x
-                        size.height = corners.0[1].y - corners.0[3].y
-                        let shape = getRect(size: size)
-                        let planeNode = SCNNode(geometry: shape)
-                        planeNode.eulerAngles.z = -.pi / 2
-                        blueNode.addChildNode(planeNode)
-                        currentHighlightNode = planeNode
-                        let action = SCNAction.scale(to: 1.1, duration: 0.2)
-                        blueNode.geometry?.firstMaterial?.diffuse.contents = UIColor.white.withAlphaComponent(0.2)
-                        planeNode.runAction(action, completionHandler: {
-                            let action2 = SCNAction.scale(to: 1, duration: 0.3)
-                            planeNode.runAction(action2)
-                        })
-                        
-                    }
+                    DispatchQueue.global(qos: .background).async {
+                        self.findInNode(points: corners.0, buffer: corners.1)
+                }
                 }
             }
         }
-        
     }
-    func session(_ session: ARSession, didUpdate frame: ARFrame) {
-                if scanModeToggle == .focused {
-                let results = sceneView.hitTest(crosshairPoint, options: nil)
-                if let feature = results.first {
-                    stopTagFindingInNode = false
-                    focusTimer.suspend()
-                    let planeNode = feature.node
-                    blueNode = planeNode
-                    isOnDetectedPlane = true
-                    numberOfFocusTimes = 0
-                    getImage(node: planeNode)
-                } else {
-                    numberOfFocusTimes += 1
-        
-                    stopTagFindingInNode = true
-                    blueNode.geometry?.firstMaterial?.diffuse.contents = UIColor.white.withAlphaComponent(0.3)
-        
-                    let fadeOut = SCNAction.fadeOpacity(to: 0, duration: 0.2)
-                         isOnDetectedPlane = false
-                    currentHighlightNode.runAction(fadeOut, completionHandler: {
-                        self.currentHighlightNode.removeFromParentNode()
-                        self.firstTimeFocusHighlight = 0
-        
+    func placeBlueFrame(node: SCNNode) {
+        //print("firsttime: \(firstTimeFocusHighlight)")
+        if firstTimeFocusHighlight == true {
+            firstTimeFocusHighlight = false
+        if let anchor = detectedPlanes[node] {
+            if let corners = self.projection(from: anchor) {
+                    var size = CGSize()
+                    size.width = corners.0[2].x - corners.0[3].x
+                    size.height = corners.0[1].y - corners.0[3].y
+                    let shape = getRect(size: size)
+                    let planeNode = SCNNode(geometry: shape)
+                    planeNode.eulerAngles.z = -.pi / 2
+                    blueNode.addChildNode(planeNode)
+                    print("asdfklj")
+                    currentHighlightNode = planeNode
+                    let action = SCNAction.scale(to: 1.1, duration: 0.2)
+                    blueNode.geometry?.firstMaterial?.diffuse.contents = UIColor.white.withAlphaComponent(0.2)
+                    planeNode.runAction(action, completionHandler: {
+                        let action2 = SCNAction.scale(to: 1, duration: 0.3)
+                        planeNode.runAction(action2)
                     })
-                    if numberOfFocusTimes == 65 {
-                        print("resume")
-                        focusTimer.resume()
-        
-                    }
                 }
+            }
+        }
+    }
+
+    
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        if scanModeToggle == .focused {
+            let results = sceneView.hitTest(crosshairPoint, options: nil)
+            if let feature = results.first {
+              //  focusTimer.suspend()
+                
+              //  stopTagFindingInNode = false
+                let planeNode = feature.node
+                blueNode = planeNode
+                isOnDetectedPlane = true
+                numberOfFocusTimes = 0
+                placeBlueFrame(node: planeNode)
+                getImage(node: planeNode)
+            } else {
+                firstTimeFocusHighlight = true
+                numberOfFocusTimes += 1
+    
+              //  stopTagFindingInNode = true
+                blueNode.geometry?.firstMaterial?.diffuse.contents = UIColor.white.withAlphaComponent(0.3)
+    
+                let fadeOut = SCNAction.fadeOpacity(to: 0, duration: 0.2)
+                isOnDetectedPlane = false
+                currentHighlightNode.runAction(fadeOut, completionHandler: {
+                    self.currentHighlightNode.removeFromParentNode()
+                })
+                
+                if numberOfFocusTimes == 65 {
+                    print("resume")
+                    // stopTagFindingInNode = false
+                    focusTimer.resume()
+    
                 }
+            }
+        }
     }
     func projection(from anchor: ARImageAnchor) -> ([CGPoint], CVPixelBuffer)? {
 
