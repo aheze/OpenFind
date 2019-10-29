@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var darkBlurEffectHeightConstraint: NSLayoutConstraint!
     
     
+ 
     
     @IBOutlet weak var photoButton: UIButton!
     @IBOutlet weak var modeButton: JJFloatingActionButton!
@@ -36,6 +37,15 @@ class ViewController: UIViewController {
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
         print("cancel")
+        
+        UIView.animate(withDuration: 0.4, animations: {
+            self.ramReel.textField.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 0)
+        }, completion: { _ in
+            self.ramReel.textField.text = ""
+            self.ramReel.textField.textColor = UIColor.white
+        })
+        
+        
         view.endEditing(true)
     }
     
@@ -71,6 +81,11 @@ class ViewController: UIViewController {
     var pipPositions: [CGPoint] {
         return pipPositionViews.map { $0.center }
     }
+    @IBAction func refreshButtonPressed(_ sender: UIButton) {
+        refreshScreen()
+    }
+    @IBAction func photoButtonPressed(_ sender: UIButton) {
+    }
     var currentPipPosition : CGPoint?
     override func viewDidLayoutSubviews() {
            super.viewDidLayoutSubviews  ()
@@ -82,20 +97,16 @@ class ViewController: UIViewController {
             if touch.view == matchesBig {
                 self.matchesShouldFireTimer = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    
                     if self.matchesShouldFireTimer == true {
                                 for view in self.pipPositionViews {
                             view.isHidden = false
                             UIView.animate(withDuration: 0.2, animations: {
                                 view.alpha = 1
                             })
-                            
                         }
-                        
                     }
                 }
             }
-            
         }
     }
 

@@ -59,6 +59,9 @@
                                             <constraint firstAttribute="width" constant="62" id="uMP-PP-6dA"/>
                                         </constraints>
                                         <state key="normal" image="cameraroll"/>
+                                        <connections>
+                                            <action selector="photoButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b4h-dz-l5E"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Qu-fv-rhf" userLabel="ModeView">
                                         <rect key="frame" x="62" y="0.0" width="75.5" height="652"/>
@@ -97,6 +100,9 @@
                                                     <constraint firstAttribute="width" constant="66" id="hhy-aa-o0G"/>
                                                 </constraints>
                                                 <state key="normal" image="refresh"/>
+                                                <connections>
+                                                    <action selector="refreshButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CDr-ft-8Pn"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

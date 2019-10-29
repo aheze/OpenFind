@@ -169,22 +169,22 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         view.addSubview(ramReel.view)
         ramReel.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         ramReel.textFieldDelegate = self as UITextFieldDelegate
+        ramReel.textField.addTarget(self, action: #selector(ViewController.textFieldDidChange(_:)),
+        for: UIControl.Event.editingChanged)
+        
         
     }
    
- @objc func keyboardWillShow(_ notification: Notification) {
+    @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             keyboardHeight = keyboardRectangle.size.height
             print("show")
         }
     }
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        print(range)
-        if range.lowerBound == 0, range.upperBound == 1 {
-            autocompButton.isEnabled = false
-            autocompButton.alpha = 0.5
-        } else if ramReel.wrapper.selectedItem == nil {
+   
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if ramReel.wrapper.selectedItem == nil {
         
         autocompButton.isEnabled = false
         autocompButton.alpha = 0.5
@@ -192,8 +192,8 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         autocompButton.isEnabled = true
         autocompButton.alpha = 1
         }
-        return true
     }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         autocompButton.isEnabled = false
         autocompButton.alpha = 0.5
@@ -265,9 +265,9 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         }
         )
              print(ramReel.selectedItem)
-        if ramReel.selectedItem == "" {
-            ramReel.placeholder = "Type here to find!"
-        }
+//        if ramReel.selectedItem == "" {
+//            ramReel.placeholder = "Type here to find!"
+//        }
         finalTextToFind = ramReel.selectedItem ?? ""
         
     }
