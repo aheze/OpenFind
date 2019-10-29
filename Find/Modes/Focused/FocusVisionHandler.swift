@@ -24,7 +24,7 @@ extension ViewController {
                 if stopTagFindingInNode == false {
                 if let observation = result as? VNRecognizedTextObservation {
                    for text in observation.topCandidates(1) {
-                    //  print(text.string)
+                      print(text.string)
                     let component = Component()
                     component.x = observation.boundingBox.origin.x
                     component.y = observation.boundingBox.origin.y

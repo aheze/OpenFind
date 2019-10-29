@@ -127,13 +127,13 @@ class ViewController: UIViewController {
             var classicHasFoundOne : Bool = false
             var processImageNumberOfPasses = 0
             var numberOfHighlights: Int = 0
-    lazy var textDetectionRequest: VNRecognizeTextRequest = {
-        let request = VNRecognizeTextRequest(completionHandler: self.handleDetectedText)
-        request.recognitionLevel = .fast
-        request.recognitionLanguages = ["en_GB"]
-        request.usesLanguageCorrection = true
-        return request
-    }()
+    lazy var textDetectionRequest = VNRecognizeTextRequest(completionHandler: handleDetectedText)
+//        let request = VNRecognizeTextRequest(completionHandler: self.handleDetectedText)
+//        request.recognitionLevel = .fast
+//        request.recognitionLanguages = ["en_GB"]
+//        request.usesLanguageCorrection = true
+//        return request
+//    }()
     
     ///FOCUS MODE
     var focusTimer = RepeatingTimer(timeInterval: 1)
@@ -157,14 +157,7 @@ class ViewController: UIViewController {
     
     var focusHighlightArray = [SCNNode]()
     var secondFocusHighlightArray = [SCNNode]()
-    lazy var focusTextDetectionRequest: VNRecognizeTextRequest = {
-        let request = VNRecognizeTextRequest(completionHandler: self.handleFocusDetectedText)
-        request.recognitionLevel = .fast
-        request.recognitionLanguages = ["en_GB"]
-        request.usesLanguageCorrection = true
-        return request
-    }()
-
+    lazy var focusTextDetectionRequest = VNRecognizeTextRequest(completionHandler: handleFocusDetectedText)
     
     ///Every mode (Universal)
     var statusBarHidden : Bool = false
@@ -224,7 +217,15 @@ class ViewController: UIViewController {
         
         //MARK: Sceneview
         setUpARDelegates()
-        
+       
+        textDetectionRequest.recognitionLevel = .fast
+        textDetectionRequest.recognitionLanguages = ["en_GB"]
+        textDetectionRequest.usesLanguageCorrection = true
+        focusTextDetectionRequest.recognitionLevel = .fast
+        focusTextDetectionRequest.recognitionLanguages = ["en_GB"]
+        focusTextDetectionRequest.usesLanguageCorrection = true
+            
+       
         
         setUpButtons()
         setUpTimers()
