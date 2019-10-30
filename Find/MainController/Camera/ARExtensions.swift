@@ -9,6 +9,30 @@
 import UIKit
 import ARKit
 
+extension ViewController: ARCoachingOverlayViewDelegate {
+  func addCoaching() {
+    coachingOverlay.delegate = self
+    coachingOverlay.session = sceneView.session
+    coachingOverlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+    // MARK: CoachingGoal
+    coachingOverlay.goal = .anyPlane
+    
+    sceneView.addSubview(coachingOverlay)
+    
+    sceneView.bringSubviewToFront(coachingOverlay)
+    print(coachingOverlay.frame)
+    print(coachingOverlay.bounds)
+    coachingOverlay.frame = sceneView.frame
+    print(coachingOverlay.frame)
+    print(coachingOverlay.bounds)
+  }
+  public func coachingOverlayViewDidDeactivate(_ coachingOverlayView: ARCoachingOverlayView) {
+    coachingOverlayView.activatesAutomatically = true
+    
+  }
+}
+
 extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
     
     func setUpARDelegates() {

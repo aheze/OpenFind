@@ -78,7 +78,7 @@ extension ViewController {
                 
                    node.position.y += Float(newPoint.x)
                     node.position.x += Float(newPoint.y)
-//                    node.eulerAngles.x = -.pi/2
+                    node.eulerAngles.x = -.pi/2
 //                    let billboardConstraint = SCNBillboardConstraint()
 //                    billboardConstraint.freeAxes = [.Y]
 //                    node.constraints = [billboardConstraint]

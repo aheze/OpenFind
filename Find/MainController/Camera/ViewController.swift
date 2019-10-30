@@ -175,6 +175,7 @@ class ViewController: UIViewController {
     lazy var focusTextDetectionRequest = VNRecognizeTextRequest(completionHandler: handleFocusDetectedText)
     
     ///Every mode (Universal)
+    let coachingOverlay = ARCoachingOverlayView()
     var statusBarHidden : Bool = false
     var scanModeToggle = CurrentModeToggle.classic
     var finalTextToFind : String = ""
@@ -232,7 +233,7 @@ class ViewController: UIViewController {
         
         //MARK: Sceneview
         setUpARDelegates()
-       
+        
         textDetectionRequest.recognitionLevel = .fast
         textDetectionRequest.recognitionLanguages = ["en_GB"]
         textDetectionRequest.usesLanguageCorrection = true
@@ -241,7 +242,6 @@ class ViewController: UIViewController {
         focusTextDetectionRequest.usesLanguageCorrection = true
             
        
-        
         setUpButtons()
         setUpTimers()
         setUpRamReel()
@@ -249,6 +249,7 @@ class ViewController: UIViewController {
         setUpFilePath()
         setUpMatches()
         setUpCrosshair()
+        addCoaching()
         //make sure the position views are hidden
         for view in pipPositionViews {
             view.isHidden = true
