@@ -34,7 +34,6 @@ extension ViewController {
                 if component.text.contains(finalTextToFind) {
                     if processImageNumberOfPasses % 2 == 0 {
                         getTextClassic(stringToFind: finalTextToFind, component: component, alternate: false)
-                        print("first")
                     } else {
                         getTextClassic(stringToFind: finalTextToFind, component: component, alternate: true)
                     }

@@ -33,7 +33,6 @@ extension ViewController {
                 let results = sceneView.hitTest(finalPoint, types: .existingPlaneUsingExtent)
                 
                 if let hitResult = results.first {
-                    
                     let realTextWidth = (individualCharacterWidth * CGFloat(stringToFind.count)) / CGFloat(2000)
                     
                     let highlight = SCNBox(width: realTextWidth, height: 0.001, length: realComponentHeight / 2000, chamferRadius: 0.001)
@@ -53,10 +52,22 @@ extension ViewController {
                         y: hitResult.worldTransform.columns.3.y,
                         z: hitResult.worldTransform.columns.3.z
                     )
-//                    node.eulerAngles.x = -.pi/2
-//                    let billboardConstraint = SCNBillboardConstraint()
-//                    billboardConstraint.freeAxes = [.Y]
-//                    node.constraints = [billboardConstraint]
+                    print(node.worldOrientation)
+                    
+                guard let anchoredNode =  sceneView.node(for: hitResult.anchor!) else { return }
+                let anchorNodeOrientation = anchoredNode.worldOrientation
+                    if anchorNodeOrientation.x == Float(0) && anchorNodeOrientation.z == Float(0) {
+                    ///plane detected is horizontal
+                    let billboardConstraint = SCNBillboardConstraint()
+                    billboardConstraint.freeAxes = [.Y]
+                    node.constraints = [billboardConstraint]
+                } else {
+                    ///is vertical
+                    //let billboardConstraint = SCNBillboardConstraint()
+                    //billboardConstraint.freeAxes = [.X]
+                    //node.constraints = [billboardConstraint]
+                }
+                    
                     classicHasFoundOne = true
                     sceneView.scene.rootNode.addChildNode(node)
                     amountOfMatches += 1

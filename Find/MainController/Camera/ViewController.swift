@@ -89,7 +89,7 @@ class ViewController: UIViewController {
     var currentPipPosition : CGPoint?
     override func viewDidLayoutSubviews() {
            super.viewDidLayoutSubviews  ()
-        print("layout")
+        
         matchesBig.center = currentPipPosition ?? pipPositions.last ?? .zero
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
