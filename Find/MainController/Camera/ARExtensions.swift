@@ -10,6 +10,16 @@ import UIKit
 import ARKit
 
 extension ViewController: ARCoachingOverlayViewDelegate {
+    func stopCoaching() {
+        coachingOverlay.activatesAutomatically = false
+        coachingOverlay.setActive(false, animated: false)
+    }
+    
+    func enableAutoCoaching() {
+        /// makes it automatic, not activate it.
+        coachingOverlay.activatesAutomatically = true
+    }
+    
   func addCoaching() {
     coachingOverlay.delegate = self
     coachingOverlay.session = sceneView.session
@@ -29,7 +39,6 @@ extension ViewController: ARCoachingOverlayViewDelegate {
   }
   public func coachingOverlayViewDidDeactivate(_ coachingOverlayView: ARCoachingOverlayView) {
     coachingOverlayView.activatesAutomatically = true
-    
   }
 }
 

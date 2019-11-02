@@ -107,13 +107,15 @@ extension ViewController {
         goToClassic.titleLabel.text = "Classic mode"
         goToClassic.imageView.image = #imageLiteral(resourceName: "bclassic 2")
         goToClassic.action = { item in
-            print("classicmode")
+            
             
             if self.scanModeToggle == .focused {
+                print("classicmode")
                 self.scanModeToggle = .classic
                 self.stopProcessingImage = false
                 self.classicTimer.resume()
                 //self.stopFinding = true
+                self.enableAutoCoaching()
                 self.blurScreen(mode: false)
                 self.focusTimer.suspend()
                 //self.f.suspend()
@@ -132,6 +134,7 @@ extension ViewController {
                 self.scanModeToggle = .focused
                 self.classicHasFoundOne = false
                 print("focus")
+                self.stopCoaching()
                 self.stopProcessingImage = true
                 self.classicTimer.suspend()
                 //self.stopLoopTag = true
