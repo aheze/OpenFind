@@ -52,7 +52,6 @@ extension ViewController {
                         y: hitResult.worldTransform.columns.3.y,
                         z: hitResult.worldTransform.columns.3.z
                     )
-                    print(node.worldOrientation)
                     
                 guard let anchoredNode =  sceneView.node(for: hitResult.anchor!) else { return }
                 let anchorNodeOrientation = anchoredNode.worldOrientation
@@ -61,12 +60,13 @@ extension ViewController {
                     let billboardConstraint = SCNBillboardConstraint()
                     billboardConstraint.freeAxes = [.Y]
                     node.constraints = [billboardConstraint]
-                } else {
+                }
+                    //else {
                     ///is vertical
                     //let billboardConstraint = SCNBillboardConstraint()
                     //billboardConstraint.freeAxes = [.X]
                     //node.constraints = [billboardConstraint]
-                }
+               // }
                     
                     classicHasFoundOne = true
                     sceneView.scene.rootNode.addChildNode(node)

@@ -61,7 +61,7 @@ extension ViewController {
             }
         }
         focusTimer.eventHandler = {
-            if self.findingInNode == false {
+            if self.isLookingForRect == false {
                 //self.processImage()
                 if let pixelBuffer = self.sceneView.session.currentFrame?.capturedImage {
                     self.search(in: pixelBuffer)
