@@ -11,7 +11,6 @@
 		4911508B235D1A3E00EC0C04 /* BasicUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4911508A235D1A3E00EC0C04 /* BasicUtilities.swift */; };
 		4911508D235D51E300EC0C04 /* MatchesHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4911508C235D51E300EC0C04 /* MatchesHUD.swift */; };
 		49115090236004E800EC0C04 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4911508E235E7DF100EC0C04 /* Roboto-Light.ttf */; };
-		491150922363E0D600EC0C04 /* ChangeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491150912363E0D600EC0C04 /* ChangeMode.swift */; };
 		491150942363E3D300EC0C04 /* ARExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491150932363E3D300EC0C04 /* ARExtensions.swift */; };
 		491150962364CC2D00EC0C04 /* RectangleDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491150952364CC2D00EC0C04 /* RectangleDetector.swift */; };
 		491150982364D25D00EC0C04 /* RectangleOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491150972364D25D00EC0C04 /* RectangleOverlay.swift */; };
@@ -55,7 +54,6 @@
 		4911508A235D1A3E00EC0C04 /* BasicUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicUtilities.swift; sourceTree = "<group>"; };
 		4911508C235D51E300EC0C04 /* MatchesHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHUD.swift; sourceTree = "<group>"; };
 		4911508E235E7DF100EC0C04 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
-		491150912363E0D600EC0C04 /* ChangeMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMode.swift; sourceTree = "<group>"; };
 		491150932363E3D300EC0C04 /* ARExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARExtensions.swift; sourceTree = "<group>"; };
 		491150952364CC2D00EC0C04 /* RectangleDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleDetector.swift; sourceTree = "<group>"; };
 		491150972364D25D00EC0C04 /* RectangleOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleOverlay.swift; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 		496937352353C1E9009CA41A /* Modes */ = {
 			isa = PBXGroup;
 			children = (
-				491150912363E0D600EC0C04 /* ChangeMode.swift */,
 				496937372353C1FD009CA41A /* Focused */,
 				496937362353C1F4009CA41A /* Classic */,
 			);
@@ -405,7 +402,6 @@
 				49115089235D17EB00EC0C04 /* shutterPressed.swift in Sources */,
 				49517018235AC56D00E00D83 /* Theme.swift in Sources */,
 				4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */,
-				491150922363E0D600EC0C04 /* ChangeMode.swift in Sources */,
 				49F7B1542353FDF40099FA62 /* VisionHandler.swift in Sources */,
 				4911509A2364D27B00EC0C04 /* FindInNode.swift in Sources */,
 				49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */,

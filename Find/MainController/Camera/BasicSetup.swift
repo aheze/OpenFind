@@ -16,6 +16,16 @@ enum CurrentModeToggle {
 //MARK: Set Up the floating buttons, classic timer, ramreel
 
 extension ViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToHist" {
+            print("hist")
+            //let destinationVC = segue.destination as! HistoryTableViewController
+           // destinationVC.folderURL = globalUrl
+        } else if segue.identifier == "goToSettings" {
+            print("prepareSett")
+        }
+        
+    }
     func setUpCrosshair() {
         let middle = view.bounds.width / 2
         let yCoord : CGFloat = 265
@@ -95,7 +105,7 @@ extension ViewController {
         goToSett.imageView.image = #imageLiteral(resourceName: "bsettings 2")
         goToSett.action = { item in
             print("settings")
-            //self.performSegue(withIdentifier: "goToSett", sender: self)
+            self.performSegue(withIdentifier: "goToSettings", sender: self)
             //self.t.suspend()
             //self.f.suspend()
         }
