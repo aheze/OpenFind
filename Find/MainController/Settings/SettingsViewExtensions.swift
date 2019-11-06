@@ -24,18 +24,18 @@ extension SettingsViewController {
         purpleButton.layer.cornerRadius = 4
         
         monthColorsView.layer.cornerRadius = 10
-        janButton.layer.cornerRadius = 6
-        febButton.layer.cornerRadius = 6
-        marButton.layer.cornerRadius = 6
-        aprButton.layer.cornerRadius = 6
-        mayButton.layer.cornerRadius = 6
-        junButton.layer.cornerRadius = 6
-        julButton.layer.cornerRadius = 6
-        augButton.layer.cornerRadius = 6
-        sepButton.layer.cornerRadius = 6
-        octButton.layer.cornerRadius = 6
-        novButton.layer.cornerRadius = 6
-        decButton.layer.cornerRadius = 6
+        janButton.layer.cornerRadius = 10
+        febButton.layer.cornerRadius = 10
+        marButton.layer.cornerRadius = 10
+        aprButton.layer.cornerRadius = 10
+        mayButton.layer.cornerRadius = 10
+        junButton.layer.cornerRadius = 10
+        julButton.layer.cornerRadius = 10
+        augButton.layer.cornerRadius = 10
+        sepButton.layer.cornerRadius = 10
+        octButton.layer.cornerRadius = 10
+        novButton.layer.cornerRadius = 10
+        decButton.layer.cornerRadius = 10
         
         prefilterView.layer.cornerRadius = 10
         otherSettingsView.clipsToBounds = true

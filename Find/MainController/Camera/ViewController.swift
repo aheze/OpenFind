@@ -131,13 +131,15 @@ class ViewController: UIViewController {
     let classicTimer = RepeatingTimer(timeInterval: 0.8)
     var isBusyProcessingImage = false
     var stopProcessingImage = false
+    var aspectRatioWidthOverHeight : CGFloat = 0
+    var aspectRatioSucceeded : Bool = false
     let sceneConfiguration = ARWorldTrackingConfiguration()
     ///     classic highlights
             var classicHighlightArray = [SCNNode]()
             var secondClassicHighlightArray = [SCNNode]()
             var classicHasFoundOne : Bool = false
             var processImageNumberOfPasses = 0
-            var numberOfHighlights: Int = 0
+            var numberOfHighlights : Int = 0
     lazy var textDetectionRequest = VNRecognizeTextRequest(completionHandler: handleDetectedText)
 //        let request = VNRecognizeTextRequest(completionHandler: self.handleDetectedText)
 //        request.recognitionLevel = .fast

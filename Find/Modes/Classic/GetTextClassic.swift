@@ -20,16 +20,33 @@ extension ViewController {
         let realComponentWidth = component.width * deviceSize.width
         let realComponentHeight = component.height * deviceSize.height
         let individualCharacterWidth = realComponentWidth / CGFloat(component.text.count)
+        //print("indc: \(individualCharacterWidth)")
     
         //print("NEWpoint is \(newPoint)")
+        ///cgimage is 4/3, device size is 9/16
+        if aspectRatioSucceeded == true {
+//            let convertedPoint = CGPoint(x: component.x, y: component.y)
+//            let deviceSizeWidthOverHeight = deviceSize.width / deviceSize.height
+//            let offset = aspectRatioWidthOverHeight - deviceSizeWidthOverHeight
+//            let halfOffset = offset / 2
+//            let realWorldWidth = deviceSize.width
+            print(deviceSize.height)
+            print(deviceSize.width)
+            print(aspectRatioWidthOverHeight)
+            let convertedWidth = deviceSize.height * aspectRatioWidthOverHeight
+            print(convertedWidth)
+            
+        }
+        
         let indicies = component.text.indicesOf(string: stringToFind)
         if indicies.count >= 0 {
             
             
             for index in indicies {
-                
-                let finalPoint = CGPoint(x: newPoint.x + individualCharacterWidth, y: newPoint.y)
+                //print("index: \(index)")
                 let addedWidth = CGFloat(index) * individualCharacterWidth
+                let finalPoint = CGPoint(x: newPoint.x + addedWidth, y: newPoint.y)
+                
                 let results = sceneView.hitTest(finalPoint, types: .existingPlaneUsingExtent)
                 
                 if let hitResult = results.first {

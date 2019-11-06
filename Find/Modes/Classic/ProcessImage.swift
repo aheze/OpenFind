@@ -23,6 +23,17 @@ extension ViewController {
             isBusyProcessingImage = false
             return
         }
+        
+       
+        let ciImage = CIImage(cvPixelBuffer: capturedImage) 
+            let width = ciImage.extent.width
+            let height = ciImage.extent.height
+            aspectRatioWidthOverHeight = height / width ///opposite
+        if aspectRatioWidthOverHeight != CGFloat(0) {
+            aspectRatioSucceeded = true
+        }
+            //print(aspectRatioWidthOverHeight)
+        
         let requests = [textDetectionRequest]
         let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: capturedImage, orientation: .right, options: [:])
         
