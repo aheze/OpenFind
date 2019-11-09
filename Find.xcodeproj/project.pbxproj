@@ -122,6 +122,13 @@
 			path = Setup;
 			sourceTree = "<group>";
 		};
+		494B6D5623764D62001461CF /* SetupBasic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SetupBasic;
+			sourceTree = "<group>";
+		};
 		4951701E235AC5F200E00D83 /* ReelSearchBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +222,7 @@
 		4969373C2353C277009CA41A /* Camera */ = {
 			isa = PBXGroup;
 			children = (
+				494B6D5623764D62001461CF /* SetupBasic */,
 				4999AC972353A80A00AB06A7 /* ViewController.swift */,
 				4999AC992353A80A00AB06A7 /* Main.storyboard */,
 				4999AC9E2353A81100AB06A7 /* LaunchScreen.storyboard */,
