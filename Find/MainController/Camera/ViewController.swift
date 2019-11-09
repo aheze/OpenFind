@@ -88,10 +88,11 @@ class ViewController: UIViewController {
     }
     @IBAction func photoButtonPressed(_ sender: UIButton) {
     }
+    var testt: Bool = false
     var currentPipPosition : CGPoint?
     override func viewDidLayoutSubviews() {
            super.viewDidLayoutSubviews  ()
-        
+        //test
         matchesBig.center = currentPipPosition ?? pipPositions.last ?? .zero
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
