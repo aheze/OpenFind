@@ -14,14 +14,19 @@ extension ViewController {
     
     func changeHUDSize(to shape: CGSize) {
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
-            for pip in self.pipPositionViews {
-                        pip.widthAnchor.constraint(equalToConstant: shape.width).isActive = true
-                        pip.heightAnchor.constraint(equalToConstant: shape.height).isActive = true
+        for pip in self.pipPositionViews {
+            let constraints = pip.constraints
+                for constraint in constraints {
+                if constraint.identifier == "matchesPositionViewWidth" {
+                    constraint.constant = shape.width
+                }
+                if constraint.identifier == "matchesPositionViewHeight" {
+                    constraint.constant = shape.height
+                }
             }
-//            self.matchesWidthConstraint.constant = shape.width
-//            self.matchesHeightContraint.constant = shape.height
-//            
+        }
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
         }, completion: nil)
         
     }

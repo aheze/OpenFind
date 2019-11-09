@@ -158,8 +158,16 @@ extension ViewController {
         self.view.addSubview(view)
         pipPositionViews.append(view)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.widthAnchor.constraint(equalToConstant: pipWidth).isActive = true
-        view.heightAnchor.constraint(equalToConstant: pipHeight).isActive = true
+       // view.widthAnchor.constraint(equalToConstant: pipWidth).isActive = true
+        
+       // view.heightAnchor.constraint(equalToConstant: pipHeight).isActive = true
+        //newView.translatesAutoresizingMaskIntoConstraints = false
+      
+        let widthConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: pipWidth)
+        let heightConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: pipHeight)
+        widthConstraint.identifier = "matchesPositionViewWidth"
+        heightConstraint.identifier = "matchesPositionViewHeight"
+        view.addConstraints([widthConstraint, heightConstraint])
         return view
     }
     func checkAction(sender : UITapGestureRecognizer) {

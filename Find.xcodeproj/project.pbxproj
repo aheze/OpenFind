@@ -115,6 +115,7 @@
 		492BF956237529E8001BE82F /* Setup */ = {
 			isa = PBXGroup;
 			children = (
+				49115088235D17EB00EC0C04 /* shutterPressed.swift */,
 				4969373D2353C3D8009CA41A /* ShutterButton.swift */,
 				4957157B2368AF69007BF68B /* RippleEffect.swift */,
 				49F7B1552353FE4B0099FA62 /* BasicSetup.swift */,
@@ -227,7 +228,6 @@
 				4999AC992353A80A00AB06A7 /* Main.storyboard */,
 				4999AC9E2353A81100AB06A7 /* LaunchScreen.storyboard */,
 				49F7B1572353FE7E0099FA62 /* TextComponent.swift */,
-				49115088235D17EB00EC0C04 /* shutterPressed.swift */,
 				4911508C235D51E300EC0C04 /* MatchesHUD.swift */,
 				491150932363E3D300EC0C04 /* ARExtensions.swift */,
 				4957157D2368B022007BF68B /* ViewExtensions.swift */,
