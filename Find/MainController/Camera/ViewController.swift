@@ -88,7 +88,7 @@ class ViewController: UIViewController {
     }
     @IBAction func photoButtonPressed(_ sender: UIButton) {
     }
-    var testt: Bool = false
+   
     var currentPipPosition : CGPoint?
     override func viewDidLayoutSubviews() {
            super.viewDidLayoutSubviews  ()
