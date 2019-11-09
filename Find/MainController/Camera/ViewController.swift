@@ -60,6 +60,8 @@ class ViewController: UIViewController {
     
     ///Matches HUD
     
+    @IBOutlet weak var matchesWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var matchesHeightContraint: NSLayoutConstraint!
     @IBOutlet weak var matchesBig: MatchesGradientView!
     @IBOutlet weak var upButton: UIButton!
     @IBOutlet weak var downButton: UIButton!
@@ -76,7 +78,7 @@ class ViewController: UIViewController {
     var pipPositionViews = [PipPositionView]()
     var initialOffset: CGPoint = .zero
     let pipWidth: CGFloat = 55
-    let pipHeight: CGFloat = 120
+    let pipHeight: CGFloat = 55
     let panRecognizer = UIPanGestureRecognizer()
     var pipPositions: [CGPoint] {
         return pipPositionViews.map { $0.center }

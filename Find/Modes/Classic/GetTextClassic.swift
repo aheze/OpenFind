@@ -19,7 +19,7 @@ extension ViewController {
         
         let realComponentWidth = component.width * deviceSize.width
         let realComponentHeight = component.height * deviceSize.height
-        let individualCharacterWidth = realComponentWidth / CGFloat(component.text.count)
+        var individualCharacterWidth = realComponentWidth / CGFloat(component.text.count)
         //print("indc: \(individualCharacterWidth)")
     
         //print("NEWpoint is \(newPoint)")
@@ -30,11 +30,23 @@ extension ViewController {
 //            let offset = aspectRatioWidthOverHeight - deviceSizeWidthOverHeight
 //            let halfOffset = offset / 2
 //            let realWorldWidth = deviceSize.width
+            
             print(deviceSize.height)
             print(deviceSize.width)
             print(aspectRatioWidthOverHeight)
             let convertedWidth = deviceSize.height * aspectRatioWidthOverHeight
             print(convertedWidth)
+            if convertedWidth >= deviceSize.width {
+                let offset = convertedWidth - deviceSize.width
+                let halfOffset = offset / 2
+                newPoint.x = convertedWidth * point.x
+                newPoint.x -= halfOffset
+                print(halfOffset)
+                let newComponentWidth = component.width * convertedWidth
+                let newIndividualCharacterWidth = newComponentWidth / CGFloat(component.text.count)
+                individualCharacterWidth = newIndividualCharacterWidth
+                
+            }
             
         }
         

@@ -23,8 +23,10 @@ extension ViewController {
 
     @IBAction func didTapButton(_ sender: ShutterButton) {
         
+        
         switch sender.buttonState {
         case .normal:
+            changeHUDSize(to: CGSize(width: 55, height: 120))
             sender.buttonState = .recording
             
             sceneView.session.pause()
@@ -73,7 +75,7 @@ extension ViewController {
             
         case .recording:
             sender.buttonState = .normal
-            
+            changeHUDSize(to: CGSize(width: 55, height: 55))
             
             self.menuButton.isHidden = false
             self.photoButton.isHidden = false

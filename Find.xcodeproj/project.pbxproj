@@ -112,6 +112,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		492BF956237529E8001BE82F /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				4969373D2353C3D8009CA41A /* ShutterButton.swift */,
+				4957157B2368AF69007BF68B /* RippleEffect.swift */,
+				49F7B1552353FE4B0099FA62 /* BasicSetup.swift */,
+			);
+			path = Setup;
+			sourceTree = "<group>";
+		};
 		4951701E235AC5F200E00D83 /* ReelSearchBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,14 +218,12 @@
 				4999AC972353A80A00AB06A7 /* ViewController.swift */,
 				4999AC992353A80A00AB06A7 /* Main.storyboard */,
 				4999AC9E2353A81100AB06A7 /* LaunchScreen.storyboard */,
-				4969373D2353C3D8009CA41A /* ShutterButton.swift */,
-				49F7B1552353FE4B0099FA62 /* BasicSetup.swift */,
 				49F7B1572353FE7E0099FA62 /* TextComponent.swift */,
 				49115088235D17EB00EC0C04 /* shutterPressed.swift */,
 				4911508C235D51E300EC0C04 /* MatchesHUD.swift */,
 				491150932363E3D300EC0C04 /* ARExtensions.swift */,
-				4957157B2368AF69007BF68B /* RippleEffect.swift */,
 				4957157D2368B022007BF68B /* ViewExtensions.swift */,
+				492BF956237529E8001BE82F /* Setup */,
 				4951701E235AC5F200E00D83 /* ReelSearchBar */,
 			);
 			path = Camera;

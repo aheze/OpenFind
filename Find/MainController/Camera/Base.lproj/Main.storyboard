@@ -207,7 +207,6 @@
                                 <constraints>
                                     <constraint firstItem="TYY-8J-adY" firstAttribute="centerX" secondItem="P33-md-CCv" secondAttribute="centerX" id="8vU-K0-vFd"/>
                                     <constraint firstItem="TYY-8J-adY" firstAttribute="top" secondItem="sCS-Fm-6VX" secondAttribute="bottom" constant="4" id="9Bu-5n-S04"/>
-                                    <constraint firstAttribute="width" secondItem="P33-md-CCv" secondAttribute="height" multiplier="11:24" id="A83-zw-kx1"/>
                                     <constraint firstItem="s3v-fM-RvH" firstAttribute="top" secondItem="TYY-8J-adY" secondAttribute="bottom" constant="4" id="FHh-C2-nJN"/>
                                     <constraint firstItem="s3v-fM-RvH" firstAttribute="centerX" secondItem="P33-md-CCv" secondAttribute="centerX" id="HFU-3V-LPp"/>
                                     <constraint firstAttribute="width" constant="55" id="Kjk-VP-9dh"/>
@@ -244,6 +243,8 @@
                         <outlet property="darkBlurEffectHeightConstraint" destination="tfa-HC-4HH" id="HNH-Jb-7ZA"/>
                         <outlet property="downButton" destination="s3v-fM-RvH" id="z4k-Ly-1yV"/>
                         <outlet property="matchesBig" destination="P33-md-CCv" id="tYz-RD-VeC"/>
+                        <outlet property="matchesHeightContraint" destination="MiV-gG-hBI" id="3mS-iC-Pjn"/>
+                        <outlet property="matchesWidthConstraint" destination="Kjk-VP-9dh" id="KDp-iZ-Mup"/>
                         <outlet property="menuButton" destination="Ksm-rU-iBX" id="fhV-tI-55z"/>
                         <outlet property="modeButton" destination="McS-Ju-2hk" id="g7E-le-xIV"/>
                         <outlet property="numberLabel" destination="TYY-8J-adY" id="wgg-Li-Scc"/>

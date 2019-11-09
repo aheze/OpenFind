@@ -12,6 +12,20 @@ import ARKit
 ///Blur Screen & Refresh Screen
 extension ViewController {
     
+    func changeHUDSize(to shape: CGSize) {
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            for pip in self.pipPositionViews {
+                        pip.widthAnchor.constraint(equalToConstant: shape.width).isActive = true
+                        pip.heightAnchor.constraint(equalToConstant: shape.height).isActive = true
+            }
+//            self.matchesWidthConstraint.constant = shape.width
+//            self.matchesHeightContraint.constant = shape.height
+//            
+        }, completion: nil)
+        
+    }
+    
     func blurScreen(mode toFocusMode: Bool) {
         let effect = UIBlurEffect(style: .light)
         let blurView = UIVisualEffectView(effect: effect)
