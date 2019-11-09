@@ -78,6 +78,7 @@ class ViewController: UIViewController {
     let pipWidth: CGFloat = 55
     let pipHeight: CGFloat = 120
     let panRecognizer = UIPanGestureRecognizer()
+    var tester = false
     var pipPositions: [CGPoint] {
         return pipPositionViews.map { $0.center }
     }
