@@ -56,6 +56,7 @@ extension ViewController {
         let indicies = component.text.indicesOf(string: stringToFind)
         if indicies.count >= 0 {
             var amountOfMatches: Int = 0
+            
             for index in indicies {
                 let finalPoint = CGPoint(x: newPoint.x + individualCharacterWidth, y: newPoint.y)
                 let addedWidth = CGFloat(index) * individualCharacterWidth
