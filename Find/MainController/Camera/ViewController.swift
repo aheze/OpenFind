@@ -60,11 +60,15 @@ class ViewController: UIViewController {
     
     ///Matches HUD
     
-    @IBOutlet weak var matchesWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var matchesHeightContraint: NSLayoutConstraint!
+    
+    @IBOutlet var matchesWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var matchesHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var matchesBig: MatchesGradientView!
+    @IBOutlet var upButtonToNumberConstraint: NSLayoutConstraint!
+    @IBOutlet var downButtonToNumberConstraint: NSLayoutConstraint!
     @IBOutlet weak var upButton: UIButton!
     @IBOutlet weak var downButton: UIButton!
+    
     @IBAction func upHUDPressed(_ sender: UIButton) {
         print("up")
     }
@@ -72,7 +76,7 @@ class ViewController: UIViewController {
         print("down")
     }
     @IBOutlet weak var numberLabel: UILabel!
-    var amountOfMatches: Int = 0
+    
     var matchesCanAcceptNewValue: Bool = true
     var matchesShouldFireTimer: Bool = true
     var pipPositionViews = [PipPositionView]()
@@ -256,6 +260,8 @@ class ViewController: UIViewController {
         setUpMatches()
         setUpCrosshair()
         addCoaching()
+        
+        changeHUDSize(to: CGSize(width: 55, height: 55))
         //make sure the position views are hidden
         for view in pipPositionViews {
             view.isHidden = true

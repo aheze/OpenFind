@@ -16,7 +16,7 @@ extension ViewController {
         
         for pip in self.pipPositionViews {
             let constraints = pip.constraints
-                for constraint in constraints {
+            for constraint in constraints {
                 if constraint.identifier == "matchesPositionViewWidth" {
                     constraint.constant = shape.width
                 }
@@ -25,9 +25,57 @@ extension ViewController {
                 }
             }
         }
+        for constraintt in view.constraints {
+            var subtractYesNo = false
+            if shape.height == 55 {
+                subtractYesNo = false
+            } else if shape.height == 120 {
+                subtractYesNo = true
+            }
+            ///120-55 = 65
+            ///65/2=32.5
+            if constraintt.identifier == "topVert" {
+                if subtractYesNo == true {
+                    constraintt.constant = constraintt.constant - 32.5
+                } else if subtractYesNo == false {
+                    constraintt.constant = constraintt.constant + 32.5
+                }
+            }
+        }
+        
+        if shape.height == shape.width {
+            self.upButtonToNumberConstraint.isActive = false
+            self.downButtonToNumberConstraint.isActive = false
+        } else {
+            self.upButtonToNumberConstraint.isActive = true
+            self.downButtonToNumberConstraint.isActive = true
+        }
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
-        }, completion: nil)
+            self.matchesBig.layoutIfNeeded()
+            if shape.height == shape.width {
+                self.upButton.alpha = 0
+                self.downButton.alpha = 0
+            } else {
+                self.upButton.alpha = 1
+                self.downButton.alpha = 1
+            }
+            
+        }, completion: { _ in
+           if shape.height == shape.width {
+                self.upButton.isHidden = true
+                self.downButton.isHidden = true
+            } else {
+                self.upButton.isHidden = false
+                self.downButton.isHidden = false
+            }
+            self.matchesHeightConstraint.constant = shape.height
+            self.matchesWidthConstraint.constant = shape.width
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+        )
         
     }
     

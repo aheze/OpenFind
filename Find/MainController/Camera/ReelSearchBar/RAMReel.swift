@@ -164,7 +164,7 @@ open class RAMReel
     
     fileprivate func updateVisuals() {
         self.view.tintColor = theme.textColor
-        print("te9")
+        //print("te9")
         self.textField.font = theme.font
         self.textField.textColor = theme.textColor
         (self.textField as UITextField).tintColor = theme.textColor
@@ -198,12 +198,12 @@ open class RAMReel
     open var placeholder: String = "" {
         willSet {
             updatePlaceholder(newValue)
-            print("place")
+            //print("place")
         }
     }
     
     fileprivate func updatePlaceholder(_ placeholder:String) {
-        print("te10")
+        //print("te10")
         let themeFont = self.theme.font
         let size = self.textField.textRect(forBounds: textField.bounds).height * themeFont.pointSize / themeFont.lineHeight * 0.8
         let font = (size > 0) ? (UIFont(name: themeFont.fontName, size: size) ?? themeFont) : themeFont
@@ -230,7 +230,7 @@ open class RAMReel
               keyboard appears (will cause issues if the widget isn't being used in full screen)
     */
     public init(frame: CGRect, dataSource: DataSource, placeholder: String = "", attemptToDodgeKeyboard: Bool, hook: HookType? = nil) {
-        print("initi")
+        //print("initi")
         self.view = UIView(frame: frame)
         self.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.translatesAutoresizingMaskIntoConstraints = true
@@ -297,7 +297,7 @@ open class RAMReel
                 self.textField.becomeFirstResponder()
                 self.textField.text = nil
                 self.textField.insertText(selectedItem.render())
-                print("te6")
+                //print("te6")
             }
         }
         
@@ -328,7 +328,7 @@ open class RAMReel
                                    animations: {
                                     self.gradientView.layer.frame.size.height = endFrame.origin.y
                                     self.textField.layoutIfNeeded()
-                                    print("te4")
+                                    //print("te4")
                     }, completion: nil)
                 }
             }
@@ -421,7 +421,7 @@ final class GestureTarget: NSObject, UIGestureRecognizerDelegate {
         super.init()
         
         recognizeFor(view, type: type, hook: hook)
-        print("te2")
+        //print("te2")
     }
     
     typealias HookType = (UIView, UIGestureRecognizer) -> ()
@@ -448,7 +448,7 @@ final class GestureTarget: NSObject, UIGestureRecognizerDelegate {
         view.addGestureRecognizer(gestureRecognizer)
       let item: (UIView, HookType) = (view, hook)
         hooks[gestureRecognizer] = item
-        print("te")
+        //print("te")
     }
     
     deinit {
@@ -460,7 +460,7 @@ final class GestureTarget: NSObject, UIGestureRecognizerDelegate {
     @objc func gesture(_ gestureRecognizer: UIGestureRecognizer) {
         if let (textField, hook) = hooks[gestureRecognizer] {
             hook(textField, gestureRecognizer)
-            print("te7")
+            //print("te7")
         }
     }
     

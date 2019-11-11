@@ -25,42 +25,32 @@ extension ViewController {
         //print("NEWpoint is \(newPoint)")
         ///cgimage is 4/3, device size is 9/16
         if aspectRatioSucceeded == true {
-//            let convertedPoint = CGPoint(x: component.x, y: component.y)
-//            let deviceSizeWidthOverHeight = deviceSize.width / deviceSize.height
-//            let offset = aspectRatioWidthOverHeight - deviceSizeWidthOverHeight
-//            let halfOffset = offset / 2
-//            let realWorldWidth = deviceSize.width
-            
-            print(deviceSize.height)
-            print(deviceSize.width)
-            print(aspectRatioWidthOverHeight)
+
+            //print(deviceSize.height)
+            //print(deviceSize.width)
+            //print(aspectRatioWidthOverHeight)
             let convertedWidth = deviceSize.height * aspectRatioWidthOverHeight
-            print(convertedWidth)
+            //print(convertedWidth)
             if convertedWidth >= deviceSize.width {
                 let offset = convertedWidth - deviceSize.width
                 let halfOffset = offset / 2
                 newPoint.x = convertedWidth * point.x
                 newPoint.x -= halfOffset
-                print(halfOffset)
+                //print(halfOffset)
                 let newComponentWidth = component.width * convertedWidth
                 let newIndividualCharacterWidth = newComponentWidth / CGFloat(component.text.count)
                 individualCharacterWidth = newIndividualCharacterWidth
-                
             }
-            
         }
         
         let indicies = component.text.indicesOf(string: stringToFind)
         if indicies.count >= 0 {
-            
-            
+            var amountOfMatches: Int = 0
             for index in indicies {
-                //print("index: \(index)")
                 let addedWidth = CGFloat(index) * individualCharacterWidth
                 let finalPoint = CGPoint(x: newPoint.x + addedWidth, y: newPoint.y)
                 
                 let results = sceneView.hitTest(finalPoint, types: .existingPlaneUsingExtent)
-                
                 if let hitResult = results.first {
                     let realTextWidth = (individualCharacterWidth * CGFloat(stringToFind.count)) / CGFloat(2000)
                     
@@ -76,33 +66,25 @@ extension ViewController {
                     let node = SCNNode(geometry: highlight)
                     node.transform = SCNMatrix4(hitResult.anchor!.transform)
                     node.position = SCNVector3(
-                        
                         x: hitResult.worldTransform.columns.3.x,
                         y: hitResult.worldTransform.columns.3.y,
                         z: hitResult.worldTransform.columns.3.z
                     )
                     
-                guard let anchoredNode =  sceneView.node(for: hitResult.anchor!) else { return }
-                let anchorNodeOrientation = anchoredNode.worldOrientation
+                    guard let anchoredNode =  sceneView.node(for: hitResult.anchor!) else { return }
+                    let anchorNodeOrientation = anchoredNode.worldOrientation
                     if anchorNodeOrientation.x == Float(0) && anchorNodeOrientation.z == Float(0) {
-                    ///plane detected is horizontal
-                    let billboardConstraint = SCNBillboardConstraint()
-                    billboardConstraint.freeAxes = [.Y]
-                    node.constraints = [billboardConstraint]
-                }
-                    //else {
-                    ///is vertical
-                    //let billboardConstraint = SCNBillboardConstraint()
-                    //billboardConstraint.freeAxes = [.X]
-                    //node.constraints = [billboardConstraint]
-               // }
-                    
+                        ///plane detected is horizontal
+                        let billboardConstraint = SCNBillboardConstraint()
+                        billboardConstraint.freeAxes = [.Y]
+                        node.constraints = [billboardConstraint]
+                    }
                     classicHasFoundOne = true
                     sceneView.scene.rootNode.addChildNode(node)
                     amountOfMatches += 1
                     if matchesCanAcceptNewValue == true {
                         DispatchQueue.main.async {
-                            self.numberLabel.text = "\(self.amountOfMatches)"
+                            self.updateMatchesNumber(to: amountOfMatches)
                         }
                     }
                     if alternate == true {
@@ -119,13 +101,12 @@ extension ViewController {
                         let action = SCNAction.fadeOpacity(to: 0.8, duration: 0.3)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                 node.runAction(action)
-                            }
+                        }
                     }
                     fadeHighlights()
                 }
             }
         }
-        
     }
 }
 extension String {

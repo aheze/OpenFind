@@ -158,16 +158,19 @@ extension ViewController {
         self.view.addSubview(view)
         pipPositionViews.append(view)
         view.translatesAutoresizingMaskIntoConstraints = false
-       // view.widthAnchor.constraint(equalToConstant: pipWidth).isActive = true
+        let widthConst = view.widthAnchor.constraint(equalToConstant: pipWidth)
+        widthConst.isActive = true
+        widthConst.identifier = "matchesPositionViewWidth"
         
-       // view.heightAnchor.constraint(equalToConstant: pipHeight).isActive = true
-        //newView.translatesAutoresizingMaskIntoConstraints = false
+        let heightConst = view.heightAnchor.constraint(equalToConstant: pipHeight)
+        heightConst.isActive = true
+        heightConst.identifier = "matchesPositionViewHeight"
       
-        let widthConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: pipWidth)
-        let heightConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: pipHeight)
-        widthConstraint.identifier = "matchesPositionViewWidth"
-        heightConstraint.identifier = "matchesPositionViewHeight"
-        view.addConstraints([widthConstraint, heightConstraint])
+//        let widthConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: pipWidth)
+//        let heightConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: pipHeight)
+//        widthConstraint.identifier = "matchesPositionViewWidth"
+//        heightConstraint.identifier = "matchesPositionViewHeight"
+//        view.addConstraints([widthConstraint, heightConstraint])
         return view
     }
     func checkAction(sender : UITapGestureRecognizer) {
@@ -193,25 +196,28 @@ extension ViewController {
     
         let topLeftView = addPipPositionView()
         topLeftView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalSpacing).isActive = true
-        topLeftView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: verticalSpacing).isActive = true
+        let tlTopConst = topLeftView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: verticalSpacing)
+        tlTopConst.isActive = true
+        tlTopConst.identifier = "topVert"
         
         let topRightView = addPipPositionView()
         topRightView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalSpacing).isActive = true
-        topRightView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: verticalSpacing).isActive = true
-        
+        let trTopConst = topRightView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: verticalSpacing)
+        trTopConst.isActive = true
+        trTopConst.identifier = "topVert"
+      
         let midLeftView = addPipPositionView()
         midLeftView.leadingAnchor.constraint(equalTo: topLeftView.trailingAnchor, constant: midHorizontalSpacing).isActive = true
-        midLeftView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: verticalSpacing).isActive = true
-        
+        let mlTopConst = midLeftView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: verticalSpacing)
+        mlTopConst.isActive = true
+        mlTopConst.identifier = "topVert"
+      
         let midRightView = addPipPositionView()
         midRightView.trailingAnchor.constraint(equalTo: topRightView.leadingAnchor, constant: -midHorizontalSpacing).isActive = true
-        midRightView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: verticalSpacing).isActive = true
-        
-//        view.addSubview(matchesBig)
-//        matchesBig.translatesAutoresizingMaskIntoConstraints = false
-//        matchesBig.widthAnchor.constraint(equalToConstant: pipWidth).isActive = true
-//        matchesBig.heightAnchor.constraint(equalToConstant: pipHeight).isActive = true
-//
+        let mrTopConst = midRightView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: verticalSpacing)
+        mrTopConst.isActive = true
+        mrTopConst.identifier = "topVert"
+    
         panRecognizer.addTarget(self, action: #selector(pipPanned(recognizer:)))
         matchesBig.addGestureRecognizer(panRecognizer)
         

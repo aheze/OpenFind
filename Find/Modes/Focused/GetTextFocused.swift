@@ -55,8 +55,7 @@ extension ViewController {
         //print("NEWpoint is \(newPoint)")
         let indicies = component.text.indicesOf(string: stringToFind)
         if indicies.count >= 0 {
-            
-            
+            var amountOfMatches: Int = 0
             for index in indicies {
                 let finalPoint = CGPoint(x: newPoint.x + individualCharacterWidth, y: newPoint.y)
                 let addedWidth = CGFloat(index) * individualCharacterWidth
@@ -87,7 +86,7 @@ extension ViewController {
                     amountOfMatches += 1
                     if matchesCanAcceptNewValue == true {
                         DispatchQueue.main.async {
-                            self.numberLabel.text = "\(self.amountOfMatches)"
+                            self.numberLabel.text = "\(amountOfMatches)"
                         }
                     }
                     if alternate == true {

@@ -205,12 +205,12 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="TYY-8J-adY" firstAttribute="top" secondItem="sCS-Fm-6VX" secondAttribute="bottom" constant="4" id="1r9-LY-UAF"/>
                                     <constraint firstItem="TYY-8J-adY" firstAttribute="centerX" secondItem="P33-md-CCv" secondAttribute="centerX" id="8vU-K0-vFd"/>
-                                    <constraint firstItem="TYY-8J-adY" firstAttribute="top" secondItem="sCS-Fm-6VX" secondAttribute="bottom" constant="4" id="9Bu-5n-S04"/>
                                     <constraint firstItem="s3v-fM-RvH" firstAttribute="top" secondItem="TYY-8J-adY" secondAttribute="bottom" constant="4" id="FHh-C2-nJN"/>
                                     <constraint firstItem="s3v-fM-RvH" firstAttribute="centerX" secondItem="P33-md-CCv" secondAttribute="centerX" id="HFU-3V-LPp"/>
                                     <constraint firstAttribute="width" constant="55" id="Kjk-VP-9dh"/>
-                                    <constraint firstAttribute="height" constant="120" id="MiV-gG-hBI"/>
+                                    <constraint firstAttribute="height" constant="120" id="MiV-gG-hBI" userLabel="Matches Height Constraint"/>
                                     <constraint firstItem="sCS-Fm-6VX" firstAttribute="centerX" secondItem="P33-md-CCv" secondAttribute="centerX" id="VXw-A3-TPx"/>
                                     <constraint firstItem="TYY-8J-adY" firstAttribute="centerY" secondItem="P33-md-CCv" secondAttribute="centerY" id="ZAr-CK-lVZ"/>
                                 </constraints>
@@ -242,8 +242,9 @@
                         <outlet property="darkBlurEffect" destination="SjR-c7-NyL" id="0Wd-Vq-FxN"/>
                         <outlet property="darkBlurEffectHeightConstraint" destination="tfa-HC-4HH" id="HNH-Jb-7ZA"/>
                         <outlet property="downButton" destination="s3v-fM-RvH" id="z4k-Ly-1yV"/>
+                        <outlet property="downButtonToNumberConstraint" destination="FHh-C2-nJN" id="sVA-yU-IHR"/>
                         <outlet property="matchesBig" destination="P33-md-CCv" id="tYz-RD-VeC"/>
-                        <outlet property="matchesHeightContraint" destination="MiV-gG-hBI" id="3mS-iC-Pjn"/>
+                        <outlet property="matchesHeightConstraint" destination="MiV-gG-hBI" id="CWY-kg-HVq"/>
                         <outlet property="matchesWidthConstraint" destination="Kjk-VP-9dh" id="KDp-iZ-Mup"/>
                         <outlet property="menuButton" destination="Ksm-rU-iBX" id="fhV-tI-55z"/>
                         <outlet property="modeButton" destination="McS-Ju-2hk" id="g7E-le-xIV"/>
@@ -255,6 +256,7 @@
                         <outlet property="toolbarBottomConstraint" destination="ake-fG-hZW" id="ktb-vQ-Wtw"/>
                         <outlet property="toolbarView" destination="Lbv-hN-VHM" id="eBt-Rj-J4E"/>
                         <outlet property="upButton" destination="sCS-Fm-6VX" id="DgI-nt-npg"/>
+                        <outlet property="upButtonToNumberConstraint" destination="1r9-LY-UAF" id="4or-C3-4az"/>
                         <segue destination="pa6-U7-HO0" kind="show" identifier="goToSettings" id="lEH-Hc-ESJ"/>
                     </connections>
                 </viewController>
