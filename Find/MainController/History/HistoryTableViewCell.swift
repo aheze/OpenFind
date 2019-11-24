@@ -32,7 +32,7 @@ class HistoryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
             dateFormatter.dateFormat = "MMddyy"
             stringDate = dateFormatter.string(from: date)
             convertDateToReadableString(theDate: date)
-            getCategories()
+            //getCategories()
         }
     }
     var stringDate = ""
@@ -41,7 +41,7 @@ class HistoryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     var fileURL : URL = URL(fileURLWithPath: "")
     
     ///collection view stuff
-    let sectionInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+    let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     let itemsPerRow : CGFloat = 4
     
     @IBOutlet weak var paddedView: UIView!
@@ -90,7 +90,8 @@ extension HistoryTableViewCell {
  
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-        let availibleWidth = collectionView.frame.width - paddingSpace
+        var availibleWidth = collectionView.frame.width - paddingSpace
+        availibleWidth -= (itemsPerRow - 1) * 2 ///   Three spacers (there are 4 photos per row for iPhone), each 2 points.
         let widthPerItem = availibleWidth / itemsPerRow
         size = CGSize(width: widthPerItem, height: widthPerItem)
         print("size:::: \(size)")
@@ -108,7 +109,7 @@ extension HistoryTableViewCell {
         return sectionInsets
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.left
+        return 2 ///horizontal line spacing, also 2 points, just like the availibleWidth
         
     }
 
@@ -118,27 +119,27 @@ extension HistoryTableViewCell {
     /// get categories,
     /// convert the date into a string, like "Today" or "Monday, January 1",
     /// loadImageFromDir
-    func loadImageFromDocumentDirectory(urlOfFile: URL,nameOfImage : String) -> UIImage? {
-        let imageURL = fileURL.appendingPathComponent("\(nameOfImage)")
-        guard let image = UIImage(contentsOfFile: imageURL.path) else { return nil }
-        return image
-    }
-    func getCategories() {
-        do {
-            let items = try FileManager.default.contentsOfDirectory(atPath: fileURL.path)
-            for item in items {
-                
-                let theFileName = (item as NSString).lastPathComponent
-                if theFileName.contains(stringDate) {
-                    if let image = loadImageFromDocumentDirectory(urlOfFile: fileURL, nameOfImage: theFileName) {
-                    photoArray!.append(image)
-                    }
-                }
-            }
-        } catch {
-            print(error)
-        }
-    }
+//    func loadImageFromDocumentDirectory(urlOfFile: URL,nameOfImage : String) -> UIImage? {
+//        let imageURL = fileURL.appendingPathComponent("\(nameOfImage)")
+//        guard let image = UIImage(contentsOfFile: imageURL.path) else { return nil }
+//        return image
+//    }
+//    func getCategories() {
+//        do {
+//            let items = try FileManager.default.contentsOfDirectory(atPath: fileURL.path)
+//            for item in items {
+//
+//                let theFileName = (item as NSString).lastPathComponent
+//                if theFileName.contains(stringDate) {
+//                    if let image = loadImageFromDocumentDirectory(urlOfFile: fileURL, nameOfImage: theFileName) {
+//                    photoArray!.append(image)
+//                    }
+//                }
+//            }
+//        } catch {
+//            print(error)
+//        }
+//    }
     
     func convertDateToReadableString(theDate: Date) {
         print("readableString")

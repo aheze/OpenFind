@@ -25,6 +25,8 @@ class HistoryViewController: UIViewController, UpdateValueDelegate{
     var cellExpandedHeights : [Int: CGFloat] = [Int: CGFloat]()
     
     var dictOfHists = Dictionary<Date, Array<UIImage>>()
+    var dictOfFormats : [Int: Date] = [Int: Date]()
+    
     var dictionaryOfHists: [Date : [UIImage]] = [:]
     
     var currentExpandedCell : Int = 0
@@ -52,12 +54,15 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         guard case let cell as HistoryTableViewCell = cell else {
             return
         }
-        cell.fileURL = folderURL
-        cell.date = sortedCatagoryArray[indexPath.row]
+        //cell.fileURL = folderURL
+        //cell.date = sortedCatagoryArray[indexPath.row]
+        
+        //cell.historyFormats.indexPathOfCell = indexPath.row
+        //cell.historyFormats.dateTaken = sortedCatagoryArray[indexPath.row]
+        let dateWasTaken = dictOfFormats[indexPath.row]!
+        cell.date = dateWasTaken
+        cell.photoArray = dictOfHists[dateWasTaken]
         cell.row = indexPath.row
-        cell.historyFormats.indexPathOfCell = indexPath.row
-        cell.historyFormats.dateTaken = sortedCatagoryArray[indexPath.row]
-      //  cell.historyFormats.photos
         
         cell.delegate = self
     }
@@ -120,11 +125,6 @@ extension HistoryViewController {
                     }
                 }
                 
-                    
-                
-                
-                
-
             }
         } catch {
             print("error getting photos... \(error)")
@@ -133,23 +133,25 @@ extension HistoryViewController {
         var tempCategories = [Date]()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMddyy"
-        for cat in categoryArray {
-            let date = dateFormatter.date(from: cat)
-            if let date = date {
-                tempCategories.append(date)
-            }
+      
+        
+        for dict in dictOfHists {
+            let dictDate = dict.key
+            tempCategories.append(dictDate)
         }
         tempCategories.sort(by: { $0.compare($1) == .orderedDescending})
-        for cat in tempCategories {
-//            let newDate = dateFormatter.string(from: cat)
-            sortedCatagoryArray.append(cat)
+        print(tempCategories)
+        for (index, cat) in tempCategories.enumerated() {
+            //sortedCatagoryArray.append(cat)
+            dictOfFormats[index] = cat
         }
-        Const.rowsCount = sortedCatagoryArray.count
-           print("cats:\(sortedCatagoryArray)")
-        cellHeights = Array(repeating: Const.closeCellHeight, count: sortedCatagoryArray.count)
+        //print("formats: \(dictOfFormats)")
+        //Const.rowsCount = sortedCatagoryArray.count
+        Const.rowsCount = dictOfFormats.count
+        print("how many categories:\(dictOfFormats.count)")
+        cellHeights = Array(repeating: Const.closeCellHeight, count: dictOfFormats.count)
         
-
-        print("dictionary of hists: \(dictOfHists)")
+        //print("dictionary of hists: \(dictOfHists)")
     }
     func loadImageFromDocumentDirectory(urlOfFile: URL,nameOfImage : String) -> UIImage? {
         let imageURL = urlOfFile.appendingPathComponent("\(nameOfImage)")
