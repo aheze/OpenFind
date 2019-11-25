@@ -8,10 +8,11 @@
 
 import UIKit
 
-class HistoryFormat {
-    var indexPathOfCell: Int = 0
-    var dateTaken: Date = Date(timeIntervalSince1970: 0)
-    var expandedHeightOfRow: CGFloat = CGFloat(0)
-    var photos: [UIImage] = [UIImage]()
-    
+struct HistoryFormat: Hashable {
+//    var indexPathOfCell: Int = 0
+//    var dateTaken: Date = Date(timeIntervalSince1970: 0)
+//    var expandedHeightOfRow: CGFloat = CGFloat(0)
+//    var photos: [UIImage] = [UIImage]()
+    var row: Int
+    var date: Date
 }

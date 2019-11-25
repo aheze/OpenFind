@@ -12,7 +12,7 @@ enum Const {
        static var closeCellHeight: CGFloat = 70
        static var openCellHeight: CGFloat = 260
        static var rowsCount = 20}
-class HistoryViewController: UIViewController, UpdateValueDelegate{
+class HistoryViewController: UIViewController, UpdateValueDelegate {
     
     var categoryArray : [String] = [String]()
     var sortedCatagoryArray : [Date] = [Date]()
@@ -25,9 +25,15 @@ class HistoryViewController: UIViewController, UpdateValueDelegate{
     var cellExpandedHeights : [Int: CGFloat] = [Int: CGFloat]()
     
     var dictOfHists = Dictionary<Date, Array<UIImage>>()
-    var dictOfFormats : [Int: Date] = [Int: Date]()
+    var finalHistoryDictionary = Dictionary<HistoryFormat, Array<UIImage>>()
+    var dictOfFormats : [Int: Date] = [Int: Date]() {
+        didSet {
+            print("drht setted")
+            print(dictOfFormats)
+        }
+    }
     
-    var dictionaryOfHists: [Date : [UIImage]] = [:]
+    //var dictionaryOfHists: [Date : [UIImage]] = [:]
     
     var currentExpandedCell : Int = 0
     
@@ -41,8 +47,10 @@ class HistoryViewController: UIViewController, UpdateValueDelegate{
         getCategories()
     }
     
+    
 }
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func changeValue(height: CGFloat, row: Int) {
         heightOfCurrentExpandedCell = height
         cellExpandedHeights[row] = height
@@ -50,25 +58,28 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categoryArray.count
     }
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard case let cell as HistoryTableViewCell = cell else {
-            return
-        }
-        //cell.fileURL = folderURL
-        //cell.date = sortedCatagoryArray[indexPath.row]
-        
-        //cell.historyFormats.indexPathOfCell = indexPath.row
-        //cell.historyFormats.dateTaken = sortedCatagoryArray[indexPath.row]
-        let dateWasTaken = dictOfFormats[indexPath.row]!
-        cell.date = dateWasTaken
-        cell.photoArray = dictOfHists[dateWasTaken]
-        cell.row = indexPath.row
-        
-        cell.delegate = self
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        guard case let cell as HistoryTableViewCell = cell else {
+//            return
+//        }
+//       cell.selectionStyle = .none
+//    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "idTableCell", for: indexPath) as! HistoryTableViewCell
+        print("_____cellForRow start_______________________________________________")
+        let dateWasTaken = dictOfFormats[indexPath.row]!
         cell.selectionStyle = .none
+        cell.photoArray = dictOfHists[dateWasTaken]!
+        cell.row = indexPath.row
+        cell.date = dateWasTaken
+        print("dateWasTaken: \(dateWasTaken)")
+        print("indexPath:\(indexPath.row)")
+        print("uiimage count: \(dictOfHists[dateWasTaken]!.count)")
+        //print("dictOfHists[dateWasTaken]! (Array of images): \(dictOfHists[dateWasTaken]!)")
+        print("_____end____________________________________________________________")
+        cell.delegate = self
+        
+        //cell.layoutIfNeeded()
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -78,10 +89,14 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
                     height = heightOfExpand
                 }
             }
-        print("\(height) : indexPath: \(indexPath.row)")
+        print("height: \(height), indexPath: \(indexPath.row)")
         return height
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? HistoryTableViewCell else {
+            print("wrong")
+            return
+        }
         if currentExpandedCell == indexPath.row {
             currentExpandedCell = -1
             } else {
@@ -91,6 +106,9 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: { () -> Void in
                 tableView.beginUpdates()
                 tableView.endUpdates()
+                if cell.frame.maxY > tableView.frame.maxY {
+                    tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: true)
+                }
             }, completion: nil)
         }
     
@@ -114,14 +132,8 @@ extension HistoryViewController {
                 
                 if theFileName.contains(categoryName) {
                     if let image = loadImageFromDocumentDirectory(urlOfFile: folderURL, nameOfImage: theFileName) {
-                        //dictOfHists[dateFromString] = [image]
                         dictOfHists[dateFromString, default: [UIImage]()].append(image)
-                        ///This is an array of UIImages.
-//                        let itemNew: [Date: [UIImage]] = [
-//                            dateFromString: "new value"
-//                        ]
-//                        var existingItems = dictionaryOfHists[dateFromString] as? [Date: [UIImage]] ?? [Date: [UIImage]]()
-//                        existingItems.ap
+                        //finalHistoryDictionary[dateFromString, default: [UIImage]()].append(image)]
                     }
                 }
                 
@@ -141,9 +153,9 @@ extension HistoryViewController {
         }
         tempCategories.sort(by: { $0.compare($1) == .orderedDescending})
         print(tempCategories)
-        for (index, cat) in tempCategories.enumerated() {
+        for (index, theDate) in tempCategories.enumerated() {
             //sortedCatagoryArray.append(cat)
-            dictOfFormats[index] = cat
+            dictOfFormats[index] = theDate
         }
         //print("formats: \(dictOfFormats)")
         //Const.rowsCount = sortedCatagoryArray.count
