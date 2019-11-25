@@ -12,7 +12,7 @@ enum Const {
        static var closeCellHeight: CGFloat = 70
        static var openCellHeight: CGFloat = 260
        static var rowsCount = 20}
-class HistoryViewController: UIViewController, UpdateValueDelegate {
+class HistoryViewController: UIViewController {
     
     var categoryArray : [String] = [String]()
     var sortedCatagoryArray : [Date] = [Date]()
@@ -48,22 +48,28 @@ class HistoryViewController: UIViewController, UpdateValueDelegate {
     }
     
     
+    
 }
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func changeValue(height: CGFloat, row: Int) {
-        heightOfCurrentExpandedCell = height
-        cellExpandedHeights[row] = height
-    }
+//    func changeValue(height: CGFloat, row: Int) {
+//        print("changeV")
+//        heightOfCurrentExpandedCell = height
+//        cellExpandedHeights[row] = height
+//        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+//            self.tableView.beginUpdates()
+//            self.tableView.endUpdates()
+//        })
+//    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categoryArray.count
     }
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        guard case let cell as HistoryTableViewCell = cell else {
-//            return
-//        }
-//       cell.selectionStyle = .none
-//    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard case let cell as HistoryTableViewCell = cell else {
+            return
+        }
+       cell.selectionStyle = .none
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "idTableCell", for: indexPath) as! HistoryTableViewCell
         print("_____cellForRow start_______________________________________________")
@@ -77,40 +83,43 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         print("uiimage count: \(dictOfHists[dateWasTaken]!.count)")
         //print("dictOfHists[dateWasTaken]! (Array of images): \(dictOfHists[dateWasTaken]!)")
         print("_____end____________________________________________________________")
-        cell.delegate = self
+        //cell.delegate = self
+        cell.collectionViewHeight.constant = cell.collectionView.collectionViewLayout.collectionViewContentSize.height
         
         //cell.layoutIfNeeded()
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        var height = Const.closeCellHeight
-            if currentExpandedCell == indexPath.row {
-                if let heightOfExpand = cellExpandedHeights[indexPath.row] {
-                    height = heightOfExpand
-                }
-            }
-        print("height: \(height), indexPath: \(indexPath.row)")
-        return height
+//        var height = Const.closeCellHeight
+//            if currentExpandedCell == indexPath.row {
+//                if let heightOfExpand = cellExpandedHeights[indexPath.row] {
+//                    height = heightOfExpand
+//                }
+//            }
+        print("height: \(cellExpandedHeights[indexPath.row]), indexPath: \(indexPath.row)")
+        //return height
+        //return cellExpandedHeights[indexPath.row] ?? 200
+        return UITableView.automaticDimension
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? HistoryTableViewCell else {
-            print("wrong")
-            return
-        }
-        if currentExpandedCell == indexPath.row {
-            currentExpandedCell = -1
-            } else {
-                currentExpandedCell = indexPath.row
-            }
-            tableView.layoutIfNeeded()
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: { () -> Void in
-                tableView.beginUpdates()
-                tableView.endUpdates()
-                if cell.frame.maxY > tableView.frame.maxY {
-                    tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: true)
-                }
-            }, completion: nil)
-        }
+//        guard let cell = tableView.cellForRow(at: indexPath) as? HistoryTableViewCell else {
+//            print("wrong")
+//            return
+//        }
+//        if currentExpandedCell == indexPath.row {
+//            currentExpandedCell = -1
+//        } else {
+//            currentExpandedCell = indexPath.row
+//        }
+//        tableView.layoutIfNeeded()
+//        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: { () -> Void in
+//            tableView.beginUpdates()
+//            tableView.endUpdates()
+//            if cell.frame.maxY > tableView.frame.maxY {
+//                tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: true)
+//            }
+//        }, completion: nil)
+    }
     
 }
 extension HistoryViewController {

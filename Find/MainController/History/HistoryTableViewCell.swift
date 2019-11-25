@@ -48,6 +48,7 @@ class HistoryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     //let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     let itemsPerRow : CGFloat = 4
     
+    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var paddedView: UIView!
     @IBOutlet weak var todayLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -56,15 +57,30 @@ class HistoryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         print("reusing...")
         photoArray = nil
     }
+//    override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+//            collectionView.layoutIfNeeded()
+//            collectionView.frame = CGRect(x: 0, y: 0, width: targetSize.width , height: 1)
+//            return collectionView.collectionViewLayout.collectionViewContentSize
+//    }
+//    override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+//
+//        self.layoutIfNeeded()
+//        let contentSize = self.collectionView.collectionViewLayout.collectionViewContentSize
+//        if self.collectionView.numberOfItems(inSection: 0) < 4 {
+//            return CGSize(width: contentSize.width, height: 120) // Static height if colview is not fitted properly.
+//        }
+//
+//        return CGSize(width: contentSize.width, height: contentSize.height + 20) // 20 is the margin of the collectinview with top and bottom
+//    }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        let newHeight : CGFloat = collectionView.collectionViewLayout.collectionViewContentSize.height
-        var frame : CGRect! = collectionView.frame
-        frame.size.height = newHeight
-        delegate?.changeValue(height: newHeight + 65, row: self.row)
-       // itemCount = Int(Darwin.round(newHeight / 150.0)) + 2
-        
-    }
+//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+//        let newHeight : CGFloat = collectionView.collectionViewLayout.collectionViewContentSize.height
+//        var frame : CGRect! = collectionView.frame
+//        frame.size.height = newHeight
+//        delegate?.changeValue(height: newHeight + 65, row: self.row)
+//       // itemCount = Int(Darwin.round(newHeight / 150.0)) + 2
+//
+//    }
     override func awakeFromNib() {
         paddedView.clipsToBounds = true
         paddedView.layer.cornerRadius = 12
@@ -73,7 +89,7 @@ class HistoryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         collectionView.layer.cornerRadius = 6
         collectionView.isScrollEnabled = false
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.old, context: nil)
+       // collectionView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.old, context: nil)
         collectionView.reloadData()
         
     }
