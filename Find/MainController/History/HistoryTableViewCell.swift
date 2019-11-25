@@ -97,9 +97,10 @@ class HistoryTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
 //        super.didMoveToSuperview()
 //        layoutIfNeeded()
 //    }
-    deinit {
-        collectionView.removeObserver(self, forKeyPath: "contentSize")
-    }
+//    deinit {
+//        collectionView.removeObserver(self, forKeyPath: "contentSize")
+//    }
+    
 }
 
 extension HistoryTableViewCell {
