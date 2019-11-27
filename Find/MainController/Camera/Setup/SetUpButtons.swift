@@ -9,7 +9,31 @@
 import UIKit
 
 extension ViewController {
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //        if segue.identifier == "goToHistory" {
+    //            print("hist")
+    //            let destinationVC = segue.destination as! HistoryViewController
+    //            destinationVC.folderURL = globalUrl
+    //        } else if segue.identifier == "goToSettings" {
+    //            print("prepareSett")
+    //        }
+            switch segue.identifier {
+                case "goToHistory":
+                    print("hist")
+                    let destinationVC = segue.destination as! HistoryViewController
+                    destinationVC.folderURL = globalUrl
+                case "goToSettings":
+                    print("prepare settings")
+                case "goToNewHistory":
+                    print("sdnf")
+                    let destinationVC = segue.destination as! PinnedSectionHeaderFooterViewController
+                    //destinationVC.folderURL = globalUrl
+                default:
+                    print("default, something wrong")
+            }
+            
+            
+        }
     func setUpButtons() {
         self.statusBarHidden = true
         UIView.animate(withDuration: 0.3, animations: {
@@ -34,6 +58,25 @@ extension ViewController {
             //self.t.suspend()
             //self.f.suspend()
         }
+        let goToNewHistory = menuButton.addItem()
+        goToNewHistory.titleLabel.text = "Newer History"
+        goToNewHistory.imageView.image = #imageLiteral(resourceName: "bhistory 2")
+        goToNewHistory.action = { item in
+            print("akj")
+            self.performSegue(withIdentifier: "goToNewHistory", sender: self)
+        }
+//        let goToNewHist = menuButton.addItem()
+//        goToNewHist.titleLabel.text = "New History"
+//        goToNewHist.imageView.image = #imageLiteral(resourceName: "bhistory 2")
+//        goToNewHist.action = { item in
+//             print("new history")
+//            //self.performSegue(withIdentifier: "goToNewHistory", sender: self)
+//            //presentViewController(PinnedSectionHeaderFooterViewController, animated: true, completion: nil)
+//
+//            //self.present(PinnedSectionHeaderFooterViewController(), animated: true, completion: nil)
+//
+//
+//        }
         
         
         
