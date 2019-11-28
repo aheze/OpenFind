@@ -19,7 +19,7 @@ extension ViewController {
                 case "goToSettings":
                     print("prepare settings")
                 case "goToNewHistory":
-                    print("sdnf")
+                    print("goingToNewHist!")
                     let destinationVC = segue.destination as! NewHistoryViewController
                     destinationVC.folderURL = globalUrl
                 default:

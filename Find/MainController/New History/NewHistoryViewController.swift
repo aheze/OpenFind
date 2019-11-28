@@ -18,19 +18,18 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         getData()
-        //collectionView.delegate = self
-        //collectionView.dataSource = self
-        //collectionView.contentInsetAdjustmentBehavior
         let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.sectionHeadersPinToVisibleBounds = true
-        //collectionView.reloadData()
+        collectionView.alwaysBounceVertical = true
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "sectionHeaderId", for: indexPath) as! TitleSupplementaryView
-            headerView.todayLabel.text = "Text: \(indexPath.section)"
+            //headerView.todayLabel.text = "Text: \(indexPath.section)"
+            let date = dictOfFormats[indexPath.section]!
+            let readableDate = convertDateToReadableString(theDate: date)
+            headerView.todayLabel.text = readableDate
             return headerView
 
         case UICollectionView.elementKindSectionFooter:
@@ -43,9 +42,6 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         }
         
     }
-//    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-//
-//    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return dictOfFormats.count
@@ -53,28 +49,25 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let date = dictOfFormats[section]!
         let photos = dictOfHists[date]!
-        
         return photos.count
-        //return 100
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
-        print("CellForItem")
-        //print(indexPath.section)
         let date = dictOfFormats[indexPath.section]
         let photos = dictOfHists[date!]
-        cell.imageView.image = photos![indexPath.item]
-        //cell.imageView.image = #imageLiteral(resourceName: "bfocus 2")
+        //cell.imageView.image = photos![indexPath.item]
+        //cell.imageView.translatesAutoresizingMaskIntoConstraints = false
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        print("CL")
+        
+        
+        ///I can't change the spacing of the columns... it is stuck at 4.
         let itemsPerRow = CGFloat(4)
-        let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-        var availibleWidth = collectionView.frame.width - paddingSpace
-        availibleWidth -= (itemsPerRow - 1) * 2 ///   Three spacers (there are 4 photos per row for iPhone), each 2 points.
+        let paddingSpace = CGFloat(4) * (itemsPerRow - 1) ///4 points, the dividers for each column
+        let availibleWidth = collectionView.frame.width - paddingSpace
+        //availibleWidth -= (itemsPerRow - 1) * 2 ///   Three spacers (there are 4 photos per row for iPhone), each 2 points.
         let widthPerItem = availibleWidth / itemsPerRow
         let size = CGSize(width: widthPerItem, height: widthPerItem)
         return size
@@ -88,19 +81,20 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 2 ///horizontal line spacing, also 2 points, just like the availibleWidth
+        return 4 ///horizontal line spacing, also 2 points, just like the availibleWidth
         
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.section)
+        print(indexPath.item)
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
     
 }
 
 
 
-extension NewHistoryViewController {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
-    }
-}
+
 
 extension NewHistoryViewController {
     func getData() {
@@ -144,5 +138,44 @@ extension NewHistoryViewController {
         let imageURL = urlOfFile.appendingPathComponent("\(nameOfImage)")
         guard let image = UIImage(contentsOfFile: imageURL.path) else { return nil }
         return image
+    }
+    
+    
+    func convertDateToReadableString(theDate: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMddyy"
+        let todaysDate = Date()
+        let todaysDateAsString = dateFormatter.string(from: todaysDate)
+        let yesterday = todaysDate.subtract(days: 1)
+        let yesterdaysDateAsString = dateFormatter.string(from: yesterday!)
+        
+        let oneWeekAgo = todaysDate.subtract(days: 7)
+        let yestYesterday = yesterday?.subtract(days: 1)
+        let range = oneWeekAgo!...yestYesterday!
+        
+        let stringDate = dateFormatter.string(from: theDate)
+        
+        if stringDate == todaysDateAsString {
+            return "Today"
+        } else if stringDate == yesterdaysDateAsString {
+            return "Yesterday"
+        } else {
+            if range.contains(theDate) {
+                dateFormatter.dateFormat = "EEEE"
+                return dateFormatter.string(from: theDate)
+            } else {
+                dateFormatter.dateFormat = "MMMM d',' yyyy"
+                return dateFormatter.string(from: theDate)
+            }
+        }
+    }
+    
+}
+
+extension NSLayoutConstraint {
+//debug constraints
+    override public var description: String {
+        let id = identifier ?? ""
+        return "id: \(id), constant: \(constant)" //you may print whatever you want here
     }
 }
