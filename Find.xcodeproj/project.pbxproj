@@ -35,7 +35,7 @@
 		4957157C2368AF69007BF68B /* RippleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4957157B2368AF69007BF68B /* RippleEffect.swift */; };
 		4957157E2368B022007BF68B /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4957157D2368B022007BF68B /* ViewExtensions.swift */; };
 		495ECCA4238A3D0B00E7D966 /* HistoryFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCA3238A3D0B00E7D966 /* HistoryFormat.swift */; };
-		495ECCA7238CF76C00E7D966 /* PinnedSectionHeaderFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCA6238CF76C00E7D966 /* PinnedSectionHeaderFooterViewController.swift */; };
+		495ECCA7238CF76C00E7D966 /* NewHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCA6238CF76C00E7D966 /* NewHistoryViewController.swift */; };
 		495ECCA9238CF7BD00E7D966 /* HPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */; };
 		495ECCAB238DB7BD00E7D966 /* TitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCAA238DB7BD00E7D966 /* TitleSupplementaryView.swift */; };
 		4969373E2353C3D8009CA41A /* ShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4969373D2353C3D8009CA41A /* ShutterButton.swift */; };
@@ -92,7 +92,7 @@
 		4957157B2368AF69007BF68B /* RippleEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleEffect.swift; sourceTree = "<group>"; };
 		4957157D2368B022007BF68B /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		495ECCA3238A3D0B00E7D966 /* HistoryFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFormat.swift; sourceTree = "<group>"; };
-		495ECCA6238CF76C00E7D966 /* PinnedSectionHeaderFooterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedSectionHeaderFooterViewController.swift; sourceTree = "<group>"; };
+		495ECCA6238CF76C00E7D966 /* NewHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHistoryViewController.swift; sourceTree = "<group>"; };
 		495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPhotoCell.swift; sourceTree = "<group>"; };
 		495ECCAA238DB7BD00E7D966 /* TitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSupplementaryView.swift; sourceTree = "<group>"; };
 		4969373D2353C3D8009CA41A /* ShutterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutterButton.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 		495ECCA5238CF74500E7D966 /* New History */ = {
 			isa = PBXGroup;
 			children = (
-				495ECCA6238CF76C00E7D966 /* PinnedSectionHeaderFooterViewController.swift */,
+				495ECCA6238CF76C00E7D966 /* NewHistoryViewController.swift */,
 				495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */,
 				495ECCAA238DB7BD00E7D966 /* TitleSupplementaryView.swift */,
 				49089E1E238EFFFA0070A70C /* FooterView.swift */,
@@ -472,7 +472,7 @@
 				4904524C2379072F0046570D /* UpdateMatches.swift in Sources */,
 				4951701C235AC56D00E00D83 /* RAMReel.swift in Sources */,
 				49115089235D17EB00EC0C04 /* shutterPressed.swift in Sources */,
-				495ECCA7238CF76C00E7D966 /* PinnedSectionHeaderFooterViewController.swift in Sources */,
+				495ECCA7238CF76C00E7D966 /* NewHistoryViewController.swift in Sources */,
 				49517018235AC56D00E00D83 /* Theme.swift in Sources */,
 				4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */,
 				49F7B1542353FDF40099FA62 /* VisionHandler.swift in Sources */,

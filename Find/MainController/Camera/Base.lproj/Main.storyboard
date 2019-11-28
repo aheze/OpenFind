@@ -386,10 +386,10 @@
             </objects>
             <point key="canvasLocation" x="828.98550724637687" y="-172.0108695652174"/>
         </scene>
-        <!--Pinned Section Header Footer View Controller-->
+        <!--New History View Controller-->
         <scene sceneID="6qd-id-r8q">
             <objects>
-                <viewController id="dyF-tU-4Cl" customClass="PinnedSectionHeaderFooterViewController" customModule="Find" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dyF-tU-4Cl" customClass="NewHistoryViewController" customModule="Find" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="P4y-7B-7yl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -429,8 +429,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PN7-t1-WxN">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="PN7-t1-WxN">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -472,6 +473,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </collectionReusableView>
                                 <connections>
+                                    <outlet property="dataSource" destination="dyF-tU-4Cl" id="Cxk-Xy-Dp5"/>
                                     <outlet property="delegate" destination="dyF-tU-4Cl" id="ldq-3X-4GO"/>
                                 </connections>
                             </collectionView>

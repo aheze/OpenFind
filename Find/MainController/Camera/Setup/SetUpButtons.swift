@@ -26,8 +26,8 @@ extension ViewController {
                     print("prepare settings")
                 case "goToNewHistory":
                     print("sdnf")
-                    let destinationVC = segue.destination as! PinnedSectionHeaderFooterViewController
-                    //destinationVC.folderURL = globalUrl
+                    let destinationVC = segue.destination as! NewHistoryViewController
+                    destinationVC.folderURL = globalUrl
                 default:
                     print("default, something wrong")
             }
