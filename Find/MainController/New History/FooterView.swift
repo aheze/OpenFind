@@ -23,11 +23,15 @@ class FooterView: UICollectionReusableView {
         self.createRectangle()
     }
     func createRectangle() {
+        print("frame: \(self.frame)")
         
         let arcRadius = CGFloat(10)
         let width = self.frame.size.width
-        let height = self.frame.size.height + arcRadius
+        print(self.frame.size.height)
+        //let height = self.frame.size.height + arcRadius
+        let height = CGFloat(self.frame.size.height)
         let origin = CGPoint(x: 0, y: -arcRadius)
+        print(origin)
         
         // Initialize the path.
         path = UIBezierPath()
