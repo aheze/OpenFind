@@ -44,6 +44,8 @@ class HistoryViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = Const.closeCellHeight
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.delegate = self
+        tableView.dataSource = self
         getCategories()
     }
     
@@ -78,6 +80,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         cell.photoArray = dictOfHists[dateWasTaken]!
         cell.row = indexPath.row
         cell.date = dateWasTaken
+        
         print("dateWasTaken: \(dateWasTaken)")
         print("indexPath:\(indexPath.row)")
         print("uiimage count: \(dictOfHists[dateWasTaken]!.count)")

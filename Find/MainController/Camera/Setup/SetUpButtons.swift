@@ -9,14 +9,8 @@
 import UIKit
 
 extension ViewController {
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //        if segue.identifier == "goToHistory" {
-    //            print("hist")
-    //            let destinationVC = segue.destination as! HistoryViewController
-    //            destinationVC.folderURL = globalUrl
-    //        } else if segue.identifier == "goToSettings" {
-    //            print("prepareSett")
-    //        }
             switch segue.identifier {
                 case "goToHistory":
                     print("hist")
@@ -26,13 +20,11 @@ extension ViewController {
                     print("prepare settings")
                 case "goToNewHistory":
                     print("sdnf")
-                    let destinationVC = segue.destination as! PinnedSectionHeaderFooterViewController
-                    //destinationVC.folderURL = globalUrl
+                    let destinationVC = segue.destination as! NewHistoryViewController
+                    destinationVC.folderURL = globalUrl
                 default:
                     print("default, something wrong")
             }
-            
-            
         }
     func setUpButtons() {
         self.statusBarHidden = true
@@ -62,7 +54,7 @@ extension ViewController {
         goToNewHistory.titleLabel.text = "Newer History"
         goToNewHistory.imageView.image = #imageLiteral(resourceName: "bhistory 2")
         goToNewHistory.action = { item in
-            print("akj")
+            print("new history")
             self.performSegue(withIdentifier: "goToNewHistory", sender: self)
         }
 //        let goToNewHist = menuButton.addItem()

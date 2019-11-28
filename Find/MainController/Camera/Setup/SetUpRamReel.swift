@@ -59,24 +59,22 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         autocompButton.alpha = 0.5
         ramReel.view.bounds = view.bounds
         print("textfield")
-        print(ramReel.collectionView.frame)
+        //print(ramReel.collectionView.frame)
         ramReel.collectionView.isHidden = false
         darkBlurEffectHeightConstraint.constant = self.view.bounds.size.height
         
         self.toolbarView.isHidden = false
         
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
-            print(self.keyboardHeight)
+            //print(self.keyboardHeight)
             self.toolbarView.alpha = 1
             self.toolbarBottomConstraint.constant = self.keyboardHeight
             self.darkBlurEffect.alpha = 1
             if self.scanModeToggle == .focused {
             if let tag1 = self.view.viewWithTag(1) {
-                print("1")
                 tag1.alpha = 0
             }
             if let tag2 = self.view.viewWithTag(2) {
-                print("2")
                 tag2.alpha = 0
             }
             } else {
@@ -105,11 +103,9 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
             
             if self.scanModeToggle == .focused {
             if let tag1 = self.view.viewWithTag(1) {
-                print("1")
                 tag1.alpha = 1
             }
             if let tag2 = self.view.viewWithTag(2) {
-                print("2")
                 tag2.alpha = 1
             }
             } else {
