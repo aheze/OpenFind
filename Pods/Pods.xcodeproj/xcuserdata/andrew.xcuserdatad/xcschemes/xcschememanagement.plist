@@ -25,11 +25,6 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>RAMReel.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
-		</dict>
 		<key>RoundCoachMark.xcscheme</key>
 		<dict>
 			<key>isShown</key>

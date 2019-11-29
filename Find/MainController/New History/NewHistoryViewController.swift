@@ -14,6 +14,8 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     var dictOfHists = Dictionary<Date, Array<UIImage>>()
     var dictOfFormats : [Int: Date] = [Int: Date]()
     
+    let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     //static let sectionHeaderElementKind = "section-header-element-kind"
@@ -25,21 +27,18 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //navigationItem.title = "Pinned Section Headers"
-        //configureHierarchy()
-        //configureDataSource()
-        //collectionView.delegate = self
-        //collectionView.dataSource = self
-        //collectionView.contentInsetAdjustmentBehavior
         getData()
         let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.sectionHeadersPinToVisibleBounds = true
     }
+    
+    
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 50)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 8)
+        return CGSize(width: collectionView.frame.width, height: 4)
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
@@ -79,12 +78,14 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         let date = dictOfFormats[indexPath.section]
         let photos = dictOfHists[date!]
         cell.imageView.image = photos![indexPath.item]
+        //cell.backgroundColor = UIColor(named: "YellowNow")
+        cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        ///MAYBE DON'T USE
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemsPerRow = CGFloat(4)
-        let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         var availibleWidth = collectionView.frame.width - paddingSpace
         availibleWidth -= (itemsPerRow - 1) * 2 ///   Three spacers (there are 4 photos per row for iPhone), each 2 points.
@@ -97,14 +98,21 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        //return sectionInsets
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        return sectionInsets
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 2 ///horizontal line spacing, also 2 points, just like the availibleWidth
         
     }
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        //self.performSegue(withIdentifier: "goToFullScreen", sender: self)
+        let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FullScreenViewController")
+        let drawerContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetViewController")
+        let pulleyController = PulleyViewController(contentViewController: mainContentVC, drawerViewController: drawerContentVC)
+        self.present(pulleyController, animated: true)
+        
+    }
 }
 
 extension NewHistoryViewController {
@@ -182,8 +190,4 @@ extension NewHistoryViewController {
     }
     
 }
-extension NewHistoryViewController {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
-    }
-}
+

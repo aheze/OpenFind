@@ -22,6 +22,12 @@
 		4911509A2364D27B00EC0C04 /* FindInNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491150992364D27B00EC0C04 /* FindInNode.swift */; };
 		4911509C236501D900EC0C04 /* FocusVisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4911509B236501D900EC0C04 /* FocusVisionHandler.swift */; };
 		4911509E236503C600EC0C04 /* GetTextFocused.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4911509D236503C600EC0C04 /* GetTextFocused.swift */; };
+		49368CA7239059A200B67C4A /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49368CA6239059A200B67C4A /* FullScreenViewController.swift */; };
+		49368CAD23905D3300B67C4A /* PulleyPassthroughScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49368CA923905D3200B67C4A /* PulleyPassthroughScrollView.swift */; };
+		49368CAE23905D3300B67C4A /* UIViewController+PulleyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49368CAA23905D3200B67C4A /* UIViewController+PulleyViewController.swift */; };
+		49368CAF23905D3300B67C4A /* UIView+constrainToParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49368CAB23905D3200B67C4A /* UIView+constrainToParent.swift */; };
+		49368CB023905D3300B67C4A /* PulleyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49368CAC23905D3300B67C4A /* PulleyViewController.swift */; };
+		49368CB223905E8E00B67C4A /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49368CB123905E8E00B67C4A /* BottomSheetViewController.swift */; };
 		49517015235AC56D00E00D83 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4951700B235AC56C00E00D83 /* CollectionViewLayout.swift */; };
 		49517016235AC56D00E00D83 /* CollectionViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4951700C235AC56C00E00D83 /* CollectionViewWrapper.swift */; };
 		49517017235AC56D00E00D83 /* TextFieldReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4951700D235AC56C00E00D83 /* TextFieldReactor.swift */; };
@@ -50,6 +56,8 @@
 		4999ACA02353A81100AB06A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4999AC9E2353A81100AB06A7 /* LaunchScreen.storyboard */; };
 		49A8EFAC237A5EFE00328D47 /* SetUpButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A8EFAB237A5EFE00328D47 /* SetUpButtons.swift */; };
 		49A8EFAE237A5F2800328D47 /* SetUpRamReel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A8EFAD237A5F2800328D47 /* SetUpRamReel.swift */; };
+		49B7A32D2390823C0070209F /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49B7A32C2390823C0070209F /* Colors.xcassets */; };
+		49B7A32F2390DB810070209F /* ArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A32E2390DB810070209F /* ArrowView.swift */; };
 		49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */; };
 		49F7B1522353FC970099FA62 /* ProcessImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1512353FC970099FA62 /* ProcessImage.swift */; };
 		49F7B1542353FDF40099FA62 /* VisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1532353FDF40099FA62 /* VisionHandler.swift */; };
@@ -79,6 +87,12 @@
 		491150992364D27B00EC0C04 /* FindInNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindInNode.swift; sourceTree = "<group>"; };
 		4911509B236501D900EC0C04 /* FocusVisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusVisionHandler.swift; sourceTree = "<group>"; };
 		4911509D236503C600EC0C04 /* GetTextFocused.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTextFocused.swift; sourceTree = "<group>"; };
+		49368CA6239059A200B67C4A /* FullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
+		49368CA923905D3200B67C4A /* PulleyPassthroughScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulleyPassthroughScrollView.swift; sourceTree = "<group>"; };
+		49368CAA23905D3200B67C4A /* UIViewController+PulleyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+PulleyViewController.swift"; sourceTree = "<group>"; };
+		49368CAB23905D3200B67C4A /* UIView+constrainToParent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+constrainToParent.swift"; sourceTree = "<group>"; };
+		49368CAC23905D3300B67C4A /* PulleyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulleyViewController.swift; sourceTree = "<group>"; };
+		49368CB123905E8E00B67C4A /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		4951700B235AC56C00E00D83 /* CollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewLayout.swift; sourceTree = "<group>"; };
 		4951700C235AC56C00E00D83 /* CollectionViewWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewWrapper.swift; sourceTree = "<group>"; };
 		4951700D235AC56C00E00D83 /* TextFieldReactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldReactor.swift; sourceTree = "<group>"; };
@@ -109,6 +123,8 @@
 		4999ACA12353A81100AB06A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49A8EFAB237A5EFE00328D47 /* SetUpButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpButtons.swift; sourceTree = "<group>"; };
 		49A8EFAD237A5F2800328D47 /* SetUpRamReel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpRamReel.swift; sourceTree = "<group>"; };
+		49B7A32C2390823C0070209F /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		49B7A32E2390DB810070209F /* ArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowView.swift; sourceTree = "<group>"; };
 		49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		49F7B1512353FC970099FA62 /* ProcessImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessImage.swift; sourceTree = "<group>"; };
 		49F7B1532353FDF40099FA62 /* VisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionHandler.swift; sourceTree = "<group>"; };
@@ -154,6 +170,28 @@
 				49A8EFAD237A5F2800328D47 /* SetUpRamReel.swift */,
 			);
 			path = Setup;
+			sourceTree = "<group>";
+		};
+		49368CA52390598000B67C4A /* FullScreen */ = {
+			isa = PBXGroup;
+			children = (
+				49368CA823905CE800B67C4A /* BottomDrawer */,
+				49368CA6239059A200B67C4A /* FullScreenViewController.swift */,
+				49368CB123905E8E00B67C4A /* BottomSheetViewController.swift */,
+			);
+			path = FullScreen;
+			sourceTree = "<group>";
+		};
+		49368CA823905CE800B67C4A /* BottomDrawer */ = {
+			isa = PBXGroup;
+			children = (
+				49368CA923905D3200B67C4A /* PulleyPassthroughScrollView.swift */,
+				49368CAC23905D3300B67C4A /* PulleyViewController.swift */,
+				49368CAB23905D3200B67C4A /* UIView+constrainToParent.swift */,
+				49368CAA23905D3200B67C4A /* UIViewController+PulleyViewController.swift */,
+				49B7A32E2390DB810070209F /* ArrowView.swift */,
+			);
+			path = BottomDrawer;
 			sourceTree = "<group>";
 		};
 		4951701E235AC5F200E00D83 /* ReelSearchBar */ = {
@@ -223,6 +261,7 @@
 				4969373A2353C241009CA41A /* History */,
 				495ECCA5238CF74500E7D966 /* New History */,
 				496937392353C228009CA41A /* Settings */,
+				49368CA52390598000B67C4A /* FullScreen */,
 			);
 			path = MainController;
 			sourceTree = "<group>";
@@ -303,6 +342,7 @@
 				496937352353C1E9009CA41A /* Modes */,
 				4969373B2353C25B009CA41A /* Utilities */,
 				4999AC9C2353A81100AB06A7 /* Assets.xcassets */,
+				49B7A32C2390823C0070209F /* Colors.xcassets */,
 				4999ACA12353A81100AB06A7 /* Info.plist */,
 			);
 			path = Find;
@@ -388,6 +428,7 @@
 				49115090236004E800EC0C04 /* Roboto-Light.ttf in Resources */,
 				49F7B15A2354E6F60099FA62 /* data.txt in Resources */,
 				4999ACA02353A81100AB06A7 /* LaunchScreen.storyboard in Resources */,
+				49B7A32D2390823C0070209F /* Colors.xcassets in Resources */,
 				4999AC9D2353A81100AB06A7 /* Assets.xcassets in Resources */,
 				4999AC9B2353A80A00AB06A7 /* Main.storyboard in Resources */,
 			);
@@ -443,6 +484,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4951701F235AC8A800E00D83 /* RAMReel.h in Sources */,
+				49368CAF23905D3300B67C4A /* UIView+constrainToParent.swift in Sources */,
 				4951701B235AC56D00E00D83 /* RAMTextField.swift in Sources */,
 				4999AC982353A80A00AB06A7 /* ViewController.swift in Sources */,
 				4969373E2353C3D8009CA41A /* ShutterButton.swift in Sources */,
@@ -453,13 +495,16 @@
 				49A8EFAC237A5EFE00328D47 /* SetUpButtons.swift in Sources */,
 				495ECCAB238DB7BD00E7D966 /* TitleSupplementaryView.swift in Sources */,
 				49F7B15E2356954A0099FA62 /* GetTextClassic.swift in Sources */,
+				49368CA7239059A200B67C4A /* FullScreenViewController.swift in Sources */,
 				4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */,
+				49B7A32F2390DB810070209F /* ArrowView.swift in Sources */,
 				491150962364CC2D00EC0C04 /* RectangleDetector.swift in Sources */,
 				49913452236FE33B00B82E46 /* SettingsBasicSetup.swift in Sources */,
 				49517016235AC56D00E00D83 /* CollectionViewWrapper.swift in Sources */,
 				4957157E2368B022007BF68B /* ViewExtensions.swift in Sources */,
 				49517017235AC56D00E00D83 /* TextFieldReactor.swift in Sources */,
 				490452502379DF5C0046570D /* HistoryTableViewCell.swift in Sources */,
+				49368CB223905E8E00B67C4A /* BottomSheetViewController.swift in Sources */,
 				49F7B1602359363E0099FA62 /* HighlightShape.swift in Sources */,
 				49A8EFAE237A5F2800328D47 /* SetUpRamReel.swift in Sources */,
 				49F7B1582353FE7E0099FA62 /* TextComponent.swift in Sources */,
@@ -469,8 +514,10 @@
 				4911508B235D1A3E00EC0C04 /* BasicUtilities.swift in Sources */,
 				4911509C236501D900EC0C04 /* FocusVisionHandler.swift in Sources */,
 				49517019235AC56D00E00D83 /* DataFlow.swift in Sources */,
+				49368CAE23905D3300B67C4A /* UIViewController+PulleyViewController.swift in Sources */,
 				4904524C2379072F0046570D /* UpdateMatches.swift in Sources */,
 				4951701C235AC56D00E00D83 /* RAMReel.swift in Sources */,
+				49368CAD23905D3300B67C4A /* PulleyPassthroughScrollView.swift in Sources */,
 				49115089235D17EB00EC0C04 /* shutterPressed.swift in Sources */,
 				495ECCA7238CF76C00E7D966 /* NewHistoryViewController.swift in Sources */,
 				49517018235AC56D00E00D83 /* Theme.swift in Sources */,
@@ -489,6 +536,7 @@
 				49089E1F238EFFFA0070A70C /* FooterView.swift in Sources */,
 				49517015235AC56D00E00D83 /* CollectionViewLayout.swift in Sources */,
 				49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */,
+				49368CB023905D3300B67C4A /* PulleyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
