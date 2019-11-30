@@ -7,6 +7,10 @@
 //
 import UIKit
 
+protocol UpdateImageDelegate: class {
+    func changeImage(image: UIImage)
+}
+
 class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     
@@ -15,6 +19,8 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     var dictOfFormats : [Int: Date] = [Int: Date]()
     
     let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    
+    //weak var imageDelegate: UpdateImageDelegate?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -31,7 +37,12 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.sectionHeadersPinToVisibleBounds = true
     }
-    
+    override func present(_ viewControllerToPresent: UIViewController,
+                          animated flag: Bool,
+                          completion: (() -> Void)? = nil) {
+      viewControllerToPresent.modalPresentationStyle = .fullScreen
+      super.present(viewControllerToPresent, animated: flag, completion: completion)
+    }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -110,6 +121,15 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FullScreenViewController")
         let drawerContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetViewController")
         let pulleyController = PulleyViewController(contentViewController: mainContentVC, drawerViewController: drawerContentVC)
+        //mainContentVC.imageToBeDisplayed = UIImage()
+        let date = dictOfFormats[indexPath.section]!
+        let photos = dictOfHists[date]!
+        let photo = photos[indexPath.item]
+        //imageDelegate?.changeImage(image: photo)
+        guard let vc = pulleyController.primaryContentViewController as? FullScreenViewController else { return }
+        //vc.modalPresentationStyle = .fullScreen
+        vc.imageView.image = photo
+        
         self.present(pulleyController, animated: true)
         
     }

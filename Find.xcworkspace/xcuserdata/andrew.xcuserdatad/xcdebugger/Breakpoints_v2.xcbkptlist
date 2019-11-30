@@ -52,5 +52,145 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Find/MainController/FullScreen/FullScreenViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "FullScreenViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE - 101d176d2ed7bb61"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Find.FullScreenViewController.xButtonView.getter : Swift.Optional&lt;__C.UIImageView&gt;"
+                  moduleName = "Find"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andrew/Desktop/Find%20Final/Find/Find/MainController/FullScreen/FullScreenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "132">
+               </Location>
+               <Location
+                  uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE - 490c1329f821e77d"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Find.FullScreenViewController.xButtonView.setter : Swift.Optional&lt;__C.UIImageView&gt;"
+                  moduleName = "Find"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andrew/Desktop/Find%20Final/Find/Find/MainController/FullScreen/FullScreenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "188">
+               </Location>
+               <Location
+                  uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE - 4c16e70d0a16206e"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Find.FullScreenViewController.xButtonView.modify : Swift.Optional&lt;__C.UIImageView&gt;"
+                  moduleName = "Find"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andrew/Desktop/Find%20Final/Find/Find/MainController/FullScreen/FullScreenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE - 79e7ba1f1452c0dd"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Find.FullScreenViewController.xButtonView.modify : Swift.Optional&lt;__C.UIImageView&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Find"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andrew/Desktop/Find%20Final/Find/Find/MainController/FullScreen/FullScreenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "80">
+               </Location>
+               <Location
+                  uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE - ad2535a04c2dabe"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Find.FullScreenViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Find.FullScreenViewController"
+                  moduleName = "Find"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andrew/Desktop/Find%20Final/Find/Find/MainController/FullScreen/FullScreenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "620">
+               </Location>
+               <Location
+                  uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE - 4f7dcb24119ee2f2"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Find.FullScreenViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Find.FullScreenViewController&gt;"
+                  moduleName = "Find"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andrew/Desktop/Find%20Final/Find/Find/MainController/FullScreen/FullScreenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "564">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6715D5CF-9588-4532-83F9-33417D0BAC25"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Find/MainController/FullScreen/FullScreenViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "handleXPress(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EA1B7335-B8F9-42E5-85A7-E8555CCAEFCA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Find/MainController/FullScreen/FullScreenViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "touchesBegan(_:with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

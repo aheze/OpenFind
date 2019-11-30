@@ -58,6 +58,11 @@
 		49A8EFAE237A5F2800328D47 /* SetUpRamReel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A8EFAD237A5F2800328D47 /* SetUpRamReel.swift */; };
 		49B7A32D2390823C0070209F /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49B7A32C2390823C0070209F /* Colors.xcassets */; };
 		49B7A32F2390DB810070209F /* ArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A32E2390DB810070209F /* ArrowView.swift */; };
+		49B7A33423923E810070209F /* ZoomTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33123923E800070209F /* ZoomTransitionController.swift */; };
+		49B7A33523923E810070209F /* ZoomDismissalInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33223923E800070209F /* ZoomDismissalInteractionController.swift */; };
+		49B7A33623923E810070209F /* ZoomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33323923E800070209F /* ZoomAnimator.swift */; };
+		49B7A33823923EBD0070209F /* PhotoPageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33723923EBD0070209F /* PhotoPageContainerViewController.swift */; };
+		49B7A33A23923EE10070209F /* PhotoZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33923923EE00070209F /* PhotoZoomViewController.swift */; };
 		49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */; };
 		49F7B1522353FC970099FA62 /* ProcessImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1512353FC970099FA62 /* ProcessImage.swift */; };
 		49F7B1542353FDF40099FA62 /* VisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1532353FDF40099FA62 /* VisionHandler.swift */; };
@@ -125,6 +130,11 @@
 		49A8EFAD237A5F2800328D47 /* SetUpRamReel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpRamReel.swift; sourceTree = "<group>"; };
 		49B7A32C2390823C0070209F /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		49B7A32E2390DB810070209F /* ArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowView.swift; sourceTree = "<group>"; };
+		49B7A33123923E800070209F /* ZoomTransitionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomTransitionController.swift; sourceTree = "<group>"; };
+		49B7A33223923E800070209F /* ZoomDismissalInteractionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomDismissalInteractionController.swift; sourceTree = "<group>"; };
+		49B7A33323923E800070209F /* ZoomAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomAnimator.swift; sourceTree = "<group>"; };
+		49B7A33723923EBD0070209F /* PhotoPageContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPageContainerViewController.swift; sourceTree = "<group>"; };
+		49B7A33923923EE00070209F /* PhotoZoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoZoomViewController.swift; sourceTree = "<group>"; };
 		49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		49F7B1512353FC970099FA62 /* ProcessImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessImage.swift; sourceTree = "<group>"; };
 		49F7B1532353FDF40099FA62 /* VisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionHandler.swift; sourceTree = "<group>"; };
@@ -175,9 +185,12 @@
 		49368CA52390598000B67C4A /* FullScreen */ = {
 			isa = PBXGroup;
 			children = (
-				49368CA823905CE800B67C4A /* BottomDrawer */,
+				49B7A33723923EBD0070209F /* PhotoPageContainerViewController.swift */,
+				49B7A33923923EE00070209F /* PhotoZoomViewController.swift */,
 				49368CA6239059A200B67C4A /* FullScreenViewController.swift */,
 				49368CB123905E8E00B67C4A /* BottomSheetViewController.swift */,
+				49B7A33023923E800070209F /* Animation */,
+				49368CA823905CE800B67C4A /* BottomDrawer */,
 			);
 			path = FullScreen;
 			sourceTree = "<group>";
@@ -348,6 +361,16 @@
 			path = Find;
 			sourceTree = "<group>";
 		};
+		49B7A33023923E800070209F /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				49B7A33123923E800070209F /* ZoomTransitionController.swift */,
+				49B7A33223923E800070209F /* ZoomDismissalInteractionController.swift */,
+				49B7A33323923E800070209F /* ZoomAnimator.swift */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
 		D0464F2926E9ACFCA3CD293D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,15 +508,19 @@
 			files = (
 				4951701F235AC8A800E00D83 /* RAMReel.h in Sources */,
 				49368CAF23905D3300B67C4A /* UIView+constrainToParent.swift in Sources */,
+				49B7A33423923E810070209F /* ZoomTransitionController.swift in Sources */,
 				4951701B235AC56D00E00D83 /* RAMTextField.swift in Sources */,
 				4999AC982353A80A00AB06A7 /* ViewController.swift in Sources */,
+				49B7A33523923E810070209F /* ZoomDismissalInteractionController.swift in Sources */,
 				4969373E2353C3D8009CA41A /* ShutterButton.swift in Sources */,
 				4951701A235AC56D00E00D83 /* CollectionViewCell.swift in Sources */,
 				491150942363E3D300EC0C04 /* ARExtensions.swift in Sources */,
 				491150982364D25D00EC0C04 /* RectangleOverlay.swift in Sources */,
 				4911508D235D51E300EC0C04 /* MatchesHUD.swift in Sources */,
+				49B7A33623923E810070209F /* ZoomAnimator.swift in Sources */,
 				49A8EFAC237A5EFE00328D47 /* SetUpButtons.swift in Sources */,
 				495ECCAB238DB7BD00E7D966 /* TitleSupplementaryView.swift in Sources */,
+				49B7A33823923EBD0070209F /* PhotoPageContainerViewController.swift in Sources */,
 				49F7B15E2356954A0099FA62 /* GetTextClassic.swift in Sources */,
 				49368CA7239059A200B67C4A /* FullScreenViewController.swift in Sources */,
 				4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */,
@@ -528,6 +555,7 @@
 				4991344E236FDF1300B82E46 /* SettingsViewController.swift in Sources */,
 				490452522379DFD40046570D /* CollectionViewPhotoCell.swift in Sources */,
 				495ECCA4238A3D0B00E7D966 /* HistoryFormat.swift in Sources */,
+				49B7A33A23923EE10070209F /* PhotoZoomViewController.swift in Sources */,
 				49F7B15C2354E85F0099FA62 /* WordReader.swift in Sources */,
 				49913450236FE12400B82E46 /* SettingsViewExtensions.swift in Sources */,
 				4911509E236503C600EC0C04 /* GetTextFocused.swift in Sources */,
