@@ -10,6 +10,7 @@ import UIKit
 
 class FooterView: UICollectionReusableView {
 
+    public let Style = DefaultStyle.self
     var path: UIBezierPath!
     
     override init(frame: CGRect) {
@@ -57,7 +58,7 @@ class FooterView: UICollectionReusableView {
         
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
-        shapeLayer.fillColor = UIColor.white.cgColor
+        shapeLayer.fillColor = Style.Colors.background.cgColor
         self.layer.addSublayer(shapeLayer)
     }
     
@@ -65,5 +66,18 @@ class FooterView: UICollectionReusableView {
 extension CGFloat {
     func toRadians() -> CGFloat {
         return self * .pi / 180.0
+    }
+}
+public enum DefaultStyle {
+
+    public enum Colors {
+
+        public static let background: UIColor = {
+            if #available(iOS 13.0, *) {
+                return UIColor.systemBackground
+            } else {
+                return .black
+            }
+        }()
     }
 }
