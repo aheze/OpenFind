@@ -13,7 +13,7 @@ protocol UpdateImageDelegate: class {
 
 class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate {
     
-    
+    //let transitionDelegate: UIViewControllerTransitioningDelegate = ZoomTransitionController()
     
     var selectedIndexPath: IndexPath!
     
@@ -37,6 +37,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         getData()
+        //self.transitioningDelegate = transitionDelegate
         let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.sectionHeadersPinToVisibleBounds = true
     }
@@ -137,8 +138,12 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         guard let vc = pulleyController.primaryContentViewController as? PhotoPageContainerViewController
             else { return }
         //nav?.delegate = vc.transitionController
+        //vc.transitioningDelegate = transitionDelegate
+        //vc.transitioningDelegate = self
+        //vc.modalPresentationStyle = .fullScreen
+        pulleyController.transitioningDelegate = vc.transitionController ///YES! It worked!
         
-        vc.transitioningDelegate = self
+        
         vc.transitionController.fromDelegate = self
         vc.transitionController.toDelegate = vc
         vc.delegate = self
@@ -148,7 +153,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         vc.currentIndex = indexPath.item
         print("3")
         vc.photos = photos
-        print("photos")
+        print("photos...")
         //vc.modalPresentationStyle = .fullScreen
         //vc.imageView.image = photo
         

@@ -28,6 +28,7 @@ extension ViewController {
                     print("sdnf")
                     let destinationVC = segue.destination as! NewHistoryViewController
                     destinationVC.folderURL = globalUrl
+                    //destinationVC.modalPresentationStyle = .fullScreen
             case "goToFullScreen":
                 print("full screen")
                 default:

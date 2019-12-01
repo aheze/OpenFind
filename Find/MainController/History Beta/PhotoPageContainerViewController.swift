@@ -110,7 +110,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     @objc func didPanWith(gestureRecognizer: UIPanGestureRecognizer) {
         switch gestureRecognizer.state {
         case .began:
-            print("Dismiss?")
+            print("Dismiss...")
             self.currentViewController.scrollView.isScrollEnabled = false
             self.transitionController.isInteractive = true
             //let _ = self.navigationController?.popViewController(animated: true)

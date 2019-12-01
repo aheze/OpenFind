@@ -168,6 +168,7 @@ extension ZoomAnimator: UIViewControllerAnimatedTransitioning {
             animateZoomInTransition(using: transitionContext)
         } else {
             animateZoomOutTransition(using: transitionContext)
+            
         }
     }
 }

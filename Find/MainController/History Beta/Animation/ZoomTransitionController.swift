@@ -18,6 +18,7 @@ class ZoomTransitionController: NSObject {
     weak var toDelegate: ZoomAnimatorDelegate?
     
     override init() {
+        print("zoom")
         animator = ZoomAnimator()
         interactionController = ZoomDismissalInteractionController()
         super.init()
@@ -30,6 +31,7 @@ class ZoomTransitionController: NSObject {
 
 extension ZoomTransitionController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        print("animattt")
         self.animator.isPresenting = true
         self.animator.fromDelegate = fromDelegate
         self.animator.toDelegate = toDelegate

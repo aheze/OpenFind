@@ -50,7 +50,7 @@ class ZoomDismissalInteractionController: NSObject {
         
         transitionContext.updateInteractiveTransition(1 - scale)
         
-        toVC.tabBarController?.tabBar.alpha = 1 - backgroundAlpha
+        //toVC.tabBarController?.tabBar.alpha = 1 - backgroundAlpha
         
         if gestureRecognizer.state == .ended {
             
@@ -67,7 +67,7 @@ class ZoomDismissalInteractionController: NSObject {
                     animations: {
                         transitionImageView.frame = fromReferenceImageViewFrame
                         fromVC.view.alpha = 1.0
-                        toVC.tabBarController?.tabBar.alpha = 0
+                        //toVC.tabBarController?.tabBar.alpha = 0
                 },
                     completion: { completed in
                         
@@ -93,7 +93,7 @@ class ZoomDismissalInteractionController: NSObject {
                            animations: {
                             fromVC.view.alpha = 0
                             transitionImageView.frame = finalTransitionSize
-                            toVC.tabBarController?.tabBar.alpha = 1
+                            //toVC.tabBarController?.tabBar.alpha = 1
                             
             }, completion: { completed in
                 
@@ -157,7 +157,8 @@ extension ZoomDismissalInteractionController: UIViewControllerInteractiveTransit
         
         let referenceImage = fromReferenceImageView.image!
         
-        containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
+        containerView.insertSubview(fromVC.view, belowSubview: toVC.view)
+        ///Had to flip fromVC and toVC for the dismiss to NOT result in a black screen!
         if animator.transitionImageView == nil {
             let transitionImageView = UIImageView(image: referenceImage)
             transitionImageView.contentMode = .scaleAspectFill
