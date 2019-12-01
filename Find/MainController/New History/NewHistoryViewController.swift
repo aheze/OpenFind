@@ -14,6 +14,7 @@ protocol UpdateImageDelegate: class {
 class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate {
     
     
+    let transitionDelegate: UIViewControllerTransitioningDelegate = ZoomTransitionController()
     
     var selectedIndexPath: IndexPath!
     
@@ -36,16 +37,18 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         getData()
+        self.transitioningDelegate = transitionDelegate
         let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.sectionHeadersPinToVisibleBounds = true
     }
-    override func present(_ viewControllerToPresent: UIViewController,
-                          animated flag: Bool,
-                          completion: (() -> Void)? = nil) {
-      viewControllerToPresent.modalPresentationStyle = .fullScreen
-      super.present(viewControllerToPresent, animated: flag, completion: completion)
-    }
+//    override func present(_ viewControllerToPresent: UIViewController,
+//                          animated flag: Bool,
+//                          completion: (() -> Void)? = nil) {
+//      viewControllerToPresent.modalPresentationStyle = .fullScreen
+//      super.present(viewControllerToPresent, animated: flag, completion: completion)
+//    }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -136,10 +139,12 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         //guard let vc = pulleyController.primaryContentViewController as? FullScreenViewController else { return }
         guard let vc = pulleyController.primaryContentViewController as? PhotoPageContainerViewController
             else { return }
+       // secondView.transitioningDelegate = transitionDelegate
         //nav?.delegate = vc.transitionController
-        
+        self.transitioningDelegate = vc.transitionController
         vc.transitioningDelegate = self
-        vc.transitionController.fromDelegate = self
+        //secondVC.transitioningDelegate = self
+        //vc.transitionController.fromDelegate = self
         vc.transitionController.toDelegate = vc
         vc.delegate = self
         print("1")
@@ -148,7 +153,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         vc.currentIndex = indexPath.item
         print("3")
         vc.photos = photos
-        print("4")
+        print("photos")
         //vc.modalPresentationStyle = .fullScreen
         //vc.imageView.image = photo
         

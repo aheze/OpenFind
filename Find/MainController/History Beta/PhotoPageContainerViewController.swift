@@ -63,7 +63,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     var singleTapGestureRecognizer: UITapGestureRecognizer!
     
     var transitionController = ZoomTransitionController()
-    
+    //var transitionDelegate: UIViewControllerTransitioningDelegate!
     override func viewDidLoad() {
         super.viewDidLoad()
         
