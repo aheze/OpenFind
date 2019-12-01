@@ -171,7 +171,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             })
             
         } else {
-            self.xButtonView.isHidden = true
+            self.xButtonView.isHidden = false
             UIView.animate(withDuration: 0.25,
                            animations: {
                             self.xButtonView.alpha = 1

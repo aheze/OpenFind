@@ -66,7 +66,7 @@ class ZoomAnimator: NSObject {
                        animations: {
                         self.transitionImageView?.frame = finalTransitionSize
                         toVC.view.alpha = 1.0
-                        fromVC.tabBarController?.tabBar.alpha = 0
+                        //fromVC.tabBarController?.tabBar.alpha = 0
         },
                        completion: { completed in
                     
@@ -114,7 +114,15 @@ class ZoomAnimator: NSObject {
         containerView.insertSubview(fromVC.view, belowSubview: toVC.view)
         ///also had to switch these... dismissing no longer results in Black Screen Of Death!!!
         
-        fromReferenceImageView.isHidden = true
+        //fromReferenceImageView.isHidden = true
+        ///prevents a white flash, use below instead of aforementioned
+        fromReferenceImageView.isHidden = false
+        fromReferenceImageView.alpha = 1
+        UIView.animate(withDuration: 0.2, animations: {
+            fromReferenceImageView.alpha = 0
+        }) { _ in
+            fromReferenceImageView.isHidden = true
+        }
         
         let finalTransitionSize = toReferenceImageViewFrame
         
