@@ -63,6 +63,7 @@
 		49B7A33623923E810070209F /* ZoomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33323923E800070209F /* ZoomAnimator.swift */; };
 		49B7A33823923EBD0070209F /* PhotoPageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33723923EBD0070209F /* PhotoPageContainerViewController.swift */; };
 		49B7A33A23923EE10070209F /* PhotoZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33923923EE00070209F /* PhotoZoomViewController.swift */; };
+		49B7A33D2393000A0070209F /* BetaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33C2393000A0070209F /* BetaController.swift */; };
 		49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */; };
 		49F7B1522353FC970099FA62 /* ProcessImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1512353FC970099FA62 /* ProcessImage.swift */; };
 		49F7B1542353FDF40099FA62 /* VisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1532353FDF40099FA62 /* VisionHandler.swift */; };
@@ -135,6 +136,7 @@
 		49B7A33323923E800070209F /* ZoomAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomAnimator.swift; sourceTree = "<group>"; };
 		49B7A33723923EBD0070209F /* PhotoPageContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPageContainerViewController.swift; sourceTree = "<group>"; };
 		49B7A33923923EE00070209F /* PhotoZoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoZoomViewController.swift; sourceTree = "<group>"; };
+		49B7A33C2393000A0070209F /* BetaController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaController.swift; sourceTree = "<group>"; };
 		49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		49F7B1512353FC970099FA62 /* ProcessImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessImage.swift; sourceTree = "<group>"; };
 		49F7B1532353FDF40099FA62 /* VisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionHandler.swift; sourceTree = "<group>"; };
@@ -185,11 +187,8 @@
 		49368CA52390598000B67C4A /* FullScreen */ = {
 			isa = PBXGroup;
 			children = (
-				49B7A33723923EBD0070209F /* PhotoPageContainerViewController.swift */,
-				49B7A33923923EE00070209F /* PhotoZoomViewController.swift */,
 				49368CA6239059A200B67C4A /* FullScreenViewController.swift */,
 				49368CB123905E8E00B67C4A /* BottomSheetViewController.swift */,
-				49B7A33023923E800070209F /* Animation */,
 				49368CA823905CE800B67C4A /* BottomDrawer */,
 			);
 			path = FullScreen;
@@ -274,6 +273,7 @@
 				4969373A2353C241009CA41A /* History */,
 				495ECCA5238CF74500E7D966 /* New History */,
 				496937392353C228009CA41A /* Settings */,
+				49B7A33B2392FFDA0070209F /* History Beta */,
 				49368CA52390598000B67C4A /* FullScreen */,
 			);
 			path = MainController;
@@ -369,6 +369,17 @@
 				49B7A33323923E800070209F /* ZoomAnimator.swift */,
 			);
 			path = Animation;
+			sourceTree = "<group>";
+		};
+		49B7A33B2392FFDA0070209F /* History Beta */ = {
+			isa = PBXGroup;
+			children = (
+				49B7A33023923E800070209F /* Animation */,
+				49B7A33723923EBD0070209F /* PhotoPageContainerViewController.swift */,
+				49B7A33923923EE00070209F /* PhotoZoomViewController.swift */,
+				49B7A33C2393000A0070209F /* BetaController.swift */,
+			);
+			path = "History Beta";
 			sourceTree = "<group>";
 		};
 		D0464F2926E9ACFCA3CD293D /* Frameworks */ = {
@@ -536,6 +547,7 @@
 				49A8EFAE237A5F2800328D47 /* SetUpRamReel.swift in Sources */,
 				49F7B1582353FE7E0099FA62 /* TextComponent.swift in Sources */,
 				4957157C2368AF69007BF68B /* RippleEffect.swift in Sources */,
+				49B7A33D2393000A0070209F /* BetaController.swift in Sources */,
 				49F7B1522353FC970099FA62 /* ProcessImage.swift in Sources */,
 				4951701D235AC56D00E00D83 /* GradientView.swift in Sources */,
 				4911508B235D1A3E00EC0C04 /* BasicUtilities.swift in Sources */,
