@@ -441,7 +441,7 @@
                                                 <constraint firstItem="PN7-t1-WxN" firstAttribute="leading" secondItem="M3t-zR-wmt" secondAttribute="leading" id="zZG-Hx-jIW"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <color key="backgroundColor" red="0.59534458509999999" green="0.96928499270000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <size key="customSize" width="100" height="100"/>
                                         <connections>
                                             <outlet property="imageView" destination="PN7-t1-WxN" id="1GB-S3-t57"/>
@@ -459,7 +459,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.089683219178082196" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="0YI-NH-fXz" firstAttribute="centerY" secondItem="IEP-t7-nfL" secondAttribute="centerY" id="5lA-0t-yzz"/>
                                         <constraint firstItem="0YI-NH-fXz" firstAttribute="leading" secondItem="IEP-t7-nfL" secondAttribute="leadingMargin" id="saV-t1-fU4"/>
@@ -1198,7 +1198,7 @@
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ngF-E8-ZlD" customClass="ArrowView" customModule="Find" customModuleProvider="target">
                                         <rect key="frame" x="309" y="12.5" width="50" height="30"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" identifier="arrowWidth" id="CS3-LM-txJ"/>
                                             <constraint firstAttribute="height" constant="30" identifier="arrowHeight" id="xnw-JS-9kb"/>

@@ -7,7 +7,7 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "TranscriptDark.png",
+      "filename" : "Slice.png",
       "appearances" : [
         {
           "appearance" : "luminosity",
@@ -23,7 +23,7 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "TranscriptDark@2x.png",
+      "filename" : "Slice@2x.png",
       "appearances" : [
         {
           "appearance" : "luminosity",
@@ -39,7 +39,7 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "TranscriptDark@3x.png",
+      "filename" : "Slice@3x.png",
       "appearances" : [
         {
           "appearance" : "luminosity",
