@@ -148,7 +148,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         vc.currentIndex = indexPath.item
         print("3")
         vc.photos = photos
-        print("4")
+        print("photos")
         //vc.modalPresentationStyle = .fullScreen
         //vc.imageView.image = photo
         
