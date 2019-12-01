@@ -341,7 +341,7 @@ extension BetaController: ZoomAnimatorDelegate {
         if cellFrame.minY < self.collectionView.contentInset.top {
             return CGRect(x: cellFrame.minX, y: self.collectionView.contentInset.top, width: cellFrame.width, height: cellFrame.height - (self.collectionView.contentInset.top - cellFrame.minY))
         }
-        
+        print(cellFrame)
         return cellFrame
     }
     

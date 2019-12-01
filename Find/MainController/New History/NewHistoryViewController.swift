@@ -280,12 +280,14 @@ extension NewHistoryViewController: ZoomAnimatorDelegate {
         //Get a guarded reference to the cell's frame
         let unconvertedFrame = getFrameFromCollectionViewCell(for: self.selectedIndexPath)
         
-        let cellFrame = self.collectionView.convert(unconvertedFrame, to: self.view)
+        var cellFrame = self.collectionView.convert(unconvertedFrame, to: self.view)
         
         if cellFrame.minY < self.collectionView.contentInset.top {
             return CGRect(x: cellFrame.minX, y: self.collectionView.contentInset.top, width: cellFrame.width, height: cellFrame.height - (self.collectionView.contentInset.top - cellFrame.minY))
         }
-        
+        print("cellframe: \(cellFrame)")
+        cellFrame.origin.y += 40
+        ///need to fix this, no hardcoded values
         return cellFrame
     }
     //This function prevents the collectionView from accessing a deallocated cell. In the event

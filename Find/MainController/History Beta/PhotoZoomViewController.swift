@@ -36,7 +36,7 @@ class PhotoZoomViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationItem.largeTitleDisplayMode = .never
+        //navigationController?.navigationItem.largeTitleDisplayMode = .never
         self.scrollView.delegate = self
         if #available(iOS 11, *) {
             self.scrollView.contentInsetAdjustmentBehavior = .never
