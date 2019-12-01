@@ -14,6 +14,9 @@ protocol PhotoPageContainerViewControllerDelegate: class {
 
 class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDelegate {
 
+    
+    @IBOutlet weak var xButtonView: UIImageView!
+    
     enum ScreenMode {
         case full, normal
     }
@@ -67,7 +70,24 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleXPress(_:)))
+        xButtonView.addGestureRecognizer(tap)
+        xButtonView.isUserInteractionEnabled = true
+        view.bringSubviewToFront(xButtonView)
         
+    }
+    
+    @objc func handleXPress(_ sender: UITapGestureRecognizer? = nil) {
+        print("x pressed...")
+//        self.transitionController.animator.isPresenting = false
+//        let tmp = self.transitionController.fromDelegate
+//        self.transitionController.animator.fromDelegate = self.transitionController.toDelegate
+//        self.transitionController.animator.toDelegate = tmp
+        self.currentViewController.scrollView.isScrollEnabled = false
+        self.transitionController.isInteractive = false
+        
+        //let _ = self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -110,7 +130,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     @objc func didPanWith(gestureRecognizer: UIPanGestureRecognizer) {
         switch gestureRecognizer.state {
         case .began:
-            print("Dismiss...")
+            print("Dismissing")
             self.currentViewController.scrollView.isScrollEnabled = false
             self.transitionController.isInteractive = true
             //let _ = self.navigationController?.popViewController(animated: true)
@@ -141,17 +161,20 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     
     func changeScreenMode(to: ScreenMode) {
         if to == .full {
-            self.navigationController?.setNavigationBarHidden(true, animated: false)
+            
             UIView.animate(withDuration: 0.25,
                            animations: {
                             self.view.backgroundColor = .black
-                            
+                            self.xButtonView.alpha = 0
             }, completion: { completed in
+                self.xButtonView.isHidden = true
             })
+            
         } else {
-            self.navigationController?.setNavigationBarHidden(false, animated: false)
+            self.xButtonView.isHidden = true
             UIView.animate(withDuration: 0.25,
                            animations: {
+                            self.xButtonView.alpha = 1
                             if #available(iOS 13.0, *) {
                                 self.view.backgroundColor = .systemBackground
                             } else {

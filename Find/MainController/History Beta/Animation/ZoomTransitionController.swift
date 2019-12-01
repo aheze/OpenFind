@@ -43,10 +43,13 @@ extension ZoomTransitionController: UIViewControllerTransitioningDelegate {
         let tmp = self.fromDelegate
         self.animator.fromDelegate = self.toDelegate
         self.animator.toDelegate = tmp
+      
+        
         return self.animator
     }
 
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        print("dismi")
         if !self.isInteractive {
             return nil
         }

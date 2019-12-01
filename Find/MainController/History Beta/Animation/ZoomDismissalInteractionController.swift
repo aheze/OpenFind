@@ -136,7 +136,7 @@ class ZoomDismissalInteractionController: NSObject {
 extension ZoomDismissalInteractionController: UIViewControllerInteractiveTransitioning {
     func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
         self.transitionContext = transitionContext
-        
+        print("interacting")
         let containerView = transitionContext.containerView
         
         guard let animator = self.animator as? ZoomAnimator,

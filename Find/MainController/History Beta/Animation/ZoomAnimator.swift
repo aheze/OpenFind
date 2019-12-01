@@ -111,7 +111,9 @@ class ZoomAnimator: NSObject {
             containerView.addSubview(transitionImageView)
         }
         
-        containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
+        containerView.insertSubview(fromVC.view, belowSubview: toVC.view)
+        ///also had to switch these... dismissing no longer results in Black Screen Of Death!!!
+        
         fromReferenceImageView.isHidden = true
         
         let finalTransitionSize = toReferenceImageViewFrame
@@ -172,3 +174,22 @@ extension ZoomAnimator: UIViewControllerAnimatedTransitioning {
         }
     }
 }
+
+//    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+//        guard
+//            let fromViewController = transitionContext.viewController(forKey: .from),
+//            let toViewController = transitionContext.viewController(forKey: .to)
+//        else {
+//            return
+//        }
+//
+//        transitionContext.containerView.insertSubview(toViewController.view, belowSubview: fromViewController.view)
+//
+//        let duration = self.transitionDuration(using: transitionContext)
+//        UIView.animate(withDuration: duration, animations: {
+//            fromViewController.view.alpha = 0
+//        }, completion: { _ in
+//            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+//        })
+//    }
+

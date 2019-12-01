@@ -7,7 +7,7 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "s.png",
+      "filename" : "EditDark.png",
       "appearances" : [
         {
           "appearance" : "luminosity",
@@ -23,7 +23,7 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "s@2x.png",
+      "filename" : "EditDark@2x.png",
       "appearances" : [
         {
           "appearance" : "luminosity",
@@ -39,7 +39,7 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "s@3x.png",
+      "filename" : "EditDark@3x.png",
       "appearances" : [
         {
           "appearance" : "luminosity",
