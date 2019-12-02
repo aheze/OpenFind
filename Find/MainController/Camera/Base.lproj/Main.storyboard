@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait" appearance="dark"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -403,13 +403,22 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlackXbutton" translatesAutoresizingMaskIntoConstraints="NO" id="QPG-2r-IPr">
+                                        <rect key="frame" x="329" y="20" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="UBb-Mc-JTY"/>
+                                            <constraint firstAttribute="height" constant="30" id="cFl-Ta-QOd"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemFillColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="0dt-GN-T2f"/>
+                                    <constraint firstAttribute="trailing" secondItem="QPG-2r-IPr" secondAttribute="trailing" constant="16" id="8bt-kF-Lxc"/>
                                     <constraint firstItem="rMI-bB-kPc" firstAttribute="centerY" secondItem="F4l-AI-AMm" secondAttribute="centerY" id="Cbr-HP-Jj3"/>
                                     <constraint firstItem="rMI-bB-kPc" firstAttribute="leading" secondItem="F4l-AI-AMm" secondAttribute="leading" constant="16" id="HKS-7R-CcY"/>
                                     <constraint firstAttribute="height" constant="70" id="cp6-Tj-sWc"/>
+                                    <constraint firstItem="QPG-2r-IPr" firstAttribute="centerY" secondItem="F4l-AI-AMm" secondAttribute="centerY" id="s6f-Nz-Brh"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pM4-sK-rSn">
@@ -492,6 +501,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="hx1-Ur-Rvr"/>
                     <connections>
+                        <outlet property="blackXButtonView" destination="QPG-2r-IPr" id="yJM-LI-ugb"/>
                         <outlet property="collectionView" destination="pM4-sK-rSn" id="iqd-aW-QBk"/>
                     </connections>
                 </viewController>
@@ -1069,6 +1079,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QwW-xD-yRJ" userLabel="HeaderView">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                 <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlackXbutton" translatesAutoresizingMaskIntoConstraints="NO" id="YBz-7c-FW0">
+                                        <rect key="frame" x="368" y="20" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="8Mm-RL-Bj0"/>
+                                            <constraint firstAttribute="height" constant="30" id="Hhu-tk-hC7"/>
+                                        </constraints>
+                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xgd-YW-juX">
                                         <rect key="frame" x="16" y="14.5" width="133" height="41"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
@@ -1078,7 +1095,9 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemFillColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="YBz-7c-FW0" firstAttribute="centerY" secondItem="QwW-xD-yRJ" secondAttribute="centerY" id="G0O-Mx-VUJ"/>
                                     <constraint firstAttribute="height" constant="70" id="Jhz-Pg-iqz"/>
+                                    <constraint firstAttribute="trailing" secondItem="YBz-7c-FW0" secondAttribute="trailing" constant="16" id="V9j-vB-TlT"/>
                                     <constraint firstItem="Xgd-YW-juX" firstAttribute="centerY" secondItem="QwW-xD-yRJ" secondAttribute="centerY" id="Yda-23-EO1"/>
                                     <constraint firstItem="Xgd-YW-juX" firstAttribute="leading" secondItem="QwW-xD-yRJ" secondAttribute="leading" constant="16" id="olg-Z8-QDK"/>
                                 </constraints>
@@ -1100,6 +1119,7 @@
                     <connections>
                         <outlet property="aprButton" destination="Xc4-9q-AqD" id="BXs-6i-GkM"/>
                         <outlet property="augButton" destination="rFu-av-xTA" id="BAt-Sf-9pB"/>
+                        <outlet property="blackXButtonView" destination="YBz-7c-FW0" id="pmP-0W-ZJr"/>
                         <outlet property="creditsView" destination="9Rr-9i-okP" id="Z8l-me-G8i"/>
                         <outlet property="decButton" destination="YSb-18-sNF" id="Tyu-dX-XkG"/>
                         <outlet property="febButton" destination="TTJ-Oa-Skx" id="10X-SC-0o1"/>
@@ -1474,6 +1494,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BlackXbutton" width="300" height="300"/>
         <image name="Edit" width="200" height="200"/>
         <image name="Find" width="200" height="200"/>
         <image name="Leica Sample" width="320" height="189.5"/>

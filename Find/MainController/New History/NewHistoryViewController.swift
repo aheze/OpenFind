@@ -27,6 +27,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var blackXButtonView: UIImageView!
     //static let sectionHeaderElementKind = "section-header-element-kind"
     
     //static let sectionFooterElementKind = "section-footer-element-kind"
@@ -40,6 +41,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         //self.transitioningDelegate = transitionDelegate
         let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.sectionHeadersPinToVisibleBounds = true
+        setUpXButton()
     }
     override func present(_ viewControllerToPresent: UIViewController,
                           animated flag: Bool,
@@ -79,6 +81,14 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
 //
 //    }
+    func setUpXButton() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleBlackXPress(_:)))
+        blackXButtonView.addGestureRecognizer(tap)
+        blackXButtonView.isUserInteractionEnabled = true
+    }
+    @objc func handleBlackXPress(_ sender: UITapGestureRecognizer? = nil) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return dictOfFormats.count

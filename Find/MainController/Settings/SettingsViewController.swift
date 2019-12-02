@@ -10,6 +10,10 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
+    
+    
+    @IBOutlet weak var blackXButtonView: UIImageView!
+    
     @IBOutlet weak var highlightColorView: UIView!
     @IBOutlet weak var redButton: UIButton!
     @IBOutlet weak var orangeButton: UIButton!
@@ -49,7 +53,16 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         setUpSettingsRoundedCorners()
         setUpSettingsSwitches()
+        setUpXButton()
     }
     
+    func setUpXButton() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleBlackXPress(_:)))
+        blackXButtonView.addGestureRecognizer(tap)
+        blackXButtonView.isUserInteractionEnabled = true
+    }
+    @objc func handleBlackXPress(_ sender: UITapGestureRecognizer? = nil) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
 }
