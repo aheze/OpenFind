@@ -135,39 +135,55 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         ///let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FullScreenViewController")
         
         ///beta
-        let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PhotoPageContainerViewController")
+//        let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PhotoPageContainerViewController")
+//        let drawerContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetViewController")
+//        let pulleyController = PulleyViewController(contentViewController: mainContentVC, drawerViewController: drawerContentVC)
+//        let date = dictOfFormats[indexPath.section]!
+//        let photos = dictOfHists[date]!
+//        guard let vc = pulleyController.primaryContentViewController as? PhotoPageContainerViewController
+//            else { return }
+//        pulleyController.transitioningDelegate = vc.transitionController ///YES! It worked!
         
-        let drawerContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetViewController")
-        let pulleyController = PulleyViewController(contentViewController: mainContentVC, drawerViewController: drawerContentVC)
-        //mainContentVC.imageToBeDisplayed = UIImage()
-        let date = dictOfFormats[indexPath.section]!
-        let photos = dictOfHists[date]!
-        //let photo = photos[indexPath.item]
-        //imageDelegate?.changeImage(image: photo)
-        //guard let vc = pulleyController.primaryContentViewController as? FullScreenViewController else { return }
-        guard let vc = pulleyController.primaryContentViewController as? PhotoPageContainerViewController
-            else { return }
-        //nav?.delegate = vc.transitionController
-        //vc.transitioningDelegate = transitionDelegate
-        //vc.transitioningDelegate = self
-        //vc.modalPresentationStyle = .fullScreen
-        pulleyController.transitioningDelegate = vc.transitionController ///YES! It worked!
-        
-        
-        vc.transitionController.fromDelegate = self
-        vc.transitionController.toDelegate = vc
-        vc.delegate = self
-        print("1")
-        self.selectedIndexPath = indexPath
+        ///_____________________
+        let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PhotoPageContainerViewController") as! PhotoPageContainerViewController
+           //let mainContentVC = PhotoPageContainerViewController()
+           
+           self.selectedIndexPath = indexPath
+           
+           print("1")
+           mainContentVC.transitioningDelegate = mainContentVC.transitionController
         print("2")
-        vc.currentIndex = indexPath.item
+           mainContentVC.transitionController.fromDelegate = self
         print("3")
-        vc.photos = photos
-        print("photos...")
-        //vc.modalPresentationStyle = .fullScreen
-        //vc.imageView.image = photo
+           mainContentVC.transitionController.toDelegate = mainContentVC
+        print("4")
+        mainContentVC.delegate = self
+        print("5")
+           let date = dictOfFormats[indexPath.section]!
+        print("6")
+           let photos = dictOfHists[date]!
+        print("7")
+        mainContentVC.currentIndex = indexPath.item
+        mainContentVC.currentSection = indexPath.section
+        print("8")
+        mainContentVC.photos = photos
+        print("9")
+           self.present(mainContentVC, animated: true)
+        print("10")
+        ///__________________
         
-        self.present(pulleyController, animated: true)
+        
+//        vc.transitionController.fromDelegate = self
+//        vc.transitionController.toDelegate = vc
+//        vc.delegate = self
+//        print("1")
+//        self.selectedIndexPath = indexPath
+//
+//        vc.currentIndex = indexPath.item
+//        print("3")
+//        vc.photos = photos
+//        print("photos...")
+//        self.present(pulleyController, animated: true)
         
     }
 }
@@ -250,8 +266,8 @@ extension NewHistoryViewController {
 
 extension NewHistoryViewController: PhotoPageContainerViewControllerDelegate {
  
-    func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int) {
-        self.selectedIndexPath = IndexPath(row: currentIndex, section: 0)
+    func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int, sectionDidUpdate currentSection: Int) {
+        self.selectedIndexPath = IndexPath(row: currentIndex, section: currentSection)
         self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
     }
 }

@@ -43,15 +43,16 @@ extension ViewController {
             self.setNeedsStatusBarAppearanceUpdate()
         })
         
-        let goToHist = menuButton.addItem()
-        goToHist.titleLabel.text = "History"
-        goToHist.imageView.image = #imageLiteral(resourceName: "bhistory 2")
-        goToHist.action = { item in
-            print("hist")
-            self.performSegue(withIdentifier: "goToHistory", sender: self)
-            //self.t.suspend()
-            //self.f.suspend()
-        }
+//        let goToHist = menuButton.addItem()
+//        goToHist.titleLabel.text = "History"
+//        goToHist.imageView.image = #imageLiteral(resourceName: "bhistory 2")
+//        goToHist.action = { item in
+//            print("hist")
+//            //self.performSegue(withIdentifier: "goToHistory", sender: self)
+//            self.present(PhotoCollectionViewController(), animated: true, completion: nil)
+//            //self.t.suspend()
+//            //self.f.suspend()
+//        }
         let goToSett = menuButton.addItem()
         goToSett.titleLabel.text = "Settings"
         goToSett.imageView.image = #imageLiteral(resourceName: "bsettings 2")

@@ -14,6 +14,31 @@ class BottomSheetViewController: UIViewController, PulleyDrawerViewControllerDel
     
     @IBOutlet weak var arrowView: ArrowView!
     
+    @IBAction func findPressed(_ sender: UIButton) {
+    }
+    
+    @IBAction func transcriptPressed(_ sender: UIButton) {
+    }
+    
+    @IBAction func infoPressed(_ sender: UIButton) {
+    }
+    
+    @IBAction func sharePressed(_ sender: UIButton) {
+    }
+    
+    @IBAction func heartPressed(_ sender: UIButton) {
+    }
+    
+    @IBAction func editPressed(_ sender: UIButton) {
+    }
+    
+    @IBAction func renamePressed(_ sender: UIButton) {
+    }
+    
+    @IBAction func deletePressed(_ sender: UIButton) {
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         arrowView.update(to: .up, animated: true)
@@ -50,10 +75,15 @@ class BottomSheetViewController: UIViewController, PulleyDrawerViewControllerDel
     }
     func partialRevealDrawerHeight(bottomSafeArea: CGFloat) -> CGFloat {
         // For devices with a bottom safe area, we want to make our drawer taller. Your implementation may not want to do that. In that case, disregard the bottomSafeArea value.
-        return 185.0 + (pulleyViewController?.currentDisplayMode == .drawer ? bottomSafeArea : 0.0)
+        return 340.0 + (pulleyViewController?.currentDisplayMode == .drawer ? bottomSafeArea : 0.0)
     }
     
     func supportedDrawerPositions() -> [PulleyPosition] {
         return [.partiallyRevealed, .collapsed] // You can specify the drawer positions you support. This is the same as: [.open, .partiallyRevealed, .collapsed, .closed]
     }
+}
+extension BottomSheetViewController {
+    
+    
+    
 }
