@@ -11,9 +11,10 @@ import UIKit
 enum CurrentModeToggle {
     case classic
     case focused
+    case fast
 }
 
-//MARK: Set Up the floating buttons, classic timer, ramreel
+//MARK: Set Up the floating buttons, classic timer
 
 extension ViewController {
     
@@ -49,16 +50,19 @@ extension ViewController {
     }
    
     func setUpTimers() {
+        fastTimer.eventHandler = {
+            self.fastFind()
+            if(false){
+                self.focusTimer.suspend() //keep strong reference
+            }
+        }
         classicTimer.eventHandler = {
             if self.isBusyProcessingImage == false {
                 self.processImage()
                 
-            } else {
-                print("busyPROCESSINGclassic+_+_+_+_+_+")
-                return
             }
             if(false){
-                self.classicTimer.suspend() //keep strong reference
+                self.classicTimer.suspend()
             }
         }
         focusTimer.eventHandler = {
@@ -67,12 +71,9 @@ extension ViewController {
                 if let pixelBuffer = self.sceneView.session.currentFrame?.capturedImage {
                     self.search(in: pixelBuffer)
                 }
-            } else {
-                print("busyPROCESSINGfocus+_+_+_+_+_+")
-                return
             }
             if(false){
-                self.focusTimer.suspend() //keep strong reference
+                self.focusTimer.suspend() 
             }
         }
     }

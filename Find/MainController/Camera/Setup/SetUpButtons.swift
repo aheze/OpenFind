@@ -37,11 +37,46 @@ extension ViewController {
             
             
         }
+    func toClassic() {
+        print("classicmode")
+        self.scanModeToggle = .classic
+        self.stopProcessingImage = false
+        self.classicTimer.resume()
+        self.enableAutoCoaching()
+        self.blurScreen(mode: "classic")
+        self.fastTimer.suspend()
+        self.focusTimer.suspend()
+        
+    }
+    func toFocus() {
+        self.scanModeToggle = .focused
+        self.fastTimer.suspend()
+        self.classicTimer.suspend()
+        self.classicHasFoundOne = false
+        print("focus")
+        self.stopCoaching()
+        self.stopProcessingImage = true
+        self.focusTimer.resume()
+        self.blurScreen(mode: "focus")
+    }
+    func toFast() {
+        self.scanModeToggle = .fast
+        self.classicHasFoundOne = false
+        self.stopCoaching()
+        self.stopProcessingImage = true
+        self.classicTimer.suspend()
+        self.focusTimer.suspend()
+        self.blurScreen(mode: "fast")
+        self.fastTimer.resume()
+        self.modeButton.close()
+    }
     func setUpButtons() {
-        self.statusBarHidden = true
-        UIView.animate(withDuration: 0.3, animations: {
-            self.setNeedsStatusBarAppearanceUpdate()
-        })
+//        self.statusBarHidden = true
+//        UIView.animate(withDuration: 0.3, animations: {
+//            self.setNeedsStatusBarAppearanceUpdate()
+//        })
+        
+        modeButton.buttonAnimationConfiguration = .transition(toImage: #imageLiteral(resourceName: "X Button Action"))
         
 //        let goToHist = menuButton.addItem()
 //        goToHist.titleLabel.text = "History"
@@ -53,6 +88,8 @@ extension ViewController {
 //            //self.t.suspend()
 //            //self.f.suspend()
 //        }
+       
+        
         let goToSett = menuButton.addItem()
         goToSett.titleLabel.text = "Settings"
         goToSett.imageView.image = #imageLiteral(resourceName: "bsettings 2")
@@ -82,56 +119,31 @@ extension ViewController {
 //
 //        }
         
+        let goToFast = modeButton.addItem()
+        goToFast.titlePosition = .trailing
+        goToFast.titleLabel.text = "Fast mode"
+        goToFast.imageView.image = #imageLiteral(resourceName: "bfast 2")
+        goToFast.action = { item in
+            self.toFast()
+        }
         
-        
-    let goToClassic = modeButton.addItem()
+        let goToClassic = modeButton.addItem()
         goToClassic.titlePosition = .trailing
         goToClassic.titleLabel.text = "Classic mode"
         goToClassic.imageView.image = #imageLiteral(resourceName: "bclassic 2")
         goToClassic.action = { item in
-            
-            
-            if self.scanModeToggle == .focused {
-                print("classicmode")
-                self.scanModeToggle = .classic
-                self.stopProcessingImage = false
-                self.classicTimer.resume()
-                //self.stopFinding = true
-                self.enableAutoCoaching()
-                self.blurScreen(mode: false)
-                self.focusTimer.suspend()
-                //self.f.suspend()
-                //self.stopLoopTag = false
-                //self.t.resume()
-            }
+            self.toClassic()
         }
         let goToFocus = modeButton.addItem()
         goToFocus.titlePosition = .trailing
         goToFocus.titleLabel.text = "Focus mode"
         goToFocus.imageView.image = #imageLiteral(resourceName: "bfocus 2")
         goToFocus.action = { item in
-            
-            
-            if self.scanModeToggle == .classic {
-                self.scanModeToggle = .focused
-                self.classicHasFoundOne = false
-                print("focus")
-                self.stopCoaching()
-                self.stopProcessingImage = true
-                self.classicTimer.suspend()
-                //self.stopLoopTag = true
-                //self.stopFinding = false
-                //self.t.suspend()
-                //self.numberOfFocusTimes = 0
-                //self.f.resume()
-                self.focusTimer.resume()
-                self.blurScreen(mode: true)
-            }
+            self.toFocus()
         }
         menuButton.overlayView.backgroundColor = UIColor.clear
         modeButton.overlayView.backgroundColor = UIColor.clear
     }
 
-    
     
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ARKit
 
 /// Ramreel setup
 extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
@@ -71,20 +72,18 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
             self.toolbarBottomConstraint.constant = self.keyboardHeight
             self.darkBlurEffect.alpha = 1
             if self.scanModeToggle == .focused {
-            if let tag1 = self.view.viewWithTag(1) {
-                print("1")
-                tag1.alpha = 0
+                if let tag1 = self.view.viewWithTag(1) {
+                    print("1")
+                    tag1.alpha = 0
+                }
+                if let tag2 = self.view.viewWithTag(2) {
+                    print("2")
+                    tag2.alpha = 0
+                }
             }
-            if let tag2 = self.view.viewWithTag(2) {
-                print("2")
-                tag2.alpha = 0
-            }
-            } else {
                 self.sceneView.session.pause()
                 self.stopProcessingImage = true
-//                self.classicTimer.suspend()
-//                print("suspend timer")
-            }
+            
              self.view.layoutIfNeeded()
         }, completion: nil)
     
@@ -103,21 +102,24 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
             self.darkBlurEffect.alpha = 0.7
             self.darkBlurEffectHeightConstraint.constant = 100
             
-            if self.scanModeToggle == .focused {
-            if let tag1 = self.view.viewWithTag(1) {
-                print("1")
-                tag1.alpha = 1
+                
+            switch self.scanModeToggle {
+            case .classic:
+                self.sceneView.session.run(self.sceneConfiguration) ///which is ARWorldTracking
+            case .fast:
+                self.sceneView.session.run(AROrientationTrackingConfiguration())
+                self.stopCoaching()
+            case .focused:
+                let config = ARImageTrackingConfiguration()
+                if let tag1 = self.view.viewWithTag(1) { tag1.alpha = 1 }
+                if let tag2 = self.view.viewWithTag(2) { tag2.alpha = 1 }
+                self.stopCoaching()
+                self.sceneView.session.run(config)
             }
-            if let tag2 = self.view.viewWithTag(2) {
-                print("2")
-                tag2.alpha = 1
-            }
-            } else {
-                self.sceneView.session.run(self.sceneConfiguration)
-                self.stopProcessingImage = false
+            self.stopProcessingImage = false
 //                self.classicTimer.resume()
 //                print("resume timer")
-            }
+        
             self.view.layoutIfNeeded()
         }, completion: {_ in
             self.toolbarView.isHidden = true

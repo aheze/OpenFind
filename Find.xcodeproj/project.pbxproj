@@ -49,6 +49,9 @@
 		495ECCA9238CF7BD00E7D966 /* HPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */; };
 		495ECCAB238DB7BD00E7D966 /* TitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCAA238DB7BD00E7D966 /* TitleSupplementaryView.swift */; };
 		4969373E2353C3D8009CA41A /* ShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4969373D2353C3D8009CA41A /* ShutterButton.swift */; };
+		4979A39023AF3A4800B09380 /* FastMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979A38F23AF3A4800B09380 /* FastMode.swift */; };
+		4979A39323AF3C4F00B09380 /* FastVisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979A39223AF3C4F00B09380 /* FastVisionHandler.swift */; };
+		4979A39523AF3F6900B09380 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979A39423AF3F6900B09380 /* Preview.swift */; };
 		4991344E236FDF1300B82E46 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991344D236FDF1200B82E46 /* SettingsViewController.swift */; };
 		49913450236FE12400B82E46 /* SettingsViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991344F236FE12400B82E46 /* SettingsViewExtensions.swift */; };
 		49913452236FE33B00B82E46 /* SettingsBasicSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49913451236FE33B00B82E46 /* SettingsBasicSetup.swift */; };
@@ -124,6 +127,9 @@
 		495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPhotoCell.swift; sourceTree = "<group>"; };
 		495ECCAA238DB7BD00E7D966 /* TitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSupplementaryView.swift; sourceTree = "<group>"; };
 		4969373D2353C3D8009CA41A /* ShutterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutterButton.swift; sourceTree = "<group>"; };
+		4979A38F23AF3A4800B09380 /* FastMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastMode.swift; sourceTree = "<group>"; };
+		4979A39223AF3C4F00B09380 /* FastVisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastVisionHandler.swift; sourceTree = "<group>"; };
+		4979A39423AF3F6900B09380 /* Preview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		4991344D236FDF1200B82E46 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4991344F236FE12400B82E46 /* SettingsViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewExtensions.swift; sourceTree = "<group>"; };
 		49913451236FE33B00B82E46 /* SettingsBasicSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBasicSetup.swift; sourceTree = "<group>"; };
@@ -257,6 +263,7 @@
 		496937352353C1E9009CA41A /* Modes */ = {
 			isa = PBXGroup;
 			children = (
+				4979A39123AF3B4B00B09380 /* Fast */,
 				496937372353C1FD009CA41A /* Focused */,
 				496937362353C1F4009CA41A /* Classic */,
 			);
@@ -337,6 +344,7 @@
 		4969373C2353C277009CA41A /* Camera */ = {
 			isa = PBXGroup;
 			children = (
+				496937352353C1E9009CA41A /* Modes */,
 				4999AC972353A80A00AB06A7 /* ViewController.swift */,
 				4999AC992353A80A00AB06A7 /* Main.storyboard */,
 				4999AC9E2353A81100AB06A7 /* LaunchScreen.storyboard */,
@@ -348,6 +356,16 @@
 				4951701E235AC5F200E00D83 /* ReelSearchBar */,
 			);
 			path = Camera;
+			sourceTree = "<group>";
+		};
+		4979A39123AF3B4B00B09380 /* Fast */ = {
+			isa = PBXGroup;
+			children = (
+				4979A39423AF3F6900B09380 /* Preview.swift */,
+				4979A38F23AF3A4800B09380 /* FastMode.swift */,
+				4979A39223AF3C4F00B09380 /* FastVisionHandler.swift */,
+			);
+			path = Fast;
 			sourceTree = "<group>";
 		};
 		4999AC872353A80A00AB06A7 = {
@@ -372,7 +390,6 @@
 			isa = PBXGroup;
 			children = (
 				496937382353C219009CA41A /* MainController */,
-				496937352353C1E9009CA41A /* Modes */,
 				4969373B2353C25B009CA41A /* Utilities */,
 				4999AC9C2353A81100AB06A7 /* Assets.xcassets */,
 				49B7A32C2390823C0070209F /* Colors.xcassets */,
@@ -582,6 +599,7 @@
 				49368CAD23905D3300B67C4A /* PulleyPassthroughScrollView.swift in Sources */,
 				49115089235D17EB00EC0C04 /* shutterPressed.swift in Sources */,
 				495ECCA7238CF76C00E7D966 /* NewHistoryViewController.swift in Sources */,
+				4979A39523AF3F6900B09380 /* Preview.swift in Sources */,
 				49517018235AC56D00E00D83 /* Theme.swift in Sources */,
 				4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */,
 				49F7B1542353FDF40099FA62 /* VisionHandler.swift in Sources */,
@@ -599,8 +617,10 @@
 				49089E1F238EFFFA0070A70C /* FooterView.swift in Sources */,
 				49517015235AC56D00E00D83 /* CollectionViewLayout.swift in Sources */,
 				49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */,
+				4979A39323AF3C4F00B09380 /* FastVisionHandler.swift in Sources */,
 				494DF11B23961ADA0076412D /* BDVCTranscript.swift in Sources */,
 				49368CB023905D3300B67C4A /* PulleyViewController.swift in Sources */,
+				4979A39023AF3A4800B09380 /* FastMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

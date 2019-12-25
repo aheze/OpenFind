@@ -80,7 +80,7 @@ extension ViewController {
     
     }
     
-    func blurScreen(mode toFocusMode: Bool) {
+    func blurScreen(mode: String) {
         let effect = UIBlurEffect(style: .light)
         let blurView = UIVisualEffectView(effect: effect)
         blurView.frame = view.bounds
@@ -94,71 +94,71 @@ extension ViewController {
         view.bringSubviewToFront(refreshButton)
         view.bringSubviewToFront(menuButton)
         view.bringSubviewToFront(ramReel.view)
+        guard let tag1 = self.view.viewWithTag(1) else {return}
+        guard let tag2 = self.view.viewWithTag(2) else {return}
+        switch mode {
         
-        if toFocusMode == false {
+        case "classic":
             //to classic
+            
+            sceneView.session.pause()
             UIView.animate(withDuration: 0.2, animations: {
                 blurView.alpha = 1
-                if let tag1 = self.view.viewWithTag(1) {
-                    tag1.alpha = 0
-                }
-                if let tag2 = self.view.viewWithTag(2) {
-                    tag2.alpha = 0
-                }
+                tag1.alpha = 0
+                tag2.alpha = 0
             }, completion: { _ in
                 let configuration = ARWorldTrackingConfiguration()
                 configuration.planeDetection = .horizontal
-            
-                self.sceneView.session.pause()
                 self.sceneView.session.run(configuration, options: [.removeExistingAnchors, .resetTracking])
-                self.modeButton.imageView.image = #imageLiteral(resourceName: "bfocus 2")
-            })
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8, execute: {
-                UIView.animate(withDuration: 0.5, animations: {blurView.alpha = 0}, completion: {_ in
-                    blurView.removeFromSuperview()})
-            })
-        } else {
-            if let tag1 = self.view.viewWithTag(1) {
-                print("1")
-                self.view.bringSubviewToFront(tag1)
-            }
-            if let tag2 = self.view.viewWithTag(2) {
-                 print("2")
-                self.view.bringSubviewToFront(tag2)
-            }
-            //focusmode
-            UIView.animate(withDuration: 0.2, animations: {blurView.alpha = 1}, completion: { _ in
-                UIView.animate(withDuration: 0.2, animations: {
-                    if let tag1 = self.view.viewWithTag(1) {
-                        tag1.alpha = 1
-                    }
-                    if let tag2 = self.view.viewWithTag(2) {
-                        tag2.alpha = 1
-                    }
-                })
-                let action = SCNAction.fadeOut(duration: 1)
-                for h in self.classicHighlightArray {
-                    h.runAction(action, completionHandler: {() in
-                        h.removeFromParentNode()
-                        print("remove")
-                    })
-                }
-                for h in self.secondClassicHighlightArray {
-                        h.runAction(action, completionHandler: {
-                            () in h.removeFromParentNode()
-                            print("remove123")
-                        })
-                }
-                self.sceneView.session.pause()
-                self.runImageTrackingSession(with: [], runOptions: [.removeExistingAnchors, .resetTracking])
                 self.modeButton.imageView.image = #imageLiteral(resourceName: "bclassic 2")
+                self.fastFindingToggle = .inactive
             })
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8, execute: {
                 UIView.animate(withDuration: 0.5, animations: {blurView.alpha = 0}, completion: {_ in
                     blurView.removeFromSuperview()})
             })
+        case "focus":
+            //focusmode
+            sceneView.session.pause()
+            UIView.animate(withDuration: 0.2, animations: {
+                blurView.alpha = 1
+                tag1.alpha = 1
+                tag2.alpha = 1
+            }, completion: { _ in
+                self.fadeClassicHighlights()
+                self.runImageTrackingSession(with: [], runOptions: [.removeExistingAnchors, .resetTracking])
+                self.modeButton.imageView.image = #imageLiteral(resourceName: "bfocus 2")
+                self.fastFindingToggle = .inactive
+            })
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8, execute: {
+                UIView.animate(withDuration: 0.5, animations: {blurView.alpha = 0}, completion: {_ in
+                    blurView.removeFromSuperview()})
+            })
+        case "fast":
+            print("fast")
+            sceneView.session.pause()
+            UIView.animate(withDuration: 0.2, animations: {
+                blurView.alpha = 1
+                tag1.alpha = 0
+                tag2.alpha = 0
+            }, completion: { _ in
+                let configuration = AROrientationTrackingConfiguration()
+                self.sceneView.session.run(configuration, options: [.removeExistingAnchors, .resetTracking])
+                self.modeButton.imageView.image = #imageLiteral(resourceName: "bfast 2")
+                self.fastFindingToggle = .notBusy
+                
+            })
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
+                UIView.animate(withDuration: 0.3, animations: {blurView.alpha = 0}, completion: {_ in
+                    blurView.removeFromSuperview()})
+                ///make it seem like it's FAST (the blur fades much faster)
+            })
+            
+        default:
+            print("error, default, blur")
         }
     }
+    
     func refreshScreen() {
         var option = RippleEffect.option()
         var xOrig = deviceSize.width / 2
@@ -197,6 +197,21 @@ extension ViewController {
                 self.classicTimer.resume()
             }
             })
+    }
+    func fadeClassicHighlights() {
+        let action = SCNAction.fadeOut(duration: 1)
+        for h in self.classicHighlightArray {
+            h.runAction(action, completionHandler: {() in
+                h.removeFromParentNode()
+                print("remove")
+            })
+        }
+        for h in self.secondClassicHighlightArray {
+            h.runAction(action, completionHandler: {
+                () in h.removeFromParentNode()
+                print("remove123")
+            })
+        }
     }
     
 }

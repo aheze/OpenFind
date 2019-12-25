@@ -59,32 +59,32 @@ extension ZoomTransitionController: UIViewControllerTransitioningDelegate {
     }
 
 }
-
-extension ZoomTransitionController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        if operation == .push {
-            self.animator.isPresenting = true
-            self.animator.fromDelegate = fromDelegate
-            self.animator.toDelegate = toDelegate
-        } else {
-            self.animator.isPresenting = false
-            let tmp = self.fromDelegate
-            self.animator.fromDelegate = self.toDelegate
-            self.animator.toDelegate = tmp
-        }
-        
-        return self.animator
-    }
-    
-    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        
-        if !self.isInteractive {
-            return nil
-        }
-        
-        self.interactionController.animator = animator
-        return self.interactionController
-    }
-
-}
+//
+//extension ZoomTransitionController: UINavigationControllerDelegate {
+//    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//
+//        if operation == .push {
+//            self.animator.isPresenting = true
+//            self.animator.fromDelegate = fromDelegate
+//            self.animator.toDelegate = toDelegate
+//        } else {
+//            self.animator.isPresenting = false
+//            let tmp = self.fromDelegate
+//            self.animator.fromDelegate = self.toDelegate
+//            self.animator.toDelegate = tmp
+//        }
+//
+//        return self.animator
+//    }
+//
+//    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+//
+//        if !self.isInteractive {
+//            return nil
+//        }
+//
+//        self.interactionController.animator = animator
+//        return self.interactionController
+//    }
+//
+//}

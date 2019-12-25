@@ -134,6 +134,23 @@ class ViewController: UIViewController {
             }
         }
     }
+    ///FAST MODE
+    enum FastFinding {
+        case busy
+        case notBusy
+        case inactive
+    }
+    var fastFindingToggle = FastFinding.inactive
+    lazy var fastTextDetectionRequest = VNRecognizeTextRequest(completionHandler: handleFastDetectedText)
+    var startFastFinding = false
+    var fastTimer = RepeatingTimer(timeInterval: 0.02)
+    var previousComponents = [Component]()
+    var currentComponents = [Component]()
+    var nextComponents = [Component]()
+    var componentsToLayers = [Component: CALayer]()
+    var numberCurrentFastmodePass: Int = 0
+    var numberOfFastMatches: Int = 0
+
     
     ///CLASSIC MODE
     let classicTimer = RepeatingTimer(timeInterval: 0.8)
@@ -148,6 +165,7 @@ class ViewController: UIViewController {
             var classicHasFoundOne : Bool = false
             var processImageNumberOfPasses = 0
             var numberOfHighlights : Int = 0
+    var sizeOfPixelBufferFast : CGSize = CGSize(width: 0, height: 0)
     lazy var textDetectionRequest = VNRecognizeTextRequest(completionHandler: handleDetectedText)
 //        let request = VNRecognizeTextRequest(completionHandler: self.handleDetectedText)
 //        request.recognitionLevel = .fast
@@ -237,13 +255,19 @@ class ViewController: UIViewController {
             object: nil
         )
     }
+    var testCurrent = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        while testCurrent == 1 {
+            testCurrent += 1
+        }
         //MARK: Sceneview
         setUpARDelegates()
         
+        fastTextDetectionRequest.recognitionLevel = .fast
+        fastTextDetectionRequest.recognitionLanguages = ["en_GB"]
+        fastTextDetectionRequest.usesLanguageCorrection = true
         textDetectionRequest.recognitionLevel = .fast
         textDetectionRequest.recognitionLanguages = ["en_GB"]
         textDetectionRequest.usesLanguageCorrection = true
@@ -269,12 +293,19 @@ class ViewController: UIViewController {
         }
         
         switch scanModeToggle {
-            case .classic:
-                print("Classic Mode")
-                classicTimer.resume()
-            case .focused:
-                print("Focus Mode")
-            
+        case .classic:
+//            print("Classic Mode")
+//            previewView.isHidden = true
+//            classicTimer.resume()
+            toClassic()
+        case .focused:
+            print("Focus Mode")
+            //previewView.isHidden = true
+            toFocus()
+        case .fast:
+            print("fast mode")
+           // previewView.isHidden = false
+            toFast()
         }
         
         

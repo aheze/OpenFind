@@ -265,7 +265,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-29" y="34"/>
+            <point key="canvasLocation" x="-29.600000000000001" y="33.733133433283363"/>
         </scene>
         <!--HistoryViewController-->
         <scene sceneID="9Er-BC-1Jm">

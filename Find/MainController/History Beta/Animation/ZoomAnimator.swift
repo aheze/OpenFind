@@ -111,9 +111,10 @@ class ZoomAnimator: NSObject {
             containerView.addSubview(transitionImageView)
         }
         
-        containerView.insertSubview(fromVC.view, belowSubview: toVC.view)
+        //containerView.insertSubview(fromVC.view, belowSubview: toVC.view)
         ///also had to switch these... dismissing no longer results in Black Screen Of Death!!!
-        
+       // containerView.insertSubview(fromVC.view, belowSubview: toVC.view)
+        containerView.insertSubview(fromVC.view, aboveSubview: toVC.view)
         //fromReferenceImageView.isHidden = true
         ///prevents a white flash, use below instead of aforementioned
         fromReferenceImageView.isHidden = false
