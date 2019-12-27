@@ -186,13 +186,34 @@ open class ShutterButton: UIButton {
         )
     }
     
+//     private var _roundRectPath: UIBezierPath {
+//         let side = bounds.width * 0.4242
+//         return UIBezierPath(
+//             roundedRect: CGRect(x: bounds.width/2 - side/2, y: bounds.width/2 - side/2, width: side, height: side),
+//             cornerRadius: side * 0.107
+//         )
+//     }
     private var _roundRectPath: UIBezierPath {
-        let side = bounds.width * 0.4242
-        return UIBezierPath(
-            roundedRect: CGRect(x: bounds.width/2 - side/2, y: bounds.width/2 - side/2, width: side, height: side),
-            cornerRadius: side * 0.107
-        )
+        let size = bounds.width * 0.38
+        let newWidth = sqrt(pow(size, 2) - pow((size/2), 2)
+        let cgPath = createRoundedTriangle(width: newWidth, height: size)
+        let trianglePath = UIBezierPath(cgPath: cgPath)
+        return trianglePath
     }
+  func createRoundedTriangle(width: CGFloat, height: CGFloat, radius: CGFloat) -> CGPath {
+     let point1 = CGPoint(x: -width / 2, y: height / 2)
+     let point2 = CGPoint(x: 0, y: -height / 2)
+     let point3 = CGPoint(x: width / 2, y: height / 2)
+
+     let path = CGMutablePath()
+     path.move(to: CGPoint(x: 0, y: height / 2))
+     path.addArc(tangent1End: point1, tangent2End: point2, radius: radius)
+     path.addArc(tangent1End: point2, tangent2End: point3, radius: radius)
+     path.addArc(tangent1End: point3, tangent2End: point1, radius: radius)
+     path.closeSubpath()
+
+     return path
+ }
     
     private var _rotatePath: UIBezierPath {
         let path = UIBezierPath()
