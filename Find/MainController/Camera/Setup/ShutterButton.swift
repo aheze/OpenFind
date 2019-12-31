@@ -35,6 +35,9 @@ import UIKit
 @IBDesignable
 open class ShutterButton: UIButton {
     
+    var miniTriangle = CAShapeLayer()
+    
+    
     @objc
     public enum ShutterType: Int {
         case normal, slowMotion, timeLapse
@@ -95,6 +98,11 @@ open class ShutterButton: UIButton {
     @objc
     public var buttonState: ButtonState = .normal {
         didSet {
+//            let size = bounds.width * 0.8
+//            let newWidth = sqrt(pow(size, 2) - pow((size/2), 2))
+//            let cgPath = createRoundedTriangle(width: newWidth, height: size, radius: size/6)
+//            let trianglePath = UIBezierPath(cgPath: cgPath)
+//                    //var triBounds = CGRect(x: 0, y: 0, width: newWidth, height: size)
             let animation = CABasicAnimation(keyPath: "path")
             animation.fromValue = _circleLayer.path
             animation.duration  = 0.15
@@ -137,6 +145,7 @@ open class ShutterButton: UIButton {
         let layer = CAShapeLayer()
         layer.path      = self._circlePath.cgPath
         layer.fillColor = self.buttonColor.cgColor
+        layer.position = CGPoint(x: 0, y: 0)
         return layer
     }()
     
@@ -186,20 +195,37 @@ open class ShutterButton: UIButton {
         )
     }
     
-//     private var _roundRectPath: UIBezierPath {
-//         let side = bounds.width * 0.4242
-//         return UIBezierPath(
-//             roundedRect: CGRect(x: bounds.width/2 - side/2, y: bounds.width/2 - side/2, width: side, height: side),
-//             cornerRadius: side * 0.107
-//         )
-//     }
-    private var _roundRectPath: UIBezierPath {
-        let size = bounds.width * 0.38
-        let newWidth = sqrt(pow(size, 2) - pow((size/2), 2)
-        let cgPath = createRoundedTriangle(width: newWidth, height: size)
-        let trianglePath = UIBezierPath(cgPath: cgPath)
-        return trianglePath
-    }
+     private var _roundRectPath: UIBezierPath {
+         let side = bounds.width * 0.4242
+         return UIBezierPath(
+             roundedRect: CGRect(x: bounds.width/2 - side/2, y: bounds.width/2 - side/2, width: side, height: side),
+             cornerRadius: side * 0.107
+         )
+     }
+//    private var _roundRectPath: UIBezierPath {
+//        let size = bounds.width * 0.8
+//        print(size)
+//        let newWidth = sqrt(pow(size, 2) - pow((size/2), 2))
+//        print(newWidth)
+//        //let cgPath = createRoundedTriangle(width: newWidth, height: size, radius: size/6)
+//        //let trianglePath = UIBezierPath(cgPath: cgPath)
+//        //var triBounds = CGRect(x: 0, y: 0, width: newWidth, height: size)
+//        return createTriangle()
+//    }
+//    func createTriangle() -> UIBezierPath {
+//
+//        let size = bounds.width * 0.8
+//        let newWidth = sqrt(pow(size, 2) - pow((size/2), 2))
+//        let freeform = UIBezierPath()
+//        let point = CGPoint(x: 0, y: 0)
+//        freeform.move(to: point)
+//        freeform.addLine(to: CGPoint(x: 50, y: 50))
+//        freeform.addLine(to: CGPoint(x: 50, y: 150))
+//        freeform.addLine(to: CGPoint(x: 150, y: 50))
+//        freeform.addLine(to: .zero)
+//        return freeform
+//
+//    }
   func createRoundedTriangle(width: CGFloat, height: CGFloat, radius: CGFloat) -> CGPath {
      let point1 = CGPoint(x: -width / 2, y: height / 2)
      let point2 = CGPoint(x: 0, y: -height / 2)

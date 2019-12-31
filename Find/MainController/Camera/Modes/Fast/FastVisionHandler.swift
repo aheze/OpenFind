@@ -19,7 +19,8 @@ extension ViewController {
         }
         
         for result in results {
-            numberOfFastMatches = 0
+            //numberOfFastMatches = 0
+            var foundAMatch = false
             if let observation = result as? VNRecognizedTextObservation {
                for text in observation.topCandidates(1) {
                     //print(text.string)
@@ -31,103 +32,230 @@ extension ViewController {
                     component.text = text.string
                     drawFastHighlight(component: component)
                     if component.text.contains(finalTextToFind) {
-                        print(component.text)
-                        nextComponents.append(component)
-                        numberOfFastMatches += 1
-                        animateFoundFastChange(newComponent: component)
+                        foundAMatch = true
+                        let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
+                        let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
+                        let offHalf = offsetWidth / 2
+                        let newW = component.width * convertedOriginalWidthOfBigImage
+                        let newH = component.height * self.deviceSize.height
+                        let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
+                        let newY = component.y * self.deviceSize.height
+                        let individualCharacterWidth = newW / CGFloat(component.text.count)
+                        let finalW = individualCharacterWidth * CGFloat(finalTextToFind.count)
                         
-                        
+                        let indicies = component.text.indicesOf(string: finalTextToFind)
+                        for index in indicies {
+                            let addedWidth = individualCharacterWidth * CGFloat(index)
+                            let finalX = newX + addedWidth
+                            let newComponent = Component()
+                            newComponent.x = finalX
+                            newComponent.y = newY
+                            newComponent.width = finalW
+                            newComponent.height = newH
+                            newComponent.text = "This value is not needed"
+                            nextComponents.append(newComponent)
+                            
+                        }
                     }
+                
                 }
             }
+            
         }
+        animateFoundFastChange()
         numberOfFastMatches = 0
     }
-    func animateFoundFastChange(newComponent: Component) {
-        
-        let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
-        let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
-        let offHalf = offsetWidth / 2
-        
-        let newW = newComponent.width * convertedOriginalWidthOfBigImage
-        let newH = newComponent.height * self.deviceSize.height
-        let newX = newComponent.x * convertedOriginalWidthOfBigImage - offHalf
-        let newY = newComponent.y * self.deviceSize.height
-        
-        let individualCharacterWidth = newW / CGFloat(newComponent.text.count)
-        //print(newComponent.text.count)
-        //print(individualCharacterWidth)
-        let indicies = newComponent.text.indicesOf(string: finalTextToFind)
-        
-       // if numberOfFastMatches == 0 {
-            for index in indicies {
-                let addedWidth = individualCharacterWidth * CGFloat(index)
-                let finalX = newX + addedWidth
-                let finalW = individualCharacterWidth * CGFloat(finalTextToFind.count)
-                let layer = CAShapeLayer()
-                layer.frame = CGRect(x: finalX, y: newY, width: finalW, height: newH)
-                layer.cornerRadius = newH / 3.5
-                let newLayer = CAShapeLayer()
-                newLayer.bounds = layer.frame
-                newLayer.path = UIBezierPath(roundedRect: layer.frame, cornerRadius: newH / 3.5).cgPath
-                newLayer.fillColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 0.6483304795)
-                newLayer.strokeColor = #colorLiteral(red: 0.1896808545, green: 0.5544475485, blue: 0.8020701142, alpha: 1)
-                newLayer.lineWidth = 3
-                newLayer.lineCap = .round
-                
-                if numberOfFastMatches == 0 {
-                
-                    let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
-                    strokeAnimation.fromValue = 0
-                    strokeAnimation.toValue = 1
-                    strokeAnimation.duration = 0.3
-                    strokeAnimation.autoreverses = false
-                    strokeAnimation.repeatCount = 0
-                    newLayer.add(strokeAnimation, forKey: "line")
+    func scaleInHighlight(layer: CAShapeLayer, newLayer: CAShapeLayer) {
+        let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        strokeAnimation.fromValue = 0
+        strokeAnimation.toValue = 1
+        strokeAnimation.duration = 0.3
+        strokeAnimation.autoreverses = false
+        strokeAnimation.repeatCount = 0
+        newLayer.add(strokeAnimation, forKey: "line")
 
-                    view.layer.insertSublayer(layer, above: sceneView.layer)
-                    layer.addSublayer(newLayer)
-                    layerScaleAnimation(layer: newLayer, duration: 0.2, fromValue: 1.2, toValue: 1)
-                    //currentComponents = nextComponents
-                    
-                } else {
-                    for nextComp in nextComponents {
-                        var arrayOfDistances = [CGFloat]()
-                        for comp in currentComponents {
-                            let currentCompPoint = CGPoint(x: comp.x, y: comp.y)
-                            let nextCompPoint = CGPoint(x: nextComp.x, y: nextComp.y)
-                            let distanceBetweenPoints = distance(currentCompPoint, nextCompPoint) //< 10 {
-                            arrayOfDistances.append(distanceBetweenPoints)
-                        }
-                        print(arrayOfDistances)
-                        guard let minDist = arrayOfDistances.min() else { return }
-                        guard let position = arrayOfDistances.firstIndex(of: minDist) else {return}
-                        if minDist <= 10 {
-                            let oldComp = currentComponents[position]
-                            let oldLayer = componentsToLayers[oldComp]
-                            let moveAnimation = CABasicAnimation(keyPath: "position")
-                            
-                            let currentCompPoint = CGPoint(x: oldComp.x, y: oldComp.y)
-                            let nextCompPoint = CGPoint(x: nextComp.x, y: nextComp.y)
-                            
-                            moveAnimation.fromValue = currentCompPoint            // animate from current position ...
-                            moveAnimation.toValue = nextCompPoint                         // ... to wherever the new position is
-                            moveAnimation.duration = 2
-                            
-                            oldLayer?.position = nextCompPoint                       // set the shape's final position to be the new position so when the animation is done, it's at its new "home"
-                            oldLayer?.add(moveAnimation, forKey: nil)
-                        }
-                    }
-                    currentComponents = nextComponents
-                    
-                }
+        view.layer.insertSublayer(layer, above: sceneView.layer)
+        layer.addSublayer(newLayer)
+        layerScaleAnimation(layer: newLayer, duration: 0.2, fromValue: 1.2, toValue: 1)
+    }
+    func animateFoundFastChange() {
+        for newComponent in nextComponents {
+            //print("ans")
+            let layer = CAShapeLayer()
+            layer.frame = CGRect(x: newComponent.x, y: newComponent.y, width: newComponent.width, height: newComponent.height)
+            layer.cornerRadius = newComponent.height / 3.5
+            print(newComponent.x)
+            let newLayer = CAShapeLayer()
+            newLayer.bounds = layer.frame
+            newLayer.path = UIBezierPath(roundedRect: layer.frame, cornerRadius: newComponent.height / 3.5).cgPath
+            newLayer.fillColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 0.6483304795)
+            newLayer.strokeColor = #colorLiteral(red: 0.1896808545, green: 0.5544475485, blue: 0.8020701142, alpha: 1)
+            newLayer.lineWidth = 3
+            newLayer.lineCap = .round
+            
+            var arrayOfDistances = [CGFloat]()
+            var num = 0
+            for oldComponent in currentComponents {
+                print("old:")
+                print(oldComponent.x)
+                num += 1
+                //print(num)
+                let currentCompPoint = CGPoint(x: oldComponent.x, y: oldComponent.y)
+                let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
+                let distanceBetweenPoints = distance(currentCompPoint, nextCompPoint) //< 10
+                arrayOfDistances.append(distanceBetweenPoints)
+                //print(distanceBetweenPoints)
             }
-//        } else {
+            if let minDist = arrayOfDistances.min() {
+                //print(arrayOfDistances)
+                //print(minDist)
+                if let position = arrayOfDistances.firstIndex(of: minDist) {
+                    if minDist <= 8 {
+                        let oldComp = currentComponents[position]
+                        let oldLayer = componentsToLayers[oldComp]
+                        let moveAnimation = CABasicAnimation(keyPath: "position")
+
+                        print(oldComp.x)
+                        let currentCompPoint = CGPoint(x: oldComp.x, y: oldComp.y)
+                        let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
+                        print(currentCompPoint)
+                        print(nextCompPoint)
+                        moveAnimation.fromValue = currentCompPoint            // animate from current position ...
+                        moveAnimation.toValue = nextCompPoint                         // ... to wherever the new position is
+                        moveAnimation.duration = 2
+                        
+//                        let newLayer = CAShapeLayer()
+//                        lay
+                        oldLayer?.position = nextCompPoint                       // set the shape's final position to be the new position so when the animation is done, it's at its new "home"
+                        oldLayer?.add(moveAnimation, forKey: nil)
+                        
+                    } else {
+                        print("no1")
+                        scaleInHighlight(layer: layer, newLayer: newLayer)
+                    }
+                } else {
+                    print("no2")
+                    scaleInHighlight(layer: layer, newLayer: newLayer)
+                }
+            } else {
+                print("no3")
+                scaleInHighlight(layer: layer, newLayer: newLayer)
+            }
+            
+            
+            
+        }
+//        for newComponent in newComponents {
 //
+//        let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
+//        let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
+//        let offHalf = offsetWidth / 2
 //
+//        let newW = newComponent.width * convertedOriginalWidthOfBigImage
+//        let newH = newComponent.height * self.deviceSize.height
+//        let newX = newComponent.x * convertedOriginalWidthOfBigImage - offHalf
+//        let newY = newComponent.y * self.deviceSize.height
+//
+//        let individualCharacterWidth = newW / CGFloat(newComponent.text.count)
+//        //print(newComponent.text.count)
+//        //print(individualCharacterWidth)
+//        let indicies = newComponent.text.indicesOf(string: finalTextToFind)
+//
+//       // if numberOfFastMatches == 0 {
+//            for index in indicies {
+//                let addedWidth = individualCharacterWidth * CGFloat(index)
+//                let finalX = newX + addedWidth
+//                let finalW = individualCharacterWidth * CGFloat(finalTextToFind.count)
+//                let layer = CAShapeLayer()
+//                layer.frame = CGRect(x: finalX, y: newY, width: finalW, height: newH)
+//                layer.cornerRadius = newH / 3.5
+//                let newLayer = CAShapeLayer()
+//                newLayer.bounds = layer.frame
+//                newLayer.path = UIBezierPath(roundedRect: layer.frame, cornerRadius: newH / 3.5).cgPath
+//                newLayer.fillColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 0.6483304795)
+//                newLayer.strokeColor = #colorLiteral(red: 0.1896808545, green: 0.5544475485, blue: 0.8020701142, alpha: 1)
+//                newLayer.lineWidth = 3
+//                newLayer.lineCap = .round
+//
+//                if numberOfFastMatches == 0 {
+//
+//                    let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
+//                    strokeAnimation.fromValue = 0
+//                    strokeAnimation.toValue = 1
+//                    strokeAnimation.duration = 0.3
+//                    strokeAnimation.autoreverses = false
+//                    strokeAnimation.repeatCount = 0
+//                    newLayer.add(strokeAnimation, forKey: "line")
+//
+//                    view.layer.insertSublayer(layer, above: sceneView.layer)
+//                    layer.addSublayer(newLayer)
+//                    layerScaleAnimation(layer: newLayer, duration: 0.2, fromValue: 1.2, toValue: 1)
+//                    //currentComponents = nextComponents
+//
+//                } else {
+//                    for nextComp in nextComponents {
+//                        print("sdgb")
+//                        var arrayOfDistances = [CGFloat]()
+//                        for comp in currentComponents {
+//                            let currentCompPoint = CGPoint(x: comp.x, y: comp.y)
+//                            let nextCompPoint = CGPoint(x: nextComp.x, y: nextComp.y)
+//                            let distanceBetweenPoints = distance(currentCompPoint, nextCompPoint) //< 10 {
+//                            arrayOfDistances.append(distanceBetweenPoints)
+//                        }
+//                        print(arrayOfDistances)
+//                        guard let minDist = arrayOfDistances.min() else { return }
+//                        guard let position = arrayOfDistances.firstIndex(of: minDist) else {return}
+//                        if minDist <= 10 {
+//
+//                            let oldComp = currentComponents[position]
+//                            let oldLayer = componentsToLayers[oldComp]
+//                            let moveAnimation = CABasicAnimation(keyPath: "position")
+//
+//                            let currentCompPoint = CGPoint(x: oldComp.x, y: oldComp.y)
+//                            let nextCompPoint = CGPoint(x: nextComp.x, y: nextComp.y)
+//
+//                            moveAnimation.fromValue = currentCompPoint            // animate from current position ...
+//                            moveAnimation.toValue = nextCompPoint                         // ... to wherever the new position is
+//                            moveAnimation.duration = 2
+//
+//                            oldLayer?.position = nextCompPoint                       // set the shape's final position to be the new position so when the animation is done, it's at its new "home"
+//                            oldLayer?.add(moveAnimation, forKey: nil)
+//                        }
+//
+//                        if currentComponents.count == 0 {
+//
+//                            let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
+//                                               strokeAnimation.fromValue = 0
+//                                               strokeAnimation.toValue = 1
+//                                               strokeAnimation.duration = 0.3
+//                                               strokeAnimation.autoreverses = false
+//                                               strokeAnimation.repeatCount = 0
+//                                               newLayer.add(strokeAnimation, forKey: "line")
+//
+//                                               view.layer.insertSublayer(layer, above: sceneView.layer)
+//                                               layer.addSublayer(newLayer)
+//                                               layerScaleAnimation(layer: newLayer, duration: 0.2, fromValue: 1.2, toValue: 1)
+//                        }
+//                    }
+        currentComponents.removeAll()
+//        for next in nextComponents {
+//            print("nextX")
+//            print(next.x)
+//            currentComponents.append(next)
 //        }
-        
-        
+       
+        currentComponents = nextComponents
+         nextComponents.removeAll()
+        print("_____________________________")
+//
+//                }
+//            }
+////        } else {
+////
+////
+////        }
+//
+//    }
     }
     
     func distance(_ a: CGPoint, _ b: CGPoint) -> CGFloat {
