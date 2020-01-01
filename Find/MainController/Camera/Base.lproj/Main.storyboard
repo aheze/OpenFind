@@ -180,13 +180,13 @@
                                 <rect key="frame" x="310" y="200" width="55" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TYY-8J-adY" userLabel="Number">
-                                        <rect key="frame" x="18.5" y="10" width="18" height="35"/>
+                                        <rect key="frame" x="18.5" y="42.5" width="18" height="35"/>
                                         <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3v-fM-RvH">
-                                        <rect key="frame" x="8" y="49" width="39" height="30"/>
+                                        <rect key="frame" x="8" y="81.5" width="39" height="30"/>
                                         <state key="normal" title="Down">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -195,7 +195,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sCS-Fm-6VX">
-                                        <rect key="frame" x="12.5" y="-24" width="30" height="30"/>
+                                        <rect key="frame" x="12.5" y="8.5" width="30" height="30"/>
                                         <state key="normal" title="Up">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -211,7 +211,7 @@
                                     <constraint firstItem="s3v-fM-RvH" firstAttribute="top" secondItem="TYY-8J-adY" secondAttribute="bottom" constant="4" id="FHh-C2-nJN"/>
                                     <constraint firstItem="s3v-fM-RvH" firstAttribute="centerX" secondItem="P33-md-CCv" secondAttribute="centerX" id="HFU-3V-LPp"/>
                                     <constraint firstAttribute="width" constant="55" id="Kjk-VP-9dh"/>
-                                    <constraint firstAttribute="height" constant="55" id="MiV-gG-hBI" userLabel="Matches Height Constraint"/>
+                                    <constraint firstAttribute="height" constant="120" id="MiV-gG-hBI" userLabel="Matches Height Constraint"/>
                                     <constraint firstItem="sCS-Fm-6VX" firstAttribute="centerX" secondItem="P33-md-CCv" secondAttribute="centerX" id="VXw-A3-TPx"/>
                                     <constraint firstItem="TYY-8J-adY" firstAttribute="centerY" secondItem="P33-md-CCv" secondAttribute="centerY" id="ZAr-CK-lVZ"/>
                                 </constraints>

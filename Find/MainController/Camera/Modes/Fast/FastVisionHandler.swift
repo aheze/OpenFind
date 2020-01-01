@@ -8,6 +8,7 @@
 
 import UIKit
 import Vision
+import ARKit
 
 extension ViewController {
     
@@ -24,7 +25,7 @@ extension ViewController {
                     //print(text.string)
                     let component = Component()
                     component.x = observation.boundingBox.origin.x
-                    component.y = 1 - observation.boundingBox.origin.y
+                    component.y = 1 - observation.boundingBox.minY
                     component.height = observation.boundingBox.height
                     component.width = observation.boundingBox.width
                     component.text = text.string
@@ -46,7 +47,7 @@ extension ViewController {
                             let finalX = newX + addedWidth
                             let newComponent = Component()
                             newComponent.x = finalX
-                            newComponent.y = newY
+                            newComponent.y = newY - newH
                             newComponent.width = finalW
                             newComponent.height = newH
                             newComponent.text = "This value is not needed"
@@ -76,13 +77,10 @@ extension ViewController {
             let newLayer = CAShapeLayer()
             newLayer.bounds = layer.frame
             newLayer.path = UIBezierPath(roundedRect: layer.frame, cornerRadius: component.height / 3.5).cgPath
-            newLayer.fillColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 0.6483304795)
+            newLayer.fillColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 0.3030554367)
             newLayer.strokeColor = #colorLiteral(red: 0.1896808545, green: 0.5544475485, blue: 0.8020701142, alpha: 1)
             newLayer.lineWidth = 3
             newLayer.lineCap = .round
-            
-            self.componentsToLayers[component] = layer
-            self.layersToSublayers[layer] = newLayer
             
             let newView = UIView(frame: CGRect(x: component.x, y: component.y, width: component.width, height: component.height))
             self.view.insertSubview(newView, aboveSubview: self.sceneView)
@@ -116,9 +114,11 @@ extension ViewController {
     }
     
     func animateFoundFastChange() {
-        
-        
-
+        print("next: \(nextComponents.count)")
+        DispatchQueue.main.async {
+            self.numberLabel.fadeTransition(0.3)
+            self.numberLabel.text = "\(self.nextComponents.count)"
+        }
         
         
         for newComponent in nextComponents {
@@ -188,10 +188,9 @@ extension ViewController {
             
             
             if !tempComponents.contains(comp) {
-//            if comp.changed == false {
                 let theView = comp.baseView
                 print("remove comp because didn't change")
-                //comp.changed = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
                     DispatchQueue.main.async {
                         UIView.animate(withDuration: 0.2, animations: {
                             theView?.alpha = 0
@@ -199,9 +198,9 @@ extension ViewController {
                             theView?.isHidden = true
                             theView?.removeFromSuperview()
                             self.currentComponents.remove(object: comp)
-                            //self.componentsToViews.removeValue(forKey: comp)
                         })
                     }
+                })
                 //comp.changed = true
 //            } else { ///    position has been changed
 //                print("position changed")
@@ -218,14 +217,19 @@ extension ViewController {
         
                 for next in nextComponents {
                     if !tempComponents.contains(next) == true {
-                         DispatchQueue.main.async {
-                           UIView.animate(withDuration: 0.2, animations: {
-                               next.baseView?.alpha = 0
-                           }, completion: { _ in
-                               next.baseView?.isHidden = true
-                               next.baseView?.removeFromSuperview()
-                           })
-                       }
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
+                            DispatchQueue.main.async {
+                               UIView.animate(withDuration: 0.3, animations: {
+                                   next.baseView?.alpha = 0
+                               }, completion: { _ in
+                                   next.baseView?.isHidden = true
+                                   next.baseView?.removeFromSuperview()
+                               })
+                            }
+                        })
+                        
+                        
                     }
                 }
         
@@ -233,10 +237,11 @@ extension ViewController {
         for curr in currentComponents {
             curr.changed = false
         }
-        
+        print("temp: \(tempComponents.count)")
         nextComponents.removeAll()
         tempComponents.removeAll()
         print("currentComponents.count: \(currentComponents.count)")
+        
         print("_______________________________________________________")
     
     }
@@ -270,7 +275,7 @@ extension ViewController {
             let newY = component.y * self.deviceSize.height
             //print("x: \(newX) y: \(newY) width: \(newW) height: \(newH)")
             let layer = CAShapeLayer()
-            layer.frame = CGRect(x: newX, y: newY, width: newW, height: newH)
+            layer.frame = CGRect(x: newX, y: newY - newH, width: newW, height: newH)
             layer.cornerRadius = newH / 3.5
             self.animateFastChange(layer: layer)
             
@@ -308,7 +313,7 @@ extension ViewController {
             layer.masksToBounds = true
             let gradient = CAGradientLayer()
             gradient.frame = layer.bounds
-            gradient.colors = [#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor, #colorLiteral(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.4).cgColor, #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor]
+            gradient.colors = [#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor, #colorLiteral(red: 0.7220415609, green: 0.7220415609, blue: 0.7220415609, alpha: 0.3010059932).cgColor, #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor]
             gradient.startPoint = CGPoint(x: -1, y: 0.5)
             gradient.endPoint = CGPoint(x: 0, y: 0.5)
             layer.addSublayer(gradient)
@@ -342,3 +347,15 @@ extension Array where Element: Equatable {
     }
 
 }
+
+//extension ViewController {
+//
+//    func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
+//        print("up")
+//    }
+//    func renderer(_ renderer: SCNSceneRenderer, willUpdate node: SCNNode, for anchor: ARAnchor) {
+//        print("sdk")
+//    }
+//
+//
+//}

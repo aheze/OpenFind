@@ -18,7 +18,15 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         ramReel = RAMReel(frame: frameRect, dataSource: dataSource, placeholder: "Start by typing…", attemptToDodgeKeyboard: false) {
             print("Plain:", $0)
             self.finalTextToFind = $0
-            self.textDetectionRequest.customWords = [self.finalTextToFind, "Find app"]
+            switch self.scanModeToggle {
+            
+            case .classic:
+                self.textDetectionRequest.customWords = [self.finalTextToFind, "Find app"]
+            case .focused:
+                self.focusTextDetectionRequest.customWords = [self.finalTextToFind, "Find app"]
+            case .fast:
+                self.fastTextDetectionRequest.customWords = [self.finalTextToFind, "Find app"]
+            }
         }
         
 //        ramReel.hooks.append {

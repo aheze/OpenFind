@@ -147,8 +147,8 @@ class ViewController: UIViewController {
     var tempComponents = [Component]()
     var currentComponents = [Component]()
     var nextComponents = [Component]()
-    var componentsToLayers = [Component: CALayer]()
-    var layersToSublayers = [CALayer: CALayer]()
+    //var componentsToLayers = [Component: CALayer]()
+    //var layersToSublayers = [CALayer: CALayer]()
  //   var componentsToViews = [Component: UIView]()
     
     var numberCurrentFastmodePass: Int = 0
@@ -277,6 +277,7 @@ class ViewController: UIViewController {
         focusTextDetectionRequest.recognitionLevel = .fast
         focusTextDetectionRequest.recognitionLanguages = ["en_GB"]
         focusTextDetectionRequest.usesLanguageCorrection = true
+        
             
        
         setUpButtons()
