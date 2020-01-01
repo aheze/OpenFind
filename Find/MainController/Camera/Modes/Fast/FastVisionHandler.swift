@@ -19,8 +19,6 @@ extension ViewController {
         }
         
         for result in results {
-            //numberOfFastMatches = 0
-            //var foundAMatch = false
             if let observation = result as? VNRecognizedTextObservation {
                for text in observation.topCandidates(1) {
                     //print(text.string)
@@ -32,7 +30,6 @@ extension ViewController {
                     component.text = text.string
                     drawFastHighlight(component: component)
                     if component.text.contains(finalTextToFind) {
-                        //foundAMatch = true
                         let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
                         let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
                         let offHalf = offsetWidth / 2
@@ -53,6 +50,7 @@ extension ViewController {
                             newComponent.width = finalW
                             newComponent.height = newH
                             newComponent.text = "This value is not needed"
+                            newComponent.changed = false
                             nextComponents.append(newComponent)
                             
                         }
@@ -105,13 +103,26 @@ extension ViewController {
             newLayer.position = CGPoint(x: x, y: y)
             newLayer.add(strokeAnimation, forKey: "line")
 
+//            let newComp = Component()
+//            newComp.baseView = newView
+//            newComp.changed = true
             component.baseView = newView
             component.changed = true //so don't delete from superview
+            //self.currentComponents.append(component)
+            //self.nextComponents.remove(object: component)
+            self.tempComponents.append(component)
             self.layerScaleAnimation(layer: newLayer, duration: 0.2, fromValue: 1.2, toValue: 1)
         }
     }
+    
     func animateFoundFastChange() {
+        
+        
+
+        
+        
         for newComponent in nextComponents {
+            
             var lowestDist = CGFloat(10000)
             var distToComp = [CGFloat: Component]()
             
@@ -127,52 +138,60 @@ extension ViewController {
                 }
             }
             
-            if lowestDist <= 50 {
+            if lowestDist <= 20 {
                 guard let oldComp = distToComp[lowestDist] else { return }
                 let currentCompPoint = CGPoint(x: oldComp.x, y: oldComp.y)
                 let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
                 
                 let newView = oldComp.baseView
+                tempComponents.append(oldComp)
+                //nextComponents.remove(object: newComponent)
                 DispatchQueue.main.async {
-                    newView?.isHidden = false
-                    newView?.alpha = 0
-                    
-                    oldComp.changed = true
-                    newComponent.changed = true
+                    UIView.animate(withDuration: 0.5, animations: {
+                        oldComp.changed = true
 
-                    UIView.animate(withDuration: 1, animations: {
-                        newView?.alpha = 1
+                        //newView?.alpha = 1
                         let xDist = nextCompPoint.x - currentCompPoint.x
                         let yDist = nextCompPoint.y - currentCompPoint.y
                         //print(newView)
-                        print(xDist)
-                        print(yDist)
-                        print(newView?.frame)
+                        //print(xDist)
+                        //print(yDist)
+                        //print(newView?.frame)
                         newView?.frame.origin.x += xDist
                         newView?.frame.origin.y += yDist
-                        print(newView?.frame)
+                        //print(newView?.frame)
                         print("ANIMATE")
                     })
                 }
             } else {
                 scaleInHighlight(component: newComponent)
-                
-                //newComponent.changed = false
             }
             
             
             
         }
-        print(currentComponents.count)
+       print(currentComponents.count)
 //        for next in nextComponents {
 //            //next.changed = false
 //            currentComponents.append(next)
 //            //next.changed = false
 //        }
-        for comp in currentComponents {
-            if comp.changed == false {
-                let theView = comp.baseView
 
+//        currentComponents.removeAll()
+     //   currentComponents += nextComponents
+        print(currentComponents.count)
+ 
+
+        
+        
+        for comp in currentComponents {
+            
+            
+            if !tempComponents.contains(comp) {
+//            if comp.changed == false {
+                let theView = comp.baseView
+                print("remove comp because didn't change")
+                //comp.changed = true
                     DispatchQueue.main.async {
                         UIView.animate(withDuration: 0.2, animations: {
                             theView?.alpha = 0
@@ -184,23 +203,41 @@ extension ViewController {
                         })
                     }
                 //comp.changed = true
-            } else { ///    position has been changed
-                comp.changed = false
+//            } else { ///    position has been changed
+//                print("position changed")
+//                 comp.changed = false
+//            }
             }
+            
         }
-//        currentComponents.removeAll()
-     //   currentComponents += nextComponents
+//        for temp in tempComponents {
+//            temp.changed = true
+//        }
+        currentComponents = tempComponents
+        
+        
+                for next in nextComponents {
+                    if !tempComponents.contains(next) == true {
+                         DispatchQueue.main.async {
+                           UIView.animate(withDuration: 0.2, animations: {
+                               next.baseView?.alpha = 0
+                           }, completion: { _ in
+                               next.baseView?.isHidden = true
+                               next.baseView?.removeFromSuperview()
+                           })
+                       }
+                    }
+                }
+        
         print(currentComponents.count)
- 
-        for next in nextComponents {
-            if next.changed == false {
-                print("fal")
-                currentComponents.append(next)
-            }
+        for curr in currentComponents {
+            curr.changed = false
         }
-        print(currentComponents.count)
+        
         nextComponents.removeAll()
+        tempComponents.removeAll()
         print("currentComponents.count: \(currentComponents.count)")
+        print("_______________________________________________________")
     
     }
     func distance(_ a: CGPoint, _ b: CGPoint) -> CGFloat {
@@ -242,10 +279,20 @@ extension ViewController {
     }
     func resetFastHighlights() {
         for highlight in currentComponents {
-            componentsToLayers[highlight]?.removeFromSuperlayer()
+            UIView.animate(withDuration: 0.5, animations: {
+                highlight.baseView?.alpha = 0
+            }, completion: {
+                _ in highlight.baseView?.removeFromSuperview()
+                self.currentComponents.remove(object: highlight)
+            })
         }
         for secondHighlight in nextComponents {
-            componentsToLayers[secondHighlight]?.removeFromSuperlayer()
+            UIView.animate(withDuration: 0.5, animations: {
+                secondHighlight.baseView?.alpha = 0
+            }, completion: {
+                _ in secondHighlight.baseView?.removeFromSuperview()
+                self.currentComponents.remove(object: secondHighlight)
+            })
         }
     }
     func animateFastChange(layer: CAShapeLayer) {

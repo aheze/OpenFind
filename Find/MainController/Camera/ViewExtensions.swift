@@ -170,14 +170,8 @@ extension ViewController {
         
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
-            if self.scanModeToggle == .focused {
-                //self.stopTagFindingInNode = true
-                self.focusTimer.suspend()
-                self.runImageTrackingSession(with: [], runOptions: [.resetTracking, .removeExistingAnchors])
-                self.focusTimer.resume()
-                self.coachingOverlay.activatesAutomatically = false
-                //self.stopTagFindingInNode = false
-            } else {
+            switch self.scanModeToggle {
+            case .classic:
                 self.stopProcessingImage = true
                 self.classicTimer.suspend()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {self.stopProcessingImage = false})
@@ -195,8 +189,17 @@ extension ViewController {
                     })
                 }
                 self.classicTimer.resume()
+            case .focused:
+                //self.stopTagFindingInNode = true
+                self.focusTimer.suspend()
+                self.runImageTrackingSession(with: [], runOptions: [.resetTracking, .removeExistingAnchors])
+                self.focusTimer.resume()
+                self.coachingOverlay.activatesAutomatically = false
+                //self.stopTagFindingInNode = false
+            case .fast:
+                self.resetFastHighlights()
             }
-            })
+        })
     }
     func fadeClassicHighlights() {
         let action = SCNAction.fadeOut(duration: 1)

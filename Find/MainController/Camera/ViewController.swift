@@ -144,7 +144,7 @@ class ViewController: UIViewController {
     lazy var fastTextDetectionRequest = VNRecognizeTextRequest(completionHandler: handleFastDetectedText)
     var startFastFinding = false
     var fastTimer = RepeatingTimer(timeInterval: 0.02)
-    var previousComponents = [Component]()
+    var tempComponents = [Component]()
     var currentComponents = [Component]()
     var nextComponents = [Component]()
     var componentsToLayers = [Component: CALayer]()
