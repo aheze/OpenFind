@@ -291,7 +291,15 @@ extension ViewController {
                 secondHighlight.baseView?.alpha = 0
             }, completion: {
                 _ in secondHighlight.baseView?.removeFromSuperview()
-                self.currentComponents.remove(object: secondHighlight)
+                self.nextComponents.remove(object: secondHighlight)
+            })
+        }
+        for currentHighlight in currentComponents {
+            UIView.animate(withDuration: 0.5, animations: {
+                currentHighlight.baseView?.alpha = 0
+            }, completion: {
+                _ in currentHighlight.baseView?.removeFromSuperview()
+                self.tempComponents.remove(object: currentHighlight)
             })
         }
     }
