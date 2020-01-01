@@ -6,7 +6,7 @@
 //  Copyright © 2019 Andrew. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Vision
 
 class Component: NSObject {
@@ -15,4 +15,6 @@ class Component: NSObject {
     var height: CGFloat = 0
     var width: CGFloat = 0
     var text = ""
+    var changed: Bool = false
+    var baseView: UIView?
 }

@@ -148,6 +148,9 @@ class ViewController: UIViewController {
     var currentComponents = [Component]()
     var nextComponents = [Component]()
     var componentsToLayers = [Component: CALayer]()
+    var layersToSublayers = [CALayer: CALayer]()
+ //   var componentsToViews = [Component: UIView]()
+    
     var numberCurrentFastmodePass: Int = 0
     var numberOfFastMatches: Int = 0
 
