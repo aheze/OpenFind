@@ -153,25 +153,36 @@ extension ViewController {
             break
         }
     }
-    func addPipPositionView() -> PipPositionView {
-        let view = PipPositionView()
-        self.view.addSubview(view)
-        pipPositionViews.append(view)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        let widthConst = view.widthAnchor.constraint(equalToConstant: pipWidth)
-        widthConst.isActive = true
-        widthConst.identifier = "matchesPositionViewWidth"
+    func addPipPositionView(special: Bool = false) -> PipPositionView {
+        if special == false {
+            let view = PipPositionView()
+            self.view.addSubview(view)
+            pipPositionViews.append(view)
+            view.translatesAutoresizingMaskIntoConstraints = false
+            let widthConst = view.widthAnchor.constraint(equalToConstant: pipWidth)
+            widthConst.isActive = true
+            widthConst.identifier = "matchesPositionViewWidth"
+            
+            let heightConst = view.heightAnchor.constraint(equalToConstant: pipHeight)
+            heightConst.isActive = true
+            heightConst.identifier = "matchesPositionViewHeight"
+            return view
+        } else {
+            let view = PipPositionView()
+            self.view.addSubview(view)
+            specialPip = view
+            view.translatesAutoresizingMaskIntoConstraints = false
+            let widthConst = view.widthAnchor.constraint(equalToConstant: pipWidth)
+            widthConst.isActive = true
+            widthConst.identifier = "matchesPositionViewWidth"
+            
+            let heightConst = view.heightAnchor.constraint(equalToConstant: pipHeight)
+            heightConst.isActive = true
+            heightConst.identifier = "matchesPositionViewHeight"
+            return view
+        }
         
-        let heightConst = view.heightAnchor.constraint(equalToConstant: pipHeight)
-        heightConst.isActive = true
-        heightConst.identifier = "matchesPositionViewHeight"
-      
-//        let widthConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: pipWidth)
-//        let heightConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: pipHeight)
-//        widthConstraint.identifier = "matchesPositionViewWidth"
-//        heightConstraint.identifier = "matchesPositionViewHeight"
-//        view.addConstraints([widthConstraint, heightConstraint])
-        return view
+        
     }
     func checkAction(sender : UITapGestureRecognizer) {
         print("tap")
@@ -193,7 +204,17 @@ extension ViewController {
         let horizontalSpacing: CGFloat = 23
         let midHorizontalSpacing: CGFloat = 25
         let verticalSpacing: CGFloat = 200
-    
+        
+//        let specialView = addPipPositionView(special: true)
+//        specialView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalSpacing).isActive = true
+//        let specialLeftConst = specialView.leadingAnchor.constraint(equalTo: view.trailingAnchor, constant: horizontalSpacing)
+//        let specialBottomConst = specialView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -verticalSpacing)
+//        specialLeftConst.isActive = true
+//        specialLeftConst.identifier = "specialLeft"
+//        specialBottomConst.isActive = true
+//        specialBottomConst.identifier = "specialBottom"
+        
+     
         let topLeftView = addPipPositionView()
         topLeftView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalSpacing).isActive = true
         let tlTopConst = topLeftView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: verticalSpacing)

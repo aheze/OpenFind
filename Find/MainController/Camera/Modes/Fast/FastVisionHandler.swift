@@ -46,10 +46,11 @@ extension ViewController {
                             let addedWidth = individualCharacterWidth * CGFloat(index)
                             let finalX = newX + addedWidth
                             let newComponent = Component()
-                            newComponent.x = finalX
-                            newComponent.y = newY - newH
-                            newComponent.width = finalW
-                            newComponent.height = newH
+                            
+                            newComponent.x = finalX - 4
+                            newComponent.y = newY - (newH + 1)
+                            newComponent.width = finalW + 8
+                            newComponent.height = newH + 2
                             newComponent.text = "This value is not needed"
                             newComponent.changed = false
                             nextComponents.append(newComponent)
@@ -66,9 +67,115 @@ extension ViewController {
     }
     
     
+    
+    
+    func animateFoundFastChange() {
+        print("FastFound+++++++++++___________________________________++++++++++++++++++++++++++")
+        
+        
+        for newComponent in nextComponents {
+            print("next looping")
+            
+            var lowestDist = CGFloat(10000)
+            var distToComp = [CGFloat: Component]()
+            
+            for oldComponent in currentComponents {
+                if oldComponent.changed == false {
+                    let currentCompPoint = CGPoint(x: oldComponent.x, y: oldComponent.y)
+                    let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
+                    let distanceBetweenPoints = distance(currentCompPoint, nextCompPoint) //< 10
+                    if distanceBetweenPoints <= lowestDist {
+                        lowestDist = distanceBetweenPoints
+                        distToComp[lowestDist] = oldComponent
+                    }
+                }
+            }
+            
+            if lowestDist <= 15 {
+                guard let oldComp = distToComp[lowestDist] else { print("NO COMP"); return }
+                let currentCompPoint = CGPoint(x: oldComp.x, y: oldComp.y)
+                let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
+                
+                let newView = oldComp.baseView
+                let nextView = newComponent.baseView
+                tempComponents.append(oldComp)
+                oldComp.changed = true
+                //nextComponents.remove(object: newComponent)
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.5, animations: {
+                        
+                        let xDist = nextCompPoint.x - currentCompPoint.x
+                        let yDist = nextCompPoint.y - currentCompPoint.y
+                        let rect = CGRect(x: newComponent.x, y: newComponent.y, width: newComponent.width, height: newComponent.height)
+                        newView?.frame = rect
+                        
+                        
+                        print("ANIMATE")
+                    })
+                }
+            } else {
+                scaleInHighlight(component: newComponent)
+            }
+        }
+        
+        print("Current: \(currentComponents.count)")
+ 
+        for comp in currentComponents {
+            if !tempComponents.contains(comp) {
+                let theView = comp.baseView
+                print("remove comp because didn't change")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                    DispatchQueue.main.async {
+                        UIView.animate(withDuration: 0.2, animations: {
+                            theView?.alpha = 0
+                        }, completion: { _ in
+                            theView?.isHidden = true
+                            theView?.removeFromSuperview()
+                            //self.currentComponents.remove(object: comp)
+                        })
+                    }
+                })
+            }
+            
+        }
+        currentComponents.removeAll()
+        currentComponents = tempComponents
+        
+        print("next: \(nextComponents.count)")
+        self.updateMatchesNumber(to: self.nextComponents.count)
+        
+        for next in nextComponents {
+            if !tempComponents.contains(next) == true {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
+                    DispatchQueue.main.async {
+                        UIView.animate(withDuration: 0.3, animations: {
+                            next.baseView?.alpha = 0
+                        }, completion: { _ in
+                            next.baseView?.isHidden = true
+                            next.baseView?.removeFromSuperview()
+                        })
+                    }
+                })
+            }
+        }
+        
+        print("Curr \(currentComponents.count)")
+        for curr in currentComponents {
+            curr.changed = false
+        }
+        print("temp: \(tempComponents.count)")
+        nextComponents.removeAll()
+        tempComponents.removeAll()
+        print("currentComponents.count: \(currentComponents.count)")
+        
+        print("END_______________________________________________________")
+    
+    }
+    
+    
     func scaleInHighlight(component: Component) {
+        print("scale")
         DispatchQueue.main.async {
-            print("scale")
             
             let layer = CAShapeLayer()
             layer.frame = CGRect(x: 0, y: 0, width: component.width, height: component.height)
@@ -100,151 +207,14 @@ extension ViewController {
             layer.addSublayer(newLayer)
             newLayer.position = CGPoint(x: x, y: y)
             newLayer.add(strokeAnimation, forKey: "line")
-
-//            let newComp = Component()
-//            newComp.baseView = newView
-//            newComp.changed = true
             component.baseView = newView
-            component.changed = true //so don't delete from superview
-            //self.currentComponents.append(component)
-            //self.nextComponents.remove(object: component)
-            self.tempComponents.append(component)
+            component.changed = true
+            
             self.layerScaleAnimation(layer: newLayer, duration: 0.2, fromValue: 1.2, toValue: 1)
         }
+        self.tempComponents.append(component)
     }
     
-    func animateFoundFastChange() {
-        print("next: \(nextComponents.count)")
-        DispatchQueue.main.async {
-            self.numberLabel.fadeTransition(0.3)
-            self.numberLabel.text = "\(self.nextComponents.count)"
-        }
-        
-        
-        for newComponent in nextComponents {
-            
-            var lowestDist = CGFloat(10000)
-            var distToComp = [CGFloat: Component]()
-            
-            for oldComponent in currentComponents {
-                if oldComponent.changed == false {
-                    let currentCompPoint = CGPoint(x: oldComponent.x, y: oldComponent.y)
-                    let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
-                    let distanceBetweenPoints = distance(currentCompPoint, nextCompPoint) //< 10
-                    if distanceBetweenPoints <= lowestDist {
-                        lowestDist = distanceBetweenPoints
-                        distToComp[lowestDist] = oldComponent
-                    }
-                }
-            }
-            
-            if lowestDist <= 20 {
-                guard let oldComp = distToComp[lowestDist] else { return }
-                let currentCompPoint = CGPoint(x: oldComp.x, y: oldComp.y)
-                let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
-                
-                let newView = oldComp.baseView
-                tempComponents.append(oldComp)
-                //nextComponents.remove(object: newComponent)
-                DispatchQueue.main.async {
-                    UIView.animate(withDuration: 0.5, animations: {
-                        oldComp.changed = true
-
-                        //newView?.alpha = 1
-                        let xDist = nextCompPoint.x - currentCompPoint.x
-                        let yDist = nextCompPoint.y - currentCompPoint.y
-                        //print(newView)
-                        //print(xDist)
-                        //print(yDist)
-                        //print(newView?.frame)
-                        newView?.frame.origin.x += xDist
-                        newView?.frame.origin.y += yDist
-                        //print(newView?.frame)
-                        print("ANIMATE")
-                    })
-                }
-            } else {
-                scaleInHighlight(component: newComponent)
-            }
-            
-            
-            
-        }
-       print(currentComponents.count)
-//        for next in nextComponents {
-//            //next.changed = false
-//            currentComponents.append(next)
-//            //next.changed = false
-//        }
-
-//        currentComponents.removeAll()
-     //   currentComponents += nextComponents
-        print(currentComponents.count)
- 
-
-        
-        
-        for comp in currentComponents {
-            
-            
-            if !tempComponents.contains(comp) {
-                let theView = comp.baseView
-                print("remove comp because didn't change")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
-                    DispatchQueue.main.async {
-                        UIView.animate(withDuration: 0.2, animations: {
-                            theView?.alpha = 0
-                        }, completion: { _ in
-                            theView?.isHidden = true
-                            theView?.removeFromSuperview()
-                            self.currentComponents.remove(object: comp)
-                        })
-                    }
-                })
-                //comp.changed = true
-//            } else { ///    position has been changed
-//                print("position changed")
-//                 comp.changed = false
-//            }
-            }
-            
-        }
-//        for temp in tempComponents {
-//            temp.changed = true
-//        }
-        currentComponents = tempComponents
-        
-        
-                for next in nextComponents {
-                    if !tempComponents.contains(next) == true {
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
-                            DispatchQueue.main.async {
-                               UIView.animate(withDuration: 0.3, animations: {
-                                   next.baseView?.alpha = 0
-                               }, completion: { _ in
-                                   next.baseView?.isHidden = true
-                                   next.baseView?.removeFromSuperview()
-                               })
-                            }
-                        })
-                        
-                        
-                    }
-                }
-        
-        print(currentComponents.count)
-        for curr in currentComponents {
-            curr.changed = false
-        }
-        print("temp: \(tempComponents.count)")
-        nextComponents.removeAll()
-        tempComponents.removeAll()
-        print("currentComponents.count: \(currentComponents.count)")
-        
-        print("_______________________________________________________")
-    
-    }
     func distance(_ a: CGPoint, _ b: CGPoint) -> CGFloat {
         let xDist = a.x - b.x
         let yDist = a.y - b.y
@@ -273,9 +243,11 @@ extension ViewController {
             let newH = component.height * self.deviceSize.height
             let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
             let newY = component.y * self.deviceSize.height
+            let buffer = CGFloat(3)
+            let doubBuffer = CGFloat(6)
             //print("x: \(newX) y: \(newY) width: \(newW) height: \(newH)")
             let layer = CAShapeLayer()
-            layer.frame = CGRect(x: newX, y: newY - newH, width: newW, height: newH)
+            layer.frame = CGRect(x: newX - buffer, y: newY, width: newW + doubBuffer, height: newH)
             layer.cornerRadius = newH / 3.5
             self.animateFastChange(layer: layer)
             
@@ -283,7 +255,8 @@ extension ViewController {
         }
     }
     func resetFastHighlights() {
-        for highlight in currentComponents {
+        DispatchQueue.main.async {
+            for highlight in self.currentComponents {
             UIView.animate(withDuration: 0.5, animations: {
                 highlight.baseView?.alpha = 0
             }, completion: {
@@ -291,7 +264,7 @@ extension ViewController {
                 self.currentComponents.remove(object: highlight)
             })
         }
-        for secondHighlight in nextComponents {
+            for secondHighlight in self.nextComponents {
             UIView.animate(withDuration: 0.5, animations: {
                 secondHighlight.baseView?.alpha = 0
             }, completion: {
@@ -299,13 +272,14 @@ extension ViewController {
                 self.nextComponents.remove(object: secondHighlight)
             })
         }
-        for currentHighlight in currentComponents {
+            for currentHighlight in self.currentComponents {
             UIView.animate(withDuration: 0.5, animations: {
                 currentHighlight.baseView?.alpha = 0
             }, completion: {
                 _ in currentHighlight.baseView?.removeFromSuperview()
                 self.tempComponents.remove(object: currentHighlight)
             })
+        }
         }
     }
     func animateFastChange(layer: CAShapeLayer) {

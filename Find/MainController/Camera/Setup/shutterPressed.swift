@@ -26,7 +26,7 @@ extension ViewController {
         
         switch sender.buttonState {
         case .normal:
-            changeHUDSize(to: CGSize(width: 55, height: 120))
+            //changeHUDSize(to: CGSize(width: 55, height: 120))
             sender.buttonState = .recording
             
             sceneView.session.pause()
@@ -60,12 +60,12 @@ extension ViewController {
                 print("date=\(dateAsString).time=\(timeAsString)")
                 saveImage(url: globalUrl, imageName: "=\(dateAsString)=\(timeAsString)", image: uiImage)
                 UIView.animate(withDuration: 0.3, animations: {
-                    self.photoButton.alpha = 0
+//                    self.photoButton.alpha = 0
                     self.menuButton.alpha = 0
                     
                 }, completion: { _ in
                     self.menuButton.isHidden = true
-                    self.photoButton.isHidden = true
+//                    self.photoButton.isHidden = true
                     
                     
                 })
@@ -75,13 +75,13 @@ extension ViewController {
             
         case .recording:
             sender.buttonState = .normal
-            changeHUDSize(to: CGSize(width: 55, height: 55))
+//            changeHUDSize(to: CGSize(width: 55, height: 55))
             
             self.menuButton.isHidden = false
-            self.photoButton.isHidden = false
+//            self.photoButton.isHidden = false
             UIView.animate(withDuration: 0.3, animations: {
                 self.menuButton.alpha = 1
-                self.photoButton.alpha = 1
+//                 self.photoButton.alpha = 1
             }, completion: nil)
             if let config = sceneView.session.configuration {
             sceneView.session.run(config)

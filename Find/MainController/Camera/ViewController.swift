@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     
  
     
-    @IBOutlet weak var photoButton: UIButton!
+    @IBOutlet weak var minimizeButton: UIButton!
     @IBOutlet weak var modeButton: JJFloatingActionButton!
     @IBOutlet weak var shutterButton: ShutterButton!
     @IBOutlet weak var refreshButton: UIButton!
@@ -76,13 +76,19 @@ class ViewController: UIViewController {
         print("down")
     }
     @IBOutlet weak var numberLabel: UILabel!
+    @IBOutlet weak var numberDenomLabel: UILabel!
     
     var matchesCanAcceptNewValue: Bool = true
     var matchesShouldFireTimer: Bool = true
     var pipPositionViews = [PipPositionView]()
+    
+    @IBOutlet weak var slashImage: UIImageView!
+    
+    var specialPip = PipPositionView()
+    
     var initialOffset: CGPoint = .zero
     let pipWidth: CGFloat = 55
-    let pipHeight: CGFloat = 55
+    let pipHeight: CGFloat = 120
     let panRecognizer = UIPanGestureRecognizer()
     var pipPositions: [CGPoint] {
         return pipPositionViews.map { $0.center }
@@ -90,7 +96,12 @@ class ViewController: UIViewController {
     @IBAction func refreshButtonPressed(_ sender: UIButton) {
         refreshScreen()
     }
-    @IBAction func photoButtonPressed(_ sender: UIButton) {
+    
+    var shouldMin = true
+    @IBAction func minimizeButtonButtonPressed(_ sender: UIButton) {
+        print("press")
+        shouldMin = !shouldMin
+        hideTopNumber(hide: shouldMin)
     }
     var bsdfhjknL: Bool = false
     var skdjbf : Bool = false
@@ -268,6 +279,11 @@ class ViewController: UIViewController {
         //MARK: Sceneview
         setUpARDelegates()
         
+        numberLabel.isHidden = false
+        numberDenomLabel.isHidden = false
+        shouldMin = false
+        hideTopNumber(hide: shouldMin)
+        
         fastTextDetectionRequest.recognitionLevel = .fast
         fastTextDetectionRequest.recognitionLanguages = ["en_GB"]
         fastTextDetectionRequest.usesLanguageCorrection = true
@@ -278,7 +294,7 @@ class ViewController: UIViewController {
         focusTextDetectionRequest.recognitionLanguages = ["en_GB"]
         focusTextDetectionRequest.usesLanguageCorrection = true
         
-            
+        updateMatchesNumber(to: 0)
        
         setUpButtons()
         setUpTimers()
@@ -289,7 +305,7 @@ class ViewController: UIViewController {
         setUpCrosshair()
         addCoaching()
         
-        changeHUDSize(to: CGSize(width: 55, height: 55))
+        //changeHUDSize(to: CGSize(width: 55, height: 55))
         //make sure the position views are hidden
         for view in pipPositionViews {
             view.isHidden = true

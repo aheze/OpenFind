@@ -53,15 +53,15 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekO-GU-ezg" userLabel="PhotoButton">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekO-GU-ezg" userLabel="MinimizeButton">
                                         <rect key="frame" x="0.0" y="586" width="62" height="62"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="62" id="4Bm-gh-YF1"/>
                                             <constraint firstAttribute="width" constant="62" id="uMP-PP-6dA"/>
                                         </constraints>
-                                        <state key="normal" image="cameraroll"/>
+                                        <state key="normal" image="MinHUD"/>
                                         <connections>
-                                            <action selector="photoButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b4h-dz-l5E"/>
+                                            <action selector="minimizeButtonButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yMJ-G0-irS"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Qu-fv-rhf" userLabel="ModeView">
@@ -179,41 +179,66 @@
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P33-md-CCv" userLabel="MatchesBig" customClass="MatchesGradientView" customModule="Find" customModuleProvider="target">
                                 <rect key="frame" x="310" y="200" width="55" height="120"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TYY-8J-adY" userLabel="Number">
-                                        <rect key="frame" x="18.5" y="42.5" width="18" height="35"/>
-                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="30"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3v-fM-RvH">
-                                        <rect key="frame" x="8" y="81.5" width="39" height="30"/>
-                                        <state key="normal" title="Down">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3v-fM-RvH">
+                                        <rect key="frame" x="7.5" y="87" width="40" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="I95-eP-xii"/>
+                                            <constraint firstAttribute="height" constant="24" id="YPp-zd-u5N"/>
+                                        </constraints>
+                                        <state key="normal" image="DownArrow">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="downHUDPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ge4-eZ-Df8"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sCS-Fm-6VX">
-                                        <rect key="frame" x="12.5" y="8.5" width="30" height="30"/>
-                                        <state key="normal" title="Up">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sCS-Fm-6VX">
+                                        <rect key="frame" x="7.5" y="9" width="40" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="DVv-RP-ekJ"/>
+                                            <constraint firstAttribute="height" constant="24" id="qw3-kS-8au"/>
+                                        </constraints>
+                                        <state key="normal" image="UpArrow">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="upHUDPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ejK-dx-sTS"/>
                                         </connections>
                                     </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slash" translatesAutoresizingMaskIntoConstraints="NO" id="EGp-Is-4uI">
+                                        <rect key="frame" x="12.5" y="45" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="byz-8V-9Ey"/>
+                                            <constraint firstAttribute="height" constant="30" id="gFa-hC-WU9"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TYY-8J-adY" userLabel="Number">
+                                        <rect key="frame" x="18.5" y="42.5" width="18" height="35"/>
+                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsA-9r-JZh" userLabel="NumberDenom">
+                                        <rect key="frame" x="18.5" y="42.5" width="18" height="35"/>
+                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.5981545250805802" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="TYY-8J-adY" firstAttribute="top" secondItem="sCS-Fm-6VX" secondAttribute="bottom" constant="4" id="1r9-LY-UAF"/>
-                                    <constraint firstItem="TYY-8J-adY" firstAttribute="centerX" secondItem="P33-md-CCv" secondAttribute="centerX" id="8vU-K0-vFd"/>
-                                    <constraint firstItem="s3v-fM-RvH" firstAttribute="top" secondItem="TYY-8J-adY" secondAttribute="bottom" constant="4" id="FHh-C2-nJN"/>
-                                    <constraint firstItem="s3v-fM-RvH" firstAttribute="centerX" secondItem="P33-md-CCv" secondAttribute="centerX" id="HFU-3V-LPp"/>
+                                    <constraint firstItem="TYY-8J-adY" firstAttribute="centerX" secondItem="P33-md-CCv" secondAttribute="centerX" identifier="numberX" id="8vU-K0-vFd"/>
+                                    <constraint firstItem="sCS-Fm-6VX" firstAttribute="centerX" secondItem="P33-md-CCv" secondAttribute="centerX" id="9b8-Kr-Yiz"/>
+                                    <constraint firstItem="zsA-9r-JZh" firstAttribute="centerY" secondItem="P33-md-CCv" secondAttribute="centerY" identifier="denomY" id="I16-Vi-Yrt"/>
                                     <constraint firstAttribute="width" constant="55" id="Kjk-VP-9dh"/>
                                     <constraint firstAttribute="height" constant="120" id="MiV-gG-hBI" userLabel="Matches Height Constraint"/>
-                                    <constraint firstItem="sCS-Fm-6VX" firstAttribute="centerX" secondItem="P33-md-CCv" secondAttribute="centerX" id="VXw-A3-TPx"/>
-                                    <constraint firstItem="TYY-8J-adY" firstAttribute="centerY" secondItem="P33-md-CCv" secondAttribute="centerY" id="ZAr-CK-lVZ"/>
+                                    <constraint firstItem="sCS-Fm-6VX" firstAttribute="top" secondItem="P33-md-CCv" secondAttribute="top" constant="9" id="Q8r-S1-IaD"/>
+                                    <constraint firstItem="TYY-8J-adY" firstAttribute="centerY" secondItem="P33-md-CCv" secondAttribute="centerY" identifier="numberY" id="ZAr-CK-lVZ"/>
+                                    <constraint firstItem="zsA-9r-JZh" firstAttribute="centerX" secondItem="P33-md-CCv" secondAttribute="centerX" identifier="denomX" id="gz5-bH-FJL"/>
+                                    <constraint firstItem="EGp-Is-4uI" firstAttribute="centerX" secondItem="P33-md-CCv" secondAttribute="centerX" id="hO8-Fk-TFi"/>
+                                    <constraint firstItem="EGp-Is-4uI" firstAttribute="centerY" secondItem="P33-md-CCv" secondAttribute="centerY" id="mJW-s7-K7e"/>
+                                    <constraint firstItem="s3v-fM-RvH" firstAttribute="centerX" secondItem="P33-md-CCv" secondAttribute="centerX" id="wAs-Rc-pKl"/>
+                                    <constraint firstAttribute="bottom" secondItem="s3v-fM-RvH" secondAttribute="bottom" constant="9" id="xtg-tN-6be"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -243,21 +268,21 @@
                         <outlet property="darkBlurEffect" destination="SjR-c7-NyL" id="0Wd-Vq-FxN"/>
                         <outlet property="darkBlurEffectHeightConstraint" destination="tfa-HC-4HH" id="HNH-Jb-7ZA"/>
                         <outlet property="downButton" destination="s3v-fM-RvH" id="z4k-Ly-1yV"/>
-                        <outlet property="downButtonToNumberConstraint" destination="FHh-C2-nJN" id="sVA-yU-IHR"/>
                         <outlet property="matchesBig" destination="P33-md-CCv" id="tYz-RD-VeC"/>
                         <outlet property="matchesHeightConstraint" destination="MiV-gG-hBI" id="CWY-kg-HVq"/>
                         <outlet property="matchesWidthConstraint" destination="Kjk-VP-9dh" id="KDp-iZ-Mup"/>
                         <outlet property="menuButton" destination="Ksm-rU-iBX" id="fhV-tI-55z"/>
+                        <outlet property="minimizeButton" destination="ekO-GU-ezg" id="gdP-bK-kbH"/>
                         <outlet property="modeButton" destination="McS-Ju-2hk" id="g7E-le-xIV"/>
+                        <outlet property="numberDenomLabel" destination="zsA-9r-JZh" id="PPK-ns-QU3"/>
                         <outlet property="numberLabel" destination="TYY-8J-adY" id="wgg-Li-Scc"/>
-                        <outlet property="photoButton" destination="ekO-GU-ezg" id="eqe-II-IC9"/>
                         <outlet property="refreshButton" destination="84J-Qd-mTc" id="tvM-QE-4kL"/>
                         <outlet property="sceneView" destination="KrV-7J-ulH" id="gFH-ke-p5A"/>
                         <outlet property="shutterButton" destination="V9d-sb-q19" id="CPb-yz-AXa"/>
+                        <outlet property="slashImage" destination="EGp-Is-4uI" id="jPj-Pa-C0v"/>
                         <outlet property="toolbarBottomConstraint" destination="ake-fG-hZW" id="ktb-vQ-Wtw"/>
                         <outlet property="toolbarView" destination="Lbv-hN-VHM" id="eBt-Rj-J4E"/>
                         <outlet property="upButton" destination="sCS-Fm-6VX" id="DgI-nt-npg"/>
-                        <outlet property="upButtonToNumberConstraint" destination="1r9-LY-UAF" id="4or-C3-4az"/>
                         <segue destination="pa6-U7-HO0" kind="show" identifier="goToSettings" id="lEH-Hc-ESJ"/>
                         <segue destination="su1-G3-ZPO" kind="show" identifier="goToHistory" id="TE7-Js-64C"/>
                         <segue destination="dyF-tU-4Cl" kind="show" identifier="goToNewHistory" id="YN9-3j-1gP"/>
@@ -1660,19 +1685,22 @@
     <resources>
         <image name="BlackXbutton" width="300" height="300"/>
         <image name="Delete" width="200" height="200"/>
+        <image name="DownArrow" width="150" height="90"/>
         <image name="Edit" width="200" height="200"/>
         <image name="Find" width="200" height="200"/>
         <image name="Heart" width="200" height="200"/>
         <image name="Info" width="200" height="200"/>
         <image name="Leica Sample" width="320" height="189.5"/>
+        <image name="MinHUD" width="256" height="256"/>
         <image name="Rename" width="200" height="200"/>
         <image name="Share" width="200" height="200"/>
         <image name="Transcript" width="200" height="200"/>
+        <image name="UpArrow" width="150" height="90"/>
         <image name="Xbutton" width="300" height="300"/>
         <image name="bclassic 2" width="75.5" height="75"/>
         <image name="bmenu 2" width="75.5" height="75"/>
-        <image name="cameraroll" width="75.5" height="75.5"/>
         <image name="info.circle" catalog="system" width="64" height="60"/>
         <image name="refresh" width="75.5" height="75.5"/>
+        <image name="slash" width="250" height="250"/>
     </resources>
 </document>
