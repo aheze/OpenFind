@@ -197,6 +197,7 @@ extension ViewController {
                 //self.stopTagFindingInNode = false
             case .fast:
                 self.resetFastHighlights()
+                self.updateMatchesNumber(to: 0)
             }
     }
     func fadeClassicHighlights() {

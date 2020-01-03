@@ -92,7 +92,7 @@ open class RAMReel
     public let view: UIView
     
     /// Gradient View
-    let gradientView: GradientView
+    let gradientView: RamGradientView
     
     // MARK: TextField
     let reactor: TextFieldReactor<DataSource, CollectionWrapperClass>
@@ -260,7 +260,7 @@ open class RAMReel
         dataFlow = dataSource *> wrapper
         reactor = textField <&> dataFlow
         
-        self.gradientView = GradientView(frame: view.bounds)
+        self.gradientView = RamGradientView(frame: view.bounds)
         self.gradientView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.gradientView.translatesAutoresizingMaskIntoConstraints = true
         self.view.insertSubview(self.gradientView, at: 0)

@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-class GradientView: UIView {
+class RamGradientView: UIView {
     
     var gradientLayer: CAGradientLayer!
     

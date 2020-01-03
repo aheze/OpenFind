@@ -68,12 +68,15 @@ class ViewController: UIViewController {
     @IBOutlet var downButtonToNumberConstraint: NSLayoutConstraint!
     @IBOutlet weak var upButton: UIButton!
     @IBOutlet weak var downButton: UIButton!
+    var shouldScale = true
     
     @IBAction func upHUDPressed(_ sender: UIButton) {
         print("up")
+        matchesUpPressed()
     }
     @IBAction func downHUDPressed(_ sender: UIButton) {
         print("down")
+        matchesDownPressed()
     }
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var numberDenomLabel: UILabel!

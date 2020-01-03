@@ -6,6 +6,6 @@ target 'Find' do
 pod 'ViewAnimator'
 pod 'JJFloatingActionButton', :git => 'https://github.com/zjohnzheng/JJFloatingActionButton'
 pod 'RoundCoachMark', :git => 'https://github.com/zjohnzheng/RoundCoachMark'
-pod 'SwiftEntryKit', :git => 'https://github.com/zjohnzheng/SwiftEntryKit'
+pod 'QuickLayout'
 
 end

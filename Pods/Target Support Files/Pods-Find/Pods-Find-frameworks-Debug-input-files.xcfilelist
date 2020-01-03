@@ -2,5 +2,4 @@ ${PODS_ROOT}/Target Support Files/Pods-Find/Pods-Find-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/JJFloatingActionButton/JJFloatingActionButton.framework
 ${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework
 ${BUILT_PRODUCTS_DIR}/RoundCoachMark/RoundCoachMark.framework
-${BUILT_PRODUCTS_DIR}/SwiftEntryKit/SwiftEntryKit.framework
 ${BUILT_PRODUCTS_DIR}/ViewAnimator/ViewAnimator.framework

@@ -164,14 +164,12 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/JJFloatingActionButton/JJFloatingActionButton.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RoundCoachMark/RoundCoachMark.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftEntryKit/SwiftEntryKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ViewAnimator/ViewAnimator.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/JJFloatingActionButton/JJFloatingActionButton.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RoundCoachMark/RoundCoachMark.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftEntryKit/SwiftEntryKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ViewAnimator/ViewAnimator.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
