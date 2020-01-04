@@ -150,6 +150,15 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    var blurView = UIVisualEffectView()
+    ///Detect if the view controller attempted to dismiss, but didn't
+    var hasStartedDismissing = false
+    var cancelSeconds = 0
+    var cancelTimer : Timer?
+    var isCancelTimerRunning = false //This will be used to make sure only one timer is created at a time.
+    
+    
     ///FAST MODE
     enum FastFinding {
         case busy

@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class SettingsViewController: UIViewController {
     
     
@@ -24,36 +25,46 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var findblueButton: UIButton!
     @IBOutlet weak var purpleButton: UIButton!
     
-    @IBOutlet weak var monthColorsView: UIView!
-    @IBOutlet weak var janButton: UIButton!
-    @IBOutlet weak var febButton: UIButton!
-    @IBOutlet weak var marButton: UIButton!
-    @IBOutlet weak var aprButton: UIButton!
-    @IBOutlet weak var mayButton: UIButton!
-    @IBOutlet weak var junButton: UIButton!
-    @IBOutlet weak var julButton: UIButton!
-    @IBOutlet weak var augButton: UIButton!
-    @IBOutlet weak var sepButton: UIButton!
-    @IBOutlet weak var octButton: UIButton!
-    @IBOutlet weak var novButton: UIButton!
-    @IBOutlet weak var decButton: UIButton!
+
+    @IBOutlet weak var watchTutorialView: UIView!
     
-    @IBOutlet weak var prefilterView: UIView!
-    @IBOutlet weak var prefilterSwitch: UISwitch!
+    @IBOutlet weak var clearHistoryView: UIView!
+    
+    @IBOutlet weak var resetSettingsView: UIView!
+    
+    @IBOutlet weak var rateAppView: UIView!
+    
+    @IBOutlet weak var helpView: UIView!
+    
+    
+    
+    
+    
+    
+    
+    
+    //    @IBOutlet weak var prefilterView: UIView!
+//    @IBOutlet weak var prefilterSwitch: UISwitch!
     
     @IBOutlet weak var otherSettingsView: UIView!
-    @IBOutlet weak var statusHUDSwitch: UISwitch!
     
     
+    
+    
+    
+    @IBOutlet weak var feedbackView: UIView!
     
     @IBOutlet weak var creditsView: UIView!
     
+    weak var delegate: UIAdaptivePresentationControllerDelegate?
     
     
     override func viewDidLoad() {
         setUpSettingsRoundedCorners()
-        setUpSettingsSwitches()
+        //setUpSettingsSwitches()
         setUpXButton()
+        setUpGradientFeedback()
+        addGestureRecognizers()
     }
     
     func setUpXButton() {
@@ -62,6 +73,11 @@ class SettingsViewController: UIViewController {
         blackXButtonView.isUserInteractionEnabled = true
     }
     @objc func handleBlackXPress(_ sender: UITapGestureRecognizer? = nil) {
+       // presentationController?.delegate?.presentationControllerDidDismiss
+        // delegate?.presentationControllerDidDismiss?(presentationController!)
+        if let pvc = self.presentationController {
+            pvc.delegate?.presentationControllerDidDismiss?(pvc)
+        }
         self.dismiss(animated: true, completion: nil)
     }
     

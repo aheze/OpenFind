@@ -8,7 +8,41 @@
 
 import UIKit
 
-extension ViewController {
+extension ViewController: UIAdaptivePresentationControllerDelegate {
+   
+    
+   
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        if cancelTimer != nil {
+            cancelTimer!.invalidate()
+            cancelTimer = nil
+        }
+        startSceneView(finish: "end")
+    }
+    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
+        hasStartedDismissing = true
+        startSceneView(finish: "start")
+        if cancelTimer == nil {
+        cancelTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
+        }
+    }
+    @objc func updateTimer() {
+        cancelSeconds += 1
+        if cancelSeconds == 5 {
+            print("hit 5 secs")
+            if cancelTimer != nil {
+                cancelTimer!.invalidate()
+                cancelTimer = nil
+            }
+            cancelSeconds = 0
+            cancelSceneView()
+        }
+        
+        //This will decrement(count down)the seconds.
+        //timerLabel.text = "\(seconds)"
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     //        if segue.identifier == "goToHistory" {
     //            print("hist")
@@ -24,6 +58,7 @@ extension ViewController {
                     destinationVC.folderURL = globalUrl
                 case "goToSettings":
                     print("prepare settings")
+                    segue.destination.presentationController?.delegate = self
                 case "goToNewHistory":
                     print("sdnf")
                     let destinationVC = segue.destination as! NewHistoryViewController
@@ -96,6 +131,9 @@ extension ViewController {
         goToSett.imageView.image = #imageLiteral(resourceName: "bsettings 2")
         goToSett.action = { item in
             print("settings")
+            
+            self.blurScreenForSheetPresentation()
+            
             self.performSegue(withIdentifier: "goToSettings", sender: self)
             //self.t.suspend()
             //self.f.suspend()
