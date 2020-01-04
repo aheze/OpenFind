@@ -142,8 +142,8 @@ extension ViewController {
                 tag1.alpha = 0
                 tag2.alpha = 0
             }, completion: { _ in
-                let configuration = AROrientationTrackingConfiguration()
-                self.sceneView.session.run(configuration, options: [.removeExistingAnchors, .resetTracking])
+                self.fadeClassicHighlights()
+                self.sceneView.session.run(self.fastSceneConfiguration, options: [.removeExistingAnchors, .resetTracking])
                 self.modeButton.imageView.image = #imageLiteral(resourceName: "bfast 2")
                 self.fastFindingToggle = .notBusy
                 

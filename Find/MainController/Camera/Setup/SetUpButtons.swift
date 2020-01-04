@@ -60,6 +60,7 @@ extension ViewController {
         self.blurScreen(mode: "focus")
     }
     func toFast() {
+        
         self.scanModeToggle = .fast
         self.classicHasFoundOne = false
         self.stopCoaching()

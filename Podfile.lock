@@ -1,18 +1,26 @@
 PODS:
   - JJFloatingActionButton (2.0.0)
   - QuickLayout (3.0.0)
+  - Realm (4.3.0):
+    - Realm/Headers (= 4.3.0)
+  - Realm/Headers (4.3.0)
+  - RealmSwift (4.3.0):
+    - Realm (= 4.3.0)
   - RoundCoachMark (1.0.2)
   - ViewAnimator (2.7.0)
 
 DEPENDENCIES:
   - JJFloatingActionButton (from `https://github.com/zjohnzheng/JJFloatingActionButton`)
   - QuickLayout
+  - RealmSwift
   - RoundCoachMark (from `https://github.com/zjohnzheng/RoundCoachMark`)
   - ViewAnimator
 
 SPEC REPOS:
   trunk:
     - QuickLayout
+    - Realm
+    - RealmSwift
     - ViewAnimator
 
 EXTERNAL SOURCES:
@@ -32,9 +40,11 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   JJFloatingActionButton: 5fc3df9cac6c0e8d8248997ad3fad25a678f9e76
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
+  Realm: 9357c3589555793e1860a7104a7412bca4a48d99
+  RealmSwift: 402f1e379a8ef82c635313037b043f0f06de880c
   RoundCoachMark: b3b00eb04ef90654af6f7ab50b3ed03ed2901467
   ViewAnimator: 5af1c6f3b310f012bf081259c43717aa54fbae73
 
-PODFILE CHECKSUM: e600233c54f1c2782f2953fdec0b462bf1059d3d
+PODFILE CHECKSUM: 5f9150b18a84e7c19aff9262f78e3c6792704fd2
 
 COCOAPODS: 1.8.3

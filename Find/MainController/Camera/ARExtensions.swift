@@ -46,11 +46,17 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
     
     func setUpARDelegates() {
         ///called when ViewDidLoad, loads a world tracking (Classic) configuration
-        sceneView.delegate = self
-        sceneView.session.delegate = self
-        sceneView.autoenablesDefaultLighting = true
-        sceneConfiguration.planeDetection = [.horizontal, .vertical]
-        sceneView.session.run(sceneConfiguration)
+        switch scanModeToggle {
+        case .classic:
+            sceneView.autoenablesDefaultLighting = true
+            sceneConfiguration.planeDetection = [.horizontal, .vertical]
+            sceneView.session.run(sceneConfiguration)
+        case .focused:
+            print("setUpFocus")
+        case .fast:
+            print("setUpFast")
+        }
+        
     }
     func runImageTrackingSession(with trackingImages: Set<ARReferenceImage>,
                                          runOptions: ARSession.RunOptions = [.removeExistingAnchors, .resetTracking]) {
@@ -63,6 +69,7 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
     
     ///Classic, for making the plane bigger when the device moves around
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        
         guard let planeAnchor = anchor as? ARPlaneAnchor,
         let planeNode = node.childNodes.first,
         let plane = planeNode.geometry as? SCNPlane else { return }
@@ -171,6 +178,14 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
 
     
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        if startGettingNearestFeaturePoints == true {
+            
+            if let featurePoints = frame.rawFeaturePoints?.points {
+                for point in featurePoints {
+                    print("sdkjh")
+                }
+            }
+        }
         if scanModeToggle == .focused {
             let results = sceneView.hitTest(crosshairPoint, options: nil)
             if let feature = results.first {

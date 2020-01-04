@@ -51,7 +51,6 @@
 		4969373E2353C3D8009CA41A /* ShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4969373D2353C3D8009CA41A /* ShutterButton.swift */; };
 		4979A39023AF3A4800B09380 /* FastMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979A38F23AF3A4800B09380 /* FastMode.swift */; };
 		4979A39323AF3C4F00B09380 /* FastVisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979A39223AF3C4F00B09380 /* FastVisionHandler.swift */; };
-		4979A39523AF3F6900B09380 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979A39423AF3F6900B09380 /* Preview.swift */; };
 		4988FBFB23BEC9FA00199635 /* EKRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988FBB523BEC9FA00199635 /* EKRootViewController.swift */; };
 		4988FBFC23BEC9FA00199635 /* EKEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988FBB623BEC9FA00199635 /* EKEntryView.swift */; };
 		4988FBFD23BEC9FA00199635 /* EKWindowProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988FBB723BEC9FA00199635 /* EKWindowProvider.swift */; };
@@ -115,6 +114,8 @@
 		4988FC3723BEC9FA00199635 /* EntryAppearanceDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988FBF823BEC9FA00199635 /* EntryAppearanceDescriptor.swift */; };
 		4988FC3823BEC9FA00199635 /* EKPopUpMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988FBF923BEC9FA00199635 /* EKPopUpMessageView.swift */; };
 		4988FC3923BEC9FA00199635 /* EKMessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988FBFA23BEC9FA00199635 /* EKMessageContentView.swift */; };
+		4988FC4523BEF82600199635 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988FC4423BEF82600199635 /* ListController.swift */; };
+		4988FC4823BEF89600199635 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988FC4723BEF89600199635 /* ListModel.swift */; };
 		4991344E236FDF1300B82E46 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991344D236FDF1200B82E46 /* SettingsViewController.swift */; };
 		49913450236FE12400B82E46 /* SettingsViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991344F236FE12400B82E46 /* SettingsViewExtensions.swift */; };
 		49913452236FE33B00B82E46 /* SettingsBasicSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49913451236FE33B00B82E46 /* SettingsBasicSetup.swift */; };
@@ -193,7 +194,6 @@
 		4969373D2353C3D8009CA41A /* ShutterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutterButton.swift; sourceTree = "<group>"; };
 		4979A38F23AF3A4800B09380 /* FastMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastMode.swift; sourceTree = "<group>"; };
 		4979A39223AF3C4F00B09380 /* FastVisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastVisionHandler.swift; sourceTree = "<group>"; };
-		4979A39423AF3F6900B09380 /* Preview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		4988FBB523BEC9FA00199635 /* EKRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EKRootViewController.swift; sourceTree = "<group>"; };
 		4988FBB623BEC9FA00199635 /* EKEntryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EKEntryView.swift; sourceTree = "<group>"; };
 		4988FBB723BEC9FA00199635 /* EKWindowProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EKWindowProvider.swift; sourceTree = "<group>"; };
@@ -257,6 +257,8 @@
 		4988FBF823BEC9FA00199635 /* EntryAppearanceDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryAppearanceDescriptor.swift; sourceTree = "<group>"; };
 		4988FBF923BEC9FA00199635 /* EKPopUpMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EKPopUpMessageView.swift; sourceTree = "<group>"; };
 		4988FBFA23BEC9FA00199635 /* EKMessageContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EKMessageContentView.swift; sourceTree = "<group>"; };
+		4988FC4423BEF82600199635 /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
+		4988FC4723BEF89600199635 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		4991344D236FDF1200B82E46 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4991344F236FE12400B82E46 /* SettingsViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewExtensions.swift; sourceTree = "<group>"; };
 		49913451236FE33B00B82E46 /* SettingsBasicSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBasicSetup.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 		4904524A237907170046570D /* Matches */ = {
 			isa = PBXGroup;
 			children = (
+				499583A823BEC74D0022689A /* MatchesUpdater.swift */,
 				4911508C235D51E300EC0C04 /* MatchesHUD.swift */,
 				4904524B2379072F0046570D /* UpdateMatches.swift */,
 			);
@@ -430,6 +433,7 @@
 				496937392353C228009CA41A /* Settings */,
 				49B7A33B2392FFDA0070209F /* History Beta */,
 				49368CA52390598000B67C4A /* FullScreen */,
+				4988FC4623BEF82D00199635 /* Lists */,
 			);
 			path = MainController;
 			sourceTree = "<group>";
@@ -490,10 +494,8 @@
 		4979A39123AF3B4B00B09380 /* Fast */ = {
 			isa = PBXGroup;
 			children = (
-				4979A39423AF3F6900B09380 /* Preview.swift */,
 				4979A38F23AF3A4800B09380 /* FastMode.swift */,
 				4979A39223AF3C4F00B09380 /* FastVisionHandler.swift */,
-				499583A823BEC74D0022689A /* MatchesUpdater.swift */,
 			);
 			path = Fast;
 			sourceTree = "<group>";
@@ -630,6 +632,15 @@
 				4988FBF823BEC9FA00199635 /* EntryAppearanceDescriptor.swift */,
 			);
 			path = MessagesUtils;
+			sourceTree = "<group>";
+		};
+		4988FC4623BEF82D00199635 /* Lists */ = {
+			isa = PBXGroup;
+			children = (
+				4988FC4423BEF82600199635 /* ListController.swift */,
+				4988FC4723BEF89600199635 /* ListModel.swift */,
+			);
+			path = Lists;
 			sourceTree = "<group>";
 		};
 		4999AC872353A80A00AB06A7 = {
@@ -857,6 +868,7 @@
 				49B7A32F2390DB810070209F /* ArrowView.swift in Sources */,
 				494DF11F23961B4E0076412D /* BDVCInfo.swift in Sources */,
 				491150962364CC2D00EC0C04 /* RectangleDetector.swift in Sources */,
+				4988FC4823BEF89600199635 /* ListModel.swift in Sources */,
 				4988FC0A23BEC9FA00199635 /* UIRectCorner+Short.swift in Sources */,
 				4988FC1823BEC9FA00199635 /* EKAttributes+PopBehavior.swift in Sources */,
 				49913452236FE33B00B82E46 /* SettingsBasicSetup.swift in Sources */,
@@ -900,7 +912,6 @@
 				49115089235D17EB00EC0C04 /* shutterPressed.swift in Sources */,
 				4988FBFD23BEC9FA00199635 /* EKWindowProvider.swift in Sources */,
 				495ECCA7238CF76C00E7D966 /* NewHistoryViewController.swift in Sources */,
-				4979A39523AF3F6900B09380 /* Preview.swift in Sources */,
 				49517018235AC56D00E00D83 /* Theme.swift in Sources */,
 				4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */,
 				49F7B1542353FDF40099FA62 /* VisionHandler.swift in Sources */,
@@ -937,6 +948,7 @@
 				4988FC0D23BEC9FA00199635 /* SwiftEntryKit.swift in Sources */,
 				49089E1F238EFFFA0070A70C /* FooterView.swift in Sources */,
 				4988FC0423BEC9FA00199635 /* UIView+Responder.swift in Sources */,
+				4988FC4523BEF82600199635 /* ListController.swift in Sources */,
 				4988FC0123BEC9FA00199635 /* EKWrapperView.swift in Sources */,
 				49517015235AC56D00E00D83 /* CollectionViewLayout.swift in Sources */,
 				49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */,

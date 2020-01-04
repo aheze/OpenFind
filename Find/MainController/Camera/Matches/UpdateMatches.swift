@@ -10,12 +10,16 @@ import UIKit
 
 extension ViewController {
     
+    
     func updateMatchesNumber(to number: Int) {
         DispatchQueue.main.async {
             print("update, \(number)")
             if number == 0 {
                 self.upButton.isEnabled = false
                 self.downButton.isEnabled = false
+            } else {
+                self.upButton.isEnabled = true
+                self.downButton.isEnabled = true
             }
         
     //        else if number - 1 == tempComponents.count {

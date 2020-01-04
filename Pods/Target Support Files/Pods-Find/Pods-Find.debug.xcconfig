@@ -1,9 +1,10 @@
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/JJFloatingActionButton" "${PODS_CONFIGURATION_BUILD_DIR}/QuickLayout" "${PODS_CONFIGURATION_BUILD_DIR}/RoundCoachMark" "${PODS_CONFIGURATION_BUILD_DIR}/ViewAnimator"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/JJFloatingActionButton" "${PODS_CONFIGURATION_BUILD_DIR}/QuickLayout" "${PODS_CONFIGURATION_BUILD_DIR}/Realm" "${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift" "${PODS_CONFIGURATION_BUILD_DIR}/RoundCoachMark" "${PODS_CONFIGURATION_BUILD_DIR}/ViewAnimator"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/JJFloatingActionButton/JJFloatingActionButton.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/QuickLayout/QuickLayout.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/RoundCoachMark/RoundCoachMark.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/ViewAnimator/ViewAnimator.framework/Headers"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/JJFloatingActionButton/JJFloatingActionButton.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/QuickLayout/QuickLayout.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Realm/Realm.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/RoundCoachMark/RoundCoachMark.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/ViewAnimator/ViewAnimator.framework/Headers"
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_LDFLAGS = $(inherited) -framework "JJFloatingActionButton" -framework "QuickLayout" -framework "RoundCoachMark" -framework "UIKit" -framework "ViewAnimator"
+LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Realm/core"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"c++" -l"z" -framework "JJFloatingActionButton" -framework "QuickLayout" -framework "Realm" -framework "RealmSwift" -framework "RoundCoachMark" -framework "Security" -framework "UIKit" -framework "ViewAnimator"
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)

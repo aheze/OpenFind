@@ -15,10 +15,10 @@ extension ViewController {
       // print("status: \(fastFindingToggle)")
             if fastFindingToggle == .notBusy {
                 fastFindingToggle = .busy
-                guard let capturedImage = sceneView.session.currentFrame?.capturedImage else {
-                     print("no captured image")
-                     return
-                }
+                if let capturedImage = sceneView.session.currentFrame?.capturedImage {
+                     print("yes captured image...")
+                     
+                
                 let ciImage = CIImage(cvPixelBuffer: capturedImage)
                 let width = ciImage.extent.width
                 let height = ciImage.extent.height
@@ -34,6 +34,8 @@ extension ViewController {
                     try imageRequestHandler.perform(requests)
                 } catch let error {
                     print("Error: \(error)")
+                }
+                
                 }
                 fastFindingToggle = .notBusy
             }

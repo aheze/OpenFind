@@ -69,6 +69,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var upButton: UIButton!
     @IBOutlet weak var downButton: UIButton!
     var shouldScale = true
+    var currentNumber = 0
+    var startGettingNearestFeaturePoints = false
+    let fastSceneConfiguration = AROrientationTrackingConfiguration()
     
     @IBAction func upHUDPressed(_ sender: UIButton) {
         print("up")
@@ -106,8 +109,7 @@ class ViewController: UIViewController {
         shouldMin = !shouldMin
         hideTopNumber(hide: shouldMin)
     }
-    var bsdfhjknL: Bool = false
-    var skdjbf : Bool = false
+    
     var currentPipPosition : CGPoint?
     override func viewDidLayoutSubviews() {
            super.viewDidLayoutSubviews  ()
@@ -222,7 +224,7 @@ class ViewController: UIViewController {
     ///Every mode (Universal)
     let coachingOverlay = ARCoachingOverlayView()
     var statusBarHidden : Bool = false
-    var scanModeToggle = CurrentModeToggle.classic
+    var scanModeToggle = CurrentModeToggle.fast
     var finalTextToFind : String = ""
     let deviceSize = UIScreen.main.bounds.size
     var keyboardHeight = CGFloat() {
@@ -272,16 +274,13 @@ class ViewController: UIViewController {
             object: nil
         )
     }
-    var testCurrent = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        while testCurrent == 1 {
-            testCurrent += 1
-        }
         //MARK: Sceneview
         setUpARDelegates()
-        
+        sceneView.delegate = self
+        sceneView.session.delegate = self
         numberLabel.isHidden = false
         numberDenomLabel.isHidden = false
         shouldMin = false
@@ -306,7 +305,7 @@ class ViewController: UIViewController {
         setUpFilePath()
         setUpMatches()
         setUpCrosshair()
-        addCoaching()
+        //addCoaching()
         
         //changeHUDSize(to: CGSize(width: 55, height: 55))
         //make sure the position views are hidden
@@ -315,21 +314,32 @@ class ViewController: UIViewController {
             view.alpha = 0
         }
         
-        switch scanModeToggle {
-        case .classic:
-//            print("Classic Mode")
-//            previewView.isHidden = true
-//            classicTimer.resume()
-            toClassic()
-        case .focused:
-            print("Focus Mode")
-            //previewView.isHidden = true
-            toFocus()
-        case .fast:
-            print("fast mode")
-           // previewView.isHidden = false
-            toFast()
-        }
+        scanModeToggle = .fast
+        classicHasFoundOne = false
+        stopCoaching()
+        stopProcessingImage = true
+        classicTimer.suspend()
+        focusTimer.suspend()
+        sceneView.session.run(fastSceneConfiguration, options: [.removeExistingAnchors, .resetTracking])
+        modeButton.imageView.image = #imageLiteral(resourceName: "bfast 2")
+        fastFindingToggle = .notBusy
+        fastTimer.resume()
+        print("resume?")
+//        switch scanModeToggle {
+//        case .classic:
+////            print("Classic Mode")
+////            previewView.isHidden = true
+////            classicTimer.resume()
+//            toClassic()
+//        case .focused:
+//            print("Focus Mode")
+//            //previewView.isHidden = true
+//            toFocus()
+//        case .fast:
+//            print("fast mode")
+//           // previewView.isHidden = false
+//            toFast()
+//        }
         
         
     }
