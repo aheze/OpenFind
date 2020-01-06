@@ -8,5 +8,6 @@ pod 'JJFloatingActionButton', :git => 'https://github.com/zjohnzheng/JJFloatingA
 pod 'RoundCoachMark', :git => 'https://github.com/zjohnzheng/RoundCoachMark'
 pod 'QuickLayout'
 pod 'RealmSwift'
+pod 'SDWebImage', '~> 5.0'
 
 end

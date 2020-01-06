@@ -6,41 +6,38 @@
 //  Copyright © 2019 Andrew. All rights reserved.
 //
 import UIKit
+import SDWebImage
 
 protocol UpdateImageDelegate: class {
     func changeImage(image: UIImage)
 }
 
-class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate {
-    
-    //let transitionDelegate: UIViewControllerTransitioningDelegate = ZoomTransitionController()
-    
+class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIViewControllerTransitioningDelegate {
     var selectedIndexPath: IndexPath!
     
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
-    var dictOfHists = Dictionary<Date, Array<UIImage>>()
+    //var dictOfHists = Dictionary<Date, Array<UIImage>>()
     var dictOfFormats : [Int: Date] = [Int: Date]()
     
-    let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    var dictOfUrls = [IndexMatcher: URL]()
+    var sectionCounts = [Int]()
     
+    //let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    //private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+    private let itemsPerRow: CGFloat = 4
+    
+    weak var delegate: UIAdaptivePresentationControllerDelegate?
     //weak var imageDelegate: UpdateImageDelegate?
-    
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var blackXButtonView: UIImageView!
-    //static let sectionHeaderElementKind = "section-header-element-kind"
-    
-    //static let sectionFooterElementKind = "section-footer-element-kind"
-
-    //var dataSource: UICollectionViewDiffableDataSource<Int, Int>! = nil
-    //var collectionView: UICollectionView! = nil
-
     override func viewDidLoad() {
         super.viewDidLoad()
         getData()
         //self.transitioningDelegate = transitionDelegate
         let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.sectionHeadersPinToVisibleBounds = true
+        collectionView?.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         setUpXButton()
     }
     override func present(_ viewControllerToPresent: UIViewController,
@@ -49,8 +46,6 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
       viewControllerToPresent.modalPresentationStyle = .fullScreen
       super.present(viewControllerToPresent, animated: flag, completion: completion)
     }
-    
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 50)
     }
@@ -76,124 +71,127 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         default:
             assert(false, "Unexpected element kind")
         }
-        
     }
-//    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-//
-//    }
     func setUpXButton() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleBlackXPress(_:)))
         blackXButtonView.addGestureRecognizer(tap)
         blackXButtonView.isUserInteractionEnabled = true
     }
     @objc func handleBlackXPress(_ sender: UITapGestureRecognizer? = nil) {
+        if let pvc = self.presentationController {
+            pvc.delegate?.presentationControllerDidDismiss?(pvc)
+        }
         self.dismiss(animated: true, completion: nil)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return dictOfFormats.count
+        //return dictOfFormats.count
+        return sectionCounts.count
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let date = dictOfFormats[section]!
-        let photos = dictOfHists[date]!
-        return photos.count
+        //let date = dictOfFormats[section]!
+        //let photos = dictOfHists[date]!
+        //return photos.count
+        return sectionCounts[section]
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
-        let date = dictOfFormats[indexPath.section]
-        let photos = dictOfHists[date!]
-        cell.imageView.image = photos![indexPath.item]
-        //cell.backgroundColor = UIColor(named: "YellowNow")
-        cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-        ///MAYBE DON'T USE
+      //  let date = dictOfFormats[indexPath.section]
+        //let photos = dictOfHists[date!]
+        //cell.imageView.image = photos![indexPath.item]
+        let newInd = IndexMatcher()
+        newInd.section = indexPath.section
+        newInd.row = indexPath.row
+        let url = dictOfUrls[newInd]
+        cell.imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "Edit"))
+        //cell.imageView.sd_setimagewith
+        
+//        let items = try! FileManager.default.contentsOfDirectory(atPath: folderURL.path)
+//        for item in items {
+//            let theFileName = (item as NSString).lastPathComponent
+//            let splits = theFileName.split(separator: "=")
+//
+//            let categoryName = String(splits[0])
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "MMddyy"
+//            let dateFromString = dateFormatter.date(from: String(splits[0]))!
+//
+//                if let image = loadImageFromDocumentDirectory(urlOfFile: folderURL, nameOfImage: theFileName) {
+//                    dictOfHists[dateFromString, default: [UIImage]()].append(image)
+//                }
+//        }
+        
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemsPerRow = CGFloat(4)
-        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-        var availibleWidth = collectionView.frame.width - paddingSpace
-        availibleWidth -= (itemsPerRow - 1) * 2 ///   Three spacers (there are 4 photos per row for iPhone), each 2 points.
-        let widthPerItem = availibleWidth / itemsPerRow
-        let size = CGSize(width: widthPerItem, height: widthPerItem)
-        return size
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return sectionInsets
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 2 ///horizontal line spacing, also 2 points, just like the availibleWidth
-        
-    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        //self.performSegue(withIdentifier: "goToFullScreen", sender: self)
-        ///let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FullScreenViewController")
-        
-        ///beta
-//        let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PhotoPageContainerViewController")
-//        let drawerContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetViewController")
-//        let pulleyController = PulleyViewController(contentViewController: mainContentVC, drawerViewController: drawerContentVC)
-//        let date = dictOfFormats[indexPath.section]!
-//        let photos = dictOfHists[date]!
-//        guard let vc = pulleyController.primaryContentViewController as? PhotoPageContainerViewController
-//            else { return }
-//        pulleyController.transitioningDelegate = vc.transitionController ///YES! It worked!
-        
-        ///_____________________
-        let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PhotoPageContainerViewController") as! PhotoPageContainerViewController
-           //let mainContentVC = PhotoPageContainerViewController()
-           
-           self.selectedIndexPath = indexPath
-           
-           print("1")
-           mainContentVC.transitioningDelegate = mainContentVC.transitionController
-        print("2")
-           mainContentVC.transitionController.fromDelegate = self
-        print("3")
-           mainContentVC.transitionController.toDelegate = mainContentVC
-        print("4")
-        mainContentVC.delegate = self
-        print("5")
-           let date = dictOfFormats[indexPath.section]!
-        print("6")
-           let photos = dictOfHists[date]!
-        print("7")
-        mainContentVC.currentIndex = indexPath.item
-        mainContentVC.currentSection = indexPath.section
-        print("8")
-        mainContentVC.photos = photos
-        print("9")
-           self.present(mainContentVC, animated: true)
-        print("10")
-        ///__________________
-        
-        
-//        vc.transitionController.fromDelegate = self
-//        vc.transitionController.toDelegate = vc
-//        vc.delegate = self
-//        print("1")
-//        self.selectedIndexPath = indexPath
-//
-//        vc.currentIndex = indexPath.item
-//        print("3")
-//        vc.photos = photos
-//        print("photos...")
-//        self.present(pulleyController, animated: true)
-        
+        let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
+            "PhotoPageContainerViewController") as! PhotoPageContainerViewController
+            //let mainContentVC = PhotoPageContainerViewController()
+            self.selectedIndexPath = indexPath
+            mainContentVC.transitioningDelegate = mainContentVC.transitionController
+            mainContentVC.transitionController.fromDelegate = self
+            mainContentVC.transitionController.toDelegate = mainContentVC
+            mainContentVC.delegate = self
+            //let date = dictOfFormats[indexPath.section]!
+           // let photos = dictOfHists[date]!
+            mainContentVC.currentIndex = indexPath.item
+            mainContentVC.currentSection = indexPath.section
+           // mainContentVC.photos = photos
+            self.present(mainContentVC, animated: true)
     }
+}
+extension NewHistoryViewController : UICollectionViewDelegateFlowLayout {
+  //1
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      sizeForItemAt indexPath: IndexPath) -> CGSize {
+    //2
+//    let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+//    let availableWidth = view.frame.width - paddingSpace
+//    let widthPerItem = availableWidth / itemsPerRow
+//
+//    return CGSize(width: widthPerItem, height: widthPerItem)
+    let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right)) / 3
+    return CGSize(width: itemSize, height: itemSize)
+  }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+//  //3
+//  func collectionView(_ collectionView: UICollectionView,
+//                      layout collectionViewLayout: UICollectionViewLayout,
+//                      insetForSectionAt section: Int) -> UIEdgeInsets {
+//    return sectionInsets
+//  }
+//
+//  // 4
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return 0
+  }
+
+
+
+
+
 }
 
 extension NewHistoryViewController {
     func getData() {
+        var arrayOfCategoryDates = [Date]()
+        var tempDictOfImagePaths = [Date: [URL]]()
+        
+        //print(folderURL.path)
         do {
             let items = try FileManager.default.contentsOfDirectory(atPath: folderURL.path)
-            for item in items {
-                let theFileName = (item as NSString).lastPathComponent
+            for theFileName in items {
+                //print(item)
+                //let theFileName = (item as NSString).lastPathComponent
+                //print(theFileName)
+                //print(folderURL.path)
                 let splits = theFileName.split(separator: "=")
                 
                 let categoryName = String(splits[0])
@@ -201,32 +199,57 @@ extension NewHistoryViewController {
                 dateFormatter.dateFormat = "MMddyy"
                 let dateFromString = dateFormatter.date(from: String(splits[0]))!
                 
-                if theFileName.contains(categoryName) {
-                    if let image = loadImageFromDocumentDirectory(urlOfFile: folderURL, nameOfImage: theFileName) {
-                        dictOfHists[dateFromString, default: [UIImage]()].append(image)
-                    }
+//                    if let image = loadImageFromDocumentDirectory(urlOfFile: folderURL, nameOfImage: theFileName) {
+//                        dictOfHists[dateFromString, default: [UIImage]()].append(image)
+//                        //tempDictOfImagePaths[dateFromString]?.append(item)
+//                    }
+                let imagePath = "\(folderURL)/\(theFileName)"
+                if !arrayOfCategoryDates.contains(dateFromString) {
+                    arrayOfCategoryDates.append(dateFromString)
                 }
+                if let imageUrl = URL(string: imagePath) {
+                    tempDictOfImagePaths[dateFromString, default: [URL]()].append(imageUrl)
+                    
+                }
+                
             }
+            print(tempDictOfImagePaths)
         } catch {
             print("error getting photos... \(error)")
         }
        
-        var tempCategories = [Date]()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMddyy"
-        for dict in dictOfHists {
-            let dictDate = dict.key
-            tempCategories.append(dictDate)
+//        var tempCategories = [Date]()
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "MMddyy"
+//        for dict in dictOfHists {
+//            let dictDate = dict.key
+//            tempCategories.append(dictDate)
+//        }
+        arrayOfCategoryDates.sort(by: { $0.compare($1) == .orderedDescending})
+        for (index, date) in arrayOfCategoryDates.enumerated() {
+            sectionCounts.append(0)
+            dictOfFormats[index] = date
+            if let arrayOfImageUrls = tempDictOfImagePaths[date] {
+                for (secondIndex, individualUrl) in arrayOfImageUrls.enumerated() {
+                    var indexPath = IndexMatcher()
+                    indexPath.section = index
+                    indexPath.row = secondIndex
+                    sectionCounts[index] += 1
+                    dictOfUrls[indexPath] = individualUrl
+                    print(sectionCounts[index])
+                }
+            }
+            
         }
-        tempCategories.sort(by: { $0.compare($1) == .orderedDescending})
+        print(dictOfUrls)
         //print(tempCategories)
-        for (index, theDate) in tempCategories.enumerated() {
-            dictOfFormats[index] = theDate
-        }
-        print("how many categories:\(dictOfFormats.count)")
+//        for (index, theDate) in arrayOfCategoryDates.enumerated() {
+//            dictOfFormats[index] = theDate
+//        }
+        //print("how many categories:\(dictOfFormats.count)")
     }
     
-    func loadImageFromDocumentDirectory(urlOfFile: URL,nameOfImage : String) -> UIImage? {
+    func loadImageFromDocumentDirectory(urlOfFile: URL, nameOfImage : String) -> UIImage? {
         let imageURL = urlOfFile.appendingPathComponent("\(nameOfImage)")
         guard let image = UIImage(contentsOfFile: imageURL.path) else { return nil }
         return image

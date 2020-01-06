@@ -138,6 +138,7 @@
 		49B7A33823923EBD0070209F /* PhotoPageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33723923EBD0070209F /* PhotoPageContainerViewController.swift */; };
 		49B7A33A23923EE10070209F /* PhotoZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33923923EE00070209F /* PhotoZoomViewController.swift */; };
 		49B7A33D2393000A0070209F /* BetaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33C2393000A0070209F /* BetaController.swift */; };
+		49BC782023C2B0E0003D9904 /* IndexMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC781F23C2B0DF003D9904 /* IndexMatcher.swift */; };
 		49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */; };
 		49F7B1522353FC970099FA62 /* ProcessImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1512353FC970099FA62 /* ProcessImage.swift */; };
 		49F7B1542353FDF40099FA62 /* VisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1532353FDF40099FA62 /* VisionHandler.swift */; };
@@ -285,6 +286,7 @@
 		49B7A33723923EBD0070209F /* PhotoPageContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPageContainerViewController.swift; sourceTree = "<group>"; };
 		49B7A33923923EE00070209F /* PhotoZoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoZoomViewController.swift; sourceTree = "<group>"; };
 		49B7A33C2393000A0070209F /* BetaController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaController.swift; sourceTree = "<group>"; };
+		49BC781F23C2B0DF003D9904 /* IndexMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexMatcher.swift; sourceTree = "<group>"; };
 		49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		49F7B1512353FC970099FA62 /* ProcessImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessImage.swift; sourceTree = "<group>"; };
 		49F7B1532353FDF40099FA62 /* VisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionHandler.swift; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 				495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */,
 				495ECCAA238DB7BD00E7D966 /* TitleSupplementaryView.swift */,
 				49089E1E238EFFFA0070A70C /* FooterView.swift */,
+				49BC781F23C2B0DF003D9904 /* IndexMatcher.swift */,
 			);
 			path = "New History";
 			sourceTree = "<group>";
@@ -939,6 +942,7 @@
 				4988FC2323BEC9FA00199635 /* EKSimpleMessage.swift in Sources */,
 				4988FC2723BEC9FA00199635 /* EKNotificationMessage.swift in Sources */,
 				49F7B15C2354E85F0099FA62 /* WordReader.swift in Sources */,
+				49BC782023C2B0E0003D9904 /* IndexMatcher.swift in Sources */,
 				49913450236FE12400B82E46 /* SettingsViewExtensions.swift in Sources */,
 				4911509E236503C600EC0C04 /* GetTextFocused.swift in Sources */,
 				4988FC1723BEC9FA00199635 /* EKAttributes+StatusBar.swift in Sources */,

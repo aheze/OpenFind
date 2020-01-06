@@ -7,6 +7,9 @@ PODS:
   - RealmSwift (4.3.0):
     - Realm (= 4.3.0)
   - RoundCoachMark (1.0.2)
+  - SDWebImage (5.4.1):
+    - SDWebImage/Core (= 5.4.1)
+  - SDWebImage/Core (5.4.1)
   - ViewAnimator (2.7.0)
 
 DEPENDENCIES:
@@ -14,6 +17,7 @@ DEPENDENCIES:
   - QuickLayout
   - RealmSwift
   - RoundCoachMark (from `https://github.com/zjohnzheng/RoundCoachMark`)
+  - SDWebImage (~> 5.0)
   - ViewAnimator
 
 SPEC REPOS:
@@ -21,6 +25,7 @@ SPEC REPOS:
     - QuickLayout
     - Realm
     - RealmSwift
+    - SDWebImage
     - ViewAnimator
 
 EXTERNAL SOURCES:
@@ -43,8 +48,9 @@ SPEC CHECKSUMS:
   Realm: 9357c3589555793e1860a7104a7412bca4a48d99
   RealmSwift: 402f1e379a8ef82c635313037b043f0f06de880c
   RoundCoachMark: b3b00eb04ef90654af6f7ab50b3ed03ed2901467
+  SDWebImage: 29c340dbdcef342bb13125553f4e19ce056b07a7
   ViewAnimator: 5af1c6f3b310f012bf081259c43717aa54fbae73
 
-PODFILE CHECKSUM: 5f9150b18a84e7c19aff9262f78e3c6792704fd2
+PODFILE CHECKSUM: 4f33515cbe98d1faa12249823c0cbeda99100b9d
 
 COCOAPODS: 1.8.3

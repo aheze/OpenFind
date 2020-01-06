@@ -27,30 +27,16 @@ class SettingsViewController: UIViewController {
     
 
     @IBOutlet weak var watchTutorialView: UIView!
-    
     @IBOutlet weak var clearHistoryView: UIView!
-    
     @IBOutlet weak var resetSettingsView: UIView!
-    
     @IBOutlet weak var rateAppView: UIView!
-    
     @IBOutlet weak var helpView: UIView!
-    
-    
-    
-    
-    
-    
     
     
     //    @IBOutlet weak var prefilterView: UIView!
 //    @IBOutlet weak var prefilterSwitch: UISwitch!
     
     @IBOutlet weak var otherSettingsView: UIView!
-    
-    
-    
-    
     
     @IBOutlet weak var feedbackView: UIView!
     

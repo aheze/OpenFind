@@ -13,6 +13,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate {
     
    
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        print("Did Dismiss")
         if cancelTimer != nil {
             cancelTimer!.invalidate()
             cancelTimer = nil
@@ -20,6 +21,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate {
         startSceneView(finish: "end")
     }
     func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
+        print("Start Dismiss")
         hasStartedDismissing = true
         startSceneView(finish: "start")
         if cancelTimer == nil {
@@ -61,6 +63,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate {
                     segue.destination.presentationController?.delegate = self
                 case "goToNewHistory":
                     print("sdnf")
+                    segue.destination.presentationController?.delegate = self
                     let destinationVC = segue.destination as! NewHistoryViewController
                     destinationVC.folderURL = globalUrl
                     //destinationVC.modalPresentationStyle = .fullScreen
@@ -143,6 +146,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate {
         goToNewHistory.imageView.image = #imageLiteral(resourceName: "bhistory 2")
         goToNewHistory.action = { item in
             print("akj")
+            self.blurScreenForSheetPresentation()
             self.performSegue(withIdentifier: "goToNewHistory", sender: self)
         }
 //        let goToNewHist = menuButton.addItem()

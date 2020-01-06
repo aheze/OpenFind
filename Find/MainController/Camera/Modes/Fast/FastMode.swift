@@ -12,7 +12,6 @@ import Vision
 extension ViewController {
   
     func fastFind() {
-      // print("status: \(fastFindingToggle)")
             if fastFindingToggle == .notBusy {
                 fastFindingToggle = .busy
                 if let capturedImage = sceneView.session.currentFrame?.capturedImage {
