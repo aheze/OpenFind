@@ -282,6 +282,8 @@ class ViewController: UIViewController {
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
+        navigationController?.navigationBar.barStyle = .black
+        
     }
     
     override func viewDidLoad() {

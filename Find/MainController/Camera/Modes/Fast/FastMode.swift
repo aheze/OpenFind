@@ -15,7 +15,7 @@ extension ViewController {
             if fastFindingToggle == .notBusy {
                 fastFindingToggle = .busy
                 if let capturedImage = sceneView.session.currentFrame?.capturedImage {
-                     print("yes captured image...")
+                //print("yes captured image...")
                      
                 
                 let ciImage = CIImage(cvPixelBuffer: capturedImage)
@@ -38,10 +38,6 @@ extension ViewController {
                 }
                 fastFindingToggle = .notBusy
             }
-            
-            
-        
-        
     }
 }
     

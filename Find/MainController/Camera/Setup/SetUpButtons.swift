@@ -62,7 +62,6 @@ extension ViewController: UIAdaptivePresentationControllerDelegate {
                     print("prepare settings")
                     segue.destination.presentationController?.delegate = self
                 case "goToNewHistory":
-                    print("sdnf")
                     segue.destination.presentationController?.delegate = self
                     let destinationVC = segue.destination as! NewHistoryViewController
                     destinationVC.folderURL = globalUrl
@@ -145,7 +144,6 @@ extension ViewController: UIAdaptivePresentationControllerDelegate {
         goToNewHistory.titleLabel.text = "Newer History"
         goToNewHistory.imageView.image = #imageLiteral(resourceName: "bhistory 2")
         goToNewHistory.action = { item in
-            print("akj")
             self.blurScreenForSheetPresentation()
             self.performSegue(withIdentifier: "goToNewHistory", sender: self)
         }

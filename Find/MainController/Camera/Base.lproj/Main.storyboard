@@ -429,13 +429,46 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlackXbutton" translatesAutoresizingMaskIntoConstraints="NO" id="QPG-2r-IPr">
-                                        <rect key="frame" x="329" y="20" width="30" height="30"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Xbutton" translatesAutoresizingMaskIntoConstraints="NO" id="QPG-2r-IPr">
+                                        <rect key="frame" x="333" y="22" width="26" height="26"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="UBb-Mc-JTY"/>
-                                            <constraint firstAttribute="height" constant="30" id="cFl-Ta-QOd"/>
+                                            <constraint firstAttribute="width" constant="26" id="UBb-Mc-JTY"/>
+                                            <constraint firstAttribute="height" constant="26" id="cFl-Ta-QOd"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ruv-8N-ih6" userLabel="SelectButton">
+                                        <rect key="frame" x="253.5" y="22" width="69.5" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="3tu-7o-voP"/>
+                                            <constraint firstAttribute="width" secondItem="ruv-8N-ih6" secondAttribute="height" multiplier="8:3" id="K4P-cW-iFb"/>
+                                        </constraints>
+                                        <state key="normal" image="Select"/>
+                                        <connections>
+                                            <action selector="selectPressed:" destination="dyF-tU-4Cl" eventType="touchUpInside" id="Pzj-rq-gjm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rlm-nr-gkv" userLabel="ShareButton">
+                                        <rect key="frame" x="223.5" y="22" width="26" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="rlm-nr-gkv" secondAttribute="height" multiplier="1:1" id="Fa3-SD-wW2"/>
+                                            <constraint firstAttribute="height" constant="26" id="G3f-Bo-35q"/>
+                                        </constraints>
+                                        <state key="normal" image="ShareTopButton"/>
+                                        <connections>
+                                            <action selector="sharePressed:" destination="dyF-tU-4Cl" eventType="touchUpInside" id="Lcg-Vb-LT4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ewf-5b-b23" userLabel="DeleteButton">
+                                        <rect key="frame" x="193.5" y="22" width="26" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="3PY-FD-ftO"/>
+                                            <constraint firstAttribute="width" secondItem="ewf-5b-b23" secondAttribute="height" multiplier="1:1" id="5EO-XQ-vPH"/>
+                                        </constraints>
+                                        <state key="normal" image="DeleteTopButton"/>
+                                        <connections>
+                                            <action selector="deletePressed:" destination="dyF-tU-4Cl" eventType="touchUpInside" id="jzm-iA-ifS"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemFillColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -443,7 +476,13 @@
                                     <constraint firstAttribute="trailing" secondItem="QPG-2r-IPr" secondAttribute="trailing" constant="16" id="8bt-kF-Lxc"/>
                                     <constraint firstItem="rMI-bB-kPc" firstAttribute="centerY" secondItem="F4l-AI-AMm" secondAttribute="centerY" id="Cbr-HP-Jj3"/>
                                     <constraint firstItem="rMI-bB-kPc" firstAttribute="leading" secondItem="F4l-AI-AMm" secondAttribute="leading" constant="16" id="HKS-7R-CcY"/>
+                                    <constraint firstItem="ruv-8N-ih6" firstAttribute="leading" secondItem="rlm-nr-gkv" secondAttribute="trailing" constant="4" id="MNg-kJ-Vuv"/>
+                                    <constraint firstItem="rlm-nr-gkv" firstAttribute="leading" secondItem="ewf-5b-b23" secondAttribute="trailing" constant="4" id="bAn-UF-qkt"/>
                                     <constraint firstAttribute="height" constant="70" id="cp6-Tj-sWc"/>
+                                    <constraint firstItem="ruv-8N-ih6" firstAttribute="centerY" secondItem="F4l-AI-AMm" secondAttribute="centerY" id="dYu-W1-aQC"/>
+                                    <constraint firstItem="ewf-5b-b23" firstAttribute="centerY" secondItem="F4l-AI-AMm" secondAttribute="centerY" id="flO-Ym-pmo"/>
+                                    <constraint firstItem="rlm-nr-gkv" firstAttribute="centerY" secondItem="F4l-AI-AMm" secondAttribute="centerY" id="mjQ-pG-Q52"/>
+                                    <constraint firstItem="QPG-2r-IPr" firstAttribute="leading" secondItem="ruv-8N-ih6" secondAttribute="trailing" constant="10" id="nnF-ua-eBz"/>
                                     <constraint firstItem="QPG-2r-IPr" firstAttribute="centerY" secondItem="F4l-AI-AMm" secondAttribute="centerY" id="s6f-Nz-Brh"/>
                                 </constraints>
                             </view>
@@ -475,7 +514,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="WmS-2Y-zaY" secondAttribute="trailing" id="uoN-ET-Qnw"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <color key="backgroundColor" red="0.0" green="0.68235294120000001" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" name="ImageLoading"/>
                                         <connections>
                                             <outlet property="imageView" destination="WmS-2Y-zaY" id="uwb-DL-3Rs"/>
                                         </connections>
@@ -526,6 +565,10 @@
                     <connections>
                         <outlet property="blackXButtonView" destination="QPG-2r-IPr" id="yJM-LI-ugb"/>
                         <outlet property="collectionView" destination="2AD-bM-2xX" id="ZJT-hY-aTG"/>
+                        <outlet property="deleteButton" destination="ewf-5b-b23" id="TSN-Ek-dta"/>
+                        <outlet property="selectButton" destination="ruv-8N-ih6" id="eZt-9K-ctB"/>
+                        <outlet property="selectButtonLeadingConstraint" destination="MNg-kJ-Vuv" id="cSP-al-OYh"/>
+                        <outlet property="shareButton" destination="rlm-nr-gkv" id="Dpq-Lb-S5H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ugj-P6-adb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1426,7 +1469,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Leica Sample" translatesAutoresizingMaskIntoConstraints="NO" id="F00-F2-p0B">
-                                        <rect key="frame" x="0.0" y="0.0" width="640" height="379"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="189.5"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1479,6 +1522,7 @@
     <resources>
         <image name="BlackXbutton" width="300" height="300"/>
         <image name="Delete" width="200" height="200"/>
+        <image name="DeleteTopButton" width="300" height="300"/>
         <image name="DownArrow" width="150" height="90"/>
         <image name="Edit" width="200" height="200"/>
         <image name="Find" width="200" height="200"/>
@@ -1487,7 +1531,9 @@
         <image name="Leica Sample" width="320" height="189.5"/>
         <image name="MinHUD" width="256" height="256"/>
         <image name="Rename" width="200" height="200"/>
+        <image name="Select" width="800" height="300"/>
         <image name="Share" width="200" height="200"/>
+        <image name="ShareTopButton" width="300" height="300"/>
         <image name="Transcript" width="200" height="200"/>
         <image name="UpArrow" width="150" height="90"/>
         <image name="Xbutton" width="300" height="300"/>
@@ -1498,6 +1544,9 @@
         <image name="slash" width="250" height="250"/>
         <namedColor name="BlackWhite">
             <color red="0.14200000464916229" green="0.14200000464916229" blue="0.14200000464916229" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ImageLoading">
+            <color red="0.89999997615814209" green="0.89999997615814209" blue="0.89999997615814209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

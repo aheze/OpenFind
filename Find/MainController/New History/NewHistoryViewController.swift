@@ -7,7 +7,7 @@
 //
 import UIKit
 import SDWebImage
-
+import SwiftEntryKit
 protocol UpdateImageDelegate: class {
     func changeImage(image: UIImage)
 }
@@ -16,28 +16,142 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     var selectedIndexPath: IndexPath!
     
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
-    //var dictOfHists = Dictionary<Date, Array<UIImage>>()
-    var dictOfFormats : [Int: Date] = [Int: Date]()
-    
+    var sectionToDate : [Int: Date] = [Int: Date]()
+    var dateToFilepaths = [Date: [URL]]()
     var dictOfUrls = [IndexMatcher: URL]()
     var sectionCounts = [Int]()
+    var imageSize = CGSize(width: 0, height: 0)
     
     //let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     //private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
     private let itemsPerRow: CGFloat = 4
     
+    
     weak var delegate: UIAdaptivePresentationControllerDelegate?
-    //weak var imageDelegate: UpdateImageDelegate?
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var selectButtonLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var selectButton: UIButton!
+    var selectButtonSelected = true
+    var swipedToDismiss = true
+    @IBAction func selectPressed(_ sender: UIButton) {
+        selectButtonSelected = !selectButtonSelected
+        if selectButtonSelected == false {
+            print("select")
+            
+            fadeSelectOptions(fadeOut: "fade in")
+        } else { ///Cancel
+            print("cancel")
+            swipedToDismiss = false
+            fadeSelectOptions(fadeOut: "fade out")
+            swipedToDismiss = true
+        }
+    }
+    
+    func fadeSelectOptions(fadeOut: String) {
+        switch fadeOut {
+        case "fade out":
+            if swipedToDismiss == false {
+                SwiftEntryKit.dismiss()
+            }
+            selectButtonLeadingConstraint.constant = CGFloat(-4)
+            UIView.animate(withDuration: 0.5, animations: {
+                self.deleteButton.alpha = 0
+                self.shareButton.alpha = 0
+                self.view.layoutIfNeeded()
+            }, completion: { _ in
+                self.deleteButton.isHidden = true
+                self.shareButton.isHidden = true
+            })
+            let toImage = UIImage(named: "Select")
+            UIView.transition(with: selectButton,
+                              duration: 0.2,
+                              options: .transitionCrossDissolve,
+                              animations: {
+                                self.selectButton.setImage(toImage, for: .normal)
+                              },
+                              completion: nil)
+        case "fade in":
+            // Create a basic toast that appears at the top
+            var attributes = EKAttributes.bottomFloat
+            attributes.entryBackground = .color(color: .white)
+            attributes.entranceAnimation = .translation
+            attributes.exitAnimation = .translation
+            attributes.displayDuration = .infinity
+            attributes.positionConstraints.size.height = .constant(value: 50)
+            attributes.statusBar = .light
+            attributes.lifecycleEvents.willDisappear = {
+                if self.swipedToDismiss == true {
+                    self.fadeSelectOptions(fadeOut: "fade out")
+                    self.swipedToDismiss = false
+                    self.selectButtonSelected = !self.selectButtonSelected
+                }
+                
+                
+            }
+            let customView = HistorySelect()
+            SwiftEntryKit.display(entry: customView, using: attributes)
+            
+            deleteButton.isHidden = false
+            shareButton.isHidden = false
+            selectButtonLeadingConstraint.constant = CGFloat(4)
+            UIView.animate(withDuration: 0.5, animations: {
+                self.deleteButton.alpha = 1
+                self.shareButton.alpha = 1
+                self.view.layoutIfNeeded()
+            })
+            let toImage = UIImage(named: "Cancel")
+            UIView.transition(with: selectButton,
+                              duration: 0.2,
+                              options: .transitionCrossDissolve,
+                              animations: {
+                                self.selectButton.setImage(toImage, for: .normal)
+                              },
+                              completion: nil)
+        case "firstTimeSetup":
+            deleteButton.alpha = 0
+            deleteButton.isHidden = true
+            
+            shareButton.alpha = 0
+            shareButton.isHidden = true
+            
+            selectButtonLeadingConstraint.constant = CGFloat(-4)
+            view.layoutIfNeeded()
+        default:
+            print("unknown case, fade")
+        }
+    }
+    
+    
+    @IBAction func deletePressed(_ sender: UIButton) {
+        print("delete")
+    }
+    
+    @IBAction func sharePressed(_ sender: UIButton) {
+        print("share")
+    }
+    
+    
+    
     
     @IBOutlet weak var blackXButtonView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         getData()
+        
+        fadeSelectOptions(fadeOut: "firstTimeSetup")
         //self.transitioningDelegate = transitionDelegate
         let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.sectionHeadersPinToVisibleBounds = true
         collectionView?.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        if let sampleDate = sectionToDate[0] {
+            if let sampleImagePath = dateToFilepaths[sampleDate] {
+                let newImage = loadImageFromDocumentDirectory(urlOfFile: sampleImagePath.first!)
+                imageSize = newImage!.size
+            }
+        }
         setUpXButton()
     }
     override func present(_ viewControllerToPresent: UIViewController,
@@ -58,7 +172,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "sectionHeaderId", for: indexPath) as! TitleSupplementaryView
             //headerView.todayLabel.text = "Text: \(indexPath.section)"
-            let date = dictOfFormats[indexPath.section]!
+            let date = sectionToDate[indexPath.section]!
             let readableDate = convertDateToReadableString(theDate: date)
             headerView.todayLabel.text = readableDate
             return headerView
@@ -81,65 +195,70 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         if let pvc = self.presentationController {
             pvc.delegate?.presentationControllerDidDismiss?(pvc)
         }
+        SwiftEntryKit.dismiss()
         self.dismiss(animated: true, completion: nil)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        //return dictOfFormats.count
         return sectionCounts.count
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //let date = dictOfFormats[section]!
-        //let photos = dictOfHists[date]!
-        //return photos.count
         return sectionCounts[section]
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
-      //  let date = dictOfFormats[indexPath.section]
-        //let photos = dictOfHists[date!]
-        //cell.imageView.image = photos![indexPath.item]
         let newInd = IndexMatcher()
         newInd.section = indexPath.section
         newInd.row = indexPath.row
         let url = dictOfUrls[newInd]
-        cell.imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "Edit"))
-        //cell.imageView.sd_setimagewith
-        
-//        let items = try! FileManager.default.contentsOfDirectory(atPath: folderURL.path)
-//        for item in items {
-//            let theFileName = (item as NSString).lastPathComponent
-//            let splits = theFileName.split(separator: "=")
-//
-//            let categoryName = String(splits[0])
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "MMddyy"
-//            let dateFromString = dateFormatter.date(from: String(splits[0]))!
-//
-//                if let image = loadImageFromDocumentDirectory(urlOfFile: folderURL, nameOfImage: theFileName) {
-//                    dictOfHists[dateFromString, default: [UIImage]()].append(image)
-//                }
-//        }
+        cell.imageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+        cell.imageView.sd_imageTransition = .fade
+        cell.imageView.sd_setImage(with: url)
         
         return cell
     }
-    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
+            // Create an action for sharing
+            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { action in
+                // Show share sheet
+            }
+
+            // Create an action for copy
+            let rename = UIAction(title: "Copy", image: UIImage(systemName: "doc.on.doc")) { action in
+                // Perform copy
+            }
+
+            // Create an action for delete with destructive attributes (highligh in red)
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { action in
+                // Perform delete
+            }
+
+            // Create a UIMenu with all the actions as children
+            return UIMenu(title: "", children: [share, rename, delete])
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
             "PhotoPageContainerViewController") as! PhotoPageContainerViewController
-            //let mainContentVC = PhotoPageContainerViewController()
-            self.selectedIndexPath = indexPath
-            mainContentVC.transitioningDelegate = mainContentVC.transitionController
-            mainContentVC.transitionController.fromDelegate = self
-            mainContentVC.transitionController.toDelegate = mainContentVC
-            mainContentVC.delegate = self
-            //let date = dictOfFormats[indexPath.section]!
-           // let photos = dictOfHists[date]!
-            mainContentVC.currentIndex = indexPath.item
-            mainContentVC.currentSection = indexPath.section
-           // mainContentVC.photos = photos
-            self.present(mainContentVC, animated: true)
+        self.selectedIndexPath = indexPath
+        mainContentVC.transitioningDelegate = mainContentVC.transitionController
+        mainContentVC.transitionController.fromDelegate = self
+        mainContentVC.transitionController.toDelegate = mainContentVC
+        mainContentVC.delegate = self
+        mainContentVC.currentIndex = indexPath.item
+        mainContentVC.currentSection = indexPath.section
+        //print(imageSize)
+        mainContentVC.photoSize = imageSize
+        
+        if let date = sectionToDate[indexPath.section] {
+            mainContentVC.photoPaths = dateToFilepaths[date]!
+        }
+        // mainContentVC.photos = photos
+        print("_____")
+        //print(dateToFilepaths)
+        self.present(mainContentVC, animated: true)
     }
 }
 extension NewHistoryViewController : UICollectionViewDelegateFlowLayout {
@@ -213,7 +332,8 @@ extension NewHistoryViewController {
                 }
                 
             }
-            print(tempDictOfImagePaths)
+            
+            //print(tempDictOfImagePaths)
         } catch {
             print("error getting photos... \(error)")
         }
@@ -228,7 +348,7 @@ extension NewHistoryViewController {
         arrayOfCategoryDates.sort(by: { $0.compare($1) == .orderedDescending})
         for (index, date) in arrayOfCategoryDates.enumerated() {
             sectionCounts.append(0)
-            dictOfFormats[index] = date
+            sectionToDate[index] = date
             if let arrayOfImageUrls = tempDictOfImagePaths[date] {
                 for (secondIndex, individualUrl) in arrayOfImageUrls.enumerated() {
                     var indexPath = IndexMatcher()
@@ -236,12 +356,13 @@ extension NewHistoryViewController {
                     indexPath.row = secondIndex
                     sectionCounts[index] += 1
                     dictOfUrls[indexPath] = individualUrl
-                    print(sectionCounts[index])
+                    dateToFilepaths[date, default: [URL]()].append(individualUrl)
+                    //print(sectionCounts[index])
                 }
             }
             
         }
-        print(dictOfUrls)
+        //print(dictOfUrls)
         //print(tempCategories)
 //        for (index, theDate) in arrayOfCategoryDates.enumerated() {
 //            dictOfFormats[index] = theDate
@@ -249,9 +370,8 @@ extension NewHistoryViewController {
         //print("how many categories:\(dictOfFormats.count)")
     }
     
-    func loadImageFromDocumentDirectory(urlOfFile: URL, nameOfImage : String) -> UIImage? {
-        let imageURL = urlOfFile.appendingPathComponent("\(nameOfImage)")
-        guard let image = UIImage(contentsOfFile: imageURL.path) else { return nil }
+    func loadImageFromDocumentDirectory(urlOfFile: URL) -> UIImage? {
+        guard let image = UIImage(contentsOfFile: urlOfFile.path) else { return nil }
         return image
     }
     

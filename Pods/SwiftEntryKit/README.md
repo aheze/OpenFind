@@ -9,7 +9,7 @@
 ![](https://travis-ci.com/huri000/SwiftEntryKit.svg?branch=master)
 
 ## What's New?
-### 🌑 `1.1.3` - let there be dark
+### 🌑 `1.1.4` - let there be dark
 `SwiftEntryKit` is now dark mode ready, and user interface styles are supported pre iOS 13 / Xcode 11!
 
 To know more about it, visit [Change Log](https://github.com/huri000/SwiftEntryKit/blob/master/CHANGELOG.md#110), and install the [example project](#example-project-installation).
@@ -133,7 +133,7 @@ The Playground Screen | Top Toast Sample
 - Xcode 9 or any higher version.
 - Swift 4.0 or any higher version.
 - The library has not been tested with iOS 8.x.y or a lower version.
-- SwiftEntryKit leans heavily on [QuickLayout](https://github.com/huri000/QuickLayout) - A lightwight library written in Swift that is used to easily layout views programmatically.
+- SwiftEntryKit leans heavily on [QuickLayout](https://github.com/huri000/QuickLayout) - A lightweight library written in Swift that is used to easily layout views programmatically.
 
 ## Installation
 
@@ -156,7 +156,7 @@ source 'https://github.com/cocoapods/specs.git'
 platform :ios, '9.0'
 use_frameworks!
 
-pod 'SwiftEntryKit', '1.1.3'
+pod 'SwiftEntryKit', '1.2.3'
 ```
 
 Then, run the following command:
@@ -179,7 +179,7 @@ $ brew install carthage
 To integrate SwiftEntryKit into your Xcode project using Carthage, specify the following in your `Cartfile`:
 
 ```ogdl
-github "huri000/SwiftEntryKit" == 1.1.3
+github "huri000/SwiftEntryKit" == 1.2.3
 ```
 
 ### Accio
@@ -196,7 +196,7 @@ $ brew install accio
 To integrate SwiftEntryKit into your Xcode project using Accio, specify the following in your `Package.swift` manifest:
 
 ```swift
-.package(url: "https://github.com/huri000/SwiftEntryKit", .exact("1.1.3"))
+.package(url: "https://github.com/huri000/SwiftEntryKit", .exact("1.2.3"))
 ```
 
 After specifying `"SwiftEntryKit"` as a dependency of the target in which you want to use it, run `accio install`.
@@ -276,7 +276,7 @@ attributes.position = .bottom
 The default value of `position` is `.top`.
 
 #### Precedence
-The precedence attribute of an entry describes the manner in which entries are pushed in. It offers 2 approaches for managing the presentation priority of multiple simultanious entries.
+The precedence attribute of an entry describes the manner in which entries are pushed in. It offers 2 approaches for managing the presentation priority of multiple simultaneous entries.
 
 ##### Override
 If the [display priority](#display-priority) is equal or higher than the currently displayed entry, override it.
@@ -618,7 +618,7 @@ The entry is being popped animatedly:
 attributes.popBehavior = .animated(animation: .init(translate: .init(duration: 0.2)))
 ```
 
-The entry is being overriden (Disappears promptly):
+The entry is being overridden (Disappears promptly):
 ```Swift
 attributes.popBehavior = .overridden
 ```
@@ -693,7 +693,7 @@ public struct EKAttributes
 
 You can use one of the presets that come with SwiftEntryKit, doing these 4 simple steps:
 
-1. Create your *EKAttributes* struct and set your preferrable properties.
+1. Create your *EKAttributes* struct and set your preferable properties.
 2. Create *EKNotificationMessage* struct (The Content) and set the content.
 3. Create *EKNotificationMessageView* (The View) and inject *EKNotificationMessage* struct to it.
 4. Display the entry using *SwiftEntryKit* class method.
@@ -908,7 +908,7 @@ Daniel Huri, huri000@gmail.com
 
 ## Thank You
 
-Thanks Lily Azar, lilushkaa@gmail.com for those aweome preset icons. 
+Thanks Lily Azar, lilushkaa@gmail.com for those awesome preset icons. 
 
 ## Credits
 

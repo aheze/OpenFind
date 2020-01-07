@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol PhotoZoomViewControllerDelegate: class {
     func photoZoomViewController(_ photoZoomViewController: PhotoZoomViewController, scrollViewDidScroll scrollView: UIScrollView)
@@ -23,8 +24,14 @@ class PhotoZoomViewController: UIViewController {
     
     weak var delegate: PhotoZoomViewControllerDelegate?
     
-    var image: UIImage!
+    //var image: UIImage!
     var index: Int = 0
+    var url: URL?
+    var imageSize: CGSize = CGSize(width: 0, height: 0) {
+        didSet {
+            print(imageSize)
+        }
+    }
 
     var doubleTapGestureRecognizer: UITapGestureRecognizer!
     
@@ -32,20 +39,20 @@ class PhotoZoomViewController: UIViewController {
         super.init(coder: aDecoder)
         self.doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didDoubleTapWith(gestureRecognizer:)))
         self.doubleTapGestureRecognizer.numberOfTapsRequired = 2
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "LoadingImagePng"))
         //navigationController?.navigationItem.largeTitleDisplayMode = .never
         self.scrollView.delegate = self
         if #available(iOS 11, *) {
             self.scrollView.contentInsetAdjustmentBehavior = .never
         }
-        self.imageView.image = self.image
-        self.imageView.frame = CGRect(x: self.imageView.frame.origin.x,
-                                      y: self.imageView.frame.origin.y,
-                                      width: self.image.size.width,
-                                      height: self.image.size.height)
+        //self.imageView.image = self.image
+        print(imageSize)
+        self.imageView.frame = CGRect(x: self.imageView.frame.origin.x, y: self.imageView.frame.origin.y, width: self.imageSize.width, height: self.imageSize.height)
         self.view.addGestureRecognizer(self.doubleTapGestureRecognizer)        
     }
     

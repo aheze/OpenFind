@@ -32,38 +32,17 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         return self.pageViewController.viewControllers![0] as! PhotoZoomViewController
     }
     
-    var photos = [UIImage]() {
-        didSet {
-//            print("asdUIIMAGE")
-//            self.pageViewController.delegate = self
-//             print("asdUIIMAGE")
-//            self.pageViewController.dataSource = self
-//             print("asdUIIMAGE")
-//            self.panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPanWith(gestureRecognizer:)))
-//            self.panGestureRecognizer.delegate = self
-//            self.pageViewController.view.addGestureRecognizer(self.panGestureRecognizer)
-//
-//            self.singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didSingleTapWith(gestureRecognizer:)))
-//            self.pageViewController.view.addGestureRecognizer(self.singleTapGestureRecognizer)
-//
-//
-//            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(PhotoZoomViewController.self)") as! PhotoZoomViewController
-//            print(vc)
-//            vc.delegate = self
-//            vc.index = self.currentIndex
-//            vc.image = self.photos[self.currentIndex]
-//            self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
-//            let viewControllers = [
-//                vc
-//            ]
-//
-//            self.pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
-            
-        }
-    }
+    //var photos = [UIImage]()
+    var photoPaths = [URL]()
     var currentIndex = 0
     var currentSection = 0
     var nextIndex: Int?
+    var photoSize: CGSize = CGSize(width: 0, height: 0) {
+        didSet {
+            print("SET")
+            print(photoSize)
+        }
+    }
     
     var panGestureRecognizer: UIPanGestureRecognizer!
     var singleTapGestureRecognizer: UITapGestureRecognizer!
@@ -90,7 +69,11 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(PhotoZoomViewController.self)") as! PhotoZoomViewController
             vc.delegate = self
             //vc.index = self.currentIndex
-            vc.image = self.photos[self.currentIndex]
+            //vc.image = self.photos[self.currentIndex]
+        print("load")
+        print(photoSize)
+        vc.imageSize = photoSize
+            vc.url = self.photoPaths[self.currentIndex]
             self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
             let viewControllers = [
                 vc
@@ -219,7 +202,9 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(PhotoZoomViewController.self)") as! PhotoZoomViewController
         vc.delegate = self
-        vc.image = self.photos[currentIndex - 1]
+        //vc.image = self.photos[currentIndex - 1]
+        vc.imageSize = photoSize
+        vc.url = self.photoPaths[currentIndex - 1]
         vc.index = currentIndex - 1
         self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
         return vc
@@ -228,14 +213,16 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        if currentIndex == (self.photos.count - 1) {
+        if currentIndex == (self.photoPaths.count - 1) {
             return nil
         }
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(PhotoZoomViewController.self)") as! PhotoZoomViewController
         vc.delegate = self
         self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
-        vc.image = self.photos[currentIndex + 1]
+        //vc.image = self.photos[currentIndex + 1]
+        vc.imageSize = photoSize
+        vc.url = self.photoPaths[currentIndex + 1]
         vc.index = currentIndex + 1
         return vc
         

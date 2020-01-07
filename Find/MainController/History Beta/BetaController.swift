@@ -178,7 +178,7 @@ class BetaController: UIViewController {
             vc.transitionController.toDelegate = vc
             vc.delegate = self
             vc.currentIndex = self.selectedIndexPath.row
-            vc.photos = self.photos
+            //vc.photos = self.photos
         }
     }
     override func present(_ viewControllerToPresent: UIViewController,

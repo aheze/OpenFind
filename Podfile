@@ -9,5 +9,6 @@ pod 'RoundCoachMark', :git => 'https://github.com/zjohnzheng/RoundCoachMark'
 pod 'QuickLayout'
 pod 'RealmSwift'
 pod 'SDWebImage', '~> 5.0'
+pod 'SwiftEntryKit'
 
 end
