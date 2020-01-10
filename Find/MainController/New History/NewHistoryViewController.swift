@@ -26,24 +26,26 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     //private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
     private let itemsPerRow: CGFloat = 4
     
+    ///Selection
+    var indexPathsThatAreSelected = [IndexPath]()
     
     weak var delegate: UIAdaptivePresentationControllerDelegate?
     @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBOutlet weak var selectButtonLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet weak var shareButton: UIButton!
+    
     @IBOutlet weak var selectButton: UIButton!
-    var selectButtonSelected = true
+    var selectButtonSelected = false ///False means is Select, true = Cancel
     var swipedToDismiss = true
     @IBAction func selectPressed(_ sender: UIButton) {
-        selectButtonSelected = !selectButtonSelected
-        if selectButtonSelected == false {
+        selectButtonSelected = !selectButtonSelected ///First time press, will be true
+        if selectButtonSelected == true {
+            //selectButtonSelected = false ///Select will now be cancel
             print("select")
             
             fadeSelectOptions(fadeOut: "fade in")
-        } else { ///Cancel
+        } else { ///Cancel will now be Select
             print("cancel")
+            //selectButtonSelected = true
             swipedToDismiss = false
             fadeSelectOptions(fadeOut: "fade out")
             swipedToDismiss = true
@@ -56,15 +58,6 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             if swipedToDismiss == false {
                 SwiftEntryKit.dismiss()
             }
-            selectButtonLeadingConstraint.constant = CGFloat(-4)
-            UIView.animate(withDuration: 0.5, animations: {
-                self.deleteButton.alpha = 0
-                self.shareButton.alpha = 0
-                self.view.layoutIfNeeded()
-            }, completion: { _ in
-                self.deleteButton.isHidden = true
-                self.shareButton.isHidden = true
-            })
             let toImage = UIImage(named: "Select")
             UIView.transition(with: selectButton,
                               duration: 0.2,
@@ -82,26 +75,14 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             attributes.displayDuration = .infinity
             attributes.positionConstraints.size.height = .constant(value: 50)
             attributes.statusBar = .light
+            attributes.entryInteraction = .absorbTouches
             attributes.lifecycleEvents.willDisappear = {
-                if self.swipedToDismiss == true {
-                    self.fadeSelectOptions(fadeOut: "fade out")
-                    self.swipedToDismiss = false
-                    self.selectButtonSelected = !self.selectButtonSelected
-                }
-                
-                
+                self.fadeSelectOptions(fadeOut: "fade out")
+                self.selectButtonSelected = false
             }
-            let customView = HistorySelect()
+            let customView = HistorySelectorView()
             SwiftEntryKit.display(entry: customView, using: attributes)
             
-            deleteButton.isHidden = false
-            shareButton.isHidden = false
-            selectButtonLeadingConstraint.constant = CGFloat(4)
-            UIView.animate(withDuration: 0.5, animations: {
-                self.deleteButton.alpha = 1
-                self.shareButton.alpha = 1
-                self.view.layoutIfNeeded()
-            })
             let toImage = UIImage(named: "Cancel")
             UIView.transition(with: selectButton,
                               duration: 0.2,
@@ -111,14 +92,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                               },
                               completion: nil)
         case "firstTimeSetup":
-            deleteButton.alpha = 0
-            deleteButton.isHidden = true
-            
-            shareButton.alpha = 0
-            shareButton.isHidden = true
-            
-            selectButtonLeadingConstraint.constant = CGFloat(-4)
-            view.layoutIfNeeded()
+            print("firstTime")
         default:
             print("unknown case, fade")
         }
@@ -143,9 +117,9 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         
         fadeSelectOptions(fadeOut: "firstTimeSetup")
         //self.transitioningDelegate = transitionDelegate
-        let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
-        layout?.sectionHeadersPinToVisibleBounds = true
-        collectionView?.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+//        let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
+//        layout?.sectionHeadersPinToVisibleBounds = true
+        collectionView?.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
         if let sampleDate = sectionToDate[0] {
             if let sampleImagePath = dateToFilepaths[sampleDate] {
                 let newImage = loadImageFromDocumentDirectory(urlOfFile: sampleImagePath.first!)
@@ -175,6 +149,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             let date = sectionToDate[indexPath.section]!
             let readableDate = convertDateToReadableString(theDate: date)
             headerView.todayLabel.text = readableDate
+            headerView.clipsToBounds = false
             return headerView
 
         case UICollectionView.elementKindSectionFooter:
@@ -214,6 +189,8 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         cell.imageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.imageView.sd_imageTransition = .fade
         cell.imageView.sd_setImage(with: url)
+        cell.heartView.alpha = 0
+        cell.addHeart(add: true)
         
         return cell
     }
@@ -297,6 +274,21 @@ extension NewHistoryViewController : UICollectionViewDelegateFlowLayout {
 
 
 }
+
+extension NewHistoryViewController: ButtonPressed {
+    func floatButtonPressed(button: String) {
+        print("button ;djf")
+        switch button {
+        case "test":
+            print("delegate test worked")
+            
+        default: print("unknown, bad string")
+        }
+    }
+    
+    
+}
+
 
 extension NewHistoryViewController {
     func getData() {

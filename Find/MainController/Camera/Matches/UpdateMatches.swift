@@ -12,8 +12,9 @@ extension ViewController {
     
     
     func updateMatchesNumber(to number: Int) {
+        print("Updating matches number to \(number)")
         DispatchQueue.main.async {
-            print("Updating matches number to \(number)")
+            
             if number == 0 {
                 self.upButton.isEnabled = false
                 self.downButton.isEnabled = false

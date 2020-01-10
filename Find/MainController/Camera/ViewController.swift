@@ -282,13 +282,14 @@ class ViewController: UIViewController {
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
-        navigationController?.navigationBar.barStyle = .black
+        //UIApplication.shared.statusBarStyle = .lightContent
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //MARK: Sceneview
+        
         setUpARDelegates()
         sceneView.delegate = self
         sceneView.session.delegate = self
@@ -360,8 +361,12 @@ class ViewController: UIViewController {
     }
     
     
-    override var prefersStatusBarHidden: Bool {
-        return self.statusBarHidden
+//    override var prefersStatusBarHidden: Bool {
+//        return self.statusBarHidden
+//    }
+   
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 
 

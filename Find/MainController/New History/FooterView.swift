@@ -26,7 +26,7 @@ class FooterView: UICollectionReusableView {
     func createRectangle() {
         //print("frame: \(self.frame)")
         
-        let arcRadius = CGFloat(10)
+        let arcRadius = CGFloat(4)
         let width = self.frame.size.width
         //print(self.frame.size.height)
         //let height = self.frame.size.height + arcRadius
@@ -58,7 +58,7 @@ class FooterView: UICollectionReusableView {
         
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
-        shapeLayer.fillColor = Style.Colors.background.cgColor
+        shapeLayer.fillColor = UIColor(named: "BackgroundHist")?.cgColor
         self.layer.addSublayer(shapeLayer)
     }
     
@@ -74,7 +74,7 @@ public enum DefaultStyle {
 
         public static let background: UIColor = {
             if #available(iOS 13.0, *) {
-                return UIColor.systemBackground
+                return UIColor.systemFill
             } else {
                 return .black
             }
