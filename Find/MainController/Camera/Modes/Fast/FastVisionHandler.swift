@@ -22,7 +22,7 @@ extension ViewController {
         
         for result in results {
             if let observation = result as? VNRecognizedTextObservation {
-               for text in observation.topCandidates(1) {
+                for text in observation.topCandidates(1) {
                     //print(text.string)
                     let component = Component()
                     component.x = observation.boundingBox.origin.x
@@ -34,7 +34,13 @@ extension ViewController {
                     let lowerCaseFinalText = finalTextToFind.lowercased()
                     let lowerCaseComponentText = component.text.lowercased()
                 
+                    print(lowerCaseFinalText)
+                    print(lowerCaseComponentText)
+                    component.text = lowerCaseComponentText
+                    
+                
                     if lowerCaseComponentText.contains(lowerCaseFinalText) {
+                        print("sghiruiguhweiugsiugr+++++++++++")
                     //if component.text.contains(finalTextToFind) {
                         let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
                         let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
@@ -46,7 +52,7 @@ extension ViewController {
                         let individualCharacterWidth = newW / CGFloat(component.text.count)
                         let finalW = individualCharacterWidth * CGFloat(finalTextToFind.count)
                         
-                        let indicies = component.text.indicesOf(string: finalTextToFind)
+                        let indicies = component.text.indicesOf(string: lowerCaseFinalText)
                         for index in indicies {
                             let addedWidth = individualCharacterWidth * CGFloat(index)
                             let finalX = newX + addedWidth
