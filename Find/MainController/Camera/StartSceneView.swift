@@ -38,7 +38,8 @@ extension ViewController {
     func cancelSceneView() {
         sceneView.session.pause()
         fastTimer.suspend()
-        fastFindingToggle = .inactive
+        //fastFindingToggle = .inactive
+        busyFastFinding = true
         hasStartedDismissing = false
     }
     func startSceneView(finish: String) {
@@ -67,7 +68,8 @@ extension ViewController {
             classicTimer.suspend()
             focusTimer.suspend()
             modeButton.imageView.image = #imageLiteral(resourceName: "bfast 2")
-            fastFindingToggle = .notBusy
+            //fastFindingToggle = .notBusy
+            busyFastFinding = false
             fastTimer.resume()
             if hasStartedDismissing == true {
                 UIView.animate(withDuration: 0.6, animations: {

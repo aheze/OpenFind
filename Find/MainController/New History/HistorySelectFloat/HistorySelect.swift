@@ -11,12 +11,44 @@ import UIKit
 protocol ButtonPressed: class {
     func floatButtonPressed(button: String)
 }
-class HistorySelectorView: UIView {
+class HistorySelectorView: UIView, ChangeNumberOfSelected {
+    func changeLabel(to: Int) {
+        photoSelectLabel.text = "\(to) Photos Selected"
+    }
 
-  
-    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var photoSelectLabel: UILabel!
     
     @IBOutlet weak var findButton: UIButton!
+    @IBOutlet weak var heartButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
+    
+    @IBOutlet weak var contentView: UIView!
+    
+    
+    @IBAction func findPressed(_ sender: UIButton) {
+        print("find")
+        buttonPressedDelegate?.floatButtonPressed(button: "find")
+    }
+    
+    @IBAction func heartPressed(_ sender: UIButton) {
+        print("heart")
+        buttonPressedDelegate?.floatButtonPressed(button: "heart")
+    }
+    
+    @IBAction func deletePressed(_ sender: UIButton) {
+        print("delete")
+        buttonPressedDelegate?.floatButtonPressed(button: "delete")
+    }
+    
+    @IBAction func sharePressed(_ sender: UIButton) {
+        print("share")
+        buttonPressedDelegate?.floatButtonPressed(button: "share")
+    }
+    
+    //weak var changeNumberDelegate: ChangeNumberOfSelected?
+    weak var buttonPressedDelegate: ButtonPressed?
+    
 //    @IBOutlet weak var heartButton: UIButton!
 //    @IBOutlet weak var deleteButton: UIButton!
 //    @IBOutlet weak var shareButton: UIButton!
@@ -43,6 +75,7 @@ class HistorySelectorView: UIView {
     }
     private func setUp() {
        // fromNib()
+        //self.changeNumberDelegate = self
         clipsToBounds = true
         layer.cornerRadius = 5
         layer.backgroundColor = #colorLiteral(red: 0, green: 0.5981545251, blue: 0.937254902, alpha: 1)
@@ -80,4 +113,5 @@ class HistorySelectorView: UIView {
 //        return String(describing: self)
 //    }
 //}
+
 

@@ -11,7 +11,9 @@ import SwiftEntryKit
 protocol UpdateImageDelegate: class {
     func changeImage(image: UIImage)
 }
-
+protocol ChangeNumberOfSelected: class {
+    func changeLabel(to: Int)
+}
 class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIViewControllerTransitioningDelegate {
     var selectedIndexPath: IndexPath!
     
@@ -28,8 +30,16 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     
     ///Selection
     var indexPathsThatAreSelected = [IndexPath]()
-    
+    var selectionMode: Bool = false {
+        didSet {
+            collectionView.allowsMultipleSelection = selectionMode
+            collectionView.selectItem(at: nil, animated: true, scrollPosition: [])
+            indexPathsThatAreSelected.removeAll()
+        }
+    }
     weak var delegate: UIAdaptivePresentationControllerDelegate?
+    weak var changeNumberDelegate: ChangeNumberOfSelected?
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     
@@ -81,7 +91,12 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 self.selectButtonSelected = false
             }
             let customView = HistorySelectorView()
+            customView.buttonPressedDelegate = self
+            self.changeNumberDelegate = customView
+            
+            //changeNumberDelegate?.changeLabel(to: 4)
             SwiftEntryKit.display(entry: customView, using: attributes)
+            enterSelectMode(entering: true)
             
             let toImage = UIImage(named: "Cancel")
             UIView.transition(with: selectButton,
@@ -277,10 +292,21 @@ extension NewHistoryViewController : UICollectionViewDelegateFlowLayout {
 
 extension NewHistoryViewController: ButtonPressed {
     func floatButtonPressed(button: String) {
-        print("button ;djf")
+        print("button delegate")
         switch button {
+            
         case "test":
             print("delegate test worked")
+            
+        case "find":
+            print("find pressed delegate")
+        case "heart":
+            print("heart pressed delegate")
+        case "delete":
+            print("delete pressed delegate")
+        case "share":
+            print("share pressed delegate")
+            
             
         default: print("unknown, bad string")
         }

@@ -111,7 +111,8 @@ extension ViewController {
                 configuration.planeDetection = .horizontal
                 self.sceneView.session.run(configuration, options: [.removeExistingAnchors, .resetTracking])
                 self.modeButton.imageView.image = #imageLiteral(resourceName: "bclassic 2")
-                self.fastFindingToggle = .inactive
+                //self.fastFindingToggle = .inactive
+                self.busyFastFinding = true
             })
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8, execute: {
                 UIView.animate(withDuration: 0.5, animations: {blurView.alpha = 0}, completion: {_ in
@@ -128,7 +129,8 @@ extension ViewController {
                 self.fadeClassicHighlights()
                 self.runImageTrackingSession(with: [], runOptions: [.removeExistingAnchors, .resetTracking])
                 self.modeButton.imageView.image = #imageLiteral(resourceName: "bfocus 2")
-                self.fastFindingToggle = .inactive
+                //self.fastFindingToggle = .inactive
+                self.busyFastFinding = true
             })
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8, execute: {
                 UIView.animate(withDuration: 0.5, animations: {blurView.alpha = 0}, completion: {_ in
@@ -137,6 +139,7 @@ extension ViewController {
         case "fast":
             print("fast")
             sceneView.session.pause()
+            fastTextDetectionRequest.customWords = ["sfhskfh 98ohkjshgosro9g u oh xvhdfogiuerouoeugorugo lhxlvhflfgu"]
             UIView.animate(withDuration: 0.2, animations: {
                 blurView.alpha = 1
                 tag1.alpha = 0
@@ -145,7 +148,8 @@ extension ViewController {
                 self.fadeClassicHighlights()
                 self.sceneView.session.run(self.fastSceneConfiguration, options: [.removeExistingAnchors, .resetTracking])
                 self.modeButton.imageView.image = #imageLiteral(resourceName: "bfast 2")
-                self.fastFindingToggle = .notBusy
+                //self.fastFindingToggle = false
+                self.busyFastFinding = false
                 
             })
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {

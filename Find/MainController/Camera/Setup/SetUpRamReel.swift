@@ -25,7 +25,12 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
             case .focused:
                 self.focusTextDetectionRequest.customWords = [self.finalTextToFind, "Find app"]
             case .fast:
-                self.fastTextDetectionRequest.customWords = [self.finalTextToFind, "Find app"]
+                print("fast")
+                let lowercased = self.finalTextToFind.lowercased()
+                let allCaps = self.finalTextToFind.uppercased()
+                self.fastTextDetectionRequest.customWords = [self.finalTextToFind, lowercased, allCaps, "Find app"]
+                //self.fastTextDetectionRequest.customWords = ["98ohkjshgosro9g"]
+                
             }
         }
         

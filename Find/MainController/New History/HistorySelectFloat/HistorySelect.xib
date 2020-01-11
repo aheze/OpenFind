@@ -11,7 +11,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HistorySelectorView" customModule="Find" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="uO7-qf-DFB"/>
-                <outlet property="findButton" destination="6a2-pU-Trb" id="MpE-d4-c7c"/>
+                <outlet property="deleteButton" destination="QBp-TE-s25" id="ehE-0a-NRQ"/>
+                <outlet property="findButton" destination="6a2-pU-Trb" id="Sle-CQ-Lgk"/>
+                <outlet property="heartButton" destination="p32-mH-K1c" id="Urb-BX-PQf"/>
+                <outlet property="photoSelectLabel" destination="WRh-xG-0gP" id="UwK-Nm-MxX"/>
+                <outlet property="shareButton" destination="wiv-ba-vX8" id="BXi-dG-zZt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -33,24 +37,36 @@
                             <fontDescription key="fontDescription" type="system" pointSize="35"/>
                             <color key="tintColor" red="0.99343103170394897" green="0.99666577577590942" blue="0.99652749300003052" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" image="magnifyingglass" catalog="system"/>
+                            <connections>
+                                <action selector="findPressed:" destination="-1" eventType="touchUpInside" id="BrQ-sv-8E1"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p32-mH-K1c" userLabel="Heart">
                             <rect key="frame" x="40.5" y="0.0" width="20.5" height="42"/>
                             <fontDescription key="fontDescription" type="system" pointSize="35"/>
                             <color key="tintColor" red="0.99343103170394897" green="0.99666577577590942" blue="0.99652749300003052" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" image="heart" catalog="system"/>
+                            <connections>
+                                <action selector="heartPressed:" destination="-1" eventType="touchUpInside" id="jIq-AF-bKa"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBp-TE-s25" userLabel="Delete">
                             <rect key="frame" x="81" y="0.0" width="20.5" height="42"/>
                             <fontDescription key="fontDescription" type="system" pointSize="35"/>
                             <color key="tintColor" red="0.99343103170394897" green="0.99666577577590942" blue="0.99652749300003052" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" image="trash" catalog="system"/>
+                            <connections>
+                                <action selector="deletePressed:" destination="-1" eventType="touchUpInside" id="u9a-1r-YxP"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wiv-ba-vX8" userLabel="Share">
                             <rect key="frame" x="121.5" y="0.0" width="20.5" height="42"/>
                             <fontDescription key="fontDescription" type="system" pointSize="35"/>
                             <color key="tintColor" red="0.99343103170394897" green="0.99666577577590942" blue="0.99652749300003052" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" image="square.and.arrow.up" catalog="system"/>
+                            <connections>
+                                <action selector="sharePressed:" destination="-1" eventType="touchUpInside" id="0UY-k6-67t"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>

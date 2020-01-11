@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftEntryKit
 
 extension ViewController: UIAdaptivePresentationControllerDelegate {
    
@@ -18,6 +19,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate {
             cancelTimer!.invalidate()
             cancelTimer = nil
         }
+        SwiftEntryKit.dismiss()
         startSceneView(finish: "end")
     }
     func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {

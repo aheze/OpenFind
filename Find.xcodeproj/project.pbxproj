@@ -81,6 +81,7 @@
 		49BC782F23C6E473003D9904 /* addHeart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC782E23C6E473003D9904 /* addHeart.swift */; };
 		49BC783523C8275B003D9904 /* HistorySelect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49BC783323C8275A003D9904 /* HistorySelect.xib */; };
 		49BC783623C8275B003D9904 /* HistorySelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC783423C8275B003D9904 /* HistorySelect.swift */; };
+		49BC783923C8C7AB003D9904 /* HistoryStartSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC783823C8C7AB003D9904 /* HistoryStartSelection.swift */; };
 		49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */; };
 		49F7B1522353FC970099FA62 /* ProcessImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1512353FC970099FA62 /* ProcessImage.swift */; };
 		49F7B1542353FDF40099FA62 /* VisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1532353FDF40099FA62 /* VisionHandler.swift */; };
@@ -171,6 +172,7 @@
 		49BC782E23C6E473003D9904 /* addHeart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addHeart.swift; sourceTree = "<group>"; };
 		49BC783323C8275A003D9904 /* HistorySelect.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistorySelect.xib; sourceTree = "<group>"; };
 		49BC783423C8275B003D9904 /* HistorySelect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistorySelect.swift; sourceTree = "<group>"; };
+		49BC783823C8C7AB003D9904 /* HistoryStartSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStartSelection.swift; sourceTree = "<group>"; };
 		49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		49F7B1512353FC970099FA62 /* ProcessImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessImage.swift; sourceTree = "<group>"; };
 		49F7B1532353FDF40099FA62 /* VisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionHandler.swift; sourceTree = "<group>"; };
@@ -275,9 +277,7 @@
 			children = (
 				49BC782A23C6DFB6003D9904 /* HistoryFinding */,
 				495ECCA6238CF76C00E7D966 /* NewHistoryViewController.swift */,
-				495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */,
-				495ECCAA238DB7BD00E7D966 /* TitleSupplementaryView.swift */,
-				49089E1E238EFFFA0070A70C /* FooterView.swift */,
+				49BC783723C8C73E003D9904 /* CollectionViewCells */,
 				49BC781F23C2B0DF003D9904 /* IndexMatcher.swift */,
 				49BC782123C3E1BF003D9904 /* TextViewRounded.swift */,
 				49BC782D23C6E0BA003D9904 /* HistorySelectFloat */,
@@ -469,8 +469,19 @@
 				49BC783423C8275B003D9904 /* HistorySelect.swift */,
 				49BC783323C8275A003D9904 /* HistorySelect.xib */,
 				49BC782E23C6E473003D9904 /* addHeart.swift */,
+				49BC783823C8C7AB003D9904 /* HistoryStartSelection.swift */,
 			);
 			path = HistorySelectFloat;
+			sourceTree = "<group>";
+		};
+		49BC783723C8C73E003D9904 /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */,
+				495ECCAA238DB7BD00E7D966 /* TitleSupplementaryView.swift */,
+				49089E1E238EFFFA0070A70C /* FooterView.swift */,
+			);
+			path = CollectionViewCells;
 			sourceTree = "<group>";
 		};
 		D0464F2926E9ACFCA3CD293D /* Frameworks */ = {
@@ -668,6 +679,7 @@
 				4917CE7F23C0490E002EA20B /* GeneralSettings.swift in Sources */,
 				49BC782C23C6E06F003D9904 /* PhotoAssigner.swift in Sources */,
 				499583A923BEC74D0022689A /* MatchesUpdater.swift in Sources */,
+				49BC783923C8C7AB003D9904 /* HistoryStartSelection.swift in Sources */,
 				495ECCA4238A3D0B00E7D966 /* HistoryFormat.swift in Sources */,
 				49B7A33A23923EE10070209F /* PhotoZoomViewController.swift in Sources */,
 				49F7B15C2354E85F0099FA62 /* WordReader.swift in Sources */,

@@ -53,7 +53,7 @@ extension ViewController {
         fastTimer.eventHandler = {
             self.fastFind()
             if(false){
-                self.focusTimer.suspend() //keep strong reference
+                self.fastTimer.suspend() //keep strong reference
             }
         }
         classicTimer.eventHandler = {

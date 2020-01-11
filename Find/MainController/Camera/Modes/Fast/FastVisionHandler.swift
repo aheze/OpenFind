@@ -30,7 +30,11 @@ extension ViewController {
                     component.width = observation.boundingBox.width
                     component.text = text.string
                     drawFastHighlight(component: component)
-                    if component.text.contains(finalTextToFind) {
+                    let lowerCaseFinalText = finalTextToFind.lowercased()
+                    let lowerCaseComponentText = component.text.lowercased()
+                
+                    if lowerCaseComponentText.contains(lowerCaseFinalText) {
+                    //if component.text.contains(finalTextToFind) {
                         let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
                         let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
                         let offHalf = offsetWidth / 2

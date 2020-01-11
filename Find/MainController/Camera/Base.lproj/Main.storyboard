@@ -1508,36 +1508,24 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                         <color key="tintColor" red="0.99343103170000002" green="0.99666577580000004" blue="0.99652749299999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="magnifyingglass" catalog="system"/>
-                                        <connections>
-                                            <action selector="findPressed:" destination="UwT-yG-cr7" eventType="touchUpInside" id="Apw-JX-s2W"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHg-2n-hAk" userLabel="Heart">
                                         <rect key="frame" x="40.5" y="0.0" width="20.5" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                         <color key="tintColor" red="0.99343103170000002" green="0.99666577580000004" blue="0.99652749299999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="heart" catalog="system"/>
-                                        <connections>
-                                            <action selector="heartPressed:" destination="UwT-yG-cr7" eventType="touchUpInside" id="FGS-6L-XgS"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FC6-jL-02O" userLabel="Delete">
                                         <rect key="frame" x="81" y="0.0" width="20.5" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                         <color key="tintColor" red="0.99343103170000002" green="0.99666577580000004" blue="0.99652749299999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="trash" catalog="system"/>
-                                        <connections>
-                                            <action selector="deletePressed:" destination="UwT-yG-cr7" eventType="touchUpInside" id="bIF-MM-c0r"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qyE-9E-8GD" userLabel="Share">
                                         <rect key="frame" x="121.5" y="0.0" width="20.5" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                         <color key="tintColor" red="0.99343103170000002" green="0.99666577580000004" blue="0.99652749299999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="square.and.arrow.up" catalog="system"/>
-                                        <connections>
-                                            <action selector="sharePressed:" destination="UwT-yG-cr7" eventType="touchUpInside" id="iKq-Mb-T9y"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -1552,13 +1540,6 @@
                         <viewLayoutGuide key="safeArea" id="kds-PV-eZG"/>
                     </view>
                     <size key="freeformSize" width="375" height="100"/>
-                    <connections>
-                        <outlet property="deleteButton" destination="FC6-jL-02O" id="kIo-x1-XHJ"/>
-                        <outlet property="findButton" destination="4it-UQ-efF" id="mZC-Qk-ICO"/>
-                        <outlet property="heartButton" destination="iHg-2n-hAk" id="xXj-D3-APT"/>
-                        <outlet property="photoSelectLabel" destination="qo2-4v-aow" id="7gR-LY-eLB"/>
-                        <outlet property="shareButton" destination="qyE-9E-8GD" id="TVH-im-nCG"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SFu-fZ-fVq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

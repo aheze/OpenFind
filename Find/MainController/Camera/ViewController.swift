@@ -165,7 +165,8 @@ class ViewController: UIViewController {
         case notBusy
         case inactive
     }
-    var fastFindingToggle = FastFinding.inactive
+    //var fastFindingToggle = FastFinding.inactive
+    var busyFastFinding = false
     lazy var fastTextDetectionRequest = VNRecognizeTextRequest(completionHandler: handleFastDetectedText)
     var startFastFinding = false
     var fastTimer = RepeatingTimer(timeInterval: 0.02)
@@ -300,7 +301,8 @@ class ViewController: UIViewController {
         
         fastTextDetectionRequest.recognitionLevel = .fast
         fastTextDetectionRequest.recognitionLanguages = ["en_GB"]
-        fastTextDetectionRequest.usesLanguageCorrection = true
+        //fastTextDetectionRequest.customWords = ["98ohkjshgosro9g"]
+        //fastTextDetectionRequest.usesLanguageCorrection = true
         textDetectionRequest.recognitionLevel = .fast
         textDetectionRequest.recognitionLanguages = ["en_GB"]
         textDetectionRequest.usesLanguageCorrection = true
@@ -334,7 +336,7 @@ class ViewController: UIViewController {
         focusTimer.suspend()
         sceneView.session.run(fastSceneConfiguration, options: [.removeExistingAnchors, .resetTracking])
         modeButton.imageView.image = #imageLiteral(resourceName: "bfast 2")
-        fastFindingToggle = .notBusy
+        busyFastFinding = false
         fastTimer.resume()
         print("resume?")
 //        switch scanModeToggle {
