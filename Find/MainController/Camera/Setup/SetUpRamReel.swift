@@ -30,7 +30,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
                 print("fast")
                 let lowercased = self.finalTextToFind.lowercased()
                 let allCaps = self.finalTextToFind.uppercased()
-                self.fastTextDetectionRequest.customWords = [self.finalTextToFind, lowercased, allCaps, "Find app"]
+                //self.fastTextDetectionRequest.customWords = [self.finalTextToFind, lowercased, allCaps, "Find app"]
                 //self.fastTextDetectionRequest.customWords = ["98ohkjshgosro9g"]
                 
             }
@@ -99,20 +99,18 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
 //        }
         
         autoCompleteButton.isEnabled = false
-        autoCompleteButton.alpha = 0.5
+
         ramReel.view.bounds = view.bounds
         print("textfield")
         print(ramReel.collectionView.frame)
         ramReel.collectionView.isHidden = false
+        ramReel.collectionView.alpha = 0
         darkBlurEffectHeightConstraint.constant = self.view.bounds.size.height
         
-        //self.toolbarView.isHidden = false
-        
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
+            self.autoCompleteButton.alpha = 0.5
             newImageView.alpha = 1
-            //print(self.keyboardHeight)
-            //self.toolbarView.alpha = 1
-            //self.toolbarBottomConstraint.constant = self.keyboardHeight
+            self.ramReel.collectionView.alpha = 1
             self.darkBlurEffect.alpha = 1
             if self.scanModeToggle == .focused {
                 if let tag1 = self.view.viewWithTag(1) {
@@ -134,19 +132,17 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let imageView = view.viewWithTag(13579) else { return }
-        ramReel.collectionView.isHidden = true
+        
          self.darkBlurEffectHeightConstraint.constant = 100
+        
+        
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
             imageView.alpha = 0
+            self.ramReel.collectionView.alpha = 0
             var frameRect = self.view.bounds
             frameRect.size.height = 100
             self.ramReel.view.bounds = frameRect
-            //self.toolbarBottomConstraint.constant = 0
-            //self.toolbarView.alpha = 0
-            
             self.darkBlurEffect.alpha = 0.7
-           
-            
                 
             switch self.scanModeToggle {
             case .classic:
@@ -162,14 +158,11 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
                 self.sceneView.session.run(config)
             }
             self.stopProcessingImage = false
-//                self.classicTimer.resume()
-//                print("resume timer")
-        
-            //self.view.layoutIfNeeded()
+            self.view.layoutIfNeeded()
         }, completion: {_ in
-            //self.toolbarView.isHidden = true
             imageView.removeFromSuperview()
             self.view.bringSubviewToFront(self.matchesBig)
+            self.ramReel.collectionView.isHidden = true
         }
         )
              print(ramReel.selectedItem)

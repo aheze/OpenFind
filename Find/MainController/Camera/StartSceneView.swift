@@ -31,13 +31,13 @@ extension ViewController {
             self.stopProcessingImage = true
             self.classicTimer.suspend()
             self.focusTimer.suspend()
-            self.fastTimer.suspend()
+            //self.fastTimer.suspend()
             self.sceneView.session.pause()
         })
     }
     func cancelSceneView() {
         sceneView.session.pause()
-        fastTimer.suspend()
+        //fastTimer.suspend()
         //fastFindingToggle = .inactive
         busyFastFinding = true
         hasStartedDismissing = false
@@ -70,7 +70,7 @@ extension ViewController {
             modeButton.imageView.image = #imageLiteral(resourceName: "bfast 2")
             //fastFindingToggle = .notBusy
             busyFastFinding = false
-            fastTimer.resume()
+            //fastTimer.resume()
             if hasStartedDismissing == true {
                 UIView.animate(withDuration: 0.6, animations: {
                     self.blurView.alpha = 0

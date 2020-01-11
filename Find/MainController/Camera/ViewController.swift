@@ -66,9 +66,9 @@ class ViewController: UIViewController {
         }
     }
     
-    ///Matches HUD
+    //MARK: Matches HUD
     
-    
+    var previousNumberOfMatches: Int = 0
     @IBOutlet var matchesWidthConstraint: NSLayoutConstraint!
     @IBOutlet var matchesHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var matchesBig: MatchesGradientView!
@@ -107,6 +107,8 @@ class ViewController: UIViewController {
     var pipPositions: [CGPoint] {
         return pipPositionViews.map { $0.center }
     }
+    
+    
     @IBAction func refreshButtonPressed(_ sender: UIButton) {
         refreshScreen()
     }
@@ -167,7 +169,7 @@ class ViewController: UIViewController {
     var isCancelTimerRunning = false //This will be used to make sure only one timer is created at a time.
     
     
-    ///FAST MODE
+    //MARK: FAST MODE
     enum FastFinding {
         case busy
         case notBusy
@@ -175,9 +177,9 @@ class ViewController: UIViewController {
     }
     //var fastFindingToggle = FastFinding.inactive
     var busyFastFinding = false
-    lazy var fastTextDetectionRequest = VNRecognizeTextRequest(completionHandler: handleFastDetectedText)
+    //lazy var fastTextDetectionRequest = VNRecognizeTextRequest(completionHandler: handleFastDetectedText)
     var startFastFinding = false
-    var fastTimer = RepeatingTimer(timeInterval: 0.02)
+    //var fastTimer = RepeatingTimer(timeInterval: 0.02)
     var tempComponents = [Component]()
     var currentComponents = [Component]()
     var nextComponents = [Component]()
@@ -188,8 +190,10 @@ class ViewController: UIViewController {
     var numberCurrentFastmodePass: Int = 0
     var numberOfFastMatches: Int = 0
 
+    var newFastModeTimer: Timer?
+    var newFastUpdateInterval: TimeInterval = 0.05
     
-    ///CLASSIC MODE
+    //MARK:CLASSIC MODE
     let classicTimer = RepeatingTimer(timeInterval: 0.8)
     var isBusyProcessingImage = false
     var stopProcessingImage = false
@@ -211,7 +215,7 @@ class ViewController: UIViewController {
 //        return request
 //    }()
     
-    ///FOCUS MODE
+    //MARK:FOCUS MODE
     var focusTimer = RepeatingTimer(timeInterval: 1)
     
     var currentCameraImage: CVPixelBuffer!
@@ -239,7 +243,7 @@ class ViewController: UIViewController {
     var secondFocusHighlightArray = [SCNNode]()
     lazy var focusTextDetectionRequest = VNRecognizeTextRequest(completionHandler: handleFocusDetectedText)
     
-    ///Every mode (Universal)
+    //MARK: Every mode (Universal)
     let coachingOverlay = ARCoachingOverlayView()
     var statusBarHidden : Bool = false
     var scanModeToggle = CurrentModeToggle.fast
@@ -265,7 +269,7 @@ class ViewController: UIViewController {
     var globalUrl : URL = URL(fileURLWithPath: "")
     
     
-    //ramreel
+    //MARK:ramreel
     var dataSource: SimplePrefixQueryDataSource!
     var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
     
@@ -307,8 +311,8 @@ class ViewController: UIViewController {
         shouldMin = false
         hideTopNumber(hide: shouldMin)
         
-        fastTextDetectionRequest.recognitionLevel = .fast
-        fastTextDetectionRequest.recognitionLanguages = ["en_GB"]
+        //fastTextDetectionRequest.recognitionLevel = .fast
+        //fastTextDetectionRequest.recognitionLanguages = ["en_GB"]
         //fastTextDetectionRequest.customWords = ["98ohkjshgosro9g"]
         //fastTextDetectionRequest.usesLanguageCorrection = true
         textDetectionRequest.recognitionLevel = .fast
@@ -345,7 +349,7 @@ class ViewController: UIViewController {
         sceneView.session.run(fastSceneConfiguration, options: [.removeExistingAnchors, .resetTracking])
         modeButton.imageView.image = #imageLiteral(resourceName: "bfast 2")
         busyFastFinding = false
-        fastTimer.resume()
+        //fastTimer.resume()
         print("resume?")
 //        switch scanModeToggle {
 //        case .classic:

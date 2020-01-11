@@ -16,6 +16,7 @@ extension ViewController {
         numberCurrentFastmodePass += 1
         guard let results = request?.results, results.count > 0 else {
             //print("no results")
+            busyFastFinding = false
             return
         }
         
@@ -66,6 +67,7 @@ extension ViewController {
             }
             
         }
+        busyFastFinding = false
         animateFoundFastChange()
         numberOfFastMatches = 0
     }

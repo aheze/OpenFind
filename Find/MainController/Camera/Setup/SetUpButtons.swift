@@ -83,13 +83,13 @@ extension ViewController: UIAdaptivePresentationControllerDelegate {
         self.classicTimer.resume()
         self.enableAutoCoaching()
         self.blurScreen(mode: "classic")
-        self.fastTimer.suspend()
+        //self.fastTimer.suspend()
         self.focusTimer.suspend()
         
     }
     func toFocus() {
         self.scanModeToggle = .focused
-        self.fastTimer.suspend()
+        //self.fastTimer.suspend()
         self.classicTimer.suspend()
         self.classicHasFoundOne = false
         print("focus")
@@ -107,7 +107,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate {
         self.classicTimer.suspend()
         self.focusTimer.suspend()
         self.blurScreen(mode: "fast")
-        self.fastTimer.resume()
+        //self.fastTimer.resume()
         self.modeButton.close()
     }
     func setUpButtons() {

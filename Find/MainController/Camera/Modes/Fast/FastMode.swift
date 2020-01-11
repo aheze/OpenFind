@@ -11,35 +11,50 @@ import Vision
 
 extension ViewController {
   
-    func fastFind() {
-            if busyFastFinding == false {
-                busyFastFinding = true
-                if let capturedImage = sceneView.session.currentFrame?.capturedImage {
-                //print("yes captured image...")
-                     
-                
-                let ciImage = CIImage(cvPixelBuffer: capturedImage)
-                let width = ciImage.extent.width
-                let height = ciImage.extent.height
-                sizeOfPixelBufferFast = CGSize(width: width, height: height)
-                
-                aspectRatioWidthOverHeight = height / width ///opposite
-                if aspectRatioWidthOverHeight != CGFloat(0) {
-                    aspectRatioSucceeded = true
-                }
-                let requests = [fastTextDetectionRequest]
-                let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: capturedImage, orientation: .right, options: [:])
+    func fastFind(in pixelBuffer: CVPixelBuffer) {
+        busyFastFinding = true
+       
+        DispatchQueue.global(qos: .background).async {
+            let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
+            let width = ciImage.extent.width
+            let height = ciImage.extent.height
+            self.sizeOfPixelBufferFast = CGSize(width: width, height: height)
+            
+            self.aspectRatioWidthOverHeight = height / width ///opposite
+            if self.aspectRatioWidthOverHeight != CGFloat(0) {
+                self.aspectRatioSucceeded = true
+            }
+            //let request = fastTextDetectionRequest
+            let request = VNRecognizeTextRequest { request, error in
+                self.handleFastDetectedText(request: request, error: error)
+            }
+            request.customWords = [self.finalTextToFind, self.finalTextToFind.lowercased(), self.finalTextToFind.uppercased(), self.finalTextToFind.capitalizingFirstLetter()]
+            
+            request.recognitionLevel = .fast
+            request.recognitionLanguages = ["en_GB"]
+            let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right)
+            //DispatchQueue.global().async {
                 do {
-                    try imageRequestHandler.perform(requests)
+                    try imageRequestHandler.perform([request])
                 } catch let error {
+                    self.busyFastFinding = false
                     print("Error: \(error)")
                 }
-                
-                }
-                busyFastFinding = false
-            }
+            //}
+        }
+        
+        
+        
+        
+    }
+    
+}
+extension String {
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
+
+    mutating func capitalizeFirstLetter() {
+        self = self.capitalizingFirstLetter()
     }
 }
-    
-    
-    

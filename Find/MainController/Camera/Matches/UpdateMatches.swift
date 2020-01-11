@@ -13,6 +13,12 @@ extension ViewController {
     
     func updateMatchesNumber(to number: Int) {
         print("Updating matches number to \(number)")
+        if number > previousNumberOfMatches {
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.prepare()
+            generator.impactOccurred()
+        }
+        
         DispatchQueue.main.async {
             
             if number == 0 {
@@ -32,6 +38,7 @@ extension ViewController {
             self.numberDenomLabel.fadeTransition(0.3)
             self.numberDenomLabel.text = "\(number)"
         }
+        previousNumberOfMatches = number
     }
     func hideTopNumber(hide: Bool) {
         

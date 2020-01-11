@@ -139,7 +139,7 @@ extension ViewController {
         case "fast":
             print("fast")
             sceneView.session.pause()
-            fastTextDetectionRequest.customWords = ["sfhskfh 98ohkjshgosro9g u oh xvhdfogiuerouoeugorugo lhxlvhflfgu"]
+            //fastTextDetectionRequest.customWords = ["sfhskfh 98ohkjshgosro9g u oh xvhdfogiuerouoeugorugo lhxlvhflfgu"]
             UIView.animate(withDuration: 0.2, animations: {
                 blurView.alpha = 1
                 tag1.alpha = 0

@@ -50,11 +50,18 @@ extension ViewController {
 //    }
    
     func setUpTimers() {
-        fastTimer.eventHandler = {
-            self.fastFind()
-            if(false){
-                self.fastTimer.suspend() //keep strong reference
+//        fastTimer.eventHandler = {
+//            self.fastFind()
+//            if(false){
+//                self.fastTimer.suspend() //keep strong reference
+//            }
+//        }
+        newFastModeTimer = Timer.scheduledTimer(withTimeInterval: newFastUpdateInterval, repeats: true) { [weak self] _ in
+            guard !self!.busyFastFinding else { return }
+            if let capturedImage = self?.sceneView.session.currentFrame?.capturedImage {
+                self?.fastFind(in: capturedImage)
             }
+            
         }
         classicTimer.eventHandler = {
             if self.isBusyProcessingImage == false {
