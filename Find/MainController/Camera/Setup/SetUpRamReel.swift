@@ -8,6 +8,8 @@
 
 import UIKit
 import ARKit
+import SnapKit
+import VideoToolbox
 
 /// Ramreel setup
 extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
@@ -73,6 +75,29 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        let newImageView = UIImageView()
+        newImageView.alpha = 0
+        view.insertSubview(newImageView, aboveSubview: sceneView)
+        newImageView.snp.makeConstraints { (make) in
+            //make.top.equalTo(sceneView)
+            make.edges.equalTo(sceneView)
+        }
+        guard let image = sceneView.session.currentFrame?.capturedImage else { return }
+        //let uiImage = UIImage(pixelBuffer: image, sceneView: sceneView)
+        let uiImage = convertToUIImage(buffer: image)
+        newImageView.image = uiImage
+        newImageView.contentMode = .scaleAspectFill
+        newImageView.tag = 13579
+        
+      
+//        if let cgImage = image?.toCGImage() {
+//            let uiImage = UIImage(cgImage: cgImage)
+//            newImageView.image = uiImage
+//
+//
+//
+//        }
+        
         autoCompleteButton.isEnabled = false
         autoCompleteButton.alpha = 0.5
         ramReel.view.bounds = view.bounds
@@ -84,6 +109,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         //self.toolbarView.isHidden = false
         
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
+            newImageView.alpha = 1
             //print(self.keyboardHeight)
             //self.toolbarView.alpha = 1
             //self.toolbarBottomConstraint.constant = self.keyboardHeight
@@ -107,9 +133,11 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
+        guard let imageView = view.viewWithTag(13579) else { return }
         ramReel.collectionView.isHidden = true
+         self.darkBlurEffectHeightConstraint.constant = 100
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            imageView.alpha = 0
             var frameRect = self.view.bounds
             frameRect.size.height = 100
             self.ramReel.view.bounds = frameRect
@@ -117,7 +145,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
             //self.toolbarView.alpha = 0
             
             self.darkBlurEffect.alpha = 0.7
-            self.darkBlurEffectHeightConstraint.constant = 100
+           
             
                 
             switch self.scanModeToggle {
@@ -140,6 +168,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
             //self.view.layoutIfNeeded()
         }, completion: {_ in
             //self.toolbarView.isHidden = true
+            imageView.removeFromSuperview()
             self.view.bringSubviewToFront(self.matchesBig)
         }
         )
@@ -151,5 +180,50 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         
     }
     
+    func convertToUIImage(buffer: CVPixelBuffer) -> UIImage?{
+        let ciImage = CIImage(cvPixelBuffer: buffer)
+        let temporaryContext = CIContext(options: nil)
+        if let temporaryImage = temporaryContext.createCGImage(ciImage, from: CGRect(x: 0, y: 0, width: CVPixelBufferGetWidth(buffer), height: CVPixelBufferGetHeight(buffer)))
+        {
+            //let capturedImage = UIImage(cgImage: temporaryImage)
+            let bufferSize = CGSize(width: CVPixelBufferGetWidth(buffer), height: CVPixelBufferGetHeight(buffer))
+            print(bufferSize)
+            //let deviceRatio = deviceSize.height / deviceSize.width
+//            let newWidth = bufferSize.height * deviceRatio
+//            let offset = (bufferSize.width - newWidth)
+//            let rect = CGRect(x: offset, y: 0, width: newWidth, height: bufferSize.height)
+//            let croppedCgImage = temporaryImage.cropping(to: rect)!
+            let capturedImage = UIImage(cgImage: temporaryImage, scale: 1.0, orientation: .right)
+            return capturedImage
+        }
+        return nil
+    }
+
+    
     
 }
+
+
+//extension UIImage {
+//    public convenience init?(pixelBuffer: CVPixelBuffer, sceneView: ARSCNView) {
+//        var cgImage: CGImage?
+//        VTCreateCGImageFromCVPixelBuffer(pixelBuffer, options: nil, imageOut: &cgImage)
+//
+//        guard var newCgImage = cgImage else {
+//            return nil
+//        }
+//        let orient = UIApplication.shared.statusBarOrientation
+//        let viewportSize = sceneView.bounds.size
+//        if let transform = sceneView.session.currentFrame?.displayTransform(for: orient, viewportSize: viewportSize).inverted() {
+//            var finalImage = CIImage(cvPixelBuffer: pixelBuffer).transformed(by: transform)
+//            guard let buffer = sceneView.session.currentFrame?.capturedImage else { return }
+//            let temporaryContext = CIContext(options: nil)
+//            if let temporaryImage = temporaryContext.createCGImage(finalImage, from: CGRect(x: 0, y: 0, width: CVPixelBufferGetWidth(buffer), height: CVPixelBufferGetHeight(buffer)))
+//            {
+//                newCgImage = temporaryImage
+//            }
+//        }
+//        self.init(cgImage: newCgImage)
+//    }
+//}
+
