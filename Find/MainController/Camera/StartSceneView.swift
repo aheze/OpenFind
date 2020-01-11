@@ -32,11 +32,13 @@ extension ViewController {
             self.classicTimer.suspend()
             self.focusTimer.suspend()
             //self.fastTimer.suspend()
+            self.newFastModeTimer?.invalidate()
             self.sceneView.session.pause()
         })
     }
     func cancelSceneView() {
         sceneView.session.pause()
+        self.newFastModeTimer?.invalidate()
         //fastTimer.suspend()
         //fastFindingToggle = .inactive
         busyFastFinding = true
@@ -71,6 +73,12 @@ extension ViewController {
             //fastFindingToggle = .notBusy
             busyFastFinding = false
             //fastTimer.resume()
+            newFastModeTimer = Timer.scheduledTimer(withTimeInterval: newFastUpdateInterval, repeats: true) { [weak self] _ in
+                guard !self!.busyFastFinding else { return }
+                if let capturedImage = self?.sceneView.session.currentFrame?.capturedImage {
+                    self?.fastFind(in: capturedImage)
+                }
+            }
             if hasStartedDismissing == true {
                 UIView.animate(withDuration: 0.6, animations: {
                     self.blurView.alpha = 0

@@ -61,7 +61,6 @@ extension ViewController {
             if let capturedImage = self?.sceneView.session.currentFrame?.capturedImage {
                 self?.fastFind(in: capturedImage)
             }
-            
         }
         classicTimer.eventHandler = {
             if self.isBusyProcessingImage == false {

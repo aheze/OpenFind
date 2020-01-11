@@ -84,12 +84,14 @@ extension ViewController: UIAdaptivePresentationControllerDelegate {
         self.enableAutoCoaching()
         self.blurScreen(mode: "classic")
         //self.fastTimer.suspend()
+        self.newFastModeTimer?.invalidate()
         self.focusTimer.suspend()
         
     }
     func toFocus() {
         self.scanModeToggle = .focused
         //self.fastTimer.suspend()
+        self.newFastModeTimer?.invalidate()
         self.classicTimer.suspend()
         self.classicHasFoundOne = false
         print("focus")
@@ -108,6 +110,12 @@ extension ViewController: UIAdaptivePresentationControllerDelegate {
         self.focusTimer.suspend()
         self.blurScreen(mode: "fast")
         //self.fastTimer.resume()
+        newFastModeTimer = Timer.scheduledTimer(withTimeInterval: newFastUpdateInterval, repeats: true) { [weak self] _ in
+            guard !self!.busyFastFinding else { return }
+            if let capturedImage = self?.sceneView.session.currentFrame?.capturedImage {
+                self?.fastFind(in: capturedImage)
+            }
+        }
         self.modeButton.close()
     }
     func setUpButtons() {
