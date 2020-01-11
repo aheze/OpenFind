@@ -28,15 +28,19 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     //private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
     private let itemsPerRow: CGFloat = 4
     
-    ///Selection
-    var indexPathsThatAreSelected = [IndexPath]()
+    //MARK:  Selection Variables
+    //var indexPathsThatAreSelected = [IndexPath]()
+    var fileUrlsSelected = [URL]()
     var selectionMode: Bool = false {
         didSet {
             collectionView.allowsMultipleSelection = selectionMode
             collectionView.selectItem(at: nil, animated: true, scrollPosition: [])
-            indexPathsThatAreSelected.removeAll()
+            fileUrlsSelected.removeAll()
         }
     }
+    var numberOfSelected = 0
+    
+    
     weak var delegate: UIAdaptivePresentationControllerDelegate?
     weak var changeNumberDelegate: ChangeNumberOfSelected?
     
@@ -87,13 +91,15 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             attributes.statusBar = .light
             attributes.entryInteraction = .absorbTouches
             attributes.lifecycleEvents.willDisappear = {
+                
                 self.fadeSelectOptions(fadeOut: "fade out")
                 self.selectButtonSelected = false
+                self.enterSelectMode(entering: false)
             }
             let customView = HistorySelectorView()
             customView.buttonPressedDelegate = self
-            self.changeNumberDelegate = customView
-            
+            changeNumberDelegate = customView ///AHDFKDS GFJYVETUKGYJHSD
+            //selectionMode = true
             //changeNumberDelegate?.changeLabel(to: 4)
             SwiftEntryKit.display(entry: customView, using: attributes)
             enterSelectMode(entering: true)
@@ -230,27 +236,59 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             return UIMenu(title: "", children: [share, rename, delete])
         }
     }
+    //MARK: Selection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
-        let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
-            "PhotoPageContainerViewController") as! PhotoPageContainerViewController
-        self.selectedIndexPath = indexPath
-        mainContentVC.transitioningDelegate = mainContentVC.transitionController
-        mainContentVC.transitionController.fromDelegate = self
-        mainContentVC.transitionController.toDelegate = mainContentVC
-        mainContentVC.delegate = self
-        mainContentVC.currentIndex = indexPath.item
-        mainContentVC.currentSection = indexPath.section
-        //print(imageSize)
-        mainContentVC.photoSize = imageSize
         
-        if let date = sectionToDate[indexPath.section] {
-            mainContentVC.photoPaths = dateToFilepaths[date]!
+        if selectionMode == true {
+
+            //let flickrPhoto = photo(for: indexPath)
+            let indexMatcher = IndexMatcher()
+            indexMatcher.section = indexPath.section
+            indexMatcher.row = indexPath.item
+            if let filePath = dictOfUrls[indexMatcher] {
+                fileUrlsSelected.append(filePath)
+            }
+            numberOfSelected += 1
+            changeNumberDelegate?.changeLabel(to: numberOfSelected)
+            //updateSharedPhotoCountLabel()
+                
+        } else {
+            collectionView.deselectItem(at: indexPath, animated: true)
+            let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
+                "PhotoPageContainerViewController") as! PhotoPageContainerViewController
+            self.selectedIndexPath = indexPath
+            mainContentVC.transitioningDelegate = mainContentVC.transitionController
+            mainContentVC.transitionController.fromDelegate = self
+            mainContentVC.transitionController.toDelegate = mainContentVC
+            mainContentVC.delegate = self
+            mainContentVC.currentIndex = indexPath.item
+            mainContentVC.currentSection = indexPath.section
+            //print(imageSize)
+            mainContentVC.photoSize = imageSize
+            
+            if let date = sectionToDate[indexPath.section] {
+                mainContentVC.photoPaths = dateToFilepaths[date]!
+            }
+            // mainContentVC.photos = photos
+            print("_____")
+            //print(dateToFilepaths)
+            self.present(mainContentVC, animated: true)
         }
-        // mainContentVC.photos = photos
-        print("_____")
-        //print(dateToFilepaths)
-        self.present(mainContentVC, animated: true)
+    }
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if selectionMode == true {
+            let indexMatcher = IndexMatcher()
+            indexMatcher.section = indexPath.section
+            indexMatcher.row = indexPath.item
+            if let filePath = dictOfUrls[indexMatcher] {
+                fileUrlsSelected.remove(object: filePath)
+            }
+            numberOfSelected -= 1
+            changeNumberDelegate?.changeLabel(to: numberOfSelected)
+            
+        }
+
+        
     }
 }
 extension NewHistoryViewController : UICollectionViewDelegateFlowLayout {

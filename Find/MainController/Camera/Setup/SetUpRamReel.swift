@@ -33,6 +33,10 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
                 
             }
         }
+        ramReel.textField.inputAccessoryView = toolBar
+        cancelButtonNew.layer.cornerRadius = 4
+        autoCompleteButton.layer.cornerRadius = 4
+        
         
 //        ramReel.hooks.append {
 //            let r = Array($0.reversed())
@@ -49,40 +53,40 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         
     }
    
-    @objc func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            keyboardHeight = keyboardRectangle.size.height
-            print("show")
-        }
-    }
+//    @objc func keyboardWillShow(_ notification: Notification) {
+//        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+//            let keyboardRectangle = keyboardFrame.cgRectValue
+//            keyboardHeight = keyboardRectangle.size.height
+//            print("show")
+//        }
+//    }
    
     @objc func textFieldDidChange(_ textField: UITextField) {
         if ramReel.wrapper.selectedItem == nil {
         
-        autocompButton.isEnabled = false
-        autocompButton.alpha = 0.5
+        autoCompleteButton.isEnabled = false
+        autoCompleteButton.alpha = 0.5
         } else {
-        autocompButton.isEnabled = true
-        autocompButton.alpha = 1
+        autoCompleteButton.isEnabled = true
+        autoCompleteButton.alpha = 1
         }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        autocompButton.isEnabled = false
-        autocompButton.alpha = 0.5
+        autoCompleteButton.isEnabled = false
+        autoCompleteButton.alpha = 0.5
         ramReel.view.bounds = view.bounds
         print("textfield")
         print(ramReel.collectionView.frame)
         ramReel.collectionView.isHidden = false
         darkBlurEffectHeightConstraint.constant = self.view.bounds.size.height
         
-        self.toolbarView.isHidden = false
+        //self.toolbarView.isHidden = false
         
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
-            print(self.keyboardHeight)
-            self.toolbarView.alpha = 1
-            self.toolbarBottomConstraint.constant = self.keyboardHeight
+            //print(self.keyboardHeight)
+            //self.toolbarView.alpha = 1
+            //self.toolbarBottomConstraint.constant = self.keyboardHeight
             self.darkBlurEffect.alpha = 1
             if self.scanModeToggle == .focused {
                 if let tag1 = self.view.viewWithTag(1) {
@@ -109,8 +113,8 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
             var frameRect = self.view.bounds
             frameRect.size.height = 100
             self.ramReel.view.bounds = frameRect
-            self.toolbarBottomConstraint.constant = 0
-            self.toolbarView.alpha = 0
+            //self.toolbarBottomConstraint.constant = 0
+            //self.toolbarView.alpha = 0
             
             self.darkBlurEffect.alpha = 0.7
             self.darkBlurEffectHeightConstraint.constant = 100
@@ -133,9 +137,9 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
 //                self.classicTimer.resume()
 //                print("resume timer")
         
-            self.view.layoutIfNeeded()
+            //self.view.layoutIfNeeded()
         }, completion: {_ in
-            self.toolbarView.isHidden = true
+            //self.toolbarView.isHidden = true
             self.view.bringSubviewToFront(self.matchesBig)
         }
         )

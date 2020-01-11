@@ -11,17 +11,22 @@ import UIKit
 extension NewHistoryViewController {
     
     func enterSelectMode(entering: Bool) {
-        guard !dictOfUrls.isEmpty else {
-            return
-        }
-
-        guard !indexPathsThatAreSelected.isEmpty else {
-          selectionMode.toggle()
-          return
-        }
-
-        guard selectionMode else {
-          return
+//        guard !dictOfUrls.isEmpty else {
+//            return
+//        }
+//
+//        guard !fileUrlsSelected.isEmpty else {
+//          selectionMode.toggle()
+//          return
+//        }
+//
+//        guard selectionMode else {
+//          return
+//        }
+        if entering == true {
+            selectionMode = true
+        } else {
+            selectionMode = false
         }
     }
     

@@ -82,6 +82,7 @@
 		49BC783523C8275B003D9904 /* HistorySelect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49BC783323C8275A003D9904 /* HistorySelect.xib */; };
 		49BC783623C8275B003D9904 /* HistorySelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC783423C8275B003D9904 /* HistorySelect.swift */; };
 		49BC783923C8C7AB003D9904 /* HistoryStartSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC783823C8C7AB003D9904 /* HistoryStartSelection.swift */; };
+		49BC785D23C95944003D9904 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC785C23C95944003D9904 /* Toolbar.swift */; };
 		49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */; };
 		49F7B1522353FC970099FA62 /* ProcessImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1512353FC970099FA62 /* ProcessImage.swift */; };
 		49F7B1542353FDF40099FA62 /* VisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1532353FDF40099FA62 /* VisionHandler.swift */; };
@@ -173,6 +174,7 @@
 		49BC783323C8275A003D9904 /* HistorySelect.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistorySelect.xib; sourceTree = "<group>"; };
 		49BC783423C8275B003D9904 /* HistorySelect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistorySelect.swift; sourceTree = "<group>"; };
 		49BC783823C8C7AB003D9904 /* HistoryStartSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStartSelection.swift; sourceTree = "<group>"; };
+		49BC785C23C95944003D9904 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		49F7B1512353FC970099FA62 /* ProcessImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessImage.swift; sourceTree = "<group>"; };
 		49F7B1532353FDF40099FA62 /* VisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionHandler.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				49F7B1552353FE4B0099FA62 /* BasicSetup.swift */,
 				49A8EFAB237A5EFE00328D47 /* SetUpButtons.swift */,
 				49A8EFAD237A5F2800328D47 /* SetUpRamReel.swift */,
+				49BC785C23C95944003D9904 /* Toolbar.swift */,
 			);
 			path = Setup;
 			sourceTree = "<group>";
@@ -647,6 +650,7 @@
 				49913452236FE33B00B82E46 /* SettingsBasicSetup.swift in Sources */,
 				494DF11D23961AEB0076412D /* BDVCShare.swift in Sources */,
 				49517016235AC56D00E00D83 /* CollectionViewWrapper.swift in Sources */,
+				49BC785D23C95944003D9904 /* Toolbar.swift in Sources */,
 				4957157E2368B022007BF68B /* ViewExtensions.swift in Sources */,
 				49BC783623C8275B003D9904 /* HistorySelect.swift in Sources */,
 				49517017235AC56D00E00D83 /* TextFieldReactor.swift in Sources */,

@@ -42,12 +42,12 @@ extension ViewController {
             return }
         globalUrl = url
     }
-    func setUpToolBar() {
-        toolbarView.isHidden = true
-        toolbarView.alpha = 0
-        toolbarView.frame.origin.y = deviceSize.height - 40
-        print(deviceSize.height)
-    }
+//    func setUpToolBar() {
+//        toolbarView.isHidden = true
+//        toolbarView.alpha = 0
+//        toolbarView.frame.origin.y = deviceSize.height - 40
+//        print(deviceSize.height)
+//    }
    
     func setUpTimers() {
         fastTimer.eventHandler = {

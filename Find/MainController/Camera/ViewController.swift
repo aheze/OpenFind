@@ -29,11 +29,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var menuButton: JJFloatingActionButton!
     
-    @IBOutlet weak var toolbarView: UIView!
     
-    @IBOutlet weak var toolbarBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var autocompButton: UIButton!
+    
+    
+    
+    @IBOutlet weak var toolBar: UIView!
+    
+    @IBOutlet weak var autoCompleteButton: UIButton!
+    @IBOutlet weak var cancelButtonNew: UIButton!
+//    @IBOutlet weak var toolbarView: UIView!
+//    
+//    @IBOutlet weak var toolbarBottomConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var cancelButton: UIButton!
+//    @IBOutlet weak var autocompButton: UIButton!
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
         print("cancel")
@@ -237,16 +245,16 @@ class ViewController: UIViewController {
     var scanModeToggle = CurrentModeToggle.fast
     var finalTextToFind : String = ""
     let deviceSize = UIScreen.main.bounds.size
-    var keyboardHeight = CGFloat() {
-        didSet {
-            if toolbarBottomConstraint.constant == 0 {
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.toolbarBottomConstraint.constant = self.keyboardHeight
-                    print("keyboard: \(self.keyboardHeight)")
-                })
-            }
-        }
-    }
+//    var keyboardHeight = CGFloat() {
+//        didSet {
+//            if toolbarBottomConstraint.constant == 0 {
+//                UIView.animate(withDuration: 0.2, animations: {
+//                    self.toolbarBottomConstraint.constant = self.keyboardHeight
+//                    print("keyboard: \(self.keyboardHeight)")
+//                })
+//            }
+//        }
+//    }
     
     ///Crosshair
     var crosshairPoint : CGPoint = CGPoint(x: 0, y: 0)
@@ -277,12 +285,12 @@ class ViewController: UIViewController {
     }()
     
     override func viewWillAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
+//        NotificationCenter.default.addObserver(
+//            self,
+//            selector: #selector(keyboardWillShow),
+//            name: UIResponder.keyboardWillShowNotification,
+//            object: nil
+//        )
         //UIApplication.shared.statusBarStyle = .lightContent
         
     }
@@ -309,13 +317,13 @@ class ViewController: UIViewController {
         focusTextDetectionRequest.recognitionLevel = .fast
         focusTextDetectionRequest.recognitionLanguages = ["en_GB"]
         focusTextDetectionRequest.usesLanguageCorrection = true
-        
+           
         updateMatchesNumber(to: 0)
        
         setUpButtons()
         setUpTimers()
         setUpRamReel()
-        setUpToolBar()
+        //setUpToolBar()
         setUpFilePath()
         setUpMatches()
         setUpCrosshair()
