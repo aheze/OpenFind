@@ -238,9 +238,13 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     //MARK: Selection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
         if selectionMode == true {
 
+            UIView.animate(withDuration: 0.4, animations: {
+                cell.imageView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+            })
+            
             //let flickrPhoto = photo(for: indexPath)
             let indexMatcher = IndexMatcher()
             indexMatcher.section = indexPath.section

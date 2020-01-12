@@ -34,13 +34,13 @@ extension ViewController {
                     let lowerCaseFinalText = finalTextToFind.lowercased()
                     let lowerCaseComponentText = component.text.lowercased()
                 
-                    print(lowerCaseFinalText)
-                    print(lowerCaseComponentText)
+                    //print(lowerCaseFinalText)
+                    //print(lowerCaseComponentText)
                     component.text = lowerCaseComponentText
                     
                 
                     if lowerCaseComponentText.contains(lowerCaseFinalText) {
-                        print("sghiruiguhweiugsiugr+++++++++++")
+                        //print("sghiruiguhweiugsiugr+++++++++++")
                     //if component.text.contains(finalTextToFind) {
                         let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
                         let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
@@ -82,11 +82,11 @@ extension ViewController {
     
     
     func animateFoundFastChange() {
-        print("FastFound+++++++++++___________________________________++++++++++++++++++++++++++")
+        //print("FastFound+++++++++++___________________________________++++++++++++++++++++++++++")
         
         
         for newComponent in nextComponents {
-            print("next looping")
+            //print("next looping")
             
             var lowestDist = CGFloat(10000)
             var distToComp = [CGFloat: Component]()
@@ -122,7 +122,7 @@ extension ViewController {
                             newView?.frame = rect
                             
                             
-                            print("ANIMATE")
+                            //print("ANIMATE")
                         })
                     }
                 } else {
@@ -148,12 +148,12 @@ extension ViewController {
             
         }
         
-        print("Current: \(currentComponents.count)")
+        //print("Current: \(currentComponents.count)")
  
         for comp in currentComponents {
             if !tempComponents.contains(comp) {
                 let theView = comp.baseView
-                print("remove comp because didn't change")
+                //print("remove comp because didn't change")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                     DispatchQueue.main.async {
                         UIView.animate(withDuration: 0.2, animations: {
@@ -171,7 +171,7 @@ extension ViewController {
         currentComponents.removeAll()
         currentComponents = tempComponents
         
-        print("next: \(nextComponents.count)")
+        //print("next: \(nextComponents.count)")
         self.updateMatchesNumber(to: self.nextComponents.count)
         
         for next in nextComponents {
@@ -189,22 +189,22 @@ extension ViewController {
             }
         }
         
-        print("Curr \(currentComponents.count)")
+        //print("Curr \(currentComponents.count)")
         for curr in currentComponents {
             curr.changed = false
         }
-        print("temp: \(tempComponents.count)")
+        //print("temp: \(tempComponents.count)")
         nextComponents.removeAll()
         tempComponents.removeAll()
-        print("currentComponents.count: \(currentComponents.count)")
+        //print("currentComponents.count: \(currentComponents.count)")
         
-        print("END_______________________________________________________")
+        //print("END_______________________________________________________")
     
     }
     
     
     func scaleInHighlight(component: Component) {
-        print("scale")
+        //print("scale")
         DispatchQueue.main.async {
             
             let layer = CAShapeLayer()
@@ -287,29 +287,29 @@ extension ViewController {
     func resetFastHighlights() {
         DispatchQueue.main.async {
             for highlight in self.currentComponents {
-            UIView.animate(withDuration: 0.5, animations: {
-                highlight.baseView?.alpha = 0
-            }, completion: {
-                _ in highlight.baseView?.removeFromSuperview()
-                self.currentComponents.remove(object: highlight)
-            })
-        }
+                UIView.animate(withDuration: 0.5, delay: 0.8, animations: {
+                    highlight.baseView?.alpha = 0
+                }, completion: {
+                    _ in highlight.baseView?.removeFromSuperview()
+                    self.currentComponents.remove(object: highlight)
+                })
+            }
             for secondHighlight in self.nextComponents {
-            UIView.animate(withDuration: 0.5, animations: {
-                secondHighlight.baseView?.alpha = 0
-            }, completion: {
-                _ in secondHighlight.baseView?.removeFromSuperview()
-                self.nextComponents.remove(object: secondHighlight)
-            })
-        }
+                UIView.animate(withDuration: 0.5, delay: 0.8, animations: {
+                    secondHighlight.baseView?.alpha = 0
+                }, completion: {
+                    _ in secondHighlight.baseView?.removeFromSuperview()
+                    self.nextComponents.remove(object: secondHighlight)
+                })
+            }
             for currentHighlight in self.currentComponents {
-            UIView.animate(withDuration: 0.5, animations: {
-                currentHighlight.baseView?.alpha = 0
-            }, completion: {
-                _ in currentHighlight.baseView?.removeFromSuperview()
-                self.tempComponents.remove(object: currentHighlight)
-            })
-        }
+                UIView.animate(withDuration: 0.5, delay: 0.8, animations: {
+                    currentHighlight.baseView?.alpha = 0
+                }, completion: {
+                    _ in currentHighlight.baseView?.removeFromSuperview()
+                    self.tempComponents.remove(object: currentHighlight)
+                })
+            }
         }
     }
     func animateFastChange(layer: CAShapeLayer) {

@@ -89,9 +89,9 @@ extension ViewController {
         view.addSubview(blurView)
         view.bringSubviewToFront(blurView)
         //view.bringSubviewToFront(photoButton)
-        view.bringSubviewToFront(modeButton)
-        view.bringSubviewToFront(shutterButton)
-        view.bringSubviewToFront(refreshButton)
+       // view.bringSubviewToFront(modeButton)
+        view.bringSubviewToFront(newShutterButton)
+       // view.bringSubviewToFront(refreshButton)
         view.bringSubviewToFront(menuButton)
         view.bringSubviewToFront(ramReel.view)
         guard let tag1 = self.view.viewWithTag(1) else {return}
@@ -110,7 +110,7 @@ extension ViewController {
                 let configuration = ARWorldTrackingConfiguration()
                 configuration.planeDetection = .horizontal
                 self.sceneView.session.run(configuration, options: [.removeExistingAnchors, .resetTracking])
-                self.modeButton.imageView.image = #imageLiteral(resourceName: "bclassic 2")
+             //   self.modeButton.imageView.image = #imageLiteral(resourceName: "bclassic 2")
                 //self.fastFindingToggle = .inactive
                 self.busyFastFinding = true
             })
@@ -128,7 +128,7 @@ extension ViewController {
             }, completion: { _ in
                 self.fadeClassicHighlights()
                 self.runImageTrackingSession(with: [], runOptions: [.removeExistingAnchors, .resetTracking])
-                self.modeButton.imageView.image = #imageLiteral(resourceName: "bfocus 2")
+              //  self.modeButton.imageView.image = #imageLiteral(resourceName: "bfocus 2")
                 //self.fastFindingToggle = .inactive
                 self.busyFastFinding = true
             })
@@ -147,7 +147,7 @@ extension ViewController {
             }, completion: { _ in
                 self.fadeClassicHighlights()
                 self.sceneView.session.run(self.fastSceneConfiguration, options: [.removeExistingAnchors, .resetTracking])
-                self.modeButton.imageView.image = #imageLiteral(resourceName: "bfast 2")
+            //    self.modeButton.imageView.image = #imageLiteral(resourceName: "bfast 2")
                 //self.fastFindingToggle = false
                 self.busyFastFinding = false
                 
@@ -163,14 +163,17 @@ extension ViewController {
         }
     }
     
-    func refreshScreen() {
+    func refreshScreen(location: CGPoint) {
         var option = RippleEffect.option()
-        var xOrig = deviceSize.width / 2
+        //var xOrig = deviceSize.width / 2
         option.fillColor = #colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 1)
-        option.radius = CGFloat(500)
+        option.radius = CGFloat(50)
         option.borderWidth = CGFloat(0)
-        option.scale = CGFloat(3.0)
-        RippleEffect.run(view, locationInView: CGPoint(x: xOrig, y: 0), option: option)
+        option.scale = CGFloat(14)
+        option.duration = 0.38
+        //option.isRunSuperView = true
+        print("sgh")
+        RippleEffect.run(sceneView, locationInView: location, option: option)
         
         
             switch self.scanModeToggle {

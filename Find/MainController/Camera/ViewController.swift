@@ -9,7 +9,7 @@
 import UIKit
 import ARKit
 import Vision
-import JJFloatingActionButton
+//import JJFloatingActionButton
 
 
 class ViewController: UIViewController {
@@ -23,12 +23,13 @@ class ViewController: UIViewController {
     
  
     
-    @IBOutlet weak var minimizeButton: UIButton!
-    @IBOutlet weak var modeButton: JJFloatingActionButton!
-    @IBOutlet weak var shutterButton: ShutterButton!
-    @IBOutlet weak var refreshButton: UIButton!
+//    @IBOutlet weak var minimizeButton: UIButton!
+//    @IBOutlet weak var modeButton: JJFloatingActionButton!
+   // @IBOutlet weak var shutterButton: ShutterButton!
+//    @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var menuButton: JJFloatingActionButton!
     
+    @IBOutlet weak var newShutterButton: NewShutterButton!
     
     
     
@@ -72,8 +73,8 @@ class ViewController: UIViewController {
     @IBOutlet var matchesWidthConstraint: NSLayoutConstraint!
     @IBOutlet var matchesHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var matchesBig: MatchesGradientView!
-    @IBOutlet var upButtonToNumberConstraint: NSLayoutConstraint!
-    @IBOutlet var downButtonToNumberConstraint: NSLayoutConstraint!
+//    @IBOutlet var upButtonToNumberConstraint: NSLayoutConstraint!
+//    @IBOutlet var downButtonToNumberConstraint: NSLayoutConstraint!
     @IBOutlet weak var upButton: UIButton!
     @IBOutlet weak var downButton: UIButton!
     var shouldScale = true
@@ -109,16 +110,20 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func refreshButtonPressed(_ sender: UIButton) {
-        refreshScreen()
-    }
+    //MARK: New Control Outlet Buttons
+    
+    @IBOutlet weak var statusView: UIView!
+    
+//    @IBAction func refreshButtonPressed(_ sender: UIButton) {
+//        refreshScreen()
+//    }
     
     var shouldMin = true
-    @IBAction func minimizeButtonButtonPressed(_ sender: UIButton) {
-        print("press")
-        shouldMin = !shouldMin
-        hideTopNumber(hide: shouldMin)
-    }
+//    @IBAction func minimizeButtonButtonPressed(_ sender: UIButton) {
+//        print("press")
+//        shouldMin = !shouldMin
+//        hideTopNumber(hide: shouldMin)
+//    }
     
     var currentPipPosition : CGPoint?
     override func viewDidLayoutSubviews() {
@@ -322,6 +327,10 @@ class ViewController: UIViewController {
         focusTextDetectionRequest.recognitionLanguages = ["en_GB"]
         focusTextDetectionRequest.usesLanguageCorrection = true
            
+        
+//        doubleTap.numberOfTapsRequired = 2
+//        sceneView.addGestureRecognizer(doubleTap)
+        
         updateMatchesNumber(to: 0)
        
         setUpButtons()
@@ -347,7 +356,7 @@ class ViewController: UIViewController {
         classicTimer.suspend()
         focusTimer.suspend()
         sceneView.session.run(fastSceneConfiguration, options: [.removeExistingAnchors, .resetTracking])
-        modeButton.imageView.image = #imageLiteral(resourceName: "bfast 2")
+        //modeButton.imageView.image = #imageLiteral(resourceName: "bfast 2")
         busyFastFinding = false
         //fastTimer.resume()
         print("resume?")

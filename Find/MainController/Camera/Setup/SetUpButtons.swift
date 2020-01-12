@@ -9,7 +9,7 @@
 import UIKit
 import SwiftEntryKit
 
-extension ViewController: UIAdaptivePresentationControllerDelegate {
+extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRecognizerDelegate {
    
     
    
@@ -45,7 +45,14 @@ extension ViewController: UIAdaptivePresentationControllerDelegate {
         //This will decrement(count down)the seconds.
         //timerLabel.text = "\(seconds)"
     }
-    
+//    @objc func doubleTapped() {
+//        print("sdfjg")
+//        // do something here
+//        //refreshScreen(touch: UITapGestureRecognizer)
+//        if doubleTap.state == UIGestureRecognizer.State.recognized {
+//            print(doubleTap.location(in: doubleTap.view))
+//        }
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     //        if segue.identifier == "goToHistory" {
@@ -116,15 +123,36 @@ extension ViewController: UIAdaptivePresentationControllerDelegate {
                 self?.fastFind(in: capturedImage)
             }
         }
-        self.modeButton.close()
+        //self.modeButton.close()
+    }
+    @objc func tappedOnce(gr:UITapGestureRecognizer) {
+        // do something here
+        print("akjd")
+        let loc: CGPoint = gr.location(in: gr.view)
+        refreshScreen(location: loc)
     }
     func setUpButtons() {
+//        let recognizerView = UIView()
+//        view.insertSubview(recognizerView, aboveSubview: sceneView)
+//        recognizerView.snp.makeConstraints { (make) in
+//            make.edges.equalToSuperview()
+//        }
+//        recognizerView.isUserInteractionEnabled = true
+        //recognizerView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedOnce))
+        tap.numberOfTapsRequired = 1
+        tap.delegate = self
+        
+        //recognizerView.addGestureRecognizer(tap)
+        //print(sceneView.isUserInteractionEnabled)
+        //sceneView.isUserInteractionEnabled = true
+        view.addGestureRecognizer(tap)
 //        self.statusBarHidden = true
 //        UIView.animate(withDuration: 0.3, animations: {
 //            self.setNeedsStatusBarAppearanceUpdate()
 //        })
         
-        modeButton.buttonAnimationConfiguration = .transition(toImage: #imageLiteral(resourceName: "X Button Action"))
+       // modeButton.buttonAnimationConfiguration = .transition(toImage: #imageLiteral(resourceName: "X Button Action"))
         
 //        let goToHist = menuButton.addItem()
 //        goToHist.titleLabel.text = "History"
@@ -139,6 +167,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate {
        
         
         let goToSett = menuButton.addItem()
+        goToSett.tag = 12462
         goToSett.titleLabel.text = "Settings"
         goToSett.imageView.image = #imageLiteral(resourceName: "bsettings 2")
         goToSett.action = { item in
@@ -151,6 +180,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate {
             //self.f.suspend()
         }
         let goToNewHistory = menuButton.addItem()
+        goToNewHistory.tag = 12461
         goToNewHistory.titleLabel.text = "Newer History"
         goToNewHistory.imageView.image = #imageLiteral(resourceName: "bhistory 2")
         goToNewHistory.action = { item in
@@ -170,31 +200,52 @@ extension ViewController: UIAdaptivePresentationControllerDelegate {
 //
 //        }
         
-        let goToFast = modeButton.addItem()
-        goToFast.titlePosition = .trailing
-        goToFast.titleLabel.text = "Fast mode"
-        goToFast.imageView.image = #imageLiteral(resourceName: "bfast 2")
-        goToFast.action = { item in
-            self.toFast()
-        }
-        
-        let goToClassic = modeButton.addItem()
-        goToClassic.titlePosition = .trailing
-        goToClassic.titleLabel.text = "Classic mode"
-        goToClassic.imageView.image = #imageLiteral(resourceName: "bclassic 2")
-        goToClassic.action = { item in
-            self.toClassic()
-        }
-        let goToFocus = modeButton.addItem()
-        goToFocus.titlePosition = .trailing
-        goToFocus.titleLabel.text = "Focus mode"
-        goToFocus.imageView.image = #imageLiteral(resourceName: "bfocus 2")
-        goToFocus.action = { item in
-            self.toFocus()
-        }
+//        let goToFast = modeButton.addItem()
+//        goToFast.titlePosition = .trailing
+//        goToFast.titleLabel.text = "Fast mode"
+//        goToFast.imageView.image = #imageLiteral(resourceName: "bfast 2")
+//        goToFast.action = { item in
+//            self.toFast()
+//        }
+//        
+//        let goToClassic = modeButton.addItem()
+//        goToClassic.titlePosition = .trailing
+//        goToClassic.titleLabel.text = "Classic mode"
+//        goToClassic.imageView.image = #imageLiteral(resourceName: "bclassic 2")
+//        goToClassic.action = { item in
+//            self.toClassic()
+//        }
+//        let goToFocus = modeButton.addItem()
+//        goToFocus.titlePosition = .trailing
+//        goToFocus.titleLabel.text = "Focus mode"
+//        goToFocus.imageView.image = #imageLiteral(resourceName: "bfocus 2")
+//        goToFocus.action = { item in
+//            self.toFocus()
+//        }
         menuButton.overlayView.backgroundColor = UIColor.clear
-        modeButton.overlayView.backgroundColor = UIColor.clear
+//        modeButton.overlayView.backgroundColor = UIColor.clear
     }
 
     
+}
+extension ViewController {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        //print(touch.view)
+        if let histButton = view.viewWithTag(12461) {
+            return false
+        }
+        if let settButton = view.viewWithTag(12462) {
+            return false
+        }
+        switch touch.view {
+        case matchesBig, newShutterButton, menuButton, statusView, darkBlurEffect:
+            print("Special view")
+            return false
+        default:
+            print("Not")
+            return true
+        }
+        //return touch.view == gestureRecognizer.view
+        
+    }
 }

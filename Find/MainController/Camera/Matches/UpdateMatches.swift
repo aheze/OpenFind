@@ -12,7 +12,7 @@ extension ViewController {
     
     
     func updateMatchesNumber(to number: Int) {
-        print("Updating matches number to \(number)")
+        //print("Updating matches number to \(number)")
         if number > previousNumberOfMatches {
             let generator = UIImpactFeedbackGenerator(style: .light)
             generator.prepare()
