@@ -175,8 +175,8 @@ import UIKit
     /// - SeeAlso: `buttonColor`
     /// - SeeAlso: `highlightedButtonColor`
     ///
-    @objc public fileprivate(set) lazy var circleView: JJCircleView = {
-        let view = JJCircleView()
+    @objc public fileprivate(set) lazy var circleView: JJBigCircleView = {
+        let view = JJBigCircleView()
         view.isUserInteractionEnabled = false
         view.color = Styles.defaultButtonColor
         return view
@@ -401,16 +401,19 @@ fileprivate extension JJFloatingActionButton {
         heightConstraint.isActive = true
 
         let imageSizeMuliplier = CGFloat(1 / sqrt(2))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.centerXAnchor.constraint(equalTo: circleView.centerXAnchor).isActive = true
-        imageView.centerYAnchor.constraint(equalTo: circleView.centerYAnchor).isActive = true
-        imageView.widthAnchor.constraint(lessThanOrEqualTo: circleView.widthAnchor, multiplier: imageSizeMuliplier).isActive = true
-        imageView.heightAnchor.constraint(lessThanOrEqualTo: circleView.heightAnchor, multiplier: imageSizeMuliplier).isActive = true
-
-        imageView.setContentCompressionResistancePriority(.fittingSizeLevel, for: .horizontal)
-        imageView.setContentCompressionResistancePriority(.fittingSizeLevel, for: .vertical)
-        circleView.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
-        circleView.setContentHuggingPriority(.fittingSizeLevel, for: .vertical)
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        imageView.centerXAnchor.constraint(equalTo: circleView.centerXAnchor).isActive = true
+//        imageView.centerYAnchor.constraint(equalTo: circleView.centerYAnchor).isActive = true
+//        imageView.widthAnchor.constraint(lessThanOrEqualTo: circleView.widthAnchor, multiplier: imageSizeMuliplier).isActive = true
+//        imageView.heightAnchor.constraint(lessThanOrEqualTo: circleView.heightAnchor, multiplier: imageSizeMuliplier).isActive = true
+//
+//        imageView.setContentCompressionResistancePriority(.fittingSizeLevel, for: .horizontal)
+//        imageView.setContentCompressionResistancePriority(.fittingSizeLevel, for: .vertical)
+//        circleView.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
+//        circleView.setContentHuggingPriority(.fittingSizeLevel, for: .vertical)
+        imageView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
 
         configureButtonImage()
     }

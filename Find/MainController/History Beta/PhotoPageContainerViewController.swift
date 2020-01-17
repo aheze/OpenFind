@@ -17,6 +17,29 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     
     @IBOutlet weak var xButtonView: UIImageView!
     
+    @IBOutlet weak var findButton: UIButton!
+    @IBOutlet weak var heartButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
+    
+    
+    @IBAction func findPressed(_ sender: UIButton) {
+        print("find")
+    }
+    
+    @IBAction func heartPressed(_ sender: UIButton) {
+        print("heart")
+    }
+    
+    @IBAction func deletePressed(_ sender: UIButton) {
+        print("delete")
+    }
+    
+    @IBAction func sharePressed(_ sender: UIButton) {
+        print("share")
+    }
+    
+    
     enum ScreenMode {
         case full, normal
     }
@@ -44,6 +67,33 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         }
     }
     
+    func drawImageViews() {
+        //let findImage = StyleKitName.imageOfFind
+        findButton.alpha = 0
+        heartButton.alpha = 0
+        deleteButton.alpha = 0
+        shareButton.alpha = 0
+        findButton.tintColor = #colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 1)
+        heartButton.tintColor = #colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 1)
+        deleteButton.tintColor = #colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 1)
+        shareButton.tintColor = #colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 1)
+        findButton.setImage(StyleKitName.imageOfFind, for: .normal)
+        heartButton.setImage(StyleKitName.imageOfHeart, for: .normal)
+        deleteButton.setImage(StyleKitName.imageOfDelete, for: .normal)
+        shareButton.setImage(StyleKitName.imageOfShare, for: .normal)
+        print("start")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4, execute: {
+            print("exce")
+            UIView.animate(withDuration: 0.4, delay: 0, options: .curveLinear, animations: {
+                self.findButton.alpha = 1
+                self.heartButton.alpha = 1
+                self.deleteButton.alpha = 1
+                self.shareButton.alpha = 1
+            }, completion: nil)
+        })
+        
+        
+    }
     var panGestureRecognizer: UIPanGestureRecognizer!
     var singleTapGestureRecognizer: UITapGestureRecognizer!
     
@@ -51,6 +101,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        drawImageViews()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleXPress(_:)))
         xButtonView.addGestureRecognizer(tap)
@@ -142,14 +193,39 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             //let _ = self.navigationController?.popViewController(animated: true)
             self.dismiss(animated: true, completion: nil)
         case .ended:
+            print("ended")
             if self.transitionController.isInteractive {
                 self.currentViewController.scrollView.isScrollEnabled = true
                 self.transitionController.isInteractive = false
                 self.transitionController.didPanWith(gestureRecognizer: gestureRecognizer)
+                UIView.animate(withDuration: 0.4, delay: 0.6, options: [], animations: {
+                    self.findButton.alpha = 1
+                    self.heartButton.alpha = 1
+                    self.deleteButton.alpha = 1
+                    self.shareButton.alpha = 1
+                }) { _ in
+                    self.findButton.isHidden = false
+                    self.heartButton.isHidden = false
+                    self.deleteButton.isHidden = false
+                    self.shareButton.isHidden = false
+                }
             }
         default:
+            print("default")
+            
             if self.transitionController.isInteractive {
                 self.transitionController.didPanWith(gestureRecognizer: gestureRecognizer)
+                UIView.animate(withDuration: 0.2, delay: 0, options: [], animations: {
+                    self.findButton.alpha = 0
+                    self.heartButton.alpha = 0
+                    self.deleteButton.alpha = 0
+                    self.shareButton.alpha = 0
+                }) { _ in
+                    self.findButton.isHidden = true
+                    self.heartButton.isHidden = true
+                    self.deleteButton.isHidden = true
+                    self.shareButton.isHidden = true
+                }
             }
         }
     }

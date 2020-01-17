@@ -24,9 +24,23 @@ extension NewHistoryViewController {
 //          return
 //        }
         if entering == true {
+//            for cellPath in dictOfUrls {
+//                let section = cellPath.key.section
+//                let row = cellPath.key.row
+//                let indexPath = IndexPath(item: row, section: section)
+//                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
+//                cell.selectMode = true
+//            }
             selectionMode = true
         } else {
             selectionMode = false
+//            for cellPath in dictOfUrls {
+//                let section = cellPath.key.section
+//                let row = cellPath.key.row
+//                let indexPath = IndexPath(item: row, section: section)
+//                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
+//                cell.selectMode = false
+//            }
         }
     }
     

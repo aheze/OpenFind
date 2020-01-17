@@ -147,6 +147,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         //print(sceneView.isUserInteractionEnabled)
         //sceneView.isUserInteractionEnabled = true
         view.addGestureRecognizer(tap)
+        view.bringSubviewToFront(numberLabel)
 //        self.statusBarHidden = true
 //        UIView.animate(withDuration: 0.3, animations: {
 //            self.setNeedsStatusBarAppearanceUpdate()
@@ -238,7 +239,7 @@ extension ViewController {
             return false
         }
         switch touch.view {
-        case matchesBig, newShutterButton, menuButton, statusView, darkBlurEffect:
+        case newShutterButton, menuButton, statusView, darkBlurEffect, blurView:
             print("Special view")
             return false
         default:

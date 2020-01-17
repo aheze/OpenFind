@@ -161,7 +161,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
             self.view.layoutIfNeeded()
         }, completion: {_ in
             imageView.removeFromSuperview()
-            self.view.bringSubviewToFront(self.matchesBig)
+            //self.view.bringSubviewToFront(self.matchesBig)
             self.ramReel.collectionView.isHidden = true
         }
         )

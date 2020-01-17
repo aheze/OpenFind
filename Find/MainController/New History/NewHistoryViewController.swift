@@ -8,6 +8,9 @@
 import UIKit
 import SDWebImage
 import SwiftEntryKit
+import RealmSwift
+
+
 protocol UpdateImageDelegate: class {
     func changeImage(image: UIImage)
 }
@@ -15,12 +18,22 @@ protocol ChangeNumberOfSelected: class {
     func changeLabel(to: Int)
 }
 class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIViewControllerTransitioningDelegate {
+    
+    
+    //MARK: Realm
+    let realm = try! Realm()
+    var photoCategories: [IndexMatcher: Results<RealmPhoto>]?
+ 
+
+    
+    
     var selectedIndexPath: IndexPath!
     
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
     var sectionToDate : [Int: Date] = [Int: Date]()
     var dateToFilepaths = [Date: [URL]]()
     var dictOfUrls = [IndexMatcher: URL]()
+    
     var sectionCounts = [Int]()
     var imageSize = CGSize(width: 0, height: 0)
     
@@ -31,14 +44,19 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     //MARK:  Selection Variables
     //var indexPathsThatAreSelected = [IndexPath]()
     var fileUrlsSelected = [URL]()
+    var indexPathsSelected = [IndexPath]()
     var selectionMode: Bool = false {
         didSet {
+            print("selection mode: \(selectionMode)")
             collectionView.allowsMultipleSelection = selectionMode
-            collectionView.selectItem(at: nil, animated: true, scrollPosition: [])
             fileUrlsSelected.removeAll()
         }
     }
-    var numberOfSelected = 0
+    var numberOfSelected = 0 {
+        didSet {
+            changeNumberDelegate?.changeLabel(to: numberOfSelected)
+        }
+    }
     
     
     weak var delegate: UIAdaptivePresentationControllerDelegate?
@@ -46,16 +64,40 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+   // @IBOutlet weak var selectIndicator: UIImageView!
     
     @IBOutlet weak var selectButton: UIButton!
+    
+    @IBOutlet weak var selectAll: UIButton!
+    var deselectAll = true
+    
+    @IBOutlet weak var inBetweenSelect: NSLayoutConstraint!
     var selectButtonSelected = false ///False means is Select, true = Cancel
     var swipedToDismiss = true
+    
+    @IBAction func selectAllPressed(_ sender: UIButton) {
+        deselectAll = !deselectAll
+        if deselectAll == false { //Select All cells, change label to opposite
+            print("select all")
+            selectAll.setTitle("Deselect All", for: .normal)
+            UIView.animate(withDuration: 0.09, animations: {
+                self.view.layoutIfNeeded()
+            })
+            deselectAllItems(deselect: false)
+        } else {
+            print("deselect all")
+            selectAll.setTitle("Select All", for: .normal)
+            UIView.animate(withDuration: 0.09, animations: {
+                self.view.layoutIfNeeded()
+            })
+            deselectAllItems(deselect: true)
+        }
+    }
+    
     @IBAction func selectPressed(_ sender: UIButton) {
         selectButtonSelected = !selectButtonSelected ///First time press, will be true
         if selectButtonSelected == true {
-            //selectButtonSelected = false ///Select will now be cancel
             print("select")
-            
             fadeSelectOptions(fadeOut: "fade in")
         } else { ///Cancel will now be Select
             print("cancel")
@@ -72,14 +114,26 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             if swipedToDismiss == false {
                 SwiftEntryKit.dismiss()
             }
-            let toImage = UIImage(named: "Select")
-            UIView.transition(with: selectButton,
-                              duration: 0.2,
-                              options: .transitionCrossDissolve,
-                              animations: {
-                                self.selectButton.setImage(toImage, for: .normal)
-                              },
-                              completion: nil)
+            deselectAll = true
+            UIView.transition(with: selectButton, duration: 0.1, options: .transitionCrossDissolve, animations: {
+              self.selectButton.setTitle("Select", for: .normal)
+            }, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                UIView.transition(with: self.selectAll, duration: 0.1, options: .transitionCrossDissolve, animations: {
+                  self.selectAll.setTitle("Select All", for: .normal)
+                }, completion: nil)
+            })
+            
+            inBetweenSelect.constant = -5
+            selectAll.alpha = 1
+            UIView.animate(withDuration: 0.5, animations: {
+                self.view.layoutIfNeeded()
+                self.selectAll.alpha = 0
+            }) { _ in
+                self.selectAll.isHidden = true
+            }
+            deselectAllItems(deselect: true)
+            
         case "fade in":
             // Create a basic toast that appears at the top
             var attributes = EKAttributes.bottomFloat
@@ -98,44 +152,36 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             }
             let customView = HistorySelectorView()
             customView.buttonPressedDelegate = self
-            changeNumberDelegate = customView ///AHDFKDS GFJYVETUKGYJHSD
+            changeNumberDelegate = customView 
             //selectionMode = true
             //changeNumberDelegate?.changeLabel(to: 4)
             SwiftEntryKit.display(entry: customView, using: attributes)
             enterSelectMode(entering: true)
             
-            let toImage = UIImage(named: "Cancel")
-            UIView.transition(with: selectButton,
-                              duration: 0.2,
-                              options: .transitionCrossDissolve,
-                              animations: {
-                                self.selectButton.setImage(toImage, for: .normal)
-                              },
-                              completion: nil)
+            selectButton.setTitle("Cancel", for: .normal)
+            inBetweenSelect.constant = 5
+            selectAll.isHidden = false
+            UIView.animate(withDuration: 0.5, animations: {
+                self.selectAll.alpha = 1
+                self.view.layoutIfNeeded()
+            })
+            
         case "firstTimeSetup":
+            selectAll.alpha = 0
+            selectAll.isHidden = true
             print("firstTime")
         default:
             print("unknown case, fade")
         }
     }
     
-    
-    @IBAction func deletePressed(_ sender: UIButton) {
-        print("delete")
-    }
-    
-    @IBAction func sharePressed(_ sender: UIButton) {
-        print("share")
-    }
-    
-    
-    
-    
     @IBOutlet weak var blackXButtonView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         getData()
-        
+        deselectAllItems(deselect: true)
+        selectButton.layer.cornerRadius = 4
+        selectAll.layer.cornerRadius = 4
         fadeSelectOptions(fadeOut: "firstTimeSetup")
         //self.transitioningDelegate = transitionDelegate
 //        let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
@@ -182,6 +228,14 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             assert(false, "Unexpected element kind")
         }
     }
+    //MARK: Realm Converter
+    
+    var indexNumber = 0
+    func indexmatcherToInt(indexMatcher: IndexMatcher) -> Int {
+        indexNumber += 1
+        return indexNumber
+        
+    }
     func setUpXButton() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleBlackXPress(_:)))
         blackXButtonView.addGestureRecognizer(tap)
@@ -210,8 +264,14 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         cell.imageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.imageView.sd_imageTransition = .fade
         cell.imageView.sd_setImage(with: url)
-        cell.heartView.alpha = 0
-        cell.addHeart(add: true)
+        if let photo = photoCategories?[newInd] {
+        
+        }
+//        if photoCategories![newInd]?.isEmpty == true {
+//            cell.heartView.alpha = 0
+//            cell.addHeart(add: true)
+//        }
+        //cell.selectMode = selectionMode
         
         return cell
     }
@@ -237,27 +297,60 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     //MARK: Selection
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
-        if selectionMode == true {
-
-            UIView.animate(withDuration: 0.4, animations: {
-                cell.imageView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-            })
+    func deselectAllItems(deselect: Bool) {
+        if deselect == true {
+            print("deselc")
             
-            //let flickrPhoto = photo(for: indexPath)
+            for i in 0..<collectionView.numberOfSections {
+                for j in 0..<collectionView.numberOfItems(inSection: i) {
+                    collectionView.deselectItem(at: IndexPath(row: j, section: i), animated: false)
+                }
+            }
+
+            fileUrlsSelected.removeAll()
+            indexPathsSelected.removeAll()
+            numberOfSelected = 0
+            
+        } else {
+            
+            print("select")
+            var number = 0
+            for section in dictOfUrls.values {
+                //let url = dictOfUrls[section]
+                fileUrlsSelected.append(section)
+                //cell.isSelected = true
+                number += 1
+            }
+            for i in 0..<collectionView.numberOfSections {
+                for j in 0..<collectionView.numberOfItems(inSection: i) {
+                    collectionView.selectItem(at: IndexPath(row: j, section: i), animated: false, scrollPosition: [])
+                }
+            }
+            numberOfSelected = number
+            
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("did")
+        //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
+//        cell.isHighlighted = true
+        if selectionMode == true {
+            print("seleeeect")
+            
             let indexMatcher = IndexMatcher()
             indexMatcher.section = indexPath.section
             indexMatcher.row = indexPath.item
             if let filePath = dictOfUrls[indexMatcher] {
                 fileUrlsSelected.append(filePath)
             }
+            
+            indexPathsSelected.append(indexPath)
             numberOfSelected += 1
-            changeNumberDelegate?.changeLabel(to: numberOfSelected)
-            //updateSharedPhotoCountLabel()
                 
         } else {
+            print("false")
             collectionView.deselectItem(at: indexPath, animated: true)
+            
             let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
                 "PhotoPageContainerViewController") as! PhotoPageContainerViewController
             self.selectedIndexPath = indexPath
@@ -280,7 +373,10 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        print("deselecting at indexpath")
         if selectionMode == true {
+            
+            print("del")
             let indexMatcher = IndexMatcher()
             indexMatcher.section = indexPath.section
             indexMatcher.row = indexPath.item
@@ -288,7 +384,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 fileUrlsSelected.remove(object: filePath)
             }
             numberOfSelected -= 1
-            changeNumberDelegate?.changeLabel(to: numberOfSelected)
+            //changeNumberDelegate?.changeLabel(to: numberOfSelected)
             
         }
 
@@ -297,39 +393,20 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 }
 extension NewHistoryViewController : UICollectionViewDelegateFlowLayout {
   //1
-  func collectionView(_ collectionView: UICollectionView,
+    func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       sizeForItemAt indexPath: IndexPath) -> CGSize {
-    //2
-//    let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-//    let availableWidth = view.frame.width - paddingSpace
-//    let widthPerItem = availableWidth / itemsPerRow
-//
-//    return CGSize(width: widthPerItem, height: widthPerItem)
-    let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right)) / 3
+        let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right)) / 3
     return CGSize(width: itemSize, height: itemSize)
-  }
+    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-//  //3
-//  func collectionView(_ collectionView: UICollectionView,
-//                      layout collectionViewLayout: UICollectionViewLayout,
-//                      insetForSectionAt section: Int) -> UIEdgeInsets {
-//    return sectionInsets
-//  }
-//
-//  // 4
-  func collectionView(_ collectionView: UICollectionView,
+    func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 0
-  }
-
-
-
-
-
+        return 0
+    }
 }
 
 extension NewHistoryViewController: ButtonPressed {
@@ -362,50 +439,26 @@ extension NewHistoryViewController {
     func getData() {
         var arrayOfCategoryDates = [Date]()
         var tempDictOfImagePaths = [Date: [URL]]()
-        
-        //print(folderURL.path)
         do {
             let items = try FileManager.default.contentsOfDirectory(atPath: folderURL.path)
             for theFileName in items {
-                //print(item)
-                //let theFileName = (item as NSString).lastPathComponent
-                //print(theFileName)
-                //print(folderURL.path)
                 let splits = theFileName.split(separator: "=")
-                
-                let categoryName = String(splits[0])
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MMddyy"
                 let dateFromString = dateFormatter.date(from: String(splits[0]))!
-                
-//                    if let image = loadImageFromDocumentDirectory(urlOfFile: folderURL, nameOfImage: theFileName) {
-//                        dictOfHists[dateFromString, default: [UIImage]()].append(image)
-//                        //tempDictOfImagePaths[dateFromString]?.append(item)
-//                    }
                 let imagePath = "\(folderURL)/\(theFileName)"
                 if !arrayOfCategoryDates.contains(dateFromString) {
                     arrayOfCategoryDates.append(dateFromString)
                 }
                 if let imageUrl = URL(string: imagePath) {
                     tempDictOfImagePaths[dateFromString, default: [URL]()].append(imageUrl)
-                    
                 }
-                
             }
-            
-            //print(tempDictOfImagePaths)
         } catch {
             print("error getting photos... \(error)")
         }
-       
-//        var tempCategories = [Date]()
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "MMddyy"
-//        for dict in dictOfHists {
-//            let dictDate = dict.key
-//            tempCategories.append(dictDate)
-//        }
         arrayOfCategoryDates.sort(by: { $0.compare($1) == .orderedDescending})
+        
         for (index, date) in arrayOfCategoryDates.enumerated() {
             sectionCounts.append(0)
             sectionToDate[index] = date
@@ -416,18 +469,23 @@ extension NewHistoryViewController {
                     indexPath.row = secondIndex
                     sectionCounts[index] += 1
                     dictOfUrls[indexPath] = individualUrl
+                    
                     dateToFilepaths[date, default: [URL]()].append(individualUrl)
-                    //print(sectionCounts[index])
+                    
+                    do {
+                        var photos = try Realm().objects(RealmPhoto.self)
+                        let photo = photoCategories![indexPath]
+                        
+                    } catch {
+                        print(error)
+                    }
+                    
+                    
+                    
                 }
             }
             
         }
-        //print(dictOfUrls)
-        //print(tempCategories)
-//        for (index, theDate) in arrayOfCategoryDates.enumerated() {
-//            dictOfFormats[index] = theDate
-//        }
-        //print("how many categories:\(dictOfFormats.count)")
     }
     
     func loadImageFromDocumentDirectory(urlOfFile: URL) -> UIImage? {
@@ -470,6 +528,7 @@ extension NewHistoryViewController {
 extension NewHistoryViewController: PhotoPageContainerViewControllerDelegate {
  
     func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int, sectionDidUpdate currentSection: Int) {
+        print("sdfhjk")
         self.selectedIndexPath = IndexPath(row: currentIndex, section: currentSection)
         self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
     }

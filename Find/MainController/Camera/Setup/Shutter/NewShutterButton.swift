@@ -43,7 +43,7 @@ class NewShutterButton: UIButton {
         shapeLayer.path = path.cgPath
         //shapeLayer.frame = self.frame
         shapeLayer.lineWidth = borderWidth
-        shapeLayer.fillColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+        shapeLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.15)
         shapeLayer.strokeColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         self.layer.addSublayer(shapeLayer)
     }

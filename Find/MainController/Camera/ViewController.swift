@@ -11,6 +11,9 @@ import ARKit
 import Vision
 //import JJFloatingActionButton
 
+protocol ChangeStatusValue: class {
+    func changeValue(to value: CGFloat)
+}
 
 class ViewController: UIViewController {
 
@@ -70,50 +73,50 @@ class ViewController: UIViewController {
     //MARK: Matches HUD
     
     var previousNumberOfMatches: Int = 0
-    @IBOutlet var matchesWidthConstraint: NSLayoutConstraint!
-    @IBOutlet var matchesHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var matchesBig: MatchesGradientView!
+    //@IBOutlet var matchesWidthConstraint: NSLayoutConstraint!
+    //@IBOutlet var matchesHeightConstraint: NSLayoutConstraint!
+    //@IBOutlet weak var matchesBig: MatchesGradientView!
 //    @IBOutlet var upButtonToNumberConstraint: NSLayoutConstraint!
 //    @IBOutlet var downButtonToNumberConstraint: NSLayoutConstraint!
-    @IBOutlet weak var upButton: UIButton!
-    @IBOutlet weak var downButton: UIButton!
+    //@IBOutlet weak var upButton: UIButton!
+    //@IBOutlet weak var downButton: UIButton!
     var shouldScale = true
     var currentNumber = 0
     var startGettingNearestFeaturePoints = false
     let fastSceneConfiguration = AROrientationTrackingConfiguration()
     
-    @IBAction func upHUDPressed(_ sender: UIButton) {
-        print("up")
-        matchesUpPressed()
-    }
-    @IBAction func downHUDPressed(_ sender: UIButton) {
-        print("down")
-        matchesDownPressed()
-    }
+//    @IBAction func upHUDPressed(_ sender: UIButton) {
+//        print("up")
+//        matchesUpPressed()
+//    }
+//    @IBAction func downHUDPressed(_ sender: UIButton) {
+//        print("down")
+//        matchesDownPressed()
+//    }
     @IBOutlet weak var numberLabel: UILabel!
-    @IBOutlet weak var numberDenomLabel: UILabel!
+    //@IBOutlet weak var numberDenomLabel: UILabel!
     
     var matchesCanAcceptNewValue: Bool = true
     var matchesShouldFireTimer: Bool = true
-    var pipPositionViews = [PipPositionView]()
+    //var pipPositionViews = [PipPositionView]()
     
-    @IBOutlet weak var slashImage: UIImageView!
+    //@IBOutlet weak var slashImage: UIImageView!
     
-    var specialPip = PipPositionView()
+    //var specialPip = PipPositionView()
     
-    var initialOffset: CGPoint = .zero
-    let pipWidth: CGFloat = 55
-    let pipHeight: CGFloat = 120
-    let panRecognizer = UIPanGestureRecognizer()
-    var pipPositions: [CGPoint] {
-        return pipPositionViews.map { $0.center }
-    }
+//    var initialOffset: CGPoint = .zero
+//    let pipWidth: CGFloat = 55
+//    let pipHeight: CGFloat = 120
+//    let panRecognizer = UIPanGestureRecognizer()
+//    var pipPositions: [CGPoint] {
+//        return pipPositionViews.map { $0.center }
+//    }
     
     
     //MARK: New Control Outlet Buttons
     
     @IBOutlet weak var statusView: UIView!
-    
+    weak var changeDelegate: ChangeStatusValue?
 //    @IBAction func refreshButtonPressed(_ sender: UIButton) {
 //        refreshScreen()
 //    }
@@ -126,46 +129,46 @@ class ViewController: UIViewController {
 //    }
     
     var currentPipPosition : CGPoint?
-    override func viewDidLayoutSubviews() {
-           super.viewDidLayoutSubviews  ()
-        //test
-        matchesBig.center = currentPipPosition ?? pipPositions.last ?? .zero
-    }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            if touch.view == matchesBig {
-                self.matchesShouldFireTimer = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    if self.matchesShouldFireTimer == true {
-                                for view in self.pipPositionViews {
-                            view.isHidden = false
-                            UIView.animate(withDuration: 0.2, animations: {
-                                view.alpha = 1
-                            })
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            if touch.view == matchesBig {
-            // do something with your currentPoint
-            matchesShouldFireTimer = false
-            for view in pipPositionViews {
-                UIView.animate(withDuration: 0.2, animations: {
-                    view.alpha = 0
-                }, completion: {
-                    _ in
-                    view.isHidden = true
-                })
-            }
-            }
-        }
-    }
-    
+//    override func viewDidLayoutSubviews() {
+//           super.viewDidLayoutSubviews  ()
+//        //test
+//        //matchesBig.center = currentPipPosition ?? pipPositions.last ?? .zero
+//    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        if let touch = touches.first {
+//            if touch.view == matchesBig {
+//                self.matchesShouldFireTimer = true
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+//                    if self.matchesShouldFireTimer == true {
+//                                for view in self.pipPositionViews {
+//                            view.isHidden = false
+//                            UIView.animate(withDuration: 0.2, animations: {
+//                                view.alpha = 1
+//                            })
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        if let touch = touches.first {
+//            if touch.view == matchesBig {
+//            // do something with your currentPoint
+//            matchesShouldFireTimer = false
+//            for view in pipPositionViews {
+//                UIView.animate(withDuration: 0.2, animations: {
+//                    view.alpha = 0
+//                }, completion: {
+//                    _ in
+//                    view.isHidden = true
+//                })
+//            }
+//            }
+//        }
+//    }
+//
     var blurView = UIVisualEffectView()
     ///Detect if the view controller attempted to dismiss, but didn't
     var hasStartedDismissing = false
@@ -308,13 +311,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         //MARK: Sceneview
         
+        changeDelegate = statusView as? ChangeStatusValue
         setUpARDelegates()
         sceneView.delegate = self
         sceneView.session.delegate = self
         numberLabel.isHidden = false
-        numberDenomLabel.isHidden = false
+        //numberDenomLabel.isHidden = false
         shouldMin = false
-        hideTopNumber(hide: shouldMin)
+       // hideTopNumber(hide: shouldMin)
         
         //fastTextDetectionRequest.recognitionLevel = .fast
         //fastTextDetectionRequest.recognitionLanguages = ["en_GB"]
@@ -338,16 +342,16 @@ class ViewController: UIViewController {
         setUpRamReel()
         //setUpToolBar()
         setUpFilePath()
-        setUpMatches()
+        //setUpMatches()
         setUpCrosshair()
         //addCoaching()
         
         //changeHUDSize(to: CGSize(width: 55, height: 55))
         //make sure the position views are hidden
-        for view in pipPositionViews {
-            view.isHidden = true
-            view.alpha = 0
-        }
+//        for view in pipPositionViews {
+//            view.isHidden = true
+//            view.alpha = 0
+//        }
         
         scanModeToggle = .fast
         classicHasFoundOne = false
