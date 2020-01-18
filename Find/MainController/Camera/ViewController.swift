@@ -356,17 +356,31 @@ class ViewController: UIViewController {
        CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly)
         return image
     }
+    private func getCamera() -> AVCaptureDevice? {
+        if let cameraDevice = AVCaptureDevice.default(.builtInDualCamera,
+                                                for: .video, position: .back) {
+            return cameraDevice
+        } else if let cameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
+                                                       for: .video, position: .back) {
+            return cameraDevice
+        } else {
+            fatalError("Missing expected back camera device.")
+            //return nil
+        }
+    }
     private func configureCamera() {
         cameraView.session = avSession
         
-        let cameraDevices = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
-        var cameraDevice: AVCaptureDevice?
-        for device in cameraDevices.devices {
-            if device.position == .back {
-                cameraDevice = device
-                break
-            }
-        }
+        //let cameraDevices = AVCaptureDevice.default(for: .ba)
+        
+//        var cameraDevice: AVCaptureDevice?
+//        for device in cameraDevices.devices {
+//            if device.position == .back {
+//                cameraDevice = device
+//                break
+//            }
+//        }
+        let cameraDevice = getCamera()
         do {
             let captureDeviceInput = try AVCaptureDeviceInput(device: cameraDevice!)
             if avSession.canAddInput(captureDeviceInput) {
@@ -382,7 +396,11 @@ class ViewController: UIViewController {
         if avSession.canAddOutput(videoDataOutput) {
             avSession.addOutput(videoDataOutput)
         }
-        cameraView.videoPreviewLayer.videoGravity = .resizeAspectFill
+        cameraView.videoPreviewLayer.videoGravity = .resizeAspect
+        cameraView.videoPreviewLayer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        DispatchQueue.main.async {
+            self.cameraView.videoPreviewLayer.frame = self.view.bounds
+        }
         avSession.startRunning()
     }
     private func isAuthorized() -> Bool {
