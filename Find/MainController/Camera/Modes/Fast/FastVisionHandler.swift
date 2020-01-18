@@ -13,7 +13,6 @@ import ARKit
 extension ViewController {
     
     func handleFastDetectedText(request: VNRequest?, error: Error?) {
-        numberCurrentFastmodePass += 1
         guard let results = request?.results, results.count > 0 else {
             //print("no results")
             busyFastFinding = false

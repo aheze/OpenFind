@@ -78,9 +78,8 @@ extension ViewController {
         hasStartedDismissing = false
         
     }
-    func startSceneView(finish: String) {
+    func startVideo(finish: String) {
         switch finish {
-            
         case "start":
             if let imageView = view.viewWithTag(13571) {
                 UIView.animate(withDuration: 0.5, delay: 0.5, animations: {
@@ -113,22 +112,8 @@ extension ViewController {
             } else {
                 print("no")
             }
-            scanModeToggle = .fast
-//            classicHasFoundOne = false
-//            stopCoaching()
-//            stopProcessingImage = true
-//            classicTimer.suspend()
-//            focusTimer.suspend()
-         //   modeButton.imageView.image = #imageLiteral(resourceName: "bfast 2")
-            //fastFindingToggle = .notBusy
+            
             busyFastFinding = false
-            //fastTimer.resume()
-//            newFastModeTimer = Timer.scheduledTimer(withTimeInterval: newFastUpdateInterval, repeats: true) { [weak self] _ in
-//                guard !self!.busyFastFinding else { return }
-//                if let capturedImage = self?.sceneView.session.currentFrame?.capturedImage {
-//                    self?.fastFind(in: capturedImage)
-//                }
-//            }
             if hasStartedDismissing == true {
                 UIView.animate(withDuration: 0.6, animations: {
                     self.blurView.alpha = 0

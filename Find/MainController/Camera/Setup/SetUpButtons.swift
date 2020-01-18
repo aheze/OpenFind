@@ -20,12 +20,12 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
             cancelTimer = nil
         }
         SwiftEntryKit.dismiss()
-        startSceneView(finish: "end")
+        startVideo(finish: "end")
     }
     func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
         print("Start Dismiss")
         hasStartedDismissing = true
-        startSceneView(finish: "start")
+        startVideo(finish: "start")
         if cancelTimer == nil {
         cancelTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
         }
@@ -83,62 +83,14 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
             
             
         }
-//    func toClassic() {
-//        print("classicmode")
-//        self.scanModeToggle = .classic
-//        self.stopProcessingImage = false
-//        self.classicTimer.resume()
-//        self.enableAutoCoaching()
-//        self.blurScreen(mode: "classic")
-//        //self.fastTimer.suspend()
-//        self.newFastModeTimer?.invalidate()
-//        self.focusTimer.suspend()
-//
-//    }
-//    func toFocus() {
-//        self.scanModeToggle = .focused
-//        //self.fastTimer.suspend()
-//        self.newFastModeTimer?.invalidate()
-//        self.classicTimer.suspend()
-//        self.classicHasFoundOne = false
-//        print("focus")
-//        self.stopCoaching()
-//        self.stopProcessingImage = true
-//        self.focusTimer.resume()
-//        self.blurScreen(mode: "focus")
-//    }
     func toFast() {
-        
-        self.scanModeToggle = .fast
-//        self.classicHasFoundOne = false
-//        self.stopCoaching()
-//        self.stopProcessingImage = true
-//        self.classicTimer.suspend()
-//        self.focusTimer.suspend()
         self.blurScreen(mode: "fast")
-        //self.fastTimer.resume()
-//        newFastModeTimer = Timer.scheduledTimer(withTimeInterval: newFastUpdateInterval, repeats: true) { [weak self] _ in
-//            guard !self!.busyFastFinding else { return }
-//            if let capturedImage = self?.sceneView.session.currentFrame?.capturedImage {
-//                self?.fastFind(in: capturedImage)
-//            }
-//        }
-        //self.modeButton.close()
     }
     @objc func tappedOnce(gr:UITapGestureRecognizer) {
-        // do something here
-        print("akjd")
         let loc: CGPoint = gr.location(in: gr.view)
         refreshScreen(location: loc)
     }
     func setUpButtons() {
-//        let recognizerView = UIView()
-//        view.insertSubview(recognizerView, aboveSubview: sceneView)
-//        recognizerView.snp.makeConstraints { (make) in
-//            make.edges.equalToSuperview()
-//        }
-//        recognizerView.isUserInteractionEnabled = true
-        //recognizerView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         let tap = UITapGestureRecognizer(target: self, action: #selector(tappedOnce))
         tap.numberOfTapsRequired = 1
         tap.delegate = self

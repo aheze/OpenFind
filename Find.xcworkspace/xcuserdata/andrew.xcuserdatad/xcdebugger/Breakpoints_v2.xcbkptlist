@@ -268,7 +268,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "98"
             endingLineNumber = "98"
-            landmarkName = "startSceneView(finish:)"
+            landmarkName = "startVideo(finish:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -285,6 +285,22 @@
             startingLineNumber = "25"
             endingLineNumber = "25"
             landmarkName = "fastFind(in:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E0967E3D-58F7-405B-844A-B546BEB34DE7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Find/MainController/Camera/Setup/Shutter/ShutterPressed.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "saveToFile()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

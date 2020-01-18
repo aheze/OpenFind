@@ -102,22 +102,8 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
             self.autoCompleteButton.alpha = 0.5
-            //newImageView.alpha = 1
             self.ramReel.collectionView.alpha = 1
             self.darkBlurEffect.alpha = 1
-            if self.scanModeToggle == .focused {
-                if let tag1 = self.view.viewWithTag(1) {
-                    print("1")
-                    tag1.alpha = 0
-                }
-                if let tag2 = self.view.viewWithTag(2) {
-                    print("2")
-                    tag2.alpha = 0
-                }
-            }
-            //    self.sceneView.session.pause()
-                //self.stopProcessingImage = true
-            
              self.view.layoutIfNeeded()
         }, completion: nil)
     

@@ -38,6 +38,7 @@
 		4917CE8123C059F6002EA20B /* StartSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4917CE8023C059F6002EA20B /* StartSceneView.swift */; };
 		4928525023D14D7B0048EC13 /* RealmPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928524F23D14D7B0048EC13 /* RealmPhoto.swift */; };
 		4928525223D154370048EC13 /* RealmComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525123D154370048EC13 /* RealmComponent.swift */; };
+		4928525423D368780048EC13 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525323D368780048EC13 /* CameraService.swift */; };
 		49325C1323CAE84500A771A3 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49325C1223CAE84500A771A3 /* StatusView.swift */; };
 		49368CA7239059A200B67C4A /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49368CA6239059A200B67C4A /* FullScreenViewController.swift */; };
 		49368CAD23905D3300B67C4A /* PulleyPassthroughScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49368CA923905D3200B67C4A /* PulleyPassthroughScrollView.swift */; };
@@ -138,6 +139,7 @@
 		4917CE8023C059F6002EA20B /* StartSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSceneView.swift; sourceTree = "<group>"; };
 		4928524F23D14D7B0048EC13 /* RealmPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmPhoto.swift; sourceTree = "<group>"; };
 		4928525123D154370048EC13 /* RealmComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmComponent.swift; sourceTree = "<group>"; };
+		4928525323D368780048EC13 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
 		49325C1223CAE84500A771A3 /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		49368CA6239059A200B67C4A /* FullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
 		49368CA923905D3200B67C4A /* PulleyPassthroughScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulleyPassthroughScrollView.swift; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 			children = (
 				4979A38F23AF3A4800B09380 /* FastMode.swift */,
 				4979A39223AF3C4F00B09380 /* FastVisionHandler.swift */,
+				4928525323D368780048EC13 /* CameraService.swift */,
 			);
 			path = Fast;
 			sourceTree = "<group>";
@@ -706,6 +709,7 @@
 				4928525023D14D7B0048EC13 /* RealmPhoto.swift in Sources */,
 				49368CB223905E8E00B67C4A /* BottomSheetViewController.swift in Sources */,
 				49A8EFAE237A5F2800328D47 /* SetUpRamReel.swift in Sources */,
+				4928525423D368780048EC13 /* CameraService.swift in Sources */,
 				49F7B1582353FE7E0099FA62 /* Component.swift in Sources */,
 				4957157C2368AF69007BF68B /* RippleEffect.swift in Sources */,
 				490DA74E23CBB871000AF57D /* UIView+JJFloatingActionButton.swift in Sources */,
