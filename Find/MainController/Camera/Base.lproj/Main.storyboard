@@ -17,9 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KrV-7J-ulH">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lVw-3T-6iA" customClass="CameraView" customModule="Find" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </arscnView>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bCb-2s-qjS" userLabel="Controls">
                                 <rect key="frame" x="0.0" y="581" width="414" height="300"/>
                                 <subviews>
@@ -143,27 +144,23 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="SjR-c7-NyL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4E0-4W-KH6"/>
-                            <constraint firstAttribute="trailing" secondItem="KrV-7J-ulH" secondAttribute="trailing" id="6Vy-ml-mBL"/>
                             <constraint firstItem="SjR-c7-NyL" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="LxG-m0-nBK"/>
                             <constraint firstItem="bCb-2s-qjS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Sad-z6-6IQ"/>
                             <constraint firstAttribute="bottom" secondItem="bCb-2s-qjS" secondAttribute="bottom" constant="15" id="bZT-O3-Wui"/>
-                            <constraint firstItem="KrV-7J-ulH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="hJA-SU-cbn"/>
-                            <constraint firstAttribute="bottom" secondItem="KrV-7J-ulH" secondAttribute="bottom" id="kGU-CM-g1N"/>
                             <constraint firstAttribute="trailing" secondItem="SjR-c7-NyL" secondAttribute="trailing" id="klW-ty-7As"/>
                             <constraint firstAttribute="trailing" secondItem="bCb-2s-qjS" secondAttribute="trailing" id="mkd-kI-UdL"/>
-                            <constraint firstItem="KrV-7J-ulH" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="zJw-b5-e6z"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="autoCompleteButton" destination="E9m-rk-xrA" id="mhQ-T3-qYY"/>
+                        <outlet property="cameraView" destination="lVw-3T-6iA" id="tYA-q5-8xb"/>
                         <outlet property="cancelButtonNew" destination="sU8-v1-Rmw" id="24G-Ly-Xd4"/>
                         <outlet property="darkBlurEffect" destination="SjR-c7-NyL" id="0Wd-Vq-FxN"/>
                         <outlet property="darkBlurEffectHeightConstraint" destination="osx-98-ICJ" id="DOQ-PQ-HNz"/>
                         <outlet property="menuButton" destination="ds1-Sw-dB2" id="LUc-6f-nmW"/>
                         <outlet property="newShutterButton" destination="oHd-Dg-FBU" id="ADY-yp-2Cz"/>
                         <outlet property="numberLabel" destination="24E-8Q-fAS" id="XjQ-vu-L9f"/>
-                        <outlet property="sceneView" destination="KrV-7J-ulH" id="gFH-ke-p5A"/>
                         <outlet property="statusView" destination="bCo-Iy-fAh" id="mzG-F9-4xu"/>
                         <outlet property="toolBar" destination="nbP-Hl-hh0" id="v0R-1H-V9i"/>
                         <segue destination="pa6-U7-HO0" kind="show" identifier="goToSettings" id="lEH-Hc-ESJ"/>

@@ -34,11 +34,6 @@
 		4911508D235D51E300EC0C04 /* MatchesHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4911508C235D51E300EC0C04 /* MatchesHUD.swift */; };
 		49115090236004E800EC0C04 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4911508E235E7DF100EC0C04 /* Roboto-Light.ttf */; };
 		491150942363E3D300EC0C04 /* ARExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491150932363E3D300EC0C04 /* ARExtensions.swift */; };
-		491150962364CC2D00EC0C04 /* RectangleDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491150952364CC2D00EC0C04 /* RectangleDetector.swift */; };
-		491150982364D25D00EC0C04 /* RectangleOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491150972364D25D00EC0C04 /* RectangleOverlay.swift */; };
-		4911509A2364D27B00EC0C04 /* FindInNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491150992364D27B00EC0C04 /* FindInNode.swift */; };
-		4911509C236501D900EC0C04 /* FocusVisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4911509B236501D900EC0C04 /* FocusVisionHandler.swift */; };
-		4911509E236503C600EC0C04 /* GetTextFocused.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4911509D236503C600EC0C04 /* GetTextFocused.swift */; };
 		4917CE7F23C0490E002EA20B /* GeneralSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4917CE7E23C0490E002EA20B /* GeneralSettings.swift */; };
 		4917CE8123C059F6002EA20B /* StartSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4917CE8023C059F6002EA20B /* StartSceneView.swift */; };
 		4928525023D14D7B0048EC13 /* RealmPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928524F23D14D7B0048EC13 /* RealmPhoto.swift */; };
@@ -103,14 +98,10 @@
 		49BC783923C8C7AB003D9904 /* HistoryStartSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC783823C8C7AB003D9904 /* HistoryStartSelection.swift */; };
 		49BC785D23C95944003D9904 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC785C23C95944003D9904 /* Toolbar.swift */; };
 		49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */; };
-		49F7B1522353FC970099FA62 /* ProcessImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1512353FC970099FA62 /* ProcessImage.swift */; };
-		49F7B1542353FDF40099FA62 /* VisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1532353FDF40099FA62 /* VisionHandler.swift */; };
 		49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1552353FE4B0099FA62 /* BasicSetup.swift */; };
 		49F7B1582353FE7E0099FA62 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1572353FE7E0099FA62 /* Component.swift */; };
 		49F7B15A2354E6F60099FA62 /* data.txt in Resources */ = {isa = PBXBuildFile; fileRef = 49F7B1592354E6F60099FA62 /* data.txt */; };
 		49F7B15C2354E85F0099FA62 /* WordReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B15B2354E85F0099FA62 /* WordReader.swift */; };
-		49F7B15E2356954A0099FA62 /* GetTextClassic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B15D2356954A0099FA62 /* GetTextClassic.swift */; };
-		49F7B1602359363E0099FA62 /* HighlightShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B15F2359363E0099FA62 /* HighlightShape.swift */; };
 		E0DFC8F68C8F4CF9FF0BC59E /* Pods_Find.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BDD383BE4831A8EEB1C1806 /* Pods_Find.framework */; };
 /* End PBXBuildFile section */
 
@@ -143,11 +134,6 @@
 		4911508C235D51E300EC0C04 /* MatchesHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHUD.swift; sourceTree = "<group>"; };
 		4911508E235E7DF100EC0C04 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		491150932363E3D300EC0C04 /* ARExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARExtensions.swift; sourceTree = "<group>"; };
-		491150952364CC2D00EC0C04 /* RectangleDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleDetector.swift; sourceTree = "<group>"; };
-		491150972364D25D00EC0C04 /* RectangleOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleOverlay.swift; sourceTree = "<group>"; };
-		491150992364D27B00EC0C04 /* FindInNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindInNode.swift; sourceTree = "<group>"; };
-		4911509B236501D900EC0C04 /* FocusVisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusVisionHandler.swift; sourceTree = "<group>"; };
-		4911509D236503C600EC0C04 /* GetTextFocused.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTextFocused.swift; sourceTree = "<group>"; };
 		4917CE7E23C0490E002EA20B /* GeneralSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettings.swift; sourceTree = "<group>"; };
 		4917CE8023C059F6002EA20B /* StartSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSceneView.swift; sourceTree = "<group>"; };
 		4928524F23D14D7B0048EC13 /* RealmPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmPhoto.swift; sourceTree = "<group>"; };
@@ -214,14 +200,10 @@
 		49BC783823C8C7AB003D9904 /* HistoryStartSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStartSelection.swift; sourceTree = "<group>"; };
 		49BC785C23C95944003D9904 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
-		49F7B1512353FC970099FA62 /* ProcessImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessImage.swift; sourceTree = "<group>"; };
-		49F7B1532353FDF40099FA62 /* VisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionHandler.swift; sourceTree = "<group>"; };
 		49F7B1552353FE4B0099FA62 /* BasicSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSetup.swift; sourceTree = "<group>"; };
 		49F7B1572353FE7E0099FA62 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		49F7B1592354E6F60099FA62 /* data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.txt; sourceTree = "<group>"; };
 		49F7B15B2354E85F0099FA62 /* WordReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordReader.swift; sourceTree = "<group>"; };
-		49F7B15D2356954A0099FA62 /* GetTextClassic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTextClassic.swift; sourceTree = "<group>"; };
-		49F7B15F2359363E0099FA62 /* HighlightShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightShape.swift; sourceTree = "<group>"; };
 		7F1B04E9888AAEC98DF2E096 /* Pods-Find.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find.debug.xcconfig"; path = "Target Support Files/Pods-Find/Pods-Find.debug.xcconfig"; sourceTree = "<group>"; };
 		E05C3167AB2FF51F44B12AE3 /* Pods-Find.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find.release.xcconfig"; path = "Target Support Files/Pods-Find/Pods-Find.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -378,33 +360,8 @@
 			isa = PBXGroup;
 			children = (
 				4979A39123AF3B4B00B09380 /* Fast */,
-				496937372353C1FD009CA41A /* Focused */,
-				496937362353C1F4009CA41A /* Classic */,
 			);
 			path = Modes;
-			sourceTree = "<group>";
-		};
-		496937362353C1F4009CA41A /* Classic */ = {
-			isa = PBXGroup;
-			children = (
-				49F7B1512353FC970099FA62 /* ProcessImage.swift */,
-				49F7B1532353FDF40099FA62 /* VisionHandler.swift */,
-				49F7B15D2356954A0099FA62 /* GetTextClassic.swift */,
-				49F7B15F2359363E0099FA62 /* HighlightShape.swift */,
-			);
-			path = Classic;
-			sourceTree = "<group>";
-		};
-		496937372353C1FD009CA41A /* Focused */ = {
-			isa = PBXGroup;
-			children = (
-				491150952364CC2D00EC0C04 /* RectangleDetector.swift */,
-				491150972364D25D00EC0C04 /* RectangleOverlay.swift */,
-				491150992364D27B00EC0C04 /* FindInNode.swift */,
-				4911509B236501D900EC0C04 /* FocusVisionHandler.swift */,
-				4911509D236503C600EC0C04 /* GetTextFocused.swift */,
-			);
-			path = Focused;
 			sourceTree = "<group>";
 		};
 		496937382353C219009CA41A /* MainController */ = {
@@ -725,19 +682,16 @@
 				490DA75A23CBB871000AF57D /* LayerProperties.swift in Sources */,
 				4951701A235AC56D00E00D83 /* CollectionViewCell.swift in Sources */,
 				491150942363E3D300EC0C04 /* ARExtensions.swift in Sources */,
-				491150982364D25D00EC0C04 /* RectangleOverlay.swift in Sources */,
 				4911508D235D51E300EC0C04 /* MatchesHUD.swift in Sources */,
 				490DA75523CBB871000AF57D /* JJFloatingActionButton+Animation.swift in Sources */,
 				49B7A33623923E810070209F /* ZoomAnimator.swift in Sources */,
 				49A8EFAC237A5EFE00328D47 /* SetUpButtons.swift in Sources */,
 				495ECCAB238DB7BD00E7D966 /* TitleSupplementaryView.swift in Sources */,
 				49B7A33823923EBD0070209F /* PhotoPageContainerViewController.swift in Sources */,
-				49F7B15E2356954A0099FA62 /* GetTextClassic.swift in Sources */,
 				49368CA7239059A200B67C4A /* FullScreenViewController.swift in Sources */,
 				4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */,
 				49B7A32F2390DB810070209F /* ArrowView.swift in Sources */,
 				494DF11F23961B4E0076412D /* BDVCInfo.swift in Sources */,
-				491150962364CC2D00EC0C04 /* RectangleDetector.swift in Sources */,
 				490DA75023CBB871000AF57D /* AnimationConfiguration.swift in Sources */,
 				4988FC4823BEF89600199635 /* ListModel.swift in Sources */,
 				49913452236FE33B00B82E46 /* SettingsBasicSetup.swift in Sources */,
@@ -751,17 +705,14 @@
 				490452502379DF5C0046570D /* HistoryTableViewCell.swift in Sources */,
 				4928525023D14D7B0048EC13 /* RealmPhoto.swift in Sources */,
 				49368CB223905E8E00B67C4A /* BottomSheetViewController.swift in Sources */,
-				49F7B1602359363E0099FA62 /* HighlightShape.swift in Sources */,
 				49A8EFAE237A5F2800328D47 /* SetUpRamReel.swift in Sources */,
 				49F7B1582353FE7E0099FA62 /* Component.swift in Sources */,
 				4957157C2368AF69007BF68B /* RippleEffect.swift in Sources */,
 				490DA74E23CBB871000AF57D /* UIView+JJFloatingActionButton.swift in Sources */,
 				490DA73F23CBAB7C000AF57D /* NewShutterButton.swift in Sources */,
 				49B7A33D2393000A0070209F /* BetaController.swift in Sources */,
-				49F7B1522353FC970099FA62 /* ProcessImage.swift in Sources */,
 				4951701D235AC56D00E00D83 /* RamGradientView.swift in Sources */,
 				4911508B235D1A3E00EC0C04 /* BasicUtilities.swift in Sources */,
-				4911509C236501D900EC0C04 /* FocusVisionHandler.swift in Sources */,
 				49517019235AC56D00E00D83 /* DataFlow.swift in Sources */,
 				49368CAE23905D3300B67C4A /* UIViewController+PulleyViewController.swift in Sources */,
 				490DA76223CEC944000AF57D /* ViewClasses.swift in Sources */,
@@ -774,9 +725,7 @@
 				495ECCA7238CF76C00E7D966 /* NewHistoryViewController.swift in Sources */,
 				49517018235AC56D00E00D83 /* Theme.swift in Sources */,
 				4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */,
-				49F7B1542353FDF40099FA62 /* VisionHandler.swift in Sources */,
 				490DA75223CBB871000AF57D /* JJFloatingActionButton.swift in Sources */,
-				4911509A2364D27B00EC0C04 /* FindInNode.swift in Sources */,
 				49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */,
 				4991344E236FDF1300B82E46 /* SettingsViewController.swift in Sources */,
 				490DA75623CBB871000AF57D /* JJFloatingActionButton+Placement.swift in Sources */,
@@ -795,7 +744,6 @@
 				49BC782023C2B0E0003D9904 /* IndexMatcher.swift in Sources */,
 				49913450236FE12400B82E46 /* SettingsViewExtensions.swift in Sources */,
 				490DA75923CBB871000AF57D /* JJCircleView.swift in Sources */,
-				4911509E236503C600EC0C04 /* GetTextFocused.swift in Sources */,
 				4917CE8123C059F6002EA20B /* StartSceneView.swift in Sources */,
 				495ECCA9238CF7BD00E7D966 /* HPhotoCell.swift in Sources */,
 				4904524E2379DB270046570D /* HistoryViewController.swift in Sources */,

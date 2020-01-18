@@ -12,6 +12,7 @@ import Vision
 extension ViewController {
   
     func fastFind(in pixelBuffer: CVPixelBuffer) {
+        print("find")
         busyFastFinding = true
        
         DispatchQueue.global(qos: .background).async {

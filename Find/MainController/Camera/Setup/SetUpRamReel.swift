@@ -20,20 +20,13 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         ramReel = RAMReel(frame: frameRect, dataSource: dataSource, placeholder: "Start by typing…", attemptToDodgeKeyboard: false) {
             print("Plain:", $0)
             self.finalTextToFind = $0
-            switch self.scanModeToggle {
-            
-            case .classic:
-                self.textDetectionRequest.customWords = [self.finalTextToFind, "Find app"]
-            case .focused:
-                self.focusTextDetectionRequest.customWords = [self.finalTextToFind, "Find app"]
-            case .fast:
+          
                 print("fast")
                 let lowercased = self.finalTextToFind.lowercased()
                 let allCaps = self.finalTextToFind.uppercased()
                 //self.fastTextDetectionRequest.customWords = [self.finalTextToFind, lowercased, allCaps, "Find app"]
                 //self.fastTextDetectionRequest.customWords = ["98ohkjshgosro9g"]
                 
-            }
         }
         ramReel.textField.inputAccessoryView = toolBar
         cancelButtonNew.layer.cornerRadius = 4
@@ -75,19 +68,19 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        let newImageView = UIImageView()
-        newImageView.alpha = 0
-        view.insertSubview(newImageView, aboveSubview: sceneView)
-        newImageView.snp.makeConstraints { (make) in
-            //make.top.equalTo(sceneView)
-            make.edges.equalTo(sceneView)
-        }
-        guard let image = sceneView.session.currentFrame?.capturedImage else { return }
-        //let uiImage = UIImage(pixelBuffer: image, sceneView: sceneView)
-        let uiImage = convertToUIImage(buffer: image)
-        newImageView.image = uiImage
-        newImageView.contentMode = .scaleAspectFill
-        newImageView.tag = 13579
+//        let newImageView = UIImageView()
+//        newImageView.alpha = 0
+//        view.insertSubview(newImageView, aboveSubview: cameraView)
+//        newImageView.snp.makeConstraints { (make) in
+//            //make.top.equalTo(sceneView)
+//            make.edges.equalTo(cameraView)
+//        }
+//        //guard let image = videoPreviewLayer
+//        //let uiImage = UIImage(pixelBuffer: image, sceneView: sceneView)
+//        let uiImage = convertToUIImage(buffer: image)
+//        newImageView.image = uiImage
+//        newImageView.contentMode = .scaleAspectFill
+//        newImageView.tag = 13579
         
       
 //        if let cgImage = image?.toCGImage() {
@@ -109,7 +102,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
             self.autoCompleteButton.alpha = 0.5
-            newImageView.alpha = 1
+            //newImageView.alpha = 1
             self.ramReel.collectionView.alpha = 1
             self.darkBlurEffect.alpha = 1
             if self.scanModeToggle == .focused {
@@ -122,8 +115,8 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
                     tag2.alpha = 0
                 }
             }
-                self.sceneView.session.pause()
-                self.stopProcessingImage = true
+            //    self.sceneView.session.pause()
+                //self.stopProcessingImage = true
             
              self.view.layoutIfNeeded()
         }, completion: nil)
@@ -131,36 +124,36 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let imageView = view.viewWithTag(13579) else { return }
+        //guard let imageView = view.viewWithTag(13579) else { print("sdflkj"); return }
         
          self.darkBlurEffectHeightConstraint.constant = 100
         
         
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-            imageView.alpha = 0
+            //imageView.alpha = 0
             self.ramReel.collectionView.alpha = 0
             var frameRect = self.view.bounds
             frameRect.size.height = 100
             self.ramReel.view.bounds = frameRect
             self.darkBlurEffect.alpha = 0.7
                 
-            switch self.scanModeToggle {
-            case .classic:
-                self.sceneView.session.run(self.sceneConfiguration) ///which is ARWorldTracking
-            case .fast:
-                self.sceneView.session.run(AROrientationTrackingConfiguration())
-                self.stopCoaching()
-            case .focused:
-                let config = ARImageTrackingConfiguration()
-                if let tag1 = self.view.viewWithTag(1) { tag1.alpha = 1 }
-                if let tag2 = self.view.viewWithTag(2) { tag2.alpha = 1 }
-                self.stopCoaching()
-                self.sceneView.session.run(config)
-            }
-            self.stopProcessingImage = false
+//            switch self.scanModeToggle {
+//            case .classic:
+//        //        self.sceneView.session.run(self.sceneConfiguration) ///which is ARWorldTracking
+//            case .fast:
+//         //       self.sceneView.session.run(AROrientationTrackingConfiguration())
+//                self.stopCoaching()
+//            case .focused:
+//                let config = ARImageTrackingConfiguration()
+//                if let tag1 = self.view.viewWithTag(1) { tag1.alpha = 1 }
+//                if let tag2 = self.view.viewWithTag(2) { tag2.alpha = 1 }
+//                self.stopCoaching()
+//                self.sceneView.session.run(config)
+//            }
+            //self.stopProcessingImage = false
             self.view.layoutIfNeeded()
         }, completion: {_ in
-            imageView.removeFromSuperview()
+           // imageView.removeFromSuperview()
             //self.view.bringSubviewToFront(self.matchesBig)
             self.ramReel.collectionView.isHidden = true
         }

@@ -83,46 +83,46 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
             
             
         }
-    func toClassic() {
-        print("classicmode")
-        self.scanModeToggle = .classic
-        self.stopProcessingImage = false
-        self.classicTimer.resume()
-        self.enableAutoCoaching()
-        self.blurScreen(mode: "classic")
-        //self.fastTimer.suspend()
-        self.newFastModeTimer?.invalidate()
-        self.focusTimer.suspend()
-        
-    }
-    func toFocus() {
-        self.scanModeToggle = .focused
-        //self.fastTimer.suspend()
-        self.newFastModeTimer?.invalidate()
-        self.classicTimer.suspend()
-        self.classicHasFoundOne = false
-        print("focus")
-        self.stopCoaching()
-        self.stopProcessingImage = true
-        self.focusTimer.resume()
-        self.blurScreen(mode: "focus")
-    }
+//    func toClassic() {
+//        print("classicmode")
+//        self.scanModeToggle = .classic
+//        self.stopProcessingImage = false
+//        self.classicTimer.resume()
+//        self.enableAutoCoaching()
+//        self.blurScreen(mode: "classic")
+//        //self.fastTimer.suspend()
+//        self.newFastModeTimer?.invalidate()
+//        self.focusTimer.suspend()
+//
+//    }
+//    func toFocus() {
+//        self.scanModeToggle = .focused
+//        //self.fastTimer.suspend()
+//        self.newFastModeTimer?.invalidate()
+//        self.classicTimer.suspend()
+//        self.classicHasFoundOne = false
+//        print("focus")
+//        self.stopCoaching()
+//        self.stopProcessingImage = true
+//        self.focusTimer.resume()
+//        self.blurScreen(mode: "focus")
+//    }
     func toFast() {
         
         self.scanModeToggle = .fast
-        self.classicHasFoundOne = false
-        self.stopCoaching()
-        self.stopProcessingImage = true
-        self.classicTimer.suspend()
-        self.focusTimer.suspend()
+//        self.classicHasFoundOne = false
+//        self.stopCoaching()
+//        self.stopProcessingImage = true
+//        self.classicTimer.suspend()
+//        self.focusTimer.suspend()
         self.blurScreen(mode: "fast")
         //self.fastTimer.resume()
-        newFastModeTimer = Timer.scheduledTimer(withTimeInterval: newFastUpdateInterval, repeats: true) { [weak self] _ in
-            guard !self!.busyFastFinding else { return }
-            if let capturedImage = self?.sceneView.session.currentFrame?.capturedImage {
-                self?.fastFind(in: capturedImage)
-            }
-        }
+//        newFastModeTimer = Timer.scheduledTimer(withTimeInterval: newFastUpdateInterval, repeats: true) { [weak self] _ in
+//            guard !self!.busyFastFinding else { return }
+//            if let capturedImage = self?.sceneView.session.currentFrame?.capturedImage {
+//                self?.fastFind(in: capturedImage)
+//            }
+//        }
         //self.modeButton.close()
     }
     @objc func tappedOnce(gr:UITapGestureRecognizer) {

@@ -96,57 +96,17 @@ extension ViewController {
         view.bringSubviewToFront(ramReel.view)
         guard let tag1 = self.view.viewWithTag(1) else {return}
         guard let tag2 = self.view.viewWithTag(2) else {return}
-        switch mode {
-        
-        case "classic":
-            //to classic
-            
-            sceneView.session.pause()
-            UIView.animate(withDuration: 0.2, animations: {
-                blurView.alpha = 1
-                tag1.alpha = 0
-                tag2.alpha = 0
-            }, completion: { _ in
-                let configuration = ARWorldTrackingConfiguration()
-                configuration.planeDetection = .horizontal
-                self.sceneView.session.run(configuration, options: [.removeExistingAnchors, .resetTracking])
-             //   self.modeButton.imageView.image = #imageLiteral(resourceName: "bclassic 2")
-                //self.fastFindingToggle = .inactive
-                self.busyFastFinding = true
-            })
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8, execute: {
-                UIView.animate(withDuration: 0.5, animations: {blurView.alpha = 0}, completion: {_ in
-                    blurView.removeFromSuperview()})
-            })
-        case "focus":
-            //focusmode
-            sceneView.session.pause()
-            UIView.animate(withDuration: 0.2, animations: {
-                blurView.alpha = 1
-                tag1.alpha = 1
-                tag2.alpha = 1
-            }, completion: { _ in
-                self.fadeClassicHighlights()
-                self.runImageTrackingSession(with: [], runOptions: [.removeExistingAnchors, .resetTracking])
-              //  self.modeButton.imageView.image = #imageLiteral(resourceName: "bfocus 2")
-                //self.fastFindingToggle = .inactive
-                self.busyFastFinding = true
-            })
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8, execute: {
-                UIView.animate(withDuration: 0.5, animations: {blurView.alpha = 0}, completion: {_ in
-                    blurView.removeFromSuperview()})
-            })
-        case "fast":
+       
             print("fast")
-            sceneView.session.pause()
+           // sceneView.session.pause()
             //fastTextDetectionRequest.customWords = ["sfhskfh 98ohkjshgosro9g u oh xvhdfogiuerouoeugorugo lhxlvhflfgu"]
             UIView.animate(withDuration: 0.2, animations: {
                 blurView.alpha = 1
                 tag1.alpha = 0
                 tag2.alpha = 0
             }, completion: { _ in
-                self.fadeClassicHighlights()
-                self.sceneView.session.run(self.fastSceneConfiguration, options: [.removeExistingAnchors, .resetTracking])
+                //self.fadeClassicHighlights()
+                //self.sceneView.session.run(self.fastSceneConfiguration, options: [.removeExistingAnchors, .resetTracking])
             //    self.modeButton.imageView.image = #imageLiteral(resourceName: "bfast 2")
                 //self.fastFindingToggle = false
                 self.busyFastFinding = false
@@ -157,10 +117,7 @@ extension ViewController {
                     blurView.removeFromSuperview()})
                 ///make it seem like it's FAST (the blur fades much faster)
             })
-            
-        default:
-            print("error, default, blur")
-        }
+       
     }
     
     func refreshScreen(location: CGPoint) {
@@ -173,55 +130,26 @@ extension ViewController {
         option.duration = 0.38
         //option.isRunSuperView = true
         print("sgh")
-        RippleEffect.run(sceneView, locationInView: location, option: option)
-        
-        
-            switch self.scanModeToggle {
-            case .classic:
-                self.stopProcessingImage = true
-                self.classicTimer.suspend()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {self.stopProcessingImage = false})
-                let action = SCNAction.fadeOut(duration: 1)
-                for h in self.classicHighlightArray {
-                    h.runAction(action, completionHandler: {() in
-                        h.removeFromParentNode()
-                        print("remove")
-                    })
-                }
-                for h in self.secondClassicHighlightArray {
-                    h.runAction(action, completionHandler: {
-                        () in h.removeFromParentNode()
-                        print("remove123")
-                    })
-                }
-                self.classicTimer.resume()
-            case .focused:
-                //self.stopTagFindingInNode = true
-                self.focusTimer.suspend()
-                self.runImageTrackingSession(with: [], runOptions: [.resetTracking, .removeExistingAnchors])
-                self.focusTimer.resume()
-                self.coachingOverlay.activatesAutomatically = false
-                //self.stopTagFindingInNode = false
-            case .fast:
-                self.resetFastHighlights()
-                self.updateMatchesNumber(to: 0)
-            }
+        RippleEffect.run(view, locationInView: location, option: option)
+        resetFastHighlights()
+        updateMatchesNumber(to: 0)
+            
     }
-    func fadeClassicHighlights() {
-        let action = SCNAction.fadeOut(duration: 1)
-        for h in self.classicHighlightArray {
-            h.runAction(action, completionHandler: {() in
-                h.removeFromParentNode()
-                print("remove")
-            })
-        }
-        for h in self.secondClassicHighlightArray {
-            h.runAction(action, completionHandler: {
-                () in h.removeFromParentNode()
-                print("remove123")
-            })
-        }
-    }
+//    func fadeClassicHighlights() {
+//        let action = SCNAction.fadeOut(duration: 1)
+//        for h in self.classicHighlightArray {
+//            h.runAction(action, completionHandler: {() in
+//                h.removeFromParentNode()
+//                print("remove")
+//            })
+//        }
+//        for h in self.secondClassicHighlightArray {
+//            h.runAction(action, completionHandler: {
+//                () in h.removeFromParentNode()
+//                print("remove123")
+//            })
+//        }
+//    }
     
 }
 

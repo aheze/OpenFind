@@ -9,16 +9,38 @@
 import UIKit
 import ARKit
 import Vision
+import AVFoundation
 //import JJFloatingActionButton
 
 protocol ChangeStatusValue: class {
     func changeValue(to value: CGFloat)
 }
 
+class CameraView: UIView {
+    
+var videoPreviewLayer: AVCaptureVideoPreviewLayer {
+    guard let layer = layer as? AVCaptureVideoPreviewLayer else {
+        fatalError("Expected `AVCaptureVideoPreviewLayer` type for layer. Check PreviewView.layerClass implementation.")
+    }
+    return layer
+}
+var session: AVCaptureSession? {
+    get {
+        return videoPreviewLayer.session
+    }
+    set {
+        videoPreviewLayer.session = newValue
+    }
+}
+// MARK: UIView
+override class var layerClass: AnyClass {
+    return AVCaptureVideoPreviewLayer.self
+}
+}
 class ViewController: UIViewController {
 
     
-    @IBOutlet weak var sceneView: ARSCNView!
+//    @IBOutlet weak var sceneView: ARSCNView!
     
     @IBOutlet weak var darkBlurEffect: UIVisualEffectView!
     @IBOutlet weak var darkBlurEffectHeightConstraint: NSLayoutConstraint!
@@ -198,24 +220,24 @@ class ViewController: UIViewController {
     var numberCurrentFastmodePass: Int = 0
     var numberOfFastMatches: Int = 0
 
-    var newFastModeTimer: Timer?
-    var newFastUpdateInterval: TimeInterval = 0.05
+    //var newFastModeTimer: Timer?
+   // var newFastUpdateInterval: TimeInterval = 0.05
     
     //MARK:CLASSIC MODE
-    let classicTimer = RepeatingTimer(timeInterval: 0.8)
-    var isBusyProcessingImage = false
-    var stopProcessingImage = false
+   // let classicTimer = RepeatingTimer(timeInterval: 0.8)
+//    var isBusyProcessingImage = false
+//    var stopProcessingImage = false
     var aspectRatioWidthOverHeight : CGFloat = 0
     var aspectRatioSucceeded : Bool = false
-    let sceneConfiguration = ARWorldTrackingConfiguration()
-    ///     classic highlights
-            var classicHighlightArray = [SCNNode]()
-            var secondClassicHighlightArray = [SCNNode]()
-            var classicHasFoundOne : Bool = false
-            var processImageNumberOfPasses = 0
-            var numberOfHighlights : Int = 0
+//    let sceneConfiguration = ARWorldTrackingConfiguration()
+//    ///     classic highlights
+//            var classicHighlightArray = [SCNNode]()
+//            var secondClassicHighlightArray = [SCNNode]()
+//            var classicHasFoundOne : Bool = false
+//            var processImageNumberOfPasses = 0
+//            var numberOfHighlights : Int = 0
     var sizeOfPixelBufferFast : CGSize = CGSize(width: 0, height: 0)
-    lazy var textDetectionRequest = VNRecognizeTextRequest(completionHandler: handleDetectedText)
+  //  lazy var textDetectionRequest = VNRecognizeTextRequest(completionHandler: handleDetectedText)
 //        let request = VNRecognizeTextRequest(completionHandler: self.handleDetectedText)
 //        request.recognitionLevel = .fast
 //        request.recognitionLanguages = ["en_GB"]
@@ -224,35 +246,35 @@ class ViewController: UIViewController {
 //    }()
     
     //MARK:FOCUS MODE
-    var focusTimer = RepeatingTimer(timeInterval: 1)
-    
-    var currentCameraImage: CVPixelBuffer!
-    var focusHasFoundOne: Bool = false
-    var imagesToTrack = [ARReferenceImage]()
-    var isLookingForRect: Bool = false
-    var numberOfFocusTimes: Int = 0
-    var detectedPlanes = [SCNNode: ARImageAnchor]()
-    var blueNode = SCNNode()
-    var currentHighlightNode = SCNNode()
-    
-    var stopTagFocusVision : Bool = false
-    
-    
-    var isOnDetectedPlane : Bool = false
-    var findingInNode : Bool = false
-    var focusRepeatsCounter: Int = 0
-    var firstTimeFocusHighlight = true
-    
-    var focusImageSize: CGSize = CGSize(width: 0, height: 0)
-    var referenceImageSizeInRealWorld: CGSize = CGSize(width: 0, height: 0)
-    var extentOfPerspectiveImage = CGRect()
-    
-    var focusHighlightArray = [SCNNode]()
-    var secondFocusHighlightArray = [SCNNode]()
-    lazy var focusTextDetectionRequest = VNRecognizeTextRequest(completionHandler: handleFocusDetectedText)
+   // var focusTimer = RepeatingTimer(timeInterval: 1)
+//
+//    var currentCameraImage: CVPixelBuffer!
+//    var focusHasFoundOne: Bool = false
+//    var imagesToTrack = [ARReferenceImage]()
+//    var isLookingForRect: Bool = false
+//    var numberOfFocusTimes: Int = 0
+//    var detectedPlanes = [SCNNode: ARImageAnchor]()
+//    var blueNode = SCNNode()
+//    var currentHighlightNode = SCNNode()
+//
+//    var stopTagFocusVision : Bool = false
+//
+//
+//    var isOnDetectedPlane : Bool = false
+//    var findingInNode : Bool = false
+//    var focusRepeatsCounter: Int = 0
+//    var firstTimeFocusHighlight = true
+//
+//    var focusImageSize: CGSize = CGSize(width: 0, height: 0)
+//    var referenceImageSizeInRealWorld: CGSize = CGSize(width: 0, height: 0)
+//    var extentOfPerspectiveImage = CGRect()
+//
+//    var focusHighlightArray = [SCNNode]()
+//    var secondFocusHighlightArray = [SCNNode]()
+   // lazy var focusTextDetectionRequest = VNRecognizeTextRequest(completionHandler: handleFocusDetectedText)
     
     //MARK: Every mode (Universal)
-    let coachingOverlay = ARCoachingOverlayView()
+//    let coachingOverlay = ARCoachingOverlayView()
     var statusBarHidden : Bool = false
     var scanModeToggle = CurrentModeToggle.fast
     var finalTextToFind : String = ""
@@ -269,7 +291,7 @@ class ViewController: UIViewController {
 //    }
     
     ///Crosshair
-    var crosshairPoint : CGPoint = CGPoint(x: 0, y: 0)
+//    var crosshairPoint : CGPoint = CGPoint(x: 0, y: 0)
     
     
     
@@ -296,6 +318,8 @@ class ViewController: UIViewController {
         }
     }()
     
+    //MARK: New Camera no Sceneview
+    let avSession = AVCaptureSession()
     override func viewWillAppear(_ animated: Bool) {
 //        NotificationCenter.default.addObserver(
 //            self,
@@ -307,14 +331,87 @@ class ViewController: UIViewController {
         
     }
     
+    @IBOutlet weak var cameraView: CameraView!
+    let videoDataOutput = AVCaptureVideoDataOutput()
+    
+    
+    func getImageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
+       guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+           return nil
+       }
+       CVPixelBufferLockBaseAddress(pixelBuffer, .readOnly)
+       let baseAddress = CVPixelBufferGetBaseAddress(pixelBuffer)
+       let width = CVPixelBufferGetWidth(pixelBuffer)
+       let height = CVPixelBufferGetHeight(pixelBuffer)
+       let bytesPerRow = CVPixelBufferGetBytesPerRow(pixelBuffer)
+       let colorSpace = CGColorSpaceCreateDeviceRGB()
+       let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue | CGBitmapInfo.byteOrder32Little.rawValue)
+       guard let context = CGContext(data: baseAddress, width: width, height: height, bitsPerComponent: 8, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) else {
+           return nil
+       }
+       guard let cgImage = context.makeImage() else {
+           return nil
+       }
+       let image = UIImage(cgImage: cgImage, scale: 1, orientation:.right)
+       CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly)
+        return image
+    }
+    private func configureCamera() {
+        cameraView.session = avSession
+        
+        let cameraDevices = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
+        var cameraDevice: AVCaptureDevice?
+        for device in cameraDevices.devices {
+            if device.position == .back {
+                cameraDevice = device
+                break
+            }
+        }
+        do {
+            let captureDeviceInput = try AVCaptureDeviceInput(device: cameraDevice!)
+            if avSession.canAddInput(captureDeviceInput) {
+                avSession.addInput(captureDeviceInput)
+            }
+        }
+        catch {
+            print("Error occured \(error)")
+            return
+        }
+        avSession.sessionPreset = .high
+        videoDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "Buffer Queue", qos: .userInteractive, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil))
+        if avSession.canAddOutput(videoDataOutput) {
+            avSession.addOutput(videoDataOutput)
+        }
+        cameraView.videoPreviewLayer.videoGravity = .resizeAspectFill
+        avSession.startRunning()
+    }
+    private func isAuthorized() -> Bool {
+        let authorizationStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+        switch authorizationStatus {
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: AVMediaType.video,
+                                          completionHandler: { (granted:Bool) -> Void in
+                                            if granted {
+                                                DispatchQueue.main.async {
+                                                   // self.configureTextDetection()
+                                                    self.configureCamera()
+                                                }
+                                            }
+            })
+            return true
+        case .authorized:
+            return true
+        case .denied, .restricted: return false
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         //MARK: Sceneview
         
         changeDelegate = statusView as? ChangeStatusValue
-        setUpARDelegates()
-        sceneView.delegate = self
-        sceneView.session.delegate = self
+//        setUpARDelegates()
+//        sceneView.delegate = self
+//        sceneView.session.delegate = self
         numberLabel.isHidden = false
         //numberDenomLabel.isHidden = false
         shouldMin = false
@@ -324,13 +421,13 @@ class ViewController: UIViewController {
         //fastTextDetectionRequest.recognitionLanguages = ["en_GB"]
         //fastTextDetectionRequest.customWords = ["98ohkjshgosro9g"]
         //fastTextDetectionRequest.usesLanguageCorrection = true
-        textDetectionRequest.recognitionLevel = .fast
-        textDetectionRequest.recognitionLanguages = ["en_GB"]
-        textDetectionRequest.usesLanguageCorrection = true
-        focusTextDetectionRequest.recognitionLevel = .fast
-        focusTextDetectionRequest.recognitionLanguages = ["en_GB"]
-        focusTextDetectionRequest.usesLanguageCorrection = true
-           
+//        textDetectionRequest.recognitionLevel = .fast
+//        textDetectionRequest.recognitionLanguages = ["en_GB"]
+//        textDetectionRequest.usesLanguageCorrection = true
+//        focusTextDetectionRequest.recognitionLevel = .fast
+//        focusTextDetectionRequest.recognitionLanguages = ["en_GB"]
+//        focusTextDetectionRequest.usesLanguageCorrection = true
+//
         
 //        doubleTap.numberOfTapsRequired = 2
 //        sceneView.addGestureRecognizer(doubleTap)
@@ -343,7 +440,7 @@ class ViewController: UIViewController {
         //setUpToolBar()
         setUpFilePath()
         //setUpMatches()
-        setUpCrosshair()
+        //setUpCrosshair()
         //addCoaching()
         
         //changeHUDSize(to: CGSize(width: 55, height: 55))
@@ -352,14 +449,17 @@ class ViewController: UIViewController {
 //            view.isHidden = true
 //            view.alpha = 0
 //        }
-        
+        if isAuthorized() {
+            //configureTextDetection()
+            configureCamera()
+        }
         scanModeToggle = .fast
-        classicHasFoundOne = false
-        stopCoaching()
-        stopProcessingImage = true
-        classicTimer.suspend()
-        focusTimer.suspend()
-        sceneView.session.run(fastSceneConfiguration, options: [.removeExistingAnchors, .resetTracking])
+//        classicHasFoundOne = false
+//        stopCoaching()
+//        stopProcessingImage = true
+   //     classicTimer.suspend()
+    //    focusTimer.suspend()
+    //sceneView.session.run(fastSceneConfiguration, options: [.removeExistingAnchors, .resetTracking])
         //modeButton.imageView.image = #imageLiteral(resourceName: "bfast 2")
         busyFastFinding = false
         //fastTimer.resume()
@@ -384,7 +484,7 @@ class ViewController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        classicHasFoundOne = false
+        //classicHasFoundOne = false
     }
     
     
@@ -401,4 +501,15 @@ class ViewController: UIViewController {
 
 
 
-
+extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
+    // MARK: - Camera Delegate and Setup
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+            return
+        }
+        
+        if busyFastFinding == false {
+            fastFind(in: pixelBuffer)
+        }
+    }
+}

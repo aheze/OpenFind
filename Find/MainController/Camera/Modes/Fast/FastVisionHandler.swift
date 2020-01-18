@@ -220,7 +220,7 @@ extension ViewController {
             newLayer.lineCap = .round
             
             let newView = UIView(frame: CGRect(x: component.x, y: component.y, width: component.width, height: component.height))
-            self.view.insertSubview(newView, aboveSubview: self.sceneView)
+            self.view.insertSubview(newView, aboveSubview: self.cameraView)
             //print(newView.frame)
             
             let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
@@ -313,7 +313,7 @@ extension ViewController {
         }
     }
     func animateFastChange(layer: CAShapeLayer) {
-            view.layer.insertSublayer(layer, above: sceneView.layer)
+            view.layer.insertSublayer(layer, above: cameraView.layer)
             layer.masksToBounds = true
             let gradient = CAGradientLayer()
             gradient.frame = layer.bounds
@@ -363,3 +363,20 @@ extension Array where Element: Equatable {
 //
 //
 //}
+extension String {
+    func indicesOf(string: String) -> [Int] {
+        var indices = [Int]()
+        var searchStartIndex = self.startIndex
+        
+        while searchStartIndex < self.endIndex,
+            let range = self.range(of: string, range: searchStartIndex..<self.endIndex),
+            !range.isEmpty
+        {
+            let index = distance(from: self.startIndex, to: range.lowerBound)
+            indices.append(index)
+            searchStartIndex = range.upperBound
+        }
+        
+        return indices
+    }
+}
