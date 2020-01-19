@@ -39,6 +39,7 @@
 		4928525023D14D7B0048EC13 /* RealmPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928524F23D14D7B0048EC13 /* RealmPhoto.swift */; };
 		4928525223D154370048EC13 /* RealmComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525123D154370048EC13 /* RealmComponent.swift */; };
 		4928525423D368780048EC13 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525323D368780048EC13 /* CameraService.swift */; };
+		4928525623D4BD490048EC13 /* UpdateOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525523D4BD490048EC13 /* UpdateOrientation.swift */; };
 		49325C1323CAE84500A771A3 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49325C1223CAE84500A771A3 /* StatusView.swift */; };
 		49368CA7239059A200B67C4A /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49368CA6239059A200B67C4A /* FullScreenViewController.swift */; };
 		49368CAD23905D3300B67C4A /* PulleyPassthroughScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49368CA923905D3200B67C4A /* PulleyPassthroughScrollView.swift */; };
@@ -140,6 +141,7 @@
 		4928524F23D14D7B0048EC13 /* RealmPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmPhoto.swift; sourceTree = "<group>"; };
 		4928525123D154370048EC13 /* RealmComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmComponent.swift; sourceTree = "<group>"; };
 		4928525323D368780048EC13 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
+		4928525523D4BD490048EC13 /* UpdateOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateOrientation.swift; sourceTree = "<group>"; };
 		49325C1223CAE84500A771A3 /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		49368CA6239059A200B67C4A /* FullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
 		49368CA923905D3200B67C4A /* PulleyPassthroughScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulleyPassthroughScrollView.swift; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 				4979A38F23AF3A4800B09380 /* FastMode.swift */,
 				4979A39223AF3C4F00B09380 /* FastVisionHandler.swift */,
 				4928525323D368780048EC13 /* CameraService.swift */,
+				4928525523D4BD490048EC13 /* UpdateOrientation.swift */,
 			);
 			path = Fast;
 			sourceTree = "<group>";
@@ -745,6 +748,7 @@
 				49F7B15C2354E85F0099FA62 /* WordReader.swift in Sources */,
 				490DA75423CBB871000AF57D /* JJFloatingActionButtonDelegate.swift in Sources */,
 				490DA75823CBB871000AF57D /* JJActionItem.swift in Sources */,
+				4928525623D4BD490048EC13 /* UpdateOrientation.swift in Sources */,
 				49BC782023C2B0E0003D9904 /* IndexMatcher.swift in Sources */,
 				49913450236FE12400B82E46 /* SettingsViewExtensions.swift in Sources */,
 				490DA75923CBB871000AF57D /* JJCircleView.swift in Sources */,

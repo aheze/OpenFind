@@ -10,6 +10,7 @@ import UIKit
 import ARKit
 import Vision
 import AVFoundation
+import CoreMotion
 
 protocol ChangeStatusValue: class {
     func changeValue(to value: CGFloat)
@@ -69,7 +70,7 @@ class ViewController: UIViewController {
     //MARK: Matches HUD
     
     var previousNumberOfMatches: Int = 0
-    var shouldScale = true
+    //var shouldScale = true
     var currentNumber = 0
     var startGettingNearestFeaturePoints = false
     let fastSceneConfiguration = AROrientationTrackingConfiguration()
@@ -84,13 +85,14 @@ class ViewController: UIViewController {
     var cancelTimer : Timer?
     //var isCancelTimerRunning = false //This will be used to make sure only one timer is created at a time.
     
+    //MARK: Motion and AR Engine
+    var motionManager: CMMotionManager!
+    var motionXAsOfHighlightStart = Double(0) ///     X
+    var motionYAsOfHighlightStart = Double(0) ///     Y
+    var motionZAsOfHighlightStart = Double(0) ///     Z
+    
     
     //MARK: FAST MODE
-//    enum FastFinding {
-//        case busy
-//        case notBusy
-//        case inactive
-//    }
     var busyFastFinding = false
     var startFastFinding = false
     var tempComponents = [Component]()
@@ -104,10 +106,8 @@ class ViewController: UIViewController {
     
     //MARK: Every mode (Universal)
     var statusBarHidden : Bool = false
-    //var scanModeToggle = CurrentModeToggle.fast
     var finalTextToFind : String = ""
     let deviceSize = UIScreen.main.bounds.size
-    
     ///Save the image
     var globalUrl : URL = URL(fileURLWithPath: "")
     
@@ -218,6 +218,10 @@ class ViewController: UIViewController {
     func capturePhoto(completion: ((UIImage) -> Void)?) {
         captureCompletionBlock = completion
     }
+    // initial configuration
+   
+    var initialAttitude: CMAttitude?
+    //var refAttitudeReferenceFrame: CMAttitudeReferenceFrame?
     override func viewDidLoad() {
         super.viewDidLoad()
         changeDelegate = statusView as? ChangeStatusValue
@@ -232,7 +236,25 @@ class ViewController: UIViewController {
             configureCamera()
         }
         busyFastFinding = false
-        print("resume?")
+        
+        motionManager = CMMotionManager()
+        motionManager.deviceMotionUpdateInterval = 0.01
+        
+        
+       //  initial configuration
+        if let deviceMot = motionManager.deviceMotion?.attitude {
+            initialAttitude = deviceMot
+        }
+
+        motionManager.startDeviceMotionUpdates(to: .main) {
+            [weak self] (data, error) in
+            guard let data = data, error == nil else {
+                return
+            }
+            // translate the attitude
+            self?.updateHighlightOrientations(attitude: data.attitude)
+        }
+        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
@@ -242,6 +264,14 @@ class ViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    // get magnitude of vector via Pythagorean theorem
+    func getMagnitude(from attitude: CMAttitude) -> Double {
+        return sqrt(pow(attitude.roll, 2) +
+                pow(attitude.yaw, 2) +
+                pow(attitude.pitch, 2))
+    }
+
+    
 
 
 }

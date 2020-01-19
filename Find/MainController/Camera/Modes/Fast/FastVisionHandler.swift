@@ -9,6 +9,7 @@
 import UIKit
 import Vision
 import ARKit
+import CoreMotion
 
 extension ViewController {
     
@@ -18,6 +19,16 @@ extension ViewController {
             busyFastFinding = false
             return
         }
+        if let currentMotion = motionManager.deviceMotion {
+            motionXAsOfHighlightStart = Double(0)
+            motionYAsOfHighlightStart = Double(0)
+            motionZAsOfHighlightStart = Double(0)
+            initialAttitude = currentMotion.attitude
+            print("set")
+            //refAttitudeReferenceFrame = currentMotion.attitude
+            //motionManager.attitudeReferenceFrame
+        }
+        
         
         for result in results {
             if let observation = result as? VNRecognizedTextObservation {
@@ -72,6 +83,7 @@ extension ViewController {
             }
             
         }
+        
         busyFastFinding = false
         animateFoundFastChange()
         numberOfFastMatches = 0
@@ -91,7 +103,7 @@ extension ViewController {
             var distToComp = [CGFloat: Component]()
             
             for oldComponent in currentComponents {
-                if oldComponent.changed == false {
+//                if oldComponent.changed == false {
                     let currentCompPoint = CGPoint(x: oldComponent.x, y: oldComponent.y)
                     let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
                     let distanceBetweenPoints = distance(currentCompPoint, nextCompPoint) //< 10
@@ -99,51 +111,50 @@ extension ViewController {
                         lowestDist = distanceBetweenPoints
                         distToComp[lowestDist] = oldComponent
                     }
-                }
+//                }
             }
-            if shouldScale == true {
-                if lowestDist <= 15 {
-                    guard let oldComp = distToComp[lowestDist] else { print("NO COMP"); return }
-                    let currentCompPoint = CGPoint(x: oldComp.x, y: oldComp.y)
-                    let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
-                    
-                    let newView = oldComp.baseView
-                    let nextView = newComponent.baseView
-                    tempComponents.append(oldComp)
-                    oldComp.changed = true
-                    //nextComponents.remove(object: newComponent)
-                    DispatchQueue.main.async {
-                        UIView.animate(withDuration: 0.5, animations: {
-                            
-                            let xDist = nextCompPoint.x - currentCompPoint.x
-                            let yDist = nextCompPoint.y - currentCompPoint.y
-                            let rect = CGRect(x: newComponent.x, y: newComponent.y, width: newComponent.width, height: newComponent.height)
-                            newView?.frame = rect
-                            
-                            
-                            //print("ANIMATE")
-                        })
-                    }
-                } else {
-                    scaleInHighlight(component: newComponent)
-                }
-            } else {
+//            if shouldScale == true {
+            if lowestDist <= 15 {
                 guard let oldComp = distToComp[lowestDist] else { print("NO COMP"); return }
                 let currentCompPoint = CGPoint(x: oldComp.x, y: oldComp.y)
                 let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
+                
                 let newView = oldComp.baseView
                 let nextView = newComponent.baseView
                 tempComponents.append(oldComp)
                 oldComp.changed = true
+                //nextComponents.remove(object: newComponent)
                 DispatchQueue.main.async {
-                    UIView.animate(withDuration: 0.5, animations: {                        let xDist = nextCompPoint.x - currentCompPoint.x
+                    UIView.animate(withDuration: 0.5, animations: {
+                        
+                        let xDist = nextCompPoint.x - currentCompPoint.x
                         let yDist = nextCompPoint.y - currentCompPoint.y
                         let rect = CGRect(x: newComponent.x, y: newComponent.y, width: newComponent.width, height: newComponent.height)
                         newView?.frame = rect
-                        print("ANIMATE, Matches Mode")
+                        
+                        
+                        //print("ANIMATE")
                     })
                 }
+            } else {
+                scaleInHighlight(component: newComponent)
             }
+//            } else {
+//                guard let oldComp = distToComp[lowestDist] else { print("NO COMP"); return }
+//                let currentCompPoint = CGPoint(x: oldComp.x, y: oldComp.y)
+//                let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
+//                let newView = oldComp.baseView
+//                let nextView = newComponent.baseView
+//                tempComponents.append(oldComp)
+//                oldComp.changed = true
+//                DispatchQueue.main.async {
+//                    UIView.animate(withDuration: 0.5, animations: {
+//                        let rect = CGRect(x: newComponent.x, y: newComponent.y, width: newComponent.width, height: newComponent.height)
+//                        newView?.frame = rect
+//                        print("ANIMATE, Matches Mode")
+//                    })
+//                }
+//            }
             
         }
         
