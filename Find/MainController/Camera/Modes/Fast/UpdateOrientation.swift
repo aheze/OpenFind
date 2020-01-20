@@ -17,7 +17,7 @@ extension ViewController {
             
             //print(data.gravity.z)
             //let asf = data.attitude.yaw
-            print("initAlt: \(attitude)")
+            //print("initAlt: \(attitude)")
             //print("attitude pitch: \(attitude.pitch)") ///IN RADIANS
             
             let rollValue = attitude.roll.radiansToDegrees
@@ -25,18 +25,18 @@ extension ViewController {
             let yawValue = attitude.yaw.radiansToDegrees
             
             
-            let xConversion = Double(4)
-            let yConversion = Double(4)
-            let zConversion = Double(0.05)
+            let xConversion = Double(8)
+            let yConversion = Double(8)
+            //let zConversion = Double(0.05)
             
             let finalRollDiff = (rollValue - motionXAsOfHighlightStart) * xConversion
             let finalPitchDiff = (pitchValue - motionYAsOfHighlightStart) * yConversion
-            let finalYawDiff = (yawValue - motionZAsOfHighlightStart) * zConversion
+            //let finalYawDiff = (yawValue - motionZAsOfHighlightStart) * zConversion
             
-            print("pitch difference: \(motionYAsOfHighlightStart - pitchValue)")
+            //print("pitch difference: \(motionYAsOfHighlightStart - pitchValue)")
             //print(pitchValue)
             for highlight in currentComponents {
-                print("highlight")
+                //print("highlight")
                 let theView = highlight.baseView
                           //  print("before frame \(index): \(theView?.frame)")
                             
@@ -67,7 +67,7 @@ extension ViewController {
             motionXAsOfHighlightStart = rollValue
             motionYAsOfHighlightStart = pitchValue
             motionZAsOfHighlightStart = yawValue
-            print("motionY: \(motionYAsOfHighlightStart)_____________")
+            //print("motionY: \(motionYAsOfHighlightStart)_____________")
            // print("xdiff: \(xDiff)")
             
         }

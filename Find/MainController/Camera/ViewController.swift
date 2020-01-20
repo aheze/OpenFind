@@ -15,6 +15,9 @@ import CoreMotion
 protocol ChangeStatusValue: class {
     func changeValue(to value: CGFloat)
 }
+protocol ToggleCreateCircle: class {
+    func toggle(created: Bool)
+}
 
 class CameraView: UIView {
     
@@ -47,6 +50,9 @@ class ViewController: UIViewController {
     
     
     //MARK: Toolbar
+    
+    var testCategoryLabels = ["Nature", "Food", "Math Chapter 1 Vocab", "More Vocab", "English Terms", "Study Helpers"]
+    @IBOutlet weak var listsCollectionView: UICollectionView!
     @IBOutlet weak var toolBar: UIView!
     @IBOutlet weak var autoCompleteButton: UIButton!
     @IBOutlet weak var cancelButtonNew: UIButton!
@@ -69,6 +75,7 @@ class ViewController: UIViewController {
     
     //MARK: Matches HUD
     
+    var createdStatusView: Bool = false
     var previousNumberOfMatches: Int = 0
     //var shouldScale = true
     var currentNumber = 0
@@ -77,6 +84,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var statusView: UIView!
     weak var changeDelegate: ChangeStatusValue?
+    weak var toggleCreateDelegate: ToggleCreateCircle?
     
     var blurView = UIVisualEffectView()
     ///Detect if the view controller attempted to dismiss, but didn't
@@ -224,7 +232,16 @@ class ViewController: UIViewController {
     //var refAttitudeReferenceFrame: CMAttitudeReferenceFrame?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        if let flowLayout = listsCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+//          flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+//        }
+        
         changeDelegate = statusView as? ChangeStatusValue
+//        toggleCreateDelegate = statusView as? ToggleCreateCircle
+        
+        
+        
         numberLabel.isHidden = false
         updateMatchesNumber(to: 0)
        
@@ -317,4 +334,7 @@ extension UIImage {
         }
         self.init(cgImage: cgImage)
     }
+}
+extension Notification.Name {
+     static let toggleCreateName = Notification.Name("toggleCreateName")
 }

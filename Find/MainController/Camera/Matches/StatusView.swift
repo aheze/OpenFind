@@ -10,6 +10,7 @@ import UIKit
 
 class StatusView: UIView, ChangeStatusValue {
     
+    var createdCircle = false
     
     var number = 0
     
@@ -26,69 +27,75 @@ class StatusView: UIView, ChangeStatusValue {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    private let notificationCenter = NotificationCenter.default
+    
     override func draw(_ rect: CGRect) {
-        self.createCircle()
+     
+        createCircle()
+        createdCircle = true
     }
     func createCircle() {
-        print("CREATECIr")
-        //print("frame: \(self.frame)")
-        
-        let borderWidth = CGFloat(6.5)
-        //let arcRadius = CGFloat(3)
-        
-        
-        let halfR = borderWidth / 2
-        let width = self.frame.size.width
-        //print(self.frame.size.height)
-        //let height = self.frame.size.height + arcRadius
-        let height = self.frame.size.height
-        
-        let path = UIBezierPath(ovalIn: CGRect(x: 0 + halfR, y: 0 + halfR, width: width - borderWidth, height: height - borderWidth))
-        //path.lineWidth = borderWidth
-        
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = path.cgPath
-        //shapeLayer.frame = self.frame
-        shapeLayer.lineWidth = borderWidth
-        shapeLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.15)
-        shapeLayer.strokeColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        //shapeLayer.name = "shape"
-        
-        
-        var topRimLayer = CAShapeLayer()
-        topRimLayer.path = path.cgPath
-        topRimLayer.lineWidth = borderWidth
-        topRimLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        topRimLayer.strokeColor = #colorLiteral(red: 0.8000000119, green: 0.8000000119, blue: 0.8000000119, alpha: 1)
-        topRimLayer.lineCap = .round
-        topRimLayer.name = "shape"
-        
-        var newFrameRect = CGRect(x: 0, y: 0, width: 0, height: 0)
-        newFrameRect.size.width = path.bounds.size.width
-        newFrameRect.size.height = path.bounds.size.height
-        newFrameRect.origin.x = path.bounds.minX - halfR
-        newFrameRect.origin.y = path.bounds.minY - halfR
-//        newFrameRect.size.x -= halfR
-//        newFrameRect.size.y -= halfR
-        topRimLayer.frame = newFrameRect
-      //  topRimLayer.position = layer.bounds.width - topRimLayer.bounds.width / 2
-        
-        let endAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        endAnimation.fromValue = 0.0
-        endAnimation.toValue = 0.5
-        endAnimation.duration = 1
-        endAnimation.autoreverses = false
-        endAnimation.repeatCount = 0
-        endAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
-        topRimLayer.strokeEnd = 0.5
-//            let animation = CAAnimationGroup()
-//            animation.animations = [startAnimation, endAnimation]
-//            animation.duration = 0.6
-//            animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
-        
-        topRimLayer.add(endAnimation, forKey: "EndAnimation")
-        self.layer.insertSublayer(shapeLayer, at: 0)
-        self.layer.insertSublayer(topRimLayer, above: shapeLayer)
+        if createdCircle == false {
+            print("CREATECIr")
+            //print("frame: \(self.frame)")
+            
+            let borderWidth = CGFloat(6.5)
+            //let arcRadius = CGFloat(3)
+            
+            
+            let halfR = borderWidth / 2
+            let width = self.frame.size.width
+            //print(self.frame.size.height)
+            //let height = self.frame.size.height + arcRadius
+            let height = self.frame.size.height
+            
+            let path = UIBezierPath(ovalIn: CGRect(x: 0 + halfR, y: 0 + halfR, width: width - borderWidth, height: height - borderWidth))
+            //path.lineWidth = borderWidth
+            
+            let shapeLayer = CAShapeLayer()
+            shapeLayer.path = path.cgPath
+            //shapeLayer.frame = self.frame
+            shapeLayer.lineWidth = borderWidth
+            shapeLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.15)
+            shapeLayer.strokeColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            //shapeLayer.name = "shape"
+            
+            
+            var topRimLayer = CAShapeLayer()
+            topRimLayer.path = path.cgPath
+            topRimLayer.lineWidth = borderWidth
+            topRimLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+            topRimLayer.strokeColor = #colorLiteral(red: 0.8000000119, green: 0.8000000119, blue: 0.8000000119, alpha: 1)
+            topRimLayer.lineCap = .round
+            topRimLayer.name = "shape"
+            
+            var newFrameRect = CGRect(x: 0, y: 0, width: 0, height: 0)
+            newFrameRect.size.width = path.bounds.size.width
+            newFrameRect.size.height = path.bounds.size.height
+            newFrameRect.origin.x = path.bounds.minX - halfR
+            newFrameRect.origin.y = path.bounds.minY - halfR
+    //        newFrameRect.size.x -= halfR
+    //        newFrameRect.size.y -= halfR
+            topRimLayer.frame = newFrameRect
+          //  topRimLayer.position = layer.bounds.width - topRimLayer.bounds.width / 2
+            
+            let endAnimation = CABasicAnimation(keyPath: "strokeEnd")
+            endAnimation.fromValue = 0.0
+            endAnimation.toValue = 0.5
+            endAnimation.duration = 1
+            endAnimation.autoreverses = false
+            endAnimation.repeatCount = 0
+            endAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+            topRimLayer.strokeEnd = 0.5
+    //            let animation = CAAnimationGroup()
+    //            animation.animations = [startAnimation, endAnimation]
+    //            animation.duration = 0.6
+    //            animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+            
+            topRimLayer.add(endAnimation, forKey: "EndAnimation")
+            self.layer.insertSublayer(shapeLayer, at: 0)
+            self.layer.insertSublayer(topRimLayer, above: shapeLayer)
+        }
     }
     
     func changeValue(to value: CGFloat) {

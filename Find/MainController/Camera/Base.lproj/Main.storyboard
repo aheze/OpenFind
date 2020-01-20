@@ -158,6 +158,7 @@
                         <outlet property="cancelButtonNew" destination="sU8-v1-Rmw" id="24G-Ly-Xd4"/>
                         <outlet property="darkBlurEffect" destination="SjR-c7-NyL" id="0Wd-Vq-FxN"/>
                         <outlet property="darkBlurEffectHeightConstraint" destination="osx-98-ICJ" id="DOQ-PQ-HNz"/>
+                        <outlet property="listsCollectionView" destination="VkX-4N-Y86" id="6Wt-wM-dIb"/>
                         <outlet property="menuButton" destination="ds1-Sw-dB2" id="LUc-6f-nmW"/>
                         <outlet property="newShutterButton" destination="oHd-Dg-FBU" id="ADY-yp-2Cz"/>
                         <outlet property="numberLabel" destination="24E-8Q-fAS" id="XjQ-vu-L9f"/>
@@ -170,38 +171,101 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="nbP-Hl-hh0" userLabel="Toolbar">
-                    <rect key="frame" x="0.0" y="0.0" width="377" height="45"/>
+                    <rect key="frame" x="0.0" y="0.0" width="377" height="110"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sU8-v1-Rmw">
-                            <rect key="frame" x="8" y="9.6666666666666643" width="64" height="26"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l8b-8S-Nlv" userLabel="BaseView">
+                            <rect key="frame" x="0.0" y="40" width="377" height="70"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sU8-v1-Rmw">
+                                    <rect key="frame" x="6" y="38" width="64" height="26"/>
+                                    <color key="backgroundColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
+                                    <state key="normal" title="Cancel">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="cancelButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gun-zH-9zE"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9m-rk-xrA">
+                                    <rect key="frame" x="178" y="38" width="193" height="26"/>
+                                    <color key="backgroundColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
+                                    <state key="normal" title="Autocomplete and Search">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="autocompButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YIj-D8-ZcQ"/>
+                                    </connections>
+                                </button>
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VkX-4N-Y86">
+                                    <rect key="frame" x="6" y="6" width="365" height="26"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nme-UL-ozs">
+                                        <size key="itemSize" width="46" height="24"/>
+                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </collectionViewFlowLayout>
+                                    <cells>
+                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="tooltopCell" id="96Z-UG-GXZ" customClass="ToolbarTopCell" customModule="Find" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="1" width="46" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eKW-jO-I0F">
+                                                <rect key="frame" x="0.0" y="0.0" width="46" height="24"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v2Y-JL-i49">
+                                                        <rect key="frame" x="0.0" y="-3" width="46" height="30"/>
+                                                        <state key="normal" title="Button"/>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="v2Y-JL-i49" firstAttribute="centerY" secondItem="eKW-jO-I0F" secondAttribute="centerY" id="4wY-Tl-Wm2"/>
+                                                    <constraint firstItem="v2Y-JL-i49" firstAttribute="centerX" secondItem="eKW-jO-I0F" secondAttribute="centerX" id="sNh-IN-hIN"/>
+                                                </constraints>
+                                            </collectionViewCellContentView>
+                                            <connections>
+                                                <outlet property="button" destination="v2Y-JL-i49" id="KeN-rW-L8K"/>
+                                            </connections>
+                                        </collectionViewCell>
+                                    </cells>
+                                    <connections>
+                                        <outlet property="dataSource" destination="BYZ-38-t0r" id="VNz-XW-Pvg"/>
+                                        <outlet property="delegate" destination="BYZ-38-t0r" id="V9N-BF-VhX"/>
+                                    </connections>
+                                </collectionView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="E9m-rk-xrA" secondAttribute="bottom" constant="6" id="5Q3-YC-fMy"/>
+                                <constraint firstItem="sU8-v1-Rmw" firstAttribute="top" secondItem="VkX-4N-Y86" secondAttribute="bottom" constant="6" id="Hi8-Sy-QQ5"/>
+                                <constraint firstAttribute="bottom" secondItem="sU8-v1-Rmw" secondAttribute="bottom" constant="6" id="Hof-Oh-J40"/>
+                                <constraint firstItem="VkX-4N-Y86" firstAttribute="top" secondItem="l8b-8S-Nlv" secondAttribute="top" constant="6" id="I5V-Cs-yfb"/>
+                                <constraint firstItem="VkX-4N-Y86" firstAttribute="leading" secondItem="l8b-8S-Nlv" secondAttribute="leading" constant="6" id="ONP-WM-J9q"/>
+                                <constraint firstAttribute="height" constant="70" id="jYz-wa-UZw"/>
+                                <constraint firstAttribute="trailing" secondItem="E9m-rk-xrA" secondAttribute="trailing" constant="6" id="qrF-XB-MqY"/>
+                                <constraint firstAttribute="trailing" secondItem="VkX-4N-Y86" secondAttribute="trailing" constant="6" id="uKL-Y2-1TC"/>
+                                <constraint firstItem="sU8-v1-Rmw" firstAttribute="leading" secondItem="l8b-8S-Nlv" secondAttribute="leading" constant="6" id="xSY-Np-RJc"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHQ-Zy-9BX">
+                            <rect key="frame" x="250" y="8" width="119" height="26"/>
                             <color key="backgroundColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
-                            <state key="normal" title="Cancel">
+                            <state key="normal" title="Find in: English">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
-                            <connections>
-                                <action selector="cancelButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gun-zH-9zE"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9m-rk-xrA">
-                            <rect key="frame" x="176" y="9.6666666666666643" width="193" height="26"/>
-                            <color key="backgroundColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
-                            <state key="normal" title="Autocomplete and Search">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="autocompButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YIj-D8-ZcQ"/>
-                            </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="b5l-rS-cQp" firstAttribute="trailing" secondItem="E9m-rk-xrA" secondAttribute="trailing" constant="8" id="6ZY-RQ-iwg"/>
-                        <constraint firstItem="sU8-v1-Rmw" firstAttribute="centerY" secondItem="nbP-Hl-hh0" secondAttribute="centerY" id="8Re-3c-neP"/>
-                        <constraint firstItem="sU8-v1-Rmw" firstAttribute="leading" secondItem="b5l-rS-cQp" secondAttribute="leading" constant="8" id="Gaq-ss-rxA"/>
-                        <constraint firstItem="E9m-rk-xrA" firstAttribute="centerY" secondItem="nbP-Hl-hh0" secondAttribute="centerY" id="gCx-b0-xIh"/>
+                        <constraint firstItem="l8b-8S-Nlv" firstAttribute="leading" secondItem="b5l-rS-cQp" secondAttribute="leading" id="9hm-1c-iQw"/>
+                        <constraint firstItem="kHQ-Zy-9BX" firstAttribute="top" secondItem="nbP-Hl-hh0" secondAttribute="top" constant="8" id="XZe-Vd-f4t"/>
+                        <constraint firstItem="l8b-8S-Nlv" firstAttribute="bottom" secondItem="b5l-rS-cQp" secondAttribute="bottom" id="e9o-JH-bmv"/>
+                        <constraint firstAttribute="trailing" secondItem="kHQ-Zy-9BX" secondAttribute="trailing" constant="8" id="pP0-7C-Hos"/>
+                        <constraint firstItem="l8b-8S-Nlv" firstAttribute="trailing" secondItem="b5l-rS-cQp" secondAttribute="trailing" id="rfv-Cy-Usd"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="b5l-rS-cQp"/>
                 </view>

@@ -40,6 +40,7 @@
 		4928525223D154370048EC13 /* RealmComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525123D154370048EC13 /* RealmComponent.swift */; };
 		4928525423D368780048EC13 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525323D368780048EC13 /* CameraService.swift */; };
 		4928525623D4BD490048EC13 /* UpdateOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525523D4BD490048EC13 /* UpdateOrientation.swift */; };
+		4928525823D539F40048EC13 /* ToolbarTopCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525723D539F40048EC13 /* ToolbarTopCollectionView.swift */; };
 		49325C1323CAE84500A771A3 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49325C1223CAE84500A771A3 /* StatusView.swift */; };
 		49368CA7239059A200B67C4A /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49368CA6239059A200B67C4A /* FullScreenViewController.swift */; };
 		49368CAD23905D3300B67C4A /* PulleyPassthroughScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49368CA923905D3200B67C4A /* PulleyPassthroughScrollView.swift */; };
@@ -98,7 +99,6 @@
 		49BC783523C8275B003D9904 /* HistorySelect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49BC783323C8275A003D9904 /* HistorySelect.xib */; };
 		49BC783623C8275B003D9904 /* HistorySelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC783423C8275B003D9904 /* HistorySelect.swift */; };
 		49BC783923C8C7AB003D9904 /* HistoryStartSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC783823C8C7AB003D9904 /* HistoryStartSelection.swift */; };
-		49BC785D23C95944003D9904 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC785C23C95944003D9904 /* Toolbar.swift */; };
 		49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */; };
 		49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1552353FE4B0099FA62 /* BasicSetup.swift */; };
 		49F7B1582353FE7E0099FA62 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1572353FE7E0099FA62 /* Component.swift */; };
@@ -142,6 +142,7 @@
 		4928525123D154370048EC13 /* RealmComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmComponent.swift; sourceTree = "<group>"; };
 		4928525323D368780048EC13 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
 		4928525523D4BD490048EC13 /* UpdateOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateOrientation.swift; sourceTree = "<group>"; };
+		4928525723D539F40048EC13 /* ToolbarTopCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarTopCollectionView.swift; sourceTree = "<group>"; };
 		49325C1223CAE84500A771A3 /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		49368CA6239059A200B67C4A /* FullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
 		49368CA923905D3200B67C4A /* PulleyPassthroughScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulleyPassthroughScrollView.swift; sourceTree = "<group>"; };
@@ -202,7 +203,6 @@
 		49BC783323C8275A003D9904 /* HistorySelect.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistorySelect.xib; sourceTree = "<group>"; };
 		49BC783423C8275B003D9904 /* HistorySelect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistorySelect.swift; sourceTree = "<group>"; };
 		49BC783823C8C7AB003D9904 /* HistoryStartSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStartSelection.swift; sourceTree = "<group>"; };
-		49BC785C23C95944003D9904 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		49F7B1552353FE4B0099FA62 /* BasicSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSetup.swift; sourceTree = "<group>"; };
 		49F7B1572353FE7E0099FA62 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
@@ -291,7 +291,6 @@
 				49F7B1552353FE4B0099FA62 /* BasicSetup.swift */,
 				49A8EFAB237A5EFE00328D47 /* SetUpButtons.swift */,
 				49A8EFAD237A5F2800328D47 /* SetUpRamReel.swift */,
-				49BC785C23C95944003D9904 /* Toolbar.swift */,
 			);
 			path = Setup;
 			sourceTree = "<group>";
@@ -372,13 +371,13 @@
 			isa = PBXGroup;
 			children = (
 				4928524E23D14D5A0048EC13 /* RealmFiles */,
+				4988FC4623BEF82D00199635 /* Lists */,
 				4969373C2353C277009CA41A /* Camera */,
 				4969373A2353C241009CA41A /* History */,
 				495ECCA5238CF74500E7D966 /* New History */,
 				496937392353C228009CA41A /* Settings */,
 				49B7A33B2392FFDA0070209F /* History Beta */,
 				49368CA52390598000B67C4A /* FullScreen */,
-				4988FC4623BEF82D00199635 /* Lists */,
 			);
 			path = MainController;
 			sourceTree = "<group>";
@@ -454,6 +453,7 @@
 			children = (
 				4988FC4423BEF82600199635 /* ListController.swift */,
 				4988FC4723BEF89600199635 /* ListModel.swift */,
+				4928525723D539F40048EC13 /* ToolbarTopCollectionView.swift */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -703,9 +703,9 @@
 				49913452236FE33B00B82E46 /* SettingsBasicSetup.swift in Sources */,
 				494DF11D23961AEB0076412D /* BDVCShare.swift in Sources */,
 				49517016235AC56D00E00D83 /* CollectionViewWrapper.swift in Sources */,
-				49BC785D23C95944003D9904 /* Toolbar.swift in Sources */,
 				4957157E2368B022007BF68B /* ViewExtensions.swift in Sources */,
 				490DA75D23CBC905000AF57D /* BigMenuButton.swift in Sources */,
+				4928525823D539F40048EC13 /* ToolbarTopCollectionView.swift in Sources */,
 				49BC783623C8275B003D9904 /* HistorySelect.swift in Sources */,
 				49517017235AC56D00E00D83 /* TextFieldReactor.swift in Sources */,
 				490452502379DF5C0046570D /* HistoryTableViewCell.swift in Sources */,

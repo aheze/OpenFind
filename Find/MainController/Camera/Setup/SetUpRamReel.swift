@@ -22,8 +22,8 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
             self.finalTextToFind = $0
           
                 print("fast")
-                let lowercased = self.finalTextToFind.lowercased()
-                let allCaps = self.finalTextToFind.uppercased()
+//                let lowercased = self.finalTextToFind.lowercased()
+//                let allCaps = self.finalTextToFind.uppercased()
                 //self.fastTextDetectionRequest.customWords = [self.finalTextToFind, lowercased, allCaps, "Find app"]
                 //self.fastTextDetectionRequest.customWords = ["98ohkjshgosro9g"]
                 
@@ -152,7 +152,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         
     }
     
-    func convertToUIImage(buffer: CVPixelBuffer) -> UIImage?{
+    func convertToUIImage(buffer: CVPixelBuffer) -> UIImage? {
         let ciImage = CIImage(cvPixelBuffer: buffer)
         let temporaryContext = CIContext(options: nil)
         if let temporaryImage = temporaryContext.createCGImage(ciImage, from: CGRect(x: 0, y: 0, width: CVPixelBufferGetWidth(buffer), height: CVPixelBufferGetHeight(buffer)))

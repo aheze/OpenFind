@@ -24,7 +24,7 @@ extension ViewController {
             motionYAsOfHighlightStart = Double(0)
             motionZAsOfHighlightStart = Double(0)
             initialAttitude = currentMotion.attitude
-            print("set")
+            //print("set")
             //refAttitudeReferenceFrame = currentMotion.attitude
             //motionManager.attitudeReferenceFrame
         }
