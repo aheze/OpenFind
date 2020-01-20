@@ -234,7 +234,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
 //        if let flowLayout = listsCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-//          flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+//            flowLayout.itemSize.height = 24
 //        }
         
         changeDelegate = statusView as? ChangeStatusValue

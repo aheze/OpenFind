@@ -178,8 +178,11 @@
                             <rect key="frame" x="0.0" y="40" width="377" height="70"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sU8-v1-Rmw">
-                                    <rect key="frame" x="6" y="38" width="64" height="26"/>
+                                    <rect key="frame" x="6" y="6" width="64" height="26"/>
                                     <color key="backgroundColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="26" id="wKB-JD-I65"/>
+                                    </constraints>
                                     <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
                                     <state key="normal" title="Cancel">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -188,20 +191,12 @@
                                         <action selector="cancelButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gun-zH-9zE"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9m-rk-xrA">
-                                    <rect key="frame" x="178" y="38" width="193" height="26"/>
-                                    <color key="backgroundColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
-                                    <state key="normal" title="Autocomplete and Search">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="autocompButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YIj-D8-ZcQ"/>
-                                    </connections>
-                                </button>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VkX-4N-Y86">
-                                    <rect key="frame" x="6" y="6" width="365" height="26"/>
+                                    <rect key="frame" x="6" y="38" width="365" height="26"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="26" id="ofZ-XU-LYm"/>
+                                    </constraints>
                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nme-UL-ozs">
                                         <size key="itemSize" width="46" height="24"/>
                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -218,12 +213,15 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v2Y-JL-i49">
                                                         <rect key="frame" x="0.0" y="-3" width="46" height="30"/>
-                                                        <state key="normal" title="Button"/>
+                                                        <state key="normal" title="Button">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="v2Y-JL-i49" firstAttribute="centerY" secondItem="eKW-jO-I0F" secondAttribute="centerY" id="4wY-Tl-Wm2"/>
-                                                    <constraint firstItem="v2Y-JL-i49" firstAttribute="centerX" secondItem="eKW-jO-I0F" secondAttribute="centerX" id="sNh-IN-hIN"/>
+                                                    <constraint firstItem="v2Y-JL-i49" firstAttribute="centerY" secondItem="eKW-jO-I0F" secondAttribute="centerY" id="Vet-BZ-QsU"/>
+                                                    <constraint firstAttribute="trailing" secondItem="v2Y-JL-i49" secondAttribute="trailing" constant="8" id="eMS-op-Qwg"/>
+                                                    <constraint firstItem="v2Y-JL-i49" firstAttribute="leading" secondItem="eKW-jO-I0F" secondAttribute="leading" constant="8" id="pKo-Nn-gwK"/>
                                                 </constraints>
                                             </collectionViewCellContentView>
                                             <connections>
@@ -236,18 +234,31 @@
                                         <outlet property="delegate" destination="BYZ-38-t0r" id="V9N-BF-VhX"/>
                                     </connections>
                                 </collectionView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9m-rk-xrA">
+                                    <rect key="frame" x="178" y="6" width="193" height="26"/>
+                                    <color key="backgroundColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="26" id="Tij-f4-ICV"/>
+                                    </constraints>
+                                    <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
+                                    <state key="normal" title="Autocomplete and Search">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="autocompButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YIj-D8-ZcQ"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="E9m-rk-xrA" secondAttribute="bottom" constant="6" id="5Q3-YC-fMy"/>
-                                <constraint firstItem="sU8-v1-Rmw" firstAttribute="top" secondItem="VkX-4N-Y86" secondAttribute="bottom" constant="6" id="Hi8-Sy-QQ5"/>
-                                <constraint firstAttribute="bottom" secondItem="sU8-v1-Rmw" secondAttribute="bottom" constant="6" id="Hof-Oh-J40"/>
-                                <constraint firstItem="VkX-4N-Y86" firstAttribute="top" secondItem="l8b-8S-Nlv" secondAttribute="top" constant="6" id="I5V-Cs-yfb"/>
-                                <constraint firstItem="VkX-4N-Y86" firstAttribute="leading" secondItem="l8b-8S-Nlv" secondAttribute="leading" constant="6" id="ONP-WM-J9q"/>
-                                <constraint firstAttribute="height" constant="70" id="jYz-wa-UZw"/>
-                                <constraint firstAttribute="trailing" secondItem="E9m-rk-xrA" secondAttribute="trailing" constant="6" id="qrF-XB-MqY"/>
-                                <constraint firstAttribute="trailing" secondItem="VkX-4N-Y86" secondAttribute="trailing" constant="6" id="uKL-Y2-1TC"/>
-                                <constraint firstItem="sU8-v1-Rmw" firstAttribute="leading" secondItem="l8b-8S-Nlv" secondAttribute="leading" constant="6" id="xSY-Np-RJc"/>
+                                <constraint firstItem="VkX-4N-Y86" firstAttribute="top" secondItem="sU8-v1-Rmw" secondAttribute="bottom" constant="6" id="0eO-YI-ken"/>
+                                <constraint firstItem="E9m-rk-xrA" firstAttribute="top" secondItem="l8b-8S-Nlv" secondAttribute="top" constant="6" id="2VN-1u-Fjx"/>
+                                <constraint firstAttribute="trailing" secondItem="VkX-4N-Y86" secondAttribute="trailing" constant="6" id="DZ7-Ep-aq2"/>
+                                <constraint firstAttribute="bottom" secondItem="VkX-4N-Y86" secondAttribute="bottom" constant="6" id="UJo-8y-ObP"/>
+                                <constraint firstItem="sU8-v1-Rmw" firstAttribute="leading" secondItem="l8b-8S-Nlv" secondAttribute="leading" constant="6" id="ejo-Zr-sgi"/>
+                                <constraint firstItem="VkX-4N-Y86" firstAttribute="leading" secondItem="l8b-8S-Nlv" secondAttribute="leading" constant="6" id="uPL-dQ-P3y"/>
+                                <constraint firstAttribute="trailing" secondItem="E9m-rk-xrA" secondAttribute="trailing" constant="6" id="wOT-nF-vGD"/>
+                                <constraint firstItem="sU8-v1-Rmw" firstAttribute="top" secondItem="l8b-8S-Nlv" secondAttribute="top" constant="6" id="xqD-nt-t9u"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHQ-Zy-9BX">
