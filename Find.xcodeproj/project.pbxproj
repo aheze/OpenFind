@@ -41,6 +41,9 @@
 		4928525423D368780048EC13 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525323D368780048EC13 /* CameraService.swift */; };
 		4928525623D4BD490048EC13 /* UpdateOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525523D4BD490048EC13 /* UpdateOrientation.swift */; };
 		4928525823D539F40048EC13 /* ToolbarTopCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525723D539F40048EC13 /* ToolbarTopCollectionView.swift */; };
+		4928525A23D617270048EC13 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525923D617270048EC13 /* ListController.swift */; };
+		4928525C23D61D230048EC13 /* ListsSelect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4928525B23D61D230048EC13 /* ListsSelect.xib */; };
+		4928526023D61F570048EC13 /* ListSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525F23D61F570048EC13 /* ListSelect.swift */; };
 		49325C1323CAE84500A771A3 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49325C1223CAE84500A771A3 /* StatusView.swift */; };
 		49368CA7239059A200B67C4A /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49368CA6239059A200B67C4A /* FullScreenViewController.swift */; };
 		49368CAD23905D3300B67C4A /* PulleyPassthroughScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49368CA923905D3200B67C4A /* PulleyPassthroughScrollView.swift */; };
@@ -62,15 +65,18 @@
 		4951701C235AC56D00E00D83 /* RAMReel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49517013235AC56D00E00D83 /* RAMReel.swift */; };
 		4951701D235AC56D00E00D83 /* RamGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49517014235AC56D00E00D83 /* RamGradientView.swift */; };
 		4951701F235AC8A800E00D83 /* RAMReel.h in Sources */ = {isa = PBXBuildFile; fileRef = 49517010235AC56D00E00D83 /* RAMReel.h */; };
+		49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3223D65AA4009308CA /* ListCollectionCell.swift */; };
+		49569B3523D6919E009308CA /* ListsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3423D6919E009308CA /* ListsLayout.swift */; };
+		49569B3923D8087E009308CA /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3823D8087E009308CA /* testView.swift */; };
 		4957157C2368AF69007BF68B /* RippleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4957157B2368AF69007BF68B /* RippleEffect.swift */; };
 		4957157E2368B022007BF68B /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4957157D2368B022007BF68B /* ViewExtensions.swift */; };
 		495ECCA4238A3D0B00E7D966 /* HistoryFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCA3238A3D0B00E7D966 /* HistoryFormat.swift */; };
 		495ECCA7238CF76C00E7D966 /* NewHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCA6238CF76C00E7D966 /* NewHistoryViewController.swift */; };
 		495ECCA9238CF7BD00E7D966 /* HPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */; };
 		495ECCAB238DB7BD00E7D966 /* TitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCAA238DB7BD00E7D966 /* TitleSupplementaryView.swift */; };
+		4966B70A23DE98C800A8523A /* MakeNewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4966B70923DE98C800A8523A /* MakeNewList.swift */; };
 		4979A39023AF3A4800B09380 /* FastMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979A38F23AF3A4800B09380 /* FastMode.swift */; };
 		4979A39323AF3C4F00B09380 /* FastVisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979A39223AF3C4F00B09380 /* FastVisionHandler.swift */; };
-		4988FC4523BEF82600199635 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988FC4423BEF82600199635 /* ListController.swift */; };
 		4988FC4823BEF89600199635 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988FC4723BEF89600199635 /* ListModel.swift */; };
 		4991344E236FDF1300B82E46 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991344D236FDF1200B82E46 /* SettingsViewController.swift */; };
 		49913450236FE12400B82E46 /* SettingsViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991344F236FE12400B82E46 /* SettingsViewExtensions.swift */; };
@@ -143,6 +149,9 @@
 		4928525323D368780048EC13 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
 		4928525523D4BD490048EC13 /* UpdateOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateOrientation.swift; sourceTree = "<group>"; };
 		4928525723D539F40048EC13 /* ToolbarTopCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarTopCollectionView.swift; sourceTree = "<group>"; };
+		4928525923D617270048EC13 /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
+		4928525B23D61D230048EC13 /* ListsSelect.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListsSelect.xib; sourceTree = "<group>"; };
+		4928525F23D61F570048EC13 /* ListSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSelect.swift; sourceTree = "<group>"; };
 		49325C1223CAE84500A771A3 /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		49368CA6239059A200B67C4A /* FullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
 		49368CA923905D3200B67C4A /* PulleyPassthroughScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulleyPassthroughScrollView.swift; sourceTree = "<group>"; };
@@ -164,15 +173,18 @@
 		49517012235AC56D00E00D83 /* RAMTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMTextField.swift; sourceTree = "<group>"; };
 		49517013235AC56D00E00D83 /* RAMReel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMReel.swift; sourceTree = "<group>"; };
 		49517014235AC56D00E00D83 /* RamGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RamGradientView.swift; sourceTree = "<group>"; };
+		49569B3223D65AA4009308CA /* ListCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionCell.swift; sourceTree = "<group>"; };
+		49569B3423D6919E009308CA /* ListsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsLayout.swift; sourceTree = "<group>"; };
+		49569B3823D8087E009308CA /* testView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView.swift; sourceTree = "<group>"; };
 		4957157B2368AF69007BF68B /* RippleEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleEffect.swift; sourceTree = "<group>"; };
 		4957157D2368B022007BF68B /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		495ECCA3238A3D0B00E7D966 /* HistoryFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFormat.swift; sourceTree = "<group>"; };
 		495ECCA6238CF76C00E7D966 /* NewHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHistoryViewController.swift; sourceTree = "<group>"; };
 		495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPhotoCell.swift; sourceTree = "<group>"; };
 		495ECCAA238DB7BD00E7D966 /* TitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSupplementaryView.swift; sourceTree = "<group>"; };
+		4966B70923DE98C800A8523A /* MakeNewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeNewList.swift; sourceTree = "<group>"; };
 		4979A38F23AF3A4800B09380 /* FastMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastMode.swift; sourceTree = "<group>"; };
 		4979A39223AF3C4F00B09380 /* FastVisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastVisionHandler.swift; sourceTree = "<group>"; };
-		4988FC4423BEF82600199635 /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
 		4988FC4723BEF89600199635 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		4991344D236FDF1200B82E46 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4991344F236FE12400B82E46 /* SettingsViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewExtensions.swift; sourceTree = "<group>"; };
@@ -451,9 +463,15 @@
 		4988FC4623BEF82D00199635 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
-				4988FC4423BEF82600199635 /* ListController.swift */,
+				4928525923D617270048EC13 /* ListController.swift */,
 				4988FC4723BEF89600199635 /* ListModel.swift */,
 				4928525723D539F40048EC13 /* ToolbarTopCollectionView.swift */,
+				4928525B23D61D230048EC13 /* ListsSelect.xib */,
+				4928525F23D61F570048EC13 /* ListSelect.swift */,
+				49569B3223D65AA4009308CA /* ListCollectionCell.swift */,
+				49569B3423D6919E009308CA /* ListsLayout.swift */,
+				49569B3823D8087E009308CA /* testView.swift */,
+				4966B70923DE98C800A8523A /* MakeNewList.swift */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -623,6 +641,7 @@
 				49BC783523C8275B003D9904 /* HistorySelect.xib in Resources */,
 				4999AC9D2353A81100AB06A7 /* Assets.xcassets in Resources */,
 				4999AC9B2353A80A00AB06A7 /* Main.storyboard in Resources */,
+				4928525C23D61D230048EC13 /* ListsSelect.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -686,6 +705,7 @@
 				49325C1323CAE84500A771A3 /* StatusView.swift in Sources */,
 				494DF11923961AC90076412D /* BDVCFind.swift in Sources */,
 				490DA75A23CBB871000AF57D /* LayerProperties.swift in Sources */,
+				4928525A23D617270048EC13 /* ListController.swift in Sources */,
 				4951701A235AC56D00E00D83 /* CollectionViewCell.swift in Sources */,
 				491150942363E3D300EC0C04 /* ARExtensions.swift in Sources */,
 				4911508D235D51E300EC0C04 /* MatchesHUD.swift in Sources */,
@@ -709,6 +729,7 @@
 				49BC783623C8275B003D9904 /* HistorySelect.swift in Sources */,
 				49517017235AC56D00E00D83 /* TextFieldReactor.swift in Sources */,
 				490452502379DF5C0046570D /* HistoryTableViewCell.swift in Sources */,
+				49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */,
 				4928525023D14D7B0048EC13 /* RealmPhoto.swift in Sources */,
 				49368CB223905E8E00B67C4A /* BottomSheetViewController.swift in Sources */,
 				49A8EFAE237A5F2800328D47 /* SetUpRamReel.swift in Sources */,
@@ -729,7 +750,9 @@
 				49115089235D17EB00EC0C04 /* ShutterPressed.swift in Sources */,
 				490DA74F23CBB871000AF57D /* JJFloatingActionButtonState.swift in Sources */,
 				49BC782223C3E1BF003D9904 /* TextViewRounded.swift in Sources */,
+				4966B70A23DE98C800A8523A /* MakeNewList.swift in Sources */,
 				495ECCA7238CF76C00E7D966 /* NewHistoryViewController.swift in Sources */,
+				4928526023D61F570048EC13 /* ListSelect.swift in Sources */,
 				49517018235AC56D00E00D83 /* Theme.swift in Sources */,
 				4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */,
 				490DA75223CBB871000AF57D /* JJFloatingActionButton.swift in Sources */,
@@ -745,6 +768,7 @@
 				49BC783923C8C7AB003D9904 /* HistoryStartSelection.swift in Sources */,
 				495ECCA4238A3D0B00E7D966 /* HistoryFormat.swift in Sources */,
 				49B7A33A23923EE10070209F /* PhotoZoomViewController.swift in Sources */,
+				49569B3523D6919E009308CA /* ListsLayout.swift in Sources */,
 				49F7B15C2354E85F0099FA62 /* WordReader.swift in Sources */,
 				490DA75423CBB871000AF57D /* JJFloatingActionButtonDelegate.swift in Sources */,
 				490DA75823CBB871000AF57D /* JJActionItem.swift in Sources */,
@@ -755,9 +779,9 @@
 				4917CE8123C059F6002EA20B /* StartSceneView.swift in Sources */,
 				495ECCA9238CF7BD00E7D966 /* HPhotoCell.swift in Sources */,
 				4904524E2379DB270046570D /* HistoryViewController.swift in Sources */,
+				49569B3923D8087E009308CA /* testView.swift in Sources */,
 				490DA75723CBB871000AF57D /* Styles.swift in Sources */,
 				49089E1F238EFFFA0070A70C /* FooterView.swift in Sources */,
-				4988FC4523BEF82600199635 /* ListController.swift in Sources */,
 				49517015235AC56D00E00D83 /* CollectionViewLayout.swift in Sources */,
 				49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */,
 				4979A39323AF3C4F00B09380 /* FastVisionHandler.swift in Sources */,

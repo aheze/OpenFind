@@ -11,6 +11,7 @@ import ARKit
 import Vision
 import AVFoundation
 import CoreMotion
+import RealmSwift
 
 protocol ChangeStatusValue: class {
     func changeValue(to value: CGFloat)
@@ -51,7 +52,8 @@ class ViewController: UIViewController {
     
     //MARK: Toolbar
     
-    var testCategoryLabels = ["Nature", "Food", "Math Chapter 1 Vocab", "More Vocab", "English Terms", "Study Helpers"]
+    let realm = try! Realm()
+    var listCategories: Results<FindList>?
     @IBOutlet weak var listsCollectionView: UICollectionView!
     @IBOutlet weak var toolBar: UIView!
     @IBOutlet weak var autoCompleteButton: UIButton!
@@ -233,18 +235,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        if let flowLayout = listsCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-//            flowLayout.itemSize.height = 24
-//        }
         
         changeDelegate = statusView as? ChangeStatusValue
-//        toggleCreateDelegate = statusView as? ToggleCreateCircle
         
+        let layout = listsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
         
         numberLabel.isHidden = false
         updateMatchesNumber(to: 0)
        
+        loadListsRealm()
         setUpButtons()
         setUpTimers()
         setUpRamReel()
