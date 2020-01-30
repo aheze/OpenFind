@@ -194,16 +194,19 @@ class ViewController: UIViewController {
             print("Error occured \(error)")
             return
         }
-        avSession.sessionPreset = .high
+        avSession.sessionPreset = .photo
         videoDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "Buffer Queue", qos: .userInteractive, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil))
         if avSession.canAddOutput(videoDataOutput) {
             avSession.addOutput(videoDataOutput)
         }
-        cameraView.videoPreviewLayer.videoGravity = .resizeAspect
-        cameraView.videoPreviewLayer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        DispatchQueue.main.async {
-            self.cameraView.videoPreviewLayer.frame = self.view.bounds
-        }
+        cameraView.videoPreviewLayer.videoGravity = .resizeAspectFill
+        //cameraView.videoPreviewLayer.position = CGPoint(x: 0.5, y: 0.5)
+        //cameraView.videoPreviewLayer.frame = self.view.bounds
+        let newBounds = view.layer.bounds
+        //avLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+        cameraView.videoPreviewLayer.bounds = newBounds
+        print(cameraView.videoPreviewLayer.bounds)
+        cameraView.videoPreviewLayer.position = CGPoint(x: newBounds.midX, y: newBounds.midY);
         avSession.startRunning()
     }
     private func isAuthorized() -> Bool {

@@ -7,8 +7,17 @@
 //
 
 import UIKit
+import SwiftEntryKit
 
 class MakeNewList: UIViewController {
+    
+    @IBOutlet weak var doneWithListButton: UIButton!
+    
+    @IBAction func doneWithListPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBOutlet weak var inputButtonsView: UIView!
     
     @IBOutlet weak var contentsContainer: UIView!
     @IBOutlet weak var contentsTextView: UITextView!
@@ -16,15 +25,77 @@ class MakeNewList: UIViewController {
     @IBOutlet weak var imageContainer: UIView!
     @IBOutlet weak var imageView: UIImageView!
     
+    weak var delegate: UIAdaptivePresentationControllerDelegate?
     
     @IBOutlet weak var titleField: UITextField!
-    @IBOutlet weak var descriptionField: UITextField!
+    @IBOutlet weak var descriptionField: UITextView!
     
     @IBAction func changeImagePressed(_ sender: UIButton) {
         print("change image")
+        var attributes = EKAttributes.centerFloat
+        attributes.entryBackground = .color(color: .white)
+        attributes.entranceAnimation = .translation
+        attributes.exitAnimation = .translation
+        attributes.displayDuration = .infinity
+        attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - 120)
+        attributes.positionConstraints.size.width = .constant(value: UIScreen.main.bounds.size.width - 60)
+        attributes.shadow = .active(with: .init(color: .black, opacity: 0.3, radius: 10, offset: .zero))
+        attributes.roundCorners = .all(radius: 10)
+        attributes.statusBar = .light
+        attributes.entryInteraction = .absorbTouches
+        attributes.lifecycleEvents.willDisappear = {
+            
+//            self.fadeSelectOptions(fadeOut: "fade out")
+//            self.selectButtonSelected = false
+//            self.enterSelectMode(entering: false)
+            if let overlay = self.view.viewWithTag(0010) {
+                UIView.animate(withDuration: 0.3, animations: {
+                    overlay.alpha = 0
+                }) { _ in
+                    overlay.removeFromSuperview()
+                }
+            }
+        }
+        let changeImageView = ImagePickerList()
+        SwiftEntryKit.display(entry: changeImageView, using: attributes)
+        let newOverlayView = UIView()
+        newOverlayView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.42578125)
+        newOverlayView.alpha = 0
+        view.addSubview(newOverlayView)
+        newOverlayView.tag = 0010
+        newOverlayView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        UIView.animate(withDuration: 0.5, animations: {
+            newOverlayView.alpha = 1
+        })
+    }
+    
+    @IBOutlet weak var doneButton: UIButton!
+    
+    @IBAction func donePressed(_ sender: Any) {
+        view.endEditing(true)
+        
     }
     
     
+    
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBAction func segmentedControl(_ sender: Any) {
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            print("First Segment Selected")
+        case 1:
+            print("Second Segment Selected")
+        default:
+            break
+        }
+    }
+    
+    @IBOutlet weak var helpButton: UIButton!
+    @IBAction func helpButtonPressed(_ sender: Any) {
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +104,15 @@ class MakeNewList: UIViewController {
         imageContainer.clipsToBounds = true
         imageContainer.layer.cornerRadius = 12
         contentsTextView.layer.cornerRadius = 6
-        
+        contentsTextView.inputAccessoryView = inputButtonsView
+        descriptionField.layer.cornerRadius = 6
+        descriptionField.layer.borderColor = #colorLiteral(red: 0.9136029482, green: 0.9136029482, blue: 0.9136029482, alpha: 1)
+        titleField.layer.borderColor = #colorLiteral(red: 0.9136029482, green: 0.9136029482, blue: 0.9136029482, alpha: 1)
+        descriptionField.layer.borderWidth = 1
+        doneWithListButton.layer.cornerRadius = 4
+        doneButton.layer.cornerRadius = 4
+        helpButton.layer.cornerRadius = 4
+        //print(titleField.layer.borderColor)
         
     }
     
@@ -46,6 +125,9 @@ extension MakeNewList: UITextViewDelegate {
         // If the replacement text is "\n" and the
         // text view is the one you want bullet points
         // for
+        switch textView.tag {
+            
+        case 11910:
         if (text == "\n") {
             print("newline")
             // If the replacement text is being added to the end of the
@@ -132,8 +214,16 @@ extension MakeNewList: UITextViewDelegate {
             
             
         }
+        
+        case 11911:
+            print("other")
+        default:
+            print("wrong text VIEW")
+    }
+        
         // Else return yes
         return true
+    
     }
     
 }

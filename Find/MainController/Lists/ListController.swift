@@ -14,8 +14,11 @@ import RealmSwift
 protocol ChangeNumberOfSelectedList: class {
     func changeLabel(to: Int)
 }
-class ListController: UIViewController, ListDeletePressed, ListLayoutDelegate {
-    
+class ListController: UIViewController, ListDeletePressed, ListLayoutDelegate, UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        print("Did Dismiss")
+        SwiftEntryKit.dismiss()
+    }
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
 //        let item = listCategories?[indexPath.row]
 //        item?.descriptionOfList.boundingRectWithSize(CGSizeMake(width, CGFloat.max), options: [.UsesFontLeading, .UsesLineFragmentOrigin], context: nil)
@@ -57,7 +60,9 @@ class ListController: UIViewController, ListDeletePressed, ListLayoutDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "makeNewListSegue" {
             print("newList")
-//            let destinationVC = segue.destination as! HistoryViewController
+            let destinationVC = segue.destination as! MakeNewList
+            destinationVC.isModalInPresentation = true
+            segue.destination.presentationController?.delegate = self
 //            destinationVC.folderURL = globalUrl
         }
 //            switch segue.identifier {
