@@ -12,6 +12,7 @@ import Vision
 extension ViewController {
   
     func fastFind(in pixelBuffer: CVPixelBuffer) {
+        //print("find")
         busyFastFinding = true
        
         DispatchQueue.global(qos: .background).async {
@@ -19,7 +20,8 @@ extension ViewController {
             let width = ciImage.extent.width
             let height = ciImage.extent.height
             self.sizeOfPixelBufferFast = CGSize(width: width, height: height)
-            
+            //print(width)
+            //print(height)
             self.aspectRatioWidthOverHeight = height / width ///opposite
             if self.aspectRatioWidthOverHeight != CGFloat(0) {
                 self.aspectRatioSucceeded = true

@@ -264,9 +264,9 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         cell.imageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.imageView.sd_imageTransition = .fade
         cell.imageView.sd_setImage(with: url)
-        if let photo = photoCategories?[newInd] {
-        
-        }
+//        if let photo = photoCategories?[newInd] {
+//
+//        }
 //        if photoCategories![newInd]?.isEmpty == true {
 //            cell.heartView.alpha = 0
 //            cell.addHeart(add: true)
@@ -346,6 +346,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             
             indexPathsSelected.append(indexPath)
             numberOfSelected += 1
+            
                 
         } else {
             print("false")
@@ -472,14 +473,14 @@ extension NewHistoryViewController {
                     
                     dateToFilepaths[date, default: [URL]()].append(individualUrl)
                     
-                    do {
-                        var photos = try Realm().objects(RealmPhoto.self)
-                        let photo = photoCategories![indexPath]
-                        
-                    } catch {
-                        print(error)
-                    }
-                    
+//                    do {
+//                        var photos = try Realm().objects(RealmPhoto.self)
+//                        let photo = photoCategories![indexPath]
+//
+//                    } catch {
+//                        print(error)
+//                    }
+//
                     
                     
                 }

@@ -13,8 +13,14 @@ protocol ButtonPressed: class {
 }
 class HistorySelectorView: UIView, ChangeNumberOfSelected {
     func changeLabel(to: Int) {
-        photoSelectLabel.fadeTransition(0.1)
-        photoSelectLabel.text = "\(to) Photos Selected"
+        if to == 1 {
+            photoSelectLabel.fadeTransition(0.1)
+            photoSelectLabel.text = "\(to) Photo Selected"
+        } else {
+            photoSelectLabel.fadeTransition(0.1)
+            photoSelectLabel.text = "\(to) Photos Selected"
+        }
+        
     }
 
     @IBOutlet weak var photoSelectLabel: UILabel!
