@@ -209,6 +209,14 @@ class ViewController: UIViewController {
         cameraView.videoPreviewLayer.position = CGPoint(x: newBounds.midX, y: newBounds.midY);
         avSession.startRunning()
     }
+    func startSession() { if !avSession.isRunning { DispatchQueue.global().async { self.avSession.startRunning() } } }
+    func stopSession() {
+        if avSession.isRunning {
+            DispatchQueue.global().async {
+                self.avSession.stopRunning()
+            }
+        }
+    }
     private func isAuthorized() -> Bool {
         let authorizationStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         switch authorizationStatus {
