@@ -9,6 +9,9 @@
 import UIKit
 import SwiftEntryKit
 
+protocol NewListMade: class {
+    func madeNewList(name: String, description: String, contents: String, imageName: String, imageColor: UIColor)
+}
 class MakeNewList: UIViewController {
     
     @IBOutlet weak var doneWithListButton: UIButton!
@@ -26,6 +29,7 @@ class MakeNewList: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     
     weak var delegate: UIAdaptivePresentationControllerDelegate?
+    weak var newListDelegate: NewListMade?
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var descriptionField: UITextView!

@@ -114,12 +114,12 @@ print("secti")
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SymbolCellID", for: indexPath) as! SymbolCell
         
-        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
+        
         let name = sfSymbolArray[indexPath.item]
-        let newImage = UIImage(systemName: name, withConfiguration: symbolConfiguration)?.withTintColor(.black, renderingMode: .alwaysOriginal)
+//        let newImage = UIImage(systemName: name, withConfiguration: symbolConfiguration)?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        cell.name = name
         
-        
-        cell.imageView.image = newImage
+        //cell.imageView.image = newImage
         
         return cell
     }
@@ -146,6 +146,7 @@ class SymbolCell: UICollectionViewCell {
 
     //static var identifier: String = "SymbolCellID"
 
+    var name = ""
     weak var imageView: UIImageView!
 
     override init(frame: CGRect) {
@@ -168,6 +169,16 @@ class SymbolCell: UICollectionViewCell {
             make.edges.equalToSuperview()
         }
         self.imageView = imageV
+        DispatchQueue.global(qos: .background).async {
+
+//            let data = NSData(contentsOfURL: NSURL(string: url)!)
+//            let img = UIImage(data: data!)!
+            DispatchQueue.main.async {
+                let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
+                let newImage = UIImage(systemName: self.name, withConfiguration: symbolConfiguration)?.withTintColor(.black, renderingMode: .alwaysOriginal)
+                self.imageView.image = newImage
+            }
+        }
         self.imageView.contentMode = .scaleAspectFit
     }
 

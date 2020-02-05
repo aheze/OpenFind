@@ -14,16 +14,14 @@ import RealmSwift
 protocol ChangeNumberOfSelectedList: class {
     func changeLabel(to: Int)
 }
-class ListController: UIViewController, ListDeletePressed, ListLayoutDelegate, UIAdaptivePresentationControllerDelegate {
+class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLayoutDelegate, UIAdaptivePresentationControllerDelegate, NewListMade {
+    
+    
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         print("Did Dismiss")
         SwiftEntryKit.dismiss()
     }
-    func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
-//        let item = listCategories?[indexPath.row]
-//        item?.descriptionOfList.boundingRectWithSize(CGSizeMake(width, CGFloat.max), options: [.UsesFontLeading, .UsesLineFragmentOrigin], context: nil)
-        return CGFloat(100)
-    }
+
     
     
     func listDeleteButtonPressed() {
@@ -62,31 +60,9 @@ class ListController: UIViewController, ListDeletePressed, ListLayoutDelegate, U
             print("newList")
             let destinationVC = segue.destination as! MakeNewList
             destinationVC.isModalInPresentation = true
+            destinationVC.newListDelegate = self
             segue.destination.presentationController?.delegate = self
-//            destinationVC.folderURL = globalUrl
         }
-//            switch segue.identifier {
-//            case "goToHistory":
-//                print("hist")
-//                let destinationVC = segue.destination as! HistoryViewController
-//                destinationVC.folderURL = globalUrl
-//            case "goToSettings":
-//                print("prepare settings")
-//                segue.destination.presentationController?.delegate = self
-//            case "goToNewHistory":
-//                segue.destination.presentationController?.delegate = self
-//                let destinationVC = segue.destination as! NewHistoryViewController
-//                destinationVC.folderURL = globalUrl
-//                //destinationVC.modalPresentationStyle = .fullScreen
-//            case "goToLists" :
-//                segue.destination.presentationController?.delegate = self
-//            case "goToFullScreen":
-//                print("full screen")
-//                default:
-//                    print("default, something wrong")
-//            }
-            
-            
     }
     
 
@@ -144,6 +120,7 @@ class ListController: UIViewController, ListDeletePressed, ListLayoutDelegate, U
         print("add")
         let newList = FindList()
         newList.name = "sdfhjk"
+        newList.descriptionOfList = "Description.....asjdkh skdjhfks dfkjhsf ksdfks fkhfkjsh dvhkdfgddfkjn ldfjglkdf glkjfl kdlfjglkd ljdflgkjd gldkfjlkd lkdjglkd fgjdl"
         newList.contents = "asjdkh skdjhfks dfkjhsf ksdfks fkhfkjsh dvhkdfgddfkjn ldfjglkdf glkjfl kdlfjglkd ljdflgkjd gldkfjlkd lkdjglkd fgjdlfkgjdfg sljdf lsjlfk sdkljfls dfkjsdl flskjfl sdkjfls dflksdjfl;dsjhf;skhf skdfj dfhgkjldsfh gkjdsfhg klsdhfgl kdsfhgkljdhsfg lhdfkghdsfklgjhsdfk gdkfjghdsklffgh sdklfjghsdlkf gskdjfhasjdkh skdjhfks dfkjhsf ksdfks fkhfkjsh dvhkdfgddfkjn ldfjglkdf glkjfl kdlfjglkd ljdflgkjd gldkfjlkd lkdjglkd fgjdlfkgjdfg sljdf lsjlfk sdkljfls dfkjsdl flskjfl sdkjfls dflksdjfl;dsjhf;skhf skdfj dfhgkjldsfh gkjdsfhg klsdhfgl kdsfhgkljdhsfg lhdfkghdsfklgjhsdfk gdkfjghdsklffgh sdklfjghsdlkf gskdjfhkasjdkh skdjhfks dfkjhsf ksdfks fkhfkjsh dvhkdfgddfkjn ldfjglkdf glkjfl kdlfjglkd ljdflgkjd gldkfjlkd lkdjglkd fgjdlfkgjdfg sljdf lsjlfk sdkljfls dfkjsdl flskjfl sdkjfls dflksdjfl;dsjhf;skhf skdfj dfhgkjldsfh gkjdsfhg klsdhfgl kdsfhgkljdhsfg lhdfkghdsfklgjhsdfk gdkfjghdsklffgh sdklfjghsdlkf gskdjfhkasjdkh skdjhfks dfkjhsf ksdfks fkhfkjsh dvhkdfgddfkjn ldfjglkdf glkjfl kdlfjglkd ljdflgkjd gldkfjlkd lkdjglkd fgjdlfkgjdfg sljdf lsjlfk sdkljfls dfkjsdl flskjfl sdkjfls dflksdjfl;dsjhf;skhf skdfj dfhgkjldsfh gkjdsfhg klsdhfgl kdsfhgkljdhsfg lhdfkghdsfklgjhsdfk gdkfjghdsklffgh sdklfjghsdlkf gskdjfhkk"
         save(findList: newList)
 //        collectionView?.performBatchUpdates({
@@ -154,7 +131,7 @@ class ListController: UIViewController, ListDeletePressed, ListLayoutDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let layout = collectionView?.collectionViewLayout as? ListsLayout {
+        if let layout = collectionView?.collectionViewLayout as? AdaptiveCollectionLayout {
           layout.delegate = self
         }
         getData()
@@ -192,51 +169,66 @@ class ListController: UIViewController, ListDeletePressed, ListLayoutDelegate, U
 }
 
 extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func madeNewList(name: String, description: String, contents: String, imageName: String, imageColor: UIColor) {
+        print("new list")
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return listCategories?.count ?? 1
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        cell.alpha = 0
-//        UIView.animate(withDuration: 0.8, animations: {
-//            var newFrame = cell.frame
-//            cell.alpha = 1
-//        })
-//    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "listCollectionCell", for: indexPath) as! ListCollectionCell
         let listT = listCategories?[indexPath.item]
         cell.title.text = listT?.name
         cell.nameDescription.text = listT?.descriptionOfList
+        cell.contentsList.text = listT?.contents
         
         
         
         return cell
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        print(collectionView.contentInset.left)
-        let itemSize = (collectionView.frame.width - (16 + 16 + 8)) / 2 ///section insets is 16
-        print(itemSize)
-       return CGSize(width: itemSize, height: itemSize)
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+    
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        heightForTextAtIndexPath indexPath: IndexPath) -> CGFloat {
+        
+        guard let item = listCategories?[indexPath.item] else { return 0}
+        
+            let textHeight = item.contents.count
+            // I get text height and as my font equal ~1pt, it's multiply and than addition it. Maybe you need to
+            /// modify that value for greater stability height calculations.
+            /// And you can get there image height for adding it to
+            let extensionHeight = Double(textHeight) * 0.70
+            // It's for example, when you need to remove height
+            //let dateHeight: CGFloat = item.expiring == nil ? -12.5 : 0
+            return AdaptiveCollectionConfig.cellBaseHeight + CGFloat(textHeight) + CGFloat(extensionHeight)
+            //+ dateHeight
+        
     }
     
-    func collectionView(_ collectionView: UICollectionView, heightForDescriptionAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
-        let item = listCategories?[indexPath.row]
-        let itemSize = item?.contents.heightWithConstrainedWidth(width: width-24, font: UIFont.systemFont(ofSize: 10))
-        
-        print("DescSize: \(itemSize)")
-//        let character = charactersData[indexPath.item]
-//        let descriptionHeight = heightForText(character.description, width: width-24)
-        let height = 4 + 17 + 4 + Int(itemSize ?? CGFloat(10)) + 12
-        return CGFloat(height)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        print(collectionView.contentInset.left)
+//        let itemSize = (collectionView.frame.width - (16 + 16 + 8)) / 2 ///section insets is 16
+//        print(itemSize)
+//       return CGSize(width: itemSize, height: itemSize)
+//    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        return 8
+//    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 8
+//    }
+    
+//    func collectionView(_ collectionView: UICollectionView, heightForDescriptionAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
+//        let item = listCategories?[indexPath.row]
+//        let itemSize = item?.contents.heightWithConstrainedWidth(width: width-24, font: UIFont.systemFont(ofSize: 10))
+//
+//        print("DescSize: \(itemSize)")
+////        let character = charactersData[indexPath.item]
+////        let descriptionHeight = heightForText(character.description, width: width-24)
+//        let height = 4 + 17 + 4 + Int(itemSize ?? CGFloat(10)) + 12
+//        return CGFloat(height)
+//    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("did")
         if selectionMode == true {

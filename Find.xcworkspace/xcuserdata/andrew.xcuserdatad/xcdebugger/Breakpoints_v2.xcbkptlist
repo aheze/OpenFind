@@ -314,8 +314,8 @@
             filePath = "Find/MainController/Lists/ListController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "ListController"
             landmarkType = "3">
          </BreakpointContent>
