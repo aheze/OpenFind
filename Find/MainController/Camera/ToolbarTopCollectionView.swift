@@ -17,18 +17,18 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return listCategories?.count ?? 0
     }
-    func save(list: FindList) {
-        do {
-            try realm.write {
-                realm.add(list)
-            }
-        } catch {
-            print("Error saving category \(error)")
-        }
-        
-        listsCollectionView.reloadData()
-        
-    }
+//    func save(list: FindList) {
+//        do {
+//            try realm.write {
+//                realm.add(list)
+//            }
+//        } catch {
+//            print("Error saving category \(error)")
+//        }
+//
+//        listsCollectionView.reloadData()
+//
+//    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = listsCollectionView.dequeueReusableCell(withReuseIdentifier: "tooltopCell", for: indexPath) as! ToolbarTopCell
         let title = listCategories?[indexPath.row].name

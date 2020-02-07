@@ -16,5 +16,5 @@ class FindList: Object {
     @objc dynamic var contents = ""
     @objc dynamic var iconImageName = ""
     @objc dynamic var iconColorName = ""
-  //@objc dynamic var created = Date()
+    @objc dynamic var dateCreated = Date()
 }

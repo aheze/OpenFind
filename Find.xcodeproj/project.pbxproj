@@ -67,9 +67,9 @@
 		4951701F235AC8A800E00D83 /* RAMReel.h in Sources */ = {isa = PBXBuildFile; fileRef = 49517010235AC56D00E00D83 /* RAMReel.h */; };
 		49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3223D65AA4009308CA /* ListCollectionCell.swift */; };
 		49569B3523D6919E009308CA /* ListsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3423D6919E009308CA /* ListsLayout.swift */; };
-		49569B3923D8087E009308CA /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3823D8087E009308CA /* testView.swift */; };
 		4957157C2368AF69007BF68B /* RippleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4957157B2368AF69007BF68B /* RippleEffect.swift */; };
 		4957157E2368B022007BF68B /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4957157D2368B022007BF68B /* ViewExtensions.swift */; };
+		49585DCF23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49585DCE23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift */; };
 		495ECCA4238A3D0B00E7D966 /* HistoryFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCA3238A3D0B00E7D966 /* HistoryFormat.swift */; };
 		495ECCA7238CF76C00E7D966 /* NewHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCA6238CF76C00E7D966 /* NewHistoryViewController.swift */; };
 		495ECCA9238CF7BD00E7D966 /* HPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */; };
@@ -178,9 +178,9 @@
 		49517014235AC56D00E00D83 /* RamGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RamGradientView.swift; sourceTree = "<group>"; };
 		49569B3223D65AA4009308CA /* ListCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionCell.swift; sourceTree = "<group>"; };
 		49569B3423D6919E009308CA /* ListsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsLayout.swift; sourceTree = "<group>"; };
-		49569B3823D8087E009308CA /* testView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView.swift; sourceTree = "<group>"; };
 		4957157B2368AF69007BF68B /* RippleEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleEffect.swift; sourceTree = "<group>"; };
 		4957157D2368B022007BF68B /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		49585DCE23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftEntryKitTemplates.swift; sourceTree = "<group>"; };
 		495ECCA3238A3D0B00E7D966 /* HistoryFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFormat.swift; sourceTree = "<group>"; };
 		495ECCA6238CF76C00E7D966 /* NewHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHistoryViewController.swift; sourceTree = "<group>"; };
 		495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPhotoCell.swift; sourceTree = "<group>"; };
@@ -364,6 +364,23 @@
 			path = ReelSearchBar;
 			sourceTree = "<group>";
 		};
+		49585DCC23ED0B8D003AB768 /* Select List SEK */ = {
+			isa = PBXGroup;
+			children = (
+				4928525B23D61D230048EC13 /* ListsSelect.xib */,
+				4928525F23D61F570048EC13 /* ListSelect.swift */,
+			);
+			path = "Select List SEK";
+			sourceTree = "<group>";
+		};
+		49585DCD23ED0C9F003AB768 /* SEK */ = {
+			isa = PBXGroup;
+			children = (
+				49585DCE23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift */,
+			);
+			path = SEK;
+			sourceTree = "<group>";
+		};
 		495ECCA5238CF74500E7D966 /* New History */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,6 +415,7 @@
 		496937382353C219009CA41A /* MainController */ = {
 			isa = PBXGroup;
 			children = (
+				49585DCD23ED0C9F003AB768 /* SEK */,
 				4928524E23D14D5A0048EC13 /* RealmFiles */,
 				4988FC4623BEF82D00199635 /* Lists */,
 				4969373C2353C277009CA41A /* Camera */,
@@ -451,6 +469,7 @@
 			children = (
 				496937352353C1E9009CA41A /* Modes */,
 				4999AC972353A80A00AB06A7 /* ViewController.swift */,
+				4928525723D539F40048EC13 /* ToolbarTopCollectionView.swift */,
 				4999AC992353A80A00AB06A7 /* Main.storyboard */,
 				4999AC9E2353A81100AB06A7 /* LaunchScreen.storyboard */,
 				49F7B1572353FE7E0099FA62 /* Component.swift */,
@@ -481,14 +500,11 @@
 			children = (
 				4966B71123E1251200A8523A /* ChangeImage */,
 				4928525923D617270048EC13 /* ListController.swift */,
-				4988FC4723BEF89600199635 /* ListModel.swift */,
-				4928525723D539F40048EC13 /* ToolbarTopCollectionView.swift */,
-				4928525B23D61D230048EC13 /* ListsSelect.xib */,
-				4928525F23D61F570048EC13 /* ListSelect.swift */,
 				49569B3223D65AA4009308CA /* ListCollectionCell.swift */,
-				49569B3423D6919E009308CA /* ListsLayout.swift */,
-				49569B3823D8087E009308CA /* testView.swift */,
 				4966B70923DE98C800A8523A /* MakeNewList.swift */,
+				49585DCC23ED0B8D003AB768 /* Select List SEK */,
+				49569B3423D6919E009308CA /* ListsLayout.swift */,
+				4988FC4723BEF89600199635 /* ListModel.swift */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -799,13 +815,13 @@
 				4917CE8123C059F6002EA20B /* StartSceneView.swift in Sources */,
 				495ECCA9238CF7BD00E7D966 /* HPhotoCell.swift in Sources */,
 				4904524E2379DB270046570D /* HistoryViewController.swift in Sources */,
-				49569B3923D8087E009308CA /* testView.swift in Sources */,
 				490DA75723CBB871000AF57D /* Styles.swift in Sources */,
 				49089E1F238EFFFA0070A70C /* FooterView.swift in Sources */,
 				49517015235AC56D00E00D83 /* CollectionViewLayout.swift in Sources */,
 				49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */,
 				4979A39323AF3C4F00B09380 /* FastVisionHandler.swift in Sources */,
 				494DF11B23961ADA0076412D /* BDVCTranscript.swift in Sources */,
+				49585DCF23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift in Sources */,
 				49368CB023905D3300B67C4A /* PulleyViewController.swift in Sources */,
 				490DA76023CEC164000AF57D /* StyleKit.swift in Sources */,
 				4979A39023AF3A4800B09380 /* FastMode.swift in Sources */,

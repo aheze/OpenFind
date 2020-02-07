@@ -22,10 +22,7 @@ struct AdaptiveCollectionConfig {
     
     static let bannerHeight: CGFloat = 120
     static let placeholderHeight: CGFloat = 210
-    static var cellBaseHeight: CGFloat {
-        //Need in project detect padding/height for smaller devices than iPhone 6
-        return UIDevice.isPhoneSE ? 190 : 210
-    }
+    static var cellBaseHeight: CGFloat = 159
     static let numberOfColumns = 2
     static var cellPadding: CGFloat {
         return UIDevice.isPhoneSE ? 4 : 8
@@ -43,6 +40,7 @@ extension UIDevice {
     
 }
 class AdaptiveCollectionLayout: UICollectionViewLayout {
+    
 
     weak var delegate: AdaptiveCollectionLayoutDelegate!
     // Cache is array of matrix with coordinates cell in X,Y
@@ -51,6 +49,7 @@ class AdaptiveCollectionLayout: UICollectionViewLayout {
     fileprivate var cache = [UICollectionViewLayoutAttributes]()
     // Determinate height of content after first loop
     // Increment as content cell are added
+    
     fileprivate var contentHeight: CGFloat = 0
 
     fileprivate var contentWidth: CGFloat {
@@ -67,12 +66,14 @@ class AdaptiveCollectionLayout: UICollectionViewLayout {
 
     override func prepare() {
         super.prepare()
+        print("1++++++++")
         // Need to clear cache for invalidate layout
         self.cache.removeAll()
 
         guard cache.isEmpty, let collectionView = collectionView else {
             return
         }
+        contentHeight = 0
         // If we had 2 sections we generate first elements and than get that offset and call it again
         // For example first section is "onboarding"
         if collectionView.numberOfSections > 1 {
@@ -85,7 +86,7 @@ class AdaptiveCollectionLayout: UICollectionViewLayout {
     }
 
     func prepareForMain(collectionView: UICollectionView, section: Int, numberOfColumns: Int, inYOffset: CGFloat? = nil) -> CGFloat? {
-
+        print("2++++++++")
         let columnWidth = contentWidth / CGFloat(numberOfColumns)
         var xOffset = [CGFloat]()
         for column in 0..<numberOfColumns {
@@ -295,3 +296,27 @@ class AdaptiveCollectionLayout: UICollectionViewLayout {
 //
 //
 //}
+extension UICollectionViewFlowLayout {
+    open override func invalidationContext(forInteractivelyMovingItems targetIndexPaths: [IndexPath], withTargetPosition targetPosition: CGPoint, previousIndexPaths: [IndexPath], previousPosition: CGPoint) -> UICollectionViewLayoutInvalidationContext {
+
+        let context = super.invalidationContext(forInteractivelyMovingItems: targetIndexPaths, withTargetPosition: targetPosition, previousIndexPaths: previousIndexPaths, previousPosition: previousPosition)
+
+        //Check that the movement has actually happeneds
+        if previousIndexPaths.first!.item != targetIndexPaths.first!.item {
+            collectionView?.dataSource?.collectionView?(collectionView!, moveItemAt: previousIndexPaths.first!, to: targetIndexPaths.last!)
+        }
+
+        return context
+    }
+
+    open override func invalidationContextForEndingInteractiveMovementOfItems(toFinalIndexPaths indexPaths: [IndexPath], previousIndexPaths: [IndexPath], movementCancelled: Bool) -> UICollectionViewLayoutInvalidationContext {
+        return super.invalidationContextForEndingInteractiveMovementOfItems(toFinalIndexPaths: indexPaths, previousIndexPaths: previousIndexPaths, movementCancelled: movementCancelled)
+    }
+
+    //@available(iOS 9.0, *) //If you'd like to apply some formatting as the dimming of the movable cell
+    open override func layoutAttributesForInteractivelyMovingItem(at indexPath: IndexPath, withTargetPosition position: CGPoint) -> UICollectionViewLayoutAttributes {
+        let attributes = super.layoutAttributesForInteractivelyMovingItem(at: indexPath, withTargetPosition: position)
+        attributes.alpha = 0.8
+        return attributes
+    }
+}

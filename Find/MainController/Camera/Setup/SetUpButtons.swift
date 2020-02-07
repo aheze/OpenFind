@@ -21,6 +21,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         }
         SwiftEntryKit.dismiss()
         startVideo(finish: "end")
+        listsCollectionView.reloadData()
     }
     func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
         print("Start Dismiss")

@@ -16,6 +16,7 @@ protocol ChangeNumberOfSelectedList: class {
 }
 class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLayoutDelegate, UIAdaptivePresentationControllerDelegate, NewListMade {
     
+    var cellHeights = [CGFloat]()
     
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         print("Did Dismiss")
@@ -23,18 +24,41 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
     }
 
     
-    
+    func sortLists() {
+        listCategories = listCategories!.sorted(byKeyPath: "dateCreated", ascending: false)
+    }
+    func exitSwiftEntryKit() {
+        SwiftEntryKit.dismiss()
+        fadeSelectOptions(fadeOut: "fade out")
+        selectButtonSelected = false
+        enterSelectMode(entering: false)
+    }
     func listDeleteButtonPressed() {
+        
+        //print("Delete:")
         //let indexes = indexPathsSelected
+        sortLists()
         var tempLists = [FindList]()
+        var tempInts = [Int]()
         var arrayOfIndexPaths = [IndexPath]()
         for index in indexPathsSelected {
             if let cat = listCategories?[index] {
                 tempLists.append(cat)
+                tempInts.append(index)
                 arrayOfIndexPaths.append(IndexPath(item: index, section: 0))
+                
             }
         }
-        print(tempLists.count)
+        //for temp in tempInts
+//        var array1 = ["a", "b", "c", "d", "e"]
+//        let array2 = ["a", "c", "d"]
+        //cellHeights = tempInts.filter { !cellHeights.contains($0) }
+        print("cellHeights    : \(cellHeights)")
+        print("list categories    : \(listCategories)")
+//        for listT in tempLists {
+//
+//        }
+        print("Index selected: \(indexPathsSelected)")
         do {
             try realm.write {
                 realm.delete(tempLists)
@@ -42,17 +66,24 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         } catch {
             print("error deleting category \(error)")
         }
+        addHeight()
         //collectionView.reloadData()
+        //print("sldjfsldfksj     d")
         collectionView.deleteItems(at: arrayOfIndexPaths)
+        //print("sldjfsldfksjd  sfds")
         indexPathsSelected.removeAll()
         numberOfSelected -= tempLists.count
         if listCategories?.count == 0 {
             SwiftEntryKit.dismiss()
         }
+        //print("sldjfsldfk            sjd")
+        //collectionView.reloadData()
 //        let realm = try! Realm()
 //        try! realm.write {
 //            realm.delete(newVideos)
 //        }
+        SwiftEntryKit.dismiss()
+        //exitSwiftEntryKit()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -116,16 +147,8 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
     
     
     @IBAction func addListPressed(_ sender: UIButton) {
+        exitSwiftEntryKit()
         performSegue(withIdentifier: "makeNewListSegue", sender: self)
-        print("add")
-        let newList = FindList()
-        newList.name = "sdfhjk"
-        newList.descriptionOfList = "Description.....asjdkh skdjhfks dfkjhsf ksdfks fkhfkjsh dvhkdfgddfkjn ldfjglkdf glkjfl kdlfjglkd ljdflgkjd gldkfjlkd lkdjglkd fgjdl"
-        newList.contents = "asjdkh skdjhfks dfkjhsf ksdfks fkhfkjsh dvhkdfgddfkjn ldfjglkdf glkjfl kdlfjglkd ljdflgkjd gldkfjlkd lkdjglkd fgjdlfkgjdfg sljdf lsjlfk sdkljfls dfkjsdl flskjfl sdkjfls dflksdjfl;dsjhf;skhf skdfj dfhgkjldsfh gkjdsfhg klsdhfgl kdsfhgkljdhsfg lhdfkghdsfklgjhsdfk gdkfjghdsklffgh sdklfjghsdlkf gskdjfhasjdkh skdjhfks dfkjhsf ksdfks fkhfkjsh dvhkdfgddfkjn ldfjglkdf glkjfl kdlfjglkd ljdflgkjd gldkfjlkd lkdjglkd fgjdlfkgjdfg sljdf lsjlfk sdkljfls dfkjsdl flskjfl sdkjfls dflksdjfl;dsjhf;skhf skdfj dfhgkjldsfh gkjdsfhg klsdhfgl kdsfhgkljdhsfg lhdfkghdsfklgjhsdfk gdkfjghdsklffgh sdklfjghsdlkf gskdjfhkasjdkh skdjhfks dfkjhsf ksdfks fkhfkjsh dvhkdfgddfkjn ldfjglkdf glkjfl kdlfjglkd ljdflgkjd gldkfjlkd lkdjglkd fgjdlfkgjdfg sljdf lsjlfk sdkljfls dfkjsdl flskjfl sdkjfls dflksdjfl;dsjhf;skhf skdfj dfhgkjldsfh gkjdsfhg klsdhfgl kdsfhgkljdhsfg lhdfkghdsfklgjhsdfk gdkfjghdsklffgh sdklfjghsdlkf gskdjfhkasjdkh skdjhfks dfkjhsf ksdfks fkhfkjsh dvhkdfgddfkjn ldfjglkdf glkjfl kdlfjglkd ljdflgkjd gldkfjlkd lkdjglkd fgjdlfkgjdfg sljdf lsjlfk sdkljfls dfkjsdl flskjfl sdkjfls dflksdjfl;dsjhf;skhf skdfj dfhgkjldsfh gkjdsfhg klsdhfgl kdsfhgkljdhsfg lhdfkghdsfklgjhsdfk gdkfjghdsklffgh sdklfjghsdlkf gskdjfhkk"
-        save(findList: newList)
-//        collectionView?.performBatchUpdates({
-//          self.collectionView?.insertItems(at: [coll])
-//        }, completion: nil)
     }
     
     
@@ -134,8 +157,13 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         if let layout = collectionView?.collectionViewLayout as? AdaptiveCollectionLayout {
           layout.delegate = self
         }
+        let padding = AdaptiveCollectionConfig.cellPadding
+        collectionView.contentInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
         getData()
         selectButton.layer.cornerRadius = 4
+       // sortLists()
+        addHeight()
+        print("Cellheights: \(cellHeights)")
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
@@ -144,7 +172,29 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
     }
     func getData() {
         listCategories = realm.objects(FindList.self)
+        sortLists()
         collectionView.reloadData()
+    }
+    func addHeight() {
+        cellHeights.removeAll()
+        if let cats = listCategories {
+            for cell in cats {
+                let sizeOfWidth = ((collectionView.bounds.width - (AdaptiveCollectionConfig.cellPadding * 3)) / 2) - 20
+                print("size of Width: \(sizeOfWidth)")
+                //let sizeOfWidth = collectionView.frame.size.width - (AdaptiveCollectionConfig.cellPadding * 3) - 20
+                
+                let newDescHeight = cell.descriptionOfList.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
+                let newContentsHeight = cell.contents.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
+                print(newDescHeight)
+                print(newContentsHeight)
+                
+            
+                let extensionHeight = newDescHeight + newContentsHeight
+                cellHeights.append(extensionHeight)
+            }
+        }
+        print("add height - height: \(cellHeights)")
+        print("list categories    : \(listCategories)")
     }
     func save(findList: FindList) {
         do {
@@ -154,12 +204,14 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         } catch {
             print("Error saving category \(error)")
         }
-        
+        sortLists()
+        addHeight()
         //collectionView.reloadData()
         let indexPath = IndexPath(
-            item: (self.listCategories?.count ?? 1) - 1,
+            item: 0,
            section: 0
          )
+        //collectionView.reloadData()
         collectionView?.performBatchUpdates({
             self.collectionView?.insertItems(at: [indexPath])
         }, completion: nil)
@@ -169,7 +221,17 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
 }
 
 extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    func madeNewList(name: String, description: String, contents: String, imageName: String, imageColor: UIColor) {
+    func madeNewList(name: String, description: String, contents: String, imageName: String, imageColor: String) {
+        print("add")
+        let newList = FindList()
+        newList.name = name
+        newList.descriptionOfList = description
+        newList.contents = contents
+        newList.iconImageName = imageName
+        newList.iconColorName = imageColor
+        newList.dateCreated = Date()
+       //newList.indexOrder = listCategories!.count
+        save(findList: newList)
         print("new list")
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -181,7 +243,8 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
         let listT = listCategories?[indexPath.item]
         cell.title.text = listT?.name
         cell.nameDescription.text = listT?.descriptionOfList
-        cell.contentsList.text = listT?.contents
+        cell.contentsList.text = listT?.contents.replacingOccurrences(of: " \u{2022} ", with: "", options: .literal, range: nil)
+        cell.contentView.layer.cornerRadius = 10
         
         
         
@@ -191,44 +254,36 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
     
     func collectionView(_ collectionView: UICollectionView,
                         heightForTextAtIndexPath indexPath: IndexPath) -> CGFloat {
+        print("Height for text")
+        print("ListCount: \(listCategories?.count)")
+        guard let cell = listCategories?[indexPath.item] else { print("ERRORRRRRR"); return 0 }
         
-        guard let item = listCategories?[indexPath.item] else { return 0}
+        //let cell = item.contents.count
+        // I get text height and as my font equal ~1pt, it's multiply and than addition it. Maybe you need to
+        /// modify that value for greater stability height calculations.
+        /// And you can get there image height for adding it to
+        let sizeOfWidth = ((collectionView.bounds.width - (AdaptiveCollectionConfig.cellPadding * 3)) / 2) - 20
+        print("size of Width: \(sizeOfWidth)")
+        //let sizeOfWidth = collectionView.frame.size.width - (AdaptiveCollectionConfig.cellPadding * 3) - 20
         
-            let textHeight = item.contents.count
-            // I get text height and as my font equal ~1pt, it's multiply and than addition it. Maybe you need to
-            /// modify that value for greater stability height calculations.
-            /// And you can get there image height for adding it to
-            let extensionHeight = Double(textHeight) * 0.70
-            // It's for example, when you need to remove height
-            //let dateHeight: CGFloat = item.expiring == nil ? -12.5 : 0
-            return AdaptiveCollectionConfig.cellBaseHeight + CGFloat(textHeight) + CGFloat(extensionHeight)
-            //+ dateHeight
+        let newDescHeight = cell.descriptionOfList.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
+        let newContentsHeight = cell.contents.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
+        //print(newDescHeight)
+       // print(newContentsHeight)
+        
+    
+        let extensionHeight = newDescHeight + newContentsHeight
+        // It's for example, when you need to remove height
+        //let dateHeight: CGFloat = item.expiring == nil ? -12.5 : 0
+        //print("Cell: \(cell)")
+        print("height: \(AdaptiveCollectionConfig.cellBaseHeight + extensionHeight + 45)")
+        print(cellHeights[indexPath.item])
+        return AdaptiveCollectionConfig.cellBaseHeight + cellHeights[indexPath.item] + 45 //+ 300
+        //+ dateHeight
+        
         
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        print(collectionView.contentInset.left)
-//        let itemSize = (collectionView.frame.width - (16 + 16 + 8)) / 2 ///section insets is 16
-//        print(itemSize)
-//       return CGSize(width: itemSize, height: itemSize)
-//    }
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 8
-//    }
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 8
-//    }
-    
-//    func collectionView(_ collectionView: UICollectionView, heightForDescriptionAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
-//        let item = listCategories?[indexPath.row]
-//        let itemSize = item?.contents.heightWithConstrainedWidth(width: width-24, font: UIFont.systemFont(ofSize: 10))
-//
-//        print("DescSize: \(itemSize)")
-////        let character = charactersData[indexPath.item]
-////        let descriptionHeight = heightForText(character.description, width: width-24)
-//        let height = 4 + 17 + 4 + Int(itemSize ?? CGFloat(10)) + 12
-//        return CGFloat(height)
-//    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("did")
         if selectionMode == true {
@@ -269,6 +324,8 @@ extension String {
 }
 
 extension ListController {
+    
+ 
     //MARK: Selection
     func deselectAllItems() {
         print("deselc")

@@ -10,17 +10,26 @@ import UIKit
 import SwiftEntryKit
 
 protocol NewListMade: class {
-    func madeNewList(name: String, description: String, contents: String, imageName: String, imageColor: UIColor)
+    func madeNewList(name: String, description: String, contents: String, imageName: String, imageColor: String)
 }
-class MakeNewList: UIViewController {
+class MakeNewList: UIViewController  {
     
     @IBOutlet weak var doneWithListButton: UIButton!
     
     @IBAction func doneWithListPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        if contentsTextView.text.isEmpty {
+            SwiftEntryKitTemplates().displaySEK(message: "Can't create a list with no contents!", backgroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), location: .top)
+        } else {
+            view.endEditing(true)
+            print("name: \(name), description: \(descriptionOfList), contents: \(contents), imageName: \(iconImageName), imageColor: \(iconColorName)")
+            newListDelegate?.madeNewList(name: name, description: descriptionOfList, contents: contents, imageName: iconImageName, imageColor: iconColorName)
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
-    @IBOutlet weak var inputButtonsView: UIView!
+    @IBOutlet var titlesInputView: UIView!
+    @IBOutlet var descInputView: UIView!
+    @IBOutlet var inputButtonsView: UIView!
     
     @IBOutlet weak var contentsContainer: UIView!
     @IBOutlet weak var contentsTextView: UITextView!
@@ -33,6 +42,13 @@ class MakeNewList: UIViewController {
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var descriptionField: UITextView!
+    var placeholderLabel : UILabel!
+    
+    var name = "Untitled"
+    var descriptionOfList = "No description..."
+    var contents = ""
+    var iconImageName = "square.grid.2x2"
+    var iconColorName = "00AEEF"
     
     @IBAction func changeImagePressed(_ sender: UIButton) {
         print("change image")
@@ -74,12 +90,23 @@ class MakeNewList: UIViewController {
             newOverlayView.alpha = 1
         })
     }
+    @IBOutlet weak var descDoneButton: UIButton!
+    @IBAction func descButtonDonePressed(_ sender: Any) {
+        view.endEditing(true)
+        //print("asd")
+        //name = titleField.text ?? "Untitled"
+    }
+    
+    @IBOutlet weak var titlesDoneButton: UIButton!
+    @IBAction func titlesButtonDonePressed(_ sender: Any) {
+        view.endEditing(true)
+        //descriptionOfList = descriptionField.text
+    }
     
     @IBOutlet weak var doneButton: UIButton!
-    
     @IBAction func donePressed(_ sender: Any) {
         view.endEditing(true)
-        
+        //contents = contentsTextView.text
     }
     
     
@@ -104,26 +131,84 @@ class MakeNewList: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpViews()
+        //print(titleField.layer.borderColor)
+        
+    }
+    func setUpViews() {
         contentsContainer.layer.cornerRadius = 12
         imageContainer.clipsToBounds = true
         imageContainer.layer.cornerRadius = 12
         contentsTextView.layer.cornerRadius = 6
+        
         contentsTextView.inputAccessoryView = inputButtonsView
-        descriptionField.layer.cornerRadius = 6
-        descriptionField.layer.borderColor = #colorLiteral(red: 0.9136029482, green: 0.9136029482, blue: 0.9136029482, alpha: 1)
-        titleField.layer.borderColor = #colorLiteral(red: 0.9136029482, green: 0.9136029482, blue: 0.9136029482, alpha: 1)
+        titleField.inputAccessoryView = titlesInputView
+        descriptionField.inputAccessoryView = descInputView
+        
+        //titleField.tag = 10901
+        //descriptionField.tag = 10902
+        //contentsTextView.tag = 10903
+        
+        descriptionField.layer.cornerRadius = 5.25
         descriptionField.layer.borderWidth = 1
-        doneWithListButton.layer.cornerRadius = 4
-        doneButton.layer.cornerRadius = 4
+        descriptionField.layer.borderColor = #colorLiteral(red: 0.9136029482, green: 0.9136029482, blue: 0.9136029482, alpha: 1)
+        
+        titleField.layer.cornerRadius = 5.25
+        titleField.layer.borderColor = #colorLiteral(red: 0.9136029482, green: 0.9136029482, blue: 0.9136029482, alpha: 1)
+        titleField.layer.borderWidth = 1
+        //titleField.layer.borderWidth = 1
+        
         helpButton.layer.cornerRadius = 4
-        //print(titleField.layer.borderColor)
+        
+        doneWithListButton.layer.cornerRadius = 4
+        descDoneButton.layer.cornerRadius = 4
+        titlesDoneButton.layer.cornerRadius = 4
+        
+        doneButton.layer.cornerRadius = 4
+        
+        placeholderLabel = UILabel()
+        placeholderLabel.text = "Enter some text..."
+        placeholderLabel.font = UIFont.systemFont(ofSize: (descriptionField.font?.pointSize)!)
+        placeholderLabel.sizeToFit()
+        descriptionField.addSubview(placeholderLabel)
+        placeholderLabel.frame.origin = CGPoint(x: 5, y: (descriptionField.font?.pointSize)! / 2)
+        placeholderLabel.textColor = UIColor.lightGray
+        placeholderLabel.isHidden = !descriptionField.text.isEmpty
         
     }
     
 }
 
-extension MakeNewList: UITextViewDelegate {
+extension MakeNewList: UITextViewDelegate, UITextFieldDelegate {
     
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.tag == 10902 {
+            //print("shkdhkusdf")
+            placeholderLabel.isHidden = !descriptionField.text.isEmpty
+        }
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("text FIELD End")
+        if textField.tag == 10901 {
+            name = titleField.text ?? "Untitled"
+            print("sfkh")
+        }
+    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        print("textViewEnd")
+        switch textView.tag {
+        case 10902:
+            print("end 10902")
+            print(descriptionField.text)
+            descriptionOfList = descriptionField.text
+        case 10903:
+            print("end 10903")
+            contents = contentsTextView.text
+        default:
+            break
+        }
+        print("END")
+    }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         // If the replacement text is "\n" and the
@@ -131,7 +216,7 @@ extension MakeNewList: UITextViewDelegate {
         // for
         switch textView.tag {
             
-        case 11910:
+        case 10903:
         if (text == "\n") {
             print("newline")
             // If the replacement text is being added to the end of the
@@ -178,11 +263,16 @@ extension MakeNewList: UITextViewDelegate {
 
 
         } else if text == "" && range.length > 0 { //Backspace
-            
+            print(range.length)
+            if range.location == 2 {
+                return false ///don't delete first bullet point
+            }
             let beginning: UITextPosition = textView.beginningOfDocument
             if let cursorRange = textView.selectedTextRange {
+                print("position1: \(textView.selectedTextRange)")
                 // get the position one character before the cursor start position
                 if let newPosition = textView.position(from: cursorRange.start, offset: -2) {
+                    print("position: \(newPosition)")
                     if let checkTextRange = textView.textRange(from: newPosition, to: cursorRange.start) {
                         if let checkText = textView.text(in: checkTextRange) {
                             if textView.text.count >= 3 {
@@ -218,9 +308,7 @@ extension MakeNewList: UITextViewDelegate {
             
             
         }
-        
-        case 11911:
-            print("other")
+            
         default:
             print("wrong text VIEW")
     }
