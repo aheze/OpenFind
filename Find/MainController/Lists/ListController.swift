@@ -53,8 +53,8 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
 //        var array1 = ["a", "b", "c", "d", "e"]
 //        let array2 = ["a", "c", "d"]
         //cellHeights = tempInts.filter { !cellHeights.contains($0) }
-        print("cellHeights    : \(cellHeights)")
-        print("list categories    : \(listCategories)")
+       // print("cellHeights    : \(cellHeights)")
+       // print("list categories    : \(listCategories)")
 //        for listT in tempLists {
 //
 //        }
@@ -180,21 +180,21 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         if let cats = listCategories {
             for cell in cats {
                 let sizeOfWidth = ((collectionView.bounds.width - (AdaptiveCollectionConfig.cellPadding * 3)) / 2) - 20
-                print("size of Width: \(sizeOfWidth)")
+               // print("size of Width: \(sizeOfWidth)")
                 //let sizeOfWidth = collectionView.frame.size.width - (AdaptiveCollectionConfig.cellPadding * 3) - 20
                 
                 let newDescHeight = cell.descriptionOfList.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
                 let newContentsHeight = cell.contents.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
-                print(newDescHeight)
-                print(newContentsHeight)
+               // print(newDescHeight)
+             //   print(newContentsHeight)
                 
             
                 let extensionHeight = newDescHeight + newContentsHeight
                 cellHeights.append(extensionHeight)
             }
         }
-        print("add height - height: \(cellHeights)")
-        print("list categories    : \(listCategories)")
+      //  print("add height - height: \(cellHeights)")
+      //  print("list categories    : \(listCategories)")
     }
     func save(findList: FindList) {
         do {
@@ -254,8 +254,8 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
     
     func collectionView(_ collectionView: UICollectionView,
                         heightForTextAtIndexPath indexPath: IndexPath) -> CGFloat {
-        print("Height for text")
-        print("ListCount: \(listCategories?.count)")
+       // print("Height for text")
+       // print("ListCount: \(listCategories?.count)")
         guard let cell = listCategories?[indexPath.item] else { print("ERRORRRRRR"); return 0 }
         
         //let cell = item.contents.count
@@ -263,7 +263,7 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
         /// modify that value for greater stability height calculations.
         /// And you can get there image height for adding it to
         let sizeOfWidth = ((collectionView.bounds.width - (AdaptiveCollectionConfig.cellPadding * 3)) / 2) - 20
-        print("size of Width: \(sizeOfWidth)")
+      //  print("size of Width: \(sizeOfWidth)")
         //let sizeOfWidth = collectionView.frame.size.width - (AdaptiveCollectionConfig.cellPadding * 3) - 20
         
         let newDescHeight = cell.descriptionOfList.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
@@ -276,9 +276,9 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
         // It's for example, when you need to remove height
         //let dateHeight: CGFloat = item.expiring == nil ? -12.5 : 0
         //print("Cell: \(cell)")
-        print("height: \(AdaptiveCollectionConfig.cellBaseHeight + extensionHeight + 45)")
-        print(cellHeights[indexPath.item])
-        return AdaptiveCollectionConfig.cellBaseHeight + cellHeights[indexPath.item] + 45 //+ 300
+      //  print("height: \(AdaptiveCollectionConfig.cellBaseHeight + extensionHeight + 45)")
+      //  print(cellHeights[indexPath.item])
+        return AdaptiveCollectionConfig.cellBaseHeight + cellHeights[indexPath.item] + 25 //+ 300
         //+ dateHeight
         
         

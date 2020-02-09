@@ -15,7 +15,7 @@ enum EntryLocation {
     case bottom
 }
 class SwiftEntryKitTemplates {
-    func displaySEK(message: String, backgroundColor: UIColor, textColor: UIColor, location: EntryLocation = .top)  {
+    func displaySEK(message: String, backgroundColor: UIColor, textColor: UIColor, location: EntryLocation = .top, duration: CGFloat = 0.7)  {
         
         var attributes = EKAttributes.topFloat
         
@@ -27,10 +27,11 @@ class SwiftEntryKitTemplates {
         attributes.entryBackground = .color(color: .white)
         attributes.entranceAnimation = .translation
         attributes.exitAnimation = .translation
-        attributes.displayDuration = 0.7
+        attributes.displayDuration = Double(duration)
         attributes.positionConstraints.size.height = .constant(value: 50)
         attributes.statusBar = .light
         attributes.entryInteraction = .absorbTouches
+        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 8, offset: .zero))
         //let font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.light)
         let contentView = UIView()
         contentView.backgroundColor = backgroundColor

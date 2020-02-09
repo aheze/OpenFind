@@ -66,14 +66,14 @@ class AdaptiveCollectionLayout: UICollectionViewLayout {
 
     override func prepare() {
         super.prepare()
-        print("1++++++++")
+        //print("1++++++++")
         // Need to clear cache for invalidate layout
         self.cache.removeAll()
 
         guard cache.isEmpty, let collectionView = collectionView else {
             return
         }
-        contentHeight = 0
+        contentHeight = collectionView.frame.size.height
         // If we had 2 sections we generate first elements and than get that offset and call it again
         // For example first section is "onboarding"
         if collectionView.numberOfSections > 1 {
@@ -86,7 +86,7 @@ class AdaptiveCollectionLayout: UICollectionViewLayout {
     }
 
     func prepareForMain(collectionView: UICollectionView, section: Int, numberOfColumns: Int, inYOffset: CGFloat? = nil) -> CGFloat? {
-        print("2++++++++")
+        //print("2++++++++")
         let columnWidth = contentWidth / CGFloat(numberOfColumns)
         var xOffset = [CGFloat]()
         for column in 0..<numberOfColumns {

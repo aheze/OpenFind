@@ -10,5 +10,6 @@ pod 'RealmSwift'
 pod 'SDWebImage', '~> 5.0'
 pod 'SwiftEntryKit'
 pod 'SnapKit'
+pod 'Parchment'
 
 end

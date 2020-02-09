@@ -7,7 +7,7 @@
 //
 
 import UIKit
-extension ImagePickerList {
+extension SymbolsViewController {
     
     func populateSymbolArray() {
         sfSymbolArray = [

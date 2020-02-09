@@ -81,6 +81,9 @@
 		4979A39323AF3C4F00B09380 /* FastVisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979A39223AF3C4F00B09380 /* FastVisionHandler.swift */; };
 		4988FC4823BEF89600199635 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988FC4723BEF89600199635 /* ListModel.swift */; };
 		498EDA0123E130C6009EB0CF /* SymbolsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498EDA0023E130C6009EB0CF /* SymbolsList.swift */; };
+		4990AAE223EDB4CE00FAF37B /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4990AAE123EDB4CE00FAF37B /* GeneralViewController.swift */; };
+		4990AAE423EDB4EF00FAF37B /* SymbolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4990AAE323EDB4EF00FAF37B /* SymbolsViewController.swift */; };
+		4990AAE623EDB50E00FAF37B /* ColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4990AAE523EDB50E00FAF37B /* ColorsViewController.swift */; };
 		4991344E236FDF1300B82E46 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991344D236FDF1200B82E46 /* SettingsViewController.swift */; };
 		49913450236FE12400B82E46 /* SettingsViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991344F236FE12400B82E46 /* SettingsViewExtensions.swift */; };
 		49913452236FE33B00B82E46 /* SettingsBasicSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49913451236FE33B00B82E46 /* SettingsBasicSetup.swift */; };
@@ -192,6 +195,9 @@
 		4979A39223AF3C4F00B09380 /* FastVisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastVisionHandler.swift; sourceTree = "<group>"; };
 		4988FC4723BEF89600199635 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		498EDA0023E130C6009EB0CF /* SymbolsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsList.swift; sourceTree = "<group>"; };
+		4990AAE123EDB4CE00FAF37B /* GeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
+		4990AAE323EDB4EF00FAF37B /* SymbolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsViewController.swift; sourceTree = "<group>"; };
+		4990AAE523EDB50E00FAF37B /* ColorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsViewController.swift; sourceTree = "<group>"; };
 		4991344D236FDF1200B82E46 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4991344F236FE12400B82E46 /* SettingsViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewExtensions.swift; sourceTree = "<group>"; };
 		49913451236FE33B00B82E46 /* SettingsBasicSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBasicSetup.swift; sourceTree = "<group>"; };
@@ -501,10 +507,13 @@
 				4966B71123E1251200A8523A /* ChangeImage */,
 				4928525923D617270048EC13 /* ListController.swift */,
 				49569B3223D65AA4009308CA /* ListCollectionCell.swift */,
-				4966B70923DE98C800A8523A /* MakeNewList.swift */,
 				49585DCC23ED0B8D003AB768 /* Select List SEK */,
 				49569B3423D6919E009308CA /* ListsLayout.swift */,
 				4988FC4723BEF89600199635 /* ListModel.swift */,
+				4966B70923DE98C800A8523A /* MakeNewList.swift */,
+				4990AAE123EDB4CE00FAF37B /* GeneralViewController.swift */,
+				4990AAE323EDB4EF00FAF37B /* SymbolsViewController.swift */,
+				4990AAE523EDB50E00FAF37B /* ColorsViewController.swift */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -741,6 +750,7 @@
 				490DA75A23CBB871000AF57D /* LayerProperties.swift in Sources */,
 				4928525A23D617270048EC13 /* ListController.swift in Sources */,
 				4951701A235AC56D00E00D83 /* CollectionViewCell.swift in Sources */,
+				4990AAE423EDB4EF00FAF37B /* SymbolsViewController.swift in Sources */,
 				491150942363E3D300EC0C04 /* ARExtensions.swift in Sources */,
 				4911508D235D51E300EC0C04 /* MatchesHUD.swift in Sources */,
 				490DA75523CBB871000AF57D /* JJFloatingActionButton+Animation.swift in Sources */,
@@ -757,6 +767,8 @@
 				49913452236FE33B00B82E46 /* SettingsBasicSetup.swift in Sources */,
 				494DF11D23961AEB0076412D /* BDVCShare.swift in Sources */,
 				49517016235AC56D00E00D83 /* CollectionViewWrapper.swift in Sources */,
+				4990AAE623EDB50E00FAF37B /* ColorsViewController.swift in Sources */,
+				4990AAE223EDB4CE00FAF37B /* GeneralViewController.swift in Sources */,
 				4957157E2368B022007BF68B /* ViewExtensions.swift in Sources */,
 				490DA75D23CBC905000AF57D /* BigMenuButton.swift in Sources */,
 				4928525823D539F40048EC13 /* ToolbarTopCollectionView.swift in Sources */,
