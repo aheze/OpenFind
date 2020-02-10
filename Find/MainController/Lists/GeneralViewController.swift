@@ -54,24 +54,51 @@ class GeneralViewController: UIViewController, ReturnGeneralNow {
             print(splits)
             
             let noDuplicateArray = splits.uniques
-            print("NO DUP: \(noDuplicateArray)")
-            
-            var hasEmptyMatch = 0
-            var hasSingleSpaceMatch = 0
-            var hasSpaceInMatch = 0
-            for match in splits {
-                if match == "" { hasEmptyMatch += 1 }
-                if match == " " { hasSingleSpaceMatch += 1 }
-                if match.contains(" ") { hasSpaceInMatch += 1 }
-            }
-            
-            if (hasEmptyMatch >= 1) {
-                print("asd")
-                var matchesPlural = "You have \(hasEmptyMatch) empty matches."
-                if hasEmptyMatch == 1 { matchesPlural = "You have a match that is empty." }
-                SwiftEntryKitTemplates().displaySEK(message: matchesPlural, backgroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), location: .top, duration: CGFloat(0.68))
-            } else if (hasSingleSpaceMatch >= 1) {
-                print("asdasd")
+            if noDuplicateArray.count != splits.count {
+                print("DUPLICATES!!! NoDUP: \(noDuplicateArray)")
+                let differenceInNumber = splits.count - noDuplicateArray.count
+                //let duplicates = Set(splits).symmetricDifference(noDuplicateArray)
+                //print(duplicates)
+                
+              
+//                let deviceStartSet = Set<String>(splits)
+//                let deviceEndSet = Set<String>(noDuplicateArray)
+//                let differentStrings = Array(deviceStartSet.subtracting(deviceEndSet))
+                
+                let differentStrings = Array(Set(splits.filter({ (i: String) in splits.filter({ $0 == i }).count > 1})))
+                
+                var titleMessage = ""
+                print("diff: \(differentStrings)")
+                if differentStrings.count == 1 {
+                    var aDuplicate = "a duplicate."
+                    let matchesNumberDiff = (splits.count - noDuplicateArray.count)
+                    //print("matNumDiff: \(matchesNumberDiff)")
+                    if matchesNumberDiff == 1 {
+                        aDuplicate = "a duplicate."
+                    } else if matchesNumberDiff == 2 {
+                        aDuplicate = "2 duplicates."
+                    } else {
+                        aDuplicate = "a couple duplicates."
+                    }
+                    titleMessage = "\"\(differentStrings[0])\" has \(aDuplicate)"
+                } else if differentStrings.count == 2 {
+                    titleMessage = "\"\(differentStrings[0])\" and \"\(differentStrings[1])\" have duplicates."
+                } else if differentStrings.count <= 4 {
+                    var newString = ""
+                    for (index, message) in differentStrings.enumerated() {
+                        if index != differentStrings.count - 1 {
+                            newString.append("\"\(message)\", ")
+                        } else {
+                            newString.append(" and \"\(message)\"")
+                        }
+                        
+                        print("NEW: \(newString)")
+                    }
+                    titleMessage = newString + " have duplicates."
+                } else {
+                    titleMessage = "You have a lot of duplicate matches."
+                }
+                print("title: \(titleMessage)")
                 var attributes = EKAttributes.topFloat
                 attributes.displayDuration = .infinity
                 attributes.entryInteraction = .absorbTouches
@@ -79,12 +106,42 @@ class GeneralViewController: UIViewController, ReturnGeneralNow {
                 attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
                 attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
                 attributes.screenInteraction = .absorbTouches
-                showButtonBarMessage(attributes: attributes)
+                
+                var matchesPlural = "You have \(differenceInNumber) empty matches."
+                if differenceInNumber == 1 { matchesPlural = "You have a match that is empty." }
+                showButtonBarMessage(attributes: attributes, titleMessage: titleMessage, desc: "Would you like us to delete the duplicates?", leftButton: "Yes, Delete and save", yesButton: "I'll fix it myself")
             } else {
-                print("NOTHING WRONG!")
-                generalDelegate?.returnNewGeneral(nameOfList: name, desc: descriptionOfList, contentsOfList: contents, interrupt: false)
-            }
+                
             
+                var hasEmptyMatch = 0
+                var hasSingleSpaceMatch = 0
+                var hasSpaceInMatch = 0
+                for match in splits {
+                    if match == "" { hasEmptyMatch += 1 }
+                    if match == " " { hasSingleSpaceMatch += 1 }
+                    if match.contains(" ") { hasSpaceInMatch += 1 }
+                }
+                
+                if (hasEmptyMatch >= 1) {
+                    print("asd")
+                    var matchesPlural = "You have \(hasEmptyMatch) empty matches."
+                    if hasEmptyMatch == 1 { matchesPlural = "You have a match that is empty." }
+                    SwiftEntryKitTemplates().displaySEK(message: matchesPlural, backgroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), location: .top, duration: CGFloat(0.68))
+                } else if (hasSingleSpaceMatch >= 1) {
+                    print("asdasd")
+                    var attributes = EKAttributes.topFloat
+                    attributes.displayDuration = .infinity
+                    attributes.entryInteraction = .absorbTouches
+                    attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+                    attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+                    attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+                    attributes.screenInteraction = .absorbTouches
+                    showButtonBarMessage(attributes: attributes, titleMessage: "Are you sure you want to have a match that is a space?", desc: "Probably not a good idea. Maybe check your matches?", leftButton: "Ignore and save", yesButton: "Ok, I'll go check")
+                } else {
+                    print("NOTHING WRONG!")
+                    generalDelegate?.returnNewGeneral(nameOfList: name, desc: descriptionOfList, contentsOfList: contents, interrupt: false)
+                }
+            }
         }
     }
     func updateInfo() {
@@ -178,6 +235,8 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
         if textView.tag == 10902 {
             //print("shkdhkusdf")
             placeholderLabel.isHidden = !descriptionView.text.isEmpty
+        } else if textView.tag == 10903 {
+            print("jklds")
         }
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -210,6 +269,11 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
         switch textView.tag {
             
         case 10903:
+//        let protectedRange = NSMakeRange(0, 3)
+//        let intersection = NSIntersectionRange(protectedRange, range)
+//        if intersection.length > 0 {
+//            return false
+//        }
         if (text == "\n") {
             print("newline")
             // If the replacement text is being added to the end of the
@@ -262,52 +326,6 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
             return false
 
 
-        } else if text == "" && range.length > 0 { //Backspace
-            print(range.length)
-            if range.location == 2 {
-                return false ///don't delete first bullet point
-            }
-            let beginning: UITextPosition = textView.beginningOfDocument
-            if let cursorRange = textView.selectedTextRange {
-                print("position1: \(textView.selectedTextRange)")
-                // get the position one character before the cursor start position
-                if let newPosition = textView.position(from: cursorRange.start, offset: -2) {
-                    print("position: \(newPosition)")
-                    if let checkTextRange = textView.textRange(from: newPosition, to: cursorRange.start) {
-                        if let checkText = textView.text(in: checkTextRange) {
-                            if textView.text.count >= 3 {
-                                switch checkText {
-                                case " \u{2022}":
-                                        print("back")
-                                    let rangLoc = 1
-                                    let start: UITextPosition = textView.position(from: beginning, offset: range.location - rangLoc)!
-                                    let end: UITextPosition = textView.position(from: start, offset: range.length + rangLoc)!
-                                    let textRange: UITextRange = textView.textRange(from: start, to: end)!
-                                    textView.replace(textRange, withText: "")
-                                    print(range.location)
-                                case "\u{2022} ":
-                                    let rangLoc = 2
-                                    let start: UITextPosition = textView.position(from: beginning, offset: range.location - rangLoc)!
-                                    let end: UITextPosition = textView.position(from: start, offset: range.length + rangLoc)!
-                                    let textRange: UITextRange = textView.textRange(from: start, to: end)!
-                                    textView.replace(textRange, withText: "")
-                                    print(range.location)
-                                default:
-                                    print("normal backspace, don't delete bullet point")
-                                }
-                                let newHeightT = contentsTextView.sizeThatFits(CGSize(width: contentsTextView.frame.size.width, height: CGFloat(MAXFLOAT))).height
-                                print("newh: \(newHeightT)")
-                                if newHeightT >= 300 {
-                                    textViewHeightConstraint.constant = newHeightT
-                                    UIView.animate(withDuration: 0.2) {
-                                        self.view.layoutIfNeeded()
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
         default:
             print("wrong text VIEW")
@@ -318,11 +336,11 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
     
     }
 
-    func showButtonBarMessage(attributes: EKAttributes) {
+    func showButtonBarMessage(attributes: EKAttributes, titleMessage: String, desc: String, leftButton: String, yesButton: String, image: String = "WhiteWarningShield") {
         let displayMode = EKAttributes.DisplayMode.inferred
         
         let title = EKProperty.LabelContent(
-            text: "Are you sure you want to have a match that is a space?",
+            text: titleMessage,
             style: .init(
                 font: UIFont.systemFont(ofSize: 20, weight: .bold),
                 color: .white,
@@ -330,7 +348,7 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
             )
         )
         let description = EKProperty.LabelContent(
-            text: "Probably not a good idea. Maybe check your matches?",
+            text: desc,
             style: .init(
                 font: UIFont.systemFont(ofSize: 14, weight: .regular),
                 color: .white,
@@ -338,7 +356,7 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
             )
         )
         let image = EKProperty.ImageContent(
-            imageName: "WhiteWarningShield",
+            imageName: image,
             displayMode: displayMode,
             size: CGSize(width: 35, height: 35),
             contentMode: .scaleAspectFit
@@ -349,32 +367,32 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
             description: description
         )
         let buttonFont = UIFont.systemFont(ofSize: 20, weight: .bold)
-        let closeButtonLabelStyle = EKProperty.LabelStyle(
+        let okButtonLabelStyle = EKProperty.LabelStyle(
             font: UIFont.systemFont(ofSize: 20, weight: .bold),
             color: .white,
             displayMode: displayMode
         )
-        let closeButtonLabel = EKProperty.LabelContent(
-            text: "I'll go check",
-            style: closeButtonLabelStyle
-        )
-        let closeButton = EKProperty.ButtonContent(
-            label: closeButtonLabel,
-            backgroundColor: .clear,
-            highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05)) {
-                SwiftEntryKit.dismiss()
-        }
-        let okButtonLabelStyle = EKProperty.LabelStyle(
-            font: buttonFont,
-            color: EKColor(#colorLiteral(red: 1, green: 0.9675828359, blue: 0.9005832124, alpha: 1)),
-            displayMode: displayMode
-        )
         let okButtonLabel = EKProperty.LabelContent(
-            text: "Ignore and save",
+            text: yesButton,
             style: okButtonLabelStyle
         )
         let okButton = EKProperty.ButtonContent(
             label: okButtonLabel,
+            backgroundColor: .clear,
+            highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05)) {
+                SwiftEntryKit.dismiss()
+        }
+        let closeButtonLabelStyle = EKProperty.LabelStyle(
+            font: buttonFont,
+            color: EKColor(#colorLiteral(red: 1, green: 0.9675828359, blue: 0.9005832124, alpha: 1)),
+            displayMode: displayMode
+        )
+        let closeButtonLabel = EKProperty.LabelContent(
+            text: leftButton,
+            style: closeButtonLabelStyle
+        )
+        let closeButton = EKProperty.ButtonContent(
+            label: closeButtonLabel,
             backgroundColor: .clear,
             highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05),
             displayMode: displayMode) { [unowned self] in
@@ -383,7 +401,7 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
                 
         }
         let buttonsBarContent = EKProperty.ButtonBarContent(
-            with: okButton, closeButton,
+            with: closeButton, okButton,
             separatorColor: Color.Gray.light,
             buttonHeight: 60,
             displayMode: displayMode,
