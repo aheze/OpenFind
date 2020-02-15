@@ -698,7 +698,7 @@ extension GeneralViewController {
             }
             
         }
-        print("Done checking for errors---------------------------")
+        print("Done checking for errors--------------++-------------")
         print("Single Space: \(singleSpaceWarning)")
         print("Start Space: \(startSpaceWarning)")
         print("End Space: \(startSpaceWarning)")
