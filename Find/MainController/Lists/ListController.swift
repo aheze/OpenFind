@@ -184,7 +184,10 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
                 //let sizeOfWidth = collectionView.frame.size.width - (AdaptiveCollectionConfig.cellPadding * 3) - 20
                 
                 let newDescHeight = cell.descriptionOfList.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
-                let newContentsHeight = cell.contents.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
+                
+                var array = cell.contents
+                let arrayAsString = array.joined(separator:"\n")
+                let newContentsHeight = arrayAsString.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
                // print(newDescHeight)
              //   print(newContentsHeight)
                 
@@ -221,12 +224,17 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
 }
 
 extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    func madeNewList(name: String, description: String, contents: String, imageName: String, imageColor: String) {
+    func madeNewList(name: String, description: String, contents: [String], imageName: String, imageColor: String) {
         print("add")
         let newList = FindList()
         newList.name = name
         newList.descriptionOfList = description
-        newList.contents = contents
+        
+        for cont in contents {
+            newList.contents.append(cont)
+        }
+        
+        
         newList.iconImageName = imageName
         newList.iconColorName = imageColor
         newList.dateCreated = Date()
@@ -243,7 +251,12 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
         let listT = listCategories?[indexPath.item]
         cell.title.text = listT?.name
         cell.nameDescription.text = listT?.descriptionOfList
-        cell.contentsList.text = listT?.contents.replacingOccurrences(of: " \u{2022} ", with: "", options: .literal, range: nil)
+        
+        var array = listT?.contents
+        if let arrayAsString = array?.joined(separator:"\n") {
+        
+            cell.contentsList.text = arrayAsString
+        }
         cell.contentView.layer.cornerRadius = 10
         
         
@@ -267,21 +280,14 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
         //let sizeOfWidth = collectionView.frame.size.width - (AdaptiveCollectionConfig.cellPadding * 3) - 20
         
         let newDescHeight = cell.descriptionOfList.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
-        let newContentsHeight = cell.contents.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
-        //print(newDescHeight)
-       // print(newContentsHeight)
         
-    
+        var array = cell.contents
+        let arrayAsString = array.joined(separator:"\n")
+        let newContentsHeight = arrayAsString.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
+        
+//        let newContentsHeight = cell.contents.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
         let extensionHeight = newDescHeight + newContentsHeight
-        // It's for example, when you need to remove height
-        //let dateHeight: CGFloat = item.expiring == nil ? -12.5 : 0
-        //print("Cell: \(cell)")
-      //  print("height: \(AdaptiveCollectionConfig.cellBaseHeight + extensionHeight + 45)")
-      //  print(cellHeights[indexPath.item])
         return AdaptiveCollectionConfig.cellBaseHeight + cellHeights[indexPath.item] + 25 //+ 300
-        //+ dateHeight
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -261,9 +261,9 @@ class ViewController: UIViewController {
         setUpTimers()
         setUpRamReel()
         setUpFilePath()
-        if isAuthorized() {
-            configureCamera()
-        }
+//        if isAuthorized() {
+//            configureCamera()
+//        }
         busyFastFinding = false
         
         motionManager = CMMotionManager()

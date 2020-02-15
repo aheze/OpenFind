@@ -11,7 +11,7 @@ import SwiftEntryKit
 import Parchment
 
 protocol NewListMade: class {
-    func madeNewList(name: String, description: String, contents: String, imageName: String, imageColor: String)
+    func madeNewList(name: String, description: String, contents: [String], imageName: String, imageColor: String)
 }
 protocol ReturnGeneralNow: class {
     func updateInfo()
@@ -28,12 +28,13 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo {
     
     var name = "Untitled"
     var descriptionOfList = "No description..."
-    var contents = ""
+    var contents = [String]()
     var iconImageName = "square.grid.2x2"
     var iconColorName = "00AEEF"
     var shouldDismiss = true
     
-    func returnNewGeneral(nameOfList: String, desc: String, contentsOfList: String, interrupt: Bool) {
+    
+    func returnNewGeneral(nameOfList: String, desc: String, contentsOfList: [String], interrupt: Bool) {
         name = nameOfList
         descriptionOfList = desc
         contents = contentsOfList
@@ -66,17 +67,17 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo {
         returnGeneralNowDelegate?.updateInfo()
         returnIconNowDelegate?.updateInfo()
         returnColorNowDelegate?.updateInfo()
-//        if contentsTextView.text.isEmpty {
+//        if contents.isEmpty {
 //            SwiftEntryKitTemplates().displaySEK(message: "Can't create a list with no contents!", backgroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), location: .top)
 //        } else {
-//        if shouldDismiss == true {
-//            print("SHOULD DISMISS")
-//            view.endEditing(true)
-//            //print("asdkahskdhaksdhaksjdh")
-//            print("name: \(name), description: \(descriptionOfList), contents: \(contents), imageName: \(iconImageName), imageColor: \(iconColorName)")
-//            newListDelegate?.madeNewList(name: name, description: descriptionOfList, contents: contents, imageName: iconImageName, imageColor: iconColorName)
-//            //self.dismiss(animated: true, completion: nil)
-//        }
+        if shouldDismiss == true {
+            print("SHOULD DISMISS")
+            view.endEditing(true)
+            //print("asdkahskdhaksdhaksjdh")
+            print("name: \(name), description: \(descriptionOfList), contents: \(contents), imageName: \(iconImageName), imageColor: \(iconColorName)")
+            newListDelegate?.madeNewList(name: name, description: descriptionOfList, contents: contents, imageName: iconImageName, imageColor: iconColorName)
+            //self.dismiss(animated: true, completion: nil)
+        }
 //        }
     }
     

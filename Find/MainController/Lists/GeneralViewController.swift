@@ -10,14 +10,25 @@ import UIKit
 import RealmSwift
 import SwiftEntryKit
 
-protocol GetGeneralInfo: class {
-    func returnNewGeneral(nameOfList: String, desc: String, contentsOfList: String, interrupt: Bool)
-}
+//enum GeneralError {
+//    case hasStartSpace
+//    case hasEndSpace
+//    case isSingleSpace
+//}
 
+protocol GetGeneralInfo: class {
+    func returnNewGeneral(nameOfList: String, desc: String, contentsOfList: [String], interrupt: Bool)
+}
+//protocol RowChange: class {
+//    func tableViewRowCountChanged(rowCount: Int)
+//}
 class GeneralViewController: UIViewController, ReturnGeneralNow {
     
     
   
+    @IBOutlet weak var editButton: UIButton!
+    @IBAction func editButtonPressed(_ sender: Any) {
+    }
     
     weak var generalDelegate: GetGeneralInfo?
 
@@ -25,13 +36,44 @@ class GeneralViewController: UIViewController, ReturnGeneralNow {
     @IBOutlet var descInputView: UIView!
     @IBOutlet var inputButtonsView: UIView!
 
-    @IBOutlet weak var contentsContainer: UIView!
-    @IBOutlet weak var contentsTextView: UITextView!
-     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var bottomActionView: UIView!
+    //    @IBOutlet weak var contentsContainer: UIView!
+//    @IBOutlet weak var contentsTextView: UITextView!
+     
+    @IBOutlet weak var matchesHeader: UIView!
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    
+//    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableBottomView: UIView!
+    
+    @IBOutlet weak var newMatchButton: UIButton!
+    @IBOutlet weak var newMatchPlus: UIButton!
+    
+    @IBAction func newMatchPressed(_ sender: Any) {
+        addNewRow(end: true)
+    }
+    
+    @IBAction func newMatchPlusPressed(_ sender: Any) {
+        addNewRow(end: true)
+    }
+    
+    var currentIndexPath = 0
+    var addingNewMatch = false
+    var emptyStringErrors = [Int]()
+    
+    var singleSpaceWarning = [Int]()
+    var startSpaceWarning = [Int]()
+    var endSpaceWarning = [Int]()
+    
+    var stringToIndexesError = [String: [Int]]()
+    
     
     weak var delegate: UIAdaptivePresentationControllerDelegate?
+  //  weak var rowChanged: RowChange?
     //weak var changedGeneralDelegate: GetGeneralInfo?
     
     @IBOutlet weak var titleField: UITextField!
@@ -40,7 +82,7 @@ class GeneralViewController: UIViewController, ReturnGeneralNow {
     
     var name = "Untitled"
     var descriptionOfList = "No description..."
-    var contents = ""
+    var contents = [String]()
     
     func doneWithEditingGeneral(overrideDone: Bool) {
         view.endEditing(true)
@@ -49,105 +91,37 @@ class GeneralViewController: UIViewController, ReturnGeneralNow {
             generalDelegate?.returnNewGeneral(nameOfList: name, desc: descriptionOfList, contentsOfList: contents, interrupt: false)
             SwiftEntryKit.dismiss()
         } else {
-            let textString = contentsTextView.text.removeFirstChars(length: 3)
-            let splits = textString.components(separatedBy: "\n \u{2022} ")
-            print(splits)
-            
-            let noDuplicateArray = splits.uniques
-            if noDuplicateArray.count != splits.count {
-                print("DUPLICATES!!! NoDUP: \(noDuplicateArray)")
-                let differenceInNumber = splits.count - noDuplicateArray.count
-                //let duplicates = Set(splits).symmetricDifference(noDuplicateArray)
-                //print(duplicates)
-                
-              
-//                let deviceStartSet = Set<String>(splits)
-//                let deviceEndSet = Set<String>(noDuplicateArray)
-//                let differentStrings = Array(deviceStartSet.subtracting(deviceEndSet))
-                
-                let differentStrings = Array(Set(splits.filter({ (i: String) in splits.filter({ $0 == i }).count > 1})))
-                
-                var titleMessage = ""
-                print("diff: \(differentStrings)")
-                if differentStrings.count == 1 {
-                    var aDuplicate = "a duplicate."
-                    let matchesNumberDiff = (splits.count - noDuplicateArray.count)
-                    //print("matNumDiff: \(matchesNumberDiff)")
-                    if matchesNumberDiff == 1 {
-                        aDuplicate = "a duplicate."
-                    } else if matchesNumberDiff == 2 {
-                        aDuplicate = "2 duplicates."
-                    } else {
-                        aDuplicate = "a couple duplicates."
-                    }
-                    titleMessage = "\"\(differentStrings[0])\" has \(aDuplicate)"
-                } else if differentStrings.count == 2 {
-                    titleMessage = "\"\(differentStrings[0])\" and \"\(differentStrings[1])\" have duplicates."
-                } else if differentStrings.count <= 4 {
-                    var newString = ""
-                    for (index, message) in differentStrings.enumerated() {
-                        if index != differentStrings.count - 1 {
-                            newString.append("\"\(message)\", ")
-                        } else {
-                            newString.append(" and \"\(message)\"")
-                        }
-                        
-                        print("NEW: \(newString)")
-                    }
-                    titleMessage = newString + " have duplicates."
-                } else {
-                    titleMessage = "You have a lot of duplicate matches."
-                }
-                print("title: \(titleMessage)")
-                var attributes = EKAttributes.topFloat
-                attributes.displayDuration = .infinity
-                attributes.entryInteraction = .absorbTouches
-                attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-                attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-                attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-                attributes.screenInteraction = .absorbTouches
-                
-                var matchesPlural = "You have \(differenceInNumber) empty matches."
-                if differenceInNumber == 1 { matchesPlural = "You have a match that is empty." }
-                showButtonBarMessage(attributes: attributes, titleMessage: titleMessage, desc: "Would you like us to delete the duplicates?", leftButton: "Yes, Delete and save", yesButton: "I'll fix it myself")
-            } else {
-                
-            
-                var hasEmptyMatch = 0
-                var hasSingleSpaceMatch = 0
-                var hasSpaceInMatch = 0
-                for match in splits {
-                    if match == "" { hasEmptyMatch += 1 }
-                    if match == " " { hasSingleSpaceMatch += 1 }
-                    if match.contains(" ") { hasSpaceInMatch += 1 }
-                }
-                
-                if (hasEmptyMatch >= 1) {
-                    print("asd")
-                    var matchesPlural = "You have \(hasEmptyMatch) empty matches."
-                    if hasEmptyMatch == 1 { matchesPlural = "You have a match that is empty." }
-                    SwiftEntryKitTemplates().displaySEK(message: matchesPlural, backgroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), location: .top, duration: CGFloat(0.68))
-                } else if (hasSingleSpaceMatch >= 1) {
-                    print("asdasd")
-                    var attributes = EKAttributes.topFloat
-                    attributes.displayDuration = .infinity
-                    attributes.entryInteraction = .absorbTouches
-                    attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-                    attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-                    attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-                    attributes.screenInteraction = .absorbTouches
-                    showButtonBarMessage(attributes: attributes, titleMessage: "Are you sure you want to have a match that is a space?", desc: "Probably not a good idea. Maybe check your matches?", leftButton: "Ignore and save", yesButton: "Ok, I'll go check")
-                } else {
-                    print("NOTHING WRONG!")
-                    generalDelegate?.returnNewGeneral(nameOfList: name, desc: descriptionOfList, contentsOfList: contents, interrupt: false)
-                }
+           // let textString = contentsTextView.text.removeFirstChars(length: 3)
+            //let splits = textString.components(separatedBy: "\n \u{2022} ")
+            //print(splits)
+//            for cont in contents {
+//                if cont == "" {
+//                    print("AHKSDGHASKJDHAKJSDHKJASHJKSHDKJHASDJKZHASKJHAKKSDH")
+//                    SwiftEntryKitTemplates().displaySEK(message: "Can't create a list with no contents!", backgroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), location: .top)
+//                }
+//            }
+            checkForErrors(contentsArray: contents)
+            if showDoneAlerts() == false {
+                print("NO ERRORS!!!!!!++++++++")
             }
+            
         }
     }
     func updateInfo() {
         print("update")
         doneWithEditingGeneral(overrideDone: false)
     }
+    func highlightRows() {
+       // for index in indexPaths {
+           // let indexP = IndexPath(row: index, section: 0)
+            //tableView.selectRow(at: indexP, animated: false, scrollPosition: .none)
+            
+            //NotificationCenter.default.post(name: .hasToHighlight, object: generalErrors)
+            //let cell = tableView.cellForRow(at: indexP) as! GeneralTableCell
+            //cell.hihilighted = true
+       // }
+    }
+    
         @IBOutlet weak var descDoneButton: UIButton!
         @IBAction func descButtonDonePressed(_ sender: Any) {
             view.endEditing(true)
@@ -181,52 +155,178 @@ class GeneralViewController: UIViewController, ReturnGeneralNow {
             //print(titleField.layer.borderColor)
             
         }
-        func setUpViews() {
-            
-            
-            titleField.autocapitalizationType = .words
-            contentsContainer.layer.cornerRadius = 12
-           // imageContainer.clipsToBounds = true
-            //imageContainer.layer.cornerRadius = 12
-            contentsTextView.layer.cornerRadius = 6
-            
-            contentsTextView.inputAccessoryView = inputButtonsView
-            titleField.inputAccessoryView = titlesInputView
-            
-            descriptionView.inputAccessoryView = descInputView
-            descriptionView.layer.cornerRadius = 5.25
-            descriptionView.layer.borderWidth = 1
-            descriptionView.layer.borderColor = #colorLiteral(red: 0.9136029482, green: 0.9136029482, blue: 0.9136029482, alpha: 1)
-            
-            titleField.layer.cornerRadius = 5.25
-            titleField.layer.borderColor = #colorLiteral(red: 0.9136029482, green: 0.9136029482, blue: 0.9136029482, alpha: 1)
-            titleField.layer.borderWidth = 1
-            //titleField.layer.borderWidth = 1
-            
-            helpButton.layer.cornerRadius = 4
-            
-            //doneWithListButton.layer.cornerRadius = 4
-            descDoneButton.layer.cornerRadius = 4
-            titlesDoneButton.layer.cornerRadius = 4
-            
-            contentsDoneButton.layer.cornerRadius = 4
-            
-            placeholderLabel = UILabel()
-            placeholderLabel.text = "Enter some text..."
-            placeholderLabel.font = UIFont.systemFont(ofSize: (descriptionView.font?.pointSize)!)
-            placeholderLabel.sizeToFit()
-            descriptionView.addSubview(placeholderLabel)
-            placeholderLabel.frame.origin = CGPoint(x: 5, y: (descriptionView.font?.pointSize)! / 2)
-            placeholderLabel.textColor = UIColor.lightGray
-            placeholderLabel.isHidden = !descriptionView.text.isEmpty
-            
+    func addNewRow(end: Bool = false) {
+        addingNewMatch = true
+        
+        print("CURR HEIGHT: \(tableView.contentSize.height)")
+        let tableViewHeightAfterAddRow = tableView.contentSize.height + 50
+        if tableViewHeightAfterAddRow >= 300 {
+            tableViewHeightConstraint.constant = tableViewHeightAfterAddRow
+            UIView.animate(withDuration: 0.75, animations: {
+                self.view.layoutIfNeeded()
+            })
         }
+        if end == false {
+            print("Return INSERT")
+            contents.insert("", at: currentIndexPath + 1)
+            currentIndexPath = currentIndexPath + 1
+            tableView.insertRows(at: [IndexPath(row: currentIndexPath, section: 0)], with: .automatic)
+        } else {
+            print("New BUTTON PRESSED")
+            
+            print("contents count \(contents.count)")
+            contents.append("")
+            currentIndexPath = contents.count - 1
+            tableView.insertRows(at: [IndexPath(row: currentIndexPath, section: 0)], with: .automatic)
+        }
+    }
+    func setUpViews() {
+        if contents.count == 0 {
+            contents.append("")
+        }
+        
+        topView.layer.cornerRadius = 8
+        
+        titleField.autocapitalizationType = .words
+//            contentsContainer.layer.cornerRadius = 12
+//           // imageContainer.clipsToBounds = true
+//            //imageContainer.layer.cornerRadius = 12
+//            contentsTextView.layer.cornerRadius = 6
+//
+//            contentsTextView.inputAccessoryView = inputButtonsView
+        titleField.inputAccessoryView = titlesInputView
+        
+        descriptionView.inputAccessoryView = descInputView
+        descriptionView.layer.cornerRadius = 5.25
+        descriptionView.layer.borderWidth = 1
+        descriptionView.layer.borderColor = #colorLiteral(red: 0.9136029482, green: 0.9136029482, blue: 0.9136029482, alpha: 1)
+        
+        titleField.layer.cornerRadius = 5.25
+        titleField.layer.borderColor = #colorLiteral(red: 0.9136029482, green: 0.9136029482, blue: 0.9136029482, alpha: 1)
+        titleField.layer.borderWidth = 1
+        //titleField.layer.borderWidth = 1
+        
+        helpButton.layer.cornerRadius = 4
+        
+        matchesHeader.clipsToBounds = true
+        matchesHeader.layer.cornerRadius = 8
+        matchesHeader.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        
+//            tableView.clipsToBounds = true
+//            tableView.layer.cornerRadius = 8
+//            tableView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        
+        tableBottomView.layer.cornerRadius = 8
+        tableBottomView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        bottomActionView.layer.cornerRadius = 8
+//            
+//            let imageAttachment = NSTextAttachment()
+//            imageAttachment.image = UIImage(systemName: "checkmark.circle")
+//
+//            let fullString = NSMutableAttributedString(string: "Press the ")
+//            fullString.append(NSAttributedString(attachment: imageAttachment))
+//            fullString.append(NSAttributedString(string: " button"))
+//            //let label.attributedText = fullString
+//            
+//            newMatchButton.setTitle(fullString, for: .normal)
+        
+        
+        //doneWithListButton.layer.cornerRadius = 4
+        descDoneButton.layer.cornerRadius = 4
+        titlesDoneButton.layer.cornerRadius = 4
+        
+        contentsDoneButton.layer.cornerRadius = 4
+        
+        placeholderLabel = UILabel()
+        placeholderLabel.text = "Short description"
+        placeholderLabel.font = UIFont.systemFont(ofSize: (descriptionView.font?.pointSize)!)
+        placeholderLabel.sizeToFit()
+        descriptionView.addSubview(placeholderLabel)
+        placeholderLabel.frame.origin = CGPoint(x: 5, y: (descriptionView.font?.pointSize)! / 2)
+        placeholderLabel.textColor = UIColor.lightGray
+        placeholderLabel.isHidden = !descriptionView.text.isEmpty
+        
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        tableView.isScrollEnabled = false
+        
+    }
 }
 
+extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       // print("aldfshksdfkjh")
+        //print("tablevide del \(contents.count)")
+        return contents.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralTableviewCell") as! GeneralTableCell
+        cell.changedTextDelegate = self
+        cell.matchTextField.text = contents[indexPath.row]
+        //cell.isUserInteractionEnabled = false
+//        if indexPath.row
+//        cell.shouldShowPlus = true
+        if addingNewMatch == true {
+            addingNewMatch = false
+        cell.matchTextField.becomeFirstResponder()
+        }
+        cell.indexPath = indexPath.row
+        //print("index: \(indexPath.row)")
+        return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
+    
+    
+}
 //protocol NewListMade: class {
 //    func madeNewList(name: String, description: String, contents: String, imageName: String, imageColor: String)
 //}
+extension GeneralViewController: ChangedTextCell {
+    func textFieldStartedEditing(indexPath: Int) {
+       // addNewRow()
+        print("curr ind: \(indexPath)")
+        currentIndexPath = indexPath
+        scrollView.setContentOffset(CGPoint(x: 0, y: (currentIndexPath * 50) + 124), animated: true) ///224 is height of everything above the tableview, so give some edit room so 124
 
+    }
+    func textFieldPressedReturn() {
+       
+        addNewRow()
+    }
+    func textFieldChangedText(indexPath: Int, text: String) {
+        print("Changed, text: \(text)")
+        contents[indexPath] = text
+    }
+//    func plusButtonPressed(indexPath: Int) {
+//        let newInd = IndexPath(row: contents.count, section: 0)
+//        tableView.insertRows(at: [newInd], with: .automatic)
+//    }
+    
+    func textFieldEndedEditing(indexPath: Int, text: String) {
+        //print("index: \(indexPath)")
+        
+//        if indexPath + 1 <= contents.count {
+//            print("yess")
+        contents[indexPath] = text
+        checkForErrors(contentsArray: contents)
+        print(contents)
+//        } else {
+//            print("nooo")
+//            contents.insert(text, at: indexPath)
+//        }
+    }
+    
+    
+    
+    
+}
 
 extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
     
@@ -255,7 +355,7 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
             descriptionOfList = descriptionView.text
         case 10903:
             print("end 10903")
-            contents = contentsTextView.text
+//            contents = contentsTextView.text
         default:
             break
         }
@@ -315,14 +415,15 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
                 
                 //textView.selectedRange = newPosition
             }
-            let newHeightT = contentsTextView.sizeThatFits(CGSize(width: contentsTextView.frame.size.width, height: CGFloat(MAXFLOAT))).height
-            print("newh: \(newHeightT)")
-            if newHeightT >= 300 {
-                textViewHeightConstraint.constant = newHeightT
-                UIView.animate(withDuration: 0.2) {
-                    self.view.layoutIfNeeded()
-                }
-            }
+            //MARK: Size To Fit
+//            let newHeightT = contentsTextView.sizeThatFits(CGSize(width: contentsTextView.frame.size.width, height: CGFloat(MAXFLOAT))).height
+//            print("newh: \(newHeightT)")
+//            if newHeightT >= 300 {
+//                textViewHeightConstraint.constant = newHeightT
+//                UIView.animate(withDuration: 0.2) {
+//                    self.view.layoutIfNeeded()
+//                }
+//            }
             return false
 
 
@@ -380,6 +481,7 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
             label: okButtonLabel,
             backgroundColor: .clear,
             highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05)) {
+                self.highlightRows()
                 SwiftEntryKit.dismiss()
         }
         let closeButtonLabelStyle = EKProperty.LabelStyle(
@@ -518,4 +620,185 @@ extension Array where Element: Hashable {
         }
         return buffer
     }
+}
+extension UIView {
+   func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        layer.mask = mask
+    }
+}
+
+extension GeneralViewController {
+    func checkForErrors(contentsArray: [String]) {
+        emptyStringErrors.removeAll()
+        
+        ///REFRESH
+        singleSpaceWarning.removeAll()
+        startSpaceWarning.removeAll()
+        endSpaceWarning.removeAll()
+        
+       
+        let noDuplicateArray = contentsArray.uniques
+        
+        var hasEmptyMatch = false
+        
+        if noDuplicateArray.count == contentsArray.count { ///There are no duplicates.
+            for (index, match) in contentsArray.enumerated() {
+                if match == "" {
+                    hasEmptyMatch = true
+                    emptyStringErrors.append(index)
+                }
+            }
+        } ///First, check for empty string.
+        
+        
+        
+        if hasEmptyMatch == false {
+            if contentsArray.count !=  noDuplicateArray.count {
+                print("There are DUPLICATES!!! NoDuplicateArray: \(noDuplicateArray)")
+                let differenceInNumber = contentsArray.count - noDuplicateArray.count
+                let differentStrings = Array(Set(contentsArray.filter({ (i: String) in contentsArray.filter({ $0 == i }).count > 1})))
+                var titleMessage = ""
+                print("diff: \(differentStrings)")
+                stringToIndexesError.removeAll() ///REFRESH
+                var firstOccuranceArray = [String]()
+                for (index, singleContent) in contentsArray.enumerated() {
+                    if differentStrings.contains(singleContent) {
+                        print("CONTAINTS")
+                        //shouldHighlightedRows.append(index)
+                        if !firstOccuranceArray.contains(singleContent) {
+                            firstOccuranceArray.append(singleContent)
+                        } else { //A occurance has already occured.
+                            stringToIndexesError[singleContent, default: [Int]()].append(index)
+                        }
+                        print(stringToIndexesError)
+                    }
+                }
+            
+            } else { ///No empty matches, or duplicates.
+                //var hasSingleSpaceMatch = 0
+                //var hasStartSpace = 0
+                //var hasEndSpace = 0
+                for (index, match) in contentsArray.enumerated() {
+                    if match == " " {
+                        //hasSingleSpaceMatch += 1
+                        singleSpaceWarning.append(index)
+                    }
+                    if match.hasPrefix(" ") {
+                        //hasStartSpace += 1
+                        startSpaceWarning.append(index)
+                    }
+                    if match.hasSuffix(" ") {
+                        //hasEndSpace += 1
+                        endSpaceWarning.append(index)
+                    }
+                }
+            }
+            
+        }
+        print("Done checking for errors---------------------------")
+        print("Single Space: \(singleSpaceWarning)")
+        print("Start Space: \(startSpaceWarning)")
+        print("End Space: \(startSpaceWarning)")
+        print(stringToIndexesError)
+    }
+    
+    
+    func showDoneAlerts() -> Bool { ///For the end, done
+        //highlightRows()
+        var showAnAlert = false
+        
+        if emptyStringErrors.count >= 1 {
+//
+//            var hasEmp = false
+//            for singleValue in generalErrors.values {
+//                if singleValue == .isEmptyString {
+//                    hasEmp = true
+//                }
+//            }
+//
+//            if hasEmp == true {
+//                showAnAlert = true
+                    var matchesPlural = "You have \(emptyStringErrors.count) empty matches!"
+                    if emptyStringErrors.count == 1 { matchesPlural = "Can't have an empty match!" }
+                    showAnAlert = true
+                SwiftEntryKitTemplates().displaySEK(message: matchesPlural, backgroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), location: .top, duration: CGFloat(0.8))
+//                SwiftEntryKitTemplates().displaySEK(message: "Can't have an empty match!", backgroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), location: .top, duration: 0.8)
+            highlightRows()
+//            }
+            
+            
+            
+        } else if stringToIndexesError.count >= 1 { ///No empty errors. Only duplicates.
+        
+            var titleMessage = ""
+            
+            let dupStrings = stringToIndexesError.keys
+            var duplicateStringArray = [String]()
+            for dup in dupStrings {
+                duplicateStringArray.append(dup)
+            }
+//            for singleString in dupStrings {
+            switch dupStrings.count {
+            case 0:
+                titleMessage = ""
+            case 1:
+                if let differentPaths = stringToIndexesError[duplicateStringArray[0]] {
+                    var aDuplicate = "a duplicate."
+                    //let matchesNumberDiff = (contentsArray.count - noDuplicateArray.count)
+                    //let matchesNumberDiff = values.count
+                    print("LKJFSLDFJLSDJFLSDJFSDF  \(differentPaths.count)")
+                    if differentPaths.count == 1 {
+                        aDuplicate = "a duplicate."
+                    } else if differentPaths.count == 2 {
+                        aDuplicate = "2 duplicates."
+                    } else {
+                        aDuplicate = "a couple duplicates."
+                    }
+                    titleMessage = "\"\(duplicateStringArray[0])\" has \(aDuplicate)"
+                }
+            case 2:
+                titleMessage = "\"\(duplicateStringArray[0])\" and \"\(duplicateStringArray[1])\" have duplicates."
+            case 3..<4:
+                print("ERROR: \(dupStrings.count)")
+                var newString = ""
+                for (index, message) in duplicateStringArray.enumerated() {
+                    if index != duplicateStringArray.count - 1 {
+                        newString.append("\"\(message)\", ")
+                    } else {
+                        newString.append(" and \"\(message)\"")
+                    }
+
+                    print("NEW: \(newString)")
+                }
+                titleMessage = newString + " have duplicates."
+            default:
+                titleMessage = "You have a lot of duplicate matches."
+            }
+            print("title: \(titleMessage)")
+            if titleMessage != "" {
+                var attributes = EKAttributes.topFloat
+                attributes.displayDuration = .infinity
+                attributes.entryInteraction = .absorbTouches
+                attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+                attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+                attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+                attributes.screenInteraction = .absorbTouches
+
+                //var matchesPlural = "You have \(differenceInNumber) empty matches."
+                //if differenceInNumber == 1 { matchesPlural = "You have a match that is empty." }
+                showAnAlert = true
+                showButtonBarMessage(attributes: attributes, titleMessage: titleMessage, desc: "Would you like us to delete the duplicates?", leftButton: "Yes, Delete and save", yesButton: "I'll fix it myself")
+            }
+        }
+        return showAnAlert
+    }
+
+    
+    func fixDuplicates() {
+        
+    }
+    
 }
