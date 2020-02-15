@@ -12,6 +12,7 @@ import ARKit
 extension ViewController {
     
     func blurScreenForSheetPresentation() {
+        stopSession()
         let newImageView = UIImageView()
         newImageView.alpha = 0
         view.insertSubview(newImageView, aboveSubview: cameraView)
@@ -26,6 +27,13 @@ extension ViewController {
 //            newImageView.tag = 13571
 //
 //        }
+        capturePhoto { image in
+           //...
+            newImageView.image = image
+            newImageView.contentMode = .scaleAspectFill
+            newImageView.tag = 13571
+            
+        }
         let effect = UIBlurEffect(style: .light)
         
         //let blurView = UIVisualEffectView(effect: effect)
@@ -67,6 +75,13 @@ extension ViewController {
 //            newImageView.tag = 13571
 //
 //        }
+        capturePhoto { image in
+           //...
+            newImageView.image = image
+            newImageView.contentMode = .scaleAspectFill
+            newImageView.tag = 13571
+            
+        }
         UIView.animate(withDuration: 0.5, animations: {
             newImageView.alpha = 1
         })
@@ -82,12 +97,13 @@ extension ViewController {
         switch finish {
         case "start":
             if let imageView = view.viewWithTag(13571) {
-                UIView.animate(withDuration: 0.5, delay: 0.5, animations: {
+                UIView.animate(withDuration: 0.5, delay: 0.8, animations: {
                     imageView.alpha = 0
                 }, completion:  { _ in
                     imageView.removeFromSuperview()
                 })
             }
+            startSession()
         //    sceneView.session.run(fastSceneConfiguration)
 //            let effect = UIBlurEffect(style: .light)
 //            let blurView = UIVisualEffectView(effect: effect)
@@ -104,7 +120,7 @@ extension ViewController {
         case "end":
             if let imageView = view.viewWithTag(13571) {
                 print("yes")
-                UIView.animate(withDuration: 0.3, delay: 0.5, animations: {
+                UIView.animate(withDuration: 0.24, delay: 0.5, animations: {
                     imageView.alpha = 0
                 }, completion:  { _ in
                     imageView.removeFromSuperview()
@@ -123,6 +139,7 @@ extension ViewController {
                 })
             } else {
 //                sceneView.session.run(fastSceneConfiguration)
+                startSession()
                 UIView.animate(withDuration: 0.6, animations: {
                     self.blurView.alpha = 0
                 }, completion: { _ in

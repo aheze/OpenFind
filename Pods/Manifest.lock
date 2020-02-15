@@ -1,4 +1,5 @@
 PODS:
+  - Parchment (1.7.0)
   - QuickLayout (3.0.0)
   - Realm (4.3.0):
     - Realm/Headers (= 4.3.0)
@@ -15,6 +16,7 @@ PODS:
   - ViewAnimator (2.7.0)
 
 DEPENDENCIES:
+  - Parchment
   - QuickLayout
   - RealmSwift
   - RoundCoachMark (from `https://github.com/zjohnzheng/RoundCoachMark`)
@@ -25,6 +27,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Parchment
     - QuickLayout
     - Realm
     - RealmSwift
@@ -43,6 +46,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/zjohnzheng/RoundCoachMark
 
 SPEC CHECKSUMS:
+  Parchment: cae686f73685d16742cec9c19239b7578a15f0f5
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
   Realm: 9357c3589555793e1860a7104a7412bca4a48d99
   RealmSwift: 402f1e379a8ef82c635313037b043f0f06de880c
@@ -52,6 +56,6 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   ViewAnimator: 5af1c6f3b310f012bf081259c43717aa54fbae73
 
-PODFILE CHECKSUM: b2e396aad2c41bd468326c8111073b25a195eadc
+PODFILE CHECKSUM: 0050ba9a2026ceed78b63b80d7faa3c5d6254fc9
 
 COCOAPODS: 1.8.3
