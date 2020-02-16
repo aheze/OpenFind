@@ -15,7 +15,12 @@ protocol GetColorInfo: class {
 }
 
 
-class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ReturnColorNow {
+class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ReturnColorNow, ReceiveColor {
+    
+    func receiveColor(name: String) {
+        print("color recieved")
+    }
+    
     
     var colorName = "00AEEF"
     

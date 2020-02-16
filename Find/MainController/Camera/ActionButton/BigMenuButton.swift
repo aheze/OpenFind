@@ -26,9 +26,11 @@ import UIKit
 
 /// A colored circle with an highlighted state
 ///
-@objc @IBDesignable public class JJCircleView: UIView {
+@objc @IBDesignable public class JJBigCircleView: UIView {
     /// The color of the circle.
     ///
+    
+    //var isBigButton: Bool?
     @objc @IBInspectable public dynamic var color: UIColor = Styles.defaultButtonColor {
         didSet {
             updateHighlightedColorFallback()
@@ -81,7 +83,7 @@ import UIKit
 
 // MARK: - Private Methods
 
-fileprivate extension JJCircleView {
+fileprivate extension JJBigCircleView {
     func setup() {
         backgroundColor = .clear
     }
@@ -89,17 +91,24 @@ fileprivate extension JJCircleView {
     func drawCircle(inRect rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()!
         context.saveGState()
-
+        
+        let borderWidth = CGFloat(6.5)
+        let halfR = borderWidth / 2
+        
         let diameter = min(rect.width, rect.height)
         var circleRect = CGRect()
-        circleRect.size.width = diameter
-        circleRect.size.height = diameter
-        circleRect.origin.x = (rect.width - diameter) / 2
-        circleRect.origin.y = (rect.height - diameter) / 2
+        circleRect.size.width = diameter - borderWidth
+        circleRect.size.height = diameter - borderWidth
+        circleRect.origin.x = ((rect.width - diameter) / 2) + halfR
+        circleRect.origin.y = ((rect.height - diameter) / 2) + halfR
 
         let circlePath = UIBezierPath(ovalIn: circleRect)
         currentColor.setFill()
         circlePath.fill()
+        
+        circlePath.lineWidth = borderWidth
+        #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).setStroke()
+        circlePath.stroke()
 
         context.restoreGState()
     }

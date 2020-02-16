@@ -220,6 +220,57 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         }, completion: nil)
         
     }
+    func update(index: Int, name: String, description: String, contents: [String], imageName: String, imageColor: String) {
+        if let listToEdit = listCategories?[index] {
+            try! realm.write {
+                listToEdit.name = ""
+                listToEdit.descriptionOfList = ""
+                //listToEdit.contents =
+                
+//                let deletes = [Video]()
+//                for (index, video) in favorite!.videos.enumerated() {
+//                    if !indexes.contains(index) {
+//                        newVideos.append(video)
+//                    }
+//                }
+//
+//                let realm = try! Realm()
+//                try! realm.write {
+//                    realm.delete(newVideos)
+//                }
+                //realm.delete(listToEdit.contents)
+                //for deleteCont in listToEdit.contents {
+               // realm.delete(listToEdit.contents.removeAll())
+                listToEdit.contents.removeAll()
+                print(  "UPDATE")
+                print(listToEdit.contents)
+                //}
+                for cont in contents {
+                    listToEdit.contents.append(cont)
+                }
+                //@objc dynamic var contents = ""
+                //var contents = List<String>()
+                listToEdit.iconImageName = ""
+                listToEdit.iconColorName = ""
+                //listToEdit.date = today
+                //listToEdit.count = plusOne
+            }
+        }
+        collectionView.reloadData()
+    }
+//    func removeContents(at indexes: [Int]) {
+//        let newVideos = [Video]()
+//        for (index, video) in favorite!.videos.enumerated() {
+//            if !indexes.contains(index) {
+//                newVideos.append(video)
+//            }
+//        }
+//
+//        let realm = try! Realm()
+//        try! realm.write {
+//            realm.delete(newVideos)
+//        }
+//    }
     
 }
 
@@ -252,7 +303,7 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
         cell.title.text = listT?.name
         cell.nameDescription.text = listT?.descriptionOfList
         
-        var array = listT?.contents
+        let array = listT?.contents
         if let arrayAsString = array?.joined(separator:"\n") {
         
             cell.contentsList.text = arrayAsString
@@ -298,6 +349,15 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
                 
         } else {
             print("false")
+            //performSegue(withIdentifier: "makeNewListSegue", sender: self)
+            let storyboard1 = UIStoryboard(name: "Main", bundle: nil)
+            let swipeViewController = storyboard1.instantiateViewController(withIdentifier: "EditListViewController") as! EditListViewController
+            //let firstViewController = EditListViewController()
+            swipeViewController.modalPresentationStyle = .custom
+            swipeViewController.transitioningDelegate = self
+            
+            present(swipeViewController, animated: true, completion: nil)
+            
             collectionView.deselectItem(at: indexPath, animated: true)
         }
     }
@@ -432,3 +492,103 @@ extension ListController {
     }
 }
 
+extension ListController:  UIViewControllerTransitioningDelegate {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return self
+    }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return self
+    }
+}
+extension ListController: UIViewControllerAnimatedTransitioning {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return 0.38
+    }
+    
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        // Retrieve the view controllers participating in the current transition from the context.
+        let fromView = transitionContext.viewController(forKey: .from)!.view!
+        let toView = transitionContext.viewController(forKey: .to)!.view!
+
+        
+        // If the view to transition from is this controller's view, the drawer is being presented.
+        let isPresentingDrawer = fromView == view
+        
+//        UIView.animate(withDuration: 0.5, animations: {
+//
+//        })
+        
+        let drawerView = isPresentingDrawer ? toView : fromView
+
+        if isPresentingDrawer {
+            // Any presented views must be part of the container view's hierarchy
+            transitionContext.containerView.addSubview(drawerView)
+        }
+
+        /***** Animation *****/
+        
+        let collViewHeight = view.frame.size.height
+        let drawerSize = CGSize(
+            width: UIScreen.main.bounds.size.width,
+            height: collViewHeight)
+        
+        print(drawerSize)
+        // Determine the drawer frame for both on and off screen positions.
+        let yPos = UIScreen.main.bounds.size.height - collViewHeight
+        
+        
+        print(collViewHeight)
+        print("y pos: \(yPos)")
+        
+        let onScreenDrawerFrame = CGRect(origin: CGPoint(x: 0, y: yPos), size: drawerSize)
+        let offScreenDrawerFrame = CGRect(origin: CGPoint(x: drawerSize.width, y: yPos), size: drawerSize)
+        
+        
+        if isPresentingDrawer == false {
+            let diffYPos = UIScreen.main.bounds.size.height - (collViewHeight / 0.97)
+            //let newyPos = yPos * 0.97
+            //onScreenDrawerFrame.origin.y = yPos
+           var newFrame = onScreenDrawerFrame
+            
+            //newFrame.origin.x *= 0.97
+            //newFrame.origin.x *= 0.97
+            //newFrame.size.width *= 0.97
+          newFrame.origin.y = diffYPos
+            newFrame.size.height = collViewHeight / 0.97
+            print("Fram: \(newFrame)")
+            drawerView.frame = newFrame
+        } else {
+            print("off Fram: \(offScreenDrawerFrame)")
+            drawerView.frame = offScreenDrawerFrame
+        }
+        //drawerView.frame = isPresentingDrawer ? offScreenDrawerFrame : onScreenDrawerFrame
+        drawerView.layer.cornerRadius = 10
+        
+        let animationDuration = transitionDuration(using: transitionContext)
+        
+        // Animate the drawer sliding in and out.
+        UIView.animate(withDuration: animationDuration, delay: .zero, options: .curveEaseOut, animations: {
+            if isPresentingDrawer == false {
+                print("dismissing")
+                
+                drawerView.frame = offScreenDrawerFrame
+                toView.transform = CGAffineTransform.identity
+                toView.layer.cornerRadius = 0
+            } else {
+                print("presenting")
+                drawerView.frame = onScreenDrawerFrame
+                fromView.transform = CGAffineTransform(scaleX: 0.97, y: 0.97)
+                fromView.layer.cornerRadius = 14
+            }
+        }, completion: { (success) in
+            // Cleanup view hierarchy
+            if !isPresentingDrawer {
+                drawerView.removeFromSuperview()
+            }
+            
+            // IMPORTANT: Notify UIKit that the transition is complete.
+            transitionContext.completeTransition(success)
+        })
+    }
+}

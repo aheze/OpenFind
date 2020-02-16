@@ -15,7 +15,12 @@ protocol GetIconInfo: class {
 }
 
 
-class SymbolsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ReturnIconNow {
+class SymbolsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ReturnIconNow, ReceiveIcon {
+    
+    func receiveIcon(name: String) {
+        print("icon recieved")
+    }
+    
  
     let realm = try! Realm()
     var recentSymbols: Results<RecentSymbol>?

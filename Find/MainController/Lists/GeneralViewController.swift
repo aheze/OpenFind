@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import SwiftEntryKit
 
-//enum GeneralError {
+//enum GeneralSpaceError {
 //    case hasStartSpace
 //    case hasEndSpace
 //    case isSingleSpace
@@ -22,7 +22,12 @@ protocol GetGeneralInfo: class {
 //protocol RowChange: class {
 //    func tableViewRowCountChanged(rowCount: Int)
 //}
-class GeneralViewController: UIViewController, ReturnGeneralNow {
+class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral {
+    
+    func receiveGeneral(name: String, desc: String, contents: [String]) {
+        print("general recieved")
+    }
+    
     
     
   
@@ -50,6 +55,8 @@ class GeneralViewController: UIViewController, ReturnGeneralNow {
 //    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableBottomView: UIView!
     
+    //var selectionMode = false
+    
     @IBOutlet weak var newMatchButton: UIButton!
     @IBOutlet weak var newMatchPlus: UIButton!
     
@@ -68,6 +75,8 @@ class GeneralViewController: UIViewController, ReturnGeneralNow {
     var singleSpaceWarning = [Int]()
     var startSpaceWarning = [Int]()
     var endSpaceWarning = [Int]()
+    
+    var generalSpaces = [String: [Int]]()
     
     var stringToIndexesError = [String: [Int]]()
     
@@ -100,6 +109,8 @@ class GeneralViewController: UIViewController, ReturnGeneralNow {
 //                    SwiftEntryKitTemplates().displaySEK(message: "Can't create a list with no contents!", backgroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), location: .top)
 //                }
 //            }
+            scrollView.setContentOffset(CGPoint(x: 0, y: currentIndexPath * 50), animated: true)
+
             checkForErrors(contentsArray: contents)
             if showDoneAlerts() == false {
                 print("NO ERRORS!!!!!!++++++++")
@@ -111,15 +122,55 @@ class GeneralViewController: UIViewController, ReturnGeneralNow {
         print("update")
         doneWithEditingGeneral(overrideDone: false)
     }
-    func highlightRows() {
+    func highlightRowsOnError() { ///Highlight the rows when done is pressed and there is an error
+        print("HIGHLIGHT ROWS, PRESSED DONE")
        // for index in indexPaths {
            // let indexP = IndexPath(row: index, section: 0)
             //tableView.selectRow(at: indexP, animated: false, scrollPosition: .none)
-            
-            //NotificationCenter.default.post(name: .hasToHighlight, object: generalErrors)
+//            print("Single Space: \(singleSpaceWarning)")
+//            print("Start Space: \(startSpaceWarning)")
+//            print("End Space: \(endSpaceWarning)")
+        NotificationCenter.default.post(name: .shouldHighlightRows, object: nil)
+//        NotificationCenter.default.post(name: .hasEmptyString, object: [0: emptyStringErrors])
+//
+//        NotificationCenter.default.post(name: .hasStartSpace, object: [0: startSpaceWarning])
+//        NotificationCenter.default.post(name: .hasEndSpace, object: [0: endSpaceWarning])
+//        NotificationCenter.default.post(name: .hasSingleSpace, object: [0: singleSpaceWarning])
+
             //let cell = tableView.cellForRow(at: indexP) as! GeneralTableCell
             //cell.hihilighted = true
        // }
+    }
+    func showWarningIcon() {
+        checkForErrors(contentsArray: contents)
+        generalSpaces.removeAll()
+//        print("About to show warning icon----------")
+//        print("Single Space: \(singleSpaceWarning)")
+//        print("Start Space: \(startSpaceWarning)")
+//        print("End Space: \(endSpaceWarning)")
+        
+        for singleSpace in singleSpaceWarning {
+            //print("singlespace")
+            generalSpaces["Single", default: [Int]()].append(singleSpace)
+        }
+        for startSpace in startSpaceWarning {
+            //print("Startspace")
+            generalSpaces["Start", default: [Int]()].append(startSpace)
+        }
+        for endSpace in endSpaceWarning {
+            //print("Endspace")
+            generalSpaces["End", default: [Int]()].append(endSpace)
+        }
+        
+       // print("General Spaces: \(generalSpaces)")
+        
+        NotificationCenter.default.post(name: .hasEmptyString, object: [0: emptyStringErrors])
+        
+        NotificationCenter.default.post(name: .hasGeneralSpaces, object: nil, userInfo: generalSpaces)
+        
+//        NotificationCenter.default.post(name: .hasStartSpace, object: [0: startSpaceWarning])
+//        NotificationCenter.default.post(name: .hasEndSpace, object: [0: endSpaceWarning])
+//        NotificationCenter.default.post(name: .hasSingleSpace, object: [0: singleSpaceWarning])
     }
     
         @IBOutlet weak var descDoneButton: UIButton!
@@ -131,12 +182,14 @@ class GeneralViewController: UIViewController, ReturnGeneralNow {
         
         @IBOutlet weak var titlesDoneButton: UIButton!
         @IBAction func titlesButtonDonePressed(_ sender: Any) {
+            //scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             view.endEditing(true)
             //descriptionOfList = descriptionField.text
         }
         
         @IBOutlet weak var contentsDoneButton: UIButton!
         @IBAction func contentsDonePressed(_ sender: Any) {
+            //scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             view.endEditing(true)
             //contents = contentsTextView.text
         }
@@ -158,7 +211,7 @@ class GeneralViewController: UIViewController, ReturnGeneralNow {
     func addNewRow(end: Bool = false) {
         addingNewMatch = true
         
-        print("CURR HEIGHT: \(tableView.contentSize.height)")
+      //  print("CURR HEIGHT: \(tableView.contentSize.height)")
         let tableViewHeightAfterAddRow = tableView.contentSize.height + 50
         if tableViewHeightAfterAddRow >= 300 {
             tableViewHeightConstraint.constant = tableViewHeightAfterAddRow
@@ -166,15 +219,16 @@ class GeneralViewController: UIViewController, ReturnGeneralNow {
                 self.view.layoutIfNeeded()
             })
         }
-        if end == false {
-            print("Return INSERT")
+        if end == false { ///User pressed return to insert
+          //  print("Return INSERT")
             contents.insert("", at: currentIndexPath + 1)
             currentIndexPath = currentIndexPath + 1
+            NotificationCenter.default.post(name: .addedRowAt, object: nil, userInfo: [0: currentIndexPath])
             tableView.insertRows(at: [IndexPath(row: currentIndexPath, section: 0)], with: .automatic)
         } else {
             print("New BUTTON PRESSED")
             
-            print("contents count \(contents.count)")
+          //  print("contents count \(contents.count)")
             contents.append("")
             currentIndexPath = contents.count - 1
             tableView.insertRows(at: [IndexPath(row: currentIndexPath, section: 0)], with: .automatic)
@@ -289,42 +343,30 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
 //    func madeNewList(name: String, description: String, contents: String, imageName: String, imageColor: String)
 //}
 extension GeneralViewController: ChangedTextCell {
+    
+    func cellPressedDoneButton() {
+        scrollView.setContentOffset(CGPoint(x: 0, y: currentIndexPath * 50), animated: true)
+    }
+    
     func textFieldStartedEditing(indexPath: Int) {
-       // addNewRow()
         print("curr ind: \(indexPath)")
         currentIndexPath = indexPath
         scrollView.setContentOffset(CGPoint(x: 0, y: (currentIndexPath * 50) + 124), animated: true) ///224 is height of everything above the tableview, so give some edit room so 124
 
     }
     func textFieldPressedReturn() {
-       
         addNewRow()
     }
     func textFieldChangedText(indexPath: Int, text: String) {
-        print("Changed, text: \(text)")
+        //print("Changed, text: \(text)")
         contents[indexPath] = text
+        showWarningIcon()
     }
-//    func plusButtonPressed(indexPath: Int) {
-//        let newInd = IndexPath(row: contents.count, section: 0)
-//        tableView.insertRows(at: [newInd], with: .automatic)
-//    }
-    
     func textFieldEndedEditing(indexPath: Int, text: String) {
-        //print("index: \(indexPath)")
-        
-//        if indexPath + 1 <= contents.count {
-//            print("yess")
         contents[indexPath] = text
         checkForErrors(contentsArray: contents)
         print(contents)
-//        } else {
-//            print("nooo")
-//            contents.insert(text, at: indexPath)
-//        }
     }
-    
-    
-    
     
 }
 
@@ -333,7 +375,6 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
     func textViewDidChange(_ textView: UITextView) {
         print("CHANGE")
         if textView.tag == 10902 {
-            //print("shkdhkusdf")
             placeholderLabel.isHidden = !descriptionView.text.isEmpty
         } else if textView.tag == 10903 {
             print("jklds")
@@ -362,80 +403,6 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
         print("END")
     }
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        // If the replacement text is "\n" and the
-        // text view is the one you want bullet points
-        // for
-        switch textView.tag {
-            
-        case 10903:
-//        let protectedRange = NSMakeRange(0, 3)
-//        let intersection = NSIntersectionRange(protectedRange, range)
-//        if intersection.length > 0 {
-//            return false
-//        }
-        if (text == "\n") {
-            print("newline")
-            // If the replacement text is being added to the end of the
-            // text view, i.e. the new index is the length of the old
-            // text view's text...
-
-
-            if range.location == textView.text.count {
-                print("KJAHSDFJJSKDF")
-                // Simply add the newline and bullet point to the end
-                if let textOfView = textView.text {
-                    let updatedText: String = "\(textOfView)\n \u{2022} "
-                    textView.text = updatedText
-                }
-                
-            } else {
-                print("ADJKGF")
-                // Get the replacement range of the UITextView
-                let beginning: UITextPosition = textView.beginningOfDocument
-                let start: UITextPosition = textView.position(from: beginning, offset: range.location)!
-                let end: UITextPosition = textView.position(from: start, offset: range.length)!
-                //var end: UITextPosition = textView.positionFromPosition(start, offset: range.length)!
-                let textRange: UITextRange = textView.textRange(from: start, to: end)!
-                // Insert that newline character *and* a bullet point
-                // at the point at which the user inputted just the
-                // newline character
-                textView.replace(textRange, withText: "\n \u{2022} ")
-                // Update the cursor position accordingly
-                //var cursor: Range = NSRange(range.location + "\n \u{2022} ".count, 0)
-//                let newPosition = textView.endOfDocument
-//                textView.selectedTextRange = textView.textRange(from: newPosition, to: newPosition)
-                
-                var arbitraryValue: Int = 0
-                arbitraryValue += range.location
-                arbitraryValue += 3
-                if let newPosition = textView.position(from: textView.beginningOfDocument, offset: arbitraryValue) {
-                    textView.selectedTextRange = textView.textRange(from: newPosition, to: newPosition)
-                }
-                
-                //textView.selectedRange = newPosition
-            }
-            //MARK: Size To Fit
-//            let newHeightT = contentsTextView.sizeThatFits(CGSize(width: contentsTextView.frame.size.width, height: CGFloat(MAXFLOAT))).height
-//            print("newh: \(newHeightT)")
-//            if newHeightT >= 300 {
-//                textViewHeightConstraint.constant = newHeightT
-//                UIView.animate(withDuration: 0.2) {
-//                    self.view.layoutIfNeeded()
-//                }
-//            }
-            return false
-
-
-        }
-        default:
-            print("wrong text VIEW")
-    }
-        
-        // Else return yes
-        return true
-    
-    }
 
     func showButtonBarMessage(attributes: EKAttributes, titleMessage: String, desc: String, leftButton: String, yesButton: String, image: String = "WhiteWarningShield") {
         let displayMode = EKAttributes.DisplayMode.inferred
@@ -481,7 +448,7 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
             label: okButtonLabel,
             backgroundColor: .clear,
             highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05)) {
-                self.highlightRows()
+                self.highlightRowsOnError()
                 SwiftEntryKit.dismiss()
         }
         let closeButtonLabelStyle = EKProperty.LabelStyle(
@@ -521,6 +488,181 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
     }
     
 }
+
+
+extension GeneralViewController {
+    func checkForErrors(contentsArray: [String]) {
+        emptyStringErrors.removeAll()
+        
+        ///REFRESH
+        singleSpaceWarning.removeAll()
+        startSpaceWarning.removeAll()
+        endSpaceWarning.removeAll()
+        
+       
+        let noDuplicateArray = contentsArray.uniques
+        
+        //var hasEmptyMatch = false
+        
+        print("contentsArray: \(contentsArray)")
+        for (index, match) in contentsArray.enumerated() {
+            if match == "" {
+                //print("empty detected")
+              //  hasEmptyMatch = true
+                emptyStringErrors.append(index)
+            }
+        }///First, check for empty string.
+        
+        
+        
+       // if hasEmptyMatch == false {
+        ///Now, check for duplicates
+        stringToIndexesError.removeAll() //
+        if contentsArray.count !=  noDuplicateArray.count {
+            //print("There are DUPLICATES!!! NoDuplicateArray: \(noDuplicateArray)")
+            //let differenceInNumber = contentsArray.count - noDuplicateArray.count
+            
+            let differentStrings = Array(Set(contentsArray.filter({ (i: String) in contentsArray.filter({ $0 == i }).count > 1}))) ///ContentsArray, but without duplicates
+          //  var titleMessage = ""
+            //print("diff: \(differentStrings)")
+            //REFRESH string to indexes
+            var firstOccuranceArray = [String]()
+            //firstOccuranceArray.removeAll()
+            for (index, singleContent) in contentsArray.enumerated() { ///Go through every match
+                if differentStrings.contains(singleContent) {
+                    //print("CONTAINTS")
+                    //shouldHighlightedRows.append(index)
+                    if !firstOccuranceArray.contains(singleContent) {
+                        print("doesn't contain \(singleContent)")
+                        firstOccuranceArray.append(singleContent)
+                    } else { //A occurance has already occured.
+                        print("DUPUPUPUPUPUPUP")
+                        stringToIndexesError[singleContent, default: [Int]()].append(index)
+                    }
+                    //print(stringToIndexesError)
+                }
+            }
+        
+        } //else { ///No empty matches, or duplicates.
+               
+        //var hasSingleSpaceMatch = 0
+                //var hasStartSpace = 0
+                //var hasEndSpace = 0
+        
+        ///check for empty spaces
+        for (index, match) in contentsArray.enumerated() {
+            if match == " " {
+             //   print("START SINGLE")
+                //hasSingleSpaceMatch += 1
+                singleSpaceWarning.append(index)
+            }
+            if match.hasPrefix(" ") {
+            //    print("START Prefix")
+                //hasStartSpace += 1
+                startSpaceWarning.append(index)
+            }
+            if match.hasSuffix(" ") {
+             //   print("START Suffix")
+                //hasEndSpace += 1
+                endSpaceWarning.append(index)
+            }
+        }
+         //   }
+            
+       // }
+        print("Done checking for errors------------------------------------------------------------------")
+        print("Empty: \(emptyStringErrors)")
+        print("Single Space: \(singleSpaceWarning)")
+        print("Start Space: \(startSpaceWarning)")
+        print("End Space: \(endSpaceWarning)")
+        print("Duplicates: \(stringToIndexesError)")
+    }
+    
+    
+    func showDoneAlerts() -> Bool { ///For the end, done
+        //highlightRows()
+        var showAnAlert = false
+        
+        if emptyStringErrors.count >= 1 {
+         //   print("MORE THAN 1! \(emptyStringErrors.count)")
+            var matchesPlural = "You have \(emptyStringErrors.count) empty matches!"
+            if emptyStringErrors.count == 1 { matchesPlural = "Can't have an empty match!" }
+            showAnAlert = true
+            SwiftEntryKitTemplates().displaySEK(message: matchesPlural, backgroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), location: .top, duration: CGFloat(0.8))
+            
+            highlightRowsOnError()
+        } else if stringToIndexesError.count >= 1 { ///No empty errors. Only duplicates.
+     //   print("ELSE!!!!")
+            var titleMessage = ""
+            
+            let dupStrings = stringToIndexesError.keys
+            var duplicateStringArray = [String]()
+            for dup in dupStrings {
+                duplicateStringArray.append(dup)
+            }
+//            for singleString in dupStrings {
+            switch dupStrings.count {
+            case 0:
+                titleMessage = ""
+            case 1:
+                if let differentPaths = stringToIndexesError[duplicateStringArray[0]] {
+                    var aDuplicate = "a duplicate."
+                    //let matchesNumberDiff = (contentsArray.count - noDuplicateArray.count)
+                    //let matchesNumberDiff = values.count
+           //         print("LKJFSLDFJLSDJFLSDJFSDF  \(differentPaths.count)")
+                    if differentPaths.count == 1 {
+                        aDuplicate = "a duplicate."
+                    } else if differentPaths.count == 2 {
+                        aDuplicate = "2 duplicates."
+                    } else {
+                        aDuplicate = "a couple duplicates."
+                    }
+                    titleMessage = "\"\(duplicateStringArray[0])\" has \(aDuplicate)"
+                }
+            case 2:
+                titleMessage = "\"\(duplicateStringArray[0])\" and \"\(duplicateStringArray[1])\" have duplicates."
+            case 3..<4:
+           //     print("ERROR: \(dupStrings.count)")
+                var newString = ""
+                for (index, message) in duplicateStringArray.enumerated() {
+                    if index != duplicateStringArray.count - 1 {
+                        newString.append("\"\(message)\", ")
+                    } else {
+                        newString.append(" and \"\(message)\"")
+                    }
+
+             //       print("NEW: \(newString)")
+                }
+                titleMessage = newString + " have duplicates."
+            default:
+                titleMessage = "You have a lot of duplicate matches."
+            }
+           // print("title: \(titleMessage)")
+            if titleMessage != "" {
+                var attributes = EKAttributes.topFloat
+                attributes.displayDuration = .infinity
+                attributes.entryInteraction = .absorbTouches
+                attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+                attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+                attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+                attributes.screenInteraction = .absorbTouches
+
+                //var matchesPlural = "You have \(differenceInNumber) empty matches."
+                //if differenceInNumber == 1 { matchesPlural = "You have a match that is empty." }
+                showAnAlert = true
+                showButtonBarMessage(attributes: attributes, titleMessage: titleMessage, desc: "Would you like us to delete the duplicates?", leftButton: "Yes, Delete and save", yesButton: "I'll fix it myself")
+            }
+        }
+        return showAnAlert
+    }
+
+    
+    func fixDuplicates() {
+        
+    }
+    
+}
+
 extension StringProtocol {
     subscript(_ offset: Int)                     -> Element     { self[index(startIndex, offsetBy: offset)] }
     subscript(_ range: Range<Int>)               -> SubSequence { prefix(range.lowerBound+range.count).suffix(range.count) }
@@ -628,177 +770,4 @@ extension UIView {
         mask.path = path.cgPath
         layer.mask = mask
     }
-}
-
-extension GeneralViewController {
-    func checkForErrors(contentsArray: [String]) {
-        emptyStringErrors.removeAll()
-        
-        ///REFRESH
-        singleSpaceWarning.removeAll()
-        startSpaceWarning.removeAll()
-        endSpaceWarning.removeAll()
-        
-       
-        let noDuplicateArray = contentsArray.uniques
-        
-        var hasEmptyMatch = false
-        
-        if noDuplicateArray.count == contentsArray.count { ///There are no duplicates.
-            for (index, match) in contentsArray.enumerated() {
-                if match == "" {
-                    hasEmptyMatch = true
-                    emptyStringErrors.append(index)
-                }
-            }
-        } ///First, check for empty string.
-        
-        
-        
-        if hasEmptyMatch == false {
-            if contentsArray.count !=  noDuplicateArray.count {
-                print("There are DUPLICATES!!! NoDuplicateArray: \(noDuplicateArray)")
-                let differenceInNumber = contentsArray.count - noDuplicateArray.count
-                let differentStrings = Array(Set(contentsArray.filter({ (i: String) in contentsArray.filter({ $0 == i }).count > 1})))
-                var titleMessage = ""
-                print("diff: \(differentStrings)")
-                stringToIndexesError.removeAll() ///REFRESH
-                var firstOccuranceArray = [String]()
-                for (index, singleContent) in contentsArray.enumerated() {
-                    if differentStrings.contains(singleContent) {
-                        print("CONTAINTS")
-                        //shouldHighlightedRows.append(index)
-                        if !firstOccuranceArray.contains(singleContent) {
-                            firstOccuranceArray.append(singleContent)
-                        } else { //A occurance has already occured.
-                            stringToIndexesError[singleContent, default: [Int]()].append(index)
-                        }
-                        print(stringToIndexesError)
-                    }
-                }
-            
-            } else { ///No empty matches, or duplicates.
-                //var hasSingleSpaceMatch = 0
-                //var hasStartSpace = 0
-                //var hasEndSpace = 0
-                for (index, match) in contentsArray.enumerated() {
-                    if match == " " {
-                        //hasSingleSpaceMatch += 1
-                        singleSpaceWarning.append(index)
-                    }
-                    if match.hasPrefix(" ") {
-                        //hasStartSpace += 1
-                        startSpaceWarning.append(index)
-                    }
-                    if match.hasSuffix(" ") {
-                        //hasEndSpace += 1
-                        endSpaceWarning.append(index)
-                    }
-                }
-            }
-            
-        }
-        print("Done checking for errors--------------++- + ------------")
-        print("Single Space: \(singleSpaceWarning)")
-        print("Start Space: \(startSpaceWarning)")
-        print("End Space: \(startSpaceWarning)")
-        print(stringToIndexesError)
-    }
-    
-    
-    func showDoneAlerts() -> Bool { ///For the end, done
-        //highlightRows()
-        var showAnAlert = false
-        
-        if emptyStringErrors.count >= 1 {
-//
-//            var hasEmp = false
-//            for singleValue in generalErrors.values {
-//                if singleValue == .isEmptyString {
-//                    hasEmp = true
-//                }
-//            }
-//
-//            if hasEmp == true {
-//                showAnAlert = true
-                    var matchesPlural = "You have \(emptyStringErrors.count) empty matches!"
-                    if emptyStringErrors.count == 1 { matchesPlural = "Can't have an empty match!" }
-                    showAnAlert = true
-                SwiftEntryKitTemplates().displaySEK(message: matchesPlural, backgroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), location: .top, duration: CGFloat(0.8))
-//                SwiftEntryKitTemplates().displaySEK(message: "Can't have an empty match!", backgroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), location: .top, duration: 0.8)
-            highlightRows()
-//            }
-            
-            
-            
-        } else if stringToIndexesError.count >= 1 { ///No empty errors. Only duplicates.
-        
-            var titleMessage = ""
-            
-            let dupStrings = stringToIndexesError.keys
-            var duplicateStringArray = [String]()
-            for dup in dupStrings {
-                duplicateStringArray.append(dup)
-            }
-//            for singleString in dupStrings {
-            switch dupStrings.count {
-            case 0:
-                titleMessage = ""
-            case 1:
-                if let differentPaths = stringToIndexesError[duplicateStringArray[0]] {
-                    var aDuplicate = "a duplicate."
-                    //let matchesNumberDiff = (contentsArray.count - noDuplicateArray.count)
-                    //let matchesNumberDiff = values.count
-                    print("LKJFSLDFJLSDJFLSDJFSDF  \(differentPaths.count)")
-                    if differentPaths.count == 1 {
-                        aDuplicate = "a duplicate."
-                    } else if differentPaths.count == 2 {
-                        aDuplicate = "2 duplicates."
-                    } else {
-                        aDuplicate = "a couple duplicates."
-                    }
-                    titleMessage = "\"\(duplicateStringArray[0])\" has \(aDuplicate)"
-                }
-            case 2:
-                titleMessage = "\"\(duplicateStringArray[0])\" and \"\(duplicateStringArray[1])\" have duplicates."
-            case 3..<4:
-                print("ERROR: \(dupStrings.count)")
-                var newString = ""
-                for (index, message) in duplicateStringArray.enumerated() {
-                    if index != duplicateStringArray.count - 1 {
-                        newString.append("\"\(message)\", ")
-                    } else {
-                        newString.append(" and \"\(message)\"")
-                    }
-
-                    print("NEW: \(newString)")
-                }
-                titleMessage = newString + " have duplicates."
-            default:
-                titleMessage = "You have a lot of duplicate matches."
-            }
-            print("title: \(titleMessage)")
-            if titleMessage != "" {
-                var attributes = EKAttributes.topFloat
-                attributes.displayDuration = .infinity
-                attributes.entryInteraction = .absorbTouches
-                attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-                attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-                attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-                attributes.screenInteraction = .absorbTouches
-
-                //var matchesPlural = "You have \(differenceInNumber) empty matches."
-                //if differenceInNumber == 1 { matchesPlural = "You have a match that is empty." }
-                showAnAlert = true
-                showButtonBarMessage(attributes: attributes, titleMessage: titleMessage, desc: "Would you like us to delete the duplicates?", leftButton: "Yes, Delete and save", yesButton: "I'll fix it myself")
-            }
-        }
-        return showAnAlert
-    }
-
-    
-    func fixDuplicates() {
-        
-    }
-    
 }

@@ -22,6 +22,8 @@ protocol ReturnIconNow: class {
 protocol ReturnColorNow: class {
     func updateInfo()
 }
+
+
 class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo {
     
 
@@ -32,6 +34,13 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo {
     var iconImageName = "square.grid.2x2"
     var iconColorName = "00AEEF"
     var shouldDismiss = true
+    
+    func returnCompletedList() {
+         print("name: \(name), description: \(descriptionOfList), contents: \(contents), imageName: \(iconImageName), imageColor: \(iconColorName)")
+         newListDelegate?.madeNewList(name: name, description: descriptionOfList, contents: contents, imageName: iconImageName, imageColor: iconColorName)
+         self.dismiss(animated: true, completion: nil)
+     }
+     
     
     
     func returnNewGeneral(nameOfList: String, desc: String, contentsOfList: [String], interrupt: Bool) {
@@ -45,12 +54,7 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo {
             returnCompletedList()
         }
     }
-    func returnCompletedList() {
-        print("name: \(name), description: \(descriptionOfList), contents: \(contents), imageName: \(iconImageName), imageColor: \(iconColorName)")
-        newListDelegate?.madeNewList(name: name, description: descriptionOfList, contents: contents, imageName: iconImageName, imageColor: iconColorName)
-        self.dismiss(animated: true, completion: nil)
-    }
-    
+ 
     func returnNewIcon(iconName: String) {
         iconImageName = iconName
     }
@@ -85,6 +89,8 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo {
     weak var returnGeneralNowDelegate: ReturnGeneralNow?
     weak var returnIconNowDelegate: ReturnIconNow?
     weak var returnColorNowDelegate: ReturnColorNow?
+    
+    
     
     weak var newListDelegate: NewListMade?
 

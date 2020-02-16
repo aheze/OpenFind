@@ -12,6 +12,7 @@
 		490452502379DF5C0046570D /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4904524F2379DF5C0046570D /* HistoryTableViewCell.swift */; };
 		490452522379DFD40046570D /* CollectionViewPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490452512379DFD40046570D /* CollectionViewPhotoCell.swift */; };
 		49089E1F238EFFFA0070A70C /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49089E1E238EFFFA0070A70C /* FooterView.swift */; };
+		490BC3F623F8DA41004D1433 /* EditListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490BC3F523F8DA41004D1433 /* EditListViewController.swift */; };
 		490DA73F23CBAB7C000AF57D /* NewShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA73E23CBAB7C000AF57D /* NewShutterButton.swift */; };
 		490DA74E23CBB871000AF57D /* UIView+JJFloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA74123CBB86A000AF57D /* UIView+JJFloatingActionButton.swift */; };
 		490DA74F23CBB871000AF57D /* JJFloatingActionButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA74223CBB86B000AF57D /* JJFloatingActionButtonState.swift */; };
@@ -130,6 +131,7 @@
 		4904524F2379DF5C0046570D /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		490452512379DFD40046570D /* CollectionViewPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewPhotoCell.swift; sourceTree = "<group>"; };
 		49089E1E238EFFFA0070A70C /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
+		490BC3F523F8DA41004D1433 /* EditListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditListViewController.swift; sourceTree = "<group>"; };
 		490DA73E23CBAB7C000AF57D /* NewShutterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShutterButton.swift; sourceTree = "<group>"; };
 		490DA74123CBB86A000AF57D /* UIView+JJFloatingActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+JJFloatingActionButton.swift"; sourceTree = "<group>"; };
 		490DA74223CBB86B000AF57D /* JJFloatingActionButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJFloatingActionButtonState.swift; sourceTree = "<group>"; };
@@ -265,6 +267,14 @@
 				49325C1223CAE84500A771A3 /* StatusView.swift */,
 			);
 			path = Matches;
+			sourceTree = "<group>";
+		};
+		490BC3F423F8DA30004D1433 /* Edit Lists */ = {
+			isa = PBXGroup;
+			children = (
+				490BC3F523F8DA41004D1433 /* EditListViewController.swift */,
+			);
+			path = "Edit Lists";
 			sourceTree = "<group>";
 		};
 		490DA74023CBB84C000AF57D /* ActionButton */ = {
@@ -523,6 +533,7 @@
 		4988FC4623BEF82D00199635 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
+				490BC3F423F8DA30004D1433 /* Edit Lists */,
 				4966B71123E1251200A8523A /* ChangeImage */,
 				4928525923D617270048EC13 /* ListController.swift */,
 				49569B3223D65AA4009308CA /* ListCollectionCell.swift */,
@@ -797,6 +808,7 @@
 				49517017235AC56D00E00D83 /* TextFieldReactor.swift in Sources */,
 				490452502379DF5C0046570D /* HistoryTableViewCell.swift in Sources */,
 				49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */,
+				490BC3F623F8DA41004D1433 /* EditListViewController.swift in Sources */,
 				4966B71023E124D700A8523A /* ImagePickerList.swift in Sources */,
 				4928525023D14D7B0048EC13 /* RealmPhoto.swift in Sources */,
 				4972B40E23F117C500843537 /* GeneralTableviewCell.swift in Sources */,
