@@ -21,22 +21,26 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = listsCollectionView.dequeueReusableCell(withReuseIdentifier: "tooltopCell", for: indexPath) as! ToolbarTopCell
-        let title = listCategories?[indexPath.row].name
-        cell.labelText.text = title
-        cell.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
-        cell.layer.cornerRadius = 6
-          
+        if let list = listCategories?[indexPath.row] {
+            cell.labelText.text = list.name
+            cell.backgroundColor = UIColor(hexString: list.iconColorName)
+            cell.layer.cornerRadius = 6
+            let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 10, weight: .semibold)
+            let newImage = UIImage(systemName: list.iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor.white, renderingMode: .alwaysOriginal)
+            
+            cell.imageView.image = newImage
+        }
         return cell
     }
-    func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      sizeForItemAt indexPath: IndexPath) -> CGSize {
-       // let cell = listsCollectionView.dequeueReusableCell(withReuseIdentifier: "tooltopCell", for: indexPath) as! ToolbarTopCell
-        //let itemSize = cell.button.frame.size.width
-        return CGSize(width: 120, height: CGFloat(24))
-    }
+//    func collectionView(_ collectionView: UICollectionView,
+//                      layout collectionViewLayout: UICollectionViewLayout,
+//                      sizeForItemAt indexPath: IndexPath) -> CGSize {
+//       // let cell = listsCollectionView.dequeueReusableCell(withReuseIdentifier: "tooltopCell", for: indexPath) as! ToolbarTopCell
+//        //let itemSize = cell.button.frame.size.width
+//        return CGSize(width: 120, height: CGFloat(38))
+//    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        print("select cell")
         
     }
 }

@@ -1,4 +1,4 @@
-framework module QuickLayout {
+module QuickLayout {
   umbrella header "QuickLayout-umbrella.h"
 
   export *

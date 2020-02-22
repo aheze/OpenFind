@@ -45,7 +45,7 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
         "#eb2f06","#e55039","#f7b731","#fed330","#78e08f",
         "#fc5c65","#fa8231","#f6b93b","#b8e994","#2bcbba",
         "#ff6348","#b71540","#079992","#d1d8e0","#778ca3",
-        "#e84393","#a55eea","#5352ed","#70a1ff","#f1f2f6",
+        "#e84393","#a55eea","#5352ed","#70a1ff","#40739e",
         "#45aaf2","#2d98da","#00aeef","#4b6584","#0a3d62"]
 //        ["#eb2f06","#e55039","#f7b731","#fed330","#78e08f","#fc5c65","#fa8231","#f6b93b","#b8e994","#2bcbba","#a55eea","#b71540","#079992","#d1d8e0","#778ca3","#45aaf2","#2d98da","#00aeef","#4b6584","#0a3d62"]
     

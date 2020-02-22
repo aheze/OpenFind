@@ -1,4 +1,4 @@
-framework module ViewAnimator {
+module ViewAnimator {
   umbrella header "ViewAnimator-umbrella.h"
 
   export *

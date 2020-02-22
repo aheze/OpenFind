@@ -190,6 +190,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         let padding = AdaptiveCollectionConfig.cellPadding
         collectionView.contentInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
         getData()
+        collectionView.delaysContentTouches = false
         selectButton.layer.cornerRadius = 4
        // sortLists()
         addHeight()
@@ -316,6 +317,7 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
             
             cell.title.text = listT.name
             cell.nameDescription.text = listT.descriptionOfList
+            //cell.contentView.clipsToBounds = true
             
             let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 100, weight: .semibold)
             let newImage = UIImage(systemName: listT.iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(hexString: listT.iconColorName), renderingMode: .alwaysOriginal)
@@ -323,9 +325,10 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
             
             let array = listT.contents.joined(separator:"\n")
             cell.contentsList.text = array
+            cell.baseView.layer.cornerRadius = 10
             
         }
-        cell.contentView.layer.cornerRadius = 10
+        //cell.contentView.layer.cornerRadius = 10
         
         
         
@@ -343,6 +346,7 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
         let newContentsHeight = arrayAsString.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
         return AdaptiveCollectionConfig.cellBaseHeight + cellHeights[indexPath.item] + 25 //+ 300
     }
+  
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("did")

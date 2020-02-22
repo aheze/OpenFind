@@ -31,6 +31,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         ramReel.textField.inputAccessoryView = toolBar
         cancelButtonNew.layer.cornerRadius = 4
         autoCompleteButton.layer.cornerRadius = 4
+        newMatchButton.layer.cornerRadius = 4
         
      //   ramReel.textField.inserttoken
         

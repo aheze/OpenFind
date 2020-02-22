@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FEA6FF0588A91CCD972EDCD698B85647"
-               BuildableName = "SwiftEntryKit.framework"
+               BuildableName = "libSwiftEntryKit.a"
                BlueprintName = "SwiftEntryKit"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

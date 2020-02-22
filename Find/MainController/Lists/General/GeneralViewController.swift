@@ -215,7 +215,32 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
     }
     
     @IBAction func bottomHelpPressed(_ sender: Any) {
+        //let frontViewController = UINavigationController(rootViewController: HomeViewController())
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let helpViewController = storyboard.instantiateViewController(withIdentifier: "DefaultHelpController") as! DefaultHelpController
+        helpViewController.arrayOfHelp = ["0989238490238409234", "0989238490238409234sjdfiosydifysdifysdfoysf"]
+
+        let navigationController = UINavigationController(rootViewController: helpViewController)
+        navigationController.view.backgroundColor = UIColor.clear
+        //navigationController.edgesForExtendedLayout = []
+        helpViewController.edgesForExtendedLayout = []
+       // helpViewController.view.layer.cornerRadius = 10
+        //helpViewController.view.corner
         
+        var attributes = EKAttributes.centerFloat
+        attributes.displayDuration = .infinity
+        attributes.entryInteraction = .absorbTouches
+        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+        attributes.entryBackground = .color(color: .white)
+        attributes.screenInteraction = .absorbTouches
+        attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+        attributes.roundCorners = .all(radius: 10)
+        
+        
+        
+        SwiftEntryKit.display(entry: navigationController, using: attributes)
     }
     
     

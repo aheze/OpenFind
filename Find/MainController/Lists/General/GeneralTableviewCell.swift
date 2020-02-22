@@ -154,8 +154,8 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
     }
     
     @objc func onHighlightRowErrors(_ notification: Notification) {
-        print("receive highlight string errors")
-        print("Errors? \(notification.userInfo)")
+        //print("receive highlight string errors")
+        //print("Errors? \(notification.userInfo)")
         animateDupRetreat()
         var arrayOfIndexes = [Int]()
         if let data = notification.userInfo as? [String: [Int]] {
@@ -164,15 +164,10 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
                     arrayOfIndexes.append(errorIndex)
                 }
             }
-//            if let arrayOfPaths = data[0] {
-//                if arrayOfPaths.contain
-//            }
             print(arrayOfIndexes)
             if arrayOfIndexes.contains(indexPath) {
                 animateDupSlide()
             }
-          //  print("HAS DATA")
-         //   print("data: \(data)")
         }
     }
     

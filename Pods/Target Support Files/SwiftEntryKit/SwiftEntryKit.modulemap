@@ -1,4 +1,4 @@
-framework module SwiftEntryKit {
+module SwiftEntryKit {
   umbrella header "SwiftEntryKit-umbrella.h"
 
   export *

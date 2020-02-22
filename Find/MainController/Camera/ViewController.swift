@@ -58,6 +58,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var toolBar: UIView!
     @IBOutlet weak var autoCompleteButton: UIButton!
     @IBOutlet weak var cancelButtonNew: UIButton!
+    @IBOutlet weak var newMatchButton: UIButton!
+    
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
         UIView.animate(withDuration: 0.4, animations: {
             self.ramReel.textField.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 0)
@@ -74,6 +76,13 @@ class ViewController: UIViewController {
             view.endEditing(true)
         }
     }
+    @IBAction func newMatchPressed(_ sender: Any) {
+        if let ramText = ramReel.textField.text {
+            ramReel.textField.text = "\(ramText)\u{2022}"
+        }
+    }
+    
+    
     
     //MARK: Lists
         
@@ -265,9 +274,9 @@ class ViewController: UIViewController {
         setUpTimers()
         setUpRamReel()
         setUpFilePath()
-//        if isAuthorized() {
-//            configureCamera()
-//        }
+        if isAuthorized() {
+            configureCamera()
+        }
         busyFastFinding = false
         
         motionManager = CMMotionManager()

@@ -41,6 +41,7 @@ extension ViewController {
                     component.width = observation.boundingBox.width
                     component.text = text.string
                     drawFastHighlight(component: component)
+                    
                     let lowerCaseFinalText = finalTextToFind.lowercased()
                     let lowerCaseComponentText = component.text.lowercased()
                 
@@ -49,36 +50,42 @@ extension ViewController {
                     component.text = lowerCaseComponentText
                     
                 
-                    if lowerCaseComponentText.contains(lowerCaseFinalText) {
-                        //print("sghiruiguhweiugsiugr+++++++++++")
-                    //if component.text.contains(finalTextToFind) {
-                        let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
-                        let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
-                        let offHalf = offsetWidth / 2
-                        let newW = component.width * convertedOriginalWidthOfBigImage
-                        let newH = component.height * self.deviceSize.height
-                        let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
-                        let newY = component.y * self.deviceSize.height
-                        let individualCharacterWidth = newW / CGFloat(component.text.count)
-                        let finalW = individualCharacterWidth * CGFloat(finalTextToFind.count)
-                        
-                        let indicies = component.text.indicesOf(string: lowerCaseFinalText)
-                        for index in indicies {
-                            let addedWidth = individualCharacterWidth * CGFloat(index)
-                            let finalX = newX + addedWidth
-                            let newComponent = Component()
+                    let arrayOfMatches = lowerCaseFinalText.components(separatedBy: "\u{2022}")
+                    print("arrayOfMatches: \(arrayOfMatches)")
+                    for match in arrayOfMatches {
+                        if lowerCaseComponentText.contains(match) {
+                            //print("sghiruiguhweiugsiugr+++++++++++")
+                        //if component.text.contains(finalTextToFind) {
+                            let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
+                            let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
+                            let offHalf = offsetWidth / 2
+                            let newW = component.width * convertedOriginalWidthOfBigImage
+                            let newH = component.height * self.deviceSize.height
+                            let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
+                            let newY = component.y * self.deviceSize.height
+                            let individualCharacterWidth = newW / CGFloat(component.text.count)
+                            let finalW = individualCharacterWidth * CGFloat(match.count)
                             
-                            newComponent.x = finalX - 4
-                            newComponent.y = newY - (newH + 1)
-                            newComponent.width = finalW + 8
-                            newComponent.height = newH + 2
-                            newComponent.text = "This value is not needed"
-                            newComponent.changed = false
-                            nextComponents.append(newComponent)
-                            
+                            let indicies = component.text.indicesOf(string: match)
+                            for index in indicies {
+                                let addedWidth = individualCharacterWidth * CGFloat(index)
+                                let finalX = newX + addedWidth
+                                let newComponent = Component()
+                                
+                                newComponent.x = finalX - 4
+                                newComponent.y = newY - (newH + 1)
+                                newComponent.width = finalW + 8
+                                newComponent.height = newH + 2
+                                newComponent.text = "This value is not needed"
+                                newComponent.changed = false
+                                nextComponents.append(newComponent)
+                                
+                            }
                         }
-                    }
                 
+                    }
+                    
+                    
                 }
             }
             
@@ -389,4 +396,6 @@ extension String {
         
         return indices
     }
+    
 }
+
