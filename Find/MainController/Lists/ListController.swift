@@ -51,16 +51,17 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
                 print("error deleting category \(error)")
             }
             let indP = IndexPath(item: currentEditingPresentationPath, section: 0)
-            collectionView.deleteItems(at: [indP])
+            sortLists()
+            collectionView?.performBatchUpdates({
+                print("BATCH UP")
+                self.collectionView?.deleteItems(at: [indP])
+            }, completion: nil)
             currentEditingPresentationPath = -1
         }
     }
     
     
     func listDeleteButtonPressed() {
-        
-        //print("Delete:")
-        //let indexes = indexPathsSelected
         sortLists()
         var tempLists = [FindList]()
         var tempInts = [Int]()
@@ -73,15 +74,6 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
                 
             }
         }
-        //for temp in tempInts
-//        var array1 = ["a", "b", "c", "d", "e"]
-//        let array2 = ["a", "c", "d"]
-        //cellHeights = tempInts.filter { !cellHeights.contains($0) }
-       // print("cellHeights    : \(cellHeights)")
-       // print("list categories    : \(listCategories)")
-//        for listT in tempLists {
-//
-//        }
         print("Index selected: \(indexPathsSelected)")
         do {
             try realm.write {
@@ -90,24 +82,9 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         } catch {
             print("error deleting category \(error)")
         }
-//        addHeight()
-        //collectionView.reloadData()
-        //print("sldjfsldfksj     d")
         collectionView.deleteItems(at: arrayOfIndexPaths)
-        //print("sldjfsldfksjd  sfds")
         indexPathsSelected.removeAll()
         numberOfSelected -= tempLists.count
-//        if listCategories?.count == 0 {
-//            SwiftEntryKit.dismiss()
-//        }
-//        //print("sldjfsldfk            sjd")
-//        //collectionView.reloadData()
-////        let realm = try! Realm()
-////        try! realm.write {
-////            realm.delete(newVideos)
-////        }
-//        SwiftEntryKit.dismiss()
-        //exitSwiftEntryKit()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -163,13 +140,6 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
             tempInts.append(inx)
             arrayOfIndexPaths.append(IndexPath(item: inx, section: 0))
         }
-//        for index in listCategories! {
-//            if let cat = listCategories?[index] {
-//                tempLists.append(cat)
-//                tempInts.append(index)
-//                arrayOfIndexPaths.append(IndexPath(item: index, section: 0))
-//            }
-//        }
         print("Index selected: \(indexPathsSelected)")
         do {
             try realm.write {

@@ -82,7 +82,7 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
     
     var generalSpaces = [String: [Int]]()
     
-    var stringToIndexesError = [String: [Int]]()
+    var stringToIndexesError = [String: [Int]]() ///A dictionary of the DUPLICATE rows- not the first occurance. These rows should be deleted.
     
     weak var deleteTheList: DeleteList?
     
@@ -135,7 +135,7 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
 //            print("Single Space: \(singleSpaceWarning)")
 //            print("Start Space: \(startSpaceWarning)")
 //            print("End Space: \(endSpaceWarning)")
-        NotificationCenter.default.post(name: .shouldHighlightRows, object: nil)
+        NotificationCenter.default.post(name: .shouldHighlightRows, object: nil, userInfo: stringToIndexesError)
 //        NotificationCenter.default.post(name: .hasEmptyString, object: [0: emptyStringErrors])
 //
 //        NotificationCenter.default.post(name: .hasStartSpace, object: [0: startSpaceWarning])
@@ -509,7 +509,7 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
                 highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05),
                 displayMode: displayMode) { [unowned self] in
                  print("cool")
-                    self.doneWithEditingGeneral(overrideDone: true)
+                    self.fixDuplicates()
             }
             let buttonsBarContent = EKProperty.ButtonBarContent(  with: closeButton, okButton,  separatorColor: Color.Gray.light,  buttonHeight: 60,  displayMode: displayMode,  expandAnimatedly: true  )
             let alertMessage = EKAlertMessage(  simpleMessage: simpleMessage,  imagePosition: .left,  buttonBarContent: buttonsBarContent
@@ -530,9 +530,9 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
                 label: closeButtonLabel,
                 backgroundColor: .clear,
                 highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05),
-                displayMode: displayMode) { [weak self] in
+                displayMode: displayMode) { [unowned self] in
                 print("DELETING LIST")
-                    self?.deleteTheList?.deleteList()
+                    self.deleteTheList?.deleteList()
                     SwiftEntryKit.dismiss()
                    // self.doneWithEditingGeneral(overrideDone: true)
             }
@@ -719,6 +719,31 @@ extension GeneralViewController {
 
     
     func fixDuplicates() {
+        
+        print("dup errors: \(stringToIndexesError)")
+        var toDeleteArray = [IndexPath]()
+        var toDeleteValues = [Int]()
+        for singleDup in stringToIndexesError {
+            for value in singleDup.value {
+                let newInd = IndexPath(row: value, section: 0)
+                toDeleteArray.append(newInd)
+                toDeleteValues.append(value)
+                //contents.remove(at: value)
+            }
+        }
+        //let indexAnimals = [0, 3, 4]
+        contents = contents
+            .enumerated()
+            .filter { !toDeleteValues.contains($0.offset) }
+            .map { $0.element }
+        
+        tableView.performBatchUpdates({
+            self.tableView.deleteRows(at: toDeleteArray, with: .automatic)
+        }) { _ in
+            self.doneWithEditingGeneral(overrideDone: true)
+        }
+        
+        
         
     }
     

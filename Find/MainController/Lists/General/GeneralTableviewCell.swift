@@ -28,7 +28,12 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
     
     var thisRowHasErrors = false ///To toggle the invisible button
     
-    var indexPath = 0 
+    var indexPath = 0
+    
+    var overlayView = UIView()
+    var touchedView = false
+    
+    
     
     weak var changedTextDelegate: ChangedTextCell?
     @IBOutlet weak var warningButton: UIButton!
@@ -121,11 +126,51 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
         }
     }
     
+    func animateDupSlide() {
+        overlayView.snp.remakeConstraints{ (make) in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.width.equalTo(contentView.frame.size.width)
+        }
+        UIView.animate(withDuration: 0.5) {
+            self.overlayView.alpha = 1
+            self.contentView.layoutIfNeeded()
+        }
+        //overlayView.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+        
+    }
+    func animateDupRetreat() {
+        overlayView.snp.remakeConstraints{ (make) in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.width.equalTo(0)
+        }
+        UIView.animate(withDuration: 0.5) {
+            self.overlayView.alpha = 0
+            self.contentView.layoutIfNeeded()
+        }
+    }
     
     @objc func onHighlightRowErrors(_ notification: Notification) {
-      //  print("receive highlight string errors")
-       // print("Errors? \(notification.userInfo)")
+        print("receive highlight string errors")
+        print("Errors? \(notification.userInfo)")
+        animateDupRetreat()
+        var arrayOfIndexes = [Int]()
         if let data = notification.userInfo as? [String: [Int]] {
+            for singleDup in data {
+                for errorIndex in singleDup.value {
+                    arrayOfIndexes.append(errorIndex)
+                }
+            }
+//            if let arrayOfPaths = data[0] {
+//                if arrayOfPaths.contain
+//            }
+            print(arrayOfIndexes)
+            if arrayOfIndexes.contains(indexPath) {
+                animateDupSlide()
+            }
           //  print("HAS DATA")
          //   print("data: \(data)")
         }
@@ -177,14 +222,23 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
 //        }
 //    }
     override func awakeFromNib() {
+        
+        
+        contentView.insertSubview(overlayView, at: 0)
+        overlayView.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.width.equalTo(0)
+        }
+        overlayView.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+        overlayView.alpha = 0
+        
         //matchTextField.setLeftPaddingPoints(10)
         //nc.addObserver(self, selector: #selector(userLoggedIn), name: Notification.Name("UserLoggedIn"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveEmptyString), name: .hasEmptyString, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveStringErrors), name: .hasGeneralSpaces, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onDupErrors), name: .hasDuplicates, object: nil)
-        
-        
-        
         NotificationCenter.default.addObserver(self, selector: #selector(onHighlightRowErrors), name: .shouldHighlightRows, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(onDeleteRow), name: .deleteRowAt, object: nil)
@@ -230,6 +284,9 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
 //            plusButton.isHidden = true
 //        }
     }
+    
+    
+    
     @objc func buttonAction(sender: UIButton!) {
       //print("Button tapped")
         changedTextDelegate?.cellPressedDoneButton()
@@ -242,7 +299,10 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
        // print("BEGIN!")
+        animateDupRetreat()
         changedTextDelegate?.textFieldStartedEditing(indexPath: indexPath)
+        //touchedView = true
+        
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         changedTextDelegate?.textFieldPressedReturn()
