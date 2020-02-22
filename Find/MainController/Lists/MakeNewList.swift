@@ -16,15 +16,21 @@ protocol NewListMade: class {
 protocol ReturnGeneralNow: class {
     func updateInfo()
 }
-protocol ReturnIconNow: class {
-    func updateInfo()
+//protocol ReturnIconNow: class {
+//    func updateInfo()
+//}
+//protocol ReturnColorNow: class {
+//    func updateInfo()
+//}
+
+protocol ScrolledToIcons: class {
+    func scrolledHere()
 }
-protocol ReturnColorNow: class {
-    func updateInfo()
+protocol ScrolledToColors: class {
+    func scrolledHere()
 }
 
-
-class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo {
+class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo, DeleteList {
     
 
     
@@ -32,7 +38,7 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo {
     var descriptionOfList = "No description..."
     var contents = [String]()
     var iconImageName = "square.grid.2x2"
-    var iconColorName = "00AEEF"
+    var iconColorName = "#00aeef"
     var shouldDismiss = true
     
     func returnCompletedList() {
@@ -41,55 +47,73 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo {
          self.dismiss(animated: true, completion: nil)
      }
      
+    @IBOutlet weak var stretchyView: UIView!
+    
+    @IBOutlet weak var stretchyHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var topImageView: UIImageView!
     
     
-    func returnNewGeneral(nameOfList: String, desc: String, contentsOfList: [String], interrupt: Bool) {
+    func returnNewGeneral(nameOfList: String, desc: String, contentsOfList: [String], hasErrors: Bool, overrideMake: Bool) {
         name = nameOfList
         descriptionOfList = desc
         contents = contentsOfList
-        shouldDismiss = !interrupt
-        print("sdfk")
-        if shouldDismiss == true {
-            view.endEditing(true)
+        
+        shouldDismiss = !hasErrors ///dismiss if no errors
+        
+        
+        
+        print("Return New General, has errors: \(hasErrors)")
+        if overrideMake == true {
+            //view.endEditing(true)
             returnCompletedList()
         }
     }
  
     func returnNewIcon(iconName: String) {
         iconImageName = iconName
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
+        let newImage = UIImage(systemName: iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(hexString: iconColorName), renderingMode: .alwaysOriginal)
+        //self.imageView.image = newImage
+        topImageView.image = newImage
     }
     
     func returnNewColor(colorName: String) {
         iconColorName = colorName
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
+        let newImage = UIImage(systemName: iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(hexString: iconColorName), renderingMode: .alwaysOriginal)
+        //self.imageView.image = newImage
+        topImageView.image = newImage
     }
     
+    func deleteList() {
+        print("delete list.....")
+        self.dismiss(animated: true, completion: nil)
+    }
     
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var doneWithListButton: UIButton!
     
     @IBAction func doneWithListPressed(_ sender: Any) {
         returnGeneralNowDelegate?.updateInfo()
-        returnIconNowDelegate?.updateInfo()
-        returnColorNowDelegate?.updateInfo()
-//        if contents.isEmpty {
-//            SwiftEntryKitTemplates().displaySEK(message: "Can't create a list with no contents!", backgroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), location: .top)
-//        } else {
+//        returnIconNowDelegate?.updateInfo()
+//        returnColorNowDelegate?.updateInfo()
+        
+        print("done pressed, waiting")
         if shouldDismiss == true {
-            print("SHOULD DISMISS")
-            view.endEditing(true)
-            //print("asdkahskdhaksdhaksjdh")
-            print("name: \(name), description: \(descriptionOfList), contents: \(contents), imageName: \(iconImageName), imageColor: \(iconColorName)")
-            newListDelegate?.madeNewList(name: name, description: descriptionOfList, contents: contents, imageName: iconImageName, imageColor: iconColorName)
-            //self.dismiss(animated: true, completion: nil)
+            shouldDismiss = false
+            print(shouldDismiss)
+            returnCompletedList()
         }
-//        }
     }
     
 
     weak var returnGeneralNowDelegate: ReturnGeneralNow?
-    weak var returnIconNowDelegate: ReturnIconNow?
-    weak var returnColorNowDelegate: ReturnColorNow?
+//    weak var returnIconNowDelegate: ReturnIconNow?
+//    weak var returnColorNowDelegate: ReturnColorNow?
     
+    weak var scrolledToIcons: ScrolledToIcons?
+    weak var scrolledToColors: ScrolledToColors?
     
     
     weak var newListDelegate: NewListMade?
@@ -99,7 +123,15 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo {
         setUpViews()
         
     }
+//    func selectGeneral() {
+//        if let first = pagingViewController.items.first {
+//          pagingViewController.select(pagingItem: first)
+//        }
+//    }
     func setUpViews() {
+        
+        
+        
         let storyboard1 = UIStoryboard(name: "Main", bundle: nil)
         let firstViewController = storyboard1.instantiateViewController(withIdentifier: "GeneralViewController") as! GeneralViewController
         
@@ -114,15 +146,22 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo {
         thirdViewController.title = "Color"
         
         firstViewController.generalDelegate = self
+        
+        firstViewController.deleteTheList = self
+        
         secondViewController.iconDelegate = self
         thirdViewController.colorDelegate = self
+        
+        self.scrolledToIcons = secondViewController
+        self.scrolledToColors = thirdViewController
+        thirdViewController.receiveColor(name: iconColorName)
         
 //        self.returnInfoNowDelegate = firstViewController
 //        self.returnInfoNowDelegate = secondViewController
 //        self.returnInfoNowDelegate = thirdViewController
         self.returnGeneralNowDelegate = firstViewController
-        self.returnIconNowDelegate = secondViewController
-        self.returnColorNowDelegate = thirdViewController
+//        self.returnIconNowDelegate = secondViewController
+//        self.returnColorNowDelegate = thirdViewController
         
         let pagingViewController = FixedPagingViewController(viewControllers: [
           firstViewController,
@@ -136,11 +175,43 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo {
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.top.equalTo(headerView.snp.bottom)
+            make.top.equalTo(stretchyView.snp.bottom)
         }
+        pagingViewController.textColor = UIColor(named: "PureBlack")!
+        pagingViewController.backgroundColor = UIColor(named: "PureBlank")!
+        pagingViewController.menuBackgroundColor = UIColor(named: "PureBlank")!
+        pagingViewController.selectedTextColor = UIColor(named: "LinkColor")!
+        pagingViewController.selectedTextColor = UIColor(named: "LinkColor")!
+        pagingViewController.selectedBackgroundColor = UIColor(named: "PureBlank")!
+        
+        pagingViewController.delegate = self
+        pagingViewController.contentInteraction = .none
+        
         
         pagingViewController.didMove(toParent: self)
         
         doneWithListButton.layer.cornerRadius = 4
+        
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
+        let newImage = UIImage(systemName: iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(hexString: iconColorName), renderingMode: .alwaysOriginal)
+        //self.imageView.image = newImage
+        topImageView.image = newImage
+        
     }
 }
+extension MakeNewList: PagingViewControllerDelegate {
+    func pagingViewController<T>(_ pagingViewController: PagingViewController<T>, didScrollToItem pagingItem: T, startingViewController: UIViewController?, destinationViewController: UIViewController, transitionSuccessful: Bool) where T : PagingItem, T : Comparable, T : Hashable {
+        
+        guard let indexItem = pagingViewController.state.currentPagingItem as? PagingIndexItem else {
+            return
+        }
+        let indexC = indexItem.index
+        
+        if indexC == 1 {
+            scrolledToIcons?.scrolledHere()
+        } else if indexC == 2 {
+            scrolledToColors?.scrolledHere()
+        }
+    }
+}
+

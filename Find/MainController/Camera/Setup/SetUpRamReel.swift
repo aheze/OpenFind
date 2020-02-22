@@ -32,6 +32,8 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         cancelButtonNew.layer.cornerRadius = 4
         autoCompleteButton.layer.cornerRadius = 4
         
+     //   ramReel.textField.inserttoken
+        
         
 //        ramReel.hooks.append {
 //            let r = Array($0.reversed())

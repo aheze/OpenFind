@@ -10,7 +10,7 @@ import UIKit
 
 class TitleSupplementaryView: UICollectionReusableView {
     
-    @IBOutlet weak var todayLabel: UILabel!
+    @IBOutlet weak var todayLabel: UILabel! 
     
     public let Style = DefaultStyle.self
     var path: UIBezierPath!

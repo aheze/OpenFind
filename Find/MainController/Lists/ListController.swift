@@ -14,7 +14,11 @@ import RealmSwift
 protocol ChangeNumberOfSelectedList: class {
     func changeLabel(to: Int)
 }
-class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLayoutDelegate, UIAdaptivePresentationControllerDelegate, NewListMade {
+class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLayoutDelegate, UIAdaptivePresentationControllerDelegate, NewListMade, TellControllerToDeleteList {
+    
+    
+    
+    
     
     var cellHeights = [CGFloat]()
     
@@ -33,6 +37,26 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         selectButtonSelected = false
         enterSelectMode(entering: false)
     }
+    
+    
+    func deleteTheList() { ///Comes from EditListViewController, deletes an existing list.
+        print("Delete Preexisting list")
+        
+        if let currentList = listCategories?[currentEditingPresentationPath] {
+            do {
+                try realm.write {
+                    realm.delete(currentList)
+                }
+            } catch {
+                print("error deleting category \(error)")
+            }
+            let indP = IndexPath(item: currentEditingPresentationPath, section: 0)
+            collectionView.deleteItems(at: [indP])
+            currentEditingPresentationPath = -1
+        }
+    }
+    
+    
     func listDeleteButtonPressed() {
         
         //print("Delete:")
@@ -66,23 +90,23 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         } catch {
             print("error deleting category \(error)")
         }
-        addHeight()
+//        addHeight()
         //collectionView.reloadData()
         //print("sldjfsldfksj     d")
         collectionView.deleteItems(at: arrayOfIndexPaths)
         //print("sldjfsldfksjd  sfds")
         indexPathsSelected.removeAll()
         numberOfSelected -= tempLists.count
-        if listCategories?.count == 0 {
-            SwiftEntryKit.dismiss()
-        }
-        //print("sldjfsldfk            sjd")
-        //collectionView.reloadData()
-//        let realm = try! Realm()
-//        try! realm.write {
-//            realm.delete(newVideos)
+//        if listCategories?.count == 0 {
+//            SwiftEntryKit.dismiss()
 //        }
-        SwiftEntryKit.dismiss()
+//        //print("sldjfsldfk            sjd")
+//        //collectionView.reloadData()
+////        let realm = try! Realm()
+////        try! realm.write {
+////            realm.delete(newVideos)
+////        }
+//        SwiftEntryKit.dismiss()
         //exitSwiftEntryKit()
     }
     
@@ -117,12 +141,48 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         }
     }
     
+    var currentEditingPresentationPath = 0
+    
     var indexPathsSelected = [Int]()
     var numberOfSelected = 0 {
         didSet {
             changeNumberDelegateList?.changeLabel(to: numberOfSelected)
         }
     }
+    
+    
+    
+    
+    
+    @IBAction func clearPressed(_ sender: Any) {
+        var tempLists = [FindList]()
+        var tempInts = [Int]()
+        var arrayOfIndexPaths = [IndexPath]()
+        for (inx, index) in listCategories!.enumerated() {
+            tempLists.append(index)
+            tempInts.append(inx)
+            arrayOfIndexPaths.append(IndexPath(item: inx, section: 0))
+        }
+//        for index in listCategories! {
+//            if let cat = listCategories?[index] {
+//                tempLists.append(cat)
+//                tempInts.append(index)
+//                arrayOfIndexPaths.append(IndexPath(item: index, section: 0))
+//            }
+//        }
+        print("Index selected: \(indexPathsSelected)")
+        do {
+            try realm.write {
+                realm.delete(tempLists)
+            }
+        } catch {
+            print("error deleting category \(error)")
+        }
+        addHeight()
+        collectionView.deleteItems(at: arrayOfIndexPaths)
+        indexPathsSelected.removeAll()
+    }
+    
     
     @IBAction func selectPressed(_ sender: UIButton) {
         selectButtonSelected = !selectButtonSelected ///First time press, will be true
@@ -175,6 +235,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         sortLists()
         collectionView.reloadData()
     }
+    
     func addHeight() {
         cellHeights.removeAll()
         if let cats = listCategories {
@@ -185,13 +246,9 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
                 
                 let newDescHeight = cell.descriptionOfList.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
                 
-                var array = cell.contents
+                let array = cell.contents
                 let arrayAsString = array.joined(separator:"\n")
                 let newContentsHeight = arrayAsString.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
-               // print(newDescHeight)
-             //   print(newContentsHeight)
-                
-            
                 let extensionHeight = newDescHeight + newContentsHeight
                 cellHeights.append(extensionHeight)
             }
@@ -223,37 +280,16 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
     func update(index: Int, name: String, description: String, contents: [String], imageName: String, imageColor: String) {
         if let listToEdit = listCategories?[index] {
             try! realm.write {
-                listToEdit.name = ""
-                listToEdit.descriptionOfList = ""
-                //listToEdit.contents =
-                
-//                let deletes = [Video]()
-//                for (index, video) in favorite!.videos.enumerated() {
-//                    if !indexes.contains(index) {
-//                        newVideos.append(video)
-//                    }
-//                }
-//
-//                let realm = try! Realm()
-//                try! realm.write {
-//                    realm.delete(newVideos)
-//                }
-                //realm.delete(listToEdit.contents)
-                //for deleteCont in listToEdit.contents {
-               // realm.delete(listToEdit.contents.removeAll())
-                listToEdit.contents.removeAll()
-                print(  "UPDATE")
-                print(listToEdit.contents)
-                //}
+                listToEdit.name = name
+                listToEdit.descriptionOfList = description
+               listToEdit.contents.removeAll()
+                print("UPDATE")
                 for cont in contents {
                     listToEdit.contents.append(cont)
                 }
-                //@objc dynamic var contents = ""
-                //var contents = List<String>()
-                listToEdit.iconImageName = ""
-                listToEdit.iconColorName = ""
-                //listToEdit.date = today
-                //listToEdit.count = plusOne
+                print(listToEdit.contents)
+                listToEdit.iconImageName = imageName
+                listToEdit.iconColorName = imageColor
             }
         }
         collectionView.reloadData()
@@ -272,6 +308,12 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
 //        }
 //    }
     
+}
+extension ListController: ListFinishedEditing {
+    func updateExistingList(name: String, description: String, contents: [String], imageName: String, imageColor: String) {
+        print("updating list")
+        update(index: currentEditingPresentationPath, name: name, description: description, contents: contents, imageName: imageName, imageColor: imageColor)
+    }
 }
 
 extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -299,14 +341,19 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "listCollectionCell", for: indexPath) as! ListCollectionCell
-        let listT = listCategories?[indexPath.item]
-        cell.title.text = listT?.name
-        cell.nameDescription.text = listT?.descriptionOfList
         
-        let array = listT?.contents
-        if let arrayAsString = array?.joined(separator:"\n") {
-        
-            cell.contentsList.text = arrayAsString
+        if let listT = listCategories?[indexPath.item] {
+            
+            cell.title.text = listT.name
+            cell.nameDescription.text = listT.descriptionOfList
+            
+            let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 100, weight: .semibold)
+            let newImage = UIImage(systemName: listT.iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(hexString: listT.iconColorName), renderingMode: .alwaysOriginal)
+            cell.imageView.image = newImage
+            
+            let array = listT.contents.joined(separator:"\n")
+            cell.contentsList.text = array
+            
         }
         cell.contentView.layer.cornerRadius = 10
         
@@ -318,26 +365,12 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
     
     func collectionView(_ collectionView: UICollectionView,
                         heightForTextAtIndexPath indexPath: IndexPath) -> CGFloat {
-       // print("Height for text")
-       // print("ListCount: \(listCategories?.count)")
         guard let cell = listCategories?[indexPath.item] else { print("ERRORRRRRR"); return 0 }
-        
-        //let cell = item.contents.count
-        // I get text height and as my font equal ~1pt, it's multiply and than addition it. Maybe you need to
-        /// modify that value for greater stability height calculations.
-        /// And you can get there image height for adding it to
         let sizeOfWidth = ((collectionView.bounds.width - (AdaptiveCollectionConfig.cellPadding * 3)) / 2) - 20
-      //  print("size of Width: \(sizeOfWidth)")
-        //let sizeOfWidth = collectionView.frame.size.width - (AdaptiveCollectionConfig.cellPadding * 3) - 20
-        
         let newDescHeight = cell.descriptionOfList.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
-        
-        var array = cell.contents
+        let array = cell.contents
         let arrayAsString = array.joined(separator:"\n")
         let newContentsHeight = arrayAsString.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
-        
-//        let newContentsHeight = cell.contents.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
-        let extensionHeight = newDescHeight + newContentsHeight
         return AdaptiveCollectionConfig.cellBaseHeight + cellHeights[indexPath.item] + 25 //+ 300
     }
     
@@ -348,13 +381,31 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
             numberOfSelected += 1
                 
         } else {
-            print("false")
+            currentEditingPresentationPath = indexPath.item
+            //print("false")
             //performSegue(withIdentifier: "makeNewListSegue", sender: self)
             let storyboard1 = UIStoryboard(name: "Main", bundle: nil)
             let swipeViewController = storyboard1.instantiateViewController(withIdentifier: "EditListViewController") as! EditListViewController
             //let firstViewController = EditListViewController()
             swipeViewController.modalPresentationStyle = .custom
             swipeViewController.transitioningDelegate = self
+            swipeViewController.finalDeleteList = self
+            
+            if let currentPath = listCategories?[indexPath.item] {
+                
+                
+                swipeViewController.name = currentPath.name
+                swipeViewController.descriptionOfList = currentPath.descriptionOfList
+                var conts = [String]()
+                for singleCont in currentPath.contents {
+                    conts.append(singleCont)
+                }
+                swipeViewController.contents = conts
+                swipeViewController.iconImageName = currentPath.iconImageName
+                swipeViewController.iconColorName = currentPath.iconColorName
+            }
+            
+            swipeViewController.finishedEditingList = self
             
             present(swipeViewController, animated: true, completion: nil)
             

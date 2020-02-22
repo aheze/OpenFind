@@ -75,6 +75,10 @@ class ViewController: UIViewController {
         }
     }
     
+    //MARK: Lists
+        
+    var selectedLists = [Int]()
+    
     //MARK: Matches HUD
     
     var createdStatusView: Bool = false

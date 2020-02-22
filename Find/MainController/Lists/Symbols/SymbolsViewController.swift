@@ -15,10 +15,20 @@ protocol GetIconInfo: class {
 }
 
 
-class SymbolsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ReturnIconNow, ReceiveIcon {
+class SymbolsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ReceiveIcon, ScrolledToIcons {
+    
+    func scrolledHere() {
+        print("scrolled here")
+        collectionView.scrollToItem(at: currentSelectedIndex, at: .centeredVertically, animated: true)
+    }
+    
     
     func receiveIcon(name: String) {
-        print("icon recieved")
+        print("icon recieved: \(name)")
+        //print(name)
+        populateSymbols()
+        
+        selectedIconName = name
     }
     
  
@@ -55,12 +65,12 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     var selectedIconName = "square.grid.2x2"
     
-    func updateInfo() {
-        //print("sdkfhskdf shdf sdsdf")
-        print("icon:::: \(selectedIconName)")
-        iconDelegate?.returnNewIcon(iconName: selectedIconName)
-        //print("sdkfhskdf shdf sdsdf 123")
-    }
+//    func updateInfo() {
+//        //print("sdkfhskdf shdf sdsdf")
+//        print("icon:::: \(selectedIconName)")
+////        iconDelegate?.returnNewIcon(iconName: selectedIconName)
+//        //print("sdkfhskdf shdf sdsdf 123")
+//    }
     
     @IBOutlet weak var collectionView: UICollectionView!
     let dictOfSymbols = [IndexMatcher: String]()
@@ -80,6 +90,7 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         populateIndexSym()
+        highlightSelectedSymbol()
 //        populateDict()
         
     }
@@ -100,6 +111,7 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
             collectionView.deselectItem(at: currentSelectedIndex, animated: false)
             currentSelectedIndex = indexPath
             selectedIconName = indexpathToSymbol[indexPath] ?? "square.grid.2x2"
+            iconDelegate?.returnNewIcon(iconName: selectedIconName)
         } else {
             print("not current")
         }
@@ -140,7 +152,7 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
                       sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemsPerRow = CGFloat(5)
         let paddingSpace = sectionInsets.left * CGFloat(itemsPerRow + 1)
-        let availableWidth = view.frame.width - paddingSpace
+        let availableWidth = collectionView.frame.width - paddingSpace
         let widthPerItem = availableWidth / itemsPerRow
         //print(widthPerItem)
         return CGSize(width: widthPerItem, height: widthPerItem)
@@ -188,7 +200,7 @@ class SymbolCell: UICollectionViewCell {
             DispatchQueue.global(qos: .background).async {
                 DispatchQueue.main.async {
                     let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
-                    let newImage = UIImage(systemName: self.name, withConfiguration: symbolConfiguration)?.withTintColor(.black, renderingMode: .alwaysOriginal)
+                    let newImage = UIImage(systemName: self.name, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "PureBlack") ?? .black, renderingMode: .alwaysOriginal)
                     self.imageView.image = newImage
 //                    let length = self.contentView.frame.size.width
 //                    self.widthConstraint.constant = length
@@ -207,7 +219,7 @@ class SymbolCell: UICollectionViewCell {
                 overlayView.frame = (CGRect(x: 0, y: 0, width: length, height: length))
                 overlayView.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 overlayView.layer.cornerRadius = 10
-                overlayView.tag = 010101
+                //overlayView.tag = 010101
                 contentView.insertSubview(overlayView, at: 0)
                 
             } else {
@@ -331,3 +343,35 @@ extension SymbolsViewController {
     
 }
 
+extension SymbolsViewController {
+    func highlightSelectedSymbol() {
+        var firstOccurance: (Int, Int) = (-1, -1)
+        var hasFound = false
+        let name = selectedIconName
+        for (index, weather) in weatherList.enumerated() {
+            if weather == name {
+                firstOccurance = (0, index)
+                hasFound = true
+            }
+        }
+        if !(hasFound) {
+            for (index, nat) in natureAndHealthList.enumerated() {
+//                print(nat)
+                if nat == name {
+                    firstOccurance = (1, index)
+                }
+            }
+        }
+        if !(hasFound) { for (index, num) in numbersList.enumerated() { if num == name { firstOccurance = (2, index) } } }
+        if !(hasFound) { for (index, mat) in mathList.enumerated() { if mat == name { firstOccurance = (3, index) } } }
+        if !(hasFound) { for (index, cur) in currencyList.enumerated() { if cur == name { firstOccurance = (4, index) } } }
+        if !(hasFound) { for (index, tec) in techList.enumerated() { if tec == name { firstOccurance = (5, index) } } }
+        if !(hasFound) { for (index, spe) in speechList.enumerated() { if spe == name { firstOccurance = (6, index) } } }
+    
+//        print(firstOccurance)
+        let indP = IndexPath(item: firstOccurance.1, section: firstOccurance.0)
+        collectionView.selectItem(at: indP, animated: false, scrollPosition: .centeredVertically)
+        currentSelectedIndex = indP
+       // collectionView.scrollToItem(at: indP, at: .centeredVertically, animated: true)
+    }
+}

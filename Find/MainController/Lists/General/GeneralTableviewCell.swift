@@ -18,20 +18,32 @@ protocol ChangedTextCell: class {
 }
 class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
     
+    var isEmptyMatch = false
+    
+    var hasDuplicates = 0
     
     var isSingleSpace = false
     var hasStartSpace = false
     var hasEndSpace = false
     
+    var thisRowHasErrors = false ///To toggle the invisible button
+    
     var indexPath = 0 
     
     weak var changedTextDelegate: ChangedTextCell?
-//    @IBOutlet weak var plusButton: UIButton!
-//    @IBAction func plusPressed(_ sender: Any) {
-//        print("PLUS PRESSED")
-//        changedTextDelegate?.plusButtonPressed(indexPath: indexPath)
-//    }
-//
+    @IBOutlet weak var warningButton: UIButton!
+    
+    @IBAction func warningPressed(_ sender: Any) {
+        print("Warning Pressed")
+        
+        if thisRowHasErrors == false {
+            matchTextField.becomeFirstResponder()
+        } else {
+            showDescriptions()
+        }
+        
+    }
+    
     @IBOutlet weak var matchTextField: UITextField!
     var cellFieldText = ""
     
@@ -41,26 +53,75 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
         }
     }
     
-    
-//    var hihilighted: Bool = false {
-//        didSet {
-//            print("HIHIHIH")
-//        }
-//    }
     @objc func onDidReceiveEmptyString(_ notification: Notification) {
        // print("NOTIFY, empty")
         if let data = notification.userInfo as? [Int: [Int]] {
-       //     print("HAS DATA")
+            print("Recieved Empty String Data: \(data)")
+            if let errorArray = data[0] {
+                if errorArray.contains(indexPath) {
+                    isEmptyMatch = true
+                    thisRowHasErrors = true
+                }
+            }
         }
     }
     @objc func onDidReceiveStringErrors(_ notification: Notification) {
       //  print("recieve string errors")
        // print("Errors? \(notification.userInfo)")
         if let data = notification.userInfo as? [String: [Int]] {
+            print("Space error data: \(data)")
+             
+            var isSingleSoStop = false
+            for singleError in data["Single"] ?? [-1] {
+                if singleError == indexPath {
+                    isSingleSpace = true
+                    thisRowHasErrors = true
+                    isSingleSoStop = true
+                }
+            }
+            if isSingleSoStop == false {
+                for startError in data["Start"] ?? [-1] {
+                    if startError == indexPath {
+                        hasStartSpace = true
+                        thisRowHasErrors = true
+                    }
+                }
+                for endError in data["End"] ?? [-1] {
+                    if endError == indexPath {
+                        hasEndSpace = true
+                        thisRowHasErrors = true
+                    }
+                }
+            }
+            
+            
+        }
+    }
+    @objc func onDupErrors(_ notification: Notification) {
+      //  print("receive highlight string errors")
+       // print("Errors? \(notification.userInfo)")
+        if let data = notification.userInfo as? [String: [Int]] {
+            print("Received duplicate data: \(data)")
+            for duplicateString in data.keys {
+                for arrayOfErrorRow in data[duplicateString]! {
+                    
+                    if arrayOfErrorRow == indexPath {
+                        hasDuplicates += 1
+                        thisRowHasErrors = true
+                    }
+                    
+                }
+            }
+            
+            //showDescriptions()
+            
+            
           //  print("HAS DATA")
          //   print("data: \(data)")
         }
     }
+    
+    
     @objc func onHighlightRowErrors(_ notification: Notification) {
       //  print("receive highlight string errors")
        // print("Errors? \(notification.userInfo)")
@@ -81,6 +142,20 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
          //   print("data: \(data)")
         }
     }
+    
+    @objc func onDeleteRow(_ notification: Notification) {
+      //  print("receive highlight string errors")
+       // print("Errors? \(notification.userInfo)")
+        print("DELETE")
+        if let data = notification.userInfo as? [Int: Int] {
+            if indexPath >= data[0]! + 1 {
+                indexPath -= 1
+            }
+          //  print("HAS DATA")
+         //   print("data: \(data)")
+        }
+    }
+    
     
     
 //    @objc func onDidReceiveStartString(_ notification: Notification) {
@@ -106,7 +181,16 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
         //nc.addObserver(self, selector: #selector(userLoggedIn), name: Notification.Name("UserLoggedIn"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveEmptyString), name: .hasEmptyString, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveStringErrors), name: .hasGeneralSpaces, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDupErrors), name: .hasDuplicates, object: nil)
+        
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(onHighlightRowErrors), name: .shouldHighlightRows, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onDeleteRow), name: .deleteRowAt, object: nil)
+        
+        
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(onAddRow), name: .addedRowAt, object: nil)
         
@@ -176,7 +260,24 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
 
 extension GeneralTableCell {
     
+    func showWarningButtons() {
+        
+        
+        
+    }
     func showDescriptions() {
+        print("showing descriptions")
+        print(isEmptyMatch)
+        
+        print(hasDuplicates)
+        
+        print(isSingleSpace)
+        print(hasStartSpace)
+        print(hasEndSpace)
+        
+        if isEmptyMatch == true {
+            
+        }
          //maybe only space errors
 
         //var hasEmptyMatch = 0
@@ -242,12 +343,15 @@ extension GeneralTableCell {
 
 
 extension Notification.Name {
-    static let hasEmptyString = Notification.Name("hasEmptyString")
     
+    static let hasEmptyString = Notification.Name("hasEmptyString")
     static let hasGeneralSpaces = Notification.Name("hasGeneralSpaces")
+    static let hasDuplicates = Notification.Name("hasDuplicates")
+    
     static let shouldHighlightRows = Notification.Name("shouldHighlightRows")
     
     static let addedRowAt = Notification.Name("addedRowAt")
+    static let deleteRowAt = Notification.Name("deleteRowAt")
     //static let delete = Notification.Name("hasGeneralSpaces")
     
 //    static let hasStartSpace = Notification.Name("hasStartSpace")

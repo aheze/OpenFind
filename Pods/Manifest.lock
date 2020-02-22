@@ -14,6 +14,7 @@ PODS:
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
   - ViewAnimator (2.7.0)
+  - WSTagsField (5.2.0)
 
 DEPENDENCIES:
   - Parchment
@@ -24,6 +25,7 @@ DEPENDENCIES:
   - SnapKit
   - SwiftEntryKit
   - ViewAnimator
+  - WSTagsField
 
 SPEC REPOS:
   trunk:
@@ -35,6 +37,7 @@ SPEC REPOS:
     - SnapKit
     - SwiftEntryKit
     - ViewAnimator
+    - WSTagsField
 
 EXTERNAL SOURCES:
   RoundCoachMark:
@@ -55,7 +58,8 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   ViewAnimator: 5af1c6f3b310f012bf081259c43717aa54fbae73
+  WSTagsField: d57a287fd552934db1d93a85d38abbf74b067d6a
 
-PODFILE CHECKSUM: 0050ba9a2026ceed78b63b80d7faa3c5d6254fc9
+PODFILE CHECKSUM: 7686591f8785fe36f1fe329c9ec13fa9c47c94ec
 
 COCOAPODS: 1.8.3

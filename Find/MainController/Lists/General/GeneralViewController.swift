@@ -17,23 +17,27 @@ import SwiftEntryKit
 //}
 
 protocol GetGeneralInfo: class {
-    func returnNewGeneral(nameOfList: String, desc: String, contentsOfList: [String], interrupt: Bool)
+    func returnNewGeneral(nameOfList: String, desc: String, contentsOfList: [String], hasErrors: Bool, overrideMake: Bool)
+}
+protocol DeleteList: class {
+    func deleteList()
 }
 //protocol RowChange: class {
 //    func tableViewRowCountChanged(rowCount: Int)
 //}
 class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral {
     
-    func receiveGeneral(name: String, desc: String, contents: [String]) {
+    func receiveGeneral(nameOfList: String, desc: String, contentsOfList: [String]) {
         print("general recieved")
+        name = nameOfList
+        descriptionOfList = desc
+        contents = contentsOfList
+//        tableView.reloadData()
+        //titleField.text = nameOfList
+        //descriptionView.text = desc
     }
     
-    
-    
-  
-    @IBOutlet weak var editButton: UIButton!
-    @IBAction func editButtonPressed(_ sender: Any) {
-    }
+   
     
     weak var generalDelegate: GetGeneralInfo?
 
@@ -80,6 +84,7 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
     
     var stringToIndexesError = [String: [Int]]()
     
+    weak var deleteTheList: DeleteList?
     
     weak var delegate: UIAdaptivePresentationControllerDelegate?
   //  weak var rowChanged: RowChange?
@@ -89,31 +94,31 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
     @IBOutlet weak var descriptionView: UITextView!
     var placeholderLabel : UILabel!
     
-    var name = "Untitled"
-    var descriptionOfList = "No description..."
+    var name = ""
+    var descriptionOfList = ""
     var contents = [String]()
     
     func doneWithEditingGeneral(overrideDone: Bool) {
         view.endEditing(true)
+        var newName = name
+        var newDesc = descriptionOfList
+        
+        if newName == "" { newName = "Untitled" }
+        if newDesc == "" { newDesc = "No Description" }
+        
         if overrideDone == true {
             print("override!!")
-            generalDelegate?.returnNewGeneral(nameOfList: name, desc: descriptionOfList, contentsOfList: contents, interrupt: false)
+            generalDelegate?.returnNewGeneral(nameOfList: newName, desc: newDesc, contentsOfList: contents, hasErrors: false, overrideMake: true)
             SwiftEntryKit.dismiss()
         } else {
-           // let textString = contentsTextView.text.removeFirstChars(length: 3)
-            //let splits = textString.components(separatedBy: "\n \u{2022} ")
-            //print(splits)
-//            for cont in contents {
-//                if cont == "" {
-//                    print("AHKSDGHASKJDHAKJSDHKJASHJKSHDKJHASDJKZHASKJHAKKSDH")
-//                    SwiftEntryKitTemplates().displaySEK(message: "Can't create a list with no contents!", backgroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), location: .top)
-//                }
-//            }
-            scrollView.setContentOffset(CGPoint(x: 0, y: currentIndexPath * 50), animated: true)
+            scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
 
             checkForErrors(contentsArray: contents)
             if showDoneAlerts() == false {
                 print("NO ERRORS!!!!!!++++++++")
+                generalDelegate?.returnNewGeneral(nameOfList: newName, desc: newDesc, contentsOfList: contents, hasErrors: false, overrideMake: false)
+            } else {
+                generalDelegate?.returnNewGeneral(nameOfList: newName, desc: newDesc, contentsOfList: contents, hasErrors: true, overrideMake: false)
             }
             
         }
@@ -162,11 +167,13 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
             generalSpaces["End", default: [Int]()].append(endSpace)
         }
         
+        
        // print("General Spaces: \(generalSpaces)")
         
-        NotificationCenter.default.post(name: .hasEmptyString, object: [0: emptyStringErrors])
-        
+        NotificationCenter.default.post(name: .hasEmptyString, object: nil, userInfo: [0: emptyStringErrors])
         NotificationCenter.default.post(name: .hasGeneralSpaces, object: nil, userInfo: generalSpaces)
+        NotificationCenter.default.post(name: .hasDuplicates, object: nil, userInfo: stringToIndexesError)
+        
         
 //        NotificationCenter.default.post(name: .hasStartSpace, object: [0: startSpaceWarning])
 //        NotificationCenter.default.post(name: .hasEndSpace, object: [0: endSpaceWarning])
@@ -176,38 +183,42 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         @IBOutlet weak var descDoneButton: UIButton!
         @IBAction func descButtonDonePressed(_ sender: Any) {
             view.endEditing(true)
-            //print("asd")
-            //name = titleField.text ?? "Untitled"
         }
         
         @IBOutlet weak var titlesDoneButton: UIButton!
         @IBAction func titlesButtonDonePressed(_ sender: Any) {
-            //scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             view.endEditing(true)
-            //descriptionOfList = descriptionField.text
         }
-        
         @IBOutlet weak var contentsDoneButton: UIButton!
         @IBAction func contentsDonePressed(_ sender: Any) {
-            //scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             view.endEditing(true)
-            //contents = contentsTextView.text
         }
-        
-        
-
-        
-        @IBOutlet weak var helpButton: UIButton!
-        @IBAction func helpButtonPressed(_ sender: Any) {
-        }
-        
         override func viewDidLoad() {
             super.viewDidLoad()
             
             setUpViews()
-            //print(titleField.layer.borderColor)
             
         }
+    
+    @IBOutlet weak var bottomDeleteButton: UIButton!
+    @IBOutlet weak var bottomHelpButton: UIButton!
+    
+    @IBAction func bottomDeletePressed(_ sender: Any) {
+        var attributes = EKAttributes.centerFloat
+        attributes.displayDuration = .infinity
+        attributes.entryInteraction = .absorbTouches
+        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+        attributes.screenInteraction = .absorbTouches
+        showButtonBarMessage(attributes: attributes, titleMessage: "Are you sure you want to delete this list?", desc: "You can't undo this action.", leftButton: "Delete", yesButton: "Don't Delete", specialAction: "Delete")
+    }
+    
+    @IBAction func bottomHelpPressed(_ sender: Any) {
+        
+    }
+    
+    
     func addNewRow(end: Bool = false) {
         addingNewMatch = true
         
@@ -234,10 +245,32 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
             tableView.insertRows(at: [IndexPath(row: currentIndexPath, section: 0)], with: .automatic)
         }
     }
+    func deleteRow(row: Int) {
+        print("DELETELLELELLE: \(row)")
+        contents.remove(at: row)
+        NotificationCenter.default.post(name: .deleteRowAt, object: nil, userInfo: [0: row])
+    }
     func setUpViews() {
         if contents.count == 0 {
             contents.append("")
         }
+        
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 70, weight: .semibold)
+        
+        let deleteImage = UIImage(systemName: "trash.circle.fill",
+                                  withConfiguration: symbolConfiguration)?.withTintColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), renderingMode: .alwaysOriginal)
+        
+        let helpImage = UIImage(systemName: "questionmark.circle.fill",
+                                withConfiguration: symbolConfiguration)?.withTintColor(#colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1), renderingMode: .alwaysOriginal)
+        bottomDeleteButton.setImage(deleteImage, for: .normal)
+        bottomHelpButton.setImage(helpImage, for: .normal)
+        
+        
+        ///Receive info
+        
+        titleField.text = name
+        descriptionView.text = descriptionOfList
+        
         
         topView.layer.cornerRadius = 8
         
@@ -253,14 +286,27 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         descriptionView.inputAccessoryView = descInputView
         descriptionView.layer.cornerRadius = 5.25
         descriptionView.layer.borderWidth = 1
-        descriptionView.layer.borderColor = #colorLiteral(red: 0.9136029482, green: 0.9136029482, blue: 0.9136029482, alpha: 1)
-        
+       // descriptionView.layer.borderColor = UIColor(named: "TextRim")?.cgColor
+        descriptionView.layer.borderColor = UIColor(named: "TextRim")?.resolvedColor(with: self.traitCollection).cgColor
+            
         titleField.layer.cornerRadius = 5.25
-        titleField.layer.borderColor = #colorLiteral(red: 0.9136029482, green: 0.9136029482, blue: 0.9136029482, alpha: 1)
+        titleField.layer.borderColor = UIColor(named: "TextRim")?.resolvedColor(with: self.traitCollection).cgColor
+       
+        
+        //titleField.layer.borderColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
         titleField.layer.borderWidth = 1
+        
+       // titleField.placeholder
+        titleField.attributedPlaceholder = NSAttributedString(string: "Name",
+                                                              attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "Gray5")])
+        
+        titleField.backgroundColor = UIColor(named: "PureBlank")
+        descriptionView.backgroundColor = UIColor(named: "PureBlank")
+        
+        descriptionView.textColor = UIColor(named: "PureBlack")
         //titleField.layer.borderWidth = 1
         
-        helpButton.layer.cornerRadius = 4
+       // helpButton.layer.cornerRadius = 4
         
         matchesHeader.clipsToBounds = true
         matchesHeader.layer.cornerRadius = 8
@@ -297,11 +343,16 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         placeholderLabel.sizeToFit()
         descriptionView.addSubview(placeholderLabel)
         placeholderLabel.frame.origin = CGPoint(x: 5, y: (descriptionView.font?.pointSize)! / 2)
-        placeholderLabel.textColor = UIColor.lightGray
+        placeholderLabel.textColor = UIColor(named: "Gray5")
         placeholderLabel.isHidden = !descriptionView.text.isEmpty
         
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         tableView.isScrollEnabled = false
+        
+    }
+    
+    
+    func showWarnings() {
         
     }
 }
@@ -311,6 +362,26 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
         return 50
     }
     
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        print("EDITITITITI")
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row == 0 {
+            return false
+        } else {
+            return true
+        }
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            //objects.remove(at: indexPath.row)
+            deleteRow(row: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        }
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        // print("aldfshksdfkjh")
         //print("tablevide del \(contents.count)")
@@ -345,7 +416,7 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
 extension GeneralViewController: ChangedTextCell {
     
     func cellPressedDoneButton() {
-        scrollView.setContentOffset(CGPoint(x: 0, y: currentIndexPath * 50), animated: true)
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
     func textFieldStartedEditing(indexPath: Int) {
@@ -404,87 +475,77 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
     }
     
 
-    func showButtonBarMessage(attributes: EKAttributes, titleMessage: String, desc: String, leftButton: String, yesButton: String, image: String = "WhiteWarningShield") {
+    func showButtonBarMessage(attributes: EKAttributes, titleMessage: String, desc: String, leftButton: String, yesButton: String, image: String = "WhiteWarningShield", specialAction: String = "None") {
         let displayMode = EKAttributes.DisplayMode.inferred
         
-        let title = EKProperty.LabelContent(
-            text: titleMessage,
-            style: .init(
-                font: UIFont.systemFont(ofSize: 20, weight: .bold),
-                color: .white,
-                displayMode: displayMode
-            )
+        let title = EKProperty.LabelContent(text: titleMessage, style: .init(font: UIFont.systemFont(ofSize: 20, weight: .bold), color: .white, displayMode: displayMode))
+        let description = EKProperty.LabelContent(            text: desc,  style: .init(      font: UIFont.systemFont(ofSize: 14, weight: .regular),      color: .white,      displayMode: displayMode  )
         )
-        let description = EKProperty.LabelContent(
-            text: desc,
-            style: .init(
-                font: UIFont.systemFont(ofSize: 14, weight: .regular),
-                color: .white,
-                displayMode: displayMode
-            )
+        let image = EKProperty.ImageContent(  imageName: image,  displayMode: displayMode,  size: CGSize(width: 35, height: 35),  contentMode: .scaleAspectFit
         )
-        let image = EKProperty.ImageContent(
-            imageName: image,
-            displayMode: displayMode,
-            size: CGSize(width: 35, height: 35),
-            contentMode: .scaleAspectFit
-        )
-        let simpleMessage = EKSimpleMessage(
-            image: image,
-            title: title,
-            description: description
+        let simpleMessage = EKSimpleMessage(  image: image,  title: title,  description: description
         )
         let buttonFont = UIFont.systemFont(ofSize: 20, weight: .bold)
-        let okButtonLabelStyle = EKProperty.LabelStyle(
-            font: UIFont.systemFont(ofSize: 20, weight: .bold),
-            color: .white,
-            displayMode: displayMode
+        let okButtonLabelStyle = EKProperty.LabelStyle(  font: UIFont.systemFont(ofSize: 20, weight: .bold),  color: .white,  displayMode: displayMode
         )
-        let okButtonLabel = EKProperty.LabelContent(
-            text: yesButton,
-            style: okButtonLabelStyle
+        let okButtonLabel = EKProperty.LabelContent(  text: yesButton,  style: okButtonLabelStyle
         )
-        let okButton = EKProperty.ButtonContent(
-            label: okButtonLabel,
-            backgroundColor: .clear,
-            highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05)) {
-                self.highlightRowsOnError()
-                SwiftEntryKit.dismiss()
+        let closeButtonLabelStyle = EKProperty.LabelStyle(  font: buttonFont,  color: EKColor(#colorLiteral(red: 1, green: 0.9675828359, blue: 0.9005832124, alpha: 1)),  displayMode: displayMode
+        )
+        let closeButtonLabel = EKProperty.LabelContent(  text: leftButton,  style: closeButtonLabelStyle
+        )
+        
+        if specialAction == "None" {
+            let okButton = EKProperty.ButtonContent(
+                label: okButtonLabel,
+                backgroundColor: .clear,
+                highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05)) {
+                    self.highlightRowsOnError()
+                    SwiftEntryKit.dismiss()
+            }
+            let closeButton = EKProperty.ButtonContent(
+                label: closeButtonLabel,
+                backgroundColor: .clear,
+                highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05),
+                displayMode: displayMode) { [unowned self] in
+                 print("cool")
+                    self.doneWithEditingGeneral(overrideDone: true)
+            }
+            let buttonsBarContent = EKProperty.ButtonBarContent(  with: closeButton, okButton,  separatorColor: Color.Gray.light,  buttonHeight: 60,  displayMode: displayMode,  expandAnimatedly: true  )
+            let alertMessage = EKAlertMessage(  simpleMessage: simpleMessage,  imagePosition: .left,  buttonBarContent: buttonsBarContent
+            )
+            let contentView = EKAlertMessageView(with: alertMessage)
+            contentView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
+            contentView.layer.cornerRadius = 10
+            SwiftEntryKit.display(entry: contentView, using: attributes)
+        } else if specialAction == "Delete" {
+            let okButton = EKProperty.ButtonContent(
+                label: okButtonLabel,
+                backgroundColor: .clear,
+                highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05)) {
+                    //self.highlightRowsOnError()
+                    SwiftEntryKit.dismiss()
+            }
+            let closeButton = EKProperty.ButtonContent(
+                label: closeButtonLabel,
+                backgroundColor: .clear,
+                highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05),
+                displayMode: displayMode) { [weak self] in
+                print("DELETING LIST")
+                    self?.deleteTheList?.deleteList()
+                    SwiftEntryKit.dismiss()
+                   // self.doneWithEditingGeneral(overrideDone: true)
+            }
+            let buttonsBarContent = EKProperty.ButtonBarContent(  with: closeButton, okButton,  separatorColor: Color.Gray.light,  buttonHeight: 60,  displayMode: displayMode,  expandAnimatedly: true  )
+            let alertMessage = EKAlertMessage(  simpleMessage: simpleMessage,  imagePosition: .left,  buttonBarContent: buttonsBarContent
+            )
+            let contentView = EKAlertMessageView(with: alertMessage)
+            contentView.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
+            contentView.layer.cornerRadius = 10
+            SwiftEntryKit.display(entry: contentView, using: attributes)
         }
-        let closeButtonLabelStyle = EKProperty.LabelStyle(
-            font: buttonFont,
-            color: EKColor(#colorLiteral(red: 1, green: 0.9675828359, blue: 0.9005832124, alpha: 1)),
-            displayMode: displayMode
-        )
-        let closeButtonLabel = EKProperty.LabelContent(
-            text: leftButton,
-            style: closeButtonLabelStyle
-        )
-        let closeButton = EKProperty.ButtonContent(
-            label: closeButtonLabel,
-            backgroundColor: .clear,
-            highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05),
-            displayMode: displayMode) { [unowned self] in
-             print("cool")
-                self.doneWithEditingGeneral(overrideDone: true)
-                
-        }
-        let buttonsBarContent = EKProperty.ButtonBarContent(
-            with: closeButton, okButton,
-            separatorColor: Color.Gray.light,
-            buttonHeight: 60,
-            displayMode: displayMode,
-            expandAnimatedly: true
-        )
-        let alertMessage = EKAlertMessage(
-            simpleMessage: simpleMessage,
-            imagePosition: .left,
-            buttonBarContent: buttonsBarContent
-        )
-        let contentView = EKAlertMessageView(with: alertMessage)
-        contentView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
-        contentView.layer.cornerRadius = 10
-        SwiftEntryKit.display(entry: contentView, using: attributes)
+        
+        
     }
     
 }
@@ -769,5 +830,24 @@ extension UIView {
         let mask = CAShapeLayer()
         mask.path = path.cgPath
         layer.mask = mask
+    }
+}
+extension UIColor {
+    convenience init(hexString: String) {
+        let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int = UInt64()
+        Scanner(string: hex).scanHexInt64(&int)
+        let a, r, g, b: UInt64
+        switch hex.count {
+        case 3: // RGB (12-bit)
+            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6: // RGB (24-bit)
+            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        case 8: // ARGB (32-bit)
+            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            (a, r, g, b) = (255, 0, 0, 0)
+        }
+        self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
     }
 }

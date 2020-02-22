@@ -45,4 +45,5 @@ class SwiftEntryKitTemplates {
         }
         SwiftEntryKit.display(entry: contentView, using: attributes)
     }
+    
 }

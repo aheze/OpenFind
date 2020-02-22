@@ -13,6 +13,7 @@
 		490452522379DFD40046570D /* CollectionViewPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490452512379DFD40046570D /* CollectionViewPhotoCell.swift */; };
 		49089E1F238EFFFA0070A70C /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49089E1E238EFFFA0070A70C /* FooterView.swift */; };
 		490BC3F623F8DA41004D1433 /* EditListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490BC3F523F8DA41004D1433 /* EditListViewController.swift */; };
+		490BC3F923FA600F004D1433 /* DoubleWarning.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490BC3F823FA600F004D1433 /* DoubleWarning.xib */; };
 		490DA73F23CBAB7C000AF57D /* NewShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA73E23CBAB7C000AF57D /* NewShutterButton.swift */; };
 		490DA74E23CBB871000AF57D /* UIView+JJFloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA74123CBB86A000AF57D /* UIView+JJFloatingActionButton.swift */; };
 		490DA74F23CBB871000AF57D /* JJFloatingActionButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA74223CBB86B000AF57D /* JJFloatingActionButtonState.swift */; };
@@ -48,6 +49,7 @@
 		492EB4F023F504BC007142CA /* PopulateSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492EB4EF23F504BC007142CA /* PopulateSymbols.swift */; };
 		492EB4F223F50C43007142CA /* RecentSymbolsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492EB4F123F50C43007142CA /* RecentSymbolsModel.swift */; };
 		492EB4F523F61F5A007142CA /* SymbolsSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492EB4F423F61F5A007142CA /* SymbolsSectionHeader.swift */; };
+		49301BEC23FB88DE00B4780B /* Pods_Find.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BDD383BE4831A8EEB1C1806 /* Pods_Find.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		49325C1323CAE84500A771A3 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49325C1223CAE84500A771A3 /* StatusView.swift */; };
 		49368CA7239059A200B67C4A /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49368CA6239059A200B67C4A /* FullScreenViewController.swift */; };
 		49368CAD23905D3300B67C4A /* PulleyPassthroughScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49368CA923905D3200B67C4A /* PulleyPassthroughScrollView.swift */; };
@@ -121,7 +123,6 @@
 		49F7B1582353FE7E0099FA62 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1572353FE7E0099FA62 /* Component.swift */; };
 		49F7B15A2354E6F60099FA62 /* data.txt in Resources */ = {isa = PBXBuildFile; fileRef = 49F7B1592354E6F60099FA62 /* data.txt */; };
 		49F7B15C2354E85F0099FA62 /* WordReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B15B2354E85F0099FA62 /* WordReader.swift */; };
-		E0DFC8F68C8F4CF9FF0BC59E /* Pods_Find.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BDD383BE4831A8EEB1C1806 /* Pods_Find.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -132,6 +133,7 @@
 		490452512379DFD40046570D /* CollectionViewPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewPhotoCell.swift; sourceTree = "<group>"; };
 		49089E1E238EFFFA0070A70C /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		490BC3F523F8DA41004D1433 /* EditListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditListViewController.swift; sourceTree = "<group>"; };
+		490BC3F823FA600F004D1433 /* DoubleWarning.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoubleWarning.xib; sourceTree = "<group>"; };
 		490DA73E23CBAB7C000AF57D /* NewShutterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShutterButton.swift; sourceTree = "<group>"; };
 		490DA74123CBB86A000AF57D /* UIView+JJFloatingActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+JJFloatingActionButton.swift"; sourceTree = "<group>"; };
 		490DA74223CBB86B000AF57D /* JJFloatingActionButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJFloatingActionButtonState.swift; sourceTree = "<group>"; };
@@ -251,7 +253,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0DFC8F68C8F4CF9FF0BC59E /* Pods_Find.framework in Frameworks */,
+				49301BEC23FB88DE00B4780B /* Pods_Find.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +277,16 @@
 				490BC3F523F8DA41004D1433 /* EditListViewController.swift */,
 			);
 			path = "Edit Lists";
+			sourceTree = "<group>";
+		};
+		490BC3F723FA5FBF004D1433 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				4990AAE123EDB4CE00FAF37B /* GeneralViewController.swift */,
+				4972B40D23F117C500843537 /* GeneralTableviewCell.swift */,
+				490BC3F823FA600F004D1433 /* DoubleWarning.xib */,
+			);
+			path = General;
 			sourceTree = "<group>";
 		};
 		490DA74023CBB84C000AF57D /* ActionButton */ = {
@@ -541,8 +553,7 @@
 				49569B3423D6919E009308CA /* ListsLayout.swift */,
 				4988FC4723BEF89600199635 /* ListModel.swift */,
 				4966B70923DE98C800A8523A /* MakeNewList.swift */,
-				4990AAE123EDB4CE00FAF37B /* GeneralViewController.swift */,
-				4972B40D23F117C500843537 /* GeneralTableviewCell.swift */,
+				490BC3F723FA5FBF004D1433 /* General */,
 				492EB4F323F50C49007142CA /* Symbols */,
 				4990AAE523EDB50E00FAF37B /* ColorsViewController.swift */,
 			);
@@ -716,6 +727,7 @@
 				4999AC9D2353A81100AB06A7 /* Assets.xcassets in Resources */,
 				4999AC9B2353A80A00AB06A7 /* Main.storyboard in Resources */,
 				4928525C23D61D230048EC13 /* ListsSelect.xib in Resources */,
+				490BC3F923FA600F004D1433 /* DoubleWarning.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -724,7 +736,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		3314A9FA62310AC21C0C3B1B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -1017,6 +1029,7 @@
 			baseConfigurationReference = 7F1B04E9888AAEC98DF2E096 /* Pods-Find.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				INFOPLIST_FILE = Find/Info.plist;
@@ -1026,6 +1039,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.Find;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
