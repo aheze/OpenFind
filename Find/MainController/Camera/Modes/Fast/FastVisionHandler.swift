@@ -51,7 +51,7 @@ extension ViewController {
                     
                 
                     let arrayOfMatches = lowerCaseFinalText.components(separatedBy: "\u{2022}")
-                    print("arrayOfMatches: \(arrayOfMatches)")
+               //     print("arrayOfMatches: \(arrayOfMatches)")
                     for match in arrayOfMatches {
                         if lowerCaseComponentText.contains(match) {
                             //print("sghiruiguhweiugsiugr+++++++++++")

@@ -54,6 +54,8 @@ class ViewController: UIViewController {
     
     let realm = try! Realm()
     var listCategories: Results<FindList>?
+    var currentContentsOfScreen = ""
+    
     @IBOutlet weak var listsCollectionView: UICollectionView!
     @IBOutlet weak var toolBar: UIView!
     @IBOutlet weak var autoCompleteButton: UIButton!

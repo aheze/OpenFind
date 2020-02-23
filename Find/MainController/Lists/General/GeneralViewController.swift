@@ -770,6 +770,7 @@ extension GeneralViewController {
             }
            // print("title: \(titleMessage)")
             if titleMessage != "" {
+                titleMessage = titleMessage.typographized(language: "en")
                 var attributes = EKAttributes.topFloat
                 attributes.displayDuration = .infinity
                 attributes.entryInteraction = .absorbTouches

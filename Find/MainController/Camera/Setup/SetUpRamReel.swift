@@ -20,27 +20,12 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         ramReel = RAMReel(frame: frameRect, dataSource: dataSource, placeholder: "Start by typing…", attemptToDodgeKeyboard: false) {
             print("Plain:", $0)
             self.finalTextToFind = $0
-          
-                print("fast")
-//                let lowercased = self.finalTextToFind.lowercased()
-//                let allCaps = self.finalTextToFind.uppercased()
-                //self.fastTextDetectionRequest.customWords = [self.finalTextToFind, lowercased, allCaps, "Find app"]
-                //self.fastTextDetectionRequest.customWords = ["98ohkjshgosro9g"]
-                
         }
         ramReel.textField.inputAccessoryView = toolBar
         cancelButtonNew.layer.cornerRadius = 4
         autoCompleteButton.layer.cornerRadius = 4
         newMatchButton.layer.cornerRadius = 4
         
-     //   ramReel.textField.inserttoken
-        
-        
-//        ramReel.hooks.append {
-//            let r = Array($0.reversed())
-//            let j = String(r)
-//            print("Reversed:", j)
-//        }
         
         view.addSubview(ramReel.view)
         ramReel.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -50,14 +35,6 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         
         
     }
-   
-//    @objc func keyboardWillShow(_ notification: Notification) {
-//        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-//            let keyboardRectangle = keyboardFrame.cgRectValue
-//            keyboardHeight = keyboardRectangle.size.height
-//            print("show")
-//        }
-//    }
    
     @objc func textFieldDidChange(_ textField: UITextField) {
         if ramReel.wrapper.selectedItem == nil {
@@ -71,28 +48,6 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-//        let newImageView = UIImageView()
-//        newImageView.alpha = 0
-//        view.insertSubview(newImageView, aboveSubview: cameraView)
-//        newImageView.snp.makeConstraints { (make) in
-//            //make.top.equalTo(sceneView)
-//            make.edges.equalTo(cameraView)
-//        }
-//        //guard let image = videoPreviewLayer
-//        //let uiImage = UIImage(pixelBuffer: image, sceneView: sceneView)
-//        let uiImage = convertToUIImage(buffer: image)
-//        newImageView.image = uiImage
-//        newImageView.contentMode = .scaleAspectFill
-//        newImageView.tag = 13579
-        
-      
-//        if let cgImage = image?.toCGImage() {
-//            let uiImage = UIImage(cgImage: cgImage)
-//            newImageView.image = uiImage
-//
-//
-//
-//        }
         
         autoCompleteButton.isEnabled = false
 
@@ -106,7 +61,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate {
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
             self.autoCompleteButton.alpha = 0.5
             self.ramReel.collectionView.alpha = 1
-            self.darkBlurEffect.alpha = 1
+            self.darkBlurEffect.alpha = 0.2
              self.view.layoutIfNeeded()
         }, completion: nil)
     
