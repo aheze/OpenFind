@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftEntryKit
+import AVFoundation
 
 extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRecognizerDelegate {
    
@@ -89,9 +90,32 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
     func toFast() {
         self.blurScreen(mode: "fast")
     }
-    @objc func tappedOnce(gr:UITapGestureRecognizer) {
+    @objc func tappedOnce(gr: UITapGestureRecognizer) {
+        
+        
         let loc: CGPoint = gr.location(in: gr.view)
-        refreshScreen(location: loc)
+        let screenSize = cameraView.videoPreviewLayer.bounds.size
+        let x = loc.y / screenSize.height
+        let y = loc.x / screenSize.width
+        let focusPoint = CGPoint(x: x, y: y)
+
+        if let device = cameraDevice {
+            do {
+                try device.lockForConfiguration()
+
+                device.focusPointOfInterest = focusPoint
+                //device.focusMode = .continuousAutoFocus
+                device.focusMode = .autoFocus
+                //device.focusMode = .locked
+                device.exposurePointOfInterest = focusPoint
+                device.exposureMode = AVCaptureDevice.ExposureMode.continuousAutoExposure
+                device.unlockForConfiguration()
+            }
+            catch {
+                // just ignore
+            }
+        }
+        //refreshScreen(location: loc)
     }
     func setUpButtons() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(tappedOnce))
@@ -101,10 +125,15 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         view.addGestureRecognizer(tap)
         view.bringSubviewToFront(numberLabel)
         
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
+        let listImage = UIImage(systemName: "square.grid.2x2.fill", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
+        let histImage = UIImage(systemName: "arrow.counterclockwise.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
+        let settImage = UIImage(systemName: "gear", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
+        
         let goToSett = menuButton.addItem()
         goToSett.tag = 12462
         goToSett.titleLabel.text = "Settings"
-        goToSett.imageView.image = #imageLiteral(resourceName: "bsettings 2")
+        goToSett.imageView.image = settImage
         goToSett.action = { item in
             print("settings")
             self.blurScreenForSheetPresentation()
@@ -112,8 +141,12 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         }
         let goToNewHistory = menuButton.addItem()
         goToNewHistory.tag = 12461
-        goToNewHistory.titleLabel.text = "Newer History"
-        goToNewHistory.imageView.image = #imageLiteral(resourceName: "bhistory 2")
+        goToNewHistory.titleLabel.text = "History"
+        
+        
+        
+        
+        goToNewHistory.imageView.image = histImage
         goToNewHistory.action = { item in
             self.blurScreenForSheetPresentation()
             self.performSegue(withIdentifier: "goToNewHistory", sender: self)
@@ -121,7 +154,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         let goToLists = menuButton.addItem()
         goToLists.tag = 12463
         goToLists.titleLabel.text = "Lists"
-        goToLists.imageView.image = #imageLiteral(resourceName: "bhistory 2")
+        goToLists.imageView.image = listImage
         goToLists.action = { item in
             self.blurScreenForSheetPresentation()
             self.performSegue(withIdentifier: "goToLists", sender: self)

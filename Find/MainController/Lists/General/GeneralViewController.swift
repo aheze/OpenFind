@@ -219,9 +219,49 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let helpViewController = storyboard.instantiateViewController(withIdentifier: "DefaultHelpController") as! DefaultHelpController
         helpViewController.arrayOfHelp = ["0989238490238409234", "0989238490238409234sjdfiosydifysdifysdfoysf"]
+        helpViewController.indexToData = ["One", """
+        TworrayOfHelp = [String]()
+        var indexToData = [String]()
+        
+        var currentPath = -1
+        
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            arrayOfHelp.count
+        }
+        
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "HelpCellID") as! HelpCell
+            cell.nameLabel.text = arrayOfHelp[i
+              
+        """]
 
+        helpViewController.title = "Help"
+        
+        //helpViewController.view.clipsToBounds = true
+        
         let navigationController = UINavigationController(rootViewController: helpViewController)
         navigationController.view.backgroundColor = UIColor.clear
+        navigationController.navigationBar.tintColor = UIColor.white
+        navigationController.navigationBar.prefersLargeTitles = true
+        
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithOpaqueBackground()
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        //navBarAppearance.backButtonAppearance = .
+        navigationController.navigationBar.standardAppearance = navBarAppearance
+        navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
+        
+        
+          
+        //navigationBar.setItems([navigationItem], animated: false)
+        
+        navigationController.view.layer.cornerRadius = 10
+        //navigationController.view.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        //navigationController.navigationBar.barTintColor = UIColor(named: "Gray2")
+        UINavigationBar.appearance().barTintColor = .black
+        
         //navigationController.edgesForExtendedLayout = []
         helpViewController.edgesForExtendedLayout = []
        // helpViewController.view.layer.cornerRadius = 10
@@ -236,12 +276,17 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         attributes.entryBackground = .color(color: .white)
         attributes.screenInteraction = .absorbTouches
         attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
-        attributes.roundCorners = .all(radius: 10)
+        
+        //attributes.roundCorners = .all(radius: 10)
         
         
         
         SwiftEntryKit.display(entry: navigationController, using: attributes)
     }
+    
+//    @objc func closeTapped() {
+//        SwiftEntryKit.dismiss()
+//    }
     
     
     func addNewRow(end: Bool = false) {

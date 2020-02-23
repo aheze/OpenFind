@@ -13,6 +13,9 @@ import SwiftEntryKit
 class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var arrayOfHelp = [String]()
+    var indexToData = [String]()
+    
+    var currentPath = -1
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         arrayOfHelp.count
@@ -28,22 +31,34 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
         let baseHeight = arrayOfHelp[indexPath.row].heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 18))
         return baseHeight + 32
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        currentPath = indexPath.row
+        performSegue(withIdentifier: "showHelpController", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showHelpController" {
+            print("help pressed")
+            let destinationVC = segue.destination as! HelpController
+            destinationVC.titleName = arrayOfHelp[currentPath]
+            destinationVC.descName = indexToData[currentPath]
+        }
+    }
     
     
     @IBOutlet weak var tableView: UITableView!
     
-    @IBAction func xButtonPressed(_ sender: Any) {
-        SwiftEntryKit.dismiss()
-    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(closeTapped))
+//        navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(closeTapped))
+
     }
-    
+    @objc func closeTapped() {
+        SwiftEntryKit.dismiss()
+    }
 }
 
 class HelpCell: UITableViewCell {
@@ -59,15 +74,14 @@ class HelpController: UIViewController {
     
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    var titleName = "" {
-        didSet {
-            titleLabel.text = titleName
-        }
-    }
-    var descName = "" {
-        didSet {
-            descriptionLabel.text = descName
-        }
+    var titleName = "" 
+    var descName = ""
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.largeTitleDisplayMode = .never
+        titleLabel.text = titleName
+        descriptionLabel.text = descName
     }
     
 }

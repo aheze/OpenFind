@@ -158,6 +158,7 @@ class ViewController: UIViewController {
     let avSession = AVCaptureSession()
     var snapshotImageOrientation = UIImage.Orientation.upMirrored
     private var captureCompletionBlock: ((UIImage) -> Void)?
+    var cameraDevice: AVCaptureDevice?
     
     @IBOutlet weak var cameraView: CameraView!
     let videoDataOutput = AVCaptureVideoDataOutput()
@@ -196,7 +197,7 @@ class ViewController: UIViewController {
     }
     private func configureCamera() {
         cameraView.session = avSession
-        let cameraDevice = getCamera()
+        cameraDevice = getCamera() 
         do {
             let captureDeviceInput = try AVCaptureDeviceInput(device: cameraDevice!)
             if avSession.canAddInput(captureDeviceInput) {

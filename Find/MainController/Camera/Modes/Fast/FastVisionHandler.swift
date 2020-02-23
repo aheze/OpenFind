@@ -64,7 +64,7 @@ extension ViewController {
                             let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
                             let newY = component.y * self.deviceSize.height
                             let individualCharacterWidth = newW / CGFloat(component.text.count)
-                            let finalW = individualCharacterWidth * CGFloat(match.count)
+                            let finalW = individualCharacterWidth * CGFloat(match  .count)
                             
                             let indicies = component.text.indicesOf(string: match)
                             for index in indicies {
@@ -76,7 +76,7 @@ extension ViewController {
                                 newComponent.y = newY - (newH + 1)
                                 newComponent.width = finalW + 8
                                 newComponent.height = newH + 2
-                                newComponent.text = "This value is not needed"
+                                newComponent.text = "match"
                                 newComponent.changed = false
                                 nextComponents.append(newComponent)
                                 
@@ -111,6 +111,7 @@ extension ViewController {
             
             for oldComponent in currentComponents {
 //                if oldComponent.changed == false {
+                if newComponent.text == oldComponent.text {
                     let currentCompPoint = CGPoint(x: oldComponent.x, y: oldComponent.y)
                     let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
                     let distanceBetweenPoints = distance(currentCompPoint, nextCompPoint) //< 10
@@ -118,6 +119,7 @@ extension ViewController {
                         lowestDist = distanceBetweenPoints
                         distToComp[lowestDist] = oldComponent
                     }
+                }
 //                }
             }
 //            if shouldScale == true {
@@ -127,16 +129,17 @@ extension ViewController {
                 let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
                 
                 let newView = oldComp.baseView
-                let nextView = newComponent.baseView
+//                let nextView = newComponent.baseView
                 tempComponents.append(oldComp)
                 oldComp.changed = true
                 //nextComponents.remove(object: newComponent)
                 DispatchQueue.main.async {
+                    let rect = CGRect(x: newComponent.x, y: newComponent.y, width: newComponent.width, height: newComponent.height)
                     UIView.animate(withDuration: 0.5, animations: {
                         
-                        let xDist = nextCompPoint.x - currentCompPoint.x
-                        let yDist = nextCompPoint.y - currentCompPoint.y
-                        let rect = CGRect(x: newComponent.x, y: newComponent.y, width: newComponent.width, height: newComponent.height)
+//                        let xDist = nextCompPoint.x - currentCompPoint.x
+//                        let yDist = nextCompPoint.y - currentCompPoint.y
+                        
                         newView?.frame = rect
                         
                         
