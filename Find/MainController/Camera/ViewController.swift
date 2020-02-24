@@ -12,6 +12,7 @@ import Vision
 import AVFoundation
 import CoreMotion
 import RealmSwift
+import SnapKit
 
 protocol ChangeStatusValue: class {
     func changeValue(to value: CGFloat)
@@ -54,6 +55,7 @@ class ViewController: UIViewController {
     
     let realm = try! Realm()
     var listCategories: Results<FindList>?
+    var editableListCategories = [EditableFindList]()
     var currentContentsOfScreen = ""
     
     @IBOutlet weak var listsCollectionView: UICollectionView!
@@ -63,27 +65,48 @@ class ViewController: UIViewController {
     @IBOutlet weak var newMatchButton: UIButton!
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.4, animations: {
-            self.ramReel.textField.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 0)
-        }, completion: { _ in
-            self.ramReel.textField.text = ""
-            self.ramReel.textField.textColor = UIColor.white
-        })
+//        UIView.animate(withDuration: 0.4, animations: {
+//            self.ramReel.textField.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 0)
+//        }, completion: { _ in
+//            self.ramReel.textField.text = ""
+//            self.ramReel.textField.textColor = UIColor.white
+//        })
         view.endEditing(true)
     }
     @IBAction func autocompButtonPressed(_ sender: UIButton) {
-        if let selectedItem = ramReel.wrapper.selectedItem {
-            ramReel.textField.text = nil
-            ramReel.textField.insertText(selectedItem.render())
-            view.endEditing(true)
-        }
+//        if let selectedItem = ramReel.wrapper.selectedItem {
+//            ramReel.textField.text = nil
+//            ramReel.textField.insertText(selectedItem.render())
+//            view.endEditing(true)
+//        }
     }
     @IBAction func newMatchPressed(_ sender: Any) {
-        if let ramText = ramReel.textField.text {
-            ramReel.textField.text = "\(ramText)\u{2022}"
+        if let searchText = searchTextField.text {
+            searchTextField.text = "\(searchText)\u{2022}"
         }
+        
+//        if let ramText = ramReel.textField.text {
+//            ramReel.textField.text = "\(ramText)\u{2022}"
+//        }
     }
     
+    //MARK: Search Bar
+    @IBOutlet weak var searchContentView: UIView!
+    
+    @IBOutlet var listsView: UIView!
+    @IBOutlet weak var listViewCollectionView: UICollectionView!
+    
+    @IBOutlet var searchTextField: TextField!
+    @IBOutlet weak var searchTextBar: UIView!
+    
+    
+//    var listsViewTop: Constraint? = nil
+//    var listsViewLeft: Constraint? = nil
+//    var listsViewWidth: Constraint? = nil
+//    
+//    var textFieldTop: Constraint? = nil
+//    var textFieldLeft: Constraint? = nil
+//    var textFieldWidth: Constraint? = nil
     
     
     //MARK: Lists
@@ -137,24 +160,24 @@ class ViewController: UIViewController {
     var globalUrl : URL = URL(fileURLWithPath: "")
     
     
-    //MARK: Ramreel
-    var dataSource: SimplePrefixQueryDataSource!
-    var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
-    
-    let data: [String] = {
-        do {
-            guard let dataPath = Bundle.main.path(forResource: "data", ofType: "txt") else {
-                return []
-            }
-            
-            let data = try WordReader(filepath: dataPath)
-            return data.words
-        }
-        catch let error {
-            print(error)
-            return []
-        }
-    }()
+//    //MARK: Ramreel
+//    var dataSource: SimplePrefixQueryDataSource!
+//    var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
+//
+//    let data: [String] = {
+//        do {
+//            guard let dataPath = Bundle.main.path(forResource: "data", ofType: "txt") else {
+//                return []
+//            }
+//
+//            let data = try WordReader(filepath: dataPath)
+//            return data.words
+//        }
+//        catch let error {
+//            print(error)
+//            return []
+//        }
+//    }()
     
     //MARK: New Camera no Sceneview
     let avSession = AVCaptureSession()
@@ -275,7 +298,12 @@ class ViewController: UIViewController {
         loadListsRealm()
         setUpButtons()
         setUpTimers()
-        setUpRamReel()
+        
+        
+//        setUpRamReel()
+        setUpSearchBar()
+        
+        
         setUpFilePath()
         if isAuthorized() {
             configureCamera()

@@ -437,6 +437,24 @@ extension NewHistoryViewController: ButtonPressed {
 
 
 extension NewHistoryViewController {
+//    func getData() {
+//        //removeImageLocalPath
+//        clearHistoryImages()
+//    }
+  func clearHistoryImages() {
+      let fileManager = FileManager.default
+      let tempFolderPath = NSTemporaryDirectory()
+      do {
+          let filePaths = try fileManager.contentsOfDirectory(atPath: folderURL.path)
+          for filePath in filePaths {
+            //print("alkaldasdasd")
+              try fileManager.removeItem(atPath: "\(folderURL.path)/\(filePath)")
+          }
+      } catch {
+          print("Could not clear temp folder: \(error)")
+      }
+  }
+
     func getData() {
         var arrayOfCategoryDates = [Date]()
         var tempDictOfImagePaths = [Date: [URL]]()
@@ -459,7 +477,7 @@ extension NewHistoryViewController {
             print("error getting photos... \(error)")
         }
         arrayOfCategoryDates.sort(by: { $0.compare($1) == .orderedDescending})
-        
+
         for (index, date) in arrayOfCategoryDates.enumerated() {
             sectionCounts.append(0)
             sectionToDate[index] = date
@@ -470,9 +488,9 @@ extension NewHistoryViewController {
                     indexPath.row = secondIndex
                     sectionCounts[index] += 1
                     dictOfUrls[indexPath] = individualUrl
-                    
+
                     dateToFilepaths[date, default: [URL]()].append(individualUrl)
-                    
+
 //                    do {
 //                        var photos = try Realm().objects(RealmPhoto.self)
 //                        let photo = photoCategories![indexPath]
@@ -481,12 +499,13 @@ extension NewHistoryViewController {
 //                        print(error)
 //                    }
 //
-                    
-                    
+
+
                 }
             }
-            
+
         }
+        print("URL COUNT: \(dictOfUrls.count)")
     }
     
     func loadImageFromDocumentDirectory(urlOfFile: URL) -> UIImage? {
@@ -575,7 +594,10 @@ extension NewHistoryViewController: ZoomAnimatorDelegate {
             return CGRect(x: cellFrame.minX, y: self.collectionView.contentInset.top, width: cellFrame.width, height: cellFrame.height - (self.collectionView.contentInset.top - cellFrame.minY))
         }
         print("cellframe: \(cellFrame)")
-        cellFrame.origin.y += 40
+        
+        let heightDiff = UIScreen.main.bounds.size.height - view.bounds.size.height
+        print("height diff: \(heightDiff)")
+        cellFrame.origin.y += heightDiff
         ///need to fix this, no hardcoded values
         return cellFrame
     }

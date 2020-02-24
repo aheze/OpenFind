@@ -19,3 +19,11 @@ class FindList: Object {
     @objc dynamic var iconColorName = ""
     @objc dynamic var dateCreated = Date()
 }
+class EditableFindList: NSObject {
+    var name = ""
+    var descriptionOfList = ""
+    //@objc dynamic var contents = ""
+    var contents = [String]()
+    var iconImageName = ""
+    var iconColorName = ""
+}

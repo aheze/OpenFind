@@ -93,7 +93,7 @@ extension ViewController {
         view.bringSubviewToFront(newShutterButton)
        // view.bringSubviewToFront(refreshButton)
         view.bringSubviewToFront(menuButton)
-        view.bringSubviewToFront(ramReel.view)
+//        view.bringSubviewToFront(ramReel.view)
         guard let tag1 = self.view.viewWithTag(1) else {return}
         guard let tag2 = self.view.viewWithTag(2) else {return}
        

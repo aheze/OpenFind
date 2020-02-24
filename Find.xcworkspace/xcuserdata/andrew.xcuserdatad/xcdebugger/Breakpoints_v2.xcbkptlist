@@ -266,8 +266,8 @@
             filePath = "Find/MainController/Camera/Setup/Shutter/ShutterPressed.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "saveToFile()"
             landmarkType = "7">
          </BreakpointContent>
