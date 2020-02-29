@@ -15,34 +15,35 @@ import VideoToolbox
 extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
     func setUpSearchBar() {
         
-        searchContentView.addSubview(listsView)
-        listsView.snp.makeConstraints { (make) in
-            //make.top.equalToSuperview()
-            //make.bottom.equalToSuperview()
-            make.height.equalTo(60)
-            
-            make.width.equalTo(0)
-            make.top.equalToSuperview()
-            make.left.equalToSuperview()
-            
-        }
-        
-        searchContentView.addSubview(searchTextField)
-        searchTextField.snp.makeConstraints { (make) in
-            //make.bottom.equalToSuperview()
-            make.right.equalToSuperview()
-            make.height.equalTo(60)
-            
-            
-            make.top.equalToSuperview()
-            make.left.equalToSuperview()
-            
-        }
-        searchTextField.layer.cornerRadius = 8
-        searchTextField.inputAccessoryView = toolBar
-        searchTextField.attributedPlaceholder = NSAttributedString(string: "Type here to find...",
+//        searchContentView.addSubview(listsView)
+//        listsView.snp.makeConstraints { (make) in
+//            //make.top.equalToSuperview()
+//            //make.bottom.equalToSuperview()
+//            make.height.equalTo(60)
+//
+//            make.width.equalTo(0)
+//            make.top.equalToSuperview()
+//            make.left.equalToSuperview()
+//
+//        }
+//
+//        searchContentView.addSubview(searchTextField)
+//        searchTextField.snp.makeConstraints { (make) in
+//            //make.bottom.equalToSuperview()
+//            make.right.equalToSuperview()
+//            make.height.equalTo(60)
+//
+//
+//            make.top.equalToSuperview()
+//            make.left.equalToSuperview()
+//
+//        }
+        newSearchTextField.layer.cornerRadius = 8
+        newSearchTextField.inputAccessoryView = toolBar
+        newSearchTextField.attributedPlaceholder = NSAttributedString(string: "Type here to find...",
                                                                    attributes:
                                                                    [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.8784313725, green: 0.878935039, blue: 0.878935039, alpha: 0.75)])
+       // newSearchTextField.
         
       //  let color: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
@@ -83,7 +84,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
             print("onlyText")
             darkBlurEffectHeightConstraint.constant = self.view.bounds.size.height
             UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
-                self.searchTextField.backgroundColor = UIColor(named: "OpaqueBlur")
+                self.newSearchTextField.backgroundColor = UIColor(named: "OpaqueBlur")
                 self.darkBlurEffect.alpha = 0.2
                 self.view.layoutIfNeeded()
             }, completion: nil)
@@ -98,7 +99,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
             darkBlurEffectHeightConstraint.constant = 100
             
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-                self.searchTextField.backgroundColor = UIColor(named: "TransparentBlur")
+                self.newSearchTextField.backgroundColor = UIColor(named: "TransparentBlur")
                 self.darkBlurEffect.alpha = 1
                 self.view.layoutIfNeeded()
             })
@@ -108,12 +109,12 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 60, height: 60)
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: 60, height: 60)
+//    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        return 8
+//    }
    
 //    @objc func textFieldDidChange(_ textField: UITextField) {
 //        if ramReel.wrapper.selectedItem == nil {
@@ -140,7 +141,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
          
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        finalTextToFind = searchTextField.text ?? ""
+        finalTextToFind = newSearchTextField.text ?? ""
         view.endEditing(true)
         print("Text: \(textField.text)")
         return true

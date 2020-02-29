@@ -16,7 +16,7 @@ extension ViewController: UICollectionViewDataSource {
         if let lC = listCategories {
             for singleL in lC {
                 
-                var editList = EditableFindList()
+                let editList = EditableFindList()
                 
                 editList.name = singleL.name
                 editList.descriptionOfList = singleL.descriptionOfList
@@ -32,8 +32,12 @@ extension ViewController: UICollectionViewDataSource {
                 editableListCategories.append(editList)
             }
         }
+//        let flowLayout = listsCollectionView.collectionViewLayout
+//        flowLayout.estimated
+        
         
         listsCollectionView.reloadData()
+//        listsToolbarLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -44,9 +48,10 @@ extension ViewController: UICollectionViewDataSource {
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView.tag == 100100 {
+//        if collectionView.tag == 100100 {
             let cell = listsCollectionView.dequeueReusableCell(withReuseIdentifier: "tooltopCell", for: indexPath) as! ToolbarTopCell
-            if let list = listCategories?[indexPath.row] {
+//            if let list = listCategories?[indexPath.row] {
+            let list = editableListCategories[indexPath.item]
                 cell.labelText.text = list.name
                 cell.backgroundColor = UIColor(hexString: list.iconColorName)
                 cell.layer.cornerRadius = 6
@@ -54,21 +59,22 @@ extension ViewController: UICollectionViewDataSource {
                 let newImage = UIImage(systemName: list.iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor.white, renderingMode: .alwaysOriginal)
                 
                 cell.imageView.image = newImage
-            }
+//            }
             return cell
-        } else {
-            let cell = listsCollectionView.dequeueReusableCell(withReuseIdentifier: "tooltopCell", for: indexPath) as! ToolbarTopCell
-            if let list = listCategories?[indexPath.row] {
-                cell.labelText.text = list.name
-                cell.backgroundColor = UIColor(hexString: list.iconColorName)
-                cell.layer.cornerRadius = 6
-                let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 10, weight: .semibold)
-                let newImage = UIImage(systemName: list.iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor.white, renderingMode: .alwaysOriginal)
-                
-                cell.imageView.image = newImage
-            }
-            return cell
-        }
+//        }
+//        else {
+//            let cell = listsCollectionView.dequeueReusableCell(withReuseIdentifier: "tooltopCell", for: indexPath) as! ToolbarTopCell
+//            if let list = listCategories?[indexPath.row] {
+//                cell.labelText.text = list.name
+//                cell.backgroundColor = UIColor(hexString: list.iconColorName)
+//                cell.layer.cornerRadius = 6
+//                let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 10, weight: .semibold)
+//                let newImage = UIImage(systemName: list.iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor.white, renderingMode: .alwaysOriginal)
+//
+//                cell.imageView.image = newImage
+//            }
+//            return cell
+//        }
     }
 //    func collectionView(_ collectionView: UICollectionView,
 //                      layout collectionViewLayout: UICollectionViewLayout,
@@ -84,7 +90,7 @@ extension ViewController: UICollectionViewDataSource {
             print(selectedLists)
             
             let indexP = IndexPath(item: selectedLists.count - 1, section: 0)
-            listViewCollectionView.insertItems(at: [indexP])
+//            listViewCollectionView.insertItems(at: [indexP])
             
             editableListCategories.remove(at: indexPath.item)
             listsCollectionView.deleteItems(at: [indexPath])
@@ -103,6 +109,23 @@ class ToolbarTopCell: UICollectionViewCell {
     @IBOutlet weak var labelText: UILabel!
     
     @IBOutlet weak var imageView: UIImageView!
+    
+    //forces the system to do one layout pass
+//    var isHeightCalculated: Bool = false
+
+//    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+//        //Exhibit A - We need to cache our calculation to prevent a crash.
+//        if !isHeightCalculated {
+//            setNeedsLayout()
+//            layoutIfNeeded()
+//            let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
+//            var newFrame = layoutAttributes.frame
+//            newFrame.size.width = CGFloat(ceilf(Float(size.width)))
+//            layoutAttributes.frame = newFrame
+//            isHeightCalculated = true
+//        }
+//        return layoutAttributes
+//    }
     //    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
 //        setNeedsLayout()
 //        layoutIfNeeded()

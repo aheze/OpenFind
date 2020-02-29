@@ -53,6 +53,7 @@ class ViewController: UIViewController {
     
     //MARK: Toolbar
     
+    @IBOutlet weak var listsToolbarLayout: UICollectionViewFlowLayout!
     let realm = try! Realm()
     var listCategories: Results<FindList>?
     var editableListCategories = [EditableFindList]()
@@ -81,8 +82,8 @@ class ViewController: UIViewController {
 //        }
     }
     @IBAction func newMatchPressed(_ sender: Any) {
-        if let searchText = searchTextField.text {
-            searchTextField.text = "\(searchText)\u{2022}"
+        if let searchText = newSearchTextField.text {
+            newSearchTextField.text = "newSearchTextField(searchText)\u{2022}"
         }
         
 //        if let ramText = ramReel.textField.text {
@@ -92,12 +93,14 @@ class ViewController: UIViewController {
     
     //MARK: Search Bar
     @IBOutlet weak var searchContentView: UIView!
+//
+//    @IBOutlet var listsView: UIView!
+//    @IBOutlet weak var listViewCollectionView: UICollectionView!
+//
+//    @IBOutlet var searchTextField: TextField!
+//    @IBOutlet weak var searchTextBar: UIView!
     
-    @IBOutlet var listsView: UIView!
-    @IBOutlet weak var listViewCollectionView: UICollectionView!
-    
-    @IBOutlet var searchTextField: TextField!
-    @IBOutlet weak var searchTextBar: UIView!
+    @IBOutlet weak var newSearchTextField: TextField!
     
     
 //    var listsViewTop: Constraint? = nil
