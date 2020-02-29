@@ -64,6 +64,8 @@
 		494DF11B23961ADA0076412D /* BDVCTranscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494DF11A23961ADA0076412D /* BDVCTranscript.swift */; };
 		494DF11D23961AEB0076412D /* BDVCShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494DF11C23961AEB0076412D /* BDVCShare.swift */; };
 		494DF11F23961B4E0076412D /* BDVCInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494DF11E23961B4E0076412D /* BDVCInfo.swift */; };
+		4952F0C2240B1DD00068564F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4952F0C1240B1DD00068564F /* SearchCell.swift */; };
+		4952F0C4240B1DE90068564F /* ToolbarTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4952F0C3240B1DE90068564F /* ToolbarTopCell.swift */; };
 		49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3223D65AA4009308CA /* ListCollectionCell.swift */; };
 		49569B3523D6919E009308CA /* ListsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3423D6919E009308CA /* ListsLayout.swift */; };
 		4957157C2368AF69007BF68B /* RippleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4957157B2368AF69007BF68B /* RippleEffect.swift */; };
@@ -177,6 +179,8 @@
 		494DF11A23961ADA0076412D /* BDVCTranscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDVCTranscript.swift; sourceTree = "<group>"; };
 		494DF11C23961AEB0076412D /* BDVCShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDVCShare.swift; sourceTree = "<group>"; };
 		494DF11E23961B4E0076412D /* BDVCInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDVCInfo.swift; sourceTree = "<group>"; };
+		4952F0C1240B1DD00068564F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		4952F0C3240B1DE90068564F /* ToolbarTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarTopCell.swift; sourceTree = "<group>"; };
 		49569B3223D65AA4009308CA /* ListCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionCell.swift; sourceTree = "<group>"; };
 		49569B3423D6919E009308CA /* ListsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsLayout.swift; sourceTree = "<group>"; };
 		4957157B2368AF69007BF68B /* RippleEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleEffect.swift; sourceTree = "<group>"; };
@@ -334,6 +338,7 @@
 				49F7B1552353FE4B0099FA62 /* BasicSetup.swift */,
 				49A8EFAB237A5EFE00328D47 /* SetUpButtons.swift */,
 				49A8EFAD237A5F2800328D47 /* SetUpSearchBar.swift */,
+				4952F0C1240B1DD00068564F /* SearchCell.swift */,
 				49301BF624030C4400B4780B /* SmallGradientView.swift */,
 			);
 			path = Setup;
@@ -499,6 +504,7 @@
 				496937352353C1E9009CA41A /* Modes */,
 				4999AC972353A80A00AB06A7 /* ViewController.swift */,
 				4928525723D539F40048EC13 /* ToolbarTopCollectionView.swift */,
+				4952F0C3240B1DE90068564F /* ToolbarTopCell.swift */,
 				4999AC992353A80A00AB06A7 /* Main.storyboard */,
 				4999AC9E2353A81100AB06A7 /* LaunchScreen.storyboard */,
 				49F7B1572353FE7E0099FA62 /* Component.swift */,
@@ -774,6 +780,7 @@
 				494DF11D23961AEB0076412D /* BDVCShare.swift in Sources */,
 				4990AAE623EDB50E00FAF37B /* ColorsViewController.swift in Sources */,
 				4990AAE223EDB4CE00FAF37B /* GeneralViewController.swift in Sources */,
+				4952F0C4240B1DE90068564F /* ToolbarTopCell.swift in Sources */,
 				4957157E2368B022007BF68B /* ViewExtensions.swift in Sources */,
 				490DA75D23CBC905000AF57D /* BigMenuButton.swift in Sources */,
 				4928525823D539F40048EC13 /* ToolbarTopCollectionView.swift in Sources */,
@@ -805,6 +812,7 @@
 				492EB4F023F504BC007142CA /* PopulateSymbols.swift in Sources */,
 				49115089235D17EB00EC0C04 /* ShutterPressed.swift in Sources */,
 				490DA74F23CBB871000AF57D /* JJFloatingActionButtonState.swift in Sources */,
+				4952F0C2240B1DD00068564F /* SearchCell.swift in Sources */,
 				49BC782223C3E1BF003D9904 /* TextViewRounded.swift in Sources */,
 				4966B70A23DE98C800A8523A /* MakeNewList.swift in Sources */,
 				495ECCA7238CF76C00E7D966 /* NewHistoryViewController.swift in Sources */,

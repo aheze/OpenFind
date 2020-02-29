@@ -180,12 +180,12 @@ extension ViewController {
         }
         
         switch touch.view {
-        case newShutterButton, menuButton, statusView, darkBlurEffect, blurView:
-            print("Special view")
-            return false
-        default:
-            print("Not")
+        case controlsView, cameraView, stackAllowView, menuAllowView, middleAllowView, statusAllowView:
+//            print("Special view")
             return true
+        default:
+//            print("Not")
+            return false
         }
         //return touch.view == gestureRecognizer.view
         

@@ -92,6 +92,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         case "addListsNow":
             print("pressed a list so now text and lists")
             
+            
         case "removeListsNow":
             print("removed every list so now ONLY TEXT")
         case "doneAndShrink":
@@ -110,7 +111,11 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
     }
     
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: 60, height: 60)
+//        if collectionView == searchCollectionView {
+//            return CGSize(width: 125, height: 60)
+//        }
+//
+//        return CGSize(width: 0, height: 0)
 //    }
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
 //        return 8
@@ -235,6 +240,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
     
     
 }
+
 
 
 //extension UIImage {

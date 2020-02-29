@@ -14,7 +14,7 @@ extension ViewController: UICollectionViewDataSource {
         listCategories = realm.objects(FindList.self)
         listCategories = listCategories!.sorted(byKeyPath: "dateCreated", ascending: false)
         if let lC = listCategories {
-            for singleL in lC {
+            for (index, singleL) in lC.enumerated() {
                 
                 let editList = EditableFindList()
                 
@@ -22,6 +22,7 @@ extension ViewController: UICollectionViewDataSource {
                 editList.descriptionOfList = singleL.descriptionOfList
                 editList.iconImageName = singleL.iconImageName
                 editList.iconColorName = singleL.iconColorName
+                editList.orderIdentifier = index
                 var contents = [String]()
                 for singleCont in singleL.contents {
                     contents.append(singleCont)
@@ -48,7 +49,8 @@ extension ViewController: UICollectionViewDataSource {
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        if collectionView.tag == 100100 {
+//        var cell = UICollectionViewCell()
+        if collectionView.tag == 100100 {
             let cell = listsCollectionView.dequeueReusableCell(withReuseIdentifier: "tooltopCell", for: indexPath) as! ToolbarTopCell
 //            if let list = listCategories?[indexPath.row] {
             let list = editableListCategories[indexPath.item]
@@ -61,9 +63,25 @@ extension ViewController: UICollectionViewDataSource {
                 cell.imageView.image = newImage
 //            }
             return cell
-//        }
-//        else {
-//            let cell = listsCollectionView.dequeueReusableCell(withReuseIdentifier: "tooltopCell", for: indexPath) as! ToolbarTopCell
+        } else { ////1001000090 search collection view searchCell
+            let cell = searchCollectionView.dequeueReusableCell(withReuseIdentifier: "searchCell", for: indexPath) as! SearchCell
+            let listNumber = selectedLists[indexPath.item]
+            if let list = listCategories?[listNumber.orderIdentifier] {
+                print("order id: \(list)")
+                
+                cell.nameLabel.text = list.name
+                cell.backgroundColor = UIColor(hexString: list.iconColorName)
+                cell.layer.cornerRadius = 6
+                let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 10, weight: .semibold)
+                let newImage = UIImage(systemName: list.iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor.white, renderingMode: .alwaysOriginal)
+                
+                cell.imageView.image = newImage
+                
+            }
+            
+            return cell
+        }
+            
 //            if let list = listCategories?[indexPath.row] {
 //                cell.labelText.text = list.name
 //                cell.backgroundColor = UIColor(hexString: list.iconColorName)
@@ -83,20 +101,62 @@ extension ViewController: UICollectionViewDataSource {
 //        //let itemSize = cell.button.frame.size.width
 //        return CGSize(width: 120, height: CGFloat(38))
 //    }
+
+    func calculateWhereToPlaceComponent(component: EditableFindList, placeInSecondCollectionView: IndexPath) {
+        let componentOrderID = component.orderIdentifier
+        print("calc")
+        var indexPathToAppendTo = 0
+        for (index, singleComponent) in editableListCategories.enumerated() {
+            ///We are going to check if the singleComponent's order identifier is smaller than componentOrderID.
+            ///If it is smaller, we know we must insert the cell ONE to the right of this indexPath.
+            if singleComponent.orderIdentifier < componentOrderID {
+                indexPathToAppendTo = index + 1
+            }
+        }
+        print("index... \(indexPathToAppendTo)")
+        ///Now that we know where to append the green cell, let's do it!
+        editableListCategories.insert(component, at: indexPathToAppendTo)
+        let newIndexPath = IndexPath(item: indexPathToAppendTo, section: 0)
+        listsCollectionView.insertItems(at: [newIndexPath])
+
+        //we must remove the red cell now.
+        selectedLists.remove(at: placeInSecondCollectionView.item)
+        searchCollectionView.deleteItems(at: [placeInSecondCollectionView])
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.tag == 100100 {
             print("select cell")
-            selectedLists.append(indexPath.item)
+            let newList = editableListCategories[indexPath.item]
+            selectedLists.append(newList)
             print(selectedLists)
             
             let indexP = IndexPath(item: selectedLists.count - 1, section: 0)
+            searchCollectionView.insertItems(at: [indexP])
 //            listViewCollectionView.insertItems(at: [indexP])
             
             editableListCategories.remove(at: indexPath.item)
             listsCollectionView.deleteItems(at: [indexPath])
+            updateListsLayout(toType: "addListsNow")
+            
+            
           //  editableListCategories
             //listsViewWidth.up
         } else {
+            print("pressed search cell")
+            let list = selectedLists[indexPath.item]
+            calculateWhereToPlaceComponent(component: list, placeInSecondCollectionView: indexPath)
+//            newList.name = list.name
+//            newList.descriptionOfList = list.descriptionOfList
+//            newList.iconImageName = list.iconImageName
+//            newList.iconColorName = list.iconColorName
+//
+//            var contents = [String]()
+//            for singleCont in list.contents {
+//                contents.append(singleCont)
+//            }
+            
+//            newList.contents = contents
                 
         }
     }
@@ -104,40 +164,4 @@ extension ViewController: UICollectionViewDataSource {
 
 
 
-class ToolbarTopCell: UICollectionViewCell {
-    
-    @IBOutlet weak var labelText: UILabel!
-    
-    @IBOutlet weak var imageView: UIImageView!
-    
-    //forces the system to do one layout pass
-//    var isHeightCalculated: Bool = false
 
-//    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-//        //Exhibit A - We need to cache our calculation to prevent a crash.
-//        if !isHeightCalculated {
-//            setNeedsLayout()
-//            layoutIfNeeded()
-//            let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-//            var newFrame = layoutAttributes.frame
-//            newFrame.size.width = CGFloat(ceilf(Float(size.width)))
-//            layoutAttributes.frame = newFrame
-//            isHeightCalculated = true
-//        }
-//        return layoutAttributes
-//    }
-    //    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-//        setNeedsLayout()
-//        layoutIfNeeded()
-//        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-//        var frame = layoutAttributes.frame
-//        //frame.size.width = ceil(size.width)
-//        frame.size.height = 24
-//        print("ashdaksd")
-//        print(size.height)
-//        layoutAttributes.frame = frame
-//        return layoutAttributes
-//    }
-   
-    
-}

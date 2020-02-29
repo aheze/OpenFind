@@ -26,4 +26,5 @@ class EditableFindList: NSObject {
     var contents = [String]()
     var iconImageName = ""
     var iconColorName = ""
+    var orderIdentifier = 0
 }

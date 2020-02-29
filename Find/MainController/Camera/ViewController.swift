@@ -83,7 +83,7 @@ class ViewController: UIViewController {
     }
     @IBAction func newMatchPressed(_ sender: Any) {
         if let searchText = newSearchTextField.text {
-            newSearchTextField.text = "newSearchTextField(searchText)\u{2022}"
+            newSearchTextField.text = "\(searchText)\u{2022}"
         }
         
 //        if let ramText = ramReel.textField.text {
@@ -94,6 +94,10 @@ class ViewController: UIViewController {
     //MARK: Search Bar
     @IBOutlet weak var searchContentView: UIView!
 //
+    @IBOutlet weak var searchCollectionView: UICollectionView!
+    @IBOutlet weak var searchCollectionTopC: NSLayoutConstraint!
+    @IBOutlet weak var searchCollectionRightC: NSLayoutConstraint!
+    
 //    @IBOutlet var listsView: UIView!
 //    @IBOutlet weak var listViewCollectionView: UICollectionView!
 //
@@ -101,9 +105,9 @@ class ViewController: UIViewController {
 //    @IBOutlet weak var searchTextBar: UIView!
     
     @IBOutlet weak var newSearchTextField: TextField!
-    
-    
-//    var listsViewTop: Constraint? = nil
+    @IBOutlet weak var searchTextTopC: NSLayoutConstraint! ///starts at 8
+    @IBOutlet weak var searchTextLeftC: NSLayoutConstraint!
+    //    var listsViewTop: Constraint? = nil
 //    var listsViewLeft: Constraint? = nil
 //    var listsViewWidth: Constraint? = nil
 //    
@@ -114,7 +118,9 @@ class ViewController: UIViewController {
     
     //MARK: Lists
         
-    var selectedLists = [Int]()
+    @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var listsLabel: UILabel!
+    var selectedLists = [EditableFindList]()
     
     //MARK: Matches HUD
     
@@ -188,6 +194,12 @@ class ViewController: UIViewController {
     private var captureCompletionBlock: ((UIImage) -> Void)?
     var cameraDevice: AVCaptureDevice?
     
+    //MARK: Camera Focus allowed views
+    @IBOutlet weak var menuAllowView: UIView!
+    @IBOutlet weak var middleAllowView: UIView!
+    @IBOutlet weak var statusAllowView: UIView!
+    @IBOutlet weak var stackAllowView: UIStackView!
+    @IBOutlet weak var controlsView: UIView!
     @IBOutlet weak var cameraView: CameraView!
     let videoDataOutput = AVCaptureVideoDataOutput()
     func getImageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
