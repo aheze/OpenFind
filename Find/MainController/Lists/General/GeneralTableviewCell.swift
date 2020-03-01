@@ -58,6 +58,13 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        print("reuse!")
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+//    override func viewWill
     @objc func onDidReceiveEmptyString(_ notification: Notification) {
        // print("NOTIFY, empty")
         if let data = notification.userInfo as? [Int: [Int]] {

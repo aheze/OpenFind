@@ -90,7 +90,11 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         switch toType {
         case "onlyTextBox":
             print("onlyText")
+            searchShrunk = false
+            searchCollectionView.reloadData()
 //            darkBlurEffectHeightConstraint.constant = self.view.bounds.size.height
+//            NotificationCenter.default.post(name: .changeSearchListSize, object: nil, userInfo: [0: false])
+            searchTextLeftC.constant = 8
             UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
                 self.newSearchTextField.backgroundColor = UIColor(named: "OpaqueBlur")
 //                self.darkBlurEffect.alpha = 0.2
@@ -99,7 +103,13 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
             
         case "addListsNow":
             print("pressed a list so now text and lists")
+            if searchShrunk == true {
+                searchShrunk = false
+                searchCollectionView.reloadData()
+            }
+//            NotificationCenter.default.post(name: .changeSearchListSize, object: nil, userInfo: [0: false])
             
+            searchTextLeftC.constant = 8
             searchTextTopC.constant = 180
             searchCollectionTopC.constant = 60
             searchContentViewHeight.constant = 243
@@ -129,12 +139,54 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
             }, completion: nil)
         case "doneAndShrink":
             print("Done, shrinking lists")
+            
+            searchShrunk = true
 //            darkBlurEffectHeightConstraint.constant = 100
+//            for j in 0..<searchCollectionView.numberOfItems(inSection: 0) {
+//                let indP = IndexPath(item: j, section: 0)
+//                if let cell = searchCollectionView.cellForItem(at: indP) as! SearchCell {
+//                    cell.labelRigh
+//                }
+////                collectionView.deselectItem(at: IndexPath(row: j, section: 0), animated: false)
+//            }
+            
+//            var listOfInds = [IndexPath]()
+//            for (index, cell) in selectedLists.enumerated() {
+//                let indP = IndexPath(item: index, section: 0)
+//                listOfInds.append(indP)
+//            }
+//
+//
+            searchCollectionView.reloadData()
+//            searchCollectionView.reloadItems(at: <#T##[IndexPath]#>)
+            
+//            NotificationCenter.default.post(name: .changeSearchListSize, object: nil, userInfo: [0: true])
+            switch selectedLists.count {
+            case 0:
+                print("nothing")
+            case 1:
+                print("1")
+                searchTextLeftC.constant = 71
+//                for (index, singleIndex) in selectedLists.enumerated() {
+//                    let indP = IndexPath(item: index, section: 0)
+//                    let cell = searchCollectionView.cellForItem(at: indP)
+//
+//                }
+                
+            default:
+                print("default")
+            }
+            
             searchContentViewHeight.constant = 71
+            searchTextTopC.constant = 8
+            searchCollectionTopC.constant = 8
             
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
                 self.newSearchTextField.backgroundColor = UIColor(named: "TransparentBlur")
 //                self.darkBlurEffect.alpha = 1
+                self.textLabel.alpha = 0
+                self.listsLabel.alpha = 0
+                self.tapToRemoveLabel.alpha = 0
                 self.view.layoutIfNeeded()
             })
         default:
@@ -273,7 +325,9 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
     
     
 }
-
+extension Notification.Name {
+    static let changeSearchListSize = Notification.Name("changeSearchListSize")
+}
 
 
 //extension UIImage {

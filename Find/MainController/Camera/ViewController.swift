@@ -104,6 +104,9 @@ class ViewController: UIViewController {
 //    @IBOutlet var searchTextField: TextField!
 //    @IBOutlet weak var searchTextBar: UIView!
     
+    
+    var searchShrunk = true
+    
     @IBOutlet weak var newSearchTextField: TextField!
     @IBOutlet weak var searchTextTopC: NSLayoutConstraint! ///starts at 8
     @IBOutlet weak var searchTextLeftC: NSLayoutConstraint!

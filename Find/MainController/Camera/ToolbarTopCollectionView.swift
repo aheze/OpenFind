@@ -64,14 +64,40 @@ extension ViewController: UICollectionViewDataSource {
 //            }
             return cell
         } else { ////1001000090 search collection view searchCell
+           // print("Dequeue, indexPath: \(indexPath.item)")
             let cell = searchCollectionView.dequeueReusableCell(withReuseIdentifier: "searchCell", for: indexPath) as! SearchCell
             let listNumber = selectedLists[indexPath.item]
             if let list = listCategories?[listNumber.orderIdentifier] {
-                print("order id: \(list)")
+//                print("order id: \(list)")
                 
-                cell.nameLabel.text = list.name
+                
                 cell.backgroundColor = UIColor(hexString: list.iconColorName)
                 cell.layer.cornerRadius = 6
+//                var newLabelFrame = cell.nameLabel.frame
+//                print(newLabelFrame)
+                print("cont size: \(cell.nameLabel.intrinsicContentSize)")
+                if searchShrunk == true {
+                   // print("SHRINK MODE")
+                    cell.nameLabel.text = ""
+                    cell.labelRightC.constant = 0
+//                    newLabelFrame.size.width = 0
+//                    cell.labelWidth.constant = 0
+                    print("cont size: \(cell.nameLabel.intrinsicContentSize)")
+                } else {
+                  //  print("EXPAND MODE")
+                    cell.nameLabel.text = list.name
+                    cell.labelRightC.constant = 8
+//                    newLabelFrame.size.width = cell.nameLabel.intrinsicContentSize.width
+//                    cell.labelWidth.constant = cell.nameLabel.intrinsicContentSize.width
+                    print("cont size: \(cell.nameLabel.intrinsicContentSize)")
+                }
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                    
+//                    cell.nameLabel.frame = newLabelFrame
+                    cell.layoutIfNeeded()
+                })
+                
                 let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 10, weight: .semibold)
                 let newImage = UIImage(systemName: list.iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor.white, renderingMode: .alwaysOriginal)
                 
