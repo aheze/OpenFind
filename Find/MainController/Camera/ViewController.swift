@@ -45,7 +45,7 @@ override class var layerClass: AnyClass {
 class ViewController: UIViewController {
     
     @IBOutlet weak var darkBlurEffect: UIVisualEffectView!
-    @IBOutlet weak var darkBlurEffectHeightConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var darkBlurEffectHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var menuButton: JJFloatingActionButton!
     @IBOutlet weak var newShutterButton: NewShutterButton!
@@ -115,11 +115,15 @@ class ViewController: UIViewController {
 //    var textFieldLeft: Constraint? = nil
 //    var textFieldWidth: Constraint? = nil
     
+    @IBOutlet weak var searchContentViewHeight: NSLayoutConstraint!
     
     //MARK: Lists
         
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var listsLabel: UILabel!
+
+    @IBOutlet weak var tapToRemoveLabel: UILabel!
+    
     var selectedLists = [EditableFindList]()
     
     //MARK: Matches HUD

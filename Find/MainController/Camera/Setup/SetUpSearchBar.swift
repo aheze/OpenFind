@@ -38,7 +38,15 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
 //            make.left.equalToSuperview()
 //
 //        }
+        textLabel.alpha = 0
+        listsLabel.alpha = 0
+        tapToRemoveLabel.alpha = 0
+        
+        searchContentView.layer.cornerRadius = 12
+        searchContentView.clipsToBounds = true
+        
         newSearchTextField.layer.cornerRadius = 8
+        
         newSearchTextField.inputAccessoryView = toolBar
         newSearchTextField.attributedPlaceholder = NSAttributedString(string: "Type here to find...",
                                                                    attributes:
@@ -82,26 +90,51 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         switch toType {
         case "onlyTextBox":
             print("onlyText")
-            darkBlurEffectHeightConstraint.constant = self.view.bounds.size.height
+//            darkBlurEffectHeightConstraint.constant = self.view.bounds.size.height
             UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
                 self.newSearchTextField.backgroundColor = UIColor(named: "OpaqueBlur")
-                self.darkBlurEffect.alpha = 0.2
+//                self.darkBlurEffect.alpha = 0.2
                 self.view.layoutIfNeeded()
             }, completion: nil)
             
         case "addListsNow":
             print("pressed a list so now text and lists")
             
+            searchTextTopC.constant = 180
+            searchCollectionTopC.constant = 60
+            searchContentViewHeight.constant = 243
+            
+            
+            UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
+                self.searchCollectionView.alpha = 1
+                self.textLabel.alpha = 1
+                self.listsLabel.alpha = 1
+                self.tapToRemoveLabel.alpha = 1
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+            
             
         case "removeListsNow":
             print("removed every list so now ONLY TEXT")
+            searchTextTopC.constant = 8
+            searchCollectionTopC.constant = 8
+            searchContentViewHeight.constant = 71
+            
+            UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
+                self.searchCollectionView.alpha = 0
+                self.textLabel.alpha = 0
+                self.listsLabel.alpha = 0
+                self.tapToRemoveLabel.alpha = 0
+                self.view.layoutIfNeeded()
+            }, completion: nil)
         case "doneAndShrink":
             print("Done, shrinking lists")
-            darkBlurEffectHeightConstraint.constant = 100
+//            darkBlurEffectHeightConstraint.constant = 100
+            searchContentViewHeight.constant = 71
             
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
                 self.newSearchTextField.backgroundColor = UIColor(named: "TransparentBlur")
-                self.darkBlurEffect.alpha = 1
+//                self.darkBlurEffect.alpha = 1
                 self.view.layoutIfNeeded()
             })
         default:

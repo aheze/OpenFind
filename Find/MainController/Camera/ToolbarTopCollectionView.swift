@@ -124,6 +124,7 @@ extension ViewController: UICollectionViewDataSource {
         searchCollectionView.deleteItems(at: [placeInSecondCollectionView])
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.tag == 100100 {
             print("select cell")
@@ -137,7 +138,9 @@ extension ViewController: UICollectionViewDataSource {
             
             editableListCategories.remove(at: indexPath.item)
             listsCollectionView.deleteItems(at: [indexPath])
-            updateListsLayout(toType: "addListsNow")
+            if selectedLists.count <= 1 {
+                updateListsLayout(toType: "addListsNow")
+            }
             
             
           //  editableListCategories
@@ -146,6 +149,11 @@ extension ViewController: UICollectionViewDataSource {
             print("pressed search cell")
             let list = selectedLists[indexPath.item]
             calculateWhereToPlaceComponent(component: list, placeInSecondCollectionView: indexPath)
+            
+            if selectedLists.count == 0 {
+                updateListsLayout(toType: "removeListsNow")
+            }
+            
 //            newList.name = list.name
 //            newList.descriptionOfList = list.descriptionOfList
 //            newList.iconImageName = list.iconImageName
