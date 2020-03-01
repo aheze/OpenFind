@@ -80,10 +80,41 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         
     }
     
-    func updateHeight(expanding: Bool) {
+    func removeAllLists() {
+        var tempArray = [EditableFindList]()
+        for singleList in selectedLists {
+//            let indP = IndexPath(item: index, section: 0)
+            tempArray.append(singleList)
+//            calculateWhereToPlaceComponent(component: singleList, placeInSecondCollectionView: indP)
+        }
+        selectedLists.removeAll()
+        searchCollectionView.reloadData()
+        for temp in tempArray {
+            calculateWhereToInsert(component: temp)
+        }
         
-        
-        
+        updateListsLayout(toType: "removeListsNow")
+    }
+    func calculateWhereToInsert(component: EditableFindList) {
+        let componentOrderID = component.orderIdentifier
+//        print("calc")
+        var indexPathToAppendTo = 0
+        for (index, singleComponent) in editableListCategories.enumerated() {
+            ///We are going to check if the singleComponent's order identifier is smaller than componentOrderID.
+            ///If it is smaller, we know we must insert the cell ONE to the right of this indexPath.
+            if singleComponent.orderIdentifier < componentOrderID {
+                indexPathToAppendTo = index + 1
+            }
+        }
+//        print("index... \(indexPathToAppendTo)")
+        ///Now that we know where to append the green cell, let's do it!
+        editableListCategories.insert(component, at: indexPathToAppendTo)
+        let newIndexPath = IndexPath(item: indexPathToAppendTo, section: 0)
+        listsCollectionView.insertItems(at: [newIndexPath])
+
+        //we must remove the red cell now.
+//        selectedLists.remove(at: placeInSecondCollectionView.item)
+//        searchCollectionView.deleteItems(at: [placeInSecondCollectionView])
     }
     func updateListsLayout(toType: String) {
         
@@ -91,6 +122,8 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         case "onlyTextBox":
             print("onlyText")
             searchShrunk = false
+            searchCollectionRightC.constant = 0
+            searchBarLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
             searchCollectionView.reloadData()
 //            darkBlurEffectHeightConstraint.constant = self.view.bounds.size.height
 //            NotificationCenter.default.post(name: .changeSearchListSize, object: nil, userInfo: [0: false])
@@ -105,6 +138,8 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
             print("pressed a list so now text and lists")
             if searchShrunk == true {
                 searchShrunk = false
+                searchCollectionRightC.constant = 0
+                searchBarLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
                 searchCollectionView.reloadData()
             }
 //            NotificationCenter.default.post(name: .changeSearchListSize, object: nil, userInfo: [0: false])
@@ -172,9 +207,19 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
 //                    let cell = searchCollectionView.cellForItem(at: indP)
 //
 //                }
-                
+            case 2:
+                searchTextLeftC.constant = 71 + 55 + 8
+            case 3:
+                searchTextLeftC.constant = 197
             default:
                 print("default")
+                searchTextLeftC.constant = 197
+                print("search frame: \(newSearchTextField.frame)")
+                let availibleWidth = searchContentView.frame.width - 189
+//                layout = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+                searchBarLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+                searchCollectionRightC.constant = availibleWidth
+                print(availibleWidth)
             }
             
             searchContentViewHeight.constant = 71

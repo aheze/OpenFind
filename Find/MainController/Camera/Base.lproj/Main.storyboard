@@ -177,7 +177,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="55" id="rb1-VP-3v9"/>
                                         </constraints>
-                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="2" id="4Qm-tc-bOS">
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="8" minimumInteritemSpacing="8" id="4Qm-tc-bOS">
                                             <size key="itemSize" width="93" height="56"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -296,6 +296,7 @@
                         <outlet property="newSearchTextField" destination="eQO-08-qIa" id="53l-JB-69S"/>
                         <outlet property="newShutterButton" destination="oHd-Dg-FBU" id="ADY-yp-2Cz"/>
                         <outlet property="numberLabel" destination="24E-8Q-fAS" id="XjQ-vu-L9f"/>
+                        <outlet property="searchBarLayout" destination="4Qm-tc-bOS" id="OXt-hQ-q6Y"/>
                         <outlet property="searchCollectionRightC" destination="GDN-6Y-n9I" id="cik-80-pvh"/>
                         <outlet property="searchCollectionTopC" destination="HwJ-M8-ks4" id="tUO-4v-XuL"/>
                         <outlet property="searchCollectionView" destination="uZE-G1-rh2" id="Zcv-iT-ZgS"/>
@@ -324,13 +325,13 @@
                             <rect key="frame" x="0.0" y="0.0" width="377" height="80"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sU8-v1-Rmw">
-                                    <rect key="frame" x="6" y="6" width="64" height="26"/>
+                                    <rect key="frame" x="6" y="6" width="128" height="26"/>
                                     <color key="backgroundColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="26" id="wKB-JD-I65"/>
                                     </constraints>
                                     <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
-                                    <state key="normal" title="Cancel">
+                                    <state key="normal" title="Remove All Lists">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <connections>
@@ -391,13 +392,13 @@
                                     </connections>
                                 </collectionView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9m-rk-xrA">
-                                    <rect key="frame" x="178" y="6" width="193" height="26"/>
+                                    <rect key="frame" x="318" y="6" width="53" height="26"/>
                                     <color key="backgroundColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="26" id="Tij-f4-ICV"/>
                                     </constraints>
                                     <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
-                                    <state key="normal" title="Autocomplete and Search">
+                                    <state key="normal" title="Done">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <connections>
@@ -405,7 +406,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z4L-2R-js4">
-                                    <rect key="frame" x="76" y="6" width="94" height="26"/>
+                                    <rect key="frame" x="218" y="6" width="94" height="26"/>
                                     <color key="backgroundColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="26" id="HhG-es-cW4"/>
@@ -424,9 +425,9 @@
                                 <constraint firstItem="VkX-4N-Y86" firstAttribute="top" secondItem="sU8-v1-Rmw" secondAttribute="bottom" constant="6" id="0eO-YI-ken"/>
                                 <constraint firstItem="E9m-rk-xrA" firstAttribute="top" secondItem="l8b-8S-Nlv" secondAttribute="top" constant="6" id="2VN-1u-Fjx"/>
                                 <constraint firstAttribute="bottom" secondItem="VkX-4N-Y86" secondAttribute="bottom" constant="6" id="8Jx-SY-dmi"/>
+                                <constraint firstItem="E9m-rk-xrA" firstAttribute="leading" secondItem="Z4L-2R-js4" secondAttribute="trailing" constant="6" id="9fJ-nD-s0a"/>
                                 <constraint firstAttribute="trailing" secondItem="VkX-4N-Y86" secondAttribute="trailing" id="DZ7-Ep-aq2"/>
                                 <constraint firstItem="sU8-v1-Rmw" firstAttribute="leading" secondItem="l8b-8S-Nlv" secondAttribute="leading" constant="6" id="ejo-Zr-sgi"/>
-                                <constraint firstItem="Z4L-2R-js4" firstAttribute="leading" secondItem="sU8-v1-Rmw" secondAttribute="trailing" constant="6" id="esQ-YW-33G"/>
                                 <constraint firstItem="Z4L-2R-js4" firstAttribute="top" secondItem="l8b-8S-Nlv" secondAttribute="top" constant="6" id="gY9-fi-k8r"/>
                                 <constraint firstItem="VkX-4N-Y86" firstAttribute="leading" secondItem="l8b-8S-Nlv" secondAttribute="leading" id="uPL-dQ-P3y"/>
                                 <constraint firstAttribute="trailing" secondItem="E9m-rk-xrA" secondAttribute="trailing" constant="6" id="wOT-nF-vGD"/>

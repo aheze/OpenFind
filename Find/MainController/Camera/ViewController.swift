@@ -66,20 +66,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var newMatchButton: UIButton!
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
-//        UIView.animate(withDuration: 0.4, animations: {
-//            self.ramReel.textField.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 0)
-//        }, completion: { _ in
-//            self.ramReel.textField.text = ""
-//            self.ramReel.textField.textColor = UIColor.white
-//        })
-        view.endEditing(true)
+        removeAllLists()
     }
     @IBAction func autocompButtonPressed(_ sender: UIButton) {
-//        if let selectedItem = ramReel.wrapper.selectedItem {
-//            ramReel.textField.text = nil
-//            ramReel.textField.insertText(selectedItem.render())
-//            view.endEditing(true)
-//        }
+        view.endEditing(true)
     }
     @IBAction func newMatchPressed(_ sender: Any) {
         if let searchText = newSearchTextField.text {
@@ -93,6 +83,9 @@ class ViewController: UIViewController {
     
     //MARK: Search Bar
     @IBOutlet weak var searchContentView: UIView!
+    
+    @IBOutlet weak var searchBarLayout: UICollectionViewFlowLayout!
+    
 //
     @IBOutlet weak var searchCollectionView: UICollectionView!
     @IBOutlet weak var searchCollectionTopC: NSLayoutConstraint!
@@ -174,26 +167,7 @@ class ViewController: UIViewController {
     let deviceSize = UIScreen.main.bounds.size
     ///Save the image
     var globalUrl : URL = URL(fileURLWithPath: "")
-    
-    
-//    //MARK: Ramreel
-//    var dataSource: SimplePrefixQueryDataSource!
-//    var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
-//
-//    let data: [String] = {
-//        do {
-//            guard let dataPath = Bundle.main.path(forResource: "data", ofType: "txt") else {
-//                return []
-//            }
-//
-//            let data = try WordReader(filepath: dataPath)
-//            return data.words
-//        }
-//        catch let error {
-//            print(error)
-//            return []
-//        }
-//    }()
+
     
     //MARK: New Camera no Sceneview
     let avSession = AVCaptureSession()
