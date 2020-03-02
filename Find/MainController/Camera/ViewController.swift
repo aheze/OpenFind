@@ -82,6 +82,10 @@ class ViewController: UIViewController {
     }
     
     //MARK: Search Bar
+    
+//    var removeListMode = true
+    var focusingList = EditableFindList()
+    
     @IBOutlet weak var searchContentView: UIView!
     
     @IBOutlet weak var searchBarLayout: UICollectionViewFlowLayout!
@@ -119,6 +123,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var listsLabel: UILabel!
 
     @IBOutlet weak var tapToRemoveLabel: UILabel!
+    
+    @IBOutlet weak var arrowDownImage: UIImageView!
     
     var selectedLists = [EditableFindList]()
     

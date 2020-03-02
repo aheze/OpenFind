@@ -30,11 +30,23 @@ extension ViewController {
             let request = VNRecognizeTextRequest { request, error in
                 self.handleFastDetectedText(request: request, error: error)
             }
-            request.customWords = [self.finalTextToFind, self.finalTextToFind.lowercased(), self.finalTextToFind.uppercased(), self.finalTextToFind.capitalizingFirstLetter()]
-            request.progressHandler = { (request, value, error) in
-                //print(value)
-                self.updateStatusViewProgress(to: CGFloat(value))
+            
+            var customFindArray = [String]()
+            for list in self.selectedLists {
+                for cont in list.contents {
+                    customFindArray.append(cont)
+                    customFindArray.append(cont.lowercased())
+                    customFindArray.append(cont.uppercased())
+                    customFindArray.append(cont.capitalizingFirstLetter())
+                    
+                }
             }
+            
+            request.customWords = [self.finalTextToFind, self.finalTextToFind.lowercased(), self.finalTextToFind.uppercased(), self.finalTextToFind.capitalizingFirstLetter()] + customFindArray
+//            request.progressHandler = { (request, value, error) in
+//                //print(value)
+//                self.updateStatusViewProgress(to: CGFloat(value))
+//            }
             
             request.recognitionLevel = .fast
             request.recognitionLanguages = ["en_GB"]

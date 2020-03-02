@@ -149,8 +149,16 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="y7C-IC-TsC">
+                                                <rect key="frame" x="88.5" y="4.5" width="25" height="23"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="458-44-s7v"/>
+                                                    <constraint firstAttribute="width" constant="25" id="wzK-Jv-JeT"/>
+                                                </constraints>
+                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to remove" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hc9-i8-kXk">
-                                                <rect key="frame" x="82.5" y="5.5" width="108.5" height="21"/>
+                                                <rect key="frame" x="116.5" y="5.5" width="108.5" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -160,7 +168,9 @@
                                         <constraints>
                                             <constraint firstItem="sbj-0t-kKO" firstAttribute="centerY" secondItem="0Wp-Su-VwL" secondAttribute="centerY" id="1sZ-TI-fKg"/>
                                             <constraint firstItem="sbj-0t-kKO" firstAttribute="leading" secondItem="0Wp-Su-VwL" secondAttribute="leading" constant="8" id="M3s-hr-yn0"/>
-                                            <constraint firstItem="Hc9-i8-kXk" firstAttribute="leading" secondItem="sbj-0t-kKO" secondAttribute="trailing" constant="16" id="Ufj-jd-WWg"/>
+                                            <constraint firstItem="Hc9-i8-kXk" firstAttribute="leading" secondItem="y7C-IC-TsC" secondAttribute="trailing" constant="3" id="hoK-ot-0Ct"/>
+                                            <constraint firstItem="y7C-IC-TsC" firstAttribute="leading" secondItem="sbj-0t-kKO" secondAttribute="trailing" constant="22" id="srp-EV-Hpb"/>
+                                            <constraint firstItem="y7C-IC-TsC" firstAttribute="centerY" secondItem="0Wp-Su-VwL" secondAttribute="centerY" id="tRf-xW-2rH"/>
                                             <constraint firstItem="Hc9-i8-kXk" firstAttribute="centerY" secondItem="0Wp-Su-VwL" secondAttribute="centerY" id="uBs-Fl-7Jq"/>
                                             <constraint firstAttribute="height" constant="32" id="xqL-rg-VJ9"/>
                                         </constraints>
@@ -281,6 +291,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="arrowDownImage" destination="y7C-IC-TsC" id="zgr-5p-NYV"/>
                         <outlet property="autoCompleteButton" destination="E9m-rk-xrA" id="mhQ-T3-qYY"/>
                         <outlet property="cameraView" destination="lVw-3T-6iA" id="tYA-q5-8xb"/>
                         <outlet property="cancelButtonNew" destination="sU8-v1-Rmw" id="24G-Ly-Xd4"/>
@@ -2803,6 +2814,7 @@
         <image name="Share" width="200" height="200"/>
         <image name="Transcript" width="200" height="200"/>
         <image name="Xbutton" width="300" height="300"/>
+        <image name="arrow.down" catalog="system" width="60" height="64"/>
         <image name="checkmark" catalog="system" width="64" height="56"/>
         <image name="chevron.right" catalog="system" width="48" height="64"/>
         <image name="heart" catalog="system" width="64" height="54"/>

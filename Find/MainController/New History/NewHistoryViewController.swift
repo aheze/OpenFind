@@ -276,14 +276,14 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
+        UIContextMenuConfiguration(identifier: indexPath as NSIndexPath, previewProvider: nil) { suggestedActions in
             // Create an action for sharing
-            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { action in
-                // Show share sheet
-            }
+//            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { action in
+//                // Show share sheet
+//            }
 
             // Create an action for copy
-            let rename = UIAction(title: "Copy", image: UIImage(systemName: "doc.on.doc")) { action in
+            let heart = UIAction(title: "Heart", image: UIImage(systemName: "heart")) { action in
                 // Perform copy
             }
 
@@ -292,8 +292,13 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 // Perform delete
             }
 
+                    // Empty menu for demonstration purposes
+                return UIMenu(title: "asdf", children: [ heart, delete])
+            
+            
+    
             // Create a UIMenu with all the actions as children
-            return UIMenu(title: "", children: [share, rename, delete])
+            
         }
     }
     //MARK: Selection

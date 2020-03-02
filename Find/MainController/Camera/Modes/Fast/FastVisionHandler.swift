@@ -50,7 +50,14 @@ extension ViewController {
                     component.text = lowerCaseComponentText
                     
                 
-                    let arrayOfMatches = lowerCaseFinalText.components(separatedBy: "\u{2022}")
+                    var arrayOfMatches = lowerCaseFinalText.components(separatedBy: "\u{2022}")
+                    var customFindArray = [String]()
+                    for list in selectedLists {
+                        for cont in list.contents {
+                            customFindArray.append(cont.lowercased())
+                        }
+                    }
+                    arrayOfMatches += customFindArray
                //     print("arrayOfMatches: \(arrayOfMatches)")
                     for match in arrayOfMatches {
                         if lowerCaseComponentText.contains(match) {

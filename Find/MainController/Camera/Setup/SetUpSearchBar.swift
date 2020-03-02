@@ -14,33 +14,11 @@ import VideoToolbox
 /// Ramreel setup
 extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
     func setUpSearchBar() {
-        
-//        searchContentView.addSubview(listsView)
-//        listsView.snp.makeConstraints { (make) in
-//            //make.top.equalToSuperview()
-//            //make.bottom.equalToSuperview()
-//            make.height.equalTo(60)
-//
-//            make.width.equalTo(0)
-//            make.top.equalToSuperview()
-//            make.left.equalToSuperview()
-//
-//        }
-//
-//        searchContentView.addSubview(searchTextField)
-//        searchTextField.snp.makeConstraints { (make) in
-//            //make.bottom.equalToSuperview()
-//            make.right.equalToSuperview()
-//            make.height.equalTo(60)
-//
-//
-//            make.top.equalToSuperview()
-//            make.left.equalToSuperview()
-//
-//        }
+
         textLabel.alpha = 0
         listsLabel.alpha = 0
         tapToRemoveLabel.alpha = 0
+        arrowDownImage.alpha = 0
         
         searchContentView.layer.cornerRadius = 12
         searchContentView.clipsToBounds = true
@@ -51,33 +29,11 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         newSearchTextField.attributedPlaceholder = NSAttributedString(string: "Type here to find...",
                                                                    attributes:
                                                                    [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.8784313725, green: 0.878935039, blue: 0.878935039, alpha: 0.75)])
-       // newSearchTextField.
-        
-      //  let color: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        
-        //searchTextField.textContainer.maximumNumberOfLines = 1
-//        dataSource = SimplePrefixQueryDataSource(data)
-//        var frameRect = view.bounds
-//        frameRect.size.height = 100
-//        ramReel = RAMReel(frame: frameRect, dataSource: dataSource, placeholder: "Start by typing…", attemptToDodgeKeyboard: false) {
-//            print("Plain:", $0)
-//            self.finalTextToFind = $0
-//        }
-//        ramReel.textField.inputAccessoryView = toolBar
+
         cancelButtonNew.layer.cornerRadius = 4
         autoCompleteButton.layer.cornerRadius = 4
         newMatchButton.layer.cornerRadius = 4
-//
-//        let arr = ["asdsad", "asdasd"]
-//        arr.re
-//
-//        view.addSubview(ramReel.view)
-//        ramReel.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        ramReel.textFieldDelegate = self as UITextFieldDelegate
-//        ramReel.textField.addTarget(self, action: #selector(ViewController.textFieldDidChange(_:)),
-//        for: UIControl.Event.editingChanged)
-        
-        
+
     }
     
     func removeAllLists() {
@@ -112,9 +68,6 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         let newIndexPath = IndexPath(item: indexPathToAppendTo, section: 0)
         listsCollectionView.insertItems(at: [newIndexPath])
 
-        //we must remove the red cell now.
-//        selectedLists.remove(at: placeInSecondCollectionView.item)
-//        searchCollectionView.deleteItems(at: [placeInSecondCollectionView])
     }
     func updateListsLayout(toType: String) {
         
@@ -152,6 +105,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
             
             UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
                 self.searchCollectionView.alpha = 1
+                self.arrowDownImage.alpha = 1
                 self.textLabel.alpha = 1
                 self.listsLabel.alpha = 1
                 self.tapToRemoveLabel.alpha = 1
@@ -169,7 +123,14 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
                 self.searchCollectionView.alpha = 0
                 self.textLabel.alpha = 0
                 self.listsLabel.alpha = 0
+                self.arrowDownImage.alpha = 0
+                
                 self.tapToRemoveLabel.alpha = 0
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        case "prepareForDisplayNew":
+            searchTextLeftC.constant = 8
+            UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
                 self.view.layoutIfNeeded()
             }, completion: nil)
         case "doneAndShrink":
@@ -239,29 +200,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         }
         
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        if collectionView == searchCollectionView {
-//            return CGSize(width: 125, height: 60)
-//        }
-//
-//        return CGSize(width: 0, height: 0)
-//    }
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 8
-//    }
-   
-//    @objc func textFieldDidChange(_ textField: UITextField) {
-//        if ramReel.wrapper.selectedItem == nil {
-//
-//        autoCompleteButton.isEnabled = false
-//        autoCompleteButton.alpha = 0.5
-//        } else {
-//        autoCompleteButton.isEnabled = true
-//        autoCompleteButton.alpha = 1
-//        }
-//    }
-    
+
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if selectedLists.count == 0 {
@@ -272,82 +211,27 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        print("RETURN END EDIt")
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
         updateListsLayout(toType: "doneAndShrink")
-         
+//        })
+        
+        
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        finalTextToFind = newSearchTextField.text ?? ""
+//        finalTextToFind = newSearchTextField.text ?? ""
         view.endEditing(true)
-        print("Text: \(textField.text)")
+//        print("RETURN")
+//        print("Text: \(textField.text)")
         return true
     }
-//    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-//        //print("Text: \(textField.text)")
-//
-//    }
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//
-//        autoCompleteButton.isEnabled = false
-////
-////        ramReel.view.bounds = view.bounds
-////        print("textfield")
-////        print(ramReel.collectionView.frame)
-////        ramReel.collectionView.isHidden = false
-////        ramReel.collectionView.alpha = 0
-//        darkBlurEffectHeightConstraint.constant = self.view.bounds.size.height
-//
-//        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
-////            self.autoCompleteButton.alpha = 0.5
-////            self.ramReel.collectionView.alpha = 1
-//            self.darkBlurEffect.alpha = 0.2
-//            self.view.layoutIfNeeded()
-//        }, completion: nil)
-//
-//    }
-    
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        //guard let imageView = view.viewWithTag(13579) else { print("sdflkj"); return }
-//
-//         self.darkBlurEffectHeightConstraint.constant = 100
-//
-//
-//        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-//            //imageView.alpha = 0
-////            self.ramReel.collectionView.alpha = 0
-////            var frameRect = self.view.bounds
-////            frameRect.size.height = 100
-////            self.ramReel.view.bounds = frameRect
-//            self.darkBlurEffect.alpha = 0.7
-//
-////            switch self.scanModeToggle {
-////            case .classic:
-////        //        self.sceneView.session.run(self.sceneConfiguration) ///which is ARWorldTracking
-////            case .fast:
-////         //       self.sceneView.session.run(AROrientationTrackingConfiguration())
-////                self.stopCoaching()
-////            case .focused:
-////                let config = ARImageTrackingConfiguration()
-////                if let tag1 = self.view.viewWithTag(1) { tag1.alpha = 1 }
-////                if let tag2 = self.view.viewWithTag(2) { tag2.alpha = 1 }
-////                self.stopCoaching()
-////                self.sceneView.session.run(config)
-////            }
-//            //self.stopProcessingImage = false
-//            self.view.layoutIfNeeded()
-//        }, completion: {_ in
-//           // imageView.removeFromSuperview()
-//            //self.view.bringSubviewToFront(self.matchesBig)
-////            self.ramReel.collectionView.isHidden = true
-//        }
-//        )
-////             print(ramReel.selectedItem)
-////        if ramReel.selectedItem == "" {
-////            ramReel.placeholder = "Type here to find!"
-////        }
-////        finalTextToFind = ramReel.selectedItem ?? ""
-//
-//    }
-    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {
+            finalTextToFind = updatedString
+        }
+        return true
+    }
+
     func convertToUIImage(buffer: CVPixelBuffer) -> UIImage? {
         let ciImage = CIImage(cvPixelBuffer: buffer)
         let temporaryContext = CIContext(options: nil)

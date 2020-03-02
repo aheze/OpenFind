@@ -9,9 +9,29 @@
 import UIKit
 
 extension ViewController: UICollectionViewDataSource {
+    
+    func tempResetLists() {
+        
+        selectedLists.removeAll()
+        editableListCategories.removeAll()
+        searchCollectionView.performBatchUpdates({
+            searchCollectionView.reloadData()
+        }, completion: nil)
+        
+        listsCollectionView.performBatchUpdates({
+            listsCollectionView.reloadData()
+        }, completion: nil)
+//        listsCollectionView.reloadData()
+        updateListsLayout(toType: "prepareForDisplayNew")
+    }
     func loadListsRealm() {
         
         listCategories = realm.objects(FindList.self)
+        selectedLists.removeAll()
+        editableListCategories.removeAll()
+        
+        
+//        print(listCategories)
         listCategories = listCategories!.sorted(byKeyPath: "dateCreated", ascending: false)
         if let lC = listCategories {
             for (index, singleL) in lC.enumerated() {
@@ -36,7 +56,12 @@ extension ViewController: UICollectionViewDataSource {
 //        let flowLayout = listsCollectionView.collectionViewLayout
 //        flowLayout.estimated
         
+        print("Loading lists")
+        for singL in editableListCategories {
+            print(singL.name)
+        }
         
+        searchCollectionView.reloadData()
         listsCollectionView.reloadData()
 //        listsToolbarLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     }
@@ -172,6 +197,7 @@ extension ViewController: UICollectionViewDataSource {
           //  editableListCategories
             //listsViewWidth.up
         } else {
+            if searchShrunk == false {
             print("pressed search cell")
             let list = selectedLists[indexPath.item]
             calculateWhereToPlaceComponent(component: list, placeInSecondCollectionView: indexPath)
@@ -191,7 +217,9 @@ extension ViewController: UICollectionViewDataSource {
 //            }
             
 //            newList.contents = contents
-                
+            } else {
+                //focus cell
+            }
         }
     }
 }
