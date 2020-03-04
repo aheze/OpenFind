@@ -162,7 +162,17 @@ class ViewController: UIViewController {
     var currentComponents = [Component]()
     var nextComponents = [Component]()
     var numberOfFastMatches: Int = 0
-
+    
+    
+    var currentMatchStrings = [String]()
+//    var currentMatchArray = [String]()
+    var currentSearchFindList = EditableFindList()
+    var currentListsSharedFindList = EditableFindList()
+    var currentSearchAndListSharedFindList = EditableFindList()
+    
+    var stringToList = [String: EditableFindList]()
+//    var containedList = [String]()
+    
     var aspectRatioWidthOverHeight : CGFloat = 0
     var aspectRatioSucceeded : Bool = false
     var sizeOfPixelBufferFast : CGSize = CGSize(width: 0, height: 0)

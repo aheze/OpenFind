@@ -185,7 +185,7 @@
                                         <rect key="frame" x="0.0" y="8" width="398" height="55"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="55" id="rb1-VP-3v9"/>
+                                            <constraint firstAttribute="height" constant="55" id="XoE-Rh-1CP"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="8" minimumInteritemSpacing="8" id="4Qm-tc-bOS">
                                             <size key="itemSize" width="93" height="56"/>
@@ -210,7 +210,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yga-Xu-zab">
-                                                            <rect key="frame" x="55" y="5" width="52.5" height="45"/>
+                                                            <rect key="frame" x="55" y="8" width="52.5" height="39"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -218,10 +218,10 @@
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="Yga-Xu-zab" firstAttribute="leading" secondItem="mAF-7K-b7m" secondAttribute="trailing" constant="8" id="HDM-Ck-KLQ"/>
-                                                        <constraint firstItem="Yga-Xu-zab" firstAttribute="top" secondItem="A9m-Qy-QTN" secondAttribute="top" constant="5" id="LJg-FC-ATx"/>
+                                                        <constraint firstItem="Yga-Xu-zab" firstAttribute="top" secondItem="A9m-Qy-QTN" secondAttribute="top" constant="8" id="LJg-FC-ATx"/>
                                                         <constraint firstAttribute="trailing" secondItem="Yga-Xu-zab" secondAttribute="trailing" constant="8" id="LdH-uV-Wq6"/>
                                                         <constraint firstItem="mAF-7K-b7m" firstAttribute="leading" secondItem="A9m-Qy-QTN" secondAttribute="leading" constant="8" id="Lxd-x1-zFf"/>
-                                                        <constraint firstAttribute="bottom" secondItem="Yga-Xu-zab" secondAttribute="bottom" constant="5" id="Yhd-xw-IWD"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Yga-Xu-zab" secondAttribute="bottom" constant="8" id="Yhd-xw-IWD"/>
                                                         <constraint firstAttribute="bottom" secondItem="mAF-7K-b7m" secondAttribute="bottom" constant="8" id="ZuJ-nI-WXI"/>
                                                         <constraint firstItem="mAF-7K-b7m" firstAttribute="top" secondItem="A9m-Qy-QTN" secondAttribute="top" constant="8" id="zd8-0f-y2q"/>
                                                     </constraints>

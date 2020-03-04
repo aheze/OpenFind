@@ -30,6 +30,7 @@ extension ViewController {
         }
         
         
+        
         for result in results {
             if let observation = result as? VNRecognizedTextObservation {
                 for text in observation.topCandidates(1) {
@@ -39,39 +40,41 @@ extension ViewController {
                     component.y = 1 - observation.boundingBox.minY
                     component.height = observation.boundingBox.height
                     component.width = observation.boundingBox.width
-                    component.text = text.string
+//                    component.text = text.string
+                    let lowerCaseComponentText = text.string.lowercased()
+                    component.text = lowerCaseComponentText
+                    let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
+                    let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
+                    let offHalf = offsetWidth / 2
+                    let newW = component.width * convertedOriginalWidthOfBigImage
+                    let newH = component.height * self.deviceSize.height
+                    let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
+                    let newY = component.y * self.deviceSize.height
+                    let individualCharacterWidth = newW / CGFloat(component.text.count)
+                    
+                    component.x = newX
+                    component.y = newY
                     drawFastHighlight(component: component)
                     
-                    let lowerCaseFinalText = finalTextToFind.lowercased()
-                    let lowerCaseComponentText = component.text.lowercased()
-                
-                    //print(lowerCaseFinalText)
-                    //print(lowerCaseComponentText)
-                    component.text = lowerCaseComponentText
                     
-                
-                    var arrayOfMatches = lowerCaseFinalText.components(separatedBy: "\u{2022}")
-                    var customFindArray = [String]()
-                    for list in selectedLists {
-                        for cont in list.contents {
-                            customFindArray.append(cont.lowercased())
-                        }
-                    }
-                    arrayOfMatches += customFindArray
                //     print("arrayOfMatches: \(arrayOfMatches)")
-                    for match in arrayOfMatches {
+                    for match in currentMatchStrings {
+//                        print("match:...")
+//                        print(match)
+//                        print(lowerCaseComponentText)
                         if lowerCaseComponentText.contains(match) {
                             //print("sghiruiguhweiugsiugr+++++++++++")
                         //if component.text.contains(finalTextToFind) {
-                            let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
-                            let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
-                            let offHalf = offsetWidth / 2
-                            let newW = component.width * convertedOriginalWidthOfBigImage
-                            let newH = component.height * self.deviceSize.height
-                            let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
-                            let newY = component.y * self.deviceSize.height
-                            let individualCharacterWidth = newW / CGFloat(component.text.count)
-                            let finalW = individualCharacterWidth * CGFloat(match  .count)
+//                            let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
+//                            let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
+//                            let offHalf = offsetWidth / 2
+//                            let newW = component.width * convertedOriginalWidthOfBigImage
+//                            let newH = component.height * self.deviceSize.height
+//                            let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
+//                            let newY = component.y * self.deviceSize.height
+//                            let individualCharacterWidth = newW / CGFloat(component.text.count)
+//                            let finalW = individualCharacterWidth * CGFloat(match  .count)
+                            let finalW = individualCharacterWidth * CGFloat(match.count)
                             
                             let indicies = component.text.indicesOf(string: match)
                             for index in indicies {
@@ -85,6 +88,30 @@ extension ViewController {
                                 newComponent.height = newH + 2
                                 newComponent.text = "match"
                                 newComponent.changed = false
+                                
+                                if let parentList = stringToList[match] {
+                                    switch parentList.descriptionOfList {
+                                    case "Search Array List +0-109028304798614":
+                                        print("Search Array")
+                                        newComponent.parentList = currentSearchFindList
+                                    case "Shared Lists +0-109028304798614":
+                                        print("Shared Lists")
+                                        newComponent.parentList = currentListsSharedFindList
+                                    case "Shared Text Lists +0-109028304798614":
+                                        print("Shared Text Lists")
+                                        newComponent.parentList = currentSearchAndListSharedFindList
+                                    default:
+                                        print("normal")
+                                        newComponent.parentList = parentList
+                                    }
+                                
+                                    
+                                    
+                                } else {
+                                    print("ERROROROR! NO parent list!")
+                                }
+                                
+                                
                                 nextComponents.append(newComponent)
                                 
                             }
@@ -293,16 +320,29 @@ extension ViewController {
     func drawFastHighlight(component: Component) {
         DispatchQueue.main.async {
             let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
-            let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
-            let offHalf = offsetWidth / 2
-            
+//            let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
+//            let offHalf = offsetWidth / 2
+//
             let newW = component.width * convertedOriginalWidthOfBigImage
             let newH = component.height * self.deviceSize.height
-            let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
-            let newY = component.y * self.deviceSize.height
+//            let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
+//            let newY = component.y * self.deviceSize.height
             let buffer = CGFloat(3)
             let doubBuffer = CGFloat(6)
-            //print("x: \(newX) y: \(newY) width: \(newW) height: \(newH)")
+//            //print("x: \(newX) y: \(newY) width: \(newW) height: \(newH)")
+//            let layer = CAShapeLayer()
+//            layer.frame = CGRect(x: newX - buffer, y: newY, width: newW + doubBuffer, height: newH)
+//            layer.cornerRadius = newH / 3.5
+            
+            let newX = component.x
+            let newY = component.y
+//            let newW = component.width
+//            let newH = component.height
+//            print("X: \(newX)")
+//            print("Y: \(newY)")
+//            print("width: \(newW)")
+//            print("height: \(newH)")
+            
             let layer = CAShapeLayer()
             layer.frame = CGRect(x: newX - buffer, y: newY, width: newW + doubBuffer, height: newH)
             layer.cornerRadius = newH / 3.5

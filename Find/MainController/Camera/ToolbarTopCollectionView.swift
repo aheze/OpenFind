@@ -180,10 +180,10 @@ extension ViewController: UICollectionViewDataSource {
         if collectionView.tag == 100100 {
             print("select cell")
             let newList = editableListCategories[indexPath.item]
-            selectedLists.append(newList)
+            selectedLists.insert(newList, at: 0)
             print(selectedLists)
             
-            let indexP = IndexPath(item: selectedLists.count - 1, section: 0)
+            let indexP = IndexPath(item: 0, section: 0)
             searchCollectionView.insertItems(at: [indexP])
 //            listViewCollectionView.insertItems(at: [indexP])
             
@@ -193,6 +193,28 @@ extension ViewController: UICollectionViewDataSource {
                 updateListsLayout(toType: "addListsNow")
             }
             
+            sortSearchTerms()
+//            var contained = [String]()
+            
+            
+            
+            
+            
+//            print("start_______________")
+//            print("dup strings: \(duplicatedStrings)")
+//            print("find list: \(currentFindMatches.count)")
+//            print("search field dup: \(cameAcrossSearchFieldText)")
+//            for list in currentFindMatches {
+//                print("list")
+//                for match in list.contents {
+//                   print("Match: \(match)")
+//                }
+//            }
+//            print("end_______________")
+//            print("one...")
+//            print(contained)
+//            containedList = contained.uniques
+//            print(containedList)
             
           //  editableListCategories
             //listsViewWidth.up

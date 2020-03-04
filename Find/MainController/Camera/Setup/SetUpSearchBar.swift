@@ -229,9 +229,115 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         if let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {
             finalTextToFind = updatedString
         }
+        sortSearchTerms()
+        
         return true
     }
 
+    func sortSearchTerms() {
+        let lowerCaseFinalText = finalTextToFind.lowercased()
+        let arrayOfSearch = lowerCaseFinalText.components(separatedBy: "\u{2022}")
+//        print("matchs aray text field: \(arrayOfMatches)")
+        
+        var cameAcrossShare = [String]()
+        var duplicatedStrings = [String]()
+        currentMatchStrings.removeAll()
+        
+        var cameAcrossSearchFieldText = [String]()
+        
+//            print("count: \(selectedLists.count)")
+        for list in selectedLists {
+            for match in list.contents {
+                currentMatchStrings.append(match)
+                if !cameAcrossShare.contains(match.lowercased()) {
+                    cameAcrossShare.append(match.lowercased())
+                } else {
+                    duplicatedStrings.append(match)
+                }
+                
+                if arrayOfSearch.contains(match.lowercased()) {
+                    cameAcrossSearchFieldText.append(match)
+                }
+            }
+        }
+//            print("search array dup: \(cameAcrossSearchFieldText)")
+//            print("dup strings: \(duplicatedStrings)")
+//            cameAcrossShare = cameAcrossShare.uniques
+        duplicatedStrings = duplicatedStrings.uniques
+        cameAcrossSearchFieldText = cameAcrossSearchFieldText.uniques
+//        duplicatedStrings += cameAcrossSearchFieldText
+        
+        for list in selectedLists {
+            print("contents: \(list.contents)")
+//            let newList = EditableFindList()
+            
+//            var tempMatches = [String]()
+            for match in list.contents {
+                if !duplicatedStrings.contains(match.lowercased()) && !cameAcrossSearchFieldText.contains(match.lowercased()) {
+                    
+//                    tempMatches.append(match.lowercased())
+                    stringToList[match.lowercased()] = list
+                }
+            }
+//            if tempMatches.count >= 1 {
+////                newList.contents = tempMatches
+//                currentMatchStrings += tempMatches
+////                for singleM in tempMatches {
+////                    stringToIndex[singleM] = index
+////                }
+//            }
+        }
+        
+//        let lowerCaseFinalText = finalTextToFind.lowercased()
+//        var arrayOfMatches = arrayOfSearch
+//        var customFindArray = [String]()
+        
+        let searchList = EditableFindList()
+        searchList.descriptionOfList = "Search Array List +0-109028304798614"
+        for match in arrayOfSearch {
+            stringToList[match] = searchList
+        }
+        
+        let sharedList = EditableFindList()
+        sharedList.descriptionOfList = "Shared Lists +0-109028304798614"
+        for match in duplicatedStrings {
+            stringToList[match] = sharedList
+        }
+        
+        let textShareList = EditableFindList()
+        textShareList.descriptionOfList = "Shared Text Lists +0-109028304798614"
+        for match in cameAcrossSearchFieldText {
+            stringToList[match] = textShareList
+        }
+        
+//
+//        for list in currentFindMatches {
+//            for cont in list.contents {
+//                customFindArray.append(cont)
+//                stringToIndex[cont] = 1
+//            }
+//        }
+//        for list in currentListSharedMatches {
+//            for cont in list.contents {
+//                customFindArray.append(cont)
+//                stringToIndex[cont] = 2
+//            }
+//        }
+//        for list in currentSearchListSharedMatches {
+//            for cont in list.contents {
+//                customFindArray.append(cont)
+//                stringToIndex[cont] = 3
+//            }
+//        }
+        
+//        arrayOfMatches += customFindArray
+        
+        currentMatchStrings += arrayOfSearch
+        currentMatchStrings = currentMatchStrings.uniques
+//        arrayOfMatches += containedList
+        print("Total Match Strings: \(currentMatchStrings)")
+        
+    }
     func convertToUIImage(buffer: CVPixelBuffer) -> UIImage? {
         let ciImage = CIImage(cvPixelBuffer: buffer)
         let temporaryContext = CIContext(options: nil)

@@ -21,6 +21,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
             cancelTimer = nil
         }
         SwiftEntryKit.dismiss()
+        currentMatchStrings.append(newSearchTextField.text ?? "")
         startVideo(finish: "end")
        // listsCollectionView.reloadData()
         loadListsRealm()
@@ -65,6 +66,9 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
     //        } else if segue.identifier == "goToSettings" {
     //            print("prepareSett")
     //        }
+        
+            currentMatchStrings.removeAll()
+            stopSession()
             switch segue.identifier {
             case "goToHistory":
                 print("hist")
