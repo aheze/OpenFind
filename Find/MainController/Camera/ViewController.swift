@@ -163,6 +163,7 @@ class ViewController: UIViewController {
     var nextComponents = [Component]()
     var numberOfFastMatches: Int = 0
     
+    var highlightColor = "00aeef"
     
     var currentMatchStrings = [String]()
 //    var currentMatchArray = [String]()

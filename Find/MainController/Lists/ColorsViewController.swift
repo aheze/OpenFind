@@ -37,14 +37,14 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
     bottom: 8.0,
     right: 8.0)
     
-    var colorName = "#00aeef"
+    var colorName = "#579f2b"
     var selectedPath = -1
     
     weak var colorDelegate: GetColorInfo?
     var colorArray: [String] = [
         "#eb2f06","#e55039","#f7b731","#fed330","#78e08f",
         "#fc5c65","#fa8231","#f6b93b","#b8e994","#2bcbba",
-        "#ff6348","#b71540","#079992","#d1d8e0","#778ca3",
+        "#ff6348","#b71540","#579f2b","#d1d8e0","#778ca3",
         "#e84393","#a55eea","#5352ed","#70a1ff","#40739e",
         "#45aaf2","#2d98da","#00aeef","#4b6584","#0a3d62"]
 //        ["#eb2f06","#e55039","#f7b731","#fed330","#78e08f","#fc5c65","#fa8231","#f6b93b","#b8e994","#2bcbba","#a55eea","#b71540","#079992","#d1d8e0","#778ca3","#45aaf2","#2d98da","#00aeef","#4b6584","#0a3d62"]

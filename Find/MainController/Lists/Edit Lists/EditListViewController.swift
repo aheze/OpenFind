@@ -80,7 +80,7 @@ class EditListViewController: UIViewController, GetGeneralInfo, GetIconInfo, Get
     var descriptionOfList = "No description..."
     var contents = [String]()
     var iconImageName = "square.grid.2x2"
-    var iconColorName = "#00aeef"
+    var iconColorName = "#579f2b"
     
     var shouldDismiss = true
     

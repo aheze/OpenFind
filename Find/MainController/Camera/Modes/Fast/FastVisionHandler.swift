@@ -94,15 +94,19 @@ extension ViewController {
                                     case "Search Array List +0-109028304798614":
                                         print("Search Array")
                                         newComponent.parentList = currentSearchFindList
+                                        newComponent.color = highlightColor
                                     case "Shared Lists +0-109028304798614":
                                         print("Shared Lists")
                                         newComponent.parentList = currentListsSharedFindList
+                                        newComponent.isSpecialType = "Shared List"
                                     case "Shared Text Lists +0-109028304798614":
                                         print("Shared Text Lists")
                                         newComponent.parentList = currentSearchAndListSharedFindList
+                                        newComponent.isSpecialType = "Shared Text List"
                                     default:
                                         print("normal")
                                         newComponent.parentList = parentList
+                                        newComponent.color = parentList.iconColorName
                                     }
                                 
                                     
@@ -145,7 +149,7 @@ extension ViewController {
             
             for oldComponent in currentComponents {
 //                if oldComponent.changed == false {
-                if newComponent.text == oldComponent.text {
+                if newComponent.parentList == oldComponent.parentList {
                     let currentCompPoint = CGPoint(x: oldComponent.x, y: oldComponent.y)
                     let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
                     let distanceBetweenPoints = distance(currentCompPoint, nextCompPoint) //< 10
@@ -268,13 +272,65 @@ extension ViewController {
             let newLayer = CAShapeLayer()
             newLayer.bounds = layer.frame
             newLayer.path = UIBezierPath(roundedRect: layer.frame, cornerRadius: component.height / 3.5).cgPath
-            newLayer.fillColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 0.3030554367)
-            newLayer.strokeColor = #colorLiteral(red: 0.1896808545, green: 0.5544475485, blue: 0.8020701142, alpha: 1)
             newLayer.lineWidth = 3
             newLayer.lineCap = .round
             
+            
+            var newFillColor = UIColor()
+            if component.isSpecialType == "Shared List" {
+                var newRect = layer.frame
+                newRect.origin.x += 1.5
+                newRect.origin.y += 1.5
+                newRect.size.width -= 3
+                newRect.size.height -= 3
+                newLayer.path = UIBezierPath(roundedRect: newRect, cornerRadius: component.height / 4.5).cgPath
+                
+                let gradient = CAGradientLayer()
+                gradient.frame = layer.bounds
+                gradient.colors = [#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1).cgColor, #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor]
+                gradient.startPoint = CGPoint(x: 0, y: 0.5)
+                gradient.endPoint = CGPoint(x: 1, y: 0.5)
+                
+                gradient.mask = newLayer
+                newLayer.fillColor = UIColor.clear.cgColor
+                newLayer.strokeColor = UIColor.black.cgColor
+                
+                layer.addSublayer(gradient)
+            } else if component.isSpecialType == "Shared Text List" {
+//                newLayer.lineWidth = 8
+                var newRect = layer.frame
+                newRect.origin.x += 1.5
+                newRect.origin.y += 1.5
+                newRect.size.width -= 3
+                newRect.size.height -= 3
+                newLayer.path = UIBezierPath(roundedRect: newRect, cornerRadius: component.height / 4.5).cgPath
+                
+                let gradient = CAGradientLayer()
+                gradient.frame = layer.bounds
+                gradient.colors = [#colorLiteral(red: 0.3411764706, green: 0.6235294118, blue: 0.168627451, alpha: 1).cgColor, UIColor(hexString: self.highlightColor).cgColor]
+                gradient.startPoint = CGPoint(x: 0, y: 0.5)
+                gradient.endPoint = CGPoint(x: 1, y: 0.5)
+                gradient.mask = newLayer
+                newLayer.fillColor = UIColor.clear.cgColor
+                newLayer.strokeColor = UIColor.black.cgColor
+                layer.addSublayer(gradient)
+                
+            } else {
+                newLayer.fillColor = UIColor(hexString: component.color).withAlphaComponent(0.3).cgColor
+                newLayer.strokeColor = UIColor(hexString: component.color).cgColor
+                layer.addSublayer(newLayer)
+            }
+            
+            
+            
+            
+            
             let newView = UIView(frame: CGRect(x: component.x, y: component.y, width: component.width, height: component.height))
             self.view.insertSubview(newView, aboveSubview: self.cameraView)
+            
+            newView.layer.addSublayer(layer)
+            newView.clipsToBounds = false
+            
             //print(newView.frame)
             
             let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
@@ -287,8 +343,9 @@ extension ViewController {
             let y = newLayer.bounds.size.height / 2
             
             //newView.layer.position = CGPoint(x: component.x, y: component.y)
-            newView.layer.addSublayer(layer)
-            layer.addSublayer(newLayer)
+            
+            
+            
             newLayer.position = CGPoint(x: x, y: y)
             newLayer.add(strokeAnimation, forKey: "line")
             component.baseView = newView
