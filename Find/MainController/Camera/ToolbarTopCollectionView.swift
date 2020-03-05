@@ -227,7 +227,7 @@ extension ViewController: UICollectionViewDataSource {
             if selectedLists.count == 0 {
                 updateListsLayout(toType: "removeListsNow")
             }
-            
+            sortSearchTerms()
 //            newList.name = list.name
 //            newList.descriptionOfList = list.descriptionOfList
 //            newList.iconImageName = list.iconImageName

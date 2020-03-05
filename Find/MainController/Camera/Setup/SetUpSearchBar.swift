@@ -50,6 +50,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         }
         
         updateListsLayout(toType: "removeListsNow")
+        sortSearchTerms()
     }
     func calculateWhereToInsert(component: EditableFindList) {
         let componentOrderID = component.orderIdentifier
@@ -235,17 +236,22 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
     }
 
     func sortSearchTerms() {
+        
         let lowerCaseFinalText = finalTextToFind.lowercased()
         let arrayOfSearch = lowerCaseFinalText.components(separatedBy: "\u{2022}")
+//        currentMatchStrings.removeAll()
 //        print("matchs aray text field: \(arrayOfMatches)")
         
         var cameAcrossShare = [String]()
         var duplicatedStrings = [String]()
+        
+        resetFastHighlights()
         currentMatchStrings.removeAll()
+        matchToColors.removeAll()
         
         var cameAcrossSearchFieldText = [String]()
         
-//            print("count: \(selectedLists.count)")
+            print("count: \(selectedLists.count)")
         for list in selectedLists {
             for match in list.contents {
                 currentMatchStrings.append(match)
@@ -267,8 +273,11 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         cameAcrossSearchFieldText = cameAcrossSearchFieldText.uniques
 //        duplicatedStrings += cameAcrossSearchFieldText
         
+        
+//        var refreshedColors = false
+        
         for list in selectedLists {
-            print("contents: \(list.contents)")
+//            print("contents: \(list.contents)")
 //            let newList = EditableFindList()
             
 //            var tempMatches = [String]()
@@ -277,6 +286,23 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
                     
 //                    tempMatches.append(match.lowercased())
                     stringToList[match.lowercased()] = list
+                    
+                } else {
+//                    print("NOT")
+                    let matchColor = UIColor(hexString: (list.iconColorName)).cgColor
+                    
+                    
+                    if matchToColors[match.lowercased()] == nil {
+//                        print("contsdfsdf")
+//                        if !matchList.contains(matchColor) {
+//                            print("NOT CONT")
+                            matchToColors[match.lowercased(), default: [CGColor]()].append(matchColor)
+//                        }
+                    } else {
+                        if !(matchToColors[match.lowercased()]?.contains(matchColor))! {
+                            matchToColors[match.lowercased(), default: [CGColor]()].append(matchColor)
+                        }
+                    }
                 }
             }
 //            if tempMatches.count >= 1 {
@@ -335,7 +361,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         currentMatchStrings += arrayOfSearch
         currentMatchStrings = currentMatchStrings.uniques
 //        arrayOfMatches += containedList
-        print("Total Match Strings: \(currentMatchStrings)")
+//        print("Total Match Strings: \(currentMatchStrings)")
         
     }
     func convertToUIImage(buffer: CVPixelBuffer) -> UIImage? {

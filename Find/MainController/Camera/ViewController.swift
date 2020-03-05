@@ -165,6 +165,9 @@ class ViewController: UIViewController {
     
     var highlightColor = "00aeef"
     
+    
+    var matchToColors = [String: [CGColor]]()
+    
     var currentMatchStrings = [String]()
 //    var currentMatchArray = [String]()
     var currentSearchFindList = EditableFindList()

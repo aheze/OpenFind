@@ -19,7 +19,7 @@ class Component: NSObject {
     var text = ""
     var parentList = EditableFindList()
 //    var isList = false
-    var color = "00aeef"
+    var colors = ["00aeef"]
     var changed: Bool = false
     var baseView: UIView?
 }

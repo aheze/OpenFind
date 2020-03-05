@@ -63,6 +63,8 @@ extension ViewController {
 //                        print(match)
 //                        print(lowerCaseComponentText)
                         if lowerCaseComponentText.contains(match) {
+//                            print(match)
+//                            print("CONTAINS!!!!!")
                             //print("sghiruiguhweiugsiugr+++++++++++")
                         //if component.text.contains(finalTextToFind) {
 //                            let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
@@ -86,7 +88,7 @@ extension ViewController {
                                 newComponent.y = newY - (newH + 1)
                                 newComponent.width = finalW + 8
                                 newComponent.height = newH + 2
-                                newComponent.text = "match"
+                                newComponent.text = match
                                 newComponent.changed = false
                                 
                                 if let parentList = stringToList[match] {
@@ -94,7 +96,7 @@ extension ViewController {
                                     case "Search Array List +0-109028304798614":
                                         print("Search Array")
                                         newComponent.parentList = currentSearchFindList
-                                        newComponent.color = highlightColor
+                                        newComponent.colors = [highlightColor]
                                     case "Shared Lists +0-109028304798614":
                                         print("Shared Lists")
                                         newComponent.parentList = currentListsSharedFindList
@@ -106,7 +108,7 @@ extension ViewController {
                                     default:
                                         print("normal")
                                         newComponent.parentList = parentList
-                                        newComponent.color = parentList.iconColorName
+                                        newComponent.colors = [parentList.iconColorName]
                                     }
                                 
                                     
@@ -278,16 +280,26 @@ extension ViewController {
             
             var newFillColor = UIColor()
             if component.isSpecialType == "Shared List" {
+                
                 var newRect = layer.frame
                 newRect.origin.x += 1.5
                 newRect.origin.y += 1.5
-                newRect.size.width -= 3
-                newRect.size.height -= 3
+//                newRect.size.width -= 3
+//                newRect.size.height -= 3
+                layer.frame.origin.x -= 1.5
+                layer.frame.origin.y -= 1.5
+                layer.frame.size.width += 3
+                layer.frame.size.height += 3
                 newLayer.path = UIBezierPath(roundedRect: newRect, cornerRadius: component.height / 4.5).cgPath
                 
                 let gradient = CAGradientLayer()
                 gradient.frame = layer.bounds
-                gradient.colors = [#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1).cgColor, #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor]
+//                gradient.colors = [#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1).cgColor, #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor]
+                if let gradientColors = self.matchToColors[component.text] {
+                    
+                    print("gra colors \(gradientColors)")
+                    gradient.colors = gradientColors
+                }
                 gradient.startPoint = CGPoint(x: 0, y: 0.5)
                 gradient.endPoint = CGPoint(x: 1, y: 0.5)
                 
@@ -301,13 +313,29 @@ extension ViewController {
                 var newRect = layer.frame
                 newRect.origin.x += 1.5
                 newRect.origin.y += 1.5
-                newRect.size.width -= 3
-                newRect.size.height -= 3
+//                newRect.size.width -= 3
+//                newRect.size.height -= 3
+                layer.frame.origin.x -= 1.5
+                layer.frame.origin.y -= 1.5
+                layer.frame.size.width += 3
+                layer.frame.size.height += 3
                 newLayer.path = UIBezierPath(roundedRect: newRect, cornerRadius: component.height / 4.5).cgPath
                 
                 let gradient = CAGradientLayer()
                 gradient.frame = layer.bounds
-                gradient.colors = [#colorLiteral(red: 0.3411764706, green: 0.6235294118, blue: 0.168627451, alpha: 1).cgColor, UIColor(hexString: self.highlightColor).cgColor]
+//                gradient.colors = [#colorLiteral(red: 0.3411764706, green: 0.6235294118, blue: 0.168627451, alpha: 1).cgColor, UIColor(hexString: self.highlightColor).cgColor]
+                
+                if let gradientColors = self.matchToColors[component.text] {
+                    print("HAS GRA")
+                    var newColors = gradientColors
+                    let newColor = UIColor(hexString: self.highlightColor)
+                    
+                    newColors.append(newColor.cgColor)
+                    gradient.colors = newColors
+//                                    gradient.colors = [#colorLiteral(red: 0.3411764706, green: 0.6235294118, blue: 0.168627451, alpha: 1).cgColor, UIColor(hexString: self.highlightColor).cgColor]
+//                    print("new gra colors \(newColors)")
+                }
+                
                 gradient.startPoint = CGPoint(x: 0, y: 0.5)
                 gradient.endPoint = CGPoint(x: 1, y: 0.5)
                 gradient.mask = newLayer
@@ -316,8 +344,8 @@ extension ViewController {
                 layer.addSublayer(gradient)
                 
             } else {
-                newLayer.fillColor = UIColor(hexString: component.color).withAlphaComponent(0.3).cgColor
-                newLayer.strokeColor = UIColor(hexString: component.color).cgColor
+                newLayer.fillColor = UIColor(hexString: component.colors.first ?? "ffffff").withAlphaComponent(0.3).cgColor
+                newLayer.strokeColor = UIColor(hexString: component.colors.first ?? "ffffff").cgColor
                 layer.addSublayer(newLayer)
             }
             
