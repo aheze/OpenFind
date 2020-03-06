@@ -15,7 +15,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
     
    
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        print("Did Dismiss")
+        print("Did Dismissss")
         if cancelTimer != nil {
             cancelTimer!.invalidate()
             cancelTimer = nil
@@ -26,29 +26,29 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
        // listsCollectionView.reloadData()
         loadListsRealm()
     }
-    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
-        print("Start Dismiss")
-        hasStartedDismissing = true
-        startVideo(finish: "start")
-        if cancelTimer == nil {
-        cancelTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
-        }
-    }
-    @objc func updateTimer() {
-        cancelSeconds += 1
-        if cancelSeconds == 5 {
-            print("hit 5 secs")
-            if cancelTimer != nil {
-                cancelTimer!.invalidate()
-                cancelTimer = nil
-            }
-            cancelSeconds = 0
-            cancelSceneView()
-        }
-        
-        //This will decrement(count down)the seconds.
-        //timerLabel.text = "\(seconds)"
-    }
+//    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
+//        print("Start Dismiss")
+////        hasStartedDismissing = true
+//        startVideo(finish: "start")
+////        if cancelTimer == nil {
+////        cancelTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
+////        }
+//    }
+//    @objc func updateTimer() {
+//        cancelSeconds += 1
+//        if cancelSeconds == 5 {
+//            print("hit 5 secs")
+//            if cancelTimer != nil {
+//                cancelTimer!.invalidate()
+//                cancelTimer = nil
+//            }
+//            cancelSeconds = 0
+//            cancelSceneView()
+//        }
+//
+//        //This will decrement(count down)the seconds.
+//        //timerLabel.text = "\(seconds)"
+//    }
 //    @objc func doubleTapped() {
 //        print("sdfjg")
 //        // do something here

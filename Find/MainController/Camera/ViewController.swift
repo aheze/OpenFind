@@ -70,6 +70,11 @@ class ViewController: UIViewController {
     }
     @IBAction func autocompButtonPressed(_ sender: UIButton) {
         view.endEditing(true)
+        if insertingListsCount == 0 {
+            updateListsLayout(toType: "doneAndShrink")
+        } else {
+            isSchedulingList = true
+        }
     }
     @IBAction func newMatchPressed(_ sender: Any) {
         if let searchText = newSearchTextField.text {
@@ -85,6 +90,9 @@ class ViewController: UIViewController {
     
 //    var removeListMode = true
     var focusingList = EditableFindList()
+    
+    var insertingListsCount = 0
+    var isSchedulingList = false
     
     @IBOutlet weak var searchContentView: UIView!
     
@@ -190,6 +198,7 @@ class ViewController: UIViewController {
 
     
     //MARK: New Camera no Sceneview
+    var previewTempImageView = UIImageView()
     let avSession = AVCaptureSession()
     var snapshotImageOrientation = UIImage.Orientation.upMirrored
     private var captureCompletionBlock: ((UIImage) -> Void)?
@@ -264,7 +273,9 @@ class ViewController: UIViewController {
         cameraView.videoPreviewLayer.position = CGPoint(x: newBounds.midX, y: newBounds.midY);
         avSession.startRunning()
     }
-    func startSession() { if !avSession.isRunning { DispatchQueue.global().async { self.avSession.startRunning() } } }
+    func startSession() { if !avSession.isRunning {
+//        print("not running avsession")
+        DispatchQueue.global().async { self.avSession.startRunning() } } }
     func stopSession() {
         if avSession.isRunning {
             DispatchQueue.global().async {
@@ -315,6 +326,7 @@ class ViewController: UIViewController {
         setUpButtons()
         setUpTimers()
         
+        setUpTempImageView()
         
 //        setUpRamReel()
         setUpSearchBar()

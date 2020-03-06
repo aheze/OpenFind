@@ -84,29 +84,29 @@ extension ViewController {
                                 let finalX = newX + addedWidth
                                 let newComponent = Component()
                                 
-                                newComponent.x = finalX - 4
-                                newComponent.y = newY - (newH + 1)
-                                newComponent.width = finalW + 8
-                                newComponent.height = newH + 2
+                                newComponent.x = finalX - 6
+                                newComponent.y = newY - (newH + 3)
+                                newComponent.width = finalW + 12
+                                newComponent.height = newH + 6
                                 newComponent.text = match
                                 newComponent.changed = false
                                 
                                 if let parentList = stringToList[match] {
                                     switch parentList.descriptionOfList {
                                     case "Search Array List +0-109028304798614":
-                                        print("Search Array")
+//                                        print("Search Array")
                                         newComponent.parentList = currentSearchFindList
                                         newComponent.colors = [highlightColor]
                                     case "Shared Lists +0-109028304798614":
-                                        print("Shared Lists")
+//                                        print("Shared Lists")
                                         newComponent.parentList = currentListsSharedFindList
                                         newComponent.isSpecialType = "Shared List"
                                     case "Shared Text Lists +0-109028304798614":
-                                        print("Shared Text Lists")
+//                                        print("Shared Text Lists")
                                         newComponent.parentList = currentSearchAndListSharedFindList
                                         newComponent.isSpecialType = "Shared Text List"
                                     default:
-                                        print("normal")
+//                                        print("normal")
                                         newComponent.parentList = parentList
                                         newComponent.colors = [parentList.iconColorName]
                                     }
@@ -297,8 +297,13 @@ extension ViewController {
 //                gradient.colors = [#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1).cgColor, #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor]
                 if let gradientColors = self.matchToColors[component.text] {
                     
-                    print("gra colors \(gradientColors)")
+//                    print("gra colors \(gradientColors)")
                     gradient.colors = gradientColors
+                    if let firstColor = gradientColors.first {
+                        print("sdfsdf")
+                        layer.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3).cgColor
+                    }
+                    
                 }
                 gradient.startPoint = CGPoint(x: 0, y: 0.5)
                 gradient.endPoint = CGPoint(x: 1, y: 0.5)
@@ -308,6 +313,7 @@ extension ViewController {
                 newLayer.strokeColor = UIColor.black.cgColor
                 
                 layer.addSublayer(gradient)
+//                layer.backgroundColor = g
             } else if component.isSpecialType == "Shared Text List" {
 //                newLayer.lineWidth = 8
                 var newRect = layer.frame
@@ -326,12 +332,17 @@ extension ViewController {
 //                gradient.colors = [#colorLiteral(red: 0.3411764706, green: 0.6235294118, blue: 0.168627451, alpha: 1).cgColor, UIColor(hexString: self.highlightColor).cgColor]
                 
                 if let gradientColors = self.matchToColors[component.text] {
-                    print("HAS GRA")
+//                    print("HAS GRA")
                     var newColors = gradientColors
                     let newColor = UIColor(hexString: self.highlightColor)
                     
                     newColors.append(newColor.cgColor)
                     gradient.colors = newColors
+                    
+                    if let firstColor = gradientColors.first {
+                        print("sdfsdf")
+                        layer.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3).cgColor
+                    }
 //                                    gradient.colors = [#colorLiteral(red: 0.3411764706, green: 0.6235294118, blue: 0.168627451, alpha: 1).cgColor, UIColor(hexString: self.highlightColor).cgColor]
 //                    print("new gra colors \(newColors)")
                 }

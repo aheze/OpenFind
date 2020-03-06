@@ -184,7 +184,19 @@ extension ViewController: UICollectionViewDataSource {
             print(selectedLists)
             
             let indexP = IndexPath(item: 0, section: 0)
-            searchCollectionView.insertItems(at: [indexP])
+            searchCollectionView.performBatchUpdates({
+                self.searchCollectionView.insertItems(at: [indexP])
+                self.insertingListsCount += 1
+            }, completion: { _ in
+                self.insertingListsCount -= 1
+                if self.isSchedulingList == true {
+                    if self.insertingListsCount == 0 {
+                        self.isSchedulingList = false
+                        self.updateListsLayout(toType: "doneAndShrink")
+                    }
+                }
+            })
+            
 //            listViewCollectionView.insertItems(at: [indexP])
             
             editableListCategories.remove(at: indexPath.item)

@@ -48,7 +48,11 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         for temp in tempArray {
             calculateWhereToInsert(component: temp)
         }
-        
+//        if insertingListsCount == 0 {
+//            updateListsLayout(toType: "doneAndShrink")
+//        } else {
+//            isSchedulingList = true
+//        }
         updateListsLayout(toType: "removeListsNow")
         sortSearchTerms()
     }
@@ -211,17 +215,24 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         }
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        print("RETURN END EDIt")
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-        updateListsLayout(toType: "doneAndShrink")
-//        })
-        
-        
-    }
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        print("RETURN END EDIt")
+////        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+//        
+//        
+//        
+////        })
+//        
+//        
+//    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 //        finalTextToFind = newSearchTextField.text ?? ""
         view.endEditing(true)
+        if insertingListsCount == 0 {
+            updateListsLayout(toType: "doneAndShrink")
+        } else {
+            isSchedulingList = true
+        }
 //        print("RETURN")
 //        print("Text: \(textField.text)")
         return true

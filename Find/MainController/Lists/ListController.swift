@@ -181,7 +181,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         performSegue(withIdentifier: "makeNewListSegue", sender: self)
     }
     
-    
+    weak var delegate: UIAdaptivePresentationControllerDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         if let layout = collectionView?.collectionViewLayout as? AdaptiveCollectionLayout {
