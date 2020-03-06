@@ -105,6 +105,40 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         let y = loc.x / screenSize.width
         let focusPoint = CGPoint(x: x, y: y)
 
+        let newImageView = UIImageView()
+        newImageView.image = UIImage(named: "FocusRectCamera")
+        let frameRect = CGRect(x: loc.x - 35, y: loc.y - 35, width: 70, height: 70)
+//        print(frameRect)
+        newImageView.frame = frameRect
+        newImageView.contentMode = .scaleAspectFit
+        cameraView.addSubview(newImageView)
+        newImageView.alpha = 0
+        
+        UIView.animateKeyframes(withDuration: 0.6, delay: 0, options: .calculationModeCubic, animations: {
+                        UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.25) {
+                            newImageView.alpha = 1
+//                            print("ANIMATE KEY")
+        //                    self.imageView.transform = CGAffineTransform(scaleX: 2, y: 2)
+                        }
+
+                        UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.25) {
+                            newImageView.alpha = 0.8
+        //                    self.imageView.center = CGPoint(x: self.view.bounds.midX, y: self.view.bounds.maxY)
+                        }
+
+                        UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.25) {
+                            newImageView.alpha = 1
+        //                    self.imageView.center = CGPoint(x: self.view.bounds.width, y: start.y)
+                        }
+
+                        UIView.addKeyframe(withRelativeStartTime: 0.75, relativeDuration: 0.25) {
+                            newImageView.alpha = 0
+        //                    self.imageView.center = start
+                        }
+                    }, completion: { _ in
+                        newImageView.removeFromSuperview()
+                    })
+        
         if let device = cameraDevice {
             do {
                 try device.lockForConfiguration()
@@ -120,6 +154,9 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
             catch {
                 // just ignore
             }
+            
+            
+            
         }
         //refreshScreen(location: loc)
     }
