@@ -30,6 +30,13 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
                                                                    attributes:
                                                                    [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.8784313725, green: 0.878935039, blue: 0.878935039, alpha: 0.75)])
 
+        warningView.alpha = 0
+        warningView.layer.cornerRadius = 6
+        warningView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        
+        warningLabel.alpha = 0
+        warningLabel.text = "Find is paused | Duplicates are not allowed"
+        
         cancelButtonNew.layer.cornerRadius = 4
         autoCompleteButton.layer.cornerRadius = 4
         newMatchButton.layer.cornerRadius = 4
@@ -239,11 +246,43 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {
-            finalTextToFind = updatedString
+            let splits = updatedString.components(separatedBy: "\u{2022}")
+            let uniqueSplits = splits.uniques
+            if uniqueSplits.count != splits.count {
+                print("DUPD UPD UPD UPDU PDPUDP")
+                resetFastHighlights()
+                allowSearch = false
+                showDuplicateAlert(show: true)
+            } else {
+                showDuplicateAlert(show: false)
+                allowSearch = true
+                finalTextToFind = updatedString
+                sortSearchTerms()
+            }
+         
         }
-        sortSearchTerms()
+        
         
         return true
+    }
+    func showDuplicateAlert(show: Bool) {
+        if show == true {
+            
+            warningHeightC.constant = 32
+            UIView.animate(withDuration: 0.5, animations: {
+                self.warningView.alpha = 1
+                self.warningLabel.alpha = 1
+                self.view.layoutIfNeeded()
+            })
+        } else {
+            warningHeightC.constant = 6
+            UIView.animate(withDuration: 0.5, animations: {
+                self.warningView.alpha = 0
+                self.warningLabel.alpha = 0
+//                self.warningLabel.text = "Find is paused | Duplicates are not allowed"
+                self.view.layoutIfNeeded()
+            })
+        }
     }
 
     func sortSearchTerms() {

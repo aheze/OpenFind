@@ -38,8 +38,6 @@
 		491150942363E3D300EC0C04 /* ARExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491150932363E3D300EC0C04 /* ARExtensions.swift */; };
 		4917CE7F23C0490E002EA20B /* GeneralSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4917CE7E23C0490E002EA20B /* GeneralSettings.swift */; };
 		4917CE8123C059F6002EA20B /* StartSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4917CE8023C059F6002EA20B /* StartSceneView.swift */; };
-		4928525023D14D7B0048EC13 /* RealmPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928524F23D14D7B0048EC13 /* RealmPhoto.swift */; };
-		4928525223D154370048EC13 /* RealmComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525123D154370048EC13 /* RealmComponent.swift */; };
 		4928525423D368780048EC13 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525323D368780048EC13 /* CameraService.swift */; };
 		4928525623D4BD490048EC13 /* UpdateOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525523D4BD490048EC13 /* UpdateOrientation.swift */; };
 		4928525823D539F40048EC13 /* ToolbarTopCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525723D539F40048EC13 /* ToolbarTopCollectionView.swift */; };
@@ -153,8 +151,6 @@
 		491150932363E3D300EC0C04 /* ARExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARExtensions.swift; sourceTree = "<group>"; };
 		4917CE7E23C0490E002EA20B /* GeneralSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettings.swift; sourceTree = "<group>"; };
 		4917CE8023C059F6002EA20B /* StartSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSceneView.swift; sourceTree = "<group>"; };
-		4928524F23D14D7B0048EC13 /* RealmPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmPhoto.swift; sourceTree = "<group>"; };
-		4928525123D154370048EC13 /* RealmComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmComponent.swift; sourceTree = "<group>"; };
 		4928525323D368780048EC13 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
 		4928525523D4BD490048EC13 /* UpdateOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateOrientation.swift; sourceTree = "<group>"; };
 		4928525723D539F40048EC13 /* ToolbarTopCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarTopCollectionView.swift; sourceTree = "<group>"; };
@@ -321,15 +317,6 @@
 			path = PaintCode;
 			sourceTree = "<group>";
 		};
-		4928524E23D14D5A0048EC13 /* RealmFiles */ = {
-			isa = PBXGroup;
-			children = (
-				4928524F23D14D7B0048EC13 /* RealmPhoto.swift */,
-				4928525123D154370048EC13 /* RealmComponent.swift */,
-			);
-			path = RealmFiles;
-			sourceTree = "<group>";
-		};
 		492BF956237529E8001BE82F /* Setup */ = {
 			isa = PBXGroup;
 			children = (
@@ -449,7 +436,6 @@
 			isa = PBXGroup;
 			children = (
 				49585DCD23ED0C9F003AB768 /* SEK */,
-				4928524E23D14D5A0048EC13 /* RealmFiles */,
 				4988FC4623BEF82D00199635 /* Lists */,
 				4969373C2353C277009CA41A /* Camera */,
 				4969373A2353C241009CA41A /* History */,
@@ -754,7 +740,6 @@
 				49B7A33423923E810070209F /* ZoomTransitionController.swift in Sources */,
 				4999AC982353A80A00AB06A7 /* ViewController.swift in Sources */,
 				49B7A33523923E810070209F /* ZoomDismissalInteractionController.swift in Sources */,
-				4928525223D154370048EC13 /* RealmComponent.swift in Sources */,
 				49BC782F23C6E473003D9904 /* addHeart.swift in Sources */,
 				49325C1323CAE84500A771A3 /* StatusView.swift in Sources */,
 				494DF11923961AC90076412D /* BDVCFind.swift in Sources */,
@@ -791,7 +776,6 @@
 				49301BF724030C4400B4780B /* SmallGradientView.swift in Sources */,
 				4966B71023E124D700A8523A /* ImagePickerList.swift in Sources */,
 				49301BF02400D4FF00B4780B /* HelpControllers.swift in Sources */,
-				4928525023D14D7B0048EC13 /* RealmPhoto.swift in Sources */,
 				4972B40E23F117C500843537 /* GeneralTableviewCell.swift in Sources */,
 				49368CB223905E8E00B67C4A /* BottomSheetViewController.swift in Sources */,
 				49A8EFAE237A5F2800328D47 /* SetUpSearchBar.swift in Sources */,

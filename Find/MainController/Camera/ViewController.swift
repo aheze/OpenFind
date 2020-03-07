@@ -91,6 +91,8 @@ class ViewController: UIViewController {
 //    var removeListMode = true
     var focusingList = EditableFindList()
     
+    var allowSearch = true
+    
     var insertingListsCount = 0
     var isSchedulingList = false
     
@@ -103,7 +105,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var searchCollectionTopC: NSLayoutConstraint!
     @IBOutlet weak var searchCollectionRightC: NSLayoutConstraint!
     
-//    @IBOutlet var listsView: UIView!
+    @IBOutlet weak var warningView: UIView!
+    
+    @IBOutlet weak var warningLabel: UILabel!
+    
+    @IBOutlet weak var warningHeightC: NSLayoutConstraint!
+    
+    
+    
+    //    @IBOutlet var listsView: UIView!
 //    @IBOutlet weak var listViewCollectionView: UICollectionView!
 //
 //    @IBOutlet var searchTextField: TextField!
@@ -385,7 +395,7 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
         }
-        if busyFastFinding == false {
+        if busyFastFinding == false && allowSearch == true {
             fastFind(in: pixelBuffer)
         }
         guard captureCompletionBlock != nil,

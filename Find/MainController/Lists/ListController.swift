@@ -250,17 +250,21 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
     }
     func update(index: Int, name: String, description: String, contents: [String], imageName: String, imageColor: String) {
         if let listToEdit = listCategories?[index] {
-            try! realm.write {
-                listToEdit.name = name
-                listToEdit.descriptionOfList = description
-               listToEdit.contents.removeAll()
-                print("UPDATE")
-                for cont in contents {
-                    listToEdit.contents.append(cont)
+            do {
+                try realm.write {
+                    listToEdit.name = name
+                    listToEdit.descriptionOfList = description
+                    listToEdit.contents.removeAll()
+                    print("UPDATE")
+                    for cont in contents {
+                        listToEdit.contents.append(cont)
+                    }
+                    print(listToEdit.contents)
+                    listToEdit.iconImageName = imageName
+                    listToEdit.iconColorName = imageColor
                 }
-                print(listToEdit.contents)
-                listToEdit.iconImageName = imageName
-                listToEdit.iconColorName = imageColor
+            } catch {
+                print("Error saving category \(error)")
             }
         }
         collectionView.reloadData()

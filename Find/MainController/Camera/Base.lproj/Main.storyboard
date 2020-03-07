@@ -21,6 +21,23 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1uu-Wl-x4d">
+                                <rect key="frame" x="16" y="97" width="382" height="6"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHm-ND-D9k">
+                                        <rect key="frame" x="170" y="-7" width="42" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="BHm-ND-D9k" firstAttribute="centerX" secondItem="1uu-Wl-x4d" secondAttribute="centerX" id="Qdu-5C-JA0"/>
+                                    <constraint firstAttribute="height" constant="6" id="bdc-W2-kMf"/>
+                                    <constraint firstItem="BHm-ND-D9k" firstAttribute="centerY" secondItem="1uu-Wl-x4d" secondAttribute="centerY" id="u66-bx-Zs4"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bCb-2s-qjS" userLabel="Controls">
                                 <rect key="frame" x="0.0" y="581" width="414" height="300"/>
                                 <subviews>
@@ -282,7 +299,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="kV4-Eg-1Ee" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="8mP-1w-akg"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1uu-Wl-x4d" secondAttribute="trailing" constant="16" id="9He-v9-Vjh"/>
+                            <constraint firstItem="1uu-Wl-x4d" firstAttribute="top" secondItem="kV4-Eg-1Ee" secondAttribute="bottom" id="Q5U-Jw-MFd"/>
                             <constraint firstItem="bCb-2s-qjS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Sad-z6-6IQ"/>
+                            <constraint firstItem="1uu-Wl-x4d" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="ZAu-k3-Krh"/>
                             <constraint firstAttribute="bottom" secondItem="bCb-2s-qjS" secondAttribute="bottom" constant="15" id="bZT-O3-Wui"/>
                             <constraint firstAttribute="trailing" secondItem="bCb-2s-qjS" secondAttribute="trailing" id="mkd-kI-UdL"/>
                             <constraint firstItem="kV4-Eg-1Ee" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="26" id="uYI-qs-zLw"/>
@@ -321,6 +341,9 @@
                         <outlet property="tapToRemoveLabel" destination="Hc9-i8-kXk" id="IQj-Ry-hZp"/>
                         <outlet property="textLabel" destination="BRC-Yj-hpw" id="ZQn-rk-L50"/>
                         <outlet property="toolBar" destination="nbP-Hl-hh0" id="v0R-1H-V9i"/>
+                        <outlet property="warningHeightC" destination="bdc-W2-kMf" id="FaV-Sf-qi6"/>
+                        <outlet property="warningLabel" destination="BHm-ND-D9k" id="7bC-8L-ud9"/>
+                        <outlet property="warningView" destination="1uu-Wl-x4d" id="L7R-Wb-oAW"/>
                         <segue destination="pa6-U7-HO0" kind="show" identifier="goToSettings" id="lEH-Hc-ESJ"/>
                         <segue destination="su1-G3-ZPO" kind="show" identifier="goToHistory" id="TE7-Js-64C"/>
                         <segue destination="dyF-tU-4Cl" kind="show" identifier="goToNewHistory" id="YN9-3j-1gP"/>

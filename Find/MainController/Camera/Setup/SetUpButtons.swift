@@ -22,6 +22,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         }
         SwiftEntryKit.dismiss()
         currentMatchStrings.append(newSearchTextField.text ?? "")
+        sortSearchTerms()
         startVideo(finish: "end")
        // listsCollectionView.reloadData()
         loadListsRealm()
@@ -113,10 +114,12 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         newImageView.contentMode = .scaleAspectFit
         cameraView.addSubview(newImageView)
         newImageView.alpha = 0
+        newImageView.transform = CGAffineTransform(scaleX: 1.35, y: 1.35)
         
         UIView.animateKeyframes(withDuration: 0.6, delay: 0, options: .calculationModeCubic, animations: {
                         UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.25) {
                             newImageView.alpha = 1
+                            newImageView.transform = CGAffineTransform.identity
 //                            print("ANIMATE KEY")
         //                    self.imageView.transform = CGAffineTransform(scaleX: 2, y: 2)
                         }

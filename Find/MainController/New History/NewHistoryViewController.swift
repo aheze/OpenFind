@@ -22,7 +22,9 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     
     //MARK: Realm
     let realm = try! Realm()
-    var photoCategories: [IndexMatcher: Results<RealmPhoto>]?
+    var photoCategories: Results<HistoryModel>?
+//    var photoCategories: [IndexMatcher: Results<RealmPhoto>]?
+//    var photoCategories = [IndexMatcher: ]
  
 
     
@@ -31,8 +33,10 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
     var sectionToDate : [Int: Date] = [Int: Date]()
-    var dateToFilepaths = [Date: [URL]]()
-    var dictOfUrls = [IndexMatcher: URL]()
+//    var dateToFilepaths = [Date: [URL]]()
+//    var dictOfUrls = [IndexMatcher: URL]()
+    
+    var indexToData = [Int: [HistoryModel]]()
     
     var sectionCounts = [Int]()
     var imageSize = CGSize(width: 0, height: 0)
@@ -178,6 +182,9 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var blackXButtonView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        populateRealm()
+        sortHist()
+//        clearHistoryImages()
         getData()
         deselectAllItems(deselect: true)
         selectButton.layer.cornerRadius = 4
@@ -187,12 +194,22 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //        let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
 //        layout?.sectionHeadersPinToVisibleBounds = true
         collectionView?.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
-        if let sampleDate = sectionToDate[0] {
-            if let sampleImagePath = dateToFilepaths[sampleDate] {
-                let newImage = loadImageFromDocumentDirectory(urlOfFile: sampleImagePath.first!)
-                imageSize = newImage!.size
+        
+        if let samplePath = photoCategories?[0] {
+            let urlString = "\(folderURL)\(samplePath.filePath)"
+            if let newURL = URL(string: urlString) {
+                if let newImage = loadImageFromDocumentDirectory(urlOfFile: newURL) {
+                    imageSize = newImage.size
+                }
             }
         }
+//        if let sampleDate = sectionToDate[0] {
+//            if let sampleImagePath = dateToFilepaths[sampleDate] {
+//                if let newImage = loadImageFromDocumentDirectory(urlOfFile: sampleImagePath.first!) {
+//                    imageSize = newImage.size
+//                }
+//            }
+//        }
         setUpXButton()
     }
     override func present(_ viewControllerToPresent: UIViewController,
@@ -214,6 +231,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "sectionHeaderId", for: indexPath) as! TitleSupplementaryView
             //headerView.todayLabel.text = "Text: \(indexPath.section)"
             let date = sectionToDate[indexPath.section]!
+            
             let readableDate = convertDateToReadableString(theDate: date)
             headerView.todayLabel.text = readableDate
             headerView.clipsToBounds = false
@@ -257,13 +275,34 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
-        let newInd = IndexMatcher()
-        newInd.section = indexPath.section
-        newInd.row = indexPath.row
-        let url = dictOfUrls[newInd]
-        cell.imageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-        cell.imageView.sd_imageTransition = .fade
-        cell.imageView.sd_setImage(with: url)
+        
+        if let hisModel = indexToData[indexPath.section] {
+            print("YES PATH")
+            let historyModel = hisModel[indexPath.item]
+            
+            var urlPath = historyModel.filePath
+            urlPath = "\(folderURL)\(urlPath)"
+            let finalUrl = URL(string: urlPath)
+            cell.imageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+            cell.imageView.sd_imageTransition = .fade
+            cell.imageView.sd_setImage(with: finalUrl)
+            
+            if historyModel.isHearted == true {
+                cell.heartView.alpha = 1
+            } else {
+                cell.heartView.alpha = 0
+            }
+        }
+        
+//        let newInd = IndexMatcher()
+//        newInd.section = indexPath.section
+//        newInd.row = indexPath.row
+//        let url = dictOfUrls[newInd]
+//        cell.imageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+//        cell.imageView.sd_imageTransition = .fade
+//        cell.imageView.sd_setImage(with: url)
+        
+        
 //        if let photo = photoCategories?[newInd] {
 //
 //        }
@@ -320,11 +359,20 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             
             print("select")
             var number = 0
-            for section in dictOfUrls.values {
-                //let url = dictOfUrls[section]
-                fileUrlsSelected.append(section)
-                //cell.isSelected = true
-                number += 1
+//            for section in dictOfUrls.values {
+//                //let url = dictOfUrls[section]
+//                fileUrlsSelected.append(section)
+//                //cell.isSelected = true
+//                number += 1
+//            }
+            if let photoCats = photoCategories {
+                for photo in photoCats {
+                    number += 1
+                    let urlString = "\(folderURL)\(photo.filePath)"
+                    if let newURL = URL(string: urlString) {
+                        fileUrlsSelected.append(newURL)
+                    }
+                }
             }
             for i in 0..<collectionView.numberOfSections {
                 for j in 0..<collectionView.numberOfItems(inSection: i) {
@@ -342,12 +390,24 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         if selectionMode == true {
             print("seleeeect")
             
-            let indexMatcher = IndexMatcher()
-            indexMatcher.section = indexPath.section
-            indexMatcher.row = indexPath.item
-            if let filePath = dictOfUrls[indexMatcher] {
-                fileUrlsSelected.append(filePath)
+//            let indexMatcher = IndexMatcher()
+//            indexMatcher.section = indexPath.section
+//            indexMatcher.row = indexPath.item
+            
+            
+            if let hisModel = indexToData[indexPath.section] {
+                print("YES PATH Select")
+                let historyModel = hisModel[indexPath.item]
+                var urlPath = historyModel.filePath
+                urlPath = "\(folderURL)\(urlPath)"
+                if let finalUrl = URL(string: urlPath) {
+                    fileUrlsSelected.append(finalUrl)
+                }
             }
+                
+//            if let filePath = dictOfUrls[indexMatcher] {
+//                fileUrlsSelected.append(filePath)
+//            }
             
             indexPathsSelected.append(indexPath)
             numberOfSelected += 1
@@ -369,9 +429,26 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             //print(imageSize)
             mainContentVC.photoSize = imageSize
             
-            if let date = sectionToDate[indexPath.section] {
-                mainContentVC.photoPaths = dateToFilepaths[date]!
+//            if let date = sectionToDate[indexPath.section] {
+//                mainContentVC.photoPaths = dateToFilepaths[date]!
+//            }
+            var photoPaths = [URL]()
+            if let hisModel = indexToData[indexPath.section] {
+                print("YES PATH Select indexpath select transition push")
+//                let historyModel = hisModel[indexPath.item]
+                
+                for historyModel in hisModel {
+                    var urlPath = historyModel.filePath
+                    urlPath = "\(folderURL)\(urlPath)"
+                    if let finalUrl = URL(string: urlPath) {
+                        photoPaths.append(finalUrl)
+//                        fileUrlsSelected.append(finalUrl)
+                    }
+                }
+                
             }
+             mainContentVC.photoPaths = photoPaths
+            
             // mainContentVC.photos = photos
             print("_____")
             //print(dateToFilepaths)
@@ -383,11 +460,20 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         if selectionMode == true {
             
             print("del")
-            let indexMatcher = IndexMatcher()
-            indexMatcher.section = indexPath.section
-            indexMatcher.row = indexPath.item
-            if let filePath = dictOfUrls[indexMatcher] {
-                fileUrlsSelected.remove(object: filePath)
+//            let indexMatcher = IndexMatcher()
+//            indexMatcher.section = indexPath.section
+//            indexMatcher.row = indexPath.item
+//            if let filePath = dictOfUrls[indexMatcher] {
+//                fileUrlsSelected.remove(object: filePath)
+//            }
+            if let hisModel = indexToData[indexPath.section] {
+                print("YES PATH DE-Select")
+                let historyModel = hisModel[indexPath.item]
+                var urlPath = historyModel.filePath
+                urlPath = "\(folderURL)\(urlPath)"
+                if let finalUrl = URL(string: urlPath) {
+                    fileUrlsSelected.remove(object: finalUrl)
+                }
             }
             numberOfSelected -= 1
             //changeNumberDelegate?.changeLabel(to: numberOfSelected)
@@ -447,6 +533,22 @@ extension NewHistoryViewController {
 //        clearHistoryImages()
 //    }
   func clearHistoryImages() {
+    var tempLists = [HistoryModel]()
+    var tempInts = [Int]()
+    var arrayOfIndexPaths = [IndexPath]()
+    for (inx, index) in photoCategories!.enumerated() {
+        tempLists.append(index)
+        tempInts.append(inx)
+        arrayOfIndexPaths.append(IndexPath(item: inx, section: 0))
+    }
+    print("Index selected: \(indexPathsSelected)")
+    do {
+        try realm.write {
+            realm.delete(tempLists)
+        }
+    } catch {
+        print("error deleting category \(error)")
+    }
       let fileManager = FileManager.default
       let tempFolderPath = NSTemporaryDirectory()
       do {
@@ -460,41 +562,69 @@ extension NewHistoryViewController {
       }
   }
 
+    func populateRealm() {
+//        listCategories = realm.objects(FindList.self)
+        photoCategories = realm.objects(HistoryModel.self)
+        
+    }
+    func sortHist() {
+        if let photoCats = photoCategories {
+            photoCategories = photoCats.sorted(byKeyPath: "dateCreated", ascending: false)
+        }
+    }
+    
     func getData() {
+        var arrayOfPaths = [URL]()
         var arrayOfCategoryDates = [Date]()
         var tempDictOfImagePaths = [Date: [URL]]()
-        do {
-            let items = try FileManager.default.contentsOfDirectory(atPath: folderURL.path)
-            for theFileName in items {
-                let splits = theFileName.split(separator: "=")
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "MMddyy"
-                let dateFromString = dateFormatter.date(from: String(splits[0]))!
-                let imagePath = "\(folderURL)/\(theFileName)"
-                if !arrayOfCategoryDates.contains(dateFromString) {
-                    arrayOfCategoryDates.append(dateFromString)
-                }
-                if let imageUrl = URL(string: imagePath) {
-                    tempDictOfImagePaths[dateFromString, default: [URL]()].append(imageUrl)
-                }
+        
+        guard let photoCats = photoCategories else { print("No Cats or Error!"); return }
+        for singleHist in photoCats {
+            
+            let splits = singleHist.filePath.components(separatedBy: "=")
+            print("file path: \(singleHist.filePath)")
+            print("Splits: \(splits)")
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMddyy"
+
+            guard let dateFromString = dateFormatter.date(from: splits[1]) else { print("no date wrong... return"); return}
+            if !arrayOfCategoryDates.contains(dateFromString) {
+                arrayOfCategoryDates.append(dateFromString)
             }
-        } catch {
-            print("error getting photos... \(error)")
+            
+            let imagePath = "\(folderURL)/\(singleHist.filePath)"
+            if !arrayOfCategoryDates.contains(dateFromString) {
+                arrayOfCategoryDates.append(dateFromString)
+            }
+            if let imageUrl = URL(string: imagePath) {
+                tempDictOfImagePaths[dateFromString, default: [URL]()].append(imageUrl)
+                arrayOfPaths.append(imageUrl)
+            }
         }
         arrayOfCategoryDates.sort(by: { $0.compare($1) == .orderedDescending})
-
+//        arrayOfPaths.sort(by: { $0.compare($1) == .orderedDescending})
+        
+        var count = -1
         for (index, date) in arrayOfCategoryDates.enumerated() {
             sectionCounts.append(0)
             sectionToDate[index] = date
+            
             if let arrayOfImageUrls = tempDictOfImagePaths[date] {
                 for (secondIndex, individualUrl) in arrayOfImageUrls.enumerated() {
-                    var indexPath = IndexMatcher()
+                    count += 1
+                    let indexPath = IndexMatcher()
                     indexPath.section = index
                     indexPath.row = secondIndex
                     sectionCounts[index] += 1
-                    dictOfUrls[indexPath] = individualUrl
-
-                    dateToFilepaths[date, default: [URL]()].append(individualUrl)
+//                    dictOfUrls[indexPath] = individualUrl
+                    
+                    if let newHistModel = photoCategories?[count] {
+                        indexToData[index, default: [HistoryModel]()].append(newHistModel)
+                        
+                    }
+//                    indexToData[indexPath]
+//                    indexToData
+//                    dateToFilepaths[date, default: [URL]()].append(individualUrl)
 
 //                    do {
 //                        var photos = try Realm().objects(RealmPhoto.self)
@@ -510,7 +640,8 @@ extension NewHistoryViewController {
             }
 
         }
-        print("URL COUNT: \(dictOfUrls.count)")
+        print("histDataCount: \(indexToData.count)")
+//        print("URL COUNT: \(dictOfUrls.count)")
     }
     
     func loadImageFromDocumentDirectory(urlOfFile: URL) -> UIImage? {
