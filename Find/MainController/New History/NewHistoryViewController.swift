@@ -185,22 +185,31 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         super.viewDidLoad()
         populateRealm()
         sortHist()
-//        clearHistoryImages()
         getData()
+//        clearHistoryImages()
+        
+        
+        
         deselectAllItems(deselect: true)
+        
         selectButton.layer.cornerRadius = 4
         selectAll.layer.cornerRadius = 4
         fadeSelectOptions(fadeOut: "firstTimeSetup")
         //self.transitioningDelegate = transitionDelegate
 //        let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
 //        layout?.sectionHeadersPinToVisibleBounds = true
+        print("asd")
         collectionView?.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
         
-        if let samplePath = photoCategories?[0] {
-            let urlString = "\(folderURL)\(samplePath.filePath)"
-            if let newURL = URL(string: urlString) {
-                if let newImage = loadImageFromDocumentDirectory(urlOfFile: newURL) {
-                    imageSize = newImage.size
+        print("asdcontent")
+        if photoCategories?.count ?? 0 > 0 {
+            if let samplePath = photoCategories?[0] {
+                print("asdsample")
+                let urlString = "\(folderURL)\(samplePath.filePath)"
+                if let newURL = URL(string: urlString) {
+                    if let newImage = loadImageFromDocumentDirectory(urlOfFile: newURL) {
+                        imageSize = newImage.size
+                    }
                 }
             }
         }
@@ -463,25 +472,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         print("deselecting at indexpath")
         if selectionMode == true {
             indexPathsSelected.remove(object: indexPath)
-            print("del")
-//            let indexMatcher = IndexMatcher()
-//            indexMatcher.section = indexPath.section
-//            indexMatcher.row = indexPath.item
-//            if let filePath = dictOfUrls[indexMatcher] {
-//                fileUrlsSelected.remove(object: filePath)
-//            }
-//            if let hisModel = indexToData[indexPath.section] {
-//                print("YES PATH DE-Select")
-//                let historyModel = hisModel[indexPath.item]
-//                var urlPath = historyModel.filePath
-//                urlPath = "\(folderURL)\(urlPath)"
-//                if let finalUrl = URL(string: urlPath) {
-//                    fileUrlsSelected.remove(object: finalUrl)
-//                }
-//            }
             numberOfSelected -= 1
-            //changeNumberDelegate?.changeLabel(to: numberOfSelected)
-            
         }
 
         
@@ -510,6 +501,7 @@ extension NewHistoryViewController: ButtonPressed {
         print("button delegate")
         var tempPhotos = [HistoryModel]()
         var deleteFromSections = [Int: Int]()
+        var filePaths = [URL]()
         
         var sectionsToDelete = [Int]()
         for selected in indexPathsSelected {
@@ -522,6 +514,10 @@ extension NewHistoryViewController: ButtonPressed {
             
             if let photoCat = indexToData[selected.section] {
                 let photo = photoCat[selected.item]
+                let urlString = photo.filePath
+                guard let finalUrl = URL(string: "\(folderURL)\(urlString)") else { print("Invalid File name"); return }
+//                print("URL: \(finalUrl)")
+                filePaths.append(finalUrl)
                 tempPhotos.append(photo)
             }
         }
@@ -529,20 +525,33 @@ extension NewHistoryViewController: ButtonPressed {
 //        print(deleteFromSections)
         for section in deleteFromSections {
             if sectionCounts[section.key] == section.value {
-                print("WHOLE SECTION")
+//                print("WHOLE SECTION")
                 sectionsToDelete.append(section.key)
             }
         }
-        print("delete sections: \(sectionsToDelete)")
+//        print("delete sections: \(sectionsToDelete)")
         switch button {
             
         case "test":
             print("delegate test worked")
-            
         case "find":
             print("find pressed delegate")
         case "heart":
             print("heart pressed delegate")
+            for item in indexPathsSelected {
+                let itemToEdit = indexToData[item.section]
+                if let singleItem = itemToEdit?[item.item] { ///Not very clear but ok
+                    
+                    do {
+                        try realm.write {
+                            singleItem.isHearted = true
+                        }
+                    } catch {
+                        print("Error saving category \(error)")
+                    }
+                }
+            }
+            collectionView.reloadItems(at: indexPathsSelected)
         case "delete":
             do {
                 try realm.write {
@@ -553,13 +562,19 @@ extension NewHistoryViewController: ButtonPressed {
             }
             
             
-            print("delete section conunt: \(sectionsToDelete.count)")
-            
-//            collectionView.deleteItems(at: indexPathsSelected)
-//            indexPathsSelected.removeAll()
+            print("Deleting from file now")
+            let fileManager = FileManager.default
+            for filePath in filePaths {
+                print("file... \(filePath)")
+                do {
+                    try fileManager.removeItem(at: filePath)
+                } catch {
+                    print("Could not delete items: \(error)")
+                }
+            }
             getData()
             if sectionsToDelete.count == 0 {
-                print("0000)))")
+//                print("0000)))")
                 collectionView.performBatchUpdates({
                     self.collectionView.deleteItems(at: indexPathsSelected)
                 }, completion: { _ in
@@ -602,42 +617,48 @@ extension NewHistoryViewController {
 //        //removeImageLocalPath
 //        clearHistoryImages()
 //    }
-  func clearHistoryImages() {
-    var tempLists = [HistoryModel]()
-    var tempInts = [Int]()
-    var arrayOfIndexPaths = [IndexPath]()
-    for (inx, index) in photoCategories!.enumerated() {
-        tempLists.append(index)
-        tempInts.append(inx)
-        arrayOfIndexPaths.append(IndexPath(item: inx, section: 0))
-    }
-    print("Index selected: \(indexPathsSelected)")
-    do {
-        try realm.write {
-            realm.delete(tempLists)
-        }
-    } catch {
-        print("error deleting category \(error)")
-    }
-      let fileManager = FileManager.default
-      let tempFolderPath = NSTemporaryDirectory()
-      do {
-          let filePaths = try fileManager.contentsOfDirectory(atPath: folderURL.path)
-          for filePath in filePaths {
-            //print("alkaldasdasd")
-              try fileManager.removeItem(atPath: "\(folderURL.path)/\(filePath)")
-          }
-      } catch {
-          print("Could not clear temp folder: \(error)")
-      }
-  }
+//  func clearHistoryImages() {
+////    var tempLists = [HistoryModel]()
+//////    var tempInts = [Int]()
+////    var arrayOfIndexPaths = [IndexPath]()
+////    for index in photoCategories! {
+////        tempLists.append(index)
+//////        tempInts.append(inx)
+//////        arrayOfIndexPaths.append(IndexPath(item: inx, section: 0))
+////    }
+////    print("Index selected: \(indexPathsSelected)")
+//    do {
+//        try realm.write {
+//            realm.delete(photoCategories!)
+//        }
+//    } catch {
+//        print("error deleting category \(error)")
+//    }
+//
+//
+//      let fileManager = FileManager.default
+////      let tempFolderPath = NSTemporaryDirectory()
+//    print("CLEAR")
+//      do {
+//          let filePaths = try fileManager.contentsOfDirectory(atPath: folderURL.path)
+//          for filePath in filePaths {
+//            //print("alkaldasdasd")
+//            print("FILE: \(filePath)")
+//              try fileManager.removeItem(atPath: "\(folderURL)\(filePath)")
+//          }
+//      } catch {
+//          print("Could not clear temp folder: \(error)")
+//      }
+//  }
 
     func populateRealm() {
+        print("POP")
 //        listCategories = realm.objects(FindList.self)
         photoCategories = realm.objects(HistoryModel.self)
         
     }
     func sortHist() {
+        print("SORT")
         if let photoCats = photoCategories {
             photoCategories = photoCats.sorted(byKeyPath: "dateCreated", ascending: false)
         }
