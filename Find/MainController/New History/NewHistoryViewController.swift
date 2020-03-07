@@ -32,7 +32,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     var selectedIndexPath: IndexPath!
     
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
-    var sectionToDate : [Int: Date] = [Int: Date]()
+    var sectionToDate: [Int: Date] = [Int: Date]()
 //    var dateToFilepaths = [Date: [URL]]()
 //    var dictOfUrls = [IndexMatcher: URL]()
     
@@ -47,13 +47,14 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     
     //MARK:  Selection Variables
     //var indexPathsThatAreSelected = [IndexPath]()
-    var fileUrlsSelected = [URL]()
+//    var fileUrlsSelected = [URL]()
     var indexPathsSelected = [IndexPath]()
     var selectionMode: Bool = false {
         didSet {
             print("selection mode: \(selectionMode)")
             collectionView.allowsMultipleSelection = selectionMode
-            fileUrlsSelected.removeAll()
+            indexPathsSelected.removeAll()
+//            fileUrlsSelected.removeAll()
         }
     }
     var numberOfSelected = 0 {
@@ -351,7 +352,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 }
             }
 
-            fileUrlsSelected.removeAll()
+//            fileUrlsSelected.removeAll()
             indexPathsSelected.removeAll()
             numberOfSelected = 0
             
@@ -365,17 +366,20 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //                //cell.isSelected = true
 //                number += 1
 //            }
-            if let photoCats = photoCategories {
-                for photo in photoCats {
-                    number += 1
-                    let urlString = "\(folderURL)\(photo.filePath)"
-                    if let newURL = URL(string: urlString) {
-                        fileUrlsSelected.append(newURL)
-                    }
-                }
-            }
+//            if let photoCats = photoCategories {
+//                for photo in photoCats {
+//                    number += 1
+//                    let urlString = "\(folderURL)\(photo.filePath)"
+//                    if let newURL = URL(string: urlString) {
+////                        fileUrlsSelected.append(newURL)
+//                    }
+//                }
+//            }
             for i in 0..<collectionView.numberOfSections {
                 for j in 0..<collectionView.numberOfItems(inSection: i) {
+                    let newInd = IndexPath(item: j, section: i)
+                    indexPathsSelected.append(newInd)
+                    number += 1
                     collectionView.selectItem(at: IndexPath(row: j, section: i), animated: false, scrollPosition: [])
                 }
             }
@@ -395,15 +399,15 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //            indexMatcher.row = indexPath.item
             
             
-            if let hisModel = indexToData[indexPath.section] {
-                print("YES PATH Select")
-                let historyModel = hisModel[indexPath.item]
-                var urlPath = historyModel.filePath
-                urlPath = "\(folderURL)\(urlPath)"
-                if let finalUrl = URL(string: urlPath) {
-                    fileUrlsSelected.append(finalUrl)
-                }
-            }
+//            if let hisModel = indexToData[indexPath.section] {
+//                print("YES PATH Select")
+//                let historyModel = hisModel[indexPath.item]
+//                var urlPath = historyModel.filePath
+//                urlPath = "\(folderURL)\(urlPath)"
+//                if let finalUrl = URL(string: urlPath) {
+//                    fileUrlsSelected.append(finalUrl)
+//                }
+//            }
                 
 //            if let filePath = dictOfUrls[indexMatcher] {
 //                fileUrlsSelected.append(filePath)
@@ -458,7 +462,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         print("deselecting at indexpath")
         if selectionMode == true {
-            
+            indexPathsSelected.remove(object: indexPath)
             print("del")
 //            let indexMatcher = IndexMatcher()
 //            indexMatcher.section = indexPath.section
@@ -466,15 +470,15 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //            if let filePath = dictOfUrls[indexMatcher] {
 //                fileUrlsSelected.remove(object: filePath)
 //            }
-            if let hisModel = indexToData[indexPath.section] {
-                print("YES PATH DE-Select")
-                let historyModel = hisModel[indexPath.item]
-                var urlPath = historyModel.filePath
-                urlPath = "\(folderURL)\(urlPath)"
-                if let finalUrl = URL(string: urlPath) {
-                    fileUrlsSelected.remove(object: finalUrl)
-                }
-            }
+//            if let hisModel = indexToData[indexPath.section] {
+//                print("YES PATH DE-Select")
+//                let historyModel = hisModel[indexPath.item]
+//                var urlPath = historyModel.filePath
+//                urlPath = "\(folderURL)\(urlPath)"
+//                if let finalUrl = URL(string: urlPath) {
+//                    fileUrlsSelected.remove(object: finalUrl)
+//                }
+//            }
             numberOfSelected -= 1
             //changeNumberDelegate?.changeLabel(to: numberOfSelected)
             
@@ -504,6 +508,32 @@ extension NewHistoryViewController : UICollectionViewDelegateFlowLayout {
 extension NewHistoryViewController: ButtonPressed {
     func floatButtonPressed(button: String) {
         print("button delegate")
+        var tempPhotos = [HistoryModel]()
+        var deleteFromSections = [Int: Int]()
+        
+        var sectionsToDelete = [Int]()
+        for selected in indexPathsSelected {
+            let section = selected.section
+            if deleteFromSections[section] == nil {
+                deleteFromSections[section] = 1
+            } else {
+                deleteFromSections[section]! += 1
+            }
+            
+            if let photoCat = indexToData[selected.section] {
+                let photo = photoCat[selected.item]
+                tempPhotos.append(photo)
+            }
+        }
+//        print(sectionCounts)
+//        print(deleteFromSections)
+        for section in deleteFromSections {
+            if sectionCounts[section.key] == section.value {
+                print("WHOLE SECTION")
+                sectionsToDelete.append(section.key)
+            }
+        }
+        print("delete sections: \(sectionsToDelete)")
         switch button {
             
         case "test":
@@ -514,12 +544,52 @@ extension NewHistoryViewController: ButtonPressed {
         case "heart":
             print("heart pressed delegate")
         case "delete":
-            print("delete pressed delegate")
+            do {
+                try realm.write {
+                    realm.delete(tempPhotos)
+                }
+            } catch {
+                print("DELETE PRESSED, but ERROR deleting photos...... \(error)")
+            }
+            
+            
+            print("delete section conunt: \(sectionsToDelete.count)")
+            
+//            collectionView.deleteItems(at: indexPathsSelected)
+//            indexPathsSelected.removeAll()
+            getData()
+            if sectionsToDelete.count == 0 {
+                print("0000)))")
+                collectionView.performBatchUpdates({
+                    self.collectionView.deleteItems(at: indexPathsSelected)
+                }, completion: { _ in
+                    self.indexPathsSelected.removeAll()
+                })
+                
+            } else {
+                collectionView.performBatchUpdates({
+                    let sections = IndexSet(sectionsToDelete)
+                    self.collectionView.deleteSections(sections)
+                }, completion: { _ in
+                    self.indexPathsSelected.removeAll()
+                })
+            }
+            
+           
+            
+            SwiftEntryKit.dismiss()
+//            fadeSelectOptions(fadeOut: "fade out")
+//            selectButtonSelected = false
+//            enterSelectMode(entering: false)
+            
+            
+//            print("delete pressed delegate")
         case "share":
             print("share pressed delegate")
             
             
         default: print("unknown, bad string")
+            
         }
     }
     
@@ -574,6 +644,11 @@ extension NewHistoryViewController {
     }
     
     func getData() {
+        
+        indexToData.removeAll()
+        sectionToDate.removeAll()
+        sectionCounts.removeAll()
+        
         var arrayOfPaths = [URL]()
         var arrayOfCategoryDates = [Date]()
         var tempDictOfImagePaths = [Date: [URL]]()
@@ -582,8 +657,8 @@ extension NewHistoryViewController {
         for singleHist in photoCats {
             
             let splits = singleHist.filePath.components(separatedBy: "=")
-            print("file path: \(singleHist.filePath)")
-            print("Splits: \(splits)")
+//            print("file path: \(singleHi st.filePath)")
+//            print("Splits: \(splits)")
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMddyy"
 
