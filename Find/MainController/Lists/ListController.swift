@@ -158,14 +158,15 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
     @IBAction func selectPressed(_ sender: UIButton) {
         selectButtonSelected = !selectButtonSelected ///First time press, will be true
         if selectButtonSelected == true {
-            print("select")
+            print("selecting now")
             fadeSelectOptions(fadeOut: "fade in")
         } else { ///Cancel will now be Select
-            print("cancel")
+            print("canceling now")
             //selectButtonSelected = true
-            swipedToDismiss = false
-            fadeSelectOptions(fadeOut: "fade out")
-            swipedToDismiss = true
+            SwiftEntryKit.dismiss()
+//            swipedToDismiss = false
+//            fadeSelectOptions(fadeOut: "fade out")
+//            swipedToDismiss = true
         }
     }
     
@@ -342,7 +343,37 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
             let array = listT.contents.joined(separator:"\n")
             cell.contentsList.text = array
             cell.baseView.layer.cornerRadius = 10
+            cell.highlightView.layer.cornerRadius = 10
             
+            
+        }
+        if indexPathsSelected.contains(indexPath.item) {
+//            print("CONTS")
+//            cell.shouldSelect = true
+//            cell.highlightView.alpha = 1
+//            cell.checkmarkView.alpha = 1
+            UIView.animate(withDuration: 0.1, animations: {
+                cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+            })
+//                checkmarkView.alpha = 1
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+            UIView.animate(withDuration: 0.1, animations: {
+                cell.highlightView.alpha = 1
+                cell.checkmarkView.alpha = 1
+                cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+//                        self.layoutIfNeeded()
+            })
+        } else {
+//            cell.shouldSelect = false
+//            cell.highlightView.alpha = 0
+//            cell.checkmarkView.alpha = 0
+            UIView.animate(withDuration: 0.1, animations: {
+                cell.highlightView.alpha = 0
+                cell.checkmarkView.alpha = 0
+                cell.transform = CGAffineTransform.identity
+//                    self.layoutIfNeeded()
+            })
+//            print("NO CONTS")
         }
         //cell.contentView.layer.cornerRadius = 10
         
@@ -367,10 +398,26 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("did")
         if selectionMode == true {
+            print("SEL MODE")
             indexPathsSelected.append(indexPath.item)
             numberOfSelected += 1
+            let cell = collectionView.cellForItem(at: indexPath) as! ListCollectionCell
+                UIView.animate(withDuration: 0.1, animations: {
+                    cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+                })
+    //                checkmarkView.alpha = 1
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                UIView.animate(withDuration: 0.1, animations: {
+                    cell.highlightView.alpha = 1
+                    cell.checkmarkView.alpha = 1
+                    cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+//                        self.layoutIfNeeded()
+                })
+            
                 
         } else {
+            print("NOT")
+            collectionView.deselectItem(at: indexPath, animated: true)
             currentEditingPresentationPath = indexPath.item
             //print("false")
             //performSegue(withIdentifier: "makeNewListSegue", sender: self)
@@ -399,7 +446,7 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
             
             present(swipeViewController, animated: true, completion: nil)
             
-            collectionView.deselectItem(at: indexPath, animated: true)
+            
         }
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -407,6 +454,13 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
         if selectionMode == true {
             indexPathsSelected.remove(object: indexPath.item)
             numberOfSelected -= 1
+            let cell = collectionView.cellForItem(at: indexPath) as! ListCollectionCell
+            UIView.animate(withDuration: 0.1, animations: {
+                cell.highlightView.alpha = 0
+                cell.checkmarkView.alpha = 0
+                cell.transform = CGAffineTransform.identity
+            })
+            
             //changeNumberDelegate?.changeLabel(to: numberOfSelected)
             
         }
@@ -435,13 +489,29 @@ extension ListController {
  
     //MARK: Selection
     func deselectAllItems() {
-        print("deselc")
-        
-        for i in 0..<collectionView.numberOfSections {
-            for j in 0..<collectionView.numberOfItems(inSection: i) {
-                collectionView.deselectItem(at: IndexPath(row: j, section: i), animated: false)
+        print("deselc all items-------------")
+        print(indexPathsSelected)
+//        for i in 0..<collectionView.numberOfSections {
+//            for j in 0..<collectionView.numberOfItems(inSection: i) {
+//                collectionView.deselectItem(at: IndexPath(row: j, section: i), animated: false)
+//            }
+//        }
+        for indexP in indexPathsSelected {
+            print("indexP: \(indexP)")
+            let indexPath = IndexPath(item: indexP, section: 0)
+            
+            if let cell = collectionView.cellForItem(at: indexPath) as? ListCollectionCell {
+                UIView.animate(withDuration: 0.1, animations: {
+                    cell.highlightView.alpha = 0
+                    cell.checkmarkView.alpha = 0
+                    cell.transform = CGAffineTransform.identity
+                })
             }
+            collectionView.deselectItem(at: indexPath, animated: true)
         }
+//        indexPathsSelected.remove(object: indexPath.item)
+//        numberOfSelected -= 1
+        
 
         //fileUrlsSelected.removeAll()
         indexPathsSelected.removeAll()
@@ -451,17 +521,20 @@ extension ListController {
         switch fadeOut {
         case "fade out":
             
-            if swipedToDismiss == false {
-                SwiftEntryKit.dismiss()
-            }
-            UIView.transition(with: selectButton, duration: 0.1, options: .transitionCrossDissolve, animations: {
-              self.selectButton.setTitle("Select", for: .normal)
-            }, completion: nil)
-            UIView.animate(withDuration: 0.5, animations: {
-                self.view.layoutIfNeeded()
-            })
-            indexPathsSelected.removeAll()
             deselectAllItems()
+//            if swipedToDismiss == false {
+//                SwiftEntryKit.dismiss()
+//            } else {
+                UIView.transition(with: selectButton, duration: 0.1, options: .transitionCrossDissolve, animations: {
+                  self.selectButton.setTitle("Select", for: .normal)
+                }, completion: nil)
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.view.layoutIfNeeded()
+                })
+//            }
+            
+            
+//            indexPathsSelected.removeAll()
             
             
         case "fade in":

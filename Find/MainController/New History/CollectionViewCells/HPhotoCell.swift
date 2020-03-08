@@ -54,15 +54,21 @@ class HPhotoCell: UICollectionViewCell {
                     print("remake")
                 }
                 //cell.isSelected = false
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                     UIView.animate(withDuration: 0.1, animations: {
                         self.checkmarkView.alpha = 1
+                        self.layoutIfNeeded()
                     })
-                })
-                UIView.animate(withDuration: 0.12, animations: {
-                    self.layoutIfNeeded()
-                })
+//                })
+//                UIView.animate(withDuration: 0.1, delay: 0.05, options: .curveLinear, animations: {
+//                    self.checkmarkView.alpha = 1
+//                    self.layoutIfNeeded()
+//                }, completion: nil)
                 
+//                UIView.animate(withDuration: 0.12, animations: {
+//
+//                })
+//
                 
             } else {
                 //super.isSelected = false
@@ -75,10 +81,18 @@ class HPhotoCell: UICollectionViewCell {
                 UIView.animate(withDuration: 0.12, animations: {
                     self.layoutIfNeeded()
                 })
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
-                    UIView.animate(withDuration: 0.1, animations: {
-                        self.checkmarkView.alpha = 0
-                    })
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
+//                    UIView.animate(withDuration: 0.1, animations: {
+//                        self.checkmarkView.alpha = 0
+//                    })
+//                })
+//                UIView.animate(withDuration: 0.1, delay: 0.2, options: .curveLinear, animations: {
+//                    self.checkmarkView.alpha = 0
+//                    self.layoutIfNeeded()
+//                }, completion: nil)
+                UIView.animate(withDuration: 0.1, animations: {
+                    self.checkmarkView.alpha = 0
+                    self.layoutIfNeeded()
                 })
                 
             }
