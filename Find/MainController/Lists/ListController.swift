@@ -344,10 +344,11 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
             cell.contentsList.text = array
             cell.baseView.layer.cornerRadius = 10
             cell.highlightView.layer.cornerRadius = 10
-            
+            print("CELL FOR ITEM, \(listT.name)")
             
         }
         if indexPathsSelected.contains(indexPath.item) {
+            print("..conts")
 //            print("CONTS")
 //            cell.shouldSelect = true
 //            cell.highlightView.alpha = 1
@@ -496,19 +497,27 @@ extension ListController {
 //                collectionView.deselectItem(at: IndexPath(row: j, section: i), animated: false)
 //            }
 //        }
+        var reloadPaths = [IndexPath]()
         for indexP in indexPathsSelected {
-            print("indexP: \(indexP)")
-            let indexPath = IndexPath(item: indexP, section: 0)
             
+            
+            let indexPath = IndexPath(item: indexP, section: 0)
+            print("indexP: \(indexPath)")
+            collectionView.deselectItem(at: indexPath, animated: true)
             if let cell = collectionView.cellForItem(at: indexPath) as? ListCollectionCell {
                 UIView.animate(withDuration: 0.1, animations: {
                     cell.highlightView.alpha = 0
                     cell.checkmarkView.alpha = 0
                     cell.transform = CGAffineTransform.identity
                 })
+            } else {
+                reloadPaths.append(indexPath)
+//                collectionView.reloadItems(at: [indexPath])
+                print("Not visible")
             }
-            collectionView.deselectItem(at: indexPath, animated: true)
+            
         }
+        collectionView.reloadItems(at: reloadPaths)
 //        indexPathsSelected.remove(object: indexPath.item)
 //        numberOfSelected -= 1
         
