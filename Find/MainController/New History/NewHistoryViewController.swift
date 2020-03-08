@@ -63,6 +63,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
+    @IBOutlet var noPhotosDisplay: UIView!
     
     weak var delegate: UIAdaptivePresentationControllerDelegate?
     weak var changeNumberDelegate: ChangeNumberOfSelected?
@@ -141,35 +142,62 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             
         case "fade in":
             // Create a basic toast that appears at the top
-            var attributes = EKAttributes.bottomFloat
-            attributes.entryBackground = .color(color: .white)
-            attributes.entranceAnimation = .translation
-            attributes.exitAnimation = .translation
-            attributes.displayDuration = .infinity
-            attributes.positionConstraints.size.height = .constant(value: 50)
-            attributes.statusBar = .light
-            attributes.entryInteraction = .absorbTouches
-            attributes.lifecycleEvents.willDisappear = {
-                
-                self.fadeSelectOptions(fadeOut: "fade out")
-                self.selectButtonSelected = false
-                self.enterSelectMode(entering: false)
-            }
-            let customView = HistorySelectorView()
-            customView.buttonPressedDelegate = self
-            changeNumberDelegate = customView 
-            //selectionMode = true
-            //changeNumberDelegate?.changeLabel(to: 4)
-            SwiftEntryKit.display(entry: customView, using: attributes)
-            enterSelectMode(entering: true)
             
-            selectButton.setTitle("Cancel", for: .normal)
-            inBetweenSelect.constant = 5
-            selectAll.isHidden = false
-            UIView.animate(withDuration: 0.5, animations: {
-                self.selectAll.alpha = 1
-                self.view.layoutIfNeeded()
-            })
+            if photoCategories?.count == 0 {
+                selectButtonSelected = false
+                var attributes = EKAttributes.bottomFloat
+                attributes.entryBackground = .color(color: .white)
+                attributes.entranceAnimation = .translation
+                attributes.exitAnimation = .translation
+                attributes.displayDuration = 0.7
+                attributes.positionConstraints.size.height = .constant(value: 50)
+                attributes.statusBar = .light
+                attributes.entryInteraction = .absorbTouches
+                //let font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.light)
+                let contentView = UIView()
+                contentView.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+                contentView.layer.cornerRadius = 8
+                let subTitle = UILabel()
+                subTitle.text = "No Photos Taken Yet!"
+                contentView.addSubview(subTitle)
+                subTitle.snp.makeConstraints { (make) in
+                    make.center.equalToSuperview()
+                }
+                
+                
+                SwiftEntryKit.display(entry: contentView, using: attributes)
+                
+            } else {
+                var attributes = EKAttributes.bottomFloat
+                attributes.entryBackground = .color(color: .white)
+                attributes.entranceAnimation = .translation
+                attributes.exitAnimation = .translation
+                attributes.displayDuration = .infinity
+                attributes.positionConstraints.size.height = .constant(value: 50)
+                attributes.statusBar = .light
+                attributes.entryInteraction = .absorbTouches
+                attributes.lifecycleEvents.willDisappear = {
+                    
+                    self.fadeSelectOptions(fadeOut: "fade out")
+                    self.selectButtonSelected = false
+                    self.enterSelectMode(entering: false)
+                }
+                let customView = HistorySelectorView()
+                customView.buttonPressedDelegate = self
+                changeNumberDelegate = customView
+                //selectionMode = true
+                //changeNumberDelegate?.changeLabel(to: 4)
+                SwiftEntryKit.display(entry: customView, using: attributes)
+                enterSelectMode(entering: true)
+                
+                selectButton.setTitle("Cancel", for: .normal)
+                inBetweenSelect.constant = 5
+                selectAll.isHidden = false
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.selectAll.alpha = 1
+                    self.view.layoutIfNeeded()
+                })
+            }
             
         case "firstTimeSetup":
             selectAll.alpha = 0
@@ -299,28 +327,12 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             
             if historyModel.isHearted == true {
                 cell.heartView.alpha = 1
+                cell.pinkTintView.alpha = 1
             } else {
                 cell.heartView.alpha = 0
+                cell.pinkTintView.alpha = 0
             }
         }
-        
-//        let newInd = IndexMatcher()
-//        newInd.section = indexPath.section
-//        newInd.row = indexPath.row
-//        let url = dictOfUrls[newInd]
-//        cell.imageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-//        cell.imageView.sd_imageTransition = .fade
-//        cell.imageView.sd_setImage(with: url)
-        
-        
-//        if let photo = photoCategories?[newInd] {
-//
-//        }
-//        if photoCategories![newInd]?.isEmpty == true {
-//            cell.heartView.alpha = 0
-//            cell.addHeart(add: true)
-//        }
-        //cell.selectMode = selectionMode
         
         return cell
     }
@@ -369,21 +381,6 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             
             print("select")
             var number = 0
-//            for section in dictOfUrls.values {
-//                //let url = dictOfUrls[section]
-//                fileUrlsSelected.append(section)
-//                //cell.isSelected = true
-//                number += 1
-//            }
-//            if let photoCats = photoCategories {
-//                for photo in photoCats {
-//                    number += 1
-//                    let urlString = "\(folderURL)\(photo.filePath)"
-//                    if let newURL = URL(string: urlString) {
-////                        fileUrlsSelected.append(newURL)
-//                    }
-//                }
-//            }
             for i in 0..<collectionView.numberOfSections {
                 for j in 0..<collectionView.numberOfItems(inSection: i) {
                     let newInd = IndexPath(item: j, section: i)
@@ -402,26 +399,6 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //        cell.isHighlighted = true
         if selectionMode == true {
             print("seleeeect")
-            
-//            let indexMatcher = IndexMatcher()
-//            indexMatcher.section = indexPath.section
-//            indexMatcher.row = indexPath.item
-            
-            
-//            if let hisModel = indexToData[indexPath.section] {
-//                print("YES PATH Select")
-//                let historyModel = hisModel[indexPath.item]
-//                var urlPath = historyModel.filePath
-//                urlPath = "\(folderURL)\(urlPath)"
-//                if let finalUrl = URL(string: urlPath) {
-//                    fileUrlsSelected.append(finalUrl)
-//                }
-//            }
-                
-//            if let filePath = dictOfUrls[indexMatcher] {
-//                fileUrlsSelected.append(filePath)
-//            }
-            
             indexPathsSelected.append(indexPath)
             numberOfSelected += 1
             
@@ -538,13 +515,31 @@ extension NewHistoryViewController: ButtonPressed {
             print("find pressed delegate")
         case "heart":
             print("heart pressed delegate")
+            
+            var selectedHeartCount = 0
+            var selectedNotHeartCount = 0
             for item in indexPathsSelected {
                 let itemToEdit = indexToData[item.section]
-                if let singleItem = itemToEdit?[item.item] { ///Not very clear but ok
+                
+                if let singleItem = itemToEdit?[item.item] {///Not very clear but ok
                     
+                    if singleItem.isHearted == true {
+                        selectedHeartCount += 1
+                    } else {
+                        selectedNotHeartCount += 1
+                    }
+                }
+            }
+            var shouldHeart = true
+            if selectedHeartCount >= selectedNotHeartCount {
+                shouldHeart = false
+            }
+            for item in indexPathsSelected {
+                let itemToEdit = indexToData[item.section]
+                if let singleItem = itemToEdit?[item.item] {
                     do {
                         try realm.write {
-                            singleItem.isHearted = true
+                            singleItem.isHearted = shouldHeart
                         }
                     } catch {
                         print("Error saving category \(error)")
@@ -552,6 +547,8 @@ extension NewHistoryViewController: ButtonPressed {
                 }
             }
             collectionView.reloadItems(at: indexPathsSelected)
+            SwiftEntryKit.dismiss()
+//            collectionView.reloadItems(at: indexPathsSelected)
         case "delete":
             do {
                 try realm.write {
@@ -613,43 +610,6 @@ extension NewHistoryViewController: ButtonPressed {
 
 
 extension NewHistoryViewController {
-//    func getData() {
-//        //removeImageLocalPath
-//        clearHistoryImages()
-//    }
-//  func clearHistoryImages() {
-////    var tempLists = [HistoryModel]()
-//////    var tempInts = [Int]()
-////    var arrayOfIndexPaths = [IndexPath]()
-////    for index in photoCategories! {
-////        tempLists.append(index)
-//////        tempInts.append(inx)
-//////        arrayOfIndexPaths.append(IndexPath(item: inx, section: 0))
-////    }
-////    print("Index selected: \(indexPathsSelected)")
-//    do {
-//        try realm.write {
-//            realm.delete(photoCategories!)
-//        }
-//    } catch {
-//        print("error deleting category \(error)")
-//    }
-//
-//
-//      let fileManager = FileManager.default
-////      let tempFolderPath = NSTemporaryDirectory()
-//    print("CLEAR")
-//      do {
-//          let filePaths = try fileManager.contentsOfDirectory(atPath: folderURL.path)
-//          for filePath in filePaths {
-//            //print("alkaldasdasd")
-//            print("FILE: \(filePath)")
-//              try fileManager.removeItem(atPath: "\(folderURL)\(filePath)")
-//          }
-//      } catch {
-//          print("Could not clear temp folder: \(error)")
-//      }
-//  }
 
     func populateRealm() {
         print("POP")
@@ -675,6 +635,15 @@ extension NewHistoryViewController {
         var tempDictOfImagePaths = [Date: [URL]]()
         
         guard let photoCats = photoCategories else { print("No Cats or Error!"); return }
+        
+        if photoCats.count == 0 {
+            view.addSubview(noPhotosDisplay)
+            noPhotosDisplay.snp.makeConstraints { (make) in
+                make.center.equalToSuperview()
+                make.width.equalTo(300)
+                make.height.equalTo(300)
+            }
+        }
         for singleHist in photoCats {
             
             let splits = singleHist.filePath.components(separatedBy: "=")
@@ -718,19 +687,6 @@ extension NewHistoryViewController {
                         indexToData[index, default: [HistoryModel]()].append(newHistModel)
                         
                     }
-//                    indexToData[indexPath]
-//                    indexToData
-//                    dateToFilepaths[date, default: [URL]()].append(individualUrl)
-
-//                    do {
-//                        var photos = try Realm().objects(RealmPhoto.self)
-//                        let photo = photoCategories![indexPath]
-//
-//                    } catch {
-//                        print(error)
-//                    }
-//
-
 
                 }
             }

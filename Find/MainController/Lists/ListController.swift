@@ -101,6 +101,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
     let realm = try! Realm()
     var listCategories: Results<FindList>?
     
+    @IBOutlet var noListsDisplay: UIView!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -203,6 +204,17 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
     }
     func getData() {
         listCategories = realm.objects(FindList.self)
+        
+        
+        guard let listCats = listCategories else { print("No LISTS..... or Error!"); return }
+        if listCats.count == 0 {
+            view.addSubview(noListsDisplay)
+            noListsDisplay.snp.makeConstraints { (make) in
+                make.center.equalToSuperview()
+                make.width.equalTo(300)
+                make.height.equalTo(300)
+            }
+        }
         sortLists()
         collectionView.reloadData()
     }

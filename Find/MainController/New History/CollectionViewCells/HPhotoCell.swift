@@ -17,12 +17,16 @@ class HPhotoCell: UICollectionViewCell {
     
     @IBOutlet weak var checkmarkView: UIImageView!
     
+    @IBOutlet weak var pinkTintView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         checkmarkView.alpha = 0
         imageView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
+        }
+        pinkTintView.snp.makeConstraints { (make) in
+            make.edges.equalTo(imageView)
         }
     }
 //    override var isHighlighted: Bool {
