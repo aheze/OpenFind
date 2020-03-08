@@ -402,19 +402,13 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
             print("SEL MODE")
             indexPathsSelected.append(indexPath.item)
             numberOfSelected += 1
-            let cell = collectionView.cellForItem(at: indexPath) as! ListCollectionCell
-                UIView.animate(withDuration: 0.1, animations: {
-                    cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-                })
-    //                checkmarkView.alpha = 1
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+            if let cell = collectionView.cellForItem(at: indexPath) as? ListCollectionCell {
                 UIView.animate(withDuration: 0.1, animations: {
                     cell.highlightView.alpha = 1
                     cell.checkmarkView.alpha = 1
                     cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-//                        self.layoutIfNeeded()
                 })
-            
+            }
                 
         } else {
             print("NOT")

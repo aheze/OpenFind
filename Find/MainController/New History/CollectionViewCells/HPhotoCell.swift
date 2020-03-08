@@ -19,6 +19,8 @@ class HPhotoCell: UICollectionViewCell {
     
     @IBOutlet weak var pinkTintView: UIView!
     
+    @IBOutlet weak var highlightView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         checkmarkView.alpha = 0
@@ -26,6 +28,9 @@ class HPhotoCell: UICollectionViewCell {
             make.edges.equalToSuperview()
         }
         pinkTintView.snp.makeConstraints { (make) in
+            make.edges.equalTo(imageView)
+        }
+        highlightView.snp.makeConstraints { (make) in
             make.edges.equalTo(imageView)
         }
     }
@@ -43,61 +48,61 @@ class HPhotoCell: UICollectionViewCell {
 //            }
 //        }
 //    }
-    override var isSelected: Bool {
-        didSet {
-            print("setted")
-            if isSelected == true {
-                //super.isSelected = true
-                print("highlighted")
-                imageView.snp.remakeConstraints { (remake) in
-                    remake.edges.equalToSuperview().inset(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-                    print("remake")
-                }
-                //cell.isSelected = false
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
-                    UIView.animate(withDuration: 0.1, animations: {
-                        self.checkmarkView.alpha = 1
-                        self.layoutIfNeeded()
-                    })
-//                })
-//                UIView.animate(withDuration: 0.1, delay: 0.05, options: .curveLinear, animations: {
-//                    self.checkmarkView.alpha = 1
-//                    self.layoutIfNeeded()
-//                }, completion: nil)
-                
-//                UIView.animate(withDuration: 0.12, animations: {
-//
-//                })
-//
-                
-            } else {
-                //super.isSelected = false
-                print("not highlight")
-                imageView.snp.remakeConstraints { (remake) in
-                    remake.edges.equalToSuperview()
-                    print("remake")
-                }
-                //cell.isSelected = false
-                UIView.animate(withDuration: 0.12, animations: {
-                    self.layoutIfNeeded()
-                })
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
+//    override var isSelected: Bool {
+//        didSet {
+//            print("setted")
+//            if isSelected == true {
+//                //super.isSelected = true
+//                print("highlighted")
+//                imageView.snp.remakeConstraints { (remake) in
+//                    remake.edges.equalToSuperview().inset(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+//                    print("remake")
+//                }
+//                //cell.isSelected = false
+////                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
 //                    UIView.animate(withDuration: 0.1, animations: {
-//                        self.checkmarkView.alpha = 0
+//                        self.checkmarkView.alpha = 1
+//                        self.layoutIfNeeded()
 //                    })
+////                })
+////                UIView.animate(withDuration: 0.1, delay: 0.05, options: .curveLinear, animations: {
+////                    self.checkmarkView.alpha = 1
+////                    self.layoutIfNeeded()
+////                }, completion: nil)
+//
+////                UIView.animate(withDuration: 0.12, animations: {
+////
+////                })
+////
+//
+//            } else {
+//                //super.isSelected = false
+//                print("not highlight")
+//                imageView.snp.remakeConstraints { (remake) in
+//                    remake.edges.equalToSuperview()
+//                    print("remake")
+//                }
+//                //cell.isSelected = false
+//                UIView.animate(withDuration: 0.12, animations: {
+//                    self.layoutIfNeeded()
 //                })
-//                UIView.animate(withDuration: 0.1, delay: 0.2, options: .curveLinear, animations: {
+////                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
+////                    UIView.animate(withDuration: 0.1, animations: {
+////                        self.checkmarkView.alpha = 0
+////                    })
+////                })
+////                UIView.animate(withDuration: 0.1, delay: 0.2, options: .curveLinear, animations: {
+////                    self.checkmarkView.alpha = 0
+////                    self.layoutIfNeeded()
+////                }, completion: nil)
+//                UIView.animate(withDuration: 0.1, animations: {
 //                    self.checkmarkView.alpha = 0
 //                    self.layoutIfNeeded()
-//                }, completion: nil)
-                UIView.animate(withDuration: 0.1, animations: {
-                    self.checkmarkView.alpha = 0
-                    self.layoutIfNeeded()
-                })
-                
-            }
-        
-        }
-    }
+//                })
+//
+//            }
+//
+//        }
+//    }
     
 }

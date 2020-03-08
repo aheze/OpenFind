@@ -574,7 +574,7 @@
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OYK-gm-HWL">
                                                             <rect key="frame" x="0.0" y="0.0" width="188" height="357"/>
-                                                            <color key="backgroundColor" red="0.59655763954115726" green="0.8641212911847872" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="backgroundColor" red="0.59607843137254901" green="0.86274509803921573" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nature" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JsY-MP-aZx">
                                                             <rect key="frame" x="59" y="72" width="70" height="30"/>
@@ -1773,6 +1773,11 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="1" green="0.52311440911774498" blue="0.56441629580970498" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </view>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fAI-t1-Zma">
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.59607843137254901" green="0.86274509803921573" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </view>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="I6e-Mc-odJ" userLabel="Heart">
                                                     <rect key="frame" x="112" y="9.5" width="30" height="27.5"/>
                                                     <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1802,6 +1807,7 @@
                                         <connections>
                                             <outlet property="checkmarkView" destination="ft3-up-jcA" id="Nda-hL-3MG"/>
                                             <outlet property="heartView" destination="I6e-Mc-odJ" id="HN4-hT-UdQ"/>
+                                            <outlet property="highlightView" destination="fAI-t1-Zma" id="Euy-6Z-Hoq"/>
                                             <outlet property="imageView" destination="WmS-2Y-zaY" id="uwb-DL-3Rs"/>
                                             <outlet property="pinkTintView" destination="vGN-eQ-DgK" id="qzJ-TY-xHD"/>
                                         </connections>

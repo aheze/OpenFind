@@ -332,6 +332,27 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 cell.heartView.alpha = 0
                 cell.pinkTintView.alpha = 0
             }
+            
+            print("CELL (\(indexPath)) IS SELECTed: \(cell.isSelected)")
+            if indexPathsSelected.contains(indexPath) {
+                print("contains select")
+                UIView.animate(withDuration: 0.1, animations: {
+                    
+                    collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+                    cell.highlightView.alpha = 1
+                    cell.checkmarkView.alpha = 1
+                    cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                })
+            } else {
+                print("contains DEselect")
+                UIView.animate(withDuration: 0.1, animations: {
+//                    cell.isSelected = false
+                    collectionView.deselectItem(at: indexPath, animated: false)
+                    cell.highlightView.alpha = 0
+                    cell.checkmarkView.alpha = 0
+                    cell.transform = CGAffineTransform.identity
+                })
+            }
         }
         
         return cell
@@ -367,29 +388,66 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         if deselect == true {
             print("deselc")
             
-            for i in 0..<collectionView.numberOfSections {
-                for j in 0..<collectionView.numberOfItems(inSection: i) {
-                    collectionView.deselectItem(at: IndexPath(row: j, section: i), animated: false)
-                }
-            }
+//            for i in 0..<collectionView.numberOfSections {
+//                for j in 0..<collectionView.numberOfItems(inSection: i) {
+//                    collectionView.deselectItem(at: IndexPath(row: j, section: i), animated: false)
+//                }
+//            }
 
 //            fileUrlsSelected.removeAll()
-            indexPathsSelected.removeAll()
-            numberOfSelected = 0
             
+            numberOfSelected = 0
+            var reloadPaths = [IndexPath]()
+            for indexP in indexPathsSelected {
+                
+                
+//                let indexPath = IndexPath(item: indexP, section: 0)
+                print("indexP deselect: \(indexP)")
+                collectionView.deselectItem(at: indexP, animated: false)
+                if let cell = collectionView.cellForItem(at: indexP) as? HPhotoCell {
+                    UIView.animate(withDuration: 0.1, animations: {
+                        cell.highlightView.alpha = 0
+                        cell.checkmarkView.alpha = 0
+                        cell.transform = CGAffineTransform.identity
+                    })
+                } else {
+                    reloadPaths.append(indexP)
+    //                collectionView.reloadItems(at: [indexPath])
+                    print("Not visible")
+                }
+                
+            }
+            collectionView.reloadItems(at: reloadPaths)
+            indexPathsSelected.removeAll()
         } else {
             
             print("select")
-            var number = 0
+            var num = 0
+            var reloadPaths = [IndexPath]()
             for i in 0..<collectionView.numberOfSections {
                 for j in 0..<collectionView.numberOfItems(inSection: i) {
-                    let newInd = IndexPath(item: j, section: i)
-                    indexPathsSelected.append(newInd)
-                    number += 1
-                    collectionView.selectItem(at: IndexPath(row: j, section: i), animated: false, scrollPosition: [])
+                    num += 1
+                    let indP = IndexPath(row: j, section: i)
+                    
+    //                let indexPath = IndexPath(item: indexP, section: 0)
+                    print("indexP select: \(indP)")
+                    indexPathsSelected.append(indP)
+                    collectionView.selectItem(at: indP, animated: true, scrollPosition: [])
+                    if let cell = collectionView.cellForItem(at: indP) as? HPhotoCell {
+                        UIView.animate(withDuration: 0.1, animations: {
+                            cell.highlightView.alpha = 1
+                            cell.checkmarkView.alpha = 1
+                            cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                        })
+                    } else {
+                        reloadPaths.append(indP)
+                        print("Not visible")
+                    }
+                    
                 }
             }
-            numberOfSelected = number
+            collectionView.reloadItems(at: reloadPaths)
+            numberOfSelected = num
             
         }
     }
@@ -399,8 +457,17 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //        cell.isHighlighted = true
         if selectionMode == true {
             print("seleeeect")
-            indexPathsSelected.append(indexPath)
-            numberOfSelected += 1
+            if !indexPathsSelected.contains(indexPath) {
+                indexPathsSelected.append(indexPath)
+                numberOfSelected += 1
+                if let cell = collectionView.cellForItem(at: indexPath) as? HPhotoCell {
+                    UIView.animate(withDuration: 0.1, animations: {
+                        cell.highlightView.alpha = 1
+                        cell.checkmarkView.alpha = 1
+                        cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                    })
+                }
+            }
             
                 
         } else {
@@ -450,6 +517,13 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         if selectionMode == true {
             indexPathsSelected.remove(object: indexPath)
             numberOfSelected -= 1
+            if let cell = collectionView.cellForItem(at: indexPath) as? HPhotoCell {
+                UIView.animate(withDuration: 0.1, animations: {
+                    cell.highlightView.alpha = 0
+                    cell.checkmarkView.alpha = 0
+                    cell.transform = CGAffineTransform.identity
+                })
+            }
         }
 
         
