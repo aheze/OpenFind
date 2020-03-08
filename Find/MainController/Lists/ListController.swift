@@ -348,34 +348,53 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
             
         }
         if indexPathsSelected.contains(indexPath.item) {
-            print("..conts")
-//            print("CONTS")
-//            cell.shouldSelect = true
-//            cell.highlightView.alpha = 1
-//            cell.checkmarkView.alpha = 1
+            print("contains select")
             UIView.animate(withDuration: 0.1, animations: {
-                cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-            })
-//                checkmarkView.alpha = 1
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-            UIView.animate(withDuration: 0.1, animations: {
+                
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
                 cell.highlightView.alpha = 1
                 cell.checkmarkView.alpha = 1
                 cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-//                        self.layoutIfNeeded()
             })
         } else {
-//            cell.shouldSelect = false
-//            cell.highlightView.alpha = 0
-//            cell.checkmarkView.alpha = 0
+            print("contains DEselect")
             UIView.animate(withDuration: 0.1, animations: {
+//                    cell.isSelected = false
+                collectionView.deselectItem(at: indexPath, animated: false)
                 cell.highlightView.alpha = 0
                 cell.checkmarkView.alpha = 0
                 cell.transform = CGAffineTransform.identity
-//                    self.layoutIfNeeded()
             })
-//            print("NO CONTS")
         }
+//        if indexPathsSelected.contains(indexPath.item) {
+//            print("..conts")
+////            print("CONTS")
+////            cell.shouldSelect = true
+////            cell.highlightView.alpha = 1
+////            cell.checkmarkView.alpha = 1
+//            UIView.animate(withDuration: 0.1, animations: {
+//                cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+//            })
+////                checkmarkView.alpha = 1
+////                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+//            UIView.animate(withDuration: 0.1, animations: {
+//                cell.highlightView.alpha = 1
+//                cell.checkmarkView.alpha = 1
+//                cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+////                        self.layoutIfNeeded()
+//            })
+//        } else {
+////            cell.shouldSelect = false
+////            cell.highlightView.alpha = 0
+////            cell.checkmarkView.alpha = 0
+//            UIView.animate(withDuration: 0.1, animations: {
+//                cell.highlightView.alpha = 0
+//                cell.checkmarkView.alpha = 0
+//                cell.transform = CGAffineTransform.identity
+////                    self.layoutIfNeeded()
+//            })
+////            print("NO CONTS")
+//        }
         //cell.contentView.layer.cornerRadius = 10
         
         
