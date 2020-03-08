@@ -11,7 +11,23 @@ import UIKit
 protocol ButtonPressed: class {
     func floatButtonPressed(button: String)
 }
-class HistorySelectorView: UIView, ChangeNumberOfSelected {
+class HistorySelectorView: UIView, ChangeNumberOfSelected, ChangeAttributes {
+    
+    
+    func changeFloat(to: String) {
+        
+        switch to {
+        case "Fill Heart":
+            let newImage = UIImage(systemName: "heart.fill")
+            heartButton.setImage(newImage, for: .normal)
+        case "Unfill Heart":
+            let newImage = UIImage(systemName: "heart")
+        heartButton.setImage(newImage, for: .normal)
+        default:
+            print("WRONG STRING....")
+        }
+    }
+    
     func changeLabel(to: Int) {
         if to == 1 {
             photoSelectLabel.fadeTransition(0.1)

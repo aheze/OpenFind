@@ -17,6 +17,9 @@ protocol UpdateImageDelegate: class {
 protocol ChangeNumberOfSelected: class {
     func changeLabel(to: Int)
 }
+protocol ChangeAttributes: class {
+    func changeFloat(to: String)
+}
 class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIViewControllerTransitioningDelegate {
     
     
@@ -48,7 +51,31 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     //MARK:  Selection Variables
     //var indexPathsThatAreSelected = [IndexPath]()
 //    var fileUrlsSelected = [URL]()
-    var indexPathsSelected = [IndexPath]()
+    var indexPathsSelected = [IndexPath]() {
+        didSet {
+            var selectedHeartCount = 0
+            var selectedNotHeartCount = 0
+            for item in indexPathsSelected {
+                let itemToEdit = indexToData[item.section]
+                
+                if let singleItem = itemToEdit?[item.item] {///Not very clear but ok
+                    
+                    if singleItem.isHearted == true {
+                        selectedHeartCount += 1
+                    } else {
+                        selectedNotHeartCount += 1
+                    }
+                }
+            }
+//            var shouldHeart = true
+            if selectedHeartCount >= selectedNotHeartCount {
+//                shouldHeart = false
+                changeFloatDelegate?.changeFloat(to: "Unfill Heart")
+            } else {
+                changeFloatDelegate?.changeFloat(to: "Fill Heart")
+            }
+        }
+    }
     var selectionMode: Bool = false {
         didSet {
             print("selection mode: \(selectionMode)")
@@ -67,6 +94,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     
     weak var delegate: UIAdaptivePresentationControllerDelegate?
     weak var changeNumberDelegate: ChangeNumberOfSelected?
+    weak var changeFloatDelegate: ChangeAttributes?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -184,6 +212,9 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 }
                 let customView = HistorySelectorView()
                 customView.buttonPressedDelegate = self
+                
+                
+                changeFloatDelegate = customView
                 changeNumberDelegate = customView
                 //selectionMode = true
                 //changeNumberDelegate?.changeLabel(to: 4)
@@ -386,7 +417,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     //MARK: Selection
     func deselectAllItems(deselect: Bool) {
         if deselect == true {
-            print("deselc")
+            print("deselcccccc")
             
 //            for i in 0..<collectionView.numberOfSections {
 //                for j in 0..<collectionView.numberOfItems(inSection: i) {
@@ -643,26 +674,25 @@ extension NewHistoryViewController: ButtonPressed {
                     print("Could not delete items: \(error)")
                 }
             }
+            print("Before COLL COUNT: \(photoCategories?.count)")
             getData()
             if sectionsToDelete.count == 0 {
 //                print("0000)))")
                 collectionView.performBatchUpdates({
+                    print("COLL COUNT: \(photoCategories?.count)")
+                    print("SEL INDEX PATHS : \(indexPathsSelected)")
                     self.collectionView.deleteItems(at: indexPathsSelected)
-                }, completion: { _ in
-                    self.indexPathsSelected.removeAll()
                 })
                 
             } else {
                 collectionView.performBatchUpdates({
                     let sections = IndexSet(sectionsToDelete)
                     self.collectionView.deleteSections(sections)
-                }, completion: { _ in
-                    self.indexPathsSelected.removeAll()
                 })
             }
             
            
-            
+            indexPathsSelected.removeAll()
             SwiftEntryKit.dismiss()
 //            fadeSelectOptions(fadeOut: "fade out")
 //            selectButtonSelected = false
