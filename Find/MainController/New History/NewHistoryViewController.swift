@@ -31,7 +31,8 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
  
 
     
-    
+    //MARK: Finding
+    var shouldDismissSEK = true
     var selectedIndexPath: IndexPath!
     
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
@@ -51,8 +52,10 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     //MARK:  Selection Variables
     //var indexPathsThatAreSelected = [IndexPath]()
 //    var fileUrlsSelected = [URL]()
+    var shouldHeart = true
     var indexPathsSelected = [IndexPath]() {
         didSet {
+            print("SETTTUTUTOUTOUOUTOUT")
             var selectedHeartCount = 0
             var selectedNotHeartCount = 0
             for item in indexPathsSelected {
@@ -68,11 +71,13 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 }
             }
 //            var shouldHeart = true
-            if selectedHeartCount >= selectedNotHeartCount {
+            if selectedNotHeartCount >= selectedHeartCount {
 //                shouldHeart = false
+                shouldHeart = true
                 changeFloatDelegate?.changeFloat(to: "Unfill Heart")
             } else {
                 changeFloatDelegate?.changeFloat(to: "Fill Heart")
+                shouldHeart = false
             }
         }
     }
@@ -183,7 +188,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 attributes.entryInteraction = .absorbTouches
                 //let font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.light)
                 let contentView = UIView()
-                contentView.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+                contentView.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 contentView.layer.cornerRadius = 8
                 let subTitle = UILabel()
                 subTitle.text = "No Photos Taken Yet!"
@@ -205,10 +210,11 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 attributes.statusBar = .light
                 attributes.entryInteraction = .absorbTouches
                 attributes.lifecycleEvents.willDisappear = {
-                    
-                    self.fadeSelectOptions(fadeOut: "fade out")
-                    self.selectButtonSelected = false
-                    self.enterSelectMode(entering: false)
+                    if self.shouldDismissSEK == true {
+                        self.fadeSelectOptions(fadeOut: "fade out")
+                        self.selectButtonSelected = false
+                        self.enterSelectMode(entering: false)
+                    }
                 }
                 let customView = HistorySelectorView()
                 customView.buttonPressedDelegate = self
@@ -221,7 +227,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 SwiftEntryKit.display(entry: customView, using: attributes)
                 enterSelectMode(entering: true)
                 
-                selectButton.setTitle("Cancel", for: .normal)
+                selectButton.setTitle("Done", for: .normal)
                 inBetweenSelect.constant = 5
                 selectAll.isHidden = false
                 UIView.animate(withDuration: 0.5, animations: {
@@ -284,7 +290,12 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     override func present(_ viewControllerToPresent: UIViewController,
                           animated flag: Bool,
                           completion: (() -> Void)? = nil) {
-      viewControllerToPresent.modalPresentationStyle = .fullScreen
+        if viewControllerToPresent.title == "PhotoPageContainerViewController" {
+            print("Photo Page Con")
+            viewControllerToPresent.modalPresentationStyle = .fullScreen
+        } else {
+        print("normal")
+        }
       super.present(viewControllerToPresent, animated: flag, completion: completion)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -507,6 +518,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             
             let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
                 "PhotoPageContainerViewController") as! PhotoPageContainerViewController
+            mainContentVC.title = "PhotoPageContainerViewController"
             self.selectedIndexPath = indexPath
             mainContentVC.transitioningDelegate = mainContentVC.transitionController
             mainContentVC.transitionController.fromDelegate = self
@@ -578,6 +590,59 @@ extension NewHistoryViewController : UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension NewHistoryViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        print("Did Dismissss")
+        shouldDismissSEK = true
+        var attributes = EKAttributes.bottomFloat
+        attributes.entryBackground = .color(color: .white)
+        attributes.entranceAnimation = .translation
+        attributes.exitAnimation = .translation
+        attributes.displayDuration = .infinity
+        attributes.positionConstraints.size.height = .constant(value: 50)
+        attributes.statusBar = .light
+        attributes.entryInteraction = .absorbTouches
+        attributes.lifecycleEvents.willDisappear = {
+            if self.shouldDismissSEK == true {
+                self.fadeSelectOptions(fadeOut: "fade out")
+                self.selectButtonSelected = false
+                self.enterSelectMode(entering: false)
+            }
+        }
+        let customView = HistorySelectorView()
+        customView.buttonPressedDelegate = self
+        
+        
+        changeFloatDelegate = customView
+        changeNumberDelegate = customView
+        //selectionMode = true
+        //changeNumberDelegate?.changeLabel(to: 4)
+        
+        SwiftEntryKit.display(entry: customView, using: attributes)
+//        enterSelectMode(entering: true)
+        changeNumberDelegate?.changeLabel(to: numberOfSelected)
+//        selectButton.setTitle("Done", for: .normal)
+//        inBetweenSelect.constant = 5
+//        selectAll.isHidden = false
+//        UIView.animate(withDuration: 0.5, animations: {
+//            self.selectAll.alpha = 1
+//            self.view.layoutIfNeeded()
+//        })
+//        if cancelTimer != nil {
+//            cancelTimer!.invalidate()
+//            cancelTimer = nil
+//        }
+//        SwiftEntryKit.dismiss()
+//        currentMatchStrings.append(newSearchTextField.text ?? "")
+//        sortSearchTerms()
+//        startVideo(finish: "end")
+//       // listsCollectionView.reloadData()
+//        loadListsRealm()
+    }
+    
+}
+
+
 extension NewHistoryViewController: ButtonPressed {
     func floatButtonPressed(button: String) {
         print("button delegate")
@@ -618,6 +683,9 @@ extension NewHistoryViewController: ButtonPressed {
             print("delegate test worked")
         case "find":
             print("find pressed delegate")
+            shouldDismissSEK = false
+            SwiftEntryKit.dismiss()
+            performSegue(withIdentifier: "goToHistoryFind", sender: self)
         case "heart":
             print("heart pressed delegate")
             
@@ -635,10 +703,10 @@ extension NewHistoryViewController: ButtonPressed {
                     }
                 }
             }
-            var shouldHeart = true
-            if selectedHeartCount >= selectedNotHeartCount {
-                shouldHeart = false
-            }
+//            var shouldHeart = true
+//            if selectedHeartCount >= selectedNotHeartCount {
+//                shouldHeart = false
+//            }
             for item in indexPathsSelected {
                 let itemToEdit = indexToData[item.section]
                 if let singleItem = itemToEdit?[item.item] {
@@ -709,6 +777,16 @@ extension NewHistoryViewController: ButtonPressed {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "goToHistoryFind":
+            segue.destination.presentationController?.delegate = self
+            let destinationVC = segue.destination as! HistoryFindController
+            print("going to find hist")
+        default:
+            print("BAD PATH SEGUE ID")
+        }
+    }
     
 }
 

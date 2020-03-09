@@ -64,6 +64,7 @@
 		494DF11F23961B4E0076412D /* BDVCInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494DF11E23961B4E0076412D /* BDVCInfo.swift */; };
 		4952F0C2240B1DD00068564F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4952F0C1240B1DD00068564F /* SearchCell.swift */; };
 		4952F0C4240B1DE90068564F /* ToolbarTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4952F0C3240B1DE90068564F /* ToolbarTopCell.swift */; };
+		4953F3BE2415A14000690E53 /* HistoryFindController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953F3BD2415A14000690E53 /* HistoryFindController.swift */; };
 		49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3223D65AA4009308CA /* ListCollectionCell.swift */; };
 		49569B3523D6919E009308CA /* ListsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3423D6919E009308CA /* ListsLayout.swift */; };
 		4957157C2368AF69007BF68B /* RippleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4957157B2368AF69007BF68B /* RippleEffect.swift */; };
@@ -177,6 +178,7 @@
 		494DF11E23961B4E0076412D /* BDVCInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDVCInfo.swift; sourceTree = "<group>"; };
 		4952F0C1240B1DD00068564F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		4952F0C3240B1DE90068564F /* ToolbarTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarTopCell.swift; sourceTree = "<group>"; };
+		4953F3BD2415A14000690E53 /* HistoryFindController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFindController.swift; sourceTree = "<group>"; };
 		49569B3223D65AA4009308CA /* ListCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionCell.swift; sourceTree = "<group>"; };
 		49569B3423D6919E009308CA /* ListsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsLayout.swift; sourceTree = "<group>"; };
 		4957157B2368AF69007BF68B /* RippleEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleEffect.swift; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 			isa = PBXGroup;
 			children = (
 				49BC782B23C6E06F003D9904 /* PhotoAssigner.swift */,
+				4953F3BD2415A14000690E53 /* HistoryFindController.swift */,
 			);
 			path = HistoryFinding;
 			sourceTree = "<group>";
@@ -829,6 +832,7 @@
 				490DA75723CBB871000AF57D /* Styles.swift in Sources */,
 				49089E1F238EFFFA0070A70C /* FooterView.swift in Sources */,
 				49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */,
+				4953F3BE2415A14000690E53 /* HistoryFindController.swift in Sources */,
 				4979A39323AF3C4F00B09380 /* FastVisionHandler.swift in Sources */,
 				494DF11B23961ADA0076412D /* BDVCTranscript.swift in Sources */,
 				49585DCF23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift in Sources */,
