@@ -91,7 +91,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
                     print("default, something wrong")
             }
         
-            tempResetLists()
+//            tempResetLists()
             
         }
     func toFast() {

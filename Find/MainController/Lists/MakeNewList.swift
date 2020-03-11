@@ -92,6 +92,14 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo, 
     }
     
     @IBOutlet weak var headerView: UIView!
+    
+    
+    @IBOutlet weak var cancelButton: UIButton!
+    
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+        
+    }
     @IBOutlet weak var doneWithListButton: UIButton!
     
     @IBAction func doneWithListPressed(_ sender: Any) {
@@ -190,7 +198,8 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo, 
         
         pagingViewController.didMove(toParent: self)
         
-        doneWithListButton.layer.cornerRadius = 4
+        cancelButton.layer.cornerRadius = 6
+        doneWithListButton.layer.cornerRadius = 6
         
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
         let newImage = UIImage(systemName: iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(hexString: iconColorName), renderingMode: .alwaysOriginal)

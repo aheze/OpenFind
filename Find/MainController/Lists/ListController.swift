@@ -193,7 +193,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         collectionView.contentInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
         getData()
         collectionView.delaysContentTouches = false
-        selectButton.layer.cornerRadius = 4
+        selectButton.layer.cornerRadius = 6
        // sortLists()
         addHeight()
         print("Cellheights: \(cellHeights)")

@@ -402,10 +402,10 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         
         
         //doneWithListButton.layer.cornerRadius = 4
-        descDoneButton.layer.cornerRadius = 4
-        titlesDoneButton.layer.cornerRadius = 4
+        descDoneButton.layer.cornerRadius = 6
+        titlesDoneButton.layer.cornerRadius = 6
         
-        contentsDoneButton.layer.cornerRadius = 4
+        contentsDoneButton.layer.cornerRadius = 6
         
         placeholderLabel = UILabel()
         placeholderLabel.text = "Short description"

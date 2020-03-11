@@ -270,7 +270,7 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
         doneButton.titleEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         doneButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         doneButton.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-        doneButton.layer.cornerRadius = 4
+        doneButton.layer.cornerRadius = 6
         //doneButton.frame.size.width = CGFloat(26)
         
         doneButton.snp.makeConstraints { (make) in

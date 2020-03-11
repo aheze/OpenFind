@@ -87,8 +87,8 @@ class EditListViewController: UIViewController, GetGeneralInfo, GetIconInfo, Get
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        saveButton.layer.cornerRadius = 4
-        cancelButton.layer.cornerRadius = 4
+        saveButton.layer.cornerRadius = 6
+        cancelButton.layer.cornerRadius = 6
         setUpViews()
         
         populateGeneral?.receiveGeneral(nameOfList: name, desc: descriptionOfList, contentsOfList: contents)

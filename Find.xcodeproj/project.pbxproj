@@ -65,6 +65,11 @@
 		4952F0C2240B1DD00068564F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4952F0C1240B1DD00068564F /* SearchCell.swift */; };
 		4952F0C4240B1DE90068564F /* ToolbarTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4952F0C3240B1DE90068564F /* ToolbarTopCell.swift */; };
 		4953F3BE2415A14000690E53 /* HistoryFindController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953F3BD2415A14000690E53 /* HistoryFindController.swift */; };
+		4953F3C0241713A100690E53 /* HistoryFindCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953F3BF241713A000690E53 /* HistoryFindCell.swift */; };
+		4953F3C224171E5F00690E53 /* FindBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4953F3C124171E5F00690E53 /* FindBar.xib */; };
+		4953F3C424171EE200690E53 /* FindBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953F3C324171EE200690E53 /* FindBar.swift */; };
+		4953F3C7241733E700690E53 /* ListToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4953F3C6241733E700690E53 /* ListToolBar.xib */; };
+		4953F3C92417344900690E53 /* ListToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953F3C82417344900690E53 /* ListToolBar.swift */; };
 		49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3223D65AA4009308CA /* ListCollectionCell.swift */; };
 		49569B3523D6919E009308CA /* ListsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3423D6919E009308CA /* ListsLayout.swift */; };
 		4957157C2368AF69007BF68B /* RippleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4957157B2368AF69007BF68B /* RippleEffect.swift */; };
@@ -179,6 +184,11 @@
 		4952F0C1240B1DD00068564F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		4952F0C3240B1DE90068564F /* ToolbarTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarTopCell.swift; sourceTree = "<group>"; };
 		4953F3BD2415A14000690E53 /* HistoryFindController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFindController.swift; sourceTree = "<group>"; };
+		4953F3BF241713A000690E53 /* HistoryFindCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFindCell.swift; sourceTree = "<group>"; };
+		4953F3C124171E5F00690E53 /* FindBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FindBar.xib; sourceTree = "<group>"; };
+		4953F3C324171EE200690E53 /* FindBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindBar.swift; sourceTree = "<group>"; };
+		4953F3C6241733E700690E53 /* ListToolBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListToolBar.xib; sourceTree = "<group>"; };
+		4953F3C82417344900690E53 /* ListToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListToolBar.swift; sourceTree = "<group>"; };
 		49569B3223D65AA4009308CA /* ListCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionCell.swift; sourceTree = "<group>"; };
 		49569B3423D6919E009308CA /* ListsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsLayout.swift; sourceTree = "<group>"; };
 		4957157B2368AF69007BF68B /* RippleEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleEffect.swift; sourceTree = "<group>"; };
@@ -385,6 +395,17 @@
 			path = BottomDrawerVCs;
 			sourceTree = "<group>";
 		};
+		4953F3C5241733C200690E53 /* Toolbar */ = {
+			isa = PBXGroup;
+			children = (
+				4928525723D539F40048EC13 /* ToolbarTopCollectionView.swift */,
+				4952F0C3240B1DE90068564F /* ToolbarTopCell.swift */,
+				4953F3C6241733E700690E53 /* ListToolBar.xib */,
+				4953F3C82417344900690E53 /* ListToolBar.swift */,
+			);
+			path = Toolbar;
+			sourceTree = "<group>";
+		};
 		49585DCC23ED0B8D003AB768 /* Select List SEK */ = {
 			isa = PBXGroup;
 			children = (
@@ -491,8 +512,7 @@
 				49301BF124019D0A00B4780B /* UseLists */,
 				496937352353C1E9009CA41A /* Modes */,
 				4999AC972353A80A00AB06A7 /* ViewController.swift */,
-				4928525723D539F40048EC13 /* ToolbarTopCollectionView.swift */,
-				4952F0C3240B1DE90068564F /* ToolbarTopCell.swift */,
+				4953F3C5241733C200690E53 /* Toolbar */,
 				4999AC992353A80A00AB06A7 /* Main.storyboard */,
 				4999AC9E2353A81100AB06A7 /* LaunchScreen.storyboard */,
 				49F7B1572353FE7E0099FA62 /* Component.swift */,
@@ -593,6 +613,9 @@
 			children = (
 				49BC782B23C6E06F003D9904 /* PhotoAssigner.swift */,
 				4953F3BD2415A14000690E53 /* HistoryFindController.swift */,
+				4953F3BF241713A000690E53 /* HistoryFindCell.swift */,
+				4953F3C124171E5F00690E53 /* FindBar.xib */,
+				4953F3C324171EE200690E53 /* FindBar.swift */,
 			);
 			path = HistoryFinding;
 			sourceTree = "<group>";
@@ -695,11 +718,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				49115090236004E800EC0C04 /* Roboto-Light.ttf in Resources */,
+				4953F3C224171E5F00690E53 /* FindBar.xib in Resources */,
 				49F7B15A2354E6F60099FA62 /* data.txt in Resources */,
 				4966B71323E1252800A8523A /* ImagePickerList.xib in Resources */,
 				4999ACA02353A81100AB06A7 /* LaunchScreen.storyboard in Resources */,
 				49B7A32D2390823C0070209F /* Colors.xcassets in Resources */,
 				49BC783523C8275B003D9904 /* HistorySelect.xib in Resources */,
+				4953F3C7241733E700690E53 /* ListToolBar.xib in Resources */,
 				4999AC9D2353A81100AB06A7 /* Assets.xcassets in Resources */,
 				4999AC9B2353A80A00AB06A7 /* Main.storyboard in Resources */,
 				4928525C23D61D230048EC13 /* ListsSelect.xib in Resources */,
@@ -759,6 +784,7 @@
 				49B7A33823923EBD0070209F /* PhotoPageContainerViewController.swift in Sources */,
 				49368CA7239059A200B67C4A /* FullScreenViewController.swift in Sources */,
 				4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */,
+				4953F3C424171EE200690E53 /* FindBar.swift in Sources */,
 				49B7A32F2390DB810070209F /* ArrowView.swift in Sources */,
 				494DF11F23961B4E0076412D /* BDVCInfo.swift in Sources */,
 				490DA75023CBB871000AF57D /* AnimationConfiguration.swift in Sources */,
@@ -786,6 +812,7 @@
 				49301BF32402460000B4780B /* FancyQuotes.swift in Sources */,
 				49F7B1582353FE7E0099FA62 /* Component.swift in Sources */,
 				4957157C2368AF69007BF68B /* RippleEffect.swift in Sources */,
+				4953F3C0241713A100690E53 /* HistoryFindCell.swift in Sources */,
 				490DA74E23CBB871000AF57D /* UIView+JJFloatingActionButton.swift in Sources */,
 				490DA73F23CBAB7C000AF57D /* NewShutterButton.swift in Sources */,
 				49B7A33D2393000A0070209F /* BetaController.swift in Sources */,
@@ -798,6 +825,7 @@
 				49368CAD23905D3300B67C4A /* PulleyPassthroughScrollView.swift in Sources */,
 				492EB4F023F504BC007142CA /* PopulateSymbols.swift in Sources */,
 				49115089235D17EB00EC0C04 /* ShutterPressed.swift in Sources */,
+				4953F3C92417344900690E53 /* ListToolBar.swift in Sources */,
 				490DA74F23CBB871000AF57D /* JJFloatingActionButtonState.swift in Sources */,
 				4952F0C2240B1DD00068564F /* SearchCell.swift in Sources */,
 				49BC782223C3E1BF003D9904 /* TextViewRounded.swift in Sources */,

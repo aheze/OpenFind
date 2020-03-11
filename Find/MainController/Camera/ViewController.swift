@@ -53,38 +53,38 @@ class ViewController: UIViewController {
     
     //MARK: Toolbar
     
-    @IBOutlet weak var listsToolbarLayout: UICollectionViewFlowLayout!
+//    @IBOutlet weak var listsToolbarLayout: UICollectionViewFlowLayout!
     let realm = try! Realm()
     var listCategories: Results<FindList>?
     var editableListCategories = [EditableFindList]()
     var currentContentsOfScreen = ""
     
-    @IBOutlet weak var listsCollectionView: UICollectionView!
-    @IBOutlet weak var toolBar: UIView!
-    @IBOutlet weak var autoCompleteButton: UIButton!
-    @IBOutlet weak var cancelButtonNew: UIButton!
-    @IBOutlet weak var newMatchButton: UIButton!
-    
-    @IBAction func cancelButtonPressed(_ sender: UIButton) {
-        removeAllLists()
-    }
-    @IBAction func autocompButtonPressed(_ sender: UIButton) {
-        view.endEditing(true)
-        if insertingListsCount == 0 {
-            updateListsLayout(toType: "doneAndShrink")
-        } else {
-            isSchedulingList = true
-        }
-    }
-    @IBAction func newMatchPressed(_ sender: Any) {
-        if let searchText = newSearchTextField.text {
-            newSearchTextField.text = "\(searchText)\u{2022}"
-        }
-        
-//        if let ramText = ramReel.textField.text {
-//            ramReel.textField.text = "\(ramText)\u{2022}"
+//    @IBOutlet weak var listsCollectionView: UICollectionView!
+//    @IBOutlet weak var toolBar: UIView!
+//    @IBOutlet weak var autoCompleteButton: UIButton!
+//    @IBOutlet weak var cancelButtonNew: UIButton!
+//    @IBOutlet weak var newMatchButton: UIButton!
+//
+//    @IBAction func cancelButtonPressed(_ sender: UIButton) {
+//        removeAllLists()
+//    }
+//    @IBAction func autocompButtonPressed(_ sender: UIButton) {
+//        view.endEditing(true)
+//        if insertingListsCount == 0 {
+//            updateListsLayout(toType: "doneAndShrink")
+//        } else {
+//            isSchedulingList = true
 //        }
-    }
+//    }
+//    @IBAction func newMatchPressed(_ sender: Any) {
+//        if let searchText = newSearchTextField.text {
+//            newSearchTextField.text = "\(searchText)\u{2022}"
+//        }
+//
+////        if let ramText = ramReel.textField.text {
+////            ramReel.textField.text = "\(ramText)\u{2022}"
+////        }
+//    }
     
     //MARK: Search Bar
     
@@ -145,7 +145,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var arrowDownImage: UIImageView!
     
     var selectedLists = [EditableFindList]()
-    
+    weak var injectListDelegate: InjectLists?
     //MARK: Matches HUD
     
     var createdStatusView: Bool = false
@@ -325,8 +325,7 @@ class ViewController: UIViewController {
         
         changeDelegate = statusView as? ChangeStatusValue
         
-        let layout = listsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        
         
         
         numberLabel.isHidden = false

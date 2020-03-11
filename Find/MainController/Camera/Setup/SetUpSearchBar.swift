@@ -11,6 +11,11 @@ import ARKit
 import SnapKit
 import VideoToolbox
 
+protocol InjectLists: class {
+    func injectLists(lists: [EditableFindList])
+    func addList(list: EditableFindList)
+}
+
 /// Ramreel setup
 extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
     func setUpSearchBar() {
@@ -25,7 +30,13 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         
         newSearchTextField.layer.cornerRadius = 8
         
-        newSearchTextField.inputAccessoryView = toolBar
+        let toolbar = ListToolBar()
+        toolbar.pressedButton = self
+        toolbar.selectedList = self
+        toolbar.changedText = self
+        toolbar.frame.size = CGSize(width: deviceSize.width, height: 80)
+        print(toolbar)
+        newSearchTextField.inputAccessoryView = toolbar
         newSearchTextField.attributedPlaceholder = NSAttributedString(string: "Type here to find...",
                                                                    attributes:
                                                                    [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.8784313725, green: 0.878935039, blue: 0.878935039, alpha: 0.75)])
@@ -37,9 +48,9 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         warningLabel.alpha = 0
         warningLabel.text = "Find is paused | Duplicates are not allowed"
         
-        cancelButtonNew.layer.cornerRadius = 4
-        autoCompleteButton.layer.cornerRadius = 4
-        newMatchButton.layer.cornerRadius = 4
+//        cancelButtonNew.layer.cornerRadius = 6
+//        autoCompleteButton.layer.cornerRadius = 6
+//        newMatchButton.layer.cornerRadius = 6
 
     }
     
@@ -50,6 +61,8 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
             tempArray.append(singleList)
 //            calculateWhereToPlaceComponent(component: singleList, placeInSecondCollectionView: indP)
         }
+        
+        
         selectedLists.removeAll()
         searchCollectionView.reloadData()
         for temp in tempArray {
@@ -78,7 +91,8 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         ///Now that we know where to append the green cell, let's do it!
         editableListCategories.insert(component, at: indexPathToAppendTo)
         let newIndexPath = IndexPath(item: indexPathToAppendTo, section: 0)
-        listsCollectionView.insertItems(at: [newIndexPath])
+//        listsCollectionView.insertItems(at: [newIndexPath])
+        injectListDelegate?.addList(list: component)
 
     }
     func updateListsLayout(toType: String) {
@@ -214,13 +228,13 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
     }
 
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if selectedLists.count == 0 {
-            updateListsLayout(toType: "onlyTextBox")
-        } else {
-            updateListsLayout(toType: "addListsNow")
-        }
-    }
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        if selectedLists.count == 0 {
+//            updateListsLayout(toType: "onlyTextBox")
+//        } else {
+//            updateListsLayout(toType: "addListsNow")
+//        }
+//    }
     
 //    func textFieldDidEndEditing(_ textField: UITextField) {
 //        print("RETURN END EDIt")

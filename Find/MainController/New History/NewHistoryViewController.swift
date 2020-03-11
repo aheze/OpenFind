@@ -20,6 +20,9 @@ protocol ChangeNumberOfSelected: class {
 protocol ChangeAttributes: class {
     func changeFloat(to: String)
 }
+protocol GiveSearchPhotos: class {
+    func changeSearchPhotos(photos: [URL])
+}
 class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIViewControllerTransitioningDelegate {
     
     
@@ -100,6 +103,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     weak var delegate: UIAdaptivePresentationControllerDelegate?
     weak var changeNumberDelegate: ChangeNumberOfSelected?
     weak var changeFloatDelegate: ChangeAttributes?
+    weak var changeSearchPhotos: GiveSearchPhotos?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -209,6 +213,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 attributes.positionConstraints.size.height = .constant(value: 50)
                 attributes.statusBar = .light
                 attributes.entryInteraction = .absorbTouches
+                attributes.shadow = .active(with: .init(color: .black, opacity: 0.4, radius: 10, offset: .zero))
                 attributes.lifecycleEvents.willDisappear = {
                     if self.shouldDismissSEK == true {
                         self.fadeSelectOptions(fadeOut: "fade out")
@@ -257,8 +262,8 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         
         deselectAllItems(deselect: true)
         
-        selectButton.layer.cornerRadius = 4
-        selectAll.layer.cornerRadius = 4
+        selectButton.layer.cornerRadius = 6
+        selectAll.layer.cornerRadius = 6
         fadeSelectOptions(fadeOut: "firstTimeSetup")
         //self.transitioningDelegate = transitionDelegate
 //        let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
@@ -602,6 +607,7 @@ extension NewHistoryViewController: UIAdaptivePresentationControllerDelegate {
         attributes.positionConstraints.size.height = .constant(value: 50)
         attributes.statusBar = .light
         attributes.entryInteraction = .absorbTouches
+        attributes.shadow = .active(with: .init(color: .black, opacity: 0.4, radius: 10, offset: .zero))
         attributes.lifecycleEvents.willDisappear = {
             if self.shouldDismissSEK == true {
                 self.fadeSelectOptions(fadeOut: "fade out")
@@ -768,8 +774,8 @@ extension NewHistoryViewController: ButtonPressed {
             
             
 //            print("delete pressed delegate")
-        case "share":
-            print("share pressed delegate")
+        case "cache":
+            print("cache pressed delegate")
             
             
         default: print("unknown, bad string")
@@ -782,6 +788,17 @@ extension NewHistoryViewController: ButtonPressed {
         case "goToHistoryFind":
             segue.destination.presentationController?.delegate = self
             let destinationVC = segue.destination as! HistoryFindController
+            
+//            var arrayOfFinds
+            var modelArray = [HistoryModel]()
+            for indexPath in indexPathsSelected {
+                let itemToEdit = indexToData[indexPath.section]
+                if let singleItem = itemToEdit?[indexPath.item] {
+                    modelArray.append(singleItem)
+                }
+            }
+            destinationVC.photos = modelArray
+//            changeSearchPhotos = destinationVC
             print("going to find hist")
         default:
             print("BAD PATH SEGUE ID")

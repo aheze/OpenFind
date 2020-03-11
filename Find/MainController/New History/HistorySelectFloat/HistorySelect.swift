@@ -44,7 +44,8 @@ class HistorySelectorView: UIView, ChangeNumberOfSelected, ChangeAttributes {
     @IBOutlet weak var findButton: UIButton!
     @IBOutlet weak var heartButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var cacheButton: UIButton!
+    
     
     @IBOutlet weak var contentView: UIView!
     
@@ -63,11 +64,11 @@ class HistorySelectorView: UIView, ChangeNumberOfSelected, ChangeAttributes {
         print("delete")
         buttonPressedDelegate?.floatButtonPressed(button: "delete")
     }
-    
-    @IBAction func sharePressed(_ sender: UIButton) {
-        print("share")
-        buttonPressedDelegate?.floatButtonPressed(button: "share")
+
+    @IBAction func cachePressed(_ sender: Any) {
+        buttonPressedDelegate?.floatButtonPressed(button: "cache")
     }
+    
     
     //weak var changeNumberDelegate: ChangeNumberOfSelected?
     weak var buttonPressedDelegate: ButtonPressed?
