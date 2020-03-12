@@ -33,8 +33,10 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         let toolbar = ListToolBar()
         toolbar.pressedButton = self
         toolbar.selectedList = self
-        toolbar.changedText = self
+//        toolbar.changedText = self
+        toolbar.startedEditing = self
         toolbar.frame.size = CGSize(width: deviceSize.width, height: 80)
+        toolbar.editableListCategories = editableListCategories
         print(toolbar)
         newSearchTextField.inputAccessoryView = toolbar
         newSearchTextField.attributedPlaceholder = NSAttributedString(string: "Type here to find...",
@@ -228,13 +230,13 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
     }
 
     
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        if selectedLists.count == 0 {
-//            updateListsLayout(toType: "onlyTextBox")
-//        } else {
-//            updateListsLayout(toType: "addListsNow")
-//        }
-//    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if selectedLists.count == 0 {
+            updateListsLayout(toType: "onlyTextBox")
+        } else {
+            updateListsLayout(toType: "addListsNow")
+        }
+    }
     
 //    func textFieldDidEndEditing(_ textField: UITextField) {
 //        print("RETURN END EDIt")
@@ -316,7 +318,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         var cameAcrossSearchFieldText = [String]()
         
             print("count: \(selectedLists.count)")
-        for list in selectedLists {
+        for list in editableListCategories {
             for match in list.contents {
                 currentMatchStrings.append(match)
                 if !cameAcrossShare.contains(match.lowercased()) {
@@ -340,7 +342,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         
 //        var refreshedColors = false
         
-        for list in selectedLists {
+        for list in editableListCategories {
 //            print("contents: \(list.contents)")
 //            let newList = EditableFindList()
             

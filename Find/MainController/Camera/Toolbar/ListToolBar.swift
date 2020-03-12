@@ -24,14 +24,18 @@ protocol ToolbarButtonPressed: class {
 protocol SelectedList: class {
     func addList(list: EditableFindList)
 }
-protocol ToolbarChangedText: class {
-    func changedText(type: ToolbarTextChangeType, special: String)
+//protocol ToolbarChangedText: class {
+//    func changedText(type: ToolbarTextChangeType, special: String)
+//}
+protocol StartedEditing: class {
+    func startedEditing(start: Bool)
 }
 class ListToolBar: UIView, InjectLists {
    
     
     
     
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
 //    var selectedLists = [EditableFindList]()
     var editableListCategories = [EditableFindList]()
@@ -39,7 +43,8 @@ class ListToolBar: UIView, InjectLists {
     
     weak var pressedButton: ToolbarButtonPressed?
     weak var selectedList: SelectedList?
-    weak var changedText: ToolbarChangedText?
+//    weak var changedText: ToolbarChangedText?
+    weak var startedEditing: StartedEditing?
     
     @IBOutlet var contentView: UIView!
     
@@ -88,6 +93,11 @@ class ListToolBar: UIView, InjectLists {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
+        collectionView.register(UINib.init(nibName: "NewListToolbarCell", bundle: nil), forCellWithReuseIdentifier: "tooltopCellNew")
+        
+        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+
+        
 //        let layout =7
     }
     
@@ -113,7 +123,7 @@ extension ListToolBar: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tooltopCell", for: indexPath) as! ToolbarTopCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tooltopCellNew", for: indexPath) as! NewListToolbarCell
         //            if let list = listCategories?[indexPath.row] {
                 let list = editableListCategories[indexPath.item]
                     cell.labelText.text = list.name
@@ -168,53 +178,54 @@ extension ListToolBar: UICollectionViewDelegate, UICollectionViewDataSource {
     
 }
 extension ListToolBar {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if editableListCategories.count == 0 {
-            changedText?.changedText(type: .beganEditing, special: "onlyTextBox")
-//            updateListsLayout(toType: "onlyTextBox")
-        } else {
-            changedText?.changedText(type: .beganEditing, special: "addListsNow")
-//            updateListsLayout(toType: "addListsNow")
-        }
-        
-    }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    //        finalTextToFind = newSearchTextField.text ?? ""
-        endEditing(true)
-        
-        changedText?.changedText(type: .shouldReturn, special: "nothing")
-//            if insertingListsCount == 0 {
-//                updateListsLayout(toType: "doneAndShrink")
-//            } else {
-//                isSchedulingList = true
-//            }
-    //        print("RETURN")
-    //        print("Text: \(textField.text)")
-            return true
-        }
-        func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-            
-            changedText?.changedText(type: .changedText, special: "nothing")
-//            if let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {
-//                let splits = updatedString.components(separatedBy: "\u{2022}")
-//                let uniqueSplits = splits.uniques
-//                if uniqueSplits.count != splits.count {
-//                    print("DUPD UPD UPD UPDU PDPUDP")
-//                    resetFastHighlights()
-//                    allowSearch = false
-//                    showDuplicateAlert(show: true)
-//                } else {
-//                    showDuplicateAlert(show: false)
-//                    allowSearch = true
-//                    finalTextToFind = updatedString
-//                    sortSearchTerms()
-//                }
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        startedEditing?.startedEditing(start: true)
+////        if editableListCategories.count == 0 {
+////            changedText?.changedText(type: .beganEditing, special: "onlyTextBox")
+//////            updateListsLayout(toType: "onlyTextBox")
+////        } else {
+////            changedText?.changedText(type: .beganEditing, special: "addListsNow")
+//////            updateListsLayout(toType: "addListsNow")
+////        }
 //
-//            }
-            
-            
-            return true
-        }
+//    }
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//    //        finalTextToFind = newSearchTextField.text ?? ""
+//        endEditing(true)
+//        startedEditing?.startedEditing(start: false)
+////        changedText?.changedText(type: .shouldReturn, special: "nothing")
+////            if insertingListsCount == 0 {
+////                updateListsLayout(toType: "doneAndShrink")
+////            } else {
+////                isSchedulingList = true
+////            }
+//    //        print("RETURN")
+//    //        print("Text: \(textField.text)")
+//            return true
+//        }
+//        func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//
+////            changedText?.changedText(type: .changedText, special: "nothing")
+////            if let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {
+////                let splits = updatedString.components(separatedBy: "\u{2022}")
+////                let uniqueSplits = splits.uniques
+////                if uniqueSplits.count != splits.count {
+////                    print("DUPD UPD UPD UPDU PDPUDP")
+////                    resetFastHighlights()
+////                    allowSearch = false
+////                    showDuplicateAlert(show: true)
+////                } else {
+////                    showDuplicateAlert(show: false)
+////                    allowSearch = true
+////                    finalTextToFind = updatedString
+////                    sortSearchTerms()
+////                }
+////
+////            }
+//
+//
+//            return true
+//        }
 //        func showDuplicateAlert(show: Bool) {
 //            if show == true {
 //

@@ -8,7 +8,11 @@
 
 import UIKit
 
-extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, SelectedList, ToolbarChangedText {
+extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, SelectedList, StartedEditing {
+    
+    
+    
+    
 
     
     func buttonPressed(button: ToolbarButtonType) {
@@ -23,18 +27,65 @@ extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, Sele
     }
     
     func addList(list: EditableFindList) {
-        editableListCategories.insert(list, at: 0)
+        print("add1")
+        selectedLists.insert(list, at: 0)
+//        let indP = IndexPath(item: 0, section: 0)
+        
+        if selectedLists.count <= 1 {
+            updateListsLayout(toType: "addListsNow")
+        }
+        print("add2")
+//            selectedLists.insert(newList, at: 0)
+//            print(selectedLists)
+    
+            let indexP = IndexPath(item: 0, section: 0)
+            searchCollectionView.performBatchUpdates({
+                print("add3")
+                self.searchCollectionView.insertItems(at: [indexP])
+                self.insertingListsCount += 1
+            }, completion: { _ in
+                self.insertingListsCount -= 1
+                if self.isSchedulingList == true {
+                    if self.insertingListsCount == 0 {
+                        self.isSchedulingList = false
+                        self.updateListsLayout(toType: "doneAndShrink")
+                    }
+                }
+            })
+    
+    //            listViewCollectionView.insertItems(at: [indexP])
+    
+//            editableListCategories.remove(at: indexPath.item)
+//            listsCollectionView.deleteItems(at: [indexPath])
+//            if selectedLists.count <= 1 {
+//                updateListsLayout(toType: "addListsNow")
+//            }
+            
+        print("add14")
+        print("add121")
+            sortSearchTerms()
+//        searchCollectionView.insertItems(at: [indP])
     }
     
-    func changedText(type: ToolbarTextChangeType, special: String) {
-        print("change")
+//    func changedText(type: ToolbarTextChangeType, special: String) {
+//        print("change")
+//    }
+    func startedEditing(start: Bool) {
+        if start == true {
+            if selectedLists.count == 0 {
+                updateListsLayout(toType: "onlyTextBox")
+            } else {
+                updateListsLayout(toType: "addListsNow")
+            }
+        } else {
+            updateListsLayout(toType: "doneAndShrink")
+        }
     }
-    
     
     func tempResetLists() {
 
 //        selectedLists.removeAll()
-        editableListCategories.removeAll()
+        selectedLists.removeAll()
         searchCollectionView.performBatchUpdates({
             searchCollectionView.reloadData()
         }, completion: nil)
@@ -91,11 +142,11 @@ extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, Sele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView.tag == 100100 {
-            return editableListCategories.count
-        } else { ///The search bar 100101
+//        if collectionView.tag == 100100 {
             return selectedLists.count
-        }
+//        } else { ///The search bar 100101
+//            return selectedLists.count
+//        }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 //        var cell = UICollectionViewCell()

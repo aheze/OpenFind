@@ -117,6 +117,8 @@
 		49BC783523C8275B003D9904 /* HistorySelect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49BC783323C8275A003D9904 /* HistorySelect.xib */; };
 		49BC783623C8275B003D9904 /* HistorySelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC783423C8275B003D9904 /* HistorySelect.swift */; };
 		49BC783923C8C7AB003D9904 /* HistoryStartSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC783823C8C7AB003D9904 /* HistoryStartSelection.swift */; };
+		49D985B024188CA4005F4E92 /* NewListToolbarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985AE24188CA4005F4E92 /* NewListToolbarCell.swift */; };
+		49D985B124188CA4005F4E92 /* NewListToolbarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49D985AF24188CA4005F4E92 /* NewListToolbarCell.xib */; };
 		49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */; };
 		49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1552353FE4B0099FA62 /* BasicSetup.swift */; };
 		49F7B1582353FE7E0099FA62 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1572353FE7E0099FA62 /* Component.swift */; };
@@ -238,6 +240,8 @@
 		49BC783323C8275A003D9904 /* HistorySelect.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistorySelect.xib; sourceTree = "<group>"; };
 		49BC783423C8275B003D9904 /* HistorySelect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistorySelect.swift; sourceTree = "<group>"; };
 		49BC783823C8C7AB003D9904 /* HistoryStartSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStartSelection.swift; sourceTree = "<group>"; };
+		49D985AE24188CA4005F4E92 /* NewListToolbarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListToolbarCell.swift; sourceTree = "<group>"; };
+		49D985AF24188CA4005F4E92 /* NewListToolbarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewListToolbarCell.xib; sourceTree = "<group>"; };
 		49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		49F7B1552353FE4B0099FA62 /* BasicSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSetup.swift; sourceTree = "<group>"; };
 		49F7B1572353FE7E0099FA62 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
@@ -402,6 +406,8 @@
 				4952F0C3240B1DE90068564F /* ToolbarTopCell.swift */,
 				4953F3C6241733E700690E53 /* ListToolBar.xib */,
 				4953F3C82417344900690E53 /* ListToolBar.swift */,
+				49D985AE24188CA4005F4E92 /* NewListToolbarCell.swift */,
+				49D985AF24188CA4005F4E92 /* NewListToolbarCell.xib */,
 			);
 			path = Toolbar;
 			sourceTree = "<group>";
@@ -719,6 +725,7 @@
 			files = (
 				49115090236004E800EC0C04 /* Roboto-Light.ttf in Resources */,
 				4953F3C224171E5F00690E53 /* FindBar.xib in Resources */,
+				49D985B124188CA4005F4E92 /* NewListToolbarCell.xib in Resources */,
 				49F7B15A2354E6F60099FA62 /* data.txt in Resources */,
 				4966B71323E1252800A8523A /* ImagePickerList.xib in Resources */,
 				4999ACA02353A81100AB06A7 /* LaunchScreen.storyboard in Resources */,
@@ -856,6 +863,7 @@
 				490DA75923CBB871000AF57D /* JJCircleView.swift in Sources */,
 				4917CE8123C059F6002EA20B /* StartSceneView.swift in Sources */,
 				495ECCA9238CF7BD00E7D966 /* HPhotoCell.swift in Sources */,
+				49D985B024188CA4005F4E92 /* NewListToolbarCell.swift in Sources */,
 				4904524E2379DB270046570D /* HistoryViewController.swift in Sources */,
 				490DA75723CBB871000AF57D /* Styles.swift in Sources */,
 				49089E1F238EFFFA0070A70C /* FooterView.swift in Sources */,
