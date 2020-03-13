@@ -19,10 +19,20 @@ extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, Sele
         switch button {
         case .removeAll:
             print("startEdit")
+            removeAllLists()
         case .newMatch:
+             if let searchText = newSearchTextField.text {
+                    newSearchTextField.text = "\(searchText)\u{2022}"
+                }
             print("return")
         case .done:
-            print("changed text")
+            view.endEditing(true)
+            if insertingListsCount == 0 {
+                updateListsLayout(toType: "doneAndShrink")
+            } else {
+                isSchedulingList = true
+            }
+//            print("changed text")
         }
     }
     
@@ -243,6 +253,9 @@ extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, Sele
         if searchShrunk == false {
             print("pressed search cell")
             let list = selectedLists[indexPath.item]
+            
+            selectedLists.remove(at: indexPath.item)
+            searchCollectionView.deleteItems(at: [indexPath])
 //            calculateWhereToPlaceComponent(component: list, placeInSecondCollectionView: indexPath)
             
             if selectedLists.count == 0 {
@@ -262,6 +275,13 @@ extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, Sele
         
 //            newList.contents = contents
         } else {
+            newSearchTextField.becomeFirstResponder()
+            if selectedLists.count == 0 {
+                updateListsLayout(toType: "onlyTextBox")
+            } else {
+                updateListsLayout(toType: "addListsNow")
+            }
+//            upda
             //focus cell
         }
         

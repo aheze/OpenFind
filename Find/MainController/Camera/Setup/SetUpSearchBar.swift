@@ -12,7 +12,6 @@ import SnapKit
 import VideoToolbox
 
 protocol InjectLists: class {
-    func injectLists(lists: [EditableFindList])
     func addList(list: EditableFindList)
 }
 
@@ -35,7 +34,11 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         toolbar.selectedList = self
 //        toolbar.changedText = self
         toolbar.startedEditing = self
+        injectListDelegate = toolbar
+        
+        
         toolbar.frame.size = CGSize(width: deviceSize.width, height: 80)
+//        toolbar.origCategories = editableListCategories
         toolbar.editableListCategories = editableListCategories
         print(toolbar)
         newSearchTextField.inputAccessoryView = toolbar
@@ -68,7 +71,8 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         selectedLists.removeAll()
         searchCollectionView.reloadData()
         for temp in tempArray {
-            calculateWhereToInsert(component: temp)
+            injectListDelegate?.addList(list: temp)
+//            calculateWhereToInsert(component: temp)
         }
 //        if insertingListsCount == 0 {
 //            updateListsLayout(toType: "doneAndShrink")
@@ -78,25 +82,25 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         updateListsLayout(toType: "removeListsNow")
         sortSearchTerms()
     }
-    func calculateWhereToInsert(component: EditableFindList) {
-        let componentOrderID = component.orderIdentifier
-//        print("calc")
-        var indexPathToAppendTo = 0
-        for (index, singleComponent) in editableListCategories.enumerated() {
-            ///We are going to check if the singleComponent's order identifier is smaller than componentOrderID.
-            ///If it is smaller, we know we must insert the cell ONE to the right of this indexPath.
-            if singleComponent.orderIdentifier < componentOrderID {
-                indexPathToAppendTo = index + 1
-            }
-        }
-//        print("index... \(indexPathToAppendTo)")
-        ///Now that we know where to append the green cell, let's do it!
-        editableListCategories.insert(component, at: indexPathToAppendTo)
-        let newIndexPath = IndexPath(item: indexPathToAppendTo, section: 0)
-//        listsCollectionView.insertItems(at: [newIndexPath])
-        injectListDelegate?.addList(list: component)
-
-    }
+//    func calculateWhereToInsert(component: EditableFindList) {
+//        let componentOrderID = component.orderIdentifier
+////        print("calc")
+//        var indexPathToAppendTo = 0
+//        for (index, singleComponent) in editableListCategories.enumerated() {
+//            ///We are going to check if the singleComponent's order identifier is smaller than componentOrderID.
+//            ///If it is smaller, we know we must insert the cell ONE to the right of this indexPath.
+//            if singleComponent.orderIdentifier < componentOrderID {
+//                indexPathToAppendTo = index + 1
+//            }
+//        }
+////        print("index... \(indexPathToAppendTo)")
+//        ///Now that we know where to append the green cell, let's do it!
+//        editableListCategories.insert(component, at: indexPathToAppendTo)
+//        let newIndexPath = IndexPath(item: indexPathToAppendTo, section: 0)
+////        listsCollectionView.insertItems(at: [newIndexPath])
+//        injectListDelegate?.addList(list: component)
+//
+//    }
     func updateListsLayout(toType: String) {
         
         switch toType {
@@ -318,7 +322,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         var cameAcrossSearchFieldText = [String]()
         
             print("count: \(selectedLists.count)")
-        for list in editableListCategories {
+        for list in selectedLists {
             for match in list.contents {
                 currentMatchStrings.append(match)
                 if !cameAcrossShare.contains(match.lowercased()) {
@@ -342,7 +346,7 @@ extension ViewController: UICollectionViewDelegate, UITextFieldDelegate, UIColle
         
 //        var refreshedColors = false
         
-        for list in editableListCategories {
+        for list in selectedLists {
 //            print("contents: \(list.contents)")
 //            let newList = EditableFindList()
             

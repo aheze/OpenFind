@@ -38,6 +38,8 @@ class ListToolBar: UIView, InjectLists {
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
 //    var selectedLists = [EditableFindList]()
+     
+//    var origCategories = [EditableFindList]()
     var editableListCategories = [EditableFindList]()
     
     
@@ -101,12 +103,13 @@ class ListToolBar: UIView, InjectLists {
 //        let layout =7
     }
     
-    func injectLists(lists: [EditableFindList]) {
-        editableListCategories = lists
-        collectionView.reloadData()
-    }
+//    func injectLists(lists: [EditableFindList]) {
+//        editableListCategories = lists
+//        collectionView.reloadData()
+//    }
     
     func addList(list: EditableFindList) {
+        print("add")
         calculateWhereToInsert(component: list)
     }
     
@@ -248,7 +251,7 @@ extension ListToolBar {
 
         func calculateWhereToInsert(component: EditableFindList) {
             let componentOrderID = component.orderIdentifier
-    //        print("calc")
+            print("calc")
             var indexPathToAppendTo = 0
             for (index, singleComponent) in editableListCategories.enumerated() {
                 ///We are going to check if the singleComponent's order identifier is smaller than componentOrderID.
