@@ -95,11 +95,28 @@ extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, Sele
     func tempResetLists() {
 
 //        selectedLists.removeAll()
+//        selectedLists.removeAll()
+        
+        
+        var tempArray = [EditableFindList]()
+        for singleList in selectedLists {
+//            let indP = IndexPath(item: index, section: 0)
+            tempArray.append(singleList)
+//            calculateWhereToPlaceComponent(component: singleList, placeInSecondCollectionView: indP)
+        }
+        
+        
         selectedLists.removeAll()
+        searchCollectionView.reloadData()
+        for temp in tempArray {
+            injectListDelegate?.addList(list: temp)
+//            calculateWhereToInsert(component: temp)
+        }
         searchCollectionView.performBatchUpdates({
             searchCollectionView.reloadData()
         }, completion: nil)
-
+        
+//        selectedLists.removeAll()
 //        injectListDelegate?.
 //        listsCollectionView.performBatchUpdates({
 //            listsCollectionView.reloadData()
@@ -172,28 +189,41 @@ extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, Sele
             cell.layer.cornerRadius = 6
 //                var newLabelFrame = cell.nameLabel.frame
 //                print(newLabelFrame)
+            cell.nameLabel.text = list.name
+//            cell.nameLabel.textAlignment = .natural
             print("cont size: \(cell.nameLabel.intrinsicContentSize)")
             if searchShrunk == true {
                // print("SHRINK MODE")
-                cell.nameLabel.text = ""
-                cell.labelRightC.constant = 0
+//                cell.nameLabel.text = ""
+//                cell.labelRightC.constant = 0
+//                cell.labelWidthC.constant = 0
+                cell.imageRightC.constant = 8
 //                    newLabelFrame.size.width = 0
 //                    cell.labelWidth.constant = 0
                 print("cont size: \(cell.nameLabel.intrinsicContentSize)")
+                UIView.animate(withDuration: 0.3, animations: {
+    
+                    cell.nameLabel.alpha = 0
+    //                    cell.nameLabel.frame = newLabelFrame
+                    cell.layoutIfNeeded()
+                })
             } else {
               //  print("EXPAND MODE")
-                cell.nameLabel.text = list.name
-                cell.labelRightC.constant = 8
+                
+//                cell.labelRightC.constant = 8
+                cell.imageRightC.constant = cell.nameLabel.intrinsicContentSize.width + 16
 //                    newLabelFrame.size.width = cell.nameLabel.intrinsicContentSize.width
 //                    cell.labelWidth.constant = cell.nameLabel.intrinsicContentSize.width
                 print("cont size: \(cell.nameLabel.intrinsicContentSize)")
+                UIView.animate(withDuration: 0.3, animations: {
+        
+                        cell.nameLabel.alpha = 1
+        //                    cell.nameLabel.frame = newLabelFrame
+                        cell.layoutIfNeeded()
+                    })
             }
             
-            UIView.animate(withDuration: 0.3, animations: {
-                
-//                    cell.nameLabel.frame = newLabelFrame
-                cell.layoutIfNeeded()
-            })
+
             
             let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 10, weight: .semibold)
             let newImage = UIImage(systemName: list.iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor.white, renderingMode: .alwaysOriginal)

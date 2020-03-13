@@ -18,15 +18,16 @@ class SearchCell: UICollectionViewCell {
     
     @IBOutlet weak var labelRightC: NSLayoutConstraint!
     
+    @IBOutlet weak var imageRightC: NSLayoutConstraint!
     //forces the system to do one layout pass
-    var isHeightCalculated: Bool = false
-    
-    var autoWidth = true
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        print("reuse! search cell")
-//        NotificationCenter.default.removeObserver(self)
-    }
+//    var isHeightCalculated: Bool = false
+//
+//    var autoWidth = true
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        print("reuse! search cell")
+////        NotificationCenter.default.removeObserver(self)
+//    }
     
 //    @objc func changeWidth(_ notification: Notification) {
 //      //  print("receive highlight string errors")

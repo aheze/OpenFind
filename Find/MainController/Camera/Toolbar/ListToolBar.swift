@@ -98,6 +98,11 @@ class ListToolBar: UIView, InjectLists {
         collectionView.register(UINib.init(nibName: "NewListToolbarCell", bundle: nil), forCellWithReuseIdentifier: "tooltopCellNew")
         
         flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        
+        removeAllButton.layer.cornerRadius = 6
+        newMatchButton.layer.cornerRadius = 6
+        doneButton.layer.cornerRadius = 6
+        
 
         
 //        let layout =7

@@ -226,7 +226,7 @@
                                                                 <constraint firstAttribute="width" constant="39" id="y2o-MM-OvW"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yga-Xu-zab">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yga-Xu-zab">
                                                             <rect key="frame" x="55" y="8" width="52.5" height="39"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -234,9 +234,9 @@
                                                         </label>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="Yga-Xu-zab" firstAttribute="leading" secondItem="mAF-7K-b7m" secondAttribute="trailing" constant="8" id="HDM-Ck-KLQ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="mAF-7K-b7m" secondAttribute="trailing" constant="68.5" id="32D-Uk-J0f"/>
                                                         <constraint firstItem="Yga-Xu-zab" firstAttribute="top" secondItem="A9m-Qy-QTN" secondAttribute="top" constant="8" id="LJg-FC-ATx"/>
-                                                        <constraint firstAttribute="trailing" secondItem="Yga-Xu-zab" secondAttribute="trailing" constant="8" id="LdH-uV-Wq6"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Yga-Xu-zab" secondAttribute="trailing" constant="8" id="LdH-uV-Wq6"/>
                                                         <constraint firstItem="mAF-7K-b7m" firstAttribute="leading" secondItem="A9m-Qy-QTN" secondAttribute="leading" constant="8" id="Lxd-x1-zFf"/>
                                                         <constraint firstAttribute="bottom" secondItem="Yga-Xu-zab" secondAttribute="bottom" constant="8" id="Yhd-xw-IWD"/>
                                                         <constraint firstAttribute="bottom" secondItem="mAF-7K-b7m" secondAttribute="bottom" constant="8" id="ZuJ-nI-WXI"/>
@@ -244,6 +244,7 @@
                                                     </constraints>
                                                 </collectionViewCellContentView>
                                                 <connections>
+                                                    <outlet property="imageRightC" destination="32D-Uk-J0f" id="cvZ-fV-rEY"/>
                                                     <outlet property="imageView" destination="mAF-7K-b7m" id="GQ5-C3-8Y5"/>
                                                     <outlet property="labelRightC" destination="LdH-uV-Wq6" id="Imc-p9-n2Z"/>
                                                     <outlet property="nameLabel" destination="Yga-Xu-zab" id="Mmd-4C-eDS"/>
