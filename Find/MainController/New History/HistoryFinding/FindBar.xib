@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -10,8 +10,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FindBar" customModule="Find" customModuleProvider="target">
             <connections>
+                <outlet property="collViewRightC" destination="Nha-Fk-uiY" id="BGU-RP-FW9"/>
+                <outlet property="collectionView" destination="gXF-Fe-JCy" id="VtQ-jX-MAl"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="bof-pU-8Gv"/>
-                <outlet property="searchBar" destination="80A-e1-lop" id="X8k-ti-xiz"/>
+                <outlet property="searchField" destination="u2b-1R-lPC" id="k3L-vR-fNs"/>
+                <outlet property="searchLeftC" destination="L1M-yz-yPg" id="Vsz-ql-fkW"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -19,21 +22,50 @@
             <rect key="frame" x="0.0" y="0.0" width="443" height="83"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" placeholder="Type here to find" translatesAutoresizingMaskIntoConstraints="NO" id="80A-e1-lop">
-                    <rect key="frame" x="8" y="8" width="427" height="67"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="gXF-Fe-JCy">
+                    <rect key="frame" x="16" y="24" width="411" height="35"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="qTM-8u-BPg"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="3" minimumInteritemSpacing="3" id="W9l-Sc-Evr">
+                        <size key="itemSize" width="35" height="35"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
                     <connections>
-                        <outlet property="delegate" destination="-1" id="hDV-h6-3KE"/>
+                        <outlet property="dataSource" destination="-1" id="uUZ-Ab-RU7"/>
+                        <outlet property="delegate" destination="-1" id="Hgt-9d-hmc"/>
                     </connections>
-                </searchBar>
+                </collectionView>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type here to find" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="u2b-1R-lPC" customClass="TextField" customModule="Find" customModuleProvider="target">
+                    <rect key="frame" x="16" y="24" width="411" height="35"/>
+                    <color key="backgroundColor" name="Gray1"/>
+                    <color key="tintColor" name="FeedbackGradientLeft"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="ZQF-Ry-GAu"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="yes" keyboardAppearance="alert" returnKeyType="search"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="insetX">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="3K9-SL-pvY"/>
+                    </connections>
+                </textField>
             </subviews>
             <color key="backgroundColor" name="Gray3"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="80A-e1-lop" secondAttribute="bottom" constant="8" id="5xZ-0u-oMb"/>
-                <constraint firstItem="80A-e1-lop" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="DDV-Z6-UlX"/>
-                <constraint firstItem="80A-e1-lop" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Xha-VH-22f"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="80A-e1-lop" secondAttribute="trailing" constant="8" id="p8P-AS-aQ4"/>
+                <constraint firstItem="gXF-Fe-JCy" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="8BO-9z-g6N"/>
+                <constraint firstItem="u2b-1R-lPC" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="G2v-lT-G0Z"/>
+                <constraint firstItem="u2b-1R-lPC" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="L1M-yz-yPg"/>
+                <constraint firstAttribute="trailing" secondItem="gXF-Fe-JCy" secondAttribute="trailing" constant="16" id="Nha-Fk-uiY"/>
+                <constraint firstItem="gXF-Fe-JCy" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="f0j-bw-78u"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="u2b-1R-lPC" secondAttribute="trailing" constant="16" id="ngS-K6-6tM"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
@@ -43,6 +75,12 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="FeedbackGradientLeft">
+            <color red="0.0" green="0.68199998140335083" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Gray1">
+            <color white="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </namedColor>
         <namedColor name="Gray3">
             <color white="0.85000002384185791" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>
