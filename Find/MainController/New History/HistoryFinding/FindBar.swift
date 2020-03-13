@@ -135,13 +135,13 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
             injectListDelegate?.addList(list: temp)
 //            calculateWhereToInsert(component: temp)
         }
-        print("remove")
+//        print("remove")
     }
     
     func addList(list: EditableFindList) {
-//        let insertPosition = selectedLists.count
-//        selectedLists.append(list)
-        selectedLists.insert(list, at: 0)
+        let insertPosition = selectedLists.count
+        selectedLists.append(list)
+//        selectedLists.insert(list, at: 0)
         
         let newImage = UIImage(systemName: list.iconImageName)?.withTintColor(UIColor(hexString: list.iconColorName))
         let newToken = UISearchToken(icon: newImage, text: list.name)
@@ -149,7 +149,7 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         newToken.representedObject = list
 //        purchasesToken.c
 
-        searchBar.searchTextField.insertToken(newToken, at: 0)
+        searchBar.searchTextField.insertToken(newToken, at: insertPosition)
 //        if selectedLists.count <= 1 {
 //            updateListsLayout(toType: "addListsNow")
 //        }
@@ -203,7 +203,7 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
                 editableListCategories.append(editList)
             }
         }
-        print("Loading lists")
+//        print("Loading lists")
         for singL in editableListCategories {
             print(singL.name)
         }
@@ -212,7 +212,7 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("Change123123, \(searchText)")
+//        print("Change123123, \(searchText)")
         var tokenLists = [EditableFindList]()
         
         searchBar.searchTextField.tokens.forEach {
@@ -237,7 +237,7 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
             injectListDelegate?.addList(list: list)
         }
         tempLists.forEach { list in
-            print("DELELE: \(list.name)")
+//            print("DELELE: \(list.name)")
             selectedLists.remove(object: list)
         }
 //        let tokens = searchBar.searchTextField.tokens
