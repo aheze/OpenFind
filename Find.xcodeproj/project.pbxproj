@@ -119,6 +119,8 @@
 		49BC783923C8C7AB003D9904 /* HistoryStartSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC783823C8C7AB003D9904 /* HistoryStartSelection.swift */; };
 		49D985B024188CA4005F4E92 /* NewListToolbarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985AE24188CA4005F4E92 /* NewListToolbarCell.swift */; };
 		49D985B124188CA4005F4E92 /* NewListToolbarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49D985AF24188CA4005F4E92 /* NewListToolbarCell.xib */; };
+		49D985B4241B374B005F4E92 /* CachingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985B3241B374B005F4E92 /* CachingViewController.swift */; };
+		49D985B6241B3847005F4E92 /* CacheCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985B5241B3847005F4E92 /* CacheCell.swift */; };
 		49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */; };
 		49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1552353FE4B0099FA62 /* BasicSetup.swift */; };
 		49F7B1582353FE7E0099FA62 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1572353FE7E0099FA62 /* Component.swift */; };
@@ -242,6 +244,8 @@
 		49BC783823C8C7AB003D9904 /* HistoryStartSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStartSelection.swift; sourceTree = "<group>"; };
 		49D985AE24188CA4005F4E92 /* NewListToolbarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListToolbarCell.swift; sourceTree = "<group>"; };
 		49D985AF24188CA4005F4E92 /* NewListToolbarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewListToolbarCell.xib; sourceTree = "<group>"; };
+		49D985B3241B374B005F4E92 /* CachingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingViewController.swift; sourceTree = "<group>"; };
+		49D985B5241B3847005F4E92 /* CacheCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheCell.swift; sourceTree = "<group>"; };
 		49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		49F7B1552353FE4B0099FA62 /* BasicSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSetup.swift; sourceTree = "<group>"; };
 		49F7B1572353FE7E0099FA62 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
@@ -617,6 +621,7 @@
 		49BC782A23C6DFB6003D9904 /* HistoryFinding */ = {
 			isa = PBXGroup;
 			children = (
+				49D985B2241B3736005F4E92 /* Caching */,
 				49BC782B23C6E06F003D9904 /* PhotoAssigner.swift */,
 				4953F3BD2415A14000690E53 /* HistoryFindController.swift */,
 				4953F3BF241713A000690E53 /* HistoryFindCell.swift */,
@@ -645,6 +650,15 @@
 				49089E1E238EFFFA0070A70C /* FooterView.swift */,
 			);
 			path = CollectionViewCells;
+			sourceTree = "<group>";
+		};
+		49D985B2241B3736005F4E92 /* Caching */ = {
+			isa = PBXGroup;
+			children = (
+				49D985B3241B374B005F4E92 /* CachingViewController.swift */,
+				49D985B5241B3847005F4E92 /* CacheCell.swift */,
+			);
+			path = Caching;
 			sourceTree = "<group>";
 		};
 		D0464F2926E9ACFCA3CD293D /* Frameworks */ = {
@@ -777,6 +791,7 @@
 				49B7A33523923E810070209F /* ZoomDismissalInteractionController.swift in Sources */,
 				49BC782F23C6E473003D9904 /* addHeart.swift in Sources */,
 				49325C1323CAE84500A771A3 /* StatusView.swift in Sources */,
+				49D985B6241B3847005F4E92 /* CacheCell.swift in Sources */,
 				494DF11923961AC90076412D /* BDVCFind.swift in Sources */,
 				490DA75A23CBB871000AF57D /* LayerProperties.swift in Sources */,
 				4928525A23D617270048EC13 /* ListController.swift in Sources */,
@@ -841,6 +856,7 @@
 				4928526023D61F570048EC13 /* ListSelect.swift in Sources */,
 				4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */,
 				490DA75223CBB871000AF57D /* JJFloatingActionButton.swift in Sources */,
+				49D985B4241B374B005F4E92 /* CachingViewController.swift in Sources */,
 				49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */,
 				4991344E236FDF1300B82E46 /* SettingsViewController.swift in Sources */,
 				490DA75623CBB871000AF57D /* JJFloatingActionButton+Placement.swift in Sources */,

@@ -67,6 +67,7 @@ class FindBar: UIView, UISearchBarDelegate {
         toolbar.startedEditing = self
                 
         searchBar.inputAccessoryView = toolbar
+        searchBar.searchTextField.tokenBackgroundColor = UIColor(named: "FeedbackGradientLeft")
         
         
         
@@ -75,27 +76,7 @@ class FindBar: UIView, UISearchBarDelegate {
         
 //        searchBar.layer.cornerRadius = 5
     }
-//    public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-//            searchBar.setShowsCancelButton(true, animated: true)
-//        }
-//
-//        public func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
-//            searchBar.setShowsCancelButton(false, animated: true)
-//
-//            return true
-//        }
-//    //    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-//    //        searchBar.showsCancelButton = true
-//    //    }
-//        func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-//            searchBar.resignFirstResponder()
-//            // Stop doing the search stuff
-//            // and clear the text in the search bar
-//    //        searchBar.searchTextField.endEditing(true)
-//    //        // Hide the cancel button
-//    //        searchBar.showsCancelButton = false
-//            // You could also change the position, frame etc of the searchBar
-//        }
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
@@ -108,9 +89,6 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         switch button {
         case .removeAll:
             removeAllLists()
-            
-            
-            
         case .newMatch:
             if let searchText = searchBar.text {
                 searchBar.text = "\(searchText)\u{2022}"

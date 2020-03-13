@@ -33,6 +33,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //    var photoCategories = [IndexMatcher: ]
  
 
+//    var presentingCache = false
     
     //MARK: Finding
     var shouldDismissSEK = true
@@ -776,7 +777,35 @@ extension NewHistoryViewController: ButtonPressed {
 //            print("delete pressed delegate")
         case "cache":
             print("cache pressed delegate")
+            var attributes = EKAttributes.centerFloat
+            attributes.displayDuration = .infinity
+            attributes.entryInteraction = .absorbTouches
+            attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+            attributes.entryBackground = .color(color: .white)
+            attributes.screenInteraction = .absorbTouches
+            attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(300))
+//            attributes.lifecycleEvents.willDisappear = {
+//
+//
+//
+//            }
+           
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController
             
+            var tempPhotos = [HistoryModel]()
+            for item in indexPathsSelected {
+                let itemToEdit = indexToData[item.section]
+                if let singleItem = itemToEdit?[item.item] {
+                    tempPhotos.append(singleItem)
+                }
+            }
+            cacheController.photos = tempPhotos
+            cacheController.view.layer.cornerRadius = 10
+            cacheController.folderURL = folderURL
+            SwiftEntryKit.display(entry: cacheController, using: attributes)
             
         default: print("unknown, bad string")
             
