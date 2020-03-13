@@ -12,6 +12,7 @@ import RealmSwift
 
 
 protocol ReturnSortedTerms: class {
+    func pause(pause: Bool)
     func returnTerms(stringToListR: [String: EditableFindList], currentSearchFindListR: EditableFindList, currentListsSharedFindListR: EditableFindList, currentSearchAndListSharedFindListR: EditableFindList, currentMatchStringsR: [String], matchToColorsR: [String: [CGColor]])
 }
 class FindBar: UIView, UITextFieldDelegate {
@@ -23,6 +24,61 @@ class FindBar: UIView, UITextFieldDelegate {
     var editableListCategories = [EditableFindList]()
     var selectedLists = [EditableFindList]()
     
+    @IBOutlet weak var warningView: UIView!
+    
+    @IBOutlet weak var warningButton: UIButton!
+    
+    @IBOutlet weak var warningLabel: UILabel!
+    
+    
+    @IBOutlet weak var warningWidth: NSLayoutConstraint!
+    
+    @IBAction func warningPressed(_ sender: Any) {
+        warningWidth.constant = searchField.frame.width
+        UIView.animateKeyframes(withDuration: 0.8, delay: 0, options: .calculationModeCubic, animations: {
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5) {
+                self.warningButton.alpha = 0
+                self.layoutIfNeeded()
+                
+            }
+//            self.warningButton.setTitle("Paused", for: .normal)
+            self.warningButton.isHidden = true
+            self.okButton.isHidden = false
+            self.okButton.alpha = 0
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5) {
+                self.warningLabel.alpha = 1
+                self.okButton.alpha = 1
+            }
+            
+        })
+        
+    }
+    
+    @IBOutlet weak var okButton: UIButton!
+    
+    @IBAction func okButtonPressed(_ sender: Any) {
+        
+        UIView.animateKeyframes(withDuration: 0.8, delay: 0, options: .calculationModeCubic, animations: {
+            self.okButton.isHidden = false
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.25) {
+                self.okButton.alpha = 0
+                self.warningLabel.alpha = 0
+            }
+            self.okButton.isHidden = true
+//            self.warningButton.setTitle("Paused", for: .normal)
+            self.warningButton.isHidden = false
+            self.warningButton.alpha = 0
+            UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.25) {
+                self.warningButton.alpha = 1
+            }
+            
+            self.warningWidth.constant = 67
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5) {
+                self.layoutIfNeeded()
+            }
+        })
+    }
     
     var finalTextToFind : String = ""
     var matchToColors = [String: [CGColor]]()
@@ -78,13 +134,6 @@ class FindBar: UIView, UITextFieldDelegate {
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        searchBar.searchTextField.backgroundColor = .red
-//        searchBar.searchTextField.backgroundColor = UIColor(named: "Gray1")
-////        searchBar.tintColor = .red
-//        searchBar.barTintColor = UIColor(named: "Gray3")
-//        searchBar.layer.borderWidth = 1
-//        searchBar.layer.borderColor = UIColor(named: "Gray3")?.cgColor
-        
         loadListsRealm()
         
         let toolbar = ListToolBar()
@@ -101,7 +150,14 @@ class FindBar: UIView, UITextFieldDelegate {
         
         collectionView.register(SearchCollectionCell.self, forCellWithReuseIdentifier: "SearchCellid")
         searchField.layer.cornerRadius = 6
-        
+        okButton.layer.cornerRadius = 4
+        warningView.layer.cornerRadius = 6
+        warningLabel.alpha = 0
+//        warningView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+        warningView.alpha = 0
+        warningButton.alpha = 0
+        okButton.alpha = 0
+        okButton.isHidden = true
         
 //        searchBar.backgroundColor = .red
         
@@ -127,7 +183,7 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
             selectedLists.remove(object: list)
             collectionView.deleteItems(at: [indexPath])
             injectListDelegate?.addList(list: list)
-            
+            sortSearchTerms()
          switch selectedLists.count {
             case 0:
                 print("nothing")
@@ -194,6 +250,37 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
 
 extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
     
+    func showDuplicateAlert(show: Bool) {
+            if show == true {
+
+//                warningHeightC.constant = 32
+                warningWidth.constant = 67
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.warningView.alpha = 1
+//                    self.warningLabel.alpha = 1
+                    self.layoutIfNeeded()
+                }) { _ in
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.warningButton.alpha = 1
+                    })
+                }
+            } else {
+//                warningHeightC.constant = 6
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.warningButton.alpha = 0
+                }) { _ in
+                    self.warningWidth.constant = 0
+                    UIView.animate(withDuration: 0.5, animations: {
+                        self.warningView.alpha = 0
+//                        self.warningLabel.alpha = 0
+        //                self.warningLabel.text = "Find is paused | Duplicates are not allowed"
+                        self.layoutIfNeeded()
+                    })
+                }
+            }
+        }
+    
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         searchActive = true
     }
@@ -208,13 +295,15 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
 //                print("DUPD UPD UPD UPDU PDPUDP")
 //                resetFastHighlights()
 //                allowSearch = false
-//                showDuplicateAlert(show: true)
+                returnTerms?.pause(pause: true)
+                showDuplicateAlert(show: true)
             } else {
                 finalTextToFind = updatedString
-//                showDuplicateAlert(show: false)
+                showDuplicateAlert(show: false)
 //                allowSearch = true
 //                finalTextToFind = updatedString
-//                sortSearchTerms()
+                returnTerms?.pause(pause: false)
+                sortSearchTerms()
             }
             
         }
@@ -234,20 +323,8 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         }
     }
     func removeAllLists() {
-//        searchBar.searchTextField.tokens = []
-//        var tempArray = [EditableFindList]()
-//        for singleList in selectedLists {
-////            let indP = IndexPath(item: index, section: 0)
-//            tempArray.append(singleList)
-////            calculateWhereToPlaceComponent(component: singleList, placeInSecondCollectionView: indP)
-//        }
-//
-//
-//        selectedLists.removeAll()
-////        searchCollectionView.reloadData()
         for temp in selectedLists {
             injectListDelegate?.addList(list: temp)
-//            calculateWhereToInsert(component: temp)
         }
         selectedLists.removeAll()
         collectionView.reloadData()
@@ -257,78 +334,27 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         UIView.animate(withDuration: 0.3, animations: {
             self.layoutIfNeeded()
         })
-//        print("remove")
     }
     
     func addList(list: EditableFindList) {
-//        let insertPosition = selectedLists.count
-//        selectedLists.append(list)
         selectedLists.insert(list, at: 0)
         let indP = IndexPath(item: 0, section: 0)
         collectionView.insertItems(at: [indP])
-        
-//        let newImage = UIImage(systemName: list.iconImageName)?.withTintColor(UIColor(hexString: list.iconColorName))
-//        let newToken = UISearchToken(icon: newImage, text: list.name)
-        
         switch selectedLists.count {
-        case 0:
-            print("nothing")
         case 1:
-            print("1")
-//            collViewWidthC.constant = 50
             searchLeftC.constant = 35 + 3 + 16
-//                for (index, singleIndex) in selectedLists.enumerated() {
-//                    let indP = IndexPath(item: index, section: 0)
-//                    let cell = searchCollectionView.cellForItem(at: indP)
-//
-//                }
         case 2:
-//            collViewWidthC.constant = 73
             searchLeftC.constant = 73 + 3 + 16
         case 3:
-//            collViewWidthC.constant = 111
             searchLeftC.constant = 111 + 3 + 16
         default:
-            print("default")
-//            collViewWidthC.constant = 111
             searchLeftC.constant = 111 + 3 + 16
-            
-            print("search frame: \(searchField.frame)")
             let availibleWidth = contentView.frame.width - 127
-//                layout = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
-//            flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
-//            searchCollectionRightC.constant = availibleWidth
             collViewRightC.constant = availibleWidth
-//            print(availibleWidth)
         }
         UIView.animate(withDuration: 0.3, animations: {
             self.layoutIfNeeded()
         })
-//
-//        newToken.representedObject = list
-////        purchasesToken.c
-//
-//        searchBar.searchTextField.insertToken(newToken, at: insertPosition)
-//        if selectedLists.count <= 1 {
-//            updateListsLayout(toType: "addListsNow")
-//        }
-    
-//        let indexP = IndexPath(item: 0, section: 0)
-//        searchCollectionView.performBatchUpdates({
-//            print("add3")
-//            self.searchCollectionView.insertItems(at: [indexP])
-//            self.insertingListsCount += 1
-//        }, completion: { _ in
-//            self.insertingListsCount -= 1
-//            if self.isSchedulingList == true {
-//                if self.insertingListsCount == 0 {
-//                    self.isSchedulingList = false
-//                    self.updateListsLayout(toType: "doneAndShrink")
-//                }
-//            }
-//        })
-        
-//        sortSearchTerms()
     }
     
     func startedEditing(start: Bool) {
@@ -362,46 +388,11 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
                 editableListCategories.append(editList)
             }
         }
-//        print("Loading lists")
         for singL in editableListCategories {
             print(singL.name)
         }
         
-//        searchCollectionView.reloadData()
     }
-    
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-////        print("Change123123, \(searchText)")
-//        var tokenLists = [EditableFindList]()
-//
-//        searchBar.searchTextField.tokens.forEach {
-//            if let list = $0.representedObject as? EditableFindList {
-////                print(list.name)
-////                if !selectedLists.contains(list) {
-//                    tokenLists.append(list)
-////                }
-//            }
-//        }
-////        selectedLists = tokenLists
-//        var tempLists = [EditableFindList]()
-//        for list in selectedLists {
-//            if !tokenLists.contains(list) {
-//                tempLists.append(list)
-//            }
-//
-//
-////            print("del list: \(tempLi.name)")
-//        }
-//        for list in tempLists {
-//            injectListDelegate?.addList(list: list)
-//        }
-//        tempLists.forEach { list in
-////            print("DELELE: \(list.name)")
-//            selectedLists.remove(object: list)
-//        }
-////        let tokens = searchBar.searchTextField.tokens
-//    }
-
 }
 
 
@@ -466,9 +457,9 @@ extension FindBar {
         for match in cameAcrossSearchFieldText {
             stringToList[match] = textShareList
         }
-    currentMatchStrings += arrayOfSearch
-    currentMatchStrings = currentMatchStrings.uniques
-    returnTerms?.returnTerms(stringToListR: stringToList, currentSearchFindListR: currentSearchFindList, currentListsSharedFindListR: currentListsSharedFindList, currentSearchAndListSharedFindListR: currentSearchAndListSharedFindList, currentMatchStringsR: currentMatchStrings, matchToColorsR: matchToColors)
+        currentMatchStrings += arrayOfSearch
+        currentMatchStrings = currentMatchStrings.uniques
+        returnTerms?.returnTerms(stringToListR: stringToList, currentSearchFindListR: currentSearchFindList, currentListsSharedFindListR: currentListsSharedFindList, currentSearchAndListSharedFindListR: currentSearchAndListSharedFindList, currentMatchStringsR: currentMatchStrings, matchToColorsR: matchToColors)
 
     }
 }
