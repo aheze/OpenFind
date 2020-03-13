@@ -9,22 +9,14 @@
 import UIKit
 
 extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, SelectedList, StartedEditing {
-    
-    
-    
-    
-
-    
     func buttonPressed(button: ToolbarButtonType) {
         switch button {
         case .removeAll:
-            print("startEdit")
             removeAllLists()
         case .newMatch:
-             if let searchText = newSearchTextField.text {
-                    newSearchTextField.text = "\(searchText)\u{2022}"
-                }
-            print("return")
+            if let searchText = newSearchTextField.text {
+                newSearchTextField.text = "\(searchText)\u{2022}"
+            }
         case .done:
             view.endEditing(true)
             if insertingListsCount == 0 {
@@ -32,21 +24,16 @@ extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, Sele
             } else {
                 isSchedulingList = true
             }
-//            print("changed text")
         }
     }
     
     func addList(list: EditableFindList) {
         print("add1")
         selectedLists.insert(list, at: 0)
-//        let indP = IndexPath(item: 0, section: 0)
-        
         if selectedLists.count <= 1 {
             updateListsLayout(toType: "addListsNow")
         }
         print("add2")
-//            selectedLists.insert(newList, at: 0)
-//            print(selectedLists)
     
             let indexP = IndexPath(item: 0, section: 0)
             searchCollectionView.performBatchUpdates({
@@ -63,23 +50,11 @@ extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, Sele
                 }
             })
     
-    //            listViewCollectionView.insertItems(at: [indexP])
-    
-//            editableListCategories.remove(at: indexPath.item)
-//            listsCollectionView.deleteItems(at: [indexPath])
-//            if selectedLists.count <= 1 {
-//                updateListsLayout(toType: "addListsNow")
-//            }
-            
         print("add14")
         print("add121")
             sortSearchTerms()
-//        searchCollectionView.insertItems(at: [indP])
     }
     
-//    func changedText(type: ToolbarTextChangeType, special: String) {
-//        print("change")
-//    }
     func startedEditing(start: Bool) {
         if start == true {
             if selectedLists.count == 0 {
@@ -93,16 +68,10 @@ extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, Sele
     }
     
     func tempResetLists() {
-
-//        selectedLists.removeAll()
-//        selectedLists.removeAll()
-        
         
         var tempArray = [EditableFindList]()
         for singleList in selectedLists {
-//            let indP = IndexPath(item: index, section: 0)
             tempArray.append(singleList)
-//            calculateWhereToPlaceComponent(component: singleList, placeInSecondCollectionView: indP)
         }
         
         
@@ -110,19 +79,10 @@ extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, Sele
         searchCollectionView.reloadData()
         for temp in tempArray {
             injectListDelegate?.addList(list: temp)
-//            calculateWhereToInsert(component: temp)
         }
         searchCollectionView.performBatchUpdates({
             searchCollectionView.reloadData()
         }, completion: nil)
-        
-//        selectedLists.removeAll()
-//        injectListDelegate?.
-//        listsCollectionView.performBatchUpdates({
-//            listsCollectionView.reloadData()
-//        }, completion: nil)
-        
-//        listsCollectionView.reloadData()
         updateListsLayout(toType: "prepareForDisplayNew")
     }
     func loadListsRealm() {
@@ -131,8 +91,6 @@ extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, Sele
         selectedLists.removeAll()
         editableListCategories.removeAll()
         
-        
-//        print(listCategories)
         listCategories = listCategories!.sorted(byKeyPath: "dateCreated", ascending: false)
         if let lC = listCategories {
             for (index, singleL) in lC.enumerated() {
@@ -154,71 +112,40 @@ extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, Sele
                 editableListCategories.append(editList)
             }
         }
-//        let flowLayout = listsCollectionView.collectionViewLayout
-//        flowLayout.estimated
-        
         print("Loading lists")
         for singL in editableListCategories {
             print(singL.name)
         }
         
         searchCollectionView.reloadData()
-//        listsCollectionView.reloadData()
-//        inje
-//        listsToolbarLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        if collectionView.tag == 100100 {
             return selectedLists.count
-//        } else { ///The search bar 100101
-//            return selectedLists.count
-//        }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        var cell = UICollectionViewCell()
-        ////1001000090 search collection view searchCell
-           // print("Dequeue, indexPath: \(indexPath.item)")
         let cell = searchCollectionView.dequeueReusableCell(withReuseIdentifier: "searchCell", for: indexPath) as! SearchCell
         let listNumber = selectedLists[indexPath.item]
         if let list = listCategories?[listNumber.orderIdentifier] {
-//                print("order id: \(list)")
-            
             
             cell.backgroundColor = UIColor(hexString: list.iconColorName)
             cell.layer.cornerRadius = 6
-//                var newLabelFrame = cell.nameLabel.frame
-//                print(newLabelFrame)
             cell.nameLabel.text = list.name
-//            cell.nameLabel.textAlignment = .natural
             print("cont size: \(cell.nameLabel.intrinsicContentSize)")
             if searchShrunk == true {
-               // print("SHRINK MODE")
-//                cell.nameLabel.text = ""
-//                cell.labelRightC.constant = 0
-//                cell.labelWidthC.constant = 0
                 cell.imageRightC.constant = 8
-//                    newLabelFrame.size.width = 0
-//                    cell.labelWidth.constant = 0
                 print("cont size: \(cell.nameLabel.intrinsicContentSize)")
                 UIView.animate(withDuration: 0.3, animations: {
     
                     cell.nameLabel.alpha = 0
-    //                    cell.nameLabel.frame = newLabelFrame
                     cell.layoutIfNeeded()
                 })
             } else {
-              //  print("EXPAND MODE")
-                
-//                cell.labelRightC.constant = 8
                 cell.imageRightC.constant = cell.nameLabel.intrinsicContentSize.width + 16
-//                    newLabelFrame.size.width = cell.nameLabel.intrinsicContentSize.width
-//                    cell.labelWidth.constant = cell.nameLabel.intrinsicContentSize.width
                 print("cont size: \(cell.nameLabel.intrinsicContentSize)")
                 UIView.animate(withDuration: 0.3, animations: {
         
                         cell.nameLabel.alpha = 1
-        //                    cell.nameLabel.frame = newLabelFrame
                         cell.layoutIfNeeded()
                     })
             }
@@ -234,50 +161,7 @@ extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, Sele
         
         return cell
         
-            
-//            if let list = listCategories?[indexPath.row] {
-//                cell.labelText.text = list.name
-//                cell.backgroundColor = UIColor(hexString: list.iconColorName)
-//                cell.layer.cornerRadius = 6
-//                let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 10, weight: .semibold)
-//                let newImage = UIImage(systemName: list.iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor.white, renderingMode: .alwaysOriginal)
-//
-//                cell.imageView.image = newImage
-//            }
-//            return cell
-//        }
     }
-//    func collectionView(_ collectionView: UICollectionView,
-//                      layout collectionViewLayout: UICollectionViewLayout,
-//                      sizeForItemAt indexPath: IndexPath) -> CGSize {
-//       // let cell = listsCollectionView.dequeueReusableCell(withReuseIdentifier: "tooltopCell", for: indexPath) as! ToolbarTopCell
-//        //let itemSize = cell.button.frame.size.width
-//        return CGSize(width: 120, height: CGFloat(38))
-//    }
-
-//    func calculateWhereToPlaceComponent(component: EditableFindList, placeInSecondCollectionView: IndexPath) {
-//        let componentOrderID = component.orderIdentifier
-//        print("calc")
-//        var indexPathToAppendTo = 0
-//        for (index, singleComponent) in editableListCategories.enumerated() {
-//            ///We are going to check if the singleComponent's order identifier is smaller than componentOrderID.
-//            ///If it is smaller, we know we must insert the cell ONE to the right of this indexPath.
-//            if singleComponent.orderIdentifier < componentOrderID {
-//                indexPathToAppendTo = index + 1
-//            }
-//        }
-//        print("index... \(indexPathToAppendTo)")
-//        ///Now that we know where to append the green cell, let's do it!
-//        editableListCategories.insert(component, at: indexPathToAppendTo)
-//        let newIndexPath = IndexPath(item: indexPathToAppendTo, section: 0)
-//        listsCollectionView.insertItems(at: [newIndexPath])
-//
-//        //we must remove the red cell now.
-//        selectedLists.remove(at: placeInSecondCollectionView.item)
-//        searchCollectionView.deleteItems(at: [placeInSecondCollectionView])
-//    }
-    
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        
         if searchShrunk == false {
@@ -286,24 +170,12 @@ extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, Sele
             
             selectedLists.remove(at: indexPath.item)
             searchCollectionView.deleteItems(at: [indexPath])
-//            calculateWhereToPlaceComponent(component: list, placeInSecondCollectionView: indexPath)
             
             if selectedLists.count == 0 {
                 updateListsLayout(toType: "removeListsNow")
             }
             injectListDelegate?.addList(list: list)
             sortSearchTerms()
-//            newList.name = list.name
-//            newList.descriptionOfList = list.descriptionOfList
-//            newList.iconImageName = list.iconImageName
-//            newList.iconColorName = list.iconColorName
-//
-//            var contents = [String]()
-//            for singleCont in list.contents {
-//                contents.append(singleCont)
-//            }
-        
-//            newList.contents = contents
         } else {
             newSearchTextField.becomeFirstResponder()
             if selectedLists.count == 0 {
@@ -311,8 +183,6 @@ extension ViewController: UICollectionViewDataSource, ToolbarButtonPressed, Sele
             } else {
                 updateListsLayout(toType: "addListsNow")
             }
-//            upda
-            //focus cell
         }
         
     }

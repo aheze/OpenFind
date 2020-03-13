@@ -24,9 +24,6 @@ protocol ToolbarButtonPressed: class {
 protocol SelectedList: class {
     func addList(list: EditableFindList)
 }
-//protocol ToolbarChangedText: class {
-//    func changedText(type: ToolbarTextChangeType, special: String)
-//}
 protocol StartedEditing: class {
     func startedEditing(start: Bool)
 }
@@ -36,10 +33,6 @@ class ListToolBar: UIView, InjectLists {
     
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
-    
-//    var selectedLists = [EditableFindList]()
-     
-//    var origCategories = [EditableFindList]()
     var editableListCategories = [EditableFindList]()
     
     
@@ -102,25 +95,12 @@ class ListToolBar: UIView, InjectLists {
         removeAllButton.layer.cornerRadius = 6
         newMatchButton.layer.cornerRadius = 6
         doneButton.layer.cornerRadius = 6
-        
-
-        
-//        let layout =7
     }
-    
-//    func injectLists(lists: [EditableFindList]) {
-//        editableListCategories = lists
-//        collectionView.reloadData()
-//    }
     
     func addList(list: EditableFindList) {
         print("add")
         calculateWhereToInsert(component: list)
     }
-    
-//    func removeList(list: EditableFindList) {
-//        collectionView.deleteItems(at: <#T##[IndexPath]#>)
-//    }
     
 }
 
@@ -132,17 +112,16 @@ extension ListToolBar: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tooltopCellNew", for: indexPath) as! NewListToolbarCell
-        //            if let list = listCategories?[indexPath.row] {
-                let list = editableListCategories[indexPath.item]
-                    cell.labelText.text = list.name
-                    cell.backgroundColor = UIColor(hexString: list.iconColorName)
-                    cell.layer.cornerRadius = 6
-                    let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 10, weight: .semibold)
-                    let newImage = UIImage(systemName: list.iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor.white, renderingMode: .alwaysOriginal)
-                    
-                    cell.imageView.image = newImage
-    //            }
-                return cell
+        let list = editableListCategories[indexPath.item]
+        cell.labelText.text = list.name
+        cell.backgroundColor = UIColor(hexString: list.iconColorName)
+        cell.layer.cornerRadius = 6
+        
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 10, weight: .semibold)
+        let newImage = UIImage(systemName: list.iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor.white, renderingMode: .alwaysOriginal)
+        
+        cell.imageView.image = newImage
+        return cell
         
     }
 
@@ -152,108 +131,11 @@ extension ListToolBar: UICollectionViewDelegate, UICollectionViewDataSource {
         
         editableListCategories.remove(at: indexPath.item)
         collectionView.deleteItems(at: [indexPath])
-//        if editableListCategories.count <= 1 {
-//            updateListsLayout(toType: "addListsNow")
-//        }
-//        selectedLists.insert(newList, at: 0)
-//        print(selectedLists)
-//
-//        let indexP = IndexPath(item: 0, section: 0)
-//        searchCollectionView.performBatchUpdates({
-//            self.searchCollectionView.insertItems(at: [indexP])
-//            self.insertingListsCount += 1
-//        }, completion: { _ in
-//            self.insertingListsCount -= 1
-//            if self.isSchedulingList == true {
-//                if self.insertingListsCount == 0 {
-//                    self.isSchedulingList = false
-//                    self.updateListsLayout(toType: "doneAndShrink")
-//                }
-//            }
-//        })
-//
-////            listViewCollectionView.insertItems(at: [indexP])
-//
-//        editableListCategories.remove(at: indexPath.item)
-//        listsCollectionView.deleteItems(at: [indexPath])
-//        if selectedLists.count <= 1 {
-//            updateListsLayout(toType: "addListsNow")
-//        }
-        
-//        sortSearchTerms()
     }
     
     
 }
 extension ListToolBar {
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        startedEditing?.startedEditing(start: true)
-////        if editableListCategories.count == 0 {
-////            changedText?.changedText(type: .beganEditing, special: "onlyTextBox")
-//////            updateListsLayout(toType: "onlyTextBox")
-////        } else {
-////            changedText?.changedText(type: .beganEditing, special: "addListsNow")
-//////            updateListsLayout(toType: "addListsNow")
-////        }
-//
-//    }
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//    //        finalTextToFind = newSearchTextField.text ?? ""
-//        endEditing(true)
-//        startedEditing?.startedEditing(start: false)
-////        changedText?.changedText(type: .shouldReturn, special: "nothing")
-////            if insertingListsCount == 0 {
-////                updateListsLayout(toType: "doneAndShrink")
-////            } else {
-////                isSchedulingList = true
-////            }
-//    //        print("RETURN")
-//    //        print("Text: \(textField.text)")
-//            return true
-//        }
-//        func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//
-////            changedText?.changedText(type: .changedText, special: "nothing")
-////            if let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {
-////                let splits = updatedString.components(separatedBy: "\u{2022}")
-////                let uniqueSplits = splits.uniques
-////                if uniqueSplits.count != splits.count {
-////                    print("DUPD UPD UPD UPDU PDPUDP")
-////                    resetFastHighlights()
-////                    allowSearch = false
-////                    showDuplicateAlert(show: true)
-////                } else {
-////                    showDuplicateAlert(show: false)
-////                    allowSearch = true
-////                    finalTextToFind = updatedString
-////                    sortSearchTerms()
-////                }
-////
-////            }
-//
-//
-//            return true
-//        }
-//        func showDuplicateAlert(show: Bool) {
-//            if show == true {
-//
-//                warningHeightC.constant = 32
-//                UIView.animate(withDuration: 0.5, animations: {
-//                    self.warningView.alpha = 1
-//                    self.warningLabel.alpha = 1
-//                    self.view.layoutIfNeeded()
-//                })
-//            } else {
-//                warningHeightC.constant = 6
-//                UIView.animate(withDuration: 0.5, animations: {
-//                    self.warningView.alpha = 0
-//                    self.warningLabel.alpha = 0
-//    //                self.warningLabel.text = "Find is paused | Duplicates are not allowed"
-//                    self.view.layoutIfNeeded()
-//                })
-//            }
-//        }
-
         func calculateWhereToInsert(component: EditableFindList) {
             let componentOrderID = component.orderIdentifier
             print("calc")
