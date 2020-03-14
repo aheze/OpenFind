@@ -434,7 +434,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     //MARK: Selection
     func deselectAllItems(deselect: Bool) {
         if deselect == true {
-            print("deselcccccc")
+//            print("deselcccccc")
             
 //            for i in 0..<collectionView.numberOfSections {
 //                for j in 0..<collectionView.numberOfItems(inSection: i) {
@@ -450,7 +450,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 
                 
 //                let indexPath = IndexPath(item: indexP, section: 0)
-                print("indexP deselect: \(indexP)")
+//                print("indexP deselect: \(indexP)")
                 collectionView.deselectItem(at: indexP, animated: false)
                 if let cell = collectionView.cellForItem(at: indexP) as? HPhotoCell {
                     UIView.animate(withDuration: 0.1, animations: {
@@ -795,16 +795,33 @@ extension NewHistoryViewController: ButtonPressed {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController
             
-            var tempPhotos = [HistoryModel]()
+//            var tempPhotos = [HistoryModel]()
+            
+            var editablePhotoArray = [EditableHistoryModel]()
             for item in indexPathsSelected {
                 let itemToEdit = indexToData[item.section]
                 if let singleItem = itemToEdit?[item.item] {
-                    tempPhotos.append(singleItem)
+//                    tempPhotos.append(singleItem)
+                    let newPhoto = EditableHistoryModel()
+                    newPhoto.filePath = singleItem.filePath
+                    newPhoto.dateCreated = singleItem.dateCreated
+                    newPhoto.isHearted = singleItem.isHearted
+                    newPhoto.isDeepSearched = singleItem.isDeepSearched
+                    var newContents = [SingleHistoryContent]()
+                    for content in singleItem.contents {
+                        newContents.append(content)
+                    }
+                    
+                    editablePhotoArray.append(newPhoto)
                 }
             }
-            cacheController.photos = tempPhotos
-            cacheController.view.layer.cornerRadius = 10
             cacheController.folderURL = folderURL
+            cacheController.photos = editablePhotoArray
+            
+            
+            
+            cacheController.view.layer.cornerRadius = 10
+            print("DAJFSDFSODFIODF: \(folderURL)")
             SwiftEntryKit.display(entry: cacheController, using: attributes)
             
         default: print("unknown, bad string")

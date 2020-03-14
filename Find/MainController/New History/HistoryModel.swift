@@ -17,6 +17,14 @@ class HistoryModel: Object {
     @objc dynamic var isDeepSearched = false
     @objc dynamic var isHearted = false
 }
+
+class EditableHistoryModel: NSObject {
+    var filePath = ""
+    var dateCreated = Date()
+    var contents = [SingleHistoryContent]()
+    var isDeepSearched = false
+    var isHearted = false
+}
 //class HistoryContent: Object {
 //    var contents = List<SingleHistoryContent>()
 //}
