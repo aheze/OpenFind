@@ -22,7 +22,10 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     var cachePhotos = [HistoryModel]()
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
     
-    @IBOutlet weak var numberCachedLabel: UILabel!
+    
+    private var gradient: CAGradientLayer!
+    
+//    var numberCachedLabel = UILabel()
     
     @IBOutlet weak var cancelButton: UIButton!
     
@@ -30,7 +33,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
         print("dismiss?")
     }
     
-    @IBOutlet weak var machineView: UIView!
+    @IBOutlet weak var numberCachedLabel: UILabel!
     
     
     @IBOutlet weak var collectionSuperview: UIView!
@@ -38,14 +41,75 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        gradient.frame = collectionSuperview.bounds
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         print("load")
         print(photos.count)
         cancelButton.layer.cornerRadius = 6
-        machineView.layer.cornerRadius = 4
+//        machineView.layer.cornerRadius = 4
+        
+        let bigRect = CGRect(x: 0, y: 0, width: 180, height: 180)
+        
+        let pathBigRect = UIBezierPath(roundedRect: bigRect, cornerRadius: 4)
+        let smallRect = CGRect(x: 10, y: 10, width: 160, height: 160)
+        
+        let pathSmallRect = UIBezierPath(roundedRect: smallRect, cornerRadius: 2)
+//
+        pathBigRect.append(pathSmallRect)
+        pathBigRect.usesEvenOddFillRule = true
+//
+        let fillLayer = CAShapeLayer()
+        fillLayer.path = pathBigRect.cgPath
+        fillLayer.fillRule = CAShapeLayerFillRule.evenOdd
+        fillLayer.fillColor = UIColor(named: "Gray4")?.cgColor
+        //fillLayer.opacity = 0.4
+        
+        let newView = UIView()
+        newView.layer.addSublayer(fillLayer)
+        view.addSubview(newView)
+        newView.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 180, height: 180))
+            make.center.equalToSuperview()
+        }
+        
+        let tintView = UIView()
+        tintView.frame = CGRect(x: 10, y: 10, width: 160, height: 160)
+        tintView.layer.cornerRadius = 2
+        tintView.backgroundColor = #colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 0.12)
+        newView.addSubview(tintView)
+        
+        let swipeView = UIView()
+        swipeView.frame = CGRect(x: 10, y: 5, width: 10, height: 170)
+        swipeView.backgroundColor = UIColor(hexString: "00aeef")
+        swipeView.layer.cornerRadius = 5
+        newView.addSubview(swipeView)
+        UIView.animate(withDuration: 0.7, delay: 0, options: [.repeat, .autoreverse], animations: {
+
+            swipeView.frame = CGRect(x: 162, y: 5, width: 10, height: 170)
+
+        }, completion: nil)
+        
+        
+//        let gradient = CAGradientLayer()
+        gradient = CAGradientLayer()
+        gradient.frame = collectionSuperview.bounds
+        
+        gradient.colors = [UIColor.clear.cgColor, UIColor.white.cgColor, UIColor.white.cgColor, UIColor.clear.cgColor]
+        gradient.locations = [0, 0.2, 0.8, 1]
+        gradient.startPoint = CGPoint(x: 0.5, y: 0)
+        gradient.endPoint = CGPoint(x: 0.5, y: 1)
+        collectionSuperview.layer.mask = gradient
+        collectionSuperview.layer.masksToBounds = true
+
         collectionView.contentInset.top = collectionSuperview.frame.size.height
+        collectionView.contentInset.bottom = collectionSuperview.frame.size.height
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
