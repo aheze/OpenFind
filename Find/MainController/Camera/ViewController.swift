@@ -146,6 +146,8 @@ class ViewController: UIViewController {
     
     var selectedLists = [EditableFindList]()
     weak var injectListDelegate: InjectLists?
+//    weak var updateToolbar: UpdateToolbar?
+    
     //MARK: Matches HUD
     
     var createdStatusView: Bool = false
@@ -331,7 +333,7 @@ class ViewController: UIViewController {
         numberLabel.isHidden = false
         updateMatchesNumber(to: 0)
        
-        loadListsRealm()
+//        loadListsRealm()
         setUpButtons()
         setUpTimers()
         

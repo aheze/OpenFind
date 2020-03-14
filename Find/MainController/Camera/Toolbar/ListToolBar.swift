@@ -28,6 +28,10 @@ protocol StartedEditing: class {
     func startedEditing(start: Bool)
 }
 class ListToolBar: UIView, InjectLists {
+    
+    
+    
+    
    
     
     
@@ -65,6 +69,13 @@ class ListToolBar: UIView, InjectLists {
         pressedButton?.buttonPressed(button: .done)
     }
     
+//    func updateToolbar() {
+//
+//    }
+    func resetWithLists(lists: [EditableFindList]) {
+        editableListCategories = lists
+        collectionView.reloadData()
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

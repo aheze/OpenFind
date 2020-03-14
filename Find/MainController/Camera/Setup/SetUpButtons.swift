@@ -24,8 +24,11 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         currentMatchStrings.append(newSearchTextField.text ?? "")
         sortSearchTerms()
         startVideo(finish: "end")
-       // listsCollectionView.reloadData()
         loadListsRealm()
+        injectListDelegate?.resetWithLists(lists: editableListCategories)
+       // listsCollectionView.reloadData()
+//        loadListsRealm()
+//        updateToolbar
     }
 //    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
 //        print("Start Dismiss")
@@ -92,6 +95,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
             }
         
             tempResetLists()
+            
             
         }
     func toFast() {
