@@ -37,7 +37,7 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         //descriptionView.text = desc
     }
     
-   
+    var isEditingText = false
     
     weak var generalDelegate: GetGeneralInfo?
 
@@ -111,7 +111,12 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
             generalDelegate?.returnNewGeneral(nameOfList: newName, desc: newDesc, contentsOfList: contents, hasErrors: false, overrideMake: true)
             SwiftEntryKit.dismiss()
         } else {
-            scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+//            scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            let origPoint = CGPoint(x: 0, y: (currentIndexPath * 50) + 500)
+                let rect = CGRect(origin: origPoint, size: CGSize(width: 50, height: 50))
+                print("RECTA::::::\(rect)")
+            
+                scrollView.scrollRectToVisible(rect, animated: true)
 
             checkForErrors(contentsArray: contents)
             if showDoneAlerts() == false {
@@ -418,7 +423,7 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         tableView.isScrollEnabled = false
-        
+        registerNotifications()
     }
     
     
@@ -485,18 +490,34 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
 //}
 extension GeneralViewController: ChangedTextCell {
     
+    private func registerNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc private func keyboardWillShow(notification: NSNotification){
+        guard let keyboardFrame = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        scrollView.contentInset.bottom = view.convert(keyboardFrame.cgRectValue, from: nil).size.height
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification){
+        scrollView.contentInset.bottom = 0
+    }
+    
     func cellPressedDoneButton() {
-        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
     func textFieldStartedEditing(indexPath: Int) {
-        print("curr ind: \(indexPath)")
         currentIndexPath = indexPath
-        scrollView.setContentOffset(CGPoint(x: 0, y: (currentIndexPath * 50) + 124), animated: true) ///224 is height of everything above the tableview, so give some edit room so 124
-
     }
     func textFieldPressedReturn() {
         addNewRow()
+        let origPoint = CGPoint(x: 0, y: (currentIndexPath * 50) + 250)
+        let rect = CGRect(origin: origPoint, size: CGSize(width: 50, height: 50))
+//        print("RECTA::::::\(rect)")
+        
+        scrollView.setContentOffset(CGPoint(x: 0, y: (currentIndexPath * 50) + 124), animated: true)
+//        scrollView.scrollRectToVisible(rect, animated: true)
     }
     func textFieldChangedText(indexPath: Int, text: String) {
         //print("Changed, text: \(text)")
