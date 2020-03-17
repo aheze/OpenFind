@@ -53,6 +53,7 @@ class CachingCancelController: UIViewController {
    
         cacheController.folderURL = folderURL
         cacheController.photos = totalPhotos
+//        cacheController.alreadyCached = cachedPhotos
         cacheController.isResuming = true
         
         
@@ -63,7 +64,7 @@ class CachingCancelController: UIViewController {
     
     
     var totalPhotos = [EditableHistoryModel]()
-    var cachedPhotos = [EditableHistoryModel]()
+//    var cachedPhotos = [EditableHistoryModel]()
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
 //    weak var injectPhotos: InjectCachedPhotos?
     
@@ -71,17 +72,24 @@ class CachingCancelController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         setUpViews()
+        
+        var count = 0
+        for photo in totalPhotos {
+            if photo.isDeepSearched {
+                count += 1
+            }
+        }
+        
         var newLabel = ""
-        if cachedPhotos.count == 1 {
+        if count == 1 {
             newLabel = """
             1 photo has already been cached.
             Would you like to keep its cache?
             """
         } else {
             newLabel = """
-            \(cachedPhotos.count) photos have already been cached.
+            \(count) photos have already been cached.
             Would you like to keep their caches?
             """
         }

@@ -11,6 +11,7 @@ PODS:
     - SDWebImage/Core (= 5.4.1)
   - SDWebImage/Core (5.4.1)
   - SnapKit (5.0.1)
+  - SPAlert (2.1.4)
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
   - ViewAnimator (2.7.0)
@@ -23,6 +24,7 @@ DEPENDENCIES:
   - RoundCoachMark (from `https://github.com/zjohnzheng/RoundCoachMark`)
   - SDWebImage (~> 5.0)
   - SnapKit
+  - SPAlert
   - SwiftEntryKit
   - ViewAnimator
   - WSTagsField
@@ -35,6 +37,7 @@ SPEC REPOS:
     - RealmSwift
     - SDWebImage
     - SnapKit
+    - SPAlert
     - SwiftEntryKit
     - ViewAnimator
     - WSTagsField
@@ -56,10 +59,11 @@ SPEC CHECKSUMS:
   RoundCoachMark: b3b00eb04ef90654af6f7ab50b3ed03ed2901467
   SDWebImage: 29c340dbdcef342bb13125553f4e19ce056b07a7
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SPAlert: 1a8afa1c6ac86a82ab5b2cfdf7f9a51e68cb6c0c
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   ViewAnimator: 5af1c6f3b310f012bf081259c43717aa54fbae73
   WSTagsField: d57a287fd552934db1d93a85d38abbf74b067d6a
 
-PODFILE CHECKSUM: 50c49f04e8f86d8545493cc384e60879bc37e64f
+PODFILE CHECKSUM: c5dc163710421b99169e6f0a9f1d1973d9eeb8ca
 
 COCOAPODS: 1.8.3

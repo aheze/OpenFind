@@ -13,5 +13,6 @@ pod 'SwiftEntryKit'
 pod 'SnapKit'
 pod 'Parchment'
 pod 'WSTagsField'
+pod 'SPAlert'
 
 end
