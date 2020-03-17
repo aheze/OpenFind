@@ -119,6 +119,7 @@
 		49D985B124188CA4005F4E92 /* NewListToolbarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49D985AF24188CA4005F4E92 /* NewListToolbarCell.xib */; };
 		49D985B4241B374B005F4E92 /* CachingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985B3241B374B005F4E92 /* CachingViewController.swift */; };
 		49D985B6241B3847005F4E92 /* CacheCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985B5241B3847005F4E92 /* CacheCell.swift */; };
+		49D985B824208037005F4E92 /* CachingCancelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985B724208037005F4E92 /* CachingCancelController.swift */; };
 		49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */; };
 		49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1552353FE4B0099FA62 /* BasicSetup.swift */; };
 		49F7B1582353FE7E0099FA62 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1572353FE7E0099FA62 /* Component.swift */; };
@@ -242,6 +243,7 @@
 		49D985AF24188CA4005F4E92 /* NewListToolbarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewListToolbarCell.xib; sourceTree = "<group>"; };
 		49D985B3241B374B005F4E92 /* CachingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingViewController.swift; sourceTree = "<group>"; };
 		49D985B5241B3847005F4E92 /* CacheCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheCell.swift; sourceTree = "<group>"; };
+		49D985B724208037005F4E92 /* CachingCancelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingCancelController.swift; sourceTree = "<group>"; };
 		49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		49F7B1552353FE4B0099FA62 /* BasicSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSetup.swift; sourceTree = "<group>"; };
 		49F7B1572353FE7E0099FA62 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
@@ -650,6 +652,7 @@
 			isa = PBXGroup;
 			children = (
 				49D985B3241B374B005F4E92 /* CachingViewController.swift */,
+				49D985B724208037005F4E92 /* CachingCancelController.swift */,
 				49D985B5241B3847005F4E92 /* CacheCell.swift */,
 			);
 			path = Caching;
@@ -871,6 +874,7 @@
 				490DA75923CBB871000AF57D /* JJCircleView.swift in Sources */,
 				4917CE8123C059F6002EA20B /* StartSceneView.swift in Sources */,
 				495ECCA9238CF7BD00E7D966 /* HPhotoCell.swift in Sources */,
+				49D985B824208037005F4E92 /* CachingCancelController.swift in Sources */,
 				49D985B024188CA4005F4E92 /* NewListToolbarCell.swift in Sources */,
 				4904524E2379DB270046570D /* HistoryViewController.swift in Sources */,
 				490DA75723CBB871000AF57D /* Styles.swift in Sources */,

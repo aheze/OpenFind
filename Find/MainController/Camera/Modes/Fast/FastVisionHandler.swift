@@ -53,7 +53,7 @@ extension ViewController {
                     let individualCharacterWidth = newW / CGFloat(component.text.count)
                     
                     component.x = newX
-                    component.y = newY
+                    component.y = newY - newH
                     drawFastHighlight(component: component)
                     
                     

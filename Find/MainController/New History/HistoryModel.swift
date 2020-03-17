@@ -32,5 +32,8 @@ class EditableHistoryModel: NSObject {
 class SingleHistoryContent: Object {
     @objc dynamic var x = Double(0)
     @objc dynamic var y = Double(0)
+    @objc dynamic var width = Double(0)
+    @objc dynamic var height = Double(0)
+
     @objc dynamic var text = ""
 }

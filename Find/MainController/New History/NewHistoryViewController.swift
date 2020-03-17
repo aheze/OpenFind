@@ -786,6 +786,7 @@ extension NewHistoryViewController: ButtonPressed {
             attributes.entryBackground = .color(color: .white)
             attributes.screenInteraction = .absorbTouches
             attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(300))
+            attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
 //            attributes.lifecycleEvents.willDisappear = {
 //
 //
@@ -821,7 +822,7 @@ extension NewHistoryViewController: ButtonPressed {
             
             
             cacheController.view.layer.cornerRadius = 10
-            print("DAJFSDFSODFIODF: \(folderURL)")
+//            print("DAJFSDFSODFIODF: \(folderURL)")
             SwiftEntryKit.display(entry: cacheController, using: attributes)
             
         default: print("unknown, bad string")
