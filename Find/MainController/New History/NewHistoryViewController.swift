@@ -601,11 +601,11 @@ extension NewHistoryViewController: ReturnCachedPhotos {
         print("give")
         if popup == "Keep" {
             let alertView = SPAlertView(title: "Kept cached photos!", message: "Tap to dismiss", preset: SPAlertPreset.done)
-            alertView.duration = 2.2
+            alertView.duration = 4
             alertView.present()
         } else if popup == "Finished" {
             let alertView = SPAlertView(title: "Caching done!", message: "Tap to dismiss", preset: SPAlertPreset.done)
-            alertView.duration = 2.2
+            alertView.duration = 4
             alertView.present()
             
         }
@@ -904,7 +904,7 @@ extension NewHistoryViewController: ButtonPressed {
                 SwiftEntryKit.display(entry: cacheController, using: attributes)
             } else {
                 let alertView = SPAlertView(title: "Done caching!", message: "All selected photos were already cached", preset: SPAlertPreset.done)
-                alertView.duration = 2
+                alertView.duration = 2.6
                 alertView.present()
             }
         default: print("unknown, bad string")

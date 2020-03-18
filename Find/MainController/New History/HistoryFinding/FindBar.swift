@@ -360,6 +360,12 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         UIView.animate(withDuration: 0.3, animations: {
             self.layoutIfNeeded()
         })
+        if hasExpandedAlert == true {
+            warningWidth.constant = searchField.frame.size.width
+            UIView.animate(withDuration: 0.3, animations: {
+                self.layoutIfNeeded()
+            })
+        }
     }
     
     func addList(list: EditableFindList) {

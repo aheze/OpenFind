@@ -3012,9 +3012,63 @@
                         <outlet property="doneButton" destination="b7E-K7-hS4" id="CEP-H7-v1d"/>
                         <outlet property="helpButton" destination="jhE-uq-1Ax" id="gtt-kU-7je"/>
                         <outlet property="tableView" destination="UjL-Di-DhB" id="fBj-vh-ymO"/>
+                        <outlet property="welcomeCacheButton" destination="6gE-rK-kBV" id="mHP-BS-7c2"/>
+                        <outlet property="welcomeImageButton" destination="WAU-aT-bSp" id="JDB-34-3mC"/>
+                        <outlet property="welcomeLabel" destination="8fp-hd-mIw" id="t1r-F3-rwM"/>
+                        <outlet property="welcomeView" destination="b2x-jn-kQz" id="8Jq-dL-Rdb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5de-I0-24U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="b2x-jn-kQz">
+                    <rect key="frame" x="0.0" y="0.0" width="400" height="300"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All selected photos have already been cached! Search results will appear immediately." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fp-hd-mIw">
+                            <rect key="frame" x="36" y="116" width="328" height="128"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gE-rK-kBV">
+                            <rect key="frame" x="148.5" y="244" width="103" height="40"/>
+                            <color key="backgroundColor" name="FeedbackGradientLeft"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="Ctu-TJ-YJV"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                            <inset key="contentEdgeInsets" minX="20" minY="8" maxX="20" maxY="8"/>
+                            <state key="normal" title="Cache">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="welcomeCacheButtonPressed:" destination="RLA-KL-RCD" eventType="touchUpInside" id="z0r-Qa-Zuy"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WAU-aT-bSp">
+                            <rect key="frame" x="150" y="16" width="100" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="OZy-Qa-tAU"/>
+                                <constraint firstAttribute="height" constant="100" id="ffZ-Eh-fHI"/>
+                            </constraints>
+                            <state key="normal" image="AllCached"/>
+                            <connections>
+                                <action selector="welcomeImageButtonPressed:" destination="RLA-KL-RCD" eventType="touchUpInside" id="LvR-87-zth"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="WAU-aT-bSp" firstAttribute="centerX" secondItem="b2x-jn-kQz" secondAttribute="centerX" id="072-eb-9i5"/>
+                        <constraint firstItem="EYp-RZ-pp5" firstAttribute="trailing" secondItem="8fp-hd-mIw" secondAttribute="trailing" constant="36" id="7AM-Eu-kKY"/>
+                        <constraint firstItem="EYp-RZ-pp5" firstAttribute="bottom" secondItem="6gE-rK-kBV" secondAttribute="bottom" constant="16" id="IXg-7H-0KA"/>
+                        <constraint firstItem="8fp-hd-mIw" firstAttribute="leading" secondItem="EYp-RZ-pp5" secondAttribute="leading" constant="36" id="Ttl-MY-vrF"/>
+                        <constraint firstItem="6gE-rK-kBV" firstAttribute="top" secondItem="8fp-hd-mIw" secondAttribute="bottom" id="cXR-MS-Iua"/>
+                        <constraint firstItem="6gE-rK-kBV" firstAttribute="centerX" secondItem="b2x-jn-kQz" secondAttribute="centerX" id="kLP-Yw-EDt"/>
+                        <constraint firstItem="8fp-hd-mIw" firstAttribute="top" secondItem="WAU-aT-bSp" secondAttribute="bottom" id="nBH-tK-R7Y"/>
+                        <constraint firstItem="WAU-aT-bSp" firstAttribute="top" secondItem="b2x-jn-kQz" secondAttribute="top" constant="16" id="xKm-2n-lp2"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="EYp-RZ-pp5"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="1424.6376811594205" y="-934.15178571428567"/>
         </scene>
@@ -3240,6 +3294,7 @@
     </scenes>
     <resources>
         <image name="AddList" width="100" height="50"/>
+        <image name="AllCached" width="512" height="512"/>
         <image name="BlackXbutton" width="300" height="300"/>
         <image name="CachedIconThick" width="100" height="100"/>
         <image name="Checkmark" width="512" height="512"/>

@@ -81,11 +81,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3vY-hK-ZqR">
-                            <rect key="frame" x="-38" y="2.5" width="30" height="30"/>
-                            <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <rect key="frame" x="-35" y="0.0" width="35" height="35"/>
+                            <color key="backgroundColor" red="1" green="0.38378415505355035" blue="0.64800288287207719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="30" id="NeU-6F-ZUc"/>
-                                <constraint firstAttribute="height" constant="30" id="za2-sa-Vo8"/>
+                                <constraint firstAttribute="width" secondItem="3vY-hK-ZqR" secondAttribute="height" multiplier="1:1" id="fjC-Ea-cdJ"/>
                             </constraints>
                             <state key="normal" title="Ok">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -98,12 +97,13 @@
                     <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="mff-9q-hBw" firstAttribute="centerY" secondItem="XgI-5D-UTy" secondAttribute="centerY" id="17l-fa-It7"/>
-                        <constraint firstItem="3vY-hK-ZqR" firstAttribute="centerY" secondItem="XgI-5D-UTy" secondAttribute="centerY" id="LY8-q5-Le3"/>
+                        <constraint firstAttribute="bottom" secondItem="3vY-hK-ZqR" secondAttribute="bottom" id="4IN-wW-zqr"/>
                         <constraint firstAttribute="width" id="Y7h-cQ-s5a"/>
                         <constraint firstItem="tYq-gL-qMd" firstAttribute="centerY" secondItem="XgI-5D-UTy" secondAttribute="centerY" id="eMl-CZ-YxL"/>
+                        <constraint firstItem="3vY-hK-ZqR" firstAttribute="top" secondItem="XgI-5D-UTy" secondAttribute="top" id="fbp-ar-Jad"/>
                         <constraint firstAttribute="height" constant="35" id="lZd-8H-rH2"/>
                         <constraint firstItem="mff-9q-hBw" firstAttribute="leading" secondItem="XgI-5D-UTy" secondAttribute="leading" constant="8" id="pFf-fd-nSV"/>
-                        <constraint firstAttribute="trailing" secondItem="3vY-hK-ZqR" secondAttribute="trailing" constant="8" id="xfR-8e-Vgg"/>
+                        <constraint firstAttribute="trailing" secondItem="3vY-hK-ZqR" secondAttribute="trailing" id="xfR-8e-Vgg"/>
                         <constraint firstItem="tYq-gL-qMd" firstAttribute="leading" secondItem="XgI-5D-UTy" secondAttribute="leading" constant="8" id="yRQ-Ue-wDv"/>
                     </constraints>
                 </view>

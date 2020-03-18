@@ -15,11 +15,18 @@ protocol ReturnCache: class {
 class HistoryFindController: UIViewController, UISearchBarDelegate {
     
     
+    @IBOutlet var welcomeView: UIView!
+    @IBOutlet weak var welcomeLabel: UILabel!
+    @IBOutlet weak var welcomeCacheButton: UIButton!
+    @IBAction func welcomeCacheButtonPressed(_ sender: Any) {
+    }
+    
+    @IBOutlet weak var welcomeImageButton: UIButton!
+    @IBAction func welcomeImageButtonPressed(_ sender: Any) {
+    }
     
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var helpButton: UIButton!
-    
     @IBAction func helpButtonPressed(_ sender: Any) {
     }
     
@@ -33,6 +40,7 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
     }
     
 
+    var allCached = false
     var highlightColor = "00aeef"
     var matchToColors = [String: [CGColor]]()
     
@@ -89,6 +97,33 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
         tableView.separatorStyle = .none
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
 //        tableView.sele
+        
+        let superViewWidth = view.frame.size.width
+        welcomeView.frame = CGRect(x: 0, y: 150, width: superViewWidth, height: 275)
+        view.addSubview(welcomeView)
+        
+//        let origText = "All selected photos have already been cached! Search results will appear immediately."
+        
+        var cachedCount = 0
+        for photo in photos {
+            if photo.isDeepSearched == true {
+                cachedCount += 1
+            }
+        }
+        if cachedCount == photos.count {
+            allCached = true
+            welcomeImageButton.setImage(UIImage(named: "AllCached"), for: .normal)
+            welcomeCacheButton.setTitle("Learn more", for: .normal)
+            welcomeLabel.text = "All selected photos have already been cached! Search results will appear immediately."
+        } else {
+            allCached = false
+            welcomeImageButton.setImage(UIImage(named: "NotAllCached"), for: .normal)
+            welcomeLabel.text = "Not all photos have been cached, so search results will not appear immediately. Press Cache to cache the remaining photos."
+            welcomeCacheButton.setTitle("Cache", for: .normal)
+        }
+        welcomeCacheButton.layer.cornerRadius = 6
+        tableView.isHidden = true
+//        welcomeView.anp
         
     }
 }
