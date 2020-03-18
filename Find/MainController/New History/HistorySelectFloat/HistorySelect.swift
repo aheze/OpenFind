@@ -23,6 +23,16 @@ class HistorySelectorView: UIView, ChangeNumberOfSelected, ChangeAttributes {
         case "Unfill Heart":
             let newImage = UIImage(systemName: "heart")
         heartButton.setImage(newImage, for: .normal)
+        case "Enable":
+            findButton.isEnabled = true
+            heartButton.isEnabled = true
+            deleteButton.isEnabled = true
+            cacheButton.isEnabled = true
+        case "Disable":
+            findButton.isEnabled = false
+            heartButton.isEnabled = false
+            deleteButton.isEnabled = false
+            cacheButton.isEnabled = false
         default:
             print("WRONG STRING....")
         }

@@ -85,7 +85,16 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 changeFloatDelegate?.changeFloat(to: "Fill Heart")
                 shouldHeart = false
             }
+            
+            if indexPathsSelected.count == 0 {
+                changeFloatDelegate?.changeFloat(to: "Disable")
+            } else {
+                changeFloatDelegate?.changeFloat(to: "Enable")
+            }
         }
+        
+        
+
     }
     var selectionMode: Bool = false {
         didSet {
