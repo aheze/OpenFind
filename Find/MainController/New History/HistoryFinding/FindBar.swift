@@ -30,13 +30,14 @@ class FindBar: UIView, UITextFieldDelegate {
     
     @IBOutlet weak var warningLabel: UILabel!
     
+    var hasExpandedAlert = false
     
     @IBOutlet weak var warningWidth: NSLayoutConstraint!
     
     @IBAction func warningPressed(_ sender: Any) {
         warningWidth.constant = searchField.frame.width
         warningLabel.isHidden = false
-        
+        hasExpandedAlert = true
         UIView.animateKeyframes(withDuration: 0.8, delay: 0, options: .calculationModeCubic, animations: {
             
             UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5) {
@@ -60,7 +61,7 @@ class FindBar: UIView, UITextFieldDelegate {
     @IBOutlet weak var okButton: UIButton!
     
     @IBAction func okButtonPressed(_ sender: Any) {
-        
+        hasExpandedAlert = false
         UIView.animateKeyframes(withDuration: 0.8, delay: 0, options: .calculationModeCubic, animations: {
             self.okButton.isHidden = false
             UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.25) {
@@ -190,14 +191,17 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
             collectionView.deleteItems(at: [indexPath])
             injectListDelegate?.addList(list: list)
             sortSearchTerms()
+            
          switch selectedLists.count {
             case 0:
                 print("nothing")
                 searchLeftC.constant = 16
+//                warningWidth.constant = searchField.frame.size.width - 67
             case 1:
                 print("1")
 //                collViewWidthC.constant = 50
                 searchLeftC.constant = 35 + 3 + 16
+//            warningWidth.constant = searchField.frame.size.width - 67
             case 2:
 //                collViewWidthC.constant = 73
                 searchLeftC.constant = 73 + 3 + 16
@@ -217,6 +221,13 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
             UIView.animate(withDuration: 0.3, animations: {
                 self.layoutIfNeeded()
             })
+        
+            if hasExpandedAlert == true {
+                warningWidth.constant = searchField.frame.size.width
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.layoutIfNeeded()
+                })
+            }
         } else {
             searchField.becomeFirstResponder()
         }
@@ -370,6 +381,12 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         UIView.animate(withDuration: 0.3, animations: {
             self.layoutIfNeeded()
         })
+        if hasExpandedAlert == true {
+            warningWidth.constant = searchField.frame.size.width
+            UIView.animate(withDuration: 0.3, animations: {
+                self.layoutIfNeeded()
+            })
+        }
     }
     
     func startedEditing(start: Bool) {
