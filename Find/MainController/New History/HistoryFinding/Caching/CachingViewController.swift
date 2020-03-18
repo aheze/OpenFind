@@ -322,12 +322,13 @@ extension CachingViewController {
                    
                     number += 1
                     print("num: \(number)")
+                    let indP = IndexPath(item: number - 1, section: 0)
+                   DispatchQueue.main.async {
+                           self.collectionView.scrollToItem(at: indP, at: .centeredVertically, animated: true)
+                   }
                     if !photo.isDeepSearched {
                         
-                        let indP = IndexPath(item: number - 1, section: 0)
-                        DispatchQueue.main.async {
-                                self.collectionView.scrollToItem(at: indP, at: .centeredVertically, animated: true)
-                        }
+                       
     //                    print("photo_____________________________")
                         self.dispatchGroup.enter()
     //                    print("photo_____________________________")
