@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 import SwiftEntryKit
 import RealmSwift
-
+import SPAlert
 
 protocol UpdateImageDelegate: class {
     func changeImage(image: UIImage)
@@ -597,9 +597,18 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 }
 
 extension NewHistoryViewController: ReturnCachedPhotos {
-    func giveCachedPhotos(photos: [HistoryModel]) {
+    func giveCachedPhotos(photos: [HistoryModel], popup: String) {
         print("give")
-        
+        if popup == "Keep" {
+            let alertView = SPAlertView(title: "Kept cached photos!", message: "Tap to dismiss", preset: SPAlertPreset.done)
+            alertView.duration = 2.2
+            alertView.present()
+        } else if popup == "Finished" {
+            let alertView = SPAlertView(title: "Caching done!", message: "Tap to dismiss", preset: SPAlertPreset.done)
+            alertView.duration = 2.2
+            alertView.present()
+            
+        }
         if let photoCats = photoCategories {
             
             for currentPhoto in photoCats {
@@ -709,6 +718,8 @@ extension NewHistoryViewController: ButtonPressed {
         var deleteFromSections = [Int: Int]()
         var filePaths = [URL]()
         
+        var alreadyCached = 0
+        var shouldCache = true
         var sectionsToDelete = [Int]()
         for selected in indexPathsSelected {
             let section = selected.section
@@ -723,10 +734,17 @@ extension NewHistoryViewController: ButtonPressed {
                 let urlString = photo.filePath
                 guard let finalUrl = URL(string: "\(folderURL)\(urlString)") else { print("Invalid File name"); return }
 //                print("URL: \(finalUrl)")
+                if photo.isDeepSearched == true {
+                    alreadyCached += 1
+                }
                 filePaths.append(finalUrl)
                 tempPhotos.append(photo)
             }
         }
+        if alreadyCached == tempPhotos.count {
+            shouldCache = false
+        }
+        
 //        print(sectionCounts)
 //        print(deleteFromSections)
         for section in deleteFromSections {
@@ -829,60 +847,66 @@ extension NewHistoryViewController: ButtonPressed {
 //            print("delete pressed delegate")
         case "cache":
             print("cache pressed delegate")
-            var attributes = EKAttributes.centerFloat
-            attributes.displayDuration = .infinity
-            attributes.entryInteraction = .absorbTouches
-            attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-            attributes.entryBackground = .color(color: .white)
-            attributes.screenInteraction = .absorbTouches
-            attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(300))
-            attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
-//            attributes.lifecycleEvents.willDisappear = {
-//
-//
-//
-//            }
-           
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController
             
-//            var tempPhotos = [HistoryModel]()
-            
-//            var tempPhotoArray = [HistoryModel]()
-            var editablePhotoArray = [EditableHistoryModel]()
-            for item in indexPathsSelected {
-                let itemToEdit = indexToData[item.section]
-                if let singleItem = itemToEdit?[item.item] {
-//                    tempPhotoArray.append(singleItem)
-                    
-//                    tempPhotos.append(singleItem)
-                    let newPhoto = EditableHistoryModel()
-                    newPhoto.filePath = singleItem.filePath
-                    newPhoto.dateCreated = singleItem.dateCreated
-                    newPhoto.isHearted = singleItem.isHearted
-                    newPhoto.isDeepSearched = singleItem.isDeepSearched
-                    var newContents = [SingleHistoryContent]()
-                    for content in singleItem.contents {
-                        newContents.append(content)
+            if shouldCache == true {
+                var attributes = EKAttributes.centerFloat
+                attributes.displayDuration = .infinity
+                attributes.entryInteraction = .absorbTouches
+                attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+                attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+                attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+                attributes.entryBackground = .color(color: .white)
+                attributes.screenInteraction = .absorbTouches
+                attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(300))
+                attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+    //            attributes.lifecycleEvents.willDisappear = {
+    //
+    //
+    //
+    //            }
+               
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController
+                
+    //            var tempPhotos = [HistoryModel]()
+                
+    //            var tempPhotoArray = [HistoryModel]()
+                var editablePhotoArray = [EditableHistoryModel]()
+                for item in indexPathsSelected {
+                    let itemToEdit = indexToData[item.section]
+                    if let singleItem = itemToEdit?[item.item] {
+    //                    tempPhotoArray.append(singleItem)
+                        
+    //                    tempPhotos.append(singleItem)
+                        let newPhoto = EditableHistoryModel()
+                        newPhoto.filePath = singleItem.filePath
+                        newPhoto.dateCreated = singleItem.dateCreated
+                        newPhoto.isHearted = singleItem.isHearted
+                        newPhoto.isDeepSearched = singleItem.isDeepSearched
+                        var newContents = [SingleHistoryContent]()
+                        for content in singleItem.contents {
+                            newContents.append(content)
+                        }
+                        
+                        editablePhotoArray.append(newPhoto)
                     }
-                    
-                    editablePhotoArray.append(newPhoto)
                 }
+                
+                
+    //            aboutToBeCached = tempPhotos
+                cacheController.folderURL = folderURL
+                cacheController.photos = editablePhotoArray
+    //            cacheController.originalPhotos = tempPhotos
+                cacheController.finishedCache = self
+                
+                cacheController.view.layer.cornerRadius = 10
+    //            print("DAJFSDFSODFIODF: \(folderURL)")
+                SwiftEntryKit.display(entry: cacheController, using: attributes)
+            } else {
+                let alertView = SPAlertView(title: "Done caching!", message: "All selected photos were already cached", preset: SPAlertPreset.done)
+                alertView.duration = 2
+                alertView.present()
             }
-            
-            
-//            aboutToBeCached = tempPhotos
-            cacheController.folderURL = folderURL
-            cacheController.photos = editablePhotoArray
-//            cacheController.originalPhotos = tempPhotos
-            cacheController.finishedCache = self
-            
-            cacheController.view.layer.cornerRadius = 10
-//            print("DAJFSDFSODFIODF: \(folderURL)")
-            SwiftEntryKit.display(entry: cacheController, using: attributes)
-            
         default: print("unknown, bad string")
             
         }

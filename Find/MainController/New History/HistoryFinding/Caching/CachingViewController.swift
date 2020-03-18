@@ -10,11 +10,10 @@ import UIKit
 import SDWebImage
 import SwiftEntryKit
 import Vision
-import SPAlert
 import RealmSwift
 
 protocol ReturnCachedPhotos: class {
-    func giveCachedPhotos(photos: [HistoryModel])
+    func giveCachedPhotos(photos: [HistoryModel], popup: String)
 }
 class CachingViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -221,9 +220,11 @@ extension CachingViewController {
             var cachedPhotos = [HistoryModel]()
             
             self.cancelButton.isEnabled = false
-            let alertView = SPAlertView(title: "Kept cached photos!", message: "Tap to dismiss", preset: SPAlertPreset.done)
-            alertView.duration = 2.2
-            alertView.present()
+            
+            
+//            let alertView = SPAlertView(title: "Kept cached photos!", message: "Tap to dismiss", preset: SPAlertPreset.done)
+//            alertView.duration = 2.2
+//            alertView.present()
             
             for photo in self.photos {
                 if photo.isDeepSearched == true {
@@ -238,7 +239,7 @@ extension CachingViewController {
                     cachedPhotos.append(histModel)
                 }
             }
-            self.finishedCache?.giveCachedPhotos(photos: cachedPhotos)
+            self.finishedCache?.giveCachedPhotos(photos: cachedPhotos, popup: "Keep")
             SwiftEntryKit.dismiss()
         }
     }
@@ -247,9 +248,9 @@ extension CachingViewController {
             var cachedPhotos = [HistoryModel]()
             
             self.cancelButton.isEnabled = false
-            let alertView = SPAlertView(title: "Caching done!", message: "Tap to dismiss", preset: SPAlertPreset.done)
-            alertView.duration = 2.2
-            alertView.present()
+//            let alertView = SPAlertView(title: "Caching done!", message: "Tap to dismiss", preset: SPAlertPreset.done)
+//            alertView.duration = 2.2
+//            alertView.present()
             
             for photo in self.photos {
                 let histModel = HistoryModel()
@@ -262,7 +263,7 @@ extension CachingViewController {
                 }
                 cachedPhotos.append(histModel)
             }
-            self.finishedCache?.giveCachedPhotos(photos: cachedPhotos)
+            self.finishedCache?.giveCachedPhotos(photos: cachedPhotos, popup: "Finished")
             SwiftEntryKit.dismiss()
         }
         
