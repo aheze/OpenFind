@@ -110,7 +110,6 @@
 		49B7A33D2393000A0070209F /* BetaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33C2393000A0070209F /* BetaController.swift */; };
 		49BC782023C2B0E0003D9904 /* IndexMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC781F23C2B0DF003D9904 /* IndexMatcher.swift */; };
 		49BC782223C3E1BF003D9904 /* TextViewRounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC782123C3E1BF003D9904 /* TextViewRounded.swift */; };
-		49BC782C23C6E06F003D9904 /* PhotoAssigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC782B23C6E06F003D9904 /* PhotoAssigner.swift */; };
 		49BC782F23C6E473003D9904 /* addHeart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC782E23C6E473003D9904 /* addHeart.swift */; };
 		49BC783523C8275B003D9904 /* HistorySelect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49BC783323C8275A003D9904 /* HistorySelect.xib */; };
 		49BC783623C8275B003D9904 /* HistorySelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC783423C8275B003D9904 /* HistorySelect.swift */; };
@@ -120,6 +119,7 @@
 		49D985B4241B374B005F4E92 /* CachingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985B3241B374B005F4E92 /* CachingViewController.swift */; };
 		49D985B6241B3847005F4E92 /* CacheCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985B5241B3847005F4E92 /* CacheCell.swift */; };
 		49D985B824208037005F4E92 /* CachingCancelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985B724208037005F4E92 /* CachingCancelController.swift */; };
+		49D985BA2421D97B005F4E92 /* FindModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985B92421D97B005F4E92 /* FindModel.swift */; };
 		49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */; };
 		49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1552353FE4B0099FA62 /* BasicSetup.swift */; };
 		49F7B1582353FE7E0099FA62 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1572353FE7E0099FA62 /* Component.swift */; };
@@ -234,7 +234,6 @@
 		49B7A33C2393000A0070209F /* BetaController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaController.swift; sourceTree = "<group>"; };
 		49BC781F23C2B0DF003D9904 /* IndexMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexMatcher.swift; sourceTree = "<group>"; };
 		49BC782123C3E1BF003D9904 /* TextViewRounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewRounded.swift; sourceTree = "<group>"; };
-		49BC782B23C6E06F003D9904 /* PhotoAssigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAssigner.swift; sourceTree = "<group>"; };
 		49BC782E23C6E473003D9904 /* addHeart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addHeart.swift; sourceTree = "<group>"; };
 		49BC783323C8275A003D9904 /* HistorySelect.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistorySelect.xib; sourceTree = "<group>"; };
 		49BC783423C8275B003D9904 /* HistorySelect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistorySelect.swift; sourceTree = "<group>"; };
@@ -244,6 +243,7 @@
 		49D985B3241B374B005F4E92 /* CachingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingViewController.swift; sourceTree = "<group>"; };
 		49D985B5241B3847005F4E92 /* CacheCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheCell.swift; sourceTree = "<group>"; };
 		49D985B724208037005F4E92 /* CachingCancelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingCancelController.swift; sourceTree = "<group>"; };
+		49D985B92421D97B005F4E92 /* FindModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindModel.swift; sourceTree = "<group>"; };
 		49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		49F7B1552353FE4B0099FA62 /* BasicSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSetup.swift; sourceTree = "<group>"; };
 		49F7B1572353FE7E0099FA62 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
@@ -618,11 +618,11 @@
 			isa = PBXGroup;
 			children = (
 				49D985B2241B3736005F4E92 /* Caching */,
-				49BC782B23C6E06F003D9904 /* PhotoAssigner.swift */,
 				4953F3BD2415A14000690E53 /* HistoryFindController.swift */,
 				4953F3BF241713A000690E53 /* HistoryFindCell.swift */,
 				4953F3C124171E5F00690E53 /* FindBar.xib */,
 				4953F3C324171EE200690E53 /* FindBar.swift */,
+				49D985B92421D97B005F4E92 /* FindModel.swift */,
 			);
 			path = HistoryFinding;
 			sourceTree = "<group>";
@@ -794,6 +794,7 @@
 				4928525A23D617270048EC13 /* ListController.swift in Sources */,
 				4990AAE423EDB4EF00FAF37B /* SymbolsViewController.swift in Sources */,
 				491150942363E3D300EC0C04 /* ARExtensions.swift in Sources */,
+				49D985BA2421D97B005F4E92 /* FindModel.swift in Sources */,
 				4911508D235D51E300EC0C04 /* MatchesHUD.swift in Sources */,
 				490DA75523CBB871000AF57D /* JJFloatingActionButton+Animation.swift in Sources */,
 				49B7A33623923E810070209F /* ZoomAnimator.swift in Sources */,
@@ -858,7 +859,6 @@
 				490452522379DFD40046570D /* CollectionViewPhotoCell.swift in Sources */,
 				490DA75123CBB871000AF57D /* JJActionItemTitlePosition.swift in Sources */,
 				4917CE7F23C0490E002EA20B /* GeneralSettings.swift in Sources */,
-				49BC782C23C6E06F003D9904 /* PhotoAssigner.swift in Sources */,
 				499583A923BEC74D0022689A /* MatchesUpdater.swift in Sources */,
 				490DA75323CBB871000AF57D /* UIColor+JJFloatingActionButton.swift in Sources */,
 				49BC783923C8C7AB003D9904 /* HistoryStartSelection.swift in Sources */,

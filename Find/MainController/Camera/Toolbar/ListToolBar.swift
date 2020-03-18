@@ -30,7 +30,24 @@ protocol StartedEditing: class {
 class ListToolBar: UIView, InjectLists {
     
     
-    
+    var lightMode = false {
+        didSet {
+            if lightMode == true {
+                print("LIGHT MODE!!!")
+                baseView.backgroundColor = UIColor(named: "Gray2")
+                
+                removeAllButton.backgroundColor = UIColor(named: "Gray3")
+                newMatchButton.backgroundColor = UIColor(named: "Gray3")
+                doneButton.backgroundColor = UIColor(named: "Gray3")
+
+                removeAllButton.setTitleColor(.black, for: .normal)
+                newMatchButton.setTitleColor(.black, for: .normal)
+                doneButton.setTitleColor(.black, for: .normal)
+            } else {
+                print("dark mode")
+            }
+        }
+    }
     
    
     
@@ -47,6 +64,7 @@ class ListToolBar: UIView, InjectLists {
     
     @IBOutlet var contentView: UIView!
     
+    @IBOutlet weak var baseView: UIView!
     
     @IBOutlet weak var removeAllButton: UIButton!
     
@@ -103,9 +121,24 @@ class ListToolBar: UIView, InjectLists {
         
         flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
-        removeAllButton.layer.cornerRadius = 6
-        newMatchButton.layer.cornerRadius = 6
-        doneButton.layer.cornerRadius = 6
+        removeAllButton.layer.cornerRadius = 4
+        newMatchButton.layer.cornerRadius = 4
+        doneButton.layer.cornerRadius = 4
+        
+//        if lightMode == true {
+//            print("LIGHT MODE!!!")
+//            baseView.backgroundColor = UIColor(named: "Gray3")
+//            removeAllButton.backgroundColor = UIColor(named: "Gray1")
+//            newMatchButton.backgroundColor = UIColor(named: "Gray1")
+//            doneButton.backgroundColor = UIColor(named: "Gray1")
+//
+//            removeAllButton.setTitleColor(.black, for: .normal)
+//            newMatchButton.setTitleColor(.black, for: .normal)
+//            doneButton.setTitleColor(.black, for: .normal)
+//        } else {
+//            print("dark mode")
+//        }
+        
     }
     
     func addList(list: EditableFindList) {

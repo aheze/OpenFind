@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ListToolBar" customModule="Find" customModuleProvider="target">
             <connections>
+                <outlet property="baseView" destination="yNx-xj-pnt" id="YET-Jz-uZE"/>
                 <outlet property="collectionView" destination="B9B-HN-NIt" id="2WG-4J-plP"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="blE-aW-0Jh"/>
                 <outlet property="doneButton" destination="B5C-dV-QNK" id="fgX-B2-hEq"/>

@@ -33,13 +33,29 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
     }
     
 
+    var highlightColor = "00aeef"
+    var matchToColors = [String: [CGColor]]()
+    
+    var currentMatchStrings = [String]()
+//    var currentMatchArray = [String]()
+    var currentSearchFindList = EditableFindList()
+    var currentListsSharedFindList = EditableFindList()
+    var currentSearchAndListSharedFindList = EditableFindList()
+    
+    var stringToList = [String: EditableFindList]()
     
     var photos = [HistoryModel]()
-
+    var resultPhotos = [FindModel]()
+    
+    
     weak var returnCache: ReturnCache?
 //    func changeSearchPhotos(photos: [URL]) {
 //        photos = photos
 //    }
+    override func viewDidLayoutSubviews() {
+          super.viewDidLayoutSubviews()
+          tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +69,8 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
         attributes.positionConstraints.size.height = .constant(value: 60)
         attributes.statusBar = .light
         attributes.entryInteraction = .absorbTouches
-        attributes.scroll = .disabled
+//        attributes.scroll = .disabled
+        attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
         attributes.roundCorners = .all(radius: 5)
         attributes.shadow = .active(with: .init(color: .black, opacity: 0.4, radius: 10, offset: .zero))
         
@@ -68,6 +85,11 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
         
         helpButton.layer.cornerRadius = 6
         doneButton.layer.cornerRadius = 6
+        
+        tableView.separatorStyle = .none
+        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+//        tableView.sele
+        
     }
 }
 extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
@@ -78,15 +100,29 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HFindCell", for: indexPath) as! HistoryFindCell
-        
+        cell.baseView.layer.cornerRadius = 4
+        cell.baseView.clipsToBounds = true
         return cell
 //        dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
     }
+    
+    
+    
 }
 
 extension HistoryFindController: ReturnSortedTerms {
     func returnTerms(stringToListR: [String : EditableFindList], currentSearchFindListR: EditableFindList, currentListsSharedFindListR: EditableFindList, currentSearchAndListSharedFindListR: EditableFindList, currentMatchStringsR: [String], matchToColorsR: [String : [CGColor]]) {
         print("RECIEVED TERMS")
+        
+        
+        stringToList = stringToListR
+        currentSearchFindList = currentSearchFindListR
+        currentListsSharedFindList = currentListsSharedFindListR
+        currentSearchAndListSharedFindList = currentSearchAndListSharedFindListR
+        currentMatchStrings = currentMatchStringsR
+        matchToColors = matchToColorsR
+        
+        
     }
     
     func pause(pause: Bool) {
@@ -96,4 +132,25 @@ extension HistoryFindController: ReturnSortedTerms {
     }
     
     
+}
+
+extension HistoryFindController {
+    func fastFind() {
+        for photo in photos {
+            let newMod = FindModel()
+            for cont in photo.contents {
+                let contText = cont.text
+                if currentMatchStrings.contains(contText) {
+                    for match in currentMatchStrings {
+                        let indicies = contText.indicesOf(string: match)
+                        
+                        let individualCharacterWidth = CGFloat(cont.width) / CGFloat(contText.count)
+                        let finalW = individualCharacterWidth * CGFloat(match.count)
+                    }
+                    
+                    
+                }
+            }
+        }
+    }
 }

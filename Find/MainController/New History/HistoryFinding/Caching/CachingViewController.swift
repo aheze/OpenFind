@@ -221,7 +221,7 @@ extension CachingViewController {
             var cachedPhotos = [HistoryModel]()
             
             self.cancelButton.isEnabled = false
-            let alertView = SPAlertView(title: "Kept cached photos!", message: nil, preset: SPAlertPreset.done)
+            let alertView = SPAlertView(title: "Kept cached photos!", message: "Tap to dismiss", preset: SPAlertPreset.done)
             alertView.duration = 2.2
             alertView.present()
             
@@ -247,7 +247,7 @@ extension CachingViewController {
             var cachedPhotos = [HistoryModel]()
             
             self.cancelButton.isEnabled = false
-            let alertView = SPAlertView(title: "Caching done!", message: nil, preset: SPAlertPreset.done)
+            let alertView = SPAlertView(title: "Caching done!", message: "Tap to dismiss", preset: SPAlertPreset.done)
             alertView.duration = 2.2
             alertView.present()
             

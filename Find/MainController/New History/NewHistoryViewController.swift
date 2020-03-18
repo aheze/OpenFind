@@ -61,7 +61,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     var shouldHeart = true
     var indexPathsSelected = [IndexPath]() {
         didSet {
-            print("SETTTUTUTOUTOUOUTOUT")
+//            print("SETTTUTUTOUTOUOUTOUT")
             var selectedHeartCount = 0
             var selectedNotHeartCount = 0
             for item in indexPathsSelected {

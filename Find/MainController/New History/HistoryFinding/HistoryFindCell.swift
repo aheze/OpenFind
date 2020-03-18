@@ -11,8 +11,16 @@ import UIKit
 class HistoryFindCell: UITableViewCell {
     
     
+    @IBOutlet weak var photoImageView: UIImageView!
     
     
+    @IBOutlet weak var titleLabel: UILabel!
     
+    @IBOutlet weak var textView: UITextView!
+    
+    
+    @IBOutlet weak var textFieldHeightC: NSLayoutConstraint!
+    
+    @IBOutlet weak var baseView: UIView!
     
 }

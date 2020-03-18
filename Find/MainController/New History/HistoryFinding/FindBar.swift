@@ -35,6 +35,8 @@ class FindBar: UIView, UITextFieldDelegate {
     
     @IBAction func warningPressed(_ sender: Any) {
         warningWidth.constant = searchField.frame.width
+        warningLabel.isHidden = false
+        
         UIView.animateKeyframes(withDuration: 0.8, delay: 0, options: .calculationModeCubic, animations: {
             
             UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5) {
@@ -66,6 +68,7 @@ class FindBar: UIView, UITextFieldDelegate {
                 self.warningLabel.alpha = 0
             }
             self.okButton.isHidden = true
+            self.warningLabel.isHidden = true
 //            self.warningButton.setTitle("Paused", for: .normal)
             self.warningButton.isHidden = false
             self.warningButton.alpha = 0
@@ -139,6 +142,7 @@ class FindBar: UIView, UITextFieldDelegate {
         let toolbar = ListToolBar()
         toolbar.frame.size = CGSize(width: deviceSize.width, height: 80)
         toolbar.editableListCategories = editableListCategories
+        toolbar.lightMode = true
         injectListDelegate = toolbar
         
         toolbar.pressedButton = self
@@ -158,6 +162,8 @@ class FindBar: UIView, UITextFieldDelegate {
         warningButton.alpha = 0
         okButton.alpha = 0
         okButton.isHidden = true
+        
+        searchField.keyboardAppearance = .default
         
 //        searchBar.backgroundColor = .red
         
@@ -255,6 +261,10 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
 
 //                warningHeightC.constant = 32
                 warningWidth.constant = 67
+                self.warningButton.isHidden = false
+                
+                self.warningLabel.isHidden = true
+                self.okButton.isHidden = true
                 UIView.animate(withDuration: 0.5, animations: {
                     self.warningView.alpha = 1
 //                    self.warningLabel.alpha = 1
@@ -268,7 +278,12 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
 //                warningHeightC.constant = 6
                 UIView.animate(withDuration: 0.2, animations: {
                     self.warningButton.alpha = 0
+                    self.warningLabel.alpha = 0
+                    self.okButton.alpha = 0
                 }) { _ in
+                    self.warningButton.isHidden = true
+                    self.warningLabel.isHidden = true
+                    self.okButton.isHidden = true
                     self.warningWidth.constant = 0
                     UIView.animate(withDuration: 0.5, animations: {
                         self.warningView.alpha = 0
