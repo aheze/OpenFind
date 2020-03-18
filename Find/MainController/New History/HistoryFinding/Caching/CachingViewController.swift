@@ -202,6 +202,13 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
         cell.imageView.sd_imageTransition = .fade
         cell.imageView.sd_setImage(with: finalUrl)
         
+//        if historyModel.isDeepSearched == true {
+//            cell.cacheCheckView.image = UIImage(named: "CachedIconThick")
+//            cell.cacheCheckView.alpha = 1
+//        } else {
+//            cell.cacheCheckView.alpha = 0
+//        }
+        
         return cell
     }
     
@@ -388,20 +395,30 @@ extension CachingViewController {
     }
     func handleFastDetectedText(request: VNRequest?, error: Error?, photo: EditableHistoryModel) {
         
+        
+        
+        let newCachedPhoto = EditableHistoryModel()
+        newCachedPhoto.dateCreated = photo.dateCreated
+        newCachedPhoto.filePath = photo.filePath
+        newCachedPhoto.isDeepSearched = true
+        newCachedPhoto.isHearted = photo.isHearted
+        
         count += 1
         DispatchQueue.main.async {
             self.numberCachedLabel.text = "\(self.count)/\(self.photos.count) photos cached"
+//            if let firstIndex = self.photos.firstIndex(of: photo) {
+//                let indP = IndexPath(item: firstIndex, section: 0)
+//                self.collectionView.reloadItems(at: [indP])
+//            } else {
+//                print("NO MODEL ERROR")
+//            }
         }
         
         guard let results = request?.results, results.count > 0 else {
             print("no results")
 //                busyFastFinding = false
             
-            let newCachedPhoto = EditableHistoryModel()
-            newCachedPhoto.dateCreated = photo.dateCreated
-            newCachedPhoto.filePath = photo.filePath
-            newCachedPhoto.isDeepSearched = true
-            newCachedPhoto.isHearted = photo.isHearted
+            
 //            newCachedPhoto.contents = contents
             
     //        alreadyCached.append(newCachedPhoto)
@@ -461,11 +478,11 @@ extension CachingViewController {
 
         }
 
-        let newCachedPhoto = EditableHistoryModel()
-        newCachedPhoto.dateCreated = photo.dateCreated
-        newCachedPhoto.filePath = photo.filePath
-        newCachedPhoto.isDeepSearched = true
-        newCachedPhoto.isHearted = photo.isHearted
+//        let newCachedPhoto = EditableHistoryModel()
+//        newCachedPhoto.dateCreated = photo.dateCreated
+//        newCachedPhoto.filePath = photo.filePath
+//        newCachedPhoto.isDeepSearched = true
+//        newCachedPhoto.isHearted = photo.isHearted
         newCachedPhoto.contents = contents
         
 //        alreadyCached.append(newCachedPhoto)

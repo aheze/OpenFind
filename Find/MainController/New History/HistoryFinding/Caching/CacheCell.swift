@@ -13,5 +13,8 @@ class CacheCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     
+//    var cacheCheckView = UIImageView()
+    
+    
     
 }
