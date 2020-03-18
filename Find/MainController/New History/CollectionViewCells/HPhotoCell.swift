@@ -12,13 +12,11 @@ class HPhotoCell: UICollectionViewCell {
     
     
     @IBOutlet weak var imageView: UIImageView!
-    
     @IBOutlet weak var heartView: UIImageView!
-    
+    @IBOutlet weak var cachedView: UIImageView!
     @IBOutlet weak var checkmarkView: UIImageView!
     
     @IBOutlet weak var pinkTintView: UIView!
-    
     @IBOutlet weak var highlightView: UIView!
     
     override func awakeFromNib() {

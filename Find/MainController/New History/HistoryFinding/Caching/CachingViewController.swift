@@ -14,8 +14,7 @@ import SPAlert
 import RealmSwift
 
 protocol ReturnCachedPhotos: class {
-    
-    func giveCachedPhotos(photos: HistoryModel)
+    func giveCachedPhotos(photos: [HistoryModel])
 }
 class CachingViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -40,6 +39,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     
     @IBAction func keepButtonPressed(_ sender: Any) {
+        keepAlreadyCached()
     }
     @IBAction func discardButtonPressed(_ sender: Any) {
         SwiftEntryKit.dismiss()
@@ -61,11 +61,13 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     var aspectRatioSucceeded : Bool = false
     var sizeOfPixelBufferFast : CGSize = CGSize(width: 0, height: 0)
     
+    
+//    var originalPhotos = [HistoryModel]()
     var photos = [EditableHistoryModel]()
 //    var alreadyCached = [EditableHistoryModel]()
     
     
-    var cachedPhotos = [HistoryModel]()
+    
     
     
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
@@ -95,19 +97,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
         statusOk = false
         cancelButton.setTitle("Cancelling...", for: .normal)
         
-        var newLabel = ""
-        if count == 1 {
-            newLabel = """
-            1 photo has already been cached.
-            Would you like to keep its cache?
-            """
-        } else {
-            newLabel = """
-            \(count) photos have already been cached.
-            Would you like to keep their caches?
-            """
-        }
-        cancelLabel.text = newLabel
+        
         
     }
 
@@ -219,8 +209,36 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
 }
 extension CachingViewController {
     
+    func keepAlreadyCached() {
+        DispatchQueue.main.async {
+            var cachedPhotos = [HistoryModel]()
+            
+            self.cancelButton.isEnabled = false
+            let alertView = SPAlertView(title: "Kept cached photos!", message: nil, preset: SPAlertPreset.done)
+            alertView.duration = 2.2
+            alertView.present()
+            
+            for photo in self.photos {
+                if photo.isDeepSearched == true {
+                    let histModel = HistoryModel()
+                    histModel.filePath = photo.filePath
+                    histModel.dateCreated = photo.dateCreated
+                    histModel.isDeepSearched = photo.isDeepSearched
+                    histModel.isHearted = photo.isHearted
+                    for cont in photo.contents {
+                        histModel.contents.append(cont)
+                    }
+                    cachedPhotos.append(histModel)
+                }
+            }
+            self.finishedCache?.giveCachedPhotos(photos: cachedPhotos)
+            SwiftEntryKit.dismiss()
+        }
+    }
     func finishedFind() {
         DispatchQueue.main.async {
+            var cachedPhotos = [HistoryModel]()
+            
             self.cancelButton.isEnabled = false
             let alertView = SPAlertView(title: "Caching done!", message: nil, preset: SPAlertPreset.done)
             alertView.duration = 2.2
@@ -235,61 +253,29 @@ extension CachingViewController {
                 for cont in photo.contents {
                     histModel.contents.append(cont)
                 }
-                self.cachedPhotos.append(histModel)
+                cachedPhotos.append(histModel)
             }
-//            self.finishedCache?.giveCachedPhotos(photos: <#T##HistoryModel#>)
+            self.finishedCache?.giveCachedPhotos(photos: cachedPhotos)
             SwiftEntryKit.dismiss()
         }
         
     }
     func finishedCancelling() {
-        
         print("Canceling done.")
+        var newLabel = ""
+        if count == 1 {
+            newLabel = """
+            1 photo has already been cached.
+            Would you like to keep its cache?
+            """
+        } else {
+            newLabel = """
+            \(count) photos have already been cached.
+            Would you like to keep their caches?
+            """
+        }
+        cancelLabel.text = newLabel
         animateChange(toCancel: true)
-//        var attributes = EKAttributes.centerFloat
-//        attributes.displayDuration = .infinity
-//        attributes.entryInteraction = .absorbTouches
-//        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-//        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-//        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-//        attributes.entryBackground = .color(color: .white)
-//        attributes.screenInteraction = .absorbTouches
-//        attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(350))
-//        attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
-////            attributes.lifecycleEvents.willDisappear = {
-////
-//
-//
-//            }
-       
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingCancelController") as! CachingCancelController
-//
-//
-//        //        cacheController.isResuming = true
-//
-//
-//
-//
-//        addChild(cacheController)
-//
-////        addChildViewController(childVC)
-//        //Or, you could add auto layout constraint instead of relying on AutoResizing contraints
-//        cacheController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-//        cacheController.view.frame = containerView.bounds
-//
-//        containerView.addSubview(cacheController.view)
-//        cacheController.didMove(toParent: self)
-//
-//
-        
-        
-        //Some property on ChildVC that needs to be set
-//        childVC.dataSource = self
-        
-//            print("DAJFSDFSODFIODF: \(folderURL)")
-//        SwiftEntryKit.display(entry: cacheController, using: attributes)
-        
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -326,22 +312,14 @@ extension CachingViewController {
             var number = 0
             for photo in self.photos {
                 if self.statusOk == true {
+                   
                     number += 1
                     print("num: \(number)")
                     if !photo.isDeepSearched {
                         
                         let indP = IndexPath(item: number - 1, section: 0)
                         DispatchQueue.main.async {
-                            print("scrollll")
-    //                        self.collectionView.performBatchUpdates({
                                 self.collectionView.scrollToItem(at: indP, at: .centeredVertically, animated: true)
-    //                        }, completion: { _ in
-//                                if self.isResuming == true {
-//                                    print("done?????!!")
-//                                    self.cancelButton.setTitle("Cancel", for: .normal)
-//                                 }
-    //                        })
-                            
                         }
     //                    print("photo_____________________________")
                         self.dispatchGroup.enter()
@@ -381,6 +359,11 @@ extension CachingViewController {
             //            }
                     } else {
                         print("ALREADY!!")
+                        self.count += 1
+                        DispatchQueue.main.async {
+                            self.numberCachedLabel.text = "\(self.count)/\(self.photos.count) photos cached"
+                        }
+                                           
 //                        self.dispatchSemaphore.signal()
 //                        self.dispatchGroup.leave()
                         continue
@@ -409,6 +392,7 @@ extension CachingViewController {
         DispatchQueue.main.async {
             self.numberCachedLabel.text = "\(self.count)/\(self.photos.count) photos cached"
         }
+        
         guard let results = request?.results, results.count > 0 else {
             print("no results")
 //                busyFastFinding = false

@@ -32,6 +32,8 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //    var photoCategories: [IndexMatcher: Results<RealmPhoto>]?
 //    var photoCategories = [IndexMatcher: ]
  
+    
+    var aboutToBeCached = [HistoryModel]()
 
 //    var presentingCache = false
     
@@ -381,6 +383,12 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 cell.pinkTintView.alpha = 0
             }
             
+            if historyModel.isDeepSearched == true {
+                cell.cachedView.alpha = 1
+            } else {
+                cell.cachedView.alpha = 0
+            }
+            
             print("CELL (\(indexPath)) IS SELECTed: \(cell.isSelected)")
             if indexPathsSelected.contains(indexPath) {
                 print("contains select")
@@ -578,6 +586,41 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         
     }
 }
+
+extension NewHistoryViewController: ReturnCachedPhotos {
+    func giveCachedPhotos(photos: [HistoryModel]) {
+        print("give")
+        
+        if let photoCats = photoCategories {
+            
+            for currentPhoto in photoCats {
+                for cachedPhoto in photos {
+                    
+                    if currentPhoto.dateCreated == cachedPhoto.dateCreated {
+                        print("EQUALS")
+                        do {
+                            try realm.write {
+                                currentPhoto.isDeepSearched = cachedPhoto.isDeepSearched
+                                currentPhoto.contents = cachedPhoto.contents
+                            }
+                        } catch {
+                            print("Error saving cache. \(error)")
+                        }
+                    }
+                    
+                }
+            }
+            getData()
+            collectionView.reloadData()
+            
+        }
+    }
+    
+    
+    
+}
+
+
 extension NewHistoryViewController : UICollectionViewDelegateFlowLayout {
   //1
     func collectionView(_ collectionView: UICollectionView,
@@ -798,10 +841,13 @@ extension NewHistoryViewController: ButtonPressed {
             
 //            var tempPhotos = [HistoryModel]()
             
+//            var tempPhotoArray = [HistoryModel]()
             var editablePhotoArray = [EditableHistoryModel]()
             for item in indexPathsSelected {
                 let itemToEdit = indexToData[item.section]
                 if let singleItem = itemToEdit?[item.item] {
+//                    tempPhotoArray.append(singleItem)
+                    
 //                    tempPhotos.append(singleItem)
                     let newPhoto = EditableHistoryModel()
                     newPhoto.filePath = singleItem.filePath
@@ -816,10 +862,13 @@ extension NewHistoryViewController: ButtonPressed {
                     editablePhotoArray.append(newPhoto)
                 }
             }
+            
+            
+//            aboutToBeCached = tempPhotos
             cacheController.folderURL = folderURL
             cacheController.photos = editablePhotoArray
-            
-            
+//            cacheController.originalPhotos = tempPhotos
+            cacheController.finishedCache = self
             
             cacheController.view.layer.cornerRadius = 10
 //            print("DAJFSDFSODFIODF: \(folderURL)")

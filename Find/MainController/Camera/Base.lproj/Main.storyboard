@@ -1663,6 +1663,13 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.59607843137254901" green="0.86274509803921573" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </view>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CachedIconThick" translatesAutoresizingMaskIntoConstraints="NO" id="d8E-vd-L7N">
+                                                    <rect key="frame" x="112" y="60" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="FQT-DX-tPL"/>
+                                                        <constraint firstAttribute="height" constant="30" id="dR4-AI-Hud"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="I6e-Mc-odJ" userLabel="Heart">
                                                     <rect key="frame" x="112" y="9.5" width="30" height="27.5"/>
                                                     <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1681,8 +1688,10 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="d8E-vd-L7N" secondAttribute="trailing" constant="8" id="FCa-Q1-g98"/>
                                                 <constraint firstAttribute="bottom" secondItem="ft3-up-jcA" secondAttribute="bottom" constant="3" id="GpJ-ou-xLP"/>
                                                 <constraint firstAttribute="trailing" secondItem="ft3-up-jcA" secondAttribute="trailing" constant="3" id="I9S-S4-L9c"/>
+                                                <constraint firstItem="d8E-vd-L7N" firstAttribute="centerY" secondItem="kAz-R9-g6N" secondAttribute="centerY" id="mt9-yi-fRi"/>
                                                 <constraint firstAttribute="trailing" secondItem="I6e-Mc-odJ" secondAttribute="trailing" constant="8" id="xet-CU-z2j"/>
                                                 <constraint firstItem="I6e-Mc-odJ" firstAttribute="top" secondItem="kAz-R9-g6N" secondAttribute="top" constant="8" id="yb9-Ni-gVe"/>
                                             </constraints>
@@ -1690,6 +1699,7 @@
                                         <color key="backgroundColor" name="BackgroundHist"/>
                                         <size key="customSize" width="150" height="150"/>
                                         <connections>
+                                            <outlet property="cachedView" destination="d8E-vd-L7N" id="6iq-fE-79T"/>
                                             <outlet property="checkmarkView" destination="ft3-up-jcA" id="Nda-hL-3MG"/>
                                             <outlet property="heartView" destination="I6e-Mc-odJ" id="HN4-hT-UdQ"/>
                                             <outlet property="highlightView" destination="fAI-t1-Zma" id="Euy-6Z-Hoq"/>
@@ -1791,7 +1801,7 @@
                     <viewLayoutGuide key="safeArea" id="aYw-jp-nwe"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="620" y="-371"/>
+            <point key="canvasLocation" x="618.84057971014499" y="-371.65178571428572"/>
         </scene>
         <!--Pulley View Controller-->
         <scene sceneID="CQP-h4-ebK">
