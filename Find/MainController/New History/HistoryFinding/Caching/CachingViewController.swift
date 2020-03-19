@@ -191,7 +191,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cacheCellid", for: indexPath) as! CacheCell
         let historyModel = photos[indexPath.item]
 //        let historyModel = hisModel[indexPath.item]
-        print("CELLFORROW")
+//        print("CELLFORROW")
         var filePath = historyModel.filePath
         let urlPath = "\(folderURL)\(filePath)"
 //        print(urlPath)
@@ -317,12 +317,13 @@ extension CachingViewController {
         }, completion: nil)
         
         dispatchQueue.async {
+            self.count = 0
             var number = 0
             for photo in self.photos {
                 if self.statusOk == true {
                    
                     number += 1
-                    print("num: \(number)")
+//                    print("num: \(number)")
                     let indP = IndexPath(item: number - 1, section: 0)
                    DispatchQueue.main.async {
                            self.collectionView.scrollToItem(at: indP, at: .centeredVertically, animated: true)
@@ -367,7 +368,7 @@ extension CachingViewController {
             //                dispatchGroup.leave()
             //            }
                     } else {
-                        print("ALREADY!!")
+//                        print("ALREADY!!")
                         self.count += 1
                         DispatchQueue.main.async {
                             self.numberCachedLabel.text = "\(self.count)/\(self.photos.count) photos cached"

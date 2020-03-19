@@ -112,7 +112,7 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
         }
         if cachedCount == photos.count {
             allCached = true
-            welcomeImageButton.setImage(UIImage(named: "AllCached"), for: .normal)
+            welcomeImageButton.setImage(UIImage(named: "AllCached"), for: .normal) 
             welcomeCacheButton.setTitle("Learn more", for: .normal)
             welcomeLabel.text = "All selected photos have already been cached! Search results will appear immediately."
         } else {

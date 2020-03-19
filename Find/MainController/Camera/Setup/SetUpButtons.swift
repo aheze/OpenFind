@@ -74,10 +74,6 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
             currentMatchStrings.removeAll()
             stopSession()
             switch segue.identifier {
-            case "goToHistory":
-                print("hist")
-                let destinationVC = segue.destination as! HistoryViewController
-                destinationVC.folderURL = globalUrl
             case "goToSettings":
                 print("prepare settings")
                 segue.destination.presentationController?.delegate = self

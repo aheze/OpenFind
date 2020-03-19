@@ -38,7 +38,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //    var presentingCache = false
     
     //MARK: Finding
-    var shouldDismissSEK = true
+//    var shouldDismissSEK = true
     var selectedIndexPath: IndexPath!
     
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
@@ -96,14 +96,16 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         
 
     }
-    var selectionMode: Bool = false {
-        didSet {
-            print("selection mode: \(selectionMode)")
-            collectionView.allowsMultipleSelection = selectionMode
-            indexPathsSelected.removeAll()
-//            fileUrlsSelected.removeAll()
-        }
-    }
+    
+    var shouldDeselectIfDismissed = true
+//    var selectionMode: Bool = false {
+//        didSet {
+//            print("selection mode: \(selectionMode)")
+//            collectionView.allowsMultipleSelection = selectionMode
+//            indexPathsSelected.removeAll()
+////            fileUrlsSelected.removeAll()
+//        }
+//    }
     var numberOfSelected = 0 {
         didSet {
             changeNumberDelegate?.changeLabel(to: numberOfSelected)
@@ -124,15 +126,16 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var selectButton: UIButton!
     
     @IBOutlet weak var selectAll: UIButton!
-    var deselectAll = true
+    var deselectAll = false
     
     @IBOutlet weak var inBetweenSelect: NSLayoutConstraint!
-    var selectButtonSelected = false ///False means is Select, true = Cancel
+    var selectButtonSelected = false
     var swipedToDismiss = true
     
     @IBAction func selectAllPressed(_ sender: UIButton) {
-        deselectAll = !deselectAll
+//        deselectAll = !deselectAll
         if deselectAll == false { //Select All cells, change label to opposite
+            deselectAll = true
             print("select all")
             selectAll.setTitle("Deselect All", for: .normal)
             UIView.animate(withDuration: 0.09, animations: {
@@ -141,6 +144,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             deselectAllItems(deselect: false)
         } else {
             print("deselect all")
+            deselectAll = false
             selectAll.setTitle("Select All", for: .normal)
             UIView.animate(withDuration: 0.09, animations: {
                 self.view.layoutIfNeeded()
@@ -150,44 +154,66 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     @IBAction func selectPressed(_ sender: UIButton) {
-        selectButtonSelected = !selectButtonSelected ///First time press, will be true
-        if selectButtonSelected == true {
+//        selectButtonSelected = !selectButtonSelected ///First time press, will be true
+        print("PRESSED____________")
+        if selectButtonSelected == false {
+            selectButtonSelected = true
+            collectionView.allowsMultipleSelection = true
+//            selectionMode = true
             print("select")
+//            swipedToDismiss = true
             fadeSelectOptions(fadeOut: "fade in")
+            
         } else { ///Cancel will now be Select
+            
+            print("COUNT: \(indexPathsSelected.count)")
+            SwiftEntryKit.dismiss()
+            selectButtonSelected = false
             print("cancel")
+            
             //selectButtonSelected = true
-            swipedToDismiss = false
-            fadeSelectOptions(fadeOut: "fade out")
-            swipedToDismiss = true
+//            swipedToDismiss = false
+//            fadeSelectOptions(fadeOut: "fade out")
+           
+            
+            collectionView.allowsMultipleSelection = false
+//            indexPathsSelected.removeAll()
+//            swipedToDismiss = true
         }
     }
     
     func fadeSelectOptions(fadeOut: String) {
         switch fadeOut {
         case "fade out":
-            if swipedToDismiss == false {
-                SwiftEntryKit.dismiss()
-            }
-            deselectAll = true
-            UIView.transition(with: selectButton, duration: 0.1, options: .transitionCrossDissolve, animations: {
-              self.selectButton.setTitle("Select", for: .normal)
-            }, completion: nil)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                UIView.transition(with: self.selectAll, duration: 0.1, options: .transitionCrossDissolve, animations: {
-                  self.selectAll.setTitle("Select All", for: .normal)
-                }, completion: nil)
-            })
+            print("fade out")
             
-            inBetweenSelect.constant = -5
-            selectAll.alpha = 1
-            UIView.animate(withDuration: 0.5, animations: {
-                self.view.layoutIfNeeded()
-                self.selectAll.alpha = 0
-            }) { _ in
-                self.selectAll.isHidden = true
+            if shouldDeselectIfDismissed == true {
+    //            if swipedToDismiss == false {
+    //                SwiftEntryKit.dismiss()
+    //            }
+                print("COUNT: \(indexPathsSelected.count)")
+                deselectAllItems(deselect: true)
+    //            enterSelectMode(entering: false)
+                deselectAll = false
+                UIView.transition(with: selectButton, duration: 0.08, options: .transitionCrossDissolve, animations: {
+                  self.selectButton.setTitle("Select", for: .normal)
+                }, completion: { _ in
+                    UIView.transition(with: self.selectAll, duration: 0.1, options: .transitionCrossDissolve, animations: {
+                      self.selectAll.setTitle("Select All", for: .normal)
+                    }, completion: nil)
+                })
+                
+                
+                inBetweenSelect.constant = -5
+                selectAll.alpha = 1
+                UIView.animate(withDuration: 0.08, animations: {
+                    self.view.layoutIfNeeded()
+                    self.selectAll.alpha = 0
+                }) { _ in
+                    self.selectAll.isHidden = true
+                }
+                selectButtonSelected = false
             }
-            deselectAllItems(deselect: true)
             
         case "fade in":
             // Create a basic toast that appears at the top
@@ -227,11 +253,11 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 attributes.entryInteraction = .absorbTouches
                 attributes.shadow = .active(with: .init(color: .black, opacity: 0.4, radius: 10, offset: .zero))
                 attributes.lifecycleEvents.willDisappear = {
-                    if self.shouldDismissSEK == true {
+//                    if self.shouldDismissSEK == true {
                         self.fadeSelectOptions(fadeOut: "fade out")
-                        self.selectButtonSelected = false
-                        self.enterSelectMode(entering: false)
-                    }
+//                        self.selectButtonSelected = false
+//                        self.enterSelectMode(entering: false)
+//                    }
                 }
                 let customView = HistorySelectorView()
                 customView.buttonPressedDelegate = self
@@ -242,12 +268,13 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 //selectionMode = true
                 //changeNumberDelegate?.changeLabel(to: 4)
                 SwiftEntryKit.display(entry: customView, using: attributes)
-                enterSelectMode(entering: true)
+//                enterSelectMode(entering: true)
+                print("fade insfdfsdf")
                 
                 selectButton.setTitle("Done", for: .normal)
                 inBetweenSelect.constant = 5
                 selectAll.isHidden = false
-                UIView.animate(withDuration: 0.5, animations: {
+                UIView.animate(withDuration: 0.08, animations: {
                     self.selectAll.alpha = 1
                     self.view.layoutIfNeeded()
                 })
@@ -256,6 +283,9 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         case "firstTimeSetup":
             selectAll.alpha = 0
             selectAll.isHidden = true
+            deselectAll = false
+            shouldDeselectIfDismissed = true
+            selectButtonSelected = false
             print("firstTime")
         default:
             print("unknown case, fade")
@@ -451,7 +481,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     //MARK: Selection
     func deselectAllItems(deselect: Bool) {
         if deselect == true {
-//            print("deselcccccc")
+            print("deselcccccc")
             
 //            for i in 0..<collectionView.numberOfSections {
 //                for j in 0..<collectionView.numberOfItems(inSection: i) {
@@ -464,7 +494,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             numberOfSelected = 0
             var reloadPaths = [IndexPath]()
             for indexP in indexPathsSelected {
-                
+//                print("indPPP")
                 
 //                let indexPath = IndexPath(item: indexP, section: 0)
 //                print("indexP deselect: \(indexP)")
@@ -478,7 +508,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 } else {
                     reloadPaths.append(indexP)
     //                collectionView.reloadItems(at: [indexPath])
-                    print("Not visible")
+//                    print("Not visible")
                 }
                 
             }
@@ -520,7 +550,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         print("did")
         //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
 //        cell.isHighlighted = true
-        if selectionMode == true {
+        if selectButtonSelected == true {
             print("seleeeect")
             if !indexPathsSelected.contains(indexPath) {
                 indexPathsSelected.append(indexPath)
@@ -580,7 +610,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         print("deselecting at indexpath")
-        if selectionMode == true {
+        if selectButtonSelected == true {
             indexPathsSelected.remove(object: indexPath)
             numberOfSelected -= 1
             if let cell = collectionView.cellForItem(at: indexPath) as? HPhotoCell {
@@ -660,7 +690,8 @@ extension NewHistoryViewController : UICollectionViewDelegateFlowLayout {
 extension NewHistoryViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         print("Did Dismissss")
-        shouldDismissSEK = true
+//        shouldDismissSEK = true
+        shouldDeselectIfDismissed = true
         var attributes = EKAttributes.bottomFloat
         attributes.entryBackground = .color(color: .white)
         attributes.entranceAnimation = .translation
@@ -671,11 +702,11 @@ extension NewHistoryViewController: UIAdaptivePresentationControllerDelegate {
         attributes.entryInteraction = .absorbTouches
         attributes.shadow = .active(with: .init(color: .black, opacity: 0.4, radius: 10, offset: .zero))
         attributes.lifecycleEvents.willDisappear = {
-            if self.shouldDismissSEK == true {
+//            if self.shouldDismissSEK == true {
                 self.fadeSelectOptions(fadeOut: "fade out")
-                self.selectButtonSelected = false
-                self.enterSelectMode(entering: false)
-            }
+//                self.selectButtonSelected = false
+//                self.enterSelectMode(entering: false)
+//            }
         }
         let customView = HistorySelectorView()
         customView.buttonPressedDelegate = self
@@ -760,7 +791,8 @@ extension NewHistoryViewController: ButtonPressed {
             print("delegate test worked")
         case "find":
             print("find pressed delegate")
-            shouldDismissSEK = false
+//            shouldDismissSEK = false
+            shouldDeselectIfDismissed = false
             SwiftEntryKit.dismiss()
             performSegue(withIdentifier: "goToHistoryFind", sender: self)
         case "heart":
@@ -901,6 +933,7 @@ extension NewHistoryViewController: ButtonPressed {
                 
                 cacheController.view.layer.cornerRadius = 10
     //            print("DAJFSDFSODFIODF: \(folderURL)")
+//                shouldDeselectIfDismissed = false
                 SwiftEntryKit.display(entry: cacheController, using: attributes)
             } else {
                 let alertView = SPAlertView(title: "Done caching!", message: "All selected photos were already cached", preset: SPAlertPreset.done)
@@ -1190,5 +1223,15 @@ extension NewHistoryViewController: ZoomAnimatorDelegate {
             //The cell was found successfully
             return guardedCell.frame
         }
+    }
+}
+extension Date {
+    func add(years: Int = 0, months: Int = 0, days: Int = 0, hours: Int = 0, minutes: Int = 0, seconds: Int = 0) -> Date? {
+        let comp = DateComponents(year: years, month: months, day: days, hour: hours, minute: minutes, second: seconds)
+        return Calendar.current.date(byAdding: comp, to: self)
+    }
+    
+    func subtract(years: Int = 0, months: Int = 0, days: Int = 0, hours: Int = 0, minutes: Int = 0, seconds: Int = 0) -> Date? {
+        return add(years: -years, months: -months, days: -days, hours: -hours, minutes: -minutes, seconds: -seconds)
     }
 }
