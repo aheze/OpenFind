@@ -100,7 +100,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 
     }
     
-    var shouldDeselectIfDismissed = true
+//    var shouldDeselectIfDismissed = true
 //    var selectionMode: Bool = false {
 //        didSet {
 //            print("selection mode: \(selectionMode)")
@@ -171,8 +171,10 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         } else { ///Cancel will now be Select
             
             print("COUNT: \(indexPathsSelected.count)")
-            SwiftEntryKit.dismiss()
             selectButtonSelected = false
+            SwiftEntryKit.dismiss()
+            
+            fadeSelectOptions(fadeOut: "fade out")
             print("cancel")
             
             //selectButtonSelected = true
@@ -190,11 +192,10 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         switch fadeOut {
         case "fade out":
             print("fade out")
-            
-            if shouldDeselectIfDismissed == true {
-    //            if swipedToDismiss == false {
-    //                SwiftEntryKit.dismiss()
-    //            }
+            if selectButtonSelected == false {
+        //            if swipedToDismiss == false {
+        //                SwiftEntryKit.dismiss()
+        //            }
                 print("COUNT: \(indexPathsSelected.count)")
                 deselectAllItems(deselect: true)
     //            enterSelectMode(entering: false)
@@ -217,8 +218,8 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                     self.selectAll.isHidden = true
                 }
                 selectButtonSelected = false
+                
             }
-            
         case "fade in":
             // Create a basic toast that appears at the top
             
@@ -255,14 +256,15 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 attributes.positionConstraints.size.height = .constant(value: 50)
                 attributes.statusBar = .light
                 attributes.entryInteraction = .absorbTouches
+                attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
                 attributes.shadow = .active(with: .init(color: .black, opacity: 0.4, radius: 10, offset: .zero))
-                attributes.lifecycleEvents.willDisappear = {
-//                    if self.shouldDismissSEK == true {
-                        self.fadeSelectOptions(fadeOut: "fade out")
-//                        self.selectButtonSelected = false
-//                        self.enterSelectMode(entering: false)
-//                    }
-                }
+//                attributes.lifecycleEvents.willDisappear = {
+////                    if self.shouldDismissSEK == true {
+//                        self.fadeSelectOptions(fadeOut: "fade out")
+////                        self.selectButtonSelected = false
+////                        self.enterSelectMode(entering: false)
+////                    }
+//                }
                 let customView = HistorySelectorView()
                 customView.buttonPressedDelegate = self
                 
@@ -288,7 +290,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             selectAll.alpha = 0
             selectAll.isHidden = true
             deselectAll = false
-            shouldDeselectIfDismissed = true
+//            shouldDeselectIfDismissed = true
             selectButtonSelected = false
             print("firstTime")
         default:
@@ -693,9 +695,6 @@ extension NewHistoryViewController : UICollectionViewDelegateFlowLayout {
 
 extension NewHistoryViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        print("Did Dismissss")
-//        shouldDismissSEK = true
-        shouldDeselectIfDismissed = true
         var attributes = EKAttributes.bottomFloat
         attributes.entryBackground = .color(color: .white)
         attributes.entranceAnimation = .translation
@@ -706,41 +705,15 @@ extension NewHistoryViewController: UIAdaptivePresentationControllerDelegate {
         attributes.entryInteraction = .absorbTouches
         attributes.shadow = .active(with: .init(color: .black, opacity: 0.4, radius: 10, offset: .zero))
         attributes.lifecycleEvents.willDisappear = {
-//            if self.shouldDismissSEK == true {
                 self.fadeSelectOptions(fadeOut: "fade out")
-//                self.selectButtonSelected = false
-//                self.enterSelectMode(entering: false)
-//            }
         }
         let customView = HistorySelectorView()
         customView.buttonPressedDelegate = self
         
-        
         changeFloatDelegate = customView
         changeNumberDelegate = customView
-        //selectionMode = true
-        //changeNumberDelegate?.changeLabel(to: 4)
-        
         SwiftEntryKit.display(entry: customView, using: attributes)
-//        enterSelectMode(entering: true)
         changeNumberDelegate?.changeLabel(to: numberOfSelected)
-//        selectButton.setTitle("Done", for: .normal)
-//        inBetweenSelect.constant = 5
-//        selectAll.isHidden = false
-//        UIView.animate(withDuration: 0.5, animations: {
-//            self.selectAll.alpha = 1
-//            self.view.layoutIfNeeded()
-//        })
-//        if cancelTimer != nil {
-//            cancelTimer!.invalidate()
-//            cancelTimer = nil
-//        }
-//        SwiftEntryKit.dismiss()
-//        currentMatchStrings.append(newSearchTextField.text ?? "")
-//        sortSearchTerms()
-//        startVideo(finish: "end")
-//       // listsCollectionView.reloadData()
-//        loadListsRealm()
     }
     
 }
@@ -763,12 +736,10 @@ extension NewHistoryViewController: ButtonPressed {
             } else {
                 deleteFromSections[section]! += 1
             }
-            
             if let photoCat = indexToData[selected.section] {
                 let photo = photoCat[selected.item]
                 let urlString = photo.filePath
                 guard let finalUrl = URL(string: "\(folderURL)\(urlString)") else { print("Invalid File name"); return }
-//                print("URL: \(finalUrl)")
                 if photo.isDeepSearched == true {
                     alreadyCached += 1
                 }
@@ -779,29 +750,17 @@ extension NewHistoryViewController: ButtonPressed {
         if alreadyCached == tempPhotos.count {
             shouldCache = false
         }
-        
-//        print(sectionCounts)
-//        print(deleteFromSections)
         for section in deleteFromSections {
             if sectionCounts[section.key] == section.value {
-//                print("WHOLE SECTION")
                 sectionsToDelete.append(section.key)
             }
         }
-//        print("delete sections: \(sectionsToDelete)")
         switch button {
             
-        case "test":
-            print("delegate test worked")
         case "find":
-            print("find pressed delegate")
-//            shouldDismissSEK = false
-            shouldDeselectIfDismissed = false
             SwiftEntryKit.dismiss()
             performSegue(withIdentifier: "goToHistoryFind", sender: self)
         case "heart":
-            print("heart pressed delegate")
-            
             var selectedHeartCount = 0
             var selectedNotHeartCount = 0
             for item in indexPathsSelected {
@@ -816,10 +775,6 @@ extension NewHistoryViewController: ButtonPressed {
                     }
                 }
             }
-//            var shouldHeart = true
-//            if selectedHeartCount >= selectedNotHeartCount {
-//                shouldHeart = false
-//            }
             for item in indexPathsSelected {
                 let itemToEdit = indexToData[item.section]
                 if let singleItem = itemToEdit?[item.item] {
@@ -833,8 +788,11 @@ extension NewHistoryViewController: ButtonPressed {
                 }
             }
             collectionView.reloadItems(at: indexPathsSelected)
+            
+            selectButtonSelected = false
+            fadeSelectOptions(fadeOut: "fade out")
             SwiftEntryKit.dismiss()
-//            collectionView.reloadItems(at: indexPathsSelected)
+            collectionView.allowsMultipleSelection = false
         case "delete":
             do {
                 try realm.write {
@@ -855,40 +813,29 @@ extension NewHistoryViewController: ButtonPressed {
                     print("Could not delete items: \(error)")
                 }
             }
-            print("Before COLL COUNT: \(photoCategories?.count)")
             getData()
             if sectionsToDelete.count == 0 {
-//                print("0000)))")
                 collectionView.performBatchUpdates({
-                    print("COLL COUNT: \(photoCategories?.count)")
-                    print("SEL INDEX PATHS : \(indexPathsSelected)")
                     self.collectionView.deleteItems(at: indexPathsSelected)
                 })
-                
             } else {
                 collectionView.performBatchUpdates({
                     let sections = IndexSet(sectionsToDelete)
                     self.collectionView.deleteSections(sections)
                 })
             }
-            
-           
             indexPathsSelected.removeAll()
+            
+            selectButtonSelected = false
+            fadeSelectOptions(fadeOut: "fade out")
             SwiftEntryKit.dismiss()
-//            fadeSelectOptions(fadeOut: "fade out")
-//            selectButtonSelected = false
-//            enterSelectMode(entering: false)
-            
-            
-//            print("delete pressed delegate")
+            collectionView.allowsMultipleSelection = false
         case "cache":
-            print("cache pressed delegate")
             
             if shouldCache == true {
                 var attributes = EKAttributes.centerFloat
                 attributes.displayDuration = .infinity
                 attributes.entryInteraction = .absorbTouches
-                attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
                 attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
                 attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
                 attributes.entryBackground = .color(color: .white)
@@ -896,24 +843,15 @@ extension NewHistoryViewController: ButtonPressed {
                 attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(300))
                 attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
                 attributes.lifecycleEvents.didAppear = {
-    
-//                    print("ANIMAT DONE")
                     self.doneAnimatingSEK?.doneAnimating()
                 }
                
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController
-                
-    //            var tempPhotos = [HistoryModel]()
-                
-    //            var tempPhotoArray = [HistoryModel]()
                 var editablePhotoArray = [EditableHistoryModel]()
                 for item in indexPathsSelected {
                     let itemToEdit = indexToData[item.section]
                     if let singleItem = itemToEdit?[item.item] {
-    //                    tempPhotoArray.append(singleItem)
-                        
-    //                    tempPhotos.append(singleItem)
                         let newPhoto = EditableHistoryModel()
                         newPhoto.filePath = singleItem.filePath
                         newPhoto.dateCreated = singleItem.dateCreated
@@ -923,30 +861,34 @@ extension NewHistoryViewController: ButtonPressed {
                         for content in singleItem.contents {
                             newContents.append(content)
                         }
-                        
                         editablePhotoArray.append(newPhoto)
                     }
                 }
                 
-                
-    //            aboutToBeCached = tempPhotos
                 cacheController.folderURL = folderURL
                 cacheController.photos = editablePhotoArray
-    //            cacheController.originalPhotos = tempPhotos
                 cacheController.finishedCache = self
                 self.doneAnimatingSEK = cacheController
-                
                 cacheController.view.layer.cornerRadius = 10
-    //            print("DAJFSDFSODFIODF: \(folderURL)")
-//                shouldDeselectIfDismissed = false
+                
+                selectButtonSelected = false
+                fadeSelectOptions(fadeOut: "fade out")
+                SwiftEntryKit.dismiss()
+                collectionView.allowsMultipleSelection = false
+                
                 SwiftEntryKit.display(entry: cacheController, using: attributes)
             } else {
                 let alertView = SPAlertView(title: "Done caching!", message: "All selected photos were already cached", preset: SPAlertPreset.done)
                 alertView.duration = 2.6
                 alertView.present()
+                
+                selectButtonSelected = false
+                fadeSelectOptions(fadeOut: "fade out")
+                SwiftEntryKit.dismiss()
+                collectionView.allowsMultipleSelection = false
             }
-        default: print("unknown, bad string")
             
+        default: print("unknown, bad string")
         }
     }
     
