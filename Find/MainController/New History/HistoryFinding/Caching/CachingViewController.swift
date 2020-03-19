@@ -15,7 +15,9 @@ import RealmSwift
 protocol ReturnCachedPhotos: class {
     func giveCachedPhotos(photos: [HistoryModel], popup: String)
 }
-class CachingViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class CachingViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, DoneAnimatingSEK {
+    
+    
     
     //MARK: Cancel cache
     
@@ -121,7 +123,15 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
         setUpViews()
         cancelView.isHidden = true
         backButton.isHidden = true
-        cancelView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+//        cancelView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+//        startFinding()
+    }
+    
+    func doneAnimating() {
+//        setUpViews()
+//        cancelView.isHidden = true
+//        backButton.isHidden = true
+//        cancelView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
         startFinding()
     }
     
@@ -314,6 +324,7 @@ extension CachingViewController {
         
         UIView.animate(withDuration: 0.7, delay: 0, options: [.repeat, .autoreverse], animations: {
             self.swipeView.frame = CGRect(x: 162, y: 5, width: 10, height: 170)
+            print("animate swipe")
         }, completion: nil)
         
         dispatchQueue.async {

@@ -23,6 +23,9 @@ protocol ChangeAttributes: class {
 protocol GiveSearchPhotos: class {
     func changeSearchPhotos(photos: [URL])
 }
+protocol DoneAnimatingSEK: class {
+    func doneAnimating()
+}
 class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIViewControllerTransitioningDelegate {
     
     
@@ -118,6 +121,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     weak var changeNumberDelegate: ChangeNumberOfSelected?
     weak var changeFloatDelegate: ChangeAttributes?
     weak var changeSearchPhotos: GiveSearchPhotos?
+    weak var doneAnimatingSEK: DoneAnimatingSEK?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -891,11 +895,11 @@ extension NewHistoryViewController: ButtonPressed {
                 attributes.screenInteraction = .absorbTouches
                 attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(300))
                 attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
-    //            attributes.lifecycleEvents.willDisappear = {
-    //
-    //
-    //
-    //            }
+                attributes.lifecycleEvents.didAppear = {
+    
+//                    print("ANIMAT DONE")
+                    self.doneAnimatingSEK?.doneAnimating()
+                }
                
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController
@@ -930,6 +934,7 @@ extension NewHistoryViewController: ButtonPressed {
                 cacheController.photos = editablePhotoArray
     //            cacheController.originalPhotos = tempPhotos
                 cacheController.finishedCache = self
+                self.doneAnimatingSEK = cacheController
                 
                 cacheController.view.layer.cornerRadius = 10
     //            print("DAJFSDFSODFIODF: \(folderURL)")
