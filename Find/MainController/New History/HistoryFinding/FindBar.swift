@@ -443,6 +443,7 @@ extension FindBar {
         
         currentMatchStrings.removeAll()
         matchToColors.removeAll()
+        stringToList.removeAll()
         
         var cameAcrossSearchFieldText = [String]()
         for list in selectedLists {
@@ -497,6 +498,9 @@ extension FindBar {
         }
         currentMatchStrings += arrayOfSearch
         currentMatchStrings = currentMatchStrings.uniques
+        
+        
+        print("stringToList:\(stringToList), currentSearchFindListR:\(currentSearchFindList), currentListsSharedFindListR:\(currentListsSharedFindList), currentSearchAndListSharedFindListR:\(currentSearchAndListSharedFindList), currentMatchStringsR:\(currentMatchStrings), matchToColorsR:\(matchToColors)")
         returnTerms?.returnTerms(stringToListR: stringToList, currentSearchFindListR: currentSearchFindList, currentListsSharedFindListR: currentListsSharedFindList, currentSearchAndListSharedFindListR: currentSearchAndListSharedFindList, currentMatchStringsR: currentMatchStrings, matchToColorsR: matchToColors)
 
     }

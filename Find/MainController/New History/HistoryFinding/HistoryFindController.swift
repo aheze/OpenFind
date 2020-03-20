@@ -106,10 +106,10 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
         
         var cachedCount = 0
         for photo in photos {
-            print("PHOTO: \(photo)")
+//            print("PHOTO: \(photo)")
             if photo.isDeepSearched == true {
                 cachedCount += 1
-                print("photo.contnet: \(photo.contents)")
+//                print("photo.contnet: \(photo.contents)")
             }
         }
         if cachedCount == photos.count {
@@ -149,7 +149,7 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
 
 extension HistoryFindController: ReturnSortedTerms {
     func returnTerms(stringToListR: [String : EditableFindList], currentSearchFindListR: EditableFindList, currentListsSharedFindListR: EditableFindList, currentSearchAndListSharedFindListR: EditableFindList, currentMatchStringsR: [String], matchToColorsR: [String : [CGColor]]) {
-        print("RECIEVED TERMS")
+//        print("RECIEVED TERMS")
         
         
         stringToList = stringToListR
@@ -178,15 +178,15 @@ extension HistoryFindController {
             print("searching in photo")
             let newMod = FindModel()
             for cont in photo.contents {
-                print("in content")
-                let contText = cont.text
-                let individualCharacterWidth = CGFloat(cont.width) / CGFloat(contText.count)
+//                print("in content")
+                let lowercaseContText = cont.text.lowercased()
+                let individualCharacterWidth = CGFloat(cont.width) / CGFloat(lowercaseContText.count)
                 
                 for match in currentMatchStrings {
-                    if contText.contains(match) {
-                        print("contains match: \(match)")
+                    if lowercaseContText.contains(match) {
+                        print("contains match: \(match), text: \(lowercaseContText)")
                         let finalW = individualCharacterWidth * CGFloat(match.count)
-                        let indicies = contText.indicesOf(string: match)
+                        let indicies = lowercaseContText.indicesOf(string: match)
                         for index in indicies {
                             
                             let addedWidth = individualCharacterWidth * CGFloat(index)

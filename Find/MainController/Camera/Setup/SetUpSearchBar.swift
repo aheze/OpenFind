@@ -500,6 +500,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         resetFastHighlights()
         currentMatchStrings.removeAll()
         matchToColors.removeAll()
+        stringToList.removeAll()
         
         var cameAcrossSearchFieldText = [String]()
         
@@ -612,6 +613,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         
         currentMatchStrings += arrayOfSearch
         currentMatchStrings = currentMatchStrings.uniques
+        
+        print("stringToList:\(stringToList), currentSearchFindListR:\(currentSearchFindList), currentListsSharedFindListR:\(currentListsSharedFindList), currentSearchAndListSharedFindListR:\(currentSearchAndListSharedFindList), currentMatchStringsR:\(currentMatchStrings), matchToColorsR:\(matchToColors)")
 //        arrayOfMatches += containedList
 //        print("Total Match Strings: \(currentMatchStrings)")
         
