@@ -2424,6 +2424,12 @@
                                     <outlet property="delegate" destination="RLA-KL-RCD" id="Udf-yl-L5u"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No results found in cache" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1U-8L-apk">
+                                <rect key="frame" x="16" y="86" width="382" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KrP-6D-fMp">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                 <subviews>
@@ -2477,10 +2483,13 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="UjL-Di-DhB" secondAttribute="bottom" id="7MN-s1-dwj"/>
                             <constraint firstItem="UjL-Di-DhB" firstAttribute="leading" secondItem="Sbp-uQ-mRg" secondAttribute="leading" id="AKT-df-dmR"/>
+                            <constraint firstItem="Avw-gX-Vhg" firstAttribute="trailing" secondItem="k1U-8L-apk" secondAttribute="trailing" constant="16" id="DPj-M5-LUs"/>
                             <constraint firstItem="KrP-6D-fMp" firstAttribute="trailing" secondItem="Avw-gX-Vhg" secondAttribute="trailing" id="MX0-Vs-WbT"/>
                             <constraint firstItem="KrP-6D-fMp" firstAttribute="leading" secondItem="Avw-gX-Vhg" secondAttribute="leading" id="RCR-fB-8gN"/>
                             <constraint firstItem="UjL-Di-DhB" firstAttribute="top" secondItem="KrP-6D-fMp" secondAttribute="bottom" id="Riu-0M-2bS"/>
+                            <constraint firstItem="k1U-8L-apk" firstAttribute="top" secondItem="KrP-6D-fMp" secondAttribute="bottom" constant="16" id="SDu-OW-pKx"/>
                             <constraint firstItem="UjL-Di-DhB" firstAttribute="trailing" secondItem="Sbp-uQ-mRg" secondAttribute="trailing" id="WiC-zi-ygT"/>
+                            <constraint firstItem="k1U-8L-apk" firstAttribute="leading" secondItem="Avw-gX-Vhg" secondAttribute="leading" constant="16" id="gWg-r6-Xa7"/>
                             <constraint firstItem="KrP-6D-fMp" firstAttribute="top" secondItem="Avw-gX-Vhg" secondAttribute="top" id="oJH-RH-vC5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Avw-gX-Vhg"/>
@@ -2489,6 +2498,7 @@
                     <connections>
                         <outlet property="doneButton" destination="b7E-K7-hS4" id="CEP-H7-v1d"/>
                         <outlet property="helpButton" destination="jhE-uq-1Ax" id="gtt-kU-7je"/>
+                        <outlet property="noResultsLabel" destination="k1U-8L-apk" id="CqO-yo-zPU"/>
                         <outlet property="tableView" destination="UjL-Di-DhB" id="fBj-vh-ymO"/>
                         <outlet property="welcomeCacheButton" destination="6gE-rK-kBV" id="mHP-BS-7c2"/>
                         <outlet property="welcomeImageButton" destination="WAU-aT-bSp" id="JDB-34-3mC"/>

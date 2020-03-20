@@ -15,6 +15,8 @@ protocol ReturnCache: class {
 class HistoryFindController: UIViewController, UISearchBarDelegate {
     
     
+    @IBOutlet weak var noResultsLabel: UILabel!
+    
     @IBOutlet var welcomeView: UIView!
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var welcomeCacheButton: UIButton!
@@ -124,7 +126,14 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
             welcomeCacheButton.setTitle("Cache", for: .normal)
         }
         welcomeCacheButton.layer.cornerRadius = 6
-        tableView.isHidden = true
+        
+//        tableView.isHidden = true
+        tableView.alpha = 0
+        tableView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        
+        noResultsLabel.alpha = 0
+        self.noResultsLabel.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        
 //        welcomeView.anp
         
     }
@@ -132,22 +141,76 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
 extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return photos.count
+        print("nummmm")
+        return resultPhotos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HFindCell", for: indexPath) as! HistoryFindCell
         cell.baseView.layer.cornerRadius = 4
         cell.baseView.clipsToBounds = true
+        cell.titleLabel.text = "sdfsdfsdf"
         return cell
 //        dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
     
     
 }
 
 extension HistoryFindController: ReturnSortedTerms {
+    
+    func startedEditing(start: Bool) {
+//        UIView.animate(withDuration: 0.1, animations: {
+//            self.welcomeView.alpha = 0
+//        }) { _ in
+//            self.welcomeView.removeFromSuperview()
+//        }
+        if resultPhotos.count == 0 {
+            if start == true {
+                tableView.isHidden = false
+                tableView.alpha = 0
+
+                noResultsLabel.text = "Start by typing or selecting a list..."
+                UIView.animate(withDuration: 0.1, animations: {
+                    self.welcomeView.alpha = 0
+                    self.tableView.alpha = 1
+                    self.noResultsLabel.alpha = 1
+                    self.noResultsLabel.transform = CGAffineTransform.identity
+                }) { _ in
+                    self.welcomeView.removeFromSuperview()
+                }
+                print("Start editing")
+                
+
+            } else {
+//
+                print("ENDDD")
+                print("COUNT:: \(stringToList.count)")
+                print("list: \(stringToList)")
+                if stringToList.count == 0 {
+                    let superViewWidth = view.frame.size.width
+                    welcomeView.frame = CGRect(x: 0, y: 150, width: superViewWidth, height: 275)
+                    view.addSubview(welcomeView)
+    //                let superViewWidth = view.frame.size.width
+    //                welcomeView.frame = CGRect(x: 0, y: 150, width: superViewWidth, height: 275)
+    //                view.addSubview(welcomeView)
+    //
+                    UIView.animate(withDuration: 0.1, animations: {
+                        self.welcomeView.alpha = 1
+                        self.tableView.alpha = 0
+                        self.noResultsLabel.alpha = 0
+                        self.noResultsLabel.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+                    }) { _ in
+                        self.tableView.isHidden = true
+                    }
+                }
+            }
+        }
+    }
+    
     func returnTerms(stringToListR: [String : EditableFindList], currentSearchFindListR: EditableFindList, currentListsSharedFindListR: EditableFindList, currentSearchAndListSharedFindListR: EditableFindList, currentMatchStringsR: [String], matchToColorsR: [String : [CGColor]]) {
 //        print("RECIEVED TERMS")
         
@@ -159,7 +222,20 @@ extension HistoryFindController: ReturnSortedTerms {
         currentMatchStrings = currentMatchStringsR
         matchToColors = matchToColorsR
         
+        print("terms")
+        
         fastFind()
+        if stringToList.count == 0 {
+            
+            noResultsLabel.text = "Start by typing or selecting a list..."
+            UIView.animate(withDuration: 0.1, animations: {
+                self.noResultsLabel.alpha = 1
+                self.noResultsLabel.transform = CGAffineTransform.identity
+            })
+            
+        }
+        
+        
         
     }
     
@@ -174,10 +250,18 @@ extension HistoryFindController: ReturnSortedTerms {
 
 extension HistoryFindController {
     func fastFind() {
+        var findModels = [FindModel]()
         for photo in photos {
             print("searching in photo")
+            var num = 0
+            
             let newMod = FindModel()
+            newMod.photo = photo
+            
+//            var attributedStrings = [NSAttributedString]()
+            
             for cont in photo.contents {
+                
 //                print("in content")
                 let lowercaseContText = cont.text.lowercased()
                 let individualCharacterWidth = CGFloat(cont.width) / CGFloat(lowercaseContText.count)
@@ -188,7 +272,7 @@ extension HistoryFindController {
                         let finalW = individualCharacterWidth * CGFloat(match.count)
                         let indicies = lowercaseContText.indicesOf(string: match)
                         for index in indicies {
-                            
+                            num += 1
                             let addedWidth = individualCharacterWidth * CGFloat(index)
                             let finalX = CGFloat(cont.x) + addedWidth
                             let newComponent = Component()
@@ -218,12 +302,60 @@ extension HistoryFindController {
                                     newComponent.parentList = parentList
                                     newComponent.colors = [parentList.iconColorName]
                                 }
-                            
-                                
+//                                newMod.components
+//                                var finalRange = 0...999
+//                                print("indexL \(index), length: \(match.count), totalCount: \(lowercaseContText.count)")
+//
+//                                let totalCount = lowercaseContText.count
+//
+//                                if lowercaseContText.count >= 25 {
+//                                    let endIndex = index + match.count - 1
+//                                    var textRange = index...endIndex
+//
+//                                    var paddingSpace = 0
+//
+//                                    let availibleSpace = totalCount - match.count
+//
+//                                    if availibleSpace % 2 == 0 {
+//                                        print("even")
+//                                        paddingSpace = availibleSpace / 2
+//                                    } else {
+//                                        paddingSpace = (availibleSpace - 1) / 2
+//                                    }
+//
+//
+//                                    let startInd = index - paddingSpace
+//                                    let endInd = index + match.count + paddingSpace
+//
+//                                    if startInd >= 0 {
+//                                        if endInd <= totalCount - 1 {
+//
+//                                        } else {
+//
+//                                        }
+//                                    } else {
+//                                        if endInd <= totalCount - 1 {
+//
+//                                        } else {
+//
+//                                        }
+//                                    }
+//
+//
+//
+//                                } else {
+//
+//                                }
+//                                if let range = lowercaseContText.range(of: match) {
+//                                    print("exists")
+//                                    print(range)
+//                                }
                                 
                             } else {
                                 print("ERROROROR! NO parent list!")
                             }
+                            
+                            newMod.components.append(newComponent)
                             
                         }
                     }
@@ -232,6 +364,50 @@ extension HistoryFindController {
                     
                 
             }
+            
+            
+            newMod.numberOfMatches = num
+            if num >= 1 {
+                findModels.append(newMod)
+            }
+            
         }
+        print("FIND COUNT: \(findModels.count)")
+        resultPhotos = findModels
+        
+        
+        if findModels.count >= 1 {
+//            tableView.isHidden = false
+//            tableView.alpha = 0
+//
+//            UIView.animate(withDuration: 0.08, animations: {
+//                self.welcomeView.alpha = 0
+//                self.tableView.alpha = 1
+//            }) { _ in
+//                self.welcomeView.removeFromSuperview()
+//            }
+//            print("MORE")
+            UIView.animate(withDuration: 0.1, animations: {
+                self.noResultsLabel.alpha = 0
+                self.tableView.alpha = 1
+                self.noResultsLabel.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+                self.tableView.transform = CGAffineTransform.identity
+            })
+        } else {
+            print("NO results")
+            
+            self.noResultsLabel.text = "No results found in cache. Press Search on the keyboard to continue."
+            UIView.animate(withDuration: 0.1, animations: {
+                self.noResultsLabel.alpha = 1
+                self.tableView.alpha = 0
+                self.noResultsLabel.transform = CGAffineTransform.identity
+                self.tableView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+            })
+        }
+        tableView.reloadData()
+        
+        
     }
+    
+    
 }

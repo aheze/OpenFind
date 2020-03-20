@@ -14,6 +14,7 @@ import RealmSwift
 protocol ReturnSortedTerms: class {
     func pause(pause: Bool)
     func returnTerms(stringToListR: [String: EditableFindList], currentSearchFindListR: EditableFindList, currentListsSharedFindListR: EditableFindList, currentSearchAndListSharedFindListR: EditableFindList, currentMatchStringsR: [String], matchToColorsR: [String: [CGColor]])
+    func startedEditing(start: Bool)
 }
 class FindBar: UIView, UITextFieldDelegate {
     
@@ -114,6 +115,7 @@ class FindBar: UIView, UITextFieldDelegate {
     //    @IBOutlet weak var searchBar: UISearchBar!
     
     weak var injectListDelegate: InjectLists?
+    
     weak var returnTerms: ReturnSortedTerms?
     
     required init?(coder aDecoder: NSCoder) {
@@ -309,14 +311,18 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         searchActive = true
+        returnTerms?.startedEditing(start: true)
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         searchActive = false
+        print("TExT: \(textField.text)")
+        returnTerms?.startedEditing(start: false)
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {
             let splits = updatedString.components(separatedBy: "\u{2022}")
             let uniqueSplits = splits.uniques
+            print("up: \(updatedString)")
             if uniqueSplits.count != splits.count {
 //                print("DUPD UPD UPD UPDU PDPUDP")
 //                resetFastHighlights()
@@ -366,6 +372,8 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
                 self.layoutIfNeeded()
             })
         }
+        
+        sortSearchTerms()
     }
     
     func addList(list: EditableFindList) {
@@ -393,6 +401,7 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
                 self.layoutIfNeeded()
             })
         }
+        sortSearchTerms()
     }
     
     func startedEditing(start: Bool) {
@@ -437,7 +446,7 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
 extension FindBar {
     func sortSearchTerms() {
         let lowerCaseFinalText = finalTextToFind.lowercased()
-        let arrayOfSearch = lowerCaseFinalText.components(separatedBy: "\u{2022}")
+        var arrayOfSearch = lowerCaseFinalText.components(separatedBy: "\u{2022}")
         var cameAcrossShare = [String]()
         var duplicatedStrings = [String]()
         
@@ -479,6 +488,16 @@ extension FindBar {
                 }
             }
         }
+        
+//        print("SEARCH sdsfARR: \(arrayOfSearch)")
+        var newSearch = [String]()
+        for match in arrayOfSearch {
+            if match != "" {
+                newSearch.append(match)
+            }
+        }
+        arrayOfSearch = newSearch
+        
         let searchList = EditableFindList()
         searchList.descriptionOfList = "Search Array List +0-109028304798614"
         for match in arrayOfSearch {
