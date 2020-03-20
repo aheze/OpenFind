@@ -794,6 +794,14 @@ extension NewHistoryViewController: ButtonPressed {
             SwiftEntryKit.dismiss()
             collectionView.allowsMultipleSelection = false
         case "delete":
+            
+            var tempIntSelected = indexPathsSelected
+            selectButtonSelected = false
+            fadeSelectOptions(fadeOut: "fade out")
+            SwiftEntryKit.dismiss()
+            collectionView.allowsMultipleSelection = false
+            
+            
             do {
                 try realm.write {
                     realm.delete(tempPhotos)
@@ -816,7 +824,7 @@ extension NewHistoryViewController: ButtonPressed {
             getData()
             if sectionsToDelete.count == 0 {
                 collectionView.performBatchUpdates({
-                    self.collectionView.deleteItems(at: indexPathsSelected)
+                    self.collectionView.deleteItems(at: tempIntSelected)
                 })
             } else {
                 collectionView.performBatchUpdates({
@@ -824,12 +832,9 @@ extension NewHistoryViewController: ButtonPressed {
                     self.collectionView.deleteSections(sections)
                 })
             }
-            indexPathsSelected.removeAll()
+            tempIntSelected.removeAll()
             
-            selectButtonSelected = false
-            fadeSelectOptions(fadeOut: "fade out")
-            SwiftEntryKit.dismiss()
-            collectionView.allowsMultipleSelection = false
+            
         case "cache":
             
             if shouldCache == true {

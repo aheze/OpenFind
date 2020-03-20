@@ -472,7 +472,18 @@ extension CachingViewController {
                     let newW = origWidth * convertedOriginalWidthOfBigImage
                     let newH = origHeight * self.deviceSize.height
                     let newX = origX * convertedOriginalWidthOfBigImage - offHalf
-                    let newY = origY * self.deviceSize.height
+                    let newY = (origY * self.deviceSize.height) - newH
+                    
+                    
+//                    let lowerCaseComponentText = text.string.lowercased()
+//                                       component.text = lowerCaseComponentText
+//                                       let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
+//                                       let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
+//                                       let offHalf = offsetWidth / 2
+//                                       let newW = component.width * convertedOriginalWidthOfBigImage
+//                                       let newH = component.height * self.deviceSize.height
+//                                       let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
+//                                       let newY = (component.y * self.deviceSize.height) - newH
 //                        let individualCharacterWidth = newW / CGFloat(component.text.count)
 
 //                        component.x = newX

@@ -49,11 +49,11 @@ extension ViewController {
                     let newW = component.width * convertedOriginalWidthOfBigImage
                     let newH = component.height * self.deviceSize.height
                     let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
-                    let newY = component.y * self.deviceSize.height
+                    let newY = (component.y * self.deviceSize.height) - newH
                     let individualCharacterWidth = newW / CGFloat(component.text.count)
                     
                     component.x = newX
-                    component.y = newY - newH
+                    component.y = newY
                     drawFastHighlight(component: component)
                     
                     
@@ -85,7 +85,8 @@ extension ViewController {
                                 let newComponent = Component()
                                 
                                 newComponent.x = finalX - 6
-                                newComponent.y = newY - (newH + 3)
+//                                newComponent.y = newY - (newH + 3)
+                                newComponent.y = newY - 3
                                 newComponent.width = finalW + 12
                                 newComponent.height = newH + 6
                                 newComponent.text = match

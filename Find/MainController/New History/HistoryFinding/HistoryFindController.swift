@@ -108,6 +108,7 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
         for photo in photos {
             if photo.isDeepSearched == true {
                 cachedCount += 1
+                print("photo.contnet: \(photo.contents)")
             }
         }
         if cachedCount == photos.count {
@@ -157,6 +158,7 @@ extension HistoryFindController: ReturnSortedTerms {
         currentMatchStrings = currentMatchStringsR
         matchToColors = matchToColorsR
         
+        fastFind()
         
     }
     
@@ -172,19 +174,62 @@ extension HistoryFindController: ReturnSortedTerms {
 extension HistoryFindController {
     func fastFind() {
         for photo in photos {
+            print("searching in photo")
             let newMod = FindModel()
             for cont in photo.contents {
+                print("in content")
                 let contText = cont.text
-                if currentMatchStrings.contains(contText) {
-                    for match in currentMatchStrings {
-                        let indicies = contText.indicesOf(string: match)
-                        
-                        let individualCharacterWidth = CGFloat(cont.width) / CGFloat(contText.count)
+                let individualCharacterWidth = CGFloat(cont.width) / CGFloat(contText.count)
+                
+                for match in currentMatchStrings {
+                    if contText.contains(match) {
+                        print("contains match: \(match)")
                         let finalW = individualCharacterWidth * CGFloat(match.count)
+                        let indicies = contText.indicesOf(string: match)
+                        for index in indicies {
+                            
+                            let addedWidth = individualCharacterWidth * CGFloat(index)
+                            let finalX = CGFloat(cont.x) + addedWidth
+                            let newComponent = Component()
+                            
+                            newComponent.x = finalX - 6
+                            newComponent.y = CGFloat(cont.y) - (CGFloat(cont.height) + 3)
+                            newComponent.width = finalW + 12
+                            newComponent.height = CGFloat(cont.height) + 6
+                            newComponent.text = match
+//                            newComponent.changed = false
+                            if let parentList = stringToList[match] {
+                                switch parentList.descriptionOfList {
+                                case "Search Array List +0-109028304798614":
+                                        print("Search Array")
+                                    newComponent.parentList = currentSearchFindList
+                                    newComponent.colors = [highlightColor]
+                                case "Shared Lists +0-109028304798614":
+                                        print("Shared Lists")
+                                    newComponent.parentList = currentListsSharedFindList
+                                    newComponent.isSpecialType = "Shared List"
+                                case "Shared Text Lists +0-109028304798614":
+                                        print("Shared Text Lists")
+                                    newComponent.parentList = currentSearchAndListSharedFindList
+                                    newComponent.isSpecialType = "Shared Text List"
+                                default:
+                                        print("normal")
+                                    newComponent.parentList = parentList
+                                    newComponent.colors = [parentList.iconColorName]
+                                }
+                            
+                                
+                                
+                            } else {
+                                print("ERROROROR! NO parent list!")
+                            }
+                            
+                        }
                     }
-                    
-                    
                 }
+                    
+                    
+                
             }
         }
     }
