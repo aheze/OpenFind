@@ -308,7 +308,14 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
             }
         }
     
-    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+//        print("clear text: \(textField.text)")
+        searchField.text = ""
+//        print("setfdfg")
+        finalTextToFind = ""
+        sortSearchTerms()
+        return true
+    }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         searchActive = true
         returnTerms?.startedEditing(start: true)
@@ -319,6 +326,7 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         returnTerms?.startedEditing(start: false)
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        print("CHANGE!!")
         if let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {
             let splits = updatedString.components(separatedBy: "\u{2022}")
             let uniqueSplits = splits.uniques

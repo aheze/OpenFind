@@ -169,20 +169,24 @@ extension HistoryFindController: ReturnSortedTerms {
 //            self.welcomeView.removeFromSuperview()
 //        }
         if resultPhotos.count == 0 {
+            
             if start == true {
-                tableView.isHidden = false
-                tableView.alpha = 0
+                if stringToList.count == 0 {
+                    tableView.isHidden = false
+                    tableView.alpha = 0
 
-                noResultsLabel.text = "Start by typing or selecting a list..."
-                UIView.animate(withDuration: 0.1, animations: {
-                    self.welcomeView.alpha = 0
-                    self.tableView.alpha = 1
-                    self.noResultsLabel.alpha = 1
-                    self.noResultsLabel.transform = CGAffineTransform.identity
-                }) { _ in
-                    self.welcomeView.removeFromSuperview()
+                    noResultsLabel.text = "Start by typing or selecting a list..."
+                    UIView.animate(withDuration: 0.1, animations: {
+                        self.welcomeView.alpha = 0
+                        self.tableView.alpha = 1
+                        self.noResultsLabel.alpha = 1
+                        self.noResultsLabel.transform = CGAffineTransform.identity
+                    }) { _ in
+                        self.welcomeView.removeFromSuperview()
+                    }
+                    print("Start editing")
                 }
-                print("Start editing")
+                
                 
 
             } else {
