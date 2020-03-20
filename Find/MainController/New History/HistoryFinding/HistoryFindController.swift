@@ -106,6 +106,7 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
         
         var cachedCount = 0
         for photo in photos {
+            print("PHOTO: \(photo)")
             if photo.isDeepSearched == true {
                 cachedCount += 1
                 print("photo.contnet: \(photo.contents)")

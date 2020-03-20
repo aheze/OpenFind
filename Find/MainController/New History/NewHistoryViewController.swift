@@ -633,7 +633,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 }
 
 extension NewHistoryViewController: ReturnCachedPhotos {
-    func giveCachedPhotos(photos: [HistoryModel], popup: String) {
+    func giveCachedPhotos(photos: [EditableHistoryModel], popup: String) {
         print("give")
         if popup == "Keep" {
             let alertView = SPAlertView(title: "Kept cached photos!", message: "Tap to dismiss", preset: SPAlertPreset.done)
@@ -651,22 +651,30 @@ extension NewHistoryViewController: ReturnCachedPhotos {
                 for cachedPhoto in photos {
                     
                     if currentPhoto.dateCreated == cachedPhoto.dateCreated {
-                        print("EQUALS")
+//                        print("EQUALS")
                         do {
                             try realm.write {
                                 currentPhoto.isDeepSearched = cachedPhoto.isDeepSearched
-                                currentPhoto.contents = cachedPhoto.contents
+                                currentPhoto.contents.removeAll()
+                                for cont in cachedPhoto.contents {
+                                    currentPhoto.contents.append(cont)
+                                }
+//                                currentPhoto.contents = cachedPhoto.contents
+//                                print("CONTENTS:ssfsdfsdf\(cachedPhoto.contents)")
                             }
                         } catch {
                             print("Error saving cache. \(error)")
                         }
+                        print("done cache, curr:: \(currentPhoto)")
                     }
                     
                 }
             }
-            getData()
+//            getData()
             collectionView.reloadData()
             
+            print(photoCats)
+            photoCategories = photoCats
         }
     }
     
@@ -912,6 +920,33 @@ extension NewHistoryViewController: ButtonPressed {
                 }
             }
             destinationVC.photos = modelArray
+            print("PHOTOARR: \(modelArray)")
+            modelArray.forEach { (edit) in
+                print(edit.contents)
+            }
+            
+            
+            var tempPhotos = [HistoryModel]()
+            var deleteFromSections = [Int: Int]()
+            var filePaths = [URL]()
+            
+//            var alreadyCached = 0
+//            var shouldCache = true
+//            var sectionsToDelete = [Int]()
+            for selected in indexPathsSelected {
+//                let section = selected.section
+//                if deleteFromSections[section] == nil {
+//                    deleteFromSections[section] = 1
+//                } else {
+//                    deleteFromSections[section]! += 1
+//                }
+                if let photoCat = indexToData[selected.section] {
+                    let photo = photoCat[selected.item]
+                    tempPhotos.append(photo)
+                }
+            }
+            
+            
 //            changeSearchPhotos = destinationVC
             print("going to find hist")
         default:
@@ -998,7 +1033,7 @@ extension NewHistoryViewController {
                     
                     if let newHistModel = photoCategories?[count] {
                         indexToData[index, default: [HistoryModel]()].append(newHistModel)
-                        
+//                        print("HIST MODE: \(newHistModel)")
                     }
 
                 }

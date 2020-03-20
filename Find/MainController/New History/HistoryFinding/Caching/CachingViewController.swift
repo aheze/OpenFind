@@ -13,7 +13,7 @@ import Vision
 import RealmSwift
 
 protocol ReturnCachedPhotos: class {
-    func giveCachedPhotos(photos: [HistoryModel], popup: String)
+    func giveCachedPhotos(photos: [EditableHistoryModel], popup: String)
 }
 class CachingViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, DoneAnimatingSEK {
     
@@ -227,7 +227,7 @@ extension CachingViewController {
     
     func keepAlreadyCached() {
         DispatchQueue.main.async {
-            var cachedPhotos = [HistoryModel]()
+            var alreadyCachedPhotos = [EditableHistoryModel]()
             
             self.cancelButton.isEnabled = false
             
@@ -238,18 +238,18 @@ extension CachingViewController {
             
             for photo in self.photos {
                 if photo.isDeepSearched == true {
-                    let histModel = HistoryModel()
-                    histModel.filePath = photo.filePath
-                    histModel.dateCreated = photo.dateCreated
-                    histModel.isDeepSearched = photo.isDeepSearched
-                    histModel.isHearted = photo.isHearted
-                    for cont in photo.contents {
-                        histModel.contents.append(cont)
-                    }
-                    cachedPhotos.append(histModel)
+//                    let histModel = HistoryModel()
+//                    histModel.filePath = photo.filePath
+//                    histModel.dateCreated = photo.dateCreated
+//                    histModel.isDeepSearched = photo.isDeepSearched
+//                    histModel.isHearted = photo.isHearted
+//                    for cont in photo.contents {
+//                        histModel.contents.append(cont)
+//                    }
+                    alreadyCachedPhotos.append(photo)
                 }
             }
-            self.finishedCache?.giveCachedPhotos(photos: cachedPhotos, popup: "Keep")
+            self.finishedCache?.giveCachedPhotos(photos: alreadyCachedPhotos, popup: "Keep")
             SwiftEntryKit.dismiss()
         }
     }
@@ -262,18 +262,19 @@ extension CachingViewController {
 //            alertView.duration = 2.2
 //            alertView.present()
             
-            for photo in self.photos {
-                let histModel = HistoryModel()
-                histModel.filePath = photo.filePath
-                histModel.dateCreated = photo.dateCreated
-                histModel.isDeepSearched = photo.isDeepSearched
-                histModel.isHearted = photo.isHearted
-                for cont in photo.contents {
-                    histModel.contents.append(cont)
-                }
-                cachedPhotos.append(histModel)
-            }
-            self.finishedCache?.giveCachedPhotos(photos: cachedPhotos, popup: "Finished")
+//            for photo in self.photos {
+//                let histModel = HistoryModel()
+//                histModel.filePath = photo.filePath
+//                histModel.dateCreated = photo.dateCreated
+//                histModel.isDeepSearched = photo.isDeepSearched
+//                histModel.isHearted = photo.isHearted
+//                for cont in photo.contents {
+//                    histModel.contents.append(cont)
+//                }
+//                cachedPhotos.append(histModel)
+//                print("MODEL: \(histModel)")
+//            }
+            self.finishedCache?.giveCachedPhotos(photos: self.photos, popup: "Finished")
             SwiftEntryKit.dismiss()
         }
         
@@ -503,6 +504,7 @@ extension CachingViewController {
 
         }
 
+        print("CACHED CONTS: \(contents)")
 //        let newCachedPhoto = EditableHistoryModel()
 //        newCachedPhoto.dateCreated = photo.dateCreated
 //        newCachedPhoto.filePath = photo.filePath
