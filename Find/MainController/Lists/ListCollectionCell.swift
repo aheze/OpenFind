@@ -22,7 +22,8 @@ class ListCollectionCell: UICollectionViewCell {
     
     @IBOutlet weak var checkmarkView: UIImageView!
     
-//    var shouldSelect = false
+    @IBOutlet weak var tapHighlightView: UIView!
+    //    var shouldSelect = false
     
     //    override func awakeFromNib() {
 //        super.awakeFromNib()
@@ -62,9 +63,12 @@ class ListCollectionCell: UICollectionViewCell {
     override var isHighlighted: Bool {
         didSet {
             if isHighlighted {
-                baseView.backgroundColor = UIColor(named: "TransparentWhite")
+                print("HIGH")
+                tapHighlightView.alpha = 1
+//                baseView.backgroundColor = UIColor(named: "TransparentWhite")
             } else {
-                baseView.backgroundColor = UIColor(named: "PureBlank")
+                tapHighlightView.alpha = 0
+//                baseView.backgroundColor = UIColor(named: "PureBlank")
             }
         }
     }

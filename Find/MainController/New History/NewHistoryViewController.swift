@@ -919,6 +919,7 @@ extension NewHistoryViewController: ButtonPressed {
                     modelArray.append(singleItem)
                 }
             }
+            destinationVC.folderURL = folderURL
             destinationVC.photos = modelArray
             print("PHOTOARR: \(modelArray)")
             modelArray.forEach { (edit) in

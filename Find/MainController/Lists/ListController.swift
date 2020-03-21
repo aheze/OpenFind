@@ -15,29 +15,33 @@ protocol ChangeNumberOfSelectedList: class {
     func changeLabel(to: Int)
 }
 class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLayoutDelegate, UIAdaptivePresentationControllerDelegate, NewListMade, TellControllerToDeleteList {
-    
-    
-    
-    
-    
     var cellHeights = [CGFloat]()
     
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         print("Did Dismiss")
         SwiftEntryKit.dismiss()
     }
-
     
     func sortLists() {
         listCategories = listCategories!.sorted(byKeyPath: "dateCreated", ascending: false)
+        guard let listCats = listCategories else { print("No LISTS..... or Error!"); return }
+        if listCats.count == 0 {
+            print("NONE LISTS!!")
+            view.addSubview(noListsDisplay)
+            noListsDisplay.snp.makeConstraints { (make) in
+                make.center.equalToSuperview()
+                make.width.equalTo(300)
+                make.height.equalTo(300)
+            }
+        } else {
+            noListsDisplay.removeFromSuperview()
+        }
     }
     func exitSwiftEntryKit() {
         SwiftEntryKit.dismiss()
         fadeSelectOptions(fadeOut: "fade out")
         selectButtonSelected = false
-        enterSelectMode(entering: false)
     }
-    
     
     func deleteTheList() { ///Comes from EditListViewController, deletes an existing list.
         print("Delete Preexisting list")
@@ -62,7 +66,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
     
     
     func listDeleteButtonPressed() {
-        sortLists()
+        
         var tempLists = [FindList]()
         var tempInts = [Int]()
         var arrayOfIndexPaths = [IndexPath]()
@@ -85,6 +89,12 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         collectionView.deleteItems(at: arrayOfIndexPaths)
         indexPathsSelected.removeAll()
         numberOfSelected -= tempLists.count
+        
+        selectButtonSelected = false
+        SwiftEntryKit.dismiss()
+        fadeSelectOptions(fadeOut: "fade out")
+        collectionView.allowsMultipleSelection = false
+        sortLists()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -110,15 +120,9 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
     
     var swipedToDismiss = true
     var selectButtonSelected = false
-    weak var changeNumberDelegateList: ChangeNumberOfSelectedList?
-    var selectionMode: Bool = false {
-        didSet {
-            print("selection mode: \(selectionMode)")
-            collectionView.allowsMultipleSelection = selectionMode
-            //fileUrlsSelected.removeAll()
-        }
-    }
     
+    
+    weak var changeNumberDelegateList: ChangeNumberOfSelectedList?
     var currentEditingPresentationPath = 0
     
     var indexPathsSelected = [Int]()
@@ -127,10 +131,6 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
             changeNumberDelegateList?.changeLabel(to: numberOfSelected)
         }
     }
-    
-    
-    
-    
     
     @IBAction func clearPressed(_ sender: Any) {
         var tempLists = [FindList]()
@@ -149,24 +149,26 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         } catch {
             print("error deleting category \(error)")
         }
-        addHeight()
+//        addHeight()
         collectionView.deleteItems(at: arrayOfIndexPaths)
         indexPathsSelected.removeAll()
     }
     
     
     @IBAction func selectPressed(_ sender: UIButton) {
-        selectButtonSelected = !selectButtonSelected ///First time press, will be true
-        if selectButtonSelected == true {
+//        selectButtonSelected = !selectButtonSelected ///First time press, will be true
+        if selectButtonSelected == false {
+            selectButtonSelected = true
             print("selecting now")
             fadeSelectOptions(fadeOut: "fade in")
+            collectionView.allowsMultipleSelection = true
         } else { ///Cancel will now be Select
             print("canceling now")
+            selectButtonSelected = false
             //selectButtonSelected = true
             SwiftEntryKit.dismiss()
-//            swipedToDismiss = false
-//            fadeSelectOptions(fadeOut: "fade out")
-//            swipedToDismiss = true
+            fadeSelectOptions(fadeOut: "fade out")
+            collectionView.allowsMultipleSelection = false
         }
     }
     
@@ -194,8 +196,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         getData()
         collectionView.delaysContentTouches = false
         selectButton.layer.cornerRadius = 6
-       // sortLists()
-        addHeight()
+//        addHeight()
         print("Cellheights: \(cellHeights)")
     }
     override func viewDidDisappear(_ animated: Bool) {
@@ -207,39 +208,37 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         listCategories = realm.objects(FindList.self)
         
         
-        guard let listCats = listCategories else { print("No LISTS..... or Error!"); return }
-        if listCats.count == 0 {
-            view.addSubview(noListsDisplay)
-            noListsDisplay.snp.makeConstraints { (make) in
-                make.center.equalToSuperview()
-                make.width.equalTo(300)
-                make.height.equalTo(300)
-            }
-        }
+//        guard let listCats = listCategories else { print("No LISTS..... or Error!"); return }
+//        if listCats.count == 0 {
+//            view.addSubview(noListsDisplay)
+//            noListsDisplay.snp.makeConstraints { (make) in
+//                make.center.equalToSuperview()
+//                make.width.equalTo(300)
+//                make.height.equalTo(300)
+//            }
+//        }
         sortLists()
         collectionView.reloadData()
     }
     
-    func addHeight() {
-        cellHeights.removeAll()
-        if let cats = listCategories {
-            for cell in cats {
-                let sizeOfWidth = ((collectionView.bounds.width - (AdaptiveCollectionConfig.cellPadding * 3)) / 2) - 20
-               // print("size of Width: \(sizeOfWidth)")
-                //let sizeOfWidth = collectionView.frame.size.width - (AdaptiveCollectionConfig.cellPadding * 3) - 20
-                
-                let newDescHeight = cell.descriptionOfList.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
-                
-                let array = cell.contents
-                let arrayAsString = array.joined(separator:"\n")
-                let newContentsHeight = arrayAsString.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
-                let extensionHeight = newDescHeight + newContentsHeight
-                cellHeights.append(extensionHeight)
-            }
-        }
-      //  print("add height - height: \(cellHeights)")
-      //  print("list categories    : \(listCategories)")
-    }
+//    func addHeight() {
+//        cellHeights.removeAll()
+//        if let cats = listCategories {
+//            for cell in cats {
+//                let sizeOfWidth = ((collectionView.bounds.width - (AdaptiveCollectionConfig.cellPadding * 3)) / 2) - 20
+//               // print("size of Width: \(sizeOfWidth)")
+//                //let sizeOfWidth = collectionView.frame.size.width - (AdaptiveCollectionConfig.cellPadding * 3) - 20
+//
+//                let newDescHeight = cell.descriptionOfList.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
+//
+//                let array = cell.contents
+//                let arrayAsString = array.joined(separator:"\n")
+//                let newContentsHeight = arrayAsString.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
+//                let extensionHeight = newDescHeight + newContentsHeight
+//                cellHeights.append(extensionHeight)
+//            }
+//        }
+//    }
     func save(findList: FindList) {
         do {
             try realm.write {
@@ -249,7 +248,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
             print("Error saving category \(error)")
         }
         sortLists()
-        addHeight()
+//        addHeight()
         //collectionView.reloadData()
         let indexPath = IndexPath(
             item: 0,
@@ -282,20 +281,6 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         }
         collectionView.reloadData()
     }
-//    func removeContents(at indexes: [Int]) {
-//        let newVideos = [Video]()
-//        for (index, video) in favorite!.videos.enumerated() {
-//            if !indexes.contains(index) {
-//                newVideos.append(video)
-//            }
-//        }
-//
-//        let realm = try! Realm()
-//        try! realm.write {
-//            realm.delete(newVideos)
-//        }
-//    }
-    
 }
 extension ListController: ListFinishedEditing {
     func updateExistingList(name: String, description: String, contents: [String], imageName: String, imageColor: String) {
@@ -343,6 +328,8 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
             let array = listT.contents.joined(separator:"\n")
             cell.contentsList.text = array
             cell.baseView.layer.cornerRadius = 10
+            cell.tapHighlightView.layer.cornerRadius = 10
+            cell.tapHighlightView.alpha = 0
             cell.highlightView.layer.cornerRadius = 10
             print("CELL FOR ITEM, \(listT.name)")
             
@@ -366,39 +353,6 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
                 cell.transform = CGAffineTransform.identity
             })
         }
-//        if indexPathsSelected.contains(indexPath.item) {
-//            print("..conts")
-////            print("CONTS")
-////            cell.shouldSelect = true
-////            cell.highlightView.alpha = 1
-////            cell.checkmarkView.alpha = 1
-//            UIView.animate(withDuration: 0.1, animations: {
-//                cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-//            })
-////                checkmarkView.alpha = 1
-////                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-//            UIView.animate(withDuration: 0.1, animations: {
-//                cell.highlightView.alpha = 1
-//                cell.checkmarkView.alpha = 1
-//                cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-////                        self.layoutIfNeeded()
-//            })
-//        } else {
-////            cell.shouldSelect = false
-////            cell.highlightView.alpha = 0
-////            cell.checkmarkView.alpha = 0
-//            UIView.animate(withDuration: 0.1, animations: {
-//                cell.highlightView.alpha = 0
-//                cell.checkmarkView.alpha = 0
-//                cell.transform = CGAffineTransform.identity
-////                    self.layoutIfNeeded()
-//            })
-////            print("NO CONTS")
-//        }
-        //cell.contentView.layer.cornerRadius = 10
-        
-        
-        
         return cell
     }
     
@@ -406,18 +360,26 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView,
                         heightForTextAtIndexPath indexPath: IndexPath) -> CGFloat {
         guard let cell = listCategories?[indexPath.item] else { print("ERRORRRRRR"); return 0 }
+        
         let sizeOfWidth = ((collectionView.bounds.width - (AdaptiveCollectionConfig.cellPadding * 3)) / 2) - 20
+        
+        
         let newDescHeight = cell.descriptionOfList.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
         let array = cell.contents
         let arrayAsString = array.joined(separator:"\n")
         let newContentsHeight = arrayAsString.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
-        return AdaptiveCollectionConfig.cellBaseHeight + cellHeights[indexPath.item] + 25 //+ 300
+        
+        let titleHeight = cell.name.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 22, weight: .bold))
+        
+        let extendHeight = newDescHeight + newContentsHeight + titleHeight
+        
+        return AdaptiveCollectionConfig.cellBaseHeight + extendHeight + 25 //+ 300
     }
   
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("did")
-        if selectionMode == true {
+        if selectButtonSelected == true {
             print("SEL MODE")
             indexPathsSelected.append(indexPath.item)
             numberOfSelected += 1
@@ -465,7 +427,7 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         print("deselecting at indexpath")
-        if selectionMode == true {
+        if selectButtonSelected == true {
             indexPathsSelected.remove(object: indexPath.item)
             numberOfSelected -= 1
             let cell = collectionView.cellForItem(at: indexPath) as! ListCollectionCell
@@ -481,13 +443,6 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
 
         
     }
-//
-//      func heightForText(_ text: String, width: CGFloat) -> CGFloat {
-//        let font = UIFont.systemFont(ofSize: 10)
-//        let rect = NSString(string: text).boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.font): font]), context: nil)
-//        return ceil(rect.height)
-//      }
-    
 }
 
 extension String {
@@ -505,11 +460,6 @@ extension ListController {
     func deselectAllItems() {
         print("deselc all items-------------")
         print(indexPathsSelected)
-//        for i in 0..<collectionView.numberOfSections {
-//            for j in 0..<collectionView.numberOfItems(inSection: i) {
-//                collectionView.deselectItem(at: IndexPath(row: j, section: i), animated: false)
-//            }
-//        }
         var reloadPaths = [IndexPath]()
         for indexP in indexPathsSelected {
             
@@ -525,17 +475,10 @@ extension ListController {
                 })
             } else {
                 reloadPaths.append(indexPath)
-//                collectionView.reloadItems(at: [indexPath])
                 print("Not visible")
             }
-            
         }
         collectionView.reloadItems(at: reloadPaths)
-//        indexPathsSelected.remove(object: indexPath.item)
-//        numberOfSelected -= 1
-        
-
-        //fileUrlsSelected.removeAll()
         indexPathsSelected.removeAll()
         numberOfSelected = 0
     }
@@ -544,24 +487,15 @@ extension ListController {
         case "fade out":
             
             deselectAllItems()
-//            if swipedToDismiss == false {
-//                SwiftEntryKit.dismiss()
-//            } else {
-                UIView.transition(with: selectButton, duration: 0.1, options: .transitionCrossDissolve, animations: {
-                  self.selectButton.setTitle("Select", for: .normal)
-                }, completion: nil)
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.view.layoutIfNeeded()
-                })
-//            }
-            
-            
-//            indexPathsSelected.removeAll()
-            
+            UIView.transition(with: selectButton, duration: 0.1, options: .transitionCrossDissolve, animations: {
+              self.selectButton.setTitle("Select", for: .normal)
+                self.view.layoutIfNeeded()
+            }, completion: nil)
             
         case "fade in":
             print("changing to select mode present entry")
             if listCategories?.count == 0 {
+                
                 selectButtonSelected = false
                 var attributes = EKAttributes.bottomFloat
                 attributes.entryBackground = .color(color: .white)
@@ -571,6 +505,8 @@ extension ListController {
                 attributes.positionConstraints.size.height = .constant(value: 50)
                 attributes.statusBar = .light
                 attributes.entryInteraction = .absorbTouches
+                
+                attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
                 //let font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.light)
                 let contentView = UIView()
                 contentView.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
@@ -585,6 +521,10 @@ extension ListController {
                 
                 SwiftEntryKit.display(entry: contentView, using: attributes)
                 
+                selectButtonSelected = false
+                fadeSelectOptions(fadeOut: "fade out")
+                collectionView.allowsMultipleSelection = false
+                
             } else {
                 // Create a basic toast that appears at the top
                 var attributes = EKAttributes.bottomFloat
@@ -595,35 +535,32 @@ extension ListController {
                 attributes.positionConstraints.size.height = .constant(value: 50)
                 attributes.statusBar = .light
                 attributes.entryInteraction = .absorbTouches
-                attributes.lifecycleEvents.willDisappear = {
-                    
-                    self.fadeSelectOptions(fadeOut: "fade out")
-                    self.selectButtonSelected = false
-                    self.enterSelectMode(entering: false)
-                }
+                
+                attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+                
+                
+//                attributes.lifecycleEvents.willDisappear = {
+//
+//                    self.fadeSelectOptions(fadeOut: "fade out")
+//                    self.selectButtonSelected = false
+//                    self.enterSelectMode(entering: false)
+//                }
                 let customView = ListSelect()
                 customView.listDeletePressed = self
                 changeNumberDelegateList = customView
                 //selectionMode = true
                 //changeNumberDelegate?.changeLabel(to: 4)
                 SwiftEntryKit.display(entry: customView, using: attributes)
-                enterSelectMode(entering: true)
+//                enterSelectMode(entering: true)
                 
                 selectButton.setTitle("Cancel", for: .normal)
-                UIView.animate(withDuration: 0.5, animations: {
+                UIView.animate(withDuration: 0.1, animations: {
                     self.view.layoutIfNeeded()
                 })
             }
             
         default:
             print("unknown case, fade")
-        }
-    }
-    func enterSelectMode(entering: Bool) {
-        if entering == true {
-            selectionMode = true
-        } else {
-            selectionMode = false
         }
     }
 }

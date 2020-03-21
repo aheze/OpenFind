@@ -322,15 +322,15 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         searchActive = false
-        print("TExT: \(textField.text)")
+//        print("TExT: \(textField.text)")
         returnTerms?.startedEditing(start: false)
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        print("CHANGE!!")
+//        print("CHANGE!!")
         if let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {
             let splits = updatedString.components(separatedBy: "\u{2022}")
             let uniqueSplits = splits.uniques
-            print("up: \(updatedString)")
+//            print("up: \(updatedString)")
             if uniqueSplits.count != splits.count {
 //                print("DUPD UPD UPD UPDU PDPUDP")
 //                resetFastHighlights()
@@ -527,7 +527,7 @@ extension FindBar {
         currentMatchStrings = currentMatchStrings.uniques
         
         
-        print("stringToList:\(stringToList), currentSearchFindListR:\(currentSearchFindList), currentListsSharedFindListR:\(currentListsSharedFindList), currentSearchAndListSharedFindListR:\(currentSearchAndListSharedFindList), currentMatchStringsR:\(currentMatchStrings), matchToColorsR:\(matchToColors)")
+//        print("stringToList:\(stringToList), currentSearchFindListR:\(currentSearchFindList), currentListsSharedFindListR:\(currentListsSharedFindList), currentSearchAndListSharedFindListR:\(currentSearchAndListSharedFindList), currentMatchStringsR:\(currentMatchStrings), matchToColorsR:\(matchToColors)")
         returnTerms?.returnTerms(stringToListR: stringToList, currentSearchFindListR: currentSearchFindList, currentListsSharedFindListR: currentListsSharedFindList, currentSearchAndListSharedFindListR: currentSearchAndListSharedFindList, currentMatchStringsR: currentMatchStrings, matchToColorsR: matchToColors)
 
     }

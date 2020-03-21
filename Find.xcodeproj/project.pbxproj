@@ -41,7 +41,6 @@
 		4928525C23D61D230048EC13 /* ListsSelect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4928525B23D61D230048EC13 /* ListsSelect.xib */; };
 		4928526023D61F570048EC13 /* ListSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525F23D61F570048EC13 /* ListSelect.swift */; };
 		492EB4F023F504BC007142CA /* PopulateSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492EB4EF23F504BC007142CA /* PopulateSymbols.swift */; };
-		492EB4F223F50C43007142CA /* RecentSymbolsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492EB4F123F50C43007142CA /* RecentSymbolsModel.swift */; };
 		492EB4F523F61F5A007142CA /* SymbolsSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492EB4F423F61F5A007142CA /* SymbolsSectionHeader.swift */; };
 		49301BF02400D4FF00B4780B /* HelpControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49301BEF2400D4FE00B4780B /* HelpControllers.swift */; };
 		49301BF32402460000B4780B /* FancyQuotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49301BF22402460000B4780B /* FancyQuotes.swift */; };
@@ -159,7 +158,6 @@
 		4928525B23D61D230048EC13 /* ListsSelect.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListsSelect.xib; sourceTree = "<group>"; };
 		4928525F23D61F570048EC13 /* ListSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSelect.swift; sourceTree = "<group>"; };
 		492EB4EF23F504BC007142CA /* PopulateSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateSymbols.swift; sourceTree = "<group>"; };
-		492EB4F123F50C43007142CA /* RecentSymbolsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSymbolsModel.swift; sourceTree = "<group>"; };
 		492EB4F423F61F5A007142CA /* SymbolsSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsSectionHeader.swift; sourceTree = "<group>"; };
 		49301BEF2400D4FE00B4780B /* HelpControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpControllers.swift; sourceTree = "<group>"; };
 		49301BF22402460000B4780B /* FancyQuotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyQuotes.swift; sourceTree = "<group>"; };
@@ -345,7 +343,6 @@
 			isa = PBXGroup;
 			children = (
 				4990AAE323EDB4EF00FAF37B /* SymbolsViewController.swift */,
-				492EB4F123F50C43007142CA /* RecentSymbolsModel.swift */,
 				492EB4EF23F504BC007142CA /* PopulateSymbols.swift */,
 				492EB4F423F61F5A007142CA /* SymbolsSectionHeader.swift */,
 			);
@@ -790,7 +787,6 @@
 				490DA75023CBB871000AF57D /* AnimationConfiguration.swift in Sources */,
 				4988FC4823BEF89600199635 /* ListModel.swift in Sources */,
 				49913452236FE33B00B82E46 /* SettingsBasicSetup.swift in Sources */,
-				492EB4F223F50C43007142CA /* RecentSymbolsModel.swift in Sources */,
 				494DF11D23961AEB0076412D /* BDVCShare.swift in Sources */,
 				4990AAE623EDB50E00FAF37B /* ColorsViewController.swift in Sources */,
 				4990AAE223EDB4CE00FAF37B /* GeneralViewController.swift in Sources */,

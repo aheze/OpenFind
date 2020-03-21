@@ -8,12 +8,14 @@
 
 import UIKit
 import SwiftEntryKit
+import SDWebImage
 
 protocol ReturnCache: class {
     func returnHistCache(cachedImages: HistoryModel)
 }
 class HistoryFindController: UIViewController, UISearchBarDelegate {
     
+    var folderURL = URL(fileURLWithPath: "", isDirectory: true)
     
     @IBOutlet weak var noResultsLabel: UILabel!
     
@@ -150,6 +152,19 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
         cell.baseView.layer.cornerRadius = 4
         cell.baseView.clipsToBounds = true
         cell.titleLabel.text = "sdfsdfsdf"
+        
+        let photo = resultPhotos[indexPath.row]
+        
+        var urlPath = photo.photo.filePath
+        urlPath = "\(folderURL)\(urlPath)"
+        let finalUrl = URL(string: urlPath)
+        
+        cell.photoImageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+        cell.photoImageView.sd_imageTransition = .fade
+        cell.photoImageView.sd_setImage(with: finalUrl)
+        
+        
+        
         return cell
 //        dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
     }
