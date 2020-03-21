@@ -80,6 +80,9 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
     var startSpaceWarning = [Int]()
     var endSpaceWarning = [Int]()
     
+    var shouldHighlightRows = false
+    
+    
     var generalSpaces = [String: [Int]]()
     
     var stringToIndexesError = [String: [Int]]() ///A dictionary of the DUPLICATE rows- not the first occurance. These rows should be deleted.
@@ -129,27 +132,84 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         }
     }
     func updateInfo() {
-        print("update")
+//        print("update")
         doneWithEditingGeneral(overrideDone: false)
     }
-    func highlightRowsOnError() { ///Highlight the rows when done is pressed and there is an error
-        print("HIGHLIGHT ROWS, PRESSED DONE")
-       // for index in indexPaths {
-           // let indexP = IndexPath(row: index, section: 0)
-            //tableView.selectRow(at: indexP, animated: false, scrollPosition: .none)
-//            print("Single Space: \(singleSpaceWarning)")
-//            print("Start Space: \(startSpaceWarning)")
-//            print("End Space: \(endSpaceWarning)")
-        NotificationCenter.default.post(name: .shouldHighlightRows, object: nil, userInfo: stringToIndexesError)
-//        NotificationCenter.default.post(name: .hasEmptyString, object: [0: emptyStringErrors])
+//    func highlightRowsOnError() { ///Highlight the rows when done is pressed and there is an error
+//        print("HIGHLIGHT ROWS, PRESSED DONE")
+//       // for index in indexPaths {
+//           // let indexP = IndexPath(row: index, section: 0)
+//            //tableView.selectRow(at: indexP, animated: false, scrollPosition: .none)
+////            print("Single Space: \(singleSpaceWarning)")
+////            print("Start Space: \(startSpaceWarning)")
+////            print("End Space: \(endSpaceWarning)")
+//        NotificationCenter.default.post(name: .shouldHighlightRows, object: nil, userInfo: stringToIndexesError)
+////        NotificationCenter.default.post(name: .hasEmptyString, object: [0: emptyStringErrors])
+////
+////        NotificationCenter.default.post(name: .hasStartSpace, object: [0: startSpaceWarning])
+////        NotificationCenter.default.post(name: .hasEndSpace, object: [0: endSpaceWarning])
+////        NotificationCenter.default.post(name: .hasSingleSpace, object: [0: singleSpaceWarning])
 //
-//        NotificationCenter.default.post(name: .hasStartSpace, object: [0: startSpaceWarning])
-//        NotificationCenter.default.post(name: .hasEndSpace, object: [0: endSpaceWarning])
-//        NotificationCenter.default.post(name: .hasSingleSpace, object: [0: singleSpaceWarning])
-
-            //let cell = tableView.cellForRow(at: indexP) as! GeneralTableCell
-            //cell.hihilighted = true
-       // }
+//            //let cell = tableView.cellForRow(at: indexP) as! GeneralTableCell
+//            //cell.hihilighted = true
+//       // }
+//    }
+    func highlightRowsOnError(type: String) { ///Highlight the rows when done is pressed and there is an error
+        print("HIGHLIGHT ROWS, PRESSED DONE")
+        
+        switch type {
+        case "EmptyMatch":
+            print("empty")
+            
+            var reloadPaths = [IndexPath]()
+            for ind in emptyStringErrors {
+                let indPath = IndexPath(row: ind, section: 0)
+                
+                if let cell = tableView.cellForRow(at: indPath) as? GeneralTableCell {
+                    UIView.animate(withDuration: 0.1, animations: {
+                        cell.overlayView.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
+                        cell.animateDupSlide()
+                    })
+                } else {
+                    reloadPaths.append(indPath)
+                }
+            }
+            
+            shouldHighlightRows = true
+            tableView.reloadRows(at: reloadPaths, with: .none)
+            
+//            NotificationCenter.default.post(name: .shouldHighlightRows, object: nil, userInfo: [0: emptyStringErrors])
+        case "Duplicate":
+//            print("dup")
+            var indInts = [Int]()
+            
+            for intArray in stringToIndexesError.values {
+                for intError in intArray {
+                    if !indInts.contains(intError) {
+                        indInts.append(intError)
+                    }
+                }
+            }
+            var reloadPaths = [IndexPath]()
+            for ind in indInts {
+                let indPath = IndexPath(row: ind, section: 0)
+                
+                if let cell = tableView.cellForRow(at: indPath) as? GeneralTableCell {
+                    UIView.animate(withDuration: 0.1, animations: {
+                        cell.overlayView.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+                        cell.animateDupSlide()
+                    })
+                } else {
+                    reloadPaths.append(indPath)
+                }
+            }
+            
+            shouldHighlightRows = true
+            tableView.reloadRows(at: reloadPaths, with: .none)
+//            NotificationCenter.default.post(name: .shouldHighlightRows, object: nil, userInfo: stringToIndexesError)
+        default:
+            print("ERROR!!>>")
+        }
     }
     func showWarningIcon() {
         checkForErrors(contentsArray: contents)
@@ -175,10 +235,10 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         
        // print("General Spaces: \(generalSpaces)")
         
-        NotificationCenter.default.post(name: .hasEmptyString, object: nil, userInfo: [0: emptyStringErrors])
-        NotificationCenter.default.post(name: .hasGeneralSpaces, object: nil, userInfo: generalSpaces)
-        NotificationCenter.default.post(name: .hasDuplicates, object: nil, userInfo: stringToIndexesError)
-        
+//        NotificationCenter.default.post(name: .hasEmptyString, object: nil, userInfo: [0: emptyStringErrors])
+//        NotificationCenter.default.post(name: .hasGeneralSpaces, object: nil, userInfo: generalSpaces)
+//        NotificationCenter.default.post(name: .hasDuplicates, object: nil, userInfo: stringToIndexesError)
+//
         
 //        NotificationCenter.default.post(name: .hasStartSpace, object: [0: startSpaceWarning])
 //        NotificationCenter.default.post(name: .hasEndSpace, object: [0: endSpaceWarning])
@@ -202,6 +262,15 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
             super.viewDidLoad()
             
             setUpViews()
+            let tableViewHeightAfterAddRow = CGFloat(50 * contents.count)
+            
+            print("HEIGHT CONT: \(tableViewHeightAfterAddRow)")
+            if tableViewHeightAfterAddRow >= 300 {
+                tableViewHeightConstraint.constant = tableViewHeightAfterAddRow
+                UIView.animate(withDuration: 0.75, animations: {
+                    self.view.layoutIfNeeded()
+                })
+            }
             
         }
     
@@ -229,14 +298,6 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         var indexToData = [String]()
         
         var currentPath = -1
-        
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            arrayOfHelp.count
-        }
-        
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "HelpCellID") as! HelpCell
-            cell.nameLabel.text = arrayOfHelp[i
               
         """]
 
@@ -298,32 +359,134 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         addingNewMatch = true
         
       //  print("CURR HEIGHT: \(tableView.contentSize.height)")
-        let tableViewHeightAfterAddRow = tableView.contentSize.height + 50
+//        let tableViewHeightAfterAddRow = tableView.contentSize.height + 50
+//        if tableViewHeightAfterAddRow >= 300 {
+//            tableViewHeightConstraint.constant = tableViewHeightAfterAddRow
+//            UIView.animate(withDuration: 0.75, animations: {
+//                self.view.layoutIfNeeded()
+//            })
+//        }
+        if end == false { ///User pressed return to insert
+          //  print("Return INSERT")
+            contents.insert("", at: currentIndexPath + 1)
+            
+            let tableViewHeightAfterAddRow = CGFloat(50 * contents.count)
+            
+            print("HEIGHT CONT: \(tableViewHeightAfterAddRow)")
+            if tableViewHeightAfterAddRow >= 300 {
+                tableViewHeightConstraint.constant = tableViewHeightAfterAddRow
+                UIView.animate(withDuration: 0.75, animations: {
+                    self.view.layoutIfNeeded()
+                })
+            }
+            
+            
+            checkForErrors(contentsArray: contents)
+            currentIndexPath = currentIndexPath + 1
+            tableView.insertRows(at: [IndexPath(row: currentIndexPath, section: 0)], with: .automatic)
+//            NotificationCenter.default.post(name: .addedRowAt, object: nil, userInfo: [0: currentIndexPath])
+            
+            print("add CURR IND: \(currentIndexPath)....count-1: \(contents.count - 1)")
+            if currentIndexPath < contents.count - 1 {
+                let endRange = currentIndexPath + 1...contents.count - 1
+                
+                var reloadPaths = [IndexPath]()
+                for singleRow in endRange {
+                    let deleteIndP = IndexPath(row: singleRow, section: 0)
+                    
+                    if let cell = tableView.cellForRow(at: deleteIndP) as? GeneralTableCell {
+                        cell.indexPath += 1
+                    } else {
+                        reloadPaths.append(deleteIndP)
+                    }
+                }
+                
+                tableView.reloadRows(at: reloadPaths, with: .automatic)
+            }
+            
+            
+            
+            
+            
+            
+        } else {
+            print("New BUTTON PRESSED")
+            
+          //  print("contents count \(contents.count)")
+            contents.append("")
+            
+            currentIndexPath = contents.count - 1
+            tableView.insertRows(at: [IndexPath(row: currentIndexPath, section: 0)], with: .automatic)
+        }
+        
+    }
+    func deleteRow(row: Int) {
+//        print("DELETELLELELLE: \(row)")
+//
+//        print("CONTS start:  \(contents)")
+        contents.remove(at: row)
+        let tableViewHeightAfterAddRow = CGFloat(50 * contents.count)
+        
+        print("HEIGHT CONT: \(tableViewHeightAfterAddRow)")
         if tableViewHeightAfterAddRow >= 300 {
             tableViewHeightConstraint.constant = tableViewHeightAfterAddRow
             UIView.animate(withDuration: 0.75, animations: {
                 self.view.layoutIfNeeded()
             })
         }
-        if end == false { ///User pressed return to insert
-          //  print("Return INSERT")
-            contents.insert("", at: currentIndexPath + 1)
-            currentIndexPath = currentIndexPath + 1
-            NotificationCenter.default.post(name: .addedRowAt, object: nil, userInfo: [0: currentIndexPath])
-            tableView.insertRows(at: [IndexPath(row: currentIndexPath, section: 0)], with: .automatic)
+        
+        checkForErrors(contentsArray: contents)
+//        print("ROW: \(row)")
+        let indP = IndexPath(row: row, section: 0)
+        tableView.deleteRows(at: [indP], with: .automatic)
+        
+        print("del CURR IND: \(row)....count: \(contents.count)")
+        if row == contents.count { ///Cont count is now 1 less because remove
+            print("last row")
         } else {
-            print("New BUTTON PRESSED")
+            print("Not last row")
+            let endRange = row...contents.count - 1
             
-          //  print("contents count \(contents.count)")
-            contents.append("")
-            currentIndexPath = contents.count - 1
+            var reloadPaths = [IndexPath]()
+            for singleRow in endRange {
+                let deleteIndP = IndexPath(row: singleRow, section: 0)
+                
+                if let cell = tableView.cellForRow(at: deleteIndP) as? GeneralTableCell {
+                    cell.indexPath -= 1
+                } else {
+                    reloadPaths.append(deleteIndP)
+                }
+            }
+            
+            tableView.reloadRows(at: reloadPaths, with: .automatic)
+            
+        }
+        
+        
+        
+//        print("CONTS:  \(contents)")
+        
+//        currentIndexPath -= 1
+//        NotificationCenter.default.post(name: .deleteRowAt, object: nil, userInfo: [0: row])
+        
+        if contents.count == 0 {
+//            contents.append("")
+//            let indP = IndexPath(row: 0, section: 0)
+//            tableView.insertRows(at: [indP], with: .automatic)
+//            addNewRow(end: true)
+            addingNewMatch = true
+            contents = [""]
+            currentIndexPath = 0
             tableView.insertRows(at: [IndexPath(row: currentIndexPath, section: 0)], with: .automatic)
         }
-    }
-    func deleteRow(row: Int) {
-        print("DELETELLELELLE: \(row)")
-        contents.remove(at: row)
-        NotificationCenter.default.post(name: .deleteRowAt, object: nil, userInfo: [0: row])
+//        let tableViewHeightAfterAddRow = tableView.contentSize.height + 50
+//        if tableViewHeightAfterAddRow >= 300 {
+//            tableViewHeightConstraint.constant = tableViewHeightAfterAddRow
+//            UIView.animate(withDuration: 0.75, animations: {
+//                self.view.layoutIfNeeded()
+//            })
+//        }
+        
     }
     func setUpViews() {
         if contents.count == 0 {
@@ -441,20 +604,18 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
         print("EDITITITITI")
     }
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.row == 0 {
-            return false
-        } else {
-            return true
-        }
-    }
+//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        if indexPath.row == 0 {
+//            return false
+//        } else {
+//            return true
+//        }
+//    }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             //objects.remove(at: indexPath.row)
             deleteRow(row: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+//            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -467,14 +628,58 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralTableviewCell") as! GeneralTableCell
         cell.changedTextDelegate = self
         cell.matchTextField.text = contents[indexPath.row]
+        cell.indexPath = indexPath.row
         //cell.isUserInteractionEnabled = false
 //        if indexPath.row
 //        cell.shouldShowPlus = true
         if addingNewMatch == true {
+            print("ADDING!! \(indexPath.row)")
             addingNewMatch = false
-        cell.matchTextField.becomeFirstResponder()
+            cell.matchTextField.becomeFirstResponder()
+            cell.overlayView.snp.remakeConstraints{ (make) in
+                make.top.equalToSuperview()
+                make.left.equalToSuperview()
+                make.bottom.equalToSuperview()
+                make.width.equalTo(0)
+            }
+            print("no CONTAINS DUP")
+//            cell.contentView.layoutIfNeeded()
+        } else {
+            if shouldHighlightRows == true {
+                if emptyStringErrors.contains(indexPath.row) {
+                    cell.overlayView.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
+                    print("empty errors")
+    //                cell.animateDupSlide()
+                } else {
+                    var thisRowContains = false
+                    for intArray in stringToIndexesError.values {
+                        if intArray.contains(indexPath.row) {
+                            thisRowContains = true
+                            break
+                        }
+                    }
+                    
+                    if thisRowContains == true {
+                        cell.overlayView.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+    //                    cell.animateDupSlide()
+                        print("CONTAINS DUP")
+                    } else {
+                        cell.overlayView.snp.remakeConstraints{ (make) in
+                            make.top.equalToSuperview()
+                            make.left.equalToSuperview()
+                            make.bottom.equalToSuperview()
+                            make.width.equalTo(0)
+                        }
+                        print("no CONTAINS DUP")
+                        cell.contentView.layoutIfNeeded()
+                    }
+                }
+            } else {
+                print("no highlight")
+            }
         }
-        cell.indexPath = indexPath.row
+        
+//        if stringToIndexesError[indexPat]
         //print("index: \(indexPath.row)")
         return cell
     }
@@ -508,6 +713,7 @@ extension GeneralViewController: ChangedTextCell {
     }
     
     func textFieldStartedEditing(indexPath: Int) {
+        print("STARTED EDITING: \(indexPath)")
         currentIndexPath = indexPath
     }
     func textFieldPressedReturn() {
@@ -591,7 +797,7 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
                 label: okButtonLabel,
                 backgroundColor: .clear,
                 highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05)) {
-                    self.highlightRowsOnError()
+                    self.highlightRowsOnError(type: "Duplicate")
                     SwiftEntryKit.dismiss()
             }
             let closeButton = EKProperty.ButtonContent(
@@ -685,10 +891,10 @@ extension GeneralViewController {
                     //print("CONTAINTS")
                     //shouldHighlightedRows.append(index)
                     if !firstOccuranceArray.contains(singleContent) {
-                        print("doesn't contain \(singleContent)")
+//                        print("doesn't contain \(singleContent)")
                         firstOccuranceArray.append(singleContent)
                     } else { //A occurance has already occured.
-                        print("DUPUPUPUPUPUPUP")
+//                        print("DUPUPUPUPUPUPUP")
                         stringToIndexesError[singleContent, default: [Int]()].append(index)
                     }
                     //print(stringToIndexesError)
@@ -722,12 +928,12 @@ extension GeneralViewController {
          //   }
             
        // }
-        print("Done checking for errors------------------------------------------------------------------")
-        print("Empty: \(emptyStringErrors)")
-        print("Single Space: \(singleSpaceWarning)")
-        print("Start Space: \(startSpaceWarning)")
-        print("End Space: \(endSpaceWarning)")
-        print("Duplicates: \(stringToIndexesError)")
+//        print("Done checking for errors------------------------------------------------------------------")
+//        print("Empty: \(emptyStringErrors)")
+//        print("Single Space: \(singleSpaceWarning)")
+//        print("Start Space: \(startSpaceWarning)")
+//        print("End Space: \(endSpaceWarning)")
+//        print("Duplicates: \(stringToIndexesError)")
     }
     
     
@@ -742,7 +948,7 @@ extension GeneralViewController {
             showAnAlert = true
             SwiftEntryKitTemplates().displaySEK(message: matchesPlural, backgroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), location: .top, duration: CGFloat(0.8))
             
-            highlightRowsOnError()
+            highlightRowsOnError(type: "EmptyMatch")
         } else if stringToIndexesError.count >= 1 { ///No empty errors. Only duplicates.
      //   print("ELSE!!!!")
             var titleMessage = ""

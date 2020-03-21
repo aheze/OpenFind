@@ -18,15 +18,15 @@ protocol ChangedTextCell: class {
 }
 class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
     
-    var isEmptyMatch = false
-    
-    var hasDuplicates = 0
-    
-    var isSingleSpace = false
-    var hasStartSpace = false
-    var hasEndSpace = false
-    
-    var thisRowHasErrors = false ///To toggle the invisible button
+//    var isEmptyMatch = false
+//
+//    var hasDuplicates = 0
+//
+//    var isSingleSpace = false
+//    var hasStartSpace = false
+//    var hasEndSpace = false
+//
+//    var thisRowHasErrors = false ///To toggle the invisible button
     
     var indexPath = 0
     
@@ -41,12 +41,12 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
     @IBAction func warningPressed(_ sender: Any) {
         print("Warning Pressed")
         
-        if thisRowHasErrors == false {
+//        if thisRowHasErrors == false {
             matchTextField.becomeFirstResponder()
-        } else {
-            showDescriptions()
-        }
-        
+//        } else {
+//            showDescriptions()
+//        }
+//
     }
     
     @IBOutlet weak var matchTextField: UITextField!
@@ -65,73 +65,73 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
     }
     
 //    override func viewWill
-    @objc func onDidReceiveEmptyString(_ notification: Notification) {
-       // print("NOTIFY, empty")
-        if let data = notification.userInfo as? [Int: [Int]] {
-            print("Recieved Empty String Data: \(data)")
-            if let errorArray = data[0] {
-                if errorArray.contains(indexPath) {
-                    isEmptyMatch = true
-                    thisRowHasErrors = true
-                }
-            }
-        }
-    }
-    @objc func onDidReceiveStringErrors(_ notification: Notification) {
-      //  print("recieve string errors")
-       // print("Errors? \(notification.userInfo)")
-        if let data = notification.userInfo as? [String: [Int]] {
-            print("Space error data: \(data)")
-             
-            var isSingleSoStop = false
-            for singleError in data["Single"] ?? [-1] {
-                if singleError == indexPath {
-                    isSingleSpace = true
-                    thisRowHasErrors = true
-                    isSingleSoStop = true
-                }
-            }
-            if isSingleSoStop == false {
-                for startError in data["Start"] ?? [-1] {
-                    if startError == indexPath {
-                        hasStartSpace = true
-                        thisRowHasErrors = true
-                    }
-                }
-                for endError in data["End"] ?? [-1] {
-                    if endError == indexPath {
-                        hasEndSpace = true
-                        thisRowHasErrors = true
-                    }
-                }
-            }
-            
-            
-        }
-    }
-    @objc func onDupErrors(_ notification: Notification) {
-      //  print("receive highlight string errors")
-       // print("Errors? \(notification.userInfo)")
-        if let data = notification.userInfo as? [String: [Int]] {
-            print("Received duplicate data: \(data)")
-            for duplicateString in data.keys {
-                for arrayOfErrorRow in data[duplicateString]! {
-                    
-                    if arrayOfErrorRow == indexPath {
-                        hasDuplicates += 1
-                        thisRowHasErrors = true
-                    }
-                    
-                }
-            }
-            
-            //showDescriptions()
-            
-            
-          //  print("HAS DATA")
-         //   print("data: \(data)")
-        }
-    }
+//    @objc func onDidReceiveEmptyString(_ notification: Notification) {
+//       // print("NOTIFY, empty")
+//        if let data = notification.userInfo as? [Int: [Int]] {
+//            print("Recieved Empty String Data: \(data)")
+//            if let errorArray = data[0] {
+//                if errorArray.contains(indexPath) {
+//                    isEmptyMatch = true
+//                    thisRowHasErrors = true
+//                }
+//            }
+//        }
+//    }
+//    @objc func onDidReceiveStringErrors(_ notification: Notification) {
+//      //  print("recieve string errors")
+//       // print("Errors? \(notification.userInfo)")
+//        if let data = notification.userInfo as? [String: [Int]] {
+//            print("Space error data: \(data)")
+//
+//            var isSingleSoStop = false
+//            for singleError in data["Single"] ?? [-1] {
+//                if singleError == indexPath {
+//                    isSingleSpace = true
+//                    thisRowHasErrors = true
+//                    isSingleSoStop = true
+//                }
+//            }
+//            if isSingleSoStop == false {
+//                for startError in data["Start"] ?? [-1] {
+//                    if startError == indexPath {
+//                        hasStartSpace = true
+//                        thisRowHasErrors = true
+//                    }
+//                }
+//                for endError in data["End"] ?? [-1] {
+//                    if endError == indexPath {
+//                        hasEndSpace = true
+//                        thisRowHasErrors = true
+//                    }
+//                }
+//            }
+//
+//
+//        }
+//    }
+//    @objc func onDupErrors(_ notification: Notification) {
+//      //  print("receive highlight string errors")
+//       // print("Errors? \(notification.userInfo)")
+//        if let data = notification.userInfo as? [String: [Int]] {
+//            print("Received duplicate data: \(data)")
+//            for duplicateString in data.keys {
+//                for arrayOfErrorRow in data[duplicateString]! {
+//
+//                    if arrayOfErrorRow == indexPath {
+//                        hasDuplicates += 1
+//                        thisRowHasErrors = true
+//                    }
+//
+//                }
+//            }
+//
+//            //showDescriptions()
+//
+//
+//          //  print("HAS DATA")
+//         //   print("data: \(data)")
+//        }
+//    }
     
     func animateDupSlide() {
         overlayView.snp.remakeConstraints{ (make) in
@@ -160,48 +160,57 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
         }
     }
     
-    @objc func onHighlightRowErrors(_ notification: Notification) {
-        //print("receive highlight string errors")
-        //print("Errors? \(notification.userInfo)")
-        animateDupRetreat()
-        var arrayOfIndexes = [Int]()
-        if let data = notification.userInfo as? [String: [Int]] {
-            for singleDup in data {
-                for errorIndex in singleDup.value {
-                    arrayOfIndexes.append(errorIndex)
-                }
-            }
-            print(arrayOfIndexes)
-            if arrayOfIndexes.contains(indexPath) {
-                animateDupSlide()
-            }
-        }
-    }
+//    @objc func onHighlightRowErrors(_ notification: Notification) {
+//        //print("receive highlight string errors")
+//        //print("Errors? \(notification.userInfo)")
+//        animateDupRetreat()
+//        var arrayOfIndexes = [Int]()
+//        if let data = notification.userInfo as? [String: [Int]] {
+//            for singleDup in data {
+//                for errorIndex in singleDup.value {
+//                    arrayOfIndexes.append(errorIndex)
+//                }
+//            }
+//            print(arrayOfIndexes)
+//            if arrayOfIndexes.contains(indexPath) {
+//                animateDupSlide()
+//            }
+//        } else if let data = notification.userInfo as? [Int: [Int]] {
+//            if let intRows = data[0] {
+//
+//
+//
+//            }
+//
+//        }
+//    }
     
-    @objc func onAddRow(_ notification: Notification) {
-      //  print("receive highlight string errors")
-       // print("Errors? \(notification.userInfo)")
-        if let data = notification.userInfo as? [Int: Int] {
-            if indexPath >= data[0]! {
-                indexPath += 1
-            }
-          //  print("HAS DATA")
-         //   print("data: \(data)")
-        }
-    }
-    
-    @objc func onDeleteRow(_ notification: Notification) {
-      //  print("receive highlight string errors")
-       // print("Errors? \(notification.userInfo)")
-        print("DELETE")
-        if let data = notification.userInfo as? [Int: Int] {
-            if indexPath >= data[0]! + 1 {
-                indexPath -= 1
-            }
-          //  print("HAS DATA")
-         //   print("data: \(data)")
-        }
-    }
+//    @objc func onAddRow(_ notification: Notification) {
+//        print("ADD recieved by \(indexPath)")
+//      //  print("receive highlight string errors")
+//       // print("Errors? \(notification.userInfo)")
+//        if let data = notification.userInfo as? [Int: Int] {
+//            if indexPath >= data[0]! {
+//                indexPath += 1
+//                print("new ind: \(indexPath)")
+//            }
+//          //  print("HAS DATA")
+//         //   print("data: \(data)")
+//        }
+//    }
+//
+//    @objc func onDeleteRow(_ notification: Notification) {
+//      //  print("receive highlight string errors")
+//       // print("Errors? \(notification.userInfo)")
+//        print("DELETE")
+//        if let data = notification.userInfo as? [Int: Int] {
+//            if indexPath >= data[0]! + 1 {
+//                indexPath -= 1
+//            }
+//          //  print("HAS DATA")
+//         //   print("data: \(data)")
+//        }
+//    }
     
     
     
@@ -238,18 +247,18 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
         
         //matchTextField.setLeftPaddingPoints(10)
         //nc.addObserver(self, selector: #selector(userLoggedIn), name: Notification.Name("UserLoggedIn"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveEmptyString), name: .hasEmptyString, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveStringErrors), name: .hasGeneralSpaces, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onDupErrors), name: .hasDuplicates, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onHighlightRowErrors), name: .shouldHighlightRows, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(onDeleteRow), name: .deleteRowAt, object: nil)
-        
-        
-        
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(onAddRow), name: .addedRowAt, object: nil)
-        
+//        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveEmptyString), name: .hasEmptyString, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveStringErrors), name: .hasGeneralSpaces, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(onDupErrors), name: .hasDuplicates, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(onHighlightRowErrors), name: .shouldHighlightRows, object: nil)
+//        
+//        NotificationCenter.default.addObserver(self, selector: #selector(onDeleteRow), name: .deleteRowAt, object: nil)
+//        
+//        
+//        
+//        
+//        NotificationCenter.default.addObserver(self, selector: #selector(onAddRow), name: .addedRowAt, object: nil)
+//        
         
 //        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveStartString), name: .hasStartSpace, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveEndString), name: .hasEndSpace, object: nil)
@@ -327,103 +336,103 @@ extension GeneralTableCell {
         
         
     }
-    func showDescriptions() {
-        print("showing descriptions")
-        print(isEmptyMatch)
-        
-        print(hasDuplicates)
-        
-        print(isSingleSpace)
-        print(hasStartSpace)
-        print(hasEndSpace)
-        
-        if isEmptyMatch == true {
-            
-        }
-         //maybe only space errors
-
-        //var hasEmptyMatch = 0
-//        let hasSingleSpaceMatch = singleSpaceWarning.count
-//        let hasStartSpace = startSpaceWarning.count
-//        let hasEndSpace = endSpaceWarning.count
+//    func showDescriptions() {
+//        print("showing descriptions")
+//        print(isEmptyMatch)
 //
-//        var singleMessage = ""
-//        switch hasSingleSpaceMatch {
-//        case 0:
-//        singleMessage = "One of you matches is an empty space"
-//        case 1:
-//        singleMessage = "One of you matches is an empty space"
-//        case 2:
-//        singleMessage = "Two of you matches is an empty space"
-//        default:
-//        singleMessage = "You have a lot of matches that are empty spaces"
-//        }
+//        print(hasDuplicates)
 //
-//        var startMessage = ""
-//        switch hasStartSpace {
-//        case 0:
-//        startMessage = "One of you matches is an empty space"
-//        case 1:
-//        startMessage = "One of you matches is an empty space"
-//        case 2:
-//        startMessage = "Two of you matches is an empty space"
-//        default:
-//        startMessage = "You have a lot of matches that are empty spaces"
-//        }
+//        print(isSingleSpace)
+//        print(hasStartSpace)
+//        print(hasEndSpace)
 //
-//        var endMessage = ""
-//        switch hasEndSpace {
-//        case 0:
-//        endMessage = "One of you matches is an empty space"
-//        case 1:
-//        endMessage = "One of you matches is an empty space"
-//        case 2:
-//        endMessage = "Two of you matches is an empty space"
-//        default:
-//        endMessage = "You have a lot of matches that are empty spaces"
+//        if isEmptyMatch == true {
+//
 //        }
-
-        //        if (hasSingleSpaceMatch >= 1) {
-        //            print("asdasd")
-        //            var attributes = EKAttributes.topFloat
-        //            attributes.displayDuration = .infinity
-        //            attributes.entryInteraction = .absorbTouches
-        //            attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-        //            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-        //            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-        //            attributes.screenInteraction = .absorbTouches
-        //            showAnAlert = true
-        //            showButtonBarMessage(attributes: attributes, titleMessage: "Are you sure you want to have a match that is a space?", desc: "Probably not a good idea. Maybe check your matches?", leftButton: "Ignore and save", yesButton: "Ok, I'll go check")
-        //        } else {
-        //            print("NOTHING WRONG!")
-        //            //generalDelegate?.returnNewGeneral(nameOfList: name, desc: descriptionOfList, contentsOfList: contentsArray, interrupt: false)
-        //        }
-       
-    }
+//         //maybe only space errors
+//
+//        //var hasEmptyMatch = 0
+////        let hasSingleSpaceMatch = singleSpaceWarning.count
+////        let hasStartSpace = startSpaceWarning.count
+////        let hasEndSpace = endSpaceWarning.count
+////
+////        var singleMessage = ""
+////        switch hasSingleSpaceMatch {
+////        case 0:
+////        singleMessage = "One of you matches is an empty space"
+////        case 1:
+////        singleMessage = "One of you matches is an empty space"
+////        case 2:
+////        singleMessage = "Two of you matches is an empty space"
+////        default:
+////        singleMessage = "You have a lot of matches that are empty spaces"
+////        }
+////
+////        var startMessage = ""
+////        switch hasStartSpace {
+////        case 0:
+////        startMessage = "One of you matches is an empty space"
+////        case 1:
+////        startMessage = "One of you matches is an empty space"
+////        case 2:
+////        startMessage = "Two of you matches is an empty space"
+////        default:
+////        startMessage = "You have a lot of matches that are empty spaces"
+////        }
+////
+////        var endMessage = ""
+////        switch hasEndSpace {
+////        case 0:
+////        endMessage = "One of you matches is an empty space"
+////        case 1:
+////        endMessage = "One of you matches is an empty space"
+////        case 2:
+////        endMessage = "Two of you matches is an empty space"
+////        default:
+////        endMessage = "You have a lot of matches that are empty spaces"
+////        }
+//
+//        //        if (hasSingleSpaceMatch >= 1) {
+//        //            print("asdasd")
+//        //            var attributes = EKAttributes.topFloat
+//        //            attributes.displayDuration = .infinity
+//        //            attributes.entryInteraction = .absorbTouches
+//        //            attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+//        //            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+//        //            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+//        //            attributes.screenInteraction = .absorbTouches
+//        //            showAnAlert = true
+//        //            showButtonBarMessage(attributes: attributes, titleMessage: "Are you sure you want to have a match that is a space?", desc: "Probably not a good idea. Maybe check your matches?", leftButton: "Ignore and save", yesButton: "Ok, I'll go check")
+//        //        } else {
+//        //            print("NOTHING WRONG!")
+//        //            //generalDelegate?.returnNewGeneral(nameOfList: name, desc: descriptionOfList, contentsOfList: contentsArray, interrupt: false)
+//        //        }
+//
+//    }
     
 }
 
-
-extension Notification.Name {
-    
-    static let hasEmptyString = Notification.Name("hasEmptyString")
-    static let hasGeneralSpaces = Notification.Name("hasGeneralSpaces")
-    static let hasDuplicates = Notification.Name("hasDuplicates")
-    
-    static let shouldHighlightRows = Notification.Name("shouldHighlightRows")
-    
-    static let addedRowAt = Notification.Name("addedRowAt")
-    static let deleteRowAt = Notification.Name("deleteRowAt")
-    //static let delete = Notification.Name("hasGeneralSpaces")
-    
-//    static let hasStartSpace = Notification.Name("hasStartSpace")
-//    static let hasEndSpace = Notification.Name("hasStartSpace")
-//    static let hasSingleSpace = Notification.Name("hasSingleSpace")
-    
-    
-    //static let didCompleteTask = Notification.Name("didCompleteTask")
-    //static let completedLengthyDownload = Notification.Name("completedLengthyDownload")
-}
+//
+//extension Notification.Name {
+//    
+//    static let hasEmptyString = Notification.Name("hasEmptyString")
+//    static let hasGeneralSpaces = Notification.Name("hasGeneralSpaces")
+//    static let hasDuplicates = Notification.Name("hasDuplicates")
+//    
+//    static let shouldHighlightRows = Notification.Name("shouldHighlightRows")
+//    
+//    static let addedRowAt = Notification.Name("addedRowAt")
+//    static let deleteRowAt = Notification.Name("deleteRowAt")
+//    //static let delete = Notification.Name("hasGeneralSpaces")
+//    
+////    static let hasStartSpace = Notification.Name("hasStartSpace")
+////    static let hasEndSpace = Notification.Name("hasStartSpace")
+////    static let hasSingleSpace = Notification.Name("hasSingleSpace")
+//    
+//    
+//    //static let didCompleteTask = Notification.Name("didCompleteTask")
+//    //static let completedLengthyDownload = Notification.Name("completedLengthyDownload")
+//}
 extension UITextField {
     func setLeftPaddingPoints(_ amount:CGFloat){
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))

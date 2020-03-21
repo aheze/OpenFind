@@ -308,7 +308,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         
         
         
-        deselectAllItems(deselect: true)
+        
         
         selectButton.layer.cornerRadius = 6
         selectAll.layer.cornerRadius = 6
@@ -339,6 +339,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //            }
 //        }
         setUpXButton()
+        deselectAllItems(deselect: true)
     }
     override func present(_ viewControllerToPresent: UIViewController,
                           animated flag: Bool,
@@ -520,6 +521,8 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             }
             collectionView.reloadItems(at: reloadPaths)
             indexPathsSelected.removeAll()
+            print("deselc!!!")
+            print(indexPathsSelected)
         } else {
             
             print("select")
