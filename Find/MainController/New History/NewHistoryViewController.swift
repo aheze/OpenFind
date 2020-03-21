@@ -65,7 +65,33 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     var indexPathsSelected = [IndexPath]() {
         didSet {
 //            print("SETTTUTUTOUTOUOUTOUT")
-            var selectedHeartCount = 0
+            checkForHearts()
+            
+            if indexPathsSelected.count == 0 {
+                print("ZERO!!!")
+                changeFloatDelegate?.changeFloat(to: "Disable")
+            } else {
+                print("NOT ZERO>>>")
+                changeFloatDelegate?.changeFloat(to: "Enable")
+            }
+        }
+        
+        
+
+    }
+    
+//    var shouldDeselectIfDismissed = true
+//    var selectionMode: Bool = false {
+//        didSet {
+//            print("selection mode: \(selectionMode)")
+//            collectionView.allowsMultipleSelection = selectionMode
+//            indexPathsSelected.removeAll()
+////            fileUrlsSelected.removeAll()
+//        }
+//    }
+    
+    func checkForHearts() {
+        var selectedHeartCount = 0
             var selectedNotHeartCount = 0
             for item in indexPathsSelected {
                 let itemToEdit = indexToData[item.section]
@@ -88,27 +114,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 changeFloatDelegate?.changeFloat(to: "Fill Heart")
                 shouldHeart = false
             }
-            
-            if indexPathsSelected.count == 0 {
-                changeFloatDelegate?.changeFloat(to: "Disable")
-            } else {
-                changeFloatDelegate?.changeFloat(to: "Enable")
-            }
-        }
-        
-        
-
     }
-    
-//    var shouldDeselectIfDismissed = true
-//    var selectionMode: Bool = false {
-//        didSet {
-//            print("selection mode: \(selectionMode)")
-//            collectionView.allowsMultipleSelection = selectionMode
-//            indexPathsSelected.removeAll()
-////            fileUrlsSelected.removeAll()
-//        }
-//    }
     var numberOfSelected = 0 {
         didSet {
             changeNumberDelegate?.changeLabel(to: numberOfSelected)
@@ -171,10 +177,14 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         } else { ///Cancel will now be Select
             
             print("COUNT: \(indexPathsSelected.count)")
+            
+            
             selectButtonSelected = false
             SwiftEntryKit.dismiss()
-            
             fadeSelectOptions(fadeOut: "fade out")
+            collectionView.allowsMultipleSelection = false
+            
+            
             print("cancel")
             
             //selectButtonSelected = true
@@ -182,7 +192,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //            fadeSelectOptions(fadeOut: "fade out")
            
             
-            collectionView.allowsMultipleSelection = false
+            
 //            indexPathsSelected.removeAll()
 //            swipedToDismiss = true
         }
@@ -217,7 +227,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 }) { _ in
                     self.selectAll.isHidden = true
                 }
-                selectButtonSelected = false
+//                selectButtonSelected = false
                 
             }
         case "fade in":
@@ -277,6 +287,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //                enterSelectMode(entering: true)
                 print("fade insfdfsdf")
                 
+                changeFloatDelegate?.changeFloat(to: "Disable")
                 selectButton.setTitle("Done", for: .normal)
                 inBetweenSelect.constant = 5
                 selectAll.isHidden = false
@@ -313,6 +324,10 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         selectButton.layer.cornerRadius = 6
         selectAll.layer.cornerRadius = 6
         fadeSelectOptions(fadeOut: "firstTimeSetup")
+        deselectAllItems(deselect: true)
+        
+//        changeFloatDelegate?.changeFloat(to: "Disable")
+//        indexPathsSelected.removeAll()
         //self.transitioningDelegate = transitionDelegate
 //        let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
 //        layout?.sectionHeadersPinToVisibleBounds = true
@@ -339,7 +354,8 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //            }
 //        }
         setUpXButton()
-        deselectAllItems(deselect: true)
+        
+        indexPathsSelected.removeAll()
     }
     override func present(_ viewControllerToPresent: UIViewController,
                           animated flag: Bool,
@@ -488,16 +504,6 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     //MARK: Selection
     func deselectAllItems(deselect: Bool) {
         if deselect == true {
-            print("deselcccccc")
-            
-//            for i in 0..<collectionView.numberOfSections {
-//                for j in 0..<collectionView.numberOfItems(inSection: i) {
-//                    collectionView.deselectItem(at: IndexPath(row: j, section: i), animated: false)
-//                }
-//            }
-
-//            fileUrlsSelected.removeAll()
-            
             numberOfSelected = 0
             var reloadPaths = [IndexPath]()
             for indexP in indexPathsSelected {
@@ -588,12 +594,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             mainContentVC.delegate = self
             mainContentVC.currentIndex = indexPath.item
             mainContentVC.currentSection = indexPath.section
-            //print(imageSize)
             mainContentVC.photoSize = imageSize
-            
-//            if let date = sectionToDate[indexPath.section] {
-//                mainContentVC.photoPaths = dateToFilepaths[date]!
-//            }
             var photoPaths = [URL]()
             if let hisModel = indexToData[indexPath.section] {
                 print("YES PATH Select indexpath select transition push")
@@ -662,8 +663,6 @@ extension NewHistoryViewController: ReturnCachedPhotos {
                                 for cont in cachedPhoto.contents {
                                     currentPhoto.contents.append(cont)
                                 }
-//                                currentPhoto.contents = cachedPhoto.contents
-//                                print("CONTENTS:ssfsdfsdf\(cachedPhoto.contents)")
                             }
                         } catch {
                             print("Error saving cache. \(error)")
@@ -715,9 +714,10 @@ extension NewHistoryViewController: UIAdaptivePresentationControllerDelegate {
         attributes.statusBar = .light
         attributes.entryInteraction = .absorbTouches
         attributes.shadow = .active(with: .init(color: .black, opacity: 0.4, radius: 10, offset: .zero))
-        attributes.lifecycleEvents.willDisappear = {
-                self.fadeSelectOptions(fadeOut: "fade out")
-        }
+        attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+//        attributes.lifecycleEvents.willDisappear = {
+//                self.fadeSelectOptions(fadeOut: "fade out")
+//        }
         let customView = HistorySelectorView()
         customView.buttonPressedDelegate = self
         
@@ -725,6 +725,7 @@ extension NewHistoryViewController: UIAdaptivePresentationControllerDelegate {
         changeNumberDelegate = customView
         SwiftEntryKit.display(entry: customView, using: attributes)
         changeNumberDelegate?.changeLabel(to: numberOfSelected)
+        checkForHearts()
     }
     
 }

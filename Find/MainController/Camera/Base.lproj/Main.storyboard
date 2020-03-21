@@ -2157,7 +2157,7 @@
                                         <rect key="frame" x="44.5" y="244" width="211" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VgK-3X-vOx">
-                                                <rect key="frame" x="0.0" y="0.0" width="90" height="40"/>
+                                                <rect key="frame" x="121" y="0.0" width="90" height="40"/>
                                                 <color key="backgroundColor" name="FeedbackGradientLeft"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="90" id="CUB-6X-ZHa"/>
@@ -2173,7 +2173,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2qz-Bq-vme">
-                                                <rect key="frame" x="98" y="0.0" width="113" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="113" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="Dlg-c0-wn1"/>
@@ -2191,10 +2191,10 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="2qz-Bq-vme" secondAttribute="bottom" id="0GA-TW-XyD"/>
-                                            <constraint firstItem="2qz-Bq-vme" firstAttribute="leading" secondItem="VgK-3X-vOx" secondAttribute="trailing" constant="8" id="66h-42-xTn"/>
-                                            <constraint firstAttribute="trailing" secondItem="2qz-Bq-vme" secondAttribute="trailing" id="GdU-FM-lGd"/>
-                                            <constraint firstItem="VgK-3X-vOx" firstAttribute="leading" secondItem="yxc-P3-eJK" secondAttribute="leading" id="Qq6-Sh-HM0"/>
+                                            <constraint firstItem="2qz-Bq-vme" firstAttribute="leading" secondItem="yxc-P3-eJK" secondAttribute="leading" id="6N3-7k-zeG"/>
+                                            <constraint firstAttribute="trailing" secondItem="VgK-3X-vOx" secondAttribute="trailing" id="DYy-jG-Bdh"/>
                                             <constraint firstAttribute="bottom" secondItem="VgK-3X-vOx" secondAttribute="bottom" id="Wka-no-Ll9"/>
+                                            <constraint firstItem="VgK-3X-vOx" firstAttribute="leading" secondItem="2qz-Bq-vme" secondAttribute="trailing" constant="8" id="azu-0M-o9h"/>
                                             <constraint firstItem="VgK-3X-vOx" firstAttribute="top" secondItem="yxc-P3-eJK" secondAttribute="top" id="mtx-0Z-e8G"/>
                                             <constraint firstItem="2qz-Bq-vme" firstAttribute="top" secondItem="yxc-P3-eJK" secondAttribute="top" id="tao-2z-hPr"/>
                                         </constraints>
