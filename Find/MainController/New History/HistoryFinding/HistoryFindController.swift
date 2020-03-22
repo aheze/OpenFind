@@ -95,8 +95,8 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
         customView.returnTerms = self
         SwiftEntryKit.display(entry: customView, using: attributes)
         
-        helpButton.layer.cornerRadius = 6
-        doneButton.layer.cornerRadius = 6
+//        helpButton.layer.cornerRadius = 6
+//        doneButton.layer.cornerRadius = 6
         
         tableView.separatorStyle = .none
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
@@ -110,10 +110,10 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
         
         var cachedCount = 0
         for photo in photos {
-//            print("PHOTO: \(photo)")
+            print("PHOTO: \(photo)")
             if photo.isDeepSearched == true {
                 cachedCount += 1
-//                print("photo.contnet: \(photo.contents)")
+                print("photo.contnet: \(photo.contents)")
             }
         }
         if cachedCount == photos.count {
@@ -149,7 +149,7 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HFindCell", for: indexPath) as! HistoryFindCell
-        cell.baseView.layer.cornerRadius = 4
+        cell.baseView.layer.cornerRadius = 6
         cell.baseView.clipsToBounds = true
         cell.titleLabel.text = "sdfsdfsdf"
         
@@ -270,6 +270,8 @@ extension HistoryFindController: ReturnSortedTerms {
 extension HistoryFindController {
     func fastFind() {
         var findModels = [FindModel]()
+        
+//        print(
         for photo in photos {
             print("searching in photo")
             var num = 0
@@ -280,6 +282,7 @@ extension HistoryFindController {
 //            var attributedStrings = [NSAttributedString]()
             
             for cont in photo.contents {
+//                print("photoCont: \(photo.contents)")
                 
 //                print("in content")
                 let lowercaseContText = cont.text.lowercased()

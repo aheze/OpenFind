@@ -414,7 +414,15 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
             
           //  print("contents count \(contents.count)")
             contents.append("")
+            let tableViewHeightAfterAddRow = CGFloat(50 * contents.count)
             
+            print("HEIGHT CONT: \(tableViewHeightAfterAddRow)")
+            if tableViewHeightAfterAddRow >= 300 {
+                tableViewHeightConstraint.constant = tableViewHeightAfterAddRow
+                UIView.animate(withDuration: 0.75, animations: {
+                    self.view.layoutIfNeeded()
+                })
+            }
             currentIndexPath = contents.count - 1
             tableView.insertRows(at: [IndexPath(row: currentIndexPath, section: 0)], with: .automatic)
         }

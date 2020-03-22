@@ -211,7 +211,7 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
 //                collViewWidthC.constant = 111
                 searchLeftC.constant = 111 + 3 + 16
             default:
-                print("default")
+//                print("default")
 //                collViewWidthC.constant = 111
                 let availibleWidth = contentView.frame.width - 127
                 //                layout = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)

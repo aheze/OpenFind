@@ -104,6 +104,26 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
             destinationVC.isModalInPresentation = true
             destinationVC.newListDelegate = self
             segue.destination.presentationController?.delegate = self
+        } else if segue.identifier == "editListSegue" {
+            print("editList")
+            let destinationVC = segue.destination as! EditListViewController
+            destinationVC.isModalInPresentation = true
+            destinationVC.finalDeleteList = self
+            destinationVC.finishedEditingList = self
+            
+            if let currentPath = listCategories?[currentEditingPresentationPath] {
+                destinationVC.name = currentPath.name
+                destinationVC.descriptionOfList = currentPath.descriptionOfList
+                var conts = [String]()
+                for singleCont in currentPath.contents {
+                    conts.append(singleCont)
+                }
+                destinationVC.contents = conts
+                destinationVC.iconImageName = currentPath.iconImageName
+                destinationVC.iconColorName = currentPath.iconColorName
+            }
+            segue.destination.presentationController?.delegate = self
+            
         }
     }
     
@@ -395,32 +415,33 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
             print("NOT")
             collectionView.deselectItem(at: indexPath, animated: true)
             currentEditingPresentationPath = indexPath.item
+            performSegue(withIdentifier: "editListSegue", sender: self)
             //print("false")
             //performSegue(withIdentifier: "makeNewListSegue", sender: self)
-            let storyboard1 = UIStoryboard(name: "Main", bundle: nil)
-            let swipeViewController = storyboard1.instantiateViewController(withIdentifier: "EditListViewController") as! EditListViewController
+//            let storyboard1 = UIStoryboard(name: "Main", bundle: nil)
+//            let swipeViewController = storyboard1.instantiateViewController(withIdentifier: "EditListViewController") as! EditListViewController
             //let firstViewController = EditListViewController()
-            swipeViewController.modalPresentationStyle = .custom
-            swipeViewController.transitioningDelegate = self
-            swipeViewController.finalDeleteList = self
+//            swipeViewController.modalPresentationStyle = .custom
+//            swipeViewController.transitioningDelegate = self
+//            swipeViewController.finalDeleteList = self
+//
+//            if let currentPath = listCategories?[indexPath.item] {
+//
+//
+//                swipeViewController.name = currentPath.name
+//                swipeViewController.descriptionOfList = currentPath.descriptionOfList
+//                var conts = [String]()
+//                for singleCont in currentPath.contents {
+//                    conts.append(singleCont)
+//                }
+//                swipeViewController.contents = conts
+//                swipeViewController.iconImageName = currentPath.iconImageName
+//                swipeViewController.iconColorName = currentPath.iconColorName
+//            }
+//            swipeViewController.finalDeleteList = self
+//            swipeViewController.finishedEditingList = self
             
-            if let currentPath = listCategories?[indexPath.item] {
-                
-                
-                swipeViewController.name = currentPath.name
-                swipeViewController.descriptionOfList = currentPath.descriptionOfList
-                var conts = [String]()
-                for singleCont in currentPath.contents {
-                    conts.append(singleCont)
-                }
-                swipeViewController.contents = conts
-                swipeViewController.iconImageName = currentPath.iconImageName
-                swipeViewController.iconColorName = currentPath.iconColorName
-            }
-            
-            swipeViewController.finishedEditingList = self
-            
-            present(swipeViewController, animated: true, completion: nil)
+//            present(swipeViewController, animated: true, completion: nil)
             
             
         }

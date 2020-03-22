@@ -198,8 +198,8 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo, 
         
         pagingViewController.didMove(toParent: self)
         
-        cancelButton.layer.cornerRadius = 6
-        doneWithListButton.layer.cornerRadius = 6
+//        cancelButton.layer.cornerRadius = 6
+//        doneWithListButton.layer.cornerRadius = 6
         
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
         let newImage = UIImage(systemName: iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(hexString: iconColorName), renderingMode: .alwaysOriginal)

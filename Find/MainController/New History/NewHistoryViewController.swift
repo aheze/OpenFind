@@ -649,6 +649,8 @@ extension NewHistoryViewController: ReturnCachedPhotos {
             alertView.present()
             
         }
+        
+        print("give photos: \(photos)")
         if let photoCats = photoCategories {
             
             for currentPhoto in photoCats {
@@ -675,7 +677,7 @@ extension NewHistoryViewController: ReturnCachedPhotos {
 //            getData()
             collectionView.reloadData()
             
-            print(photoCats)
+            print("PHOTO CATS: \(photoCats)")
             photoCategories = photoCats
         }
     }
@@ -813,9 +815,17 @@ extension NewHistoryViewController: ButtonPressed {
             SwiftEntryKit.dismiss()
             collectionView.allowsMultipleSelection = false
             
+            var contents = [SingleHistoryContent]()
+            for photo in tempPhotos {
+                for content in photo.contents {
+                    contents.append(content)
+                }
+            }
+            
             
             do {
                 try realm.write {
+                    realm.delete(contents)
                     realm.delete(tempPhotos)
                 }
             } catch {
@@ -978,6 +988,10 @@ extension NewHistoryViewController {
     }
     
     func getData() {
+        
+//        try! realm.write {
+//            realm.deleteAll()
+//        }
         
         indexToData.removeAll()
         sectionToDate.removeAll()

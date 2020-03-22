@@ -387,7 +387,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             case 3:
                 searchTextLeftC.constant = 197
             default:
-                print("default")
+//                print("default")
                 searchTextLeftC.constant = 197
                 print("search frame: \(newSearchTextField.frame)")
                 let availibleWidth = searchContentView.frame.width - 189

@@ -211,7 +211,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
                 }
             }
         default:
-            print("default")
+//            print("default")
             
             if self.transitionController.isInteractive {
                 self.transitionController.didPanWith(gestureRecognizer: gestureRecognizer)
