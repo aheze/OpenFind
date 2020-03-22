@@ -65,40 +65,40 @@ extension ViewController {
         
         
     }
-    func updateStatusViewProgress(to value: CGFloat) {
-       // print("changing")
-        changeDelegate?.changeValue(to: value)
-//        DispatchQueue.main.async {
-//            if let sublayers = self.statusView.layer.sublayers {
-//                for shapeLayer in sublayers {
-//                    // ...
-//                    if shapeLayer.name == "shape" {
-//                        print("ads")
-//                        let s = shapeLayer as! CAShapeLayer
-//                        //s.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor
-//                        //s.strokeColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 1).cgColor
-//                        //s.lineWidth = 5
-//                        //s.path = path.cgPath
-//                        //s.strokeStart = 0.8
-//
-////                        let startAnimation = CABasicAnimation(keyPath: "strokeStart")
-////                        startAnimation.fromValue = 0
-////                        startAnimation.toValue = 0.8
-//
-//                        let endAnimation = CABasicAnimation(keyPath: "strokeEnd")
-//                        //endAnimation.fromValue = 0.1
-//                        endAnimation.toValue = value
-//
-//                        let animation = CAAnimationGroup()
-//                        animation.animations = [endAnimation]
-//                        animation.duration = 0.1
-//                        s.add(animation, forKey: "MyAnimation")
-//
-//                    }
-//                }
-//            }
-//        }
-    }
+//    func updateStatusViewProgress(to value: CGFloat) {
+//       // print("changing")
+//        changeDelegate?.changeValue(to: value)
+////        DispatchQueue.main.async {
+////            if let sublayers = self.statusView.layer.sublayers {
+////                for shapeLayer in sublayers {
+////                    // ...
+////                    if shapeLayer.name == "shape" {
+////                        print("ads")
+////                        let s = shapeLayer as! CAShapeLayer
+////                        //s.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor
+////                        //s.strokeColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 1).cgColor
+////                        //s.lineWidth = 5
+////                        //s.path = path.cgPath
+////                        //s.strokeStart = 0.8
+////
+//////                        let startAnimation = CABasicAnimation(keyPath: "strokeStart")
+//////                        startAnimation.fromValue = 0
+//////                        startAnimation.toValue = 0.8
+////
+////                        let endAnimation = CABasicAnimation(keyPath: "strokeEnd")
+////                        //endAnimation.fromValue = 0.1
+////                        endAnimation.toValue = value
+////
+////                        let animation = CAAnimationGroup()
+////                        animation.animations = [endAnimation]
+////                        animation.duration = 0.1
+////                        s.add(animation, forKey: "MyAnimation")
+////
+////                    }
+////                }
+////            }
+////        }
+//    }
 }
 extension String {
     func capitalizingFirstLetter() -> String {

@@ -2434,7 +2434,7 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UjL-Di-DhB">
                                 <rect key="frame" x="0.0" y="48" width="414" height="794"/>
-                                <color key="backgroundColor" name="Gray2"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HFindCell" id="gXA-IB-GqP" customClass="HistoryFindCell" customModule="Find" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="122.5"/>
@@ -2509,7 +2509,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" name="BackgroundHist"/>
+                        <color key="backgroundColor" name="Gray2"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="UjL-Di-DhB" secondAttribute="bottom" id="7MN-s1-dwj"/>
                             <constraint firstItem="UjL-Di-DhB" firstAttribute="leading" secondItem="Sbp-uQ-mRg" secondAttribute="leading" id="AKT-df-dmR"/>

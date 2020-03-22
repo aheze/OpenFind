@@ -193,7 +193,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             //let _ = self.navigationController?.popViewController(animated: true)
             self.dismiss(animated: true, completion: nil)
         case .ended:
-            print("ended")
+//            print("ended")
             if self.transitionController.isInteractive {
                 self.currentViewController.scrollView.isScrollEnabled = true
                 self.transitionController.isInteractive = false

@@ -14,9 +14,9 @@ import CoreMotion
 import RealmSwift
 import SnapKit
 
-protocol ChangeStatusValue: class {
-    func changeValue(to value: CGFloat)
-}
+//protocol ChangeStatusValue: class {
+//    func changeValue(to value: CGFloat)
+//}
 protocol ToggleCreateCircle: class {
     func toggle(created: Bool)
 }
@@ -49,6 +49,12 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var menuButton: JJFloatingActionButton!
     @IBOutlet weak var newShutterButton: NewShutterButton!
+    
+    
+    //MARK: Timer and haptic feedback
+    var hapticFeedbackEnabled = true
+    var currentPassCount = 0 /// +1 whenever frame added for AV
+    
     
     
     //MARK: Toolbar
@@ -158,7 +164,7 @@ class ViewController: UIViewController {
     let fastSceneConfiguration = AROrientationTrackingConfiguration()
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var statusView: UIView!
-    weak var changeDelegate: ChangeStatusValue?
+//    weak var changeDelegate: ChangeStatusValue?
     weak var toggleCreateDelegate: ToggleCreateCircle?
     
     var blurView = UIVisualEffectView()
@@ -325,7 +331,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
-        changeDelegate = statusView as? ChangeStatusValue
+//        changeDelegate = statusView as? ChangeStatusValue
         
         
         
@@ -393,6 +399,11 @@ class ViewController: UIViewController {
 extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     // MARK: - Camera Delegate and Setup
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        
+        currentPassCount += 1
+//        print("PASS: \(currentPassCount)")
+        
+        
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
         }

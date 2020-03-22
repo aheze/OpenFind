@@ -66,7 +66,7 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
 //    }
     override func viewDidLayoutSubviews() {
           super.viewDidLayoutSubviews()
-          tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+          tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 82, right: 0)
     }
     
     override func viewDidLoad() {
@@ -84,7 +84,7 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
 //        attributes.scroll = .disabled
         attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
         attributes.roundCorners = .all(radius: 5)
-        attributes.shadow = .active(with: .init(color: .black, opacity: 0.4, radius: 10, offset: .zero))
+        attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
         
         let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
         let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
@@ -151,13 +151,15 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HFindCell", for: indexPath) as! HistoryFindCell
         cell.baseView.layer.cornerRadius = 6
         cell.baseView.clipsToBounds = true
-        cell.titleLabel.text = "sdfsdfsdf"
+//        cell.titleLabel.text = "sdfsdfsdf"
         
-        let photo = resultPhotos[indexPath.row]
+        let model = resultPhotos[indexPath.row]
         
-        var urlPath = photo.photo.filePath
+        var urlPath = model.photo.filePath
         urlPath = "\(folderURL)\(urlPath)"
         let finalUrl = URL(string: urlPath)
+        
+        cell.titleLabel.text = model.photo.dateCreated.convertDateToReadableString()
         
         cell.photoImageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.photoImageView.sd_imageTransition = .fade
@@ -193,7 +195,7 @@ extension HistoryFindController: ReturnSortedTerms {
                     noResultsLabel.text = "Start by typing or selecting a list..."
                     UIView.animate(withDuration: 0.1, animations: {
                         self.welcomeView.alpha = 0
-                        self.tableView.alpha = 1
+//                        self.tableView.alpha = 1
                         self.noResultsLabel.alpha = 1
                         self.noResultsLabel.transform = CGAffineTransform.identity
                     }) { _ in
@@ -409,6 +411,7 @@ extension HistoryFindController {
 //                self.welcomeView.removeFromSuperview()
 //            }
 //            print("MORE")
+            tableView.isHidden = false
             UIView.animate(withDuration: 0.1, animations: {
                 self.noResultsLabel.alpha = 0
                 self.tableView.alpha = 1
@@ -424,7 +427,9 @@ extension HistoryFindController {
                 self.tableView.alpha = 0
                 self.noResultsLabel.transform = CGAffineTransform.identity
                 self.tableView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-            })
+            }) { _ in
+                self.tableView.isHidden = true
+            }
         }
         tableView.reloadData()
         

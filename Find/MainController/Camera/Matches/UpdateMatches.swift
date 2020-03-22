@@ -13,10 +13,14 @@ extension ViewController {
     
     func updateMatchesNumber(to number: Int) {
         //print("Updating matches number to \(number)")
+        
         if number > previousNumberOfMatches {
-            let generator = UIImpactFeedbackGenerator(style: .light)
-            generator.prepare()
-            generator.impactOccurred()
+            if currentPassCount >= 100 {
+                currentPassCount = 0
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.prepare()
+                generator.impactOccurred()
+            }
         }
         
         DispatchQueue.main.async {

@@ -212,7 +212,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
           layout.delegate = self
         }
         let padding = AdaptiveCollectionConfig.cellPadding
-        collectionView.contentInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
+        collectionView.contentInset = UIEdgeInsets(top: padding, left: padding, bottom: 82, right: padding)
         getData()
         collectionView.delaysContentTouches = false
         selectButton.layer.cornerRadius = 6

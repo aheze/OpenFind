@@ -148,7 +148,7 @@ extension ViewController {
 //                    self.hasStartedDismissing = false
 //                })
 //            } else {
-                print("ended")
+//                print("ended")
 //                sceneView.session.run(fastSceneConfiguration)
                 startSession()
                 UIView.animate(withDuration: 0.6, animations: {

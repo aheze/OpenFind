@@ -8,16 +8,16 @@
 
 import UIKit
 
-class StatusView: UIView, ChangeStatusValue {
+class StatusView: UIView {
     
     var createdCircle = false
     
     var number = 0
     
-    var topRimLayer = CAShapeLayer()
-    var previousValue = CGFloat(0.5)
-    var startLineValue = CGFloat(0)
-    public let Style = DefaultStyle.self
+//    var topRimLayer = CAShapeLayer()
+//    var previousValue = CGFloat(0.5)
+//    var startLineValue = CGFloat(0)
+//    public let Style = DefaultStyle.self
     var path: UIBezierPath!
     
     override init(frame: CGRect) {
@@ -30,7 +30,6 @@ class StatusView: UIView, ChangeStatusValue {
     private let notificationCenter = NotificationCenter.default
     
     override func draw(_ rect: CGRect) {
-     
         createCircle()
         createdCircle = true
     }
@@ -61,13 +60,13 @@ class StatusView: UIView, ChangeStatusValue {
             //shapeLayer.name = "shape"
             
             
-            var topRimLayer = CAShapeLayer()
-            topRimLayer.path = path.cgPath
-            topRimLayer.lineWidth = borderWidth
-            topRimLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-            topRimLayer.strokeColor = #colorLiteral(red: 0.8000000119, green: 0.8000000119, blue: 0.8000000119, alpha: 1)
-            topRimLayer.lineCap = .round
-            topRimLayer.name = "shape"
+//            var topRimLayer = CAShapeLayer()
+//            topRimLayer.path = path.cgPath
+//            topRimLayer.lineWidth = borderWidth
+//            topRimLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+//            topRimLayer.strokeColor = #colorLiteral(red: 0.8000000119, green: 0.8000000119, blue: 0.8000000119, alpha: 1)
+//            topRimLayer.lineCap = .round
+//            topRimLayer.name = "shape"
             
             var newFrameRect = CGRect(x: 0, y: 0, width: 0, height: 0)
             newFrameRect.size.width = path.bounds.size.width
@@ -76,54 +75,54 @@ class StatusView: UIView, ChangeStatusValue {
             newFrameRect.origin.y = path.bounds.minY - halfR
     //        newFrameRect.size.x -= halfR
     //        newFrameRect.size.y -= halfR
-            topRimLayer.frame = newFrameRect
+//            topRimLayer.frame = newFrameRect
           //  topRimLayer.position = layer.bounds.width - topRimLayer.bounds.width / 2
             
-            let endAnimation = CABasicAnimation(keyPath: "strokeEnd")
-            endAnimation.fromValue = 0.0
-            endAnimation.toValue = 0.5
-            endAnimation.duration = 1
-            endAnimation.autoreverses = false
-            endAnimation.repeatCount = 0
-            endAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
-            topRimLayer.strokeEnd = 0.5
-    //            let animation = CAAnimationGroup()
-    //            animation.animations = [startAnimation, endAnimation]
-    //            animation.duration = 0.6
-    //            animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
-            
-            topRimLayer.add(endAnimation, forKey: "EndAnimation")
+//            let endAnimation = CABasicAnimation(keyPath: "strokeEnd")
+//            endAnimation.fromValue = 0.0
+//            endAnimation.toValue = 0.5
+//            endAnimation.duration = 1
+//            endAnimation.autoreverses = false
+//            endAnimation.repeatCount = 0
+//            endAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+//            topRimLayer.strokeEnd = 0.5
+//    //            let animation = CAAnimationGroup()
+//    //            animation.animations = [startAnimation, endAnimation]
+//    //            animation.duration = 0.6
+//    //            animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+//
+//            topRimLayer.add(endAnimation, forKey: "EndAnimation")
             self.layer.insertSublayer(shapeLayer, at: 0)
-            self.layer.insertSublayer(topRimLayer, above: shapeLayer)
+//            self.layer.insertSublayer(topRimLayer, above: shapeLayer)
         }
     }
     
-    func changeValue(to value: CGFloat) {
-        topRimLayer.removeAllAnimations()
-//         number += 1
-//        if number % 10 == 0 {
-            //print("skjdfgsjkfghksjghdjkf")
-            topRimLayer.strokeEnd = previousValue
-            let endAnimation = CABasicAnimation(keyPath: "strokeEnd")
-            endAnimation.fromValue = previousValue
-            endAnimation.toValue = value
-            endAnimation.duration = 0.1
-            endAnimation.autoreverses = false
-            endAnimation.repeatCount = 0
-            
-            topRimLayer.add(endAnimation, forKey: "newEnd")
-            topRimLayer.strokeEnd = value
-//        }
-//        var newValue = value
-//        if value == 1 {
-//            print("onee")
-//            newValue = 0.8
-//        }
-        
-        previousValue = value
-        //endAnimation.fillMode = .forwards
-        
-    }
+//    func changeValue(to value: CGFloat) {
+//        topRimLayer.removeAllAnimations()
+////         number += 1
+////        if number % 10 == 0 {
+//            //print("skjdfgsjkfghksjghdjkf")
+//            topRimLayer.strokeEnd = previousValue
+//            let endAnimation = CABasicAnimation(keyPath: "strokeEnd")
+//            endAnimation.fromValue = previousValue
+//            endAnimation.toValue = value
+//            endAnimation.duration = 0.1
+//            endAnimation.autoreverses = false
+//            endAnimation.repeatCount = 0
+//
+//            topRimLayer.add(endAnimation, forKey: "newEnd")
+//            topRimLayer.strokeEnd = value
+////        }
+////        var newValue = value
+////        if value == 1 {
+////            print("onee")
+////            newValue = 0.8
+////        }
+//
+//        previousValue = value
+//        //endAnimation.fillMode = .forwards
+//
+//    }
 //    func changeValue(to value: CGFloat) {
 //        //print("change")
 ////        topRimLayer.

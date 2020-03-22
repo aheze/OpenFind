@@ -15,7 +15,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
     
    
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        print("Did Dismissss")
+//        print("Did Dismissss")
         if cancelTimer != nil {
             cancelTimer!.invalidate()
             cancelTimer = nil

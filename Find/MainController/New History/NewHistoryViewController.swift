@@ -68,15 +68,13 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             checkForHearts()
             
             if indexPathsSelected.count == 0 {
-                print("ZERO!!!")
+//                print("ZERO!!!")
                 changeFloatDelegate?.changeFloat(to: "Disable")
             } else {
-                print("NOT ZERO>>>")
+//                print("NOT ZERO>>>")
                 changeFloatDelegate?.changeFloat(to: "Enable")
             }
         }
-        
-        
 
     }
     
@@ -303,7 +301,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             deselectAll = false
 //            shouldDeselectIfDismissed = true
             selectButtonSelected = false
-            print("firstTime")
+//            print("firstTime")
         default:
             print("unknown case, fade")
         }
@@ -317,10 +315,6 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         getData()
 //        clearHistoryImages()
         
-        
-        
-        
-        
         selectButton.layer.cornerRadius = 6
         selectAll.layer.cornerRadius = 6
         fadeSelectOptions(fadeOut: "firstTimeSetup")
@@ -331,13 +325,13 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         //self.transitioningDelegate = transitionDelegate
 //        let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
 //        layout?.sectionHeadersPinToVisibleBounds = true
-        print("asd")
-        collectionView?.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
+//        print("asd")
+        collectionView?.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 82, right: 16)
         
-        print("asdcontent")
+//        print("asdcontent")
         if photoCategories?.count ?? 0 > 0 {
             if let samplePath = photoCategories?[0] {
-                print("asdsample")
+//                print("asdsample")
                 let urlString = "\(folderURL)\(samplePath.filePath)"
                 if let newURL = URL(string: urlString) {
                     if let newImage = loadImageFromDocumentDirectory(urlOfFile: newURL) {
@@ -382,7 +376,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             //headerView.todayLabel.text = "Text: \(indexPath.section)"
             let date = sectionToDate[indexPath.section]!
             
-            let readableDate = convertDateToReadableString(theDate: date)
+            let readableDate = date.convertDateToReadableString()
             headerView.todayLabel.text = readableDate
             headerView.clipsToBounds = false
             return headerView
@@ -427,7 +421,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
         
         if let hisModel = indexToData[indexPath.section] {
-            print("YES PATH")
+//            print("YES PATH")
             let historyModel = hisModel[indexPath.item]
             
             var urlPath = historyModel.filePath
@@ -451,9 +445,9 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 cell.cachedView.alpha = 0
             }
             
-            print("CELL (\(indexPath)) IS SELECTed: \(cell.isSelected)")
+//            print("CELL (\(indexPath)) IS SELECTed: \(cell.isSelected)")
             if indexPathsSelected.contains(indexPath) {
-                print("contains select")
+//                print("contains select")
                 UIView.animate(withDuration: 0.1, animations: {
                     
                     collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
@@ -462,7 +456,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                     cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
                 })
             } else {
-                print("contains DEselect")
+//                print("contains DEselect")
                 UIView.animate(withDuration: 0.1, animations: {
 //                    cell.isSelected = false
                     collectionView.deselectItem(at: indexPath, animated: false)
@@ -527,11 +521,11 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             }
             collectionView.reloadItems(at: reloadPaths)
             indexPathsSelected.removeAll()
-            print("deselc!!!")
-            print(indexPathsSelected)
+//            print("deselc!!!")
+//            print(indexPathsSelected)
         } else {
             
-            print("select")
+//            print("select")
             var num = 0
             var reloadPaths = [IndexPath]()
             for i in 0..<collectionView.numberOfSections {
@@ -540,7 +534,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                     let indP = IndexPath(row: j, section: i)
                     
     //                let indexPath = IndexPath(item: indexP, section: 0)
-                    print("indexP select: \(indP)")
+//                    print("indexP select: \(indP)")
                     indexPathsSelected.append(indP)
                     collectionView.selectItem(at: indP, animated: true, scrollPosition: [])
                     if let cell = collectionView.cellForItem(at: indP) as? HPhotoCell {
@@ -551,7 +545,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                         })
                     } else {
                         reloadPaths.append(indP)
-                        print("Not visible")
+//                        print("Not visible")
                     }
                     
                 }
@@ -562,11 +556,11 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("did")
+//        print("did")
         //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
 //        cell.isHighlighted = true
         if selectButtonSelected == true {
-            print("seleeeect")
+//            print("seleeeect")
             if !indexPathsSelected.contains(indexPath) {
                 indexPathsSelected.append(indexPath)
                 numberOfSelected += 1
@@ -581,7 +575,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             
                 
         } else {
-            print("false")
+//            print("false")
             collectionView.deselectItem(at: indexPath, animated: true)
             
             let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
@@ -597,7 +591,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             mainContentVC.photoSize = imageSize
             var photoPaths = [URL]()
             if let hisModel = indexToData[indexPath.section] {
-                print("YES PATH Select indexpath select transition push")
+//                print("YES PATH Select indexpath select transition push")
 //                let historyModel = hisModel[indexPath.item]
                 
                 for historyModel in hisModel {
@@ -613,7 +607,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
              mainContentVC.photoPaths = photoPaths
             
             // mainContentVC.photos = photos
-            print("_____")
+//            print("_____")
             //print(dateToFilepaths)
             self.present(mainContentVC, animated: true)
         }
@@ -809,53 +803,73 @@ extension NewHistoryViewController: ButtonPressed {
             collectionView.allowsMultipleSelection = false
         case "delete":
             
-            var tempIntSelected = indexPathsSelected
-            selectButtonSelected = false
-            fadeSelectOptions(fadeOut: "fade out")
-            SwiftEntryKit.dismiss()
-            collectionView.allowsMultipleSelection = false
-            
-            var contents = [SingleHistoryContent]()
-            for photo in tempPhotos {
-                for content in photo.contents {
-                    contents.append(content)
-                }
-            }
-            
-            print("CONTS: \(contents)")
-            
-            do {
-                try realm.write {
-                    realm.delete(contents)
-                    realm.delete(tempPhotos)
-                }
-            } catch {
-                print("DELETE PRESSED, but ERROR deleting photos...... \(error)")
-            }
-            
-            
-            print("Deleting from file now")
-            let fileManager = FileManager.default
-            for filePath in filePaths {
-                print("file... \(filePath)")
-                do {
-                    try fileManager.removeItem(at: filePath)
-                } catch {
-                    print("Could not delete items: \(error)")
-                }
-            }
-            getData()
-            if sectionsToDelete.count == 0 {
-                collectionView.performBatchUpdates({
-                    self.collectionView.deleteItems(at: tempIntSelected)
-                })
+            var titleMessage = ""
+            if indexPathsSelected.count == 1 {
+                titleMessage = "Delete photo?"
             } else {
-                collectionView.performBatchUpdates({
-                    let sections = IndexSet(sectionsToDelete)
-                    self.collectionView.deleteSections(sections)
-                })
+                if indexPathsSelected.count == photoCategories?.count {
+                    titleMessage = "Delete ALL photos?!"
+                } else {
+                    titleMessage = "Delete \(indexPathsSelected.count) photos?"
+                }
+                
             }
-            tempIntSelected.removeAll()
+            
+            let alert = UIAlertController(title: titleMessage, message: "This action can't be undone.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
+                var tempIntSelected = self.indexPathsSelected
+                self.selectButtonSelected = false
+                self.fadeSelectOptions(fadeOut: "fade out")
+                SwiftEntryKit.dismiss()
+                self.collectionView.allowsMultipleSelection = false
+                
+                var contents = [SingleHistoryContent]()
+                for photo in tempPhotos {
+                    for content in photo.contents {
+                        contents.append(content)
+                    }
+                }
+                
+    //            print("CONTS: \(contents)")
+                
+                do {
+                    try self.realm.write {
+                        self.realm.delete(contents)
+                        self.realm.delete(tempPhotos)
+                    }
+                } catch {
+                    print("DELETE PRESSED, but ERROR deleting photos...... \(error)")
+                }
+                
+                
+                print("Deleting from file now")
+                let fileManager = FileManager.default
+                for filePath in filePaths {
+                    print("file... \(filePath)")
+                    do {
+                        try fileManager.removeItem(at: filePath)
+                    } catch {
+                        print("Could not delete items: \(error)")
+                    }
+                }
+                self.getData()
+                if sectionsToDelete.count == 0 {
+                    self.collectionView.performBatchUpdates({
+                        self.collectionView.deleteItems(at: tempIntSelected)
+                    })
+                } else {
+                    self.collectionView.performBatchUpdates({
+                        let sections = IndexSet(sectionsToDelete)
+                        self.collectionView.deleteSections(sections)
+                    })
+                }
+                tempIntSelected.removeAll()
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
+            
+            
             
             
         case "cache":
@@ -976,13 +990,13 @@ extension NewHistoryViewController: ButtonPressed {
 extension NewHistoryViewController {
 
     func populateRealm() {
-        print("POP")
+//        print("POP")
 //        listCategories = realm.objects(FindList.self)
         photoCategories = realm.objects(HistoryModel.self)
         
     }
     func sortHist() {
-        print("SORT")
+//        print("SORT")
         if let photoCats = photoCategories {
             photoCategories = photoCats.sorted(byKeyPath: "dateCreated", ascending: false)
         }
@@ -1099,6 +1113,37 @@ extension NewHistoryViewController {
         }
     }
     
+}
+
+extension Date {
+    func convertDateToReadableString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMddyy"
+        let todaysDate = Date()
+        let todaysDateAsString = dateFormatter.string(from: todaysDate)
+        let yesterday = todaysDate.subtract(days: 1)
+        let yesterdaysDateAsString = dateFormatter.string(from: yesterday!)
+        
+        let oneWeekAgo = todaysDate.subtract(days: 7)
+        let yestYesterday = yesterday?.subtract(days: 1)
+        let range = oneWeekAgo!...yestYesterday!
+        
+        let stringDate = dateFormatter.string(from: self)
+        
+        if stringDate == todaysDateAsString {
+            return "Today"
+        } else if stringDate == yesterdaysDateAsString {
+            return "Yesterday"
+        } else {
+            if range.contains(self) {
+                dateFormatter.dateFormat = "EEEE"
+                return dateFormatter.string(from: self)
+            } else {
+                dateFormatter.dateFormat = "MMMM d',' yyyy"
+                return dateFormatter.string(from: self)
+            }
+        }
+    }
 }
 
 extension NewHistoryViewController: PhotoPageContainerViewControllerDelegate {

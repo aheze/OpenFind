@@ -40,9 +40,9 @@ class ListToolBar: UIView, InjectLists {
                 newMatchButton.backgroundColor = UIColor(named: "Gray3")
                 doneButton.backgroundColor = UIColor(named: "Gray3")
 
-                removeAllButton.setTitleColor(.black, for: .normal)
-                newMatchButton.setTitleColor(.black, for: .normal)
-                doneButton.setTitleColor(.black, for: .normal)
+                removeAllButton.setTitleColor(UIColor(named: "PureBlack"), for: .normal)
+                newMatchButton.setTitleColor(UIColor(named: "PureBlack"), for: .normal)
+                doneButton.setTitleColor(UIColor(named: "PureBlack"), for: .normal)
             } else {
                 print("dark mode")
             }

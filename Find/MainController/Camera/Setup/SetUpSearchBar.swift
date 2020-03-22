@@ -169,10 +169,10 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
                 editableListCategories.append(editList)
             }
         }
-        print("Loading lists")
-        for singL in editableListCategories {
-            print(singL.name)
-        }
+//        print("Loading lists")
+//        for singL in editableListCategories {
+//            print(singL.name)
+//        }
 
         searchCollectionView.reloadData()
 //        updateToolbar?.updateToolbar()
@@ -465,6 +465,14 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         }
         
         
+        return true
+    }
+    
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        
+        finalTextToFind = ""
+        sortSearchTerms()
         return true
     }
     func showDuplicateAlert(show: Bool) {
