@@ -25,9 +25,6 @@ class EditableHistoryModel: NSObject {
     var isDeepSearched = false
     var isHearted = false
 }
-//class HistoryContent: Object {
-//    var contents = List<SingleHistoryContent>()
-//}
 
 class SingleHistoryContent: Object {
     @objc dynamic var x = Double(0)

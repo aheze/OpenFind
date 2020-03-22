@@ -822,6 +822,7 @@ extension NewHistoryViewController: ButtonPressed {
                 }
             }
             
+            print("CONTS: \(contents)")
             
             do {
                 try realm.write {
