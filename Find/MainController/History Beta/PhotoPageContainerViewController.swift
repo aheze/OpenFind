@@ -21,6 +21,9 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     @IBOutlet weak var heartButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
+    
+    
+    
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
     
     
@@ -57,8 +60,12 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     }
     
     //var photos = [UIImage]()
+    
+    //MARK: FROM FIND
+    var cameFromFind = false
+    var findModels = [FindModel]()
+
     var photoModels = [EditableHistoryModel]()
-//    var photoPaths = [URL]()
     var currentIndex = 0
     var currentSection = 0
     var nextIndex: Int?

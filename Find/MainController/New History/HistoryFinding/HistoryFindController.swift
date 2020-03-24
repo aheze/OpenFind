@@ -76,6 +76,12 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
           super.viewDidLayoutSubviews()
           tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 82, right: 0)
     }
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        if viewControllerToPresent.title == "PhotoPageContainerViewController" {
+            viewControllerToPresent.modalPresentationStyle = .fullScreen
+        }
+      super.present(viewControllerToPresent, animated: flag, completion: completion)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -721,7 +727,13 @@ extension HistoryFindController: ZoomAnimatorDelegate {
                     return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
                 }
                 
-                return guardedCell.frame
+                var cellFrame = guardedCell.frame
+                cellFrame.origin.x += 16
+                cellFrame.origin.y += 6
+                cellFrame.size.width = 100
+                cellFrame.size.height -= 12
+                
+                return cellFrame
             }
             //Otherwise the cell should be visible
             else {
@@ -730,7 +742,14 @@ extension HistoryFindController: ZoomAnimatorDelegate {
                     return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
                 }
                 //The cell was found successfully
-                return guardedCell.frame
+//                return guardedCell.frame
+                var cellFrame = guardedCell.frame
+                cellFrame.origin.x += 16
+                cellFrame.origin.y += 6
+                cellFrame.size.width = 100
+                cellFrame.size.height -= 12
+                
+                return cellFrame
             }
         } else {
             self.tableView.scrollToRow(at: self.selectedIndexPath, at: .middle, animated: false)
@@ -746,7 +765,14 @@ extension HistoryFindController: ZoomAnimatorDelegate {
                 return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
             }
             
-            return guardedCell.frame
+//            return guardedCell.frame
+            var cellFrame = guardedCell.frame
+            cellFrame.origin.x += 16
+            cellFrame.origin.y += 6
+            cellFrame.size.width = 100
+            cellFrame.size.height -= 12
+            
+            return cellFrame
         }
     }
 }
