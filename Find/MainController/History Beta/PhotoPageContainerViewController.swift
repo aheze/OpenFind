@@ -21,6 +21,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     @IBOutlet weak var heartButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
+    var folderURL = URL(fileURLWithPath: "", isDirectory: true)
     
     
     @IBAction func findPressed(_ sender: UIButton) {
@@ -56,7 +57,8 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     }
     
     //var photos = [UIImage]()
-    var photoPaths = [URL]()
+    var photoModels = [EditableHistoryModel]()
+//    var photoPaths = [URL]()
     var currentIndex = 0
     var currentSection = 0
     var nextIndex: Int?
@@ -124,11 +126,14 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         print("load")
         print(photoSize)
         vc.imageSize = photoSize
-            vc.url = self.photoPaths[self.currentIndex]
-            self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
-            let viewControllers = [
-                vc
-            ]
+        
+        let filePath = self.photoModels[self.currentIndex].filePath
+        let urlString = URL(string: "\(folderURL)\(filePath)")
+        vc.url = urlString
+        self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
+        let viewControllers = [
+            vc
+        ]
             
             self.pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
         
@@ -280,7 +285,13 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
         vc.delegate = self
         //vc.image = self.photos[currentIndex - 1]
         vc.imageSize = photoSize
-        vc.url = self.photoPaths[currentIndex - 1]
+//        vc.url = self.photoPaths[currentIndex - 1]
+        
+        let filePath = self.photoModels[self.currentIndex - 1].filePath
+        let urlString = URL(string: "\(folderURL)\(filePath)")
+        vc.url = urlString
+        
+        
         vc.index = currentIndex - 1
         self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
         return vc
@@ -289,7 +300,7 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        if currentIndex == (self.photoPaths.count - 1) {
+        if currentIndex == (self.photoModels.count - 1) {
             return nil
         }
         
@@ -298,7 +309,14 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
         self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
         //vc.image = self.photos[currentIndex + 1]
         vc.imageSize = photoSize
-        vc.url = self.photoPaths[currentIndex + 1]
+//        vc.url = self.photoPaths[currentIndex + 1]
+        
+        
+        let filePath = self.photoModels[self.currentIndex + 1].filePath
+        let urlString = URL(string: "\(folderURL)\(filePath)")
+        vc.url = urlString
+        
+        
         vc.index = currentIndex + 1
         return vc
         

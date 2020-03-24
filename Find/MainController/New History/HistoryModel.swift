@@ -21,7 +21,7 @@ class HistoryModel: Object {
 class EditableHistoryModel: NSObject {
     var filePath = ""
     var dateCreated = Date()
-    var contents = [SingleHistoryContent]()
+    var contents = [EditableSingleHistoryContent]()
     var isDeepSearched = false
     var isHearted = false
 }
@@ -33,4 +33,12 @@ class SingleHistoryContent: Object {
     @objc dynamic var height = Double(0)
 
     @objc dynamic var text = ""
+}
+
+class EditableSingleHistoryContent: NSObject {
+    var x = CGFloat(0)
+    var y = CGFloat(0)
+    var width = CGFloat(0)
+    var height = CGFloat(0)
+    var text = ""
 }

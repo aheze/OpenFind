@@ -455,7 +455,7 @@ extension CachingViewController {
             return
         }
 
-        var contents = [SingleHistoryContent]()
+        var contents = [EditableSingleHistoryContent]()
         
         for result in results {
             if let observation = result as? VNRecognizedTextObservation {
@@ -495,12 +495,12 @@ extension CachingViewController {
 
 //                        component.x = newX
 //                        component.y = newY
-                    let singleContent = SingleHistoryContent()
+                    let singleContent = EditableSingleHistoryContent()
                     singleContent.text = text.string
-                    singleContent.x = Double(newX)
-                    singleContent.y = Double(newY)
-                    singleContent.width = Double(newW)
-                    singleContent.height = Double(newH)
+                    singleContent.x = newX
+                    singleContent.y = newY
+                    singleContent.width = newW
+                    singleContent.height = newH
 //
                     contents.append(singleContent)
                     

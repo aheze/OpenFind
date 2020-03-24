@@ -334,7 +334,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //                print("asdsample")
                 let urlString = "\(folderURL)\(samplePath.filePath)"
                 if let newURL = URL(string: urlString) {
-                    if let newImage = loadImageFromDocumentDirectory(urlOfFile: newURL) {
+                    if let newImage = newURL.loadImageFromDocumentDirectory() {
                         imageSize = newImage.size
                     }
                 }
@@ -589,22 +589,49 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             mainContentVC.currentIndex = indexPath.item
             mainContentVC.currentSection = indexPath.section
             mainContentVC.photoSize = imageSize
-            var photoPaths = [URL]()
-            if let hisModel = indexToData[indexPath.section] {
-//                print("YES PATH Select indexpath select transition push")
-//                let historyModel = hisModel[indexPath.item]
-                
-                for historyModel in hisModel {
-                    var urlPath = historyModel.filePath
-                    urlPath = "\(folderURL)\(urlPath)"
-                    if let finalUrl = URL(string: urlPath) {
-                        photoPaths.append(finalUrl)
-//                        fileUrlsSelected.append(finalUrl)
+//            var photoPaths = [URL]()
+//            if let hisModel = indexToData[indexPath.section] {
+////                print("YES PATH Select indexpath select transition push")
+////                let historyModel = hisModel[indexPath.item]
+//
+//                for historyModel in hisModel {
+//                    var urlPath = historyModel.filePath
+//                    urlPath = "\(folderURL)\(urlPath)"
+//                    if let finalUrl = URL(string: urlPath) {
+//                        photoPaths.append(finalUrl)
+////                        fileUrlsSelected.append(finalUrl)
+//                    }
+//                }
+//
+//            }
+//             mainContentVC.photoPaths = photoPaths
+            mainContentVC.folderURL = folderURL
+            
+            if let hisModels = indexToData[indexPath.section] {
+                var modelArray = [EditableHistoryModel]()
+                for photo in hisModels {
+                        
+                    let newHistModel = EditableHistoryModel()
+                    newHistModel.filePath = photo.filePath
+                    newHistModel.dateCreated = photo.dateCreated
+                    newHistModel.isHearted = photo.isHearted
+                    newHistModel.isDeepSearched = photo.isDeepSearched
+                    
+                    for cont in photo.contents {
+                        let realmContent = EditableSingleHistoryContent()
+                        realmContent.text = cont.text
+                        realmContent.height = CGFloat(cont.height)
+                        realmContent.width = CGFloat(cont.width)
+                        realmContent.x = CGFloat(cont.x)
+                        realmContent.y = CGFloat(cont.y)
+    //                                    realmContent.
+    //                                    realnContent.
+                        newHistModel.contents.append(realmContent)
                     }
+                    modelArray.append(newHistModel)
                 }
-                
+                mainContentVC.photoModels = modelArray
             }
-             mainContentVC.photoPaths = photoPaths
             
             // mainContentVC.photos = photos
 //            print("_____")
@@ -657,7 +684,15 @@ extension NewHistoryViewController: ReturnCachedPhotos {
                                 currentPhoto.isDeepSearched = cachedPhoto.isDeepSearched
                                 currentPhoto.contents.removeAll()
                                 for cont in cachedPhoto.contents {
-                                    currentPhoto.contents.append(cont)
+                                    let realmContent = SingleHistoryContent()
+                                    realmContent.text = cont.text
+                                    realmContent.height = Double(cont.height)
+                                    realmContent.width = Double(cont.width)
+                                    realmContent.x = Double(cont.x)
+                                    realmContent.y = Double(cont.y)
+//                                    realmContent.
+//                                    realnContent.
+                                    currentPhoto.contents.append(realmContent)
                                 }
                             }
                         } catch {
@@ -941,11 +976,33 @@ extension NewHistoryViewController: ButtonPressed {
             let destinationVC = segue.destination as! HistoryFindController
             
 //            var arrayOfFinds
-            var modelArray = [HistoryModel]()
+            var modelArray = [EditableHistoryModel]()
             for indexPath in indexPathsSelected {
                 let itemToEdit = indexToData[indexPath.section]
                 if let singleItem = itemToEdit?[indexPath.item] {
-                    modelArray.append(singleItem)
+                    
+                    let newHistModel = EditableHistoryModel()
+                    newHistModel.filePath = singleItem.filePath
+                    newHistModel.dateCreated = singleItem.dateCreated
+                    newHistModel.isHearted = singleItem.isHearted
+                    newHistModel.isDeepSearched = singleItem.isDeepSearched
+                    
+                    for cont in singleItem.contents {
+                        let realmContent = EditableSingleHistoryContent()
+                        realmContent.text = cont.text
+                        realmContent.height = CGFloat(cont.height)
+                        realmContent.width = CGFloat(cont.width)
+                        realmContent.x = CGFloat(cont.x)
+                        realmContent.y = CGFloat(cont.y)
+    //                                    realmContent.
+    //                                    realnContent.
+                        newHistModel.contents.append(realmContent)
+                    }
+//                    for cont in singleItem.contents {
+//                        newHistModel.contents.append(cont)
+//                    }
+                    
+                    modelArray.append(newHistModel)
                 }
             }
             destinationVC.folderURL = folderURL
@@ -1078,10 +1135,10 @@ extension NewHistoryViewController {
 //        print("URL COUNT: \(dictOfUrls.count)")
     }
     
-    func loadImageFromDocumentDirectory(urlOfFile: URL) -> UIImage? {
-        guard let image = UIImage(contentsOfFile: urlOfFile.path) else { return nil }
-        return image
-    }
+//    func loadImageFromDocumentDirectory(urlOfFile: URL) -> UIImage? {
+//        guard let image = UIImage(contentsOfFile: urlOfFile.path) else { return nil }
+//        return image
+//    }
     
     
     func convertDateToReadableString(theDate: Date) -> String {
@@ -1285,5 +1342,13 @@ extension Date {
     
     func subtract(years: Int = 0, months: Int = 0, days: Int = 0, hours: Int = 0, minutes: Int = 0, seconds: Int = 0) -> Date? {
         return add(years: -years, months: -months, days: -days, hours: -hours, minutes: -minutes, seconds: -seconds)
+    }
+}
+
+
+extension URL {
+    func loadImageFromDocumentDirectory() -> UIImage? {
+        guard let image = UIImage(contentsOfFile: self.path) else { return nil }
+        return image
     }
 }

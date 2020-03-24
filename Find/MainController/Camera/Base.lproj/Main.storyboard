@@ -2391,9 +2391,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jhE-uq-1Ax">
-                                        <rect key="frame" x="16" y="8" width="94" height="32"/>
+                                        <rect key="frame" x="16" y="8" width="50" height="32"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="I3p-cT-7DK"/>
                                             <constraint firstAttribute="height" constant="32" id="MDC-qt-bLt"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
@@ -2401,9 +2402,10 @@
                                         <state key="normal" title="Help"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7E-K7-hS4">
-                                        <rect key="frame" x="304" y="8" width="94" height="32"/>
+                                        <rect key="frame" x="348" y="8" width="50" height="32"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="NHJ-6s-AZh"/>
                                             <constraint firstAttribute="height" constant="32" id="unX-O3-pif"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
@@ -2415,20 +2417,24 @@
                                             <action selector="helpButtonPressed:" destination="RLA-KL-RCD" eventType="touchUpInside" id="Vga-Q1-thU"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="RA2-bn-IA8">
+                                        <rect key="frame" x="92" y="14" width="20" height="20"/>
+                                        <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" name="FeedbackGradientLeft"/>
                                 <constraints>
                                     <constraint firstItem="oNE-m3-Qz9" firstAttribute="centerX" secondItem="KrP-6D-fMp" secondAttribute="centerX" id="EOI-ap-g9b"/>
                                     <constraint firstItem="jhE-uq-1Ax" firstAttribute="leading" secondItem="KrP-6D-fMp" secondAttribute="leading" constant="16" id="GEL-fW-dMI"/>
+                                    <constraint firstItem="oNE-m3-Qz9" firstAttribute="leading" secondItem="RA2-bn-IA8" secondAttribute="trailing" constant="6" id="H3g-5W-SvN"/>
                                     <constraint firstItem="jhE-uq-1Ax" firstAttribute="centerY" secondItem="KrP-6D-fMp" secondAttribute="centerY" id="HMv-Fi-mPx"/>
                                     <constraint firstAttribute="bottom" secondItem="b7E-K7-hS4" secondAttribute="bottom" constant="8" id="Llw-PP-bUH"/>
                                     <constraint firstAttribute="bottom" secondItem="jhE-uq-1Ax" secondAttribute="bottom" constant="8" id="Omj-kl-PWa"/>
                                     <constraint firstItem="oNE-m3-Qz9" firstAttribute="centerY" secondItem="KrP-6D-fMp" secondAttribute="centerY" id="UAS-zn-EIj"/>
                                     <constraint firstItem="b7E-K7-hS4" firstAttribute="top" secondItem="KrP-6D-fMp" secondAttribute="top" constant="8" id="Vs1-NZ-qCP"/>
                                     <constraint firstItem="b7E-K7-hS4" firstAttribute="centerY" secondItem="KrP-6D-fMp" secondAttribute="centerY" id="Xsw-It-aId"/>
-                                    <constraint firstItem="oNE-m3-Qz9" firstAttribute="leading" secondItem="jhE-uq-1Ax" secondAttribute="trailing" constant="8" id="Zm6-tQ-nGD"/>
+                                    <constraint firstItem="RA2-bn-IA8" firstAttribute="centerY" secondItem="KrP-6D-fMp" secondAttribute="centerY" id="p4d-Vn-abQ"/>
                                     <constraint firstItem="jhE-uq-1Ax" firstAttribute="top" secondItem="KrP-6D-fMp" secondAttribute="top" constant="8" id="pee-Ls-cZP"/>
-                                    <constraint firstItem="b7E-K7-hS4" firstAttribute="leading" secondItem="oNE-m3-Qz9" secondAttribute="trailing" constant="8" id="uy6-2o-Be4"/>
                                     <constraint firstAttribute="trailing" secondItem="b7E-K7-hS4" secondAttribute="trailing" constant="16" id="wgu-wA-dan"/>
                                 </constraints>
                             </view>
@@ -2461,7 +2467,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" scrollEnabled="NO" text="jlkdfj sldfjlsdk fklsj flshf klhf lskhk dlhg sdlkjhg dkslfhgklds fjghskdlf gh dsflkg" translatesAutoresizingMaskIntoConstraints="NO" id="bho-aX-Afw">
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" scrollEnabled="NO" editable="NO" text="jlkdfj sldfjlsdk fklsj flshf klhf lskhk dlhg sdlkjhg dkslfhgklds fjghskdlf gh dsflkg" translatesAutoresizingMaskIntoConstraints="NO" id="bho-aX-Afw">
                                                             <rect key="frame" x="110" y="34" width="268" height="47.5"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                             <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -2524,7 +2530,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="Tow-Xw-HAb"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="RA2-bn-IA8" id="yM4-yY-yMY"/>
                         <outlet property="doneButton" destination="b7E-K7-hS4" id="CEP-H7-v1d"/>
+                        <outlet property="helpButton" destination="jhE-uq-1Ax" id="4Db-Oh-rAZ"/>
+                        <outlet property="histCenterC" destination="EOI-ap-g9b" id="LLc-6c-AKL"/>
                         <outlet property="noResultsLabel" destination="k1U-8L-apk" id="CqO-yo-zPU"/>
                         <outlet property="tableView" destination="UjL-Di-DhB" id="fBj-vh-ymO"/>
                         <outlet property="welcomeCacheButton" destination="6gE-rK-kBV" id="mHP-BS-7c2"/>

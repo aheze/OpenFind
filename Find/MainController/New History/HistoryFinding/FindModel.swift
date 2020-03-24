@@ -9,7 +9,7 @@
 import UIKit
 
 class FindModel: NSObject {
-    var photo = HistoryModel()
+    var photo = EditableHistoryModel()
     var numberOfMatches = 0
     var descriptionText = ""
     var descriptionHeight = CGFloat(0)
