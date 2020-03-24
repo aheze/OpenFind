@@ -12,6 +12,7 @@ class FindModel: NSObject {
     var photo = HistoryModel()
     var numberOfMatches = 0
     var descriptionText = ""
+    var descriptionHeight = CGFloat(0)
     var descriptionMatchRanges = [ClosedRange<Int>]()
     var components = [Component]()
 }

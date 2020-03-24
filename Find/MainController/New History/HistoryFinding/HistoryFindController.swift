@@ -34,6 +34,9 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
     @IBAction func helpButtonPressed(_ sender: Any) {
     }
     
+    
+    let deviceSize = UIScreen.main.bounds.size
+    
     @IBOutlet weak var doneButton: UIButton!
     
     @IBAction func doneButtonPressed(_ sender: Any) {
@@ -193,9 +196,7 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
 //        return UITableView.automaticDimension
 //    }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // Swift 4.2 onwards
-//        return UITableView.automaticDimension
-        return 140
+        return resultPhotos[indexPath.row].descriptionHeight
     }
     
 }
@@ -294,7 +295,9 @@ extension HistoryFindController: ReturnSortedTerms {
 
 extension HistoryFindController {
     func fastFind() {
+        
         var findModels = [FindModel]()
+//        var heights = [CGFloat]()
         
 //        print(
         for photo in photos {
@@ -386,7 +389,6 @@ extension HistoryFindController {
             
                 
             }
-            newMod.numberOfMatches = num
             if num >= 1 {
                 
                 for (index, comp) in compMatches.enumerated() {
@@ -411,7 +413,13 @@ extension HistoryFindController {
                 
                 findModels.append(newMod)
             }
+            newMod.numberOfMatches = num
             newMod.descriptionText = descriptionOfPhoto
+            let totalWidth = view.frame.size.width
+            let finalWidth = totalWidth - 146
+            let height = descriptionOfPhoto.heightWithConstrainedWidth(width: finalWidth, font: UIFont.systemFont(ofSize: 14))
+            let finalHeight = height + 70
+            newMod.descriptionHeight = finalHeight
             
         }
         print("FIND COUNT: \(findModels.count)")
