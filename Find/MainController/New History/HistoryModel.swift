@@ -13,7 +13,7 @@ import RealmSwift
 class HistoryModel: Object {
     @objc dynamic var filePath = ""
     @objc dynamic var dateCreated = Date()
-    var contents = List<SingleHistoryContent>()
+    let contents = List<SingleHistoryContent>()
     @objc dynamic var isDeepSearched = false
     @objc dynamic var isHearted = false
 }

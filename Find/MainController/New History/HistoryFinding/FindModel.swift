@@ -12,5 +12,10 @@ class FindModel: NSObject {
     var photo = HistoryModel()
     var numberOfMatches = 0
     var descriptionText = ""
+    var descriptionMatchRanges = [ClosedRange<Int>]()
     var components = [Component]()
+}
+
+class ArrayOfMatchesInComp: NSObject {
+    var stringToRanges = [String: [ClosedRange<Int>]]()
 }

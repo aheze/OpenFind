@@ -18,8 +18,9 @@ class HistoryFindCell: UITableViewCell {
     
     @IBOutlet weak var textView: UITextView!
     
+//    @IBOutlet weak var descLabel: UILabel!
     
-    @IBOutlet weak var textFieldHeightC: NSLayoutConstraint!
+//    @IBOutlet weak var textFieldHeightC: NSLayoutConstraint!
     
     @IBOutlet weak var baseView: UIView!
     

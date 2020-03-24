@@ -14,7 +14,7 @@ class FindList: Object {
     @objc dynamic var name = ""
     @objc dynamic var descriptionOfList = ""
     //@objc dynamic var contents = ""
-    var contents = List<String>()
+    let contents = List<String>()
     @objc dynamic var iconImageName = ""
     @objc dynamic var iconColorName = ""
     @objc dynamic var dateCreated = Date()

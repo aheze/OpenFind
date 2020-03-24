@@ -65,6 +65,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     
 //    var originalPhotos = [HistoryModel]()
     var photos = [EditableHistoryModel]()
+    var alreadyCachedPhotos = [EditableHistoryModel]()
 //    var alreadyCached = [EditableHistoryModel]()
     
     
@@ -227,29 +228,29 @@ extension CachingViewController {
     
     func keepAlreadyCached() {
         DispatchQueue.main.async {
-            var alreadyCachedPhotos = [EditableHistoryModel]()
-            
-            self.cancelButton.isEnabled = false
-            
-            
-//            let alertView = SPAlertView(title: "Kept cached photos!", message: "Tap to dismiss", preset: SPAlertPreset.done)
-//            alertView.duration = 2.2
-//            alertView.present()
-            
-            for photo in self.photos {
-                if photo.isDeepSearched == true {
-//                    let histModel = HistoryModel()
-//                    histModel.filePath = photo.filePath
-//                    histModel.dateCreated = photo.dateCreated
-//                    histModel.isDeepSearched = photo.isDeepSearched
-//                    histModel.isHearted = photo.isHearted
-//                    for cont in photo.contents {
-//                        histModel.contents.append(cont)
-//                    }
-                    alreadyCachedPhotos.append(photo)
-                }
-            }
-            self.finishedCache?.giveCachedPhotos(photos: alreadyCachedPhotos, popup: "Keep")
+//            var alreadyCachedPhotos = [EditableHistoryModel]()
+//
+//            self.cancelButton.isEnabled = false
+//
+//
+////            let alertView = SPAlertView(title: "Kept cached photos!", message: "Tap to dismiss", preset: SPAlertPreset.done)
+////            alertView.duration = 2.2
+////            alertView.present()
+//
+//            for photo in self.photos {
+//                if photo.isDeepSearched == true {
+////                    let histModel = HistoryModel()
+////                    histModel.filePath = photo.filePath
+////                    histModel.dateCreated = photo.dateCreated
+////                    histModel.isDeepSearched = photo.isDeepSearched
+////                    histModel.isHearted = photo.isHearted
+////                    for cont in photo.contents {
+////                        histModel.contents.append(cont)
+////                    }
+//                    alreadyCachedPhotos.append(photo)
+//                }
+//            }
+            self.finishedCache?.giveCachedPhotos(photos: self.alreadyCachedPhotos, popup: "Keep")
             SwiftEntryKit.dismiss()
         }
     }
@@ -274,7 +275,7 @@ extension CachingViewController {
 //                cachedPhotos.append(histModel)
 //                print("MODEL: \(histModel)")
 //            }
-            self.finishedCache?.giveCachedPhotos(photos: self.photos, popup: "Finished")
+            self.finishedCache?.giveCachedPhotos(photos: self.alreadyCachedPhotos, popup: "Finished")
             SwiftEntryKit.dismiss()
         }
         
@@ -368,6 +369,11 @@ extension CachingViewController {
                         request.recognitionLevel = .accurate
                         request.recognitionLanguages = ["en_GB"]
                         let imageRequestHandler = VNImageRequestHandler(url: photoUrl, orientation: .up)
+                        
+                        request.progressHandler = { (request, value, error) in
+                            print("Progress: \(value)")
+//                            self.updateStatusViewProgress(to: CGFloat(value))
+                        }
                         //DispatchQueue.global().async {
                         do {
                             try imageRequestHandler.perform([request])
@@ -437,12 +443,12 @@ extension CachingViewController {
 //            newCachedPhoto.contents = contents
             
     //        alreadyCached.append(newCachedPhoto)
-            
-            if let origIndex = photos.firstIndex(of: photo) {
-                photos[origIndex] = newCachedPhoto
-            } else {
-                print("ERROR!!!!!!")
-            }
+            alreadyCachedPhotos.append(newCachedPhoto)
+//            if let origIndex = photos.firstIndex(of: photo) {
+//                photos[origIndex] = newCachedPhoto
+//            } else {
+//                print("ERROR!!!!!!")
+//            }
             dispatchSemaphore.signal()
             dispatchGroup.leave()
             
@@ -514,12 +520,12 @@ extension CachingViewController {
         
 //        alreadyCached.append(newCachedPhoto)
         
-        if let origIndex = photos.firstIndex(of: photo) {
-            photos[origIndex] = newCachedPhoto
-        } else {
-            print("ERROR!!!!!!")
-        }
-        
+//        if let origIndex = photos.firstIndex(of: photo) {
+//            photos[origIndex] = newCachedPhoto
+//        } else {
+//            print("ERROR!!!!!!")
+//        }
+        alreadyCachedPhotos.append(newCachedPhoto)
         dispatchSemaphore.signal()
         dispatchGroup.leave()
 //            busyFastFinding = false

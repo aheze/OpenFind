@@ -58,7 +58,7 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
     
     var photos = [HistoryModel]()
     var resultPhotos = [FindModel]()
-    
+    var resultHeights = [CGFloat]()
     
     weak var returnCache: ReturnCache?
 //    func changeSearchPhotos(photos: [URL]) {
@@ -136,6 +136,8 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
         noResultsLabel.alpha = 0
         self.noResultsLabel.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.estimatedRowHeight = UITableView.automaticDimension // Something close to your average cell height
 //        welcomeView.anp
         
     }
@@ -151,6 +153,15 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HFindCell", for: indexPath) as! HistoryFindCell
         cell.baseView.layer.cornerRadius = 6
         cell.baseView.clipsToBounds = true
+//        cell.textView.isScrollEnabled = false
+//        
+//        
+//        let fixedWidth = cell.textView.frame.size.width
+//        let newSize = cell.textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+////        let finalWidth = max(newSize.width, fixedWidth)
+//        let finalHeight = newSize.height
+//        
+//        cell.textFieldHeightC.constant = finalHeight
 //        cell.titleLabel.text = "sdfsdfsdf"
         
         let model = resultPhotos[indexPath.row]
@@ -160,6 +171,11 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
         let finalUrl = URL(string: urlPath)
         
         cell.titleLabel.text = model.photo.dateCreated.convertDateToReadableString()
+        cell.textView.text = model.descriptionText
+//        cell.layoutIfNeeded()
+        
+        
+        print("TEXT: \(model.descriptionText)")
         
         cell.photoImageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.photoImageView.sd_imageTransition = .fade
@@ -173,7 +189,14 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
     }
-    
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // Swift 4.2 onwards
+//        return UITableView.automaticDimension
+        return 140
+    }
     
 }
 
@@ -281,20 +304,30 @@ extension HistoryFindController {
             let newMod = FindModel()
             newMod.photo = photo
             
-//            var attributedStrings = [NSAttributedString]()
+            var descriptionOfPhoto = ""
+//            var descStrings = [String]()
+//            var compMatches = [ArrayOfMatchesInComp]()
+            var compMatches = [String: [ClosedRange<Int>]]() ///COMPONENT to ranges
             
+            
+            ///Cycle through each block of text. Each cont may be a line long.
             for cont in photo.contents {
-//                print("photoCont: \(photo.contents)")
+//                let compRange = ArrayOfMatchesInComp()
                 
+                var matchRanges = [ClosedRange<Int>]()
+//                print("photoCont: \(photo.contents)")
 //                print("in content")
+                var hasMatch = false
+                
                 let lowercaseContText = cont.text.lowercased()
                 let individualCharacterWidth = CGFloat(cont.width) / CGFloat(lowercaseContText.count)
-                
                 for match in currentMatchStrings {
                     if lowercaseContText.contains(match) {
+                        hasMatch = true
                         print("contains match: \(match), text: \(lowercaseContText)")
                         let finalW = individualCharacterWidth * CGFloat(match.count)
                         let indicies = lowercaseContText.indicesOf(string: match)
+                        
                         for index in indicies {
                             num += 1
                             let addedWidth = individualCharacterWidth * CGFloat(index)
@@ -326,74 +359,59 @@ extension HistoryFindController {
                                     newComponent.parentList = parentList
                                     newComponent.colors = [parentList.iconColorName]
                                 }
-//                                newMod.components
-//                                var finalRange = 0...999
-//                                print("indexL \(index), length: \(match.count), totalCount: \(lowercaseContText.count)")
-//
-//                                let totalCount = lowercaseContText.count
-//
-//                                if lowercaseContText.count >= 25 {
-//                                    let endIndex = index + match.count - 1
-//                                    var textRange = index...endIndex
-//
-//                                    var paddingSpace = 0
-//
-//                                    let availibleSpace = totalCount - match.count
-//
-//                                    if availibleSpace % 2 == 0 {
-//                                        print("even")
-//                                        paddingSpace = availibleSpace / 2
-//                                    } else {
-//                                        paddingSpace = (availibleSpace - 1) / 2
-//                                    }
-//
-//
-//                                    let startInd = index - paddingSpace
-//                                    let endInd = index + match.count + paddingSpace
-//
-//                                    if startInd >= 0 {
-//                                        if endInd <= totalCount - 1 {
-//
-//                                        } else {
-//
-//                                        }
-//                                    } else {
-//                                        if endInd <= totalCount - 1 {
-//
-//                                        } else {
-//
-//                                        }
-//                                    }
-//
-//
-//
-//                                } else {
-//
-//                                }
-//                                if let range = lowercaseContText.range(of: match) {
-//                                    print("exists")
-//                                    print(range)
-//                                }
-                                
                             } else {
                                 print("ERROROROR! NO parent list!")
                             }
                             
                             newMod.components.append(newComponent)
+                            matchRanges.append(index...index + match.count)
+//                            textToRanges[cont.text, default: [ClosedRange<Int>]()].append(index...index + match.count)
                             
                         }
+                        
+                        
+                        
                     }
                 }
                     
+                if hasMatch == true {
+//                    descStrings.append(cont.text)
+//                    compRange.stringToRanges = index...index + match.count
+//                    compRange.stringToRanges = textToRanges
+                    print("COMOPP: \(matchRanges)")
+//                    compMatches.append(matchRanges)
+                    compMatches[cont.text] = matchRanges
                     
+                }
+            
                 
             }
-            
-            
             newMod.numberOfMatches = num
             if num >= 1 {
+                
+                for (index, comp) in compMatches.enumerated() {
+                    if index <= 2 {
+//                        let thisCompString = comp.stringToRanges.first?.key
+                        let thisCompString = comp.key
+                        
+                        if descriptionOfPhoto == "" {
+                            descriptionOfPhoto.append("...\(thisCompString)...")
+                        } else {
+                            descriptionOfPhoto.append("\n...\(thisCompString)...")
+                        }
+                        
+//                        for matchCont in comp {
+//
+//                        }
+//                        de
+//                        let componentString = comp.
+                        
+                    }
+                }
+                
                 findModels.append(newMod)
             }
+            newMod.descriptionText = descriptionOfPhoto
             
         }
         print("FIND COUNT: \(findModels.count)")
