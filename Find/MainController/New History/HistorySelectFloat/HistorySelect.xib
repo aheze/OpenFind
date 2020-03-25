@@ -56,20 +56,8 @@
                                 <action selector="heartPressed:" destination="-1" eventType="touchUpInside" id="jIq-AF-bKa"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBp-TE-s25" userLabel="Delete">
-                            <rect key="frame" x="88" y="0.0" width="42" height="42"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="QBp-TE-s25" secondAttribute="height" multiplier="1:1" id="wgU-q6-jDp"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                            <color key="tintColor" red="0.99343103170394897" green="0.99666577577590942" blue="0.99652749300003052" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <state key="normal" image="trash" catalog="system"/>
-                            <connections>
-                                <action selector="deletePressed:" destination="-1" eventType="touchUpInside" id="u9a-1r-YxP"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u9z-k9-EE7" userLabel="Cache">
-                            <rect key="frame" x="132" y="0.0" width="42" height="42"/>
+                            <rect key="frame" x="88" y="0.0" width="42" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="u9z-k9-EE7" secondAttribute="height" multiplier="1:1" id="LvM-A2-jz1"/>
                             </constraints>
@@ -78,6 +66,18 @@
                             <state key="normal" image="CachedIconThin"/>
                             <connections>
                                 <action selector="cachePressed:" destination="-1" eventType="touchUpInside" id="bHt-c1-Xh4"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBp-TE-s25" userLabel="Delete">
+                            <rect key="frame" x="132" y="0.0" width="42" height="42"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="QBp-TE-s25" secondAttribute="height" multiplier="1:1" id="wgU-q6-jDp"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                            <color key="tintColor" red="0.99343103170394897" green="0.99666577577590942" blue="0.99652749300003052" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" image="trash" catalog="system"/>
+                            <connections>
+                                <action selector="deletePressed:" destination="-1" eventType="touchUpInside" id="u9a-1r-YxP"/>
                             </connections>
                         </button>
                     </subviews>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftEntryKit
 
 protocol PhotoPageContainerViewControllerDelegate: class {
     func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int, sectionDidUpdate currentSection: Int)
@@ -15,33 +16,44 @@ protocol PhotoPageContainerViewControllerDelegate: class {
 class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDelegate {
 
     
-    @IBOutlet weak var xButtonView: UIImageView!
+//    @IBOutlet weak var xButtonView: UIImageView!
+    
+    
+    @IBOutlet weak var xButton: UIButton!
+    @IBAction func xButtonPressed(_ sender: Any) {
+        self.currentViewController.scrollView.isScrollEnabled = false
+        self.transitionController.isInteractive = false
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    @IBOutlet weak var blurView: UIVisualEffectView!
     
     @IBOutlet weak var findButton: UIButton!
     @IBOutlet weak var heartButton: UIButton!
+    @IBOutlet weak var cacheButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var moreButton: UIButton!
+    
+    @IBAction func findPressed(_ sender: Any) {
+    }
+    
+    @IBAction func heartPressed(_ sender: Any) {
+    }
+    
+    @IBAction func cachePressed(_ sender: Any) {
+    }
+    
+    @IBAction func deletePressed(_ sender: Any) {
+    }
+    
+    @IBAction func morePressed(_ sender: Any) {
+    }
     
     
+    @IBOutlet weak var backBlurView: UIVisualEffectView!
     
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
-    
-    
-    @IBAction func findPressed(_ sender: UIButton) {
-        print("find")
-    }
-    
-    @IBAction func heartPressed(_ sender: UIButton) {
-        print("heart")
-    }
-    
-    @IBAction func deletePressed(_ sender: UIButton) {
-        print("delete")
-    }
-    
-    @IBAction func sharePressed(_ sender: UIButton) {
-        print("share")
-    }
+
     
     
     enum ScreenMode {
@@ -68,41 +80,17 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     var photoModels = [EditableHistoryModel]()
     var currentIndex = 0
     var currentSection = 0
-    var nextIndex: Int?
+//    var nextIndex: Int?
+//    var newNextIndex = -1
+    
+    
     var photoSize: CGSize = CGSize(width: 0, height: 0) {
         didSet {
             print("SET")
             print(photoSize)
         }
     }
-    
-    func drawImageViews() {
-        //let findImage = StyleKitName.imageOfFind
-        findButton.alpha = 0
-        heartButton.alpha = 0
-        deleteButton.alpha = 0
-        shareButton.alpha = 0
-        findButton.tintColor = #colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 1)
-        heartButton.tintColor = #colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 1)
-        deleteButton.tintColor = #colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 1)
-        shareButton.tintColor = #colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 1)
-        findButton.setImage(StyleKitName.imageOfFind, for: .normal)
-        heartButton.setImage(StyleKitName.imageOfHeart, for: .normal)
-        deleteButton.setImage(StyleKitName.imageOfDelete, for: .normal)
-        shareButton.setImage(StyleKitName.imageOfShare, for: .normal)
-        print("start")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4, execute: {
-            print("exce")
-            UIView.animate(withDuration: 0.4, delay: 0, options: .curveLinear, animations: {
-                self.findButton.alpha = 1
-                self.heartButton.alpha = 1
-                self.deleteButton.alpha = 1
-                self.shareButton.alpha = 1
-            }, completion: nil)
-        })
-        
-        
-    }
+
     var panGestureRecognizer: UIPanGestureRecognizer!
     var singleTapGestureRecognizer: UITapGestureRecognizer!
     
@@ -110,55 +98,75 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        drawImageViews()
+      
+        backBlurView.layer.cornerRadius = 10
+        backBlurView.clipsToBounds = true
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleXPress(_:)))
-        xButtonView.addGestureRecognizer(tap)
-        xButtonView.isUserInteractionEnabled = true
-        view.bringSubviewToFront(xButtonView)
-            
-            self.pageViewController.delegate = self
-            self.pageViewController.dataSource = self
-            self.panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPanWith(gestureRecognizer:)))
-            self.panGestureRecognizer.delegate = self
-            self.pageViewController.view.addGestureRecognizer(self.panGestureRecognizer)
-            
-            self.singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didSingleTapWith(gestureRecognizer:)))
-            self.pageViewController.view.addGestureRecognizer(self.singleTapGestureRecognizer)
-            
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(PhotoZoomViewController.self)") as! PhotoZoomViewController
-            vc.delegate = self
-            //vc.index = self.currentIndex
-            //vc.image = self.photos[self.currentIndex]
-        print("load")
-        print(photoSize)
+        self.pageViewController.delegate = self
+        self.pageViewController.dataSource = self
+        self.panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPanWith(gestureRecognizer:)))
+        self.panGestureRecognizer.delegate = self
+        self.pageViewController.view.addGestureRecognizer(self.panGestureRecognizer)
+        
+        self.singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didSingleTapWith(gestureRecognizer:)))
+        self.pageViewController.view.addGestureRecognizer(self.singleTapGestureRecognizer)
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(PhotoZoomViewController.self)") as! PhotoZoomViewController
+        vc.delegate = self
+
         vc.imageSize = photoSize
+        var urlString = URL(string: "")
+        if cameFromFind {
+            let filePath = self.findModels[self.currentIndex].photo.filePath
+            urlString = URL(string: "\(folderURL)\(filePath)")
+        } else {
+            let filePath = self.photoModels[self.currentIndex].filePath
+            urlString = URL(string: "\(folderURL)\(filePath)")
+        }
         
-        let filePath = self.photoModels[self.currentIndex].filePath
-        let urlString = URL(string: "\(folderURL)\(filePath)")
         vc.url = urlString
+        vc.index = currentIndex
         self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
-        let viewControllers = [
-            vc
-        ]
+        let viewControllers = [ vc ]
             
-            self.pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+        self.pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
         
+        if cameFromFind {
+            blurView.isHidden = true
+            
+            var attributes = EKAttributes.bottomFloat
+            attributes.entryBackground = .color(color: .white)
+            attributes.entranceAnimation = .translation
+            attributes.exitAnimation = .translation
+            attributes.displayDuration = .infinity
+            attributes.positionConstraints.size.height = .constant(value: 60)
+            attributes.statusBar = .light
+            attributes.entryInteraction = .absorbTouches
+            attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+            attributes.roundCorners = .all(radius: 5)
+            attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
+            
+            let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
+            let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
+            attributes.positionConstraints.keyboardRelation = keyboardRelation
+            
+            let customView = FindBar()
+            
+    //        customView.returnTerms = self
+            SwiftEntryKit.display(entry: customView, using: attributes)
+        } else {
+            blurView.layer.cornerRadius = 10
+            blurView.clipsToBounds = true
+            if photoModels[currentIndex].isHearted == true {
+                let newImage = UIImage(systemName: "heart.fill")
+                heartButton.setImage(newImage, for: .normal)
+            } else {
+                let newImage = UIImage(systemName: "heart")
+                heartButton.setImage(newImage, for: .normal)
+            }
+        }
     }
-    
-    @objc func handleXPress(_ sender: UITapGestureRecognizer? = nil) {
-        print("x pressed...")
-//        self.transitionController.animator.isPresenting = false
-//        let tmp = self.transitionController.fromDelegate
-//        self.transitionController.animator.fromDelegate = self.transitionController.toDelegate
-//        self.transitionController.animator.toDelegate = tmp
-        self.currentViewController.scrollView.isScrollEnabled = false
-        self.transitionController.isInteractive = false
-        
-        //let _ = self.navigationController?.popViewController(animated: true)
-        self.dismiss(animated: true, completion: nil)
-    }
-    
+
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         
         if let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
@@ -210,34 +218,34 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
                 self.currentViewController.scrollView.isScrollEnabled = true
                 self.transitionController.isInteractive = false
                 self.transitionController.didPanWith(gestureRecognizer: gestureRecognizer)
-                UIView.animate(withDuration: 0.4, delay: 0.6, options: [], animations: {
-                    self.findButton.alpha = 1
-                    self.heartButton.alpha = 1
-                    self.deleteButton.alpha = 1
-                    self.shareButton.alpha = 1
-                }) { _ in
-                    self.findButton.isHidden = false
-                    self.heartButton.isHidden = false
-                    self.deleteButton.isHidden = false
-                    self.shareButton.isHidden = false
-                }
+//                UIView.animate(withDuration: 0.4, delay: 0.6, options: [], animations: {
+//                    self.findButton.alpha = 1
+//                    self.heartButton.alpha = 1
+//                    self.deleteButton.alpha = 1
+//                    self.shareButton.alpha = 1
+//                }) { _ in
+//                    self.findButton.isHidden = false
+//                    self.heartButton.isHidden = false
+//                    self.deleteButton.isHidden = false
+//                    self.shareButton.isHidden = false
+//                }
             }
         default:
 //            print("default")
             
             if self.transitionController.isInteractive {
                 self.transitionController.didPanWith(gestureRecognizer: gestureRecognizer)
-                UIView.animate(withDuration: 0.2, delay: 0, options: [], animations: {
-                    self.findButton.alpha = 0
-                    self.heartButton.alpha = 0
-                    self.deleteButton.alpha = 0
-                    self.shareButton.alpha = 0
-                }) { _ in
-                    self.findButton.isHidden = true
-                    self.heartButton.isHidden = true
-                    self.deleteButton.isHidden = true
-                    self.shareButton.isHidden = true
-                }
+//                UIView.animate(withDuration: 0.2, delay: 0, options: [], animations: {
+//                    self.findButton.alpha = 0
+//                    self.heartButton.alpha = 0
+//                    self.deleteButton.alpha = 0
+//                    self.shareButton.alpha = 0
+//                }) { _ in
+//                    self.findButton.isHidden = true
+//                    self.heartButton.isHidden = true
+//                    self.deleteButton.isHidden = true
+//                    self.shareButton.isHidden = true
+//                }
             }
         }
     }
@@ -255,29 +263,48 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     
     func changeScreenMode(to: ScreenMode) {
         if to == .full {
-            
+            if !cameFromFind {
+                UIView.animate(withDuration: 0.25,
+                               animations: {
+                                self.blurView.alpha = 0
+                }, completion: { completed in
+                    self.blurView.isHidden = true
+                })
+            }
             UIView.animate(withDuration: 0.25,
                            animations: {
                             self.view.backgroundColor = .black
-                            self.xButtonView.alpha = 0
+                            self.xButton.alpha = 0
+                            self.backBlurView.alpha = 0
             }, completion: { completed in
-                self.xButtonView.isHidden = true
+                self.xButton.isHidden = true
+                self.blurView.isHidden = true
             })
             
         } else {
-            self.xButtonView.isHidden = false
+            if !cameFromFind {
+                blurView.isHidden = false
+                UIView.animate(withDuration: 0.25,
+                               animations: {
+                                self.blurView.alpha = 1
+                }, completion: nil)
+                
+            }
+            self.xButton.isHidden = false
             UIView.animate(withDuration: 0.25,
                            animations: {
-                            self.xButtonView.alpha = 1
+                            self.xButton.alpha = 1
                             if #available(iOS 13.0, *) {
                                 self.view.backgroundColor = .systemBackground
                             } else {
                                 self.view.backgroundColor = .white
                             }
+                            self.backBlurView.alpha = 1
             }, completion: { completed in
             })
         }
     }
+    
 }
 
 extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
@@ -290,16 +317,20 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(PhotoZoomViewController.self)") as! PhotoZoomViewController
         vc.delegate = self
-        //vc.image = self.photos[currentIndex - 1]
         vc.imageSize = photoSize
-//        vc.url = self.photoPaths[currentIndex - 1]
+        var urlString = URL(string: "")
+        if cameFromFind {
+            let filePath = self.findModels[self.currentIndex - 1].photo.filePath
+            urlString = URL(string: "\(folderURL)\(filePath)")
+        } else {
+            let filePath = self.photoModels[self.currentIndex - 1].filePath
+            urlString = URL(string: "\(folderURL)\(filePath)")
+        }
         
-        let filePath = self.photoModels[self.currentIndex - 1].filePath
-        let urlString = URL(string: "\(folderURL)\(filePath)")
         vc.url = urlString
+        guard let zoomVC = viewController as? PhotoZoomViewController else { print("NONONONO"); return nil}
+        vc.index = zoomVC.index - 1
         
-        
-        vc.index = currentIndex - 1
         self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
         return vc
         
@@ -307,56 +338,70 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        if currentIndex == (self.photoModels.count - 1) {
-            return nil
+        if cameFromFind {
+            if currentIndex == (self.findModels.count - 1) {
+                return nil
+            }
+        } else {
+            if currentIndex == (self.photoModels.count - 1) {
+                return nil
+            }
         }
+        
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(PhotoZoomViewController.self)") as! PhotoZoomViewController
         vc.delegate = self
         self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
-        //vc.image = self.photos[currentIndex + 1]
         vc.imageSize = photoSize
-//        vc.url = self.photoPaths[currentIndex + 1]
         
         
-        let filePath = self.photoModels[self.currentIndex + 1].filePath
-        let urlString = URL(string: "\(folderURL)\(filePath)")
+        var urlString = URL(string: "")
+        if cameFromFind {
+            let filePath = self.findModels[self.currentIndex + 1].photo.filePath
+            urlString = URL(string: "\(folderURL)\(filePath)")
+        } else {
+            let filePath = self.photoModels[self.currentIndex + 1].filePath
+            urlString = URL(string: "\(folderURL)\(filePath)")
+        }
+        
         vc.url = urlString
+        guard let zoomVC = viewController as? PhotoZoomViewController else { print("NONONONO"); return nil}
+        vc.index = zoomVC.index + 1
         
-        
-        vc.index = currentIndex + 1
         return vc
         
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        
-        guard let nextVC = pendingViewControllers.first as? PhotoZoomViewController else {
-            return
-        }
-        
-        self.nextIndex = nextVC.index
-    }
-    
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        
-        if (completed && self.nextIndex != nil) {
-            previousViewControllers.forEach { vc in
-                let zoomVC = vc as! PhotoZoomViewController
-                zoomVC.scrollView.zoomScale = zoomVC.scrollView.minimumZoomScale
-            }
+        if completed {
+            let currentVC = currentViewController
+            let index = currentVC.index
+            print("INDEX: \(index)")
+            currentIndex = index
+            
+        }
+        previousViewControllers.forEach { vc in
+            let zoomVC = vc as! PhotoZoomViewController
+            zoomVC.scrollView.zoomScale = zoomVC.scrollView.minimumZoomScale
+        }
 
-            self.currentIndex = self.nextIndex!
-            self.delegate?.containerViewController(self, indexDidUpdate: self.currentIndex, sectionDidUpdate: self.currentSection)
+        self.delegate?.containerViewController(self, indexDidUpdate: self.currentIndex, sectionDidUpdate: self.currentSection)
+
+        if !cameFromFind {
+            if self.photoModels[self.currentIndex].isHearted == true {
+                let newImage = UIImage(systemName: "heart.fill")
+                heartButton.setImage(newImage, for: .normal)
+            } else {
+                let newImage = UIImage(systemName: "heart")
+                heartButton.setImage(newImage, for: .normal)
+            }
         }
         
-        self.nextIndex = nil
     }
     
 }
 
 extension PhotoPageContainerViewController: PhotoZoomViewControllerDelegate {
-    
     func photoZoomViewController(_ photoZoomViewController: PhotoZoomViewController, scrollViewDidScroll scrollView: UIScrollView) {
         if scrollView.zoomScale != scrollView.minimumZoomScale && self.currentMode != .full {
             self.changeScreenMode(to: .full)
@@ -377,7 +422,7 @@ extension PhotoPageContainerViewController: ZoomAnimatorDelegate {
         return self.currentViewController.imageView
     }
     
-    func referenceImageViewFrameInTransitioningView(for zoomAnimator: ZoomAnimator) -> CGRect? {        
+    func referenceImageViewFrameInTransitioningView(for zoomAnimator: ZoomAnimator) -> CGRect? {
         return self.currentViewController.scrollView.convert(self.currentViewController.imageView.frame, to: self.currentViewController.view)
     }
 }

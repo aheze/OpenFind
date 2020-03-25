@@ -2467,7 +2467,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" scrollEnabled="NO" editable="NO" text="jlkdfj sldfjlsdk fklsj flshf klhf lskhk dlhg sdlkjhg dkslfhgklds fjghskdlf gh dsflkg" translatesAutoresizingMaskIntoConstraints="NO" id="bho-aX-Afw">
+                                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" scrollEnabled="NO" editable="NO" text="jlkdfj sldfjlsdk fklsj flshf klhf lskhk dlhg sdlkjhg dkslfhgklds fjghskdlf gh dsflkg" translatesAutoresizingMaskIntoConstraints="NO" id="bho-aX-Afw">
                                                             <rect key="frame" x="110" y="34" width="268" height="47.5"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                             <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -2614,89 +2614,137 @@
                                     <segue destination="bTz-Zg-Ooa" kind="embed" id="smK-Tj-xsq"/>
                                 </connections>
                             </containerView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Xbutton" translatesAutoresizingMaskIntoConstraints="NO" id="6DD-3H-ciy">
-                                <rect key="frame" x="373" y="60" width="25" height="25"/>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Paq-Mg-YB3">
+                                <rect key="frame" x="87" y="812" width="240" height="40"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vM0-YG-OID">
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tSx-bA-Sbg">
+                                            <rect key="frame" x="6" y="0.0" width="228" height="40"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mj0-rs-H2T">
+                                                    <rect key="frame" x="0.0" y="9" width="45.5" height="22"/>
+                                                    <color key="tintColor" name="FeedbackGradientRight"/>
+                                                    <state key="normal" image="magnifyingglass" catalog="system">
+                                                        <color key="titleColor" name="FeedbackGradientRight"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="findPressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="GKG-IY-lT8"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3l-p7-oSX">
+                                                    <rect key="frame" x="45.5" y="9" width="45.5" height="22"/>
+                                                    <color key="tintColor" name="FeedbackGradientRight"/>
+                                                    <state key="normal" image="heart" catalog="system">
+                                                        <color key="titleColor" name="FeedbackGradientRight"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="heartPressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="Jbe-Nz-gOZ"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GJO-WY-oxz">
+                                                    <rect key="frame" x="91" y="0.0" width="46" height="40"/>
+                                                    <color key="tintColor" name="FeedbackGradientRight"/>
+                                                    <state key="normal" image="ThinBlue">
+                                                        <color key="titleColor" name="FeedbackGradientRight"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="cachePressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="aID-zN-qw4"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ce-Cj-kwU">
+                                                    <rect key="frame" x="137" y="9" width="45.5" height="22"/>
+                                                    <color key="tintColor" name="FeedbackGradientRight"/>
+                                                    <state key="normal" image="trash" catalog="system">
+                                                        <color key="titleColor" name="FeedbackGradientRight"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="deletePressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="Vek-Yp-e0A"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Doh-oq-pXf">
+                                                    <rect key="frame" x="182.5" y="9" width="45.5" height="22"/>
+                                                    <color key="tintColor" name="FeedbackGradientRight"/>
+                                                    <state key="normal" image="ellipsis.circle" catalog="system">
+                                                        <color key="titleColor" name="FeedbackGradientRight"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="morePressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="E7D-Nc-v9e"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="tSx-bA-Sbg" firstAttribute="leading" secondItem="vM0-YG-OID" secondAttribute="leading" constant="6" id="046-hY-Gpy"/>
+                                        <constraint firstAttribute="bottom" secondItem="tSx-bA-Sbg" secondAttribute="bottom" id="2QR-pW-9D0"/>
+                                        <constraint firstAttribute="trailing" secondItem="tSx-bA-Sbg" secondAttribute="trailing" constant="6" id="d3p-cy-0ZQ"/>
+                                        <constraint firstItem="tSx-bA-Sbg" firstAttribute="top" secondItem="vM0-YG-OID" secondAttribute="top" id="ncY-tG-0y6"/>
+                                    </constraints>
+                                </view>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="25" id="ISu-TE-mz9"/>
-                                    <constraint firstAttribute="height" constant="25" id="Wye-Nt-gur"/>
+                                    <constraint firstAttribute="height" constant="40" id="ZEd-gd-RqF"/>
+                                    <constraint firstAttribute="width" constant="240" id="urE-kM-LD2"/>
                                 </constraints>
-                            </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="mvk-Ds-ZmX">
-                                <rect key="frame" x="358" y="105" width="40" height="184"/>
-                                <subviews>
-                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ooy-GP-EHc" userLabel="Find">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="jca-oW-t8s"/>
-                                            <constraint firstAttribute="width" constant="40" id="yXP-d6-acB"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="findPressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="Npm-i4-V4N"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ETN-5f-fPH" userLabel="Heart">
-                                        <rect key="frame" x="0.0" y="48" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="Ukd-zF-QYO"/>
-                                            <constraint firstAttribute="width" constant="40" id="tOu-Qv-KCg"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="heartPressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="qvv-VV-e4V"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rj-Am-N0w">
-                                        <rect key="frame" x="0.0" y="96" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="Ud6-ER-6Zl"/>
-                                            <constraint firstAttribute="height" constant="40" id="kF3-7X-aaR"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="deletePressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="C8O-vV-x0A"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ief-Yz-PDC">
-                                        <rect key="frame" x="0.0" y="144" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="c0E-8v-VqC"/>
-                                            <constraint firstAttribute="height" constant="40" id="ie4-oz-M9p"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="sharePressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="pY5-nh-IPm"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B4x-Oj-4tb">
+                                <rect key="frame" x="16" y="52" width="60" height="31"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="VKB-zC-a9W">
+                                    <rect key="frame" x="0.0" y="0.0" width="60" height="31"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="te5-rx-LTY">
+                                            <rect key="frame" x="0.0" y="0.0" width="60" height="31"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                            <color key="tintColor" name="FeedbackGradientRight"/>
+                                            <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
+                                            <state key="normal" title="Back"/>
+                                            <connections>
+                                                <action selector="xButtonPressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="7Hw-2a-cmJ"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="te5-rx-LTY" firstAttribute="leading" secondItem="VKB-zC-a9W" secondAttribute="leading" id="94n-6w-p6n"/>
+                                        <constraint firstAttribute="bottom" secondItem="te5-rx-LTY" secondAttribute="bottom" id="VzP-Ah-GnJ"/>
+                                        <constraint firstItem="te5-rx-LTY" firstAttribute="top" secondItem="VKB-zC-a9W" secondAttribute="top" id="aP7-ci-mva"/>
+                                        <constraint firstAttribute="trailing" secondItem="te5-rx-LTY" secondAttribute="trailing" id="zsF-pY-6nS"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="6DD-3H-ciy" firstAttribute="top" secondItem="dC1-aD-whg" secondAttribute="bottom" constant="16" id="28S-sN-kaL"/>
+                            <constraint firstItem="B4x-Oj-4tb" firstAttribute="top" secondItem="dC1-aD-whg" secondAttribute="bottom" constant="8" id="3Na-yB-ggN"/>
                             <constraint firstItem="akx-V1-sdk" firstAttribute="top" secondItem="QHL-0B-bRk" secondAttribute="top" id="5vw-c0-pKm"/>
                             <constraint firstItem="akx-V1-sdk" firstAttribute="leading" secondItem="QHL-0B-bRk" secondAttribute="leading" id="7F0-5W-nje"/>
                             <constraint firstAttribute="trailing" secondItem="akx-V1-sdk" secondAttribute="trailing" id="Bfn-fB-Aiu"/>
+                            <constraint firstItem="Paq-Mg-YB3" firstAttribute="centerX" secondItem="QHL-0B-bRk" secondAttribute="centerX" id="Lh9-1e-fBF"/>
                             <constraint firstAttribute="bottom" secondItem="akx-V1-sdk" secondAttribute="bottom" id="Q1b-0x-cs2"/>
-                            <constraint firstItem="eh5-7a-Q5S" firstAttribute="trailing" secondItem="6DD-3H-ciy" secondAttribute="trailing" constant="16" id="Sie-u7-i4r"/>
-                            <constraint firstItem="mvk-Ds-ZmX" firstAttribute="top" secondItem="6DD-3H-ciy" secondAttribute="bottom" constant="20" id="vR4-jM-fNS"/>
-                            <constraint firstItem="eh5-7a-Q5S" firstAttribute="trailing" secondItem="mvk-Ds-ZmX" secondAttribute="trailing" constant="16" id="xf5-rL-j4V"/>
+                            <constraint firstItem="9AY-Tu-QB1" firstAttribute="top" secondItem="Paq-Mg-YB3" secondAttribute="bottom" constant="10" id="wP5-Fg-qOb"/>
+                            <constraint firstItem="B4x-Oj-4tb" firstAttribute="leading" secondItem="eh5-7a-Q5S" secondAttribute="leading" constant="16" id="xkk-7j-cHF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eh5-7a-Q5S"/>
                     </view>
                     <navigationItem key="navigationItem" title="Zoom" id="VZ4-6V-utS"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="deleteButton" destination="0rj-Am-N0w" id="vsf-WW-Azj"/>
-                        <outlet property="findButton" destination="Ooy-GP-EHc" id="mH8-SY-uQA"/>
-                        <outlet property="heartButton" destination="ETN-5f-fPH" id="IaL-s3-dkQ"/>
-                        <outlet property="shareButton" destination="ief-Yz-PDC" id="MIS-Cs-Goy"/>
-                        <outlet property="xButtonView" destination="6DD-3H-ciy" id="EiG-mH-rcT"/>
+                        <outlet property="backBlurView" destination="Paq-Mg-YB3" id="Ns0-ax-oPC"/>
+                        <outlet property="blurView" destination="Paq-Mg-YB3" id="cvp-ux-93W"/>
+                        <outlet property="cacheButton" destination="GJO-WY-oxz" id="mla-yk-i3J"/>
+                        <outlet property="deleteButton" destination="9ce-Cj-kwU" id="FfA-ZN-9aH"/>
+                        <outlet property="findButton" destination="mj0-rs-H2T" id="xOT-jM-p9a"/>
+                        <outlet property="heartButton" destination="F3l-p7-oSX" id="ToS-3E-jDd"/>
+                        <outlet property="moreButton" destination="Doh-oq-pXf" id="43U-Lc-OD2"/>
+                        <outlet property="xButton" destination="te5-rx-LTY" id="yKD-td-Ebf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eiz-PJ-Gbo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1401" y="-218"/>
+            <point key="canvasLocation" x="1398.5507246376812" y="-218.30357142857142"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="oSE-tP-tAc">
@@ -2722,7 +2770,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Leica Sample" translatesAutoresizingMaskIntoConstraints="NO" id="F00-F2-p0B">
-                                        <rect key="frame" x="0.0" y="0.0" width="640" height="379"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="189.5"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2754,7 +2802,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vjC-8K-o1d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3855" y="-1168"/>
+            <point key="canvasLocation" x="3167" y="-217"/>
         </scene>
     </scenes>
     <resources>
@@ -2765,16 +2813,21 @@
         <image name="Checkmark" width="512" height="512"/>
         <image name="Leica Sample" width="320" height="189.5"/>
         <image name="New Menu" width="512" height="512"/>
+        <image name="ThinBlue" width="100" height="100"/>
         <image name="Xbutton" width="300" height="300"/>
-        <image name="arrow.down" catalog="system" width="60" height="64"/>
+        <image name="arrow.down" catalog="system" width="32" height="32"/>
         <image name="checkmark" catalog="system" width="64" height="56"/>
         <image name="chevron.right" catalog="system" width="48" height="64"/>
+        <image name="ellipsis.circle" catalog="system" width="64" height="60"/>
+        <image name="heart" catalog="system" width="64" height="54"/>
         <image name="heart.fill" catalog="system" width="64" height="54"/>
+        <image name="magnifyingglass" catalog="system" width="64" height="56"/>
         <image name="photo.fill.on.rectangle.fill" catalog="system" width="64" height="48"/>
         <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
         <image name="questionmark.circle" catalog="system" width="64" height="60"/>
         <image name="rectangle.3.offgrid.fill" catalog="system" width="64" height="40"/>
         <image name="square.grid.2x2" catalog="system" width="64" height="56"/>
+        <image name="trash" catalog="system" width="60" height="64"/>
         <namedColor name="BackgroundHist">
             <color red="0.89800000190734863" green="0.89800000190734863" blue="0.9179999828338623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

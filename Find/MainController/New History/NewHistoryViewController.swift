@@ -587,8 +587,10 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             mainContentVC.transitionController.toDelegate = mainContentVC
             mainContentVC.delegate = self
             mainContentVC.currentIndex = indexPath.item
+            print("seleect: CURRENT INDEX: \(indexPath.item)")
             mainContentVC.currentSection = indexPath.section
             mainContentVC.photoSize = imageSize
+            mainContentVC.cameFromFind = false
 //            var photoPaths = [URL]()
 //            if let hisModel = indexToData[indexPath.section] {
 ////                print("YES PATH Select indexpath select transition push")

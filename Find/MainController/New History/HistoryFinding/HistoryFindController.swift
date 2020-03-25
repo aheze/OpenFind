@@ -193,7 +193,13 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
         urlPath = "\(folderURL)\(urlPath)"
         let finalUrl = URL(string: urlPath)
         
-        cell.titleLabel.text = model.photo.dateCreated.convertDateToReadableString()
+        var numberText = ""
+        if model.numberOfMatches == 1 {
+            numberText = "\(model.numberOfMatches) match"
+        } else {
+            numberText = "\(model.numberOfMatches) matches"
+        }
+        cell.titleLabel.text = "\(model.photo.dateCreated.convertDateToReadableString()) | \(numberText)"
         cell.textView.text = model.descriptionText
 //        cell.layoutIfNeeded()
         
@@ -267,8 +273,12 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
             
             modelArray.append(newHistModel)
         }
-        mainContentVC.photoModels = modelArray
+        
+        mainContentVC.cameFromFind = true
+        mainContentVC.findModels = resultPhotos
+//        mainContentVC.photoModels = modelArray
 //        mainContentVC.photoPaths = photoPaths
+        SwiftEntryKit.dismiss()
         self.present(mainContentVC, animated: true)
     }
 //    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -361,6 +371,7 @@ extension HistoryFindController: ReturnSortedTerms {
                 self.tableView.isHidden = true
             }
             resultPhotos.removeAll()
+            tableView.reloadData()
             
         } else {
             fastFind()

@@ -161,7 +161,7 @@ extension ListToolBar: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.backgroundColor = UIColor(hexString: list.iconColorName)
         cell.layer.cornerRadius = 6
         
-        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 10, weight: .semibold)
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 8, weight: .semibold)
         let newImage = UIImage(systemName: list.iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor.white, renderingMode: .alwaysOriginal)
         
         cell.imageView.image = newImage
