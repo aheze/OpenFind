@@ -7,15 +7,19 @@
 //
 
 import UIKit
-
+protocol RecieveDeleteLast: class {
+    func deletedLastPhoto()
+}
 class ZoomTransitionController: NSObject {
     
     let animator: ZoomAnimator
     let interactionController: ZoomDismissalInteractionController
     var isInteractive: Bool = false
+    var deletedLast: Bool = false
 
     weak var fromDelegate: ZoomAnimatorDelegate?
     weak var toDelegate: ZoomAnimatorDelegate?
+    weak var deleteLastDel: RecieveDeleteLast?
     
     override init() {
         print("zoom")
@@ -35,6 +39,9 @@ extension ZoomTransitionController: UIViewControllerTransitioningDelegate {
         self.animator.isPresenting = true
         self.animator.fromDelegate = fromDelegate
         self.animator.toDelegate = toDelegate
+//        self.animator.deleteLastDel
+        
+        deleteLastDel = self.animator
         return self.animator
     }
     
@@ -44,15 +51,24 @@ extension ZoomTransitionController: UIViewControllerTransitioningDelegate {
         self.animator.fromDelegate = self.toDelegate
         self.animator.toDelegate = tmp
       
+        print("Dismiss!!!!")
         
         return self.animator
     }
 
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         print("dismi")
-        if !self.isInteractive {
+        
+        if deletedLast {
+            print("LAST!")
+            deleteLastDel?.deletedLastPhoto()
+//            self.animator.deletedLast = true
+        }
+        if !self.isInteractive || self.deletedLast {
             return nil
         }
+        
+        
         
         self.interactionController.animator = animator
         return self.interactionController

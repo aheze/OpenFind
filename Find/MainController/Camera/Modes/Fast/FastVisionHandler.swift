@@ -14,127 +14,135 @@ import CoreMotion
 extension ViewController {
     
     func handleFastDetectedText(request: VNRequest?, error: Error?) {
-        guard let results = request?.results, results.count > 0 else {
-            //print("no results")
+        if shouldResetHighlights {
+//            shouldResetHighlights = false
+//            print("should RESET")
             busyFastFinding = false
-            return
-        }
-        if let currentMotion = motionManager.deviceMotion {
-            motionXAsOfHighlightStart = Double(0)
-            motionYAsOfHighlightStart = Double(0)
-            motionZAsOfHighlightStart = Double(0)
-            initialAttitude = currentMotion.attitude
-            //print("set")
-            //refAttitudeReferenceFrame = currentMotion.attitude
-            //motionManager.attitudeReferenceFrame
-        }
-        
-        
-        
-        for result in results {
-            if let observation = result as? VNRecognizedTextObservation {
-                for text in observation.topCandidates(1) {
-                    //print(text.string)
-                    let component = Component()
-                    component.x = observation.boundingBox.origin.x
-                    component.y = 1 - observation.boundingBox.minY
-                    component.height = observation.boundingBox.height
-                    component.width = observation.boundingBox.width
-//                    component.text = text.string
-                    let lowerCaseComponentText = text.string.lowercased()
-                    component.text = lowerCaseComponentText
-                    let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
-                    let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
-                    let offHalf = offsetWidth / 2
-                    let newW = component.width * convertedOriginalWidthOfBigImage
-                    let newH = component.height * self.deviceSize.height
-                    let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
-                    let newY = (component.y * self.deviceSize.height) - newH
-                    let individualCharacterWidth = newW / CGFloat(component.text.count)
-                    
-                    component.x = newX
-                    component.y = newY
-                    drawFastHighlight(component: component)
-                    
-                    
-               //     print("arrayOfMatches: \(arrayOfMatches)")
-                    for match in currentMatchStrings {
-//                        print("match:...")
-//                        print(match)
-//                        print(lowerCaseComponentText)
-                        if lowerCaseComponentText.contains(match) {
-//                            print(match)
-//                            print("CONTAINS!!!!!")
-                            //print("sghiruiguhweiugsiugr+++++++++++")
-                        //if component.text.contains(finalTextToFind) {
-//                            let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
-//                            let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
-//                            let offHalf = offsetWidth / 2
-//                            let newW = component.width * convertedOriginalWidthOfBigImage
-//                            let newH = component.height * self.deviceSize.height
-//                            let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
-//                            let newY = component.y * self.deviceSize.height
-//                            let individualCharacterWidth = newW / CGFloat(component.text.count)
-//                            let finalW = individualCharacterWidth * CGFloat(match  .count)
-                            let finalW = individualCharacterWidth * CGFloat(match.count)
-                            
-                            let indicies = component.text.indicesOf(string: match)
-                            for index in indicies {
-                                let addedWidth = individualCharacterWidth * CGFloat(index)
-                                let finalX = newX + addedWidth
-                                let newComponent = Component()
-                                
-                                newComponent.x = finalX - 6
-//                                newComponent.y = newY - (newH + 3)
-                                newComponent.y = newY - 3
-                                newComponent.width = finalW + 12
-                                newComponent.height = newH + 6
-                                newComponent.text = match
-                                newComponent.changed = false
-                                
-                                if let parentList = stringToList[match] {
-                                    switch parentList.descriptionOfList {
-                                    case "Search Array List +0-109028304798614":
-//                                        print("Search Array")
-                                        newComponent.parentList = currentSearchFindList
-                                        newComponent.colors = [highlightColor]
-                                    case "Shared Lists +0-109028304798614":
-//                                        print("Shared Lists")
-                                        newComponent.parentList = currentListsSharedFindList
-                                        newComponent.isSpecialType = "Shared List"
-                                    case "Shared Text Lists +0-109028304798614":
-//                                        print("Shared Text Lists")
-                                        newComponent.parentList = currentSearchAndListSharedFindList
-                                        newComponent.isSpecialType = "Shared Text List"
-                                    default:
-//                                        print("normal")
-                                        newComponent.parentList = parentList
-                                        newComponent.colors = [parentList.iconColorName]
-                                    }
-                                
-                                    
-                                    
-                                } else {
-                                    print("ERROROROR! NO parent list!")
-                                }
-                                
-                                
-                                nextComponents.append(newComponent)
-                                
-                            }
-                        }
-                
-                    }
-                    
-                    
-                }
+            resetFastHighlights()
+        } else {
+            guard let results = request?.results, results.count > 0 else {
+                //print("no results")
+                busyFastFinding = false
+                return
+            }
+            if let currentMotion = motionManager.deviceMotion {
+                motionXAsOfHighlightStart = Double(0)
+                motionYAsOfHighlightStart = Double(0)
+                motionZAsOfHighlightStart = Double(0)
+                initialAttitude = currentMotion.attitude
+                //print("set")
+                //refAttitudeReferenceFrame = currentMotion.attitude
+                //motionManager.attitudeReferenceFrame
             }
             
+            
+            
+            for result in results {
+                if let observation = result as? VNRecognizedTextObservation {
+                    for text in observation.topCandidates(1) {
+                        //print(text.string)
+                        let component = Component()
+                        component.x = observation.boundingBox.origin.x
+                        component.y = 1 - observation.boundingBox.minY
+                        component.height = observation.boundingBox.height
+                        component.width = observation.boundingBox.width
+        //                    component.text = text.string
+                        let lowerCaseComponentText = text.string.lowercased()
+                        component.text = lowerCaseComponentText
+                        let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
+                        let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
+                        let offHalf = offsetWidth / 2
+                        let newW = component.width * convertedOriginalWidthOfBigImage
+                        let newH = component.height * self.deviceSize.height
+                        let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
+                        let newY = (component.y * self.deviceSize.height) - newH
+                        let individualCharacterWidth = newW / CGFloat(component.text.count)
+                        
+                        component.x = newX
+                        component.y = newY
+                        drawFastHighlight(component: component)
+                        
+                        
+                   //     print("arrayOfMatches: \(arrayOfMatches)")
+                        for match in currentMatchStrings {
+        //                        print("match:...")
+        //                        print(match)
+        //                        print(lowerCaseComponentText)
+                            if lowerCaseComponentText.contains(match) {
+        //                            print(match)
+        //                            print("CONTAINS!!!!!")
+                                //print("sghiruiguhweiugsiugr+++++++++++")
+                            //if component.text.contains(finalTextToFind) {
+        //                            let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
+        //                            let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
+        //                            let offHalf = offsetWidth / 2
+        //                            let newW = component.width * convertedOriginalWidthOfBigImage
+        //                            let newH = component.height * self.deviceSize.height
+        //                            let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
+        //                            let newY = component.y * self.deviceSize.height
+        //                            let individualCharacterWidth = newW / CGFloat(component.text.count)
+        //                            let finalW = individualCharacterWidth * CGFloat(match  .count)
+                                let finalW = individualCharacterWidth * CGFloat(match.count)
+                                
+                                let indicies = component.text.indicesOf(string: match)
+                                for index in indicies {
+                                    let addedWidth = individualCharacterWidth * CGFloat(index)
+                                    let finalX = newX + addedWidth
+                                    let newComponent = Component()
+                                    
+                                    newComponent.x = finalX - 6
+        //                                newComponent.y = newY - (newH + 3)
+                                    newComponent.y = newY - 3
+                                    newComponent.width = finalW + 12
+                                    newComponent.height = newH + 6
+                                    newComponent.text = match
+                                    newComponent.changed = false
+                                    
+                                    if let parentList = stringToList[match] {
+                                        switch parentList.descriptionOfList {
+                                        case "Search Array List +0-109028304798614":
+        //                                        print("Search Array")
+                                            newComponent.parentList = currentSearchFindList
+                                            newComponent.colors = [highlightColor]
+                                        case "Shared Lists +0-109028304798614":
+        //                                        print("Shared Lists")
+                                            newComponent.parentList = currentListsSharedFindList
+                                            newComponent.isSpecialType = "Shared List"
+                                        case "Shared Text Lists +0-109028304798614":
+        //                                        print("Shared Text Lists")
+                                            newComponent.parentList = currentSearchAndListSharedFindList
+                                            newComponent.isSpecialType = "Shared Text List"
+                                        default:
+        //                                        print("normal")
+                                            newComponent.parentList = parentList
+                                            newComponent.colors = [parentList.iconColorName]
+                                        }
+                                    
+                                        
+                                        
+                                    } else {
+                                        print("ERROROROR! NO parent list!")
+                                    }
+                                    
+                                    
+                                    nextComponents.append(newComponent)
+                                    
+                                }
+                            }
+                    
+                        }
+                        
+                        
+                    }
+                }
+                
+            }
+            
+            busyFastFinding = false
+            animateFoundFastChange()
+            numberOfFastMatches = 0
+            
         }
-        
-        busyFastFinding = false
-        animateFoundFastChange()
-        numberOfFastMatches = 0
     }
     
     

@@ -65,6 +65,10 @@ class ViewController: UIViewController {
     var editableListCategories = [EditableFindList]()
     var currentContentsOfScreen = ""
     
+    
+    
+    var shouldResetHighlights = false
+    
 //    @IBOutlet weak var listsCollectionView: UICollectionView!
 //    @IBOutlet weak var toolBar: UIView!
 //    @IBOutlet weak var autoCompleteButton: UIButton!
@@ -408,8 +412,11 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             return
         }
         if busyFastFinding == false && allowSearch == true {
+//            print("fastFind!!")
             fastFind(in: pixelBuffer)
         }
+        
+        
         guard captureCompletionBlock != nil,
             let outputImage = UIImage(pixBuffer: pixelBuffer) else { return }
         DispatchQueue.main.async { [weak self] in

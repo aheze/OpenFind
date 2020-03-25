@@ -80,12 +80,19 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             var newIndex = 0
             
                     
-            print("OLD INDEX: \(index)")
-            print("OLD COUNT: \(oldCount)")
+//            print("OLD INDEX: \(index)")
+//            print("OLD COUNT: \(oldCount)")
             if index == 0 {
                 ///DELETED FIRST photo
     //            goRight = false
-               
+               if self.photoModels.count == 0 {
+                   print("DELETED LAST PHOTO")
+                   self.currentViewController.scrollView.isScrollEnabled = false
+                   self.transitionController.isInteractive = false
+                   self.transitionController.deletedLast = true
+                   self.dismiss(animated: true, completion: nil)
+//                    self.dismiss(animated: true, completion: nil)
+               } else {
                    newIndex = index
                    vc.delegate = self
                    vc.imageSize = self.photoSize
@@ -96,39 +103,33 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
                    self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
                    let viewControllers = [ vc ]
 //                   self.pageViewController.setViewControllers(viewControllers, direction: .reverse, animated: true, completion: nil)
-                UIView.animate(withDuration: 0.25, animations: {
-                    self.currentViewController.view.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
-                    self.currentViewController.view.alpha = 0
-                }) { _ in
-                   self.pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+                    UIView.animate(withDuration: 0.25, animations: {
+                        self.currentViewController.view.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+                        self.currentViewController.view.alpha = 0
+                    }) { _ in
+                       self.pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+                    }
                 }
                 
 //               }
                 
             
             } else {
-                if self.photoModels.count == 0 {
-                    print("DELETED LAST PHOTO")
-                } else {
-                    newIndex = index - 1
-                    vc.delegate = self
-                    vc.imageSize = self.photoSize
-                    let filePath = self.photoModels[newIndex].filePath
-                    let urlString = URL(string: "\(self.folderURL)\(filePath)")
-                    vc.url = urlString
-                    vc.index = newIndex
-                    self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
-                    let viewControllers = [ vc ]
-                    
-                    UIView.animate(withDuration: 0.25, animations: {
-                        self.currentViewController.view.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
-                        self.currentViewController.view.alpha = 0
-                    }) { _ in
-                       self.pageViewController.setViewControllers(viewControllers, direction: .reverse, animated: true, completion: nil)
-                    }
-                    
-                    
-                    
+                newIndex = index - 1
+                vc.delegate = self
+                vc.imageSize = self.photoSize
+                let filePath = self.photoModels[newIndex].filePath
+                let urlString = URL(string: "\(self.folderURL)\(filePath)")
+                vc.url = urlString
+                vc.index = newIndex
+                self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
+                let viewControllers = [ vc ]
+                
+                UIView.animate(withDuration: 0.25, animations: {
+                    self.currentViewController.view.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+                    self.currentViewController.view.alpha = 0
+                }) { _ in
+                   self.pageViewController.setViewControllers(viewControllers, direction: .reverse, animated: true, completion: nil)
                 }
                 
                 

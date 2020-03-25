@@ -16,8 +16,8 @@ class ZoomDismissalInteractionController: NSObject {
     var fromReferenceImageViewFrame: CGRect?
     var toReferenceImageViewFrame: CGRect?
     
-    func didPanWith(gestureRecognizer: UIPanGestureRecognizer, deletedLast: Bool = false) {
-        
+    func didPanWith(gestureRecognizer: UIPanGestureRecognizer) {
+//        print("PANNNNNN")
         guard let transitionContext = self.transitionContext,
             let animator = self.animator as? ZoomAnimator,
             let transitionImageView = animator.transitionImageView,
@@ -161,6 +161,7 @@ extension ZoomDismissalInteractionController: UIViewControllerInteractiveTransit
         ///Had to flip fromVC and toVC for the dismiss to NOT result in a black screen!
         containerView.insertSubview(fromVC.view, aboveSubview: toVC.view)
         if animator.transitionImageView == nil {
+            print("NILNILNIL")
             let transitionImageView = UIImageView(image: referenceImage)
             transitionImageView.contentMode = .scaleAspectFill
             transitionImageView.clipsToBounds = true

@@ -583,7 +583,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //            print("false")
             collectionView.deselectItem(at: indexPath, animated: true)
             
-            
+            print("SELECTJL")
             
             
             if let currentIndex = indexPathToIndex[indexPath] {
@@ -1279,15 +1279,16 @@ extension NewHistoryViewController: ZoomAnimatorDelegate {
     }
     
     func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
-        let cell = self.collectionView.cellForItem(at: self.selectedIndexPath) as! HPhotoCell
+        if let cell = self.collectionView.cellForItem(at: self.selectedIndexPath) as? HPhotoCell {
         
-        let cellFrame = self.collectionView.convert(cell.frame, to: self.view)
-        
-        if cellFrame.minY < self.collectionView.contentInset.top {
-            self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .top, animated: false)
-        } else if cellFrame.maxY > self.view.frame.height - self.collectionView.contentInset.bottom {
-            self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .bottom, animated: false)
-        }
+            let cellFrame = self.collectionView.convert(cell.frame, to: self.view)
+            
+            if cellFrame.minY < self.collectionView.contentInset.top {
+                self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .top, animated: false)
+            } else if cellFrame.maxY > self.view.frame.height - self.collectionView.contentInset.bottom {
+                self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .bottom, animated: false)
+            }
+        } 
     }
     
     func referenceImageView(for zoomAnimator: ZoomAnimator) -> UIImageView? {

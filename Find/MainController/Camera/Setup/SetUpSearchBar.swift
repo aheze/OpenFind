@@ -454,9 +454,12 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
                 print("DUPD UPD UPD UPDU PDPUDP")
                 resetFastHighlights()
                 allowSearch = false
+//                resetFastHighlights()
+                shouldResetHighlights = true
                 showDuplicateAlert(show: true)
             } else {
                 showDuplicateAlert(show: false)
+                shouldResetHighlights = false
                 allowSearch = true
                 finalTextToFind = updatedString
                 sortSearchTerms()
@@ -470,8 +473,11 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        
+        print("CLEAR!!!!")
         finalTextToFind = ""
+        allowSearch = true
+        shouldResetHighlights = false
+        showDuplicateAlert(show: false)
         sortSearchTerms()
         return true
     }
