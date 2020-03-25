@@ -10,7 +10,21 @@ import UIKit
 import SwiftEntryKit
 
 protocol PhotoPageContainerViewControllerDelegate: class {
-    func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int, sectionDidUpdate currentSection: Int)
+    func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int)
+}
+
+protocol ChangedSearchTermsFromZoom: class {
+    func pause(pause: Bool)
+    func returnTerms(stringToListR: [String: EditableFindList], currentSearchFindListR: EditableFindList, currentListsSharedFindListR: EditableFindList, currentSearchAndListSharedFindListR: EditableFindList, currentMatchStringsR: [String], matchToColorsR: [String: [CGColor]])
+    func startedEditing(start: Bool)
+}
+
+protocol ZoomStateChanged: class {
+    func changedState(type: String)
+}
+
+protocol ZoomDeletedPhoto: class {
+    func deletedPhoto(photoIndex: Int)
 }
 
 class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDelegate {
@@ -44,6 +58,88 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     }
     
     @IBAction func deletePressed(_ sender: Any) {
+//            if let nextPage = pageViewController(self, viewControllerAfter: currentViewController) {
+//                pageViewController.setViewControllers([nextPage], direction: .forward, animated: true, completion: nil)
+//            }
+//        pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+//        let currentIndex = currentViewController
+        
+        let alert = UIAlertController(title: "Delete photo?", message: "This action can't be undone.", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
+            
+            let zoomVC = self.currentViewController
+            let index = zoomVC.index
+            
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(PhotoZoomViewController.self)") as! PhotoZoomViewController
+            
+            //        var goRight = true
+            let oldCount = self.photoModels.count - 1
+            self.photoModels.remove(at: index)
+            self.deletedPhoto?.deletedPhoto(photoIndex: index)
+            
+            var newIndex = 0
+            
+                    
+            print("OLD INDEX: \(index)")
+            print("OLD COUNT: \(oldCount)")
+            if index == 0 {
+                ///DELETED FIRST photo
+    //            goRight = false
+               
+                   newIndex = index
+                   vc.delegate = self
+                   vc.imageSize = self.photoSize
+                   let filePath = self.photoModels[newIndex].filePath
+                   let urlString = URL(string: "\(self.folderURL)\(filePath)")
+                   vc.url = urlString
+                   vc.index = newIndex
+                   self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
+                   let viewControllers = [ vc ]
+//                   self.pageViewController.setViewControllers(viewControllers, direction: .reverse, animated: true, completion: nil)
+                UIView.animate(withDuration: 0.25, animations: {
+                    self.currentViewController.view.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+                    self.currentViewController.view.alpha = 0
+                }) { _ in
+                   self.pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+                }
+                
+//               }
+                
+            
+            } else {
+                if self.photoModels.count == 0 {
+                    print("DELETED LAST PHOTO")
+                } else {
+                    newIndex = index - 1
+                    vc.delegate = self
+                    vc.imageSize = self.photoSize
+                    let filePath = self.photoModels[newIndex].filePath
+                    let urlString = URL(string: "\(self.folderURL)\(filePath)")
+                    vc.url = urlString
+                    vc.index = newIndex
+                    self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
+                    let viewControllers = [ vc ]
+                    
+                    UIView.animate(withDuration: 0.25, animations: {
+                        self.currentViewController.view.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+                        self.currentViewController.view.alpha = 0
+                    }) { _ in
+                       self.pageViewController.setViewControllers(viewControllers, direction: .reverse, animated: true, completion: nil)
+                    }
+                    
+                    
+                    
+                }
+                
+                
+            }
+            
+            self.currentIndex = newIndex
+            self.delegate?.containerViewController(self, indexDidUpdate: self.currentIndex)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
     @IBAction func morePressed(_ sender: Any) {
@@ -62,6 +158,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     var currentMode: ScreenMode = .normal
     
     weak var delegate: PhotoPageContainerViewControllerDelegate?
+    weak var deletedPhoto: ZoomDeletedPhoto?
     
     var pageViewController: UIPageViewController {
         return self.children[0] as! UIPageViewController
@@ -76,10 +173,11 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     //MARK: FROM FIND
     var cameFromFind = false
     var findModels = [FindModel]()
+    var changedTerms: ChangedSearchTermsFromZoom?
 
     var photoModels = [EditableHistoryModel]()
     var currentIndex = 0
-    var currentSection = 0
+//    var currentSection = 0
 //    var nextIndex: Int?
 //    var newNextIndex = -1
     
@@ -99,7 +197,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     override func viewDidLoad() {
         super.viewDidLoad()
       
-        backBlurView.layer.cornerRadius = 10
+        backBlurView.layer.cornerRadius = 6
         backBlurView.clipsToBounds = true
         
         self.pageViewController.delegate = self
@@ -152,7 +250,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             
             let customView = FindBar()
             
-    //        customView.returnTerms = self
+//            customView.returnTerms = self
             SwiftEntryKit.display(entry: customView, using: attributes)
         } else {
             blurView.layer.cornerRadius = 10
@@ -385,7 +483,7 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
             zoomVC.scrollView.zoomScale = zoomVC.scrollView.minimumZoomScale
         }
 
-        self.delegate?.containerViewController(self, indexDidUpdate: self.currentIndex, sectionDidUpdate: self.currentSection)
+        self.delegate?.containerViewController(self, indexDidUpdate: self.currentIndex)
 
         if !cameFromFind {
             if self.photoModels[self.currentIndex].isHearted == true {

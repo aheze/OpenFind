@@ -118,7 +118,6 @@
 		49F7B1502353FBEE0099FA62 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */; };
 		49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1552353FE4B0099FA62 /* BasicSetup.swift */; };
 		49F7B1582353FE7E0099FA62 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1572353FE7E0099FA62 /* Component.swift */; };
-		49F7B15A2354E6F60099FA62 /* data.txt in Resources */ = {isa = PBXBuildFile; fileRef = 49F7B1592354E6F60099FA62 /* data.txt */; };
 		49F7B15C2354E85F0099FA62 /* WordReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B15B2354E85F0099FA62 /* WordReader.swift */; };
 		7996AF3BCDF7929A19EDEAFD /* libPods-Find.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 571DE92438CAEED131097BBB /* libPods-Find.a */; };
 /* End PBXBuildFile section */
@@ -237,7 +236,6 @@
 		49F7B14F2353FBEE0099FA62 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		49F7B1552353FE4B0099FA62 /* BasicSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSetup.swift; sourceTree = "<group>"; };
 		49F7B1572353FE7E0099FA62 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
-		49F7B1592354E6F60099FA62 /* data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.txt; sourceTree = "<group>"; };
 		49F7B15B2354E85F0099FA62 /* WordReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordReader.swift; sourceTree = "<group>"; };
 		571DE92438CAEED131097BBB /* libPods-Find.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Find.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F1B04E9888AAEC98DF2E096 /* Pods-Find.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find.debug.xcconfig"; path = "Target Support Files/Pods-Find/Pods-Find.debug.xcconfig"; sourceTree = "<group>"; };
@@ -479,7 +477,6 @@
 			isa = PBXGroup;
 			children = (
 				4911508E235E7DF100EC0C04 /* Roboto-Light.ttf */,
-				49F7B1592354E6F60099FA62 /* data.txt */,
 				49F7B15B2354E85F0099FA62 /* WordReader.swift */,
 				4999AC932353A80A00AB06A7 /* AppDelegate.swift */,
 				4999AC952353A80A00AB06A7 /* SceneDelegate.swift */,
@@ -714,7 +711,6 @@
 				49115090236004E800EC0C04 /* Roboto-Light.ttf in Resources */,
 				4953F3C224171E5F00690E53 /* FindBar.xib in Resources */,
 				49D985B124188CA4005F4E92 /* NewListToolbarCell.xib in Resources */,
-				49F7B15A2354E6F60099FA62 /* data.txt in Resources */,
 				4966B71323E1252800A8523A /* ImagePickerList.xib in Resources */,
 				4999ACA02353A81100AB06A7 /* LaunchScreen.storyboard in Resources */,
 				49B7A32D2390823C0070209F /* Colors.xcassets in Resources */,

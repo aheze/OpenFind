@@ -424,6 +424,12 @@ extension CachingViewController {
         newCachedPhoto.isDeepSearched = true
         newCachedPhoto.isHearted = photo.isHearted
         
+        if let origIndex = photos.firstIndex(of: photo) {
+            photos[origIndex].isDeepSearched = true
+        } else {
+            print("ERROR!!!!!!")
+        }
+        
         count += 1
         DispatchQueue.main.async {
             self.numberCachedLabel.text = "\(self.count)/\(self.photos.count) photos cached"
@@ -520,11 +526,7 @@ extension CachingViewController {
         
 //        alreadyCached.append(newCachedPhoto)
         
-//        if let origIndex = photos.firstIndex(of: photo) {
-//            photos[origIndex] = newCachedPhoto
-//        } else {
-//            print("ERROR!!!!!!")
-//        }
+        
         alreadyCachedPhotos.append(newCachedPhoto)
         dispatchSemaphore.signal()
         dispatchGroup.leave()

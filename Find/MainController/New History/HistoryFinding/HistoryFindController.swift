@@ -227,7 +227,7 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
         mainContentVC.transitionController.toDelegate = mainContentVC
         mainContentVC.delegate = self
         mainContentVC.currentIndex = indexPath.item
-        mainContentVC.currentSection = indexPath.section
+//        mainContentVC.currentSection = indexPath.section
         mainContentVC.photoSize = imageSize
         
 //        var photoPaths = [URL]()
@@ -592,9 +592,9 @@ extension HistoryFindController {
 
 extension HistoryFindController: PhotoPageContainerViewControllerDelegate {
  
-    func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int, sectionDidUpdate currentSection: Int) {
-        print("sdfhjk")
-        self.selectedIndexPath = IndexPath(row: currentIndex, section: currentSection)
+    func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int) {
+//        print("sdfhjk")
+        self.selectedIndexPath = IndexPath(row: currentIndex, section: 0)
 //        self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
         self.tableView.scrollToRow(at: self.selectedIndexPath, at: .middle, animated: false)
     }

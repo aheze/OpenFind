@@ -50,6 +50,8 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //    var dictOfUrls = [IndexMatcher: URL]()
     
     var indexToData = [Int: [HistoryModel]]()
+    var indexPathToIndex = [IndexPath: Int]()
+    var indexToIndexPath = [Int: IndexPath]()
     
     var sectionCounts = [Int]()
     var imageSize = CGSize(width: 0, height: 0)
@@ -535,17 +537,19 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                     
     //                let indexPath = IndexPath(item: indexP, section: 0)
 //                    print("indexP select: \(indP)")
-                    indexPathsSelected.append(indP)
-                    collectionView.selectItem(at: indP, animated: true, scrollPosition: [])
-                    if let cell = collectionView.cellForItem(at: indP) as? HPhotoCell {
-                        UIView.animate(withDuration: 0.1, animations: {
-                            cell.highlightView.alpha = 1
-                            cell.checkmarkView.alpha = 1
-                            cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-                        })
-                    } else {
-                        reloadPaths.append(indP)
-//                        print("Not visible")
+                    if !indexPathsSelected.contains(indP) {
+                        indexPathsSelected.append(indP)
+                        collectionView.selectItem(at: indP, animated: true, scrollPosition: [])
+                        if let cell = collectionView.cellForItem(at: indP) as? HPhotoCell {
+                            UIView.animate(withDuration: 0.1, animations: {
+                                cell.highlightView.alpha = 1
+                                cell.checkmarkView.alpha = 1
+                                cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                            })
+                        } else {
+                            reloadPaths.append(indP)
+    //                        print("Not visible")
+                        }
                     }
                     
                 }
@@ -562,6 +566,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         if selectButtonSelected == true {
 //            print("seleeeect")
             if !indexPathsSelected.contains(indexPath) {
+                print("Doesnt conatin \(indexPath)")
                 indexPathsSelected.append(indexPath)
                 numberOfSelected += 1
                 if let cell = collectionView.cellForItem(at: indexPath) as? HPhotoCell {
@@ -578,67 +583,62 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //            print("false")
             collectionView.deselectItem(at: indexPath, animated: true)
             
-            let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
-                "PhotoPageContainerViewController") as! PhotoPageContainerViewController
-            mainContentVC.title = "PhotoPageContainerViewController"
-            self.selectedIndexPath = indexPath
-            mainContentVC.transitioningDelegate = mainContentVC.transitionController
-            mainContentVC.transitionController.fromDelegate = self
-            mainContentVC.transitionController.toDelegate = mainContentVC
-            mainContentVC.delegate = self
-            mainContentVC.currentIndex = indexPath.item
-            print("seleect: CURRENT INDEX: \(indexPath.item)")
-            mainContentVC.currentSection = indexPath.section
-            mainContentVC.photoSize = imageSize
-            mainContentVC.cameFromFind = false
-//            var photoPaths = [URL]()
-//            if let hisModel = indexToData[indexPath.section] {
-////                print("YES PATH Select indexpath select transition push")
-////                let historyModel = hisModel[indexPath.item]
-//
-//                for historyModel in hisModel {
-//                    var urlPath = historyModel.filePath
-//                    urlPath = "\(folderURL)\(urlPath)"
-//                    if let finalUrl = URL(string: urlPath) {
-//                        photoPaths.append(finalUrl)
-////                        fileUrlsSelected.append(finalUrl)
-//                    }
-//                }
-//
-//            }
-//             mainContentVC.photoPaths = photoPaths
-            mainContentVC.folderURL = folderURL
             
-            if let hisModels = indexToData[indexPath.section] {
-                var modelArray = [EditableHistoryModel]()
-                for photo in hisModels {
+            
+            
+            if let currentIndex = indexPathToIndex[indexPath] {
+                
+                
+                let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
+                                "PhotoPageContainerViewController") as! PhotoPageContainerViewController
+                mainContentVC.title = "PhotoPageContainerViewController"
+                self.selectedIndexPath = indexPath
+                mainContentVC.transitioningDelegate = mainContentVC.transitionController
+                mainContentVC.transitionController.fromDelegate = self
+                mainContentVC.transitionController.toDelegate = mainContentVC
+                mainContentVC.delegate = self
+                mainContentVC.currentIndex = currentIndex
+    //            print("seleect: CURRENT INDEX: \(indexPath.item)")
+    //            mainContentVC.currentSection = indexPath.section
+                mainContentVC.photoSize = imageSize
+                mainContentVC.cameFromFind = false
+                mainContentVC.folderURL = folderURL
+                mainContentVC.deletedPhoto = self
+                
+                
+                if let photoCats = photoCategories {
+                    var modelArray = [EditableHistoryModel]()
+                    for photo in photoCats {
+                            
+                        let newHistModel = EditableHistoryModel()
+                        newHistModel.filePath = photo.filePath
+                        newHistModel.dateCreated = photo.dateCreated
+                        newHistModel.isHearted = photo.isHearted
+                        newHistModel.isDeepSearched = photo.isDeepSearched
                         
-                    let newHistModel = EditableHistoryModel()
-                    newHistModel.filePath = photo.filePath
-                    newHistModel.dateCreated = photo.dateCreated
-                    newHistModel.isHearted = photo.isHearted
-                    newHistModel.isDeepSearched = photo.isDeepSearched
-                    
-                    for cont in photo.contents {
-                        let realmContent = EditableSingleHistoryContent()
-                        realmContent.text = cont.text
-                        realmContent.height = CGFloat(cont.height)
-                        realmContent.width = CGFloat(cont.width)
-                        realmContent.x = CGFloat(cont.x)
-                        realmContent.y = CGFloat(cont.y)
-    //                                    realmContent.
-    //                                    realnContent.
-                        newHistModel.contents.append(realmContent)
+                        for cont in photo.contents {
+                            let realmContent = EditableSingleHistoryContent()
+                            realmContent.text = cont.text
+                            realmContent.height = CGFloat(cont.height)
+                            realmContent.width = CGFloat(cont.width)
+                            realmContent.x = CGFloat(cont.x)
+                            realmContent.y = CGFloat(cont.y)
+        //                                    realmContent.
+        //                                    realnContent.
+                            newHistModel.contents.append(realmContent)
+                        }
+                        modelArray.append(newHistModel)
                     }
-                    modelArray.append(newHistModel)
+                    mainContentVC.photoModels = modelArray
                 }
-                mainContentVC.photoModels = modelArray
+                
+                // mainContentVC.photos = photos
+    //            print("_____")
+                //print(dateToFilepaths)
+                self.present(mainContentVC, animated: true)
             }
             
-            // mainContentVC.photos = photos
-//            print("_____")
-            //print(dateToFilepaths)
-            self.present(mainContentVC, animated: true)
+            
         }
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -839,7 +839,7 @@ extension NewHistoryViewController: ButtonPressed {
             SwiftEntryKit.dismiss()
             collectionView.allowsMultipleSelection = false
         case "delete":
-            
+            print("INDEX COUNT: \(indexPathsSelected.count)")
             var titleMessage = ""
             if indexPathsSelected.count == 1 {
                 titleMessage = "Delete photo?"
@@ -1122,6 +1122,10 @@ extension NewHistoryViewController {
                     indexPath.section = index
                     indexPath.row = secondIndex
                     sectionCounts[index] += 1
+                    
+                    let indP = IndexPath(item: secondIndex, section: index)
+                    indexPathToIndex[indP] = count
+                    indexToIndexPath[count] = indP
 //                    dictOfUrls[indexPath] = individualUrl
                     
                     if let newHistModel = photoCategories?[count] {
@@ -1205,12 +1209,66 @@ extension Date {
     }
 }
 
+extension NewHistoryViewController: ZoomDeletedPhoto {
+    
+    func deletedPhoto(photoIndex: Int) {
+        print("DELEting!")
+        var sectionToDelete = -1
+        if let photoCats = photoCategories {
+            let photoToDelete = photoCats[photoIndex]
+            
+            if let indP = indexToIndexPath[photoIndex] {
+                let section = indP.section
+                let photosInSection = indexToData[section]
+                
+                if photosInSection?.count == 1 {
+                    sectionToDelete = section
+                }
+                
+                var contents = [SingleHistoryContent]()
+                for content in photoToDelete.contents {
+                    contents.append(content)
+                }
+                
+                do {
+                    try realm.write {
+                        realm.delete(contents)
+                        realm.delete(photoToDelete)
+                    }
+                } catch {
+                    print("ERROR DELETIN!! \(error)")
+                }
+                
+                getData()
+                if sectionToDelete >= 0 {
+                    let sections = IndexSet([sectionToDelete])
+                    collectionView.deleteSections(sections)
+                } else {
+                    collectionView.deleteItems(at: [indP])
+                }
+            }
+            
+        }
+        
+        
+    }
+    
+}
+
+
+
+
 extension NewHistoryViewController: PhotoPageContainerViewControllerDelegate {
  
-    func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int, sectionDidUpdate currentSection: Int) {
-        print("sdfhjk")
-        self.selectedIndexPath = IndexPath(row: currentIndex, section: currentSection)
-        self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
+    func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int) {
+        print("select path")
+//        self.selectedIndexPath = IndexPath(row: currentIndex, section: currentSection)
+//        self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
+//
+        if let indexPath = indexToIndexPath[currentIndex] {
+            self.selectedIndexPath = indexPath
+            self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
+        }
     }
 }
 

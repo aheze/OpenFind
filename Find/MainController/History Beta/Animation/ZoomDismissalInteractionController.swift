@@ -16,7 +16,7 @@ class ZoomDismissalInteractionController: NSObject {
     var fromReferenceImageViewFrame: CGRect?
     var toReferenceImageViewFrame: CGRect?
     
-    func didPanWith(gestureRecognizer: UIPanGestureRecognizer) {
+    func didPanWith(gestureRecognizer: UIPanGestureRecognizer, deletedLast: Bool = false) {
         
         guard let transitionContext = self.transitionContext,
             let animator = self.animator as? ZoomAnimator,
