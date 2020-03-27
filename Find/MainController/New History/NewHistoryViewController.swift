@@ -379,6 +379,12 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             let date = sectionToDate[indexPath.section]!
             
             let readableDate = date.convertDateToReadableString()
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//            let todaysDate = Date()
+//            let todaysDateAsString = dateFormatter.string(from: date)
+            
+//            let readableDate = todaysDateAsString
             headerView.todayLabel.text = readableDate
             headerView.clipsToBounds = false
             return headerView
@@ -889,6 +895,7 @@ extension NewHistoryViewController: ButtonPressed {
                         print("Could not delete items: \(error)")
                     }
                 }
+                
                 self.getData()
                 if sectionsToDelete.count == 0 {
                     self.collectionView.performBatchUpdates({
@@ -1063,6 +1070,19 @@ extension NewHistoryViewController {
     
     func getData() {
         
+//        let fm = FileManager.default
+//        do {
+//            let paths = try fm.contentsOfDirectory(at: folderURL, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
+//          for path in paths
+//          {
+//            print("path: \(path)")
+////            let finalP = "\(folderURL)/\(path)"
+////            print("final: \(finalP)")
+//            try fm.removeItem(at: path)
+//          }
+//        } catch {
+//          print(error.localizedDescription)
+//        }
 //        try! realm.write {
 //            realm.deleteAll()
 //        }
@@ -1147,34 +1167,34 @@ extension NewHistoryViewController {
 //    }
     
     
-    func convertDateToReadableString(theDate: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMddyy"
-        let todaysDate = Date()
-        let todaysDateAsString = dateFormatter.string(from: todaysDate)
-        let yesterday = todaysDate.subtract(days: 1)
-        let yesterdaysDateAsString = dateFormatter.string(from: yesterday!)
-        
-        let oneWeekAgo = todaysDate.subtract(days: 7)
-        let yestYesterday = yesterday?.subtract(days: 1)
-        let range = oneWeekAgo!...yestYesterday!
-        
-        let stringDate = dateFormatter.string(from: theDate)
-        
-        if stringDate == todaysDateAsString {
-            return "Today"
-        } else if stringDate == yesterdaysDateAsString {
-            return "Yesterday"
-        } else {
-            if range.contains(theDate) {
-                dateFormatter.dateFormat = "EEEE"
-                return dateFormatter.string(from: theDate)
-            } else {
-                dateFormatter.dateFormat = "MMMM d',' yyyy"
-                return dateFormatter.string(from: theDate)
-            }
-        }
-    }
+//    func convertDateToReadableString(dateToConvert: Date) -> String {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "MMddyy"
+//        let todaysDate = Date()
+//        let todaysDateAsString = dateFormatter.string(from: todaysDate)
+//        let yesterday = todaysDate.subtract(days: 1)
+//        let yesterdaysDateAsString = dateFormatter.string(from: yesterday!)
+//
+//        let oneWeekAgo = todaysDate.subtract(days: 7)
+//        let yestYesterday = yesterday?.subtract(days: 1)
+//        let range = oneWeekAgo!...yestYesterday!
+//
+//        let stringDate = dateFormatter.string(from: dateToConvert)
+//
+//        if stringDate == todaysDateAsString {
+//            return "Today"
+//        } else if stringDate == yesterdaysDateAsString {
+//            return "Yesterday"
+//        } else {
+//            if range.contains(dateToConvert) {
+//                dateFormatter.dateFormat = "EEEE"
+//                return dateFormatter.string(from: dateToConvert)
+//            } else {
+//                dateFormatter.dateFormat = "MMMM d',' yyyy"
+//                return dateFormatter.string(from: dateToConvert)
+//            }
+//        }
+//    }
     
 }
 
@@ -1225,19 +1245,31 @@ extension NewHistoryViewController: ZoomDeletedPhoto {
                     sectionToDelete = section
                 }
                 
-                var contents = [SingleHistoryContent]()
-                for content in photoToDelete.contents {
-                    contents.append(content)
+//                var contents = [SingleHistoryContent]()
+//                for content in photoToDelete.contents {
+//                    contents.append(content)
+//                }
+                let urlString = photoToDelete.filePath
+                guard let finalUrl = URL(string: "\(folderURL)\(urlString)") else { print("Invalid File name"); return }
+                
+                let fileManager = FileManager.default
+                print("file delete... \(finalUrl)")
+                do {
+                    try fileManager.removeItem(at: finalUrl)
+                } catch {
+                    print("Could not delete items: \(error)")
                 }
                 
                 do {
                     try realm.write {
-                        realm.delete(contents)
+                        realm.delete(photoToDelete.contents)
                         realm.delete(photoToDelete)
                     }
                 } catch {
                     print("ERROR DELETIN!! \(error)")
                 }
+                
+                
                 
                 getData()
                 if sectionToDelete >= 0 {
@@ -1288,7 +1320,7 @@ extension NewHistoryViewController: ZoomAnimatorDelegate {
             } else if cellFrame.maxY > self.view.frame.height - self.collectionView.contentInset.bottom {
                 self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .bottom, animated: false)
             }
-        } 
+        }
     }
     
     func referenceImageView(for zoomAnimator: ZoomAnimator) -> UIImageView? {

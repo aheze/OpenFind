@@ -292,14 +292,14 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         //let frontViewController = UINavigationController(rootViewController: HomeViewController())
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let helpViewController = storyboard.instantiateViewController(withIdentifier: "DefaultHelpController") as! DefaultHelpController
-        helpViewController.arrayOfHelp = ["0989238490238409234", "0989238490238409234sjdfiosydifysdifysdfoysf"]
-        helpViewController.indexToData = ["One", """
-        TworrayOfHelp = [String]()
-        var indexToData = [String]()
-        
-        var currentPath = -1
-              
-        """]
+//        helpViewController.arrayOfHelp = ["0989238490238409234", "0989238490238409234sjdfiosydifysdifysdfoysf"]
+//        helpViewController.indexToData = ["One", """
+//        TworrayOfHelp = [String]()
+//        var indexToData = [String]()
+//        
+//        var currentPath = -1
+//              
+//        """]
 
         helpViewController.title = "Help"
         

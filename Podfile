@@ -14,5 +14,6 @@ pod 'SnapKit'
 pod 'Parchment'
 pod 'WSTagsField'
 pod 'SPAlert'
+pod 'SwiftyJSON', '~> 4.0'
 
 end

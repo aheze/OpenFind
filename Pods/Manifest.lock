@@ -14,6 +14,7 @@ PODS:
   - SPAlert (2.1.4)
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
+  - SwiftyJSON (4.3.0)
   - ViewAnimator (2.7.0)
   - WSTagsField (5.2.0)
 
@@ -26,6 +27,7 @@ DEPENDENCIES:
   - SnapKit
   - SPAlert
   - SwiftEntryKit
+  - SwiftyJSON (~> 4.0)
   - ViewAnimator
   - WSTagsField
 
@@ -39,6 +41,7 @@ SPEC REPOS:
     - SnapKit
     - SPAlert
     - SwiftEntryKit
+    - SwiftyJSON
     - ViewAnimator
     - WSTagsField
 
@@ -61,9 +64,10 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SPAlert: 1a8afa1c6ac86a82ab5b2cfdf7f9a51e68cb6c0c
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   ViewAnimator: 5af1c6f3b310f012bf081259c43717aa54fbae73
   WSTagsField: d57a287fd552934db1d93a85d38abbf74b067d6a
 
-PODFILE CHECKSUM: c5dc163710421b99169e6f0a9f1d1973d9eeb8ca
+PODFILE CHECKSUM: d9310d3bd3f3116beb0e321b4c2c4082f23a1430
 
 COCOAPODS: 1.8.3
