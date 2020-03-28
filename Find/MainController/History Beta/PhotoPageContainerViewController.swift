@@ -27,7 +27,11 @@ protocol ZoomDeletedPhoto: class {
     func deletedPhoto(photoIndex: Int)
 }
 
-class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDelegate {
+class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDelegate, EditedFindBar {
+    func updateTerms(stringToListR: [String : EditableFindList], currentSearchFindListR: EditableFindList, currentListsSharedFindListR: EditableFindList, currentSearchAndListSharedFindListR: EditableFindList, currentMatchStringsR: [String], matchToColorsR: [String : [CGColor]]) {
+        print("update")
+    }
+    
 
     
 //    @IBOutlet weak var xButtonView: UIImageView!
@@ -40,6 +44,8 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         self.dismiss(animated: true, completion: nil)
     }
 
+    var matchToColors = [String: [CGColor]]()
+    
     @IBOutlet weak var blurView: UIVisualEffectView!
     
     @IBOutlet weak var findButton: UIButton!
@@ -216,8 +222,13 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         vc.imageSize = photoSize
         var urlString = URL(string: "")
         if cameFromFind {
-            let filePath = self.findModels[self.currentIndex].photo.filePath
+            let model = self.findModels[self.currentIndex]
+            let filePath = model.photo.filePath
             urlString = URL(string: "\(folderURL)\(filePath)")
+            
+            vc.matchToColors = matchToColors
+            vc.highlights = model.components
+            
         } else {
             let filePath = self.photoModels[self.currentIndex].filePath
             urlString = URL(string: "\(folderURL)\(filePath)")
@@ -225,6 +236,8 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         
         vc.url = urlString
         vc.index = currentIndex
+        
+        
         self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
         let viewControllers = [ vc ]
             
@@ -233,26 +246,26 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         if cameFromFind {
             blurView.isHidden = true
             
-            var attributes = EKAttributes.bottomFloat
-            attributes.entryBackground = .color(color: .white)
-            attributes.entranceAnimation = .translation
-            attributes.exitAnimation = .translation
-            attributes.displayDuration = .infinity
-            attributes.positionConstraints.size.height = .constant(value: 60)
-            attributes.statusBar = .light
-            attributes.entryInteraction = .absorbTouches
-            attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
-            attributes.roundCorners = .all(radius: 5)
-            attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
-            
-            let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
-            let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
-            attributes.positionConstraints.keyboardRelation = keyboardRelation
-            
-            let customView = FindBar()
-            
-//            customView.returnTerms = self
-            SwiftEntryKit.display(entry: customView, using: attributes)
+//            var attributes = EKAttributes.bottomFloat
+//            attributes.entryBackground = .color(color: .white)
+//            attributes.entranceAnimation = .translation
+//            attributes.exitAnimation = .translation
+//            attributes.displayDuration = .infinity
+//            attributes.positionConstraints.size.height = .constant(value: 60)
+//            attributes.statusBar = .light
+//            attributes.entryInteraction = .absorbTouches
+//            attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+//            attributes.roundCorners = .all(radius: 5)
+//            attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
+//
+//            let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
+//            let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
+//            attributes.positionConstraints.keyboardRelation = keyboardRelation
+//
+//            let customView = FindBar()
+//
+////            customView.returnTerms = self
+//            SwiftEntryKit.display(entry: customView, using: attributes)
         } else {
             blurView.layer.cornerRadius = 10
             blurView.clipsToBounds = true
@@ -419,8 +432,11 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
         vc.imageSize = photoSize
         var urlString = URL(string: "")
         if cameFromFind {
-            let filePath = self.findModels[self.currentIndex - 1].photo.filePath
+            let model = self.findModels[self.currentIndex - 1]
+            let filePath = model.photo.filePath
             urlString = URL(string: "\(folderURL)\(filePath)")
+            vc.matchToColors = matchToColors
+            vc.highlights = model.components
         } else {
             let filePath = self.photoModels[self.currentIndex - 1].filePath
             urlString = URL(string: "\(folderURL)\(filePath)")
@@ -456,8 +472,14 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
         
         var urlString = URL(string: "")
         if cameFromFind {
-            let filePath = self.findModels[self.currentIndex + 1].photo.filePath
+//            let filePath = self.findModels[self.currentIndex + 1].photo.filePath
+//            urlString = URL(string: "\(folderURL)\(filePath)")
+//
+            let model = self.findModels[self.currentIndex + 1]
+            let filePath = model.photo.filePath
             urlString = URL(string: "\(folderURL)\(filePath)")
+            vc.matchToColors = matchToColors
+            vc.highlights = model.components
         } else {
             let filePath = self.photoModels[self.currentIndex + 1].filePath
             urlString = URL(string: "\(folderURL)\(filePath)")
@@ -522,6 +544,6 @@ extension PhotoPageContainerViewController: ZoomAnimatorDelegate {
     }
     
     func referenceImageViewFrameInTransitioningView(for zoomAnimator: ZoomAnimator) -> CGRect? {
-        return self.currentViewController.scrollView.convert(self.currentViewController.imageView.frame, to: self.currentViewController.view)
+        return self.currentViewController.scrollView.convert(self.currentViewController.mainContentView.frame, to: self.currentViewController.view)
     }
 }

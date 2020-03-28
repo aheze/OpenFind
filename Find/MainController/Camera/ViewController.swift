@@ -208,8 +208,8 @@ class ViewController: UIViewController {
 //    var containedList = [String]()
     
     var aspectRatioWidthOverHeight : CGFloat = 0
-    var aspectRatioSucceeded : Bool = false
-    var sizeOfPixelBufferFast : CGSize = CGSize(width: 0, height: 0)
+//    var aspectRatioSucceeded : Bool = false
+//    var sizeOfPixelBufferFast : CGSize = CGSize(width: 0, height: 0)
     
     //MARK: Every mode (Universal)
     var statusBarHidden : Bool = false

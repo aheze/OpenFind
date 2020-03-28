@@ -345,8 +345,27 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
             let newImage = UIImage(systemName: listT.iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(hexString: listT.iconColorName), renderingMode: .alwaysOriginal)
             cell.imageView.image = newImage
             
-            let array = listT.contents.joined(separator:"\n")
-            cell.contentsList.text = array
+            var textToDisplay = ""
+            var overFlowCount = 0
+            for (index, text) in listT.contents.enumerated() {
+                
+                if index <= 10 {
+                    if index == listT.contents.count - 1 {
+                        textToDisplay += text
+                    } else {
+                        textToDisplay += "\(text)\n"
+                    }
+                } else {
+                    overFlowCount += 1
+                }
+            }
+            if overFlowCount >= 1 {
+                textToDisplay += "\n... \(overFlowCount) more"
+            }
+            
+//            let array = listT.contents.joined(separator:"\n")
+            
+            cell.contentsList.text = textToDisplay
             cell.baseView.layer.cornerRadius = 10
             cell.tapHighlightView.layer.cornerRadius = 10
             cell.tapHighlightView.alpha = 0
@@ -386,14 +405,35 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
         
         let newDescHeight = cell.descriptionOfList.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
         let array = cell.contents
-        let arrayAsString = array.joined(separator:"\n")
-        let newContentsHeight = arrayAsString.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
+        
+        
+        var textToDisplay = ""
+        var overFlowCount = 0
+        for (index, text) in array.enumerated() {
+            
+            if index <= 10 {
+                if index == array.count - 1 {
+                    textToDisplay += text
+                } else {
+                    textToDisplay += "\(text)\n"
+                }
+            } else {
+                overFlowCount += 1
+            }
+        }
+        if overFlowCount >= 1 {
+            textToDisplay += "\n... \(overFlowCount) more"
+        }
+        
+        
+//        let arrayAsString = array.joined(separator:"\n")
+        let newContentsHeight = textToDisplay.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 16))
         
         let titleHeight = cell.name.heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 22, weight: .bold))
         
         let extendHeight = newDescHeight + newContentsHeight + titleHeight
         
-        return AdaptiveCollectionConfig.cellBaseHeight + extendHeight + 25 //+ 300
+        return AdaptiveCollectionConfig.cellBaseHeight + extendHeight + 8 //+ 300
     }
   
     

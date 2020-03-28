@@ -13,10 +13,18 @@ import SDWebImage
 protocol ReturnCache: class {
     func returnHistCache(cachedImages: HistoryModel)
 }
+
+protocol EditedFindBar: class {
+    func updateTerms(stringToListR: [String: EditableFindList], currentSearchFindListR: EditableFindList, currentListsSharedFindListR: EditableFindList, currentSearchAndListSharedFindListR: EditableFindList, currentMatchStringsR: [String], matchToColorsR: [String: [CGColor]])
+}
+
 class HistoryFindController: UIViewController, UISearchBarDelegate {
     
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
     var imageSize = CGSize(width: 0, height: 0)
+    
+    var sekSwitchedToPreview = false
+    weak var editedFindbar: EditedFindBar?
     
     @IBOutlet weak var noResultsLabel: UILabel!
     
@@ -226,59 +234,50 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
         mainContentVC.transitionController.fromDelegate = self
         mainContentVC.transitionController.toDelegate = mainContentVC
         mainContentVC.delegate = self
+        
         mainContentVC.currentIndex = indexPath.item
 //        mainContentVC.currentSection = indexPath.section
         mainContentVC.photoSize = imageSize
         
-//        var photoPaths = [URL]()
-//        if let hisModel = indexToData[indexPath.section] {
-//    //                print("YES PATH Select indexpath select transition push")
-//    //                let historyModel = hisModel[indexPath.item]
-//
-//            for historyModel in hisModel {
-//                var urlPath = historyModel.filePath
-//                urlPath = "\(folderURL)\(urlPath)"
-//                if let finalUrl = URL(string: urlPath) {
-//                    photoPaths.append(finalUrl)
-//    //                        fileUrlsSelected.append(finalUrl)
-//                }
-//            }
-//
-//        }
         mainContentVC.folderURL = folderURL
+        self.editedFindbar = mainContentVC
                 
         var modelArray = [EditableHistoryModel]()
-        for photo in photos {
-                
-            let newHistModel = EditableHistoryModel()
-            newHistModel.filePath = photo.filePath
-            newHistModel.dateCreated = photo.dateCreated
-            newHistModel.isHearted = photo.isHearted
-            newHistModel.isDeepSearched = photo.isDeepSearched
-            
-            for cont in photo.contents {
-                let realmContent = EditableSingleHistoryContent()
-                realmContent.text = cont.text
-                realmContent.height = CGFloat(cont.height)
-                realmContent.width = CGFloat(cont.width)
-                realmContent.x = CGFloat(cont.x)
-                realmContent.y = CGFloat(cont.y)
-//                                    realmContent.
-//                                    realnContent.
-                newHistModel.contents.append(realmContent)
-            }
-//                    for cont in singleItem.contents {
-//                        newHistModel.contents.append(cont)
-//                    }
-            
-            modelArray.append(newHistModel)
-        }
+//        for photo in photos {
+//
+//            let newHistModel = EditableHistoryModel()
+//            newHistModel.filePath = photo.filePath
+//            newHistModel.dateCreated = photo.dateCreated
+//            newHistModel.isHearted = photo.isHearted
+//            newHistModel.isDeepSearched = photo.isDeepSearched
+//
+//            for cont in photo.contents {
+//                let realmContent = EditableSingleHistoryContent()
+//                realmContent.text = cont.text
+//                realmContent.height = CGFloat(cont.height)
+//                realmContent.width = CGFloat(cont.width)
+//                realmContent.x = CGFloat(cont.x)
+//                realmContent.y = CGFloat(cont.y)
+////                                    realmContent.
+////                                    realnContent.
+//                newHistModel.contents.append(realmContent)
+//            }
+////                    for cont in singleItem.contents {
+////                        newHistModel.contents.append(cont)
+////                    }
+//
+//            modelArray.append(newHistModel)
+//        }
+//        let currentModel = resultPhotos[indexPath.row]
+//        let comps = currentModel.components
+//        mainContentVC.
         
+        mainContentVC.matchToColors = matchToColors
         mainContentVC.cameFromFind = true
         mainContentVC.findModels = resultPhotos
 //        mainContentVC.photoModels = modelArray
 //        mainContentVC.photoPaths = photoPaths
-        SwiftEntryKit.dismiss()
+//        SwiftEntryKit.dismiss()
         self.present(mainContentVC, animated: true)
     }
 //    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -399,19 +398,16 @@ extension HistoryFindController {
             self.view.layoutIfNeeded()
         })
         DispatchQueue.global(qos: .background).async {
-            print("1")
+//            print("1")
             var findModels = [FindModel]()
-            print("2")
     //        var heights = [CGFloat]()
             
     //        print(
             for photo in self.photos {
-                print("3")
                 print("searching in photo")
                 var num = 0
                 
                 let newMod = FindModel()
-                print("4")
                 newMod.photo = photo
                 
                 var descriptionOfPhoto = ""
@@ -422,7 +418,7 @@ extension HistoryFindController {
                 
                 ///Cycle through each block of text. Each cont may be a line long.
                 for cont in photo.contents {
-                    print("5")
+//                    print("CONT: \(cont.x)")
     //                let compRange = ArrayOfMatchesInComp()
                     
                     var matchRanges = [ClosedRange<Int>]()
@@ -433,10 +429,8 @@ extension HistoryFindController {
                     let lowercaseContText = cont.text.lowercased()
                     let individualCharacterWidth = CGFloat(cont.width) / CGFloat(lowercaseContText.count)
                     for match in self.currentMatchStrings {
-                        print("6")
                         if lowercaseContText.contains(match) {
                             hasMatch = true
-                            print("contains match: \(match), text: \(lowercaseContText)")
                             let finalW = individualCharacterWidth * CGFloat(match.count)
                             let indicies = lowercaseContText.indicesOf(string: match)
                             
@@ -446,10 +440,11 @@ extension HistoryFindController {
                                 let finalX = CGFloat(cont.x) + addedWidth
                                 let newComponent = Component()
                                 
-                                newComponent.x = finalX - 6
-                                newComponent.y = CGFloat(cont.y) - (CGFloat(cont.height) + 3)
-                                newComponent.width = finalW + 12
-                                newComponent.height = CGFloat(cont.height) + 6
+                                newComponent.x = finalX
+                                newComponent.y = CGFloat(cont.y) - (CGFloat(cont.height))
+                                newComponent.width = finalW
+//                                print("WIDT: \(finalW + 12)")
+                                newComponent.height = CGFloat(cont.height)
                                 newComponent.text = match
     //                            newComponent.changed = false
                                 if let parentList = self.stringToList[match] {

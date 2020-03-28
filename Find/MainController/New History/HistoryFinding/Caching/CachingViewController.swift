@@ -38,6 +38,8 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     let tintView = UIView()
     let swipeView = UIView()
     
+    var photoSize = CGSize(width: 0, height: 0)
+    
     
     @IBAction func keepButtonPressed(_ sender: Any) {
         keepAlreadyCached()
@@ -59,8 +61,8 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     let deviceSize = UIScreen.main.bounds.size
     
     var aspectRatioWidthOverHeight : CGFloat = 0
-    var aspectRatioSucceeded : Bool = false
-    var sizeOfPixelBufferFast : CGSize = CGSize(width: 0, height: 0)
+//    var aspectRatioSucceeded : Bool = false
+//    var sizeOfPixelBufferFast : CGSize = CGSize(width: 0, height: 0)
     
     
 //    var originalPhotos = [HistoryModel]()
@@ -324,10 +326,10 @@ extension CachingViewController {
     }
     func startFinding() {
         
-        UIView.animate(withDuration: 0.7, delay: 0, options: [.repeat, .autoreverse], animations: {
-            self.swipeView.frame = CGRect(x: 162, y: 5, width: 10, height: 170)
-            print("animate swipe")
-        }, completion: nil)
+//        UIView.animate(withDuration: 0.7, delay: 0, options: [.repeat, .autoreverse], animations: {
+//            self.swipeView.frame = CGRect(x: 162, y: 5, width: 10, height: 170)
+//            print("animate swipe")
+//        }, completion: nil)
         
         dispatchQueue.async {
             self.count = 0
@@ -353,15 +355,21 @@ extension CachingViewController {
                         
                         
                         guard let photoImage = self.getImageFromDir(photo.filePath) else { print("WRONG IMAGE!!!!"); return }
+                        
+                        
                         let width = photoImage.size.width
                         let height = photoImage.size.height
-                        self.sizeOfPixelBufferFast = CGSize(width: width, height: height)
+                        
+                        self.photoSize = CGSize(width: width, height: height)
+                        
+                        print("WIDTH: \(width), height: \(height)")
+//                        self.sizeOfPixelBufferFast = CGSize(width: height, height: width)
                         //print(width)
                         //print(height)
-                        self.aspectRatioWidthOverHeight = height / width ///opposite
-                        if self.aspectRatioWidthOverHeight != CGFloat(0) {
-                            self.aspectRatioSucceeded = true
-                        }
+                        self.aspectRatioWidthOverHeight = width / height
+//                        if self.aspectRatioWidthOverHeight != CGFloat(0) {
+////                            self.aspectRatioSucceeded = true
+//                        }
                         //let request = fastTextDetectionRequest
                         let request = VNRecognizeTextRequest { request, error in
                             self.handleFastDetectedText(request: request, error: error, photo: photo)
@@ -416,8 +424,6 @@ extension CachingViewController {
     }
     func handleFastDetectedText(request: VNRequest?, error: Error?, photo: EditableHistoryModel) {
         
-        
-        
         let newCachedPhoto = EditableHistoryModel()
         newCachedPhoto.dateCreated = photo.dateCreated
         newCachedPhoto.filePath = photo.filePath
@@ -429,32 +435,14 @@ extension CachingViewController {
         } else {
             print("ERROR!!!!!!")
         }
-        
         count += 1
         DispatchQueue.main.async {
             self.numberCachedLabel.text = "\(self.count)/\(self.photos.count) photos cached"
-//            if let firstIndex = self.photos.firstIndex(of: photo) {
-//                let indP = IndexPath(item: firstIndex, section: 0)
-//                self.collectionView.reloadItems(at: [indP])
-//            } else {
-//                print("NO MODEL ERROR")
-//            }
         }
         
         guard let results = request?.results, results.count > 0 else {
             print("no results")
-//                busyFastFinding = false
-            
-            
-//            newCachedPhoto.contents = contents
-            
-    //        alreadyCached.append(newCachedPhoto)
             alreadyCachedPhotos.append(newCachedPhoto)
-//            if let origIndex = photos.firstIndex(of: photo) {
-//                photos[origIndex] = newCachedPhoto
-//            } else {
-//                print("ERROR!!!!!!")
-//            }
             dispatchSemaphore.signal()
             dispatchGroup.leave()
             
@@ -465,74 +453,30 @@ extension CachingViewController {
         
         for result in results {
             if let observation = result as? VNRecognizedTextObservation {
-//                    let newComponent = EditableHistoryModel()
                 for text in observation.topCandidates(1) {
-                    print(text.string)
                     
-                    
-//                        let component = Component()
                     let origX = observation.boundingBox.origin.x
                     let origY = 1 - observation.boundingBox.minY
                     let origWidth = observation.boundingBox.width
                     let origHeight = observation.boundingBox.height
                     
-//                    component.text = text.string
-//                        let lowerCaseComponentText = text.string.lowercased()
-//                        component.text = lowerCaseComponentText
-                    let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
-                    let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
-                    let offHalf = offsetWidth / 2
-                    let newW = origWidth * convertedOriginalWidthOfBigImage
-                    let newH = origHeight * self.deviceSize.height
-                    let newX = origX * convertedOriginalWidthOfBigImage - offHalf
-                    let newY = (origY * self.deviceSize.height) - newH
-                    
-                    
-//                    let lowerCaseComponentText = text.string.lowercased()
-//                                       component.text = lowerCaseComponentText
-//                                       let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
-//                                       let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
-//                                       let offHalf = offsetWidth / 2
-//                                       let newW = component.width * convertedOriginalWidthOfBigImage
-//                                       let newH = component.height * self.deviceSize.height
-//                                       let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
-//                                       let newY = (component.y * self.deviceSize.height) - newH
-//                        let individualCharacterWidth = newW / CGFloat(component.text.count)
-
-//                        component.x = newX
-//                        component.y = newY
                     let singleContent = EditableSingleHistoryContent()
                     singleContent.text = text.string
-                    singleContent.x = newX
-                    singleContent.y = newY
-                    singleContent.width = newW
-                    singleContent.height = newH
-//
+                    singleContent.x = origX
+                    singleContent.y = origY
+                    singleContent.width = origWidth
+                    singleContent.height = origHeight
                     contents.append(singleContent)
-                    
-
                 }
             }
 
         }
 
-        print("CACHED CONTS: \(contents)")
-//        let newCachedPhoto = EditableHistoryModel()
-//        newCachedPhoto.dateCreated = photo.dateCreated
-//        newCachedPhoto.filePath = photo.filePath
-//        newCachedPhoto.isDeepSearched = true
-//        newCachedPhoto.isHearted = photo.isHearted
         newCachedPhoto.contents = contents
-        
-//        alreadyCached.append(newCachedPhoto)
-        
         
         alreadyCachedPhotos.append(newCachedPhoto)
         dispatchSemaphore.signal()
         dispatchGroup.leave()
-//            busyFastFinding = false
-//            animateFoundFastChange()
-//            numberOfFastMatches = 0
     }
 }
 extension CachingViewController : UICollectionViewDelegateFlowLayout {

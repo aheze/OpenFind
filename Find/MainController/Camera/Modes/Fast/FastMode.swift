@@ -19,13 +19,13 @@ extension ViewController {
             let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
             let width = ciImage.extent.width
             let height = ciImage.extent.height
-            self.sizeOfPixelBufferFast = CGSize(width: width, height: height)
+//            self.sizeOfPixelBufferFast = CGSize(width: width, height: height)
             //print(width)
             //print(height)
             self.aspectRatioWidthOverHeight = height / width ///opposite
-            if self.aspectRatioWidthOverHeight != CGFloat(0) {
-                self.aspectRatioSucceeded = true
-            }
+//            if self.aspectRatioWidthOverHeight != CGFloat(0) {
+//                self.aspectRatioSucceeded = true
+//            }
             //let request = fastTextDetectionRequest
             let request = VNRecognizeTextRequest { request, error in
                 self.handleFastDetectedText(request: request, error: error)

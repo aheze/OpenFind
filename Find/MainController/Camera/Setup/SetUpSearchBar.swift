@@ -86,32 +86,36 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
 
             cell.backgroundColor = UIColor(hexString: list.iconColorName)
             cell.layer.cornerRadius = 6
-            cell.nameLabel.text = list.name
-            print("cont size: \(cell.nameLabel.intrinsicContentSize)")
-            if searchShrunk == true {
-                cell.imageRightC.constant = 8
-                print("cont size: \(cell.nameLabel.intrinsicContentSize)")
-                UIView.animate(withDuration: 0.3, animations: {
-
-                    cell.nameLabel.alpha = 0
-                    cell.layoutIfNeeded()
-                })
-            } else {
-                cell.imageRightC.constant = cell.nameLabel.intrinsicContentSize.width + 16
-                print("cont size: \(cell.nameLabel.intrinsicContentSize)")
-                UIView.animate(withDuration: 0.3, animations: {
-
-                        cell.nameLabel.alpha = 1
-                        cell.layoutIfNeeded()
-                    })
-            }
-
-
-
+               
             let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 10, weight: .semibold)
             let newImage = UIImage(systemName: list.iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor.white, renderingMode: .alwaysOriginal)
 
             cell.imageView.image = newImage
+            
+//            print("cont size: \(cell.nameLabel.intrinsicContentSize)")
+            if searchShrunk == true {
+                print("SHRUNK")
+                cell.imageRightC.constant = 0
+//                print("cont size: \(cell.nameLabel.intrinsicContentSize)")
+                UIView.animate(withDuration: 0.3, animations: {
+                    cell.nameLabel.text = ""
+                    cell.nameLabel.alpha = 0
+                    cell.layoutIfNeeded()
+                })
+            } else {
+                cell.imageRightC.constant = 8
+                print("NOT SHRUNK")
+                print("cont size: \(cell.nameLabel.intrinsicContentSize)")
+                UIView.animate(withDuration: 0.3, animations: {
+                cell.nameLabel.text = list.name
+                cell.nameLabel.alpha = 1
+                    cell.layoutIfNeeded()
+                })
+            }
+
+
+
+            
 
         }
 
@@ -126,6 +130,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
 
             selectedLists.remove(at: indexPath.item)
             searchCollectionView.deleteItems(at: [indexPath])
+            
+//            searchCollectionView.reloadData()
 
             if selectedLists.count == 0 {
                 updateListsLayout(toType: "removeListsNow")
@@ -235,6 +241,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         warningLabel.alpha = 0
         warningLabel.text = "Find is paused | Duplicates are not allowed"
         
+        
+        searchBarLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
 //        cancelButtonNew.layer.cornerRadius = 6
 //        autoCompleteButton.layer.cornerRadius = 6
 //        newMatchButton.layer.cornerRadius = 6
@@ -350,7 +358,16 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         case "doneAndShrink":
             print("Done, shrinking lists")
             
-            searchShrunk = true
+//            searchShrunk = true
+            searchCollectionView.performBatchUpdates({
+                self.searchShrunk = true
+            }, completion: { _ in
+                self.searchCollectionView.reloadData()
+            })
+            
+//
+//
+            
 //            darkBlurEffectHeightConstraint.constant = 100
 //            for j in 0..<searchCollectionView.numberOfItems(inSection: 0) {
 //                let indP = IndexPath(item: j, section: 0)
@@ -367,7 +384,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
 //            }
 //
 //
-            searchCollectionView.reloadData()
+//            searchCollectionView.reloadData()
 //            searchCollectionView.reloadItems(at: <#T##[IndexPath]#>)
             
 //            NotificationCenter.default.post(name: .changeSearchListSize, object: nil, userInfo: [0: true])
