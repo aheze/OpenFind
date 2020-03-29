@@ -116,6 +116,10 @@ class ZoomDismissalInteractionController: NSObject {
                 animator.finishedDismissing = true
                 
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+//                print("NOT")
+                animator.finishedDismissing = true
+                
+                
                 animator.toDelegate?.transitionDidEndWith(zoomAnimator: animator)
                 animator.fromDelegate?.transitionDidEndWith(zoomAnimator: animator)
                 self.transitionContext = nil

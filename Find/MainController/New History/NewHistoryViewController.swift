@@ -609,8 +609,9 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 mainContentVC.photoSize = imageSize
                 mainContentVC.cameFromFind = false
                 mainContentVC.folderURL = folderURL
-                mainContentVC.deletedPhoto = self
                 
+                mainContentVC.deletedPhoto = self
+                mainContentVC.changeModel = self
                 
                 if let photoCats = photoCategories {
                     var modelArray = [EditableHistoryModel]()
@@ -1158,44 +1159,7 @@ extension NewHistoryViewController {
 
         }
         print("histDataCount: \(indexToData.count)")
-//        print("URL COUNT: \(dictOfUrls.count)")
     }
-    
-//    func loadImageFromDocumentDirectory(urlOfFile: URL) -> UIImage? {
-//        guard let image = UIImage(contentsOfFile: urlOfFile.path) else { return nil }
-//        return image
-//    }
-    
-    
-//    func convertDateToReadableString(dateToConvert: Date) -> String {
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "MMddyy"
-//        let todaysDate = Date()
-//        let todaysDateAsString = dateFormatter.string(from: todaysDate)
-//        let yesterday = todaysDate.subtract(days: 1)
-//        let yesterdaysDateAsString = dateFormatter.string(from: yesterday!)
-//
-//        let oneWeekAgo = todaysDate.subtract(days: 7)
-//        let yestYesterday = yesterday?.subtract(days: 1)
-//        let range = oneWeekAgo!...yestYesterday!
-//
-//        let stringDate = dateFormatter.string(from: dateToConvert)
-//
-//        if stringDate == todaysDateAsString {
-//            return "Today"
-//        } else if stringDate == yesterdaysDateAsString {
-//            return "Yesterday"
-//        } else {
-//            if range.contains(dateToConvert) {
-//                dateFormatter.dateFormat = "EEEE"
-//                return dateFormatter.string(from: dateToConvert)
-//            } else {
-//                dateFormatter.dateFormat = "MMMM d',' yyyy"
-//                return dateFormatter.string(from: dateToConvert)
-//            }
-//        }
-//    }
-    
 }
 
 extension Date {
@@ -1227,6 +1191,26 @@ extension Date {
             }
         }
     }
+}
+
+extension NewHistoryViewController: ZoomStateChanged {
+    
+    func changedState(type: String) {
+        switch type {
+        case "Unheart":
+            print("UNHE")
+        case "Heart":
+            print("HE")
+        case "Cache":
+            print("CE")
+        case "Uncache":
+            print("UnCAChE")
+        default:
+            print("WRONG DEFAUTL!!!")
+        }
+    }
+    
+    
 }
 
 extension NewHistoryViewController: ZoomDeletedPhoto {

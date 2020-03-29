@@ -48,16 +48,30 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     
     @IBOutlet weak var blurView: UIVisualEffectView!
     
+    weak var changeModel: ZoomStateChanged?
+    
     @IBOutlet weak var findButton: UIButton!
     @IBOutlet weak var heartButton: UIButton!
     @IBOutlet weak var cacheButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet weak var moreButton: UIButton!
     
     @IBAction func findPressed(_ sender: Any) {
     }
     
     @IBAction func heartPressed(_ sender: Any) {
+        if photoModels[currentIndex].isHearted == true {
+            photoModels[currentIndex].isHearted = false
+            let newImage = UIImage(systemName: "heart")
+            heartButton.setImage(newImage, for: .normal)
+            heartButton.tintColor = UIColor(hexString: "5287B6")
+            changeModel?.changedState(type: "Unheart")
+        } else {
+            photoModels[currentIndex].isHearted = true
+            let newImage = UIImage(systemName: "heart.fill")
+            heartButton.setImage(newImage, for: .normal)
+            heartButton.tintColor = UIColor(named: "FeedbackGradientRight")
+            changeModel?.changedState(type: "Heart")
+        }
     }
     
     @IBAction func cachePressed(_ sender: Any) {
@@ -147,9 +161,6 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
         
-    }
-    
-    @IBAction func morePressed(_ sender: Any) {
     }
     
     
@@ -274,9 +285,11 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             if photoModels[currentIndex].isHearted == true {
                 let newImage = UIImage(systemName: "heart.fill")
                 heartButton.setImage(newImage, for: .normal)
+                heartButton.tintColor = UIColor(named: "FeedbackGradientRight")
             } else {
                 let newImage = UIImage(systemName: "heart")
                 heartButton.setImage(newImage, for: .normal)
+                heartButton.tintColor = UIColor(hexString: "5287B6")
             }
         }
     }
@@ -511,12 +524,14 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
         self.delegate?.containerViewController(self, indexDidUpdate: self.currentIndex)
 
         if !cameFromFind {
-            if self.photoModels[self.currentIndex].isHearted == true {
+            if photoModels[currentIndex].isHearted == true {
                 let newImage = UIImage(systemName: "heart.fill")
                 heartButton.setImage(newImage, for: .normal)
+                heartButton.tintColor = UIColor(named: "FeedbackGradientRight")
             } else {
                 let newImage = UIImage(systemName: "heart")
                 heartButton.setImage(newImage, for: .normal)
+                heartButton.tintColor = UIColor(hexString: "5287B6")
             }
         }
         

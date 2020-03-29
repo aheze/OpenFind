@@ -206,8 +206,8 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
                 fromReferenceImageView.isHidden = false
                 
 //                if !transitionContext.transitionWasCancelled {
-//                    print("NOT CANCELLED  sdds")
-//                    self.finishedDismissing = true
+                    print("NOT CANCELLED  sdds")
+                    self.finishedDismissing = true
 //                } else {
 //                    print("CANCCELLED  sdfsd")
 //                }

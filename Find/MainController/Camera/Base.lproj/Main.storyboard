@@ -2644,76 +2644,74 @@
                                 </connections>
                             </containerView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Paq-Mg-YB3">
-                                <rect key="frame" x="87" y="812" width="240" height="40"/>
+                                <rect key="frame" x="87" y="796" width="240" height="50"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vM0-YG-OID">
-                                    <rect key="frame" x="0.0" y="0.0" width="240" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="50"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tSx-bA-Sbg">
-                                            <rect key="frame" x="6" y="0.0" width="228" height="40"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tSx-bA-Sbg">
+                                            <rect key="frame" x="12" y="0.0" width="216" height="50"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mj0-rs-H2T">
-                                                    <rect key="frame" x="0.0" y="9" width="45.5" height="22"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mj0-rs-H2T">
+                                                    <rect key="frame" x="0.0" y="5" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="2Xg-wW-4Vs"/>
+                                                        <constraint firstAttribute="height" constant="40" id="Xqr-o7-RLw"/>
+                                                    </constraints>
                                                     <color key="tintColor" name="FeedbackGradientRight"/>
-                                                    <state key="normal" image="magnifyingglass" catalog="system">
-                                                        <color key="titleColor" name="FeedbackGradientRight"/>
-                                                    </state>
+                                                    <state key="normal" image="magnifyingglass" catalog="system"/>
                                                     <connections>
                                                         <action selector="findPressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="GKG-IY-lT8"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3l-p7-oSX">
-                                                    <rect key="frame" x="45.5" y="9" width="45.5" height="22"/>
-                                                    <color key="tintColor" name="FeedbackGradientRight"/>
-                                                    <state key="normal" image="heart" catalog="system">
-                                                        <color key="titleColor" name="FeedbackGradientRight"/>
-                                                    </state>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3l-p7-oSX">
+                                                    <rect key="frame" x="58.5" y="5" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="JYc-Wj-e3r"/>
+                                                        <constraint firstAttribute="width" constant="40" id="Uzm-CG-4S0"/>
+                                                    </constraints>
+                                                    <color key="tintColor" red="0.32156862745098036" green="0.52941176470588236" blue="0.71372549019607845" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" image="heart" catalog="system"/>
                                                     <connections>
                                                         <action selector="heartPressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="Jbe-Nz-gOZ"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GJO-WY-oxz">
-                                                    <rect key="frame" x="91" y="0.0" width="46" height="40"/>
-                                                    <color key="tintColor" name="FeedbackGradientRight"/>
-                                                    <state key="normal" image="ThinBlue">
-                                                        <color key="titleColor" name="FeedbackGradientRight"/>
-                                                    </state>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GJO-WY-oxz">
+                                                    <rect key="frame" x="117.5" y="5" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="LBH-Ph-UaD"/>
+                                                        <constraint firstAttribute="width" constant="40" id="lH6-p2-R8H"/>
+                                                    </constraints>
+                                                    <color key="tintColor" red="0.32156862745098036" green="0.52941176470588236" blue="0.71372549019607845" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" image="NotCachedThin"/>
                                                     <connections>
                                                         <action selector="cachePressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="aID-zN-qw4"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ce-Cj-kwU">
-                                                    <rect key="frame" x="137" y="9" width="45.5" height="22"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ce-Cj-kwU">
+                                                    <rect key="frame" x="176" y="5" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="BfB-pg-cOv"/>
+                                                        <constraint firstAttribute="height" constant="40" id="jZB-p9-TFM"/>
+                                                    </constraints>
                                                     <color key="tintColor" name="FeedbackGradientRight"/>
-                                                    <state key="normal" image="trash" catalog="system">
-                                                        <color key="titleColor" name="FeedbackGradientRight"/>
-                                                    </state>
+                                                    <state key="normal" image="trash" catalog="system"/>
                                                     <connections>
                                                         <action selector="deletePressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="Vek-Yp-e0A"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Doh-oq-pXf">
-                                                    <rect key="frame" x="182.5" y="9" width="45.5" height="22"/>
-                                                    <color key="tintColor" name="FeedbackGradientRight"/>
-                                                    <state key="normal" image="ellipsis.circle" catalog="system">
-                                                        <color key="titleColor" name="FeedbackGradientRight"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="morePressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="E7D-Nc-v9e"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="tSx-bA-Sbg" firstAttribute="leading" secondItem="vM0-YG-OID" secondAttribute="leading" constant="6" id="046-hY-Gpy"/>
+                                        <constraint firstItem="tSx-bA-Sbg" firstAttribute="leading" secondItem="vM0-YG-OID" secondAttribute="leading" constant="12" id="046-hY-Gpy"/>
                                         <constraint firstAttribute="bottom" secondItem="tSx-bA-Sbg" secondAttribute="bottom" id="2QR-pW-9D0"/>
-                                        <constraint firstAttribute="trailing" secondItem="tSx-bA-Sbg" secondAttribute="trailing" constant="6" id="d3p-cy-0ZQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="tSx-bA-Sbg" secondAttribute="trailing" constant="12" id="d3p-cy-0ZQ"/>
                                         <constraint firstItem="tSx-bA-Sbg" firstAttribute="top" secondItem="vM0-YG-OID" secondAttribute="top" id="ncY-tG-0y6"/>
                                     </constraints>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="ZEd-gd-RqF"/>
+                                    <constraint firstAttribute="height" constant="50" id="ZEd-gd-RqF"/>
                                     <constraint firstAttribute="width" constant="240" id="urE-kM-LD2"/>
                                 </constraints>
                                 <blurEffect style="extraLight"/>
@@ -2753,7 +2751,7 @@
                             <constraint firstAttribute="trailing" secondItem="akx-V1-sdk" secondAttribute="trailing" id="Bfn-fB-Aiu"/>
                             <constraint firstItem="Paq-Mg-YB3" firstAttribute="centerX" secondItem="QHL-0B-bRk" secondAttribute="centerX" id="Lh9-1e-fBF"/>
                             <constraint firstAttribute="bottom" secondItem="akx-V1-sdk" secondAttribute="bottom" id="Q1b-0x-cs2"/>
-                            <constraint firstItem="9AY-Tu-QB1" firstAttribute="top" secondItem="Paq-Mg-YB3" secondAttribute="bottom" constant="10" id="wP5-Fg-qOb"/>
+                            <constraint firstItem="9AY-Tu-QB1" firstAttribute="top" secondItem="Paq-Mg-YB3" secondAttribute="bottom" constant="16" id="wP5-Fg-qOb"/>
                             <constraint firstItem="B4x-Oj-4tb" firstAttribute="leading" secondItem="eh5-7a-Q5S" secondAttribute="leading" constant="16" id="xkk-7j-cHF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eh5-7a-Q5S"/>
@@ -2767,7 +2765,6 @@
                         <outlet property="deleteButton" destination="9ce-Cj-kwU" id="FfA-ZN-9aH"/>
                         <outlet property="findButton" destination="mj0-rs-H2T" id="xOT-jM-p9a"/>
                         <outlet property="heartButton" destination="F3l-p7-oSX" id="ToS-3E-jDd"/>
-                        <outlet property="moreButton" destination="Doh-oq-pXf" id="43U-Lc-OD2"/>
                         <outlet property="xButton" destination="te5-rx-LTY" id="yKD-td-Ebf"/>
                     </connections>
                 </viewController>
@@ -2855,12 +2852,11 @@
         <image name="Checkmark" width="512" height="512"/>
         <image name="Leica Sample" width="320" height="189.5"/>
         <image name="New Menu" width="512" height="512"/>
-        <image name="ThinBlue" width="100" height="100"/>
+        <image name="NotCachedThin" width="100" height="100"/>
         <image name="Xbutton" width="300" height="300"/>
         <image name="arrow.down" catalog="system" width="32" height="32"/>
         <image name="checkmark" catalog="system" width="64" height="56"/>
         <image name="chevron.right" catalog="system" width="48" height="64"/>
-        <image name="ellipsis.circle" catalog="system" width="64" height="60"/>
         <image name="heart" catalog="system" width="64" height="54"/>
         <image name="heart.fill" catalog="system" width="64" height="54"/>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>

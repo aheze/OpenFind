@@ -813,6 +813,7 @@ extension HistoryFindController: ZoomAnimatorDelegate {
     }
     
     func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
+        print("TRANSS END????")
         if zoomAnimator.isPresenting == false && zoomAnimator.finishedDismissing == true {
             var attributes = EKAttributes.bottomFloat
             attributes.entryBackground = .color(color: .white)
