@@ -91,6 +91,8 @@ class ListToolBar: UIView, InjectLists {
 //
 //    }
     func resetWithLists(lists: [EditableFindList]) {
+        print("recieved...")
+        print("COUNT: \(lists.count)")
         editableListCategories = lists
         collectionView.reloadData()
     }

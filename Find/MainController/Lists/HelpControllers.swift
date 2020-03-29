@@ -15,7 +15,7 @@ class HelpObject: NSObject {
     var title = ""
     var urlPath = ""
 }
-
+//Proto
 class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
 //    var arrayOfHelp = [String]()

@@ -13,10 +13,11 @@ class FindModel: NSObject {
     var numberOfMatches = 0
     var descriptionText = ""
     var descriptionHeight = CGFloat(0)
-    var descriptionMatchRanges = [ClosedRange<Int>]()
+    var descriptionMatchRanges = [ArrayOfMatchesInComp]()
     var components = [Component]()
 }
 
 class ArrayOfMatchesInComp: NSObject {
-    var stringToRanges = [String: [ClosedRange<Int>]]()
+    var descriptionRange = 0...1
+    var text = ""
 }

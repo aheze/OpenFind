@@ -38,7 +38,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     let tintView = UIView()
     let swipeView = UIView()
     
-    var photoSize = CGSize(width: 0, height: 0)
+//    var photoSize = CGSize(width: 0, height: 0)
     
     
     @IBAction func keepButtonPressed(_ sender: Any) {
@@ -312,18 +312,7 @@ extension CachingViewController {
             }
         }
     }
-    func getImageFromDir(_ imageName: String) -> UIImage? {
-
-        if let fileURL = URL(string: "\(folderURL)\(imageName)") {
-            do {
-                let imageData = try Data(contentsOf: fileURL)
-                return UIImage(data: imageData)
-            } catch {
-                print("Not able to load image")
-            }
-        }
-        return nil
-    }
+    
     func startFinding() {
         
 //        UIView.animate(withDuration: 0.7, delay: 0, options: [.repeat, .autoreverse], animations: {
@@ -354,19 +343,19 @@ extension CachingViewController {
                         guard let photoUrl = URL(string: "\(self.folderURL)\(photo.filePath)") else { print("WRONG URL!!!!"); return }
                         
                         
-                        guard let photoImage = self.getImageFromDir(photo.filePath) else { print("WRONG IMAGE!!!!"); return }
-                        
-                        
-                        let width = photoImage.size.width
-                        let height = photoImage.size.height
-                        
-                        self.photoSize = CGSize(width: width, height: height)
-                        
-                        print("WIDTH: \(width), height: \(height)")
-//                        self.sizeOfPixelBufferFast = CGSize(width: height, height: width)
-                        //print(width)
-                        //print(height)
-                        self.aspectRatioWidthOverHeight = width / height
+//                        guard let photoImage = photoUrl.absoluteString.getImageFromDir() else { print("WRONG IMAGE!!!!"); return }
+//
+//
+//                        let width = photoImage.size.width
+//                        let height = photoImage.size.height
+//
+//                        self.photoSize = CGSize(width: width, height: height)
+//
+//                        print("WIDTH: \(width), height: \(height)")
+////                        self.sizeOfPixelBufferFast = CGSize(width: height, height: width)
+//                        //print(width)
+//                        //print(height)
+//                        self.aspectRatioWidthOverHeight = width / height
 //                        if self.aspectRatioWidthOverHeight != CGFloat(0) {
 ////                            self.aspectRatioSucceeded = true
 //                        }
@@ -568,5 +557,20 @@ extension CachingViewController {
         
         numberCachedLabel.text = "0/\(photos.count) photos cached"
         
+    }
+}
+
+extension String {
+    func getImageFromDir() -> UIImage? {
+
+        if let fileURL = URL(string: self) {
+            do {
+                let imageData = try Data(contentsOf: fileURL)
+                return UIImage(data: imageData)
+            } catch {
+                print("Not able to load image")
+            }
+        }
+        return nil
     }
 }

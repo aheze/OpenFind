@@ -9,13 +9,20 @@
 import UIKit
 import SwiftEntryKit
 import RealmSwift
+import SnapKit
 
 
 protocol ReturnSortedTerms: class {
     func pause(pause: Bool)
     func returnTerms(stringToListR: [String: EditableFindList], currentSearchFindListR: EditableFindList, currentListsSharedFindListR: EditableFindList, currentSearchAndListSharedFindListR: EditableFindList, currentMatchStringsR: [String], matchToColorsR: [String: [CGColor]])
     func startedEditing(start: Bool)
+    func pressedReturn()
+    func triedToEdit()
+    
+    func hereAreCurrentLists(currentSelected: [EditableFindList], currentText: String)
 }
+
+//protocol Dis
 class FindBar: UIView, UITextFieldDelegate {
     
     let deviceSize = UIScreen.main.bounds.size
@@ -24,6 +31,11 @@ class FindBar: UIView, UITextFieldDelegate {
     var listCategories: Results<FindList>?
     var editableListCategories = [EditableFindList]()
     var selectedLists = [EditableFindList]()
+    
+    var highlightColor = "00aeef"
+    
+    var searchDisabled = false
+    
     
     @IBOutlet weak var warningView: UIView!
     
@@ -115,7 +127,6 @@ class FindBar: UIView, UITextFieldDelegate {
     //    @IBOutlet weak var searchBar: UISearchBar!
     
     weak var injectListDelegate: InjectLists?
-    
     weak var returnTerms: ReturnSortedTerms?
     
     required init?(coder aDecoder: NSCoder) {
@@ -140,7 +151,10 @@ class FindBar: UIView, UITextFieldDelegate {
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
         loadListsRealm()
+        
+        
         
         let toolbar = ListToolBar()
         toolbar.frame.size = CGSize(width: deviceSize.width, height: 80)
@@ -180,6 +194,95 @@ class FindBar: UIView, UITextFieldDelegate {
     
 }
 
+extension FindBar: ChangeFindBar {
+    
+    
+    func change(type: String) {
+        switch type {
+        case "Disable":
+            print("siable")
+            DispatchQueue.main.async {
+                self.searchField.backgroundColor = UIColor(named: "Gray2")
+                self.searchDisabled = true
+            }
+        case "Enable":
+            DispatchQueue.main.async {
+                self.searchField.backgroundColor = UIColor(named: "Gray1")
+                self.searchDisabled = false
+            }
+        case "GetLists":
+            print("GET LISTS!!!")
+            returnTerms?.hereAreCurrentLists(currentSelected: selectedLists, currentText: searchField.text ?? "")
+//            self.searchFiel
+        default:
+            print("WRONGGGG")
+            
+        }
+    }
+    
+    func giveLists(lists: [EditableFindList], searchText: String) {
+        searchField.text = searchText
+        
+        print("RECIEVES!!! \(lists)")
+        selectedLists = lists
+        var notSelectedLists = [EditableFindList]()
+        var selectedOrderIDs = [Int]()
+        for list in lists {
+            selectedOrderIDs.append(list.orderIdentifier)
+        }
+        
+        for list in editableListCategories {
+            if !selectedOrderIDs.contains(list.orderIdentifier) {
+                notSelectedLists.append(list)
+                print("YEYEYE")
+            } else {
+                print("ONNONO")
+            }
+        }
+        print("COUNT:::: NOT::: \(notSelectedLists.count)")
+        injectListDelegate?.resetWithLists(lists: notSelectedLists)
+        switch selectedLists.count {
+        case 0:
+            print("nothing")
+            searchLeftC.constant = 16
+//                warningWidth.constant = searchField.frame.size.width - 67
+        case 1:
+            print("1")
+//                collViewWidthC.constant = 50
+            searchLeftC.constant = 35 + 3 + 16
+//            warningWidth.constant = searchField.frame.size.width - 67
+        case 2:
+//                collViewWidthC.constant = 73
+            searchLeftC.constant = 73 + 3 + 16
+        case 3:
+//                collViewWidthC.constant = 111
+            searchLeftC.constant = 111 + 3 + 16
+        default:
+//                print("default")
+//                collViewWidthC.constant = 111
+            let availibleWidth = contentView.frame.width - 127
+            //                layout = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+            //            flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+            //            searchCollectionRightC.constant = availibleWidth
+                        collViewRightC.constant = availibleWidth
+            searchLeftC.constant = 111 + 3 + 16
+        }
+        UIView.animate(withDuration: 0.3, animations: {
+            self.layoutIfNeeded()
+        })
+    
+        if hasExpandedAlert == true {
+            warningWidth.constant = searchField.frame.size.width
+            UIView.animate(withDuration: 0.3, animations: {
+                self.layoutIfNeeded()
+            })
+        }
+        collectionView.reloadData()
+    }
+    
+    
+}
+
 extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -187,51 +290,55 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if searchActive == true {
-            let list = selectedLists[indexPath.item]
-            selectedLists.remove(object: list)
-            collectionView.deleteItems(at: [indexPath])
-            injectListDelegate?.addList(list: list)
-            sortSearchTerms()
-            
-         switch selectedLists.count {
-            case 0:
-                print("nothing")
-                searchLeftC.constant = 16
-//                warningWidth.constant = searchField.frame.size.width - 67
-            case 1:
-                print("1")
-//                collViewWidthC.constant = 50
-                searchLeftC.constant = 35 + 3 + 16
-//            warningWidth.constant = searchField.frame.size.width - 67
-            case 2:
-//                collViewWidthC.constant = 73
-                searchLeftC.constant = 73 + 3 + 16
-            case 3:
-//                collViewWidthC.constant = 111
-                searchLeftC.constant = 111 + 3 + 16
-            default:
-//                print("default")
-//                collViewWidthC.constant = 111
-                let availibleWidth = contentView.frame.width - 127
-                //                layout = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
-                //            flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
-                //            searchCollectionRightC.constant = availibleWidth
-                            collViewRightC.constant = availibleWidth
-                searchLeftC.constant = 111 + 3 + 16
-            }
-            UIView.animate(withDuration: 0.3, animations: {
-                self.layoutIfNeeded()
-            })
-        
-            if hasExpandedAlert == true {
-                warningWidth.constant = searchField.frame.size.width
+        if searchDisabled == false {
+            if searchActive == true {
+                let list = selectedLists[indexPath.item]
+                selectedLists.remove(object: list)
+                collectionView.deleteItems(at: [indexPath])
+                injectListDelegate?.addList(list: list)
+                sortSearchTerms()
+                
+             switch selectedLists.count {
+                case 0:
+                    print("nothing")
+                    searchLeftC.constant = 16
+    //                warningWidth.constant = searchField.frame.size.width - 67
+                case 1:
+                    print("1")
+    //                collViewWidthC.constant = 50
+                    searchLeftC.constant = 35 + 3 + 16
+    //            warningWidth.constant = searchField.frame.size.width - 67
+                case 2:
+    //                collViewWidthC.constant = 73
+                    searchLeftC.constant = 73 + 3 + 16
+                case 3:
+    //                collViewWidthC.constant = 111
+                    searchLeftC.constant = 111 + 3 + 16
+                default:
+    //                print("default")
+    //                collViewWidthC.constant = 111
+                    let availibleWidth = contentView.frame.width - 127
+                    //                layout = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+                    //            flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+                    //            searchCollectionRightC.constant = availibleWidth
+                                collViewRightC.constant = availibleWidth
+                    searchLeftC.constant = 111 + 3 + 16
+                }
                 UIView.animate(withDuration: 0.3, animations: {
                     self.layoutIfNeeded()
                 })
+            
+                if hasExpandedAlert == true {
+                    warningWidth.constant = searchField.frame.size.width
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.layoutIfNeeded()
+                    })
+                }
+            } else {
+                searchField.becomeFirstResponder()
             }
         } else {
-            searchField.becomeFirstResponder()
+            returnTerms?.triedToEdit()
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -320,13 +427,30 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         searchActive = true
         returnTerms?.startedEditing(start: true)
     }
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        searchActive = false
-        print("ENDEDIT")
-        returnTerms?.startedEditing(start: false)
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if searchDisabled == false {
+            return true
+        } else {
+            returnTerms?.triedToEdit()
+            return false
+        }
     }
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        searchActive = false
+//        print("ENDEDIT")
+//        returnTerms?.startedEditing(start: false)
+//    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if stringToList.count != 0 {
+            textField.resignFirstResponder()
+//            print("Return hsdkjf")
+            returnTerms?.pressedReturn()
+        }
+        return true
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        print("CHANGE!!")
+        print("CHANGE!! now")
         if let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {
             let splits = updatedString.components(separatedBy: "\u{2022}")
             let uniqueSplits = splits.uniques
@@ -359,7 +483,11 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
                 searchField.text = "\(searchText)\u{2022}"
             }
         case .done:
-            self.endEditing(true)
+            searchActive = false
+            print("END   EDIT")
+            searchField.resignFirstResponder()
+            returnTerms?.startedEditing(start: false)
+//            self.endEditing(true)
         }
     }
     func removeAllLists() {
@@ -478,15 +606,24 @@ extension FindBar {
             }
         }
         duplicatedStrings = duplicatedStrings.uniques
+        
+        print("DUP STRINGA: \(duplicatedStrings)")
         cameAcrossSearchFieldText = cameAcrossSearchFieldText.uniques
+        
+        print("Search text. \(cameAcrossSearchFieldText)")
         for list in selectedLists {
             for match in list.contents {
+                let matchColor = UIColor(hexString: (list.iconColorName)).cgColor
+                
                 if !duplicatedStrings.contains(match.lowercased()) && !cameAcrossSearchFieldText.contains(match.lowercased()) {
                     stringToList[match.lowercased()] = list
+                    matchToColors[match.lowercased()] = [matchColor]
                 } else {
-                    let matchColor = UIColor(hexString: (list.iconColorName)).cgColor
+                    
+                    
+                    
                     if matchToColors[match.lowercased()] == nil {
-                            matchToColors[match.lowercased(), default: [CGColor]()].append(matchColor)
+                            matchToColors[match.lowercased()] = [matchColor]
 //                        }
                     } else {
                         if !(matchToColors[match.lowercased()]?.contains(matchColor))! {
@@ -500,34 +637,37 @@ extension FindBar {
 //        print("SEARCH sdsfARR: \(arrayOfSearch)")
         var newSearch = [String]()
         for match in arrayOfSearch {
-            if match != "" {
+            if match != "" && !cameAcrossSearchFieldText.contains(match) && !duplicatedStrings.contains(match) {
                 newSearch.append(match)
             }
         }
         arrayOfSearch = newSearch
         
         let searchList = EditableFindList()
-        searchList.descriptionOfList = "Search Array List +0-109028304798614"
+//        searchList.descriptionOfList = "Search Array List +0-109028304798614"
         for match in arrayOfSearch {
             stringToList[match] = searchList
+            matchToColors[match] = [UIColor(hexString: highlightColor).cgColor]
         }
         
         let sharedList = EditableFindList()
-        sharedList.descriptionOfList = "Shared Lists +0-109028304798614"
+//        sharedList.descriptionOfList = "Shared Lists +0-109028304798614"
         for match in duplicatedStrings {
             stringToList[match] = sharedList
         }
         
         let textShareList = EditableFindList()
-        textShareList.descriptionOfList = "Shared Text Lists +0-109028304798614"
+//        textShareList.descriptionOfList = "Shared Text Lists +0-109028304798614"
         for match in cameAcrossSearchFieldText {
             stringToList[match] = textShareList
+            let cgColor = UIColor(hexString: highlightColor).cgColor
+            matchToColors[match, default: [CGColor]()].append(cgColor)
         }
         currentMatchStrings += arrayOfSearch
         currentMatchStrings = currentMatchStrings.uniques
         
         
-//        print("stringToList:\(stringToList), currentSearchFindListR:\(currentSearchFindList), currentListsSharedFindListR:\(currentListsSharedFindList), currentSearchAndListSharedFindListR:\(currentSearchAndListSharedFindList), currentMatchStringsR:\(currentMatchStrings), matchToColorsR:\(matchToColors)")
+        print("GIVE!!!   stringToList:\(stringToList), currentSearchFindListR:\(currentSearchFindList), currentListsSharedFindListR:\(currentListsSharedFindList), currentSearchAndListSharedFindListR:\(currentSearchAndListSharedFindList), currentMatchStringsR:\(currentMatchStrings), matchToColorsR:\(matchToColors)")
         returnTerms?.returnTerms(stringToListR: stringToList, currentSearchFindListR: currentSearchFindList, currentListsSharedFindListR: currentListsSharedFindList, currentSearchAndListSharedFindListR: currentSearchAndListSharedFindList, currentMatchStringsR: currentMatchStrings, matchToColorsR: matchToColors)
 
     }
@@ -546,10 +686,11 @@ class SearchCollectionCell: UICollectionViewCell {
 //        imageView.textAlignment = .center
         contentView.addSubview(imageView)
 //        print("frameSize: \(frame)")
-//        imageView.snp.makeConstraints { (make) in
-//            make.edges.equalToSuperview()
+        imageView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 3.5, left: 3.5, bottom: 3.5, right: 3.5))
+            
 //            make.size.equalTo(CGSize(width: 35, height: 35))
-//        }
+        }
 //        self.layoutIfNeeded()
         
     }

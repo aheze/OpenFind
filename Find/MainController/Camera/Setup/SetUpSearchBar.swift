@@ -644,10 +644,11 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         
         currentMatchStrings += arrayOfSearch
         currentMatchStrings = currentMatchStrings.uniques
+        //        arrayOfMatches += containedList
         
-//        print("stringToList:\(stringToList), currentSearchFindListR:\(currentSearchFindList), currentListsSharedFindListR:\(currentListsSharedFindList), currentSearchAndListSharedFindListR:\(currentSearchAndListSharedFindList), currentMatchStringsR:\(currentMatchStrings), matchToColorsR:\(matchToColors)")
-//        arrayOfMatches += containedList
-//        print("Total Match Strings: \(currentMatchStrings)")
+        print("stringToList:\(stringToList), currentSearchFindListR:\(currentSearchFindList), currentListsSharedFindListR:\(currentListsSharedFindList), currentSearchAndListSharedFindListR:\(currentSearchAndListSharedFindList), currentMatchStringsR:\(currentMatchStrings), matchToColorsR:\(matchToColors)")
+
+        print("Total Match Strings: \(currentMatchStrings)")
         
     }
     func convertToUIImage(buffer: CVPixelBuffer) -> UIImage? {

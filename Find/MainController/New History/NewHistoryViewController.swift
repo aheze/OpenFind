@@ -357,10 +357,10 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                           animated flag: Bool,
                           completion: (() -> Void)? = nil) {
         if viewControllerToPresent.title == "PhotoPageContainerViewController" {
-            print("Photo Page Con")
+//            print("Photo Page Con")
             viewControllerToPresent.modalPresentationStyle = .fullScreen
         } else {
-        print("normal")
+//        print("normal")
         }
       super.present(viewControllerToPresent, animated: flag, completion: completion)
     }
@@ -1445,3 +1445,5 @@ extension URL {
         return image
     }
 }
+
+

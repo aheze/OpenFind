@@ -227,6 +227,8 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             urlString = URL(string: "\(folderURL)\(filePath)")
             
             vc.matchToColors = matchToColors
+            
+            print("MATCHS: \(matchToColors)")
             vc.highlights = model.components
             
         } else {

@@ -66,12 +66,18 @@ class PhotoZoomViewController: UIViewController {
 //        print("HIGH: \(highlights)")
         print("Frame: \(mainContentView.frame)")
         
+        print("MATCHS zoom: \(matchToColors)")
+        print("MATCH COLORS: \(matchToColors)")
        scaleHighlights()
         
         
     }
     func scaleInHighlight(component: Component) {
+        
+//        print("COMPONENT; \(component.text)")
         //print("scale")
+        guard let colors = matchToColors[component.text] else { print("NO COLORS! scalee"); return }
+        print("COLROS zoom text: \(component.text).. \(colors)")
         DispatchQueue.main.async {
             
             let layer = CAShapeLayer()
@@ -85,9 +91,9 @@ class PhotoZoomViewController: UIViewController {
             newLayer.lineCap = .round
             
             
-            var newFillColor = UIColor()
-            if component.isSpecialType == "Shared List" {
-                
+//            var newFillColor = UIColor()
+            if colors.count > 1 {
+                print("shared list")
                 var newRect = layer.frame
                 newRect.origin.x += 1.5
                 newRect.origin.y += 1.5
@@ -107,7 +113,7 @@ class PhotoZoomViewController: UIViewController {
 //                    print("gra colors \(gradientColors)")
                     gradient.colors = gradientColors
                     if let firstColor = gradientColors.first {
-                        print("sdfsdf")
+//                        print("sdfsdf")
                         layer.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3).cgColor
                     }
                     
@@ -121,50 +127,15 @@ class PhotoZoomViewController: UIViewController {
                 
                 layer.addSublayer(gradient)
 //                layer.backgroundColor = g
-            } else if component.isSpecialType == "Shared Text List" {
-//                newLayer.lineWidth = 8
-                var newRect = layer.frame
-                newRect.origin.x += 1.5
-                newRect.origin.y += 1.5
-//                newRect.size.width -= 3
-//                newRect.size.height -= 3
-                layer.frame.origin.x -= 1.5
-                layer.frame.origin.y -= 1.5
-                layer.frame.size.width += 3
-                layer.frame.size.height += 3
-                newLayer.path = UIBezierPath(roundedRect: newRect, cornerRadius: component.height / 4.5).cgPath
-                
-                let gradient = CAGradientLayer()
-                gradient.frame = layer.bounds
-//                gradient.colors = [#colorLiteral(red: 0.3411764706, green: 0.6235294118, blue: 0.168627451, alpha: 1).cgColor, UIColor(hexString: self.highlightColor).cgColor]
-                
-                if let gradientColors = self.matchToColors[component.text] {
-//                    print("HAS GRA")
-                    var newColors = gradientColors
-                    let newColor = UIColor(hexString: self.highlightColor)
-                    
-                    newColors.append(newColor.cgColor)
-                    gradient.colors = newColors
-                    
-                    if let firstColor = gradientColors.first {
-                        print("sdfsdf")
-                        layer.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3).cgColor
-                    }
-//                                    gradient.colors = [#colorLiteral(red: 0.3411764706, green: 0.6235294118, blue: 0.168627451, alpha: 1).cgColor, UIColor(hexString: self.highlightColor).cgColor]
-//                    print("new gra colors \(newColors)")
-                }
-                
-                gradient.startPoint = CGPoint(x: 0, y: 0.5)
-                gradient.endPoint = CGPoint(x: 1, y: 0.5)
-                gradient.mask = newLayer
-                newLayer.fillColor = UIColor.clear.cgColor
-                newLayer.strokeColor = UIColor.black.cgColor
-                layer.addSublayer(gradient)
-                
             } else {
-                newLayer.fillColor = UIColor(hexString: component.colors.first ?? "ffffff").withAlphaComponent(0.3).cgColor
-                newLayer.strokeColor = UIColor(hexString: component.colors.first ?? "ffffff").cgColor
-                layer.addSublayer(newLayer)
+                
+//                print("Normal")
+                
+                if let firstColor = colors.first {
+                    newLayer.fillColor = firstColor.copy(alpha: 0.3)
+                    newLayer.strokeColor = firstColor
+                    layer.addSublayer(newLayer)
+                }
             }
             
             let newView = UIView(frame: CGRect(x: component.x, y: component.y, width: component.width, height: component.height))
@@ -185,7 +156,7 @@ class PhotoZoomViewController: UIViewController {
             component.baseView = newView
             component.changed = true
             
-            self.layerScaleAnimation(layer: newLayer, duration: 0.2, fromValue: 1.2, toValue: 1)
+//            self.layerScaleAnimation(layer: newLayer, duration: 0.2, fromValue: 1.2, toValue: 1)
         }
     }
     
@@ -234,53 +205,28 @@ class PhotoZoomViewController: UIViewController {
     //            print(newWidth)
     //            print(newHeight)
             
-            print("OLD: x: \(comp.x), y: \(comp.y), width: \(comp.width), height: \(comp.height)")
-            print("x: \(newX), y: \(newY), width: \(newWidth), height: \(newHeight)")
+//            print("OLD: x: \(comp.x), y: \(comp.y), width: \(comp.width), height: \(comp.height)")
+//            print("x: \(newX), y: \(newY), width: \(newWidth), height: \(newHeight)")
             
             
     //            comp.x = newX
     //            comp.y = newY
     //            comp.width = newWidth
     //            comp.height = newHeight
-            
-            let compToScale = Component()
-            compToScale.x = newX
-            compToScale.y = newY
-            compToScale.width = newWidth
-            compToScale.height = newHeight
-            compToScale.colors = comp.colors
-            compToScale.isSpecialType = comp.isSpecialType
-            
-    //            comp.width *= imageSize.width
-    //            comp.y *= imageSize.height
-    //            comp.height *= imageSize.height
-            scaleInHighlight(component: compToScale)
+            if newHeight <= 200 {
+                let compToScale = Component()
+                compToScale.x = newX - 6
+                compToScale.y = newY - 3
+                compToScale.width = newWidth + 12
+                compToScale.height = newHeight + 6
+                compToScale.colors = comp.colors
+                compToScale.text = comp.text
+                compToScale.isSpecialType = comp.isSpecialType
+                scaleInHighlight(component: compToScale)
+            }
 
         }
     }
-//    override func viewSafeAreaInsetsDidChange() {
-//
-//        //When this view's safeAreaInsets change, propagate this information
-//        //to the previous ViewController so the collectionView contentInsets
-//        //can be updated accordingly. This is necessary in order to properly
-//        //calculate the frame position for the dismiss (swipe down) animation
-//
-//        if #available(iOS 11, *) {
-//
-//            //Get the parent view controller (ViewController) from the navigation controller
-//            guard let parentVC = self.navigationController?.viewControllers.first as? ViewController else {
-//                return
-//            }
-//
-//            //Update the ViewController's left and right local safeAreaInset variables
-//            //with the safeAreaInsets for this current view. These will be used to
-//            //update the contentInsets of the collectionView inside ViewController
-//            parentVC.currentLeftSafeAreaInset = self.view.safeAreaInsets.left
-//            parentVC.currentRightSafeAreaInset = self.view.safeAreaInsets.right
-//
-//        }
-//
-//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
