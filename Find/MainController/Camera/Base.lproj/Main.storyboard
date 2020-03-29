@@ -2854,7 +2854,7 @@
         <image name="New Menu" width="512" height="512"/>
         <image name="NotCachedThin" width="100" height="100"/>
         <image name="Xbutton" width="300" height="300"/>
-        <image name="arrow.down" catalog="system" width="32" height="32"/>
+        <image name="arrow.down" catalog="system" width="60" height="64"/>
         <image name="checkmark" catalog="system" width="64" height="56"/>
         <image name="chevron.right" catalog="system" width="48" height="64"/>
         <image name="heart" catalog="system" width="64" height="54"/>

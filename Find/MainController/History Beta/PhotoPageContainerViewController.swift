@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftEntryKit
+import SPAlert
 
 protocol PhotoPageContainerViewControllerDelegate: class {
     func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int)
@@ -20,7 +21,10 @@ protocol ChangedSearchTermsFromZoom: class {
 }
 
 protocol ZoomStateChanged: class {
-    func changedState(type: String)
+    func changedState(type: String, index: Int)
+}
+protocol ZoomCached: class {
+    func cached(cached: Bool, photo: EditableHistoryModel, index: Int)
 }
 
 protocol ZoomDeletedPhoto: class {
@@ -49,6 +53,8 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     @IBOutlet weak var blurView: UIVisualEffectView!
     
     weak var changeModel: ZoomStateChanged?
+    weak var doneAnimatingSEK: DoneAnimatingSEK?
+    weak var changeCache: ZoomCached?
     
     @IBOutlet weak var findButton: UIButton!
     @IBOutlet weak var heartButton: UIButton!
@@ -64,17 +70,107 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             let newImage = UIImage(systemName: "heart")
             heartButton.setImage(newImage, for: .normal)
             heartButton.tintColor = UIColor(hexString: "5287B6")
-            changeModel?.changedState(type: "Unheart")
+            changeModel?.changedState(type: "Unheart", index: currentIndex)
         } else {
             photoModels[currentIndex].isHearted = true
             let newImage = UIImage(systemName: "heart.fill")
             heartButton.setImage(newImage, for: .normal)
             heartButton.tintColor = UIColor(named: "FeedbackGradientRight")
-            changeModel?.changedState(type: "Heart")
+            changeModel?.changedState(type: "Heart", index: currentIndex)
         }
     }
     
     @IBAction func cachePressed(_ sender: Any) {
+        if photoModels[currentIndex].isDeepSearched == false {
+            var attributes = EKAttributes.centerFloat
+            attributes.displayDuration = .infinity
+            attributes.entryInteraction = .absorbTouches
+            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+            attributes.entryBackground = .color(color: .white)
+            attributes.screenInteraction = .absorbTouches
+            attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(300))
+            attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+            attributes.lifecycleEvents.didAppear = {
+                self.doneAnimatingSEK?.doneAnimating()
+            }
+           
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController
+            
+            
+            
+            let singleItem = photoModels[currentIndex]
+            
+            let newPhoto = EditableHistoryModel()
+            newPhoto.filePath = singleItem.filePath
+            newPhoto.dateCreated = singleItem.dateCreated
+            newPhoto.isHearted = singleItem.isHearted
+            newPhoto.isDeepSearched = singleItem.isDeepSearched
+            let editablePhotoArray = [newPhoto]
+            
+            cacheController.folderURL = folderURL
+            cacheController.photos = editablePhotoArray
+            cacheController.finishedCache = self
+            self.doneAnimatingSEK = cacheController
+            cacheController.view.layer.cornerRadius = 10
+            
+            
+            SwiftEntryKit.display(entry: cacheController, using: attributes)
+            
+        } else { ///UNCACHE
+            var attributes = EKAttributes.centerFloat
+            attributes.displayDuration = .infinity
+            attributes.entryInteraction = .absorbTouches
+            attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+            attributes.screenInteraction = .absorbTouches
+            
+            let displayMode = EKAttributes.DisplayMode.inferred
+            let title = EKProperty.LabelContent(text: "Delete the cache?", style: .init(font: UIFont.systemFont(ofSize: 20, weight: .bold), color: .white, displayMode: displayMode))
+            let description = EKProperty.LabelContent(text: "Caching takes a long time, but deleting will save a little memory", style: .init(font: UIFont.systemFont(ofSize: 14, weight: .regular), color: .white,      displayMode: displayMode))
+            let image = EKProperty.ImageContent(  imageName: "WhiteWarningShield",  displayMode: displayMode,  size: CGSize(width: 35, height: 35),  contentMode: .scaleAspectFit  )
+            let simpleMessage = EKSimpleMessage(  image: image,  title: title,  description: description )
+            let buttonFont = UIFont.systemFont(ofSize: 20, weight: .bold)
+            let okButtonLabelStyle = EKProperty.LabelStyle(  font: UIFont.systemFont(ofSize: 20, weight: .bold),  color: .white,  displayMode: displayMode )
+            let okButtonLabel = EKProperty.LabelContent(  text: "Cancel",  style: okButtonLabelStyle )
+            let closeButtonLabelStyle = EKProperty.LabelStyle(  font: buttonFont,  color: EKColor(#colorLiteral(red: 1, green: 0.9675828359, blue: 0.9005832124, alpha: 1)),  displayMode: displayMode)
+            let closeButtonLabel = EKProperty.LabelContent(  text: "Delete",  style: closeButtonLabelStyle )
+       
+            let okButton = EKProperty.ButtonContent(
+                label: okButtonLabel,
+                backgroundColor: .clear,
+                highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05)) {
+                    SwiftEntryKit.dismiss()
+            }
+            let closeButton = EKProperty.ButtonContent(
+                label: closeButtonLabel,
+                backgroundColor: .clear,
+                highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05),
+                displayMode: displayMode) { [unowned self] in
+                print("DELETING CACHE")
+                    let tempModel = EditableHistoryModel()
+                    self.changeCache?.cached(cached: false, photo: tempModel, index: self.currentIndex)
+                    self.cacheButton.setImage(UIImage(named: "NotCachedThin"), for: .normal)
+                    self.cacheButton.tintColor = UIColor(hexString: "5287B6")
+                    self.photoModels[self.currentIndex].isDeepSearched = false
+                    
+                    let alertView = SPAlertView(title: "Deleted this photo's cache!", message: "Tap to dismiss", preset: SPAlertPreset.done)
+                    alertView.duration = 4
+                    alertView.present()
+                    
+                    SwiftEntryKit.dismiss()
+                   // self.doneWithEditingGeneral(overrideDone: true)
+            }
+            let buttonsBarContent = EKProperty.ButtonBarContent(  with: okButton, closeButton,  separatorColor: Color.Gray.light,  buttonHeight: 60,  displayMode: displayMode,  expandAnimatedly: true  )
+            let alertMessage = EKAlertMessage(  simpleMessage: simpleMessage,  imagePosition: .left,  buttonBarContent: buttonsBarContent
+            )
+            let contentView = EKAlertMessageView(with: alertMessage)
+            contentView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
+            contentView.layer.cornerRadius = 10
+            SwiftEntryKit.display(entry: contentView, using: attributes)
+        }
     }
     
     @IBAction func deletePressed(_ sender: Any) {
@@ -290,6 +386,13 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
                 let newImage = UIImage(systemName: "heart")
                 heartButton.setImage(newImage, for: .normal)
                 heartButton.tintColor = UIColor(hexString: "5287B6")
+            }
+            if photoModels[currentIndex].isDeepSearched == true {
+                cacheButton.setImage(UIImage(named: "YesCachedThin"), for: .normal)
+                cacheButton.tintColor = UIColor(named: "FeedbackGradientRight")
+            } else {
+                cacheButton.setImage(UIImage(named: "NotCachedThin"), for: .normal)
+                cacheButton.tintColor = UIColor(hexString: "5287B6")
             }
         }
     }
@@ -533,6 +636,14 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
                 heartButton.setImage(newImage, for: .normal)
                 heartButton.tintColor = UIColor(hexString: "5287B6")
             }
+            if photoModels[currentIndex].isDeepSearched == true {
+                cacheButton.setImage(UIImage(named: "YesCachedThin"), for: .normal)
+                cacheButton.tintColor = UIColor(named: "FeedbackGradientRight")
+            } else {
+                cacheButton.setImage(UIImage(named: "NotCachedThin"), for: .normal)
+                cacheButton.tintColor = UIColor(hexString: "5287B6")
+            }
+            
         }
         
     }
@@ -563,4 +674,33 @@ extension PhotoPageContainerViewController: ZoomAnimatorDelegate {
     func referenceImageViewFrameInTransitioningView(for zoomAnimator: ZoomAnimator) -> CGRect? {
         return self.currentViewController.scrollView.convert(self.currentViewController.mainContentView.frame, to: self.currentViewController.view)
     }
+}
+extension PhotoPageContainerViewController: ReturnCachedPhotos {
+    func giveCachedPhotos(photos: [EditableHistoryModel], popup: String) {
+        
+        photoModels[currentIndex].isDeepSearched = true
+        cacheButton.setImage(UIImage(named: "YesCachedThin"), for: .normal)
+        cacheButton.tintColor = UIColor(named: "FeedbackGradientRight")
+        
+        print("give")
+        if popup == "Keep" {
+            let alertView = SPAlertView(title: "Kept cached photos!", message: "Tap to dismiss", preset: SPAlertPreset.done)
+            alertView.duration = 4
+            alertView.present()
+        } else if popup == "Finished" {
+            let alertView = SPAlertView(title: "Caching done!", message: "Tap to dismiss", preset: SPAlertPreset.done)
+            alertView.duration = 4
+            alertView.present()
+            
+        }
+        if let firstPhoto = photos.first {
+            changeCache?.cached(cached: true, photo: firstPhoto, index: currentIndex)
+        } else {
+            print("NO PHOTO>>>>!")
+        }
+        
+    }
+    
+    
+    
 }

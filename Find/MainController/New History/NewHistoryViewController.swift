@@ -37,6 +37,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
  
     
     var aboutToBeCached = [HistoryModel]()
+    
 
 //    var presentingCache = false
     
@@ -58,11 +59,13 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     
     //let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     //private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+    
     private let itemsPerRow: CGFloat = 4
     
     //MARK:  Selection Variables
     //var indexPathsThatAreSelected = [IndexPath]()
 //    var fileUrlsSelected = [URL]()
+    var shouldCache = true
     var shouldHeart = true
     var indexPathsSelected = [IndexPath]() {
         didSet {
@@ -92,28 +95,45 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func checkForHearts() {
         var selectedHeartCount = 0
-            var selectedNotHeartCount = 0
-            for item in indexPathsSelected {
-                let itemToEdit = indexToData[item.section]
+        var selectedNotHeartCount = 0
+        
+        var selectedCacheCount = 0
+        var selectedNotCacheCount = 0
+        
+        for item in indexPathsSelected {
+            let itemToEdit = indexToData[item.section]
+            
+            if let singleItem = itemToEdit?[item.item] {///Not very clear but ok
                 
-                if let singleItem = itemToEdit?[item.item] {///Not very clear but ok
-                    
-                    if singleItem.isHearted == true {
-                        selectedHeartCount += 1
-                    } else {
-                        selectedNotHeartCount += 1
-                    }
+                if singleItem.isHearted == true {
+                    selectedHeartCount += 1
+                } else {
+                    selectedNotHeartCount += 1
+                }
+                
+                if singleItem.isDeepSearched == true {
+                    selectedCacheCount += 1
+                } else {
+                    selectedNotCacheCount += 1
                 }
             }
+        }
 //            var shouldHeart = true
-            if selectedNotHeartCount >= selectedHeartCount {
-//                shouldHeart = false
-                shouldHeart = true
-                changeFloatDelegate?.changeFloat(to: "Unfill Heart")
-            } else {
-                changeFloatDelegate?.changeFloat(to: "Fill Heart")
-                shouldHeart = false
-            }
+        if selectedNotHeartCount >= selectedHeartCount {
+            shouldHeart = true
+            changeFloatDelegate?.changeFloat(to: "Unfill Heart")
+        } else {
+            changeFloatDelegate?.changeFloat(to: "Fill Heart")
+            shouldHeart = false
+        }
+        
+        if selectedNotCacheCount >= selectedCacheCount {
+            shouldCache = true
+            changeFloatDelegate?.changeFloat(to: "NotCached")
+        } else {
+            changeFloatDelegate?.changeFloat(to: "Cached")
+            shouldCache = false
+        }
     }
     var numberOfSelected = 0 {
         didSet {
@@ -612,6 +632,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 
                 mainContentVC.deletedPhoto = self
                 mainContentVC.changeModel = self
+                mainContentVC.changeCache = self
                 
                 if let photoCats = photoCategories {
                     var modelArray = [EditableHistoryModel]()
@@ -687,12 +708,22 @@ extension NewHistoryViewController: ReturnCachedPhotos {
                 for cachedPhoto in photos {
                     
                     if currentPhoto.dateCreated == cachedPhoto.dateCreated {
+                        
+//                        var contentsToDelete = [SingleHistoryContent]()
+//                        for cont in currentPhoto.contents {
+//                            contentsToDelete.append(cont)
+//                        }
+                        
 //                        print("EQUALS")
                         do {
                             try realm.write {
                                 currentPhoto.isDeepSearched = cachedPhoto.isDeepSearched
-                                currentPhoto.contents.removeAll()
+//                                currentPhoto.contents.removeAll()
+                                
+                                realm.delete(currentPhoto.contents)
+                                
                                 for cont in cachedPhoto.contents {
+                                    
                                     let realmContent = SingleHistoryContent()
                                     realmContent.text = cont.text
                                     realmContent.height = Double(cont.height)
@@ -779,7 +810,7 @@ extension NewHistoryViewController: ButtonPressed {
         var filePaths = [URL]()
         
         var alreadyCached = 0
-        var shouldCache = true
+//        var shouldCache = true
         var sectionsToDelete = [Int]()
         for selected in indexPathsSelected {
             let section = selected.section
@@ -799,9 +830,9 @@ extension NewHistoryViewController: ButtonPressed {
                 tempPhotos.append(photo)
             }
         }
-        if alreadyCached == tempPhotos.count {
-            shouldCache = false
-        }
+//        if alreadyCached == tempPhotos.count {
+//            shouldCache = false
+//        }
         for section in deleteFromSections {
             if sectionCounts[section.key] == section.value {
                 sectionsToDelete.append(section.key)
@@ -813,20 +844,6 @@ extension NewHistoryViewController: ButtonPressed {
             SwiftEntryKit.dismiss()
             performSegue(withIdentifier: "goToHistoryFind", sender: self)
         case "heart":
-            var selectedHeartCount = 0
-            var selectedNotHeartCount = 0
-            for item in indexPathsSelected {
-                let itemToEdit = indexToData[item.section]
-                
-                if let singleItem = itemToEdit?[item.item] {///Not very clear but ok
-                    
-                    if singleItem.isHearted == true {
-                        selectedHeartCount += 1
-                    } else {
-                        selectedNotHeartCount += 1
-                    }
-                }
-            }
             for item in indexPathsSelected {
                 let itemToEdit = indexToData[item.section]
                 if let singleItem = itemToEdit?[item.item] {
@@ -944,10 +961,10 @@ extension NewHistoryViewController: ButtonPressed {
                         newPhoto.dateCreated = singleItem.dateCreated
                         newPhoto.isHearted = singleItem.isHearted
                         newPhoto.isDeepSearched = singleItem.isDeepSearched
-                        var newContents = [SingleHistoryContent]()
-                        for content in singleItem.contents {
-                            newContents.append(content)
-                        }
+//                        var newContents = [SingleHistoryContent]()
+//                        for content in singleItem.contents {
+//                            newContents.append(content)
+//                        }
                         editablePhotoArray.append(newPhoto)
                     }
                 }
@@ -965,14 +982,26 @@ extension NewHistoryViewController: ButtonPressed {
                 
                 SwiftEntryKit.display(entry: cacheController, using: attributes)
             } else {
-                let alertView = SPAlertView(title: "Done caching!", message: "All selected photos were already cached", preset: SPAlertPreset.done)
-                alertView.duration = 2.6
-                alertView.present()
+                var arrayOfUncache = [Int]()
+                for indexP in indexPathsSelected {
+                    if let index = indexPathToIndex[indexP] {
+                        arrayOfUncache.append(index)
+                    }
+                }
+                let alert = UIAlertController(title: "Delete these photos' caches?", message: "Caching again takes a long time", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
+                    self.uncachePhotos(at: arrayOfUncache)
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
                 
-                selectButtonSelected = false
-                fadeSelectOptions(fadeOut: "fade out")
-                SwiftEntryKit.dismiss()
-                collectionView.allowsMultipleSelection = false
+//                let alertView = SPAlertView(title: "Done caching!", message: "All selected photos were already cached", preset: SPAlertPreset.done)
+//                alertView.duration = 2.6
+//                alertView.present()
+//
+//                selectButtonSelected = false
+//                fadeSelectOptions(fadeOut: "fade out")
+//                SwiftEntryKit.dismiss()
+//                collectionView.allowsMultipleSelection = false
             }
             
         default: print("unknown, bad string")
@@ -1004,14 +1033,8 @@ extension NewHistoryViewController: ButtonPressed {
                         realmContent.width = CGFloat(cont.width)
                         realmContent.x = CGFloat(cont.x)
                         realmContent.y = CGFloat(cont.y)
-    //                                    realmContent.
-    //                                    realnContent.
                         newHistModel.contents.append(realmContent)
                     }
-//                    for cont in singleItem.contents {
-//                        newHistModel.contents.append(cont)
-//                    }
-                    
                     modelArray.append(newHistModel)
                 }
             }
@@ -1022,21 +1045,8 @@ extension NewHistoryViewController: ButtonPressed {
                 print(edit.contents)
             }
             
-            
             var tempPhotos = [HistoryModel]()
-            var deleteFromSections = [Int: Int]()
-            var filePaths = [URL]()
-            
-//            var alreadyCached = 0
-//            var shouldCache = true
-//            var sectionsToDelete = [Int]()
             for selected in indexPathsSelected {
-//                let section = selected.section
-//                if deleteFromSections[section] == nil {
-//                    deleteFromSections[section] = 1
-//                } else {
-//                    deleteFromSections[section]! += 1
-//                }
                 if let photoCat = indexToData[selected.section] {
                     let photo = photoCat[selected.item]
                     tempPhotos.append(photo)
@@ -1055,6 +1065,34 @@ extension NewHistoryViewController: ButtonPressed {
 
 
 extension NewHistoryViewController {
+    
+    func uncachePhotos(at: [Int]) {
+        
+        if let photoCats = photoCategories {
+//            let deleteContents = [SingleHistoryContent]()
+            for index in at {
+                let realmPhoto = photoCats[index]
+                do {
+                    try realm.write {
+                        realm.delete(realmPhoto.contents)
+                        realmPhoto.isDeepSearched = false
+                    }
+                } catch {
+                    print("ERROR Changing CACHEHHE!! \(error)")
+                }
+            }
+            
+            getData()
+            
+            var indexPathsToReload = [IndexPath]()
+            for index in at {
+                if let indP = indexToIndexPath[index] {
+                    indexPathsToReload.append(indP)
+                }
+            }
+            collectionView.reloadItems(at: indexPathsToReload)
+        }
+    }
 
     func populateRealm() {
 //        print("POP")
@@ -1193,18 +1231,83 @@ extension Date {
     }
 }
 
-extension NewHistoryViewController: ZoomStateChanged {
+extension NewHistoryViewController: ZoomStateChanged, ZoomCached {
     
-    func changedState(type: String) {
+    
+    func cached(cached: Bool, photo: EditableHistoryModel, index: Int) {
+        if cached == true {
+            print("RECIEVE CACHE!!")
+            if let photoCats = photoCategories {
+                let origPhoto = photoCats[index]
+                if let indP = indexToIndexPath[index] {
+                    do {
+                        try realm.write {
+                            
+                            realm.delete(origPhoto.contents)
+                            
+                            origPhoto.isDeepSearched = true
+                            
+                            for cont in photo.contents {
+                                
+                                let realmContent = SingleHistoryContent()
+                                realmContent.text = cont.text
+                                realmContent.height = Double(cont.height)
+                                realmContent.width = Double(cont.width)
+                                realmContent.x = Double(cont.x)
+                                realmContent.y = Double(cont.y)
+                                
+                                origPhoto.contents.append(realmContent)
+                            }
+                            
+                        }
+                    } catch {
+                        print("ERROR Changing heart!! \(error)")
+                    }
+                    getData()
+                    collectionView.reloadItems(at: [indP])
+                }
+                
+            }
+        } else { ///UNCACHE
+            uncachePhotos(at: [index])
+        }
+    }
+    
+    
+    func changedState(type: String, index: Int) {
         switch type {
         case "Unheart":
-            print("UNHE")
+            if let photoCats = photoCategories {
+                let photo = photoCats[index]
+                if let indP = indexToIndexPath[index] {
+                    do {
+                        try realm.write {
+                            photo.isHearted = false
+                        }
+                    } catch {
+                        print("ERROR Changing heart!! \(error)")
+                    }
+                    getData()
+                    collectionView.reloadItems(at: [indP])
+                }
+                
+            }
         case "Heart":
-            print("HE")
-        case "Cache":
-            print("CE")
-        case "Uncache":
-            print("UnCAChE")
+            if let photoCats = photoCategories {
+                let photo = photoCats[index]
+                if let indP = indexToIndexPath[index] {
+                    do {
+                        try realm.write {
+                            photo.isHearted = true
+                        }
+                    } catch {
+                        print("ERROR Changing heart!! \(error)")
+                    }
+                    getData()
+                    collectionView.reloadItems(at: [indP])
+                }
+                
+            }
         default:
             print("WRONG DEFAUTL!!!")
         }

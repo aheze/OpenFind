@@ -841,7 +841,7 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
                     SwiftEntryKit.dismiss()
                    // self.doneWithEditingGeneral(overrideDone: true)
             }
-            let buttonsBarContent = EKProperty.ButtonBarContent(  with: closeButton, okButton,  separatorColor: Color.Gray.light,  buttonHeight: 60,  displayMode: displayMode,  expandAnimatedly: true  )
+            let buttonsBarContent = EKProperty.ButtonBarContent(  with: okButton, closeButton, separatorColor: Color.Gray.light,  buttonHeight: 60,  displayMode: displayMode,  expandAnimatedly: true  )
             let alertMessage = EKAlertMessage(  simpleMessage: simpleMessage,  imagePosition: .left,  buttonBarContent: buttonsBarContent
             )
             let contentView = EKAlertMessageView(with: alertMessage)
