@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import Vision
 
 protocol PhotoZoomViewControllerDelegate: class {
     func photoZoomViewController(_ photoZoomViewController: PhotoZoomViewController, scrollViewDidScroll scrollView: UIScrollView)
@@ -16,6 +17,11 @@ protocol PhotoZoomViewControllerDelegate: class {
 class PhotoZoomViewController: UIViewController {
     
     @IBOutlet weak var mainContentView: UIView!
+    
+    var ocrSearching = false
+    var folderURL = URL(fileURLWithPath: "", isDirectory: true)
+    
+    var deviceSize = UIScreen.main.bounds.size
     
     
     @IBOutlet weak var imageViewBottomConstraint: NSLayoutConstraint!
@@ -38,8 +44,12 @@ class PhotoZoomViewController: UIViewController {
     }
 
     var highlights = [Component]()
+//    var currentMatchStrings = [String]()
     var matchToColors = [String: [CGColor]]()
     var highlightColor = "00aeef"
+    
+    var photoComp = EditableHistoryModel()
+    
     
     var doubleTapGestureRecognizer: UITapGestureRecognizer!
     
@@ -64,10 +74,10 @@ class PhotoZoomViewController: UIViewController {
         self.view.addGestureRecognizer(self.doubleTapGestureRecognizer)
         
 //        print("HIGH: \(highlights)")
-        print("Frame: \(mainContentView.frame)")
-        
-        print("MATCHS zoom: \(matchToColors)")
-        print("MATCH COLORS: \(matchToColors)")
+//        print("Frame: \(mainContentView.frame)")
+//
+//        print("MATCHS zoom: \(matchToColors)")
+//        print("MATCH COLORS: \(matchToColors)")
        scaleHighlights()
         
         
@@ -286,5 +296,307 @@ extension PhotoZoomViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.delegate?.photoZoomViewController(self, scrollViewDidScroll: scrollView)
+    }
+}
+
+extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
+
+    
+    func returnTerms(matchToColorsR: [String : [CGColor]]) {
+        matchToColors = matchToColorsR
+    }
+    
+    func fastFind() {
+        
+        DispatchQueue.global(qos: .background).async {
+//            print("1")
+            var findModels = [FindModel]()
+    //        var heights = [CGFloat]()
+            
+    //        print(
+            let photo = self.photoComp
+            print("searching in photo")
+            var num = 0
+            
+//            let newMod = FindModel()
+            var newFastComponents = [Component]()
+//            newMod.photo = photo
+            
+//            var compMatches = [String: [ArrayOfMatchesInComp]]() ///COMPONENT to ranges
+            ///Cycle through each block of text. Each cont may be a line long.
+            for cont in photo.contents {
+//                var matchRanges = [ArrayOfMatchesInComp]()
+                var hasMatch = false
+                let lowercaseContText = cont.text.lowercased()
+                let individualCharacterWidth = CGFloat(cont.width) / CGFloat(lowercaseContText.count)
+                for match in self.matchToColors.keys {
+                    if lowercaseContText.contains(match) {
+                        hasMatch = true
+                        let finalW = individualCharacterWidth * CGFloat(match.count)
+                        let indicies = lowercaseContText.indicesOf(string: match)
+                        
+                        for index in indicies {
+                            num += 1
+                            let addedWidth = individualCharacterWidth * CGFloat(index)
+                            let finalX = CGFloat(cont.x) + addedWidth
+                            let newComponent = Component()
+                            
+                            newComponent.x = finalX
+                            newComponent.y = CGFloat(cont.y) - (CGFloat(cont.height))
+                            newComponent.width = finalW
+                            newComponent.height = CGFloat(cont.height)
+                            newComponent.text = match
+                            
+                            newFastComponents.append(newComponent)
+//
+//                            let newRangeObject = ArrayOfMatchesInComp()
+//                            newRangeObject.descriptionRange = index...index + match.count
+//                            newRangeObject.text = match
+//                            matchRanges.append(newRangeObject)
+                        }
+                    }
+                }
+          
+                
+            }
+            
+            self.highlights = newFastComponents
+//            newMod.numberOfMatches = num
+            
+            DispatchQueue.main.async {
+                self.scaleHighlights()
+//                photoComp = newMod
+                
+           
+            }
+            
+        }
+        
+    }
+    
+    func ocrFind(photo: EditableHistoryModel) {
+        ocrSearching = true
+        
+//        DispatchQueue.main.async {
+//            self.activityIndicator.startAnimating()
+//            self.histCenterC.constant = 13
+//            UIView.animate(withDuration: 0.12, animations: {
+//                self.view.layoutIfNeeded()
+//                self.progressView.alpha = 1
+//                self.progressView.setProgress(Float(0), animated: true)
+//            })
+//        }
+        
+        DispatchQueue.global(qos: .background).async {
+//            self.ocrPassCount = 0
+//            var number = 0
+            
+        
+                    
+    //                number += 1
+    //                    print("num: \(number)")
+    //                    let indP = IndexPath(item: number - 1, section: 0)
+                    
+//                    self.dispatchGroup.enter()
+                    
+                    
+                    
+    //                print("OCR: \(self.ocrPassCount)")
+                    guard let photoUrl = URL(string: "\(self.folderURL)\(photo.filePath)") else { print("WRONG URL!!!!"); return }
+                    
+                    let request = VNRecognizeTextRequest { request, error in
+                        self.handleFastDetectedText(request: request, error: error, photo: photo)
+                    }
+                    
+                    var customFindArray = [String]()
+            for findWord in self.matchToColors.keys {
+                        customFindArray.append(findWord)
+                        customFindArray.append(findWord.lowercased())
+                        customFindArray.append(findWord.uppercased())
+                        customFindArray.append(findWord.capitalizingFirstLetter())
+                    }
+                    
+                    request.customWords = customFindArray
+                    
+                    
+                    request.recognitionLevel = .fast
+                    request.recognitionLanguages = ["en_GB"]
+                    let imageRequestHandler = VNImageRequestHandler(url: photoUrl, orientation: .up)
+                    
+    //                request.progressHandler = { (request, value, error) in
+    ////                    print("Progress: \(value)")
+    //                }
+                    do {
+                        try imageRequestHandler.perform([request])
+                    } catch let error {
+                        print("Error: \(error)")
+                    }
+                    
+                
+               
+            
+        }
+//        dispatchGroup.notify(queue: dispatchQueue) {
+//            if self.statusOk == true {
+//                self.ocrSearching = false
+//    //            self.
+//                DispatchQueue.main.async {
+//                    self.showWarning(show: false)
+//                    self.tableView.reloadData()
+//                    self.helpButton.isEnabled = true
+//                }
+//
+//                self.changeFindbar?.change(type: "Enable")
+//                print("Finished all requests.")
+//                self.finishOCR()
+//            }
+//        }
+        
+    }
+    
+    func handleFastDetectedText(request: VNRequest?, error: Error?, photo: EditableHistoryModel) {
+            
+        
+//        self.ocrPassCount += 1
+//        DispatchQueue.main.async {
+////            print("HPOSO COUNT: \(self.photos.count)")
+//            let individualProgress = CGFloat(self.ocrPassCount) / CGFloat(self.photos.count)
+////            print("IND PROGR: \(individualProgress)")
+//            UIView.animate(withDuration: 0.6, animations: {
+//                self.progressView.setProgress(Float(individualProgress), animated: true)
+//            })
+//        }
+        
+       
+        guard let results = request?.results, results.count > 0 else {
+            print("no results")
+//                alreadyCachedPhotos.append(newCachedPhoto)
+//            dispatchSemaphore.signal()
+//            dispatchGroup.leave()
+//
+            return
+        }
+
+        var contents = [EditableSingleHistoryContent]()
+        
+        for result in results {
+            if let observation = result as? VNRecognizedTextObservation {
+                for text in observation.topCandidates(1) {
+                    
+                    let origX = observation.boundingBox.origin.x
+                    let origY = 1 - observation.boundingBox.minY
+                    let origWidth = observation.boundingBox.width
+                    let origHeight = observation.boundingBox.height
+                    
+                    let singleContent = EditableSingleHistoryContent()
+                    singleContent.text = text.string
+                    singleContent.x = origX
+                    singleContent.y = origY
+                    singleContent.width = origWidth
+                    singleContent.height = origHeight
+                    contents.append(singleContent)
+                }
+            }
+        }
+        
+        let newMod = FindModel()
+        
+        var compMatches = [String: [ArrayOfMatchesInComp]]()
+        var numberOfMatches = 0
+        
+        var findComponents = [Component]()
+        for cont in contents {
+            var matchRanges = [ArrayOfMatchesInComp]()
+            var hasMatch = false
+            
+            let lowercaseContText = cont.text.lowercased()
+            
+            let individualCharacterWidth = CGFloat(cont.width) / CGFloat(lowercaseContText.count)
+            for match in self.matchToColors.keys {
+                if lowercaseContText.contains(match) {
+//                    print("MATCH!! \(match), in: \(cont.text)")
+                    hasMatch = true
+                    let finalW = individualCharacterWidth * CGFloat(match.count)
+                    let indicies = lowercaseContText.indicesOf(string: match)
+                    
+                    for index in indicies {
+                        numberOfMatches += 1
+                        let addedWidth = individualCharacterWidth * CGFloat(index)
+                        let finalX = CGFloat(cont.x) + addedWidth
+                        
+                        let newComponent = Component()
+                        
+                        newComponent.x = finalX
+                        newComponent.y = CGFloat(cont.y) - (CGFloat(cont.height))
+                        newComponent.width = finalW
+                        newComponent.height = CGFloat(cont.height)
+                        newComponent.text = match
+                        
+                        findComponents.append(newComponent)
+                        
+                        let newRangeObject = ArrayOfMatchesInComp()
+                        newRangeObject.descriptionRange = index...index + match.count
+                        newRangeObject.text = match
+                        matchRanges.append(newRangeObject)
+                        
+                    }
+                    
+                    
+                    
+                }
+            }
+                
+            if hasMatch == true {
+                compMatches[cont.text] = matchRanges
+            }
+        }
+        var descriptionOfPhoto = ""
+        var finalRangesObjects = [ArrayOfMatchesInComp]()
+        
+        if numberOfMatches >= 1 {
+            var existingCount = 0
+            for (index, comp) in compMatches.enumerated() {
+                if index <= 2 {
+                    let thisCompString = comp.key
+                    
+                    if descriptionOfPhoto == "" {
+                        existingCount += 3
+                        descriptionOfPhoto.append("...\(thisCompString)...")
+                    } else {
+                        existingCount += 4
+                        descriptionOfPhoto.append("\n...\(thisCompString)...")
+                    }
+                    for compRange in comp.value {
+                        let newStart = existingCount + (compRange.descriptionRange.first ?? 0)
+                        let newEnd = existingCount + (compRange.descriptionRange.last ?? 1)
+                        let newRange = newStart...newEnd
+                        
+                        let matchObject = ArrayOfMatchesInComp()
+                        matchObject.descriptionRange = newRange
+                        matchObject.text = compRange.text
+                        
+                        finalRangesObjects.append(matchObject)
+                    }
+                    let addedLength = 3 + thisCompString.count
+                    existingCount += addedLength
+                }
+            }
+            
+            let totalWidth = self.deviceSize.width
+            let finalWidth = totalWidth - 146
+            let height = descriptionOfPhoto.heightWithConstrainedWidth(width: finalWidth, font: UIFont.systemFont(ofSize: 14))
+            let finalHeight = height + 70
+            
+            newMod.photo = photo
+            newMod.descriptionMatchRanges = finalRangesObjects
+            newMod.numberOfMatches = numberOfMatches
+            newMod.descriptionText = descriptionOfPhoto
+            newMod.descriptionHeight = finalHeight
+            
+            newMod.components = findComponents
+            
+//            resultPhotos.append(newMod)
+             
+        }
     }
 }

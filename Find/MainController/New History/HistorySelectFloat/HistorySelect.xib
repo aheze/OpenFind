@@ -63,7 +63,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="35"/>
                             <color key="tintColor" red="0.99343103170000002" green="0.99666577580000004" blue="0.99652749299999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <state key="normal" image="CachedIconThin"/>
+                            <state key="normal" image="SelectNotCached"/>
                             <connections>
                                 <action selector="cachePressed:" destination="-1" eventType="touchUpInside" id="bHt-c1-Xh4"/>
                             </connections>
@@ -99,7 +99,7 @@
         </view>
     </objects>
     <resources>
-        <image name="CachedIconThin" width="100" height="100"/>
+        <image name="SelectNotCached" width="100" height="100"/>
         <image name="heart" catalog="system" width="64" height="54"/>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
         <image name="trash" catalog="system" width="60" height="64"/>

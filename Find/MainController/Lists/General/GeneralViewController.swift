@@ -278,14 +278,17 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
     @IBOutlet weak var bottomHelpButton: UIButton!
     
     @IBAction func bottomDeletePressed(_ sender: Any) {
-        var attributes = EKAttributes.centerFloat
-        attributes.displayDuration = .infinity
-        attributes.entryInteraction = .absorbTouches
-        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-        attributes.screenInteraction = .absorbTouches
-        showButtonBarMessage(attributes: attributes, titleMessage: "Are you sure you want to delete this list?", desc: "You can't undo this action.", leftButton: "Delete", yesButton: "Don't Delete", specialAction: "Delete")
+        
+        let alert = UIAlertController(title: "Are you sure you want to delete this list?", message: "You can't undo this action.", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
+            
+            self.deleteTheList?.deleteList()
+            SwiftEntryKit.dismiss()
+          
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
     @IBAction func bottomHelpPressed(_ sender: Any) {
@@ -821,31 +824,6 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
             )
             let contentView = EKAlertMessageView(with: alertMessage)
             contentView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
-            contentView.layer.cornerRadius = 10
-            SwiftEntryKit.display(entry: contentView, using: attributes)
-        } else if specialAction == "Delete" {
-            let okButton = EKProperty.ButtonContent(
-                label: okButtonLabel,
-                backgroundColor: .clear,
-                highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05)) {
-                    //self.highlightRowsOnError()
-                    SwiftEntryKit.dismiss()
-            }
-            let closeButton = EKProperty.ButtonContent(
-                label: closeButtonLabel,
-                backgroundColor: .clear,
-                highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05),
-                displayMode: displayMode) { [unowned self] in
-                print("DELETING LIST")
-                    self.deleteTheList?.deleteList()
-                    SwiftEntryKit.dismiss()
-                   // self.doneWithEditingGeneral(overrideDone: true)
-            }
-            let buttonsBarContent = EKProperty.ButtonBarContent(  with: okButton, closeButton, separatorColor: Color.Gray.light,  buttonHeight: 60,  displayMode: displayMode,  expandAnimatedly: true  )
-            let alertMessage = EKAlertMessage(  simpleMessage: simpleMessage,  imagePosition: .left,  buttonBarContent: buttonsBarContent
-            )
-            let contentView = EKAlertMessageView(with: alertMessage)
-            contentView.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
             contentView.layer.cornerRadius = 10
             SwiftEntryKit.display(entry: contentView, using: attributes)
         }

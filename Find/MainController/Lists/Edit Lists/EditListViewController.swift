@@ -166,7 +166,7 @@ class EditListViewController: UIViewController, GetGeneralInfo, GetIconInfo, Get
     
     func deleteList() {
         finalDeleteList?.deleteTheList()
-        print("delete sdfkdhfksdhfkjskdjhfkjsd kjsdhk sdf")
+//        print("delete sdfkdhfksdhfkjskdjhfkjsd kjsdhk sdf")
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
     func returnNewGeneral(nameOfList: String, desc: String, contentsOfList: [String], hasErrors: Bool, overrideMake: Bool) {

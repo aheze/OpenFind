@@ -34,9 +34,9 @@ class HistorySelectorView: UIView, ChangeNumberOfSelected, ChangeAttributes {
             deleteButton.isEnabled = false
             cacheButton.isEnabled = false
         case "Cached":
-            cacheButton.setImage(UIImage(named: "YesCachedThin"), for: .normal)
+            cacheButton.setImage(UIImage(named: "SelectCached"), for: .normal)
         case "NotCached":
-            cacheButton.setImage(UIImage(named: "NotCachedThin"), for: .normal)
+            cacheButton.setImage(UIImage(named: "SelectNotCached"), for: .normal)
         default:
             print("WRONG STRING....")
         }

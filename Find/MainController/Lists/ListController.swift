@@ -9,6 +9,7 @@
 import UIKit
 import SwiftEntryKit
 import RealmSwift
+import SPAlert
 
 
 protocol ChangeNumberOfSelectedList: class {
@@ -62,39 +63,71 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
             }, completion: nil)
             currentEditingPresentationPath = -1
         }
+        
+        let alertView = SPAlertView(title: "Deleted list!", message: "Tap to dismiss", preset: SPAlertPreset.done)
+        alertView.duration = 2.6
+        alertView.present()
+        
     }
     
     
     func listDeleteButtonPressed() {
         
-        var tempLists = [FindList]()
-        var tempInts = [Int]()
-        var arrayOfIndexPaths = [IndexPath]()
-        for index in indexPathsSelected {
-            if let cat = listCategories?[index] {
-                tempLists.append(cat)
-                tempInts.append(index)
-                arrayOfIndexPaths.append(IndexPath(item: index, section: 0))
-                
-            }
+        var titleMessage = ""
+        var finishMessage = ""
+        if indexPathsSelected.count == 1 {
+            titleMessage = "Delete this List?"
+            finishMessage = "List deleted!"
+        } else if indexPathsSelected.count == listCategories?.count {
+            titleMessage = "Delete ALL lists?!"
+            finishMessage = "All lists deleted!"
+        } else {
+            titleMessage = "Delete \(indexPathsSelected.count) lists?"
+            finishMessage = "\(indexPathsSelected.count) lists deleted!"
         }
-        print("Index selected: \(indexPathsSelected)")
-        do {
-            try realm.write {
-                realm.delete(tempLists)
-            }
-        } catch {
-            print("error deleting category \(error)")
-        }
-        collectionView.deleteItems(at: arrayOfIndexPaths)
-        indexPathsSelected.removeAll()
-        numberOfSelected -= tempLists.count
         
-        selectButtonSelected = false
-        SwiftEntryKit.dismiss()
-        fadeSelectOptions(fadeOut: "fade out")
-        collectionView.allowsMultipleSelection = false
-        sortLists()
+        let alert = UIAlertController(title: titleMessage, message: "This action can't be undone.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
+            var tempLists = [FindList]()
+            var tempInts = [Int]()
+//            var contentsToDelete =
+            var arrayOfIndexPaths = [IndexPath]()
+            for index in self.indexPathsSelected {
+                if let cat = self.listCategories?[index] {
+                    tempLists.append(cat)
+                    tempInts.append(index)
+                    arrayOfIndexPaths.append(IndexPath(item: index, section: 0))
+                    
+                }
+            }
+            print("Index selected: \(self.indexPathsSelected)")
+            do {
+                try self.realm.write {
+                    self.realm.delete(tempLists)
+                }
+            } catch {
+                print("error deleting category \(error)")
+            }
+            self.collectionView.deleteItems(at: arrayOfIndexPaths)
+            self.indexPathsSelected.removeAll()
+            self.numberOfSelected -= tempLists.count
+            
+            self.selectButtonSelected = false
+            SwiftEntryKit.dismiss()
+            self.fadeSelectOptions(fadeOut: "fade out")
+            self.collectionView.allowsMultipleSelection = false
+            self.sortLists()
+            
+            
+            
+            let alertView = SPAlertView(title: finishMessage, message: "Tap to dismiss", preset: SPAlertPreset.done)
+            alertView.duration = 2.6
+            alertView.present()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
+      
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

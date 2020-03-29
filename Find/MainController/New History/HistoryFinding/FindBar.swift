@@ -14,11 +14,11 @@ import SnapKit
 
 protocol ReturnSortedTerms: class {
     func pause(pause: Bool)
-    func returnTerms(stringToListR: [String: EditableFindList], currentSearchFindListR: EditableFindList, currentListsSharedFindListR: EditableFindList, currentSearchAndListSharedFindListR: EditableFindList, currentMatchStringsR: [String], matchToColorsR: [String: [CGColor]])
+    func returnTerms(currentMatchStringsR: [String], matchToColorsR: [String: [CGColor]])
     func startedEditing(start: Bool)
     func pressedReturn()
     func triedToEdit()
-    
+    func triedToEditWhilePaused()
     func hereAreCurrentLists(currentSelected: [EditableFindList], currentText: String)
 }
 
@@ -35,6 +35,8 @@ class FindBar: UIView, UITextFieldDelegate {
     var highlightColor = "00aeef"
     
     var searchDisabled = false
+    
+    var dupPaused = false
     
     
     @IBOutlet weak var warningView: UIView!
@@ -98,15 +100,17 @@ class FindBar: UIView, UITextFieldDelegate {
     }
     
     var finalTextToFind : String = ""
-    var matchToColors = [String: [CGColor]]()
+    
         
     var currentMatchStrings = [String]()
+    var matchToColors = [String: [CGColor]]()
+    //    var stringToList = [String: EditableFindList]()
     
-    var currentSearchFindList = EditableFindList()
-    var currentListsSharedFindList = EditableFindList()
-    var currentSearchAndListSharedFindList = EditableFindList()
+//    var currentSearchFindList = EditableFindList()
+//    var currentListsSharedFindList = EditableFindList()
+//    var currentSearchAndListSharedFindList = EditableFindList()
     
-    var stringToList = [String: EditableFindList]()
+    
 
     @IBOutlet var contentView: FindBar!
     
@@ -205,6 +209,7 @@ extension FindBar: ChangeFindBar {
             DispatchQueue.main.async {
                 self.searchField.backgroundColor = UIColor(named: "Gray2")
                 self.searchDisabled = true
+//                self.he
             }
         case "Enable":
             DispatchQueue.main.async {
@@ -222,10 +227,12 @@ extension FindBar: ChangeFindBar {
     }
     
     func giveLists(lists: [EditableFindList], searchText: String) {
+        searchDisabled = false
+        searchActive = false
+        
         searchField.text = searchText
         finalTextToFind = searchText
         
-        print("RECIEVES!!! \(lists)")
         selectedLists = lists
         var notSelectedLists = [EditableFindList]()
         var selectedOrderIDs = [Int]()
@@ -236,38 +243,23 @@ extension FindBar: ChangeFindBar {
         for list in editableListCategories {
             if !selectedOrderIDs.contains(list.orderIdentifier) {
                 notSelectedLists.append(list)
-                print("YEYEYE")
-            } else {
-                print("ONNONO")
             }
         }
         print("COUNT:::: NOT::: \(notSelectedLists.count)")
         injectListDelegate?.resetWithLists(lists: notSelectedLists)
         switch selectedLists.count {
         case 0:
-            print("nothing")
-            searchLeftC.constant = 16
-//                warningWidth.constant = searchField.frame.size.width - 67
+            searchLeftC.constant = 12
         case 1:
-            print("1")
-//                collViewWidthC.constant = 50
-            searchLeftC.constant = 35 + 3 + 16
-//            warningWidth.constant = searchField.frame.size.width - 67
+            searchLeftC.constant = 35 + 3 + 12
         case 2:
-//                collViewWidthC.constant = 73
-            searchLeftC.constant = 73 + 3 + 16
+            searchLeftC.constant = 73 + 3 + 12
         case 3:
-//                collViewWidthC.constant = 111
-            searchLeftC.constant = 111 + 3 + 16
+            searchLeftC.constant = 111 + 3 + 12
         default:
-//                print("default")
-//                collViewWidthC.constant = 111
-            let availibleWidth = contentView.frame.width - 127
-            //                layout = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
-            //            flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
-            //            searchCollectionRightC.constant = availibleWidth
-                        collViewRightC.constant = availibleWidth
-            searchLeftC.constant = 111 + 3 + 16
+            let availibleWidth = contentView.frame.width - 123
+            collViewRightC.constant = availibleWidth
+            searchLeftC.constant = 111 + 3 + 12
         }
         UIView.animate(withDuration: 0.3, animations: {
             self.layoutIfNeeded()
@@ -279,8 +271,24 @@ extension FindBar: ChangeFindBar {
                 self.layoutIfNeeded()
             })
         }
-        sortSearchTerms(shouldReturnTerms: false)
+        
         collectionView.reloadData()
+        
+        let splits = searchText.components(separatedBy: "\u{2022}")
+        let uniqueSplits = splits.uniques
+//            print("up: \(updatedString)")
+        if uniqueSplits.count != splits.count {
+            dupPaused = true
+            returnTerms?.pause(pause: true)
+            showDuplicateAlert(show: true)
+        } else {
+            dupPaused = false
+            finalTextToFind = searchText
+            showDuplicateAlert(show: false)
+            returnTerms?.pause(pause: false)
+            sortSearchTerms(shouldReturnTerms: false)
+        }
+        
     }
     
     
@@ -293,39 +301,43 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("SELE")
         if searchDisabled == false {
+            print("NOT DIS")
             if searchActive == true {
+                print("ACTI")
                 let list = selectedLists[indexPath.item]
                 selectedLists.remove(object: list)
                 collectionView.deleteItems(at: [indexPath])
                 injectListDelegate?.addList(list: list)
+                
                 sortSearchTerms()
                 
              switch selectedLists.count {
                 case 0:
                     print("nothing")
-                    searchLeftC.constant = 16
+                    searchLeftC.constant = 12
     //                warningWidth.constant = searchField.frame.size.width - 67
                 case 1:
                     print("1")
     //                collViewWidthC.constant = 50
-                    searchLeftC.constant = 35 + 3 + 16
+                    searchLeftC.constant = 35 + 3 + 12
     //            warningWidth.constant = searchField.frame.size.width - 67
                 case 2:
     //                collViewWidthC.constant = 73
-                    searchLeftC.constant = 73 + 3 + 16
+                    searchLeftC.constant = 73 + 3 + 12
                 case 3:
     //                collViewWidthC.constant = 111
-                    searchLeftC.constant = 111 + 3 + 16
+                    searchLeftC.constant = 111 + 3 + 12
                 default:
     //                print("default")
     //                collViewWidthC.constant = 111
-                    let availibleWidth = contentView.frame.width - 127
+                    let availibleWidth = contentView.frame.width - 123
                     //                layout = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
                     //            flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
                     //            searchCollectionRightC.constant = availibleWidth
                                 collViewRightC.constant = availibleWidth
-                    searchLeftC.constant = 111 + 3 + 16
+                    searchLeftC.constant = 111 + 3 + 12
                 }
                 UIView.animate(withDuration: 0.3, animations: {
                     self.layoutIfNeeded()
@@ -338,6 +350,7 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
                     })
                 }
             } else {
+                print("FALSE!!")
                 searchField.becomeFirstResponder()
             }
         } else {
@@ -380,47 +393,48 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
 extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
     
     func showDuplicateAlert(show: Bool) {
-            if show == true {
+        if show == true {
 
 //                warningHeightC.constant = 32
-                warningWidth.constant = 67
-                self.warningButton.isHidden = false
-                
+            warningWidth.constant = 67
+            self.warningButton.isHidden = false
+            
+            self.warningLabel.isHidden = true
+            self.okButton.isHidden = true
+            UIView.animate(withDuration: 0.5, animations: {
+                self.warningView.alpha = 1
+//                    self.warningLabel.alpha = 1
+                self.layoutIfNeeded()
+            }) { _ in
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.warningButton.alpha = 1
+                })
+            }
+        } else {
+//                warningHeightC.constant = 6
+            UIView.animate(withDuration: 0.2, animations: {
+                self.warningButton.alpha = 0
+                self.warningLabel.alpha = 0
+                self.okButton.alpha = 0
+            }) { _ in
+                self.warningButton.isHidden = true
                 self.warningLabel.isHidden = true
                 self.okButton.isHidden = true
+                self.warningWidth.constant = 0
                 UIView.animate(withDuration: 0.5, animations: {
-                    self.warningView.alpha = 1
-//                    self.warningLabel.alpha = 1
-                    self.layoutIfNeeded()
-                }) { _ in
-                    UIView.animate(withDuration: 0.2, animations: {
-                        self.warningButton.alpha = 1
-                    })
-                }
-            } else {
-//                warningHeightC.constant = 6
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.warningButton.alpha = 0
-                    self.warningLabel.alpha = 0
-                    self.okButton.alpha = 0
-                }) { _ in
-                    self.warningButton.isHidden = true
-                    self.warningLabel.isHidden = true
-                    self.okButton.isHidden = true
-                    self.warningWidth.constant = 0
-                    UIView.animate(withDuration: 0.5, animations: {
-                        self.warningView.alpha = 0
+                    self.warningView.alpha = 0
 //                        self.warningLabel.alpha = 0
-        //                self.warningLabel.text = "Find is paused | Duplicates are not allowed"
-                        self.layoutIfNeeded()
-                    })
-                }
+    //                self.warningLabel.text = "Find is paused | Duplicates are not allowed"
+                    self.layoutIfNeeded()
+                })
             }
         }
+    }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
 //        print("clear text: \(textField.text)")
         searchField.text = ""
+        dupPaused = false
 //        print("setfdfg")
         finalTextToFind = ""
         sortSearchTerms()
@@ -428,6 +442,7 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         searchActive = true
+        print("ACTIVE")
         returnTerms?.startedEditing(start: true)
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -444,12 +459,19 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
 //        returnTerms?.startedEditing(start: false)
 //    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("RETURN?? \(stringToList.count)")
-        if stringToList.count != 0 {
-            textField.resignFirstResponder()
-//            print("Return hsdkjf")
-            returnTerms?.pressedReturn()
-        }
+//        print("RETURN?? \(stringToList.count)")
+        
+        
+            if dupPaused == false {
+                if currentMatchStrings.count != 0 {
+                    searchActive = false
+                    textField.resignFirstResponder()
+                    returnTerms?.pressedReturn()
+                }
+            } else {
+                returnTerms?.triedToEditWhilePaused()
+            }
+        
         return true
     }
     
@@ -464,12 +486,14 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
 //                resetFastHighlights()
 //                allowSearch = false
                 returnTerms?.pause(pause: true)
+                dupPaused = true
                 showDuplicateAlert(show: true)
             } else {
                 finalTextToFind = updatedString
                 showDuplicateAlert(show: false)
 //                allowSearch = true
 //                finalTextToFind = updatedString
+                dupPaused = false
                 returnTerms?.pause(pause: false)
                 sortSearchTerms()
             }
@@ -501,8 +525,8 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         selectedLists.removeAll()
         collectionView.reloadData()
 //        collViewWidthC.constant = 50
-        collViewRightC.constant = 16
-        searchLeftC.constant = 16
+        collViewRightC.constant = 12
+        searchLeftC.constant = 12
         UIView.animate(withDuration: 0.3, animations: {
             self.layoutIfNeeded()
         })
@@ -522,14 +546,14 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         collectionView.insertItems(at: [indP])
         switch selectedLists.count {
         case 1:
-            searchLeftC.constant = 35 + 3 + 16
+            searchLeftC.constant = 35 + 3 + 12
         case 2:
-            searchLeftC.constant = 73 + 3 + 16
+            searchLeftC.constant = 73 + 3 + 12
         case 3:
-            searchLeftC.constant = 111 + 3 + 16
+            searchLeftC.constant = 111 + 3 + 12
         default:
-            searchLeftC.constant = 111 + 3 + 16
-            let availibleWidth = contentView.frame.width - 127
+            searchLeftC.constant = 111 + 3 + 12
+            let availibleWidth = contentView.frame.width - 123
             collViewRightC.constant = availibleWidth
         }
         UIView.animate(withDuration: 0.3, animations: {
@@ -585,95 +609,97 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
 
 extension FindBar {
     func sortSearchTerms(shouldReturnTerms: Bool = true) {
-        let lowerCaseFinalText = finalTextToFind.lowercased()
-        var arrayOfSearch = lowerCaseFinalText.components(separatedBy: "\u{2022}")
-        var cameAcrossShare = [String]()
-        var duplicatedStrings = [String]()
-        
-        currentMatchStrings.removeAll()
-        matchToColors.removeAll()
-        stringToList.removeAll()
-        
-        var cameAcrossSearchFieldText = [String]()
-        for list in selectedLists {
-            for match in list.contents {
-                currentMatchStrings.append(match)
-                if !cameAcrossShare.contains(match.lowercased()) {
-                    cameAcrossShare.append(match.lowercased())
-                } else {
-                    duplicatedStrings.append(match)
-                }
-                
-                if arrayOfSearch.contains(match.lowercased()) {
-                    cameAcrossSearchFieldText.append(match)
+        if dupPaused == false {
+            let lowerCaseFinalText = finalTextToFind.lowercased()
+            var arrayOfSearch = lowerCaseFinalText.components(separatedBy: "\u{2022}")
+            var cameAcrossShare = [String]()
+            var duplicatedStrings = [String]()
+            
+            currentMatchStrings.removeAll()
+            matchToColors.removeAll()
+//            stringToList.removeAll()
+            
+            var cameAcrossSearchFieldText = [String]()
+            for list in selectedLists {
+                for match in list.contents {
+                    currentMatchStrings.append(match)
+                    if !cameAcrossShare.contains(match.lowercased()) {
+                        cameAcrossShare.append(match.lowercased())
+                    } else {
+                        duplicatedStrings.append(match)
+                    }
+                    
+                    if arrayOfSearch.contains(match.lowercased()) {
+                        cameAcrossSearchFieldText.append(match)
+                    }
                 }
             }
-        }
-        duplicatedStrings = duplicatedStrings.uniques
-        
-        print("DUP STRINGA: \(duplicatedStrings)")
-        cameAcrossSearchFieldText = cameAcrossSearchFieldText.uniques
-        
-        print("Search text. \(cameAcrossSearchFieldText)")
-        for list in selectedLists {
-            for match in list.contents {
-                let matchColor = UIColor(hexString: (list.iconColorName)).cgColor
-                
-                if !duplicatedStrings.contains(match.lowercased()) && !cameAcrossSearchFieldText.contains(match.lowercased()) {
-                    stringToList[match.lowercased()] = list
-                    matchToColors[match.lowercased()] = [matchColor]
-                } else {
+            duplicatedStrings = duplicatedStrings.uniques
+            
+            print("DUP STRINGA: \(duplicatedStrings)")
+            cameAcrossSearchFieldText = cameAcrossSearchFieldText.uniques
+            
+            print("Search text. \(cameAcrossSearchFieldText)")
+            for list in selectedLists {
+                for match in list.contents {
+                    let matchColor = UIColor(hexString: (list.iconColorName)).cgColor
                     
-                    
-                    
-                    if matchToColors[match.lowercased()] == nil {
-                            matchToColors[match.lowercased()] = [matchColor]
-//                        }
+                    if !duplicatedStrings.contains(match.lowercased()) && !cameAcrossSearchFieldText.contains(match.lowercased()) {
+//                        stringToList[match.lowercased()] = list
+                        matchToColors[match.lowercased()] = [matchColor]
                     } else {
-                        if !(matchToColors[match.lowercased()]?.contains(matchColor))! {
-                            matchToColors[match.lowercased(), default: [CGColor]()].append(matchColor)
+                        
+                        
+                        
+                        if matchToColors[match.lowercased()] == nil {
+                                matchToColors[match.lowercased()] = [matchColor]
+    //                        }
+                        } else {
+                            if !(matchToColors[match.lowercased()]?.contains(matchColor))! {
+                                matchToColors[match.lowercased(), default: [CGColor]()].append(matchColor)
+                            }
                         }
                     }
                 }
             }
-        }
-        
-//        print("SEARCH sdsfARR: \(arrayOfSearch)")
-        var newSearch = [String]()
-        for match in arrayOfSearch {
-            if match != "" && !cameAcrossSearchFieldText.contains(match) && !duplicatedStrings.contains(match) {
-                newSearch.append(match)
+            
+    //        print("SEARCH sdsfARR: \(arrayOfSearch)")
+            var newSearch = [String]()
+            for match in arrayOfSearch {
+                if match != "" && !cameAcrossSearchFieldText.contains(match) && !duplicatedStrings.contains(match) {
+                    newSearch.append(match)
+                }
             }
-        }
-        arrayOfSearch = newSearch
-        
-        let searchList = EditableFindList()
-//        searchList.descriptionOfList = "Search Array List +0-109028304798614"
-        for match in arrayOfSearch {
-            stringToList[match] = searchList
-            matchToColors[match] = [UIColor(hexString: highlightColor).cgColor]
-        }
-        
-        let sharedList = EditableFindList()
-//        sharedList.descriptionOfList = "Shared Lists +0-109028304798614"
-        for match in duplicatedStrings {
-            stringToList[match] = sharedList
-        }
-        
-        let textShareList = EditableFindList()
-//        textShareList.descriptionOfList = "Shared Text Lists +0-109028304798614"
-        for match in cameAcrossSearchFieldText {
-            stringToList[match] = textShareList
-            let cgColor = UIColor(hexString: highlightColor).cgColor
-            matchToColors[match, default: [CGColor]()].append(cgColor)
-        }
-        currentMatchStrings += arrayOfSearch
-        currentMatchStrings = currentMatchStrings.uniques
-        
-        if shouldReturnTerms {
-            print("GIVE!!!   stringToList:\(stringToList), currentSearchFindListR:\(currentSearchFindList), currentListsSharedFindListR:\(currentListsSharedFindList), currentSearchAndListSharedFindListR:\(currentSearchAndListSharedFindList), currentMatchStringsR:\(currentMatchStrings), matchToColorsR:\(matchToColors)")
-            returnTerms?.returnTerms(stringToListR: stringToList, currentSearchFindListR: currentSearchFindList, currentListsSharedFindListR: currentListsSharedFindList, currentSearchAndListSharedFindListR: currentSearchAndListSharedFindList, currentMatchStringsR: currentMatchStrings, matchToColorsR: matchToColors)
-                
+            arrayOfSearch = newSearch
+            
+//            let searchList = EditableFindList()
+    //        searchList.descriptionOfList = "Search Array List +0-109028304798614"
+            for match in arrayOfSearch {
+//                stringToList[match] = searchList
+                matchToColors[match] = [UIColor(hexString: highlightColor).cgColor]
+            }
+            
+//            let sharedList = EditableFindList()
+    //        sharedList.descriptionOfList = "Shared Lists +0-109028304798614"
+//            for match in duplicatedStrings {
+//                stringToList[match] = sharedList
+//            }
+            
+            let textShareList = EditableFindList()
+    //        textShareList.descriptionOfList = "Shared Text Lists +0-109028304798614"
+            for match in cameAcrossSearchFieldText {
+//                stringToList[match] = textShareList
+                let cgColor = UIColor(hexString: highlightColor).cgColor
+                matchToColors[match, default: [CGColor]()].append(cgColor)
+            }
+            currentMatchStrings += arrayOfSearch
+            currentMatchStrings = currentMatchStrings.uniques
+            
+            if shouldReturnTerms {
+//                print("GIVE!!!   stringToList:\(stringToList), currentSearchFindListR:\(currentSearchFindList), currentListsSharedFindListR:\(currentListsSharedFindList), currentSearchAndListSharedFindListR:\(currentSearchAndListSharedFindList), currentMatchStringsR:\(currentMatchStrings), matchToColorsR:\(matchToColors)")
+                returnTerms?.returnTerms(currentMatchStringsR: currentMatchStrings, matchToColorsR: matchToColors)
+                    
+            }
         }
 
     }

@@ -15,15 +15,15 @@ protocol ReturnCache: class {
     func returnHistCache(cachedImages: HistoryModel)
 }
 
-protocol EditedFindBar: class {
-    func updateTerms(stringToListR: [String: EditableFindList], currentSearchFindListR: EditableFindList, currentListsSharedFindListR: EditableFindList, currentSearchAndListSharedFindListR: EditableFindList, currentMatchStringsR: [String], matchToColorsR: [String: [CGColor]])
-}
+//protocol EditedFindBar: class {
+//    func updateTerms(stringToListR: [String: EditableFindList], currentSearchFindListR: EditableFindList, currentListsSharedFindListR: EditableFindList, currentSearchAndListSharedFindListR: EditableFindList, currentMatchStringsR: [String], matchToColorsR: [String: [CGColor]])
+//}
 protocol ChangeFindBar: class {
     func change(type: String)
     func giveLists(lists: [EditableFindList], searchText: String)
 }
 
-class HistoryFindController: UIViewController, UISearchBarDelegate {
+class HistoryFindController: UIViewController {
     
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
     var imageSize = CGSize(width: 0, height: 0)
@@ -34,6 +34,8 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var progressView: UIProgressView!
     var showedWarningAlready = false
     
+    var dupSoPaused = false
+    var isShowingDupWarning = false
     
     @IBOutlet weak var progressHeightC: NSLayoutConstraint!
     
@@ -51,7 +53,9 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
     var savedTextfieldText = ""
     
     
-    weak var editedFindbar: EditedFindBar?
+    
+    
+//    weak var editedFindbar: EditedFindBar?
     weak var changeFindbar: ChangeFindBar?
     
     var shouldAllowPressRow = true
@@ -160,11 +164,11 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
     
     var currentMatchStrings = [String]()
 //    var currentMatchArray = [String]()
-    var currentSearchFindList = EditableFindList()
-    var currentListsSharedFindList = EditableFindList()
-    var currentSearchAndListSharedFindList = EditableFindList()
+//    var currentSearchFindList = EditableFindList()
+//    var currentListsSharedFindList = EditableFindList()
+//    var currentSearchAndListSharedFindList = EditableFindList()
     
-    var stringToList = [String: EditableFindList]()
+//    var stringToList = [String: EditableFindList]()
     
     var photos = [EditableHistoryModel]()
     var resultPhotos = [FindModel]()
@@ -375,7 +379,7 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
             mainContentVC.photoSize = imageSize
             
             mainContentVC.folderURL = folderURL
-            self.editedFindbar = mainContentVC
+//            self.editedFindbar = mainContentVC
             
             mainContentVC.matchToColors = matchToColors
             mainContentVC.cameFromFind = true
@@ -423,6 +427,33 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
             })
         }
     }
+    
+    func showPauseWarning() {
+        if isShowingDupWarning == false {
+            isShowingDupWarning = true
+            warningHeightC.constant = 32
+            progressHeightC.constant = 0
+            warningView.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+            warningLabel.text = "Duplicates are not allowed"
+            UIView.animate(withDuration: 0.5, animations: {
+                self.warningView.alpha = 1
+                self.warningLabel.alpha = 1
+                self.view.layoutIfNeeded()
+            }) { _ in
+                self.warningHeightC.constant = 6
+                self.progressHeightC.constant = 2
+                UIView.animate(withDuration: 0.5, delay: 1, options: .curveLinear, animations: {
+                    self.warningView.alpha = 0
+                    self.warningLabel.alpha = 0
+                    self.view.layoutIfNeeded()
+                }, completion: { _ in
+                    self.warningView.backgroundColor = #colorLiteral(red: 0, green: 0.5607843137, blue: 0.8470588235, alpha: 1)
+                    self.warningLabel.text = "OCR search in progress!"
+                    self.isShowingDupWarning = false
+                })
+            }
+        }
+    }
 }
 
 extension HistoryFindController: ReturnSortedTerms {
@@ -436,7 +467,7 @@ extension HistoryFindController: ReturnSortedTerms {
         if resultPhotos.count == 0 {
             
             if start == true {
-                if stringToList.count == 0 {
+                if currentMatchStrings.count == 0 {
                     tableView.isHidden = false
                     tableView.alpha = 0
 
@@ -457,9 +488,9 @@ extension HistoryFindController: ReturnSortedTerms {
             } else {
 //
                 print("ENDDD")
-                print("COUNT:: \(stringToList.count)")
-                print("list: \(stringToList)")
-                if stringToList.count == 0 {
+//                print("COUNT:: \(stringToList.count)")
+//                print("list: \(stringToList)")
+                if currentMatchStrings.count == 0 {
                     let superViewWidth = view.frame.size.width
                     welcomeView.frame = CGRect(x: 0, y: 150, width: superViewWidth, height: 275)
                     view.addSubview(welcomeView)
@@ -480,21 +511,21 @@ extension HistoryFindController: ReturnSortedTerms {
         }
     }
     
-    func returnTerms(stringToListR: [String : EditableFindList], currentSearchFindListR: EditableFindList, currentListsSharedFindListR: EditableFindList, currentSearchAndListSharedFindListR: EditableFindList, currentMatchStringsR: [String], matchToColorsR: [String : [CGColor]]) {
-//        print("RECIEVED TERMS")
+    func returnTerms( currentMatchStringsR: [String], matchToColorsR: [String : [CGColor]]) {
+        print("RECIEVED TERMS...>>.>.: \(currentMatchStringsR)")
         
         
-        stringToList = stringToListR
-        currentSearchFindList = currentSearchFindListR
-        currentListsSharedFindList = currentListsSharedFindListR
-        currentSearchAndListSharedFindList = currentSearchAndListSharedFindListR
+//        stringToList = stringToListR
+//        currentSearchFindList = currentSearchFindListR
+//        currentListsSharedFindList = currentListsSharedFindListR
+//        currentSearchAndListSharedFindList = currentSearchAndListSharedFindListR
         currentMatchStrings = currentMatchStringsR
         matchToColors = matchToColorsR
         
         print("terms")
         
         
-        if stringToList.count == 0 {
+        if currentMatchStrings.count == 0 {
             
             noResultsLabel.text = "Start by typing or selecting a list..."
             UIView.animate(withDuration: 0.1, animations: {
@@ -517,21 +548,27 @@ extension HistoryFindController: ReturnSortedTerms {
     }
     
     func pause(pause: Bool) {
-        
-        print("recieved pause. \(pause)")
+        dupSoPaused = pause
+//        print("recieved pause. \(pause)")
         
     }
     func pressedReturn() {
 //        shouldAllowPressRow = false
         
         ocrFind()
+        helpButton.isEnabled = false
         changeFindbar?.change(type: "Disable")
     }
     
     func triedToEdit() {
-        showWarning(show: true)
+        if dupSoPaused == false {
+            showWarning(show: true)
+        }
     }
-    
+    func triedToEditWhilePaused() {
+        
+        showPauseWarning()
+    }
     func hereAreCurrentLists(currentSelected: [EditableFindList], currentText: String) {
         print("GAVE!! \(currentSelected)")
         savedSelectedLists = currentSelected
@@ -1139,7 +1176,7 @@ extension HistoryFindController {
                     }
                     
                     var customFindArray = [String]()
-                    for findWord in self.stringToList.keys {
+                    for findWord in self.currentMatchStrings {
                         customFindArray.append(findWord)
                         customFindArray.append(findWord.lowercased())
                         customFindArray.append(findWord.uppercased())
@@ -1171,22 +1208,19 @@ extension HistoryFindController {
             }
         }
         dispatchGroup.notify(queue: dispatchQueue) {
-            self.ocrSearching = false
-//            self.
-            DispatchQueue.main.async {
-                self.showWarning(show: false)
-                self.tableView.reloadData()
+            if self.statusOk == true {
+                self.ocrSearching = false
+    //            self.
+                DispatchQueue.main.async {
+                    self.showWarning(show: false)
+                    self.tableView.reloadData()
+                    self.helpButton.isEnabled = true
+                }
+                
+                self.changeFindbar?.change(type: "Enable")
+                print("Finished all requests.")
+                self.finishOCR()
             }
-            
-            self.changeFindbar?.change(type: "Enable")
-            print("Finished all requests.")
-            
-            self.finishOCR()
-            
-            
-//            self.finishOCR()
-//            fastFind()
-//            ocrfini
         }
         
     }
@@ -1390,7 +1424,7 @@ extension HistoryFindController {
         DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()
             self.histCenterC.constant = 0
-            UIView.animate(withDuration: 0.12, animations: {
+            UIView.animate(withDuration: 0.3, animations: {
                 self.view.layoutIfNeeded()
             })
             

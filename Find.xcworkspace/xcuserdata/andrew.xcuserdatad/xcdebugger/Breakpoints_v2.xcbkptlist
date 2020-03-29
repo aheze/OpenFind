@@ -314,8 +314,8 @@
             filePath = "Find/MainController/New History/HistoryFinding/FindBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "532"
-            endingLineNumber = "532"
+            startingLineNumber = "556"
+            endingLineNumber = "556"
             landmarkName = "addList(list:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -346,8 +346,8 @@
             filePath = "Find/MainController/History Beta/PhotoZoomViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "scaleInHighlight(component:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -864,16 +864,20 @@ extension NewHistoryViewController: ButtonPressed {
             collectionView.allowsMultipleSelection = false
         case "delete":
             print("INDEX COUNT: \(indexPathsSelected.count)")
+//            var titleMessage = ""
+       
+            
             var titleMessage = ""
+            var finishMessage = ""
             if indexPathsSelected.count == 1 {
                 titleMessage = "Delete photo?"
+                finishMessage = "Photo deleted!"
+            } else if indexPathsSelected.count == photoCategories?.count {
+                titleMessage = "Delete ALL photos?!"
+                finishMessage = "All photos deleted!"
             } else {
-                if indexPathsSelected.count == photoCategories?.count {
-                    titleMessage = "Delete ALL photos?!"
-                } else {
-                    titleMessage = "Delete \(indexPathsSelected.count) photos?"
-                }
-                
+                titleMessage = "Delete \(indexPathsSelected.count) photos?"
+                finishMessage = "\(indexPathsSelected.count) photos deleted!"
             }
             
             let alert = UIAlertController(title: titleMessage, message: "This action can't be undone.", preferredStyle: .alert)
@@ -914,6 +918,8 @@ extension NewHistoryViewController: ButtonPressed {
                     }
                 }
                 
+                
+                
                 self.getData()
                 if sectionsToDelete.count == 0 {
                     self.collectionView.performBatchUpdates({
@@ -926,6 +932,11 @@ extension NewHistoryViewController: ButtonPressed {
                     })
                 }
                 tempIntSelected.removeAll()
+                
+                let alertView = SPAlertView(title: finishMessage, message: "Tap to dismiss", preset: SPAlertPreset.done)
+                alertView.duration = 2.6
+                alertView.present()
+                
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -982,26 +993,47 @@ extension NewHistoryViewController: ButtonPressed {
                 
                 SwiftEntryKit.display(entry: cacheController, using: attributes)
             } else {
+//                print("O CACHE")
                 var arrayOfUncache = [Int]()
                 for indexP in indexPathsSelected {
                     if let index = indexPathToIndex[indexP] {
                         arrayOfUncache.append(index)
                     }
                 }
-                let alert = UIAlertController(title: "Delete these photos' caches?", message: "Caching again takes a long time", preferredStyle: .alert)
+//                var message = ""
+//                if arrayOfUncache.count == 1 {
+//                    message = "1 cache!"
+//                } else {
+//                    message = "\(arrayOfUncache.count) caches!"
+//                }
+                var titleMessage = ""
+                var finishMessage = ""
+                if arrayOfUncache.count == 1 {
+                    titleMessage = "Clear this photo's cache?"
+                    finishMessage = "Cache cleared!"
+                } else if arrayOfUncache.count == photoCategories?.count {
+                    titleMessage = "Clear ENTIRE cache?!"
+                    finishMessage = "Entire cache cleared!"
+                } else {
+                    titleMessage = "Clear \(arrayOfUncache.count) photos' caches?"
+                    finishMessage = "\(arrayOfUncache.count) caches deleted!"
+                }
+                
+                let alert = UIAlertController(title: titleMessage, message: "Caching again will take a while...", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
                     self.uncachePhotos(at: arrayOfUncache)
+                    let alertView = SPAlertView(title: finishMessage, message: "Tap to dismiss", preset: SPAlertPreset.done)
+                    alertView.duration = 2.6
+                    alertView.present()
+                    
+                    self.selectButtonSelected = false
+                    self.fadeSelectOptions(fadeOut: "fade out")
+                    SwiftEntryKit.dismiss()
+                    self.collectionView.allowsMultipleSelection = false
                 }))
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
                 
-//                let alertView = SPAlertView(title: "Done caching!", message: "All selected photos were already cached", preset: SPAlertPreset.done)
-//                alertView.duration = 2.6
-//                alertView.present()
-//
-//                selectButtonSelected = false
-//                fadeSelectOptions(fadeOut: "fade out")
-//                SwiftEntryKit.dismiss()
-//                collectionView.allowsMultipleSelection = false
             }
             
         default: print("unknown, bad string")

@@ -28,7 +28,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="gXF-Fe-JCy">
-                    <rect key="frame" x="16" y="24" width="411" height="35"/>
+                    <rect key="frame" x="12" y="24" width="419" height="35"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="qTM-8u-BPg"/>
@@ -45,7 +45,7 @@
                     </connections>
                 </collectionView>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type here to find" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="u2b-1R-lPC" customClass="TextField" customModule="Find" customModuleProvider="target">
-                    <rect key="frame" x="16" y="24" width="411" height="35"/>
+                    <rect key="frame" x="12" y="24" width="419" height="35"/>
                     <color key="backgroundColor" name="Gray1"/>
                     <color key="tintColor" name="FeedbackGradientLeft"/>
                     <constraints>
@@ -63,7 +63,7 @@
                     </connections>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XgI-5D-UTy">
-                    <rect key="frame" x="427" y="24" width="0.0" height="35"/>
+                    <rect key="frame" x="431" y="24" width="0.0" height="35"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mff-9q-hBw">
                             <rect key="frame" x="8" y="2.5" width="51" height="30"/>
@@ -110,12 +110,12 @@
             </subviews>
             <color key="backgroundColor" name="Gray3"/>
             <constraints>
-                <constraint firstItem="gXF-Fe-JCy" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="8BO-9z-g6N"/>
+                <constraint firstItem="gXF-Fe-JCy" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="8BO-9z-g6N"/>
                 <constraint firstItem="u2b-1R-lPC" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="G2v-lT-G0Z"/>
-                <constraint firstItem="u2b-1R-lPC" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="L1M-yz-yPg"/>
-                <constraint firstAttribute="trailing" secondItem="gXF-Fe-JCy" secondAttribute="trailing" constant="16" id="Nha-Fk-uiY"/>
+                <constraint firstItem="u2b-1R-lPC" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="L1M-yz-yPg"/>
+                <constraint firstAttribute="trailing" secondItem="gXF-Fe-JCy" secondAttribute="trailing" constant="12" id="Nha-Fk-uiY"/>
                 <constraint firstItem="gXF-Fe-JCy" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="f0j-bw-78u"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="u2b-1R-lPC" secondAttribute="trailing" constant="16" id="ngS-K6-6tM"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="u2b-1R-lPC" secondAttribute="trailing" constant="12" id="ngS-K6-6tM"/>
                 <constraint firstItem="XgI-5D-UTy" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="pK7-vU-IAa"/>
                 <constraint firstItem="u2b-1R-lPC" firstAttribute="trailing" secondItem="XgI-5D-UTy" secondAttribute="trailing" id="x99-vq-3rq"/>
             </constraints>

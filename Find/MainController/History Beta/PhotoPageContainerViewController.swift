@@ -13,13 +13,10 @@ import SPAlert
 protocol PhotoPageContainerViewControllerDelegate: class {
     func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int)
 }
-
 protocol ChangedSearchTermsFromZoom: class {
-    func pause(pause: Bool)
-    func returnTerms(stringToListR: [String: EditableFindList], currentSearchFindListR: EditableFindList, currentListsSharedFindListR: EditableFindList, currentSearchAndListSharedFindListR: EditableFindList, currentMatchStringsR: [String], matchToColorsR: [String: [CGColor]])
-    func startedEditing(start: Bool)
+//    func pause(pause: Bool)
+    func returnTerms(matchToColorsR: [String: [CGColor]])
 }
-
 protocol ZoomStateChanged: class {
     func changedState(type: String, index: Int)
 }
@@ -31,15 +28,10 @@ protocol ZoomDeletedPhoto: class {
     func deletedPhoto(photoIndex: Int)
 }
 
-class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDelegate, EditedFindBar {
-    func updateTerms(stringToListR: [String : EditableFindList], currentSearchFindListR: EditableFindList, currentListsSharedFindListR: EditableFindList, currentSearchAndListSharedFindListR: EditableFindList, currentMatchStringsR: [String], matchToColorsR: [String : [CGColor]]) {
-        print("update")
-    }
-    
+class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDelegate {
 
-    
-//    @IBOutlet weak var xButtonView: UIImageView!
-    
+    var currentMatchStrings = [String]()
+    var matchToColors = [String: [CGColor]]()
     
     @IBOutlet weak var xButton: UIButton!
     @IBAction func xButtonPressed(_ sender: Any) {
@@ -48,7 +40,6 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         self.dismiss(animated: true, completion: nil)
     }
 
-    var matchToColors = [String: [CGColor]]()
     
     @IBOutlet weak var blurView: UIVisualEffectView!
     
@@ -56,12 +47,40 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     weak var doneAnimatingSEK: DoneAnimatingSEK?
     weak var changeCache: ZoomCached?
     
+    
+    weak var changeFindbar: ChangeFindBar?
+    
+    var deviceSize = UIScreen.main.bounds.size
+    
     @IBOutlet weak var findButton: UIButton!
     @IBOutlet weak var heartButton: UIButton!
     @IBOutlet weak var cacheButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     
     @IBAction func findPressed(_ sender: Any) {
+        var attributes = EKAttributes.bottomFloat
+        attributes.entryBackground = .color(color: .white)
+        attributes.entranceAnimation = .translation
+        attributes.exitAnimation = .translation
+        attributes.displayDuration = .infinity
+        attributes.positionConstraints.size.height = .constant(value: 60)
+        attributes.statusBar = .light
+        attributes.entryInteraction = .absorbTouches
+//        attributes.scroll = .disabled
+        attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+        attributes.roundCorners = .all(radius: 5)
+        attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
+        
+        let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
+        let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
+        attributes.positionConstraints.keyboardRelation = keyboardRelation
+        
+        let customView = FindBar()
+        
+        customView.returnTerms = self
+        
+        self.changeFindbar = customView
+        SwiftEntryKit.display(entry: customView, using: attributes)
     }
     
     @IBAction func heartPressed(_ sender: Any) {
@@ -119,57 +138,22 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             SwiftEntryKit.display(entry: cacheController, using: attributes)
             
         } else { ///UNCACHE
-            var attributes = EKAttributes.centerFloat
-            attributes.displayDuration = .infinity
-            attributes.entryInteraction = .absorbTouches
-            attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-            attributes.screenInteraction = .absorbTouches
             
-            let displayMode = EKAttributes.DisplayMode.inferred
-            let title = EKProperty.LabelContent(text: "Delete the cache?", style: .init(font: UIFont.systemFont(ofSize: 20, weight: .bold), color: .white, displayMode: displayMode))
-            let description = EKProperty.LabelContent(text: "Caching takes a long time, but deleting will save a little memory", style: .init(font: UIFont.systemFont(ofSize: 14, weight: .regular), color: .white,      displayMode: displayMode))
-            let image = EKProperty.ImageContent(  imageName: "WhiteWarningShield",  displayMode: displayMode,  size: CGSize(width: 35, height: 35),  contentMode: .scaleAspectFit  )
-            let simpleMessage = EKSimpleMessage(  image: image,  title: title,  description: description )
-            let buttonFont = UIFont.systemFont(ofSize: 20, weight: .bold)
-            let okButtonLabelStyle = EKProperty.LabelStyle(  font: UIFont.systemFont(ofSize: 20, weight: .bold),  color: .white,  displayMode: displayMode )
-            let okButtonLabel = EKProperty.LabelContent(  text: "Cancel",  style: okButtonLabelStyle )
-            let closeButtonLabelStyle = EKProperty.LabelStyle(  font: buttonFont,  color: EKColor(#colorLiteral(red: 1, green: 0.9675828359, blue: 0.9005832124, alpha: 1)),  displayMode: displayMode)
-            let closeButtonLabel = EKProperty.LabelContent(  text: "Delete",  style: closeButtonLabelStyle )
-       
-            let okButton = EKProperty.ButtonContent(
-                label: okButtonLabel,
-                backgroundColor: .clear,
-                highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05)) {
-                    SwiftEntryKit.dismiss()
-            }
-            let closeButton = EKProperty.ButtonContent(
-                label: closeButtonLabel,
-                backgroundColor: .clear,
-                highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05),
-                displayMode: displayMode) { [unowned self] in
-                print("DELETING CACHE")
-                    let tempModel = EditableHistoryModel()
-                    self.changeCache?.cached(cached: false, photo: tempModel, index: self.currentIndex)
-                    self.cacheButton.setImage(UIImage(named: "NotCachedThin"), for: .normal)
-                    self.cacheButton.tintColor = UIColor(hexString: "5287B6")
-                    self.photoModels[self.currentIndex].isDeepSearched = false
-                    
-                    let alertView = SPAlertView(title: "Deleted this photo's cache!", message: "Tap to dismiss", preset: SPAlertPreset.done)
-                    alertView.duration = 4
-                    alertView.present()
-                    
-                    SwiftEntryKit.dismiss()
-                   // self.doneWithEditingGeneral(overrideDone: true)
-            }
-            let buttonsBarContent = EKProperty.ButtonBarContent(  with: okButton, closeButton,  separatorColor: Color.Gray.light,  buttonHeight: 60,  displayMode: displayMode,  expandAnimatedly: true  )
-            let alertMessage = EKAlertMessage(  simpleMessage: simpleMessage,  imagePosition: .left,  buttonBarContent: buttonsBarContent
-            )
-            let contentView = EKAlertMessageView(with: alertMessage)
-            contentView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
-            contentView.layer.cornerRadius = 10
-            SwiftEntryKit.display(entry: contentView, using: attributes)
+            let alert = UIAlertController(title: "Delete this photo's cache?", message: "Caching again will take a while...", preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
+                let tempModel = EditableHistoryModel()
+                self.changeCache?.cached(cached: false, photo: tempModel, index: self.currentIndex)
+                self.cacheButton.setImage(UIImage(named: "NotCachedThin"), for: .normal)
+                self.cacheButton.tintColor = UIColor(hexString: "5287B6")
+                self.photoModels[self.currentIndex].isDeepSearched = false
+                
+                let alertView = SPAlertView(title: "Deleted this photo's cache!", message: "Tap to dismiss", preset: SPAlertPreset.done)
+                alertView.duration = 2.6
+                alertView.present()
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
         }
     }
     
@@ -188,16 +172,10 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(PhotoZoomViewController.self)") as! PhotoZoomViewController
             
-            //        var goRight = true
-            let oldCount = self.photoModels.count - 1
             self.photoModels.remove(at: index)
             self.deletedPhoto?.deletedPhoto(photoIndex: index)
             
             var newIndex = 0
-            
-                    
-//            print("OLD INDEX: \(index)")
-//            print("OLD COUNT: \(oldCount)")
             if index == 0 {
                 ///DELETED FIRST photo
     //            goRight = false
@@ -207,7 +185,6 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
                    self.transitionController.isInteractive = false
                    self.transitionController.deletedLast = true
                    self.dismiss(animated: true, completion: nil)
-//                    self.dismiss(animated: true, completion: nil)
                } else {
                    newIndex = index
                    vc.delegate = self
@@ -218,7 +195,6 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
                    vc.index = newIndex
                    self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
                    let viewControllers = [ vc ]
-//                   self.pageViewController.setViewControllers(viewControllers, direction: .reverse, animated: true, completion: nil)
                     UIView.animate(withDuration: 0.25, animations: {
                         self.currentViewController.view.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
                         self.currentViewController.view.alpha = 0
@@ -226,10 +202,6 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
                        self.pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
                     }
                 }
-                
-//               }
-                
-            
             } else {
                 newIndex = index - 1
                 vc.delegate = self
@@ -247,8 +219,6 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
                 }) { _ in
                    self.pageViewController.setViewControllers(viewControllers, direction: .reverse, animated: true, completion: nil)
                 }
-                
-                
             }
             
             self.currentIndex = newIndex
@@ -264,7 +234,6 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
 
-    
     
     enum ScreenMode {
         case full, normal
@@ -291,10 +260,6 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
 
     var photoModels = [EditableHistoryModel]()
     var currentIndex = 0
-//    var currentSection = 0
-//    var nextIndex: Int?
-//    var newNextIndex = -1
-    
     
     var photoSize: CGSize = CGSize(width: 0, height: 0) {
         didSet {
@@ -325,8 +290,11 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(PhotoZoomViewController.self)") as! PhotoZoomViewController
         vc.delegate = self
-
+        
         vc.imageSize = photoSize
+        
+//        vc.
+        
         var urlString = URL(string: "")
         if cameFromFind {
             let model = self.findModels[self.currentIndex]
@@ -339,10 +307,13 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             vc.highlights = model.components
             
         } else {
+            vc.photoComp = self.photoModels[self.currentIndex]
             let filePath = self.photoModels[self.currentIndex].filePath
             urlString = URL(string: "\(folderURL)\(filePath)")
+            self.changedTerms = vc
         }
         
+        vc.folderURL = folderURL
         vc.url = urlString
         vc.index = currentIndex
         
@@ -354,27 +325,6 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         
         if cameFromFind {
             blurView.isHidden = true
-            
-//            var attributes = EKAttributes.bottomFloat
-//            attributes.entryBackground = .color(color: .white)
-//            attributes.entranceAnimation = .translation
-//            attributes.exitAnimation = .translation
-//            attributes.displayDuration = .infinity
-//            attributes.positionConstraints.size.height = .constant(value: 60)
-//            attributes.statusBar = .light
-//            attributes.entryInteraction = .absorbTouches
-//            attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
-//            attributes.roundCorners = .all(radius: 5)
-//            attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
-//
-//            let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
-//            let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
-//            attributes.positionConstraints.keyboardRelation = keyboardRelation
-//
-//            let customView = FindBar()
-//
-////            customView.returnTerms = self
-//            SwiftEntryKit.display(entry: customView, using: attributes)
         } else {
             blurView.layer.cornerRadius = 10
             blurView.clipsToBounds = true
@@ -448,34 +398,10 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
                 self.currentViewController.scrollView.isScrollEnabled = true
                 self.transitionController.isInteractive = false
                 self.transitionController.didPanWith(gestureRecognizer: gestureRecognizer)
-//                UIView.animate(withDuration: 0.4, delay: 0.6, options: [], animations: {
-//                    self.findButton.alpha = 1
-//                    self.heartButton.alpha = 1
-//                    self.deleteButton.alpha = 1
-//                    self.shareButton.alpha = 1
-//                }) { _ in
-//                    self.findButton.isHidden = false
-//                    self.heartButton.isHidden = false
-//                    self.deleteButton.isHidden = false
-//                    self.shareButton.isHidden = false
-//                }
             }
         default:
-//            print("default")
-            
             if self.transitionController.isInteractive {
                 self.transitionController.didPanWith(gestureRecognizer: gestureRecognizer)
-//                UIView.animate(withDuration: 0.2, delay: 0, options: [], animations: {
-//                    self.findButton.alpha = 0
-//                    self.heartButton.alpha = 0
-//                    self.deleteButton.alpha = 0
-//                    self.shareButton.alpha = 0
-//                }) { _ in
-//                    self.findButton.isHidden = true
-//                    self.heartButton.isHidden = true
-//                    self.deleteButton.isHidden = true
-//                    self.shareButton.isHidden = true
-//                }
             }
         }
     }
@@ -548,6 +474,7 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(PhotoZoomViewController.self)") as! PhotoZoomViewController
         vc.delegate = self
         vc.imageSize = photoSize
+        vc.folderURL = folderURL
         var urlString = URL(string: "")
         if cameFromFind {
             let model = self.findModels[self.currentIndex - 1]
@@ -558,6 +485,8 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
         } else {
             let filePath = self.photoModels[self.currentIndex - 1].filePath
             urlString = URL(string: "\(folderURL)\(filePath)")
+            vc.photoComp = self.photoModels[self.currentIndex - 1]
+            self.changedTerms = vc
         }
         
         vc.url = urlString
@@ -586,7 +515,7 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
         vc.delegate = self
         self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
         vc.imageSize = photoSize
-        
+        vc.folderURL = folderURL
         
         var urlString = URL(string: "")
         if cameFromFind {
@@ -601,6 +530,8 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
         } else {
             let filePath = self.photoModels[self.currentIndex + 1].filePath
             urlString = URL(string: "\(folderURL)\(filePath)")
+            vc.photoComp = self.photoModels[self.currentIndex + 1]
+            self.changedTerms = vc
         }
         
         vc.url = urlString
@@ -699,6 +630,40 @@ extension PhotoPageContainerViewController: ReturnCachedPhotos {
             print("NO PHOTO>>>>!")
         }
         
+    }
+}
+
+extension PhotoPageContainerViewController: ReturnSortedTerms {
+    func returnTerms(currentMatchStringsR: [String], matchToColorsR: [String : [CGColor]]) {
+//        print("ASD")
+        currentMatchStrings = currentMatchStringsR
+        matchToColors = matchToColorsR
+        changedTerms?.returnTerms(matchToColorsR: matchToColorsR)
+        
+    }
+    
+    func pause(pause: Bool) {
+        print("ASD")
+    }
+    
+    func startedEditing(start: Bool) {
+        print("ASD")
+    }
+    
+    func pressedReturn() {
+        print("ASD")
+    }
+    
+    func triedToEdit() {
+        print("ASD")
+    }
+    
+    func triedToEditWhilePaused() {
+        print("ASD")
+    }
+    
+    func hereAreCurrentLists(currentSelected: [EditableFindList], currentText: String) {
+        return
     }
     
     
