@@ -76,7 +76,17 @@ class ZoomDismissalInteractionController: NSObject {
                         transitionImageView.removeFromSuperview()
                         animator.transitionImageView = nil
                         transitionContext.cancelInteractiveTransition()
+                        
+                        print("COMPLETED??? \(!transitionContext.transitionWasCancelled)")
                         transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                        
+//                        if transitionContext.transitionWasCancelled {
+                            print("CANCELLED")
+                            animator.finishedDismissing = false
+//                        } else {
+//                            print("NOT...")
+//                        }
+                        
                         animator.toDelegate?.transitionDidEndWith(zoomAnimator: animator)
                         animator.fromDelegate?.transitionDidEndWith(zoomAnimator: animator)
                         self.transitionContext = nil
@@ -102,6 +112,9 @@ class ZoomDismissalInteractionController: NSObject {
                 fromReferenceImageView.isHidden = false
                 
                 self.transitionContext?.finishInteractiveTransition()
+                
+                animator.finishedDismissing = true
+                
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
                 animator.toDelegate?.transitionDidEndWith(zoomAnimator: animator)
                 animator.fromDelegate?.transitionDidEndWith(zoomAnimator: animator)

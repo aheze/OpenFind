@@ -25,6 +25,7 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
     var transitionImageView: UIImageView?
     var isPresenting: Bool = true
     var deletedLast: Bool = false
+    var finishedDismissing: Bool = false
     
     func deletedLastPhoto() {
         print("LAST RECIEVED.")
@@ -204,10 +205,19 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
                 toReferenceImageView.isHidden = false
                 fromReferenceImageView.isHidden = false
                 
+//                if !transitionContext.transitionWasCancelled {
+//                    print("NOT CANCELLED  sdds")
+//                    self.finishedDismissing = true
+//                } else {
+//                    print("CANCCELLED  sdfsd")
+//                }
+                
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                
+                
                 self.toDelegate?.transitionDidEndWith(zoomAnimator: self)
                 self.fromDelegate?.transitionDidEndWith(zoomAnimator: self)
-
+                
             })
         }
     }

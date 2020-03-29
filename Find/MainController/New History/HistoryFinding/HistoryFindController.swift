@@ -357,12 +357,13 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        self.selectedIndexPath = indexPath
         
         if shouldAllowPressRow == true && ocrSearching == false {
             let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
                 "PhotoPageContainerViewController") as! PhotoPageContainerViewController
             mainContentVC.title = "PhotoPageContainerViewController"
-            self.selectedIndexPath = indexPath
+            
             mainContentVC.transitioningDelegate = mainContentVC.transitionController
             mainContentVC.transitionController.fromDelegate = self
             mainContentVC.transitionController.toDelegate = mainContentVC
@@ -811,7 +812,7 @@ extension HistoryFindController: ZoomAnimatorDelegate {
     }
     
     func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
-        if zoomAnimator.isPresenting == false {
+        if zoomAnimator.isPresenting == false && zoomAnimator.finishedDismissing == true {
             var attributes = EKAttributes.bottomFloat
             attributes.entryBackground = .color(color: .white)
             attributes.entranceAnimation = .translation
@@ -841,7 +842,7 @@ extension HistoryFindController: ZoomAnimatorDelegate {
             print("TRANSITION ENDED")
         }
 //        let cell = self.tableView.cellForItem(at: self.selectedIndexPath) as! HistoryFindCell
-        let cell = self.tableView.cellForRow(at: self.selectedIndexPath) as! HistoryFindCell
+        guard let cell = self.tableView.cellForRow(at: self.selectedIndexPath) as? HistoryFindCell else { print("NO CELL!!!"); return }
         let cellFrame = self.tableView.convert(cell.frame, to: self.view)
         
         if cellFrame.minY < self.tableView.contentInset.top {

@@ -181,6 +181,7 @@ class FindBar: UIView, UITextFieldDelegate {
         okButton.isHidden = true
         
         searchField.keyboardAppearance = .default
+        searchField.autocorrectionType = .no
         
 //        searchBar.backgroundColor = .red
         
@@ -222,6 +223,7 @@ extension FindBar: ChangeFindBar {
     
     func giveLists(lists: [EditableFindList], searchText: String) {
         searchField.text = searchText
+        finalTextToFind = searchText
         
         print("RECIEVES!!! \(lists)")
         selectedLists = lists
@@ -277,6 +279,7 @@ extension FindBar: ChangeFindBar {
                 self.layoutIfNeeded()
             })
         }
+        sortSearchTerms(shouldReturnTerms: false)
         collectionView.reloadData()
     }
     
@@ -441,6 +444,7 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
 //        returnTerms?.startedEditing(start: false)
 //    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("RETURN?? \(stringToList.count)")
         if stringToList.count != 0 {
             textField.resignFirstResponder()
 //            print("Return hsdkjf")
@@ -580,7 +584,7 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
 
 
 extension FindBar {
-    func sortSearchTerms() {
+    func sortSearchTerms(shouldReturnTerms: Bool = true) {
         let lowerCaseFinalText = finalTextToFind.lowercased()
         var arrayOfSearch = lowerCaseFinalText.components(separatedBy: "\u{2022}")
         var cameAcrossShare = [String]()
@@ -666,9 +670,11 @@ extension FindBar {
         currentMatchStrings += arrayOfSearch
         currentMatchStrings = currentMatchStrings.uniques
         
-        
-        print("GIVE!!!   stringToList:\(stringToList), currentSearchFindListR:\(currentSearchFindList), currentListsSharedFindListR:\(currentListsSharedFindList), currentSearchAndListSharedFindListR:\(currentSearchAndListSharedFindList), currentMatchStringsR:\(currentMatchStrings), matchToColorsR:\(matchToColors)")
-        returnTerms?.returnTerms(stringToListR: stringToList, currentSearchFindListR: currentSearchFindList, currentListsSharedFindListR: currentListsSharedFindList, currentSearchAndListSharedFindListR: currentSearchAndListSharedFindList, currentMatchStringsR: currentMatchStrings, matchToColorsR: matchToColors)
+        if shouldReturnTerms {
+            print("GIVE!!!   stringToList:\(stringToList), currentSearchFindListR:\(currentSearchFindList), currentListsSharedFindListR:\(currentListsSharedFindList), currentSearchAndListSharedFindListR:\(currentSearchAndListSharedFindList), currentMatchStringsR:\(currentMatchStrings), matchToColorsR:\(matchToColors)")
+            returnTerms?.returnTerms(stringToListR: stringToList, currentSearchFindListR: currentSearchFindList, currentListsSharedFindListR: currentListsSharedFindList, currentSearchAndListSharedFindListR: currentSearchAndListSharedFindList, currentMatchStringsR: currentMatchStrings, matchToColorsR: matchToColors)
+                
+        }
 
     }
 }

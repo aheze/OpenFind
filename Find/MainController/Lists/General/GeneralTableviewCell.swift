@@ -234,7 +234,7 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
 //    }
     override func awakeFromNib() {
         
-        
+        matchTextField.returnKeyType = .next
         contentView.insertSubview(overlayView, at: 0)
         overlayView.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
