@@ -811,34 +811,35 @@ extension HistoryFindController: ZoomAnimatorDelegate {
     }
     
     func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
-        
-        var attributes = EKAttributes.bottomFloat
-        attributes.entryBackground = .color(color: .white)
-        attributes.entranceAnimation = .translation
-        attributes.exitAnimation = .translation
-        attributes.displayDuration = .infinity
-        attributes.positionConstraints.size.height = .constant(value: 60)
-        attributes.statusBar = .light
-        attributes.entryInteraction = .absorbTouches
-//        attributes.scroll = .disabled
-        attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
-        attributes.roundCorners = .all(radius: 5)
-        attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
-        
-        let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
-        let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
-        attributes.positionConstraints.keyboardRelation = keyboardRelation
-        
-        let customView = FindBar()
-//            customView.selectedLists = self.savedSelectedLists
-        customView.returnTerms = self
-        
-        self.changeFindbar = customView
-        SwiftEntryKit.display(entry: customView, using: attributes)
-        
-        self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText)
-        
-        print("TRANSITION ENDED")
+        if zoomAnimator.isPresenting == false {
+            var attributes = EKAttributes.bottomFloat
+            attributes.entryBackground = .color(color: .white)
+            attributes.entranceAnimation = .translation
+            attributes.exitAnimation = .translation
+            attributes.displayDuration = .infinity
+            attributes.positionConstraints.size.height = .constant(value: 60)
+            attributes.statusBar = .light
+            attributes.entryInteraction = .absorbTouches
+    //        attributes.scroll = .disabled
+            attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+            attributes.roundCorners = .all(radius: 5)
+            attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
+            
+            let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
+            let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
+            attributes.positionConstraints.keyboardRelation = keyboardRelation
+            
+            let customView = FindBar()
+    //            customView.selectedLists = self.savedSelectedLists
+            customView.returnTerms = self
+            
+            self.changeFindbar = customView
+            SwiftEntryKit.display(entry: customView, using: attributes)
+            
+            self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText)
+            
+            print("TRANSITION ENDED")
+        }
 //        let cell = self.tableView.cellForItem(at: self.selectedIndexPath) as! HistoryFindCell
         let cell = self.tableView.cellForRow(at: self.selectedIndexPath) as! HistoryFindCell
         let cellFrame = self.tableView.convert(cell.frame, to: self.view)
