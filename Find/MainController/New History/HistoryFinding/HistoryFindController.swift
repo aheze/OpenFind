@@ -37,7 +37,7 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var progressHeightC: NSLayoutConstraint!
     
-    
+    var statusOk = true
     let dispatchGroup = DispatchGroup()
     let dispatchQueue = DispatchQueue(label: "ocrFindQueue")
     let dispatchSemaphore = DispatchSemaphore(value: 0)
@@ -142,6 +142,7 @@ class HistoryFindController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var doneButton: UIButton!
     
     @IBAction func doneButtonPressed(_ sender: Any) {
+        statusOk = false
         if let pvc = self.presentationController {
             pvc.delegate?.presentationControllerDidDismiss?(pvc)
         }
@@ -1119,49 +1120,52 @@ extension HistoryFindController {
             self.ocrPassCount = 0
 //            var number = 0
             for photo in self.photos {
-                
-//                number += 1
-//                    print("num: \(number)")
-//                    let indP = IndexPath(item: number - 1, section: 0)
-                
-                self.dispatchGroup.enter()
-                
-                
-                
-//                print("OCR: \(self.ocrPassCount)")
-                guard let photoUrl = URL(string: "\(self.folderURL)\(photo.filePath)") else { print("WRONG URL!!!!"); return }
-                
-                let request = VNRecognizeTextRequest { request, error in
-                    self.handleFastDetectedText(request: request, error: error, photo: photo)
+                if self.statusOk == true {
+                    
+    //                number += 1
+    //                    print("num: \(number)")
+    //                    let indP = IndexPath(item: number - 1, section: 0)
+                    
+                    self.dispatchGroup.enter()
+                    
+                    
+                    
+    //                print("OCR: \(self.ocrPassCount)")
+                    guard let photoUrl = URL(string: "\(self.folderURL)\(photo.filePath)") else { print("WRONG URL!!!!"); return }
+                    
+                    let request = VNRecognizeTextRequest { request, error in
+                        self.handleFastDetectedText(request: request, error: error, photo: photo)
+                    }
+                    
+                    var customFindArray = [String]()
+                    for findWord in self.stringToList.keys {
+                        customFindArray.append(findWord)
+                        customFindArray.append(findWord.lowercased())
+                        customFindArray.append(findWord.uppercased())
+                        customFindArray.append(findWord.capitalizingFirstLetter())
+                    }
+                    
+                    request.customWords = customFindArray
+                    
+                    
+                    request.recognitionLevel = .fast
+                    request.recognitionLanguages = ["en_GB"]
+                    let imageRequestHandler = VNImageRequestHandler(url: photoUrl, orientation: .up)
+                    
+    //                request.progressHandler = { (request, value, error) in
+    ////                    print("Progress: \(value)")
+    //                }
+                    do {
+                        try imageRequestHandler.perform([request])
+                    } catch let error {
+        //                self.busyFastFinding = false
+                        print("Error: \(error)")
+                    }
+                    
+                    self.dispatchSemaphore.wait()
+                } else {
+                    break
                 }
-                
-                var customFindArray = [String]()
-                for findWord in self.stringToList.keys {
-                    customFindArray.append(findWord)
-                    customFindArray.append(findWord.lowercased())
-                    customFindArray.append(findWord.uppercased())
-                    customFindArray.append(findWord.capitalizingFirstLetter())
-                }
-                
-                request.customWords = customFindArray
-                
-                
-                request.recognitionLevel = .fast
-                request.recognitionLanguages = ["en_GB"]
-                let imageRequestHandler = VNImageRequestHandler(url: photoUrl, orientation: .up)
-                
-//                request.progressHandler = { (request, value, error) in
-////                    print("Progress: \(value)")
-//                }
-                do {
-                    try imageRequestHandler.perform([request])
-                } catch let error {
-    //                self.busyFastFinding = false
-                    print("Error: \(error)")
-                }
-                
-                self.dispatchSemaphore.wait()
-                
                
             }
         }
