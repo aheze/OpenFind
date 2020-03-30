@@ -20,6 +20,9 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
             cancelTimer!.invalidate()
             cancelTimer = nil
         }
+        
+        readDefaultsValues()
+        
         SwiftEntryKit.dismiss()
         currentMatchStrings.append(newSearchTextField.text ?? "")
         sortSearchTerms()
@@ -81,6 +84,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
                 segue.destination.presentationController?.delegate = self
                 let destinationVC = segue.destination as! NewHistoryViewController
                 destinationVC.folderURL = globalUrl
+                destinationVC.highlightColor = highlightColor
                 //destinationVC.modalPresentationStyle = .fullScreen
             case "goToLists" :
                 segue.destination.presentationController?.delegate = self

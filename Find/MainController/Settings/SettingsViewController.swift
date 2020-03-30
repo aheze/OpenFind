@@ -8,10 +8,14 @@
 
 import UIKit
 import SwiftEntryKit
+import RealmSwift
 
 
 class SettingsViewController: UIViewController {
     
+    let realm = try! Realm()
+    var listCategories: Results<FindList>?
+    var historyPhotos: Results<HistoryModel>?
     
     @IBOutlet weak var xButton: UIButton!
     
@@ -36,9 +40,7 @@ class SettingsViewController: UIViewController {
     
     @IBAction func colorButtonPressed(_ sender: UIButton) {
         let image = UIImage(systemName: "checkmark")
-        
         removeChecks()
-        
         switch sender.tag {
         case 3501:
             redButton.setImage(image, for: .normal)
@@ -125,15 +127,102 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func clearHistPressed(_ sender: Any) {
-        print("CLEAR hist")
+        let alert = UIAlertController(title: "Clear History", message: "All your photos and their caches will be deleted. This action can't be undone.", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Clear", style: UIAlertAction.Style.destructive, handler: { _ in
+            var tempPhotos = [HistoryModel]()
+            var contents = [SingleHistoryContent]()
+            
+            
+            if let photoCats = self.historyPhotos {
+                for photo in photoCats {≥
+                    
+                    tempPhotos.append(photo)
+                    for content in photo.contents {
+                        contents.append(content)
+                    }
+                    
+                }
+            }
+            do {
+                try self.realm.write {
+                    self.realm.delete(contents)
+                    self.realm.delete(tempPhotos)
+                }
+            } catch {
+                print("DELETE PRESSED, but ERROR deleting photos...... \(error)")
+            }
+            print("CLEAR hist")
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func clearListsPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "Clear Lists", message: "All your lists will be deleted. This action can't be undone.", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Clear", style: UIAlertAction.Style.destructive, handler: { _ in
+            var tempLists = [FindList]()
+            if let allLists = self.listCategories {
+                for singleList in allLists {
+                    tempLists.append(singleList)
+                }
+            }
+            do {
+                try self.realm.write {
+                    self.realm.delete(tempLists)
+                }
+            } catch {
+                print("DELETE PRESSED, but ERROR deleting photos...... \(error)")
+            }
+            print("CLEAR hist")
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
         print("clear list")
     }
     
     @IBAction func resetSettingsPressed(_ sender: Any) {
         print("reset sett")
+        let alert = UIAlertController(title: "Reset Settings", message: "Settings will be reset to default.", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Reset", style: UIAlertAction.Style.default, handler: { _ in
+            
+            self.defaults.set("00AEEF", forKey: "highlightColor")
+            self.defaults.set(true, forKey: "showTextDetectIndicator")
+            self.defaults.set(true, forKey: "hapticFeedback")
+            
+            self.removeChecks()
+            let image = UIImage(systemName: "checkmark")
+            if let hexString = self.defaults.string(forKey: "highlightColor") {
+                switch hexString {
+                case "EB3B5A":
+                    self.redButton.setImage(image, for: .normal)
+                case "FA8231":
+                    self.orangeButton.setImage(image, for: .normal)
+                case "FED330":
+                    self.yellowButton.setImage(image, for: .normal)
+                case "20BF6B":
+                    self.greenButton.setImage(image, for: .normal)
+                case "2BCBBA":
+                    self.tealButton.setImage(image, for: .normal)
+                case "45AAF2":
+                    self.lightblueButton.setImage(image, for: .normal)
+                case "00AEEF":
+                    self.findblueButton.setImage(image, for: .normal)
+                case "A55EEA":
+                    self.purpleButton.setImage(image, for: .normal)
+                default:
+                    print("WRONG TAG!!")
+                }
+            }
+            
+            self.textDetectSwitch.setOn(true, animated: true)
+            self.hapticFeedbackSwitch.setOn(true, animated: true)
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -175,6 +264,8 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         
+        historyPhotos = realm.objects(HistoryModel.self)
+        listCategories = realm.objects(FindList.self)
 //        let defaults = UserDefaults.standard
 //        defaults.set(25, forKey: "Age")
 //        defaults.set(true, forKey: "UseTouchID")

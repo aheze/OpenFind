@@ -32,6 +32,7 @@ protocol ZoomDeletedPhoto: class {
 class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDelegate {
 
 //    var currentMatchStrings = [String]()
+    var highlightColor = "00aeef"
     var matchToColors = [String: [CGColor]]()
     
     @IBOutlet weak var xButton: UIButton!
@@ -99,6 +100,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         let customView = FindBar()
         
         customView.returnTerms = self
+        customView.highlightColor = highlightColor
         
         self.changeFindbar = customView
         SwiftEntryKit.display(entry: customView, using: attributes)
@@ -324,7 +326,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(PhotoZoomViewController.self)") as! PhotoZoomViewController
         vc.delegate = self
-        
+//        vc.highlightColor = highlightColor
         vc.imageSize = photoSize
         
 //        vc.
@@ -525,6 +527,7 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
         vc.delegate = self
         vc.imageSize = photoSize
         vc.folderURL = folderURL
+//        vc.highlightColor = highlightColor
         var urlString = URL(string: "")
         if cameFromFind {
             let model = self.findModels[self.currentIndex - 1]
@@ -569,6 +572,7 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
         self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
         vc.imageSize = photoSize
         vc.folderURL = folderURL
+//        vc.highlightColor = highlightColor
         
         var urlString = URL(string: "")
         if cameFromFind {

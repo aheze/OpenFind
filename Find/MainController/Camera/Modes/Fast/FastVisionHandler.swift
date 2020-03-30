@@ -60,7 +60,9 @@ extension ViewController {
                         
                         component.x = newX
                         component.y = newY
-                        drawFastHighlight(component: component)
+                        if shouldShowTextDetectIndicator {
+                            drawFastHighlight(component: component)
+                        }
                         
                         
                    //     print("arrayOfMatches: \(arrayOfMatches)")

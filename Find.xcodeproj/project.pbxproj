@@ -30,7 +30,6 @@
 		490DA76223CEC944000AF57D /* ViewClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA76123CEC944000AF57D /* ViewClasses.swift */; };
 		49115089235D17EB00EC0C04 /* ShutterPressed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49115088235D17EB00EC0C04 /* ShutterPressed.swift */; };
 		4911508B235D1A3E00EC0C04 /* BasicUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4911508A235D1A3E00EC0C04 /* BasicUtilities.swift */; };
-		4911508D235D51E300EC0C04 /* MatchesHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4911508C235D51E300EC0C04 /* MatchesHUD.swift */; };
 		49115090236004E800EC0C04 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4911508E235E7DF100EC0C04 /* Roboto-Light.ttf */; };
 		491150942363E3D300EC0C04 /* ARExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491150932363E3D300EC0C04 /* ARExtensions.swift */; };
 		4917CE7F23C0490E002EA20B /* GeneralSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4917CE7E23C0490E002EA20B /* GeneralSettings.swift */; };
@@ -88,7 +87,6 @@
 		4991344E236FDF1300B82E46 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991344D236FDF1200B82E46 /* SettingsViewController.swift */; };
 		49913450236FE12400B82E46 /* SettingsViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991344F236FE12400B82E46 /* SettingsViewExtensions.swift */; };
 		49913452236FE33B00B82E46 /* SettingsBasicSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49913451236FE33B00B82E46 /* SettingsBasicSetup.swift */; };
-		499583A923BEC74D0022689A /* MatchesUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499583A823BEC74D0022689A /* MatchesUpdater.swift */; };
 		4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4999AC932353A80A00AB06A7 /* AppDelegate.swift */; };
 		4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4999AC952353A80A00AB06A7 /* SceneDelegate.swift */; };
 		4999AC982353A80A00AB06A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4999AC972353A80A00AB06A7 /* ViewController.swift */; };
@@ -148,7 +146,6 @@
 		490DA76123CEC944000AF57D /* ViewClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewClasses.swift; sourceTree = "<group>"; };
 		49115088235D17EB00EC0C04 /* ShutterPressed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutterPressed.swift; sourceTree = "<group>"; };
 		4911508A235D1A3E00EC0C04 /* BasicUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicUtilities.swift; sourceTree = "<group>"; };
-		4911508C235D51E300EC0C04 /* MatchesHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHUD.swift; sourceTree = "<group>"; };
 		4911508E235E7DF100EC0C04 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		491150932363E3D300EC0C04 /* ARExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARExtensions.swift; sourceTree = "<group>"; };
 		4917CE7E23C0490E002EA20B /* GeneralSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettings.swift; sourceTree = "<group>"; };
@@ -206,7 +203,6 @@
 		4991344D236FDF1200B82E46 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4991344F236FE12400B82E46 /* SettingsViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewExtensions.swift; sourceTree = "<group>"; };
 		49913451236FE33B00B82E46 /* SettingsBasicSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBasicSetup.swift; sourceTree = "<group>"; };
-		499583A823BEC74D0022689A /* MatchesUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesUpdater.swift; sourceTree = "<group>"; };
 		4999AC902353A80A00AB06A7 /* Find.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Find.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4999AC932353A80A00AB06A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4999AC952353A80A00AB06A7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -261,8 +257,6 @@
 		4904524A237907170046570D /* Matches */ = {
 			isa = PBXGroup;
 			children = (
-				499583A823BEC74D0022689A /* MatchesUpdater.swift */,
-				4911508C235D51E300EC0C04 /* MatchesHUD.swift */,
 				4904524B2379072F0046570D /* UpdateMatches.swift */,
 				49325C1223CAE84500A771A3 /* StatusView.swift */,
 			);
@@ -782,7 +776,6 @@
 				4990AAE423EDB4EF00FAF37B /* SymbolsViewController.swift in Sources */,
 				491150942363E3D300EC0C04 /* ARExtensions.swift in Sources */,
 				49D985BA2421D97B005F4E92 /* FindModel.swift in Sources */,
-				4911508D235D51E300EC0C04 /* MatchesHUD.swift in Sources */,
 				490DA75523CBB871000AF57D /* JJFloatingActionButton+Animation.swift in Sources */,
 				49B7A33623923E810070209F /* ZoomAnimator.swift in Sources */,
 				49A8EFAC237A5EFE00328D47 /* SetUpButtons.swift in Sources */,
@@ -844,7 +837,6 @@
 				490DA75623CBB871000AF57D /* JJFloatingActionButton+Placement.swift in Sources */,
 				490DA75123CBB871000AF57D /* JJActionItemTitlePosition.swift in Sources */,
 				4917CE7F23C0490E002EA20B /* GeneralSettings.swift in Sources */,
-				499583A923BEC74D0022689A /* MatchesUpdater.swift in Sources */,
 				490DA75323CBB871000AF57D /* UIColor+JJFloatingActionButton.swift in Sources */,
 				49BC783923C8C7AB003D9904 /* HistoryStartSelection.swift in Sources */,
 				49B7A33A23923EE10070209F /* PhotoZoomViewController.swift in Sources */,

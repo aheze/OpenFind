@@ -17,9 +17,11 @@ extension ViewController {
         if number > previousNumberOfMatches {
             if currentPassCount >= 100 {
                 currentPassCount = 0
-                let generator = UIImpactFeedbackGenerator(style: .light)
-                generator.prepare()
-                generator.impactOccurred()
+                if shouldHapticFeedback {
+                    let generator = UIImpactFeedbackGenerator(style: .light)
+                    generator.prepare()
+                    generator.impactOccurred()
+                }
             }
         }
         

@@ -51,10 +51,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var newShutterButton: NewShutterButton!
     
     let defaults = UserDefaults.standard
-    
+    var shouldShowTextDetectIndicator = true
+    var shouldHapticFeedback = true
     
     //MARK: Timer and haptic feedback
-    var hapticFeedbackEnabled = true
+//    var hapticFeedbackEnabled = true
     var currentPassCount = 0 /// +1 whenever frame added for AV
     
     
@@ -336,11 +337,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let hexString = defaults.string(forKey: "highlightColor") {
-            highlightColor = hexString
-            print("COLOR: \(hexString)")
-        }
-        
+        readDefaultsValues()
         
 //        changeDelegate = statusView as? ChangeStatusValue
         
@@ -400,7 +397,29 @@ class ViewController: UIViewController {
                 pow(attitude.pitch, 2))
     }
 
-    
+    func readDefaultsValues() {
+        if let hexString = defaults.string(forKey: "highlightColor") {
+            highlightColor = hexString
+            print("COLOR: \(hexString)")
+        }
+        
+        let showText = defaults.bool(forKey: "showTextDetectIndicator")
+        let hapFeed = defaults.bool(forKey: "hapticFeedback")
+        
+        if showText {
+            shouldShowTextDetectIndicator = true
+        } else {
+            shouldShowTextDetectIndicator = false
+        }
+        
+        if hapFeed {
+            shouldHapticFeedback = true
+        } else {
+            shouldHapticFeedback = false
+        }
+
+
+    }
 
 
 }

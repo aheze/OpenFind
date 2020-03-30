@@ -51,7 +51,7 @@ class PhotoZoomViewController: UIViewController {
 
     var highlights = [Component]()
     var matchToColors = [String: [CGColor]]()
-    var highlightColor = "00aeef"
+//    var highlightColor = "00aeef"
     
     var photoComp = EditableHistoryModel()
     

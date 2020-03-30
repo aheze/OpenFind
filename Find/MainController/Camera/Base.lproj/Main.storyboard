@@ -2121,7 +2121,7 @@
                                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <inset key="titleEdgeInsets" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                 <state key="normal" title="Reset Settings">
-                                                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="titleColor" name="FeedbackGradientRight"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="resetSettingsPressed:" destination="pa6-U7-HO0" eventType="touchUpInside" id="nBy-He-o2G"/>
@@ -2168,7 +2168,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <inset key="titleEdgeInsets" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal">
-                                                            <string key="title">Leave
+                                                            <string key="title">Send
 Feedback!</string>
                                                             <color key="titleColor" name="PureBlack"/>
                                                         </state>
@@ -3103,17 +3103,17 @@ the App!</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Iu-nM-Kxq">
-                                        <rect key="frame" x="0.0" y="0.0" width="640" height="379"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="189.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Leica Sample" translatesAutoresizingMaskIntoConstraints="NO" id="F00-F2-p0B">
-                                                <rect key="frame" x="0.0" y="0.0" width="640" height="379"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="189.5"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HAh-a2-fex">
-                                                <rect key="frame" x="0.0" y="0.0" width="640" height="379"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="189.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="l0B-xE-ltA">
-                                                <rect key="frame" x="0.0" y="0.0" width="640" height="3"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="2EH-Z9-vBc"/>
                                                 </constraints>

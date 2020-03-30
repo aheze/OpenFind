@@ -34,7 +34,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     var photoCategories: Results<HistoryModel>?
 //    var photoCategories: [IndexMatcher: Results<RealmPhoto>]?
 //    var photoCategories = [IndexMatcher: ]
- 
+    var highlightColor = "00aeef"
     
     var aboutToBeCached = [HistoryModel]()
     
@@ -630,6 +630,8 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 mainContentVC.cameFromFind = false
                 mainContentVC.folderURL = folderURL
                 
+                mainContentVC.highlightColor = highlightColor
+                
                 mainContentVC.deletedPhoto = self
                 mainContentVC.changeModel = self
                 mainContentVC.changeCache = self
@@ -1071,6 +1073,7 @@ extension NewHistoryViewController: ButtonPressed {
                 }
             }
             destinationVC.folderURL = folderURL
+            destinationVC.highlightColor = highlightColor
             destinationVC.photos = modelArray
             print("PHOTOARR: \(modelArray)")
             modelArray.forEach { (edit) in

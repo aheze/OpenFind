@@ -46,6 +46,7 @@ class HistoryFindController: UIViewController {
     var ocrPassCount = 0
     var ocrSearching = false
     
+//    var highlightColor = "00aeef"
     
 //    var sekSwitchedToPreview = false
     
@@ -216,6 +217,7 @@ class HistoryFindController: UIViewController {
         let customView = FindBar()
         
         customView.returnTerms = self
+        customView.highlightColor = highlightColor
         
         self.changeFindbar = customView
         SwiftEntryKit.display(entry: customView, using: attributes)
