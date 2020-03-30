@@ -346,8 +346,8 @@
             filePath = "Find/MainController/History Beta/PhotoZoomViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "scaleInHighlight(component:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -30,7 +30,7 @@ protocol ZoomDeletedPhoto: class {
 
 class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDelegate {
 
-    var currentMatchStrings = [String]()
+//    var currentMatchStrings = [String]()
     var matchToColors = [String: [CGColor]]()
     
     @IBOutlet weak var xButton: UIButton!
@@ -39,9 +39,29 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         self.transitionController.isInteractive = false
         self.dismiss(animated: true, completion: nil)
     }
-
+    
+    @IBOutlet weak var doneFindingBlurView: UIVisualEffectView!
+    
+    @IBOutlet weak var doneFinding: UIButton!
+    
+    @IBAction func doneFindingPressed(_ sender: Any) {
+        matchToColors.removeAll()
+        changedTerms?.returnTerms(matchToColorsR: matchToColors)
+        SwiftEntryKit.dismiss()
+        
+        findingNow = false
+        UIView.animate(withDuration: 0.2, animations: {
+            self.doneFindingBlurView.alpha = 0
+        }) { _ in
+            self.doneFindingBlurView.isHidden = true
+        }
+        
+    }
+    
     
     @IBOutlet weak var blurView: UIVisualEffectView!
+    
+    var findingNow = false
     
     weak var changeModel: ZoomStateChanged?
     weak var doneAnimatingSEK: DoneAnimatingSEK?
@@ -66,8 +86,8 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         attributes.positionConstraints.size.height = .constant(value: 60)
         attributes.statusBar = .light
         attributes.entryInteraction = .absorbTouches
-//        attributes.scroll = .disabled
-        attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+        attributes.scroll = .disabled
+//        attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
         attributes.roundCorners = .all(radius: 5)
         attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
         
@@ -81,6 +101,13 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         
         self.changeFindbar = customView
         SwiftEntryKit.display(entry: customView, using: attributes)
+        
+        findingNow = true
+        doneFindingBlurView.isHidden = false
+        UIView.animate(withDuration: 0.2, animations: {
+            self.doneFindingBlurView.alpha = 1
+        })
+        
     }
     
     @IBAction func heartPressed(_ sender: Any) {
@@ -279,6 +306,12 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         backBlurView.layer.cornerRadius = 6
         backBlurView.clipsToBounds = true
         
+        doneFindingBlurView.layer.cornerRadius = 6
+        doneFindingBlurView.clipsToBounds = true
+        
+        doneFindingBlurView.isHidden = true
+        doneFindingBlurView.alpha = 0
+        
         self.pageViewController.delegate = self
         self.pageViewController.dataSource = self
         self.panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPanWith(gestureRecognizer:)))
@@ -297,6 +330,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         
         var urlString = URL(string: "")
         if cameFromFind {
+            
             let model = self.findModels[self.currentIndex]
             let filePath = model.photo.filePath
             urlString = URL(string: "\(folderURL)\(filePath)")
@@ -432,9 +466,16 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
                             self.view.backgroundColor = .black
                             self.xButton.alpha = 0
                             self.backBlurView.alpha = 0
+                            if self.findingNow {
+                                self.doneFindingBlurView.alpha = 0
+                            }
+                            
             }, completion: { completed in
                 self.xButton.isHidden = true
                 self.blurView.isHidden = true
+                if self.findingNow {
+                    self.doneFindingBlurView.isHidden = true
+                }
             })
             
         } else {
@@ -446,6 +487,9 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
                 }, completion: nil)
                 
             }
+            if self.findingNow {
+                self.doneFindingBlurView.isHidden = false
+            }
             self.xButton.isHidden = false
             UIView.animate(withDuration: 0.25,
                            animations: {
@@ -454,6 +498,9 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
                                 self.view.backgroundColor = .systemBackground
                             } else {
                                 self.view.backgroundColor = .white
+                            }
+                            if self.findingNow {
+                                self.doneFindingBlurView.alpha = 1
                             }
                             self.backBlurView.alpha = 1
             }, completion: { completed in
@@ -486,7 +533,8 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
             let filePath = self.photoModels[self.currentIndex - 1].filePath
             urlString = URL(string: "\(folderURL)\(filePath)")
             vc.photoComp = self.photoModels[self.currentIndex - 1]
-            self.changedTerms = vc
+//            self.changedTerms = vc
+//            changedTerms?.returnTerms(matchToColorsR: matchToColors)
         }
         
         vc.url = urlString
@@ -531,7 +579,8 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
             let filePath = self.photoModels[self.currentIndex + 1].filePath
             urlString = URL(string: "\(folderURL)\(filePath)")
             vc.photoComp = self.photoModels[self.currentIndex + 1]
-            self.changedTerms = vc
+//            self.changedTerms = vc
+//            changedTerms?.returnTerms(matchToColorsR: matchToColors)
         }
         
         vc.url = urlString
@@ -545,9 +594,12 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if completed {
             let currentVC = currentViewController
+//            currentVC
             let index = currentVC.index
             print("INDEX: \(index)")
             currentIndex = index
+            self.changedTerms = currentVC
+            changedTerms?.returnTerms(matchToColorsR: matchToColors)
             
         }
         previousViewControllers.forEach { vc in
@@ -634,10 +686,12 @@ extension PhotoPageContainerViewController: ReturnCachedPhotos {
 }
 
 extension PhotoPageContainerViewController: ReturnSortedTerms {
-    func returnTerms(currentMatchStringsR: [String], matchToColorsR: [String : [CGColor]]) {
+    func returnTerms(matchToColorsR: [String : [CGColor]]) {
 //        print("ASD")
-        currentMatchStrings = currentMatchStringsR
+//        currentMatchStrings = currentMatchStringsR
         matchToColors = matchToColorsR
+        let nc = NotificationCenter.default
+//        nc.post(name: .changeSearchTerms, object: self, userInfo: matchToColors)
         changedTerms?.returnTerms(matchToColorsR: matchToColorsR)
         
     }
@@ -669,3 +723,6 @@ extension PhotoPageContainerViewController: ReturnSortedTerms {
     
     
 }
+//extension Notification.Name {
+//    static let changeSearchTerms = Notification.Name("changeSearchTerms")
+//}

@@ -2742,6 +2742,32 @@
                                 </view>
                                 <blurEffect style="extraLight"/>
                             </visualEffectView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VPg-8f-Jvb">
+                                <rect key="frame" x="242" y="52" width="156" height="31"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="jkt-Oy-khK">
+                                    <rect key="frame" x="0.0" y="0.0" width="156" height="31"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9tD-vS-QJ0">
+                                            <rect key="frame" x="0.0" y="0.0" width="156" height="31"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                            <color key="tintColor" name="FeedbackGradientRight"/>
+                                            <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
+                                            <state key="normal" title="I'm done finding"/>
+                                            <connections>
+                                                <action selector="doneFindingPressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="gEe-wU-W4a"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="9tD-vS-QJ0" secondAttribute="trailing" id="PDp-Lq-JC2"/>
+                                        <constraint firstAttribute="bottom" secondItem="9tD-vS-QJ0" secondAttribute="bottom" id="Xwo-mH-Ls8"/>
+                                        <constraint firstItem="9tD-vS-QJ0" firstAttribute="leading" secondItem="jkt-Oy-khK" secondAttribute="leading" id="p6U-6z-xdG"/>
+                                        <constraint firstItem="9tD-vS-QJ0" firstAttribute="top" secondItem="jkt-Oy-khK" secondAttribute="top" id="vw8-Ij-k2t"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="extraLight"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -2749,8 +2775,10 @@
                             <constraint firstItem="akx-V1-sdk" firstAttribute="top" secondItem="QHL-0B-bRk" secondAttribute="top" id="5vw-c0-pKm"/>
                             <constraint firstItem="akx-V1-sdk" firstAttribute="leading" secondItem="QHL-0B-bRk" secondAttribute="leading" id="7F0-5W-nje"/>
                             <constraint firstAttribute="trailing" secondItem="akx-V1-sdk" secondAttribute="trailing" id="Bfn-fB-Aiu"/>
+                            <constraint firstItem="VPg-8f-Jvb" firstAttribute="top" secondItem="dC1-aD-whg" secondAttribute="bottom" constant="8" id="JqQ-iw-GhR"/>
                             <constraint firstItem="Paq-Mg-YB3" firstAttribute="centerX" secondItem="QHL-0B-bRk" secondAttribute="centerX" id="Lh9-1e-fBF"/>
                             <constraint firstAttribute="bottom" secondItem="akx-V1-sdk" secondAttribute="bottom" id="Q1b-0x-cs2"/>
+                            <constraint firstItem="eh5-7a-Q5S" firstAttribute="trailing" secondItem="VPg-8f-Jvb" secondAttribute="trailing" constant="16" id="eky-dJ-Xq6"/>
                             <constraint firstItem="9AY-Tu-QB1" firstAttribute="top" secondItem="Paq-Mg-YB3" secondAttribute="bottom" constant="16" id="wP5-Fg-qOb"/>
                             <constraint firstItem="B4x-Oj-4tb" firstAttribute="leading" secondItem="eh5-7a-Q5S" secondAttribute="leading" constant="16" id="xkk-7j-cHF"/>
                         </constraints>
@@ -2763,6 +2791,8 @@
                         <outlet property="blurView" destination="Paq-Mg-YB3" id="cvp-ux-93W"/>
                         <outlet property="cacheButton" destination="GJO-WY-oxz" id="mla-yk-i3J"/>
                         <outlet property="deleteButton" destination="9ce-Cj-kwU" id="FfA-ZN-9aH"/>
+                        <outlet property="doneFinding" destination="9tD-vS-QJ0" id="Jyi-Dr-ZZx"/>
+                        <outlet property="doneFindingBlurView" destination="VPg-8f-Jvb" id="Wj2-Ip-UzR"/>
                         <outlet property="findButton" destination="mj0-rs-H2T" id="xOT-jM-p9a"/>
                         <outlet property="heartButton" destination="F3l-p7-oSX" id="ToS-3E-jDd"/>
                         <outlet property="xButton" destination="te5-rx-LTY" id="yKD-td-Ebf"/>
@@ -2801,10 +2831,18 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Leica Sample" translatesAutoresizingMaskIntoConstraints="NO" id="F00-F2-p0B">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="189.5"/>
                                             </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HAh-a2-fex">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="189.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="HAh-a2-fex" secondAttribute="bottom" id="GdL-5d-DFF"/>
+                                            <constraint firstItem="HAh-a2-fex" firstAttribute="top" secondItem="3Iu-nM-Kxq" secondAttribute="top" id="Hds-gi-WVM"/>
                                             <constraint firstAttribute="bottom" secondItem="F00-F2-p0B" secondAttribute="bottom" id="KaM-lA-wQK"/>
+                                            <constraint firstItem="HAh-a2-fex" firstAttribute="leading" secondItem="3Iu-nM-Kxq" secondAttribute="leading" id="Ouf-tq-iYj"/>
+                                            <constraint firstAttribute="trailing" secondItem="HAh-a2-fex" secondAttribute="trailing" id="Rzr-pg-f9c"/>
                                             <constraint firstAttribute="trailing" secondItem="F00-F2-p0B" secondAttribute="trailing" id="fgc-hn-VYF"/>
                                             <constraint firstItem="F00-F2-p0B" firstAttribute="leading" secondItem="3Iu-nM-Kxq" secondAttribute="leading" id="jWS-hU-pFb"/>
                                             <constraint firstItem="F00-F2-p0B" firstAttribute="top" secondItem="3Iu-nM-Kxq" secondAttribute="top" id="znf-8C-NPh"/>
@@ -2830,6 +2868,7 @@
                         <viewLayoutGuide key="safeArea" id="vSl-kF-mLV"/>
                     </view>
                     <connections>
+                        <outlet property="drawingView" destination="HAh-a2-fex" id="dkQ-ZL-t18"/>
                         <outlet property="imageView" destination="F00-F2-p0B" id="cBe-rV-iMD"/>
                         <outlet property="imageViewBottomConstraint" destination="G28-6r-Zfd" id="kQK-la-gMv"/>
                         <outlet property="imageViewLeadingConstraint" destination="Cqz-e9-RKR" id="PbS-aB-iVK"/>

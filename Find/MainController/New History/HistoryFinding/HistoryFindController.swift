@@ -162,7 +162,7 @@ class HistoryFindController: UIViewController {
     var matchToColors = [String: [CGColor]]()
     var highlightColor = "00aeef"
     
-    var currentMatchStrings = [String]()
+//    var currentMatchStrings = [String]()
 //    var currentMatchArray = [String]()
 //    var currentSearchFindList = EditableFindList()
 //    var currentListsSharedFindList = EditableFindList()
@@ -467,7 +467,7 @@ extension HistoryFindController: ReturnSortedTerms {
         if resultPhotos.count == 0 {
             
             if start == true {
-                if currentMatchStrings.count == 0 {
+                if matchToColors.keys.count == 0 {
                     tableView.isHidden = false
                     tableView.alpha = 0
 
@@ -490,7 +490,7 @@ extension HistoryFindController: ReturnSortedTerms {
                 print("ENDDD")
 //                print("COUNT:: \(stringToList.count)")
 //                print("list: \(stringToList)")
-                if currentMatchStrings.count == 0 {
+                if matchToColors.keys.count == 0 {
                     let superViewWidth = view.frame.size.width
                     welcomeView.frame = CGRect(x: 0, y: 150, width: superViewWidth, height: 275)
                     view.addSubview(welcomeView)
@@ -511,21 +511,21 @@ extension HistoryFindController: ReturnSortedTerms {
         }
     }
     
-    func returnTerms( currentMatchStringsR: [String], matchToColorsR: [String : [CGColor]]) {
-        print("RECIEVED TERMS...>>.>.: \(currentMatchStringsR)")
+    func returnTerms(matchToColorsR: [String : [CGColor]]) {
+//        print("RECIEVED TERMS...>>.>.: \(currentMatchStringsR)")
         
         
 //        stringToList = stringToListR
 //        currentSearchFindList = currentSearchFindListR
 //        currentListsSharedFindList = currentListsSharedFindListR
 //        currentSearchAndListSharedFindList = currentSearchAndListSharedFindListR
-        currentMatchStrings = currentMatchStringsR
+//        currentMatchStrings = currentMatchStringsR
         matchToColors = matchToColorsR
         
         print("terms")
         
         
-        if currentMatchStrings.count == 0 {
+        if matchToColors.keys.count == 0 {
             
             noResultsLabel.text = "Start by typing or selecting a list..."
             UIView.animate(withDuration: 0.1, animations: {
@@ -630,7 +630,7 @@ extension HistoryFindController {
                     
                     let lowercaseContText = cont.text.lowercased()
                     let individualCharacterWidth = CGFloat(cont.width) / CGFloat(lowercaseContText.count)
-                    for match in self.currentMatchStrings {
+                    for match in self.matchToColors.keys {
                         if lowercaseContText.contains(match) {
                             hasMatch = true
                             let finalW = individualCharacterWidth * CGFloat(match.count)
@@ -1176,7 +1176,7 @@ extension HistoryFindController {
                     }
                     
                     var customFindArray = [String]()
-                    for findWord in self.currentMatchStrings {
+                    for findWord in self.matchToColors.keys {
                         customFindArray.append(findWord)
                         customFindArray.append(findWord.lowercased())
                         customFindArray.append(findWord.uppercased())
@@ -1282,7 +1282,7 @@ extension HistoryFindController {
             let lowercaseContText = cont.text.lowercased()
             
             let individualCharacterWidth = CGFloat(cont.width) / CGFloat(lowercaseContText.count)
-            for match in self.currentMatchStrings {
+            for match in self.matchToColors.keys {
                 if lowercaseContText.contains(match) {
 //                    print("MATCH!! \(match), in: \(cont.text)")
                     hasMatch = true

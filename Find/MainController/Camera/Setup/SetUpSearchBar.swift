@@ -673,9 +673,9 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     
 }
-extension Notification.Name {
-    static let changeSearchListSize = Notification.Name("changeSearchListSize")
-}
+//extension Notification.Name {
+//    static let changeSearchListSize = Notification.Name("changeSearchListSize")
+//}
 
 
 //extension UIImage {

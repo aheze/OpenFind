@@ -448,6 +448,6 @@ extension UIImage {
         self.init(cgImage: cgImage)
     }
 }
-extension Notification.Name {
-     static let toggleCreateName = Notification.Name("toggleCreateName")
-}
+//extension Notification.Name {
+//     static let toggleCreateName = Notification.Name("toggleCreateName")
+//}

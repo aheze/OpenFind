@@ -23,7 +23,7 @@ class PhotoZoomViewController: UIViewController {
     
     var deviceSize = UIScreen.main.bounds.size
     
-    
+    @IBOutlet weak var drawingView: UIView!
     @IBOutlet weak var imageViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewTopConstraint: NSLayoutConstraint!
@@ -33,6 +33,7 @@ class PhotoZoomViewController: UIViewController {
     
     weak var delegate: PhotoZoomViewControllerDelegate?
     var oldFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
+    var initializedView = false
     
     //var image: UIImage!
     var index: Int = 0
@@ -62,6 +63,7 @@ class PhotoZoomViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initializedView = true
         self.imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "LoadingImagePng"))
         //navigationController?.navigationItem.largeTitleDisplayMode = .never
         self.scrollView.delegate = self
@@ -70,8 +72,13 @@ class PhotoZoomViewController: UIViewController {
         }
         //self.imageView.image = self.image
         print(imageSize)
-        self.mainContentView.frame = CGRect(x: self.imageView.frame.origin.x, y: self.imageView.frame.origin.y, width: self.imageSize.width, height: self.imageSize.height)
-        self.view.addGestureRecognizer(self.doubleTapGestureRecognizer)
+        mainContentView.frame = CGRect(x: self.imageView.frame.origin.x, y: self.imageView.frame.origin.y, width: self.imageSize.width, height: self.imageSize.height)
+        
+        oldFrame = mainContentView.frame
+        print("OLDF::: \(oldFrame)")
+        view.addGestureRecognizer(self.doubleTapGestureRecognizer)
+        
+//        NotificationCenter.default.addObserver(self, selector: #selector(returnTerms(_:)), name: .changeSearchTerms, object: nil)
         
 //        print("HIGH: \(highlights)")
 //        print("Frame: \(mainContentView.frame)")
@@ -79,8 +86,7 @@ class PhotoZoomViewController: UIViewController {
 //        print("MATCHS zoom: \(matchToColors)")
 //        print("MATCH COLORS: \(matchToColors)")
        scaleHighlights()
-        
-        
+        fastFind()
     }
     func scaleInHighlight(component: Component) {
         
@@ -150,7 +156,7 @@ class PhotoZoomViewController: UIViewController {
             
             let newView = UIView(frame: CGRect(x: component.x, y: component.y, width: component.width, height: component.height))
 //            self.view.insertSubview(newView, aboveSubview: self.mainContentView)
-            self.mainContentView.addSubview(newView)
+            self.drawingView.addSubview(newView)
             
             newView.layer.addSublayer(layer)
             newView.clipsToBounds = false
@@ -185,10 +191,11 @@ class PhotoZoomViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 //        scaleHighlights()
+        print("SUBSUBSUBSUB")
         updateZoomScaleForSize(view.bounds.size)
         updateConstraintsForSize(view.bounds.size)
         print("FRAME: \(mainContentView.frame)")
-        
+//        view.bringSubviewToFront(drawingView)
 //        if oldFrame != mainContentView.frame {
 //
 //        }
@@ -202,27 +209,13 @@ class PhotoZoomViewController: UIViewController {
         updateConstraintsForSize(view.bounds.size)
     }
     func scaleHighlights() {
+        print("SCALE IN>>>")
         for comp in highlights {
-                    
-                    
-            let newX = comp.x * mainContentView.frame.width
-            let newWidth = comp.width * mainContentView.frame.width
-            let newY = comp.y * mainContentView.frame.height
-            let newHeight = comp.height * mainContentView.frame.height
-            
-    //            print(newX)
-    //            print(newY)
-    //            print(newWidth)
-    //            print(newHeight)
-            
-//            print("OLD: x: \(comp.x), y: \(comp.y), width: \(comp.width), height: \(comp.height)")
-//            print("x: \(newX), y: \(newY), width: \(newWidth), height: \(newHeight)")
-            
-            
-    //            comp.x = newX
-    //            comp.y = newY
-    //            comp.width = newWidth
-    //            comp.height = newHeight
+            let newX = comp.x * oldFrame.size.width
+            let newWidth = comp.width * oldFrame.size.width
+            let newY = comp.y * oldFrame.size.height
+            let newHeight = comp.height * oldFrame.size.height
+            print("x: \(newX), y: \(newY), width: \(newWidth), height: \(newHeight)")
             if newHeight <= 200 {
                 let compToScale = Component()
                 compToScale.x = newX - 6
@@ -302,20 +295,44 @@ extension PhotoZoomViewController: UIScrollViewDelegate {
 extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
 
     
-    func returnTerms(matchToColorsR: [String : [CGColor]]) {
+     func returnTerms(matchToColorsR: [String: [CGColor]]) {
+//        getRead
+//        if initializedView {
+            print("RETURNED TERMS!!!")
+            print("DATA: \(matchToColorsR)")
         matchToColors = matchToColorsR
+        drawingView.subviews.forEach({ $0.removeFromSuperview() })
+        fastFind()
+                    
+                    
+                
+            
+//        }
     }
     
     func fastFind() {
         
+//        (_ notification: Notification) {
+        //      //  print("receive highlight string errors")
+        //       // print("Errors? \(notification.userInfo)")
+        //        print("DELETE")
+        //        if let data = notification.userInfo as? [Int: Int] {
+        //            if indexPath >= data[0]! + 1 {
+        //                indexPath -= 1
+        //            }
+        //          //  print("HAS DATA")
+        //         //   print("data: \(data)")
+        //        }
+        //    }
+        
         DispatchQueue.global(qos: .background).async {
 //            print("1")
-            var findModels = [FindModel]()
+//            var findModels = [FindModel]()
     //        var heights = [CGFloat]()
             
     //        print(
             let photo = self.photoComp
-            print("searching in photo")
+            print("searching in photo FAST")
             var num = 0
             
 //            let newMod = FindModel()
@@ -326,12 +343,12 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
             ///Cycle through each block of text. Each cont may be a line long.
             for cont in photo.contents {
 //                var matchRanges = [ArrayOfMatchesInComp]()
-                var hasMatch = false
+//                var hasMatch = false
                 let lowercaseContText = cont.text.lowercased()
                 let individualCharacterWidth = CGFloat(cont.width) / CGFloat(lowercaseContText.count)
                 for match in self.matchToColors.keys {
                     if lowercaseContText.contains(match) {
-                        hasMatch = true
+//                        hasMatch = true
                         let finalW = individualCharacterWidth * CGFloat(match.count)
                         let indicies = lowercaseContText.indicesOf(string: match)
                         

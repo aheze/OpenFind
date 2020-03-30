@@ -14,7 +14,7 @@ import SnapKit
 
 protocol ReturnSortedTerms: class {
     func pause(pause: Bool)
-    func returnTerms(currentMatchStringsR: [String], matchToColorsR: [String: [CGColor]])
+    func returnTerms(matchToColorsR: [String: [CGColor]])
     func startedEditing(start: Bool)
     func pressedReturn()
     func triedToEdit()
@@ -102,7 +102,7 @@ class FindBar: UIView, UITextFieldDelegate {
     var finalTextToFind : String = ""
     
         
-    var currentMatchStrings = [String]()
+//    var currentMatchStrings = [String]()
     var matchToColors = [String: [CGColor]]()
     //    var stringToList = [String: EditableFindList]()
     
@@ -463,7 +463,7 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         
         
             if dupPaused == false {
-                if currentMatchStrings.count != 0 {
+                if matchToColors.keys.count != 0 {
                     searchActive = false
                     textField.resignFirstResponder()
                     returnTerms?.pressedReturn()
@@ -615,14 +615,15 @@ extension FindBar {
             var cameAcrossShare = [String]()
             var duplicatedStrings = [String]()
             
-            currentMatchStrings.removeAll()
+//            currentMatchStrings.removeAll()
             matchToColors.removeAll()
 //            stringToList.removeAll()
             
+//            var currentStrings
             var cameAcrossSearchFieldText = [String]()
             for list in selectedLists {
                 for match in list.contents {
-                    currentMatchStrings.append(match)
+//                    currentMatchStrings.append(match)
                     if !cameAcrossShare.contains(match.lowercased()) {
                         cameAcrossShare.append(match.lowercased())
                     } else {
@@ -692,12 +693,12 @@ extension FindBar {
                 let cgColor = UIColor(hexString: highlightColor).cgColor
                 matchToColors[match, default: [CGColor]()].append(cgColor)
             }
-            currentMatchStrings += arrayOfSearch
-            currentMatchStrings = currentMatchStrings.uniques
+//            currentMatchStrings += arrayOfSearch
+//            currentMatchStrings = currentMatchStrings.uniques
             
             if shouldReturnTerms {
 //                print("GIVE!!!   stringToList:\(stringToList), currentSearchFindListR:\(currentSearchFindList), currentListsSharedFindListR:\(currentListsSharedFindList), currentSearchAndListSharedFindListR:\(currentSearchAndListSharedFindList), currentMatchStringsR:\(currentMatchStrings), matchToColorsR:\(matchToColors)")
-                returnTerms?.returnTerms(currentMatchStringsR: currentMatchStrings, matchToColorsR: matchToColors)
+                returnTerms?.returnTerms(matchToColorsR: matchToColors)
                     
             }
         }

@@ -1430,6 +1430,9 @@ extension NewHistoryViewController: ZoomAnimatorDelegate {
     }
     
     func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
+        if zoomAnimator.isPresenting == false && zoomAnimator.finishedDismissing == true {
+            SwiftEntryKit.dismiss()
+        }
         if let cell = self.collectionView.cellForItem(at: self.selectedIndexPath) as? HPhotoCell {
         
             let cellFrame = self.collectionView.convert(cell.frame, to: self.view)
