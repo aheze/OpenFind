@@ -7,13 +7,20 @@
 //
 
 import UIKit
+import SwiftEntryKit
 
 
 class SettingsViewController: UIViewController {
     
     
+    @IBOutlet weak var xButton: UIButton!
     
-    @IBOutlet weak var blackXButtonView: UIImageView!
+    @IBAction func xButtonPressed(_ sender: Any) {
+        if let pvc = self.presentationController {
+            pvc.delegate?.presentationControllerDidDismiss?(pvc)
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
     
     @IBOutlet weak var highlightColorView: UIView!
     @IBOutlet weak var redButton: UIButton!
@@ -25,46 +32,227 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var findblueButton: UIButton!
     @IBOutlet weak var purpleButton: UIButton!
     
+    let defaults = UserDefaults.standard
+    
+    @IBAction func colorButtonPressed(_ sender: UIButton) {
+        let image = UIImage(systemName: "checkmark")
+        
+        removeChecks()
+        
+        switch sender.tag {
+        case 3501:
+            redButton.setImage(image, for: .normal)
+            defaults.set("EB3B5A", forKey: "highlightColor")
+            print("red")
+        case 3502:
+            orangeButton.setImage(image, for: .normal)
+            defaults.set("FA8231", forKey: "highlightColor")
+            print("org")
+        case 3503:
+            yellowButton.setImage(image, for: .normal)
+            defaults.set("FED330", forKey: "highlightColor")
+            print("yel")
+        case 3504:
+            greenButton.setImage(image, for: .normal)
+            defaults.set("20BF6B", forKey: "highlightColor")
+            print("gre")
+        case 3505:
+            tealButton.setImage(image, for: .normal)
+            defaults.set("2BCBBA", forKey: "highlightColor")
+            print("teal")
+        case 3506:
+            lightblueButton.setImage(image, for: .normal)
+            defaults.set("45AAF2", forKey: "highlightColor")
+            print("blue")
+        case 3507:
+            findblueButton.setImage(image, for: .normal)
+            defaults.set("00AEEF", forKey: "highlightColor")
+            print("aeef")
+        case 3508:
+            purpleButton.setImage(image, for: .normal)
+            defaults.set("A55EEA", forKey: "highlightColor")
+            print("purple")
+        default:
+            print("WRONG TAG!!")
+        }
+    }
+    func removeChecks() {
+        redButton.setImage(nil, for: .normal)
+        orangeButton.setImage(nil, for: .normal)
+        yellowButton.setImage(nil, for: .normal)
+        greenButton.setImage(nil, for: .normal)
+        tealButton.setImage(nil, for: .normal)
+        lightblueButton.setImage(nil, for: .normal)
+        findblueButton.setImage(nil, for: .normal)
+        purpleButton.setImage(nil, for: .normal)
+    }
+    
 
-    @IBOutlet weak var watchTutorialView: UIView!
-    @IBOutlet weak var clearHistoryView: UIView!
-    @IBOutlet weak var resetSettingsView: UIView!
-    @IBOutlet weak var rateAppView: UIView!
-    @IBOutlet weak var helpView: UIView!
+    @IBAction func textDetectIndicatorPressed(_ sender: Any) {
+    }
+    
+    @IBOutlet weak var textDetectSwitch: UISwitch!
+    @IBAction func textDetectSwitchValue(_ sender: UISwitch) {
+        if textDetectSwitch.isOn == true {
+            defaults.set(true, forKey: "showTextDetectIndicator")
+        } else {
+            defaults.set(false, forKey: "showTextDetectIndicator")
+        }
+    }
     
     
-    //    @IBOutlet weak var prefilterView: UIView!
-//    @IBOutlet weak var prefilterSwitch: UISwitch!
+    
+    @IBAction func hapticFeedbackPressed(_ sender: Any) {
+    }
+    
+    @IBOutlet weak var hapticFeedbackSwitch: UISwitch!
+    @IBAction func hapticFeedbackSwitchValue(_ sender: UISwitch) {
+        if hapticFeedbackSwitch.isOn == true {
+            defaults.set(true, forKey: "hapticFeedback")
+        } else {
+            defaults.set(false, forKey: "hapticFeedback")
+        }
+    }
+    
+    
+    
+    @IBAction func helpPressed(_ sender: Any) {
+        displayHelpController()
+    }
+    
+    @IBAction func tutorialButtonPressed(_ sender: Any) {
+        print("tutorial")
+    }
+    
+    @IBAction func clearHistPressed(_ sender: Any) {
+        print("CLEAR hist")
+    }
+    
+    @IBAction func clearListsPressed(_ sender: Any) {
+        print("clear list")
+    }
+    
+    @IBAction func resetSettingsPressed(_ sender: Any) {
+        print("reset sett")
+    }
+    
+    
+    
+    
     
     @IBOutlet weak var otherSettingsView: UIView!
+    @IBOutlet weak var middleHelpView: UIView!
     
-    @IBOutlet weak var feedbackView: UIView!
+    @IBOutlet weak var moreSettingsView: UIView!
+    
+    
+    
+    @IBOutlet weak var leaveFeedbackView: UIView!
+    
+    @IBOutlet weak var rateAppView: UIView!
+    
+    @IBAction func leaveFeedbackPressed(_ sender: Any) {
+        displayWithURL(urlString: "https://forms.gle/agdyoB9PFfnv8cU1A/", topLabelText: "Send Feedback", color: #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1))
+    }
+    
+    @IBAction func rateAppPressed(_ sender: Any) {
+        print("Rate app")
+    }
+    
+    
+    
     
     @IBOutlet weak var creditsView: UIView!
     
+    @IBAction func creditsPressed(_ sender: Any) {
+        print("credits")
+    }
+    
+    
+
     weak var delegate: UIAdaptivePresentationControllerDelegate?
     
     
     override func viewDidLoad() {
+        
+//        let defaults = UserDefaults.standard
+//        defaults.set(25, forKey: "Age")
+//        defaults.set(true, forKey: "UseTouchID")
+//        defaults.set(CGFloat.pi, forKey: "Pi")
+//
+//        defaults.set("Paul Hudson", forKey: "Name")
+//        defaults.set(Date(), forKey: "LastRun")
+//        
+        
         setUpSettingsRoundedCorners()
-        //setUpSettingsSwitches()
-        setUpXButton()
-        setUpGradientFeedback()
-        addGestureRecognizers()
+        setUpBasic()
+//        addGestureRecognizers()
+    }
+ 
+    
+}
+
+
+extension SettingsViewController {
+    func displayWithURL(urlString: String, topLabelText: String, color: UIColor) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewControllerPresent = storyboard.instantiateViewController(withIdentifier: "SingleHelp") as! SingleHelp
+        viewControllerPresent.topLabelText = topLabelText
+        viewControllerPresent.urlString = urlString
+        viewControllerPresent.topViewColor = color
+        
+        viewControllerPresent.view.layer.cornerRadius = 10
+//        view.layer.cornerRadius = 10
+        viewControllerPresent.view.clipsToBounds = true
+        viewControllerPresent.edgesForExtendedLayout = []
+        
+        var attributes = EKAttributes.centerFloat
+        attributes.displayDuration = .infinity
+        attributes.entryInteraction = .absorbTouches
+        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+        attributes.entryBackground = .color(color: .white)
+        attributes.screenInteraction = .absorbTouches
+        attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+        SwiftEntryKit.display(entry: viewControllerPresent, using: attributes)
     }
     
-    func setUpXButton() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleBlackXPress(_:)))
-        blackXButtonView.addGestureRecognizer(tap)
-        blackXButtonView.isUserInteractionEnabled = true
+    func displayHelpController() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let helpViewController = storyboard.instantiateViewController(withIdentifier: "DefaultHelpController") as! DefaultHelpController
+        
+        helpViewController.title = "Help"
+        helpViewController.helpJsonKey = "SettingsHelpArray"
+        
+//        helpViewController.title = "Find Help"
+//        helpViewController.helpJsonKey = "HistoryFindHelpArray"
+        let navigationController = UINavigationController(rootViewController: helpViewController)
+        navigationController.view.backgroundColor = UIColor.clear
+        navigationController.navigationBar.tintColor = UIColor.white
+        navigationController.navigationBar.prefersLargeTitles = true
+        
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithOpaqueBackground()
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+        navigationController.navigationBar.standardAppearance = navBarAppearance
+        navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
+        navigationController.view.layer.cornerRadius = 10
+        UINavigationBar.appearance().barTintColor = .black
+        helpViewController.edgesForExtendedLayout = []
+        
+        var attributes = EKAttributes.centerFloat
+        attributes.displayDuration = .infinity
+        attributes.entryInteraction = .absorbTouches
+        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+        attributes.entryBackground = .color(color: .white)
+        attributes.screenInteraction = .absorbTouches
+        attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+        
+        SwiftEntryKit.display(entry: navigationController, using: attributes)
     }
-    @objc func handleBlackXPress(_ sender: UITapGestureRecognizer? = nil) {
-       // presentationController?.delegate?.presentationControllerDidDismiss
-        // delegate?.presentationControllerDidDismiss?(presentationController!)
-        if let pvc = self.presentationController {
-            pvc.delegate?.presentationControllerDidDismiss?(pvc)
-        }
-        self.dismiss(animated: true, completion: nil)
-    }
-    
 }

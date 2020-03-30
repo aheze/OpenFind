@@ -78,6 +78,8 @@
 		4972B40E23F117C500843537 /* GeneralTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4972B40D23F117C500843537 /* GeneralTableviewCell.swift */; };
 		4979A39023AF3A4800B09380 /* FastMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979A38F23AF3A4800B09380 /* FastMode.swift */; };
 		4979A39323AF3C4F00B09380 /* FastVisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979A39223AF3C4F00B09380 /* FastVisionHandler.swift */; };
+		498332D82431B4D500AD083E /* LDGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498332D72431B4D500AD083E /* LDGradientView.swift */; };
+		498332DA243279EF00AD083E /* SingleHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498332D9243279EF00AD083E /* SingleHelp.swift */; };
 		4988FC4823BEF89600199635 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988FC4723BEF89600199635 /* ListModel.swift */; };
 		498EDA0123E130C6009EB0CF /* SymbolsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498EDA0023E130C6009EB0CF /* SymbolsList.swift */; };
 		4990AAE223EDB4CE00FAF37B /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4990AAE123EDB4CE00FAF37B /* GeneralViewController.swift */; };
@@ -194,6 +196,8 @@
 		4972B40D23F117C500843537 /* GeneralTableviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTableviewCell.swift; sourceTree = "<group>"; };
 		4979A38F23AF3A4800B09380 /* FastMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastMode.swift; sourceTree = "<group>"; };
 		4979A39223AF3C4F00B09380 /* FastVisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastVisionHandler.swift; sourceTree = "<group>"; };
+		498332D72431B4D500AD083E /* LDGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDGradientView.swift; sourceTree = "<group>"; };
+		498332D9243279EF00AD083E /* SingleHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleHelp.swift; sourceTree = "<group>"; };
 		4988FC4723BEF89600199635 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		498EDA0023E130C6009EB0CF /* SymbolsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsList.swift; sourceTree = "<group>"; };
 		4990AAE123EDB4CE00FAF37B /* GeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
@@ -469,6 +473,7 @@
 				4991344F236FE12400B82E46 /* SettingsViewExtensions.swift */,
 				4917CE7E23C0490E002EA20B /* GeneralSettings.swift */,
 				49913451236FE33B00B82E46 /* SettingsBasicSetup.swift */,
+				498332D72431B4D500AD083E /* LDGradientView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -517,6 +522,15 @@
 			path = Fast;
 			sourceTree = "<group>";
 		};
+		498332DB243279F900AD083E /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				498332D9243279EF00AD083E /* SingleHelp.swift */,
+				49301BEF2400D4FE00B4780B /* HelpControllers.swift */,
+			);
+			path = Help;
+			sourceTree = "<group>";
+		};
 		4988FC4623BEF82D00199635 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
@@ -531,7 +545,7 @@
 				490BC3F723FA5FBF004D1433 /* General */,
 				492EB4F323F50C49007142CA /* Symbols */,
 				4990AAE523EDB50E00FAF37B /* ColorsViewController.swift */,
-				49301BEF2400D4FE00B4780B /* HelpControllers.swift */,
+				498332DB243279F900AD083E /* Help */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -796,6 +810,7 @@
 				49301BF02400D4FF00B4780B /* HelpControllers.swift in Sources */,
 				4972B40E23F117C500843537 /* GeneralTableviewCell.swift in Sources */,
 				49368CB223905E8E00B67C4A /* BottomSheetViewController.swift in Sources */,
+				498332D82431B4D500AD083E /* LDGradientView.swift in Sources */,
 				49A8EFAE237A5F2800328D47 /* SetUpSearchBar.swift in Sources */,
 				4928525423D368780048EC13 /* CameraService.swift in Sources */,
 				49301BF32402460000B4780B /* FancyQuotes.swift in Sources */,
@@ -834,6 +849,7 @@
 				49BC783923C8C7AB003D9904 /* HistoryStartSelection.swift in Sources */,
 				49B7A33A23923EE10070209F /* PhotoZoomViewController.swift in Sources */,
 				49569B3523D6919E009308CA /* ListsLayout.swift in Sources */,
+				498332DA243279EF00AD083E /* SingleHelp.swift in Sources */,
 				49F7B15C2354E85F0099FA62 /* WordReader.swift in Sources */,
 				490DA75423CBB871000AF57D /* JJFloatingActionButtonDelegate.swift in Sources */,
 				490DA75823CBB871000AF57D /* JJActionItem.swift in Sources */,

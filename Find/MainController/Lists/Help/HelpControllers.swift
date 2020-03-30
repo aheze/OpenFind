@@ -75,7 +75,7 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(closeTapped))
-        if let url = URL(string: "https://raw.githubusercontent.com/zjohnzheng/FindHelp/master/NavigatorDatasource.json") {
+        if let url = URL(string: "https://raw.githubusercontent.com/zjohnzheng/FindHelp/master/1NavigatorDatasource.json") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 
                if let data = data {
@@ -146,15 +146,23 @@ class HelpController: UIViewController, WKNavigationDelegate {
         
         webView.navigationDelegate = self
         setupEstimatedProgressObserver()
+        webView.isOpaque = false
+        webView.backgroundColor = UIColor.clear
+        
         sendRequest(urlString: urlString)
         
     }
     private func sendRequest(urlString: String) {
-        let myURL = URL(string: urlString)
-        let myRequest = URLRequest(url: myURL!)
-        webView.load(myRequest)
-        webView.isOpaque = false
-        webView.backgroundColor = UIColor.clear
+        
+        if let urlToLoad = URL(string: urlString) {
+            let myRequest = URLRequest(url: urlToLoad)
+            webView.load(myRequest)
+        } else {
+            let errorUrlToLoad = URL(string: "https://zjohnzheng.github.io/FindHelp/404.html")!
+            let myRequest = URLRequest(url: errorUrlToLoad)
+            webView.load(myRequest)
+        }
+        
     }
     
   func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {

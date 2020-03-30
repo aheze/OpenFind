@@ -50,6 +50,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var menuButton: JJFloatingActionButton!
     @IBOutlet weak var newShutterButton: NewShutterButton!
     
+    let defaults = UserDefaults.standard
+    
     
     //MARK: Timer and haptic feedback
     var hapticFeedbackEnabled = true
@@ -334,11 +336,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let hexString = defaults.string(forKey: "highlightColor") {
+            highlightColor = hexString
+            print("COLOR: \(hexString)")
+        }
+        
         
 //        changeDelegate = statusView as? ChangeStatusValue
         
         
-        
+//        highlightColor
         
         numberLabel.isHidden = false
         updateMatchesNumber(to: 0)

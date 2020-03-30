@@ -176,15 +176,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         let histImage = UIImage(systemName: "arrow.counterclockwise.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
         let settImage = UIImage(systemName: "gear", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
         
-        let goToSett = menuButton.addItem()
-        goToSett.tag = 12462
-        goToSett.titleLabel.text = "Settings"
-        goToSett.imageView.image = settImage
-        goToSett.action = { item in
-            print("settings")
-            self.blurScreenForSheetPresentation()
-            self.performSegue(withIdentifier: "goToSettings", sender: self)
-        }
+        
         let goToNewHistory = menuButton.addItem()
         goToNewHistory.tag = 12461
         goToNewHistory.titleLabel.text = "History"
@@ -204,6 +196,16 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         goToLists.action = { item in
             self.blurScreenForSheetPresentation()
             self.performSegue(withIdentifier: "goToLists", sender: self)
+        }
+        
+        let goToSett = menuButton.addItem()
+        goToSett.tag = 12462
+        goToSett.titleLabel.text = "Settings"
+        goToSett.imageView.image = settImage
+        goToSett.action = { item in
+//            print("settings")
+            self.blurScreenForSheetPresentation()
+            self.performSegue(withIdentifier: "goToSettings", sender: self)
         }
         
         menuButton.overlayView.backgroundColor = UIColor.clear

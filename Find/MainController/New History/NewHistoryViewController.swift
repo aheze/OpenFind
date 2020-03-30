@@ -329,7 +329,18 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
-    @IBOutlet weak var blackXButtonView: UIImageView!
+    @IBOutlet weak var xButton: UIButton!
+    
+    @IBAction func xButtonPressed(_ sender: Any) {
+        if let pvc = self.presentationController {
+            pvc.delegate?.presentationControllerDidDismiss?(pvc)
+        }
+        SwiftEntryKit.dismiss()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         populateRealm()
@@ -369,7 +380,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //                }
 //            }
 //        }
-        setUpXButton()
+//        setUpXButton()
         
         indexPathsSelected.removeAll()
     }
@@ -426,18 +437,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         return indexNumber
         
     }
-    func setUpXButton() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleBlackXPress(_:)))
-        blackXButtonView.addGestureRecognizer(tap)
-        blackXButtonView.isUserInteractionEnabled = true
-    }
-    @objc func handleBlackXPress(_ sender: UITapGestureRecognizer? = nil) {
-        if let pvc = self.presentationController {
-            pvc.delegate?.presentationControllerDidDismiss?(pvc)
-        }
-        SwiftEntryKit.dismiss()
-        self.dismiss(animated: true, completion: nil)
-    }
+
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sectionCounts.count

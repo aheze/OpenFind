@@ -76,6 +76,7 @@ class HistoryFindController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let helpViewController = storyboard.instantiateViewController(withIdentifier: "DefaultHelpController") as! DefaultHelpController
         helpViewController.title = "Find Help"
+        helpViewController.helpJsonKey = "HistoryFindHelpArray"
         let navigationController = UINavigationController(rootViewController: helpViewController)
         navigationController.view.backgroundColor = UIColor.clear
         navigationController.navigationBar.tintColor = UIColor.white
@@ -90,6 +91,7 @@ class HistoryFindController: UIViewController {
         navigationController.view.layer.cornerRadius = 10
         UINavigationBar.appearance().barTintColor = .black
         helpViewController.edgesForExtendedLayout = []
+        
         var attributes = EKAttributes.centerFloat
         attributes.displayDuration = .infinity
         attributes.entryInteraction = .absorbTouches
