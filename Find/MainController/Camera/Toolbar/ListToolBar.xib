@@ -70,7 +70,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFO-dW-9SD">
-                            <rect key="frame" x="255" y="6" width="94" height="26"/>
+                            <rect key="frame" x="140" y="6" width="94" height="26"/>
                             <color key="backgroundColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="26" id="3gA-Jm-Q5R"/>
@@ -88,6 +88,7 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="B9B-HN-NIt" secondAttribute="bottom" constant="6" id="AmE-8d-dgB"/>
                         <constraint firstAttribute="trailing" secondItem="B9B-HN-NIt" secondAttribute="trailing" id="CIC-Z5-n6W"/>
+                        <constraint firstItem="oFO-dW-9SD" firstAttribute="leading" secondItem="4fF-c0-iRr" secondAttribute="trailing" constant="6" id="D4g-8i-HLc"/>
                         <constraint firstItem="oFO-dW-9SD" firstAttribute="top" secondItem="yNx-xj-pnt" secondAttribute="top" constant="6" id="EFa-ql-gP3"/>
                         <constraint firstItem="4fF-c0-iRr" firstAttribute="top" secondItem="yNx-xj-pnt" secondAttribute="top" constant="6" id="FBq-rj-yH5"/>
                         <constraint firstItem="B9B-HN-NIt" firstAttribute="top" secondItem="4fF-c0-iRr" secondAttribute="bottom" constant="6" id="GAT-i4-FVI"/>
@@ -95,7 +96,6 @@
                         <constraint firstItem="4fF-c0-iRr" firstAttribute="leading" secondItem="yNx-xj-pnt" secondAttribute="leading" constant="6" id="Wu1-YS-knL"/>
                         <constraint firstItem="B5C-dV-QNK" firstAttribute="top" secondItem="yNx-xj-pnt" secondAttribute="top" constant="6" id="ijK-BU-rrO"/>
                         <constraint firstItem="B9B-HN-NIt" firstAttribute="leading" secondItem="yNx-xj-pnt" secondAttribute="leading" id="wTV-J5-eil"/>
-                        <constraint firstItem="B5C-dV-QNK" firstAttribute="leading" secondItem="oFO-dW-9SD" secondAttribute="trailing" constant="6" id="x3Q-U9-Wqw"/>
                     </constraints>
                 </view>
             </subviews>

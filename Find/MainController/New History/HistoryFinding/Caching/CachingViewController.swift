@@ -18,6 +18,7 @@ protocol ReturnCachedPhotos: class {
 class CachingViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, DoneAnimatingSEK {
     
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //MARK: Cancel cache
     
@@ -36,7 +37,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     let rimView = UIView()
     let tintView = UIView()
-    let swipeView = UIView()
+//    let swipeView = UIView()
     
 //    var photoSize = CGSize(width: 0, height: 0)
     
@@ -126,6 +127,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
         setUpViews()
         cancelView.isHidden = true
         backButton.isHidden = true
+        activityIndicator.startAnimating()
 //        cancelView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
 //        startFinding()
     }
@@ -153,21 +155,24 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
                 
                 self.rimView.alpha = 0
                 self.tintView.alpha = 0
-                self.swipeView.alpha = 0
+                self.activityIndicator.alpha = 0
+//                self.swipeView.alpha = 0
                 
             }, completion: { _ in
                 self.baseView.isHidden = true
                 
                 self.rimView.isHidden = true
                 self.tintView.isHidden = true
-                self.swipeView.isHidden = true
+                self.activityIndicator.isHidden = true
+//                self.swipeView.isHidden = true
             })
             
         } else {
             self.baseView.isHidden = false
             self.rimView.isHidden = false
             self.tintView.isHidden = false
-            self.swipeView.isHidden = false
+            self.activityIndicator.isHidden = false
+//            self.swipeView.isHidden = false
             
             self.statusOk = true
             
@@ -183,7 +188,8 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
                 
                 self.rimView.alpha = 1
                 self.tintView.alpha = 1
-                self.swipeView.alpha = 1
+                self.activityIndicator.alpha = 1
+//                self.swipeView.alpha = 1
                 
                 
             }, completion: { _ in
@@ -521,10 +527,10 @@ extension CachingViewController {
         rimView.addSubview(tintView)
         
         
-        swipeView.frame = CGRect(x: 10, y: 5, width: 10, height: 170)
-        swipeView.backgroundColor = UIColor(hexString: "00aeef")
-        swipeView.layer.cornerRadius = 5
-        rimView.addSubview(swipeView)
+//        swipeView.frame = CGRect(x: 10, y: 5, width: 10, height: 170)
+//        swipeView.backgroundColor = UIColor(hexString: "00aeef")
+//        swipeView.layer.cornerRadius = 5
+//        rimView.addSubview(swipeView)
         
         
         
@@ -557,6 +563,7 @@ extension CachingViewController {
         
         numberCachedLabel.text = "0/\(photos.count) photos cached"
         
+        baseView.bringSubviewToFront(activityIndicator)
     }
 }
 

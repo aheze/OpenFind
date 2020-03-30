@@ -16,6 +16,7 @@ protocol PhotoPageContainerViewControllerDelegate: class {
 protocol ChangedSearchTermsFromZoom: class {
 //    func pause(pause: Bool)
     func returnTerms(matchToColorsR: [String: [CGColor]])
+    func pressedReturn()
 }
 protocol ZoomStateChanged: class {
     func changedState(type: String, index: Int)
@@ -339,12 +340,14 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             
             print("MATCHS: \(matchToColors)")
             vc.highlights = model.components
+            vc.cameFromFind = true
             
         } else {
             vc.photoComp = self.photoModels[self.currentIndex]
             let filePath = self.photoModels[self.currentIndex].filePath
             urlString = URL(string: "\(folderURL)\(filePath)")
             self.changedTerms = vc
+            vc.cameFromFind = false
         }
         
         vc.folderURL = folderURL
@@ -529,10 +532,12 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
             urlString = URL(string: "\(folderURL)\(filePath)")
             vc.matchToColors = matchToColors
             vc.highlights = model.components
+            vc.cameFromFind = true
         } else {
             let filePath = self.photoModels[self.currentIndex - 1].filePath
             urlString = URL(string: "\(folderURL)\(filePath)")
             vc.photoComp = self.photoModels[self.currentIndex - 1]
+            vc.cameFromFind = false
 //            self.changedTerms = vc
 //            changedTerms?.returnTerms(matchToColorsR: matchToColors)
         }
@@ -575,10 +580,12 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
             urlString = URL(string: "\(folderURL)\(filePath)")
             vc.matchToColors = matchToColors
             vc.highlights = model.components
+            vc.cameFromFind = true
         } else {
             let filePath = self.photoModels[self.currentIndex + 1].filePath
             urlString = URL(string: "\(folderURL)\(filePath)")
             vc.photoComp = self.photoModels[self.currentIndex + 1]
+            vc.cameFromFind = false
 //            self.changedTerms = vc
 //            changedTerms?.returnTerms(matchToColorsR: matchToColors)
         }
@@ -592,14 +599,13 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        
+        let currentVC = currentViewController
         if completed {
-            let currentVC = currentViewController
-//            currentVC
             let index = currentVC.index
             print("INDEX: \(index)")
             currentIndex = index
-            self.changedTerms = currentVC
-            changedTerms?.returnTerms(matchToColorsR: matchToColors)
+            
             
         }
         previousViewControllers.forEach { vc in
@@ -610,6 +616,10 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
         self.delegate?.containerViewController(self, indexDidUpdate: self.currentIndex)
 
         if !cameFromFind {
+            if completed {
+                self.changedTerms = currentVC
+                changedTerms?.returnTerms(matchToColorsR: matchToColors)
+            }
             if photoModels[currentIndex].isHearted == true {
                 let newImage = UIImage(systemName: "heart.fill")
                 heartButton.setImage(newImage, for: .normal)
@@ -687,11 +697,7 @@ extension PhotoPageContainerViewController: ReturnCachedPhotos {
 
 extension PhotoPageContainerViewController: ReturnSortedTerms {
     func returnTerms(matchToColorsR: [String : [CGColor]]) {
-//        print("ASD")
-//        currentMatchStrings = currentMatchStringsR
         matchToColors = matchToColorsR
-        let nc = NotificationCenter.default
-//        nc.post(name: .changeSearchTerms, object: self, userInfo: matchToColors)
         changedTerms?.returnTerms(matchToColorsR: matchToColorsR)
         
     }
@@ -705,6 +711,7 @@ extension PhotoPageContainerViewController: ReturnSortedTerms {
     }
     
     func pressedReturn() {
+        changedTerms?.pressedReturn()
         print("ASD")
     }
     

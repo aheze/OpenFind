@@ -64,9 +64,6 @@ class HistoryFindController: UIViewController {
     
     @IBOutlet var welcomeView: UIView!
     @IBOutlet weak var welcomeLabel: UILabel!
-    @IBOutlet weak var welcomeCacheButton: UIButton!
-    @IBAction func welcomeCacheButtonPressed(_ sender: Any) {
-    }
     
     @IBOutlet weak var welcomeImageButton: UIButton!
     @IBAction func welcomeImageButtonPressed(_ sender: Any) {
@@ -247,15 +244,14 @@ class HistoryFindController: UIViewController {
         if cachedCount == photos.count {
             allCached = true
             welcomeImageButton.setImage(UIImage(named: "AllCached"), for: .normal) 
-            welcomeCacheButton.setTitle("Learn more", for: .normal)
+//            welcomeCacheButton.setTitle("Learn more", for: .normal)
             welcomeLabel.text = "All selected photos have already been cached! Search results will appear immediately."
         } else {
             allCached = false
             welcomeImageButton.setImage(UIImage(named: "NotAllCached"), for: .normal)
-            welcomeLabel.text = "Not all photos have been cached, so search results will not appear immediately. Press Cache to cache the remaining photos."
-            welcomeCacheButton.setTitle("Cache", for: .normal)
+            welcomeLabel.text = "Not all photos have been cached, so some search results will not appear immediately. Press 'search' on the keyboard to find using OCR."
+//            welcomeCacheButton.setTitle("Cache", for: .normal)
         }
-        welcomeCacheButton.layer.cornerRadius = 6
         
 //        tableView.isHidden = true
         tableView.alpha = 0

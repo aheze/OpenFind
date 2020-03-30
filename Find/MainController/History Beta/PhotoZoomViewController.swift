@@ -18,6 +18,12 @@ class PhotoZoomViewController: UIViewController {
     
     @IBOutlet weak var mainContentView: UIView!
     
+    @IBOutlet weak var progressView: UIProgressView!
+
+    
+    @IBOutlet weak var progressHeightC: NSLayoutConstraint!
+    
+    var cameFromFind = false
     var ocrSearching = false
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
     
@@ -33,7 +39,6 @@ class PhotoZoomViewController: UIViewController {
     
     weak var delegate: PhotoZoomViewControllerDelegate?
     var oldFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
-    var initializedView = false
     
     //var image: UIImage!
     var index: Int = 0
@@ -45,7 +50,6 @@ class PhotoZoomViewController: UIViewController {
     }
 
     var highlights = [Component]()
-//    var currentMatchStrings = [String]()
     var matchToColors = [String: [CGColor]]()
     var highlightColor = "00aeef"
     
@@ -63,35 +67,29 @@ class PhotoZoomViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializedView = true
-        self.imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "LoadingImagePng"))
-        //navigationController?.navigationItem.largeTitleDisplayMode = .never
+        progressView.alpha = 0
+        self.imageView.sd_setImage(with: url)
         self.scrollView.delegate = self
         if #available(iOS 11, *) {
             self.scrollView.contentInsetAdjustmentBehavior = .never
         }
-        //self.imageView.image = self.image
         print(imageSize)
         mainContentView.frame = CGRect(x: self.imageView.frame.origin.x, y: self.imageView.frame.origin.y, width: self.imageSize.width, height: self.imageSize.height)
         
         oldFrame = mainContentView.frame
-        print("OLDF::: \(oldFrame)")
+//        print("OLDF::: \(oldFrame)")
         view.addGestureRecognizer(self.doubleTapGestureRecognizer)
+//        scaleHighlights()
+//        print("HIGHS: \(highlights)")
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(returnTerms(_:)), name: .changeSearchTerms, object: nil)
-        
-//        print("HIGH: \(highlights)")
-//        print("Frame: \(mainContentView.frame)")
-//
-//        print("MATCHS zoom: \(matchToColors)")
-//        print("MATCH COLORS: \(matchToColors)")
-       scaleHighlights()
-        fastFind()
+        if cameFromFind {
+            DispatchQueue.main.async {
+                self.scaleHighlights()
+            }
+        }
+//        fastFind()
     }
-    func scaleInHighlight(component: Component) {
-        
-//        print("COMPONENT; \(component.text)")
-        //print("scale")
+    func scaleInHighlight(component: Component, unsure: Bool = false) {
         guard let colors = matchToColors[component.text] else { print("NO COLORS! scalee"); return }
         print("COLROS zoom text: \(component.text).. \(colors)")
         DispatchQueue.main.async {
@@ -109,27 +107,19 @@ class PhotoZoomViewController: UIViewController {
             
 //            var newFillColor = UIColor()
             if colors.count > 1 {
-                print("shared list")
                 var newRect = layer.frame
                 newRect.origin.x += 1.5
                 newRect.origin.y += 1.5
-//                newRect.size.width -= 3
-//                newRect.size.height -= 3
                 layer.frame.origin.x -= 1.5
                 layer.frame.origin.y -= 1.5
                 layer.frame.size.width += 3
                 layer.frame.size.height += 3
                 newLayer.path = UIBezierPath(roundedRect: newRect, cornerRadius: component.height / 4.5).cgPath
-                
                 let gradient = CAGradientLayer()
                 gradient.frame = layer.bounds
-//                gradient.colors = [#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1).cgColor, #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor]
                 if let gradientColors = self.matchToColors[component.text] {
-                    
-//                    print("gra colors \(gradientColors)")
                     gradient.colors = gradientColors
                     if let firstColor = gradientColors.first {
-//                        print("sdfsdf")
                         layer.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3).cgColor
                     }
                     
@@ -142,11 +132,7 @@ class PhotoZoomViewController: UIViewController {
                 newLayer.strokeColor = UIColor.black.cgColor
                 
                 layer.addSublayer(gradient)
-//                layer.backgroundColor = g
             } else {
-                
-//                print("Normal")
-                
                 if let firstColor = colors.first {
                     newLayer.fillColor = firstColor.copy(alpha: 0.3)
                     newLayer.strokeColor = firstColor
@@ -155,7 +141,6 @@ class PhotoZoomViewController: UIViewController {
             }
             
             let newView = UIView(frame: CGRect(x: component.x, y: component.y, width: component.width, height: component.height))
-//            self.view.insertSubview(newView, aboveSubview: self.mainContentView)
             self.drawingView.addSubview(newView)
             
             newView.layer.addSublayer(layer)
@@ -164,15 +149,12 @@ class PhotoZoomViewController: UIViewController {
             let x = newLayer.bounds.size.width / 2
             let y = newLayer.bounds.size.height / 2
             
-            //newView.layer.position = CGPoint(x: component.x, y: component.y)
-            
-            
-            
+            if unsure {
+                newView.alpha = 0.4
+            }
             newLayer.position = CGPoint(x: x, y: y)
             component.baseView = newView
             component.changed = true
-            
-//            self.layerScaleAnimation(layer: newLayer, duration: 0.2, fromValue: 1.2, toValue: 1)
         }
     }
     
@@ -190,17 +172,8 @@ class PhotoZoomViewController: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        scaleHighlights()
-        print("SUBSUBSUBSUB")
         updateZoomScaleForSize(view.bounds.size)
         updateConstraintsForSize(view.bounds.size)
-        print("FRAME: \(mainContentView.frame)")
-//        view.bringSubviewToFront(drawingView)
-//        if oldFrame != mainContentView.frame {
-//
-//        }
-//        oldFrame = mainContentView.frame
-        
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -209,23 +182,28 @@ class PhotoZoomViewController: UIViewController {
         updateConstraintsForSize(view.bounds.size)
     }
     func scaleHighlights() {
-        print("SCALE IN>>>")
+        
+        drawingView.subviews.forEach({ $0.removeFromSuperview() })
         for comp in highlights {
             let newX = comp.x * oldFrame.size.width
             let newWidth = comp.width * oldFrame.size.width
             let newY = comp.y * oldFrame.size.height
             let newHeight = comp.height * oldFrame.size.height
             print("x: \(newX), y: \(newY), width: \(newWidth), height: \(newHeight)")
-            if newHeight <= 200 {
-                let compToScale = Component()
-                compToScale.x = newX - 6
-                compToScale.y = newY - 3
-                compToScale.width = newWidth + 12
-                compToScale.height = newHeight + 6
-                compToScale.colors = comp.colors
-                compToScale.text = comp.text
-                compToScale.isSpecialType = comp.isSpecialType
+            
+            let compToScale = Component()
+            compToScale.x = newX - 6
+            compToScale.y = newY - 3
+            compToScale.width = newWidth + 12
+            compToScale.height = newHeight + 6
+            compToScale.colors = comp.colors
+            compToScale.text = comp.text
+            compToScale.isSpecialType = comp.isSpecialType
+            
+            if newHeight <= 50 {
                 scaleInHighlight(component: compToScale)
+            } else {
+                scaleInHighlight(component: compToScale, unsure: true)
             }
 
         }
@@ -293,6 +271,8 @@ extension PhotoZoomViewController: UIScrollViewDelegate {
 }
 
 extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
+    
+    
 
     
      func returnTerms(matchToColorsR: [String: [CGColor]]) {
@@ -301,54 +281,25 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
             print("RETURNED TERMS!!!")
             print("DATA: \(matchToColorsR)")
         matchToColors = matchToColorsR
-        drawingView.subviews.forEach({ $0.removeFromSuperview() })
-        fastFind()
-                    
-                    
-                
-            
-//        }
+        
+        fastFind() 
+        
+    }
+    func pressedReturn() {
+        ocrFind(photo: photoComp)
     }
     
     func fastFind() {
-        
-//        (_ notification: Notification) {
-        //      //  print("receive highlight string errors")
-        //       // print("Errors? \(notification.userInfo)")
-        //        print("DELETE")
-        //        if let data = notification.userInfo as? [Int: Int] {
-        //            if indexPath >= data[0]! + 1 {
-        //                indexPath -= 1
-        //            }
-        //          //  print("HAS DATA")
-        //         //   print("data: \(data)")
-        //        }
-        //    }
-        
         DispatchQueue.global(qos: .background).async {
-//            print("1")
-//            var findModels = [FindModel]()
-    //        var heights = [CGFloat]()
-            
-    //        print(
             let photo = self.photoComp
-            print("searching in photo FAST")
             var num = 0
-            
-//            let newMod = FindModel()
             var newFastComponents = [Component]()
-//            newMod.photo = photo
-            
-//            var compMatches = [String: [ArrayOfMatchesInComp]]() ///COMPONENT to ranges
             ///Cycle through each block of text. Each cont may be a line long.
             for cont in photo.contents {
-//                var matchRanges = [ArrayOfMatchesInComp]()
-//                var hasMatch = false
                 let lowercaseContText = cont.text.lowercased()
                 let individualCharacterWidth = CGFloat(cont.width) / CGFloat(lowercaseContText.count)
                 for match in self.matchToColors.keys {
                     if lowercaseContText.contains(match) {
-//                        hasMatch = true
                         let finalW = individualCharacterWidth * CGFloat(match.count)
                         let indicies = lowercaseContText.indicesOf(string: match)
                         
@@ -365,26 +316,14 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
                             newComponent.text = match
                             
                             newFastComponents.append(newComponent)
-//
-//                            let newRangeObject = ArrayOfMatchesInComp()
-//                            newRangeObject.descriptionRange = index...index + match.count
-//                            newRangeObject.text = match
-//                            matchRanges.append(newRangeObject)
                         }
                     }
                 }
-          
-                
             }
             
             self.highlights = newFastComponents
-//            newMod.numberOfMatches = num
-            
             DispatchQueue.main.async {
                 self.scaleHighlights()
-//                photoComp = newMod
-                
-           
             }
             
         }
@@ -394,95 +333,53 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
     func ocrFind(photo: EditableHistoryModel) {
         ocrSearching = true
         
-//        DispatchQueue.main.async {
-//            self.activityIndicator.startAnimating()
-//            self.histCenterC.constant = 13
-//            UIView.animate(withDuration: 0.12, animations: {
-//                self.view.layoutIfNeeded()
-//                self.progressView.alpha = 1
-//                self.progressView.setProgress(Float(0), animated: true)
-//            })
-//        }
+        DispatchQueue.main.async {
+            self.progressHeightC.constant = 20
+            UIView.animate(withDuration: 0.12, animations: {
+                self.progressView.alpha = 1
+                self.progressView.setProgress(Float(0), animated: true)
+                self.view.layoutIfNeeded()
+//                self.progressView.transform = CGAffineTransform(scaleX: 1, y: <#T##CGFloat#>)
+            })
+        }
         
         DispatchQueue.global(qos: .background).async {
-//            self.ocrPassCount = 0
-//            var number = 0
+            guard let photoUrl = URL(string: "\(self.folderURL)\(photo.filePath)") else { print("WRONG URL!!!!"); return }
             
-        
-                    
-    //                number += 1
-    //                    print("num: \(number)")
-    //                    let indP = IndexPath(item: number - 1, section: 0)
-                    
-//                    self.dispatchGroup.enter()
-                    
-                    
-                    
-    //                print("OCR: \(self.ocrPassCount)")
-                    guard let photoUrl = URL(string: "\(self.folderURL)\(photo.filePath)") else { print("WRONG URL!!!!"); return }
-                    
-                    let request = VNRecognizeTextRequest { request, error in
-                        self.handleFastDetectedText(request: request, error: error, photo: photo)
-                    }
-                    
-                    var customFindArray = [String]()
+            let request = VNRecognizeTextRequest { request, error in
+                self.handleFastDetectedText(request: request, error: error, photo: photo)
+            }
+            
+            var customFindArray = [String]()
             for findWord in self.matchToColors.keys {
-                        customFindArray.append(findWord)
-                        customFindArray.append(findWord.lowercased())
-                        customFindArray.append(findWord.uppercased())
-                        customFindArray.append(findWord.capitalizingFirstLetter())
-                    }
-                    
-                    request.customWords = customFindArray
-                    
-                    
-                    request.recognitionLevel = .fast
-                    request.recognitionLanguages = ["en_GB"]
-                    let imageRequestHandler = VNImageRequestHandler(url: photoUrl, orientation: .up)
-                    
-    //                request.progressHandler = { (request, value, error) in
-    ////                    print("Progress: \(value)")
-    //                }
-                    do {
-                        try imageRequestHandler.perform([request])
-                    } catch let error {
-                        print("Error: \(error)")
-                    }
-                    
-                
-               
+                customFindArray.append(findWord)
+                customFindArray.append(findWord.lowercased())
+                customFindArray.append(findWord.uppercased())
+                customFindArray.append(findWord.capitalizingFirstLetter())
+            }
             
+            request.customWords = customFindArray
+            request.recognitionLevel = .fast
+            request.recognitionLanguages = ["en_GB"]
+            let imageRequestHandler = VNImageRequestHandler(url: photoUrl, orientation: .up)
+            do {
+                try imageRequestHandler.perform([request])
+            } catch let error {
+                print("Error: \(error)")
+            }
         }
-//        dispatchGroup.notify(queue: dispatchQueue) {
-//            if self.statusOk == true {
-//                self.ocrSearching = false
-//    //            self.
-//                DispatchQueue.main.async {
-//                    self.showWarning(show: false)
-//                    self.tableView.reloadData()
-//                    self.helpButton.isEnabled = true
-//                }
-//
-//                self.changeFindbar?.change(type: "Enable")
-//                print("Finished all requests.")
-//                self.finishOCR()
-//            }
-//        }
-        
     }
     
     func handleFastDetectedText(request: VNRequest?, error: Error?, photo: EditableHistoryModel) {
             
-        
-//        self.ocrPassCount += 1
-//        DispatchQueue.main.async {
-////            print("HPOSO COUNT: \(self.photos.count)")
-//            let individualProgress = CGFloat(self.ocrPassCount) / CGFloat(self.photos.count)
-////            print("IND PROGR: \(individualProgress)")
-//            UIView.animate(withDuration: 0.6, animations: {
-//                self.progressView.setProgress(Float(individualProgress), animated: true)
-//            })
-//        }
+        DispatchQueue.main.async {
+            self.progressHeightC.constant = 2
+            UIView.animate(withDuration: 0.6, animations: {
+                self.progressView.setProgress(Float(1), animated: true)
+                self.progressView.alpha = 0
+                self.view.layoutIfNeeded()
+            })
+        }
         
        
         guard let results = request?.results, results.count > 0 else {
@@ -522,17 +419,13 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
         var numberOfMatches = 0
         
         var findComponents = [Component]()
+        
         for cont in contents {
-            var matchRanges = [ArrayOfMatchesInComp]()
-            var hasMatch = false
-            
             let lowercaseContText = cont.text.lowercased()
             
             let individualCharacterWidth = CGFloat(cont.width) / CGFloat(lowercaseContText.count)
             for match in self.matchToColors.keys {
                 if lowercaseContText.contains(match) {
-//                    print("MATCH!! \(match), in: \(cont.text)")
-                    hasMatch = true
                     let finalW = individualCharacterWidth * CGFloat(match.count)
                     let indicies = lowercaseContText.indicesOf(string: match)
                     
@@ -551,69 +444,53 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
                         
                         findComponents.append(newComponent)
                         
-                        let newRangeObject = ArrayOfMatchesInComp()
-                        newRangeObject.descriptionRange = index...index + match.count
-                        newRangeObject.text = match
-                        matchRanges.append(newRangeObject)
-                        
                     }
-                    
-                    
-                    
                 }
-            }
-                
-            if hasMatch == true {
-                compMatches[cont.text] = matchRanges
             }
         }
-        var descriptionOfPhoto = ""
-        var finalRangesObjects = [ArrayOfMatchesInComp]()
         
-        if numberOfMatches >= 1 {
-            var existingCount = 0
-            for (index, comp) in compMatches.enumerated() {
-                if index <= 2 {
-                    let thisCompString = comp.key
-                    
-                    if descriptionOfPhoto == "" {
-                        existingCount += 3
-                        descriptionOfPhoto.append("...\(thisCompString)...")
-                    } else {
-                        existingCount += 4
-                        descriptionOfPhoto.append("\n...\(thisCompString)...")
-                    }
-                    for compRange in comp.value {
-                        let newStart = existingCount + (compRange.descriptionRange.first ?? 0)
-                        let newEnd = existingCount + (compRange.descriptionRange.last ?? 1)
-                        let newRange = newStart...newEnd
-                        
-                        let matchObject = ArrayOfMatchesInComp()
-                        matchObject.descriptionRange = newRange
-                        matchObject.text = compRange.text
-                        
-                        finalRangesObjects.append(matchObject)
-                    }
-                    let addedLength = 3 + thisCompString.count
-                    existingCount += addedLength
+        var componentsToAdd = [Component]()
+//        var newMatchesNumber = 0
+        
+        for newFindMatch in findComponents {
+            var smallestDist = CGFloat(999)
+            for findMatch in highlights {
+                
+                let point1 = CGPoint(x: findMatch.x, y: findMatch.y)
+                let point2 = CGPoint(x: newFindMatch.x, y: newFindMatch.y)
+                let pointDistance = relativeDistance(point1, point2)
+                
+//                                print("OLD: \(point1), new: \(point2)")
+                if pointDistance < smallestDist {
+                    smallestDist = pointDistance
                 }
+                
+            }
+//                            print("SMALL DIST: \(smallestDist)")
+            if smallestDist >= 0.008 { ///Bigger, so add it
+                componentsToAdd.append(newFindMatch)
+//                newMatchesNumber += 1
             }
             
-            let totalWidth = self.deviceSize.width
-            let finalWidth = totalWidth - 146
-            let height = descriptionOfPhoto.heightWithConstrainedWidth(width: finalWidth, font: UIFont.systemFont(ofSize: 14))
-            let finalHeight = height + 70
-            
-            newMod.photo = photo
-            newMod.descriptionMatchRanges = finalRangesObjects
-            newMod.numberOfMatches = numberOfMatches
-            newMod.descriptionText = descriptionOfPhoto
-            newMod.descriptionHeight = finalHeight
-            
-            newMod.components = findComponents
+        }
+        highlights += componentsToAdd
+//        scaleHighlights()
+        DispatchQueue.main.async {
+            self.scaleHighlights()
+        }
+//        existingModel.components += componentsToAdd
+//        existingModel.numberOfMatches += newMatchesNumber
+//        print("ADD MATCHES: \(newMatchesNumber)")
+        
+//            newMod.components = findComponents
             
 //            resultPhotos.append(newMod)
              
-        }
+        
+    }
+    func relativeDistance(_ a: CGPoint, _ b: CGPoint) -> CGFloat {
+        let xDist = a.x - b.x
+        let yDist = a.y - b.y
+        return CGFloat(xDist * xDist + yDist * yDist)
     }
 }

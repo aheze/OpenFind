@@ -22,6 +22,7 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
 //    var indexToData = [String]()
     
     var helpObjects = [HelpObject]()
+    var helpJsonKey = "ListsHelpArray"
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -81,7 +82,7 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
                     if let jsonString = String(data: data, encoding: .utf8) {
                         if let data = jsonString.data(using: .utf8) {
                             if let json = try? JSON(data: data) {
-                                for item in json["ListsHelpArray"].arrayValue {
+                                for item in json[self.helpJsonKey].arrayValue {
 //                                    print("ITEM: \(item)")
                                     let name = item["name"].stringValue
                                     let urlString = item["url"].stringValue
@@ -98,7 +99,7 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
                     }
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()
-                        print("OBJECTS: \(self.helpObjects)")
+//                        print("OBJECTS: \(self.helpObjects)")
 //                        self.tableView.performBatchUpdates({
                             self.tableView.reloadData()
 //                        }, completion: { _ in

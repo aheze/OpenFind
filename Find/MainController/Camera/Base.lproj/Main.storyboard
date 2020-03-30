@@ -2300,6 +2300,10 @@
                                             <action selector="cancelButtonPressed:" destination="bU4-lF-0xB" eventType="touchUpInside" id="Li6-gE-X96"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="X4F-sC-U3v">
+                                        <rect key="frame" x="172.5" y="215.5" width="37" height="37"/>
+                                        <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
@@ -2308,6 +2312,8 @@
                                     <constraint firstItem="0Hf-fQ-JEd" firstAttribute="centerX" secondItem="6GT-YB-6e2" secondAttribute="centerX" id="BOb-7d-gIe"/>
                                     <constraint firstItem="dmM-dI-18L" firstAttribute="top" secondItem="scZ-On-pSO" secondAttribute="bottom" constant="8" id="NQP-KY-DS3"/>
                                     <constraint firstItem="scZ-On-pSO" firstAttribute="top" secondItem="6GT-YB-6e2" secondAttribute="top" constant="26" id="O9l-PS-W1u"/>
+                                    <constraint firstItem="X4F-sC-U3v" firstAttribute="centerX" secondItem="6GT-YB-6e2" secondAttribute="centerX" id="Twv-Y3-o10"/>
+                                    <constraint firstItem="X4F-sC-U3v" firstAttribute="centerY" secondItem="6GT-YB-6e2" secondAttribute="centerY" id="XYC-pp-GSU"/>
                                     <constraint firstItem="1ct-uq-Rkc" firstAttribute="centerX" secondItem="6GT-YB-6e2" secondAttribute="centerX" id="f8x-rN-Uu6"/>
                                     <constraint firstAttribute="bottom" secondItem="1ct-uq-Rkc" secondAttribute="bottom" constant="26" id="f90-Tf-18i"/>
                                     <constraint firstItem="dmM-dI-18L" firstAttribute="centerX" secondItem="6GT-YB-6e2" secondAttribute="centerX" id="fVH-xW-obh"/>
@@ -2331,6 +2337,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="500"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="X4F-sC-U3v" id="Hyp-Ej-bgk"/>
                         <outlet property="backButton" destination="sKB-7D-QCp" id="bIa-Pc-3UJ"/>
                         <outlet property="baseView" destination="6GT-YB-6e2" id="goC-vB-cV3"/>
                         <outlet property="cancelButton" destination="1ct-uq-Rkc" id="Ffk-3Q-UW6"/>
@@ -2565,7 +2572,6 @@
                         <outlet property="warningHeightC" destination="8qR-EL-DL9" id="DfR-Ss-7cF"/>
                         <outlet property="warningLabel" destination="mJu-qT-9cJ" id="6D5-r8-NY6"/>
                         <outlet property="warningView" destination="mca-gY-h1V" id="anf-MI-6Tg"/>
-                        <outlet property="welcomeCacheButton" destination="6gE-rK-kBV" id="mHP-BS-7c2"/>
                         <outlet property="welcomeImageButton" destination="WAU-aT-bSp" id="JDB-34-3mC"/>
                         <outlet property="welcomeLabel" destination="8fp-hd-mIw" id="t1r-F3-rwM"/>
                         <outlet property="welcomeView" destination="b2x-jn-kQz" id="8Jq-dL-Rdb"/>
@@ -2577,26 +2583,11 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All selected photos have already been cached! Search results will appear immediately." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fp-hd-mIw">
-                            <rect key="frame" x="36" y="116" width="328" height="128"/>
+                            <rect key="frame" x="36" y="116" width="328" height="61"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gE-rK-kBV">
-                            <rect key="frame" x="148.5" y="244" width="103" height="40"/>
-                            <color key="backgroundColor" name="FeedbackGradientLeft"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="Ctu-TJ-YJV"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                            <inset key="contentEdgeInsets" minX="20" minY="8" maxX="20" maxY="8"/>
-                            <state key="normal" title="Cache">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="welcomeCacheButtonPressed:" destination="RLA-KL-RCD" eventType="touchUpInside" id="z0r-Qa-Zuy"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WAU-aT-bSp">
                             <rect key="frame" x="150" y="16" width="100" height="100"/>
                             <constraints>
@@ -2613,10 +2604,7 @@
                     <constraints>
                         <constraint firstItem="WAU-aT-bSp" firstAttribute="centerX" secondItem="b2x-jn-kQz" secondAttribute="centerX" id="072-eb-9i5"/>
                         <constraint firstItem="EYp-RZ-pp5" firstAttribute="trailing" secondItem="8fp-hd-mIw" secondAttribute="trailing" constant="36" id="7AM-Eu-kKY"/>
-                        <constraint firstItem="EYp-RZ-pp5" firstAttribute="bottom" secondItem="6gE-rK-kBV" secondAttribute="bottom" constant="16" id="IXg-7H-0KA"/>
                         <constraint firstItem="8fp-hd-mIw" firstAttribute="leading" secondItem="EYp-RZ-pp5" secondAttribute="leading" constant="36" id="Ttl-MY-vrF"/>
-                        <constraint firstItem="6gE-rK-kBV" firstAttribute="top" secondItem="8fp-hd-mIw" secondAttribute="bottom" id="cXR-MS-Iua"/>
-                        <constraint firstItem="6gE-rK-kBV" firstAttribute="centerX" secondItem="b2x-jn-kQz" secondAttribute="centerX" id="kLP-Yw-EDt"/>
                         <constraint firstItem="8fp-hd-mIw" firstAttribute="top" secondItem="WAU-aT-bSp" secondAttribute="bottom" id="nBH-tK-R7Y"/>
                         <constraint firstItem="WAU-aT-bSp" firstAttribute="top" secondItem="b2x-jn-kQz" secondAttribute="top" constant="16" id="xKm-2n-lp2"/>
                     </constraints>
@@ -2826,15 +2814,22 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Iu-nM-Kxq">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="189.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="640" height="379"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Leica Sample" translatesAutoresizingMaskIntoConstraints="NO" id="F00-F2-p0B">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="189.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="640" height="379"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HAh-a2-fex">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="189.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="640" height="379"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="l0B-xE-ltA">
+                                                <rect key="frame" x="0.0" y="0.0" width="640" height="3"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="2" id="2EH-Z9-vBc"/>
+                                                </constraints>
+                                                <color key="trackTintColor" name="Gray3"/>
+                                            </progressView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -2843,7 +2838,10 @@
                                             <constraint firstAttribute="bottom" secondItem="F00-F2-p0B" secondAttribute="bottom" id="KaM-lA-wQK"/>
                                             <constraint firstItem="HAh-a2-fex" firstAttribute="leading" secondItem="3Iu-nM-Kxq" secondAttribute="leading" id="Ouf-tq-iYj"/>
                                             <constraint firstAttribute="trailing" secondItem="HAh-a2-fex" secondAttribute="trailing" id="Rzr-pg-f9c"/>
+                                            <constraint firstAttribute="trailing" secondItem="l0B-xE-ltA" secondAttribute="trailing" id="WHT-35-MCf"/>
+                                            <constraint firstItem="l0B-xE-ltA" firstAttribute="top" secondItem="3Iu-nM-Kxq" secondAttribute="top" id="bdn-Bo-kzd"/>
                                             <constraint firstAttribute="trailing" secondItem="F00-F2-p0B" secondAttribute="trailing" id="fgc-hn-VYF"/>
+                                            <constraint firstItem="l0B-xE-ltA" firstAttribute="leading" secondItem="3Iu-nM-Kxq" secondAttribute="leading" id="giH-Eb-Me4"/>
                                             <constraint firstItem="F00-F2-p0B" firstAttribute="leading" secondItem="3Iu-nM-Kxq" secondAttribute="leading" id="jWS-hU-pFb"/>
                                             <constraint firstItem="F00-F2-p0B" firstAttribute="top" secondItem="3Iu-nM-Kxq" secondAttribute="top" id="znf-8C-NPh"/>
                                         </constraints>
@@ -2875,6 +2873,8 @@
                         <outlet property="imageViewTopConstraint" destination="FCW-hD-ADG" id="pWS-WY-xua"/>
                         <outlet property="imageViewTrailingConstraint" destination="1Df-1e-nFR" id="VVr-JI-7mg"/>
                         <outlet property="mainContentView" destination="3Iu-nM-Kxq" id="ijC-1H-Ydp"/>
+                        <outlet property="progressHeightC" destination="2EH-Z9-vBc" id="gRr-6t-o88"/>
+                        <outlet property="progressView" destination="l0B-xE-ltA" id="zzH-2R-T2Y"/>
                         <outlet property="scrollView" destination="Ne8-K1-1y3" id="HwX-V4-Dwv"/>
                     </connections>
                 </viewController>
