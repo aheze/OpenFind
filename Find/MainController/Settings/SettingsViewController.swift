@@ -16,6 +16,7 @@ class SettingsViewController: UIViewController {
     let realm = try! Realm()
     var listCategories: Results<FindList>?
     var historyPhotos: Results<HistoryModel>?
+    var folderURL = URL(fileURLWithPath: "", isDirectory: true)
     
     @IBOutlet weak var xButton: UIButton!
     
@@ -132,10 +133,14 @@ class SettingsViewController: UIViewController {
             var tempPhotos = [HistoryModel]()
             var contents = [SingleHistoryContent]()
             
+            var tempFilePaths = [URL]()
             
             if let photoCats = self.historyPhotos {
-                for photo in photoCats {≥
+                for photo in photoCats {
                     
+                    let urlString = photo.filePath
+                    guard let finalUrl = URL(string: "\(self.folderURL)\(urlString)") else { print("Invalid File name"); return }
+                    tempFilePaths.append(finalUrl)
                     tempPhotos.append(photo)
                     for content in photo.contents {
                         contents.append(content)
@@ -152,6 +157,17 @@ class SettingsViewController: UIViewController {
                 print("DELETE PRESSED, but ERROR deleting photos...... \(error)")
             }
             print("CLEAR hist")
+            
+            print("Deleting from file now")
+            let fileManager = FileManager.default
+            for filePath in tempFilePaths {
+                print("file... \(filePath)")
+                do {
+                    try fileManager.removeItem(at: filePath)
+                } catch {
+                    print("Could not delete items: \(error)")
+                }
+            }
             
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))

@@ -80,6 +80,8 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
             case "goToSettings":
                 print("prepare settings")
                 segue.destination.presentationController?.delegate = self
+                let destinationVC = segue.destination as! SettingsViewController
+                destinationVC.folderURL = globalUrl
             case "goToNewHistory":
                 segue.destination.presentationController?.delegate = self
                 let destinationVC = segue.destination as! NewHistoryViewController
