@@ -72,7 +72,7 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         tableView.alpha = 0
-        tableView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+//        tableView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(closeTapped))
         if let url = URL(string: "https://raw.githubusercontent.com/zjohnzheng/FindHelp/master/1NavigatorDatasource.json") {
@@ -99,15 +99,10 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
                     }
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()
-//                        print("OBJECTS: \(self.helpObjects)")
-//                        self.tableView.performBatchUpdates({
                             self.tableView.reloadData()
-//                        }, completion: { _ in
                             UIView.animate(withDuration: 0.3, animations: {
                                 self.tableView.alpha = 1
-                                self.tableView.transform = CGAffineTransform.identity
                             })
-//                        })
                     }
                 }
                 

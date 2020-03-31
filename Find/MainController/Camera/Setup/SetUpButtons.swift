@@ -24,7 +24,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         readDefaultsValues()
         
         SwiftEntryKit.dismiss()
-        currentMatchStrings.append(newSearchTextField.text ?? "")
+//        currentMatchStrings.append(newSearchTextField.text ?? "")
         sortSearchTerms()
         startVideo(finish: "end")
         loadListsRealm()
@@ -74,7 +74,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
     //            print("prepareSett")
     //        }
         
-            currentMatchStrings.removeAll()
+//            currentMatchStrings.removeAll()
             stopSession()
             switch segue.identifier {
             case "goToSettings":

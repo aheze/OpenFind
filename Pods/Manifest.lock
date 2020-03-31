@@ -6,7 +6,6 @@ PODS:
   - Realm/Headers (4.3.0)
   - RealmSwift (4.3.0):
     - Realm (= 4.3.0)
-  - RoundCoachMark (1.0.2)
   - SDWebImage (5.4.1):
     - SDWebImage/Core (= 5.4.1)
   - SDWebImage/Core (5.4.1)
@@ -15,21 +14,16 @@ PODS:
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
   - SwiftyJSON (4.3.0)
-  - ViewAnimator (2.7.0)
-  - WSTagsField (5.2.0)
 
 DEPENDENCIES:
   - Parchment
   - QuickLayout
   - RealmSwift
-  - RoundCoachMark (from `https://github.com/zjohnzheng/RoundCoachMark`)
   - SDWebImage (~> 5.0)
   - SnapKit
   - SPAlert
   - SwiftEntryKit
   - SwiftyJSON (~> 4.0)
-  - ViewAnimator
-  - WSTagsField
 
 SPEC REPOS:
   trunk:
@@ -42,32 +36,18 @@ SPEC REPOS:
     - SPAlert
     - SwiftEntryKit
     - SwiftyJSON
-    - ViewAnimator
-    - WSTagsField
-
-EXTERNAL SOURCES:
-  RoundCoachMark:
-    :git: https://github.com/zjohnzheng/RoundCoachMark
-
-CHECKOUT OPTIONS:
-  RoundCoachMark:
-    :commit: 7b06990084de31bb0a375fa1cdb37ca57e5920d5
-    :git: https://github.com/zjohnzheng/RoundCoachMark
 
 SPEC CHECKSUMS:
   Parchment: cae686f73685d16742cec9c19239b7578a15f0f5
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
   Realm: 9357c3589555793e1860a7104a7412bca4a48d99
   RealmSwift: 402f1e379a8ef82c635313037b043f0f06de880c
-  RoundCoachMark: b3b00eb04ef90654af6f7ab50b3ed03ed2901467
   SDWebImage: 29c340dbdcef342bb13125553f4e19ce056b07a7
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SPAlert: 1a8afa1c6ac86a82ab5b2cfdf7f9a51e68cb6c0c
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
-  ViewAnimator: 5af1c6f3b310f012bf081259c43717aa54fbae73
-  WSTagsField: d57a287fd552934db1d93a85d38abbf74b067d6a
 
-PODFILE CHECKSUM: d9310d3bd3f3116beb0e321b4c2c4082f23a1430
+PODFILE CHECKSUM: 1278890661212383722a1f5e99779010b04fec91
 
 COCOAPODS: 1.8.3

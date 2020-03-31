@@ -686,7 +686,7 @@ extension FindBar {
 //                stringToList[match] = sharedList
 //            }
             
-            let textShareList = EditableFindList()
+//            let textShareList = EditableFindList()
     //        textShareList.descriptionOfList = "Shared Text Lists +0-109028304798614"
             for match in cameAcrossSearchFieldText {
 //                stringToList[match] = textShareList

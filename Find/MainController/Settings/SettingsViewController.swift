@@ -190,7 +190,6 @@ class SettingsViewController: UIViewController {
             } catch {
                 print("DELETE PRESSED, but ERROR deleting photos...... \(error)")
             }
-            print("CLEAR hist")
             
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
@@ -200,7 +199,6 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func resetSettingsPressed(_ sender: Any) {
-        print("reset sett")
         let alert = UIAlertController(title: "Reset Settings", message: "Settings will be reset to default.", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Reset", style: UIAlertAction.Style.default, handler: { _ in
             
@@ -210,28 +208,7 @@ class SettingsViewController: UIViewController {
             
             self.removeChecks()
             let image = UIImage(systemName: "checkmark")
-            if let hexString = self.defaults.string(forKey: "highlightColor") {
-                switch hexString {
-                case "EB3B5A":
-                    self.redButton.setImage(image, for: .normal)
-                case "FA8231":
-                    self.orangeButton.setImage(image, for: .normal)
-                case "FED330":
-                    self.yellowButton.setImage(image, for: .normal)
-                case "20BF6B":
-                    self.greenButton.setImage(image, for: .normal)
-                case "2BCBBA":
-                    self.tealButton.setImage(image, for: .normal)
-                case "45AAF2":
-                    self.lightblueButton.setImage(image, for: .normal)
-                case "00AEEF":
-                    self.findblueButton.setImage(image, for: .normal)
-                case "A55EEA":
-                    self.purpleButton.setImage(image, for: .normal)
-                default:
-                    print("WRONG TAG!!")
-                }
-            }
+            self.findblueButton.setImage(image, for: .normal)
             
             self.textDetectSwitch.setOn(true, animated: true)
             self.hapticFeedbackSwitch.setOn(true, animated: true)
@@ -271,6 +248,9 @@ class SettingsViewController: UIViewController {
     
     @IBAction func creditsPressed(_ sender: Any) {
         print("credits")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let creditsController = storyboard.instantiateViewController(withIdentifier: "CreditsViewController") as! CreditsViewController
+        present(creditsController, animated: true, completion: nil)
     }
     
     

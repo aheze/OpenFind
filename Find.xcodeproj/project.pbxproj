@@ -71,6 +71,10 @@
 		495ECCA7238CF76C00E7D966 /* NewHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCA6238CF76C00E7D966 /* NewHistoryViewController.swift */; };
 		495ECCA9238CF7BD00E7D966 /* HPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */; };
 		495ECCAB238DB7BD00E7D966 /* TitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCAA238DB7BD00E7D966 /* TitleSupplementaryView.swift */; };
+		495F38F22432B7B700A17D93 /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38F12432B7B700A17D93 /* CreditsViewController.swift */; };
+		495F38FA2432C8FE00A17D93 /* CarteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38F72432C8FB00A17D93 /* CarteViewController.swift */; };
+		495F38FB2432C8FE00A17D93 /* CarteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38F82432C8FC00A17D93 /* CarteItem.swift */; };
+		495F38FC2432C8FE00A17D93 /* Carte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38F92432C8FE00A17D93 /* Carte.swift */; };
 		4966B70A23DE98C800A8523A /* MakeNewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4966B70923DE98C800A8523A /* MakeNewList.swift */; };
 		4966B71023E124D700A8523A /* ImagePickerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4966B70F23E124D700A8523A /* ImagePickerList.swift */; };
 		4966B71323E1252800A8523A /* ImagePickerList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4966B71223E1252800A8523A /* ImagePickerList.xib */; };
@@ -187,6 +191,10 @@
 		495ECCA6238CF76C00E7D966 /* NewHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHistoryViewController.swift; sourceTree = "<group>"; };
 		495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPhotoCell.swift; sourceTree = "<group>"; };
 		495ECCAA238DB7BD00E7D966 /* TitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSupplementaryView.swift; sourceTree = "<group>"; };
+		495F38F12432B7B700A17D93 /* CreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
+		495F38F72432C8FB00A17D93 /* CarteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarteViewController.swift; sourceTree = "<group>"; };
+		495F38F82432C8FC00A17D93 /* CarteItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarteItem.swift; sourceTree = "<group>"; };
+		495F38F92432C8FE00A17D93 /* Carte.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carte.swift; sourceTree = "<group>"; };
 		4966B70923DE98C800A8523A /* MakeNewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeNewList.swift; sourceTree = "<group>"; };
 		4966B70F23E124D700A8523A /* ImagePickerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerList.swift; sourceTree = "<group>"; };
 		4966B71223E1252800A8523A /* ImagePickerList.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePickerList.xib; sourceTree = "<group>"; };
@@ -345,13 +353,6 @@
 			path = Symbols;
 			sourceTree = "<group>";
 		};
-		49301BF124019D0A00B4780B /* UseLists */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UseLists;
-			sourceTree = "<group>";
-		};
 		49368CA52390598000B67C4A /* FullScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -428,6 +429,16 @@
 			path = "New History";
 			sourceTree = "<group>";
 		};
+		495F38F62432C8D100A17D93 /* Carte */ = {
+			isa = PBXGroup;
+			children = (
+				495F38F92432C8FE00A17D93 /* Carte.swift */,
+				495F38F82432C8FC00A17D93 /* CarteItem.swift */,
+				495F38F72432C8FB00A17D93 /* CarteViewController.swift */,
+			);
+			path = Carte;
+			sourceTree = "<group>";
+		};
 		4966B71123E1251200A8523A /* ChangeImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -463,11 +474,13 @@
 		496937392353C228009CA41A /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				495F38F62432C8D100A17D93 /* Carte */,
 				4991344D236FDF1200B82E46 /* SettingsViewController.swift */,
 				4991344F236FE12400B82E46 /* SettingsViewExtensions.swift */,
 				4917CE7E23C0490E002EA20B /* GeneralSettings.swift */,
 				49913451236FE33B00B82E46 /* SettingsBasicSetup.swift */,
 				498332D72431B4D500AD083E /* LDGradientView.swift */,
+				495F38F12432B7B700A17D93 /* CreditsViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -488,7 +501,6 @@
 		4969373C2353C277009CA41A /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				49301BF124019D0A00B4780B /* UseLists */,
 				496937352353C1E9009CA41A /* Modes */,
 				4999AC972353A80A00AB06A7 /* ViewController.swift */,
 				4953F3C5241733C200690E53 /* Toolbar */,
@@ -668,6 +680,7 @@
 				4999AC8C2353A80A00AB06A7 /* Sources */,
 				4999AC8D2353A80A00AB06A7 /* Frameworks */,
 				4999AC8E2353A80A00AB06A7 /* Resources */,
+				495F38F52432BECF00A17D93 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -734,6 +747,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		495F38F52432BECF00A17D93 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
 		6D06741A707392F12B687239 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -816,8 +846,10 @@
 				492EB4F523F61F5A007142CA /* SymbolsSectionHeader.swift in Sources */,
 				4911508B235D1A3E00EC0C04 /* BasicUtilities.swift in Sources */,
 				49368CAE23905D3300B67C4A /* UIViewController+PulleyViewController.swift in Sources */,
+				495F38FC2432C8FE00A17D93 /* Carte.swift in Sources */,
 				490DA76223CEC944000AF57D /* ViewClasses.swift in Sources */,
 				4904524C2379072F0046570D /* UpdateMatches.swift in Sources */,
+				495F38F22432B7B700A17D93 /* CreditsViewController.swift in Sources */,
 				498EDA0123E130C6009EB0CF /* SymbolsList.swift in Sources */,
 				49368CAD23905D3300B67C4A /* PulleyPassthroughScrollView.swift in Sources */,
 				492EB4F023F504BC007142CA /* PopulateSymbols.swift in Sources */,
@@ -827,6 +859,7 @@
 				4952F0C2240B1DD00068564F /* SearchCell.swift in Sources */,
 				49BC782223C3E1BF003D9904 /* TextViewRounded.swift in Sources */,
 				4966B70A23DE98C800A8523A /* MakeNewList.swift in Sources */,
+				495F38FB2432C8FE00A17D93 /* CarteItem.swift in Sources */,
 				495ECCA7238CF76C00E7D966 /* NewHistoryViewController.swift in Sources */,
 				4928526023D61F570048EC13 /* ListSelect.swift in Sources */,
 				4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */,
@@ -836,6 +869,7 @@
 				4991344E236FDF1300B82E46 /* SettingsViewController.swift in Sources */,
 				490DA75623CBB871000AF57D /* JJFloatingActionButton+Placement.swift in Sources */,
 				490DA75123CBB871000AF57D /* JJActionItemTitlePosition.swift in Sources */,
+				495F38FA2432C8FE00A17D93 /* CarteViewController.swift in Sources */,
 				4917CE7F23C0490E002EA20B /* GeneralSettings.swift in Sources */,
 				490DA75323CBB871000AF57D /* UIColor+JJFloatingActionButton.swift in Sources */,
 				49BC783923C8C7AB003D9904 /* HistoryStartSelection.swift in Sources */,

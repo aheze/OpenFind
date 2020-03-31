@@ -201,7 +201,7 @@ class ViewController: UIViewController {
     
     var matchToColors = [String: [CGColor]]()
     
-    var currentMatchStrings = [String]()
+//    var currentMatchStrings = [String]()
 //    var currentMatchArray = [String]()
     var currentSearchFindList = EditableFindList()
     var currentListsSharedFindList = EditableFindList()
