@@ -147,8 +147,6 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController
             
-            
-            
             let singleItem = photoModels[currentIndex]
             
             let newPhoto = EditableHistoryModel()
@@ -676,6 +674,8 @@ extension PhotoPageContainerViewController: ReturnCachedPhotos {
     func giveCachedPhotos(photos: [EditableHistoryModel], popup: String) {
         
         photoModels[currentIndex].isDeepSearched = true
+        
+        
         cacheButton.setImage(UIImage(named: "YesCachedThin"), for: .normal)
         cacheButton.tintColor = UIColor(named: "FeedbackGradientRight")
         
@@ -691,6 +691,8 @@ extension PhotoPageContainerViewController: ReturnCachedPhotos {
             
         }
         if let firstPhoto = photos.first {
+            photoModels[currentIndex] = firstPhoto
+            currentViewController.photoComp = firstPhoto
             changeCache?.cached(cached: true, photo: firstPhoto, index: currentIndex)
         } else {
             print("NO PHOTO>>>>!")

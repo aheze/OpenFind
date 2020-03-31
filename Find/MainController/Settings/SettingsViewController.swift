@@ -38,9 +38,14 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var purpleButton: UIButton!
     
     let defaults = UserDefaults.standard
+    var customizedSettingsBefore = false
     
     @IBAction func colorButtonPressed(_ sender: UIButton) {
         let image = UIImage(systemName: "checkmark")
+//        let defaults = UserDefaults.standard
+        if customizedSettingsBefore == false {
+            defaults.set(true, forKey: "customizedSettingsBool")
+        }
         removeChecks()
         switch sender.tag {
         case 3501:
@@ -234,6 +239,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var rateAppView: UIView!
     
     @IBAction func leaveFeedbackPressed(_ sender: Any) {
+        defaults.set(true, forKey: "feedbackedAlready")
         displayWithURL(urlString: "https://forms.gle/agdyoB9PFfnv8cU1A/", topLabelText: "Send Feedback", color: #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1))
     }
     
@@ -262,6 +268,8 @@ class SettingsViewController: UIViewController {
         
         historyPhotos = realm.objects(HistoryModel.self)
         listCategories = realm.objects(FindList.self)
+        
+        customizedSettingsBefore = defaults.bool(forKey: "customizedSettingsBool")
 //        let defaults = UserDefaults.standard
 //        defaults.set(25, forKey: "Age")
 //        defaults.set(true, forKey: "UseTouchID")
@@ -323,7 +331,7 @@ extension SettingsViewController {
         navBarAppearance.configureWithOpaqueBackground()
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        navBarAppearance.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+        navBarAppearance.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         navigationController.navigationBar.standardAppearance = navBarAppearance
         navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
         navigationController.view.layer.cornerRadius = 10

@@ -174,6 +174,12 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         tap.numberOfTapsRequired = 1
         tap.delegate = self
         
+        
+        let tapOnStats = UITapGestureRecognizer(target: self, action: #selector(tappedOnStats))
+        tap.numberOfTapsRequired = 1
+        tap.delegate = self
+        statusView.addGestureRecognizer(tapOnStats)
+        
         view.addGestureRecognizer(tap)
         view.bringSubviewToFront(numberLabel)
         
@@ -220,6 +226,77 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
     
 }
 extension ViewController {
+    
+    @objc func tappedOnStats() {
+        print("STTATS!!!")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let cacheController = storyboard.instantiateViewController(withIdentifier: "StatsViewController") as! StatsViewController
+        cacheController.view.layer.cornerRadius = 10
+        //        view.layer.cornerRadius = 10
+        cacheController.view.clipsToBounds = true
+        cacheController.edgesForExtendedLayout = []
+        
+        self.updateStatsNumber = cacheController
+        
+        let boldAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .bold)]
+        let regularAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .regular)]
+        
+        let boldText = NSAttributedString(string: "\(currentNumberOfMatches)", attributes: boldAttribute)
+        let regularText = NSAttributedString(string: " matches found currently", attributes: regularAttribute)
+        let newString = NSMutableAttributedString()
+        newString.append(boldText)
+        newString.append(regularText)
+        cacheController.currentlyHowManyMatches.attributedText = newString
+        
+        var wordsFinding = [String]()
+        for list in stringToList.keys {
+            wordsFinding.append(list)
+        }
+        
+        var finalMatchesString = ""
+        
+        switch wordsFinding.count {
+         case 0:
+            finalMatchesString = "[no words]"
+         case 1:
+            finalMatchesString = "\"\(wordsFinding[0])\""
+         case 2:
+            finalMatchesString = "\"\(wordsFinding[0])\" and \"\(wordsFinding[1])\""
+         default:
+            for (index, message) in wordsFinding.enumerated() {
+                if index != wordsFinding.count - 1 {
+                    finalMatchesString.append("\"\(message)\", ")
+                } else {
+                    finalMatchesString.append(" and \"\(message)\"")
+                }
+            }
+         }
+        
+        var wordsThis = "these"
+        var wordS = "s"
+        if wordsFinding.count == 1 { wordsThis = "this"; wordS = "" }
+        
+        let regularMatchesText = NSAttributedString(string: "Currently searching for \(wordsThis) word\(wordS): ", attributes: regularAttribute)
+        let boldMatchesText = NSAttributedString(string: finalMatchesString, attributes: boldAttribute)
+        
+        let newMatches = NSMutableAttributedString()
+        newMatches.append(regularMatchesText)
+        newMatches.append(boldMatchesText)
+        cacheController.currentSearchingForTheseWords.attributedText = newMatches
+        
+        var attributes = EKAttributes.centerFloat
+        attributes.displayDuration = .infinity
+        attributes.entryInteraction = .absorbTouches
+        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+        attributes.entryBackground = .color(color: .white)
+        attributes.screenInteraction = .absorbTouches
+        attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+        
+        SwiftEntryKit.display(entry: cacheController, using: attributes)
+        
+    }
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         //print(touch.view)
         if view.viewWithTag(12461) != nil {

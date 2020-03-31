@@ -20,7 +20,9 @@ import SnapKit
 protocol ToggleCreateCircle: class {
     func toggle(created: Bool)
 }
-
+protocol UpdateMatchesNumberStats: class {
+    func update(to: Int)
+}
 class CameraView: UIView {
     
 var videoPreviewLayer: AVCaptureVideoPreviewLayer {
@@ -54,6 +56,15 @@ class ViewController: UIViewController {
     var shouldShowTextDetectIndicator = true
     var shouldHapticFeedback = true
     
+    
+    //MARK: Stats
+    weak var updateStatsNumber: UpdateMatchesNumberStats?
+    var currentNumberOfMatches = 0
+    
+    var newNumberOfMatchesFound = 0
+    var existingNumberOfMatchesFound = 0
+    
+    
     //MARK: Timer and haptic feedback
 //    var hapticFeedbackEnabled = true
     var currentPassCount = 0 /// +1 whenever frame added for AV
@@ -62,42 +73,11 @@ class ViewController: UIViewController {
     
     //MARK: Toolbar
     
-//    @IBOutlet weak var listsToolbarLayout: UICollectionViewFlowLayout!
     let realm = try! Realm()
     var listCategories: Results<FindList>?
     var editableListCategories = [EditableFindList]()
     var currentContentsOfScreen = ""
-    
-    
-    
     var shouldResetHighlights = false
-    
-//    @IBOutlet weak var listsCollectionView: UICollectionView!
-//    @IBOutlet weak var toolBar: UIView!
-//    @IBOutlet weak var autoCompleteButton: UIButton!
-//    @IBOutlet weak var cancelButtonNew: UIButton!
-//    @IBOutlet weak var newMatchButton: UIButton!
-//
-//    @IBAction func cancelButtonPressed(_ sender: UIButton) {
-//        removeAllLists()
-//    }
-//    @IBAction func autocompButtonPressed(_ sender: UIButton) {
-//        view.endEditing(true)
-//        if insertingListsCount == 0 {
-//            updateListsLayout(toType: "doneAndShrink")
-//        } else {
-//            isSchedulingList = true
-//        }
-//    }
-//    @IBAction func newMatchPressed(_ sender: Any) {
-//        if let searchText = newSearchTextField.text {
-//            newSearchTextField.text = "\(searchText)\u{2022}"
-//        }
-//
-////        if let ramText = ramReel.textField.text {
-////            ramReel.textField.text = "\(ramText)\u{2022}"
-////        }
-//    }
     
     //MARK: Search Bar
     
@@ -119,33 +99,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var searchCollectionRightC: NSLayoutConstraint!
     
     @IBOutlet weak var warningView: UIView!
-    
     @IBOutlet weak var warningLabel: UILabel!
-    
     @IBOutlet weak var warningHeightC: NSLayoutConstraint!
-    
-    
-    
-    //    @IBOutlet var listsView: UIView!
-//    @IBOutlet weak var listViewCollectionView: UICollectionView!
-//
-//    @IBOutlet var searchTextField: TextField!
-//    @IBOutlet weak var searchTextBar: UIView!
-    
-    
     var searchShrunk = true
     
     @IBOutlet weak var newSearchTextField: TextField!
     @IBOutlet weak var searchTextTopC: NSLayoutConstraint! ///starts at 8
     @IBOutlet weak var searchTextLeftC: NSLayoutConstraint!
-    //    var listsViewTop: Constraint? = nil
-//    var listsViewLeft: Constraint? = nil
-//    var listsViewWidth: Constraint? = nil
-//    
-//    var textFieldTop: Constraint? = nil
-//    var textFieldLeft: Constraint? = nil
-//    var textFieldWidth: Constraint? = nil
-    
     @IBOutlet weak var searchContentViewHeight: NSLayoutConstraint!
     
     //MARK: Lists
@@ -179,7 +139,6 @@ class ViewController: UIViewController {
     var hasStartedDismissing = false
     var cancelSeconds = 0
     var cancelTimer : Timer?
-    //var isCancelTimerRunning = false //This will be used to make sure only one timer is created at a time.
     
     //MARK: Motion and AR Engine
     var motionManager: CMMotionManager!
@@ -201,18 +160,12 @@ class ViewController: UIViewController {
     
     var matchToColors = [String: [CGColor]]()
     
-//    var currentMatchStrings = [String]()
-//    var currentMatchArray = [String]()
     var currentSearchFindList = EditableFindList()
     var currentListsSharedFindList = EditableFindList()
     var currentSearchAndListSharedFindList = EditableFindList()
     
     var stringToList = [String: EditableFindList]()
-//    var containedList = [String]()
-    
     var aspectRatioWidthOverHeight : CGFloat = 0
-//    var aspectRatioSucceeded : Bool = false
-//    var sizeOfPixelBufferFast : CGSize = CGSize(width: 0, height: 0)
     
     //MARK: Every mode (Universal)
     var statusBarHidden : Bool = false
@@ -289,10 +242,7 @@ class ViewController: UIViewController {
             avSession.addOutput(videoDataOutput)
         }
         cameraView.videoPreviewLayer.videoGravity = .resizeAspectFill
-        //cameraView.videoPreviewLayer.position = CGPoint(x: 0.5, y: 0.5)
-        //cameraView.videoPreviewLayer.frame = self.view.bounds
         let newBounds = view.layer.bounds
-        //avLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
         cameraView.videoPreviewLayer.bounds = newBounds
         print(cameraView.videoPreviewLayer.bounds)
         cameraView.videoPreviewLayer.position = CGPoint(x: newBounds.midX, y: newBounds.midY);
@@ -334,8 +284,12 @@ class ViewController: UIViewController {
    
     var initialAttitude: CMAttitude?
     //var refAttitudeReferenceFrame: CMAttitudeReferenceFrame?
+    
+ 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         
         readDefaultsValues()
         
@@ -382,11 +336,11 @@ class ViewController: UIViewController {
         }
         
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        //classicHasFoundOne = false
-        print("diss")
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(true)
+//        //classicHasFoundOne = false
+//        print("diss")
+//    }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -398,9 +352,10 @@ class ViewController: UIViewController {
     }
 
     func readDefaultsValues() {
+        
         if let hexString = defaults.string(forKey: "highlightColor") {
             highlightColor = hexString
-            print("COLOR: \(hexString)")
+//            print("COLOR: \(hexString)")
         }
         
         let showText = defaults.bool(forKey: "showTextDetectIndicator")

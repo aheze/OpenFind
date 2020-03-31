@@ -344,6 +344,13 @@ extension ListController: ListFinishedEditing {
 
 extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func madeNewList(name: String, description: String, contents: [String], imageName: String, imageColor: String) {
+        
+        let defaults = UserDefaults.standard
+        let listsCount = defaults.integer(forKey: "listsCreateCount")
+        let newListsCount = listsCount + 1
+        defaults.set(newListsCount, forKey: "listsCreateCount")
+        
+        
         print("add")
         let newList = FindList()
         newList.name = name

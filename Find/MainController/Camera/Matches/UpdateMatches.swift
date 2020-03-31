@@ -12,6 +12,9 @@ extension ViewController {
     
     
     func updateMatchesNumber(to number: Int) {
+        
+        currentNumberOfMatches = number
+        updateStatsNumber?.update(to: number)
         //print("Updating matches number to \(number)")
         
         if number > previousNumberOfMatches {

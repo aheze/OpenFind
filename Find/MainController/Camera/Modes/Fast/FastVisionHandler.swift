@@ -172,6 +172,8 @@ extension ViewController {
     
     
     func scaleInHighlight(component: Component) {
+        newNumberOfMatchesFound += 1
+        
         DispatchQueue.main.async {
             
             let layer = CAShapeLayer()

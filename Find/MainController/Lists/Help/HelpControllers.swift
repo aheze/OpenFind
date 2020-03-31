@@ -137,6 +137,14 @@ class HelpController: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
         
+        let defaults = UserDefaults.standard
+        let helpCount = defaults.integer(forKey: "helpPressCount")
+        let newHelpCount = helpCount + 1
+        defaults.set(newHelpCount, forKey: "helpPressCount")
+        
+    
+        
+        
 //        progressBar.progressTintColor = #colorLiteral(red: 0.9764705896, green: 0.5311594379, blue: 0, alpha: 1)
         
         webView.navigationDelegate = self
@@ -169,6 +177,12 @@ class HelpController: UIViewController, WKNavigationDelegate {
              decisionHandler(WKNavigationActionPolicy.cancel)
             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "HelpController") as? HelpController
             if let url = navigationAction.request.url {
+                
+                if url.absoluteString == "https://forms.gle/agdyoB9PFfnv8cU1A/" {
+                    print("FEEDBACK!!")
+                    let defaults = UserDefaults.standard
+                    defaults.set(true, forKey: "feedbackedAlready")
+                }
 //                print("URL STINRG:::\(url.absoluteString)") // It will give the selected link URL
                 vc?.urlString = url.absoluteString
             }

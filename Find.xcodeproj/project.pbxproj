@@ -75,6 +75,7 @@
 		495F38FA2432C8FE00A17D93 /* CarteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38F72432C8FB00A17D93 /* CarteViewController.swift */; };
 		495F38FB2432C8FE00A17D93 /* CarteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38F82432C8FC00A17D93 /* CarteItem.swift */; };
 		495F38FC2432C8FE00A17D93 /* Carte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38F92432C8FE00A17D93 /* Carte.swift */; };
+		495F38FE243302D500A17D93 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38FD243302D500A17D93 /* StatsViewController.swift */; };
 		4966B70A23DE98C800A8523A /* MakeNewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4966B70923DE98C800A8523A /* MakeNewList.swift */; };
 		4966B71023E124D700A8523A /* ImagePickerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4966B70F23E124D700A8523A /* ImagePickerList.swift */; };
 		4966B71323E1252800A8523A /* ImagePickerList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4966B71223E1252800A8523A /* ImagePickerList.xib */; };
@@ -195,6 +196,7 @@
 		495F38F72432C8FB00A17D93 /* CarteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarteViewController.swift; sourceTree = "<group>"; };
 		495F38F82432C8FC00A17D93 /* CarteItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarteItem.swift; sourceTree = "<group>"; };
 		495F38F92432C8FE00A17D93 /* Carte.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carte.swift; sourceTree = "<group>"; };
+		495F38FD243302D500A17D93 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		4966B70923DE98C800A8523A /* MakeNewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeNewList.swift; sourceTree = "<group>"; };
 		4966B70F23E124D700A8523A /* ImagePickerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerList.swift; sourceTree = "<group>"; };
 		4966B71223E1252800A8523A /* ImagePickerList.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePickerList.xib; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				49A8EFAD237A5F2800328D47 /* SetUpSearchBar.swift */,
 				4952F0C1240B1DD00068564F /* SearchCell.swift */,
 				49301BF624030C4400B4780B /* SmallGradientView.swift */,
+				495F38FD243302D500A17D93 /* StatsViewController.swift */,
 			);
 			path = Setup;
 			sourceTree = "<group>";
@@ -881,6 +884,7 @@
 				490DA75823CBB871000AF57D /* JJActionItem.swift in Sources */,
 				4928525623D4BD490048EC13 /* UpdateOrientation.swift in Sources */,
 				49BC782023C2B0E0003D9904 /* IndexMatcher.swift in Sources */,
+				495F38FE243302D500A17D93 /* StatsViewController.swift in Sources */,
 				49913450236FE12400B82E46 /* SettingsViewExtensions.swift in Sources */,
 				490DA75923CBB871000AF57D /* JJCircleView.swift in Sources */,
 				4917CE8123C059F6002EA20B /* StartSceneView.swift in Sources */,

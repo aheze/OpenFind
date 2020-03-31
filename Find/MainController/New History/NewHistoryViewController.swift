@@ -691,6 +691,13 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 
 extension NewHistoryViewController: ReturnCachedPhotos {
     func giveCachedPhotos(photos: [EditableHistoryModel], popup: String) {
+        
+        let defaults = UserDefaults.standard
+        let existingCacheCount = defaults.integer(forKey: "cacheCountTotal")
+        let newCacheCount = existingCacheCount + photos.count
+        defaults.set(newCacheCount, forKey: "cacheCountTotal")
+        
+        
         print("give")
         if popup == "Keep" {
             let alertView = SPAlertView(title: "Kept cached photos!", message: "Tap to dismiss", preset: SPAlertPreset.done)
@@ -1271,7 +1278,12 @@ extension NewHistoryViewController: ZoomStateChanged, ZoomCached {
     
     func cached(cached: Bool, photo: EditableHistoryModel, index: Int) {
         if cached == true {
-            print("RECIEVE CACHE!!")
+            let defaults = UserDefaults.standard
+            let existingCacheCount = defaults.integer(forKey: "cacheCountTotal")
+            let newCacheCount = existingCacheCount + 1
+            
+            defaults.set(newCacheCount, forKey: "cacheCountTotal")
+//            print("RECIEVE CACHE!!")
             if let photoCats = photoCategories {
                 let origPhoto = photoCats[index]
                 if let indP = indexToIndexPath[index] {
