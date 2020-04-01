@@ -46,8 +46,9 @@ override class var layerClass: AnyClass {
 }
 class ViewController: UIViewController {
     
+  
     
-    @IBOutlet weak var completeOverlayBlur: UIVisualEffectView!
+    @IBOutlet weak var blackOverlayView: UIView!
     
     @IBOutlet weak var darkBlurEffect: UIVisualEffectView!
 //    @IBOutlet weak var darkBlurEffectHeightConstraint: NSLayoutConstraint!
@@ -250,10 +251,11 @@ class ViewController: UIViewController {
         print(cameraView.videoPreviewLayer.bounds)
         cameraView.videoPreviewLayer.position = CGPoint(x: newBounds.midX, y: newBounds.midY);
         avSession.startRunning()
-        UIView.animate(withDuration: 0.8, animations: {
-            self.completeOverlayBlur.alpha = 0
+        UIView.animate(withDuration: 0.8, delay: 2, animations: {
+            self.blackOverlayView.alpha = 0
         }) { _ in
-            self.completeOverlayBlur.removeFromSuperview()
+            self.blackOverlayView.removeFromSuperview()
+            print("comp2")
         }
     }
     func startSession() { if !avSession.isRunning {
@@ -303,7 +305,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        
+        self.modalPresentationStyle = .automatic
         readDefaultsValues()
         
 //        changeDelegate = statusView as? ChangeStatusValue

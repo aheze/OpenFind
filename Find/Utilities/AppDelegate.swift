@@ -43,21 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Tell Realm to use this new configuration object for the default Realm
         Realm.Configuration.defaultConfiguration = config
         
-        let defaults = UserDefaults.standard
-        let launchedBefore = defaults.bool(forKey: "launchedBefore")
         
-        if launchedBefore {
-            print("Not first launch.")
-        } else {
-            print("First launch, setting UserDefault.")
-            
-            defaults.set(true, forKey: "launchedBefore")
-            defaults.set("00AEEF", forKey: "highlightColor")
-            
-            defaults.set(true, forKey: "showTextDetectIndicator")
-            defaults.set(true, forKey: "hapticFeedback")
-            
-        }
         
         return true
     }

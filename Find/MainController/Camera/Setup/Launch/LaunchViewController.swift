@@ -8,31 +8,110 @@
 
 import UIKit
 import AVFoundation
+import paper_onboarding
+import SnapKit
 
 class LaunchViewController: UIViewController {
     
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var topLeftImageView: UIImageView!
-    
     @IBOutlet weak var topRightImageView: UIImageView!
-    
     @IBOutlet weak var bottomLeftImageView: UIImageView!
-    
     @IBOutlet weak var bottomRightImageView: UIImageView!
     
     @IBOutlet weak var totalWidthC: NSLayoutConstraint!
-    
     @IBOutlet weak var totalHeightC: NSLayoutConstraint!
     
     @IBOutlet weak var allowAccessView: UIView!
-    
-    
     @IBOutlet weak var allowAccessButton: UIButton!
     
+    @IBOutlet weak var allowAccessViewHeightC: NSLayoutConstraint!
+    
+    @IBOutlet weak var allowAccessWidthC: NSLayoutConstraint!
+    
+    @IBOutlet weak var accessDescLabel: UILabel!
+    
     @IBAction func allowAccessPressed(_ sender: Any) {
+        if shouldGoToSettings {
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl)
+            }
+        } else {
+            AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
+                if granted {
+                    DispatchQueue.main.async {
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self.allowAccessView.alpha = 0
+                        }) { _ in
+                            self.allowAccessView.isHidden = true
+                            self.drawAnimation(type: "fullScreenStart")
+                        }
+                    }
+                    print("allow")
+                    //access allowed
+                } else {
+                    print("NOT allow")
+                    self.shouldGoToSettings = true
+                    self.firstTimeDeny = false
+                    DispatchQueue.main.async {
+                        self.drawAnimation(type: "DENIED")
+                    }
+                    //access denied
+                }
+            })
+        }
     }
+    var shouldGoToSettings = false
+    var firstTimeDeny = false
     
     @IBOutlet weak var settingsPictureView: UIImageView!
+    
+    
+    let onboarding = PaperOnboarding()
+    @IBOutlet weak var getStartedButton: UIButton!
+    @IBAction func getStartedPressed(_ sender: Any) {
+        print("start!!!")
+        let defaults = UserDefaults.standard
+        defaults.set(true, forKey: "launchedBefore")
+        defaults.set("00AEEF", forKey: "highlightColor")
+        
+        defaults.set(true, forKey: "showTextDetectIndicator")
+        defaults.set(true, forKey: "hapticFeedback")
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.onboarding.alpha = 0
+            self.onboarding.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
+            self.getStartedButton.alpha = 0
+            self.getStartedButton.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
+        })
+        
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            print("Authourized")
+            self.drawAnimation(type: "fullScreenStart")
+        case .notDetermined:
+            print("ND")
+            shouldGoToSettings = false
+            self.drawAnimation(type: "needPermissions")
+        case .denied:
+            print("D")
+            firstTimeDeny = true
+            shouldGoToSettings = true
+            self.drawAnimation(type: "DENIED")
+        case .restricted:
+            print("R")
+            self.drawAnimation(type: "Restricted")
+        }
+        
+        
+        
+    }
+    var bottomOnboardingConstraint: Constraint? = nil
+    
+    
     
     let deviceSize = UIScreen.main.bounds.size
     let loadingImages = (0...10).map { UIImage(named: "\($0)")! }
@@ -42,6 +121,11 @@ class LaunchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getStartedButton.alpha = 0
+        getStartedButton.isHidden = true
+        getStartedButton.layer.cornerRadius = 6
+        getStartedButton.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+        
         allowAccessView.isHidden = true
         allowAccessView.alpha = 0
         allowAccessView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
@@ -49,19 +133,20 @@ class LaunchViewController: UIViewController {
         settingsPictureView.alpha = 0
         
         allowAccessButton.layer.cornerRadius = 6
+        allowAccessView.layer.cornerRadius = 14
         
 //        view.layoutIfNeeded()
-        print("LOADIM: \(loadingImages)")
+//        print("LOADIM: \(loadingImages)")
         topRightImageView.transform = CGAffineTransform(rotationAngle: CGFloat(-270).degreesToRadians)
         bottomLeftImageView.transform = CGAffineTransform(rotationAngle: CGFloat(-90).degreesToRadians)
         bottomRightImageView.transform = CGAffineTransform(rotationAngle: CGFloat(-180).degreesToRadians)
         
         let defaults = UserDefaults.standard
         let launchedBefore = defaults.bool(forKey: "launchedBefore")
-        if !launchedBefore {
+        if launchedBefore == false {
             print("FIRST LAUNCH")
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
-                self.drawAnimation()
+                self.drawAnimation(type: "onboarding")
             })
         } else {
             switch AVCaptureDevice.authorizationStatus(for: .video) {
@@ -72,48 +157,50 @@ class LaunchViewController: UIViewController {
                 })
             case .notDetermined:
                 print("ND")
+                shouldGoToSettings = false
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                     self.drawAnimation(type: "needPermissions")
                 })
             case .denied:
                 print("D")
+                firstTimeDeny = true
+                shouldGoToSettings = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                    
+                    self.drawAnimation(type: "DENIED")
+                })
             case .restricted:
                 print("R")
-                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                    self.drawAnimation(type: "Restricted")
+                })
             }
-//            if AVCaptureDevice.authorizationStatus(for: .video) ==  .authorized {
-//            //already authorized
-//                print("Authourized")
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
-//                    self.drawAnimation()
-//                })
-//
-//            } else {
-//                self.drawAnimation(type: "needPermissions")
-//
-//            }
         }
  
         
     }
     
-    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
-        viewControllerToPresent.modalPresentationStyle = .fullScreen
-      super.present(viewControllerToPresent, animated: flag, completion: completion)
-    }
+//    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+//        viewControllerToPresent.modalPresentationStyle = .fullScreen
+//      super.present(viewControllerToPresent, animated: flag, completion: completion)
+//    }
+//
     
     
-    
-    func drawAnimation(type: String = "onboarding") {
-        let availibleWidth = deviceSize.width - 100
+    func drawAnimation(type:String = "onboarding") {
+        let availibleWidth = deviceSize.width - 60
+        let accessAvailibleWidth = deviceSize.width - 100
         UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
             self.baseView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         }) { _ in
             switch type {
-            case "needPermissions":
-                print("anim")
+            case "Restricted":
+                print("RRR")
                 self.totalWidthC.constant = availibleWidth
                 self.totalHeightC.constant = availibleWidth
+                self.allowAccessViewHeightC.constant = accessAvailibleWidth
+                self.allowAccessWidthC.constant = accessAvailibleWidth
+                
                 self.allowAccessView.isHidden = false
                 UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
                     self.view.layoutIfNeeded()
@@ -142,19 +229,114 @@ class LaunchViewController: UIViewController {
                     self.bottomLeftImageView.startAnimating()
                     self.bottomRightImageView.startAnimating()
                 })
-                AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
-                    if granted {
-                        //access allowed
-                    } else {
-                        //access denied
-                    }
-                })
-            case "onboarding":
+                self.accessDescLabel.text = "You don't have permission to use the camera."
+                self.shouldGoToSettings = true
+                self.allowAccessButton.setTitle("Go to settings", for: .normal)
+                
+            case "DENIED":
+//                print("AVAI::: \(availibleWidth), h: \(self.deviceSize.height - 100)")
                 self.totalWidthC.constant = availibleWidth
-                self.totalHeightC.constant = availibleWidth
+                self.totalHeightC.constant = self.deviceSize.height - 60
+                self.allowAccessViewHeightC.constant = self.deviceSize.height - 100
+                self.allowAccessWidthC.constant = accessAvailibleWidth
+                self.allowAccessView.isHidden = false
                 UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
                     self.view.layoutIfNeeded()
                     self.baseView.transform = CGAffineTransform.identity
+                    self.allowAccessView.transform = CGAffineTransform.identity
+                    self.allowAccessView.alpha = 1
+                    if self.firstTimeDeny {
+                        
+                        
+                        self.topLeftImageView.image = UIImage(named: "10")
+                        self.topRightImageView.image = UIImage(named: "10")
+                        self.bottomLeftImageView.image = UIImage(named: "10")
+                        self.bottomRightImageView.image = UIImage(named: "10")
+                        self.topLeftImageView.animationImages = self.loadingImages
+                        self.topRightImageView.animationImages = self.loadingImages
+                        self.bottomLeftImageView.animationImages = self.loadingImages
+                        self.bottomRightImageView.animationImages = self.loadingImages
+                        self.topLeftImageView.animationRepeatCount = 1
+                        self.topRightImageView.animationRepeatCount = 1
+                        self.bottomLeftImageView.animationRepeatCount = 1
+                        self.bottomRightImageView.animationRepeatCount = 1
+                        self.topLeftImageView.animationDuration = 0.4
+                        self.topRightImageView.animationDuration = 0.4
+                        self.bottomLeftImageView.animationDuration = 0.4
+                        self.bottomRightImageView.animationDuration = 0.4
+                        self.topLeftImageView.startAnimating()
+                        self.topRightImageView.startAnimating()
+                        self.bottomLeftImageView.startAnimating()
+                        self.bottomRightImageView.startAnimating()
+                    }
+                    self.settingsPictureView.alpha = 1
+                })
+                self.allowAccessButton.setTitle("Go to settings", for: .normal)
+                
+            case "needPermissions":
+                print("needPermissions")
+                self.totalWidthC.constant = availibleWidth
+                self.totalHeightC.constant = availibleWidth
+                self.allowAccessViewHeightC.constant = accessAvailibleWidth
+                self.allowAccessWidthC.constant = accessAvailibleWidth
+                
+                self.allowAccessView.isHidden = false
+                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
+                    self.view.layoutIfNeeded()
+                    self.baseView.transform = CGAffineTransform.identity
+                    self.allowAccessView.transform = CGAffineTransform.identity
+                    self.allowAccessView.alpha = 1
+                    
+                    self.topLeftImageView.image = UIImage(named: "10")
+                    self.topRightImageView.image = UIImage(named: "10")
+                    self.bottomLeftImageView.image = UIImage(named: "10")
+                    self.bottomRightImageView.image = UIImage(named: "10")
+                    self.topLeftImageView.animationImages = self.loadingImages
+                    self.topRightImageView.animationImages = self.loadingImages
+                    self.bottomLeftImageView.animationImages = self.loadingImages
+                    self.bottomRightImageView.animationImages = self.loadingImages
+                    self.topLeftImageView.animationRepeatCount = 1
+                    self.topRightImageView.animationRepeatCount = 1
+                    self.bottomLeftImageView.animationRepeatCount = 1
+                    self.bottomRightImageView.animationRepeatCount = 1
+                    self.topLeftImageView.animationDuration = 0.4
+                    self.topRightImageView.animationDuration = 0.4
+                    self.bottomLeftImageView.animationDuration = 0.4
+                    self.bottomRightImageView.animationDuration = 0.4
+                    self.topLeftImageView.startAnimating()
+                    self.topRightImageView.startAnimating()
+                    self.bottomLeftImageView.startAnimating()
+                    self.bottomRightImageView.startAnimating()
+                })
+                
+            case "onboarding":
+                
+                self.onboarding.dataSource = self
+                self.onboarding.delegate = self
+                self.onboarding.alpha = 0
+                self.onboarding.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+                self.onboarding.layer.cornerRadius = 14
+                self.onboarding.clipsToBounds = true
+                self.view.addSubview(self.onboarding)
+                self.onboarding.snp.makeConstraints { (make) in
+                    make.width.equalTo(accessAvailibleWidth)
+                    make.centerX.equalToSuperview()
+                    make.top.equalToSuperview().offset(50)
+                    self.bottomOnboardingConstraint = make.bottom.equalToSuperview().offset(-50).constraint
+                }
+//                getStarter
+                
+                self.view.layoutIfNeeded()
+                
+                
+                
+                self.totalWidthC.constant = availibleWidth
+                self.totalHeightC.constant = self.deviceSize.height - 60
+                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
+                    self.view.layoutIfNeeded()
+                    self.baseView.transform = CGAffineTransform.identity
+                    self.onboarding.alpha = 1
+                    self.onboarding.transform = CGAffineTransform.identity
                     
                     self.topLeftImageView.image = UIImage(named: "10")
                     self.topRightImageView.image = UIImage(named: "10")
@@ -177,17 +359,20 @@ class LaunchViewController: UIViewController {
                     self.bottomLeftImageView.startAnimating()
                     self.bottomRightImageView.startAnimating()
                 }) { _ in
-                    
+                    self.getStartedButton.isHidden = false
                 }
             case "fullScreenStart":
                 let finalWidth = self.deviceSize.width
                 let finalHeight = self.deviceSize.height
                 self.totalWidthC.constant = finalWidth
                 self.totalHeightC.constant = finalHeight
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.05, execute: {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController")
                     viewController.modalTransitionStyle = .crossDissolve
+                    viewController.modalPresentationStyle = .overCurrentContext
+//                    viewController.transitioningDelegate = self
                     self.present(viewController, animated: true, completion: nil)
                 })
                 UIView.animate(withDuration: 0.4, animations: {
@@ -204,24 +389,73 @@ class LaunchViewController: UIViewController {
             }
         }
     }
-            
-//            AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
-//                if granted {
-//                    print("ALLOW")
-//                    self.drawAnimation(type: "fullScreenStart")
-//                    //access allowed
-//                } else {
-//                    self.drawAnimation(type: "needPermissions")
-//                    print("NOT AL")
-//                    //access denied
-//                }
-//            })
         
 }
-        
-        
-            
+
+extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSource {
     
+    func onboardingWillTransitonToIndex(_ index: Int) {
+        if index == 2 {
+            getStartedButton.alpha = 0
+            self.bottomOnboardingConstraint?.update(offset: -120)
+            UIView.animate(withDuration: 0.3, animations: {
+                self.getStartedButton.transform = CGAffineTransform.identity
+                self.view.layoutIfNeeded()
+                self.getStartedButton.alpha = 1
+            })
+        } else {
+            getStartedButton.alpha = 1
+            self.bottomOnboardingConstraint?.update(offset: -50)
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+                self.getStartedButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+                self.getStartedButton.alpha = 0
+            })
+            
+        }
+    }
+    
+    
+    func onboardingItem(at index: Int) -> OnboardingItemInfo {
+      return [
+        OnboardingItemInfo(informationImage: UIImage(named: "findRim")!,
+                                      title: "title",
+                                description: "description",
+                                   pageIcon: UIImage(named: "findRim")!,
+                                      color: UIColor.blue,
+                                 titleColor: UIColor.white,
+                           descriptionColor: UIColor.white,
+                           titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
+                            descriptionFont: UIFont.systemFont(ofSize: 17)),
+
+        OnboardingItemInfo(informationImage: UIImage(named: "findRim")!,
+                   title: "title",
+             description: "description",
+                pageIcon: UIImage(named: "findRim")!,
+                   color: UIColor.blue,
+              titleColor: UIColor.white,
+        descriptionColor: UIColor.white,
+        titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
+         descriptionFont: UIFont.systemFont(ofSize: 17)),
+
+       OnboardingItemInfo(informationImage: UIImage(named: "findRim")!,
+                  title: "title",
+            description: "description",
+               pageIcon: UIImage(named: "findRim")!,
+                  color: UIColor.blue,
+             titleColor: UIColor.white,
+       descriptionColor: UIColor.white,
+       titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
+        descriptionFont: UIFont.systemFont(ofSize: 17))
+        ][index]
+    }
+
+    func onboardingItemsCount() -> Int {
+       return 3
+    }
+}
+
+      
     
 //public extension UIDevice {
 //
