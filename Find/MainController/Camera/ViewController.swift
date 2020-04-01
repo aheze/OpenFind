@@ -48,6 +48,100 @@ class ViewController: UIViewController {
     
   
     
+    ///PINCHING
+    @IBOutlet weak var controlsBottomC: NSLayoutConstraint! //15
+    
+    @IBOutlet weak var contentTopC: NSLayoutConstraint!
+    //8
+    
+    @IBOutlet var pinchGesture: UIPinchGestureRecognizer!
+    var shouldPinch = true
+    @IBAction func pinchGesture(_ sender: UIPinchGestureRecognizer) {
+//        print("PINCH: \(sender.scale)")
+//        print("STATE: \(sender.state)")
+//        if shouldPinch {
+//            shouldPinch = false
+//        if sender.state == UIGestureRecognizer.State.began {
+//            UIView.animate(withDuration: 0.2, animations: {
+//                self.searchContentView.alpha = 1
+//                self.controlsView.alpha = 1
+//                self.controlsBlurView.alpha = 0
+//            })
+//        }
+        
+//        if sender.scale >= 1 {
+//            if shouldPinch {
+                controlsBottomC.constant = 15 - (sender.scale * 50)
+                contentTopC.constant = 8 - (sender.scale * 50)
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.view.layoutIfNeeded()
+                })
+              
+//            }
+//        } else {
+//            controlsBottomC.constant = 15
+//            contentTopC.constant = 8
+//            UIView.animate(withDuration: 0.4, animations: {
+//                self.view.layoutIfNeeded()
+//            })
+//        }
+//
+        if sender.state == UIGestureRecognizer.State.ended {
+            if sender.scale >= 1.3 {
+                print("DIEMI")
+                controlsBottomC.constant = -80
+                contentTopC.constant = -100
+                searchContentView.isHidden = false
+                controlsView.isHidden = false
+
+                controlsBlurView.isHidden = false
+                controlsBlurView.alpha = 0
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.view.layoutIfNeeded()
+                    self.searchContentView.alpha = 0
+                    self.controlsView.alpha = 0
+
+                    self.controlsBlurView.alpha = 1
+                    self.controlsBlurView.transform = CGAffineTransform.identity
+                }) { _ in
+                    self.searchContentView.isHidden = true
+                    self.controlsView.isHidden = true
+                    self.shouldPinch = true
+                }
+            } else {
+                print("cancel")
+                revealControls()
+                
+            }
+        }
+        
+    }
+    @IBOutlet weak var controlsBlurView: UIVisualEffectView!
+    
+    @IBAction func showControlsPressed(_ sender: Any) {
+        revealControls()
+    }
+    
+    func revealControls() {
+        searchContentView.isHidden = false
+        controlsView.isHidden = false
+        controlsBlurView.isHidden = true
+        controlsBottomC.constant = 15
+        contentTopC.constant
+         = 8
+        UIView.animate(withDuration: 0.4, animations: {
+            self.view.layoutIfNeeded()
+            self.searchContentView.alpha = 1
+            self.controlsView.alpha = 1
+            
+            self.controlsBlurView.alpha = 0
+            self.controlsBlurView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        }) { _ in
+            self.controlsBlurView.isHidden = true
+        }
+    }
+    
+    
     @IBOutlet weak var blackOverlayView: UIView!
     
     @IBOutlet weak var darkBlurEffect: UIVisualEffectView!
@@ -305,8 +399,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        pinchGesture.delegate = self
         self.modalPresentationStyle = .automatic
         readDefaultsValues()
+        
+        controlsBlurView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        controlsBlurView.alpha = 0
+        controlsBlurView.layer.cornerRadius = 8
+        controlsBlurView.clipsToBounds = true
+        controlsBlurView.isHidden = true
         
 //        changeDelegate = statusView as? ChangeStatusValue
         

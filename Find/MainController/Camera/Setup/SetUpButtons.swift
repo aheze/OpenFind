@@ -320,4 +320,20 @@ extension ViewController {
         //return touch.view == gestureRecognizer.view
         
     }
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer == pinchGesture {
+            
+            UIView.animate(withDuration: 0.4, animations: {
+                self.searchContentView.alpha = 1
+                self.controlsView.alpha = 1
+                self.controlsBlurView.alpha = 0
+                self.controlsBlurView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+            }) { _ in
+                self.controlsBlurView.isHidden = true
+            }
+//            print("EQUALS")
+        }
+//        print("BEGIN")
+        return true
+    }
 }

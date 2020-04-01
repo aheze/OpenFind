@@ -95,8 +95,8 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="We need to access your camera to find text. Find works offline and nothing leaves your phone." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K83-pM-wfg">
-                                        <rect key="frame" x="16" y="86.5" width="248" height="57.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <rect key="frame" x="16" y="86.5" width="248" height="86"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -106,7 +106,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="CPU-iU-fj3"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                         <state key="normal" title="Allow Access">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -115,7 +115,7 @@
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" image="Leica Sample" translatesAutoresizingMaskIntoConstraints="NO" id="gn8-8L-ybj">
-                                        <rect key="frame" x="0.0" y="152" width="280" height="64"/>
+                                        <rect key="frame" x="0.0" y="184.5" width="280" height="31.5"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" name="Gray1"/>
@@ -126,7 +126,7 @@
                                     <constraint firstAttribute="trailing" secondItem="4PV-lP-fX0" secondAttribute="trailing" constant="16" id="F5V-Rq-uTx"/>
                                     <constraint firstAttribute="width" constant="280" id="FD3-uC-I9c"/>
                                     <constraint firstItem="eUw-c3-UBq" firstAttribute="top" secondItem="emv-Ex-wFD" secondAttribute="top" constant="16" id="NdH-CZ-UkX"/>
-                                    <constraint firstItem="gn8-8L-ybj" firstAttribute="top" secondItem="K83-pM-wfg" secondAttribute="bottom" constant="8" id="XCU-Ma-qBl"/>
+                                    <constraint firstItem="gn8-8L-ybj" firstAttribute="top" secondItem="K83-pM-wfg" secondAttribute="bottom" constant="12" id="XCU-Ma-qBl"/>
                                     <constraint firstItem="gn8-8L-ybj" firstAttribute="leading" secondItem="emv-Ex-wFD" secondAttribute="leading" id="e4P-j2-Hvl"/>
                                     <constraint firstAttribute="bottom" secondItem="4PV-lP-fX0" secondAttribute="bottom" constant="16" id="jM4-qR-hNr"/>
                                     <constraint firstAttribute="trailing" secondItem="eUw-c3-UBq" secondAttribute="trailing" constant="16" id="k5I-Rg-j4o"/>
@@ -146,7 +146,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
-                                <state key="normal" title="Get Started!">
+                                <state key="normal" title="Ok, let's go!">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -197,13 +197,15 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lVw-3T-6iA" customClass="CameraView" customModule="Find" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JxZ-Kx-qvm">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1uu-Wl-x4d">
-                                <rect key="frame" x="16" y="97" width="382" height="6"/>
+                                <rect key="frame" x="16" y="123" width="382" height="6"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHm-ND-D9k">
                                         <rect key="frame" x="170" y="-7" width="42" height="20.5"/>
@@ -328,7 +330,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kV4-Eg-1Ee" userLabel="Content">
-                                <rect key="frame" x="8" y="26" width="398" height="71"/>
+                                <rect key="frame" x="8" y="52" width="398" height="71"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SjR-c7-NyL" userLabel="darkBlurEffect">
                                         <rect key="frame" x="0.0" y="0.0" width="398" height="71"/>
@@ -342,7 +344,7 @@
                                         <rect key="frame" x="8" y="-36" width="382" height="32"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lists" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbj-0t-kKO">
-                                                <rect key="frame" x="8" y="0.0" width="58.5" height="32"/>
+                                                <rect key="frame" x="8" y="0.5" width="58.5" height="31.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -356,7 +358,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to remove" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hc9-i8-kXk">
-                                                <rect key="frame" x="116.5" y="5.5" width="108.5" height="21"/>
+                                                <rect key="frame" x="116.5" y="6" width="108.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -460,6 +462,7 @@
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="uZE-G1-rh2" firstAttribute="top" secondItem="0Wp-Su-VwL" secondAttribute="bottom" constant="12" id="2il-Fw-syz"/>
                                     <constraint firstItem="SjR-c7-NyL" firstAttribute="leading" secondItem="kV4-Eg-1Ee" secondAttribute="leading" id="3yI-em-aL9"/>
@@ -479,12 +482,45 @@
                                     <constraint firstItem="eQO-08-qIa" firstAttribute="top" secondItem="kV4-Eg-1Ee" secondAttribute="top" constant="8" id="tCA-et-4hv"/>
                                 </constraints>
                             </view>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2JP-1T-MxT">
+                                <rect key="frame" x="137" y="849" width="140" height="35"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="4uo-B3-Qd7">
+                                    <rect key="frame" x="0.0" y="0.0" width="140" height="35"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u0g-ei-7rm">
+                                            <rect key="frame" x="0.0" y="0.0" width="140" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="35" id="UWh-ZK-tVQ"/>
+                                                <constraint firstAttribute="width" constant="140" id="kgb-95-LaB"/>
+                                            </constraints>
+                                            <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
+                                            <state key="normal" title="Show Controls">
+                                                <color key="titleColor" name="FeedbackGradientRight"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="showControlsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xDu-Ej-IHC"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="u0g-ei-7rm" firstAttribute="top" secondItem="4uo-B3-Qd7" secondAttribute="top" id="4Ej-PE-xEF"/>
+                                        <constraint firstAttribute="trailing" secondItem="u0g-ei-7rm" secondAttribute="trailing" id="Gfv-3Z-i7G"/>
+                                        <constraint firstAttribute="bottom" secondItem="u0g-ei-7rm" secondAttribute="bottom" id="nwK-Os-tYn"/>
+                                        <constraint firstItem="u0g-ei-7rm" firstAttribute="leading" secondItem="4uo-B3-Qd7" secondAttribute="leading" id="qfn-Tt-Wz6"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="JxZ-Kx-qvm" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="2ku-jf-gbb"/>
+                            <constraint firstAttribute="bottom" secondItem="2JP-1T-MxT" secondAttribute="bottom" constant="12" id="5El-mq-7hs"/>
                             <constraint firstItem="kV4-Eg-1Ee" firstAttribute="leading" secondItem="oNn-cV-T8L" secondAttribute="leading" constant="8" id="8mP-1w-akg"/>
                             <constraint firstItem="oNn-cV-T8L" firstAttribute="trailing" secondItem="1uu-Wl-x4d" secondAttribute="trailing" constant="16" id="9He-v9-Vjh"/>
+                            <constraint firstItem="2JP-1T-MxT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9aW-0c-yNf"/>
                             <constraint firstItem="JxZ-Kx-qvm" firstAttribute="trailing" secondItem="oNn-cV-T8L" secondAttribute="trailing" id="PFf-2M-aj6"/>
                             <constraint firstItem="1uu-Wl-x4d" firstAttribute="top" secondItem="kV4-Eg-1Ee" secondAttribute="bottom" id="Q5U-Jw-MFd"/>
                             <constraint firstItem="bCb-2s-qjS" firstAttribute="leading" secondItem="oNn-cV-T8L" secondAttribute="leading" id="Sad-z6-6IQ"/>
@@ -493,15 +529,21 @@
                             <constraint firstItem="oNn-cV-T8L" firstAttribute="trailing" secondItem="bCb-2s-qjS" secondAttribute="trailing" id="mkd-kI-UdL"/>
                             <constraint firstAttribute="bottom" secondItem="JxZ-Kx-qvm" secondAttribute="bottom" id="pjX-NH-ygd"/>
                             <constraint firstItem="JxZ-Kx-qvm" firstAttribute="leading" secondItem="oNn-cV-T8L" secondAttribute="leading" id="tOd-68-VJs"/>
-                            <constraint firstItem="kV4-Eg-1Ee" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="26" id="uYI-qs-zLw"/>
+                            <constraint firstItem="kV4-Eg-1Ee" firstAttribute="top" secondItem="oNn-cV-T8L" secondAttribute="top" constant="8" id="uYI-qs-zLw"/>
                             <constraint firstItem="oNn-cV-T8L" firstAttribute="trailing" secondItem="kV4-Eg-1Ee" secondAttribute="trailing" constant="8" id="z0X-1C-qfr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oNn-cV-T8L"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="UmV-UV-Y1q" appends="YES" id="mqa-Pz-uTD"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="arrowDownImage" destination="y7C-IC-TsC" id="zgr-5p-NYV"/>
                         <outlet property="blackOverlayView" destination="JxZ-Kx-qvm" id="2In-yD-QY6"/>
                         <outlet property="cameraView" destination="lVw-3T-6iA" id="tYA-q5-8xb"/>
+                        <outlet property="contentTopC" destination="uYI-qs-zLw" id="d0f-uN-GYJ"/>
+                        <outlet property="controlsBlurView" destination="2JP-1T-MxT" id="zlF-Wp-gev"/>
+                        <outlet property="controlsBottomC" destination="bZT-O3-Wui" id="cax-iZ-w1Z"/>
                         <outlet property="controlsView" destination="bCb-2s-qjS" id="zOb-6P-Aye"/>
                         <outlet property="darkBlurEffect" destination="SjR-c7-NyL" id="0Wd-Vq-FxN"/>
                         <outlet property="listsLabel" destination="sbj-0t-kKO" id="bsh-5a-IVV"/>
@@ -511,6 +553,7 @@
                         <outlet property="newSearchTextField" destination="eQO-08-qIa" id="53l-JB-69S"/>
                         <outlet property="newShutterButton" destination="oHd-Dg-FBU" id="ADY-yp-2Cz"/>
                         <outlet property="numberLabel" destination="24E-8Q-fAS" id="XjQ-vu-L9f"/>
+                        <outlet property="pinchGesture" destination="UmV-UV-Y1q" id="HUX-Nq-hMW"/>
                         <outlet property="searchBarLayout" destination="4Qm-tc-bOS" id="OXt-hQ-q6Y"/>
                         <outlet property="searchCollectionRightC" destination="GDN-6Y-n9I" id="cik-80-pvh"/>
                         <outlet property="searchCollectionTopC" destination="HwJ-M8-ks4" id="tUO-4v-XuL"/>
@@ -533,6 +576,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="UmV-UV-Y1q">
+                    <connections>
+                        <action selector="pinchGesture:" destination="BYZ-38-t0r" id="zQZ-6P-TYa"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-710.14492753623199" y="177.45535714285714"/>
         </scene>
