@@ -143,7 +143,8 @@ class LaunchViewController: UIViewController {
         
         let defaults = UserDefaults.standard
         let launchedBefore = defaults.bool(forKey: "launchedBefore")
-        if launchedBefore == false {
+        //launchedBefore == false
+        if true {
             print("FIRST LAUNCH")
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                 self.drawAnimation(type: "onboarding")
@@ -395,7 +396,7 @@ class LaunchViewController: UIViewController {
 extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSource {
     
     func onboardingWillTransitonToIndex(_ index: Int) {
-        if index == 2 {
+        if index == 4 {
             getStartedButton.alpha = 0
             self.bottomOnboardingConstraint?.update(offset: -120)
             UIView.animate(withDuration: 0.3, animations: {
@@ -418,40 +419,60 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
     
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
       return [
-        OnboardingItemInfo(informationImage: UIImage(named: "findRim")!,
-                                      title: "title",
-                                description: "description",
-                                   pageIcon: UIImage(named: "findRim")!,
-                                      color: UIColor.blue,
-                                 titleColor: UIColor.white,
-                           descriptionColor: UIColor.white,
+        OnboardingItemInfo(informationImage: UIImage(named: "Leica Sample")!,
+                                      title: "",
+                                description: "",
+                                   pageIcon: UIImage(named: "1icon")!,
+                                   color: UIColor(named: "Gray1")!,
+                                 titleColor: UIColor.black,
+                           descriptionColor: UIColor.darkGray,
                            titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
                             descriptionFont: UIFont.systemFont(ofSize: 17)),
-
-        OnboardingItemInfo(informationImage: UIImage(named: "findRim")!,
+        
+        OnboardingItemInfo(informationImage: UIImage(named: "Leica Sample")!,
                    title: "title",
              description: "description",
-                pageIcon: UIImage(named: "findRim")!,
-                   color: UIColor.blue,
-              titleColor: UIColor.white,
-        descriptionColor: UIColor.white,
+                pageIcon: UIImage(named: "2icon")!,
+                   color: UIColor(named: "Gray2")!,
+              titleColor: UIColor.black,
+        descriptionColor: UIColor.darkGray,
+        titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
+         descriptionFont: UIFont.systemFont(ofSize: 17)),
+        
+        OnboardingItemInfo(informationImage: UIImage(named: "Leica Sample")!,
+                   title: "title",
+             description: "description",
+                pageIcon: UIImage(named: "3icon")!,
+                   color: UIColor(named: "Gray1")!,
+              titleColor: UIColor.black,
+        descriptionColor: UIColor.darkGray,
         titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
          descriptionFont: UIFont.systemFont(ofSize: 17)),
 
-       OnboardingItemInfo(informationImage: UIImage(named: "findRim")!,
+        OnboardingItemInfo(informationImage: UIImage(named: "Leica Sample")!,
+                   title: "title",
+             description: "description",
+                pageIcon: UIImage(named: "4icon")!,
+                   color: UIColor(named: "Gray2")!,
+              titleColor: UIColor.black,
+        descriptionColor: UIColor.darkGray,
+        titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
+         descriptionFont: UIFont.systemFont(ofSize: 17)),
+
+       OnboardingItemInfo(informationImage: UIImage(named: "Leica Sample")!,
                   title: "title",
-            description: "description",
-               pageIcon: UIImage(named: "findRim")!,
-                  color: UIColor.blue,
-             titleColor: UIColor.white,
-       descriptionColor: UIColor.white,
+            description: "description sdf sdf sd sdf dsf ds sdf sd ",
+               pageIcon: UIImage(named: "5icon")!,
+                  color: UIColor(named: "Gray1")!,
+             titleColor: UIColor.black,
+       descriptionColor: UIColor.darkGray,
        titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
         descriptionFont: UIFont.systemFont(ofSize: 17))
         ][index]
     }
 
     func onboardingItemsCount() -> Int {
-       return 3
+       return 5
     }
 }
 

@@ -1052,18 +1052,18 @@ extension BidirectionalCollection {
 }
 
 
-extension String {
-  func removeFirstChars(length: Int) -> String {
-        if length <= 0 {
-            return self
-        } else if let to = self.index(self.startIndex, offsetBy: length, limitedBy: self.endIndex) {
-            return self.substring(from: to)
-
-        } else {
-            return ""
-        }
-    }
-}
+//extension String {
+//  func removeFirstChars(length: Int) -> String {
+//        if length <= 0 {
+//            return self
+//        } else if let to = self.index(self.startIndex, offsetBy: length, limitedBy: self.endIndex) {
+//            return self.substring(from: to)
+//
+//        } else {
+//            return ""
+//        }
+//    }
+//}
 struct Color {
     struct BlueGray {
         static let c50 = EKColor(rgb: 0xeceff1)

@@ -105,11 +105,11 @@ import UIKit
             display(inView: superview, bottomInset: bottomInset, trailingInset: trailingInset, safeAreaInset: safeAreaInset)
             var bottom: NSLayoutConstraint
 
-            bottom = bottomAnchor.constraint(equalTo: viewController.bottomLayoutGuide.topAnchor, constant: -bottomInset)
+            bottom = bottomAnchor.constraint(equalTo: viewController.view.safeAreaLayoutGuide.bottomAnchor, constant: -bottomInset)
             bottom.priority = UILayoutPriority(500)
             bottom.isActive = true
 
-            bottom = bottomAnchor.constraint(lessThanOrEqualTo: viewController.bottomLayoutGuide.topAnchor, constant: -bottomInset)
+            bottom = bottomAnchor.constraint(lessThanOrEqualTo: viewController.view.safeAreaLayoutGuide.bottomAnchor, constant: -bottomInset)
             bottom.priority = .required
             bottom.isActive = true
         }
