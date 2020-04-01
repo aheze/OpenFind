@@ -26,8 +26,6 @@
 		490DA75923CBB871000AF57D /* JJCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA74C23CBB870000AF57D /* JJCircleView.swift */; };
 		490DA75A23CBB871000AF57D /* LayerProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA74D23CBB871000AF57D /* LayerProperties.swift */; };
 		490DA75D23CBC905000AF57D /* BigMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA75C23CBC905000AF57D /* BigMenuButton.swift */; };
-		490DA76023CEC164000AF57D /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA75F23CEC164000AF57D /* StyleKit.swift */; };
-		490DA76223CEC944000AF57D /* ViewClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA76123CEC944000AF57D /* ViewClasses.swift */; };
 		49115089235D17EB00EC0C04 /* ShutterPressed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49115088235D17EB00EC0C04 /* ShutterPressed.swift */; };
 		4911508B235D1A3E00EC0C04 /* BasicUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4911508A235D1A3E00EC0C04 /* BasicUtilities.swift */; };
 		49115090236004E800EC0C04 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4911508E235E7DF100EC0C04 /* Roboto-Light.ttf */; };
@@ -76,6 +74,7 @@
 		495F38FB2432C8FE00A17D93 /* CarteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38F82432C8FC00A17D93 /* CarteItem.swift */; };
 		495F38FC2432C8FE00A17D93 /* Carte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38F92432C8FE00A17D93 /* Carte.swift */; };
 		495F38FE243302D500A17D93 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38FD243302D500A17D93 /* StatsViewController.swift */; };
+		495F39012433FF1600A17D93 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F39002433FF1600A17D93 /* LaunchViewController.swift */; };
 		4966B70A23DE98C800A8523A /* MakeNewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4966B70923DE98C800A8523A /* MakeNewList.swift */; };
 		4966B71023E124D700A8523A /* ImagePickerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4966B70F23E124D700A8523A /* ImagePickerList.swift */; };
 		4966B71323E1252800A8523A /* ImagePickerList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4966B71223E1252800A8523A /* ImagePickerList.xib */; };
@@ -147,8 +146,6 @@
 		490DA74C23CBB870000AF57D /* JJCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJCircleView.swift; sourceTree = "<group>"; };
 		490DA74D23CBB871000AF57D /* LayerProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerProperties.swift; sourceTree = "<group>"; };
 		490DA75C23CBC905000AF57D /* BigMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigMenuButton.swift; sourceTree = "<group>"; };
-		490DA75F23CEC164000AF57D /* StyleKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
-		490DA76123CEC944000AF57D /* ViewClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewClasses.swift; sourceTree = "<group>"; };
 		49115088235D17EB00EC0C04 /* ShutterPressed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutterPressed.swift; sourceTree = "<group>"; };
 		4911508A235D1A3E00EC0C04 /* BasicUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicUtilities.swift; sourceTree = "<group>"; };
 		4911508E235E7DF100EC0C04 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
@@ -197,6 +194,7 @@
 		495F38F82432C8FC00A17D93 /* CarteItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarteItem.swift; sourceTree = "<group>"; };
 		495F38F92432C8FE00A17D93 /* Carte.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carte.swift; sourceTree = "<group>"; };
 		495F38FD243302D500A17D93 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
+		495F39002433FF1600A17D93 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		4966B70923DE98C800A8523A /* MakeNewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeNewList.swift; sourceTree = "<group>"; };
 		4966B70F23E124D700A8523A /* ImagePickerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerList.swift; sourceTree = "<group>"; };
 		4966B71223E1252800A8523A /* ImagePickerList.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePickerList.xib; sourceTree = "<group>"; };
@@ -322,18 +320,10 @@
 			path = Shutter;
 			sourceTree = "<group>";
 		};
-		490DA75E23CEC156000AF57D /* PaintCode */ = {
-			isa = PBXGroup;
-			children = (
-				490DA75F23CEC164000AF57D /* StyleKit.swift */,
-				490DA76123CEC944000AF57D /* ViewClasses.swift */,
-			);
-			path = PaintCode;
-			sourceTree = "<group>";
-		};
 		492BF956237529E8001BE82F /* Setup */ = {
 			isa = PBXGroup;
 			children = (
+				495F38FF2433FC0000A17D93 /* Launch */,
 				490DA75B23CBBC3A000AF57D /* Shutter */,
 				4957157B2368AF69007BF68B /* RippleEffect.swift */,
 				49F7B1552353FE4B0099FA62 /* BasicSetup.swift */,
@@ -440,6 +430,14 @@
 				495F38F72432C8FB00A17D93 /* CarteViewController.swift */,
 			);
 			path = Carte;
+			sourceTree = "<group>";
+		};
+		495F38FF2433FC0000A17D93 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				495F39002433FF1600A17D93 /* LaunchViewController.swift */,
+			);
+			path = Launch;
 			sourceTree = "<group>";
 		};
 		4966B71123E1251200A8523A /* ChangeImage */ = {
@@ -580,7 +578,6 @@
 		4999AC922353A80A00AB06A7 /* Find */ = {
 			isa = PBXGroup;
 			children = (
-				490DA75E23CEC156000AF57D /* PaintCode */,
 				496937382353C219009CA41A /* MainController */,
 				4969373B2353C25B009CA41A /* Utilities */,
 				4999AC9C2353A81100AB06A7 /* Assets.xcassets */,
@@ -835,6 +832,7 @@
 				4966B71023E124D700A8523A /* ImagePickerList.swift in Sources */,
 				49301BF02400D4FF00B4780B /* HelpControllers.swift in Sources */,
 				4972B40E23F117C500843537 /* GeneralTableviewCell.swift in Sources */,
+				495F39012433FF1600A17D93 /* LaunchViewController.swift in Sources */,
 				49368CB223905E8E00B67C4A /* BottomSheetViewController.swift in Sources */,
 				498332D82431B4D500AD083E /* LDGradientView.swift in Sources */,
 				49A8EFAE237A5F2800328D47 /* SetUpSearchBar.swift in Sources */,
@@ -850,7 +848,6 @@
 				4911508B235D1A3E00EC0C04 /* BasicUtilities.swift in Sources */,
 				49368CAE23905D3300B67C4A /* UIViewController+PulleyViewController.swift in Sources */,
 				495F38FC2432C8FE00A17D93 /* Carte.swift in Sources */,
-				490DA76223CEC944000AF57D /* ViewClasses.swift in Sources */,
 				4904524C2379072F0046570D /* UpdateMatches.swift in Sources */,
 				495F38F22432B7B700A17D93 /* CreditsViewController.swift in Sources */,
 				498EDA0123E130C6009EB0CF /* SymbolsList.swift in Sources */,
@@ -899,7 +896,6 @@
 				494DF11B23961ADA0076412D /* BDVCTranscript.swift in Sources */,
 				49585DCF23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift in Sources */,
 				49368CB023905D3300B67C4A /* PulleyViewController.swift in Sources */,
-				490DA76023CEC164000AF57D /* StyleKit.swift in Sources */,
 				4979A39023AF3A4800B09380 /* FastMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

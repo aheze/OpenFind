@@ -1,4 +1,5 @@
 PODS:
+  - paper-onboarding (6.1.4)
   - Parchment (1.7.0)
   - QuickLayout (3.0.0)
   - Realm (4.3.0):
@@ -13,9 +14,11 @@ PODS:
   - SPAlert (2.1.4)
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
+  - SwiftyGif (5.2.0)
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
+  - paper-onboarding
   - Parchment
   - QuickLayout
   - RealmSwift
@@ -23,10 +26,12 @@ DEPENDENCIES:
   - SnapKit
   - SPAlert
   - SwiftEntryKit
+  - SwiftyGif
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   trunk:
+    - paper-onboarding
     - Parchment
     - QuickLayout
     - Realm
@@ -35,9 +40,11 @@ SPEC REPOS:
     - SnapKit
     - SPAlert
     - SwiftEntryKit
+    - SwiftyGif
     - SwiftyJSON
 
 SPEC CHECKSUMS:
+  paper-onboarding: d3f16416e6f42add686117e8b32bfffaad899a79
   Parchment: cae686f73685d16742cec9c19239b7578a15f0f5
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
   Realm: 9357c3589555793e1860a7104a7412bca4a48d99
@@ -46,8 +53,9 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SPAlert: 1a8afa1c6ac86a82ab5b2cfdf7f9a51e68cb6c0c
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
+  SwiftyGif: b85c6b33a9411859d9e1db998b6a8214aea942df
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 1278890661212383722a1f5e99779010b04fec91
+PODFILE CHECKSUM: dc90b2a1cee6bf9fe5228f5e4e66e88b325a5b32
 
 COCOAPODS: 1.8.3

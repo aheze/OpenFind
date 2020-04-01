@@ -46,6 +46,9 @@ override class var layerClass: AnyClass {
 }
 class ViewController: UIViewController {
     
+    
+    @IBOutlet weak var completeOverlayBlur: UIVisualEffectView!
+    
     @IBOutlet weak var darkBlurEffect: UIVisualEffectView!
 //    @IBOutlet weak var darkBlurEffectHeightConstraint: NSLayoutConstraint!
     
@@ -247,6 +250,11 @@ class ViewController: UIViewController {
         print(cameraView.videoPreviewLayer.bounds)
         cameraView.videoPreviewLayer.position = CGPoint(x: newBounds.midX, y: newBounds.midY);
         avSession.startRunning()
+        UIView.animate(withDuration: 0.8, animations: {
+            self.completeOverlayBlur.alpha = 0
+        }) { _ in
+            self.completeOverlayBlur.removeFromSuperview()
+        }
     }
     func startSession() { if !avSession.isRunning {
 //        print("not running avsession")
@@ -258,25 +266,30 @@ class ViewController: UIViewController {
             }
         }
     }
-    private func isAuthorized() -> Bool {
-        let authorizationStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
-        switch authorizationStatus {
-        case .notDetermined:
-            AVCaptureDevice.requestAccess(for: AVMediaType.video,
-                                          completionHandler: { (granted:Bool) -> Void in
-                                            if granted {
-                                                DispatchQueue.main.async {
-                                                   // self.configureTextDetection()
-                                                    self.configureCamera()
-                                                }
-                                            }
-            })
-            return true
-        case .authorized:
-            return true
-        case .denied, .restricted: return false
-        }
+    
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        viewControllerToPresent.modalPresentationStyle = .pageSheet
+      super.present(viewControllerToPresent, animated: flag, completion: completion)
     }
+//    private func isAuthorized() -> Bool {
+//        let authorizationStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+//        switch authorizationStatus {
+//        case .notDetermined:
+//            AVCaptureDevice.requestAccess(for: AVMediaType.video,
+//                                          completionHandler: { (granted:Bool) -> Void in
+//                                            if granted {
+//                                                DispatchQueue.main.async {
+//                                                   // self.configureTextDetection()
+//                                                    self.configureCamera()
+//                                                }
+//                                            }
+//            })
+//            return true
+//        case .authorized:
+//            return true
+//        case .denied, .restricted: return false
+//        }
+//    }
     func capturePhoto(completion: ((UIImage) -> Void)?) {
         captureCompletionBlock = completion
     }
@@ -312,9 +325,12 @@ class ViewController: UIViewController {
         
         
         setUpFilePath()
-        if isAuthorized() {
+        
+        
+        ///Is already athorized in Launchscreen
+//        if isAuthorized() {
             configureCamera()
-        }
+//        }
         busyFastFinding = false
         
         motionManager = CMMotionManager()
