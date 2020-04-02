@@ -8,7 +8,7 @@
 
 import UIKit
 import AVFoundation
-import paper_onboarding
+//import paper_onboarding
 import SnapKit
 
 class LaunchViewController: UIViewController {
@@ -397,7 +397,7 @@ class LaunchViewController: UIViewController {
 extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSource {
     
     func onboardingWillTransitonToIndex(_ index: Int) {
-        if index == 4 {
+        if index == 5 {
             getStartedButton.alpha = 0
             self.bottomOnboardingConstraint?.update(offset: -120)
             UIView.animate(withDuration: 0.3, animations: {
@@ -423,8 +423,8 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
         OnboardingItemInfo(informationImage: UIImage(named: "Leica Sample")!,
                                       title: "Welcome to Find",
                                 description: "Swipe to get started",
-                                   pageIcon: UIImage(named: "1icon")!,
-                                   color: #colorLiteral(red: 0.8999999762, green: 0.8999999762, blue: 0.8999999762, alpha: 1),
+                                   pageIcon: UIImage(),
+                                   color: UIColor(named: "OnboardingGray")!,
                                  titleColor: UIColor.black,
                            descriptionColor: UIColor.darkGray,
                            titleFont: UIFont.systemFont(ofSize: 30, weight: .bold),
@@ -433,8 +433,8 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
         OnboardingItemInfo(informationImage: UIImage(named: "Leica Sample")!,
                    title: "What is Find?",
              description: "Find is Command+F for camera. Find words in books, worksheets, nutrition labels... Anywhere as long as there's text!",
-                pageIcon: UIImage(named: "2icon")!,
-                   color: #colorLiteral(red: 0.8899999857, green: 0.8899999857, blue: 0.8899999857, alpha: 1),
+                pageIcon: UIImage(named: "1icon")!,
+                color: UIColor(named: "OnboardingGray")!,
               titleColor: UIColor.black,
         descriptionColor: UIColor.darkGray,
         titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
@@ -443,8 +443,8 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
         OnboardingItemInfo(informationImage: UIImage(named: "Leica Sample")!,
                    title: "Find words",
              description: "Tap the Search Field at the top of the screen",
-                pageIcon: UIImage(named: "3icon")!,
-                   color: #colorLiteral(red: 0.8799999952, green: 0.8799999952, blue: 0.8799999952, alpha: 1),
+                pageIcon: UIImage(named: "2icon")!,
+                color: UIColor(named: "OnboardingGray")!,
               titleColor: UIColor.black,
         descriptionColor: UIColor.darkGray,
         titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
@@ -453,8 +453,8 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
         OnboardingItemInfo(informationImage: UIImage(named: "Leica Sample")!,
                    title: "Take photos",
              description: "Tap the shutter button. Later, you can come back to these and Find from them again and again and again...",
-                pageIcon: UIImage(named: "4icon")!,
-                   color: #colorLiteral(red: 0.8700000048, green: 0.8700000048, blue: 0.8700000048, alpha: 1),
+                pageIcon: UIImage(named: "3icon")!,
+                   color: UIColor(named: "OnboardingGray")!,
               titleColor: UIColor.black,
         descriptionColor: UIColor.darkGray,
         titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
@@ -463,8 +463,18 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
        OnboardingItemInfo(informationImage: UIImage(named: "Leica Sample")!,
                   title: "Access the Menu",
             description: "Your History, Lists, and Settings are here. Check it out!",
+               pageIcon: UIImage(named: "4icon")!,
+                  color: UIColor(named: "OnboardingGray")!,
+             titleColor: UIColor.black,
+       descriptionColor: UIColor.darkGray,
+       titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
+        descriptionFont: UIFont.systemFont(ofSize: 17)),
+       
+       OnboardingItemInfo(informationImage: UIImage(named: "Leica Sample")!,
+                  title: "Before you start...",
+            description: "To ensure the most accurate results, please make sure to hold your phone as steady as possible.",
                pageIcon: UIImage(named: "5icon")!,
-                  color: #colorLiteral(red: 0.8600000143, green: 0.8600000143, blue: 0.8600000143, alpha: 1),
+                  color: UIColor(named: "OnboardingGray")!,
              titleColor: UIColor.black,
        descriptionColor: UIColor.darkGray,
        titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
@@ -472,8 +482,13 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
         ][index]
     }
 
+//    func onboardingConfigurationItem(_ item: OnboardingContentViewItem, index: Int) {
+//        // config labels
+//        item.
+//    }
+    
     func onboardingItemsCount() -> Int {
-       return 5
+       return 6
     }
 }
 

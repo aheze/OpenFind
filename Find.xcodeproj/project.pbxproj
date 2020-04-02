@@ -63,6 +63,18 @@
 		4953F3C92417344900690E53 /* ListToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953F3C82417344900690E53 /* ListToolBar.swift */; };
 		49563501243591650001E8C6 /* RateTheApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49563500243591650001E8C6 /* RateTheApp.swift */; };
 		49563503243593860001E8C6 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49563502243593860001E8C6 /* TutorialViewController.swift */; };
+		49563519243694BC0001E8C6 /* PageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49563507243694BB0001E8C6 /* PageContainer.swift */; };
+		4956351A243694BC0001E8C6 /* PageViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49563509243694BB0001E8C6 /* PageViewItem.swift */; };
+		4956351B243694BC0001E8C6 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956350A243694BB0001E8C6 /* PageView.swift */; };
+		4956351C243694BC0001E8C6 /* OnboardingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956350C243694BB0001E8C6 /* OnboardingContentView.swift */; };
+		4956351D243694BC0001E8C6 /* OnboardingContantViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956350E243694BB0001E8C6 /* OnboardingContantViewItem.swift */; };
+		4956351E243694BC0001E8C6 /* PaperOnboardingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956350F243694BB0001E8C6 /* PaperOnboardingDelegate.swift */; };
+		4956351F243694BC0001E8C6 /* FillAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49563511243694BB0001E8C6 /* FillAnimationView.swift */; };
+		49563520243694BC0001E8C6 /* PaperOnboardingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49563512243694BB0001E8C6 /* PaperOnboardingDataSource.swift */; };
+		49563521243694BC0001E8C6 /* GestureControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49563514243694BB0001E8C6 /* GestureControl.swift */; };
+		49563522243694BC0001E8C6 /* PaperOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49563515243694BB0001E8C6 /* PaperOnboarding.swift */; };
+		49563523243694BC0001E8C6 /* ConstraintsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49563517243694BB0001E8C6 /* ConstraintsHelper.swift */; };
+		49563524243694BC0001E8C6 /* Configuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49563518243694BB0001E8C6 /* Configuring.swift */; };
 		49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3223D65AA4009308CA /* ListCollectionCell.swift */; };
 		49569B3523D6919E009308CA /* ListsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3423D6919E009308CA /* ListsLayout.swift */; };
 		4957157C2368AF69007BF68B /* RippleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4957157B2368AF69007BF68B /* RippleEffect.swift */; };
@@ -185,6 +197,18 @@
 		4953F3C82417344900690E53 /* ListToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListToolBar.swift; sourceTree = "<group>"; };
 		49563500243591650001E8C6 /* RateTheApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateTheApp.swift; sourceTree = "<group>"; };
 		49563502243593860001E8C6 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		49563507243694BB0001E8C6 /* PageContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContainer.swift; sourceTree = "<group>"; };
+		49563509243694BB0001E8C6 /* PageViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewItem.swift; sourceTree = "<group>"; };
+		4956350A243694BB0001E8C6 /* PageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
+		4956350C243694BB0001E8C6 /* OnboardingContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingContentView.swift; sourceTree = "<group>"; };
+		4956350E243694BB0001E8C6 /* OnboardingContantViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingContantViewItem.swift; sourceTree = "<group>"; };
+		4956350F243694BB0001E8C6 /* PaperOnboardingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaperOnboardingDelegate.swift; sourceTree = "<group>"; };
+		49563511243694BB0001E8C6 /* FillAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillAnimationView.swift; sourceTree = "<group>"; };
+		49563512243694BB0001E8C6 /* PaperOnboardingDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaperOnboardingDataSource.swift; sourceTree = "<group>"; };
+		49563514243694BB0001E8C6 /* GestureControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureControl.swift; sourceTree = "<group>"; };
+		49563515243694BB0001E8C6 /* PaperOnboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaperOnboarding.swift; sourceTree = "<group>"; };
+		49563517243694BB0001E8C6 /* ConstraintsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintsHelper.swift; sourceTree = "<group>"; };
+		49563518243694BB0001E8C6 /* Configuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuring.swift; sourceTree = "<group>"; };
 		49569B3223D65AA4009308CA /* ListCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionCell.swift; sourceTree = "<group>"; };
 		49569B3423D6919E009308CA /* ListsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsLayout.swift; sourceTree = "<group>"; };
 		4957157B2368AF69007BF68B /* RippleEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleEffect.swift; sourceTree = "<group>"; };
@@ -396,6 +420,89 @@
 			path = Toolbar;
 			sourceTree = "<group>";
 		};
+		49563504243694BB0001E8C6 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				49563505243694BB0001E8C6 /* PageView */,
+				4956350B243694BB0001E8C6 /* OnboardingContentView */,
+				4956350F243694BB0001E8C6 /* PaperOnboardingDelegate.swift */,
+				49563510243694BB0001E8C6 /* FillAnimationView */,
+				49563512243694BB0001E8C6 /* PaperOnboardingDataSource.swift */,
+				49563513243694BB0001E8C6 /* GestureControl */,
+				49563515243694BB0001E8C6 /* PaperOnboarding.swift */,
+				49563516243694BB0001E8C6 /* Helpers */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		49563505243694BB0001E8C6 /* PageView */ = {
+			isa = PBXGroup;
+			children = (
+				49563506243694BB0001E8C6 /* PageContainerView */,
+				49563508243694BB0001E8C6 /* Item */,
+				4956350A243694BB0001E8C6 /* PageView.swift */,
+			);
+			path = PageView;
+			sourceTree = "<group>";
+		};
+		49563506243694BB0001E8C6 /* PageContainerView */ = {
+			isa = PBXGroup;
+			children = (
+				49563507243694BB0001E8C6 /* PageContainer.swift */,
+			);
+			path = PageContainerView;
+			sourceTree = "<group>";
+		};
+		49563508243694BB0001E8C6 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				49563509243694BB0001E8C6 /* PageViewItem.swift */,
+			);
+			path = Item;
+			sourceTree = "<group>";
+		};
+		4956350B243694BB0001E8C6 /* OnboardingContentView */ = {
+			isa = PBXGroup;
+			children = (
+				4956350C243694BB0001E8C6 /* OnboardingContentView.swift */,
+				4956350D243694BB0001E8C6 /* Item */,
+			);
+			path = OnboardingContentView;
+			sourceTree = "<group>";
+		};
+		4956350D243694BB0001E8C6 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				4956350E243694BB0001E8C6 /* OnboardingContantViewItem.swift */,
+			);
+			path = Item;
+			sourceTree = "<group>";
+		};
+		49563510243694BB0001E8C6 /* FillAnimationView */ = {
+			isa = PBXGroup;
+			children = (
+				49563511243694BB0001E8C6 /* FillAnimationView.swift */,
+			);
+			path = FillAnimationView;
+			sourceTree = "<group>";
+		};
+		49563513243694BB0001E8C6 /* GestureControl */ = {
+			isa = PBXGroup;
+			children = (
+				49563514243694BB0001E8C6 /* GestureControl.swift */,
+			);
+			path = GestureControl;
+			sourceTree = "<group>";
+		};
+		49563516243694BB0001E8C6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				49563517243694BB0001E8C6 /* ConstraintsHelper.swift */,
+				49563518243694BB0001E8C6 /* Configuring.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		49585DCC23ED0B8D003AB768 /* Select List SEK */ = {
 			isa = PBXGroup;
 			children = (
@@ -480,6 +587,7 @@
 		496937392353C228009CA41A /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				49563504243694BB0001E8C6 /* Source */,
 				495F38F62432C8D100A17D93 /* Carte */,
 				4991344D236FDF1200B82E46 /* SettingsViewController.swift */,
 				4991344F236FE12400B82E46 /* SettingsViewExtensions.swift */,
@@ -800,13 +908,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				49368CAF23905D3300B67C4A /* UIView+constrainToParent.swift in Sources */,
+				49563519243694BC0001E8C6 /* PageContainer.swift in Sources */,
 				49B7A33423923E810070209F /* ZoomTransitionController.swift in Sources */,
 				4999AC982353A80A00AB06A7 /* ViewController.swift in Sources */,
 				49B7A33523923E810070209F /* ZoomDismissalInteractionController.swift in Sources */,
 				49BC782F23C6E473003D9904 /* addHeart.swift in Sources */,
 				49325C1323CAE84500A771A3 /* StatusView.swift in Sources */,
+				49563521243694BC0001E8C6 /* GestureControl.swift in Sources */,
 				49D985B6241B3847005F4E92 /* CacheCell.swift in Sources */,
+				4956351F243694BC0001E8C6 /* FillAnimationView.swift in Sources */,
 				494DF11923961AC90076412D /* BDVCFind.swift in Sources */,
+				4956351B243694BC0001E8C6 /* PageView.swift in Sources */,
 				490DA75A23CBB871000AF57D /* LayerProperties.swift in Sources */,
 				4928525A23D617270048EC13 /* ListController.swift in Sources */,
 				4990AAE423EDB4EF00FAF37B /* SymbolsViewController.swift in Sources */,
@@ -822,6 +934,7 @@
 				4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */,
 				4953F3C424171EE200690E53 /* FindBar.swift in Sources */,
 				49B7A32F2390DB810070209F /* ArrowView.swift in Sources */,
+				49563520243694BC0001E8C6 /* PaperOnboardingDataSource.swift in Sources */,
 				494DF11F23961B4E0076412D /* BDVCInfo.swift in Sources */,
 				490DA75023CBB871000AF57D /* AnimationConfiguration.swift in Sources */,
 				4988FC4823BEF89600199635 /* ListModel.swift in Sources */,
@@ -837,6 +950,7 @@
 				49301BF724030C4400B4780B /* SmallGradientView.swift in Sources */,
 				4966B71023E124D700A8523A /* ImagePickerList.swift in Sources */,
 				49301BF02400D4FF00B4780B /* HelpControllers.swift in Sources */,
+				49563522243694BC0001E8C6 /* PaperOnboarding.swift in Sources */,
 				4972B40E23F117C500843537 /* GeneralTableviewCell.swift in Sources */,
 				495F39012433FF1600A17D93 /* LaunchViewController.swift in Sources */,
 				49368CB223905E8E00B67C4A /* BottomSheetViewController.swift in Sources */,
@@ -850,6 +964,7 @@
 				490DA74E23CBB871000AF57D /* UIView+JJFloatingActionButton.swift in Sources */,
 				490DA73F23CBAB7C000AF57D /* NewShutterButton.swift in Sources */,
 				49B7A33D2393000A0070209F /* BetaController.swift in Sources */,
+				4956351A243694BC0001E8C6 /* PageViewItem.swift in Sources */,
 				492EB4F523F61F5A007142CA /* SymbolsSectionHeader.swift in Sources */,
 				4911508B235D1A3E00EC0C04 /* BasicUtilities.swift in Sources */,
 				49368CAE23905D3300B67C4A /* UIViewController+PulleyViewController.swift in Sources */,
@@ -865,11 +980,13 @@
 				4952F0C2240B1DD00068564F /* SearchCell.swift in Sources */,
 				49BC782223C3E1BF003D9904 /* TextViewRounded.swift in Sources */,
 				4966B70A23DE98C800A8523A /* MakeNewList.swift in Sources */,
+				4956351C243694BC0001E8C6 /* OnboardingContentView.swift in Sources */,
 				495F38FB2432C8FE00A17D93 /* CarteItem.swift in Sources */,
 				495ECCA7238CF76C00E7D966 /* NewHistoryViewController.swift in Sources */,
 				4928526023D61F570048EC13 /* ListSelect.swift in Sources */,
 				4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */,
 				49563501243591650001E8C6 /* RateTheApp.swift in Sources */,
+				49563523243694BC0001E8C6 /* ConstraintsHelper.swift in Sources */,
 				490DA75223CBB871000AF57D /* JJFloatingActionButton.swift in Sources */,
 				49D985B4241B374B005F4E92 /* CachingViewController.swift in Sources */,
 				49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */,
@@ -877,6 +994,7 @@
 				490DA75623CBB871000AF57D /* JJFloatingActionButton+Placement.swift in Sources */,
 				490DA75123CBB871000AF57D /* JJActionItemTitlePosition.swift in Sources */,
 				495F38FA2432C8FE00A17D93 /* CarteViewController.swift in Sources */,
+				49563524243694BC0001E8C6 /* Configuring.swift in Sources */,
 				4917CE7F23C0490E002EA20B /* GeneralSettings.swift in Sources */,
 				490DA75323CBB871000AF57D /* UIColor+JJFloatingActionButton.swift in Sources */,
 				49BC783923C8C7AB003D9904 /* HistoryStartSelection.swift in Sources */,
@@ -888,6 +1006,7 @@
 				490DA75823CBB871000AF57D /* JJActionItem.swift in Sources */,
 				4928525623D4BD490048EC13 /* UpdateOrientation.swift in Sources */,
 				49BC782023C2B0E0003D9904 /* IndexMatcher.swift in Sources */,
+				4956351D243694BC0001E8C6 /* OnboardingContantViewItem.swift in Sources */,
 				495F38FE243302D500A17D93 /* StatsViewController.swift in Sources */,
 				49913450236FE12400B82E46 /* SettingsViewExtensions.swift in Sources */,
 				490DA75923CBB871000AF57D /* JJCircleView.swift in Sources */,
@@ -904,6 +1023,7 @@
 				494DF11B23961ADA0076412D /* BDVCTranscript.swift in Sources */,
 				49585DCF23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift in Sources */,
 				49368CB023905D3300B67C4A /* PulleyViewController.swift in Sources */,
+				4956351E243694BC0001E8C6 /* PaperOnboardingDelegate.swift in Sources */,
 				4979A39023AF3A4800B09380 /* FastMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

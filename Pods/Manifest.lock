@@ -1,5 +1,4 @@
 PODS:
-  - paper-onboarding (6.1.4)
   - Parchment (1.7.0)
   - QuickLayout (3.0.0)
   - Realm (4.3.0):
@@ -18,7 +17,6 @@ PODS:
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
-  - paper-onboarding
   - Parchment
   - QuickLayout
   - RealmSwift
@@ -31,7 +29,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - paper-onboarding
     - Parchment
     - QuickLayout
     - Realm
@@ -44,7 +41,6 @@ SPEC REPOS:
     - SwiftyJSON
 
 SPEC CHECKSUMS:
-  paper-onboarding: d3f16416e6f42add686117e8b32bfffaad899a79
   Parchment: cae686f73685d16742cec9c19239b7578a15f0f5
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
   Realm: 9357c3589555793e1860a7104a7412bca4a48d99
@@ -56,6 +52,6 @@ SPEC CHECKSUMS:
   SwiftyGif: b85c6b33a9411859d9e1db998b6a8214aea942df
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: dc90b2a1cee6bf9fe5228f5e4e66e88b325a5b32
+PODFILE CHECKSUM: 1d331ff556f3a0361a5859ed06b62e5f529169a8
 
 COCOAPODS: 1.8.3

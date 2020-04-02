@@ -13,7 +13,6 @@ pod 'Parchment'
 pod 'SPAlert'
 pod 'SwiftyJSON', '~> 4.0'
 pod 'SwiftyGif'
-pod 'paper-onboarding'
 
 end
 

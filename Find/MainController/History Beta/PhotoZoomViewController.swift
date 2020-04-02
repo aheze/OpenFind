@@ -15,7 +15,7 @@ protocol PhotoZoomViewControllerDelegate: class {
 }
 
 protocol ReturnHowManyMatches: class {
-    func howMany(number: Int)
+    func howMany(number: Int, searchInCache: Bool)
 }
 
 class PhotoZoomViewController: UIViewController {
@@ -327,7 +327,7 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
                 }
             }
             
-            self.returnNumber?.howMany(number: newFastComponents.count)
+            self.returnNumber?.howMany(number: newFastComponents.count, searchInCache: true)
             print("HOW MANY: \(newFastComponents.count)")
             
             self.highlights = newFastComponents
@@ -397,6 +397,7 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
 //            dispatchSemaphore.signal()
 //            dispatchGroup.leave()
 //
+            self.returnNumber?.howMany(number: -1, searchInCache: false)
             return
         }
 
@@ -421,10 +422,6 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
                 }
             }
         }
-        
-        let newMod = FindModel()
-        
-        var compMatches = [String: [ArrayOfMatchesInComp]]()
         var numberOfMatches = 0
         
         var findComponents = [Component]()
@@ -483,6 +480,7 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
             
         }
         highlights += componentsToAdd
+        self.returnNumber?.howMany(number: highlights.count, searchInCache: false)
 //        scaleHighlights()
         DispatchQueue.main.async {
             self.scaleHighlights()

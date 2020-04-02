@@ -29,6 +29,8 @@ class FindBar: UIView, UITextFieldDelegate {
     
     var resultsLabel = UILabel()
     
+    var origCacheNumber = 0
+    
     let realm = try! Realm()
     var listCategories: Results<FindList>?
     var editableListCategories = [EditableFindList]()
@@ -764,19 +766,46 @@ class SearchCollectionCell: UICollectionViewCell {
 
 
 extension FindBar: GiveFindbarMatchNumber {
-    func howMany(number: Int) {
+    func howMany(number: Int, inCache: Bool) {
         print("number matches findbar: \(number)")
-        DispatchQueue.main.async {
-            if number == 0 {
-                self.resultsLabel.text = "No Matches"
-            } else if number == 1 {
-                self.resultsLabel.text = "1 Match"
-            } else {
-                self.resultsLabel.text = "\(number) Matches"
+        if inCache {
+            origCacheNumber = number
+            DispatchQueue.main.async {
+                if number == 0 {
+                    self.resultsLabel.text = "No Matches in "
+                } else if number == 1 {
+                    self.resultsLabel.text = "1 Match in "
+                } else {
+                    self.resultsLabel.text = "\(number) Matches in "
+                }
+                
+//                let textH = 35
+                let imageRect = CGRect(x: 0, y: 2.5, width: 30, height: 30)
+                self.resultsLabel.addImageWith(name: "TextFieldCache", behindText: true, bounds: imageRect)
             }
-//            let sWidth = self.searchField.frame.size.width
-//            let sHeight = self.searchField.frame.size.height
-//            self.resultsLabel.frame = CGRect(x: CGFloat(self.searchField.frame.size.width - 125), y: CGFloat(5), width: CGFloat(120), height: sHeight - 10)
+        } else {
+            if number == -1 {
+                DispatchQueue.main.async {
+                    if self.origCacheNumber == 0 {
+                        self.resultsLabel.text = "No Matches"
+                    } else if number == 1 {
+                        self.resultsLabel.text = "1 Match "
+                    } else {
+                        self.resultsLabel.text = "\(self.origCacheNumber) Matches"
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    if number == 0 {
+                        self.resultsLabel.text = "No Matches"
+                    } else if number == 1 {
+                        self.resultsLabel.text = "1 Match "
+                    } else {
+                        self.resultsLabel.text = "\(number) Matches"
+                    }
+                }
+            }
+            
         }
     }
 }
@@ -820,5 +849,38 @@ class InsetTextField: UITextField {
         rect.origin.x += insets.left
 
         return rect
+    }
+}
+extension UILabel {
+
+    func addImageWith(name: String, behindText: Bool, bounds: CGRect) {
+
+        let attachment = NSTextAttachment()
+        attachment.image = UIImage(named: name)
+        
+        
+        attachment.bounds = CGRect(x: 0, y: 0, width: 15, height: 15)
+        let attachmentString = NSAttributedString(attachment: attachment)
+
+        guard let txt = self.text else {
+            return
+        }
+
+        if behindText {
+            let strLabelText = NSMutableAttributedString(string: txt)
+            strLabelText.append(attachmentString)
+            self.attributedText = strLabelText
+        } else {
+            let strLabelText = NSAttributedString(string: txt)
+            let mutableAttachmentString = NSMutableAttributedString(attributedString: attachmentString)
+            mutableAttachmentString.append(strLabelText)
+            self.attributedText = mutableAttachmentString
+        }
+    }
+
+    func removeImage() {
+        let text = self.text
+        self.attributedText = nil
+        self.text = text
     }
 }

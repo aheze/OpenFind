@@ -29,7 +29,7 @@ protocol ZoomDeletedPhoto: class {
     func deletedPhoto(photoIndex: Int)
 }
 protocol GiveFindbarMatchNumber: class {
-    func howMany(number: Int)
+    func howMany(number: Int, inCache: Bool)
 }
 
 class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDelegate {
@@ -777,9 +777,9 @@ extension PhotoPageContainerViewController {
 
 extension PhotoPageContainerViewController: ReturnHowManyMatches {
     
-    func howMany(number: Int) {
+    func howMany(number: Int, searchInCache: Bool) {
 //        howMany.
-        giveNumber?.howMany(number: number)
+        giveNumber?.howMany(number: number, inCache: searchInCache)
     }
     
 }

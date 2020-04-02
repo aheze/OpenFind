@@ -211,7 +211,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
         let historyModel = photos[indexPath.item]
 //        let historyModel = hisModel[indexPath.item]
 //        print("CELLFORROW")
-        var filePath = historyModel.filePath
+        let filePath = historyModel.filePath
         let urlPath = "\(folderURL)\(filePath)"
 //        print(urlPath)
         
@@ -521,6 +521,12 @@ extension CachingViewController {
         
         
         cancelImageView.layer.cornerRadius = 4
+        if let firstPhoto = photos.first {
+            let urlPath = "\(folderURL)\(firstPhoto.filePath)"
+            let finalUrl = URL(string: urlPath)
+            cancelImageView.sd_imageTransition = .fade
+            cancelImageView.sd_setImage(with: finalUrl)
+        }
         
         
         keepButton.layer.cornerRadius = 6
