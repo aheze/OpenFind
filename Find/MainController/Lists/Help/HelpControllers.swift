@@ -112,14 +112,14 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         if goDirectlyToUrl {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let defaultHelp = storyboard.instantiateViewController(withIdentifier: "HelpController") as? HelpController {
-                defaultHelp.urlString = directUrl
-                self.navigationController?.pushViewController(defaultHelp, animated: true)
-            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let defaultHelp = storyboard.instantiateViewController(withIdentifier: "HelpController") as? HelpController {
+                    defaultHelp.urlString = self.directUrl
+                    self.navigationController?.pushViewController(defaultHelp, animated: true)
+                }
+            })
         }
-            
-
     }
     
     

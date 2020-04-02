@@ -298,9 +298,9 @@
             filePath = "Find/MainController/New History/HistoryFinding/FindBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "556"
-            endingLineNumber = "556"
-            landmarkName = "addList(list:)"
+            startingLineNumber = "568"
+            endingLineNumber = "568"
+            landmarkName = "removeAllLists()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

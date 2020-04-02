@@ -398,7 +398,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
+        
         pinchGesture.delegate = self
         self.modalPresentationStyle = .automatic
         readDefaultsValues()

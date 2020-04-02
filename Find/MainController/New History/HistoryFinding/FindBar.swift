@@ -27,6 +27,8 @@ class FindBar: UIView, UITextFieldDelegate {
     
     let deviceSize = UIScreen.main.bounds.size
     
+    var resultsLabel = UILabel()
+    
     let realm = try! Realm()
     var listCategories: Results<FindList>?
     var editableListCategories = [EditableFindList]()
@@ -127,7 +129,7 @@ class FindBar: UIView, UITextFieldDelegate {
     
     var searchActive = false
     
-    @IBOutlet weak var searchField: TextField!
+    @IBOutlet weak var searchField: InsetTextField!
     //    @IBOutlet weak var searchBar: UISearchBar!
     
     weak var injectListDelegate: InjectLists?
@@ -149,6 +151,10 @@ class FindBar: UIView, UITextFieldDelegate {
         layer.cornerRadius = 5
         layer.backgroundColor = #colorLiteral(red: 0, green: 0.5981545251, blue: 0.937254902, alpha: 1)
         
+//        _ = self.view
+        
+//        searchField.insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 125)
+        
         
         
         Bundle.main.loadNibNamed("FindBar", owner: self, options: nil)
@@ -156,6 +162,9 @@ class FindBar: UIView, UITextFieldDelegate {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
+        searchField.insets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+//        searchField.clearButtonMode = .whileEditing
+        resultsLabel.textAlignment = .right
         loadListsRealm()
         
         
@@ -186,6 +195,11 @@ class FindBar: UIView, UITextFieldDelegate {
         
         searchField.keyboardAppearance = .default
         searchField.autocorrectionType = .no
+        searchField.rightView = resultsLabel
+        searchField.rightViewMode = .always
+        
+        resultsLabel.textColor = UIColor.lightGray
+        
         
 //        searchBar.backgroundColor = .red
         
@@ -749,3 +763,62 @@ class SearchCollectionCell: UICollectionViewCell {
 }
 
 
+extension FindBar: GiveFindbarMatchNumber {
+    func howMany(number: Int) {
+        print("number matches findbar: \(number)")
+        DispatchQueue.main.async {
+            if number == 0 {
+                self.resultsLabel.text = "No Matches"
+            } else if number == 1 {
+                self.resultsLabel.text = "1 Match"
+            } else {
+                self.resultsLabel.text = "\(number) Matches"
+            }
+//            let sWidth = self.searchField.frame.size.width
+//            let sHeight = self.searchField.frame.size.height
+//            self.resultsLabel.frame = CGRect(x: CGFloat(self.searchField.frame.size.width - 125), y: CGFloat(5), width: CGFloat(120), height: sHeight - 10)
+        }
+    }
+}
+
+class InsetTextField: UITextField {
+    
+    var insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    private func setInsets(forBounds bounds: CGRect) -> CGRect {
+
+        var totalInsets = insets //property in you subClass
+
+        if let leftView = leftView  { totalInsets.left += leftView.frame.origin.x }
+        if let rightView = rightView { totalInsets.right += rightView.bounds.size.width }
+
+        return bounds.inset(by: totalInsets)
+    }
+
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return setInsets(forBounds: bounds)
+    }
+
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return setInsets(forBounds: bounds)
+    }
+
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return setInsets(forBounds: bounds)
+    }
+
+    override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+
+        var rect = super.rightViewRect(forBounds: bounds)
+        rect.origin.x -= insets.right
+
+        return rect
+    }
+
+    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+
+        var rect = super.leftViewRect(forBounds: bounds)
+        rect.origin.x += insets.left
+
+        return rect
+    }
+}

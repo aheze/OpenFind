@@ -14,6 +14,10 @@ protocol PhotoZoomViewControllerDelegate: class {
     func photoZoomViewController(_ photoZoomViewController: PhotoZoomViewController, scrollViewDidScroll scrollView: UIScrollView)
 }
 
+protocol ReturnHowManyMatches: class {
+    func howMany(number: Int)
+}
+
 class PhotoZoomViewController: UIViewController {
     
     @IBOutlet weak var mainContentView: UIView!
@@ -38,6 +42,8 @@ class PhotoZoomViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     
     weak var delegate: PhotoZoomViewControllerDelegate?
+    weak var returnNumber: ReturnHowManyMatches?
+    
     var oldFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
     
     //var image: UIImage!
@@ -91,7 +97,7 @@ class PhotoZoomViewController: UIViewController {
     }
     func scaleInHighlight(component: Component, unsure: Bool = false) {
         guard let colors = matchToColors[component.text] else { print("NO COLORS! scalee"); return }
-        print("COLROS zoom text: \(component.text).. \(colors)")
+//        print("COLROS zoom text: \(component.text).. \(colors)")
         DispatchQueue.main.async {
             
             let layer = CAShapeLayer()
@@ -189,7 +195,7 @@ class PhotoZoomViewController: UIViewController {
             let newWidth = comp.width * oldFrame.size.width
             let newY = comp.y * oldFrame.size.height
             let newHeight = comp.height * oldFrame.size.height
-            print("x: \(newX), y: \(newY), width: \(newWidth), height: \(newHeight)")
+//            print("x: \(newX), y: \(newY), width: \(newWidth), height: \(newHeight)")
             
             let compToScale = Component()
             compToScale.x = newX - 6
@@ -320,6 +326,9 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
                     }
                 }
             }
+            
+            self.returnNumber?.howMany(number: newFastComponents.count)
+            print("HOW MANY: \(newFastComponents.count)")
             
             self.highlights = newFastComponents
             DispatchQueue.main.async {

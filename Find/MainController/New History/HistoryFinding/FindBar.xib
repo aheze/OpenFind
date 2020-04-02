@@ -14,7 +14,7 @@
                 <outlet property="collectionView" destination="gXF-Fe-JCy" id="VtQ-jX-MAl"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="bof-pU-8Gv"/>
                 <outlet property="okButton" destination="3vY-hK-ZqR" id="P8B-EA-USS"/>
-                <outlet property="searchField" destination="u2b-1R-lPC" id="k3L-vR-fNs"/>
+                <outlet property="searchField" destination="u2b-1R-lPC" id="xKz-9d-LM3"/>
                 <outlet property="searchLeftC" destination="L1M-yz-yPg" id="Vsz-ql-fkW"/>
                 <outlet property="warningButton" destination="mff-9q-hBw" id="dsH-E8-431"/>
                 <outlet property="warningLabel" destination="tYq-gL-qMd" id="gyL-Q9-gIl"/>
@@ -44,7 +44,7 @@
                         <outlet property="delegate" destination="-1" id="Hgt-9d-hmc"/>
                     </connections>
                 </collectionView>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type here to find" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="u2b-1R-lPC" customClass="TextField" customModule="Find" customModuleProvider="target">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type here to find" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="u2b-1R-lPC" customClass="InsetTextField" customModule="Find" customModuleProvider="target">
                     <rect key="frame" x="12" y="24" width="419" height="35"/>
                     <color key="backgroundColor" name="Gray1"/>
                     <color key="tintColor" name="FeedbackGradientLeft"/>

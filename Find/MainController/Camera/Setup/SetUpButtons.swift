@@ -220,7 +220,10 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
             self.performSegue(withIdentifier: "goToSettings", sender: self)
         }
         
-        menuButton.overlayView.backgroundColor = UIColor.clear
+        if let xImage = UIImage(named: "jjXButton") {
+            menuButton.buttonAnimationConfiguration = .transition(toImage: xImage)
+            menuButton.overlayView.backgroundColor = UIColor.clear
+        }
     }
 
     

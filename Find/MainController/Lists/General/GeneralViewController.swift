@@ -260,6 +260,8 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         }
         override func viewDidLoad() {
             super.viewDidLoad()
+            bottomDeleteButton.layer.cornerRadius = 6
+            bottomHelpButton.layer.cornerRadius = 6
             
             setUpViews()
             let tableViewHeightAfterAddRow = CGFloat(50 * contents.count)

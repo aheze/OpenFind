@@ -130,6 +130,63 @@ class SettingsViewController: UIViewController {
     
     @IBAction func tutorialButtonPressed(_ sender: Any) {
         print("tutorial")
+        let alert = UIAlertController(title: "Watch Tutorial", message: "Which tutorial do you want to watch?", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "General", style: UIAlertAction.Style.default, handler: { _ in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "GeneralTutorialViewController") as! GeneralTutorialViewController
+            vc.view.layer.cornerRadius = 10
+            vc.view.clipsToBounds = true
+            
+            var attributes = EKAttributes.centerFloat
+            attributes.displayDuration = .infinity
+            attributes.entryInteraction = .absorbTouches
+            attributes.scroll = .disabled
+            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+            attributes.entryBackground = .color(color: .white)
+            attributes.screenInteraction = .absorbTouches
+            attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+            SwiftEntryKit.display(entry: vc, using: attributes)
+            
+        }))
+        alert.addAction(UIAlertAction(title: "History", style: UIAlertAction.Style.default, handler: { _ in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "HistoryTutorialViewController") as! HistoryTutorialViewController
+            vc.view.layer.cornerRadius = 10
+            vc.view.clipsToBounds = true
+            
+            var attributes = EKAttributes.centerFloat
+            attributes.displayDuration = .infinity
+            attributes.entryInteraction = .absorbTouches
+            attributes.scroll = .disabled
+            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+            attributes.entryBackground = .color(color: .white)
+            attributes.screenInteraction = .absorbTouches
+            attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+            SwiftEntryKit.display(entry: vc, using: attributes)
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Lists", style: UIAlertAction.Style.default, handler: { _ in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ListsTutorialViewController") as! ListsTutorialViewController
+            vc.view.layer.cornerRadius = 10
+            vc.view.clipsToBounds = true
+            
+            var attributes = EKAttributes.centerFloat
+            attributes.displayDuration = .infinity
+            attributes.entryInteraction = .absorbTouches
+            attributes.scroll = .disabled
+            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+            attributes.entryBackground = .color(color: .white)
+            attributes.screenInteraction = .absorbTouches
+            attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+            SwiftEntryKit.display(entry: vc, using: attributes)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+//        GeneralTutorialViewController
     }
     
     @IBAction func clearHistPressed(_ sender: Any) {

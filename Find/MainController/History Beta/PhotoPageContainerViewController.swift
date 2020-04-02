@@ -28,6 +28,9 @@ protocol ZoomCached: class {
 protocol ZoomDeletedPhoto: class {
     func deletedPhoto(photoIndex: Int)
 }
+protocol GiveFindbarMatchNumber: class {
+    func howMany(number: Int)
+}
 
 class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDelegate {
 
@@ -70,6 +73,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     weak var changeModel: ZoomStateChanged?
     weak var doneAnimatingSEK: DoneAnimatingSEK?
     weak var changeCache: ZoomCached?
+    weak var giveNumber: GiveFindbarMatchNumber?
     
     
     weak var changeFindbar: ChangeFindBar?
@@ -350,6 +354,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             urlString = URL(string: "\(folderURL)\(filePath)")
             self.changedTerms = vc
             vc.cameFromFind = false
+            vc.returnNumber = self
         }
         
         vc.folderURL = folderURL
@@ -611,10 +616,9 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
         let currentVC = currentViewController
         if completed {
             let index = currentVC.index
+            currentVC.returnNumber = self
             print("INDEX: \(index)")
             currentIndex = index
-            
-            
         }
         previousViewControllers.forEach { vc in
             let zoomVC = vc as! PhotoZoomViewController
@@ -711,7 +715,6 @@ extension PhotoPageContainerViewController: ReturnSortedTerms {
     func returnTerms(matchToColorsR: [String : [CGColor]]) {
         matchToColors = matchToColorsR
         changedTerms?.returnTerms(matchToColorsR: matchToColorsR)
-        
     }
     
     func pause(pause: Bool) {
@@ -758,6 +761,8 @@ extension PhotoPageContainerViewController {
         
         customView.returnTerms = self
         customView.highlightColor = highlightColor
+//        customView.
+        self.giveNumber = customView
         
         self.changeFindbar = customView
         SwiftEntryKit.display(entry: customView, using: attributes)
@@ -768,4 +773,13 @@ extension PhotoPageContainerViewController {
             self.doneFindingBlurView.alpha = 1
         })
     }
+}
+
+extension PhotoPageContainerViewController: ReturnHowManyMatches {
+    
+    func howMany(number: Int) {
+//        howMany.
+        giveNumber?.howMany(number: number)
+    }
+    
 }

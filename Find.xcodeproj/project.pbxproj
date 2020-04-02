@@ -61,6 +61,8 @@
 		4953F3C424171EE200690E53 /* FindBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953F3C324171EE200690E53 /* FindBar.swift */; };
 		4953F3C7241733E700690E53 /* ListToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4953F3C6241733E700690E53 /* ListToolBar.xib */; };
 		4953F3C92417344900690E53 /* ListToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953F3C82417344900690E53 /* ListToolBar.swift */; };
+		49563501243591650001E8C6 /* RateTheApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49563500243591650001E8C6 /* RateTheApp.swift */; };
+		49563503243593860001E8C6 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49563502243593860001E8C6 /* TutorialViewController.swift */; };
 		49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3223D65AA4009308CA /* ListCollectionCell.swift */; };
 		49569B3523D6919E009308CA /* ListsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3423D6919E009308CA /* ListsLayout.swift */; };
 		4957157C2368AF69007BF68B /* RippleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4957157B2368AF69007BF68B /* RippleEffect.swift */; };
@@ -181,6 +183,8 @@
 		4953F3C324171EE200690E53 /* FindBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindBar.swift; sourceTree = "<group>"; };
 		4953F3C6241733E700690E53 /* ListToolBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListToolBar.xib; sourceTree = "<group>"; };
 		4953F3C82417344900690E53 /* ListToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListToolBar.swift; sourceTree = "<group>"; };
+		49563500243591650001E8C6 /* RateTheApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateTheApp.swift; sourceTree = "<group>"; };
+		49563502243593860001E8C6 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		49569B3223D65AA4009308CA /* ListCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionCell.swift; sourceTree = "<group>"; };
 		49569B3423D6919E009308CA /* ListsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsLayout.swift; sourceTree = "<group>"; };
 		4957157B2368AF69007BF68B /* RippleEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleEffect.swift; sourceTree = "<group>"; };
@@ -332,6 +336,7 @@
 				4952F0C1240B1DD00068564F /* SearchCell.swift */,
 				49301BF624030C4400B4780B /* SmallGradientView.swift */,
 				495F38FD243302D500A17D93 /* StatsViewController.swift */,
+				49563500243591650001E8C6 /* RateTheApp.swift */,
 			);
 			path = Setup;
 			sourceTree = "<group>";
@@ -482,6 +487,7 @@
 				49913451236FE33B00B82E46 /* SettingsBasicSetup.swift */,
 				498332D72431B4D500AD083E /* LDGradientView.swift */,
 				495F38F12432B7B700A17D93 /* CreditsViewController.swift */,
+				49563502243593860001E8C6 /* TutorialViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -863,6 +869,7 @@
 				495ECCA7238CF76C00E7D966 /* NewHistoryViewController.swift in Sources */,
 				4928526023D61F570048EC13 /* ListSelect.swift in Sources */,
 				4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */,
+				49563501243591650001E8C6 /* RateTheApp.swift in Sources */,
 				490DA75223CBB871000AF57D /* JJFloatingActionButton.swift in Sources */,
 				49D985B4241B374B005F4E92 /* CachingViewController.swift in Sources */,
 				49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */,
@@ -886,6 +893,7 @@
 				490DA75923CBB871000AF57D /* JJCircleView.swift in Sources */,
 				4917CE8123C059F6002EA20B /* StartSceneView.swift in Sources */,
 				495ECCA9238CF7BD00E7D966 /* HPhotoCell.swift in Sources */,
+				49563503243593860001E8C6 /* TutorialViewController.swift in Sources */,
 				49D985B824208037005F4E92 /* CachingCancelController.swift in Sources */,
 				49D985B024188CA4005F4E92 /* NewListToolbarCell.swift in Sources */,
 				490DA75723CBB871000AF57D /* Styles.swift in Sources */,

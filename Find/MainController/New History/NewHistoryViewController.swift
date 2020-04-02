@@ -1513,7 +1513,40 @@ extension NewHistoryViewController: PhotoPageContainerViewControllerDelegate {
 //        self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
 //
         if let indexPath = indexToIndexPath[currentIndex] {
-            self.selectedIndexPath = indexPath
+            
+            if let cell = collectionView.cellForItem(at: selectedIndexPath) as? HPhotoCell {
+                guard let hisModel = self.indexToData[selectedIndexPath.section] else { print("NO CELL MODEL"); return }
+                let historyModel = hisModel[selectedIndexPath.item]
+                if historyModel.isHearted == true {
+//                    UIView.animate(withDuration: 0.2, animations: {
+                        cell.heartView.alpha = 1
+                        cell.pinkTintView.alpha = 1
+//                    })
+                } else {
+//                    UIView.animate(withDuration: 0.2, animations: {
+                        cell.heartView.alpha = 0
+                        cell.pinkTintView.alpha = 0
+//                    })
+                }
+            }
+            selectedIndexPath = indexPath
+            
+            if let cell = collectionView.cellForItem(at: indexPath) as? HPhotoCell {
+                guard let hisModel = self.indexToData[indexPath.section] else { print("NO CELL MODEL"); return }
+                let historyModel = hisModel[indexPath.item]
+                if historyModel.isHearted == true {
+//                    UIView.animate(withDuration: 0.2, animations: {
+                        cell.heartView.alpha = 1
+                        cell.pinkTintView.alpha = 1
+//                    })
+                } else {
+//                    UIView.animate(withDuration: 0.2, animations: {
+                        cell.heartView.alpha = 0
+                        cell.pinkTintView.alpha = 0
+//                    })
+                }
+            }
+            
             self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
         }
     }
