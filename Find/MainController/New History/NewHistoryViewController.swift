@@ -37,6 +37,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     var highlightColor = "00aeef"
     
     var aboutToBeCached = [HistoryModel]()
+//    var reloadingHearts
     
 
 //    var presentingCache = false
@@ -44,6 +45,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     //MARK: Finding
 //    var shouldDismissSEK = true
     var selectedIndexPath: IndexPath!
+//    var isPresentingState = false
     
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
     var sectionToDate: [Int: Date] = [Int: Date]()
@@ -498,24 +500,131 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
         UIContextMenuConfiguration(identifier: indexPath as NSIndexPath, previewProvider: nil) { suggestedActions in
             // Create an action for sharing
 //            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { action in
 //                // Show share sheet
 //            }
-
+            guard let hisModel = self.indexToData[indexPath.section] else { print("NO CONTEXT"); return UIMenu(title: "No Actions")}
+            let historyModel = hisModel[indexPath.item]
+            
+            guard let indexOfPhoto = self.indexPathToIndex[indexPath] else { print("NO INDEX"); return UIMenu(title: "No Actions")}
+            
+            var heartMessage = ""
+            var heartImage = UIImage()
+            if historyModel.isHearted {
+                heartMessage = "Unheart"
+                heartImage = UIImage(systemName: "heart") ?? UIImage()
+            } else {
+                heartMessage = "Heart"
+                heartImage = UIImage(systemName: "heart.fill") ?? UIImage()
+            }
+            
+            var cacheMessage = ""
+            var cacheImage = UIImage()
+            if historyModel.isDeepSearched {
+                cacheMessage = "Uncache"
+                cacheImage = UIImage(named: "ContextNotCached") ?? UIImage()
+            } else {
+                cacheMessage = "Cache"
+                cacheImage = UIImage(named: "ContextCached") ?? UIImage()
+            }
+            
             // Create an action for copy
-            let heart = UIAction(title: "Heart", image: UIImage(systemName: "heart")) { action in
+            let find = UIAction(title: "Find", image: UIImage(systemName: "magnifyingglass")) { action in
+                self.presentFromIndexpath(indexPath: indexPath, directFind: true)
                 // Perform copy
             }
-
-            // Create an action for delete with destructive attributes (highligh in red)
+            let heart = UIAction(title: heartMessage, image: heartImage) { action in
+                if historyModel.isHearted {
+                    self.changeHeart(nowHearted: false, atIndex: indexOfPhoto)
+                } else {
+                    self.changeHeart(nowHearted: true, atIndex: indexOfPhoto)
+                }
+                // Perform copy
+            }
+            
+//            var cacheAction = UIMenu(title: "")
+//            if historyModel.isDeepSearched {
+//                let cacheCancel = UIAction(title: "Cancel", image: UIImage(systemName: "backward")) { action in }
+//                let cacheConfirm = UIAction(title: "Confirm", image: UIImage(systemName: "checkmark"), attributes: .destructive) { action in
+//                    if let index = self.indexPathToIndex[indexPath] {
+//                        self.uncachePhotos(at: [index])
+//                    }
+//                }
+//                cacheAction = UIMenu(title: "Uncache", children: [cacheCancel, cacheConfirm])
+//            } else {
+//                let cacheNow = UIAction(title: cacheMessage, image: cacheImage) { action in
+//                    let newPhoto = EditableHistoryModel()
+//                    newPhoto.filePath = historyModel.filePath
+//                    newPhoto.dateCreated = historyModel.dateCreated
+//                    newPhoto.isHearted = historyModel.isHearted
+//                    newPhoto.isDeepSearched = historyModel.isDeepSearched
+//                    if let index = self.indexPathToIndex[indexPath] {
+//                        self.cachePhoto(photo: newPhoto, index: index)
+//                    }
+//                }
+//                cacheAction = UIMenu(title: "Cache", children: [cacheNow])
+//            }
+//
+            
+            let cacheAction = UIAction(title: cacheMessage, image: cacheImage) { action in
+                if historyModel.isDeepSearched {
+                    let alert = UIAlertController(title: "Clear this photo's cache?", message: "Caching again will take a while...", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Clear", style: UIAlertAction.Style.destructive, handler: { _ in
+                        self.uncachePhotos(at: [indexOfPhoto])
+                    }))
+                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    
+                } else {
+                    var attributes = EKAttributes.centerFloat
+                    attributes.displayDuration = .infinity
+                    attributes.entryInteraction = .absorbTouches
+                    attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+                    attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+                    attributes.entryBackground = .color(color: .white)
+                    attributes.screenInteraction = .absorbTouches
+                    attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(300))
+                    attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+                    attributes.lifecycleEvents.didAppear = {
+                        self.doneAnimatingSEK?.doneAnimating()
+                    }
+                   
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController
+                    
+                    let newPhoto = EditableHistoryModel()
+                    newPhoto.filePath = historyModel.filePath
+                    newPhoto.dateCreated = historyModel.dateCreated
+                    newPhoto.isHearted = historyModel.isHearted
+                    newPhoto.isDeepSearched = historyModel.isDeepSearched
+                    
+                    cacheController.folderURL = self.folderURL
+                    cacheController.photos = [newPhoto]
+                    cacheController.finishedCache = self
+                    self.doneAnimatingSEK = cacheController
+                    cacheController.view.layer.cornerRadius = 10
+                    
+                    SwiftEntryKit.display(entry: cacheController, using: attributes)
+                }
+            }
+            
             let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { action in
+                let alert = UIAlertController(title: "Delete this photo?", message: "This action can't be undone.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
+                    self.deletePhotoAt(photoIndex: indexOfPhoto)
+                    let alertView = SPAlertView(title: "Photo Deleted!", message: "Tap to dismiss", preset: SPAlertPreset.done)
+                    alertView.duration = 2.6
+                    alertView.present()
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
                 // Perform delete
             }
-
                     // Empty menu for demonstration purposes
-                return UIMenu(title: "asdf", children: [ heart, delete])
+            return UIMenu(title: "Actions", children: [find, heart, cacheAction, delete])
             
             
     
@@ -523,6 +632,25 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             
         }
     }
+//    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+//        animator.addCompletion {
+//            print("interact")
+//            if let identifier = configuration.identifier as? IndexPath {
+//                print("letet")
+//                self.presentFromIndexpath(indexPath: identifier)
+//            }
+//        }
+//    }
+    func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        animator.addCompletion {
+            print("interact")
+            if let identifier = configuration.identifier as? IndexPath {
+                print("letet")
+                self.presentFromIndexpath(indexPath: identifier)
+            }
+        }
+    }
+    
     //MARK: Selection
     func deselectAllItems(deselect: Bool) {
         if deselect == true {
@@ -585,6 +713,68 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             
         }
     }
+    
+    func presentFromIndexpath(indexPath: IndexPath, directFind: Bool = false) {
+        if let currentIndex = indexPathToIndex[indexPath] {
+//            isPresentingState = true
+            
+            if let cell = collectionView.cellForItem(at: indexPath) as? HPhotoCell {
+                guard let hisModel = self.indexToData[indexPath.section] else { print("NO CELL MODEL"); return }
+                let historyModel = hisModel[indexPath.item]
+                if historyModel.isHearted == true {
+                    UIView.animate(withDuration: 0.2, animations: {
+                        cell.heartView.alpha = 0
+                        cell.pinkTintView.alpha = 0
+                    })
+                }
+            }
+            
+            let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
+                            "PhotoPageContainerViewController") as! PhotoPageContainerViewController
+            mainContentVC.title = "PhotoPageContainerViewController"
+            self.selectedIndexPath = indexPath
+            mainContentVC.transitioningDelegate = mainContentVC.transitionController
+            mainContentVC.transitionController.fromDelegate = self
+            mainContentVC.transitionController.toDelegate = mainContentVC
+            mainContentVC.delegate = self
+            mainContentVC.currentIndex = currentIndex
+            mainContentVC.photoSize = imageSize
+            mainContentVC.cameFromFind = false
+            mainContentVC.folderURL = folderURL
+            
+            mainContentVC.goDirectlyToFind = directFind
+            
+            mainContentVC.highlightColor = highlightColor
+            
+            mainContentVC.deletedPhoto = self
+            mainContentVC.changeModel = self
+            mainContentVC.changeCache = self
+            
+            if let photoCats = photoCategories {
+                var modelArray = [EditableHistoryModel]()
+                for photo in photoCats {
+                    let newHistModel = EditableHistoryModel()
+                    newHistModel.filePath = photo.filePath
+                    newHistModel.dateCreated = photo.dateCreated
+                    newHistModel.isHearted = photo.isHearted
+                    newHistModel.isDeepSearched = photo.isDeepSearched
+                    
+                    for cont in photo.contents {
+                        let realmContent = EditableSingleHistoryContent()
+                        realmContent.text = cont.text
+                        realmContent.height = CGFloat(cont.height)
+                        realmContent.width = CGFloat(cont.width)
+                        realmContent.x = CGFloat(cont.x)
+                        realmContent.y = CGFloat(cont.y)
+                        newHistModel.contents.append(realmContent)
+                    }
+                    modelArray.append(newHistModel)
+                }
+                mainContentVC.photoModels = modelArray
+            }
+            self.present(mainContentVC, animated: true)
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        print("did")
         //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
@@ -608,66 +798,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         } else {
 //            print("false")
             collectionView.deselectItem(at: indexPath, animated: true)
-            
-            print("SELECTJL")
-            
-            
-            if let currentIndex = indexPathToIndex[indexPath] {
-                
-                
-                let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
-                                "PhotoPageContainerViewController") as! PhotoPageContainerViewController
-                mainContentVC.title = "PhotoPageContainerViewController"
-                self.selectedIndexPath = indexPath
-                mainContentVC.transitioningDelegate = mainContentVC.transitionController
-                mainContentVC.transitionController.fromDelegate = self
-                mainContentVC.transitionController.toDelegate = mainContentVC
-                mainContentVC.delegate = self
-                mainContentVC.currentIndex = currentIndex
-    //            print("seleect: CURRENT INDEX: \(indexPath.item)")
-    //            mainContentVC.currentSection = indexPath.section
-                mainContentVC.photoSize = imageSize
-                mainContentVC.cameFromFind = false
-                mainContentVC.folderURL = folderURL
-                
-                mainContentVC.highlightColor = highlightColor
-                
-                mainContentVC.deletedPhoto = self
-                mainContentVC.changeModel = self
-                mainContentVC.changeCache = self
-                
-                if let photoCats = photoCategories {
-                    var modelArray = [EditableHistoryModel]()
-                    for photo in photoCats {
-                            
-                        let newHistModel = EditableHistoryModel()
-                        newHistModel.filePath = photo.filePath
-                        newHistModel.dateCreated = photo.dateCreated
-                        newHistModel.isHearted = photo.isHearted
-                        newHistModel.isDeepSearched = photo.isDeepSearched
-                        
-                        for cont in photo.contents {
-                            let realmContent = EditableSingleHistoryContent()
-                            realmContent.text = cont.text
-                            realmContent.height = CGFloat(cont.height)
-                            realmContent.width = CGFloat(cont.width)
-                            realmContent.x = CGFloat(cont.x)
-                            realmContent.y = CGFloat(cont.y)
-        //                                    realmContent.
-        //                                    realnContent.
-                            newHistModel.contents.append(realmContent)
-                        }
-                        modelArray.append(newHistModel)
-                    }
-                    mainContentVC.photoModels = modelArray
-                }
-                
-                // mainContentVC.photos = photos
-    //            print("_____")
-                //print(dateToFilepaths)
-                self.present(mainContentVC, animated: true)
-            }
-            
+            presentFromIndexpath(indexPath: indexPath)
             
         }
     }
@@ -871,6 +1002,7 @@ extension NewHistoryViewController: ButtonPressed {
             fadeSelectOptions(fadeOut: "fade out")
             SwiftEntryKit.dismiss()
             collectionView.allowsMultipleSelection = false
+            
         case "delete":
             print("INDEX COUNT: \(indexPathsSelected.count)")
 //            var titleMessage = ""
@@ -1044,7 +1176,11 @@ extension NewHistoryViewController: ButtonPressed {
                 self.present(alert, animated: true, completion: nil)
                 
             }
-            
+        case "help":
+            print("help")
+            self.selectButtonSelected = false
+            self.fadeSelectOptions(fadeOut: "fade out")
+            self.collectionView.allowsMultipleSelection = false
         default: print("unknown, bad string")
         }
     }
@@ -1278,43 +1414,7 @@ extension NewHistoryViewController: ZoomStateChanged, ZoomCached {
     
     func cached(cached: Bool, photo: EditableHistoryModel, index: Int) {
         if cached == true {
-            let defaults = UserDefaults.standard
-            let existingCacheCount = defaults.integer(forKey: "cacheCountTotal")
-            let newCacheCount = existingCacheCount + 1
-            
-            defaults.set(newCacheCount, forKey: "cacheCountTotal")
-//            print("RECIEVE CACHE!!")
-            if let photoCats = photoCategories {
-                let origPhoto = photoCats[index]
-                if let indP = indexToIndexPath[index] {
-                    do {
-                        try realm.write {
-                            
-                            realm.delete(origPhoto.contents)
-                            
-                            origPhoto.isDeepSearched = true
-                            
-                            for cont in photo.contents {
-                                
-                                let realmContent = SingleHistoryContent()
-                                realmContent.text = cont.text
-                                realmContent.height = Double(cont.height)
-                                realmContent.width = Double(cont.width)
-                                realmContent.x = Double(cont.x)
-                                realmContent.y = Double(cont.y)
-                                
-                                origPhoto.contents.append(realmContent)
-                            }
-                            
-                        }
-                    } catch {
-                        print("ERROR Changing heart!! \(error)")
-                    }
-                    getData()
-                    collectionView.reloadItems(at: [indP])
-                }
-                
-            }
+            cachePhoto(photo: photo, index: index)
         } else { ///UNCACHE
             uncachePhotos(at: [index])
         }
@@ -1324,42 +1424,31 @@ extension NewHistoryViewController: ZoomStateChanged, ZoomCached {
     func changedState(type: String, index: Int) {
         switch type {
         case "Unheart":
-            if let photoCats = photoCategories {
-                let photo = photoCats[index]
-                if let indP = indexToIndexPath[index] {
-                    do {
-                        try realm.write {
-                            photo.isHearted = false
-                        }
-                    } catch {
-                        print("ERROR Changing heart!! \(error)")
-                    }
-                    getData()
-                    collectionView.reloadItems(at: [indP])
-                }
-                
-            }
+            changeHeart(nowHearted: false, atIndex: index)
         case "Heart":
-            if let photoCats = photoCategories {
-                let photo = photoCats[index]
-                if let indP = indexToIndexPath[index] {
-                    do {
-                        try realm.write {
-                            photo.isHearted = true
-                        }
-                    } catch {
-                        print("ERROR Changing heart!! \(error)")
-                    }
-                    getData()
-                    collectionView.reloadItems(at: [indP])
-                }
-                
-            }
+            changeHeart(nowHearted: true, atIndex: index)
         default:
             print("WRONG DEFAUTL!!!")
         }
     }
     
+    func changeHeart(nowHearted: Bool, atIndex: Int) {
+        if let photoCats = photoCategories {
+            let photo = photoCats[atIndex]
+            if let indP = indexToIndexPath[atIndex] {
+                do {
+                    try realm.write {
+                        photo.isHearted = nowHearted
+                    }
+                } catch {
+                    print("ERROR Changing heart!! \(error)")
+                }
+                getData()
+                collectionView.reloadItems(at: [indP])
+            }
+            
+        }
+    }
     
 }
 
@@ -1367,6 +1456,9 @@ extension NewHistoryViewController: ZoomDeletedPhoto {
     
     func deletedPhoto(photoIndex: Int) {
         print("DELEting!")
+        deletePhotoAt(photoIndex: photoIndex)
+    }
+    func deletePhotoAt(photoIndex: Int) {
         var sectionToDelete = -1
         if let photoCats = photoCategories {
             let photoToDelete = photoCats[photoIndex]
@@ -1378,11 +1470,6 @@ extension NewHistoryViewController: ZoomDeletedPhoto {
                 if photosInSection?.count == 1 {
                     sectionToDelete = section
                 }
-                
-//                var contents = [SingleHistoryContent]()
-//                for content in photoToDelete.contents {
-//                    contents.append(content)
-//                }
                 let urlString = photoToDelete.filePath
                 guard let finalUrl = URL(string: "\(folderURL)\(urlString)") else { print("Invalid File name"); return }
                 
@@ -1393,7 +1480,6 @@ extension NewHistoryViewController: ZoomDeletedPhoto {
                 } catch {
                     print("Could not delete items: \(error)")
                 }
-                
                 do {
                     try realm.write {
                         realm.delete(photoToDelete.contents)
@@ -1402,9 +1488,6 @@ extension NewHistoryViewController: ZoomDeletedPhoto {
                 } catch {
                     print("ERROR DELETIN!! \(error)")
                 }
-                
-                
-                
                 getData()
                 if sectionToDelete >= 0 {
                     let sections = IndexSet([sectionToDelete])
@@ -1415,8 +1498,6 @@ extension NewHistoryViewController: ZoomDeletedPhoto {
             }
             
         }
-        
-        
     }
     
 }
@@ -1438,6 +1519,48 @@ extension NewHistoryViewController: PhotoPageContainerViewControllerDelegate {
     }
 }
 
+extension NewHistoryViewController {
+    func cachePhoto(photo: EditableHistoryModel, index: Int) {
+        let defaults = UserDefaults.standard
+        let existingCacheCount = defaults.integer(forKey: "cacheCountTotal")
+        let newCacheCount = existingCacheCount + 1
+        
+        defaults.set(newCacheCount, forKey: "cacheCountTotal")
+//            print("RECIEVE CACHE!!")
+        if let photoCats = photoCategories {
+            let origPhoto = photoCats[index]
+            if let indP = indexToIndexPath[index] {
+                do {
+                    try realm.write {
+                        
+                        realm.delete(origPhoto.contents)
+                        
+                        origPhoto.isDeepSearched = true
+                        
+                        for cont in photo.contents {
+                            
+                            let realmContent = SingleHistoryContent()
+                            realmContent.text = cont.text
+                            realmContent.height = Double(cont.height)
+                            realmContent.width = Double(cont.width)
+                            realmContent.x = Double(cont.x)
+                            realmContent.y = Double(cont.y)
+                            
+                            origPhoto.contents.append(realmContent)
+                        }
+                        
+                    }
+                } catch {
+                    print("ERROR Changing heart!! \(error)")
+                }
+                getData()
+                collectionView.reloadItems(at: [indP])
+            }
+            
+        }
+    }
+}
+
 extension NewHistoryViewController: ZoomAnimatorDelegate {
     
     func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
@@ -1447,6 +1570,16 @@ extension NewHistoryViewController: ZoomAnimatorDelegate {
     func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
         if zoomAnimator.isPresenting == false && zoomAnimator.finishedDismissing == true {
             SwiftEntryKit.dismiss()
+            if let cell = collectionView.cellForItem(at: selectedIndexPath) as? HPhotoCell {
+                guard let hisModel = self.indexToData[selectedIndexPath.section] else { print("NO CELL MODELReturn"); return }
+                let historyModel = hisModel[selectedIndexPath.item]
+                if historyModel.isHearted == true {
+                    UIView.animate(withDuration: 0.2, animations: {
+                        cell.heartView.alpha = 1
+                        cell.pinkTintView.alpha = 1
+                    })
+                }
+            }
         }
         if let cell = self.collectionView.cellForItem(at: self.selectedIndexPath) as? HPhotoCell {
         

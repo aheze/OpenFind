@@ -35,17 +35,29 @@ class CreditsViewController: UIViewController, UITextViewDelegate {
         
         textView.delegate = self
         
-        let attributedString = NSMutableAttributedString(string: "Thanks to H. Kamran (about.me/hkamran80) for feedback and being a beta tester for Find, and W in K (soundcloud.com/officialwinkmusic) for making the video preview music on the App Store!")
-//        let attributedString = NSMutableAttributedString(string: "Thanks to H. Kamran and W in K for feedback and being beta testers for Find!")
-        attributedString.addAttribute(.link, value: "https://about.me/hkamran80", range: NSRange(location: 10, length: 30))
         
-        attributedString.addAttribute(.link, value: "https://soundcloud.com/officialwinkmusic", range: NSRange(location: 92, length: 41))
+        let kamranLink = [NSAttributedString.Key.link: "https://about.me/hkamran80"]
+        let winkLink = [NSAttributedString.Key.link: "https://soundcloud.com/officialwinkmusic"]
         
-        let fullRange = NSMakeRange(0, attributedString.length)
+        let kamran = NSAttributedString(string: "H. Kamran (about.me/hkamran80) ", attributes: kamranLink)
+        let wink = NSAttributedString(string: "W in K (soundcloud.com/officialwinkmusic) ", attributes: winkLink)
         
-        attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 18), range: fullRange)
+        let thanksTo = NSAttributedString(string: "Thanks to ")
+        let forFeedback = NSAttributedString(string: "for feedback and being a beta tester, and ")
+        let videoMusic = NSAttributedString(string: "for the app promo music on the App Store!")
+        
+        let entireString = NSMutableAttributedString()
+        
+        
+        entireString.append(thanksTo)
+        entireString.append(kamran)
+        entireString.append(forFeedback)
+        entireString.append(wink)
+        entireString.append(videoMusic)
+        let fullRange = NSMakeRange(0, entireString.length)
+        entireString.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 18), range: fullRange)
 
-        textView.attributedText = attributedString
+        textView.attributedText = entireString
         textView.textAlignment = .center
 
         
@@ -542,11 +554,11 @@ extension CreditsViewController {
         SOFTWARE.
         """
         
-        var item11 = CarteItem(name: "SwiftyGif")
+        var item11 = CarteItem(name: "PaperOnboarding")
         item11.licenseText = """
         The MIT License (MIT)
 
-        Copyright (c) 2016 Alexis Creuzot
+        Copyright (c) 2016 Ramotion
 
         Permission is hereby granted, free of charge, to any person obtaining a copy
         of this software and associated documentation files (the "Software"), to deal

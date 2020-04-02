@@ -35,6 +35,9 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     var highlightColor = "00aeef"
     var matchToColors = [String: [CGColor]]()
     
+    var goDirectlyToFind = false
+    
+    
     @IBOutlet weak var xButton: UIButton!
     @IBAction func xButtonPressed(_ sender: Any) {
         self.currentViewController.scrollView.isScrollEnabled = false
@@ -57,7 +60,6 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         }) { _ in
             self.doneFindingBlurView.isHidden = true
         }
-        
     }
     
     
@@ -78,39 +80,10 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     @IBOutlet weak var heartButton: UIButton!
     @IBOutlet weak var cacheButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var helpButton: UIButton!
     
     @IBAction func findPressed(_ sender: Any) {
-        var attributes = EKAttributes.bottomFloat
-        attributes.entryBackground = .color(color: .white)
-        attributes.entranceAnimation = .translation
-        attributes.exitAnimation = .translation
-        attributes.displayDuration = .infinity
-        attributes.positionConstraints.size.height = .constant(value: 60)
-        attributes.statusBar = .light
-        attributes.entryInteraction = .absorbTouches
-        attributes.scroll = .disabled
-//        attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
-        attributes.roundCorners = .all(radius: 5)
-        attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
-        
-        let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
-        let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
-        attributes.positionConstraints.keyboardRelation = keyboardRelation
-        
-        let customView = FindBar()
-        
-        customView.returnTerms = self
-        customView.highlightColor = highlightColor
-        
-        self.changeFindbar = customView
-        SwiftEntryKit.display(entry: customView, using: attributes)
-        
-        findingNow = true
-        doneFindingBlurView.isHidden = false
-        UIView.animate(withDuration: 0.2, animations: {
-            self.doneFindingBlurView.alpha = 1
-        })
-        
+        pressFind()
     }
     
     @IBAction func heartPressed(_ sender: Any) {
@@ -257,6 +230,39 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         
     }
     
+    @IBAction func questionPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let helpViewController = storyboard.instantiateViewController(withIdentifier: "DefaultHelpController") as! DefaultHelpController
+        helpViewController.title = "Help"
+        helpViewController.goDirectlyToUrl = true
+        helpViewController.directUrl = "https://zjohnzheng.github.io/FindHelp/History-HistoryControls.html"
+        
+        let navigationController = UINavigationController(rootViewController: helpViewController)
+        navigationController.view.backgroundColor = UIColor.clear
+        navigationController.navigationBar.tintColor = UIColor.white
+        navigationController.navigationBar.prefersLargeTitles = true
+        
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithOpaqueBackground()
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        navigationController.navigationBar.standardAppearance = navBarAppearance
+        navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
+        navigationController.view.layer.cornerRadius = 10
+        UINavigationBar.appearance().barTintColor = .black
+        helpViewController.edgesForExtendedLayout = []
+        var attributes = EKAttributes.centerFloat
+        attributes.displayDuration = .infinity
+        attributes.entryInteraction = .absorbTouches
+        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+        attributes.entryBackground = .color(color: .white)
+        attributes.screenInteraction = .absorbTouches
+        attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+        SwiftEntryKit.display(entry: navigationController, using: attributes)
+    }
     
     @IBOutlet weak var backBlurView: UIVisualEffectView!
     
@@ -324,11 +330,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(PhotoZoomViewController.self)") as! PhotoZoomViewController
         vc.delegate = self
-//        vc.highlightColor = highlightColor
         vc.imageSize = photoSize
-        
-//        vc.
-        
         var urlString = URL(string: "")
         if cameFromFind {
             
@@ -380,6 +382,10 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             } else {
                 cacheButton.setImage(UIImage(named: "NotCachedThin"), for: .normal)
                 cacheButton.tintColor = UIColor(hexString: "5287B6")
+            }
+            
+            if goDirectlyToFind {
+                pressFind()
             }
         }
     }
@@ -709,33 +715,57 @@ extension PhotoPageContainerViewController: ReturnSortedTerms {
     }
     
     func pause(pause: Bool) {
-        print("ASD")
     }
     
     func startedEditing(start: Bool) {
-        print("ASD")
     }
     
     func pressedReturn() {
         changedTerms?.pressedReturn()
-        print("ASD")
     }
     
     func triedToEdit() {
-        print("ASD")
     }
     
     func triedToEditWhilePaused() {
-        print("ASD")
     }
     
     func hereAreCurrentLists(currentSelected: [EditableFindList], currentText: String) {
-        return
     }
     
     
     
 }
-//extension Notification.Name {
-//    static let changeSearchTerms = Notification.Name("changeSearchTerms")
-//}
+extension PhotoPageContainerViewController {
+    func pressFind() {
+        var attributes = EKAttributes.bottomFloat
+        attributes.entryBackground = .color(color: .white)
+        attributes.entranceAnimation = .translation
+        attributes.exitAnimation = .translation
+        attributes.displayDuration = .infinity
+        attributes.positionConstraints.size.height = .constant(value: 60)
+        attributes.statusBar = .light
+        attributes.entryInteraction = .absorbTouches
+        attributes.scroll = .disabled
+        attributes.roundCorners = .all(radius: 5)
+        attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
+        
+        let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
+        let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
+        attributes.positionConstraints.keyboardRelation = keyboardRelation
+        
+        let customView = FindBar()
+        
+        customView.returnTerms = self
+        customView.highlightColor = highlightColor
+        
+        self.changeFindbar = customView
+        SwiftEntryKit.display(entry: customView, using: attributes)
+        
+        findingNow = true
+        doneFindingBlurView.isHidden = false
+        UIView.animate(withDuration: 0.2, animations: {
+            self.doneFindingBlurView.alpha = 1
+        })
+    }
+}

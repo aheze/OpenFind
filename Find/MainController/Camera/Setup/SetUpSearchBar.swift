@@ -28,9 +28,22 @@ extension ViewController: ToolbarButtonPressed, SelectedList, StartedEditing {
         case .removeAll:
             removeAllLists()
         case .newMatch:
-            if let searchText = newSearchTextField.text {
-                newSearchTextField.text = "\(searchText)\u{2022}"
+            if let selectedRange = newSearchTextField.selectedTextRange {
+                let cursorPosition = newSearchTextField.offset(from: newSearchTextField.beginningOfDocument, to: selectedRange.start)
+                if let textFieldText = newSearchTextField.text {
+                    var newText = textFieldText
+                    newText.insert(string: "\u{2022}", ind: cursorPosition)
+                    print("\(cursorPosition)")
+                    newSearchTextField.text = newText
+                    
+                    
+//                        let positionOriginal = textField.beginningOfDocument
+                    if let cursorLocation = newSearchTextField.position(from: newSearchTextField.beginningOfDocument, offset: cursorPosition + 1) {
+                        newSearchTextField.selectedTextRange = newSearchTextField.textRange(from: cursorLocation, to: cursorLocation)
+                    }
+                }
             }
+
         case .done:
             view.endEditing(true)
             if insertingListsCount == 0 {
@@ -578,5 +591,10 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             return capturedImage
         }
         return nil
+    }
+}
+extension String {
+    mutating func insert(string:String,ind:Int) {
+        self.insert(contentsOf: string, at:self.index(self.startIndex, offsetBy: ind) )
     }
 }

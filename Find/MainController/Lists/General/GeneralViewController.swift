@@ -504,16 +504,16 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
             contents.append("")
         }
         
-        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 70, weight: .semibold)
-        
-        let deleteImage = UIImage(systemName: "trash.circle.fill",
-                                  withConfiguration: symbolConfiguration)?.withTintColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), renderingMode: .alwaysOriginal)
-        
-        let helpImage = UIImage(systemName: "questionmark.circle.fill",
-                                withConfiguration: symbolConfiguration)?.withTintColor(#colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1), renderingMode: .alwaysOriginal)
-        bottomDeleteButton.setImage(deleteImage, for: .normal)
-        bottomHelpButton.setImage(helpImage, for: .normal)
-        
+//        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 70, weight: .semibold)
+//        
+//        let deleteImage = UIImage(systemName: "trash.circle.fill",
+//                                  withConfiguration: symbolConfiguration)?.withTintColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), renderingMode: .alwaysOriginal)
+//        
+//        let helpImage = UIImage(systemName: "questionmark.circle.fill",
+//                                withConfiguration: symbolConfiguration)?.withTintColor(#colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1), renderingMode: .alwaysOriginal)
+//        bottomDeleteButton.setImage(deleteImage, for: .normal)
+//        bottomHelpButton.setImage(helpImage, for: .normal)
+//        
         
         ///Receive info
         

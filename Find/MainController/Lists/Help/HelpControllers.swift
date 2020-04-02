@@ -23,6 +23,8 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
     
     var helpObjects = [HelpObject]()
     var helpJsonKey = "ListsHelpArray"
+    var goDirectlyToUrl = false
+    var directUrl = ""
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -109,7 +111,14 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
             }.resume()
         }
         
-        
+        if goDirectlyToUrl {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let defaultHelp = storyboard.instantiateViewController(withIdentifier: "HelpController") as? HelpController {
+                defaultHelp.urlString = directUrl
+                self.navigationController?.pushViewController(defaultHelp, animated: true)
+            }
+        }
+            
 
     }
     
@@ -169,31 +178,25 @@ class HelpController: UIViewController, WKNavigationDelegate {
     }
     
   func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    
          if navigationAction.navigationType == WKNavigationType.linkActivated {
-             print("link")
-
+            decisionHandler(WKNavigationActionPolicy.cancel)
             
-            
-             decisionHandler(WKNavigationActionPolicy.cancel)
-            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "HelpController") as? HelpController
-            if let url = navigationAction.request.url {
-                
-                if url.absoluteString == "https://forms.gle/agdyoB9PFfnv8cU1A/" {
-                    print("FEEDBACK!!")
-                    let defaults = UserDefaults.standard
-                    defaults.set(true, forKey: "feedbackedAlready")
+            if let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "HelpController") as? HelpController {
+                if let url = navigationAction.request.url {
+                    if url.absoluteString == "https://forms.gle/agdyoB9PFfnv8cU1A/" {
+                        let defaults = UserDefaults.standard
+                        defaults.set(true, forKey: "feedbackedAlready")
+                    }
+                    vc.urlString = url.absoluteString
                 }
-//                print("URL STINRG:::\(url.absoluteString)") // It will give the selected link URL
-                vc?.urlString = url.absoluteString
+                self.navigationController?.pushViewController(vc, animated: true)
             }
-            self.navigationController?.pushViewController(vc!, animated: true)
-            
              return
          }
-//         print("no link")
-         decisionHandler(WKNavigationActionPolicy.allow)
-  }
-
+    
+        decisionHandler(WKNavigationActionPolicy.allow)
+    }
 }
 
 extension HelpController {

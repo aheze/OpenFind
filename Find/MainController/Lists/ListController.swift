@@ -16,7 +16,15 @@ protocol ChangeNumberOfSelectedList: class {
     func changeLabel(to: Int)
 }
 class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLayoutDelegate, UIAdaptivePresentationControllerDelegate, NewListMade, TellControllerToDeleteList {
-    var cellHeights = [CGFloat]()
+//    var cellHeights = [CGFloat]()
+    
+    var colorArray: [String] = [
+    "#eb2f06","#e55039","#f7b731","#fed330","#78e08f",
+    "#fc5c65","#fa8231","#f6b93b","#b8e994","#2bcbba",
+    "#ff6348","#b71540","#579f2b","#d1d8e0","#778ca3",
+    "#e84393","#a55eea","#5352ed","#70a1ff","#40739e",
+    "#45aaf2","#2d98da","#00aeef","#4b6584","#0a3d62"]
+    var randomizedColor = ""
     
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         print("Did Dismiss")
@@ -136,6 +144,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
             let destinationVC = segue.destination as! MakeNewList
             destinationVC.isModalInPresentation = true
             destinationVC.newListDelegate = self
+            destinationVC.iconColorName = randomizedColor
             segue.destination.presentationController?.delegate = self
         } else if segue.identifier == "editListSegue" {
             print("editList")
@@ -184,29 +193,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
             changeNumberDelegateList?.changeLabel(to: numberOfSelected)
         }
     }
-    
-    @IBAction func clearPressed(_ sender: Any) {
-        var tempLists = [FindList]()
-        var tempInts = [Int]()
-        var arrayOfIndexPaths = [IndexPath]()
-        for (inx, index) in listCategories!.enumerated() {
-            tempLists.append(index)
-            tempInts.append(inx)
-            arrayOfIndexPaths.append(IndexPath(item: inx, section: 0))
-        }
-        print("Index selected: \(indexPathsSelected)")
-        do {
-            try realm.write {
-                realm.delete(tempLists)
-            }
-        } catch {
-            print("error deleting category \(error)")
-        }
-//        addHeight()
-        collectionView.deleteItems(at: arrayOfIndexPaths)
-        indexPathsSelected.removeAll()
-    }
-    
+  
     
     @IBAction func selectPressed(_ sender: UIButton) {
 //        selectButtonSelected = !selectButtonSelected ///First time press, will be true
@@ -233,6 +220,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
     }
     
     
+    @IBOutlet weak var addListButton: UIButton!
     @IBAction func addListPressed(_ sender: UIButton) {
         exitSwiftEntryKit()
         performSegue(withIdentifier: "makeNewListSegue", sender: self)
@@ -244,13 +232,21 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         if let layout = collectionView?.collectionViewLayout as? AdaptiveCollectionLayout {
           layout.delegate = self
         }
+        
+        if let randColorString = colorArray.randomElement() {
+            randomizedColor = randColorString
+        }
+        addListButton.layer.cornerRadius = 6
+        addListButton.backgroundColor = UIColor(hexString: randomizedColor)
+        
+        
         let padding = AdaptiveCollectionConfig.cellPadding
         collectionView.contentInset = UIEdgeInsets(top: padding, left: padding, bottom: 82, right: padding)
         getData()
         collectionView.delaysContentTouches = false
         selectButton.layer.cornerRadius = 6
 //        addHeight()
-        print("Cellheights: \(cellHeights)")
+//        print("Cellheights: \(cellHeights)")
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)

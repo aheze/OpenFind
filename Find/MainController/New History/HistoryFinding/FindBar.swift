@@ -507,8 +507,24 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         case .removeAll:
             removeAllLists()
         case .newMatch:
-            if let searchText = searchField.text {
-                searchField.text = "\(searchText)\u{2022}"
+//            if let searchText = searchField.text {
+//                searchField.text = "\(searchText)\u{2022}"
+//            }
+            
+            if let selectedRange = searchField.selectedTextRange {
+                let cursorPosition = searchField.offset(from: searchField.beginningOfDocument, to: selectedRange.start)
+                if let textFieldText = searchField.text {
+                    var newText = textFieldText
+                    newText.insert(string: "\u{2022}", ind: cursorPosition)
+                    print("\(cursorPosition)")
+                    searchField.text = newText
+                    
+                    
+//                        let positionOriginal = textField.beginningOfDocument
+                    if let cursorLocation = searchField.position(from: searchField.beginningOfDocument, offset: cursorPosition + 1) {
+                        searchField.selectedTextRange = searchField.textRange(from: cursorLocation, to: cursorLocation)
+                    }
+                }
             }
         case .done:
             searchActive = false

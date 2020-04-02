@@ -322,7 +322,8 @@ extension ViewController {
     }
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer == pinchGesture {
-            
+            searchContentView.isHidden = false
+            controlsView.isHidden = false
             UIView.animate(withDuration: 0.4, animations: {
                 self.searchContentView.alpha = 1
                 self.controlsView.alpha = 1

@@ -339,33 +339,8 @@ extension CachingViewController {
                            self.collectionView.scrollToItem(at: indP, at: .centeredVertically, animated: true)
                    }
                     if !photo.isDeepSearched {
-                        
-                       
-    //                    print("photo_____________________________")
                         self.dispatchGroup.enter()
-    //                    print("photo_____________________________")
-    //                    print("fold:\(self.folderURL)")
-    //                    print("FILEPATH: \(photo.filePath)")
                         guard let photoUrl = URL(string: "\(self.folderURL)\(photo.filePath)") else { print("WRONG URL!!!!"); return }
-                        
-                        
-//                        guard let photoImage = photoUrl.absoluteString.getImageFromDir() else { print("WRONG IMAGE!!!!"); return }
-//
-//
-//                        let width = photoImage.size.width
-//                        let height = photoImage.size.height
-//
-//                        self.photoSize = CGSize(width: width, height: height)
-//
-//                        print("WIDTH: \(width), height: \(height)")
-////                        self.sizeOfPixelBufferFast = CGSize(width: height, height: width)
-//                        //print(width)
-//                        //print(height)
-//                        self.aspectRatioWidthOverHeight = width / height
-//                        if self.aspectRatioWidthOverHeight != CGFloat(0) {
-////                            self.aspectRatioSucceeded = true
-//                        }
-                        //let request = fastTextDetectionRequest
                         let request = VNRecognizeTextRequest { request, error in
                             self.handleFastDetectedText(request: request, error: error, photo: photo)
                         }
@@ -375,28 +350,19 @@ extension CachingViewController {
                         
                         request.progressHandler = { (request, value, error) in
                             print("Progress: \(value)")
-//                            self.updateStatusViewProgress(to: CGFloat(value))
                         }
-                        //DispatchQueue.global().async {
                         do {
                             try imageRequestHandler.perform([request])
                         } catch let error {
-            //                self.busyFastFinding = false
                             print("Error: \(error)")
                         }
                         
                         self.dispatchSemaphore.wait()
-            //                dispatchGroup.leave()
-            //            }
                     } else {
-//                        print("ALREADY!!")
                         self.count += 1
                         DispatchQueue.main.async {
                             self.numberCachedLabel.text = "\(self.count)/\(self.photos.count) photos cached"
                         }
-                                           
-//                        self.dispatchSemaphore.signal()
-//                        self.dispatchGroup.leave()
                         continue
                     }
                 } else {
@@ -523,7 +489,7 @@ extension CachingViewController {
         
         tintView.frame = CGRect(x: 10, y: 10, width: 160, height: 160)
         tintView.layer.cornerRadius = 2
-        tintView.backgroundColor = #colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 0.12)
+        tintView.backgroundColor = #colorLiteral(red: 0.0862745098, green: 0.6823529412, blue: 0.937254902, alpha: 0.25)
         rimView.addSubview(tintView)
         
         

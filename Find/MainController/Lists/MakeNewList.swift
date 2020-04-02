@@ -38,7 +38,7 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo, 
     var descriptionOfList = "No description..."
     var contents = [String]()
     var iconImageName = "square.grid.2x2"
-    var iconColorName = "#579f2b"
+    var iconColorName = "579f2b"
     var shouldDismiss = true
     
     func returnCompletedList() {
