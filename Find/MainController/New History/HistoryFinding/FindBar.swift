@@ -766,47 +766,66 @@ class SearchCollectionCell: UICollectionViewCell {
 
 
 extension FindBar: GiveFindbarMatchNumber {
-    func howMany(number: Int, inCache: Bool) {
-        print("number matches findbar: \(number)")
-        if inCache {
-            origCacheNumber = number
+    func howMany(number: Int, inCache: Bool, noSearchTerms: Bool) {
+        print("number matches findbar: \(number), no search? \(noSearchTerms) inCache: \(inCache)")
+        if noSearchTerms {
             DispatchQueue.main.async {
-                if number == 0 {
-                    self.resultsLabel.text = "No Matches in "
-                } else if number == 1 {
-                    self.resultsLabel.text = "1 Match in "
-                } else {
-                    self.resultsLabel.text = "\(number) Matches in "
-                }
-                
-//                let textH = 35
-                let imageRect = CGRect(x: 0, y: 2.5, width: 30, height: 30)
-                self.resultsLabel.addImageWith(name: "TextFieldCache", behindText: true, bounds: imageRect)
+                self.resultsLabel.text = ""
             }
         } else {
-            if number == -1 {
-                DispatchQueue.main.async {
-                    if self.origCacheNumber == 0 {
-                        self.resultsLabel.text = "No Matches"
-                    } else if number == 1 {
-                        self.resultsLabel.text = "1 Match "
-                    } else {
-                        self.resultsLabel.text = "\(self.origCacheNumber) Matches"
-                    }
-                }
-            } else {
+            if inCache {
+                origCacheNumber = number
                 DispatchQueue.main.async {
                     if number == 0 {
-                        self.resultsLabel.text = "No Matches"
+                        self.resultsLabel.text = "No Matches in "
                     } else if number == 1 {
+                        self.resultsLabel.text = "1 Match in "
+                    } else {
+                        self.resultsLabel.text = "\(number) Matches in "
+                    }
+                    print("mani asynccache: \(number)")
+    //                let textH = 35
+                    let imageRect = CGRect(x: 0, y: 2.5, width: 30, height: 30)
+                    self.resultsLabel.addImageWith(name: "TextFieldCache", behindText: true, bounds: imageRect)
+                }
+            } else {
+                let newNumber = origCacheNumber + number
+                print("newNNN ;\(newNumber)")
+                DispatchQueue.main.async {
+                    if newNumber == 0 {
+                        self.resultsLabel.text = "No Matches"
+                    } else if newNumber == 1 {
                         self.resultsLabel.text = "1 Match "
                     } else {
-                        self.resultsLabel.text = "\(number) Matches"
+                        self.resultsLabel.text = "\(newNumber) Matches"
                     }
                 }
             }
-            
         }
+//        else {
+//            if number == -1 {
+//                DispatchQueue.main.async {
+//                    if self.origCacheNumber == 0 {
+//                        self.resultsLabel.text = "No Matches"
+//                    } else if number == 1 {
+//                        self.resultsLabel.text = "1 Match "
+//                    } else {
+//                        self.resultsLabel.text = "\(self.origCacheNumber) Matches"
+//                    }
+//                }
+//            } else {
+//                DispatchQueue.main.async {
+//                    if number == 0 {
+//                        self.resultsLabel.text = "No Matches"
+//                    } else if number == 1 {
+//                        self.resultsLabel.text = "1 Match "
+//                    } else {
+//                        self.resultsLabel.text = "\(number) Matches"
+//                    }
+//                }
+//            }
+//
+//        }
     }
 }
 

@@ -232,17 +232,6 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
             generalSpaces["End", default: [Int]()].append(endSpace)
         }
         
-        
-       // print("General Spaces: \(generalSpaces)")
-        
-//        NotificationCenter.default.post(name: .hasEmptyString, object: nil, userInfo: [0: emptyStringErrors])
-//        NotificationCenter.default.post(name: .hasGeneralSpaces, object: nil, userInfo: generalSpaces)
-//        NotificationCenter.default.post(name: .hasDuplicates, object: nil, userInfo: stringToIndexesError)
-//
-        
-//        NotificationCenter.default.post(name: .hasStartSpace, object: [0: startSpaceWarning])
-//        NotificationCenter.default.post(name: .hasEndSpace, object: [0: endSpaceWarning])
-//        NotificationCenter.default.post(name: .hasSingleSpace, object: [0: singleSpaceWarning])
     }
     
         @IBOutlet weak var descDoneButton: UIButton!

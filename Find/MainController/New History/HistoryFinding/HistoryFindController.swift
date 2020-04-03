@@ -28,6 +28,9 @@ class HistoryFindController: UIViewController {
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
     var imageSize = CGSize(width: 0, height: 0)
     
+//    var cacheFindNumber = 0
+    var newOCRfindNumber = 0
+    
     @IBOutlet weak var warningView: UIView!
     @IBOutlet weak var warningLabel: UILabel!
     @IBOutlet weak var warningHeightC: NSLayoutConstraint!
@@ -58,6 +61,7 @@ class HistoryFindController: UIViewController {
     
 //    weak var editedFindbar: EditedFindBar?
     weak var changeFindbar: ChangeFindBar?
+    weak var giveNumber: GiveFindbarMatchNumber?
     
     var shouldAllowPressRow = true
     
@@ -68,6 +72,57 @@ class HistoryFindController: UIViewController {
     
     @IBOutlet weak var welcomeImageButton: UIButton!
     @IBAction func welcomeImageButtonPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewControllerPresent = storyboard.instantiateViewController(withIdentifier: "SingleHelp") as! SingleHelp
+        viewControllerPresent.topLabelText = "The Cache"
+        viewControllerPresent.urlString = "https://zjohnzheng.github.io/FindHelp/History-WhatIsTheCache.html"
+        viewControllerPresent.topViewColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+        
+        viewControllerPresent.view.layer.cornerRadius = 10
+        viewControllerPresent.view.clipsToBounds = true
+        viewControllerPresent.edgesForExtendedLayout = []
+        
+        var attributes = EKAttributes.centerFloat
+        attributes.displayDuration = .infinity
+        attributes.entryInteraction = .absorbTouches
+        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+        attributes.entryBackground = .color(color: .white)
+        attributes.screenInteraction = .absorbTouches
+        attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+        attributes.lifecycleEvents.willDisappear = {
+                    
+            var attributes = EKAttributes.bottomFloat
+            attributes.entryBackground = .color(color: .white)
+            attributes.entranceAnimation = .translation
+            attributes.exitAnimation = .translation
+            attributes.displayDuration = .infinity
+            attributes.positionConstraints.size.height = .constant(value: 60)
+            attributes.statusBar = .light
+            attributes.entryInteraction = .absorbTouches
+            attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+            attributes.roundCorners = .all(radius: 5)
+            attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
+            
+            let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
+            let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
+            attributes.positionConstraints.keyboardRelation = keyboardRelation
+            
+            let customView = FindBar()
+            customView.returnTerms = self
+            self.giveNumber = customView
+            
+            self.changeFindbar = customView
+            SwiftEntryKit.display(entry: customView, using: attributes)
+            
+            self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText)
+            
+            
+        }
+        
+        changeFindbar?.change(type: "GetLists")
+        SwiftEntryKit.display(entry: viewControllerPresent, using: attributes)
     }
     
     @IBOutlet weak var tableView: UITableView!
@@ -124,6 +179,7 @@ class HistoryFindController: UIViewController {
             let customView = FindBar()
 //            customView.selectedLists = self.savedSelectedLists
             customView.returnTerms = self
+            self.giveNumber = customView
             
             self.changeFindbar = customView
             SwiftEntryKit.display(entry: customView, using: attributes)
@@ -217,6 +273,7 @@ class HistoryFindController: UIViewController {
         let customView = FindBar()
         
         customView.returnTerms = self
+        self.giveNumber = customView
         customView.highlightColor = highlightColor
         
         self.changeFindbar = customView
@@ -526,7 +583,7 @@ extension HistoryFindController: ReturnSortedTerms {
         
         
         if matchToColors.keys.count == 0 {
-            
+            self.giveNumber?.howMany(number: 0, inCache: true, noSearchTerms: true)
             noResultsLabel.text = "Start by typing or selecting a list..."
             UIView.animate(withDuration: 0.1, animations: {
                 self.noResultsLabel.alpha = 1
@@ -538,6 +595,7 @@ extension HistoryFindController: ReturnSortedTerms {
             }
             resultPhotos.removeAll()
             tableView.reloadData()
+            
             
         } else {
             fastFind()
@@ -578,7 +636,7 @@ extension HistoryFindController: ReturnSortedTerms {
 
 extension HistoryFindController {
     func fastFind() {
-        
+        var totalMatchNumber = 0
         if numberOfFindRequests == 0 {
 //            self.tableView.isUserInteractionEnabled = false
             self.shouldAllowPressRow = false
@@ -637,6 +695,7 @@ extension HistoryFindController {
                             let indicies = lowercaseContText.indicesOf(string: match)
                             
                             for index in indicies {
+                                totalMatchNumber += 1
                                 num += 1
                                 let addedWidth = individualCharacterWidth * CGFloat(index)
                                 let finalX = CGFloat(cont.x) + addedWidth
@@ -648,55 +707,19 @@ extension HistoryFindController {
 //                                print("WIDT: \(finalW + 12)")
                                 newComponent.height = CGFloat(cont.height)
                                 newComponent.text = match
-    //                            newComponent.changed = false
-//                                if let parentList = self.stringToList[match] {
-//                                    switch parentList.descriptionOfList {
-//                                    case "Search Array List +0-109028304798614":
-////                                            print("Search Array")
-//                                            newComponent.parentList = self.currentSearchFindList
-//                                            newComponent.colors = [self.highlightColor]
-//                                    case "Shared Lists +0-109028304798614":
-////                                            print("Shared Lists")
-//                                            newComponent.parentList = self.currentListsSharedFindList
-//                                        newComponent.isSpecialType = "Shared List"
-//                                    case "Shared Text Lists +0-109028304798614":
-////                                            print("Shared Text Lists")
-//                                            newComponent.parentList = self.currentSearchAndListSharedFindList
-//                                        newComponent.isSpecialType = "Shared Text List"
-//                                    default:
-////                                            print("normal")
-//                                        newComponent.parentList = parentList
-//                                        newComponent.colors = [parentList.iconColorName]
-//                                    }
-//                                } else {
-//                                    print("ERROROROR! NO parent list!")
-//                                }
-                                
                                 newMod.components.append(newComponent)
                                 
                                 let newRangeObject = ArrayOfMatchesInComp()
                                 newRangeObject.descriptionRange = index...index + match.count
                                 newRangeObject.text = match
                                 matchRanges.append(newRangeObject)
-    //                            textToRanges[cont.text, default: [ClosedRange<Int>]()].append(index...index + match.count)
-                                
                             }
-                            
-                            
-                            
                         }
                     }
                         
                     if hasMatch == true {
-    //                    descStrings.append(cont.text)
-    //                    compRange.stringToRanges = index...index + match.count
-    //                    compRange.stringToRanges = textToRanges
-//                        print("COMOPP: \(matchRanges)")
-    //                    compMatches.append(matchRanges)
                         compMatches[cont.text] = matchRanges
-                        
                     }
-                
                     
                 }
                 
@@ -705,12 +728,6 @@ extension HistoryFindController {
                     var existingCount = 0
                     for (index, comp) in compMatches.enumerated() {
                         if index <= 2 {
-                            
-                            
-                            
-    //                        let thisCompString = comp.stringToRanges.first?.key
-                            
-                            
                             let thisCompString = comp.key
                             
                             if descriptionOfPhoto == "" {
@@ -732,41 +749,15 @@ extension HistoryFindController {
                                 
                                 
                                 finalRangesObjects.append(matchObject)
-//                                finalRanges.append(newRange)
-//                                let newRangeObject = ArrayOfMatchesInComp()
-//                                newRangeObject.descriptionRange = newRange
-//                                newRangeObject.text = comp.
                             }
                             let addedLength = 3 + thisCompString.count
                             existingCount += addedLength
-                            
-                            
-                            
-                            
-//                            let newRance =
-                            
-    //                        for matchCont in comp {
-    //
-    //                        }
-    //                        de
-    //                        let componentString = comp.
                             
                         }
                     }
                     
                     findModels.append(newMod)
                 }
-                
-//                print("RANGES: \(finalRanges)")
-                
-                
-//                newMod.descriptionMatchRanges = finalRanges
-                
-//                for range in finalRanges {
-//                    let newRangeObject = ArrayOfMatchesInComp()
-//                    newRangeObject.descriptionRange = range
-//                    newRangeObject.text
-//                }
                 newMod.descriptionMatchRanges = finalRangesObjects
                 newMod.numberOfMatches = num
                 newMod.descriptionText = descriptionOfPhoto
@@ -779,6 +770,14 @@ extension HistoryFindController {
             }
 //            print("FIND COUNT: \(findModels.count)")
             self.resultPhotos = findModels
+            
+            print("TOF IND NUMBER: \(totalMatchNumber)")
+            if self.matchToColors.count == 0 {
+                self.giveNumber?.howMany(number: totalMatchNumber, inCache: true, noSearchTerms: true)
+            } else {
+                self.giveNumber?.howMany(number: totalMatchNumber, inCache: true, noSearchTerms: false)
+            }
+            
             
             DispatchQueue.main.async {
                 
@@ -820,11 +819,14 @@ extension HistoryFindController {
                     
                     
                     self.tableView.reloadData()
+//                    self.cacheFindNumber = totalMatchNumber
                     
                 }
+                
             }
             
         }
+        
         
     }
     
@@ -872,6 +874,7 @@ extension HistoryFindController: ZoomAnimatorDelegate {
             let customView = FindBar()
     //            customView.selectedLists = self.savedSelectedLists
             customView.returnTerms = self
+            self.giveNumber = customView
             
             self.changeFindbar = customView
             SwiftEntryKit.display(entry: customView, using: attributes)
@@ -1142,6 +1145,7 @@ extension HistoryFindController {
 
 extension HistoryFindController {
     func ocrFind() {
+        newOCRfindNumber = 0
         ocrSearching = true
         
         DispatchQueue.main.async {
@@ -1383,6 +1387,8 @@ extension HistoryFindController {
                     
                     existingModel.components += componentsToAdd
                     existingModel.numberOfMatches += newMatchesNumber
+                    
+                    newOCRfindNumber += newMatchesNumber
                     print("ADD MATCHES: \(newMatchesNumber)")
 //                    for cont in conte
 //                    existingModel.photo.contents.append(contents)
@@ -1404,6 +1410,7 @@ extension HistoryFindController {
                 newMod.components = findComponents
                 
                 resultPhotos.append(newMod)
+                newOCRfindNumber += numberOfMatches
                 
             }
             
@@ -1421,6 +1428,13 @@ extension HistoryFindController {
     }
     
     func finishOCR() {
+//        let totalMatches = newOCRfindNumber + cacheFindNumber
+//        giveNumber?.howMany(number: newOCRfindNumber, inCache: false)
+        if matchToColors.count == 0 {
+            self.giveNumber?.howMany(number: newOCRfindNumber, inCache: false, noSearchTerms: true)
+        } else {
+            self.giveNumber?.howMany(number: newOCRfindNumber, inCache: false, noSearchTerms: false)
+        }
         DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()
             self.histCenterC.constant = 0
@@ -1475,3 +1489,4 @@ extension HistoryFindController {
         return CGFloat(xDist * xDist + yDist * yDist)
     }
 }
+

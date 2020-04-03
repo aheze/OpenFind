@@ -219,6 +219,12 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //            swipedToDismiss = true
         }
     }
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     func fadeSelectOptions(fadeOut: String) {
         switch fadeOut {
@@ -348,25 +354,13 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         populateRealm()
         sortHist()
         getData()
-//        clearHistoryImages()
-        
         selectButton.layer.cornerRadius = 6
         selectAll.layer.cornerRadius = 6
         fadeSelectOptions(fadeOut: "firstTimeSetup")
         deselectAllItems(deselect: true)
-        
-//        changeFloatDelegate?.changeFloat(to: "Disable")
-//        indexPathsSelected.removeAll()
-        //self.transitioningDelegate = transitionDelegate
-//        let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
-//        layout?.sectionHeadersPinToVisibleBounds = true
-//        print("asd")
         collectionView?.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 82, right: 16)
-        
-//        print("asdcontent")
         if photoCategories?.count ?? 0 > 0 {
             if let samplePath = photoCategories?[0] {
-//                print("asdsample")
                 let urlString = "\(folderURL)\(samplePath.filePath)"
                 if let newURL = URL(string: urlString) {
                     if let newImage = newURL.loadImageFromDocumentDirectory() {
@@ -375,16 +369,32 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 }
             }
         }
-//        if let sampleDate = sectionToDate[0] {
-//            if let sampleImagePath = dateToFilepaths[sampleDate] {
-//                if let newImage = loadImageFromDocumentDirectory(urlOfFile: sampleImagePath.first!) {
-//                    imageSize = newImage.size
-//                }
-//            }
-//        }
-//        setUpXButton()
-        
         indexPathsSelected.removeAll()
+        
+        let defaults = UserDefaults.standard
+        let historyViewedBefore = defaults.bool(forKey: "historyViewedBefore")
+        if historyViewedBefore == false {
+            defaults.set(true, forKey: "historyViewedBefore")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "HistoryTutorialViewController") as! HistoryTutorialViewController
+            vc.view.layer.cornerRadius = 10
+            vc.view.clipsToBounds = true
+            
+            var attributes = EKAttributes.centerFloat
+            attributes.displayDuration = .infinity
+            attributes.entryInteraction = .absorbTouches
+            attributes.scroll = .disabled
+            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+            attributes.entryBackground = .color(color: .white)
+            attributes.screenInteraction = .absorbTouches
+            attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                SwiftEntryKit.display(entry: vc, using: attributes)
+            })
+            
+        }
     }
     override func present(_ viewControllerToPresent: UIViewController,
                           animated flag: Bool,

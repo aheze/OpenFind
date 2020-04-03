@@ -58,7 +58,7 @@ class FooterView: UICollectionReusableView {
         
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
-        shapeLayer.fillColor = UIColor(named: "BackgroundHist")?.cgColor
+        shapeLayer.fillColor = UIColor(named: "Gray2")?.cgColor
         self.layer.addSublayer(shapeLayer)
     }
     

@@ -52,40 +52,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var controlsBottomC: NSLayoutConstraint! //15
     
     @IBOutlet weak var contentTopC: NSLayoutConstraint!
-    //8
+    //15
     
     @IBOutlet var pinchGesture: UIPinchGestureRecognizer!
     var shouldPinch = true
     @IBAction func pinchGesture(_ sender: UIPinchGestureRecognizer) {
-//        print("PINCH: \(sender.scale)")
-//        print("STATE: \(sender.state)")
-//        if shouldPinch {
-//            shouldPinch = false
-//        if sender.state == UIGestureRecognizer.State.began {
-//            UIView.animate(withDuration: 0.2, animations: {
-//                self.searchContentView.alpha = 1
-//                self.controlsView.alpha = 1
-//                self.controlsBlurView.alpha = 0
-//            })
-//        }
-        
-//        if sender.scale >= 1 {
-//            if shouldPinch {
-                controlsBottomC.constant = 15 - (sender.scale * 50)
-                contentTopC.constant = 8 - (sender.scale * 50)
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.view.layoutIfNeeded()
-                })
-              
-//            }
-//        } else {
-//            controlsBottomC.constant = 15
-//            contentTopC.constant = 8
-//            UIView.animate(withDuration: 0.4, animations: {
-//                self.view.layoutIfNeeded()
-//            })
-//        }
-//
+        controlsBottomC.constant = 15 - (sender.scale * 50)
+        contentTopC.constant = 15 - (sender.scale * 50)
+        UIView.animate(withDuration: 0.2, animations: {
+            self.view.layoutIfNeeded()
+        })
         if sender.state == UIGestureRecognizer.State.ended {
             if sender.scale >= 1.3 {
                 print("DIEMI")
@@ -109,9 +85,7 @@ class ViewController: UIViewController {
                     self.shouldPinch = true
                 }
             } else {
-                print("cancel")
                 revealControls()
-                
             }
         }
         
@@ -127,8 +101,7 @@ class ViewController: UIViewController {
         controlsView.isHidden = false
         controlsBlurView.isHidden = true
         controlsBottomC.constant = 15
-        contentTopC.constant
-         = 8
+        contentTopC.constant = 15
         UIView.animate(withDuration: 0.4, animations: {
             self.view.layoutIfNeeded()
             self.searchContentView.alpha = 1
@@ -393,15 +366,25 @@ class ViewController: UIViewController {
    
     var initialAttitude: CMAttitude?
     //var refAttitudeReferenceFrame: CMAttitudeReferenceFrame?
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        if #available(iOS 13.0, *) {
+////            return .
+//        } else {
+//            return .lightContent
+//        }
+//    }
     
+    override var prefersStatusBarHidden: Bool {
+        return true  
+    }
  
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         pinchGesture.delegate = self
         self.modalPresentationStyle = .automatic
+        
+        UIApplication.shared.isStatusBarHidden = true
         readDefaultsValues()
         
         controlsBlurView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
@@ -409,25 +392,11 @@ class ViewController: UIViewController {
         controlsBlurView.layer.cornerRadius = 8
         controlsBlurView.clipsToBounds = true
         controlsBlurView.isHidden = true
-        
-//        changeDelegate = statusView as? ChangeStatusValue
-        
-        
-//        highlightColor
-        
         numberLabel.isHidden = false
         updateMatchesNumber(to: 0)
-       
-//        loadListsRealm()
         setUpButtons()
-        setUpTimers()
-        
         setUpTempImageView()
-        
-//        setUpRamReel()
         setUpSearchBar()
-        
-        
         setUpFilePath()
         
         
@@ -439,8 +408,6 @@ class ViewController: UIViewController {
         
         motionManager = CMMotionManager()
         motionManager.deviceMotionUpdateInterval = 0.01
-        
-        
        //  initial configuration
         if let deviceMot = motionManager.deviceMotion?.attitude {
             initialAttitude = deviceMot
@@ -451,19 +418,13 @@ class ViewController: UIViewController {
             guard let data = data, error == nil else {
                 return
             }
-            // translate the attitude
             self?.updateHighlightOrientations(attitude: data.attitude)
         }
         
     }
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(true)
-//        //classicHasFoundOne = false
-//        print("diss")
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .lightContent
 //    }
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
     // get magnitude of vector via Pythagorean theorem
     func getMagnitude(from attitude: CMAttitude) -> Double {
         return sqrt(pow(attitude.roll, 2) +
@@ -475,7 +436,6 @@ class ViewController: UIViewController {
         
         if let hexString = defaults.string(forKey: "highlightColor") {
             highlightColor = hexString
-//            print("COLOR: \(hexString)")
         }
         
         let showText = defaults.bool(forKey: "showTextDetectIndicator")
@@ -504,32 +464,22 @@ class ViewController: UIViewController {
 extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     // MARK: - Camera Delegate and Setup
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        
         currentPassCount += 1
-//        print("PASS: \(currentPassCount)")
-        
-        
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
         }
         if busyFastFinding == false && allowSearch == true {
-//            print("fastFind!!")
             fastFind(in: pixelBuffer)
         }
-        
-        
         guard captureCompletionBlock != nil,
             let outputImage = UIImage(pixBuffer: pixelBuffer) else { return }
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if let captureCompletionBlock = self.captureCompletionBlock {
-                //print("askdh")
                 captureCompletionBlock(outputImage)
-                //AudioServicesPlayAlertSound(SystemSoundID(1108))
             }
             self.captureCompletionBlock = nil
         }
-        
     }
 }
 extension UIImage {
@@ -549,6 +499,3 @@ extension UIImage {
         self.init(cgImage: cgImage)
     }
 }
-//extension Notification.Name {
-//     static let toggleCreateName = Notification.Name("toggleCreateName")
-//}

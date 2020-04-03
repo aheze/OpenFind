@@ -145,7 +145,7 @@ class LaunchViewController: UIViewController {
         let defaults = UserDefaults.standard
         let launchedBefore = defaults.bool(forKey: "launchedBefore")
         //launchedBefore == false
-        if true {
+        if launchedBefore == false {
             print("FIRST LAUNCH")
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                 self.drawAnimation(type: "onboarding")
@@ -374,6 +374,7 @@ class LaunchViewController: UIViewController {
                     let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController")
                     viewController.modalTransitionStyle = .crossDissolve
                     viewController.modalPresentationStyle = .overCurrentContext
+                    viewController.modalPresentationCapturesStatusBarAppearance = true
 //                    viewController.transitioningDelegate = self
                     self.present(viewController, animated: true, completion: nil)
                 })
@@ -420,7 +421,7 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
     
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
       return [
-        OnboardingItemInfo(informationImage: UIImage(named: "Leica Sample")!,
+        OnboardingItemInfo(informationImage: UIImage(named: "Swelcome")!,
                                       title: "Welcome to Find",
                                 description: "Swipe to get started",
                                    pageIcon: UIImage(),
@@ -430,7 +431,7 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
                            titleFont: UIFont.systemFont(ofSize: 30, weight: .bold),
                             descriptionFont: UIFont.systemFont(ofSize: 17)),
         
-        OnboardingItemInfo(informationImage: UIImage(named: "Leica Sample")!,
+        OnboardingItemInfo(informationImage: UIImage(named: "Swhatis")!,
                    title: "What is Find?",
              description: "Find is Command+F for camera. Find words in books, worksheets, nutrition labels... Anywhere as long as there's text!",
                 pageIcon: UIImage(named: "1icon")!,
@@ -440,7 +441,7 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
         titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
          descriptionFont: UIFont.systemFont(ofSize: 17)),
         
-        OnboardingItemInfo(informationImage: UIImage(named: "Leica Sample")!,
+        OnboardingItemInfo(informationImage: UIImage(named: "Ssearchfield")!,
                    title: "Find words",
              description: "Tap the Search Field at the top of the screen",
                 pageIcon: UIImage(named: "2icon")!,
@@ -450,7 +451,7 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
         titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
          descriptionFont: UIFont.systemFont(ofSize: 17)),
 
-        OnboardingItemInfo(informationImage: UIImage(named: "Leica Sample")!,
+        OnboardingItemInfo(informationImage: UIImage(named: "Sshutter")!,
                    title: "Take photos",
              description: "Tap the shutter button. Later, you can come back to these and Find from them again and again and again...",
                 pageIcon: UIImage(named: "3icon")!,
@@ -460,7 +461,7 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
         titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
          descriptionFont: UIFont.systemFont(ofSize: 17)),
 
-       OnboardingItemInfo(informationImage: UIImage(named: "Leica Sample")!,
+       OnboardingItemInfo(informationImage: UIImage(named: "Smenu")!,
                   title: "Access the Menu",
             description: "Your History, Lists, and Settings are here. Check it out!",
                pageIcon: UIImage(named: "4icon")!,
@@ -470,7 +471,7 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
        titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
         descriptionFont: UIFont.systemFont(ofSize: 17)),
        
-       OnboardingItemInfo(informationImage: UIImage(named: "Leica Sample")!,
+       OnboardingItemInfo(informationImage: UIImage(named: "Sjitter")!,
                   title: "Before you start...",
             description: "To ensure the most accurate results, please make sure to hold your phone as steady as possible.",
                pageIcon: UIImage(named: "5icon")!,
@@ -484,7 +485,8 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
 
 //    func onboardingConfigurationItem(_ item: OnboardingContentViewItem, index: Int) {
 //        // config labels
-//        item.
+//        item.informationImageWidthConstraint?.constant = 250
+//        item.informationImageHeightConstraint?.constant = 250
 //    }
     
     func onboardingItemsCount() -> Int {

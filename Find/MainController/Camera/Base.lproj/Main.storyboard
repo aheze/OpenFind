@@ -205,7 +205,7 @@
                                 <gestureRecognizers/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1uu-Wl-x4d">
-                                <rect key="frame" x="16" y="123" width="382" height="6"/>
+                                <rect key="frame" x="16" y="130" width="382" height="6"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHm-ND-D9k">
                                         <rect key="frame" x="170" y="-7" width="42" height="20.5"/>
@@ -330,7 +330,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kV4-Eg-1Ee" userLabel="Content">
-                                <rect key="frame" x="8" y="52" width="398" height="71"/>
+                                <rect key="frame" x="8" y="59" width="398" height="71"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SjR-c7-NyL" userLabel="darkBlurEffect">
                                         <rect key="frame" x="0.0" y="0.0" width="398" height="71"/>
@@ -529,7 +529,7 @@
                             <constraint firstItem="oNn-cV-T8L" firstAttribute="trailing" secondItem="bCb-2s-qjS" secondAttribute="trailing" id="mkd-kI-UdL"/>
                             <constraint firstAttribute="bottom" secondItem="JxZ-Kx-qvm" secondAttribute="bottom" id="pjX-NH-ygd"/>
                             <constraint firstItem="JxZ-Kx-qvm" firstAttribute="leading" secondItem="oNn-cV-T8L" secondAttribute="leading" id="tOd-68-VJs"/>
-                            <constraint firstItem="kV4-Eg-1Ee" firstAttribute="top" secondItem="oNn-cV-T8L" secondAttribute="top" constant="8" id="uYI-qs-zLw"/>
+                            <constraint firstItem="kV4-Eg-1Ee" firstAttribute="top" secondItem="oNn-cV-T8L" secondAttribute="top" constant="15" id="uYI-qs-zLw"/>
                             <constraint firstItem="oNn-cV-T8L" firstAttribute="trailing" secondItem="kV4-Eg-1Ee" secondAttribute="trailing" constant="8" id="z0X-1C-qfr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oNn-cV-T8L"/>
@@ -622,7 +622,7 @@
                                         </constraints>
                                         <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
                                         <state key="normal" title="Select">
-                                            <color key="titleColor" name="LinkColor"/>
+                                            <color key="titleColor" name="SelectLabel"/>
                                         </state>
                                         <connections>
                                             <action selector="selectPressed:" destination="bN2-ri-A2h" eventType="touchUpInside" id="zF5-BZ-HSg"/>
@@ -684,14 +684,14 @@
                                                             <color key="textColor" name="PureBlack"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="Short Description jlsdjflsdl lsdkjlkj sldfjlk lsdjfldkjflsdj lkjlsdf" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLH-OC-Hjk">
-                                                            <rect key="frame" x="10" y="104.5" width="168" height="57.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" text="Short Description jlsdjflsdl lsdkjlkj sldfjlk lsdjfldkjflsdj lkjlsdf" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLH-OC-Hjk">
+                                                            <rect key="frame" x="10" y="104.5" width="168" height="86.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <color key="textColor" name="PureBlack"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="Matches" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CeU-8I-rNo">
-                                                            <rect key="frame" x="54.5" y="170" width="79" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="Matches:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CeU-8I-rNo">
+                                                            <rect key="frame" x="51.5" y="199" width="85" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="s6G-EH-sTt"/>
                                                             </constraints>
@@ -699,8 +699,8 @@
                                                             <color key="textColor" name="PureBlack"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAM-2B-UZG">
-                                                            <rect key="frame" x="10" y="197" width="168" height="144"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="749" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAM-2B-UZG">
+                                                            <rect key="frame" x="10" y="226" width="168" height="115"/>
                                                             <string key="text">Contents asjdasd ladjlkj alkdjla dakljdla dlkaj aljdlka ljlka sdjlakdjla lkajd laskdj lakdjls dklajsd lakj aljd aljdla sdjlkadlkj lasd</string>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <color key="textColor" name="PureBlack"/>
@@ -1578,7 +1578,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" name="Gray3"/>
+                                                <color key="backgroundColor" name="Gray1"/>
                                                 <constraints>
                                                     <constraint firstItem="vZ6-oK-Otx" firstAttribute="centerX" secondItem="pa4-4L-yZS" secondAttribute="centerX" id="JDW-OD-x2T"/>
                                                     <constraint firstAttribute="height" constant="40" id="VhV-W7-g4R"/>
@@ -1667,7 +1667,7 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" name="Gray4"/>
+                                        <color key="backgroundColor" name="Gray2"/>
                                         <constraints>
                                             <constraint firstItem="Rei-xf-Qmm" firstAttribute="top" secondItem="pa4-4L-yZS" secondAttribute="bottom" id="2jw-0O-UWI"/>
                                             <constraint firstItem="fSu-od-i3x" firstAttribute="centerX" secondItem="Vvt-RF-KwY" secondAttribute="centerX" id="4fd-kL-XZu"/>
@@ -2000,7 +2000,7 @@
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2AD-bM-2xX">
                                 <rect key="frame" x="0.0" y="70" width="414" height="772"/>
-                                <color key="backgroundColor" name="BackgroundHist"/>
+                                <color key="backgroundColor" name="Gray2"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KF3-Nz-BPc">
                                     <size key="itemSize" width="111" height="121"/>
                                     <size key="headerReferenceSize" width="50" height="50"/>
@@ -2062,7 +2062,7 @@
                                                 <constraint firstItem="I6e-Mc-odJ" firstAttribute="top" secondItem="kAz-R9-g6N" secondAttribute="top" constant="8" id="yb9-Ni-gVe"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <color key="backgroundColor" name="BackgroundHist"/>
+                                        <color key="backgroundColor" name="Gray2"/>
                                         <size key="customSize" width="150" height="150"/>
                                         <connections>
                                             <outlet property="cachedView" destination="d8E-vd-L7N" id="6iq-fE-79T"/>
@@ -2080,11 +2080,13 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLd-De-xUV">
                                             <rect key="frame" x="20" y="16" width="56" height="26"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="22"/>
                                             <color key="textColor" name="HistoryTitle"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="oLd-De-xUV" firstAttribute="leading" secondItem="J83-Ow-MpB" secondAttribute="leadingMargin" constant="12" id="2ur-Bg-gRK"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="oLd-De-xUV" secondAttribute="bottom" id="FKD-dY-XgC"/>
@@ -2103,7 +2105,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Gray2"/>
                         <constraints>
                             <constraint firstItem="F4l-AI-AMm" firstAttribute="top" secondItem="54Q-xX-W9S" secondAttribute="top" id="34W-7F-SM7"/>
                             <constraint firstItem="54Q-xX-W9S" firstAttribute="trailing" secondItem="2AD-bM-2xX" secondAttribute="trailing" id="5kv-hD-Vzb"/>
@@ -3872,9 +3874,6 @@ the App!</string>
         <image name="square.grid.2x2" catalog="system" width="64" height="56"/>
         <image name="trash" catalog="system" width="60" height="64"/>
         <image name="xmark" catalog="system" width="64" height="56"/>
-        <namedColor name="BackgroundHist">
-            <color red="0.89800000190734863" green="0.89800000190734863" blue="0.9179999828338623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="BlackWhite">
             <color red="0.14200000464916229" green="0.14200000464916229" blue="0.14200000464916229" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -3900,7 +3899,7 @@ the App!</string>
             <color red="0.024000000208616257" green="0.50999999046325684" blue="0.70200002193450928" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="LinkColor">
-            <color red="0.0" green="0.50800001621246338" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.50999999046325684" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="PureBlack">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

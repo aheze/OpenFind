@@ -31,22 +31,6 @@ extension ViewController {
         DispatchQueue.main.async {
             self.numberLabel.fadeTransition(0.1)
             self.numberLabel.text = "\(number)"
-//            if number == 0 {
-//                self.upButton.isEnabled = false
-//                self.downButton.isEnabled = false
-//            } else {
-//                self.upButton.isEnabled = true
-//                self.downButton.isEnabled = true
-//            }
-//
-//    //        else if number - 1 == tempComponents.count {
-//    //            downButton.isEnabled = false
-//    //        } else {
-//    //            upButton.isEnabled = true
-//    //            downButton.isEnabled = true
-//    //        }
-//            self.numberDenomLabel.fadeTransition(0.3)
-//            self.numberDenomLabel.text = "\(number)"
         }
         previousNumberOfMatches = number
     }

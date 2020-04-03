@@ -28,7 +28,7 @@ class TitleSupplementaryView: UICollectionReusableView {
     
     func createRectangle() {
         //print("frame: \(self.frame)")
-        
+        print("RECT")
         let arcRadius = CGFloat(4)
         let width = self.frame.size.width
         //print(self.frame.size.height)
@@ -61,7 +61,7 @@ class TitleSupplementaryView: UICollectionReusableView {
         
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
-        shapeLayer.fillColor = UIColor(named: "BackgroundHist")?.cgColor
+        shapeLayer.fillColor = UIColor(named: "Gray2")?.cgColor
         self.layer.insertSublayer(shapeLayer, below: todayLabel.layer)
     }
 //    let label = UILabel()

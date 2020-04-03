@@ -221,26 +221,38 @@ extension ViewController {
             }
 
             let newView = UIView(frame: CGRect(x: component.x, y: component.y, width: component.width, height: component.height))
+            newView.alpha = 0
             self.view.insertSubview(newView, aboveSubview: self.cameraView)
             
             newView.layer.addSublayer(layer)
             newView.clipsToBounds = false
             
-            let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
-            strokeAnimation.fromValue = 0
-            strokeAnimation.toValue = 1
-            strokeAnimation.duration = 0.3
-            strokeAnimation.autoreverses = false
-            strokeAnimation.repeatCount = 0
+            
             let x = newLayer.bounds.size.width / 2
             let y = newLayer.bounds.size.height / 2
-            
             newLayer.position = CGPoint(x: x, y: y)
-            newLayer.add(strokeAnimation, forKey: "line")
             component.baseView = newView
             component.changed = true
             
-            self.layerScaleAnimation(layer: newLayer, duration: 0.2, fromValue: 1.2, toValue: 1)
+            
+//            print("Count pass: \(self.currentPassCount)  :: curr diff: \(self.nextComponents.count - self.previousNumberOfMatches)")
+            UIView.animate(withDuration: 0.15, animations: {
+                newView.alpha = 1
+            })
+            if self.nextComponents.count > self.previousNumberOfMatches {
+//                if self.currentPassCount >= 100 {
+                    print("STROKE END!!")
+                    let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
+                    strokeAnimation.fromValue = 0
+                    strokeAnimation.toValue = 1
+                    strokeAnimation.duration = 0.3
+                    strokeAnimation.autoreverses = false
+                    strokeAnimation.repeatCount = 0
+                    newLayer.add(strokeAnimation, forKey: "line")
+                    self.layerScaleAnimation(layer: newLayer, duration: 0.2, fromValue: 1.2, toValue: 1)
+//                }
+            }
+            
         }
         self.tempComponents.append(component)
     }
@@ -254,7 +266,6 @@ extension ViewController {
     func layerScaleAnimation(layer: CALayer, duration: CFTimeInterval, fromValue: CGFloat, toValue: CGFloat) {
         let timing = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
         let scaleAnimation: CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
-
         CATransaction.begin()
         CATransaction.setAnimationTimingFunction(timing)
         scaleAnimation.duration = duration

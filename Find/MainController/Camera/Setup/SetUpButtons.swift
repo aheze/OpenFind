@@ -82,17 +82,19 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
                 segue.destination.presentationController?.delegate = self
                 let destinationVC = segue.destination as! SettingsViewController
                 destinationVC.folderURL = globalUrl
+                destinationVC.modalPresentationCapturesStatusBarAppearance = true
             case "goToNewHistory":
                 segue.destination.presentationController?.delegate = self
                 let destinationVC = segue.destination as! NewHistoryViewController
                 destinationVC.folderURL = globalUrl
                 destinationVC.highlightColor = highlightColor
+                destinationVC.modalPresentationCapturesStatusBarAppearance = true
                 //destinationVC.modalPresentationStyle = .fullScreen
             case "goToLists" :
+                let destinationVC = segue.destination as! ListController
+                destinationVC.modalPresentationCapturesStatusBarAppearance = true
                 segue.destination.presentationController?.delegate = self
-            case "goToFullScreen":
-                print("full screen")
-                default:
+            default:
                     print("default, something wrong")
             }
         

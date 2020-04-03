@@ -16,6 +16,32 @@ class HelpObject: NSObject {
     var urlPath = ""
 }
 //Proto
+
+class PresentHelp {
+    static func displayWithURL(urlString: String, topLabelText: String, color: UIColor) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewControllerPresent = storyboard.instantiateViewController(withIdentifier: "SingleHelp") as! SingleHelp
+        viewControllerPresent.topLabelText = topLabelText
+        viewControllerPresent.urlString = urlString
+        viewControllerPresent.topViewColor = color
+        
+        viewControllerPresent.view.layer.cornerRadius = 10
+//        view.layer.cornerRadius = 10
+        viewControllerPresent.view.clipsToBounds = true
+        viewControllerPresent.edgesForExtendedLayout = []
+        
+        var attributes = EKAttributes.centerFloat
+        attributes.displayDuration = .infinity
+        attributes.entryInteraction = .absorbTouches
+        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+        attributes.entryBackground = .color(color: .white)
+        attributes.screenInteraction = .absorbTouches
+        attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+        SwiftEntryKit.display(entry: viewControllerPresent, using: attributes)
+    }
+}
 class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
 //    var arrayOfHelp = [String]()

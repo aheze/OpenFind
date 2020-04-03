@@ -137,6 +137,13 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         
       
     }
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "makeNewListSegue" {
@@ -245,8 +252,31 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         getData()
         collectionView.delaysContentTouches = false
         selectButton.layer.cornerRadius = 6
-//        addHeight()
-//        print("Cellheights: \(cellHeights)")
+        
+        let defaults = UserDefaults.standard
+        let listsViewedBefore = defaults.bool(forKey: "listsViewedBefore")
+        if listsViewedBefore == false {
+            defaults.set(true, forKey: "listsViewedBefore")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ListsTutorialViewController") as! ListsTutorialViewController
+            vc.view.layer.cornerRadius = 10
+            vc.view.clipsToBounds = true
+            
+            var attributes = EKAttributes.centerFloat
+            attributes.displayDuration = .infinity
+            attributes.entryInteraction = .absorbTouches
+            attributes.scroll = .disabled
+            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+            attributes.entryBackground = .color(color: .white)
+            attributes.screenInteraction = .absorbTouches
+            attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                SwiftEntryKit.display(entry: vc, using: attributes)
+            })
+        }
+        
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
