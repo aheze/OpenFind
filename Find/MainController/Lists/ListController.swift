@@ -14,6 +14,7 @@ import SPAlert
 
 protocol ChangeNumberOfSelectedList: class {
     func changeLabel(to: Int)
+    func disablePress(disable: Bool)
 }
 class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLayoutDelegate, UIAdaptivePresentationControllerDelegate, NewListMade, TellControllerToDeleteList {
 //    var cellHeights = [CGFloat]()
@@ -197,6 +198,11 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
     var indexPathsSelected = [Int]()
     var numberOfSelected = 0 {
         didSet {
+            if numberOfSelected == 0 {
+                changeNumberDelegateList?.disablePress(disable: true)
+            } else {
+                changeNumberDelegateList?.disablePress(disable: false)
+            }
             changeNumberDelegateList?.changeLabel(to: numberOfSelected)
         }
     }
@@ -645,8 +651,9 @@ extension ListController {
                     make.center.equalToSuperview()
                 }
                 
-                
                 SwiftEntryKit.display(entry: contentView, using: attributes)
+                
+                
                 
                 selectButtonSelected = false
                 fadeSelectOptions(fadeOut: "fade out")
@@ -679,7 +686,7 @@ extension ListController {
                 //changeNumberDelegate?.changeLabel(to: 4)
                 SwiftEntryKit.display(entry: customView, using: attributes)
 //                enterSelectMode(entering: true)
-                
+                changeNumberDelegateList?.disablePress(disable: true)
                 selectButton.setTitle("Cancel", for: .normal)
                 UIView.animate(withDuration: 0.1, animations: {
                     self.view.layoutIfNeeded()

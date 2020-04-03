@@ -20,31 +20,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         if let defaultRealmPath = Realm.Configuration.defaultConfiguration.fileURL {
-            print("DEFUALT PATH: \(defaultRealmPath), \(defaultRealmPath.absoluteString)")
-            let bundleRealmPath = Bundle.main.url(forResource: "defaultSeeds", withExtension: "realm")
-            print("realmP;|  \(bundleRealmPath)")
-            print("copy?")
-            if !FileManager.default.fileExists(atPath: defaultRealmPath.absoluteString) {
-                do {
-                    try FileManager.default.copyItem(at: bundleRealmPath!, to: defaultRealmPath)
-                } catch let error {
-                    print("error copying seeds: \(error)")
+//            print("DEFUALT PATH: \(defaultRealmPath), string: \(defaultRealmPath.absoluteString), pat; \(defaultRealmPath.path)")
+            if let bundleRealmPath = Bundle.main.url(forResource: "defaultSeeds", withExtension: "realm") {
+//                print("realm bundle path:  \(bundleRealmPath)")
+//                print("copy?")
+                if !FileManager.default.fileExists(atPath: defaultRealmPath.path) {
+//                    print("FIRST!!")
+                    do {
+                        try FileManager.default.copyItem(at: bundleRealmPath, to: defaultRealmPath)
+                    } catch let error {
+                        print("error copying seeds: \(error)")
+                    }
                 }
             }
-        } else {
-            print("NOT EXIS")
         }
         
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 14,
+            schemaVersion: 15,
 
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
                 // We haven’t migrated anything yet, so oldSchemaVersion == 0
-                if (oldSchemaVersion < 14) {
+                if (oldSchemaVersion < 15) {
                     
 //                    migration.deleteData(forType: "RecentSymbol")
 //                    migration.deleteData(forType: "RealmPhoto")

@@ -27,6 +27,15 @@ class ListSelect: UIView, ChangeNumberOfSelectedList {
         }
         
     }
+    
+    func disablePress(disable: Bool) {
+        if disable == true {
+            deleteButton.isEnabled = false
+        } else {
+            deleteButton.isEnabled = true
+        }
+        
+    }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setUp()

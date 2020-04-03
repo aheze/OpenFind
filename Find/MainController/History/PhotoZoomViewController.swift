@@ -506,3 +506,4 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
         return CGFloat(xDist * xDist + yDist * yDist)
     }
 }
+

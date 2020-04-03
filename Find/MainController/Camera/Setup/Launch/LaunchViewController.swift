@@ -70,7 +70,40 @@ class LaunchViewController: UIViewController {
     
     @IBOutlet weak var settingsPictureView: UIImageView!
     
-    
+    @IBOutlet weak var skipButton: UIButton!
+    @IBAction func skipPressed(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        defaults.set(true, forKey: "launchedBefore")
+        defaults.set("00AEEF", forKey: "highlightColor")
+        
+        defaults.set(true, forKey: "showTextDetectIndicator")
+        defaults.set(true, forKey: "hapticFeedback")
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.onboarding.alpha = 0
+            self.onboarding.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
+            self.getStartedButton.alpha = 0
+            self.getStartedButton.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
+        })
+        
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            print("Authourized")
+            self.drawAnimation(type: "fullScreenStart")
+        case .notDetermined:
+            print("ND")
+            shouldGoToSettings = false
+            self.drawAnimation(type: "needPermissions")
+        case .denied:
+            print("D")
+            firstTimeDeny = true
+            shouldGoToSettings = true
+            self.drawAnimation(type: "DENIED")
+        case .restricted:
+            print("R")
+            self.drawAnimation(type: "Restricted")
+        }
+    }
     let onboarding = PaperOnboarding()
     @IBOutlet weak var getStartedButton: UIButton!
     @IBAction func getStartedPressed(_ sender: Any) {
@@ -107,8 +140,6 @@ class LaunchViewController: UIViewController {
             self.drawAnimation(type: "Restricted")
         }
         
-        
-        
     }
     var bottomOnboardingConstraint: Constraint? = nil
     
@@ -121,6 +152,9 @@ class LaunchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        skipButton.alpha = 0
+        skipButton.isHidden = true
         
         getStartedButton.alpha = 0
         getStartedButton.isHidden = true
@@ -329,7 +363,7 @@ class LaunchViewController: UIViewController {
 //                getStarter
                 
                 self.view.layoutIfNeeded()
-                
+                self.view.bringSubviewToFront(self.skipButton)
                 
                 
                 self.totalWidthC.constant = availibleWidth
@@ -362,6 +396,10 @@ class LaunchViewController: UIViewController {
                     self.bottomRightImageView.startAnimating()
                 }) { _ in
                     self.getStartedButton.isHidden = false
+                    self.skipButton.isHidden = false
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.skipButton.alpha = 1
+                    })
                 }
             case "fullScreenStart":
                 let finalWidth = self.deviceSize.width
@@ -398,6 +436,20 @@ class LaunchViewController: UIViewController {
 extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSource {
     
     func onboardingWillTransitonToIndex(_ index: Int) {
+        if index == 0 {
+            skipButton.alpha = 0
+            skipButton.isHidden = false
+            UIView.animate(withDuration: 0.15, animations: {
+                self.skipButton.alpha = 1
+            })
+        } else {
+            skipButton.alpha = 1
+            UIView.animate(withDuration: 0.15, animations: {
+                self.skipButton.alpha = 0
+            }) { _ in
+                self.skipButton.isHidden = true
+            }
+        }
         if index == 5 {
             getStartedButton.alpha = 0
             self.bottomOnboardingConstraint?.update(offset: -120)
