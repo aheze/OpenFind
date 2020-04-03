@@ -712,6 +712,10 @@ extension PhotoPageContainerViewController: ReturnCachedPhotos {
 }
 
 extension PhotoPageContainerViewController: ReturnSortedTerms {
+    
+    func hereAreCurrentLists(currentSelected: [EditableFindList], currentText: String, object: MatchesLabelObject) {
+    }
+    
     func returnTerms(matchToColorsR: [String : [CGColor]]) {
         matchToColors = matchToColorsR
         changedTerms?.returnTerms(matchToColorsR: matchToColorsR)
@@ -731,9 +735,6 @@ extension PhotoPageContainerViewController: ReturnSortedTerms {
     }
     
     func triedToEditWhilePaused() {
-    }
-    
-    func hereAreCurrentLists(currentSelected: [EditableFindList], currentText: String) {
     }
     
     

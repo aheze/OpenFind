@@ -284,8 +284,8 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
      func returnTerms(matchToColorsR: [String: [CGColor]]) {
 //        getRead
 //        if initializedView {
-            print("RETURNED TERMS!!!")
-            print("DATA: \(matchToColorsR)")
+//            print("RETURNED TERMS!!!")
+//            print("DATA: \(matchToColorsR)")
         matchToColors = matchToColorsR
         
         fastFind() 
@@ -481,7 +481,7 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
             }
             
         }
-        print("ADD COmP COUNT")
+//        print("ADD COmP COUNT")
         
         
 //        scaleHighlights()

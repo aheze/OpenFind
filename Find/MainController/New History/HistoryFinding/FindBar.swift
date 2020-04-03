@@ -19,7 +19,7 @@ protocol ReturnSortedTerms: class {
     func pressedReturn()
     func triedToEdit()
     func triedToEditWhilePaused()
-    func hereAreCurrentLists(currentSelected: [EditableFindList], currentText: String)
+    func hereAreCurrentLists(currentSelected: [EditableFindList], currentText: String, object: MatchesLabelObject)
 }
 
 //protocol Dis
@@ -30,6 +30,8 @@ class FindBar: UIView, UITextFieldDelegate {
     var resultsLabel = UILabel()
     
     var origCacheNumber = 0
+    var totalResultsNumber = 0
+    var searchingOnlyInCache = true
     
     let realm = try! Realm()
     var listCategories: Results<FindList>?
@@ -167,6 +169,12 @@ class FindBar: UIView, UITextFieldDelegate {
         searchField.insets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
 //        searchField.clearButtonMode = .whileEditing
         resultsLabel.textAlignment = .right
+//        DispatchQueue.main.async {
+//            self.resultsLabel.text = ""
+//        }
+        resultsLabel.text = "                                   "
+//        let imageRect = CGRect(x: 0, y: 2.5, width: 30, height: 30)
+//        resultsLabel.addImageWith(name: "", behindText: true, bounds: imageRect)
         loadListsRealm()
         
         
@@ -234,7 +242,12 @@ extension FindBar: ChangeFindBar {
             }
         case "GetLists":
             print("GET LISTS!!!")
-            returnTerms?.hereAreCurrentLists(currentSelected: selectedLists, currentText: searchField.text ?? "")
+            let currentLabelObject = MatchesLabelObject()
+            currentLabelObject.cachedNumber = origCacheNumber
+            currentLabelObject.totalNumber = totalResultsNumber
+            currentLabelObject.hadSearchedInCache = searchingOnlyInCache
+            print("Orig cache number: \(origCacheNumber), total: \(totalResultsNumber), onlyInCache? \(searchingOnlyInCache)")
+            returnTerms?.hereAreCurrentLists(currentSelected: selectedLists, currentText: searchField.text ?? "", object: currentLabelObject)
 //            self.searchFiel
         default:
             print("WRONGGGG")
@@ -242,7 +255,34 @@ extension FindBar: ChangeFindBar {
         }
     }
     
-    func giveLists(lists: [EditableFindList], searchText: String) {
+    func giveLists(lists: [EditableFindList], searchText: String, labelObject: MatchesLabelObject) {
+        
+//        if labelObject.
+        origCacheNumber = labelObject.cachedNumber
+        totalResultsNumber = labelObject.totalNumber
+        if labelObject.hadSearchedInCache {
+            if totalResultsNumber == 0 {
+                resultsLabel.text = "No Matches in "
+            } else if totalResultsNumber == 1 {
+                resultsLabel.text = "1 Match in "
+            } else {
+                resultsLabel.text = "\(totalResultsNumber) Matches in "
+            }
+            print("main asynccache GIVE: \(totalResultsNumber), orig: \(origCacheNumber)")
+//                let textH = 35
+            let imageRect = CGRect(x: 0, y: 2.5, width: 30, height: 30)
+            resultsLabel.addImageWith(name: "TextFieldCache", behindText: true, bounds: imageRect)
+        } else {
+            print("newNNN TOTAL ;\(totalResultsNumber)")
+            if totalResultsNumber == 0 {
+                self.resultsLabel.text = "No Matches"
+            } else if totalResultsNumber == 1 {
+                self.resultsLabel.text = "1 Match "
+            } else {
+                self.resultsLabel.text = "\(totalResultsNumber) Matches"
+            }
+        }
+        
         searchDisabled = false
         searchActive = false
         
@@ -767,15 +807,18 @@ class SearchCollectionCell: UICollectionViewCell {
 
 extension FindBar: GiveFindbarMatchNumber {
     func howMany(number: Int, inCache: Bool, noSearchTerms: Bool) {
-        print("number matches findbar: \(number), no search? \(noSearchTerms) inCache: \(inCache)")
-        if noSearchTerms {
-            DispatchQueue.main.async {
-                self.resultsLabel.text = ""
-            }
-        } else {
-            if inCache {
-                origCacheNumber = number
-                DispatchQueue.main.async {
+//        print("number matches findbar: \(number), no search? \(noSearchTerms) inCache: \(inCache)")
+        DispatchQueue.main.async {
+            if noSearchTerms {
+                self.totalResultsNumber = 0
+                self.origCacheNumber = 0
+                self.searchingOnlyInCache = true
+                self.resultsLabel.text = "                                   "
+            } else {
+                if inCache {
+                    self.origCacheNumber = number
+                    self.totalResultsNumber = number
+                    self.searchingOnlyInCache = true
                     if number == 0 {
                         self.resultsLabel.text = "No Matches in "
                     } else if number == 1 {
@@ -783,15 +826,15 @@ extension FindBar: GiveFindbarMatchNumber {
                     } else {
                         self.resultsLabel.text = "\(number) Matches in "
                     }
-                    print("mani asynccache: \(number)")
+//                    print("mani asynccache: \(number)")
     //                let textH = 35
                     let imageRect = CGRect(x: 0, y: 2.5, width: 30, height: 30)
                     self.resultsLabel.addImageWith(name: "TextFieldCache", behindText: true, bounds: imageRect)
-                }
-            } else {
-                let newNumber = origCacheNumber + number
-                print("newNNN ;\(newNumber)")
-                DispatchQueue.main.async {
+                } else {
+                    let newNumber = self.origCacheNumber + number
+                    self.searchingOnlyInCache = false
+                    self.totalResultsNumber = newNumber
+//                    print("newNNN ;\(newNumber)")
                     if newNumber == 0 {
                         self.resultsLabel.text = "No Matches"
                     } else if newNumber == 1 {
@@ -802,30 +845,6 @@ extension FindBar: GiveFindbarMatchNumber {
                 }
             }
         }
-//        else {
-//            if number == -1 {
-//                DispatchQueue.main.async {
-//                    if self.origCacheNumber == 0 {
-//                        self.resultsLabel.text = "No Matches"
-//                    } else if number == 1 {
-//                        self.resultsLabel.text = "1 Match "
-//                    } else {
-//                        self.resultsLabel.text = "\(self.origCacheNumber) Matches"
-//                    }
-//                }
-//            } else {
-//                DispatchQueue.main.async {
-//                    if number == 0 {
-//                        self.resultsLabel.text = "No Matches"
-//                    } else if number == 1 {
-//                        self.resultsLabel.text = "1 Match "
-//                    } else {
-//                        self.resultsLabel.text = "\(number) Matches"
-//                    }
-//                }
-//            }
-//
-//        }
     }
 }
 

@@ -11,6 +11,11 @@ import SwiftEntryKit
 import SDWebImage
 import Vision
 
+class MatchesLabelObject: NSObject {
+    var cachedNumber = 0
+    var totalNumber = 0
+    var hadSearchedInCache = true
+}
 protocol ReturnCache: class {
     func returnHistCache(cachedImages: HistoryModel)
 }
@@ -20,7 +25,7 @@ protocol ReturnCache: class {
 //}
 protocol ChangeFindBar: class {
     func change(type: String)
-    func giveLists(lists: [EditableFindList], searchText: String)
+    func giveLists(lists: [EditableFindList], searchText: String, labelObject: MatchesLabelObject)
 }
 
 class HistoryFindController: UIViewController {
@@ -55,7 +60,7 @@ class HistoryFindController: UIViewController {
     
     var savedSelectedLists = [EditableFindList]()
     var savedTextfieldText = ""
-    
+    var savedLabelObject = MatchesLabelObject()
     
     
     
@@ -116,7 +121,7 @@ class HistoryFindController: UIViewController {
             self.changeFindbar = customView
             SwiftEntryKit.display(entry: customView, using: attributes)
             
-            self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText)
+            self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText, labelObject: self.savedLabelObject)
             
             
         }
@@ -184,7 +189,7 @@ class HistoryFindController: UIViewController {
             self.changeFindbar = customView
             SwiftEntryKit.display(entry: customView, using: attributes)
             
-            self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText)
+            self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText, labelObject: self.savedLabelObject)
             
             
         }
@@ -627,10 +632,11 @@ extension HistoryFindController: ReturnSortedTerms {
         
         showPauseWarning()
     }
-    func hereAreCurrentLists(currentSelected: [EditableFindList], currentText: String) {
+    func hereAreCurrentLists(currentSelected: [EditableFindList], currentText: String, object: MatchesLabelObject) {
         print("GAVE!! \(currentSelected)")
         savedSelectedLists = currentSelected
         savedTextfieldText = currentText
+        savedLabelObject = object
     }
 }
 
@@ -879,7 +885,7 @@ extension HistoryFindController: ZoomAnimatorDelegate {
             self.changeFindbar = customView
             SwiftEntryKit.display(entry: customView, using: attributes)
             
-            self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText)
+            self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText, labelObject: savedLabelObject)
             
             print("TRANSITION ENDED")
         }
