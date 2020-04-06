@@ -91,6 +91,7 @@ class HistorySelectorView: UIView, ChangeNumberOfSelected, ChangeAttributes {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let helpViewController = storyboard.instantiateViewController(withIdentifier: "DefaultHelpController") as! DefaultHelpController
         helpViewController.title = "Help"
+        helpViewController.helpJsonKey = "HistoryFindHelpArray"
         helpViewController.goDirectlyToUrl = true
         helpViewController.directUrl = "https://zjohnzheng.github.io/FindHelp/History-HistoryControls.html"
         

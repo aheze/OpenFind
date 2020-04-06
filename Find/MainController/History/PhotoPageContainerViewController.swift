@@ -239,6 +239,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         let helpViewController = storyboard.instantiateViewController(withIdentifier: "DefaultHelpController") as! DefaultHelpController
         helpViewController.title = "Help"
         helpViewController.goDirectlyToUrl = true
+        helpViewController.helpJsonKey = "HistoryFindHelpArray"
         helpViewController.directUrl = "https://zjohnzheng.github.io/FindHelp/History-HistoryControls.html"
         
         let navigationController = UINavigationController(rootViewController: helpViewController)

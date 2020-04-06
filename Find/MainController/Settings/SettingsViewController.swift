@@ -187,6 +187,23 @@ class SettingsViewController: UIViewController {
             attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
             SwiftEntryKit.display(entry: vc, using: attributes)
         }))
+        alert.addAction(UIAlertAction(title: "Lists Builder", style: UIAlertAction.Style.default, handler: { _ in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ListsBuilderTutorialViewController") as! ListsBuilderTutorialViewController
+            vc.view.layer.cornerRadius = 10
+            vc.view.clipsToBounds = true
+            
+            var attributes = EKAttributes.centerFloat
+            attributes.displayDuration = .infinity
+            attributes.entryInteraction = .absorbTouches
+            attributes.scroll = .disabled
+            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+            attributes.entryBackground = .color(color: .white)
+            attributes.screenInteraction = .absorbTouches
+            attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+            SwiftEntryKit.display(entry: vc, using: attributes)
+        }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
 //        GeneralTutorialViewController
@@ -305,6 +322,23 @@ class SettingsViewController: UIViewController {
     
     @IBAction func rateAppPressed(_ sender: Any) {
         print("Rate app")
+        if let productURL = URL(string: "https://apps.apple.com/app/id1506500202") {
+            var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
+
+            // 2.
+            components?.queryItems = [
+              URLQueryItem(name: "action", value: "write-review")
+            ]
+
+            // 3.
+            guard let writeReviewURL = components?.url else {
+                print("no url")
+              return
+            }
+
+            // 4.
+            UIApplication.shared.open(writeReviewURL)
+        }
     }
     
     

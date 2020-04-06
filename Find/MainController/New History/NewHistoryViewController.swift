@@ -277,6 +277,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                 contentView.layer.cornerRadius = 8
                 let subTitle = UILabel()
                 subTitle.text = "No Photos Taken Yet!"
+                subTitle.textColor = UIColor.white
                 contentView.addSubview(subTitle)
                 subTitle.snp.makeConstraints { (make) in
                     make.center.equalToSuperview()

@@ -129,7 +129,29 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo, 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
-        
+        let defaults = UserDefaults.standard
+        let listsViewedBefore = defaults.bool(forKey: "listsBuilderViewedBefore")
+        if listsViewedBefore == false {
+            defaults.set(true, forKey: "listsBuilderViewedBefore")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ListsBuilderTutorialViewController") as! ListsBuilderTutorialViewController
+            vc.view.layer.cornerRadius = 10
+            vc.view.clipsToBounds = true
+            
+            var attributes = EKAttributes.centerFloat
+            attributes.displayDuration = .infinity
+            attributes.entryInteraction = .absorbTouches
+            attributes.scroll = .disabled
+            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+            attributes.entryBackground = .color(color: .white)
+            attributes.screenInteraction = .absorbTouches
+            attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                SwiftEntryKit.display(entry: vc, using: attributes)
+            })
+        }
     }
 //    func selectGeneral() {
 //        if let first = pagingViewController.items.first {

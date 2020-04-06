@@ -1,8 +1,8 @@
 platform :ios, '13.0'
 
 target 'Find' do
-#  use_frameworks!
-use_modular_headers!
+  use_frameworks!
+#use_modular_headers!
 
 pod 'QuickLayout'
 pod 'RealmSwift'

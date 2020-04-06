@@ -3862,6 +3862,55 @@ the App!</string>
             </objects>
             <point key="canvasLocation" x="3167" y="-217"/>
         </scene>
+        <!--Lists Builder Tutorial View Controller-->
+        <scene sceneID="As3-ca-tRk">
+            <objects>
+                <viewController storyboardIdentifier="ListsBuilderTutorialViewController" id="0FL-15-ynb" customClass="ListsBuilderTutorialViewController" customModule="Find" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EYk-6n-Mak">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fxz-wQ-bGs" customClass="PaperOnboarding" customModule="Find" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2C-rw-SRu">
+                                <rect key="frame" x="167" y="742" width="80" height="40"/>
+                                <color key="backgroundColor" name="FeedbackGradientLeft"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="c7C-fg-i7i"/>
+                                    <constraint firstAttribute="height" constant="40" id="eIY-UE-r2r"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
+                                <state key="normal" title="Ok!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="listsGoButtonPressed:" destination="0FL-15-ynb" eventType="touchUpInside" id="lDP-8W-mtH"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Q2C-rw-SRu" firstAttribute="centerX" secondItem="EYk-6n-Mak" secondAttribute="centerX" id="1fF-lU-CQ6"/>
+                            <constraint firstItem="Fxz-wQ-bGs" firstAttribute="leading" secondItem="EYk-6n-Mak" secondAttribute="leading" id="U4S-2T-H9R"/>
+                            <constraint firstItem="Fxz-wQ-bGs" firstAttribute="top" secondItem="EYk-6n-Mak" secondAttribute="top" id="dF0-eZ-zre"/>
+                            <constraint firstAttribute="trailing" secondItem="Fxz-wQ-bGs" secondAttribute="trailing" id="jH7-aD-ZXs"/>
+                            <constraint firstItem="4h2-qu-luZ" firstAttribute="bottom" secondItem="Q2C-rw-SRu" secondAttribute="bottom" constant="80" id="pW4-Bi-gpM"/>
+                            <constraint firstAttribute="bottom" secondItem="Fxz-wQ-bGs" secondAttribute="bottom" id="uOS-Ur-Qfs"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4h2-qu-luZ"/>
+                    </view>
+                    <connections>
+                        <outlet property="goButton" destination="Q2C-rw-SRu" id="Fdu-Ei-IUT"/>
+                        <outlet property="paperOnboarding" destination="Fxz-wQ-bGs" id="A9k-p4-itL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xg8-f7-CWy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1554" y="2024"/>
+        </scene>
     </scenes>
     <resources>
         <image name="0" width="133" height="133"/>

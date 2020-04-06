@@ -646,6 +646,7 @@ extension ListController {
                 contentView.layer.cornerRadius = 8
                 let subTitle = UILabel()
                 subTitle.text = "No Lists Created Yet!"
+                subTitle.textColor = UIColor.white
                 contentView.addSubview(subTitle)
                 subTitle.snp.makeConstraints { (make) in
                     make.center.equalToSuperview()

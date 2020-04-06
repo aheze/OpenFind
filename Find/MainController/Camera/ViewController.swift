@@ -13,6 +13,7 @@ import AVFoundation
 import CoreMotion
 import RealmSwift
 import SnapKit
+import SwiftEntryKit
 
 //protocol ChangeStatusValue: class {
 //    func changeValue(to value: CGFloat)
@@ -378,6 +379,71 @@ class ViewController: UIViewController {
         return true  
     }
  
+    override func viewWillLayoutSubviews() {
+        cameraView.videoPreviewLayer.frame = self.view.bounds
+        if let connection = cameraView.videoPreviewLayer.connection {
+            if connection.isVideoOrientationSupported {
+                if let orientation = statusBarOrientation {
+                    connection.videoOrientation = self.interfaceOrientation(toVideoOrientation: orientation)
+                    if orientation != .portrait {
+                        var attributes = EKAttributes.topFloat
+                        attributes.entryBackground = .color(color: .white)
+                        attributes.entranceAnimation = .translation
+                        attributes.exitAnimation = .translation
+                        attributes.displayDuration = .infinity
+                        attributes.positionConstraints.size.height = .constant(value: 80)
+                        attributes.statusBar = .light
+                        attributes.entryInteraction = .absorbTouches
+                        attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+//                        attributes.scroll = .
+                        //let font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.light)
+                        let contentView = UIView()
+                        contentView.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
+                        contentView.layer.cornerRadius = 8
+                        let subTitle = UILabel()
+                        subTitle.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                        subTitle.text = "Landscape view is not yet supported!"
+                        contentView.addSubview(subTitle)
+                        subTitle.snp.makeConstraints { (make) in
+                            make.center.equalToSuperview()
+                        }
+                        SwiftEntryKit.display(entry: contentView, using: attributes)
+                    } else {
+                        SwiftEntryKit.dismiss()
+                    }
+                }
+            }
+        }
+    }
+    var statusBarOrientation: UIInterfaceOrientation? {
+        get {
+            guard let orientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation else {
+                #if DEBUG
+                fatalError("Could not obtain UIInterfaceOrientation from a valid windowScene")
+                #else
+                return nil
+                #endif
+            }
+            return orientation
+        }
+    }
+    func interfaceOrientation(toVideoOrientation orientation: UIInterfaceOrientation) -> AVCaptureVideoOrientation {
+        switch orientation {
+        case .portrait:
+            return .portrait
+        case .portraitUpsideDown:
+            return .portraitUpsideDown
+        case .landscapeLeft:
+            return .landscapeLeft
+        case .landscapeRight:
+            return .landscapeRight
+        default:
+            break
+        }
+
+        print("Warning - Didn't recognise interface orientation (\(orientation))")
+        return .portrait
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
