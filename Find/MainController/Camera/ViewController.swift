@@ -26,28 +26,32 @@ protocol UpdateMatchesNumberStats: class {
 }
 class CameraView: UIView {
     
-var videoPreviewLayer: AVCaptureVideoPreviewLayer {
-    guard let layer = layer as? AVCaptureVideoPreviewLayer else {
-        fatalError("Expected `AVCaptureVideoPreviewLayer` type for layer. Check PreviewView.layerClass implementation.")
+    var videoPreviewLayer: AVCaptureVideoPreviewLayer {
+        guard let layer = layer as? AVCaptureVideoPreviewLayer else {
+            fatalError("Expected `AVCaptureVideoPreviewLayer` type for layer. Check PreviewView.layerClass implementation.")
+        }
+        return layer
     }
-    return layer
-}
-var session: AVCaptureSession? {
-    get {
-        return videoPreviewLayer.session
+    var session: AVCaptureSession? {
+        get {
+            return videoPreviewLayer.session
+        }
+        set {
+            videoPreviewLayer.session = newValue
+        }
     }
-    set {
-        videoPreviewLayer.session = newValue
+    // MARK: UIView
+    override class var layerClass: AnyClass {
+        return AVCaptureVideoPreviewLayer.self
     }
-}
-// MARK: UIView
-override class var layerClass: AnyClass {
-    return AVCaptureVideoPreviewLayer.self
-}
 }
 class ViewController: UIViewController {
     
   
+    let deviceType = UIDevice.current.modelName
+        
+    
+    var normalSearchFieldTopCConstant = CGFloat(0)
     var displayingOrientationError = false
     
     ///PINCHING
@@ -60,7 +64,7 @@ class ViewController: UIViewController {
     var shouldPinch = true
     @IBAction func pinchGesture(_ sender: UIPinchGestureRecognizer) {
         controlsBottomC.constant = 15 - (sender.scale * 50)
-        contentTopC.constant = 15 - (sender.scale * 50)
+        contentTopC.constant = normalSearchFieldTopCConstant - (sender.scale * 50)
         UIView.animate(withDuration: 0.2, animations: {
             self.view.layoutIfNeeded()
         })
@@ -103,7 +107,7 @@ class ViewController: UIViewController {
         controlsView.isHidden = false
         controlsBlurView.isHidden = true
         controlsBottomC.constant = 15
-        contentTopC.constant = 15
+        contentTopC.constant = normalSearchFieldTopCConstant
         UIView.animate(withDuration: 0.4, animations: {
             self.view.layoutIfNeeded()
             self.searchContentView.alpha = 1
@@ -117,7 +121,7 @@ class ViewController: UIViewController {
     }
     
     
-    @IBOutlet weak var blackOverlayView: UIView!
+//    @IBOutlet weak var blackOverlayView: UIView!
     
     @IBOutlet weak var darkBlurEffect: UIVisualEffectView!
 //    @IBOutlet weak var darkBlurEffectHeightConstraint: NSLayoutConstraint!
@@ -292,39 +296,42 @@ class ViewController: UIViewController {
                                                        for: .video, position: .back) {
             return cameraDevice
         } else {
-            fatalError("Missing expected back camera device.")
+            print("Missing Camera.")
+            return nil
+//            fatalError("Missing expected back camera device.")
             //return nil
         }
     }
     private func configureCamera() {
         cameraView.session = avSession
-        cameraDevice = getCamera() 
-        do {
-            let captureDeviceInput = try AVCaptureDeviceInput(device: cameraDevice!)
-            if avSession.canAddInput(captureDeviceInput) {
-                avSession.addInput(captureDeviceInput)
+        if let cameraDevice = getCamera() {
+            do {
+                let captureDeviceInput = try AVCaptureDeviceInput(device: cameraDevice)
+                if avSession.canAddInput(captureDeviceInput) {
+                    avSession.addInput(captureDeviceInput)
+                }
             }
-        }
-        catch {
-            print("Error occured \(error)")
-            return
-        }
-        avSession.sessionPreset = .photo
-        videoDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "Buffer Queue", qos: .userInteractive, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil))
-        if avSession.canAddOutput(videoDataOutput) {
-            avSession.addOutput(videoDataOutput)
-        }
-        cameraView.videoPreviewLayer.videoGravity = .resizeAspectFill
-        let newBounds = view.layer.bounds
-        cameraView.videoPreviewLayer.bounds = newBounds
-        print(cameraView.videoPreviewLayer.bounds)
-        cameraView.videoPreviewLayer.position = CGPoint(x: newBounds.midX, y: newBounds.midY);
-        avSession.startRunning()
-        UIView.animate(withDuration: 0.8, delay: 2, animations: {
-            self.blackOverlayView.alpha = 0
-        }) { _ in
-            self.blackOverlayView.removeFromSuperview()
-            print("comp2")
+            catch {
+                print("Error occured \(error)")
+                return
+            }
+            avSession.sessionPreset = .photo
+            videoDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "Buffer Queue", qos: .userInteractive, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil))
+            if avSession.canAddOutput(videoDataOutput) {
+                avSession.addOutput(videoDataOutput)
+            }
+            cameraView.videoPreviewLayer.videoGravity = .resizeAspectFill
+            let newBounds = view.layer.bounds
+            cameraView.videoPreviewLayer.bounds = newBounds
+            print(cameraView.videoPreviewLayer.bounds)
+            cameraView.videoPreviewLayer.position = CGPoint(x: newBounds.midX, y: newBounds.midY);
+            avSession.startRunning()
+//            UIView.animate(withDuration: 0.8, delay: 2, animations: {
+//                self.blackOverlayView.alpha = 0
+//            }) { _ in
+//                self.blackOverlayView.removeFromSuperview()
+//                print("comp2")
+//            }
         }
     }
     func startSession() { if !avSession.isRunning {
@@ -400,7 +407,7 @@ class ViewController: UIViewController {
                         UIView.animate(withDuration: 0.5, animations: {
                             self.warningView.alpha = 1
                             self.warningLabel.alpha = 1
-                            self.view.layoutIfNeeded()
+                            self.warningView.layoutIfNeeded()
                         })
                     } else {
                         if displayingOrientationError == true {
@@ -413,7 +420,7 @@ class ViewController: UIViewController {
                             UIView.animate(withDuration: 0.5, animations: {
                                 self.warningView.alpha = 0
                                 self.warningLabel.alpha = 0
-                                self.view.layoutIfNeeded()
+                                self.warningView.layoutIfNeeded()
                             }) { _ in
                                 self.warningLabel.text = "Find is paused | Duplicates are not allowed"
                             }
@@ -456,6 +463,24 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var hasNotch = false
+        switch deviceType {
+            case "iPhone10,3", "iPhone10,6", "iPhone11,2", "iPhone11,4", "iPhone11,6", "iPhone11,8", "iPhone12,3", "iPhone12,5":
+                hasNotch = true
+            default:
+                break
+        }
+        if hasNotch {
+            print("NOTCH")
+            normalSearchFieldTopCConstant = 0
+        } else {
+            print("NO NOTCH")
+            normalSearchFieldTopCConstant = 12
+        }
+        contentTopC.constant = normalSearchFieldTopCConstant
+        searchContentView.layoutIfNeeded()
+        
         pinchGesture.delegate = self
         self.modalPresentationStyle = .automatic
         
@@ -572,5 +597,30 @@ extension UIImage {
             return nil
         }
         self.init(cgImage: cgImage)
+    }
+}
+//extension ViewController {
+//    var hasTopNotch: Bool {
+//        if #available(iOS 13.0,  *) {
+//            return UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.top ?? 0 > 20
+//        }else{
+//         return UIApplication.shared.delegate?.window??.safeAreaInsets.top ?? 0 > 20
+//        }
+//
+//        return false
+//    }
+//}
+ 
+
+extension UIDevice {
+    var modelName: String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machineMirror = Mirror(reflecting: systemInfo.machine)
+        let identifier = machineMirror.children.reduce("") { identifier, element in
+            guard let value = element.value as? Int8, value != 0 else { return identifier }
+            return identifier + String(UnicodeScalar(UInt8(value)))
+        }
+        return identifier
     }
 }

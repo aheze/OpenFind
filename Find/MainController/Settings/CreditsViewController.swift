@@ -42,12 +42,14 @@ class CreditsViewController: UIViewController, UITextViewDelegate {
         let kamran = NSAttributedString(string: "H. Kamran (about.me/hkamran80) ", attributes: kamranLink)
         let wink = NSAttributedString(string: "W in K (soundcloud.com/officialwinkmusic) ", attributes: winkLink)
         
+//        let blackAttribute = [NSAttributedString.Key.foregroundColor:  UIColor.label]
         let thanksTo = NSAttributedString(string: "Thanks to ")
         let forFeedback = NSAttributedString(string: "for feedback and being a beta tester, and ")
         let videoMusic = NSAttributedString(string: "for the app promo music on the App Store!")
         
         let entireString = NSMutableAttributedString()
         
+//        thanksTo.addAtt
         
         entireString.append(thanksTo)
         entireString.append(kamran)
@@ -56,6 +58,7 @@ class CreditsViewController: UIViewController, UITextViewDelegate {
         entireString.append(videoMusic)
         let fullRange = NSMakeRange(0, entireString.length)
         entireString.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 18), range: fullRange)
+        entireString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.label, range: fullRange)
 
         textView.attributedText = entireString
         textView.textAlignment = .center

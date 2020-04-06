@@ -31,6 +31,8 @@ class LaunchViewController: UIViewController {
     
     @IBOutlet weak var accessDescLabel: UILabel!
     
+    var onboardingOnLastPage = false
+    
     @IBAction func allowAccessPressed(_ sender: Any) {
         if shouldGoToSettings {
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
@@ -104,7 +106,8 @@ class LaunchViewController: UIViewController {
             self.drawAnimation(type: "Restricted")
         }
     }
-    let onboarding = PaperOnboarding()
+    @IBOutlet weak var onboarding: PaperOnboarding!
+    
     @IBOutlet weak var getStartedButton: UIButton!
     @IBAction func getStartedPressed(_ sender: Any) {
         print("start!!!")
@@ -141,9 +144,10 @@ class LaunchViewController: UIViewController {
         }
         
     }
-    var bottomOnboardingConstraint: Constraint? = nil
+//    var bottomOnboardingConstraint: Constraint? = nil
     
-    
+    @IBOutlet weak var onboardingBottomC: NSLayoutConstraint!
+    @IBOutlet weak var onboardingWidthC: NSLayoutConstraint!
     
     let deviceSize = UIScreen.main.bounds.size
     let loadingImages = (0...10).map { UIImage(named: "\($0)")! }
@@ -159,7 +163,7 @@ class LaunchViewController: UIViewController {
         getStartedButton.alpha = 0
         getStartedButton.isHidden = true
         getStartedButton.layer.cornerRadius = 6
-        getStartedButton.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+        getStartedButton.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
         
         allowAccessView.isHidden = true
         allowAccessView.alpha = 0
@@ -179,7 +183,7 @@ class LaunchViewController: UIViewController {
         let defaults = UserDefaults.standard
         let launchedBefore = defaults.bool(forKey: "launchedBefore")
         //launchedBefore == false
-        if launchedBefore == false {
+        if true {
             print("FIRST LAUNCH")
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                 self.drawAnimation(type: "onboarding")
@@ -353,13 +357,14 @@ class LaunchViewController: UIViewController {
                 self.onboarding.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
                 self.onboarding.layer.cornerRadius = 14
                 self.onboarding.clipsToBounds = true
-                self.view.addSubview(self.onboarding)
-                self.onboarding.snp.makeConstraints { (make) in
-                    make.width.equalTo(accessAvailibleWidth)
-                    make.centerX.equalToSuperview()
-                    make.top.equalToSuperview().offset(50)
-                    self.bottomOnboardingConstraint = make.bottom.equalToSuperview().offset(-50).constraint
-                }
+                self.onboardingWidthC.constant = accessAvailibleWidth
+//                self.view.addSubview(self.onboarding)
+//                self.onboarding.snp.makeConstraints { (make) in
+//                    make.width.equalTo(accessAvailibleWidth)
+//                    make.centerX.equalToSuperview()
+//                    make.top.equalToSuperview().offset(50)
+//                    self.bottomOnboardingConstraint = make.bottom.equalToSuperview().offset(-50).constraint
+//                }
 //                getStarter
                 
                 self.view.layoutIfNeeded()
@@ -451,21 +456,29 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
             }
         }
         if index == 5 {
+            onboardingOnLastPage = true
+            getStartedButton.isHidden = false
             getStartedButton.alpha = 0
-            self.bottomOnboardingConstraint?.update(offset: -120)
-            UIView.animate(withDuration: 0.3, animations: {
+            onboardingBottomC.constant = 120
+            UIView.animate(withDuration: 0.15, animations: {
                 self.getStartedButton.transform = CGAffineTransform.identity
                 self.view.layoutIfNeeded()
                 self.getStartedButton.alpha = 1
             })
         } else {
-            getStartedButton.alpha = 1
-            self.bottomOnboardingConstraint?.update(offset: -50)
-            UIView.animate(withDuration: 0.3, animations: {
-                self.view.layoutIfNeeded()
-                self.getStartedButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-                self.getStartedButton.alpha = 0
-            })
+            if onboardingOnLastPage == true {
+                onboardingOnLastPage = false
+                self.getStartedButton.isHidden = false
+                getStartedButton.alpha = 1
+                onboardingBottomC.constant = 50
+                UIView.animate(withDuration: 0.15, animations: {
+                    self.view.layoutIfNeeded()
+                    self.getStartedButton.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
+                    self.getStartedButton.alpha = 0
+                }) { _ in
+                    self.getStartedButton.isHidden = true
+                }
+            }
             
         }
     }
