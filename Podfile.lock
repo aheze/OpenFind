@@ -13,7 +13,6 @@ PODS:
   - SPAlert (2.1.4)
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
-  - SwiftyGif (5.2.0)
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
@@ -24,7 +23,6 @@ DEPENDENCIES:
   - SnapKit
   - SPAlert
   - SwiftEntryKit
-  - SwiftyGif
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
@@ -37,7 +35,6 @@ SPEC REPOS:
     - SnapKit
     - SPAlert
     - SwiftEntryKit
-    - SwiftyGif
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -49,9 +46,8 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SPAlert: 1a8afa1c6ac86a82ab5b2cfdf7f9a51e68cb6c0c
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
-  SwiftyGif: b85c6b33a9411859d9e1db998b6a8214aea942df
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 1d331ff556f3a0361a5859ed06b62e5f529169a8
+PODFILE CHECKSUM: 64831cca3bfde9ebe44c4d29e2494ccadbd1fef7
 
 COCOAPODS: 1.8.3

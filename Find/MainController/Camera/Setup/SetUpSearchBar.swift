@@ -467,6 +467,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             let uniqueSplits = splits.uniques
             if uniqueSplits.count != splits.count {
                 print("DUPD UPD UPD UPDU PDPUDP")
+                updateMatchesNumber(to: 0)
                 resetFastHighlights()
                 allowSearch = false
 //                resetFastHighlights()
@@ -494,6 +495,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         return true
     }
     func showDuplicateAlert(show: Bool) {
+        
         if show == true {
             
             warningHeightC.constant = 32

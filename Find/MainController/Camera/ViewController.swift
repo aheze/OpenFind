@@ -48,6 +48,7 @@ override class var layerClass: AnyClass {
 class ViewController: UIViewController {
     
   
+    var displayingOrientationError = false
     
     ///PINCHING
     @IBOutlet weak var controlsBottomC: NSLayoutConstraint! //15
@@ -386,30 +387,38 @@ class ViewController: UIViewController {
                 if let orientation = statusBarOrientation {
                     connection.videoOrientation = self.interfaceOrientation(toVideoOrientation: orientation)
                     if orientation != .portrait {
-                        var attributes = EKAttributes.topFloat
-                        attributes.entryBackground = .color(color: .white)
-                        attributes.entranceAnimation = .translation
-                        attributes.exitAnimation = .translation
-                        attributes.displayDuration = .infinity
-                        attributes.positionConstraints.size.height = .constant(value: 80)
-                        attributes.statusBar = .light
-                        attributes.entryInteraction = .absorbTouches
-                        attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
-//                        attributes.scroll = .
-                        //let font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.light)
-                        let contentView = UIView()
-                        contentView.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
-                        contentView.layer.cornerRadius = 8
-                        let subTitle = UILabel()
-                        subTitle.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-                        subTitle.text = "Landscape view is not yet supported!"
-                        contentView.addSubview(subTitle)
-                        subTitle.snp.makeConstraints { (make) in
-                            make.center.equalToSuperview()
-                        }
-                        SwiftEntryKit.display(entry: contentView, using: attributes)
+                        displayingOrientationError = true
+                        newSearchTextField.isEnabled = false
+                        print("wrong Or")
+                        updateMatchesNumber(to: 0)
+                        resetFastHighlights()
+                        allowSearch = false
+                        shouldResetHighlights = true
+                        
+                        warningLabel.text = "Find is paused | Landscape view is not yet supported"
+                        warningHeightC.constant = 32
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self.warningView.alpha = 1
+                            self.warningLabel.alpha = 1
+                            self.view.layoutIfNeeded()
+                        })
                     } else {
-                        SwiftEntryKit.dismiss()
+                        if displayingOrientationError == true {
+                            displayingOrientationError = false
+                            newSearchTextField.isEnabled = true
+                            print("RIGHT Or")
+                            allowSearch = true
+                            shouldResetHighlights = false
+                            warningHeightC.constant = 6
+                            UIView.animate(withDuration: 0.5, animations: {
+                                self.warningView.alpha = 0
+                                self.warningLabel.alpha = 0
+                                self.view.layoutIfNeeded()
+                            }) { _ in
+                                self.warningLabel.text = "Find is paused | Duplicates are not allowed"
+                            }
+                        }
+//                        SwiftEntryKit.dismiss()
                     }
                 }
             }

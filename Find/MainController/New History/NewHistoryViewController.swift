@@ -439,8 +439,10 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             return footerView
 
         default:
-            assert(false, "Unexpected element kind")
+            print("error")
+            return UICollectionReusableView()
         }
+        
     }
     //MARK: Realm Converter
     

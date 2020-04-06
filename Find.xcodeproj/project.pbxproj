@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -63,7 +63,6 @@
 		49563523243694BC0001E8C6 /* ConstraintsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49563517243694BB0001E8C6 /* ConstraintsHelper.swift */; };
 		49563524243694BC0001E8C6 /* Configuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49563518243694BB0001E8C6 /* Configuring.swift */; };
 		4956352A2437A4B60001E8C6 /* defaultSeeds.realm in Resources */ = {isa = PBXBuildFile; fileRef = 495635292437A4860001E8C6 /* defaultSeeds.realm */; };
-		4956352B2437A4D40001E8C6 /* defaultSeeds.realm in Sources */ = {isa = PBXBuildFile; fileRef = 495635292437A4860001E8C6 /* defaultSeeds.realm */; };
 		4956352D2437F4820001E8C6 /* DebugPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956352C2437F4820001E8C6 /* DebugPrint.swift */; };
 		49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3223D65AA4009308CA /* ListCollectionCell.swift */; };
 		49569B3523D6919E009308CA /* ListsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3423D6919E009308CA /* ListsLayout.swift */; };
@@ -122,10 +121,11 @@
 		49D985BA2421D97B005F4E92 /* FindModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985B92421D97B005F4E92 /* FindModel.swift */; };
 		49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1552353FE4B0099FA62 /* BasicSetup.swift */; };
 		49F7B1582353FE7E0099FA62 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1572353FE7E0099FA62 /* Component.swift */; };
-		7996AF3BCDF7929A19EDEAFD /* libPods-Find.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 571DE92438CAEED131097BBB /* libPods-Find.a */; };
+		9F7EB9AD24508DC95B5FA75F /* Pods_Find.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206C7F74D4ED39BAC2ED69EB /* Pods_Find.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		206C7F74D4ED39BAC2ED69EB /* Pods_Find.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Find.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4904524B2379072F0046570D /* UpdateMatches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMatches.swift; sourceTree = "<group>"; };
 		49089E1E238EFFFA0070A70C /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		490BC3F523F8DA41004D1433 /* EditListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditListViewController.swift; sourceTree = "<group>"; };
@@ -242,7 +242,6 @@
 		49D985B92421D97B005F4E92 /* FindModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindModel.swift; sourceTree = "<group>"; };
 		49F7B1552353FE4B0099FA62 /* BasicSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSetup.swift; sourceTree = "<group>"; };
 		49F7B1572353FE7E0099FA62 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
-		571DE92438CAEED131097BBB /* libPods-Find.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Find.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F1B04E9888AAEC98DF2E096 /* Pods-Find.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find.debug.xcconfig"; path = "Target Support Files/Pods-Find/Pods-Find.debug.xcconfig"; sourceTree = "<group>"; };
 		E05C3167AB2FF51F44B12AE3 /* Pods-Find.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find.release.xcconfig"; path = "Target Support Files/Pods-Find/Pods-Find.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -252,7 +251,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7996AF3BCDF7929A19EDEAFD /* libPods-Find.a in Frameworks */,
+				9F7EB9AD24508DC95B5FA75F /* Pods_Find.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,7 +697,7 @@
 		D0464F2926E9ACFCA3CD293D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				571DE92438CAEED131097BBB /* libPods-Find.a */,
+				206C7F74D4ED39BAC2ED69EB /* Pods_Find.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -724,6 +723,7 @@
 				4999AC8D2353A80A00AB06A7 /* Frameworks */,
 				4999AC8E2353A80A00AB06A7 /* Resources */,
 				495F38F52432BECF00A17D93 /* ShellScript */,
+				EB34CC35153CA0D5614389C5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -805,7 +805,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#!/bin/bash\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$((bN += 1))\nbN=$(printf \"%d\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"\n\n";
 		};
 		6D06741A707392F12B687239 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -829,6 +829,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EB34CC35153CA0D5614389C5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Find/Pods-Find-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Find/Pods-Find-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Find/Pods-Find-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -836,7 +853,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4956352B2437A4D40001E8C6 /* defaultSeeds.realm in Sources */,
 				49563519243694BC0001E8C6 /* PageContainer.swift in Sources */,
 				49B7A33423923E810070209F /* ZoomTransitionController.swift in Sources */,
 				4999AC982353A80A00AB06A7 /* ViewController.swift in Sources */,
@@ -1091,6 +1107,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1111,7 +1128,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.Find;
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
