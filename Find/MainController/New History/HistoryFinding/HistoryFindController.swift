@@ -15,6 +15,7 @@ class MatchesLabelObject: NSObject {
     var cachedNumber = 0
     var totalNumber = 0
     var hadSearchedInCache = true
+//    var hi
 }
 protocol ReturnCache: class {
     func returnHistCache(cachedImages: HistoryModel)
@@ -117,6 +118,7 @@ class HistoryFindController: UIViewController {
             let customView = FindBar()
             customView.returnTerms = self
             self.giveNumber = customView
+            customView.highlightColor = self.highlightColor
             
             self.changeFindbar = customView
             SwiftEntryKit.display(entry: customView, using: attributes)
@@ -184,6 +186,7 @@ class HistoryFindController: UIViewController {
             let customView = FindBar()
 //            customView.selectedLists = self.savedSelectedLists
             customView.returnTerms = self
+            customView.highlightColor = self.highlightColor
             self.giveNumber = customView
             
             self.changeFindbar = customView
@@ -881,6 +884,7 @@ extension HistoryFindController: ZoomAnimatorDelegate {
     //            customView.selectedLists = self.savedSelectedLists
             customView.returnTerms = self
             self.giveNumber = customView
+            customView.highlightColor = self.highlightColor
             
             self.changeFindbar = customView
             SwiftEntryKit.display(entry: customView, using: attributes)
@@ -925,9 +929,22 @@ extension HistoryFindController: ZoomAnimatorDelegate {
         }
         print("cellframe: \(cellFrame)")
         
-        let heightDiff = UIScreen.main.bounds.size.height - view.bounds.size.height
-        print("height diff: \(heightDiff)")
-        cellFrame.origin.y += heightDiff
+//        let heightDiff = UIScreen.main.bounds.size.height - view.bounds.size.height
+//        print("height diff: \(heightDiff)")
+//        cellFrame.origin.y += heightDiff
+//        let heightDiff = UIScreen.main.bounds.size.height - view.bounds.size.height
+//        var widthDiff = UIScreen.main.bounds.size.width - view.bounds.size.width
+//        widthDiff /= 2
+//        print("height diff: \(heightDiff)")
+//        cellFrame.origin.y += heightDiff
+//        cellFrame.origin.x += widthDiff
+        
+        let superCellFrame = self.tableView.convert(unconvertedFrame, to: nil)
+        let cellYDiff = superCellFrame.origin.y - cellFrame.origin.y
+        let cellXDiff = superCellFrame.origin.x - cellFrame.origin.x
+        
+        cellFrame.origin.y += cellYDiff
+        cellFrame.origin.x += cellXDiff
         ///need to fix this, no hardcoded values
         return cellFrame
     }

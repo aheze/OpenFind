@@ -34,6 +34,7 @@ class LaunchViewController: UIViewController {
     var onboardingOnLastPage = false
     
     @IBAction func allowAccessPressed(_ sender: Any) {
+        print("allow")
         if shouldGoToSettings {
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                 return
@@ -93,7 +94,7 @@ class LaunchViewController: UIViewController {
             print("Authourized")
             self.drawAnimation(type: "fullScreenStart")
         case .notDetermined:
-            print("ND")
+            print("NDsdf")
             shouldGoToSettings = false
             self.drawAnimation(type: "needPermissions")
         case .denied:
@@ -123,7 +124,9 @@ class LaunchViewController: UIViewController {
             self.onboarding.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
             self.getStartedButton.alpha = 0
             self.getStartedButton.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
-        })
+        }) { _ in
+            self.getStartedButton.isHidden = true
+        }
         
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
@@ -149,7 +152,7 @@ class LaunchViewController: UIViewController {
     @IBOutlet weak var onboardingBottomC: NSLayoutConstraint!
     @IBOutlet weak var onboardingWidthC: NSLayoutConstraint!
     
-    let deviceSize = UIScreen.main.bounds.size
+//    let deviceSize = UIScreen.main.bounds.size
     let loadingImages = (0...10).map { UIImage(named: "\($0)")! }
     
     let defaults = UserDefaults.standard
@@ -157,7 +160,7 @@ class LaunchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        skipButton.alpha = 0
+//        skipButton.alpha = 0
         skipButton.isHidden = true
         
         getStartedButton.alpha = 0
@@ -183,12 +186,14 @@ class LaunchViewController: UIViewController {
         let defaults = UserDefaults.standard
         let launchedBefore = defaults.bool(forKey: "launchedBefore")
         //launchedBefore == false
-        if true {
+        if launchedBefore == false {
             print("FIRST LAUNCH")
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                 self.drawAnimation(type: "onboarding")
             })
         } else {
+            onboarding.removeFromSuperview()
+            skipButton.isHidden = true
             switch AVCaptureDevice.authorizationStatus(for: .video) {
             case .authorized:
                 print("Authourized")
@@ -196,7 +201,7 @@ class LaunchViewController: UIViewController {
                     self.drawAnimation(type: "fullScreenStart")
                 })
             case .notDetermined:
-                print("ND")
+                print("ND sdf sdf ")
                 shouldGoToSettings = false
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                     self.drawAnimation(type: "needPermissions")
@@ -215,6 +220,8 @@ class LaunchViewController: UIViewController {
                     self.drawAnimation(type: "Restricted")
                 })
             }
+//            view.bringSubviewToFront(allowAccessView)
+//            allowAccessView.bringSubviewToFront(allowAccessButton)
         }
  
         
@@ -228,14 +235,15 @@ class LaunchViewController: UIViewController {
     
     
     func drawAnimation(type:String = "onboarding") {
-        let availibleWidth = deviceSize.width - 60
-        let accessAvailibleWidth = deviceSize.width - 100
+        let availibleWidth = view.bounds.width - 60
+        let accessAvailibleWidth = view.bounds.width - 100
         UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
             self.baseView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         }) { _ in
             switch type {
             case "Restricted":
                 print("RRR")
+                self.skipButton.isHidden = true
                 self.totalWidthC.constant = availibleWidth
                 self.totalHeightC.constant = availibleWidth
                 self.allowAccessViewHeightC.constant = accessAvailibleWidth
@@ -247,6 +255,7 @@ class LaunchViewController: UIViewController {
                     self.baseView.transform = CGAffineTransform.identity
                     self.allowAccessView.transform = CGAffineTransform.identity
                     self.allowAccessView.alpha = 1
+//                    self.skipButton.alpha = 0
                     
                     self.topLeftImageView.image = UIImage(named: "10")
                     self.topRightImageView.image = UIImage(named: "10")
@@ -272,21 +281,29 @@ class LaunchViewController: UIViewController {
                 self.accessDescLabel.text = "You don't have permission to use the camera."
                 self.shouldGoToSettings = true
                 self.allowAccessButton.setTitle("Go to settings", for: .normal)
+//                self.allowAccessButton.isUserInteractionEnabled = true
                 
             case "DENIED":
+//                self.skipButton.isHidden = true
 //                print("AVAI::: \(availibleWidth), h: \(self.deviceSize.height - 100)")
                 self.totalWidthC.constant = availibleWidth
-                self.totalHeightC.constant = self.deviceSize.height - 60
-                self.allowAccessViewHeightC.constant = self.deviceSize.height - 100
+                self.totalHeightC.constant = self.view.bounds.height - 60
+                self.allowAccessViewHeightC.constant = self.view.bounds.height - 100
                 self.allowAccessWidthC.constant = accessAvailibleWidth
                 self.allowAccessView.isHidden = false
+                
+//                self.skipButton.isHidden = true
+//                UIView.animate(withDuration: 0.2, animations: {
+//                    self.skipButton.alpha = 1
+//                })
                 UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
                     self.view.layoutIfNeeded()
                     self.baseView.transform = CGAffineTransform.identity
                     self.allowAccessView.transform = CGAffineTransform.identity
                     self.allowAccessView.alpha = 1
+//                    self.skipButton.alpha = 0
+                    self.settingsPictureView.alpha = 1
                     if self.firstTimeDeny {
-                        
                         
                         self.topLeftImageView.image = UIImage(named: "10")
                         self.topRightImageView.image = UIImage(named: "10")
@@ -309,9 +326,11 @@ class LaunchViewController: UIViewController {
                         self.bottomLeftImageView.startAnimating()
                         self.bottomRightImageView.startAnimating()
                     }
-                    self.settingsPictureView.alpha = 1
+                    
                 })
                 self.allowAccessButton.setTitle("Go to settings", for: .normal)
+//                self.allowAccessView.alpha = 0.5
+                
                 
             case "needPermissions":
                 print("needPermissions")
@@ -320,6 +339,7 @@ class LaunchViewController: UIViewController {
                 self.allowAccessViewHeightC.constant = accessAvailibleWidth
                 self.allowAccessWidthC.constant = accessAvailibleWidth
                 
+//                self.skipButton.isHidden = true
                 self.allowAccessView.isHidden = false
                 UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
                     self.view.layoutIfNeeded()
@@ -348,7 +368,8 @@ class LaunchViewController: UIViewController {
                     self.bottomLeftImageView.startAnimating()
                     self.bottomRightImageView.startAnimating()
                 })
-                
+                print("hi")
+//                allowAcces
             case "onboarding":
                 
                 self.onboarding.dataSource = self
@@ -372,7 +393,7 @@ class LaunchViewController: UIViewController {
                 
                 
                 self.totalWidthC.constant = availibleWidth
-                self.totalHeightC.constant = self.deviceSize.height - 60
+                self.totalHeightC.constant = self.view.bounds.height - 60
                 UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
                     self.view.layoutIfNeeded()
                     self.baseView.transform = CGAffineTransform.identity
@@ -402,15 +423,17 @@ class LaunchViewController: UIViewController {
                 }) { _ in
                     self.getStartedButton.isHidden = false
                     self.skipButton.isHidden = false
-                    UIView.animate(withDuration: 0.2, animations: {
-                        self.skipButton.alpha = 1
-                    })
+//                    UIView.animate(withDuration: 0.2, animations: {
+//                        self.skipButton.alpha = 1
+//                    })
                 }
             case "fullScreenStart":
-                let finalWidth = self.deviceSize.width
-                let finalHeight = self.deviceSize.height
+                let finalWidth = self.view.bounds.width
+                let finalHeight = self.view.bounds.height
                 self.totalWidthC.constant = finalWidth
                 self.totalHeightC.constant = finalHeight
+                
+//                self.skipButton.isHidden = true
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.05, execute: {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -442,18 +465,18 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
     
     func onboardingWillTransitonToIndex(_ index: Int) {
         if index == 0 {
-            skipButton.alpha = 0
+//            skipButton.alpha = 0
             skipButton.isHidden = false
-            UIView.animate(withDuration: 0.15, animations: {
-                self.skipButton.alpha = 1
-            })
+//            UIView.animate(withDuration: 0.15, animations: {
+//                self.skipButton.alpha = 1
+//            })
         } else {
-            skipButton.alpha = 1
-            UIView.animate(withDuration: 0.15, animations: {
-                self.skipButton.alpha = 0
-            }) { _ in
-                self.skipButton.isHidden = true
-            }
+//            skipButton.alpha = 1
+//            UIView.animate(withDuration: 0.15, animations: {
+//                self.skipButton.alpha = 0
+//            }) { _ in
+            skipButton.isHidden = true
+//            }
         }
         if index == 5 {
             onboardingOnLastPage = true
@@ -518,7 +541,7 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
 
         OnboardingItemInfo(informationImage: UIImage(named: "Sshutter")!,
                    title: "Take photos",
-             description: "Tap the shutter button. Later, you can come back to these and Find from them again and again and again...",
+             description: "Tap the shutter button. Your photos will appear in your History, where you can Find from them again and again and again...",
                 pageIcon: UIImage(named: "3icon")!,
                    color: UIColor(named: "OnboardingGray")!,
               titleColor: UIColor.black,

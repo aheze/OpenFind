@@ -163,6 +163,8 @@ class ViewController: UIViewController {
     
     var allowSearch = true
     
+    
+    
     var insertingListsCount = 0
     var isSchedulingList = false
     
@@ -170,7 +172,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var searchBarLayout: UICollectionViewFlowLayout!
     
-//
     @IBOutlet weak var searchCollectionView: UICollectionView!
     @IBOutlet weak var searchCollectionTopC: NSLayoutConstraint!
     @IBOutlet weak var searchCollectionRightC: NSLayoutConstraint!
@@ -179,6 +180,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var warningLabel: UILabel!
     @IBOutlet weak var warningHeightC: NSLayoutConstraint!
     var searchShrunk = true
+    
+    @IBOutlet weak var alternateWarningView: UIView!
+
+    @IBOutlet weak var alternateWarningLabel: UILabel!
+    @IBOutlet weak var alternateWarningHeightC: NSLayoutConstraint!
     
     @IBOutlet weak var newSearchTextField: TextField!
     @IBOutlet weak var searchTextTopC: NSLayoutConstraint! ///starts at 8
@@ -398,32 +404,31 @@ class ViewController: UIViewController {
                         newSearchTextField.isEnabled = false
                         print("wrong Or")
                         updateMatchesNumber(to: 0)
+                        
                         resetFastHighlights()
-                        allowSearch = false
+//                        allowSearch = false
                         shouldResetHighlights = true
                         
-                        warningLabel.text = "Find is paused | Landscape view is not yet supported"
-                        warningHeightC.constant = 32
+//                        alternateWarningLabel.text = "Find is paused | Landscape view is not yet supported"
+                        alternateWarningHeightC.constant = 70
                         UIView.animate(withDuration: 0.5, animations: {
-                            self.warningView.alpha = 1
-                            self.warningLabel.alpha = 1
-                            self.warningView.layoutIfNeeded()
+                            self.alternateWarningView.alpha = 1
+                            self.alternateWarningLabel.alpha = 1
+                            self.alternateWarningView.layoutIfNeeded()
                         })
                     } else {
                         if displayingOrientationError == true {
                             displayingOrientationError = false
                             newSearchTextField.isEnabled = true
                             print("RIGHT Or")
-                            allowSearch = true
+//                            allowSearch = true
                             shouldResetHighlights = false
-                            warningHeightC.constant = 6
+                            alternateWarningHeightC.constant = 0
                             UIView.animate(withDuration: 0.5, animations: {
-                                self.warningView.alpha = 0
-                                self.warningLabel.alpha = 0
-                                self.warningView.layoutIfNeeded()
-                            }) { _ in
-                                self.warningLabel.text = "Find is paused | Duplicates are not allowed"
-                            }
+                                self.alternateWarningView.alpha = 0
+                                self.alternateWarningLabel.alpha = 0
+                                self.alternateWarningView.layoutIfNeeded()
+                            })
                         }
 //                        SwiftEntryKit.dismiss()
                     }
@@ -568,7 +573,7 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
         }
-        if busyFastFinding == false && allowSearch == true {
+        if busyFastFinding == false && allowSearch == true && displayingOrientationError == false {
             fastFind(in: pixelBuffer)
         }
         guard captureCompletionBlock != nil,

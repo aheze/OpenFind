@@ -39,6 +39,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     var aboutToBeCached = [HistoryModel]()
 //    var reloadingHearts
     
+    var indexToHeader = [Int: TitleSupplementaryView]()
 
 //    var presentingCache = false
     
@@ -129,12 +130,19 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             shouldHeart = false
         }
         
-        if selectedNotCacheCount >= selectedCacheCount {
+//        if selectedNotCacheCount >= selectedCacheCount {
+//            shouldCache = true
+//            changeFloatDelegate?.changeFloat(to: "NotCached")
+//        } else {
+//            changeFloatDelegate?.changeFloat(to: "Cached")
+//            shouldCache = false
+//        }
+        if selectedNotCacheCount >= 1 {
             shouldCache = true
             changeFloatDelegate?.changeFloat(to: "NotCached")
         } else {
-            changeFloatDelegate?.changeFloat(to: "Cached")
             shouldCache = false
+            changeFloatDelegate?.changeFloat(to: "Cached")
         }
     }
     var numberOfSelected = 0 {
@@ -258,6 +266,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
 //                selectButtonSelected = false
                 
             }
+            
         case "fade in":
             // Create a basic toast that appears at the top
             
@@ -411,38 +420,22 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 50)
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 4)
-    }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        switch kind {
-        case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "sectionHeaderId", for: indexPath) as! TitleSupplementaryView
-            //headerView.todayLabel.text = "Text: \(indexPath.section)"
-            let date = sectionToDate[indexPath.section]!
-            
-            let readableDate = date.convertDateToReadableString()
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-//            let todaysDate = Date()
-//            let todaysDateAsString = dateFormatter.string(from: date)
-            
-//            let readableDate = todaysDateAsString
-            headerView.todayLabel.text = readableDate
-            headerView.clipsToBounds = false
+//        switch kind {
+//        case UICollectionView.elementKindSectionHeader:
+        if kind == UICollectionView.elementKindSectionHeader {
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "sectionHeaderID", for: indexPath) as! TitleSupplementaryView
+            if let date = sectionToDate[indexPath.section] {
+                let readableDate = date.convertDateToReadableString()
+                headerView.todayLabel.text = readableDate
+            }
+            indexToHeader[indexPath.section] = headerView
             return headerView
-
-        case UICollectionView.elementKindSectionFooter:
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "sectionFooterId", for: indexPath) as! FooterView
-            footerView.clipsToBounds = false
-            return footerView
-
-        default:
-            print("error")
+        } else {
+            print("footer?")
             return UICollectionReusableView()
         }
-        
     }
     //MARK: Realm Converter
     
@@ -462,8 +455,19 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
-        
+        cell.layer.masksToBounds = true
+//        cell.
         if let hisModel = indexToData[indexPath.section] {
+//            let totalSectionCount = hisModel.count
+            let (shouldRound, cornerMasks) = calculateCornerRadius(indexPath: indexPath)
+            
+//            let newCornerMasks: CACornerMask = cornerMasks
+            if shouldRound {
+                cell.layer.cornerRadius = 4
+                cell.layer.maskedCorners = cornerMasks
+            } else {
+                cell.layer.cornerRadius = 0
+            }
 //            print("YES PATH")
             let historyModel = hisModel[indexPath.item]
             
@@ -962,11 +966,16 @@ extension NewHistoryViewController: ButtonPressed {
         var deleteFromSections = [Int: Int]()
         var filePaths = [URL]()
         
+        var sectionsTouched = [Int]()
+        
         var alreadyCached = 0
 //        var shouldCache = true
         var sectionsToDelete = [Int]()
         for selected in indexPathsSelected {
             let section = selected.section
+            if !sectionsTouched.contains(section) {
+                sectionsTouched.append(section)
+            }
             if deleteFromSections[section] == nil {
                 deleteFromSections[section] = 1
             } else {
@@ -1036,6 +1045,7 @@ extension NewHistoryViewController: ButtonPressed {
             
             let alert = UIAlertController(title: titleMessage, message: "This action can't be undone.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
+                
                 var tempIntSelected = self.indexPathsSelected
                 self.selectButtonSelected = false
                 self.fadeSelectOptions(fadeOut: "fade out")
@@ -1085,6 +1095,14 @@ extension NewHistoryViewController: ButtonPressed {
                         self.collectionView.deleteSections(sections)
                     })
                 }
+                
+                for section in sectionsTouched {
+                    self.modifySection(modifiedSection: section)
+                    self.reloadEdgeItems(modifiedSection: section)
+                }
+//                for section in sectionsToDelete {
+//
+//                }
                 tempIntSelected.removeAll()
                 
                 let alertView = SPAlertView(title: finishMessage, message: "Tap to dismiss", preset: SPAlertPreset.done)
@@ -1174,7 +1192,7 @@ extension NewHistoryViewController: ButtonPressed {
                 }
                 
                 let alert = UIAlertController(title: titleMessage, message: "Caching again will take a while...", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
+                alert.addAction(UIAlertAction(title: "Clear", style: UIAlertAction.Style.destructive, handler: { _ in
                     self.uncachePhotos(at: arrayOfUncache)
                     let alertView = SPAlertView(title: finishMessage, message: "Tap to dismiss", preset: SPAlertPreset.done)
                     alertView.duration = 2.6
@@ -1662,9 +1680,13 @@ extension NewHistoryViewController: ZoomAnimatorDelegate {
         }
         print("cellframe: \(cellFrame)")
         
-        let heightDiff = UIScreen.main.bounds.size.height - view.bounds.size.height
-        print("height diff: \(heightDiff)")
-        cellFrame.origin.y += heightDiff
+        let superCellFrame = self.collectionView.convert(unconvertedFrame, to: nil)
+        let cellYDiff = superCellFrame.origin.y - cellFrame.origin.y
+        let cellXDiff = superCellFrame.origin.x - cellFrame.origin.x
+        
+        cellFrame.origin.y += cellYDiff
+        cellFrame.origin.x += cellXDiff
+        ///works on ipad now
         ///need to fix this, no hardcoded values
         return cellFrame
     }
@@ -1762,4 +1784,151 @@ extension URL {
     }
 }
 
-
+extension NewHistoryViewController {
+    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        indexToHeader.removeValue(forKey: indexPath.section)
+    }
+    func modifySection(modifiedSection: Int) {
+        if let header = indexToHeader[modifiedSection] {
+            if let date = sectionToDate[modifiedSection] {
+                let readableDate = date.convertDateToReadableString()
+                header.todayLabel.text = readableDate
+            }
+        }
+//        let sections = collectionView.visibleSupplementaryViews(ofKind: UICollectionView.elementKindSectionHeader)
+//        for section in sections {
+////            section.
+////            let nd = section.ind
+//            if let header = section as? TitleSupplementaryView {
+////                header.todayLabel.text =
+//                if let date = sectionToDate[modifiedSection] {
+//                    let readableDate = date.convertDateToReadableString()
+//                    header.todayLabel.text = readableDate
+//                }
+//            }
+//        }
+    }
+    func reloadEdgeItems(modifiedSection: Int) {
+        if let section = indexToData[modifiedSection] {
+            var reloadPaths = [IndexPath]()
+            let sectionCount = section.count
+            print("SEC COUNT: \(sectionCount)")
+            if section.count <= 6 {
+                print("6 under")
+                for (index, item) in section.enumerated() {
+                    print("sec: \(item), ind: \(index)")
+                    let indP = IndexPath(item: index, section: modifiedSection)
+                    reloadPaths.append(indP)
+                }
+            } else {
+                print("Else")
+                let firstThree = [IndexPath(item: 0, section: modifiedSection), IndexPath(item: 1, section: modifiedSection), IndexPath(item: 2, section: modifiedSection)]
+                let last = sectionCount - 1
+                let secondToLast = sectionCount - 2
+                let thirdToLast = sectionCount - 3
+                
+                let lastThree = [IndexPath(item: thirdToLast, section: modifiedSection), IndexPath(item: secondToLast, section: modifiedSection), IndexPath(item: last, section: modifiedSection)]
+                
+                reloadPaths = firstThree + lastThree
+                
+            }
+            if reloadPaths.count >= 1 {
+                print("MORE THAN !")
+//                collectionView.reloadItems(at: reloadPaths)
+                for path in reloadPaths {
+                    print("path...")
+                    if let cell = collectionView.cellForItem(at: path) as? HPhotoCell {
+                        let (shouldRound, corners) = calculateCornerRadius(indexPath: path)
+                        if shouldRound {
+                            print("Round")
+//                            cell.layer.maskedCorners = []
+                            UIView.animate(withDuration: 0.3, animations: {
+                                cell.layer.cornerRadius = 4
+                                cell.layer.maskedCorners = corners
+//                                cell.layoutIfNeeded()
+                            })
+                        } else {
+                            print("NO")
+                            UIView.animate(withDuration: 0.3, animations: {
+                                cell.layer.cornerRadius = 0
+//                                cell.layoutIfNeeded()
+                            })
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+    func calculateCornerRadius(indexPath: IndexPath) -> (Bool, CACornerMask) {
+        
+        
+//        print("start___")
+//    view.layer.maskedCorners
+        if let section = indexToData[indexPath.section] {
+            let totalSectionCount = section.count
+            if totalSectionCount <= 3 {
+                if totalSectionCount == 1 {
+                    return (true, [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner])
+                } else if totalSectionCount == 2 {
+                    if indexPath.item == 0 {
+                        return (true, [.layerMinXMinYCorner, .layerMinXMaxYCorner])
+                    } else if indexPath.item == 1 {
+                        return (true, [.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
+                    }
+                } else { /// Three cells
+                    if indexPath.item == 0 {
+                        return (true, [.layerMinXMinYCorner, .layerMinXMaxYCorner])
+                    } else if indexPath.item == 2 {
+                        return (true, [.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
+                    }
+                }
+            } else {
+                
+                if indexPath.item <= 2 {
+                    switch indexPath.item {
+                    case 0:
+                        return (true, [.layerMinXMinYCorner])
+                    case 2:
+                        if totalSectionCount <= 5 {
+                            return (true, [.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
+                        } else {
+                            return (true, [.layerMaxXMinYCorner])
+                        }
+                        
+                    default:
+                        break
+                    }
+                } else {
+                    let lastIndex = totalSectionCount - 1
+                    let secondToLastIndex = totalSectionCount - 2
+                    let thirdToLastIndex = totalSectionCount - 3
+                    
+                    if totalSectionCount % 3 == 0 {
+                        if indexPath.item == thirdToLastIndex {
+                            return (true, [.layerMinXMaxYCorner])
+                        } else if indexPath.item == lastIndex {
+                            return (true, [.layerMaxXMaxYCorner])
+                        }
+                    } else if totalSectionCount % 3 == 2 {
+                        if indexPath.item == secondToLastIndex {
+                            return (true, [.layerMinXMaxYCorner])
+                        } else if indexPath.item == lastIndex {
+                            return (true, [.layerMaxXMaxYCorner])
+                        } else if indexPath.item == thirdToLastIndex {
+                            return (true, [.layerMaxXMaxYCorner])
+                        }
+                    } else {
+                        if indexPath.item == lastIndex {
+                            return (true, [.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
+                        } else if indexPath.item == secondToLastIndex {
+                            return (true, [.layerMaxXMaxYCorner])
+                        }
+                    }
+                }
+            }
+        }
+//        print("EXIT")
+        return (false, [])
+    }
+}

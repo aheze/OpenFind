@@ -78,15 +78,12 @@
 		495F38FE243302D500A17D93 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38FD243302D500A17D93 /* StatsViewController.swift */; };
 		495F39012433FF1600A17D93 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F39002433FF1600A17D93 /* LaunchViewController.swift */; };
 		4966B70A23DE98C800A8523A /* MakeNewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4966B70923DE98C800A8523A /* MakeNewList.swift */; };
-		4966B71023E124D700A8523A /* ImagePickerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4966B70F23E124D700A8523A /* ImagePickerList.swift */; };
-		4966B71323E1252800A8523A /* ImagePickerList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4966B71223E1252800A8523A /* ImagePickerList.xib */; };
 		4972B40E23F117C500843537 /* GeneralTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4972B40D23F117C500843537 /* GeneralTableviewCell.swift */; };
 		4979A39023AF3A4800B09380 /* FastMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979A38F23AF3A4800B09380 /* FastMode.swift */; };
 		4979A39323AF3C4F00B09380 /* FastVisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979A39223AF3C4F00B09380 /* FastVisionHandler.swift */; };
 		498332D82431B4D500AD083E /* LDGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498332D72431B4D500AD083E /* LDGradientView.swift */; };
 		498332DA243279EF00AD083E /* SingleHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498332D9243279EF00AD083E /* SingleHelp.swift */; };
 		4988FC4823BEF89600199635 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988FC4723BEF89600199635 /* ListModel.swift */; };
-		498EDA0123E130C6009EB0CF /* SymbolsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498EDA0023E130C6009EB0CF /* SymbolsList.swift */; };
 		4990AAE223EDB4CE00FAF37B /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4990AAE123EDB4CE00FAF37B /* GeneralViewController.swift */; };
 		4990AAE423EDB4EF00FAF37B /* SymbolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4990AAE323EDB4EF00FAF37B /* SymbolsViewController.swift */; };
 		4990AAE623EDB50E00FAF37B /* ColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4990AAE523EDB50E00FAF37B /* ColorsViewController.swift */; };
@@ -197,15 +194,12 @@
 		495F38FD243302D500A17D93 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		495F39002433FF1600A17D93 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		4966B70923DE98C800A8523A /* MakeNewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeNewList.swift; sourceTree = "<group>"; };
-		4966B70F23E124D700A8523A /* ImagePickerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerList.swift; sourceTree = "<group>"; };
-		4966B71223E1252800A8523A /* ImagePickerList.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePickerList.xib; sourceTree = "<group>"; };
 		4972B40D23F117C500843537 /* GeneralTableviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTableviewCell.swift; sourceTree = "<group>"; };
 		4979A38F23AF3A4800B09380 /* FastMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastMode.swift; sourceTree = "<group>"; };
 		4979A39223AF3C4F00B09380 /* FastVisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastVisionHandler.swift; sourceTree = "<group>"; };
 		498332D72431B4D500AD083E /* LDGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDGradientView.swift; sourceTree = "<group>"; };
 		498332D9243279EF00AD083E /* SingleHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleHelp.swift; sourceTree = "<group>"; };
 		4988FC4723BEF89600199635 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
-		498EDA0023E130C6009EB0CF /* SymbolsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsList.swift; sourceTree = "<group>"; };
 		4990AAE123EDB4CE00FAF37B /* GeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
 		4990AAE323EDB4EF00FAF37B /* SymbolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsViewController.swift; sourceTree = "<group>"; };
 		4990AAE523EDB50E00FAF37B /* ColorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsViewController.swift; sourceTree = "<group>"; };
@@ -484,16 +478,6 @@
 			path = Launch;
 			sourceTree = "<group>";
 		};
-		4966B71123E1251200A8523A /* ChangeImage */ = {
-			isa = PBXGroup;
-			children = (
-				4966B70F23E124D700A8523A /* ImagePickerList.swift */,
-				4966B71223E1252800A8523A /* ImagePickerList.xib */,
-				498EDA0023E130C6009EB0CF /* SymbolsList.swift */,
-			);
-			path = ChangeImage;
-			sourceTree = "<group>";
-		};
 		496937352353C1E9009CA41A /* Modes */ = {
 			isa = PBXGroup;
 			children = (
@@ -584,7 +568,6 @@
 			isa = PBXGroup;
 			children = (
 				490BC3F423F8DA30004D1433 /* Edit Lists */,
-				4966B71123E1251200A8523A /* ChangeImage */,
 				4928525923D617270048EC13 /* ListController.swift */,
 				49569B3223D65AA4009308CA /* ListCollectionCell.swift */,
 				49585DCC23ED0B8D003AB768 /* Select List SEK */,
@@ -775,7 +758,6 @@
 				4956352A2437A4B60001E8C6 /* defaultSeeds.realm in Resources */,
 				4953F3C224171E5F00690E53 /* FindBar.xib in Resources */,
 				49D985B124188CA4005F4E92 /* NewListToolbarCell.xib in Resources */,
-				4966B71323E1252800A8523A /* ImagePickerList.xib in Resources */,
 				4999ACA02353A81100AB06A7 /* LaunchScreen.storyboard in Resources */,
 				49B7A32D2390823C0070209F /* Colors.xcassets in Resources */,
 				49BC783523C8275B003D9904 /* HistorySelect.xib in Resources */,
@@ -886,7 +868,6 @@
 				49BC783623C8275B003D9904 /* HistorySelect.swift in Sources */,
 				49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */,
 				490BC3F623F8DA41004D1433 /* EditListViewController.swift in Sources */,
-				4966B71023E124D700A8523A /* ImagePickerList.swift in Sources */,
 				49301BF02400D4FF00B4780B /* HelpControllers.swift in Sources */,
 				49563522243694BC0001E8C6 /* PaperOnboarding.swift in Sources */,
 				4972B40E23F117C500843537 /* GeneralTableviewCell.swift in Sources */,
@@ -905,7 +886,6 @@
 				495F38FC2432C8FE00A17D93 /* Carte.swift in Sources */,
 				4904524C2379072F0046570D /* UpdateMatches.swift in Sources */,
 				495F38F22432B7B700A17D93 /* CreditsViewController.swift in Sources */,
-				498EDA0123E130C6009EB0CF /* SymbolsList.swift in Sources */,
 				4956352D2437F4820001E8C6 /* DebugPrint.swift in Sources */,
 				492EB4F023F504BC007142CA /* PopulateSymbols.swift in Sources */,
 				49115089235D17EB00EC0C04 /* ShutterPressed.swift in Sources */,

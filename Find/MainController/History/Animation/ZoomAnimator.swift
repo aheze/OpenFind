@@ -51,7 +51,8 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
         toReferenceImageView.isHidden = true
         containerView.addSubview(toVC.view)
         
-        let referenceImage = fromReferenceImageView.image!
+        guard let referenceImage = fromReferenceImageView.image else { transitionContext.completeTransition(false)
+            return }
         
         if self.transitionImageView == nil {
             let transitionImageView = UIImageView(image: referenceImage)

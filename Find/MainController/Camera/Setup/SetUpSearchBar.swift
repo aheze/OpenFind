@@ -247,6 +247,14 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
                                                                    attributes:
                                                                    [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.8784313725, green: 0.878935039, blue: 0.878935039, alpha: 0.75)])
 
+        
+        alternateWarningView.alpha = 0
+        alternateWarningView.layer.cornerRadius = 6
+        alternateWarningView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        
+        alternateWarningLabel.alpha = 0
+        alternateWarningLabel.text = "Only Portrait view is currently supported.\nPlease rotate your iPad to Portrait view, then relaunch the app."
+        
         warningView.alpha = 0
         warningView.layer.cornerRadius = 6
         warningView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
@@ -505,7 +513,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
                 self.view.layoutIfNeeded()
             })
         } else {
-            warningHeightC.constant = 6
+            warningHeightC.constant = 0
             UIView.animate(withDuration: 0.5, animations: {
                 self.warningView.alpha = 0
                 self.warningLabel.alpha = 0

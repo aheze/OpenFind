@@ -89,7 +89,7 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
 
         OnboardingItemInfo(informationImage: UIImage(named: "Sshutter")!,
                    title: "Take photos",
-             description: "Tap the shutter button. Your photos are stored in your History, where you can Find from them again and again and again...",
+             description: "Tap the shutter button. Your photos will appear in your History, where you can Find from them again and again and again...",
                 pageIcon: UIImage(named: "3icon")!,
                    color: UIColor(named: "OnboardingGray")!,
               titleColor: UIColor.black,

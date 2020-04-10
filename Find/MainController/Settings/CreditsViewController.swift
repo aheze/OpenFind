@@ -42,7 +42,7 @@ class CreditsViewController: UIViewController, UITextViewDelegate {
         let kamran = NSAttributedString(string: "H. Kamran (about.me/hkamran80) ", attributes: kamranLink)
         let wink = NSAttributedString(string: "W in K (soundcloud.com/officialwinkmusic) ", attributes: winkLink)
         
-//        let blackAttribute = [NSAttributedString.Key.foregroundColor:  UIColor.label]
+//        let blackAt  tribute = [NSAttributedString.Key.foregroundColor:  UIColor.label]
         let thanksTo = NSAttributedString(string: "Thanks to ")
         let forFeedback = NSAttributedString(string: "for feedback and being a beta tester, and ")
         let videoMusic = NSAttributedString(string: "for the app promo music on the App Store!")

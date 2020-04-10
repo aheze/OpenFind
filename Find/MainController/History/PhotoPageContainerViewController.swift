@@ -157,6 +157,10 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
                 alertView.present()
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.sourceView = cacheButton
+                popoverController.sourceRect = cacheButton.bounds
+            }
             self.present(alert, animated: true, completion: nil)
             
         }
@@ -230,6 +234,10 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             self.delegate?.containerViewController(self, indexDidUpdate: self.currentIndex)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = deleteButton
+            popoverController.sourceRect = deleteButton.bounds
+       }
         self.present(alert, animated: true, completion: nil)
         
     }

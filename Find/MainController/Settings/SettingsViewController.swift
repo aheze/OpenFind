@@ -96,6 +96,7 @@ class SettingsViewController: UIViewController {
     }
     
 
+    @IBOutlet weak var textDetectButton: UIButton!
     @IBAction func textDetectIndicatorPressed(_ sender: Any) {
         PresentHelp.displayWithURL(urlString: "https://zjohnzheng.github.io/FindHelp/Settings-TextDetectIndicator.html", topLabelText: "Text Detected Indicator", color: #colorLiteral(red: 0, green: 0.6156862745, blue: 0.937254902, alpha: 1))
     }
@@ -111,6 +112,7 @@ class SettingsViewController: UIViewController {
     
     
     
+    @IBOutlet weak var hapticButton: UIButton!
     @IBAction func hapticFeedbackPressed(_ sender: Any) {
         PresentHelp.displayWithURL(urlString: "https://zjohnzheng.github.io/FindHelp/Settings-HapticFeedback.html", topLabelText: "Haptic Feedback", color: #colorLiteral(red: 0, green: 0.6156862745, blue: 0.937254902, alpha: 1))
         
@@ -130,6 +132,9 @@ class SettingsViewController: UIViewController {
     @IBAction func helpPressed(_ sender: Any) {
         displayHelpController()
     }
+    
+    
+    @IBOutlet weak var tutorialButton: UIButton!
     
     @IBAction func tutorialButtonPressed(_ sender: Any) {
         print("tutorial")
@@ -205,10 +210,15 @@ class SettingsViewController: UIViewController {
             SwiftEntryKit.display(entry: vc, using: attributes)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = tutorialButton
+            popoverController.sourceRect = tutorialButton.bounds
+        }
         self.present(alert, animated: true, completion: nil)
 //        GeneralTutorialViewController
     }
     
+    @IBOutlet weak var clearHistButton: UIButton!
     @IBAction func clearHistPressed(_ sender: Any) {
         let alert = UIAlertController(title: "Clear History", message: "All your photos and their caches will be deleted. This action can't be undone.", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Clear", style: UIAlertAction.Style.destructive, handler: { _ in
@@ -253,9 +263,14 @@ class SettingsViewController: UIViewController {
             
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = clearHistButton
+            popoverController.sourceRect = clearHistButton.bounds
+        }
         self.present(alert, animated: true, completion: nil)
     }
     
+    @IBOutlet weak var clearListsButton: UIButton!
     @IBAction func clearListsPressed(_ sender: Any) {
         let alert = UIAlertController(title: "Clear Lists", message: "All your lists will be deleted. This action can't be undone.", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Clear", style: UIAlertAction.Style.destructive, handler: { _ in
@@ -275,11 +290,16 @@ class SettingsViewController: UIViewController {
             
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = clearListsButton
+            popoverController.sourceRect = clearListsButton.bounds
+        }
         self.present(alert, animated: true, completion: nil)
         
         print("clear list")
     }
     
+    @IBOutlet weak var resetSettingsButton: UIButton!
     @IBAction func resetSettingsPressed(_ sender: Any) {
         let alert = UIAlertController(title: "Reset Settings", message: "Settings will be reset to default.", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Reset", style: UIAlertAction.Style.default, handler: { _ in
@@ -297,6 +317,10 @@ class SettingsViewController: UIViewController {
             
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = resetSettingsButton
+            popoverController.sourceRect = resetSettingsButton.bounds
+        }
         self.present(alert, animated: true, completion: nil)
     }
     

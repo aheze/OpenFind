@@ -278,6 +278,10 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
           
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = bottomDeleteButton
+            popoverController.sourceRect = bottomDeleteButton.bounds
+        }
         self.present(alert, animated: true, completion: nil)
         
     }

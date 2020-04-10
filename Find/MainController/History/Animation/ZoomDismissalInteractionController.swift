@@ -165,6 +165,8 @@ extension ZoomDismissalInteractionController: UIViewControllerInteractiveTransit
             else {
                 return
         }
+//        print("VIEW! ;\(fromVC.view.bounds)")
+//        print("VIEW2 ;\(toVC.view.bounds)")
         
         animator.fromDelegate?.transitionWillStartWith(zoomAnimator: animator)
         animator.toDelegate?.transitionWillStartWith(zoomAnimator: animator)
@@ -172,7 +174,9 @@ extension ZoomDismissalInteractionController: UIViewControllerInteractiveTransit
         self.fromReferenceImageViewFrame = fromReferenceImageViewFrame
         self.toReferenceImageViewFrame = toReferenceImageViewFrame
         
-        let referenceImage = fromReferenceImageView.image!
+//        let referenceImage = fromReferenceImageView.image!
+        guard let referenceImage = fromReferenceImageView.image else { transitionContext.completeTransition(false)
+        return }
         
         //containerView.insertSubview(fromVC.view, belowSubview: toVC.view)
         ///Had to flip fromVC and toVC for the dismiss to NOT result in a black screen!

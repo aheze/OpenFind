@@ -253,41 +253,54 @@ extension ViewController {
         newString.append(regularText)
         cacheController.currentlyHowManyMatches.attributedText = newString
         
-        var wordsFinding = [String]()
-        for list in stringToList.keys {
-            wordsFinding.append(list)
+        if allowSearch == true {
+            var wordsFinding = [String]()
+            for list in stringToList.keys {
+                wordsFinding.append(list)
+            }
+            
+            var finalMatchesString = ""
+            
+            switch wordsFinding.count {
+             case 0:
+                finalMatchesString = "[no words]"
+             case 1:
+                finalMatchesString = "\"\(wordsFinding[0])\""
+             case 2:
+                finalMatchesString = "\"\(wordsFinding[0])\" and \"\(wordsFinding[1])\""
+             default:
+                for (index, message) in wordsFinding.enumerated() {
+                    if index != wordsFinding.count - 1 {
+                        finalMatchesString.append("\"\(message)\", ")
+                    } else {
+                        finalMatchesString.append(" and \"\(message)\"")
+                    }
+                }
+             }
+            
+            var wordsThis = "these"
+            var wordS = "s"
+            if wordsFinding.count == 1 { wordsThis = "this"; wordS = "" }
+            
+            let regularMatchesText = NSAttributedString(string: "Currently searching for \(wordsThis) word\(wordS): ", attributes: regularAttribute)
+            let boldMatchesText = NSAttributedString(string: finalMatchesString, attributes: boldAttribute)
+            
+            let newMatches = NSMutableAttributedString()
+            newMatches.append(regularMatchesText)
+            newMatches.append(boldMatchesText)
+            cacheController.currentSearchingForTheseWords.attributedText = newMatches
+            
+        } else {
+            let regularMatchesText = NSAttributedString(string: "Currently searching for: ", attributes: regularAttribute)
+            let boldMatchesText = NSAttributedString(string: "Nothing! You have duplicates, so Find is currently paused. Make sure that there are no duplicates in the Search Bar.", attributes: boldAttribute)
+            
+            let newMatches = NSMutableAttributedString()
+            newMatches.append(regularMatchesText)
+            newMatches.append(boldMatchesText)
+            cacheController.currentSearchingForTheseWords.attributedText = newMatches
         }
         
-        var finalMatchesString = ""
         
-        switch wordsFinding.count {
-         case 0:
-            finalMatchesString = "[no words]"
-         case 1:
-            finalMatchesString = "\"\(wordsFinding[0])\""
-         case 2:
-            finalMatchesString = "\"\(wordsFinding[0])\" and \"\(wordsFinding[1])\""
-         default:
-            for (index, message) in wordsFinding.enumerated() {
-                if index != wordsFinding.count - 1 {
-                    finalMatchesString.append("\"\(message)\", ")
-                } else {
-                    finalMatchesString.append(" and \"\(message)\"")
-                }
-            }
-         }
-        
-        var wordsThis = "these"
-        var wordS = "s"
-        if wordsFinding.count == 1 { wordsThis = "this"; wordS = "" }
-        
-        let regularMatchesText = NSAttributedString(string: "Currently searching for \(wordsThis) word\(wordS): ", attributes: regularAttribute)
-        let boldMatchesText = NSAttributedString(string: finalMatchesString, attributes: boldAttribute)
-        
-        let newMatches = NSMutableAttributedString()
-        newMatches.append(regularMatchesText)
-        newMatches.append(boldMatchesText)
-        cacheController.currentSearchingForTheseWords.attributedText = newMatches
         
         var attributes = EKAttributes.centerFloat
         attributes.displayDuration = .infinity
