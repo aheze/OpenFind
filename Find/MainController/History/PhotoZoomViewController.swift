@@ -355,7 +355,8 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
         }
         
         DispatchQueue.global(qos: .background).async {
-            guard let photoUrl = URL(string: "\(self.folderURL)\(photo.filePath)") else { print("WRONG URL!!!!"); return }
+            let photoUrl = self.folderURL.appendingPathComponent(photo.filePath)
+//            guard let photoUrl = URL(string: "\(self.folderURL)\(photo.filePath)") else { print("WRONG URL!!!!"); return }
             
             let request = VNRecognizeTextRequest { request, error in
                 self.handleFastDetectedText(request: request, error: error, photo: photo)

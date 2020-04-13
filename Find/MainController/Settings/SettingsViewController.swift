@@ -231,7 +231,8 @@ class SettingsViewController: UIViewController {
                 for photo in photoCats {
                     
                     let urlString = photo.filePath
-                    guard let finalUrl = URL(string: "\(self.folderURL)\(urlString)") else { print("Invalid File name"); return }
+                    let finalUrl = self.folderURL.appendingPathComponent(urlString)
+//                    guard let finalUrl = URL(string: "\(self.folderURL)\(urlString)") else { print("Invalid File name"); return }
                     tempFilePaths.append(finalUrl)
                     tempPhotos.append(photo)
                     for content in photo.contents {

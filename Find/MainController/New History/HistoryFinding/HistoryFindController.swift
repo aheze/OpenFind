@@ -333,13 +333,16 @@ class HistoryFindController: UIViewController {
         if photos.count > 0 {
            let samplePath = photos[0]
 //                print("asdsample")
-            let urlString = "\(folderURL)\(samplePath.filePath)"
-            if let newURL = URL(string: urlString) {
-                if let newImage = newURL.loadImageFromDocumentDirectory() {
-                    imageSize = newImage.size
-                }
+//            let urlString = "\(folderURL)\(samplePath.filePath)"
+//            if let newURL = URL(string: urlString) {
+//                if let newImage = newURL.loadImageFromDocumentDirectory() {
+//                    imageSize = newImage.size
+//                }
+//            }
+            let finalUrl = folderURL.appendingPathComponent(samplePath.filePath)
+            if let newImage = finalUrl.loadImageFromDocumentDirectory() {
+                imageSize = newImage.size
             }
-            
         }
         warningView.alpha = 0
         warningView.layer.cornerRadius = 6
@@ -364,8 +367,9 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
         let model = resultPhotos[indexPath.row]
         
         var urlPath = model.photo.filePath
-        urlPath = "\(folderURL)\(urlPath)"
-        let finalUrl = URL(string: urlPath)
+//        urlPath = "\(folderURL)\(urlPath)"
+//        let finalUrl = URL(string: urlPath)
+        let finalUrl = folderURL.appendingPathComponent(urlPath)
         
         var numberText = ""
         if model.numberOfMatches == 1 {
@@ -1196,7 +1200,8 @@ extension HistoryFindController {
                     
                     
     //                print("OCR: \(self.ocrPassCount)")
-                    guard let photoUrl = URL(string: "\(self.folderURL)\(photo.filePath)") else { print("WRONG URL!!!!"); return }
+                    let photoUrl = self.folderURL.appendingPathComponent(photo.filePath)
+//                    guard let photoUrl = URL(string: "\(self.folderURL)\(photo.filePath)") else { print("WRONG URL!!!!"); return }
                     
                     let request = VNRecognizeTextRequest { request, error in
                         self.handleFastDetectedText(request: request, error: error, photo: photo)

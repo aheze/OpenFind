@@ -370,12 +370,18 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         deselectAllItems(deselect: true)
         collectionView?.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 82, right: 16)
         if photoCategories?.count ?? 0 > 0 {
-            if let samplePath = photoCategories?[0] {
-                let urlString = "\(folderURL)\(samplePath.filePath)"
-                if let newURL = URL(string: urlString) {
-                    if let newImage = newURL.loadImageFromDocumentDirectory() {
-                        imageSize = newImage.size
-                    }
+            if let samplePhoto = photoCategories?[0] {
+                
+                
+//                let urlString = "\(folderURL)\(samplePhoto.filePath)"
+//                if let newURL = URL(string: urlString) {
+//                    if let newImage = newURL.loadImageFromDocumentDirectory() {
+//                        imageSize = newImage.size
+//                    }
+//                }
+                let finalUrl = folderURL.appendingPathComponent(samplePhoto.filePath)
+                if let newImage = finalUrl.loadImageFromDocumentDirectory() {
+                    imageSize = newImage.size
                 }
             }
         }
@@ -470,13 +476,14 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             }
 //            print("YES PATH")
             let historyModel = hisModel[indexPath.item]
+//            print("FOLD: \(folderURL)")
+            let urlPath = historyModel.filePath
+            let finalURL = folderURL.appendingPathComponent(urlPath)
             
-            var urlPath = historyModel.filePath
-            urlPath = "\(folderURL)\(urlPath)"
-            let finalUrl = URL(string: urlPath)
+            
             cell.imageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.imageView.sd_imageTransition = .fade
-            cell.imageView.sd_setImage(with: finalUrl)
+            cell.imageView.sd_setImage(with: finalURL)
             
             if historyModel.isHearted == true {
                 cell.heartView.alpha = 1
@@ -984,7 +991,9 @@ extension NewHistoryViewController: ButtonPressed {
             if let photoCat = indexToData[selected.section] {
                 let photo = photoCat[selected.item]
                 let urlString = photo.filePath
-                guard let finalUrl = URL(string: "\(folderURL)\(urlString)") else { print("Invalid File name"); return }
+                
+                let finalUrl = folderURL.appendingPathComponent(urlString)
+//                guard let finalUrl = URL(string: "\(folderURL)\(urlString)") else { print("Invalid File name"); return }
                 if photo.isDeepSearched == true {
                     alreadyCached += 1
                 }
@@ -1341,7 +1350,8 @@ extension NewHistoryViewController {
         
         var arrayOfPaths = [URL]()
         var arrayOfCategoryDates = [Date]()
-        var tempDictOfImagePaths = [Date: [URL]]()
+//        var tempDictOfImagePaths = [Date: [URL]]()
+        var dateToNumber = [Date: Int]()
         
         guard let photoCats = photoCategories else { print("No Cats or Error!"); return }
         
@@ -1366,14 +1376,21 @@ extension NewHistoryViewController {
                 arrayOfCategoryDates.append(dateFromString)
             }
             
-            let imagePath = "\(folderURL)/\(singleHist.filePath)"
+//            let imagePath = "\(folderURL)/\(singleHist.filePath)"
             if !arrayOfCategoryDates.contains(dateFromString) {
                 arrayOfCategoryDates.append(dateFromString)
             }
-            if let imageUrl = URL(string: imagePath) {
-                tempDictOfImagePaths[dateFromString, default: [URL]()].append(imageUrl)
-                arrayOfPaths.append(imageUrl)
+            let finalUrl = folderURL.appendingPathComponent(singleHist.filePath)
+//            if let imageUrl = URL(string: imagePath) {
+//                tempDictOfImagePaths[dateFromString, default: [URL]()].append(imageUrl)
+            if dateToNumber[dateFromString] == nil {
+                dateToNumber[dateFromString] = 0
+            } else {
+                dateToNumber[dateFromString]! += 1
             }
+//                arrayOfPaths.append(imageUrl)
+            arrayOfPaths.append(finalUrl)
+//            }
         }
         arrayOfCategoryDates.sort(by: { $0.compare($1) == .orderedDescending})
 //        arrayOfPaths.sort(by: { $0.compare($1) == .orderedDescending})
@@ -1383,8 +1400,9 @@ extension NewHistoryViewController {
             sectionCounts.append(0)
             sectionToDate[index] = date
             
-            if let arrayOfImageUrls = tempDictOfImagePaths[date] {
-                for (secondIndex, individualUrl) in arrayOfImageUrls.enumerated() {
+            if let numberOfPhotosInDate = dateToNumber[date] {
+                print("NUM PO: \(numberOfPhotosInDate)")
+                for secondIndex in 0...numberOfPhotosInDate {
                     count += 1
                     let indexPath = IndexMatcher()
                     indexPath.section = index
@@ -1502,7 +1520,9 @@ extension NewHistoryViewController: ZoomDeletedPhoto {
                     sectionToDelete = section
                 }
                 let urlString = photoToDelete.filePath
-                guard let finalUrl = URL(string: "\(folderURL)\(urlString)") else { print("Invalid File name"); return }
+                
+                let finalUrl = folderURL.appendingPathComponent(urlString)
+//                guard let finalUrl = URL(string: "\(folderURL)\(urlString)") else { print("Invalid File name"); return }
                 
                 let fileManager = FileManager.default
                 print("file delete... \(finalUrl)")

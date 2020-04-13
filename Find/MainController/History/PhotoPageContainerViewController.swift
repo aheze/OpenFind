@@ -195,15 +195,16 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
                    self.transitionController.deletedLast = true
                    self.dismiss(animated: true, completion: nil)
                } else {
-                   newIndex = index
-                   vc.delegate = self
-                   vc.imageSize = self.photoSize
-                   let filePath = self.photoModels[newIndex].filePath
-                   let urlString = URL(string: "\(self.folderURL)\(filePath)")
-                   vc.url = urlString
-                   vc.index = newIndex
-                   self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
-                   let viewControllers = [ vc ]
+                    newIndex = index
+                    vc.delegate = self
+                    vc.imageSize = self.photoSize
+                    let filePath = self.photoModels[newIndex].filePath
+//                   let urlString = URL(string: "\(self.folderURL)\(filePath)")
+                    let urlString = self.folderURL.appendingPathComponent(filePath)
+                    vc.url = urlString
+                    vc.index = newIndex
+                    self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
+                    let viewControllers = [ vc ]
                     UIView.animate(withDuration: 0.25, animations: {
                         self.currentViewController.view.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
                         self.currentViewController.view.alpha = 0
@@ -216,7 +217,8 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
                 vc.delegate = self
                 vc.imageSize = self.photoSize
                 let filePath = self.photoModels[newIndex].filePath
-                let urlString = URL(string: "\(self.folderURL)\(filePath)")
+//                let urlString = URL(string: "\(self.folderURL)\(filePath)")
+                let urlString = self.folderURL.appendingPathComponent(filePath)
                 vc.url = urlString
                 vc.index = newIndex
                 self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
@@ -349,7 +351,9 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             
             let model = self.findModels[self.currentIndex]
             let filePath = model.photo.filePath
-            urlString = URL(string: "\(folderURL)\(filePath)")
+            
+            urlString = folderURL.appendingPathComponent(filePath)
+//            urlString = URL(string: "\(folderURL)\(filePath)")
             
             vc.matchToColors = matchToColors
             
@@ -360,7 +364,8 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         } else {
             vc.photoComp = self.photoModels[self.currentIndex]
             let filePath = self.photoModels[self.currentIndex].filePath
-            urlString = URL(string: "\(folderURL)\(filePath)")
+//            urlString = URL(string: "\(folderURL)\(filePath)")
+            urlString = folderURL.appendingPathComponent(filePath)
             self.changedTerms = vc
             vc.cameFromFind = false
             vc.returnNumber = self
@@ -550,13 +555,15 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
         if cameFromFind {
             let model = self.findModels[self.currentIndex - 1]
             let filePath = model.photo.filePath
-            urlString = URL(string: "\(folderURL)\(filePath)")
+//            urlString = URL(string: "\(folderURL)\(filePath)")
+            urlString = folderURL.appendingPathComponent(filePath)
             vc.matchToColors = matchToColors
             vc.highlights = model.components
             vc.cameFromFind = true
         } else {
             let filePath = self.photoModels[self.currentIndex - 1].filePath
-            urlString = URL(string: "\(folderURL)\(filePath)")
+//            urlString = URL(string: "\(folderURL)\(filePath)")
+            urlString = folderURL.appendingPathComponent(filePath)
             vc.photoComp = self.photoModels[self.currentIndex - 1]
             vc.cameFromFind = false
 //            self.changedTerms = vc
@@ -599,13 +606,15 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
 //
             let model = self.findModels[self.currentIndex + 1]
             let filePath = model.photo.filePath
-            urlString = URL(string: "\(folderURL)\(filePath)")
+//            urlString = URL(string: "\(folderURL)\(filePath)")
+            urlString = folderURL.appendingPathComponent(filePath)
             vc.matchToColors = matchToColors
             vc.highlights = model.components
             vc.cameFromFind = true
         } else {
             let filePath = self.photoModels[self.currentIndex + 1].filePath
-            urlString = URL(string: "\(folderURL)\(filePath)")
+//            urlString = URL(string: "\(folderURL)\(filePath)")
+            urlString = folderURL.appendingPathComponent(filePath)
             vc.photoComp = self.photoModels[self.currentIndex + 1]
             vc.cameFromFind = false
 //            self.changedTerms = vc

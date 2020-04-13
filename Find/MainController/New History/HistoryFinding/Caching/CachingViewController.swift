@@ -212,10 +212,11 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
 //        let historyModel = hisModel[indexPath.item]
 //        print("CELLFORROW")
         let filePath = historyModel.filePath
-        let urlPath = "\(folderURL)\(filePath)"
+//        let urlPath = "\(folderURL)\(filePath)"
 //        print(urlPath)
         
-        let finalUrl = URL(string: urlPath)
+//        let finalUrl = URL(string: urlPath)
+        let finalUrl = folderURL.appendingPathComponent(filePath)
         cell.imageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.imageView.sd_imageTransition = .fade
         cell.imageView.sd_setImage(with: finalUrl)
@@ -340,7 +341,8 @@ extension CachingViewController {
                    }
                     if !photo.isDeepSearched {
                         self.dispatchGroup.enter()
-                        guard let photoUrl = URL(string: "\(self.folderURL)\(photo.filePath)") else { print("WRONG URL!!!!"); return }
+                        let photoUrl = self.folderURL.appendingPathComponent(photo.filePath)
+//                        guard let photoUrl = URL(string: "\(self.folderURL)\(photo.filePath)") else { print("WRONG URL!!!!"); return }
                         let request = VNRecognizeTextRequest { request, error in
                             self.handleFastDetectedText(request: request, error: error, photo: photo)
                         }
@@ -522,8 +524,9 @@ extension CachingViewController {
         
         cancelImageView.layer.cornerRadius = 4
         if let firstPhoto = photos.first {
-            let urlPath = "\(folderURL)\(firstPhoto.filePath)"
-            let finalUrl = URL(string: urlPath)
+//            let urlPath = "\(folderURL)\(firstPhoto.filePath)"
+//            let finalUrl = URL(string: urlPath)
+            let finalUrl = folderURL.appendingPathComponent(firstPhoto.filePath)
             cancelImageView.sd_imageTransition = .fade
             cancelImageView.sd_setImage(with: finalUrl)
         }
