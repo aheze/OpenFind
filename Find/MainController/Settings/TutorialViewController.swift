@@ -38,13 +38,13 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
         if index == 5 {
             goButton.isHidden = false
             goButton.alpha = 0
-            UIView.animate(withDuration: 0.15, animations: {
+            UIView.animate(withDuration: 0.05, animations: {
                 self.goButton.transform = CGAffineTransform.identity
                 self.goButton.alpha = 1
             })
         } else {
             goButton.alpha = 1
-            UIView.animate(withDuration: 0.15, animations: {
+            UIView.animate(withDuration: 0.05, animations: {
                 self.goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 self.goButton.alpha = 0
             }) { _ in
@@ -152,13 +152,13 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
         if index == 3 {
             goButton.alpha = 0
             goButton.isHidden = false
-            UIView.animate(withDuration: 0.15, animations: {
+            UIView.animate(withDuration: 0.05, animations: {
                 self.goButton.transform = CGAffineTransform.identity
                 self.goButton.alpha = 1
             })
         } else {
             goButton.alpha = 1
-            UIView.animate(withDuration: 0.15, animations: {
+            UIView.animate(withDuration: 0.05, animations: {
                 self.goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 self.goButton.alpha = 0
             }) { _ in
@@ -203,7 +203,7 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
 
         OnboardingItemInfo(informationImage: UIImage(named: "Hcache")!,
                    title: "Cache photos",
-             description: "Find uses OCR to search in your photos, but because OCR is often time consuming, you have the option to pre-search (aka Cache) them!",
+             description: "Find uses OCR, which is often time consuming. Solution: Caching (pre-searching an image). Results will appear instantly when finding from Cached photos!",
                 pageIcon: UIImage(named: "3icon")!,
                    color: UIColor(named: "OnboardingGray")!,
               titleColor: UIColor.black,
@@ -247,13 +247,13 @@ class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, Pa
         if index == 3 {
             goButton.alpha = 0
             goButton.isHidden = false
-            UIView.animate(withDuration: 0.15, animations: {
+            UIView.animate(withDuration: 0.05, animations: {
                 self.goButton.transform = CGAffineTransform.identity
                 self.goButton.alpha = 1
             })
         } else {
             goButton.alpha = 1
-            UIView.animate(withDuration: 0.15, animations: {
+            UIView.animate(withDuration: 0.05, animations: {
                 self.goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 self.goButton.alpha = 0
             }) { _ in
@@ -342,13 +342,13 @@ class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDeleg
         if index == 3 {
             goButton.alpha = 0
             goButton.isHidden = false
-            UIView.animate(withDuration: 0.15, animations: {
+            UIView.animate(withDuration: 0.05, animations: {
                 self.goButton.transform = CGAffineTransform.identity
                 self.goButton.alpha = 1
             })
         } else {
             goButton.alpha = 1
-            UIView.animate(withDuration: 0.15, animations: {
+            UIView.animate(withDuration: 0.05, animations: {
                 self.goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 self.goButton.alpha = 0
             }) { _ in

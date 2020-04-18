@@ -84,7 +84,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     @IBOutlet weak var heartButton: UIButton!
     @IBOutlet weak var cacheButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet weak var helpButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
     
     @IBAction func findPressed(_ sender: Any) {
         pressFind()
@@ -244,39 +244,33 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         
     }
     
-    @IBAction func questionPressed(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let helpViewController = storyboard.instantiateViewController(withIdentifier: "DefaultHelpController") as! DefaultHelpController
-        helpViewController.title = "Help"
-        helpViewController.goDirectlyToUrl = true
-        helpViewController.helpJsonKey = "HistoryFindHelpArray"
-        helpViewController.directUrl = "https://zjohnzheng.github.io/FindHelp/History-HistoryControls.html"
+    @IBAction func sharePressed(_ sender: Any) {
         
-        let navigationController = UINavigationController(rootViewController: helpViewController)
-        navigationController.view.backgroundColor = UIColor.clear
-        navigationController.navigationBar.tintColor = UIColor.white
-        navigationController.navigationBar.prefersLargeTitles = true
-        
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.configureWithOpaqueBackground()
-        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        navBarAppearance.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-        navigationController.navigationBar.standardAppearance = navBarAppearance
-        navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
-        navigationController.view.layer.cornerRadius = 10
-        UINavigationBar.appearance().barTintColor = .black
-        helpViewController.edgesForExtendedLayout = []
-        var attributes = EKAttributes.centerFloat
-        attributes.displayDuration = .infinity
-        attributes.entryInteraction = .absorbTouches
-        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-        attributes.entryBackground = .color(color: .white)
-        attributes.screenInteraction = .absorbTouches
-        attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
-        SwiftEntryKit.display(entry: navigationController, using: attributes)
+        let currentModel = photoModels[currentIndex]
+//        let filePath = folderURL.appendingPathComponent(currentModel.filePath)
+//        if let image = filePath.loadImageFromDocumentDirectory() {
+            
+        let shareObject = HistorySharing(filePath: currentModel.filePath, folderURL: folderURL)
+            let activityViewController = UIActivityViewController(activityItems: [shareObject], applicationActivities: nil)
+            let tempController = UIViewController()
+            tempController.modalPresentationStyle = .overFullScreen
+            activityViewController.completionWithItemsHandler = { [weak tempController] _, _, _, _ in
+                if let presentingViewController = tempController?.presentingViewController {
+                    presentingViewController.dismiss(animated: true, completion: nil)
+                } else {
+                    tempController?.dismiss(animated: true, completion: nil)
+                }
+            }
+            if let popoverController = activityViewController.popoverPresentationController {
+                popoverController.sourceRect = CGRect(x: 0, y: 0, width: shareButton.frame.width, height: shareButton.frame.width)
+                popoverController.sourceView = shareButton
+//                popoverController.permittedArrowDirections = .up
+            }
+            present(tempController, animated: true) { [weak tempController] in
+                tempController?.present(activityViewController, animated: true, completion: nil)
+            }
+//        }
+
     }
     
     @IBOutlet weak var backBlurView: UIVisualEffectView!

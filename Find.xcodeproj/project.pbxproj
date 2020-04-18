@@ -64,6 +64,8 @@
 		49563524243694BC0001E8C6 /* Configuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49563518243694BB0001E8C6 /* Configuring.swift */; };
 		4956352A2437A4B60001E8C6 /* defaultSeeds.realm in Resources */ = {isa = PBXBuildFile; fileRef = 495635292437A4860001E8C6 /* defaultSeeds.realm */; };
 		4956352D2437F4820001E8C6 /* DebugPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956352C2437F4820001E8C6 /* DebugPrint.swift */; };
+		49564333244A8FA4002C9245 /* HistorySharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49564332244A8FA4002C9245 /* HistorySharing.swift */; };
+		49564335244A8FBF002C9245 /* HistoryCollectionViewFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49564334244A8FBF002C9245 /* HistoryCollectionViewFiles.swift */; };
 		49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3223D65AA4009308CA /* ListCollectionCell.swift */; };
 		49569B3523D6919E009308CA /* ListsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3423D6919E009308CA /* ListsLayout.swift */; };
 		4957157E2368B022007BF68B /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4957157D2368B022007BF68B /* ViewExtensions.swift */; };
@@ -116,6 +118,7 @@
 		49D985B6241B3847005F4E92 /* CacheCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985B5241B3847005F4E92 /* CacheCell.swift */; };
 		49D985B824208037005F4E92 /* CachingCancelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985B724208037005F4E92 /* CachingCancelController.swift */; };
 		49D985BA2421D97B005F4E92 /* FindModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985B92421D97B005F4E92 /* FindModel.swift */; };
+		49E48BA824453C8A00263BBC /* MoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E48BA724453C8900263BBC /* MoreActions.swift */; };
 		49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1552353FE4B0099FA62 /* BasicSetup.swift */; };
 		49F7B1582353FE7E0099FA62 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1572353FE7E0099FA62 /* Component.swift */; };
 		9F7EB9AD24508DC95B5FA75F /* Pods_Find.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206C7F74D4ED39BAC2ED69EB /* Pods_Find.framework */; };
@@ -180,6 +183,8 @@
 		49563518243694BB0001E8C6 /* Configuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuring.swift; sourceTree = "<group>"; };
 		495635292437A4860001E8C6 /* defaultSeeds.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = defaultSeeds.realm; sourceTree = "<group>"; };
 		4956352C2437F4820001E8C6 /* DebugPrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugPrint.swift; sourceTree = "<group>"; };
+		49564332244A8FA4002C9245 /* HistorySharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySharing.swift; sourceTree = "<group>"; };
+		49564334244A8FBF002C9245 /* HistoryCollectionViewFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCollectionViewFiles.swift; sourceTree = "<group>"; };
 		49569B3223D65AA4009308CA /* ListCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionCell.swift; sourceTree = "<group>"; };
 		49569B3423D6919E009308CA /* ListsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsLayout.swift; sourceTree = "<group>"; };
 		4957157D2368B022007BF68B /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
@@ -234,6 +239,7 @@
 		49D985B5241B3847005F4E92 /* CacheCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheCell.swift; sourceTree = "<group>"; };
 		49D985B724208037005F4E92 /* CachingCancelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingCancelController.swift; sourceTree = "<group>"; };
 		49D985B92421D97B005F4E92 /* FindModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindModel.swift; sourceTree = "<group>"; };
+		49E48BA724453C8900263BBC /* MoreActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreActions.swift; sourceTree = "<group>"; };
 		49F7B1552353FE4B0099FA62 /* BasicSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSetup.swift; sourceTree = "<group>"; };
 		49F7B1572353FE7E0099FA62 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		7F1B04E9888AAEC98DF2E096 /* Pods-Find.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find.debug.xcconfig"; path = "Target Support Files/Pods-Find/Pods-Find.debug.xcconfig"; sourceTree = "<group>"; };
@@ -449,13 +455,16 @@
 		495ECCA5238CF74500E7D966 /* New History */ = {
 			isa = PBXGroup;
 			children = (
-				49BC782A23C6DFB6003D9904 /* HistoryFinding */,
 				495ECCA6238CF76C00E7D966 /* NewHistoryViewController.swift */,
+				49BC782A23C6DFB6003D9904 /* HistoryFinding */,
 				49BC783723C8C73E003D9904 /* CollectionViewCells */,
 				49BC781F23C2B0DF003D9904 /* IndexMatcher.swift */,
 				49BC782123C3E1BF003D9904 /* TextViewRounded.swift */,
 				49BC782D23C6E0BA003D9904 /* HistorySelectFloat */,
 				49301BF42402493A00B4780B /* HistoryModel.swift */,
+				49E48BA724453C8900263BBC /* MoreActions.swift */,
+				49564332244A8FA4002C9245 /* HistorySharing.swift */,
+				49564334244A8FBF002C9245 /* HistoryCollectionViewFiles.swift */,
 			);
 			path = "New History";
 			sourceTree = "<group>";
@@ -842,6 +851,7 @@
 				49BC782F23C6E473003D9904 /* addHeart.swift in Sources */,
 				49325C1323CAE84500A771A3 /* StatusView.swift in Sources */,
 				49563521243694BC0001E8C6 /* GestureControl.swift in Sources */,
+				49564333244A8FA4002C9245 /* HistorySharing.swift in Sources */,
 				49D985B6241B3847005F4E92 /* CacheCell.swift in Sources */,
 				4956351F243694BC0001E8C6 /* FillAnimationView.swift in Sources */,
 				4956351B243694BC0001E8C6 /* PageView.swift in Sources */,
@@ -869,6 +879,7 @@
 				49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */,
 				490BC3F623F8DA41004D1433 /* EditListViewController.swift in Sources */,
 				49301BF02400D4FF00B4780B /* HelpControllers.swift in Sources */,
+				49E48BA824453C8A00263BBC /* MoreActions.swift in Sources */,
 				49563522243694BC0001E8C6 /* PaperOnboarding.swift in Sources */,
 				4972B40E23F117C500843537 /* GeneralTableviewCell.swift in Sources */,
 				495F39012433FF1600A17D93 /* LaunchViewController.swift in Sources */,
@@ -935,6 +946,7 @@
 				49585DCF23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift in Sources */,
 				4956351E243694BC0001E8C6 /* PaperOnboardingDelegate.swift in Sources */,
 				4979A39023AF3A4800B09380 /* FastMode.swift in Sources */,
+				49564335244A8FBF002C9245 /* HistoryCollectionViewFiles.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

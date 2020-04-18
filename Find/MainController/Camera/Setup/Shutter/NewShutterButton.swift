@@ -27,24 +27,15 @@ class NewShutterButton: UIButton {
     }
     func createCircle() {
         if createdCircle == false {
-            //print("frame: \(self.frame)")
-            
             let borderWidth = CGFloat(6)
-            //let arcRadius = CGFloat(3)
-            
             
             let halfR = borderWidth / 2
             let width = self.frame.size.width
-            //print(self.frame.size.height)
-            //let height = self.frame.size.height + arcRadius
             let height = self.frame.size.height
             
             let path = UIBezierPath(ovalIn: CGRect(x: 0 + halfR, y: 0 + halfR, width: width - borderWidth, height: height - borderWidth))
-            //path.lineWidth = borderWidth
-            
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = path.cgPath
-            //shapeLayer.frame = self.frame
             shapeLayer.lineWidth = borderWidth
             shapeLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.15)
             shapeLayer.strokeColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)

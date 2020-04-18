@@ -188,13 +188,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
                 editableListCategories.append(editList)
             }
         }
-//        print("Loading lists")
-//        for singL in editableListCategories {
-//            print(singL.name)
-//        }
-
         searchCollectionView.reloadData()
-//        updateToolbar?.updateToolbar()
     }
     func tempResetLists() {
 
@@ -207,7 +201,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         selectedLists.removeAll()
         searchCollectionView.reloadData()
         
-//        injectListDelegate?.resetWithLists(lists: tempArray)
         for temp in tempArray {
             injectListDelegate?.addList(list: temp)
         }
@@ -261,13 +254,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         
         warningLabel.alpha = 0
         warningLabel.text = "Find is paused | Duplicates are not allowed"
-        
-        
         searchBarLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-//        cancelButtonNew.layer.cornerRadius = 6
-//        autoCompleteButton.layer.cornerRadius = 6
-//        newMatchButton.layer.cornerRadius = 6
-
     }
     
     func removeAllLists() {

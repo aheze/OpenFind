@@ -318,33 +318,33 @@ extension ViewController {
         }
     }
     func animateFastChange(layer: CAShapeLayer) {
-            view.layer.insertSublayer(layer, above: cameraView.layer)
-            layer.masksToBounds = true
-            let gradient = CAGradientLayer()
-            gradient.frame = layer.bounds
-            gradient.colors = [#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor, #colorLiteral(red: 0.7220415609, green: 0.7220415609, blue: 0.7220415609, alpha: 0.3010059932).cgColor, #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor]
-            gradient.startPoint = CGPoint(x: -1, y: 0.5)
-            gradient.endPoint = CGPoint(x: 0, y: 0.5)
-            layer.addSublayer(gradient)
-            
-            let startPointAnim = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.startPoint))
-            startPointAnim.fromValue = CGPoint(x: -1, y: 0.5)
-            startPointAnim.toValue = CGPoint(x:1, y: 0.5)
+        view.layer.insertSublayer(layer, above: cameraView.layer)
+        layer.masksToBounds = true
+        let gradient = CAGradientLayer()
+        gradient.frame = layer.bounds
+        gradient.colors = [#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor, #colorLiteral(red: 0.7220415609, green: 0.7220415609, blue: 0.7220415609, alpha: 0.3010059932).cgColor, #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor]
+        gradient.startPoint = CGPoint(x: -1, y: 0.5)
+        gradient.endPoint = CGPoint(x: 0, y: 0.5)
+        layer.addSublayer(gradient)
+        
+        let startPointAnim = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.startPoint))
+        startPointAnim.fromValue = CGPoint(x: -1, y: 0.5)
+        startPointAnim.toValue = CGPoint(x:1, y: 0.5)
 
-            let endPointAnim = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.endPoint))
-            endPointAnim.fromValue = CGPoint(x: 0, y: 0.5)
-            endPointAnim.toValue = CGPoint(x:2, y: 0.5)
+        let endPointAnim = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.endPoint))
+        endPointAnim.fromValue = CGPoint(x: 0, y: 0.5)
+        endPointAnim.toValue = CGPoint(x:2, y: 0.5)
 
-            let animGroup = CAAnimationGroup()
-            animGroup.animations = [startPointAnim, endPointAnim]
-            animGroup.duration = 0.6
-            animGroup.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
-            animGroup.repeatCount = 0
-            gradient.add(animGroup, forKey: "animateGrad")
-       
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-                layer.removeFromSuperlayer()
-            })
+        let animGroup = CAAnimationGroup()
+        animGroup.animations = [startPointAnim, endPointAnim]
+        animGroup.duration = 0.6
+        animGroup.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
+        animGroup.repeatCount = 0
+        gradient.add(animGroup, forKey: "animateGrad")
+   
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+            layer.removeFromSuperlayer()
+        })
     }
 }
 extension Array where Element: Equatable {
