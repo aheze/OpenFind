@@ -47,6 +47,9 @@ class SwiftEntryKitTemplates {
         attributes.entryBackground = .color(color: .white)
         attributes.screenInteraction = .absorbTouches
         attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+        
+        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
+        
         SwiftEntryKit.display(entry: navigationController, using: attributes)
     }
     

@@ -121,6 +121,9 @@ class HistoryFindController: UIViewController {
             customView.highlightColor = self.highlightColor
             
             self.changeFindbar = customView
+            let edgeWidth = CGFloat(600)
+            attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
+//            attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
             SwiftEntryKit.display(entry: customView, using: attributes)
             
             self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText, labelObject: self.savedLabelObject)
@@ -129,6 +132,7 @@ class HistoryFindController: UIViewController {
         }
         
         changeFindbar?.change(type: "GetLists")
+        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
         SwiftEntryKit.display(entry: viewControllerPresent, using: attributes)
     }
     
@@ -190,6 +194,9 @@ class HistoryFindController: UIViewController {
             self.giveNumber = customView
             
             self.changeFindbar = customView
+            let edgeWidth = CGFloat(600)
+            attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
+//            attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
             SwiftEntryKit.display(entry: customView, using: attributes)
             
             self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText, labelObject: self.savedLabelObject)
@@ -198,7 +205,7 @@ class HistoryFindController: UIViewController {
         }
         
         changeFindbar?.change(type: "GetLists")
-        
+        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
         SwiftEntryKit.display(entry: navigationController, using: attributes)
     }
     
@@ -285,6 +292,9 @@ class HistoryFindController: UIViewController {
         customView.highlightColor = highlightColor
         
         self.changeFindbar = customView
+        
+        let edgeWidth = CGFloat(600)
+        attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
         SwiftEntryKit.display(entry: customView, using: attributes)
         
 //        helpButton.layer.cornerRadius = 6
@@ -296,6 +306,7 @@ class HistoryFindController: UIViewController {
         
         let superViewWidth = view.frame.size.width
         welcomeView.frame = CGRect(x: 0, y: 150, width: superViewWidth, height: 275)
+        
         view.addSubview(welcomeView)
         
 //        let origText = "All selected photos have already been cached! Search results will appear immediately."
@@ -350,7 +361,7 @@ class HistoryFindController: UIViewController {
         warningLabel.alpha = 0
         progressView.alpha = 0
         
-        
+//        view.layoutIfNeeded()
     }
 }
 extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
@@ -891,6 +902,8 @@ extension HistoryFindController: ZoomAnimatorDelegate {
             customView.highlightColor = self.highlightColor
             
             self.changeFindbar = customView
+            let edgeWidth = CGFloat(600)
+            attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
             SwiftEntryKit.display(entry: customView, using: attributes)
             
             self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText, labelObject: savedLabelObject)

@@ -306,7 +306,8 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
                     make.center.equalToSuperview()
                 }
                 
-                
+                let edgeWidth = CGFloat(600)
+                attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
                 SwiftEntryKit.display(entry: contentView, using: attributes)
                 
                 
@@ -448,7 +449,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             attributes.entryBackground = .color(color: .white)
             attributes.screenInteraction = .absorbTouches
             attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
-            
+            attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 SwiftEntryKit.display(entry: vc, using: attributes)
             })
@@ -539,23 +540,7 @@ extension NewHistoryViewController: ReturnCachedPhotos {
 }
 
 
-extension NewHistoryViewController : UICollectionViewDelegateFlowLayout {
-  //1
-    func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right)) / 3
-    return CGSize(width: itemSize, height: itemSize)
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-}
+
 
 extension NewHistoryViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
@@ -782,6 +767,9 @@ extension NewHistoryViewController: ButtonPressed {
                 attributes.entryBackground = .color(color: .white)
                 attributes.screenInteraction = .absorbTouches
                 attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(300))
+//                attributes.positionConstraints.maxSize = .init(width: .constant(value: 300), height: .constant(value: 400))
+                attributes.positionConstraints.maxSize = .init(width: .constant(value: 450), height: .constant(value: 550))
+                
                 attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
                 attributes.lifecycleEvents.didAppear = {
                     self.doneAnimatingSEK?.doneAnimating()

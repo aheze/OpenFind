@@ -9,6 +9,7 @@
 import UIKit
 import SwiftEntryKit
 import RealmSwift
+import SPAlert
 
 
 class SettingsViewController: UIViewController {
@@ -154,6 +155,7 @@ class SettingsViewController: UIViewController {
             attributes.entryBackground = .color(color: .white)
             attributes.screenInteraction = .absorbTouches
             attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+            attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
             SwiftEntryKit.display(entry: vc, using: attributes)
             
         }))
@@ -172,6 +174,7 @@ class SettingsViewController: UIViewController {
             attributes.entryBackground = .color(color: .white)
             attributes.screenInteraction = .absorbTouches
             attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+            attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
             SwiftEntryKit.display(entry: vc, using: attributes)
             
         }))
@@ -190,6 +193,7 @@ class SettingsViewController: UIViewController {
             attributes.entryBackground = .color(color: .white)
             attributes.screenInteraction = .absorbTouches
             attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+            attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
             SwiftEntryKit.display(entry: vc, using: attributes)
         }))
         alert.addAction(UIAlertAction(title: "Lists Builder", style: UIAlertAction.Style.default, handler: { _ in
@@ -207,6 +211,7 @@ class SettingsViewController: UIViewController {
             attributes.entryBackground = .color(color: .white)
             attributes.screenInteraction = .absorbTouches
             attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+            attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
             SwiftEntryKit.display(entry: vc, using: attributes)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
@@ -261,7 +266,9 @@ class SettingsViewController: UIViewController {
                     print("Could not delete items: \(error)")
                 }
             }
-            
+            let alertView = SPAlertView(title: "Cleared History", message: "Tap to dismiss", preset: SPAlertPreset.done)
+            alertView.duration = 2.6
+            alertView.present()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
         if let popoverController = alert.popoverPresentationController {
@@ -288,7 +295,9 @@ class SettingsViewController: UIViewController {
             } catch {
                 print("DELETE PRESSED, but ERROR deleting photos...... \(error)")
             }
-            
+            let alertView = SPAlertView(title: "Cleared All Lists", message: "Tap to dismiss", preset: SPAlertPreset.done)
+            alertView.duration = 2.6
+            alertView.present()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
         if let popoverController = alert.popoverPresentationController {
@@ -448,7 +457,7 @@ extension SettingsViewController {
         attributes.entryBackground = .color(color: .white)
         attributes.screenInteraction = .absorbTouches
         attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
-        
+        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
         SwiftEntryKit.display(entry: navigationController, using: attributes)
     }
 }

@@ -11,7 +11,7 @@ import SwiftEntryKit
 import SDWebImage
 import SPAlert
 
-extension NewHistoryViewController {
+extension NewHistoryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 50)
     }
@@ -33,7 +33,20 @@ extension NewHistoryViewController {
         }
     }
     
-
+    func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right)) / 3
+    return CGSize(width: itemSize, height: itemSize)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sectionCounts.count
@@ -171,6 +184,7 @@ extension NewHistoryViewController {
                     attributes.entryBackground = .color(color: .white)
                     attributes.screenInteraction = .absorbTouches
                     attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(300))
+                    attributes.positionConstraints.maxSize = .init(width: .constant(value: 450), height: .constant(value: 550))
                     attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
                     attributes.lifecycleEvents.didAppear = {
                         self.doneAnimatingSEK?.doneAnimating()
@@ -207,12 +221,45 @@ extension NewHistoryViewController {
                 self.present(alert, animated: true, completion: nil)
                 // Perform delete
             }
-            let help = UIAction(title: "Help", image: UIImage(systemName: "trash")) { action in
+            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { action in
+                
+                
+                //        let filePath = folderURL.appendingPathComponent(currentModel.filePath)
+                //        if let image = filePath.loadImageFromDocumentDirectory() {
+                            
+                let shareObject = HistorySharing(filePath: historyModel.filePath, folderURL: self.folderURL)
+                let activityViewController = UIActivityViewController(activityItems: [shareObject], applicationActivities: nil)
+                let tempController = UIViewController()
+                tempController.modalPresentationStyle = .overFullScreen
+                activityViewController.completionWithItemsHandler = { [weak tempController] _, _, _, _ in
+                    if let presentingViewController = tempController?.presentingViewController {
+                        presentingViewController.dismiss(animated: true, completion: nil)
+                    } else {
+                        tempController?.dismiss(animated: true, completion: nil)
+                    }
+                }
+                if let popoverController = activityViewController.popoverPresentationController {
+//                    let itemSize = (self.collectionView.frame.width - (self.collectionView.contentInset.left + self.collectionView.contentInset.right)) / 3
+//                    let newRect = CGRect(origin: CGPoint(x: 0, y: 0), size: itemSize)
+//                    popoverController.sourceRect = newRect
+                    if let cell = collectionView.cellForItem(at: indexPath) as? HPhotoCell {
+                        popoverController.sourceRect = cell.bounds
+                        popoverController.sourceView = cell
+                    }
+//                    popoverController.sourceView = shareButton
+    //                popoverController.permittedArrowDirections = .up
+                }
+                self.present(tempController, animated: true) { [weak tempController] in
+                    tempController?.present(activityViewController, animated: true, completion: nil)
+                }
+                
+            }
+            let help = UIAction(title: "Help", image: UIImage(systemName: "questionmark")) { action in
                 SwiftEntryKitTemplates.displayHistoryHelp()
             }
                     // Empty menu for demonstration purposes
             if self.selectButtonSelected == false {
-                return UIMenu(title: "Actions", children: [find, heart, cacheAction, delete, help])
+                return UIMenu(title: "Actions", children: [find, heart, cacheAction, delete, share, help])
             } else {
                 return nil
             }

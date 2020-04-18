@@ -277,7 +277,9 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
             attributes.entryBackground = .color(color: .white)
             attributes.screenInteraction = .absorbTouches
             attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
-            
+//            let edgeWidth = CGFloat(600)
+//            attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
+            attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 SwiftEntryKit.display(entry: vc, using: attributes)
             })
@@ -652,6 +654,8 @@ extension ListController {
                     make.center.equalToSuperview()
                 }
                 
+                let edgeWidth = CGFloat(600)
+                attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
                 SwiftEntryKit.display(entry: contentView, using: attributes)
                 
                 
@@ -673,7 +677,8 @@ extension ListController {
                 
                 attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
                 
-                
+                let edgeWidth = CGFloat(600)
+                attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
 //                attributes.lifecycleEvents.willDisappear = {
 //
 //                    self.fadeSelectOptions(fadeOut: "fade out")

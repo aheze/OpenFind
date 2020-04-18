@@ -350,7 +350,26 @@ class ViewController: UIViewController {
             }
         }
     }
-    
+    @objc private func _KeyboardHeightChanged(_ notification: Notification){
+        if let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            UIView.animate(withDuration: 0.5, animations: {
+                let rect = frame.cgRectValue
+                print("KEYABORD CHANGE: \(rect)")
+//                self.SampleViewBottomConstaint.constant == 0 ? (self.SampleViewBottomConstaint.constant = frame.cgRectValue.height) : (self.SampleViewBottomConstaint.constant = 0)
+            })
+
+        }
+        if let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] {
+            if let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] {
+                print("DUR: \(duration), cur: \(curve)")
+            }
+        } else {
+            
+        }
+        
+        
+        
+    }
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         viewControllerToPresent.modalPresentationStyle = .pageSheet
       super.present(viewControllerToPresent, animated: flag, completion: completion)
@@ -489,7 +508,9 @@ class ViewController: UIViewController {
         pinchGesture.delegate = self
         self.modalPresentationStyle = .automatic
         
-        UIApplication.shared.isStatusBarHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(_KeyboardHeightChanged(_:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
+        
+//        UIApplication.shared.isStatusBarHidden = true
         readDefaultsValues()
         
         controlsBlurView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)

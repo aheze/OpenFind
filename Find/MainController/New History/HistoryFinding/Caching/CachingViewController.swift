@@ -137,7 +137,19 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
 //        cancelView.isHidden = true
 //        backButton.isHidden = true
 //        cancelView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        
         startFinding()
+    }
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        DispatchQueue.main.async {
+            let frameDiff = (self.collectionView.frame.size.height - 140) / 2
+            self.collectionView.contentInset.top = frameDiff
+            self.collectionView.contentInset.bottom = frameDiff
+            self.collectionView.contentInsetAdjustmentBehavior = .never
+            let startInd = IndexPath(item: 0, section: 0)
+            self.collectionView.scrollToItem(at: startInd, at: .centeredVertically, animated: true)
+        }
     }
     
     func animateChange(toCancel: Bool) {
@@ -265,7 +277,7 @@ extension CachingViewController {
     }
     func finishedFind() {
         DispatchQueue.main.async {
-            var cachedPhotos = [HistoryModel]()
+//            var cachedPhotos = [HistoryModel]()
             
             self.cancelButton.isEnabled = false
 //            let alertView = SPAlertView(title: "Caching done!", message: "Tap to dismiss", preset: SPAlertPreset.done)
@@ -322,11 +334,6 @@ extension CachingViewController {
     
     func startFinding() {
         
-//        UIView.animate(withDuration: 0.7, delay: 0, options: [.repeat, .autoreverse], animations: {
-//            self.swipeView.frame = CGRect(x: 162, y: 5, width: 10, height: 170)
-//            print("animate swipe")
-//        }, completion: nil)
-        
         dispatchQueue.async {
             self.count = 0
             var number = 0
@@ -337,7 +344,7 @@ extension CachingViewController {
 //                    print("num: \(number)")
                     let indP = IndexPath(item: number - 1, section: 0)
                    DispatchQueue.main.async {
-                           self.collectionView.scrollToItem(at: indP, at: .centeredVertically, animated: true)
+                        self.collectionView.scrollToItem(at: indP, at: .centeredVertically, animated: true)
                    }
                     if !photo.isDeepSearched {
                         self.dispatchGroup.enter()
@@ -512,10 +519,7 @@ extension CachingViewController {
         collectionSuperview.layer.mask = gradient
         collectionSuperview.layer.masksToBounds = true
 
-        var frameDiff = (collectionView.frame.size.height - bigRect.size.height) / 2
-        collectionView.contentInset.top = frameDiff
-        collectionView.contentInset.bottom = frameDiff
-        collectionView.contentInsetAdjustmentBehavior = .never
+        
         
         
         view.clipsToBounds = true

@@ -116,6 +116,8 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             attributes.entryBackground = .color(color: .white)
             attributes.screenInteraction = .absorbTouches
             attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(300))
+//            attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
+            attributes.positionConstraints.maxSize = .init(width: .constant(value: 450), height: .constant(value: 550))
             attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
             attributes.lifecycleEvents.didAppear = {
                 self.doneAnimatingSEK?.doneAnimating()
@@ -251,24 +253,24 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
 //        if let image = filePath.loadImageFromDocumentDirectory() {
             
         let shareObject = HistorySharing(filePath: currentModel.filePath, folderURL: folderURL)
-            let activityViewController = UIActivityViewController(activityItems: [shareObject], applicationActivities: nil)
-            let tempController = UIViewController()
-            tempController.modalPresentationStyle = .overFullScreen
-            activityViewController.completionWithItemsHandler = { [weak tempController] _, _, _, _ in
-                if let presentingViewController = tempController?.presentingViewController {
-                    presentingViewController.dismiss(animated: true, completion: nil)
-                } else {
-                    tempController?.dismiss(animated: true, completion: nil)
-                }
+        let activityViewController = UIActivityViewController(activityItems: [shareObject], applicationActivities: nil)
+        let tempController = UIViewController()
+        tempController.modalPresentationStyle = .overFullScreen
+        activityViewController.completionWithItemsHandler = { [weak tempController] _, _, _, _ in
+            if let presentingViewController = tempController?.presentingViewController {
+                presentingViewController.dismiss(animated: true, completion: nil)
+            } else {
+                tempController?.dismiss(animated: true, completion: nil)
             }
-            if let popoverController = activityViewController.popoverPresentationController {
-                popoverController.sourceRect = CGRect(x: 0, y: 0, width: shareButton.frame.width, height: shareButton.frame.width)
-                popoverController.sourceView = shareButton
+        }
+        if let popoverController = activityViewController.popoverPresentationController {
+            popoverController.sourceRect = CGRect(x: 0, y: 0, width: shareButton.frame.width, height: shareButton.frame.width)
+            popoverController.sourceView = shareButton
 //                popoverController.permittedArrowDirections = .up
-            }
-            present(tempController, animated: true) { [weak tempController] in
-                tempController?.present(activityViewController, animated: true, completion: nil)
-            }
+        }
+        present(tempController, animated: true) { [weak tempController] in
+            tempController?.present(activityViewController, animated: true, completion: nil)
+        }
 //        }
 
     }
@@ -765,7 +767,8 @@ extension PhotoPageContainerViewController {
         attributes.scroll = .disabled
         attributes.roundCorners = .all(radius: 5)
         attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
-        
+        let edgeWidth = CGFloat(600)
+        attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
         let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
         let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
         attributes.positionConstraints.keyboardRelation = keyboardRelation

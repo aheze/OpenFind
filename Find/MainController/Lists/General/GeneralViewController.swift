@@ -343,7 +343,7 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         
         //attributes.roundCorners = .all(radius: 10)
         
-        
+        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
         
         SwiftEntryKit.display(entry: navigationController, using: attributes)
     }
