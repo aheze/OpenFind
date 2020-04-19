@@ -208,25 +208,8 @@ extension NewHistoryViewController {
                     SwiftEntryKit.display(entry: cacheController, using: attributes)
                 }
             }
-            
-            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { action in
-                let alert = UIAlertController(title: "Delete this photo?", message: "This action can't be undone.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
-                    self.deletePhotoAt(photoIndex: indexOfPhoto)
-                    let alertView = SPAlertView(title: "Photo Deleted!", message: "Tap to dismiss", preset: SPAlertPreset.done)
-                    alertView.duration = 2.6
-                    alertView.present()
-                }))
-                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-                // Perform delete
-            }
             let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { action in
                 
-                
-                //        let filePath = folderURL.appendingPathComponent(currentModel.filePath)
-                //        if let image = filePath.loadImageFromDocumentDirectory() {
-                            
                 let shareObject = HistorySharing(filePath: historyModel.filePath, folderURL: self.folderURL)
                 let activityViewController = UIActivityViewController(activityItems: [shareObject], applicationActivities: nil)
                 let tempController = UIViewController()
@@ -239,27 +222,34 @@ extension NewHistoryViewController {
                     }
                 }
                 if let popoverController = activityViewController.popoverPresentationController {
-//                    let itemSize = (self.collectionView.frame.width - (self.collectionView.contentInset.left + self.collectionView.contentInset.right)) / 3
-//                    let newRect = CGRect(origin: CGPoint(x: 0, y: 0), size: itemSize)
-//                    popoverController.sourceRect = newRect
                     if let cell = collectionView.cellForItem(at: indexPath) as? HPhotoCell {
                         popoverController.sourceRect = cell.bounds
                         popoverController.sourceView = cell
                     }
-//                    popoverController.sourceView = shareButton
-    //                popoverController.permittedArrowDirections = .up
                 }
                 self.present(tempController, animated: true) { [weak tempController] in
                     tempController?.present(activityViewController, animated: true, completion: nil)
                 }
-                
             }
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { action in
+                let alert = UIAlertController(title: "Delete this photo?", message: "This action can't be undone.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
+                    self.deletePhotoAt(photoIndex: indexOfPhoto)
+                    let alertView = SPAlertView(title: "Photo Deleted!", message: "Tap to dismiss", preset: SPAlertPreset.done)
+                    alertView.duration = 2.6
+                    alertView.present()
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                // Perform delete
+            }
+            
             let help = UIAction(title: "Help", image: UIImage(systemName: "questionmark")) { action in
                 SwiftEntryKitTemplates.displayHistoryHelp()
             }
                     // Empty menu for demonstration purposes
             if self.selectButtonSelected == false {
-                return UIMenu(title: "Actions", children: [find, heart, cacheAction, delete, share, help])
+                return UIMenu(title: "Actions", children: [find, heart, cacheAction, share, delete, help])
             } else {
                 return nil
             }

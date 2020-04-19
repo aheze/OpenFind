@@ -305,9 +305,16 @@ class HistoryFindController: UIViewController {
 //        tableView.sele
         
         let superViewWidth = view.frame.size.width
-        welcomeView.frame = CGRect(x: 0, y: 150, width: superViewWidth, height: 275)
-        
+        let newWidth = min(superViewWidth, CGFloat(400))
+//        welcomeView.frame = CGRect(x: 0, y: 150, width: newWidth, height: 275)
         view.addSubview(welcomeView)
+        welcomeView.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(150)
+            make.width.equalTo(newWidth)
+            make.height.equalTo(300)
+        }
+        
         
 //        let origText = "All selected photos have already been cached! Search results will appear immediately."
         
@@ -571,9 +578,21 @@ extension HistoryFindController: ReturnSortedTerms {
 //                print("COUNT:: \(stringToList.count)")
 //                print("list: \(stringToList)")
                 if matchToColors.keys.count == 0 {
+//                    let superViewWidth = view.frame.size.width
+//                    welcomeView.frame = CGRect(x: 0, y: 150, width: superViewWidth, height: 275)
+//                    view.addSubview(welcomeView)
                     let superViewWidth = view.frame.size.width
-                    welcomeView.frame = CGRect(x: 0, y: 150, width: superViewWidth, height: 275)
+                    let newWidth = min(superViewWidth, CGFloat(400))
+            //        welcomeView.frame = CGRect(x: 0, y: 150, width: newWidth, height: 275)
                     view.addSubview(welcomeView)
+                    welcomeView.snp.makeConstraints { (make) in
+                        make.centerX.equalToSuperview()
+                        make.top.equalToSuperview().offset(150)
+                        make.width.equalTo(newWidth)
+                        make.height.equalTo(300)
+                    }
+                    welcomeView.alpha = 0
+                    
     //                let superViewWidth = view.frame.size.width
     //                welcomeView.frame = CGRect(x: 0, y: 150, width: superViewWidth, height: 275)
     //                view.addSubview(welcomeView)

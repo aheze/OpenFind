@@ -47,9 +47,11 @@ class CameraView: UIView {
 }
 class ViewController: UIViewController {
     
-  
+    
+    
     let deviceType = UIDevice.current.modelName
-        
+    
+    
     
     var normalSearchFieldTopCConstant = CGFloat(0)
     var displayingOrientationError = false
@@ -150,11 +152,20 @@ class ViewController: UIViewController {
     
     //MARK: Toolbar
     
+    
     let realm = try! Realm()
     var listCategories: Results<FindList>?
     var editableListCategories = [EditableFindList]()
     var currentContentsOfScreen = ""
     var shouldResetHighlights = false
+    //MARK: Keyboard
+    let toolbar = ListToolBar()
+    var toolbarWidthC: Constraint?
+    var toolbarLeftC: Constraint?
+    var toolbarTopC: Constraint?
+    var didFinishShouldUpdateHeight = false
+    
+    
     
     //MARK: Search Bar
     
@@ -350,49 +361,69 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    
+    @objc private func _KeyboardFrameChanged(_ notification: Notification){
+        if let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let rect = frame.cgRectValue
+            print("KEYABORD CHANGE: \(rect)")
+            var shouldFade = false
+            if didFinishShouldUpdateHeight {
+                self.toolbarTopC?.update(offset: rect.origin.y - 80)
+                if rect.width == CGFloat(0) {
+                    shouldFade = true
+                }
+            }
+            if rect.width != CGFloat(0) {
+                self.toolbarWidthC?.update(offset: rect.width)
+                self.toolbarLeftC?.update(offset: rect.origin.x)
+            }
+            UIView.animate(withDuration: 0.6, animations: {
+                if rect.width < UIScreen.main.bounds.size.width {
+                    self.toolbar.layer.cornerRadius = 5
+                } else {
+                    self.toolbar.layer.cornerRadius = 0
+                }
+                if shouldFade == true {
+                    self.toolbar.alpha = 0
+                }
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
     @objc private func _KeyboardHeightChanged(_ notification: Notification){
         if let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             UIView.animate(withDuration: 0.5, animations: {
                 let rect = frame.cgRectValue
-                print("KEYABORD CHANGE: \(rect)")
-//                self.SampleViewBottomConstaint.constant == 0 ? (self.SampleViewBottomConstaint.constant = frame.cgRectValue.height) : (self.SampleViewBottomConstaint.constant = 0)
+                print("KEYABORD CHANGE HEIGHT: \(rect)")
+                if let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double {
+                    if let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt {
+                        print("DUR: \(duration), cur: \(curve)")
+                        if rect.width == CGFloat(0) {
+                            self.didFinishShouldUpdateHeight = true
+                        } else {
+                            self.didFinishShouldUpdateHeight = false
+                            self.toolbarTopC?.update(offset: rect.origin.y - 80)
+                            UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(rawValue: curve), animations: {
+                                if rect.origin.y == UIScreen.main.bounds.size.height {
+                                    self.toolbar.alpha = 0
+                                    print("FADE NOW")
+                                } else {
+                                    print("DONT ADE")
+                                    self.toolbar.alpha = 1
+                                }
+                                self.view.layoutIfNeeded()
+                            }, completion: nil)
+                        }
+                    }
+                }
             })
-
         }
-        if let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] {
-            if let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] {
-                print("DUR: \(duration), cur: \(curve)")
-            }
-        } else {
-            
-        }
-        
-        
-        
     }
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         viewControllerToPresent.modalPresentationStyle = .pageSheet
       super.present(viewControllerToPresent, animated: flag, completion: completion)
     }
-//    private func isAuthorized() -> Bool {
-//        let authorizationStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
-//        switch authorizationStatus {
-//        case .notDetermined:
-//            AVCaptureDevice.requestAccess(for: AVMediaType.video,
-//                                          completionHandler: { (granted:Bool) -> Void in
-//                                            if granted {
-//                                                DispatchQueue.main.async {
-//                                                   // self.configureTextDetection()
-//                                                    self.configureCamera()
-//                                                }
-//                                            }
-//            })
-//            return true
-//        case .authorized:
-//            return true
-//        case .denied, .restricted: return false
-//        }
-//    }
     func capturePhoto(completion: ((UIImage) -> Void)?) {
         captureCompletionBlock = completion
     }
@@ -508,7 +539,9 @@ class ViewController: UIViewController {
         pinchGesture.delegate = self
         self.modalPresentationStyle = .automatic
         
-        NotificationCenter.default.addObserver(self, selector: #selector(_KeyboardHeightChanged(_:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(_KeyboardFrameChanged(_:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(_KeyboardHeightChanged(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        
         
 //        UIApplication.shared.isStatusBarHidden = true
         readDefaultsValues()

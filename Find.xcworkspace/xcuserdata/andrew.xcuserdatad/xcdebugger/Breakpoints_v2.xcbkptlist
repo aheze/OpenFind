@@ -266,8 +266,8 @@
             filePath = "Find/MainController/Camera/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "ViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -298,8 +298,8 @@
             filePath = "Find/MainController/New History/HistoryFinding/FindBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "610"
-            endingLineNumber = "610"
+            startingLineNumber = "617"
+            endingLineNumber = "617"
             landmarkName = "removeAllLists()"
             landmarkType = "7">
          </BreakpointContent>

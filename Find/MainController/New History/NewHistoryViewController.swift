@@ -883,6 +883,7 @@ extension NewHistoryViewController: ButtonPressed {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "goToHistoryFind":
+            SwiftEntryKit.dismiss()
             segue.destination.presentationController?.delegate = self
             let destinationVC = segue.destination as! HistoryFindController
             var modelArray = [EditableHistoryModel]()

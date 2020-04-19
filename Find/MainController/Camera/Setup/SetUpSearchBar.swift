@@ -221,21 +221,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         
         newSearchTextField.layer.cornerRadius = 8
         
-        let toolbar = ListToolBar()
-        toolbar.pressedButton = self
-        toolbar.selectedList = self
-//        toolbar.changedText = self
-        toolbar.startedEditing = self
-        injectListDelegate = toolbar
-//        updateToolbar = toolbar
         
-        loadListsRealm()
-        
-        toolbar.frame.size = CGSize(width: deviceSize.width, height: 80)
-//        toolbar.origCategories = editableListCategories
-        toolbar.editableListCategories = editableListCategories
-        print(toolbar)
-        newSearchTextField.inputAccessoryView = toolbar
         newSearchTextField.attributedPlaceholder = NSAttributedString(string: "Type here to find...",
                                                                    attributes:
                                                                    [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.8784313725, green: 0.878935039, blue: 0.878935039, alpha: 0.75)])
@@ -255,6 +241,24 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         warningLabel.alpha = 0
         warningLabel.text = "Find is paused | Duplicates are not allowed"
         searchBarLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        
+        
+        toolbar.pressedButton = self
+        toolbar.selectedList = self
+        toolbar.startedEditing = self
+        injectListDelegate = toolbar
+        loadListsRealm()
+        toolbar.frame.size = CGSize(width: deviceSize.width, height: 80)
+        toolbar.editableListCategories = editableListCategories
+        toolbar.alpha = 0
+        view.addSubview(toolbar)
+        toolbar.snp.makeConstraints { (make) in
+            make.height.equalTo(80)
+            toolbarWidthC = make.width.equalTo(0).offset(deviceSize.width).constraint
+            toolbarLeftC = make.left.equalTo(0).offset(0).constraint
+            toolbarTopC = make.top.equalTo(0).offset(deviceSize.height).constraint
+        }
+//        newSearchTextField.inputAccessoryView = toolbar
     }
     
     func removeAllLists() {

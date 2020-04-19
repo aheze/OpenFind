@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ListToolBar" customModule="Find" customModuleProvider="target">
             <connections>
-                <outlet property="baseView" destination="yNx-xj-pnt" id="YET-Jz-uZE"/>
                 <outlet property="collectionView" destination="B9B-HN-NIt" id="2WG-4J-plP"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="blE-aW-0Jh"/>
                 <outlet property="doneButton" destination="B5C-dV-QNK" id="fgX-B2-hEq"/>
                 <outlet property="flowLayout" destination="7qj-za-ZLn" id="5l9-Rn-r0Z"/>
                 <outlet property="newMatchButton" destination="oFO-dW-9SD" id="7Jj-bK-nsq"/>
                 <outlet property="removeAllButton" destination="4fF-c0-iRr" id="YBf-Zz-yJQ"/>
+                <outlet property="visualBaseView" destination="Omm-9U-OZP" id="KFc-6b-UeD"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -23,88 +23,92 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yNx-xj-pnt" userLabel="BaseView">
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Omm-9U-OZP">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fF-c0-iRr">
-                            <rect key="frame" x="6" y="6" width="128" height="26"/>
-                            <color key="backgroundColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="26" id="MDj-o4-clf"/>
-                            </constraints>
-                            <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
-                            <state key="normal" title="Remove All Lists">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="removeAllPressed:" destination="-1" eventType="touchUpInside" id="Ojc-ov-Pxm"/>
-                            </connections>
-                        </button>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="100100" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="B9B-HN-NIt">
-                            <rect key="frame" x="0.0" y="38" width="414" height="36"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7qj-za-ZLn">
-                                <size key="itemSize" width="90" height="30"/>
-                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                <inset key="sectionInset" minX="6" minY="0.0" maxX="6" maxY="0.0"/>
-                            </collectionViewFlowLayout>
-                            <cells/>
-                            <connections>
-                                <outlet property="dataSource" destination="-1" id="eOg-jr-N9A"/>
-                                <outlet property="delegate" destination="-1" id="bUw-TZ-qix"/>
-                            </connections>
-                        </collectionView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B5C-dV-QNK">
-                            <rect key="frame" x="355" y="6" width="53" height="26"/>
-                            <color key="backgroundColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="26" id="w7v-bt-Bct"/>
-                            </constraints>
-                            <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
-                            <state key="normal" title="Done">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="donePressed:" destination="-1" eventType="touchUpInside" id="aX6-E5-96U"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFO-dW-9SD">
-                            <rect key="frame" x="140" y="6" width="94" height="26"/>
-                            <color key="backgroundColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="26" id="3gA-Jm-Q5R"/>
-                            </constraints>
-                            <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
-                            <state key="normal" title="New Match">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="newMatchPressed:" destination="-1" eventType="touchUpInside" id="yVI-KE-38u"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="bottom" secondItem="B9B-HN-NIt" secondAttribute="bottom" constant="6" id="AmE-8d-dgB"/>
-                        <constraint firstAttribute="trailing" secondItem="B9B-HN-NIt" secondAttribute="trailing" id="CIC-Z5-n6W"/>
-                        <constraint firstItem="oFO-dW-9SD" firstAttribute="leading" secondItem="4fF-c0-iRr" secondAttribute="trailing" constant="6" id="D4g-8i-HLc"/>
-                        <constraint firstItem="oFO-dW-9SD" firstAttribute="top" secondItem="yNx-xj-pnt" secondAttribute="top" constant="6" id="EFa-ql-gP3"/>
-                        <constraint firstItem="4fF-c0-iRr" firstAttribute="top" secondItem="yNx-xj-pnt" secondAttribute="top" constant="6" id="FBq-rj-yH5"/>
-                        <constraint firstItem="B9B-HN-NIt" firstAttribute="top" secondItem="4fF-c0-iRr" secondAttribute="bottom" constant="6" id="GAT-i4-FVI"/>
-                        <constraint firstAttribute="trailing" secondItem="B5C-dV-QNK" secondAttribute="trailing" constant="6" id="Jbg-Qs-mXg"/>
-                        <constraint firstItem="4fF-c0-iRr" firstAttribute="leading" secondItem="yNx-xj-pnt" secondAttribute="leading" constant="6" id="Wu1-YS-knL"/>
-                        <constraint firstItem="B5C-dV-QNK" firstAttribute="top" secondItem="yNx-xj-pnt" secondAttribute="top" constant="6" id="ijK-BU-rrO"/>
-                        <constraint firstItem="B9B-HN-NIt" firstAttribute="leading" secondItem="yNx-xj-pnt" secondAttribute="leading" id="wTV-J5-eil"/>
-                    </constraints>
-                </view>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="LOj-fv-sz0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fF-c0-iRr">
+                                <rect key="frame" x="6" y="6" width="128" height="26"/>
+                                <color key="backgroundColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="MDj-o4-clf"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
+                                <state key="normal" title="Remove All Lists">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="removeAllPressed:" destination="-1" eventType="touchUpInside" id="Ojc-ov-Pxm"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="100100" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="B9B-HN-NIt">
+                                <rect key="frame" x="0.0" y="38" width="414" height="36"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7qj-za-ZLn">
+                                    <size key="itemSize" width="90" height="30"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="6" minY="0.0" maxX="6" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="-1" id="eOg-jr-N9A"/>
+                                    <outlet property="delegate" destination="-1" id="bUw-TZ-qix"/>
+                                </connections>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B5C-dV-QNK">
+                                <rect key="frame" x="355" y="6" width="53" height="26"/>
+                                <color key="backgroundColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="w7v-bt-Bct"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="donePressed:" destination="-1" eventType="touchUpInside" id="aX6-E5-96U"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFO-dW-9SD">
+                                <rect key="frame" x="140" y="6" width="94" height="26"/>
+                                <color key="backgroundColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="3gA-Jm-Q5R"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
+                                <state key="normal" title="New Match">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="newMatchPressed:" destination="-1" eventType="touchUpInside" id="yVI-KE-38u"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="B5C-dV-QNK" secondAttribute="trailing" constant="6" id="1wY-DF-NKp"/>
+                            <constraint firstAttribute="bottom" secondItem="B9B-HN-NIt" secondAttribute="bottom" constant="6" id="BKy-7I-e72"/>
+                            <constraint firstItem="B9B-HN-NIt" firstAttribute="top" secondItem="B5C-dV-QNK" secondAttribute="bottom" constant="6" id="BZt-HE-1DY"/>
+                            <constraint firstItem="B5C-dV-QNK" firstAttribute="top" secondItem="LOj-fv-sz0" secondAttribute="top" constant="6" id="LdL-uG-gLA"/>
+                            <constraint firstItem="4fF-c0-iRr" firstAttribute="top" secondItem="LOj-fv-sz0" secondAttribute="top" constant="6" id="cgb-U0-SXS"/>
+                            <constraint firstItem="B9B-HN-NIt" firstAttribute="leading" secondItem="LOj-fv-sz0" secondAttribute="leading" id="jfn-0Q-MfR"/>
+                            <constraint firstAttribute="trailing" secondItem="B9B-HN-NIt" secondAttribute="trailing" id="moj-KC-JUI"/>
+                            <constraint firstItem="oFO-dW-9SD" firstAttribute="top" secondItem="LOj-fv-sz0" secondAttribute="top" constant="6" id="noZ-ua-eNK"/>
+                            <constraint firstItem="oFO-dW-9SD" firstAttribute="leading" secondItem="4fF-c0-iRr" secondAttribute="trailing" constant="6" id="pyP-jX-DAk"/>
+                            <constraint firstItem="4fF-c0-iRr" firstAttribute="leading" secondItem="LOj-fv-sz0" secondAttribute="leading" constant="6" id="yyD-LS-dGY"/>
+                        </constraints>
+                    </view>
+                    <blurEffect style="systemUltraThinMaterialLight"/>
+                </visualEffectView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="yNx-xj-pnt" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="CCZ-xL-jHR"/>
-                <constraint firstItem="yNx-xj-pnt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Fhg-IL-VLr"/>
-                <constraint firstItem="yNx-xj-pnt" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="iua-Ro-MnE"/>
-                <constraint firstItem="yNx-xj-pnt" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="wpB-YW-jsh"/>
+                <constraint firstItem="Omm-9U-OZP" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="4Dd-Dt-vHm"/>
+                <constraint firstItem="Omm-9U-OZP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="7tp-lc-dRo"/>
+                <constraint firstItem="Omm-9U-OZP" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Cmq-8e-7WN"/>
+                <constraint firstItem="Omm-9U-OZP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="e3V-1M-fBk"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

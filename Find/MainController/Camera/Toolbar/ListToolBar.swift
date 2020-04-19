@@ -32,9 +32,13 @@ class ListToolBar: UIView, InjectLists {
     
     var lightMode = false {
         didSet {
+            var effect = UIBlurEffect()
             if lightMode == true {
                 print("LIGHT MODE!!!")
-                baseView.backgroundColor = UIColor(named: "Gray2")
+//                baseView.backgroundColor = UIColor(named: "Gray2")
+//                contentView.backgroundColor = #colorLiteral(red: 0.9601849914, green: 0.9601849914, blue: 0.9601849914, alpha: 0.15)
+                effect = UIBlurEffect(style: .systemThickMaterialLight)
+//                visualBaseView.effect
                 
                 removeAllButton.backgroundColor = UIColor(named: "Gray3")
                 newMatchButton.backgroundColor = UIColor(named: "Gray3")
@@ -44,8 +48,11 @@ class ListToolBar: UIView, InjectLists {
                 newMatchButton.setTitleColor(UIColor(named: "PureBlack"), for: .normal)
                 doneButton.setTitleColor(UIColor(named: "PureBlack"), for: .normal)
             } else {
+//                contentView.backgroundColor = #colorLiteral(red: 0.05655267835, green: 0.05655267835, blue: 0.05655267835, alpha: 0.15)
+                effect = UIBlurEffect(style: .systemThickMaterialDark)
                 print("dark mode")
             }
+            visualBaseView.effect = effect
         }
     }
     
@@ -64,7 +71,8 @@ class ListToolBar: UIView, InjectLists {
     
     @IBOutlet var contentView: UIView!
     
-    @IBOutlet weak var baseView: UIView!
+    @IBOutlet weak var visualBaseView: UIVisualEffectView!
+    //    @IBOutlet weak var baseView: UIView!
     
     @IBOutlet weak var removeAllButton: UIButton!
     
@@ -140,7 +148,11 @@ class ListToolBar: UIView, InjectLists {
 //        } else {
 //            print("dark mode")
 //        }
-        
+        var effect = UIBlurEffect()
+        contentView.backgroundColor = .clear
+        effect = UIBlurEffect(style: .systemThickMaterialDark)
+        visualBaseView.effect = effect
+        print("dark mode")
     }
     
     func addList(list: EditableFindList) {

@@ -1708,7 +1708,7 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" name="Gray2"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Rei-xf-Qmm" firstAttribute="top" secondItem="pa4-4L-yZS" secondAttribute="bottom" id="2jw-0O-UWI"/>
                                             <constraint firstItem="fSu-od-i3x" firstAttribute="centerX" secondItem="Vvt-RF-KwY" secondAttribute="centerX" id="4fd-kL-XZu"/>
@@ -1739,7 +1739,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="trp-Tg-3ch"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Gray2"/>
                         <constraints>
                             <constraint firstItem="Qhz-hU-u5O" firstAttribute="trailing" secondItem="PRf-cd-yp3" secondAttribute="trailing" id="N7v-jq-ClV"/>
                             <constraint firstAttribute="bottom" secondItem="PRf-cd-yp3" secondAttribute="bottom" id="ShC-wq-BGS"/>
@@ -2141,7 +2141,7 @@
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ss5-9y-yps">
                                 <rect key="frame" x="302" y="716" width="42" height="42"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="42" id="vCJ-5V-ncM"/>
                                     <constraint firstAttribute="height" constant="42" id="wAX-Hs-ohg"/>
@@ -3974,20 +3974,8 @@ the App!</string>
                                                         <action selector="cachePressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="aID-zN-qw4"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ce-Cj-kwU">
-                                                    <rect key="frame" x="139.5" y="5" width="40" height="40"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="BfB-pg-cOv"/>
-                                                        <constraint firstAttribute="height" constant="40" id="jZB-p9-TFM"/>
-                                                    </constraints>
-                                                    <color key="tintColor" name="FeedbackGradientRight"/>
-                                                    <state key="normal" image="trash" catalog="system"/>
-                                                    <connections>
-                                                        <action selector="deletePressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="Vek-Yp-e0A"/>
-                                                    </connections>
-                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bsw-2W-jAY">
-                                                    <rect key="frame" x="186" y="5" width="40" height="40"/>
+                                                    <rect key="frame" x="139.5" y="5" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="iVj-E5-3QN"/>
                                                         <constraint firstAttribute="width" constant="40" id="z2s-w3-cqu"/>
@@ -3996,6 +3984,18 @@ the App!</string>
                                                     <state key="normal" image="square.and.arrow.up" catalog="system"/>
                                                     <connections>
                                                         <action selector="sharePressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="a7T-od-lZf"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ce-Cj-kwU">
+                                                    <rect key="frame" x="186" y="5" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="BfB-pg-cOv"/>
+                                                        <constraint firstAttribute="height" constant="40" id="jZB-p9-TFM"/>
+                                                    </constraints>
+                                                    <color key="tintColor" name="FeedbackGradientRight"/>
+                                                    <state key="normal" image="trash" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="deletePressed:" destination="Ur0-Uw-6Qa" eventType="touchUpInside" id="Vek-Yp-e0A"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

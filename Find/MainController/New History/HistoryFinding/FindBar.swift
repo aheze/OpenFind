@@ -557,7 +557,14 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         }
         return true
     }
-    
+//    override func didMoveToWindow() {
+//        super.didMoveToWindow()
+//        if #available(iOS 11.0, *) {
+//            if let window = self.window {
+//                self.bottomAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: window.safeAreaLayoutGuide.bottomAnchor, multiplier: 1.0).isActive = true
+//            }
+//        }
+//    }
     func buttonPressed(button: ToolbarButtonType) {
         switch button {
         case .removeAll:
@@ -643,17 +650,14 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
     func startedEditing(start: Bool) {
         print("started editing")
     }
-    
     func loadListsRealm() {
-        
         listCategories = realm.objects(FindList.self)
         selectedLists.removeAll()
         editableListCategories.removeAll()
-        
-        listCategories = listCategories!.sorted(byKeyPath: "dateCreated", ascending: false)
-        if let lC = listCategories {
-            for (index, singleL) in lC.enumerated() {
-                
+        if var cats = listCategories {
+            cats = cats.sorted(byKeyPath: "dateCreated", ascending: false)
+            listCategories = cats
+            for (index, singleL) in cats.enumerated() {
                 let editList = EditableFindList()
                 
                 editList.name = singleL.name
@@ -667,15 +671,42 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
                 }
                 
                 editList.contents = contents
-                
                 editableListCategories.append(editList)
             }
         }
-        for singL in editableListCategories {
-            print(singL.name)
-        }
-        
     }
+//    func loadListsRealm() {
+//
+//        listCategories = realm.objects(FindList.self)
+//        selectedLists.removeAll()
+//        editableListCategories.removeAll()
+//
+//        listCategories = listCategories!.sorted(byKeyPath: "dateCreated", ascending: false)
+//        if let lC = listCategories {
+//            for (index, singleL) in lC.enumerated() {
+//
+//                let editList = EditableFindList()
+//
+//                editList.name = singleL.name
+//                editList.descriptionOfList = singleL.descriptionOfList
+//                editList.iconImageName = singleL.iconImageName
+//                editList.iconColorName = singleL.iconColorName
+//                editList.orderIdentifier = index
+//                var contents = [String]()
+//                for singleCont in singleL.contents {
+//                    contents.append(singleCont)
+//                }
+//
+//                editList.contents = contents
+//
+//                editableListCategories.append(editList)
+//            }
+//        }
+//        for singL in editableListCategories {
+//            print(singL.name)
+//        }
+//
+//    }
 }
 
 
