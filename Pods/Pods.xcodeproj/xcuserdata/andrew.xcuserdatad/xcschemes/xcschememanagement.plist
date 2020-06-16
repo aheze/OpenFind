@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>JJFloatingActionButton.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
 		<key>Parchment.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -18,6 +23,11 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
+		</dict>
+		<key>RAMReel.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
 		</dict>
 		<key>Realm.xcscheme</key>
 		<dict>
