@@ -15,6 +15,9 @@ extension ViewController {
     func saveImage(url: URL, imageName: String, image: UIImage, dateCreated: Date) {
 //        let startURL = url.appendingPathComponent("\(imageName)")
 //        let fileURL = startURL.appendingPathExtension("jpg")
+        
+        //test commit
+        print("save")
         let fileURL = url.appendingPathComponent("\(imageName)")
         print(fileURL)
         guard let data = image.jpegData(compressionQuality: 1) else { return }
