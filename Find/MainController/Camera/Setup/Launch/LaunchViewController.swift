@@ -152,7 +152,7 @@ class LaunchViewController: UIViewController {
     @IBOutlet weak var onboardingBottomC: NSLayoutConstraint!
     @IBOutlet weak var onboardingWidthC: NSLayoutConstraint!
     
-//    let deviceSize = UIScreen.main.bounds.size
+//    let deviceSize = screenBounds.size
     let loadingImages = (0...10).map { UIImage(named: "\($0)")! }
     
     let defaults = UserDefaults.standard
@@ -440,6 +440,8 @@ class LaunchViewController: UIViewController {
                     let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController")
                     viewController.modalTransitionStyle = .crossDissolve
                     viewController.modalPresentationStyle = .overCurrentContext
+                    
+                    
                     viewController.modalPresentationCapturesStatusBarAppearance = true
 //                    viewController.transitioningDelegate = self
                     self.present(viewController, animated: true, completion: nil)

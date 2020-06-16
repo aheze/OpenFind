@@ -25,7 +25,7 @@ protocol ReturnSortedTerms: class {
 //protocol Dis
 class FindBar: UIView, UITextFieldDelegate {
     
-    let deviceSize = UIScreen.main.bounds.size
+    let deviceSize = screenBounds.size
     
     var resultsLabel = UILabel()
     

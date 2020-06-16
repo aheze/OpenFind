@@ -59,7 +59,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var baseView: UIView!
     
     
-//    let deviceSize = UIScreen.main.bounds.size
+//    let deviceSize = screenBounds.size
     
     var aspectRatioWidthOverHeight : CGFloat = 0
 //    var aspectRatioSucceeded : Bool = false

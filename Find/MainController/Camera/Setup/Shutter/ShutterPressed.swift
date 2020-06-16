@@ -8,36 +8,46 @@
 
 import UIKit
 import RealmSwift
+import AVFoundation
 
 extension ViewController {
     
-    func saveImage(url : URL, imageName: String, image: UIImage) {
+    func saveImage(url: URL, imageName: String, image: UIImage, dateCreated: Date) {
+//        let startURL = url.appendingPathComponent("\(imageName)")
+//        let fileURL = startURL.appendingPathExtension("jpg")
         let fileURL = url.appendingPathComponent("\(imageName)")
         print(fileURL)
         guard let data = image.jpegData(compressionQuality: 1) else { return }
         do {
-
             try data.write(to: fileURL)
         } catch let error {
             print("error saving file with error", error)
+        }
+        let newHist = HistoryModel()
+        newHist.filePath = "\(imageName)"
+        newHist.dateCreated = dateCreated
+        do {
+            try realm.write {
+                realm.add(newHist)
+            }
+        } catch {
+            print("Error saving category \(error)")
         }
        
     }
 
     @IBAction func buttonTouchDown(_ sender: NewShutterButton) {
-        print("down")
-        
         sender.zoomOutWithEasing(duration: 0.07, easingOffset: 0.1)
     }
     
     @IBAction func buttonTouchUp(_ sender: NewShutterButton) {
-        print("up")
+        AppStoreReviewManager.requestReviewIfAppropriate()
         sender.zoomInWithEasing(duration: 0.06)
+        animateShutterOverlay()
         saveToFile()
     }
     @IBAction func buttonTouchUpOutside(_ sender: NewShutterButton) {
         sender.zoomInWithEasing(duration: 0.06)
-        print("up outside")
     }
     
     func animateShutterOverlay() {
@@ -45,128 +55,36 @@ extension ViewController {
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.prepare()
         generator.impactOccurred()
-        
         let newView = UIView()
-        view.insertSubview(newView, aboveSubview: sceneView)
+        view.insertSubview(newView, aboveSubview: cameraView)
         newView.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
         newView.alpha = 0
         newView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        UIView.animate(withDuration: 0.07, animations: {
+        UIView.animate(withDuration: 0.09, animations: {
             newView.alpha = 1
         }, completion: { _ in
-            UIView.animate(withDuration: 0.05, delay: 0.06, animations: {
+            UIView.animate(withDuration: 0.11, delay: 0.01, animations: {
                 newView.alpha = 0
             }) { _ in
                 newView.removeFromSuperview()
             }
-            
         })
-        
     }
     func saveToFile() {
-        if let capturedImage = sceneView.session.currentFrame?.capturedImage {
-            var ciImage = CIImage(cvPixelBuffer: capturedImage)
-            let transform = ciImage.orientationTransform(for: CGImagePropertyOrientation(rawValue: 6)!)
-            ciImage = ciImage.transformed(by: transform)
-            let size = ciImage.extent.size
-            let screenSize: CGRect = UIScreen.main.bounds
-            let imageRect = CGRect(x: screenSize.origin.x, y: screenSize.origin.y, width: size.width, height: size.height)
-            let context = CIContext(options: nil)
-            guard let cgImage = context.createCGImage(ciImage, from: imageRect) else {
-                return
-            }
-            let uiImage = UIImage(cgImage: cgImage)
-            
+        capturePhoto { image in
             let date = Date()
             let formatter = DateFormatter()
             formatter.dateFormat = "MMddyy"
             let dateAsString = formatter.string(from: date)
             let timeFormatter = DateFormatter()
-            timeFormatter.dateFormat = "HHmmss.SSSS"
+            timeFormatter.dateFormat = "HHmmss-SSSS"
             let timeAsString = timeFormatter.string(from: date)
-            print("date=\(dateAsString).time=\(timeAsString)")
-            saveImage(url: globalUrl, imageName: "=\(dateAsString)=\(timeAsString)", image: uiImage)
-            animateShutterOverlay()
-//            UIView.animate(withDuration: 0.3, animations: {
-//    //                    self.photoButton.alpha = 0
-//                self.menuButton.alpha = 0
-//
-//            }, completion: { _ in
-//                self.menuButton.isHidden = true
-//    //                    self.photoButton.isHidden = true
-//
-//            })
+            print("Date=\(dateAsString), time=\(timeAsString)")
+            self.saveImage(url: self.globalUrl, imageName: "=\(dateAsString)=\(timeAsString)", image: image, dateCreated: date)
         }
     }
-//    @IBAction func didTapButton(_ sender: ShutterButton) {
-//        
-//        print(sender.buttonState)
-//        switch sender.buttonState {
-//        case .normal:
-//            //changeHUDSize(to: CGSize(width: 55, height: 120))
-//            sender.buttonState = .recording
-//            
-//            sceneView.session.pause()
-//            
-//            if let capturedImage = sceneView.session.currentFrame?.capturedImage {
-//                
-//                
-//                var ciImage = CIImage(cvPixelBuffer: capturedImage)
-//                let transform = ciImage.orientationTransform(for: CGImagePropertyOrientation(rawValue: 6)!)
-//                ciImage = ciImage.transformed(by: transform)
-//                let size = ciImage.extent.size
-//                
-//                let screenSize: CGRect = UIScreen.main.bounds
-//                let imageRect = CGRect(x: screenSize.origin.x, y: screenSize.origin.y, width: size.width, height: size.height)
-//                let context = CIContext(options: nil)
-//                guard let cgImage = context.createCGImage(ciImage, from: imageRect) else {
-//                    return
-//                }
-//                let uiImage = UIImage(cgImage: cgImage)
-//                //                self.freezeImageArray.append(uiImage)
-//                let date = Date()
-//                
-//                let formatter = DateFormatter()
-//                formatter.dateFormat = "MMddyy"
-//                let dateAsString = formatter.string(from: date)
-//                
-//                
-//                let timeFormatter = DateFormatter()
-//                timeFormatter.dateFormat = "HHmmss.SSSS"
-//                let timeAsString = timeFormatter.string(from: date)
-//                print("date=\(dateAsString).time=\(timeAsString)")
-//                saveImage(url: globalUrl, imageName: "=\(dateAsString)=\(timeAsString)", image: uiImage)
-//                UIView.animate(withDuration: 0.3, animations: {
-////                    self.photoButton.alpha = 0
-//                    self.menuButton.alpha = 0
-//                    
-//                }, completion: { _ in
-//                    self.menuButton.isHidden = true
-////                    self.photoButton.isHidden = true
-//                    
-//                    
-//                })
-//            }
-//
-//            
-//            
-//        case .recording:
-//            sender.buttonState = .normal
-////            changeHUDSize(to: CGSize(width: 55, height: 55))
-//            
-//            self.menuButton.isHidden = false
-////            self.photoButton.isHidden = false
-//            UIView.animate(withDuration: 0.3, animations: {
-//                self.menuButton.alpha = 1
-////                 self.photoButton.alpha = 1
-//            }, completion: nil)
-//            if let config = sceneView.session.configuration {
-//            sceneView.session.run(config)
-//            }
-//        }
-//    }
 
 }
 extension UIView {

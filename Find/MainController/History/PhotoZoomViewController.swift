@@ -31,7 +31,7 @@ class PhotoZoomViewController: UIViewController {
     var ocrSearching = false
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
     
-    var deviceSize = UIScreen.main.bounds.size
+    var deviceSize = screenBounds.size
     
     @IBOutlet weak var drawingView: UIView!
     @IBOutlet weak var imageViewBottomConstraint: NSLayoutConstraint!

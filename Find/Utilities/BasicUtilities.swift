@@ -8,6 +8,7 @@
 
 import VideoToolbox
 import UIKit
+
 extension CIImage {
     
     /// Returns a pixel buffer of the image's current contents.

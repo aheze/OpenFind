@@ -17,7 +17,7 @@ protocol ZoomAnimatorDelegate: class {
 
 class ZoomAnimator: NSObject, RecieveDeleteLast {
     
-    let deviceSize = UIScreen.main.bounds.size
+    let deviceSize = screenBounds.size
     
     weak var fromDelegate: ZoomAnimatorDelegate?
     weak var toDelegate: ZoomAnimatorDelegate?
@@ -34,7 +34,7 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
     fileprivate func animateZoomInTransition(using transitionContext: UIViewControllerContextTransitioning) {
         print("COOM IN")
         let containerView = transitionContext.containerView
-        
+        print("CON FRAME: \(containerView.frame)")
         guard let toVC = transitionContext.viewController(forKey: .to),
             let fromVC = transitionContext.viewController(forKey: .from),
             let fromReferenceImageView = self.fromDelegate?.referenceImageView(for: self),
@@ -46,6 +46,15 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
         
         self.fromDelegate?.transitionWillStartWith(zoomAnimator: self)
         self.toDelegate?.transitionWillStartWith(zoomAnimator: self)
+        
+        
+        print("TOVIEW: \(toVC.view)")
+        
+        
+        /// add this so support Projector
+        toVC.view.frame = screenBounds
+        
+        
         
         toVC.view.alpha = 0
         toReferenceImageView.isHidden = true

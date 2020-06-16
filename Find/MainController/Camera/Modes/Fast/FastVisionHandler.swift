@@ -36,7 +36,7 @@ extension ViewController {
                     for text in observation.topCandidates(1) {
                         let component = Component()
                         component.x = observation.boundingBox.origin.x
-                        component.y = 1 - observation.boundingBox.minY
+                        component.y = 1 - observation.boundingBox.origin.y
                         component.height = observation.boundingBox.height
                         component.width = observation.boundingBox.width
                         let lowerCaseComponentText = text.string.lowercased()
@@ -50,8 +50,12 @@ extension ViewController {
                         let newY = (component.y * self.deviceSize.height) - newH
                         let individualCharacterWidth = newW / CGFloat(component.text.count)
                         
+//                        print("size: \(self.deviceSize)")
+                        
                         component.x = newX
                         component.y = newY
+                        component.width = newW
+                        component.height = newH
                         if shouldShowTextDetectIndicator {
                             drawFastHighlight(component: component)
                         }
@@ -241,7 +245,7 @@ extension ViewController {
             })
             if self.nextComponents.count > self.previousNumberOfMatches {
 //                if self.currentPassCount >= 100 {
-                    print("STROKE END!!")
+//                    print("STROKE END!!")
                     let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
                     strokeAnimation.fromValue = 0
                     strokeAnimation.toValue = 1
@@ -276,9 +280,12 @@ extension ViewController {
     }
     func drawFastHighlight(component: Component) {
         DispatchQueue.main.async {
-            let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
-            let newW = component.width * convertedOriginalWidthOfBigImage
-            let newH = component.height * self.deviceSize.height
+//            let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
+//            let newW = component.width * convertedOriginalWidthOfBigImage
+//            let newH = component.height * self.deviceSize.height
+            let newW = component.width
+            let newH = component.height
+            
             let buffer = CGFloat(3)
             let doubBuffer = CGFloat(6)
             let newX = component.x
@@ -371,6 +378,5 @@ extension String {
         
         return indices
     }
-    
 }
 

@@ -235,7 +235,7 @@ class ViewController: UIViewController {
     var cancelTimer : Timer?
     
     //MARK: Motion and AR Engine
-    var motionManager: CMMotionManager!
+    var motionManager = CMMotionManager()
     var motionXAsOfHighlightStart = Double(0) ///     X
     var motionYAsOfHighlightStart = Double(0) ///     Y
     var motionZAsOfHighlightStart = Double(0) ///     Z
@@ -264,7 +264,7 @@ class ViewController: UIViewController {
     //MARK: Every mode (Universal)
     var statusBarHidden : Bool = false
     var finalTextToFind : String = ""
-    let deviceSize = UIScreen.main.bounds.size
+    let deviceSize = screenBounds.size
     ///Save the image
     var globalUrl : URL = URL(fileURLWithPath: "")
 
@@ -379,7 +379,7 @@ class ViewController: UIViewController {
                 self.toolbarLeftC?.update(offset: rect.origin.x)
             }
             UIView.animate(withDuration: 0.6, animations: {
-                if rect.width < UIScreen.main.bounds.size.width {
+                if rect.width < screenBounds.size.width {
                     self.toolbar.layer.cornerRadius = 5
                 } else {
                     self.toolbar.layer.cornerRadius = 0
@@ -405,7 +405,7 @@ class ViewController: UIViewController {
                             self.didFinishShouldUpdateHeight = false
                             self.toolbarTopC?.update(offset: rect.origin.y - 80)
                             UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(rawValue: curve), animations: {
-                                if rect.origin.y == UIScreen.main.bounds.size.height {
+                                if rect.origin.y == screenBounds.size.height {
                                     self.toolbar.alpha = 0
                                     print("FADE NOW")
                                 } else {
@@ -518,7 +518,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        print("SIZESASADS   vdl ASA: \(screenBounds.size)")
         var hasNotch = false
         switch deviceType {
             case "iPhone10,3", "iPhone10,6", "iPhone11,2", "iPhone11,4", "iPhone11,6", "iPhone11,8", "iPhone12,3", "iPhone12,5":
@@ -565,7 +565,7 @@ class ViewController: UIViewController {
 //        }
         busyFastFinding = false
         
-        motionManager = CMMotionManager()
+//        motionManager = CMMotionManager()
         motionManager.deviceMotionUpdateInterval = 0.01
        //  initial configuration
         if let deviceMot = motionManager.deviceMotion?.attitude {
@@ -649,7 +649,7 @@ extension UIImage {
         ciImage = ciImage.transformed(by: transform)
         let size = ciImage.extent.size
 
-        let screenSize: CGRect = UIScreen.main.bounds
+        let screenSize: CGRect = screenBounds
         let imageRect = CGRect(x: screenSize.origin.x, y: screenSize.origin.y, width: size.width, height: size.height)
         let context = CIContext(options: nil)
         guard let cgImage = context.createCGImage(ciImage, from: imageRect) else {

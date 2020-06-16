@@ -34,7 +34,7 @@ struct AdaptiveCollectionConfig {
 extension UIDevice {
     
     static var isPhoneSE: Bool {
-        let screenWidth = UIScreen.main.bounds.width
+        let screenWidth = screenBounds.width
         return screenWidth == 320
     }
     

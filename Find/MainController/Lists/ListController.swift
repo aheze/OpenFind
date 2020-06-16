@@ -276,7 +276,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
             attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
             attributes.entryBackground = .color(color: .white)
             attributes.screenInteraction = .absorbTouches
-            attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+            attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
 //            let edgeWidth = CGFloat(600)
 //            attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
             attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
@@ -743,12 +743,12 @@ extension ListController: UIViewControllerAnimatedTransitioning {
         
         let collViewHeight = view.frame.size.height
         let drawerSize = CGSize(
-            width: UIScreen.main.bounds.size.width,
+            width: screenBounds.size.width,
             height: collViewHeight)
         
         print(drawerSize)
         // Determine the drawer frame for both on and off screen positions.
-        let yPos = UIScreen.main.bounds.size.height - collViewHeight
+        let yPos = screenBounds.size.height - collViewHeight
         
         
         print(collViewHeight)
@@ -759,7 +759,7 @@ extension ListController: UIViewControllerAnimatedTransitioning {
         
         
         if isPresentingDrawer == false {
-            let diffYPos = UIScreen.main.bounds.size.height - (collViewHeight / 0.97)
+            let diffYPos = screenBounds.size.height - (collViewHeight / 0.97)
             //let newyPos = yPos * 0.97
             //onScreenDrawerFrame.origin.y = yPos
            var newFrame = onScreenDrawerFrame

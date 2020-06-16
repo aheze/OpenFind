@@ -46,7 +46,7 @@ class SwiftEntryKitTemplates {
         attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
         attributes.entryBackground = .color(color: .white)
         attributes.screenInteraction = .absorbTouches
-        attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
         
         attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
         

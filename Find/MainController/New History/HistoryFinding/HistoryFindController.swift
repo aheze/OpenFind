@@ -96,7 +96,7 @@ class HistoryFindController: UIViewController {
         attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
         attributes.entryBackground = .color(color: .white)
         attributes.screenInteraction = .absorbTouches
-        attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
         attributes.lifecycleEvents.willDisappear = {
                     
             var attributes = EKAttributes.bottomFloat
@@ -167,7 +167,7 @@ class HistoryFindController: UIViewController {
         attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
         attributes.entryBackground = .color(color: .white)
         attributes.screenInteraction = .absorbTouches
-        attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
         attributes.lifecycleEvents.willDisappear = {
             
             var attributes = EKAttributes.bottomFloat
@@ -212,7 +212,7 @@ class HistoryFindController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var histCenterC: NSLayoutConstraint!
     
-    let deviceSize = UIScreen.main.bounds.size
+    let deviceSize = screenBounds.size
     
     @IBOutlet weak var doneButton: UIButton!
     
@@ -965,11 +965,11 @@ extension HistoryFindController: ZoomAnimatorDelegate {
         }
         print("cellframe: \(cellFrame)")
         
-//        let heightDiff = UIScreen.main.bounds.size.height - view.bounds.size.height
+//        let heightDiff = screenBounds.size.height - view.bounds.size.height
 //        print("height diff: \(heightDiff)")
 //        cellFrame.origin.y += heightDiff
-//        let heightDiff = UIScreen.main.bounds.size.height - view.bounds.size.height
-//        var widthDiff = UIScreen.main.bounds.size.width - view.bounds.size.width
+//        let heightDiff = screenBounds.size.height - view.bounds.size.height
+//        var widthDiff = screenBounds.size.width - view.bounds.size.width
 //        widthDiff /= 2
 //        print("height diff: \(heightDiff)")
 //        cellFrame.origin.y += heightDiff
@@ -1005,10 +1005,10 @@ extension HistoryFindController: ZoomAnimatorDelegate {
                 //Guard against nil values
     //            guard let guardedCell = (self.collectionView.cellForItem(at: self.selectedIndexPath) as? HPhotoCell) else {
     //                //Return a default UIImageView
-    //                return UIImageView(frame: CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0))
+    //                return UIImageView(frame: CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0))
     //            }
                 guard let guardedCell = (self.tableView.cellForRow(at: self.selectedIndexPath) as? HistoryFindCell) else {
-                    return UIImageView(frame: CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0))
+                    return UIImageView(frame: CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0))
                 }
                 //The PhotoCollectionViewCell was found in the collectionView, return the image
                 return guardedCell.photoImageView
@@ -1018,10 +1018,10 @@ extension HistoryFindController: ZoomAnimatorDelegate {
                 //Guard against nil return values
     //            guard let guardedCell = self.collectionView.cellForItem(at: self.selectedIndexPath) as? HPhotoCell else {
     //                //Return a default UIImageView
-    //                return UIImageView(frame: CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0))
+    //                return UIImageView(frame: CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0))
     //            }
                 guard let guardedCell = (self.tableView.cellForRow(at: self.selectedIndexPath) as? HistoryFindCell) else {
-                    return UIImageView(frame: CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0))
+                    return UIImageView(frame: CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0))
                 }
                 //The PhotoCollectionViewCell was found in the collectionView, return the image
                 return guardedCell.photoImageView
@@ -1037,7 +1037,7 @@ extension HistoryFindController: ZoomAnimatorDelegate {
             
             //Prevent the collectionView from returning a nil value
             guard let guardedCell = (self.tableView.cellForRow(at: self.selectedIndexPath) as? HistoryFindCell) else {
-                return UIImageView(frame: CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0))
+                return UIImageView(frame: CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0))
             }
             
             return guardedCell.photoImageView
@@ -1070,7 +1070,7 @@ extension HistoryFindController: ZoomAnimatorDelegate {
                 
                 //Prevent the collectionView from returning a nil value
                 guard let guardedCell = (self.tableView.cellForRow(at: self.selectedIndexPath) as? HistoryFindCell) else {
-                    return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
+                    return CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0)
                 }
                 
                 var cellFrame = guardedCell.frame
@@ -1085,7 +1085,7 @@ extension HistoryFindController: ZoomAnimatorDelegate {
             else {
                 //Prevent the collectionView from returning a nil value
                 guard let guardedCell = (self.tableView.cellForRow(at: self.selectedIndexPath) as? HistoryFindCell) else {
-                    return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
+                    return CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0)
                 }
                 //The cell was found successfully
 //                return guardedCell.frame
@@ -1108,7 +1108,7 @@ extension HistoryFindController: ZoomAnimatorDelegate {
             
             //Prevent the collectionView from returning a nil value
             guard let guardedCell = (self.tableView.cellForRow(at: self.selectedIndexPath) as? HistoryFindCell) else {
-                return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
+                return CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0)
             }
             
 //            return guardedCell.frame

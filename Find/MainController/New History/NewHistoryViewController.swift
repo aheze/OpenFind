@@ -402,6 +402,8 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("SIZESASADSASA: \(screenBounds.size)")
         tempShareView.isUserInteractionEnabled = false
         tempShareView.backgroundColor = UIColor.clear
         populateRealm()
@@ -448,7 +450,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
             attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
             attributes.entryBackground = .color(color: .white)
             attributes.screenInteraction = .absorbTouches
-            attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(100))
+            attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
             attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 SwiftEntryKit.display(entry: vc, using: attributes)
@@ -766,7 +768,7 @@ extension NewHistoryViewController: ButtonPressed {
                 attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
                 attributes.entryBackground = .color(color: .white)
                 attributes.screenInteraction = .absorbTouches
-                attributes.positionConstraints.size.height = .constant(value: UIScreen.main.bounds.size.height - CGFloat(300))
+                attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(300))
 //                attributes.positionConstraints.maxSize = .init(width: .constant(value: 300), height: .constant(value: 400))
                 attributes.positionConstraints.maxSize = .init(width: .constant(value: 450), height: .constant(value: 550))
                 
@@ -1130,32 +1132,55 @@ extension NewHistoryViewController {
 
 extension Date {
     func convertDateToReadableString() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMddyy"
+        /// Initializing a Date object will always return the current date (including time)
         let todaysDate = Date()
-        let todaysDateAsString = dateFormatter.string(from: todaysDate)
-        let yesterday = todaysDate.subtract(days: 1)
-        let yesterdaysDateAsString = dateFormatter.string(from: yesterday!)
         
-        let oneWeekAgo = todaysDate.subtract(days: 7)
-        let yestYesterday = yesterday?.subtract(days: 1)
-        let range = oneWeekAgo!...yestYesterday!
+        guard let yesterday = todaysDate.subtract(days: 1) else { return "2020"}
         
-        let stringDate = dateFormatter.string(from: self)
+        guard let oneWeekAgo = todaysDate.subtract(days: 7) else { return "2020"}
+        guard let yestYesterday = yesterday.subtract(days: 1) else { return "2020"}
         
-        if stringDate == todaysDateAsString {
+        /// This will be any date from one week ago to the day before yesterday
+        let recently = oneWeekAgo...yestYesterday
+        
+        /// convert the date into a string, if the date is before yesterday
+        let dateFormatter = DateFormatter()
+        
+        /// If self (the date that you're comparing) is today
+        if self.hasSame(.day, as: todaysDate) {
             return "Today"
-        } else if stringDate == yesterdaysDateAsString {
+            
+        /// if self is yesterday
+        } else if self.hasSame(.day, as: yesterday) {
             return "Yesterday"
+            
+        /// if self is in between one week ago and the day before yesterday
+        } else if recently.contains(self) {
+            
+            /// "EEEE" will display something like "Wednesday" (the weekday)
+            dateFormatter.dateFormat = "EEEE"
+            return dateFormatter.string(from: self)
+            
+        /// self is before one week ago
         } else {
-            if range.contains(self) {
-                dateFormatter.dateFormat = "EEEE"
-                return dateFormatter.string(from: self)
-            } else {
-                dateFormatter.dateFormat = "MMMM d',' yyyy"
-                return dateFormatter.string(from: self)
-            }
+            
+            /// displays the date as "January 1, 2020"
+            /// the ' ' marks indicate a character that you add (in our case, a comma)
+            dateFormatter.dateFormat = "MMMM d',' yyyy"
+            return dateFormatter.string(from: self)
         }
+        
+    }
+    
+    /// Thanks to Vasily Bodnarchuk: https://stackoverflow.com/a/40654331
+    func compare(with date: Date, only component: Calendar.Component) -> Int {
+        let days1 = Calendar.current.component(component, from: self)
+        let days2 = Calendar.current.component(component, from: date)
+        return days1 - days2
+    }
+
+    func hasSame(_ component: Calendar.Component, as date: Date) -> Bool {
+        return self.compare(with: date, only: component) == 0
     }
 }
 
@@ -1435,7 +1460,7 @@ extension NewHistoryViewController: ZoomAnimatorDelegate {
             //Guard against nil values
             guard let guardedCell = (self.collectionView.cellForItem(at: self.selectedIndexPath) as? HPhotoCell) else {
                 //Return a default UIImageView
-                return UIImageView(frame: CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0))
+                return UIImageView(frame: CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0))
             }
             //The PhotoCollectionViewCell was found in the collectionView, return the image
             return guardedCell.imageView
@@ -1445,7 +1470,7 @@ extension NewHistoryViewController: ZoomAnimatorDelegate {
             //Guard against nil return values
             guard let guardedCell = self.collectionView.cellForItem(at: self.selectedIndexPath) as? HPhotoCell else {
                 //Return a default UIImageView
-                return UIImageView(frame: CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0))
+                return UIImageView(frame: CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0))
             }
             //The PhotoCollectionViewCell was found in the collectionView, return the image
             return guardedCell.imageView
@@ -1473,7 +1498,7 @@ extension NewHistoryViewController: ZoomAnimatorDelegate {
             
             //Prevent the collectionView from returning a nil value
             guard let guardedCell = (self.collectionView.cellForItem(at: self.selectedIndexPath) as? HPhotoCell) else {
-                return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
+                return CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0)
             }
             
             return guardedCell.frame
@@ -1482,7 +1507,7 @@ extension NewHistoryViewController: ZoomAnimatorDelegate {
         else {
             //Prevent the collectionView from returning a nil value
             guard let guardedCell = (self.collectionView.cellForItem(at: self.selectedIndexPath) as? HPhotoCell) else {
-                return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
+                return CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0)
             }
             //The cell was found successfully
             return guardedCell.frame
