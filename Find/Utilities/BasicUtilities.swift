@@ -9,6 +9,12 @@
 import VideoToolbox
 import UIKit
 
+var screenBounds: CGRect {
+    get {
+        return UIScreen.main.bounds
+    }
+}
+
 extension CIImage {
     
     /// Returns a pixel buffer of the image's current contents.
