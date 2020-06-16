@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C25FCAC584CDAFE23E4779E005DCA67F"
-               BuildableName = "RoundCoachMark.framework"
+               BuildableName = "libRoundCoachMark.a"
                BlueprintName = "RoundCoachMark"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

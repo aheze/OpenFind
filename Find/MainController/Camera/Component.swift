@@ -14,7 +14,12 @@ class Component: NSObject {
     var y: CGFloat = 0
     var height: CGFloat = 0
     var width: CGFloat = 0
+    
+    var isSpecialType = "Not Special"
     var text = ""
+    var parentList = EditableFindList()
+//    var isList = false
+    var colors = ["00aeef"]
     var changed: Bool = false
     var baseView: UIView?
 }

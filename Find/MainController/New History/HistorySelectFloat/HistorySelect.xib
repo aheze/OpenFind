@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,12 +10,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HistorySelectorView" customModule="Find" customModuleProvider="target">
             <connections>
+                <outlet property="cacheButton" destination="u9z-k9-EE7" id="Cqz-Lh-VFI"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="uO7-qf-DFB"/>
                 <outlet property="deleteButton" destination="QBp-TE-s25" id="ehE-0a-NRQ"/>
                 <outlet property="findButton" destination="6a2-pU-Trb" id="Sle-CQ-Lgk"/>
                 <outlet property="heartButton" destination="p32-mH-K1c" id="Urb-BX-PQf"/>
                 <outlet property="photoSelectLabel" destination="WRh-xG-0gP" id="UwK-Nm-MxX"/>
-                <outlet property="shareButton" destination="wiv-ba-vX8" id="BXi-dG-zZt"/>
+                <outlet property="shareButton" destination="3I5-43-TUh" id="rgI-na-rv6"/>
+                <outlet property="stackView" destination="A3x-6s-yc3" id="wKi-58-WPA"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -29,11 +31,14 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="A3x-6s-yc3">
-                    <rect key="frame" x="256" y="7" width="142" height="42"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="-5" translatesAutoresizingMaskIntoConstraints="NO" id="A3x-6s-yc3">
+                    <rect key="frame" x="214" y="7" width="190" height="42"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6a2-pU-Trb" userLabel="Find">
-                            <rect key="frame" x="0.0" y="0.0" width="20.5" height="42"/>
+                            <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="6a2-pU-Trb" secondAttribute="height" multiplier="1:1" id="5Kg-0s-BX2"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="35"/>
                             <color key="tintColor" red="0.99343103170394897" green="0.99666577577590942" blue="0.99652749300003052" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" image="magnifyingglass" catalog="system"/>
@@ -42,7 +47,10 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p32-mH-K1c" userLabel="Heart">
-                            <rect key="frame" x="40.5" y="0.0" width="20.5" height="42"/>
+                            <rect key="frame" x="37" y="0.0" width="42" height="42"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="p32-mH-K1c" secondAttribute="height" multiplier="1:1" id="cXK-6W-WGp"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="35"/>
                             <color key="tintColor" red="0.99343103170394897" green="0.99666577577590942" blue="0.99652749300003052" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" image="heart" catalog="system"/>
@@ -50,8 +58,35 @@
                                 <action selector="heartPressed:" destination="-1" eventType="touchUpInside" id="jIq-AF-bKa"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u9z-k9-EE7" userLabel="Cache">
+                            <rect key="frame" x="74" y="0.0" width="42" height="42"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="u9z-k9-EE7" secondAttribute="height" multiplier="1:1" id="LvM-A2-jz1"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                            <color key="tintColor" red="0.99343103170000002" green="0.99666577580000004" blue="0.99652749299999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" image="SelectNotCached"/>
+                            <connections>
+                                <action selector="cachePressed:" destination="-1" eventType="touchUpInside" id="bHt-c1-Xh4"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3I5-43-TUh" userLabel="Share">
+                            <rect key="frame" x="111" y="0.0" width="42" height="42"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="3I5-43-TUh" secondAttribute="height" multiplier="1:1" id="06l-Te-xaC"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                            <color key="tintColor" red="0.99343103170000002" green="0.99666577580000004" blue="0.99652749299999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" image="square.and.arrow.up" catalog="system"/>
+                            <connections>
+                                <action selector="sharePressed:" destination="-1" eventType="touchUpInside" id="lwP-y4-wbh"/>
+                            </connections>
+                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBp-TE-s25" userLabel="Delete">
-                            <rect key="frame" x="81" y="0.0" width="20.5" height="42"/>
+                            <rect key="frame" x="148" y="0.0" width="42" height="42"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="QBp-TE-s25" secondAttribute="height" multiplier="1:1" id="wgU-q6-jDp"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="35"/>
                             <color key="tintColor" red="0.99343103170394897" green="0.99666577577590942" blue="0.99652749300003052" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" image="trash" catalog="system"/>
@@ -59,16 +94,10 @@
                                 <action selector="deletePressed:" destination="-1" eventType="touchUpInside" id="u9a-1r-YxP"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wiv-ba-vX8" userLabel="Share">
-                            <rect key="frame" x="121.5" y="0.0" width="20.5" height="42"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                            <color key="tintColor" red="0.99343103170394897" green="0.99666577577590942" blue="0.99652749300003052" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <state key="normal" image="square.and.arrow.up" catalog="system"/>
-                            <connections>
-                                <action selector="sharePressed:" destination="-1" eventType="touchUpInside" id="0UY-k6-67t"/>
-                            </connections>
-                        </button>
                     </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="oeM-o3-vgA"/>
+                    </constraints>
                 </stackView>
             </subviews>
             <color key="backgroundColor" name="FeedbackGradientLeft"/>
@@ -76,7 +105,7 @@
                 <constraint firstItem="WRh-xG-0gP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Ig4-73-KHg"/>
                 <constraint firstItem="A3x-6s-yc3" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="LHD-dn-xs7"/>
                 <constraint firstItem="WRh-xG-0gP" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="l29-J1-FjU"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="A3x-6s-yc3" secondAttribute="trailing" constant="16" id="tkj-h7-mwW"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="A3x-6s-yc3" secondAttribute="trailing" constant="10" id="tkj-h7-mwW"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -84,10 +113,11 @@
         </view>
     </objects>
     <resources>
-        <image name="heart" catalog="system" width="64" height="54"/>
-        <image name="magnifyingglass" catalog="system" width="64" height="56"/>
-        <image name="square.and.arrow.up" catalog="system" width="56" height="64"/>
-        <image name="trash" catalog="system" width="60" height="64"/>
+        <image name="SelectNotCached" width="100" height="100"/>
+        <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <image name="trash" catalog="system" width="121" height="128"/>
         <namedColor name="FeedbackGradientLeft">
             <color red="0.0" green="0.68199998140335083" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -1,4 +1,4 @@
-framework module RoundCoachMark {
+module RoundCoachMark {
   umbrella header "RoundCoachMark-umbrella.h"
 
   export *

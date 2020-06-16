@@ -38,43 +38,118 @@ extension SettingsViewController {
 //        decButton.layer.cornerRadius = 10
         
 //        prefilterView.layer.cornerRadius = 10
-        otherSettingsView.layer.masksToBounds = true
-        otherSettingsView.layer.cornerRadius = 10
-        creditsView.layer.masksToBounds = true
-        creditsView.layer.cornerRadius = 10
-        feedbackView.layer.cornerRadius = 10
-        feedbackView.layer.masksToBounds = true
+        
+        otherSettingsView.layer.cornerRadius = 8
+        otherSettingsView.clipsToBounds = true
+        
+        middleHelpView.layer.cornerRadius = 8
+        middleHelpView.clipsToBounds = true
+        
+        moreSettingsView.layer.cornerRadius = 8
+        moreSettingsView.clipsToBounds = true
+        
+        leaveFeedbackView.layer.cornerRadius = 8
+        leaveFeedbackView.clipsToBounds = true
+        
+        rateAppView.layer.cornerRadius = 8
+        rateAppView.clipsToBounds = true
+        
+        creditsView.layer.cornerRadius = 8
+        creditsView.clipsToBounds = true
+        
+//        feedbackView.layer.cornerRadius = 10
+//        feedbackView.layer.masksToBounds = true
         
         
         
     }
-    func addGestureRecognizers() {
-        let watchTap = UILongPressGestureRecognizer(target: self, action: #selector(self.watchTapped(_:)))
-        watchTap.minimumPressDuration = 0
-        watchTutorialView.addGestureRecognizer(watchTap)
+    func setUpBasic() {
+        redButton.tintColor = .white
+        orangeButton.tintColor = .white
+        yellowButton.tintColor = .white
+        greenButton.tintColor = .white
+        tealButton.tintColor = .white
+        lightblueButton.tintColor = .white
+        findblueButton.tintColor = .white
+        purpleButton.tintColor = .white
         
-        let clearHistTap = UILongPressGestureRecognizer(target: self, action: #selector(self.clearHistTapped(_:)))
-        clearHistTap.minimumPressDuration = 0
-        clearHistoryView.addGestureRecognizer(clearHistTap)
+        let image = UIImage(systemName: "checkmark")
         
-        let resetTap = UILongPressGestureRecognizer(target: self, action: #selector(self.resetTapped(_:)))
-        resetTap.minimumPressDuration = 0
-        resetSettingsView.addGestureRecognizer(resetTap)
+        let defaults = UserDefaults.standard
+        if let hexString = defaults.string(forKey: "highlightColor") {
+            switch hexString {
+            case "EB3B5A":
+                redButton.setImage(image, for: .normal)
+//                defaults.set("EB3B5A", forKey: "highlightColor")
+                print("red")
+            case "FA8231":
+                orangeButton.setImage(image, for: .normal)
+//                defaults.set("FA8231", forKey: "highlightColor")
+                print("org")
+            case "FED330":
+                yellowButton.setImage(image, for: .normal)
+//                defaults.set("FED330", forKey: "highlightColor")
+                print("yel")
+            case "20BF6B":
+                greenButton.setImage(image, for: .normal)
+//                defaults.set("20BF6B", forKey: "highlightColor")
+                print("gre")
+            case "2BCBBA":
+                tealButton.setImage(image, for: .normal)
+//                defaults.set("2BCBBA", forKey: "highlightColor")
+                print("teal")
+            case "45AAF2":
+                lightblueButton.setImage(image, for: .normal)
+//                defaults.set("45AAF2", forKey: "highlightColor")
+                print("blue")
+            case "00AEEF":
+                findblueButton.setImage(image, for: .normal)
+//                defaults.set("00AEEF", forKey: "highlightColor")
+                print("aeef")
+            case "A55EEA":
+                purpleButton.setImage(image, for: .normal)
+//                defaults.set("A55EEA", forKey: "highlightColor")
+                print("purple")
+            default:
+                print("WRONG UserDe!!")
+            }
+            
+            
+        }
         
-        let rateTap = UILongPressGestureRecognizer(target: self, action: #selector(self.rateTapped(_:)))
-        rateTap.minimumPressDuration = 0
-        rateAppView.addGestureRecognizer(rateTap)
+        let shouldShowTextDetectIndicator = defaults.bool(forKey: "showTextDetectIndicator")
+        let shouldHapticFeedback = defaults.bool(forKey: "hapticFeedback")
         
-        let helpTap = UILongPressGestureRecognizer(target: self, action: #selector(self.helpTapped(_:)))
-        helpTap.minimumPressDuration = 0
-        helpView.addGestureRecognizer(helpTap)
+        if shouldShowTextDetectIndicator {
+            textDetectSwitch.setOn(true, animated: false)
+        } else {
+            textDetectSwitch.setOn(false, animated: false)
+        }
+        
+        if shouldHapticFeedback {
+            hapticFeedbackSwitch.setOn(true, animated: false)
+        } else {
+            hapticFeedbackSwitch.setOn(false, animated: false)
+        }
+        
+        
     }
-    func setUpGradientFeedback() {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor(named: "FeedbackGradientLeft")?.cgColor, UIColor(named: "FeedbackGradientRight")?.cgColor]
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
-        gradientLayer.frame = CGRect(x: 0.0, y: 0.0, width: feedbackView.frame.size.width, height: feedbackView.frame.size.height)
-        feedbackView.layer.insertSublayer(gradientLayer, at: 0)
-    }
+//    func addGestureRecognizers() {
+//
+//        let feedbackTap = UITapGestureRecognizer(target: self, action: #selector(self.feedbackTapped(_:)))
+//        leaveFeedbackView.addGestureRecognizer(feedbackTap)
+//
+//        let rateTap = UITapGestureRecognizer(target: self, action: #selector(self.rateTapped(_:)))
+//        rateAppView.addGestureRecognizer(rateTap)
+//
+//    }
+//    @objc func feedbackTapped(_ sender: UITapGestureRecognizer? = nil) {
+//        // handling code
+//        print("TAPPP")
+//    }
+//    @objc func rateTapped(_ sender: UITapGestureRecognizer? = nil) {
+//        print("RATEEE")
+//        // handling code
+//    }
+    
 }

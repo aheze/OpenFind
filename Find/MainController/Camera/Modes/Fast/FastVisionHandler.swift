@@ -14,96 +14,98 @@ import CoreMotion
 extension ViewController {
     
     func handleFastDetectedText(request: VNRequest?, error: Error?) {
-        guard let results = request?.results, results.count > 0 else {
-            //print("no results")
+        if shouldResetHighlights {
             busyFastFinding = false
-            return
-        }
-        if let currentMotion = motionManager.deviceMotion {
-            motionXAsOfHighlightStart = Double(0)
-            motionYAsOfHighlightStart = Double(0)
-            motionZAsOfHighlightStart = Double(0)
-            initialAttitude = currentMotion.attitude
-            //print("set")
-            //refAttitudeReferenceFrame = currentMotion.attitude
-            //motionManager.attitudeReferenceFrame
-        }
-        
-        
-        for result in results {
-            if let observation = result as? VNRecognizedTextObservation {
-                for text in observation.topCandidates(1) {
-                    //print(text.string)
-                    let component = Component()
-                    component.x = observation.boundingBox.origin.x
-                    component.y = 1 - observation.boundingBox.minY
-                    component.height = observation.boundingBox.height
-                    component.width = observation.boundingBox.width
-                    component.text = text.string
-                    drawFastHighlight(component: component)
-                    let lowerCaseFinalText = finalTextToFind.lowercased()
-                    let lowerCaseComponentText = component.text.lowercased()
-                
-                    //print(lowerCaseFinalText)
-                    //print(lowerCaseComponentText)
-                    component.text = lowerCaseComponentText
-                    
-                
-                    if lowerCaseComponentText.contains(lowerCaseFinalText) {
-                        //print("sghiruiguhweiugsiugr+++++++++++")
-                    //if component.text.contains(finalTextToFind) {
+            resetFastHighlights()
+        } else {
+            guard let results = request?.results, results.count > 0 else {
+                busyFastFinding = false
+                return
+            }
+            if let currentMotion = motionManager.deviceMotion {
+                motionXAsOfHighlightStart = Double(0)
+                motionYAsOfHighlightStart = Double(0)
+                motionZAsOfHighlightStart = Double(0)
+                initialAttitude = currentMotion.attitude
+            }
+            
+            
+            
+            for result in results {
+                if let observation = result as? VNRecognizedTextObservation {
+                    for text in observation.topCandidates(1) {
+                        let component = Component()
+                        component.x = observation.boundingBox.origin.x
+                        component.y = 1 - observation.boundingBox.origin.y
+                        component.height = observation.boundingBox.height
+                        component.width = observation.boundingBox.width
+                        let lowerCaseComponentText = text.string.lowercased()
+                        component.text = lowerCaseComponentText
                         let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
                         let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
                         let offHalf = offsetWidth / 2
                         let newW = component.width * convertedOriginalWidthOfBigImage
                         let newH = component.height * self.deviceSize.height
                         let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
-                        let newY = component.y * self.deviceSize.height
+                        let newY = (component.y * self.deviceSize.height) - newH
                         let individualCharacterWidth = newW / CGFloat(component.text.count)
-                        let finalW = individualCharacterWidth * CGFloat(finalTextToFind.count)
                         
-                        let indicies = component.text.indicesOf(string: lowerCaseFinalText)
-                        for index in indicies {
-                            let addedWidth = individualCharacterWidth * CGFloat(index)
-                            let finalX = newX + addedWidth
-                            let newComponent = Component()
-                            
-                            newComponent.x = finalX - 4
-                            newComponent.y = newY - (newH + 1)
-                            newComponent.width = finalW + 8
-                            newComponent.height = newH + 2
-                            newComponent.text = "This value is not needed"
-                            newComponent.changed = false
-                            nextComponents.append(newComponent)
-                            
+//                        print("size: \(self.deviceSize)")
+                        
+                        component.x = newX
+                        component.y = newY
+                        component.width = newW
+                        component.height = newH
+                        if shouldShowTextDetectIndicator {
+                            drawFastHighlight(component: component)
+                        }
+                        for match in stringToList.keys {
+                            if lowerCaseComponentText.contains(match) {
+                                let finalW = individualCharacterWidth * CGFloat(match.count)
+                                
+                                let indicies = component.text.indicesOf(string: match)
+                                for index in indicies {
+                                    let addedWidth = individualCharacterWidth * CGFloat(index)
+                                    let finalX = newX + addedWidth
+                                    let newComponent = Component()
+                                    newComponent.x = finalX - 6
+                                    newComponent.y = newY - 3
+                                    newComponent.width = finalW + 12
+                                    newComponent.height = newH + 6
+                                    newComponent.text = match
+                                    newComponent.changed = false
+                                    
+                                    if let parentList = stringToList[match] {
+                                        newComponent.parentList = parentList
+                                    } else {
+                                        print("ERROROROR! NO parent list!")
+                                    }
+                                    nextComponents.append(newComponent)
+                                }
+                            }
                         }
                     }
-                
                 }
             }
             
+            busyFastFinding = false
+            animateFoundFastChange()
+            numberOfFastMatches = 0
+            
         }
-        
-        busyFastFinding = false
-        animateFoundFastChange()
-        numberOfFastMatches = 0
     }
     
     
     
     
     func animateFoundFastChange() {
-        //print("FastFound+++++++++++___________________________________++++++++++++++++++++++++++")
-        
-        
         for newComponent in nextComponents {
-            //print("next looping")
-            
             var lowestDist = CGFloat(10000)
             var distToComp = [CGFloat: Component]()
             
             for oldComponent in currentComponents {
 //                if oldComponent.changed == false {
+                if newComponent.parentList == oldComponent.parentList {
                     let currentCompPoint = CGPoint(x: oldComponent.x, y: oldComponent.y)
                     let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
                     let distanceBetweenPoints = distance(currentCompPoint, nextCompPoint) //< 10
@@ -111,59 +113,27 @@ extension ViewController {
                         lowestDist = distanceBetweenPoints
                         distToComp[lowestDist] = oldComponent
                     }
+                }
 //                }
             }
-//            if shouldScale == true {
             if lowestDist <= 15 {
                 guard let oldComp = distToComp[lowestDist] else { print("NO COMP"); return }
-                let currentCompPoint = CGPoint(x: oldComp.x, y: oldComp.y)
-                let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
-                
                 let newView = oldComp.baseView
-                let nextView = newComponent.baseView
                 tempComponents.append(oldComp)
                 oldComp.changed = true
-                //nextComponents.remove(object: newComponent)
                 DispatchQueue.main.async {
+                    let rect = CGRect(x: newComponent.x, y: newComponent.y, width: newComponent.width, height: newComponent.height)
                     UIView.animate(withDuration: 0.5, animations: {
-                        
-                        let xDist = nextCompPoint.x - currentCompPoint.x
-                        let yDist = nextCompPoint.y - currentCompPoint.y
-                        let rect = CGRect(x: newComponent.x, y: newComponent.y, width: newComponent.width, height: newComponent.height)
                         newView?.frame = rect
-                        
-                        
-                        //print("ANIMATE")
                     })
                 }
             } else {
                 scaleInHighlight(component: newComponent)
             }
-//            } else {
-//                guard let oldComp = distToComp[lowestDist] else { print("NO COMP"); return }
-//                let currentCompPoint = CGPoint(x: oldComp.x, y: oldComp.y)
-//                let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
-//                let newView = oldComp.baseView
-//                let nextView = newComponent.baseView
-//                tempComponents.append(oldComp)
-//                oldComp.changed = true
-//                DispatchQueue.main.async {
-//                    UIView.animate(withDuration: 0.5, animations: {
-//                        let rect = CGRect(x: newComponent.x, y: newComponent.y, width: newComponent.width, height: newComponent.height)
-//                        newView?.frame = rect
-//                        print("ANIMATE, Matches Mode")
-//                    })
-//                }
-//            }
-            
         }
-        
-        //print("Current: \(currentComponents.count)")
- 
         for comp in currentComponents {
             if !tempComponents.contains(comp) {
                 let theView = comp.baseView
-                //print("remove comp because didn't change")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                     DispatchQueue.main.async {
                         UIView.animate(withDuration: 0.2, animations: {
@@ -171,7 +141,6 @@ extension ViewController {
                         }, completion: { _ in
                             theView?.isHidden = true
                             theView?.removeFromSuperview()
-                            //self.currentComponents.remove(object: comp)
                         })
                     }
                 })
@@ -181,7 +150,6 @@ extension ViewController {
         currentComponents.removeAll()
         currentComponents = tempComponents
         
-        //print("next: \(nextComponents.count)")
         self.updateMatchesNumber(to: self.nextComponents.count)
         
         for next in nextComponents {
@@ -199,22 +167,17 @@ extension ViewController {
             }
         }
         
-        //print("Curr \(currentComponents.count)")
         for curr in currentComponents {
             curr.changed = false
         }
-        //print("temp: \(tempComponents.count)")
         nextComponents.removeAll()
         tempComponents.removeAll()
-        //print("currentComponents.count: \(currentComponents.count)")
-        
-        //print("END_______________________________________________________")
-    
     }
     
     
     func scaleInHighlight(component: Component) {
-        //print("scale")
+        newNumberOfMatchesFound += 1
+        
         DispatchQueue.main.async {
             
             let layer = CAShapeLayer()
@@ -224,33 +187,76 @@ extension ViewController {
             let newLayer = CAShapeLayer()
             newLayer.bounds = layer.frame
             newLayer.path = UIBezierPath(roundedRect: layer.frame, cornerRadius: component.height / 3.5).cgPath
-            newLayer.fillColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 0.3030554367)
-            newLayer.strokeColor = #colorLiteral(red: 0.1896808545, green: 0.5544475485, blue: 0.8020701142, alpha: 1)
             newLayer.lineWidth = 3
             newLayer.lineCap = .round
             
+            guard let colors = self.matchToColors[component.text] else { print("NO COLORS! scalee"); return }
+            if colors.count > 1 {
+                var newRect = layer.frame
+                newRect.origin.x += 1.5
+                newRect.origin.y += 1.5
+                layer.frame.origin.x -= 1.5
+                layer.frame.origin.y -= 1.5
+                layer.frame.size.width += 3
+                layer.frame.size.height += 3
+                newLayer.path = UIBezierPath(roundedRect: newRect, cornerRadius: component.height / 4.5).cgPath
+                let gradient = CAGradientLayer()
+                gradient.frame = layer.bounds
+                if let gradientColors = self.matchToColors[component.text] {
+                    gradient.colors = gradientColors
+                    if let firstColor = gradientColors.first {
+                        layer.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3).cgColor
+                    }
+                }
+                gradient.startPoint = CGPoint(x: 0, y: 0.5)
+                gradient.endPoint = CGPoint(x: 1, y: 0.5)
+                
+                gradient.mask = newLayer
+                newLayer.fillColor = UIColor.clear.cgColor
+                newLayer.strokeColor = UIColor.black.cgColor
+                
+                layer.addSublayer(gradient)
+            } else {
+                if let firstColor = colors.first {
+                    newLayer.fillColor = firstColor.copy(alpha: 0.3)
+                    newLayer.strokeColor = firstColor
+                    layer.addSublayer(newLayer)
+                }
+            }
+
             let newView = UIView(frame: CGRect(x: component.x, y: component.y, width: component.width, height: component.height))
+            newView.alpha = 0
             self.view.insertSubview(newView, aboveSubview: self.cameraView)
-            //print(newView.frame)
             
-            let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
-            strokeAnimation.fromValue = 0
-            strokeAnimation.toValue = 1
-            strokeAnimation.duration = 0.3
-            strokeAnimation.autoreverses = false
-            strokeAnimation.repeatCount = 0
+            newView.layer.addSublayer(layer)
+            newView.clipsToBounds = false
+            
+            
             let x = newLayer.bounds.size.width / 2
             let y = newLayer.bounds.size.height / 2
-            
-            //newView.layer.position = CGPoint(x: component.x, y: component.y)
-            newView.layer.addSublayer(layer)
-            layer.addSublayer(newLayer)
             newLayer.position = CGPoint(x: x, y: y)
-            newLayer.add(strokeAnimation, forKey: "line")
             component.baseView = newView
             component.changed = true
             
-            self.layerScaleAnimation(layer: newLayer, duration: 0.2, fromValue: 1.2, toValue: 1)
+            
+//            print("Count pass: \(self.currentPassCount)  :: curr diff: \(self.nextComponents.count - self.previousNumberOfMatches)")
+            UIView.animate(withDuration: 0.15, animations: {
+                newView.alpha = 1
+            })
+            if self.nextComponents.count > self.previousNumberOfMatches {
+//                if self.currentPassCount >= 100 {
+//                    print("STROKE END!!")
+                    let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
+                    strokeAnimation.fromValue = 0
+                    strokeAnimation.toValue = 1
+                    strokeAnimation.duration = 0.3
+                    strokeAnimation.autoreverses = false
+                    strokeAnimation.repeatCount = 0
+                    newLayer.add(strokeAnimation, forKey: "line")
+                    self.layerScaleAnimation(layer: newLayer, duration: 0.2, fromValue: 1.2, toValue: 1)
+//                }
+            }
+            
         }
         self.tempComponents.append(component)
     }
@@ -264,7 +270,6 @@ extension ViewController {
     func layerScaleAnimation(layer: CALayer, duration: CFTimeInterval, fromValue: CGFloat, toValue: CGFloat) {
         let timing = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
         let scaleAnimation: CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
-
         CATransaction.begin()
         CATransaction.setAnimationTimingFunction(timing)
         scaleAnimation.duration = duration
@@ -275,23 +280,20 @@ extension ViewController {
     }
     func drawFastHighlight(component: Component) {
         DispatchQueue.main.async {
-            let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
-            let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
-            let offHalf = offsetWidth / 2
+//            let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
+//            let newW = component.width * convertedOriginalWidthOfBigImage
+//            let newH = component.height * self.deviceSize.height
+            let newW = component.width
+            let newH = component.height
             
-            let newW = component.width * convertedOriginalWidthOfBigImage
-            let newH = component.height * self.deviceSize.height
-            let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
-            let newY = component.y * self.deviceSize.height
             let buffer = CGFloat(3)
             let doubBuffer = CGFloat(6)
-            //print("x: \(newX) y: \(newY) width: \(newW) height: \(newH)")
+            let newX = component.x
+            let newY = component.y
             let layer = CAShapeLayer()
             layer.frame = CGRect(x: newX - buffer, y: newY, width: newW + doubBuffer, height: newH)
             layer.cornerRadius = newH / 3.5
             self.animateFastChange(layer: layer)
-            
-        
         }
     }
     func resetFastHighlights() {
@@ -323,33 +325,33 @@ extension ViewController {
         }
     }
     func animateFastChange(layer: CAShapeLayer) {
-            view.layer.insertSublayer(layer, above: cameraView.layer)
-            layer.masksToBounds = true
-            let gradient = CAGradientLayer()
-            gradient.frame = layer.bounds
-            gradient.colors = [#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor, #colorLiteral(red: 0.7220415609, green: 0.7220415609, blue: 0.7220415609, alpha: 0.3010059932).cgColor, #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor]
-            gradient.startPoint = CGPoint(x: -1, y: 0.5)
-            gradient.endPoint = CGPoint(x: 0, y: 0.5)
-            layer.addSublayer(gradient)
-            
-            let startPointAnim = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.startPoint))
-            startPointAnim.fromValue = CGPoint(x: -1, y: 0.5)
-            startPointAnim.toValue = CGPoint(x:1, y: 0.5)
+        view.layer.insertSublayer(layer, above: cameraView.layer)
+        layer.masksToBounds = true
+        let gradient = CAGradientLayer()
+        gradient.frame = layer.bounds
+        gradient.colors = [#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor, #colorLiteral(red: 0.7220415609, green: 0.7220415609, blue: 0.7220415609, alpha: 0.3010059932).cgColor, #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor]
+        gradient.startPoint = CGPoint(x: -1, y: 0.5)
+        gradient.endPoint = CGPoint(x: 0, y: 0.5)
+        layer.addSublayer(gradient)
+        
+        let startPointAnim = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.startPoint))
+        startPointAnim.fromValue = CGPoint(x: -1, y: 0.5)
+        startPointAnim.toValue = CGPoint(x:1, y: 0.5)
 
-            let endPointAnim = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.endPoint))
-            endPointAnim.fromValue = CGPoint(x: 0, y: 0.5)
-            endPointAnim.toValue = CGPoint(x:2, y: 0.5)
+        let endPointAnim = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.endPoint))
+        endPointAnim.fromValue = CGPoint(x: 0, y: 0.5)
+        endPointAnim.toValue = CGPoint(x:2, y: 0.5)
 
-            let animGroup = CAAnimationGroup()
-            animGroup.animations = [startPointAnim, endPointAnim]
-            animGroup.duration = 0.6
-            animGroup.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
-            animGroup.repeatCount = 0
-            gradient.add(animGroup, forKey: "animateGrad")
-       
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-                layer.removeFromSuperlayer()
-            })
+        let animGroup = CAAnimationGroup()
+        animGroup.animations = [startPointAnim, endPointAnim]
+        animGroup.duration = 0.6
+        animGroup.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
+        animGroup.repeatCount = 0
+        gradient.add(animGroup, forKey: "animateGrad")
+   
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+            layer.removeFromSuperlayer()
+        })
     }
 }
 extension Array where Element: Equatable {
@@ -359,20 +361,7 @@ extension Array where Element: Equatable {
         guard let index = firstIndex(of: object) else {return}
         remove(at: index)
     }
-
 }
-
-//extension ViewController {
-//
-//    func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
-//        print("up")
-//    }
-//    func renderer(_ renderer: SCNSceneRenderer, willUpdate node: SCNNode, for anchor: ARAnchor) {
-//        print("sdk")
-//    }
-//
-//
-//}
 extension String {
     func indicesOf(string: String) -> [Int] {
         var indices = [Int]()
@@ -390,3 +379,4 @@ extension String {
         return indices
     }
 }
+
