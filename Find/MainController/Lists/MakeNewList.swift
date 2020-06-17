@@ -33,9 +33,14 @@ protocol ScrolledToColors: class {
 class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo, DeleteList {
     
 
+    let originalListName = NSLocalizedString("originalListName", comment: "EditList def=Untitled")
+    let originalDescriptionOfList = NSLocalizedString("originalDescriptionOfList", comment: "EditList def=No description...")
     
-    var name = "Untitled"
-    var descriptionOfList = "No description..."
+    lazy var name = originalListName
+    lazy var descriptionOfList = originalDescriptionOfList
+    
+//    var name = "Untitled"
+//    var descriptionOfList = "No description..."
     var contents = [String]()
     var iconImageName = "square.grid.2x2"
     var iconColorName = "579f2b"
@@ -171,9 +176,13 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo, 
         let storyboard3 = UIStoryboard(name: "Main", bundle: nil)
         let thirdViewController = storyboard3.instantiateViewController(withIdentifier: "ColorsViewController") as! ColorsViewController
 
-        firstViewController.title = "General"
-        secondViewController.title = "Icon"
-        thirdViewController.title = "Color"
+        let firstVCTitle = NSLocalizedString("firstVCTitle", comment: "EditList def=General")
+        let secondVCTitle = NSLocalizedString("secondVCTitle", comment: "EditList def=Icon")
+        let thirdVCTitle = NSLocalizedString("thirdVCTitle", comment: "EditList def=Color")
+        
+        firstViewController.title = firstVCTitle
+        secondViewController.title = secondVCTitle
+        thirdViewController.title = thirdVCTitle
         
         firstViewController.generalDelegate = self
         
@@ -186,12 +195,7 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo, 
         self.scrolledToColors = thirdViewController
         thirdViewController.receiveColor(name: iconColorName)
         
-//        self.returnInfoNowDelegate = firstViewController
-//        self.returnInfoNowDelegate = secondViewController
-//        self.returnInfoNowDelegate = thirdViewController
         self.returnGeneralNowDelegate = firstViewController
-//        self.returnIconNowDelegate = secondViewController
-//        self.returnColorNowDelegate = thirdViewController
         
         let pagingViewController = FixedPagingViewController(viewControllers: [
           firstViewController,
@@ -220,12 +224,9 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo, 
         
         pagingViewController.didMove(toParent: self)
         
-//        cancelButton.layer.cornerRadius = 6
-//        doneWithListButton.layer.cornerRadius = 6
         
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
         let newImage = UIImage(systemName: iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(hexString: iconColorName), renderingMode: .alwaysOriginal)
-        //self.imageView.image = newImage
         topImageView.image = newImage
         
     }

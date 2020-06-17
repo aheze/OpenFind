@@ -18,7 +18,10 @@ class SwiftEntryKitTemplates {
     static func displayHistoryHelp() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let helpViewController = storyboard.instantiateViewController(withIdentifier: "DefaultHelpController") as! DefaultHelpController
-        helpViewController.title = "Help"
+        
+        let helpTitle = NSLocalizedString("helpTitle", comment: "SwiftEntryKitTemplates displayHistoryHelp def=Help")
+        
+        helpViewController.title = helpTitle
         helpViewController.goDirectlyToUrl = true
         helpViewController.helpJsonKey = "HistoryFindHelpArray"
         helpViewController.directUrl = "https://zjohnzheng.github.io/FindHelp/History-HistoryControls.html"

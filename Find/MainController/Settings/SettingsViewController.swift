@@ -99,7 +99,9 @@ class SettingsViewController: UIViewController {
 
     @IBOutlet weak var textDetectButton: UIButton!
     @IBAction func textDetectIndicatorPressed(_ sender: Any) {
-        PresentHelp.displayWithURL(urlString: "https://zjohnzheng.github.io/FindHelp/Settings-TextDetectIndicator.html", topLabelText: "Text Detected Indicator", color: #colorLiteral(red: 0, green: 0.6156862745, blue: 0.937254902, alpha: 1))
+        
+        let textDetectedIndicator = NSLocalizedString("textDetectedIndicator", comment: "Settings def=Text Detected Indicator")
+        PresentHelp.displayWithURL(urlString: "https://zjohnzheng.github.io/FindHelp/Settings-TextDetectIndicator.html", topLabelText: textDetectedIndicator, color: #colorLiteral(red: 0, green: 0.6156862745, blue: 0.937254902, alpha: 1))
     }
     
     @IBOutlet weak var textDetectSwitch: UISwitch!
@@ -115,7 +117,9 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var hapticButton: UIButton!
     @IBAction func hapticFeedbackPressed(_ sender: Any) {
-        PresentHelp.displayWithURL(urlString: "https://zjohnzheng.github.io/FindHelp/Settings-HapticFeedback.html", topLabelText: "Haptic Feedback", color: #colorLiteral(red: 0, green: 0.6156862745, blue: 0.937254902, alpha: 1))
+        let hapticFeedback = NSLocalizedString("hapticFeedback", comment: "Settings def=Haptic Feedback")
+        
+        PresentHelp.displayWithURL(urlString: "https://zjohnzheng.github.io/FindHelp/Settings-HapticFeedback.html", topLabelText: hapticFeedback, color: #colorLiteral(red: 0, green: 0.6156862745, blue: 0.937254902, alpha: 1))
         
     }
     
@@ -138,9 +142,18 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var tutorialButton: UIButton!
     
     @IBAction func tutorialButtonPressed(_ sender: Any) {
-        print("tutorial")
-        let alert = UIAlertController(title: "Watch Tutorial", message: "Which tutorial do you want to watch?", preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "General", style: UIAlertAction.Style.default, handler: { _ in
+        let watchTutorial = NSLocalizedString("watchTutorial", comment: "Settings def=Watch Tutorial")
+        let whichTutorialWatch = NSLocalizedString("whichTutorialWatch",
+                                                   comment: "Settings def=Which tutorial do you want to watch?")
+        let generalTutorial = NSLocalizedString("generalTutorial", comment: "Settings def=General")
+        let historyTutorial = NSLocalizedString("historyTutorial", comment: "Settings def=History")
+        let listsTutorial = NSLocalizedString("listsTutorial", comment: "Settings def=Lists")
+        let listsBuilderTutorial = NSLocalizedString("listsBuilderTutorial", comment: "Settings def=Lists Builder")
+        
+        let alert = UIAlertController(title: watchTutorial, message: whichTutorialWatch, preferredStyle: .actionSheet)
+        
+        
+        alert.addAction(UIAlertAction(title: generalTutorial, style: UIAlertAction.Style.default, handler: { _ in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "GeneralTutorialViewController") as! GeneralTutorialViewController
             vc.view.layer.cornerRadius = 10
@@ -159,7 +172,7 @@ class SettingsViewController: UIViewController {
             SwiftEntryKit.display(entry: vc, using: attributes)
             
         }))
-        alert.addAction(UIAlertAction(title: "History", style: UIAlertAction.Style.default, handler: { _ in
+        alert.addAction(UIAlertAction(title: historyTutorial, style: UIAlertAction.Style.default, handler: { _ in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "HistoryTutorialViewController") as! HistoryTutorialViewController
             vc.view.layer.cornerRadius = 10
@@ -178,7 +191,7 @@ class SettingsViewController: UIViewController {
             SwiftEntryKit.display(entry: vc, using: attributes)
             
         }))
-        alert.addAction(UIAlertAction(title: "Lists", style: UIAlertAction.Style.default, handler: { _ in
+        alert.addAction(UIAlertAction(title: listsTutorial, style: UIAlertAction.Style.default, handler: { _ in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "ListsTutorialViewController") as! ListsTutorialViewController
             vc.view.layer.cornerRadius = 10
@@ -196,7 +209,7 @@ class SettingsViewController: UIViewController {
             attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
             SwiftEntryKit.display(entry: vc, using: attributes)
         }))
-        alert.addAction(UIAlertAction(title: "Lists Builder", style: UIAlertAction.Style.default, handler: { _ in
+        alert.addAction(UIAlertAction(title: listsBuilderTutorial, style: UIAlertAction.Style.default, handler: { _ in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "ListsBuilderTutorialViewController") as! ListsBuilderTutorialViewController
             vc.view.layer.cornerRadius = 10
@@ -214,7 +227,9 @@ class SettingsViewController: UIViewController {
             attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
             SwiftEntryKit.display(entry: vc, using: attributes)
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        
+        let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
+        alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))
         if let popoverController = alert.popoverPresentationController {
             popoverController.sourceView = tutorialButton
             popoverController.sourceRect = tutorialButton.bounds
@@ -222,11 +237,28 @@ class SettingsViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
 //        GeneralTutorialViewController
     }
+    let clear = NSLocalizedString("clear", comment: "Settings def=Clear")
+    let tapToDismiss = NSLocalizedString("tapToDismiss", comment: "Multipurpose def=Tap to dismiss")
+    let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
+    
     
     @IBOutlet weak var clearHistButton: UIButton!
     @IBAction func clearHistPressed(_ sender: Any) {
-        let alert = UIAlertController(title: "Clear History", message: "All your photos and their caches will be deleted. This action can't be undone.", preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Clear", style: UIAlertAction.Style.destructive, handler: { _ in
+        let clearHistory = NSLocalizedString("clearHistory", comment: "Settings def=Clear History")
+        let allPhotosAndCachesDeleted = NSLocalizedString("allPhotosAndCachesDeleted",
+                                                          comment: "Settings def=All your photos and their caches will be deleted. This action can't be undone.")
+        
+        
+        /// confirm
+        let clearedHistory = NSLocalizedString("clearedHistory", comment: "Settings def=Cleared History")
+        
+        
+        
+        
+        
+        let alert = UIAlertController(title: clearHistory, message: allPhotosAndCachesDeleted, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: clear, style: UIAlertAction.Style.destructive, handler: { _ in
             var tempPhotos = [HistoryModel]()
             var contents = [SingleHistoryContent]()
             
@@ -254,7 +286,6 @@ class SettingsViewController: UIViewController {
             } catch {
                 print("DELETE PRESSED, but ERROR deleting photos...... \(error)")
             }
-            print("CLEAR hist")
             
             print("Deleting from file now")
             let fileManager = FileManager.default
@@ -266,11 +297,12 @@ class SettingsViewController: UIViewController {
                     print("Could not delete items: \(error)")
                 }
             }
-            let alertView = SPAlertView(title: "Cleared History", message: "Tap to dismiss", preset: SPAlertPreset.done)
+            
+            let alertView = SPAlertView(title: clearedHistory, message: self.tapToDismiss, preset: SPAlertPreset.done)
             alertView.duration = 2.6
             alertView.present()
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))
         if let popoverController = alert.popoverPresentationController {
             popoverController.sourceView = clearHistButton
             popoverController.sourceRect = clearHistButton.bounds
@@ -280,8 +312,18 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var clearListsButton: UIButton!
     @IBAction func clearListsPressed(_ sender: Any) {
-        let alert = UIAlertController(title: "Clear Lists", message: "All your lists will be deleted. This action can't be undone.", preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Clear", style: UIAlertAction.Style.destructive, handler: { _ in
+        
+        let clearLists = NSLocalizedString("clearLists", comment: "Settings def=Clear Lists")
+        let allYourListsDeleted = NSLocalizedString("allYourListsDeleted",
+                                                   comment: "Settings def=All your lists will be deleted. This action can't be undone.")
+        let clearedAllLists = NSLocalizedString("clearedAllLists", comment: "Settings def=Cleared All Lists")
+        
+        
+        
+        
+        
+        let alert = UIAlertController(title: clearLists, message: allYourListsDeleted, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: clear, style: UIAlertAction.Style.destructive, handler: { _ in
             var tempLists = [FindList]()
             if let allLists = self.listCategories {
                 for singleList in allLists {
@@ -295,24 +337,29 @@ class SettingsViewController: UIViewController {
             } catch {
                 print("DELETE PRESSED, but ERROR deleting photos...... \(error)")
             }
-            let alertView = SPAlertView(title: "Cleared All Lists", message: "Tap to dismiss", preset: SPAlertPreset.done)
+            let alertView = SPAlertView(title: clearedAllLists, message: self.tapToDismiss, preset: SPAlertPreset.done)
             alertView.duration = 2.6
             alertView.present()
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))
         if let popoverController = alert.popoverPresentationController {
             popoverController.sourceView = clearListsButton
             popoverController.sourceRect = clearListsButton.bounds
         }
         self.present(alert, animated: true, completion: nil)
         
-        print("clear list")
     }
     
     @IBOutlet weak var resetSettingsButton: UIButton!
     @IBAction func resetSettingsPressed(_ sender: Any) {
-        let alert = UIAlertController(title: "Reset Settings", message: "Settings will be reset to default.", preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Reset", style: UIAlertAction.Style.default, handler: { _ in
+        let resetSettings = NSLocalizedString("resetSettings", comment: "Settings def=Reset Settings")
+        let settingsResetToDefault = NSLocalizedString("settingsResetToDefault",
+                                                   comment: "Settings def=Settings will be reset to default.")
+        let reset = NSLocalizedString("reset", comment: "Settings def=Reset")
+        
+        
+        let alert = UIAlertController(title: resetSettings, message: settingsResetToDefault, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: reset, style: UIAlertAction.Style.default, handler: { _ in
             
             self.defaults.set("00AEEF", forKey: "highlightColor")
             self.defaults.set(true, forKey: "showTextDetectIndicator")
@@ -326,7 +373,7 @@ class SettingsViewController: UIViewController {
             self.hapticFeedbackSwitch.setOn(true, animated: true)
             
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))
         if let popoverController = alert.popoverPresentationController {
             popoverController.sourceView = resetSettingsButton
             popoverController.sourceRect = resetSettingsButton.bounds
@@ -351,7 +398,9 @@ class SettingsViewController: UIViewController {
     
     @IBAction func leaveFeedbackPressed(_ sender: Any) {
         defaults.set(true, forKey: "feedbackedAlready")
-        PresentHelp.displayWithURL(urlString: "https://forms.gle/agdyoB9PFfnv8cU1A/", topLabelText: "Send Feedback", color: #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1))
+        let sendFeedback = NSLocalizedString("sendFeedback", comment: "Settings def=Send Feedback")
+        
+        PresentHelp.displayWithURL(urlString: "https://forms.gle/agdyoB9PFfnv8cU1A/", topLabelText: sendFeedback, color: #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1))
     }
     
     @IBAction func rateAppPressed(_ sender: Any) {
@@ -385,9 +434,6 @@ class SettingsViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let creditsController = storyboard.instantiateViewController(withIdentifier: "CreditsViewController") as! CreditsViewController
         
-        
-//        present(creditsController, animated: true, completion: false)
-        
         present(creditsController, animated: true, completion: nil)
 
         
@@ -410,18 +456,9 @@ class SettingsViewController: UIViewController {
         listCategories = realm.objects(FindList.self)
         
         customizedSettingsBefore = defaults.bool(forKey: "customizedSettingsBool")
-//        let defaults = UserDefaults.standard
-//        defaults.set(25, forKey: "Age")
-//        defaults.set(true, forKey: "UseTouchID")
-//        defaults.set(CGFloat.pi, forKey: "Pi")
-//
-//        defaults.set("Paul Hudson", forKey: "Name")
-//        defaults.set(Date(), forKey: "LastRun")
-//        
         
         setUpSettingsRoundedCorners()
         setUpBasic()
-//        addGestureRecognizers()
     }
  
     
@@ -434,7 +471,8 @@ extension SettingsViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let helpViewController = storyboard.instantiateViewController(withIdentifier: "DefaultHelpController") as! DefaultHelpController
         
-        helpViewController.title = "Help"
+        let help = NSLocalizedString("help", comment: "Settings def=Help")
+        helpViewController.title = help
         helpViewController.helpJsonKey = "SettingsHelpArray"
         
 //        helpViewController.title = "Find Help"

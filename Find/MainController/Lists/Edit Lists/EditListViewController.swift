@@ -37,18 +37,12 @@ class EditListViewController: UIViewController, GetGeneralInfo, GetIconInfo, Get
     @IBOutlet weak var cancelButton: UIButton!
     
     @IBAction func savePressed(_ sender: Any) {
-        print("done pressed, waiting")
-        
         returnGeneralNowDelegate?.updateInfo()
-//        returnIconNowDelegate?.updateInfo()
-//        returnColorNowDelegate?.updateInfo()
-        
         if shouldDismiss == true {
             shouldDismiss = false
             print(shouldDismiss)
             returnCompletedList()
         }
-        
         
     }
     weak var finalDeleteList: TellControllerToDeleteList?
@@ -62,9 +56,6 @@ class EditListViewController: UIViewController, GetGeneralInfo, GetIconInfo, Get
     }
 
     weak var returnGeneralNowDelegate: ReturnGeneralNow?
-//    weak var returnIconNowDelegate: ReturnIconNow?
-//    weak var returnColorNowDelegate: ReturnColorNow?
-    
     weak var populateGeneral: ReceiveGeneral?
     weak var populateIcon: ReceiveIcon?
     weak var populateColor: ReceiveColor?
@@ -72,12 +63,13 @@ class EditListViewController: UIViewController, GetGeneralInfo, GetIconInfo, Get
     weak var scrolledToIcons: ScrolledToIcons?
     weak var scrolledToColors: ScrolledToColors?
 
-   // var shouldDismiss = false
-    
     weak var finishedEditingList: ListFinishedEditing?
     
-    var name = "Untitled"
-    var descriptionOfList = "No description..."
+    let originalListName = NSLocalizedString("originalListName", comment: "EditList def=Untitled")
+    let originalDescriptionOfList = NSLocalizedString("originalDescriptionOfList", comment: "EditList def=No description...")
+    
+    lazy var name = originalListName
+    lazy var descriptionOfList = originalDescriptionOfList
     var contents = [String]()
     var iconImageName = "square.grid.2x2"
     var iconColorName = "#579f2b"
@@ -87,8 +79,6 @@ class EditListViewController: UIViewController, GetGeneralInfo, GetIconInfo, Get
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        saveButton.layer.cornerRadius = 6
-//        cancelButton.layer.cornerRadius = 6
         setUpViews()
         
         populateGeneral?.receiveGeneral(nameOfList: name, desc: descriptionOfList, contentsOfList: contents)
@@ -106,9 +96,13 @@ class EditListViewController: UIViewController, GetGeneralInfo, GetIconInfo, Get
         let storyboard3 = UIStoryboard(name: "Main", bundle: nil)
         let thirdViewController = storyboard3.instantiateViewController(withIdentifier: "ColorsViewController") as! ColorsViewController
 
-        firstViewController.title = "General"
-        secondViewController.title = "Icon"
-        thirdViewController.title = "Color"
+        let firstVCTitle = NSLocalizedString("firstVCTitle", comment: "EditList def=General")
+        let secondVCTitle = NSLocalizedString("secondVCTitle", comment: "EditList def=Icon")
+        let thirdVCTitle = NSLocalizedString("thirdVCTitle", comment: "EditList def=Color")
+        
+        firstViewController.title = firstVCTitle
+        secondViewController.title = secondVCTitle
+        thirdViewController.title = thirdVCTitle
         
         firstViewController.generalDelegate = self
         
@@ -117,9 +111,6 @@ class EditListViewController: UIViewController, GetGeneralInfo, GetIconInfo, Get
         secondViewController.iconDelegate = self
         thirdViewController.colorDelegate = self
         
-//        self.returnInfoNowDelegate = firstViewController
-//        self.returnInfoNowDelegate = secondViewController
-//        self.returnInfoNowDelegate = thirdViewController
         self.scrolledToIcons = secondViewController
         self.scrolledToColors = thirdViewController
     
@@ -128,9 +119,7 @@ class EditListViewController: UIViewController, GetGeneralInfo, GetIconInfo, Get
         self.populateColor = thirdViewController
         
         self.returnGeneralNowDelegate = firstViewController
-//        self.returnIconNowDelegate = secondViewController
-//        self.returnColorNowDelegate = thirdViewController
-            
+        
         let pagingViewController = FixedPagingViewController(viewControllers: [
           firstViewController,
           secondViewController,
@@ -159,14 +148,11 @@ class EditListViewController: UIViewController, GetGeneralInfo, GetIconInfo, Get
         
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
         let newImage = UIImage(systemName: iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(hexString: iconColorName), renderingMode: .alwaysOriginal)
-        //self.imageView.image = newImage
         topImageView.image = newImage
-        // doneWithListButton.layer.cornerRadius = 4
     }
     
     func deleteList() {
         finalDeleteList?.deleteTheList()
-//        print("delete sdfkdhfksdhfkjskdjhfkjsd kjsdhk sdf")
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
     func returnNewGeneral(nameOfList: String, desc: String, contentsOfList: [String], hasErrors: Bool, overrideMake: Bool) {
@@ -179,7 +165,6 @@ class EditListViewController: UIViewController, GetGeneralInfo, GetIconInfo, Get
         
         print("Return New General, has errors: \(hasErrors)")
         if overrideMake == true {
-            //view.endEditing(true)
             returnCompletedList()
         }
     }
@@ -189,7 +174,6 @@ class EditListViewController: UIViewController, GetGeneralInfo, GetIconInfo, Get
         iconImageName = iconName
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
         let newImage = UIImage(systemName: iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(hexString: iconColorName), renderingMode: .alwaysOriginal)
-        //self.imageView.image = newImage
         topImageView.image = newImage
     }
    
@@ -197,16 +181,12 @@ class EditListViewController: UIViewController, GetGeneralInfo, GetIconInfo, Get
         iconColorName = colorName
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
         let newImage = UIImage(systemName: iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(hexString: iconColorName), renderingMode: .alwaysOriginal)
-        //self.imageView.image = newImage
         topImageView.image = newImage
     }
     
     func returnCompletedList() {
         finishedEditingList?.updateExistingList(name: name, description: descriptionOfList, contents: contents, imageName: iconImageName, imageColor: iconColorName)
         presentingViewController?.dismiss(animated: true, completion: nil)
-        print("Completed. name: \(name), description: \(descriptionOfList), contents: \(contents), imageName: \(iconImageName), imageColor: \(iconColorName)")
-       // newListDelegate?.madeNewList(name: name, description: descriptionOfList, contents: contents, imageName: iconImageName, imageColor: iconColorName)
-        //self.dismiss(animated: true, completion: nil)
     }
 
 }

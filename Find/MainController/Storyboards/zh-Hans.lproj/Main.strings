@@ -1,0 +1,312 @@
+
+/* Class = "UILabel"; text = "0 lists created since you first downloaded Find"; ObjectID = "1EQ-hf-zvc"; */
+"1EQ-hf-zvc.text" = "0 lists created since you first downloaded Find";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "1ct-uq-Rkc"; */
+"1ct-uq-Rkc.normalTitle" = "Cancel";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "24E-8Q-fAS"; */
+"24E-8Q-fAS.text" = "0";
+
+/* Class = "UIButton"; normalTitle = "Clear History"; ObjectID = "2V9-Nx-FSL"; */
+"2V9-Nx-FSL.normalTitle" = "Clear History";
+
+/* Class = "UIButton"; normalTitle = "Discard"; ObjectID = "2qz-Bq-vme"; */
+"2qz-Bq-vme.normalTitle" = "Discard";
+
+/* Class = "UIButton"; normalTitle = "Cache"; ObjectID = "34B-T7-kHO"; */
+"34B-T7-kHO.normalTitle" = "Cache";
+
+/* Class = "UIButton"; normalTitle = "Allow Access"; ObjectID = "4PV-lP-fX0"; */
+"4PV-lP-fX0.normalTitle" = "Allow Access";
+
+/* Class = "UILabel"; text = "Camera Permissions"; ObjectID = "4my-mQ-fon"; */
+"4my-mQ-fon.text" = "Camera Permissions";
+
+/* Class = "UIButton"; normalTitle = "Licenses"; ObjectID = "6OO-b0-YRY"; */
+"6OO-b0-YRY.normalTitle" = "Licenses";
+
+/* Class = "UIButton"; normalTitle = "Ok, let's go!"; ObjectID = "8Fu-Z2-9xn"; */
+"8Fu-Z2-9xn.normalTitle" = "Ok, let's go!";
+
+/* Class = "UILabel"; text = "All selected photos have already been cached! Search results will appear immediately."; ObjectID = "8fp-hd-mIw"; */
+"8fp-hd-mIw.text" = "All selected photos have already been cached! Search results will appear immediately.";
+
+/* Class = "UIButton"; normalTitle = "Select All"; ObjectID = "9Ve-iy-tg4"; */
+"9Ve-iy-tg4.normalTitle" = "Select All";
+
+/* Class = "UIButton"; normalTitle = "I'm done finding"; ObjectID = "9tD-vS-QJ0"; */
+"9tD-vS-QJ0.normalTitle" = "I'm done finding";
+
+/* Class = "UILabel"; text = "(Just for fun 😀)"; ObjectID = "AKm-fF-x3d"; */
+"AKm-fF-x3d.text" = "(Just for fun 😀)";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "BHm-ND-D9k"; */
+"BHm-ND-D9k.text" = "Label";
+
+/* Class = "UILabel"; text = "Text"; ObjectID = "BRC-Yj-hpw"; */
+"BRC-Yj-hpw.text" = "Text";
+
+/* Class = "UILabel"; text = "Matches:"; ObjectID = "CeU-8I-rNo"; */
+"CeU-8I-rNo.text" = "Matches:";
+
+/* Class = "UILabel"; text = "Help pressed 0 times since you first downloaded Find"; ObjectID = "E31-rb-T1p"; */
+"E31-rb-T1p.text" = "Help pressed 0 times since you first downloaded Find";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "Eq3-Dm-AWI"; */
+"Eq3-Dm-AWI.normalTitle" = "Done";
+
+/* Class = "UILabel"; text = "Find by Zheng"; ObjectID = "FMI-oy-YpO"; */
+"FMI-oy-YpO.text" = "Find by Zheng";
+
+/* Class = "UILabel"; text = "Recent"; ObjectID = "G7F-LF-zvC"; */
+"G7F-LF-zvC.text" = "Recent";
+
+/* Class = "UILabel"; text = "Lists"; ObjectID = "G9M-e0-VIH"; */
+"G9M-e0-VIH.text" = "Lists";
+
+/* Class = "UILabel"; text = "0 photos cached since you first downloaded Find"; ObjectID = "G9N-ln-McW"; */
+"G9N-ln-McW.text" = "0 photos cached since you first downloaded Find";
+
+/* Class = "UIButton"; normalTitle = "Haptic Feedback"; ObjectID = "HVd-N8-NVZ"; */
+"HVd-N8-NVZ.normalTitle" = "Haptic Feedback";
+
+/* Class = "UILabel"; text = "Tap to remove"; ObjectID = "Hc9-i8-kXk"; */
+"Hc9-i8-kXk.text" = "Tap to remove";
+
+/* Class = "UILabel"; text = "Highlight Color"; ObjectID = "Hhg-Z1-44F"; */
+"Hhg-Z1-44F.text" = "Highlight Color";
+
+/* Class = "UILabel"; text = "Use lists to find multiple words at the same time. Make one by clicking the + button. "; ObjectID = "IcC-jV-a0m"; */
+"IcC-jV-a0m.text" = "Use lists to find multiple words at the same time. Make one by clicking the + button. ";
+
+/* Class = "UILabel"; text = "No Photos"; ObjectID = "Iqa-IW-JHs"; */
+"Iqa-IW-JHs.text" = "No Photos";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "JsY-MP-aZx"; */
+"JsY-MP-aZx.text" = "Title";
+
+/* Class = "UILabel"; text = "We need to access your camera to find text. Find works offline and nothing leaves your phone."; ObjectID = "K83-pM-wfg"; */
+"K83-pM-wfg.text" = "We need to access your camera to find text. Find works offline and nothing leaves your phone.";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Kwk-Zc-VjT"; */
+"Kwk-Zc-VjT.normalTitle" = "Cancel";
+
+/* Class = "UIButton"; normalTitle = "Tutorials"; ObjectID = "LcM-Ye-jUM"; */
+"LcM-Ye-jUM.normalTitle" = "Tutorials";
+
+/* Class = "UILabel"; text = "Viewed Stats Status: true"; ObjectID = "Loo-ZW-eJO"; */
+"Loo-ZW-eJO.text" = "Viewed Stats Status: true";
+
+/* Class = "UIButton"; normalTitle = "Select"; ObjectID = "N4g-n5-ToO"; */
+"N4g-n5-ToO.normalTitle" = "Select";
+
+/* Class = "UIButton"; normalTitle = "Share"; ObjectID = "N6s-5U-gLc"; */
+"N6s-5U-gLc.normalTitle" = "Share";
+
+/* Class = "UILabel"; text = "Left Feedback Status: false"; ObjectID = "Nj8-Y0-Hzh"; */
+"Nj8-Y0-Hzh.text" = "Left Feedback Status: false";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Nlm-VP-vQE"; */
+"Nlm-VP-vQE.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "Owe-kB-SJJ"; */
+"Owe-kB-SJJ.normalTitle" = "Done";
+
+/* Class = "UIButton"; normalTitle = "Ok!"; ObjectID = "Q2C-rw-SRu"; */
+"Q2C-rw-SRu.normalTitle" = "Ok!";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Q85-dU-Zkp"; */
+"Q85-dU-Zkp.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "T7d-iS-RH2"; */
+"T7d-iS-RH2.normalTitle" = "Done";
+
+/* Class = "UIButton"; normalTitle = "Reset Settings"; ObjectID = "TYH-NW-c38"; */
+"TYH-NW-c38.normalTitle" = "Reset Settings";
+
+/* Class = "UIButton"; normalTitle = "Text Detected Indicator"; ObjectID = "TfG-ap-oJ4"; */
+"TfG-ap-oJ4.normalTitle" = "Text Detected Indicator";
+
+/* Class = "UILabel"; text = "Currently searching for these words: [no words]"; ObjectID = "Tq3-Y5-Tqr"; */
+"Tq3-Y5-Tqr.text" = "Currently searching for these words: [no words]";
+
+/* Class = "UIButton"; normalTitle = "Skip"; ObjectID = "URE-cP-ORh"; */
+"URE-cP-ORh.normalTitle" = "Skip";
+
+/* Class = "UITextField"; placeholder = "Name"; ObjectID = "USM-QX-OWB"; */
+"USM-QX-OWB.placeholder" = "Name";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "Ua1-LX-cFk"; */
+"Ua1-LX-cFk.normalTitle" = "Done";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Ues-K1-LkQ"; */
+"Ues-K1-LkQ.normalTitle" = "Cancel";
+
+/* Class = "UINavigationItem"; title = "Zoom"; ObjectID = "VZ4-6V-utS"; */
+"VZ4-6V-utS.title" = "Zoom";
+
+/* Class = "UIButton"; normalTitle = "Keep"; ObjectID = "VgK-3X-vOx"; */
+"VgK-3X-vOx.normalTitle" = "Keep";
+
+/* Class = "UILabel"; text = "Actions"; ObjectID = "WF8-wg-wfu"; */
+"WF8-wg-wfu.text" = "Actions";
+
+/* Class = "UIButton"; normalTitle = "Ok!"; ObjectID = "WOK-i0-X5W"; */
+"WOK-i0-X5W.normalTitle" = "Ok!";
+
+/* Class = "UILabel"; text = "1 Photo has already been cached. Would you like to keep its cache?"; ObjectID = "X2y-kb-0Y0"; */
+"X2y-kb-0Y0.text" = "1 Photo has already been cached. Would you like to keep its cache?";
+
+/* Class = "UILabel"; text = "Settings"; ObjectID = "Xgd-YW-juX"; */
+"Xgd-YW-juX.text" = "Settings";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Yga-Xu-zab"; */
+"Yga-Xu-zab.text" = "Label";
+
+/* Class = "UILabel"; text = "Credits"; ObjectID = "ZZV-av-XHO"; */
+"ZZV-av-XHO.text" = "Credits";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ZwK-R3-7by"; */
+"ZwK-R3-7by.text" = "Label";
+
+/* Class = "UILabel"; text = "Once you've taken photos, they will appear here."; ObjectID = "aU8-vu-F6L"; */
+"aU8-vu-F6L.text" = "Once you've taken photos, they will appear here.";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "b7E-K7-hS4"; */
+"b7E-K7-hS4.normalTitle" = "Done";
+
+/* Class = "UIButton"; normalTitle = "Ok!"; ObjectID = "bEK-zj-4g5"; */
+"bEK-zj-4g5.normalTitle" = "Ok!";
+
+/* Class = "UITextView"; text = "jlkdfj sldfjlsdk fklsj flshf klhf lskhk dlhg sdlkjhg dkslfhgklds fjghskdlf gh dsflkg"; ObjectID = "bho-aX-Afw"; */
+"bho-aX-Afw.text" = "jlkdfj sldfjlsdk fklsj flshf klhf lskhk dlhg sdlkjhg dkslfhgklds fjghskdlf gh dsflkg";
+
+/* Class = "UIButton"; normalTitle = "Send\nFeedback!"; ObjectID = "boC-pm-VSb"; */
+"boC-pm-VSb.normalTitle" = "Send\nFeedback!";
+
+/* Class = "UIButton"; normalTitle = "Find"; ObjectID = "bqh-b2-2qX"; */
+"bqh-b2-2qX.normalTitle" = "Find";
+
+/* Class = "UIButton"; normalTitle = "Ok, let's go!"; ObjectID = "cKd-F8-dU4"; */
+"cKd-F8-dU4.normalTitle" = "Ok, let's go!";
+
+/* Class = "UILabel"; text = "New List"; ObjectID = "dMb-YI-sVB"; */
+"dMb-YI-sVB.text" = "New List";
+
+/* Class = "UILabel"; text = "1/2 photos cached"; ObjectID = "dmM-dI-18L"; */
+"dmM-dI-18L.text" = "1/2 photos cached";
+
+/* Class = "UILabel"; text = "5 Matches | Yesterday sdfls dfjs ljs fljs flsf"; ObjectID = "f3Q-wj-4ao"; */
+"f3Q-wj-4ao.text" = "5 Matches | Yesterday sdfls dfjs ljs fljs flsf";
+
+/* Class = "UIButton"; normalTitle = "Heart"; ObjectID = "gWW-iV-dmv"; */
+"gWW-iV-dmv.normalTitle" = "Heart";
+
+/* Class = "UIButton"; normalTitle = "Help"; ObjectID = "hsE-Lo-z9h"; */
+"hsE-Lo-z9h.normalTitle" = "Help";
+
+/* Class = "UILabel"; text = "Contents asjdasd ladjlkj alkdjla dakljdla dlkaj aljdlka ljlka sdjlakdjla lkajd laskdj lakdjls dklajsd lakj aljd aljdla sdjlkadlkj lasd"; ObjectID = "jAM-2B-UZG"; */
+"jAM-2B-UZG.text" = "Contents asjdasd ladjlkj alkdjla dakljdla dlkaj aljdlka ljlka sdjlakdjla lkajd laskdj lakdjls dklajsd lakj aljd aljdla sdjlkadlkj lasd";
+
+/* Class = "UIButton"; normalTitle = "Help"; ObjectID = "jhE-uq-1Ax"; */
+"jhE-uq-1Ax.normalTitle" = "Help";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "jxG-PK-C99"; */
+"jxG-PK-C99.normalTitle" = "Delete";
+
+/* Class = "UILabel"; text = "No results found in cache"; ObjectID = "k1U-8L-apk"; */
+"k1U-8L-apk.text" = "No results found in cache";
+
+/* Class = "UILabel"; text = "Edit List"; ObjectID = "l9K-YH-kPm"; */
+"l9K-YH-kPm.text" = "Edit List";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "lME-Z5-Sdx"; */
+"lME-Z5-Sdx.normalTitle" = "Done";
+
+/* Class = "UITextField"; placeholder = "Match"; ObjectID = "lMV-xk-qWw"; */
+"lMV-xk-qWw.placeholder" = "Match";
+
+/* Class = "UILabel"; text = "OCR search in progress!"; ObjectID = "mJu-qT-9cJ"; */
+"mJu-qT-9cJ.text" = "OCR search in progress!";
+
+/* Class = "UIButton"; normalTitle = "Rate\nthe App!"; ObjectID = "mp4-4Z-4cg"; */
+"mp4-4Z-4cg.normalTitle" = "Rate\nthe App!";
+
+/* Class = "UIButton"; normalTitle = "Credits"; ObjectID = "nI6-vq-9rt"; */
+"nI6-vq-9rt.normalTitle" = "Credits";
+
+/* Class = "UILabel"; text = "Short Description jlsdjflsdl lsdkjlkj sldfjlk lsdjfldkjflsdj lkjlsdf"; ObjectID = "nLH-OC-Hjk"; */
+"nLH-OC-Hjk.text" = "Short Description jlsdjflsdl lsdkjlkj sldfjlk lsdjfldkjflsdj lkjlsdf";
+
+/* Class = "UIButton"; normalTitle = "Help"; ObjectID = "nl7-2L-Lfd"; */
+"nl7-2L-Lfd.normalTitle" = "Help";
+
+/* Class = "UIButton"; normalTitle = "Help"; ObjectID = "nvH-Iq-CHd"; */
+"nvH-Iq-CHd.normalTitle" = "Help";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "oIE-Aw-8g6"; */
+"oIE-Aw-8g6.normalTitle" = "Delete";
+
+/* Class = "UILabel"; text = "Find from History"; ObjectID = "oNE-m3-Qz9"; */
+"oNE-m3-Qz9.text" = "Find from History";
+
+/* Class = "UILabel"; text = "Customized Settings Status: false"; ObjectID = "pYi-Ra-ZSV"; */
+"pYi-Ra-ZSV.text" = "Customized Settings Status: false";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "rAm-FK-rNs"; */
+"rAm-FK-rNs.normalTitle" = "Save";
+
+/* Class = "UILabel"; text = "History"; ObjectID = "rMI-bB-kPc"; */
+"rMI-bB-kPc.text" = "History";
+
+/* Class = "UIButton"; normalTitle = "Follow me on Medium!"; ObjectID = "rPp-Jw-MuZ"; */
+"rPp-Jw-MuZ.normalTitle" = "Follow me on Medium!";
+
+/* Class = "UIButton"; normalTitle = "Select"; ObjectID = "ruv-8N-ih6"; */
+"ruv-8N-ih6.normalTitle" = "Select";
+
+/* Class = "UIButton"; normalTitle = "Import"; ObjectID = "sEX-Js-VbY"; */
+"sEX-Js-VbY.normalTitle" = "Import";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "sKB-7D-QCp"; */
+"sKB-7D-QCp.normalTitle" = "Back";
+
+/* Class = "UILabel"; text = "Lists"; ObjectID = "sbj-0t-kKO"; */
+"sbj-0t-kKO.text" = "Lists";
+
+/* Class = "UILabel"; text = "Caching Photos"; ObjectID = "scZ-On-pSO"; */
+"scZ-On-pSO.text" = "Caching Photos";
+
+/* Class = "UIButton"; normalTitle = "New Match"; ObjectID = "srB-MK-Y9p"; */
+"srB-MK-Y9p.normalTitle" = "New Match";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "te5-rx-LTY"; */
+"te5-rx-LTY.normalTitle" = "Back";
+
+/* Class = "UILabel"; text = "Stats"; ObjectID = "tgX-AL-vwK"; */
+"tgX-AL-vwK.text" = "Stats";
+
+/* Class = "UIButton"; normalTitle = "Show Controls"; ObjectID = "u0g-ei-7rm"; */
+"u0g-ei-7rm.normalTitle" = "Show Controls";
+
+/* Class = "UILabel"; text = "No Lists"; ObjectID = "v96-On-D6n"; */
+"v96-On-D6n.text" = "No Lists";
+
+/* Class = "UIButton"; normalTitle = "Clear Lists"; ObjectID = "vOY-ej-zkc"; */
+"vOY-ej-zkc.normalTitle" = "Clear Lists";
+
+/* Class = "UILabel"; text = "Matches"; ObjectID = "vZ6-oK-Otx"; */
+"vZ6-oK-Otx.text" = "Matches";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "vku-v3-AD3"; */
+"vku-v3-AD3.normalTitle" = "Done";
+
+/* Class = "UILabel"; text = "Help"; ObjectID = "wyQ-Lp-esF"; */
+"wyQ-Lp-esF.text" = "Help";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore "; ObjectID = "x7d-LB-Q4P"; */
+"x7d-LB-Q4P.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore ";
+
+/* Class = "UILabel"; text = "0 matches found currently"; ObjectID = "ygo-eL-ZJZ"; */
+"ygo-eL-ZJZ.text" = "0 matches found currently";

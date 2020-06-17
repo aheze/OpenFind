@@ -20,10 +20,17 @@ class ListSelect: UIView, ChangeNumberOfSelectedList {
     func changeLabel(to: Int) {
         if to == 1 {
             listSelectLabel.fadeTransition(0.1)
-            listSelectLabel.text = "\(to) List Selected"
+            
+            let oneListSelected = NSLocalizedString("oneListSelected", comment: "ListSelect def=One List Selected")
+            listSelectLabel.text = oneListSelected
+//            listSelectLabel.text = "\(to) List Selected"
         } else {
             listSelectLabel.fadeTransition(0.1)
-            listSelectLabel.text = "\(to) Lists Selected"
+            
+            let numberListsSelected = NSLocalizedString("%d numberLists",
+                                                                         comment:"ListController def=x Lists Selected")
+            listSelectLabel.text = String.localizedStringWithFormat(numberListsSelected, to)
+//            listSelectLabel.text = "\(to) Lists Selected"
         }
         
     }

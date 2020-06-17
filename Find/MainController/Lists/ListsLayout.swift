@@ -66,7 +66,6 @@ class AdaptiveCollectionLayout: UICollectionViewLayout {
 
     override func prepare() {
         super.prepare()
-        //print("1++++++++")
         // Need to clear cache for invalidate layout
         self.cache.removeAll()
 
@@ -86,7 +85,6 @@ class AdaptiveCollectionLayout: UICollectionViewLayout {
     }
 
     func prepareForMain(collectionView: UICollectionView, section: Int, numberOfColumns: Int, inYOffset: CGFloat? = nil) -> CGFloat? {
-        //print("2++++++++")
         let columnWidth = contentWidth / CGFloat(numberOfColumns)
         var xOffset = [CGFloat]()
         for column in 0..<numberOfColumns {
