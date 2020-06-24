@@ -21,22 +21,19 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
     
     weak var fromDelegate: ZoomAnimatorDelegate?
     weak var toDelegate: ZoomAnimatorDelegate?
-
+    
     var transitionImageView: UIImageView?
     var isPresenting: Bool = true
     var deletedLast: Bool = false
     var finishedDismissing: Bool = false
     
     func deletedLastPhoto() {
-        print("LAST RECIEVED.")
         deletedLast = true
     }
     fileprivate func animateZoomInTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        print("COOM IN")
         let containerView = transitionContext.containerView
-        print("CON FRAME: \(containerView.frame)")
         guard let toVC = transitionContext.viewController(forKey: .to),
-            let fromVC = transitionContext.viewController(forKey: .from),
+            let _ = transitionContext.viewController(forKey: .from),
             let fromReferenceImageView = self.fromDelegate?.referenceImageView(for: self),
             let toReferenceImageView = self.toDelegate?.referenceImageView(for: self),
             let fromReferenceImageViewFrame = self.fromDelegate?.referenceImageViewFrameInTransitioningView(for: self)
@@ -47,14 +44,8 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
         self.fromDelegate?.transitionWillStartWith(zoomAnimator: self)
         self.toDelegate?.transitionWillStartWith(zoomAnimator: self)
         
-        
-        print("TOVIEW: \(toVC.view)")
-        
-        
         /// add this so support Projector
         toVC.view.frame = screenBounds
-        
-        
         
         toVC.view.alpha = 0
         toReferenceImageView.isHidden = true
@@ -84,10 +75,9 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
                        animations: {
                         self.transitionImageView?.frame = finalTransitionSize
                         toVC.view.alpha = 1.0
-                        //fromVC.tabBarController?.tabBar.alpha = 0
         },
                        completion: { completed in
-                    
+                        
                         self.transitionImageView?.removeFromSuperview()
                         toReferenceImageView.isHidden = false
                         fromReferenceImageView.isHidden = false
@@ -103,10 +93,7 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
     fileprivate func animateZoomOutTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let containerView = transitionContext.containerView
         
-        print("COOM OUT")
-        
         if deletedLast == true {
-            print("ANimte! LAST")
             guard let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
                 let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
                 let fromReferenceImageView = self.fromDelegate?.referenceImageView(for: self),
@@ -116,11 +103,10 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
                     return
             }
             toReferenceImageView.isHidden = true
-                    
+            
             let referenceImage = fromReferenceImageView.image!
             
             if self.transitionImageView == nil {
-                print("NILLLL!")
                 let transitionImageView = UIImageView(image: referenceImage)
                 transitionImageView.contentMode = .scaleAspectFill
                 transitionImageView.clipsToBounds = true
@@ -146,7 +132,6 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
                             fromVC.view.alpha = 0
                             self.transitionImageView?.frame = finalTransitionSize
                             self.transitionImageView?.alpha = 0
-    //                        toVC.tabBarController?.tabBar.alpha = 1
             }, completion: { completed in
                 
                 self.transitionImageView?.removeFromSuperview()
@@ -156,10 +141,9 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
                 self.toDelegate?.transitionDidEndWith(zoomAnimator: self)
                 self.fromDelegate?.transitionDidEndWith(zoomAnimator: self)
-
             })
         } else {
-        
+            
             guard let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
                 let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
                 let fromReferenceImageView = self.fromDelegate?.referenceImageView(for: self),
@@ -188,7 +172,7 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
             
             //containerView.insertSubview(fromVC.view, belowSubview: toVC.view)
             ///also had to switch these... dismissing no longer results in Black Screen Of Death!!!
-           // containerView.insertSubview(fromVC.view, belowSubview: toVC.view)
+            // containerView.insertSubview(fromVC.view, belowSubview: toVC.view)
             containerView.insertSubview(fromVC.view, aboveSubview: toVC.view)
             //fromReferenceImageView.isHidden = true
             ///prevents a white flash, use below instead of aforementioned
@@ -208,20 +192,13 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
                            animations: {
                             fromVC.view.alpha = 0
                             self.transitionImageView?.frame = finalTransitionSize
-    //                        toVC.tabBarController?.tabBar.alpha = 1
             }, completion: { completed in
                 
                 self.transitionImageView?.removeFromSuperview()
                 toReferenceImageView.isHidden = false
                 fromReferenceImageView.isHidden = false
                 
-//                if !transitionContext.transitionWasCancelled {
-                    print("NOT CANCELLED  sdds")
-                    self.finishedDismissing = true
-//                } else {
-//                    print("CANCCELLED  sdfsd")
-//                }
-                
+                self.finishedDismissing = true
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
                 
                 
@@ -260,7 +237,6 @@ extension ZoomAnimator: UIViewControllerAnimatedTransitioning {
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        print("DELETE STATUS: \(deletedLast)")
         if self.isPresenting {
             animateZoomInTransition(using: transitionContext)
         } else {
@@ -269,22 +245,3 @@ extension ZoomAnimator: UIViewControllerAnimatedTransitioning {
         }
     }
 }
-
-//    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-//        guard
-//            let fromViewController = transitionContext.viewController(forKey: .from),
-//            let toViewController = transitionContext.viewController(forKey: .to)
-//        else {
-//            return
-//        }
-//
-//        transitionContext.containerView.insertSubview(toViewController.view, belowSubview: fromViewController.view)
-//
-//        let duration = self.transitionDuration(using: transitionContext)
-//        UIView.animate(withDuration: duration, animations: {
-//            fromViewController.view.alpha = 0
-//        }, completion: { _ in
-//            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-//        })
-//    }
-

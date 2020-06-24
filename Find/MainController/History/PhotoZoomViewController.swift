@@ -46,7 +46,6 @@ class PhotoZoomViewController: UIViewController {
     
     var oldFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
     
-    //var image: UIImage!
     var index: Int = 0
     var url: URL?
     var imageSize: CGSize = CGSize(width: 0, height: 0) {
@@ -57,10 +56,8 @@ class PhotoZoomViewController: UIViewController {
 
     var highlights = [Component]()
     var matchToColors = [String: [CGColor]]()
-//    var highlightColor = "00aeef"
     
     var photoComp = EditableHistoryModel()
-    
     
     var doubleTapGestureRecognizer: UITapGestureRecognizer!
     
@@ -79,25 +76,21 @@ class PhotoZoomViewController: UIViewController {
         if #available(iOS 11, *) {
             self.scrollView.contentInsetAdjustmentBehavior = .never
         }
-        print(imageSize)
+        
         mainContentView.frame = CGRect(x: self.imageView.frame.origin.x, y: self.imageView.frame.origin.y, width: self.imageSize.width, height: self.imageSize.height)
         
         oldFrame = mainContentView.frame
-//        print("OLDF::: \(oldFrame)")
         view.addGestureRecognizer(self.doubleTapGestureRecognizer)
-//        scaleHighlights()
-//        print("HIGHS: \(highlights)")
         
         if cameFromFind {
             DispatchQueue.main.async {
                 self.scaleHighlights()
             }
         }
-//        fastFind()
     }
     func scaleInHighlight(component: Component, unsure: Bool = false) {
         guard let colors = matchToColors[component.text] else { print("NO COLORS! scalee"); return }
-//        print("COLROS zoom text: \(component.text).. \(colors)")
+        
         DispatchQueue.main.async {
             
             let layer = CAShapeLayer()
@@ -110,8 +103,6 @@ class PhotoZoomViewController: UIViewController {
             newLayer.lineWidth = 3
             newLayer.lineCap = .round
             
-            
-//            var newFillColor = UIColor()
             if colors.count > 1 {
                 var newRect = layer.frame
                 newRect.origin.x += 1.5
@@ -195,7 +186,6 @@ class PhotoZoomViewController: UIViewController {
             let newWidth = comp.width * oldFrame.size.width
             let newY = comp.y * oldFrame.size.height
             let newHeight = comp.height * oldFrame.size.height
-//            print("x: \(newX), y: \(newY), width: \(newWidth), height: \(newHeight)")
             
             let compToScale = Component()
             compToScale.x = newX - 6
@@ -211,7 +201,6 @@ class PhotoZoomViewController: UIViewController {
             } else {
                 scaleInHighlight(component: compToScale, unsure: true)
             }
-
         }
     }
     
@@ -278,18 +267,9 @@ extension PhotoZoomViewController: UIScrollViewDelegate {
 
 extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
     
-    
-
-    
-     func returnTerms(matchToColorsR: [String: [CGColor]]) {
-//        getRead
-//        if initializedView {
-//            print("RETURNED TERMS!!!")
-//            print("DATA: \(matchToColorsR)")
+    func returnTerms(matchToColorsR: [String: [CGColor]]) {
         matchToColors = matchToColorsR
-        
-        fastFind() 
-        
+        fastFind()
     }
     func pressedReturn() {
         ocrFind(photo: photoComp)
@@ -300,7 +280,8 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
             let photo = self.photoComp
             var num = 0
             var newFastComponents = [Component]()
-            ///Cycle through each block of text. Each cont may be a line long.
+            
+            /// Cycle through each block of text. Each cont may be a line long.
             for cont in photo.contents {
                 let lowercaseContText = cont.text.lowercased()
                 let individualCharacterWidth = CGFloat(cont.width) / CGFloat(lowercaseContText.count)
@@ -327,9 +308,6 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
                 }
             }
             
-            
-            print("HOW MANY: \(newFastComponents.count)")
-            
             self.highlights = newFastComponents
             DispatchQueue.main.async {
                 self.scaleHighlights()
@@ -350,13 +328,11 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
                 self.progressView.alpha = 1
                 self.progressView.setProgress(Float(0), animated: true)
                 self.view.layoutIfNeeded()
-//                self.progressView.transform = CGAffineTransform(scaleX: 1, y: <#T##CGFloat#>)
             })
         }
         
         DispatchQueue.global(qos: .background).async {
             let photoUrl = self.folderURL.appendingPathComponent(photo.filePath)
-//            guard let photoUrl = URL(string: "\(self.folderURL)\(photo.filePath)") else { print("WRONG URL!!!!"); return }
             
             let request = VNRecognizeTextRequest { request, error in
                 self.handleFastDetectedText(request: request, error: error, photo: photo)
@@ -393,13 +369,8 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
             })
         }
         
-       
         guard let results = request?.results, results.count > 0 else {
             print("no results")
-//                alreadyCachedPhotos.append(newCachedPhoto)
-//            dispatchSemaphore.signal()
-//            dispatchGroup.leave()
-//
             self.returnNumber?.howMany(number: 0, searchInCache: false)
             return
         }
@@ -442,15 +413,12 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
                         numberOfMatches += 1
                         let addedWidth = individualCharacterWidth * CGFloat(index)
                         let finalX = CGFloat(cont.x) + addedWidth
-                        
                         let newComponent = Component()
-                        
                         newComponent.x = finalX
                         newComponent.y = CGFloat(cont.y) - (CGFloat(cont.height))
                         newComponent.width = finalW
                         newComponent.height = CGFloat(cont.height)
                         newComponent.text = match
-                        
                         findComponents.append(newComponent)
                         
                     }
@@ -459,7 +427,6 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
         }
         
         var componentsToAdd = [Component]()
-//        var newMatchesNumber = 0
         
         for newFindMatch in findComponents {
             var smallestDist = CGFloat(999)
@@ -469,38 +436,23 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
                 let point2 = CGPoint(x: newFindMatch.x, y: newFindMatch.y)
                 let pointDistance = relativeDistance(point1, point2)
                 
-//                                print("OLD: \(point1), new: \(point2)")
                 if pointDistance < smallestDist {
                     smallestDist = pointDistance
                 }
                 
             }
-//                            print("SMALL DIST: \(smallestDist)")
-            if smallestDist >= 0.008 { ///Bigger, so add it
+            if smallestDist >= 0.008 { /// Bigger, so add it
                 componentsToAdd.append(newFindMatch)
-//                newMatchesNumber += 1
             }
-            
         }
-//        print("ADD COmP COUNT")
         
-        
-//        scaleHighlights()
         DispatchQueue.main.async {
             self.highlights += componentsToAdd
             self.returnNumber?.howMany(number: componentsToAdd.count, searchInCache: false)
             self.scaleHighlights()
         }
-//        existingModel.components += componentsToAdd
-//        existingModel.numberOfMatches += newMatchesNumber
-//        print("ADD MATCHES: \(newMatchesNumber)")
-        
-//            newMod.components = findComponents
-            
-//            resultPhotos.append(newMod)
-             
-        
     }
+    
     func relativeDistance(_ a: CGPoint, _ b: CGPoint) -> CGFloat {
         let xDist = a.x - b.x
         let yDist = a.y - b.y

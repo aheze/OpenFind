@@ -624,8 +624,9 @@ extension ListController {
                 SwiftEntryKit.display(entry: customView, using: attributes)
                 changeNumberDelegateList?.disablePress(disable: true)
                 
-                let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
-                selectButton.setTitle(cancel, for: .normal)
+//                let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
+                let done = NSLocalizedString("done", comment: "Multipurpose def=Done")
+                selectButton.setTitle(done, for: .normal)
                 UIView.animate(withDuration: 0.1, animations: {
                     self.view.layoutIfNeeded()
                 })

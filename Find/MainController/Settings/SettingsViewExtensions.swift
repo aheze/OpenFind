@@ -23,21 +23,6 @@ extension SettingsViewController {
         findblueButton.layer.cornerRadius = 4
         purpleButton.layer.cornerRadius = 4
         
-//        monthColorsView.layer.cornerRadius = 10
-//        janButton.layer.cornerRadius = 10
-//        febButton.layer.cornerRadius = 10
-//        marButton.layer.cornerRadius = 10
-//        aprButton.layer.cornerRadius = 10
-//        mayButton.layer.cornerRadius = 10
-//        junButton.layer.cornerRadius = 10
-//        julButton.layer.cornerRadius = 10
-//        augButton.layer.cornerRadius = 10
-//        sepButton.layer.cornerRadius = 10
-//        octButton.layer.cornerRadius = 10
-//        novButton.layer.cornerRadius = 10
-//        decButton.layer.cornerRadius = 10
-        
-//        prefilterView.layer.cornerRadius = 10
         
         otherSettingsView.layer.cornerRadius = 8
         otherSettingsView.clipsToBounds = true
@@ -57,11 +42,6 @@ extension SettingsViewController {
         creditsView.layer.cornerRadius = 8
         creditsView.clipsToBounds = true
         
-//        feedbackView.layer.cornerRadius = 10
-//        feedbackView.layer.masksToBounds = true
-        
-        
-        
     }
     func setUpBasic() {
         redButton.tintColor = .white
@@ -80,41 +60,23 @@ extension SettingsViewController {
             switch hexString {
             case "EB3B5A":
                 redButton.setImage(image, for: .normal)
-//                defaults.set("EB3B5A", forKey: "highlightColor")
-                print("red")
             case "FA8231":
                 orangeButton.setImage(image, for: .normal)
-//                defaults.set("FA8231", forKey: "highlightColor")
-                print("org")
             case "FED330":
                 yellowButton.setImage(image, for: .normal)
-//                defaults.set("FED330", forKey: "highlightColor")
-                print("yel")
             case "20BF6B":
                 greenButton.setImage(image, for: .normal)
-//                defaults.set("20BF6B", forKey: "highlightColor")
-                print("gre")
             case "2BCBBA":
                 tealButton.setImage(image, for: .normal)
-//                defaults.set("2BCBBA", forKey: "highlightColor")
-                print("teal")
             case "45AAF2":
                 lightblueButton.setImage(image, for: .normal)
-//                defaults.set("45AAF2", forKey: "highlightColor")
-                print("blue")
             case "00AEEF":
                 findblueButton.setImage(image, for: .normal)
-//                defaults.set("00AEEF", forKey: "highlightColor")
-                print("aeef")
             case "A55EEA":
                 purpleButton.setImage(image, for: .normal)
-//                defaults.set("A55EEA", forKey: "highlightColor")
-                print("purple")
             default:
                 print("WRONG UserDe!!")
             }
-            
-            
         }
         
         let shouldShowTextDetectIndicator = defaults.bool(forKey: "showTextDetectIndicator")
@@ -131,25 +93,5 @@ extension SettingsViewController {
         } else {
             hapticFeedbackSwitch.setOn(false, animated: false)
         }
-        
-        
     }
-//    func addGestureRecognizers() {
-//
-//        let feedbackTap = UITapGestureRecognizer(target: self, action: #selector(self.feedbackTapped(_:)))
-//        leaveFeedbackView.addGestureRecognizer(feedbackTap)
-//
-//        let rateTap = UITapGestureRecognizer(target: self, action: #selector(self.rateTapped(_:)))
-//        rateAppView.addGestureRecognizer(rateTap)
-//
-//    }
-//    @objc func feedbackTapped(_ sender: UITapGestureRecognizer? = nil) {
-//        // handling code
-//        print("TAPPP")
-//    }
-//    @objc func rateTapped(_ sender: UITapGestureRecognizer? = nil) {
-//        print("RATEEE")
-//        // handling code
-//    }
-    
 }

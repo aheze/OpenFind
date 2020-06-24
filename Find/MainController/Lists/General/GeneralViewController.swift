@@ -649,7 +649,6 @@ extension GeneralViewController {
         }///First, check for empty string.
         
         
-        
        // if hasEmptyMatch == false {
         ///Now, check for duplicates
         stringToIndexesError.removeAll() //
@@ -714,10 +713,7 @@ extension GeneralViewController {
                                                                       comment:"GeneralViewController def=You have x empty matches!")
             
             
-//            var matchesPlural = "You have \(emptyStringErrors.count) empty matches!"
             var matchesPlural = String.localizedStringWithFormat(youHaveXEmptyMatches, emptyStringErrors.count)
-            
-            
             
             if emptyStringErrors.count == 1 { matchesPlural = cantHaveEmptyMatch }
             showAnAlert = true

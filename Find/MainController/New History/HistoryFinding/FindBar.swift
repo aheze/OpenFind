@@ -22,7 +22,6 @@ protocol ReturnSortedTerms: class {
     func hereAreCurrentLists(currentSelected: [EditableFindList], currentText: String, object: MatchesLabelObject)
 }
 
-//protocol Dis
 class FindBar: UIView, UITextFieldDelegate {
     
     let deviceSize = screenBounds.size
@@ -46,9 +45,7 @@ class FindBar: UIView, UITextFieldDelegate {
     
     
     @IBOutlet weak var warningView: UIView!
-    
     @IBOutlet weak var warningButton: UIButton!
-    
     @IBOutlet weak var warningLabel: UILabel!
     
     var hasExpandedAlert = false
@@ -66,7 +63,7 @@ class FindBar: UIView, UITextFieldDelegate {
                 self.layoutIfNeeded()
                 
             }
-//            self.warningButton.setTitle("Paused", for: .normal)
+            
             self.warningButton.isHidden = true
             self.okButton.isHidden = false
             self.okButton.alpha = 0
@@ -91,7 +88,7 @@ class FindBar: UIView, UITextFieldDelegate {
             }
             self.okButton.isHidden = true
             self.warningLabel.isHidden = true
-//            self.warningButton.setTitle("Paused", for: .normal)
+            
             self.warningButton.isHidden = false
             self.warningButton.alpha = 0
             UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.25) {
@@ -106,26 +103,12 @@ class FindBar: UIView, UITextFieldDelegate {
     }
     
     var finalTextToFind : String = ""
-    
-        
-//    var currentMatchStrings = [String]()
     var matchToColors = [String: [CGColor]]()
-    //    var stringToList = [String: EditableFindList]()
     
-//    var currentSearchFindList = EditableFindList()
-//    var currentListsSharedFindList = EditableFindList()
-//    var currentSearchAndListSharedFindList = EditableFindList()
-    
-    
-
     @IBOutlet var contentView: FindBar!
-    
     @IBOutlet weak var collectionView: UICollectionView!
     
-//    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
-    
     @IBOutlet weak var searchLeftC: NSLayoutConstraint! ///16
-    
     @IBOutlet weak var collViewRightC: NSLayoutConstraint!
     //    @IBOutlet weak var collViewWidthC: NSLayoutConstraint!
     ///35
@@ -134,7 +117,6 @@ class FindBar: UIView, UITextFieldDelegate {
     var searchActive = false
     
     @IBOutlet weak var searchField: InsetTextField!
-    //    @IBOutlet weak var searchBar: UISearchBar!
     
     weak var injectListDelegate: InjectLists?
     weak var returnTerms: ReturnSortedTerms?
@@ -149,17 +131,10 @@ class FindBar: UIView, UITextFieldDelegate {
         setUp()
     }
     private func setUp() {
-       // fromNib()
-        //self.changeNumberDelegate = self
+        
         clipsToBounds = true
         layer.cornerRadius = 5
         layer.backgroundColor = #colorLiteral(red: 0, green: 0.5981545251, blue: 0.937254902, alpha: 1)
-        
-//        _ = self.view
-        
-//        searchField.insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 125)
-        
-        
         
         Bundle.main.loadNibNamed("FindBar", owner: self, options: nil)
         addSubview(contentView)
@@ -167,14 +142,9 @@ class FindBar: UIView, UITextFieldDelegate {
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         searchField.insets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
-//        searchField.clearButtonMode = .whileEditing
         resultsLabel.textAlignment = .right
-//        DispatchQueue.main.async {
-//            self.resultsLabel.text = ""
-//        }
+        
         resultsLabel.text = "                                   "
-//        let imageRect = CGRect(x: 0, y: 2.5, width: 30, height: 30)
-//        resultsLabel.addImageWith(name: "", behindText: true, bounds: imageRect)
         loadListsRealm()
         
         
@@ -190,14 +160,13 @@ class FindBar: UIView, UITextFieldDelegate {
         toolbar.startedEditing = self
                 
         searchField.inputAccessoryView = toolbar
-//        searchBar.searchTextField.tokenBackgroundColor = UIColor(named: "FeedbackGradientLeft")
         
         collectionView.register(SearchCollectionCell.self, forCellWithReuseIdentifier: "SearchCellid")
         searchField.layer.cornerRadius = 6
         okButton.layer.cornerRadius = 4
         warningView.layer.cornerRadius = 6
         warningLabel.alpha = 0
-//        warningView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+        
         warningView.alpha = 0
         warningButton.alpha = 0
         okButton.alpha = 0
@@ -209,18 +178,8 @@ class FindBar: UIView, UITextFieldDelegate {
         searchField.rightViewMode = .always
         
         resultsLabel.textColor = UIColor.lightGray
-        
-        
-//        searchBar.backgroundColor = .red
-        
-//        searchBar.layer.cornerRadius = 5
-    }
 
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        searchBar.resignFirstResponder()
-//    }
-    
-    
+    }
 }
 
 extension FindBar: ChangeFindBar {
@@ -229,11 +188,9 @@ extension FindBar: ChangeFindBar {
     func change(type: String) {
         switch type {
         case "Disable":
-            print("siable")
             DispatchQueue.main.async {
                 self.searchField.backgroundColor = UIColor(named: "Gray2")
                 self.searchDisabled = true
-//                self.he
             }
         case "Enable":
             DispatchQueue.main.async {
@@ -241,12 +198,11 @@ extension FindBar: ChangeFindBar {
                 self.searchDisabled = false
             }
         case "GetLists":
-            print("GET LISTS!!!")
             let currentLabelObject = MatchesLabelObject()
             currentLabelObject.cachedNumber = origCacheNumber
             currentLabelObject.totalNumber = totalResultsNumber
             currentLabelObject.hadSearchedInCache = searchingOnlyInCache
-            print("Orig cache number: \(origCacheNumber), total: \(totalResultsNumber), onlyInCache? \(searchingOnlyInCache)")
+//            print("Orig cache number: \(origCacheNumber), total: \(totalResultsNumber), onlyInCache? \(searchingOnlyInCache)")
             returnTerms?.hereAreCurrentLists(currentSelected: selectedLists, currentText: searchField.text ?? "", object: currentLabelObject)
 //            self.searchFiel
         default:
@@ -257,30 +213,40 @@ extension FindBar: ChangeFindBar {
     
     func giveLists(lists: [EditableFindList], searchText: String, labelObject: MatchesLabelObject) {
         
-//        if labelObject.
         origCacheNumber = labelObject.cachedNumber
         totalResultsNumber = labelObject.totalNumber
         if labelObject.hadSearchedInCache {
-            if totalResultsNumber == 0 {
-                resultsLabel.text = "No Matches in "
-            } else if totalResultsNumber == 1 {
-                resultsLabel.text = "1 Match in "
-            } else {
-                resultsLabel.text = "\(totalResultsNumber) Matches in "
-            }
-            print("main asynccache GIVE: \(totalResultsNumber), orig: \(origCacheNumber)")
-//                let textH = 35
-            let imageRect = CGRect(x: 0, y: 2.5, width: 30, height: 30)
-            resultsLabel.addImageWith(name: "TextFieldCache", behindText: true, bounds: imageRect)
+            setResultLabelText(searchingInCache: true, number: totalResultsNumber)
+//            if totalResultsNumber == 0 {
+//                let noMatchesInSpace = NSLocalizedString("noMatchesInSpace", comment: "FindBar def=No Matches in ")
+////                resultsLabel.text = "No Matches in "
+//                resultsLabel.text = noMatchesInSpace
+//            } else if totalResultsNumber == 1 {
+////                resultsLabel.text = "1 Match in "
+//                resultsLabel.text = oneMatchInSpace
+//            } else {
+//
+//                let xMatchesInSpace = NSLocalizedString("%d MatchesInSpace", comment: "FindBar def=x Matches in ")
+//                let string = String.localizedStringWithFormat(xMatchesInSpace, totalResultsNumber)
+////                resultsLabel.text = "\(totalResultsNumber) Matches in "
+//                resultsLabel.text = string
+//            }
+//
+//            let imageRect = CGRect(x: 0, y: 2.5, width: 30, height: 30)
+//            resultsLabel.addImageWith(name: "TextFieldCache", behindText: true, bounds: imageRect)
         } else {
-            print("newNNN TOTAL ;\(totalResultsNumber)")
-            if totalResultsNumber == 0 {
-                self.resultsLabel.text = "No Matches"
-            } else if totalResultsNumber == 1 {
-                self.resultsLabel.text = "1 Match "
-            } else {
-                self.resultsLabel.text = "\(totalResultsNumber) Matches"
-            }
+            setResultLabelText(searchingInCache: false, number: totalResultsNumber)
+//            if totalResultsNumber == 0 {
+//
+//                let noMatches = NSLocalizedString("noMatches", comment: "FindBar def=No Matches")
+//                self.resultsLabel.text = noMatches
+//            } else if totalResultsNumber == 1 {
+//
+//                self.resultsLabel.text = oneMatch
+//            } else {
+//                let matches = NSLocalizedString("matches", comment: "FindBar def=Matches")
+//                self.resultsLabel.text = "\(totalResultsNumber) \(matches)"
+//            }
         }
         
         searchDisabled = false
@@ -301,7 +267,7 @@ extension FindBar: ChangeFindBar {
                 notSelectedLists.append(list)
             }
         }
-        print("COUNT:::: NOT::: \(notSelectedLists.count)")
+        
         injectListDelegate?.resetWithLists(lists: notSelectedLists)
         switch selectedLists.count {
         case 0:
@@ -332,7 +298,6 @@ extension FindBar: ChangeFindBar {
         
         let splits = searchText.components(separatedBy: "\u{2022}")
         let uniqueSplits = splits.uniques
-//            print("up: \(updatedString)")
         if uniqueSplits.count != splits.count {
             dupPaused = true
             returnTerms?.pause(pause: true)
@@ -357,11 +322,8 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("SELE")
         if searchDisabled == false {
-            print("NOT DIS")
             if searchActive == true {
-                print("ACTI")
                 let list = selectedLists[indexPath.item]
                 selectedLists.remove(object: list)
                 collectionView.deleteItems(at: [indexPath])
@@ -371,28 +333,16 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
                 
              switch selectedLists.count {
                 case 0:
-                    print("nothing")
                     searchLeftC.constant = 12
-    //                warningWidth.constant = searchField.frame.size.width - 67
                 case 1:
-                    print("1")
-    //                collViewWidthC.constant = 50
                     searchLeftC.constant = 35 + 3 + 12
-    //            warningWidth.constant = searchField.frame.size.width - 67
                 case 2:
-    //                collViewWidthC.constant = 73
                     searchLeftC.constant = 73 + 3 + 12
                 case 3:
-    //                collViewWidthC.constant = 111
                     searchLeftC.constant = 111 + 3 + 12
                 default:
-    //                print("default")
-    //                collViewWidthC.constant = 111
                     let availibleWidth = contentView.frame.width - 123
-                    //                layout = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
-                    //            flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
-                    //            searchCollectionRightC.constant = availibleWidth
-                                collViewRightC.constant = availibleWidth
+                    collViewRightC.constant = availibleWidth
                     searchLeftC.constant = 111 + 3 + 12
                 }
                 UIView.animate(withDuration: 0.3, animations: {
@@ -406,7 +356,6 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
                     })
                 }
             } else {
-                print("FALSE!!")
                 searchField.becomeFirstResponder()
             }
         } else {
@@ -418,14 +367,11 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
         
         let list = selectedLists[indexPath.item]
         
-        
-//        let newImage = UIImage(systemName: list.iconImageName)?.withTintColor(UIColor.white)
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 14, weight: .medium)
         let newImage = UIImage(systemName: list.iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor.white, renderingMode: .alwaysOriginal)
         let backgroundColor = UIColor(hexString: list.iconColorName)
         
         cell.contentView.backgroundColor = backgroundColor
-//        let image = UIImage(
         cell.imageView.image = newImage
         cell.layer.cornerRadius = 6
         cell.clipsToBounds = true
@@ -435,14 +381,8 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.size.height
-        print("WIDTH:::\(width)")
         return CGSize(width: width, height: width)
     }
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        print("SIXEJOJSDLDSFDLF")
-//        return CGFloat(3)
-//    }
-    
     
 }
 
@@ -451,7 +391,6 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
     func showDuplicateAlert(show: Bool) {
         if show == true {
 
-//                warningHeightC.constant = 32
             warningWidth.constant = 67
             self.warningButton.isHidden = false
             
@@ -459,7 +398,6 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
             self.okButton.isHidden = true
             UIView.animate(withDuration: 0.5, animations: {
                 self.warningView.alpha = 1
-//                    self.warningLabel.alpha = 1
                 self.layoutIfNeeded()
             }) { _ in
                 UIView.animate(withDuration: 0.2, animations: {
@@ -467,7 +405,6 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
                 })
             }
         } else {
-//                warningHeightC.constant = 6
             UIView.animate(withDuration: 0.2, animations: {
                 self.warningButton.alpha = 0
                 self.warningLabel.alpha = 0
@@ -479,8 +416,6 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
                 self.warningWidth.constant = 0
                 UIView.animate(withDuration: 0.5, animations: {
                     self.warningView.alpha = 0
-//                        self.warningLabel.alpha = 0
-    //                self.warningLabel.text = "Find is paused | Duplicates are not allowed"
                     self.layoutIfNeeded()
                 })
             }
@@ -488,17 +423,14 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-//        print("clear text: \(textField.text)")
         searchField.text = ""
         dupPaused = false
-//        print("setfdfg")
         finalTextToFind = ""
         sortSearchTerms()
         return true
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         searchActive = true
-        print("ACTIVE")
         returnTerms?.startedEditing(start: true)
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -509,14 +441,8 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
             return false
         }
     }
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        searchActive = false
-//        print("ENDEDIT")
-//        returnTerms?.startedEditing(start: false)
-//    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        print("RETURN?? \(stringToList.count)")
-        
         
             if dupPaused == false {
                 if matchToColors.keys.count != 0 {
@@ -532,23 +458,16 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        print("CHANGE!! now")
         if let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {
             let splits = updatedString.components(separatedBy: "\u{2022}")
             let uniqueSplits = splits.uniques
-//            print("up: \(updatedString)")
             if uniqueSplits.count != splits.count {
-//                print("DUPD UPD UPD UPDU PDPUDP")
-//                resetFastHighlights()
-//                allowSearch = false
                 returnTerms?.pause(pause: true)
                 dupPaused = true
                 showDuplicateAlert(show: true)
             } else {
                 finalTextToFind = updatedString
                 showDuplicateAlert(show: false)
-//                allowSearch = true
-//                finalTextToFind = updatedString
                 dupPaused = false
                 returnTerms?.pause(pause: false)
                 sortSearchTerms()
@@ -557,33 +476,20 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         }
         return true
     }
-//    override func didMoveToWindow() {
-//        super.didMoveToWindow()
-//        if #available(iOS 11.0, *) {
-//            if let window = self.window {
-//                self.bottomAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: window.safeAreaLayoutGuide.bottomAnchor, multiplier: 1.0).isActive = true
-//            }
-//        }
-//    }
+    
     func buttonPressed(button: ToolbarButtonType) {
         switch button {
         case .removeAll:
             removeAllLists()
         case .newMatch:
-//            if let searchText = searchField.text {
-//                searchField.text = "\(searchText)\u{2022}"
-//            }
-            
             if let selectedRange = searchField.selectedTextRange {
                 let cursorPosition = searchField.offset(from: searchField.beginningOfDocument, to: selectedRange.start)
                 if let textFieldText = searchField.text {
                     var newText = textFieldText
                     newText.insert(string: "\u{2022}", ind: cursorPosition)
-                    print("\(cursorPosition)")
+                    
                     searchField.text = newText
                     
-                    
-//                        let positionOriginal = textField.beginningOfDocument
                     if let cursorLocation = searchField.position(from: searchField.beginningOfDocument, offset: cursorPosition + 1) {
                         searchField.selectedTextRange = searchField.textRange(from: cursorLocation, to: cursorLocation)
                     }
@@ -591,10 +497,8 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
             }
         case .done:
             searchActive = false
-            print("END   EDIT")
             searchField.resignFirstResponder()
             returnTerms?.startedEditing(start: false)
-//            self.endEditing(true)
         }
     }
     func removeAllLists() {
@@ -603,7 +507,6 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         }
         selectedLists.removeAll()
         collectionView.reloadData()
-//        collViewWidthC.constant = 50
         collViewRightC.constant = 12
         searchLeftC.constant = 12
         UIView.animate(withDuration: 0.3, animations: {
@@ -675,38 +578,7 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
             }
         }
     }
-//    func loadListsRealm() {
-//
-//        listCategories = realm.objects(FindList.self)
-//        selectedLists.removeAll()
-//        editableListCategories.removeAll()
-//
-//        listCategories = listCategories!.sorted(byKeyPath: "dateCreated", ascending: false)
-//        if let lC = listCategories {
-//            for (index, singleL) in lC.enumerated() {
-//
-//                let editList = EditableFindList()
-//
-//                editList.name = singleL.name
-//                editList.descriptionOfList = singleL.descriptionOfList
-//                editList.iconImageName = singleL.iconImageName
-//                editList.iconColorName = singleL.iconColorName
-//                editList.orderIdentifier = index
-//                var contents = [String]()
-//                for singleCont in singleL.contents {
-//                    contents.append(singleCont)
-//                }
-//
-//                editList.contents = contents
-//
-//                editableListCategories.append(editList)
-//            }
-//        }
-//        for singL in editableListCategories {
-//            print(singL.name)
-//        }
-//
-//    }
+
 }
 
 
@@ -718,15 +590,11 @@ extension FindBar {
             var cameAcrossShare = [String]()
             var duplicatedStrings = [String]()
             
-//            currentMatchStrings.removeAll()
             matchToColors.removeAll()
-//            stringToList.removeAll()
             
-//            var currentStrings
             var cameAcrossSearchFieldText = [String]()
             for list in selectedLists {
                 for match in list.contents {
-//                    currentMatchStrings.append(match)
                     if !cameAcrossShare.contains(match.lowercased()) {
                         cameAcrossShare.append(match.lowercased())
                     } else {
@@ -740,24 +608,19 @@ extension FindBar {
             }
             duplicatedStrings = duplicatedStrings.uniques
             
-            print("DUP STRINGA: \(duplicatedStrings)")
             cameAcrossSearchFieldText = cameAcrossSearchFieldText.uniques
             
-            print("Search text. \(cameAcrossSearchFieldText)")
             for list in selectedLists {
                 for match in list.contents {
                     let matchColor = UIColor(hexString: (list.iconColorName)).cgColor
                     
                     if !duplicatedStrings.contains(match.lowercased()) && !cameAcrossSearchFieldText.contains(match.lowercased()) {
-//                        stringToList[match.lowercased()] = list
                         matchToColors[match.lowercased()] = [matchColor]
                     } else {
                         
                         
-                        
                         if matchToColors[match.lowercased()] == nil {
                                 matchToColors[match.lowercased()] = [matchColor]
-    //                        }
                         } else {
                             if !(matchToColors[match.lowercased()]?.contains(matchColor))! {
                                 matchToColors[match.lowercased(), default: [CGColor]()].append(matchColor)
@@ -767,7 +630,6 @@ extension FindBar {
                 }
             }
             
-    //        print("SEARCH sdsfARR: \(arrayOfSearch)")
             var newSearch = [String]()
             for match in arrayOfSearch {
                 if match != "" && !cameAcrossSearchFieldText.contains(match) && !duplicatedStrings.contains(match) {
@@ -776,33 +638,17 @@ extension FindBar {
             }
             arrayOfSearch = newSearch
             
-//            let searchList = EditableFindList()
-    //        searchList.descriptionOfList = "Search Array List +0-109028304798614"
             for match in arrayOfSearch {
-//                stringToList[match] = searchList
                 matchToColors[match] = [UIColor(hexString: highlightColor).cgColor]
             }
-            
-//            let sharedList = EditableFindList()
-    //        sharedList.descriptionOfList = "Shared Lists +0-109028304798614"
-//            for match in duplicatedStrings {
-//                stringToList[match] = sharedList
-//            }
-            
-//            let textShareList = EditableFindList()
-    //        textShareList.descriptionOfList = "Shared Text Lists +0-109028304798614"
+           
             for match in cameAcrossSearchFieldText {
-//                stringToList[match] = textShareList
                 let cgColor = UIColor(hexString: highlightColor).cgColor
                 matchToColors[match, default: [CGColor]()].append(cgColor)
             }
-//            currentMatchStrings += arrayOfSearch
-//            currentMatchStrings = currentMatchStrings.uniques
             
             if shouldReturnTerms {
-//                print("GIVE!!!   stringToList:\(stringToList), currentSearchFindListR:\(currentSearchFindList), currentListsSharedFindListR:\(currentListsSharedFindList), currentSearchAndListSharedFindListR:\(currentSearchAndListSharedFindList), currentMatchStringsR:\(currentMatchStrings), matchToColorsR:\(matchToColors)")
                 returnTerms?.returnTerms(matchToColorsR: matchToColors)
-                    
             }
         }
 
@@ -813,21 +659,15 @@ extension FindBar {
 class SearchCollectionCell: UICollectionViewCell {
 
     var imageView: UIImageView = UIImageView(frame: CGRect.zero)
-
     
     override init(frame : CGRect) {
         super.init(frame : frame)
         imageView.frame.size = CGSize(width: self.frame.width, height: self.frame.height)
         imageView.contentMode = .scaleAspectFit
-//        imageView.textAlignment = .center
         contentView.addSubview(imageView)
-//        print("frameSize: \(frame)")
         imageView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview().inset(UIEdgeInsets(top: 3.5, left: 3.5, bottom: 3.5, right: 3.5))
-            
-//            make.size.equalTo(CGSize(width: 35, height: 35))
         }
-//        self.layoutIfNeeded()
         
     }
     required init?(coder aDecoder: NSCoder) {
@@ -838,7 +678,6 @@ class SearchCollectionCell: UICollectionViewCell {
 
 extension FindBar: GiveFindbarMatchNumber {
     func howMany(number: Int, inCache: Bool, noSearchTerms: Bool) {
-//        print("number matches findbar: \(number), no search? \(noSearchTerms) inCache: \(inCache)")
         DispatchQueue.main.async {
             if noSearchTerms {
                 self.totalResultsNumber = 0
@@ -850,29 +689,42 @@ extension FindBar: GiveFindbarMatchNumber {
                     self.origCacheNumber = number
                     self.totalResultsNumber = number
                     self.searchingOnlyInCache = true
-                    if number == 0 {
-                        self.resultsLabel.text = "No Matches in "
-                    } else if number == 1 {
-                        self.resultsLabel.text = "1 Match in "
-                    } else {
-                        self.resultsLabel.text = "\(number) Matches in "
-                    }
-//                    print("mani asynccache: \(number)")
-    //                let textH = 35
-                    let imageRect = CGRect(x: 0, y: 2.5, width: 30, height: 30)
-                    self.resultsLabel.addImageWith(name: "TextFieldCache", behindText: true, bounds: imageRect)
+//                    if number == 0 {
+//                        self.resultsLabel.text = "No Matches in "
+//                    } else if number == 1 {
+//                        self.resultsLabel.text = "1 Match in "
+//                    } else {
+//                        self.resultsLabel.text = "\(number) Matches in "
+//                    }
+////                    print("mani asynccache: \(number)")
+//    //                let textH = 35
+//                    let imageRect = CGRect(x: 0, y: 2.5, width: 30, height: 30)
+//                    self.resultsLabel.addImageWith(name: "TextFieldCache", behindText: true, bounds: imageRect)
+                    self.setResultLabelText(searchingInCache: true, number: number)
                 } else {
                     let newNumber = self.origCacheNumber + number
                     self.searchingOnlyInCache = false
                     self.totalResultsNumber = newNumber
 //                    print("newNNN ;\(newNumber)")
-                    if newNumber == 0 {
-                        self.resultsLabel.text = "No Matches"
-                    } else if newNumber == 1 {
-                        self.resultsLabel.text = "1 Match "
-                    } else {
-                        self.resultsLabel.text = "\(newNumber) Matches"
-                    }
+                    self.setResultLabelText(searchingInCache: false, number: newNumber)
+//                    if newNumber == 0 {
+//
+//                        let noMatches = NSLocalizedString("noMatches", comment: "FindBar def=No Matches")
+//                        self.resultsLabel.text = noMatches
+//                    } else if totalResultsNumber == 1 {
+//
+//                        self.resultsLabel.text = oneMatch
+//                    } else {
+//                        let matches = NSLocalizedString("matches", comment: "FindBar def=Matches")
+//                        self.resultsLabel.text = "\(newNumber) \(matches)"
+//                    }
+//                    if newNumber == 0 {
+//                        self.resultsLabel.text = "No Matches"
+//                    } else if newNumber == 1 {
+//                        self.resultsLabel.text = "1 Match "
+//                    } else {
+//                        self.resultsLabel.text = "\(newNumber) Matches"
+//                    }
                 }
             }
         }
@@ -951,5 +803,44 @@ extension UILabel {
         let text = self.text
         self.attributedText = nil
         self.text = text
+    }
+}
+
+extension FindBar {
+    func setResultLabelText(searchingInCache: Bool, number: Int) {
+        if searchingInCache {
+            if number == 0 {
+                let noMatchesInSpace = NSLocalizedString("noMatchesInSpace", comment: "FindBar def=No Matches in ")
+                //                resultsLabel.text = "No Matches in "
+                resultsLabel.text = noMatchesInSpace
+            } else if totalResultsNumber == 1 {
+                let oneMatchInSpace = NSLocalizedString("oneMatchInSpace", comment: "FindBar def=1 Match in ")
+                //                resultsLabel.text = "1 Match in "
+                resultsLabel.text = oneMatchInSpace
+            } else {
+                
+                let xMatchesInSpace = NSLocalizedString("%d MatchesInSpace", comment: "FindBar def=x Matches in ")
+                let string = String.localizedStringWithFormat(xMatchesInSpace, number)
+                //                resultsLabel.text = "\(totalResultsNumber) Matches in "
+                resultsLabel.text = string
+            }
+            
+            let imageRect = CGRect(x: 0, y: 2.5, width: 30, height: 30)
+            resultsLabel.addImageWith(name: "TextFieldCache", behindText: true, bounds: imageRect)
+        } else {
+            
+            if number == 0 {
+                
+                let noMatches = NSLocalizedString("noMatches", comment: "FindBar def=No Matches")
+                self.resultsLabel.text = noMatches
+            } else if totalResultsNumber == 1 {
+                
+                let oneMatch = NSLocalizedString("oneMatch", comment: "Multifile def=1 match")
+                self.resultsLabel.text = oneMatch
+            } else {
+                let matches = NSLocalizedString("matches", comment: "FindBar def=Matches")
+                self.resultsLabel.text = "\(number) \(matches)"
+            }
+        }
     }
 }

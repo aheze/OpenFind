@@ -415,13 +415,16 @@ extension NewHistoryViewController: ReturnCachedPhotos {
         
         let tapToDismiss = NSLocalizedString("tapToDismiss", comment: "Multipurpose def=Tap to dismiss")
         if popup == "Keep" {
-            let keptCachedPhotos = NSLocalizedString("keptCachedPhotos", comment: "NewHistoryViewController def=Kept cached photos!")
+            let keptCachedPhotos = NSLocalizedString("keptCachedPhotos", comment: "Multifile def=Kept cached photos!")
             
             let alertView = SPAlertView(title: keptCachedPhotos, message: tapToDismiss, preset: SPAlertPreset.done)
             alertView.duration = 4
             alertView.present()
         } else if popup == "Finished" {
-            let alertView = SPAlertView(title: "Caching done!", message: tapToDismiss, preset: SPAlertPreset.done)
+            
+            let cachingDoneExclaim = NSLocalizedString("cachingDoneExclaim", comment: "Multifile def=Caching done!")
+            
+            let alertView = SPAlertView(title: cachingDoneExclaim, message: tapToDismiss, preset: SPAlertPreset.done)
             alertView.duration = 4
             alertView.present()
             
@@ -587,8 +590,8 @@ extension NewHistoryViewController: ButtonPressed {
             var finishMessage = ""
             if indexPathsSelected.count == 1 {
                 
-                let deleteThisPhotoQuestion = NSLocalizedString("deleteThisPhotoQuestion", comment: "NewHistoryViewController def=Delete photo?")
-                let photoDeletedExclaim = NSLocalizedString("photoDeletedExclaim", comment: "NewHistoryViewController def=Photo deleted!")
+                let deleteThisPhotoQuestion = NSLocalizedString("deleteThisPhotoQuestion", comment: "Multifile def=Delete photo?")
+                let photoDeletedExclaim = NSLocalizedString("photoDeletedExclaim", comment: "Multifile def=Photo deleted!")
                 
                 
                 titleMessage = deleteThisPhotoQuestion
@@ -773,7 +776,7 @@ extension NewHistoryViewController: ButtonPressed {
                 var finishMessage = ""
                 if indexPathsSelected.count == 1 {
                     
-                    let clearThisCacheQuestion = NSLocalizedString("clearThisCacheQuestion", comment: "NewHistoryViewController def=Clear this photo's cache?")
+                    let clearThisCacheQuestion = NSLocalizedString("clearThisCacheQuestion", comment: "Multifile def=Clear this photo's cache?")
                     let cacheClearedExclaim = NSLocalizedString("cacheClearedExclaim", comment: "NewHistoryViewController def=Cache cleared!")
                     
                     
@@ -797,7 +800,7 @@ extension NewHistoryViewController: ButtonPressed {
         //            finishMessage = "\(indexPathsSelected.count) lists deleted!"
                 }
                 
-                let cachingAgainTakeAWhile = NSLocalizedString("cachingAgainTakeAWhile", comment: "NewHistoryViewController def=Caching again will take a while...")
+                let cachingAgainTakeAWhile = NSLocalizedString("cachingAgainTakeAWhile", comment: "Multifile def=Caching again will take a while...")
                 let clear = NSLocalizedString("clear", comment: "Multipurpose def=Clear")
                 
                 let alert = UIAlertController(title: titleMessage, message: cachingAgainTakeAWhile, preferredStyle: .alert)

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ChangedTextCell: class {
-    //func plusButtonPressed(indexPath: Int)
+    
     func textFieldEndedEditing(indexPath: Int, text: String)
     func textFieldStartedEditing(indexPath: Int)
     func textFieldChangedText(indexPath: Int, text: String)

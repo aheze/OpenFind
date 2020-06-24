@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import Carte
 
 class CreditsViewController: UIViewController, UITextViewDelegate {
     
@@ -43,13 +42,19 @@ class CreditsViewController: UIViewController, UITextViewDelegate {
         let wink = NSAttributedString(string: "W in K (soundcloud.com/officialwinkmusic) ", attributes: winkLink)
         
 //        let blackAt  tribute = [NSAttributedString.Key.foregroundColor:  UIColor.label]
-        let thanksTo = NSAttributedString(string: "Thanks to ")
-        let forFeedback = NSAttributedString(string: "for feedback and being a beta tester, and ")
-        let videoMusic = NSAttributedString(string: "for the app promo music on the App Store!")
+        let thanksToLoc = NSLocalizedString("thanksTo", comment: "CreditsViewController def=Thanks to")
+        let forFeedbackTesterAndSpaceLoc = NSLocalizedString("forFeedbackTesterAndSpace", comment: "CreditsViewController def=for feedback and being a beta tester, and ")
+        let forAppPromoMusicOnAppStoreExclaimLoc = NSLocalizedString("forAppPromoMusicOnAppStoreExclaim", comment: "CreditsViewController def=for the app promo music on the App Store!")
+        
+        let thanksTo = NSAttributedString(string: "\(thanksToLoc) ")
+//        let forFeedback = NSAttributedString(string: "for feedback and being a beta tester, and ")
+        let forFeedback = NSAttributedString(string: forFeedbackTesterAndSpaceLoc)
+        
+        let videoMusic = NSAttributedString(string: forAppPromoMusicOnAppStoreExclaimLoc)
+//        let videoMusic = NSAttributedString(string: "for the app promo music on the App Store!")
+        
         
         let entireString = NSMutableAttributedString()
-        
-//        thanksTo.addAtt
         
         entireString.append(thanksTo)
         entireString.append(kamran)
@@ -62,8 +67,6 @@ class CreditsViewController: UIViewController, UITextViewDelegate {
 
         textView.attributedText = entireString
         textView.textAlignment = .center
-
-        
         
         licensesView.layer.cornerRadius = 8
         

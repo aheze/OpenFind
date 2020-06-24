@@ -347,7 +347,7 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
         
         var numberText = ""
         if model.numberOfMatches == 1 {
-            let oneMatch = NSLocalizedString("oneMatch", comment: "HistoryFindController def=1 match")
+            let oneMatch = NSLocalizedString("oneMatch", comment: "Multifile def=1 match")
             //            numberText = "\(model.numberOfMatches) match"
             numberText = oneMatch
         } else {
@@ -1351,4 +1351,3 @@ extension HistoryFindController {
     }
 }
 
-// MARK: - STOPPED HERE FOR LOCALIZATION

@@ -22,7 +22,6 @@ class ZoomTransitionController: NSObject {
     weak var deleteLastDel: RecieveDeleteLast?
     
     override init() {
-        print("zoom")
         animator = ZoomAnimator()
         interactionController = ZoomDismissalInteractionController()
         super.init()
@@ -35,11 +34,9 @@ class ZoomTransitionController: NSObject {
 
 extension ZoomTransitionController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        print("animattt")
         self.animator.isPresenting = true
         self.animator.fromDelegate = fromDelegate
         self.animator.toDelegate = toDelegate
-//        self.animator.deleteLastDel
         
         deleteLastDel = self.animator
         return self.animator
@@ -51,56 +48,20 @@ extension ZoomTransitionController: UIViewControllerTransitioningDelegate {
         self.animator.fromDelegate = self.toDelegate
         self.animator.toDelegate = tmp
       
-        print("Dismiss!!!!")
-        
         return self.animator
     }
 
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        print("dismi")
         
         if deletedLast {
-            print("LAST!")
             deleteLastDel?.deletedLastPhoto()
-//            self.animator.deletedLast = true
         }
         if !self.isInteractive || self.deletedLast {
             return nil
         }
-        
-        
         
         self.interactionController.animator = animator
         return self.interactionController
     }
 
 }
-//
-//extension ZoomTransitionController: UINavigationControllerDelegate {
-//    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//
-//        if operation == .push {
-//            self.animator.isPresenting = true
-//            self.animator.fromDelegate = fromDelegate
-//            self.animator.toDelegate = toDelegate
-//        } else {
-//            self.animator.isPresenting = false
-//            let tmp = self.fromDelegate
-//            self.animator.fromDelegate = self.toDelegate
-//            self.animator.toDelegate = tmp
-//        }
-//
-//        return self.animator
-//    }
-//
-//    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-//
-//        if !self.isInteractive {
-//            return nil
-//        }
-//
-//        self.interactionController.animator = animator
-//        return self.interactionController
-//    }
-//
-//}

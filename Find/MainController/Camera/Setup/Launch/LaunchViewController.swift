@@ -472,27 +472,6 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
         }
     }
 }
-    
-class LaunchLocalization {
-    let welcomeToFind = NSLocalizedString("welcomeToFind", comment: "LaunchViewController def=Welcome to Find")
-    let swipeToGetStarted = NSLocalizedString("swipeToGetStarted", comment: "LaunchViewController def=Swipe to get started")
-    
-    let whatIsFind = NSLocalizedString("whatIsFind", comment: "LaunchViewController def=What is Find?")
-    let findIsCommandFForCamera = NSLocalizedString("findIsCommandFForCamera",
-                                 comment: "LaunchViewController def=Find is Command+F for camera: Find words in books, worksheets, nutrition labels... anywhere that contains text!")
-    
-    let findWords = NSLocalizedString("findWords", comment: "LaunchViewController def=Find words")
-    let tapSearchField = NSLocalizedString("tapSearchField", comment: "LaunchViewController def=Tap the Search Field at the top of the screen")
-    
-    let takePhotos = NSLocalizedString("takePhotos", comment: "LaunchViewController def=Take photos")
-    let tapShutterButton = NSLocalizedString("tapShutterButton", comment: "LaunchViewController def=Tap the shutter button. Your photos will appear in your History, where you can Find from them again and again and again...")
-    
-    let accessMenu = NSLocalizedString("accessMenu", comment: "LaunchViewController def=Access the Menu")
-    let yourHistoryListsAndSettingsHere = NSLocalizedString("yourHistoryListsAndSettingsHere", comment: "LaunchViewController def=Your History, Lists, and Settings are here. Check it out!")
-    
-    let beforeYouStart = NSLocalizedString("beforeYouStart", comment: "LaunchViewController def=Before you start...")
-    let ensureAccuracy = NSLocalizedString("ensureAccuracy", comment: "LaunchViewController def=To ensure the most accurate results, please make sure to hold your phone as steady as possible.")
-}
 
 
 extension LaunchViewController {

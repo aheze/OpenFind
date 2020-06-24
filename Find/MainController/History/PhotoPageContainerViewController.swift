@@ -14,7 +14,6 @@ protocol PhotoPageContainerViewControllerDelegate: class {
     func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int)
 }
 protocol ChangedSearchTermsFromZoom: class {
-//    func pause(pause: Bool)
     func returnTerms(matchToColorsR: [String: [CGColor]])
     func pressedReturn()
 }
@@ -34,7 +33,6 @@ protocol GiveFindbarMatchNumber: class {
 
 class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDelegate {
 
-//    var currentMatchStrings = [String]()
     var highlightColor = "00aeef"
     var matchToColors = [String: [CGColor]]()
     
@@ -105,6 +103,8 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             changeModel?.changedState(type: "Heart", index: currentIndex)
         }
     }
+    let tapToDismiss = NSLocalizedString("tapToDismiss", comment: "Multipurpose def=Tap to dismiss")
+    let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
     
     @IBAction func cachePressed(_ sender: Any) {
         if photoModels[currentIndex].isDeepSearched == false {
@@ -116,7 +116,6 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             attributes.entryBackground = .color(color: .white)
             attributes.screenInteraction = .absorbTouches
             attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(300))
-//            attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
             attributes.positionConstraints.maxSize = .init(width: .constant(value: 450), height: .constant(value: 550))
             attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
             attributes.lifecycleEvents.didAppear = {
@@ -146,19 +145,25 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             
         } else { ///UNCACHE
             
-            let alert = UIAlertController(title: "Delete this photo's cache?", message: "Caching again will take a while...", preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
+            let clearThisCacheQuestion = NSLocalizedString("clearThisCacheQuestion", comment: "Multifile def=Clear this photo's cache?")
+            let cachingAgainTakeAWhile = NSLocalizedString("cachingAgainTakeAWhile", comment: "Multifile def=Caching again will take a while...")
+            let clear = NSLocalizedString("clear", comment: "Multipurpose def=Clear")
+            
+            let clearedThisPhotosCacheExclaim = NSLocalizedString("clearedThisPhotosCacheExclaim", comment: "PhotoPageContainerViewController def=Cleared this photo's cache!")
+            
+            let alert = UIAlertController(title: clearThisCacheQuestion, message: cachingAgainTakeAWhile, preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: clear, style: UIAlertAction.Style.destructive, handler: { _ in
                 let tempModel = EditableHistoryModel()
                 self.changeCache?.cached(cached: false, photo: tempModel, index: self.currentIndex)
                 self.cacheButton.setImage(UIImage(named: "NotCachedThin"), for: .normal)
                 self.cacheButton.tintColor = UIColor(hexString: "5287B6")
                 self.photoModels[self.currentIndex].isDeepSearched = false
                 
-                let alertView = SPAlertView(title: "Deleted this photo's cache!", message: "Tap to dismiss", preset: SPAlertPreset.done)
+                let alertView = SPAlertView(title: clearedThisPhotosCacheExclaim, message: self.tapToDismiss, preset: SPAlertPreset.done)
                 alertView.duration = 2.6
                 alertView.present()
             }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))
             if let popoverController = alert.popoverPresentationController {
                 popoverController.sourceView = cacheButton
                 popoverController.sourceRect = cacheButton.bounds
@@ -169,15 +174,13 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     }
     
     @IBAction func deletePressed(_ sender: Any) {
-//            if let nextPage = pageViewController(self, viewControllerAfter: currentViewController) {
-//                pageViewController.setViewControllers([nextPage], direction: .forward, animated: true, completion: nil)
-//            }
-//        pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
-//        let currentIndex = currentViewController
         
+        let deleteThisPhotoQuestion = NSLocalizedString("deleteThisPhotoQuestion", comment: "Multifile def=Delete photo?")
         let cantBeUndone = NSLocalizedString("cantBeUndone", comment: "Multipurpose def=This action can't be undone.")
-        let alert = UIAlertController(title: "Delete photo?", message: cantBeUndone, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
+        let delete = NSLocalizedString("delete", comment: "Multipurpose def=Delete")
+        
+        let alert = UIAlertController(title: deleteThisPhotoQuestion, message: cantBeUndone, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: delete, style: UIAlertAction.Style.destructive, handler: { _ in
             
             let zoomVC = self.currentViewController
             let index = zoomVC.index
@@ -189,10 +192,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             
             var newIndex = 0
             if index == 0 {
-                ///DELETED FIRST photo
-    //            goRight = false
                if self.photoModels.count == 0 {
-                   print("DELETED LAST PHOTO")
                    self.currentViewController.scrollView.isScrollEnabled = false
                    self.transitionController.isInteractive = false
                    self.transitionController.deletedLast = true
@@ -202,7 +202,6 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
                     vc.delegate = self
                     vc.imageSize = self.photoSize
                     let filePath = self.photoModels[newIndex].filePath
-//                   let urlString = URL(string: "\(self.folderURL)\(filePath)")
                     let urlString = self.folderURL.appendingPathComponent(filePath)
                     vc.url = urlString
                     vc.index = newIndex
@@ -220,7 +219,6 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
                 vc.delegate = self
                 vc.imageSize = self.photoSize
                 let filePath = self.photoModels[newIndex].filePath
-//                let urlString = URL(string: "\(self.folderURL)\(filePath)")
                 let urlString = self.folderURL.appendingPathComponent(filePath)
                 vc.url = urlString
                 vc.index = newIndex
@@ -238,7 +236,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             self.currentIndex = newIndex
             self.delegate?.containerViewController(self, indexDidUpdate: self.currentIndex)
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))
         if let popoverController = alert.popoverPresentationController {
             popoverController.sourceView = deleteButton
             popoverController.sourceRect = deleteButton.bounds
@@ -250,9 +248,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     @IBAction func sharePressed(_ sender: Any) {
         
         let currentModel = photoModels[currentIndex]
-//        let filePath = folderURL.appendingPathComponent(currentModel.filePath)
-//        if let image = filePath.loadImageFromDocumentDirectory() {
-            
+        
         let shareObject = HistorySharing(filePath: currentModel.filePath, folderURL: folderURL)
         let activityViewController = UIActivityViewController(activityItems: [shareObject], applicationActivities: nil)
         let tempController = UIViewController()
@@ -267,19 +263,15 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         if let popoverController = activityViewController.popoverPresentationController {
             popoverController.sourceRect = CGRect(x: 0, y: 0, width: shareButton.frame.width, height: shareButton.frame.width)
             popoverController.sourceView = shareButton
-//                popoverController.permittedArrowDirections = .up
         }
         present(tempController, animated: true) { [weak tempController] in
             tempController?.present(activityViewController, animated: true, completion: nil)
         }
-//        }
-
     }
     
     @IBOutlet weak var backBlurView: UIVisualEffectView!
     
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
-
     
     enum ScreenMode {
         case full, normal
@@ -297,7 +289,6 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         return self.pageViewController.viewControllers![0] as! PhotoZoomViewController
     }
     
-    //var photos = [UIImage]()
     
     //MARK: FROM FIND
     var cameFromFind = false
@@ -307,12 +298,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     var photoModels = [EditableHistoryModel]()
     var currentIndex = 0
     
-    var photoSize: CGSize = CGSize(width: 0, height: 0) {
-        didSet {
-            print("SET")
-            print(photoSize)
-        }
-    }
+    var photoSize: CGSize = CGSize(width: 0, height: 0)
 
     var panGestureRecognizer: UIPanGestureRecognizer!
     var singleTapGestureRecognizer: UITapGestureRecognizer!
@@ -350,18 +336,14 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
             let filePath = model.photo.filePath
             
             urlString = folderURL.appendingPathComponent(filePath)
-//            urlString = URL(string: "\(folderURL)\(filePath)")
             
             vc.matchToColors = matchToColors
-            
-            print("MATCHS: \(matchToColors)")
             vc.highlights = model.components
             vc.cameFromFind = true
             
         } else {
             vc.photoComp = self.photoModels[self.currentIndex]
             let filePath = self.photoModels[self.currentIndex].filePath
-//            urlString = URL(string: "\(folderURL)\(filePath)")
             urlString = folderURL.appendingPathComponent(filePath)
             self.changedTerms = vc
             vc.cameFromFind = false
@@ -438,21 +420,13 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         return false
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     @objc func didPanWith(gestureRecognizer: UIPanGestureRecognizer) {
         switch gestureRecognizer.state {
         case .began:
-            print("Dismissing")
             self.currentViewController.scrollView.isScrollEnabled = false
             self.transitionController.isInteractive = true
-            //let _ = self.navigationController?.popViewController(animated: true)
             self.dismiss(animated: true, completion: nil)
         case .ended:
-//            print("ended")
             if self.transitionController.isInteractive {
                 self.currentViewController.scrollView.isScrollEnabled = true
                 self.transitionController.isInteractive = false
@@ -537,38 +511,36 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
 
 extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         if currentIndex == 0 {
             return nil
         }
-        print("NEXTTTT!!! \(view.bounds)")
+        
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(PhotoZoomViewController.self)") as! PhotoZoomViewController
         vc.delegate = self
         vc.imageSize = photoSize
         vc.folderURL = folderURL
-//        vc.highlightColor = highlightColor
         var urlString = URL(string: "")
         if cameFromFind {
             let model = self.findModels[self.currentIndex - 1]
             let filePath = model.photo.filePath
-//            urlString = URL(string: "\(folderURL)\(filePath)")
+            
             urlString = folderURL.appendingPathComponent(filePath)
             vc.matchToColors = matchToColors
             vc.highlights = model.components
             vc.cameFromFind = true
         } else {
             let filePath = self.photoModels[self.currentIndex - 1].filePath
-//            urlString = URL(string: "\(folderURL)\(filePath)")
+            
             urlString = folderURL.appendingPathComponent(filePath)
             vc.photoComp = self.photoModels[self.currentIndex - 1]
             vc.cameFromFind = false
-//            self.changedTerms = vc
-//            changedTerms?.returnTerms(matchToColorsR: matchToColors)
         }
         
         vc.url = urlString
-        guard let zoomVC = viewController as? PhotoZoomViewController else { print("NONONONO"); return nil}
+        guard let zoomVC = viewController as? PhotoZoomViewController else { return nil }
         vc.index = zoomVC.index - 1
         
         self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
@@ -588,34 +560,27 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
             }
         }
         
-        
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(PhotoZoomViewController.self)") as! PhotoZoomViewController
         vc.delegate = self
         self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
         vc.imageSize = photoSize
         vc.folderURL = folderURL
-//        vc.highlightColor = highlightColor
         
         var urlString = URL(string: "")
         if cameFromFind {
-//            let filePath = self.findModels[self.currentIndex + 1].photo.filePath
-//            urlString = URL(string: "\(folderURL)\(filePath)")
-//
             let model = self.findModels[self.currentIndex + 1]
             let filePath = model.photo.filePath
-//            urlString = URL(string: "\(folderURL)\(filePath)")
+            
             urlString = folderURL.appendingPathComponent(filePath)
             vc.matchToColors = matchToColors
             vc.highlights = model.components
             vc.cameFromFind = true
         } else {
             let filePath = self.photoModels[self.currentIndex + 1].filePath
-//            urlString = URL(string: "\(folderURL)\(filePath)")
+            
             urlString = folderURL.appendingPathComponent(filePath)
             vc.photoComp = self.photoModels[self.currentIndex + 1]
             vc.cameFromFind = false
-//            self.changedTerms = vc
-//            changedTerms?.returnTerms(matchToColorsR: matchToColors)
         }
         
         vc.url = urlString
@@ -632,7 +597,6 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
         if completed {
             let index = currentVC.index
             currentVC.returnNumber = self
-            print("INDEX: \(index)")
             currentIndex = index
         }
         previousViewControllers.forEach { vc in
@@ -663,11 +627,8 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
                 cacheButton.setImage(UIImage(named: "NotCachedThin"), for: .normal)
                 cacheButton.tintColor = UIColor(hexString: "5287B6")
             }
-            
         }
-        
     }
-    
 }
 
 extension PhotoPageContainerViewController: PhotoZoomViewControllerDelegate {
@@ -700,34 +661,33 @@ extension PhotoPageContainerViewController: ReturnCachedPhotos {
         
         photoModels[currentIndex].isDeepSearched = true
         
-        
         cacheButton.setImage(UIImage(named: "YesCachedThin"), for: .normal)
         cacheButton.tintColor = UIColor(named: "FeedbackGradientRight")
         
-        print("give")
         if popup == "Keep" {
-            let alertView = SPAlertView(title: "Kept cached photos!", message: "Tap to dismiss", preset: SPAlertPreset.done)
+            let keptCachedPhotos = NSLocalizedString("keptCachedPhotos", comment: "Multifile def=Kept cached photos!")
+            
+            let alertView = SPAlertView(title: keptCachedPhotos, message: tapToDismiss, preset: SPAlertPreset.done)
             alertView.duration = 4
             alertView.present()
         } else if popup == "Finished" {
-            let alertView = SPAlertView(title: "Caching done!", message: "Tap to dismiss", preset: SPAlertPreset.done)
+            let cachingDoneExclaim = NSLocalizedString("cachingDoneExclaim", comment: "Multifile def=Caching done!")
+            
+            let alertView = SPAlertView(title: cachingDoneExclaim, message: tapToDismiss, preset: SPAlertPreset.done)
             alertView.duration = 4
             alertView.present()
             
         }
+        
         if let firstPhoto = photos.first {
             photoModels[currentIndex] = firstPhoto
             currentViewController.photoComp = firstPhoto
             changeCache?.cached(cached: true, photo: firstPhoto, index: currentIndex)
-        } else {
-            print("NO PHOTO>>>>!")
         }
-        
     }
 }
 
 extension PhotoPageContainerViewController: ReturnSortedTerms {
-    
     func hereAreCurrentLists(currentSelected: [EditableFindList], currentText: String, object: MatchesLabelObject) {
     }
     
@@ -751,9 +711,6 @@ extension PhotoPageContainerViewController: ReturnSortedTerms {
     
     func triedToEditWhilePaused() {
     }
-    
-    
-    
 }
 extension PhotoPageContainerViewController {
     func pressFind() {
@@ -778,7 +735,7 @@ extension PhotoPageContainerViewController {
         
         customView.returnTerms = self
         customView.highlightColor = highlightColor
-//        customView.
+        
         self.giveNumber = customView
         
         self.changeFindbar = customView
@@ -795,8 +752,7 @@ extension PhotoPageContainerViewController {
 extension PhotoPageContainerViewController: ReturnHowManyMatches {
     
     func howMany(number: Int, searchInCache: Bool) {
-//        howMany.
-        print("photo cont.... \(number), matchCount: \(matchToColors.count)")
+        
         if matchToColors.count == 0 {
             giveNumber?.howMany(number: number, inCache: searchInCache, noSearchTerms: true)
         } else {

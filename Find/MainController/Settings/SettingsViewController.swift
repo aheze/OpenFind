@@ -471,12 +471,10 @@ extension SettingsViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let helpViewController = storyboard.instantiateViewController(withIdentifier: "DefaultHelpController") as! DefaultHelpController
         
-        let help = NSLocalizedString("help", comment: "Settings def=Help")
+        let help = NSLocalizedString("help", comment: "Multipurpose def=Help")
         helpViewController.title = help
         helpViewController.helpJsonKey = "SettingsHelpArray"
         
-//        helpViewController.title = "Find Help"
-//        helpViewController.helpJsonKey = "HistoryFindHelpArray"
         let navigationController = UINavigationController(rootViewController: helpViewController)
         navigationController.view.backgroundColor = UIColor.clear
         navigationController.navigationBar.tintColor = UIColor.white

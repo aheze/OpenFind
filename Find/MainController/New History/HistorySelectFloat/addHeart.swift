@@ -9,7 +9,6 @@
 import UIKit
 
 extension HPhotoCell {
-    
     func addHeart(add: Bool) {
         if add == true {
             UIView.animate(withDuration: 0.4, animations: {

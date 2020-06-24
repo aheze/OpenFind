@@ -16,35 +16,28 @@ extension NewHistoryViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: collectionView.frame.width, height: 50)
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-//        switch kind {
-//        case UICollectionView.elementKindSectionHeader:
-        if kind == UICollectionView.elementKindSectionHeader {
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "sectionHeaderID", for: indexPath) as! TitleSupplementaryView
-            if let date = sectionToDate[indexPath.section] {
-                let readableDate = date.convertDateToReadableString()
-                headerView.todayLabel.text = readableDate
-            }
-            indexToHeader[indexPath.section] = headerView
-            return headerView
-        } else {
-            print("footer?")
-            return UICollectionReusableView()
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "sectionHeaderID", for: indexPath) as! TitleSupplementaryView
+        if let date = sectionToDate[indexPath.section] {
+            let readableDate = date.convertDateToReadableString()
+            headerView.todayLabel.text = readableDate
         }
+        indexToHeader[indexPath.section] = headerView
+        return headerView
+        
     }
     
     func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      sizeForItemAt indexPath: IndexPath) -> CGSize {
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right)) / 3
-    return CGSize(width: itemSize, height: itemSize)
+        return CGSize(width: itemSize, height: itemSize)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     
@@ -57,25 +50,17 @@ extension NewHistoryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
         cell.layer.masksToBounds = true
-//        cell.
         if let hisModel = indexToData[indexPath.section] {
-//            let totalSectionCount = hisModel.count
             let (shouldRound, cornerMasks) = calculateCornerRadius(indexPath: indexPath)
-            
-//            let newCornerMasks: CACornerMask = cornerMasks
             if shouldRound {
                 cell.layer.cornerRadius = 4
                 cell.layer.maskedCorners = cornerMasks
             } else {
                 cell.layer.cornerRadius = 0
             }
-//            print("YES PATH")
             let historyModel = hisModel[indexPath.item]
-//            print("FOLD: \(folderURL)")
             let urlPath = historyModel.filePath
             let finalURL = folderURL.appendingPathComponent(urlPath)
-//            let finalURL = startURL.appendingPathExtension("jpg")
-            
             
             cell.imageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             cell.imageView.sd_imageTransition = .fade
@@ -95,9 +80,7 @@ extension NewHistoryViewController: UICollectionViewDelegateFlowLayout {
                 cell.cachedView.alpha = 0
             }
             
-//            print("CELL (\(indexPath)) IS SELECTed: \(cell.isSelected)")
             if indexPathsSelected.contains(indexPath) {
-//                print("contains select")
                 UIView.animate(withDuration: 0.1, animations: {
                     
                     collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
@@ -106,9 +89,7 @@ extension NewHistoryViewController: UICollectionViewDelegateFlowLayout {
                     cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
                 })
             } else {
-//                print("contains DEselect")
                 UIView.animate(withDuration: 0.1, animations: {
-//                    cell.isSelected = false
                     collectionView.deselectItem(at: indexPath, animated: false)
                     cell.highlightView.alpha = 0
                     cell.checkmarkView.alpha = 0
@@ -128,6 +109,13 @@ extension NewHistoryViewController {
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         
         UIContextMenuConfiguration(identifier: indexPath as NSIndexPath, previewProvider: nil) { suggestedActions in
+            
+            let clearLoc = NSLocalizedString("clear", comment: "Multipurpose def=Clear")
+            let cancelLoc = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
+            let deleteLoc = NSLocalizedString("delete", comment: "Multipurpose def=Delete")
+            let tapToDismiss = NSLocalizedString("tapToDismiss", comment: "Multipurpose def=Tap to dismiss")
+            
+            
             guard let hisModel = self.indexToData[indexPath.section] else { print("NO CONTEXT"); return UIMenu(title: "No Actions")}
             let historyModel = hisModel[indexPath.item]
             
@@ -136,25 +124,28 @@ extension NewHistoryViewController {
             var heartMessage = ""
             var heartImage = UIImage()
             if historyModel.isHearted {
-                heartMessage = "Unheart"
+                heartMessage = NSLocalizedString("unheart", comment: "HistoryCollectionViewFiles def=Unheart")
                 heartImage = UIImage(systemName: "heart") ?? UIImage()
             } else {
-                heartMessage = "Heart"
+                heartMessage = NSLocalizedString("heart", comment: "HistoryCollectionViewFiles def=Heart")
                 heartImage = UIImage(systemName: "heart.fill") ?? UIImage()
             }
             
             var cacheMessage = ""
             var cacheImage = UIImage()
             if historyModel.isDeepSearched {
-                cacheMessage = "Uncache"
+                
+                cacheMessage = NSLocalizedString("uncache", comment: "HistoryCollectionViewFiles def=Uncache")
                 cacheImage = UIImage(named: "ContextNotCached") ?? UIImage()
             } else {
-                cacheMessage = "Cache"
+                cacheMessage = NSLocalizedString("cache", comment: "HistoryCollectionViewFiles def=Cache")
                 cacheImage = UIImage(named: "ContextCached") ?? UIImage()
             }
             
             // Create an action for copy
-            let find = UIAction(title: "Find", image: UIImage(systemName: "magnifyingglass")) { action in
+            
+            let findLoc = NSLocalizedString("findLoc", comment: "Multipurpose def=Find")
+            let find = UIAction(title: findLoc, image: UIImage(systemName: "magnifyingglass")) { action in
                 self.presentFromIndexpath(indexPath: indexPath, directFind: true)
                 // Perform copy
             }
@@ -168,11 +159,15 @@ extension NewHistoryViewController {
             }
             let cacheAction = UIAction(title: cacheMessage, image: cacheImage) { action in
                 if historyModel.isDeepSearched {
-                    let alert = UIAlertController(title: "Clear this photo's cache?", message: "Caching again will take a while...", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Clear", style: UIAlertAction.Style.destructive, handler: { _ in
+                    let clearThisCacheQuestion = NSLocalizedString("clearThisCacheQuestion", comment: "Multifile def=Clear this photo's cache?")
+                    let cachingAgainTakeAWhile = NSLocalizedString("cachingAgainTakeAWhile", comment: "Multifile def=Caching again will take a while...")
+                    
+                    
+                    let alert = UIAlertController(title: clearThisCacheQuestion, message: cachingAgainTakeAWhile, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: clearLoc, style: UIAlertAction.Style.destructive, handler: { _ in
                         self.uncachePhotos(at: [indexOfPhoto])
                     }))
-                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+                    alert.addAction(UIAlertAction(title: cancelLoc, style: UIAlertAction.Style.cancel, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                     
                 } else {
@@ -189,7 +184,7 @@ extension NewHistoryViewController {
                     attributes.lifecycleEvents.didAppear = {
                         self.doneAnimatingSEK?.doneAnimating()
                     }
-                   
+                    
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController
                     
@@ -208,7 +203,8 @@ extension NewHistoryViewController {
                     SwiftEntryKit.display(entry: cacheController, using: attributes)
                 }
             }
-            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { action in
+            let shareLoc = NSLocalizedString("shareLoc", comment: "HistoryCollectionViewFiles def=Share")
+            let share = UIAction(title: shareLoc, image: UIImage(systemName: "square.and.arrow.up")) { action in
                 
                 let shareObject = HistorySharing(filePath: historyModel.filePath, folderURL: self.folderURL)
                 let activityViewController = UIActivityViewController(activityItems: [shareObject], applicationActivities: nil)
@@ -231,27 +227,34 @@ extension NewHistoryViewController {
                     tempController?.present(activityViewController, animated: true, completion: nil)
                 }
             }
-            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { action in
+            let delete = UIAction(title: deleteLoc, image: UIImage(systemName: "trash"), attributes: .destructive) { action in
                 let cantBeUndone = NSLocalizedString("cantBeUndone", comment: "Multipurpose def=This action can't be undone.")
                 
-                let alert = UIAlertController(title: "Delete this photo?", message: cantBeUndone, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
+                let deleteThisPhotoQuestion = NSLocalizedString("deleteThisPhotoQuestion", comment: "Multifile def=Delete photo?")
+                let photoDeleted = NSLocalizedString("photoDeleted", comment: "HistoryCollectionViewFiles def=Photo Deleted!")
+                
+                let alert = UIAlertController(title: deleteThisPhotoQuestion, message: cantBeUndone, preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: deleteLoc, style: UIAlertAction.Style.destructive, handler: { _ in
                     self.deletePhotoAt(photoIndex: indexOfPhoto)
-                    let alertView = SPAlertView(title: "Photo Deleted!", message: "Tap to dismiss", preset: SPAlertPreset.done)
+                    let alertView = SPAlertView(title: photoDeleted, message: tapToDismiss, preset: SPAlertPreset.done)
                     alertView.duration = 2.6
                     alertView.present()
                 }))
-                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: cancelLoc, style: UIAlertAction.Style.cancel, handler: nil))
                 self.present(alert, animated: true, completion: nil)
                 // Perform delete
             }
             
-            let help = UIAction(title: "Help", image: UIImage(systemName: "questionmark")) { action in
+            let helpLoc = NSLocalizedString("help", comment: "Multipurpose def=Help")
+            let help = UIAction(title: helpLoc, image: UIImage(systemName: "questionmark")) { action in
                 SwiftEntryKitTemplates.displayHistoryHelp()
             }
-                    // Empty menu for demonstration purposes
+            // Empty menu for demonstration purposes
+            
+            let actionsLoc = NSLocalizedString("actionsLoc", comment: "HistoryCollectionViewFiles def=Actions")
             if self.selectButtonSelected == false {
-                return UIMenu(title: "Actions", children: [find, heart, cacheAction, share, delete, help])
+                return UIMenu(title: actionsLoc, children: [find, heart, cacheAction, share, delete, help])
             } else {
                 return nil
             }
@@ -261,9 +264,7 @@ extension NewHistoryViewController {
     }
     func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
         animator.addCompletion {
-            print("interact")
             if let identifier = configuration.identifier as? IndexPath {
-                print("letet")
                 self.presentFromIndexpath(indexPath: identifier)
             }
         }
@@ -276,10 +277,6 @@ extension NewHistoryViewController {
             numberOfSelected = 0
             var reloadPaths = [IndexPath]()
             for indexP in indexPathsSelected {
-//                print("indPPP")
-                
-//                let indexPath = IndexPath(item: indexP, section: 0)
-//                print("indexP deselect: \(indexP)")
                 collectionView.deselectItem(at: indexP, animated: false)
                 if let cell = collectionView.cellForItem(at: indexP) as? HPhotoCell {
                     UIView.animate(withDuration: 0.1, animations: {
@@ -289,27 +286,17 @@ extension NewHistoryViewController {
                     })
                 } else {
                     reloadPaths.append(indexP)
-    //                collectionView.reloadItems(at: [indexPath])
-//                    print("Not visible")
                 }
-                
             }
             collectionView.reloadItems(at: reloadPaths)
             indexPathsSelected.removeAll()
-//            print("deselc!!!")
-//            print(indexPathsSelected)
         } else {
-            
-//            print("select")
             var num = 0
             var reloadPaths = [IndexPath]()
             for i in 0..<collectionView.numberOfSections {
                 for j in 0..<collectionView.numberOfItems(inSection: i) {
                     num += 1
                     let indP = IndexPath(row: j, section: i)
-                    
-    //                let indexPath = IndexPath(item: indexP, section: 0)
-//                    print("indexP select: \(indP)")
                     if !indexPathsSelected.contains(indP) {
                         indexPathsSelected.append(indP)
                         collectionView.selectItem(at: indP, animated: true, scrollPosition: [])
@@ -321,7 +308,6 @@ extension NewHistoryViewController {
                             })
                         } else {
                             reloadPaths.append(indP)
-    //                        print("Not visible")
                         }
                     }
                     
@@ -335,8 +321,6 @@ extension NewHistoryViewController {
     
     func presentFromIndexpath(indexPath: IndexPath, directFind: Bool = false) {
         if let currentIndex = indexPathToIndex[indexPath] {
-//            isPresentingState = true
-            
             if let cell = collectionView.cellForItem(at: indexPath) as? HPhotoCell {
                 guard let hisModel = self.indexToData[indexPath.section] else { print("NO CELL MODEL"); return }
                 let historyModel = hisModel[indexPath.item]
@@ -349,7 +333,7 @@ extension NewHistoryViewController {
             }
             
             let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
-                            "PhotoPageContainerViewController") as! PhotoPageContainerViewController
+                "PhotoPageContainerViewController") as! PhotoPageContainerViewController
             mainContentVC.title = "PhotoPageContainerViewController"
             self.selectedIndexPath = indexPath
             mainContentVC.transitioningDelegate = mainContentVC.transitionController
@@ -395,13 +379,8 @@ extension NewHistoryViewController {
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        print("did")
-        //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
-//        cell.isHighlighted = true
         if selectButtonSelected == true {
-//            print("seleeeect")
             if !indexPathsSelected.contains(indexPath) {
-                print("Doesnt conatin \(indexPath)")
                 indexPathsSelected.append(indexPath)
                 numberOfSelected += 1
                 if let cell = collectionView.cellForItem(at: indexPath) as? HPhotoCell {
@@ -413,16 +392,13 @@ extension NewHistoryViewController {
                 }
             }
             
-                
         } else {
-//            print("false")
             collectionView.deselectItem(at: indexPath, animated: true)
             presentFromIndexpath(indexPath: indexPath)
             
         }
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        print("deselecting at indexpath")
         if selectButtonSelected == true {
             indexPathsSelected.remove(object: indexPath)
             numberOfSelected -= 1

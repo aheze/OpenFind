@@ -11,8 +11,9 @@ import UIKit
 import SnapKit
 import SwiftEntryKit
 
-class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, PaperOnboardingDataSource {
-//    let getStartedButton = UIButton()
+    class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, PaperOnboardingDataSource {
+    
+    let loc = LaunchLocalization()
     
     @IBOutlet weak var paperOnboarding: PaperOnboarding!
     
@@ -58,8 +59,8 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
       return [
         OnboardingItemInfo(informationImage: UIImage(named: "Swelcome")!,
-                                      title: "Welcome to Find",
-                                description: "Swipe to get started",
+                           title: loc.welcomeToFind,
+                                description: loc.swipeToGetStarted,
                                    pageIcon: UIImage(),
                                    color: UIColor(named: "OnboardingGray")!,
                                  titleColor: UIColor.black,
@@ -68,8 +69,8 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
                             descriptionFont: UIFont.systemFont(ofSize: 17)),
         
         OnboardingItemInfo(informationImage: UIImage(named: "Swhatis")!,
-                   title: "What is Find?",
-             description: "Find is Command+F for camera. Find words in books, worksheets, nutrition labels... Anywhere as long as there's text!",
+                   title: loc.whatIsFind,
+             description: loc.findIsCommandFForCamera,
                 pageIcon: UIImage(named: "1icon")!,
                 color: UIColor(named: "OnboardingGray")!,
               titleColor: UIColor.black,
@@ -78,8 +79,8 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
          descriptionFont: UIFont.systemFont(ofSize: 17)),
         
         OnboardingItemInfo(informationImage: UIImage(named: "Ssearchfield")!,
-                   title: "Find words",
-             description: "Tap the Search Field at the top of the screen",
+                   title: loc.findWords,
+             description: loc.tapSearchField,
                 pageIcon: UIImage(named: "2icon")!,
                 color: UIColor(named: "OnboardingGray")!,
               titleColor: UIColor.black,
@@ -88,8 +89,8 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
          descriptionFont: UIFont.systemFont(ofSize: 17)),
 
         OnboardingItemInfo(informationImage: UIImage(named: "Sshutter")!,
-                   title: "Take photos",
-             description: "Tap the shutter button. Your photos will appear in your History, where you can Find from them again and again and again...",
+                           title: loc.takePhotos,
+                           description: loc.tapShutterButton,
                 pageIcon: UIImage(named: "3icon")!,
                    color: UIColor(named: "OnboardingGray")!,
               titleColor: UIColor.black,
@@ -98,8 +99,8 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
          descriptionFont: UIFont.systemFont(ofSize: 17)),
 
        OnboardingItemInfo(informationImage: UIImage(named: "Smenu")!,
-                  title: "Access the Menu",
-            description: "Your History, Lists, and Settings are here. Check it out!",
+                          title: loc.accessMenu,
+                          description: loc.yourHistoryListsAndSettingsHere,
                pageIcon: UIImage(named: "4icon")!,
                   color: UIColor(named: "OnboardingGray")!,
              titleColor: UIColor.black,
@@ -108,8 +109,8 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
         descriptionFont: UIFont.systemFont(ofSize: 17)),
        
        OnboardingItemInfo(informationImage: UIImage(named: "Sjitter")!,
-                  title: "Before you start...",
-            description: "To ensure the most accurate results, please make sure to hold your phone as steady as possible.",
+                          title: loc.beforeYouStart,
+                          description: loc.ensureAccuracy,
                pageIcon: UIImage(named: "5icon")!,
                   color: UIColor(named: "OnboardingGray")!,
              titleColor: UIColor.black,
@@ -126,6 +127,7 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
 class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, PaperOnboardingDataSource {
 //    let getStartedButton = UIButton()
     
+    let loc = HistoryTutorialLocalization()
     
     @IBOutlet weak var paperOnboarding: PaperOnboarding!
     
@@ -137,7 +139,6 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("TUTO")
         goButton.layer.cornerRadius = 6
         paperOnboarding.delegate = self
         paperOnboarding.dataSource = self
@@ -172,8 +173,8 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
       return [
         OnboardingItemInfo(informationImage: UIImage(named: "Hwelcome")!,
-                                      title: "History...",
-                                description: "...where all your photos live!",
+                           title: loc.welcomeToHistory,
+                           description: loc.whereAllYourPhotosLive,
                                    pageIcon: UIImage(),
                                    color: UIColor(named: "OnboardingGray")!,
                                  titleColor: UIColor.black,
@@ -182,8 +183,8 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
                             descriptionFont: UIFont.systemFont(ofSize: 17)),
         
         OnboardingItemInfo(informationImage: UIImage(named: "Hselect")!,
-                   title: "Select photos",
-             description: "Tap the select button, and the History Controls will pop up!",
+                           title: loc.selectPhotos,
+                           description: loc.tapSelectButtonAndPopUp,
                 pageIcon: UIImage(named: "1icon")!,
                    color: UIColor(named: "OnboardingGray")!,
               titleColor: UIColor.black,
@@ -192,8 +193,8 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
          descriptionFont: UIFont.systemFont(ofSize: 17)),
         
         OnboardingItemInfo(informationImage: UIImage(named: "Hfind")!,
-                   title: "Find from History",
-             description: "Select a few photos, then tap the Find icon. Then, enter the text that you want to find! ",
+                           title: loc.findFromHistory,
+                           description: loc.selectAFewPhotos,
                 pageIcon: UIImage(named: "2icon")!,
                    color: UIColor(named: "OnboardingGray")!,
               titleColor: UIColor.black,
@@ -202,8 +203,8 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
          descriptionFont: UIFont.systemFont(ofSize: 17)),
 
         OnboardingItemInfo(informationImage: UIImage(named: "Hcache")!,
-                   title: "Cache photos",
-             description: "Find uses OCR, which is often time consuming. Solution: Caching (pre-searching an image). Results will appear instantly when finding from Cached photos!",
+                           title: loc.cachePhotos,
+                           description: loc.cachingPhotos,
                 pageIcon: UIImage(named: "3icon")!,
                    color: UIColor(named: "OnboardingGray")!,
               titleColor: UIColor.black,
@@ -218,8 +219,8 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
     }
 }
 class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, PaperOnboardingDataSource {
-//    let getStartedButton = UIButton()
-    
+
+    let loc = ListsTutorialLocalization()
     
     @IBOutlet weak var paperOnboarding: PaperOnboarding!
     
@@ -267,8 +268,8 @@ class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, Pa
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
       return [
         OnboardingItemInfo(informationImage: UIImage(named: "Lwelcome")!,
-                                      title: "Lists...",
-                                description: "...find multiple words at the same time!",
+                           title: loc.welcomeToLists,
+                           description: loc.findMultipleWords,
                                    pageIcon: UIImage(),
                                    color: UIColor(named: "OnboardingGray")!,
                                  titleColor: UIColor.black,
@@ -277,8 +278,8 @@ class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, Pa
                             descriptionFont: UIFont.systemFont(ofSize: 17)),
         
         OnboardingItemInfo(informationImage: UIImage(named: "LaddList")!,
-                   title: "Make a list",
-             description: "Tap the Add button",
+                           title: loc.makeAList,
+                           description: loc.tapTheAddButton,
                 pageIcon: UIImage(named: "1icon")!,
                    color: UIColor(named: "OnboardingGray")!,
               titleColor: UIColor.black,
@@ -287,8 +288,8 @@ class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, Pa
          descriptionFont: UIFont.systemFont(ofSize: 17)),
         
         OnboardingItemInfo(informationImage: UIImage(named: "LaddMatch")!,
-                   title: "Add some matches",
-             description: "Matches are the words that Find searches for when you use the list",
+                           title: loc.addSomeMatches,
+                           description: loc.findSearchesForMatches,
                 pageIcon: UIImage(named: "2icon")!,
                    color: UIColor(named: "OnboardingGray")!,
               titleColor: UIColor.black,
@@ -297,8 +298,8 @@ class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, Pa
          descriptionFont: UIFont.systemFont(ofSize: 17)),
 
         OnboardingItemInfo(informationImage: UIImage(named: "Luse")!,
-                   title: "Use the list",
-             description: "Your lists will appear above the keyboard, whether you are Finding using the camera or from history",
+                           title: loc.useTheList,
+                           description: loc.yourListsWillAppear,
                 pageIcon: UIImage(named: "3icon")!,
                    color: UIColor(named: "OnboardingGray")!,
               titleColor: UIColor.black,
@@ -313,8 +314,8 @@ class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, Pa
     }
 }
 class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDelegate, PaperOnboardingDataSource {
-//    let getStartedButton = UIButton()
-    
+
+    let loc = ListsBuilderTutorialLocalization()
     
     @IBOutlet weak var paperOnboarding: PaperOnboarding!
     
@@ -362,8 +363,8 @@ class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDeleg
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
       return [
         OnboardingItemInfo(informationImage: UIImage(named: "Bwelcome")!,
-                                      title: "Lists Builder...",
-                                description: "...Start easily making lists!",
+                           title: loc.welcomeToListsBuilder,
+                           description: loc.startEasilyMakingLists,
                                    pageIcon: UIImage(),
                                    color: UIColor(named: "OnboardingGray")!,
                                  titleColor: UIColor.black,
@@ -372,8 +373,8 @@ class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDeleg
                             descriptionFont: UIFont.systemFont(ofSize: 17)),
         
         OnboardingItemInfo(informationImage: UIImage(named: "Badd")!,
-                   title: "Add a match",
-             description: "Matches (aka words) are what Find looks for when you use the list. To make one, just tap the placeholder that says 'Match'!",
+                           title: loc.addAMatch,
+                           description: loc.matchesAreWhatFindLooksFor,
                 pageIcon: UIImage(named: "1icon")!,
                    color: UIColor(named: "OnboardingGray")!,
               titleColor: UIColor.black,
@@ -382,8 +383,8 @@ class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDeleg
          descriptionFont: UIFont.systemFont(ofSize: 17)),
         
         OnboardingItemInfo(informationImage: UIImage(named: "Breturn")!,
-                   title: "Add more matches",
-             description: "Once you've typed in your first match, just tap 'next' on the keyboard! Repeat until satisfied.",
+                           title: loc.addMoreMatches,
+                           description: loc.onceYouveTypedInYourFirstMatch,
                 pageIcon: UIImage(named: "2icon")!,
                    color: UIColor(named: "OnboardingGray")!,
               titleColor: UIColor.black,
@@ -392,8 +393,8 @@ class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDeleg
          descriptionFont: UIFont.systemFont(ofSize: 17)),
 
         OnboardingItemInfo(informationImage: UIImage(named: "Bdelete")!,
-                   title: "Delete a match",
-             description: "Sometimes you got to delete a match. No feelings hurt, just swipe left and tap 'Delete'!",
+                           title: loc.deleteAMatch,
+                           description: loc.sometimesYouGotToDeleteAMatch,
                 pageIcon: UIImage(named: "3icon")!,
                    color: UIColor(named: "OnboardingGray")!,
               titleColor: UIColor.black,

@@ -8,11 +8,9 @@
 
 import UIKit
 
-
 protocol GetIconInfo: class {
     func returnNewIcon(iconName: String)
 }
-
 
 class SymbolsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ReceiveIcon, ScrolledToIcons {
     
@@ -24,19 +22,12 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     func receiveIcon(name: String) {
         print("icon recieved: \(name)")
-        //print(name)
+        
         populateSymbols()
         
         selectedIconName = name
     }
-    
  
-//    let realm = try! Realm()
-//    var recentSymbols: Results<RecentSymbol>?
-//    var hasRecent = false /// If there are recent lists, this becomes 1.
-    
-//    var recentLists = [String]()
-    
     var techList = [String]()
     var weatherList = [String]()
     var natureAndHealthList = [String]()
@@ -50,14 +41,16 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
     var numOfSecs = 0
     var numOfItemsInSec = [Int : Int]()
     
-//    sectionToCount[0] = techList.count
-//    sectionToCount[1] = weatherList.count
-//    sectionToCount[2] = speechList.count
-//    sectionToCount[3] = natureAndHealthList.count
-//    sectionToCount[4] = currencyList.count
-//    sectionToCount[5] = mathList.count
-//    sectionToCount[6] = numbersList.count
-    var referenceArray: [String] = ["Tech", "Weather", "Speech", "Nature", "Currency", "Math", "Numbers"]
+    let techLoc = NSLocalizedString("techLoc", comment: "SymbolsViewController def=Tech")
+    let weatherLoc = NSLocalizedString("weatherLoc", comment: "SymbolsViewController def=Weather")
+    let speechLoc = NSLocalizedString("speechLoc", comment: "SymbolsViewController def=Speech")
+    let natureLoc = NSLocalizedString("natureLoc", comment: "SymbolsViewController def=Nature")
+    let currencyLoc = NSLocalizedString("currencyLoc", comment: "SymbolsViewController def=Currency")
+    let mathLoc = NSLocalizedString("mathLoc", comment: "SymbolsViewController def=Math")
+    let numbersLoc = NSLocalizedString("numbersLoc", comment: "SymbolsViewController def=Numbers")
+    
+//    var referenceArrays: [String] = ["Tech", "Weather", "Speech", "Nature", "Currency", "Math", "Numbers"]
+    lazy var referenceArray: [String] = [techLoc, weatherLoc, speechLoc, natureLoc, currencyLoc, mathLoc, numbersLoc]
     
     var indexpathToSymbol = [IndexPath: String]()
     //var sectionToCategory = [Int: String]()
@@ -72,19 +65,8 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     var selectedIconName = "square.grid.2x2"
     
-//    func updateInfo() {
-//        //print("sdkfhskdf shdf sdsdf")
-//        print("icon:::: \(selectedIconName)")
-////        iconDelegate?.returnNewIcon(iconName: selectedIconName)
-//        //print("sdkfhskdf shdf sdsdf 123")
-//    }
-    
     @IBOutlet weak var collectionView: UICollectionView!
     let dictOfSymbols = [IndexMatcher: String]()
-    
-   // @IBAction func segmentedControl(_ sender: Any) {
-    //}
-   // @IBOutlet weak var segmentContainer: UIView!
     
     var sfSymbolArray: [String] = [String]()
     
@@ -108,28 +90,16 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
             
             if let cell = collectionView.cellForItem(at: currentSelectedIndex) as? SymbolCell {
                 cell.overlayView.alpha = 0
-//                print("LET")
-            } else {
-//                print("NONE")
             }
-//            collectionView.reloadItems(at: [currentSelectedIndex])
-//            collectionView.deselectItem(at: currentSelectedIndex, animated: false)
+            
             currentSelectedIndex = indexPath
             
-//            if let cell = collectionView.cellForItem(at: indexPath) as? SymbolCell {
-//                cell.overlayView.alpha = 0
-//                print("LET")
-//            } else {
-//                print("NONE")
-//            }
             selectedIconName = indexpathToSymbol[indexPath] ?? "square.grid.2x2"
             iconDelegate?.returnNewIcon(iconName: selectedIconName)
             
             
             collectionView.reloadItems(at: [indexPath])
             
-        } else {
-//            print("not current")
         }
     }
     
@@ -141,7 +111,6 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return sectionToCount[section] ?? 1
-        //return sfSymbolArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -149,21 +118,15 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
         cell.overlayView.layer.cornerRadius = 4
         
         if currentSelectedIndex == indexPath {
-//            print("True, \(indexPath)")
             cell.overlayView.alpha = 1
         } else {
-//            print("False, \(indexPath)")
             cell.overlayView.alpha = 0
         }
         
-        //var name = ""
     
         if let name = indexpathToSymbol[indexPath] {
             cell.name = name
-        } else {
-//            print("no! \(indexPath)")
         }
-        //cell.backgroundColor = UIColor.gray
         
         return cell
     }
@@ -192,15 +155,10 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
     let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "symbolsSectionHeader", for: indexPath) as! SymbolsSectionHeader
-        //headerView.todayLabel.text = "Text: \(indexPath.section)"
         var sectionName = ""
         sectionName = referenceArray[indexPath.section]
+        
         headerView.nameLabel.text = sectionName
-      
-        //let date = sectionToDate[indexPath.section]!
-       // let readableDate = convertDateToReadableString(theDate: date)
-        //headerView.todayLabel.text = readableDate
-        //headerView.clipsToBounds = false
         return headerView
     }
 
@@ -214,8 +172,6 @@ class SymbolCell: UICollectionViewCell {
     @IBOutlet weak var widthConstraint: NSLayoutConstraint!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
-//    var overlayView = UIView()
-    
     @IBOutlet weak var overlayView: UIView!
     var name = "" {
         didSet {
@@ -224,35 +180,10 @@ class SymbolCell: UICollectionViewCell {
                     let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
                     let newImage = UIImage(systemName: self.name, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "PureBlack") ?? .black, renderingMode: .alwaysOriginal)
                     self.imageView.image = newImage
-//                    let length = self.contentView.frame.size.width
-//                    self.widthConstraint.constant = length
-//                    self.heightConstraint.constant = length
-                   // self.imageView.contentMode = .scaleAspectFit
                 }
             }
         }
     }
-//    override var isSelected: Bool {
-//        didSet {
-//            if (isSelected) {
-//                let length = self.contentView.frame.size.width
-//                overlayView.alpha = 1
-//
-//                //var newView = UIView()
-////                overlayView.frame = (CGRect(x: 0, y: 0, width: length, height: length))
-////                overlayView.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-////                overlayView.layer.cornerRadius = 10
-////                //overlayView.tag = 010101
-////                contentView.insertSubview(overlayView, at: 0)
-//
-//            } else {
-//                overlayView.alpha = 0
-//               // if let newView = contentView.viewWithTag(010101) {
-////                    overlayView.removeFromSuperview()
-//               // }
-//            }
-//        }
-//    }
 }
 
 extension SymbolsViewController {
@@ -271,31 +202,22 @@ extension SymbolsViewController {
             print(collectionView.numberOfSections)
             if let count = sectionToCount[i] {
                 for j in 0..<count {
-                    //print(collectionView.numberOfItems(inSection: i))
-                    //print("CYCLE")
                     let indP = IndexPath(row: j, section: i)
                     var name = ""
                     switch i {
                     case 0:
-        //                print("0")
                         name = techList[j]
                     case 1:
-        //                print("1")
                         name = weatherList[j]
                     case 2:
-        //                 print("2")
                         name = speechList[j]
                     case 3:
-        //                print("3")
                         name = natureAndHealthList[j]
                     case 4:
-        //                print("4")
                         name = currencyList[j]
                     case 5:
-        //                print("5")
                         name = mathList[j]
                     case 6:
-        //                print("6")
                         name = numbersList[j]
                     default:
                         print("weird error NOT tempInt (is 0)")
@@ -334,12 +256,8 @@ extension SymbolsViewController {
         if !(hasFound) { for (index, tec) in mathList.enumerated() { if tec == name { firstOccurance = (5, index) } } }
         if !(hasFound) { for (index, spe) in numbersList.enumerated() { if spe == name { firstOccurance = (6, index) } } }
 
-        print("NAME:::")
-        print(name)
-        print(firstOccurance)
         let indP = IndexPath(item: firstOccurance.1, section: firstOccurance.0)
         collectionView.selectItem(at: indP, animated: false, scrollPosition: .centeredVertically)
         currentSelectedIndex = indP
-       // collectionView.scrollToItem(at: indP, at: .centeredVertically, animated: true)
     }
 }

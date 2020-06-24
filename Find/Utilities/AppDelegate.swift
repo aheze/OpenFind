@@ -16,16 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        //UIApplication.shared.statusBarStyle = .lightContent
         
         
         if let defaultRealmPath = Realm.Configuration.defaultConfiguration.fileURL {
-//            print("DEFUALT PATH: \(defaultRealmPath), string: \(defaultRealmPath.absoluteString), pat; \(defaultRealmPath.path)")
             if let bundleRealmPath = Bundle.main.url(forResource: "defaultSeeds", withExtension: "realm") {
-//                print("realm bundle path:  \(bundleRealmPath)")
-//                print("copy?")
                 if !FileManager.default.fileExists(atPath: defaultRealmPath.path) {
-//                    print("FIRST!!")
                     do {
                         try FileManager.default.copyItem(at: bundleRealmPath, to: defaultRealmPath)
                     } catch let error {

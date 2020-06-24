@@ -15,11 +15,8 @@ protocol ButtonPressed: class {
 class HistorySelectorView: UIView, ChangeNumberOfSelected, ChangeAttributes {
     
     func getRect() -> CGRect {
-//        print("origFrame: \(shareButton.frame)")
         let rect = stackView.convert(shareButton.frame, to: contentView)
         let finalRect = self.contentView.convert(rect, to: nil)
-//        print("rect float: \(rect)")
-//        print("new: \(finalRect)")
         return finalRect
     }
     func changeFloat(to: String) {
@@ -52,13 +49,15 @@ class HistorySelectorView: UIView, ChangeNumberOfSelected, ChangeAttributes {
         }
     }
     
-    func changeLabel(to: Int) {
-        if to == 1 {
+    func changeLabel(to number: Int) {
+        if number == 1 {
             photoSelectLabel.fadeTransition(0.1)
-            photoSelectLabel.text = "\(to) Photo Selected"
+            let photoSelected = NSLocalizedString("photoSelected", comment: "HistorySelect def=Photo Selected")
+            photoSelectLabel.text = "\(number) \(photoSelected)"
         } else {
             photoSelectLabel.fadeTransition(0.1)
-            photoSelectLabel.text = "\(to) Photos Selected"
+            let photosSelected = NSLocalizedString("photosSelected", comment: "HistorySelect def=Photos Selected")
+            photoSelectLabel.text = "\(number) \(photosSelected)"
         }
         
     }
@@ -76,18 +75,15 @@ class HistorySelectorView: UIView, ChangeNumberOfSelected, ChangeAttributes {
     
     
     @IBAction func findPressed(_ sender: UIButton) {
-        print("find")
         buttonPressedDelegate?.floatButtonPressed(button: "find")
     }
     
     @IBAction func heartPressed(_ sender: UIButton) {
-        print("heart")
         buttonPressedDelegate?.floatButtonPressed(button: "heart")
         
     }
     
     @IBAction func deletePressed(_ sender: UIButton) {
-        print("delete")
         buttonPressedDelegate?.floatButtonPressed(button: "delete")
     }
 
@@ -97,39 +93,6 @@ class HistorySelectorView: UIView, ChangeNumberOfSelected, ChangeAttributes {
     
     @IBAction func sharePressed(_ sender: Any) {
         buttonPressedDelegate?.floatButtonPressed(button: "share")
-//        buttonPressedDelegate?.floatButtonPressed(button: "help")
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let helpViewController = storyboard.instantiateViewController(withIdentifier: "DefaultHelpController") as! DefaultHelpController
-//        helpViewController.title = "Help"
-//        helpViewController.helpJsonKey = "HistoryFindHelpArray"
-//        helpViewController.goDirectlyToUrl = true
-//        helpViewController.directUrl = "https://zjohnzheng.github.io/FindHelp/History-HistoryControls.html"
-//
-//        let navigationController = UINavigationController(rootViewController: helpViewController)
-//        navigationController.view.backgroundColor = UIColor.clear
-//        navigationController.navigationBar.tintColor = UIColor.white
-//        navigationController.navigationBar.prefersLargeTitles = true
-//
-//        let navBarAppearance = UINavigationBarAppearance()
-//        navBarAppearance.configureWithOpaqueBackground()
-//        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-//        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-//        navBarAppearance.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-//        navigationController.navigationBar.standardAppearance = navBarAppearance
-//        navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
-//        navigationController.view.layer.cornerRadius = 10
-//        UINavigationBar.appearance().barTintColor = .black
-//        helpViewController.edgesForExtendedLayout = []
-//        var attributes = EKAttributes.centerFloat
-//        attributes.displayDuration = .infinity
-//        attributes.entryInteraction = .absorbTouches
-//        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-//        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-//        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-//        attributes.entryBackground = .color(color: .white)
-//        attributes.screenInteraction = .absorbTouches
-//        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
-//        SwiftEntryKit.display(entry: navigationController, using: attributes)
     }
     weak var buttonPressedDelegate: ButtonPressed?
     
@@ -152,7 +115,5 @@ class HistorySelectorView: UIView, ChangeNumberOfSelected, ChangeAttributes {
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        
     }
 }
