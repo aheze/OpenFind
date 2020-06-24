@@ -15,10 +15,6 @@ protocol InjectLists: class {
     func addList(list: EditableFindList)
     func resetWithLists(lists: [EditableFindList])
 }
-//protocol UpdateToolbar: class {
-//    func updateToolbar()
-//}
-/// Ramreel setup
 
 extension ViewController: ToolbarButtonPressed, SelectedList, StartedEditing {
   
@@ -33,11 +29,9 @@ extension ViewController: ToolbarButtonPressed, SelectedList, StartedEditing {
                 if let textFieldText = newSearchTextField.text {
                     var newText = textFieldText
                     newText.insert(string: "\u{2022}", ind: cursorPosition)
-                    print("\(cursorPosition)")
+                    
                     newSearchTextField.text = newText
                     
-                    
-//                        let positionOriginal = textField.beginningOfDocument
                     if let cursorLocation = newSearchTextField.position(from: newSearchTextField.beginningOfDocument, offset: cursorPosition + 1) {
                         newSearchTextField.selectedTextRange = newSearchTextField.textRange(from: cursorLocation, to: cursorLocation)
                     }
@@ -88,6 +82,7 @@ extension ViewController: ToolbarButtonPressed, SelectedList, StartedEditing {
         }
     }
 }
+
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             return selectedLists.count
@@ -105,11 +100,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
 
             cell.imageView.image = newImage
             
-//            print("cont size: \(cell.nameLabel.intrinsicContentSize)")
             if searchShrunk == true {
-                print("SHRUNK")
                 cell.imageRightC.constant = 0
-//                print("cont size: \(cell.nameLabel.intrinsicContentSize)")
                 UIView.animate(withDuration: 0.3, animations: {
                     cell.nameLabel.text = ""
                     cell.nameLabel.alpha = 0
@@ -117,18 +109,12 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
                 })
             } else {
                 cell.imageRightC.constant = 8
-                print("NOT SHRUNK")
-                print("cont size: \(cell.nameLabel.intrinsicContentSize)")
                 UIView.animate(withDuration: 0.3, animations: {
                 cell.nameLabel.text = list.name
                 cell.nameLabel.alpha = 1
                     cell.layoutIfNeeded()
                 })
             }
-
-
-
-            
 
         }
 
@@ -144,8 +130,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             selectedLists.remove(at: indexPath.item)
             searchCollectionView.deleteItems(at: [indexPath])
             
-//            searchCollectionView.reloadData()
-
             if selectedLists.count == 0 {
                 updateListsLayout(toType: "removeListsNow")
             }
@@ -197,7 +181,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             tempArray.append(singleList)
         }
 
-
         selectedLists.removeAll()
         searchCollectionView.reloadData()
         
@@ -221,25 +204,31 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         
         newSearchTextField.layer.cornerRadius = 8
         
+        let typeHereToFind = NSLocalizedString("typeHereToFind", comment: "SetUpSearchBar def=Type here to find...")
         
-        newSearchTextField.attributedPlaceholder = NSAttributedString(string: "Type here to find...",
+        newSearchTextField.attributedPlaceholder = NSAttributedString(string: typeHereToFind,
                                                                    attributes:
                                                                    [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.8784313725, green: 0.878935039, blue: 0.878935039, alpha: 0.75)])
-
         
         alternateWarningView.alpha = 0
         alternateWarningView.layer.cornerRadius = 6
         alternateWarningView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
         alternateWarningLabel.alpha = 0
-        alternateWarningLabel.text = "Only Portrait view is currently supported.\nPlease rotate your iPad to Portrait view, then relaunch the app."
+        
+        let onlyPortraitSupported = NSLocalizedString("onlyPortraitSupported", comment: "SetUpSearchBar def=Only Portrait view is currently supported.")
+        let rotateToPortrait = NSLocalizedString("rotateToPortrait", comment: "SetUpSearchBar def=Please rotate your iPad to Portrait view, then relaunch the app.")
+        
+//        alternateWarningLabel.text = "Only Portrait view is currently supported.\nPlease rotate your iPad to Portrait view, then relaunch the app."
+        alternateWarningLabel.text = "\(onlyPortraitSupported)\n\(rotateToPortrait)"
         
         warningView.alpha = 0
         warningView.layer.cornerRadius = 6
         warningView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
         warningLabel.alpha = 0
-        warningLabel.text = "Find is paused | Duplicates are not allowed"
+        let findPausedDuplicatesNotAllowed = NSLocalizedString("findPausedDuplicatesNotAllowed", comment: "SetUpSearchBar def=Find is paused | Duplicates are not allowed")
+        warningLabel.text = findPausedDuplicatesNotAllowed
         searchBarLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
         
@@ -258,15 +247,12 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             toolbarLeftC = make.left.equalTo(0).offset(0).constraint
             toolbarTopC = make.top.equalTo(0).offset(deviceSize.height).constraint
         }
-//        newSearchTextField.inputAccessoryView = toolbar
     }
     
     func removeAllLists() {
         var tempArray = [EditableFindList]()
         for singleList in selectedLists {
-//            let indP = IndexPath(item: index, section: 0)
             tempArray.append(singleList)
-//            calculateWhereToPlaceComponent(component: singleList, placeInSecondCollectionView: indP)
         }
         
         
@@ -274,50 +260,22 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         searchCollectionView.reloadData()
         for temp in tempArray {
             injectListDelegate?.addList(list: temp)
-//            calculateWhereToInsert(component: temp)
         }
-//        if insertingListsCount == 0 {
-//            updateListsLayout(toType: "doneAndShrink")
-//        } else {
-//            isSchedulingList = true
-//        }
         updateListsLayout(toType: "removeListsNow")
         sortSearchTerms()
     }
-//    func calculateWhereToInsert(component: EditableFindList) {
-//        let componentOrderID = component.orderIdentifier
-////        print("calc")
-//        var indexPathToAppendTo = 0
-//        for (index, singleComponent) in editableListCategories.enumerated() {
-//            ///We are going to check if the singleComponent's order identifier is smaller than componentOrderID.
-//            ///If it is smaller, we know we must insert the cell ONE to the right of this indexPath.
-//            if singleComponent.orderIdentifier < componentOrderID {
-//                indexPathToAppendTo = index + 1
-//            }
-//        }
-////        print("index... \(indexPathToAppendTo)")
-//        ///Now that we know where to append the green cell, let's do it!
-//        editableListCategories.insert(component, at: indexPathToAppendTo)
-//        let newIndexPath = IndexPath(item: indexPathToAppendTo, section: 0)
-////        listsCollectionView.insertItems(at: [newIndexPath])
-//        injectListDelegate?.addList(list: component)
-//
-//    }
+
     func updateListsLayout(toType: String) {
         
         switch toType {
         case "onlyTextBox":
-            print("onlyText")
             searchShrunk = false
             searchCollectionRightC.constant = 0
             searchBarLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
             searchCollectionView.reloadData()
-//            darkBlurEffectHeightConstraint.constant = self.view.bounds.size.height
-//            NotificationCenter.default.post(name: .changeSearchListSize, object: nil, userInfo: [0: false])
             searchTextLeftC.constant = 8
             UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
                 self.newSearchTextField.backgroundColor = UIColor(named: "OpaqueBlur")
-//                self.darkBlurEffect.alpha = 0.2
                 self.view.layoutIfNeeded()
             }, completion: nil)
             
@@ -329,8 +287,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
                 searchBarLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
                 searchCollectionView.reloadData()
             }
-//            NotificationCenter.default.post(name: .changeSearchListSize, object: nil, userInfo: [0: false])
-            
             searchTextLeftC.constant = 8
             searchTextTopC.constant = 180
             searchCollectionTopC.constant = 60
@@ -370,57 +326,26 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         case "doneAndShrink":
             print("Done, shrinking lists")
             
-//            searchShrunk = true
             searchCollectionView.performBatchUpdates({
                 self.searchShrunk = true
             }, completion: { _ in
                 self.searchCollectionView.reloadData()
             })
             
-//
-//
-            
-//            darkBlurEffectHeightConstraint.constant = 100
-//            for j in 0..<searchCollectionView.numberOfItems(inSection: 0) {
-//                let indP = IndexPath(item: j, section: 0)
-//                if let cell = searchCollectionView.cellForItem(at: indP) as! SearchCell {
-//                    cell.labelRigh
-//                }
-////                collectionView.deselectItem(at: IndexPath(row: j, section: 0), animated: false)
-//            }
-            
-//            var listOfInds = [IndexPath]()
-//            for (index, cell) in selectedLists.enumerated() {
-//                let indP = IndexPath(item: index, section: 0)
-//                listOfInds.append(indP)
-//            }
-//
-//
-//            searchCollectionView.reloadData()
-//            searchCollectionView.reloadItems(at: <#T##[IndexPath]#>)
-            
-//            NotificationCenter.default.post(name: .changeSearchListSize, object: nil, userInfo: [0: true])
             switch selectedLists.count {
             case 0:
                 print("nothing")
             case 1:
                 print("1")
                 searchTextLeftC.constant = 71
-//                for (index, singleIndex) in selectedLists.enumerated() {
-//                    let indP = IndexPath(item: index, section: 0)
-//                    let cell = searchCollectionView.cellForItem(at: indP)
-//
-//                }
             case 2:
                 searchTextLeftC.constant = 71 + 55 + 8
             case 3:
                 searchTextLeftC.constant = 197
             default:
-//                print("default")
                 searchTextLeftC.constant = 197
                 print("search frame: \(newSearchTextField.frame)")
                 let availibleWidth = searchContentView.frame.width - 189
-//                layout = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
                 searchBarLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
                 searchCollectionRightC.constant = availibleWidth
                 print(availibleWidth)
@@ -465,11 +390,9 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             let splits = updatedString.components(separatedBy: "\u{2022}")
             let uniqueSplits = splits.uniques
             if uniqueSplits.count != splits.count {
-                print("DUPD UPD UPD UPDU PDPUDP")
                 updateMatchesNumber(to: 0)
                 resetFastHighlights()
                 allowSearch = false
-//                resetFastHighlights()
                 shouldResetHighlights = true
                 showDuplicateAlert(show: true)
             } else {
@@ -485,7 +408,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        print("CLEAR!!!!")
         finalTextToFind = ""
         allowSearch = true
         shouldResetHighlights = false
@@ -508,7 +430,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             UIView.animate(withDuration: 0.5, animations: {
                 self.warningView.alpha = 0
                 self.warningLabel.alpha = 0
-//                self.warningLabel.text = "Find is paused | Duplicates are not allowed"
                 self.view.layoutIfNeeded()
             })
         }

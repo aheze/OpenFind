@@ -22,11 +22,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     //MARK: Cancel cache
     
-    //@IBOutlet weak var cancelGradientView: UIView!
     
-    //@IBOutlet weak var cancelBaseView: UIView!
-    
-   
     @IBOutlet weak var cancelView: UIView!
     @IBOutlet weak var cancelImageView: UIImageView!
     @IBOutlet weak var cancelLabel: UILabel!
@@ -37,9 +33,6 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     let rimView = UIView()
     let tintView = UIView()
-//    let swipeView = UIView()
-    
-//    var photoSize = CGSize(width: 0, height: 0)
     
     
     @IBAction func keepButtonPressed(_ sender: Any) {
@@ -49,9 +42,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
         SwiftEntryKit.dismiss()
     }
     @IBAction func backButtonPressed(_ sender: Any) {
-//        startFinding()
         animateChange(toCancel: false)
-        
     }
     
     
@@ -59,20 +50,10 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var baseView: UIView!
     
     
-//    let deviceSize = screenBounds.size
-    
     var aspectRatioWidthOverHeight : CGFloat = 0
-//    var aspectRatioSucceeded : Bool = false
-//    var sizeOfPixelBufferFast : CGSize = CGSize(width: 0, height: 0)
     
-    
-//    var originalPhotos = [HistoryModel]()
     var photos = [EditableHistoryModel]()
     var alreadyCachedPhotos = [EditableHistoryModel]()
-//    var alreadyCached = [EditableHistoryModel]()
-    
-    
-    
     
     
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
@@ -83,13 +64,11 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     var statusOk = true ///OK = Running, no cancel
     
-
+    
     var isResuming = false
     
     private var gradient: CAGradientLayer!
     private var newGrad:CAGradientLayer!
-    
-//    var numberCachedLabel = UILabel()
     
     @IBOutlet weak var cancelButton: UIButton!
     var presentingCancelPrompt = false
@@ -100,12 +79,12 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBAction func cancelButtonPressed(_ sender: Any) {
         print("dismiss?")
         statusOk = false
-        cancelButton.setTitle("Cancelling...", for: .normal)
         
-        
+        let cancelling = NSLocalizedString("cancelling", comment: "CachingViewController def=Cancelling...")
+        cancelButton.setTitle(cancelling, for: .normal)
         
     }
-
+    
     
     @IBOutlet weak var numberCachedLabel: UILabel!
     
@@ -117,9 +96,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
         gradient.frame = collectionSuperview.bounds
-//        newGrad.frame = cancelGradientView.bounds
     }
     
     override func viewDidLoad() {
@@ -128,16 +105,9 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
         cancelView.isHidden = true
         backButton.isHidden = true
         activityIndicator.startAnimating()
-//        cancelView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-//        startFinding()
     }
     
     func doneAnimating() {
-//        setUpViews()
-//        cancelView.isHidden = true
-//        backButton.isHidden = true
-//        cancelView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-        
         startFinding()
     }
     override func viewWillLayoutSubviews() {
@@ -156,7 +126,6 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
         if toCancel == true {
             self.cancelView.isHidden = false
             self.backButton.isHidden = false
-//            self.statusOk = false
             UIView.animate(withDuration: 0.4, animations: {
                 self.baseView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
                 self.cancelView.transform = CGAffineTransform.identity
@@ -168,7 +137,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
                 self.rimView.alpha = 0
                 self.tintView.alpha = 0
                 self.activityIndicator.alpha = 0
-//                self.swipeView.alpha = 0
+                //                self.swipeView.alpha = 0
                 
             }, completion: { _ in
                 self.baseView.isHidden = true
@@ -176,7 +145,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
                 self.rimView.isHidden = true
                 self.tintView.isHidden = true
                 self.activityIndicator.isHidden = true
-//                self.swipeView.isHidden = true
+                //                self.swipeView.isHidden = true
             })
             
         } else {
@@ -184,11 +153,12 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
             self.rimView.isHidden = false
             self.tintView.isHidden = false
             self.activityIndicator.isHidden = false
-//            self.swipeView.isHidden = false
+            //            self.swipeView.isHidden = false
             
             self.statusOk = true
             
-            cancelButton.setTitle("Cancel", for: .normal)
+            let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
+            cancelButton.setTitle(cancel, for: .normal)
             
             UIView.animate(withDuration: 0.4, animations: {
                 self.baseView.transform = CGAffineTransform.identity
@@ -201,7 +171,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
                 self.rimView.alpha = 1
                 self.tintView.alpha = 1
                 self.activityIndicator.alpha = 1
-//                self.swipeView.alpha = 1
+                //                self.swipeView.alpha = 1
                 
                 
             }, completion: { _ in
@@ -221,24 +191,13 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cacheCellid", for: indexPath) as! CacheCell
         let historyModel = photos[indexPath.item]
-//        let historyModel = hisModel[indexPath.item]
-//        print("CELLFORROW")
-        let filePath = historyModel.filePath
-//        let urlPath = "\(folderURL)\(filePath)"
-//        print(urlPath)
         
-//        let finalUrl = URL(string: urlPath)
+        let filePath = historyModel.filePath
         let finalUrl = folderURL.appendingPathComponent(filePath)
         cell.imageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.imageView.sd_imageTransition = .fade
         cell.imageView.sd_setImage(with: finalUrl)
         
-//        if historyModel.isDeepSearched == true {
-//            cell.cacheCheckView.image = UIImage(named: "CachedIconThick")
-//            cell.cacheCheckView.alpha = 1
-//        } else {
-//            cell.cacheCheckView.alpha = 0
-//        }
         
         return cell
     }
@@ -249,71 +208,41 @@ extension CachingViewController {
     
     func keepAlreadyCached() {
         DispatchQueue.main.async {
-//            var alreadyCachedPhotos = [EditableHistoryModel]()
-//
-//            self.cancelButton.isEnabled = false
-//
-//
-////            let alertView = SPAlertView(title: "Kept cached photos!", message: "Tap to dismiss", preset: SPAlertPreset.done)
-////            alertView.duration = 2.2
-////            alertView.present()
-//
-//            for photo in self.photos {
-//                if photo.isDeepSearched == true {
-////                    let histModel = HistoryModel()
-////                    histModel.filePath = photo.filePath
-////                    histModel.dateCreated = photo.dateCreated
-////                    histModel.isDeepSearched = photo.isDeepSearched
-////                    histModel.isHearted = photo.isHearted
-////                    for cont in photo.contents {
-////                        histModel.contents.append(cont)
-////                    }
-//                    alreadyCachedPhotos.append(photo)
-//                }
-//            }
+            
             self.finishedCache?.giveCachedPhotos(photos: self.alreadyCachedPhotos, popup: "Keep")
             SwiftEntryKit.dismiss()
         }
     }
     func finishedFind() {
         DispatchQueue.main.async {
-//            var cachedPhotos = [HistoryModel]()
             
             self.cancelButton.isEnabled = false
-//            let alertView = SPAlertView(title: "Caching done!", message: "Tap to dismiss", preset: SPAlertPreset.done)
-//            alertView.duration = 2.2
-//            alertView.present()
             
-//            for photo in self.photos {
-//                let histModel = HistoryModel()
-//                histModel.filePath = photo.filePath
-//                histModel.dateCreated = photo.dateCreated
-//                histModel.isDeepSearched = photo.isDeepSearched
-//                histModel.isHearted = photo.isHearted
-//                for cont in photo.contents {
-//                    histModel.contents.append(cont)
-//                }
-//                cachedPhotos.append(histModel)
-//                print("MODEL: \(histModel)")
-//            }
             self.finishedCache?.giveCachedPhotos(photos: self.alreadyCachedPhotos, popup: "Finished")
             SwiftEntryKit.dismiss()
         }
         
     }
     func finishedCancelling() {
-        print("Canceling done.")
+        
         var newLabel = ""
         if count == 1 {
-            newLabel = """
-            1 photo has already been cached.
-            Would you like to keep its cache?
-            """
+            let onePhotoHasAlreadyBeenCachedWouldYouKeep = NSLocalizedString("onePhotoHasAlreadyBeenCachedWouldYouKeep", comment: "CachingViewController def=1 photo has already been cached.\nWould you like to keep its cache?")
+            newLabel = onePhotoHasAlreadyBeenCachedWouldYouKeep
+            //            newLabel = """
+            //            1 photo has already been cached.
+            //            Would you like to keep its cache?
+            //            """
         } else {
-            newLabel = """
-            \(count) photos have already been cached.
-            Would you like to keep their caches?
-            """
+            let xPhotosHaveAlreadyBeenCachedWouldYouKeep = NSLocalizedString("%d photosHaveAlreadyBeenCachedWouldYouKeep", comment: "CachingViewController def=x photos have already been cached.\nWould you like to keep its cache?")
+            
+            let string = String.localizedStringWithFormat(xPhotosHaveAlreadyBeenCachedWouldYouKeep, count)
+            
+            newLabel = string
+            //            newLabel = """
+            //            \(count) photos have already been cached.
+            //            Would you like to keep their caches?
+            //            """
         }
         cancelLabel.text = newLabel
         animateChange(toCancel: true)
@@ -323,11 +252,9 @@ extension CachingViewController {
         if segue.identifier == "goToCancel" {
             
             if let cacheController = segue.destination as? CachingCancelController {
-              //Some property on ChildVC that needs to be set
-              cacheController.folderURL = folderURL
-              //        cacheController.cachedPhotos = alreadyCached
-              cacheController.totalPhotos = photos
-              cacheController.view.layer.cornerRadius = 10
+                cacheController.folderURL = folderURL
+                cacheController.totalPhotos = photos
+                cacheController.view.layer.cornerRadius = 10
             }
         }
     }
@@ -339,17 +266,15 @@ extension CachingViewController {
             var number = 0
             for photo in self.photos {
                 if self.statusOk == true {
-                   
                     number += 1
-//                    print("num: \(number)")
                     let indP = IndexPath(item: number - 1, section: 0)
-                   DispatchQueue.main.async {
+                    DispatchQueue.main.async {
                         self.collectionView.scrollToItem(at: indP, at: .centeredVertically, animated: true)
-                   }
+                    }
                     if !photo.isDeepSearched {
                         self.dispatchGroup.enter()
                         let photoUrl = self.folderURL.appendingPathComponent(photo.filePath)
-//                        guard let photoUrl = URL(string: "\(self.folderURL)\(photo.filePath)") else { print("WRONG URL!!!!"); return }
+                        //                        guard let photoUrl = URL(string: "\(self.folderURL)\(photo.filePath)") else { print("WRONG URL!!!!"); return }
                         let request = VNRecognizeTextRequest { request, error in
                             self.handleFastDetectedText(request: request, error: error, photo: photo)
                         }
@@ -370,7 +295,11 @@ extension CachingViewController {
                     } else {
                         self.count += 1
                         DispatchQueue.main.async {
-                            self.numberCachedLabel.text = "\(self.count)/\(self.photos.count) photos cached"
+                            let xSlashxPhotosCached = NSLocalizedString("%d Slash %d PhotosCached", comment: "CachingViewController def=x/x photos cached")
+                            let string = String.localizedStringWithFormat(xSlashxPhotosCached, self.count, self.photos.count)
+                            
+//                            self.numberCachedLabel.text = "\(self.count)/\(self.photos.count) photos cached"
+                            self.numberCachedLabel.text = string
                         }
                         continue
                     }
@@ -418,7 +347,7 @@ extension CachingViewController {
             
             return
         }
-
+        
         var contents = [EditableSingleHistoryContent]()
         
         for result in results {
@@ -439,9 +368,9 @@ extension CachingViewController {
                     contents.append(singleContent)
                 }
             }
-
+            
         }
-
+        
         newCachedPhoto.contents = contents
         
         alreadyCachedPhotos.append(newCachedPhoto)
@@ -450,19 +379,19 @@ extension CachingViewController {
     }
 }
 extension CachingViewController : UICollectionViewDelegateFlowLayout {
-  //1
+    //1
     func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right)) / 3
-    return CGSize(width: collectionView.frame.width, height: collectionView.frame.width)
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        //        let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right)) / 3
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.width)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
     func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
 }
@@ -479,10 +408,10 @@ extension CachingViewController {
         let smallRect = CGRect(x: 10, y: 10, width: 160, height: 160)
         
         let pathSmallRect = UIBezierPath(roundedRect: smallRect, cornerRadius: 2)
-//
+        //
         pathBigRect.append(pathSmallRect)
         pathBigRect.usesEvenOddFillRule = true
-//
+        //
         let fillLayer = CAShapeLayer()
         fillLayer.path = pathBigRect.cgPath
         fillLayer.fillRule = CAShapeLayerFillRule.evenOdd
@@ -501,15 +430,6 @@ extension CachingViewController {
         tintView.backgroundColor = #colorLiteral(red: 0.0862745098, green: 0.6823529412, blue: 0.937254902, alpha: 0.25)
         rimView.addSubview(tintView)
         
-        
-//        swipeView.frame = CGRect(x: 10, y: 5, width: 10, height: 170)
-//        swipeView.backgroundColor = UIColor(hexString: "00aeef")
-//        swipeView.layer.cornerRadius = 5
-//        rimView.addSubview(swipeView)
-        
-        
-        
-//        let gradient = CAGradientLayer()
         gradient = CAGradientLayer()
         gradient.frame = collectionSuperview.bounds
         gradient.colors = [UIColor.clear.cgColor, UIColor.white.cgColor, UIColor.white.cgColor, UIColor.clear.cgColor]
@@ -518,9 +438,6 @@ extension CachingViewController {
         gradient.endPoint = CGPoint(x: 0.5, y: 1)
         collectionSuperview.layer.mask = gradient
         collectionSuperview.layer.masksToBounds = true
-
-        
-        
         
         view.clipsToBounds = true
         view.bringSubviewToFront(cancelButton)
@@ -528,8 +445,6 @@ extension CachingViewController {
         
         cancelImageView.layer.cornerRadius = 4
         if let firstPhoto = photos.first {
-//            let urlPath = "\(folderURL)\(firstPhoto.filePath)"
-//            let finalUrl = URL(string: urlPath)
             let finalUrl = folderURL.appendingPathComponent(firstPhoto.filePath)
             cancelImageView.sd_imageTransition = .fade
             cancelImageView.sd_setImage(with: finalUrl)
@@ -548,7 +463,7 @@ extension CachingViewController {
 
 extension String {
     func getImageFromDir() -> UIImage? {
-
+        
         if let fileURL = URL(string: self) {
             do {
                 let imageData = try Data(contentsOf: fileURL)

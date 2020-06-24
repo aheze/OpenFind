@@ -113,8 +113,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
 //            finishMessage = "\(indexPathsSelected.count) lists deleted!"
         }
         
-        let cantBeUndone = NSLocalizedString("cantBeUndone",
-        comment: "ListController def=This action can't be undone.")
+        let cantBeUndone = NSLocalizedString("cantBeUndone", comment: "Multipurpose def=This action can't be undone.")
         
         let alert = UIAlertController(title: titleMessage, message: cantBeUndone, preferredStyle: .alert)
         

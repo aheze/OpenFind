@@ -34,11 +34,8 @@ class ListToolBar: UIView, InjectLists {
         didSet {
             var effect = UIBlurEffect()
             if lightMode == true {
-                print("LIGHT MODE!!!")
-//                baseView.backgroundColor = UIColor(named: "Gray2")
-//                contentView.backgroundColor = #colorLiteral(red: 0.9601849914, green: 0.9601849914, blue: 0.9601849914, alpha: 0.15)
+                
                 effect = UIBlurEffect(style: .systemThickMaterialLight)
-//                visualBaseView.effect
                 
                 removeAllButton.backgroundColor = UIColor(named: "Gray3")
                 newMatchButton.backgroundColor = UIColor(named: "Gray3")
@@ -48,7 +45,7 @@ class ListToolBar: UIView, InjectLists {
                 newMatchButton.setTitleColor(UIColor(named: "PureBlack"), for: .normal)
                 doneButton.setTitleColor(UIColor(named: "PureBlack"), for: .normal)
             } else {
-//                contentView.backgroundColor = #colorLiteral(red: 0.05655267835, green: 0.05655267835, blue: 0.05655267835, alpha: 0.15)
+                
                 effect = UIBlurEffect(style: .systemThickMaterialDark)
                 print("dark mode")
             }
@@ -99,8 +96,6 @@ class ListToolBar: UIView, InjectLists {
 //
 //    }
     func resetWithLists(lists: [EditableFindList]) {
-        print("recieved...")
-        print("COUNT: \(lists.count)")
         editableListCategories = lists
         collectionView.reloadData()
     }
@@ -115,12 +110,7 @@ class ListToolBar: UIView, InjectLists {
         setUp()
     }
     private func setUp() {
-        print("SETT")
-       // fromNib()
-        //self.changeNumberDelegate = self
         clipsToBounds = true
-//        layer.cornerRadius = 5
-//        layer.backgroundColor = #colorLiteral(red: 0, green: 0.5981545251, blue: 0.937254902, alpha: 1)
         
         Bundle.main.loadNibNamed("ListToolBar", owner: self, options: nil)
         addSubview(contentView)
@@ -135,28 +125,13 @@ class ListToolBar: UIView, InjectLists {
         newMatchButton.layer.cornerRadius = 4
         doneButton.layer.cornerRadius = 4
         
-//        if lightMode == true {
-//            print("LIGHT MODE!!!")
-//            baseView.backgroundColor = UIColor(named: "Gray3")
-//            removeAllButton.backgroundColor = UIColor(named: "Gray1")
-//            newMatchButton.backgroundColor = UIColor(named: "Gray1")
-//            doneButton.backgroundColor = UIColor(named: "Gray1")
-//
-//            removeAllButton.setTitleColor(.black, for: .normal)
-//            newMatchButton.setTitleColor(.black, for: .normal)
-//            doneButton.setTitleColor(.black, for: .normal)
-//        } else {
-//            print("dark mode")
-//        }
         var effect = UIBlurEffect()
         contentView.backgroundColor = .clear
         effect = UIBlurEffect(style: .systemThickMaterialDark)
         visualBaseView.effect = effect
-        print("dark mode")
     }
     
     func addList(list: EditableFindList) {
-        print("add")
         calculateWhereToInsert(component: list)
     }
     
@@ -196,7 +171,6 @@ extension ListToolBar: UICollectionViewDelegate, UICollectionViewDataSource {
 extension ListToolBar {
         func calculateWhereToInsert(component: EditableFindList) {
             let componentOrderID = component.orderIdentifier
-            print("calc")
             var indexPathToAppendTo = 0
             for (index, singleComponent) in editableListCategories.enumerated() {
                 ///We are going to check if the singleComponent's order identifier is smaller than componentOrderID.

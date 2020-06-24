@@ -15,7 +15,6 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
     
    
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-//        print("Did Dismissss")
         if cancelTimer != nil {
             cancelTimer!.invalidate()
             cancelTimer = nil
@@ -24,57 +23,14 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         readDefaultsValues()
         
         SwiftEntryKit.dismiss()
-//        currentMatchStrings.append(newSearchTextField.text ?? "")
         sortSearchTerms()
-        startVideo(finish: "end")
+        startVideo()
         loadListsRealm()
         injectListDelegate?.resetWithLists(lists: editableListCategories)
-       // listsCollectionView.reloadData()
-//        loadListsRealm()
-//        updateToolbar
     }
-//    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
-//        print("Start Dismiss")
-////        hasStartedDismissing = true
-//        startVideo(finish: "start")
-////        if cancelTimer == nil {
-////        cancelTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
-////        }
-//    }
-//    @objc func updateTimer() {
-//        cancelSeconds += 1
-//        if cancelSeconds == 5 {
-//            print("hit 5 secs")
-//            if cancelTimer != nil {
-//                cancelTimer!.invalidate()
-//                cancelTimer = nil
-//            }
-//            cancelSeconds = 0
-//            cancelSceneView()
-//        }
-//
-//        //This will decrement(count down)the seconds.
-//        //timerLabel.text = "\(seconds)"
-//    }
-//    @objc func doubleTapped() {
-//        print("sdfjg")
-//        // do something here
-//        //refreshScreen(touch: UITapGestureRecognizer)
-//        if doubleTap.state == UIGestureRecognizer.State.recognized {
-//            print(doubleTap.location(in: doubleTap.view))
-//        }
-//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //        if segue.identifier == "goToHistory" {
-    //            print("hist")
-    //            let destinationVC = segue.destination as! HistoryViewController
-    //            destinationVC.folderURL = globalUrl
-    //        } else if segue.identifier == "goToSettings" {
-    //            print("prepareSett")
-    //        }
         
-//            currentMatchStrings.removeAll()
             stopSession()
             switch segue.identifier {
             case "goToSettings":
@@ -89,7 +45,6 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
                 destinationVC.folderURL = globalUrl
                 destinationVC.highlightColor = highlightColor
                 destinationVC.modalPresentationCapturesStatusBarAppearance = true
-                //destinationVC.modalPresentationStyle = .fullScreen
             case "goToLists" :
                 let destinationVC = segue.destination as! ListController
                 destinationVC.modalPresentationCapturesStatusBarAppearance = true
@@ -99,7 +54,6 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
             }
         
             tempResetLists()
-            
             
         }
     func toFast() {
@@ -117,7 +71,6 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         let newImageView = UIImageView()
         newImageView.image = UIImage(named: "FocusRectCamera")
         let frameRect = CGRect(x: loc.x - 35, y: loc.y - 35, width: 70, height: 70)
-//        print(frameRect)
         newImageView.frame = frameRect
         newImageView.contentMode = .scaleAspectFit
         cameraView.addSubview(newImageView)
@@ -128,23 +81,18 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
                         UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.25) {
                             newImageView.alpha = 1
                             newImageView.transform = CGAffineTransform.identity
-//                            print("ANIMATE KEY")
-        //                    self.imageView.transform = CGAffineTransform(scaleX: 2, y: 2)
                         }
 
                         UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.25) {
                             newImageView.alpha = 0.8
-        //                    self.imageView.center = CGPoint(x: self.view.bounds.midX, y: self.view.bounds.maxY)
                         }
 
                         UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.25) {
                             newImageView.alpha = 1
-        //                    self.imageView.center = CGPoint(x: self.view.bounds.width, y: start.y)
                         }
 
                         UIView.addKeyframe(withRelativeStartTime: 0.75, relativeDuration: 0.25) {
                             newImageView.alpha = 0
-        //                    self.imageView.center = start
                         }
                     }, completion: { _ in
                         newImageView.removeFromSuperview()
@@ -155,9 +103,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
                 try device.lockForConfiguration()
 
                 device.focusPointOfInterest = focusPoint
-                //device.focusMode = .continuousAutoFocus
                 device.focusMode = .autoFocus
-                //device.focusMode = .locked
                 device.exposurePointOfInterest = focusPoint
                 device.exposureMode = AVCaptureDevice.ExposureMode.continuousAutoExposure
                 device.unlockForConfiguration()
@@ -167,9 +113,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
             }
             
             
-            
         }
-        //refreshScreen(location: loc)
     }
     func setUpButtons() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(tappedOnce))
@@ -190,12 +134,13 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         let histImage = UIImage(systemName: "arrow.counterclockwise.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
         let settImage = UIImage(systemName: "gear", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
         
+        let history = NSLocalizedString("history", comment: "Multipurpose def=History")
+        let lists = NSLocalizedString("lists", comment: "Multipurpose def=Lists")
+        let settings = NSLocalizedString("settings", comment: "Multipurpose def=Settings")
         
         let goToNewHistory = menuButton.addItem()
         goToNewHistory.tag = 12461
-        goToNewHistory.titleLabel.text = "History"
-        
-        
+        goToNewHistory.titleLabel.text = history
         
         
         goToNewHistory.imageView.image = histImage
@@ -205,7 +150,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         }
         let goToLists = menuButton.addItem()
         goToLists.tag = 12463
-        goToLists.titleLabel.text = "Lists"
+        goToLists.titleLabel.text = lists
         goToLists.imageView.image = listImage
         goToLists.action = { item in
             self.blurScreenForSheetPresentation()
@@ -214,7 +159,7 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         
         let goToSett = menuButton.addItem()
         goToSett.tag = 12462
-        goToSett.titleLabel.text = "Settings"
+        goToSett.titleLabel.text = settings
         goToSett.imageView.image = settImage
         goToSett.action = { item in
 //            print("settings")
@@ -233,11 +178,9 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
 extension ViewController {
     
     @objc func tappedOnStats() {
-        print("STTATS!!!")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let cacheController = storyboard.instantiateViewController(withIdentifier: "StatsViewController") as! StatsViewController
         cacheController.view.layer.cornerRadius = 10
-        //        view.layer.cornerRadius = 10
         cacheController.view.clipsToBounds = true
         cacheController.edgesForExtendedLayout = []
         
@@ -246,12 +189,17 @@ extension ViewController {
         let boldAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .bold)]
         let regularAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .regular)]
         
+        let spaceMatchesFoundCurrently = NSLocalizedString("spaceMatchesFoundCurrently", comment: "Stats def= matches found currently")
+        
         let boldText = NSAttributedString(string: "\(currentNumberOfMatches)", attributes: boldAttribute)
-        let regularText = NSAttributedString(string: " matches found currently", attributes: regularAttribute)
+        let regularText = NSAttributedString(string: spaceMatchesFoundCurrently, attributes: regularAttribute)
         let newString = NSMutableAttributedString()
         newString.append(boldText)
         newString.append(regularText)
         cacheController.currentlyHowManyMatches.attributedText = newString
+        
+        let currentlySearchingFor = NSLocalizedString("currentlySearchingFor", comment: "Stats def=Currently searching for")
+        
         
         if allowSearch == true {
             var wordsFinding = [String]()
@@ -263,26 +211,51 @@ extension ViewController {
             
             switch wordsFinding.count {
              case 0:
-                finalMatchesString = "[no words]"
+                let noWords = NSLocalizedString("noWords", comment: "Stats def=[no words]")
+                finalMatchesString = noWords
              case 1:
-                finalMatchesString = "\"\(wordsFinding[0])\""
+                let quotexquote = NSLocalizedString("quote %d quote", comment: "Stats def=\"x\"")
+                let string = String.localizedStringWithFormat(quotexquote, wordsFinding[0])
+                finalMatchesString = string
              case 2:
-                finalMatchesString = "\"\(wordsFinding[0])\" and \"\(wordsFinding[1])\""
+                let quotexquoteSpaceAndquotexquote = NSLocalizedString("quote %d quoteSpaceAndquote %d quote", comment: "Stats def=\"x\" and \"x\"")
+                let string = String.localizedStringWithFormat(quotexquoteSpaceAndquotexquote, wordsFinding[0], wordsFinding[1])
+                finalMatchesString = string
+                
+              
+                
+                
+//                finalMatchesString = "\"\(wordsFinding[0])\" and \"\(wordsFinding[1])\""
              default:
                 for (index, message) in wordsFinding.enumerated() {
                     if index != wordsFinding.count - 1 {
-                        finalMatchesString.append("\"\(message)\", ")
+                        let quotexquoteCommaSpace = NSLocalizedString("quote %d quoteCommaSpace", comment: "Stats def=\"x\", ")
+                        let string = String.localizedStringWithFormat(quotexquoteCommaSpace, message)
+//                        finalMatchesString.append("\"\(message)\", ")
+                        finalMatchesString.append(string)
                     } else {
-                        finalMatchesString.append(" and \"\(message)\"")
+                        let spaceAndSpacequotexquote = NSLocalizedString("spaceAndSpacequote %d quote", comment: "Stats def= and \"x\"")
+                        let string = String.localizedStringWithFormat(spaceAndSpacequotexquote, message)
+//                        finalMatchesString.append(" and \"\(message)\"")
+                        finalMatchesString.append(string)
                     }
                 }
              }
             
-            var wordsThis = "these"
-            var wordS = "s"
-            if wordsFinding.count == 1 { wordsThis = "this"; wordS = "" }
+            let thisWordColon = NSLocalizedString("thisWord", comment: "Stats def=this word")
+            let theseWordsColon = NSLocalizedString("theseWords", comment: "Stats def=these words")
             
-            let regularMatchesText = NSAttributedString(string: "Currently searching for \(wordsThis) word\(wordS): ", attributes: regularAttribute)
+            
+            
+            var thisWord = thisWordColon
+            if wordsFinding.count != 1 {
+                thisWord = theseWordsColon
+            }
+//            var wordsThis = "these"
+//            var wordS = "s"
+//            if wordsFinding.count == 1 { wordsThis = "this"; wordS = "" }
+            
+            let regularMatchesText = NSAttributedString(string: "\(currentlySearchingFor) \(thisWord): ", attributes: regularAttribute)
             let boldMatchesText = NSAttributedString(string: finalMatchesString, attributes: boldAttribute)
             
             let newMatches = NSMutableAttributedString()
@@ -291,16 +264,17 @@ extension ViewController {
             cacheController.currentSearchingForTheseWords.attributedText = newMatches
             
         } else {
-            let regularMatchesText = NSAttributedString(string: "Currently searching for: ", attributes: regularAttribute)
-            let boldMatchesText = NSAttributedString(string: "Nothing! You have duplicates, so Find is currently paused. Make sure that there are no duplicates in the Search Bar.", attributes: boldAttribute)
+            let regularMatchesText = NSAttributedString(string: "\(currentlySearchingFor): ", attributes: regularAttribute)
+            let nothingHaveDuplicatesPaused = NSLocalizedString("nothingHaveDuplicatesPaused", comment: "Stats def=Nothing! You have duplicates, so Find is currently paused. Make sure that there are no duplicates in the Search Bar.")
+            
+            let boldMatchesText = NSAttributedString(string: nothingHaveDuplicatesPaused, attributes: boldAttribute)
             
             let newMatches = NSMutableAttributedString()
             newMatches.append(regularMatchesText)
             newMatches.append(boldMatchesText)
             cacheController.currentSearchingForTheseWords.attributedText = newMatches
         }
-        
-        
+    
         
         var attributes = EKAttributes.centerFloat
         attributes.displayDuration = .infinity
@@ -329,13 +303,10 @@ extension ViewController {
         
         switch touch.view {
         case controlsView, cameraView, stackAllowView, menuAllowView, middleAllowView, statusAllowView:
-//            print("Special view")
             return true
         default:
-//            print("Not")
             return false
         }
-        //return touch.view == gestureRecognizer.view
         
     }
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -350,9 +321,7 @@ extension ViewController {
             }) { _ in
                 self.controlsBlurView.isHidden = true
             }
-//            print("EQUALS")
         }
-//        print("BEGIN")
         return true
     }
 }

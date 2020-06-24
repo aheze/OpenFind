@@ -15,6 +15,8 @@ extension ViewController {
     
     func handleFastDetectedText(request: VNRequest?, error: Error?) {
         if shouldResetHighlights {
+            
+            /// reset the cycle
             busyFastFinding = false
             resetFastHighlights()
         } else {
@@ -50,7 +52,7 @@ extension ViewController {
                         let newY = (component.y * self.deviceSize.height) - newH
                         let individualCharacterWidth = newW / CGFloat(component.text.count)
                         
-//                        print("size: \(self.deviceSize)")
+                        //                        print("size: \(self.deviceSize)")
                         
                         component.x = newX
                         component.y = newY
@@ -104,7 +106,7 @@ extension ViewController {
             var distToComp = [CGFloat: Component]()
             
             for oldComponent in currentComponents {
-//                if oldComponent.changed == false {
+                //                if oldComponent.changed == false {
                 if newComponent.parentList == oldComponent.parentList {
                     let currentCompPoint = CGPoint(x: oldComponent.x, y: oldComponent.y)
                     let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
@@ -114,7 +116,7 @@ extension ViewController {
                         distToComp[lowestDist] = oldComponent
                     }
                 }
-//                }
+                //                }
             }
             if lowestDist <= 15 {
                 guard let oldComp = distToComp[lowestDist] else { print("NO COMP"); return }
@@ -223,7 +225,7 @@ extension ViewController {
                     layer.addSublayer(newLayer)
                 }
             }
-
+            
             let newView = UIView(frame: CGRect(x: component.x, y: component.y, width: component.width, height: component.height))
             newView.alpha = 0
             self.view.insertSubview(newView, aboveSubview: self.cameraView)
@@ -238,23 +240,18 @@ extension ViewController {
             component.baseView = newView
             component.changed = true
             
-            
-//            print("Count pass: \(self.currentPassCount)  :: curr diff: \(self.nextComponents.count - self.previousNumberOfMatches)")
             UIView.animate(withDuration: 0.15, animations: {
                 newView.alpha = 1
             })
             if self.nextComponents.count > self.previousNumberOfMatches {
-//                if self.currentPassCount >= 100 {
-//                    print("STROKE END!!")
-                    let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
-                    strokeAnimation.fromValue = 0
-                    strokeAnimation.toValue = 1
-                    strokeAnimation.duration = 0.3
-                    strokeAnimation.autoreverses = false
-                    strokeAnimation.repeatCount = 0
-                    newLayer.add(strokeAnimation, forKey: "line")
-                    self.layerScaleAnimation(layer: newLayer, duration: 0.2, fromValue: 1.2, toValue: 1)
-//                }
+                let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
+                strokeAnimation.fromValue = 0
+                strokeAnimation.toValue = 1
+                strokeAnimation.duration = 0.3
+                strokeAnimation.autoreverses = false
+                strokeAnimation.repeatCount = 0
+                newLayer.add(strokeAnimation, forKey: "line")
+                self.layerScaleAnimation(layer: newLayer, duration: 0.2, fromValue: 1.2, toValue: 1)
             }
             
         }
@@ -280,9 +277,7 @@ extension ViewController {
     }
     func drawFastHighlight(component: Component) {
         DispatchQueue.main.async {
-//            let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
-//            let newW = component.width * convertedOriginalWidthOfBigImage
-//            let newH = component.height * self.deviceSize.height
+            
             let newW = component.width
             let newH = component.height
             
@@ -337,25 +332,25 @@ extension ViewController {
         let startPointAnim = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.startPoint))
         startPointAnim.fromValue = CGPoint(x: -1, y: 0.5)
         startPointAnim.toValue = CGPoint(x:1, y: 0.5)
-
+        
         let endPointAnim = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.endPoint))
         endPointAnim.fromValue = CGPoint(x: 0, y: 0.5)
         endPointAnim.toValue = CGPoint(x:2, y: 0.5)
-
+        
         let animGroup = CAAnimationGroup()
         animGroup.animations = [startPointAnim, endPointAnim]
         animGroup.duration = 0.6
         animGroup.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
         animGroup.repeatCount = 0
         gradient.add(animGroup, forKey: "animateGrad")
-   
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
             layer.removeFromSuperlayer()
         })
     }
 }
 extension Array where Element: Equatable {
-
+    
     // Remove first collection element that is equal to the given `object`:
     mutating func remove(object: Element) {
         guard let index = firstIndex(of: object) else {return}

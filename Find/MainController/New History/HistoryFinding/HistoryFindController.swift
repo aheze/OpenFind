@@ -15,15 +15,10 @@ class MatchesLabelObject: NSObject {
     var cachedNumber = 0
     var totalNumber = 0
     var hadSearchedInCache = true
-//    var hi
 }
 protocol ReturnCache: class {
     func returnHistCache(cachedImages: HistoryModel)
 }
-
-//protocol EditedFindBar: class {
-//    func updateTerms(stringToListR: [String: EditableFindList], currentSearchFindListR: EditableFindList, currentListsSharedFindListR: EditableFindList, currentSearchAndListSharedFindListR: EditableFindList, currentMatchStringsR: [String], matchToColorsR: [String: [CGColor]])
-//}
 protocol ChangeFindBar: class {
     func change(type: String)
     func giveLists(lists: [EditableFindList], searchText: String, labelObject: MatchesLabelObject)
@@ -31,10 +26,11 @@ protocol ChangeFindBar: class {
 
 class HistoryFindController: UIViewController {
     
+    let startByTypingOrSelectingAList = NSLocalizedString("startByTypingOrSelectingAList", comment: "HistoryFindController def=Start by typing or selecting a list...")
+    
     var folderURL = URL(fileURLWithPath: "", isDirectory: true)
     var imageSize = CGSize(width: 0, height: 0)
     
-//    var cacheFindNumber = 0
     var newOCRfindNumber = 0
     
     @IBOutlet weak var warningView: UIView!
@@ -55,17 +51,10 @@ class HistoryFindController: UIViewController {
     var ocrPassCount = 0
     var ocrSearching = false
     
-//    var highlightColor = "00aeef"
-    
-//    var sekSwitchedToPreview = false
-    
     var savedSelectedLists = [EditableFindList]()
     var savedTextfieldText = ""
     var savedLabelObject = MatchesLabelObject()
     
-    
-    
-//    weak var editedFindbar: EditedFindBar?
     weak var changeFindbar: ChangeFindBar?
     weak var giveNumber: GiveFindbarMatchNumber?
     
@@ -80,7 +69,9 @@ class HistoryFindController: UIViewController {
     @IBAction func welcomeImageButtonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewControllerPresent = storyboard.instantiateViewController(withIdentifier: "SingleHelp") as! SingleHelp
-        viewControllerPresent.topLabelText = "The Cache"
+        
+        let theCache = NSLocalizedString("theCache", comment: "HistoryFindController def=The Cache")
+        viewControllerPresent.topLabelText = theCache
         viewControllerPresent.urlString = "https://zjohnzheng.github.io/FindHelp/History-WhatIsTheCache.html"
         viewControllerPresent.topViewColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
         
@@ -98,7 +89,7 @@ class HistoryFindController: UIViewController {
         attributes.screenInteraction = .absorbTouches
         attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
         attributes.lifecycleEvents.willDisappear = {
-                    
+            
             var attributes = EKAttributes.bottomFloat
             attributes.entryBackground = .color(color: .white)
             attributes.entranceAnimation = .translation
@@ -123,12 +114,10 @@ class HistoryFindController: UIViewController {
             self.changeFindbar = customView
             let edgeWidth = CGFloat(600)
             attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
-//            attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
+            
             SwiftEntryKit.display(entry: customView, using: attributes)
             
             self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText, labelObject: self.savedLabelObject)
-            
-            
         }
         
         changeFindbar?.change(type: "GetLists")
@@ -139,10 +128,12 @@ class HistoryFindController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var helpButton: UIButton!
     @IBAction func helpButtonPressed(_ sender: Any) {
-//        print("help")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let helpViewController = storyboard.instantiateViewController(withIdentifier: "DefaultHelpController") as! DefaultHelpController
-        helpViewController.title = "Find Help"
+        
+        let findHelp = NSLocalizedString("findHelp", comment: "HistoryFindController def=Find Help")
+        
+        helpViewController.title = findHelp
         helpViewController.helpJsonKey = "HistoryFindHelpArray"
         let navigationController = UINavigationController(rootViewController: helpViewController)
         navigationController.view.backgroundColor = UIColor.clear
@@ -178,7 +169,6 @@ class HistoryFindController: UIViewController {
             attributes.positionConstraints.size.height = .constant(value: 60)
             attributes.statusBar = .light
             attributes.entryInteraction = .absorbTouches
-    //        attributes.scroll = .disabled
             attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
             attributes.roundCorners = .all(radius: 5)
             attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
@@ -188,7 +178,6 @@ class HistoryFindController: UIViewController {
             attributes.positionConstraints.keyboardRelation = keyboardRelation
             
             let customView = FindBar()
-//            customView.selectedLists = self.savedSelectedLists
             customView.returnTerms = self
             customView.highlightColor = self.highlightColor
             self.giveNumber = customView
@@ -196,11 +185,9 @@ class HistoryFindController: UIViewController {
             self.changeFindbar = customView
             let edgeWidth = CGFloat(600)
             attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
-//            attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
             SwiftEntryKit.display(entry: customView, using: attributes)
             
             self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText, labelObject: self.savedLabelObject)
-            
             
         }
         
@@ -227,19 +214,10 @@ class HistoryFindController: UIViewController {
     @IBOutlet weak var findFromHistoryLabel: UILabel!
     
     var numberOfFindRequests = 0
-
+    
     var allCached = false
-//    var highlightColor = "00aeef"
     var matchToColors = [String: [CGColor]]()
     var highlightColor = "00aeef"
-    
-//    var currentMatchStrings = [String]()
-//    var currentMatchArray = [String]()
-//    var currentSearchFindList = EditableFindList()
-//    var currentListsSharedFindList = EditableFindList()
-//    var currentSearchAndListSharedFindList = EditableFindList()
-    
-//    var stringToList = [String: EditableFindList]()
     
     var photos = [EditableHistoryModel]()
     var resultPhotos = [FindModel]()
@@ -250,18 +228,16 @@ class HistoryFindController: UIViewController {
     var selectedIndexPath: IndexPath!
     
     weak var returnCache: ReturnCache?
-//    func changeSearchPhotos(photos: [URL]) {
-//        photos = photos
-//    }
+    
     override func viewDidLayoutSubviews() {
-          super.viewDidLayoutSubviews()
-          tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 82, right: 0)
+        super.viewDidLayoutSubviews()
+        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 82, right: 0)
     }
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         if viewControllerToPresent.title == "PhotoPageContainerViewController" {
             viewControllerToPresent.modalPresentationStyle = .fullScreen
         }
-      super.present(viewControllerToPresent, animated: flag, completion: completion)
+        super.present(viewControllerToPresent, animated: flag, completion: completion)
     }
     
     override func viewDidLoad() {
@@ -276,7 +252,6 @@ class HistoryFindController: UIViewController {
         attributes.positionConstraints.size.height = .constant(value: 60)
         attributes.statusBar = .light
         attributes.entryInteraction = .absorbTouches
-//        attributes.scroll = .disabled
         attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
         attributes.roundCorners = .all(radius: 5)
         attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
@@ -297,16 +272,11 @@ class HistoryFindController: UIViewController {
         attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
         SwiftEntryKit.display(entry: customView, using: attributes)
         
-//        helpButton.layer.cornerRadius = 6
-//        doneButton.layer.cornerRadius = 6
-        
         tableView.separatorStyle = .none
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
-//        tableView.sele
-        
         let superViewWidth = view.frame.size.width
         let newWidth = min(superViewWidth, CGFloat(400))
-//        welcomeView.frame = CGRect(x: 0, y: 150, width: newWidth, height: 275)
+        
         view.addSubview(welcomeView)
         welcomeView.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
@@ -316,47 +286,35 @@ class HistoryFindController: UIViewController {
         }
         
         
-//        let origText = "All selected photos have already been cached! Search results will appear immediately."
-        
         var cachedCount = 0
         for photo in photos {
-//            print("PHOTO: \(photo)")
-            
-            
             if photo.isDeepSearched == true {
                 cachedCount += 1
-//                print("photo.contnet: \(photo.contents)")
             }
         }
         if cachedCount == photos.count {
             allCached = true
-            welcomeImageButton.setImage(UIImage(named: "AllCached"), for: .normal) 
-//            welcomeCacheButton.setTitle("Learn more", for: .normal)
-            welcomeLabel.text = "All selected photos have already been cached! Search results will appear immediately."
+            welcomeImageButton.setImage(UIImage(named: "AllCached"), for: .normal)
+            
+            let allSelectedPhotosAlreadyCached = NSLocalizedString("allSelectedPhotosAlreadyCached", comment: "HistoryFindController def=All selected photos have already been cached! Search results will appear immediately.")
+            welcomeLabel.text = allSelectedPhotosAlreadyCached
         } else {
             allCached = false
             welcomeImageButton.setImage(UIImage(named: "NotAllCached"), for: .normal)
+            let notAllSelectedPhotosAlreadyCached = NSLocalizedString("notAllSelectedPhotosAlreadyCached", comment: "Not all photos have been cached, so some search results will not appear immediately. Press 'search' on the keyboard to find using OCR.")
+            
             welcomeLabel.text = "Not all photos have been cached, so some search results will not appear immediately. Press 'search' on the keyboard to find using OCR."
-//            welcomeCacheButton.setTitle("Cache", for: .normal)
         }
         
-//        tableView.isHidden = true
         tableView.alpha = 0
         tableView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         
         noResultsLabel.alpha = 0
         self.noResultsLabel.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         activityIndicator.hidesWhenStopped = true
-
+        
         if photos.count > 0 {
-           let samplePath = photos[0]
-//                print("asdsample")
-//            let urlString = "\(folderURL)\(samplePath.filePath)"
-//            if let newURL = URL(string: urlString) {
-//                if let newImage = newURL.loadImageFromDocumentDirectory() {
-//                    imageSize = newImage.size
-//                }
-//            }
+            let samplePath = photos[0]
             let finalUrl = folderURL.appendingPathComponent(samplePath.filePath)
             if let newImage = finalUrl.loadImageFromDocumentDirectory() {
                 imageSize = newImage.size
@@ -368,13 +326,11 @@ class HistoryFindController: UIViewController {
         warningLabel.alpha = 0
         progressView.alpha = 0
         
-//        view.layoutIfNeeded()
     }
 }
 extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        print("nummmm")
         return resultPhotos.count
     }
     
@@ -384,68 +340,54 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
         cell.baseView.clipsToBounds = true
         let model = resultPhotos[indexPath.row]
         
-        var urlPath = model.photo.filePath
-//        urlPath = "\(folderURL)\(urlPath)"
-//        let finalUrl = URL(string: urlPath)
+        let urlPath = model.photo.filePath
+        //        urlPath = "\(folderURL)\(urlPath)"
+        //        let finalUrl = URL(string: urlPath)
         let finalUrl = folderURL.appendingPathComponent(urlPath)
         
         var numberText = ""
         if model.numberOfMatches == 1 {
-            numberText = "\(model.numberOfMatches) match"
+            let oneMatch = NSLocalizedString("oneMatch", comment: "HistoryFindController def=1 match")
+            //            numberText = "\(model.numberOfMatches) match"
+            numberText = oneMatch
         } else {
-            numberText = "\(model.numberOfMatches) matches"
+            
+            let xSpaceMatches = NSLocalizedString("%d SpaceMatches", comment: "HistoryFindController def=x matches")
+            let string = String.localizedStringWithFormat(xSpaceMatches, model.numberOfMatches)
+            //            numberText = "\(model.numberOfMatches) matches"
+            numberText = string
         }
         cell.titleLabel.text = "\(model.photo.dateCreated.convertDateToReadableString()) | \(numberText)"
         cell.textView.text = model.descriptionText
-//        cell.layoutIfNeeded()
         cell.photoImageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
         cell.photoImageView.sd_imageTransition = .fade
         cell.photoImageView.sd_setImage(with: finalUrl)
         
-        
-     // you should ensure layout
+        // you should ensure layout
         cell.textView.layoutManager.ensureLayout(for: cell.textView.textContainer)
         
         var rects = [CGRect]()
-//        print("MATCH TO COLORS: \(matchToColors)")
-        print("------Ranges: \(model.descriptionMatchRanges)")
         cell.drawingView.subviews.forEach({ $0.removeFromSuperview() })
         for range in model.descriptionMatchRanges {
-            print("range: \(range.descriptionRange)")
             
-//            let start = cell.textView.positionFromPosition(cell.textView.beginningOfDocument, offset: range.location)
+            //            let start = cell.textView.positionFromPosition(cell.textView.beginningOfDocument, offset: range.location)
             guard let first = range.descriptionRange.first else { print("NO START!"); continue }
             guard let last = range.descriptionRange.last else { print("NO end!"); continue }
             guard let start = cell.textView.position(from: cell.textView.beginningOfDocument, offset: first) else { print("ERROR!! Start"); continue }
             // text position of the end of the range
-//            let end = cell.textView.positionFromPosition(start, offset: range.length)!
             guard let end = cell.textView.position(from: cell.textView.beginningOfDocument, offset: last) else { print("ERROR!! End"); continue }
-
-            // text range of the range
-//            let tRange = cell.textView.textRangeFromPosition(start, toPosition: end)
-
+            
             if let textRange = cell.textView.textRange(from: start, to: end) {
-            // here it is!
+                // here it is!
                 let rect = cell.textView.firstRect(for: textRange)
                 rects.append(rect)
                 
                 let newHighlight = addHighlight(text: range.text, rect: rect)
                 cell.drawingView.addSubview(newHighlight)
-                
-                
             }
         }
         
-        
-        
-        print("TEXT: \(model.descriptionText), RECTS: \(rects)----")
-        
-        
-        
-        
-        
         return cell
-//        dequeueReusableCell(withReuseIdentifier: "hPhotoId", for: indexPath) as! HPhotoCell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
@@ -462,22 +404,17 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
             mainContentVC.delegate = self
             
             mainContentVC.currentIndex = indexPath.item
-    //        mainContentVC.currentSection = indexPath.section
             mainContentVC.photoSize = imageSize
             
             mainContentVC.folderURL = folderURL
-//            self.editedFindbar = mainContentVC
             
             mainContentVC.matchToColors = matchToColors
             mainContentVC.cameFromFind = true
             mainContentVC.findModels = resultPhotos
-    //        mainContentVC.photoModels = modelArray
-    //        mainContentVC.photoPaths = photoPaths
-    //        SwiftEntryKit.dismiss()
+            
             changeFindbar?.change(type: "GetLists")
             SwiftEntryKit.dismiss()
             self.present(mainContentVC, animated: true)
-//            SwiftEntryKit.dismiss()
             
         } else {
             showWarning(show: true)
@@ -494,10 +431,8 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
                 warningHeightC.constant = 32
                 progressHeightC.constant = 10
                 UIView.animate(withDuration: 0.5, animations: {
-    //                self.prog
                     self.warningView.alpha = 1
                     self.warningLabel.alpha = 1
-//                    self.progressView.transform = self.progressView.transform.scaledBy(x: 1, y: 20)
                     self.view.layoutIfNeeded()
                 })
             }
@@ -509,7 +444,6 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
                 self.progressView.alpha = 0
                 self.warningView.alpha = 0
                 self.warningLabel.alpha = 0
-//                self.progressView.transform = CGAffineTransform.identity
                 self.view.layoutIfNeeded()
             })
         }
@@ -521,7 +455,9 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
             warningHeightC.constant = 32
             progressHeightC.constant = 0
             warningView.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
-            warningLabel.text = "Duplicates are not allowed"
+            
+            let duplicatesNotAllowed = NSLocalizedString("duplicatesNotAllowed", comment: "HistoryFindController def=Duplicates are not allowed")
+            warningLabel.text = duplicatesNotAllowed
             UIView.animate(withDuration: 0.5, animations: {
                 self.warningView.alpha = 1
                 self.warningLabel.alpha = 1
@@ -535,7 +471,9 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
                     self.view.layoutIfNeeded()
                 }, completion: { _ in
                     self.warningView.backgroundColor = #colorLiteral(red: 0, green: 0.5607843137, blue: 0.8470588235, alpha: 1)
-                    self.warningLabel.text = "OCR search in progress!"
+                    
+                    let ocrSearchInProgress = NSLocalizedString("ocrSearchInProgress", comment: "HistoryFindController def=OCR search in progress!")
+                    self.warningLabel.text = ocrSearchInProgress
                     self.isShowingDupWarning = false
                 })
             }
@@ -546,44 +484,28 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
 extension HistoryFindController: ReturnSortedTerms {
     
     func startedEditing(start: Bool) {
-//        UIView.animate(withDuration: 0.1, animations: {
-//            self.welcomeView.alpha = 0
-//        }) { _ in
-//            self.welcomeView.removeFromSuperview()
-//        }
+        
         if resultPhotos.count == 0 {
             
             if start == true {
                 if matchToColors.keys.count == 0 {
                     tableView.isHidden = false
                     tableView.alpha = 0
-
-                    noResultsLabel.text = "Start by typing or selecting a list..."
+                    
+                    noResultsLabel.text = startByTypingOrSelectingAList
                     UIView.animate(withDuration: 0.1, animations: {
                         self.welcomeView.alpha = 0
-//                        self.tableView.alpha = 1
                         self.noResultsLabel.alpha = 1
                         self.noResultsLabel.transform = CGAffineTransform.identity
                     }) { _ in
                         self.welcomeView.removeFromSuperview()
                     }
-                    print("Start editing")
                 }
                 
-                
-
             } else {
-//
-                print("ENDDD")
-//                print("COUNT:: \(stringToList.count)")
-//                print("list: \(stringToList)")
                 if matchToColors.keys.count == 0 {
-//                    let superViewWidth = view.frame.size.width
-//                    welcomeView.frame = CGRect(x: 0, y: 150, width: superViewWidth, height: 275)
-//                    view.addSubview(welcomeView)
                     let superViewWidth = view.frame.size.width
                     let newWidth = min(superViewWidth, CGFloat(400))
-            //        welcomeView.frame = CGRect(x: 0, y: 150, width: newWidth, height: 275)
                     view.addSubview(welcomeView)
                     welcomeView.snp.makeConstraints { (make) in
                         make.centerX.equalToSuperview()
@@ -593,10 +515,6 @@ extension HistoryFindController: ReturnSortedTerms {
                     }
                     welcomeView.alpha = 0
                     
-    //                let superViewWidth = view.frame.size.width
-    //                welcomeView.frame = CGRect(x: 0, y: 150, width: superViewWidth, height: 275)
-    //                view.addSubview(welcomeView)
-    //
                     UIView.animate(withDuration: 0.1, animations: {
                         self.welcomeView.alpha = 1
                         self.tableView.alpha = 0
@@ -611,22 +529,18 @@ extension HistoryFindController: ReturnSortedTerms {
     }
     
     func returnTerms(matchToColorsR: [String : [CGColor]]) {
-//        print("RECIEVED TERMS...>>.>.: \(currentMatchStringsR)")
-        
-        
-//        stringToList = stringToListR
-//        currentSearchFindList = currentSearchFindListR
-//        currentListsSharedFindList = currentListsSharedFindListR
-//        currentSearchAndListSharedFindList = currentSearchAndListSharedFindListR
-//        currentMatchStrings = currentMatchStringsR
+        //        stringToList = stringToListR
+        //        currentSearchFindList = currentSearchFindListR
+        //        currentListsSharedFindList = currentListsSharedFindListR
+        //        currentSearchAndListSharedFindList = currentSearchAndListSharedFindListR
+        //        currentMatchStrings = currentMatchStringsR
         matchToColors = matchToColorsR
-        
-        print("terms")
-        
         
         if matchToColors.keys.count == 0 {
             self.giveNumber?.howMany(number: 0, inCache: true, noSearchTerms: true)
-            noResultsLabel.text = "Start by typing or selecting a list..."
+            
+            
+            noResultsLabel.text = startByTypingOrSelectingAList
             UIView.animate(withDuration: 0.1, animations: {
                 self.noResultsLabel.alpha = 1
                 self.noResultsLabel.transform = CGAffineTransform.identity
@@ -638,22 +552,18 @@ extension HistoryFindController: ReturnSortedTerms {
             resultPhotos.removeAll()
             tableView.reloadData()
             
-            
         } else {
             fastFind()
         }
-        
-        
-        
     }
     
     func pause(pause: Bool) {
         dupSoPaused = pause
-//        print("recieved pause. \(pause)")
+        //        print("recieved pause. \(pause)")
         
     }
     func pressedReturn() {
-//        shouldAllowPressRow = false
+        //        shouldAllowPressRow = false
         
         ocrFind()
         helpButton.isEnabled = false
@@ -666,11 +576,9 @@ extension HistoryFindController: ReturnSortedTerms {
         }
     }
     func triedToEditWhilePaused() {
-        
         showPauseWarning()
     }
     func hereAreCurrentLists(currentSelected: [EditableFindList], currentText: String, object: MatchesLabelObject) {
-        print("GAVE!! \(currentSelected)")
         savedSelectedLists = currentSelected
         savedTextfieldText = currentText
         savedLabelObject = object
@@ -681,7 +589,6 @@ extension HistoryFindController {
     func fastFind() {
         var totalMatchNumber = 0
         if numberOfFindRequests == 0 {
-//            self.tableView.isUserInteractionEnabled = false
             self.shouldAllowPressRow = false
             UIView.animate(withDuration: 0.2, animations: {
                 self.tableView.alpha = 0.5
@@ -691,7 +598,7 @@ extension HistoryFindController {
         numberOfFindRequests += 1
         
         
-    
+        
         
         activityIndicator.startAnimating()
         histCenterC.constant = 13
@@ -699,11 +606,7 @@ extension HistoryFindController {
             self.view.layoutIfNeeded()
         })
         DispatchQueue.global(qos: .background).async {
-//            print("1")
             var findModels = [FindModel]()
-    //        var heights = [CGFloat]()
-            
-    //        print(
             for photo in self.photos {
                 print("searching in photo")
                 var num = 0
@@ -712,21 +615,11 @@ extension HistoryFindController {
                 newMod.photo = photo
                 
                 var descriptionOfPhoto = ""
-    //            var descStrings = [String]()
-    //            var compMatches = [ArrayOfMatchesInComp]()
                 var compMatches = [String: [ArrayOfMatchesInComp]]() ///COMPONENT to ranges
-                
                 
                 ///Cycle through each block of text. Each cont may be a line long.
                 for cont in photo.contents {
-//                    print("CONT: \(cont.x)")
-    //                let compRange = ArrayOfMatchesInComp()
-                    
-//                    var matchRanges = [ClosedRange<Int>]()
-                    
                     var matchRanges = [ArrayOfMatchesInComp]()
-    //                print("photoCont: \(photo.contents)")
-    //                print("in content")
                     var hasMatch = false
                     
                     let lowercaseContText = cont.text.lowercased()
@@ -747,7 +640,6 @@ extension HistoryFindController {
                                 newComponent.x = finalX
                                 newComponent.y = CGFloat(cont.y) - (CGFloat(cont.height))
                                 newComponent.width = finalW
-//                                print("WIDT: \(finalW + 12)")
                                 newComponent.height = CGFloat(cont.height)
                                 newComponent.text = match
                                 newMod.components.append(newComponent)
@@ -759,7 +651,7 @@ extension HistoryFindController {
                             }
                         }
                     }
-                        
+                    
                     if hasMatch == true {
                         compMatches[cont.text] = matchRanges
                     }
@@ -775,6 +667,7 @@ extension HistoryFindController {
                             
                             if descriptionOfPhoto == "" {
                                 existingCount += 3
+                                
                                 descriptionOfPhoto.append("...\(thisCompString)...")
                             } else {
                                 existingCount += 4
@@ -811,10 +704,10 @@ extension HistoryFindController {
                 newMod.descriptionHeight = finalHeight
                 
             }
-//            print("FIND COUNT: \(findModels.count)")
+            
             self.resultPhotos = findModels
             
-            print("TOF IND NUMBER: \(totalMatchNumber)")
+            
             if self.matchToColors.count == 0 {
                 self.giveNumber?.howMany(number: totalMatchNumber, inCache: true, noSearchTerms: true)
             } else {
@@ -825,7 +718,7 @@ extension HistoryFindController {
             DispatchQueue.main.async {
                 
                 self.numberOfFindRequests -= 1
-            
+                
                 if self.numberOfFindRequests == 0 {
                     self.activityIndicator.stopAnimating()
                     self.histCenterC.constant = 0
@@ -833,7 +726,6 @@ extension HistoryFindController {
                         self.view.layoutIfNeeded()
                     })
                     
-//                    self.tableView.isUserInteractionEnabled = true
                     self.shouldAllowPressRow = true
                     
                     if findModels.count >= 1 {
@@ -846,9 +738,10 @@ extension HistoryFindController {
                             self.tableView.transform = CGAffineTransform.identity
                         })
                     } else {
-                        print("NO results")
-    //                    if
-                        self.noResultsLabel.text = "No results found in cache. Press Search on the keyboard to continue."
+                        
+                        let noResultsInCache = NSLocalizedString("noResultsInCache", comment: "HistoryFindController def=No results found in cache. Press Search on the keyboard to continue.")
+                        //                        self.noResultsLabel.text = "No results found in cache. Press Search on the keyboard to continue."
+                        self.noResultsLabel.text = noResultsInCache
                         UIView.animate(withDuration: 0.1, animations: {
                             self.noResultsLabel.alpha = 1
                             self.tableView.alpha = 0
@@ -862,28 +755,17 @@ extension HistoryFindController {
                     
                     
                     self.tableView.reloadData()
-//                    self.cacheFindNumber = totalMatchNumber
-                    
                 }
-                
             }
-            
         }
-        
-        
     }
-    
-    
 }
 
 
 
 extension HistoryFindController: PhotoPageContainerViewControllerDelegate {
- 
     func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int) {
-//        print("sdfhjk")
         self.selectedIndexPath = IndexPath(row: currentIndex, section: 0)
-//        self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
         self.tableView.scrollToRow(at: self.selectedIndexPath, at: .middle, animated: false)
     }
 }
@@ -905,7 +787,6 @@ extension HistoryFindController: ZoomAnimatorDelegate {
             attributes.positionConstraints.size.height = .constant(value: 60)
             attributes.statusBar = .light
             attributes.entryInteraction = .absorbTouches
-    //        attributes.scroll = .disabled
             attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
             attributes.roundCorners = .all(radius: 5)
             attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
@@ -915,7 +796,6 @@ extension HistoryFindController: ZoomAnimatorDelegate {
             attributes.positionConstraints.keyboardRelation = keyboardRelation
             
             let customView = FindBar()
-    //            customView.selectedLists = self.savedSelectedLists
             customView.returnTerms = self
             self.giveNumber = customView
             customView.highlightColor = self.highlightColor
@@ -929,21 +809,18 @@ extension HistoryFindController: ZoomAnimatorDelegate {
             
             print("TRANSITION ENDED")
         }
-//        let cell = self.tableView.cellForItem(at: self.selectedIndexPath) as! HistoryFindCell
+        
         guard let cell = self.tableView.cellForRow(at: self.selectedIndexPath) as? HistoryFindCell else { print("NO CELL!!!"); return }
         let cellFrame = self.tableView.convert(cell.frame, to: self.view)
         
         if cellFrame.minY < self.tableView.contentInset.top {
-//            self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .top, animated: false)
             self.tableView.scrollToRow(at: self.selectedIndexPath, at: .top, animated: false)
         } else if cellFrame.maxY > self.view.frame.height - self.tableView.contentInset.bottom {
-//            self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .bottom, animated: false)
             self.tableView.scrollToRow(at: self.selectedIndexPath, at: .bottom, animated: false)
         }
     }
     
     func referenceImageView(for zoomAnimator: ZoomAnimator) -> UIImageView? {
-        
         //Get a guarded reference to the cell's UIImageView
         let referenceImageView = getImageViewFromCollectionViewCell(for: self.selectedIndexPath)
         
@@ -963,38 +840,26 @@ extension HistoryFindController: ZoomAnimatorDelegate {
         if cellFrame.minY < self.tableView.contentInset.top {
             return CGRect(x: cellFrame.minX, y: self.tableView.contentInset.top, width: cellFrame.width, height: cellFrame.height - (self.tableView.contentInset.top - cellFrame.minY))
         }
-        print("cellframe: \(cellFrame)")
-        
-//        let heightDiff = screenBounds.size.height - view.bounds.size.height
-//        print("height diff: \(heightDiff)")
-//        cellFrame.origin.y += heightDiff
-//        let heightDiff = screenBounds.size.height - view.bounds.size.height
-//        var widthDiff = screenBounds.size.width - view.bounds.size.width
-//        widthDiff /= 2
-//        print("height diff: \(heightDiff)")
-//        cellFrame.origin.y += heightDiff
-//        cellFrame.origin.x += widthDiff
-        
         let superCellFrame = self.tableView.convert(unconvertedFrame, to: nil)
         let cellYDiff = superCellFrame.origin.y - cellFrame.origin.y
         let cellXDiff = superCellFrame.origin.x - cellFrame.origin.x
         
         cellFrame.origin.y += cellYDiff
         cellFrame.origin.x += cellXDiff
-        ///need to fix this, no hardcoded values
         return cellFrame
     }
+    
     //This function prevents the collectionView from accessing a deallocated cell. In the event
     //that the cell for the selectedIndexPath is nil, a default UIImageView is returned in its place
     func getImageViewFromCollectionViewCell(for selectedIndexPath: IndexPath) -> UIImageView {
         
         //Get the array of visible cells in the collectionView
         if let visibleCells = self.tableView.indexPathsForVisibleRows {
-        
+            
             //If the current indexPath is not visible in the collectionView,
             //scroll the collectionView to the cell to prevent it from returning a nil value
             if !visibleCells.contains(self.selectedIndexPath) {
-               
+                
                 //Scroll the collectionView to the current selectedIndexPath which is offscreen
                 self.tableView.scrollToRow(at: self.selectedIndexPath, at: .middle, animated: false)
                 
@@ -1002,11 +867,6 @@ extension HistoryFindController: ZoomAnimatorDelegate {
                 self.tableView.reloadRows(at: visibleCells, with: .none)
                 self.tableView.layoutIfNeeded()
                 
-                //Guard against nil values
-    //            guard let guardedCell = (self.collectionView.cellForItem(at: self.selectedIndexPath) as? HPhotoCell) else {
-    //                //Return a default UIImageView
-    //                return UIImageView(frame: CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0))
-    //            }
                 guard let guardedCell = (self.tableView.cellForRow(at: self.selectedIndexPath) as? HistoryFindCell) else {
                     return UIImageView(frame: CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0))
                 }
@@ -1015,11 +875,7 @@ extension HistoryFindController: ZoomAnimatorDelegate {
             }
             else {
                 
-                //Guard against nil return values
-    //            guard let guardedCell = self.collectionView.cellForItem(at: self.selectedIndexPath) as? HPhotoCell else {
-    //                //Return a default UIImageView
-    //                return UIImageView(frame: CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0))
-    //            }
+                
                 guard let guardedCell = (self.tableView.cellForRow(at: self.selectedIndexPath) as? HistoryFindCell) else {
                     return UIImageView(frame: CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0))
                 }
@@ -1028,14 +884,12 @@ extension HistoryFindController: ZoomAnimatorDelegate {
             }
         } else {
             self.tableView.scrollToRow(at: self.selectedIndexPath, at: .middle, animated: false)
-                        //Reload the items at the newly visible indexPaths
-            //            self.tableView.reloadItems(at: visibleCells)
+            
             if let newlyVisibleCells = self.tableView?.indexPathsForVisibleRows {
                 self.tableView.reloadRows(at: newlyVisibleCells, with: .none)
             }
             self.tableView.layoutIfNeeded()
             
-            //Prevent the collectionView from returning a nil value
             guard let guardedCell = (self.tableView.cellForRow(at: self.selectedIndexPath) as? HistoryFindCell) else {
                 return UIImageView(frame: CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0))
             }
@@ -1058,10 +912,10 @@ extension HistoryFindController: ZoomAnimatorDelegate {
             if !visibleCells.contains(self.selectedIndexPath) {
                 
                 //Scroll the collectionView to the cell that is currently offscreen
-    //            self.tableView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
+                //            self.tableView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
                 self.tableView.scrollToRow(at: self.selectedIndexPath, at: .middle, animated: false)
                 //Reload the items at the newly visible indexPaths
-    //            self.tableView.reloadItems(at: visibleCells)
+                //            self.tableView.reloadItems(at: visibleCells)
                 if let newlyVisibleCells = self.tableView?.indexPathsForVisibleRows {
                     self.tableView.reloadRows(at: newlyVisibleCells, with: .none)
                 }
@@ -1081,14 +935,14 @@ extension HistoryFindController: ZoomAnimatorDelegate {
                 
                 return cellFrame
             }
-            //Otherwise the cell should be visible
+                //Otherwise the cell should be visible
             else {
                 //Prevent the collectionView from returning a nil value
                 guard let guardedCell = (self.tableView.cellForRow(at: self.selectedIndexPath) as? HistoryFindCell) else {
                     return CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0)
                 }
                 //The cell was found successfully
-//                return guardedCell.frame
+                //                return guardedCell.frame
                 var cellFrame = guardedCell.frame
                 cellFrame.origin.x += 16
                 cellFrame.origin.y += 6
@@ -1099,7 +953,7 @@ extension HistoryFindController: ZoomAnimatorDelegate {
             }
         } else {
             self.tableView.scrollToRow(at: self.selectedIndexPath, at: .middle, animated: false)
-                        //Reload the items at the newly visible indexPaths
+            //Reload the items at the newly visible indexPaths
             //            self.tableView.reloadItems(at: visibleCells)
             if let newlyVisibleCells = self.tableView?.indexPathsForVisibleRows {
                 self.tableView.reloadRows(at: newlyVisibleCells, with: .none)
@@ -1111,7 +965,7 @@ extension HistoryFindController: ZoomAnimatorDelegate {
                 return CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0)
             }
             
-//            return guardedCell.frame
+            //            return guardedCell.frame
             var cellFrame = guardedCell.frame
             cellFrame.origin.x += 16
             cellFrame.origin.y += 6
@@ -1133,26 +987,19 @@ extension HistoryFindController {
         newOrigRect.size.height += 2
         
         let newView = UIView(frame: CGRect(x: newOrigRect.origin.x, y: newOrigRect.origin.y, width: newOrigRect.size.width, height: newOrigRect.size.height))
-//        print("text to color... text: \(text)")
         guard let colors = matchToColors[text] else { print("NO COLORS!"); return newView}
         
-//        let viewToReturn = UIView()
-//        DispatchQueue.main.async {
-            
         let layer = CAShapeLayer()
         layer.frame = CGRect(x: 0, y: 0, width: newOrigRect.size.width, height: newOrigRect.size.height)
         layer.cornerRadius = rect.size.height / 3.5
-            
+        
         let newLayer = CAShapeLayer()
         newLayer.bounds = layer.frame
         newLayer.path = UIBezierPath(roundedRect: layer.frame, cornerRadius: newOrigRect.size.height / 3.5).cgPath
         newLayer.lineWidth = 2
-//        newLayer.lineCap = .round
-            
-            
-//            var newFillColor = UIColor()
+        
         if colors.count > 1 {
-//                print("shared list")
+            
             var newRect = layer.frame
             newRect.origin.x += 1
             newRect.origin.y += 1
@@ -1164,12 +1011,10 @@ extension HistoryFindController {
             
             let gradient = CAGradientLayer()
             gradient.frame = layer.bounds
-//                if let gradientColors = self.matchToColors[component.text] {
             gradient.colors = colors
             if let firstColor = colors.first {
                 layer.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3).cgColor
             }
-//                }
             gradient.startPoint = CGPoint(x: 0, y: 0.5)
             gradient.endPoint = CGPoint(x: 1, y: 0.5)
             gradient.mask = newLayer
@@ -1178,8 +1023,6 @@ extension HistoryFindController {
             layer.addSublayer(gradient)
             
         } else {
-//            newLayer.fillColor = UIColor(hexString: highlightColor).withAlphaComponent(0.3).cgColor
-//            newLayer.strokeColor = UIColor(hexString: highlightColor).cgColor
             layer.addSublayer(newLayer)
             if let firstColor = colors.first {
                 newLayer.fillColor = firstColor.copy(alpha: 0.3)
@@ -1187,18 +1030,14 @@ extension HistoryFindController {
                 layer.addSublayer(newLayer)
             }
         }
-            
-            
-//            self.mainContentView.addSubview(newView)
-            
-            newView.layer.addSublayer(layer)
-            newView.clipsToBounds = false
-            let x = newLayer.bounds.size.width / 2
-            let y = newLayer.bounds.size.height / 2
-            newLayer.position = CGPoint(x: x, y: y)
-            
-            return newView
-//        }
+        
+        newView.layer.addSublayer(layer)
+        newView.clipsToBounds = false
+        let x = newLayer.bounds.size.width / 2
+        let y = newLayer.bounds.size.height / 2
+        newLayer.position = CGPoint(x: x, y: y)
+        
+        return newView
     }
 }
 
@@ -1219,22 +1058,13 @@ extension HistoryFindController {
         
         dispatchQueue.async {
             self.ocrPassCount = 0
-//            var number = 0
+            
             for photo in self.photos {
                 if self.statusOk == true {
                     
-    //                number += 1
-    //                    print("num: \(number)")
-    //                    let indP = IndexPath(item: number - 1, section: 0)
-                    
                     self.dispatchGroup.enter()
                     
-                    
-                    
-    //                print("OCR: \(self.ocrPassCount)")
                     let photoUrl = self.folderURL.appendingPathComponent(photo.filePath)
-//                    guard let photoUrl = URL(string: "\(self.folderURL)\(photo.filePath)") else { print("WRONG URL!!!!"); return }
-                    
                     let request = VNRecognizeTextRequest { request, error in
                         self.handleFastDetectedText(request: request, error: error, photo: photo)
                     }
@@ -1254,13 +1084,9 @@ extension HistoryFindController {
                     request.recognitionLanguages = ["en_GB"]
                     let imageRequestHandler = VNImageRequestHandler(url: photoUrl, orientation: .up)
                     
-    //                request.progressHandler = { (request, value, error) in
-    ////                    print("Progress: \(value)")
-    //                }
                     do {
                         try imageRequestHandler.perform([request])
                     } catch let error {
-        //                self.busyFastFinding = false
                         print("Error: \(error)")
                     }
                     
@@ -1268,13 +1094,12 @@ extension HistoryFindController {
                 } else {
                     break
                 }
-               
+                
             }
         }
         dispatchGroup.notify(queue: dispatchQueue) {
             if self.statusOk == true {
                 self.ocrSearching = false
-    //            self.
                 DispatchQueue.main.async {
                     self.showWarning(show: false)
                     self.tableView.reloadData()
@@ -1293,24 +1118,19 @@ extension HistoryFindController {
         
         self.ocrPassCount += 1
         DispatchQueue.main.async {
-//            print("HPOSO COUNT: \(self.photos.count)")
             let individualProgress = CGFloat(self.ocrPassCount) / CGFloat(self.photos.count)
-//            print("IND PROGR: \(individualProgress)")
             UIView.animate(withDuration: 0.6, animations: {
                 self.progressView.setProgress(Float(individualProgress), animated: true)
             })
         }
         
-       
+        
         guard let results = request?.results, results.count > 0 else {
-            print("no results")
-//                alreadyCachedPhotos.append(newCachedPhoto)
             dispatchSemaphore.signal()
             dispatchGroup.leave()
-            
             return
         }
-
+        
         var contents = [EditableSingleHistoryContent]()
         
         for result in results {
@@ -1348,7 +1168,6 @@ extension HistoryFindController {
             let individualCharacterWidth = CGFloat(cont.width) / CGFloat(lowercaseContText.count)
             for match in self.matchToColors.keys {
                 if lowercaseContText.contains(match) {
-//                    print("MATCH!! \(match), in: \(cont.text)")
                     hasMatch = true
                     let finalW = individualCharacterWidth * CGFloat(match.count)
                     let indicies = lowercaseContText.indicesOf(string: match)
@@ -1374,12 +1193,9 @@ extension HistoryFindController {
                         matchRanges.append(newRangeObject)
                         
                     }
-                    
-                    
-                    
                 }
             }
-                
+            
             if hasMatch == true {
                 compMatches[cont.text] = matchRanges
             }
@@ -1431,13 +1247,12 @@ extension HistoryFindController {
                             let point2 = CGPoint(x: newFindMatch.x, y: newFindMatch.y)
                             let pointDistance = relativeDistance(point1, point2)
                             
-//                                print("OLD: \(point1), new: \(point2)")
                             if pointDistance < smallestDist {
                                 smallestDist = pointDistance
                             }
                             
                         }
-//                            print("SMALL DIST: \(smallestDist)")
+                        
                         if smallestDist >= 0.008 { ///Bigger, so add it
                             componentsToAdd.append(newFindMatch)
                             newMatchesNumber += 1
@@ -1450,8 +1265,7 @@ extension HistoryFindController {
                     
                     newOCRfindNumber += newMatchesNumber
                     print("ADD MATCHES: \(newMatchesNumber)")
-//                    for cont in conte
-//                    existingModel.photo.contents.append(contents)
+                    
                 }
             }
             
@@ -1473,23 +1287,14 @@ extension HistoryFindController {
                 newOCRfindNumber += numberOfMatches
                 
             }
-            
-            
         }
         
-        
-        
-        
-//        newCachedPhoto.contents = contents
-        
-//            alreadyCachedPhotos.append(newCachedPhoto)
         dispatchSemaphore.signal()
         dispatchGroup.leave()
     }
     
     func finishOCR() {
-//        let totalMatches = newOCRfindNumber + cacheFindNumber
-//        giveNumber?.howMany(number: newOCRfindNumber, inCache: false)
+        
         if matchToColors.count == 0 {
             self.giveNumber?.howMany(number: newOCRfindNumber, inCache: false, noSearchTerms: true)
         } else {
@@ -1502,7 +1307,6 @@ extension HistoryFindController {
                 self.view.layoutIfNeeded()
             })
             
-//                    self.tableView.isUserInteractionEnabled = true
             self.shouldAllowPressRow = true
             
             if self.resultPhotos.count >= 1 {
@@ -1516,8 +1320,9 @@ extension HistoryFindController {
                 })
             } else {
                 print("NO results")
-//                    if
-                self.noResultsLabel.text = "No results found."
+                let noResultsFound = NSLocalizedString("noResultsFound", comment: "HistoryFindController def=No results found.")
+                
+                self.noResultsLabel.text = noResultsFound
                 UIView.animate(withDuration: 0.1, animations: {
                     self.noResultsLabel.alpha = 1
                     self.tableView.alpha = 0
@@ -1527,11 +1332,7 @@ extension HistoryFindController {
                     self.tableView.isHidden = true
                 }
             }
-            
-            
-            
             self.tableView.reloadData()
-            
         }
     }
 }
@@ -1550,3 +1351,4 @@ extension HistoryFindController {
     }
 }
 
+// MARK: - STOPPED HERE FOR LOCALIZATION

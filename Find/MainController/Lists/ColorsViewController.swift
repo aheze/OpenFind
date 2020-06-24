@@ -47,40 +47,17 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
         "#ff6348","#b71540","#579f2b","#d1d8e0","#778ca3",
         "#e84393","#a55eea","#5352ed","#70a1ff","#40739e",
         "#45aaf2","#2d98da","#00aeef","#4b6584","#0a3d62"]
-//        ["#eb2f06","#e55039","#f7b731","#fed330","#78e08f","#fc5c65","#fa8231","#f6b93b","#b8e994","#2bcbba","#a55eea","#b71540","#079992","#d1d8e0","#778ca3","#45aaf2","#2d98da","#00aeef","#4b6584","#0a3d62"]
-    
-    //["#eb2f06","#e55039","#f7b731","#fed330","#78e08f”,"#fc5c65","#fa8231","#f6b93b","#b8e994","#2bcbba","#ff6348" ,"#b71540","#079992","#d1d8e0","#778ca3","#a55eea","#5352ed","#70a1ff","#f1f2f6","#e84393","#45aaf2","#2d98da","#00aeef","#4b6584","#0a3d62"]
-    
-    
-  
-    
-//    func updateInfo() {
-//        if colorName == "" {
-//            colorName = "#00aeef"
-//        }
-//        print("Return color. Color name: \(colorName)")
-//        colorDelegate?.returnNewColor(colorName: colorName)
-//    }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return colorArray.count
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         colorName = colorArray[indexPath.item]
-        //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCellID", for: indexPath) as! ColorCell
-        print("select")
         colorDelegate?.returnNewColor(colorName: colorName)
         selectedPath = indexPath.item
-       // cell.checkMarkView.isHidden = false
-        
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         colorName = colorArray[indexPath.item]
-        //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCellID", for: indexPath) as! ColorCell
-        
-        print("deselect")
-       // cell.checkMarkView.isHidden = true
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -91,8 +68,6 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
         } else {
             cell.checkMarkView.isHidden = true
         }
-        //cell.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-       // cell.sizeForItems = collectionView.siz
         return cell
     }
     func collectionView(_ collectionView: UICollectionView,
@@ -102,7 +77,6 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
         let paddingSpace = sectionInsets.left * CGFloat(itemsPerRow + 1)
         let availableWidth = collectionView.frame.width - paddingSpace
         let widthPerItem = availableWidth / itemsPerRow
-        print("width: \(widthPerItem)")
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -113,8 +87,6 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
                       minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 8
     }
-    
-    
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -130,24 +102,16 @@ class ColorCell: UICollectionViewCell {
     var color = "" {
         didSet {
             print(color)
-            var contentLength = bounds.size.width
-            var halfContL = contentLength / 2
-            print("content height for color cell: \(contentLength)")
+            let contentLength = bounds.size.width
+            let halfContL = contentLength / 2
             let circlePath = UIBezierPath(arcCenter: CGPoint(x: halfContL, y: halfContL), radius: CGFloat(halfContL), startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
 
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = circlePath.cgPath
 
-            //change the fill color
             shapeLayer.fillColor = UIColor(hexString: color).cgColor
-            //you can change the stroke color
-            //shapeLayer.strokeColor = UIColor.red.cgColor
-            //you can change the line width
-            //shapeLayer.lineWidth = 30
-
             contentView.layer.addSublayer(shapeLayer)
             contentView.bringSubviewToFront(checkMarkView)
-            //self.backgroundColor = UIColor(hex: color)
         }
     }
     
@@ -157,50 +121,9 @@ class ColorCell: UICollectionViewCell {
         didSet {
             if (isSelected) {
                 checkMarkView.isHidden = false
-//                let length = bounds.size.width
-//
-//                //var newView = UIView()
-//                overlayView.frame = (CGRect(x: 0, y: 0, width: length, height: length))
-//                overlayView.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-//                overlayView.layer.cornerRadius = 10
-//                //overlayView.tag = 010101
-//                contentView.addSubview(<#T##view: UIView##UIView#>)
-
             } else {
                 checkMarkView.isHidden = true
-               // if let newView = contentView.viewWithTag(010101) {
-//                    overlayView.removeFromSuperview()
-               // }
             }
         }
     }
-    
 }
-
-//extension UIColor {
-//    public convenience init?(hex: String) {
-//        let r, g, b, a: CGFloat
-//
-//        if hex.hasPrefix("#") {
-//            let start = hex.index(hex.startIndex, offsetBy: 1)
-//            let hexColor = String(hex[start...])
-//
-//            if hexColor.count == 8 {
-//                let scanner = Scanner(string: hexColor)
-//                var hexNumber: UInt64 = 0
-//
-//                if scanner.scanHexInt64(&hexNumber) {
-//                    r = CGFloat((hexNumber & 0xff000000) >> 24) / 255
-//                    g = CGFloat((hexNumber & 0x00ff0000) >> 16) / 255
-//                    b = CGFloat((hexNumber & 0x0000ff00) >> 8) / 255
-//                    a = CGFloat(hexNumber & 0x000000ff) / 255
-//
-//                    self.init(red: r, green: g, blue: b, alpha: a)
-//                    return
-//                }
-//            }
-//        }
-//
-//        return nil
-//    }
-//}

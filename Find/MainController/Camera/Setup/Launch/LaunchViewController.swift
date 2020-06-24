@@ -8,10 +8,11 @@
 
 import UIKit
 import AVFoundation
-//import paper_onboarding
 import SnapKit
 
 class LaunchViewController: UIViewController {
+    
+    let loc = LaunchLocalization()
     
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var topLeftImageView: UIImageView!
@@ -34,7 +35,6 @@ class LaunchViewController: UIViewController {
     var onboardingOnLastPage = false
     
     @IBAction func allowAccessPressed(_ sender: Any) {
-        print("allow")
         if shouldGoToSettings {
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                 return
@@ -147,12 +147,12 @@ class LaunchViewController: UIViewController {
         }
         
     }
-//    var bottomOnboardingConstraint: Constraint? = nil
+    //    var bottomOnboardingConstraint: Constraint? = nil
     
     @IBOutlet weak var onboardingBottomC: NSLayoutConstraint!
     @IBOutlet weak var onboardingWidthC: NSLayoutConstraint!
     
-//    let deviceSize = screenBounds.size
+    //    let deviceSize = screenBounds.size
     let loadingImages = (0...10).map { UIImage(named: "\($0)")! }
     
     let defaults = UserDefaults.standard
@@ -160,7 +160,7 @@ class LaunchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        skipButton.alpha = 0
+        //        skipButton.alpha = 0
         skipButton.isHidden = true
         
         getStartedButton.alpha = 0
@@ -177,8 +177,8 @@ class LaunchViewController: UIViewController {
         allowAccessButton.layer.cornerRadius = 6
         allowAccessView.layer.cornerRadius = 14
         
-//        view.layoutIfNeeded()
-//        print("LOADIM: \(loadingImages)")
+        //        view.layoutIfNeeded()
+        //        print("LOADIM: \(loadingImages)")
         topRightImageView.transform = CGAffineTransform(rotationAngle: CGFloat(-270).degreesToRadians)
         bottomLeftImageView.transform = CGAffineTransform(rotationAngle: CGFloat(-90).degreesToRadians)
         bottomRightImageView.transform = CGAffineTransform(rotationAngle: CGFloat(-180).degreesToRadians)
@@ -220,18 +220,14 @@ class LaunchViewController: UIViewController {
                     self.drawAnimation(type: "Restricted")
                 })
             }
-//            view.bringSubviewToFront(allowAccessView)
-//            allowAccessView.bringSubviewToFront(allowAccessButton)
+            //            view.bringSubviewToFront(allowAccessView)
+            //            allowAccessView.bringSubviewToFront(allowAccessButton)
         }
- 
+        
         
     }
     
-//    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
-//        viewControllerToPresent.modalPresentationStyle = .fullScreen
-//      super.present(viewControllerToPresent, animated: flag, completion: completion)
-//    }
-//
+    let goToSettings = NSLocalizedString("goToSettings", comment: "LaunchViewController def=Go to settings")
     
     
     func drawAnimation(type:String = "onboarding") {
@@ -255,7 +251,7 @@ class LaunchViewController: UIViewController {
                     self.baseView.transform = CGAffineTransform.identity
                     self.allowAccessView.transform = CGAffineTransform.identity
                     self.allowAccessView.alpha = 1
-//                    self.skipButton.alpha = 0
+                    //                    self.skipButton.alpha = 0
                     
                     self.topLeftImageView.image = UIImage(named: "10")
                     self.topRightImageView.image = UIImage(named: "10")
@@ -278,30 +274,24 @@ class LaunchViewController: UIViewController {
                     self.bottomLeftImageView.startAnimating()
                     self.bottomRightImageView.startAnimating()
                 })
-                self.accessDescLabel.text = "You don't have permission to use the camera."
-                self.shouldGoToSettings = true
-                self.allowAccessButton.setTitle("Go to settings", for: .normal)
-//                self.allowAccessButton.isUserInteractionEnabled = true
                 
+                let noPermissionToUseCamera = NSLocalizedString("noPermissionToUseCamera", comment: "LaunchViewController def=You don't have permission to use the camera.")
+                
+                self.accessDescLabel.text = noPermissionToUseCamera
+                self.shouldGoToSettings = true
+                self.allowAccessButton.setTitle(self.goToSettings, for: .normal)
             case "DENIED":
-//                self.skipButton.isHidden = true
-//                print("AVAI::: \(availibleWidth), h: \(self.deviceSize.height - 100)")
                 self.totalWidthC.constant = availibleWidth
                 self.totalHeightC.constant = self.view.bounds.height - 60
                 self.allowAccessViewHeightC.constant = self.view.bounds.height - 100
                 self.allowAccessWidthC.constant = accessAvailibleWidth
                 self.allowAccessView.isHidden = false
                 
-//                self.skipButton.isHidden = true
-//                UIView.animate(withDuration: 0.2, animations: {
-//                    self.skipButton.alpha = 1
-//                })
                 UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
                     self.view.layoutIfNeeded()
                     self.baseView.transform = CGAffineTransform.identity
                     self.allowAccessView.transform = CGAffineTransform.identity
                     self.allowAccessView.alpha = 1
-//                    self.skipButton.alpha = 0
                     self.settingsPictureView.alpha = 1
                     if self.firstTimeDeny {
                         
@@ -328,18 +318,14 @@ class LaunchViewController: UIViewController {
                     }
                     
                 })
-                self.allowAccessButton.setTitle("Go to settings", for: .normal)
-//                self.allowAccessView.alpha = 0.5
-                
+                self.allowAccessButton.setTitle(self.goToSettings, for: .normal)
                 
             case "needPermissions":
-                print("needPermissions")
                 self.totalWidthC.constant = availibleWidth
                 self.totalHeightC.constant = availibleWidth
                 self.allowAccessViewHeightC.constant = accessAvailibleWidth
                 self.allowAccessWidthC.constant = accessAvailibleWidth
                 
-//                self.skipButton.isHidden = true
                 self.allowAccessView.isHidden = false
                 UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
                     self.view.layoutIfNeeded()
@@ -368,8 +354,7 @@ class LaunchViewController: UIViewController {
                     self.bottomLeftImageView.startAnimating()
                     self.bottomRightImageView.startAnimating()
                 })
-                print("hi")
-//                allowAcces
+                
             case "onboarding":
                 
                 self.onboarding.dataSource = self
@@ -379,14 +364,6 @@ class LaunchViewController: UIViewController {
                 self.onboarding.layer.cornerRadius = 14
                 self.onboarding.clipsToBounds = true
                 self.onboardingWidthC.constant = accessAvailibleWidth
-//                self.view.addSubview(self.onboarding)
-//                self.onboarding.snp.makeConstraints { (make) in
-//                    make.width.equalTo(accessAvailibleWidth)
-//                    make.centerX.equalToSuperview()
-//                    make.top.equalToSuperview().offset(50)
-//                    self.bottomOnboardingConstraint = make.bottom.equalToSuperview().offset(-50).constraint
-//                }
-//                getStarter
                 
                 self.view.layoutIfNeeded()
                 self.view.bringSubviewToFront(self.skipButton)
@@ -423,17 +400,12 @@ class LaunchViewController: UIViewController {
                 }) { _ in
                     self.getStartedButton.isHidden = false
                     self.skipButton.isHidden = false
-//                    UIView.animate(withDuration: 0.2, animations: {
-//                        self.skipButton.alpha = 1
-//                    })
                 }
             case "fullScreenStart":
                 let finalWidth = self.view.bounds.width
                 let finalHeight = self.view.bounds.height
                 self.totalWidthC.constant = finalWidth
                 self.totalHeightC.constant = finalHeight
-                
-//                self.skipButton.isHidden = true
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.05, execute: {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -443,7 +415,7 @@ class LaunchViewController: UIViewController {
                     
                     
                     viewController.modalPresentationCapturesStatusBarAppearance = true
-//                    viewController.transitioningDelegate = self
+                    //                    viewController.transitioningDelegate = self
                     self.present(viewController, animated: true, completion: nil)
                 })
                 UIView.animate(withDuration: 0.4, animations: {
@@ -455,30 +427,22 @@ class LaunchViewController: UIViewController {
                     self.bottomRightImageView.alpha = 0
                     self.view.alpha = 0
                 })
-                default:
-                    print("WRONG!!")
+            default:
+                print("WRONG!!")
             }
         }
     }
-        
+    
 }
+
 
 extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSource {
     
     func onboardingWillTransitonToIndex(_ index: Int) {
         if index == 0 {
-//            skipButton.alpha = 0
             skipButton.isHidden = false
-//            UIView.animate(withDuration: 0.15, animations: {
-//                self.skipButton.alpha = 1
-//            })
         } else {
-//            skipButton.alpha = 1
-//            UIView.animate(withDuration: 0.15, animations: {
-//                self.skipButton.alpha = 0
-//            }) { _ in
             skipButton.isHidden = true
-//            }
         }
         if index == 5 {
             onboardingOnLastPage = true
@@ -507,119 +471,101 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
             
         }
     }
+}
+    
+class LaunchLocalization {
+    let welcomeToFind = NSLocalizedString("welcomeToFind", comment: "LaunchViewController def=Welcome to Find")
+    let swipeToGetStarted = NSLocalizedString("swipeToGetStarted", comment: "LaunchViewController def=Swipe to get started")
+    
+    let whatIsFind = NSLocalizedString("whatIsFind", comment: "LaunchViewController def=What is Find?")
+    let findIsCommandFForCamera = NSLocalizedString("findIsCommandFForCamera",
+                                 comment: "LaunchViewController def=Find is Command+F for camera: Find words in books, worksheets, nutrition labels... anywhere that contains text!")
+    
+    let findWords = NSLocalizedString("findWords", comment: "LaunchViewController def=Find words")
+    let tapSearchField = NSLocalizedString("tapSearchField", comment: "LaunchViewController def=Tap the Search Field at the top of the screen")
+    
+    let takePhotos = NSLocalizedString("takePhotos", comment: "LaunchViewController def=Take photos")
+    let tapShutterButton = NSLocalizedString("tapShutterButton", comment: "LaunchViewController def=Tap the shutter button. Your photos will appear in your History, where you can Find from them again and again and again...")
+    
+    let accessMenu = NSLocalizedString("accessMenu", comment: "LaunchViewController def=Access the Menu")
+    let yourHistoryListsAndSettingsHere = NSLocalizedString("yourHistoryListsAndSettingsHere", comment: "LaunchViewController def=Your History, Lists, and Settings are here. Check it out!")
+    
+    let beforeYouStart = NSLocalizedString("beforeYouStart", comment: "LaunchViewController def=Before you start...")
+    let ensureAccuracy = NSLocalizedString("ensureAccuracy", comment: "LaunchViewController def=To ensure the most accurate results, please make sure to hold your phone as steady as possible.")
+}
+
+
+extension LaunchViewController {
+    // MARK: - STOPPED HERE FOR LOCALIZATION
     
     
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
-      return [
-        OnboardingItemInfo(informationImage: UIImage(named: "Swelcome")!,
-                                      title: "Welcome to Find",
-                                description: "Swipe to get started",
-                                   pageIcon: UIImage(),
-                                   color: UIColor(named: "OnboardingGray")!,
-                                 titleColor: UIColor.black,
-                           descriptionColor: UIColor.darkGray,
-                           titleFont: UIFont.systemFont(ofSize: 30, weight: .bold),
-                            descriptionFont: UIFont.systemFont(ofSize: 17)),
-        
-        OnboardingItemInfo(informationImage: UIImage(named: "Swhatis")!,
-                   title: "What is Find?",
-             description: "Find is Command+F for camera. Find words in books, worksheets, nutrition labels... Anywhere as long as there's text!",
-                pageIcon: UIImage(named: "1icon")!,
-                color: UIColor(named: "OnboardingGray")!,
-              titleColor: UIColor.black,
-        descriptionColor: UIColor.darkGray,
-        titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
-         descriptionFont: UIFont.systemFont(ofSize: 17)),
-        
-        OnboardingItemInfo(informationImage: UIImage(named: "Ssearchfield")!,
-                   title: "Find words",
-             description: "Tap the Search Field at the top of the screen",
-                pageIcon: UIImage(named: "2icon")!,
-                color: UIColor(named: "OnboardingGray")!,
-              titleColor: UIColor.black,
-        descriptionColor: UIColor.darkGray,
-        titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
-         descriptionFont: UIFont.systemFont(ofSize: 17)),
-
-        OnboardingItemInfo(informationImage: UIImage(named: "Sshutter")!,
-                   title: "Take photos",
-             description: "Tap the shutter button. Your photos will appear in your History, where you can Find from them again and again and again...",
-                pageIcon: UIImage(named: "3icon")!,
-                   color: UIColor(named: "OnboardingGray")!,
-              titleColor: UIColor.black,
-        descriptionColor: UIColor.darkGray,
-        titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
-         descriptionFont: UIFont.systemFont(ofSize: 17)),
-
-       OnboardingItemInfo(informationImage: UIImage(named: "Smenu")!,
-                  title: "Access the Menu",
-            description: "Your History, Lists, and Settings are here. Check it out!",
-               pageIcon: UIImage(named: "4icon")!,
-                  color: UIColor(named: "OnboardingGray")!,
-             titleColor: UIColor.black,
-       descriptionColor: UIColor.darkGray,
-       titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
-        descriptionFont: UIFont.systemFont(ofSize: 17)),
-       
-       OnboardingItemInfo(informationImage: UIImage(named: "Sjitter")!,
-                  title: "Before you start...",
-            description: "To ensure the most accurate results, please make sure to hold your phone as steady as possible.",
-               pageIcon: UIImage(named: "5icon")!,
-                  color: UIColor(named: "OnboardingGray")!,
-             titleColor: UIColor.black,
-       descriptionColor: UIColor.darkGray,
-       titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
-        descriptionFont: UIFont.systemFont(ofSize: 17))
-        ][index]
+        return [
+            OnboardingItemInfo(informationImage: UIImage(named: "Swelcome")!,
+                               title: loc.welcomeToFind,
+                               description: loc.swipeToGetStarted,
+                               pageIcon: UIImage(),
+                               color: UIColor(named: "OnboardingGray")!,
+                               titleColor: UIColor.black,
+                               descriptionColor: UIColor.darkGray,
+                               titleFont: UIFont.systemFont(ofSize: 30, weight: .bold),
+                               descriptionFont: UIFont.systemFont(ofSize: 17)),
+            
+            OnboardingItemInfo(informationImage: UIImage(named: "Swhatis")!,
+                               title: loc.whatIsFind,
+                               description: loc.findIsCommandFForCamera,
+                               pageIcon: UIImage(named: "1icon")!,
+                               color: UIColor(named: "OnboardingGray")!,
+                               titleColor: UIColor.black,
+                               descriptionColor: UIColor.darkGray,
+                               titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
+                               descriptionFont: UIFont.systemFont(ofSize: 17)),
+            
+            OnboardingItemInfo(informationImage: UIImage(named: "Ssearchfield")!,
+                               title: loc.findWords,
+                               description: loc.tapSearchField,
+                               pageIcon: UIImage(named: "2icon")!,
+                               color: UIColor(named: "OnboardingGray")!,
+                               titleColor: UIColor.black,
+                               descriptionColor: UIColor.darkGray,
+                               titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
+                               descriptionFont: UIFont.systemFont(ofSize: 17)),
+            
+            OnboardingItemInfo(informationImage: UIImage(named: "Sshutter")!,
+                               title: loc.takePhotos,
+                               description: loc.tapShutterButton,
+                               pageIcon: UIImage(named: "3icon")!,
+                               color: UIColor(named: "OnboardingGray")!,
+                               titleColor: UIColor.black,
+                               descriptionColor: UIColor.darkGray,
+                               titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
+                               descriptionFont: UIFont.systemFont(ofSize: 17)),
+            
+            OnboardingItemInfo(informationImage: UIImage(named: "Smenu")!,
+                               title: loc.accessMenu,
+                               description: loc.yourHistoryListsAndSettingsHere,
+                               pageIcon: UIImage(named: "4icon")!,
+                               color: UIColor(named: "OnboardingGray")!,
+                               titleColor: UIColor.black,
+                               descriptionColor: UIColor.darkGray,
+                               titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
+                               descriptionFont: UIFont.systemFont(ofSize: 17)),
+            
+            OnboardingItemInfo(informationImage: UIImage(named: "Sjitter")!,
+                               title: loc.beforeYouStart,
+                               description: loc.ensureAccuracy,
+                               pageIcon: UIImage(named: "5icon")!,
+                               color: UIColor(named: "OnboardingGray")!,
+                               titleColor: UIColor.black,
+                               descriptionColor: UIColor.darkGray,
+                               titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
+                               descriptionFont: UIFont.systemFont(ofSize: 17))
+            ][index]
     }
-
-//    func onboardingConfigurationItem(_ item: OnboardingContentViewItem, index: Int) {
-//        // config labels
-//        item.informationImageWidthConstraint?.constant = 250
-//        item.informationImageHeightConstraint?.constant = 250
-//    }
     
     func onboardingItemsCount() -> Int {
-       return 6
+        return 6
     }
 }
 
-      
-    
-//public extension UIDevice {
-//
-//    static let modelName: Bool = {
-//        var systemInfo = utsname()
-//        uname(&systemInfo)
-//        let machineMirror = Mirror(reflecting: systemInfo.machine)
-//        let identifier = machineMirror.children.reduce("") { identifier, element in
-//            guard let value = element.value as? Int8, value != 0 else { return identifier }
-//            return identifier + String(UnicodeScalar(UInt8(value)))
-//        }
-//
-//        func mapToDevice(identifier: String) -> Bool { // swiftlint:disable:this cyclomatic_complexity
-//            #if os(iOS)
-//            switch identifier {
-//            case "iPhone10,3", "iPhone10,6":                return true
-//            case "iPhone11,2":                              return true
-//            case "iPhone11,4", "iPhone11,6":                return true
-//            case "iPhone11,8":                              return true
-//            case "iPhone12,1":                              return true
-//            case "iPhone12,3":                              return true
-//            case "iPhone12,5":                              return true
-//            default:                                        return false
-//            }
-//            #elseif os(tvOS)
-//            switch identifier {
-//            case "AppleTV5,3": return "Apple TV 4"
-//            case "AppleTV6,2": return "Apple TV 4K"
-//            case "i386", "x86_64": return "Simulator \(mapToDevice(identifier: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "tvOS"))"
-//            default: return identifier
-//            }
-//            #endif
-//        }
-//
-//        return mapToDevice(identifier: identifier)
-//    }()
-//
-//}
+

@@ -175,7 +175,8 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
 //        pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
 //        let currentIndex = currentViewController
         
-        let alert = UIAlertController(title: "Delete photo?", message: "This action can't be undone.", preferredStyle: .actionSheet)
+        let cantBeUndone = NSLocalizedString("cantBeUndone", comment: "Multipurpose def=This action can't be undone.")
+        let alert = UIAlertController(title: "Delete photo?", message: cantBeUndone, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
             
             let zoomVC = self.currentViewController

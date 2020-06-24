@@ -13,7 +13,6 @@ import RealmSwift
 class FindList: Object {
     @objc dynamic var name = ""
     @objc dynamic var descriptionOfList = ""
-    //@objc dynamic var contents = ""
     let contents = List<String>()
     @objc dynamic var iconImageName = ""
     @objc dynamic var iconColorName = ""
@@ -22,7 +21,6 @@ class FindList: Object {
 class EditableFindList: NSObject {
     var name = ""
     var descriptionOfList = ""
-    //@objc dynamic var contents = ""
     var contents = [String]()
     var iconImageName = ""
     var iconColorName = ""

@@ -23,14 +23,12 @@ class ListSelect: UIView, ChangeNumberOfSelectedList {
             
             let oneListSelected = NSLocalizedString("oneListSelected", comment: "ListSelect def=One List Selected")
             listSelectLabel.text = oneListSelected
-//            listSelectLabel.text = "\(to) List Selected"
         } else {
             listSelectLabel.fadeTransition(0.1)
             
             let numberListsSelected = NSLocalizedString("%d numberLists",
                                                                          comment:"ListController def=x Lists Selected")
             listSelectLabel.text = String.localizedStringWithFormat(numberListsSelected, to)
-//            listSelectLabel.text = "\(to) Lists Selected"
         }
         
     }
@@ -53,8 +51,6 @@ class ListSelect: UIView, ChangeNumberOfSelectedList {
         setUp()
     }
     private func setUp() {
-       // fromNib()
-        //self.changeNumberDelegate = self
         clipsToBounds = true
         layer.cornerRadius = 5
         layer.backgroundColor = #colorLiteral(red: 0, green: 0.5981545251, blue: 0.937254902, alpha: 1)

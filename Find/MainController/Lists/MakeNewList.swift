@@ -16,13 +16,6 @@ protocol NewListMade: class {
 protocol ReturnGeneralNow: class {
     func updateInfo()
 }
-//protocol ReturnIconNow: class {
-//    func updateInfo()
-//}
-//protocol ReturnColorNow: class {
-//    func updateInfo()
-//}
-
 protocol ScrolledToIcons: class {
     func scrolledHere()
 }
@@ -79,7 +72,6 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo, 
         iconImageName = iconName
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
         let newImage = UIImage(systemName: iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(hexString: iconColorName), renderingMode: .alwaysOriginal)
-        //self.imageView.image = newImage
         topImageView.image = newImage
     }
     
@@ -87,12 +79,10 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo, 
         iconColorName = colorName
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
         let newImage = UIImage(systemName: iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(hexString: iconColorName), renderingMode: .alwaysOriginal)
-        //self.imageView.image = newImage
         topImageView.image = newImage
     }
     
     func deleteList() {
-        print("delete list.....")
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -109,22 +99,14 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo, 
     
     @IBAction func doneWithListPressed(_ sender: Any) {
         returnGeneralNowDelegate?.updateInfo()
-//        returnIconNowDelegate?.updateInfo()
-//        returnColorNowDelegate?.updateInfo()
-        
-        print("done pressed, waiting")
         if shouldDismiss == true {
             shouldDismiss = false
-            print(shouldDismiss)
             returnCompletedList()
         }
     }
     
 
     weak var returnGeneralNowDelegate: ReturnGeneralNow?
-//    weak var returnIconNowDelegate: ReturnIconNow?
-//    weak var returnColorNowDelegate: ReturnColorNow?
-    
     weak var scrolledToIcons: ScrolledToIcons?
     weak var scrolledToColors: ScrolledToColors?
     
@@ -158,14 +140,7 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo, 
             })
         }
     }
-//    func selectGeneral() {
-//        if let first = pagingViewController.items.first {
-//          pagingViewController.select(pagingItem: first)
-//        }
-//    }
     func setUpViews() {
-        
-        
         
         let storyboard1 = UIStoryboard(name: "Main", bundle: nil)
         let firstViewController = storyboard1.instantiateViewController(withIdentifier: "GeneralViewController") as! GeneralViewController

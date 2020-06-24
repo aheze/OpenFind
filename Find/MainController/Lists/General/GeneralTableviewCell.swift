@@ -24,7 +24,6 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
     var touchedView = false
     
     
-    
     weak var changedTextDelegate: ChangedTextCell?
     @IBOutlet weak var warningButton: UIButton!
     
@@ -88,7 +87,13 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
         let doneButton = UIButton()
         inputAView.addSubview(doneButton)
         
-        doneButton.setTitle("Done", for: .normal)
+        
+        
+        let done = NSLocalizedString("done", comment: "Multipurpose def=Done")
+        
+        
+        
+        doneButton.setTitle(done, for: .normal)
         doneButton.titleEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         doneButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         doneButton.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)

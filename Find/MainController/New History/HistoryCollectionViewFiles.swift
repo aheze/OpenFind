@@ -232,7 +232,9 @@ extension NewHistoryViewController {
                 }
             }
             let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { action in
-                let alert = UIAlertController(title: "Delete this photo?", message: "This action can't be undone.", preferredStyle: .alert)
+                let cantBeUndone = NSLocalizedString("cantBeUndone", comment: "Multipurpose def=This action can't be undone.")
+                
+                let alert = UIAlertController(title: "Delete this photo?", message: cantBeUndone, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
                     self.deletePhotoAt(photoIndex: indexOfPhoto)
                     let alertView = SPAlertView(title: "Photo Deleted!", message: "Tap to dismiss", preset: SPAlertPreset.done)

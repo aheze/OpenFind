@@ -15,9 +15,6 @@ import RealmSwift
 import SnapKit
 import SwiftEntryKit
 
-//protocol ChangeStatusValue: class {
-//    func changeValue(to value: CGFloat)
-//}
 protocol ToggleCreateCircle: class {
     func toggle(created: Bool)
 }
@@ -52,7 +49,6 @@ class ViewController: UIViewController {
     let deviceType = UIDevice.current.modelName
     
     
-    
     var normalSearchFieldTopCConstant = CGFloat(0)
     var displayingOrientationError = false
     
@@ -72,7 +68,6 @@ class ViewController: UIViewController {
         })
         if sender.state == UIGestureRecognizer.State.ended {
             if sender.scale >= 1.3 {
-                print("DIEMI")
                 controlsBottomC.constant = -80
                 contentTopC.constant = -100
                 searchContentView.isHidden = false
@@ -123,11 +118,7 @@ class ViewController: UIViewController {
     }
     
     
-//    @IBOutlet weak var blackOverlayView: UIView!
-    
     @IBOutlet weak var darkBlurEffect: UIVisualEffectView!
-//    @IBOutlet weak var darkBlurEffectHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var menuButton: JJFloatingActionButton!
     @IBOutlet weak var newShutterButton: NewShutterButton!
     
@@ -315,8 +306,6 @@ class ViewController: UIViewController {
         } else {
             print("Missing Camera.")
             return nil
-//            fatalError("Missing expected back camera device.")
-            //return nil
         }
     }
     private func configureCamera() {
@@ -343,12 +332,6 @@ class ViewController: UIViewController {
             print(cameraView.videoPreviewLayer.bounds)
             cameraView.videoPreviewLayer.position = CGPoint(x: newBounds.midX, y: newBounds.midY);
             avSession.startRunning()
-//            UIView.animate(withDuration: 0.8, delay: 2, animations: {
-//                self.blackOverlayView.alpha = 0
-//            }) { _ in
-//                self.blackOverlayView.removeFromSuperview()
-//                print("comp2")
-//            }
         }
     }
     func startSession() { if !avSession.isRunning {
@@ -366,7 +349,6 @@ class ViewController: UIViewController {
     @objc private func _KeyboardFrameChanged(_ notification: Notification){
         if let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let rect = frame.cgRectValue
-            print("KEYABORD CHANGE: \(rect)")
             var shouldFade = false
             if didFinishShouldUpdateHeight {
                 self.toolbarTopC?.update(offset: rect.origin.y - 80)
@@ -395,10 +377,8 @@ class ViewController: UIViewController {
         if let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             UIView.animate(withDuration: 0.5, animations: {
                 let rect = frame.cgRectValue
-                print("KEYABORD CHANGE HEIGHT: \(rect)")
                 if let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double {
                     if let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt {
-                        print("DUR: \(duration), cur: \(curve)")
                         if rect.width == CGFloat(0) {
                             self.didFinishShouldUpdateHeight = true
                         } else {
@@ -407,9 +387,7 @@ class ViewController: UIViewController {
                             UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(rawValue: curve), animations: {
                                 if rect.origin.y == screenBounds.size.height {
                                     self.toolbar.alpha = 0
-                                    print("FADE NOW")
                                 } else {
-                                    print("DONT ADE")
                                     self.toolbar.alpha = 1
                                 }
                                 self.view.layoutIfNeeded()
@@ -427,17 +405,7 @@ class ViewController: UIViewController {
     func capturePhoto(completion: ((UIImage) -> Void)?) {
         captureCompletionBlock = completion
     }
-    // initial configuration
-   
     var initialAttitude: CMAttitude?
-    //var refAttitudeReferenceFrame: CMAttitudeReferenceFrame?
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        if #available(iOS 13.0, *) {
-////            return .
-//        } else {
-//            return .lightContent
-//        }
-//    }
     
     override var prefersStatusBarHidden: Bool {
         return true  
@@ -452,14 +420,11 @@ class ViewController: UIViewController {
                     if orientation != .portrait {
                         displayingOrientationError = true
                         newSearchTextField.isEnabled = false
-                        print("wrong Or")
                         updateMatchesNumber(to: 0)
                         
                         resetFastHighlights()
-//                        allowSearch = false
                         shouldResetHighlights = true
                         
-//                        alternateWarningLabel.text = "Find is paused | Landscape view is not yet supported"
                         alternateWarningHeightC.constant = 70
                         UIView.animate(withDuration: 0.5, animations: {
                             self.alternateWarningView.alpha = 1
@@ -470,8 +435,7 @@ class ViewController: UIViewController {
                         if displayingOrientationError == true {
                             displayingOrientationError = false
                             newSearchTextField.isEnabled = true
-                            print("RIGHT Or")
-//                            allowSearch = true
+                            
                             shouldResetHighlights = false
                             alternateWarningHeightC.constant = 0
                             UIView.animate(withDuration: 0.5, animations: {
@@ -480,7 +444,6 @@ class ViewController: UIViewController {
                                 self.alternateWarningView.layoutIfNeeded()
                             })
                         }
-//                        SwiftEntryKit.dismiss()
                     }
                 }
             }
@@ -511,7 +474,6 @@ class ViewController: UIViewController {
         default:
             break
         }
-
         print("Warning - Didn't recognise interface orientation (\(orientation))")
         return .portrait
     }
@@ -519,7 +481,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
 
         var hasNotch = false
         switch deviceType {
@@ -529,10 +490,8 @@ class ViewController: UIViewController {
                 break
         }
         if hasNotch {
-            print("NOTCH")
             normalSearchFieldTopCConstant = 0
         } else {
-            print("NO NOTCH")
             normalSearchFieldTopCConstant = 12
         }
         contentTopC.constant = normalSearchFieldTopCConstant
@@ -544,8 +503,6 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(_KeyboardFrameChanged(_:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_KeyboardHeightChanged(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
-        
-//        UIApplication.shared.isStatusBarHidden = true
         readDefaultsValues()
         
         controlsBlurView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
@@ -561,7 +518,7 @@ class ViewController: UIViewController {
         setUpFilePath()
         
         
-        ///Is already athorized in Launchscreen
+        /// is already athorized in Launchscreen
 //        if isAuthorized() {
             configureCamera()
 //        }
@@ -583,9 +540,7 @@ class ViewController: UIViewController {
         }
         
     }
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        return .lightContent
-//    }
+    
     // get magnitude of vector via Pythagorean theorem
     func getMagnitude(from attitude: CMAttitude) -> Double {
         return sqrt(pow(attitude.roll, 2) +
@@ -630,6 +585,8 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             return
         }
         if busyFastFinding == false && allowSearch == true && displayingOrientationError == false {
+            
+            /// 1. Find
             fastFind(in: pixelBuffer)
         }
         guard captureCompletionBlock != nil,
@@ -660,18 +617,6 @@ extension UIImage {
         self.init(cgImage: cgImage)
     }
 }
-//extension ViewController {
-//    var hasTopNotch: Bool {
-//        if #available(iOS 13.0,  *) {
-//            return UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.top ?? 0 > 20
-//        }else{
-//         return UIApplication.shared.delegate?.window??.safeAreaInsets.top ?? 0 > 20
-//        }
-//
-//        return false
-//    }
-//}
- 
 
 extension UIDevice {
     var modelName: String {

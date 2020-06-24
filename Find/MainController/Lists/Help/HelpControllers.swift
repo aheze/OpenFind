@@ -15,8 +15,6 @@ class HelpObject: NSObject {
     var title = ""
     var urlPath = ""
 }
-//Proto
-
 class PresentHelp {
     static func displayWithURL(urlString: String, topLabelText: String, color: UIColor) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -26,7 +24,6 @@ class PresentHelp {
         viewControllerPresent.topViewColor = color
         
         viewControllerPresent.view.layer.cornerRadius = 10
-//        view.layer.cornerRadius = 10
         viewControllerPresent.view.clipsToBounds = true
         viewControllerPresent.edgesForExtendedLayout = []
         
@@ -45,9 +42,6 @@ class PresentHelp {
 }
 class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-//    var arrayOfHelp = [String]()
-//    var indexToData = [String]()
-    
     var helpObjects = [HelpObject]()
     var helpJsonKey = "ListsHelpArray"
     var goDirectlyToUrl = false
@@ -64,18 +58,12 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HelpCellID") as! HelpCell
-//        cell.nameLabel.text = arrayOfHelp[indexPath.row]
         let object = helpObjects[indexPath.row]
         cell.nameLabel.text = object.title
-        print("deleg, \(object.title)")
         
         return cell
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let sizeOfWidth = tableView.bounds.width - 32
-//        let baseHeight = arrayOfHelp[indexPath.row].heightWithConstrainedWidth(width: sizeOfWidth, font: UIFont.systemFont(ofSize: 18))
-//        return baseHeight + 32
-//    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         currentPath = indexPath.row
@@ -84,7 +72,6 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showHelpController" {
-            print("help pressed")
             let destinationVC = segue.destination as! HelpController
             destinationVC.urlString = helpObjects[currentPath].urlPath
         }

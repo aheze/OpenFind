@@ -237,7 +237,7 @@ class SettingsViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
 //        GeneralTutorialViewController
     }
-    let clear = NSLocalizedString("clear", comment: "Settings def=Clear")
+    let clear = NSLocalizedString("clear", comment: "Multipurpose def=Clear")
     let tapToDismiss = NSLocalizedString("tapToDismiss", comment: "Multipurpose def=Tap to dismiss")
     let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
     

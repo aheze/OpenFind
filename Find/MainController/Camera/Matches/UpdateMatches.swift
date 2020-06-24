@@ -15,7 +15,6 @@ extension ViewController {
         
         currentNumberOfMatches = number
         updateStatsNumber?.update(to: number)
-        //print("Updating matches number to \(number)")
         
         if number > previousNumberOfMatches {
             if currentPassCount >= 100 {
@@ -34,48 +33,7 @@ extension ViewController {
         }
         previousNumberOfMatches = number
     }
-//    func hideTopNumber(hide: Bool) {
-//        
-//        var xMove = 6
-//        var yMove = 14
-//        if hide == true {
-//            xMove = 0
-//            yMove = 0
-//            slashImage.alpha = 1
-//        } else {
-//            slashImage.alpha = 0
-//        }
-//        
-//        matchesBig.bringSubviewToFront(numberDenomLabel)
-//        matchesBig.bringSubviewToFront(numberLabel)
-//        for constraint in matchesBig.constraints {
-//            if constraint.identifier == "numberY" {
-//               constraint.constant = CGFloat(-yMove)
-//            }
-//            if constraint.identifier == "denomY" {
-//                constraint.constant = CGFloat(yMove)
-//            }
-//            if constraint.identifier == "numberX" {
-//                constraint.constant = CGFloat(-xMove)
-//            }
-//            if constraint.identifier == "denomX" {
-//                constraint.constant = CGFloat(xMove)
-//            }
-//        }
-//        
-//        matchesBig.bringSubviewToFront(slashImage)
-//        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-//            if hide == true {
-//                self.numberLabel.alpha = 0
-//                self.slashImage.alpha = 0
-//            } else {
-//                self.numberLabel.alpha = 1
-//                self.slashImage.alpha = 1
-//            }
-//            self.matchesBig.layoutIfNeeded()
-//        }, completion: nil)
-//    }
-    
+
 }
 extension UIView {
     func fadeTransition(_ duration:CFTimeInterval) {

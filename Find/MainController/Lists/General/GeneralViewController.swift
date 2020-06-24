@@ -22,9 +22,6 @@ protocol GetGeneralInfo: class {
 protocol DeleteList: class {
     func deleteList()
 }
-//protocol RowChange: class {
-//    func tableViewRowCountChanged(rowCount: Int)
-//}
 class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral {
     
     func receiveGeneral(nameOfList: String, desc: String, contentsOfList: [String]) {
@@ -32,9 +29,6 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         name = nameOfList
         descriptionOfList = desc
         contents = contentsOfList
-//        tableView.reloadData()
-        //titleField.text = nameOfList
-        //descriptionView.text = desc
     }
     
     var isEditingText = false
@@ -50,16 +44,11 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
     
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var bottomActionView: UIView!
-    //    @IBOutlet weak var contentsContainer: UIView!
-//    @IBOutlet weak var contentsTextView: UITextView!
-     
     @IBOutlet weak var matchesHeader: UIView!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
-//    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableBottomView: UIView!
     
-    //var selectionMode = false
     
     @IBOutlet weak var newMatchButton: UIButton!
     @IBOutlet weak var newMatchPlus: UIButton!
@@ -90,8 +79,6 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
     weak var deleteTheList: DeleteList?
     
     weak var delegate: UIAdaptivePresentationControllerDelegate?
-  //  weak var rowChanged: RowChange?
-    //weak var changedGeneralDelegate: GetGeneralInfo?
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var descriptionView: UITextView!
@@ -106,19 +93,17 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         var newName = name
         var newDesc = descriptionOfList
         
-        if newName == "" { newName = "Untitled" }
-        if newDesc == "" { newDesc = "No Description" }
+        let untitledName = NSLocalizedString("untitledName", comment: "GeneralViewController def=Untitled")
+        let noDescription = NSLocalizedString("noDescription", comment: "GeneralViewController def=No Description")
+        if newName == "" { newName = "untitledName" }
+        if newDesc == "" { newDesc = "noDescription" }
         
         if overrideDone == true {
-            print("override!!")
             generalDelegate?.returnNewGeneral(nameOfList: newName, desc: newDesc, contentsOfList: contents, hasErrors: false, overrideMake: true)
             SwiftEntryKit.dismiss()
         } else {
-//            scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             let origPoint = CGPoint(x: 0, y: (currentIndexPath * 50) + 500)
                 let rect = CGRect(origin: origPoint, size: CGSize(width: 50, height: 50))
-                print("RECTA::::::\(rect)")
-            
                 scrollView.scrollRectToVisible(rect, animated: true)
 
             checkForErrors(contentsArray: contents)
@@ -132,35 +117,14 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         }
     }
     func updateInfo() {
-//        print("update")
         doneWithEditingGeneral(overrideDone: false)
     }
-//    func highlightRowsOnError() { ///Highlight the rows when done is pressed and there is an error
-//        print("HIGHLIGHT ROWS, PRESSED DONE")
-//       // for index in indexPaths {
-//           // let indexP = IndexPath(row: index, section: 0)
-//            //tableView.selectRow(at: indexP, animated: false, scrollPosition: .none)
-////            print("Single Space: \(singleSpaceWarning)")
-////            print("Start Space: \(startSpaceWarning)")
-////            print("End Space: \(endSpaceWarning)")
-//        NotificationCenter.default.post(name: .shouldHighlightRows, object: nil, userInfo: stringToIndexesError)
-////        NotificationCenter.default.post(name: .hasEmptyString, object: [0: emptyStringErrors])
-////
-////        NotificationCenter.default.post(name: .hasStartSpace, object: [0: startSpaceWarning])
-////        NotificationCenter.default.post(name: .hasEndSpace, object: [0: endSpaceWarning])
-////        NotificationCenter.default.post(name: .hasSingleSpace, object: [0: singleSpaceWarning])
-//
-//            //let cell = tableView.cellForRow(at: indexP) as! GeneralTableCell
-//            //cell.hihilighted = true
-//       // }
-//    }
+
     func highlightRowsOnError(type: String) { ///Highlight the rows when done is pressed and there is an error
         print("HIGHLIGHT ROWS, PRESSED DONE")
         
         switch type {
         case "EmptyMatch":
-            print("empty")
-            
             var reloadPaths = [IndexPath]()
             for ind in emptyStringErrors {
                 let indPath = IndexPath(row: ind, section: 0)
@@ -178,9 +142,7 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
             shouldHighlightRows = true
             tableView.reloadRows(at: reloadPaths, with: .none)
             
-//            NotificationCenter.default.post(name: .shouldHighlightRows, object: nil, userInfo: [0: emptyStringErrors])
         case "Duplicate":
-//            print("dup")
             var indInts = [Int]()
             
             for intArray in stringToIndexesError.values {
@@ -206,7 +168,6 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
             
             shouldHighlightRows = true
             tableView.reloadRows(at: reloadPaths, with: .none)
-//            NotificationCenter.default.post(name: .shouldHighlightRows, object: nil, userInfo: stringToIndexesError)
         default:
             print("ERROR!!>>")
         }
@@ -214,11 +175,6 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
     func showWarningIcon() {
         checkForErrors(contentsArray: contents)
         generalSpaces.removeAll()
-//        print("About to show warning icon----------")
-//        print("Single Space: \(singleSpaceWarning)")
-//        print("Start Space: \(startSpaceWarning)")
-//        print("End Space: \(endSpaceWarning)")
-        
         for singleSpace in singleSpaceWarning {
             //print("singlespace")
             generalSpaces["Single", default: [Int]()].append(singleSpace)
@@ -234,50 +190,55 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         
     }
     
-        @IBOutlet weak var descDoneButton: UIButton!
-        @IBAction func descButtonDonePressed(_ sender: Any) {
-            view.endEditing(true)
+    @IBOutlet weak var descDoneButton: UIButton!
+    @IBAction func descButtonDonePressed(_ sender: Any) {
+        view.endEditing(true)
+    }
+    
+    @IBOutlet weak var titlesDoneButton: UIButton!
+    @IBAction func titlesButtonDonePressed(_ sender: Any) {
+        view.endEditing(true)
+    }
+    @IBOutlet weak var contentsDoneButton: UIButton!
+    @IBAction func contentsDonePressed(_ sender: Any) {
+        view.endEditing(true)
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        bottomDeleteButton.layer.cornerRadius = 6
+        bottomHelpButton.layer.cornerRadius = 6
+        
+        setUpViews()
+        let tableViewHeightAfterAddRow = CGFloat(50 * contents.count)
+        
+        if tableViewHeightAfterAddRow >= 300 {
+            tableViewHeightConstraint.constant = tableViewHeightAfterAddRow
+            UIView.animate(withDuration: 0.75, animations: {
+                self.view.layoutIfNeeded()
+            })
         }
         
-        @IBOutlet weak var titlesDoneButton: UIButton!
-        @IBAction func titlesButtonDonePressed(_ sender: Any) {
-            view.endEditing(true)
-        }
-        @IBOutlet weak var contentsDoneButton: UIButton!
-        @IBAction func contentsDonePressed(_ sender: Any) {
-            view.endEditing(true)
-        }
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            bottomDeleteButton.layer.cornerRadius = 6
-            bottomHelpButton.layer.cornerRadius = 6
-            
-            setUpViews()
-            let tableViewHeightAfterAddRow = CGFloat(50 * contents.count)
-            
-            print("HEIGHT CONT: \(tableViewHeightAfterAddRow)")
-            if tableViewHeightAfterAddRow >= 300 {
-                tableViewHeightConstraint.constant = tableViewHeightAfterAddRow
-                UIView.animate(withDuration: 0.75, animations: {
-                    self.view.layoutIfNeeded()
-                })
-            }
-            
-        }
+    }
     
     @IBOutlet weak var bottomDeleteButton: UIButton!
     @IBOutlet weak var bottomHelpButton: UIButton!
     
     @IBAction func bottomDeletePressed(_ sender: Any) {
         
-        let alert = UIAlertController(title: "Are you sure you want to delete this list?", message: "You can't undo this action.", preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
+        let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
+        let delete = NSLocalizedString("delete", comment: "Multipurpose def=Delete")
+        let confirmDeleteList = NSLocalizedString("confirmDeleteList", comment: "Are you sure you want to delete this list?")
+        let cantUndoDeleteList = NSLocalizedString("cantUndoDeleteList", comment: "You can't undo this action.")
+        
+        
+        let alert = UIAlertController(title: confirmDeleteList, message: cantUndoDeleteList, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: delete, style: UIAlertAction.Style.destructive, handler: { _ in
             
             self.deleteTheList?.deleteList()
             SwiftEntryKit.dismiss()
           
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))
         if let popoverController = alert.popoverPresentationController {
             popoverController.sourceView = bottomDeleteButton
             popoverController.sourceRect = bottomDeleteButton.bounds
@@ -285,23 +246,14 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         self.present(alert, animated: true, completion: nil)
         
     }
-    
+    /// stopper **HERE**
     @IBAction func bottomHelpPressed(_ sender: Any) {
-        //let frontViewController = UINavigationController(rootViewController: HomeViewController())
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let helpViewController = storyboard.instantiateViewController(withIdentifier: "DefaultHelpController") as! DefaultHelpController
-//        helpViewController.arrayOfHelp = ["0989238490238409234", "0989238490238409234sjdfiosydifysdifysdfoysf"]
-//        helpViewController.indexToData = ["One", """
-//        TworrayOfHelp = [String]()
-//        var indexToData = [String]()
-//        
-//        var currentPath = -1
-//              
-//        """]
-
-        helpViewController.title = "Help"
         
-        //helpViewController.view.clipsToBounds = true
+        let help = NSLocalizedString("help", comment: "Multipurpose def=Help")
+        
+        helpViewController.title = help
         
         let navigationController = UINavigationController(rootViewController: helpViewController)
         navigationController.view.backgroundColor = UIColor.clear
@@ -313,23 +265,13 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         navBarAppearance.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-        //navBarAppearance.backButtonAppearance = .
         navigationController.navigationBar.standardAppearance = navBarAppearance
         navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
         
         
-          
-        //navigationBar.setItems([navigationItem], animated: false)
-        
         navigationController.view.layer.cornerRadius = 10
-        //navigationController.view.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        //navigationController.navigationBar.barTintColor = UIColor(named: "Gray2")
         UINavigationBar.appearance().barTintColor = .black
-        
-        //navigationController.edgesForExtendedLayout = []
         helpViewController.edgesForExtendedLayout = []
-       // helpViewController.view.layer.cornerRadius = 10
-        //helpViewController.view.corner
         
         var attributes = EKAttributes.centerFloat
         attributes.displayDuration = .infinity
@@ -341,36 +283,22 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         attributes.screenInteraction = .absorbTouches
         attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
         
-        //attributes.roundCorners = .all(radius: 10)
         
         attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
         
         SwiftEntryKit.display(entry: navigationController, using: attributes)
     }
     
-//    @objc func closeTapped() {
-//        SwiftEntryKit.dismiss()
-//    }
-    
     
     func addNewRow(end: Bool = false) {
         addingNewMatch = true
         
-      //  print("CURR HEIGHT: \(tableView.contentSize.height)")
-//        let tableViewHeightAfterAddRow = tableView.contentSize.height + 50
-//        if tableViewHeightAfterAddRow >= 300 {
-//            tableViewHeightConstraint.constant = tableViewHeightAfterAddRow
-//            UIView.animate(withDuration: 0.75, animations: {
-//                self.view.layoutIfNeeded()
-//            })
-//        }
         if end == false { ///User pressed return to insert
           //  print("Return INSERT")
             contents.insert("", at: currentIndexPath + 1)
             
             let tableViewHeightAfterAddRow = CGFloat(50 * contents.count)
             
-            print("HEIGHT CONT: \(tableViewHeightAfterAddRow)")
             if tableViewHeightAfterAddRow >= 300 {
                 tableViewHeightConstraint.constant = tableViewHeightAfterAddRow
                 UIView.animate(withDuration: 0.75, animations: {
@@ -382,9 +310,7 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
             checkForErrors(contentsArray: contents)
             currentIndexPath = currentIndexPath + 1
             tableView.insertRows(at: [IndexPath(row: currentIndexPath, section: 0)], with: .automatic)
-//            NotificationCenter.default.post(name: .addedRowAt, object: nil, userInfo: [0: currentIndexPath])
             
-            print("add CURR IND: \(currentIndexPath)....count-1: \(contents.count - 1)")
             if currentIndexPath < contents.count - 1 {
                 let endRange = currentIndexPath + 1...contents.count - 1
                 
@@ -403,14 +329,7 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
             }
             
             
-            
-            
-            
-            
         } else {
-            print("New BUTTON PRESSED")
-            
-          //  print("contents count \(contents.count)")
             contents.append("")
             let tableViewHeightAfterAddRow = CGFloat(50 * contents.count)
             
@@ -427,9 +346,6 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         
     }
     func deleteRow(row: Int) {
-//        print("DELETELLELELLE: \(row)")
-//
-//        print("CONTS start:  \(contents)")
         contents.remove(at: row)
         let tableViewHeightAfterAddRow = CGFloat(50 * contents.count)
         
@@ -442,7 +358,6 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         }
         
         checkForErrors(contentsArray: contents)
-//        print("ROW: \(row)")
         let indP = IndexPath(row: row, section: 0)
         tableView.deleteRows(at: [indP], with: .automatic)
         
@@ -469,46 +384,17 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         }
         
         
-        
-//        print("CONTS:  \(contents)")
-        
-//        currentIndexPath -= 1
-//        NotificationCenter.default.post(name: .deleteRowAt, object: nil, userInfo: [0: row])
-        
         if contents.count == 0 {
-//            contents.append("")
-//            let indP = IndexPath(row: 0, section: 0)
-//            tableView.insertRows(at: [indP], with: .automatic)
-//            addNewRow(end: true)
             addingNewMatch = true
             contents = [""]
             currentIndexPath = 0
             tableView.insertRows(at: [IndexPath(row: currentIndexPath, section: 0)], with: .automatic)
         }
-//        let tableViewHeightAfterAddRow = tableView.contentSize.height + 50
-//        if tableViewHeightAfterAddRow >= 300 {
-//            tableViewHeightConstraint.constant = tableViewHeightAfterAddRow
-//            UIView.animate(withDuration: 0.75, animations: {
-//                self.view.layoutIfNeeded()
-//            })
-//        }
-        
     }
     func setUpViews() {
         if contents.count == 0 {
             contents.append("")
         }
-        
-//        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 70, weight: .semibold)
-//        
-//        let deleteImage = UIImage(systemName: "trash.circle.fill",
-//                                  withConfiguration: symbolConfiguration)?.withTintColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), renderingMode: .alwaysOriginal)
-//        
-//        let helpImage = UIImage(systemName: "questionmark.circle.fill",
-//                                withConfiguration: symbolConfiguration)?.withTintColor(#colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1), renderingMode: .alwaysOriginal)
-//        bottomDeleteButton.setImage(deleteImage, for: .normal)
-//        bottomHelpButton.setImage(helpImage, for: .normal)
-//        
         
         ///Receive info
         
@@ -519,28 +405,18 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         topView.layer.cornerRadius = 8
         
         titleField.autocapitalizationType = .words
-//            contentsContainer.layer.cornerRadius = 12
-//           // imageContainer.clipsToBounds = true
-//            //imageContainer.layer.cornerRadius = 12
-//            contentsTextView.layer.cornerRadius = 6
-//
-//            contentsTextView.inputAccessoryView = inputButtonsView
         titleField.inputAccessoryView = titlesInputView
         
         descriptionView.inputAccessoryView = descInputView
         descriptionView.layer.cornerRadius = 5.25
         descriptionView.layer.borderWidth = 1
-       // descriptionView.layer.borderColor = UIColor(named: "TextRim")?.cgColor
         descriptionView.layer.borderColor = UIColor(named: "TextRim")?.resolvedColor(with: self.traitCollection).cgColor
             
         titleField.layer.cornerRadius = 5.25
         titleField.layer.borderColor = UIColor(named: "TextRim")?.resolvedColor(with: self.traitCollection).cgColor
        
-        
-        //titleField.layer.borderColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
         titleField.layer.borderWidth = 1
         
-       // titleField.placeholder
         titleField.attributedPlaceholder = NSAttributedString(string: "Name",
                                                               attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "Gray5")])
         
@@ -548,34 +424,14 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         descriptionView.backgroundColor = UIColor(named: "PureBlank")
         
         descriptionView.textColor = UIColor(named: "PureBlack")
-        //titleField.layer.borderWidth = 1
-        
-       // helpButton.layer.cornerRadius = 4
-        
         matchesHeader.clipsToBounds = true
         matchesHeader.layer.cornerRadius = 8
         matchesHeader.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         
-//            tableView.clipsToBounds = true
-//            tableView.layer.cornerRadius = 8
-//            tableView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        
         tableBottomView.layer.cornerRadius = 8
         tableBottomView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         bottomActionView.layer.cornerRadius = 8
-//            
-//            let imageAttachment = NSTextAttachment()
-//            imageAttachment.image = UIImage(systemName: "checkmark.circle")
-//
-//            let fullString = NSMutableAttributedString(string: "Press the ")
-//            fullString.append(NSAttributedString(attachment: imageAttachment))
-//            fullString.append(NSAttributedString(string: " button"))
-//            //let label.attributedText = fullString
-//            
-//            newMatchButton.setTitle(fullString, for: .normal)
         
-        
-        //doneWithListButton.layer.cornerRadius = 4
         descDoneButton.layer.cornerRadius = 6
         titlesDoneButton.layer.cornerRadius = 6
         
@@ -606,27 +462,12 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
         return 50
     }
     
-    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
-        print("EDITITITITI")
-    }
-    
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        if indexPath.row == 0 {
-//            return false
-//        } else {
-//            return true
-//        }
-//    }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            //objects.remove(at: indexPath.row)
             deleteRow(row: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       // print("aldfshksdfkjh")
-        //print("tablevide del \(contents.count)")
         return contents.count
     }
     
@@ -635,11 +476,7 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
         cell.changedTextDelegate = self
         cell.matchTextField.text = contents[indexPath.row]
         cell.indexPath = indexPath.row
-        //cell.isUserInteractionEnabled = false
-//        if indexPath.row
-//        cell.shouldShowPlus = true
         if addingNewMatch == true {
-            print("ADDING!! \(indexPath.row)")
             addingNewMatch = false
             cell.matchTextField.becomeFirstResponder()
             cell.overlayView.snp.remakeConstraints{ (make) in
@@ -648,14 +485,10 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
                 make.bottom.equalToSuperview()
                 make.width.equalTo(0)
             }
-            print("no CONTAINS DUP")
-//            cell.contentView.layoutIfNeeded()
         } else {
             if shouldHighlightRows == true {
                 if emptyStringErrors.contains(indexPath.row) {
                     cell.overlayView.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
-                    print("empty errors")
-    //                cell.animateDupSlide()
                 } else {
                     var thisRowContains = false
                     for intArray in stringToIndexesError.values {
@@ -667,8 +500,6 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     if thisRowContains == true {
                         cell.overlayView.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
-    //                    cell.animateDupSlide()
-                        print("CONTAINS DUP")
                     } else {
                         cell.overlayView.snp.remakeConstraints{ (make) in
                             make.top.equalToSuperview()
@@ -676,29 +507,19 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
                             make.bottom.equalToSuperview()
                             make.width.equalTo(0)
                         }
-                        print("no CONTAINS DUP")
                         cell.contentView.layoutIfNeeded()
                     }
                 }
-            } else {
-                print("no highlight")
             }
         }
         
-//        if stringToIndexesError[indexPat]
-        //print("index: \(indexPath.row)")
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
     }
-    
-    
-    
 }
-//protocol NewListMade: class {
-//    func madeNewList(name: String, description: String, contents: String, imageName: String, imageColor: String)
-//}
+
 extension GeneralViewController: ChangedTextCell {
     
     private func registerNotifications() {
@@ -719,27 +540,22 @@ extension GeneralViewController: ChangedTextCell {
     }
     
     func textFieldStartedEditing(indexPath: Int) {
-        print("STARTED EDITING: \(indexPath)")
         currentIndexPath = indexPath
     }
     func textFieldPressedReturn() {
         addNewRow()
         let origPoint = CGPoint(x: 0, y: (currentIndexPath * 50) + 250)
         let rect = CGRect(origin: origPoint, size: CGSize(width: 50, height: 50))
-//        print("RECTA::::::\(rect)")
         
         scrollView.setContentOffset(CGPoint(x: 0, y: (currentIndexPath * 50) + 124), animated: true)
-//        scrollView.scrollRectToVisible(rect, animated: true)
     }
     func textFieldChangedText(indexPath: Int, text: String) {
-        //print("Changed, text: \(text)")
         contents[indexPath] = text
         showWarningIcon()
     }
     func textFieldEndedEditing(indexPath: Int, text: String) {
         contents[indexPath] = text
         checkForErrors(contentsArray: contents)
-        print(contents)
     }
     
 }
@@ -747,34 +563,24 @@ extension GeneralViewController: ChangedTextCell {
 extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
-        print("CHANGE")
         if textView.tag == 10902 {
             placeholderLabel.isHidden = !descriptionView.text.isEmpty
         } else if textView.tag == 10903 {
-            print("jklds")
         }
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print("text FIELD End")
         if textField.tag == 10901 {
-            name = titleField.text ?? "Untitled"
-            print("sfkh")
+            let untitledName = NSLocalizedString("untitledName", comment: "GeneralViewController def=Untitled")
+            name = titleField.text ?? untitledName
         }
     }
     func textViewDidEndEditing(_ textView: UITextView) {
-        print("textViewEnd")
         switch textView.tag {
         case 10902:
-            print("end 10902")
-            print(descriptionView.text)
             descriptionOfList = descriptionView.text
-        case 10903:
-            print("end 10903")
-//            contents = contentsTextView.text
         default:
             break
         }
-        print("END")
     }
     
 
@@ -782,20 +588,20 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
         let displayMode = EKAttributes.DisplayMode.inferred
         
         let title = EKProperty.LabelContent(text: titleMessage, style: .init(font: UIFont.systemFont(ofSize: 20, weight: .bold), color: .white, displayMode: displayMode))
-        let description = EKProperty.LabelContent(            text: desc,  style: .init(      font: UIFont.systemFont(ofSize: 14, weight: .regular),      color: .white,      displayMode: displayMode  )
+        let description = EKProperty.LabelContent(text: desc, style: .init(font: UIFont.systemFont(ofSize: 14, weight: .regular), color: .white,displayMode: displayMode)
         )
         let image = EKProperty.ImageContent(  imageName: image,  displayMode: displayMode,  size: CGSize(width: 35, height: 35),  contentMode: .scaleAspectFit
         )
-        let simpleMessage = EKSimpleMessage(  image: image,  title: title,  description: description
+        let simpleMessage = EKSimpleMessage(image: image, title: title, description: description
         )
         let buttonFont = UIFont.systemFont(ofSize: 20, weight: .bold)
-        let okButtonLabelStyle = EKProperty.LabelStyle(  font: UIFont.systemFont(ofSize: 20, weight: .bold),  color: .white,  displayMode: displayMode
+        let okButtonLabelStyle = EKProperty.LabelStyle( font: UIFont.systemFont(ofSize: 20, weight: .bold), color: .white,  displayMode: displayMode
         )
-        let okButtonLabel = EKProperty.LabelContent(  text: yesButton,  style: okButtonLabelStyle
+        let okButtonLabel = EKProperty.LabelContent( text: yesButton, style: okButtonLabelStyle
         )
-        let closeButtonLabelStyle = EKProperty.LabelStyle(  font: buttonFont,  color: EKColor(#colorLiteral(red: 1, green: 0.9675828359, blue: 0.9005832124, alpha: 1)),  displayMode: displayMode
+        let closeButtonLabelStyle = EKProperty.LabelStyle(font: buttonFont, color: EKColor(#colorLiteral(red: 1, green: 0.9675828359, blue: 0.9005832124, alpha: 1)), displayMode: displayMode
         )
-        let closeButtonLabel = EKProperty.LabelContent(  text: leftButton,  style: closeButtonLabelStyle
+        let closeButtonLabel = EKProperty.LabelContent(text: leftButton, style: closeButtonLabelStyle
         )
         
         if specialAction == "None" {
@@ -811,8 +617,7 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
                 backgroundColor: .clear,
                 highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05),
                 displayMode: displayMode) { [unowned self] in
-                 print("cool")
-                    self.fixDuplicates()
+                self.fixDuplicates()
             }
             let buttonsBarContent = EKProperty.ButtonBarContent(  with: closeButton, okButton,  separatorColor: Color.Gray.light,  buttonHeight: 60,  displayMode: displayMode,  expandAnimatedly: true  )
             let alertMessage = EKAlertMessage(  simpleMessage: simpleMessage,  imagePosition: .left,  buttonBarContent: buttonsBarContent
@@ -822,10 +627,7 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
             contentView.layer.cornerRadius = 10
             SwiftEntryKit.display(entry: contentView, using: attributes)
         }
-        
-        
     }
-    
 }
 
 
@@ -838,16 +640,10 @@ extension GeneralViewController {
         startSpaceWarning.removeAll()
         endSpaceWarning.removeAll()
         
-       
         let noDuplicateArray = contentsArray.uniques
         
-        //var hasEmptyMatch = false
-        
-        print("contentsArray: \(contentsArray)")
         for (index, match) in contentsArray.enumerated() {
             if match == "" {
-                //print("empty detected")
-              //  hasEmptyMatch = true
                 emptyStringErrors.append(index)
             }
         }///First, check for empty string.
@@ -858,27 +654,17 @@ extension GeneralViewController {
         ///Now, check for duplicates
         stringToIndexesError.removeAll() //
         if contentsArray.count !=  noDuplicateArray.count {
-            //print("There are DUPLICATES!!! NoDuplicateArray: \(noDuplicateArray)")
-            //let differenceInNumber = contentsArray.count - noDuplicateArray.count
             
             let differentStrings = Array(Set(contentsArray.filter({ (i: String) in contentsArray.filter({ $0 == i }).count > 1}))) ///ContentsArray, but without duplicates
-          //  var titleMessage = ""
-            //print("diff: \(differentStrings)")
-            //REFRESH string to indexes
+            
             var firstOccuranceArray = [String]()
-            //firstOccuranceArray.removeAll()
             for (index, singleContent) in contentsArray.enumerated() { ///Go through every match
                 if differentStrings.contains(singleContent) {
-                    //print("CONTAINTS")
-                    //shouldHighlightedRows.append(index)
                     if !firstOccuranceArray.contains(singleContent) {
-//                        print("doesn't contain \(singleContent)")
                         firstOccuranceArray.append(singleContent)
                     } else { //A occurance has already occured.
-//                        print("DUPUPUPUPUPUPUP")
                         stringToIndexesError[singleContent, default: [Int]()].append(index)
                     }
-                    //print(stringToIndexesError)
                 }
             }
         
@@ -919,19 +705,26 @@ extension GeneralViewController {
     
     
     func showDoneAlerts() -> Bool { ///For the end, done
-        //highlightRows()
         var showAnAlert = false
         
         if emptyStringErrors.count >= 1 {
-         //   print("MORE THAN 1! \(emptyStringErrors.count)")
-            var matchesPlural = "You have \(emptyStringErrors.count) empty matches!"
-            if emptyStringErrors.count == 1 { matchesPlural = "Can't have an empty match!" }
+            let cantHaveEmptyMatch = NSLocalizedString("cantHaveEmptyMatch", comment: "GeneralViewController def=Can't have an empty match!")
+            
+            let youHaveXEmptyMatches = NSLocalizedString("youHave %d EmptyMatches",
+                                                                      comment:"GeneralViewController def=You have x empty matches!")
+            
+            
+//            var matchesPlural = "You have \(emptyStringErrors.count) empty matches!"
+            var matchesPlural = String.localizedStringWithFormat(youHaveXEmptyMatches, emptyStringErrors.count)
+            
+            
+            
+            if emptyStringErrors.count == 1 { matchesPlural = cantHaveEmptyMatch }
             showAnAlert = true
             SwiftEntryKitTemplates().displaySEK(message: matchesPlural, backgroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), location: .top, duration: CGFloat(0.8))
             
             highlightRowsOnError(type: "EmptyMatch")
         } else if stringToIndexesError.count >= 1 { ///No empty errors. Only duplicates.
-     //   print("ELSE!!!!")
             var titleMessage = ""
             
             let dupStrings = stringToIndexesError.keys
@@ -939,45 +732,72 @@ extension GeneralViewController {
             for dup in dupStrings {
                 duplicateStringArray.append(dup)
             }
-//            for singleString in dupStrings {
+            
             switch dupStrings.count {
             case 0:
                 titleMessage = ""
             case 1:
+                
                 if let differentPaths = stringToIndexesError[duplicateStringArray[0]] {
-                    var aDuplicate = "a duplicate."
-                    //let matchesNumberDiff = (contentsArray.count - noDuplicateArray.count)
-                    //let matchesNumberDiff = values.count
-           //         print("LKJFSLDFJLSDJFLSDJFSDF  \(differentPaths.count)")
-                    if differentPaths.count == 1 {
-                        aDuplicate = "a duplicate."
-                    } else if differentPaths.count == 2 {
-                        aDuplicate = "2 duplicates."
+                    let aDuplicateOriginal = NSLocalizedString("aDuplicateOriginal", comment: "GeneralViewController def=a duplicate.")
+                    
+                    
+                    var aDuplicate = aDuplicateOriginal
+//                    if differentPaths.count == 1 {
+//                        aDuplicate = "a duplicate."
+//                    } else
+                    if differentPaths.count == 2 {
+                        let twoDuplicates = NSLocalizedString("twoDuplicates", comment: "GeneralViewController def=2 duplicates.")
+                        
+                        aDuplicate = twoDuplicates
                     } else {
-                        aDuplicate = "a couple duplicates."
+                        let aCoupleDuplicates = NSLocalizedString("aCoupleDuplicates", comment: "GeneralViewController def=a couple duplicates.")
+                        aDuplicate = aCoupleDuplicates
                     }
-                    titleMessage = "\"\(duplicateStringArray[0])\" has \(aDuplicate)"
+                    
+                    let xHasXDuplicates = NSLocalizedString("%@ has %@", comment:"GeneralViewController def=\"\(duplicateStringArray[0])\" has \(aDuplicate)")
+
+//                    titleMessage = "\"\(duplicateStringArray[0])\" has \(aDuplicate)"
+                    titleMessage = String.localizedStringWithFormat(xHasXDuplicates, duplicateStringArray[0], aDuplicate)
                 }
             case 2:
-                titleMessage = "\"\(duplicateStringArray[0])\" and \"\(duplicateStringArray[1])\" have duplicates."
+                let xAndxHaveDuplicates = NSLocalizedString("%@ and %@ have",
+                                                            comment:"GeneralViewController def=\"\(duplicateStringArray[0])\" and \"\(duplicateStringArray[1])\" have duplicates.")
+
+                titleMessage = String.localizedStringWithFormat(xAndxHaveDuplicates, duplicateStringArray[0], duplicateStringArray[1])
+//                titleMessage = "\"\(duplicateStringArray[0])\" and \"\(duplicateStringArray[1])\" have duplicates."
+                
             case 3..<4:
-           //     print("ERROR: \(dupStrings.count)")
                 var newString = ""
                 for (index, message) in duplicateStringArray.enumerated() {
                     if index != duplicateStringArray.count - 1 {
                         newString.append("\"\(message)\", ")
                     } else {
-                        newString.append(" and \"\(message)\"")
+                        
+                        let and = NSLocalizedString("and", comment: "Multipurpose def=and")
+                        newString.append(" \(and) \"\(message)\"")
                     }
 
              //       print("NEW: \(newString)")
                 }
-                titleMessage = newString + " have duplicates."
+                
+                let spaceHaveDuplicates = NSLocalizedString("spaceHaveDuplicates", comment:"GeneralViewController def= have duplicates.")
+                    
+                titleMessage = newString + spaceHaveDuplicates
             default:
-                titleMessage = "You have a lot of duplicate matches."
+                
+                let youHaveLotsDuplicates = NSLocalizedString("youHaveLotsDuplicates",
+                                                              comment:"GeneralViewController def=You have a lot of duplicate matches.")
+//                titleMessage = "You have a lot of duplicate matches."
+                titleMessage = youHaveLotsDuplicates
             }
            // print("title: \(titleMessage)")
             if titleMessage != "" {
+                
+                
+                
+                
+                
                 titleMessage = titleMessage.typographized(language: "en")
                 var attributes = EKAttributes.topFloat
                 attributes.displayDuration = .infinity
@@ -990,7 +810,18 @@ extension GeneralViewController {
                 //var matchesPlural = "You have \(differenceInNumber) empty matches."
                 //if differenceInNumber == 1 { matchesPlural = "You have a match that is empty." }
                 showAnAlert = true
-                showButtonBarMessage(attributes: attributes, titleMessage: titleMessage, desc: "Would you like us to delete the duplicates?", leftButton: "Yes, Delete and save", yesButton: "I'll fix it myself")
+                
+                let wouldYouLikeDeleteDup = NSLocalizedString("wouldYouLikeDeleteDup",
+                comment:"GeneralViewController def=Would you like us to delete the duplicates?")
+                
+                let leftButtonDeleteSave = NSLocalizedString("leftButtonDeleteSave",
+                comment:"GeneralViewController def=Yes, Delete and save")
+                
+                let rightButtonFixItMyself = NSLocalizedString("rightButtonFixItMyself",
+                comment:"GeneralViewController def=I'll fix it myself")
+                
+                
+                showButtonBarMessage(attributes: attributes, titleMessage: titleMessage, desc: wouldYouLikeDeleteDup, leftButton: leftButtonDeleteSave, yesButton: rightButtonFixItMyself)
             }
         }
         return showAnAlert
