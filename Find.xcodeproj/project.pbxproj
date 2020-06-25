@@ -33,6 +33,7 @@
 		4928525C23D61D230048EC13 /* ListsSelect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4928525B23D61D230048EC13 /* ListsSelect.xib */; };
 		4928526023D61F570048EC13 /* ListSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525F23D61F570048EC13 /* ListSelect.swift */; };
 		492A2D2224A3116600F9C4A1 /* TutorialLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492A2D2124A3116600F9C4A1 /* TutorialLocalization.swift */; };
+		492A2D2624A4046200F9C4A1 /* BartyCrouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492A2D2524A4046200F9C4A1 /* BartyCrouch.swift */; };
 		492EB4F023F504BC007142CA /* PopulateSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492EB4EF23F504BC007142CA /* PopulateSymbols.swift */; };
 		492EB4F523F61F5A007142CA /* SymbolsSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492EB4F423F61F5A007142CA /* SymbolsSectionHeader.swift */; };
 		49301BF02400D4FF00B4780B /* HelpControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49301BEF2400D4FE00B4780B /* HelpControllers.swift */; };
@@ -160,6 +161,7 @@
 		4928525B23D61D230048EC13 /* ListsSelect.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListsSelect.xib; sourceTree = "<group>"; };
 		4928525F23D61F570048EC13 /* ListSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSelect.swift; sourceTree = "<group>"; };
 		492A2D2124A3116600F9C4A1 /* TutorialLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialLocalization.swift; sourceTree = "<group>"; };
+		492A2D2524A4046200F9C4A1 /* BartyCrouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartyCrouch.swift; sourceTree = "<group>"; };
 		492EB4EF23F504BC007142CA /* PopulateSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateSymbols.swift; sourceTree = "<group>"; };
 		492EB4F423F61F5A007142CA /* SymbolsSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsSectionHeader.swift; sourceTree = "<group>"; };
 		49301BEF2400D4FE00B4780B /* HelpControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpControllers.swift; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 				4999AC932353A80A00AB06A7 /* AppDelegate.swift */,
 				4999AC952353A80A00AB06A7 /* SceneDelegate.swift */,
 				4911508A235D1A3E00EC0C04 /* BasicUtilities.swift */,
+				492A2D2524A4046200F9C4A1 /* BartyCrouch.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -732,6 +735,7 @@
 			buildConfigurationList = 4999ACA42353A81100AB06A7 /* Build configuration list for PBXNativeTarget "Find" */;
 			buildPhases = (
 				6D06741A707392F12B687239 /* [CP] Check Pods Manifest.lock */,
+				492A2D2424A4040000F9C4A1 /* Barty */,
 				4999AC8C2353A80A00AB06A7 /* Sources */,
 				4999AC8D2353A80A00AB06A7 /* Frameworks */,
 				4999AC8E2353A80A00AB06A7 /* Resources */,
@@ -805,6 +809,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		492A2D2424A4040000F9C4A1 /* Barty */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Barty;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which bartycrouch > /dev/null; then\n    bartycrouch update -x\nelse\n    echo \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi\n";
+		};
 		495F38F52432BECF00A17D93 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -886,6 +908,7 @@
 				490DA75523CBB871000AF57D /* JJFloatingActionButton+Animation.swift in Sources */,
 				49B7A33623923E810070209F /* ZoomAnimator.swift in Sources */,
 				49A8EFAC237A5EFE00328D47 /* SetUpButtons.swift in Sources */,
+				492A2D2624A4046200F9C4A1 /* BartyCrouch.swift in Sources */,
 				495ECCAB238DB7BD00E7D966 /* TitleSupplementaryView.swift in Sources */,
 				49301BF52402493A00B4780B /* HistoryModel.swift in Sources */,
 				49B7A33823923EBD0070209F /* PhotoPageContainerViewController.swift in Sources */,

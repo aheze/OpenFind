@@ -62,7 +62,7 @@ class ListsTutorialLocalization {
 
 class ListsBuilderTutorialLocalization {
     let welcomeToListsBuilder = NSLocalizedString("welcomeToListsBuilder", comment: "TutorialLocalization def=Lists Builder...")
-    let startEasilyMakingLists = NSLocalizedString("startEasilyMakingLists", comment: "TutorialLocalization def=......Start easily making lists!")
+    let startEasilyMakingLists = NSLocalizedString("startEasilyMakingLists", comment: "TutorialLocalization def=...Start easily making lists!")
     
     let addAMatch = NSLocalizedString("addAMatch", comment: "TutorialLocalization def=Add a match")
     let matchesAreWhatFindLooksFor = NSLocalizedString("matchesAreWhatFindLooksFor",

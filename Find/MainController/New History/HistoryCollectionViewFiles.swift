@@ -231,13 +231,14 @@ extension NewHistoryViewController {
                 let cantBeUndone = NSLocalizedString("cantBeUndone", comment: "Multipurpose def=This action can't be undone.")
                 
                 let deleteThisPhotoQuestion = NSLocalizedString("deleteThisPhotoQuestion", comment: "Multifile def=Delete photo?")
-                let photoDeleted = NSLocalizedString("photoDeleted", comment: "HistoryCollectionViewFiles def=Photo Deleted!")
+                
+                let photoDeletedExclaim = NSLocalizedString("photoDeletedExclaim", comment: "Multifile def=Photo deleted!")
                 
                 let alert = UIAlertController(title: deleteThisPhotoQuestion, message: cantBeUndone, preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: deleteLoc, style: UIAlertAction.Style.destructive, handler: { _ in
                     self.deletePhotoAt(photoIndex: indexOfPhoto)
-                    let alertView = SPAlertView(title: photoDeleted, message: tapToDismiss, preset: SPAlertPreset.done)
+                    let alertView = SPAlertView(title: photoDeletedExclaim, message: tapToDismiss, preset: SPAlertPreset.done)
                     alertView.duration = 2.6
                     alertView.present()
                 }))

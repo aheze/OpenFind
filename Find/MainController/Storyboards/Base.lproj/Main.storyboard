@@ -2277,7 +2277,7 @@
                                     <action selector="followMeButtonPressed:" destination="dK9-Wy-dXW" eventType="touchUpInside" id="20U-ag-iKy"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore " textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="x7d-LB-Q4P">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore " textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="x7d-LB-Q4P">
                                 <rect key="frame" x="16" y="126" width="382" height="150"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>

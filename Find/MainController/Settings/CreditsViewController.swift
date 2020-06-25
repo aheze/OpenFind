@@ -35,10 +35,10 @@ class CreditsViewController: UIViewController, UITextViewDelegate {
         textView.delegate = self
         
         
-        let kamranLink = [NSAttributedString.Key.link: "https://about.me/hkamran80"]
-        let winkLink = [NSAttributedString.Key.link: "https://soundcloud.com/officialwinkmusic"]
+        let kamranLink = [NSAttributedString.Key.link: "https://hkamran.com/"]
+        let winkLink = [NSAttributedString.Key.link: "https://soundcloud.com/officialwinkmusic/"]
         
-        let kamran = NSAttributedString(string: "H. Kamran (about.me/hkamran80) ", attributes: kamranLink)
+        let kamran = NSAttributedString(string: "H. Kamran (hkamran.com) ", attributes: kamranLink)
         let wink = NSAttributedString(string: "W in K (soundcloud.com/officialwinkmusic) ", attributes: winkLink)
         
 //        let blackAt  tribute = [NSAttributedString.Key.foregroundColor:  UIColor.label]

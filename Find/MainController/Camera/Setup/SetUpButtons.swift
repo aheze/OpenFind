@@ -214,11 +214,12 @@ extension ViewController {
                 let noWords = NSLocalizedString("noWords", comment: "Stats def=[no words]")
                 finalMatchesString = noWords
              case 1:
-                let quotexquote = NSLocalizedString("quote %d quote", comment: "Stats def=\"x\"")
+                let quotexquote = NSLocalizedString("quote %@ quote", comment: "Stats def=\"x\"")
                 let string = String.localizedStringWithFormat(quotexquote, wordsFinding[0])
                 finalMatchesString = string
              case 2:
-                let quotexquoteSpaceAndquotexquote = NSLocalizedString("quote %d quoteSpaceAndquote %d quote", comment: "Stats def=\"x\" and \"x\"")
+                print("MULTI 2!!!!!!!")
+                let quotexquoteSpaceAndquotexquote = NSLocalizedString("quote %@ quoteSpaceAndquote %@ quote", comment: "Stats def=\"x\" and \"x\"")
                 let string = String.localizedStringWithFormat(quotexquoteSpaceAndquotexquote, wordsFinding[0], wordsFinding[1])
                 finalMatchesString = string
                 
@@ -229,12 +230,12 @@ extension ViewController {
              default:
                 for (index, message) in wordsFinding.enumerated() {
                     if index != wordsFinding.count - 1 {
-                        let quotexquoteCommaSpace = NSLocalizedString("quote %d quoteCommaSpace", comment: "Stats def=\"x\", ")
+                        let quotexquoteCommaSpace = NSLocalizedString("quote %@ quoteCommaSpace", comment: "Stats def=\"x\", ")
                         let string = String.localizedStringWithFormat(quotexquoteCommaSpace, message)
 //                        finalMatchesString.append("\"\(message)\", ")
                         finalMatchesString.append(string)
                     } else {
-                        let spaceAndSpacequotexquote = NSLocalizedString("spaceAndSpacequote %d quote", comment: "Stats def= and \"x\"")
+                        let spaceAndSpacequotexquote = NSLocalizedString("spaceAndSpacequote %@ quote", comment: "Stats def= and \"x\"")
                         let string = String.localizedStringWithFormat(spaceAndSpacequotexquote, message)
 //                        finalMatchesString.append(" and \"\(message)\"")
                         finalMatchesString.append(string)
