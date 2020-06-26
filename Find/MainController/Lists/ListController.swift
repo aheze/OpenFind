@@ -413,7 +413,7 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
             }
             
             if overFlowCount >= 1 {
-                let overFlowCountMoreFormat = NSLocalizedString("@d overFlowCountMore",
+                let overFlowCountMoreFormat = NSLocalizedString("%d overFlowCountMore",
                                                           comment:"ListController def=\n... x more")
                 
                 textToDisplay += String.localizedStringWithFormat(overFlowCountMoreFormat, overFlowCount)
@@ -473,7 +473,7 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
         }
         if overFlowCount >= 1 {
 //            textToDisplay += "\n... \(overFlowCount) more"
-            let overFlowCountMoreFormat = NSLocalizedString("@d overFlowCountMore",
+            let overFlowCountMoreFormat = NSLocalizedString("%d overFlowCountMore",
                                                       comment:"ListController def=\n... x more")
             
             textToDisplay += String.localizedStringWithFormat(overFlowCountMoreFormat, overFlowCount)

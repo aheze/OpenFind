@@ -146,7 +146,7 @@ class SettingsViewController: UIViewController {
         let whichTutorialWatch = NSLocalizedString("whichTutorialWatch",
                                                    comment: "Settings def=Which tutorial do you want to watch?")
         let generalTutorial = NSLocalizedString("generalTutorial", comment: "Settings def=General")
-        let historyTutorial = NSLocalizedString("historyTutorial", comment: "Settings def=History")
+        let photosTutorial = NSLocalizedString("photosTutorial", comment: "Settings def=Photos")
         let listsTutorial = NSLocalizedString("listsTutorial", comment: "Settings def=Lists")
         let listsBuilderTutorial = NSLocalizedString("listsBuilderTutorial", comment: "Settings def=Lists Builder")
         
@@ -172,7 +172,7 @@ class SettingsViewController: UIViewController {
             SwiftEntryKit.display(entry: vc, using: attributes)
             
         }))
-        alert.addAction(UIAlertAction(title: historyTutorial, style: UIAlertAction.Style.default, handler: { _ in
+        alert.addAction(UIAlertAction(title: photosTutorial, style: UIAlertAction.Style.default, handler: { _ in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "HistoryTutorialViewController") as! HistoryTutorialViewController
             vc.view.layer.cornerRadius = 10
@@ -237,28 +237,29 @@ class SettingsViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
 //        GeneralTutorialViewController
     }
-    let clear = NSLocalizedString("clear", comment: "Multipurpose def=Clear")
+//    let clear = NSLocalizedString("clear", comment: "Multipurpose def=Clear")
+    let deleteLoc = NSLocalizedString("delete", comment: "Multipurpose def=Delete")
     let tapToDismiss = NSLocalizedString("tapToDismiss", comment: "Multipurpose def=Tap to dismiss")
     let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
     
     
     @IBOutlet weak var clearHistButton: UIButton!
     @IBAction func clearHistPressed(_ sender: Any) {
-        let clearHistory = NSLocalizedString("clearHistory", comment: "Settings def=Clear History")
+        let deleteAllPhotos = NSLocalizedString("deleteAllPhotos", comment: "Settings def=Delete All Photos")
         let allPhotosAndCachesDeleted = NSLocalizedString("allPhotosAndCachesDeleted",
                                                           comment: "Settings def=All your photos and their caches will be deleted. This action can't be undone.")
         
         
         /// confirm
-        let clearedHistory = NSLocalizedString("clearedHistory", comment: "Settings def=Cleared History")
+        let deletedAllPhotos = NSLocalizedString("deletedAllPhotos", comment: "Settings def=Deleted All Photos")
         
         
         
         
         
-        let alert = UIAlertController(title: clearHistory, message: allPhotosAndCachesDeleted, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: deleteAllPhotos, message: allPhotosAndCachesDeleted, preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: clear, style: UIAlertAction.Style.destructive, handler: { _ in
+        alert.addAction(UIAlertAction(title: deleteLoc, style: UIAlertAction.Style.destructive, handler: { _ in
             var tempPhotos = [HistoryModel]()
             var contents = [SingleHistoryContent]()
             
@@ -298,7 +299,7 @@ class SettingsViewController: UIViewController {
                 }
             }
             
-            let alertView = SPAlertView(title: clearedHistory, message: self.tapToDismiss, preset: SPAlertPreset.done)
+            let alertView = SPAlertView(title: deletedAllPhotos, message: self.tapToDismiss, preset: SPAlertPreset.done)
             alertView.duration = 2.6
             alertView.present()
         }))
@@ -313,17 +314,17 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var clearListsButton: UIButton!
     @IBAction func clearListsPressed(_ sender: Any) {
         
-        let clearLists = NSLocalizedString("clearLists", comment: "Settings def=Clear Lists")
+        let deleteAllLists = NSLocalizedString("deleteAllLists", comment: "Settings def=Delete All Lists")
         let allYourListsDeleted = NSLocalizedString("allYourListsDeleted",
                                                    comment: "Settings def=All your lists will be deleted. This action can't be undone.")
-        let clearedAllLists = NSLocalizedString("clearedAllLists", comment: "Settings def=Cleared All Lists")
+        let deletedAllLists = NSLocalizedString("deletedAllLists", comment: "Settings def=Deleted All Lists")
         
         
         
         
         
-        let alert = UIAlertController(title: clearLists, message: allYourListsDeleted, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: clear, style: UIAlertAction.Style.destructive, handler: { _ in
+        let alert = UIAlertController(title: deleteAllLists, message: allYourListsDeleted, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: deleteLoc, style: UIAlertAction.Style.destructive, handler: { _ in
             var tempLists = [FindList]()
             if let allLists = self.listCategories {
                 for singleList in allLists {
@@ -337,7 +338,7 @@ class SettingsViewController: UIViewController {
             } catch {
                 print("DELETE PRESSED, but ERROR deleting photos...... \(error)")
             }
-            let alertView = SPAlertView(title: clearedAllLists, message: self.tapToDismiss, preset: SPAlertPreset.done)
+            let alertView = SPAlertView(title: deletedAllLists, message: self.tapToDismiss, preset: SPAlertPreset.done)
             alertView.duration = 2.6
             alertView.present()
         }))

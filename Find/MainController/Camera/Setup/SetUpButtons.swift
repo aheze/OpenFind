@@ -131,16 +131,16 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
         
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
         let listImage = UIImage(systemName: "square.grid.2x2.fill", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
-        let histImage = UIImage(systemName: "arrow.counterclockwise.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
+        let histImage = UIImage(systemName: "photo.fill.on.rectangle.fill", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
         let settImage = UIImage(systemName: "gear", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
         
-        let history = NSLocalizedString("history", comment: "Multipurpose def=History")
+        let photos = NSLocalizedString("photos", comment: "Multipurpose def=Photos")
         let lists = NSLocalizedString("lists", comment: "Multipurpose def=Lists")
         let settings = NSLocalizedString("settings", comment: "Multipurpose def=Settings")
         
         let goToNewHistory = menuButton.addItem()
         goToNewHistory.tag = 12461
-        goToNewHistory.titleLabel.text = history
+        goToNewHistory.titleLabel.text = photos
         
         
         goToNewHistory.imageView.image = histImage

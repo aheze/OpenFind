@@ -522,7 +522,7 @@ extension LaunchViewController {
             
             OnboardingItemInfo(informationImage: UIImage(named: "Smenu")!,
                                title: loc.accessMenu,
-                               description: loc.yourHistoryListsAndSettingsHere,
+                               description: loc.yourPhotosListsAndSettingsHere,
                                pageIcon: UIImage(named: "4icon")!,
                                color: UIColor(named: "OnboardingGray")!,
                                titleColor: UIColor.black,

@@ -20,24 +20,24 @@ class LaunchLocalization {
     let tapSearchField = NSLocalizedString("tapSearchField", comment: "TutorialLocalization def=Tap the Search Field at the top of the screen")
     
     let takePhotos = NSLocalizedString("takePhotos", comment: "TutorialLocalization def=Take photos")
-    let tapShutterButton = NSLocalizedString("tapShutterButton", comment: "TutorialLocalization def=Tap the shutter button. Your photos will appear in your History, where you can Find from them again and again and again...")
+    let tapShutterButton = NSLocalizedString("tapShutterButton", comment: "TutorialLocalization def=Tap the shutter button, and they'll appear in Photos, where you can search in them later.")
     
     let accessMenu = NSLocalizedString("accessMenu", comment: "TutorialLocalization def=Access the Menu")
-    let yourHistoryListsAndSettingsHere = NSLocalizedString("yourHistoryListsAndSettingsHere", comment: "TutorialLocalization def=Your History, Lists, and Settings are here. Check it out!")
+    let yourPhotosListsAndSettingsHere = NSLocalizedString("yourPhotosListsAndSettingsHere", comment: "TutorialLocalization def=Your Photos, Lists, and Settings are here. Check them out!")
     
     let beforeYouStart = NSLocalizedString("beforeYouStart", comment: "TutorialLocalization def=Before you start...")
     let ensureAccuracy = NSLocalizedString("ensureAccuracy", comment: "TutorialLocalization def=To ensure the most accurate results, please make sure to hold your phone as steady as possible.")
 }
 
 class HistoryTutorialLocalization {
-    let welcomeToHistory = NSLocalizedString("welcomeToHistory", comment: "TutorialLocalization def=History...")
-    let whereAllYourPhotosLive = NSLocalizedString("whereAllYourPhotosLive", comment: "TutorialLocalization def=...where all your photos live!")
+    let welcomeToPhotos = NSLocalizedString("welcomeToPhotos", comment: "TutorialLocalization def=Photos...")
+    let photosFindAgainAndAgain = NSLocalizedString("photosFindAgainAndAgain", comment: "TutorialLocalization def=...find again and again!")
     
     let selectPhotos = NSLocalizedString("selectPhotos", comment: "TutorialLocalization def=Select photos")
     let tapSelectButtonAndPopUp = NSLocalizedString("tapSelectButtonAndPopUp",
-                                 comment: "TutorialLocalization def=Tap the select button, and the History Controls will pop up!")
+                                 comment: "TutorialLocalization def=Tap the select button, and the Action Controls will pop up!")
     
-    let findFromHistory = NSLocalizedString("findFromHistory", comment: "TutorialLocalization def=Find from History")
+    let findFromPhotos = NSLocalizedString("findFromPhotos", comment: "TutorialLocalization def=Find from Photos")
     let selectAFewPhotos = NSLocalizedString("selectAFewPhotos", comment: "TutorialLocalization def=Select a few photos, tap the Find icon, and enter the text that you want to find!")
     
     let cachePhotos = NSLocalizedString("cachePhotos", comment: "TutorialLocalization def=Cache photos")
@@ -56,7 +56,7 @@ class ListsTutorialLocalization {
     let findSearchesForMatches = NSLocalizedString("findSearchesForMatches", comment: "TutorialLocalization def=Find searches for your matches when you use the list")
     
     let useTheList = NSLocalizedString("useTheList", comment: "TutorialLocalization def=Use the list")
-    let yourListsWillAppear = NSLocalizedString("yourListsWillAppear", comment: "TutorialLocalization def=Your lists will appear above the keyboard, whether you are Finding using the camera or from history")
+    let yourListsWillAppear = NSLocalizedString("yourListsWillAppear", comment: "TutorialLocalization def=Your lists will appear above the keyboard, whether you are Finding using the camera or from Photos")
 }
 
 

@@ -7,8 +7,8 @@
 /* Class = "UILabel"; text = "0"; ObjectID = "24E-8Q-fAS"; */
 "24E-8Q-fAS.text" = "0";
 
-/* Class = "UIButton"; normalTitle = "Clear History"; ObjectID = "2V9-Nx-FSL"; */
-"2V9-Nx-FSL.normalTitle" = "Clear History";
+/* Class = "UIButton"; normalTitle = "Delete All Photos"; ObjectID = "2V9-Nx-FSL"; */
+"2V9-Nx-FSL.normalTitle" = "Clear Photos";
 
 /* Class = "UIButton"; normalTitle = "Discard"; ObjectID = "2qz-Bq-vme"; */
 "2qz-Bq-vme.normalTitle" = "Discard";
@@ -118,7 +118,7 @@
 /* Class = "UIButton"; normalTitle = "Reset Settings"; ObjectID = "TYH-NW-c38"; */
 "TYH-NW-c38.normalTitle" = "Reset Settings";
 
-/* Class = "UIButton"; normalTitle = "Text Detected Indicator"; ObjectID = "TfG-ap-oJ4"; */
+/* Class = "UIButton"; normalTitle = "Text Detection Indicator"; ObjectID = "TfG-ap-oJ4"; */
 "TfG-ap-oJ4.normalTitle" = "Text Detected Indicator";
 
 /* Class = "UILabel"; text = "Currently searching for these words: [no words]"; ObjectID = "Tq3-Y5-Tqr"; */
@@ -226,8 +226,8 @@
 /* Class = "UIButton"; normalTitle = "Help"; ObjectID = "nvH-Iq-CHd"; */
 "nvH-Iq-CHd.normalTitle" = "Help";
 
-/* Class = "UILabel"; text = "Find from History"; ObjectID = "oNE-m3-Qz9"; */
-"oNE-m3-Qz9.text" = "Find from History";
+/* Class = "UILabel"; text = "Find from Photos"; ObjectID = "oNE-m3-Qz9"; */
+"oNE-m3-Qz9.text" = "Find from Photos";
 
 /* Class = "UILabel"; text = "Customized Settings Status: false"; ObjectID = "pYi-Ra-ZSV"; */
 "pYi-Ra-ZSV.text" = "Customized Settings Status: false";
@@ -235,8 +235,8 @@
 /* Class = "UIButton"; normalTitle = "Save"; ObjectID = "rAm-FK-rNs"; */
 "rAm-FK-rNs.normalTitle" = "Save";
 
-/* Class = "UILabel"; text = "History"; ObjectID = "rMI-bB-kPc"; */
-"rMI-bB-kPc.text" = "History";
+/* Class = "UILabel"; text = "Photos"; ObjectID = "rMI-bB-kPc"; */
+"rMI-bB-kPc.text" = "Photos";
 
 /* Class = "UIButton"; normalTitle = "Follow me on Medium!"; ObjectID = "rPp-Jw-MuZ"; */
 "rPp-Jw-MuZ.normalTitle" = "Follow me on Medium!";
@@ -268,7 +268,7 @@
 /* Class = "UILabel"; text = "No Lists"; ObjectID = "v96-On-D6n"; */
 "v96-On-D6n.text" = "No Lists";
 
-/* Class = "UIButton"; normalTitle = "Clear Lists"; ObjectID = "vOY-ej-zkc"; */
+/* Class = "UIButton"; normalTitle = "Delete All Lists"; ObjectID = "vOY-ej-zkc"; */
 "vOY-ej-zkc.normalTitle" = "Clear Lists";
 
 /* Class = "UILabel"; text = "Matches"; ObjectID = "vZ6-oK-Otx"; */

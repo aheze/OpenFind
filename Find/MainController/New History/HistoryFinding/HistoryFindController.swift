@@ -303,7 +303,7 @@ class HistoryFindController: UIViewController {
             welcomeImageButton.setImage(UIImage(named: "NotAllCached"), for: .normal)
             let notAllSelectedPhotosAlreadyCached = NSLocalizedString("notAllSelectedPhotosAlreadyCached", comment: "Not all photos have been cached, so some search results will not appear immediately. Press 'search' on the keyboard to find using OCR.")
             
-            welcomeLabel.text = "Not all photos have been cached, so some search results will not appear immediately. Press 'search' on the keyboard to find using OCR."
+            welcomeLabel.text = notAllSelectedPhotosAlreadyCached
         }
         
         tableView.alpha = 0

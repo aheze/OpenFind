@@ -13,6 +13,9 @@
 /* ListController def=x Lists Selected */
 "%d numberLists" = "%d Lists Selected";
 
+/* ListController def=\n... x more */
+"%d overFlowCountMore" = "\n... %d more";
+
 /* NewHistoryViewController def=x caches cleared! */
 "%d photos caches deleted!" = "%d caches cleared!";
 
@@ -27,9 +30,6 @@
 
 /* HistoryFindController def=x matches */
 "%d SpaceMatches" = "%d matches";
-
-/* ListController def=\n... x more */
-"@d overFlowCountMore" = "\n... @d more";
 
 /* TutorialLocalization def=Access the Menu */
 "accessMenu" = "Access the Menu";
@@ -106,20 +106,8 @@
 /* Multipurpose def=Clear */
 "clear" = "Clear";
 
-/* Settings def=Cleared All Lists */
-"clearedAllLists" = "Cleared All Lists";
-
-/* Settings def=Cleared History */
-"clearedHistory" = "Cleared History";
-
 /* PhotoPageContainerViewController def=Cleared this photo's cache! */
 "clearedThisPhotosCacheExclaim" = "Cleared this photo's cache!";
-
-/* Settings def=Clear History */
-"clearHistory" = "Clear History";
-
-/* Settings def=Clear Lists */
-"clearLists" = "Clear Lists";
 
 /* Multifile def=Clear this photo's cache? */
 "clearThisCacheQuestion" = "Clear this photo's cache?";
@@ -151,14 +139,26 @@
 /* NewHistoryViewController def=Delete x photos? */
 "Delete %d photos?" = "Delete %d photos?";
 
+/* Settings def=Delete All Lists */
+"deleteAllLists" = "Delete All Lists";
+
 /* ListController def=Delete ALL lists?! */
 "deleteAllListsQuestion" = "Delete ALL lists?!";
+
+/* Settings def=Delete All Photos */
+"deleteAllPhotos" = "Delete All Photos";
 
 /* NewHistoryViewController def=Delete ALL photos?! */
 "deleteAllPhotosQuestion" = "Delete ALL photos?!";
 
 /* TutorialLocalization def=Delete a match */
 "deleteAMatch" = "Delete a match";
+
+/* Settings def=Deleted All Lists */
+"deletedAllLists" = "Deleted All Lists";
+
+/* Settings def=Deleted All Photos */
+"deletedAllPhotos" = "Deleted All Photos";
 
 /* ListController def=Deleted list! */
 "deletedList" = "Deleted list!";
@@ -190,8 +190,8 @@
 /* NewHistoryViewController def=Entire cache cleared! */
 "entireCacheDeletedExclaim" = "Entire cache cleared!";
 
-/* TutorialLocalization def=Find from History */
-"findFromHistory" = "Find from History";
+/* TutorialLocalization def=Find from Photos */
+"findFromPhotos" = "Find from Photos";
 
 /* HistoryFindController def=Find Help */
 "findHelp" = "Find Help";
@@ -249,9 +249,6 @@
 
 /* Multipurpose def=History */
 "history" = "History";
-
-/* Settings def=History */
-"historyTutorial" = "History";
 
 /* StatsViewController def=Just for fun */
 "justForFunStats" = "Just for fun";
@@ -376,8 +373,14 @@
 /* Multifile def=Photo deleted! */
 "photoDeletedExclaim" = "Photo deleted!";
 
+/* Multipurpose def=Photos */
+"photos" = "Photos";
+
 /* HistorySelect def=Photo Selected */
 "photoSelected" = "Photo Selected";
+
+/* TutorialLocalization def=...find again and again! */
+"photosFindAgainAndAgain" = "...find again and again!";
 
 /* StatsViewController def=photos */
 "photosPluralLoc" = "photos";
@@ -387,6 +390,9 @@
 
 /* StatsViewController def=photo */
 "photosSingularLoc" = "photo";
+
+/* Settings def=Photos */
+"photosTutorial" = "Photos";
 
 /* Stats def=\"x\" */
 "quote %@ quote" = "\"%@\"";
@@ -472,11 +478,11 @@
 /* TutorialLocalization def=Tap the Search Field at the top of the screen */
 "tapSearchField" = "Tap the Search Field at the top of the screen";
 
-/* TutorialLocalization def=Tap the select button, and the History Controls will pop up! */
-"tapSelectButtonAndPopUp" = "Tap the select button, and the History Controls will pop up!";
+/* TutorialLocalization def=Tap the select button, and the Action Controls will pop up! */
+"tapSelectButtonAndPopUp" = "Tap the select button, and the Action Controls will pop up!";
 
-/* TutorialLocalization def=Tap the shutter button. Your photos will appear in your History, where you can Find from them again and again and again... */
-"tapShutterButton" = "Tap the shutter button. Your photos will appear in your History, where you can Find from them again and again and again...";
+/* TutorialLocalization def=Tap the shutter button, and they'll appear in Photos, where you can search in them later. */
+"tapShutterButton" = "Tap the shutter button to take photos! They'll appear in Photos, where you can search from them later.";
 
 /* TutorialLocalization def=Tap the Add button */
 "tapTheAddButton" = "Tap the Add button";
@@ -488,7 +494,7 @@
 "techLoc" = "Tech";
 
 /* Settings def=Text Detected Indicator */
-"textDetectedIndicator" = "Text Detected Indicator";
+"textDetectedIndicator" = "Text Detection Indicator";
 
 /* CreditsViewController def=Thanks to */
 "thanksTo" = "Thanks to";
@@ -544,20 +550,17 @@
 /* TutorialLocalization def=Welcome to Find */
 "welcomeToFind" = "Welcome to Find";
 
-/* TutorialLocalization def=History... */
-"welcomeToHistory" = "History...";
-
 /* TutorialLocalization def=Lists... */
 "welcomeToLists" = "Lists...";
 
 /* TutorialLocalization def=Lists Builder... */
 "welcomeToListsBuilder" = "Lists Builder...";
 
+/* TutorialLocalization def=Photos... */
+"welcomeToPhotos" = "Photos...";
+
 /* TutorialLocalization def=What is Find? */
 "whatIsFind" = "What is Find?";
-
-/* TutorialLocalization def=...where all your photos live! */
-"whereAllYourPhotosLive" = "...where all your photos live!";
 
 /* Settings def=Which tutorial do you want to watch? */
 "whichTutorialWatch" = "Which tutorial do you want to watch?";
@@ -574,8 +577,8 @@
 /* GeneralViewController def=You have a lot of duplicate matches. */
 "youHaveLotsDuplicates" = "You have a lot of duplicate matches.";
 
-/* TutorialLocalization def=Your History, Lists, and Settings are here. Check it out! */
-"yourHistoryListsAndSettingsHere" = "Your History, Lists, and Settings are here. Check it out!";
+/* TutorialLocalization def=Your lists will appear above the keyboard, whether you are Finding using the camera or from Photos */
+"yourListsWillAppear" = "Your lists will appear above the keyboard, whether you are Finding using the camera or from Photos";
 
-/* TutorialLocalization def=Your lists will appear above the keyboard, whether you are Finding using the camera or from history */
-"yourListsWillAppear" = "Your lists will appear above the keyboard, whether you are Finding using the camera or from history";
+/* TutorialLocalization def=Your Photos, Lists, and Settings are here. Check them out! */
+"yourPhotosListsAndSettingsHere" = "Your Photos, Lists, and Settings are here. Check them out!";

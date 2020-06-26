@@ -600,3 +600,36 @@
 
 /* Stats def= and \"x\" */
 "spaceAndSpacequote %@ quote" = "";
+
+/* ListController def=\n... x more */
+"%d overFlowCountMore" = "";
+
+/* Settings def=Delete All Photos */
+"deleteAllPhotos" = "";
+
+/* Settings def=Deleted All Photos */
+"deletedAllPhotos" = "";
+
+/* TutorialLocalization def=Find from Photos */
+"findFromPhotos" = "";
+
+/* Multipurpose def=Photos */
+"photos" = "";
+
+/* TutorialLocalization def=...find again and again! */
+"photosFindAgainAndAgain" = "";
+
+/* Settings def=Photos */
+"photosTutorial" = "";
+
+/* TutorialLocalization def=Photos... */
+"welcomeToPhotos" = "";
+
+/* TutorialLocalization def=Your Photos, Lists, and Settings are here. Check them out! */
+"yourPhotosListsAndSettingsHere" = "";
+
+/* Settings def=Delete All Lists */
+"deleteAllLists" = "";
+
+/* Settings def=Deleted All Lists */
+"deletedAllLists" = "";

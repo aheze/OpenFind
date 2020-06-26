@@ -100,7 +100,7 @@ import SwiftEntryKit
 
        OnboardingItemInfo(informationImage: UIImage(named: "Smenu")!,
                           title: loc.accessMenu,
-                          description: loc.yourHistoryListsAndSettingsHere,
+                          description: loc.yourPhotosListsAndSettingsHere,
                pageIcon: UIImage(named: "4icon")!,
                   color: UIColor(named: "OnboardingGray")!,
              titleColor: UIColor.black,
@@ -173,8 +173,8 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
       return [
         OnboardingItemInfo(informationImage: UIImage(named: "Hwelcome")!,
-                           title: loc.welcomeToHistory,
-                           description: loc.whereAllYourPhotosLive,
+                           title: loc.welcomeToPhotos,
+                           description: loc.photosFindAgainAndAgain,
                                    pageIcon: UIImage(),
                                    color: UIColor(named: "OnboardingGray")!,
                                  titleColor: UIColor.black,
@@ -193,7 +193,7 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
          descriptionFont: UIFont.systemFont(ofSize: 17)),
         
         OnboardingItemInfo(informationImage: UIImage(named: "Hfind")!,
-                           title: loc.findFromHistory,
+                           title: loc.findFromPhotos,
                            description: loc.selectAFewPhotos,
                 pageIcon: UIImage(named: "2icon")!,
                    color: UIColor(named: "OnboardingGray")!,
