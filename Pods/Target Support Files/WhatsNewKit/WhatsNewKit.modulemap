@@ -1,0 +1,6 @@
+framework module WhatsNewKit {
+  umbrella header "WhatsNewKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
