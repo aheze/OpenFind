@@ -405,7 +405,7 @@ id RLMMixedToObjc(realm::Mixed const& mixed) {
         case realm::type_Timestamp:
             return RLMTimestampToNSDate(mixed.get_timestamp());
         case realm::type_Binary:
-            return RLMBinaryDataToNSData(mixed.get_binary());
+            return RLMBinaryDataToNSData(mixed.get<realm::BinaryData>());
         case realm::type_Link:
         case realm::type_LinkList:
         default:
@@ -418,7 +418,7 @@ NSString *RLMDefaultDirectoryForBundleIdentifier(NSString *bundleIdentifier) {
     (void)bundleIdentifier;
     // tvOS prohibits writing to the Documents directory, so we use the Library/Caches directory instead.
     return NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
-#elif TARGET_OS_IPHONE
+#elif TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST
     (void)bundleIdentifier;
     // On iOS the Documents directory isn't user-visible, so put files there
     return NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];

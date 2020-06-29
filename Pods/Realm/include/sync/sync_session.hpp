@@ -284,6 +284,10 @@ public:
         {
             session.handle_error(std::move(error));
         }
+        static void nonsync_transact_notify(SyncSession& session, VersionID::version_type version)
+        {
+            session.nonsync_transact_notify(version);
+        }
     };
 
 private:

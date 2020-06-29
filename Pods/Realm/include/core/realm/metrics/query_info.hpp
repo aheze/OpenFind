@@ -35,7 +35,6 @@ namespace metrics {
 
 class QueryInfo {
 public:
-
     enum QueryType {
         type_Find,
         type_FindAll,

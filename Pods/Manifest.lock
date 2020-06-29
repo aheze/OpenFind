@@ -1,19 +1,20 @@
 PODS:
-  - Parchment (1.7.0)
+  - Parchment (2.4.0)
   - QuickLayout (3.0.0)
-  - Realm (4.3.0):
-    - Realm/Headers (= 4.3.0)
-  - Realm/Headers (4.3.0)
-  - RealmSwift (4.3.0):
-    - Realm (= 4.3.0)
-  - SDWebImage (5.4.1):
-    - SDWebImage/Core (= 5.4.1)
-  - SDWebImage/Core (5.4.1)
+  - Realm (5.1.0):
+    - Realm/Headers (= 5.1.0)
+  - Realm/Headers (5.1.0)
+  - RealmSwift (5.1.0):
+    - Realm (= 5.1.0)
+  - SDWebImage (5.8.1):
+    - SDWebImage/Core (= 5.8.1)
+  - SDWebImage/Core (5.8.1)
   - SnapKit (5.0.1)
   - SPAlert (2.1.4)
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
   - SwiftyJSON (4.3.0)
+  - WhatsNewKit (1.3.4)
 
 DEPENDENCIES:
   - Parchment
@@ -24,6 +25,7 @@ DEPENDENCIES:
   - SPAlert
   - SwiftEntryKit
   - SwiftyJSON (~> 4.0)
+  - WhatsNewKit
 
 SPEC REPOS:
   trunk:
@@ -36,18 +38,20 @@ SPEC REPOS:
     - SPAlert
     - SwiftEntryKit
     - SwiftyJSON
+    - WhatsNewKit
 
 SPEC CHECKSUMS:
-  Parchment: cae686f73685d16742cec9c19239b7578a15f0f5
+  Parchment: 002785473861582385db5c6725165353c500198e
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
-  Realm: 9357c3589555793e1860a7104a7412bca4a48d99
-  RealmSwift: 402f1e379a8ef82c635313037b043f0f06de880c
-  SDWebImage: 29c340dbdcef342bb13125553f4e19ce056b07a7
+  Realm: bdea546851e37b4cf0a2400cef115c7c26fda488
+  RealmSwift: 70945aa168db93b215c460e9c8ef680261aa28af
+  SDWebImage: e3eae2eda88578db0685a0c88597fdadd9433f05
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SPAlert: 1a8afa1c6ac86a82ab5b2cfdf7f9a51e68cb6c0c
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+  WhatsNewKit: 35f25faa0e17f3ad9b825ba46b13a14279972973
 
-PODFILE CHECKSUM: 64831cca3bfde9ebe44c4d29e2494ccadbd1fef7
+PODFILE CHECKSUM: 067c7c11d3c11beefdfd86113b1728fa5d98ed49
 
 COCOAPODS: 1.8.3

@@ -27,7 +27,7 @@
 #include <realm/alloc.hpp>
 #include <realm/impl/array_writer.hpp>
 #include <realm/array_integer.hpp>
-#include <realm/group_shared_options.hpp>
+#include <realm/db_options.hpp>
 
 
 namespace realm {
@@ -52,7 +52,7 @@ public:
     // (Group::m_is_shared), the constructor also adds version tracking
     // information to the group, if it is not already present (6th and 7th entry
     // in Group::m_top).
-    using Durability = SharedGroupOptions::Durability;
+    using Durability = DBOptions::Durability;
     GroupWriter(Group&, Durability dura = Durability::Full);
     ~GroupWriter();
 

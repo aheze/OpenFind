@@ -79,6 +79,9 @@
 /* NewHistoryViewController def=Cache cleared! */
 "cacheClearedExclaim" = "Cache cleared!";
 
+/*StatsViewController*/
+"cachedSinceYouFirstDownload" = "cached since you first downloaded Find";
+
 /* TutorialLocalization def=Cache photos */
 "cachePhotos" = "Cache photos";
 
@@ -419,7 +422,7 @@
 "secondVCTitle" = "Icon";
 
 /* ListController def=select */
-"select" = "select";
+"select" = "Select";
 
 /* TutorialLocalization def=Select a few photos, tap the Find icon, and enter the text that you want to find! */
 "selectAFewPhotos" = "Select a few photos, tap the Find icon, and enter the text that you want to find!";
@@ -561,6 +564,24 @@
 
 /* TutorialLocalization def=What is Find? */
 "whatIsFind" = "What is Find?";
+
+/*WhatsNewConfiguration*/
+"whatsNewChineseSupport" = "Chinese Availability";
+
+/*WhatsNewConfiguration*/
+"whatsNewChineseSupportDetails" = "We've translated Find into Chinese! However, only English and Pinyin are currently supported as input for our OCR engine.";
+
+/*WhatsNewConfiguration*/
+"whatsNewHistoryIsNowPhotos" = "History is now Photos";
+
+/*WhatsNewConfiguration*/
+"whatsNewInFindNumber" = "What's New in\nFind 1.1.0";
+
+/*WhatsNewConfiguration*/
+"whatsNewWhatsNewScreen" = "What's New Screen";
+
+/*WhatsNewConfiguration*/
+"whatsNewWhatsNewScreenDetails" = "This screen that you're seeing right now is all-new!";
 
 /* Settings def=Which tutorial do you want to watch? */
 "whichTutorialWatch" = "Which tutorial do you want to watch?";

@@ -43,9 +43,7 @@
 		4952F0C2240B1DD00068564F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4952F0C1240B1DD00068564F /* SearchCell.swift */; };
 		4953F3BE2415A14000690E53 /* HistoryFindController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953F3BD2415A14000690E53 /* HistoryFindController.swift */; };
 		4953F3C0241713A100690E53 /* HistoryFindCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953F3BF241713A000690E53 /* HistoryFindCell.swift */; };
-		4953F3C224171E5F00690E53 /* FindBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4953F3C124171E5F00690E53 /* FindBar.xib */; };
 		4953F3C424171EE200690E53 /* FindBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953F3C324171EE200690E53 /* FindBar.swift */; };
-		4953F3C7241733E700690E53 /* ListToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4953F3C6241733E700690E53 /* ListToolBar.xib */; };
 		4953F3C92417344900690E53 /* ListToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953F3C82417344900690E53 /* ListToolBar.swift */; };
 		49563501243591650001E8C6 /* RateTheApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49563500243591650001E8C6 /* RateTheApp.swift */; };
 		49563503243593860001E8C6 /* TutorialViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49563502243593860001E8C6 /* TutorialViewControllers.swift */; };
@@ -68,6 +66,10 @@
 		49569B3523D6919E009308CA /* ListsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3423D6919E009308CA /* ListsLayout.swift */; };
 		4957157E2368B022007BF68B /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4957157D2368B022007BF68B /* ViewExtensions.swift */; };
 		49585DCF23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49585DCE23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift */; };
+		495DAD3624A6B2E500D5F844 /* FindBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 495DAD3824A6B2E500D5F844 /* FindBar.xib */; };
+		495DAD3B24A6B34400D5F844 /* HistorySelect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 495DAD3D24A6B34400D5F844 /* HistorySelect.xib */; };
+		495DAD4024A6B37500D5F844 /* ListToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 495DAD4224A6B37500D5F844 /* ListToolBar.xib */; };
+		495DAD4724A81F4600D5F844 /* WhatsNewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495DAD4624A81F4600D5F844 /* WhatsNewConfiguration.swift */; };
 		495ECCA7238CF76C00E7D966 /* NewHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCA6238CF76C00E7D966 /* NewHistoryViewController.swift */; };
 		495ECCA9238CF7BD00E7D966 /* HPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */; };
 		495ECCAB238DB7BD00E7D966 /* TitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCAA238DB7BD00E7D966 /* TitleSupplementaryView.swift */; };
@@ -106,7 +108,6 @@
 		49BC782023C2B0E0003D9904 /* IndexMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC781F23C2B0DF003D9904 /* IndexMatcher.swift */; };
 		49BC782223C3E1BF003D9904 /* TextViewRounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC782123C3E1BF003D9904 /* TextViewRounded.swift */; };
 		49BC782F23C6E473003D9904 /* addHeart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC782E23C6E473003D9904 /* addHeart.swift */; };
-		49BC783523C8275B003D9904 /* HistorySelect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49BC783323C8275A003D9904 /* HistorySelect.xib */; };
 		49BC783623C8275B003D9904 /* HistorySelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC783423C8275B003D9904 /* HistorySelect.swift */; };
 		49D985B024188CA4005F4E92 /* NewListToolbarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985AE24188CA4005F4E92 /* NewListToolbarCell.swift */; };
 		49D985B124188CA4005F4E92 /* NewListToolbarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49D985AF24188CA4005F4E92 /* NewListToolbarCell.xib */; };
@@ -171,9 +172,7 @@
 		4952F0C1240B1DD00068564F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		4953F3BD2415A14000690E53 /* HistoryFindController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFindController.swift; sourceTree = "<group>"; };
 		4953F3BF241713A000690E53 /* HistoryFindCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFindCell.swift; sourceTree = "<group>"; };
-		4953F3C124171E5F00690E53 /* FindBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FindBar.xib; sourceTree = "<group>"; };
 		4953F3C324171EE200690E53 /* FindBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindBar.swift; sourceTree = "<group>"; };
-		4953F3C6241733E700690E53 /* ListToolBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListToolBar.xib; sourceTree = "<group>"; };
 		4953F3C82417344900690E53 /* ListToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListToolBar.swift; sourceTree = "<group>"; };
 		49563500243591650001E8C6 /* RateTheApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateTheApp.swift; sourceTree = "<group>"; };
 		49563502243593860001E8C6 /* TutorialViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewControllers.swift; sourceTree = "<group>"; };
@@ -198,6 +197,13 @@
 		49585DCE23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftEntryKitTemplates.swift; sourceTree = "<group>"; };
 		495D9CC524A16AAB009C507C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		495D9CC724A16AAB009C507C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		495DAD3724A6B2E500D5F844 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FindBar.xib; sourceTree = "<group>"; };
+		495DAD3A24A6B2E900D5F844 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FindBar.strings"; sourceTree = "<group>"; };
+		495DAD3C24A6B34400D5F844 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HistorySelect.xib; sourceTree = "<group>"; };
+		495DAD3F24A6B34E00D5F844 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/HistorySelect.strings"; sourceTree = "<group>"; };
+		495DAD4124A6B37500D5F844 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ListToolBar.xib; sourceTree = "<group>"; };
+		495DAD4424A6B37900D5F844 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ListToolBar.strings"; sourceTree = "<group>"; };
+		495DAD4624A81F4600D5F844 /* WhatsNewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewConfiguration.swift; sourceTree = "<group>"; };
 		495ECCA6238CF76C00E7D966 /* NewHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHistoryViewController.swift; sourceTree = "<group>"; };
 		495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPhotoCell.swift; sourceTree = "<group>"; };
 		495ECCAA238DB7BD00E7D966 /* TitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSupplementaryView.swift; sourceTree = "<group>"; };
@@ -238,7 +244,6 @@
 		49BC781F23C2B0DF003D9904 /* IndexMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexMatcher.swift; sourceTree = "<group>"; };
 		49BC782123C3E1BF003D9904 /* TextViewRounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewRounded.swift; sourceTree = "<group>"; };
 		49BC782E23C6E473003D9904 /* addHeart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addHeart.swift; sourceTree = "<group>"; };
-		49BC783323C8275A003D9904 /* HistorySelect.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistorySelect.xib; sourceTree = "<group>"; };
 		49BC783423C8275B003D9904 /* HistorySelect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistorySelect.swift; sourceTree = "<group>"; };
 		49D985AE24188CA4005F4E92 /* NewListToolbarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListToolbarCell.swift; sourceTree = "<group>"; };
 		49D985AF24188CA4005F4E92 /* NewListToolbarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewListToolbarCell.xib; sourceTree = "<group>"; };
@@ -346,6 +351,7 @@
 				4952F0C1240B1DD00068564F /* SearchCell.swift */,
 				495F38FD243302D500A17D93 /* StatsViewController.swift */,
 				49563500243591650001E8C6 /* RateTheApp.swift */,
+				495DAD4624A81F4600D5F844 /* WhatsNewConfiguration.swift */,
 			);
 			path = Setup;
 			sourceTree = "<group>";
@@ -363,7 +369,7 @@
 		4953F3C5241733C200690E53 /* Toolbar */ = {
 			isa = PBXGroup;
 			children = (
-				4953F3C6241733E700690E53 /* ListToolBar.xib */,
+				495DAD4224A6B37500D5F844 /* ListToolBar.xib */,
 				4953F3C82417344900690E53 /* ListToolBar.swift */,
 				49D985AE24188CA4005F4E92 /* NewListToolbarCell.swift */,
 				49D985AF24188CA4005F4E92 /* NewListToolbarCell.xib */,
@@ -469,6 +475,13 @@
 				49585DCE23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift */,
 			);
 			path = SEK;
+			sourceTree = "<group>";
+		};
+		495DAD4524A7FDED00D5F844 /* TestingImages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TestingImages;
 			sourceTree = "<group>";
 		};
 		495ECCA5238CF74500E7D966 /* New History */ = {
@@ -626,6 +639,7 @@
 		4999AC922353A80A00AB06A7 /* Find */ = {
 			isa = PBXGroup;
 			children = (
+				495DAD4524A7FDED00D5F844 /* TestingImages */,
 				495635292437A4860001E8C6 /* defaultSeeds.realm */,
 				496937382353C219009CA41A /* MainController */,
 				4969373B2353C25B009CA41A /* Utilities */,
@@ -663,7 +677,7 @@
 				49D985B2241B3736005F4E92 /* Caching */,
 				4953F3BD2415A14000690E53 /* HistoryFindController.swift */,
 				4953F3BF241713A000690E53 /* HistoryFindCell.swift */,
-				4953F3C124171E5F00690E53 /* FindBar.xib */,
+				495DAD3824A6B2E500D5F844 /* FindBar.xib */,
 				4953F3C324171EE200690E53 /* FindBar.swift */,
 				49D985B92421D97B005F4E92 /* FindModel.swift */,
 			);
@@ -674,7 +688,7 @@
 			isa = PBXGroup;
 			children = (
 				49BC783423C8275B003D9904 /* HistorySelect.swift */,
-				49BC783323C8275A003D9904 /* HistorySelect.xib */,
+				495DAD3D24A6B34400D5F844 /* HistorySelect.xib */,
 				49BC782E23C6E473003D9904 /* addHeart.swift */,
 			);
 			path = HistorySelectFloat;
@@ -793,12 +807,12 @@
 			files = (
 				4956352A2437A4B60001E8C6 /* defaultSeeds.realm in Resources */,
 				49E9D89224996E1A0006757C /* Localizable.strings in Resources */,
-				4953F3C224171E5F00690E53 /* FindBar.xib in Resources */,
+				495DAD3624A6B2E500D5F844 /* FindBar.xib in Resources */,
 				49D985B124188CA4005F4E92 /* NewListToolbarCell.xib in Resources */,
 				4999ACA02353A81100AB06A7 /* LaunchScreen.storyboard in Resources */,
 				49B7A32D2390823C0070209F /* Colors.xcassets in Resources */,
-				49BC783523C8275B003D9904 /* HistorySelect.xib in Resources */,
-				4953F3C7241733E700690E53 /* ListToolBar.xib in Resources */,
+				495DAD3B24A6B34400D5F844 /* HistorySelect.xib in Resources */,
+				495DAD4024A6B37500D5F844 /* ListToolBar.xib in Resources */,
 				4999AC9D2353A81100AB06A7 /* Assets.xcassets in Resources */,
 				4999AC9B2353A80A00AB06A7 /* Main.storyboard in Resources */,
 				4928525C23D61D230048EC13 /* ListsSelect.xib in Resources */,
@@ -922,6 +936,7 @@
 				4957157E2368B022007BF68B /* ViewExtensions.swift in Sources */,
 				490DA75D23CBC905000AF57D /* BigMenuButton.swift in Sources */,
 				49BC783623C8275B003D9904 /* HistorySelect.swift in Sources */,
+				495DAD4724A81F4600D5F844 /* WhatsNewConfiguration.swift in Sources */,
 				49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */,
 				490BC3F623F8DA41004D1433 /* EditListViewController.swift in Sources */,
 				49301BF02400D4FF00B4780B /* HelpControllers.swift in Sources */,
@@ -994,6 +1009,33 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		495DAD3824A6B2E500D5F844 /* FindBar.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				495DAD3724A6B2E500D5F844 /* Base */,
+				495DAD3A24A6B2E900D5F844 /* zh-Hans */,
+			);
+			name = FindBar.xib;
+			sourceTree = "<group>";
+		};
+		495DAD3D24A6B34400D5F844 /* HistorySelect.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				495DAD3C24A6B34400D5F844 /* Base */,
+				495DAD3F24A6B34E00D5F844 /* zh-Hans */,
+			);
+			name = HistorySelect.xib;
+			sourceTree = "<group>";
+		};
+		495DAD4224A6B37500D5F844 /* ListToolBar.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				495DAD4124A6B37500D5F844 /* Base */,
+				495DAD4424A6B37900D5F844 /* zh-Hans */,
+			);
+			name = ListToolBar.xib;
+			sourceTree = "<group>";
+		};
 		4999AC992353A80A00AB06A7 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1153,7 +1195,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1174,7 +1216,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

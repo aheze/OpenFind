@@ -70,9 +70,9 @@ class StatsViewController: UIViewController, UpdateMatchesNumberStats {
         let settCustomized = defaults.bool(forKey: "customizedSettingsBool")
         let feedbacked = defaults.bool(forKey: "feedbackedAlready")
         
-        var cacheS = "s"
-        var helpS = "s"
-        var listsS = "s"
+//        var cacheS = "s"
+//        var helpS = "s"
+//        var listsS = "s"
         
         let photosPluralLoc = NSLocalizedString("photosPluralLoc", comment: "StatsViewController def=photos")
         let timesPluralLoc = NSLocalizedString("timesPluralLoc", comment: "StatsViewController def=times")
@@ -108,7 +108,9 @@ class StatsViewController: UIViewController, UpdateMatchesNumberStats {
         
         let cacheBold = NSAttributedString(string: "\(cacheCount)", attributes: boldAttribute)
 //        let cacheRegular = NSAttributedString(string: " photo\(cacheS) cached since you first downloaded Find", attributes: regularAttribute)
-        let cacheRegular = NSAttributedString(string: " \(photosPlural) cached since you first downloaded Find", attributes: regularAttribute)
+        
+        let cachedSinceYouFirstDownload = NSLocalizedString("cachedSinceYouFirstDownload", comment: "StatsViewController")
+        let cacheRegular = NSAttributedString(string: " \(photosPlural) \(cachedSinceYouFirstDownload)", attributes: regularAttribute)
         let cacheString = NSMutableAttributedString()
         cacheString.append(cacheBold)
         cacheString.append(cacheRegular)

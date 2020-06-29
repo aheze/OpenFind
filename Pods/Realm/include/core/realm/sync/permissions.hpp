@@ -31,6 +31,7 @@
 #include <realm/util/metered/string.hpp>
 
 #include <realm/table_view.hpp>
+#include <realm/obj.hpp>
 
 namespace realm {
 namespace sync {
@@ -76,29 +77,29 @@ static constexpr char g_realms_table_name[] = "class___Realm";
 
 
 /// Create the permissions schema if it doesn't already exist.
-void create_permissions_schema(Group&);
+void create_permissions_schema(Transaction&);
 
 /// Set up the basic "everyone" role and default permissions. The default is to
 /// set up some very permissive defaults, where "everyone" can do everything.
-void set_up_basic_permissions(Group& group, TableInfoCache& table_info_cache, bool permissive = true);
+void set_up_basic_permissions(Transaction&, TableInfoCache& table_info_cache, bool permissive = true);
 // Convenience function that creates a new TableInfoCache.
-void set_up_basic_permissions(Group& group, bool permissive = true);
+void set_up_basic_permissions(Transaction&, bool permissive = true);
 
 /// Set up some basic permissions for the class. The default is to set up some
 /// very permissive default, where "everyone" can do everything in the class.
-void set_up_basic_permissions_for_class(Group&, StringData class_name, bool permissive = true);
+void set_up_basic_permissions_for_class(Transaction&, StringData class_name, bool permissive = true);
 // void set_up_basic_default_permissions_for_class(Group&, TableRef klass, bool permissive = true);
 
 /// Return the index of the ACL in the class, if one exists. If no ACL column is
 /// defined in the class, returns `npos`.
-size_t find_permissions_column(const Group&, ConstTableRef);
+ColKey find_permissions_column(const Transaction&, ConstTableRef);
 
 //@{
 /// Convenience functions to check permisions data
 /// The functions must be called inside a read (or write) transaction.
-bool permissions_schema_exist(const Group&);
+bool permissions_schema_exist(const Transaction&);
 
-bool user_exist(const Group&, StringData user_id);
+bool user_exist(const Transaction&, StringData user_id);
 //@}
 
 
@@ -132,17 +133,24 @@ struct InvalidPermissionsSchema : util::runtime_error {
 ///
 /// When a role or user has not already been defined in the Realm, these
 /// functions create them on-demand.
-void set_realm_permissions_for_role(Group&, StringData role_name,
+void set_realm_permissions_for_role(Transaction&, StringData role_name,
                                     uint_least32_t privileges);
-void set_class_permissions_for_role(Group&, StringData class_name,
+void set_realm_permissions_for_role(Transaction&, ObjKey role,
+                                    uint_least32_t privileges);
+void set_class_permissions_for_role(Transaction&, StringData class_name,
                                     StringData role_name, uint_least32_t privileges);
+void set_class_permissions_for_role(Transaction&, StringData class_name, ObjKey role_key,
+                                    uint_least32_t privileges);
 // void set_default_object_permissions_for_role(Group&, StringData class_name,
 //                                              StringData role_name,
 //                                              uint_least32_t privileges);
-void set_object_permissions_for_role(Group&, TableRef table, size_t row_ndx,
+void set_object_permissions_for_role(Transaction&, TableRef table, Obj& object,
                                      StringData role_name, uint_least32_t privileges);
+void set_object_permissions_for_role(Transaction&, TableRef table, Obj& object, ObjKey role,
+                                     uint_least32_t privileges);
 
-void add_user_to_role(Group&, StringData user_id, StringData role_name);
+void add_user_to_role(Transaction&, StringData user_id, StringData role_name);
+void add_user_to_role(Transaction&, Obj user, ObjKey role);
 //@}
 
 /// The Privilege enum is intended to be used in a bitfield.
@@ -254,10 +262,9 @@ inline constexpr uint_least32_t operator~(Privilege p)
 
 struct PermissionsCache {
     /// Each element is the index of a row in the `class___Roles` table.
-    using RoleList = std::vector<std::size_t>;
+    using RoleList = std::vector<ObjKey>;
 
-    PermissionsCache(const Group& g, TableInfoCache& table_info_cache,
-                     StringData user_identity, bool is_admin = false);
+    PermissionsCache(const Transaction& g, TableInfoCache& table_info_cache, StringData user_identity, bool is_admin = false);
 
     bool is_admin() const noexcept;
 
@@ -348,7 +355,7 @@ struct PermissionsCache {
     void verify();
 
 private:
-    const Group& group;
+    const Transaction& group;
     TableInfoCache& m_table_info_cache;
     std::string user_id;
     bool m_is_admin;
@@ -357,7 +364,7 @@ private:
     ObjectIDSet created_objects;
 
     // uint_least32_t get_default_object_privileges(ConstTableRef);
-    uint_least32_t get_privileges_for_permissions(ConstLinkViewRef);
+    uint_least32_t get_privileges_for_permissions(const ConstLnkLst&);
     friend struct InstructionApplierWithPermissionCheck;
 };
 
@@ -412,7 +419,7 @@ std::ostream& operator<<(std::ostream&, const PermissionCorrections&);
 /// changeset that can be sent to the client to revert the illicit changes that
 /// were detected by the applier.
 struct InstructionApplierWithPermissionCheck {
-    explicit InstructionApplierWithPermissionCheck(Group& reference_realm,
+    explicit InstructionApplierWithPermissionCheck(Transaction& reference_realm,
                                                    bool is_admin,
                                                    StringData user_identity);
     ~InstructionApplierWithPermissionCheck();

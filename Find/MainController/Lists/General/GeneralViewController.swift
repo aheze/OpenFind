@@ -95,8 +95,8 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         
         let untitledName = NSLocalizedString("untitledName", comment: "GeneralViewController def=Untitled")
         let noDescription = NSLocalizedString("noDescription", comment: "GeneralViewController def=No Description")
-        if newName == "" { newName = "untitledName" }
-        if newDesc == "" { newDesc = "noDescription" }
+        if newName == "" { newName = untitledName }
+        if newDesc == "" { newDesc = noDescription }
         
         if overrideDone == true {
             generalDelegate?.returnNewGeneral(nameOfList: newName, desc: newDesc, contentsOfList: contents, hasErrors: false, overrideMake: true)

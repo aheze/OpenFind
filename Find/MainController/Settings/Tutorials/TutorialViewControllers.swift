@@ -17,6 +17,11 @@ import SwiftEntryKit
     
     @IBOutlet weak var paperOnboarding: PaperOnboarding!
     
+        
+    @IBAction func xPressed(_ sender: Any) {
+        SwiftEntryKit.dismiss()
+    }
+        
     @IBOutlet weak var goButton: UIButton!
     @IBAction func goButtonPressed(_ sender: Any) {
         SwiftEntryKit.dismiss()
@@ -30,27 +35,25 @@ import SwiftEntryKit
         paperOnboarding.delegate = self
         paperOnboarding.dataSource = self
         
-        goButton.isHidden = true
+//        goButton.isHidden = true
         goButton.alpha = 0
         goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
     }
     
     func onboardingWillTransitonToIndex(_ index: Int) {
         if index == 5 {
-            goButton.isHidden = false
-            goButton.alpha = 0
-            UIView.animate(withDuration: 0.05, animations: {
+//            goButton.isHidden = false
+//            goButton.alpha = 0
+            UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform.identity
                 self.goButton.alpha = 1
             })
         } else {
-            goButton.alpha = 1
-            UIView.animate(withDuration: 0.05, animations: {
+//            goButton.alpha = 1
+            UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 self.goButton.alpha = 0
-            }) { _ in
-                self.goButton.isHidden = true
-            }
+            })
 
         }
     }
@@ -131,8 +134,12 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
     
     @IBOutlet weak var paperOnboarding: PaperOnboarding!
     
-    @IBOutlet weak var goButton: UIButton!
     
+    @IBAction func historyXPressed(_ sender: Any) {
+        SwiftEntryKit.dismiss()
+    }
+    
+    @IBOutlet weak var goButton: UIButton!
     @IBAction func histGoButtonPressed(_ sender: Any) {
         SwiftEntryKit.dismiss()
     }
@@ -143,7 +150,7 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
         paperOnboarding.delegate = self
         paperOnboarding.dataSource = self
         
-        goButton.isHidden = true
+//        goButton.isHidden = true
         goButton.alpha = 0
         goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         
@@ -151,21 +158,18 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
     
     func onboardingWillTransitonToIndex(_ index: Int) {
         if index == 3 {
-            goButton.alpha = 0
-            goButton.isHidden = false
-            UIView.animate(withDuration: 0.05, animations: {
+//            goButton.alpha = 0
+//            goButton.isHidden = false
+            UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform.identity
                 self.goButton.alpha = 1
             })
         } else {
-            goButton.alpha = 1
-            UIView.animate(withDuration: 0.05, animations: {
+//            goButton.alpha = 1
+            UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 self.goButton.alpha = 0
-            }) { _ in
-                self.goButton.isHidden = true
-            }
-
+            })
         }
     }
     
@@ -224,8 +228,12 @@ class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, Pa
     
     @IBOutlet weak var paperOnboarding: PaperOnboarding!
     
-    @IBOutlet weak var goButton: UIButton!
     
+    @IBAction func listsXPressed(_ sender: Any) {
+        SwiftEntryKit.dismiss()
+    }
+    
+    @IBOutlet weak var goButton: UIButton!
     @IBAction func listsGoButtonPressed(_ sender: Any) {
         SwiftEntryKit.dismiss()
     }
@@ -239,27 +247,25 @@ class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, Pa
         paperOnboarding.delegate = self
         paperOnboarding.dataSource = self
         
-        goButton.isHidden = true
+//        goButton.isHidden = true
         goButton.alpha = 0
         goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
     }
     
     func onboardingWillTransitonToIndex(_ index: Int) {
         if index == 3 {
-            goButton.alpha = 0
-            goButton.isHidden = false
-            UIView.animate(withDuration: 0.05, animations: {
+//            goButton.alpha = 0
+//            goButton.isHidden = false
+            UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform.identity
                 self.goButton.alpha = 1
             })
         } else {
-            goButton.alpha = 1
-            UIView.animate(withDuration: 0.05, animations: {
+//            goButton.alpha = 1
+            UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 self.goButton.alpha = 0
-            }) { _ in
-                self.goButton.isHidden = true
-            }
+            })
 
         }
     }
@@ -320,8 +326,12 @@ class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDeleg
     @IBOutlet weak var paperOnboarding: PaperOnboarding!
     
     @IBOutlet weak var goButton: UIButton!
-    
     @IBAction func listsGoButtonPressed(_ sender: Any) {
+        SwiftEntryKit.dismiss()
+    }
+    
+    
+    @IBAction func listsBuilderXPressed(_ sender: Any) {
         SwiftEntryKit.dismiss()
     }
     
@@ -334,27 +344,25 @@ class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDeleg
         paperOnboarding.delegate = self
         paperOnboarding.dataSource = self
         
-        goButton.isHidden = true
+//        goButton.isHidden = true
         goButton.alpha = 0
         goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
     }
     
     func onboardingWillTransitonToIndex(_ index: Int) {
         if index == 3 {
-            goButton.alpha = 0
-            goButton.isHidden = false
-            UIView.animate(withDuration: 0.05, animations: {
+//            goButton.alpha = 0
+//            goButton.isHidden = false
+            UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform.identity
                 self.goButton.alpha = 1
             })
         } else {
-            goButton.alpha = 1
-            UIView.animate(withDuration: 0.05, animations: {
+//            goButton.alpha = 1
+            UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 self.goButton.alpha = 0
-            }) { _ in
-                self.goButton.isHidden = true
-            }
+            })
 
         }
     }

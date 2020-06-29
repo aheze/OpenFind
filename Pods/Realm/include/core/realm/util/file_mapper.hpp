@@ -30,10 +30,14 @@ namespace realm {
 namespace util {
 
 void* mmap(FileDesc fd, size_t size, File::AccessMode access, size_t offset, const char* encryption_key);
+void* mmap_fixed(FileDesc fd, void* address_request, size_t size, File::AccessMode access, size_t offset,
+                 const char* enc_key);
+void* mmap_reserve(FileDesc fd, size_t size, size_t offset);
 void munmap(void* addr, size_t size);
 void* mremap(FileDesc fd, size_t file_offset, void* old_addr, size_t old_size, File::AccessMode a, size_t new_size,
              const char* encryption_key);
 void msync(FileDesc fd, void* addr, size_t size);
+void* mmap_anon(size_t size);
 
 // A function which may be given to encryption_read_barrier. If present, the read barrier is a
 // a barrier for a full array. If absent, the read barrier is a barrier only for the address
@@ -46,8 +50,8 @@ class PageReclaimGovernor {
 public:
     // Called by the page reclaimer with the current load (in bytes) and
     // must return the target load (also in bytes). Returns no_match if no
-	// target can be set
-	static constexpr int64_t no_match = -1;
+    // target can be set
+    static constexpr int64_t no_match = -1;
     virtual std::function<int64_t()> current_target_getter(size_t load) = 0;
     virtual void report_target_result(int64_t) = 0;
 };
@@ -95,6 +99,11 @@ SharedFileInfo* get_file_info_for_file(File& file);
 // for optimization purposes.
 void* mmap(FileDesc fd, size_t size, File::AccessMode access, size_t offset, const char* encryption_key,
            EncryptedFileMapping*& mapping);
+void* mmap_fixed(FileDesc fd, void* address_request, size_t size, File::AccessMode access, size_t offset,
+                 const char* enc_key, EncryptedFileMapping* mapping);
+
+void* mmap_reserve(FileDesc fd, size_t size, File::AccessMode am, size_t offset, const char* enc_key,
+                   EncryptedFileMapping*& mapping);
 
 void do_encryption_read_barrier(const void* addr, size_t size, HeaderToSize header_to_size,
                                 EncryptedFileMapping* mapping);
@@ -157,14 +166,14 @@ void inline encryption_write_barrier(const void*, size_t, EncryptedFileMapping*)
 
 // helpers for encrypted Maps
 template <typename T>
-void encryption_read_barrier(File::Map<T>& map, size_t index, size_t num_elements = 1)
+void encryption_read_barrier(const File::Map<T>& map, size_t index, size_t num_elements = 1)
 {
     T* addr = map.get_addr();
     encryption_read_barrier(addr + index, sizeof(T) * num_elements, map.get_encrypted_mapping());
 }
 
 template <typename T>
-void encryption_write_barrier(File::Map<T>& map, size_t index, size_t num_elements = 1)
+void encryption_write_barrier(const File::Map<T>& map, size_t index, size_t num_elements = 1)
 {
     T* addr = map.get_addr();
     encryption_write_barrier(addr + index, sizeof(T) * num_elements, map.get_encrypted_mapping());

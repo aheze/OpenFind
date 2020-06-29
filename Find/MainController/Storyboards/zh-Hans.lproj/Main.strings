@@ -1,41 +1,41 @@
 /* Class = "UILabel"; text = "0 lists created since you first downloaded Find"; ObjectID = "1EQ-hf-zvc"; */
-"1EQ-hf-zvc.text" = "0 lists created since you first downloaded Find";
+"1EQ-hf-zvc.text" = "0清单做成自您首次下载Find以来";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "1ct-uq-Rkc"; */
-"1ct-uq-Rkc.normalTitle" = "Cancel";
+"1ct-uq-Rkc.normalTitle" = "取消";
 
 /* Class = "UILabel"; text = "0"; ObjectID = "24E-8Q-fAS"; */
 "24E-8Q-fAS.text" = "0";
 
 /* Class = "UIButton"; normalTitle = "Delete All Photos"; ObjectID = "2V9-Nx-FSL"; */
-"2V9-Nx-FSL.normalTitle" = "Clear Photos";
+"2V9-Nx-FSL.normalTitle" = "删除所有照片";
 
 /* Class = "UIButton"; normalTitle = "Discard"; ObjectID = "2qz-Bq-vme"; */
-"2qz-Bq-vme.normalTitle" = "Discard";
+"2qz-Bq-vme.normalTitle" = "删掉";
 
 /* Class = "UIButton"; normalTitle = "Allow Access"; ObjectID = "4PV-lP-fX0"; */
-"4PV-lP-fX0.normalTitle" = "Allow Access";
+"4PV-lP-fX0.normalTitle" = "允许访问";
 
 /* Class = "UILabel"; text = "Camera Permissions"; ObjectID = "4my-mQ-fon"; */
-"4my-mQ-fon.text" = "Camera Permissions";
+"4my-mQ-fon.text" = "相机权限";
 
 /* Class = "UIButton"; normalTitle = "Licenses"; ObjectID = "6OO-b0-YRY"; */
-"6OO-b0-YRY.normalTitle" = "Licenses";
+"6OO-b0-YRY.normalTitle" = "许可证";
 
 /* Class = "UIButton"; normalTitle = "Ok, let's go!"; ObjectID = "8Fu-Z2-9xn"; */
-"8Fu-Z2-9xn.normalTitle" = "Ok, let's go!";
+"8Fu-Z2-9xn.normalTitle" = "好了，前往吧！";
 
 /* Class = "UILabel"; text = "All selected photos have already been cached! Search results will appear immediately."; ObjectID = "8fp-hd-mIw"; */
-"8fp-hd-mIw.text" = "All selected photos have already been cached! Search results will appear immediately.";
+"8fp-hd-mIw.text" = "所有选择的照片已使用快取！搜索结果将立即显示。";
 
 /* Class = "UIButton"; normalTitle = "Select All"; ObjectID = "9Ve-iy-tg4"; */
-"9Ve-iy-tg4.normalTitle" = "Select All";
+"9Ve-iy-tg4.normalTitle" = "全选";
 
 /* Class = "UIButton"; normalTitle = "I'm done finding"; ObjectID = "9tD-vS-QJ0"; */
-"9tD-vS-QJ0.normalTitle" = "I'm done finding";
+"9tD-vS-QJ0.normalTitle" = "找好了";
 
 /* Class = "UILabel"; text = "(Just for fun 😀)"; ObjectID = "AKm-fF-x3d"; */
-"AKm-fF-x3d.text" = "(Just for fun 😀)";
+"AKm-fF-x3d.text" = "(纯娱乐 😀)";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "BHm-ND-D9k"; */
 "BHm-ND-D9k.text" = "Label";
@@ -44,244 +44,244 @@
 "BRC-Yj-hpw.text" = "Text";
 
 /* Class = "UILabel"; text = "Matches:"; ObjectID = "CeU-8I-rNo"; */
-"CeU-8I-rNo.text" = "Matches:";
+"CeU-8I-rNo.text" = "匹配：";
 
 /* Class = "UILabel"; text = "Help pressed 0 times since you first downloaded Find"; ObjectID = "E31-rb-T1p"; */
-"E31-rb-T1p.text" = "Help pressed 0 times since you first downloaded Find";
+"E31-rb-T1p.text" = "去了帮助中心0次自您首次下载Find以来";
 
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "Eq3-Dm-AWI"; */
-"Eq3-Dm-AWI.normalTitle" = "Done";
+"Eq3-Dm-AWI.normalTitle" = "完成";
 
 /* Class = "UILabel"; text = "Find by Zheng"; ObjectID = "FMI-oy-YpO"; */
 "FMI-oy-YpO.text" = "Find by Zheng";
 
 /* Class = "UILabel"; text = "Recent"; ObjectID = "G7F-LF-zvC"; */
-"G7F-LF-zvC.text" = "Recent";
+"G7F-LF-zvC.text" = "最近";
 
 /* Class = "UILabel"; text = "Lists"; ObjectID = "G9M-e0-VIH"; */
-"G9M-e0-VIH.text" = "Lists";
+"G9M-e0-VIH.text" = "清单";
 
 /* Class = "UILabel"; text = "0 photos cached since you first downloaded Find"; ObjectID = "G9N-ln-McW"; */
-"G9N-ln-McW.text" = "0 photos cached since you first downloaded Find";
+"G9N-ln-McW.text" = "已快取0照片自您首次下载Find以来";
 
 /* Class = "UIButton"; normalTitle = "Haptic Feedback"; ObjectID = "HVd-N8-NVZ"; */
-"HVd-N8-NVZ.normalTitle" = "Haptic Feedback";
+"HVd-N8-NVZ.normalTitle" = "触觉反馈";
 
 /* Class = "UILabel"; text = "Tap to remove"; ObjectID = "Hc9-i8-kXk"; */
-"Hc9-i8-kXk.text" = "Tap to remove";
+"Hc9-i8-kXk.text" = "点按即可去掉";
 
 /* Class = "UILabel"; text = "Highlight Color"; ObjectID = "Hhg-Z1-44F"; */
-"Hhg-Z1-44F.text" = "Highlight Color";
+"Hhg-Z1-44F.text" = "突出显示颜色";
 
 /* Class = "UILabel"; text = "Use lists to find multiple words at the same time. Make one by clicking the + button. "; ObjectID = "IcC-jV-a0m"; */
-"IcC-jV-a0m.text" = "Use lists to find multiple words at the same time. Make one by clicking the + button. ";
+"IcC-jV-a0m.text" = "用清单来同时寻找多个单词. 点按 \"+\" 按钮来做一个！";
 
 /* Class = "UILabel"; text = "No Photos"; ObjectID = "Iqa-IW-JHs"; */
-"Iqa-IW-JHs.text" = "No Photos";
+"Iqa-IW-JHs.text" = "没有照片";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "JsY-MP-aZx"; */
-"JsY-MP-aZx.text" = "Title";
+"JsY-MP-aZx.text" = "标题";
 
-/* Class = "UILabel"; text = "We need to access your camera to find text. Find works offline and nothing leaves your phone."; ObjectID = "K83-pM-wfg"; */
-"K83-pM-wfg.text" = "We need to access your camera to find text. Find works offline and nothing leaves your phone.";
+/* Class = "UILabel"; text = "We need to access the camera to find text. Find works offline and nothing leaves your phone."; ObjectID = "K83-pM-wfg"; */
+"K83-pM-wfg.text" = "Find需要访问您的相机以查找单词。您的信息决不离开您的手机（Find不需要上网来工作）。";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Kwk-Zc-VjT"; */
-"Kwk-Zc-VjT.normalTitle" = "Cancel";
+"Kwk-Zc-VjT.normalTitle" = "取消";
 
 /* Class = "UIButton"; normalTitle = "Tutorials"; ObjectID = "LcM-Ye-jUM"; */
-"LcM-Ye-jUM.normalTitle" = "Tutorials";
+"LcM-Ye-jUM.normalTitle" = "教程";
 
 /* Class = "UILabel"; text = "Viewed Stats Status: true"; ObjectID = "Loo-ZW-eJO"; */
-"Loo-ZW-eJO.text" = "Viewed Stats Status: true";
+"Loo-ZW-eJO.text" = "查看统计状态：有";
 
 /* Class = "UIButton"; normalTitle = "Select"; ObjectID = "N4g-n5-ToO"; */
-"N4g-n5-ToO.normalTitle" = "Select";
+"N4g-n5-ToO.normalTitle" = "选择";
 
 /* Class = "UILabel"; text = "Left Feedback Status: false"; ObjectID = "Nj8-Y0-Hzh"; */
-"Nj8-Y0-Hzh.text" = "Left Feedback Status: false";
+"Nj8-Y0-Hzh.text" = "留反馈状态：没有";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "Nlm-VP-vQE"; */
 "Nlm-VP-vQE.text" = "Label";
 
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "Owe-kB-SJJ"; */
-"Owe-kB-SJJ.normalTitle" = "Done";
+"Owe-kB-SJJ.normalTitle" = "完成";
 
 /* Class = "UIButton"; normalTitle = "Ok!"; ObjectID = "Q2C-rw-SRu"; */
-"Q2C-rw-SRu.normalTitle" = "Ok!";
+"Q2C-rw-SRu.normalTitle" = "前往";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "Q85-dU-Zkp"; */
 "Q85-dU-Zkp.text" = "Label";
 
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "T7d-iS-RH2"; */
-"T7d-iS-RH2.normalTitle" = "Done";
+"T7d-iS-RH2.normalTitle" = "完成";
 
 /* Class = "UIButton"; normalTitle = "Reset Settings"; ObjectID = "TYH-NW-c38"; */
-"TYH-NW-c38.normalTitle" = "Reset Settings";
+"TYH-NW-c38.normalTitle" = "重置所有设置";
 
 /* Class = "UIButton"; normalTitle = "Text Detection Indicator"; ObjectID = "TfG-ap-oJ4"; */
-"TfG-ap-oJ4.normalTitle" = "Text Detected Indicator";
+"TfG-ap-oJ4.normalTitle" = "文字检测指示器";
 
 /* Class = "UILabel"; text = "Currently searching for these words: [no words]"; ObjectID = "Tq3-Y5-Tqr"; */
-"Tq3-Y5-Tqr.text" = "Currently searching for these words: [no words]";
+"Tq3-Y5-Tqr.text" = "正在找这些单词: [没有]";
 
 /* Class = "UIButton"; normalTitle = "Skip"; ObjectID = "URE-cP-ORh"; */
-"URE-cP-ORh.normalTitle" = "Skip";
+"URE-cP-ORh.normalTitle" = "跳跃";
 
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "USM-QX-OWB"; */
-"USM-QX-OWB.placeholder" = "Name";
+"USM-QX-OWB.placeholder" = "名称";
 
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "Ua1-LX-cFk"; */
-"Ua1-LX-cFk.normalTitle" = "Done";
+"Ua1-LX-cFk.normalTitle" = "完成";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Ues-K1-LkQ"; */
-"Ues-K1-LkQ.normalTitle" = "Cancel";
-
-/* Class = "UINavigationItem"; title = "Zoom"; ObjectID = "VZ4-6V-utS"; */
-"VZ4-6V-utS.title" = "Zoom";
+"Ues-K1-LkQ.normalTitle" = "取消";
 
 /* Class = "UIButton"; normalTitle = "Keep"; ObjectID = "VgK-3X-vOx"; */
-"VgK-3X-vOx.normalTitle" = "Keep";
+"VgK-3X-vOx.normalTitle" = "保留";
 
 /* Class = "UIButton"; normalTitle = "Ok!"; ObjectID = "WOK-i0-X5W"; */
-"WOK-i0-X5W.normalTitle" = "Ok!";
+"WOK-i0-X5W.normalTitle" = "前往";
 
 /* Class = "UILabel"; text = "1 Photo has already been cached. Would you like to keep its cache?"; ObjectID = "X2y-kb-0Y0"; */
-"X2y-kb-0Y0.text" = "1 Photo has already been cached. Would you like to keep its cache?";
+"X2y-kb-0Y0.text" = "一张照片已使用快取。您要保留它的快取吗？";
 
 /* Class = "UILabel"; text = "Settings"; ObjectID = "Xgd-YW-juX"; */
-"Xgd-YW-juX.text" = "Settings";
+"Xgd-YW-juX.text" = "设置";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "Yga-Xu-zab"; */
 "Yga-Xu-zab.text" = "Label";
 
 /* Class = "UILabel"; text = "Credits"; ObjectID = "ZZV-av-XHO"; */
-"ZZV-av-XHO.text" = "Credits";
+"ZZV-av-XHO.text" = "致谢";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "ZwK-R3-7by"; */
 "ZwK-R3-7by.text" = "Label";
 
 /* Class = "UILabel"; text = "Once you've taken photos, they will appear here."; ObjectID = "aU8-vu-F6L"; */
-"aU8-vu-F6L.text" = "Once you've taken photos, they will appear here.";
+"aU8-vu-F6L.text" = "拍照后，它们会出现在这里";
 
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "b7E-K7-hS4"; */
-"b7E-K7-hS4.normalTitle" = "Done";
+"b7E-K7-hS4.normalTitle" = "完成";
 
 /* Class = "UIButton"; normalTitle = "Ok!"; ObjectID = "bEK-zj-4g5"; */
-"bEK-zj-4g5.normalTitle" = "Ok!";
+"bEK-zj-4g5.normalTitle" = "前往";
 
 /* Class = "UITextView"; text = "jlkdfj sldfjlsdk fklsj flshf klhf lskhk dlhg sdlkjhg dkslfhgklds fjghskdlf gh dsflkg"; ObjectID = "bho-aX-Afw"; */
-"bho-aX-Afw.text" = "jlkdfj sldfjlsdk fklsj flshf klhf lskhk dlhg sdlkjhg dkslfhgklds fjghskdlf gh dsflkg";
+"bho-aX-Afw.text" = "Find placeholder";
 
 /* Class = "UIButton"; normalTitle = "Send\nFeedback!"; ObjectID = "boC-pm-VSb"; */
-"boC-pm-VSb.normalTitle" = "Send\nFeedback!";
+"boC-pm-VSb.normalTitle" = "发送反馈!";
 
 /* Class = "UIButton"; normalTitle = "Ok, let's go!"; ObjectID = "cKd-F8-dU4"; */
-"cKd-F8-dU4.normalTitle" = "Ok, let's go!";
+"cKd-F8-dU4.normalTitle" = "好了，前往吧！";
 
 /* Class = "UILabel"; text = "New List"; ObjectID = "dMb-YI-sVB"; */
-"dMb-YI-sVB.text" = "New List";
+"dMb-YI-sVB.text" = "新清单";
 
 /* Class = "UILabel"; text = "1/2 photos cached"; ObjectID = "dmM-dI-18L"; */
-"dmM-dI-18L.text" = "1/2 photos cached";
+"dmM-dI-18L.text" = "1/2 照片已使用快取";
 
 /* Class = "UILabel"; text = "5 Matches | Yesterday sdfls dfjs ljs fljs flsf"; ObjectID = "f3Q-wj-4ao"; */
-"f3Q-wj-4ao.text" = "5 Matches | Yesterday sdfls dfjs ljs fljs flsf";
+"f3Q-wj-4ao.text" = "5个结果 | 昨天";
 
 /* Class = "UIButton"; normalTitle = "Help"; ObjectID = "hsE-Lo-z9h"; */
-"hsE-Lo-z9h.normalTitle" = "Help";
+"hsE-Lo-z9h.normalTitle" = "帮助";
 
 /* Class = "UILabel"; text = "Contents asjdasd ladjlkj alkdjla dakljdla dlkaj aljdlka ljlka sdjlakdjla lkajd laskdj lakdjls dklajsd lakj aljd aljdla sdjlkadlkj lasd"; ObjectID = "jAM-2B-UZG"; */
-"jAM-2B-UZG.text" = "Contents asjdasd ladjlkj alkdjla dakljdla dlkaj aljdlka ljlka sdjlakdjla lkajd laskdj lakdjls dklajsd lakj aljd aljdla sdjlkadlkj lasd";
+"jAM-2B-UZG.text" = "Contents Placeholder";
 
 /* Class = "UIButton"; normalTitle = "Help"; ObjectID = "jhE-uq-1Ax"; */
-"jhE-uq-1Ax.normalTitle" = "Help";
+"jhE-uq-1Ax.normalTitle" = "帮助";
 
 /* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "jxG-PK-C99"; */
-"jxG-PK-C99.normalTitle" = "Delete";
+"jxG-PK-C99.normalTitle" = "删掉";
 
 /* Class = "UILabel"; text = "No results found in cache"; ObjectID = "k1U-8L-apk"; */
-"k1U-8L-apk.text" = "No results found in cache";
+"k1U-8L-apk.text" = "没有结果在快取里";
 
 /* Class = "UILabel"; text = "Edit List"; ObjectID = "l9K-YH-kPm"; */
-"l9K-YH-kPm.text" = "Edit List";
+"l9K-YH-kPm.text" = "编辑清单";
 
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "lME-Z5-Sdx"; */
-"lME-Z5-Sdx.normalTitle" = "Done";
+"lME-Z5-Sdx.normalTitle" = "完成";
 
 /* Class = "UITextField"; placeholder = "Match"; ObjectID = "lMV-xk-qWw"; */
-"lMV-xk-qWw.placeholder" = "Match";
+"lMV-xk-qWw.placeholder" = "匹配";
 
 /* Class = "UILabel"; text = "OCR search in progress!"; ObjectID = "mJu-qT-9cJ"; */
-"mJu-qT-9cJ.text" = "OCR search in progress!";
+"mJu-qT-9cJ.text" = "正在用OCR寻找！";
 
 /* Class = "UIButton"; normalTitle = "Rate\nthe App!"; ObjectID = "mp4-4Z-4cg"; */
-"mp4-4Z-4cg.normalTitle" = "Rate\nthe App!";
+"mp4-4Z-4cg.normalTitle" = "给Find\n一个评价！";
 
 /* Class = "UIButton"; normalTitle = "Credits"; ObjectID = "nI6-vq-9rt"; */
-"nI6-vq-9rt.normalTitle" = "Credits";
+"nI6-vq-9rt.normalTitle" = "致谢";
 
 /* Class = "UILabel"; text = "Short Description jlsdjflsdl lsdkjlkj sldfjlk lsdjfldkjflsdj lkjlsdf"; ObjectID = "nLH-OC-Hjk"; */
-"nLH-OC-Hjk.text" = "Short Description jlsdjflsdl lsdkjlkj sldfjlk lsdjfldkjflsdj lkjlsdf";
+"nLH-OC-Hjk.text" = "简短的介绍";
 
 /* Class = "UIButton"; normalTitle = "Help"; ObjectID = "nvH-Iq-CHd"; */
-"nvH-Iq-CHd.normalTitle" = "Help";
+"nvH-Iq-CHd.normalTitle" = "帮助";
 
 /* Class = "UILabel"; text = "Find from Photos"; ObjectID = "oNE-m3-Qz9"; */
-"oNE-m3-Qz9.text" = "Find from Photos";
+"oNE-m3-Qz9.text" = "从照片找";
 
 /* Class = "UILabel"; text = "Customized Settings Status: false"; ObjectID = "pYi-Ra-ZSV"; */
-"pYi-Ra-ZSV.text" = "Customized Settings Status: false";
+"pYi-Ra-ZSV.text" = "定制设置状态：没有";
 
 /* Class = "UIButton"; normalTitle = "Save"; ObjectID = "rAm-FK-rNs"; */
-"rAm-FK-rNs.normalTitle" = "Save";
+"rAm-FK-rNs.normalTitle" = "存盘";
 
 /* Class = "UILabel"; text = "Photos"; ObjectID = "rMI-bB-kPc"; */
-"rMI-bB-kPc.text" = "Photos";
+"rMI-bB-kPc.text" = "照片";
 
 /* Class = "UIButton"; normalTitle = "Follow me on Medium!"; ObjectID = "rPp-Jw-MuZ"; */
-"rPp-Jw-MuZ.normalTitle" = "Follow me on Medium!";
+"rPp-Jw-MuZ.normalTitle" = "在Medium上关注我！";
 
 /* Class = "UIButton"; normalTitle = "Select"; ObjectID = "ruv-8N-ih6"; */
-"ruv-8N-ih6.normalTitle" = "Select";
+"ruv-8N-ih6.normalTitle" = "选择";
 
 /* Class = "UIButton"; normalTitle = "Back"; ObjectID = "sKB-7D-QCp"; */
-"sKB-7D-QCp.normalTitle" = "Back";
+"sKB-7D-QCp.normalTitle" = "背部";
 
 /* Class = "UILabel"; text = "Lists"; ObjectID = "sbj-0t-kKO"; */
-"sbj-0t-kKO.text" = "Lists";
+"sbj-0t-kKO.text" = "清单";
 
 /* Class = "UILabel"; text = "Caching Photos"; ObjectID = "scZ-On-pSO"; */
-"scZ-On-pSO.text" = "Caching Photos";
+"scZ-On-pSO.text" = "正在启用快取";
 
 /* Class = "UIButton"; normalTitle = "New Match"; ObjectID = "srB-MK-Y9p"; */
-"srB-MK-Y9p.normalTitle" = "New Match";
+"srB-MK-Y9p.normalTitle" = "新匹配";
 
 /* Class = "UIButton"; normalTitle = "Back"; ObjectID = "te5-rx-LTY"; */
-"te5-rx-LTY.normalTitle" = "Back";
+"te5-rx-LTY.normalTitle" = "背部";
 
 /* Class = "UILabel"; text = "Stats"; ObjectID = "tgX-AL-vwK"; */
-"tgX-AL-vwK.text" = "Stats";
+"tgX-AL-vwK.text" = "统计资料";
 
 /* Class = "UIButton"; normalTitle = "Show Controls"; ObjectID = "u0g-ei-7rm"; */
-"u0g-ei-7rm.normalTitle" = "Show Controls";
+"u0g-ei-7rm.normalTitle" = "显示控制项";
 
 /* Class = "UILabel"; text = "No Lists"; ObjectID = "v96-On-D6n"; */
-"v96-On-D6n.text" = "No Lists";
+"v96-On-D6n.text" = "没有清单";
 
 /* Class = "UIButton"; normalTitle = "Delete All Lists"; ObjectID = "vOY-ej-zkc"; */
-"vOY-ej-zkc.normalTitle" = "Clear Lists";
+"vOY-ej-zkc.normalTitle" = "删除所有清单";
 
 /* Class = "UILabel"; text = "Matches"; ObjectID = "vZ6-oK-Otx"; */
-"vZ6-oK-Otx.text" = "Matches";
+"vZ6-oK-Otx.text" = "匹配";
 
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "vku-v3-AD3"; */
-"vku-v3-AD3.normalTitle" = "Done";
+"vku-v3-AD3.normalTitle" = "完成";
 
 /* Class = "UILabel"; text = "Help"; ObjectID = "wyQ-Lp-esF"; */
-"wyQ-Lp-esF.text" = "Help";
+"wyQ-Lp-esF.text" = "帮助";
 
 /* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore "; ObjectID = "x7d-LB-Q4P"; */
 "x7d-LB-Q4P.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore ";
 
 /* Class = "UILabel"; text = "0 matches found currently"; ObjectID = "ygo-eL-ZJZ"; */
-"ygo-eL-ZJZ.text" = "0 matches found currently";
+"ygo-eL-ZJZ.text" = "0个搜索结果";
+
+/* Class = "UIButton"; normalTitle = "See What's New in Find!"; ObjectID = "eVF-Pd-XiX"; */
+"eVF-Pd-XiX.normalTitle" = "看一看Find的新功能！";

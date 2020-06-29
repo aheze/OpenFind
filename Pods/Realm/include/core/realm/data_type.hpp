@@ -50,8 +50,8 @@ enum DataType {
     type_Binary = 4,
     type_OldDateTime = 7,
     type_Timestamp = 8,
-    type_Table = 5,
-    type_Mixed = 6,
+    type_OldTable = 5,
+    type_OldMixed = 6,
     type_Link = 12,
     type_LinkList = 13
 };
@@ -61,6 +61,8 @@ enum LinkType {
     link_Strong,
     link_Weak,
 };
+
+const char* get_data_type_name(DataType type) noexcept;
 
 } // namespace realm
 

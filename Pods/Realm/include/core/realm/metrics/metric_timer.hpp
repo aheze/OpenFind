@@ -30,13 +30,13 @@ namespace metrics {
 
 using nanosecond_storage_t = int64_t;
 
-class MetricTimerResult
-{
+class MetricTimerResult {
 public:
     MetricTimerResult();
     ~MetricTimerResult();
     nanosecond_storage_t get_elapsed_nanoseconds() const;
     void report_nanoseconds(nanosecond_storage_t time);
+
 protected:
     nanosecond_storage_t m_elapsed_nanoseconds;
 };

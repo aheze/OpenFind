@@ -104,7 +104,7 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
             }
             toReferenceImageView.isHidden = true
             
-            let referenceImage = fromReferenceImageView.image!
+            guard let referenceImage = fromReferenceImageView.image else { return }
             
             if self.transitionImageView == nil {
                 let transitionImageView = UIImageView(image: referenceImage)
@@ -159,7 +159,7 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
             
             toReferenceImageView.isHidden = true
             
-            let referenceImage = fromReferenceImageView.image!
+            guard let referenceImage = fromReferenceImageView.image else { return }
             
             if self.transitionImageView == nil {
                 let transitionImageView = UIImageView(image: referenceImage)

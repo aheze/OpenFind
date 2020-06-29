@@ -14,6 +14,7 @@ import CoreMotion
 import RealmSwift
 import SnapKit
 import SwiftEntryKit
+import WhatsNewKit
 
 protocol ToggleCreateCircle: class {
     func toggle(created: Bool)
@@ -22,6 +23,7 @@ protocol UpdateMatchesNumberStats: class {
     func update(to: Int)
 }
 class CameraView: UIView {
+    
     
     var videoPreviewLayer: AVCaptureVideoPreviewLayer {
         guard let layer = layer as? AVCaptureVideoPreviewLayer else {
@@ -43,6 +45,13 @@ class CameraView: UIView {
     }
 }
 class ViewController: UIViewController {
+    
+//    var versionStore = WhatsNewVersionStore()
+    // Local KeyValueStore
+    let keyValueVersionStore = KeyValueWhatsNewVersionStore(keyValueable: UserDefaults.standard)
+    let updateImportantShouldPresentWhatsNew = true
+    var shouldPresentWhatsNew = false
+    
     
     
     
@@ -184,9 +193,22 @@ class ViewController: UIViewController {
     var searchShrunk = true
     
     @IBOutlet weak var alternateWarningView: UIView!
-
     @IBOutlet weak var alternateWarningLabel: UILabel!
     @IBOutlet weak var alternateWarningHeightC: NSLayoutConstraint!
+    
+    @IBOutlet weak var whatsNewView: UIView!
+    @IBOutlet weak var whatsNewButton: UIButton!
+    @IBOutlet weak var whatsNewHeightC: NSLayoutConstraint!
+    @IBAction func whatsNewPressed(_ sender: Any) {
+        if shouldPresentWhatsNew {
+            dismissWhatsNew(completion: {
+                self.displayWhatsNew()
+            })
+            
+        }
+    }
+    
+    
     
     @IBOutlet weak var newSearchTextField: TextField!
     @IBOutlet weak var searchTextTopC: NSLayoutConstraint! ///starts at 8
@@ -481,6 +503,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         var hasNotch = false
         switch deviceType {
             case "iPhone10,3", "iPhone10,6", "iPhone11,2", "iPhone11,4", "iPhone11,6", "iPhone11,8", "iPhone12,3", "iPhone12,5":
@@ -492,6 +515,7 @@ class ViewController: UIViewController {
             normalSearchFieldTopCConstant = 0
         } else {
             normalSearchFieldTopCConstant = 12
+//            normalSearchFieldTopCConstant = 22
         }
         contentTopC.constant = normalSearchFieldTopCConstant
         searchContentView.layoutIfNeeded()
@@ -538,7 +562,39 @@ class ViewController: UIViewController {
             self?.updateHighlightOrientations(attitude: data.attitude)
         }
         
+        /// call to pre load with images
+//        preloadAllImages()
+        
+        whatsNewView.alpha = 0
+        whatsNewView.layer.cornerRadius = 6
+        whatsNewView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        
+        whatsNewButton.alpha = 0
+        
+        if updateImportantShouldPresentWhatsNew {
+            if !keyValueVersionStore.has(version: WhatsNew.Version.current()) {
+                keyValueVersionStore.set(version: WhatsNew.Version.current())
+                //                print("Current Has")
+                //                /// presented already
+                //            } else {
+                /// not presented yet
+                print("Current Not")
+                
+                shouldPresentWhatsNew = true
+                
+                whatsNewHeightC.constant = 32
+                UIView.animate(withDuration: 1.5, animations: {
+                    self.whatsNewView.alpha = 1
+                    self.whatsNewButton.alpha = 1
+                    self.whatsNewView.layoutIfNeeded()
+                })
+                
+            }
+        }
+        
     }
+    
+    
     
     // get magnitude of vector via Pythagorean theorem
     func getMagnitude(from attitude: CMAttitude) -> Double {

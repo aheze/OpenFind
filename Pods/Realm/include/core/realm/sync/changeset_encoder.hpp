@@ -71,7 +71,7 @@ private:
     void append_value(float);
     void append_value(double);
     void append_value(InternString);
-    void append_value(sync::ObjectID);
+    void append_value(GlobalKey);
     void append_value(Timestamp);
 
     Buffer m_buffer;

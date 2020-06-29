@@ -75,7 +75,7 @@ struct SyncClientConfig {
     std::string base_file_path;
     MetadataMode metadata_mode = MetadataMode::Encryption;
     util::Optional<std::vector<char>> custom_encryption_key;
-    bool reset_metadata_on_error = false;;
+    bool reset_metadata_on_error = false;
 
     SyncLoggerFactory* logger_factory = nullptr;
     // FIXME: Should probably be util::Logger::Level::error

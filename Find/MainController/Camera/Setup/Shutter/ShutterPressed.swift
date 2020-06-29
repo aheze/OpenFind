@@ -13,18 +13,17 @@ import AVFoundation
 extension ViewController {
     
     func saveImage(url: URL, imageName: String, image: UIImage, dateCreated: Date) {
-//        let startURL = url.appendingPathComponent("\(imageName)")
-//        let fileURL = startURL.appendingPathExtension("jpg")
-        
-        //test commit
-        print("save")
+
         let fileURL = url.appendingPathComponent("\(imageName)")
         print(fileURL)
-        guard let data = image.jpegData(compressionQuality: 1) else { return }
-        do {
-            try data.write(to: fileURL)
-        } catch let error {
-            print("error saving file with error", error)
+        print("SAVE!!!!!!")
+        DispatchQueue.global().async {
+            guard let data = image.jpegData(compressionQuality: 1) else { return }
+            do {
+                try data.write(to: fileURL)
+            } catch let error {
+                print("error saving file with error", error)
+            }
         }
         let newHist = HistoryModel()
         newHist.filePath = "\(imageName)"
@@ -44,6 +43,7 @@ extension ViewController {
     }
     
     @IBAction func buttonTouchUp(_ sender: NewShutterButton) {
+        
         AppStoreReviewManager.requestReviewIfAppropriate()
         sender.zoomInWithEasing(duration: 0.06)
         animateShutterOverlay()
@@ -81,6 +81,7 @@ extension ViewController {
             let formatter = DateFormatter()
             formatter.dateFormat = "MMddyy"
             let dateAsString = formatter.string(from: date)
+            
             let timeFormatter = DateFormatter()
             timeFormatter.dateFormat = "HHmmss-SSSS"
             let timeAsString = timeFormatter.string(from: date)
@@ -88,7 +89,88 @@ extension ViewController {
             self.saveImage(url: self.globalUrl, imageName: "=\(dateAsString)=\(timeAsString)", image: image, dateCreated: date)
         }
     }
-
+    
+    func preloadAllImages() {
+//        let imageArray = [
+//        "=062720=154754-1000",
+//        "=062720=154755-1000",
+//        "=062720=154756-1000",
+//        "=062720=154757-1000",
+//        "=062720=154758-1000",
+//        "=062720=154759-1000",
+//        "=062720=154760-1000",
+//        "=062720=154761-1000",
+//        "=062620=154761-1000",
+//        "=062620=154762-1000",
+//        "=062620=154763-1000",
+//        "=062620=154764-1000",
+//        "=062620=154765-1000",
+//        "=062620=154766-1000",
+//        "=062620=154767-1000",
+//        "=062620=154768-1000",
+//        "=062620=154769-1000",
+//        "=062620=154770-1000",
+//        ]
+        let imageArray =  [
+        "=062720=154754-1000",
+        "=062720=154755-1000",
+        "=062720=154756-1000",
+        "=062720=154757-1000",
+        "=062720=154758-1000",
+        "=062720=154759-1000",
+        "=062720=154700-1000",
+        "=062720=154701-1000",
+            
+        "=062620=154702-1000",
+        "=062620=154703-1000",
+        "=062620=154704-1000",
+        "=062620=154705-1000",
+        "=062620=154706-1000",
+        "=062620=154707-1000",
+        "=062620=154708-1000",
+        "=062620=154709-1000",
+        "=062620=154710-1000",
+        "=062620=154711-1000"
+        ]
+        
+        print("imageArray count: \(imageArray.count)")
+        preloadImages(imageNames: imageArray)
+    }
+    
+    func preloadImages(imageNames: [String]) {
+        
+        for (index, imageName) in imageNames.enumerated() {
+            print("index: \(index)")
+            
+            let splits = imageName.components(separatedBy: "=")
+            print("splits: \(splits)")
+            
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "MMddyy"
+//            guard let dateFromString = dateFormatter.date(from: splits[1]) else { print("Wrong date 1"); return}
+//
+//
+//            let timeFormatter = DateFormatter()
+//            timeFormatter.dateFormat = "HHmmss'-'SSSS"
+//            guard let timeFromString = timeFormatter.date(from: splits[2]) else { print("Wrong date 2"); return}
+//
+            let finalDateFormatter = DateFormatter()
+            finalDateFormatter.dateFormat = "'='MMddyy'='HHmmss'-'SSSS"
+            guard let finalDate = finalDateFormatter.date(from: imageName) else { print("Wrong date 3"); continue}
+            
+//            let imageName = "=\(dateFromString)=\(timeFromString)"
+            
+            print("imagename: \(imageName)")
+            
+            if let image = UIImage(named: imageName) {
+                saveImage(url: self.globalUrl, imageName: imageName, image: image, dateCreated: finalDate)
+            }
+            
+//            preloadSave(date: finalDate, dateNameString: imageName, image: UIImage(named: imageName)!)
+            
+           
+        }
+    }
 }
 extension UIView {
 

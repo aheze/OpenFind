@@ -14,7 +14,7 @@
 "%d numberLists" = "%d个清单已选";
 
 /* ListController def=\n... x more */
-"%d overFlowCountMore" = "\n... 还有%d个";
+"%d overFlowCountMore" = "\n……还有%d个";
 
 /* NewHistoryViewController def=x caches cleared! */
 "%d photos caches deleted!" = "%d个快取已清除！";
@@ -32,7 +32,7 @@
 "%d SpaceMatches" = "%d个搜索结果";
 
 /* TutorialLocalization def=Access the Menu */
-"accessMenu" = "进入菜单栏";
+"accessMenu" = "菜单栏";
 
 /* GeneralViewController def=a couple duplicates. */
 "aCoupleDuplicates" = "一些重复项";
@@ -71,7 +71,7 @@
 "and" = "和";
 
 /* TutorialLocalization def=Before you start... */
-"beforeYouStart" = "在你开始前...";
+"beforeYouStart" = "在您寻找前……";
 
 /* HistoryCollectionViewFiles def=Cache */
 "cache" = "快取";
@@ -79,11 +79,14 @@
 /* NewHistoryViewController def=Cache cleared! */
 "cacheClearedExclaim" = "快取已清除！";
 
+/*StatsViewController*/
+"cachedSinceYouFirstDownload" = "已启用快取自您首次下载Find以来";
+
 /* TutorialLocalization def=Cache photos */
 "cachePhotos" = "快取照片";
 
 /* Multifile def=Caching again will take a while... */
-"cachingAgainTakeAWhile" = "再次快取将需要一段时间...";
+"cachingAgainTakeAWhile" = "再次快取将需要一段时间……";
 
 /* Multifile def=Caching done! */
 "cachingDoneExclaim" = "快取完成！";
@@ -92,7 +95,7 @@
 "cancel" = "取消";
 
 /* CachingViewController def=Cancelling... */
-"cancelling" = "正在取消。。。";
+"cancelling" = "正在取消……";
 
 /* Multipurpose def=This action can't be undone. */
 "cantBeUndone" = "此操作无法撤消。";
@@ -125,7 +128,7 @@
 "currentlySearchingFor" = "正在找";
 
 /* StatsViewController def=Customized Settings Status */
-"customizedSettingsStatus" = "定制设定状态";
+"customizedSettingsStatus" = "定制设置状态";
 
 /* Multipurpose def=Delete */
 "delete" = "删除";
@@ -146,7 +149,7 @@
 "deleteAllListsQuestion" = "删除所有清单？！";
 
 /* Settings def=Delete All Photos */
-"deleteAllPhotos" = "Delete All Photos";
+"deleteAllPhotos" = "删除所有照片";
 
 /* NewHistoryViewController def=Delete ALL photos?! */
 "deleteAllPhotosQuestion" = "删除所有照片？！";
@@ -185,7 +188,7 @@
 "encounteredError" = "遇到内部错误";
 
 /* TutorialLocalization def=To ensure the most accurate results, please make sure to hold your phone as steady as possible. */
-"ensureAccuracy" = "为了保证最准确的结果，请尽可能保持手机稳定.";
+"ensureAccuracy" = "为了保证最准确的结果，请尽可能保持手机稳定。";
 
 /* NewHistoryViewController def=Entire cache cleared! */
 "entireCacheDeletedExclaim" = "整个快取已清除!";
@@ -194,22 +197,22 @@
 "findFromPhotos" = "从照片里找";
 
 /* HistoryFindController def=Find Help */
-"findHelp" = "照找帮助中心";
+"findHelp" = "Find帮助中心";
 
 /* TutorialLocalization def=Find is Command+F for camera: Find words in books, worksheets, nutrition labels... anywhere that contains text! */
-"findIsCommandFForCamera" = "照找是现实生活的 \"Ctrl+F\"！任何有文字的地方，无论是书里还是营养标签上，照找都能找！";
+"findIsCommandFForCamera" = "Find是现实生活的 \"Ctrl+F\"！任何有文字的地方，Find都能找到！";
 
 /* Multipurpose def=Find */
-"findLoc" = "照找";
+"findLoc" = "Find";
 
 /* TutorialLocalization def=...find multiple words at the same time! */
 "findMultipleWords" = "同时寻找多个单词！";
 
 /* SetUpSearchBar def=Find is paused | Duplicates are not allowed */
-"findPausedDuplicatesNotAllowed" = "照找暂时暂停 | 不允许重复项";
+"findPausedDuplicatesNotAllowed" = "Find暂时暂停 | 不允许重复项";
 
 /* TutorialLocalization def=Find searches for your matches when you use the list */
-"findSearchesForMatches" = "使用清单时, 照找将找您的匹配.";
+"findSearchesForMatches" = "使用清单时, Find将找您的匹配。";
 
 /* TutorialLocalization def=Caching photos speeds up search results! */
 "findUsesOCR" = "有快取的照片可加快搜索结果！";
@@ -224,7 +227,7 @@
 "forAppPromoMusicOnAppStoreExclaim" = "制作App Store上的音乐！";
 
 /* CreditsViewController def=for feedback and being a beta tester, and  */
-"forFeedbackTesterAndSpace" = "提供反馈和当一位Beta测试员";
+"forFeedbackTesterAndSpace" = "提供反馈和当一位Beta测试员，和 ";
 
 /* Settings def=General */
 "generalTutorial" = "常规";
@@ -293,7 +296,7 @@
 "matches" = "匹配";
 
 /* TutorialLocalization def=Matches are what Find looks for when you use the list. Make one by tapping the placeholder that says 'Match'! */
-"matchesAreWhatFindLooksFor" = "使用清单时, 照找将找您的匹配. 点按 \"匹配\" 来做一个！";
+"matchesAreWhatFindLooksFor" = "使用清单时, Find将找您的匹配。点按 \"匹配\" 来做一个！";
 
 /* StatsViewController def=matches found currently */
 "matchesFoundCurrently" = "个搜索结果";
@@ -332,7 +335,7 @@
 "notAllSelectedPhotosAlreadyCached" = "并非所有照片都已有快取，因此某些搜索结果不会立即显示。 按键盘上的 \"搜索\" 来用OCR寻找.";
 
 /* Stats def=Nothing! You have duplicates, so Find is currently paused. Make sure that there are no duplicates in the Search Bar. */
-"nothingHaveDuplicatesPaused" = "没有！ 您有重复项，因此照找当前已暂停。 确保搜索栏中没有重复项。";
+"nothingHaveDuplicatesPaused" = "没有！ 您有重复项，因此Find当前已暂停。 确保搜索栏中没有重复项。";
 
 /* Stats def=[no words] */
 "noWords" = "[没有]";
@@ -344,7 +347,7 @@
 "ocrSearchInProgress" = "正在用OCR寻找！";
 
 /* TutorialLocalization def=Once you've typed in your first match, just tap 'next' on the keyboard! Repeat until satisfied. */
-"onceYouveTypedInYourFirstMatch" = "输入第一个匹配后，只需点击键盘上的 \"下一个\"！重复直到满意为止。";
+"onceYouveTypedInYourFirstMatch" = "输入第一个匹配后，只需点击键盘上的 \"下一项\"！重复直到满意为止。";
 
 /* ListSelect def=One List Selected */
 "oneListSelected" = "一个清单已选";
@@ -365,7 +368,7 @@
 "Open Source Licenses" = "开源许可证";
 
 /* EditList def=No description... */
-"originalDescriptionOfList" = "无说明。。。";
+"originalDescriptionOfList" = "无说明……";
 
 /* EditList def=Untitled */
 "originalListName" = "无标题";
@@ -413,7 +416,7 @@
 "rightButtonFixItMyself" = "我自己去改";
 
 /* SetUpSearchBar def=Please rotate your iPad to Portrait view, then relaunch the app. */
-"rotateToPortrait" = "请把您的iPad旋转到纵向视图，然后重新启动照找。";
+"rotateToPortrait" = "请把您的iPad旋转到纵向视图，然后重新启动Find。";
 
 /* EditList def=Icon */
 "secondVCTitle" = "图标";
@@ -422,7 +425,7 @@
 "select" = "选择";
 
 /* TutorialLocalization def=Select a few photos, tap the Find icon, and enter the text that you want to find! */
-"selectAFewPhotos" = "选择几张照片，点按 \"查找\" 图标，然后输入要查找的单词！";
+"selectAFewPhotos" = "选择几张照片，点按 \"查找\" 图标，然后输入要寻找的单词";
 
 /* NewHistoryViewController def=Select All */
 "selectAllLoc" = "全选";
@@ -446,10 +449,10 @@
 "shareLoc" = "分享";
 
 /* StatsViewController def=since you first downloaded Find */
-"sinceYouFirstDownloadedFind" = "自您首次下载照找以来";
+"sinceYouFirstDownloadedFind" = "自您首次下载Find以来";
 
 /* TutorialLocalization def=Sometimes you got to delete a match. No feelings hurt, just swipe left and tap 'Delete'! */
-"sometimesYouGotToDeleteAMatch" = "有时您必须删除一个匹配项。 没关系，只需向左滑动并点按 \"删除\"";
+"sometimesYouGotToDeleteAMatch" = "有时您必须删除一个匹配项。 没关系，只需向左滑动并点按 \"删除\"！";
 
 /* Stats def= and \"x\" */
 "spaceAndSpacequote %@ quote" = " 和 \"%@\"";
@@ -464,14 +467,13 @@
 "speechLoc" = "语言";
 
 /* HistoryFindController def=Start by typing or selecting a list... */
-"startByTypingOrSelectingAList" = "输入单词或选择一个清单...
-";
+"startByTypingOrSelectingAList" = "输入英文或拼音";
 
 /* TutorialLocalization def=...Start easily making lists! */
-"startEasilyMakingLists" = "。。。开始轻松列出清单！";
+"startEasilyMakingLists" = "开始轻松列出清单！";
 
 /* TutorialLocalization def=Swipe to get started */
-"swipeToGetStarted" = "滑动即可开始";
+"swipeToGetStarted" = "滑动即可开始\n\n⚠️ 当前，Find仅支持英语和拼音。";
 
 /* TutorialLocalization def=Take photos */
 "takePhotos" = "拍照";
@@ -480,11 +482,10 @@
 "tapSearchField" = "点击屏幕顶部的搜索栏";
 
 /* TutorialLocalization def=Tap the select button, and the Action Controls will pop up! */
-"tapSelectButtonAndPopUp" = "点击选择按钮，将控制项弹出！
-";
+"tapSelectButtonAndPopUp" = "点击选择按钮，将控制项弹出";
 
 /* TutorialLocalization def=Tap the shutter button, and they'll appear in Photos, where you can search in them later. */
-"tapShutterButton" = "点按快门按钮拍照! 它们会出现在 \"照片\" 中，您以后可以在其中进行搜索。";
+"tapShutterButton" = "点按快门，并它们会出现在 \"照片\" 里。您以后可以在其中进行寻找。";
 
 /* TutorialLocalization def=Tap the Add button */
 "tapTheAddButton" = "点击添加按钮";
@@ -526,7 +527,7 @@
 "twoDuplicates" = "两个重复项";
 
 /* SetUpSearchBar def=Type here to find... */
-"typeHereToFind" = "输入单词，照找会找！";
+"typeHereToFind" = "输入英文，拼音，或选个清单";
 
 /* HistoryCollectionViewFiles def=Uncache */
 "uncache" = "删除快取";
@@ -550,25 +551,43 @@
 "weatherLoc" = "天气";
 
 /* TutorialLocalization def=Welcome to Find */
-"welcomeToFind" = "欢迎来到照找！";
+"welcomeToFind" = "欢迎来到Find！";
 
 /* TutorialLocalization def=Lists... */
-"welcomeToLists" = "清单。。。";
+"welcomeToLists" = "清单……";
 
 /* TutorialLocalization def=Lists Builder... */
-"welcomeToListsBuilder" = "清单生成器。。。";
+"welcomeToListsBuilder" = "清单生成器……";
 
 /* TutorialLocalization def=Photos... */
-"welcomeToPhotos" = "照片。。。";
+"welcomeToPhotos" = "照片……";
 
 /* TutorialLocalization def=What is Find? */
-"whatIsFind" = "什么是照找？";
+"whatIsFind" = "什么是Find？";
+
+/*WhatsNewConfiguration*/
+"whatsNewChineseSupport" = "中文翻译";
+
+/*WhatsNewConfiguration*/
+"whatsNewChineseSupportDetails" = "Find已翻译成了中文！ 但是，目前仅支持英语和拼音作为OCR（Optical Character Recognition）引擎的输入。"; /// 寻找单词的软件
+
+/*WhatsNewConfiguration*/
+"whatsNewHistoryIsNowPhotos" = "中文翻译";
+
+/*WhatsNewConfiguration*/
+"whatsNewInFindNumber" = "Find 1.1.0的新功能";
+
+/*WhatsNewConfiguration*/
+"whatsNewWhatsNewScreen" = "新增功能屏幕";
+
+/*WhatsNewConfiguration*/
+"whatsNewWhatsNewScreenDetails" = "您现在看到的屏幕是全新的！";
 
 /* Settings def=Which tutorial do you want to watch? */
 "whichTutorialWatch" = "您想观看哪个教程？";
 
 /* GeneralViewController def=Would you like us to delete the duplicates? */
-"wouldYouLikeDeleteDup" = "您要照找删除重复项吗？";
+"wouldYouLikeDeleteDup" = "您要Find删除重复项吗？";
 
 /* extensionDate def=Yesterday */
 "yesterdayLoc" = "昨天";
@@ -583,4 +602,7 @@
 "yourListsWillAppear" = "无论您是使用相机查找还是从照片查找，列表都将出现在键盘上方。";
 
 /* TutorialLocalization def=Your Photos, Lists, and Settings are here. Check them out! */
-"yourPhotosListsAndSettingsHere" = "您的照片，清单和设置在这里。 去看一下！";
+"yourPhotosListsAndSettingsHere" = "您的照片，清单和设置在这里。 去看一看！";
+
+/*WhatsNewConfiguration*/
+"whatsNewHistoryIsNowPhotos" = "";

@@ -234,10 +234,10 @@
             filePath = "Find/MainController/Camera/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "ViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -346,8 +346,8 @@
             filePath = "Find/MainController/Camera/Setup/Launch/LaunchViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "438"
-            endingLineNumber = "438"
+            startingLineNumber = "444"
+            endingLineNumber = "444"
             landmarkName = "unknown"
             landmarkType = "0">
          </BreakpointContent>
@@ -362,8 +362,8 @@
             filePath = "Find/MainController/Camera/Setup/Launch/LaunchViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "478"
-            endingLineNumber = "478"
+            startingLineNumber = "490"
+            endingLineNumber = "490"
             landmarkName = "LaunchViewController"
             landmarkType = "21">
          </BreakpointContent>
@@ -394,8 +394,8 @@
             filePath = "Find/MainController/New History/NewHistoryViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1239"
-            endingLineNumber = "1239"
+            startingLineNumber = "1314"
+            endingLineNumber = "1314"
             landmarkName = "unknown"
             landmarkType = "0">
          </BreakpointContent>

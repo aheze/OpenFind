@@ -8,3 +8,4 @@ ${BUILT_PRODUCTS_DIR}/SPAlert/SPAlert.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
 ${BUILT_PRODUCTS_DIR}/SwiftEntryKit/SwiftEntryKit.framework
 ${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework
+${BUILT_PRODUCTS_DIR}/WhatsNewKit/WhatsNewKit.framework

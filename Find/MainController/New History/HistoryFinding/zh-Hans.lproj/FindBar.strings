@@ -1,0 +1,11 @@
+/* Class = "UIButton"; normalTitle = "Ok"; ObjectID = "3vY-hK-ZqR"; */
+"3vY-hK-ZqR.normalTitle" = "好";
+
+/* Class = "UIButton"; normalTitle = "Paused"; ObjectID = "mff-9q-hBw"; */
+"mff-9q-hBw.normalTitle" = "已暂停";
+
+/* Class = "UILabel"; text = "Duplicates are not allowed"; ObjectID = "tYq-gL-qMd"; */
+"tYq-gL-qMd.text" = "不允许重复项";
+
+/* Class = "UITextField"; placeholder = "Type here to find"; ObjectID = "u2b-1R-lPC"; */
+"u2b-1R-lPC.placeholder" = "输入英文，拼音，或选个清单";

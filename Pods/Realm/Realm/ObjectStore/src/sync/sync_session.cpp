@@ -25,7 +25,10 @@
 #include "sync/sync_user.hpp"
 
 #include <realm/sync/client.hpp>
+#include <realm/db_options.hpp>
 #include <realm/sync/protocol.hpp>
+
+#include "impl/realm_coordinator.hpp"
 
 using namespace realm;
 using namespace realm::_impl;
@@ -407,29 +410,6 @@ SyncSession::SyncSession(SyncClient& client, std::string realm_path, SyncConfig 
 , m_realm_path(std::move(realm_path))
 , m_client(client)
 {
-    // Sync history validation ensures that the history within the Realm file is in a format that can be used
-    // by the version of realm-sync that we're using. Validation is enabled by default when the binding manually
-    // opens a sync session (via `SyncManager::get_session`), but is disabled when the sync session is opened
-    // as a side effect of opening a `Realm`. In that case, the sync history has already been validated by the
-    // act of opening the `Realm` so it's not necessary to repeat it here.
-    if (m_config.validate_sync_history) {
-        Realm::Config realm_config;
-        realm_config.path = m_realm_path;
-        realm_config.schema_mode = SchemaMode::Additive;
-        realm_config.force_sync_history = true;
-        realm_config.cache = false;
-
-        if (m_config.realm_encryption_key) {
-            realm_config.encryption_key.resize(64);
-            std::copy(m_config.realm_encryption_key->begin(), m_config.realm_encryption_key->end(),
-                      realm_config.encryption_key.begin());
-        }
-
-        std::unique_ptr<Replication> history;
-        std::unique_ptr<SharedGroup> shared_group;
-        std::unique_ptr<Group> read_only_group;
-        Realm::open_with_config(realm_config, history, shared_group, read_only_group, nullptr);
-   }
 }
 
 std::string SyncSession::get_recovery_file_path()
@@ -614,8 +594,8 @@ void SyncSession::handle_error(SyncError error)
             case ClientError::limits_exceeded:
             case ClientError::protocol_mismatch:
             case ClientError::ssl_server_cert_rejected:
-            case ClientError::unknown_message:
             case ClientError::missing_protocol_feature:
+            case ClientError::unknown_message:
             case ClientError::bad_serial_transact_status:
             case ClientError::bad_object_id_substitutions:
             case ClientError::http_tunnel_failed:
@@ -636,8 +616,15 @@ void SyncSession::handle_error(SyncError error)
             }
             break;
         case NextStateAfterError::inactive: {
-            std::unique_lock<std::mutex> lock(m_state_mutex);
-            advance_state(lock, State::inactive);
+            if (error.is_client_reset_requested()) {
+                std::unique_lock<std::mutex> lock(m_state_mutex);
+                cancel_pending_waits(lock, error.error_code);
+            }
+
+            {
+                std::unique_lock<std::mutex> lock(m_state_mutex);
+                advance_state(lock, State::inactive);
+            }
             break;
         }
         case NextStateAfterError::error: {

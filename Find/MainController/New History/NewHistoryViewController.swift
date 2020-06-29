@@ -1043,6 +1043,81 @@ extension NewHistoryViewController {
     }
 }
 
+extension NewHistoryViewController {
+//    func preloadData() {
+//
+//        indexToData.removeAll()
+//        sectionToDate.removeAll()
+//        sectionCounts.removeAll()
+//
+//        var arrayOfPaths = [URL]()
+//        var arrayOfCategoryDates = [Date]()
+//        var dateToNumber = [Date: Int]()
+//
+//        let filePaths = Bundle.main.paths(forResourcesOfType: "png", inDirectory: "TestingImages")
+////        for hist in
+//
+//        if filePaths.count == 0 {
+//            view.addSubview(noPhotosDisplay)
+//            noPhotosDisplay.snp.makeConstraints { (make) in
+//                make.center.equalToSuperview()
+//                make.width.equalTo(300)
+//                make.height.equalTo(300)
+//            }
+//        }
+//
+//        for singleHist in filePaths {
+//
+//            let splits = singleHist.components(separatedBy: "=")
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "MMddyy"
+//
+//            guard let dateFromString = dateFormatter.date(from: splits[1]) else { print("no date wrong... return"); return}
+//            if !arrayOfCategoryDates.contains(dateFromString) {
+//                arrayOfCategoryDates.append(dateFromString)
+//            }
+//
+//            if !arrayOfCategoryDates.contains(dateFromString) {
+//                arrayOfCategoryDates.append(dateFromString)
+//            }
+//            let finalUrl = folderURL.appendingPathComponent(singleHist)
+//
+//            if dateToNumber[dateFromString] == nil {
+//                dateToNumber[dateFromString] = 0
+//            } else {
+//                dateToNumber[dateFromString]! += 1
+//            }
+//
+//            arrayOfPaths.append(finalUrl)
+//        }
+//        arrayOfCategoryDates.sort(by: { $0.compare($1) == .orderedDescending})
+//
+//        var count = -1
+//        for (index, date) in arrayOfCategoryDates.enumerated() {
+//            sectionCounts.append(0)
+//            sectionToDate[index] = date
+//
+//            if let numberOfPhotosInDate = dateToNumber[date] {
+//                for secondIndex in 0...numberOfPhotosInDate {
+//                    count += 1
+//                    let indexPath = IndexMatcher()
+//                    indexPath.section = index
+//                    indexPath.row = secondIndex
+//                    sectionCounts[index] += 1
+//
+//                    let indP = IndexPath(item: secondIndex, section: index)
+//                    indexPathToIndex[indP] = count
+//                    indexToIndexPath[count] = indP
+//
+//                    if let newHistModel = photoCategories?[count] {
+//                        indexToData[index, default: [HistoryModel]()].append(newHistModel)
+//                    }
+//                }
+//            }
+//        }
+//    }
+}
+
 extension Date {
     func convertDateToReadableString() -> String {
         

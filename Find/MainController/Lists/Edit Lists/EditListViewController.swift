@@ -120,7 +120,7 @@ class EditListViewController: UIViewController, GetGeneralInfo, GetIconInfo, Get
         
         self.returnGeneralNowDelegate = firstViewController
         
-        let pagingViewController = FixedPagingViewController(viewControllers: [
+        let pagingViewController = PagingViewController(viewControllers: [
           firstViewController,
           secondViewController,
           thirdViewController    
@@ -191,7 +191,7 @@ class EditListViewController: UIViewController, GetGeneralInfo, GetIconInfo, Get
 
 }
 extension EditListViewController: PagingViewControllerDelegate {
-    func pagingViewController<T>(_ pagingViewController: PagingViewController<T>, didScrollToItem pagingItem: T, startingViewController: UIViewController?, destinationViewController: UIViewController, transitionSuccessful: Bool) where T : PagingItem, T : Comparable, T : Hashable {
+    func pagingViewController<T>(_ pagingViewController: PagingViewController, didScrollToItem pagingItem: T, startingViewController: UIViewController?, destinationViewController: UIViewController, transitionSuccessful: Bool) where T : PagingItem, T : Comparable, T : Hashable {
         
         guard let indexItem = pagingViewController.state.currentPagingItem as? PagingIndexItem else {
             return

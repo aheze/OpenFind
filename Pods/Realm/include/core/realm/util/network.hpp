@@ -53,7 +53,7 @@
 //
 // Require Linux kernel version >= 2.6.27 such that we have epoll_create1(),
 // `O_CLOEXEC`, and `EPOLLRDHUP`.
-#if defined(__linux__)
+#if defined(__linux__) && !REALM_ANDROID
 #  include <linux/version.h>
 #  if !defined(REALM_HAVE_EPOLL)
 #    if !defined(REALM_DISABLE_UTIL_NETWORK_EPOLL)

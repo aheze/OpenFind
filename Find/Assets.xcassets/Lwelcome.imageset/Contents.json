@@ -1,23 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "1024 Square Copy 6.png",
       "idiom" : "universal",
-      "filename" : "Lwelcome.png",
       "scale" : "1x"
     },
     {
+      "filename" : "1024 Square Copy 6@2x.png",
       "idiom" : "universal",
-      "filename" : "Lwelcome@2x.png",
       "scale" : "2x"
     },
     {
+      "filename" : "1024 Square Copy 6@3x.png",
       "idiom" : "universal",
-      "filename" : "Lwelcome@3x.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

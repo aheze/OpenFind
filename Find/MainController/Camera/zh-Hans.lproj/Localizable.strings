@@ -633,3 +633,24 @@
 
 /* Settings def=Deleted All Lists */
 "deletedAllLists" = "";
+
+/*StatsViewController*/
+"cachedSinceYouFirstDownload" = "";
+
+/*WhatsNewConfiguration*/
+"whatsNewInFindNumber" = "Find 1.1.0的新功能";
+
+/*WhatsNewConfiguration*/
+"whatsNewChineseSupport" = "中文翻译";
+
+/*WhatsNewConfiguration*/
+"whatsNewChineseSupportDetails" = "我们把Find翻译成了中文！ 但是，目前仅支持英语和拼音作为我们OCR引擎的输入。";
+
+/*WhatsNewConfiguration*/
+"whatsNewHistoryIsNowPhotos" = "中文翻译";
+
+/*WhatsNewConfiguration*/
+"whatsNewWhatsNewScreen" = "新增功能屏幕";
+
+/*WhatsNewConfiguration*/
+"whatsNewWhatsNewScreenDetails" = "您现在看到的屏幕是全新的！";
