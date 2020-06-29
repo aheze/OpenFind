@@ -200,7 +200,7 @@
 "findHelp" = "Find Help";
 
 /* TutorialLocalization def=Find is Command+F for camera: Find words in books, worksheets, nutrition labels... anywhere that contains text! */
-"findIsCommandFForCamera" = "Find is Command+F for camera: Find words in books, worksheets, nutrition labels... anywhere that contains text!";
+"findIsCommandFForCamera" = "Find is Command+F for Camera: Find words in books, worksheets, nutrition labels... anywhere that contains text!";
 
 /* Multipurpose def=Find */
 "findLoc" = "Find";
@@ -485,7 +485,7 @@
 "tapSelectButtonAndPopUp" = "Tap the select button, and the Action Controls will pop up!";
 
 /* TutorialLocalization def=Tap the shutter button, and they'll appear in Photos, where you can search in them later. */
-"tapShutterButton" = "Tap the shutter button to take photos! They'll appear in Photos, where you can search from them later.";
+"tapShutterButton" = "Tap the shutter button and they'll appear in Photos, where you can search in them later.";
 
 /* TutorialLocalization def=Tap the Add button */
 "tapTheAddButton" = "Tap the Add button";

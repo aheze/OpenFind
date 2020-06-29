@@ -41,7 +41,7 @@ extension ViewController {
                 items: [
                     WhatsNew.Item(
                         title: "Chinese Support",
-                        subtitle: "Chinese is a complex language, but we hope Find can help you out! We've translated Find into Chinese, but only English and Pinyin are currently supported in our OCR engine.",
+                        subtitle: "We've translated Find into Chinese! However, only English and Pinyin are currently supported in our text recognition engine.",
                         image: UIImage(systemName: "bubble.left.and.bubble.right.fill")?.withTintColor(#colorLiteral(red: 1, green: 0.2843809529, blue: 0, alpha: 1), renderingMode: .alwaysOriginal)
                     ),
                     
