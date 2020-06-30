@@ -345,6 +345,8 @@
 			children = (
 				495F38FF2433FC0000A17D93 /* Launch */,
 				490DA75B23CBBC3A000AF57D /* Shutter */,
+				490DA74023CBB84C000AF57D /* ActionButton */,
+				4917CE8023C059F6002EA20B /* StartSceneView.swift */,
 				49F7B1552353FE4B0099FA62 /* BasicSetup.swift */,
 				49A8EFAB237A5EFE00328D47 /* SetUpButtons.swift */,
 				49A8EFAD237A5F2800328D47 /* SetUpSearchBar.swift */,
@@ -518,18 +520,11 @@
 			path = Launch;
 			sourceTree = "<group>";
 		};
-		496937352353C1E9009CA41A /* Modes */ = {
-			isa = PBXGroup;
-			children = (
-				4979A39123AF3B4B00B09380 /* Fast */,
-			);
-			path = Modes;
-			sourceTree = "<group>";
-		};
 		496937382353C219009CA41A /* MainController */ = {
 			isa = PBXGroup;
 			children = (
 				49E9D88D24996D8A0006757C /* Storyboards */,
+				498332DB243279F900AD083E /* Help */,
 				49585DCD23ED0C9F003AB768 /* SEK */,
 				4988FC4623BEF82D00199635 /* Lists */,
 				4969373C2353C277009CA41A /* Camera */,
@@ -568,15 +563,13 @@
 		4969373C2353C277009CA41A /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				496937352353C1E9009CA41A /* Modes */,
+				4979A39123AF3B4B00B09380 /* Fast */,
 				4999AC972353A80A00AB06A7 /* ViewController.swift */,
 				4953F3C5241733C200690E53 /* Toolbar */,
 				49F7B1572353FE7E0099FA62 /* Component.swift */,
 				4957157D2368B022007BF68B /* ViewExtensions.swift */,
 				4904524A237907170046570D /* Matches */,
 				492BF956237529E8001BE82F /* Setup */,
-				490DA74023CBB84C000AF57D /* ActionButton */,
-				4917CE8023C059F6002EA20B /* StartSceneView.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -613,7 +606,6 @@
 				490BC3F723FA5FBF004D1433 /* General */,
 				492EB4F323F50C49007142CA /* Symbols */,
 				4990AAE523EDB50E00FAF37B /* ColorsViewController.swift */,
-				498332DB243279F900AD083E /* Help */,
 			);
 			path = Lists;
 			sourceTree = "<group>";

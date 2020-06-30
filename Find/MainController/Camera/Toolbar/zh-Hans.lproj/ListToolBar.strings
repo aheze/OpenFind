@@ -4,5 +4,5 @@
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "B5C-dV-QNK"; */
 "B5C-dV-QNK.normalTitle" = "完成";
 
-/* Class = "UIButton"; normalTitle = "New Match"; ObjectID = "oFO-dW-9SD"; */
-"oFO-dW-9SD.normalTitle" = "新匹配";
+/* Class = "UIButton"; normalTitle = "Add Search Term"; ObjectID = "oFO-dW-9SD"; */
+"oFO-dW-9SD.normalTitle" = "添加寻找词";

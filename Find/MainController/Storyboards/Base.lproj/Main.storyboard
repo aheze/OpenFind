@@ -762,8 +762,8 @@
                                                             <color key="textColor" name="PureBlack"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="Matches:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CeU-8I-rNo">
-                                                            <rect key="frame" x="51.5" y="199" width="85" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="Words to Find:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CeU-8I-rNo">
+                                                            <rect key="frame" x="28.5" y="199" width="131.5" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="s6G-EH-sTt"/>
                                                             </constraints>
@@ -1228,7 +1228,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
-                                <state key="normal" title="Ok!">
+                                <state key="normal" title="Ok">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -1279,7 +1279,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
-                                <state key="normal" title="Ok!">
+                                <state key="normal" title="Ok">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -1647,7 +1647,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="382" height="30.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Match" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lMV-xk-qWw" customClass="TextField" customModule="Find" customModuleProvider="target">
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Word" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lMV-xk-qWw" customClass="TextField" customModule="Find" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="332" height="30.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                                     <textInputTraits key="textInputTraits"/>
@@ -1691,8 +1691,8 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pa4-4L-yZS" userLabel="MatchesHeader">
                                                 <rect key="frame" x="16" y="184" width="382" height="40"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Matches" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZ6-oK-Otx">
-                                                        <rect key="frame" x="149.5" y="7.5" width="83" height="25.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Words to Find" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZ6-oK-Otx">
+                                                        <rect key="frame" x="125.5" y="7.5" width="131.5" height="25.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -1709,8 +1709,8 @@
                                                 <rect key="frame" x="16" y="524" width="382" height="35"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srB-MK-Y9p">
-                                                        <rect key="frame" x="40" y="2.5" width="78" height="30"/>
-                                                        <state key="normal" title="New Match">
+                                                        <rect key="frame" x="40" y="2.5" width="68" height="30"/>
+                                                        <state key="normal" title="Add Word">
                                                             <color key="titleColor" name="LinkColor"/>
                                                         </state>
                                                         <connections>
@@ -3087,7 +3087,7 @@ the App!</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 matches found currently" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ygo-eL-ZJZ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 words found currently" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ygo-eL-ZJZ">
                                 <rect key="frame" x="16" y="120.5" width="382" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -3543,7 +3543,7 @@ the App!</string>
                                                                 <constraint firstAttribute="width" constant="100" id="C9X-Kv-t5l"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 Matches | Yesterday sdfls dfjs ljs fljs flsf" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3Q-wj-4ao">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 Results | Yesterday sdfls dfjs ljs fljs flsf" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3Q-wj-4ao">
                                                             <rect key="frame" x="110" y="8" width="268" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="sBn-hv-0S3"/>
@@ -4002,7 +4002,7 @@ the App!</string>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
-                                <state key="normal" title="Ok!">
+                                <state key="normal" title="Ok">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>

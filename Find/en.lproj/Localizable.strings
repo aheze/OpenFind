@@ -8,7 +8,7 @@
 "%d lists deleted!" = "%d lists deleted!";
 
 /* FindBar def=x Matches in  */
-"%d MatchesInSpace" = "%d Matches in ";
+"%d MatchesInSpace" = "%d Results in ";
 
 /* ListController def=x Lists Selected */
 "%d numberLists" = "%d Lists Selected";
@@ -29,7 +29,7 @@
 "%d Slash %d PhotosCached" = "%1$d/%2$d photos cached";
 
 /* HistoryFindController def=x matches */
-"%d SpaceMatches" = "%d matches";
+"%d SpaceMatches" = "%d results";
 
 /* TutorialLocalization def=Access the Menu */
 "accessMenu" = "Access the Menu";
@@ -41,13 +41,13 @@
 "actionsLoc" = "Actions";
 
 /* TutorialLocalization def=Add a match */
-"addAMatch" = "Add a match";
+"addAMatch" = "Add a word to find";
 
 /* TutorialLocalization def=Add more matches */
-"addMoreMatches" = "Add more matches";
+"addMoreMatches" = "Add more words";
 
 /* TutorialLocalization def=Add some matches */
-"addSomeMatches" = "Add some matches";
+"addSomeMatches" = "Add words to find";
 
 /* GeneralViewController def=a duplicate. */
 "aDuplicateOriginal" = "a duplicate.";
@@ -206,13 +206,13 @@
 "findLoc" = "Find";
 
 /* TutorialLocalization def=...find multiple words at the same time! */
-"findMultipleWords" = "...find multiple words at the same time!";
+"findMultipleWords" = "Find multiple words at the same time!";
 
 /* SetUpSearchBar def=Find is paused | Duplicates are not allowed */
 "findPausedDuplicatesNotAllowed" = "Find is paused | Duplicates are not allowed";
 
 /* TutorialLocalization def=Find searches for your matches when you use the list */
-"findSearchesForMatches" = "Find searches for your matches when you use the list";
+"findSearchesForMatches" = "Group commonly used words here";
 
 /* TutorialLocalization def=Caching photos speeds up search results! */
 "findUsesOCR" = "Caching photos speeds up search results!";
@@ -289,17 +289,23 @@
 /* MultipurposeExtension def=true */
 "locBoolTrue" = "true";
 
+/*TutorialLocalization*/
+"locLaunchLists" = "Use lists";
+
+/*TutorialLocalization*/
+"locMakeLists" = "Group multiple words together into Lists. Find all of them at once!";
+
 /* TutorialLocalization def=Make a list */
 "makeAList" = "Make a list";
 
 /* FindBar def=Matches */
-"matches" = "Matches";
+"matches" = "results";
 
 /* TutorialLocalization def=Matches are what Find looks for when you use the list. Make one by tapping the placeholder that says 'Match'! */
-"matchesAreWhatFindLooksFor" = "Matches are what Find looks for when you use the list. Make one by tapping the placeholder that says 'Match'!";
+"matchesAreWhatFindLooksFor" = "Find will look for these words when you use the list. Add one by tapping the placeholder that says 'Word'!";
 
 /* StatsViewController def=matches found currently */
-"matchesFoundCurrently" = "matches found currently";
+"matchesFoundCurrently" = "words found currently";
 
 /* SymbolsViewController def=Math */
 "mathLoc" = "Math";
@@ -314,10 +320,10 @@
 "noListsCreatedYet" = "No Lists Created Yet!";
 
 /* FindBar def=No Matches */
-"noMatches" = "No Matches";
+"noMatches" = "No results";
 
 /* FindBar def=No Matches in  */
-"noMatchesInSpace" = "No Matches in ";
+"noMatchesInSpace" = "No results in ";
 
 /* LaunchViewController def=You don't have permission to use the camera. */
 "noPermissionToUseCamera" = "You don't have permission to use the camera.";
@@ -383,7 +389,7 @@
 "photoSelected" = "Photo Selected";
 
 /* TutorialLocalization def=...find again and again! */
-"photosFindAgainAndAgain" = "...find again and again!";
+"photosFindAgainAndAgain" = "Save it now, find in it later!";
 
 /* StatsViewController def=photos */
 "photosPluralLoc" = "photos";
@@ -391,7 +397,7 @@
 /* HistorySelect def=Photos Selected */
 "photosSelected" = "Photos Selected";
 
-/* StatsViewController def=photo */
+/* StatsViewControl6ler def=photo */
 "photosSingularLoc" = "photo";
 
 /* Settings def=Photos */
@@ -425,7 +431,7 @@
 "select" = "Select";
 
 /* TutorialLocalization def=Select a few photos, tap the Find icon, and enter the text that you want to find! */
-"selectAFewPhotos" = "Select a few photos, tap the Find icon, and enter the text that you want to find!";
+"selectAFewPhotos" = "Select a few photos, tap the Find icon, and enter the text that you want to find";
 
 /* NewHistoryViewController def=Select All */
 "selectAllLoc" = "Select All";
@@ -452,7 +458,7 @@
 "sinceYouFirstDownloadedFind" = "since you first downloaded Find";
 
 /* TutorialLocalization def=Sometimes you got to delete a match. No feelings hurt, just swipe left and tap 'Delete'! */
-"sometimesYouGotToDeleteAMatch" = "Sometimes you got to delete a match. No feelings hurt, just swipe left and tap 'Delete'!";
+"sometimesYouGotToDeleteAMatch" = "Sometimes you got to delete a match. No problem, just swipe left and tap 'Delete'!";
 
 /* Stats def= and \"x\" */
 "spaceAndSpacequote %@ quote" = " and \"%@\"";
@@ -461,7 +467,7 @@
 "spaceHaveDuplicates" = " have duplicates.";
 
 /* Stats def= matches found currently */
-"spaceMatchesFoundCurrently" = " matches found currently";
+"spaceMatchesFoundCurrently" = " words found currently";
 
 /* SymbolsViewController def=Speech */
 "speechLoc" = "Speech";
@@ -470,7 +476,7 @@
 "startByTypingOrSelectingAList" = "Start by typing or selecting a list...";
 
 /* TutorialLocalization def=...Start easily making lists! */
-"startEasilyMakingLists" = "...Start easily making lists!";
+"startEasilyMakingLists" = "Start making lists!";
 
 /* TutorialLocalization def=Swipe to get started */
 "swipeToGetStarted" = "Swipe to get started";
@@ -482,13 +488,13 @@
 "tapSearchField" = "Tap the Search Field at the top of the screen";
 
 /* TutorialLocalization def=Tap the select button, and the Action Controls will pop up! */
-"tapSelectButtonAndPopUp" = "Tap the select button, and the Action Controls will pop up!";
+"tapSelectButtonAndPopUp" = "Tap the \"Select\" button, and the Action Controls will pop up";
 
 /* TutorialLocalization def=Tap the shutter button, and they'll appear in Photos, where you can search in them later. */
-"tapShutterButton" = "Tap the shutter button and they'll appear in Photos, where you can search in them later.";
+"tapShutterButton" = "Tap the shutter button to take photos! Save it now, find in it later.";
 
 /* TutorialLocalization def=Tap the Add button */
-"tapTheAddButton" = "Tap the Add button";
+"tapTheAddButton" = "Tap the \"+\" button";
 
 /* Multipurpose def=Tap to dismiss */
 "tapToDismiss" = "Tap to dismiss";
@@ -554,13 +560,13 @@
 "welcomeToFind" = "Welcome to Find";
 
 /* TutorialLocalization def=Lists... */
-"welcomeToLists" = "Lists...";
+"welcomeToLists" = "Lists";
 
 /* TutorialLocalization def=Lists Builder... */
-"welcomeToListsBuilder" = "Lists Builder...";
+"welcomeToListsBuilder" = "Lists Builder";
 
 /* TutorialLocalization def=Photos... */
-"welcomeToPhotos" = "Photos...";
+"welcomeToPhotos" = "Photos";
 
 /* TutorialLocalization def=What is Find? */
 "whatIsFind" = "What is Find?";
@@ -593,13 +599,13 @@
 "yesterdayLoc" = "Yesterday";
 
 /* GeneralViewController def=You have x empty matches! */
-"youHave %d EmptyMatches" = "You have %d empty matches!";
+"youHave %d EmptyMatches" = "You have %d empty words!";
 
 /* GeneralViewController def=You have a lot of duplicate matches. */
-"youHaveLotsDuplicates" = "You have a lot of duplicate matches.";
+"youHaveLotsDuplicates" = "You have a lot of duplicate words.";
 
 /* TutorialLocalization def=Your lists will appear above the keyboard, whether you are Finding using the camera or from Photos */
-"yourListsWillAppear" = "Your lists will appear above the keyboard, whether you are Finding using the camera or from Photos";
+"yourListsWillAppear" = "Lists will appear above the keyboard, whether you're Finding using the camera or from Photos";
 
 /* TutorialLocalization def=Your Photos, Lists, and Settings are here. Check them out! */
 "yourPhotosListsAndSettingsHere" = "Your Photos, Lists, and Settings are here. Check them out!";

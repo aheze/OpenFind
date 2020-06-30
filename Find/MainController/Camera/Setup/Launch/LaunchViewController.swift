@@ -456,7 +456,7 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
             })
 //            skipButton.isHidden = true
         }
-        if index == 5 {
+        if index == 6 {
             onboardingOnLastPage = true
 //            getStartedButton.isHidden = false
             getStartedButton.alpha = 0
@@ -522,10 +522,21 @@ extension LaunchViewController {
                                titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
+            OnboardingItemInfo(informationImage: UIImage(named: "Slists")!,
+            title: loc.lists,
+            description: loc.makeLists,
+            pageIcon: UIImage(named: "3icon")!,
+            color: UIColor(named: "OnboardingGray")!,
+            titleColor: UIColor.black,
+            descriptionColor: UIColor.darkGray,
+            titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
+            descriptionFont: UIFont.systemFont(ofSize: 17)),
+            
+            
             OnboardingItemInfo(informationImage: UIImage(named: "Sshutter")!,
                                title: loc.takePhotos,
                                description: loc.tapShutterButton,
-                               pageIcon: UIImage(named: "3icon")!,
+                               pageIcon: UIImage(named: "4icon")!,
                                color: UIColor(named: "OnboardingGray")!,
                                titleColor: UIColor.black,
                                descriptionColor: UIColor.darkGray,
@@ -535,7 +546,7 @@ extension LaunchViewController {
             OnboardingItemInfo(informationImage: UIImage(named: "Smenu")!,
                                title: loc.accessMenu,
                                description: loc.yourPhotosListsAndSettingsHere,
-                               pageIcon: UIImage(named: "4icon")!,
+                               pageIcon: UIImage(named: "5icon")!,
                                color: UIColor(named: "OnboardingGray")!,
                                titleColor: UIColor.black,
                                descriptionColor: UIColor.darkGray,
@@ -545,7 +556,7 @@ extension LaunchViewController {
             OnboardingItemInfo(informationImage: UIImage(named: "Sjitter")!,
                                title: loc.beforeYouStart,
                                description: loc.ensureAccuracy,
-                               pageIcon: UIImage(named: "5icon")!,
+                               pageIcon: UIImage(named: "6icon")!,
                                color: UIColor(named: "OnboardingGray")!,
                                titleColor: UIColor.black,
                                descriptionColor: UIColor.darkGray,
@@ -555,7 +566,7 @@ extension LaunchViewController {
     }
     
     func onboardingItemsCount() -> Int {
-        return 6
+        return 7
     }
 }
 

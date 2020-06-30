@@ -654,3 +654,9 @@
 
 /*WhatsNewConfiguration*/
 "whatsNewWhatsNewScreenDetails" = "您现在看到的屏幕是全新的！";
+
+/*TutorialLocalization*/
+"locLaunchLists" = "用清单";
+
+/*TutorialLocalization*/
+"locMakeLists" = "将多个单词组合到清单中，一次寻找所有的";

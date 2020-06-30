@@ -19,6 +19,11 @@ class LaunchLocalization {
     let findWords = NSLocalizedString("findWords", comment: "TutorialLocalization def=Find words")
     let tapSearchField = NSLocalizedString("tapSearchField", comment: "TutorialLocalization def=Tap the Search Field at the top of the screen")
     
+    
+    let lists = NSLocalizedString("locLaunchLists", comment: "TutorialLocalization")
+    let makeLists = NSLocalizedString("locMakeLists", comment: "TutorialLocalization")
+    
+    
     let takePhotos = NSLocalizedString("takePhotos", comment: "TutorialLocalization def=Take photos")
     let tapShutterButton = NSLocalizedString("tapShutterButton", comment: "TutorialLocalization def=Tap the shutter button, and they'll appear in Photos, where you can search in them later.")
     
