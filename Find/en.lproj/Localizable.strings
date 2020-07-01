@@ -1,8 +1,8 @@
 /* GeneralViewController def=\"\(duplicateStringArray[0])\" and \"\(duplicateStringArray[1])\" have duplicates. */
-"%@ and %@ have" = "%1$@ and %2$@ have";
+"%@ and %@ have" = "\"%1$@\" and \"%2$@\" have";
 
 /* GeneralViewController def=\"\(duplicateStringArray[0])\" has \(aDuplicate) */
-"%@ has %@" = "%1$@ has %2$@";
+"%@ has %@" = "\"%1$@\" has %2$@";
 
 /* ListController def=x lists deleted! */
 "%d lists deleted!" = "%d lists deleted!";
@@ -101,7 +101,7 @@
 "cantBeUndone" = "This action can't be undone.";
 
 /* GeneralViewController def=Can't have an empty match! */
-"cantHaveEmptyMatch" = "Can't have an empty match!";
+"cantHaveEmptyMatch" = "Can't have an empty word!";
 
 /* You can't undo this action. */
 "cantUndoDeleteList" = "You can't undo this action.";
@@ -155,7 +155,7 @@
 "deleteAllPhotosQuestion" = "Delete ALL photos?!";
 
 /* TutorialLocalization def=Delete a match */
-"deleteAMatch" = "Delete a match";
+"deleteAMatch" = "Delete a word";
 
 /* Settings def=Deleted All Lists */
 "deletedAllLists" = "Deleted All Lists";
@@ -302,13 +302,16 @@
 "matches" = "results";
 
 /* TutorialLocalization def=Matches are what Find looks for when you use the list. Make one by tapping the placeholder that says 'Match'! */
-"matchesAreWhatFindLooksFor" = "Find will look for these words when you use the list. Add one by tapping the placeholder that says 'Word'!";
+"matchesAreWhatFindLooksFor" = "Find will look for these words when you use the list. Add one by tapping the placeholder that says 'Word'";
 
 /* StatsViewController def=matches found currently */
 "matchesFoundCurrently" = "words found currently";
 
 /* SymbolsViewController def=Math */
 "mathLoc" = "Math";
+
+/*GeneralViewController*/
+"nameGeneral" = "Name";
 
 /* SymbolsViewController def=Nature */
 "natureLoc" = "Nature";
@@ -353,7 +356,7 @@
 "ocrSearchInProgress" = "OCR search in progress!";
 
 /* TutorialLocalization def=Once you've typed in your first match, just tap 'next' on the keyboard! Repeat until satisfied. */
-"onceYouveTypedInYourFirstMatch" = "Once you've typed in your first match, just tap 'next' on the keyboard! Repeat until satisfied.";
+"onceYouveTypedInYourFirstMatch" = "Once you've typed in your first word, just tap 'next' on the keyboard! Repeat until satisfied.";
 
 /* ListSelect def=One List Selected */
 "oneListSelected" = "One List Selected";
@@ -454,11 +457,14 @@
 /* HistoryCollectionViewFiles def=Share */
 "shareLoc" = "Share";
 
+/*GeneralViewController*/
+"shortDescriptionPlaceholder" = "Short description";
+
 /* StatsViewController def=since you first downloaded Find */
 "sinceYouFirstDownloadedFind" = "since you first downloaded Find";
 
 /* TutorialLocalization def=Sometimes you got to delete a match. No feelings hurt, just swipe left and tap 'Delete'! */
-"sometimesYouGotToDeleteAMatch" = "Sometimes you got to delete a match. No problem, just swipe left and tap 'Delete'!";
+"sometimesYouGotToDeleteAMatch" = "Sometimes you got to delete a word. No problem, just swipe left and tap 'Delete'";
 
 /* Stats def= and \"x\" */
 "spaceAndSpacequote %@ quote" = " and \"%@\"";

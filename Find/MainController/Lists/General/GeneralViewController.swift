@@ -417,7 +417,9 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
        
         titleField.layer.borderWidth = 1
         
-        titleField.attributedPlaceholder = NSAttributedString(string: "Name",
+        
+        let name = NSLocalizedString("nameGeneral", comment: "GeneralViewController")
+        titleField.attributedPlaceholder = NSAttributedString(string: name,
                                                               attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "Gray5")])
         
         titleField.backgroundColor = UIColor(named: "PureBlank")
@@ -438,7 +440,11 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         contentsDoneButton.layer.cornerRadius = 6
         
         placeholderLabel = UILabel()
-        placeholderLabel.text = "Short description"
+        
+        let shortDescription = NSLocalizedString("shortDescriptionPlaceholder", comment: "GeneralViewController")
+        
+        
+        placeholderLabel.text = shortDescription
         placeholderLabel.font = UIFont.systemFont(ofSize: (descriptionView.font?.pointSize)!)
         placeholderLabel.sizeToFit()
         descriptionView.addSubview(placeholderLabel)
@@ -739,10 +745,9 @@ extension GeneralViewController {
                     
                     
                     var aDuplicate = aDuplicateOriginal
-//                    if differentPaths.count == 1 {
-//                        aDuplicate = "a duplicate."
-//                    } else
-                    if differentPaths.count == 2 {
+                    if differentPaths.count == 1 {
+                        aDuplicate = aDuplicateOriginal
+                    } else if differentPaths.count == 2 {
                         let twoDuplicates = NSLocalizedString("twoDuplicates", comment: "GeneralViewController def=2 duplicates.")
                         
                         aDuplicate = twoDuplicates

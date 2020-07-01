@@ -1,8 +1,8 @@
 /* GeneralViewController def=\"\(duplicateStringArray[0])\" and \"\(duplicateStringArray[1])\" have duplicates. */
-"%@ and %@ have" = "%@ 和 %@ 有";
+"%@ and %@ have" = "\"%@\" 和 \"%@\" 有";
 
 /* GeneralViewController def=\"\(duplicateStringArray[0])\" has \(aDuplicate) */
-"%@ has %@" = "%@ 有 %@";
+"%@ has %@" = "\"%@\" 有 %@";
 
 /* ListController def=x lists deleted! */
 "%d lists deleted!" = "删掉了%d个清单";
@@ -310,6 +310,9 @@
 /* SymbolsViewController def=Math */
 "mathLoc" = "数学";
 
+/*GeneralViewController*/
+"nameGeneral" = "名称";
+
 /* SymbolsViewController def=Nature */
 "natureLoc" = "自然";
 
@@ -453,6 +456,9 @@
 
 /* HistoryCollectionViewFiles def=Share */
 "shareLoc" = "分享";
+
+/*GeneralViewController*/
+"shortDescriptionPlaceholder" = "简短的介绍";
 
 /* StatsViewController def=since you first downloaded Find */
 "sinceYouFirstDownloadedFind" = "自您首次下载Find以来";

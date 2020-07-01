@@ -660,3 +660,9 @@
 
 /*TutorialLocalization*/
 "locMakeLists" = "将多个单词组合到清单中，一次寻找所有的";
+
+/*GeneralViewController*/
+"nameGeneral" = "名称";
+
+/*GeneralViewController*/
+"shortDescriptionPlaceholder" = "简短的介绍";
