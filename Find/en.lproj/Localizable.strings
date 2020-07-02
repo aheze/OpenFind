@@ -8,7 +8,7 @@
 "%d lists deleted!" = "%d lists deleted!";
 
 /* FindBar def=x Matches in  */
-"%d MatchesInSpace" = "%d Results in ";
+"%d MatchesInSpace" = "%d results in ";
 
 /* ListController def=x Lists Selected */
 "%d numberLists" = "%d Lists Selected";
@@ -362,10 +362,10 @@
 "oneListSelected" = "One List Selected";
 
 /* Multifile def=1 match */
-"oneMatch" = "1 match";
+"oneMatch" = "1 result";
 
 /* FindBar def=1 Match in  */
-"oneMatchInSpace" = "1 Match in ";
+"oneMatchInSpace" = "1 result in ";
 
 /* CachingViewController def=1 photo has already been cached.\nWould you like to keep its cache? */
 "onePhotoHasAlreadyBeenCachedWouldYouKeep" = "1 photo has already been cached.\nWould you like to keep its cache?";

@@ -1141,15 +1141,15 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Fu-Z2-9xn">
-                                <rect key="frame" x="102" y="742" width="210" height="40"/>
+                                <rect key="frame" x="296" y="796" width="110" height="40"/>
                                 <color key="backgroundColor" name="FeedbackGradientLeft"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="K5M-pu-grV"/>
-                                    <constraint firstAttribute="width" constant="210" id="Wb9-lU-unc"/>
+                                    <constraint firstAttribute="width" constant="110" id="Wb9-lU-unc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
-                                <state key="normal" title="Ok, let's go!">
+                                <state key="normal" title="Ok">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -1174,12 +1174,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="AkF-aS-uUJ" firstAttribute="top" secondItem="HSu-bM-OxG" secondAttribute="top" constant="16" id="GLw-Hv-cxQ"/>
+                            <constraint firstItem="HSu-bM-OxG" firstAttribute="trailing" secondItem="8Fu-Z2-9xn" secondAttribute="trailing" constant="8" id="H4S-Ks-HvM"/>
                             <constraint firstItem="shQ-5M-Lzd" firstAttribute="trailing" secondItem="pyI-Ox-nza" secondAttribute="trailing" id="LK3-Rr-sFN"/>
                             <constraint firstItem="shQ-5M-Lzd" firstAttribute="leading" secondItem="pyI-Ox-nza" secondAttribute="leading" id="UJp-Xl-5hC"/>
-                            <constraint firstItem="HSu-bM-OxG" firstAttribute="bottom" secondItem="8Fu-Z2-9xn" secondAttribute="bottom" constant="80" id="Ymp-LE-gWl"/>
+                            <constraint firstItem="HSu-bM-OxG" firstAttribute="bottom" secondItem="8Fu-Z2-9xn" secondAttribute="bottom" constant="26" id="Ymp-LE-gWl"/>
                             <constraint firstItem="HSu-bM-OxG" firstAttribute="trailing" secondItem="AkF-aS-uUJ" secondAttribute="trailing" constant="16" id="ahg-cw-Y20"/>
                             <constraint firstItem="shQ-5M-Lzd" firstAttribute="top" secondItem="pyI-Ox-nza" secondAttribute="top" id="o1p-Lp-xnq"/>
-                            <constraint firstItem="8Fu-Z2-9xn" firstAttribute="centerX" secondItem="pyI-Ox-nza" secondAttribute="centerX" id="ojI-qb-mbb"/>
                             <constraint firstAttribute="bottom" secondItem="shQ-5M-Lzd" secondAttribute="bottom" id="sh4-jq-tUF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HSu-bM-OxG"/>
@@ -1220,7 +1220,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bEK-zj-4g5">
-                                <rect key="frame" x="152" y="742" width="110" height="40"/>
+                                <rect key="frame" x="296" y="796" width="110" height="40"/>
                                 <color key="backgroundColor" name="FeedbackGradientLeft"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="La1-tO-bq4"/>
@@ -1241,10 +1241,10 @@
                             <constraint firstItem="H4E-5n-TJD" firstAttribute="top" secondItem="7oA-gR-W03" secondAttribute="top" id="Akr-qB-uKG"/>
                             <constraint firstAttribute="trailing" secondItem="H4E-5n-TJD" secondAttribute="trailing" id="Ctj-JY-9iG"/>
                             <constraint firstItem="Tn3-cy-5dS" firstAttribute="trailing" secondItem="IW2-Ij-oRz" secondAttribute="trailing" constant="16" id="IFI-hE-q5K"/>
-                            <constraint firstItem="Tn3-cy-5dS" firstAttribute="bottom" secondItem="bEK-zj-4g5" secondAttribute="bottom" constant="80" id="Zbe-yR-hSa"/>
-                            <constraint firstItem="bEK-zj-4g5" firstAttribute="centerX" secondItem="7oA-gR-W03" secondAttribute="centerX" id="aag-p1-TEu"/>
+                            <constraint firstItem="Tn3-cy-5dS" firstAttribute="bottom" secondItem="bEK-zj-4g5" secondAttribute="bottom" constant="26" id="Zbe-yR-hSa"/>
                             <constraint firstAttribute="bottom" secondItem="H4E-5n-TJD" secondAttribute="bottom" id="c6j-6P-RG1"/>
                             <constraint firstItem="IW2-Ij-oRz" firstAttribute="top" secondItem="Tn3-cy-5dS" secondAttribute="top" constant="16" id="csm-tV-QHK"/>
+                            <constraint firstItem="Tn3-cy-5dS" firstAttribute="trailing" secondItem="bEK-zj-4g5" secondAttribute="trailing" constant="8" id="eqb-eL-6r5"/>
                             <constraint firstItem="H4E-5n-TJD" firstAttribute="leading" secondItem="7oA-gR-W03" secondAttribute="leading" id="x9V-nz-ihI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Tn3-cy-5dS"/>
@@ -1271,7 +1271,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WOK-i0-X5W">
-                                <rect key="frame" x="152" y="742" width="110" height="40"/>
+                                <rect key="frame" x="296" y="796" width="110" height="40"/>
                                 <color key="backgroundColor" name="FeedbackGradientLeft"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="110" id="Vmr-nC-1uM"/>
@@ -1305,11 +1305,11 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="0t8-a7-Kj3" secondAttribute="bottom" id="1tq-ax-Lkx"/>
                             <constraint firstAttribute="trailing" secondItem="0t8-a7-Kj3" secondAttribute="trailing" id="7IH-cN-nGi"/>
-                            <constraint firstItem="WOK-i0-X5W" firstAttribute="centerX" secondItem="vTj-gl-Yc6" secondAttribute="centerX" id="901-Vq-DaI"/>
+                            <constraint firstItem="Xgr-bG-JfV" firstAttribute="trailing" secondItem="WOK-i0-X5W" secondAttribute="trailing" constant="8" id="ChQ-Nu-aMs"/>
                             <constraint firstItem="Xgr-bG-JfV" firstAttribute="trailing" secondItem="wid-LQ-ijx" secondAttribute="trailing" constant="16" id="EbF-xD-CaQ"/>
                             <constraint firstItem="0t8-a7-Kj3" firstAttribute="top" secondItem="vTj-gl-Yc6" secondAttribute="top" id="TDd-Wa-dvk"/>
                             <constraint firstItem="wid-LQ-ijx" firstAttribute="top" secondItem="Xgr-bG-JfV" secondAttribute="top" constant="16" id="gsO-C5-hjo"/>
-                            <constraint firstItem="Xgr-bG-JfV" firstAttribute="bottom" secondItem="WOK-i0-X5W" secondAttribute="bottom" constant="80" id="ocu-kb-oTS"/>
+                            <constraint firstItem="Xgr-bG-JfV" firstAttribute="bottom" secondItem="WOK-i0-X5W" secondAttribute="bottom" constant="26" id="ocu-kb-oTS"/>
                             <constraint firstItem="0t8-a7-Kj3" firstAttribute="leading" secondItem="vTj-gl-Yc6" secondAttribute="leading" id="zru-Pn-od2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Xgr-bG-JfV"/>
@@ -1456,8 +1456,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i4P-yP-Sw8" userLabel="Top View">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyQ-Lp-esF">
-                                        <rect key="frame" x="16" y="9.5" width="52.5" height="29"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="wyQ-Lp-esF">
+                                        <rect key="frame" x="16" y="9.5" width="316" height="29"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1484,6 +1484,7 @@
                                     <constraint firstItem="wyQ-Lp-esF" firstAttribute="centerY" secondItem="i4P-yP-Sw8" secondAttribute="centerY" id="9Qy-Uz-cEp"/>
                                     <constraint firstItem="Ua1-LX-cFk" firstAttribute="centerY" secondItem="i4P-yP-Sw8" secondAttribute="centerY" id="FsY-BG-p3w"/>
                                     <constraint firstAttribute="bottom" secondItem="Ua1-LX-cFk" secondAttribute="bottom" constant="8" id="JCm-fU-AaF"/>
+                                    <constraint firstItem="Ua1-LX-cFk" firstAttribute="leading" secondItem="wyQ-Lp-esF" secondAttribute="trailing" constant="16" id="Wlr-Xh-MGh"/>
                                     <constraint firstAttribute="trailing" secondItem="Ua1-LX-cFk" secondAttribute="trailing" constant="16" id="gHM-xy-HnM"/>
                                     <constraint firstItem="Ua1-LX-cFk" firstAttribute="top" secondItem="i4P-yP-Sw8" secondAttribute="top" constant="8" id="l1y-oK-Qbf"/>
                                 </constraints>
@@ -3994,7 +3995,7 @@ the App!</string>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2C-rw-SRu">
-                                <rect key="frame" x="152" y="742" width="110" height="40"/>
+                                <rect key="frame" x="296" y="796" width="110" height="40"/>
                                 <color key="backgroundColor" name="FeedbackGradientLeft"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="110" id="c7C-fg-i7i"/>
@@ -4026,13 +4027,13 @@ the App!</string>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Q2C-rw-SRu" firstAttribute="centerX" secondItem="EYk-6n-Mak" secondAttribute="centerX" id="1fF-lU-CQ6"/>
                             <constraint firstItem="Fxz-wQ-bGs" firstAttribute="leading" secondItem="EYk-6n-Mak" secondAttribute="leading" id="U4S-2T-H9R"/>
                             <constraint firstItem="4h2-qu-luZ" firstAttribute="trailing" secondItem="mBs-Bo-npM" secondAttribute="trailing" constant="16" id="UrY-L4-Qgg"/>
                             <constraint firstItem="Fxz-wQ-bGs" firstAttribute="top" secondItem="EYk-6n-Mak" secondAttribute="top" id="dF0-eZ-zre"/>
                             <constraint firstItem="mBs-Bo-npM" firstAttribute="top" secondItem="4h2-qu-luZ" secondAttribute="top" constant="16" id="fvp-Qs-DUO"/>
+                            <constraint firstItem="4h2-qu-luZ" firstAttribute="trailing" secondItem="Q2C-rw-SRu" secondAttribute="trailing" constant="8" id="iZ0-aA-rDi"/>
                             <constraint firstAttribute="trailing" secondItem="Fxz-wQ-bGs" secondAttribute="trailing" id="jH7-aD-ZXs"/>
-                            <constraint firstItem="4h2-qu-luZ" firstAttribute="bottom" secondItem="Q2C-rw-SRu" secondAttribute="bottom" constant="80" id="pW4-Bi-gpM"/>
+                            <constraint firstItem="4h2-qu-luZ" firstAttribute="bottom" secondItem="Q2C-rw-SRu" secondAttribute="bottom" constant="26" id="pW4-Bi-gpM"/>
                             <constraint firstAttribute="bottom" secondItem="Fxz-wQ-bGs" secondAttribute="bottom" id="uOS-Ur-Qfs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4h2-qu-luZ"/>

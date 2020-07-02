@@ -10,7 +10,7 @@
 /* Class = "UIButton"; normalTitle = "Delete All Photos"; ObjectID = "2V9-Nx-FSL"; */
 "2V9-Nx-FSL.normalTitle" = "删除所有照片";
 
-/* Class = "UIButton"; normalTitle = "Discard"; ObjectID = "2qz-Bq-vme"; */
+/* Class = "UIButton"; normalTitle = "Discard"; ObjectID =  "2qz-Bq-vme"; */
 "2qz-Bq-vme.normalTitle" = "删掉";
 
 /* Class = "UIButton"; normalTitle = "Allow Access"; ObjectID = "4PV-lP-fX0"; */
@@ -22,8 +22,8 @@
 /* Class = "UIButton"; normalTitle = "Licenses"; ObjectID = "6OO-b0-YRY"; */
 "6OO-b0-YRY.normalTitle" = "许可证";
 
-/* Class = "UIButton"; normalTitle = "Ok, let's go!"; ObjectID = "8Fu-Z2-9xn"; */
-"8Fu-Z2-9xn.normalTitle" = "好，前往！";
+/* Class = "UIButton"; normalTitle = "Ok"; ObjectID = "8Fu-Z2-9xn"; */
+"8Fu-Z2-9xn.normalTitle" = "前往";
 
 /* Class = "UILabel"; text = "All selected photos have already been cached! Search results will appear immediately."; ObjectID = "8fp-hd-mIw"; */
 "8fp-hd-mIw.text" = "所有选择的照片已使用快取！搜索结果将立即显示。";
