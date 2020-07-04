@@ -40,14 +40,14 @@ extension ViewController {
                 title: "What's New in\nFind 1.1.0",
                 items: [
                     WhatsNew.Item(
-                        title: "Chinese Support",
-                        subtitle: "We've translated Find into Chinese! However, only English and Pinyin are currently supported in our text recognition engine.",
+                        title: "Chinese Availability",
+                        subtitle: "您好！We've translated Find into Chinese! However, only English and Pinyin are currently supported as input by the text recognition engine.",
                         image: UIImage(systemName: "bubble.left.and.bubble.right.fill")?.withTintColor(#colorLiteral(red: 1, green: 0.2843809529, blue: 0, alpha: 1), renderingMode: .alwaysOriginal)
                     ),
                     
                     WhatsNew.Item(
                         title: "History is now Photos",
-                        subtitle: "History got kind of confusing, so we renamed it!",
+                        subtitle: "Renamed so it doesn't clash with a future feature",
                         image: UIImage(systemName: "photo.fill.on.rectangle.fill")?.withTintColor(#colorLiteral(red: 0.2555771952, green: 0.8299632353, blue: 0, alpha: 1), renderingMode: .alwaysOriginal)
                     ),
                     WhatsNew.Item(
