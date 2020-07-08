@@ -249,7 +249,31 @@ extension NewHistoryViewController {
             
             let helpLoc = NSLocalizedString("help", comment: "Multipurpose def=Help")
             let help = UIAction(title: helpLoc, image: UIImage(systemName: "questionmark")) { action in
-                SwiftEntryKitTemplates.displayHistoryHelp()
+//                SwiftEntryKitTemplates.displayHistoryHelp()
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let helpViewController = storyboard.instantiateViewController(withIdentifier: "DefaultHelpController") as! DefaultHelpController
+                
+                let helpTitle = NSLocalizedString("helpTitle", comment: "SwiftEntryKitTemplates displayHistoryHelp def=Help")
+                
+                helpViewController.title = helpTitle
+                helpViewController.helpJsonKey = "HistoryFindHelpArray"
+//                helpViewController.goDirectlyToUrl = true
+//                helpViewController.directUrl = "https://zjohnzheng.github.io/FindHelp/History-HistoryControls.html"
+
+                let navigationController = UINavigationController(rootViewController: helpViewController)
+                navigationController.navigationBar.tintColor = UIColor.white
+                navigationController.navigationBar.prefersLargeTitles = true
+
+                let navBarAppearance = UINavigationBarAppearance()
+                navBarAppearance.configureWithOpaqueBackground()
+                navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+                navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+                navBarAppearance.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+                
+                navigationController.navigationBar.standardAppearance = navBarAppearance
+                navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
+                
+                self.present(navigationController, animated: true, completion: nil)
             }
             // Empty menu for demonstration purposes
             

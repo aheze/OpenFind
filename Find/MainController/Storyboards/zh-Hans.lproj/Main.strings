@@ -285,3 +285,12 @@
 
 /* Class = "UIButton"; normalTitle = "See What's New in Find!"; ObjectID = "eVF-Pd-XiX"; */
 "eVF-Pd-XiX.normalTitle" = "看一看Find的新功能！";
+
+/* Class = "UIButton"; normalTitle = "Take a quick tour"; ObjectID = "5Yw-UI-voz"; */
+"5Yw-UI-voz.normalTitle" = "简介";
+
+/* Class = "UIButton"; normalTitle = "Take a quick tour"; ObjectID = "cTp-Rv-tcc"; */
+"cTp-Rv-tcc.normalTitle" = "简介";
+
+/* Class = "UIButton"; normalTitle = "Take a quick tour"; ObjectID = "xJC-hJ-cAP"; */
+"xJC-hJ-cAP.normalTitle" = "简介";

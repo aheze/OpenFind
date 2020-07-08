@@ -26,6 +26,39 @@ protocol ScrolledToColors: class {
 class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo, DeleteList {
     
 
+    @IBOutlet weak var quickTourView: UIView!
+    @IBOutlet weak var quickTourHeightC: NSLayoutConstraint! /// 40
+    @IBOutlet weak var quickTourButton: UIButton!
+    @IBOutlet weak var closeQuickTourButton: UIButton!
+    
+    let defaults = UserDefaults.standard
+    @IBAction func quickTourButtonPressed(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ListsBuilderTutorialViewController") as! ListsBuilderTutorialViewController
+        
+        animateCloseQuickTour()
+        present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func closeQuickTourButtonPressed(_ sender: Any) {
+        animateCloseQuickTour()
+    }
+    
+    func animateCloseQuickTour() {
+        defaults.set(true, forKey: "listsBuilderViewedBefore")
+        
+        quickTourHeightC.constant = 0
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+            self.quickTourButton.alpha = 0
+            self.closeQuickTourButton.alpha = 0
+        }) { _ in
+            self.quickTourView.alpha = 0
+        }
+    }
+    
+    
     let originalListName = NSLocalizedString("originalListName", comment: "EditList def=Untitled")
     let originalDescriptionOfList = NSLocalizedString("originalDescriptionOfList", comment: "EditList def=No description...")
     
@@ -115,30 +148,26 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpViews()
-        let defaults = UserDefaults.standard
+        
+        
+        
         let listsViewedBefore = defaults.bool(forKey: "listsBuilderViewedBefore")
+        
         if listsViewedBefore == false {
-            defaults.set(true, forKey: "listsBuilderViewedBefore")
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "ListsBuilderTutorialViewController") as! ListsBuilderTutorialViewController
-            vc.view.layer.cornerRadius = 10
-            vc.view.clipsToBounds = true
             
-            var attributes = EKAttributes.centerFloat
-            attributes.displayDuration = .infinity
-            attributes.entryInteraction = .absorbTouches
-            attributes.scroll = .disabled
-            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-            attributes.entryBackground = .color(color: .white)
-            attributes.screenInteraction = .absorbTouches
-            attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
-            attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                SwiftEntryKit.display(entry: vc, using: attributes)
+            quickTourHeightC.constant = 40
+            UIView.animate(withDuration: 0.5, animations: {
+                self.view.layoutIfNeeded()
             })
+            
+        } else {
+            quickTourView.alpha = 0
+            quickTourButton.alpha = 0
+            closeQuickTourButton.alpha = 0
+            quickTourHeightC.constant = 0
         }
+        
+        setUpViews()
     }
     func setUpViews() {
         
@@ -184,7 +213,9 @@ class MakeNewList: UIViewController, GetGeneralInfo, GetIconInfo, GetColorInfo, 
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.top.equalTo(stretchyView.snp.bottom)
+//            make.top.equalTo(stretchyView.snp.bottom)
+            
+            make.top.equalTo(quickTourView.snp.bottom)
         }
         pagingViewController.textColor = UIColor(named: "PureBlack")!
         pagingViewController.backgroundColor = UIColor(named: "PureBlank")!

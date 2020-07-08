@@ -19,12 +19,12 @@ import SwiftEntryKit
     
         
     @IBAction func xPressed(_ sender: Any) {
-        SwiftEntryKit.dismiss()
+        self.dismiss(animated: true, completion: nil)
     }
         
     @IBOutlet weak var goButton: UIButton!
     @IBAction func goButtonPressed(_ sender: Any) {
-        SwiftEntryKit.dismiss()
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -147,12 +147,12 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
     
     
     @IBAction func historyXPressed(_ sender: Any) {
-        SwiftEntryKit.dismiss()
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBOutlet weak var goButton: UIButton!
     @IBAction func histGoButtonPressed(_ sender: Any) {
-        SwiftEntryKit.dismiss()
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -241,12 +241,12 @@ class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, Pa
     
     
     @IBAction func listsXPressed(_ sender: Any) {
-        SwiftEntryKit.dismiss()
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBOutlet weak var goButton: UIButton!
     @IBAction func listsGoButtonPressed(_ sender: Any) {
-        SwiftEntryKit.dismiss()
+        self.dismiss(animated: true, completion: nil)
     }
     
     
@@ -338,12 +338,12 @@ class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDeleg
     
     @IBOutlet weak var goButton: UIButton!
     @IBAction func listsGoButtonPressed(_ sender: Any) {
-        SwiftEntryKit.dismiss()
+        self.dismiss(animated: true, completion: nil)
     }
     
     
     @IBAction func listsBuilderXPressed(_ sender: Any) {
-        SwiftEntryKit.dismiss()
+        self.dismiss(animated: true, completion: nil)
     }
     
     

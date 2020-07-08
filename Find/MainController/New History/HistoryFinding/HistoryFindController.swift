@@ -65,6 +65,10 @@ class HistoryFindController: UIViewController {
     @IBOutlet var welcomeView: UIView!
     @IBOutlet weak var welcomeLabel: UILabel!
     
+    /// for detecting when Help or Cache Help was dismissed
+    weak var delegate: UIAdaptivePresentationControllerDelegate?
+    
+    
     @IBOutlet weak var welcomeImageButton: UIButton!
     @IBAction func welcomeImageButtonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -75,54 +79,59 @@ class HistoryFindController: UIViewController {
         viewControllerPresent.urlString = "https://zjohnzheng.github.io/FindHelp/History-WhatIsTheCache.html"
         viewControllerPresent.topViewColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
         
-        viewControllerPresent.view.layer.cornerRadius = 10
-        viewControllerPresent.view.clipsToBounds = true
-        viewControllerPresent.edgesForExtendedLayout = []
-        
-        var attributes = EKAttributes.centerFloat
-        attributes.displayDuration = .infinity
-        attributes.entryInteraction = .absorbTouches
-        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-        attributes.entryBackground = .color(color: .white)
-        attributes.screenInteraction = .absorbTouches
-        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
-        attributes.lifecycleEvents.willDisappear = {
-            
-            var attributes = EKAttributes.bottomFloat
-            attributes.entryBackground = .color(color: .white)
-            attributes.entranceAnimation = .translation
-            attributes.exitAnimation = .translation
-            attributes.displayDuration = .infinity
-            attributes.positionConstraints.size.height = .constant(value: 60)
-            attributes.statusBar = .light
-            attributes.entryInteraction = .absorbTouches
-            attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
-            attributes.roundCorners = .all(radius: 5)
-            attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
-            
-            let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
-            let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
-            attributes.positionConstraints.keyboardRelation = keyboardRelation
-            
-            let customView = FindBar()
-            customView.returnTerms = self
-            self.giveNumber = customView
-            customView.highlightColor = self.highlightColor
-            
-            self.changeFindbar = customView
-            let edgeWidth = CGFloat(600)
-            attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
-            
-            SwiftEntryKit.display(entry: customView, using: attributes)
-            
-            self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText, labelObject: self.savedLabelObject)
-        }
-        
         changeFindbar?.change(type: "GetLists")
-        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
-        SwiftEntryKit.display(entry: viewControllerPresent, using: attributes)
+        SwiftEntryKit.dismiss()
+        viewControllerPresent.presentationController?.delegate = self
+        self.present(viewControllerPresent, animated: true, completion: nil)
+        
+//        viewControllerPresent.view.layer.cornerRadius = 10
+//        viewControllerPresent.view.clipsToBounds = true
+//        viewControllerPresent.edgesForExtendedLayout = []
+//
+//        var attributes = EKAttributes.centerFloat
+//        attributes.displayDuration = .infinity
+//        attributes.entryInteraction = .absorbTouches
+//        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+//        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+//        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+//        attributes.entryBackground = .color(color: .white)
+//        attributes.screenInteraction = .absorbTouches
+//        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
+//        attributes.lifecycleEvents.willDisappear = {
+//
+//            var attributes = EKAttributes.bottomFloat
+//            attributes.entryBackground = .color(color: .white)
+//            attributes.entranceAnimation = .translation
+//            attributes.exitAnimation = .translation
+//            attributes.displayDuration = .infinity
+//            attributes.positionConstraints.size.height = .constant(value: 60)
+//            attributes.statusBar = .light
+//            attributes.entryInteraction = .absorbTouches
+//            attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+//            attributes.roundCorners = .all(radius: 5)
+//            attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
+//
+//            let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
+//            let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
+//            attributes.positionConstraints.keyboardRelation = keyboardRelation
+//
+//            let customView = FindBar()
+//            customView.returnTerms = self
+//            self.giveNumber = customView
+//            customView.highlightColor = self.highlightColor
+//
+//            self.changeFindbar = customView
+//            let edgeWidth = CGFloat(600)
+//            attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
+//
+//            SwiftEntryKit.display(entry: customView, using: attributes)
+//
+//            self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText, labelObject: self.savedLabelObject)
+//        }
+//
+//        changeFindbar?.change(type: "GetLists")
+//        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
+//        SwiftEntryKit.display(entry: viewControllerPresent, using: attributes)
     }
     
     @IBOutlet weak var tableView: UITableView!
@@ -144,56 +153,63 @@ class HistoryFindController: UIViewController {
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         navBarAppearance.backgroundColor = #colorLiteral(red: 0.1019607843, green: 0.6823529412, blue: 0.937254902, alpha: 1)
+        
         navigationController.navigationBar.standardAppearance = navBarAppearance
         navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
         navigationController.view.layer.cornerRadius = 10
         UINavigationBar.appearance().barTintColor = .black
-        helpViewController.edgesForExtendedLayout = []
-        
-        var attributes = EKAttributes.centerFloat
-        attributes.displayDuration = .infinity
-        attributes.entryInteraction = .absorbTouches
-        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-        attributes.entryBackground = .color(color: .white)
-        attributes.screenInteraction = .absorbTouches
-        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
-        attributes.lifecycleEvents.willDisappear = {
-            
-            var attributes = EKAttributes.bottomFloat
-            attributes.entryBackground = .color(color: .white)
-            attributes.entranceAnimation = .translation
-            attributes.exitAnimation = .translation
-            attributes.displayDuration = .infinity
-            attributes.positionConstraints.size.height = .constant(value: 60)
-            attributes.statusBar = .light
-            attributes.entryInteraction = .absorbTouches
-            attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
-            attributes.roundCorners = .all(radius: 5)
-            attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
-            
-            let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
-            let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
-            attributes.positionConstraints.keyboardRelation = keyboardRelation
-            
-            let customView = FindBar()
-            customView.returnTerms = self
-            customView.highlightColor = self.highlightColor
-            self.giveNumber = customView
-            
-            self.changeFindbar = customView
-            let edgeWidth = CGFloat(600)
-            attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
-            SwiftEntryKit.display(entry: customView, using: attributes)
-            
-            self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText, labelObject: self.savedLabelObject)
-            
-        }
+//        helpViewController.edgesForExtendedLayout = []
         
         changeFindbar?.change(type: "GetLists")
-        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
-        SwiftEntryKit.display(entry: navigationController, using: attributes)
+        SwiftEntryKit.dismiss()
+//        helpViewController.presentationController?.delegate = self
+        navigationController.presentationController?.delegate = self
+        self.present(navigationController, animated: true, completion: nil)
+        
+//        var attributes = EKAttributes.centerFloat
+//        attributes.displayDuration = .infinity
+//        attributes.entryInteraction = .absorbTouches
+//        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+//        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+//        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+//        attributes.entryBackground = .color(color: .white)
+//        attributes.screenInteraction = .absorbTouches
+//        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
+//        attributes.lifecycleEvents.willDisappear = {
+//
+//            var attributes = EKAttributes.bottomFloat
+//            attributes.entryBackground = .color(color: .white)
+//            attributes.entranceAnimation = .translation
+//            attributes.exitAnimation = .translation
+//            attributes.displayDuration = .infinity
+//            attributes.positionConstraints.size.height = .constant(value: 60)
+//            attributes.statusBar = .light
+//            attributes.entryInteraction = .absorbTouches
+//            attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+//            attributes.roundCorners = .all(radius: 5)
+//            attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
+//
+//            let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
+//            let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
+//            attributes.positionConstraints.keyboardRelation = keyboardRelation
+//
+//            let customView = FindBar()
+//            customView.returnTerms = self
+//            customView.highlightColor = self.highlightColor
+//            self.giveNumber = customView
+//
+//            self.changeFindbar = customView
+//            let edgeWidth = CGFloat(600)
+//            attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
+//            SwiftEntryKit.display(entry: customView, using: attributes)
+//
+//            self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText, labelObject: self.savedLabelObject)
+//
+//        }
+//
+        
+//        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
+//        SwiftEntryKit.display(entry: navigationController, using: attributes)
     }
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -242,6 +258,7 @@ class HistoryFindController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         
         var attributes = EKAttributes.bottomFloat
@@ -1337,6 +1354,42 @@ extension HistoryFindController {
     }
 }
 
+extension HistoryFindController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        print("presentationControllerDidDismiss")
+        rePresentFindBar()
+    }
+    func rePresentFindBar() {
+        var attributes = EKAttributes.bottomFloat
+        attributes.entryBackground = .color(color: .white)
+        attributes.entranceAnimation = .translation
+        attributes.exitAnimation = .translation
+        attributes.displayDuration = .infinity
+        attributes.positionConstraints.size.height = .constant(value: 60)
+        attributes.statusBar = .light
+        attributes.entryInteraction = .absorbTouches
+        attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+        attributes.roundCorners = .all(radius: 5)
+        attributes.shadow = .active(with: .init(color: .black, opacity: 0.35, radius: 6, offset: .zero))
+        
+        let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
+        let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
+        attributes.positionConstraints.keyboardRelation = keyboardRelation
+        
+        let customView = FindBar()
+        customView.returnTerms = self
+        self.giveNumber = customView
+        customView.highlightColor = self.highlightColor
+        
+        self.changeFindbar = customView
+        let edgeWidth = CGFloat(600)
+        attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
+        
+        SwiftEntryKit.display(entry: customView, using: attributes)
+        
+        self.changeFindbar?.giveLists(lists: self.savedSelectedLists, searchText: self.savedTextfieldText, labelObject: self.savedLabelObject)
+    }
+}
 
 extension HistoryFindController {
     func distance(_ a: CGPoint, _ b: CGPoint) -> CGFloat {

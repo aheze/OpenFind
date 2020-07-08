@@ -179,12 +179,12 @@ extension ViewController {
     
     @objc func tappedOnStats() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let cacheController = storyboard.instantiateViewController(withIdentifier: "StatsViewController") as! StatsViewController
-        cacheController.view.layer.cornerRadius = 10
-        cacheController.view.clipsToBounds = true
-        cacheController.edgesForExtendedLayout = []
+        let statsViewController = storyboard.instantiateViewController(withIdentifier: "StatsViewController") as! StatsViewController
+        statsViewController.view.layer.cornerRadius = 10
+        statsViewController.view.clipsToBounds = true
+        statsViewController.edgesForExtendedLayout = []
         
-        self.updateStatsNumber = cacheController
+        self.updateStatsNumber = statsViewController
         
         let boldAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .bold)]
         let regularAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .regular)]
@@ -196,10 +196,9 @@ extension ViewController {
         let newString = NSMutableAttributedString()
         newString.append(boldText)
         newString.append(regularText)
-        cacheController.currentlyHowManyMatches.attributedText = newString
+        statsViewController.currentlyHowManyMatches.attributedText = newString
         
         let currentlySearchingFor = NSLocalizedString("currentlySearchingFor", comment: "Stats def=Currently searching for")
-        
         
         if allowSearch == true {
             var wordsFinding = [String]()
@@ -223,21 +222,15 @@ extension ViewController {
                 let string = String.localizedStringWithFormat(quotexquoteSpaceAndquotexquote, wordsFinding[0], wordsFinding[1])
                 finalMatchesString = string
                 
-              
-                
-                
-//                finalMatchesString = "\"\(wordsFinding[0])\" and \"\(wordsFinding[1])\""
              default:
                 for (index, message) in wordsFinding.enumerated() {
                     if index != wordsFinding.count - 1 {
                         let quotexquoteCommaSpace = NSLocalizedString("quote %@ quoteCommaSpace", comment: "Stats def=\"x\", ")
                         let string = String.localizedStringWithFormat(quotexquoteCommaSpace, message)
-//                        finalMatchesString.append("\"\(message)\", ")
                         finalMatchesString.append(string)
                     } else {
                         let spaceAndSpacequotexquote = NSLocalizedString("spaceAndSpacequote %@ quote", comment: "Stats def= and \"x\"")
                         let string = String.localizedStringWithFormat(spaceAndSpacequotexquote, message)
-//                        finalMatchesString.append(" and \"\(message)\"")
                         finalMatchesString.append(string)
                     }
                 }
@@ -247,14 +240,10 @@ extension ViewController {
             let theseWordsColon = NSLocalizedString("theseWords", comment: "Stats def=these words")
             
             
-            
             var thisWord = thisWordColon
             if wordsFinding.count != 1 {
                 thisWord = theseWordsColon
             }
-//            var wordsThis = "these"
-//            var wordS = "s"
-//            if wordsFinding.count == 1 { wordsThis = "this"; wordS = "" }
             
             let regularMatchesText = NSAttributedString(string: "\(currentlySearchingFor) \(thisWord): ", attributes: regularAttribute)
             let boldMatchesText = NSAttributedString(string: finalMatchesString, attributes: boldAttribute)
@@ -262,7 +251,7 @@ extension ViewController {
             let newMatches = NSMutableAttributedString()
             newMatches.append(regularMatchesText)
             newMatches.append(boldMatchesText)
-            cacheController.currentSearchingForTheseWords.attributedText = newMatches
+            statsViewController.currentSearchingForTheseWords.attributedText = newMatches
             
         } else {
             let regularMatchesText = NSAttributedString(string: "\(currentlySearchingFor): ", attributes: regularAttribute)
@@ -273,7 +262,7 @@ extension ViewController {
             let newMatches = NSMutableAttributedString()
             newMatches.append(regularMatchesText)
             newMatches.append(boldMatchesText)
-            cacheController.currentSearchingForTheseWords.attributedText = newMatches
+            statsViewController.currentSearchingForTheseWords.attributedText = newMatches
         }
     
         
@@ -287,7 +276,8 @@ extension ViewController {
         attributes.screenInteraction = .absorbTouches
         attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
         attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
-        SwiftEntryKit.display(entry: cacheController, using: attributes)
+        attributes.statusBar = .hidden
+        SwiftEntryKit.display(entry: statsViewController, using: attributes)
         
     }
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {

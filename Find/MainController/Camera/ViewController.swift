@@ -49,7 +49,7 @@ class ViewController: UIViewController {
 //    var versionStore = WhatsNewVersionStore()
     // Local KeyValueStore
     let keyValueVersionStore = KeyValueWhatsNewVersionStore(keyValueable: UserDefaults.standard)
-    let updateImportantShouldPresentWhatsNew = true
+    let updateImportantShouldPresentWhatsNew = false
     var shouldPresentWhatsNew = false
     
     
@@ -571,26 +571,23 @@ class ViewController: UIViewController {
         
         whatsNewButton.alpha = 0
         
-        if updateImportantShouldPresentWhatsNew {
-            if !keyValueVersionStore.has(version: WhatsNew.Version.current()) {
-                keyValueVersionStore.set(version: WhatsNew.Version.current())
-                //                print("Current Has")
-                //                /// presented already
-                //            } else {
-                /// not presented yet
-                print("Current Not")
-                
+        
+        if !keyValueVersionStore.has(version: WhatsNew.Version.current()) {
+            keyValueVersionStore.set(version: WhatsNew.Version.current())
+            
+            /// not presented yet
+            if updateImportantShouldPresentWhatsNew {
                 shouldPresentWhatsNew = true
-                
                 whatsNewHeightC.constant = 32
                 UIView.animate(withDuration: 1.5, animations: {
                     self.whatsNewView.alpha = 1
                     self.whatsNewButton.alpha = 1
                     self.whatsNewView.layoutIfNeeded()
                 })
-                
             }
+            
         }
+        
         
     }
     

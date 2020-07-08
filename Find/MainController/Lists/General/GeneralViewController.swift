@@ -10,12 +10,6 @@ import UIKit
 import RealmSwift
 import SwiftEntryKit
 
-//enum GeneralSpaceError {
-//    case hasStartSpace
-//    case hasEndSpace
-//    case isSingleSpace
-//}
-
 protocol GetGeneralInfo: class {
     func returnNewGeneral(nameOfList: String, desc: String, contentsOfList: [String], hasErrors: Bool, overrideMake: Bool)
 }
@@ -252,41 +246,57 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         let helpViewController = storyboard.instantiateViewController(withIdentifier: "DefaultHelpController") as! DefaultHelpController
         
         let help = NSLocalizedString("help", comment: "Multipurpose def=Help")
-        
         helpViewController.title = help
         
+//        let navigationController = UINavigationController(rootViewController: helpViewController)
+//        navigationController.view.backgroundColor = UIColor.clear
+//        navigationController.navigationBar.tintColor = UIColor.white
+//        navigationController.navigationBar.prefersLargeTitles = true
+//        
+//        let navBarAppearance = UINavigationBarAppearance()
+//        navBarAppearance.configureWithOpaqueBackground()
+//        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+//        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+//        navBarAppearance.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+//        navigationController.navigationBar.standardAppearance = navBarAppearance
+//        navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
+//        
+//        
+//        navigationController.view.layer.cornerRadius = 10
+//        UINavigationBar.appearance().barTintColor = .black
+//        helpViewController.edgesForExtendedLayout = []
+//        
+//        var attributes = EKAttributes.centerFloat
+//        attributes.displayDuration = .infinity
+//        attributes.entryInteraction = .absorbTouches
+//        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+//        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+//        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+//        attributes.entryBackground = .color(color: .white)
+//        attributes.screenInteraction = .absorbTouches
+//        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
+//        
+//        
+//        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
+//        
+//        SwiftEntryKit.display(entry: navigationController, using: attributes)
+//        
+//        
+
         let navigationController = UINavigationController(rootViewController: helpViewController)
-        navigationController.view.backgroundColor = UIColor.clear
         navigationController.navigationBar.tintColor = UIColor.white
         navigationController.navigationBar.prefersLargeTitles = true
-        
+
         let navBarAppearance = UINavigationBarAppearance()
         navBarAppearance.configureWithOpaqueBackground()
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         navBarAppearance.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        
         navigationController.navigationBar.standardAppearance = navBarAppearance
         navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
         
-        
-        navigationController.view.layer.cornerRadius = 10
-        UINavigationBar.appearance().barTintColor = .black
-        helpViewController.edgesForExtendedLayout = []
-        
-        var attributes = EKAttributes.centerFloat
-        attributes.displayDuration = .infinity
-        attributes.entryInteraction = .absorbTouches
-        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-        attributes.entryBackground = .color(color: .white)
-        attributes.screenInteraction = .absorbTouches
-        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
-        
-        
-        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
-        
-        SwiftEntryKit.display(entry: navigationController, using: attributes)
+        self.present(navigationController, animated: true, completion: nil)
     }
     
     

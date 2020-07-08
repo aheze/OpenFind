@@ -115,5 +115,7 @@ class HistorySelectorView: UIView, ChangeNumberOfSelected, ChangeAttributes {
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        cacheButton.imageView?.contentMode = .scaleAspectFill
     }
 }

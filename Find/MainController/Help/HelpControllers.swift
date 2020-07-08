@@ -15,31 +15,31 @@ class HelpObject: NSObject {
     var title = ""
     var urlPath = ""
 }
-class PresentHelp {
-    static func displayWithURL(urlString: String, topLabelText: String, color: UIColor) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewControllerPresent = storyboard.instantiateViewController(withIdentifier: "SingleHelp") as! SingleHelp
-        viewControllerPresent.topLabelText = topLabelText
-        viewControllerPresent.urlString = urlString
-        viewControllerPresent.topViewColor = color
-        
-        viewControllerPresent.view.layer.cornerRadius = 10
-        viewControllerPresent.view.clipsToBounds = true
-        viewControllerPresent.edgesForExtendedLayout = []
-        
-        var attributes = EKAttributes.centerFloat
-        attributes.displayDuration = .infinity
-        attributes.entryInteraction = .absorbTouches
-        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-        attributes.entryBackground = .color(color: .white)
-        attributes.screenInteraction = .absorbTouches
-        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
-        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
-        SwiftEntryKit.display(entry: viewControllerPresent, using: attributes)
-    }
-}
+//class PresentHelp {
+//    static func displayWithURL(urlString: String, topLabelText: String, color: UIColor) {
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let viewControllerPresent = storyboard.instantiateViewController(withIdentifier: "SingleHelp") as! SingleHelp
+//        viewControllerPresent.topLabelText = topLabelText
+//        viewControllerPresent.urlString = urlString
+//        viewControllerPresent.topViewColor = color
+//        
+////        viewControllerPresent.view.layer.cornerRadius = 10
+////        viewControllerPresent.view.clipsToBounds = true
+////        viewControllerPresent.edgesForExtendedLayout = []
+////
+////        var attributes = EKAttributes.centerFloat
+////        attributes.displayDuration = .infinity
+////        attributes.entryInteraction = .absorbTouches
+////        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+////        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+////        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+////        attributes.entryBackground = .color(color: .white)
+////        attributes.screenInteraction = .absorbTouches
+////        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
+////        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
+////        SwiftEntryKit.display(entry: viewControllerPresent, using: attributes)
+//    }
+//}
 class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var helpObjects = [HelpObject]()
@@ -79,7 +79,6 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     @IBOutlet weak var tableView: UITableView!
-    
     
     
     override func viewDidLoad() {
@@ -140,7 +139,12 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     @objc func closeTapped() {
-        SwiftEntryKit.dismiss()
+//        SwiftEntryKit.dismiss()
+        if let pvc = self.navigationController?.presentationController {
+            print("has presentation controller, Navigation")
+            pvc.delegate?.presentationControllerDidDismiss?(pvc)
+        }
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

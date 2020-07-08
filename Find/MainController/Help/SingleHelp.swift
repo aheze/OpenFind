@@ -19,7 +19,11 @@ class SingleHelp: UIViewController, WKNavigationDelegate {
     @IBOutlet weak var doneButton: UIButton!
     
     @IBAction func doneButtonPressed(_ sender: Any) {
-        SwiftEntryKit.dismiss()
+//        SwiftEntryKit.dismiss()
+        if let pvc = self.presentationController {
+            pvc.delegate?.presentationControllerDidDismiss?(pvc)
+        }
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBOutlet weak var topView: UIView!

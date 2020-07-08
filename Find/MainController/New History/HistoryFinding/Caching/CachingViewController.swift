@@ -336,7 +336,11 @@ extension CachingViewController {
         }
         count += 1
         DispatchQueue.main.async {
-            self.numberCachedLabel.text = "\(self.count)/\(self.photos.count) photos cached"
+//            self.numberCachedLabel.text = "\(self.count)/\(self.photos.count) photos cached"
+            
+            let xSlashxPhotosCached = NSLocalizedString("%d Slash %d PhotosCached", comment: "CachingViewController def=x/x photos cached")
+            let string = String.localizedStringWithFormat(xSlashxPhotosCached, self.count, self.photos.count)
+            self.numberCachedLabel.text = string
         }
         
         guard let results = request?.results, results.count > 0 else {
@@ -455,7 +459,11 @@ extension CachingViewController {
         discardButton.layer.cornerRadius = 6
         backButton.layer.cornerRadius = backButton.frame.size.height / 2
         
-        numberCachedLabel.text = "0/\(photos.count) photos cached"
+        let xSlashxPhotosCached = NSLocalizedString("%d Slash %d PhotosCached", comment: "CachingViewController def=x/x photos cached")
+        let string = String.localizedStringWithFormat(xSlashxPhotosCached, 0, photos.count)
+        numberCachedLabel.text = string
+
+//        numberCachedLabel.text = "0/\(photos.count) photos cached"
         
         baseView.bringSubviewToFront(activityIndicator)
     }

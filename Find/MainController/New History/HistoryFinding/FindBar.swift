@@ -61,7 +61,6 @@ class FindBar: UIView, UITextFieldDelegate {
             UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5) {
                 self.warningButton.alpha = 0
                 self.layoutIfNeeded()
-                
             }
             
             self.warningButton.isHidden = true
@@ -283,9 +282,10 @@ extension FindBar: ChangeFindBar {
             collViewRightC.constant = availibleWidth
             searchLeftC.constant = 111 + 3 + 12
         }
-        UIView.animate(withDuration: 0.3, animations: {
+        
+//        UIView.animate(withDuration: 0.3, animations: {
             self.layoutIfNeeded()
-        })
+//        })
     
         if hasExpandedAlert == true {
             warningWidth.constant = searchField.frame.size.width

@@ -101,7 +101,7 @@ class SettingsViewController: UIViewController {
     @IBAction func textDetectIndicatorPressed(_ sender: Any) {
         
         let textDetectedIndicator = NSLocalizedString("textDetectedIndicator", comment: "Settings def=Text Detected Indicator")
-        PresentHelp.displayWithURL(urlString: "https://zjohnzheng.github.io/FindHelp/Settings-TextDetectIndicator.html", topLabelText: textDetectedIndicator, color: #colorLiteral(red: 0, green: 0.6156862745, blue: 0.937254902, alpha: 1))
+        displayWithURL(urlString: "https://zjohnzheng.github.io/FindHelp/Settings-TextDetectIndicator.html", topLabelText: textDetectedIndicator, color: #colorLiteral(red: 0, green: 0.6156862745, blue: 0.937254902, alpha: 1))
     }
     
     @IBOutlet weak var textDetectSwitch: UISwitch!
@@ -119,7 +119,7 @@ class SettingsViewController: UIViewController {
     @IBAction func hapticFeedbackPressed(_ sender: Any) {
         let hapticFeedback = NSLocalizedString("hapticFeedback", comment: "Settings def=Haptic Feedback")
         
-        PresentHelp.displayWithURL(urlString: "https://zjohnzheng.github.io/FindHelp/Settings-HapticFeedback.html", topLabelText: hapticFeedback, color: #colorLiteral(red: 0, green: 0.6156862745, blue: 0.937254902, alpha: 1))
+        displayWithURL(urlString: "https://zjohnzheng.github.io/FindHelp/Settings-HapticFeedback.html", topLabelText: hapticFeedback, color: #colorLiteral(red: 0, green: 0.6156862745, blue: 0.937254902, alpha: 1))
         
     }
     
@@ -156,76 +156,22 @@ class SettingsViewController: UIViewController {
         alert.addAction(UIAlertAction(title: generalTutorial, style: UIAlertAction.Style.default, handler: { _ in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "GeneralTutorialViewController") as! GeneralTutorialViewController
-            vc.view.layer.cornerRadius = 10
-            vc.view.clipsToBounds = true
-            
-            var attributes = EKAttributes.centerFloat
-            attributes.displayDuration = .infinity
-            attributes.entryInteraction = .absorbTouches
-            attributes.scroll = .disabled
-            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-            attributes.entryBackground = .color(color: .white)
-            attributes.screenInteraction = .absorbTouches
-            attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
-            attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
-            SwiftEntryKit.display(entry: vc, using: attributes)
-            
+            self.present(vc, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: photosTutorial, style: UIAlertAction.Style.default, handler: { _ in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "HistoryTutorialViewController") as! HistoryTutorialViewController
-            vc.view.layer.cornerRadius = 10
-            vc.view.clipsToBounds = true
-            
-            var attributes = EKAttributes.centerFloat
-            attributes.displayDuration = .infinity
-            attributes.entryInteraction = .absorbTouches
-            attributes.scroll = .disabled
-            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-            attributes.entryBackground = .color(color: .white)
-            attributes.screenInteraction = .absorbTouches
-            attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
-            attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
-            SwiftEntryKit.display(entry: vc, using: attributes)
-            
+            self.present(vc, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: listsTutorial, style: UIAlertAction.Style.default, handler: { _ in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "ListsTutorialViewController") as! ListsTutorialViewController
-            vc.view.layer.cornerRadius = 10
-            vc.view.clipsToBounds = true
-            
-            var attributes = EKAttributes.centerFloat
-            attributes.displayDuration = .infinity
-            attributes.entryInteraction = .absorbTouches
-            attributes.scroll = .disabled
-            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-            attributes.entryBackground = .color(color: .white)
-            attributes.screenInteraction = .absorbTouches
-            attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
-            attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
-            SwiftEntryKit.display(entry: vc, using: attributes)
+            self.present(vc, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: listsBuilderTutorial, style: UIAlertAction.Style.default, handler: { _ in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "ListsBuilderTutorialViewController") as! ListsBuilderTutorialViewController
-            vc.view.layer.cornerRadius = 10
-            vc.view.clipsToBounds = true
-            
-            var attributes = EKAttributes.centerFloat
-            attributes.displayDuration = .infinity
-            attributes.entryInteraction = .absorbTouches
-            attributes.scroll = .disabled
-            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-            attributes.entryBackground = .color(color: .white)
-            attributes.screenInteraction = .absorbTouches
-            attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
-            attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
-            SwiftEntryKit.display(entry: vc, using: attributes)
+            self.present(vc, animated: true, completion: nil)
         }))
         
         let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
@@ -235,7 +181,6 @@ class SettingsViewController: UIViewController {
             popoverController.sourceRect = tutorialButton.bounds
         }
         self.present(alert, animated: true, completion: nil)
-//        GeneralTutorialViewController
     }
 //    let clear = NSLocalizedString("clear", comment: "Multipurpose def=Clear")
     let deleteLoc = NSLocalizedString("delete", comment: "Multipurpose def=Delete")
@@ -401,7 +346,7 @@ class SettingsViewController: UIViewController {
         defaults.set(true, forKey: "feedbackedAlready")
         let sendFeedback = NSLocalizedString("sendFeedback", comment: "Settings def=Send Feedback")
         
-        PresentHelp.displayWithURL(urlString: "https://forms.gle/agdyoB9PFfnv8cU1A/", topLabelText: sendFeedback, color: #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1))
+        displayWithURL(urlString: "https://forms.gle/agdyoB9PFfnv8cU1A/", topLabelText: sendFeedback, color: #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1))
     }
     
     @IBAction func rateAppPressed(_ sender: Any) {
@@ -467,7 +412,30 @@ class SettingsViewController: UIViewController {
 
 
 extension SettingsViewController {
-    
+    func displayWithURL(urlString: String, topLabelText: String, color: UIColor) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewControllerPresent = storyboard.instantiateViewController(withIdentifier: "SingleHelp") as! SingleHelp
+        viewControllerPresent.topLabelText = topLabelText
+        viewControllerPresent.urlString = urlString
+        viewControllerPresent.topViewColor = color
+        self.present(viewControllerPresent, animated: true, completion: nil)
+        
+//        viewControllerPresent.view.layer.cornerRadius = 10
+//        viewControllerPresent.view.clipsToBounds = true
+//        viewControllerPresent.edgesForExtendedLayout = []
+//
+//        var attributes = EKAttributes.centerFloat
+//        attributes.displayDuration = .infinity
+//        attributes.entryInteraction = .absorbTouches
+//        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+//        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+//        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+//        attributes.entryBackground = .color(color: .white)
+//        attributes.screenInteraction = .absorbTouches
+//        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
+//        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
+//        SwiftEntryKit.display(entry: viewControllerPresent, using: attributes)
+    }
     func displayHelpController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let helpViewController = storyboard.instantiateViewController(withIdentifier: "DefaultHelpController") as! DefaultHelpController
@@ -477,7 +445,7 @@ extension SettingsViewController {
         helpViewController.helpJsonKey = "SettingsHelpArray"
         
         let navigationController = UINavigationController(rootViewController: helpViewController)
-        navigationController.view.backgroundColor = UIColor.clear
+//        navigationController.view.backgroundColor = UIColor.clear
         navigationController.navigationBar.tintColor = UIColor.white
         navigationController.navigationBar.prefersLargeTitles = true
         
@@ -488,20 +456,21 @@ extension SettingsViewController {
         navBarAppearance.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         navigationController.navigationBar.standardAppearance = navBarAppearance
         navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
-        navigationController.view.layer.cornerRadius = 10
+//        navigationController.view.layer.cornerRadius = 10
         UINavigationBar.appearance().barTintColor = .black
-        helpViewController.edgesForExtendedLayout = []
-        
-        var attributes = EKAttributes.centerFloat
-        attributes.displayDuration = .infinity
-        attributes.entryInteraction = .absorbTouches
-        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-        attributes.entryBackground = .color(color: .white)
-        attributes.screenInteraction = .absorbTouches
-        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
-        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
-        SwiftEntryKit.display(entry: navigationController, using: attributes)
+//        helpViewController.edgesForExtendedLayout = []
+//
+        self.present(navigationController, animated: true, completion: nil)
+//        var attributes = EKAttributes.centerFloat
+//        attributes.displayDuration = .infinity
+//        attributes.entryInteraction = .absorbTouches
+//        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+//        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+//        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+//        attributes.entryBackground = .color(color: .white)
+//        attributes.screenInteraction = .absorbTouches
+//        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
+//        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
+//        SwiftEntryKit.display(entry: navigationController, using: attributes)
     }
 }
