@@ -23,6 +23,5 @@ extension ViewController {
             return }
         globalUrl = url
     }
- 
 }
 

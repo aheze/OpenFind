@@ -35,7 +35,9 @@ class ListToolBar: UIView, InjectLists {
             var effect = UIBlurEffect()
             if lightMode == true {
                 
-                effect = UIBlurEffect(style: .systemThickMaterialLight)
+                /// based on the system, don't force dark
+                
+                effect = UIBlurEffect(style: .systemThickMaterial)
                 
                 removeAllButton.backgroundColor = UIColor(named: "Gray3")
                 newMatchButton.backgroundColor = UIColor(named: "Gray3")

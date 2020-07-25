@@ -31,7 +31,8 @@ class StatsViewController: UIViewController, UpdateMatchesNumberStats {
     }
      
     @IBAction func xButtonPressed(_ sender: Any) {
-        SwiftEntryKit.dismiss()
+//        SwiftEntryKit.dismiss()
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBOutlet weak var justForFun: UILabel!

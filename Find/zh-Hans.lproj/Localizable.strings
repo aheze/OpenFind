@@ -71,7 +71,7 @@
 "and" = "和";
 
 /* TutorialLocalization def=Before you start... */
-"beforeYouStart" = "在您寻找前";
+"beforeYouStart" = "在您查找前";
 
 /* HistoryCollectionViewFiles def=Cache */
 "cache" = "快取";
@@ -206,7 +206,7 @@
 "findLoc" = "Find";
 
 /* TutorialLocalization def=...find multiple words at the same time! */
-"findMultipleWords" = "同时寻找多个词！";
+"findMultipleWords" = "同时查找多个词！";
 
 /* SetUpSearchBar def=Find is paused | Duplicates are not allowed */
 "findPausedDuplicatesNotAllowed" = "Find暂时暂停 | 不允许重复项";
@@ -293,7 +293,7 @@
 "locLaunchLists" = "使用清单";
 
 /*TutorialLocalization*/
-"locMakeLists" = "将多个词组合到清单中，一次寻找所有的词";
+"locMakeLists" = "将多个词组合到清单中，一次查找所有的词";
 
 /* TutorialLocalization def=Make a list */
 "makeAList" = "做清单";
@@ -338,10 +338,10 @@
 "noResultsFound" = "没有结果";
 
 /* HistoryFindController def=No results found in cache. Press Search on the keyboard to continue. */
-"noResultsInCache" = "在快取里没有结果。点按键盘上的 \"搜索\" 来继续寻找。";
+"noResultsInCache" = "在快取里没有结果。点按键盘上的 \"搜索\" 来继续查找。";
 
 /* Not all photos have been cached, so some search results will not appear immediately. Press 'search' on the keyboard to find using OCR. */
-"notAllSelectedPhotosAlreadyCached" = "并非所有照片都已有快取，因此某些搜索结果不会立即显示。 按键盘上的 \"搜索\" 来用OCR寻找.";
+"notAllSelectedPhotosAlreadyCached" = "并非所有照片都已有快取，因此某些搜索结果不会立即显示。 按键盘上的 \"搜索\" 来用OCR查找.";
 
 /* Stats def=Nothing! You have duplicates, so Find is currently paused. Make sure that there are no duplicates in the Search Bar. */
 "nothingHaveDuplicatesPaused" = "没有！ 您有重复项，因此Find当前已暂停。 确保搜索栏中没有重复项。";
@@ -353,7 +353,7 @@
 "numbersLoc" = "数字";
 
 /* HistoryFindController def=OCR search in progress! */
-"ocrSearchInProgress" = "正在用OCR寻找！";
+"ocrSearchInProgress" = "正在用OCR查找！";
 
 /* TutorialLocalization def=Once you've typed in your first match, just tap 'next' on the keyboard! Repeat until satisfied. */
 "onceYouveTypedInYourFirstMatch" = "输入第一个搜索词后，每加一个词，点击盘上的 \"下一项\"！";
@@ -392,7 +392,7 @@
 "photoSelected" = "张照片已选";
 
 /* TutorialLocalization def=...find again and again! */
-"photosFindAgainAndAgain" = "先储存，后寻找！";
+"photosFindAgainAndAgain" = "先储存，后查找！";
 
 /* StatsViewController def=photos */
 "photosPluralLoc" = "照片";
@@ -434,7 +434,7 @@
 "select" = "选择";
 
 /* TutorialLocalization def=Select a few photos, tap the Find icon, and enter the text that you want to find! */
-"selectAFewPhotos" = "点按 \"查找\" 图标，然后输入要寻找的词";
+"selectAFewPhotos" = "点按 \"查找\" 图标，然后输入要查找的词";
 
 /* NewHistoryViewController def=Select All */
 "selectAllLoc" = "全选";
@@ -497,7 +497,7 @@
 "tapSelectButtonAndPopUp" = "点击 \"选择\" 按钮，将控制项弹出，然后选择照片";
 
 /* TutorialLocalization def=Tap the shutter button, and they'll appear in Photos, where you can search in them later. */
-"tapShutterButton" = "点按快门，照片会储存在 \"照片\" 里，\n您以后可以在其中进行寻找。";
+"tapShutterButton" = "点按快门，照片会储存在 \"照片\" 里，\n您以后可以在其中进行查找。";
 
 /* TutorialLocalization def=Tap the Add button */
 "tapTheAddButton" = "点击 \"+\"  按钮";
@@ -581,7 +581,7 @@
 "whatsNewChineseSupport" = "中文翻译";
 
 /*WhatsNewConfiguration*/
-"whatsNewChineseSupportDetails" = "Find已翻译成了中文！ 但是，目前仅支持英语和拼音作为OCR（Optical Character Recognition）引擎的输入。"; /// 寻找词的软件
+"whatsNewChineseSupportDetails" = "Find已翻译成了中文！ 但是，目前仅支持英语和拼音作为OCR（Optical Character Recognition）引擎的输入。"; /// 查找词的软件
 
 /*WhatsNewConfiguration*/
 "whatsNewHistoryIsNowPhotos" = "中文翻译";

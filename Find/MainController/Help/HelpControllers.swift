@@ -15,31 +15,7 @@ class HelpObject: NSObject {
     var title = ""
     var urlPath = ""
 }
-//class PresentHelp {
-//    static func displayWithURL(urlString: String, topLabelText: String, color: UIColor) {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let viewControllerPresent = storyboard.instantiateViewController(withIdentifier: "SingleHelp") as! SingleHelp
-//        viewControllerPresent.topLabelText = topLabelText
-//        viewControllerPresent.urlString = urlString
-//        viewControllerPresent.topViewColor = color
-//        
-////        viewControllerPresent.view.layer.cornerRadius = 10
-////        viewControllerPresent.view.clipsToBounds = true
-////        viewControllerPresent.edgesForExtendedLayout = []
-////
-////        var attributes = EKAttributes.centerFloat
-////        attributes.displayDuration = .infinity
-////        attributes.entryInteraction = .absorbTouches
-////        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-////        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-////        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-////        attributes.entryBackground = .color(color: .white)
-////        attributes.screenInteraction = .absorbTouches
-////        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
-////        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
-////        SwiftEntryKit.display(entry: viewControllerPresent, using: attributes)
-//    }
-//}
+
 class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var helpObjects = [HelpObject]()
@@ -87,12 +63,10 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         tableView.alpha = 0
-//        tableView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-        
         
         let done = NSLocalizedString("done", comment: "Multipurpose def=Done")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: done, style: .plain, target: self, action: #selector(closeTapped))
-        if let url = URL(string: "https://raw.githubusercontent.com/zjohnzheng/FindHelp/master/1NavigatorDatasource.json") {
+        if let url = URL(string: "https://raw.githubusercontent.com/ahzzheng/FindHelp/master/1NavigatorDatasource.json") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 
                if let data = data {
@@ -190,9 +164,10 @@ class HelpController: UIViewController, WKNavigationDelegate {
             let myRequest = URLRequest(url: urlToLoad)
             webView.load(myRequest)
         } else {
-            let errorUrlToLoad = URL(string: "https://zjohnzheng.github.io/FindHelp/404.html")!
-            let myRequest = URLRequest(url: errorUrlToLoad)
-            webView.load(myRequest)
+            if let errorUrlToLoad = URL(string: "https://ahzzheng.github.io/FindHelp/404.html") {
+                let myRequest = URLRequest(url: errorUrlToLoad)
+                webView.load(myRequest)
+            }
         }
         
     }

@@ -258,7 +258,7 @@ extension NewHistoryViewController {
                 helpViewController.title = helpTitle
                 helpViewController.helpJsonKey = "HistoryFindHelpArray"
 //                helpViewController.goDirectlyToUrl = true
-//                helpViewController.directUrl = "https://zjohnzheng.github.io/FindHelp/History-HistoryControls.html"
+//                helpViewController.directUrl = "https://ahzzheng.github.io/FindHelp/History-HistoryControls.html"
 
                 let navigationController = UINavigationController(rootViewController: helpViewController)
                 navigationController.navigationBar.tintColor = UIColor.white

@@ -33,6 +33,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     let tapToDismiss = NSLocalizedString("tapToDismiss", comment: "Multipurpose def=Tap to dismiss")
     let cantBeUndone = NSLocalizedString("cantBeUndone", comment: "Multipurpose def=This action can't be undone.")
     
+    @IBOutlet weak var topBlurView: UIVisualEffectView!
     
     @IBOutlet weak var quickTourView: UIView!
     @IBOutlet weak var quickTourHeightC: NSLayoutConstraint! /// 40
@@ -57,20 +58,23 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func animateCloseQuickTour() {
         defaults.set(true, forKey: "historyViewedBefore")
-        
+        let topInset = topBlurView.frame.height
         quickTourHeightC.constant = 0
+        
+        self.collectionView.verticalScrollIndicatorInsets.top = topInset
+        
         UIView.animate(withDuration: 0.5, animations: {
             self.view.layoutIfNeeded()
             self.quickTourButton.alpha = 0
             self.closeQuickTourButton.alpha = 0
+            
+            self.collectionView.contentInset = UIEdgeInsets(top: topInset, left: 16, bottom: 82, right: 16)
+            
         }) { _ in
             self.quickTourView.alpha = 0
         }
     }
 
-    
-    
-    
     
     
     //MARK: Realm
@@ -380,7 +384,10 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         self.dismiss(animated: true, completion: nil)
     }
     
-    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(true)
+//        collectionView.setContentOffset(CGPoint(x: -collectionView.contentInset.left, y: 0), animated: true)
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -390,11 +397,37 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         populateRealm()
         sortHist()
         getData()
+        
+        let topInset = topBlurView.frame.height
+        let historyViewedBefore = defaults.bool(forKey: "historyViewedBefore")
+        if historyViewedBefore == false {
+            
+            collectionView.contentInset = UIEdgeInsets(top: topInset + 40, left: 16, bottom: 82, right: 16)
+            collectionView.verticalScrollIndicatorInsets.top = topInset + 40
+            
+            quickTourHeightC.constant = 40
+            UIView.animate(withDuration: 0.5, animations: {
+                self.view.layoutIfNeeded()
+            })
+        } else {
+            
+            print("history has been viewed before")
+            
+            collectionView.contentInset = UIEdgeInsets(top: topInset, left: 16, bottom: 82, right: 16)
+            collectionView.verticalScrollIndicatorInsets.top = topInset
+            
+            
+            quickTourView.alpha = 0
+            quickTourButton.alpha = 0
+            closeQuickTourButton.alpha = 0
+            quickTourHeightC.constant = 0
+        }
+        
         selectButton.layer.cornerRadius = 6
         selectAll.layer.cornerRadius = 6
         fadeSelectOptions(fadeOut: "firstTimeSetup")
         deselectAllItems(deselect: true)
-        collectionView?.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 82, right: 16)
+    
         if photoCategories?.count ?? 0 > 0 {
             if let samplePhoto = photoCategories?[0] {
                 
@@ -408,19 +441,9 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         indexPathsSelected.removeAll()
         
         
-        let historyViewedBefore = defaults.bool(forKey: "historyViewedBefore")
         
-        if historyViewedBefore == false {
-            quickTourHeightC.constant = 40
-            UIView.animate(withDuration: 0.5, animations: {
-                self.view.layoutIfNeeded()
-            })
-        } else {
-            quickTourView.alpha = 0
-            quickTourButton.alpha = 0
-            closeQuickTourButton.alpha = 0
-            quickTourHeightC.constant = 0
-        }
+        
+//        collectionView.lay
     }
     override func present(_ viewControllerToPresent: UIViewController,
                           animated flag: Bool,
@@ -1327,19 +1350,19 @@ extension NewHistoryViewController: PhotoPageContainerViewControllerDelegate {
                 }
             }
             selectedIndexPath = indexPath
-            
-            if let cell = collectionView.cellForItem(at: indexPath) as? HPhotoCell {
-                guard let hisModel = self.indexToData[indexPath.section] else { print("NO CELL MODEL"); return }
-                let historyModel = hisModel[indexPath.item]
-                if historyModel.isHearted == true {
-                    cell.heartView.alpha = 1
-                    cell.pinkTintView.alpha = 1
-                } else {
-                    cell.heartView.alpha = 0
-                    cell.pinkTintView.alpha = 0
-                }
-            }
-            
+//            
+//            if let cell = collectionView.cellForItem(at: indexPath) as? HPhotoCell {
+//                guard let hisModel = self.indexToData[indexPath.section] else { print("NO CELL MODEL"); return }
+//                let historyModel = hisModel[indexPath.item]
+//                if historyModel.isHearted == true {
+//                    cell.heartView.alpha = 1
+//                    cell.pinkTintView.alpha = 1
+//                } else {
+//                    cell.heartView.alpha = 0
+//                    cell.pinkTintView.alpha = 0
+//                }
+//            }
+//            
             self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
         }
     }

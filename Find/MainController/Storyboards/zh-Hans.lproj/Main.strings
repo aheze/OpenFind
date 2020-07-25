@@ -74,7 +74,7 @@
 "Hhg-Z1-44F.text" = "突出显示颜色";
 
 /* Class = "UILabel"; text = "Use lists to find multiple words at the same time. Make one by clicking the + button. "; ObjectID = "IcC-jV-a0m"; */
-"IcC-jV-a0m.text" = "用清单来同时寻找多个词. 点按 \"+\" 按钮来做一个！";
+"IcC-jV-a0m.text" = "用清单来同时查找多个词. 点按 \"+\" 按钮来做一个！";
 
 /* Class = "UILabel"; text = "No Photos"; ObjectID = "Iqa-IW-JHs"; */
 "Iqa-IW-JHs.text" = "没有照片";
@@ -209,7 +209,7 @@
 "lMV-xk-qWw.placeholder" = "搜索词";
 
 /* Class = "UILabel"; text = "OCR search in progress!"; ObjectID = "mJu-qT-9cJ"; */
-"mJu-qT-9cJ.text" = "正在用OCR寻找！";
+"mJu-qT-9cJ.text" = "正在用OCR查找！";
 
 /* Class = "UIButton"; normalTitle = "Rate\nthe App!"; ObjectID = "mp4-4Z-4cg"; */
 "mp4-4Z-4cg.normalTitle" = "给Find\n一个评价！";

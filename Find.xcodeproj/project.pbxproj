@@ -79,6 +79,7 @@
 		495F38FC2432C8FE00A17D93 /* Carte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38F92432C8FE00A17D93 /* Carte.swift */; };
 		495F38FE243302D500A17D93 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38FD243302D500A17D93 /* StatsViewController.swift */; };
 		495F39012433FF1600A17D93 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F39002433FF1600A17D93 /* LaunchViewController.swift */; };
+		495F7DAA24CBB3970053DE50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 495F7DAC24CBB3970053DE50 /* InfoPlist.strings */; };
 		4966B70A23DE98C800A8523A /* MakeNewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4966B70923DE98C800A8523A /* MakeNewList.swift */; };
 		4972B40E23F117C500843537 /* GeneralTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4972B40D23F117C500843537 /* GeneralTableviewCell.swift */; };
 		4979A39023AF3A4800B09380 /* FastMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979A38F23AF3A4800B09380 /* FastMode.swift */; };
@@ -214,6 +215,9 @@
 		495F38F92432C8FE00A17D93 /* Carte.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carte.swift; sourceTree = "<group>"; };
 		495F38FD243302D500A17D93 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		495F39002433FF1600A17D93 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		495F7DA624CBACE90053DE50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		495F7DAB24CBB3970053DE50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		495F7DAD24CBB39A0053DE50 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		4966B70923DE98C800A8523A /* MakeNewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeNewList.swift; sourceTree = "<group>"; };
 		4972B40D23F117C500843537 /* GeneralTableviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTableviewCell.swift; sourceTree = "<group>"; };
 		4979A38F23AF3A4800B09380 /* FastMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastMode.swift; sourceTree = "<group>"; };
@@ -233,7 +237,6 @@
 		4999AC9A2353A80A00AB06A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4999AC9C2353A81100AB06A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4999AC9F2353A81100AB06A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		4999ACA12353A81100AB06A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49A8EFAB237A5EFE00328D47 /* SetUpButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpButtons.swift; sourceTree = "<group>"; };
 		49A8EFAD237A5F2800328D47 /* SetUpSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpSearchBar.swift; sourceTree = "<group>"; };
 		49B7A32C2390823C0070209F /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -559,6 +562,8 @@
 				4911508A235D1A3E00EC0C04 /* BasicUtilities.swift */,
 				492A2D2524A4046200F9C4A1 /* BartyCrouch.swift */,
 				49FC8A9124AD1E920078783D /* Projector.swift */,
+				495F7DA624CBACE90053DE50 /* Info.plist */,
+				495F7DAC24CBB3970053DE50 /* InfoPlist.strings */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -640,7 +645,6 @@
 				4969373B2353C25B009CA41A /* Utilities */,
 				4999AC9C2353A81100AB06A7 /* Assets.xcassets */,
 				49B7A32C2390823C0070209F /* Colors.xcassets */,
-				4999ACA12353A81100AB06A7 /* Info.plist */,
 				49E9D89424996E1A0006757C /* Localizable.strings */,
 			);
 			path = Find;
@@ -803,6 +807,7 @@
 				4956352A2437A4B60001E8C6 /* defaultSeeds.realm in Resources */,
 				49E9D89224996E1A0006757C /* Localizable.strings in Resources */,
 				495DAD3624A6B2E500D5F844 /* FindBar.xib in Resources */,
+				495F7DAA24CBB3970053DE50 /* InfoPlist.strings in Resources */,
 				49D985B124188CA4005F4E92 /* NewListToolbarCell.xib in Resources */,
 				4999ACA02353A81100AB06A7 /* LaunchScreen.storyboard in Resources */,
 				49B7A32D2390823C0070209F /* Colors.xcassets in Resources */,
@@ -1032,6 +1037,15 @@
 			name = ListToolBar.xib;
 			sourceTree = "<group>";
 		};
+		495F7DAC24CBB3970053DE50 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				495F7DAB24CBB3970053DE50 /* en */,
+				495F7DAD24CBB39A0053DE50 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		4999AC992353A80A00AB06A7 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1186,12 +1200,12 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YA533DMD5J;
-				INFOPLIST_FILE = Find/Info.plist;
+				INFOPLIST_FILE = Find/Utilities/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1207,12 +1221,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YA533DMD5J;
-				INFOPLIST_FILE = Find/Info.plist;
+				INFOPLIST_FILE = Find/Utilities/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

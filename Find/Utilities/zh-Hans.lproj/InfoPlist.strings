@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  Find
+
+  Created by Zheng on 7/24/20.
+  Copyright © 2020 Andrew. All rights reserved.
+*/
+
+NSCameraUsageDescription = "使用您的相机来查找文字";
+
+NSPhotoLibraryAddUsageDescription = "添加照片到您的照片库";

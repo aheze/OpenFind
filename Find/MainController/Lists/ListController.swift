@@ -18,6 +18,7 @@ protocol ChangeNumberOfSelectedList: class {
 }
 class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLayoutDelegate, UIAdaptivePresentationControllerDelegate, NewListMade, TellControllerToDeleteList {
 
+    @IBOutlet weak var topBlurView: UIVisualEffectView!
     
     @IBOutlet weak var quickTourView: UIView!
     @IBOutlet weak var quickTourHeightC: NSLayoutConstraint! /// 40
@@ -44,10 +45,19 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         defaults.set(true, forKey: "listsViewedBefore")
         
         quickTourHeightC.constant = 0
+        
+        let topInset = topBlurView.frame.height
+        let padding = AdaptiveCollectionConfig.cellPadding
+        
+        self.collectionView.verticalScrollIndicatorInsets.top = topInset
+        
         UIView.animate(withDuration: 0.5, animations: {
             self.view.layoutIfNeeded()
             self.quickTourButton.alpha = 0
             self.closeQuickTourButton.alpha = 0
+            
+            
+            self.collectionView.contentInset = UIEdgeInsets(top: padding + topInset, left: padding, bottom: 82, right: padding)
         }) { _ in
             self.quickTourView.alpha = 0
         }
@@ -145,8 +155,6 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
             
             titleMessage = String.localizedStringWithFormat(deleteSelectedCountLists, indexPathsSelected.count)
             finishMessage = String.localizedStringWithFormat(finishedDeleteSelectedCountLists, indexPathsSelected.count)
-//            titleMessage = "Delete \(indexPathsSelected.count) lists?"
-//            finishMessage = "\(indexPathsSelected.count) lists deleted!"
         }
         
         let cantBeUndone = NSLocalizedString("cantBeUndone", comment: "Multipurpose def=This action can't be undone.")
@@ -307,9 +315,9 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         addListButton.layer.cornerRadius = 6
         addListButton.backgroundColor = UIColor(hexString: randomizedColor)
         
-        
+        let topInset = topBlurView.frame.height
         let padding = AdaptiveCollectionConfig.cellPadding
-        collectionView.contentInset = UIEdgeInsets(top: padding, left: padding, bottom: 82, right: padding)
+
         getData()
         collectionView.delaysContentTouches = false
         selectButton.layer.cornerRadius = 6
@@ -319,17 +327,25 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         
         if listsViewedBefore == false {
             
+            collectionView.contentInset = UIEdgeInsets(top: padding + topInset + 40, left: padding, bottom: 82, right: padding)
+            collectionView.verticalScrollIndicatorInsets.top = topInset + 40
+            
             quickTourHeightC.constant = 40
             UIView.animate(withDuration: 0.5, animations: {
                 self.view.layoutIfNeeded()
             })
             
         } else {
+            collectionView.contentInset = UIEdgeInsets(top: padding + topInset, left: padding, bottom: 82, right: padding)
+            collectionView.verticalScrollIndicatorInsets.top = topInset
+            
             quickTourView.alpha = 0
             quickTourButton.alpha = 0
             closeQuickTourButton.alpha = 0
             quickTourHeightC.constant = 0
         }
+        
+        
         
     }
     override func viewDidDisappear(_ animated: Bool) {
