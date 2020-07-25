@@ -15,7 +15,7 @@ class CreditsViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func followMeButtonPressed(_ sender: Any) {
-        if let urlToOpen = URL(string: "https://medium.com/@ahzzheng") {
+        if let urlToOpen = URL(string: "https://medium.com/@ahezheng") {
             UIApplication.shared.open(urlToOpen)
         }
     }
