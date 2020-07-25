@@ -203,7 +203,7 @@ class LaunchViewController: UIViewController {
                     self.drawAnimation(type: "fullScreenStart")
                 })
             case .notDetermined:
-                print("ND sdf sdf ")
+                print("ND")
                 shouldGoToSettings = false
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                     self.drawAnimation(type: "needPermissions")

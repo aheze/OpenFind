@@ -76,7 +76,7 @@ class HistoryFindController: UIViewController {
         
         let theCache = NSLocalizedString("theCache", comment: "HistoryFindController def=The Cache")
         viewControllerPresent.topLabelText = theCache
-        viewControllerPresent.urlString = "https://ahezheng.github.io/FindHelp/History-WhatIsTheCache.html"
+        viewControllerPresent.urlString = "https://aheze.github.io/FindHelp/History-WhatIsTheCache.html"
         viewControllerPresent.topViewColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
         
         changeFindbar?.change(type: "GetLists")

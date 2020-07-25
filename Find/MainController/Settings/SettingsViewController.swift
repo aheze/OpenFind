@@ -105,7 +105,7 @@ class SettingsViewController: UIViewController {
     @IBAction func textDetectIndicatorPressed(_ sender: Any) {
         
         let textDetectedIndicator = NSLocalizedString("textDetectedIndicator", comment: "Settings def=Text Detected Indicator")
-        displayWithURL(urlString: "https://ahezheng.github.io/FindHelp/Settings-TextDetectIndicator.html", topLabelText: textDetectedIndicator, color: #colorLiteral(red: 0, green: 0.6156862745, blue: 0.937254902, alpha: 1))
+        displayWithURL(urlString: "https://aheze.github.io/FindHelp/Settings-TextDetectIndicator.html", topLabelText: textDetectedIndicator, color: #colorLiteral(red: 0, green: 0.6156862745, blue: 0.937254902, alpha: 1))
     }
     
     @IBOutlet weak var textDetectSwitch: UISwitch!
@@ -123,7 +123,7 @@ class SettingsViewController: UIViewController {
     @IBAction func hapticFeedbackPressed(_ sender: Any) {
         let hapticFeedback = NSLocalizedString("hapticFeedback", comment: "Settings def=Haptic Feedback")
         
-        displayWithURL(urlString: "https://ahezheng.github.io/FindHelp/Settings-HapticFeedback.html", topLabelText: hapticFeedback, color: #colorLiteral(red: 0, green: 0.6156862745, blue: 0.937254902, alpha: 1))
+        displayWithURL(urlString: "https://aheze.github.io/FindHelp/Settings-HapticFeedback.html", topLabelText: hapticFeedback, color: #colorLiteral(red: 0, green: 0.6156862745, blue: 0.937254902, alpha: 1))
         
     }
     

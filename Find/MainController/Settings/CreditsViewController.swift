@@ -15,10 +15,34 @@ class CreditsViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func followMeButtonPressed(_ sender: Any) {
-        if let urlToOpen = URL(string: "https://medium.com/@ahezheng") {
+        if let urlToOpen = URL(string: "https://medium.com/@ahzzheng") {
             UIApplication.shared.open(urlToOpen)
         }
+        
+//        if let urlToOpen = URL(string: "https://medium.com/@ahzzheng") {
+//            print("open")
+//            let task = URLSession.shared.dataTask(with: urlToOpen) { _, response, _ in
+//                if let httpResponse = response as? HTTPURLResponse {
+//                    print("Status code: \(httpResponse.statusCode)")
+//
+//                    DispatchQueue.main.async {
+//                        if httpResponse.statusCode != 404 {
+//                            UIApplication.shared.open(urlToOpen)
+//                        } else {
+//
+//                            if let urlToOpen = URL(string: "https://medium.com/@aheze") {
+//                                UIApplication.shared.open(urlToOpen)
+//                            }
+//                        }
+//                    }
+//
+//                }
+//            }
+//            task.resume()
+//        }
     }
+    
+    
     
     
     @IBOutlet weak var textView: UITextView!

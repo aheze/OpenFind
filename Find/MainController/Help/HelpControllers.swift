@@ -66,7 +66,7 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
         
         let done = NSLocalizedString("done", comment: "Multipurpose def=Done")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: done, style: .plain, target: self, action: #selector(closeTapped))
-        if let url = URL(string: "https://raw.githubusercontent.com/ahezheng/FindHelp/master/1NavigatorDatasource.json") {
+        if let url = URL(string: "https://raw.githubusercontent.com/aheze/FindHelp/master/1NavigatorDatasource.json") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 
                if let data = data {
@@ -164,7 +164,7 @@ class HelpController: UIViewController, WKNavigationDelegate {
             let myRequest = URLRequest(url: urlToLoad)
             webView.load(myRequest)
         } else {
-            if let errorUrlToLoad = URL(string: "https://ahezheng.github.io/FindHelp/404.html") {
+            if let errorUrlToLoad = URL(string: "https://aheze.github.io/FindHelp/404.html") {
                 let myRequest = URLRequest(url: errorUrlToLoad)
                 webView.load(myRequest)
             }

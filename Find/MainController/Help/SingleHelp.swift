@@ -61,7 +61,7 @@ class SingleHelp: UIViewController, WKNavigationDelegate {
             let encounteredError = NSLocalizedString("encounteredError", comment: "SingleHelp def=Encountered an error")
             topLabel.text = encounteredError
             
-            if let errorUrlToLoad = URL(string: "https://ahezheng.github.io/FindHelp/404.html") {
+            if let errorUrlToLoad = URL(string: "https://aheze.github.io/FindHelp/404.html") {
                 let myRequest = URLRequest(url: errorUrlToLoad)
                 webView.load(myRequest)
             }
