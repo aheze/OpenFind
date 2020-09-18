@@ -748,7 +748,6 @@
 			buildConfigurationList = 4999ACA42353A81100AB06A7 /* Build configuration list for PBXNativeTarget "Find" */;
 			buildPhases = (
 				6D06741A707392F12B687239 /* [CP] Check Pods Manifest.lock */,
-				492A2D2424A4040000F9C4A1 /* Barty */,
 				4999AC8C2353A80A00AB06A7 /* Sources */,
 				4999AC8D2353A80A00AB06A7 /* Frameworks */,
 				4999AC8E2353A80A00AB06A7 /* Resources */,
@@ -823,24 +822,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		492A2D2424A4040000F9C4A1 /* Barty */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = Barty;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which bartycrouch > /dev/null; then\n    bartycrouch update -x\nelse\n    echo \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi\n";
-		};
 		495F38F52432BECF00A17D93 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1205,7 +1186,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1226,7 +1207,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

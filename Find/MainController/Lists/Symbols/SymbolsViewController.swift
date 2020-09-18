@@ -175,13 +175,13 @@ class SymbolCell: UICollectionViewCell {
     @IBOutlet weak var overlayView: UIView!
     var name = "" {
         didSet {
-            DispatchQueue.global(qos: .background).async {
+//            DispatchQueue.global(qos: .background).async {
                 DispatchQueue.main.async {
                     let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
                     let newImage = UIImage(systemName: self.name, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "PureBlack") ?? .black, renderingMode: .alwaysOriginal)
                     self.imageView.image = newImage
                 }
-            }
+//            }
         }
     }
 }

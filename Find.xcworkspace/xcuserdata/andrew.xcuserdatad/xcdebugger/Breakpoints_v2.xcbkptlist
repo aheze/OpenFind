@@ -68,7 +68,7 @@
             landmarkType = "3">
             <Locations>
                <Location
-                  uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE - 101d176d2ed7bb61"
+                  uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE - bb097ed9b4a2c81"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -83,7 +83,7 @@
                   offsetFromSymbolStart = "132">
                </Location>
                <Location
-                  uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE - 490c1329f821e77d"
+                  uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE - 52a193a94dbc709d"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -98,7 +98,7 @@
                   offsetFromSymbolStart = "188">
                </Location>
                <Location
-                  uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE - 4c16e70d0a16206e"
+                  uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE - 57bb678dbf8babae"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -113,7 +113,7 @@
                   offsetFromSymbolStart = "72">
                </Location>
                <Location
-                  uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE - 79e7ba1f1452c0dd"
+                  uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE - 624a3a9fa1cf573d"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -128,7 +128,7 @@
                   offsetFromSymbolStart = "80">
                </Location>
                <Location
-                  uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE - ad2535a04c2dabe"
+                  uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE - 117fd3dab15f4d5e"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -143,7 +143,7 @@
                   offsetFromSymbolStart = "620">
                </Location>
                <Location
-                  uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE - 4f7dcb24119ee2f2"
+                  uuid = "DB01A8CF-8936-4317-871C-F266B37CCAAE - 54d04ba4a4037512"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -234,8 +234,8 @@
             filePath = "Find/MainController/Camera/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
             landmarkName = "ViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -378,8 +378,8 @@
             filePath = "Find/MainController/New History/NewHistoryViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1371"
-            endingLineNumber = "1371"
+            startingLineNumber = "1372"
+            endingLineNumber = "1372"
             landmarkName = "unknown"
             landmarkType = "0">
          </BreakpointContent>

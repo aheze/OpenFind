@@ -946,6 +946,7 @@ extension NewHistoryViewController: ButtonPressed {
 extension NewHistoryViewController {
     
     func shareData(_ dataToShare: [String]) {
+//        var bankAccount: [String: Double] = [:]
         
         switch UIDevice.current.userInterfaceIdiom {
         case .phone:

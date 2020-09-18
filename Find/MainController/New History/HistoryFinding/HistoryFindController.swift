@@ -622,7 +622,7 @@ extension HistoryFindController {
         UIView.animate(withDuration: 0.12, animations: {
             self.view.layoutIfNeeded()
         })
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             var findModels = [FindModel]()
             for photo in self.photos {
                 print("searching in photo")

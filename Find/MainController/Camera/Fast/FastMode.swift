@@ -16,7 +16,7 @@ extension ViewController {
         /// busy finding
         busyFastFinding = true
         
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
             let width = ciImage.extent.width
             let height = ciImage.extent.height

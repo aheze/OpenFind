@@ -276,7 +276,7 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
     }
     
     func fastFind() {
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             let photo = self.photoComp
             var num = 0
             var newFastComponents = [Component]()
@@ -331,7 +331,7 @@ extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
             })
         }
         
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             let photoUrl = self.folderURL.appendingPathComponent(photo.filePath)
             
             let request = VNRecognizeTextRequest { request, error in

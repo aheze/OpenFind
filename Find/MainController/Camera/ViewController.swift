@@ -44,6 +44,7 @@ class CameraView: UIView {
         return AVCaptureVideoPreviewLayer.self
     }
 }
+
 class ViewController: UIViewController {
     
 //    var versionStore = WhatsNewVersionStore()
@@ -420,6 +421,7 @@ class ViewController: UIViewController {
             })
         }
     }
+    
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         viewControllerToPresent.modalPresentationStyle = .pageSheet
       super.present(viewControllerToPresent, animated: flag, completion: completion)
