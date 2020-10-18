@@ -172,29 +172,31 @@ class HelpController: UIViewController, WKNavigationDelegate {
         
     }
     
-  func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-    
-         if navigationAction.navigationType == WKNavigationType.linkActivated {
-            decisionHandler(WKNavigationActionPolicy.cancel)
-            
-            if let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "HelpController") as? HelpController {
-                if let url = navigationAction.request.url {
-                    if url.absoluteString == "https://forms.gle/agdyoB9PFfnv8cU1A/" {
-                        let defaults = UserDefaults.standard
-                        defaults.set(true, forKey: "feedbackedAlready")
-                    }
-                    vc.urlString = url.absoluteString
-                }
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-             return
-         }
-    
-        decisionHandler(WKNavigationActionPolicy.allow)
-    }
+  
 }
 
 extension HelpController {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+      
+           if navigationAction.navigationType == WKNavigationType.linkActivated {
+              decisionHandler(WKNavigationActionPolicy.cancel)
+              
+              if let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "HelpController") as? HelpController {
+                  if let url = navigationAction.request.url {
+                      if url.absoluteString == "https://forms.gle/agdyoB9PFfnv8cU1A/" {
+                          let defaults = UserDefaults.standard
+                          defaults.set(true, forKey: "feedbackedAlready")
+                      }
+                      vc.urlString = url.absoluteString
+                  }
+                  self.navigationController?.pushViewController(vc, animated: true)
+              }
+               return
+           }
+      
+          decisionHandler(WKNavigationActionPolicy.allow)
+      }
+    
     func webView(_: WKWebView, didStartProvisionalNavigation _: WKNavigation!) {
         if progressBar.isHidden {
             // Make sure our animation is visible.
@@ -206,6 +208,7 @@ extension HelpController {
                            self.progressBar.alpha = 1.0
         })
     }
+    
 
     func webView(_: WKWebView, didFinish _: WKNavigation!) {
         UIView.animate(withDuration: 0.33,
