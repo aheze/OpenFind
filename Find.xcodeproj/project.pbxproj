@@ -436,7 +436,6 @@
 		492BF956237529E8001BE82F /* Setup */ = {
 			isa = PBXGroup;
 			children = (
-				495F38FF2433FC0000A17D93 /* Launch */,
 				490DA75B23CBBC3A000AF57D /* Shutter */,
 				490DA74023CBB84C000AF57D /* ActionButton */,
 				4917CE8023C059F6002EA20B /* StartSceneView.swift */,
@@ -572,13 +571,6 @@
 			path = SEK;
 			sourceTree = "<group>";
 		};
-		495DAD4524A7FDED00D5F844 /* TestingImages */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TestingImages;
-			sourceTree = "<group>";
-		};
 		495ECCA5238CF74500E7D966 /* New History */ = {
 			isa = PBXGroup;
 			children = (
@@ -620,7 +612,6 @@
 				3CE306CB259AC44A00F1B2E2 /* Tab Navigation */,
 				49E9D88D24996D8A0006757C /* Storyboards */,
 				498332DB243279F900AD083E /* Help */,
-				49585DCD23ED0C9F003AB768 /* SEK */,
 				4988FC4623BEF82D00199635 /* Lists */,
 				4969373C2353C277009CA41A /* Camera */,
 				495ECCA5238CF74500E7D966 /* New History */,
@@ -647,6 +638,7 @@
 		4969373B2353C25B009CA41A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				49585DCD23ED0C9F003AB768 /* SEK */,
 				4999AC932353A80A00AB06A7 /* AppDelegate.swift */,
 				4999AC952353A80A00AB06A7 /* SceneDelegate.swift */,
 				4911508A235D1A3E00EC0C04 /* BasicUtilities.swift */,
@@ -662,12 +654,12 @@
 			isa = PBXGroup;
 			children = (
 				3C4DE6F3259AD3FF0037D104 /* Camera Buttons */,
-				4999AC972353A80A00AB06A7 /* CameraViewController.swift */,
 				4979A39123AF3B4B00B09380 /* Fast */,
 				4953F3C5241733C200690E53 /* Toolbar */,
+				4904524A237907170046570D /* Matches */,
+				4999AC972353A80A00AB06A7 /* CameraViewController.swift */,
 				49F7B1572353FE7E0099FA62 /* Component.swift */,
 				4957157D2368B022007BF68B /* ViewExtensions.swift */,
-				4904524A237907170046570D /* Matches */,
 				492BF956237529E8001BE82F /* Setup */,
 			);
 			path = Camera;
@@ -696,14 +688,14 @@
 			isa = PBXGroup;
 			children = (
 				490BC3F423F8DA30004D1433 /* Edit Lists */,
+				49585DCC23ED0B8D003AB768 /* Select List SEK */,
+				490BC3F723FA5FBF004D1433 /* General */,
+				492EB4F323F50C49007142CA /* Symbols */,
 				4928525923D617270048EC13 /* ListController.swift */,
 				49569B3223D65AA4009308CA /* ListCollectionCell.swift */,
-				49585DCC23ED0B8D003AB768 /* Select List SEK */,
 				49569B3423D6919E009308CA /* ListsLayout.swift */,
 				4988FC4723BEF89600199635 /* ListModel.swift */,
 				4966B70923DE98C800A8523A /* MakeNewList.swift */,
-				490BC3F723FA5FBF004D1433 /* General */,
-				492EB4F323F50C49007142CA /* Symbols */,
 				4990AAE523EDB50E00FAF37B /* ColorsViewController.swift */,
 			);
 			path = Lists;
@@ -730,9 +722,9 @@
 		4999AC922353A80A00AB06A7 /* Find */ = {
 			isa = PBXGroup;
 			children = (
-				495DAD4524A7FDED00D5F844 /* TestingImages */,
 				495635292437A4860001E8C6 /* defaultSeeds.realm */,
 				496937382353C219009CA41A /* MainController */,
+				495F38FF2433FC0000A17D93 /* Launch */,
 				4969373B2353C25B009CA41A /* Utilities */,
 				4999AC9C2353A81100AB06A7 /* Assets.xcassets */,
 				3C4DE703259AD5670037D104 /* NewColors.xcassets */,
