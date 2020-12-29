@@ -18,7 +18,6 @@ class Component: NSObject {
     var isSpecialType = "Not Special"
     var text = ""
     var parentList = EditableFindList()
-//    var isList = false
     var colors = ["00aeef"]
     var changed: Bool = false
     var baseView: UIView?

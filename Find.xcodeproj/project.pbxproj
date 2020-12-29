@@ -34,7 +34,6 @@
 		3CE306EA259AC5AF00F1B2E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */; };
 		4904524C2379072F0046570D /* UpdateMatches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4904524B2379072F0046570D /* UpdateMatches.swift */; };
 		490BC3F623F8DA41004D1433 /* EditListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490BC3F523F8DA41004D1433 /* EditListViewController.swift */; };
-		490BC3F923FA600F004D1433 /* DoubleWarning.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490BC3F823FA600F004D1433 /* DoubleWarning.xib */; };
 		490DA73F23CBAB7C000AF57D /* NewShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA73E23CBAB7C000AF57D /* NewShutterButton.swift */; };
 		490DA74E23CBB871000AF57D /* UIView+JJFloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA74123CBB86A000AF57D /* UIView+JJFloatingActionButton.swift */; };
 		490DA74F23CBB871000AF57D /* JJFloatingActionButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA74223CBB86B000AF57D /* JJFloatingActionButtonState.swift */; };
@@ -190,7 +189,6 @@
 		3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4904524B2379072F0046570D /* UpdateMatches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMatches.swift; sourceTree = "<group>"; };
 		490BC3F523F8DA41004D1433 /* EditListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditListViewController.swift; sourceTree = "<group>"; };
-		490BC3F823FA600F004D1433 /* DoubleWarning.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoubleWarning.xib; sourceTree = "<group>"; };
 		490DA73E23CBAB7C000AF57D /* NewShutterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShutterButton.swift; sourceTree = "<group>"; };
 		490DA74123CBB86A000AF57D /* UIView+JJFloatingActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+JJFloatingActionButton.swift"; sourceTree = "<group>"; };
 		490DA74223CBB86B000AF57D /* JJFloatingActionButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJFloatingActionButtonState.swift; sourceTree = "<group>"; };
@@ -328,6 +326,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C16EA81259BED7F00D73755 /* Other View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				495F38FF2433FC0000A17D93 /* Launch */,
+				496937392353C228009CA41A /* Settings */,
+				498332DB243279F900AD083E /* Help */,
+			);
+			path = "Other View Controllers";
+			sourceTree = "<group>";
+		};
+		3C16EA83259BED9A00D73755 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				49B7A33123923E800070209F /* ZoomTransitionController.swift */,
+				49B7A33223923E800070209F /* ZoomDismissalInteractionController.swift */,
+				49B7A33323923E800070209F /* ZoomAnimator.swift */,
+				49B7A33723923EBD0070209F /* PhotoPageContainerViewController.swift */,
+				49B7A33923923EE00070209F /* PhotoZoomViewController.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		3C16EA84259BEDC100D73755 /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */,
+				3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */,
+				490BC3F723FA5FBF004D1433 /* General */,
+				492EB4F323F50C49007142CA /* Symbols */,
+				4990AAE523EDB50E00FAF37B /* ColorsViewController.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
 		3C4DE6F3259AD3FF0037D104 /* Camera Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -407,7 +439,6 @@
 			children = (
 				4990AAE123EDB4CE00FAF37B /* GeneralViewController.swift */,
 				4972B40D23F117C500843537 /* GeneralTableviewCell.swift */,
-				490BC3F823FA600F004D1433 /* DoubleWarning.xib */,
 				49301BF22402460000B4780B /* FancyQuotes.swift */,
 			);
 			path = General;
@@ -599,6 +630,7 @@
 				49BC781F23C2B0DF003D9904 /* IndexMatcher.swift */,
 				49BC782123C3E1BF003D9904 /* TextViewRounded.swift */,
 				49BC782D23C6E0BA003D9904 /* HistorySelectFloat */,
+				3C16EA83259BED9A00D73755 /* Animations */,
 				49301BF42402493A00B4780B /* HistoryModel.swift */,
 				49564332244A8FA4002C9245 /* HistorySharing.swift */,
 				49564334244A8FBF002C9245 /* HistoryCollectionViewFiles.swift */,
@@ -624,18 +656,14 @@
 			path = Launch;
 			sourceTree = "<group>";
 		};
-		496937382353C219009CA41A /* MainController */ = {
+		496937382353C219009CA41A /* Tab Bar Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */,
-				498332DB243279F900AD083E /* Help */,
 				4988FC4623BEF82D00199635 /* Lists */,
 				4969373C2353C277009CA41A /* Camera */,
 				495ECCA5238CF74500E7D966 /* New History */,
-				496937392353C228009CA41A /* Settings */,
-				49B7A33B2392FFDA0070209F /* History */,
 			);
-			path = MainController;
+			path = "Tab Bar Controllers";
 			sourceTree = "<group>";
 		};
 		496937392353C228009CA41A /* Settings */ = {
@@ -670,11 +698,11 @@
 		4969373C2353C277009CA41A /* Camera */ = {
 			isa = PBXGroup;
 			children = (
+				4999AC972353A80A00AB06A7 /* CameraViewController.swift */,
 				3C4DE6F3259AD3FF0037D104 /* Camera Buttons */,
 				4979A39123AF3B4B00B09380 /* Fast */,
 				4953F3C5241733C200690E53 /* Toolbar */,
 				4904524A237907170046570D /* Matches */,
-				4999AC972353A80A00AB06A7 /* CameraViewController.swift */,
 				49F7B1572353FE7E0099FA62 /* Component.swift */,
 				4957157D2368B022007BF68B /* ViewExtensions.swift */,
 				492BF956237529E8001BE82F /* Setup */,
@@ -704,19 +732,15 @@
 		4988FC4623BEF82D00199635 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
-				490BC3F423F8DA30004D1433 /* Edit Lists */,
-				49585DCC23ED0B8D003AB768 /* Select List SEK */,
-				490BC3F723FA5FBF004D1433 /* General */,
-				492EB4F323F50C49007142CA /* Symbols */,
 				4928525923D617270048EC13 /* ListController.swift */,
 				3C16EA70259BE7D600D73755 /* ListController+NavBar.swift */,
+				3C16EA84259BEDC100D73755 /* Builder */,
+				490BC3F423F8DA30004D1433 /* Edit Lists */,
+				49585DCC23ED0B8D003AB768 /* Select List SEK */,
 				49569B3223D65AA4009308CA /* ListCollectionCell.swift */,
 				49569B3423D6919E009308CA /* ListsLayout.swift */,
 				4988FC4723BEF89600199635 /* ListModel.swift */,
 				4966B70923DE98C800A8523A /* MakeNewList.swift */,
-				4990AAE523EDB50E00FAF37B /* ColorsViewController.swift */,
-				3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */,
-				3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -746,8 +770,9 @@
 				3C4DE714259B0E960037D104 /* Components */,
 				3CE306CB259AC44A00F1B2E2 /* Tab Navigation */,
 				49E9D88D24996D8A0006757C /* Storyboards */,
-				496937382353C219009CA41A /* MainController */,
-				495F38FF2433FC0000A17D93 /* Launch */,
+				3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */,
+				496937382353C219009CA41A /* Tab Bar Controllers */,
+				3C16EA81259BED7F00D73755 /* Other View Controllers */,
 				4969373B2353C25B009CA41A /* Utilities */,
 				4999AC9C2353A81100AB06A7 /* Assets.xcassets */,
 				3C4DE703259AD5670037D104 /* NewColors.xcassets */,
@@ -755,26 +780,6 @@
 				49E9D89424996E1A0006757C /* Localizable.strings */,
 			);
 			path = Find;
-			sourceTree = "<group>";
-		};
-		49B7A33023923E800070209F /* Animation */ = {
-			isa = PBXGroup;
-			children = (
-				49B7A33123923E800070209F /* ZoomTransitionController.swift */,
-				49B7A33223923E800070209F /* ZoomDismissalInteractionController.swift */,
-				49B7A33323923E800070209F /* ZoomAnimator.swift */,
-			);
-			path = Animation;
-			sourceTree = "<group>";
-		};
-		49B7A33B2392FFDA0070209F /* History */ = {
-			isa = PBXGroup;
-			children = (
-				49B7A33023923E800070209F /* Animation */,
-				49B7A33723923EBD0070209F /* PhotoPageContainerViewController.swift */,
-				49B7A33923923EE00070209F /* PhotoZoomViewController.swift */,
-			);
-			path = History;
 			sourceTree = "<group>";
 		};
 		49BC782A23C6DFB6003D9904 /* HistoryFinding */ = {
@@ -931,7 +936,6 @@
 				3C4DE719259B0EB50037D104 /* TutorialHeader.xib in Resources */,
 				3CE306D7259AC46400F1B2E2 /* PhotosIcon.xib in Resources */,
 				4928525C23D61D230048EC13 /* ListsSelect.xib in Resources */,
-				490BC3F923FA600F004D1433 /* DoubleWarning.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

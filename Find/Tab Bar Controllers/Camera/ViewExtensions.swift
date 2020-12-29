@@ -19,8 +19,6 @@ extension CameraViewController {
         blurView.alpha = 0
         view.addSubview(blurView)
         view.bringSubviewToFront(blurView)
-//        view.bringSubviewToFront(newShutterButton)
-//        view.bringSubviewToFront(menuButton)
         guard let tag1 = self.view.viewWithTag(1) else {return}
         guard let tag2 = self.view.viewWithTag(2) else {return}
         UIView.animate(withDuration: 0.2, animations: {
