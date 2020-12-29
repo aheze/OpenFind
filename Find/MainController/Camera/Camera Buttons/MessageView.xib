@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessageView" customModule="FindTabBar" customModuleProvider="target">
+            <connections>
+                <outlet property="blurView" destination="szc-qC-iyH" id="MgW-e7-FeP"/>
+                <outlet property="containerView" destination="xDF-d6-BgB" id="Uy0-gN-c15"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="Bei-Qb-FSf"/>
+                <outlet property="labelButton" destination="kDQ-e9-MRI" id="8BX-E5-LNQ"/>
+                <outlet property="shadeView" destination="BmC-nR-m2p" id="HVA-bn-KSX"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PassthroughView" customModule="FindTabBar" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="244" height="53"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xDF-d6-BgB" customClass="PassthroughView" customModule="FindTabBar" customModuleProvider="target">
+                    <rect key="frame" x="40.5" y="6" width="163" height="41"/>
+                    <subviews>
+                        <visualEffectView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="szc-qC-iyH">
+                            <rect key="frame" x="0.0" y="0.0" width="163" height="41"/>
+                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="0TL-43-Coc">
+                                <rect key="frame" x="0.0" y="0.0" width="163" height="41"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                            <blurEffect style="systemUltraThinMaterialDark"/>
+                        </visualEffectView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BmC-nR-m2p">
+                            <rect key="frame" x="0.0" y="0.0" width="163" height="41"/>
+                            <color key="backgroundColor" name="50Black"/>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDQ-e9-MRI">
+                            <rect key="frame" x="20" y="4" width="123" height="33"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="Caching - 100%">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="touchDown:" destination="-1" eventType="touchDragEnter" id="7WN-x6-tY5"/>
+                                <action selector="touchDown:" destination="-1" eventType="touchDown" id="U04-WM-CAn"/>
+                                <action selector="touchUpCancel:" destination="-1" eventType="touchDragExit" id="0hV-Gm-WcW"/>
+                                <action selector="touchUpCancel:" destination="-1" eventType="touchCancel" id="2BN-C1-FZN"/>
+                                <action selector="touchUpInside:" destination="-1" eventType="touchUpInside" id="0jo-ha-I48"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="szc-qC-iyH" firstAttribute="top" secondItem="xDF-d6-BgB" secondAttribute="top" id="2xh-90-lPN"/>
+                        <constraint firstAttribute="bottom" secondItem="BmC-nR-m2p" secondAttribute="bottom" id="4nx-3t-v0x"/>
+                        <constraint firstAttribute="bottom" secondItem="kDQ-e9-MRI" secondAttribute="bottom" constant="4" id="9N3-ou-b9T"/>
+                        <constraint firstItem="BmC-nR-m2p" firstAttribute="leading" secondItem="xDF-d6-BgB" secondAttribute="leading" id="TKc-LO-uS7"/>
+                        <constraint firstAttribute="trailing" secondItem="BmC-nR-m2p" secondAttribute="trailing" id="U2z-fU-TlF"/>
+                        <constraint firstAttribute="trailing" secondItem="kDQ-e9-MRI" secondAttribute="trailing" constant="20" id="bjT-QS-hoa"/>
+                        <constraint firstAttribute="trailing" secondItem="szc-qC-iyH" secondAttribute="trailing" id="g84-Rl-oT1"/>
+                        <constraint firstItem="szc-qC-iyH" firstAttribute="leading" secondItem="xDF-d6-BgB" secondAttribute="leading" id="j04-Za-VMt"/>
+                        <constraint firstItem="kDQ-e9-MRI" firstAttribute="top" secondItem="xDF-d6-BgB" secondAttribute="top" constant="4" id="k96-lO-We3"/>
+                        <constraint firstAttribute="bottom" secondItem="szc-qC-iyH" secondAttribute="bottom" id="lrW-9S-j5w"/>
+                        <constraint firstItem="BmC-nR-m2p" firstAttribute="top" secondItem="xDF-d6-BgB" secondAttribute="top" id="voa-SA-dK5"/>
+                        <constraint firstItem="kDQ-e9-MRI" firstAttribute="leading" secondItem="xDF-d6-BgB" secondAttribute="leading" constant="20" id="weN-qZ-RXD"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="xDF-d6-BgB" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Wel-EN-sjI"/>
+                <constraint firstItem="xDF-d6-BgB" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ZWL-Fz-5Vu"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-169.56521739130437" y="388.05803571428572"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="50Black">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

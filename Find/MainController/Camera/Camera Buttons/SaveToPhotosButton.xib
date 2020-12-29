@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SaveToPhotosButton" customModule="FindTabBar" customModuleProvider="target">
+            <connections>
+                <outlet property="blurView" destination="Bjk-0D-iiC" id="qUS-ag-wot"/>
+                <outlet property="button" destination="knC-9d-etM" id="tlY-Vl-Z4d"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="Sq3-wP-eos"/>
+                <outlet property="photosIcon" destination="KrA-9Z-f1a" id="lf6-JM-hKN"/>
+                <outlet property="shadeView" destination="JwQ-bZ-bA4" id="jVU-NQ-EQS"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bjk-0D-iiC">
+                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eeH-4D-DUr">
+                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <blurEffect style="systemUltraThinMaterialDark"/>
+                </visualEffectView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JwQ-bZ-bA4">
+                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                    <color key="backgroundColor" name="50Black"/>
+                </view>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KrA-9Z-f1a" customClass="PhotosIcon" customModule="FindTabBar" customModuleProvider="target">
+                    <rect key="frame" x="10" y="10" width="40" height="40"/>
+                    <viewLayoutGuide key="safeArea" id="ila-jN-EeL"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="BhB-yA-15Q"/>
+                        <constraint firstAttribute="height" constant="40" id="MTi-wN-WrM"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="knC-9d-etM">
+                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                    <connections>
+                        <action selector="touchDown:" destination="-1" eventType="touchDown" id="85w-vi-9hB"/>
+                        <action selector="touchDown:" destination="-1" eventType="touchDragEnter" id="XFr-Gi-OfW"/>
+                        <action selector="touchUpCancel:" destination="-1" eventType="touchDragExit" id="0rc-Wb-B7d"/>
+                        <action selector="touchUpCancel:" destination="-1" eventType="touchCancel" id="IWm-Ot-fEP"/>
+                        <action selector="touchUpInside:" destination="-1" eventType="touchUpInside" id="I8x-H7-Jac"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="JwQ-bZ-bA4" secondAttribute="bottom" id="8ub-WV-dwX"/>
+                <constraint firstItem="KrA-9Z-f1a" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="AuJ-ny-JJZ"/>
+                <constraint firstItem="knC-9d-etM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="CGp-iz-a8q"/>
+                <constraint firstItem="JwQ-bZ-bA4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Nlf-jQ-QIx"/>
+                <constraint firstItem="knC-9d-etM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ZeR-Hw-rBi"/>
+                <constraint firstAttribute="trailing" secondItem="knC-9d-etM" secondAttribute="trailing" id="aKR-6M-exd"/>
+                <constraint firstItem="JwQ-bZ-bA4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dc3-TB-rED"/>
+                <constraint firstAttribute="trailing" secondItem="JwQ-bZ-bA4" secondAttribute="trailing" id="mVi-V4-IFZ"/>
+                <constraint firstAttribute="bottom" secondItem="knC-9d-etM" secondAttribute="bottom" id="vhj-Hq-aEI"/>
+                <constraint firstItem="KrA-9Z-f1a" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="wyG-fD-rMR"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-215.94202898550725" y="209.59821428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="50Black">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

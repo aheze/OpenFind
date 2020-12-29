@@ -93,3 +93,110 @@ extension NSLayoutConstraint {
         return "id: \(id), constant: \(constant)" //you may print whatever you want here
     }
 }
+
+class PassthroughView: UIView {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        return subviews.contains(where: {
+            !$0.isHidden
+                && $0.isUserInteractionEnabled
+                && $0.point(inside: self.convert(point, to: $0), with: event)
+        })
+    }
+}
+
+class PassthroughStackView: UIStackView {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        if subviews.contains(where: {
+            $0.alpha != 0
+                && $0.isUserInteractionEnabled
+                && $0.point(inside: self.convert(point, to: $0), with: event)
+        }) {
+            print("yep")
+        } else {
+            print("NONONo")
+        }
+        return subviews.contains(where: {
+            $0.alpha != 0
+                && $0.isUserInteractionEnabled
+                && $0.point(inside: self.convert(point, to: $0), with: event)
+        })
+    }
+}
+
+extension UISpringTimingParameters {
+    
+    /// A design-friendly way to create a spring timing curve.
+    ///
+    /// - Parameters:
+    ///   - damping: The 'bounciness' of the animation. Value must be between 0 and 1.
+    ///   - response: The 'speed' of the animation.
+    ///   - initialVelocity: The vector describing the starting motion of the property. Optional, default is `.zero`.
+    public convenience init(damping: CGFloat, response: CGFloat, initialVelocity: CGVector = .zero) {
+        let stiffness = pow(2 * .pi / response, 2)
+        let damp = 4 * .pi * damping / response
+        self.init(mass: 1, stiffness: stiffness, damping: damp, initialVelocity: initialVelocity)
+    }
+    
+}
+extension UIViewController {
+    func addChild(_ childViewController: UIViewController, in inView: UIView) {
+        // Add Child View Controller
+        addChild(childViewController)
+        
+        // Add Child View as Subview
+        inView.insertSubview(childViewController.view, at: 0)
+        
+        // Configure Child View
+        childViewController.view.frame = inView.bounds
+        childViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        // Notify Child View Controller
+        childViewController.didMove(toParent: self)
+    }
+    func removeChild(_ childViewController: UIViewController) {
+        // Notify Child View Controller
+        childViewController.willMove(toParent: nil)
+
+        // Remove Child View From Superview
+        childViewController.view.removeFromSuperview()
+
+        // Notify Child View Controller
+        childViewController.removeFromParent()
+    }
+}
+
+infix operator >!<
+
+func >!< (object1: AnyObject!, object2: AnyObject!) -> Bool {
+   return (object_getClassName(object1) == object_getClassName(object2))
+}
+
+extension Array where Element: UIColor {
+    func intermediate(percentage: CGFloat) -> UIColor {
+        let percentage = Swift.max(Swift.min(percentage, 100), 0)
+        switch percentage {
+        case 0: return first ?? .clear
+        case 1: return last ?? .clear
+        default:
+            let approxIndex = percentage / (1 / CGFloat(count - 1))
+            let firstIndex = Swift.min(count - 1, Int(approxIndex.rounded(.down)))
+            let secondIndex = Swift.min(count - 1, Int(approxIndex.rounded(.up)))
+            let fallbackIndex = Swift.min(count - 1, Int(approxIndex.rounded()))
+
+            let firstColor = self[firstIndex]
+            let secondColor = self[secondIndex]
+            let fallbackColor = self[fallbackIndex]
+
+            var (r1, g1, b1, a1): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
+            var (r2, g2, b2, a2): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
+            guard firstColor.getRed(&r1, green: &g1, blue: &b1, alpha: &a1) else { return fallbackColor }
+            guard secondColor.getRed(&r2, green: &g2, blue: &b2, alpha: &a2) else { return fallbackColor }
+
+            let intermediatePercentage = approxIndex - CGFloat(firstIndex)
+            return UIColor(red: CGFloat(r1 + (r2 - r1) * intermediatePercentage),
+                           green: CGFloat(g1 + (g2 - g1) * intermediatePercentage),
+                           blue: CGFloat(b1 + (b2 - b1) * intermediatePercentage),
+                           alpha: CGFloat(a1 + (a2 - a1) * intermediatePercentage))
+        }
+    }
+}

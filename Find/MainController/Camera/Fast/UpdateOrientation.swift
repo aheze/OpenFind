@@ -9,7 +9,7 @@
 import UIKit
 import CoreMotion
 
-extension ViewController {
+extension CameraViewController {
     func updateHighlightOrientations(attitude: CMAttitude) {
         if let initAttitude = initialAttitude {
             
@@ -33,7 +33,11 @@ extension ViewController {
         }
     }
 }
+extension BinaryInteger {
+    var degreesToRadians: CGFloat { CGFloat(self) * .pi / 180 }
+}
+
 extension FloatingPoint {
-    var degreesToRadians: Self { return self * .pi / 180 }
-    var radiansToDegrees: Self { return self * 180 / .pi }
+    var degreesToRadians: Self { self * .pi / 180 }
+    var radiansToDegrees: Self { self * 180 / .pi }
 }

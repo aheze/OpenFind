@@ -9,7 +9,7 @@
 import UIKit
 import Vision
 
-extension ViewController {
+extension CameraViewController {
     
     func fastFind(in pixelBuffer: CVPixelBuffer) {
         

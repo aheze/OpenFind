@@ -8,6 +8,8 @@
 
 import UIKit
 
+var deviceHasNotch = false
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -19,29 +21,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
+        deviceHasNotch = window?.safeAreaInsets.bottom ?? 0 > 0
         
-//        projectorActivated = true
-//                
-//        if let rootWindow = self.window {
-//            let settings = ProjectorSettings()
-//            settings.shouldStopAtStatusBar = false
-//            settings.position = .right
-//            settings.defaultDeviceToProject = .iPhoneX
-////            settings.shouldShowControls = false
-//            
-//            Projector.display(rootWindow: rootWindow, settings: settings)
-//        }
+        if deviceHasNotch {
+            ConstantVars.shutterBottomDistance = Constants.framelessShutterBottomDistance
+        } else {
+            ConstantVars.shutterBottomDistance = Constants.framedShutterBottomDistance
+        }
         
+        print("View scene delegate!, notch: \(deviceHasNotch)")
     }
-    
-//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-//    // If the app is closed, then it is opened thru a link in email, once the app is initialized, it will load the url here
-//    guard let urlContext = connectionOptions.urlContexts.first else {
-//    return
-//    }
-//    print(urlContext.url)
-//    }
-//    //U
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

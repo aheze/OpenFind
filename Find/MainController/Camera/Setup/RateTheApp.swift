@@ -47,5 +47,5 @@ enum AppStoreReviewManager {
   }
 }
 
-extension ViewController {
+extension CameraViewController {
 }

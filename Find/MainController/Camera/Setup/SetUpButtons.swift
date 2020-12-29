@@ -10,7 +10,7 @@ import UIKit
 import SwiftEntryKit
 import AVFoundation
 
-extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRecognizerDelegate {
+extension CameraViewController: UIAdaptivePresentationControllerDelegate {
    
     
    
@@ -115,67 +115,67 @@ extension ViewController: UIAdaptivePresentationControllerDelegate, UIGestureRec
             
         }
     }
-    func setUpButtons() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedOnce))
-        tap.numberOfTapsRequired = 1
-        tap.delegate = self
-        
-        
-        let tapOnStats = UITapGestureRecognizer(target: self, action: #selector(tappedOnStats))
-        tap.numberOfTapsRequired = 1
-        tap.delegate = self
-        statusView.addGestureRecognizer(tapOnStats)
-        
-        view.addGestureRecognizer(tap)
-        view.bringSubviewToFront(numberLabel)
-        
-        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
-        let listImage = UIImage(systemName: "square.grid.2x2.fill", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
-        let histImage = UIImage(systemName: "photo.fill.on.rectangle.fill", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
-        let settImage = UIImage(systemName: "gear", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
-        
-        let photos = NSLocalizedString("photos", comment: "Multipurpose def=Photos")
-        let lists = NSLocalizedString("lists", comment: "Multipurpose def=Lists")
-        let settings = NSLocalizedString("settings", comment: "Multipurpose def=Settings")
-        
-        let goToNewHistory = menuButton.addItem()
-        goToNewHistory.tag = 12461
-        goToNewHistory.titleLabel.text = photos
-        
-        
-        goToNewHistory.imageView.image = histImage
-        goToNewHistory.action = { item in
-            self.blurScreenForSheetPresentation()
-            self.performSegue(withIdentifier: "goToNewHistory", sender: self)
-        }
-        let goToLists = menuButton.addItem()
-        goToLists.tag = 12463
-        goToLists.titleLabel.text = lists
-        goToLists.imageView.image = listImage
-        goToLists.action = { item in
-            self.blurScreenForSheetPresentation()
-            self.performSegue(withIdentifier: "goToLists", sender: self)
-        }
-        
-        let goToSett = menuButton.addItem()
-        goToSett.tag = 12462
-        goToSett.titleLabel.text = settings
-        goToSett.imageView.image = settImage
-        goToSett.action = { item in
-//            print("settings")
-            self.blurScreenForSheetPresentation()
-            self.performSegue(withIdentifier: "goToSettings", sender: self)
-        }
-        
-        if let xImage = UIImage(named: "jjXButton") {
-            menuButton.buttonAnimationConfiguration = .transition(toImage: xImage)
-            menuButton.overlayView.backgroundColor = UIColor.clear
-        }
-    }
+//    func setUpButtons() {
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedOnce))
+//        tap.numberOfTapsRequired = 1
+//        tap.delegate = self
+//        
+//        
+////        let tapOnStats = UITapGestureRecognizer(target: self, action: #selector(tappedOnStats))
+////        tap.numberOfTapsRequired = 1
+////        tap.delegate = self
+////        statusView.addGestureRecognizer(tapOnStats)
+//        
+//        view.addGestureRecognizer(tap)
+////        view.bringSubviewToFront(numberLabel)
+//        
+//        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
+//        let listImage = UIImage(systemName: "square.grid.2x2.fill", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
+//        let histImage = UIImage(systemName: "photo.fill.on.rectangle.fill", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
+//        let settImage = UIImage(systemName: "gear", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
+//        
+//        let photos = NSLocalizedString("photos", comment: "Multipurpose def=Photos")
+//        let lists = NSLocalizedString("lists", comment: "Multipurpose def=Lists")
+//        let settings = NSLocalizedString("settings", comment: "Multipurpose def=Settings")
+//        
+//        let goToNewHistory = menuButton.addItem()
+//        goToNewHistory.tag = 12461
+//        goToNewHistory.titleLabel.text = photos
+//        
+//        
+//        goToNewHistory.imageView.image = histImage
+//        goToNewHistory.action = { item in
+//            self.blurScreenForSheetPresentation()
+//            self.performSegue(withIdentifier: "goToNewHistory", sender: self)
+//        }
+//        let goToLists = menuButton.addItem()
+//        goToLists.tag = 12463
+//        goToLists.titleLabel.text = lists
+//        goToLists.imageView.image = listImage
+//        goToLists.action = { item in
+//            self.blurScreenForSheetPresentation()
+//            self.performSegue(withIdentifier: "goToLists", sender: self)
+//        }
+//        
+//        let goToSett = menuButton.addItem()
+//        goToSett.tag = 12462
+//        goToSett.titleLabel.text = settings
+//        goToSett.imageView.image = settImage
+//        goToSett.action = { item in
+////            print("settings")
+//            self.blurScreenForSheetPresentation()
+//            self.performSegue(withIdentifier: "goToSettings", sender: self)
+//        }
+//        
+//        if let xImage = UIImage(named: "jjXButton") {
+//            menuButton.buttonAnimationConfiguration = .transition(toImage: xImage)
+//            menuButton.overlayView.backgroundColor = UIColor.clear
+//        }
+//    }
 
     
 }
-extension ViewController {
+extension CameraViewController {
     
     @objc func tappedOnStats() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -280,39 +280,39 @@ extension ViewController {
 //        SwiftEntryKit.display(entry: statsViewController, using: attributes)
         
     }
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        //print(touch.view)
-        if view.viewWithTag(12461) != nil {
-            return false
-        }
-        if view.viewWithTag(12462) != nil {
-            return false
-        }
-        if view.viewWithTag(12463) != nil {
-            return false
-        }
-        
-        switch touch.view {
-        case controlsView, cameraView, stackAllowView, menuAllowView, middleAllowView, statusAllowView:
-            return true
-        default:
-            return false
-        }
-        
-    }
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if gestureRecognizer == pinchGesture {
-            searchContentView.isHidden = false
-            controlsView.isHidden = false
-            UIView.animate(withDuration: 0.4, animations: {
-                self.searchContentView.alpha = 1
-                self.controlsView.alpha = 1
-                self.controlsBlurView.alpha = 0
-                self.controlsBlurView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-            }) { _ in
-                self.controlsBlurView.isHidden = true
-            }
-        }
-        return true
-    }
+//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+//        //print(touch.view)
+//        if view.viewWithTag(12461) != nil {
+//            return false
+//        }
+//        if view.viewWithTag(12462) != nil {
+//            return false
+//        }
+//        if view.viewWithTag(12463) != nil {
+//            return false
+//        }
+//
+//        switch touch.view {
+//        case controlsView, cameraView, stackAllowView, menuAllowView, middleAllowView, statusAllowView:
+//            return true
+//        default:
+//            return false
+//        }
+//
+//    }
+//    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+//        if gestureRecognizer == pinchGesture {
+//            searchContentView.isHidden = false
+//            controlsView.isHidden = false
+//            UIView.animate(withDuration: 0.4, animations: {
+//                self.searchContentView.alpha = 1
+//                self.controlsView.alpha = 1
+//                self.controlsBlurView.alpha = 0
+//                self.controlsBlurView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+//            }) { _ in
+//                self.controlsBlurView.isHidden = true
+//            }
+//        }
+//        return true
+//    }
 }

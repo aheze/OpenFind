@@ -9,7 +9,7 @@
 import UIKit
 import WhatsNewKit
 
-extension ViewController {
+extension CameraViewController {
     
     func dismissWhatsNew(completion: @escaping () -> Void) {
         self.whatsNewHeightC.constant = 0

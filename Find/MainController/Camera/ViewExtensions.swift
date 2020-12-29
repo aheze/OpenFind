@@ -10,7 +10,7 @@ import UIKit
 import ARKit
 
 ///Blur Screen & Refresh Screen
-extension ViewController {
+extension CameraViewController {
     func blurScreen(mode: String) {
         let effect = UIBlurEffect(style: .light)
         let blurView = UIVisualEffectView(effect: effect)
@@ -19,8 +19,8 @@ extension ViewController {
         blurView.alpha = 0
         view.addSubview(blurView)
         view.bringSubviewToFront(blurView)
-        view.bringSubviewToFront(newShutterButton)
-        view.bringSubviewToFront(menuButton)
+//        view.bringSubviewToFront(newShutterButton)
+//        view.bringSubviewToFront(menuButton)
         guard let tag1 = self.view.viewWithTag(1) else {return}
         guard let tag2 = self.view.viewWithTag(2) else {return}
         UIView.animate(withDuration: 0.2, animations: {

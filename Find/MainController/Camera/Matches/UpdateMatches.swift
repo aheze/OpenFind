@@ -8,30 +8,30 @@
 
 import UIKit
 
-extension ViewController {
+extension CameraViewController {
     
     
     func updateMatchesNumber(to number: Int) {
         
-        currentNumberOfMatches = number
-        updateStatsNumber?.update(to: number)
-        
-        if number > previousNumberOfMatches {
-            if currentPassCount >= 100 {
-                currentPassCount = 0
-                if shouldHapticFeedback {
-                    let generator = UIImpactFeedbackGenerator(style: .light)
-                    generator.prepare()
-                    generator.impactOccurred()
-                }
-            }
-        }
-        
-        DispatchQueue.main.async {
-            self.numberLabel.fadeTransition(0.1)
-            self.numberLabel.text = "\(number)"
-        }
-        previousNumberOfMatches = number
+//        currentNumberOfMatches = number
+//        updateStatsNumber?.update(to: number)
+//        
+//        if number > previousNumberOfMatches {
+//            if currentPassCount >= 100 {
+//                currentPassCount = 0
+//                if shouldHapticFeedback {
+//                    let generator = UIImpactFeedbackGenerator(style: .light)
+//                    generator.prepare()
+//                    generator.impactOccurred()
+//                }
+//            }
+//        }
+//        
+//        DispatchQueue.main.async {
+//            self.numberLabel.fadeTransition(0.1)
+//            self.numberLabel.text = "\(number)"
+//        }
+//        previousNumberOfMatches = number
     }
 
 }

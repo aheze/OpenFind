@@ -16,7 +16,7 @@ protocol InjectLists: class {
     func resetWithLists(lists: [EditableFindList])
 }
 
-extension ViewController: ToolbarButtonPressed, SelectedList, StartedEditing {
+extension CameraViewController: ToolbarButtonPressed, SelectedList, StartedEditing {
   
     
     func buttonPressed(button: ToolbarButtonType) {
@@ -83,7 +83,7 @@ extension ViewController: ToolbarButtonPressed, SelectedList, StartedEditing {
     }
 }
 
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
+extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             return selectedLists.count
     }

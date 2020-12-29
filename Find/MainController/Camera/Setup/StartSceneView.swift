@@ -9,7 +9,7 @@
 import UIKit
 import ARKit
 
-extension ViewController {
+extension CameraViewController {
     
     func setUpTempImageView() {
         previewTempImageView.alpha = 0

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabBarView" customModule="FindTabBar" customModuleProvider="target">
+            <connections>
+                <outlet property="backgroundView" destination="m3l-1d-bWI" id="dnq-ob-gAQ"/>
+                <outlet property="blurView" destination="569-gu-a2G" id="f1U-Ol-9kJ"/>
+                <outlet property="cameraIcon" destination="10d-KH-We3" id="u8P-Fk-Nbl"/>
+                <outlet property="containerHeightC" destination="0N9-Yw-gol" id="OMf-FW-fwv"/>
+                <outlet property="containerView" destination="sCo-YF-aez" id="RWn-Nl-yDX"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="CzQ-TV-7XN"/>
+                <outlet property="listsIcon" destination="Su2-wl-aUw" id="kaa-Mm-Jsc"/>
+                <outlet property="photosIcon" destination="EOH-Do-hxB" id="ygD-GT-lCx"/>
+                <outlet property="shadeView" destination="bCs-J2-IPj" id="ZOU-Ze-Nfk"/>
+                <outlet property="stackView" destination="FmO-hJ-SLz" id="UtM-Am-fMB"/>
+                <outlet property="topLineView" destination="WIt-5u-c1k" id="856-h5-ogj"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PassthroughView" customModule="FindTabBar" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="84"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m3l-1d-bWI">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="84"/>
+                    <subviews>
+                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="569-gu-a2G">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="84"/>
+                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="if6-81-hyx">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="84"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                            <blurEffect style="regular"/>
+                        </visualEffectView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bCs-J2-IPj">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="84"/>
+                            <color key="backgroundColor" name="50Black"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="569-gu-a2G" secondAttribute="trailing" id="7Ok-Sq-hvW"/>
+                        <constraint firstItem="bCs-J2-IPj" firstAttribute="leading" secondItem="m3l-1d-bWI" secondAttribute="leading" id="7fL-5S-jLl"/>
+                        <constraint firstAttribute="bottom" secondItem="bCs-J2-IPj" secondAttribute="bottom" id="PN4-Sm-IXa"/>
+                        <constraint firstAttribute="bottom" secondItem="569-gu-a2G" secondAttribute="bottom" id="XNL-6z-63d"/>
+                        <constraint firstItem="569-gu-a2G" firstAttribute="top" secondItem="m3l-1d-bWI" secondAttribute="top" id="ciI-0U-BM9"/>
+                        <constraint firstAttribute="trailing" secondItem="bCs-J2-IPj" secondAttribute="trailing" id="e3G-Um-Ipl"/>
+                        <constraint firstItem="569-gu-a2G" firstAttribute="leading" secondItem="m3l-1d-bWI" secondAttribute="leading" id="jnq-id-n6s"/>
+                        <constraint firstItem="bCs-J2-IPj" firstAttribute="top" secondItem="m3l-1d-bWI" secondAttribute="top" id="mtA-aN-Ecf"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCo-YF-aez" customClass="PassthroughView" customModule="FindTabBar" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="58"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="90" translatesAutoresizingMaskIntoConstraints="NO" id="FmO-hJ-SLz" customClass="PassthroughStackView" customModule="FindTabBar" customModuleProvider="target">
+                            <rect key="frame" x="57" y="9" width="300" height="40"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EOH-Do-hxB" customClass="PhotosIcon" customModule="FindTabBar" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="8bN-6f-Aat"/>
+                                        <constraint firstAttribute="height" constant="40" id="BLB-Xw-dGJ"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="10d-KH-We3" customClass="CameraIcon" customModule="FindTabBar" customModuleProvider="target">
+                                    <rect key="frame" x="130" y="0.0" width="40" height="40"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="2ms-Yq-MBo"/>
+                                        <constraint firstAttribute="width" constant="40" id="MSF-Yz-1Bq"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Su2-wl-aUw" customClass="ListsIcon" customModule="FindTabBar" customModuleProvider="target">
+                                    <rect key="frame" x="260" y="0.0" width="40" height="40"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="cv3-5i-POm"/>
+                                        <constraint firstAttribute="height" constant="40" id="elV-BP-ARq"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="58" id="0N9-Yw-gol"/>
+                        <constraint firstItem="FmO-hJ-SLz" firstAttribute="centerY" secondItem="sCo-YF-aez" secondAttribute="centerY" id="DRf-in-W2w"/>
+                        <constraint firstItem="FmO-hJ-SLz" firstAttribute="centerX" secondItem="sCo-YF-aez" secondAttribute="centerX" id="JVv-PW-gAb"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WIt-5u-c1k">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="0.5"/>
+                    <color key="backgroundColor" systemColor="placeholderTextColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.25" id="gIt-QZ-g6e"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="m3l-1d-bWI" secondAttribute="bottom" id="2OI-Sc-gkg"/>
+                <constraint firstAttribute="trailing" secondItem="WIt-5u-c1k" secondAttribute="trailing" id="6gG-VV-g72"/>
+                <constraint firstItem="m3l-1d-bWI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8r3-gs-BBK"/>
+                <constraint firstItem="sCo-YF-aez" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ARa-Ad-ud3"/>
+                <constraint firstAttribute="trailing" secondItem="m3l-1d-bWI" secondAttribute="trailing" id="DpW-Cp-3GG"/>
+                <constraint firstItem="sCo-YF-aez" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="MLV-th-Gll"/>
+                <constraint firstItem="m3l-1d-bWI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="N6U-jP-wI0"/>
+                <constraint firstItem="WIt-5u-c1k" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="P0Q-LN-5UK"/>
+                <constraint firstAttribute="trailing" secondItem="sCo-YF-aez" secondAttribute="trailing" id="UMb-rJ-5VI"/>
+                <constraint firstItem="WIt-5u-c1k" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oXu-tI-uPw"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-104.34782608695653" y="-115.84821428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="50Black">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="placeholderTextColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

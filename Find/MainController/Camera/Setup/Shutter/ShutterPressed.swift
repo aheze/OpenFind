@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import AVFoundation
 
-extension ViewController {
+extension CameraViewController {
     
     func saveImage(url: URL, imageName: String, image: UIImage, dateCreated: Date) {
 

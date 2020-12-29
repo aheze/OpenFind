@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CacheButton" customModule="FindTabBar" customModuleProvider="target">
+            <connections>
+                <outlet property="blurView" destination="9bG-9S-QTL" id="eoN-D5-Xts"/>
+                <outlet property="button" destination="NTj-87-iaL" id="WgR-mJ-OEn"/>
+                <outlet property="cacheIcon" destination="2nD-aE-IaF" id="LJm-Sh-1DA"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="ebq-Gc-mYJ"/>
+                <outlet property="shadeView" destination="R0a-gY-LUe" id="isR-BD-UVs"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9bG-9S-QTL">
+                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8Dy-mt-a9l">
+                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <blurEffect style="systemUltraThinMaterialDark"/>
+                </visualEffectView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R0a-gY-LUe">
+                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                    <color key="backgroundColor" name="50Black"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2nD-aE-IaF" customClass="CacheIcon" customModule="FindTabBar" customModuleProvider="target">
+                    <rect key="frame" x="15" y="15" width="30" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="B0n-63-N8M"/>
+                        <constraint firstAttribute="width" constant="30" id="i3I-z5-wL9"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTj-87-iaL">
+                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                    <connections>
+                        <action selector="touchDown:" destination="-1" eventType="touchDragEnter" id="BFM-mK-5by"/>
+                        <action selector="touchDown:" destination="-1" eventType="touchDown" id="cfF-LX-Rex"/>
+                        <action selector="touchUpCancel:" destination="-1" eventType="touchCancel" id="ATt-a8-SZr"/>
+                        <action selector="touchUpCancel:" destination="-1" eventType="touchDragExit" id="dqm-28-aUG"/>
+                        <action selector="touchUpInside:" destination="-1" eventType="touchUpInside" id="xrd-8L-wTU"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="9bG-9S-QTL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0b2-Y7-D2v"/>
+                <constraint firstItem="2nD-aE-IaF" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="3xJ-Jy-Wx4"/>
+                <constraint firstItem="2nD-aE-IaF" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="6qe-QL-e8U"/>
+                <constraint firstItem="R0a-gY-LUe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="AfM-Zv-N8j"/>
+                <constraint firstAttribute="trailing" secondItem="9bG-9S-QTL" secondAttribute="trailing" id="P3E-21-h8e"/>
+                <constraint firstItem="9bG-9S-QTL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Qgq-Ci-xi8"/>
+                <constraint firstItem="NTj-87-iaL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Umr-Qb-Wex"/>
+                <constraint firstAttribute="trailing" secondItem="NTj-87-iaL" secondAttribute="trailing" id="iBn-KB-bxX"/>
+                <constraint firstItem="NTj-87-iaL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="kjK-s4-thc"/>
+                <constraint firstAttribute="trailing" secondItem="R0a-gY-LUe" secondAttribute="trailing" id="nCq-dg-pHb"/>
+                <constraint firstAttribute="bottom" secondItem="R0a-gY-LUe" secondAttribute="bottom" id="oTH-Xa-2A2"/>
+                <constraint firstAttribute="bottom" secondItem="NTj-87-iaL" secondAttribute="bottom" id="s4c-xr-5Wa"/>
+                <constraint firstAttribute="bottom" secondItem="9bG-9S-QTL" secondAttribute="bottom" id="tLh-qK-OCf"/>
+                <constraint firstItem="R0a-gY-LUe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="uic-TJ-Kqb"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="132" y="84"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="50Black">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

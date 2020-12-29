@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CameraViewController.swift
 //  Find
 //
 //  Created by Zheng on 10/13/19.
@@ -45,16 +45,25 @@ class CameraView: UIView {
     }
 }
 
-class ViewController: UIViewController {
+class CameraViewController: UIViewController {
     
-//    var versionStore = WhatsNewVersionStore()
-    // Local KeyValueStore
     let keyValueVersionStore = KeyValueWhatsNewVersionStore(keyValueable: UserDefaults.standard)
     let updateImportantShouldPresentWhatsNew = false
     var shouldPresentWhatsNew = false
     
+    @IBOutlet weak var cameraIconHolder: UIView!
+    @IBOutlet weak var cameraIconHolderBottomC: NSLayoutConstraint!
     
+    @IBOutlet weak var messageView: MessageView!
+    @IBOutlet weak var saveToPhotos: SaveToPhotosButton!
+    @IBOutlet weak var cameraIcon: CameraIcon!
+    @IBOutlet weak var cache: CacheButton!
+    @IBOutlet weak var saveLabel: UILabel!
+    @IBOutlet weak var cacheLabel: UILabel!
     
+    var cameraChanged: ((Bool) -> Void)?
+    var savePressed = false
+    var cachePressed = false
     
     let deviceType = UIDevice.current.modelName
     
@@ -63,46 +72,46 @@ class ViewController: UIViewController {
     var displayingOrientationError = false
     
     ///PINCHING
-    @IBOutlet weak var controlsBottomC: NSLayoutConstraint! //15
+//    @IBOutlet weak var controlsBottomC: NSLayoutConstraint! //15
     
     @IBOutlet weak var contentTopC: NSLayoutConstraint!
     //15
     
-    @IBOutlet var pinchGesture: UIPinchGestureRecognizer!
+//    @IBOutlet var pinchGesture: UIPinchGestureRecognizer!
     var shouldPinch = true
-    @IBAction func pinchGesture(_ sender: UIPinchGestureRecognizer) {
-        controlsBottomC.constant = 15 - (sender.scale * 50)
-        contentTopC.constant = normalSearchFieldTopCConstant - (sender.scale * 50)
-        UIView.animate(withDuration: 0.2, animations: {
-            self.view.layoutIfNeeded()
-        })
-        if sender.state == UIGestureRecognizer.State.ended {
-            if sender.scale >= 1.3 {
-                controlsBottomC.constant = -80
-                contentTopC.constant = -100
-                searchContentView.isHidden = false
-                controlsView.isHidden = false
-
-                controlsBlurView.isHidden = false
-                controlsBlurView.alpha = 0
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.view.layoutIfNeeded()
-                    self.searchContentView.alpha = 0
-                    self.controlsView.alpha = 0
-
-                    self.controlsBlurView.alpha = 1
-                    self.controlsBlurView.transform = CGAffineTransform.identity
-                }) { _ in
-                    self.searchContentView.isHidden = true
-                    self.controlsView.isHidden = true
-                    self.shouldPinch = true
-                }
-            } else {
-                revealControls()
-            }
-        }
+//    @IBAction func pinchGesture(_ sender: UIPinchGestureRecognizer) {
+//        controlsBottomC.constant = 15 - (sender.scale * 50)
+//        contentTopC.constant = normalSearchFieldTopCConstant - (sender.scale * 50)
+//        UIView.animate(withDuration: 0.2, animations: {
+//            self.view.layoutIfNeeded()
+//        })
+//        if sender.state == UIGestureRecognizer.State.ended {
+//            if sender.scale >= 1.3 {
+//                controlsBottomC.constant = -80
+//                contentTopC.constant = -100
+//                searchContentView.isHidden = false
+//                controlsView.isHidden = false
+//
+//                controlsBlurView.isHidden = false
+//                controlsBlurView.alpha = 0
+//                UIView.animate(withDuration: 0.4, animations: {
+//                    self.view.layoutIfNeeded()
+//                    self.searchContentView.alpha = 0
+//                    self.controlsView.alpha = 0
+//
+//                    self.controlsBlurView.alpha = 1
+//                    self.controlsBlurView.transform = CGAffineTransform.identity
+//                }) { _ in
+//                    self.searchContentView.isHidden = true
+//                    self.controlsView.isHidden = true
+//                    self.shouldPinch = true
+//                }
+//            } else {
+//                revealControls()
+//            }
+//        }
         
-    }
+//    }
     @IBOutlet weak var controlsBlurView: UIVisualEffectView!
     
     @IBAction func showControlsPressed(_ sender: Any) {
@@ -110,27 +119,27 @@ class ViewController: UIViewController {
     }
     
     func revealControls() {
-        searchContentView.isHidden = false
-        controlsView.isHidden = false
-        controlsBlurView.isHidden = true
-        controlsBottomC.constant = 15
-        contentTopC.constant = normalSearchFieldTopCConstant
-        UIView.animate(withDuration: 0.4, animations: {
-            self.view.layoutIfNeeded()
-            self.searchContentView.alpha = 1
-            self.controlsView.alpha = 1
-            
-            self.controlsBlurView.alpha = 0
-            self.controlsBlurView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-        }) { _ in
-            self.controlsBlurView.isHidden = true
-        }
+//        searchContentView.isHidden = false
+//        controlsView.isHidden = false
+//        controlsBlurView.isHidden = true
+//        controlsBottomC.constant = 15
+//        contentTopC.constant = normalSearchFieldTopCConstant
+//        UIView.animate(withDuration: 0.4, animations: {
+//            self.view.layoutIfNeeded()
+//            self.searchContentView.alpha = 1
+//            self.controlsView.alpha = 1
+//            
+//            self.controlsBlurView.alpha = 0
+//            self.controlsBlurView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+//        }) { _ in
+//            self.controlsBlurView.isHidden = true
+//        }
     }
     
     
     @IBOutlet weak var darkBlurEffect: UIVisualEffectView!
-    @IBOutlet weak var menuButton: JJFloatingActionButton!
-    @IBOutlet weak var newShutterButton: NewShutterButton!
+//    @IBOutlet weak var menuButton: JJFloatingActionButton!
+//    @IBOutlet weak var newShutterButton: NewShutterButton!
     
     let defaults = UserDefaults.standard
     var shouldShowTextDetectIndicator = true
@@ -237,8 +246,8 @@ class ViewController: UIViewController {
     var currentNumber = 0
     var startGettingNearestFeaturePoints = false
     let fastSceneConfiguration = AROrientationTrackingConfiguration()
-    @IBOutlet weak var numberLabel: UILabel!
-    @IBOutlet weak var statusView: UIView!
+//    @IBOutlet weak var numberLabel: UILabel!
+//    @IBOutlet weak var statusView: UIView!
 //    weak var changeDelegate: ChangeStatusValue?
     weak var toggleCreateDelegate: ToggleCreateCircle?
     
@@ -291,11 +300,11 @@ class ViewController: UIViewController {
     var cameraDevice: AVCaptureDevice?
     
     //MARK: Camera Focus allowed views
-    @IBOutlet weak var menuAllowView: UIView!
-    @IBOutlet weak var middleAllowView: UIView!
-    @IBOutlet weak var statusAllowView: UIView!
-    @IBOutlet weak var stackAllowView: UIStackView!
-    @IBOutlet weak var controlsView: UIView!
+//    @IBOutlet weak var menuAllowView: UIView!
+//    @IBOutlet weak var middleAllowView: UIView!
+//    @IBOutlet weak var statusAllowView: UIView!
+//    @IBOutlet weak var stackAllowView: UIStackView!
+//    @IBOutlet weak var controlsView: UIView!
     @IBOutlet weak var cameraView: CameraView!
     let videoDataOutput = AVCaptureVideoDataOutput()
     func getImageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
@@ -501,7 +510,13 @@ class ViewController: UIViewController {
         print("Warning - Didn't recognise interface orientation (\(orientation))")
         return .portrait
     }
-    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        cameraIconHolderBottomC.constant = ConstantVars.shutterBottomDistance
+        
+        cameraIcon.makeActiveState()()
+        cameraIcon.rimView.layer.borderColor = UIColor.white.cgColor
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -522,7 +537,7 @@ class ViewController: UIViewController {
         contentTopC.constant = normalSearchFieldTopCConstant
         searchContentView.layoutIfNeeded()
         
-        pinchGesture.delegate = self
+//        pinchGesture.delegate = self
         self.modalPresentationStyle = .automatic
         
         NotificationCenter.default.addObserver(self, selector: #selector(_KeyboardFrameChanged(_:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
@@ -535,9 +550,9 @@ class ViewController: UIViewController {
         controlsBlurView.layer.cornerRadius = 8
         controlsBlurView.clipsToBounds = true
         controlsBlurView.isHidden = true
-        numberLabel.isHidden = false
+//        numberLabel.isHidden = false
         updateMatchesNumber(to: 0)
-        setUpButtons()
+//        setUpButtons()
         setUpTempImageView()
         setUpSearchBar()
         setUpFilePath()
@@ -591,9 +606,83 @@ class ViewController: UIViewController {
         }
         
         
+        /// 1.2 setup
+        
+        cameraIconHolder.backgroundColor = UIColor.clear
+        cameraIcon.isActualButton = true
+        cameraIcon.pressed = { [weak self] in
+            guard let self = self else { return }
+            CameraState.isOn.toggle()
+            self.cameraIcon.toggle(on: CameraState.isOn)
+            self.cameraChanged?(CameraState.isOn)
+        }
+        saveToPhotos.alpha = 0
+        saveToPhotos.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        cache.alpha = 0
+        cache.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        saveLabel.alpha = 0
+        cacheLabel.alpha = 0
+        
+        saveToPhotos.pressed = { [weak self] in
+            guard let self = self else { return }
+            self.savePressed.toggle()
+            if self.savePressed {
+                UIView.animate(withDuration: Double(Constants.transitionDuration)) {
+                    self.saveToPhotos.photosIcon.makeActiveState(offset: true)()
+                }
+                self.saveLabel.fadeTransition(0.2)
+                self.saveLabel.text = "Saved"
+            } else {
+                UIView.animate(withDuration: Double(Constants.transitionDuration)) {
+                    self.saveToPhotos.photosIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)()
+                }
+                self.saveLabel.fadeTransition(0.2)
+                self.saveLabel.text = "Save"
+            }
+        }
+        cache.pressed = { [weak self] in
+            guard let self = self else { return }
+            self.cachePressed.toggle()
+            if self.cachePressed {
+                self.cache.cacheIcon.animateCheck(percentage: 1)
+                self.cache.cacheIcon.toggleRim(light: true)
+                self.cacheLabel.fadeTransition(0.2)
+                self.cacheLabel.text = "Caching..."
+                self.messageView.showMessage("Caching - 50%", dismissible: false, duration: -1)
+            } else {
+                self.cache.cacheIcon.animateCheck(percentage: 0)
+                self.cache.cacheIcon.toggleRim(light: false)
+                self.cacheLabel.fadeTransition(0.2)
+                self.cacheLabel.text = "Cache"
+                self.messageView.showMessage("Cancelled", dismissible: true, duration: 1)
+            }
+        }
+        
+        
     }
     
     
+    func makeActiveState() {
+        UIView.animate(withDuration: 0.4) {
+            self.saveToPhotos.alpha = 1
+            self.saveToPhotos.transform = CGAffineTransform.identity
+            self.cache.alpha = 1
+            self.cache.transform = CGAffineTransform.identity
+            self.saveLabel.alpha = 1
+            self.cacheLabel.alpha = 1
+        }
+    }
+    
+    func makeInactiveState() {
+        UIView.animate(withDuration: 0.4) {
+            self.saveToPhotos.alpha = 0
+            self.saveToPhotos.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            self.cache.alpha = 0
+            self.cache.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            self.saveLabel.alpha = 0
+            self.cacheLabel.alpha = 0
+        }
+    }
     
     // get magnitude of vector via Pythagorean theorem
     func getMagnitude(from attitude: CMAttitude) -> Double {
@@ -631,7 +720,7 @@ class ViewController: UIViewController {
 
 
 
-extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
+extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     // MARK: - Camera Delegate and Setup
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         currentPassCount += 1

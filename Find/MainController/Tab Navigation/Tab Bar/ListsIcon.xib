@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ListsIcon" customModule="FindTabBar" customModuleProvider="target">
+            <connections>
+                <outlet property="backgroundView" destination="bz5-Ob-cyg" id="AZk-qM-8wm"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="qCE-yA-leH"/>
+                <outlet property="detailsView" destination="pY4-Jz-HkC" id="VOV-sA-cXt"/>
+                <outlet property="foregroundView" destination="qDr-qd-6fE" id="tcA-Y8-gyA"/>
+                <outlet property="touchButton" destination="Bu1-Sa-3oV" id="VGa-tw-0q0"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bz5-Ob-cyg">
+                    <rect key="frame" x="6" y="7" width="23" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" name="TabIconBackground-Dark"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qDr-qd-6fE">
+                    <rect key="frame" x="11" y="3" width="23" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pY4-Jz-HkC">
+                            <rect key="frame" x="0.0" y="0.0" width="23" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" name="TabIconDetails-Dark"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" name="TabIconForeground-Dark"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bu1-Sa-3oV">
+                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                    <connections>
+                        <action selector="touchDown:" destination="-1" eventType="touchDown" id="X0F-Yg-YKU"/>
+                        <action selector="touchDown:" destination="-1" eventType="touchDragEnter" id="naL-SE-QNv"/>
+                        <action selector="touchUpCancel:" destination="-1" eventType="touchCancel" id="aLM-mw-QOZ"/>
+                        <action selector="touchUpCancel:" destination="-1" eventType="touchDragExit" id="hgM-pL-nqw"/>
+                        <action selector="touchUpInside:" destination="-1" eventType="touchUpInside" id="RAZ-Y6-42u"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Bu1-Sa-3oV" secondAttribute="bottom" id="2yM-vt-OQg"/>
+                <constraint firstAttribute="trailing" secondItem="Bu1-Sa-3oV" secondAttribute="trailing" id="d2c-he-ERM"/>
+                <constraint firstItem="Bu1-Sa-3oV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="lxd-hM-qD0"/>
+                <constraint firstItem="Bu1-Sa-3oV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mkZ-qd-G59"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="63.768115942028992" y="81.696428571428569"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="TabIconBackground-Dark">
+            <color red="0.35699999332427979" green="0.35699999332427979" blue="0.35699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TabIconDetails-Dark">
+            <color red="0.84700000286102295" green="0.84700000286102295" blue="0.84700000286102295" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TabIconForeground-Dark">
+            <color red="0.29399999976158142" green="0.29399999976158142" blue="0.29399999976158142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

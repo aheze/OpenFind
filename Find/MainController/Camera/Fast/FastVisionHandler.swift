@@ -11,7 +11,7 @@ import Vision
 import ARKit
 import CoreMotion
 
-extension ViewController {
+extension CameraViewController {
     
     func handleFastDetectedText(request: VNRequest?, error: Error?) {
         if shouldResetHighlights {

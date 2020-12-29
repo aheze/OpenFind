@@ -16,6 +16,15 @@ protocol ChangeNumberOfSelectedList: class {
     func changeLabel(to: Int)
     func disablePress(disable: Bool)
 }
+class ListsNavController: UINavigationController {
+    
+}
+
+class LayerScrollView: UIScrollView, UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
 class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLayoutDelegate, UIAdaptivePresentationControllerDelegate, NewListMade, TellControllerToDeleteList {
 
     @IBOutlet weak var topBlurView: UIVisualEffectView!
