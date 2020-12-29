@@ -23,7 +23,46 @@ class ListBuilderViewController: UIViewController {
     
     var listBuilderType = ListBuilderType.editor
     
-    @IBOutlet weak var topImageView: UIImageView!
+    @IBOutlet weak var topImageView: UIImageView! /// show the symbol and color
+    @IBOutlet weak var promptLabel: UILabel! /// Edit list or New List
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
+    
+    weak var finishedEditingList: FinishedEditingList?
+    weak var newListDelegate: NewListMade?
+    
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func saveButtonPressed(_ sender: Any) {
+        view.endEditing(true)
+        
+        
+        print("save pressed")
+        var newName = generalVC.name
+        var newDesc = generalVC.descriptionOfList
+        
+        let untitledName = NSLocalizedString("untitledName", comment: "GeneralViewController def=Untitled")
+        let noDescription = NSLocalizedString("noDescription", comment: "GeneralViewController def=No Description")
+        if newName == "" { newName = untitledName }
+        if newDesc == "" { newDesc = noDescription }
+        
+        name = newName
+        descriptionOfList = newDesc
+        contents = generalVC.contents
+        iconImageName = symbolVC.selectedIconName
+        iconColorName = colorVC.colorName
+
+        findAndStoreErrors(contentsArray: generalVC.contents)
+        if showDoneAlerts() { /// true = has errors
+            print("has errors")
+        } else {
+            print("No errors")
+            returnCompletedList()
+        }
+    }
+    
     
     @IBOutlet weak var referenceView: UIView!
     
@@ -53,22 +92,24 @@ class ListBuilderViewController: UIViewController {
     var iconImageName = "square.grid.2x2"
     var iconColorName = "#579f2b"
     
-    var canDismiss = false
-    
-    weak var finishedEditingList: FinishedEditingList?
-    weak var newListDelegate: NewListMade?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if listBuilderType == .editor {
+            promptLabel.text = "Edit List"
+        } else {
+            promptLabel.text = "New List"
+        }
         setUpPagingVC()
     }
     
     
     func returnCompletedList() {
         if listBuilderType == .editor {
+            print("is editor")
             finishedEditingList?.updateExistingList(name: name, description: descriptionOfList, contents: contents, imageName: iconImageName, imageColor: iconColorName, deleteList: false)
         } else {
+            print("make new")
             newListDelegate?.madeNewList(name: name, description: descriptionOfList, contents: contents, imageName: iconImageName, imageColor: iconColorName)
         }
         self.dismiss(animated: true, completion: nil)
@@ -77,18 +118,10 @@ class ListBuilderViewController: UIViewController {
 }
 
 extension ListBuilderViewController: GetGeneralInfo, GetIconInfo, GetColorInfo {
-    func returnNewGeneral(nameOfList: String, desc: String, contentsOfList: [String], hasErrors: Bool, overrideMake: Bool) {
+    func returnFinishedGeneral(nameOfList: String, desc: String, contentsOfList: [String]) {
         name = nameOfList
         descriptionOfList = desc
         contents = contentsOfList
-        
-        canDismiss = !hasErrors ///dismiss if no errors
-        print("has errors? \(hasErrors)")
-        
-        print("Return New General, has errors: \(hasErrors)")
-        if overrideMake == true {
-            returnCompletedList()
-        }
     }
     
     func returnNewIcon(iconName: String) {
@@ -120,11 +153,15 @@ extension ListBuilderViewController: GetGeneralInfo, GetIconInfo, GetColorInfo {
         generalVC.generalDelegate = self
         generalVC.deleteThisList = { [weak self] in
             self?.finishedEditingList?.updateExistingList(name: "", description: "", contents: [""], imageName: "", imageColor: "", deleteList: true)
-            self?.presentingViewController?.dismiss(animated: true, completion: nil)
+            self?.dismiss(animated: true, completion: nil)
         }
         
         symbolVC.iconDelegate = self
         colorVC.colorDelegate = self
+        
+        generalVC.receiveGeneral(nameOfList: name, desc: descriptionOfList, contentsOfList: contents)
+        symbolVC.receiveIcon(name: iconImageName)
+        colorVC.receiveColor(name: iconColorName)
         
         let pagingViewController = PagingViewController(viewControllers: [
             generalVC,
@@ -143,11 +180,10 @@ extension ListBuilderViewController: GetGeneralInfo, GetIconInfo, GetColorInfo {
         }
         
         pagingViewController.textColor = UIColor(named: "PureBlack")!
-        pagingViewController.backgroundColor = UIColor(named: "PureBlank")!
-        pagingViewController.menuBackgroundColor = UIColor(named: "PureBlank")!
+        pagingViewController.backgroundColor = UIColor.secondarySystemBackground
+        pagingViewController.menuBackgroundColor = UIColor.secondarySystemBackground
         pagingViewController.selectedTextColor = UIColor(named: "LinkColor")!
-        pagingViewController.selectedTextColor = UIColor(named: "LinkColor")!
-        pagingViewController.selectedBackgroundColor = UIColor(named: "PureBlank")!
+        pagingViewController.selectedBackgroundColor = UIColor.secondarySystemBackground
         pagingViewController.contentInteraction = .none
         
         pagingViewController.delegate = self

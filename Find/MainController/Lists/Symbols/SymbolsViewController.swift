@@ -141,7 +141,6 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
         let middlePaddingSpace = CGFloat(8)
         let availableWidth = collectionView.frame.width - edgePaddingSpace - (middlePaddingSpace * (itemsPerRow - 1))
         let widthPerItem = (availableWidth / itemsPerRow)
-        print(widthPerItem)
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

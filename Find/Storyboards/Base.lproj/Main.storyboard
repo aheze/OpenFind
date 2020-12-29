@@ -918,25 +918,77 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7YW-xc-BV1">
-                                <rect key="frame" x="0.0" y="44" width="414" height="90"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="126"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cTk-C7-NCr">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                        <subviews>
+                                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="00L-NE-8Jy">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="jcb-98-k44">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </view>
+                                                <blurEffect style="regular"/>
+                                            </visualEffectView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D0O-zB-X8g">
+                                                <rect key="frame" x="20" y="7.5" width="59" height="35"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                <state key="normal" title="Cancel"/>
+                                                <connections>
+                                                    <action selector="cancelButtonPressed:" destination="qXW-1w-dQD" eventType="touchUpInside" id="FiC-lA-lLX"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJm-mq-t0W">
+                                                <rect key="frame" x="171.5" y="13.5" width="71" height="23"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jCO-rD-51A">
+                                                <rect key="frame" x="353" y="7.5" width="41" height="35"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                <state key="normal" title="Save"/>
+                                                <connections>
+                                                    <action selector="saveButtonPressed:" destination="qXW-1w-dQD" eventType="touchUpInside" id="ctX-Ir-J0h"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="D0O-zB-X8g" firstAttribute="centerY" secondItem="cTk-C7-NCr" secondAttribute="centerY" id="19k-BK-mVO"/>
+                                            <constraint firstItem="00L-NE-8Jy" firstAttribute="leading" secondItem="cTk-C7-NCr" secondAttribute="leading" id="M46-ne-FMq"/>
+                                            <constraint firstAttribute="height" constant="50" id="Nj4-5a-H1y"/>
+                                            <constraint firstItem="jCO-rD-51A" firstAttribute="centerY" secondItem="cTk-C7-NCr" secondAttribute="centerY" id="T0v-gW-rYC"/>
+                                            <constraint firstAttribute="trailing" secondItem="jCO-rD-51A" secondAttribute="trailing" constant="20" id="TZo-LM-6ZH"/>
+                                            <constraint firstItem="EJm-mq-t0W" firstAttribute="centerX" secondItem="cTk-C7-NCr" secondAttribute="centerX" id="XUG-2c-1NY"/>
+                                            <constraint firstItem="00L-NE-8Jy" firstAttribute="top" secondItem="cTk-C7-NCr" secondAttribute="top" id="ggL-Wl-Ah6"/>
+                                            <constraint firstAttribute="trailing" secondItem="00L-NE-8Jy" secondAttribute="trailing" id="iRD-fj-gRh"/>
+                                            <constraint firstItem="D0O-zB-X8g" firstAttribute="leading" secondItem="cTk-C7-NCr" secondAttribute="leading" constant="20" id="u1e-7Q-bG3"/>
+                                            <constraint firstItem="EJm-mq-t0W" firstAttribute="centerY" secondItem="cTk-C7-NCr" secondAttribute="centerY" id="wZk-s4-dBn"/>
+                                            <constraint firstAttribute="bottom" secondItem="00L-NE-8Jy" secondAttribute="bottom" id="zVu-BB-3ss"/>
+                                        </constraints>
+                                    </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z7P-cn-jyc">
-                                        <rect key="frame" x="170" y="8" width="74" height="74"/>
+                                        <rect key="frame" x="177" y="58" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Z7P-cn-jyc" secondAttribute="height" multiplier="1:1" id="8Tk-Sn-EIq"/>
+                                            <constraint firstAttribute="height" constant="60" id="rlL-Cg-QZF"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" name="Gray1"/>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Z7P-cn-jyc" secondAttribute="bottom" constant="8" id="8JG-ca-wqI"/>
-                                    <constraint firstAttribute="height" constant="90" id="CqS-U4-AiH"/>
-                                    <constraint firstItem="Z7P-cn-jyc" firstAttribute="top" secondItem="7YW-xc-BV1" secondAttribute="top" constant="8" id="Fb1-ap-YZY"/>
+                                    <constraint firstItem="Z7P-cn-jyc" firstAttribute="top" secondItem="cTk-C7-NCr" secondAttribute="bottom" constant="8" id="LST-1a-JfF"/>
                                     <constraint firstItem="Z7P-cn-jyc" firstAttribute="centerX" secondItem="7YW-xc-BV1" secondAttribute="centerX" id="XNH-eN-EMe"/>
+                                    <constraint firstAttribute="trailing" secondItem="cTk-C7-NCr" secondAttribute="trailing" id="a4I-Z5-EjN"/>
+                                    <constraint firstItem="cTk-C7-NCr" firstAttribute="top" secondItem="7YW-xc-BV1" secondAttribute="top" id="hgx-0P-ulo"/>
+                                    <constraint firstItem="cTk-C7-NCr" firstAttribute="leading" secondItem="7YW-xc-BV1" secondAttribute="leading" id="psz-0J-O6Z"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bL4-mR-BiL">
-                                <rect key="frame" x="0.0" y="134" width="414" height="762"/>
+                                <rect key="frame" x="0.0" y="170" width="414" height="726"/>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                             </view>
                         </subviews>
@@ -955,7 +1007,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="ST3-4Y-fv4"/>
                     <connections>
+                        <outlet property="cancelButton" destination="D0O-zB-X8g" id="6om-jt-Mdi"/>
+                        <outlet property="promptLabel" destination="EJm-mq-t0W" id="lNp-YU-pH8"/>
                         <outlet property="referenceView" destination="bL4-mR-BiL" id="9Lu-eC-s9o"/>
+                        <outlet property="saveButton" destination="jCO-rD-51A" id="ifL-Ol-Oh4"/>
                         <outlet property="topImageView" destination="Z7P-cn-jyc" id="7r0-wY-9cq"/>
                     </connections>
                 </viewController>

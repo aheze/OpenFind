@@ -325,6 +325,9 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
     
     weak var delegate: UIAdaptivePresentationControllerDelegate?
     override func viewDidLoad() {
+        
+        setUpBarButtons()
+        
         super.viewDidLoad()
         if let layout = collectionView?.collectionViewLayout as? AdaptiveCollectionLayout {
           layout.delegate = self
@@ -420,6 +423,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         
     }
     func update(index: Int, name: String, description: String, contents: [String], imageName: String, imageColor: String) {
+        print("updating with... \(name), \(description), \(contents)")
         if let listToEdit = listCategories?[index] {
             do {
                 try realm.write {

@@ -19,7 +19,6 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     
     func scrolledHere() {
-        print("SCROLL")
         if let row = colorArray.firstIndex(of: colorName) {
             let indP = IndexPath(item: row, section: 0)
             print(indP)
