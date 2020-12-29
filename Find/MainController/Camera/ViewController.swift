@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  Find
 //
-//  Created by Andrew on 10/13/19.
-//  Copyright © 2019 Andrew. All rights reserved.
+//  Created by Zheng on 10/13/19.
+//  Copyright © 2019 Zheng. All rights reserved.
 //
 
 import UIKit
