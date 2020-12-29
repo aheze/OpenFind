@@ -12,7 +12,7 @@ protocol GetIconInfo: class {
     func returnNewIcon(iconName: String)
 }
 
-class SymbolsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ReceiveIcon, ScrolledToIcons {
+class SymbolsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func scrolledHere() {
         print("scrolled here, \(currentSelectedIndex)")
@@ -56,10 +56,10 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
     //var sectionToCategory = [Int: String]()
     var sectionToCount = [Int: Int]()
     
-    private let sectionInsets = UIEdgeInsets(top: 4.0,
-                                             left: 4.0,
-                                             bottom: 4.0,
-                                             right: 4.0)
+    private let sectionInsets = UIEdgeInsets(top: 16,
+                                             left: 16,
+                                             bottom: 16,
+                                             right: 16)
     
     weak var iconDelegate: GetIconInfo?
     
@@ -125,7 +125,9 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
         
     
         if let name = indexpathToSymbol[indexPath] {
-            cell.name = name
+            let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 12, weight: .semibold)
+            let newImage = UIImage(systemName: name, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "PureBlack") ?? .black, renderingMode: .alwaysOriginal)
+            cell.imageView.image = newImage
         }
         
         return cell
@@ -134,10 +136,11 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
     func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemsPerRow = CGFloat(5)
-        let paddingSpace = sectionInsets.left * CGFloat(itemsPerRow + 1)
-        let availableWidth = collectionView.frame.width - paddingSpace
-        let widthPerItem = (availableWidth / itemsPerRow) - 4
+        let itemsPerRow = CGFloat(6)
+        let edgePaddingSpace = sectionInsets.left * 2
+        let middlePaddingSpace = CGFloat(8)
+        let availableWidth = collectionView.frame.width - edgePaddingSpace - (middlePaddingSpace * (itemsPerRow - 1))
+        let widthPerItem = (availableWidth / itemsPerRow)
         print(widthPerItem)
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
@@ -168,22 +171,7 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
 class SymbolCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
-    
-    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var overlayView: UIView!
-    var name = "" {
-        didSet {
-//            DispatchQueue.global(qos: .background).async {
-                DispatchQueue.main.async {
-                    let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
-                    let newImage = UIImage(systemName: self.name, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "PureBlack") ?? .black, renderingMode: .alwaysOriginal)
-                    self.imageView.image = newImage
-                }
-//            }
-        }
-    }
 }
 
 extension SymbolsViewController {

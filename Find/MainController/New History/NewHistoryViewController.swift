@@ -33,7 +33,9 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     let tapToDismiss = NSLocalizedString("tapToDismiss", comment: "Multipurpose def=Tap to dismiss")
     let cantBeUndone = NSLocalizedString("cantBeUndone", comment: "Multipurpose def=This action can't be undone.")
     
-    @IBOutlet weak var topBlurView: UIVisualEffectView!
+//    @IBOutlet weak var topBlurView: UIVisualEffectView!
+    
+    @IBOutlet weak var topView: UIView!
     
     @IBOutlet weak var quickTourView: UIView!
     @IBOutlet weak var quickTourHeightC: NSLayoutConstraint! /// 40
@@ -58,7 +60,8 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func animateCloseQuickTour() {
         defaults.set(true, forKey: "historyViewedBefore")
-        let topInset = topBlurView.frame.height
+        let topInset = topView.frame.height
+        
         quickTourHeightC.constant = 0
         
         self.collectionView.verticalScrollIndicatorInsets.top = topInset
@@ -196,8 +199,6 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     
     @IBOutlet weak var selectButton: UIButton!
     
-    @IBOutlet weak var selectAll: UIButton!
-    var deselectAll = false
     
     @IBOutlet weak var inBetweenSelect: NSLayoutConstraint!
     var selectButtonSelected = false
@@ -207,43 +208,17 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
     let selectAllLoc = NSLocalizedString("selectAllLoc", comment: "NewHistoryViewController def=Select All")
     
     
-    @IBAction func selectAllPressed(_ sender: UIButton) {
-        if deselectAll == false { /// Select All cells, change label to opposite
-            deselectAll = true
-            print("select all")
-            
-            let deselectAllLoc = NSLocalizedString("deselectAllLoc", comment: "NewHistoryViewController def=Deselect All")
-            
-            selectAll.setTitle(deselectAllLoc, for: .normal)
-            UIView.animate(withDuration: 0.09, animations: {
-                self.view.layoutIfNeeded()
-            })
-            deselectAllItems(deselect: false)
-        } else {
-            print("deselect all")
-            deselectAll = false
-            
-            
-            
-            selectAll.setTitle(selectAllLoc, for: .normal)
-            UIView.animate(withDuration: 0.09, animations: {
-                self.view.layoutIfNeeded()
-            })
-            deselectAllItems(deselect: true)
-        }
-    }
-    
     @IBAction func selectPressed(_ sender: UIButton) {
         if selectButtonSelected == false {
             selectButtonSelected = true
             collectionView.allowsMultipleSelection = true
-            fadeSelectOptions(fadeOut: "fade in")
+//            fadeSelectOptions(fadeOut: "fade in")
             
         } else { ///Cancel will now be Select
             
             selectButtonSelected = false
             SwiftEntryKit.dismiss()
-            fadeSelectOptions(fadeOut: "fade out")
+//            fadeSelectOptions(fadeOut: "fade out")
             collectionView.allowsMultipleSelection = false
             
         }
@@ -255,134 +230,122 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         return .lightContent
     }
     
-    func fadeSelectOptions(fadeOut: String) {
-        switch fadeOut {
-        case "fade out":
-            if selectButtonSelected == false {
-                deselectAllItems(deselect: true)
-                deselectAll = false
-                UIView.transition(with: selectButton, duration: 0.08, options: .transitionCrossDissolve, animations: {
-                    self.selectButton.setTitle(self.selectLoc, for: .normal)
-                }, completion: { _ in
-                    UIView.transition(with: self.selectAll, duration: 0.1, options: .transitionCrossDissolve, animations: {
-                        self.selectAll.setTitle(self.selectAllLoc, for: .normal)
-                    }, completion: nil)
-                })
-                
-                
-                inBetweenSelect.constant = -5
-                selectAll.alpha = 1
-                UIView.animate(withDuration: 0.08, animations: {
-                    self.view.layoutIfNeeded()
-                    self.selectAll.alpha = 0
-                }) { _ in
-                    self.selectAll.isHidden = true
-                }
-            }
-            
-        case "fade in":
-            if photoCategories?.count == 0 {
-                selectButtonSelected = false
-                var attributes = EKAttributes.bottomFloat
-                attributes.entryBackground = .color(color: .white)
-                attributes.entranceAnimation = .translation
-                attributes.exitAnimation = .translation
-                attributes.displayDuration = 0.7
-                attributes.positionConstraints.size.height = .constant(value: 50)
-                attributes.statusBar = .light
-                attributes.entryInteraction = .absorbTouches
-                
-                let contentView = UIView()
-                contentView.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-                contentView.layer.cornerRadius = 8
-                let subTitle = UILabel()
-                
-                let noPhotosTakenYet = NSLocalizedString("noPhotosTakenYet", comment: "NewHistoryViewController def=No Photos Taken Yet!")
-                subTitle.text = noPhotosTakenYet
-                subTitle.textColor = UIColor.white
-                contentView.addSubview(subTitle)
-                subTitle.snp.makeConstraints { (make) in
-                    make.center.equalToSuperview()
-                }
-                
-                let edgeWidth = CGFloat(600)
-                attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
-                SwiftEntryKit.display(entry: contentView, using: attributes)
-                
-            } else {
-                var attributes = EKAttributes.bottomFloat
-                attributes.entryBackground = .color(color: .white)
-                attributes.entranceAnimation = .translation
-                attributes.exitAnimation = .translation
-                attributes.displayDuration = .infinity
-                attributes.positionConstraints.size.height = .constant(value: 50)
-                attributes.statusBar = .light
-                attributes.entryInteraction = .absorbTouches
-                attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
-                
-                let edgeWidth = CGFloat(600)
-                attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
-                
-                
-                attributes.shadow = .active(with: .init(color: .black, opacity: 0.4, radius: 10, offset: .zero))
-                attributes.lifecycleEvents.didAppear =  {
-                    if let rect = self.changeFloatDelegate?.getRect() {
-                        self.tempShareWidthC.constant = rect.width
-                        self.tempShareHeightC.constant = rect.height
-                        let viewFrame = self.view.convert(self.view.bounds, to: nil)
-                        let newX = viewFrame.origin.x
-                        let newY = viewFrame.origin.y
-                        
-                        let hor = (rect.origin.x + rect.width) - newX
-                        var vert = (rect.origin.y + rect.height) - newY
-                        vert -= 10
-                        
-                        let horDiff = self.view.bounds.width - hor
-                        let vertDiff = self.view.bounds.height - vert
-                        
-                        self.tempShareRightC.constant = horDiff
-                        self.tempShareBottomC.constant = vertDiff
-                        self.tempShareView.layoutIfNeeded()
-                    }
-                }
-                let customView = HistorySelectorView()
-                customView.buttonPressedDelegate = self
-                
-                changeFloatDelegate = customView
-                changeNumberDelegate = customView
-                SwiftEntryKit.display(entry: customView, using: attributes)
-                
-                changeFloatDelegate?.changeFloat(to: "Disable")
-                
-                let done = NSLocalizedString("done", comment: "Multipurpose def=Done")
-                selectButton.setTitle(done, for: .normal)
-                inBetweenSelect.constant = 5
-                selectAll.isHidden = false
-                UIView.animate(withDuration: 0.08, animations: {
-                    self.selectAll.alpha = 1
-                    self.view.layoutIfNeeded()
-                })
-            }
-            
-        case "firstTimeSetup":
-            selectAll.alpha = 0
-            selectAll.isHidden = true
-            deselectAll = false
-            selectButtonSelected = false
-        default:
-            print("unknown case, fade")
-        }
-    }
+//    func fadeSelectOptions(fadeOut: String) {
+//        switch fadeOut {
+//        case "fade out":
+//            if selectButtonSelected == false {
+//                deselectAllItems(deselect: true)
+//
+//                UIView.transition(with: selectButton, duration: 0.08, options: .transitionCrossDissolve, animations: {
+//                    self.selectButton.setTitle(self.selectLoc, for: .normal)
+//                }, completion: { _ in
+//                    UIView.transition(with: self.selectAll, duration: 0.1, options: .transitionCrossDissolve, animations: {
+//                        self.selectAll.setTitle(self.selectAllLoc, for: .normal)
+//                    }, completion: nil)
+//                })
+//
+//
+//                inBetweenSelect.constant = -5
+//                selectAll.alpha = 1
+//                UIView.animate(withDuration: 0.08, animations: {
+//                    self.view.layoutIfNeeded()
+//                    self.selectAll.alpha = 0
+//                }) { _ in
+//                    self.selectAll.isHidden = true
+//                }
+//            }
+//
+//        case "fade in":
+//            if photoCategories?.count == 0 {
+//                selectButtonSelected = false
+//                var attributes = EKAttributes.bottomFloat
+//                attributes.entryBackground = .color(color: .white)
+//                attributes.entranceAnimation = .translation
+//                attributes.exitAnimation = .translation
+//                attributes.displayDuration = 0.7
+//                attributes.positionConstraints.size.height = .constant(value: 50)
+//                attributes.statusBar = .light
+//                attributes.entryInteraction = .absorbTouches
+//
+//                let contentView = UIView()
+//                contentView.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+//                contentView.layer.cornerRadius = 8
+//                let subTitle = UILabel()
+//
+//                let noPhotosTakenYet = NSLocalizedString("noPhotosTakenYet", comment: "NewHistoryViewController def=No Photos Taken Yet!")
+//                subTitle.text = noPhotosTakenYet
+//                subTitle.textColor = UIColor.white
+//                contentView.addSubview(subTitle)
+//                subTitle.snp.makeConstraints { (make) in
+//                    make.center.equalToSuperview()
+//                }
+//
+//                let edgeWidth = CGFloat(600)
+//                attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
+//                SwiftEntryKit.display(entry: contentView, using: attributes)
+//
+//            } else {
+//                var attributes = EKAttributes.bottomFloat
+//                attributes.entryBackground = .color(color: .white)
+//                attributes.entranceAnimation = .translation
+//                attributes.exitAnimation = .translation
+//                attributes.displayDuration = .infinity
+//                attributes.positionConstraints.size.height = .constant(value: 50)
+//                attributes.statusBar = .light
+//                attributes.entryInteraction = .absorbTouches
+//                attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+//
+//                let edgeWidth = CGFloat(600)
+//                attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
+//
+//
+//                attributes.shadow = .active(with: .init(color: .black, opacity: 0.4, radius: 10, offset: .zero))
+//                attributes.lifecycleEvents.didAppear =  {
+//                    if let rect = self.changeFloatDelegate?.getRect() {
+//                        self.tempShareWidthC.constant = rect.width
+//                        self.tempShareHeightC.constant = rect.height
+//                        let viewFrame = self.view.convert(self.view.bounds, to: nil)
+//                        let newX = viewFrame.origin.x
+//                        let newY = viewFrame.origin.y
+//
+//                        let hor = (rect.origin.x + rect.width) - newX
+//                        var vert = (rect.origin.y + rect.height) - newY
+//                        vert -= 10
+//
+//                        let horDiff = self.view.bounds.width - hor
+//                        let vertDiff = self.view.bounds.height - vert
+//
+//                        self.tempShareRightC.constant = horDiff
+//                        self.tempShareBottomC.constant = vertDiff
+//                        self.tempShareView.layoutIfNeeded()
+//                    }
+//                }
+//                let customView = HistorySelectorView()
+//                customView.buttonPressedDelegate = self
+//
+//                changeFloatDelegate = customView
+//                changeNumberDelegate = customView
+//                SwiftEntryKit.display(entry: customView, using: attributes)
+//
+//                changeFloatDelegate?.changeFloat(to: "Disable")
+//
+//                let done = NSLocalizedString("done", comment: "Multipurpose def=Done")
+//                selectButton.setTitle(done, for: .normal)
+//                inBetweenSelect.constant = 5
+//                selectAll.isHidden = false
+//                UIView.animate(withDuration: 0.08, animations: {
+//                    self.selectAll.alpha = 1
+//                    self.view.layoutIfNeeded()
+//                })
+//            }
+//
+//        case "firstTimeSetup":
+//            selectButtonSelected = false
+//        default:
+//            print("unknown case, fade")
+//        }
+//    }
     
-    @IBOutlet weak var xButton: UIButton!
-    
-    @IBAction func xButtonPressed(_ sender: Any) {
-        if let pvc = self.presentationController {
-            pvc.delegate?.presentationControllerDidDismiss?(pvc)
-        }
-        SwiftEntryKit.dismiss()
-        self.dismiss(animated: true, completion: nil)
-    }
     
 //    override func viewDidAppear(_ animated: Bool) {
 //        super.viewDidAppear(true)
@@ -398,7 +361,7 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         sortHist()
         getData()
         
-        let topInset = topBlurView.frame.height
+        let topInset = topView.frame.height
         let historyViewedBefore = defaults.bool(forKey: "historyViewedBefore")
         if historyViewedBefore == false {
             
@@ -424,8 +387,8 @@ class NewHistoryViewController: UIViewController, UICollectionViewDelegate, UICo
         }
         
         selectButton.layer.cornerRadius = 6
-        selectAll.layer.cornerRadius = 6
-        fadeSelectOptions(fadeOut: "firstTimeSetup")
+    
+//        fadeSelectOptions(fadeOut: "firstTimeSetup")
         deselectAllItems(deselect: true)
     
         if photoCategories?.count ?? 0 > 0 {
@@ -561,7 +524,7 @@ extension NewHistoryViewController: UIAdaptivePresentationControllerDelegate {
             }
         }
         let customView = HistorySelectorView()
-        customView.buttonPressedDelegate = self
+//        customView.buttonPressedDelegate = self
         
         changeFloatDelegate = customView
         changeNumberDelegate = customView
@@ -572,325 +535,325 @@ extension NewHistoryViewController: UIAdaptivePresentationControllerDelegate {
 }
 
 
-extension NewHistoryViewController: ButtonPressed {
+extension NewHistoryViewController  {
     
     
-    func floatButtonPressed(button: String) {
-        var tempPhotos = [HistoryModel]()
-        var deleteFromSections = [Int: Int]()
-        var filePaths = [URL]()
-        
-        var sectionsTouched = [Int]()
-        
-        var alreadyCached = 0
-        var sectionsToDelete = [Int]()
-        for selected in indexPathsSelected {
-            let section = selected.section
-            if !sectionsTouched.contains(section) {
-                sectionsTouched.append(section)
-            }
-            if deleteFromSections[section] == nil {
-                deleteFromSections[section] = 1
-            } else {
-                deleteFromSections[section]! += 1
-            }
-            if let photoCat = indexToData[selected.section] {
-                let photo = photoCat[selected.item]
-                let urlString = photo.filePath
-                
-                let finalUrl = folderURL.appendingPathComponent(urlString)
-                if photo.isDeepSearched == true {
-                    alreadyCached += 1
-                }
-                filePaths.append(finalUrl)
-                tempPhotos.append(photo)
-            }
-        }
-        
-        for section in deleteFromSections {
-            if sectionCounts[section.key] == section.value {
-                sectionsToDelete.append(section.key)
-            }
-        }
-        switch button {
-            
-        case "find":
-            SwiftEntryKit.dismiss()
-            performSegue(withIdentifier: "goToHistoryFind", sender: self)
-        case "heart":
-            for item in indexPathsSelected {
-                let itemToEdit = indexToData[item.section]
-                if let singleItem = itemToEdit?[item.item] {
-                    do {
-                        try realm.write {
-                            singleItem.isHearted = shouldHeart
-                        }
-                    } catch {
-                        print("Error saving category \(error)")
-                    }
-                }
-            }
-            collectionView.reloadItems(at: indexPathsSelected)
-            
-            selectButtonSelected = false
-            fadeSelectOptions(fadeOut: "fade out")
-            SwiftEntryKit.dismiss()
-            collectionView.allowsMultipleSelection = false
-            
-        case "delete":
-            
-            var titleMessage = ""
-            var finishMessage = ""
-            if indexPathsSelected.count == 1 {
-                
-                let deleteThisPhotoQuestion = NSLocalizedString("deleteThisPhotoQuestion", comment: "Multifile def=Delete photo?")
-                let photoDeletedExclaim = NSLocalizedString("photoDeletedExclaim", comment: "Multifile def=Photo deleted!")
-                
-                
-                titleMessage = deleteThisPhotoQuestion
-                finishMessage = photoDeletedExclaim
-            } else if indexPathsSelected.count == photoCategories?.count {
-                let deleteAllPhotosQuestion = NSLocalizedString("deleteAllPhotosQuestion", comment: "NewHistoryViewController def=Delete ALL photos?!")
-                let allPhotosDeletedExclaim = NSLocalizedString("allPhotosDeletedExclaim", comment: "NewHistoryViewController def=All photos deleted!")
-                
-                titleMessage = deleteAllPhotosQuestion
-                finishMessage = allPhotosDeletedExclaim
-            } else {
-                let deletexPhotos = NSLocalizedString("Delete %d photos?", comment:"NewHistoryViewController def=Delete x photos?")
-                
-                let finishedDeletexPhotos = NSLocalizedString("%d photos deleted!", comment:"NewHistoryViewController def=x photos deleted!")
-                
-                
-                titleMessage = String.localizedStringWithFormat(deletexPhotos, indexPathsSelected.count)
-                finishMessage = String.localizedStringWithFormat(finishedDeletexPhotos, indexPathsSelected.count)
-    //            titleMessage = "Delete \(indexPathsSelected.count) lists?"
-    //            finishMessage = "\(indexPathsSelected.count) lists deleted!"
-            }
-            
-            
-    
+//    func floatButtonPressed(button: String) {
+//        var tempPhotos = [HistoryModel]()
+//        var deleteFromSections = [Int: Int]()
+//        var filePaths = [URL]()
 //
+//        var sectionsTouched = [Int]()
+//
+//        var alreadyCached = 0
+//        var sectionsToDelete = [Int]()
+//        for selected in indexPathsSelected {
+//            let section = selected.section
+//            if !sectionsTouched.contains(section) {
+//                sectionsTouched.append(section)
+//            }
+//            if deleteFromSections[section] == nil {
+//                deleteFromSections[section] = 1
+//            } else {
+//                deleteFromSections[section]! += 1
+//            }
+//            if let photoCat = indexToData[selected.section] {
+//                let photo = photoCat[selected.item]
+//                let urlString = photo.filePath
+//
+//                let finalUrl = folderURL.appendingPathComponent(urlString)
+//                if photo.isDeepSearched == true {
+//                    alreadyCached += 1
+//                }
+//                filePaths.append(finalUrl)
+//                tempPhotos.append(photo)
+//            }
+//        }
+//
+//        for section in deleteFromSections {
+//            if sectionCounts[section.key] == section.value {
+//                sectionsToDelete.append(section.key)
+//            }
+//        }
+//        switch button {
+//
+//        case "find":
+//            SwiftEntryKit.dismiss()
+//            performSegue(withIdentifier: "goToHistoryFind", sender: self)
+//        case "heart":
+//            for item in indexPathsSelected {
+//                let itemToEdit = indexToData[item.section]
+//                if let singleItem = itemToEdit?[item.item] {
+//                    do {
+//                        try realm.write {
+//                            singleItem.isHearted = shouldHeart
+//                        }
+//                    } catch {
+//                        print("Error saving category \(error)")
+//                    }
+//                }
+//            }
+//            collectionView.reloadItems(at: indexPathsSelected)
+//
+//            selectButtonSelected = false
+//            fadeSelectOptions(fadeOut: "fade out")
+//            SwiftEntryKit.dismiss()
+//            collectionView.allowsMultipleSelection = false
+//
+//        case "delete":
 //
 //            var titleMessage = ""
 //            var finishMessage = ""
 //            if indexPathsSelected.count == 1 {
-//                titleMessage = "Delete photo?"
-//                finishMessage = "Photo deleted!"
+//
+//                let deleteThisPhotoQuestion = NSLocalizedString("deleteThisPhotoQuestion", comment: "Multifile def=Delete photo?")
+//                let photoDeletedExclaim = NSLocalizedString("photoDeletedExclaim", comment: "Multifile def=Photo deleted!")
+//
+//
+//                titleMessage = deleteThisPhotoQuestion
+//                finishMessage = photoDeletedExclaim
 //            } else if indexPathsSelected.count == photoCategories?.count {
-//                titleMessage = "Delete ALL photos?!"
-//                finishMessage = "All photos deleted!"
+//                let deleteAllPhotosQuestion = NSLocalizedString("deleteAllPhotosQuestion", comment: "NewHistoryViewController def=Delete ALL photos?!")
+//                let allPhotosDeletedExclaim = NSLocalizedString("allPhotosDeletedExclaim", comment: "NewHistoryViewController def=All photos deleted!")
+//
+//                titleMessage = deleteAllPhotosQuestion
+//                finishMessage = allPhotosDeletedExclaim
 //            } else {
-//                titleMessage = "Delete \(indexPathsSelected.count) photos?"
-//                finishMessage = "\(indexPathsSelected.count) photos deleted!"
+//                let deletexPhotos = NSLocalizedString("Delete %d photos?", comment:"NewHistoryViewController def=Delete x photos?")
+//
+//                let finishedDeletexPhotos = NSLocalizedString("%d photos deleted!", comment:"NewHistoryViewController def=x photos deleted!")
+//
+//
+//                titleMessage = String.localizedStringWithFormat(deletexPhotos, indexPathsSelected.count)
+//                finishMessage = String.localizedStringWithFormat(finishedDeletexPhotos, indexPathsSelected.count)
+//    //            titleMessage = "Delete \(indexPathsSelected.count) lists?"
+//    //            finishMessage = "\(indexPathsSelected.count) lists deleted!"
 //            }
-            
-            let delete = NSLocalizedString("delete", comment: "Multipurpose def=Delete")
-            let alert = UIAlertController(title: titleMessage, message: cantBeUndone, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: delete, style: UIAlertAction.Style.destructive, handler: { _ in
-                
-                var tempIntSelected = self.indexPathsSelected
-                self.selectButtonSelected = false
-                self.fadeSelectOptions(fadeOut: "fade out")
-                SwiftEntryKit.dismiss()
-                self.collectionView.allowsMultipleSelection = false
-                
-                var contents = [SingleHistoryContent]()
-                for photo in tempPhotos {
-                    for content in photo.contents {
-                        contents.append(content)
-                    }
-                }
-                
-                do {
-                    try self.realm.write {
-                        self.realm.delete(contents)
-                        self.realm.delete(tempPhotos)
-                    }
-                } catch {
-                    print("DELETE PRESSED, but ERROR deleting photos...... \(error)")
-                }
-                
-                
-                print("Deleting from file now")
-                let fileManager = FileManager.default
-                for filePath in filePaths {
-                    print("file... \(filePath)")
-                    do {
-                        try fileManager.removeItem(at: filePath)
-                    } catch {
-                        print("Could not delete items: \(error)")
-                    }
-                }
-                
-                
-                
-                self.getData()
-                if sectionsToDelete.count == 0 {
-                    self.collectionView.performBatchUpdates({
-                        self.collectionView.deleteItems(at: tempIntSelected)
-                    })
-                } else {
-                    self.collectionView.performBatchUpdates({
-                        let sections = IndexSet(sectionsToDelete)
-                        self.collectionView.deleteSections(sections)
-                    })
-                }
-                
-                for section in sectionsTouched {
-                    self.modifySection(modifiedSection: section)
-                    self.reloadEdgeItems(modifiedSection: section)
-                }
-                tempIntSelected.removeAll()
-                
-                
-                let alertView = SPAlertView(title: finishMessage, message: self.tapToDismiss, preset: SPAlertPreset.done)
-                alertView.duration = 2.6
-                alertView.present()
-                
-            }))
-            
-            
-            alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            
-            
-            
-            
-            
-        case "cache":
-            
-            if shouldCache == true {
-                var attributes = EKAttributes.centerFloat
-                attributes.displayDuration = .infinity
-                attributes.entryInteraction = .absorbTouches
-                attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-                attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-                attributes.entryBackground = .color(color: .white)
-                attributes.screenInteraction = .absorbTouches
-                
-                print("CACHE ___ \(screenBounds.size.height - CGFloat(300))")
-                let cacheControllerHeight = max(screenBounds.size.height - CGFloat(300), 410)
-                
-                attributes.positionConstraints.size.height = .constant(value: cacheControllerHeight)
-                //                attributes.positionConstraints.maxSize = .init(width: .constant(value: 300), height: .constant(value: 400))
-                attributes.positionConstraints.maxSize = .init(width: .constant(value: 450), height: .constant(value: 550))
-                
-                attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
-                attributes.lifecycleEvents.didAppear = {
-                    self.doneAnimatingSEK?.doneAnimating()
-                }
-                
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController
-                var editablePhotoArray = [EditableHistoryModel]()
-                for item in indexPathsSelected {
-                    let itemToEdit = indexToData[item.section]
-                    if let singleItem = itemToEdit?[item.item] {
-                        let newPhoto = EditableHistoryModel()
-                        newPhoto.filePath = singleItem.filePath
-                        newPhoto.dateCreated = singleItem.dateCreated
-                        newPhoto.isHearted = singleItem.isHearted
-                        newPhoto.isDeepSearched = singleItem.isDeepSearched
-                        editablePhotoArray.append(newPhoto)
-                    }
-                }
-                
-                cacheController.folderURL = folderURL
-                cacheController.photos = editablePhotoArray
-                cacheController.finishedCache = self
-                self.doneAnimatingSEK = cacheController
-                cacheController.view.layer.cornerRadius = 10
-                
-                selectButtonSelected = false
-                fadeSelectOptions(fadeOut: "fade out")
-                SwiftEntryKit.dismiss()
-                collectionView.allowsMultipleSelection = false
-                
-                SwiftEntryKit.display(entry: cacheController, using: attributes)
-            } else {
-                var arrayOfUncache = [Int]()
-                for indexP in indexPathsSelected {
-                    if let index = indexPathToIndex[indexP] {
-                        arrayOfUncache.append(index)
-                    }
-                }
+//
+//
+//
+////
+////
+////            var titleMessage = ""
+////            var finishMessage = ""
+////            if indexPathsSelected.count == 1 {
+////                titleMessage = "Delete photo?"
+////                finishMessage = "Photo deleted!"
+////            } else if indexPathsSelected.count == photoCategories?.count {
+////                titleMessage = "Delete ALL photos?!"
+////                finishMessage = "All photos deleted!"
+////            } else {
+////                titleMessage = "Delete \(indexPathsSelected.count) photos?"
+////                finishMessage = "\(indexPathsSelected.count) photos deleted!"
+////            }
+//
+//            let delete = NSLocalizedString("delete", comment: "Multipurpose def=Delete")
+//            let alert = UIAlertController(title: titleMessage, message: cantBeUndone, preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: delete, style: UIAlertAction.Style.destructive, handler: { _ in
+//
+//                var tempIntSelected = self.indexPathsSelected
+//                self.selectButtonSelected = false
+//                self.fadeSelectOptions(fadeOut: "fade out")
+//                SwiftEntryKit.dismiss()
+//                self.collectionView.allowsMultipleSelection = false
+//
+//                var contents = [SingleHistoryContent]()
+//                for photo in tempPhotos {
+//                    for content in photo.contents {
+//                        contents.append(content)
+//                    }
+//                }
+//
+//                do {
+//                    try self.realm.write {
+//                        self.realm.delete(contents)
+//                        self.realm.delete(tempPhotos)
+//                    }
+//                } catch {
+//                    print("DELETE PRESSED, but ERROR deleting photos...... \(error)")
+//                }
+//
+//
+//                print("Deleting from file now")
+//                let fileManager = FileManager.default
+//                for filePath in filePaths {
+//                    print("file... \(filePath)")
+//                    do {
+//                        try fileManager.removeItem(at: filePath)
+//                    } catch {
+//                        print("Could not delete items: \(error)")
+//                    }
+//                }
+//
+//
+//
+//                self.getData()
+//                if sectionsToDelete.count == 0 {
+//                    self.collectionView.performBatchUpdates({
+//                        self.collectionView.deleteItems(at: tempIntSelected)
+//                    })
+//                } else {
+//                    self.collectionView.performBatchUpdates({
+//                        let sections = IndexSet(sectionsToDelete)
+//                        self.collectionView.deleteSections(sections)
+//                    })
+//                }
+//
+//                for section in sectionsTouched {
+//                    self.modifySection(modifiedSection: section)
+//                    self.reloadEdgeItems(modifiedSection: section)
+//                }
+//                tempIntSelected.removeAll()
+//
+//
+//                let alertView = SPAlertView(title: finishMessage, message: self.tapToDismiss, preset: SPAlertPreset.done)
+//                alertView.duration = 2.6
+//                alertView.present()
+//
+//            }))
+//
+//
+//            alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))
+//            self.present(alert, animated: true, completion: nil)
+//
+//
+//
+//
+//
+//        case "cache":
+//
+//            if shouldCache == true {
+//                var attributes = EKAttributes.centerFloat
+//                attributes.displayDuration = .infinity
+//                attributes.entryInteraction = .absorbTouches
+//                attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+//                attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+//                attributes.entryBackground = .color(color: .white)
+//                attributes.screenInteraction = .absorbTouches
+//
+//                print("CACHE ___ \(screenBounds.size.height - CGFloat(300))")
+//                let cacheControllerHeight = max(screenBounds.size.height - CGFloat(300), 410)
+//
+//                attributes.positionConstraints.size.height = .constant(value: cacheControllerHeight)
+//                //                attributes.positionConstraints.maxSize = .init(width: .constant(value: 300), height: .constant(value: 400))
+//                attributes.positionConstraints.maxSize = .init(width: .constant(value: 450), height: .constant(value: 550))
+//
+//                attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+//                attributes.lifecycleEvents.didAppear = {
+//                    self.doneAnimatingSEK?.doneAnimating()
+//                }
+//
+//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController
+//                var editablePhotoArray = [EditableHistoryModel]()
+//                for item in indexPathsSelected {
+//                    let itemToEdit = indexToData[item.section]
+//                    if let singleItem = itemToEdit?[item.item] {
+//                        let newPhoto = EditableHistoryModel()
+//                        newPhoto.filePath = singleItem.filePath
+//                        newPhoto.dateCreated = singleItem.dateCreated
+//                        newPhoto.isHearted = singleItem.isHearted
+//                        newPhoto.isDeepSearched = singleItem.isDeepSearched
+//                        editablePhotoArray.append(newPhoto)
+//                    }
+//                }
+//
+//                cacheController.folderURL = folderURL
+//                cacheController.photos = editablePhotoArray
+//                cacheController.finishedCache = self
+//                self.doneAnimatingSEK = cacheController
+//                cacheController.view.layer.cornerRadius = 10
+//
+//                selectButtonSelected = false
+//                fadeSelectOptions(fadeOut: "fade out")
+//                SwiftEntryKit.dismiss()
+//                collectionView.allowsMultipleSelection = false
+//
+//                SwiftEntryKit.display(entry: cacheController, using: attributes)
+//            } else {
+//                var arrayOfUncache = [Int]()
+//                for indexP in indexPathsSelected {
+//                    if let index = indexPathToIndex[indexP] {
+//                        arrayOfUncache.append(index)
+//                    }
+//                }
+////
+////                var titleMessage = ""
+////                var finishMessage = ""
+////                if arrayOfUncache.count == 1 {
+////                    titleMessage = "Clear this photo's cache?"
+////                    finishMessage = "Cache cleared!"
+////                } else if arrayOfUncache.count == photoCategories?.count {
+////                    titleMessage = "Clear ENTIRE cache?!"
+////                    finishMessage = "Entire cache cleared!"
+////                } else {
+////                    titleMessage = "Clear \(arrayOfUncache.count) photos' caches?"
+////                    finishMessage = "\(arrayOfUncache.count) caches deleted!"
+////                }
+////
 //
 //                var titleMessage = ""
 //                var finishMessage = ""
-//                if arrayOfUncache.count == 1 {
-//                    titleMessage = "Clear this photo's cache?"
-//                    finishMessage = "Cache cleared!"
-//                } else if arrayOfUncache.count == photoCategories?.count {
-//                    titleMessage = "Clear ENTIRE cache?!"
-//                    finishMessage = "Entire cache cleared!"
+//                if indexPathsSelected.count == 1 {
+//
+//                    let clearThisCacheQuestion = NSLocalizedString("clearThisCacheQuestion", comment: "Multifile def=Clear this photo's cache?")
+//                    let cacheClearedExclaim = NSLocalizedString("cacheClearedExclaim", comment: "NewHistoryViewController def=Cache cleared!")
+//
+//
+//                    titleMessage = clearThisCacheQuestion
+//                    finishMessage = cacheClearedExclaim
+//                } else if indexPathsSelected.count == photoCategories?.count {
+//                    let deleteEntireCacheQuestion = NSLocalizedString("deleteEntireCacheQuestion", comment: "NewHistoryViewController def=Clear ENTIRE cache?!")
+//                    let entireCacheDeletedExclaim = NSLocalizedString("entireCacheDeletedExclaim", comment: "NewHistoryViewController def=Entire cache cleared!")
+//
+//                    titleMessage = deleteEntireCacheQuestion
+//                    finishMessage = entireCacheDeletedExclaim
 //                } else {
-//                    titleMessage = "Clear \(arrayOfUncache.count) photos' caches?"
-//                    finishMessage = "\(arrayOfUncache.count) caches deleted!"
+//                    let deletexCaches = NSLocalizedString("Delete %d caches?", comment:"NewHistoryViewController def=Clear x photos' caches?")
+//
+//                    let finishedDeletexCaches = NSLocalizedString("%d photos caches deleted!", comment:"NewHistoryViewController def=x caches cleared!")
+//
+//
+//                    titleMessage = String.localizedStringWithFormat(deletexCaches, arrayOfUncache.count)
+//                    finishMessage = String.localizedStringWithFormat(finishedDeletexCaches, arrayOfUncache.count)
+//        //            titleMessage = "Delete \(indexPathsSelected.count) lists?"
+//        //            finishMessage = "\(indexPathsSelected.count) lists deleted!"
 //                }
 //
-                
-                var titleMessage = ""
-                var finishMessage = ""
-                if indexPathsSelected.count == 1 {
-                    
-                    let clearThisCacheQuestion = NSLocalizedString("clearThisCacheQuestion", comment: "Multifile def=Clear this photo's cache?")
-                    let cacheClearedExclaim = NSLocalizedString("cacheClearedExclaim", comment: "NewHistoryViewController def=Cache cleared!")
-                    
-                    
-                    titleMessage = clearThisCacheQuestion
-                    finishMessage = cacheClearedExclaim
-                } else if indexPathsSelected.count == photoCategories?.count {
-                    let deleteEntireCacheQuestion = NSLocalizedString("deleteEntireCacheQuestion", comment: "NewHistoryViewController def=Clear ENTIRE cache?!")
-                    let entireCacheDeletedExclaim = NSLocalizedString("entireCacheDeletedExclaim", comment: "NewHistoryViewController def=Entire cache cleared!")
-                    
-                    titleMessage = deleteEntireCacheQuestion
-                    finishMessage = entireCacheDeletedExclaim
-                } else {
-                    let deletexCaches = NSLocalizedString("Delete %d caches?", comment:"NewHistoryViewController def=Clear x photos' caches?")
-                    
-                    let finishedDeletexCaches = NSLocalizedString("%d photos caches deleted!", comment:"NewHistoryViewController def=x caches cleared!")
-                    
-                    
-                    titleMessage = String.localizedStringWithFormat(deletexCaches, arrayOfUncache.count)
-                    finishMessage = String.localizedStringWithFormat(finishedDeletexCaches, arrayOfUncache.count)
-        //            titleMessage = "Delete \(indexPathsSelected.count) lists?"
-        //            finishMessage = "\(indexPathsSelected.count) lists deleted!"
-                }
-                
-                let cachingAgainTakeAWhile = NSLocalizedString("cachingAgainTakeAWhile", comment: "Multifile def=Caching again will take a while...")
-                let clear = NSLocalizedString("clear", comment: "Multipurpose def=Clear")
-                
-                let alert = UIAlertController(title: titleMessage, message: cachingAgainTakeAWhile, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: clear, style: UIAlertAction.Style.destructive, handler: { _ in
-                    self.uncachePhotos(at: arrayOfUncache)
-                    let alertView = SPAlertView(title: finishMessage, message: self.tapToDismiss, preset: SPAlertPreset.done)
-                    alertView.duration = 2.6
-                    alertView.present()
-                    
-                    self.selectButtonSelected = false
-                    self.fadeSelectOptions(fadeOut: "fade out")
-                    SwiftEntryKit.dismiss()
-                    self.collectionView.allowsMultipleSelection = false
-                }))
-                alert.addAction(UIAlertAction(title: self.cancel, style: UIAlertAction.Style.cancel, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
-            
-        case "share":
-            print("share")
-            var arrayOfUrlStrings = [String]()
-            for indexP in indexPathsSelected {
-                let bigItem = indexToData[indexP.section]
-                if let photo = bigItem?[indexP.item] {
-                    arrayOfUrlStrings.append(photo.filePath)
-                }
-            }
-            shareData(arrayOfUrlStrings)
-            
-        default: print("unknown, bad string")
-            
-        }
-    }
+//                let cachingAgainTakeAWhile = NSLocalizedString("cachingAgainTakeAWhile", comment: "Multifile def=Caching again will take a while...")
+//                let clear = NSLocalizedString("clear", comment: "Multipurpose def=Clear")
+//
+//                let alert = UIAlertController(title: titleMessage, message: cachingAgainTakeAWhile, preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: clear, style: UIAlertAction.Style.destructive, handler: { _ in
+//                    self.uncachePhotos(at: arrayOfUncache)
+//                    let alertView = SPAlertView(title: finishMessage, message: self.tapToDismiss, preset: SPAlertPreset.done)
+//                    alertView.duration = 2.6
+//                    alertView.present()
+//
+//                    self.selectButtonSelected = false
+//                    self.fadeSelectOptions(fadeOut: "fade out")
+//                    SwiftEntryKit.dismiss()
+//                    self.collectionView.allowsMultipleSelection = false
+//                }))
+//                alert.addAction(UIAlertAction(title: self.cancel, style: UIAlertAction.Style.cancel, handler: nil))
+//                self.present(alert, animated: true, completion: nil)
+//            }
+//
+//        case "share":
+//            print("share")
+//            var arrayOfUrlStrings = [String]()
+//            for indexP in indexPathsSelected {
+//                let bigItem = indexToData[indexP.section]
+//                if let photo = bigItem?[indexP.item] {
+//                    arrayOfUrlStrings.append(photo.filePath)
+//                }
+//            }
+//            shareData(arrayOfUrlStrings)
+//
+//        default: print("unknown, bad string")
+//
+//        }
+//    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "goToHistoryFind":

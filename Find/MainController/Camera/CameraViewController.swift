@@ -555,7 +555,7 @@ class CameraViewController: UIViewController {
 //        setUpButtons()
         setUpTempImageView()
         setUpSearchBar()
-        setUpFilePath()
+        
         
         
         /// is already athorized in Launchscreen

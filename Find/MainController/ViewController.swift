@@ -18,10 +18,16 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var shadeView: UIView!
     
+    var globalUrl : URL = URL(fileURLWithPath: "")
+    var highlightColor = "00aeef"
+    
     // MARK: - View Controllers
     lazy var photos: NewHistoryViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "NewHistoryViewController") as? NewHistoryViewController {
+            viewController.folderURL = globalUrl
+            viewController.highlightColor = highlightColor
+            viewController.modalPresentationCapturesStatusBarAppearance = true
             return viewController
         }
         fatalError()
@@ -30,6 +36,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     lazy var camera: CameraViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "CameraViewController") as? CameraViewController {
+            viewController.globalUrl = globalUrl
             
             tabBarView.hideRealShutter = { hide in
                 if hide {
@@ -62,8 +69,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "ListController") as? ListController {
             let navigationController = ListsNavController(rootViewController: viewController)
+            viewController.modalPresentationCapturesStatusBarAppearance = true
+//            viewController.presentationController?.delegate = self
             return navigationController
-            
         }
         fatalError()
     }()
@@ -334,6 +342,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         shadeView.alpha = 0
         blurView.isHidden = false
         shadeView.isHidden = false
+        
+        setUpFilePath()
     }
 
     /// enable both the long press and pan gesture

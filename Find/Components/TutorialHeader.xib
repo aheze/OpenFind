@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TutorialHeader" customModule="Find" customModuleProvider="target">
+            <connections>
+                <outlet property="closeButton" destination="SEh-Zb-lZG" id="W57-rc-x7a"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="mrH-73-ngT"/>
+                <outlet property="startTourButton" destination="jyh-99-vPg" id="3gr-0g-SLy"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jyh-99-vPg">
+                    <rect key="frame" x="6" y="0.0" width="347.5" height="51"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="4" maxY="0.0"/>
+                    <state key="normal" title="Take a quick tour" image="paperplane.fill" catalog="system">
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="18" scale="small" weight="medium"/>
+                    </state>
+                    <connections>
+                        <action selector="startButtonPressed:" destination="-1" eventType="touchUpInside" id="UGz-g7-Sov"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEh-Zb-lZG">
+                    <rect key="frame" x="365.5" y="4.5" width="42.5" height="42"/>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="contentEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
+                    <state key="normal" image="xmark" catalog="system">
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="18" scale="medium" weight="medium"/>
+                    </state>
+                    <connections>
+                        <action selector="closeButtonPressed:" destination="-1" eventType="touchUpInside" id="4VK-8m-YSU"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemGreenColor"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SEh-Zb-lZG" secondAttribute="trailing" constant="6" id="2hT-f0-Roe"/>
+                <constraint firstItem="jyh-99-vPg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FlB-Ri-McX"/>
+                <constraint firstItem="SEh-Zb-lZG" firstAttribute="leading" secondItem="jyh-99-vPg" secondAttribute="trailing" constant="12" id="YVP-KQ-PMe"/>
+                <constraint firstItem="jyh-99-vPg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="6" id="Zdi-gd-2Uw"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="jyh-99-vPg" secondAttribute="bottom" id="u36-il-gsd"/>
+                <constraint firstItem="SEh-Zb-lZG" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="uJ8-QK-Srx"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-220.28985507246378" y="-213.95089285714286"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="paperplane.fill" catalog="system" width="128" height="118"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

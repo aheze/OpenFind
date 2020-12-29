@@ -16,7 +16,7 @@ enum CurrentModeToggle {
 
 //MARK: Set Up the floating buttons, classic timer
 
-extension CameraViewController {
+extension ViewController {
     func setUpFilePath() {
         guard let url = URL.createFolder(folderName: "historyImages") else {
             print("no create")

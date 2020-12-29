@@ -15,7 +15,7 @@ protocol GetColorInfo: class {
 }
 
 
-class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ReceiveColor, ScrolledToColors {
+class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     
     func scrolledHere() {

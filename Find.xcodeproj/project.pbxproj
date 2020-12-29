@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C389ED3259BA0D5007DB33B /* ListBuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */; };
 		3C4DE6FB259AD3FF0037D104 /* SaveToPhotosButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */; };
 		3C4DE6FC259AD3FF0037D104 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F5259AD3FF0037D104 /* MessageView.xib */; };
 		3C4DE6FD259AD3FF0037D104 /* CacheIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F6259AD3FF0037D104 /* CacheIcon.swift */; };
@@ -15,6 +16,8 @@
 		3C4DE700259AD3FF0037D104 /* CacheButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F9259AD3FF0037D104 /* CacheButton.xib */; };
 		3C4DE701259AD3FF0037D104 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4DE6FA259AD3FF0037D104 /* MessageView.swift */; };
 		3C4DE704259AD5670037D104 /* NewColors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE703259AD5670037D104 /* NewColors.xcassets */; };
+		3C4DE716259B0EAB0037D104 /* TutorialHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4DE715259B0EAB0037D104 /* TutorialHeader.swift */; };
+		3C4DE719259B0EB50037D104 /* TutorialHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE718259B0EB50037D104 /* TutorialHeader.xib */; };
 		3CE306D6259AC46400F1B2E2 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306CE259AC46400F1B2E2 /* TabBar.swift */; };
 		3CE306D7259AC46400F1B2E2 /* PhotosIcon.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE306CF259AC46400F1B2E2 /* PhotosIcon.xib */; };
 		3CE306D8259AC46400F1B2E2 /* PhotosIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306D0259AC46400F1B2E2 /* PhotosIcon.swift */; };
@@ -158,6 +161,7 @@
 
 /* Begin PBXFileReference section */
 		206C7F74D4ED39BAC2ED69EB /* Pods_Find.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Find.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBuilderViewController.swift; sourceTree = "<group>"; };
 		3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaveToPhotosButton.xib; sourceTree = "<group>"; };
 		3C4DE6F5259AD3FF0037D104 /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
 		3C4DE6F6259AD3FF0037D104 /* CacheIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheIcon.swift; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 		3C4DE6F9259AD3FF0037D104 /* CacheButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CacheButton.xib; sourceTree = "<group>"; };
 		3C4DE6FA259AD3FF0037D104 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		3C4DE703259AD5670037D104 /* NewColors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NewColors.xcassets; sourceTree = "<group>"; };
+		3C4DE715259B0EAB0037D104 /* TutorialHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialHeader.swift; sourceTree = "<group>"; };
+		3C4DE718259B0EB50037D104 /* TutorialHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialHeader.xib; sourceTree = "<group>"; };
 		3CE306CE259AC46400F1B2E2 /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		3CE306CF259AC46400F1B2E2 /* PhotosIcon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotosIcon.xib; sourceTree = "<group>"; };
 		3CE306D0259AC46400F1B2E2 /* PhotosIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosIcon.swift; sourceTree = "<group>"; };
@@ -330,6 +336,15 @@
 				3C4DE6FA259AD3FF0037D104 /* MessageView.swift */,
 			);
 			path = "Camera Buttons";
+			sourceTree = "<group>";
+		};
+		3C4DE714259B0E960037D104 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3C4DE715259B0EAB0037D104 /* TutorialHeader.swift */,
+				3C4DE718259B0EB50037D104 /* TutorialHeader.xib */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		3CE306CB259AC44A00F1B2E2 /* Tab Navigation */ = {
@@ -609,8 +624,6 @@
 			isa = PBXGroup;
 			children = (
 				3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */,
-				3CE306CB259AC44A00F1B2E2 /* Tab Navigation */,
-				49E9D88D24996D8A0006757C /* Storyboards */,
 				498332DB243279F900AD083E /* Help */,
 				4988FC4623BEF82D00199635 /* Lists */,
 				4969373C2353C277009CA41A /* Camera */,
@@ -697,6 +710,7 @@
 				4988FC4723BEF89600199635 /* ListModel.swift */,
 				4966B70923DE98C800A8523A /* MakeNewList.swift */,
 				4990AAE523EDB50E00FAF37B /* ColorsViewController.swift */,
+				3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -723,6 +737,9 @@
 			isa = PBXGroup;
 			children = (
 				495635292437A4860001E8C6 /* defaultSeeds.realm */,
+				3C4DE714259B0E960037D104 /* Components */,
+				3CE306CB259AC44A00F1B2E2 /* Tab Navigation */,
+				49E9D88D24996D8A0006757C /* Storyboards */,
 				496937382353C219009CA41A /* MainController */,
 				495F38FF2433FC0000A17D93 /* Launch */,
 				4969373B2353C25B009CA41A /* Utilities */,
@@ -905,6 +922,7 @@
 				495DAD4024A6B37500D5F844 /* ListToolBar.xib in Resources */,
 				4999AC9D2353A81100AB06A7 /* Assets.xcassets in Resources */,
 				4999AC9B2353A80A00AB06A7 /* Main.storyboard in Resources */,
+				3C4DE719259B0EB50037D104 /* TutorialHeader.xib in Resources */,
 				3CE306D7259AC46400F1B2E2 /* PhotosIcon.xib in Resources */,
 				4928525C23D61D230048EC13 /* ListsSelect.xib in Resources */,
 				490BC3F923FA600F004D1433 /* DoubleWarning.xib in Resources */,
@@ -1001,6 +1019,8 @@
 				492A2D2624A4046200F9C4A1 /* BartyCrouch.swift in Sources */,
 				495ECCAB238DB7BD00E7D966 /* TitleSupplementaryView.swift in Sources */,
 				49301BF52402493A00B4780B /* HistoryModel.swift in Sources */,
+				3C389ED3259BA0D5007DB33B /* ListBuilderViewController.swift in Sources */,
+				3C4DE716259B0EAB0037D104 /* TutorialHeader.swift in Sources */,
 				49B7A33823923EBD0070209F /* PhotoPageContainerViewController.swift in Sources */,
 				3CE306D6259AC46400F1B2E2 /* TabBar.swift in Sources */,
 				4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */,

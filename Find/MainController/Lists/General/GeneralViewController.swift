@@ -16,7 +16,7 @@ protocol GetGeneralInfo: class {
 protocol DeleteList: class {
     func deleteList()
 }
-class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral {
+class GeneralViewController: UIViewController {
     
     func receiveGeneral(nameOfList: String, desc: String, contentsOfList: [String]) {
         print("general recieved")
@@ -70,7 +70,9 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
     
     var stringToIndexesError = [String: [Int]]() ///A dictionary of the DUPLICATE rows- not the first occurance. These rows should be deleted.
     
-    weak var deleteTheList: DeleteList?
+//    weak var deleteTheList: DeleteList?
+    
+    var deleteThisList: (() -> Void)?
     
     weak var delegate: UIAdaptivePresentationControllerDelegate?
     
@@ -228,7 +230,10 @@ class GeneralViewController: UIViewController, ReturnGeneralNow, ReceiveGeneral 
         let alert = UIAlertController(title: confirmDeleteList, message: cantUndoDeleteList, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: delete, style: UIAlertAction.Style.destructive, handler: { _ in
             
-            self.deleteTheList?.deleteList()
+//            self.deleteTheList?.deleteList()
+            
+            self.deleteThisList?()
+            
             SwiftEntryKit.dismiss()
           
         }))
@@ -561,7 +566,6 @@ extension GeneralViewController: ChangedTextCell {
     func textFieldPressedReturn() {
         addNewRow()
         let origPoint = CGPoint(x: 0, y: (currentIndexPath * 50) + 250)
-        let rect = CGRect(origin: origPoint, size: CGSize(width: 50, height: 50))
         
         scrollView.setContentOffset(CGPoint(x: 0, y: (currentIndexPath * 50) + 124), animated: true)
     }
