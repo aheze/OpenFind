@@ -23,10 +23,33 @@ class ListBuilderViewController: UIViewController {
     
     var listBuilderType = ListBuilderType.editor
     
+    @IBOutlet weak var topView: UIView! /// header at the top
     @IBOutlet weak var topImageView: UIImageView! /// show the symbol and color
     @IBOutlet weak var promptLabel: UILabel! /// Edit list or New List
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
+    
+    @IBOutlet weak var tutorialContainer: UIView!
+    @IBOutlet weak var tutorialContainerHeightC: NSLayoutConstraint!
+    
+    let defaults = UserDefaults.standard
+    
+    func animateCloseQuickTour(quickTourView: TutorialHeader) {
+        defaults.set(true, forKey: "listsBuilderViewedBefore")
+        
+        quickTourView.colorViewHeightConst.constant = 0
+        tutorialContainerHeightC.constant = 0
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            quickTourView.layoutIfNeeded()
+            self.view.layoutIfNeeded()
+            quickTourView.startTourButton.alpha = 0
+            quickTourView.closeButton.alpha = 0
+            
+        }) { _ in
+            quickTourView.removeFromSuperview()
+        }
+    }
     
     weak var finishedEditingList: FinishedEditingList?
     weak var newListDelegate: NewListMade?
@@ -100,6 +123,39 @@ class ListBuilderViewController: UIViewController {
         } else {
             promptLabel.text = "New List"
         }
+        
+        
+        let listsBuilderViewedBefore = defaults.bool(forKey: "listsBuilderViewedBefore")
+        
+        if !listsBuilderViewedBefore {
+            
+            let quickTourView = TutorialHeader()
+            quickTourView.colorView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
+            
+            tutorialContainerHeightC.constant = 50
+            tutorialContainer.addSubview(quickTourView)
+            
+            quickTourView.snp.makeConstraints { (make) in
+                make.top.equalToSuperview()
+                make.left.equalToSuperview()
+                make.right.equalToSuperview()
+                make.height.equalTo(50)
+            }
+            
+            quickTourView.pressed = { [weak self] in
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "ListsBuilderTutorialViewController") as! ListsBuilderTutorialViewController
+                
+                self?.animateCloseQuickTour(quickTourView: quickTourView)
+                self?.present(vc, animated: true, completion: nil)
+            }
+            
+            quickTourView.closed = { [weak self] in
+                self?.animateCloseQuickTour(quickTourView: quickTourView)
+            }
+        }
+        
         setUpPagingVC()
     }
     
@@ -160,13 +216,9 @@ extension ListBuilderViewController: GetGeneralInfo, GetIconInfo, GetColorInfo {
         colorVC.colorDelegate = self
         
         generalVC.receiveGeneral(nameOfList: name, desc: descriptionOfList, contentsOfList: contents)
-//        symbolVC.receiveIcon(name: iconImageName)
-//        colorVC.receiveColor(name: iconColorName)
-        
         
         symbolVC.selectedIconName = iconImageName
         colorVC.colorName = iconColorName
-        print("set colors")
         
         let pagingViewController = PagingViewController(viewControllers: [
             generalVC,

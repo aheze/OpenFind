@@ -969,10 +969,17 @@
                                             <constraint firstAttribute="bottom" secondItem="00L-NE-8Jy" secondAttribute="bottom" id="zVu-BB-3ss"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ine-JN-ivl">
+                                        <rect key="frame" x="0.0" y="50" width="414" height="0.0"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" id="arW-5u-nfr"/>
+                                        </constraints>
+                                    </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z7P-cn-jyc">
                                         <rect key="frame" x="177" y="58" width="60" height="60"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="Z7P-cn-jyc" secondAttribute="height" multiplier="1:1" id="8Tk-Sn-EIq"/>
+                                            <constraint firstAttribute="width" constant="60" id="abT-HS-1CV"/>
                                             <constraint firstAttribute="height" constant="60" id="rlL-Cg-QZF"/>
                                         </constraints>
                                     </imageView>
@@ -980,10 +987,13 @@
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Z7P-cn-jyc" secondAttribute="bottom" constant="8" id="8JG-ca-wqI"/>
-                                    <constraint firstItem="Z7P-cn-jyc" firstAttribute="top" secondItem="cTk-C7-NCr" secondAttribute="bottom" constant="8" id="LST-1a-JfF"/>
+                                    <constraint firstItem="ine-JN-ivl" firstAttribute="top" secondItem="cTk-C7-NCr" secondAttribute="bottom" id="G9z-Id-Ny4"/>
+                                    <constraint firstAttribute="trailing" secondItem="ine-JN-ivl" secondAttribute="trailing" id="UOV-vY-2gv"/>
                                     <constraint firstItem="Z7P-cn-jyc" firstAttribute="centerX" secondItem="7YW-xc-BV1" secondAttribute="centerX" id="XNH-eN-EMe"/>
                                     <constraint firstAttribute="trailing" secondItem="cTk-C7-NCr" secondAttribute="trailing" id="a4I-Z5-EjN"/>
+                                    <constraint firstItem="Z7P-cn-jyc" firstAttribute="top" secondItem="ine-JN-ivl" secondAttribute="bottom" constant="8" id="gg2-kL-Oxw"/>
                                     <constraint firstItem="cTk-C7-NCr" firstAttribute="top" secondItem="7YW-xc-BV1" secondAttribute="top" id="hgx-0P-ulo"/>
+                                    <constraint firstItem="ine-JN-ivl" firstAttribute="leading" secondItem="7YW-xc-BV1" secondAttribute="leading" id="lgf-ut-oJX"/>
                                     <constraint firstItem="cTk-C7-NCr" firstAttribute="leading" secondItem="7YW-xc-BV1" secondAttribute="leading" id="psz-0J-O6Z"/>
                                 </constraints>
                             </view>
@@ -1012,6 +1022,9 @@
                         <outlet property="referenceView" destination="bL4-mR-BiL" id="9Lu-eC-s9o"/>
                         <outlet property="saveButton" destination="jCO-rD-51A" id="ifL-Ol-Oh4"/>
                         <outlet property="topImageView" destination="Z7P-cn-jyc" id="7r0-wY-9cq"/>
+                        <outlet property="topView" destination="7YW-xc-BV1" id="U7L-Oi-iHC"/>
+                        <outlet property="tutorialContainer" destination="ine-JN-ivl" id="fq8-ao-vdY"/>
+                        <outlet property="tutorialContainerHeightC" destination="arW-5u-nfr" id="BVh-XZ-IxM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0yt-RL-GWH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1418,7 +1431,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GEf-lM-WO1">
                                 <rect key="frame" x="20" y="64" width="374" height="798"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="L2s-H3-Tx2">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="L2s-H3-Tx2">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>

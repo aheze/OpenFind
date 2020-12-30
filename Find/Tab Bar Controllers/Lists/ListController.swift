@@ -35,42 +35,24 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
 //    @IBOutlet weak var closeQuickTourButton: UIButton!
     
     let defaults = UserDefaults.standard
-    @IBAction func quickTourButtonPressed(_ sender: Any) {
+    
+    func animateCloseQuickTour(quickTourView: TutorialHeader) {
+        print("animte!!")
         defaults.set(true, forKey: "listsViewedBefore")
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ListsTutorialViewController") as! ListsTutorialViewController
+        let padding = AdaptiveCollectionConfig.cellPadding
         
-        animateCloseQuickTour()
-        present(vc, animated: true, completion: nil)
+        quickTourView.colorViewHeightConst.constant = 0
         
-    }
-    
-    @IBAction func closeQuickTourButtonPressed(_ sender: Any) {
-        animateCloseQuickTour()
-    }
-    
-    func animateCloseQuickTour() {
-        defaults.set(true, forKey: "listsViewedBefore")
-        
-//        quickTourHeightC.constant = 0
-        
-//        let topInset = topBlurView.frame.height
-//        let padding = AdaptiveCollectionConfig.cellPadding
-        
-//        self.collectionView.verticalScrollIndicatorInsets.top = topInset
-        
-//        UIView.animate(withDuration: 0.5, animations: {
-//            self.view.layoutIfNeeded()
-//            self.quickTourButton.alpha = 0
-//            self.closeQuickTourButton.alpha = 0
-//
-//
-//            self.collectionView.contentInset = UIEdgeInsets(top: padding + topInset, left: padding, bottom: 82, right: padding)
-//            self.collectionView.contentInset = UIEdgeInsets(top: padding, left: padding, bottom: 82, right: padding)
-//        }) { _ in
-//            self.quickTourView.alpha = 0
-//        }
+        UIView.animate(withDuration: 0.5, animations: {
+            quickTourView.layoutIfNeeded()
+            self.collectionView.contentInset = UIEdgeInsets(top: padding, left: padding, bottom: 82, right: padding)
+            self.collectionView.verticalScrollIndicatorInsets.top = 0
+            quickTourView.startTourButton.alpha = 0
+            quickTourView.closeButton.alpha = 0
+        }) { _ in
+            quickTourView.removeFromSuperview()
+        }
     }
     
     
@@ -337,37 +319,51 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
             randomizedColor = randColorString
         }
         setUpBarButtons()
-//        addListButton.layer.cornerRadius = 6
-//        addListButton.backgroundColor = UIColor(hexString: randomizedColor)
         
-//        let topInset = topBlurView.frame.height
         let padding = AdaptiveCollectionConfig.cellPadding
 
         getData()
         collectionView.delaysContentTouches = false
-//        selectButton.layer.cornerRadius = 6
-        
         let defaults = UserDefaults.standard
         let listsViewedBefore = defaults.bool(forKey: "listsViewedBefore")
         
+        
         if listsViewedBefore == false {
+            let quickTourView = TutorialHeader()
+            quickTourView.colorView.backgroundColor = UIColor(named: "TabIconListsMain")
             
-            collectionView.contentInset = UIEdgeInsets(top: padding + 40, left: padding, bottom: 82, right: padding)
-            collectionView.verticalScrollIndicatorInsets.top = 40
-            
-//            quickTourHeightC.constant = 40
-            UIView.animate(withDuration: 0.5, animations: {
-                self.view.layoutIfNeeded()
-            })
+            if let navController = navigationController {
+                navController.view.insertSubview(quickTourView, belowSubview: navigationController!.navigationBar)
+                
+                quickTourView.snp.makeConstraints { (make) in
+                    make.height.equalTo(50)
+                    make.left.equalToSuperview()
+                    make.right.equalToSuperview()
+                    make.bottom.equalTo(navController.navigationBar.snp.bottom).offset(50)
+                }
+                
+                collectionView.contentInset = UIEdgeInsets(top: padding + 50, left: padding, bottom: 82, right: padding)
+                collectionView.verticalScrollIndicatorInsets.top = 40
+                
+                
+                quickTourView.pressed = { [weak self] in
+                    
+//                    self?.defaults.set(true, forKey: "listsViewedBefore")
+                    
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "ListsTutorialViewController") as! ListsTutorialViewController
+                    
+                    self?.animateCloseQuickTour(quickTourView: quickTourView)
+                    self?.present(vc, animated: true, completion: nil)
+                }
+                
+                quickTourView.closed = { [weak self] in
+                    self?.animateCloseQuickTour(quickTourView: quickTourView)
+                }
+            }
             
         } else {
             collectionView.contentInset = UIEdgeInsets(top: padding, left: padding, bottom: 82, right: padding)
-//            collectionView.verticalScrollIndicatorInsets.top = topInset
-            
-//            quickTourView.alpha = 0
-//            quickTourButton.alpha = 0
-//            closeQuickTourButton.alpha = 0
-//            quickTourHeightC.constant = 0
         }
         
         
@@ -381,18 +377,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         self.title = "Lists"
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        let quickTourView = TutorialHeader()
-        quickTourView.translatesAutoresizingMaskIntoConstraints = false
-        navigationController!.view.insertSubview(quickTourView, belowSubview: navigationController!.navigationBar)
         
-        NSLayoutConstraint.activate([
-            quickTourView.heightAnchor.constraint(equalToConstant: 50),
-            quickTourView.leftAnchor.constraint(equalTo: navigationController!.view.leftAnchor),
-            quickTourView.rightAnchor.constraint(equalTo: navigationController!.view.rightAnchor),
-//            quickTourView.topAnchor.constraint(equalTo: navigationController!.view.bottomAnchor)
-//            ,
-            quickTourView.bottomAnchor.constraint(equalTo: navigationController!.navigationBar.bottomAnchor, constant: 50)
-        ])
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)

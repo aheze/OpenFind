@@ -21,7 +21,6 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
         super.viewDidLoad()
         if let row = colorArray.firstIndex(of: colorName) {
             let indP = IndexPath(item: row, section: 0)
-            print(indP)
             selectedPath = row
             collectionView.selectItem(at: indP, animated: false, scrollPosition: .centeredVertically)
         }
@@ -85,15 +84,11 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    
-    
-    
 }
 
 class ColorCell: UICollectionViewCell {
 
     @IBOutlet weak var checkMarkView: UIImageView!
-    //var sizeForItems = CGFloat(0)
     var color = "" {
         didSet {
             print(color)

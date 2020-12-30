@@ -12,6 +12,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TutorialHeader" customModule="Find" customModuleProvider="target">
             <connections>
                 <outlet property="closeButton" destination="SEh-Zb-lZG" id="W57-rc-x7a"/>
+                <outlet property="colorView" destination="NmH-B0-98l" id="ebv-wj-hGY"/>
+                <outlet property="colorViewHeightConst" destination="ZKV-qP-ACx" id="bWk-Mo-1vn"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="mrH-73-ngT"/>
                 <outlet property="startTourButton" destination="jyh-99-vPg" id="3gr-0g-SLy"/>
             </connections>
@@ -21,41 +23,55 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jyh-99-vPg">
-                    <rect key="frame" x="6" y="0.0" width="347.5" height="51"/>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="4" maxY="0.0"/>
-                    <state key="normal" title="Take a quick tour" image="paperplane.fill" catalog="system">
-                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="18" scale="small" weight="medium"/>
-                    </state>
-                    <connections>
-                        <action selector="startButtonPressed:" destination="-1" eventType="touchUpInside" id="UGz-g7-Sov"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEh-Zb-lZG">
-                    <rect key="frame" x="365.5" y="4.5" width="42.5" height="42"/>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <inset key="contentEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
-                    <state key="normal" image="xmark" catalog="system">
-                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="18" scale="medium" weight="medium"/>
-                    </state>
-                    <connections>
-                        <action selector="closeButtonPressed:" destination="-1" eventType="touchUpInside" id="4VK-8m-YSU"/>
-                    </connections>
-                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NmH-B0-98l">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jyh-99-vPg">
+                            <rect key="frame" x="0.0" y="0.0" width="359.5" height="50"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="4" maxY="0.0"/>
+                            <state key="normal" title="Take a quick tour" image="paperplane.fill" catalog="system">
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="18" scale="small" weight="medium"/>
+                            </state>
+                            <connections>
+                                <action selector="startButtonPressed:" destination="-1" eventType="touchUpInside" id="UGz-g7-Sov"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEh-Zb-lZG">
+                            <rect key="frame" x="371.5" y="0.0" width="42.5" height="50"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <inset key="contentEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
+                            <state key="normal" image="xmark" catalog="system">
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="18" scale="medium" weight="medium"/>
+                            </state>
+                            <connections>
+                                <action selector="closeButtonPressed:" destination="-1" eventType="touchUpInside" id="4VK-8m-YSU"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="XAh-MC-c2A"/>
+                    <color key="backgroundColor" systemColor="systemRedColor"/>
+                    <constraints>
+                        <constraint firstItem="jyh-99-vPg" firstAttribute="top" secondItem="NmH-B0-98l" secondAttribute="top" id="GEF-d4-UE6"/>
+                        <constraint firstItem="SEh-Zb-lZG" firstAttribute="top" secondItem="NmH-B0-98l" secondAttribute="top" id="H1c-IP-bGy"/>
+                        <constraint firstItem="SEh-Zb-lZG" firstAttribute="leading" secondItem="jyh-99-vPg" secondAttribute="trailing" constant="12" id="ODI-UD-37h"/>
+                        <constraint firstItem="jyh-99-vPg" firstAttribute="leading" secondItem="XAh-MC-c2A" secondAttribute="leading" id="Sjt-cg-ieC"/>
+                        <constraint firstItem="XAh-MC-c2A" firstAttribute="trailing" secondItem="SEh-Zb-lZG" secondAttribute="trailing" id="WYS-pI-akw"/>
+                        <constraint firstAttribute="height" constant="50" id="ZKV-qP-ACx"/>
+                        <constraint firstAttribute="bottom" secondItem="SEh-Zb-lZG" secondAttribute="bottom" id="k5w-lq-9nc"/>
+                        <constraint firstAttribute="bottom" secondItem="jyh-99-vPg" secondAttribute="bottom" id="w3L-oj-mGY"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemGreenColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SEh-Zb-lZG" secondAttribute="trailing" constant="6" id="2hT-f0-Roe"/>
-                <constraint firstItem="jyh-99-vPg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FlB-Ri-McX"/>
-                <constraint firstItem="SEh-Zb-lZG" firstAttribute="leading" secondItem="jyh-99-vPg" secondAttribute="trailing" constant="12" id="YVP-KQ-PMe"/>
-                <constraint firstItem="jyh-99-vPg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="6" id="Zdi-gd-2Uw"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="jyh-99-vPg" secondAttribute="bottom" id="u36-il-gsd"/>
-                <constraint firstItem="SEh-Zb-lZG" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="uJ8-QK-Srx"/>
+                <constraint firstItem="NmH-B0-98l" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9Mz-2z-gVF"/>
+                <constraint firstItem="NmH-B0-98l" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ic1-V7-F6q"/>
+                <constraint firstItem="NmH-B0-98l" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="yGd-QQ-Np3"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-220.28985507246378" y="-213.95089285714286"/>
@@ -64,8 +80,8 @@
     <resources>
         <image name="paperplane.fill" catalog="system" width="128" height="118"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -11,11 +11,17 @@ import UIKit
 class TutorialHeader: UIView {
     
     @IBOutlet var contentView: UIView!
+    @IBOutlet weak var colorView: UIView!
+    
     @IBOutlet weak var startTourButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
     
+    @IBOutlet weak var colorViewHeightConst: NSLayoutConstraint!
+    
+    
     var pressed: (() -> Void)?
     var closed: (() -> Void)?
+    
     @IBAction func startButtonPressed(_ sender: Any) {
         pressed?()
     }
