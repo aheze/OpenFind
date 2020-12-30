@@ -69,24 +69,21 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
     let dictOfSymbols = [IndexMatcher: String]()
     
     var sfSymbolArray: [String] = [String]()
+    var iconColor: UIColor = UIColor.label
     
     override func viewDidLoad() {
         super.viewDidLoad()
         populateSymbols()
-//        getData()
-        let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout // casting is required because UICollectionViewLayout doesn't offer header pin. Its feature of UICollectionViewFlowLayout
+        let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.sectionHeadersPinToVisibleBounds = true
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         populateIndexSym()
         highlightSelectedSymbol()
-//        populateDict()
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if currentSelectedIndex != indexPath {
-            print("curr: \(indexPath)")
-            
             
             if let cell = collectionView.cellForItem(at: currentSelectedIndex) as? SymbolCell {
                 cell.overlayView.alpha = 0
@@ -97,9 +94,7 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
             selectedIconName = indexpathToSymbol[indexPath] ?? "square.grid.2x2"
             iconDelegate?.returnNewIcon(iconName: selectedIconName)
             
-            
             collectionView.reloadItems(at: [indexPath])
-            
         }
     }
     
@@ -123,20 +118,22 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
             cell.overlayView.alpha = 0
         }
         
-    
+        
         if let name = indexpathToSymbol[indexPath] {
             let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 12, weight: .semibold)
-            let newImage = UIImage(systemName: name, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "PureBlack") ?? .black, renderingMode: .alwaysOriginal)
-            cell.imageView.image = newImage
+            
+            let image = UIImage(systemName: name, withConfiguration: symbolConfiguration)
+            let configuredImage = image?.withTintColor(iconColor, renderingMode: .alwaysOriginal)
+            cell.imageView.image = configuredImage
         }
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemsPerRow = CGFloat(6)
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemsPerRow = CGFloat(8)
         let edgePaddingSpace = sectionInsets.left * 2
         let middlePaddingSpace = CGFloat(8)
         let availableWidth = collectionView.frame.width - edgePaddingSpace - (middlePaddingSpace * (itemsPerRow - 1))
@@ -147,8 +144,8 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
         return 4
     }
     func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 4
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -156,7 +153,7 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-    let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "symbolsSectionHeader", for: indexPath) as! SymbolsSectionHeader
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "symbolsSectionHeader", for: indexPath) as! SymbolsSectionHeader
         var sectionName = ""
         sectionName = referenceArray[indexPath.section]
         

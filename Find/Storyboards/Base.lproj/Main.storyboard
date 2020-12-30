@@ -1850,7 +1850,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4u2-ce-bLN">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CJ1-Ra-52E">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="50" height="50"/>
@@ -1895,17 +1895,29 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iag-2y-qTo">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="kmI-Pj-vWJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                            <blurEffect style="regular"/>
+                                        </visualEffectView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recent" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7F-LF-zvC">
                                             <rect key="frame" x="24" y="13.5" width="61" height="23"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" systemColor="secondaryLabelColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" name="Gray3"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="G7F-LF-zvC" firstAttribute="leading" secondItem="rFq-7d-72J" secondAttribute="leadingMargin" constant="16" id="74h-so-u1Q"/>
-                                        <constraint firstItem="G7F-LF-zvC" firstAttribute="centerY" secondItem="rFq-7d-72J" secondAttribute="centerY" id="l3k-Es-50j"/>
+                                        <constraint firstItem="Iag-2y-qTo" firstAttribute="leading" secondItem="rFq-7d-72J" secondAttribute="leading" id="Y7k-Fb-h2i"/>
+                                        <constraint firstItem="G7F-LF-zvC" firstAttribute="centerY" secondItem="rFq-7d-72J" secondAttribute="centerY" id="bVq-9f-fd2"/>
+                                        <constraint firstAttribute="bottom" secondItem="Iag-2y-qTo" secondAttribute="bottom" id="coi-oX-h13"/>
+                                        <constraint firstAttribute="trailing" secondItem="Iag-2y-qTo" secondAttribute="trailing" id="qm7-ed-EBu"/>
+                                        <constraint firstItem="Iag-2y-qTo" firstAttribute="top" secondItem="rFq-7d-72J" secondAttribute="top" id="rR8-89-kzj"/>
                                     </constraints>
                                     <connections>
                                         <outlet property="nameLabel" destination="G7F-LF-zvC" id="C6E-eW-Ov9"/>
@@ -4203,6 +4215,9 @@ the App!</string>
         </systemColor>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

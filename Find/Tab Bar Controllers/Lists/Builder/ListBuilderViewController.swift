@@ -184,6 +184,7 @@ extension ListBuilderViewController: GetGeneralInfo, GetIconInfo, GetColorInfo {
         pagingViewController.menuBackgroundColor = UIColor.secondarySystemBackground
         pagingViewController.selectedTextColor = UIColor(named: "LinkColor")!
         pagingViewController.selectedBackgroundColor = UIColor.secondarySystemBackground
+        pagingViewController.borderColor = UIColor.quaternaryLabel
         pagingViewController.contentInteraction = .none
         
         pagingViewController.delegate = self

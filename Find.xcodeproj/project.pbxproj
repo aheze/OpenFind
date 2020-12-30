@@ -33,7 +33,6 @@
 		3CE306E5259AC4B000F1B2E2 /* ButtonTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E2259AC4B000F1B2E2 /* ButtonTransitions.swift */; };
 		3CE306EA259AC5AF00F1B2E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */; };
 		4904524C2379072F0046570D /* UpdateMatches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4904524B2379072F0046570D /* UpdateMatches.swift */; };
-		490BC3F623F8DA41004D1433 /* EditListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490BC3F523F8DA41004D1433 /* EditListViewController.swift */; };
 		490DA73F23CBAB7C000AF57D /* NewShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA73E23CBAB7C000AF57D /* NewShutterButton.swift */; };
 		490DA74E23CBB871000AF57D /* UIView+JJFloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA74123CBB86A000AF57D /* UIView+JJFloatingActionButton.swift */; };
 		490DA74F23CBB871000AF57D /* JJFloatingActionButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA74223CBB86B000AF57D /* JJFloatingActionButtonState.swift */; };
@@ -104,7 +103,6 @@
 		495F38FE243302D500A17D93 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38FD243302D500A17D93 /* StatsViewController.swift */; };
 		495F39012433FF1600A17D93 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F39002433FF1600A17D93 /* LaunchViewController.swift */; };
 		495F7DAA24CBB3970053DE50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 495F7DAC24CBB3970053DE50 /* InfoPlist.strings */; };
-		4966B70A23DE98C800A8523A /* MakeNewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4966B70923DE98C800A8523A /* MakeNewList.swift */; };
 		4972B40E23F117C500843537 /* GeneralTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4972B40D23F117C500843537 /* GeneralTableviewCell.swift */; };
 		4979A39023AF3A4800B09380 /* FastMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979A38F23AF3A4800B09380 /* FastMode.swift */; };
 		4979A39323AF3C4F00B09380 /* FastVisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979A39223AF3C4F00B09380 /* FastVisionHandler.swift */; };
@@ -188,7 +186,6 @@
 		3CE306E2259AC4B000F1B2E2 /* ButtonTransitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTransitions.swift; sourceTree = "<group>"; };
 		3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4904524B2379072F0046570D /* UpdateMatches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMatches.swift; sourceTree = "<group>"; };
-		490BC3F523F8DA41004D1433 /* EditListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditListViewController.swift; sourceTree = "<group>"; };
 		490DA73E23CBAB7C000AF57D /* NewShutterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShutterButton.swift; sourceTree = "<group>"; };
 		490DA74123CBB86A000AF57D /* UIView+JJFloatingActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+JJFloatingActionButton.swift"; sourceTree = "<group>"; };
 		490DA74223CBB86B000AF57D /* JJFloatingActionButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJFloatingActionButtonState.swift; sourceTree = "<group>"; };
@@ -266,7 +263,6 @@
 		495F7DA624CBACE90053DE50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		495F7DAB24CBB3970053DE50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		495F7DAD24CBB39A0053DE50 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		4966B70923DE98C800A8523A /* MakeNewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeNewList.swift; sourceTree = "<group>"; };
 		4972B40D23F117C500843537 /* GeneralTableviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTableviewCell.swift; sourceTree = "<group>"; };
 		4979A38F23AF3A4800B09380 /* FastMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastMode.swift; sourceTree = "<group>"; };
 		4979A39223AF3C4F00B09380 /* FastVisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastVisionHandler.swift; sourceTree = "<group>"; };
@@ -424,14 +420,6 @@
 				49325C1223CAE84500A771A3 /* StatusView.swift */,
 			);
 			path = Matches;
-			sourceTree = "<group>";
-		};
-		490BC3F423F8DA30004D1433 /* Edit Lists */ = {
-			isa = PBXGroup;
-			children = (
-				490BC3F523F8DA41004D1433 /* EditListViewController.swift */,
-			);
-			path = "Edit Lists";
 			sourceTree = "<group>";
 		};
 		490BC3F723FA5FBF004D1433 /* General */ = {
@@ -735,12 +723,10 @@
 				4928525923D617270048EC13 /* ListController.swift */,
 				3C16EA70259BE7D600D73755 /* ListController+NavBar.swift */,
 				3C16EA84259BEDC100D73755 /* Builder */,
-				490BC3F423F8DA30004D1433 /* Edit Lists */,
 				49585DCC23ED0B8D003AB768 /* Select List SEK */,
 				49569B3223D65AA4009308CA /* ListCollectionCell.swift */,
 				49569B3423D6919E009308CA /* ListsLayout.swift */,
 				4988FC4723BEF89600199635 /* ListModel.swift */,
-				4966B70923DE98C800A8523A /* MakeNewList.swift */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -1049,7 +1035,6 @@
 				49BC783623C8275B003D9904 /* HistorySelect.swift in Sources */,
 				495DAD4724A81F4600D5F844 /* WhatsNewConfiguration.swift in Sources */,
 				49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */,
-				490BC3F623F8DA41004D1433 /* EditListViewController.swift in Sources */,
 				3C4DE6FD259AD3FF0037D104 /* CacheIcon.swift in Sources */,
 				49301BF02400D4FF00B4780B /* HelpControllers.swift in Sources */,
 				49563522243694BC0001E8C6 /* PaperOnboarding.swift in Sources */,
@@ -1077,7 +1062,6 @@
 				3CE306E4259AC4B000F1B2E2 /* GestureTransitions.swift in Sources */,
 				4952F0C2240B1DD00068564F /* SearchCell.swift in Sources */,
 				49BC782223C3E1BF003D9904 /* TextViewRounded.swift in Sources */,
-				4966B70A23DE98C800A8523A /* MakeNewList.swift in Sources */,
 				4956351C243694BC0001E8C6 /* OnboardingContentView.swift in Sources */,
 				495F38FB2432C8FE00A17D93 /* CarteItem.swift in Sources */,
 				495ECCA7238CF76C00E7D966 /* NewHistoryViewController.swift in Sources */,

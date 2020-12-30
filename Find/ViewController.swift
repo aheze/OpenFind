@@ -95,6 +95,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                         collectionView.isScrollEnabled = true
                     }
                 }
+                if let photosCollectionView = photos.collectionView {
+                    photosCollectionView.isScrollEnabled = false
+                    photosCollectionView.isScrollEnabled = true
+                }
                 
                 animator?.isReversed = false
                 animator?.stopAnimation(true)
@@ -222,6 +226,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     
                     switch ViewControllerState.currentVC {
                     case is NewHistoryViewController:
+                        if let photosCollectionView = photos.collectionView {
+                            photosCollectionView.isScrollEnabled = false
+                            photosCollectionView.isScrollEnabled = true
+                        }
                         gestures.isRubberBanding = true
                     case is CameraViewController:
                         startMoveVC(from: camera, to: photos, direction: .right, toOverlay: true)
@@ -241,10 +249,20 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     
                     switch ViewControllerState.currentVC {
                     case is NewHistoryViewController:
+                        if let photosCollectionView = photos.collectionView {
+                            photosCollectionView.isScrollEnabled = false
+                            photosCollectionView.isScrollEnabled = true
+                        }
                         startMoveVC(from: photos, to: camera, direction: .left, toOverlay: false)
                     case is CameraViewController:
                         startMoveVC(from: camera, to: lists, direction: .left, toOverlay: true)
                     case is ListsNavController:
+                        if let listsVC = lists.viewControllers.first as? ListController {
+                            if let collectionView = listsVC.collectionView {
+                                collectionView.isScrollEnabled = false
+                                collectionView.isScrollEnabled = true
+                            }
+                        }
                         gestures.isRubberBanding = true
                     default:
                         print("could not cast view controller")

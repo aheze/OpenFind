@@ -12,15 +12,17 @@ extension ListController {
     func setUpBarButtons() {
         let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addPressed(sender:)))
         let selectButton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectPressed(sender:)))
+        
+        addButton.tintColor = UIColor(hexString: randomizedColor)
         navigationItem.rightBarButtonItems = [addButton, selectButton]
     }
     @objc func addPressed(sender: UIBarButtonItem) {
-        print("add")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "ListBuilderViewController") as? ListBuilderViewController {
             viewController.listBuilderType = .maker
             viewController.newListDelegate = self
             viewController.iconColorName = randomizedColor
+            viewController.isModalInPresentation = true
             self.present(viewController, animated: true, completion: nil)
         }
     }

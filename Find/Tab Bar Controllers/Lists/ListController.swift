@@ -326,7 +326,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
     weak var delegate: UIAdaptivePresentationControllerDelegate?
     override func viewDidLoad() {
         
-        setUpBarButtons()
+        
         
         super.viewDidLoad()
         if let layout = collectionView?.collectionViewLayout as? AdaptiveCollectionLayout {
@@ -336,6 +336,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         if let randColorString = colorArray.randomElement() {
             randomizedColor = randColorString
         }
+        setUpBarButtons()
 //        addListButton.layer.cornerRadius = 6
 //        addListButton.backgroundColor = UIColor(hexString: randomizedColor)
         
@@ -612,6 +613,7 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
                     for singleContent in currentPath.contents {
                         contents.append(singleContent)
                     }
+                    viewController.isModalInPresentation = true
                     viewController.contents = contents
                     viewController.iconImageName = currentPath.iconImageName
                     viewController.iconColorName = currentPath.iconColorName
@@ -619,8 +621,6 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
                 
                 self.present(viewController, animated: true)
             }
-            
-            //            performSegue(withIdentifier: "editListSegue", sender: self)
         }
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -635,8 +635,6 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
             })
             
         }
-
-        
     }
 }
 
