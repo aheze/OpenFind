@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ARKit
 import Vision
 import AVFoundation
 import CoreMotion
@@ -245,7 +244,7 @@ class CameraViewController: UIViewController {
     //var shouldScale = true
     var currentNumber = 0
     var startGettingNearestFeaturePoints = false
-    let fastSceneConfiguration = AROrientationTrackingConfiguration()
+    
 //    @IBOutlet weak var numberLabel: UILabel!
 //    @IBOutlet weak var statusView: UIView!
 //    weak var changeDelegate: ChangeStatusValue?

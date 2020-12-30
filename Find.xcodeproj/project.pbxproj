@@ -392,13 +392,13 @@
 			isa = PBXGroup;
 			children = (
 				3CE306CE259AC46400F1B2E2 /* TabBar.swift */,
-				3CE306CF259AC46400F1B2E2 /* PhotosIcon.xib */,
+				3CE306D5259AC46400F1B2E2 /* TabBar.xib */,
 				3CE306D0259AC46400F1B2E2 /* PhotosIcon.swift */,
+				3CE306CF259AC46400F1B2E2 /* PhotosIcon.xib */,
 				3CE306D1259AC46400F1B2E2 /* ListsIcon.swift */,
 				3CE306D2259AC46400F1B2E2 /* CameraIcon.xib */,
 				3CE306D3259AC46400F1B2E2 /* CameraIcon.swift */,
 				3CE306D4259AC46400F1B2E2 /* ListsIcon.xib */,
-				3CE306D5259AC46400F1B2E2 /* TabBar.xib */,
 			);
 			path = "Tab Bar";
 			sourceTree = "<group>";

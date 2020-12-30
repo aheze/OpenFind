@@ -6,7 +6,13 @@
 //
 
 import UIKit
+import SnapKit
 
+enum TabBarMode {
+    case navigationControls /// navigate between view controllers
+    case photosControls /// selection controls for Photos
+    case listsControls /// selection controls for Lists
+}
 class TabBarView: PassthroughView {
     
     var animatingObjects = 0
@@ -22,6 +28,28 @@ class TabBarView: PassthroughView {
     @IBOutlet weak var containerView: PassthroughView!
     @IBOutlet weak var containerHeightC: NSLayoutConstraint!
     @IBOutlet weak var stackView: PassthroughStackView!
+    
+    /// reference view to add selecting buttons
+    @IBOutlet weak var controlsReferenceView: UIView!
+    
+    @IBOutlet var photosControls: UIView!
+    @IBOutlet weak var starButton: UIButton!
+    @IBAction func starButtonPressed(_ sender: Any) {
+    }
+    
+    @IBOutlet weak var cacheButton: UIButton!
+    @IBAction func cacheButtonPressed(_ sender: Any) {
+    }
+    
+    @IBOutlet weak var photosDeleteButton: UIButton!
+    @IBAction func photosDeleteButtonPressed(_ sender: Any) {
+    }
+    
+    @IBOutlet var listsControls: UIView!
+    @IBOutlet weak var listsDeleteButton: UIButton!
+    @IBAction func listsDeleteButtonPressed(_ sender: Any) {
+    }
+    
     
     @IBOutlet weak var topLineView: UIView!
     @IBOutlet weak var backgroundView: UIView!
@@ -114,6 +142,8 @@ class TabBarView: PassthroughView {
             }
         }
         self.clipsToBounds = false
+        
+        
     }
     
     func getBlocks(from fromVC: UIViewController, to toVCType: ViewControllerType) -> (
