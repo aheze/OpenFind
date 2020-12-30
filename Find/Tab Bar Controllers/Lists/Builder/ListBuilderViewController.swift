@@ -160,8 +160,13 @@ extension ListBuilderViewController: GetGeneralInfo, GetIconInfo, GetColorInfo {
         colorVC.colorDelegate = self
         
         generalVC.receiveGeneral(nameOfList: name, desc: descriptionOfList, contentsOfList: contents)
-        symbolVC.receiveIcon(name: iconImageName)
-        colorVC.receiveColor(name: iconColorName)
+//        symbolVC.receiveIcon(name: iconImageName)
+//        colorVC.receiveColor(name: iconColorName)
+        
+        
+        symbolVC.selectedIconName = iconImageName
+        colorVC.colorName = iconColorName
+        print("set colors")
         
         let pagingViewController = PagingViewController(viewControllers: [
             generalVC,
@@ -186,29 +191,11 @@ extension ListBuilderViewController: GetGeneralInfo, GetIconInfo, GetColorInfo {
         pagingViewController.selectedBackgroundColor = UIColor.secondarySystemBackground
         pagingViewController.borderColor = UIColor.quaternaryLabel
         pagingViewController.contentInteraction = .none
-        
-        pagingViewController.delegate = self
     
         pagingViewController.didMove(toParent: self)
         
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
         let newImage = UIImage(systemName: iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(hexString: iconColorName), renderingMode: .alwaysOriginal)
         topImageView.image = newImage
-    }
-}
-
-extension ListBuilderViewController: PagingViewControllerDelegate {
-    func pagingViewController<T>(_ pagingViewController: PagingViewController, didScrollToItem pagingItem: T, startingViewController: UIViewController?, destinationViewController: UIViewController, transitionSuccessful: Bool) where T : PagingItem, T : Comparable, T : Hashable {
-        
-        guard let indexItem = pagingViewController.state.currentPagingItem as? PagingIndexItem else {
-            return
-        }
-        let indexC = indexItem.index
-        
-        if indexC == 1 {
-            symbolVC.scrolledHere()
-        } else if indexC == 2 {
-            colorVC.scrolledHere()
-        }
     }
 }

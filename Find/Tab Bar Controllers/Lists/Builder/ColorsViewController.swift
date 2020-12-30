@@ -17,18 +17,14 @@ protocol GetColorInfo: class {
 
 class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    
-    func scrolledHere() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         if let row = colorArray.firstIndex(of: colorName) {
             let indP = IndexPath(item: row, section: 0)
             print(indP)
             selectedPath = row
             collectionView.selectItem(at: indP, animated: false, scrollPosition: .centeredVertically)
         }
-    }
-    func receiveColor(name: String) {
-        print("color recieved")
-        colorName = name
     }
     
     private let sectionInsets = UIEdgeInsets(top: 8.0,
