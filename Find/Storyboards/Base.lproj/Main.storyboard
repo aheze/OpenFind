@@ -613,10 +613,10 @@
             </objects>
             <point key="canvasLocation" x="-710.14492753623199" y="177.45535714285714"/>
         </scene>
-        <!--List Controller-->
+        <!--Lists Controller-->
         <scene sceneID="AX2-Df-qyN">
             <objects>
-                <viewController storyboardIdentifier="ListController" id="bN2-ri-A2h" customClass="ListController" customModule="Find" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ListsController" id="bN2-ri-A2h" customClass="ListsController" customModule="Find" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AHc-eQ-e2l">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -760,13 +760,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tfj-fk-cpK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="oFA-Wh-vvq">
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" id="oFA-Wh-vvq">
                     <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rectangle.3.offgrid.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Eta-iU-kLB">
                             <rect key="frame" x="112.5" y="26" width="75" height="72.5"/>
-                            <color key="tintColor" name="FeedbackGradientLeft"/>
+                            <color key="tintColor" name="TabIconListsMain"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="75" id="YTu-TV-7YQ"/>
                                 <constraint firstAttribute="height" constant="75" id="wZi-5x-wwT"/>
@@ -775,7 +775,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Lists" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v96-On-D6n">
                             <rect key="frame" x="108" y="122" width="84" height="29"/>
                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" systemColor="secondaryLabelColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use lists to find multiple words at the same time. Make one by clicking the + button. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IcC-jV-a0m">
@@ -784,7 +784,7 @@
                                 <constraint firstAttribute="width" constant="215" id="re2-p6-RGd"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" systemColor="secondaryLabelColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -4216,6 +4216,9 @@ the App!</string>
         </namedColor>
         <namedColor name="SemitransparentWhite">
             <color red="1" green="1" blue="1" alpha="0.60000002384185791" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TabIconListsMain">
+            <color red="1" green="0.71399998664855957" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TransparentBlur">
             <color white="0.83700001239776611" alpha="0.15000000596046448" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

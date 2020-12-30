@@ -30,9 +30,9 @@ class TabBarView: PassthroughView {
     @IBOutlet weak var stackView: PassthroughStackView!
     
     /// reference view to add selecting buttons
-    @IBOutlet weak var controlsReferenceView: UIView!
+    @IBOutlet weak var controlsReferenceView: ReceiveTouchView!
     
-    @IBOutlet var photosControls: UIView!
+    @IBOutlet var photosControls: ReceiveTouchView!
     @IBOutlet weak var starButton: UIButton!
     @IBAction func starButtonPressed(_ sender: Any) {
     }
@@ -45,9 +45,13 @@ class TabBarView: PassthroughView {
     @IBAction func photosDeleteButtonPressed(_ sender: Any) {
     }
     
-    @IBOutlet var listsControls: UIView!
+    @IBOutlet var listsControls: ReceiveTouchView!
+    @IBOutlet weak var listsSelectionLabel: UILabel!
     @IBOutlet weak var listsDeleteButton: UIButton!
+    
+    var listsDeletePressed: (() -> Void)?
     @IBAction func listsDeleteButtonPressed(_ sender: Any) {
+        listsDeletePressed?()
     }
     
     
@@ -143,7 +147,7 @@ class TabBarView: PassthroughView {
         }
         self.clipsToBounds = false
         
-        
+        controlsReferenceView.isUserInteractionEnabled = false
     }
     
     func getBlocks(from fromVC: UIViewController, to toVCType: ViewControllerType) -> (

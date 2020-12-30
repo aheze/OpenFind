@@ -1,5 +1,5 @@
 //
-//  ListController+NavBar.swift
+//  ListsController+NavBar.swift
 //  Find
 //
 //  Created by Zheng on 12/29/20.
@@ -8,13 +8,15 @@
 
 import UIKit
 
-extension ListController {
+extension ListsController {
     func setUpBarButtons() {
-        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addPressed(sender:)))
-        let selectButton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectPressed(sender:)))
+        addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addPressed(sender:)))
+        selectButton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectPressed(sender:)))
         
         addButton.tintColor = UIColor(hexString: randomizedColor)
         navigationItem.rightBarButtonItems = [addButton, selectButton]
+        
+        updateSelectionLabel?(0)
     }
     @objc func addPressed(sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -27,8 +29,7 @@ extension ListController {
         }
     }
     @objc func selectPressed(sender: UIBarButtonItem) {
-        print("select")
+        selectPressed()
     }
-    
     
 }

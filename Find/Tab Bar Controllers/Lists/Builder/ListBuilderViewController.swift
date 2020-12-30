@@ -130,7 +130,7 @@ class ListBuilderViewController: UIViewController {
         if !listsBuilderViewedBefore {
             
             let quickTourView = TutorialHeader()
-            quickTourView.colorView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
+            quickTourView.colorView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.8247417789, blue: 0.1493863227, alpha: 1)
             
             tutorialContainerHeightC.constant = 50
             tutorialContainer.addSubview(quickTourView)

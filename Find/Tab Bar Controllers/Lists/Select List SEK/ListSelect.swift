@@ -27,7 +27,7 @@ class ListSelect: UIView, ChangeNumberOfSelectedList {
             listSelectLabel.fadeTransition(0.1)
             
             let numberListsSelected = NSLocalizedString("%d numberLists",
-                                                                         comment:"ListController def=x Lists Selected")
+                                                                         comment:"ListsController def=x Lists Selected")
             listSelectLabel.text = String.localizedStringWithFormat(numberListsSelected, to)
         }
         

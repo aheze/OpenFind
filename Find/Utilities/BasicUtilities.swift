@@ -93,13 +93,28 @@ extension NSLayoutConstraint {
         return "id: \(id), constant: \(constant)" //you may print whatever you want here
     }
 }
-
+class ReceiveTouchView: UIView {
+    
+}
 class PassthroughView: UIView {
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        return subviews.contains(where: {
-            !$0.isHidden
+        if subviews.contains(where: {
+            ($0 is ReceiveTouchView && $0.point(inside: self.convert(point, to: $0), with: event)) || (
+                !$0.isHidden
                 && $0.isUserInteractionEnabled
                 && $0.point(inside: self.convert(point, to: $0), with: event)
+            )
+        }) {
+            print("yep pass")
+        } else {
+            print("NONONo pass")
+        }
+        return subviews.contains(where: {
+            ($0 is ReceiveTouchView && $0.point(inside: self.convert(point, to: $0), with: event)) || (
+                !$0.isHidden
+                && $0.isUserInteractionEnabled
+                && $0.point(inside: self.convert(point, to: $0), with: event)
+            )
         })
     }
 }

@@ -1,5 +1,5 @@
 //
-//  ListController.swift
+//  ListsController.swift
 //  Find
 //
 //  Created by Andrew on 1/20/20.
@@ -25,19 +25,28 @@ class LayerScrollView: UIScrollView, UIGestureRecognizerDelegate {
         return true
     }
 }
-class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLayoutDelegate, UIAdaptivePresentationControllerDelegate, NewListMade, FinishedEditingList {
-
+class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLayoutDelegate, UIAdaptivePresentationControllerDelegate, NewListMade, FinishedEditingList {
 
     
-//    @IBOutlet weak var quickTourView: UIView!
-//    @IBOutlet weak var quickTourHeightC: NSLayoutConstraint! /// 40
-//    @IBOutlet weak var quickTourButton: UIButton!
-//    @IBOutlet weak var closeQuickTourButton: UIButton!
+    // MARK: - Tab bar
+    var showSelectionControls: ((Bool) -> Void)? /// show or hide
     
+    // MARK: - Selection
+    var addButton: UIBarButtonItem!
+    var selectButton: UIBarButtonItem!
+//    var enableSelectionControls: ((Bool) -> Void)? /// enable or disable buttons on selection controls
+    var updateSelectionLabel: ((Int) -> Void)?
+    
+    var indexPathsSelected = [Int]()
+    var numberOfSelected = 0 {
+        didSet {
+            updateSelectionLabel?(numberOfSelected)
+        }
+    }
+
     let defaults = UserDefaults.standard
     
     func animateCloseQuickTour(quickTourView: TutorialHeader) {
-        print("animte!!")
         defaults.set(true, forKey: "listsViewedBefore")
         
         let padding = AdaptiveCollectionConfig.cellPadding
@@ -69,9 +78,10 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         SwiftEntryKit.dismiss()
     }
     
+    /// Sort lists by date and show a no list view if no lists
     func sortLists() {
         listCategories = listCategories!.sorted(byKeyPath: "dateCreated", ascending: false)
-        guard let listCats = listCategories else { print("No LISTS..... or Error!"); return }
+        guard let listCats = listCategories else { return }
         if listCats.count == 0 {
             view.addSubview(noListsDisplay)
             noListsDisplay.snp.makeConstraints { (make) in
@@ -82,11 +92,6 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         } else {
             noListsDisplay.removeFromSuperview()
         }
-    }
-    func exitSwiftEntryKit() {
-        SwiftEntryKit.dismiss()
-        fadeSelectOptions(fadeOut: "fade out")
-        selectButtonSelected = false
     }
     
     func deleteTheList() { ///Comes from EditListViewController, deletes an existing list.
@@ -107,7 +112,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
             currentEditingPresentationPath = -1
         }
         
-        let deletedList = NSLocalizedString("deletedList", comment: "ListController def=Deleted list!")
+        let deletedList = NSLocalizedString("deletedList", comment: "ListsController def=Deleted list!")
         let tapToDismiss = NSLocalizedString("tapToDismiss", comment: "Multipurpose def=Tap to dismiss")
         
         let alertView = SPAlertView(title: deletedList, message: tapToDismiss, preset: SPAlertPreset.done)
@@ -117,121 +122,12 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
     }
     
     
-    func listDeleteButtonPressed() {
-        
-        var titleMessage = ""
-        var finishMessage = ""
-        if indexPathsSelected.count == 1 {
-            let deleteThisListQuestion = NSLocalizedString("deleteThisListQuestion",
-                                                           comment: "ListController def=Delete this List?")
-            let listDeletedExclaim = NSLocalizedString("listDeletedExclaim",
-                                                       comment: "ListController def=List deleted!")
-            
-            
-            titleMessage = deleteThisListQuestion
-            finishMessage = listDeletedExclaim
-        } else if indexPathsSelected.count == listCategories?.count {
-            let deleteAllListsQuestion = NSLocalizedString("deleteAllListsQuestion",
-                                                           comment: "ListController def=Delete ALL lists?!")
-            let allListsDeletedExclaim = NSLocalizedString("allListsDeletedExclaim",
-                                                       comment: "ListController def=All lists deleted!")
-            
-            titleMessage = deleteAllListsQuestion
-            finishMessage = allListsDeletedExclaim
-        } else {
-            let deleteSelectedCountLists = NSLocalizedString("Delete %d lists?",
-                                                             comment:"ListController def=Delete x lists?")
-            let finishedDeleteSelectedCountLists = NSLocalizedString("%d lists deleted!",
-                                                                     comment:"ListController def=x lists deleted!")
-            
-            
-            titleMessage = String.localizedStringWithFormat(deleteSelectedCountLists, indexPathsSelected.count)
-            finishMessage = String.localizedStringWithFormat(finishedDeleteSelectedCountLists, indexPathsSelected.count)
-        }
-        
-        let cantBeUndone = NSLocalizedString("cantBeUndone", comment: "Multipurpose def=This action can't be undone.")
-        
-        let alert = UIAlertController(title: titleMessage, message: cantBeUndone, preferredStyle: .alert)
-        
-        let delete = NSLocalizedString("delete", comment: "Multipurpose def=Delete")
-        
-        alert.addAction(UIAlertAction(title: delete, style: UIAlertAction.Style.destructive, handler: { _ in
-            var tempLists = [FindList]()
-            var tempInts = [Int]()
-            var arrayOfIndexPaths = [IndexPath]()
-            for index in self.indexPathsSelected {
-                if let cat = self.listCategories?[index] {
-                    tempLists.append(cat)
-                    tempInts.append(index)
-                    arrayOfIndexPaths.append(IndexPath(item: index, section: 0))
-                }
-            }
-            do {
-                try self.realm.write {
-                    self.realm.delete(tempLists)
-                }
-            } catch {
-                print("error deleting category \(error)")
-            }
-            self.collectionView.deleteItems(at: arrayOfIndexPaths)
-            self.indexPathsSelected.removeAll()
-            self.numberOfSelected -= tempLists.count
-            
-            self.selectButtonSelected = false
-            SwiftEntryKit.dismiss()
-            self.fadeSelectOptions(fadeOut: "fade out")
-            self.collectionView.allowsMultipleSelection = false
-            self.sortLists()
-            
-            
-            let tapToDismiss = NSLocalizedString("tapToDismiss", comment: "Multipurpose def=Tap to dismiss")
-            let alertView = SPAlertView(title: finishMessage, message: tapToDismiss, preset: SPAlertPreset.done)
-            alertView.duration = 2.6
-            alertView.present()
-        }))
-        
-        let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
-        alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-        
-      
-    }
     override var prefersStatusBarHidden: Bool {
         return false
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "makeNewListSegue" {
-//            let destinationVC = segue.destination as! MakeNewList
-//            destinationVC.isModalInPresentation = true
-//            destinationVC.newListDelegate = self
-//            destinationVC.iconColorName = randomizedColor
-//            segue.destination.presentationController?.delegate = self
-//        } else if segue.identifier == "editListSegue" {
-//            let destinationVC = segue.destination as! EditListViewController
-//            destinationVC.isModalInPresentation = true
-//            destinationVC.finalDeleteList = self
-//            destinationVC.finishedEditingList = self
-//
-//            if let currentPath = listCategories?[currentEditingPresentationPath] {
-//                destinationVC.name = currentPath.name
-//                destinationVC.descriptionOfList = currentPath.descriptionOfList
-//                var conts = [String]()
-//                for singleCont in currentPath.contents {
-//                    conts.append(singleCont)
-//                }
-//                destinationVC.contents = conts
-//                destinationVC.iconImageName = currentPath.iconImageName
-//                destinationVC.iconColorName = currentPath.iconColorName
-//            }
-//            segue.destination.presentationController?.delegate = self
-//
-//        }
-//    }
     
 
     let realm = try! Realm()
@@ -242,43 +138,15 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
     @IBOutlet weak var collectionView: UICollectionView!
     
     
-//    @IBOutlet weak var selectButton: UIButton!
-    
     var swipedToDismiss = true
+    
+    /// Whether is in select mode or not
     var selectButtonSelected = false
     
     
     weak var changeNumberDelegateList: ChangeNumberOfSelectedList?
     var currentEditingPresentationPath = 0
     
-    var indexPathsSelected = [Int]()
-    var numberOfSelected = 0 {
-        didSet {
-            if numberOfSelected == 0 {
-                changeNumberDelegateList?.disablePress(disable: true)
-            } else {
-                changeNumberDelegateList?.disablePress(disable: false)
-            }
-            changeNumberDelegateList?.changeLabel(to: numberOfSelected)
-        }
-    }
-  
-    
-   func selectPressed(_ sender: UIButton) {
-        
-        ///First time press, will be true
-        if selectButtonSelected == false {
-            selectButtonSelected = true
-            fadeSelectOptions(fadeOut: "fade in")
-            collectionView.allowsMultipleSelection = true
-            
-        } else { ///Cancel will now be Select
-            selectButtonSelected = false
-            SwiftEntryKit.dismiss()
-            fadeSelectOptions(fadeOut: "fade out")
-            collectionView.allowsMultipleSelection = false
-        }
-    }
     
     @IBAction func blackXButtonPressed(_ sender: UIButton) {
         if let pvc = self.presentationController {
@@ -288,27 +156,8 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
     }
     
     
-//    @IBOutlet weak var addListButton: UIButton!
-    func addListPressed(_ sender: UIButton) {
-        exitSwiftEntryKit()
-//        performSegue(withIdentifier: "makeNewListSegue", sender: self)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let viewController = storyboard.instantiateViewController(withIdentifier: "ListBuilderViewController") as? ListBuilderViewController {
-            viewController.newListDelegate = self
-            viewController.iconColorName = randomizedColor
-            self.present(viewController, animated: true)
-        }
-        
-//        let destinationVC = segue.destination as! MakeNewList
-//        destinationVC.isModalInPresentation = true
-//        destinationVC.newListDelegate = self
-//        destinationVC.iconColorName = randomizedColor
-    }
-    
     weak var delegate: UIAdaptivePresentationControllerDelegate?
     override func viewDidLoad() {
-        
-        
         
         super.viewDidLoad()
         if let layout = collectionView?.collectionViewLayout as? AdaptiveCollectionLayout {
@@ -348,8 +197,6 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
                 
                 quickTourView.pressed = { [weak self] in
                     
-//                    self?.defaults.set(true, forKey: "listsViewedBefore")
-                    
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = storyboard.instantiateViewController(withIdentifier: "ListsTutorialViewController") as! ListsTutorialViewController
                     
@@ -365,14 +212,6 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         } else {
             collectionView.contentInset = UIEdgeInsets(top: padding, left: padding, bottom: 82, right: padding)
         }
-        
-        
-        
-        
-//        navigationController?.view
-//        
-//        let constraint = navigationController!.navigationBar.bottomAnchor.constraint(equalTo: quickTourView.topAnchor)
-//        NSLayoutConstraint.activate([constraint])
         
         self.title = "Lists"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -409,7 +248,6 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         
     }
     func update(index: Int, name: String, description: String, contents: [String], imageName: String, imageColor: String) {
-        print("updating with... \(name), \(description), \(contents)")
         if let listToEdit = listCategories?[index] {
             do {
                 try realm.write {
@@ -430,7 +268,7 @@ class ListController: UIViewController, ListDeletePressed, AdaptiveCollectionLay
         collectionView.reloadData()
     }
 }
-extension ListController {
+extension ListsController {
     func updateExistingList(name: String, description: String, contents: [String], imageName: String, imageColor: String, deleteList: Bool) {
         if deleteList {
             deleteTheList()
@@ -440,7 +278,7 @@ extension ListController {
     }
 }
 
-extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension ListsController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func madeNewList(name: String, description: String, contents: [String], imageName: String, imageColor: String) {
         
         
@@ -495,7 +333,7 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
             
             if overFlowCount >= 1 {
                 let overFlowCountMoreFormat = NSLocalizedString("%d overFlowCountMore",
-                                                          comment:"ListController def=\n... x more")
+                                                          comment:"ListsController def=\n... x more")
                 
                 textToDisplay += String.localizedStringWithFormat(overFlowCountMoreFormat, overFlowCount)
             }
@@ -508,20 +346,18 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
             
         }
         if indexPathsSelected.contains(indexPath.item) {
-            UIView.animate(withDuration: 0.1, animations: {
+//            UIView.animate(withDuration: 0.1, animations: {
                 
                 collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
                 cell.highlightView.alpha = 1
                 cell.checkmarkView.alpha = 1
-                cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            })
+//            })
         } else {
-            UIView.animate(withDuration: 0.1, animations: {
+//            UIView.animate(withDuration: 0.1, animations: {
                 collectionView.deselectItem(at: indexPath, animated: false)
                 cell.highlightView.alpha = 0
                 cell.checkmarkView.alpha = 0
-                cell.transform = CGAffineTransform.identity
-            })
+//            })
         }
         return cell
     }
@@ -555,7 +391,7 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
         if overFlowCount >= 1 {
 //            textToDisplay += "\n... \(overFlowCount) more"
             let overFlowCountMoreFormat = NSLocalizedString("%d overFlowCountMore",
-                                                      comment:"ListController def=\n... x more")
+                                                      comment:"ListsController def=\n... x more")
             
             textToDisplay += String.localizedStringWithFormat(overFlowCountMoreFormat, overFlowCount)
         }
@@ -578,7 +414,7 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
                 UIView.animate(withDuration: 0.1, animations: {
                     cell.highlightView.alpha = 1
                     cell.checkmarkView.alpha = 1
-                    cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+//                    cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
                 })
             }
                 
@@ -616,7 +452,7 @@ extension ListController: UICollectionViewDataSource, UICollectionViewDelegate, 
             UIView.animate(withDuration: 0.1, animations: {
                 cell.highlightView.alpha = 0
                 cell.checkmarkView.alpha = 0
-                cell.transform = CGAffineTransform.identity
+//                cell.transform = CGAffineTransform.identity
             })
             
         }
@@ -631,7 +467,7 @@ extension String {
     }
 }
 
-extension ListController {
+extension ListsController {
     
  
     //MARK: Selection
@@ -654,89 +490,7 @@ extension ListController {
 //        indexPathsSelected.removeAll()
 //        numberOfSelected = 0
 //    }
-    func fadeSelectOptions(fadeOut: String) {
-        switch fadeOut {
-        case "fade out":
-//            deselectAllItems()
-        
-        print("fade out")
-//            UIView.transition(with: selectButton, duration: 0.1, options: .transitionCrossDissolve, animations: {
-//
-//                let select = NSLocalizedString("select", comment: "ListController def=select")
-//
-//                self.selectButton.setTitle(select, for: .normal)
-//                self.view.layoutIfNeeded()
-//            }, completion: nil)
-            
-        case "fade in":
-            if listCategories?.count == 0 {
-                
-                selectButtonSelected = false
-                var attributes = EKAttributes.bottomFloat
-                attributes.entryBackground = .color(color: .white)
-                attributes.entranceAnimation = .translation
-                attributes.exitAnimation = .translation
-                attributes.displayDuration = 0.7
-                attributes.positionConstraints.size.height = .constant(value: 50)
-                attributes.statusBar = .light
-                attributes.entryInteraction = .absorbTouches
-                
-                attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
-                let contentView = UIView()
-                contentView.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
-                contentView.layer.cornerRadius = 8
-                let subTitle = UILabel()
-                
-                let noListsCreatedYet = NSLocalizedString("noListsCreatedYet",
-                                                          comment: "ListController def=No Lists Created Yet!")
-                subTitle.text = noListsCreatedYet
-                subTitle.textColor = UIColor.white
-                contentView.addSubview(subTitle)
-                subTitle.snp.makeConstraints { (make) in
-                    make.center.equalToSuperview()
-                }
-                
-                let edgeWidth = CGFloat(600)
-                attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
-                SwiftEntryKit.display(entry: contentView, using: attributes)
-                
-                selectButtonSelected = false
-                collectionView.allowsMultipleSelection = false
-                
-            } else {
-                // Create a basic toast that appears at the top
-                var attributes = EKAttributes.bottomFloat
-                attributes.entryBackground = .color(color: .white)
-                attributes.entranceAnimation = .translation
-                attributes.exitAnimation = .translation
-                attributes.displayDuration = .infinity
-                attributes.positionConstraints.size.height = .constant(value: 50)
-                attributes.statusBar = .light
-                attributes.entryInteraction = .absorbTouches
-                
-                attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
-                
-                let edgeWidth = CGFloat(600)
-                attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
-                let customView = ListSelect()
-                customView.listDeletePressed = self
-                changeNumberDelegateList = customView
-                
-                SwiftEntryKit.display(entry: customView, using: attributes)
-                changeNumberDelegateList?.disablePress(disable: true)
-                
-//                let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
-                let done = NSLocalizedString("done", comment: "Multipurpose def=Done")
-//                selectButton.setTitle(done, for: .normal)
-                UIView.animate(withDuration: 0.1, animations: {
-                    self.view.layoutIfNeeded()
-                })
-            }
-            
-        default:
-            print("unknown case, fade")
-        }
-    }
+    
 }
 
 

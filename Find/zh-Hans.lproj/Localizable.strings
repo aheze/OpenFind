@@ -4,16 +4,16 @@
 /* GeneralViewController def=\"\(duplicateStringArray[0])\" has \(aDuplicate) */
 "%@ has %@" = "\"%@\" 有 %@";
 
-/* ListController def=x lists deleted! */
+/* ListsController def=x lists deleted! */
 "%d lists deleted!" = "删掉了%d个清单";
 
 /* FindBar def=x Matches in  */
 "%d MatchesInSpace" = "%d个搜索结果在";
 
-/* ListController def=x Lists Selected */
+/* ListsController def=x Lists Selected */
 "%d numberLists" = "%d个清单已选";
 
-/* ListController def=\n... x more */
+/* ListsController def=\n... x more */
 "%d overFlowCountMore" = "\n…还有%d个";
 
 /* NewHistoryViewController def=x caches cleared! */
@@ -52,7 +52,7 @@
 /* GeneralViewController def=a duplicate. */
 "aDuplicateOriginal" = "一个重复项";
 
-/* ListController def=All lists deleted! */
+/* ListsController def=All lists deleted! */
 "allListsDeletedExclaim" = "所有清单已删除！";
 
 /* Settings def=All your photos and their caches will be deleted. This action can't be undone. */
@@ -136,7 +136,7 @@
 /* NewHistoryViewController def=Clear x photos' caches? */
 "Delete %d caches?" = "清除%d张照片的快取？";
 
-/* ListController def=Delete x lists? */
+/* ListsController def=Delete x lists? */
 "Delete %d lists?" = "删除%d个清单？";
 
 /* NewHistoryViewController def=Delete x photos? */
@@ -145,7 +145,7 @@
 /* Settings def=Delete All Lists */
 "deleteAllLists" = "删除所有清单";
 
-/* ListController def=Delete ALL lists?! */
+/* ListsController def=Delete ALL lists?! */
 "deleteAllListsQuestion" = "删除所有清单？！";
 
 /* Settings def=Delete All Photos */
@@ -163,13 +163,13 @@
 /* Settings def=Deleted All Photos */
 "deletedAllPhotos" = "所有照片已删除！";
 
-/* ListController def=Deleted list! */
+/* ListsController def=Deleted list! */
 "deletedList" = "删除了清单！";
 
 /* NewHistoryViewController def=Clear ENTIRE cache?! */
 "deleteEntireCacheQuestion" = "清除所有照片的快取?!";
 
-/* ListController def=Delete this List? */
+/* ListsController def=Delete this List? */
 "deleteThisListQuestion" = "删除这个清单？";
 
 /* Multifile def=Delete photo? */
@@ -265,7 +265,7 @@
 /* StatsViewController def=Left Feedback Status */
 "leftFeedbackStatus" = "留反馈状态";
 
-/* ListController def=List deleted! */
+/* ListsController def=List deleted! */
 "listDeletedExclaim" = "清单已删除！";
 
 /* Multipurpose def=Lists */
@@ -319,7 +319,7 @@
 /* GeneralViewController def=No Description */
 "noDescription" = "无说明";
 
-/* ListController def=No Lists Created Yet! */
+/* ListsController def=No Lists Created Yet! */
 "noListsCreatedYet" = "还没有清单做成！";
 
 /* FindBar def=No Matches */
@@ -430,7 +430,7 @@
 /* EditList def=Icon */
 "secondVCTitle" = "图标";
 
-/* ListController def=select */
+/* ListsController def=select */
 "select" = "选择";
 
 /* TutorialLocalization def=Select a few photos, tap the Find icon, and enter the text that you want to find! */

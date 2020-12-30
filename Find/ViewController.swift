@@ -67,10 +67,21 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     lazy var lists: ListsNavController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let viewController = storyboard.instantiateViewController(withIdentifier: "ListController") as? ListController {
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "ListsController") as? ListsController {
             let navigationController = ListsNavController(rootViewController: viewController)
             viewController.modalPresentationCapturesStatusBarAppearance = true
-//            viewController.presentationController?.delegate = self
+            viewController.showSelectionControls = { [weak self] show in
+                guard let self = self else { return }
+                self.tabBarView.showListsControls(show: show)
+            }
+            viewController.updateSelectionLabel = { [weak self] numberSelected in
+                guard let self = self else { return }
+                self.tabBarView.updateLabel(numberOfSelected: numberSelected)
+            }
+            tabBarView.listsDeletePressed = { [weak self] in
+                guard let self = self else { return }
+                viewController.listDeleteButtonPressed()
+            }
             return navigationController
         }
         fatalError()
@@ -89,7 +100,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         case .began:
             print("long pres beign")
             if gestures.isAnimating {
-                if let listsVC = lists.viewControllers.first as? ListController {
+                if let listsVC = lists.viewControllers.first as? ListsController {
                     if let collectionView = listsVC.collectionView {
                         collectionView.isScrollEnabled = false
                         collectionView.isScrollEnabled = true
@@ -234,7 +245,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     case is CameraViewController:
                         startMoveVC(from: camera, to: photos, direction: .right, toOverlay: true)
                     case is ListsNavController:
-                        if let listsVC = lists.viewControllers.first as? ListController {
+                        if let listsVC = lists.viewControllers.first as? ListsController {
                             if let collectionView = listsVC.collectionView {
                                 collectionView.isScrollEnabled = false
                                 collectionView.isScrollEnabled = true
@@ -257,7 +268,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     case is CameraViewController:
                         startMoveVC(from: camera, to: lists, direction: .left, toOverlay: true)
                     case is ListsNavController:
-                        if let listsVC = lists.viewControllers.first as? ListController {
+                        if let listsVC = lists.viewControllers.first as? ListsController {
                             if let collectionView = listsVC.collectionView {
                                 collectionView.isScrollEnabled = false
                                 collectionView.isScrollEnabled = true

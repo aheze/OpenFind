@@ -46,7 +46,7 @@ extension CameraViewController: UIAdaptivePresentationControllerDelegate {
                 destinationVC.highlightColor = highlightColor
                 destinationVC.modalPresentationCapturesStatusBarAppearance = true
             case "goToLists" :
-                let destinationVC = segue.destination as! ListController
+                let destinationVC = segue.destination as! ListsController
                 destinationVC.modalPresentationCapturesStatusBarAppearance = true
                 segue.destination.presentationController?.delegate = self
             default:

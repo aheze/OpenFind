@@ -4,16 +4,16 @@
 /* GeneralViewController def=\"\(duplicateStringArray[0])\" has \(aDuplicate) */
 "%@ has %@" = "\"%1$@\" has %2$@";
 
-/* ListController def=x lists deleted! */
+/* ListsController def=x lists deleted! */
 "%d lists deleted!" = "%d lists deleted!";
 
 /* FindBar def=x Matches in  */
 "%d MatchesInSpace" = "%d results in ";
 
-/* ListController def=x Lists Selected */
+/* ListsController def=x Lists Selected */
 "%d numberLists" = "%d Lists Selected";
 
-/* ListController def=\n... x more */
+/* ListsController def=\n... x more */
 "%d overFlowCountMore" = "\n... %d more";
 
 /* NewHistoryViewController def=x caches cleared! */
@@ -52,7 +52,7 @@
 /* GeneralViewController def=a duplicate. */
 "aDuplicateOriginal" = "a duplicate.";
 
-/* ListController def=All lists deleted! */
+/* ListsController def=All lists deleted! */
 "allListsDeletedExclaim" = "All lists deleted!";
 
 /* Settings def=All your photos and their caches will be deleted. This action can't be undone. */
@@ -136,7 +136,7 @@
 /* NewHistoryViewController def=Clear x photos' caches? */
 "Delete %d caches?" = "Clear %d photos' caches?";
 
-/* ListController def=Delete x lists? */
+/* ListsController def=Delete x lists? */
 "Delete %d lists?" = "Delete %d lists?";
 
 /* NewHistoryViewController def=Delete x photos? */
@@ -145,7 +145,7 @@
 /* Settings def=Delete All Lists */
 "deleteAllLists" = "Delete All Lists";
 
-/* ListController def=Delete ALL lists?! */
+/* ListsController def=Delete ALL lists?! */
 "deleteAllListsQuestion" = "Delete ALL lists?!";
 
 /* Settings def=Delete All Photos */
@@ -163,13 +163,13 @@
 /* Settings def=Deleted All Photos */
 "deletedAllPhotos" = "Deleted All Photos";
 
-/* ListController def=Deleted list! */
+/* ListsController def=Deleted list! */
 "deletedList" = "Deleted list!";
 
 /* NewHistoryViewController def=Clear ENTIRE cache?! */
 "deleteEntireCacheQuestion" = "Clear ENTIRE cache?!";
 
-/* ListController def=Delete this List? */
+/* ListsController def=Delete this List? */
 "deleteThisListQuestion" = "Delete this List?";
 
 /* Multifile def=Delete photo? */
@@ -265,7 +265,7 @@
 /* StatsViewController def=Left Feedback Status */
 "leftFeedbackStatus" = "Left Feedback Status";
 
-/* ListController def=List deleted! */
+/* ListsController def=List deleted! */
 "listDeletedExclaim" = "List deleted!";
 
 /* Multipurpose def=Lists */
@@ -319,7 +319,7 @@
 /* GeneralViewController def=No Description */
 "noDescription" = "No Description";
 
-/* ListController def=No Lists Created Yet! */
+/* ListsController def=No Lists Created Yet! */
 "noListsCreatedYet" = "No Lists Created Yet!";
 
 /* FindBar def=No Matches */
@@ -430,7 +430,7 @@
 /* EditList def=Icon */
 "secondVCTitle" = "Icon";
 
-/* ListController def=select */
+/* ListsController def=select */
 "select" = "Select";
 
 /* TutorialLocalization def=Select a few photos, tap the Find icon, and enter the text that you want to find! */
