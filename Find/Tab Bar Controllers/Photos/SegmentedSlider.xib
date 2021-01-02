@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SegmentedSlider" customModule="PhotoGallery" customModuleProvider="target">
+            <connections>
+                <outlet property="allLabel" destination="xy7-tW-Frx" id="elo-Dy-6bc"/>
+                <outlet property="blurView" destination="JME-xP-hsa" id="FMp-2m-NNi"/>
+                <outlet property="cachedLabel" destination="V5Q-5I-JJ7" id="g9d-Tr-uBF"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="jWN-ir-aiF"/>
+                <outlet property="indicatorView" destination="z3g-Re-Vab" id="NhW-Ik-bsG"/>
+                <outlet property="localLabel" destination="Zup-GQ-hYj" id="8OW-vD-24V"/>
+                <outlet property="stackView" destination="k6Z-3l-PRq" id="Crv-kt-YAP"/>
+                <outlet property="starredLabel" destination="p3n-4u-CMq" id="qXF-ey-4Uh"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JME-xP-hsa">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="os4-5S-Pc8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <blurEffect style="prominent"/>
+                </visualEffectView>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z3g-Re-Vab">
+                    <rect key="frame" x="45" y="3" width="64" height="34"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="k6Z-3l-PRq">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Local" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zup-GQ-hYj" customClass="PaddedLabel" customModule="PhotoGallery" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="86.5" height="40"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starred" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3n-4u-CMq" customClass="PaddedLabel" customModule="PhotoGallery" customModuleProvider="target">
+                            <rect key="frame" x="86.5" y="0.0" width="121.5" height="40"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cached" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5Q-5I-JJ7" customClass="PaddedLabel" customModule="PhotoGallery" customModuleProvider="target">
+                            <rect key="frame" x="208" y="0.0" width="126" height="40"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xy7-tW-Frx" customClass="PaddedLabel" customModule="PhotoGallery" customModuleProvider="target">
+                            <rect key="frame" x="334" y="0.0" width="41" height="40"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="JME-xP-hsa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="G5H-8e-Jpg"/>
+                <constraint firstAttribute="bottom" secondItem="JME-xP-hsa" secondAttribute="bottom" id="GNK-59-0Sx"/>
+                <constraint firstAttribute="trailing" secondItem="JME-xP-hsa" secondAttribute="trailing" id="Ugu-DI-dVG"/>
+                <constraint firstItem="JME-xP-hsa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bNR-mv-oqp"/>
+                <constraint firstItem="k6Z-3l-PRq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="uEB-Wb-W5f"/>
+                <constraint firstAttribute="bottom" secondItem="k6Z-3l-PRq" secondAttribute="bottom" id="ueJ-K9-Lgy"/>
+                <constraint firstAttribute="trailing" secondItem="k6Z-3l-PRq" secondAttribute="trailing" id="vL2-H8-9mb"/>
+                <constraint firstItem="k6Z-3l-PRq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zFx-af-tmI"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="103.62318840579711" y="-202.90178571428569"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

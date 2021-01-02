@@ -67,4 +67,6 @@ struct Constants {
 
 struct ConstantVars { /// calculated based on device size
     static var shutterBottomDistance = CGFloat(0)
+    static var cameraShutterAvoidFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
+    static var photoFilterAvoidFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
 }

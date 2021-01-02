@@ -220,9 +220,9 @@ extension ViewController {
         var finishImmediately = false
         
         switch fromVC {
-        case is NewHistoryViewController:
+        case is PhotosNavController:
             switch toVC {
-            case is NewHistoryViewController:
+            case is PhotosNavController:
                 print("ERROR! Is same")
             case is CameraViewController:
                 if favoredDirection == .left { /// completed
@@ -265,7 +265,7 @@ extension ViewController {
             }
         case is CameraViewController:
             switch toVC {
-            case is NewHistoryViewController:
+            case is PhotosNavController:
                 if favoredDirection == .right { /// completed
                     let (prep, animations, completion) = tabBarView.getBlocks(from: fromVC, to: .photos)
                     prep()
@@ -338,7 +338,7 @@ extension ViewController {
             }
         case is ListsNavController:
             switch toVC {
-            case is NewHistoryViewController:
+            case is PhotosNavController:
                 print("error! Should not swipe from lists to photos")
             case is CameraViewController:
                 if favoredDirection == .right { /// completed

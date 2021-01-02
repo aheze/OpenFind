@@ -17,7 +17,7 @@ protocol ChangeNumberOfSelectedList: class {
     func disablePress(disable: Bool)
 }
 class ListsNavController: UINavigationController {
-    
+    var viewController: ListsController!
 }
 
 class LayerScrollView: UIScrollView, UIGestureRecognizerDelegate {

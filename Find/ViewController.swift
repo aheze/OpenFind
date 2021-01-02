@@ -22,13 +22,15 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var highlightColor = "00aeef"
     
     // MARK: - View Controllers
-    lazy var photos: NewHistoryViewController = {
+    lazy var photos: PhotosNavController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let viewController = storyboard.instantiateViewController(withIdentifier: "NewHistoryViewController") as? NewHistoryViewController {
-            viewController.folderURL = globalUrl
-            viewController.highlightColor = highlightColor
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "PhotosViewController") as? PhotosViewController {
+            let navigationController = PhotosNavController(rootViewController: viewController)
+            navigationController.viewController = viewController
+//            viewController.folderURL = globalUrl
+//            viewController.highlightColor = highlightColor
             viewController.modalPresentationCapturesStatusBarAppearance = true
-            return viewController
+            return navigationController
         }
         fatalError()
     }()
@@ -69,6 +71,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "ListsController") as? ListsController {
             let navigationController = ListsNavController(rootViewController: viewController)
+            navigationController.viewController = viewController
             viewController.modalPresentationCapturesStatusBarAppearance = true
             viewController.showSelectionControls = { [weak self] show in
                 guard let self = self else { return }
@@ -100,16 +103,17 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         case .began:
             print("long pres beign")
             if gestures.isAnimating {
-                if let listsVC = lists.viewControllers.first as? ListsController {
-                    if let collectionView = listsVC.collectionView {
-                        collectionView.isScrollEnabled = false
-                        collectionView.isScrollEnabled = true
-                    }
-                }
-                if let photosCollectionView = photos.collectionView {
-                    photosCollectionView.isScrollEnabled = false
-                    photosCollectionView.isScrollEnabled = true
-                }
+                
+                let collectionView = lists.viewController.collectionView
+                collectionView?.isScrollEnabled = false
+                collectionView?.isScrollEnabled = true
+                    
+                
+                
+//                if let photosCollectionView = photos.collectionView {
+//                    photosCollectionView.isScrollEnabled = false
+//                    photosCollectionView.isScrollEnabled = true
+//                }
                 
                 animator?.isReversed = false
                 animator?.stopAnimation(true)
@@ -236,21 +240,17 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     gestures.direction = .right
                     
                     switch ViewControllerState.currentVC {
-                    case is NewHistoryViewController:
-                        if let photosCollectionView = photos.collectionView {
-                            photosCollectionView.isScrollEnabled = false
-                            photosCollectionView.isScrollEnabled = true
-                        }
+                    case is PhotosNavController:
+//                        let collectionView = photos.viewController.collectionView
+//                        collectionView?.isScrollEnabled = false
+//                        collectionView?.isScrollEnabled = true
                         gestures.isRubberBanding = true
                     case is CameraViewController:
                         startMoveVC(from: camera, to: photos, direction: .right, toOverlay: true)
                     case is ListsNavController:
-                        if let listsVC = lists.viewControllers.first as? ListsController {
-                            if let collectionView = listsVC.collectionView {
-                                collectionView.isScrollEnabled = false
-                                collectionView.isScrollEnabled = true
-                            }
-                        }
+                        let collectionView = lists.viewController.collectionView
+                        collectionView?.isScrollEnabled = false
+                        collectionView?.isScrollEnabled = true
                         startMoveVC(from: lists, to: camera, direction: .right, toOverlay: false)
                     default:
                         print("could not cast view controller")
@@ -259,21 +259,23 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     gestures.direction = .left
                     
                     switch ViewControllerState.currentVC {
-                    case is NewHistoryViewController:
-                        if let photosCollectionView = photos.collectionView {
-                            photosCollectionView.isScrollEnabled = false
-                            photosCollectionView.isScrollEnabled = true
-                        }
+                    case is PhotosNavController:
+//                        let collectionView = photos.viewController.collectionView
+//                        collectionView?.isScrollEnabled = false
+//                        collectionView?.isScrollEnabled = true
                         startMoveVC(from: photos, to: camera, direction: .left, toOverlay: false)
                     case is CameraViewController:
                         startMoveVC(from: camera, to: lists, direction: .left, toOverlay: true)
                     case is ListsNavController:
-                        if let listsVC = lists.viewControllers.first as? ListsController {
-                            if let collectionView = listsVC.collectionView {
-                                collectionView.isScrollEnabled = false
-                                collectionView.isScrollEnabled = true
-                            }
-                        }
+//                        if let listsVC = lists.viewControllers.first as? ListsController {
+//                            if let collectionView = listsVC.collectionView {
+//                                collectionView.isScrollEnabled = false
+//                                collectionView.isScrollEnabled = true
+//                            }
+//                        }
+                        let collectionView = lists.viewController.collectionView
+                        collectionView?.isScrollEnabled = false
+                        collectionView?.isScrollEnabled = true
                         gestures.isRubberBanding = true
                     default:
                         print("could not cast view controller")
@@ -319,6 +321,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         print("loadeddd")
+        setUpFilePath()
+        checkIfHistoryImagesExist()
+        
         if deviceHasNotch {
             tabBarHeightC.constant = 84
         } else {
@@ -372,7 +377,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         blurView.isHidden = false
         shadeView.isHidden = false
         
-        setUpFilePath()
+        
     }
 
     /// enable both the long press and pan gesture
@@ -392,7 +397,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let location = touch.location(in: containerView)
         
         let shutterArea = CGRect(x: containerView.bounds.width / 2 - 50, y: containerView.bounds.height - 140, width: 100, height: 140)
-        if shutterArea.contains(location) {
+        let photoFilterArea = photos.viewController.segmentedSlider?.frame ?? CGRect(x: 0, y: 0, width: 0, height: 0)
+        if shutterArea.contains(location) || photoFilterArea.contains(location) {
+            print("contains")
             return false
         }
         return true
