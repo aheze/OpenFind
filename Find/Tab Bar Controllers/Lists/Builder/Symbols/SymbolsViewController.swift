@@ -53,7 +53,6 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
     lazy var referenceArray: [String] = [techLoc, weatherLoc, speechLoc, natureLoc, currencyLoc, mathLoc, numbersLoc]
     
     var indexpathToSymbol = [IndexPath: String]()
-    //var sectionToCategory = [Int: String]()
     var sectionToCount = [Int: Int]()
     
     private let sectionInsets = UIEdgeInsets(top: 16,
@@ -134,19 +133,16 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemsPerRow = CGFloat(8)
-        let edgePaddingSpace = sectionInsets.left * 2
-        let middlePaddingSpace = CGFloat(8)
-        let availableWidth = collectionView.frame.width - edgePaddingSpace - (middlePaddingSpace * (itemsPerRow - 1))
+        
+        let availableWidth = collectionView.frame.width - (sectionInsets.left * (itemsPerRow + 1))
         let widthPerItem = (availableWidth / itemsPerRow)
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 4
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionInsets.left
     }
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 4
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionInsets.left
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 45)

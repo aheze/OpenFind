@@ -18,6 +18,7 @@ extension ViewController {
             
             if !fileURLs.isEmpty { /// there are files here
                 photos.viewController.migrationNeeded = true
+                photos.viewController.photosToMigrate = fileURLs
 //                photos.viewController.showMigrationView()
             }
             

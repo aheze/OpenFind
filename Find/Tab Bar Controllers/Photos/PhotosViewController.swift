@@ -13,6 +13,7 @@ class PhotosNavController: UINavigationController {
 }
 class PhotosViewController: UIViewController {
     var migrationNeeded = false
+    var photosToMigrate = [URL]()
     
     @IBOutlet weak var segmentedSlider: SegmentedSlider!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -26,7 +27,9 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         if migrationNeeded {
-            showMigrationView()
+            showMigrationView(photosToMigrate: photosToMigrate)
+            
+            
         }
     }
 }

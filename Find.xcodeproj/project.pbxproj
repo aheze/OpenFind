@@ -29,6 +29,9 @@
 		3C4DE719259B0EB50037D104 /* TutorialHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE718259B0EB50037D104 /* TutorialHeader.xib */; };
 		3CB6842C259FF9A700AE0AD6 /* SegmentedSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */; };
 		3CB6842D259FF9A700AE0AD6 /* SegmentedSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB6842B259FF9A700AE0AD6 /* SegmentedSlider.xib */; };
+		3CB6843225A0087700AE0AD6 /* PhotosMigrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */; };
+		3CB6843525A013D800AE0AD6 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6843425A013D800AE0AD6 /* ImageCell.swift */; };
+		3CB6843825A0140200AE0AD6 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB6843725A0140200AE0AD6 /* ImageCell.xib */; };
 		3CE306D6259AC46400F1B2E2 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306CE259AC46400F1B2E2 /* TabBar.swift */; };
 		3CE306D7259AC46400F1B2E2 /* PhotosIcon.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE306CF259AC46400F1B2E2 /* PhotosIcon.xib */; };
 		3CE306D8259AC46400F1B2E2 /* PhotosIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306D0259AC46400F1B2E2 /* PhotosIcon.swift */; };
@@ -191,6 +194,9 @@
 		3C4DE718259B0EB50037D104 /* TutorialHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialHeader.xib; sourceTree = "<group>"; };
 		3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedSlider.swift; sourceTree = "<group>"; };
 		3CB6842B259FF9A700AE0AD6 /* SegmentedSlider.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentedSlider.xib; sourceTree = "<group>"; };
+		3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationController.swift; sourceTree = "<group>"; };
+		3CB6843425A013D800AE0AD6 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		3CB6843725A0140200AE0AD6 /* ImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
 		3CE306CE259AC46400F1B2E2 /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		3CE306CF259AC46400F1B2E2 /* PhotosIcon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotosIcon.xib; sourceTree = "<group>"; };
 		3CE306D0259AC46400F1B2E2 /* PhotosIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosIcon.swift; sourceTree = "<group>"; };
@@ -344,11 +350,11 @@
 			isa = PBXGroup;
 			children = (
 				3C020CE8259FF7470087AE92 /* PhotosViewController.swift */,
-				3C020CEC259FF7890087AE92 /* PhotosVC+Migration.swift */,
-				3C369708259EEFE500A6544A /* PhotosMigrationView.swift */,
-				3C36970B259EEFF500A6544A /* PhotosMigrationView.xib */,
+				3CB6842F25A0085E00AE0AD6 /* Migration */,
 				3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */,
 				3CB6842B259FF9A700AE0AD6 /* SegmentedSlider.xib */,
+				3CB6843425A013D800AE0AD6 /* ImageCell.swift */,
+				3CB6843725A0140200AE0AD6 /* ImageCell.xib */,
 			);
 			path = Photos;
 			sourceTree = "<group>";
@@ -408,6 +414,17 @@
 				3C4DE718259B0EB50037D104 /* TutorialHeader.xib */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		3CB6842F25A0085E00AE0AD6 /* Migration */ = {
+			isa = PBXGroup;
+			children = (
+				3C020CEC259FF7890087AE92 /* PhotosVC+Migration.swift */,
+				3C369708259EEFE500A6544A /* PhotosMigrationView.swift */,
+				3C36970B259EEFF500A6544A /* PhotosMigrationView.xib */,
+				3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */,
+			);
+			path = Migration;
 			sourceTree = "<group>";
 		};
 		3CE306CB259AC44A00F1B2E2 /* Tab Navigation */ = {
@@ -945,6 +962,7 @@
 				3CB6842D259FF9A700AE0AD6 /* SegmentedSlider.xib in Resources */,
 				3C4DE704259AD5670037D104 /* NewColors.xcassets in Resources */,
 				3CE306DA259AC46400F1B2E2 /* CameraIcon.xib in Resources */,
+				3CB6843825A0140200AE0AD6 /* ImageCell.xib in Resources */,
 				3CE306DC259AC46400F1B2E2 /* ListsIcon.xib in Resources */,
 				3C4DE700259AD3FF0037D104 /* CacheButton.xib in Resources */,
 				4999ACA02353A81100AB06A7 /* LaunchScreen.storyboard in Resources */,
@@ -1045,6 +1063,7 @@
 				4928525A23D617270048EC13 /* ListsController.swift in Sources */,
 				4990AAE423EDB4EF00FAF37B /* SymbolsViewController.swift in Sources */,
 				49D985BA2421D97B005F4E92 /* FindModel.swift in Sources */,
+				3CB6843525A013D800AE0AD6 /* ImageCell.swift in Sources */,
 				490DA75523CBB871000AF57D /* JJFloatingActionButton+Animation.swift in Sources */,
 				3C020CE9259FF7470087AE92 /* PhotosViewController.swift in Sources */,
 				49B7A33623923E810070209F /* ZoomAnimator.swift in Sources */,
@@ -1057,6 +1076,7 @@
 				3C21DEE6259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift in Sources */,
 				3C4DE716259B0EAB0037D104 /* TutorialHeader.swift in Sources */,
 				49B7A33823923EBD0070209F /* PhotoPageContainerViewController.swift in Sources */,
+				3CB6843225A0087700AE0AD6 /* PhotosMigrationController.swift in Sources */,
 				3CE306D6259AC46400F1B2E2 /* TabBar.swift in Sources */,
 				4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */,
 				4953F3C424171EE200690E53 /* FindBar.swift in Sources */,

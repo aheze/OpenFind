@@ -16,8 +16,10 @@ class PhotosMigrationView: UIView {
     @IBOutlet weak var explanation1Label: UILabel!
     @IBOutlet weak var explanation2Label: UILabel!
     
+    var movePressed: (() -> Void)?
     @IBOutlet weak var moveButton: UIButton!
     @IBAction func moveButtonPressed(_ sender: Any) {
+        movePressed?()
     }
     
     override init(frame: CGRect) {
@@ -39,3 +41,4 @@ class PhotosMigrationView: UIView {
         moveButton.layer.cornerRadius = 12
     }
 }
+
