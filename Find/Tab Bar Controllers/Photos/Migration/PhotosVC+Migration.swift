@@ -14,10 +14,20 @@ extension PhotosViewController {
         
         collectionView.alpha = 0
         
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = UIColor.systemBackground
+        scrollView.alwaysBounceVertical = true
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        
         let migrationView = PhotosMigrationView()
-        view.addSubview(migrationView)
+        scrollView.addSubview(migrationView)
         migrationView.snp.makeConstraints { (make) in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.edges.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalTo(500)
         }
         
         migrationView.movePressed = { [weak self] in

@@ -49,7 +49,6 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
     let mathLoc = NSLocalizedString("mathLoc", comment: "SymbolsViewController def=Math")
     let numbersLoc = NSLocalizedString("numbersLoc", comment: "SymbolsViewController def=Numbers")
     
-//    var referenceArrays: [String] = ["Tech", "Weather", "Speech", "Nature", "Currency", "Math", "Numbers"]
     lazy var referenceArray: [String] = [techLoc, weatherLoc, speechLoc, natureLoc, currencyLoc, mathLoc, numbersLoc]
     
     var indexpathToSymbol = [IndexPath: String]()
