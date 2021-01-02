@@ -13,6 +13,7 @@ import SDWebImage
 class PhotosMigrationController: UIViewController {
     
     let dispatchGroup = DispatchGroup()
+    var numberCompleted = 0
     
 //    let assets = [PHAsset]()
     var photoURLs = [URL]()
@@ -33,6 +34,12 @@ class PhotosMigrationController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     let scale = UIScreen.main.scale // Will be 2.0 on 6/7/8 and 3.0 on 6+/7+/8+ or later
     
+    @IBOutlet weak var overlayView: UIView!
+    @IBOutlet weak var blurView: UIVisualEffectView!
+    @IBOutlet weak var segmentIndicator: ANSegmentIndicator!
+    @IBOutlet weak var movingLabel: UILabel!
+    @IBOutlet weak var progressLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +49,27 @@ class PhotosMigrationController: UIViewController {
         collectionView.register(UINib(nibName: "ImageCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
         collectionView.contentInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         
-        print("load count: \( photoURLs.count)")
+        blurView.effect = nil
+        segmentIndicator.alpha = 0
+        movingLabel.alpha = 0
+        progressLabel.alpha = 0
+        progressLabel.text = "0%"
+        
+        blurView.clipsToBounds = true
+        blurView.layer.cornerRadius = 12
+        
+        var settings = ANSegmentIndicatorSettings()
+        
+        settings.segmentColor = UIColor(named: "100Blue")!
+        settings.defaultSegmentColor = UIColor.systemBackground
+        
+        settings.segmentBorderType = .round
+        settings.segmentsCount = min(50, photoURLs.count)
+        settings.segmentWidth = 5
+        settings.animationDuration = 0.2
+        settings.spaceBetweenSegments = Degrees(2)
+        
+        segmentIndicator.settings = settings
     }
 }
 
@@ -65,7 +92,6 @@ extension PhotosMigrationController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let fullWidth = collectionView.bounds.width
         let edgePadding =  collectionView.contentInset.left
-        print("edge: \(edgePadding)")
         let numberPerRow = CGFloat(4)
         let totalPadding = edgePadding * CGFloat(numberPerRow + 1)
         let eachCellWidth = (fullWidth - totalPadding) / numberPerRow

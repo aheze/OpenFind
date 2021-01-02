@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SPAlert
 
 extension PhotosMigrationController {
     func writeToPhotos(photoURLs: [URL]) {
@@ -14,33 +15,43 @@ extension PhotosMigrationController {
         cancelButton.isEnabled = false
         confirmButton.isEnabled = false
         
+        UIView.animate(withDuration: 0.8, animations: {
+            self.blurView.effect = UIBlurEffect(style: .regular)
+            self.segmentIndicator.alpha = 1
+            self.movingLabel.alpha = 1
+            self.progressLabel.alpha = 1
+        })
+        
         for photoURL in photoURLs {
             dispatchGroup.enter()
-            print("entering...")
             if let image = UIImage(contentsOfFile: photoURL.path) {
-                print("has iamge")
                 UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
             }
         }
-        
+
         dispatchGroup.notify(queue: .main) {
             print("Finished all requests.")
+            let alertView = SPAlertView(title: "Finished", message: "Your photos have been moved to the Photos app.", preset: SPAlertPreset.done)
+            alertView.duration = 2.6
+            alertView.present()
+            self.dismiss(animated: true, completion: nil)
         }
        
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
-        print("saved")
+        
         dispatchGroup.leave()
-//        if let error = error {
-//            // we got back an error!
-//            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
-//            ac.addAction(UIAlertAction(title: "OK", style: .default))
-//            present(ac, animated: true)
-//        } else {
-//            let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
-//            ac.addAction(UIAlertAction(title: "OK", style: .default))
-//            present(ac, animated: true)
-//        }
+        numberCompleted += 1
+        let percentComplete = CGFloat(numberCompleted) / CGFloat(photoURLs.count)
+        let percentCompleteOf100 = percentComplete * 100
+        
+        progressLabel.fadeTransition(0.1)
+        progressLabel.text = "\(Int(percentCompleteOf100))%"
+        
+        segmentIndicator.updateProgress(percent: Degrees(percentCompleteOf100))
+        if let error = error {
+            print("Error saving: \(error)")
+        }
     }
 }

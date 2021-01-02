@@ -16,6 +16,7 @@
 		3C2858CA259CF00200BABBA7 /* ListsController+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */; };
 		3C2C3E9325A1152F002C3D11 /* PhotosMigrationController+Write.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */; };
 		3C2C3E9625A11749002C3D11 /* PreloadImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9525A11749002C3D11 /* PreloadImages.xcassets */; };
+		3C2C3E9925A11CD6002C3D11 /* ANSegmentIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */; };
 		3C369709259EEFE500A6544A /* PhotosMigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C369708259EEFE500A6544A /* PhotosMigrationView.swift */; };
 		3C36970C259EEFF500A6544A /* PhotosMigrationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C36970B259EEFF500A6544A /* PhotosMigrationView.xib */; };
 		3C389ED3259BA0D5007DB33B /* ListBuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */; };
@@ -183,6 +184,7 @@
 		3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+Selection.swift"; sourceTree = "<group>"; };
 		3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosMigrationController+Write.swift"; sourceTree = "<group>"; };
 		3C2C3E9525A11749002C3D11 /* PreloadImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PreloadImages.xcassets; sourceTree = "<group>"; };
+		3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSegmentIndicator.swift; sourceTree = "<group>"; };
 		3C369708259EEFE500A6544A /* PhotosMigrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationView.swift; sourceTree = "<group>"; };
 		3C36970B259EEFF500A6544A /* PhotosMigrationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotosMigrationView.xib; sourceTree = "<group>"; };
 		3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBuilderViewController.swift; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 			children = (
 				3C4DE715259B0EAB0037D104 /* TutorialHeader.swift */,
 				3C4DE718259B0EB50037D104 /* TutorialHeader.xib */,
+				3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1157,6 +1160,7 @@
 				4928525623D4BD490048EC13 /* UpdateOrientation.swift in Sources */,
 				49BC782023C2B0E0003D9904 /* IndexMatcher.swift in Sources */,
 				492A2D2224A3116600F9C4A1 /* TutorialLocalization.swift in Sources */,
+				3C2C3E9925A11CD6002C3D11 /* ANSegmentIndicator.swift in Sources */,
 				4956351D243694BC0001E8C6 /* OnboardingContantViewItem.swift in Sources */,
 				495F38FE243302D500A17D93 /* StatsViewController.swift in Sources */,
 				49913450236FE12400B82E46 /* SettingsViewExtensions.swift in Sources */,
