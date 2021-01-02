@@ -3309,11 +3309,11 @@ the App!</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVI-ZE-xKU">
-                                        <rect key="frame" x="353" y="7.5" width="41" height="35"/>
+                                        <rect key="frame" x="326" y="7.5" width="68" height="35"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                        <state key="normal" title="Save"/>
+                                        <state key="normal" title="Confirm"/>
                                         <connections>
-                                            <action selector="saveButtonPressed:" destination="cxu-NG-gnM" eventType="touchUpInside" id="hs3-lT-F28"/>
+                                            <action selector="confirmButtonPressed:" destination="cxu-NG-gnM" eventType="touchUpInside" id="8n8-tE-YtM"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -3376,8 +3376,8 @@ the App!</string>
                     <connections>
                         <outlet property="cancelButton" destination="gwm-Ba-voS" id="sZP-2j-bC3"/>
                         <outlet property="collectionView" destination="moD-9L-EiM" id="gpt-Rk-XBd"/>
+                        <outlet property="confirmButton" destination="GVI-ZE-xKU" id="BQL-Lr-0HC"/>
                         <outlet property="movePhotosLabel" destination="vF4-q0-Cee" id="ezh-by-sgH"/>
-                        <outlet property="saveButton" destination="GVI-ZE-xKU" id="UIf-81-NN8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZYe-C8-ayo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

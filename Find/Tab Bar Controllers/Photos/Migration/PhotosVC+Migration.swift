@@ -40,6 +40,5 @@ extension PhotosViewController {
             }
         }
     }
-    
 }
   

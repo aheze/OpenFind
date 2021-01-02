@@ -14,6 +14,8 @@
 		3C21DEE6259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */; };
 		3C2858C6259C3E4C00BABBA7 /* TabBar+SelectionControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C5259C3E4C00BABBA7 /* TabBar+SelectionControls.swift */; };
 		3C2858CA259CF00200BABBA7 /* ListsController+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */; };
+		3C2C3E9325A1152F002C3D11 /* PhotosMigrationController+Write.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */; };
+		3C2C3E9625A11749002C3D11 /* PreloadImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9525A11749002C3D11 /* PreloadImages.xcassets */; };
 		3C369709259EEFE500A6544A /* PhotosMigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C369708259EEFE500A6544A /* PhotosMigrationView.swift */; };
 		3C36970C259EEFF500A6544A /* PhotosMigrationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C36970B259EEFF500A6544A /* PhotosMigrationView.xib */; };
 		3C389ED3259BA0D5007DB33B /* ListBuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */; };
@@ -179,6 +181,8 @@
 		3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListBuilderVC+ErrorChecking.swift"; sourceTree = "<group>"; };
 		3C2858C5259C3E4C00BABBA7 /* TabBar+SelectionControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBar+SelectionControls.swift"; sourceTree = "<group>"; };
 		3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+Selection.swift"; sourceTree = "<group>"; };
+		3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosMigrationController+Write.swift"; sourceTree = "<group>"; };
+		3C2C3E9525A11749002C3D11 /* PreloadImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PreloadImages.xcassets; sourceTree = "<group>"; };
 		3C369708259EEFE500A6544A /* PhotosMigrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationView.swift; sourceTree = "<group>"; };
 		3C36970B259EEFF500A6544A /* PhotosMigrationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotosMigrationView.xib; sourceTree = "<group>"; };
 		3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBuilderViewController.swift; sourceTree = "<group>"; };
@@ -423,6 +427,7 @@
 				3C369708259EEFE500A6544A /* PhotosMigrationView.swift */,
 				3C36970B259EEFF500A6544A /* PhotosMigrationView.xib */,
 				3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */,
+				3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */,
 			);
 			path = Migration;
 			sourceTree = "<group>";
@@ -815,6 +820,7 @@
 				4999AC9C2353A81100AB06A7 /* Assets.xcassets */,
 				3C4DE703259AD5670037D104 /* NewColors.xcassets */,
 				49B7A32C2390823C0070209F /* Colors.xcassets */,
+				3C2C3E9525A11749002C3D11 /* PreloadImages.xcassets */,
 				49E9D89424996E1A0006757C /* Localizable.strings */,
 			);
 			path = Find;
@@ -956,6 +962,7 @@
 				4956352A2437A4B60001E8C6 /* defaultSeeds.realm in Resources */,
 				3CE306DD259AC46400F1B2E2 /* TabBar.xib in Resources */,
 				49E9D89224996E1A0006757C /* Localizable.strings in Resources */,
+				3C2C3E9625A11749002C3D11 /* PreloadImages.xcassets in Resources */,
 				495DAD3624A6B2E500D5F844 /* FindBar.xib in Resources */,
 				495F7DAA24CBB3970053DE50 /* InfoPlist.strings in Resources */,
 				49D985B124188CA4005F4E92 /* NewListToolbarCell.xib in Resources */,
@@ -1051,6 +1058,7 @@
 				4999AC982353A80A00AB06A7 /* CameraViewController.swift in Sources */,
 				49B7A33523923E810070209F /* ZoomDismissalInteractionController.swift in Sources */,
 				49BC782F23C6E473003D9904 /* addHeart.swift in Sources */,
+				3C2C3E9325A1152F002C3D11 /* PhotosMigrationController+Write.swift in Sources */,
 				49325C1323CAE84500A771A3 /* StatusView.swift in Sources */,
 				49563521243694BC0001E8C6 /* GestureControl.swift in Sources */,
 				3CE306D8259AC46400F1B2E2 /* PhotosIcon.swift in Sources */,

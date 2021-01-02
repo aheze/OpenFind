@@ -12,21 +12,27 @@ import SDWebImage
 
 class PhotosMigrationController: UIViewController {
     
+    let dispatchGroup = DispatchGroup()
+    
 //    let assets = [PHAsset]()
     var photoURLs = [URL]()
     
     @IBOutlet weak var cancelButton: UIButton!
     @IBAction func cancelButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBOutlet weak var movePhotosLabel: UILabel!
     
     
-    @IBOutlet weak var saveButton: UIButton!
-    @IBAction func saveButtonPressed(_ sender: Any) {
+    @IBOutlet weak var confirmButton: UIButton!
+    @IBAction func confirmButtonPressed(_ sender: Any) {
+        writeToPhotos(photoURLs: photoURLs)
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
+    let scale = UIScreen.main.scale // Will be 2.0 on 6/7/8 and 3.0 on 6+/7+/8+ or later
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +54,11 @@ extension PhotosMigrationController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let url = photoURLs[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
-        cell.imageView.sd_setImage(with: url)
+        
+        let thumbnailSize = CGSize(width: 200 * scale, height: 200 * scale)
+        
+        cell.imageView.sd_imageTransition = .fade
+        cell.imageView.sd_setImage(with: url, placeholderImage: nil, context: [.imageThumbnailPixelSize : thumbnailSize])
         return cell
     }
     
