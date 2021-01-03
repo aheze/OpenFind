@@ -50,6 +50,7 @@ class CameraViewController: UIViewController {
     let updateImportantShouldPresentWhatsNew = false
     var shouldPresentWhatsNew = false
     
+    // MARK: Tab bar
     @IBOutlet weak var cameraIconHolder: UIView!
     @IBOutlet weak var cameraIconHolderBottomC: NSLayoutConstraint!
     
@@ -59,6 +60,23 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var cache: CacheButton!
     @IBOutlet weak var saveLabel: UILabel!
     @IBOutlet weak var cacheLabel: UILabel!
+    
+    @IBOutlet weak var statsView: UIView!
+    @IBOutlet weak var statsBottomC: NSLayoutConstraint!
+    @IBOutlet weak var statsButton: UIButton!
+    @IBAction func statsButtonPressed(_ sender: Any) {
+        tappedOnStats()
+    }
+    
+    @IBOutlet weak var settingsView: UIView!
+    @IBOutlet weak var settingsBottomC: NSLayoutConstraint!
+    @IBOutlet weak var settingsButton: UIButton!
+    @IBAction func settingsButtonPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as? SettingsViewController {
+            self.present(viewController, animated: true)
+        }
+    }
     
     var cameraChanged: ((Bool) -> Void)?
     var savePressed = false
@@ -515,10 +533,11 @@ class CameraViewController: UIViewController {
         
         cameraIcon.makeActiveState()()
         cameraIcon.rimView.layer.borderColor = UIColor.white.cgColor
+        
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         var hasNotch = false
         switch deviceType {
@@ -531,7 +550,6 @@ class CameraViewController: UIViewController {
             normalSearchFieldTopCConstant = 0
         } else {
             normalSearchFieldTopCConstant = 12
-//            normalSearchFieldTopCConstant = 22
         }
         contentTopC.constant = normalSearchFieldTopCConstant
         searchContentView.layoutIfNeeded()
@@ -549,21 +567,20 @@ class CameraViewController: UIViewController {
         controlsBlurView.layer.cornerRadius = 8
         controlsBlurView.clipsToBounds = true
         controlsBlurView.isHidden = true
-//        numberLabel.isHidden = false
         updateMatchesNumber(to: 0)
-//        setUpButtons()
         setUpTempImageView()
         setUpSearchBar()
         
+        statsView.layer.cornerRadius = statsView.bounds.width / 2
+        settingsView.layer.cornerRadius = settingsView.bounds.width / 2
+        print("cons: \(ConstantVars.shutterBottomDistance)")
+        statsBottomC.constant = CGFloat(ConstantVars.tabHeight) + 8
+        settingsBottomC.constant = CGFloat(ConstantVars.tabHeight) + 8
         
         
-        /// is already athorized in Launchscreen
-//        if isAuthorized() {
-            configureCamera()
-//        }
+        configureCamera()
         busyFastFinding = false
         
-//        motionManager = CMMotionManager()
         motionManager.deviceMotionUpdateInterval = 0.01
        //  initial configuration
         if let deviceMot = motionManager.deviceMotion?.attitude {

@@ -324,11 +324,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         setUpFilePath()
         checkIfHistoryImagesExist()
         
-        if deviceHasNotch {
-            tabBarHeightC.constant = 84
-        } else {
-            tabBarHeightC.constant = 50
-        }
+        tabBarHeightC.constant =  CGFloat(ConstantVars.tabHeight)
         
         ViewControllerState.currentVC = camera
         

@@ -63,10 +63,14 @@ struct Constants {
     static var detailIconColorLight = UIColor(named: "TabIconDetails-Light")!
     static var foregroundIconColorLight = UIColor(named: "TabIconForeground-Light")!
     static var backgroundIconColorLight = UIColor(named: "TabIconBackground-Light")!
+    
+    static var iPhoneXTabHeight = 84
+    static var iPhone8TabHeight = 50
 }
 
 struct ConstantVars { /// calculated based on device size
     static var shutterBottomDistance = CGFloat(0)
     static var cameraShutterAvoidFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
     static var photoFilterAvoidFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
+    static var tabHeight = 84
 }

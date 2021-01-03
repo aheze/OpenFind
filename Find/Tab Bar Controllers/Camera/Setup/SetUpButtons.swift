@@ -177,7 +177,7 @@ extension CameraViewController: UIAdaptivePresentationControllerDelegate {
 }
 extension CameraViewController {
     
-    @objc func tappedOnStats() {
+    func tappedOnStats() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let statsViewController = storyboard.instantiateViewController(withIdentifier: "StatsViewController") as! StatsViewController
         statsViewController.view.layer.cornerRadius = 10

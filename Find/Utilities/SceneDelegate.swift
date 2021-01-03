@@ -25,8 +25,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if deviceHasNotch {
             ConstantVars.shutterBottomDistance = Constants.framelessShutterBottomDistance
+            ConstantVars.tabHeight = Constants.iPhoneXTabHeight
         } else {
             ConstantVars.shutterBottomDistance = Constants.framedShutterBottomDistance
+            ConstantVars.tabHeight = Constants.iPhone8TabHeight
         }
         
         print("View scene delegate!, notch: \(deviceHasNotch)")
