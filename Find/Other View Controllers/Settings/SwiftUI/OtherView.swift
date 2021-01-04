@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct OtherView: View {
+    @Binding var swipeToNavigateEnabled: Bool
     var body: some View {
-        SwipeToNavigateView()
+        SwipeToNavigateView(isOn: $swipeToNavigateEnabled)
         ResetSettingsView()
         CreditsView()
     }
 }
 
 struct SwipeToNavigateView: View {
-    @State var isOn = false
+    @Binding var isOn: Bool
     var body: some View {
         ZStack {
             VStack(spacing: 0) {

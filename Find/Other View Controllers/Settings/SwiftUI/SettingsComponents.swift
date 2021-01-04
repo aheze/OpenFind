@@ -64,4 +64,5 @@ extension String {
     static let customMediumBlue = "2E8DFF"
     static let customLightPurple = "B77AFF"
     static let customPink = "FF779F"
+    
 }

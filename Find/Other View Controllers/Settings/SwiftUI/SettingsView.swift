@@ -6,6 +6,27 @@
 //
 
 import SwiftUI
+import Combine
+
+private var cancellables = [String: AnyCancellable]()
+
+extension Published {
+    init(wrappedValue defaultValue: Value, key: String) {
+        let value = UserDefaults.standard.object(forKey: key) as? Value ?? defaultValue
+        self.init(initialValue: value)
+        cancellables[key] = projectedValue.sink { val in
+            UserDefaults.standard.set(val, forKey: key)
+        }
+    }
+}
+
+class Settings: ObservableObject {
+    @Published(key: "highlightColor") var highlightColor = "00AEEF"
+    @Published(key: "showTextDetectIndicator") var showTextDetectIndicator = true
+    @Published(key: "hapticFeedbackLevel") var hapticFeedbackLevel = 0
+    @Published(key: "livePreviewEnabled") var livePreviewEnabled = true
+    @Published(key: "swipeToNavigateEnabled") var swipeToNavigateEnabled = true
+}
 
 struct SettingsView: View {
     init() {
@@ -16,18 +37,19 @@ struct SettingsView: View {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
         UINavigationBar.appearance().barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).withAlphaComponent(0.3)
         
+//        UIScrollView.appearance().backgroundColor = UIColor.clear
+        
     }
     
-    @State private var highlightColor = UserDefaults.standard.string(forKey: "highlightColor")
-    @State private var showTextDetectIndicator = UserDefaults.standard.bool(forKey: "showTextDetectIndicator")
-    @State private var hapticFeedback = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
+    @ObservedObject var settings = Settings()
     
-    
-    
-    
-    
-    
-    
+//    @State private var highlightColor = UserDefaults.standard.string(forKey: "highlightColor")
+//
+//    @State private var showTextDetectIndicator = UserDefaults.standard.bool(forKey: "showTextDetectIndicator")
+//    @State private var hapticFeedbackLevel = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
+//    @State private var livePreviewEnabled = UserDefaults.standard.bool(forKey: "livePreviewEnabled")
+//
+//    @State private var swipeToNavigateEnabled = UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled")
     
     var body: some View {
         NavigationView {
@@ -36,14 +58,16 @@ struct SettingsView: View {
                     VStack(spacing: 2) {
                         SectionHeaderView(text: "General")
                         
-                        GeneralView()
+                        GeneralView(selectedHighlightColor: $settings.highlightColor)
                             .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                         
+//                        let _ = print("feedback level: \(settings.hapticFeedbackLevel)")
                         SectionHeaderView(text: "Camera")
 
                         CameraSettingsView(
-                            textDetectionIsOn: $showTextDetectIndicator,
-                            hapticFeedbackLevel: $hapticFeedback
+                            textDetectionIsOn: $settings.showTextDetectIndicator,
+                            hapticFeedbackLevel: $settings.hapticFeedbackLevel,
+                            livePreviewEnabled: $settings.livePreviewEnabled
                         )
                             .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                         
@@ -54,7 +78,7 @@ struct SettingsView: View {
                         
                         SectionHeaderView(text: "Other")
                         
-                        OtherView()
+                        OtherView(swipeToNavigateEnabled: $settings.swipeToNavigateEnabled)
                             .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                     }
                     
@@ -62,7 +86,8 @@ struct SettingsView: View {
                 .fixFlickering { scrollView in
                     scrollView
                         .background(
-                            VisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterialDark))
+                            VisualEffectView(effect: UIBlurEffect(style: .systemThickMaterialDark))
+//                            Color.clear
                         )
                 }
             }

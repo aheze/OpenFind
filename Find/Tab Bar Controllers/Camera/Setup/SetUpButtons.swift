@@ -29,33 +29,33 @@ extension CameraViewController: UIAdaptivePresentationControllerDelegate {
         injectListDelegate?.resetWithLists(lists: editableListCategories)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-            stopSession()
-            switch segue.identifier {
-            case "goToSettings":
-                print("prepare settings")
-                segue.destination.presentationController?.delegate = self
-                let destinationVC = segue.destination as! SettingsViewController
-                destinationVC.folderURL = globalUrl
-                destinationVC.modalPresentationCapturesStatusBarAppearance = true
-            case "goToNewHistory":
-                segue.destination.presentationController?.delegate = self
-                let destinationVC = segue.destination as! NewHistoryViewController
-                destinationVC.folderURL = globalUrl
-                destinationVC.highlightColor = highlightColor
-                destinationVC.modalPresentationCapturesStatusBarAppearance = true
-            case "goToLists" :
-                let destinationVC = segue.destination as! ListsController
-                destinationVC.modalPresentationCapturesStatusBarAppearance = true
-                segue.destination.presentationController?.delegate = self
-            default:
-                    print("default, something wrong")
-            }
-        
-            tempResetLists()
-            
-        }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//            stopSession()
+//            switch segue.identifier {
+//            case "goToSettings":
+//                print("prepare settings")
+//                segue.destination.presentationController?.delegate = self
+//                let destinationVC = segue.destination as! SettingsViewController
+//                destinationVC.folderURL = globalUrl
+//                destinationVC.modalPresentationCapturesStatusBarAppearance = true
+//            case "goToNewHistory":
+//                segue.destination.presentationController?.delegate = self
+//                let destinationVC = segue.destination as! NewHistoryViewController
+//                destinationVC.folderURL = globalUrl
+//                destinationVC.highlightColor = highlightColor
+//                destinationVC.modalPresentationCapturesStatusBarAppearance = true
+//            case "goToLists" :
+//                let destinationVC = segue.destination as! ListsController
+//                destinationVC.modalPresentationCapturesStatusBarAppearance = true
+//                segue.destination.presentationController?.delegate = self
+//            default:
+//                    print("default, something wrong")
+//            }
+//
+//            tempResetLists()
+//
+//        }
     func toFast() {
         self.blurScreen(mode: "fast")
     }

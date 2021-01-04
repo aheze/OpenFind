@@ -10,10 +10,11 @@ import SwiftUI
 struct CameraSettingsView: View {
     @Binding var textDetectionIsOn: Bool
     @Binding var hapticFeedbackLevel: Int
+    @Binding var livePreviewEnabled: Bool
     var body: some View {
         TextDetectionView(isOn: $textDetectionIsOn)
         HapticFeedbackView(level: $hapticFeedbackLevel)
-        LivePreviewView()
+        LivePreviewView(isOn: $livePreviewEnabled)
     }
 }
 
@@ -48,9 +49,9 @@ struct TextDetectionView: View {
 struct HapticFeedbackView: View {
     @Binding var level: Int
     
-    @State var none = true
-    @State var light = false
-    @State var heavy = false
+//    @State var none = true
+//    @State var light = false
+//    @State var heavy = false
     
     var body: some View {
         
@@ -60,14 +61,11 @@ struct HapticFeedbackView: View {
                 
                 HStack(spacing: 14) {
                     Button(action: {
-                        none = true
-                        light = false
-                        heavy = false
                         level = 1
                     }) {
                         VStack {
                             RoundedRectangle(cornerRadius: 12)
-                                .strokeBorder(Color.blue, lineWidth: none ? 3 : 0)
+                                .strokeBorder(Color.blue, lineWidth: (level == 1) ? 3 : 0)
                                 .background(RoundedRectangle(cornerRadius: 12).foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))))
                                 .frame(height: 36)
                             
@@ -76,28 +74,22 @@ struct HapticFeedbackView: View {
                         }
                     }
                     Button(action: {
-                        none = false
-                        light = true
-                        heavy = false
                         level = 2
                     }) {
                         VStack {
                             RoundedRectangle(cornerRadius: 12)
-                                .strokeBorder(Color.blue, lineWidth: light ? 3 : 0)
+                                .strokeBorder(Color.blue, lineWidth: (level == 2) ? 3 : 0)
                                 .background(RoundedRectangle(cornerRadius: 12).foregroundColor(Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1))))
                                 .frame(height: 36)
                             Label(text: "Light")
                         }
                     }
                     Button(action: {
-                        none = false
-                        light = false
-                        heavy = true
                         level = 3
                     }) {
                         VStack {
                             RoundedRectangle(cornerRadius: 12)
-                                .strokeBorder(Color.blue, lineWidth: heavy ? 3 : 0)
+                                .strokeBorder(Color.blue, lineWidth: (level == 3) ? 3 : 0)
                                 .background(RoundedRectangle(cornerRadius: 12).foregroundColor(Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))))
                                 .frame(height: 36)
                             Label(text: "Heavy")
@@ -117,7 +109,7 @@ struct HapticFeedbackView: View {
 }
 
 struct LivePreviewView: View {
-    @State var isOn = false
+    @Binding var isOn: Bool
     var body: some View {
         ZStack {
             VStack(spacing: 0) {

@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct GeneralView: View {
+    @Binding var selectedHighlightColor: String
     var body: some View {
-        DefaultColorView()
+        DefaultColorView(selectedColor: $selectedHighlightColor)
     }
 }
 
 struct DefaultColorView: View {
-    
+    @Binding var selectedColor: String
     var body: some View {
         ZStack {
             Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5))
@@ -22,24 +23,24 @@ struct DefaultColorView: View {
                 HeaderView(text: "Default Highlight Color")
                 VStack(spacing: 0) {
                     HStack(spacing: 0) {
-                        RectangleButton(color: .customRed)
-                        RectangleButton(color: .customOrange)
-                        RectangleButton(color: .customYellow)
-                        RectangleButton(color: .customGreen)
-                        RectangleButton(color: .customBlue)
-                        RectangleButton(color: .customDarkBlue)
-                        RectangleButton(color: .customPurple)
-                        RectangleButton(color: .customMagenta)
+                        RectangleButton(selectedColor: $selectedColor, color: .customRed)
+                        RectangleButton(selectedColor: $selectedColor, color: .customOrange)
+                        RectangleButton(selectedColor: $selectedColor, color: .customYellow)
+                        RectangleButton(selectedColor: $selectedColor, color: .customGreen)
+                        RectangleButton(selectedColor: $selectedColor, color: .customBlue)
+                        RectangleButton(selectedColor: $selectedColor, color: .customDarkBlue)
+                        RectangleButton(selectedColor: $selectedColor, color: .customPurple)
+                        RectangleButton(selectedColor: $selectedColor, color: .customMagenta)
                     }
                     HStack(spacing: 0) {
-                        RectangleButton(color: .customSalmon)
-                        RectangleButton(color: .customYellorange)
-                        RectangleButton(color: .customLime)
-                        RectangleButton(color: .customNeon)
-                        RectangleButton(color: .customLightBlue)
-                        RectangleButton(color: .customMediumBlue)
-                        RectangleButton(color: .customLightPurple)
-                        RectangleButton(color: .customPink)
+                        RectangleButton(selectedColor: $selectedColor, color: .customSalmon)
+                        RectangleButton(selectedColor: $selectedColor, color: .customYellorange)
+                        RectangleButton(selectedColor: $selectedColor, color: .customLime)
+                        RectangleButton(selectedColor: $selectedColor, color: .customNeon)
+                        RectangleButton(selectedColor: $selectedColor, color: .customLightBlue)
+                        RectangleButton(selectedColor: $selectedColor, color: .customMediumBlue)
+                        RectangleButton(selectedColor: $selectedColor, color: .customLightPurple)
+                        RectangleButton(selectedColor: $selectedColor, color: .customPink)
                     }
                 }
             }
@@ -47,14 +48,25 @@ struct DefaultColorView: View {
     }
 }
 struct RectangleButton: View {
+    @Binding var selectedColor: String
+    
     var color: String
     var body: some View {
         Button(action: {
-            UserDefaults.standard.set(color, forKey: "highlightColor")
+//            UserDefaults.standard.set(color, forKey: "highlightColor")
+            selectedColor = color
+//            UserDefaults.standard.set(color, forKey: "highlightColor")
         }) {
             Rectangle()
                 .foregroundColor(Color(UIColor(hexString: color)))
                 .aspectRatio(1.0, contentMode: .fit)
+                .overlay(
+                    (selectedColor.lowercased() == color.lowercased()) ? AnyView(
+                        Image(systemName: "checkmark")
+                            .foregroundColor(.white)
+                            .font(Font.system(size: 19, weight: .medium))
+                    ) : AnyView(EmptyView())
+                )
         }
     }
 }

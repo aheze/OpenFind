@@ -14,6 +14,7 @@ import RealmSwift
 import SnapKit
 import SwiftEntryKit
 import WhatsNewKit
+import SwiftUI
 
 protocol ToggleCreateCircle: class {
     func toggle(created: Bool)
@@ -88,10 +89,9 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var settingsBottomC: NSLayoutConstraint!
     @IBOutlet weak var settingsButton: UIButton!
     @IBAction func settingsButtonPressed(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let viewController = storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as? SettingsViewController {
-            self.present(viewController, animated: true)
-        }
+        let settingsVC = UIHostingController(rootView: SettingsView())
+        settingsVC.presentationController?.delegate = self
+        self.present(settingsVC, animated: true)
     }
     
     var cameraChanged: ((Bool) -> Void)?

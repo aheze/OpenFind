@@ -444,11 +444,11 @@
 			children = (
 				3C6EE6AB25A2AB350078462A /* SettingsView.swift */,
 				3C6EE6A925A2AB350078462A /* SettingsComponents.swift */,
-				3C6EE6AE25A2AB350078462A /* CameraView.swift */,
-				3C6EE6AC25A2AB350078462A /* CreditsView.swift */,
 				3C6EE6A825A2AB350078462A /* GeneralView.swift */,
+				3C6EE6AE25A2AB350078462A /* CameraView.swift */,
 				3C6EE6AA25A2AB350078462A /* HeaderView.swift */,
 				3C6EE6AF25A2AB350078462A /* OtherView.swift */,
+				3C6EE6AC25A2AB350078462A /* CreditsView.swift */,
 				3C6EE6AD25A2AB350078462A /* SupportView.swift */,
 			);
 			path = SwiftUI;
