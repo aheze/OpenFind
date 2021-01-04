@@ -414,6 +414,7 @@ extension ListsController: UICollectionViewDataSource, UICollectionViewDelegate,
                 UIView.animate(withDuration: 0.1, animations: {
                     cell.highlightView.alpha = 1
                     cell.checkmarkView.alpha = 1
+                    cell.highlightView.frame.size.width = 40
 //                    cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
                 })
             }
@@ -467,31 +468,6 @@ extension String {
     }
 }
 
-extension ListsController {
-    
- 
-    //MARK: Selection
-//    func deselectAllItems() {
-//        var reloadPaths = [IndexPath]()
-//        for indexP in indexPathsSelected {
-//            let indexPath = IndexPath(item: indexP, section: 0)
-//            collectionView.deselectItem(at: indexPath, animated: true)
-//            if let cell = collectionView.cellForItem(at: indexPath) as? ListCollectionCell {
-//                UIView.animate(withDuration: 0.1, animations: {
-//                    cell.highlightView.alpha = 0
-//                    cell.checkmarkView.alpha = 0
-//                    cell.transform = CGAffineTransform.identity
-//                })
-//            } else {
-//                reloadPaths.append(indexPath)
-//            }
-//        }
-//        collectionView.reloadItems(at: reloadPaths)
-//        indexPathsSelected.removeAll()
-//        numberOfSelected = 0
-//    }
-    
-}
 
 
 /// stopped here for localization

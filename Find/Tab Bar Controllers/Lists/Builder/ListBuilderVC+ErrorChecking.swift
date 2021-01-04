@@ -183,7 +183,7 @@ extension ListBuilderViewController {
             let okButton = EKProperty.ButtonContent(
                 label: okButtonLabel,
                 backgroundColor: .clear,
-                highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05)
+                highlightedBackgroundColor: SEKColor.Gray.a800.with(alpha: 0.05)
             ) { [weak self] in
                 self?.generalVC.highlightRowsOnError(type: "Duplicate")
                 SwiftEntryKit.dismiss()
@@ -191,7 +191,7 @@ extension ListBuilderViewController {
             let closeButton = EKProperty.ButtonContent(
                 label: closeButtonLabel,
                 backgroundColor: .clear,
-                highlightedBackgroundColor: Color.Gray.a800.with(alpha: 0.05),
+                highlightedBackgroundColor: SEKColor.Gray.a800.with(alpha: 0.05),
                 displayMode: displayMode
             ) { [weak self] in
                 self?.generalVC.fixDuplicates {
@@ -199,7 +199,7 @@ extension ListBuilderViewController {
                     self?.returnCompletedList()
                 }
             }
-            let buttonsBarContent = EKProperty.ButtonBarContent( with: closeButton, okButton, separatorColor: Color.Gray.light, buttonHeight: 60, displayMode: displayMode, expandAnimatedly: true )
+            let buttonsBarContent = EKProperty.ButtonBarContent( with: closeButton, okButton, separatorColor: SEKColor.Gray.light, buttonHeight: 60, displayMode: displayMode, expandAnimatedly: true )
             let alertMessage = EKAlertMessage( simpleMessage: simpleMessage, imagePosition: .left, buttonBarContent: buttonsBarContent
             )
             let contentView = EKAlertMessageView(with: alertMessage)
