@@ -746,9 +746,9 @@
 		496937392353C228009CA41A /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				4991344D236FDF1200B82E46 /* SettingsViewController.swift */,
 				3C6EE6BA25A2AC580078462A /* SwiftUI */,
 				495F38F62432C8D100A17D93 /* Carte */,
-				4991344D236FDF1200B82E46 /* SettingsViewController.swift */,
 				4991344F236FE12400B82E46 /* SettingsViewExtensions.swift */,
 				498332D72431B4D500AD083E /* LDGradientView.swift */,
 				495F38F12432B7B700A17D93 /* CreditsViewController.swift */,

@@ -292,6 +292,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAv-Gj-3md">
                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="gear"/>
                                                 <connections>
                                                     <action selector="settingsButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tp4-sl-30Y"/>
@@ -313,8 +314,15 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fK0-3I-lSn">
                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
-                                                <state key="normal" image="stats"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <state key="normal" title="0">
+                                                    <color key="titleColor" name="TabIconDetails-Dark"/>
+                                                </state>
                                                 <connections>
+                                                    <action selector="statsButtonCancel:" destination="BYZ-38-t0r" eventType="touchDragExit" id="RYB-Cl-Arn"/>
+                                                    <action selector="statsButtonCancel:" destination="BYZ-38-t0r" eventType="touchCancel" id="YUB-WM-CE9"/>
+                                                    <action selector="statsButtonDown:" destination="BYZ-38-t0r" eventType="touchDown" id="5Mb-n5-hB8"/>
+                                                    <action selector="statsButtonDown:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="HxQ-jJ-MZK"/>
                                                     <action selector="statsButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8ip-p7-4h4"/>
                                                 </connections>
                                             </button>
@@ -4479,7 +4487,6 @@ the App!</string>
         <image name="sparkles" catalog="system" width="112" height="128"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="square.grid.2x2" catalog="system" width="128" height="114"/>
-        <image name="stats" width="32" height="32"/>
         <image name="trash" catalog="system" width="121" height="128"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="100ButtonTint">
@@ -4526,6 +4533,9 @@ the App!</string>
         </namedColor>
         <namedColor name="SemitransparentWhite">
             <color red="1" green="1" blue="1" alpha="0.60000002384185791" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TabIconDetails-Dark">
+            <color red="0.84700000286102295" green="0.84700000286102295" blue="0.84700000286102295" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TabIconListsMain">
             <color red="1" green="0.71399998664855957" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

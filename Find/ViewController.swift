@@ -320,9 +320,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        print("loadeddd")
+
         setUpFilePath()
         checkIfHistoryImagesExist()
+        checkForOldUserDefaults()
         
         tabBarHeightC.constant =  CGFloat(ConstantVars.tabHeight)
         

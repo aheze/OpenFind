@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct CameraSettingsView: View {
+    @Binding var textDetectionIsOn: Bool
+    @Binding var hapticFeedbackLevel: Int
     var body: some View {
-        TextDetectionView()
-        HapticFeedbackView()
+        TextDetectionView(isOn: $textDetectionIsOn)
+        HapticFeedbackView(level: $hapticFeedbackLevel)
         LivePreviewView()
     }
 }
 
 struct TextDetectionView: View {
-    @State var isOn = false
+    @Binding var isOn: Bool
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -44,7 +46,7 @@ struct TextDetectionView: View {
 }
 
 struct HapticFeedbackView: View {
-    @State var mode = 0
+    @Binding var level: Int
     
     @State var none = true
     @State var light = false
@@ -61,7 +63,7 @@ struct HapticFeedbackView: View {
                         none = true
                         light = false
                         heavy = false
-                        mode = 0
+                        level = 1
                     }) {
                         VStack {
                             RoundedRectangle(cornerRadius: 12)
@@ -77,7 +79,7 @@ struct HapticFeedbackView: View {
                         none = false
                         light = true
                         heavy = false
-                        mode = 1
+                        level = 2
                     }) {
                         VStack {
                             RoundedRectangle(cornerRadius: 12)
@@ -91,7 +93,7 @@ struct HapticFeedbackView: View {
                         none = false
                         light = false
                         heavy = true
-                        mode = 2
+                        level = 3
                     }) {
                         VStack {
                             RoundedRectangle(cornerRadius: 12)

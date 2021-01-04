@@ -64,8 +64,24 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var statsView: UIView!
     @IBOutlet weak var statsBottomC: NSLayoutConstraint!
     @IBOutlet weak var statsButton: UIButton!
+    
+    
+    @IBAction func statsButtonDown(_ sender: Any) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.statsButton.alpha = 0.5
+        })
+    }
+    
     @IBAction func statsButtonPressed(_ sender: Any) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.statsButton.alpha = 1
+        })
         tappedOnStats()
+    }
+    @IBAction func statsButtonCancel(_ sender: Any) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.statsButton.alpha = 1
+        })
     }
     
     @IBOutlet weak var settingsView: UIView!

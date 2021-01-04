@@ -26,6 +26,19 @@ extension ViewController {
             print("Error while enumerating files \(error.localizedDescription)")
         }
     }
+    
+    func checkForOldUserDefaults() {
+        if UserDefaults.standard.integer(forKey: "hapticFeedbackLevel") == 0 { /// level has not been set yet
+            print("Is 0!!!!")
+            
+            if UserDefaults.standard.bool(forKey: "hapticFeedback") == true { /// used to be on
+                UserDefaults.standard.set(2, forKey: "hapticFeedbackLevel")
+            } else {
+                UserDefaults.standard.set(1, forKey: "hapticFeedbackLevel")
+            }
+        }
+        
+    }
 }
 
 extension FileManager {

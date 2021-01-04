@@ -19,8 +19,8 @@ struct SettingsView: View {
     }
     
     @State private var highlightColor = UserDefaults.standard.string(forKey: "highlightColor")
-    @State private var showTextDetectIndicator = UserDefaults.standard.string(forKey: "showTextDetectIndicator")
-    @State private var hapticFeedback = UserDefaults.standard.string(forKey: "hapticFeedback")
+    @State private var showTextDetectIndicator = UserDefaults.standard.bool(forKey: "showTextDetectIndicator")
+    @State private var hapticFeedback = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
     
     
     
@@ -41,7 +41,10 @@ struct SettingsView: View {
                         
                         SectionHeaderView(text: "Camera")
 
-                        CameraSettingsView()
+                        CameraSettingsView(
+                            textDetectionIsOn: $showTextDetectIndicator,
+                            hapticFeedbackLevel: $hapticFeedback
+                        )
                             .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                         
                         SectionHeaderView(text: "Support and Feedback")
