@@ -12,7 +12,9 @@ import SDWebImage
 
 class PhotosMigrationController: UIViewController {
     
-    let dispatchGroup = DispatchGroup()
+//    let dispatchGroup = DispatchGroup()
+    let dispatchQueue = DispatchQueue(label: "saveImagesQueue")
+    let dispatchSemaphore = DispatchSemaphore(value: 0)
     var numberCompleted = 0
     
 //    let assets = [PHAsset]()

@@ -14,12 +14,17 @@ extension ViewController {
         print("checking...")
         do {
             let fileURLs = try FileManager.default.contentsOfDirectory(at: globalUrl, includingPropertiesForKeys: nil)
-                print("has file urls \(fileURLs)")
+           
             
             if !fileURLs.isEmpty { /// there are files here
                 photos.viewController.migrationNeeded = true
                 photos.viewController.photosToMigrate = fileURLs
 //                photos.viewController.showMigrationView()
+                
+                photoCategories = realm.objects(HistoryModel.self)
+                print("cats: \(photoCategories)")
+                print("count: \(photoCategories?.count)")
+                print("has file urls \(fileURLs.count)")
             }
             
         } catch {
