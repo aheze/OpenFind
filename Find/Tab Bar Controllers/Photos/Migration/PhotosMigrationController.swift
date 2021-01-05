@@ -9,6 +9,7 @@
 import UIKit
 import Photos
 import SDWebImage
+import RealmSwift
 
 class PhotosMigrationController: UIViewController {
     

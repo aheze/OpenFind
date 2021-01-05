@@ -41,28 +41,12 @@ extension PhotosViewController {
                     let editablePhoto = EditableHistoryModel()
                     editablePhoto.dateCreated = photo.dateCreated
                     editablePhoto.filePath = photo.filePath
-//                    editablePhoto.isDeepSearched = photo.isDeepSearched
-//                    editablePhoto.isHearted = photo.isHearted
-//
-//                    var photoContents = [EditableSingleHistoryContent]()
-//                    for content in photo.contents {
-//                        let editableContent = EditableSingleHistoryContent()
-//                        editableContent.text = content.text
-//                        editableContent.x = CGFloat(content.x)
-//                        editableContent.y = CGFloat(content.y)
-//                        editableContent.width = CGFloat(content.width)
-//                        editableContent.height = CGFloat(content.height)
-//                        photoContents.append(editableContent)
-//                    }
-//
-//                    editablePhoto.contents = photoContents
                     editablePhotos.append(editablePhoto)
                 }
                 
-                
-                
-                viewController.editablePhotosToMigrate = editablePhotos
                 viewController.folderURL = folderURL
+                viewController.editablePhotosToMigrate = editablePhotos /// editable so can access on background thread
+                viewController.realPhotos = photosToMigrate /// modify the real photo's assetIdenfier later
                 self.present(viewController, animated: true)
             }
         }

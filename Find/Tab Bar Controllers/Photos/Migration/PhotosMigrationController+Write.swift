@@ -95,10 +95,8 @@ extension PhotosMigrationController {
             print("finishedEditablePhotos: \(finishedEditablePhotos)")
             
             
-            let testMessages = ["errorMessages", "errorMessdsaadssadages", "123sages"]
-            
             DispatchQueue.main.async {
-                self.finish(editablePhotosWithErrors: editablePhotosWithErrors, errorMessages: testMessages, finishedEditablePhotos: finishedEditablePhotos)
+                self.finish(editablePhotosWithErrors: editablePhotosWithErrors, errorMessages: errorMessages, finishedEditablePhotos: finishedEditablePhotos)
             }
             
         }
@@ -117,6 +115,28 @@ extension PhotosMigrationController {
     }
     func finish(editablePhotosWithErrors: [EditableHistoryModel], errorMessages: [String], finishedEditablePhotos: [EditableHistoryModel]) {
         
+        
+        
+        for templatePhoto in finishedEditablePhotos {
+            for realPhoto in realPhotos {
+                if realPhoto.dateCreated == templatePhoto.dateCreated {
+                    print("Match!")
+                    
+                    do {
+                        try realm.write {
+                            realPhoto.assetIdentifier = templatePhoto.assetIdentifier
+                        }
+                    } catch {
+                        print("Error saving asset identifier or removing photo. \(error)")
+                    }
+                    let fullUrl = folderURL.appendingPathComponent(realPhoto.filePath)
+                    deletePhotoAtPath(fullUrl: fullUrl)
+                }
+            }
+        }
+        
+        
+//        if !editablePhotosWithErrors.isEmpty {
         if !editablePhotosWithErrors.isEmpty {
             resetProgress()
             tryAgain = true
@@ -144,43 +164,13 @@ extension PhotosMigrationController {
             print("No errors!")
             print("photos: \(finishedEditablePhotos)")
             
-            for templatePhoto in finishedEditablePhotos {
-                for realPhoto in realPhotos {
-                    if realPhoto.dateCreated == templatePhoto.dateCreated {
-                        print("Match!")
-                        
-                        do {
-                            try realm.write {
-                                realPhoto.assetIdentifier = templatePhoto.assetIdentifier
-//                                realm.delete(currentPhoto.contents)
-                                
-                            }
-                        } catch {
-                            print("Error saving asset identifier. \(error)")
-                        }
-                        
-                    }
-                }
-//                var newPhoto = HistoryModel()
-//                newPhoto.filePath = ""
-//                newPhoto.dateCreated = photo.dateCreated
-//                newPhoto.assetIdentifier = photo.assetIdentifier
-//                newPhoto.isDeepSearched = photo.isDeepSearched
-//                newPhoto.isHearted = photo.isHearted
-//
-//                var photoContents = [EditableSingleHistoryContent]()
-//                for content in photo.contents {
-//                    let editableContent = EditableSingleHistoryContent()
-//                    editableContent.text = content.text
-//                    editableContent.x = CGFloat(content.x)
-//                    editableContent.y = CGFloat(content.y)
-//                    editableContent.width = CGFloat(content.width)
-//                    editableContent.height = CGFloat(content.height)
-//                    photoContents.append(editableContent)
-//                }
-//
-//                newPhoto.contents = photoContents
-            }
+            let finishedMovingMessage = "Finished moving"
+            let detailsMessage = "Your photos have been moved to the Photos app."
+            let alertView = SPAlertView(title: finishedMovingMessage, message: detailsMessage, preset: SPAlertPreset.done)
+            alertView.duration = 2.6
+            alertView.present()
+            resetProgress()
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -234,7 +224,7 @@ extension PhotosMigrationController {
         self.present(activityViewController, animated: true)
     }
     
-    func showManualConfirmation(attributes: EKAttributes, titleMessage: String, desc: String, leftButton: String, yesButton: String, image: String = "WhiteCheckmark", specialAction: String = "None") {
+    func showManualConfirmation(attributes: EKAttributes, titleMessage: String, desc: String, leftButton: String, yesButton: String, image: String = "WhiteCheckmark") {
         let displayMode = EKAttributes.DisplayMode.inferred
         
         let title = EKProperty.LabelContent(text: titleMessage, style: .init(font: UIFont.systemFont(ofSize: 20, weight: .bold), color: .white, displayMode: displayMode))
@@ -247,13 +237,13 @@ extension PhotosMigrationController {
         let closeButtonLabelStyle = EKProperty.LabelStyle(font: buttonFont, color: EKColor(#colorLiteral(red: 1, green: 0.9675828359, blue: 0.9005832124, alpha: 1)), displayMode: displayMode)
         let closeButtonLabel = EKProperty.LabelContent(text: leftButton, style: closeButtonLabelStyle)
         
-        if specialAction == "None" {
             let okButton = EKProperty.ButtonContent(
                 label: okButtonLabel,
                 backgroundColor: .clear,
                 highlightedBackgroundColor: SEKColor.Gray.a800.with(alpha: 0.05)
             ) { [weak self] in
-                print("Done")
+                self?.deleteErrorPhotos()
+                self?.dismiss(animated: true, completion: nil)
                 SwiftEntryKit.dismiss()
             }
             let closeButton = EKProperty.ButtonContent(
@@ -261,16 +251,46 @@ extension PhotosMigrationController {
                 backgroundColor: .clear,
                 highlightedBackgroundColor: SEKColor.Gray.a800.with(alpha: 0.05),
                 displayMode: displayMode
-            ) { [weak self] in
+            ) { 
                 SwiftEntryKit.dismiss()
             }
-            let buttonsBarContent = EKProperty.ButtonBarContent( with: closeButton, okButton, separatorColor: SEKColor.Gray.light, buttonHeight: 60, displayMode: displayMode, expandAnimatedly: true )
-            let alertMessage = EKAlertMessage( simpleMessage: simpleMessage, imagePosition: .left, buttonBarContent: buttonsBarContent
+            let buttonsBarContent = EKProperty.ButtonBarContent(with: closeButton, okButton, separatorColor: SEKColor.Gray.light, buttonHeight: 60, displayMode: displayMode, expandAnimatedly: true )
+            let alertMessage = EKAlertMessage(simpleMessage: simpleMessage, imagePosition: .left, buttonBarContent: buttonsBarContent
             )
             let contentView = EKAlertMessageView(with: alertMessage)
             contentView.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
             contentView.layer.cornerRadius = 10
             SwiftEntryKit.display(entry: contentView, using: attributes)
+    }
+    
+    func deleteErrorPhotos() {
+        print("deleteing error photos..")
+        for templatePhoto in editablePhotosToMigrate {
+            for realPhoto in realPhotos {
+                if realPhoto.dateCreated == templatePhoto.dateCreated {
+                    print("Error photo match!")
+                    
+                    do {
+                        try realm.write {
+                            realm.delete(realPhoto.contents)
+                            realm.delete(realPhoto)
+                        }
+                    } catch {
+                        print("Error saving asset identifier or removing photo. \(error)")
+                    }
+                    let fullUrl = folderURL.appendingPathComponent(realPhoto.filePath)
+                    deletePhotoAtPath(fullUrl: fullUrl)
+                }
+            }
+        }
+    }
+    func deletePhotoAtPath(fullUrl: URL) {
+        if FileManager.default.fileExists(atPath: fullUrl.path) {
+            do {
+                try FileManager.default.removeItem(at: fullUrl)
+            } catch {
+                print("error deleting file. \(error)")
+            }
         }
     }
 }
