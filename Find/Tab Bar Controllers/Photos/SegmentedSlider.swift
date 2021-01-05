@@ -40,7 +40,6 @@ class SegmentedSlider: UIView {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        print("TOUCH BEGAN")
         if let touchPoint = touches.first?.location(in: contentView) {
             if let (hoveredLabel, hoveredFilter) = getHoveredLabel(touchPoint: touchPoint) as? (UIView, PhotoFilter) {
                 

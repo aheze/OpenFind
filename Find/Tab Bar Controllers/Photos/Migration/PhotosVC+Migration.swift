@@ -56,6 +56,7 @@ extension PhotosViewController {
                     UIView.animate(withDuration: 0.5, animations: {
                         scrollView.alpha = 0
                         scrollView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                        self.collectionView.alpha = 1
                     }) { _ in
                         scrollView.removeFromSuperview()
                     }

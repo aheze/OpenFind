@@ -7,6 +7,7 @@ target 'Find' do
 pod 'QuickLayout'
 pod 'RealmSwift'
 pod 'SDWebImage', '~> 5.0'
+pod 'SDWebImagePhotosPlugin'
 pod 'SwiftEntryKit'
 pod 'SnapKit'
 pod 'Parchment'

@@ -3262,7 +3262,7 @@ the App!</string>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="kGC-7l-4HT" customClass="ImageCell" customModule="Find" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="kGC-7l-4HT" customClass="PhotoCell" customModule="Find" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="LfO-YE-8ak">
@@ -3281,11 +3281,11 @@ the App!</string>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
-                                            <outlet property="imageView" destination="9PI-Yv-AWO" id="u9G-ph-EZp"/>
+                                            <outlet property="imageView" destination="9PI-Yv-AWO" id="9yH-ay-VqY"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageHeader" id="Kiu-ik-VRh" customClass="ImageHeader" customModule="Find" customModuleProvider="target">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoHeader" id="Kiu-ik-VRh" customClass="PhotoHeader" customModule="Find" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
@@ -3302,7 +3302,7 @@ the App!</string>
                                         <constraint firstItem="3Gd-9Z-dgV" firstAttribute="leading" secondItem="Kiu-ik-VRh" secondAttribute="leadingMargin" constant="20" id="Z9q-vR-8Ms"/>
                                     </constraints>
                                     <connections>
-                                        <outlet property="monthLabel" destination="3Gd-9Z-dgV" id="WvB-4n-JLp"/>
+                                        <outlet property="monthLabel" destination="3Gd-9Z-dgV" id="HgL-WZ-cXt"/>
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>

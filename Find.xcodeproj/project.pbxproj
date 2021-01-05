@@ -20,6 +20,12 @@
 		3C369709259EEFE500A6544A /* PhotosMigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C369708259EEFE500A6544A /* PhotosMigrationView.swift */; };
 		3C36970C259EEFF500A6544A /* PhotosMigrationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C36970B259EEFF500A6544A /* PhotosMigrationView.xib */; };
 		3C389ED3259BA0D5007DB33B /* ListBuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */; };
+		3C3D47C625A40133002B8BBF /* PhotosVC+PHAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47C525A40133002B8BBF /* PhotosVC+PHAssets.swift */; };
+		3C3D47C925A40170002B8BBF /* PhotosVC+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47C825A40170002B8BBF /* PhotosVC+Sorting.swift */; };
+		3C3D47DA25A40A4E002B8BBF /* PhotoPermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47D925A40A4E002B8BBF /* PhotoPermissionView.swift */; };
+		3C3D47DD25A40A5B002B8BBF /* PhotoPermissionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D47DC25A40A5B002B8BBF /* PhotoPermissionView.xib */; };
+		3C3D47E025A41AEB002B8BBF /* PhotosVC+Diffable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47DF25A41AEB002B8BBF /* PhotosVC+Diffable.swift */; };
+		3C3D47E325A41B9E002B8BBF /* PhotosVC+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47E225A41B9E002B8BBF /* PhotosVC+Cells.swift */; };
 		3C4DE6FB259AD3FF0037D104 /* SaveToPhotosButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */; };
 		3C4DE6FC259AD3FF0037D104 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F5259AD3FF0037D104 /* MessageView.xib */; };
 		3C4DE6FD259AD3FF0037D104 /* CacheIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F6259AD3FF0037D104 /* CacheIcon.swift */; };
@@ -196,6 +202,12 @@
 		3C369708259EEFE500A6544A /* PhotosMigrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationView.swift; sourceTree = "<group>"; };
 		3C36970B259EEFF500A6544A /* PhotosMigrationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotosMigrationView.xib; sourceTree = "<group>"; };
 		3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBuilderViewController.swift; sourceTree = "<group>"; };
+		3C3D47C525A40133002B8BBF /* PhotosVC+PHAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+PHAssets.swift"; sourceTree = "<group>"; };
+		3C3D47C825A40170002B8BBF /* PhotosVC+Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Sorting.swift"; sourceTree = "<group>"; };
+		3C3D47D925A40A4E002B8BBF /* PhotoPermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPermissionView.swift; sourceTree = "<group>"; };
+		3C3D47DC25A40A5B002B8BBF /* PhotoPermissionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPermissionView.xib; sourceTree = "<group>"; };
+		3C3D47DF25A41AEB002B8BBF /* PhotosVC+Diffable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Diffable.swift"; sourceTree = "<group>"; };
+		3C3D47E225A41B9E002B8BBF /* PhotosVC+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Cells.swift"; sourceTree = "<group>"; };
 		3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaveToPhotosButton.xib; sourceTree = "<group>"; };
 		3C4DE6F5259AD3FF0037D104 /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
 		3C4DE6F6259AD3FF0037D104 /* CacheIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheIcon.swift; sourceTree = "<group>"; };
@@ -372,6 +384,11 @@
 			isa = PBXGroup;
 			children = (
 				3C020CE8259FF7470087AE92 /* PhotosViewController.swift */,
+				3C3D47C825A40170002B8BBF /* PhotosVC+Sorting.swift */,
+				3C3D47C525A40133002B8BBF /* PhotosVC+PHAssets.swift */,
+				3C3D47DF25A41AEB002B8BBF /* PhotosVC+Diffable.swift */,
+				3C3D47E225A41B9E002B8BBF /* PhotosVC+Cells.swift */,
+				3C3D47D825A40A41002B8BBF /* Permissions */,
 				3CB6842F25A0085E00AE0AD6 /* Migration */,
 				3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */,
 				3CB6842B259FF9A700AE0AD6 /* SegmentedSlider.xib */,
@@ -413,6 +430,15 @@
 				4990AAE523EDB50E00FAF37B /* ColorsViewController.swift */,
 			);
 			path = Builder;
+			sourceTree = "<group>";
+		};
+		3C3D47D825A40A41002B8BBF /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				3C3D47D925A40A4E002B8BBF /* PhotoPermissionView.swift */,
+				3C3D47DC25A40A5B002B8BBF /* PhotoPermissionView.xib */,
+			);
+			path = Permissions;
 			sourceTree = "<group>";
 		};
 		3C4DE6F3259AD3FF0037D104 /* Camera Buttons */ = {
@@ -994,6 +1020,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C3D47DD25A40A5B002B8BBF /* PhotoPermissionView.xib in Resources */,
 				4956352A2437A4B60001E8C6 /* defaultSeeds.realm in Resources */,
 				3CE306DD259AC46400F1B2E2 /* TabBar.xib in Resources */,
 				49E9D89224996E1A0006757C /* Localizable.strings in Resources */,
@@ -1099,6 +1126,7 @@
 				49563521243694BC0001E8C6 /* GestureControl.swift in Sources */,
 				3CE306D8259AC46400F1B2E2 /* PhotosIcon.swift in Sources */,
 				49564333244A8FA4002C9245 /* HistorySharing.swift in Sources */,
+				3C3D47C925A40170002B8BBF /* PhotosVC+Sorting.swift in Sources */,
 				3C6EE6B725A2AB350078462A /* OtherView.swift in Sources */,
 				49D985B6241B3847005F4E92 /* CacheCell.swift in Sources */,
 				4956351F243694BC0001E8C6 /* FillAnimationView.swift in Sources */,
@@ -1120,6 +1148,7 @@
 				495ECCAB238DB7BD00E7D966 /* TitleSupplementaryView.swift in Sources */,
 				49301BF52402493A00B4780B /* HistoryModel.swift in Sources */,
 				3C389ED3259BA0D5007DB33B /* ListBuilderViewController.swift in Sources */,
+				3C3D47E325A41B9E002B8BBF /* PhotosVC+Cells.swift in Sources */,
 				3C21DEE6259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift in Sources */,
 				3C4DE716259B0EAB0037D104 /* TutorialHeader.swift in Sources */,
 				49B7A33823923EBD0070209F /* PhotoPageContainerViewController.swift in Sources */,
@@ -1133,6 +1162,7 @@
 				3CE306DB259AC46400F1B2E2 /* CameraIcon.swift in Sources */,
 				3CE306E5259AC4B000F1B2E2 /* ButtonTransitions.swift in Sources */,
 				4990AAE623EDB50E00FAF37B /* ColorsViewController.swift in Sources */,
+				3C3D47E025A41AEB002B8BBF /* PhotosVC+Diffable.swift in Sources */,
 				4990AAE223EDB4CE00FAF37B /* GeneralViewController.swift in Sources */,
 				3C369709259EEFE500A6544A /* PhotosMigrationView.swift in Sources */,
 				4957157E2368B022007BF68B /* ViewExtensions.swift in Sources */,
@@ -1170,6 +1200,7 @@
 				3CE306E4259AC4B000F1B2E2 /* GestureTransitions.swift in Sources */,
 				4952F0C2240B1DD00068564F /* SearchCell.swift in Sources */,
 				49BC782223C3E1BF003D9904 /* TextViewRounded.swift in Sources */,
+				3C3D47C625A40133002B8BBF /* PhotosVC+PHAssets.swift in Sources */,
 				4956351C243694BC0001E8C6 /* OnboardingContentView.swift in Sources */,
 				495F38FB2432C8FE00A17D93 /* CarteItem.swift in Sources */,
 				3C6EE6B225A2AB350078462A /* HeaderView.swift in Sources */,
@@ -1200,6 +1231,7 @@
 				49BC782023C2B0E0003D9904 /* IndexMatcher.swift in Sources */,
 				492A2D2224A3116600F9C4A1 /* TutorialLocalization.swift in Sources */,
 				3C2C3E9925A11CD6002C3D11 /* ANSegmentIndicator.swift in Sources */,
+				3C3D47DA25A40A4E002B8BBF /* PhotoPermissionView.swift in Sources */,
 				3C6EE6B025A2AB350078462A /* GeneralView.swift in Sources */,
 				4956351D243694BC0001E8C6 /* OnboardingContantViewItem.swift in Sources */,
 				495F38FE243302D500A17D93 /* StatsViewController.swift in Sources */,

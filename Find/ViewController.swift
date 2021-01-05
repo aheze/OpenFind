@@ -108,21 +108,16 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             print("long pres beign")
             if gestures.isAnimating {
                 
-                let collectionView = lists.viewController.collectionView
-                collectionView?.isScrollEnabled = false
-                collectionView?.isScrollEnabled = true
+                let listsCollectionView = lists.viewController.collectionView
+                listsCollectionView?.isScrollEnabled = false
+                listsCollectionView?.isScrollEnabled = true
                     
-                
-                
-//                if let photosCollectionView = photos.collectionView {
-//                    photosCollectionView.isScrollEnabled = false
-//                    photosCollectionView.isScrollEnabled = true
-//                }
+                let photosCollectionView = photos.viewController.collectionView
+                photosCollectionView?.isScrollEnabled = false
+                photosCollectionView?.isScrollEnabled = true
                 
                 animator?.isReversed = false
                 animator?.stopAnimation(true)
-                
-//                animator?.finishAnimation(at: .current)
                 if !gestures.isRubberBanding {
                     self.tabBarView.animatingObjects -= 1
                 }
@@ -232,7 +227,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             blurAnimator?.pauseAnimation()
         case .changed:
-            print("pan changed")
             gestures.hasMovedFromPress = true
             let velocity = sender.velocity(in: view)
             let translation = sender.translation(in: view).x
@@ -245,16 +239,16 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     
                     switch ViewControllerState.currentVC {
                     case is PhotosNavController:
-//                        let collectionView = photos.viewController.collectionView
-//                        collectionView?.isScrollEnabled = false
-//                        collectionView?.isScrollEnabled = true
+                        let photosCollectionView = photos.viewController.collectionView
+                        photosCollectionView?.isScrollEnabled = false
+                        photosCollectionView?.isScrollEnabled = true
                         gestures.isRubberBanding = true
                     case is CameraViewController:
                         startMoveVC(from: camera, to: photos, direction: .right, toOverlay: true)
                     case is ListsNavController:
-                        let collectionView = lists.viewController.collectionView
-                        collectionView?.isScrollEnabled = false
-                        collectionView?.isScrollEnabled = true
+                        let listsCollectionView = lists.viewController.collectionView
+                        listsCollectionView?.isScrollEnabled = false
+                        listsCollectionView?.isScrollEnabled = true
                         startMoveVC(from: lists, to: camera, direction: .right, toOverlay: false)
                     default:
                         print("could not cast view controller")
@@ -264,22 +258,16 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     
                     switch ViewControllerState.currentVC {
                     case is PhotosNavController:
-//                        let collectionView = photos.viewController.collectionView
-//                        collectionView?.isScrollEnabled = false
-//                        collectionView?.isScrollEnabled = true
+                        let photosCollectionView = photos.viewController.collectionView
+                        photosCollectionView?.isScrollEnabled = false
+                        photosCollectionView?.isScrollEnabled = true
                         startMoveVC(from: photos, to: camera, direction: .left, toOverlay: false)
                     case is CameraViewController:
                         startMoveVC(from: camera, to: lists, direction: .left, toOverlay: true)
                     case is ListsNavController:
-//                        if let listsVC = lists.viewControllers.first as? ListsController {
-//                            if let collectionView = listsVC.collectionView {
-//                                collectionView.isScrollEnabled = false
-//                                collectionView.isScrollEnabled = true
-//                            }
-//                        }
-                        let collectionView = lists.viewController.collectionView
-                        collectionView?.isScrollEnabled = false
-                        collectionView?.isScrollEnabled = true
+                        let listsCollectionView = lists.viewController.collectionView
+                        listsCollectionView?.isScrollEnabled = false
+                        listsCollectionView?.isScrollEnabled = true
                         gestures.isRubberBanding = true
                     default:
                         print("could not cast view controller")
@@ -400,7 +388,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let shutterArea = CGRect(x: containerView.bounds.width / 2 - 50, y: containerView.bounds.height - 140, width: 100, height: 140)
         let photoFilterArea = photos.viewController.segmentedSlider?.frame ?? CGRect(x: 0, y: 0, width: 0, height: 0)
         if shutterArea.contains(location) || photoFilterArea.contains(location) {
-            print("contains")
             return false
         }
         return true
