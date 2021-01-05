@@ -72,7 +72,7 @@ extension ViewController {
                 tabBarView.getBlocks(from: fromVC, to: .lists).0()
                 toVC.view.frame.origin.x += toVC.view.frame.width
                 gestures.transitionAnimatorBlock = {
-                    self.shadeView.backgroundColor = UIColor.yellow
+                    self.shadeView.backgroundColor = UIColor.secondarySystemBackground
                     self.shadeView.alpha = 1
                     self.blurView.effect = UIBlurEffect(style: .light)
                     self.tabBarView.shadeView.alpha = 0
@@ -104,7 +104,7 @@ extension ViewController {
                 toVC.view.frame.origin.x -= toVC.view.frame.width
                 
                 gestures.transitionAnimatorBlock = {
-                    self.shadeView.backgroundColor = UIColor.blue
+                    self.shadeView.backgroundColor = UIColor.systemBackground
                     self.shadeView.alpha = 1
                     self.blurView.effect = UIBlurEffect(style: .light)
                     self.tabBarView.shadeView.alpha = 0

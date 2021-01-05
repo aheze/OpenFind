@@ -72,7 +72,7 @@ extension ViewController {
 //                        self.tabBarView.cameraIcon.alpha = 1
                     }
                     
-                    shadeView.backgroundColor = UIColor.blue
+                    shadeView.backgroundColor = UIColor.systemBackground
                     shadeView.alpha = 1
                     blurView.effect = UIBlurEffect(style: .light)
                     tabBarView.shadeView.alpha = 0
@@ -124,7 +124,7 @@ extension ViewController {
 //                        self.tabBarView.cameraIcon.alpha = 1
                     }
                     
-                    shadeView.backgroundColor = UIColor.yellow
+                    shadeView.backgroundColor = UIColor.secondarySystemBackground
                     shadeView.alpha = 1
                     blurView.effect = UIBlurEffect(style: .light)
                     tabBarView.shadeView.alpha = 0
@@ -165,7 +165,7 @@ extension ViewController {
                     containerView.bringSubviewToFront(toVC.view)
                     blurView.effect = UIBlurEffect(style: .light)
                     shadeView.alpha = 1
-                    shadeView.backgroundColor = UIColor.blue
+                    shadeView.backgroundColor = UIColor.systemBackground
                     tabBarView.shadeView.alpha = 0
                     tabBarView.blurView.effect = UIBlurEffect(style: .light)
                     tabBarView.blurBackgroundView.alpha = 1
@@ -182,7 +182,7 @@ extension ViewController {
                     containerView.bringSubviewToFront(toVC.view)
                     blurView.effect = UIBlurEffect(style: .light)
                     shadeView.alpha = 1
-                    shadeView.backgroundColor = UIColor.yellow
+                    shadeView.backgroundColor = UIColor.secondarySystemBackground
                     tabBarView.shadeView.alpha = 0
                     tabBarView.blurView.effect = UIBlurEffect(style: .light)
                     tabBarView.blurBackgroundView.alpha = 1
