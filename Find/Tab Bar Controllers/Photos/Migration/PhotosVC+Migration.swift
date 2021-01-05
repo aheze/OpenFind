@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 extension PhotosViewController {
-    func showMigrationView(photosToMigrate: [URL]) {
+    func showMigrationView(photosToMigrate: [HistoryModel], folderURL: URL) {
         
         collectionView.alpha = 0
         
@@ -35,7 +35,34 @@ extension PhotosViewController {
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let viewController = storyboard.instantiateViewController(withIdentifier: "PhotosMigrationController") as? PhotosMigrationController {
-                viewController.photoURLs = photosToMigrate
+                
+                var editablePhotos = [EditableHistoryModel]()
+                for photo in photosToMigrate {
+                    let editablePhoto = EditableHistoryModel()
+                    editablePhoto.dateCreated = photo.dateCreated
+                    editablePhoto.filePath = photo.filePath
+//                    editablePhoto.isDeepSearched = photo.isDeepSearched
+//                    editablePhoto.isHearted = photo.isHearted
+//
+//                    var photoContents = [EditableSingleHistoryContent]()
+//                    for content in photo.contents {
+//                        let editableContent = EditableSingleHistoryContent()
+//                        editableContent.text = content.text
+//                        editableContent.x = CGFloat(content.x)
+//                        editableContent.y = CGFloat(content.y)
+//                        editableContent.width = CGFloat(content.width)
+//                        editableContent.height = CGFloat(content.height)
+//                        photoContents.append(editableContent)
+//                    }
+//
+//                    editablePhoto.contents = photoContents
+                    editablePhotos.append(editablePhoto)
+                }
+                
+                
+                
+                viewController.editablePhotosToMigrate = editablePhotos
+                viewController.folderURL = folderURL
                 self.present(viewController, animated: true)
             }
         }

@@ -12,13 +12,14 @@ import SDWebImage
 
 class PhotosMigrationController: UIViewController {
     
-//    let dispatchGroup = DispatchGroup()
     let dispatchQueue = DispatchQueue(label: "saveImagesQueue")
     let dispatchSemaphore = DispatchSemaphore(value: 0)
     var numberCompleted = 0
     
-//    let assets = [PHAsset]()
-    var photoURLs = [URL]()
+    var folderURL = URL(fileURLWithPath: "", isDirectory: true)
+    var editablePhotosToMigrate = [EditableHistoryModel]()
+    var realPhotos = [HistoryModel]() /// replace these later
+    let realm = try! Realm()
     
     @IBOutlet weak var cancelButton: UIButton!
     @IBAction func cancelButtonPressed(_ sender: Any) {
@@ -26,12 +27,26 @@ class PhotosMigrationController: UIViewController {
     }
     
     @IBOutlet weak var movePhotosLabel: UILabel!
+    @IBOutlet weak var promptLabel: UILabel!
     
-    
+    var tryAgain = false
     @IBOutlet weak var confirmButton: UIButton!
     @IBAction func confirmButtonPressed(_ sender: Any) {
-        writeToPhotos(photoURLs: photoURLs)
+        writeToPhotos(editablePhotos: editablePhotosToMigrate, baseURL: folderURL)
     }
+    
+    
+    // MARK: Error handling views
+    
+    @IBOutlet weak var tapTryAgainView: UIView!
+    @IBOutlet weak var tapTryAgainHeightC: NSLayoutConstraint!
+    
+    @IBOutlet weak var tryAgainLabel: UILabel!
+    @IBOutlet weak var manuallyMoveButton: UIButton!
+    @IBAction func manuallyMoveButtonPressed(_ sender: Any) {
+        manualMove()
+    }
+    
     
     @IBOutlet weak var collectionView: UICollectionView!
     let scale = UIScreen.main.scale // Will be 2.0 on 6/7/8 and 3.0 on 6+/7+/8+ or later
@@ -57,6 +72,9 @@ class PhotosMigrationController: UIViewController {
         progressLabel.alpha = 0
         progressLabel.text = "0%"
         
+        tapTryAgainView.alpha = 0
+        tapTryAgainHeightC.constant = 0
+        
         blurView.clipsToBounds = true
         blurView.layer.cornerRadius = 12
         
@@ -66,7 +84,7 @@ class PhotosMigrationController: UIViewController {
         settings.defaultSegmentColor = UIColor.systemBackground
         
         settings.segmentBorderType = .round
-        settings.segmentsCount = min(50, photoURLs.count)
+        settings.segmentsCount = min(50, editablePhotosToMigrate.count)
         settings.segmentWidth = 5
         settings.animationDuration = 0.2
         settings.spaceBetweenSegments = Degrees(2)
@@ -77,17 +95,20 @@ class PhotosMigrationController: UIViewController {
 
 extension PhotosMigrationController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photoURLs.count
+        return editablePhotosToMigrate.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let url = photoURLs[indexPath.item]
+        let photo = editablePhotosToMigrate[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
         
         let thumbnailSize = CGSize(width: 200 * scale, height: 200 * scale)
         
+        let url = folderURL.appendingPathComponent(photo.filePath)
+        print("URL: \(url)")
         cell.imageView.sd_imageTransition = .fade
         cell.imageView.sd_setImage(with: url, placeholderImage: nil, context: [.imageThumbnailPixelSize : thumbnailSize])
+        
         return cell
     }
     

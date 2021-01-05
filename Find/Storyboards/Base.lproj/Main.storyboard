@@ -3392,12 +3392,6 @@ the App!</string>
                                     <constraint firstItem="2A4-os-b3N" firstAttribute="top" secondItem="pHB-au-YwG" secondAttribute="top" id="xMz-VL-VDv"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="These photos will be moved." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOe-HW-5gn">
-                                <rect key="frame" x="104" y="102" width="206.5" height="19.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" systemColor="secondaryLabelColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="moD-9L-EiM">
                                 <rect key="frame" x="0.0" y="129.5" width="414" height="766.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3464,20 +3458,70 @@ the App!</string>
                                     <constraint firstItem="tdB-jj-phk" firstAttribute="top" secondItem="RHS-8M-FVR" secondAttribute="top" constant="16" id="yBA-I1-A1l"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rbp-Hq-49G">
+                                <rect key="frame" x="0.0" y="94" width="414" height="35.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="These photos will be moved." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOe-HW-5gn">
+                                        <rect key="frame" x="104" y="8" width="206.5" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s63-WB-Vqm">
+                                        <rect key="frame" x="78.5" y="35.5" width="257" height="0.0"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap 'Try Again' or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kzn-lF-Gee">
+                                                <rect key="frame" x="8" y="-9.5" width="126" height="19.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sot-Lv-tdU">
+                                                <rect key="frame" x="140" y="-16" width="109" height="32"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <state key="normal" title="manually move">
+                                                    <color key="titleColor" name="100ButtonTint"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="manuallyMoveButtonPressed:" destination="cxu-NG-gnM" eventType="touchUpInside" id="cZG-U7-A2l"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="Kzn-lF-Gee" firstAttribute="centerY" secondItem="s63-WB-Vqm" secondAttribute="centerY" id="6f9-9g-bVG"/>
+                                            <constraint firstItem="Kzn-lF-Gee" firstAttribute="leading" secondItem="s63-WB-Vqm" secondAttribute="leading" constant="8" id="Cs8-Rt-GoO"/>
+                                            <constraint firstAttribute="trailing" secondItem="sot-Lv-tdU" secondAttribute="trailing" constant="8" id="apo-Uj-hG2"/>
+                                            <constraint firstAttribute="height" id="nTa-PA-94W"/>
+                                            <constraint firstItem="sot-Lv-tdU" firstAttribute="centerY" secondItem="s63-WB-Vqm" secondAttribute="centerY" id="s2n-0M-Gnh"/>
+                                            <constraint firstItem="sot-Lv-tdU" firstAttribute="leading" secondItem="Kzn-lF-Gee" secondAttribute="trailing" constant="6" id="y7i-92-IYh"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="lOe-HW-5gn" firstAttribute="top" secondItem="Rbp-Hq-49G" secondAttribute="top" constant="8" id="JLH-zv-MCj"/>
+                                    <constraint firstItem="lOe-HW-5gn" firstAttribute="centerX" secondItem="Rbp-Hq-49G" secondAttribute="centerX" id="Vbc-Lz-91V"/>
+                                    <constraint firstAttribute="bottom" secondItem="s63-WB-Vqm" secondAttribute="bottom" id="iXY-TZ-kUc"/>
+                                    <constraint firstItem="s63-WB-Vqm" firstAttribute="centerX" secondItem="Rbp-Hq-49G" secondAttribute="centerX" id="tSA-tZ-5uB"/>
+                                    <constraint firstItem="s63-WB-Vqm" firstAttribute="top" secondItem="lOe-HW-5gn" secondAttribute="bottom" constant="8" id="w6r-dC-clu"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Gwq-8t-d3G"/>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Rbp-Hq-49G" firstAttribute="top" secondItem="pHB-au-YwG" secondAttribute="bottom" id="679-iL-LN5"/>
                             <constraint firstItem="RHS-8M-FVR" firstAttribute="centerX" secondItem="Hek-qu-kd6" secondAttribute="centerX" id="7E4-P9-q2z"/>
-                            <constraint firstItem="moD-9L-EiM" firstAttribute="top" secondItem="lOe-HW-5gn" secondAttribute="bottom" constant="8" id="7aZ-T1-tHd"/>
+                            <constraint firstAttribute="trailing" secondItem="Rbp-Hq-49G" secondAttribute="trailing" id="CAK-Mf-1TU"/>
                             <constraint firstAttribute="trailing" secondItem="moD-9L-EiM" secondAttribute="trailing" id="Ezu-nr-n9E"/>
                             <constraint firstAttribute="bottom" secondItem="moD-9L-EiM" secondAttribute="bottom" id="ayd-Vn-hAn"/>
+                            <constraint firstItem="moD-9L-EiM" firstAttribute="top" secondItem="Rbp-Hq-49G" secondAttribute="bottom" id="bxP-Qc-vDN"/>
                             <constraint firstItem="pHB-au-YwG" firstAttribute="leading" secondItem="Hek-qu-kd6" secondAttribute="leading" id="dkF-Qn-KP1"/>
                             <constraint firstAttribute="trailing" secondItem="pHB-au-YwG" secondAttribute="trailing" id="eEO-8b-8Nt"/>
                             <constraint firstItem="RHS-8M-FVR" firstAttribute="centerY" secondItem="Hek-qu-kd6" secondAttribute="centerY" id="enJ-jf-L43"/>
-                            <constraint firstItem="lOe-HW-5gn" firstAttribute="top" secondItem="pHB-au-YwG" secondAttribute="bottom" constant="8" id="eom-9d-4cn"/>
                             <constraint firstItem="pHB-au-YwG" firstAttribute="top" secondItem="Gwq-8t-d3G" secondAttribute="top" id="iIw-Ti-3vN"/>
-                            <constraint firstItem="lOe-HW-5gn" firstAttribute="centerX" secondItem="Hek-qu-kd6" secondAttribute="centerX" id="ng0-xt-mGb"/>
+                            <constraint firstItem="Rbp-Hq-49G" firstAttribute="leading" secondItem="Hek-qu-kd6" secondAttribute="leading" id="u80-uW-gF5"/>
                             <constraint firstItem="moD-9L-EiM" firstAttribute="leading" secondItem="Hek-qu-kd6" secondAttribute="leading" id="vgR-sb-Ml2"/>
                         </constraints>
                     </view>
@@ -3486,16 +3530,21 @@ the App!</string>
                         <outlet property="cancelButton" destination="gwm-Ba-voS" id="sZP-2j-bC3"/>
                         <outlet property="collectionView" destination="moD-9L-EiM" id="gpt-Rk-XBd"/>
                         <outlet property="confirmButton" destination="GVI-ZE-xKU" id="BQL-Lr-0HC"/>
+                        <outlet property="manuallyMoveButton" destination="sot-Lv-tdU" id="biW-VA-Uih"/>
                         <outlet property="movePhotosLabel" destination="vF4-q0-Cee" id="ezh-by-sgH"/>
                         <outlet property="movingLabel" destination="lqS-ZQ-kKE" id="nZB-wl-5MD"/>
                         <outlet property="overlayView" destination="RHS-8M-FVR" id="Epe-MP-xJB"/>
                         <outlet property="progressLabel" destination="8Mn-ME-wh7" id="RyM-qA-Ecq"/>
+                        <outlet property="promptLabel" destination="lOe-HW-5gn" id="F5Z-Md-kex"/>
                         <outlet property="segmentIndicator" destination="tdB-jj-phk" id="Q6Y-cL-e1T"/>
+                        <outlet property="tapTryAgainHeightC" destination="nTa-PA-94W" id="M0I-Bu-ngM"/>
+                        <outlet property="tapTryAgainView" destination="s63-WB-Vqm" id="hbc-85-dZi"/>
+                        <outlet property="tryAgainLabel" destination="Kzn-lF-Gee" id="8o3-vv-nMc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZYe-C8-ayo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="615.94202898550725" y="-1123.6607142857142"/>
+            <point key="canvasLocation" x="614.49275362318849" y="-1123.6607142857142"/>
         </scene>
         <!--Caching View Controller-->
         <scene sceneID="HKu-sR-xuZ">

@@ -17,13 +17,22 @@ extension ViewController {
            
             
             if !fileURLs.isEmpty { /// there are files here
+                photoObjects = realm.objects(HistoryModel.self)
+                
+                var photoArray = [HistoryModel]()
+                photoObjects?.forEach({ (photo) in
+                    photoArray.append(photo)
+                })
+                
                 photos.viewController.migrationNeeded = true
-                photos.viewController.photosToMigrate = fileURLs
+                photos.viewController.photosToMigrate = photoArray
+                photos.viewController.folderURL = globalUrl
 //                photos.viewController.showMigrationView()
                 
-                photoCategories = realm.objects(HistoryModel.self)
-                print("cats: \(photoCategories)")
-                print("count: \(photoCategories?.count)")
+                
+//                print("cats: \(photoObjects)")
+                print("fol url: \(globalUrl)")
+                print("count: \(photoObjects?.count)")
                 print("has file urls \(fileURLs.count)")
             }
             

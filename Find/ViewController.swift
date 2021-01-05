@@ -12,7 +12,7 @@ import RealmSwift
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     let realm = try! Realm()
-    var photoCategories: Results<HistoryModel>?
+    var photoObjects: Results<HistoryModel>?
     
     @IBOutlet weak var tabBarView: TabBarView!
     @IBOutlet weak var tabBarHeightC: NSLayoutConstraint!
