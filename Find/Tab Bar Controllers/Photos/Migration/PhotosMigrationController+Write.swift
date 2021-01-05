@@ -171,6 +171,7 @@ extension PhotosMigrationController {
             alertView.present()
             resetProgress()
             self.dismiss(animated: true, completion: nil)
+            completed?()
         }
     }
     
@@ -243,6 +244,7 @@ extension PhotosMigrationController {
                 highlightedBackgroundColor: SEKColor.Gray.a800.with(alpha: 0.05)
             ) { [weak self] in
                 self?.deleteErrorPhotos()
+                self?.completed?()
                 self?.dismiss(animated: true, completion: nil)
                 SwiftEntryKit.dismiss()
             }

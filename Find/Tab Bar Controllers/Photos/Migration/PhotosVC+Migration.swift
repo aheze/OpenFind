@@ -47,6 +47,20 @@ extension PhotosViewController {
                 viewController.folderURL = folderURL
                 viewController.editablePhotosToMigrate = editablePhotos /// editable so can access on background thread
                 viewController.realPhotos = photosToMigrate /// modify the real photo's assetIdenfier later
+                
+                viewController.completed = { [weak self] in
+                    guard let self = self else { return }
+                    print("Completed!")
+                    
+                    scrollView.isUserInteractionEnabled = false
+                    UIView.animate(withDuration: 0.5, animations: {
+                        scrollView.alpha = 0
+                        scrollView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                    }) { _ in
+                        scrollView.removeFromSuperview()
+                    }
+                    
+                }
                 self.present(viewController, animated: true)
             }
         }

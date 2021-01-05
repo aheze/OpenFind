@@ -22,6 +22,10 @@ class PhotosMigrationController: UIViewController {
     var realPhotos = [HistoryModel]() /// replace these later
     let realm = try! Realm()
     
+    // MARK: Once completed...
+    var completed: (() -> Void)?
+    
+    
     @IBOutlet weak var cancelButton: UIButton!
     @IBAction func cancelButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
