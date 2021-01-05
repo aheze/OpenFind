@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabBarView" customModule="Find" customModuleProvider="target">
             <connections>
                 <outlet property="backgroundView" destination="m3l-1d-bWI" id="dnq-ob-gAQ"/>
+                <outlet property="blurBackgroundView" destination="cg9-qX-9rO" id="3OE-cP-V9f"/>
                 <outlet property="blurView" destination="569-gu-a2G" id="f1U-Ol-9kJ"/>
                 <outlet property="cacheButton" destination="1BX-UY-Tml" id="hJS-f9-P4U"/>
                 <outlet property="cameraIcon" destination="10d-KH-We3" id="u8P-Fk-Nbl"/>
@@ -45,14 +46,34 @@
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m3l-1d-bWI">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="447"/>
                     <subviews>
-                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="569-gu-a2G">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bxp-3l-YpG">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="447"/>
-                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="if6-81-hyx">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="447"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </view>
-                            <blurEffect style="regular"/>
-                        </visualEffectView>
+                            <subviews>
+                                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="569-gu-a2G">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="447"/>
+                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="if6-81-hyx">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="447"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </view>
+                                    <blurEffect style="systemThickMaterial"/>
+                                </visualEffectView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cg9-qX-9rO">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="447"/>
+                                    <color key="backgroundColor" name="75Background"/>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="569-gu-a2G" firstAttribute="top" secondItem="bxp-3l-YpG" secondAttribute="top" id="4hs-S2-Yn2"/>
+                                <constraint firstAttribute="bottom" secondItem="569-gu-a2G" secondAttribute="bottom" id="62D-3c-8b9"/>
+                                <constraint firstAttribute="bottom" secondItem="cg9-qX-9rO" secondAttribute="bottom" id="CVO-vd-Do5"/>
+                                <constraint firstItem="569-gu-a2G" firstAttribute="leading" secondItem="bxp-3l-YpG" secondAttribute="leading" id="DS4-7R-c4E"/>
+                                <constraint firstAttribute="trailing" secondItem="cg9-qX-9rO" secondAttribute="trailing" id="EEx-BA-JDm"/>
+                                <constraint firstAttribute="trailing" secondItem="569-gu-a2G" secondAttribute="trailing" id="ERt-7h-CAZ"/>
+                                <constraint firstItem="cg9-qX-9rO" firstAttribute="leading" secondItem="bxp-3l-YpG" secondAttribute="leading" id="jzh-SA-MYv"/>
+                                <constraint firstItem="cg9-qX-9rO" firstAttribute="top" secondItem="bxp-3l-YpG" secondAttribute="top" id="vQ3-dd-kbg"/>
+                            </constraints>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bCs-J2-IPj">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="447"/>
                             <color key="backgroundColor" name="50Black"/>
@@ -60,14 +81,14 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="569-gu-a2G" secondAttribute="trailing" id="7Ok-Sq-hvW"/>
                         <constraint firstItem="bCs-J2-IPj" firstAttribute="leading" secondItem="m3l-1d-bWI" secondAttribute="leading" id="7fL-5S-jLl"/>
+                        <constraint firstAttribute="trailing" secondItem="bxp-3l-YpG" secondAttribute="trailing" id="F02-7q-Ik5"/>
+                        <constraint firstItem="bxp-3l-YpG" firstAttribute="leading" secondItem="m3l-1d-bWI" secondAttribute="leading" id="Nix-Ro-DsX"/>
                         <constraint firstAttribute="bottom" secondItem="bCs-J2-IPj" secondAttribute="bottom" id="PN4-Sm-IXa"/>
-                        <constraint firstAttribute="bottom" secondItem="569-gu-a2G" secondAttribute="bottom" id="XNL-6z-63d"/>
-                        <constraint firstItem="569-gu-a2G" firstAttribute="top" secondItem="m3l-1d-bWI" secondAttribute="top" id="ciI-0U-BM9"/>
+                        <constraint firstAttribute="bottom" secondItem="bxp-3l-YpG" secondAttribute="bottom" id="XRT-Bu-hYS"/>
                         <constraint firstAttribute="trailing" secondItem="bCs-J2-IPj" secondAttribute="trailing" id="e3G-Um-Ipl"/>
-                        <constraint firstItem="569-gu-a2G" firstAttribute="leading" secondItem="m3l-1d-bWI" secondAttribute="leading" id="jnq-id-n6s"/>
                         <constraint firstItem="bCs-J2-IPj" firstAttribute="top" secondItem="m3l-1d-bWI" secondAttribute="top" id="mtA-aN-Ecf"/>
+                        <constraint firstItem="bxp-3l-YpG" firstAttribute="top" secondItem="m3l-1d-bWI" secondAttribute="top" id="pF9-mw-PYJ"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCo-YF-aez" customClass="PassthroughView" customModule="Find" customModuleProvider="target">
@@ -239,6 +260,9 @@
         </namedColor>
         <namedColor name="50Black">
             <color red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="75Background">
+            <color red="1" green="1" blue="1" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="placeholderTextColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>

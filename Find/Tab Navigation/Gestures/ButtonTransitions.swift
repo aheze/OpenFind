@@ -77,6 +77,7 @@ extension ViewController {
                     blurView.effect = UIBlurEffect(style: .light)
                     tabBarView.shadeView.alpha = 0
                     tabBarView.blurView.effect = UIBlurEffect(style: .light)
+                    tabBarView.blurBackgroundView.alpha = 1
                     containerView.bringSubviewToFront(toVC.view)
                     containerView.sendSubviewToBack(camera.view)
                     
@@ -101,6 +102,7 @@ extension ViewController {
                     self.blurView.effect = nil
                     tabBarView.shadeView.alpha = 1
                     tabBarView.blurView.effect = nil
+                    tabBarView.blurBackgroundView.alpha = 0
                     containerView.sendSubviewToBack(toVC.view) /// camera view
                     containerView.bringSubviewToFront(blurContainerView)
                     
@@ -127,6 +129,7 @@ extension ViewController {
                     blurView.effect = UIBlurEffect(style: .light)
                     tabBarView.shadeView.alpha = 0
                     tabBarView.blurView.effect = UIBlurEffect(style: .light)
+                    tabBarView.blurBackgroundView.alpha = 1
                     containerView.bringSubviewToFront(blurContainerView)
                     containerView.bringSubviewToFront(toVC.view)
                     containerView.sendSubviewToBack(camera.view)
@@ -165,6 +168,7 @@ extension ViewController {
                     shadeView.backgroundColor = UIColor.blue
                     tabBarView.shadeView.alpha = 0
                     tabBarView.blurView.effect = UIBlurEffect(style: .light)
+                    tabBarView.blurBackgroundView.alpha = 1
                     print("phots")
                 case is CameraViewController:
                     print("camera")
@@ -173,6 +177,7 @@ extension ViewController {
                     shadeView.alpha = 0
                     tabBarView.shadeView.alpha = 1
                     tabBarView.blurView.effect = nil
+                    tabBarView.blurBackgroundView.alpha = 0
                 case is ListsNavController:
                     containerView.bringSubviewToFront(toVC.view)
                     blurView.effect = UIBlurEffect(style: .light)
@@ -180,6 +185,7 @@ extension ViewController {
                     shadeView.backgroundColor = UIColor.yellow
                     tabBarView.shadeView.alpha = 0
                     tabBarView.blurView.effect = UIBlurEffect(style: .light)
+                    tabBarView.blurBackgroundView.alpha = 1
                     print("listsss")
                 default:
                     print("Could not cast transition vc")

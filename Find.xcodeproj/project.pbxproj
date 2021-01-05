@@ -78,7 +78,7 @@
 		490DA75A23CBB871000AF57D /* LayerProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA74D23CBB871000AF57D /* LayerProperties.swift */; };
 		490DA75D23CBC905000AF57D /* BigMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA75C23CBC905000AF57D /* BigMenuButton.swift */; };
 		49115089235D17EB00EC0C04 /* ShutterPressed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49115088235D17EB00EC0C04 /* ShutterPressed.swift */; };
-		4911508B235D1A3E00EC0C04 /* BasicUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4911508A235D1A3E00EC0C04 /* BasicUtilities.swift */; };
+		4911508B235D1A3E00EC0C04 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4911508A235D1A3E00EC0C04 /* Utilities.swift */; };
 		4917CE8123C059F6002EA20B /* StartSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4917CE8023C059F6002EA20B /* StartSceneView.swift */; };
 		4928525623D4BD490048EC13 /* UpdateOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525523D4BD490048EC13 /* UpdateOrientation.swift */; };
 		4928525A23D617270048EC13 /* ListsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928525923D617270048EC13 /* ListsController.swift */; };
@@ -170,7 +170,6 @@
 		49E9D89224996E1A0006757C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49E9D89424996E1A0006757C /* Localizable.strings */; };
 		49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1552353FE4B0099FA62 /* BasicSetup.swift */; };
 		49F7B1582353FE7E0099FA62 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F7B1572353FE7E0099FA62 /* Component.swift */; };
-		49FC8A9224AD1E920078783D /* Projector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FC8A9124AD1E920078783D /* Projector.swift */; };
 		9F7EB9AD24508DC95B5FA75F /* Pods_Find.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206C7F74D4ED39BAC2ED69EB /* Pods_Find.framework */; };
 /* End PBXBuildFile section */
 
@@ -260,7 +259,7 @@
 		490DA74D23CBB871000AF57D /* LayerProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerProperties.swift; sourceTree = "<group>"; };
 		490DA75C23CBC905000AF57D /* BigMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigMenuButton.swift; sourceTree = "<group>"; };
 		49115088235D17EB00EC0C04 /* ShutterPressed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutterPressed.swift; sourceTree = "<group>"; };
-		4911508A235D1A3E00EC0C04 /* BasicUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicUtilities.swift; sourceTree = "<group>"; };
+		4911508A235D1A3E00EC0C04 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		4917CE8023C059F6002EA20B /* StartSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSceneView.swift; sourceTree = "<group>"; };
 		4928525523D4BD490048EC13 /* UpdateOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateOrientation.swift; sourceTree = "<group>"; };
 		4928525923D617270048EC13 /* ListsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsController.swift; sourceTree = "<group>"; };
@@ -363,7 +362,6 @@
 		49E9D89524996E1E0006757C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		49F7B1552353FE4B0099FA62 /* BasicSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSetup.swift; sourceTree = "<group>"; };
 		49F7B1572353FE7E0099FA62 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
-		49FC8A9124AD1E920078783D /* Projector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Projector.swift; sourceTree = "<group>"; };
 		7F1B04E9888AAEC98DF2E096 /* Pods-Find.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find.debug.xcconfig"; path = "Target Support Files/Pods-Find/Pods-Find.debug.xcconfig"; sourceTree = "<group>"; };
 		E05C3167AB2FF51F44B12AE3 /* Pods-Find.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find.release.xcconfig"; path = "Target Support Files/Pods-Find/Pods-Find.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -525,6 +523,15 @@
 				3CE306E0259AC4B000F1B2E2 /* State.swift */,
 			);
 			path = Gestures;
+			sourceTree = "<group>";
+		};
+		3CFBD47D25A4EE94000BCA7D /* Lifecycle */ = {
+			isa = PBXGroup;
+			children = (
+				4999AC932353A80A00AB06A7 /* AppDelegate.swift */,
+				4999AC952353A80A00AB06A7 /* SceneDelegate.swift */,
+			);
+			path = Lifecycle;
 			sourceTree = "<group>";
 		};
 		4904524A237907170046570D /* Matches */ = {
@@ -788,11 +795,8 @@
 			children = (
 				49563504243694BB0001E8C6 /* PaperOnboarding */,
 				49585DCD23ED0C9F003AB768 /* SEK */,
-				4999AC932353A80A00AB06A7 /* AppDelegate.swift */,
-				4999AC952353A80A00AB06A7 /* SceneDelegate.swift */,
-				4911508A235D1A3E00EC0C04 /* BasicUtilities.swift */,
+				4911508A235D1A3E00EC0C04 /* Utilities.swift */,
 				492A2D2524A4046200F9C4A1 /* BartyCrouch.swift */,
-				49FC8A9124AD1E920078783D /* Projector.swift */,
 				495F7DA624CBACE90053DE50 /* Info.plist */,
 				495F7DAC24CBB3970053DE50 /* InfoPlist.strings */,
 			);
@@ -872,9 +876,10 @@
 				495635292437A4860001E8C6 /* defaultSeeds.realm */,
 				3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */,
 				3C020CE4259FF5A70087AE92 /* ViewController+Migration.swift */,
+				3CFBD47D25A4EE94000BCA7D /* Lifecycle */,
 				3C4DE714259B0E960037D104 /* Components */,
-				3CE306CB259AC44A00F1B2E2 /* Tab Navigation */,
 				49E9D88D24996D8A0006757C /* Storyboards */,
+				3CE306CB259AC44A00F1B2E2 /* Tab Navigation */,
 				496937382353C219009CA41A /* Tab Bar Controllers */,
 				3C16EA81259BED7F00D73755 /* Other View Controllers */,
 				4969373B2353C25B009CA41A /* Utilities */,
@@ -1187,7 +1192,7 @@
 				490DA73F23CBAB7C000AF57D /* NewShutterButton.swift in Sources */,
 				4956351A243694BC0001E8C6 /* PageViewItem.swift in Sources */,
 				492EB4F523F61F5A007142CA /* SymbolsSectionHeader.swift in Sources */,
-				4911508B235D1A3E00EC0C04 /* BasicUtilities.swift in Sources */,
+				4911508B235D1A3E00EC0C04 /* Utilities.swift in Sources */,
 				3CE306D9259AC46400F1B2E2 /* ListsIcon.swift in Sources */,
 				495F38FC2432C8FE00A17D93 /* Carte.swift in Sources */,
 				4904524C2379072F0046570D /* UpdateMatches.swift in Sources */,
@@ -1241,7 +1246,6 @@
 				3C2858CA259CF00200BABBA7 /* ListsController+Selection.swift in Sources */,
 				495ECCA9238CF7BD00E7D966 /* HPhotoCell.swift in Sources */,
 				49563503243593860001E8C6 /* TutorialViewControllers.swift in Sources */,
-				49FC8A9224AD1E920078783D /* Projector.swift in Sources */,
 				3C020CE5259FF5A70087AE92 /* ViewController+Migration.swift in Sources */,
 				49D985B824208037005F4E92 /* CachingCancelController.swift in Sources */,
 				49D985B024188CA4005F4E92 /* NewListToolbarCell.swift in Sources */,

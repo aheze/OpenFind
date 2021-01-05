@@ -77,6 +77,7 @@ extension ViewController {
                     self.blurView.effect = UIBlurEffect(style: .light)
                     self.tabBarView.shadeView.alpha = 0
                     self.tabBarView.blurView.effect = UIBlurEffect(style: .light)
+                    self.tabBarView.blurBackgroundView.alpha = 1
                 }
                 blurAnimator?.addAnimations {
                     self.gestures.transitionAnimatorBlock?()
@@ -89,6 +90,7 @@ extension ViewController {
                     self.blurView.effect = nil
                     self.tabBarView.shadeView.alpha = 1
                     self.tabBarView.blurView.effect = nil
+                    self.tabBarView.blurBackgroundView.alpha = 0
                 }
                 blurAnimator?.addAnimations {
                     self.gestures.transitionAnimatorBlock?()
@@ -107,6 +109,7 @@ extension ViewController {
                     self.blurView.effect = UIBlurEffect(style: .light)
                     self.tabBarView.shadeView.alpha = 0
                     self.tabBarView.blurView.effect = UIBlurEffect(style: .light)
+                    self.tabBarView.blurBackgroundView.alpha = 1
                 }
                 blurAnimator?.addAnimations {
                     self.gestures.transitionAnimatorBlock?()
@@ -119,6 +122,7 @@ extension ViewController {
                     self.blurView.effect = nil
                     self.tabBarView.shadeView.alpha = 1
                     self.tabBarView.blurView.effect = nil
+                    self.tabBarView.blurBackgroundView.alpha = 0
                 }
                 blurAnimator?.addAnimations {
                     self.gestures.transitionAnimatorBlock?()
@@ -433,14 +437,17 @@ extension ViewController {
             if finishImmediately {
                 tabBarView.shadeView.alpha = 1
                 tabBarView.blurView.effect = nil
+                tabBarView.blurBackgroundView.alpha = 0
             }
             if instantly {
                 if toVC is CameraViewController {
                     tabBarView.shadeView.alpha = 1
                     tabBarView.blurView.effect = nil
+                    tabBarView.blurBackgroundView.alpha = 0
                 } else {
                     tabBarView.shadeView.alpha = 0
                     tabBarView.blurView.effect = UIBlurEffect(style: .light)
+                    tabBarView.blurBackgroundView.alpha = 1
                 }
             }
             

@@ -58,7 +58,11 @@ class TabBarView: PassthroughView {
     @IBOutlet weak var topLineView: UIView!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var shadeView: UIView!
+    
+    
     @IBOutlet weak var blurView: UIVisualEffectView!
+    @IBOutlet weak var blurBackgroundView: UIView! /// extra color for more opaque look
+    
     
     @IBOutlet weak var photosIcon: PhotosIcon!
     @IBOutlet weak var cameraIcon: CameraIcon!
@@ -96,6 +100,7 @@ class TabBarView: PassthroughView {
         cameraIcon.alpha = 0
         shadeView.alpha = 1
         blurView.effect = nil
+        blurBackgroundView.alpha = 0
         
         let timingParameters = UISpringTimingParameters(damping: 1, response: Constants.transitionDuration)
         tabAnimator = UIViewPropertyAnimator(duration: 0, timingParameters: timingParameters)

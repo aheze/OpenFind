@@ -25,6 +25,8 @@ class PhotosViewController: UIViewController {
     var allPhotos: PHFetchResult<PHAsset>? = nil
     var months = [Month]()
     
+    let screenScale = UIScreen.main.scale
+    
     // MARK: Diffable Data Source
     lazy var dataSource = makeDataSource()
     typealias DataSource = UICollectionViewDiffableDataSource<Month, PHAsset>

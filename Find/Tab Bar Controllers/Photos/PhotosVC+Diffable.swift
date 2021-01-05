@@ -32,10 +32,14 @@ extension PhotosViewController {
                 let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: self.cellReuseIdentifier,
                     for: indexPath) as? PhotoCell
-                cell?.contentView.backgroundColor = .blue
                 
                 if let url = NSURL.sd_URL(with: asset) {
-                    cell?.imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: 300, height: 300)])
+                    
+                    let cellLength = cell?.bounds.width ?? 100
+                    let imageLength = cellLength * (self.screenScale + 1)
+                    
+                    cell?.imageView.sd_imageTransition = .fade
+                    cell?.imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: imageLength, height: imageLength)])
                 }
                 return cell
             })
@@ -89,15 +93,15 @@ extension PhotosViewController {
             
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             item.contentInsets = NSDirectionalEdgeInsets(
-              top: 2,
-              leading: 2,
-              bottom: 2,
-              trailing: 2
+              top: 3,
+              leading: 3,
+              bottom: 0,
+              trailing: 0
             )
             
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: itemCount)
             let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 0, bottom: 10, trailing: 0)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 0, bottom: 3, trailing: 3)
             section.interGroupSpacing = 0
             
             // Supplementary header view setup
