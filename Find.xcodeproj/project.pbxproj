@@ -10,6 +10,8 @@
 		3C020CE5259FF5A70087AE92 /* ViewController+Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C020CE4259FF5A70087AE92 /* ViewController+Migration.swift */; };
 		3C020CE9259FF7470087AE92 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C020CE8259FF7470087AE92 /* PhotosViewController.swift */; };
 		3C020CED259FF7890087AE92 /* PhotosVC+Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C020CEC259FF7890087AE92 /* PhotosVC+Migration.swift */; };
+		3C0F5ED225A570F200549040 /* PhotosVC+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */; };
+		3C0F5ED525A5729A00549040 /* NewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED425A5729A00549040 /* NewAssets.xcassets */; };
 		3C16EA71259BE7D600D73755 /* ListsController+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C16EA70259BE7D600D73755 /* ListsController+NavBar.swift */; };
 		3C21DEE6259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */; };
 		3C2858C6259C3E4C00BABBA7 /* TabBar+SelectionControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C5259C3E4C00BABBA7 /* TabBar+SelectionControls.swift */; };
@@ -191,6 +193,8 @@
 		3C020CE4259FF5A70087AE92 /* ViewController+Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Migration.swift"; sourceTree = "<group>"; };
 		3C020CE8259FF7470087AE92 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		3C020CEC259FF7890087AE92 /* PhotosVC+Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Migration.swift"; sourceTree = "<group>"; };
+		3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Realm.swift"; sourceTree = "<group>"; };
+		3C0F5ED425A5729A00549040 /* NewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NewAssets.xcassets; sourceTree = "<group>"; };
 		3C16EA70259BE7D600D73755 /* ListsController+NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+NavBar.swift"; sourceTree = "<group>"; };
 		3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListBuilderVC+ErrorChecking.swift"; sourceTree = "<group>"; };
 		3C2858C5259C3E4C00BABBA7 /* TabBar+SelectionControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBar+SelectionControls.swift"; sourceTree = "<group>"; };
@@ -385,6 +389,7 @@
 				3C3D47C825A40170002B8BBF /* PhotosVC+Sorting.swift */,
 				3C3D47C525A40133002B8BBF /* PhotosVC+PHAssets.swift */,
 				3C3D47DF25A41AEB002B8BBF /* PhotosVC+Diffable.swift */,
+				3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */,
 				3C3D47E225A41B9E002B8BBF /* PhotosVC+Cells.swift */,
 				3C3D47D825A40A41002B8BBF /* Permissions */,
 				3CB6842F25A0085E00AE0AD6 /* Migration */,
@@ -884,6 +889,7 @@
 				3C16EA81259BED7F00D73755 /* Other View Controllers */,
 				4969373B2353C25B009CA41A /* Utilities */,
 				4999AC9C2353A81100AB06A7 /* Assets.xcassets */,
+				3C0F5ED425A5729A00549040 /* NewAssets.xcassets */,
 				3C4DE703259AD5670037D104 /* NewColors.xcassets */,
 				49B7A32C2390823C0070209F /* Colors.xcassets */,
 				3C2C3E9525A11749002C3D11 /* PreloadImages.xcassets */,
@@ -1031,6 +1037,7 @@
 				49E9D89224996E1A0006757C /* Localizable.strings in Resources */,
 				3C2C3E9625A11749002C3D11 /* PreloadImages.xcassets in Resources */,
 				495DAD3624A6B2E500D5F844 /* FindBar.xib in Resources */,
+				3C0F5ED525A5729A00549040 /* NewAssets.xcassets in Resources */,
 				495F7DAA24CBB3970053DE50 /* InfoPlist.strings in Resources */,
 				49D985B124188CA4005F4E92 /* NewListToolbarCell.xib in Resources */,
 				3CB6842D259FF9A700AE0AD6 /* SegmentedSlider.xib in Resources */,
@@ -1179,6 +1186,7 @@
 				49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */,
 				3C4DE6FD259AD3FF0037D104 /* CacheIcon.swift in Sources */,
 				49301BF02400D4FF00B4780B /* HelpControllers.swift in Sources */,
+				3C0F5ED225A570F200549040 /* PhotosVC+Realm.swift in Sources */,
 				49563522243694BC0001E8C6 /* PaperOnboarding.swift in Sources */,
 				4972B40E23F117C500843537 /* GeneralTableviewCell.swift in Sources */,
 				495F39012433FF1600A17D93 /* LaunchViewController.swift in Sources */,

@@ -12,6 +12,7 @@ import RealmSwift
 //class EditableH
 class HistoryModel: Object {
     @objc dynamic var filePath = ""
+    @objc dynamic var isTakenLocally = false /// if photo was saved from Find app
     @objc dynamic var assetIdentifier = ""
     @objc dynamic var dateCreated = Date()
     let contents = List<SingleHistoryContent>()
@@ -21,6 +22,7 @@ class HistoryModel: Object {
 
 class EditableHistoryModel: NSObject {
     var filePath = ""
+    var isTakenLocally = false /// if photo was saved from Find app
     var assetIdentifier = ""
     var dateCreated = Date()
     var contents = [EditableSingleHistoryContent]()

@@ -26,14 +26,14 @@ extension PhotosViewController {
         // 1
         let dataSource = DataSource(
             collectionView: collectionView,
-            cellProvider: { (collectionView, indexPath, asset) ->
+            cellProvider: { (collectionView, indexPath, findPhoto) ->
                 UICollectionViewCell? in
                 // 2
                 let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: self.cellReuseIdentifier,
-                    for: indexPath) as? PhotoCell
+                    for: indexPath) as? ImageCell
                 
-                if let url = NSURL.sd_URL(with: asset) {
+                if let url = NSURL.sd_URL(with: findPhoto.asset) {
                     
                     let cellLength = cell?.bounds.width ?? 100
                     let imageLength = cellLength * (self.screenScale + 1)
@@ -68,7 +68,7 @@ extension PhotosViewController {
         // 3
         snapshot.appendSections(months)
         months.forEach { month in
-            snapshot.appendItems(month.assets, toSection: month)
+            snapshot.appendItems(month.photos, toSection: month)
         }
         // 5
         

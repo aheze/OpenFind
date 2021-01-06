@@ -44,14 +44,33 @@ extension PhotosViewController {
             if let photos = allPhotos {
                 photos.enumerateObjects { (asset, index, stop) in
                     
+                    var matchingRealmPhoto: HistoryModel?
+                    if let photoObjects = self.photoObjects {
+                        for object in photoObjects {
+                            if object.assetIdentifier == asset.localIdentifier {
+                                print("matching id")
+                                matchingRealmPhoto = object
+                                break
+                            }
+                        }
+                    }
+                    
+                    var findPhoto = FindPhoto()
+                    if let matchingPhoto = matchingRealmPhoto {
+                        findPhoto.model = matchingPhoto
+                    }
+                    findPhoto.asset = asset
+                    
                     if let photoDateCreated = asset.creationDate {
                         let sameMonths = self.months.filter( { $0.monthDate.isEqual(to: photoDateCreated, toGranularity: .month) })
                         if let firstOfSameMonth = sameMonths.first {
-                            firstOfSameMonth.assets.append(asset)
+//                            firstOfSameMonth.assets.append(asset)
+                            firstOfSameMonth.photos.append(findPhoto)
                         } else {
                             let newMonth = Month()
                             newMonth.monthDate = photoDateCreated
-                            newMonth.assets.append(asset)
+//                            newMonth.assets.append(asset)
+                            newMonth.photos.append(findPhoto)
                             self.months.append(newMonth)
                         }
                         

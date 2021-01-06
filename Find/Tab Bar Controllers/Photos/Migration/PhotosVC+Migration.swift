@@ -41,6 +41,8 @@ extension PhotosViewController {
                     let editablePhoto = EditableHistoryModel()
                     editablePhoto.dateCreated = photo.dateCreated
                     editablePhoto.filePath = photo.filePath
+                    editablePhoto.isDeepSearched = photo.isDeepSearched
+                    editablePhoto.isHearted = photo.isHearted
                     editablePhotos.append(editablePhoto)
                 }
                 

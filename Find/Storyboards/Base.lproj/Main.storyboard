@@ -3261,30 +3261,7 @@ the App!</string>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="kGC-7l-4HT" customClass="PhotoCell" customModule="Find" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="LfO-YE-8ak">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9PI-Yv-AWO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                </imageView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="9PI-Yv-AWO" firstAttribute="top" secondItem="LfO-YE-8ak" secondAttribute="top" id="6wi-cQ-0H8"/>
-                                                <constraint firstAttribute="bottom" secondItem="9PI-Yv-AWO" secondAttribute="bottom" id="FR8-d8-YA4"/>
-                                                <constraint firstAttribute="trailing" secondItem="9PI-Yv-AWO" secondAttribute="trailing" id="ohv-uj-sVY"/>
-                                                <constraint firstItem="9PI-Yv-AWO" firstAttribute="leading" secondItem="LfO-YE-8ak" secondAttribute="leading" id="rAZ-FU-Hws"/>
-                                            </constraints>
-                                        </collectionViewCellContentView>
-                                        <connections>
-                                            <outlet property="imageView" destination="9PI-Yv-AWO" id="9yH-ay-VqY"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoHeader" id="Kiu-ik-VRh" customClass="PhotoHeader" customModule="Find" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3319,7 +3296,7 @@ the App!</string>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="0iz-9s-4iE" secondAttribute="trailing" id="CM8-mH-qEP"/>
                             <constraint firstItem="0iz-9s-4iE" firstAttribute="leading" secondItem="LAd-sS-QXd" secondAttribute="leading" id="Cxz-Ho-7I4"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="0XE-et-vDj" secondAttribute="bottom" constant="60" id="I3k-SL-fnM"/>
+                            <constraint firstAttribute="bottom" secondItem="0XE-et-vDj" secondAttribute="bottom" constant="94" id="I3k-SL-fnM"/>
                             <constraint firstItem="y9x-GI-FZm" firstAttribute="trailing" secondItem="0XE-et-vDj" secondAttribute="trailing" constant="20" id="Pgn-0a-37t"/>
                             <constraint firstItem="0iz-9s-4iE" firstAttribute="top" secondItem="LAd-sS-QXd" secondAttribute="top" id="esD-iD-bTd"/>
                             <constraint firstAttribute="bottom" secondItem="0iz-9s-4iE" secondAttribute="bottom" id="iZz-Ot-JK8"/>
@@ -3329,6 +3306,7 @@ the App!</string>
                     <connections>
                         <outlet property="collectionView" destination="0iz-9s-4iE" id="LLE-S0-QeL"/>
                         <outlet property="segmentedSlider" destination="0XE-et-vDj" id="Dif-0H-LbJ"/>
+                        <outlet property="segmentedSliderBottomC" destination="I3k-SL-fnM" id="KJ8-2E-Oeq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cyf-3f-e0g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -95,7 +95,7 @@ class TabBarView: PassthroughView {
         } else {
             containerHeightC.constant = 50
         }
-        
+    
         topLineView.alpha = 0
         cameraIcon.alpha = 0
         shadeView.alpha = 1

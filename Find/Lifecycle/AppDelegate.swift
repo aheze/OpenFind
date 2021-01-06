@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     migration.enumerateObjects(ofType: HistoryModel.className()) { oldObject, newObject in
                         newObject!["assetIdentifier"] = ""
+                        newObject!["isTakenLocally"] = true
                     }
                     // Nothing to do!
                     // Realm will automatically detect new properties and removed properties

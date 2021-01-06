@@ -114,6 +114,17 @@ extension PhotosMigrationController: UICollectionViewDelegate, UICollectionViewD
         cell.imageView.sd_imageTransition = .fade
         cell.imageView.sd_setImage(with: url, placeholderImage: nil, context: [.imageThumbnailPixelSize : thumbnailSize])
         
+        if photo.isDeepSearched {
+            print("Searched")
+            cell.cacheImageView.image = UIImage(named: "CacheActive-Light")
+        } else {
+            cell.cacheImageView.image = nil
+        }
+        if photo.isHearted {
+            cell.starImageView.image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate)
+            cell.starImageView.tintColor = UIColor(named: "Gold")
+        }
+        
         return cell
     }
     

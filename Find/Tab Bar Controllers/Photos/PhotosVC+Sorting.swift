@@ -13,7 +13,8 @@ class Month: Hashable {
     
     var id = UUID()
     var monthDate = Date()
-    var assets = [PHAsset]()
+//    var assets = [PHAsset]()
+    var photos = [FindPhoto]()
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
@@ -22,4 +23,9 @@ class Month: Hashable {
     static func == (lhs: Month, rhs: Month) -> Bool {
         lhs.id == rhs.id
     }
+}
+
+class FindPhoto: NSObject {
+    var asset = PHAsset()
+    var model = HistoryModel()
 }
