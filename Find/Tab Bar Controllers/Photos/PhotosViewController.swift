@@ -37,7 +37,7 @@ class PhotosViewController: UIViewController {
     lazy var dataSource = makeDataSource()
     typealias DataSource = UICollectionViewDiffableDataSource<Month, FindPhoto>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Month, FindPhoto>
-    let cellReuseIdentifier = "PhotoCell"
+    let cellReuseIdentifier = "ImageCell"
     let headerReuseIdentifier = "PhotoHeader"
    
     
@@ -57,7 +57,7 @@ class PhotosViewController: UIViewController {
         
         setUpSDWebImage()
         
-        self.collectionView.register(UINib(nibName: "ImageCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
+        collectionView.register(UINib(nibName: "ImageCell", bundle: nil), forCellWithReuseIdentifier: cellReuseIdentifier)
         
         
 //        collectionView.delegate = self

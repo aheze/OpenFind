@@ -12,6 +12,7 @@ import Photos
 import SwiftEntryKit
 
 extension PhotosMigrationController {
+    
     func writeToPhotos(editablePhotos: [EditableHistoryModel], baseURL: URL) {
         self.isModalInPresentation = true
         cancelButton.isEnabled = false
@@ -42,7 +43,6 @@ extension PhotosMigrationController {
                     editablePhotosWithErrors.append(editablePhoto)
                     let readableError = String(describing: error.localizedDescription)
                     errorMessages.append(readableError)
-                    print("error making data: \(error)")
                 }
                 
                 guard let data = photoData else {
@@ -61,9 +61,7 @@ extension PhotosMigrationController {
                     creationRequest.addResource(with: .photo, data: data, options: nil)
                     if let identifier = creationRequest.placeholderForCreatedAsset?.localIdentifier {
                         photoIdentifier = identifier
-                        print("added, id: \(identifier), \(creationRequest.placeholderForCreatedAsset)")
                     } else {
-                        print("no identifier")
                     }
                 }) { (success, error) in
                     
@@ -71,14 +69,12 @@ extension PhotosMigrationController {
                         success,
                         let identifier = photoIdentifier
                     {
-                        print("saved properly")
                         editablePhoto.assetIdentifier = identifier
                         finishedEditablePhotos.append(editablePhoto)
                     } else {
                         editablePhotosWithErrors.append(editablePhoto)
                         let readableError = String(describing: error?.localizedDescription)
                         errorMessages.append(readableError)
-                        print("Error saving asset to library:\(readableError)")
                     }
                     
                     self.dispatchSemaphore.signal() /// signal and animate number completed regardless
@@ -89,18 +85,12 @@ extension PhotosMigrationController {
                 
                 self.dispatchSemaphore.wait()
             }
-            print("Loop done")
-            print("with errors: \(editablePhotosWithErrors)")
-            print("error messages: \(errorMessages)")
-            print("finishedEditablePhotos: \(finishedEditablePhotos)")
-            
             
             DispatchQueue.main.async {
                 self.finish(editablePhotosWithErrors: editablePhotosWithErrors, errorMessages: errorMessages, finishedEditablePhotos: finishedEditablePhotos)
             }
             
         }
-        print("after async")
     }
     
     func savedAnotherImage() {
@@ -135,8 +125,6 @@ extension PhotosMigrationController {
             }
         }
         
-        
-//        if !editablePhotosWithErrors.isEmpty {
         if !editablePhotosWithErrors.isEmpty {
             resetProgress()
             tryAgain = true

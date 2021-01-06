@@ -18,37 +18,45 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="331-bI-iaT">
                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                 </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0vG-yK-i3D">
+                    <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
+                </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WI2-MS-Um0">
-                    <rect key="frame" x="68" y="8" width="24" height="24"/>
+                    <rect key="frame" x="5" y="5" width="20" height="20"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="24" id="AwM-Az-4oO"/>
-                        <constraint firstAttribute="width" constant="24" id="Otf-Oj-reE"/>
+                        <constraint firstAttribute="height" constant="20" id="enp-m7-YOD"/>
+                        <constraint firstAttribute="width" constant="20" id="hc5-3x-IWe"/>
                     </constraints>
                 </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3xd-Ac-UWi">
-                    <rect key="frame" x="8" y="8" width="24" height="24"/>
+                    <rect key="frame" x="75" y="5" width="20" height="20"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="24" id="Cvx-tf-HdV"/>
-                        <constraint firstAttribute="height" constant="24" id="PfB-fD-Xyo"/>
+                        <constraint firstAttribute="height" constant="20" id="eUU-9X-MZz"/>
+                        <constraint firstAttribute="width" constant="20" id="kd0-N4-H6O"/>
                     </constraints>
                 </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="WI2-MS-Um0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Dqc-3b-cck"/>
-                <constraint firstAttribute="trailing" secondItem="WI2-MS-Um0" secondAttribute="trailing" constant="8" id="Jqv-Nq-d62"/>
-                <constraint firstItem="3xd-Ac-UWi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Z0g-kJ-4Is"/>
-                <constraint firstItem="3xd-Ac-UWi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="ZL2-LQ-Nh3"/>
+                <constraint firstItem="0vG-yK-i3D" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8ud-ap-1Cc"/>
+                <constraint firstItem="WI2-MS-Um0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="5" id="X7V-56-egu"/>
+                <constraint firstAttribute="trailing" secondItem="3xd-Ac-UWi" secondAttribute="trailing" constant="5" id="eLf-xO-Fo3"/>
                 <constraint firstItem="331-bI-iaT" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="nOz-uF-Olc"/>
+                <constraint firstAttribute="trailing" secondItem="0vG-yK-i3D" secondAttribute="trailing" id="nfb-7U-tgK"/>
                 <constraint firstItem="331-bI-iaT" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="qFa-FU-gmJ"/>
+                <constraint firstItem="0vG-yK-i3D" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="qih-cQ-DsS"/>
+                <constraint firstItem="3xd-Ac-UWi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="sPk-Jg-YNE"/>
                 <constraint firstItem="331-bI-iaT" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="slp-e3-L9R"/>
                 <constraint firstItem="331-bI-iaT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="wCj-p8-Dq0"/>
+                <constraint firstItem="WI2-MS-Um0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="x57-VE-Bm8"/>
+                <constraint firstItem="0vG-yK-i3D" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.5" id="ydz-Qk-2f2"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="cacheImageView" destination="3xd-Ac-UWi" id="5sZ-1x-VvL"/>
                 <outlet property="imageView" destination="331-bI-iaT" id="Rx6-4t-jQx"/>
+                <outlet property="shadowImageView" destination="0vG-yK-i3D" id="j8w-Pd-YoV"/>
                 <outlet property="starImageView" destination="WI2-MS-Um0" id="u4U-fR-hdG"/>
             </connections>
             <point key="canvasLocation" x="-62.318840579710148" y="103.79464285714285"/>

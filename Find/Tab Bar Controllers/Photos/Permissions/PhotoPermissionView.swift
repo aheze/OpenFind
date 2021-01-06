@@ -14,6 +14,7 @@ enum PermissionAction {
     case goToSettings
     case restricted
     case allowed
+    case limited
 }
 class PhotoPermissionView: UIView {
     
@@ -76,7 +77,7 @@ class PhotoPermissionView: UIView {
         case .restricted:
             allowAccessButton.isEnabled = false
             descriptionLabel.text = "Find is unable to access the Photo library"
-        case .allowed:
+        case .allowed, .limited:
             break
         }
     }

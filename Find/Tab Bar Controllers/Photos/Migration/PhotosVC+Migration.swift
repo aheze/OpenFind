@@ -54,6 +54,10 @@ extension PhotosViewController {
                     guard let self = self else { return }
                     print("Completed!")
                     
+//                    collectionView.
+//                    applySnapshot(animatingDifferences: false)
+                    
+                    self.fetchAssets()
                     scrollView.isUserInteractionEnabled = false
                     UIView.animate(withDuration: 0.5, animations: {
                         scrollView.alpha = 0

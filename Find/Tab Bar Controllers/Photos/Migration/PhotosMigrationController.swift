@@ -37,8 +37,11 @@ class PhotosMigrationController: UIViewController {
     var tryAgain = false
     @IBOutlet weak var confirmButton: UIButton!
     @IBAction func confirmButtonPressed(_ sender: Any) {
-        writeToPhotos(editablePhotos: editablePhotosToMigrate, baseURL: folderURL)
+        getPermissionsAndWrite()
     }
+    
+    // MARK: Get permission
+//    var permissionAction = PermissionAction.notDetermined
     
     
     // MARK: Error handling views
@@ -115,7 +118,6 @@ extension PhotosMigrationController: UICollectionViewDelegate, UICollectionViewD
         cell.imageView.sd_setImage(with: url, placeholderImage: nil, context: [.imageThumbnailPixelSize : thumbnailSize])
         
         if photo.isDeepSearched {
-            print("Searched")
             cell.cacheImageView.image = UIImage(named: "CacheActive-Light")
         } else {
             cell.cacheImageView.image = nil
@@ -123,6 +125,11 @@ extension PhotosMigrationController: UICollectionViewDelegate, UICollectionViewD
         if photo.isHearted {
             cell.starImageView.image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate)
             cell.starImageView.tintColor = UIColor(named: "Gold")
+        }
+        if photo.isDeepSearched || photo.isHearted {
+            cell.shadowImageView.image = UIImage(named: "DownShadow")
+        } else {
+            cell.shadowImageView.image = nil
         }
         
         return cell

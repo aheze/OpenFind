@@ -10,6 +10,7 @@ import UIKit
 
 class ImageCell: UICollectionViewCell {
     
+    @IBOutlet weak var shadowImageView: UIImageView!
     @IBOutlet weak var cacheImageView: UIImageView!
     @IBOutlet weak var starImageView: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
