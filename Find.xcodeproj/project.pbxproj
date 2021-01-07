@@ -20,6 +20,7 @@
 		3C2C3E9325A1152F002C3D11 /* PhotosMigrationController+Write.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */; };
 		3C2C3E9625A11749002C3D11 /* PreloadImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9525A11749002C3D11 /* PreloadImages.xcassets */; };
 		3C2C3E9925A11CD6002C3D11 /* ANSegmentIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */; };
+		3C35399225A6AECF00CB0CF9 /* PhotosVC+CustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C35399125A6AECF00CB0CF9 /* PhotosVC+CustomLayout.swift */; };
 		3C369709259EEFE500A6544A /* PhotosMigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C369708259EEFE500A6544A /* PhotosMigrationView.swift */; };
 		3C36970C259EEFF500A6544A /* PhotosMigrationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C36970B259EEFF500A6544A /* PhotosMigrationView.xib */; };
 		3C389ED3259BA0D5007DB33B /* ListBuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */; };
@@ -204,6 +205,7 @@
 		3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosMigrationController+Write.swift"; sourceTree = "<group>"; };
 		3C2C3E9525A11749002C3D11 /* PreloadImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PreloadImages.xcassets; sourceTree = "<group>"; };
 		3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSegmentIndicator.swift; sourceTree = "<group>"; };
+		3C35399125A6AECF00CB0CF9 /* PhotosVC+CustomLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+CustomLayout.swift"; sourceTree = "<group>"; };
 		3C369708259EEFE500A6544A /* PhotosMigrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationView.swift; sourceTree = "<group>"; };
 		3C36970B259EEFF500A6544A /* PhotosMigrationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotosMigrationView.xib; sourceTree = "<group>"; };
 		3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBuilderViewController.swift; sourceTree = "<group>"; };
@@ -393,6 +395,7 @@
 				3C3D47DF25A41AEB002B8BBF /* PhotosVC+Diffable.swift */,
 				3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */,
 				3C3D47E225A41B9E002B8BBF /* PhotosVC+Cells.swift */,
+				3C35399125A6AECF00CB0CF9 /* PhotosVC+CustomLayout.swift */,
 				3C3D47D825A40A41002B8BBF /* Permissions */,
 				3CB6842F25A0085E00AE0AD6 /* Migration */,
 				3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */,
@@ -1214,6 +1217,7 @@
 				3C6EE6B425A2AB350078462A /* CreditsView.swift in Sources */,
 				4953F3C92417344900690E53 /* ListToolBar.swift in Sources */,
 				490DA74F23CBB871000AF57D /* JJFloatingActionButtonState.swift in Sources */,
+				3C35399225A6AECF00CB0CF9 /* PhotosVC+CustomLayout.swift in Sources */,
 				3CE306E4259AC4B000F1B2E2 /* GestureTransitions.swift in Sources */,
 				4952F0C2240B1DD00068564F /* SearchCell.swift in Sources */,
 				49BC782223C3E1BF003D9904 /* TextViewRounded.swift in Sources */,

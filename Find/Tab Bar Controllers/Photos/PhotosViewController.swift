@@ -25,7 +25,9 @@ class PhotosViewController: UIViewController {
     // MARK: Photo loading
     var hasFullAccess = false
     var allPhotos: PHFetchResult<PHAsset>? = nil
+    
     var allMonths = [Month]() /// all photos
+    
     var monthsToDisplay = [Month]() /// shown photos, including filters
     
     // MARK: Realm photo matching + loading
@@ -61,6 +63,11 @@ class PhotosViewController: UIViewController {
         
         setUpSDWebImage()
         
+//        if let layout = collectionView.collectionViewLayout as? InvertedStackLayout {
+//                layout.layoutDelegate = self
+//            }
+        
+        
         collectionView.register(UINib(nibName: "ImageCell", bundle: nil), forCellWithReuseIdentifier: cellReuseIdentifier)
         
         
@@ -76,13 +83,13 @@ class PhotosViewController: UIViewController {
         getSliderCallback()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if let lastMonth = monthsToDisplay.last, let lastPhoto = lastMonth.photos.last {
-            if let lastIndex = dataSource.indexPath(for: lastPhoto) {
-                print("scrolling")
-                collectionView.scrollToItem(at: lastIndex, at: .bottom, animated: false)
-            }
-        }
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        if let lastMonth = monthsToDisplay.last, let lastPhoto = lastMonth.photos.last {
+//            if let lastIndex = dataSource.indexPath(for: lastPhoto) {
+//                print("scrolling")
+//                collectionView.scrollToItem(at: lastIndex, at: .bottom, animated: false)
+//            }
+//        }
+//    }
 }

@@ -39,9 +39,15 @@ extension PhotosViewController {
             showPermissionView(action: permissionAction)
         } else {
             let fetchOptions = PHFetchOptions()
+            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
             allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
             
             if let photos = allPhotos {
+                
+                var totalMonths = [Month]()
+                
+                var mutableMonths = [MutableMonth]()
+                
                 photos.enumerateObjects { (asset, index, stop) in
                     
                     var matchingRealmPhoto: HistoryModel?
@@ -62,22 +68,46 @@ extension PhotosViewController {
                     findPhoto.asset = asset
                     
                     if let photoDateCreated = asset.creationDate {
-                        let sameMonths = self.allMonths.filter( { $0.monthDate.isEqual(to: photoDateCreated, toGranularity: .month) })
+                        let sameMonths = mutableMonths.filter( { $0.monthDate.isEqual(to: photoDateCreated, toGranularity: .month) })
                         if let firstOfSameMonth = sameMonths.first {
-//                            firstOfSameMonth.assets.append(asset)
                             firstOfSameMonth.photos.append(findPhoto)
+                            print("same first")
                         } else {
-                            let newMonth = Month()
+                            let newMonth = MutableMonth()
                             newMonth.monthDate = photoDateCreated
-//                            newMonth.assets.append(asset)
                             newMonth.photos.append(findPhoto)
-                            self.allMonths.append(newMonth)
+                            mutableMonths.append(newMonth)
+                            print("new month")
                         }
-                        
                     }
                     
+                    
+                    
+//                    if let photoDateCreated = asset.creationDate {
+//                        let sameMonths = totalMonths.filter( { $0.monthDate.isEqual(to: photoDateCreated, toGranularity: .month) })
+//                        if let firstOfSameMonth = sameMonths.first {
+////                            firstOfSameMonth.assets.append(asset)
+//                            firstOfSameMonth.photos.append(findPhoto)
+//                        } else {
+//                            let newMonth = Month()
+//                            newMonth.monthDate = photoDateCreated
+////                            newMonth.assets.append(asset)
+//                            newMonth.photos.append(findPhoto)
+//                            totalMonths.append(newMonth)
+//                        }
+//
+//                    }
+                    
                 }
-                monthsToDisplay = allMonths
+                print("-------")
+                for mutableMonth in mutableMonths {
+                    print("Loop thorugh")
+                    let realMonth = Month(monthDate: mutableMonth.monthDate, photos: mutableMonth.photos)
+                    totalMonths.append(realMonth)
+                }
+                
+                allMonths = totalMonths
+                monthsToDisplay = totalMonths
                 applySnapshot(animatingDifferences: false)
             }
         }

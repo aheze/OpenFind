@@ -11,6 +11,12 @@ import SDWebImage
 import SDWebImagePhotosPlugin
 
 extension PhotosViewController {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+      super.viewWillTransition(to: size, with: coordinator)
+      coordinator.animate(alongsideTransition: { context in
+        self.collectionView.collectionViewLayout.invalidateLayout()
+      }, completion: nil)
+    }
     func setUpSDWebImage() {
         //Supports HTTP URL as well as Photos URL globally
         SDImageLoadersManager.shared.loaders = [SDWebImageDownloader.shared, SDImagePhotosLoader.shared]
@@ -34,25 +40,25 @@ extension PhotosViewController {
                     for: indexPath) as? ImageCell
                 
                 if let url = NSURL.sd_URL(with: findPhoto.asset) {
-                    
+//                    cell?.backgroundColor = .red
                     let cellLength = cell?.bounds.width ?? 100
                     let imageLength = cellLength * (self.screenScale + 1)
-                    
+
                     cell?.imageView.sd_imageTransition = .fade
                     cell?.imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: imageLength, height: imageLength)])
-                    
-                    if findPhoto.model.isDeepSearched {
+
+                    if let model = findPhoto.model, model.isDeepSearched {
                         cell?.cacheImageView.image = UIImage(named: "CacheActive-Light")
                     } else {
                         cell?.cacheImageView.image = nil
                     }
-                    if findPhoto.model.isHearted {
+                    if let model = findPhoto.model, model.isHearted {
                         cell?.starImageView.image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate)
 //                        cell?.starImageView.tintColor = UIColor(named: "Gold")
                     } else {
                         cell?.starImageView.image = nil
                     }
-                    if findPhoto.model.isDeepSearched || findPhoto.model.isHearted {
+                    if let model = findPhoto.model, (model.isDeepSearched || model.isHearted) {
                         cell?.shadowImageView.image = UIImage(named: "DownShadow")
                     } else {
                         cell?.shadowImageView.image = nil
