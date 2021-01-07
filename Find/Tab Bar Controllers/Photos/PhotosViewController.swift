@@ -25,7 +25,8 @@ class PhotosViewController: UIViewController {
     // MARK: Photo loading
     var hasFullAccess = false
     var allPhotos: PHFetchResult<PHAsset>? = nil
-    var months = [Month]()
+    var allMonths = [Month]() /// all photos
+    var monthsToDisplay = [Month]() /// shown photos, including filters
     
     // MARK: Realm photo matching + loading
     let realm = try! Realm()
@@ -49,6 +50,9 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        getRealmObjects()
+        
         if migrationNeeded {
             showMigrationView(photosToMigrate: photosToMigrate, folderURL: folderURL)
         } else {
@@ -68,5 +72,17 @@ class PhotosViewController: UIViewController {
         collectionView.contentInset.bottom = 16 + segmentedSlider.bounds.height + bottomInset
         collectionView.verticalScrollIndicatorInsets.bottom = bottomInset
         segmentedSliderBottomC.constant = 8 + bottomInset
+        
+        getSliderCallback()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let lastMonth = monthsToDisplay.last, let lastPhoto = lastMonth.photos.last {
+            if let lastIndex = dataSource.indexPath(for: lastPhoto) {
+                print("scrolling")
+                collectionView.scrollToItem(at: lastIndex, at: .bottom, animated: false)
+            }
+        }
     }
 }

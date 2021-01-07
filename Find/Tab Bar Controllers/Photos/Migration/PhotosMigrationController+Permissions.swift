@@ -42,12 +42,17 @@ extension PhotosMigrationController {
                 getPhotoAccess()
             }
         case .goToSettings:
-            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                return
-            }
-            if UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl)
-            }
+            let alert = UIAlertController(title: "Allow Access to Photo Library", message: "Find needs permission to move your photos", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Go to Settings", style: UIAlertAction.Style.default, handler: { _ in
+                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                    return
+                }
+                if UIApplication.shared.canOpenURL(settingsUrl) {
+                    UIApplication.shared.open(settingsUrl)
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
         case .restricted:
             let alert = UIAlertController(title: "Restricted", message: "Find could not access your photo library.", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
@@ -64,23 +69,6 @@ extension PhotosMigrationController {
             if status == .authorized || status == .limited {
                 self.getPermissionsAndWrite()
             }
-//            switch status {
-//            case .notDetermined:
-//                print("not determined")
-//                self.permissionAction = .notDetermined
-//            case .restricted:
-//                print("restricted")
-//                self.permissionAction = .restricted
-//            case .denied:
-//                print("denied")
-//                self.permissionAction = .goToSettings
-//            case .authorized:
-//                self.permissionAction = .allowed
-//            case .limited:
-//                self.permissionAction = .limited
-//            @unknown default:
-//                print("default")
-//            }
         }
     }
     
@@ -89,23 +77,6 @@ extension PhotosMigrationController {
             if status == .authorized {
                 self.getPermissionsAndWrite()
             }
-//            switch status {
-//            case .notDetermined:
-//                print("not determined")
-//                self.permissionAction = .notDetermined
-//            case .restricted:
-//                print("restricted")
-//                self.permissionAction = .restricted
-//            case .denied:
-//                print("denied")
-//                self.permissionAction = .goToSettings
-//            case .authorized:
-//                self.permissionAction = .allowed
-//            case .limited:
-//                self.permissionAction = .limited
-//            @unknown default:
-//                print("default")
-//            }
         }
     }
 

@@ -40,6 +40,23 @@ extension PhotosViewController {
                     
                     cell?.imageView.sd_imageTransition = .fade
                     cell?.imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: imageLength, height: imageLength)])
+                    
+                    if findPhoto.model.isDeepSearched {
+                        cell?.cacheImageView.image = UIImage(named: "CacheActive-Light")
+                    } else {
+                        cell?.cacheImageView.image = nil
+                    }
+                    if findPhoto.model.isHearted {
+                        cell?.starImageView.image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate)
+//                        cell?.starImageView.tintColor = UIColor(named: "Gold")
+                    } else {
+                        cell?.starImageView.image = nil
+                    }
+                    if findPhoto.model.isDeepSearched || findPhoto.model.isHearted {
+                        cell?.shadowImageView.image = UIImage(named: "DownShadow")
+                    } else {
+                        cell?.shadowImageView.image = nil
+                    }
                 }
                 return cell
             })
@@ -66,8 +83,8 @@ extension PhotosViewController {
         // 2
         var snapshot = Snapshot()
         // 3
-        snapshot.appendSections(months)
-        months.forEach { month in
+        snapshot.appendSections(monthsToDisplay)
+        monthsToDisplay.forEach { month in
             snapshot.appendItems(month.photos, toSection: month)
         }
         // 5

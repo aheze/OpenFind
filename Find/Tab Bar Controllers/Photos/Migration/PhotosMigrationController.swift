@@ -124,7 +124,8 @@ extension PhotosMigrationController: UICollectionViewDelegate, UICollectionViewD
         }
         if photo.isHearted {
             cell.starImageView.image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate)
-            cell.starImageView.tintColor = UIColor(named: "Gold")
+        } else {
+            cell.starImageView.image = nil
         }
         if photo.isDeepSearched || photo.isHearted {
             cell.shadowImageView.image = UIImage(named: "DownShadow")

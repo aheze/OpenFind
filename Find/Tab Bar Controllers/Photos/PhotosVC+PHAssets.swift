@@ -55,14 +55,14 @@ extension PhotosViewController {
                         }
                     }
                     
-                    var findPhoto = FindPhoto()
+                    let findPhoto = FindPhoto()
                     if let matchingPhoto = matchingRealmPhoto {
                         findPhoto.model = matchingPhoto
                     }
                     findPhoto.asset = asset
                     
                     if let photoDateCreated = asset.creationDate {
-                        let sameMonths = self.months.filter( { $0.monthDate.isEqual(to: photoDateCreated, toGranularity: .month) })
+                        let sameMonths = self.allMonths.filter( { $0.monthDate.isEqual(to: photoDateCreated, toGranularity: .month) })
                         if let firstOfSameMonth = sameMonths.first {
 //                            firstOfSameMonth.assets.append(asset)
                             firstOfSameMonth.photos.append(findPhoto)
@@ -71,13 +71,13 @@ extension PhotosViewController {
                             newMonth.monthDate = photoDateCreated
 //                            newMonth.assets.append(asset)
                             newMonth.photos.append(findPhoto)
-                            self.months.append(newMonth)
+                            self.allMonths.append(newMonth)
                         }
                         
                     }
                     
                 }
-                
+                monthsToDisplay = allMonths
                 applySnapshot(animatingDifferences: false)
             }
         }
