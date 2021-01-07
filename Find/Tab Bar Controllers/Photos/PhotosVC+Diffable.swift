@@ -40,7 +40,6 @@ extension PhotosViewController {
                     for: indexPath) as? ImageCell
                 
                 if let url = NSURL.sd_URL(with: findPhoto.asset) {
-//                    cell?.backgroundColor = .red
                     let cellLength = cell?.bounds.width ?? 100
                     let imageLength = cellLength * (self.screenScale + 1)
 
@@ -54,7 +53,6 @@ extension PhotosViewController {
                     }
                     if let model = findPhoto.model, model.isHearted {
                         cell?.starImageView.image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate)
-//                        cell?.starImageView.tintColor = UIColor(named: "Gold")
                     } else {
                         cell?.starImageView.image = nil
                     }
