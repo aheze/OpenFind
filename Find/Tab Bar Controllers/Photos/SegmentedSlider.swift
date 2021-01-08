@@ -114,6 +114,9 @@ class SegmentedSlider: UIView {
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         blurView.clipsToBounds = true
+        
+        blurView.layer.borderWidth = 0.1
+        blurView.layer.borderColor = UIColor.secondaryLabel.cgColor
     }
     
     override func layoutSubviews() {

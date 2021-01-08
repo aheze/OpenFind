@@ -77,8 +77,13 @@ extension PhotosViewController {
                 for: indexPath) as? PhotoHeader
             
             
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMMM yyyy"
+            let dateAsString = formatter.string(from: section.monthDate)
+            
+            
 //            view?.monthLabel.text = section.title
-            view?.monthLabel.text = "Month"
+            view?.monthLabel.text = dateAsString
             return view
         }
         return dataSource
@@ -113,17 +118,13 @@ extension PhotosViewController {
             )
             
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(
-              top: 3,
-              leading: 3,
-              bottom: 0,
-              trailing: 0
-            )
             
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: itemCount)
+            group.interItemSpacing = .fixed(3)
+            
             let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 0, bottom: 3, trailing: 3)
-            section.interGroupSpacing = 0
+            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
+            section.interGroupSpacing = 3
             
             // Supplementary header view setup
             let headerFooterSize = NSCollectionLayoutSize(
@@ -136,6 +137,7 @@ extension PhotosViewController {
               alignment: .top
             )
             section.boundarySupplementaryItems = [sectionHeader]
+            sectionHeader.pinToVisibleBounds = true
             return section
         })
     }

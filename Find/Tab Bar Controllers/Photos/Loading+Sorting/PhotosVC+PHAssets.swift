@@ -54,7 +54,6 @@ extension PhotosViewController {
                     if let photoObjects = self.photoObjects {
                         for object in photoObjects {
                             if object.assetIdentifier == asset.localIdentifier {
-                                print("matching id")
                                 matchingRealmPhoto = object
                                 break
                             }
@@ -71,37 +70,16 @@ extension PhotosViewController {
                         let sameMonths = mutableMonths.filter( { $0.monthDate.isEqual(to: photoDateCreated, toGranularity: .month) })
                         if let firstOfSameMonth = sameMonths.first {
                             firstOfSameMonth.photos.append(findPhoto)
-                            print("same first")
                         } else {
                             let newMonth = MutableMonth()
                             newMonth.monthDate = photoDateCreated
                             newMonth.photos.append(findPhoto)
                             mutableMonths.append(newMonth)
-                            print("new month")
                         }
                     }
-                    
-                    
-                    
-//                    if let photoDateCreated = asset.creationDate {
-//                        let sameMonths = totalMonths.filter( { $0.monthDate.isEqual(to: photoDateCreated, toGranularity: .month) })
-//                        if let firstOfSameMonth = sameMonths.first {
-////                            firstOfSameMonth.assets.append(asset)
-//                            firstOfSameMonth.photos.append(findPhoto)
-//                        } else {
-//                            let newMonth = Month()
-//                            newMonth.monthDate = photoDateCreated
-////                            newMonth.assets.append(asset)
-//                            newMonth.photos.append(findPhoto)
-//                            totalMonths.append(newMonth)
-//                        }
-//
-//                    }
-                    
                 }
-                print("-------")
+                
                 for mutableMonth in mutableMonths {
-                    print("Loop thorugh")
                     let realMonth = Month(monthDate: mutableMonth.monthDate, photos: mutableMonth.photos)
                     totalMonths.append(realMonth)
                 }

@@ -43,6 +43,9 @@ class PhotosViewController: UIViewController {
     let cellReuseIdentifier = "ImageCell"
     let headerReuseIdentifier = "PhotoHeader"
    
+    // MARK: Nav bar
+    var findButton: UIBarButtonItem!
+    var selectButton: UIBarButtonItem!
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -53,6 +56,7 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         
+        setUpBarButtons()
         getRealmObjects()
         
         if migrationNeeded {
@@ -62,14 +66,7 @@ class PhotosViewController: UIViewController {
         }
         
         setUpSDWebImage()
-        
-//        if let layout = collectionView.collectionViewLayout as? InvertedStackLayout {
-//                layout.layoutDelegate = self
-//            }
-        
-        
         collectionView.register(UINib(nibName: "ImageCell", bundle: nil), forCellWithReuseIdentifier: cellReuseIdentifier)
-        
         
 //        collectionView.delegate = self
         collectionView.dataSource = dataSource
@@ -82,14 +79,4 @@ class PhotosViewController: UIViewController {
         
         getSliderCallback()
     }
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        if let lastMonth = monthsToDisplay.last, let lastPhoto = lastMonth.photos.last {
-//            if let lastIndex = dataSource.indexPath(for: lastPhoto) {
-//                print("scrolling")
-//                collectionView.scrollToItem(at: lastIndex, at: .bottom, animated: false)
-//            }
-//        }
-//    }
 }

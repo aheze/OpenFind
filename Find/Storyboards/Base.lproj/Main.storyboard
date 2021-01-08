@@ -3266,8 +3266,16 @@ the App!</string>
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VMm-Lc-Nch">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="zBy-DJ-EFI">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                            <blurEffect style="prominent"/>
+                                        </visualEffectView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="December 25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Gd-9Z-dgV">
-                                            <rect key="frame" x="28" y="13.5" width="115.5" height="23"/>
+                                            <rect key="frame" x="20" y="13.5" width="115.5" height="23"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                             <color key="textColor" systemColor="secondaryLabelColor"/>
                                             <nil key="highlightedColor"/>
@@ -3275,8 +3283,12 @@ the App!</string>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="3Gd-9Z-dgV" firstAttribute="centerY" secondItem="Kiu-ik-VRh" secondAttribute="centerY" id="Xtc-QJ-b0A"/>
-                                        <constraint firstItem="3Gd-9Z-dgV" firstAttribute="leading" secondItem="Kiu-ik-VRh" secondAttribute="leadingMargin" constant="20" id="Z9q-vR-8Ms"/>
+                                        <constraint firstAttribute="bottom" secondItem="VMm-Lc-Nch" secondAttribute="bottom" id="Bdw-95-ciS"/>
+                                        <constraint firstItem="VMm-Lc-Nch" firstAttribute="top" secondItem="Kiu-ik-VRh" secondAttribute="top" id="Fkv-4W-pys"/>
+                                        <constraint firstAttribute="trailing" secondItem="VMm-Lc-Nch" secondAttribute="trailing" id="YQb-qe-kjP"/>
+                                        <constraint firstItem="3Gd-9Z-dgV" firstAttribute="leading" secondItem="Kiu-ik-VRh" secondAttribute="leading" constant="20" id="Z9q-vR-8Ms"/>
+                                        <constraint firstItem="3Gd-9Z-dgV" firstAttribute="centerY" secondItem="Kiu-ik-VRh" secondAttribute="centerY" id="pCU-cy-Q7g"/>
+                                        <constraint firstItem="VMm-Lc-Nch" firstAttribute="leading" secondItem="Kiu-ik-VRh" secondAttribute="leading" id="sMR-8w-8pF"/>
                                     </constraints>
                                     <connections>
                                         <outlet property="monthLabel" destination="3Gd-9Z-dgV" id="HgL-WZ-cXt"/>
@@ -3311,7 +3323,7 @@ the App!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cyf-3f-e0g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-23" y="-959"/>
+            <point key="canvasLocation" x="-23.188405797101453" y="-959.59821428571422"/>
         </scene>
         <!--Photos Migration Controller-->
         <scene sceneID="8zE-VO-uLX">
