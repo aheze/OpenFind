@@ -40,6 +40,8 @@
 		3C4DE704259AD5670037D104 /* NewColors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE703259AD5670037D104 /* NewColors.xcassets */; };
 		3C4DE716259B0EAB0037D104 /* TutorialHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4DE715259B0EAB0037D104 /* TutorialHeader.swift */; };
 		3C4DE719259B0EB50037D104 /* TutorialHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE718259B0EB50037D104 /* TutorialHeader.xib */; };
+		3C5B156725A7ED7A00BB8988 /* ViewController+CameraShutoff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B156625A7ED7A00BB8988 /* ViewController+CameraShutoff.swift */; };
+		3C5B156B25A7EE7900BB8988 /* NotifyTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B156A25A7EE7900BB8988 /* NotifyTransition.swift */; };
 		3C6EE6B025A2AB350078462A /* GeneralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EE6A825A2AB350078462A /* GeneralView.swift */; };
 		3C6EE6B125A2AB350078462A /* SettingsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EE6A925A2AB350078462A /* SettingsComponents.swift */; };
 		3C6EE6B225A2AB350078462A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EE6AA25A2AB350078462A /* HeaderView.swift */; };
@@ -225,6 +227,8 @@
 		3C4DE703259AD5670037D104 /* NewColors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NewColors.xcassets; sourceTree = "<group>"; };
 		3C4DE715259B0EAB0037D104 /* TutorialHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialHeader.swift; sourceTree = "<group>"; };
 		3C4DE718259B0EB50037D104 /* TutorialHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialHeader.xib; sourceTree = "<group>"; };
+		3C5B156625A7ED7A00BB8988 /* ViewController+CameraShutoff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+CameraShutoff.swift"; sourceTree = "<group>"; };
+		3C5B156A25A7EE7900BB8988 /* NotifyTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTransition.swift; sourceTree = "<group>"; };
 		3C6EE6A825A2AB350078462A /* GeneralView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralView.swift; sourceTree = "<group>"; };
 		3C6EE6A925A2AB350078462A /* SettingsComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsComponents.swift; sourceTree = "<group>"; };
 		3C6EE6AA25A2AB350078462A /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
@@ -531,6 +535,7 @@
 			children = (
 				3CE306E2259AC4B000F1B2E2 /* ButtonTransitions.swift */,
 				3CE306E1259AC4B000F1B2E2 /* GestureTransitions.swift */,
+				3C5B156A25A7EE7900BB8988 /* NotifyTransition.swift */,
 				3CE306E0259AC4B000F1B2E2 /* State.swift */,
 			);
 			path = Gestures;
@@ -886,6 +891,7 @@
 			children = (
 				495635292437A4860001E8C6 /* defaultSeeds.realm */,
 				3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */,
+				3C5B156625A7ED7A00BB8988 /* ViewController+CameraShutoff.swift */,
 				3C020CE4259FF5A70087AE92 /* ViewController+Migration.swift */,
 				3CFBD47D25A4EE94000BCA7D /* Lifecycle */,
 				3C4DE714259B0E960037D104 /* Components */,
@@ -1146,6 +1152,7 @@
 				49564333244A8FA4002C9245 /* HistorySharing.swift in Sources */,
 				3C3D47C925A40170002B8BBF /* PhotosVC+Sorting.swift in Sources */,
 				3C6EE6B725A2AB350078462A /* OtherView.swift in Sources */,
+				3C5B156B25A7EE7900BB8988 /* NotifyTransition.swift in Sources */,
 				49D985B6241B3847005F4E92 /* CacheCell.swift in Sources */,
 				4956351F243694BC0001E8C6 /* FillAnimationView.swift in Sources */,
 				3C6EE6B325A2AB350078462A /* SettingsView.swift in Sources */,
@@ -1255,6 +1262,7 @@
 				3C3D47DA25A40A4E002B8BBF /* PhotoPermissionView.swift in Sources */,
 				3C6EE6B025A2AB350078462A /* GeneralView.swift in Sources */,
 				4956351D243694BC0001E8C6 /* OnboardingContantViewItem.swift in Sources */,
+				3C5B156725A7ED7A00BB8988 /* ViewController+CameraShutoff.swift in Sources */,
 				495F38FE243302D500A17D93 /* StatsViewController.swift in Sources */,
 				49913450236FE12400B82E46 /* SettingsViewExtensions.swift in Sources */,
 				490DA75923CBB871000AF57D /* JJCircleView.swift in Sources */,

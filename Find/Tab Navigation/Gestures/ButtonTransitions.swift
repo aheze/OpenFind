@@ -67,10 +67,7 @@ extension ViewController {
                     self.tabBarView.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
                     self.tabBarView.makeLayerInactiveState(duration: Constants.transitionDuration)
                     
-                    let completion: (() -> Void) = {
-//                        self.tabBarView.hideRealShutter?(true)
-//                        self.tabBarView.cameraIcon.alpha = 1
-                    }
+                    let completion = { }
                     
                     shadeView.backgroundColor = UIColor.systemBackground
                     shadeView.alpha = 1
@@ -119,10 +116,7 @@ extension ViewController {
                     self.tabBarView.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
                     self.tabBarView.makeLayerInactiveState(duration: Constants.transitionDuration)
                     
-                    let completion: (() -> Void) = {
-//                        self.tabBarView.hideRealShutter?(true)
-//                        self.tabBarView.cameraIcon.alpha = 1
-                    }
+                    let completion = { }
                     
                     shadeView.backgroundColor = UIColor.secondarySystemBackground
                     shadeView.alpha = 1

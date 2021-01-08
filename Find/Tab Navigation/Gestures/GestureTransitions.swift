@@ -193,7 +193,8 @@ extension ViewController {
     }
     
     func finishMoveVC(currentX: CGFloat, velocity: CGFloat, from fromVC: UIViewController, to toVC: UIViewController, instantly: Bool = false) {
-        
+        print("Finishing from \(fromVC) to \(toVC)")
+        print("Current is \(ViewControllerState.currentVC) and new is \(ViewControllerState.newVC)")
         animator = nil
         
         let decelerationRate = UIScrollView.DecelerationRate.normal.rawValue
@@ -396,11 +397,11 @@ extension ViewController {
                 self.tabBarView.gestureInterruptedButton = false
             }
             if self.gestures.completedMove {
-                ViewControllerState.newVC?.didMove(toParent: self)
+                toVC.didMove(toParent: self)
                 
-                ViewControllerState.currentVC?.willMove(toParent: nil)
-                ViewControllerState.currentVC?.view.removeFromSuperview()
-                ViewControllerState.currentVC?.removeFromParent()
+                fromVC.willMove(toParent: nil)
+                fromVC.view.removeFromSuperview()
+                fromVC.removeFromParent()
                 
                 ViewControllerState.currentVC = ViewControllerState.newVC
                 ViewControllerState.newVC = nil
@@ -408,11 +409,13 @@ extension ViewController {
                 self.blurAnimator?.isReversed = false
                 
                 print("Current view controller: \(ViewControllerState.currentVC)")
+                
+                self.notifyCompletion(finishedAtVC: toVC)
             } else {
                 print("Did not complete move")
-                ViewControllerState.newVC?.willMove(toParent: nil)
-                ViewControllerState.newVC?.view.removeFromSuperview()
-                ViewControllerState.newVC?.removeFromParent()
+                toVC.willMove(toParent: nil)
+                toVC.view.removeFromSuperview()
+                toVC.removeFromParent()
                 ViewControllerState.newVC = nil
             }
             if ViewControllerState.currentVC is CameraViewController {

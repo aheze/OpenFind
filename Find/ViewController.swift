@@ -94,6 +94,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         fatalError()
     }()
     
+    // MARK: Camera shutoff
+    lazy var cameraShutoffTask = DispatchWorkItem { _ = self.shutoffCamera() }
+    
+    // MARK: Gestures
+    
     var blurAnimator: UIViewPropertyAnimator?
     var animator: UIViewPropertyAnimator? /// animate gesture endings
     
@@ -105,7 +110,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func handleLongPress(_ sender: UILongPressGestureRecognizer) {
         switch sender.state {
         case .began:
-            print("long pres beign")
             if gestures.isAnimating {
                 
                 let listsCollectionView = lists.viewController.collectionView
@@ -220,7 +224,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func handlePan(_ sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .began:
-            print("pan begin")
             if gestures.direction == nil {
                 let timingParameters = UISpringTimingParameters(damping: 1, response: Constants.transitionDuration, initialVelocity: CGVector(dx: 0, dy: 0))
                 blurAnimator = UIViewPropertyAnimator(duration: 0, timingParameters: timingParameters)
