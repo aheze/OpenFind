@@ -11,16 +11,16 @@ import UIKit
 extension ViewController {
     /// navigated away from camera
     func startCameraShutoff() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: cameraShutoffTask)
+        camera.allowSearchFocus = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 8, execute: cameraShutoffTask)
+    }
+    func startCamera() {
+        camera.allowSearchFocus = true
+        cancelShutoff()
+        camera.startVideo()
     }
     func cancelShutoff() {
         cameraShutoffTask.cancel()
-    }
-    func shutoffCamera() -> (() -> Void) {
-        let shutoffBlock = {
-            print("Shutt off cam!!")
-        }
-        
-        return shutoffBlock
+        cameraShutoffTask = DispatchWorkItem { self.shutoffCamera?() }
     }
 }

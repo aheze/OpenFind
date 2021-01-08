@@ -470,8 +470,8 @@
 		3C4DE714259B0E960037D104 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				3C4DE715259B0EAB0037D104 /* TutorialHeader.swift */,
 				3C4DE718259B0EB50037D104 /* TutorialHeader.xib */,
+				3C4DE715259B0EAB0037D104 /* TutorialHeader.swift */,
 				3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */,
 			);
 			path = Components;
@@ -891,8 +891,8 @@
 			children = (
 				495635292437A4860001E8C6 /* defaultSeeds.realm */,
 				3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */,
-				3C5B156625A7ED7A00BB8988 /* ViewController+CameraShutoff.swift */,
 				3C020CE4259FF5A70087AE92 /* ViewController+Migration.swift */,
+				3C5B156625A7ED7A00BB8988 /* ViewController+CameraShutoff.swift */,
 				3CFBD47D25A4EE94000BCA7D /* Lifecycle */,
 				3C4DE714259B0E960037D104 /* Components */,
 				49E9D88D24996D8A0006757C /* Storyboards */,

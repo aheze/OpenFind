@@ -215,7 +215,8 @@ class CameraViewController: UIViewController {
 //    var removeListMode = true
     var focusingList = EditableFindList()
     
-    var allowSearch = true
+    var allowSearch = true /// orientation disable
+    var allowSearchFocus = true /// disable when on different screen
     
     
     
@@ -399,9 +400,13 @@ class CameraViewController: UIViewController {
             avSession.startRunning()
         }
     }
-    func startSession() { if !avSession.isRunning {
-//        print("not running avsession")
-        DispatchQueue.global().async { self.avSession.startRunning() } } }
+    func startSession() {
+        if !avSession.isRunning {
+            DispatchQueue.global().async {
+                self.avSession.startRunning()
+            }
+        }
+    }
     func stopSession() {
         if avSession.isRunning {
             DispatchQueue.global().async {
@@ -409,7 +414,6 @@ class CameraViewController: UIViewController {
             }
         }
     }
-    
     
     @objc private func _KeyboardFrameChanged(_ notification: Notification){
         if let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
@@ -759,7 +763,7 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
         }
-        if busyFastFinding == false && allowSearch == true && displayingOrientationError == false {
+        if busyFastFinding == false && allowSearch == true && displayingOrientationError == false && allowSearchFocus == true {
             
             /// 1. Find
             fastFind(in: pixelBuffer)

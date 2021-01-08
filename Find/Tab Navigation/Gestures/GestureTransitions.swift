@@ -83,6 +83,7 @@ extension ViewController {
                     self.gestures.transitionAnimatorBlock?()
                 }
             } else { /// photos to camera
+                startCamera()
                 tabBarView.getBlocks(from: fromVC, to: .camera).0()
                 blurView.effect = UIBlurEffect(style: .light)
                 gestures.transitionAnimatorBlock = {
@@ -115,6 +116,7 @@ extension ViewController {
                     self.gestures.transitionAnimatorBlock?()
                 }
             } else { /// lists to camera
+                startCamera()
                 tabBarView.getBlocks(from: fromVC, to: .camera).0()
                 blurView.effect = UIBlurEffect(style: .light)
                 gestures.transitionAnimatorBlock = {
@@ -410,7 +412,7 @@ extension ViewController {
                 
                 print("Current view controller: \(ViewControllerState.currentVC)")
                 
-                self.notifyCompletion(finishedAtVC: toVC)
+//                self.notifyCompletion(finishedAtVC: toVC)
             } else {
                 print("Did not complete move")
                 toVC.willMove(toParent: nil)
@@ -419,7 +421,11 @@ extension ViewController {
                 ViewControllerState.newVC = nil
             }
             if ViewControllerState.currentVC is CameraViewController {
-                self.tabBarView.showLineView(show: false)
+                print("is camera")
+//                self.tabBarView.showLineView(show: false)
+//                if let currentVC =  ViewControllerState.currentVC {
+//                    self.notifyCompletion(finishedAtVC: currentVC)
+//                }
 //                self.blurView.effect = nil
 //                self.shadeView.eff
             } else {
@@ -430,6 +436,9 @@ extension ViewController {
             self.gestures.totalTranslation = 0
             self.gestures.gestureSavedOffset = 0
             self.gestures.completedMove = false
+            if let currentVC =  ViewControllerState.currentVC {
+                self.notifyCompletion(finishedAtVC: currentVC)
+            }
         }
         if finishImmediately || instantly {
             block()

@@ -95,7 +95,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }()
     
     // MARK: Camera shutoff
-    lazy var cameraShutoffTask = DispatchWorkItem { _ = self.shutoffCamera() }
+    var cameraShutoffTask = DispatchWorkItem { print("shut") }
+    var shutoffCamera: (() -> Void)?
+//        = {
+//        print("Shutt off cam!!")
+//        self.camera.stopSession()
+//    }
     
     // MARK: Gestures
     
@@ -355,7 +360,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        shutoffCamera = {
+            print("Shut off cam!!")
+            self.camera.stopSession()
+        }
 
         setUpFilePath()
         checkIfHistoryImagesExist()

@@ -14,10 +14,13 @@ extension ViewController {
         switch currentVC {
         case is PhotosNavController:
             print("ended at photos")
+            startCameraShutoff()
         case is CameraViewController:
             print("ended at camera")
+            startCamera()
         case is ListsNavController:
             print("ended at lists")
+            startCameraShutoff()
         default:
             print("Unknown notified VC")
         }
