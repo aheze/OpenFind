@@ -403,6 +403,7 @@ extension NewHistoryViewController {
             self.present(mainContentVC, animated: true)
         }
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if selectButtonSelected == true {
             if !indexPathsSelected.contains(indexPath) {

@@ -19,6 +19,10 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="331-bI-iaT">
                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                 </imageView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Ws-Xl-Q2a">
+                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                    <color key="backgroundColor" name="50Blue"/>
+                </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0vG-yK-i3D">
                     <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
                 </imageView>
@@ -37,19 +41,34 @@
                         <constraint firstAttribute="width" constant="20" id="kd0-N4-H6O"/>
                     </constraints>
                 </imageView>
+                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="yS2-AI-R8f">
+                    <rect key="frame" x="75" y="75" width="20" height="20"/>
+                    <color key="tintColor" name="100ButtonTint"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="i6t-me-Z75"/>
+                        <constraint firstAttribute="width" constant="20" id="pAB-sK-SYb"/>
+                    </constraints>
+                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="default" weight="medium"/>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="0vG-yK-i3D" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8ud-ap-1Cc"/>
+                <constraint firstItem="6Ws-Xl-Q2a" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="DSz-SN-EbK"/>
                 <constraint firstItem="WI2-MS-Um0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="5" id="X7V-56-egu"/>
                 <constraint firstAttribute="trailing" secondItem="3xd-Ac-UWi" secondAttribute="trailing" constant="5" id="eLf-xO-Fo3"/>
+                <constraint firstAttribute="bottom" secondItem="6Ws-Xl-Q2a" secondAttribute="bottom" id="iJX-cG-YGc"/>
                 <constraint firstItem="331-bI-iaT" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="nOz-uF-Olc"/>
                 <constraint firstAttribute="trailing" secondItem="0vG-yK-i3D" secondAttribute="trailing" id="nfb-7U-tgK"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="yS2-AI-R8f" secondAttribute="bottom" constant="5" id="q75-FD-EnN"/>
                 <constraint firstItem="331-bI-iaT" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="qFa-FU-gmJ"/>
                 <constraint firstItem="0vG-yK-i3D" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="qih-cQ-DsS"/>
                 <constraint firstItem="3xd-Ac-UWi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="sPk-Jg-YNE"/>
                 <constraint firstItem="331-bI-iaT" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="slp-e3-L9R"/>
+                <constraint firstItem="6Ws-Xl-Q2a" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="u7m-Td-jI4"/>
+                <constraint firstAttribute="trailing" secondItem="6Ws-Xl-Q2a" secondAttribute="trailing" id="uW9-RU-eyC"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="yS2-AI-R8f" secondAttribute="trailing" constant="5" id="viM-o6-NLw"/>
                 <constraint firstItem="331-bI-iaT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="wCj-p8-Dq0"/>
                 <constraint firstItem="WI2-MS-Um0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="x57-VE-Bm8"/>
                 <constraint firstItem="0vG-yK-i3D" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.5" id="ydz-Qk-2f2"/>
@@ -57,7 +76,9 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="cacheImageView" destination="3xd-Ac-UWi" id="5sZ-1x-VvL"/>
+                <outlet property="highlightView" destination="6Ws-Xl-Q2a" id="YDR-Te-0Pe"/>
                 <outlet property="imageView" destination="331-bI-iaT" id="Rx6-4t-jQx"/>
+                <outlet property="selectionImageView" destination="yS2-AI-R8f" id="82x-bS-CdO"/>
                 <outlet property="shadowImageView" destination="0vG-yK-i3D" id="j8w-Pd-YoV"/>
                 <outlet property="starImageView" destination="WI2-MS-Um0" id="u4U-fR-hdG"/>
             </connections>
@@ -65,6 +86,13 @@
         </view>
     </objects>
     <resources>
+        <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
+        <namedColor name="100ButtonTint">
+            <color red="0.0" green="0.52499997615814209" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="50Blue">
+            <color red="0.0" green="0.68199998140335083" blue="0.93699997663497925" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Gold">
             <color red="1" green="0.77600002288818359" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

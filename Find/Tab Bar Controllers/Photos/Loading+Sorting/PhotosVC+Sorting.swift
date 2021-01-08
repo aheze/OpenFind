@@ -54,6 +54,9 @@ extension PhotosViewController {
     func getSliderCallback() {
         segmentedSlider.pressedFilter = { [weak self] filter in
             guard let self = self else { return }
+            
+            var allPhotosToDisplay = [FindPhoto]()
+            
             switch filter {
             case .local:
                 var filteredMonths = self.allMonths
@@ -61,13 +64,11 @@ extension PhotosViewController {
                     let filteredPhotos = filteredMonths[index].photos.filter { photo in
                         return photo.model?.isTakenLocally ?? false
                     }
-                   filteredMonths[index].photos = filteredPhotos
+                    filteredMonths[index].photos = filteredPhotos
+                    allPhotosToDisplay += filteredPhotos
                 }
                 filteredMonths = filteredMonths.filter { month in
-                    let filteredPhotos = month.photos.filter { photo in
-                        return photo.model?.isTakenLocally ?? false
-                    }
-                    return !filteredPhotos.isEmpty
+                    return !month.photos.isEmpty
                 }
                 self.monthsToDisplay = filteredMonths
             case .starred:
@@ -76,13 +77,11 @@ extension PhotosViewController {
                     let filteredPhotos = filteredMonths[index].photos.filter { photo in
                         return photo.model?.isHearted ?? false
                     }
-                   filteredMonths[index].photos = filteredPhotos
+                    filteredMonths[index].photos = filteredPhotos
+                    allPhotosToDisplay += filteredPhotos
                 }
                 filteredMonths = filteredMonths.filter { month in
-                    let filteredPhotos = month.photos.filter { photo in
-                        return photo.model?.isHearted ?? false
-                    }
-                    return !filteredPhotos.isEmpty
+                    return !month.photos.isEmpty
                 }
                 self.monthsToDisplay = filteredMonths
             case .cached:
@@ -91,20 +90,23 @@ extension PhotosViewController {
                     let filteredPhotos = filteredMonths[index].photos.filter { photo in
                         return photo.model?.isDeepSearched ?? false
                     }
-                   filteredMonths[index].photos = filteredPhotos
+                    filteredMonths[index].photos = filteredPhotos
+                    allPhotosToDisplay += filteredPhotos
                 }
                 filteredMonths = filteredMonths.filter { month in
-                    let filteredPhotos = month.photos.filter { photo in
-                        return photo.model?.isDeepSearched ?? false
-                    }
-                    return !filteredPhotos.isEmpty
+                    return !month.photos.isEmpty
                 }
                 self.monthsToDisplay = filteredMonths
             case .all:
                 self.monthsToDisplay = self.allMonths
+                for month in self.allMonths {
+                    allPhotosToDisplay += month.photos
+                }
             }
             
+            self.allPhotosToDisplay = allPhotosToDisplay
             self.applySnapshot(animatingDifferences: true)
+            print("all photos count: \(allPhotosToDisplay.count)")
         }
     }
 }

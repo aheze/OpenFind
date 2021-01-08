@@ -34,9 +34,10 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
     // MARK: - Selection
     var addButton: UIBarButtonItem!
     var selectButton: UIBarButtonItem!
-//    var enableSelectionControls: ((Bool) -> Void)? /// enable or disable buttons on selection controls
     var updateSelectionLabel: ((Int) -> Void)?
     
+    /// Whether is in select mode or not
+    var selectButtonSelected = false
     var indexPathsSelected = [Int]()
     var numberOfSelected = 0 {
         didSet {
@@ -139,9 +140,6 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
     
     
     var swipedToDismiss = true
-    
-    /// Whether is in select mode or not
-    var selectButtonSelected = false
     
     
     weak var changeNumberDelegateList: ChangeNumberOfSelectedList?

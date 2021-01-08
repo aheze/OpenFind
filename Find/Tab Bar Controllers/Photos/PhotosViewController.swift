@@ -25,16 +25,26 @@ class PhotosViewController: UIViewController {
     // MARK: Photo loading
     var hasFullAccess = false
     var allPhotos: PHFetchResult<PHAsset>? = nil
-    
     var allMonths = [Month]() /// all photos
-    
     var monthsToDisplay = [Month]() /// shown photos, including filters
+    var allPhotosToDisplay = [FindPhoto]() /// shown photos, including filters, but without grouping by month
     
     // MARK: Realm photo matching + loading
     let realm = try! Realm()
     var photoObjects: Results<HistoryModel>?
+    let screenScale = UIScreen.main.scale /// for photo thumbnail
     
-    let screenScale = UIScreen.main.scale
+    // MARK: Photo selection
+    var updateSelectionLabel: ((Int) -> Void)?
+    
+    /// Whether is in select mode or not
+    var selectButtonSelected = false
+    var indexPathsSelected = [IndexPath]()
+    var numberOfSelected = 0 {
+        didSet {
+            updateSelectionLabel?(numberOfSelected)
+        }
+    }
     
     // MARK: Diffable Data Source
     lazy var dataSource = makeDataSource()
@@ -68,7 +78,7 @@ class PhotosViewController: UIViewController {
         setUpSDWebImage()
         collectionView.register(UINib(nibName: "ImageCell", bundle: nil), forCellWithReuseIdentifier: cellReuseIdentifier)
         
-//        collectionView.delegate = self
+        collectionView.delegate = self
         collectionView.dataSource = dataSource
         configureLayout()
         

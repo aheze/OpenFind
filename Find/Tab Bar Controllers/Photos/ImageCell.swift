@@ -15,4 +15,9 @@ class ImageCell: UICollectionViewCell {
     @IBOutlet weak var starImageView: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
     
+    // MARK: Selection
+    @IBOutlet weak var highlightView: UIView!
+    @IBOutlet weak var selectionImageView: UIImageView!
+    
+    
 }

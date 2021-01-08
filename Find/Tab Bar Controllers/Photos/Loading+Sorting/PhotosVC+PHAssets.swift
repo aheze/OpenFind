@@ -79,14 +79,20 @@ extension PhotosViewController {
                     }
                 }
                 
+                var allPhotosToDisplay = [FindPhoto]()
                 for mutableMonth in mutableMonths {
+                    for photo in mutableMonth.photos {
+                        allPhotosToDisplay.append(photo)
+                    }
                     let realMonth = Month(monthDate: mutableMonth.monthDate, photos: mutableMonth.photos)
                     totalMonths.append(realMonth)
                 }
                 
                 allMonths = totalMonths
                 monthsToDisplay = totalMonths
+                self.allPhotosToDisplay = allPhotosToDisplay
                 applySnapshot(animatingDifferences: false)
+                print("all photos count: \(allPhotosToDisplay.count)")
             }
         }
     }

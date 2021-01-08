@@ -42,7 +42,7 @@
 		3C4DE719259B0EB50037D104 /* TutorialHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE718259B0EB50037D104 /* TutorialHeader.xib */; };
 		3C5B156725A7ED7A00BB8988 /* ViewController+CameraShutoff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B156625A7ED7A00BB8988 /* ViewController+CameraShutoff.swift */; };
 		3C5B156B25A7EE7900BB8988 /* NotifyTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B156A25A7EE7900BB8988 /* NotifyTransition.swift */; };
-		3C5B157325A8CD9C00BB8988 /* PhotosVC+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B157225A8CD9C00BB8988 /* PhotosVC+CollectionView.swift */; };
+		3C5B157325A8CD9C00BB8988 /* PhotosVC+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B157225A8CD9C00BB8988 /* PhotosVC+Selection.swift */; };
 		3C5B157825A8CE7E00BB8988 /* PhotosVC+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B157725A8CE7E00BB8988 /* PhotosVC+NavBar.swift */; };
 		3C6EE6B025A2AB350078462A /* GeneralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EE6A825A2AB350078462A /* GeneralView.swift */; };
 		3C6EE6B125A2AB350078462A /* SettingsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EE6A925A2AB350078462A /* SettingsComponents.swift */; };
@@ -69,6 +69,7 @@
 		3CE306E4259AC4B000F1B2E2 /* GestureTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E1259AC4B000F1B2E2 /* GestureTransitions.swift */; };
 		3CE306E5259AC4B000F1B2E2 /* ButtonTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E2259AC4B000F1B2E2 /* ButtonTransitions.swift */; };
 		3CE306EA259AC5AF00F1B2E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */; };
+		3CECF4C125A9072300C16A16 /* PhotosVC+PresentSlides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECF4C025A9072300C16A16 /* PhotosVC+PresentSlides.swift */; };
 		4904524C2379072F0046570D /* UpdateMatches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4904524B2379072F0046570D /* UpdateMatches.swift */; };
 		490DA73F23CBAB7C000AF57D /* NewShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA73E23CBAB7C000AF57D /* NewShutterButton.swift */; };
 		490DA74E23CBB871000AF57D /* UIView+JJFloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490DA74123CBB86A000AF57D /* UIView+JJFloatingActionButton.swift */; };
@@ -231,7 +232,7 @@
 		3C4DE718259B0EB50037D104 /* TutorialHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialHeader.xib; sourceTree = "<group>"; };
 		3C5B156625A7ED7A00BB8988 /* ViewController+CameraShutoff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+CameraShutoff.swift"; sourceTree = "<group>"; };
 		3C5B156A25A7EE7900BB8988 /* NotifyTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTransition.swift; sourceTree = "<group>"; };
-		3C5B157225A8CD9C00BB8988 /* PhotosVC+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+CollectionView.swift"; sourceTree = "<group>"; };
+		3C5B157225A8CD9C00BB8988 /* PhotosVC+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Selection.swift"; sourceTree = "<group>"; };
 		3C5B157725A8CE7E00BB8988 /* PhotosVC+NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+NavBar.swift"; sourceTree = "<group>"; };
 		3C6EE6A825A2AB350078462A /* GeneralView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralView.swift; sourceTree = "<group>"; };
 		3C6EE6A925A2AB350078462A /* SettingsComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsComponents.swift; sourceTree = "<group>"; };
@@ -258,6 +259,7 @@
 		3CE306E1259AC4B000F1B2E2 /* GestureTransitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureTransitions.swift; sourceTree = "<group>"; };
 		3CE306E2259AC4B000F1B2E2 /* ButtonTransitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTransitions.swift; sourceTree = "<group>"; };
 		3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3CECF4C025A9072300C16A16 /* PhotosVC+PresentSlides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+PresentSlides.swift"; sourceTree = "<group>"; };
 		4904524B2379072F0046570D /* UpdateMatches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMatches.swift; sourceTree = "<group>"; };
 		490DA73E23CBAB7C000AF57D /* NewShutterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShutterButton.swift; sourceTree = "<group>"; };
 		490DA74123CBB86A000AF57D /* UIView+JJFloatingActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+JJFloatingActionButton.swift"; sourceTree = "<group>"; };
@@ -494,7 +496,8 @@
 		3C5B157125A8CD8800BB8988 /* Collection View */ = {
 			isa = PBXGroup;
 			children = (
-				3C5B157225A8CD9C00BB8988 /* PhotosVC+CollectionView.swift */,
+				3C5B157225A8CD9C00BB8988 /* PhotosVC+Selection.swift */,
+				3CECF4C025A9072300C16A16 /* PhotosVC+PresentSlides.swift */,
 			);
 			path = "Collection View";
 			sourceTree = "<group>";
@@ -1250,6 +1253,7 @@
 				4904524C2379072F0046570D /* UpdateMatches.swift in Sources */,
 				3C0F5ED825A62B2600549040 /* PhotosMigrationController+Permissions.swift in Sources */,
 				495F38F22432B7B700A17D93 /* CreditsViewController.swift in Sources */,
+				3CECF4C125A9072300C16A16 /* PhotosVC+PresentSlides.swift in Sources */,
 				492EB4F023F504BC007142CA /* PopulateSymbols.swift in Sources */,
 				49115089235D17EB00EC0C04 /* ShutterPressed.swift in Sources */,
 				3C6EE6B425A2AB350078462A /* CreditsView.swift in Sources */,
@@ -1306,7 +1310,7 @@
 				49D985B024188CA4005F4E92 /* NewListToolbarCell.swift in Sources */,
 				490DA75723CBB871000AF57D /* Styles.swift in Sources */,
 				4953F3BE2415A14000690E53 /* HistoryFindController.swift in Sources */,
-				3C5B157325A8CD9C00BB8988 /* PhotosVC+CollectionView.swift in Sources */,
+				3C5B157325A8CD9C00BB8988 /* PhotosVC+Selection.swift in Sources */,
 				3CE306EA259AC5AF00F1B2E2 /* ViewController.swift in Sources */,
 				4979A39323AF3C4F00B09380 /* FastVisionHandler.swift in Sources */,
 				49585DCF23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift in Sources */,

@@ -13,7 +13,6 @@ import SPAlert
 extension ListsController {
     
     func selectPressed() {
-        print("select")
         if listCategories?.count == 0 {
             showNoListsAlert()
         } else {
