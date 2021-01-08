@@ -860,7 +860,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="-107" y="333"/>
+            <point key="canvasLocation" x="-23" y="338"/>
         </scene>
         <!--Make New List-->
         <scene sceneID="swq-v5-TTq">
@@ -4387,6 +4387,38 @@ the App!</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tvZ-AU-Qkc">
+                                <rect key="frame" x="107" y="410" width="200" height="76"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Something went wrong." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jr-oe-diC">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="23"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Gb-Zo-sfS">
+                                        <rect key="frame" x="50" y="35" width="100" height="39"/>
+                                        <color key="backgroundColor" name="100Blue"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                        <inset key="contentEdgeInsets" minX="16" minY="8" maxX="16" maxY="8"/>
+                                        <state key="normal" title="Refresh">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="gestureRefreshButtonPressed:" destination="cdc-vn-WNf" eventType="touchUpInside" id="s5D-uO-lIn"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="1Gb-Zo-sfS" secondAttribute="bottom" constant="2" id="4Y0-5m-4aF"/>
+                                    <constraint firstItem="1Gb-Zo-sfS" firstAttribute="top" secondItem="8jr-oe-diC" secondAttribute="bottom" constant="12" id="T6j-DB-LBZ"/>
+                                    <constraint firstItem="1Gb-Zo-sfS" firstAttribute="centerX" secondItem="tvZ-AU-Qkc" secondAttribute="centerX" id="UPU-G2-qNY"/>
+                                    <constraint firstAttribute="trailing" secondItem="8jr-oe-diC" secondAttribute="trailing" id="aV8-AX-fqW"/>
+                                    <constraint firstItem="8jr-oe-diC" firstAttribute="top" secondItem="tvZ-AU-Qkc" secondAttribute="top" id="iwy-x4-41W"/>
+                                    <constraint firstItem="8jr-oe-diC" firstAttribute="leading" secondItem="tvZ-AU-Qkc" secondAttribute="leading" id="s2z-3i-WFA"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sAF-Wi-oy5">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
@@ -4420,7 +4452,7 @@ the App!</string>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="Lsa-GX-hJi" firstAttribute="leading" secondItem="sAF-Wi-oy5" secondAttribute="leading" id="9dz-cA-1pg"/>
@@ -4442,11 +4474,14 @@ the App!</string>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eij-1t-WKa"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="dUP-Wt-rTn" firstAttribute="leading" secondItem="tXW-u9-N9R" secondAttribute="leading" id="5S4-zb-nLy"/>
                             <constraint firstItem="sAF-Wi-oy5" firstAttribute="leading" secondItem="tXW-u9-N9R" secondAttribute="leading" id="5ei-d0-aCZ"/>
                             <constraint firstAttribute="bottom" secondItem="sAF-Wi-oy5" secondAttribute="bottom" id="Fir-1w-K3D"/>
                             <constraint firstAttribute="trailing" secondItem="sAF-Wi-oy5" secondAttribute="trailing" id="Iuz-Ip-5zG"/>
+                            <constraint firstItem="tvZ-AU-Qkc" firstAttribute="centerX" secondItem="tXW-u9-N9R" secondAttribute="centerX" id="Sjs-hm-d0E"/>
+                            <constraint firstItem="tvZ-AU-Qkc" firstAttribute="centerY" secondItem="tXW-u9-N9R" secondAttribute="centerY" id="Wwu-yh-MMX"/>
                             <constraint firstAttribute="trailing" secondItem="dUP-Wt-rTn" secondAttribute="trailing" id="bhR-Iv-ipf"/>
                             <constraint firstItem="sAF-Wi-oy5" firstAttribute="top" secondItem="tXW-u9-N9R" secondAttribute="top" id="cqd-tk-sdL"/>
                             <constraint firstAttribute="bottom" secondItem="dUP-Wt-rTn" secondAttribute="bottom" id="mf5-ym-B1t"/>
@@ -4456,6 +4491,7 @@ the App!</string>
                         <outlet property="blurContainerView" destination="Lsa-GX-hJi" id="iVL-Mo-hOT"/>
                         <outlet property="blurView" destination="Hit-m0-nwX" id="eyR-vS-7qc"/>
                         <outlet property="containerView" destination="sAF-Wi-oy5" id="wxl-en-c4I"/>
+                        <outlet property="gestureRefreshButton" destination="1Gb-Zo-sfS" id="sZ6-d4-5qZ"/>
                         <outlet property="longPressGestureRecognizer" destination="a8A-MY-9So" id="JgE-5k-abv"/>
                         <outlet property="panGestureRecognizer" destination="yok-zd-H7h" id="2AM-HL-pA4"/>
                         <outlet property="shadeView" destination="LMu-lQ-uaz" id="8fi-Zx-WbZ"/>
@@ -4516,6 +4552,9 @@ the App!</string>
         <image name="square.grid.2x2" catalog="system" width="128" height="114"/>
         <image name="trash" catalog="system" width="121" height="128"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
+        <namedColor name="100Blue">
+            <color red="0.0" green="0.68199998140335083" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="100ButtonTint">
             <color red="0.0" green="0.52499997615814209" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -4599,9 +4638,6 @@ the App!</string>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

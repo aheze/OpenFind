@@ -15,9 +15,7 @@ extension ViewController {
             
             /// finish quickly
             if (originalToVC >!< toVC) {
-                print("had original to. is same: \((originalToVC >!< toVC))")
                 if !gestures.isAnimating {
-                    print("currntly noy animatin")
                     let position: CGFloat
                     
                     gestures.totalTranslation = gestures.gestureSavedOffset
@@ -44,7 +42,6 @@ extension ViewController {
                 ViewControllerState.currentVC = toVC
                 ViewControllerState.newVC = nil
                 
-                print("Stop+++++++++++++=")
                 panGestureRecognizer.isEnabled = false
                 panGestureRecognizer.isEnabled = true
                 panGestureRecognizer.setTranslation(.zero, in: containerView)
@@ -55,6 +52,7 @@ extension ViewController {
                 gestures.gestureSavedOffset = 0
                 animator?.stopAnimation(true)
                 blurAnimator?.stopAnimation(true)
+                
                 switch toVC {
                 case is PhotosNavController:
                     tabBarView.hideRealShutter?(true)
@@ -133,12 +131,14 @@ extension ViewController {
                 default:
                     print("default trans")
                 }
+                
+                notifyCompletion(finishedAtVC: toVC)
             }
             
         } else { /// normal button press
+            
             if let currentVC = ViewControllerState.currentVC {
                 if gestures.isRubberBanding {
-                    print("rubber banding")
                     panGestureRecognizer.isEnabled = false
                     panGestureRecognizer.isEnabled = true
                     panGestureRecognizer.setTranslation(.zero, in: containerView)
@@ -148,7 +148,7 @@ extension ViewController {
                     self.gestures.isRubberBanding = false
                     self.gestures.gestureSavedOffset = 0
                 }
-                print("current exists")
+                
                 addChild(toVC, in: containerView)
                 removeChild(currentVC)
                 ViewControllerState.currentVC = toVC
@@ -163,9 +163,7 @@ extension ViewController {
                     tabBarView.shadeView.alpha = 0
                     tabBarView.blurView.effect = UIBlurEffect(style: .light)
                     tabBarView.blurBackgroundView.alpha = 1
-                    print("phots")
                 case is CameraViewController:
-                    print("camera")
                     containerView.sendSubviewToBack(toVC.view)
                     blurView.effect = nil
                     shadeView.alpha = 0
@@ -180,10 +178,11 @@ extension ViewController {
                     tabBarView.shadeView.alpha = 0
                     tabBarView.blurView.effect = UIBlurEffect(style: .light)
                     tabBarView.blurBackgroundView.alpha = 1
-                    print("listsss")
                 default:
                     print("Could not cast transition vc")
                 }
+                
+                notifyCompletion(finishedAtVC: toVC)
             }
         }
     }

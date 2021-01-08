@@ -10,6 +10,7 @@ import UIKit
 
 extension ViewController {
     func notifyCompletion(finishedAtVC currentVC: UIViewController) {
+        print("notifying")
         switch currentVC {
         case is PhotosNavController:
             print("ended at photos")

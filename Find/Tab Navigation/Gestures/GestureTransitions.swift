@@ -420,6 +420,8 @@ extension ViewController {
             }
             if ViewControllerState.currentVC is CameraViewController {
                 self.tabBarView.showLineView(show: false)
+//                self.blurView.effect = nil
+//                self.shadeView.eff
             } else {
                 self.tabBarView.showLineView(show: true)
             }
