@@ -394,12 +394,7 @@
 			isa = PBXGroup;
 			children = (
 				3C020CE8259FF7470087AE92 /* PhotosViewController.swift */,
-				3C3D47C825A40170002B8BBF /* PhotosVC+Sorting.swift */,
-				3C3D47C525A40133002B8BBF /* PhotosVC+PHAssets.swift */,
-				3C3D47DF25A41AEB002B8BBF /* PhotosVC+Diffable.swift */,
-				3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */,
-				3C3D47E225A41B9E002B8BBF /* PhotosVC+Cells.swift */,
-				3C35399125A6AECF00CB0CF9 /* PhotosVC+CustomLayout.swift */,
+				3C5B156F25A8CD3D00BB8988 /* Loading+Sorting */,
 				3C3D47D825A40A41002B8BBF /* Permissions */,
 				3CB6842F25A0085E00AE0AD6 /* Migration */,
 				3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */,
@@ -475,6 +470,19 @@
 				3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		3C5B156F25A8CD3D00BB8988 /* Loading+Sorting */ = {
+			isa = PBXGroup;
+			children = (
+				3C3D47C825A40170002B8BBF /* PhotosVC+Sorting.swift */,
+				3C3D47C525A40133002B8BBF /* PhotosVC+PHAssets.swift */,
+				3C3D47DF25A41AEB002B8BBF /* PhotosVC+Diffable.swift */,
+				3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */,
+				3C3D47E225A41B9E002B8BBF /* PhotosVC+Cells.swift */,
+				3C35399125A6AECF00CB0CF9 /* PhotosVC+CustomLayout.swift */,
+			);
+			path = "Loading+Sorting";
 			sourceTree = "<group>";
 		};
 		3C6EE6BA25A2AC580078462A /* SwiftUI */ = {
