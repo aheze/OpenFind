@@ -39,10 +39,9 @@ class PhotoSlidesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("loaded")
-        print("Currnt index: \(currentIndex)")
         
         setupDelegates()
+        setupGestures()
         setFirstVC()
     }
     

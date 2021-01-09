@@ -506,8 +506,8 @@
 				3C56C5A125A95C970006A667 /* PhotoSlidesVC+SetFirstVC.swift */,
 				3C56C5A525A95D120006A667 /* PhotoSlidesVC+PagingSource.swift */,
 				3C56C5A925A966BA0006A667 /* PhotoSlidesVC+ZoomDelegate.swift */,
-				3CFF312425AA490900D3C56D /* PhotoSlidesVC+Gestures.swift */,
 				3CFF312725AA496B00D3C56D /* PhotoSlidesVC+Setup.swift */,
+				3CFF312425AA490900D3C56D /* PhotoSlidesVC+Gestures.swift */,
 				3C56C5B325AA43760006A667 /* Slide View Controller */,
 			);
 			path = Slides;
