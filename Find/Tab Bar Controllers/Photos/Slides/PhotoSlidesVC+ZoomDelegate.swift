@@ -26,6 +26,6 @@ extension PhotoSlidesViewController: ZoomAnimatorDelegate {
 
     func referenceImageViewFrameInTransitioningView(for zoomAnimator: ZoomAnimator) -> CGRect? {
         print("trans")
-        return currentViewController.scrollView.convert(currentViewController.mainContentView.frame, to: currentViewController.view)
+        return currentViewController.scrollView.convert(currentViewController.contentView.frame, to: currentViewController.view)
     }
 }

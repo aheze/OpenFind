@@ -22,13 +22,14 @@ class PhotoSlidesViewController: UIViewController {
         return self.children[0] as! UIPageViewController
     }
     
-    var currentViewController: PhotoZoomViewController {
-        return self.pageViewController.viewControllers![0] as! PhotoZoomViewController
+    var currentViewController: SlideViewController {
+        return self.pageViewController.viewControllers![0] as! SlideViewController
     }
     
     // MARK: Data source
     var findPhotos = [FindPhoto]() /// click in Photos
     var currentIndex = 0
+    var firstPlaceholderImage: UIImage? /// from the collection view
     
     // MARK: Transitioning
     var transitionController = ZoomTransitionController()
@@ -37,6 +38,8 @@ class PhotoSlidesViewController: UIViewController {
         super.viewDidLoad()
         print("loaded")
         print("Currnt index: \(currentIndex)")
+        
+        setupDelegates()
         setFirstVC()
     }
     

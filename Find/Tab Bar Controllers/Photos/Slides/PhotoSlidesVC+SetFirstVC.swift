@@ -10,12 +10,12 @@ import UIKit
 
 extension PhotoSlidesViewController {
     func setFirstVC() {
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PhotoZoomViewController") as! PhotoZoomViewController
-//        viewController.delegate = self
+        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SlideViewController") as! SlideViewController
         
         let findPhoto = findPhotos[currentIndex]
         viewController.findPhoto = findPhoto
         viewController.index = currentIndex
+        viewController.placeholderImage = firstPlaceholderImage
         
         let viewControllers = [ viewController ]
             

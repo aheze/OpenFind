@@ -4562,6 +4562,62 @@ the App!</string>
             </objects>
             <point key="canvasLocation" x="2941" y="-871"/>
         </scene>
+        <!--Slide View Controller-->
+        <scene sceneID="Iyp-5u-6q4">
+            <objects>
+                <viewController storyboardIdentifier="SlideViewController" id="NOt-wu-oWs" customClass="SlideViewController" customModule="Find" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hnb-ZX-XOX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BVi-R5-JQF">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OyK-X0-bbG">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPermissions" translatesAutoresizingMaskIntoConstraints="NO" id="dwe-kN-tFW">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="dwe-kN-tFW" firstAttribute="top" secondItem="OyK-X0-bbG" secondAttribute="top" id="LpR-Xj-hAs"/>
+                                            <constraint firstAttribute="trailing" secondItem="dwe-kN-tFW" secondAttribute="trailing" id="dDH-4c-hzn"/>
+                                            <constraint firstItem="dwe-kN-tFW" firstAttribute="leading" secondItem="OyK-X0-bbG" secondAttribute="leading" id="qox-O3-eFE"/>
+                                            <constraint firstAttribute="bottom" secondItem="dwe-kN-tFW" secondAttribute="bottom" id="to6-ZH-liT"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="OyK-X0-bbG" firstAttribute="top" secondItem="BVi-R5-JQF" secondAttribute="top" id="QJD-zd-cas"/>
+                                    <constraint firstAttribute="trailing" secondItem="OyK-X0-bbG" secondAttribute="trailing" id="b4y-Ea-bFn"/>
+                                    <constraint firstAttribute="bottom" secondItem="OyK-X0-bbG" secondAttribute="bottom" id="ccN-DV-hrC"/>
+                                    <constraint firstItem="OyK-X0-bbG" firstAttribute="width" secondItem="BVi-R5-JQF" secondAttribute="width" id="jLi-FO-Jgi"/>
+                                    <constraint firstItem="OyK-X0-bbG" firstAttribute="height" secondItem="BVi-R5-JQF" secondAttribute="height" id="oR6-bd-KbK"/>
+                                    <constraint firstItem="OyK-X0-bbG" firstAttribute="leading" secondItem="BVi-R5-JQF" secondAttribute="leading" id="psv-Cw-8ri"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BRK-R6-gWs"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BVi-R5-JQF" firstAttribute="top" secondItem="hnb-ZX-XOX" secondAttribute="top" id="Ixk-kh-jhq"/>
+                            <constraint firstItem="BVi-R5-JQF" firstAttribute="leading" secondItem="hnb-ZX-XOX" secondAttribute="leading" id="SWR-HI-PRi"/>
+                            <constraint firstAttribute="bottom" secondItem="BVi-R5-JQF" secondAttribute="bottom" id="pg1-Rj-pij"/>
+                            <constraint firstAttribute="trailing" secondItem="BVi-R5-JQF" secondAttribute="trailing" id="xwf-Ah-EjD"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contentView" destination="OyK-X0-bbG" id="cUC-0p-iPt"/>
+                        <outlet property="imageView" destination="dwe-kN-tFW" id="rcq-Do-wX1"/>
+                        <outlet property="scrollView" destination="BVi-R5-JQF" id="gEa-za-oS3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yqX-LQ-5vD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3617.3913043478265" y="-867.1875"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="eQO-08-qIa">
@@ -4580,6 +4636,7 @@ the App!</string>
         <image name="Feedback" width="200" height="200"/>
         <image name="Leica Sample" width="320" height="189.5"/>
         <image name="NotCachedThin" width="100" height="100"/>
+        <image name="PhotoPermissions" width="516" height="516"/>
         <image name="Rate" width="200" height="200"/>
         <image name="arrow.down" catalog="system" width="120" height="128"/>
         <image name="camera.fill" catalog="system" width="128" height="94"/>

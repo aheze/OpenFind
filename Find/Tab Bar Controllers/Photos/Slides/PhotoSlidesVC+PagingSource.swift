@@ -23,8 +23,8 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
         
         let leftFindPhoto = findPhotos[currentIndex - 1] /// findPhoto for this zoom vc
         
-        guard let currentViewController = viewController as? PhotoZoomViewController else { return nil }
-        let leftViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PhotoZoomViewController") as! PhotoZoomViewController
+        guard let currentViewController = viewController as? SlideViewController else { return nil }
+        let leftViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SlideViewController") as! SlideViewController
         
         leftViewController.findPhoto = leftFindPhoto
         leftViewController.index = currentViewController.index - 1
@@ -44,8 +44,8 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
         
         let rightFindPhoto = findPhotos[currentIndex + 1] /// findPhoto for this zoom vc
         
-        guard let currentViewController = viewController as? PhotoZoomViewController else { return nil }
-        let rightViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PhotoZoomViewController") as! PhotoZoomViewController
+        guard let currentViewController = viewController as? SlideViewController else { return nil }
+        let rightViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SlideViewController") as! SlideViewController
         
         rightViewController.findPhoto = rightFindPhoto
         rightViewController.index = currentViewController.index + 1
@@ -63,33 +63,11 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
             currentIndex = index
         }
         previousViewControllers.forEach { vc in
-            let zoomVC = vc as! PhotoZoomViewController
+            let zoomVC = vc as! SlideViewController
             zoomVC.scrollView.zoomScale = zoomVC.scrollView.minimumZoomScale
         }
         
         self.updatedIndex?.indexUpdated(to: currentIndex)
         
-//        if !cameFromFind {
-//            if completed {
-//                self.changedTerms = currentVC
-//                changedTerms?.returnTerms(matchToColorsR: matchToColors)
-//            }
-//            if photoModels[currentIndex].isHearted == true {
-//                let newImage = UIImage(systemName: "heart.fill")
-//                heartButton.setImage(newImage, for: .normal)
-//                heartButton.tintColor = UIColor(named: "FeedbackGradientRight")
-//            } else {
-//                let newImage = UIImage(systemName: "heart")
-//                heartButton.setImage(newImage, for: .normal)
-//                heartButton.tintColor = UIColor(hexString: "5287B6")
-//            }
-//            if photoModels[currentIndex].isDeepSearched == true {
-//                cacheButton.setImage(UIImage(named: "YesCachedThin"), for: .normal)
-//                cacheButton.tintColor = UIColor(named: "FeedbackGradientRight")
-//            } else {
-//                cacheButton.setImage(UIImage(named: "NotCachedThin"), for: .normal)
-//                cacheButton.tintColor = UIColor(hexString: "5287B6")
-//            }
-//        }
     }
 }

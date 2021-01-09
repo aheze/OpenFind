@@ -28,6 +28,11 @@ extension PhotosViewController {
 //                slidesViewController.currentIndex
                 
                 slidesViewController.findPhotos = allPhotosToDisplay
+                
+                if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell {
+                    slidesViewController.firstPlaceholderImage = cell.imageView.image
+                }
+//                if let currentImage 
 //                mainContentVC.photoSize = imageSize
 //                mainContentVC.cameFromFind = false
 //                mainContentVC.folderURL = folderURL
