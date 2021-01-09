@@ -10,6 +10,7 @@ import UIKit
 
 extension SlideViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        print("zoom")
         return contentView
     }
     

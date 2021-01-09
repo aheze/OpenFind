@@ -8,9 +8,32 @@
 
 import UIKit
 
+/// Handle gestures
+extension PhotoSlidesViewController {
+    @objc func didPanWith(gestureRecognizer: UIPanGestureRecognizer) {
+        switch gestureRecognizer.state {
+        case .began:
+            self.currentViewController.scrollView.isScrollEnabled = false
+            self.transitionController.isInteractive = true
+            self.dismiss(animated: true, completion: nil)
+        case .ended:
+            if self.transitionController.isInteractive {
+                self.currentViewController.scrollView.isScrollEnabled = true
+                self.transitionController.isInteractive = false
+                self.transitionController.didPanWith(gestureRecognizer: gestureRecognizer)
+            }
+        default:
+            if self.transitionController.isInteractive {
+                self.transitionController.didPanWith(gestureRecognizer: gestureRecognizer)
+            }
+        }
+    }
+}
+
+/// Determine cancellation / recognize at same time
 extension PhotoSlidesViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        
+        print("begin")
         if let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
             let velocity = gestureRecognizer.velocity(in: self.view)
             
@@ -31,7 +54,7 @@ extension PhotoSlidesViewController: UIGestureRecognizerDelegate {
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        
+        print("recog")
         if otherGestureRecognizer == self.currentViewController.scrollView.panGestureRecognizer {
             if self.currentViewController.scrollView.contentOffset.y == 0 {
                 return true

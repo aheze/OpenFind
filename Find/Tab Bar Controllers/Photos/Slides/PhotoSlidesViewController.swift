@@ -34,6 +34,9 @@ class PhotoSlidesViewController: UIViewController {
     // MARK: Transitioning
     var transitionController = ZoomTransitionController()
     
+    // MARK: Gestures
+    var panGestureRecognizer: UIPanGestureRecognizer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("loaded")
