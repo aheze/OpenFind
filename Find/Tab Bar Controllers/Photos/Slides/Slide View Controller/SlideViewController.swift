@@ -31,23 +31,15 @@ class SlideViewController: UIViewController {
         
         imageView.image = placeholderImage
         
+        let scale = UIScreen.main.scale
+        let targetSize = CGSize(width: contentView.bounds.width * scale, height: contentView.bounds.height * scale)
         let manager = PHImageManager.default()
         let options = PHImageRequestOptions()
-        options.deliveryMode = .highQualityFormat
-//        options.isSynchronous = true
-        manager.requestImage(for: findPhoto.asset, targetSize: contentView.bounds.size, contentMode: .aspectFit, options: options, resultHandler: { (result, info) in
-            print("result, \(info)")
+        manager.requestImage(for: findPhoto.asset, targetSize: targetSize, contentMode: .aspectFit, options: options, resultHandler: { (result, info) in
             if let photo = result {
                 self.imageView.image = photo
             }
         })
-        
-        
-//        if let url = NSURL.sd_URL(with: findPhoto.asset) {
-//            imageView.sd_imageTransition = .fade
-//            imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue])
-//        }
-        
     }
 }
 
