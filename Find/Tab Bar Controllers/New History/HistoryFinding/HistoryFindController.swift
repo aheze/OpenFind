@@ -9,6 +9,7 @@
 import UIKit
 import SwiftEntryKit
 import SDWebImage
+import SDWebImagePhotosPlugin
 import Vision
 
 class MatchesLabelObject: NSObject {
@@ -56,7 +57,7 @@ class HistoryFindController: UIViewController {
     var savedLabelObject = MatchesLabelObject()
     
     weak var changeFindbar: ChangeFindBar?
-    weak var giveNumber: GiveFindbarMatchNumber?
+//    weak var giveNumber: GiveFindbarMatchNumber?
     
     var shouldAllowPressRow = true
     
@@ -280,7 +281,7 @@ class HistoryFindController: UIViewController {
         let customView = FindBar()
         
         customView.returnTerms = self
-        self.giveNumber = customView
+//        self.giveNumber = customView
         customView.highlightColor = highlightColor
         
         self.changeFindbar = customView
@@ -330,13 +331,15 @@ class HistoryFindController: UIViewController {
         self.noResultsLabel.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         activityIndicator.hidesWhenStopped = true
         
-        if photos.count > 0 {
-            let samplePath = photos[0]
-            let finalUrl = folderURL.appendingPathComponent(samplePath.filePath)
-            if let newImage = finalUrl.loadImageFromDocumentDirectory() {
-                imageSize = newImage.size
-            }
-        }
+//        if photos.count > 0 {
+//            let samplePath = photos[0]
+//            let finalUrl = folderURL.appendingPathComponent(samplePath.filePath)
+//            
+//            
+//            if let newImage = finalUrl.loadImageFromDocumentDirectory() {
+//                imageSize = newImage.size
+//            }
+//        }
         warningView.alpha = 0
         warningView.layer.cornerRadius = 6
         warningView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
@@ -355,37 +358,50 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HFindCell", for: indexPath) as! HistoryFindCell
         cell.baseView.layer.cornerRadius = 6
         cell.baseView.clipsToBounds = true
-        let model = resultPhotos[indexPath.row]
         
-        let urlPath = model.photo.filePath
+        let findModel = resultPhotos[indexPath.row]
+        
+//        let urlPath = model.photo.filePath
         //        urlPath = "\(folderURL)\(urlPath)"
         //        let finalUrl = URL(string: urlPath)
-        let finalUrl = folderURL.appendingPathComponent(urlPath)
+//        let finalUrl = folderURL.appendingPathComponent(urlPath)
         
         var numberText = ""
-        if model.numberOfMatches == 1 {
+        if findModel.numberOfMatches == 1 {
             let oneMatch = NSLocalizedString("oneMatch", comment: "Multifile def=1 match")
             //            numberText = "\(model.numberOfMatches) match"
             numberText = oneMatch
         } else {
             
             let xSpaceMatches = NSLocalizedString("%d SpaceMatches", comment: "HistoryFindController def=x matches")
-            let string = String.localizedStringWithFormat(xSpaceMatches, model.numberOfMatches)
+            let string = String.localizedStringWithFormat(xSpaceMatches, findModel.numberOfMatches)
             //            numberText = "\(model.numberOfMatches) matches"
             numberText = string
         }
-        cell.titleLabel.text = "\(model.photo.dateCreated.convertDateToReadableString()) | \(numberText)"
-        cell.textView.text = model.descriptionText
-        cell.photoImageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-        cell.photoImageView.sd_imageTransition = .fade
-        cell.photoImageView.sd_setImage(with: finalUrl)
+            
+        
+        if let creationDate = findModel.findPhoto.asset.creationDate?.convertDateToReadableString() {
+            cell.titleLabel.text = "\(creationDate)"
+            
+        }
+//        cell.titleLabel.text = "\(findModel.findPhoto.asset.creationDate?.convertDateToReadableString()) | \(numberText)"
+        cell.textView.text = findModel.descriptionText
+        
+        
+        if let url = NSURL.sd_URL(with: findModel.findPhoto.asset) {
+
+            cell.photoImageView.sd_imageTransition = .fade
+            cell.photoImageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue])
+            
+        }
+//        cell.photoImageView.sd_setImage(with: finalUrl)
         
         // you should ensure layout
         cell.textView.layoutManager.ensureLayout(for: cell.textView.textContainer)
         
         var rects = [CGRect]()
         cell.drawingView.subviews.forEach({ $0.removeFromSuperview() })
-        for range in model.descriptionMatchRanges {
+        for range in findModel.descriptionMatchRanges {
             
             //            let start = cell.textView.positionFromPosition(cell.textView.beginningOfDocument, offset: range.location)
             guard let first = range.descriptionRange.first else { print("NO START!"); continue }
@@ -411,27 +427,27 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
         self.selectedIndexPath = indexPath
         
         if shouldAllowPressRow == true && ocrSearching == false {
-            let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
-                "PhotoPageContainerViewController") as! PhotoPageContainerViewController
-            mainContentVC.title = "PhotoPageContainerViewController"
-            
-            mainContentVC.transitioningDelegate = mainContentVC.transitionController
-            mainContentVC.transitionController.fromDelegate = self
-            mainContentVC.transitionController.toDelegate = mainContentVC
-            mainContentVC.delegate = self
-            
-            mainContentVC.currentIndex = indexPath.item
-            mainContentVC.photoSize = imageSize
-            
-            mainContentVC.folderURL = folderURL
-            
-            mainContentVC.matchToColors = matchToColors
-            mainContentVC.cameFromFind = true
-            mainContentVC.findModels = resultPhotos
-            
-            changeFindbar?.change(type: "GetLists")
-            SwiftEntryKit.dismiss()
-            self.present(mainContentVC, animated: true)
+//            let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
+//                "PhotoPageContainerViewController") as! PhotoPageContainerViewController
+//            mainContentVC.title = "PhotoPageContainerViewController"
+//            
+//            mainContentVC.transitioningDelegate = mainContentVC.transitionController
+//            mainContentVC.transitionController.fromDelegate = self
+//            mainContentVC.transitionController.toDelegate = mainContentVC
+//            mainContentVC.delegate = self
+//            
+//            mainContentVC.currentIndex = indexPath.item
+//            mainContentVC.photoSize = imageSize
+//            
+//            mainContentVC.folderURL = folderURL
+//            
+//            mainContentVC.matchToColors = matchToColors
+//            mainContentVC.cameFromFind = true
+//            mainContentVC.findModels = resultPhotos
+//            
+//            changeFindbar?.change(type: "GetLists")
+//            SwiftEntryKit.dismiss()
+//            self.present(mainContentVC, animated: true)
             
         } else {
             showWarning(show: true)
@@ -554,7 +570,7 @@ extension HistoryFindController: ReturnSortedTerms {
         matchToColors = matchToColorsR
         
         if matchToColors.keys.count == 0 {
-            self.giveNumber?.howMany(number: 0, inCache: true, noSearchTerms: true)
+//            self.giveNumber?.howMany(number: 0, inCache: true, noSearchTerms: true)
             
             
             noResultsLabel.text = startByTypingOrSelectingAList
@@ -629,7 +645,7 @@ extension HistoryFindController {
                 var num = 0
                 
                 let newMod = FindModel()
-                newMod.photo = photo
+//                newMod.photo = photo
                 
                 var descriptionOfPhoto = ""
                 var compMatches = [String: [ArrayOfMatchesInComp]]() ///COMPONENT to ranges
@@ -725,11 +741,11 @@ extension HistoryFindController {
             self.resultPhotos = findModels
             
             
-            if self.matchToColors.count == 0 {
-                self.giveNumber?.howMany(number: totalMatchNumber, inCache: true, noSearchTerms: true)
-            } else {
-                self.giveNumber?.howMany(number: totalMatchNumber, inCache: true, noSearchTerms: false)
-            }
+//            if self.matchToColors.count == 0 {
+//                self.giveNumber?.howMany(number: totalMatchNumber, inCache: true, noSearchTerms: true)
+//            } else {
+//                self.giveNumber?.howMany(number: totalMatchNumber, inCache: true, noSearchTerms: false)
+//            }
             
             
             DispatchQueue.main.async {
@@ -780,12 +796,12 @@ extension HistoryFindController {
 
 
 
-extension HistoryFindController: PhotoPageContainerViewControllerDelegate {
-    func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int) {
-        self.selectedIndexPath = IndexPath(row: currentIndex, section: 0)
-        self.tableView.scrollToRow(at: self.selectedIndexPath, at: .middle, animated: false)
-    }
-}
+//extension HistoryFindController: PhotoPageContainerViewControllerDelegate {
+//    func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int) {
+//        self.selectedIndexPath = IndexPath(row: currentIndex, section: 0)
+//        self.tableView.scrollToRow(at: self.selectedIndexPath, at: .middle, animated: false)
+//    }
+//}
 
 extension HistoryFindController: ZoomAnimatorDelegate {
     
@@ -814,7 +830,7 @@ extension HistoryFindController: ZoomAnimatorDelegate {
             
             let customView = FindBar()
             customView.returnTerms = self
-            self.giveNumber = customView
+//            self.giveNumber = customView
             customView.highlightColor = self.highlightColor
             
             self.changeFindbar = customView
@@ -1251,7 +1267,10 @@ extension HistoryFindController {
             
             var foundSamePhoto = false
             for existingModel in self.resultPhotos {
-                if photo.dateCreated == existingModel.photo.dateCreated {
+                if
+                    let creationDate = existingModel.findPhoto.asset.creationDate,
+                    photo.dateCreated == creationDate
+                {
                     foundSamePhoto = true
                     var componentsToAdd = [Component]()
                     var newMatchesNumber = 0
@@ -1292,7 +1311,8 @@ extension HistoryFindController {
                 let height = descriptionOfPhoto.heightWithConstrainedWidth(width: finalWidth, font: UIFont.systemFont(ofSize: 14))
                 let finalHeight = height + 70
                 
-                newMod.photo = photo
+//                newMod.photo = photo
+//                newMod.findPhoto.model = photo
                 newMod.descriptionMatchRanges = finalRangesObjects
                 newMod.numberOfMatches = numberOfMatches
                 newMod.descriptionText = descriptionOfPhoto
@@ -1312,11 +1332,11 @@ extension HistoryFindController {
     
     func finishOCR() {
         
-        if matchToColors.count == 0 {
-            self.giveNumber?.howMany(number: newOCRfindNumber, inCache: false, noSearchTerms: true)
-        } else {
-            self.giveNumber?.howMany(number: newOCRfindNumber, inCache: false, noSearchTerms: false)
-        }
+//        if matchToColors.count == 0 {
+//            self.giveNumber?.howMany(number: newOCRfindNumber, inCache: false, noSearchTerms: true)
+//        } else {
+//            self.giveNumber?.howMany(number: newOCRfindNumber, inCache: false, noSearchTerms: false)
+//        }
         DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()
             self.histCenterC.constant = 0
@@ -1378,7 +1398,7 @@ extension HistoryFindController: UIAdaptivePresentationControllerDelegate {
         
         let customView = FindBar()
         customView.returnTerms = self
-        self.giveNumber = customView
+//        self.giveNumber = customView
         customView.highlightColor = self.highlightColor
         
         self.changeFindbar = customView

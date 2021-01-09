@@ -294,3 +294,72 @@ func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
         set: { lhs.wrappedValue = $0 }
     )
 }
+
+extension Date {
+    func convertDateToReadableString() -> String {
+        
+        let todayLoc = NSLocalizedString("todayLoc", comment: "extensionDate def=Today")
+        let yesterdayLoc = NSLocalizedString("yesterdayLoc", comment: "extensionDate def=Yesterday")
+        
+        
+        
+        /// Initializing a Date object will always return the current date (including time)
+        let todaysDate = Date()
+        
+        guard let yesterday = todaysDate.subtract(days: 1) else { return "2020"}
+        
+        guard let oneWeekAgo = todaysDate.subtract(days: 7) else { return "2020"}
+        guard let yestYesterday = yesterday.subtract(days: 1) else { return "2020"}
+        
+        /// This will be any date from one week ago to the day before yesterday
+        let recently = oneWeekAgo...yestYesterday
+        
+        /// convert the date into a string, if the date is before yesterday
+        let dateFormatter = DateFormatter()
+        
+        /// If self (the date that you're comparing) is today
+        if self.hasSame(.day, as: todaysDate) {
+            return todayLoc
+            
+            /// if self is yesterday
+        } else if self.hasSame(.day, as: yesterday) {
+            return yesterdayLoc
+            
+            /// if self is in between one week ago and the day before yesterday
+        } else if recently.contains(self) {
+            
+            /// "EEEE" will display something like "Wednesday" (the weekday)
+            dateFormatter.dateFormat = "EEEE"
+            return dateFormatter.string(from: self)
+            
+            /// self is before one week ago
+        } else {
+            
+            /// displays the date as "January 1, 2020"
+            /// the ' ' marks indicate a character that you add (in our case, a comma)
+            dateFormatter.dateFormat = "MMMM d',' yyyy"
+            return dateFormatter.string(from: self)
+        }
+        
+    }
+    
+    /// Thanks to Vasily Bodnarchuk: https://stackoverflow.com/a/40654331
+    func compare(with date: Date, only component: Calendar.Component) -> Int {
+        let days1 = Calendar.current.component(component, from: self)
+        let days2 = Calendar.current.component(component, from: date)
+        return days1 - days2
+    }
+    
+    func hasSame(_ component: Calendar.Component, as date: Date) -> Bool {
+        return self.compare(with: date, only: component) == 0
+    }
+    
+    func add(years: Int = 0, months: Int = 0, days: Int = 0, hours: Int = 0, minutes: Int = 0, seconds: Int = 0) -> Date? {
+        let comp = DateComponents(year: years, month: months, day: days, hour: hours, minute: minutes, second: seconds)
+        return Calendar.current.date(byAdding: comp, to: self)
+    }
+    
+    func subtract(years: Int = 0, months: Int = 0, days: Int = 0, hours: Int = 0, minutes: Int = 0, seconds: Int = 0) -> Date? {
+        return add(years: -years, months: -months, days: -days, hours: -hours, minutes: -minutes, seconds: -seconds)
+    }
+}

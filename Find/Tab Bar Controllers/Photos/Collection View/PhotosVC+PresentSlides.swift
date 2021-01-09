@@ -12,6 +12,35 @@ extension PhotosViewController {
     func presentFromIndexPath(indexPath: IndexPath, directFind: Bool = false) {
         if let findPhoto = dataSource.itemIdentifier(for: indexPath) {
             print("has findPhto")
+            if let currentIndex = allPhotosToDisplay.firstIndex(of: findPhoto) {
+                print("first")
+                
+                let slidesViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
+                                                                                                        "PhotoSlidesViewController") as! PhotoSlidesViewController
+//                mainContentVC.title = "PhotoPageContainerViewController"
+                self.selectedIndexPath = indexPath
+                slidesViewController.transitioningDelegate = slidesViewController.transitionController
+                slidesViewController.transitionController.fromDelegate = self
+                slidesViewController.transitionController.toDelegate = slidesViewController
+                slidesViewController.updatedIndex = self
+                slidesViewController.currentIndex = currentIndex
+                
+                
+                slidesViewController.findPhotos = allPhotosToDisplay
+//                mainContentVC.photoSize = imageSize
+//                mainContentVC.cameFromFind = false
+//                mainContentVC.folderURL = folderURL
+                
+//                mainContentVC.goDirectlyToFind = directFind
+                
+//                mainContentVC.highlightColor = highlightColor
+//
+//                mainContentVC.deletedPhoto = self
+//                mainContentVC.changeModel = self
+//                mainContentVC.changeCache = self
+                
+                self.present(slidesViewController, animated: true)
+            }
         }
         
         

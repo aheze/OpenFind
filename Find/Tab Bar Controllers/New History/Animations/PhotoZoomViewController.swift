@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import SDWebImagePhotosPlugin
 import Vision
 
 protocol PhotoZoomViewControllerDelegate: class {
@@ -29,7 +30,9 @@ class PhotoZoomViewController: UIViewController {
     
     var cameFromFind = false
     var ocrSearching = false
-    var folderURL = URL(fileURLWithPath: "", isDirectory: true)
+//    var folderURL = URL(fileURLWithPath: "", isDirectory: true)
+    
+    var findPhoto = FindPhoto()
     
     var deviceSize = screenBounds.size
     
@@ -47,7 +50,7 @@ class PhotoZoomViewController: UIViewController {
     var oldFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
     
     var index: Int = 0
-    var url: URL?
+//    var url: URL?
     var imageSize: CGSize = CGSize(width: 0, height: 0) {
         didSet {
             print(imageSize)
@@ -71,7 +74,16 @@ class PhotoZoomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         progressView.alpha = 0
-        self.imageView.sd_setImage(with: url)
+//        self.imageView.sd_setImage(with: url)
+        
+        if let url = NSURL.sd_URL(with: findPhoto.asset) {
+
+            imageView.sd_imageTransition = .fade
+            imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue])
+            
+        }
+        
+        
         self.scrollView.delegate = self
         if #available(iOS 11, *) {
             self.scrollView.contentInsetAdjustmentBehavior = .never
@@ -265,198 +277,199 @@ extension PhotoZoomViewController: UIScrollViewDelegate {
     }
 }
 
-extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
-    
-    func returnTerms(matchToColorsR: [String: [CGColor]]) {
-        matchToColors = matchToColorsR
-        fastFind()
-    }
-    func pressedReturn() {
-        ocrFind(photo: photoComp)
-    }
-    
-    func fastFind() {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let photo = self.photoComp
-            var num = 0
-            var newFastComponents = [Component]()
-            
-            /// Cycle through each block of text. Each cont may be a line long.
-            for cont in photo.contents {
-                let lowercaseContText = cont.text.lowercased()
-                let individualCharacterWidth = CGFloat(cont.width) / CGFloat(lowercaseContText.count)
-                for match in self.matchToColors.keys {
-                    if lowercaseContText.contains(match) {
-                        let finalW = individualCharacterWidth * CGFloat(match.count)
-                        let indicies = lowercaseContText.indicesOf(string: match)
-                        
-                        for index in indicies {
-                            num += 1
-                            let addedWidth = individualCharacterWidth * CGFloat(index)
-                            let finalX = CGFloat(cont.x) + addedWidth
-                            let newComponent = Component()
-                            
-                            newComponent.x = finalX
-                            newComponent.y = CGFloat(cont.y) - (CGFloat(cont.height))
-                            newComponent.width = finalW
-                            newComponent.height = CGFloat(cont.height)
-                            newComponent.text = match
-                            
-                            newFastComponents.append(newComponent)
-                        }
-                    }
-                }
-            }
-            
-            self.highlights = newFastComponents
-            DispatchQueue.main.async {
-                self.scaleHighlights()
-                self.returnNumber?.howMany(number: self.highlights.count, searchInCache: true)
-            }
-            
-        }
-        
-        
-    }
-    
-    func ocrFind(photo: EditableHistoryModel) {
-        ocrSearching = true
-        
-        DispatchQueue.main.async {
-            self.progressHeightC.constant = 20
-            UIView.animate(withDuration: 0.12, animations: {
-                self.progressView.alpha = 1
-                self.progressView.setProgress(Float(0), animated: true)
-                self.view.layoutIfNeeded()
-            })
-        }
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            let photoUrl = self.folderURL.appendingPathComponent(photo.filePath)
-            
-            let request = VNRecognizeTextRequest { request, error in
-                self.handleFastDetectedText(request: request, error: error, photo: photo)
-            }
-            
-            var customFindArray = [String]()
-            for findWord in self.matchToColors.keys {
-                customFindArray.append(findWord)
-                customFindArray.append(findWord.lowercased())
-                customFindArray.append(findWord.uppercased())
-                customFindArray.append(findWord.capitalizingFirstLetter())
-            }
-            
-            request.customWords = customFindArray
-            request.recognitionLevel = .fast
-            request.recognitionLanguages = ["en_GB"]
-            let imageRequestHandler = VNImageRequestHandler(url: photoUrl, orientation: .up)
-            do {
-                try imageRequestHandler.perform([request])
-            } catch let error {
-                print("Error: \(error)")
-            }
-        }
-    }
-    
-    func handleFastDetectedText(request: VNRequest?, error: Error?, photo: EditableHistoryModel) {
-            
-        DispatchQueue.main.async {
-            self.progressHeightC.constant = 2
-            UIView.animate(withDuration: 0.6, animations: {
-                self.progressView.setProgress(Float(1), animated: true)
-                self.progressView.alpha = 0
-                self.view.layoutIfNeeded()
-            })
-        }
-        
-        guard let results = request?.results, results.count > 0 else {
-            print("no results")
-            self.returnNumber?.howMany(number: 0, searchInCache: false)
-            return
-        }
-
-        var contents = [EditableSingleHistoryContent]()
-        
-        for result in results {
-            if let observation = result as? VNRecognizedTextObservation {
-                for text in observation.topCandidates(1) {
-                    
-                    let origX = observation.boundingBox.origin.x
-                    let origY = 1 - observation.boundingBox.minY
-                    let origWidth = observation.boundingBox.width
-                    let origHeight = observation.boundingBox.height
-                    
-                    let singleContent = EditableSingleHistoryContent()
-                    singleContent.text = text.string
-                    singleContent.x = origX
-                    singleContent.y = origY
-                    singleContent.width = origWidth
-                    singleContent.height = origHeight
-                    contents.append(singleContent)
-                }
-            }
-        }
-        var numberOfMatches = 0
-        
-        var findComponents = [Component]()
-        
-        for cont in contents {
-            let lowercaseContText = cont.text.lowercased()
-            
-            let individualCharacterWidth = CGFloat(cont.width) / CGFloat(lowercaseContText.count)
-            for match in self.matchToColors.keys {
-                if lowercaseContText.contains(match) {
-                    let finalW = individualCharacterWidth * CGFloat(match.count)
-                    let indicies = lowercaseContText.indicesOf(string: match)
-                    
-                    for index in indicies {
-                        numberOfMatches += 1
-                        let addedWidth = individualCharacterWidth * CGFloat(index)
-                        let finalX = CGFloat(cont.x) + addedWidth
-                        let newComponent = Component()
-                        newComponent.x = finalX
-                        newComponent.y = CGFloat(cont.y) - (CGFloat(cont.height))
-                        newComponent.width = finalW
-                        newComponent.height = CGFloat(cont.height)
-                        newComponent.text = match
-                        findComponents.append(newComponent)
-                        
-                    }
-                }
-            }
-        }
-        
-        var componentsToAdd = [Component]()
-        
-        for newFindMatch in findComponents {
-            var smallestDist = CGFloat(999)
-            for findMatch in highlights {
-                
-                let point1 = CGPoint(x: findMatch.x, y: findMatch.y)
-                let point2 = CGPoint(x: newFindMatch.x, y: newFindMatch.y)
-                let pointDistance = relativeDistance(point1, point2)
-                
-                if pointDistance < smallestDist {
-                    smallestDist = pointDistance
-                }
-                
-            }
-            if smallestDist >= 0.008 { /// Bigger, so add it
-                componentsToAdd.append(newFindMatch)
-            }
-        }
-        
-        DispatchQueue.main.async {
-            self.highlights += componentsToAdd
-            self.returnNumber?.howMany(number: componentsToAdd.count, searchInCache: false)
-            self.scaleHighlights()
-        }
-    }
-    
-    func relativeDistance(_ a: CGPoint, _ b: CGPoint) -> CGFloat {
-        let xDist = a.x - b.x
-        let yDist = a.y - b.y
-        return CGFloat(xDist * xDist + yDist * yDist)
-    }
-}
+//extension PhotoZoomViewController: ChangedSearchTermsFromZoom {
+//    
+//    func returnTerms(matchToColorsR: [String: [CGColor]]) {
+//        matchToColors = matchToColorsR
+//        fastFind()
+//    }
+//    func pressedReturn() {
+//        ocrFind(photo: photoComp)
+//    }
+//    
+//    func fastFind() {
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            let photo = self.photoComp
+//            var num = 0
+//            var newFastComponents = [Component]()
+//            
+//            /// Cycle through each block of text. Each cont may be a line long.
+//            for cont in photo.contents {
+//                let lowercaseContText = cont.text.lowercased()
+//                let individualCharacterWidth = CGFloat(cont.width) / CGFloat(lowercaseContText.count)
+//                for match in self.matchToColors.keys {
+//                    if lowercaseContText.contains(match) {
+//                        let finalW = individualCharacterWidth * CGFloat(match.count)
+//                        let indicies = lowercaseContText.indicesOf(string: match)
+//                        
+//                        for index in indicies {
+//                            num += 1
+//                            let addedWidth = individualCharacterWidth * CGFloat(index)
+//                            let finalX = CGFloat(cont.x) + addedWidth
+//                            let newComponent = Component()
+//                            
+//                            newComponent.x = finalX
+//                            newComponent.y = CGFloat(cont.y) - (CGFloat(cont.height))
+//                            newComponent.width = finalW
+//                            newComponent.height = CGFloat(cont.height)
+//                            newComponent.text = match
+//                            
+//                            newFastComponents.append(newComponent)
+//                        }
+//                    }
+//                }
+//            }
+//            
+//            self.highlights = newFastComponents
+//            DispatchQueue.main.async {
+//                self.scaleHighlights()
+//                self.returnNumber?.howMany(number: self.highlights.count, searchInCache: true)
+//            }
+//            
+//        }
+//        
+//        
+//    }
+//    
+//    func ocrFind(photo: EditableHistoryModel) {
+//        ocrSearching = true
+//        
+////        DispatchQueue.main.async {
+////            self.progressHeightC.constant = 20
+////            UIView.animate(withDuration: 0.12, animations: {
+////                self.progressView.alpha = 1
+////                self.progressView.setProgress(Float(0), animated: true)
+////                self.view.layoutIfNeeded()
+////            })
+////        }
+////
+////        DispatchQueue.global(qos: .userInitiated).async {
+//////            let photoUrl = self.folderURL.appendingPathComponent(photo.filePath)
+////
+////
+////            let request = VNRecognizeTextRequest { request, error in
+////                self.handleFastDetectedText(request: request, error: error, photo: photo)
+////            }
+////
+////            var customFindArray = [String]()
+////            for findWord in self.matchToColors.keys {
+////                customFindArray.append(findWord)
+////                customFindArray.append(findWord.lowercased())
+////                customFindArray.append(findWord.uppercased())
+////                customFindArray.append(findWord.capitalizingFirstLetter())
+////            }
+////
+////            request.customWords = customFindArray
+////            request.recognitionLevel = .fast
+////            request.recognitionLanguages = ["en_GB"]
+////            let imageRequestHandler = VNImageRequestHandler(url: photoUrl, orientation: .up)
+////            do {
+////                try imageRequestHandler.perform([request])
+////            } catch let error {
+////                print("Error: \(error)")
+////            }
+////        }
+//    }
+//    
+//    func handleFastDetectedText(request: VNRequest?, error: Error?, photo: EditableHistoryModel) {
+//            
+//        DispatchQueue.main.async {
+//            self.progressHeightC.constant = 2
+//            UIView.animate(withDuration: 0.6, animations: {
+//                self.progressView.setProgress(Float(1), animated: true)
+//                self.progressView.alpha = 0
+//                self.view.layoutIfNeeded()
+//            })
+//        }
+//        
+//        guard let results = request?.results, results.count > 0 else {
+//            print("no results")
+//            self.returnNumber?.howMany(number: 0, searchInCache: false)
+//            return
+//        }
+//
+//        var contents = [EditableSingleHistoryContent]()
+//        
+//        for result in results {
+//            if let observation = result as? VNRecognizedTextObservation {
+//                for text in observation.topCandidates(1) {
+//                    
+//                    let origX = observation.boundingBox.origin.x
+//                    let origY = 1 - observation.boundingBox.minY
+//                    let origWidth = observation.boundingBox.width
+//                    let origHeight = observation.boundingBox.height
+//                    
+//                    let singleContent = EditableSingleHistoryContent()
+//                    singleContent.text = text.string
+//                    singleContent.x = origX
+//                    singleContent.y = origY
+//                    singleContent.width = origWidth
+//                    singleContent.height = origHeight
+//                    contents.append(singleContent)
+//                }
+//            }
+//        }
+//        var numberOfMatches = 0
+//        
+//        var findComponents = [Component]()
+//        
+//        for cont in contents {
+//            let lowercaseContText = cont.text.lowercased()
+//            
+//            let individualCharacterWidth = CGFloat(cont.width) / CGFloat(lowercaseContText.count)
+//            for match in self.matchToColors.keys {
+//                if lowercaseContText.contains(match) {
+//                    let finalW = individualCharacterWidth * CGFloat(match.count)
+//                    let indicies = lowercaseContText.indicesOf(string: match)
+//                    
+//                    for index in indicies {
+//                        numberOfMatches += 1
+//                        let addedWidth = individualCharacterWidth * CGFloat(index)
+//                        let finalX = CGFloat(cont.x) + addedWidth
+//                        let newComponent = Component()
+//                        newComponent.x = finalX
+//                        newComponent.y = CGFloat(cont.y) - (CGFloat(cont.height))
+//                        newComponent.width = finalW
+//                        newComponent.height = CGFloat(cont.height)
+//                        newComponent.text = match
+//                        findComponents.append(newComponent)
+//                        
+//                    }
+//                }
+//            }
+//        }
+//        
+//        var componentsToAdd = [Component]()
+//        
+//        for newFindMatch in findComponents {
+//            var smallestDist = CGFloat(999)
+//            for findMatch in highlights {
+//                
+//                let point1 = CGPoint(x: findMatch.x, y: findMatch.y)
+//                let point2 = CGPoint(x: newFindMatch.x, y: newFindMatch.y)
+//                let pointDistance = relativeDistance(point1, point2)
+//                
+//                if pointDistance < smallestDist {
+//                    smallestDist = pointDistance
+//                }
+//                
+//            }
+//            if smallestDist >= 0.008 { /// Bigger, so add it
+//                componentsToAdd.append(newFindMatch)
+//            }
+//        }
+//        
+//        DispatchQueue.main.async {
+//            self.highlights += componentsToAdd
+//            self.returnNumber?.howMany(number: componentsToAdd.count, searchInCache: false)
+//            self.scaleHighlights()
+//        }
+//    }
+//    
+//    func relativeDistance(_ a: CGPoint, _ b: CGPoint) -> CGFloat {
+//        let xDist = a.x - b.x
+//        let yDist = a.y - b.y
+//        return CGFloat(xDist * xDist + yDist * yDist)
+//    }
+//}
 

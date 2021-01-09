@@ -81,8 +81,6 @@ extension PhotosViewController {
             formatter.dateFormat = "MMMM yyyy"
             let dateAsString = formatter.string(from: section.monthDate)
             
-            
-//            view?.monthLabel.text = section.title
             view?.monthLabel.text = dateAsString
             return view
         }

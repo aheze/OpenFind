@@ -46,6 +46,8 @@ class PhotosViewController: UIViewController {
         }
     }
     
+    var selectedIndexPath: IndexPath? /// current indexPath pressed when go to slides vc
+    
     // MARK: Diffable Data Source
     lazy var dataSource = makeDataSource()
     typealias DataSource = UICollectionViewDiffableDataSource<Month, FindPhoto>

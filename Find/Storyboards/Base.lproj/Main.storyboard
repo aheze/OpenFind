@@ -4053,6 +4053,21 @@ the App!</string>
             </objects>
             <point key="canvasLocation" x="1424.6376811594205" y="-934.15178571428567"/>
         </scene>
+        <!--Photo Slides View Controller-->
+        <scene sceneID="yVk-ZI-3KQ">
+            <objects>
+                <viewController storyboardIdentifier="PhotoSlidesViewController" id="ftn-4Q-7W3" customClass="PhotoSlidesViewController" customModule="Find" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="q1B-6m-Sbl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="xfy-aH-kmF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I4j-4R-aY6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2153" y="-871"/>
+        </scene>
         <!--Photo Page Container View Controller-->
         <scene sceneID="1OH-r9-WSZ">
             <objects>

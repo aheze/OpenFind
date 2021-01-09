@@ -676,60 +676,60 @@ class SearchCollectionCell: UICollectionViewCell {
 }
 
 
-extension FindBar: GiveFindbarMatchNumber {
-    func howMany(number: Int, inCache: Bool, noSearchTerms: Bool) {
-        DispatchQueue.main.async {
-            if noSearchTerms {
-                self.totalResultsNumber = 0
-                self.origCacheNumber = 0
-                self.searchingOnlyInCache = true
-                self.resultsLabel.text = "                                   "
-            } else {
-                if inCache {
-                    self.origCacheNumber = number
-                    self.totalResultsNumber = number
-                    self.searchingOnlyInCache = true
-//                    if number == 0 {
-//                        self.resultsLabel.text = "No Matches in "
-//                    } else if number == 1 {
-//                        self.resultsLabel.text = "1 Match in "
-//                    } else {
-//                        self.resultsLabel.text = "\(number) Matches in "
-//                    }
-////                    print("mani asynccache: \(number)")
-//    //                let textH = 35
-//                    let imageRect = CGRect(x: 0, y: 2.5, width: 30, height: 30)
-//                    self.resultsLabel.addImageWith(name: "TextFieldCache", behindText: true, bounds: imageRect)
-                    self.setResultLabelText(searchingInCache: true, number: number)
-                } else {
-                    let newNumber = self.origCacheNumber + number
-                    self.searchingOnlyInCache = false
-                    self.totalResultsNumber = newNumber
-//                    print("newNNN ;\(newNumber)")
-                    self.setResultLabelText(searchingInCache: false, number: newNumber)
-//                    if newNumber == 0 {
-//
-//                        let noMatches = NSLocalizedString("noMatches", comment: "FindBar def=No Matches")
-//                        self.resultsLabel.text = noMatches
-//                    } else if totalResultsNumber == 1 {
-//
-//                        self.resultsLabel.text = oneMatch
-//                    } else {
-//                        let matches = NSLocalizedString("matches", comment: "FindBar def=Matches")
-//                        self.resultsLabel.text = "\(newNumber) \(matches)"
-//                    }
-//                    if newNumber == 0 {
-//                        self.resultsLabel.text = "No Matches"
-//                    } else if newNumber == 1 {
-//                        self.resultsLabel.text = "1 Match "
-//                    } else {
-//                        self.resultsLabel.text = "\(newNumber) Matches"
-//                    }
-                }
-            }
-        }
-    }
-}
+//extension FindBar: GiveFindbarMatchNumber {
+//    func howMany(number: Int, inCache: Bool, noSearchTerms: Bool) {
+//        DispatchQueue.main.async {
+//            if noSearchTerms {
+//                self.totalResultsNumber = 0
+//                self.origCacheNumber = 0
+//                self.searchingOnlyInCache = true
+//                self.resultsLabel.text = "                                   "
+//            } else {
+//                if inCache {
+//                    self.origCacheNumber = number
+//                    self.totalResultsNumber = number
+//                    self.searchingOnlyInCache = true
+////                    if number == 0 {
+////                        self.resultsLabel.text = "No Matches in "
+////                    } else if number == 1 {
+////                        self.resultsLabel.text = "1 Match in "
+////                    } else {
+////                        self.resultsLabel.text = "\(number) Matches in "
+////                    }
+//////                    print("mani asynccache: \(number)")
+////    //                let textH = 35
+////                    let imageRect = CGRect(x: 0, y: 2.5, width: 30, height: 30)
+////                    self.resultsLabel.addImageWith(name: "TextFieldCache", behindText: true, bounds: imageRect)
+//                    self.setResultLabelText(searchingInCache: true, number: number)
+//                } else {
+//                    let newNumber = self.origCacheNumber + number
+//                    self.searchingOnlyInCache = false
+//                    self.totalResultsNumber = newNumber
+////                    print("newNNN ;\(newNumber)")
+//                    self.setResultLabelText(searchingInCache: false, number: newNumber)
+////                    if newNumber == 0 {
+////
+////                        let noMatches = NSLocalizedString("noMatches", comment: "FindBar def=No Matches")
+////                        self.resultsLabel.text = noMatches
+////                    } else if totalResultsNumber == 1 {
+////
+////                        self.resultsLabel.text = oneMatch
+////                    } else {
+////                        let matches = NSLocalizedString("matches", comment: "FindBar def=Matches")
+////                        self.resultsLabel.text = "\(newNumber) \(matches)"
+////                    }
+////                    if newNumber == 0 {
+////                        self.resultsLabel.text = "No Matches"
+////                    } else if newNumber == 1 {
+////                        self.resultsLabel.text = "1 Match "
+////                    } else {
+////                        self.resultsLabel.text = "\(newNumber) Matches"
+////                    }
+//                }
+//            }
+//        }
+//    }
+//}
 
 class InsetTextField: UITextField {
     
