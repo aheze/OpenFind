@@ -3319,6 +3319,7 @@ the App!</string>
                         <outlet property="collectionView" destination="0iz-9s-4iE" id="LLE-S0-QeL"/>
                         <outlet property="segmentedSlider" destination="0XE-et-vDj" id="Dif-0H-LbJ"/>
                         <outlet property="segmentedSliderBottomC" destination="I3k-SL-fnM" id="KJ8-2E-Oeq"/>
+                        <segue destination="ftn-4Q-7W3" kind="show" identifier="ShowSlides" id="8cS-an-jcm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cyf-3f-e0g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -4058,11 +4059,11 @@ the App!</string>
             <objects>
                 <viewController storyboardIdentifier="PhotoSlidesViewController" id="ftn-4Q-7W3" customClass="PhotoSlidesViewController" customModule="Find" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="q1B-6m-Sbl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6tX-E6-tlq">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <connections>
                                     <segue destination="Y0h-2n-qcz" kind="embed" id="vDt-Ux-qSh"/>
                                 </connections>
@@ -4077,6 +4078,7 @@ the App!</string>
                             <constraint firstItem="6tX-E6-tlq" firstAttribute="top" secondItem="q1B-6m-Sbl" secondAttribute="top" id="nTh-GN-eQO"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="wQi-gR-ZkJ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I4j-4R-aY6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

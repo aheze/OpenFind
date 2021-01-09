@@ -9,44 +9,75 @@
 import UIKit
 
 extension PhotosViewController {
-    func presentFromIndexPath(indexPath: IndexPath, directFind: Bool = false) {
-        if let findPhoto = dataSource.itemIdentifier(for: indexPath) {
-            print("has findPhto")
+    func presentFromIndexPath(indexPath: IndexPath) {
+        self.selectedIndexPath = indexPath
+        self.performSegue(withIdentifier: "ShowSlides", sender: self)
+    }
+      
+    func configureSlides(navigationController: UINavigationController, slidesViewController: PhotoSlidesViewController) {
+
+        
+        
+       
+        
+        
+        
+        if let indexPath = selectedIndexPath, let findPhoto = dataSource.itemIdentifier(for: indexPath) {
+            
+            
+            navigationController.delegate = slidesViewController.transitionController
+            slidesViewController.transitionController.fromDelegate = self
+            slidesViewController.transitionController.toDelegate = slidesViewController
+            slidesViewController.updatedIndex = self
+            
+            slidesViewController.findPhotos = allPhotosToDisplay
+            
+            
             if let currentIndex = allPhotosToDisplay.firstIndex(of: findPhoto) {
-                print("first")
-                
-                let slidesViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
-                                                                                                        "PhotoSlidesViewController") as! PhotoSlidesViewController
-//                mainContentVC.title = "PhotoPageContainerViewController"
-                self.selectedIndexPath = indexPath
-                slidesViewController.transitioningDelegate = slidesViewController.transitionController
-                slidesViewController.transitionController.fromDelegate = self
-                slidesViewController.transitionController.toDelegate = slidesViewController
-                slidesViewController.updatedIndex = self
                 slidesViewController.currentIndex = currentIndex
-                
-//                slidesViewController.currentIndex
-                
-                slidesViewController.findPhotos = allPhotosToDisplay
-                
-                if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell {
-                    slidesViewController.firstPlaceholderImage = cell.imageView.image
-                }
-//                if let currentImage 
-//                mainContentVC.photoSize = imageSize
-//                mainContentVC.cameFromFind = false
-//                mainContentVC.folderURL = folderURL
-                
-//                mainContentVC.goDirectlyToFind = directFind
-                
-//                mainContentVC.highlightColor = highlightColor
-//
-//                mainContentVC.deletedPhoto = self
-//                mainContentVC.changeModel = self
-//                mainContentVC.changeCache = self
-                
-                self.present(slidesViewController, animated: true)
             }
+            
+            if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell {
+                slidesViewController.firstPlaceholderImage = cell.imageView.image
+            }
+            
+            
+            print("has findPhto")
+//            if let currentIndex = allPhotosToDisplay.firstIndex(of: findPhoto) {
+//                print("first")
+//
+//                let slidesViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
+//                                                                                                        "PhotoSlidesViewController") as! PhotoSlidesViewController
+////                mainContentVC.title = "PhotoPageContainerViewController"
+////                self.selectedIndexPath = indexPath
+//                slidesViewController.transitioningDelegate = slidesViewController.transitionController
+//                slidesViewController.transitionController.fromDelegate = self
+//                slidesViewController.transitionController.toDelegate = slidesViewController
+//                slidesViewController.updatedIndex = self
+//                slidesViewController.currentIndex = currentIndex
+//
+////                slidesViewController.currentIndex
+//
+//                slidesViewController.findPhotos = allPhotosToDisplay
+//
+//
+////                if let currentImage
+////                mainContentVC.photoSize = imageSize
+////                mainContentVC.cameFromFind = false
+////                mainContentVC.folderURL = folderURL
+//
+////                mainContentVC.goDirectlyToFind = directFind
+//
+////                mainContentVC.highlightColor = highlightColor
+////
+////                mainContentVC.deletedPhoto = self
+////                mainContentVC.changeModel = self
+////                mainContentVC.changeCache = self
+//
+////                self.present(slidesViewController, animated: true)
+////                self.navigationController?.pushViewController(slidesViewController, animated: true)
+////                self.performSegue(withIdentifier: "ShowSlides", sender: self)
+//            }
         }
         
         
