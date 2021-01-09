@@ -25,6 +25,7 @@ extension PhotosViewController {
                 slidesViewController.updatedIndex = self
                 slidesViewController.currentIndex = currentIndex
                 
+//                slidesViewController.currentIndex
                 
                 slidesViewController.findPhotos = allPhotosToDisplay
 //                mainContentVC.photoSize = imageSize

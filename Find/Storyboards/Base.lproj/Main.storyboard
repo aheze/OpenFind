@@ -4060,13 +4060,27 @@ the App!</string>
                     <view key="view" contentMode="scaleToFill" id="q1B-6m-Sbl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6tX-E6-tlq">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <connections>
+                                    <segue destination="Y0h-2n-qcz" kind="embed" id="vDt-Ux-qSh"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="xfy-aH-kmF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="6tX-E6-tlq" secondAttribute="trailing" id="Ldq-qD-lZj"/>
+                            <constraint firstItem="6tX-E6-tlq" firstAttribute="leading" secondItem="q1B-6m-Sbl" secondAttribute="leading" id="TBc-5A-J33"/>
+                            <constraint firstAttribute="bottom" secondItem="6tX-E6-tlq" secondAttribute="bottom" id="Vii-ur-7Za"/>
+                            <constraint firstItem="6tX-E6-tlq" firstAttribute="top" secondItem="q1B-6m-Sbl" secondAttribute="top" id="nTh-GN-eQO"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I4j-4R-aY6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2153" y="-871"/>
+            <point key="canvasLocation" x="2152.1739130434785" y="-871.20535714285711"/>
         </scene>
         <!--Photo Page Container View Controller-->
         <scene sceneID="1OH-r9-WSZ">
@@ -4539,6 +4553,14 @@ the App!</string>
                 </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1510" y="177"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="9nT-J8-2rZ">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="Y0h-2n-qcz" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="002-Ue-Asl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2941" y="-871"/>
         </scene>
     </scenes>
     <designables>

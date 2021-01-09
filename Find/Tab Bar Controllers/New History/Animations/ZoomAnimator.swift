@@ -31,6 +31,7 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
         deletedLast = true
     }
     fileprivate func animateZoomInTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        print("Aniate zoom in")
         let containerView = transitionContext.containerView
         guard let toVC = transitionContext.viewController(forKey: .to),
             let _ = transitionContext.viewController(forKey: .from),
@@ -38,8 +39,11 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
             let toReferenceImageView = self.toDelegate?.referenceImageView(for: self),
             let fromReferenceImageViewFrame = self.fromDelegate?.referenceImageViewFrameInTransitioningView(for: self)
             else {
+            print("nope")
                 return
         }
+        
+        print("sniamte zomo in")
         
         self.fromDelegate?.transitionWillStartWith(zoomAnimator: self)
         self.toDelegate?.transitionWillStartWith(zoomAnimator: self)
@@ -53,6 +57,8 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
         
         guard let referenceImage = fromReferenceImageView.image else { transitionContext.completeTransition(false)
             return }
+        
+        print("2")
         
         if self.transitionImageView == nil {
             let transitionImageView = UIImageView(image: referenceImage)
@@ -92,7 +98,7 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
     
     fileprivate func animateZoomOutTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let containerView = transitionContext.containerView
-        
+        print("Soom out")
         if deletedLast == true {
             guard let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
                 let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),

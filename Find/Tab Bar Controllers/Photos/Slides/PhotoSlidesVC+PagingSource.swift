@@ -15,6 +15,7 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
     
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        print("before")
         
         if currentIndex == 0 {
             return nil
@@ -36,7 +37,7 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-  
+        print("after")
         if currentIndex == (self.findPhotos.count - 1) {
             return nil
         }

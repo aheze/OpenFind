@@ -20,6 +20,6 @@ extension PhotoSlidesViewController {
         let viewControllers = [ viewController ]
             
         print("set")
-//        self.pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+        self.pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
     }
 }

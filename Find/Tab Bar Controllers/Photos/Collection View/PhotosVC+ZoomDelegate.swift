@@ -45,10 +45,11 @@ extension PhotosViewController: PhotoSlidesUpdatedIndex {
 extension PhotosViewController: ZoomAnimatorDelegate {
     
     func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
-        
+        print("starting")
     }
     
     func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
+        print("ended")
         guard let selectedIndexPath = selectedIndexPath else {
             print("no index path")
             return
@@ -87,6 +88,7 @@ extension PhotosViewController: ZoomAnimatorDelegate {
     }
     
     func referenceImageView(for zoomAnimator: ZoomAnimator) -> UIImageView? {
+        print("get reference")
         guard let selectedIndexPath = selectedIndexPath else {
             print("no index path")
             return UIImageView(frame: CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0))
@@ -98,6 +100,7 @@ extension PhotosViewController: ZoomAnimatorDelegate {
     }
     
     func referenceImageViewFrameInTransitioningView(for zoomAnimator: ZoomAnimator) -> CGRect? {
+        print("get image view frame")
         guard let selectedIndexPath = selectedIndexPath else {
             print("no index path")
             return CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0)
@@ -128,9 +131,11 @@ extension PhotosViewController: ZoomAnimatorDelegate {
     //This function prevents the collectionView from accessing a deallocated cell. In the event
     //that the cell for the selectedIndexPath is nil, a default UIImageView is returned in its place
     func getImageViewFromCollectionViewCell(for selectedIndexPath: IndexPath) -> UIImageView {
-        
+        print("get image")
         //Get the array of visible cells in the collectionView
         let visibleCells = self.collectionView.indexPathsForVisibleItems
+        
+        print("sele: \(selectedIndexPath), visible")
         
         //If the current indexPath is not visible in the collectionView,
         //scroll the collectionView to the cell to prevent it from returning a nil value
@@ -148,6 +153,8 @@ extension PhotosViewController: ZoomAnimatorDelegate {
                 //Return a default UIImageView
                 return UIImageView(frame: CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0))
             }
+            
+            print("returning")
             //The PhotoCollectionViewCell was found in the collectionView, return the image
             return guardedCell.imageView
         }
@@ -159,6 +166,8 @@ extension PhotosViewController: ZoomAnimatorDelegate {
                 return UIImageView(frame: CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0))
             }
             //The PhotoCollectionViewCell was found in the collectionView, return the image
+            
+            print("rturning 2")
             return guardedCell.imageView
         }
         
