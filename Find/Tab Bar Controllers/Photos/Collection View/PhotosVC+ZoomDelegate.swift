@@ -68,6 +68,8 @@ extension PhotosViewController: ZoomAnimatorDelegate {
         let cell = collectionView.cellForItem(at: selectedIndexPath) as! ImageCell
         if zoomAnimator.isPresenting == false && zoomAnimator.finishedDismissing == true {
             
+            currentSlidesController = nil
+            changePresentationMode(presentingSlides: false)
             if
                 let findPhoto = dataSource.itemIdentifier(for: selectedIndexPath),
                 let model = findPhoto.model

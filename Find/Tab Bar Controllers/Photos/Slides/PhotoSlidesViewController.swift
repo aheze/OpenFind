@@ -37,12 +37,26 @@ class PhotoSlidesViewController: UIViewController {
     // MARK: Gestures
     var panGestureRecognizer: UIPanGestureRecognizer!
     
+    // MARK: Actions
+    var photoSlideControlPressed: ((PhotoSlideAction) -> Void)? /// pressed action in tab bar
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupDelegates()
         setupGestures()
         setFirstVC()
+        
+        self.title = "Photo"
+        navigationItem.largeTitleDisplayMode = .never
+        
+        print("Loaded")
+//        photoSlideControlPressed = { [weak self] action in
+//            guard let self = self else { return }
+//            
+//            print("Action: \(action)")
+//            
+//        }
     }
     
     // MARK: Delegate back to PhotosVC

@@ -31,9 +31,30 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         if let viewController = storyboard.instantiateViewController(withIdentifier: "PhotosViewController") as? PhotosViewController {
             let navigationController = PhotosNavController(rootViewController: viewController)
             navigationController.viewController = viewController
-//            viewController.folderURL = globalUrl
-//            viewController.highlightColor = highlightColor
             viewController.modalPresentationCapturesStatusBarAppearance = true
+            
+            viewController.changePresentationMode = { [weak self] presentingSlides in
+                guard let self = self else { return }
+                
+                if presentingSlides {
+                    self.longPressGestureRecognizer.isEnabled = false
+                    self.panGestureRecognizer.isEnabled = false
+                    self.tabBarView.showPhotoSlideControls(show: true)
+                } else {
+                    self.longPressGestureRecognizer.isEnabled = true
+                    self.panGestureRecognizer.isEnabled = true
+                    self.tabBarView.showPhotoSlideControls(show: false)
+                }
+            }
+            
+//            tabBarView.photoSlideControlPressed = viewController.photoSlideControlPressed
+//           viewController.photoSlideControlPressed = tabBarView.photoSlideControlPressed
+            tabBarView.photoSlideControlPressed = { action in
+//                viewController.photoSlideControlPressed
+                print("Action: \(action)")
+//                viewController.photoSlideControlPressed?(action)
+                viewController.currentSlidesController?.actionPressed(action: action)
+            }
             return navigationController
         }
         fatalError()
@@ -413,6 +434,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 return true
             }
         }
+        
+//        tabBarView.
         
         blurView.effect = nil
         shadeView.alpha = 0

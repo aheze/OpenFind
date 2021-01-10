@@ -11,6 +11,7 @@ import SnapKit
 enum TabBarMode {
     case navigationControls /// navigate between view controllers
     case photosControls /// selection controls for Photos
+    case photoSlideControls
     case listsControls /// selection controls for Lists
 }
 class TabBarView: PassthroughView {
@@ -32,6 +33,7 @@ class TabBarView: PassthroughView {
     /// reference view to add selecting buttons
     @IBOutlet weak var controlsReferenceView: ReceiveTouchView!
     
+    // MARK: Selection in Photos
     @IBOutlet var photosControls: ReceiveTouchView!
     @IBOutlet weak var starButton: UIButton!
     @IBAction func starButtonPressed(_ sender: Any) {
@@ -45,6 +47,7 @@ class TabBarView: PassthroughView {
     @IBAction func photosDeleteButtonPressed(_ sender: Any) {
     }
     
+    // MARK: Selection in Lists
     @IBOutlet var listsControls: ReceiveTouchView!
     @IBOutlet weak var listsSelectionLabel: UILabel!
     @IBOutlet weak var listsDeleteButton: UIButton!
@@ -53,6 +56,37 @@ class TabBarView: PassthroughView {
     @IBAction func listsDeleteButtonPressed(_ sender: Any) {
         listsDeletePressed?()
     }
+    
+    // MARK: Photo Slide controls
+    @IBOutlet var photoSlideControls: ReceiveTouchView!
+    @IBOutlet weak var slideShareButton: UIButton!
+    @IBAction func slideSharePressed(_ sender: Any) {
+        photoSlideControlPressed?(.share)
+    }
+
+    @IBOutlet weak var slideStarButton: UIButton!
+    @IBAction func slideStarPressed(_ sender: Any) {
+        photoSlideControlPressed?(.star)
+    }
+   
+    @IBOutlet weak var slideCacheButton: UIButton!
+    @IBAction func slideCachePressed(_ sender: Any) {
+        photoSlideControlPressed?(.cache)
+    }
+    
+    @IBOutlet weak var slideDeleteButton: UIButton!
+    @IBAction func slideDeletePressed(_ sender: Any) {
+        photoSlideControlPressed?(.delete)
+    }
+    
+    @IBOutlet weak var slideInfoButton: UIButton!
+    @IBAction func slideInfoPressed(_ sender: Any) {
+        photoSlideControlPressed?(.info)
+    }
+    
+    var photoSlideControlPressed: ((PhotoSlideAction) -> Void)?
+    
+    
     
     
     @IBOutlet weak var topLineView: UIView!

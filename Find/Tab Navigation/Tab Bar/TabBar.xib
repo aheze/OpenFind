@@ -25,10 +25,16 @@
                 <outlet property="listsDeleteButton" destination="cyJ-A4-ML3" id="KMl-Gy-UEv"/>
                 <outlet property="listsIcon" destination="Su2-wl-aUw" id="kaa-Mm-Jsc"/>
                 <outlet property="listsSelectionLabel" destination="HR2-CF-DNb" id="fLf-hG-iv4"/>
+                <outlet property="photoSlideControls" destination="5ex-iS-SQb" id="Ich-1W-oqY"/>
                 <outlet property="photosControls" destination="F0d-ei-2Yx" id="4eg-PQ-kg8"/>
                 <outlet property="photosDeleteButton" destination="FCf-p6-NPI" id="tE5-r7-SCq"/>
                 <outlet property="photosIcon" destination="EOH-Do-hxB" id="ygD-GT-lCx"/>
                 <outlet property="shadeView" destination="bCs-J2-IPj" id="ZOU-Ze-Nfk"/>
+                <outlet property="slideCacheButton" destination="Og5-zd-hSh" id="0gp-i3-97B"/>
+                <outlet property="slideDeleteButton" destination="ZZU-jK-mEd" id="dtu-9U-kWJ"/>
+                <outlet property="slideInfoButton" destination="xXF-bS-4GF" id="6vU-0d-UgQ"/>
+                <outlet property="slideShareButton" destination="bZb-Fp-p7M" id="Iwh-pj-CDG"/>
+                <outlet property="slideStarButton" destination="HOq-qe-6HH" id="dQ4-EZ-Erv"/>
                 <outlet property="stackView" destination="FmO-hJ-SLz" id="UtM-Am-fMB"/>
                 <outlet property="starButton" destination="6W3-WX-fhU" id="gK9-Pr-WMn"/>
                 <outlet property="topLineView" destination="WIt-5u-c1k" id="856-h5-ogj"/>
@@ -255,15 +261,67 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EEj-Oc-aWs">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="EEj-Oc-aWs">
+                    <rect key="frame" x="20" y="0.0" width="374" height="49"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZb-Fp-p7M">
+                            <rect key="frame" x="0.0" y="0.0" width="23" height="49"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <state key="normal" image="square.and.arrow.up" catalog="system">
+                                <color key="titleColor" name="100ButtonTint"/>
+                            </state>
+                            <connections>
+                                <action selector="slideSharePressed:" destination="-1" eventType="touchUpInside" id="tis-0w-qfo"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOq-qe-6HH">
+                            <rect key="frame" x="78" y="0.0" width="27" height="49"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <state key="normal" image="star" catalog="system">
+                                <color key="titleColor" name="100ButtonTint"/>
+                            </state>
+                            <connections>
+                                <action selector="slideStarPressed:" destination="-1" eventType="touchUpInside" id="S4R-Sy-Jo5"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Og5-zd-hSh">
+                            <rect key="frame" x="160" y="0.0" width="55" height="49"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <state key="normal" title="Cache">
+                                <color key="titleColor" name="100ButtonTint"/>
+                            </state>
+                            <connections>
+                                <action selector="slideCachePressed:" destination="-1" eventType="touchUpInside" id="gxO-KE-1IQ"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZU-jK-mEd">
+                            <rect key="frame" x="270" y="0.0" width="24" height="49"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <state key="normal" image="trash" catalog="system">
+                                <color key="titleColor" name="100ButtonTint"/>
+                            </state>
+                            <connections>
+                                <action selector="slideDeletePressed:" destination="-1" eventType="touchUpInside" id="12v-cS-jdq"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXF-bS-4GF">
+                            <rect key="frame" x="349" y="0.0" width="25" height="49"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <state key="normal" image="info.circle" catalog="system">
+                                <color key="titleColor" name="100ButtonTint"/>
+                            </state>
+                            <connections>
+                                <action selector="slideInfoPressed:" destination="-1" eventType="touchUpInside" id="GIf-An-za5"/>
+                            </connections>
+                        </button>
+                    </subviews>
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="KZF-Bi-MCM"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="EEj-Oc-aWs" firstAttribute="leading" secondItem="5ex-iS-SQb" secondAttribute="leading" id="MaR-0b-dhU"/>
-                <constraint firstAttribute="trailing" secondItem="EEj-Oc-aWs" secondAttribute="trailing" id="Ndb-9d-d4q"/>
+                <constraint firstItem="EEj-Oc-aWs" firstAttribute="leading" secondItem="5ex-iS-SQb" secondAttribute="leading" constant="20" id="MaR-0b-dhU"/>
+                <constraint firstAttribute="trailing" secondItem="EEj-Oc-aWs" secondAttribute="trailing" constant="20" id="Ndb-9d-d4q"/>
                 <constraint firstAttribute="bottom" secondItem="EEj-Oc-aWs" secondAttribute="bottom" id="WA0-K7-iIC"/>
                 <constraint firstItem="EEj-Oc-aWs" firstAttribute="top" secondItem="5ex-iS-SQb" secondAttribute="top" id="g6p-bQ-bJ3"/>
             </constraints>
@@ -272,6 +330,8 @@
         </view>
     </objects>
     <resources>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <image name="trash" catalog="system" width="121" height="128"/>
         <namedColor name="100ButtonTint">

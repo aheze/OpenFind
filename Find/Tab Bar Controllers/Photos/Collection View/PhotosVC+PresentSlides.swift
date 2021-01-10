@@ -44,8 +44,21 @@ extension PhotosViewController {
                 }
                 
             }
-            
+            print("Setting")
+//            slidesViewController.photoSlideControlPressed = photoSlideControlPressed
+            currentSlidesController = slidesViewController
+            changePresentationMode(presentingSlides: true)
+        }
+    }
+    
+    /// set the currentlyPresenting and change the tab bar
+    func changePresentationMode(presentingSlides: Bool) {
+        if presentingSlides {
             currentlyPresentingSlides = true
+            changePresentationMode?(true)
+        } else {
+            currentlyPresentingSlides = false
+            changePresentationMode?(false)
         }
     }
 }
