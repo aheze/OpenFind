@@ -87,6 +87,8 @@ class ZoomAnimator: NSObject {
     fileprivate func animateZoomOutTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let containerView = transitionContext.containerView
         
+        print("Zoom out")
+        
         guard let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
             let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
             let fromReferenceImageView = self.fromDelegate?.referenceImageView(for: self),
@@ -96,6 +98,8 @@ class ZoomAnimator: NSObject {
             else {
                 return
         }
+        
+        print("after")
         
         self.fromDelegate?.transitionWillStartWith(zoomAnimator: self)
         self.toDelegate?.transitionWillStartWith(zoomAnimator: self)
@@ -127,6 +131,9 @@ class ZoomAnimator: NSObject {
                         toVC.tabBarController?.tabBar.alpha = 1
         }, completion: { completed in
             
+            print("finish trans")
+            self.finishedDismissing = true
+            
             self.transitionImageView?.removeFromSuperview()
             toReferenceImageView.isHidden = false
             fromReferenceImageView.isHidden = false
@@ -135,7 +142,7 @@ class ZoomAnimator: NSObject {
             self.toDelegate?.transitionDidEndWith(zoomAnimator: self)
             self.fromDelegate?.transitionDidEndWith(zoomAnimator: self)
 
-            self.finishedDismissing = true
+            
         })
     }
     

@@ -46,20 +46,22 @@ extension PhotosViewController {
                     cell?.imageView.sd_imageTransition = .fade
                     cell?.imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: imageLength, height: imageLength)])
 
-                    if let model = findPhoto.model, model.isDeepSearched {
-                        cell?.cacheImageView.image = UIImage(named: "CacheActive-Light")
-                    } else {
-                        cell?.cacheImageView.image = nil
-                    }
-                    if let model = findPhoto.model, model.isHearted {
-                        cell?.starImageView.image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate)
-                    } else {
-                        cell?.starImageView.image = nil
-                    }
-                    if let model = findPhoto.model, (model.isDeepSearched || model.isHearted) {
-                        cell?.shadowImageView.image = UIImage(named: "DownShadow")
-                    } else {
-                        cell?.shadowImageView.image = nil
+                    if let model = findPhoto.model {
+                        if model.isDeepSearched {
+                            cell?.cacheImageView.image = UIImage(named: "CacheActive-Light")
+                        } else {
+                            cell?.cacheImageView.image = nil
+                        }
+                        if model.isHearted {
+                            cell?.starImageView.image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate)
+                        } else {
+                            cell?.starImageView.image = nil
+                        }
+                        if model.isDeepSearched || model.isHearted {
+                            cell?.shadowImageView.image = UIImage(named: "DownShadow")
+                        } else {
+                            cell?.shadowImageView.image = nil
+                        }
                     }
                 }
                 return cell

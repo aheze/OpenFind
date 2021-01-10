@@ -47,6 +47,7 @@ class PhotosViewController: UIViewController {
     }
     
     var selectedIndexPath: IndexPath? /// current indexPath pressed when go to slides vc
+    var currentlyPresentingSlides = false /// whether currently presenting the slides or not
     
     // MARK: Diffable Data Source
     lazy var dataSource = makeDataSource()

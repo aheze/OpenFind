@@ -15,7 +15,7 @@ extension PhotosViewController: PhotoSlidesUpdatedIndex {
         let currentPhoto = allPhotosToDisplay[newIndex]
         if let indexPath = dataSource.indexPath(for: currentPhoto) {
             if let selectedIndexPath = selectedIndexPath {
-                if let cell = collectionView.cellForItem(at: selectedIndexPath) as? ImageCell {
+                if let cell = collectionView.cellForItem(at: selectedIndexPath) as? ImageCell { /// old index
                     if let model = currentPhoto.model {
                         if model.isHearted || model.isDeepSearched  {
                             cell.shadowImageView.alpha = 1
@@ -30,6 +30,20 @@ extension PhotosViewController: PhotoSlidesUpdatedIndex {
                         if model.isDeepSearched {
                             cell.cacheImageView.alpha = 1
                         } else {
+                            cell.cacheImageView.alpha = 0
+                        }
+                    }
+                }
+                
+                if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell { /// new index
+                    if let model = currentPhoto.model {
+                        if model.isHearted || model.isDeepSearched  {
+                            cell.shadowImageView.alpha = 0
+                        }
+                        if model.isHearted {
+                            cell.starImageView.alpha = 0
+                        }
+                        if model.isDeepSearched {
                             cell.cacheImageView.alpha = 0
                         }
                     }
@@ -50,7 +64,27 @@ extension PhotosViewController: ZoomAnimatorDelegate {
     
     func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
         guard let selectedIndexPath = selectedIndexPath else { return }
+        
         let cell = collectionView.cellForItem(at: selectedIndexPath) as! ImageCell
+        if zoomAnimator.isPresenting == false && zoomAnimator.finishedDismissing == true {
+            
+            if
+                let findPhoto = dataSource.itemIdentifier(for: selectedIndexPath),
+                let model = findPhoto.model
+            {
+                UIView.animate(withDuration: 0.2, animations: {
+                    if model.isHearted || model.isDeepSearched  {
+                        cell.shadowImageView.alpha = 1
+                    }
+                    if model.isHearted {
+                        cell.starImageView.alpha = 1
+                    }
+                    if model.isDeepSearched {
+                        cell.cacheImageView.alpha = 1
+                    }
+                })
+            }
+        }
         
         let cellFrame = collectionView.convert(cell.frame, to: view)
         

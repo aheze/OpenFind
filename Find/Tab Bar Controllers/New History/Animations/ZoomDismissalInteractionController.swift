@@ -70,6 +70,8 @@ class ZoomDismissalInteractionController: NSObject {
                         toVC.tabBarController?.tabBar.alpha = 0
                 },
                     completion: { completed in
+                        animator.finishedDismissing = false
+                        print("CANcel finish")
                         
                         toReferenceImageView.isHidden = false
                         fromReferenceImageView.isHidden = false
@@ -96,6 +98,8 @@ class ZoomDismissalInteractionController: NSObject {
                             toVC.tabBarController?.tabBar.alpha = 1
                             
             }, completion: { completed in
+                print("Fnished!!!")
+                animator.finishedDismissing = true
                 
                 transitionImageView.removeFromSuperview()
                 toReferenceImageView.isHidden = false

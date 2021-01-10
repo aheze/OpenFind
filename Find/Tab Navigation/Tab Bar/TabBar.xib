@@ -201,7 +201,7 @@
                 <constraint firstAttribute="trailing" secondItem="cyJ-A4-ML3" secondAttribute="trailing" constant="20" id="X2b-EM-6HY"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="551" y="10"/>
+            <point key="canvasLocation" x="625" y="-2"/>
         </view>
         <view contentMode="scaleToFill" id="F0d-ei-2Yx" customClass="ReceiveTouchView" customModule="Find" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -249,7 +249,26 @@
                 <constraint firstItem="6W3-WX-fhU" firstAttribute="centerY" secondItem="F0d-ei-2Yx" secondAttribute="centerY" id="kwG-4c-2Ji"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="552" y="-60"/>
+            <point key="canvasLocation" x="625" y="-71"/>
+        </view>
+        <view contentMode="scaleToFill" id="5ex-iS-SQb" customClass="ReceiveTouchView" customModule="Find" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EEj-Oc-aWs">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="KZF-Bi-MCM"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="EEj-Oc-aWs" firstAttribute="leading" secondItem="5ex-iS-SQb" secondAttribute="leading" id="MaR-0b-dhU"/>
+                <constraint firstAttribute="trailing" secondItem="EEj-Oc-aWs" secondAttribute="trailing" id="Ndb-9d-d4q"/>
+                <constraint firstAttribute="bottom" secondItem="EEj-Oc-aWs" secondAttribute="bottom" id="WA0-K7-iIC"/>
+                <constraint firstItem="EEj-Oc-aWs" firstAttribute="top" secondItem="5ex-iS-SQb" secondAttribute="top" id="g6p-bQ-bJ3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="626" y="-143"/>
         </view>
     </objects>
     <resources>
