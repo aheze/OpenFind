@@ -101,6 +101,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             viewController.showSelectionControls = { [weak self] show in
                 guard let self = self else { return }
                 self.tabBarView.showListsControls(show: show)
+                
+                if show {
+                    self.longPressGestureRecognizer.isEnabled = false
+                    self.panGestureRecognizer.isEnabled = false
+                } else {
+                    self.longPressGestureRecognizer.isEnabled = true
+                    self.panGestureRecognizer.isEnabled = true
+                }
             }
             viewController.updateSelectionLabel = { [weak self] numberSelected in
                 guard let self = self else { return }
