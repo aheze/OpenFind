@@ -46,15 +46,16 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     self.tabBarView.showPhotoSlideControls(show: false)
                 }
             }
+            viewController.dimSlideControls = { [weak self] dim in
+                guard let self = self else { return }
+                
+                self.tabBarView.dimPhotoSlideControls(dim: dim)
+            }
             
-//            tabBarView.photoSlideControlPressed = viewController.photoSlideControlPressed
-//           viewController.photoSlideControlPressed = tabBarView.photoSlideControlPressed
             tabBarView.photoSlideControlPressed = { action in
-//                viewController.photoSlideControlPressed
-                print("Action: \(action)")
-//                viewController.photoSlideControlPressed?(action)
                 viewController.currentSlidesController?.actionPressed(action: action)
             }
+            
             return navigationController
         }
         fatalError()
@@ -126,13 +127,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: Camera shutoff
     var cameraShutoffTask = DispatchWorkItem { print("shut") }
     var shutoffCamera: (() -> Void)?
-//        = {
-//        print("Shutt off cam!!")
-//        self.camera.stopSession()
-//    }
     
     // MARK: Gestures
-    
     var blurAnimator: UIViewPropertyAnimator?
     var animator: UIViewPropertyAnimator? /// animate gesture endings
     

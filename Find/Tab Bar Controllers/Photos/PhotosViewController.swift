@@ -51,6 +51,7 @@ class PhotosViewController: UIViewController {
     var changePresentationMode: ((Bool) -> Void)? /// notify the parent to change the tab bar
     var currentSlidesController: PhotoSlidesViewController? /// currently presenting
     var photoSlideControlPressed: ((PhotoSlideAction) -> Void)? /// pressed action in tab bar
+    var dimSlideControls: ((Bool) -> Void)? /// dim the controls during dismissal
     
     // MARK: Diffable Data Source
     lazy var dataSource = makeDataSource()

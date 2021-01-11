@@ -59,10 +59,20 @@ extension PhotosViewController: PhotoSlidesUpdatedIndex {
 extension PhotosViewController: ZoomAnimatorDelegate {
     
     func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
-        
+        print("starting trans, presenting: \(zoomAnimator.isPresenting)")
+        if !zoomAnimator.isPresenting {
+            dimSlideControls?(true)
+        }
     }
     
     func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
+        print("end")
+        if zoomAnimator.isPresenting == false {
+            if zoomAnimator.finishedDismissing == false {
+                dimSlideControls?(false)
+            }
+        }
+        
         guard let selectedIndexPath = selectedIndexPath else { return }
         
         let cell = collectionView.cellForItem(at: selectedIndexPath) as! ImageCell

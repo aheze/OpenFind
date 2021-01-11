@@ -30,7 +30,7 @@ extension TabBarView {
                 self.stackView.alpha = 0
                 self.photoSlideControls.alpha = 1
             }
-            
+            photoSlideControls.isUserInteractionEnabled = true
             
         } else {
             controlsReferenceView.isUserInteractionEnabled = false
@@ -43,5 +43,14 @@ extension TabBarView {
             }
         }
         
+    }
+    func dimPhotoSlideControls(dim: Bool) {
+        if dim {
+            photoSlideControls.alpha = 0.5
+            photoSlideControls.isUserInteractionEnabled = false
+        } else {
+            photoSlideControls.alpha = 1
+            photoSlideControls.isUserInteractionEnabled = true
+        }
     }
 }
