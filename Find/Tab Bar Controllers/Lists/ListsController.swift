@@ -344,18 +344,13 @@ extension ListsController: UICollectionViewDataSource, UICollectionViewDelegate,
             
         }
         if indexPathsSelected.contains(indexPath.item) {
-//            UIView.animate(withDuration: 0.1, animations: {
-                
-                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
-                cell.highlightView.alpha = 1
-                cell.checkmarkView.alpha = 1
-//            })
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+            cell.highlightView.alpha = 1
+            cell.checkmarkView.alpha = 1
         } else {
-//            UIView.animate(withDuration: 0.1, animations: {
-                collectionView.deselectItem(at: indexPath, animated: false)
-                cell.highlightView.alpha = 0
-                cell.checkmarkView.alpha = 0
-//            })
+            collectionView.deselectItem(at: indexPath, animated: false)
+            cell.highlightView.alpha = 0
+            cell.checkmarkView.alpha = 0
         }
         return cell
     }
@@ -363,7 +358,7 @@ extension ListsController: UICollectionViewDataSource, UICollectionViewDelegate,
     
     func collectionView(_ collectionView: UICollectionView,
                         heightForTextAtIndexPath indexPath: IndexPath) -> CGFloat {
-        guard let cell = listCategories?[indexPath.item] else { print("ERRORRRRRR"); return 0 }
+        guard let cell = listCategories?[indexPath.item] else { return 0 }
         
         let sizeOfWidth = ((collectionView.bounds.width - (AdaptiveCollectionConfig.cellPadding * 3)) / 2) - 20
         
@@ -413,7 +408,6 @@ extension ListsController: UICollectionViewDataSource, UICollectionViewDelegate,
                     cell.highlightView.alpha = 1
                     cell.checkmarkView.alpha = 1
                     cell.highlightView.frame.size.width = 40
-//                    cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
                 })
             }
                 
@@ -451,7 +445,6 @@ extension ListsController: UICollectionViewDataSource, UICollectionViewDelegate,
             UIView.animate(withDuration: 0.1, animations: {
                 cell.highlightView.alpha = 0
                 cell.checkmarkView.alpha = 0
-//                cell.transform = CGAffineTransform.identity
             })
             
         }

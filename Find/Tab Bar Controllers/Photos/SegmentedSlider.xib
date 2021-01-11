@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SegmentedSlider" customModule="PhotoGallery" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SegmentedSlider" customModule="Find" customModuleProvider="target">
             <connections>
                 <outlet property="allLabel" destination="xy7-tW-Frx" id="elo-Dy-6bc"/>
                 <outlet property="blurView" destination="JME-xP-hsa" id="FMp-2m-NNi"/>
@@ -17,6 +17,9 @@
                 <outlet property="contentView" destination="iN0-l3-epB" id="jWN-ir-aiF"/>
                 <outlet property="indicatorView" destination="z3g-Re-Vab" id="NhW-Ik-bsG"/>
                 <outlet property="localLabel" destination="Zup-GQ-hYj" id="8OW-vD-24V"/>
+                <outlet property="numberOfSelectedLabel" destination="eqZ-tJ-hU7" id="hvS-Rf-wUa"/>
+                <outlet property="numberOfSelectedView" destination="tue-Uz-fRo" id="pcS-11-L0g"/>
+                <outlet property="sliderContainerView" destination="Jmg-RG-Ad4" id="LEi-Ea-uRE"/>
                 <outlet property="stackView" destination="k6Z-3l-PRq" id="Crv-kt-YAP"/>
                 <outlet property="starredLabel" destination="p3n-4u-CMq" id="qXF-ey-4Uh"/>
             </connections>
@@ -34,55 +37,87 @@
                     </view>
                     <blurEffect style="prominent"/>
                 </visualEffectView>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z3g-Re-Vab">
-                    <rect key="frame" x="45" y="3" width="64" height="34"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                </view>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="k6Z-3l-PRq">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jmg-RG-Ad4">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Local" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zup-GQ-hYj" customClass="PaddedLabel" customModule="PhotoGallery" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="86.5" height="40"/>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
-                            <color key="textColor" systemColor="secondaryLabelColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starred" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3n-4u-CMq" customClass="PaddedLabel" customModule="PhotoGallery" customModuleProvider="target">
-                            <rect key="frame" x="86.5" y="0.0" width="121.5" height="40"/>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
-                            <color key="textColor" systemColor="secondaryLabelColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cached" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5Q-5I-JJ7" customClass="PaddedLabel" customModule="PhotoGallery" customModuleProvider="target">
-                            <rect key="frame" x="208" y="0.0" width="126" height="40"/>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
-                            <color key="textColor" systemColor="secondaryLabelColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xy7-tW-Frx" customClass="PaddedLabel" customModule="PhotoGallery" customModuleProvider="target">
-                            <rect key="frame" x="334" y="0.0" width="41" height="40"/>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
-                            <color key="textColor" systemColor="secondaryLabelColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z3g-Re-Vab">
+                            <rect key="frame" x="155" y="3" width="64" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="k6Z-3l-PRq">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Local" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zup-GQ-hYj" customClass="PaddedLabel" customModule="Find" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="86.5" height="40"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starred" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3n-4u-CMq" customClass="PaddedLabel" customModule="Find" customModuleProvider="target">
+                                    <rect key="frame" x="86.5" y="0.0" width="121.5" height="40"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cached" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5Q-5I-JJ7" customClass="PaddedLabel" customModule="Find" customModuleProvider="target">
+                                    <rect key="frame" x="208" y="0.0" width="126" height="40"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xy7-tW-Frx" customClass="PaddedLabel" customModule="Find" customModuleProvider="target">
+                                    <rect key="frame" x="334" y="0.0" width="41" height="40"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
                     </subviews>
-                </stackView>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="k6Z-3l-PRq" firstAttribute="leading" secondItem="Jmg-RG-Ad4" secondAttribute="leading" id="2jx-bA-3dQ"/>
+                        <constraint firstAttribute="bottom" secondItem="k6Z-3l-PRq" secondAttribute="bottom" id="dAp-bp-PrC"/>
+                        <constraint firstAttribute="trailing" secondItem="k6Z-3l-PRq" secondAttribute="trailing" id="pi8-F1-u9B"/>
+                        <constraint firstItem="k6Z-3l-PRq" firstAttribute="top" secondItem="Jmg-RG-Ad4" secondAttribute="top" id="yBo-tT-HKo"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="Jmg-RG-Ad4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Eai-6L-caH"/>
                 <constraint firstItem="JME-xP-hsa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="G5H-8e-Jpg"/>
                 <constraint firstAttribute="bottom" secondItem="JME-xP-hsa" secondAttribute="bottom" id="GNK-59-0Sx"/>
                 <constraint firstAttribute="trailing" secondItem="JME-xP-hsa" secondAttribute="trailing" id="Ugu-DI-dVG"/>
+                <constraint firstItem="Jmg-RG-Ad4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bGL-IY-2dd"/>
                 <constraint firstItem="JME-xP-hsa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bNR-mv-oqp"/>
-                <constraint firstItem="k6Z-3l-PRq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="uEB-Wb-W5f"/>
-                <constraint firstAttribute="bottom" secondItem="k6Z-3l-PRq" secondAttribute="bottom" id="ueJ-K9-Lgy"/>
-                <constraint firstAttribute="trailing" secondItem="k6Z-3l-PRq" secondAttribute="trailing" id="vL2-H8-9mb"/>
-                <constraint firstItem="k6Z-3l-PRq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zFx-af-tmI"/>
+                <constraint firstAttribute="bottom" secondItem="Jmg-RG-Ad4" secondAttribute="bottom" id="d4d-xB-eX8"/>
+                <constraint firstAttribute="trailing" secondItem="Jmg-RG-Ad4" secondAttribute="trailing" id="jsd-ui-aBO"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="103.62318840579711" y="-202.90178571428569"/>
+        </view>
+        <view contentMode="scaleToFill" id="tue-Uz-fRo">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Photos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eqZ-tJ-hU7">
+                    <rect key="frame" x="127.5" y="25.5" width="120" height="23"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="OfF-4G-YDp"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="eqZ-tJ-hU7" firstAttribute="centerX" secondItem="tue-Uz-fRo" secondAttribute="centerX" id="Mvs-kb-Bwd"/>
+                <constraint firstItem="eqZ-tJ-hU7" firstAttribute="centerY" secondItem="tue-Uz-fRo" secondAttribute="centerY" id="zdG-8d-6BF"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="103.62318840579711" y="-129.24107142857142"/>
         </view>
     </objects>
     <resources>

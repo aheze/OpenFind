@@ -8,6 +8,29 @@
 
 import UIKit
 
+extension PhotosViewController {
+    func selectPressed() {
+        if allPhotosToDisplay.count == 0 {
+//            showNoListsAlert()
+            print("no phoos")
+        } else {
+            selectButtonSelected.toggle()
+            showSelectionControls?(selectButtonSelected)
+            if selectButtonSelected {
+                selectButton.title = "Done"
+                collectionView.allowsMultipleSelection = true
+                segmentedSlider.showNumberOfSelected(show: true)
+//                addButton.isEnabled = false
+            } else {
+                selectButton.title = "Select"
+                collectionView.allowsMultipleSelection = false
+                segmentedSlider.showNumberOfSelected(show: false)
+//                deselectAllItems()
+//                addButton.isEnabled = true
+            }
+        }
+    }
+}
 extension PhotosViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if selectButtonSelected == true {

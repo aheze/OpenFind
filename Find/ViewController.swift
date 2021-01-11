@@ -46,6 +46,18 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     self.tabBarView.showPhotoSlideControls(show: false)
                 }
             }
+            viewController.showSelectionControls = { [weak self] show in
+                guard let self = self else { return }
+                self.tabBarView.showPhotoSelectionControls(show: show)
+                
+                if show {
+                    self.longPressGestureRecognizer.isEnabled = false
+                    self.panGestureRecognizer.isEnabled = false
+                } else {
+                    self.longPressGestureRecognizer.isEnabled = true
+                    self.panGestureRecognizer.isEnabled = true
+                }
+            }
             viewController.dimSlideControls = { [weak self] dim in
                 guard let self = self else { return }
                 

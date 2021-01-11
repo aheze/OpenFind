@@ -29,6 +29,9 @@ class SegmentedSlider: UIView {
     var currentHoveredLabel: UIView?
     
     @IBOutlet var contentView: UIView!
+    
+    
+    @IBOutlet weak var sliderContainerView: UIView! /// contains slider and labels
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var indicatorView: UIView!
@@ -38,62 +41,87 @@ class SegmentedSlider: UIView {
     @IBOutlet weak var cachedLabel: PaddedLabel!
     @IBOutlet weak var allLabel: PaddedLabel!
     
+    // MARK: Photos selection
+    @IBOutlet var numberOfSelectedView: UIView!
+    @IBOutlet weak var numberOfSelectedLabel: UILabel!
+    var allowingInteraction = true
+    
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        if let touchPoint = touches.first?.location(in: contentView) {
-            if let (hoveredLabel, hoveredFilter) = getHoveredLabel(touchPoint: touchPoint) as? (UIView, PhotoFilter) {
-                
-                if hoveredFilter == currentFilter { /// dragging indicator
-                    touchStatus = .startedInCurrentFilter
-                    animateScale(shrink: true)
-                } else { /// pressed down on different label
-                    touchStatus = .startedOutsideCurrentFilter
-                    currentHoveredLabel = hoveredLabel
-                    animateHighlight(view: hoveredLabel, highlight: true)
-                }
-                currentHoveredFilter = hoveredFilter
-            }
-        }
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
-        
-        if let touchPoint = touches.first?.location(in: contentView) {
-            if let (hoveredLabel, hoveredFilter) = getHoveredLabel(touchPoint: touchPoint) as? (UIView, PhotoFilter) {
-                
-                if hoveredFilter != currentHoveredFilter { /// dragged to different label
-                    if touchStatus == .startedInCurrentFilter {
-                        animateChangeSelection(filter: hoveredFilter)
-                    } else {
-                        animateHighlight(view: hoveredLabel, highlight: true)
-                        
-                        if let currentHoveredLabel = currentHoveredLabel {
-                            animateHighlight(view: currentHoveredLabel, highlight: false)
-                        }
+        if allowingInteraction {
+            if let touchPoint = touches.first?.location(in: contentView) {
+                if let (hoveredLabel, hoveredFilter) = getHoveredLabel(touchPoint: touchPoint) as? (UIView, PhotoFilter) {
+                    
+                    if hoveredFilter == currentFilter { /// dragging indicator
+                        touchStatus = .startedInCurrentFilter
+                        animateScale(shrink: true)
+                    } else { /// pressed down on different label
+                        touchStatus = .startedOutsideCurrentFilter
                         currentHoveredLabel = hoveredLabel
-                        
+                        animateHighlight(view: hoveredLabel, highlight: true)
                     }
                     currentHoveredFilter = hoveredFilter
                 }
             }
         }
     }
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        if let touchPoint = touches.first?.location(in: contentView) {
-            if let (_, hoveredFilter) = getHoveredLabel(touchPoint: touchPoint) as? (UIView, PhotoFilter) {
-                if currentFilter != hoveredFilter {
-                    animateChangeSelection(filter: hoveredFilter)
-                    currentFilter = hoveredFilter
-                    pressedFilter?(hoveredFilter)
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        if allowingInteraction {
+            if let touchPoint = touches.first?.location(in: contentView) {
+                if let (hoveredLabel, hoveredFilter) = getHoveredLabel(touchPoint: touchPoint) as? (UIView, PhotoFilter) {
+                    
+                    if hoveredFilter != currentHoveredFilter { /// dragged to different label
+                        if touchStatus == .startedInCurrentFilter {
+                            animateChangeSelection(filter: hoveredFilter)
+                        } else {
+                            animateHighlight(view: hoveredLabel, highlight: true)
+                            
+                            if let currentHoveredLabel = currentHoveredLabel {
+                                animateHighlight(view: currentHoveredLabel, highlight: false)
+                            }
+                            currentHoveredLabel = hoveredLabel
+                            
+                        }
+                        currentHoveredFilter = hoveredFilter
+                    }
                 }
             }
+        }
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        if allowingInteraction {
+            if let touchPoint = touches.first?.location(in: contentView) {
+                if let (_, hoveredFilter) = getHoveredLabel(touchPoint: touchPoint) as? (UIView, PhotoFilter) {
+                    if currentFilter != hoveredFilter {
+                        animateChangeSelection(filter: hoveredFilter)
+                        currentFilter = hoveredFilter
+                        pressedFilter?(hoveredFilter)
+                    }
+                }
+                animateHighlight(view: localLabel, highlight: false)
+                animateHighlight(view: starredLabel, highlight: false)
+                animateHighlight(view: cachedLabel, highlight: false)
+                animateHighlight(view: allLabel, highlight: false)
+                animateScale(shrink: false)
+            }
+        }
+    }
+    
+    func cancelTouch(cancel: Bool) {
+        if cancel {
+            allowingInteraction = false
+            animateChangeSelection(filter: currentFilter)
             animateHighlight(view: localLabel, highlight: false)
             animateHighlight(view: starredLabel, highlight: false)
             animateHighlight(view: cachedLabel, highlight: false)
             animateHighlight(view: allLabel, highlight: false)
             animateScale(shrink: false)
+        } else {
+            allowingInteraction = true
         }
     }
     

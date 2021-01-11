@@ -17,6 +17,21 @@ enum PhotoSlideAction {
     
 }
 extension TabBarView {
+    func showPhotoSelectionControls(show: Bool) {
+        if show {
+            controlsReferenceView.isUserInteractionEnabled = true
+            stackView.isHidden = true
+            controlsReferenceView.addSubview(photosControls)
+            photosControls.snp.makeConstraints { (make) in
+                make.edges.equalToSuperview()
+            }
+        } else {
+            controlsReferenceView.isUserInteractionEnabled = false
+            stackView.isHidden = false
+            photosControls.removeFromSuperview()
+        }
+        
+    }
     func showPhotoSlideControls(show: Bool) {
         if show {
             controlsReferenceView.isUserInteractionEnabled = true

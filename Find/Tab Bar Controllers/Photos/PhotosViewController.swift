@@ -35,6 +35,7 @@ class PhotosViewController: UIViewController {
     let screenScale = UIScreen.main.scale /// for photo thumbnail
     
     // MARK: Photo selection
+    var showSelectionControls: ((Bool) -> Void)? /// show or hide
     var updateSelectionLabel: ((Int) -> Void)?
     
     /// Whether is in select mode or not
