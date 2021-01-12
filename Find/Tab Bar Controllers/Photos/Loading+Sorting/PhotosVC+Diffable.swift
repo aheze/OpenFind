@@ -62,6 +62,10 @@ extension PhotosViewController {
                         } else {
                             cell?.shadowImageView.image = nil
                         }
+                    } else {
+                        cell?.cacheImageView.image = nil
+                        cell?.starImageView.image = nil
+                        cell?.shadowImageView.image = nil
                     }
                     
                     if self.indexPathsSelected.contains(indexPath) {

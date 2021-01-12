@@ -189,8 +189,8 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyJ-A4-ML3" customClass="CustomButton" customModule="Find" customModuleProvider="target">
-                    <rect key="frame" x="373" y="12.5" width="21" height="24.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <rect key="frame" x="373" y="11.5" width="21" height="26"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <state key="normal" image="trash" catalog="system">
                         <color key="titleColor" name="100ButtonTint"/>
                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
@@ -215,8 +215,8 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6W3-WX-fhU" customClass="CustomButton" customModule="Find" customModuleProvider="target">
-                    <rect key="frame" x="20" y="12.5" width="25" height="24"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <rect key="frame" x="20" y="11.5" width="25" height="26"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <state key="normal" image="star" catalog="system">
                         <color key="titleColor" name="100ButtonTint"/>
                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
@@ -226,8 +226,8 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1BX-UY-Tml" customClass="CustomButton" customModule="Find" customModuleProvider="target">
-                    <rect key="frame" x="179.5" y="7" width="55" height="35"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <rect key="frame" x="177.5" y="5.5" width="59" height="38"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <state key="normal" title="Cache">
                         <color key="titleColor" name="100ButtonTint"/>
                     </state>
@@ -236,8 +236,8 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCf-p6-NPI" customClass="CustomButton" customModule="Find" customModuleProvider="target">
-                    <rect key="frame" x="373" y="12.5" width="21" height="24.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <rect key="frame" x="373" y="11.5" width="21" height="26"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <state key="normal" image="trash" catalog="system">
                         <color key="titleColor" name="100ButtonTint"/>
                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
@@ -269,7 +269,7 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZb-Fp-p7M" customClass="CustomButton" customModule="Find" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="21.5" height="49"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
                             <state key="normal" image="square.and.arrow.up" catalog="system">
                                 <color key="titleColor" name="100ButtonTint"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
@@ -279,8 +279,8 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOq-qe-6HH" customClass="CustomButton" customModule="Find" customModuleProvider="target">
-                            <rect key="frame" x="79" y="0.0" width="25" height="49"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <rect key="frame" x="78" y="0.0" width="25" height="49"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
                             <state key="normal" image="star" catalog="system">
                                 <color key="titleColor" name="100ButtonTint"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
@@ -290,8 +290,8 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Og5-zd-hSh" customClass="CustomButton" customModule="Find" customModuleProvider="target">
-                            <rect key="frame" x="161.5" y="0.0" width="55" height="49"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <rect key="frame" x="159.5" y="0.0" width="59" height="49"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
                             <state key="normal" title="Cache">
                                 <color key="titleColor" name="100ButtonTint"/>
                             </state>
@@ -300,8 +300,8 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZU-jK-mEd" customClass="CustomButton" customModule="Find" customModuleProvider="target">
-                            <rect key="frame" x="273.5" y="0.0" width="21" height="49"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <rect key="frame" x="274.5" y="0.0" width="21" height="49"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
                             <state key="normal" image="trash" catalog="system">
                                 <color key="titleColor" name="100ButtonTint"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
@@ -312,7 +312,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXF-bS-4GF" customClass="CustomButton" customModule="Find" customModuleProvider="target">
                             <rect key="frame" x="352" y="0.0" width="22" height="49"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
                             <state key="normal" image="info.circle" catalog="system">
                                 <color key="titleColor" name="100ButtonTint"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
