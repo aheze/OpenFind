@@ -15,28 +15,28 @@
                 <outlet property="backgroundView" destination="m3l-1d-bWI" id="dnq-ob-gAQ"/>
                 <outlet property="blurBackgroundView" destination="cg9-qX-9rO" id="3OE-cP-V9f"/>
                 <outlet property="blurView" destination="569-gu-a2G" id="f1U-Ol-9kJ"/>
-                <outlet property="cacheButton" destination="1BX-UY-Tml" id="hJS-f9-P4U"/>
+                <outlet property="cacheButton" destination="1BX-UY-Tml" id="iV2-H4-I9A"/>
                 <outlet property="cameraIcon" destination="10d-KH-We3" id="u8P-Fk-Nbl"/>
                 <outlet property="containerHeightC" destination="0N9-Yw-gol" id="OMf-FW-fwv"/>
                 <outlet property="containerView" destination="sCo-YF-aez" id="RWn-Nl-yDX"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="CzQ-TV-7XN"/>
                 <outlet property="controlsReferenceView" destination="gDY-hq-DTd" id="04Y-ao-Meb"/>
                 <outlet property="listsControls" destination="rdg-yk-Rn2" id="1JN-ky-R88"/>
-                <outlet property="listsDeleteButton" destination="cyJ-A4-ML3" id="KMl-Gy-UEv"/>
+                <outlet property="listsDeleteButton" destination="cyJ-A4-ML3" id="IBJ-g5-kKK"/>
                 <outlet property="listsIcon" destination="Su2-wl-aUw" id="kaa-Mm-Jsc"/>
                 <outlet property="listsSelectionLabel" destination="HR2-CF-DNb" id="fLf-hG-iv4"/>
                 <outlet property="photoSlideControls" destination="5ex-iS-SQb" id="Ich-1W-oqY"/>
                 <outlet property="photosControls" destination="F0d-ei-2Yx" id="4eg-PQ-kg8"/>
-                <outlet property="photosDeleteButton" destination="FCf-p6-NPI" id="tE5-r7-SCq"/>
+                <outlet property="photosDeleteButton" destination="FCf-p6-NPI" id="ql2-R1-sQc"/>
                 <outlet property="photosIcon" destination="EOH-Do-hxB" id="ygD-GT-lCx"/>
                 <outlet property="shadeView" destination="bCs-J2-IPj" id="ZOU-Ze-Nfk"/>
-                <outlet property="slideCacheButton" destination="Og5-zd-hSh" id="0gp-i3-97B"/>
-                <outlet property="slideDeleteButton" destination="ZZU-jK-mEd" id="dtu-9U-kWJ"/>
-                <outlet property="slideInfoButton" destination="xXF-bS-4GF" id="6vU-0d-UgQ"/>
-                <outlet property="slideShareButton" destination="bZb-Fp-p7M" id="Iwh-pj-CDG"/>
-                <outlet property="slideStarButton" destination="HOq-qe-6HH" id="dQ4-EZ-Erv"/>
+                <outlet property="slideCacheButton" destination="Og5-zd-hSh" id="9aF-At-lbh"/>
+                <outlet property="slideDeleteButton" destination="ZZU-jK-mEd" id="SgW-yO-RaN"/>
+                <outlet property="slideInfoButton" destination="xXF-bS-4GF" id="4BY-V1-cLC"/>
+                <outlet property="slideShareButton" destination="bZb-Fp-p7M" id="Wh7-A7-wTQ"/>
+                <outlet property="slideStarButton" destination="HOq-qe-6HH" id="8E2-9o-JsM"/>
                 <outlet property="stackView" destination="FmO-hJ-SLz" id="UtM-Am-fMB"/>
-                <outlet property="starButton" destination="6W3-WX-fhU" id="gK9-Pr-WMn"/>
+                <outlet property="starButton" destination="6W3-WX-fhU" id="6Kl-up-tu4"/>
                 <outlet property="topLineView" destination="WIt-5u-c1k" id="856-h5-ogj"/>
             </connections>
         </placeholder>
@@ -188,11 +188,12 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyJ-A4-ML3">
-                    <rect key="frame" x="370" y="11.5" width="24" height="26"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyJ-A4-ML3" customClass="CustomButton" customModule="Find" customModuleProvider="target">
+                    <rect key="frame" x="373" y="12.5" width="21" height="24.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <state key="normal" image="trash" catalog="system">
                         <color key="titleColor" name="100ButtonTint"/>
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
                     </state>
                     <connections>
                         <action selector="listsDeleteButtonPressed:" destination="-1" eventType="touchUpInside" id="sJM-wi-cEZ"/>
@@ -213,17 +214,18 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6W3-WX-fhU">
-                    <rect key="frame" x="20" y="12" width="27" height="25"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6W3-WX-fhU" customClass="CustomButton" customModule="Find" customModuleProvider="target">
+                    <rect key="frame" x="20" y="12.5" width="25" height="24"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <state key="normal" image="star" catalog="system">
                         <color key="titleColor" name="100ButtonTint"/>
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
                     </state>
                     <connections>
                         <action selector="starButtonPressed:" destination="-1" eventType="touchUpInside" id="wDW-N7-S05"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1BX-UY-Tml">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1BX-UY-Tml" customClass="CustomButton" customModule="Find" customModuleProvider="target">
                     <rect key="frame" x="179.5" y="7" width="55" height="35"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <state key="normal" title="Cache">
@@ -233,11 +235,12 @@
                         <action selector="cacheButtonPressed:" destination="-1" eventType="touchUpInside" id="CEZ-QC-A5w"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCf-p6-NPI">
-                    <rect key="frame" x="370" y="11.5" width="24" height="26"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCf-p6-NPI" customClass="CustomButton" customModule="Find" customModuleProvider="target">
+                    <rect key="frame" x="373" y="12.5" width="21" height="24.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <state key="normal" image="trash" catalog="system">
                         <color key="titleColor" name="100ButtonTint"/>
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
                     </state>
                     <connections>
                         <action selector="photosDeleteButtonPressed:" destination="-1" eventType="touchUpInside" id="qaO-e9-n2a"/>
@@ -264,28 +267,30 @@
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="EEj-Oc-aWs">
                     <rect key="frame" x="20" y="0.0" width="374" height="49"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZb-Fp-p7M">
-                            <rect key="frame" x="0.0" y="0.0" width="23" height="49"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZb-Fp-p7M" customClass="CustomButton" customModule="Find" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="21.5" height="49"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <state key="normal" image="square.and.arrow.up" catalog="system">
                                 <color key="titleColor" name="100ButtonTint"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
                             </state>
                             <connections>
                                 <action selector="slideSharePressed:" destination="-1" eventType="touchUpInside" id="tis-0w-qfo"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOq-qe-6HH">
-                            <rect key="frame" x="78" y="0.0" width="27" height="49"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOq-qe-6HH" customClass="CustomButton" customModule="Find" customModuleProvider="target">
+                            <rect key="frame" x="79" y="0.0" width="25" height="49"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <state key="normal" image="star" catalog="system">
                                 <color key="titleColor" name="100ButtonTint"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
                             </state>
                             <connections>
                                 <action selector="slideStarPressed:" destination="-1" eventType="touchUpInside" id="S4R-Sy-Jo5"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Og5-zd-hSh">
-                            <rect key="frame" x="160" y="0.0" width="55" height="49"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Og5-zd-hSh" customClass="CustomButton" customModule="Find" customModuleProvider="target">
+                            <rect key="frame" x="161.5" y="0.0" width="55" height="49"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <state key="normal" title="Cache">
                                 <color key="titleColor" name="100ButtonTint"/>
@@ -294,21 +299,23 @@
                                 <action selector="slideCachePressed:" destination="-1" eventType="touchUpInside" id="gxO-KE-1IQ"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZU-jK-mEd">
-                            <rect key="frame" x="270" y="0.0" width="24" height="49"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZU-jK-mEd" customClass="CustomButton" customModule="Find" customModuleProvider="target">
+                            <rect key="frame" x="273.5" y="0.0" width="21" height="49"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <state key="normal" image="trash" catalog="system">
                                 <color key="titleColor" name="100ButtonTint"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
                             </state>
                             <connections>
                                 <action selector="slideDeletePressed:" destination="-1" eventType="touchUpInside" id="12v-cS-jdq"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXF-bS-4GF">
-                            <rect key="frame" x="349" y="0.0" width="25" height="49"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXF-bS-4GF" customClass="CustomButton" customModule="Find" customModuleProvider="target">
+                            <rect key="frame" x="352" y="0.0" width="22" height="49"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <state key="normal" image="info.circle" catalog="system">
                                 <color key="titleColor" name="100ButtonTint"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
                             </state>
                             <connections>
                                 <action selector="slideInfoPressed:" destination="-1" eventType="touchUpInside" id="GIf-An-za5"/>

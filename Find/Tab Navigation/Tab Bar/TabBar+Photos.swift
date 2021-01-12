@@ -69,7 +69,6 @@ extension TabBarView {
         }
     }
     func updateActions(action: ChangeActions) {
-        print("updating")
         switch action {
         case .shouldStar:
             let starImage = UIImage(systemName: "star")

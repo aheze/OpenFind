@@ -61,17 +61,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             viewController.updateActions = { [weak self] action in
                 guard let self = self else { return }
                 self.tabBarView.updateActions(action: action)
-////                switch action {
-////
-////                case .shouldStar:
-////                    <#code#>
-////                case .shouldNotStar:
-////                    <#code#>
-////                case .shouldCache:
-////                    <#code#>
-////                case .shouldNotCache:
-////                    <#code#>
-////                }
             }
             viewController.dimSlideControls = { [weak self] dim in
                 guard let self = self else { return }

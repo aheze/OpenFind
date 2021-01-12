@@ -35,22 +35,25 @@ class TabBarView: PassthroughView {
     
     // MARK: Selection in Photos
     @IBOutlet var photosControls: ReceiveTouchView!
-    @IBOutlet weak var starButton: UIButton!
+    @IBOutlet weak var starButton: CustomButton!
     @IBAction func starButtonPressed(_ sender: Any) {
+//        starButton.fade(false)
+        print("starredd!!!!")
     }
     
-    @IBOutlet weak var cacheButton: UIButton!
+    @IBOutlet weak var cacheButton: CustomButton!
     @IBAction func cacheButtonPressed(_ sender: Any) {
+        
     }
     
-    @IBOutlet weak var photosDeleteButton: UIButton!
+    @IBOutlet weak var photosDeleteButton: CustomButton!
     @IBAction func photosDeleteButtonPressed(_ sender: Any) {
     }
     
     // MARK: Selection in Lists
     @IBOutlet var listsControls: ReceiveTouchView!
     @IBOutlet weak var listsSelectionLabel: UILabel!
-    @IBOutlet weak var listsDeleteButton: UIButton!
+    @IBOutlet weak var listsDeleteButton: CustomButton!
     
     var listsDeletePressed: (() -> Void)?
     @IBAction func listsDeleteButtonPressed(_ sender: Any) {
@@ -59,27 +62,27 @@ class TabBarView: PassthroughView {
     
     // MARK: Photo Slide controls
     @IBOutlet var photoSlideControls: ReceiveTouchView!
-    @IBOutlet weak var slideShareButton: UIButton!
+    @IBOutlet weak var slideShareButton: CustomButton!
     @IBAction func slideSharePressed(_ sender: Any) {
         photoSlideControlPressed?(.share)
     }
 
-    @IBOutlet weak var slideStarButton: UIButton!
+    @IBOutlet weak var slideStarButton: CustomButton!
     @IBAction func slideStarPressed(_ sender: Any) {
         photoSlideControlPressed?(.star)
     }
    
-    @IBOutlet weak var slideCacheButton: UIButton!
+    @IBOutlet weak var slideCacheButton: CustomButton!
     @IBAction func slideCachePressed(_ sender: Any) {
         photoSlideControlPressed?(.cache)
     }
     
-    @IBOutlet weak var slideDeleteButton: UIButton!
+    @IBOutlet weak var slideDeleteButton: CustomButton!
     @IBAction func slideDeletePressed(_ sender: Any) {
         photoSlideControlPressed?(.delete)
     }
     
-    @IBOutlet weak var slideInfoButton: UIButton!
+    @IBOutlet weak var slideInfoButton: CustomButton!
     @IBAction func slideInfoPressed(_ sender: Any) {
         photoSlideControlPressed?(.info)
     }

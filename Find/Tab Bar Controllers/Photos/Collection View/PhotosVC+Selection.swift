@@ -48,7 +48,7 @@ extension PhotosViewController {
         segmentedSlider.numberOfSelectedLabel.text = text
     }
     func determineActions() {
-        
+        print("inds selected: \(indexPathsSelected)")
         var starredCount = 0
         var notStarredCount = 0
 
@@ -70,7 +70,6 @@ extension PhotosViewController {
                 }
             }
         }
-
         if notStarredCount >= starredCount {
             shouldStarSelection = true
             updateActions?(.shouldStar)
@@ -81,7 +80,8 @@ extension PhotosViewController {
             updateActions?(.shouldNotStar)
         }
 
-        if notCachedCount >= 1 {
+        /// deselected all OR has one that's not cached
+        if (cachedCount == 0 && notCachedCount == 0) || notCachedCount > 0 {
             shouldCacheSelection = true
             updateActions?(.shouldCache)
 //            changeFloatDelegate?.changeFloat(to: "NotCached")
