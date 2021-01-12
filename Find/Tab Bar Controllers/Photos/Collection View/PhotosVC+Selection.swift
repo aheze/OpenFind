@@ -32,7 +32,7 @@ extension PhotosViewController {
                 selectButton.title = "Select"
                 collectionView.allowsMultipleSelection = false
                 segmentedSlider.showNumberOfSelected(show: false)
-//                deselectAllItems()
+                deselectAllPhotos()
 //                addButton.isEnabled = true
             }
         }
@@ -73,9 +73,7 @@ extension PhotosViewController {
         if notStarredCount >= starredCount {
             shouldStarSelection = true
             updateActions?(.shouldStar)
-//            changeFloatDelegate?.changeFloat(to: "Unfill Heart")
         } else {
-//            changeFloatDelegate?.changeFloat(to: "Fill Heart")
             shouldStarSelection = false
             updateActions?(.shouldNotStar)
         }
@@ -84,12 +82,21 @@ extension PhotosViewController {
         if (cachedCount == 0 && notCachedCount == 0) || notCachedCount > 0 {
             shouldCacheSelection = true
             updateActions?(.shouldCache)
-//            changeFloatDelegate?.changeFloat(to: "NotCached")
         } else {
             shouldCacheSelection = false
             updateActions?(.shouldNotCache)
-//            changeFloatDelegate?.changeFloat(to: "Cached")
         }
+    }
+    func deselectAllPhotos() {
+        numberOfSelected = 0
+        for indexP in indexPathsSelected {
+            collectionView.deselectItem(at: indexP, animated: false)
+            if let cell = collectionView.cellForItem(at: indexP) as? ImageCell {
+                cell.highlightView.isHidden = true
+                cell.selectionImageView.isHidden = true
+            }
+        }
+        indexPathsSelected.removeAll()
     }
 }
 extension PhotosViewController: UICollectionViewDelegate {

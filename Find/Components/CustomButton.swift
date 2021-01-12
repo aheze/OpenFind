@@ -23,7 +23,6 @@ class CustomButton: UIButton {
     func configure() {
         self.addTarget(self, action: #selector(touchDown(_:)), for: [.touchDown, .touchDragEnter])
         self.addTarget(self, action: #selector(touchFinish(_:)), for: [.touchUpInside, .touchCancel, .touchDragExit])
-        print("mode: \(String(describing: imageView?.contentMode))")
         imageView?.contentMode = .scaleAspectFit
     }
 
