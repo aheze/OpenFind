@@ -73,7 +73,6 @@ extension PhotosViewController {
                     }
                 }
             }
-            print("nop star")
         }
         
         applyModelSnapshot(changedItems: changedPhotos)

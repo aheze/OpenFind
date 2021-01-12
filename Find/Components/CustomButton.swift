@@ -24,6 +24,7 @@ class CustomButton: UIButton {
         self.addTarget(self, action: #selector(touchDown(_:)), for: [.touchDown, .touchDragEnter])
         self.addTarget(self, action: #selector(touchFinish(_:)), for: [.touchUpInside, .touchCancel, .touchDragExit])
         imageView?.contentMode = .scaleAspectFit
+        self.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
     }
 
     @objc func touchDown(_ sender: UIButton) {
