@@ -33,14 +33,16 @@ extension PhotosViewController {
 }
 extension PhotosViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("did select")
+        
         if selectButtonSelected == true {
             if !indexPathsSelected.contains(indexPath) {
                 indexPathsSelected.append(indexPath)
                 numberOfSelected += 1
                 if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell {
 //                    UIView.animate(withDuration: 0.1, animations: {
-//                        cell.highlightView.alpha = 1
-//                        cell.checkmarkView.alpha = 1
+                    cell.highlightView.isHidden = false
+                    cell.selectionImageView.isHidden = false
 //                        cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
 //                    })
                 }
@@ -58,12 +60,9 @@ extension PhotosViewController: UICollectionViewDelegate {
         if selectButtonSelected == true {
             indexPathsSelected.remove(object: indexPath)
             numberOfSelected -= 1
-            if let cell = collectionView.cellForItem(at: indexPath) as? HPhotoCell {
-                UIView.animate(withDuration: 0.1, animations: {
-                    cell.highlightView.alpha = 0
-                    cell.checkmarkView.alpha = 0
-                    cell.transform = CGAffineTransform.identity
-                })
+            if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell {
+                cell.highlightView.isHidden = true
+                cell.selectionImageView.isHidden = true
             }
         }
     }

@@ -63,6 +63,14 @@ extension PhotosViewController {
                             cell?.shadowImageView.image = nil
                         }
                     }
+                    
+                    if self.indexPathsSelected.contains(indexPath) {
+                        cell?.highlightView.isHidden = false
+                        cell?.selectionImageView.isHidden = false
+                    } else {
+                        cell?.highlightView.isHidden = true
+                        cell?.selectionImageView.isHidden = true
+                    }
                 }
                 return cell
             })
