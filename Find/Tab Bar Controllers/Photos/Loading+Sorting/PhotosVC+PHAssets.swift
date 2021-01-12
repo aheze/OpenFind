@@ -9,6 +9,7 @@
 import UIKit
 import Photos
 import SnapKit
+import RealmSwift
 
 extension PhotosViewController {
     func fetchAssets() {
@@ -45,54 +46,61 @@ extension PhotosViewController {
             if let photos = allPhotos {
                 
                 var totalMonths = [Month]()
-                
                 var mutableMonths = [MutableMonth]()
                 
-                photos.enumerateObjects { (asset, index, stop) in
-                    
-                    var matchingRealmPhoto: HistoryModel?
-                    if let photoObjects = self.photoObjects {
-                        for object in photoObjects {
+                var unmanagedObjects = [HistoryModel]()
+                if let photoObjects = self.photoObjects {
+                    for object in photoObjects {
+                        let unmanagedObject = HistoryModel(value: object)
+                        unmanagedObjects.append(unmanagedObject)
+                    }
+                }
+                DispatchQueue.global(qos: .userInitiated).async {
+                    photos.enumerateObjects { (asset, index, stop) in
+                        
+                        var matchingRealmPhoto: HistoryModel?
+                        
+                        for object in unmanagedObjects {
                             if object.assetIdentifier == asset.localIdentifier {
                                 matchingRealmPhoto = object
                                 break
                             }
                         }
-                    }
-                    
-                    let findPhoto = FindPhoto()
-                    if let matchingPhoto = matchingRealmPhoto {
-                        findPhoto.model = matchingPhoto
-                    }
-                    findPhoto.asset = asset
-                    
-                    if let photoDateCreated = asset.creationDate {
-                        let sameMonths = mutableMonths.filter( { $0.monthDate.isEqual(to: photoDateCreated, toGranularity: .month) })
-                        if let firstOfSameMonth = sameMonths.first {
-                            firstOfSameMonth.photos.append(findPhoto)
-                        } else {
-                            let newMonth = MutableMonth()
-                            newMonth.monthDate = photoDateCreated
-                            newMonth.photos.append(findPhoto)
-                            mutableMonths.append(newMonth)
+                        
+                        let findPhoto = FindPhoto()
+                        if let matchingPhoto = matchingRealmPhoto {
+                            findPhoto.model = matchingPhoto
+                        }
+                        findPhoto.asset = asset
+                        
+                        if let photoDateCreated = asset.creationDate {
+                            let sameMonths = mutableMonths.filter( { $0.monthDate.isEqual(to: photoDateCreated, toGranularity: .month) })
+                            if let firstOfSameMonth = sameMonths.first {
+                                firstOfSameMonth.photos.append(findPhoto)
+                            } else {
+                                let newMonth = MutableMonth()
+                                newMonth.monthDate = photoDateCreated
+                                newMonth.photos.append(findPhoto)
+                                mutableMonths.append(newMonth)
+                            }
                         }
                     }
-                }
-                
-                var allPhotosToDisplay = [FindPhoto]()
-                for mutableMonth in mutableMonths {
-                    for photo in mutableMonth.photos {
-                        allPhotosToDisplay.append(photo)
+                    DispatchQueue.main.async {
+                        var allPhotosToDisplay = [FindPhoto]()
+                        for mutableMonth in mutableMonths {
+                            for photo in mutableMonth.photos {
+                                allPhotosToDisplay.append(photo)
+                            }
+                            let realMonth = Month(monthDate: mutableMonth.monthDate, photos: mutableMonth.photos)
+                            totalMonths.append(realMonth)
+                        }
+
+                        self.allMonths = totalMonths
+                        self.monthsToDisplay = totalMonths
+                        self.allPhotosToDisplay = allPhotosToDisplay
+                        self.applySnapshot(animatingDifferences: false)
                     }
-                    let realMonth = Month(monthDate: mutableMonth.monthDate, photos: mutableMonth.photos)
-                    totalMonths.append(realMonth)
                 }
-                
-                allMonths = totalMonths
-                monthsToDisplay = totalMonths
-                self.allPhotosToDisplay = allPhotosToDisplay
-                applySnapshot(animatingDifferences: false)
-                print("all photos count: \(allPhotosToDisplay.count)")
             }
         }
     }

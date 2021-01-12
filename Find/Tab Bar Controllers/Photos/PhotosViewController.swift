@@ -84,6 +84,10 @@ class PhotosViewController: UIViewController {
         
         setUpBarButtons()
         getRealmObjects()
+
+        collectionView.register(UINib(nibName: "ImageCell", bundle: nil), forCellWithReuseIdentifier: cellReuseIdentifier)
+        collectionView.delegate = self
+        collectionView.dataSource = dataSource
         
         if migrationNeeded {
             showMigrationView(photosToMigrate: photosToMigrate, folderURL: folderURL)
@@ -92,17 +96,14 @@ class PhotosViewController: UIViewController {
         }
         
         setUpSDWebImage()
-        collectionView.register(UINib(nibName: "ImageCell", bundle: nil), forCellWithReuseIdentifier: cellReuseIdentifier)
         
-        collectionView.delegate = self
-        collectionView.dataSource = dataSource
         configureLayout()
-        
+
         let bottomInset = CGFloat(ConstantVars.tabHeight)
         collectionView.contentInset.bottom = 16 + segmentedSlider.bounds.height + bottomInset
         collectionView.verticalScrollIndicatorInsets.bottom = bottomInset
         segmentedSliderBottomC.constant = 8 + bottomInset
-        
+
         getSliderCallback()
     }
     
