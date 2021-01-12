@@ -68,4 +68,21 @@ extension TabBarView {
             photoSlideControls.isUserInteractionEnabled = true
         }
     }
+    func updateActions(action: ChangeActions) {
+        print("updating")
+        switch action {
+        case .shouldStar:
+            let starImage = UIImage(systemName: "star")
+            starButton.setImage(starImage, for: .normal)
+        case .shouldNotStar:
+            let starFillImage = UIImage(systemName: "star.fill")
+            starButton.setImage(starFillImage, for: .normal)
+        case .shouldCache:
+            let cacheText = "Cache"
+            cacheButton.setTitle(cacheText, for: .normal)
+        case .shouldNotCache:
+            let cachedText = "Cached"
+            cacheButton.setTitle(cachedText, for: .normal)
+        }
+    }
 }

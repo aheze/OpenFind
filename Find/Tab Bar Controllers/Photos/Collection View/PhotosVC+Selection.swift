@@ -8,6 +8,13 @@
 
 import UIKit
 
+enum ChangeActions {
+    case shouldStar
+    case shouldNotStar
+    case shouldCache
+    case shouldNotCache
+}
+
 extension PhotosViewController {
     func selectPressed() {
         if allPhotosToDisplay.count == 0 {
@@ -30,30 +37,76 @@ extension PhotosViewController {
             }
         }
     }
+    func updateSelectionLabel(to numberSelected: Int) {
+        let text: String
+        if numberSelected == 1 {
+            text = "\(numberSelected) Photo Selected"
+        } else {
+            text = "\(numberSelected) Photos Selected"
+        }
+
+        segmentedSlider.numberOfSelectedLabel.text = text
+    }
+    func determineActions() {
+        
+        var starredCount = 0
+        var notStarredCount = 0
+
+        var cachedCount = 0
+        var notCachedCount = 0
+
+        for item in indexPathsSelected {
+            if let itemToEdit = dataSource.itemIdentifier(for: item) {
+                if let model = itemToEdit.model, model.isHearted == true {
+                    starredCount += 1
+                } else {
+                    notStarredCount += 1
+                }
+
+                if let model = itemToEdit.model, model.isDeepSearched == true {
+                    cachedCount += 1
+                } else {
+                    notCachedCount += 1
+                }
+            }
+        }
+
+        if notStarredCount >= starredCount {
+            shouldStarSelection = true
+            updateActions?(.shouldStar)
+//            changeFloatDelegate?.changeFloat(to: "Unfill Heart")
+        } else {
+//            changeFloatDelegate?.changeFloat(to: "Fill Heart")
+            shouldStarSelection = false
+            updateActions?(.shouldNotStar)
+        }
+
+        if notCachedCount >= 1 {
+            shouldCacheSelection = true
+            updateActions?(.shouldCache)
+//            changeFloatDelegate?.changeFloat(to: "NotCached")
+        } else {
+            shouldCacheSelection = false
+            updateActions?(.shouldNotCache)
+//            changeFloatDelegate?.changeFloat(to: "Cached")
+        }
+    }
 }
 extension PhotosViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("did select")
-        
         if selectButtonSelected == true {
             if !indexPathsSelected.contains(indexPath) {
                 indexPathsSelected.append(indexPath)
                 numberOfSelected += 1
                 if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell {
-//                    UIView.animate(withDuration: 0.1, animations: {
                     cell.highlightView.isHidden = false
                     cell.selectionImageView.isHidden = false
-//                        cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-//                    })
                 }
             }
             
         } else {
             collectionView.deselectItem(at: indexPath, animated: true)
-            print("selected at \(indexPath)")
             presentFromIndexPath(indexPath: indexPath)
-            
-            
         }
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -66,5 +119,6 @@ extension PhotosViewController: UICollectionViewDelegate {
             }
         }
     }
+    
 }
 

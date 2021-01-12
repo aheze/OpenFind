@@ -36,16 +36,23 @@ class PhotosViewController: UIViewController {
     
     // MARK: Photo selection
     var showSelectionControls: ((Bool) -> Void)? /// show or hide
-    var updateSelectionLabel: ((Int) -> Void)?
+    var updateActions: ((ChangeActions) -> Void)? /// switch star/unstar and cache/uncache
     
     /// Whether is in select mode or not
     var selectButtonSelected = false
     var indexPathsSelected = [IndexPath]()
     var numberOfSelected = 0 {
         didSet {
-            updateSelectionLabel?(numberOfSelected)
+            print("set")
+            determineActions()
+            updateSelectionLabel(to: numberOfSelected)
+            
         }
     }
+    
+    
+    var shouldStarSelection = false /// if press **star** button, should apply star or remove
+    var shouldCacheSelection = false /// if press **cache** button, should apply cache or remove
     
     var selectedIndexPath: IndexPath? /// current indexPath pressed when go to slides vc
     var currentlyPresentingSlides = false /// whether currently presenting the slides or not
