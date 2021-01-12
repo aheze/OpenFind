@@ -21,22 +21,23 @@ extension PhotosViewController {
         dataSource.apply(snapshot, animatingDifferences: true)
     }
     func star(_ shouldStar: Bool) {
-        print("starring ; \(indexPathsSelected)")
         var changedPhotos = [FindPhoto]()
         if shouldStar {
             for indexPath in indexPathsSelected {
                 if let findPhoto = dataSource.itemIdentifier(for: indexPath) {
-                    changedPhotos.append(findPhoto)
-                    print("has photo")
                     if let model = findPhoto.model {
-                        do {
-                            try realm.write {
-                                model.isHearted = true
+                        if !model.isHearted { /// only star if not starred
+                            changedPhotos.append(findPhoto)
+                            do {
+                                try realm.write {
+                                    model.isHearted = true
+                                }
+                            } catch {
+                                print("Error starring photo \(error)")
                             }
-                        } catch {
-                            print("Error starring photo \(error)")
                         }
                     } else {
+                        changedPhotos.append(findPhoto)
                         let assetIdentifier = findPhoto.asset.localIdentifier
                         let newModel = HistoryModel()
                         newModel.assetIdentifier = assetIdentifier
@@ -55,10 +56,29 @@ extension PhotosViewController {
                     }
                 }
             }
-            applyModelSnapshot(changedItems: changedPhotos)
         } else {
+            for indexPath in indexPathsSelected {
+                if let findPhoto = dataSource.itemIdentifier(for: indexPath) {
+                    if let model = findPhoto.model {
+                        if model.isHearted { /// only unstar if already starred
+                            changedPhotos.append(findPhoto)
+                            do {
+                                try realm.write {
+                                    model.isHearted = false
+                                }
+                            } catch {
+                                print("Error starring photo \(error)")
+                            }
+                        }
+                    }
+                }
+            }
             print("nop star")
         }
-        deselectAllPhotos()
+        
+        applyModelSnapshot(changedItems: changedPhotos)
+        sortPhotos(with: currentFilter)
+        applySnapshot()
+        doneWithSelect()
     }
 }

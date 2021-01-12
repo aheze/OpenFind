@@ -19,12 +19,12 @@ extension PhotosViewController {
     func selectPressed() {
         if allPhotosToDisplay.count == 0 {
 //            showNoListsAlert()
-            print("no phoos")
+            print("no photos")
         } else {
             selectButtonSelected.toggle()
             showSelectionControls?(selectButtonSelected)
             if selectButtonSelected {
-                selectButton.title = "Done"
+                selectButton.title = "Cancel"
                 collectionView.allowsMultipleSelection = true
                 segmentedSlider.showNumberOfSelected(show: true)
 //                addButton.isEnabled = false
@@ -33,10 +33,25 @@ extension PhotosViewController {
                 collectionView.allowsMultipleSelection = false
                 segmentedSlider.showNumberOfSelected(show: false)
                 deselectAllPhotos()
+                updateActions?(.shouldStar)
+                updateActions?(.shouldCache)
 //                addButton.isEnabled = true
             }
         }
     }
+    func doneWithSelect() {
+        print("Done")
+        selectButtonSelected = false
+        showSelectionControls?(selectButtonSelected)
+        
+        selectButton.title = "Select"
+        collectionView.allowsMultipleSelection = false
+        segmentedSlider.showNumberOfSelected(show: false)
+        deselectAllPhotos()
+        updateActions?(.shouldStar)
+        updateActions?(.shouldCache)
+    }
+    
     func updateSelectionLabel(to numberSelected: Int) {
         let text: String
         if numberSelected == 1 {

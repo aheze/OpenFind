@@ -28,6 +28,7 @@ class PhotosViewController: UIViewController {
     var allMonths = [Month]() /// all photos
     var monthsToDisplay = [Month]() /// shown photos, including filters
     var allPhotosToDisplay = [FindPhoto]() /// shown photos, including filters, but without grouping by month
+    var currentFilter = PhotoFilter.all
     
     // MARK: Realm photo matching + loading
     let realm = try! Realm()
