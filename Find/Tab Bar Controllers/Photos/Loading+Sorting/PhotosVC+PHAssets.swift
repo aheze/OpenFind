@@ -99,8 +99,36 @@ extension PhotosViewController {
                         self.monthsToDisplay = totalMonths
                         self.allPhotosToDisplay = allPhotosToDisplay
                         self.applySnapshot(animatingDifferences: false)
+                        self.fadeCollectionView(false, instantly: false)
                     }
                 }
+            }
+        }
+    }
+    
+    func fadeCollectionView(_ shouldFade: Bool, instantly: Bool) {
+        let block: (() -> Void)
+        var completion: (() -> Void)?
+        
+        if shouldFade {
+            block = {
+                self.collectionView.alpha = 0
+            }
+        } else {
+            block = {
+                self.collectionView.alpha = 1
+                self.activityIndicator?.alpha = 0
+            }
+            completion = {
+                self.activityIndicator?.stopAnimating()
+            }
+        }
+        if instantly {
+            block()
+            completion?()
+        } else {
+            UIView.animate(withDuration: 0.6, animations: block) { _ in
+                completion?()
             }
         }
     }

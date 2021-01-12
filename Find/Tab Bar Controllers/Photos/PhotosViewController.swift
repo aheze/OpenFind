@@ -29,6 +29,7 @@ class PhotosViewController: UIViewController {
     var monthsToDisplay = [Month]() /// shown photos, including filters
     var allPhotosToDisplay = [FindPhoto]() /// shown photos, including filters, but without grouping by month
     var currentFilter = PhotoFilter.all
+    var activityIndicator: UIActivityIndicatorView? /// show photo loading
     
     // MARK: Realm photo matching + loading
     let realm = try! Realm()
@@ -92,6 +93,8 @@ class PhotosViewController: UIViewController {
         if migrationNeeded {
             showMigrationView(photosToMigrate: photosToMigrate, folderURL: folderURL)
         } else {
+            addActivityIndicator()
+            fadeCollectionView(true, instantly: true)
             fetchAssets()
         }
         

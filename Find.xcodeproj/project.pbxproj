@@ -31,6 +31,7 @@
 		3C3D47DD25A40A5B002B8BBF /* PhotoPermissionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D47DC25A40A5B002B8BBF /* PhotoPermissionView.xib */; };
 		3C3D47E025A41AEB002B8BBF /* PhotosVC+Diffable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47DF25A41AEB002B8BBF /* PhotosVC+Diffable.swift */; };
 		3C3D47E325A41B9E002B8BBF /* PhotosVC+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47E225A41B9E002B8BBF /* PhotosVC+Cells.swift */; };
+		3C4A8E4925AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */; };
 		3C4DE6FB259AD3FF0037D104 /* SaveToPhotosButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */; };
 		3C4DE6FC259AD3FF0037D104 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F5259AD3FF0037D104 /* MessageView.xib */; };
 		3C4DE6FD259AD3FF0037D104 /* CacheIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F6259AD3FF0037D104 /* CacheIcon.swift */; };
@@ -236,6 +237,7 @@
 		3C3D47DC25A40A5B002B8BBF /* PhotoPermissionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPermissionView.xib; sourceTree = "<group>"; };
 		3C3D47DF25A41AEB002B8BBF /* PhotosVC+Diffable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Diffable.swift"; sourceTree = "<group>"; };
 		3C3D47E225A41B9E002B8BBF /* PhotosVC+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Cells.swift"; sourceTree = "<group>"; };
+		3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+ActivityIndicator.swift"; sourceTree = "<group>"; };
 		3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaveToPhotosButton.xib; sourceTree = "<group>"; };
 		3C4DE6F5259AD3FF0037D104 /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
 		3C4DE6F6259AD3FF0037D104 /* CacheIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheIcon.swift; sourceTree = "<group>"; };
@@ -546,6 +548,7 @@
 				3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */,
 				3C3D47E225A41B9E002B8BBF /* PhotosVC+Cells.swift */,
 				3C35399125A6AECF00CB0CF9 /* PhotosVC+CustomLayout.swift */,
+				3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */,
 			);
 			path = "Loading+Sorting";
 			sourceTree = "<group>";
@@ -1342,6 +1345,7 @@
 				4928526023D61F570048EC13 /* ListSelect.swift in Sources */,
 				3C2858C6259C3E4C00BABBA7 /* TabBar+Lists.swift in Sources */,
 				3C020CED259FF7890087AE92 /* PhotosVC+Migration.swift in Sources */,
+				3C4A8E4925AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift in Sources */,
 				4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */,
 				3CB6842C259FF9A700AE0AD6 /* SegmentedSlider.swift in Sources */,
 				3CE306E3259AC4B000F1B2E2 /* State.swift in Sources */,
