@@ -34,20 +34,22 @@ class TabBarView: PassthroughView {
     @IBOutlet weak var controlsReferenceView: ReceiveTouchView!
     
     // MARK: Selection in Photos
+    var photoSelectionControlPressed: ((PhotoSlideAction) -> Void)?
     @IBOutlet var photosControls: ReceiveTouchView!
     @IBOutlet weak var starButton: CustomButton!
     @IBAction func starButtonPressed(_ sender: Any) {
-//        starButton.fade(false)
         print("starredd!!!!")
+        photoSelectionControlPressed?(.star)
     }
     
     @IBOutlet weak var cacheButton: CustomButton!
     @IBAction func cacheButtonPressed(_ sender: Any) {
-        
+        photoSelectionControlPressed?(.cache)
     }
     
     @IBOutlet weak var photosDeleteButton: CustomButton!
     @IBAction func photosDeleteButtonPressed(_ sender: Any) {
+        photoSelectionControlPressed?(.delete)
     }
     
     // MARK: Selection in Lists

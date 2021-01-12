@@ -36,17 +36,31 @@ class MutableMonth {
     var photos = [FindPhoto]()
 }
 
+//class FindPhoto: Hashable {
+//    var id = UUID()
+//    var asset = PHAsset()
+//    var model: HistoryModel?
+//    
+//    func hash(into hasher: inout Hasher) {
+//        hasher.combine(id)
+//    }
+//    
+//    static func == (lhs: FindPhoto, rhs: FindPhoto) -> Bool {
+//        return lhs.id == rhs.id
+//    }
+//}
 class FindPhoto: Hashable {
     var id = UUID()
     var asset = PHAsset()
     var model: HistoryModel?
-    
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+//        hasher.combine(model)
     }
-    
+
     static func == (lhs: FindPhoto, rhs: FindPhoto) -> Bool {
-        lhs.id == rhs.id
+        return lhs.id == rhs.id && lhs.model == rhs.model
     }
 }
 

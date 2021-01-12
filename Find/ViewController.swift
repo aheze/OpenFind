@@ -68,6 +68,21 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 self.tabBarView.dimPhotoSlideControls(dim: dim)
             }
             
+            /// controls in selection
+            tabBarView.photoSelectionControlPressed = { action in
+                switch action {
+                case .star:
+                    viewController.star(viewController.shouldStarSelection)
+                case .cache:
+                    print("cache sel")
+                case .delete:
+                    print("delete sel")
+                default:
+                    print("Can't handle action in selection")
+                }
+            }
+            
+            /// controls for each photo in slides
             tabBarView.photoSlideControlPressed = { action in
                 viewController.currentSlidesController?.actionPressed(action: action)
             }
