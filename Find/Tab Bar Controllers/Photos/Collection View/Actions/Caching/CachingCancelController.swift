@@ -26,27 +26,28 @@ class CachingCancelController: UIViewController {
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
-        var attributes = EKAttributes.centerFloat
-        attributes.displayDuration = .infinity
-        attributes.entryInteraction = .absorbTouches
-        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-        attributes.entryBackground = .color(color: .white)
-        attributes.screenInteraction = .absorbTouches
-        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(300))
-        attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController
-   
-        cacheController.folderURL = folderURL
-        cacheController.photos = totalPhotos
-        cacheController.isResuming = true
-        
-        
-        cacheController.view.layer.cornerRadius = 10
-        SwiftEntryKit.display(entry: cacheController, using: attributes)
+        print("back")
+//        var attributes = EKAttributes.centerFloat
+//        attributes.displayDuration = .infinity
+//        attributes.entryInteraction = .absorbTouches
+//        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
+//        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+//        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+//        attributes.entryBackground = .color(color: .white)
+//        attributes.screenInteraction = .absorbTouches
+//        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(300))
+//        attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+//
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController
+//
+//        cacheController.folderURL = folderURL
+//        cacheController.photos = totalPhotos
+//        cacheController.isResuming = true
+//
+//
+//        cacheController.view.layer.cornerRadius = 10
+//        SwiftEntryKit.display(entry: cacheController, using: attributes)
     }
     
     

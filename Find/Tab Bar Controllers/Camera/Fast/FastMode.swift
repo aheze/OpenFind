@@ -40,7 +40,6 @@ extension CameraViewController {
             
             request.customWords = [self.finalTextToFind, self.finalTextToFind.lowercased(), self.finalTextToFind.uppercased(), self.finalTextToFind.capitalizingFirstLetter()] + customFindArray
         
-            /// 好好好好好好好好hao le
             
             request.recognitionLevel = .fast
             request.recognitionLanguages = ["en_GB", "zh"]

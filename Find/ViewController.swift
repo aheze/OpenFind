@@ -75,6 +75,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     viewController.star(viewController.shouldStarSelection)
                 case .cache:
                     print("cache sel")
+                    viewController.cache(viewController.shouldCacheSelection)
                 case .delete:
                     print("delete sel")
                 default:
