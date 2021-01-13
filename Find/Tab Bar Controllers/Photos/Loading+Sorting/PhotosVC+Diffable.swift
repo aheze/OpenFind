@@ -45,8 +45,9 @@ extension PhotosViewController {
 
                     cell?.imageView.sd_imageTransition = .fade
                     cell?.imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: imageLength, height: imageLength)])
-
+                    
                     if let model = findPhoto.model {
+                        print("has model, \(model.assetIdentifier), \(model.isDeepSearched)")
                         if model.isDeepSearched {
                             cell?.cacheImageView.image = UIImage(named: "CacheActive-Light")
                         } else {
@@ -109,7 +110,7 @@ extension PhotosViewController {
             snapshot.appendItems(month.photos, toSection: month)
         }
         // 5
-        
+
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
     func configureLayout() {

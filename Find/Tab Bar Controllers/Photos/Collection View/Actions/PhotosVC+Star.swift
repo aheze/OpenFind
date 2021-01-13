@@ -14,12 +14,12 @@ extension PhotosViewController {
         if shouldStar {
             for indexPath in indexPathsSelected {
                 if let findPhoto = dataSource.itemIdentifier(for: indexPath) {
-                    if let model = findPhoto.model {
-                        if !model.isHearted { /// only star if not starred
+                    if let model = findPhoto.model, let realModel = getRealRealmObject(from: model) {
+                        if !realModel.isHearted { /// only star if not starred
                             changedPhotos.append(findPhoto)
                             do {
                                 try realm.write {
-                                    model.isHearted = true
+                                    realModel.isHearted = true
                                 }
                             } catch {
                                 print("Error starring photo \(error)")
@@ -48,12 +48,12 @@ extension PhotosViewController {
         } else {
             for indexPath in indexPathsSelected {
                 if let findPhoto = dataSource.itemIdentifier(for: indexPath) {
-                    if let model = findPhoto.model {
-                        if model.isHearted { /// only unstar if already starred
+                    if let model = findPhoto.model, let realModel = getRealRealmObject(from: model) {
+                        if realModel.isHearted { /// only unstar if already starred
                             changedPhotos.append(findPhoto)
                             do {
                                 try realm.write {
-                                    model.isHearted = false
+                                    realModel.isHearted = false
                                 }
                             } catch {
                                 print("Error starring photo \(error)")

@@ -394,7 +394,7 @@ extension CachingViewController {
             for result in results {
                 if let observation = result as? VNRecognizedTextObservation {
                     for text in observation.topCandidates(1) {
-                        print("text: \(text)")
+                        print("text: \(text.string)")
                         let origX = observation.boundingBox.origin.x
                         let origY = 1 - observation.boundingBox.minY
                         let origWidth = observation.boundingBox.width
@@ -415,27 +415,35 @@ extension CachingViewController {
             
             
             if let model = photo.model {
-                do {
-                    try self.realm.write {
-                        model.isDeepSearched = true
-                        self.realm.delete(model.contents)
-                        
-                        for cont in contents {
+                print("alreay has, \(model.assetIdentifier), \(photo.asset.localIdentifier)")
+                if !model.isDeepSearched {
+                    print("NOt deep yuet")
+                    do {
+                        try self.realm.write {
+                            model.isDeepSearched = true
+                            self.realm.delete(model.contents)
                             
-                            let realmContent = SingleHistoryContent()
-                            realmContent.text = cont.text
-                            realmContent.height = Double(cont.height)
-                            realmContent.width = Double(cont.width)
-                            realmContent.x = Double(cont.x)
-                            realmContent.y = Double(cont.y)
-                            model.contents.append(realmContent)
+                            for cont in contents {
+                                
+                                let realmContent = SingleHistoryContent()
+                                realmContent.text = cont.text
+                                realmContent.height = Double(cont.height)
+                                realmContent.width = Double(cont.width)
+                                realmContent.x = Double(cont.x)
+                                realmContent.y = Double(cont.y)
+                                model.contents.append(realmContent)
+                            }
                         }
+                        print("after write")
+                    } catch {
+                        print("Error saving cache. \(error)")
                     }
-                } catch {
-                    print("Error saving cache. \(error)")
+                    
                 }
             } else {
+                print("not yet")
                 let newModel = HistoryModel()
+                print("asset id: \(photo.asset.localIdentifier)")
                 newModel.assetIdentifier = photo.asset.localIdentifier
                 newModel.isDeepSearched = true
                 newModel.isTakenLocally = false
@@ -443,8 +451,8 @@ extension CachingViewController {
                 do {
                     try self.realm.write {
                         self.realm.add(newModel)
+                        
                         for cont in contents {
-                            
                             let realmContent = SingleHistoryContent()
                             realmContent.text = cont.text
                             realmContent.height = Double(cont.height)
@@ -457,7 +465,7 @@ extension CachingViewController {
                 } catch {
                     print("Error saving model \(error)")
                 }
-                
+                print("saved to realm")
                 photo.model = newModel
                 
                 

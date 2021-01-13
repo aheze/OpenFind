@@ -102,6 +102,7 @@ extension PhotosViewController {
                         self.fadeCollectionView(false, instantly: false)
                     }
                 }
+                print("Done")
             }
         }
     }

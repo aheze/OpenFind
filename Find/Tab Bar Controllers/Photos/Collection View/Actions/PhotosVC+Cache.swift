@@ -11,7 +11,7 @@ import SwiftEntryKit
 
 extension PhotosViewController: ReturnCachedPhotos {
     func giveCachedPhotos(photos: [FindPhoto], returnResult: CacheReturn) {
-        print("Given")
+        print("Given: \(photos)")
         
         applyModelSnapshot(changedItems: photos)
         sortPhotos(with: currentFilter)
@@ -62,6 +62,7 @@ extension PhotosViewController {
                 if let item = dataSource.itemIdentifier(for: indexPath) {
                     selectedPhotos.append(item)
                     print("appenidng")
+                    print("Has model? \(item.model)")
                 }
             }
             
