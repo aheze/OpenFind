@@ -20,6 +20,7 @@ extension PhotosViewController {
                             do {
                                 try realm.write {
                                     realModel.isHearted = true
+                                    model.isHearted = true /// also change the unmanaged model
                                 }
                             } catch {
                                 print("Error starring photo \(error)")
@@ -54,6 +55,7 @@ extension PhotosViewController {
                             do {
                                 try realm.write {
                                     realModel.isHearted = false
+                                    model.isHearted = false /// also change the unmanaged model
                                 }
                             } catch {
                                 print("Error starring photo \(error)")

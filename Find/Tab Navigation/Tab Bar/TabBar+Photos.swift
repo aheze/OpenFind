@@ -69,10 +69,8 @@ extension TabBarView {
         }
     }
     func updateActions(action: ChangeActions) {
-        print("update")
         switch action {
         case .shouldStar:
-            print("should star")
             let starImage = UIImage(systemName: "star")
             starButton.setImage(starImage, for: .normal)
         case .shouldNotStar:
