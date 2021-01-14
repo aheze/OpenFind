@@ -33,12 +33,19 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var discardButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     
-    
-    
+    @IBOutlet weak var baseView: UIView!
     let rimView = UIView()
     let tintView = UIView()
     
+    @IBOutlet weak var numberCachedLabel: UILabel!
+    @IBOutlet weak var collectionSuperview: UIView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        statusOk = false
+        let cancelling = NSLocalizedString("cancelling", comment: "CachingViewController def=Cancelling...")
+        cancelButton.setTitle(cancelling, for: .normal)
+    }
     @IBAction func keepButtonPressed(_ sender: Any) {
         keepAlreadyCached()
     }
@@ -49,62 +56,32 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
         animateChange(toCancel: false)
     }
     
-    
-    
-    @IBOutlet weak var baseView: UIView!
-    
     let screenScale = UIScreen.main.scale /// for photo thumbnail
     let realm = try! Realm()
     var getRealRealmObject: ((HistoryModel) -> HistoryModel?)? /// get real realm managed object
     
     var aspectRatioWidthOverHeight : CGFloat = 0
     
-//    var photos = [EditableHistoryModel]()
-//    var alreadyCachedPhotos = [EditableHistoryModel]()
-    
+
     // MARK: Track which photos have been cached
     var numberCached = 0
     var photosToCache = [FindPhoto]()
     var alreadyCachedPhotos = [FindPhoto]()
-    
-    
-//    var folderURL = URL(fileURLWithPath: "", isDirectory: true)
     
     let dispatchGroup = DispatchGroup()
     let dispatchQueue = DispatchQueue(label: "taskQueue")
     let dispatchSemaphore = DispatchSemaphore(value: 0)
     
     var statusOk = true ///OK = Running, no cancel
-    
-    
     var isResuming = false
     
     private var gradient: CAGradientLayer!
-    private var newGrad:CAGradientLayer!
+    private var newGrad: CAGradientLayer!
     
     @IBOutlet weak var cancelButton: UIButton!
     var presentingCancelPrompt = false
     
     weak var finishedCache: ReturnCachedPhotos?
-    
-    
-    @IBAction func cancelButtonPressed(_ sender: Any) {
-        print("dismiss?")
-        statusOk = false
-        
-        let cancelling = NSLocalizedString("cancelling", comment: "CachingViewController def=Cancelling...")
-        cancelButton.setTitle(cancelling, for: .normal)
-        
-    }
-    
-    
-    @IBOutlet weak var numberCachedLabel: UILabel!
-    
-    
-    @IBOutlet weak var collectionSuperview: UIView!
-    
-    
-    @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -122,6 +99,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     func doneAnimating() {
         startFinding()
     }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         DispatchQueue.main.async {
@@ -149,7 +127,6 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
                 self.rimView.alpha = 0
                 self.tintView.alpha = 0
                 self.activityIndicator.alpha = 0
-                //                self.swipeView.alpha = 0
                 
             }, completion: { _ in
                 self.baseView.isHidden = true
@@ -157,7 +134,6 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
                 self.rimView.isHidden = true
                 self.tintView.isHidden = true
                 self.activityIndicator.isHidden = true
-                //                self.swipeView.isHidden = true
             })
             
         } else {
@@ -165,7 +141,6 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
             self.rimView.isHidden = false
             self.tintView.isHidden = false
             self.activityIndicator.isHidden = false
-            //            self.swipeView.isHidden = false
             
             self.statusOk = true
             
@@ -183,11 +158,8 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
                 self.rimView.alpha = 1
                 self.tintView.alpha = 1
                 self.activityIndicator.alpha = 1
-                //                self.swipeView.alpha = 1
-                
                 
             }, completion: { _ in
-                print("completed")
                 self.cancelView.isHidden = true
                 self.backButton.isHidden = true
                 self.startFinding()
@@ -203,9 +175,6 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cacheCellid", for: indexPath) as! CacheCell
         
-//        let historyModel = photos[indexPath.item]
-        
-        
         let findPhoto = photosToCache[indexPath.item]
         
         if let url = NSURL.sd_URL(with: findPhoto.asset) {
@@ -214,16 +183,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
 
             cell.imageView.sd_imageTransition = .fade
             cell.imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: imageLength, height: imageLength)])
-            
         }
-        
-//        let filePath = historyModel.filePath
-//        let finalUrl = folderURL.appendingPathComponent(filePath)
-//        cell.imageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-//        cell.imageView.sd_imageTransition = .fade
-//        cell.imageView.sd_setImage(with: finalUrl)
-        
-        
         return cell
     }
     
@@ -233,19 +193,13 @@ extension CachingViewController {
     
     func keepAlreadyCached() {
         DispatchQueue.main.async {
-            
-//            self.finishedCache?.giveCachedPhotos(photos: self.alreadyCachedPhotos, popup: "Keep")
             self.finishedCache?.giveCachedPhotos(photos: self.alreadyCachedPhotos, returnResult: .keptSome)
             SwiftEntryKit.dismiss()
         }
     }
     func finishedFind() {
         DispatchQueue.main.async {
-            
             self.cancelButton.isEnabled = false
-            
-//            self.finishedCache?.giveCachedPhotos(photos: self.alreadyCachedPhotos, popup: "Finished")
-            
             self.finishedCache?.giveCachedPhotos(photos: self.alreadyCachedPhotos, returnResult: .completedAll)
             SwiftEntryKit.dismiss()
         }
@@ -295,7 +249,6 @@ extension CachingViewController {
                         options.isSynchronous = true
                         PHImageManager.default().requestImage(for: findPhoto.asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options) { (image, _) in
                             if let uiImage = image, let cgImage = uiImage.cgImage {
-                                print("has")
                                 let request = VNRecognizeTextRequest { request, error in
                                     self.handleFastDetectedText(request: request, error: error, photo: findPhoto)
                                 }
@@ -309,19 +262,6 @@ extension CachingViewController {
                                 }
                             }
                         }
-//                        PHImageManager.default().requestImageDataAndOrientation(for: findPhoto.asset, options: nil) { (imageData, dataUTI, orientation, nil) in
-//                            let request = VNRecognizeTextRequest { request, error in
-//                                self.handleFastDetectedText(request: request, error: error, photo: findPhoto)
-//                            }
-//                            request.recognitionLevel = .accurate
-//                            request.recognitionLanguages = ["en_GB"]
-//                            let imageRequestHandler = VNImageRequestHandler(data: imageData!, orientation: .up)
-//                            do {
-//                                try imageRequestHandler.perform([request])
-//                            } catch let error {
-//                                print("Error: \(error)")
-//                            }
-//                        }
                         self.dispatchSemaphore.wait()
                     }
                     
@@ -333,7 +273,6 @@ extension CachingViewController {
         dispatchGroup.notify(queue: dispatchQueue) {
             print("Finished all requests.")
             if self.statusOk == false {
-                print("not ok")
                 DispatchQueue.main.async {
                     self.finishedCancelling()
                 }
@@ -344,24 +283,17 @@ extension CachingViewController {
         
     }
     func handleFastDetectedText(request: VNRequest?, error: Error?, photo: FindPhoto) {
-        print("handling")
         
         numberCached += 1
         DispatchQueue.main.async {
             let xSlashxPhotosCached = NSLocalizedString("%d Slash %d PhotosCached", comment: "CachingViewController def=x/x photos cached")
             let string = String.localizedStringWithFormat(xSlashxPhotosCached, self.numberCached, self.photosToCache.count)
             self.numberCachedLabel.text = string
-            //        }
-            
-            
             
             guard let results = request?.results, results.count > 0 else {
-                print("no results")
-                
                 
                 if let model = photo.model {
                     if let realModel = self.getRealRealmObject?(model) {
-                        print("hgas real model")
                         do {
                             try self.realm.write {
                                 realModel.isDeepSearched = true
@@ -423,9 +355,7 @@ extension CachingViewController {
             
             if let model = photo.model {
                 if let realModel = self.getRealRealmObject?(model) {
-                    print("alreay has, \(realModel.assetIdentifier), \(photo.asset.localIdentifier)")
                     if !realModel.isDeepSearched {
-                        print("NOt deep yuet")
                         do {
                             try self.realm.write {
                                 realModel.isDeepSearched = true
@@ -448,13 +378,10 @@ extension CachingViewController {
                         } catch {
                             print("Error saving cache. \(error)")
                         }
-                        
                     }
                 }
             } else {
-                print("not yet")
                 let newModel = HistoryModel()
-                print("asset id: \(photo.asset.localIdentifier)")
                 newModel.assetIdentifier = photo.asset.localIdentifier
                 newModel.isDeepSearched = true
                 newModel.isTakenLocally = false
@@ -476,79 +403,9 @@ extension CachingViewController {
                 } catch {
                     print("Error saving model \(error)")
                 }
-                print("saved to realm")
+                
                 photo.model = newModel
-                
-                
-                //            do {
-                //                try realm.write {
-                //                    currentPhoto.isDeepSearched = cachedPhoto.isDeepSearched
-                //                    realm.delete(currentPhoto.contents)
-                //
-                //                    for cont in cachedPhoto.contents {
-                //
-                //                        let realmContent = SingleHistoryContent()
-                //                        realmContent.text = cont.text
-                //                        realmContent.height = Double(cont.height)
-                //                        realmContent.width = Double(cont.width)
-                //                        realmContent.x = Double(cont.x)
-                //                        realmContent.y = Double(cont.y)
-                //                        currentPhoto.contents.append(realmContent)
-                //                    }
-                //                }
-                //            } catch {
-                //                print("Error saving cache. \(error)")
-                //            }
             }
-            
-            
-            
-            //        let newCachedPhoto = EditableHistoryModel()
-            //        newCachedPhoto.dateCreated = photo.dateCreated
-            //        newCachedPhoto.filePath = photo.filePath
-            //        newCachedPhoto.isDeepSearched = true
-            //        newCachedPhoto.isHearted = photo.isHearted
-            //
-            //        if let origIndex = photos.firstIndex(of: photo) {
-            //            photos[origIndex].isDeepSearched = true
-            //        } else {
-            //            print("ERROR!!!!!!")
-            //        }
-            
-            
-            //        guard let results = request?.results, results.count > 0 else {
-            //            print("no results")
-            //            alreadyCachedPhotos.append(newCachedPhoto)
-            //            dispatchSemaphore.signal()
-            //            dispatchGroup.leave()
-            //
-            //            return
-            //        }
-            //
-            //        var contents = [EditableSingleHistoryContent]()
-            //
-            //        for result in results {
-            //            if let observation = result as? VNRecognizedTextObservation {
-            //                for text in observation.topCandidates(1) {
-            //
-            //                    let origX = observation.boundingBox.origin.x
-            //                    let origY = 1 - observation.boundingBox.minY
-            //                    let origWidth = observation.boundingBox.width
-            //                    let origHeight = observation.boundingBox.height
-            //
-            //                    let singleContent = EditableSingleHistoryContent()
-            //                    singleContent.text = text.string
-            //                    singleContent.x = origX
-            //                    singleContent.y = origY
-            //                    singleContent.width = origWidth
-            //                    singleContent.height = origHeight
-            //                    contents.append(singleContent)
-            //                }
-            //            }
-            //
-            //        }
-            
-            //        newCachedPhoto.contents = contents
             
             self.alreadyCachedPhotos.append(photo)
             self.dispatchSemaphore.signal()
@@ -557,11 +414,9 @@ extension CachingViewController {
     }
 }
 extension CachingViewController : UICollectionViewDelegateFlowLayout {
-    //1
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //        let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right)) / 3
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.width)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -586,15 +441,14 @@ extension CachingViewController {
         let smallRect = CGRect(x: 10, y: 10, width: 160, height: 160)
         
         let pathSmallRect = UIBezierPath(roundedRect: smallRect, cornerRadius: 2)
-        //
+        
         pathBigRect.append(pathSmallRect)
         pathBigRect.usesEvenOddFillRule = true
-        //
+        
         let fillLayer = CAShapeLayer()
         fillLayer.path = pathBigRect.cgPath
         fillLayer.fillRule = CAShapeLayerFillRule.evenOdd
         fillLayer.fillColor = UIColor(named: "Gray4")?.cgColor
-        
         
         rimView.layer.addSublayer(fillLayer)
         view.addSubview(rimView)
@@ -620,12 +474,8 @@ extension CachingViewController {
         view.clipsToBounds = true
         view.bringSubviewToFront(cancelButton)
         
-        
         cancelImageView.layer.cornerRadius = 4
         if let firstPhoto = photosToCache.first {
-//            let finalUrl = folderURL.appendingPathComponent(firstPhoto.filePath)
-//            cancelImageView.sd_imageTransition = .fade
-//            cancelImageView.sd_setImage(with: finalUrl)
             
             if let url = NSURL.sd_URL(with: firstPhoto.asset) {
                 let boundsLength = cancelImageView.bounds.width
@@ -647,20 +497,5 @@ extension CachingViewController {
         numberCachedLabel.text = string
 
         baseView.bringSubviewToFront(activityIndicator)
-    }
-}
-
-extension String {
-    func getImageFromDir() -> UIImage? {
-        
-        if let fileURL = URL(string: self) {
-            do {
-                let imageData = try Data(contentsOf: fileURL)
-                return UIImage(data: imageData)
-            } catch {
-                print("Not able to load image")
-            }
-        }
-        return nil
     }
 }

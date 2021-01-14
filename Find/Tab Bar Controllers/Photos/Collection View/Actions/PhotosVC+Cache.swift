@@ -22,6 +22,13 @@ extension PhotosViewController: ReturnCachedPhotos {
 
 extension PhotosViewController {
     func cache(_ shouldCache: Bool) {
+        var selectedPhotos = [FindPhoto]()
+        for indexPath in indexPathsSelected {
+            if let item = dataSource.itemIdentifier(for: indexPath) {
+                selectedPhotos.append(item)
+            }
+        }
+        
         print("Should cache: \(shouldCache)")
         
         if shouldCache == true {
@@ -47,13 +54,6 @@ extension PhotosViewController {
                 cacheController.doneAnimating()
             }
             
-            
-            var selectedPhotos = [FindPhoto]()
-            for indexPath in indexPathsSelected {
-                if let item = dataSource.itemIdentifier(for: indexPath) {
-                    selectedPhotos.append(item)
-                }
-            }
             cacheController.photosToCache = selectedPhotos
             cacheController.getRealRealmObject = { [weak self] object in
                 guard let self = self else { return nil }
@@ -71,6 +71,30 @@ extension PhotosViewController {
             collectionView.allowsMultipleSelection = false
             
             SwiftEntryKit.display(entry: cacheController, using: attributes)
+        } else {
+            var changedPhotos = [FindPhoto]()
+            for findPhoto in selectedPhotos {
+                if let model = findPhoto.model {
+                    if let realModel = getRealRealmObject(from: model) {
+                        if realModel.isDeepSearched { /// only unstar if already starred
+                            changedPhotos.append(findPhoto)
+                            do {
+                                try realm.write {
+                                    realModel.isDeepSearched = false
+                                    model.isDeepSearched = false /// also change the unmanaged model
+                                    realm.delete(realModel.contents)
+                                    realm.delete(model.contents)
+                                }
+                            } catch {
+                                print("Error starring photo \(error)")
+                            }
+                        }
+                    }
+                }
+            }
+            applyModelSnapshot(changedItems: changedPhotos)
+            sortPhotos(with: currentFilter)
+            applySnapshot()
         }
         doneWithSelect()
     }
