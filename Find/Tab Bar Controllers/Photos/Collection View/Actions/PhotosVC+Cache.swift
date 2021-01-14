@@ -55,6 +55,14 @@ extension PhotosViewController {
                 }
             }
             cacheController.photosToCache = selectedPhotos
+            cacheController.getRealRealmObject = { [weak self] object in
+                guard let self = self else { return nil }
+                if let realObject = self.getRealRealmObject(from: object) {
+                    return realObject
+                } else {
+                    return nil
+                }
+            }
             cacheController.finishedCache = self
             cacheController.view.layer.cornerRadius = 10
             

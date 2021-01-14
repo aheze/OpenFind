@@ -55,6 +55,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     let screenScale = UIScreen.main.scale /// for photo thumbnail
     let realm = try! Realm()
+    var getRealRealmObject: ((HistoryModel) -> HistoryModel?)? /// get real realm managed object
     
     var aspectRatioWidthOverHeight : CGFloat = 0
     
@@ -359,14 +360,20 @@ extension CachingViewController {
                 
                 
                 if let model = photo.model {
-                    do {
-                        try self.realm.write {
-                            model.isDeepSearched = true
-                            self.realm.delete(model.contents)
+                    if let realModel = self.getRealRealmObject?(model) {
+                        print("hgas real model")
+                        do {
+                            try self.realm.write {
+                                realModel.isDeepSearched = true
+                                model.isDeepSearched = true
+                                self.realm.delete(realModel.contents)
+                                self.realm.delete(model.contents)
+                            }
+                        } catch {
+                            print("Error saving cache. \(error)")
                         }
-                    } catch {
-                        print("Error saving cache. \(error)")
                     }
+                   
                 } else {
                     let newModel = HistoryModel()
                     newModel.assetIdentifier = photo.asset.localIdentifier
@@ -415,30 +422,34 @@ extension CachingViewController {
             
             
             if let model = photo.model {
-                print("alreay has, \(model.assetIdentifier), \(photo.asset.localIdentifier)")
-                if !model.isDeepSearched {
-                    print("NOt deep yuet")
-                    do {
-                        try self.realm.write {
-                            model.isDeepSearched = true
-                            self.realm.delete(model.contents)
-                            
-                            for cont in contents {
+                if let realModel = self.getRealRealmObject?(model) {
+                    print("alreay has, \(realModel.assetIdentifier), \(photo.asset.localIdentifier)")
+                    if !realModel.isDeepSearched {
+                        print("NOt deep yuet")
+                        do {
+                            try self.realm.write {
+                                realModel.isDeepSearched = true
+                                model.isDeepSearched = true
+                                self.realm.delete(realModel.contents)
+                                self.realm.delete(model.contents)
                                 
-                                let realmContent = SingleHistoryContent()
-                                realmContent.text = cont.text
-                                realmContent.height = Double(cont.height)
-                                realmContent.width = Double(cont.width)
-                                realmContent.x = Double(cont.x)
-                                realmContent.y = Double(cont.y)
-                                model.contents.append(realmContent)
+                                for cont in contents {
+                                    let realmContent = SingleHistoryContent()
+                                    realmContent.text = cont.text
+                                    realmContent.height = Double(cont.height)
+                                    realmContent.width = Double(cont.width)
+                                    realmContent.x = Double(cont.x)
+                                    realmContent.y = Double(cont.y)
+                                    realModel.contents.append(realmContent)
+                                    model.contents.append(realmContent)
+                                }
                             }
+                            print("after write")
+                        } catch {
+                            print("Error saving cache. \(error)")
                         }
-                        print("after write")
-                    } catch {
-                        print("Error saving cache. \(error)")
+                        
                     }
-                    
                 }
             } else {
                 print("not yet")
