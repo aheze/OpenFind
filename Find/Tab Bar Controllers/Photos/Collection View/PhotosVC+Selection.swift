@@ -72,13 +72,13 @@ extension PhotosViewController {
 
         for item in indexPathsSelected {
             if let itemToEdit = dataSource.itemIdentifier(for: item) {
-                if let model = itemToEdit.model, model.isHearted == true {
+                if let model = itemToEdit.editableModel, model.isHearted == true {
                     starredCount += 1
                 } else {
                     notStarredCount += 1
                 }
 
-                if let model = itemToEdit.model, model.isDeepSearched == true {
+                if let model = itemToEdit.editableModel, model.isDeepSearched == true {
                     cachedCount += 1
                 } else {
                     notCachedCount += 1

@@ -48,19 +48,45 @@ extension PhotosViewController {
                 var totalMonths = [Month]()
                 var mutableMonths = [MutableMonth]()
                 
-                var unmanagedObjects = [HistoryModel]()
+//                var unmanagedObjects = [HistoryModel]()
+//                if let photoObjects = self.photoObjects {
+//                    for object in photoObjects {
+//                        let unmanagedObject = HistoryModel(value: object)
+//                        unmanagedObjects.append(unmanagedObject)
+//                    }
+//                }
+                var editableModels = [EditableHistoryModel]()
                 if let photoObjects = self.photoObjects {
                     for object in photoObjects {
-                        let unmanagedObject = HistoryModel(value: object)
-                        unmanagedObjects.append(unmanagedObject)
+                        let editableModel = EditableHistoryModel()
+                        editableModel.assetIdentifier = object.assetIdentifier
+                        editableModel.isTakenLocally = object.isTakenLocally
+                        editableModel.isHearted = object.isHearted
+                        editableModel.isDeepSearched = object.isDeepSearched
+//                        editableModel. = object.assetIdentifier
+                        
+                        for content in object.contents {
+                            let editableContent = EditableSingleHistoryContent()
+                            editableContent.text = content.text
+                            editableContent.height = CGFloat(content.height)
+                            editableContent.width = CGFloat(content.width)
+                            editableContent.x = CGFloat(content.x)
+                            editableContent.y = CGFloat(content.y)
+                            editableModel.contents.append(editableContent)
+                        }
+                        
+                        editableModels.append(editableModel)
+//                        let unmanagedObject = HistoryModel(value: object)
+//                        unmanagedObjects.append(unmanagedObject)
                     }
                 }
+                
                 DispatchQueue.global(qos: .userInitiated).async {
                     photos.enumerateObjects { (asset, index, stop) in
                         
-                        var matchingRealmPhoto: HistoryModel?
+                        var matchingRealmPhoto: EditableHistoryModel?
                         
-                        for object in unmanagedObjects {
+                        for object in editableModels {
                             if object.assetIdentifier == asset.localIdentifier {
                                 matchingRealmPhoto = object
                                 break
@@ -69,7 +95,7 @@ extension PhotosViewController {
                         
                         let findPhoto = FindPhoto()
                         if let matchingPhoto = matchingRealmPhoto {
-                            findPhoto.model = matchingPhoto
+                            findPhoto.editableModel = matchingPhoto
                         }
                         findPhoto.asset = asset
                         

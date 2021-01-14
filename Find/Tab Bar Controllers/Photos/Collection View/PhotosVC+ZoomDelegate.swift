@@ -16,7 +16,7 @@ extension PhotosViewController: PhotoSlidesUpdatedIndex {
         if let indexPath = dataSource.indexPath(for: currentPhoto) {
             if let selectedIndexPath = selectedIndexPath {
                 if let cell = collectionView.cellForItem(at: selectedIndexPath) as? ImageCell { /// old index
-                    if let model = currentPhoto.model {
+                    if let model = currentPhoto.editableModel {
                         if model.isHearted || model.isDeepSearched  {
                             cell.shadowImageView.alpha = 1
                         } else {
@@ -36,7 +36,7 @@ extension PhotosViewController: PhotoSlidesUpdatedIndex {
                 }
                 
                 if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell { /// new index
-                    if let model = currentPhoto.model {
+                    if let model = currentPhoto.editableModel {
                         if model.isHearted || model.isDeepSearched  {
                             cell.shadowImageView.alpha = 0
                         }
@@ -82,7 +82,7 @@ extension PhotosViewController: ZoomAnimatorDelegate {
             changePresentationMode(presentingSlides: false)
             if
                 let findPhoto = dataSource.itemIdentifier(for: selectedIndexPath),
-                let model = findPhoto.model
+                let model = findPhoto.editableModel
             {
                 UIView.animate(withDuration: 0.2, animations: {
                     if model.isHearted || model.isDeepSearched  {

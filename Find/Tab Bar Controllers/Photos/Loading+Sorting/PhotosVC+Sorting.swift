@@ -39,14 +39,14 @@ class MutableMonth {
 class FindPhoto: Hashable {
     var id = UUID()
     var asset = PHAsset()
-    var model: HistoryModel?
+    var editableModel: EditableHistoryModel?
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 
     static func == (lhs: FindPhoto, rhs: FindPhoto) -> Bool {
-        return lhs.id == rhs.id && lhs.model == rhs.model
+        return lhs.id == rhs.id && lhs.editableModel == rhs.editableModel
     }
 }
 
@@ -67,7 +67,7 @@ extension PhotosViewController {
             var filteredMonths = self.allMonths
             for index in 0..<filteredMonths.count {
                 let filteredPhotos = filteredMonths[index].photos.filter { photo in
-                    return photo.model?.isTakenLocally ?? false
+                    return photo.editableModel?.isTakenLocally ?? false
                 }
                 filteredMonths[index].photos = filteredPhotos
                 allPhotosToDisplay += filteredPhotos
@@ -80,7 +80,7 @@ extension PhotosViewController {
             var filteredMonths = self.allMonths
             for index in 0..<filteredMonths.count {
                 let filteredPhotos = filteredMonths[index].photos.filter { photo in
-                    return photo.model?.isHearted ?? false
+                    return photo.editableModel?.isHearted ?? false
                 }
                 filteredMonths[index].photos = filteredPhotos
                 allPhotosToDisplay += filteredPhotos
@@ -93,7 +93,7 @@ extension PhotosViewController {
             var filteredMonths = self.allMonths
             for index in 0..<filteredMonths.count {
                 let filteredPhotos = filteredMonths[index].photos.filter { photo in
-                    return photo.model?.isDeepSearched ?? false
+                    return photo.editableModel?.isDeepSearched ?? false
                 }
                 filteredMonths[index].photos = filteredPhotos
                 allPhotosToDisplay += filteredPhotos

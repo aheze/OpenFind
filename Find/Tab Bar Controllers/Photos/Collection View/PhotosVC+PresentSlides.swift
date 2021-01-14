@@ -31,7 +31,7 @@ extension PhotosViewController {
             if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell {
                 slidesViewController.firstPlaceholderImage = cell.imageView.image
                 
-                if let model = findPhoto.model {
+                if let model = findPhoto.editableModel {
                     if model.isDeepSearched {
                         cell.cacheImageView.alpha = 0
                     }

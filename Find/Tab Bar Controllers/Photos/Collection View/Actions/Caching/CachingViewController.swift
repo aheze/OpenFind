@@ -58,7 +58,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     let screenScale = UIScreen.main.scale /// for photo thumbnail
     let realm = try! Realm()
-    var getRealRealmObject: ((HistoryModel) -> HistoryModel?)? /// get real realm managed object
+    var getRealRealmModel: ((EditableHistoryModel) -> HistoryModel?)? /// get real realm managed object
     
     var aspectRatioWidthOverHeight : CGFloat = 0
     
@@ -235,7 +235,7 @@ extension CachingViewController {
                         self.collectionView.scrollToItem(at: indP, at: .centeredVertically, animated: true)
                     }
                     
-                    if let model = findPhoto.model, model.isDeepSearched == true {
+                    if let model = findPhoto.editableModel, model.isDeepSearched == true {
                         self.numberCached += 1
                         DispatchQueue.main.async {
                             let xSlashxPhotosCached = NSLocalizedString("%d Slash %d PhotosCached", comment: "CachingViewController def=x/x photos cached")
@@ -247,14 +247,15 @@ extension CachingViewController {
                         self.dispatchGroup.enter()
                         let options = PHImageRequestOptions()
                         options.isSynchronous = true
-                        PHImageManager.default().requestImage(for: findPhoto.asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options) { (image, _) in
-                            if let uiImage = image, let cgImage = uiImage.cgImage {
+                        
+                        PHImageManager.default().requestImageDataAndOrientation(for: findPhoto.asset, options: options) { (data, _, _, _) in
+                            if let imageData = data {
                                 let request = VNRecognizeTextRequest { request, error in
                                     self.handleFastDetectedText(request: request, error: error, photo: findPhoto)
                                 }
                                 request.recognitionLevel = .accurate
                                 request.recognitionLanguages = ["en_GB"]
-                                let imageRequestHandler = VNImageRequestHandler(cgImage: cgImage, orientation: .up, options: [:])
+                                let imageRequestHandler = VNImageRequestHandler(data: imageData, orientation: .up, options: [:])
                                 do {
                                     try imageRequestHandler.perform([request])
                                 } catch let error {
@@ -262,6 +263,7 @@ extension CachingViewController {
                                 }
                             }
                         }
+                        
                         self.dispatchSemaphore.wait()
                     }
                     
@@ -292,20 +294,19 @@ extension CachingViewController {
             
             guard let results = request?.results, results.count > 0 else {
                 
-                if let model = photo.model {
-                    if let realModel = self.getRealRealmObject?(model) {
+                if let editableModel = photo.editableModel {
+                    if let realModel = self.getRealRealmModel?(editableModel) {
                         do {
                             try self.realm.write {
                                 realModel.isDeepSearched = true
-                                model.isDeepSearched = true
                                 self.realm.delete(realModel.contents)
-                                self.realm.delete(model.contents)
                             }
                         } catch {
                             print("Error saving cache. \(error)")
                         }
                     }
-                   
+                    editableModel.isDeepSearched = true
+                    editableModel.contents.removeAll()
                 } else {
                     let newModel = HistoryModel()
                     newModel.assetIdentifier = photo.asset.localIdentifier
@@ -320,7 +321,12 @@ extension CachingViewController {
                         print("Error saving model \(error)")
                     }
                     
-                    photo.model = newModel
+                    let editableModel = EditableHistoryModel()
+                    editableModel.assetIdentifier = photo.asset.localIdentifier
+                    editableModel.isDeepSearched = true
+                    editableModel.isTakenLocally = false
+                    
+                    photo.editableModel = editableModel
                 }
                 
                 self.alreadyCachedPhotos.append(photo)
@@ -353,15 +359,13 @@ extension CachingViewController {
             
             
             
-            if let model = photo.model {
-                if let realModel = self.getRealRealmObject?(model) {
+            if let editableModel = photo.editableModel {
+                if let realModel = self.getRealRealmModel?(editableModel) {
                     if !realModel.isDeepSearched {
                         do {
                             try self.realm.write {
                                 realModel.isDeepSearched = true
-                                model.isDeepSearched = true
                                 self.realm.delete(realModel.contents)
-                                self.realm.delete(model.contents)
                                 
                                 for cont in contents {
                                     let realmContent = SingleHistoryContent()
@@ -371,13 +375,14 @@ extension CachingViewController {
                                     realmContent.x = Double(cont.x)
                                     realmContent.y = Double(cont.y)
                                     realModel.contents.append(realmContent)
-                                    model.contents.append(realmContent)
                                 }
                             }
                             print("after write")
                         } catch {
                             print("Error saving cache. \(error)")
                         }
+                        editableModel.isDeepSearched = true
+                        editableModel.contents = contents
                     }
                 }
             } else {
@@ -404,7 +409,13 @@ extension CachingViewController {
                     print("Error saving model \(error)")
                 }
                 
-                photo.model = newModel
+                let editableModel = EditableHistoryModel()
+                editableModel.assetIdentifier = photo.asset.localIdentifier
+                editableModel.isDeepSearched = true
+                editableModel.isTakenLocally = false
+                editableModel.contents = contents /// set the contents
+                
+                photo.editableModel = editableModel
             }
             
             self.alreadyCachedPhotos.append(photo)

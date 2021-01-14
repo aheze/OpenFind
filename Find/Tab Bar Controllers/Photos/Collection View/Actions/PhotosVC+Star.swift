@@ -14,18 +14,18 @@ extension PhotosViewController {
         if shouldStar {
             for indexPath in indexPathsSelected {
                 if let findPhoto = dataSource.itemIdentifier(for: indexPath) {
-                    if let model = findPhoto.model {
-                        if let realModel = getRealRealmObject(from: model) {
+                    if let editableModel = findPhoto.editableModel {
+                        if let realModel = getRealRealmModel(from: editableModel) {
                             if !realModel.isHearted { /// only star if not starred
                                 changedPhotos.append(findPhoto)
                                 do {
                                     try realm.write {
                                         realModel.isHearted = true
-                                        model.isHearted = true /// also change the unmanaged model
                                     }
                                 } catch {
                                     print("Error starring photo \(error)")
                                 }
+                                editableModel.isHearted = true /// also change the editable model
                             }
                         }
                     } else {
@@ -44,25 +44,30 @@ extension PhotosViewController {
                             print("Error saving model \(error)")
                         }
                         
-                        findPhoto.model = newModel
+                        let editableModel = EditableHistoryModel()
+                        editableModel.assetIdentifier = assetIdentifier
+                        editableModel.isHearted = true
+                        editableModel.isTakenLocally = false
+                        
+                        findPhoto.editableModel = editableModel
                     }
                 }
             }
         } else {
             for indexPath in indexPathsSelected {
                 if let findPhoto = dataSource.itemIdentifier(for: indexPath) {
-                    if let model = findPhoto.model {
-                        if let realModel = getRealRealmObject(from: model) {
+                    if let editableModel = findPhoto.editableModel {
+                        if let realModel = getRealRealmModel(from: editableModel) {
                             if realModel.isHearted { /// only unstar if already starred
                                 changedPhotos.append(findPhoto)
                                 do {
                                     try realm.write {
                                         realModel.isHearted = false
-                                        model.isHearted = false /// also change the unmanaged model
                                     }
                                 } catch {
                                     print("Error starring photo \(error)")
                                 }
+                                editableModel.isHearted = false /// also change the editable model
                             }
                         }
                     }

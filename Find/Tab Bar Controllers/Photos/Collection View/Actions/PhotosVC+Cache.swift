@@ -55,9 +55,9 @@ extension PhotosViewController {
             }
             
             cacheController.photosToCache = selectedPhotos
-            cacheController.getRealRealmObject = { [weak self] object in
+            cacheController.getRealRealmModel = { [weak self] object in
                 guard let self = self else { return nil }
-                if let realObject = self.getRealRealmObject(from: object) {
+                if let realObject = self.getRealRealmModel(from: object) {
                     return realObject
                 } else {
                     return nil
@@ -74,20 +74,20 @@ extension PhotosViewController {
         } else {
             var changedPhotos = [FindPhoto]()
             for findPhoto in selectedPhotos {
-                if let model = findPhoto.model {
-                    if let realModel = getRealRealmObject(from: model) {
+                if let editableModel = findPhoto.editableModel {
+                    if let realModel = getRealRealmModel(from: editableModel)  {
                         if realModel.isDeepSearched { /// only unstar if already starred
                             changedPhotos.append(findPhoto)
                             do {
                                 try realm.write {
                                     realModel.isDeepSearched = false
-                                    model.isDeepSearched = false /// also change the unmanaged model
                                     realm.delete(realModel.contents)
-                                    realm.delete(model.contents)
                                 }
                             } catch {
                                 print("Error starring photo \(error)")
                             }
+                            editableModel.isDeepSearched = false
+                            editableModel.contents.removeAll()
                         }
                     }
                 }

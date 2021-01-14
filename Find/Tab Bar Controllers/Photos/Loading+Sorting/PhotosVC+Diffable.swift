@@ -46,8 +46,7 @@ extension PhotosViewController {
                     cell?.imageView.sd_imageTransition = .fade
                     cell?.imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: imageLength, height: imageLength)])
                     
-                    if let model = findPhoto.model {
-                        print("has model, \(model.assetIdentifier), \(model.isDeepSearched)")
+                    if let model = findPhoto.editableModel {
                         if model.isDeepSearched {
                             cell?.cacheImageView.image = UIImage(named: "CacheActive-Light")
                         } else {
