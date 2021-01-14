@@ -77,6 +77,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     print("cache sel")
                     viewController.cache(viewController.shouldCacheSelection)
                 case .delete:
+                    viewController.deleteSelectedPhotos()
                     print("delete sel")
                 default:
                     print("Can't handle action in selection")
