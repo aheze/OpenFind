@@ -28,28 +28,57 @@ class Settings: ObservableObject {
     @Published(key: "swipeToNavigateEnabled") var swipeToNavigateEnabled = true
 }
 
-struct SettingsView: View {
+public class SettingsViewHoster: UIViewController {
+    
     init() {
-        //Use this if NavigationBarTitle is with Large Font
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        
-        //Use this if NavigationBarTitle is with displayMode = .inline
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).withAlphaComponent(0.3)
-        
-//        UIScrollView.appearance().backgroundColor = UIColor.clear
-        
+        super.init(nibName: nil, bundle: nil)
     }
     
-    @ObservedObject var settings = Settings()
+    public required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
-//    @State private var highlightColor = UserDefaults.standard.string(forKey: "highlightColor")
-//
-//    @State private var showTextDetectIndicator = UserDefaults.standard.bool(forKey: "showTextDetectIndicator")
-//    @State private var hapticFeedbackLevel = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
-//    @State private var livePreviewEnabled = UserDefaults.standard.bool(forKey: "livePreviewEnabled")
-//
-//    @State private var swipeToNavigateEnabled = UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled")
+    
+    public override func loadView() {
+        
+        /**
+         Instantiate the base `view`.
+         */
+        view = UIView()
+
+        /**
+         Create a `SupportDocsView`.
+         */
+        var settingsView = SettingsView()
+        
+        /**
+         Set the dismiss button handler.
+         */
+        settingsView.donePressed = { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        }
+        
+        /**
+         Host `supportDocsView` in a view controller.
+         */
+        let hostedSettings = UIHostingController(rootView: settingsView)
+        
+        /**
+         Embed `hostedSupportDocs`.
+         */
+        self.addChild(hostedSettings)
+        view.addSubview(hostedSettings.view)
+        hostedSettings.view.frame = view.bounds
+        hostedSettings.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        hostedSettings.didMove(toParent: self)
+    }
+}
+
+
+struct SettingsView: View {
+
+    @ObservedObject var settings = Settings()
+    var donePressed: (() -> Void)?
     
     var body: some View {
         NavigationView {
@@ -61,7 +90,6 @@ struct SettingsView: View {
                         GeneralView(selectedHighlightColor: $settings.highlightColor)
                             .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                         
-//                        let _ = print("feedback level: \(settings.hapticFeedbackLevel)")
                         SectionHeaderView(text: "Camera")
 
                         CameraSettingsView(
@@ -87,12 +115,18 @@ struct SettingsView: View {
                     scrollView
                         .background(
                             VisualEffectView(effect: UIBlurEffect(style: .systemThickMaterialDark))
-//                            Color.clear
                         )
                 }
             }
-            
             .navigationBarTitle("Settings")
+            .navigationBarItems(trailing:
+                                    Button(action: {
+                                        donePressed?()
+                                    }) {
+                                        Text("Done")
+                                    }
+            )
+            .configureBar()
         }
     }
 }

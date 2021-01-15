@@ -288,10 +288,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m5W-6E-t5W">
-                                        <rect key="frame" x="374" y="146" width="32" height="32"/>
+                                        <rect key="frame" x="368" y="140" width="38" height="38"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAv-Gj-3md">
-                                                <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="gear"/>
                                                 <connections>
@@ -301,19 +301,19 @@
                                         </subviews>
                                         <color key="backgroundColor" name="50Black"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="5wI-tC-Bbk"/>
+                                            <constraint firstAttribute="height" constant="38" id="5wI-tC-Bbk"/>
                                             <constraint firstAttribute="trailing" secondItem="SAv-Gj-3md" secondAttribute="trailing" id="7Ky-wM-EHc"/>
-                                            <constraint firstAttribute="width" constant="32" id="Pyy-SY-MkH"/>
+                                            <constraint firstAttribute="width" constant="38" id="Pyy-SY-MkH"/>
                                             <constraint firstItem="SAv-Gj-3md" firstAttribute="top" secondItem="m5W-6E-t5W" secondAttribute="top" id="WsS-PY-6gQ"/>
                                             <constraint firstItem="SAv-Gj-3md" firstAttribute="leading" secondItem="m5W-6E-t5W" secondAttribute="leading" id="gWa-H0-Gsn"/>
                                             <constraint firstAttribute="bottom" secondItem="SAv-Gj-3md" secondAttribute="bottom" id="iN8-91-aOd"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kbt-Wb-Lvr">
-                                        <rect key="frame" x="8" y="146" width="32" height="32"/>
+                                        <rect key="frame" x="8" y="140" width="38" height="38"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fK0-3I-lSn">
-                                                <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                 <state key="normal" title="0">
                                                     <color key="titleColor" name="TabIconDetails-Dark"/>
@@ -329,12 +329,12 @@
                                         </subviews>
                                         <color key="backgroundColor" name="50Black"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="32" id="00K-gX-4Qp"/>
+                                            <constraint firstAttribute="width" constant="38" id="00K-gX-4Qp"/>
                                             <constraint firstItem="fK0-3I-lSn" firstAttribute="top" secondItem="Kbt-Wb-Lvr" secondAttribute="top" id="Bvd-ah-CQH"/>
                                             <constraint firstItem="fK0-3I-lSn" firstAttribute="leading" secondItem="Kbt-Wb-Lvr" secondAttribute="leading" id="IfU-1S-ePO"/>
                                             <constraint firstAttribute="trailing" secondItem="fK0-3I-lSn" secondAttribute="trailing" id="WWq-O1-den"/>
                                             <constraint firstAttribute="bottom" secondItem="fK0-3I-lSn" secondAttribute="bottom" id="fs6-Wu-yZm"/>
-                                            <constraint firstAttribute="height" constant="32" id="u5T-Qy-gET"/>
+                                            <constraint firstAttribute="height" constant="38" id="u5T-Qy-gET"/>
                                         </constraints>
                                     </view>
                                 </subviews>

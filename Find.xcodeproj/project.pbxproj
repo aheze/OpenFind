@@ -32,6 +32,7 @@
 		3C3D47E025A41AEB002B8BBF /* PhotosVC+Diffable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47DF25A41AEB002B8BBF /* PhotosVC+Diffable.swift */; };
 		3C3D47E325A41B9E002B8BBF /* PhotosVC+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47E225A41B9E002B8BBF /* PhotosVC+Cells.swift */; };
 		3C4A8E4925AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */; };
+		3C4B6D7325B23460001F501A /* NavigationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4B6D7225B23460001F501A /* NavigationViewModifier.swift */; };
 		3C4DE6FB259AD3FF0037D104 /* SaveToPhotosButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */; };
 		3C4DE6FC259AD3FF0037D104 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F5259AD3FF0037D104 /* MessageView.xib */; };
 		3C4DE6FD259AD3FF0037D104 /* CacheIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F6259AD3FF0037D104 /* CacheIcon.swift */; };
@@ -241,6 +242,7 @@
 		3C3D47DF25A41AEB002B8BBF /* PhotosVC+Diffable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Diffable.swift"; sourceTree = "<group>"; };
 		3C3D47E225A41B9E002B8BBF /* PhotosVC+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Cells.swift"; sourceTree = "<group>"; };
 		3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+ActivityIndicator.swift"; sourceTree = "<group>"; };
+		3C4B6D7225B23460001F501A /* NavigationViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModifier.swift; sourceTree = "<group>"; };
 		3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaveToPhotosButton.xib; sourceTree = "<group>"; };
 		3C4DE6F5259AD3FF0037D104 /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
 		3C4DE6F6259AD3FF0037D104 /* CacheIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheIcon.swift; sourceTree = "<group>"; };
@@ -583,6 +585,7 @@
 			isa = PBXGroup;
 			children = (
 				3C6EE6AB25A2AB350078462A /* SettingsView.swift */,
+				3C4B6D7225B23460001F501A /* NavigationViewModifier.swift */,
 				3C6EE6A925A2AB350078462A /* SettingsComponents.swift */,
 				3C6EE6A825A2AB350078462A /* GeneralView.swift */,
 				3C6EE6AE25A2AB350078462A /* CameraView.swift */,
@@ -1378,6 +1381,7 @@
 				49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */,
 				4991344E236FDF1300B82E46 /* SettingsViewController.swift in Sources */,
 				490DA75623CBB871000AF57D /* JJFloatingActionButton+Placement.swift in Sources */,
+				3C4B6D7325B23460001F501A /* NavigationViewModifier.swift in Sources */,
 				490DA75123CBB871000AF57D /* JJActionItemTitlePosition.swift in Sources */,
 				495F38FA2432C8FE00A17D93 /* CarteViewController.swift in Sources */,
 				49563524243694BC0001E8C6 /* Configuring.swift in Sources */,

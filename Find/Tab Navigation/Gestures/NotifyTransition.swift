@@ -14,7 +14,7 @@ extension ViewController {
         switch currentVC {
         case is PhotosNavController:
             print("ended at photos")
-//            startCameraShutoff()
+            startCameraShutoff()
         case is CameraViewController:
             print("ended at camera")
             startCamera()

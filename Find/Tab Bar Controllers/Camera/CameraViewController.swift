@@ -89,7 +89,8 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var settingsBottomC: NSLayoutConstraint!
     @IBOutlet weak var settingsButton: UIButton!
     @IBAction func settingsButtonPressed(_ sender: Any) {
-        let settingsVC = UIHostingController(rootView: SettingsView())
+//        let settingsVC = UIHostingController(rootView: SettingsView())
+        let settingsVC = SettingsViewHoster()
         settingsVC.presentationController?.delegate = self
         self.present(settingsVC, animated: true)
     }
