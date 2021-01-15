@@ -45,7 +45,6 @@ class PhotosViewController: UIViewController {
     var indexPathsSelected = [IndexPath]()
     var numberOfSelected = 0 {
         didSet {
-            print("set")
             determineActions()
             updateSelectionLabel(to: numberOfSelected)
             

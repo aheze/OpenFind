@@ -63,7 +63,6 @@ extension PhotosViewController {
         segmentedSlider.numberOfSelectedLabel.text = text
     }
     func determineActions() {
-        print("inds selected: \(indexPathsSelected)")
         var starredCount = 0
         var notStarredCount = 0
 

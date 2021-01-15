@@ -48,13 +48,6 @@ extension PhotosViewController {
                 var totalMonths = [Month]()
                 var mutableMonths = [MutableMonth]()
                 
-//                var unmanagedObjects = [HistoryModel]()
-//                if let photoObjects = self.photoObjects {
-//                    for object in photoObjects {
-//                        let unmanagedObject = HistoryModel(value: object)
-//                        unmanagedObjects.append(unmanagedObject)
-//                    }
-//                }
                 var editableModels = [EditableHistoryModel]()
                 if let photoObjects = self.photoObjects {
                     for object in photoObjects {
@@ -63,7 +56,6 @@ extension PhotosViewController {
                         editableModel.isTakenLocally = object.isTakenLocally
                         editableModel.isHearted = object.isHearted
                         editableModel.isDeepSearched = object.isDeepSearched
-//                        editableModel. = object.assetIdentifier
                         
                         for content in object.contents {
                             let editableContent = EditableSingleHistoryContent()
@@ -76,8 +68,6 @@ extension PhotosViewController {
                         }
                         
                         editableModels.append(editableModel)
-//                        let unmanagedObject = HistoryModel(value: object)
-//                        unmanagedObjects.append(unmanagedObject)
                     }
                 }
                 
@@ -128,7 +118,6 @@ extension PhotosViewController {
                         self.fadeCollectionView(false, instantly: false)
                     }
                 }
-                print("Done")
             }
         }
     }

@@ -44,8 +44,7 @@ extension PhotosViewController {
                 }
                 
             }
-            print("Setting")
-//            slidesViewController.photoSlideControlPressed = photoSlideControlPressed
+            
             currentSlidesController = slidesViewController
             changePresentationMode(presentingSlides: true)
         }

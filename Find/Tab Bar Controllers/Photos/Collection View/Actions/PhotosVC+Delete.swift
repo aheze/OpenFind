@@ -8,76 +8,73 @@
 
 import UIKit
 import Photos
-//import RealmSwift
 
+class PhotoForDeletion {
+    var indexPath = IndexPath(item: 0, section: 0)
+    var findPhoto = FindPhoto()
+}
 extension PhotosViewController {
     func deleteSelectedPhotos() {
-        var selectedPhotos = [FindPhoto]()
         var assetIdentifiers = [String]()
+        
+        var photosForDeletion = [PhotoForDeletion]()
         
         for indexPath in indexPathsSelected {
             if let findPhoto = dataSource.itemIdentifier(for: indexPath) {
-                selectedPhotos.append(findPhoto)
                 assetIdentifiers.append(findPhoto.asset.localIdentifier)
+                
+                let photoForDeletion = PhotoForDeletion()
+                photoForDeletion.indexPath = indexPath
+                photoForDeletion.findPhoto = findPhoto
+                
+                photosForDeletion.append(photoForDeletion)
             }
         }
         
-        let assets = PHAsset.fetchAssets(withLocalIdentifiers: assetIdentifiers, options: nil)
+        photosForDeletion.sort { $0.indexPath.section == $1.indexPath.section ? $0.indexPath.item < $1.indexPath.item : $0.indexPath.section < $1.indexPath.section  }
+        photosForDeletion.reverse() /// start removing from the end
         
+        let assets = PHAsset.fetchAssets(withLocalIdentifiers: assetIdentifiers, options: nil)
+
         PHPhotoLibrary.shared().performChanges {
             PHAssetChangeRequest.deleteAssets(assets)
         } completionHandler: { (success, error) in
             if success {
-                for selectedPhoto in selectedPhotos {
-                    if let editableModel = selectedPhoto.editableModel {
+                for photoToDelete in photosForDeletion {
+                    var hasError = false
+                    if let editableModel = photoToDelete.findPhoto.editableModel {
                         DispatchQueue.main.async {
                             if let realModel = self.getRealRealmModel(from: editableModel) {
-                                
+
                                 do {
                                     try self.realm.write {
                                         self.realm.delete(realModel.contents)
                                         self.realm.delete(realModel)
                                     }
                                 } catch {
+                                    hasError = true
                                     print("Error starring photo \(error)")
                                 }
                             }
                         }
                     }
+                    if !hasError {
+                        let indexPath = photoToDelete.indexPath
+                        self.allMonths[indexPath.section].photos.remove(at: indexPath.item)
+                    }
+                }
+                
+                self.allMonths = self.allMonths.filter { month in
+                    return !month.photos.isEmpty
+                }
+                
+                DispatchQueue.main.async {
+                    self.sortPhotos(with: self.currentFilter)
+                    self.applySnapshot()
                 }
             }
-            
-            
         }
         
         doneWithSelect()
-
-//        PHPhotoLibrary.shared().performChanges({
-//
-//            let creationRequest = PHAssetCreationRequest.forAsset()
-//            creationRequest.addResource(with: .photo, data: data, options: nil)
-//            if let identifier = creationRequest.placeholderForCreatedAsset?.localIdentifier {
-//                photoIdentifier = identifier
-//            } else {
-//            }
-//        }) { (success, error) in
-//
-//            if
-//                success,
-//                let identifier = photoIdentifier
-//            {
-//                editablePhoto.assetIdentifier = identifier
-//                finishedEditablePhotos.append(editablePhoto)
-//            } else {
-//                editablePhotosWithErrors.append(editablePhoto)
-//                let readableError = String(describing: error?.localizedDescription)
-//                errorMessages.append(readableError)
-//            }
-//
-//            self.dispatchSemaphore.signal() /// signal and animate number completed regardless
-//            DispatchQueue.main.async {
-//                self.savedAnotherImage()
-//            }
-//        }
     }
 }
