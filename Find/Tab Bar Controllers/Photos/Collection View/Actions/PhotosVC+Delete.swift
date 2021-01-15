@@ -19,14 +19,23 @@ extension PhotosViewController {
         
         var photosForDeletion = [PhotoForDeletion]()
         
-        for indexPath in indexPathsSelected {
+        for indexPath in indexPathsSelected { /// indexPath is still the one with filters applied
             if let findPhoto = dataSource.itemIdentifier(for: indexPath) {
                 assetIdentifiers.append(findPhoto.asset.localIdentifier)
                 
                 let photoForDeletion = PhotoForDeletion()
-                photoForDeletion.indexPath = indexPath
-                photoForDeletion.findPhoto = findPhoto
                 
+                for (monthIndex, month) in allMonths.enumerated() {
+                    let samePhotos = month.photos.filter { $0.asset.localIdentifier == findPhoto.asset.localIdentifier}
+                    
+                    /// same photo in allMonths found, get its index
+                    if let samePhoto = samePhotos.first, let itemIndex = month.photos.firstIndex(of: samePhoto) {
+                        let indexPath = IndexPath(item: itemIndex, section: monthIndex)
+                        photoForDeletion.indexPath = indexPath
+                    }
+                }
+                
+                photoForDeletion.findPhoto = findPhoto
                 photosForDeletion.append(photoForDeletion)
             }
         }
@@ -35,7 +44,6 @@ extension PhotosViewController {
         photosForDeletion.reverse() /// start removing from the end
         
         let assets = PHAsset.fetchAssets(withLocalIdentifiers: assetIdentifiers, options: nil)
-
         PHPhotoLibrary.shared().performChanges {
             PHAssetChangeRequest.deleteAssets(assets)
         } completionHandler: { (success, error) in

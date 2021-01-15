@@ -106,6 +106,7 @@ extension PhotosViewController {
         // 3
         snapshot.appendSections(monthsToDisplay)
         monthsToDisplay.forEach { month in
+            print("month count: \(month.photos.count)")
             snapshot.appendItems(month.photos, toSection: month)
         }
         // 5
