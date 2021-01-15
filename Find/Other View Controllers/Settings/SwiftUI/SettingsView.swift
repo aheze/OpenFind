@@ -107,7 +107,7 @@ struct SettingsView: View {
                         SectionHeaderView(text: "Other")
                         
                         OtherView(swipeToNavigateEnabled: $settings.swipeToNavigateEnabled)
-                            .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                            .padding(EdgeInsets(top: 6, leading: 16, bottom: 16, trailing: 16))
                     }
                     
                 }

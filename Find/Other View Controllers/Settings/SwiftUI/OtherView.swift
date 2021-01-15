@@ -73,7 +73,10 @@ struct CreditsView: View {
             VStack(spacing: 0) {
                 HeaderView(text: "Credits")
                 
-                NavigationLink(destination: PeopleView()) {
+                NavigationLink(destination:
+                                PeopleView()
+                                .navigationBarTitle(Text("People"), displayMode: .inline)
+                ) {
                     HStack(spacing: 0) {
                         Label(text: "People")
                             .padding(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
