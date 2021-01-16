@@ -133,7 +133,7 @@ class FindBar: UIView, UITextFieldDelegate {
         
         clipsToBounds = true
         layer.cornerRadius = 5
-        layer.backgroundColor = #colorLiteral(red: 0, green: 0.5981545251, blue: 0.937254902, alpha: 1)
+//        layer.backgroundColor = #colorLiteral(red: 0, green: 0.5981545251, blue: 0.937254902, alpha: 1)
         
         Bundle.main.loadNibNamed("FindBar", owner: self, options: nil)
         addSubview(contentView)
@@ -175,6 +175,8 @@ class FindBar: UIView, UITextFieldDelegate {
         searchField.autocorrectionType = .no
         searchField.rightView = resultsLabel
         searchField.rightViewMode = .always
+        searchField.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+        searchField.attributedPlaceholder = NSAttributedString(string: "Type here to find", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
         
         resultsLabel.textColor = UIColor.lightGray
 
@@ -270,17 +272,17 @@ extension FindBar: ChangeFindBar {
         injectListDelegate?.resetWithLists(lists: notSelectedLists)
         switch selectedLists.count {
         case 0:
-            searchLeftC.constant = 12
+            searchLeftC.constant = 0
         case 1:
-            searchLeftC.constant = 35 + 3 + 12
+            searchLeftC.constant = 35 + 3
         case 2:
-            searchLeftC.constant = 73 + 3 + 12
+            searchLeftC.constant = 73 + 3
         case 3:
-            searchLeftC.constant = 111 + 3 + 12
+            searchLeftC.constant = 111 + 3
         default:
-            let availibleWidth = contentView.frame.width - 123
-            collViewRightC.constant = availibleWidth
-            searchLeftC.constant = 111 + 3 + 12
+            let availableWidth = contentView.frame.width - 123
+            collViewRightC.constant = availableWidth
+            searchLeftC.constant = 111 + 3
         }
         
 //        UIView.animate(withDuration: 0.3, animations: {
@@ -333,17 +335,17 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
                 
              switch selectedLists.count {
                 case 0:
-                    searchLeftC.constant = 12
+                    searchLeftC.constant = 0
                 case 1:
-                    searchLeftC.constant = 35 + 3 + 12
+                    searchLeftC.constant = 35 + 3
                 case 2:
-                    searchLeftC.constant = 73 + 3 + 12
+                    searchLeftC.constant = 73 + 3
                 case 3:
-                    searchLeftC.constant = 111 + 3 + 12
+                    searchLeftC.constant = 111 + 3
                 default:
-                    let availibleWidth = contentView.frame.width - 123
-                    collViewRightC.constant = availibleWidth
-                    searchLeftC.constant = 111 + 3 + 12
+                    let availableWidth = contentView.frame.width - 123
+                    collViewRightC.constant = availableWidth
+                    searchLeftC.constant = 111 + 3
                 }
                 UIView.animate(withDuration: 0.3, animations: {
                     self.layoutIfNeeded()
@@ -507,8 +509,8 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         }
         selectedLists.removeAll()
         collectionView.reloadData()
-        collViewRightC.constant = 12
-        searchLeftC.constant = 12
+        collViewRightC.constant = 0
+        searchLeftC.constant = 0
         UIView.animate(withDuration: 0.3, animations: {
             self.layoutIfNeeded()
         })
@@ -528,15 +530,15 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         collectionView.insertItems(at: [indP])
         switch selectedLists.count {
         case 1:
-            searchLeftC.constant = 35 + 3 + 12
+            searchLeftC.constant = 35 + 3
         case 2:
-            searchLeftC.constant = 73 + 3 + 12
+            searchLeftC.constant = 73 + 3
         case 3:
-            searchLeftC.constant = 111 + 3 + 12
+            searchLeftC.constant = 111 + 3
         default:
-            searchLeftC.constant = 111 + 3 + 12
-            let availibleWidth = contentView.frame.width - 123
-            collViewRightC.constant = availibleWidth
+            searchLeftC.constant = 111 + 3
+            let availableWidth = contentView.frame.width - 123
+            collViewRightC.constant = availableWidth
         }
         UIView.animate(withDuration: 0.3, animations: {
             self.layoutIfNeeded()

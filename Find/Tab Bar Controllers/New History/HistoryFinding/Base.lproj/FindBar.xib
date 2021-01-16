@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17132" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17105"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -30,7 +29,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="gXF-Fe-JCy">
-                    <rect key="frame" x="12" y="24" width="419" height="35"/>
+                    <rect key="frame" x="0.0" y="24" width="443" height="35"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="qTM-8u-BPg"/>
@@ -47,9 +46,9 @@
                     </connections>
                 </collectionView>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type here to find" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="u2b-1R-lPC" customClass="InsetTextField" customModule="Find" customModuleProvider="target">
-                    <rect key="frame" x="12" y="24" width="419" height="35"/>
-                    <color key="backgroundColor" name="Gray1"/>
-                    <color key="tintColor" name="FeedbackGradientLeft"/>
+                    <rect key="frame" x="0.0" y="24" width="443" height="35"/>
+                    <color key="backgroundColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <color key="tintColor" white="1" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="ZQF-Ry-GAu"/>
                     </constraints>
@@ -60,7 +59,7 @@
                     </connections>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XgI-5D-UTy">
-                    <rect key="frame" x="431" y="24" width="0.0" height="35"/>
+                    <rect key="frame" x="443" y="24" width="0.0" height="35"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mff-9q-hBw">
                             <rect key="frame" x="8" y="2.5" width="51" height="30"/>
@@ -106,14 +105,14 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" name="Gray3"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="gXF-Fe-JCy" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="8BO-9z-g6N"/>
+                <constraint firstItem="gXF-Fe-JCy" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="8BO-9z-g6N"/>
                 <constraint firstItem="u2b-1R-lPC" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="G2v-lT-G0Z"/>
-                <constraint firstItem="u2b-1R-lPC" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="L1M-yz-yPg"/>
-                <constraint firstAttribute="trailing" secondItem="gXF-Fe-JCy" secondAttribute="trailing" constant="12" id="Nha-Fk-uiY"/>
+                <constraint firstItem="u2b-1R-lPC" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="L1M-yz-yPg"/>
+                <constraint firstAttribute="trailing" secondItem="gXF-Fe-JCy" secondAttribute="trailing" id="Nha-Fk-uiY"/>
                 <constraint firstItem="gXF-Fe-JCy" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="f0j-bw-78u"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="u2b-1R-lPC" secondAttribute="trailing" constant="12" id="ngS-K6-6tM"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="u2b-1R-lPC" secondAttribute="trailing" id="ngS-K6-6tM"/>
                 <constraint firstItem="XgI-5D-UTy" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="pK7-vU-IAa"/>
                 <constraint firstItem="u2b-1R-lPC" firstAttribute="trailing" secondItem="XgI-5D-UTy" secondAttribute="trailing" id="x99-vq-3rq"/>
             </constraints>
@@ -124,15 +123,6 @@
         </view>
     </objects>
     <resources>
-        <namedColor name="FeedbackGradientLeft">
-            <color red="0.0" green="0.68199998140335083" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Gray1">
-            <color white="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </namedColor>
-        <namedColor name="Gray3">
-            <color white="0.85000002384185791" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </namedColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

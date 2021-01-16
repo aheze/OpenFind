@@ -3255,24 +3255,18 @@ the App!</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Lg-gS-P4U" userLabel="Top View">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find from Photos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vxX-5U-MOv">
-                                        <rect key="frame" x="119.66666666666667" y="11.999999999999998" width="174.66666666666663" height="26.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="ppL-Cl-XRj">
-                                        <rect key="frame" x="93.666666666666671" y="15" width="20" height="20"/>
-                                        <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </activityIndicatorView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4BQ-22-UbH" customClass="FindBar" customModule="Find" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="8" width="382" height="34"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" name="FeedbackGradientLeft"/>
+                                <color key="backgroundColor" name="TabIconPhotosMain"/>
                                 <constraints>
-                                    <constraint firstItem="vxX-5U-MOv" firstAttribute="leading" secondItem="ppL-Cl-XRj" secondAttribute="trailing" constant="6" id="9Kg-Jq-htj"/>
-                                    <constraint firstItem="vxX-5U-MOv" firstAttribute="centerX" secondItem="2Lg-gS-P4U" secondAttribute="centerX" id="TCr-y0-ogU"/>
-                                    <constraint firstItem="ppL-Cl-XRj" firstAttribute="centerY" secondItem="2Lg-gS-P4U" secondAttribute="centerY" id="UqP-cY-pOn"/>
+                                    <constraint firstItem="4BQ-22-UbH" firstAttribute="leading" secondItem="2Lg-gS-P4U" secondAttribute="leading" constant="16" id="NZH-x3-kHM"/>
+                                    <constraint firstAttribute="bottom" secondItem="4BQ-22-UbH" secondAttribute="bottom" constant="8" id="b8F-KQ-iUR"/>
+                                    <constraint firstAttribute="trailing" secondItem="4BQ-22-UbH" secondAttribute="trailing" constant="16" id="eN2-ym-KnB"/>
                                     <constraint firstAttribute="height" constant="50" id="iDK-Lg-WUQ"/>
-                                    <constraint firstItem="vxX-5U-MOv" firstAttribute="centerY" secondItem="2Lg-gS-P4U" secondAttribute="centerY" id="wAG-YL-gYf"/>
+                                    <constraint firstItem="4BQ-22-UbH" firstAttribute="top" secondItem="2Lg-gS-P4U" secondAttribute="top" constant="8" id="wIZ-vG-788"/>
                                 </constraints>
                             </view>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="7CF-yv-drp">
@@ -3400,7 +3394,6 @@ the App!</string>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="activityIndicator" destination="ppL-Cl-XRj" id="Xr0-51-qbU"/>
                         <outlet property="progressView" destination="7CF-yv-drp" id="m7U-4M-Laq"/>
                         <outlet property="tableView" destination="Gzv-fX-Vyn" id="RGq-Mk-wxL"/>
                         <outlet property="warningLabel" destination="d2z-RA-6HM" id="PbV-OK-7Ri"/>
@@ -3484,16 +3477,15 @@ the App!</string>
                                     <constraint firstAttribute="height" constant="40" id="yTa-ge-OYU"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKE-Ij-JZI">
-                                <rect key="frame" x="152" y="686" width="110" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKE-Ij-JZI">
+                                <rect key="frame" x="137" y="686" width="140" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="222-OW-xTA"/>
-                                    <constraint firstAttribute="width" constant="110" id="JWF-CO-ZN4"/>
+                                    <constraint firstAttribute="width" constant="140" id="JWF-CO-ZN4"/>
                                 </constraints>
                                 <color key="tintColor" name="75White"/>
                                 <state key="normal" image="chevron.compact.down" catalog="system">
-                                    <color key="titleColor" red="0.0" green="0.68235294120000001" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="48" scale="medium" weight="medium"/>
                                 </state>
                                 <connections>
@@ -4918,6 +4910,9 @@ the App!</string>
         </namedColor>
         <namedColor name="TabIconListsMain">
             <color red="1" green="0.71399998664855957" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TabIconPhotosMain">
+            <color red="0.0" green="0.77600002288818359" blue="0.030999999493360519" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TransparentBlur">
             <color white="0.83700001239776611" alpha="0.15000000596046448" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
