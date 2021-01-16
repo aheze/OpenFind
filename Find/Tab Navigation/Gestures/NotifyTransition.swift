@@ -12,7 +12,7 @@ extension ViewController {
     func notifyCompletion(finishedAtVC currentVC: UIViewController) {
         print("notifying")
         switch currentVC {
-        case is PhotosNavController:
+        case is PhotosWrapperController:
             print("ended at photos")
             startCameraShutoff()
         case is CameraViewController:

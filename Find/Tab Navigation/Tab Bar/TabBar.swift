@@ -205,7 +205,7 @@ class TabBarView: PassthroughView {
         switch toVCType {
         case .photos:
             switch fromVC {
-            case is PhotosNavController:
+            case is PhotosWrapperController:
                 print("nothing, in photos")
             case is CameraViewController:
                 let makeInactive = self.cameraIcon.makeNormalState()
@@ -237,7 +237,7 @@ class TabBarView: PassthroughView {
             }
         case .camera:
             switch fromVC {
-            case is PhotosNavController:
+            case is PhotosWrapperController:
                 print("currently photos, to camera")
                 
                 let makeInactive = self.photosIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)
@@ -282,7 +282,7 @@ class TabBarView: PassthroughView {
             }
         case .lists:
             switch fromVC {
-            case is PhotosNavController:
+            case is PhotosWrapperController:
                 let makeInactive = self.photosIcon.makeNormalState(details: Constants.detailIconColorLight, foreground: Constants.foregroundIconColorLight, background: Constants.backgroundIconColorLight)
                 let makeOtherInactive = self.cameraIcon.makeNormalState()
                 let makeActive = self.listsIcon.makeActiveState()

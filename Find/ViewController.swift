@@ -26,9 +26,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var highlightColor = "00aeef"
     
     // MARK: - View Controllers
-    lazy var photos: PhotosNavController = {
+    
+    lazy var photos: PhotosWrapperController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "PhotosViewController") as? PhotosViewController {
+            
             let navigationController = PhotosNavController(rootViewController: viewController)
             navigationController.viewController = viewController
             viewController.modalPresentationCapturesStatusBarAppearance = true
@@ -87,10 +89,78 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 viewController.currentSlidesController?.actionPressed(action: action)
             }
             
-            return navigationController
+            let wrapper = PhotosWrapperController()
+            wrapper.navController = navigationController
+            return wrapper
         }
         fatalError()
     }()
+    
+//    lazy var photos: PhotosNavController = {
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        if let viewController = storyboard.instantiateViewController(withIdentifier: "PhotosViewController") as? PhotosViewController {
+//            let navigationController = PhotosNavController(rootViewController: viewController)
+//            navigationController.viewController = viewController
+//            viewController.modalPresentationCapturesStatusBarAppearance = true
+//
+//            viewController.changePresentationMode = { [weak self] presentingSlides in
+//                guard let self = self else { return }
+//
+//                if presentingSlides {
+//                    self.longPressGestureRecognizer.isEnabled = false
+//                    self.panGestureRecognizer.isEnabled = false
+//                    self.tabBarView.showPhotoSlideControls(show: true)
+//                } else {
+//                    self.longPressGestureRecognizer.isEnabled = true
+//                    self.panGestureRecognizer.isEnabled = true
+//                    self.tabBarView.showPhotoSlideControls(show: false)
+//                }
+//            }
+//            viewController.showSelectionControls = { [weak self] show in
+//                guard let self = self else { return }
+//                self.tabBarView.showPhotoSelectionControls(show: show)
+//
+//                if show {
+//                    self.longPressGestureRecognizer.isEnabled = false
+//                    self.panGestureRecognizer.isEnabled = false
+//                } else {
+//                    self.longPressGestureRecognizer.isEnabled = true
+//                    self.panGestureRecognizer.isEnabled = true
+//                }
+//            }
+//            viewController.updateActions = { [weak self] action in
+//                guard let self = self else { return }
+//                self.tabBarView.updateActions(action: action)
+//            }
+//            viewController.dimSlideControls = { [weak self] dim in
+//                guard let self = self else { return }
+//
+//                self.tabBarView.dimPhotoSlideControls(dim: dim)
+//            }
+//
+//            /// controls in selection
+//            tabBarView.photoSelectionControlPressed = { action in
+//                switch action {
+//                case .star:
+//                    viewController.star(viewController.shouldStarSelection)
+//                case .cache:
+//                    viewController.cache(viewController.shouldCacheSelection)
+//                case .delete:
+//                    viewController.deleteSelectedPhotos()
+//                default:
+//                    print("Can't handle action in selection")
+//                }
+//            }
+//
+//            /// controls for each photo in slides
+//            tabBarView.photoSlideControlPressed = { action in
+//                viewController.currentSlidesController?.actionPressed(action: action)
+//            }
+//
+//            return navigationController
+//        }
+//        fatalError()
+//    }()
     
     lazy var camera: CameraViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -218,7 +288,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 listsCollectionView?.isScrollEnabled = false
                 listsCollectionView?.isScrollEnabled = true
                     
-                let photosCollectionView = photos.viewController.collectionView
+                let photosCollectionView = photos.navController.viewController.collectionView
                 photosCollectionView?.isScrollEnabled = false
                 photosCollectionView?.isScrollEnabled = true
                 
@@ -343,8 +413,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     gestures.direction = .right
                     
                     switch ViewControllerState.currentVC {
-                    case is PhotosNavController:
-                        let photosCollectionView = photos.viewController.collectionView
+                    case is PhotosWrapperController:
+                        let photosCollectionView = photos.navController.viewController.collectionView
                         photosCollectionView?.isScrollEnabled = false
                         photosCollectionView?.isScrollEnabled = true
                         gestures.isRubberBanding = true
@@ -362,8 +432,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     gestures.direction = .left
                     
                     switch ViewControllerState.currentVC {
-                    case is PhotosNavController:
-                        let photosCollectionView = photos.viewController.collectionView
+                    case is PhotosWrapperController:
+                        let photosCollectionView = photos.navController.viewController.collectionView
                         photosCollectionView?.isScrollEnabled = false
                         photosCollectionView?.isScrollEnabled = true
                         startMoveVC(from: photos, to: camera, direction: .left, toOverlay: false)
@@ -498,7 +568,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let location = touch.location(in: containerView)
         
         let shutterArea = CGRect(x: containerView.bounds.width / 2 - 50, y: containerView.bounds.height - 140, width: 100, height: 140)
-        let photoFilterArea = photos.viewController.segmentedSlider?.frame ?? CGRect(x: 0, y: 0, width: 0, height: 0)
+        let photoFilterArea = photos.navController.viewController.segmentedSlider?.frame ?? CGRect(x: 0, y: 0, width: 0, height: 0)
         if shutterArea.contains(location) || photoFilterArea.contains(location) {
             return false
         }

@@ -54,7 +54,7 @@ extension ViewController {
                 blurAnimator?.stopAnimation(true)
                 
                 switch toVC {
-                case is PhotosNavController:
+                case is PhotosWrapperController:
                     tabBarView.hideRealShutter?(true)
                     tabBarView.cameraIcon.alpha = 1
                     let block = {
@@ -155,7 +155,7 @@ extension ViewController {
                 ViewControllerState.newVC = nil
                 
                 switch toVC {
-                case is PhotosNavController:
+                case is PhotosWrapperController:
                     containerView.bringSubviewToFront(toVC.view)
                     blurView.effect = UIBlurEffect(style: .light)
                     shadeView.alpha = 1

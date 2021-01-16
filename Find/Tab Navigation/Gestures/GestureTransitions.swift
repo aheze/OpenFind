@@ -227,9 +227,9 @@ extension ViewController {
         var finishImmediately = false
         
         switch fromVC {
-        case is PhotosNavController:
+        case is PhotosWrapperController:
             switch toVC {
-            case is PhotosNavController:
+            case is PhotosWrapperController:
                 print("ERROR! Is same")
             case is CameraViewController:
                 if favoredDirection == .left { /// completed
@@ -272,7 +272,7 @@ extension ViewController {
             }
         case is CameraViewController:
             switch toVC {
-            case is PhotosNavController:
+            case is PhotosWrapperController:
                 if favoredDirection == .right { /// completed
                     let (prep, animations, completion) = tabBarView.getBlocks(from: fromVC, to: .photos)
                     prep()
@@ -345,7 +345,7 @@ extension ViewController {
             }
         case is ListsNavController:
             switch toVC {
-            case is PhotosNavController:
+            case is PhotosWrapperController:
                 print("error! Should not swipe from lists to photos")
             case is CameraViewController:
                 if favoredDirection == .right { /// completed
@@ -411,8 +411,6 @@ extension ViewController {
                 self.blurAnimator?.isReversed = false
                 
                 print("Current view controller: \(ViewControllerState.currentVC)")
-                
-//                self.notifyCompletion(finishedAtVC: toVC)
             } else {
                 print("Did not complete move")
                 toVC.willMove(toParent: nil)
@@ -422,12 +420,6 @@ extension ViewController {
             }
             if ViewControllerState.currentVC is CameraViewController {
                 print("is camera")
-//                self.tabBarView.showLineView(show: false)
-//                if let currentVC =  ViewControllerState.currentVC {
-//                    self.notifyCompletion(finishedAtVC: currentVC)
-//                }
-//                self.blurView.effect = nil
-//                self.shadeView.eff
             } else {
                 self.tabBarView.showLineView(show: true)
             }

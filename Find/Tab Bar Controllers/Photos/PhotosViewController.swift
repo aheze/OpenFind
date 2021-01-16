@@ -10,9 +10,6 @@ import UIKit
 import Photos
 import RealmSwift
 
-class PhotosNavController: UINavigationController {
-    var viewController: PhotosViewController!
-}
 class PhotosViewController: UIViewController {
     var migrationNeeded = false
     var photosToMigrate = [HistoryModel]()
@@ -47,10 +44,8 @@ class PhotosViewController: UIViewController {
         didSet {
             determineActions()
             updateSelectionLabel(to: numberOfSelected)
-            
         }
     }
-    
     
     var shouldStarSelection = false /// if press **star** button, should apply star or remove
     var shouldCacheSelection = false /// if press **cache** button, should apply cache or remove
@@ -72,6 +67,13 @@ class PhotosViewController: UIViewController {
     // MARK: Nav bar
     var findButton: UIBarButtonItem!
     var selectButton: UIBarButtonItem!
+    
+    // MARK: Finding
+    var switchToFind: ((PhotoFilter, [FindPhoto]) -> Void)?
+    
+    @IBOutlet weak var collapseButton: UIButton! /// dismiss Finding
+    @IBAction func collapseButtonPressed(_ sender: Any) {
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -98,8 +100,8 @@ class PhotosViewController: UIViewController {
         }
         
         setUpSDWebImage()
-        
         configureLayout()
+        setUpFinding()
 
         let bottomInset = CGFloat(ConstantVars.tabHeight)
         collectionView.contentInset.bottom = 16 + segmentedSlider.bounds.height + bottomInset

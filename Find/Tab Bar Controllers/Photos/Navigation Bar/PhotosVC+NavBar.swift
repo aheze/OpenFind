@@ -18,6 +18,7 @@ extension PhotosViewController {
     }
     @objc func findPressed(sender: UIBarButtonItem) {
         print("Find")
+        findPressed()
     }
     @objc func selectPressed(sender: UIBarButtonItem) {
         selectPressed()

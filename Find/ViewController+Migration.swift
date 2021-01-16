@@ -24,9 +24,9 @@ extension ViewController {
                     photoArray.append(photo)
                 })
                 
-                photos.viewController.migrationNeeded = true
-                photos.viewController.photosToMigrate = photoArray
-                photos.viewController.folderURL = globalUrl
+                photos.navController.viewController.migrationNeeded = true
+                photos.navController.viewController.photosToMigrate = photoArray
+                photos.navController.viewController.folderURL = globalUrl
 //                photos.viewController.showMigrationView()
                 
                 
