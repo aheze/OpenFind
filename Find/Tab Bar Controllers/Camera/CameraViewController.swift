@@ -589,8 +589,8 @@ class CameraViewController: UIViewController {
         controlsBlurView.clipsToBounds = true
         controlsBlurView.isHidden = true
         updateMatchesNumber(to: 0)
-        setUpTempImageView()
-        setUpSearchBar()
+        setupTempImageView()
+        setupSearchBar()
         
         statsView.layer.cornerRadius = statsView.bounds.width / 2
         settingsView.layer.cornerRadius = settingsView.bounds.width / 2

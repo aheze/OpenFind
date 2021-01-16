@@ -208,7 +208,7 @@
 /* TutorialLocalization def=...find multiple words at the same time! */
 "findMultipleWords" = "同时查找多个词！";
 
-/* SetUpSearchBar def=Find is paused | Duplicates are not allowed */
+/* SetupSearchBar def=Find is paused | Duplicates are not allowed */
 "findPausedDuplicatesNotAllowed" = "Find暂时暂停 | 不允许重复项";
 
 /* TutorialLocalization def=Find searches for your matches when you use the list */
@@ -370,7 +370,7 @@
 /* CachingViewController def=1 photo has already been cached.\nWould you like to keep its cache? */
 "onePhotoHasAlreadyBeenCachedWouldYouKeep" = "一张照片已使用快取。\n您要保留它的快取吗？";
 
-/* SetUpSearchBar def=Only Portrait view is currently supported. */
+/* SetupSearchBar def=Only Portrait view is currently supported. */
 "onlyPortraitSupported" = "当前仅提供纵向视图。";
 
 /* Open Source Licenses */
@@ -424,7 +424,7 @@
 /* GeneralViewController def=I'll fix it myself */
 "rightButtonFixItMyself" = "我自己去改";
 
-/* SetUpSearchBar def=Please rotate your iPad to Portrait view, then relaunch the app. */
+/* SetupSearchBar def=Please rotate your iPad to Portrait view, then relaunch the app. */
 "rotateToPortrait" = "请把您的iPad旋转到纵向视图，然后重新启动Find。";
 
 /* EditList def=Icon */
@@ -538,7 +538,7 @@
 /* GeneralViewController def=2 duplicates. */
 "twoDuplicates" = "两个重复项";
 
-/* SetUpSearchBar def=Type here to find... */
+/* SetupSearchBar def=Type here to find... */
 "typeHereToFind" = "输入英文，拼音，或选个清单";
 
 /* HistoryCollectionViewFiles def=Uncache */

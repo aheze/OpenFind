@@ -165,7 +165,7 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
         if let randColorString = colorArray.randomElement() {
             randomizedColor = randColorString
         }
-        setUpBarButtons()
+        setupBarButtons()
         
         let padding = AdaptiveCollectionConfig.cellPadding
 

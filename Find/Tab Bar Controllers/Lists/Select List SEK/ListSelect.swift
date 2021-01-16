@@ -43,14 +43,14 @@ class ListSelect: UIView, ChangeNumberOfSelectedList {
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setUp()
+        setup()
     }
     
     init() {
         super.init(frame: .zero)
-        setUp()
+        setup()
     }
-    private func setUp() {
+    private func setup() {
         clipsToBounds = true
         layer.cornerRadius = 5
         layer.backgroundColor = #colorLiteral(red: 0, green: 0.5981545251, blue: 0.937254902, alpha: 1)

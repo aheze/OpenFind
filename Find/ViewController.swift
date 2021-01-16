@@ -492,7 +492,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             self.camera.stopSession()
         }
 
-        setUpFilePath()
+        setupFilePath()
         checkIfHistoryImagesExist()
         checkForOldUserDefaults()
         

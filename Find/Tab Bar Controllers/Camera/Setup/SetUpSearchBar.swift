@@ -1,5 +1,5 @@
 //
-//  SetUpRamReel.swift
+//  SetupRamReel.swift
 //  Find
 //
 //  Created by Andrew on 11/11/19.
@@ -192,7 +192,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }, completion: nil)
         updateListsLayout(toType: "prepareForDisplayNew")
     }
-    func setUpSearchBar() {
+    func setupSearchBar() {
 
         textLabel.alpha = 0
         listsLabel.alpha = 0
@@ -204,7 +204,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         newSearchTextField.layer.cornerRadius = 8
         
-        let typeHereToFind = NSLocalizedString("typeHereToFind", comment: "SetUpSearchBar def=Type here to find...")
+        let typeHereToFind = NSLocalizedString("typeHereToFind", comment: "SetupSearchBar def=Type here to find...")
         
         newSearchTextField.attributedPlaceholder = NSAttributedString(string: typeHereToFind,
                                                                    attributes:
@@ -216,8 +216,8 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         alternateWarningLabel.alpha = 0
         
-        let onlyPortraitSupported = NSLocalizedString("onlyPortraitSupported", comment: "SetUpSearchBar def=Only Portrait view is currently supported.")
-        let rotateToPortrait = NSLocalizedString("rotateToPortrait", comment: "SetUpSearchBar def=Please rotate your iPad to Portrait view, then relaunch the app.")
+        let onlyPortraitSupported = NSLocalizedString("onlyPortraitSupported", comment: "SetupSearchBar def=Only Portrait view is currently supported.")
+        let rotateToPortrait = NSLocalizedString("rotateToPortrait", comment: "SetupSearchBar def=Please rotate your iPad to Portrait view, then relaunch the app.")
         
 //        alternateWarningLabel.text = "Only Portrait view is currently supported.\nPlease rotate your iPad to Portrait view, then relaunch the app."
         alternateWarningLabel.text = "\(onlyPortraitSupported)\n\(rotateToPortrait)"
@@ -227,7 +227,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         warningView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
         warningLabel.alpha = 0
-        let findPausedDuplicatesNotAllowed = NSLocalizedString("findPausedDuplicatesNotAllowed", comment: "SetUpSearchBar def=Find is paused | Duplicates are not allowed")
+        let findPausedDuplicatesNotAllowed = NSLocalizedString("findPausedDuplicatesNotAllowed", comment: "SetupSearchBar def=Find is paused | Duplicates are not allowed")
         warningLabel.text = findPausedDuplicatesNotAllowed
         searchBarLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         

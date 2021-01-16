@@ -9,7 +9,7 @@
 import UIKit
 
 extension PhotosViewController {
-    func setUpFinding() {
+    func setupFinding() {
         collapseButton.layer.cornerRadius = 16
         collapseButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         collapseButton.alpha = 0

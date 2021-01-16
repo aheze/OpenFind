@@ -10,7 +10,7 @@ import UIKit
 
 extension SettingsViewController {
     
-    func setUpSettingsRoundedCorners() {
+    func setupSettingsRoundedCorners() {
         
         
         highlightColorView.layer.cornerRadius = 10
@@ -43,7 +43,7 @@ extension SettingsViewController {
         creditsView.clipsToBounds = true
         
     }
-    func setUpBasic() {
+    func setupBasic() {
         redButton.tintColor = .white
         orangeButton.tintColor = .white
         yellowButton.tintColor = .white

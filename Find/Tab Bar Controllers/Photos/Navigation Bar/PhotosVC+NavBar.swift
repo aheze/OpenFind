@@ -9,7 +9,7 @@
 import UIKit
 
 extension PhotosViewController {
-    func setUpBarButtons() {
+    func setupBarButtons() {
         self.title = "Photos"
         findButton = UIBarButtonItem(title: "Find", style: .plain, target: self, action: #selector(findPressed(sender:)))
         selectButton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectPressed(sender:)))

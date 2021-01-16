@@ -11,7 +11,7 @@ import ARKit
 
 extension CameraViewController {
     
-    func setUpTempImageView() {
+    func setupTempImageView() {
         previewTempImageView.alpha = 0
         view.insertSubview(previewTempImageView, aboveSubview: cameraView)
         previewTempImageView.snp.makeConstraints { (make) in

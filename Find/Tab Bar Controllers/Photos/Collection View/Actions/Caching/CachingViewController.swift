@@ -90,7 +90,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpViews()
+        setupViews()
         cancelView.isHidden = true
         backButton.isHidden = true
         activityIndicator.startAnimating()
@@ -442,7 +442,7 @@ extension CachingViewController : UICollectionViewDelegateFlowLayout {
 
 extension CachingViewController {
     
-    func setUpViews() {
+    func setupViews() {
         
         cancelButton.layer.cornerRadius = 6
         

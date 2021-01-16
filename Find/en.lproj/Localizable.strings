@@ -208,7 +208,7 @@
 /* TutorialLocalization def=...find multiple words at the same time! */
 "findMultipleWords" = "Find multiple words at the same time!";
 
-/* SetUpSearchBar def=Find is paused | Duplicates are not allowed */
+/* SetupSearchBar def=Find is paused | Duplicates are not allowed */
 "findPausedDuplicatesNotAllowed" = "Find is paused | Duplicates are not allowed";
 
 /* TutorialLocalization def=Find searches for your matches when you use the list */
@@ -370,7 +370,7 @@
 /* CachingViewController def=1 photo has already been cached.\nWould you like to keep its cache? */
 "onePhotoHasAlreadyBeenCachedWouldYouKeep" = "1 photo has already been cached.\nWould you like to keep its cache?";
 
-/* SetUpSearchBar def=Only Portrait view is currently supported. */
+/* SetupSearchBar def=Only Portrait view is currently supported. */
 "onlyPortraitSupported" = "Only Portrait view is currently supported.";
 
 /* Open Source Licenses */
@@ -424,7 +424,7 @@
 /* GeneralViewController def=I'll fix it myself */
 "rightButtonFixItMyself" = "I'll fix it myself";
 
-/* SetUpSearchBar def=Please rotate your iPad to Portrait view, then relaunch the app. */
+/* SetupSearchBar def=Please rotate your iPad to Portrait view, then relaunch the app. */
 "rotateToPortrait" = "Please rotate your iPad to Portrait view, then relaunch the app.";
 
 /* EditList def=Icon */
@@ -538,7 +538,7 @@
 /* GeneralViewController def=2 duplicates. */
 "twoDuplicates" = "2 duplicates.";
 
-/* SetUpSearchBar def=Type here to find... */
+/* SetupSearchBar def=Type here to find... */
 "typeHereToFind" = "Type here to find...";
 
 /* HistoryCollectionViewFiles def=Uncache */

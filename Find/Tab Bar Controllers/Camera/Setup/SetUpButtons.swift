@@ -1,5 +1,5 @@
 //
-//  SetUpButtons.swift
+//  SetupButtons.swift
 //  Find
 //
 //  Created by Andrew on 11/11/19.
@@ -115,7 +115,7 @@ extension CameraViewController: UIAdaptivePresentationControllerDelegate {
             
         }
     }
-//    func setUpButtons() {
+//    func setupButtons() {
 //        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedOnce))
 //        tap.numberOfTapsRequired = 1
 //        tap.delegate = self

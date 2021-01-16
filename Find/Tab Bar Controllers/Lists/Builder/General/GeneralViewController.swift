@@ -201,7 +201,7 @@ class GeneralViewController: UIViewController {
         bottomDeleteButton.layer.cornerRadius = 6
         bottomHelpButton.layer.cornerRadius = 6
         
-        setUpViews()
+        setupViews()
         let tableViewHeightAfterAddRow = CGFloat(50 * contents.count)
         
         if tableViewHeightAfterAddRow >= 300 {
@@ -403,7 +403,7 @@ class GeneralViewController: UIViewController {
             tableView.insertRows(at: [IndexPath(row: currentIndexPath, section: 0)], with: .automatic)
         }
     }
-    func setUpViews() {
+    func setupViews() {
         if contents.count == 0 {
             contents.append("")
         }

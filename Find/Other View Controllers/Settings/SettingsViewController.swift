@@ -411,8 +411,8 @@ class SettingsViewController: UIViewController {
         
         customizedSettingsBefore = defaults.bool(forKey: "customizedSettingsBool")
         
-        setUpSettingsRoundedCorners()
-        setUpBasic()
+        setupSettingsRoundedCorners()
+        setupBasic()
     }
  
     

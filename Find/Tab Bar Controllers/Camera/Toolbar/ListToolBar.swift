@@ -104,14 +104,14 @@ class ListToolBar: UIView, InjectLists {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setUp()
+        setup()
     }
     
     init() {
         super.init(frame: .zero)
-        setUp()
+        setup()
     }
-    private func setUp() {
+    private func setup() {
         clipsToBounds = true
         
         Bundle.main.loadNibNamed("ListToolBar", owner: self, options: nil)

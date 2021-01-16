@@ -22,6 +22,8 @@ class PhotoFindViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Load")
+        
+        setup()
     }
     
 }

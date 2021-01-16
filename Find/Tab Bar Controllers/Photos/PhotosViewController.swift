@@ -84,7 +84,7 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        setUpBarButtons()
+        setupBarButtons()
         getRealmObjects()
 
         collectionView.register(UINib(nibName: "ImageCell", bundle: nil), forCellWithReuseIdentifier: cellReuseIdentifier)
@@ -99,9 +99,9 @@ class PhotosViewController: UIViewController {
             fetchAssets()
         }
         
-        setUpSDWebImage()
+        setupSDWebImage()
         configureLayout()
-        setUpFinding()
+        setupFinding()
 
         let bottomInset = CGFloat(ConstantVars.tabHeight)
         collectionView.contentInset.bottom = 16 + segmentedSlider.bounds.height + bottomInset

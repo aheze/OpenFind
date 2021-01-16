@@ -17,7 +17,7 @@ extension PhotosViewController {
         self.collectionView.collectionViewLayout.invalidateLayout()
       }, completion: nil)
     }
-    func setUpSDWebImage() {
+    func setupSDWebImage() {
         //Supports HTTP URL as well as Photos URL globally
         SDImageLoadersManager.shared.loaders = [SDWebImageDownloader.shared, SDImagePhotosLoader.shared]
         // Replace default manager's loader implementation

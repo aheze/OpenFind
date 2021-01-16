@@ -16,6 +16,7 @@
 		3C1317E225B2581800FCEB79 /* PhotosVC+Finding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317E125B2581800FCEB79 /* PhotosVC+Finding.swift */; };
 		3C1317E525B259EB00FCEB79 /* PhotoFindVC+Populate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317E425B259EB00FCEB79 /* PhotoFindVC+Populate.swift */; };
 		3C1317E925B264BD00FCEB79 /* PhotosWrapperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317E825B264BD00FCEB79 /* PhotosWrapperController.swift */; };
+		3C1317ED25B2A73C00FCEB79 /* PhotoFindVC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317EC25B2A73B00FCEB79 /* PhotoFindVC+Setup.swift */; };
 		3C16EA71259BE7D600D73755 /* ListsController+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C16EA70259BE7D600D73755 /* ListsController+NavBar.swift */; };
 		3C21DEE6259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */; };
 		3C2858C6259C3E4C00BABBA7 /* TabBar+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */; };
@@ -230,6 +231,7 @@
 		3C1317E125B2581800FCEB79 /* PhotosVC+Finding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Finding.swift"; sourceTree = "<group>"; };
 		3C1317E425B259EB00FCEB79 /* PhotoFindVC+Populate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+Populate.swift"; sourceTree = "<group>"; };
 		3C1317E825B264BD00FCEB79 /* PhotosWrapperController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosWrapperController.swift; sourceTree = "<group>"; };
+		3C1317EC25B2A73B00FCEB79 /* PhotoFindVC+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+Setup.swift"; sourceTree = "<group>"; };
 		3C16EA70259BE7D600D73755 /* ListsController+NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+NavBar.swift"; sourceTree = "<group>"; };
 		3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListBuilderVC+ErrorChecking.swift"; sourceTree = "<group>"; };
 		3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBar+Lists.swift"; sourceTree = "<group>"; };
@@ -637,6 +639,7 @@
 			children = (
 				3C1317E125B2581800FCEB79 /* PhotosVC+Finding.swift */,
 				3CDA84F525B2519E00726F91 /* PhotoFindViewController.swift */,
+				3C1317EC25B2A73B00FCEB79 /* PhotoFindVC+Setup.swift */,
 				3C1317E425B259EB00FCEB79 /* PhotoFindVC+Populate.swift */,
 			);
 			path = Finding;
@@ -1420,6 +1423,7 @@
 				492A2D2224A3116600F9C4A1 /* TutorialLocalization.swift in Sources */,
 				3C2C3E9925A11CD6002C3D11 /* ANSegmentIndicator.swift in Sources */,
 				3C3D47DA25A40A4E002B8BBF /* PhotoPermissionView.swift in Sources */,
+				3C1317ED25B2A73C00FCEB79 /* PhotoFindVC+Setup.swift in Sources */,
 				3C6EE6B025A2AB350078462A /* GeneralView.swift in Sources */,
 				4956351D243694BC0001E8C6 /* OnboardingContantViewItem.swift in Sources */,
 				3CFF312F25AA79D400D3C56D /* TabBar+Photos.swift in Sources */,

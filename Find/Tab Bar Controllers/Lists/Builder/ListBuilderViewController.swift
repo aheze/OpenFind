@@ -156,7 +156,7 @@ class ListBuilderViewController: UIViewController {
             }
         }
         
-        setUpPagingVC()
+        setupPagingVC()
     }
     
     
@@ -196,7 +196,7 @@ extension ListBuilderViewController: GetGeneralInfo, GetIconInfo, GetColorInfo {
     
     
     
-    func setUpPagingVC() {
+    func setupPagingVC() {
         
         let firstVCTitle = NSLocalizedString("firstVCTitle", comment: "EditList def=General")
         let secondVCTitle = NSLocalizedString("secondVCTitle", comment: "EditList def=Icon")

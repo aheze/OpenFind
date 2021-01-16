@@ -57,7 +57,7 @@ class CachingCancelController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpViews()
+        setupViews()
         
 //        var count = 0
 //        for photo in totalPhotos {
@@ -102,7 +102,7 @@ class CachingCancelController: UIViewController {
     }
 }
 extension CachingCancelController {
-    func setUpViews() {
+    func setupViews() {
         cancelImageView.layer.cornerRadius = 4
         keepButton.layer.cornerRadius = 6
         discardButton.layer.cornerRadius = 6

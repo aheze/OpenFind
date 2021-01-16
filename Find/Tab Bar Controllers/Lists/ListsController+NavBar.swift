@@ -9,7 +9,7 @@
 import UIKit
 
 extension ListsController {
-    func setUpBarButtons() {
+    func setupBarButtons() {
         addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addPressed(sender:)))
         selectButton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectPressed(sender:)))
         

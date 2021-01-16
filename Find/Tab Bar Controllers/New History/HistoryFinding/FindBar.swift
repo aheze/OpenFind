@@ -122,14 +122,14 @@ class FindBar: UIView, UITextFieldDelegate {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setUp()
+        setup()
     }
     
     init() {
         super.init(frame: .zero)
-        setUp()
+        setup()
     }
-    private func setUp() {
+    private func setup() {
         
         clipsToBounds = true
         layer.cornerRadius = 5
