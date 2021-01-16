@@ -3295,7 +3295,7 @@ the App!</string>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gzv-fX-Vyn">
-                                <rect key="frame" x="0.0" y="50" width="414" height="686"/>
+                                <rect key="frame" x="0.0" y="110.33333333333331" width="414" height="625.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HFindCell" rowHeight="97.5" id="aMT-Hz-Iax" customClass="HistoryFindCell" customModule="Find" customModuleProvider="target">
@@ -3373,6 +3373,24 @@ the App!</string>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Alc-Nu-G0B">
+                                <rect key="frame" x="0.0" y="58" width="414" height="52.333333333333343"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FgX-GJ-ZZY">
+                                        <rect key="frame" x="16" y="15.999999999999998" width="382" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="FgX-GJ-ZZY" firstAttribute="leading" secondItem="Alc-Nu-G0B" secondAttribute="leading" constant="16" id="73D-zZ-Yi5"/>
+                                    <constraint firstAttribute="trailing" secondItem="FgX-GJ-ZZY" secondAttribute="trailing" constant="16" id="AXk-CP-9dH"/>
+                                    <constraint firstAttribute="bottom" secondItem="FgX-GJ-ZZY" secondAttribute="bottom" constant="16" id="VyU-R8-guc"/>
+                                    <constraint firstItem="FgX-GJ-ZZY" firstAttribute="top" secondItem="Alc-Nu-G0B" secondAttribute="top" constant="16" id="sBn-BX-MQJ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VFP-vX-BVP"/>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
@@ -3381,20 +3399,25 @@ the App!</string>
                             <constraint firstItem="7CF-yv-drp" firstAttribute="top" secondItem="2Lg-gS-P4U" secondAttribute="bottom" id="77v-lR-NMx"/>
                             <constraint firstItem="50k-Yv-2oR" firstAttribute="top" secondItem="7CF-yv-drp" secondAttribute="bottom" id="Eio-nx-vx8"/>
                             <constraint firstItem="50k-Yv-2oR" firstAttribute="top" secondItem="7CF-yv-drp" secondAttribute="bottom" id="JO3-TJ-DBa"/>
+                            <constraint firstItem="Gzv-fX-Vyn" firstAttribute="top" secondItem="Alc-Nu-G0B" secondAttribute="bottom" id="LC1-08-ElD"/>
                             <constraint firstAttribute="trailing" secondItem="7CF-yv-drp" secondAttribute="trailing" id="Pv6-x2-Naz"/>
                             <constraint firstAttribute="trailing" secondItem="Gzv-fX-Vyn" secondAttribute="trailing" id="QiA-V1-fed"/>
+                            <constraint firstItem="Alc-Nu-G0B" firstAttribute="trailing" secondItem="VFP-vX-BVP" secondAttribute="trailing" id="WJJ-F6-siL"/>
                             <constraint firstAttribute="bottom" secondItem="Gzv-fX-Vyn" secondAttribute="bottom" id="bRT-59-QgB"/>
                             <constraint firstItem="50k-Yv-2oR" firstAttribute="leading" secondItem="VFP-vX-BVP" secondAttribute="leading" constant="16" id="dTV-Lt-nB6"/>
                             <constraint firstItem="7CF-yv-drp" firstAttribute="leading" secondItem="oow-0C-4Ut" secondAttribute="leading" id="dow-sd-SxC"/>
                             <constraint firstItem="2Lg-gS-P4U" firstAttribute="top" secondItem="oow-0C-4Ut" secondAttribute="top" id="eZh-Af-FPo"/>
-                            <constraint firstItem="Gzv-fX-Vyn" firstAttribute="top" secondItem="2Lg-gS-P4U" secondAttribute="bottom" id="gJH-fk-cMR"/>
                             <constraint firstAttribute="trailing" secondItem="2Lg-gS-P4U" secondAttribute="trailing" id="hyJ-CJ-7S7"/>
                             <constraint firstItem="2Lg-gS-P4U" firstAttribute="leading" secondItem="oow-0C-4Ut" secondAttribute="leading" id="qv4-BG-TZM"/>
                             <constraint firstItem="VFP-vX-BVP" firstAttribute="trailing" secondItem="50k-Yv-2oR" secondAttribute="trailing" constant="16" id="sBL-wx-XfD"/>
+                            <constraint firstItem="Alc-Nu-G0B" firstAttribute="top" secondItem="50k-Yv-2oR" secondAttribute="bottom" id="vud-fE-0ZY"/>
+                            <constraint firstItem="Alc-Nu-G0B" firstAttribute="leading" secondItem="VFP-vX-BVP" secondAttribute="leading" id="yOL-cH-Wi2"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="findBar" destination="4BQ-22-UbH" id="3mF-9R-rcs"/>
                         <outlet property="progressView" destination="7CF-yv-drp" id="m7U-4M-Laq"/>
+                        <outlet property="promptLabel" destination="FgX-GJ-ZZY" id="hyu-RO-IzP"/>
                         <outlet property="tableView" destination="Gzv-fX-Vyn" id="RGq-Mk-wxL"/>
                         <outlet property="warningLabel" destination="d2z-RA-6HM" id="PbV-OK-7Ri"/>
                         <outlet property="warningView" destination="50k-Yv-2oR" id="tyG-fm-J9n"/>
@@ -3503,7 +3526,7 @@ the App!</string>
                             <constraint firstItem="y9x-GI-FZm" firstAttribute="trailing" secondItem="0XE-et-vDj" secondAttribute="trailing" constant="20" id="Pgn-0a-37t"/>
                             <constraint firstItem="0iz-9s-4iE" firstAttribute="top" secondItem="LAd-sS-QXd" secondAttribute="top" id="esD-iD-bTd"/>
                             <constraint firstAttribute="bottom" secondItem="0iz-9s-4iE" secondAttribute="bottom" id="iZz-Ot-JK8"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="JKE-Ij-JZI" secondAttribute="bottom" id="qOW-TJ-edj"/>
+                            <constraint firstAttribute="bottom" secondItem="JKE-Ij-JZI" secondAttribute="bottom" id="qOW-TJ-edj"/>
                             <constraint firstItem="0XE-et-vDj" firstAttribute="leading" secondItem="y9x-GI-FZm" secondAttribute="leading" constant="20" id="vld-wK-Wse"/>
                         </constraints>
                     </view>

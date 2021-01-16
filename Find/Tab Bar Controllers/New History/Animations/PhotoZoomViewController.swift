@@ -206,7 +206,6 @@ class PhotoZoomViewController: UIViewController {
             compToScale.height = newHeight + 6
             compToScale.colors = comp.colors
             compToScale.text = comp.text
-            compToScale.isSpecialType = comp.isSpecialType
             
             if newHeight <= 50 {
                 scaleInHighlight(component: compToScale)

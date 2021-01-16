@@ -17,6 +17,10 @@
 		3C1317E525B259EB00FCEB79 /* PhotoFindVC+Populate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317E425B259EB00FCEB79 /* PhotoFindVC+Populate.swift */; };
 		3C1317E925B264BD00FCEB79 /* PhotosWrapperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317E825B264BD00FCEB79 /* PhotosWrapperController.swift */; };
 		3C1317ED25B2A73C00FCEB79 /* PhotoFindVC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317EC25B2A73B00FCEB79 /* PhotoFindVC+Setup.swift */; };
+		3C1317F025B3687200FCEB79 /* PhotoFindVC+FindBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317EF25B3687200FCEB79 /* PhotoFindVC+FindBarDelegate.swift */; };
+		3C1317F325B3817300FCEB79 /* PhotoFindVC+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317F225B3817300FCEB79 /* PhotoFindVC+TableView.swift */; };
+		3C1317F625B3829900FCEB79 /* PhotoFindVC+Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317F525B3829900FCEB79 /* PhotoFindVC+Highlight.swift */; };
+		3C1317F925B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317F825B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift */; };
 		3C16EA71259BE7D600D73755 /* ListsController+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C16EA70259BE7D600D73755 /* ListsController+NavBar.swift */; };
 		3C21DEE6259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */; };
 		3C2858C6259C3E4C00BABBA7 /* TabBar+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */; };
@@ -232,6 +236,10 @@
 		3C1317E425B259EB00FCEB79 /* PhotoFindVC+Populate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+Populate.swift"; sourceTree = "<group>"; };
 		3C1317E825B264BD00FCEB79 /* PhotosWrapperController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosWrapperController.swift; sourceTree = "<group>"; };
 		3C1317EC25B2A73B00FCEB79 /* PhotoFindVC+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+Setup.swift"; sourceTree = "<group>"; };
+		3C1317EF25B3687200FCEB79 /* PhotoFindVC+FindBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+FindBarDelegate.swift"; sourceTree = "<group>"; };
+		3C1317F225B3817300FCEB79 /* PhotoFindVC+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+TableView.swift"; sourceTree = "<group>"; };
+		3C1317F525B3829900FCEB79 /* PhotoFindVC+Highlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+Highlight.swift"; sourceTree = "<group>"; };
+		3C1317F825B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+FindFromCache.swift"; sourceTree = "<group>"; };
 		3C16EA70259BE7D600D73755 /* ListsController+NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+NavBar.swift"; sourceTree = "<group>"; };
 		3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListBuilderVC+ErrorChecking.swift"; sourceTree = "<group>"; };
 		3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBar+Lists.swift"; sourceTree = "<group>"; };
@@ -641,6 +649,10 @@
 				3CDA84F525B2519E00726F91 /* PhotoFindViewController.swift */,
 				3C1317EC25B2A73B00FCEB79 /* PhotoFindVC+Setup.swift */,
 				3C1317E425B259EB00FCEB79 /* PhotoFindVC+Populate.swift */,
+				3C1317EF25B3687200FCEB79 /* PhotoFindVC+FindBarDelegate.swift */,
+				3C1317F825B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift */,
+				3C1317F225B3817300FCEB79 /* PhotoFindVC+TableView.swift */,
+				3C1317F525B3829900FCEB79 /* PhotoFindVC+Highlight.swift */,
 			);
 			path = Finding;
 			sourceTree = "<group>";
@@ -1335,6 +1347,7 @@
 				4988FC4823BEF89600199635 /* ListModel.swift in Sources */,
 				3C8CFC5C25AAE02D004FF194 /* PhotoSlidesVC+Actions.swift in Sources */,
 				3CDA84F625B2519E00726F91 /* PhotoFindViewController.swift in Sources */,
+				3C1317F025B3687200FCEB79 /* PhotoFindVC+FindBarDelegate.swift in Sources */,
 				3CE306DB259AC46400F1B2E2 /* CameraIcon.swift in Sources */,
 				3CE306E5259AC4B000F1B2E2 /* ButtonTransitions.swift in Sources */,
 				4990AAE623EDB50E00FAF37B /* ColorsViewController.swift in Sources */,
@@ -1350,11 +1363,13 @@
 				3C6EE6B625A2AB350078462A /* CameraView.swift in Sources */,
 				49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */,
 				3C4DE6FD259AD3FF0037D104 /* CacheIcon.swift in Sources */,
+				3C1317F325B3817300FCEB79 /* PhotoFindVC+TableView.swift in Sources */,
 				49301BF02400D4FF00B4780B /* HelpControllers.swift in Sources */,
 				3C0F5ED225A570F200549040 /* PhotosVC+Realm.swift in Sources */,
 				3C1317E925B264BD00FCEB79 /* PhotosWrapperController.swift in Sources */,
 				49563522243694BC0001E8C6 /* PaperOnboarding.swift in Sources */,
 				4972B40E23F117C500843537 /* GeneralTableviewCell.swift in Sources */,
+				3C1317F625B3829900FCEB79 /* PhotoFindVC+Highlight.swift in Sources */,
 				495F39012433FF1600A17D93 /* LaunchViewController.swift in Sources */,
 				498332D82431B4D500AD083E /* LDGradientView.swift in Sources */,
 				49A8EFAE237A5F2800328D47 /* SetUpSearchBar.swift in Sources */,
@@ -1407,6 +1422,7 @@
 				49D985B4241B374B005F4E92 /* CachingViewController.swift in Sources */,
 				49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */,
 				4991344E236FDF1300B82E46 /* SettingsViewController.swift in Sources */,
+				3C1317F925B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift in Sources */,
 				490DA75623CBB871000AF57D /* JJFloatingActionButton+Placement.swift in Sources */,
 				3C4B6D7325B23460001F501A /* NavigationViewModifier.swift in Sources */,
 				490DA75123CBB871000AF57D /* JJActionItemTitlePosition.swift in Sources */,

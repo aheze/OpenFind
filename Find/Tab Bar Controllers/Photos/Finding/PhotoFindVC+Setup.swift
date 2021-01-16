@@ -11,5 +11,10 @@ import UIKit
 extension PhotoFindViewController {
     func setup() {
         warningView.alpha = 0
+        
+        
+        findBar.findBarDelegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 }

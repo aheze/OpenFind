@@ -12,14 +12,14 @@ import RealmSwift
 import SnapKit
 
 
-protocol ReturnSortedTerms: class {
+protocol FindBarDelegate: class {
     func pause(pause: Bool)
     func returnTerms(matchToColorsR: [String: [CGColor]])
     func startedEditing(start: Bool)
     func pressedReturn()
     func triedToEdit()
     func triedToEditWhilePaused()
-    func hereAreCurrentLists(currentSelected: [EditableFindList], currentText: String, object: MatchesLabelObject)
+//    func hereAreCurrentLists(currentSelected: [EditableFindList], currentText: String, object: MatchesLabelObject)
 }
 
 class FindBar: UIView, UITextFieldDelegate {
@@ -118,7 +118,7 @@ class FindBar: UIView, UITextFieldDelegate {
     @IBOutlet weak var searchField: InsetTextField!
     
     weak var injectListDelegate: InjectLists?
-    weak var returnTerms: ReturnSortedTerms?
+    weak var findBarDelegate: FindBarDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -176,143 +176,155 @@ class FindBar: UIView, UITextFieldDelegate {
         searchField.rightView = resultsLabel
         searchField.rightViewMode = .always
         searchField.backgroundColor = UIColor.white.withAlphaComponent(0.3)
-        searchField.attributedPlaceholder = NSAttributedString(string: "Type here to find", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+        searchField.attributedPlaceholder = NSAttributedString(string: "Type here to find", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white.withAlphaComponent(0.75)])
         
         resultsLabel.textColor = UIColor.lightGray
 
     }
 }
 
-extension FindBar: ChangeFindBar {
+
+
+extension FindBar {
     
-    
-    func change(type: String) {
-        switch type {
-        case "Disable":
-            DispatchQueue.main.async {
-                self.searchField.backgroundColor = UIColor(named: "Gray2")
-                self.searchDisabled = true
-            }
-        case "Enable":
-            DispatchQueue.main.async {
-                self.searchField.backgroundColor = UIColor(named: "Gray1")
-                self.searchDisabled = false
-            }
-        case "GetLists":
-            let currentLabelObject = MatchesLabelObject()
-            currentLabelObject.cachedNumber = origCacheNumber
-            currentLabelObject.totalNumber = totalResultsNumber
-            currentLabelObject.hadSearchedInCache = searchingOnlyInCache
-//            print("Orig cache number: \(origCacheNumber), total: \(totalResultsNumber), onlyInCache? \(searchingOnlyInCache)")
-            returnTerms?.hereAreCurrentLists(currentSelected: selectedLists, currentText: searchField.text ?? "", object: currentLabelObject)
-//            self.searchFiel
-        default:
-            print("WRONGGGG")
-            
+    func disableTextField(_ shouldDisable: Bool) {
+        if shouldDisable {
+            self.searchField.backgroundColor = UIColor(named: "Gray2")
+            self.searchDisabled = true
+        } else {
+            self.searchField.backgroundColor = UIColor(named: "Gray1")
+            self.searchDisabled = false
         }
     }
     
-    func giveLists(lists: [EditableFindList], searchText: String, labelObject: MatchesLabelObject) {
-        
-        origCacheNumber = labelObject.cachedNumber
-        totalResultsNumber = labelObject.totalNumber
-        if labelObject.hadSearchedInCache {
-            setResultLabelText(searchingInCache: true, number: totalResultsNumber)
-//            if totalResultsNumber == 0 {
-//                let noMatchesInSpace = NSLocalizedString("noMatchesInSpace", comment: "FindBar def=No Matches in ")
-////                resultsLabel.text = "No Matches in "
-//                resultsLabel.text = noMatchesInSpace
-//            } else if totalResultsNumber == 1 {
-////                resultsLabel.text = "1 Match in "
-//                resultsLabel.text = oneMatchInSpace
-//            } else {
-//
-//                let xMatchesInSpace = NSLocalizedString("%d MatchesInSpace", comment: "FindBar def=x Matches in ")
-//                let string = String.localizedStringWithFormat(xMatchesInSpace, totalResultsNumber)
-////                resultsLabel.text = "\(totalResultsNumber) Matches in "
-//                resultsLabel.text = string
-//            }
-//
-//            let imageRect = CGRect(x: 0, y: 2.5, width: 30, height: 30)
-//            resultsLabel.addImageWith(name: "TextFieldCache", behindText: true, bounds: imageRect)
-        } else {
-            setResultLabelText(searchingInCache: false, number: totalResultsNumber)
-//            if totalResultsNumber == 0 {
-//
-//                let noMatches = NSLocalizedString("noMatches", comment: "FindBar def=No Matches")
-//                self.resultsLabel.text = noMatches
-//            } else if totalResultsNumber == 1 {
-//
-//                self.resultsLabel.text = oneMatch
-//            } else {
-//                let matches = NSLocalizedString("matches", comment: "FindBar def=Matches")
-//                self.resultsLabel.text = "\(totalResultsNumber) \(matches)"
-//            }
-        }
-        
-        searchDisabled = false
-        searchActive = false
-        
-        searchField.text = searchText
-        finalTextToFind = searchText
-        
-        selectedLists = lists
-        var notSelectedLists = [EditableFindList]()
-        var selectedOrderIDs = [Int]()
-        for list in lists {
-            selectedOrderIDs.append(list.orderIdentifier)
-        }
-        
-        for list in editableListCategories {
-            if !selectedOrderIDs.contains(list.orderIdentifier) {
-                notSelectedLists.append(list)
-            }
-        }
-        
-        injectListDelegate?.resetWithLists(lists: notSelectedLists)
-        switch selectedLists.count {
-        case 0:
-            searchLeftC.constant = 0
-        case 1:
-            searchLeftC.constant = 35 + 3
-        case 2:
-            searchLeftC.constant = 73 + 3
-        case 3:
-            searchLeftC.constant = 111 + 3
-        default:
-            let availableWidth = contentView.frame.width - 123
-            collViewRightC.constant = availableWidth
-            searchLeftC.constant = 111 + 3
-        }
-        
-//        UIView.animate(withDuration: 0.3, animations: {
-            self.layoutIfNeeded()
-//        })
     
-        if hasExpandedAlert == true {
-            warningWidth.constant = searchField.frame.size.width
-            UIView.animate(withDuration: 0.3, animations: {
-                self.layoutIfNeeded()
-            })
-        }
-        
-        collectionView.reloadData()
-        
-        let splits = searchText.components(separatedBy: "\u{2022}")
-        let uniqueSplits = splits.uniques
-        if uniqueSplits.count != splits.count {
-            dupPaused = true
-            returnTerms?.pause(pause: true)
-            showDuplicateAlert(show: true)
-        } else {
-            dupPaused = false
-            finalTextToFind = searchText
-            showDuplicateAlert(show: false)
-            returnTerms?.pause(pause: false)
-            sortSearchTerms(shouldReturnTerms: false)
-        }
-        
-    }
+//    func change(type: String) {
+//        switch type {
+//        case "Disable":
+//            DispatchQueue.main.async {
+//                self.searchField.backgroundColor = UIColor(named: "Gray2")
+//                self.searchDisabled = true
+//            }
+//        case "Enable":
+//            DispatchQueue.main.async {
+//                self.searchField.backgroundColor = UIColor(named: "Gray1")
+//                self.searchDisabled = false
+//            }
+//        case "GetLists":
+//            let currentLabelObject = MatchesLabelObject()
+//            currentLabelObject.cachedNumber = origCacheNumber
+//            currentLabelObject.totalNumber = totalResultsNumber
+//            currentLabelObject.hadSearchedInCache = searchingOnlyInCache
+////            print("Orig cache number: \(origCacheNumber), total: \(totalResultsNumber), onlyInCache? \(searchingOnlyInCache)")
+//            returnTerms?.hereAreCurrentLists(currentSelected: selectedLists, currentText: searchField.text ?? "", object: currentLabelObject)
+////            self.searchFiel
+//        default:
+//            print("WRONGGGG")
+//
+//        }
+//    }
+    
+//    func giveLists(lists: [EditableFindList], searchText: String, labelObject: MatchesLabelObject) {
+//
+//        origCacheNumber = labelObject.cachedNumber
+//        totalResultsNumber = labelObject.totalNumber
+//        if labelObject.hadSearchedInCache {
+//            setResultLabelText(searchingInCache: true, number: totalResultsNumber)
+////            if totalResultsNumber == 0 {
+////                let noMatchesInSpace = NSLocalizedString("noMatchesInSpace", comment: "FindBar def=No Matches in ")
+//////                resultsLabel.text = "No Matches in "
+////                resultsLabel.text = noMatchesInSpace
+////            } else if totalResultsNumber == 1 {
+//////                resultsLabel.text = "1 Match in "
+////                resultsLabel.text = oneMatchInSpace
+////            } else {
+////
+////                let xMatchesInSpace = NSLocalizedString("%d MatchesInSpace", comment: "FindBar def=x Matches in ")
+////                let string = String.localizedStringWithFormat(xMatchesInSpace, totalResultsNumber)
+//////                resultsLabel.text = "\(totalResultsNumber) Matches in "
+////                resultsLabel.text = string
+////            }
+////
+////            let imageRect = CGRect(x: 0, y: 2.5, width: 30, height: 30)
+////            resultsLabel.addImageWith(name: "TextFieldCache", behindText: true, bounds: imageRect)
+//        } else {
+//            setResultLabelText(searchingInCache: false, number: totalResultsNumber)
+////            if totalResultsNumber == 0 {
+////
+////                let noMatches = NSLocalizedString("noMatches", comment: "FindBar def=No Matches")
+////                self.resultsLabel.text = noMatches
+////            } else if totalResultsNumber == 1 {
+////
+////                self.resultsLabel.text = oneMatch
+////            } else {
+////                let matches = NSLocalizedString("matches", comment: "FindBar def=Matches")
+////                self.resultsLabel.text = "\(totalResultsNumber) \(matches)"
+////            }
+//        }
+//
+//        searchDisabled = false
+//        searchActive = false
+//
+//        searchField.text = searchText
+//        finalTextToFind = searchText
+//
+//        selectedLists = lists
+//        var notSelectedLists = [EditableFindList]()
+//        var selectedOrderIDs = [Int]()
+//        for list in lists {
+//            selectedOrderIDs.append(list.orderIdentifier)
+//        }
+//
+//        for list in editableListCategories {
+//            if !selectedOrderIDs.contains(list.orderIdentifier) {
+//                notSelectedLists.append(list)
+//            }
+//        }
+//
+//        injectListDelegate?.resetWithLists(lists: notSelectedLists)
+//        switch selectedLists.count {
+//        case 0:
+//            searchLeftC.constant = 0
+//        case 1:
+//            searchLeftC.constant = 35 + 3
+//        case 2:
+//            searchLeftC.constant = 73 + 3
+//        case 3:
+//            searchLeftC.constant = 111 + 3
+//        default:
+//            let availableWidth = contentView.frame.width - 123
+//            collViewRightC.constant = availableWidth
+//            searchLeftC.constant = 111 + 3
+//        }
+//
+////        UIView.animate(withDuration: 0.3, animations: {
+//            self.layoutIfNeeded()
+////        })
+//
+//        if hasExpandedAlert == true {
+//            warningWidth.constant = searchField.frame.size.width
+//            UIView.animate(withDuration: 0.3, animations: {
+//                self.layoutIfNeeded()
+//            })
+//        }
+//
+//        collectionView.reloadData()
+//
+//        let splits = searchText.components(separatedBy: "\u{2022}")
+//        let uniqueSplits = splits.uniques
+//        if uniqueSplits.count != splits.count {
+//            dupPaused = true
+//            returnTerms?.pause(pause: true)
+//            showDuplicateAlert(show: true)
+//        } else {
+//            dupPaused = false
+//            finalTextToFind = searchText
+//            showDuplicateAlert(show: false)
+//            returnTerms?.pause(pause: false)
+//            sortSearchTerms(shouldReturnTerms: false)
+//        }
+//
+//    }
     
     
 }
@@ -361,7 +373,7 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
                 searchField.becomeFirstResponder()
             }
         } else {
-            returnTerms?.triedToEdit()
+            findBarDelegate?.triedToEdit()
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -433,13 +445,13 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         searchActive = true
-        returnTerms?.startedEditing(start: true)
+        findBarDelegate?.startedEditing(start: true)
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if searchDisabled == false {
             return true
         } else {
-            returnTerms?.triedToEdit()
+            findBarDelegate?.triedToEdit()
             return false
         }
     }
@@ -450,10 +462,10 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
                 if matchToColors.keys.count != 0 {
                     searchActive = false
                     textField.resignFirstResponder()
-                    returnTerms?.pressedReturn()
+                    findBarDelegate?.pressedReturn()
                 }
             } else {
-                returnTerms?.triedToEditWhilePaused()
+                findBarDelegate?.triedToEditWhilePaused()
             }
         
         return true
@@ -464,14 +476,14 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
             let splits = updatedString.components(separatedBy: "\u{2022}")
             let uniqueSplits = splits.uniques
             if uniqueSplits.count != splits.count {
-                returnTerms?.pause(pause: true)
+                findBarDelegate?.pause(pause: true)
                 dupPaused = true
                 showDuplicateAlert(show: true)
             } else {
                 finalTextToFind = updatedString
                 showDuplicateAlert(show: false)
                 dupPaused = false
-                returnTerms?.pause(pause: false)
+                findBarDelegate?.pause(pause: false)
                 sortSearchTerms()
             }
             
@@ -500,7 +512,7 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         case .done:
             searchActive = false
             searchField.resignFirstResponder()
-            returnTerms?.startedEditing(start: false)
+            findBarDelegate?.startedEditing(start: false)
         }
     }
     func removeAllLists() {
@@ -650,7 +662,7 @@ extension FindBar {
             }
             
             if shouldReturnTerms {
-                returnTerms?.returnTerms(matchToColorsR: matchToColors)
+                findBarDelegate?.returnTerms(matchToColorsR: matchToColors)
             }
         }
 

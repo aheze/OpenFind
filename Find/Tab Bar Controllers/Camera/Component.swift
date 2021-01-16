@@ -15,7 +15,6 @@ class Component: NSObject {
     var height: CGFloat = 0
     var width: CGFloat = 0
     
-    var isSpecialType = "Not Special"
     var text = ""
     var parentList = EditableFindList()
     var colors = ["00aeef"]

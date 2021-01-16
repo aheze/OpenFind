@@ -8,8 +8,17 @@
 
 import UIKit
 
+class ResultPhoto: NSObject {
+    var findPhoto = FindPhoto()
+    var numberOfMatches = 0
+    var descriptionText = ""
+    var descriptionHeight = CGFloat(0)
+    var descriptionMatchRanges = [ArrayOfMatchesInComp]()
+    var components = [Component]()
+}
+
 extension PhotoFindViewController {
     func populatePhotos(findPhotos: [FindPhoto]) {
-        
+        self.findPhotos = findPhotos
     }
 }

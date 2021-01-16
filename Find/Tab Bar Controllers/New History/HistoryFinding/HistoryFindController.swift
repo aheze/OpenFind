@@ -280,11 +280,11 @@ class HistoryFindController: UIViewController {
         
         let customView = FindBar()
         
-        customView.returnTerms = self
+//        customView.returnTerms = self
 //        self.giveNumber = customView
         customView.highlightColor = highlightColor
         
-        self.changeFindbar = customView
+//        self.changeFindbar = customView
         
         let edgeWidth = CGFloat(600)
         attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
@@ -514,7 +514,7 @@ extension HistoryFindController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension HistoryFindController: ReturnSortedTerms {
+extension HistoryFindController {
     
     func startedEditing(start: Bool) {
         
@@ -829,11 +829,11 @@ extension HistoryFindController: ZoomAnimatorDelegate {
             attributes.positionConstraints.keyboardRelation = keyboardRelation
             
             let customView = FindBar()
-            customView.returnTerms = self
+//            customView.returnTerms = self
 //            self.giveNumber = customView
             customView.highlightColor = self.highlightColor
             
-            self.changeFindbar = customView
+//            self.changeFindbar = customView
             let edgeWidth = CGFloat(600)
             attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
             SwiftEntryKit.display(entry: customView, using: attributes)
@@ -1397,11 +1397,11 @@ extension HistoryFindController: UIAdaptivePresentationControllerDelegate {
         attributes.positionConstraints.keyboardRelation = keyboardRelation
         
         let customView = FindBar()
-        customView.returnTerms = self
+//        customView.returnTerms = self
 //        self.giveNumber = customView
         customView.highlightColor = self.highlightColor
         
-        self.changeFindbar = customView
+//        self.changeFindbar = customView
         let edgeWidth = CGFloat(600)
         attributes.positionConstraints.maxSize = .init(width: .constant(value: edgeWidth), height: .intrinsic)
         
