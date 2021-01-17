@@ -104,8 +104,9 @@ class PhotosViewController: UIViewController {
         setupFinding()
 
         let bottomInset = CGFloat(ConstantVars.tabHeight)
+        let bottomSafeAreaHeight = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.bottom ?? 0
         collectionView.contentInset.bottom = 16 + segmentedSlider.bounds.height + bottomInset
-        collectionView.verticalScrollIndicatorInsets.bottom = bottomInset
+        collectionView.verticalScrollIndicatorInsets.bottom = bottomInset - CGFloat(bottomSafeAreaHeight)
         segmentedSliderBottomC.constant = 8 + bottomInset
 
         getSliderCallback()

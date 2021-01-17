@@ -137,22 +137,14 @@ extension PhotoFindViewController {
                 
                 if self.numberCurrentlyFindingFromCache == 0 {
                     self.shouldAllowPressRow = true
+                    self.setPromptToHowManyCacheResults(howMany: totalMatchNumber)
                     
-                    if resultPhotos.count >= 1 {
-                        
-                        self.setPromptToHowManyCacheResults(howMany: totalMatchNumber)
-                        
-                        
-                        UIView.animate(withDuration: 0.1, animations: {
-                            self.tableView.alpha = 1
-                        })
-                    } else {
-                        
-                        let noResultsInCache = NSLocalizedString("noResultsInCache", comment: "HistoryFindController def=No results found in cache. Press Search on the keyboard to continue.")
-                        self.promptLabel.text = noResultsInCache
-                        UIView.animate(withDuration: 0.1, animations: {
-                            self.tableView.alpha = 0
-                        })
+                    UIView.animate(withDuration: 0.1, animations: {
+                        self.tableView.alpha = 1
+                    })
+                    
+                    if resultPhotos.count == 0 {
+                        self.resultPhotos.removeAll()
                     }
                     
                     self.tableView.reloadData()
