@@ -649,8 +649,8 @@
 			children = (
 				3C1317E125B2581800FCEB79 /* PhotosVC+Finding.swift */,
 				3CDA84F525B2519E00726F91 /* PhotoFindViewController.swift */,
-				3C1317EC25B2A73B00FCEB79 /* PhotoFindVC+Setup.swift */,
 				3C1317E425B259EB00FCEB79 /* PhotoFindVC+Populate.swift */,
+				3C1317EC25B2A73B00FCEB79 /* PhotoFindVC+Setup.swift */,
 				3C1317EF25B3687200FCEB79 /* PhotoFindVC+FindBarDelegate.swift */,
 				3C1317F825B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift */,
 				3C1317F225B3817300FCEB79 /* PhotoFindVC+TableView.swift */,

@@ -15,15 +15,12 @@ extension PhotosViewController {
         collapseButton.alpha = 0
     }
     func findPressed() {
-//        findWithFilter?(currentFilter)
         switchToFind?(currentFilter, allPhotosToDisplay)
         
         UIView.animate(withDuration: 0.5) {
             self.segmentedSlider.alpha = 0
             self.collapseButton.alpha = 1
         }
-        
-        
 
 //        switch currentFilter {
 //        case .local:

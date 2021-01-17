@@ -84,9 +84,9 @@ class PhotosWrapperController: UIViewController {
        
         let currentFilter = navController.viewController.currentFilter
         let howManyPhotosSelected = navController.viewController.numberOfSelected
-        photoFindViewController.changePromptToStarting(startingFilter: currentFilter, howManyPhotos: howManyPhotosSelected, isAllPhotos: false)
         
-        photoFindViewController.populatePhotos(findPhotos: photosToFind)
+        photoFindViewController.populatePhotos(findPhotos: photosToFind, currentFilter: currentFilter, findingFromAllPhotos: true)
+        photoFindViewController.changePromptToStarting(startingFilter: currentFilter, howManyPhotos: howManyPhotosSelected, isAllPhotos: true)
     }
     
     func addShadows() {

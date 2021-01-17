@@ -16,7 +16,7 @@ enum PromptType {
 }
 extension PhotoFindViewController {
     func changePromptToStarting(startingFilter: PhotoFilter, howManyPhotos: Int, isAllPhotos: Bool) {
-        print("starting")
+        print("starting, all? \(isAllPhotos)")
          
         let findingFrom = "Finding from "
         let photos = "photos"
@@ -46,7 +46,7 @@ extension PhotoFindViewController {
             filter = "all "
             color = UIColor(named: "TabIconPhotosMain")!
             if isAllPhotos {
-                number = " "
+                number = ""
             } else {
                 number = "\(howManyPhotos) of "
             }

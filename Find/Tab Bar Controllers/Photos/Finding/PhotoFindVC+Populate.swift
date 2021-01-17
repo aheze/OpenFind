@@ -18,7 +18,9 @@ class ResultPhoto: NSObject {
 }
 
 extension PhotoFindViewController {
-    func populatePhotos(findPhotos: [FindPhoto]) {
+    func populatePhotos(findPhotos: [FindPhoto], currentFilter: PhotoFilter, findingFromAllPhotos: Bool) {
         self.findPhotos = findPhotos
+        self.currentFilter = currentFilter
+        self.findingFromAllPhotos = findingFromAllPhotos
     }
 }

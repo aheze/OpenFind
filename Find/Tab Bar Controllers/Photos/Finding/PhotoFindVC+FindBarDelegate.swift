@@ -20,6 +20,8 @@ extension PhotoFindViewController: FindBarDelegate {
         self.matchToColors = matchToColorsR
         if matchToColorsR.keys.count >= 1 {
             findFromCache()
+        } else { /// no text entered
+            changePromptToStarting(startingFilter: currentFilter, howManyPhotos: findPhotos.count, isAllPhotos: findingFromAllPhotos)
         }
         
         

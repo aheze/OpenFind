@@ -10,8 +10,8 @@ import UIKit
 
 extension PhotoFindViewController {
     func setup() {
+        progressView.alpha = 0
         warningView.alpha = 0
-        
         
         findBar.findBarDelegate = self
         tableView.delegate = self
