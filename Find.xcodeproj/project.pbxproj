@@ -39,6 +39,7 @@
 		3C3D47DD25A40A5B002B8BBF /* PhotoPermissionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D47DC25A40A5B002B8BBF /* PhotoPermissionView.xib */; };
 		3C3D47E025A41AEB002B8BBF /* PhotosVC+Diffable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47DF25A41AEB002B8BBF /* PhotosVC+Diffable.swift */; };
 		3C3D47E325A41B9E002B8BBF /* PhotosVC+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47E225A41B9E002B8BBF /* PhotosVC+Cells.swift */; };
+		3C3DF5E025B4A59100DD7A10 /* PhotoFindVC+Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3DF5DF25B4A59100DD7A10 /* PhotoFindVC+Prompt.swift */; };
 		3C4A8E4925AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */; };
 		3C4B6D7325B23460001F501A /* NavigationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4B6D7225B23460001F501A /* NavigationViewModifier.swift */; };
 		3C4DE6FB259AD3FF0037D104 /* SaveToPhotosButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */; };
@@ -258,6 +259,7 @@
 		3C3D47DC25A40A5B002B8BBF /* PhotoPermissionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPermissionView.xib; sourceTree = "<group>"; };
 		3C3D47DF25A41AEB002B8BBF /* PhotosVC+Diffable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Diffable.swift"; sourceTree = "<group>"; };
 		3C3D47E225A41B9E002B8BBF /* PhotosVC+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Cells.swift"; sourceTree = "<group>"; };
+		3C3DF5DF25B4A59100DD7A10 /* PhotoFindVC+Prompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+Prompt.swift"; sourceTree = "<group>"; };
 		3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+ActivityIndicator.swift"; sourceTree = "<group>"; };
 		3C4B6D7225B23460001F501A /* NavigationViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModifier.swift; sourceTree = "<group>"; };
 		3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaveToPhotosButton.xib; sourceTree = "<group>"; };
@@ -652,6 +654,7 @@
 				3C1317EF25B3687200FCEB79 /* PhotoFindVC+FindBarDelegate.swift */,
 				3C1317F825B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift */,
 				3C1317F225B3817300FCEB79 /* PhotoFindVC+TableView.swift */,
+				3C3DF5DF25B4A59100DD7A10 /* PhotoFindVC+Prompt.swift */,
 				3C1317F525B3829900FCEB79 /* PhotoFindVC+Highlight.swift */,
 			);
 			path = Finding;
@@ -1438,6 +1441,7 @@
 				49BC782023C2B0E0003D9904 /* IndexMatcher.swift in Sources */,
 				492A2D2224A3116600F9C4A1 /* TutorialLocalization.swift in Sources */,
 				3C2C3E9925A11CD6002C3D11 /* ANSegmentIndicator.swift in Sources */,
+				3C3DF5E025B4A59100DD7A10 /* PhotoFindVC+Prompt.swift in Sources */,
 				3C3D47DA25A40A4E002B8BBF /* PhotoPermissionView.swift in Sources */,
 				3C1317ED25B2A73C00FCEB79 /* PhotoFindVC+Setup.swift in Sources */,
 				3C6EE6B025A2AB350078462A /* GeneralView.swift in Sources */,

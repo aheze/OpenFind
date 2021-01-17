@@ -39,7 +39,6 @@ class PhotosWrapperController: UIViewController {
         navController.viewController.switchToFind = { [weak self] (currentFilter, photosToFindFrom)  in
             guard let self = self else { return }
             self.photosToFind = photosToFindFrom
-            
             self.switchToFind()
         }
 
@@ -82,6 +81,12 @@ class PhotosWrapperController: UIViewController {
         }
         
         pressedFindBefore = true
+       
+        let currentFilter = navController.viewController.currentFilter
+        let howManyPhotosSelected = navController.viewController.numberOfSelected
+        photoFindViewController.changePromptToStarting(startingFilter: currentFilter, howManyPhotos: howManyPhotosSelected, isAllPhotos: false)
+        
+        photoFindViewController.populatePhotos(findPhotos: photosToFind)
     }
     
     func addShadows() {

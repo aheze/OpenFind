@@ -15,6 +15,14 @@ extension PhotoFindViewController: FindBarDelegate {
     
     func returnTerms(matchToColorsR: [String : [CGColor]]) {
         print("returnTerms findbar")
+        
+        
+        self.matchToColors = matchToColorsR
+        if matchToColorsR.keys.count >= 1 {
+            findFromCache()
+        }
+        
+        
     }
     
     func startedEditing(start: Bool) {
@@ -22,7 +30,15 @@ extension PhotoFindViewController: FindBarDelegate {
     }
     
     func pressedReturn() {
-        print("pressedReturn findbar")
+        print("pressedReturn findbar------------")
+        
+        
+        promptLabel.text = "Hello"
+//        UIView.animate(withDuration: 1) {
+////            self.promptView.frame.size.height = 20
+//            self.tableView.tableHeaderView?.frame.size.height = 20
+//            self.tableView.layoutIfNeeded()
+//        }
     }
     
     func triedToEdit() {

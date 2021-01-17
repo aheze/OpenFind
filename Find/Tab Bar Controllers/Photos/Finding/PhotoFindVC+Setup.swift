@@ -16,5 +16,10 @@ extension PhotoFindViewController {
         findBar.findBarDelegate = self
         tableView.delegate = self
         tableView.dataSource = self
+        
+        let bottomSafeAreaHeight = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.bottom ?? 0
+        tableView.contentInset.bottom = CGFloat(ConstantVars.tabHeight) + CGFloat(16)
+        tableView.verticalScrollIndicatorInsets.bottom = CGFloat(ConstantVars.tabHeight) - CGFloat(bottomSafeAreaHeight)
+        
     }
 }

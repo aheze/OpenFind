@@ -10,8 +10,12 @@ import UIKit
 
 class HistoryFindCell: UITableViewCell {
     
+    @IBOutlet weak var shadowView: CellShadowView!
+    
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var numberOfMatchesView: UIView!
+    @IBOutlet weak var numberOfMatchesLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
     
     @IBOutlet weak var drawingView: UIView!

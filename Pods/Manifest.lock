@@ -15,6 +15,7 @@ PODS:
   - SPAlert (2.1.4)
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
+  - SwiftRichString (3.7.2)
   - SwiftyJSON (4.3.0)
   - WhatsNewKit (1.3.4)
 
@@ -27,6 +28,7 @@ DEPENDENCIES:
   - SnapKit
   - SPAlert
   - SwiftEntryKit
+  - SwiftRichString
   - SwiftyJSON (~> 4.0)
   - WhatsNewKit
 
@@ -41,6 +43,7 @@ SPEC REPOS:
     - SnapKit
     - SPAlert
     - SwiftEntryKit
+    - SwiftRichString
     - SwiftyJSON
     - WhatsNewKit
 
@@ -54,9 +57,10 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SPAlert: 1a8afa1c6ac86a82ab5b2cfdf7f9a51e68cb6c0c
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
+  SwiftRichString: d61b807db1f8834c26fee92b6dd3e1be2dc5af03
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   WhatsNewKit: 35f25faa0e17f3ad9b825ba46b13a14279972973
 
-PODFILE CHECKSUM: 88a7b205099869a99cb8de0833cff9899c1b7f1f
+PODFILE CHECKSUM: ebce0947f2830cd08f5596587e95bb9459790f6f
 
 COCOAPODS: 1.10.0

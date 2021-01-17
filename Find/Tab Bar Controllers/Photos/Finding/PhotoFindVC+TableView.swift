@@ -15,10 +15,17 @@ extension PhotoFindViewController: UITableViewDelegate, UITableViewDataSource {
         return resultPhotos.count
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HFindCell", for: indexPath) as! HistoryFindCell
-        cell.baseView.layer.cornerRadius = 6
+        cell.baseView.layer.cornerRadius = 8
         cell.baseView.clipsToBounds = true
+        
+        cell.shadowView.layer.masksToBounds = false
+        cell.shadowView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        cell.shadowView.layer.shadowColor = #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1).cgColor
+        cell.shadowView.layer.shadowOpacity = 0.5
+        cell.shadowView.layer.shadowRadius = 4
         
         let findModel = resultPhotos[indexPath.row]
         
@@ -37,6 +44,9 @@ extension PhotoFindViewController: UITableViewDelegate, UITableViewDataSource {
         if let creationDate = findModel.findPhoto.asset.creationDate?.convertDateToReadableString() {
             cell.titleLabel.text = "\(creationDate)"
         }
+        
+        cell.numberOfMatchesView.layer.cornerRadius = cell.numberOfMatchesView.bounds.height / 2
+        cell.numberOfMatchesLabel.text = numberText
 
         cell.textView.text = findModel.descriptionText
         

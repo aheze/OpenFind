@@ -121,7 +121,7 @@ extension PhotoFindViewController {
                 resultPhoto.descriptionMatchRanges = finalRangesObjects
                 resultPhoto.numberOfMatches = numberOfMatches
                 resultPhoto.descriptionText = descriptionOfPhoto
-                let totalWidth = self.view.bounds.width
+                let totalWidth = self.deviceWidth
                 let finalWidth = totalWidth - 146
                 let height = descriptionOfPhoto.heightWithConstrainedWidth(width: finalWidth, font: UIFont.systemFont(ofSize: 14))
                 let finalHeight = height + 70
@@ -140,8 +140,10 @@ extension PhotoFindViewController {
                     
                     if resultPhotos.count >= 1 {
                         
+                        self.setPromptToHowManyCacheResults(howMany: totalMatchNumber)
+                        
+                        
                         UIView.animate(withDuration: 0.1, animations: {
-                            self.promptLabel.alpha = 0
                             self.tableView.alpha = 1
                         })
                     } else {
@@ -149,7 +151,6 @@ extension PhotoFindViewController {
                         let noResultsInCache = NSLocalizedString("noResultsInCache", comment: "HistoryFindController def=No results found in cache. Press Search on the keyboard to continue.")
                         self.promptLabel.text = noResultsInCache
                         UIView.animate(withDuration: 0.1, animations: {
-                            self.promptLabel.alpha = 1
                             self.tableView.alpha = 0
                         })
                     }
