@@ -56,7 +56,6 @@ extension PhotoFindViewController {
             $0.color = color
         }
         
-        
         let attributedText = findingFrom.set(styles: [boldStyle, grayStyle]) + number.set(style: boldStyle) + filter.set(styles: [boldStyle, colorStyle]) + photos.set(styles: [boldStyle, grayStyle])
         promptLabel.attributedText = attributedText
     }
@@ -74,18 +73,19 @@ extension PhotoFindViewController {
         let attributedText = "\(howMany)".set(style: textStyle) + resultsInCache + nextButtonAttachment! + toFindFromPhotos
         promptLabel.attributedText = attributedText
     }
-    func setPromptToFastFinding() {
+    func setPromptToHowManyFastFound(howMany: Int) { /// how many finished finding
         let textStyle = Style {
             $0.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             $0.color = UIColor.secondaryLabel
         }
         
-        let inProgress = "Finding from uncached photos..."
+        let inProgress = "Finding from uncached photos (".set(style: textStyle)
+        let outOfWhat = "\(howMany)/\(findPhotos.count)".set(style: textStyle)
+        let ending = ")...".set(style: textStyle)
         
-        let attributedText = inProgress.set(style: textStyle)
+        let attributedText = inProgress + outOfWhat + ending
         promptLabel.attributedText = attributedText
     }
-    
     /// Finished searching cache and uncached photos
     func setPromptToFinishedFastFinding(howMany: Int) {
         let textStyle = Style {
@@ -93,7 +93,7 @@ extension PhotoFindViewController {
             $0.color = UIColor.secondaryLabel
         }
         
-        let results = " results.".set(style: textStyle)
+        let results = " results".set(style: textStyle)
         
         let attributedText = "\(howMany)".set(style: textStyle) + results
         promptLabel.attributedText = attributedText

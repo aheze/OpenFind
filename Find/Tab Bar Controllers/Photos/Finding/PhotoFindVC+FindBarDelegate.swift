@@ -36,7 +36,7 @@ extension PhotoFindViewController: FindBarDelegate {
         print("pressedReturn findbar------------")
         
 //        promptLabel.text = "Hello"
-        setPromptToFastFinding()
+        setPromptToHowManyFastFound(howMany: 0)
         fastFind()
     }
     

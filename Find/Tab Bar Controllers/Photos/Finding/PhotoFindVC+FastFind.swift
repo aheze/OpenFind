@@ -90,6 +90,7 @@ extension PhotoFindViewController {
             UIView.animate(withDuration: 0.6, animations: {
                 self.progressView.setProgress(Float(individualProgress), animated: true)
             })
+            self.setPromptToHowManyFastFound(howMany: self.numberFastFound)
         }
         
         guard let results = request?.results, results.count > 0 else {
