@@ -55,7 +55,6 @@ class ZoomDismissalInteractionController: NSObject {
         toVC.tabBarController?.tabBar.alpha = 1 - backgroundAlpha
         
         if gestureRecognizer.state == .ended {
-            print("ended")
             let velocity = gestureRecognizer.velocity(in: fromVC.view)
             if velocity.y < 0 || newCenter.y < anchorPoint.y {
                 
@@ -87,6 +86,9 @@ class ZoomDismissalInteractionController: NSObject {
                 return
             }
             
+            if animator.cameFromFind {
+                transitionImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+            }
             //start animation
             let finalTransitionSize = toReferenceImageViewFrame
             
@@ -96,8 +98,9 @@ class ZoomDismissalInteractionController: NSObject {
                            animations: {
                             fromVC.view.alpha = 0
                             transitionImageView.frame = finalTransitionSize
-                            toVC.tabBarController?.tabBar.alpha = 1
-                            
+                            if animator.cameFromFind {
+                                transitionImageView.layer.cornerRadius = 8
+                            }
             }, completion: { completed in
                 animator.finishedDismissing = true
                 
@@ -139,7 +142,6 @@ class ZoomDismissalInteractionController: NSObject {
 
 extension ZoomDismissalInteractionController: UIViewControllerInteractiveTransitioning {
     func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
-        print("Start tansition")
         self.transitionContext = transitionContext
         
         let containerView = transitionContext.containerView

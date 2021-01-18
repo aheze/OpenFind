@@ -120,6 +120,7 @@ class ZoomAnimator: NSObject {
         }
         
         if cameFromFind {
+            transitionImageView?.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
             containerView.insertSubview(fromVC.view, aboveSubview: toVC.view)
             containerView.bringSubviewToFront(transitionImageView!)
             fromReferenceImageView.isHidden = true
@@ -136,9 +137,10 @@ class ZoomAnimator: NSObject {
                        animations: {
                         fromVC.view.alpha = 0
                         self.transitionImageView?.frame = finalTransitionSize
+                        if self.cameFromFind {
+                            self.transitionImageView?.layer.cornerRadius = 8
+                        }
         }, completion: { completed in
-            
-            print("finish trans")
             self.finishedDismissing = true
             
             self.transitionImageView?.removeFromSuperview()
@@ -149,18 +151,6 @@ class ZoomAnimator: NSObject {
             self.toDelegate?.transitionDidEndWith(zoomAnimator: self)
             self.fromDelegate?.transitionDidEndWith(zoomAnimator: self)
 
-            
-            //                self.transitionImageView?.removeFromSuperview()
-            //                toReferenceImageView.isHidden = false
-            //                fromReferenceImageView.isHidden = false
-            //
-            //                self.finishedDismissing = true
-            //                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-            //
-            //
-            //                self.toDelegate?.transitionDidEndWith(zoomAnimator: self)
-            //                self.fromDelegate?.transitionDidEndWith(zoomAnimator: self)
-            
         })
     }
     
