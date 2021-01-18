@@ -162,7 +162,13 @@ extension ZoomDismissalInteractionController: UIViewControllerInteractiveTransit
         
         let referenceImage = fromReferenceImageView.image!
         
-        containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
+        if animator.cameFromFind {
+            print("from find")
+            ///Had to flip fromVC and toVC for the dismiss to NOT result in a black screen!
+            containerView.insertSubview(fromVC.view, aboveSubview: toVC.view)
+        } else {
+            containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
+        }
         if animator.transitionImageView == nil {
             let transitionImageView = UIImageView(image: referenceImage)
             transitionImageView.contentMode = .scaleAspectFill
