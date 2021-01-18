@@ -2326,7 +2326,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="618.84057971014499" y="-371.65178571428572"/>
+            <point key="canvasLocation" x="3043" y="-1729"/>
         </scene>
         <!--Credits View Controller-->
         <scene sceneID="MBY-WC-INM">
@@ -3519,7 +3519,7 @@ the App!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iU3-Eo-ItR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-30" y="-1636"/>
+            <point key="canvasLocation" x="-15" y="-1667"/>
         </scene>
         <!--Photos View Controller-->
         <scene sceneID="uxz-7q-vwR">
@@ -3839,7 +3839,7 @@ the App!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZYe-C8-ayo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="614.49275362318849" y="-1123.6607142857142"/>
+            <point key="canvasLocation" x="744" y="-1666"/>
         </scene>
         <!--Caching View Controller-->
         <scene sceneID="HKu-sR-xuZ">
@@ -4359,7 +4359,7 @@ the App!</string>
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="1424.6376811594205" y="-934.15178571428567"/>
+            <point key="canvasLocation" x="3800" y="-1729"/>
         </scene>
         <!--Photo Slides View Controller-->
         <scene sceneID="yVk-ZI-3KQ">
@@ -4375,21 +4375,61 @@ the App!</string>
                                     <segue destination="Y0h-2n-qcz" kind="embed" id="vDt-Ux-qSh"/>
                                 </connections>
                             </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jB3-ed-Bdr">
+                                <rect key="frame" x="16" y="16.000000000000004" width="80.666666666666671" height="36.333333333333343"/>
+                                <subviews>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tUv-4R-c5U">
+                                        <rect key="frame" x="0.0" y="0.0" width="80.666666666666671" height="36.333333333333336"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="W9A-sZ-kHI">
+                                            <rect key="frame" x="0.0" y="0.0" width="80.666666666666671" height="36.333333333333336"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                        <blurEffect style="prominent"/>
+                                    </visualEffectView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tkG-FL-Vjn">
+                                        <rect key="frame" x="15.999999999999996" y="7.9999999999999982" width="48.666666666666657" height="20.333333333333329"/>
+                                        <color key="tintColor" name="TabIconPhotosMain"/>
+                                        <state key="normal" title="Back" image="chevron.backward" catalog="system">
+                                            <color key="titleColor" name="TabIconPhotosMain"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backBlurButtonPressed:" destination="ftn-4Q-7W3" eventType="touchUpInside" id="4Nl-07-0Eg"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="tkG-FL-Vjn" secondAttribute="bottom" constant="8" id="DOA-MW-sSM"/>
+                                    <constraint firstAttribute="bottom" secondItem="tUv-4R-c5U" secondAttribute="bottom" id="Gbj-Kq-b9t"/>
+                                    <constraint firstItem="tUv-4R-c5U" firstAttribute="top" secondItem="jB3-ed-Bdr" secondAttribute="top" id="II7-mC-FsF"/>
+                                    <constraint firstAttribute="trailing" secondItem="tUv-4R-c5U" secondAttribute="trailing" id="abQ-2C-X4U"/>
+                                    <constraint firstItem="tkG-FL-Vjn" firstAttribute="top" secondItem="jB3-ed-Bdr" secondAttribute="top" constant="8" id="dfI-SY-eL8"/>
+                                    <constraint firstItem="tkG-FL-Vjn" firstAttribute="leading" secondItem="jB3-ed-Bdr" secondAttribute="leading" constant="16" id="lbP-LN-idt"/>
+                                    <constraint firstItem="tUv-4R-c5U" firstAttribute="leading" secondItem="jB3-ed-Bdr" secondAttribute="leading" id="nIk-07-lJ4"/>
+                                    <constraint firstAttribute="trailing" secondItem="tkG-FL-Vjn" secondAttribute="trailing" constant="16" id="ujV-om-8CM"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xfy-aH-kmF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="6tX-E6-tlq" secondAttribute="trailing" id="Ldq-qD-lZj"/>
                             <constraint firstItem="6tX-E6-tlq" firstAttribute="leading" secondItem="q1B-6m-Sbl" secondAttribute="leading" id="TBc-5A-J33"/>
+                            <constraint firstItem="jB3-ed-Bdr" firstAttribute="leading" secondItem="xfy-aH-kmF" secondAttribute="leading" constant="16" id="Vek-5E-Ey1"/>
                             <constraint firstAttribute="bottom" secondItem="6tX-E6-tlq" secondAttribute="bottom" id="Vii-ur-7Za"/>
                             <constraint firstItem="6tX-E6-tlq" firstAttribute="top" secondItem="q1B-6m-Sbl" secondAttribute="top" id="nTh-GN-eQO"/>
+                            <constraint firstItem="jB3-ed-Bdr" firstAttribute="top" secondItem="xfy-aH-kmF" secondAttribute="top" constant="16" id="tt4-6u-ERZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wQi-gR-ZkJ"/>
+                    <connections>
+                        <outlet property="backBlurView" destination="tUv-4R-c5U" id="UJj-Lu-739"/>
+                        <outlet property="backButtonView" destination="jB3-ed-Bdr" id="qtV-4i-ZG4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I4j-4R-aY6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2152.1739130434785" y="-871.20535714285711"/>
+            <point key="canvasLocation" x="744" y="-990"/>
         </scene>
         <!--Photo Page Container View Controller-->
         <scene sceneID="1OH-r9-WSZ">
@@ -4574,7 +4614,7 @@ the App!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eiz-PJ-Gbo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1398.5507246376812" y="-218.30357142857142"/>
+            <point key="canvasLocation" x="4605" y="-1729"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="oSE-tP-tAc">
@@ -4582,7 +4622,7 @@ the App!</string>
                 <pageViewController automaticallyAdjustsScrollViewInsets="NO" transitionStyle="scroll" pageSpacing="10" navigationOrientation="horizontal" spineLocation="none" id="bTz-Zg-Ooa" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eo1-ra-sxT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2145" y="-217"/>
+            <point key="canvasLocation" x="5348" y="-1729"/>
         </scene>
         <!--Photo Zoom View Controller-->
         <scene sceneID="xfF-oY-1vh">
@@ -4662,7 +4702,7 @@ the App!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vjC-8K-o1d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2814" y="-217"/>
+            <point key="canvasLocation" x="6083" y="-1730"/>
         </scene>
         <!--Lists Builder Tutorial View Controller-->
         <scene sceneID="As3-ca-tRk">
@@ -4869,7 +4909,7 @@ the App!</string>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" transitionStyle="scroll" pageSpacing="10" navigationOrientation="horizontal" spineLocation="none" id="Y0h-2n-qcz" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="002-Ue-Asl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2941" y="-871"/>
+            <point key="canvasLocation" x="1532" y="-990"/>
         </scene>
         <!--Slide View Controller-->
         <scene sceneID="Iyp-5u-6q4">
@@ -4934,7 +4974,7 @@ the App!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yqX-LQ-5vD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3616.8224299065419" y="-867.60259179265665"/>
+            <point key="canvasLocation" x="2209" y="-986"/>
         </scene>
     </scenes>
     <designables>
@@ -4959,6 +4999,7 @@ the App!</string>
         <image name="arrow.down" catalog="system" width="120" height="128"/>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>
+        <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="chevron.compact.down" catalog="system" width="128" height="43"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="folder.fill.badge.plus" catalog="system" width="128" height="91"/>

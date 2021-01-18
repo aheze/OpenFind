@@ -27,7 +27,6 @@ class PhotoSlidesViewController: UIViewController {
     }
     
     // MARK: Data source
-//    var findPhotos = [FindPhoto]() /// click in Photos
     var currentIndex = 0
     var firstPlaceholderImage: UIImage? /// from the collection view
     
@@ -35,6 +34,16 @@ class PhotoSlidesViewController: UIViewController {
     var cameFromFind = false
     var resultPhotos = [ResultPhoto]() /// photos from Finding
     var matchToColors = [String: [CGColor]]()
+    
+    // MARK: Finding back button
+    @IBOutlet weak var backButtonView: UIView!
+    @IBOutlet weak var backBlurView: UIVisualEffectView!
+    @IBAction func backBlurButtonPressed(_ sender: Any) {
+        self.transitionController.animator.cameFromFind = true
+        self.transitionController.isInteractive = false
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     // MARK: Transitioning
     var transitionController = ZoomTransitionController()
@@ -54,6 +63,13 @@ class PhotoSlidesViewController: UIViewController {
         
         self.title = "Photo"
         navigationItem.largeTitleDisplayMode = .never
+        
+        backBlurView.clipsToBounds = true
+        backBlurView.layer.cornerRadius = 6
+        
+        if !cameFromFind {
+            backButtonView.removeFromSuperview()
+        }
     }
     
     // MARK: Delegate back to PhotosVC

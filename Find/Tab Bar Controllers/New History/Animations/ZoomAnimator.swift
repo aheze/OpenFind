@@ -120,14 +120,10 @@ class ZoomAnimator: NSObject {
         }
         
         if cameFromFind {
-            containerView.insertSubview(fromVC.view, belowSubview: toVC.view)
-            fromReferenceImageView.isHidden = false
-            fromReferenceImageView.alpha = 1
-            UIView.animate(withDuration: 0.2, animations: {
-                fromReferenceImageView.alpha = 0
-            }) { _ in
-                fromReferenceImageView.isHidden = true
-            }
+            containerView.insertSubview(fromVC.view, aboveSubview: toVC.view)
+            containerView.sendSubviewToBack(toVC.view)
+            containerView.bringSubviewToFront(transitionImageView!)
+            fromReferenceImageView.isHidden = true
         } else {
             containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
             fromReferenceImageView.isHidden = true
@@ -141,7 +137,6 @@ class ZoomAnimator: NSObject {
                        animations: {
                         fromVC.view.alpha = 0
                         self.transitionImageView?.frame = finalTransitionSize
-                        toVC.tabBarController?.tabBar.alpha = 1
         }, completion: { completed in
             
             print("finish trans")
@@ -155,6 +150,17 @@ class ZoomAnimator: NSObject {
             self.toDelegate?.transitionDidEndWith(zoomAnimator: self)
             self.fromDelegate?.transitionDidEndWith(zoomAnimator: self)
 
+            
+            //                self.transitionImageView?.removeFromSuperview()
+            //                toReferenceImageView.isHidden = false
+            //                fromReferenceImageView.isHidden = false
+            //
+            //                self.finishedDismissing = true
+            //                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            //
+            //
+            //                self.toDelegate?.transitionDidEndWith(zoomAnimator: self)
+            //                self.fromDelegate?.transitionDidEndWith(zoomAnimator: self)
             
         })
     }

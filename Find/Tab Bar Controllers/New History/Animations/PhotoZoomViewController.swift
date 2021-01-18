@@ -102,7 +102,7 @@ class PhotoZoomViewController: UIViewController {
     }
     func scaleInHighlight(component: Component, unsure: Bool = false) {
         guard let colors = matchToColors[component.text] else { print("NO COLORS! scalee"); return }
-        
+      
         DispatchQueue.main.async {
             
             let layer = CAShapeLayer()
