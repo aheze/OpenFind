@@ -11,6 +11,7 @@ import UIKit
 extension PhotoFindViewController {
     
     func referenceImageView(for zoomAnimator: ZoomAnimator) -> UIImageView? {
+        print("ref")
         guard let selectedIndexPath = selectedIndexPath else { return nil }
         //Get a guarded reference to the cell's UIImageView
         let referenceImageView = getImageViewFromCollectionViewCell(for: selectedIndexPath)
@@ -19,7 +20,7 @@ extension PhotoFindViewController {
     }
     
     func referenceImageViewFrameInTransitioningView(for zoomAnimator: ZoomAnimator) -> CGRect? {
-        
+    print("ref 2")
         guard let selectedIndexPath = selectedIndexPath else { return nil }
         
         self.view.layoutIfNeeded()
@@ -45,7 +46,7 @@ extension PhotoFindViewController {
     //This function prevents the collectionView from accessing a deallocated cell. In the event
     //that the cell for the selectedIndexPath is nil, a default UIImageView is returned in its place
     func getImageViewFromCollectionViewCell(for selectedIndexPath: IndexPath) -> UIImageView {
-        
+        print("Get im")
         //Get the array of visible cells in the collectionView
         if let visibleCells = self.tableView.indexPathsForVisibleRows {
             
@@ -95,7 +96,7 @@ extension PhotoFindViewController {
     //This function prevents the collectionView from accessing a deallocated cell. In the
     //event that the cell for the selectedIndexPath is nil, a default CGRect is returned in its place
     func getFrameFromCollectionViewCell(for selectedIndexPath: IndexPath) -> CGRect {
-        
+        print("get frame")
         //Get the currently visible cells from the collectionView
         if let visibleCells = self.tableView.indexPathsForVisibleRows {
             

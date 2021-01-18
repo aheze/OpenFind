@@ -20,7 +20,6 @@ class SlideViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     
     var placeholderImage: UIImage? /// placeholder from the collection view
-//    var findPhoto = FindPhoto()
     var resultPhoto = ResultPhoto()
     var index: Int = 0 /// index of this slide
     

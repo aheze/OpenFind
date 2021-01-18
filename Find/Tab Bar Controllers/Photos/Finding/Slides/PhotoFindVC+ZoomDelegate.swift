@@ -12,7 +12,7 @@ import UIKit
 extension PhotoFindViewController: PhotoSlidesUpdatedIndex {
     
     func indexUpdated(to newIndex: Int) {
-        IndexPath(row: newIndex, section: 0)
+        print("ind updatedt to \(newIndex)")
         let currentPhoto = resultPhotos[newIndex]
         let indexPath = IndexPath(row: newIndex, section: 0)
         

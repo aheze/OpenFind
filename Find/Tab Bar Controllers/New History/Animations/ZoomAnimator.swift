@@ -17,6 +17,8 @@ protocol ZoomAnimatorDelegate: class {
 
 class ZoomAnimator: NSObject {
     
+    var cameFromFind = false /// if this is from Photo Finding
+    
     weak var fromDelegate: ZoomAnimatorDelegate?
     weak var toDelegate: ZoomAnimatorDelegate?
 
@@ -117,8 +119,19 @@ class ZoomAnimator: NSObject {
             containerView.addSubview(transitionImageView)
         }
         
-        containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
-        fromReferenceImageView.isHidden = true
+        if cameFromFind {
+            containerView.insertSubview(fromVC.view, belowSubview: toVC.view)
+            fromReferenceImageView.isHidden = false
+            fromReferenceImageView.alpha = 1
+            UIView.animate(withDuration: 0.2, animations: {
+                fromReferenceImageView.alpha = 0
+            }) { _ in
+                fromReferenceImageView.isHidden = true
+            }
+        } else {
+            containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
+            fromReferenceImageView.isHidden = true
+        }
         
         let finalTransitionSize = toReferenceImageViewFrame
         

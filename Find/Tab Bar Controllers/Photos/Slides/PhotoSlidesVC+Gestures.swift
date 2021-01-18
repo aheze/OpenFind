@@ -11,11 +11,20 @@ import UIKit
 /// Handle gestures
 extension PhotoSlidesViewController {
     @objc func didPanWith(gestureRecognizer: UIPanGestureRecognizer) {
+        if cameFromFind {
+            self.transitionController.animator.cameFromFind = true
+        }
         switch gestureRecognizer.state {
         case .began:
             self.currentViewController.scrollView.isScrollEnabled = false
             self.transitionController.isInteractive = true
-            let _ = self.navigationController?.popViewController(animated: true)
+            
+            if cameFromFind {
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                let _ = self.navigationController?.popViewController(animated: true)
+            }
+            
         case .ended:
             if self.transitionController.isInteractive {
                 self.currentViewController.scrollView.isScrollEnabled = true

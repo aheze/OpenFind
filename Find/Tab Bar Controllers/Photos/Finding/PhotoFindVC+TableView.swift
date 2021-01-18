@@ -105,27 +105,6 @@ extension PhotoFindViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.selectedIndexPath = indexPath
-        
-        print("Tableview did select, \(shouldAllowPressRow), \(fastFinding)")
-        
-        if shouldAllowPressRow && !fastFinding {
-            let slidesViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PhotoSlidesViewController") as! PhotoSlidesViewController
-            
-            slidesViewController.transitioningDelegate = slidesViewController.transitionController
-            slidesViewController.transitionController.fromDelegate = self
-            slidesViewController.transitionController.toDelegate = slidesViewController
-            slidesViewController.updatedIndex = self
-            
-            slidesViewController.resultPhotos = resultPhotos
-            
-            slidesViewController.currentIndex = indexPath.item
-
-            
-            slidesViewController.matchToColors = matchToColors
-            slidesViewController.cameFromFind = true
-            
-            self.present(slidesViewController, animated: true)
-        }
+        presentFromIndexPath(indexPath: indexPath)
     }
 }

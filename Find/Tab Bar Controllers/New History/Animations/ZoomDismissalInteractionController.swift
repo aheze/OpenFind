@@ -17,7 +17,9 @@ class ZoomDismissalInteractionController: NSObject {
     var toReferenceImageViewFrame: CGRect?
     
     func didPanWith(gestureRecognizer: UIPanGestureRecognizer) {
+        print("Did pan with...")
         
+        print(transitionContext, animator)
         guard let transitionContext = self.transitionContext,
             let animator = self.animator as? ZoomAnimator,
             let transitionImageView = animator.transitionImageView,
@@ -29,7 +31,7 @@ class ZoomDismissalInteractionController: NSObject {
             let toReferenceImageViewFrame = self.toReferenceImageViewFrame else {
                 return
         }
-        
+        print("has")
         
         fromReferenceImageView.isHidden = true
         
@@ -53,7 +55,7 @@ class ZoomDismissalInteractionController: NSObject {
         toVC.tabBarController?.tabBar.alpha = 1 - backgroundAlpha
         
         if gestureRecognizer.state == .ended {
-            
+            print("ended")
             let velocity = gestureRecognizer.velocity(in: fromVC.view)
             if velocity.y < 0 || newCenter.y < anchorPoint.y {
                 
@@ -137,6 +139,7 @@ class ZoomDismissalInteractionController: NSObject {
 
 extension ZoomDismissalInteractionController: UIViewControllerInteractiveTransitioning {
     func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
+        print("Start tansition")
         self.transitionContext = transitionContext
         
         let containerView = transitionContext.containerView

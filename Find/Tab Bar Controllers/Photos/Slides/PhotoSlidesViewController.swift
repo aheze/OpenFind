@@ -54,14 +54,6 @@ class PhotoSlidesViewController: UIViewController {
         
         self.title = "Photo"
         navigationItem.largeTitleDisplayMode = .never
-        
-        print("Loaded")
-//        photoSlideControlPressed = { [weak self] action in
-//            guard let self = self else { return }
-//            
-//            print("Action: \(action)")
-//            
-//        }
     }
     
     // MARK: Delegate back to PhotosVC
