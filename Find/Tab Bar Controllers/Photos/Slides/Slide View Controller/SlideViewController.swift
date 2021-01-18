@@ -7,13 +7,12 @@
 //
 
 import UIKit
-//import SDWebImage
-//import SDWebImagePhotosPlugin
 import Photos
 
 /// each slide in the slides
 class SlideViewController: UIViewController {
     
+    var cameFromFind = false
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -22,6 +21,12 @@ class SlideViewController: UIViewController {
     var placeholderImage: UIImage? /// placeholder from the collection view
     var resultPhoto = ResultPhoto()
     var index: Int = 0 /// index of this slide
+    
+    // MARK: Drawing
+    @IBOutlet weak var drawingView: UIView!
+    var highlights = [Component]()
+    var matchToColors = [String: [CGColor]]()
+    var drawnHighlights = [Component: UIView]() /// the highlights that have already been drawn
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +45,20 @@ class SlideViewController: UIViewController {
                 self.imageView.image = photo
             }
         })
+        
+        if cameFromFind {
+            view.layoutIfNeeded()
+            DispatchQueue.main.async {
+                self.drawHighlights()
+            }
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        view.layoutIfNeeded()
+        print("layout, draw bounds NOW at  \(self.drawingView.bounds)")
+        updateHighlightFrames()
     }
 }
 

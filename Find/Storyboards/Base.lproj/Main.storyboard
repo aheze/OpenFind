@@ -4888,12 +4888,20 @@ the App!</string>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPermissions" translatesAutoresizingMaskIntoConstraints="NO" id="dwe-kN-tFW">
                                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                                             </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P4S-UE-ULS">
+                                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="P4S-UE-ULS" firstAttribute="top" secondItem="OyK-X0-bbG" secondAttribute="top" id="D0d-iy-lQ7"/>
                                             <constraint firstItem="dwe-kN-tFW" firstAttribute="top" secondItem="OyK-X0-bbG" secondAttribute="top" id="LpR-Xj-hAs"/>
                                             <constraint firstAttribute="trailing" secondItem="dwe-kN-tFW" secondAttribute="trailing" id="dDH-4c-hzn"/>
+                                            <constraint firstAttribute="bottom" secondItem="P4S-UE-ULS" secondAttribute="bottom" id="isU-2u-scV"/>
+                                            <constraint firstItem="P4S-UE-ULS" firstAttribute="leading" secondItem="OyK-X0-bbG" secondAttribute="leading" id="npL-cI-l6t"/>
                                             <constraint firstItem="dwe-kN-tFW" firstAttribute="leading" secondItem="OyK-X0-bbG" secondAttribute="leading" id="qox-O3-eFE"/>
+                                            <constraint firstAttribute="trailing" secondItem="P4S-UE-ULS" secondAttribute="trailing" id="rqG-r8-uym"/>
                                             <constraint firstAttribute="bottom" secondItem="dwe-kN-tFW" secondAttribute="bottom" id="to6-ZH-liT"/>
                                         </constraints>
                                     </view>
@@ -4919,13 +4927,14 @@ the App!</string>
                     </view>
                     <connections>
                         <outlet property="contentView" destination="OyK-X0-bbG" id="cUC-0p-iPt"/>
+                        <outlet property="drawingView" destination="P4S-UE-ULS" id="UPi-DC-K3o"/>
                         <outlet property="imageView" destination="dwe-kN-tFW" id="rcq-Do-wX1"/>
                         <outlet property="scrollView" destination="BVi-R5-JQF" id="gEa-za-oS3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yqX-LQ-5vD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3617.3913043478265" y="-867.1875"/>
+            <point key="canvasLocation" x="3616.8224299065419" y="-867.60259179265665"/>
         </scene>
     </scenes>
     <designables>
@@ -4990,7 +4999,7 @@ the App!</string>
             <color red="0.0" green="0.49799999594688416" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Gold">
-            <color red="1" green="0.77647058823529413" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.77600002288818359" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Gray1">
             <color white="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

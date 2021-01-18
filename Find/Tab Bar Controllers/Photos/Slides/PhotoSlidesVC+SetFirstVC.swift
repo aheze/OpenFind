@@ -17,6 +17,12 @@ extension PhotoSlidesViewController {
         viewController.index = currentIndex
         viewController.placeholderImage = firstPlaceholderImage
         
+        if cameFromFind {
+            viewController.cameFromFind = true
+            viewController.highlights = resultPhoto.components
+            viewController.matchToColors = matchToColors
+        }
+        
         let viewControllers = [ viewController ]
             
         self.pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)

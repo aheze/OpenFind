@@ -13,9 +13,7 @@ protocol PhotoSlidesUpdatedIndex: class {
 }
 extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
-    func pageViewController(_ pageViewController: UIPageViewController,
-                            viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        print("before")
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         if currentIndex == 0 {
             return nil
@@ -29,15 +27,17 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
         leftViewController.resultPhoto = leftResultPhoto
         leftViewController.index = currentViewController.index - 1
         
-        print("left index from current vc: \(currentViewController.index - 1)")
-        print("left index from curr: \(currentIndex - 1)")
+        if cameFromFind {
+            leftViewController.cameFromFind = true
+            leftViewController.highlights = leftResultPhoto.components
+            leftViewController.matchToColors = matchToColors
+        }
         
         return leftViewController
         
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        print("after")
         if currentIndex == (self.resultPhotos.count - 1) {
             return nil
         }
@@ -49,6 +49,13 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
         
         rightViewController.resultPhoto = rightResultPhoto
         rightViewController.index = currentViewController.index + 1
+        
+        if cameFromFind {
+            rightViewController.cameFromFind = true
+            print("comps: \(rightResultPhoto.components)")
+            rightViewController.highlights = rightResultPhoto.components
+            rightViewController.matchToColors = matchToColors
+        }
         
         return rightViewController
         

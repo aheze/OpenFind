@@ -45,6 +45,7 @@
 		3C3DF5FF25B52CF000DD7A10 /* PhotoFindVC+ZoomDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3DF5FE25B52CF000DD7A10 /* PhotoFindVC+ZoomDelegate.swift */; };
 		3C4A8E4925AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */; };
 		3C4B6D7325B23460001F501A /* NavigationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4B6D7225B23460001F501A /* NavigationViewModifier.swift */; };
+		3C4C96AB25B5F9DC009FDE8D /* SlideVC+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4C96AA25B5F9DC009FDE8D /* SlideVC+Draw.swift */; };
 		3C4DE6FB259AD3FF0037D104 /* SaveToPhotosButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */; };
 		3C4DE6FC259AD3FF0037D104 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F5259AD3FF0037D104 /* MessageView.xib */; };
 		3C4DE6FD259AD3FF0037D104 /* CacheIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F6259AD3FF0037D104 /* CacheIcon.swift */; };
@@ -268,6 +269,7 @@
 		3C3DF5FE25B52CF000DD7A10 /* PhotoFindVC+ZoomDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+ZoomDelegate.swift"; sourceTree = "<group>"; };
 		3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+ActivityIndicator.swift"; sourceTree = "<group>"; };
 		3C4B6D7225B23460001F501A /* NavigationViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModifier.swift; sourceTree = "<group>"; };
+		3C4C96AA25B5F9DC009FDE8D /* SlideVC+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SlideVC+Draw.swift"; sourceTree = "<group>"; };
 		3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaveToPhotosButton.xib; sourceTree = "<group>"; };
 		3C4DE6F5259AD3FF0037D104 /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
 		3C4DE6F6259AD3FF0037D104 /* CacheIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheIcon.swift; sourceTree = "<group>"; };
@@ -565,12 +567,12 @@
 			isa = PBXGroup;
 			children = (
 				3C56C59D25A956450006A667 /* PhotoSlidesViewController.swift */,
-				3C8CFC5B25AAE02D004FF194 /* PhotoSlidesVC+Actions.swift */,
+				3CFF312725AA496B00D3C56D /* PhotoSlidesVC+Setup.swift */,
 				3C56C5A125A95C970006A667 /* PhotoSlidesVC+SetFirstVC.swift */,
 				3C56C5A525A95D120006A667 /* PhotoSlidesVC+PagingSource.swift */,
 				3C56C5A925A966BA0006A667 /* PhotoSlidesVC+ZoomDelegate.swift */,
-				3CFF312725AA496B00D3C56D /* PhotoSlidesVC+Setup.swift */,
 				3CFF312425AA490900D3C56D /* PhotoSlidesVC+Gestures.swift */,
+				3C8CFC5B25AAE02D004FF194 /* PhotoSlidesVC+Actions.swift */,
 				3C56C5B325AA43760006A667 /* Slide View Controller */,
 			);
 			path = Slides;
@@ -581,6 +583,7 @@
 			children = (
 				3C56C5AD25AA42760006A667 /* SlideViewController.swift */,
 				3C56C5B025AA43210006A667 /* SlideVC+ScrollView.swift */,
+				3C4C96AA25B5F9DC009FDE8D /* SlideVC+Draw.swift */,
 			);
 			path = "Slide View Controller";
 			sourceTree = "<group>";
@@ -1378,6 +1381,7 @@
 				4957157E2368B022007BF68B /* ViewExtensions.swift in Sources */,
 				490DA75D23CBC905000AF57D /* BigMenuButton.swift in Sources */,
 				3CFF312525AA490900D3C56D /* PhotoSlidesVC+Gestures.swift in Sources */,
+				3C4C96AB25B5F9DC009FDE8D /* SlideVC+Draw.swift in Sources */,
 				3C4DE6FF259AD3FF0037D104 /* SaveToPhotosButton.swift in Sources */,
 				49BC783623C8275B003D9904 /* HistorySelect.swift in Sources */,
 				495DAD4724A81F4600D5F844 /* WhatsNewConfiguration.swift in Sources */,
