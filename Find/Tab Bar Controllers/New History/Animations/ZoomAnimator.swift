@@ -121,7 +121,6 @@ class ZoomAnimator: NSObject {
         
         if cameFromFind {
             containerView.insertSubview(fromVC.view, aboveSubview: toVC.view)
-            containerView.sendSubviewToBack(toVC.view)
             containerView.bringSubviewToFront(transitionImageView!)
             fromReferenceImageView.isHidden = true
         } else {
