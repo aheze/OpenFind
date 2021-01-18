@@ -29,6 +29,28 @@ extension PhotoFindViewController: UITableViewDelegate, UITableViewDataSource {
         
         let findModel = resultPhotos[indexPath.row]
         
+        if let model = findModel.findPhoto.editableModel {
+            if model.isDeepSearched {
+                cell.cacheImageView.image = UIImage(named: "CacheActive-Light")
+            } else {
+                cell.cacheImageView.image = nil
+            }
+            if model.isHearted {
+                cell.starImageView.image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate)
+            } else {
+                cell.starImageView.image = nil
+            }
+            if model.isDeepSearched || model.isHearted {
+                cell.shadowImageView.image = UIImage(named: "DownShadow")
+            } else {
+                cell.shadowImageView.image = nil
+            }
+        } else {
+            cell.cacheImageView.image = nil
+            cell.starImageView.image = nil
+            cell.shadowImageView.image = nil
+        }
+        
         var numberText = ""
         if findModel.numberOfMatches == 1 {
             let oneMatch = NSLocalizedString("oneMatch", comment: "Multifile def=1 match")

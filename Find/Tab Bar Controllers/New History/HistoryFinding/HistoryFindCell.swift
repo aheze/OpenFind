@@ -13,6 +13,10 @@ class HistoryFindCell: UITableViewCell {
     @IBOutlet weak var shadowView: CellShadowView!
     
     @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var shadowImageView: UIImageView!
+    @IBOutlet weak var starImageView: UIImageView!
+    @IBOutlet weak var cacheImageView: UIImageView!
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var numberOfMatchesView: UIView!
     @IBOutlet weak var numberOfMatchesLabel: UILabel!
@@ -20,5 +24,7 @@ class HistoryFindCell: UITableViewCell {
     
     @IBOutlet weak var drawingView: UIView!
     @IBOutlet weak var baseView: UIView!
+    
+    
     
 }

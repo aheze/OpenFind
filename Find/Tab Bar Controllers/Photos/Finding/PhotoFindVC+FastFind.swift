@@ -12,6 +12,8 @@ import Vision
 
 extension PhotoFindViewController {
     func fastFind() {
+        var fastFindResultsNumber = 0
+        
         DispatchQueue.main.async {
             self.progressView.setProgress(Float(0), animated: false)
             UIView.animate(withDuration: 2, animations: {
@@ -32,7 +34,8 @@ extension PhotoFindViewController {
                 PHImageManager.default().requestImageDataAndOrientation(for: findPhoto.asset, options: options) { (data, _, _, _) in
                     if let imageData = data {
                         let request = VNRecognizeTextRequest { request, error in
-                            self.handleFastDetectedText(request: request, error: error, photo: findPhoto)
+                            let howManyMatches = self.handleFastDetectedText(request: request, error: error, photo: findPhoto)
+                            fastFindResultsNumber += howManyMatches
                         }
                         request.recognitionLevel = .fast
                         request.recognitionLanguages = ["en_GB"]
@@ -67,7 +70,7 @@ extension PhotoFindViewController {
             DispatchQueue.main.async {
 //                self.showWarning(show: false)
                 
-                self.setPromptToFinishedFastFinding(howMany: self.resultPhotos.count)
+                self.setPromptToFinishedFastFinding(howMany: self.totalCacheResults + fastFindResultsNumber)
                 
                 self.tableView.reloadData()
                 
@@ -82,7 +85,8 @@ extension PhotoFindViewController {
     }
     
     
-    func handleFastDetectedText(request: VNRequest?, error: Error?, photo: FindPhoto) {
+    func handleFastDetectedText(request: VNRequest?, error: Error?, photo: FindPhoto) -> Int {
+        var fastFindResultsNumber = 0
         
         numberFastFound += 1
         DispatchQueue.main.async {
@@ -96,7 +100,7 @@ extension PhotoFindViewController {
         guard let results = request?.results, results.count > 0 else {
             dispatchSemaphore.signal()
             dispatchGroup.leave()
-            return
+            return 0
         }
         
         var contents = [EditableSingleHistoryContent]()
@@ -234,7 +238,7 @@ extension PhotoFindViewController {
                     
                     existingPhoto.components += componentsToAdd
                     existingPhoto.numberOfMatches += newMatchesNumber
-                    
+                    fastFindResultsNumber += newMatchesNumber
                     print("ADD MATCHES: \(newMatchesNumber)")
                     
                 }
@@ -253,12 +257,14 @@ extension PhotoFindViewController {
                 
                 resultPhotos.append(resultPhoto)
                 
+                fastFindResultsNumber = numberOfMatches
             }
         }
         
         dispatchSemaphore.signal()
         dispatchGroup.leave()
         
+        return fastFindResultsNumber
     }
 }
 

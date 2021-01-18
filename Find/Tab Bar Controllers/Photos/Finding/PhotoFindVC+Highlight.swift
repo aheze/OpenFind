@@ -26,7 +26,7 @@ extension PhotoFindViewController {
         let newLayer = CAShapeLayer()
         newLayer.bounds = layer.frame
         newLayer.path = UIBezierPath(roundedRect: layer.frame, cornerRadius: newOrigRect.size.height / 3.5).cgPath
-        newLayer.lineWidth = 2
+        newLayer.lineWidth = 0
         
         if colors.count > 1 {
             
@@ -49,14 +49,12 @@ extension PhotoFindViewController {
             gradient.endPoint = CGPoint(x: 1, y: 0.5)
             gradient.mask = newLayer
             newLayer.fillColor = UIColor.clear.cgColor
-            newLayer.strokeColor = UIColor.black.cgColor
             layer.addSublayer(gradient)
             
         } else {
             layer.addSublayer(newLayer)
             if let firstColor = colors.first {
                 newLayer.fillColor = firstColor.copy(alpha: 0.3)
-                newLayer.strokeColor = firstColor
                 layer.addSublayer(newLayer)
             }
         }

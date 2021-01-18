@@ -65,7 +65,12 @@ extension PhotoFindViewController {
             $0.color = UIColor.secondaryLabel
         }
         
-        let resultsInCache = " results in cached photos. Press ".set(style: textStyle)
+        var results = "results"
+        if howMany == 1 {
+            results = "result"
+        }
+        
+        let resultsInCache = " \(results) in cached photos. Press ".set(style: textStyle)
         let toFindFromPhotos = " to find from uncached photos.".set(style: textStyle)
         
         let nextButtonAttachment = AttributedString(image: Image(named: "NextButton"), bounds: "0,-6,66,24")
@@ -79,11 +84,15 @@ extension PhotoFindViewController {
             $0.color = UIColor.secondaryLabel
         }
         
-        let inProgress = "Finding from uncached photos (".set(style: textStyle)
-        let outOfWhat = "\(howMany)/\(findPhotos.count)".set(style: textStyle)
-        let ending = ")...".set(style: textStyle)
+//        let inProgress = "Finding from uncached photos (".set(style: textStyle)
+//        let outOfWhat = "\(howMany)/\(findPhotos.count)".set(style: textStyle)
+//        let ending = ")...".set(style: textStyle)
         
-        let attributedText = inProgress + outOfWhat + ending
+//        let attributedText = inProgress + outOfWhat + ending
+        
+        
+        
+        let attributedText = "Finding from uncached photos (\(howMany)/\(findPhotos.count))...".set(style: textStyle)
         promptLabel.attributedText = attributedText
     }
     /// Finished searching cache and uncached photos
@@ -93,9 +102,13 @@ extension PhotoFindViewController {
             $0.color = UIColor.secondaryLabel
         }
         
-        let results = " results".set(style: textStyle)
+        var results = "results"
+        if howMany == 1 {
+            results = "result"
+        }
+//        let inPhotos = "in \()"
         
-        let attributedText = "\(howMany)".set(style: textStyle) + results
+        let attributedText = "\(howMany) \(results) in \(resultPhotos.count) photos".set(style: textStyle)
         promptLabel.attributedText = attributedText
     }
 }

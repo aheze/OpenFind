@@ -10,7 +10,9 @@ import UIKit
 
 extension PhotoFindViewController {
     func findFromCache() {
+        totalCacheResults = 0
         var totalMatchNumber = 0
+        
         if numberCurrentlyFindingFromCache == 0 {
             self.shouldAllowPressRow = false
             UIView.animate(withDuration: 0.2, animations: {
@@ -145,6 +147,8 @@ extension PhotoFindViewController {
                     
                     self.tableView.reloadData()
                 }
+                
+                self.totalCacheResults = totalMatchNumber
             }
         }
     }
