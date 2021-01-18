@@ -12,11 +12,16 @@ import Vision
 
 extension PhotoFindViewController {
     func fastFind() {
+//        numberCurrentlyFastFinding += 1
+        let thisProcessIdentifier = UUID()
+        currentFastFindProcess = thisProcessIdentifier
+        
         var fastFindResultsNumber = 0
         
         DispatchQueue.main.async {
+            
             self.progressView.setProgress(Float(0), animated: false)
-            UIView.animate(withDuration: 2, animations: {
+            UIView.animate(withDuration: 0.5, animations: {
                 self.progressView.alpha = 1
                 self.tableView.alpha = 0.5
             })
@@ -26,66 +31,83 @@ extension PhotoFindViewController {
             self.numberFastFound = 0
             
             for findPhoto in self.findPhotos {
-                self.dispatchGroup.enter()
-                
-                let options = PHImageRequestOptions()
-                options.isSynchronous = true
-                
-                PHImageManager.default().requestImageDataAndOrientation(for: findPhoto.asset, options: options) { (data, _, _, _) in
-                    if let imageData = data {
-                        let request = VNRecognizeTextRequest { request, error in
-                            let howManyMatches = self.handleFastDetectedText(request: request, error: error, photo: findPhoto)
-                            fastFindResultsNumber += howManyMatches
+                print("this process: \(thisProcessIdentifier)")
+                print("current process: \(self.currentFastFindProcess)")
+                if thisProcessIdentifier == self.currentFastFindProcess {
+                    self.dispatchGroup.enter()
+                    
+                    let options = PHImageRequestOptions()
+                    options.isSynchronous = true
+                    
+                    PHImageManager.default().requestImageDataAndOrientation(for: findPhoto.asset, options: options) { (data, _, _, _) in
+                        if let imageData = data {
+                            let request = VNRecognizeTextRequest { request, error in
+                                let howManyMatches = self.handleFastDetectedText(request: request, error: error, photo: findPhoto, thisProcessIdentifier: thisProcessIdentifier)
+                                fastFindResultsNumber += howManyMatches
+                            }
+                            request.recognitionLevel = .fast
+                            request.recognitionLanguages = ["en_GB"]
+                            
+                            var customFindArray = [String]()
+                            for findWord in self.matchToColors.keys {
+                                customFindArray.append(findWord)
+                                customFindArray.append(findWord.lowercased())
+                                customFindArray.append(findWord.uppercased())
+                                customFindArray.append(findWord.capitalizingFirstLetter())
+                            }
+                            
+                            request.customWords = customFindArray
+                            
+                            
+                            let imageRequestHandler = VNImageRequestHandler(data: imageData, orientation: .up, options: [:])
+                            do {
+                                try imageRequestHandler.perform([request])
+                            } catch let error {
+                                print("Error: \(error)")
+                            }
+                            
+                            self.dispatchSemaphore.wait()
                         }
-                        request.recognitionLevel = .fast
-                        request.recognitionLanguages = ["en_GB"]
-                        
-                        var customFindArray = [String]()
-                        for findWord in self.matchToColors.keys {
-                            customFindArray.append(findWord)
-                            customFindArray.append(findWord.lowercased())
-                            customFindArray.append(findWord.uppercased())
-                            customFindArray.append(findWord.capitalizingFirstLetter())
-                        }
-                        
-                        request.customWords = customFindArray
-                        
-                        
-                        let imageRequestHandler = VNImageRequestHandler(data: imageData, orientation: .up, options: [:])
-                        do {
-                            try imageRequestHandler.perform([request])
-                        } catch let error {
-                            print("Error: \(error)")
-                        }
-                        
-                        self.dispatchSemaphore.wait()
                     }
+                } else {
+                    break
                 }
             }
         }
         dispatchGroup.notify(queue: dispatchQueue) {
-            self.fastFinding = false
-            print("Finished all requests.")
-            
-            DispatchQueue.main.async {
-//                self.showWarning(show: false)
-                
-                self.setPromptToFinishedFastFinding(howMany: self.totalCacheResults + fastFindResultsNumber)
-                
-                self.tableView.reloadData()
-                
-                self.shouldAllowPressRow = true
-                
-                UIView.animate(withDuration: 0.1, animations: {
-                    self.tableView.alpha = 1
-                    self.progressView.alpha = 0
-                })
+//            self.numberCurrentlyFastFinding -= 1
+//            print("Finished all requests, \(self.numberCurrentlyFastFinding)")
+            if thisProcessIdentifier == self.currentFastFindProcess {
+                DispatchQueue.main.async {
+                    
+                    self.setPromptToFinishedFastFinding(howMany: self.totalCacheResults + fastFindResultsNumber)
+                    
+                    self.tableView.reloadData()
+                    
+                    
+                    UIView.animate(withDuration: 0.1, animations: {
+                        self.tableView.alpha = 1
+                        self.progressView.alpha = 0
+                    })
+                }
+                self.currentFastFindProcess = nil
             }
         }
     }
     
     
-    func handleFastDetectedText(request: VNRequest?, error: Error?, photo: FindPhoto) -> Int {
+    func handleFastDetectedText(request: VNRequest?, error: Error?, photo: FindPhoto, thisProcessIdentifier: UUID) -> Int {
+        
+        guard
+            thisProcessIdentifier == currentFastFindProcess,
+            let results = request?.results,
+            results.count > 0 else {
+            dispatchSemaphore.signal()
+            dispatchGroup.leave()
+            return 0
+        }
+        
+        
         var fastFindResultsNumber = 0
         
         numberFastFound += 1
@@ -95,12 +117,6 @@ extension PhotoFindViewController {
                 self.progressView.setProgress(Float(individualProgress), animated: true)
             })
             self.setPromptToHowManyFastFound(howMany: self.numberFastFound)
-        }
-        
-        guard let results = request?.results, results.count > 0 else {
-            dispatchSemaphore.signal()
-            dispatchGroup.leave()
-            return 0
         }
         
         var contents = [EditableSingleHistoryContent]()

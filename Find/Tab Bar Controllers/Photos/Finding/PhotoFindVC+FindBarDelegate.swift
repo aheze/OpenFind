@@ -23,6 +23,8 @@ extension PhotoFindViewController: FindBarDelegate {
             changePromptToStarting(startingFilter: currentFilter, howManyPhotos: findPhotos.count, isAllPhotos: findingFromAllPhotos)
             resultPhotos.removeAll()
             tableView.reloadData()
+            currentFastFindProcess = nil
+            self.progressView.alpha = 0
         }
         
         

@@ -10,11 +10,14 @@ import UIKit
 
 extension PhotoFindViewController {
     func findFromCache() {
+        print("set to nil")
+        currentFastFindProcess = nil
+        
+        
         totalCacheResults = 0
         var totalMatchNumber = 0
         
         if numberCurrentlyFindingFromCache == 0 {
-            self.shouldAllowPressRow = false
             UIView.animate(withDuration: 0.2, animations: {
                 self.tableView.alpha = 0.5
             })
@@ -138,11 +141,14 @@ extension PhotoFindViewController {
                 self.numberCurrentlyFindingFromCache -= 1
                 
                 if self.numberCurrentlyFindingFromCache == 0 {
-                    self.shouldAllowPressRow = true
+//                    if self.numberCurrentlyFastFinding == 0 {
+                    print("setting")
                     self.setPromptToHowManyCacheResults(howMany: totalMatchNumber)
+//                    }
                     
                     UIView.animate(withDuration: 0.1, animations: {
                         self.tableView.alpha = 1
+                        self.progressView.alpha = 0
                     })
                     
                     self.tableView.reloadData()

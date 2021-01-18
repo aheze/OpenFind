@@ -23,11 +23,7 @@ extension PhotoFindViewController {
     func presentFromIndexPath(indexPath: IndexPath) {
         self.selectedIndexPath = indexPath
         
-        print("Tableview did select, \(shouldAllowPressRow), \(fastFinding)")
-        
-        if shouldAllowPressRow && !fastFinding {
-           
-            
+        if numberCurrentlyFindingFromCache == 0 && currentFastFindProcess == nil {
             
             let slidesViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PhotoSlidesViewController") as! PhotoSlidesViewController
             
