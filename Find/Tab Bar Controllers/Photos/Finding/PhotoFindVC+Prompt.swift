@@ -73,7 +73,7 @@ extension PhotoFindViewController {
         let resultsInCache = " \(results) in cached photos. Press ".set(style: textStyle)
         let toFindFromPhotos = " to find from uncached photos.".set(style: textStyle)
         
-        let nextButtonAttachment = AttributedString(image: Image(named: "NextButton"), bounds: "0,-6,66,24")
+        let nextButtonAttachment = AttributedString(image: Image(named: "ContinueButton"), bounds: "0,-6,84,24")
         
         let attributedText = "\(howMany)".set(style: textStyle) + resultsInCache + nextButtonAttachment! + toFindFromPhotos
         promptLabel.attributedText = attributedText
@@ -83,14 +83,6 @@ extension PhotoFindViewController {
             $0.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             $0.color = UIColor.secondaryLabel
         }
-        
-//        let inProgress = "Finding from uncached photos (".set(style: textStyle)
-//        let outOfWhat = "\(howMany)/\(findPhotos.count)".set(style: textStyle)
-//        let ending = ")...".set(style: textStyle)
-        
-//        let attributedText = inProgress + outOfWhat + ending
-        
-        
         
         let attributedText = "Finding from uncached photos (\(howMany)/\(findPhotos.count))...".set(style: textStyle)
         promptLabel.attributedText = attributedText

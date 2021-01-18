@@ -78,6 +78,7 @@ class PhotosWrapperController: UIViewController {
             self.navController.view.layer.cornerRadius = 16
             self.photoFindViewController.view.frame.origin.y = findOriginY
             self.findShadowView?.frame.origin.y = findOriginY
+            self.navController.viewController.shadeView.alpha = 1
         }
         
         pressedFindBefore = true

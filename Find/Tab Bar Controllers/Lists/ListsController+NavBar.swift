@@ -13,6 +13,7 @@ extension ListsController {
         addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addPressed(sender:)))
         selectButton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectPressed(sender:)))
         
+        selectButton.tintColor = UIColor(named: "ListsText")
         addButton.tintColor = UIColor(hexString: randomizedColor)
         navigationItem.rightBarButtonItems = [addButton, selectButton]
         

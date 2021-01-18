@@ -14,6 +14,9 @@ extension PhotosViewController {
         findButton = UIBarButtonItem(title: "Find", style: .plain, target: self, action: #selector(findPressed(sender:)))
         selectButton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectPressed(sender:)))
         
+        findButton.tintColor = UIColor(named: "TabIconPhotosMain")
+        selectButton.tintColor = UIColor(named: "TabIconPhotosMain")
+        
         navigationItem.rightBarButtonItems = [findButton, selectButton]
     }
     @objc func findPressed(sender: UIBarButtonItem) {

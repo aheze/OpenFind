@@ -70,6 +70,7 @@ class PhotosViewController: UIViewController {
     
     // MARK: Finding
     var switchToFind: ((PhotoFilter, [FindPhoto]) -> Void)?
+    @IBOutlet weak var shadeView: UIView!
     
     @IBOutlet weak var collapseButton: UIButton! /// dismiss Finding
     @IBAction func collapseButtonPressed(_ sender: Any) {

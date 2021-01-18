@@ -3579,6 +3579,10 @@ the App!</string>
                                     <constraint firstAttribute="height" constant="40" id="yTa-ge-OYU"/>
                                 </constraints>
                             </view>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rxq-Q5-k6q">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                <color key="backgroundColor" name="50Black"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKE-Ij-JZI">
                                 <rect key="frame" x="144" y="876" width="140" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3599,12 +3603,16 @@ the App!</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="JKE-Ij-JZI" firstAttribute="centerX" secondItem="LAd-sS-QXd" secondAttribute="centerX" id="0WO-nk-lsn"/>
+                            <constraint firstItem="Rxq-Q5-k6q" firstAttribute="leading" secondItem="LAd-sS-QXd" secondAttribute="leading" id="6sC-Mk-WTH"/>
+                            <constraint firstAttribute="trailing" secondItem="Rxq-Q5-k6q" secondAttribute="trailing" id="76U-Hn-zkM"/>
                             <constraint firstAttribute="trailing" secondItem="0iz-9s-4iE" secondAttribute="trailing" id="CM8-mH-qEP"/>
                             <constraint firstItem="0iz-9s-4iE" firstAttribute="leading" secondItem="LAd-sS-QXd" secondAttribute="leading" id="Cxz-Ho-7I4"/>
                             <constraint firstAttribute="bottom" secondItem="0XE-et-vDj" secondAttribute="bottom" constant="94" id="I3k-SL-fnM"/>
+                            <constraint firstItem="Rxq-Q5-k6q" firstAttribute="top" secondItem="LAd-sS-QXd" secondAttribute="top" id="P34-Ro-vCe"/>
                             <constraint firstItem="y9x-GI-FZm" firstAttribute="trailing" secondItem="0XE-et-vDj" secondAttribute="trailing" constant="20" id="Pgn-0a-37t"/>
                             <constraint firstItem="0iz-9s-4iE" firstAttribute="top" secondItem="LAd-sS-QXd" secondAttribute="top" id="esD-iD-bTd"/>
                             <constraint firstAttribute="bottom" secondItem="0iz-9s-4iE" secondAttribute="bottom" id="iZz-Ot-JK8"/>
+                            <constraint firstAttribute="bottom" secondItem="Rxq-Q5-k6q" secondAttribute="bottom" id="nqO-o5-8Od"/>
                             <constraint firstAttribute="bottom" secondItem="JKE-Ij-JZI" secondAttribute="bottom" id="qOW-TJ-edj"/>
                             <constraint firstItem="0XE-et-vDj" firstAttribute="leading" secondItem="y9x-GI-FZm" secondAttribute="leading" constant="20" id="vld-wK-Wse"/>
                         </constraints>
@@ -3614,6 +3622,7 @@ the App!</string>
                         <outlet property="collectionView" destination="0iz-9s-4iE" id="LLE-S0-QeL"/>
                         <outlet property="segmentedSlider" destination="0XE-et-vDj" id="Dif-0H-LbJ"/>
                         <outlet property="segmentedSliderBottomC" destination="I3k-SL-fnM" id="KJ8-2E-Oeq"/>
+                        <outlet property="shadeView" destination="Rxq-Q5-k6q" id="oeq-e3-b0F"/>
                         <segue destination="ftn-4Q-7W3" kind="show" identifier="ShowSlides" id="8cS-an-jcm"/>
                     </connections>
                 </viewController>
@@ -4981,7 +4990,7 @@ the App!</string>
             <color red="0.0" green="0.49799999594688416" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Gold">
-            <color red="1" green="0.77600002288818359" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.77647058823529413" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Gray1">
             <color white="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
