@@ -143,10 +143,6 @@ extension PhotoFindViewController {
                         self.tableView.alpha = 1
                     })
                     
-                    if resultPhotos.count == 0 {
-                        self.resultPhotos.removeAll()
-                    }
-                    
                     self.tableView.reloadData()
                 }
             }

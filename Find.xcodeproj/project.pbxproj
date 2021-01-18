@@ -39,6 +39,7 @@
 		3C3D47E025A41AEB002B8BBF /* PhotosVC+Diffable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47DF25A41AEB002B8BBF /* PhotosVC+Diffable.swift */; };
 		3C3D47E325A41B9E002B8BBF /* PhotosVC+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47E225A41B9E002B8BBF /* PhotosVC+Cells.swift */; };
 		3C3DF5E025B4A59100DD7A10 /* PhotoFindVC+Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3DF5DF25B4A59100DD7A10 /* PhotoFindVC+Prompt.swift */; };
+		3C3DF5F325B5049900DD7A10 /* PhotoFindVC+FastFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3DF5F225B5049900DD7A10 /* PhotoFindVC+FastFind.swift */; };
 		3C4A8E4925AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */; };
 		3C4B6D7325B23460001F501A /* NavigationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4B6D7225B23460001F501A /* NavigationViewModifier.swift */; };
 		3C4DE6FB259AD3FF0037D104 /* SaveToPhotosButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */; };
@@ -258,6 +259,7 @@
 		3C3D47DF25A41AEB002B8BBF /* PhotosVC+Diffable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Diffable.swift"; sourceTree = "<group>"; };
 		3C3D47E225A41B9E002B8BBF /* PhotosVC+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Cells.swift"; sourceTree = "<group>"; };
 		3C3DF5DF25B4A59100DD7A10 /* PhotoFindVC+Prompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+Prompt.swift"; sourceTree = "<group>"; };
+		3C3DF5F225B5049900DD7A10 /* PhotoFindVC+FastFind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+FastFind.swift"; sourceTree = "<group>"; };
 		3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+ActivityIndicator.swift"; sourceTree = "<group>"; };
 		3C4B6D7225B23460001F501A /* NavigationViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModifier.swift; sourceTree = "<group>"; };
 		3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaveToPhotosButton.xib; sourceTree = "<group>"; };
@@ -650,6 +652,7 @@
 				3C1317EC25B2A73B00FCEB79 /* PhotoFindVC+Setup.swift */,
 				3C1317EF25B3687200FCEB79 /* PhotoFindVC+FindBarDelegate.swift */,
 				3C1317F825B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift */,
+				3C3DF5F225B5049900DD7A10 /* PhotoFindVC+FastFind.swift */,
 				3C1317F225B3817300FCEB79 /* PhotoFindVC+TableView.swift */,
 				3C3DF5DF25B4A59100DD7A10 /* PhotoFindVC+Prompt.swift */,
 				3C1317F525B3829900FCEB79 /* PhotoFindVC+Highlight.swift */,
@@ -1291,6 +1294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C3DF5F325B5049900DD7A10 /* PhotoFindVC+FastFind.swift in Sources */,
 				49563519243694BC0001E8C6 /* PageContainer.swift in Sources */,
 				49B7A33423923E810070209F /* ZoomTransitionController.swift in Sources */,
 				3C71F26225AF6B9900D22212 /* PhotosVC+Cache.swift in Sources */,

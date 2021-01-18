@@ -74,5 +74,29 @@ extension PhotoFindViewController {
         let attributedText = "\(howMany)".set(style: textStyle) + resultsInCache + nextButtonAttachment! + toFindFromPhotos
         promptLabel.attributedText = attributedText
     }
+    func setPromptToFastFinding() {
+        let textStyle = Style {
+            $0.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+            $0.color = UIColor.secondaryLabel
+        }
+        
+        let inProgress = "Finding from uncached photos..."
+        
+        let attributedText = inProgress.set(style: textStyle)
+        promptLabel.attributedText = attributedText
+    }
+    
+    /// Finished searching cache and uncached photos
+    func setPromptToFinishedFastFinding(howMany: Int) {
+        let textStyle = Style {
+            $0.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+            $0.color = UIColor.secondaryLabel
+        }
+        
+        let results = " results.".set(style: textStyle)
+        
+        let attributedText = "\(howMany)".set(style: textStyle) + results
+        promptLabel.attributedText = attributedText
+    }
 }
 

@@ -24,6 +24,13 @@ class PhotoFindViewController: UIViewController {
     var numberCurrentlyFindingFromCache = 0 /// how many cache findings are currently going on
     var deviceWidth = UIScreen.main.bounds.width
     
+    // MARK: Fast find from OCR
+    var fastFinding = false /// currently fast finding or not
+    var numberFastFound = 0 /// how many fast found so far, for the progress view
+    let dispatchGroup = DispatchGroup()
+    let dispatchQueue = DispatchQueue(label: "ocrFastFindQueue")
+    let dispatchSemaphore = DispatchSemaphore(value: 0)
+    
     
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var warningView: UIView! /// ocr search in progress
