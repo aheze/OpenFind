@@ -26,6 +26,9 @@ extension PhotoFindViewController {
         print("Tableview did select, \(shouldAllowPressRow), \(fastFinding)")
         
         if shouldAllowPressRow && !fastFinding {
+           
+            
+            
             let slidesViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PhotoSlidesViewController") as! PhotoSlidesViewController
             
             slidesViewController.transitioningDelegate = slidesViewController.transitionController
@@ -37,10 +40,27 @@ extension PhotoFindViewController {
             slidesViewController.resultPhotos = resultPhotos
             
             slidesViewController.currentIndex = indexPath.item
-
             
             slidesViewController.matchToColors = matchToColors
             slidesViewController.cameFromFind = true
+            
+            if let cell = tableView.cellForRow(at: indexPath) as? HistoryFindCell {
+                slidesViewController.firstPlaceholderImage = cell.photoImageView.image
+                
+                let findPhoto = resultPhotos[indexPath.row].findPhoto
+                if let model = findPhoto.editableModel {
+                    if model.isDeepSearched {
+                        cell.cacheImageView.alpha = 0
+                    }
+                    if model.isHearted {
+                        cell.starImageView.alpha = 0
+                    }
+                    if model.isDeepSearched || model.isHearted {
+                        cell.shadowImageView.alpha = 0
+                    }
+                }
+            }
+            
             
             self.present(slidesViewController, animated: true)
         }

@@ -163,7 +163,6 @@ extension ZoomDismissalInteractionController: UIViewControllerInteractiveTransit
         let referenceImage = fromReferenceImageView.image!
         
         if animator.cameFromFind {
-            print("from find")
             ///Had to flip fromVC and toVC for the dismiss to NOT result in a black screen!
             containerView.insertSubview(fromVC.view, aboveSubview: toVC.view)
         } else {
