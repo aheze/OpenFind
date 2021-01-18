@@ -27,9 +27,14 @@ class PhotoSlidesViewController: UIViewController {
     }
     
     // MARK: Data source
-    var findPhotos = [FindPhoto]() /// click in Photos
+//    var findPhotos = [FindPhoto]() /// click in Photos
     var currentIndex = 0
     var firstPlaceholderImage: UIImage? /// from the collection view
+    
+    // MARK: Finding
+    var cameFromFind = false
+    var resultPhotos = [ResultPhoto]() /// photos from Finding
+    var matchToColors = [String: [CGColor]]()
     
     // MARK: Transitioning
     var transitionController = ZoomTransitionController()

@@ -21,12 +21,12 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
             return nil
         }
         
-        let leftFindPhoto = findPhotos[currentIndex - 1] /// findPhoto for this zoom vc
+        let leftResultPhoto = resultPhotos[currentIndex - 1] /// findPhoto for this zoom vc
         
         guard let currentViewController = viewController as? SlideViewController else { return nil }
         let leftViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SlideViewController") as! SlideViewController
         
-        leftViewController.findPhoto = leftFindPhoto
+        leftViewController.resultPhoto = leftResultPhoto
         leftViewController.index = currentViewController.index - 1
         
         print("left index from current vc: \(currentViewController.index - 1)")
@@ -38,16 +38,16 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         print("after")
-        if currentIndex == (self.findPhotos.count - 1) {
+        if currentIndex == (self.resultPhotos.count - 1) {
             return nil
         }
         
-        let rightFindPhoto = findPhotos[currentIndex + 1] /// findPhoto for this zoom vc
+        let rightResultPhoto = resultPhotos[currentIndex + 1] /// findPhoto for this zoom vc
         
         guard let currentViewController = viewController as? SlideViewController else { return nil }
         let rightViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SlideViewController") as! SlideViewController
         
-        rightViewController.findPhoto = rightFindPhoto
+        rightViewController.resultPhoto = rightResultPhoto
         rightViewController.index = currentViewController.index + 1
         
         return rightViewController

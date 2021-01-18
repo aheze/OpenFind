@@ -12,8 +12,8 @@ extension PhotoSlidesViewController {
     func setFirstVC() {
         let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SlideViewController") as! SlideViewController
         
-        let findPhoto = findPhotos[currentIndex]
-        viewController.findPhoto = findPhoto
+        let resultPhoto = resultPhotos[currentIndex]
+        viewController.resultPhoto = resultPhoto
         viewController.index = currentIndex
         viewController.placeholderImage = firstPlaceholderImage
         

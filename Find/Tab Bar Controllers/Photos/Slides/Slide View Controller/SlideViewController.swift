@@ -20,7 +20,8 @@ class SlideViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     
     var placeholderImage: UIImage? /// placeholder from the collection view
-    var findPhoto = FindPhoto()
+//    var findPhoto = FindPhoto()
+    var resultPhoto = ResultPhoto()
     var index: Int = 0 /// index of this slide
     
     override func viewDidLoad() {
@@ -35,7 +36,7 @@ class SlideViewController: UIViewController {
         let targetSize = CGSize(width: contentView.bounds.width * scale, height: contentView.bounds.height * scale)
         let manager = PHImageManager.default()
         let options = PHImageRequestOptions()
-        manager.requestImage(for: findPhoto.asset, targetSize: targetSize, contentMode: .aspectFit, options: options, resultHandler: { (result, info) in
+        manager.requestImage(for: resultPhoto.findPhoto.asset, targetSize: targetSize, contentMode: .aspectFit, options: options, resultHandler: { (result, info) in
             if let photo = result {
                 self.imageView.image = photo
             }

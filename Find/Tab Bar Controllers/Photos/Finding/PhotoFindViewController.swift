@@ -32,13 +32,17 @@ class PhotoFindViewController: UIViewController {
     let dispatchQueue = DispatchQueue(label: "ocrFastFindQueue")
     let dispatchSemaphore = DispatchSemaphore(value: 0)
     
+    // MARK: Present photo
+    var selectedIndexPath: IndexPath?
+    var currentlyPresentingSlides = false /// whether currently presenting the slides or not
+    var changePresentationMode: ((Bool) -> Void)? /// notify the parent to change the tab bar
     
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var warningView: UIView! /// ocr search in progress
     @IBOutlet weak var warningLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
-    var shouldAllowPressRow = false
+    var shouldAllowPressRow = true
     
     var findPhotos = [FindPhoto]() /// photos to find from
     var resultPhotos = [ResultPhoto]() /// photos displayed in table view

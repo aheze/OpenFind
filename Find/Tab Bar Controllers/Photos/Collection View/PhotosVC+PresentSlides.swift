@@ -21,7 +21,11 @@ extension PhotosViewController {
             slidesViewController.transitionController.toDelegate = slidesViewController
             slidesViewController.updatedIndex = self
             
-            slidesViewController.findPhotos = allPhotosToDisplay
+            slidesViewController.resultPhotos = allPhotosToDisplay.map {
+                let resultPhoto = ResultPhoto()
+                resultPhoto.findPhoto = $0
+                return resultPhoto
+            }
             
             
             if let currentIndex = allPhotosToDisplay.firstIndex(of: findPhoto) {
