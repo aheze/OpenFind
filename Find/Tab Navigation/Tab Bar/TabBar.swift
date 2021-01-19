@@ -192,6 +192,8 @@ class TabBarView: PassthroughView {
         self.clipsToBounds = false
         
         controlsReferenceView.isUserInteractionEnabled = false
+        
+        dimPhotoSlideControls(dim: true, isPhotosControls: true)
     }
     
     func getBlocks(from fromVC: UIViewController, to toVCType: ViewControllerType) -> (

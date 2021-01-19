@@ -61,7 +61,7 @@ extension PhotosViewController: ZoomAnimatorDelegate {
     func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
         print("starting trans, presenting: \(zoomAnimator.isPresenting)")
         if !zoomAnimator.isPresenting {
-            dimSlideControls?(true)
+            dimSlideControls?(true, false)
         }
     }
     
@@ -69,7 +69,7 @@ extension PhotosViewController: ZoomAnimatorDelegate {
         print("end")
         if zoomAnimator.isPresenting == false {
             if zoomAnimator.finishedDismissing == false {
-                dimSlideControls?(false)
+                dimSlideControls?(false, false)
             }
         }
         

@@ -59,13 +59,23 @@ extension TabBarView {
         }
         
     }
-    func dimPhotoSlideControls(dim: Bool) {
-        if dim {
-            photoSlideControls.alpha = 0.5
-            photoSlideControls.isUserInteractionEnabled = false
+    func dimPhotoSlideControls(dim: Bool, isPhotosControls: Bool) {
+        if isPhotosControls {
+            if dim {
+                photosControls.alpha = 0.5
+                photosControls.isUserInteractionEnabled = false
+            } else {
+                photosControls.alpha = 1
+                photosControls.isUserInteractionEnabled = true
+            }
         } else {
-            photoSlideControls.alpha = 1
-            photoSlideControls.isUserInteractionEnabled = true
+            if dim {
+                photoSlideControls.alpha = 0.5
+                photoSlideControls.isUserInteractionEnabled = false
+            } else {
+                photoSlideControls.alpha = 1
+                photoSlideControls.isUserInteractionEnabled = true
+            }
         }
     }
     func updateActions(action: ChangeActions) {

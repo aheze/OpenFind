@@ -64,10 +64,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 guard let self = self else { return }
                 self.tabBarView.updateActions(action: action)
             }
-            viewController.dimSlideControls = { [weak self] dim in
+            viewController.dimSlideControls = { [weak self] (dim, isPhotosControls) in
                 guard let self = self else { return }
-                
-                self.tabBarView.dimPhotoSlideControls(dim: dim)
+                print("dimming")
+                self.tabBarView.dimPhotoSlideControls(dim: dim, isPhotosControls: isPhotosControls)
             }
             
             /// controls in selection

@@ -44,6 +44,12 @@ class PhotosViewController: UIViewController {
         didSet {
             determineActions()
             updateSelectionLabel(to: numberOfSelected)
+            
+            if numberOfSelected == 0 {
+                dimSlideControls?(true, true)
+            } else {
+                dimSlideControls?(false, true)
+            }
         }
     }
     
@@ -55,7 +61,7 @@ class PhotosViewController: UIViewController {
     var changePresentationMode: ((Bool) -> Void)? /// notify the parent to change the tab bar
     var currentSlidesController: PhotoSlidesViewController? /// currently presenting
     var photoSlideControlPressed: ((PhotoSlideAction) -> Void)? /// pressed action in tab bar
-    var dimSlideControls: ((Bool) -> Void)? /// dim the controls during dismissal
+    var dimSlideControls: ((Bool, Bool) -> Void)? /// dim the controls during dismissal, is photos  = true / for dismissal = false
     
     // MARK: Diffable Data Source
     lazy var dataSource = makeDataSource()

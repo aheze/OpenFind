@@ -20,15 +20,16 @@ class ResultPhoto: NSObject {
 extension PhotoFindViewController {
     func populatePhotos(findPhotos: [FindPhoto], currentFilter: PhotoFilter, findingFromAllPhotos: Bool, changedFromBefore: Bool) {
 
-        print("fin phoo count: \(findPhotos.count), all photos? \(findingFromAllPhotos)")
+        let originalFindPhotoIdentifiers = self.findPhotos.map { $0.asset.localIdentifier }
+        let newFindPhotoIdentifiers = findPhotos.map { $0.asset.localIdentifier }
         
-        let originalFindPhotoCount = self.findPhotos.count
+        print(originalFindPhotoIdentifiers.containsSameElements(as: newFindPhotoIdentifiers))
         
         self.findPhotos = findPhotos
         self.currentFilter = currentFilter
         self.findingFromAllPhotos = findingFromAllPhotos
         
-        if changedFromBefore || (originalFindPhotoCount != findPhotos.count) {
+        if changedFromBefore || !originalFindPhotoIdentifiers.containsSameElements(as: newFindPhotoIdentifiers) {
             print("Changed!")
             changePromptToStarting(startingFilter: currentFilter, howManyPhotos: findPhotos.count, isAllPhotos: findingFromAllPhotos)
             currentFastFindProcess = nil
