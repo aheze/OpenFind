@@ -994,7 +994,10 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D0O-zB-X8g">
                                                 <rect key="frame" x="20" y="7.6666666666666643" width="59" height="35"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                <state key="normal" title="Cancel"/>
+                                                <color key="tintColor" name="ListsText"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" name="ListsText"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="cancelButtonPressed:" destination="qXW-1w-dQD" eventType="touchUpInside" id="FiC-lA-lLX"/>
                                                 </connections>
@@ -1008,7 +1011,10 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jCO-rD-51A">
                                                 <rect key="frame" x="367" y="7.6666666666666643" width="41" height="35"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                <state key="normal" title="Save"/>
+                                                <color key="tintColor" name="ListsText"/>
+                                                <state key="normal" title="Save">
+                                                    <color key="titleColor" name="ListsText"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="saveButtonPressed:" destination="qXW-1w-dQD" eventType="touchUpInside" id="ctX-Ir-J0h"/>
                                                 </connections>
@@ -5060,6 +5066,9 @@ the App!</string>
         </namedColor>
         <namedColor name="LinkColor">
             <color red="0.0" green="0.50999999046325684" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ListsText">
+            <color red="1" green="0.61400002241134644" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="PureBlack">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
