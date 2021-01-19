@@ -70,9 +70,13 @@ extension PhotoFindViewController {
         }
         
         let resultsInCache = " \(results) in cached photos. Press ".set(style: textStyle)
-        let toFindFromPhotos = " to find from uncached photos.".set(style: textStyle)
+        var toFindFromPhotos = " to find from uncached photos.".set(style: textStyle)
         
-        let nextButtonAttachment = AttributedString(image: Image(named: "ContinueButton"), bounds: "0,-6,84,24")
+        if currentFilter == .cached {
+            toFindFromPhotos = " to find with OCR again.".set(style: textStyle)
+        }
+        
+        let nextButtonAttachment = AttributedString(image: Image(named: "ContinueButton"), bounds: "0,-6,76,24")
         
         let attributedText = "\(howMany)".set(style: textStyle) + resultsInCache + nextButtonAttachment! + toFindFromPhotos
         promptLabel.attributedText = attributedText
@@ -83,7 +87,12 @@ extension PhotoFindViewController {
             $0.color = UIColor.secondaryLabel
         }
         
-        let attributedText = "Finding from uncached photos (\(howMany)/\(findPhotos.count))...".set(style: textStyle)
+        var attributedText = "Finding from uncached photos (\(howMany)/\(findPhotos.count))...".set(style: textStyle)
+        
+        if currentFilter == .cached {
+            attributedText = "Finding from photos (\(howMany)/\(findPhotos.count))...".set(style: textStyle)
+        }
+        
         promptLabel.attributedText = attributedText
     }
     /// Finished searching cache and uncached photos

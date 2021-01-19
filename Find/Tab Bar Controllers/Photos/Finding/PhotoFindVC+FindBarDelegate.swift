@@ -36,10 +36,10 @@ extension PhotoFindViewController: FindBarDelegate {
     
     func pressedReturn() {
         print("pressedReturn findbar------------")
-        
-//        promptLabel.text = "Hello"
-        setPromptToHowManyFastFound(howMany: 0)
-        fastFind()
+        if numberCurrentlyFindingFromCache == 0 {
+            setPromptToHowManyFastFound(howMany: 0)
+            fastFind()
+        }
     }
     
     func triedToEdit() {
