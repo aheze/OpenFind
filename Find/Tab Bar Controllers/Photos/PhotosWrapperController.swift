@@ -18,7 +18,11 @@ class PhotosWrapperController: UIViewController {
     var photosShadowView: UIView?
     var findShadowView: UIView?
     
+    var currentFilter = PhotoFilter.all
     var photosToFind = [FindPhoto]()
+    var findingFromAllPhotos = false
+    var hasChangedFromBefore = false
+    
     lazy var photoFindViewController: PhotoFindViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "PhotoFindViewController") as? PhotoFindViewController {
@@ -36,15 +40,22 @@ class PhotosWrapperController: UIViewController {
         super.viewDidLoad()
         addChild(navController, in: view)
         
-        navController.viewController.switchToFind = { [weak self] (currentFilter, photosToFindFrom)  in
+        navController.viewController.switchToFind = { [weak self] (currentFilter, photosToFindFrom, isAllPhotos, hasChangedFromBefore)  in
             guard let self = self else { return }
+            print("switching, all? \(isAllPhotos)")
+            self.currentFilter = currentFilter
             self.photosToFind = photosToFindFrom
+            self.findingFromAllPhotos = isAllPhotos
+            self.hasChangedFromBefore = hasChangedFromBefore
             self.switchToFind()
+        }
+        
+        navController.viewController.switchBack = { [weak self] in
+            guard let self = self else { return }
+            self.switchBackToPhotos()
         }
 
         navController.view.clipsToBounds = true
-        
-        
         
     }
     
@@ -73,21 +84,46 @@ class PhotosWrapperController: UIViewController {
         navController.viewController.collectionView.isUserInteractionEnabled = false
         
         UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveLinear) {
+            
+           
             self.navController.view.transform = CGAffineTransform(translationX: 0, y: -translationNeeded)
-            self.photosShadowView?.transform = CGAffineTransform(translationX: 0, y: -translationNeeded)
             self.navController.view.layer.cornerRadius = 16
+            self.navController.viewController.shadeView.alpha = 1
+            self.navController.viewController.segmentedSlider.alpha = 0
+            self.navController.viewController.collapseButton.alpha = 1
+            self.photosShadowView?.transform = CGAffineTransform(translationX: 0, y: -translationNeeded)
+            self.photosShadowView?.alpha = 1
+                        
             self.photoFindViewController.view.frame.origin.y = findOriginY
             self.findShadowView?.frame.origin.y = findOriginY
-            self.navController.viewController.shadeView.alpha = 1
+            self.findShadowView?.alpha = 1
         }
+       
+        photoFindViewController.populatePhotos(findPhotos: photosToFind, currentFilter: currentFilter, findingFromAllPhotos: findingFromAllPhotos, changedFromBefore: hasChangedFromBefore)
         
         pressedFindBefore = true
-       
-        let currentFilter = navController.viewController.currentFilter
-        let howManyPhotosSelected = navController.viewController.numberOfSelected
+    }
+    
+    func switchBackToPhotos() {
+        navController.viewController.collectionView.isUserInteractionEnabled = true
+        photoFindViewController.findBar.searchField.resignFirstResponder()
         
-        photoFindViewController.populatePhotos(findPhotos: photosToFind, currentFilter: currentFilter, findingFromAllPhotos: true)
-        photoFindViewController.changePromptToStarting(startingFilter: currentFilter, howManyPhotos: howManyPhotosSelected, isAllPhotos: true)
+        
+        UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveLinear) {
+            self.navController.view.transform = CGAffineTransform.identity
+            self.navController.view.layer.cornerRadius = 16
+            
+            self.navController.viewController.shadeView.alpha = 0
+            self.navController.viewController.segmentedSlider.alpha = 1
+            self.navController.viewController.collapseButton.alpha = 0
+            
+            self.photosShadowView?.transform = CGAffineTransform.identity
+            self.photosShadowView?.alpha = 0
+            
+            self.photoFindViewController.view.frame.origin.y += self.view.bounds.height
+            self.findShadowView?.frame.origin.y += self.view.bounds.height
+            self.findShadowView?.alpha = 0
+        }
     }
     
     func addShadows() {

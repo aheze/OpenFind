@@ -12,7 +12,6 @@ import Vision
 
 extension PhotoFindViewController {
     func fastFind() {
-//        numberCurrentlyFastFinding += 1
         let thisProcessIdentifier = UUID()
         currentFastFindProcess = thisProcessIdentifier
         
@@ -31,8 +30,6 @@ extension PhotoFindViewController {
             self.numberFastFound = 0
             
             for findPhoto in self.findPhotos {
-                print("this process: \(thisProcessIdentifier)")
-                print("current process: \(self.currentFastFindProcess)")
                 if thisProcessIdentifier == self.currentFastFindProcess {
                     self.dispatchGroup.enter()
                     
@@ -75,8 +72,6 @@ extension PhotoFindViewController {
             }
         }
         dispatchGroup.notify(queue: dispatchQueue) {
-//            self.numberCurrentlyFastFinding -= 1
-//            print("Finished all requests, \(self.numberCurrentlyFastFinding)")
             if thisProcessIdentifier == self.currentFastFindProcess {
                 DispatchQueue.main.async {
                     

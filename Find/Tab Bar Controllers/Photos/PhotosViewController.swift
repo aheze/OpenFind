@@ -69,11 +69,17 @@ class PhotosViewController: UIViewController {
     var selectButton: UIBarButtonItem!
     
     // MARK: Finding
-    var switchToFind: ((PhotoFilter, [FindPhoto]) -> Void)?
+    var hasChangedFromBefore = false /// whether photo deleted, cached, or something changed
+    var switchToFind: ((PhotoFilter, [FindPhoto], Bool, Bool) -> Void)? /// filter, photos to find from, is all photos, has changed from before
+    var switchBack: (() -> Void)?
     @IBOutlet weak var shadeView: UIView!
     
     @IBOutlet weak var collapseButton: UIButton! /// dismiss Finding
     @IBAction func collapseButtonPressed(_ sender: Any) {
+        switchBack?()
+        if selectButtonSelected {
+            showSelectionControls?(true)
+        }
     }
     
     override func viewDidLayoutSubviews() {

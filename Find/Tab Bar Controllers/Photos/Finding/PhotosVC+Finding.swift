@@ -15,23 +15,23 @@ extension PhotosViewController {
         collapseButton.alpha = 0
     }
     func findPressed() {
-        switchToFind?(currentFilter, allPhotosToDisplay)
-        
-        UIView.animate(withDuration: 0.5) {
-            self.segmentedSlider.alpha = 0
-            self.collapseButton.alpha = 1
+        print("Has changed from before? \(hasChangedFromBefore)")
+        if indexPathsSelected.isEmpty {
+            switchToFind?(currentFilter, allPhotosToDisplay, true, hasChangedFromBefore)
+        } else {
+            var findPhotos = [FindPhoto]()
+            for indexPath in indexPathsSelected {
+                if let findPhoto = dataSource.itemIdentifier(for: indexPath) {
+                    findPhotos.append(findPhoto)
+                }
+            }
+            switchToFind?(currentFilter, findPhotos, false, hasChangedFromBefore)
         }
-
-//        switch currentFilter {
-//        case .local:
-//            <#code#>
-//        case .starred:
-//            <#code#>
-//        case .cached:
-//            <#code#>
-//        case .all:
-//            <#code#>
-//        }
         
+        if selectButtonSelected {
+            showSelectionControls?(false)
+        }
+        
+        hasChangedFromBefore = false
     }
 }

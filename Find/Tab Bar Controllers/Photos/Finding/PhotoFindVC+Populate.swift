@@ -18,9 +18,27 @@ class ResultPhoto: NSObject {
 }
 
 extension PhotoFindViewController {
-    func populatePhotos(findPhotos: [FindPhoto], currentFilter: PhotoFilter, findingFromAllPhotos: Bool) {
+    func populatePhotos(findPhotos: [FindPhoto], currentFilter: PhotoFilter, findingFromAllPhotos: Bool, changedFromBefore: Bool) {
+
+        print("fin phoo count: \(findPhotos.count), all photos? \(findingFromAllPhotos)")
+        
+        let originalFindPhotoCount = self.findPhotos.count
+        
         self.findPhotos = findPhotos
         self.currentFilter = currentFilter
         self.findingFromAllPhotos = findingFromAllPhotos
+        
+        if changedFromBefore || (originalFindPhotoCount != findPhotos.count) {
+            print("Changed!")
+            changePromptToStarting(startingFilter: currentFilter, howManyPhotos: findPhotos.count, isAllPhotos: findingFromAllPhotos)
+            currentFastFindProcess = nil
+            resultPhotos.removeAll()
+            tableView.reloadData()
+            tableView.alpha = 1
+            progressView.alpha = 0
+            findBar.clearTextField()
+        }
+        
+        
     }
 }

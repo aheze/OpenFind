@@ -18,7 +18,6 @@ enum ChangeActions {
 extension PhotosViewController {
     func selectPressed() {
         if allPhotosToDisplay.count == 0 {
-//            showNoListsAlert()
             print("no photos")
         } else {
             selectButtonSelected.toggle()
@@ -27,7 +26,6 @@ extension PhotosViewController {
                 selectButton.title = "Cancel"
                 collectionView.allowsMultipleSelection = true
                 segmentedSlider.showNumberOfSelected(show: true)
-//                addButton.isEnabled = false
             } else {
                 selectButton.title = "Select"
                 collectionView.allowsMultipleSelection = false
@@ -35,7 +33,6 @@ extension PhotosViewController {
                 deselectAllPhotos()
                 updateActions?(.shouldStar)
                 updateActions?(.shouldCache)
-//                addButton.isEnabled = true
             }
         }
     }

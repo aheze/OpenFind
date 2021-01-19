@@ -141,10 +141,7 @@ extension PhotoFindViewController {
                 self.numberCurrentlyFindingFromCache -= 1
                 
                 if self.numberCurrentlyFindingFromCache == 0 {
-//                    if self.numberCurrentlyFastFinding == 0 {
-                    print("setting")
                     self.setPromptToHowManyCacheResults(howMany: totalMatchNumber)
-//                    }
                     
                     UIView.animate(withDuration: 0.1, animations: {
                         self.tableView.alpha = 1

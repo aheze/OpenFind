@@ -4376,18 +4376,19 @@ the App!</string>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jB3-ed-Bdr">
-                                <rect key="frame" x="16" y="16.000000000000004" width="80.666666666666671" height="36.333333333333343"/>
+                                <rect key="frame" x="16" y="16" width="88.666666666666671" height="39"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tUv-4R-c5U">
-                                        <rect key="frame" x="0.0" y="0.0" width="80.666666666666671" height="36.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="88.666666666666671" height="39"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="W9A-sZ-kHI">
-                                            <rect key="frame" x="0.0" y="0.0" width="80.666666666666671" height="36.333333333333336"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="88.666666666666671" height="39"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <blurEffect style="prominent"/>
                                     </visualEffectView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tkG-FL-Vjn">
-                                        <rect key="frame" x="15.999999999999996" y="7.9999999999999982" width="48.666666666666657" height="20.333333333333329"/>
+                                        <rect key="frame" x="15.999999999999996" y="8" width="56.666666666666657" height="23"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <color key="tintColor" name="TabIconPhotosMain"/>
                                         <state key="normal" title="Back" image="chevron.backward" catalog="system">
                                             <color key="titleColor" name="TabIconPhotosMain"/>

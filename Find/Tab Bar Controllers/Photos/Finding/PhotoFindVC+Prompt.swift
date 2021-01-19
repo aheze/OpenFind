@@ -16,7 +16,6 @@ enum PromptType {
 }
 extension PhotoFindViewController {
     func changePromptToStarting(startingFilter: PhotoFilter, howManyPhotos: Int, isAllPhotos: Bool) {
-        print("starting, all? \(isAllPhotos)")
          
         let findingFrom = "Finding from "
         let photos = "photos"
@@ -98,7 +97,6 @@ extension PhotoFindViewController {
         if howMany == 1 {
             results = "result"
         }
-//        let inPhotos = "in \()"
         
         let attributedText = "\(howMany) \(results) in \(resultPhotos.count) photos".set(style: textStyle)
         promptLabel.attributedText = attributedText

@@ -437,10 +437,7 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        searchField.text = ""
-        dupPaused = false
-        finalTextToFind = ""
-        sortSearchTerms()
+        clearTextField()
         return true
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -489,6 +486,13 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
             
         }
         return true
+    }
+    
+    func clearTextField() {
+        searchField.text = ""
+        dupPaused = false
+        finalTextToFind = ""
+        sortSearchTerms()
     }
     
     func buttonPressed(button: ToolbarButtonType) {

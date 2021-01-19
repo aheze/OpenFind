@@ -101,12 +101,14 @@ extension PhotosViewController {
         return dataSource
     }
     func applySnapshot(animatingDifferences: Bool = true) {
+        
+        hasChangedFromBefore = true
+        print("APPLYING SNAPSHOT-----------------")
         // 2
         var snapshot = Snapshot()
         // 3
         snapshot.appendSections(monthsToDisplay)
         monthsToDisplay.forEach { month in
-            print("month count: \(month.photos.count)")
             snapshot.appendItems(month.photos, toSection: month)
         }
         // 5
