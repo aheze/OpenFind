@@ -18,6 +18,8 @@ protocol ZoomAnimatorDelegate: class {
 class ZoomAnimator: NSObject {
     
     var cameFromFind = false /// if this is from Photo Finding
+    var photoExists = true /// if deleted, or unstarred/cached
+    
     
     weak var fromDelegate: ZoomAnimatorDelegate?
     weak var toDelegate: ZoomAnimatorDelegate?
@@ -91,12 +93,21 @@ class ZoomAnimator: NSObject {
         
         print("Zoom out")
         
+        var toReferenceImageViewOptional = self.toDelegate?.referenceImageView(for: self)
+        var toReferenceImageViewFrameOptional = self.toDelegate?.referenceImageViewFrameInTransitioningView(for: self)
+        
+        if !photoExists {
+            print("Does no exist")
+            toReferenceImageViewOptional = UIImageView()
+            toReferenceImageViewFrameOptional = CGRect(x: (UIScreen.main.bounds.width / 2) - 50, y: UIScreen.main.bounds.height + 200, width: 100, height: 100)
+        }
+        
         guard let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
             let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
             let fromReferenceImageView = self.fromDelegate?.referenceImageView(for: self),
-            let toReferenceImageView = self.toDelegate?.referenceImageView(for: self),
+            let toReferenceImageView = toReferenceImageViewOptional,
             let fromReferenceImageViewFrame = self.fromDelegate?.referenceImageViewFrameInTransitioningView(for: self),
-            let toReferenceImageViewFrame = self.toDelegate?.referenceImageViewFrameInTransitioningView(for: self)
+            let toReferenceImageViewFrame = toReferenceImageViewFrameOptional
             else {
                 return
         }

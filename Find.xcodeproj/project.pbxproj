@@ -502,9 +502,6 @@
 		3C16EA83259BED9A00D73755 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				49B7A33123923E800070209F /* ZoomTransitionController.swift */,
-				49B7A33223923E800070209F /* ZoomDismissalInteractionController.swift */,
-				49B7A33323923E800070209F /* ZoomAnimator.swift */,
 				49B7A33723923EBD0070209F /* PhotoPageContainerViewController.swift */,
 				49B7A33923923EE00070209F /* PhotoZoomViewController.swift */,
 			);
@@ -552,6 +549,16 @@
 			path = Actions;
 			sourceTree = "<group>";
 		};
+		3C4C96BA25B76FD5009FDE8D /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				49B7A33123923E800070209F /* ZoomTransitionController.swift */,
+				49B7A33223923E800070209F /* ZoomDismissalInteractionController.swift */,
+				49B7A33323923E800070209F /* ZoomAnimator.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		3C4DE6F3259AD3FF0037D104 /* Camera Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -588,6 +595,7 @@
 				3C56C5A925A966BA0006A667 /* PhotoSlidesVC+ZoomDelegate.swift */,
 				3CFF312425AA490900D3C56D /* PhotoSlidesVC+Gestures.swift */,
 				3C56C5B325AA43760006A667 /* Slide View Controller */,
+				3C4C96BA25B76FD5009FDE8D /* Animations */,
 			);
 			path = Slides;
 			sourceTree = "<group>";

@@ -25,6 +25,7 @@ extension PhotoSlidesViewController {
                     }
                     editableModel.isHearted = false /// also change the editable model
                     updateActions?(.shouldStar)
+                    findPhotoChanged?(currentIndex)
                 } else {
                     do {
                         try realm.write {
@@ -35,6 +36,7 @@ extension PhotoSlidesViewController {
                     }
                     editableModel.isHearted = true /// also change the editable model
                     updateActions?(.shouldNotStar)
+                    findPhotoChanged?(currentIndex)
                 }
             }
         } else {
@@ -52,6 +54,7 @@ extension PhotoSlidesViewController {
                 print("Error saving model \(error)")
             }
             updateActions?(.shouldStar)
+            findPhotoChanged?(currentIndex)
             
             let editableModel = EditableHistoryModel()
             editableModel.assetIdentifier = assetIdentifier

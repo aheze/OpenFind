@@ -36,7 +36,18 @@ extension PhotosViewController {
                 guard let self = self else { return }
                 self.updateSlideActions?(newAction)
             }
-            
+            slidesViewController.findPhotoChanged = { [weak self] index in
+                guard let self = self else { return }
+                self.slidesChanged(at: index)
+            }
+            slidesViewController.checkIfPhotoExists = { [weak self] findPhoto in
+                guard let self = self else { return false }
+                if self.allPhotosToDisplay.contains(where: { $0.asset.localIdentifier == findPhoto.asset.localIdentifier }) {
+                    print("Contains!")
+                    return true
+                }
+                return false
+            }
             if let currentIndex = allPhotosToDisplay.firstIndex(of: findPhoto) {
                 slidesViewController.currentIndex = currentIndex
             }

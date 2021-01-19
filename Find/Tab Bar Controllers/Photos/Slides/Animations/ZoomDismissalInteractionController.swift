@@ -17,21 +17,18 @@ class ZoomDismissalInteractionController: NSObject {
     var toReferenceImageViewFrame: CGRect?
     
     func didPanWith(gestureRecognizer: UIPanGestureRecognizer) {
-        print("Did pan with...")
         
-        print(transitionContext, animator)
         guard let transitionContext = self.transitionContext,
             let animator = self.animator as? ZoomAnimator,
             let transitionImageView = animator.transitionImageView,
             let fromVC = transitionContext.viewController(forKey: .from),
             let toVC = transitionContext.viewController(forKey: .to),
             let fromReferenceImageView = animator.fromDelegate?.referenceImageView(for: animator),
-            let toReferenceImageView = animator.toDelegate?.referenceImageView(for: animator),
+            let toReferenceImageView = animator.photoExists ? animator.toDelegate?.referenceImageView(for: animator) : UIImageView(),
             let fromReferenceImageViewFrame = self.fromReferenceImageViewFrame,
-            let toReferenceImageViewFrame = self.toReferenceImageViewFrame else {
+            let toReferenceImageViewFrame = animator.photoExists ? self.toReferenceImageViewFrame : CGRect(x: (UIScreen.main.bounds.width / 2) - 50, y: UIScreen.main.bounds.height + 200, width: 100, height: 100) else {
                 return
         }
-        print("has")
         
         fromReferenceImageView.isHidden = true
         

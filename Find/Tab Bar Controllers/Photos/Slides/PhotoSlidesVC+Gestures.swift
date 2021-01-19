@@ -12,9 +12,9 @@ import UIKit
 extension PhotoSlidesViewController {
     @objc func didPanWith(gestureRecognizer: UIPanGestureRecognizer) {
         if cameFromFind {
-            print("cam from fine")
             self.transitionController.animator.cameFromFind = true
         }
+        
         switch gestureRecognizer.state {
         case .began:
             self.currentViewController.scrollView.isScrollEnabled = false
