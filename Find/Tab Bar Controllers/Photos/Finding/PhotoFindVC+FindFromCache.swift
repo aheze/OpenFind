@@ -32,9 +32,7 @@ extension PhotoFindViewController {
             for findPhoto in self.findPhotos {
                 
                 guard let editableModel = findPhoto.editableModel else { continue }
-                
-                
-                print("searching in photo")
+                  
                 var numberOfMatches = 0 /// how many individual matches
                 
                 let resultPhoto = ResultPhoto()
