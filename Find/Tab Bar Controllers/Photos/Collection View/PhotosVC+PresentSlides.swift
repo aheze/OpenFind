@@ -27,6 +27,15 @@ extension PhotosViewController {
                 return resultPhoto
             }
             
+            slidesViewController.getRealModel = { [weak self] editableModel in
+                guard let self = self else { return nil }
+                return self.getRealRealmModel(from: editableModel)
+            }
+            
+            slidesViewController.updateActions = { [weak self] newAction in
+                guard let self = self else { return }
+                self.updateSlideActions?(newAction)
+            }
             
             if let currentIndex = allPhotosToDisplay.firstIndex(of: findPhoto) {
                 slidesViewController.currentIndex = currentIndex

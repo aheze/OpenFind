@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class PhotoSlidesViewController: UIViewController {
     
@@ -44,15 +45,16 @@ class PhotoSlidesViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    // MARK: Actions
+    let realm = try! Realm()
+    var getRealModel: ((EditableHistoryModel) -> HistoryModel?)?
+    var updateActions: ((ChangeActions) -> Void)? /// switch star/unstar and cache/uncache
     
     // MARK: Transitioning
     var transitionController = ZoomTransitionController()
     
     // MARK: Gestures
     var panGestureRecognizer: UIPanGestureRecognizer!
-    
-    // MARK: Actions
-    var photoSlideControlPressed: ((PhotoSlideAction) -> Void)? /// pressed action in tab bar
     
     override func viewDidLoad() {
         super.viewDidLoad()

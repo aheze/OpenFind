@@ -62,7 +62,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             viewController.updateActions = { [weak self] action in
                 guard let self = self else { return }
-                self.tabBarView.updateActions(action: action)
+                self.tabBarView.updateActions(action: action, isPhotosControls: true)
+            }
+            viewController.updateSlideActions = { [weak self] action in
+                guard let self = self else { return }
+                self.tabBarView.updateActions(action: action, isPhotosControls: false)
             }
             viewController.dimSlideControls = { [weak self] (dim, isPhotosControls) in
                 guard let self = self else { return }

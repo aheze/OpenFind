@@ -63,6 +63,9 @@ class PhotosViewController: UIViewController {
     var photoSlideControlPressed: ((PhotoSlideAction) -> Void)? /// pressed action in tab bar
     var dimSlideControls: ((Bool, Bool) -> Void)? /// dim the controls during dismissal, is photos  = true / for dismissal = false
     
+    // MARK: Slides
+    var updateSlideActions: ((ChangeActions) -> Void)? /// switch star/unstar and cache/uncache
+    
     // MARK: Diffable Data Source
     lazy var dataSource = makeDataSource()
     typealias DataSource = UICollectionViewDiffableDataSource<Month, FindPhoto>
