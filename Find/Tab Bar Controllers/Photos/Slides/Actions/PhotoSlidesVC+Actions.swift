@@ -21,6 +21,7 @@ extension PhotoSlidesViewController {
             print("star")
             starPhoto()
         case .cache:
+            cachePhoto()
             print("cache")
         case .delete:
             print("delete")
