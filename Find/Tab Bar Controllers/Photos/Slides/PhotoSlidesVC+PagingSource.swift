@@ -68,11 +68,18 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
             
             
             if !cameFromFind {
-                let resultPhoto = resultPhotos[currentIndex]
-                if let editableModel = resultPhoto.findPhoto.editableModel, editableModel.isHearted {
-                    updateActions?(.shouldNotStar)
-                } else {
-                    updateActions?(.shouldStar)
+                let findPhoto = resultPhotos[currentIndex].findPhoto
+                if let editableModel = findPhoto.editableModel {
+                    if editableModel.isHearted {
+                        updateActions?(.shouldNotStar)
+                    } else {
+                        updateActions?(.shouldStar)
+                    }
+                    if editableModel.isDeepSearched {
+                        updateActions?(.shouldNotCache)
+                    } else {
+                        updateActions?(.shouldCache)
+                    }
                 }
             }
         }

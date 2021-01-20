@@ -23,10 +23,17 @@ extension PhotoSlidesViewController {
             viewController.matchToColors = matchToColors
         } else {
             let findPhoto = resultPhotos[currentIndex].findPhoto
-            if let editableModel = findPhoto.editableModel, editableModel.isHearted {
-                updateActions?(.shouldNotStar)
-            } else {
-                updateActions?(.shouldStar)
+            if let editableModel = findPhoto.editableModel {
+                if editableModel.isHearted {
+                    updateActions?(.shouldNotStar)
+                } else {
+                    updateActions?(.shouldStar)
+                }
+                if editableModel.isDeepSearched {
+                    updateActions?(.shouldNotCache)
+                } else {
+                    updateActions?(.shouldCache)
+                }
             }
         }
         

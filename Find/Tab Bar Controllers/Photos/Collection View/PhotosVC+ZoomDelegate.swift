@@ -12,11 +12,10 @@ import UIKit
 extension PhotosViewController: PhotoSlidesUpdatedIndex {
     
     func indexUpdated(to newIndex: Int) {
-        let currentPhoto = allPhotosToDisplay[newIndex]
-        if let indexPath = dataSource.indexPath(for: currentPhoto) {
-            if let selectedIndexPath = selectedIndexPath {
-                if let cell = collectionView.cellForItem(at: selectedIndexPath) as? ImageCell { /// old index
-                    if let model = currentPhoto.editableModel {
+        if let previousIndexPath = selectedIndexPath {
+            if let cell = collectionView.cellForItem(at: previousIndexPath) as? ImageCell { /// old index
+                if let previousPhoto = dataSource.itemIdentifier(for: previousIndexPath) {
+                    if let model = previousPhoto.editableModel {
                         if model.isHearted || model.isDeepSearched  {
                             cell.shadowImageView.alpha = 1
                         } else {
@@ -34,24 +33,26 @@ extension PhotosViewController: PhotoSlidesUpdatedIndex {
                         }
                     }
                 }
-                
-                if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell { /// new index
-                    if let model = currentPhoto.editableModel {
-                        if model.isHearted || model.isDeepSearched  {
-                            cell.shadowImageView.alpha = 0
-                        }
-                        if model.isHearted {
-                            cell.starImageView.alpha = 0
-                        }
-                        if model.isDeepSearched {
-                            cell.cacheImageView.alpha = 0
-                        }
+            }
+        }
+        
+        let currentPhoto = allPhotosToDisplay[newIndex]
+        if let newIndexPath = dataSource.indexPath(for: currentPhoto) {
+            if let cell = collectionView.cellForItem(at: newIndexPath) as? ImageCell { /// new index
+                if let model = currentPhoto.editableModel {
+                    if model.isHearted || model.isDeepSearched  {
+                        cell.shadowImageView.alpha = 0
+                    }
+                    if model.isHearted {
+                        cell.starImageView.alpha = 0
+                    }
+                    if model.isDeepSearched {
+                        cell.cacheImageView.alpha = 0
                     }
                 }
             }
-            
-            selectedIndexPath = indexPath
-            collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: false)
+            selectedIndexPath = newIndexPath
+            collectionView.scrollToItem(at: newIndexPath, at: .centeredVertically, animated: false)
         }
     }
 }
