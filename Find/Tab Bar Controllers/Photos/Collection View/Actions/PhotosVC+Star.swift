@@ -79,5 +79,6 @@ extension PhotosViewController {
         sortPhotos(with: currentFilter)
         applySnapshot()
         doneWithSelect()
+        
     }
 }

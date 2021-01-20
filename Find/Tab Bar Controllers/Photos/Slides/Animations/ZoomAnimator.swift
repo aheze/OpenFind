@@ -18,7 +18,8 @@ protocol ZoomAnimatorDelegate: class {
 class ZoomAnimator: NSObject {
     
     var cameFromFind = false /// if this is from Photo Finding
-    var photoExists = true /// if deleted, or unstarred/cached
+//    var photoExists = true /// if deleted, or unstarred/cached
+    var removedLast = false
     
     
     weak var fromDelegate: ZoomAnimatorDelegate?
@@ -30,6 +31,7 @@ class ZoomAnimator: NSObject {
     var finishedDismissing: Bool = false
     
     fileprivate func animateZoomInTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        print("zoom in")
         
         let containerView = transitionContext.containerView
         
@@ -91,15 +93,15 @@ class ZoomAnimator: NSObject {
     fileprivate func animateZoomOutTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let containerView = transitionContext.containerView
         
-        print("Zoom out")
+        var toReferenceImageViewOptional: UIImageView?
+        var toReferenceImageViewFrameOptional: CGRect?
         
-        var toReferenceImageViewOptional = self.toDelegate?.referenceImageView(for: self)
-        var toReferenceImageViewFrameOptional = self.toDelegate?.referenceImageViewFrameInTransitioningView(for: self)
-        
-        if !photoExists {
-            print("Does no exist")
+        if removedLast {
             toReferenceImageViewOptional = UIImageView()
             toReferenceImageViewFrameOptional = CGRect(x: (UIScreen.main.bounds.width / 2) - 50, y: UIScreen.main.bounds.height + 200, width: 100, height: 100)
+        } else {
+            toReferenceImageViewOptional = self.toDelegate?.referenceImageView(for: self)
+            toReferenceImageViewFrameOptional = self.toDelegate?.referenceImageViewFrameInTransitioningView(for: self)
         }
         
         guard let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
@@ -111,8 +113,6 @@ class ZoomAnimator: NSObject {
             else {
                 return
         }
-        
-        print("after")
         
         self.fromDelegate?.transitionWillStartWith(zoomAnimator: self)
         self.toDelegate?.transitionWillStartWith(zoomAnimator: self)

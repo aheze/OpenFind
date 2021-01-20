@@ -70,7 +70,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             viewController.dimSlideControls = { [weak self] (dim, isPhotosControls) in
                 guard let self = self else { return }
-                print("dimming")
                 self.tabBarView.dimPhotoSlideControls(dim: dim, isPhotosControls: isPhotosControls)
             }
             

@@ -59,51 +59,50 @@ extension PhotosViewController: PhotoSlidesUpdatedIndex {
 extension PhotosViewController: ZoomAnimatorDelegate {
     
     func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
-        print("starting trans, presenting: \(zoomAnimator.isPresenting)")
         if !zoomAnimator.isPresenting {
             dimSlideControls?(true, false)
         }
     }
     
     func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
-        print("end")
         if zoomAnimator.isPresenting == false {
             if zoomAnimator.finishedDismissing == false {
                 dimSlideControls?(false, false)
+            } else {
+                currentSlidesController = nil
+                changePresentationMode(presentingSlides: false)
             }
         }
         
         guard let selectedIndexPath = selectedIndexPath else { return }
         
-        let cell = collectionView.cellForItem(at: selectedIndexPath) as! ImageCell
-        if zoomAnimator.isPresenting == false && zoomAnimator.finishedDismissing == true {
-            
-            currentSlidesController = nil
-            changePresentationMode(presentingSlides: false)
-            if
-                let findPhoto = dataSource.itemIdentifier(for: selectedIndexPath),
-                let model = findPhoto.editableModel
-            {
-                UIView.animate(withDuration: 0.2, animations: {
-                    if model.isHearted || model.isDeepSearched  {
-                        cell.shadowImageView.alpha = 1
-                    }
-                    if model.isHearted {
-                        cell.starImageView.alpha = 1
-                    }
-                    if model.isDeepSearched {
-                        cell.cacheImageView.alpha = 1
-                    }
-                })
+        if let cell = collectionView.cellForItem(at: selectedIndexPath) as? ImageCell {
+            if zoomAnimator.isPresenting == false && zoomAnimator.finishedDismissing == true {
+                if
+                    let findPhoto = dataSource.itemIdentifier(for: selectedIndexPath),
+                    let model = findPhoto.editableModel
+                {
+                    UIView.animate(withDuration: 0.2, animations: {
+                        if model.isHearted || model.isDeepSearched  {
+                            cell.shadowImageView.alpha = 1
+                        }
+                        if model.isHearted {
+                            cell.starImageView.alpha = 1
+                        }
+                        if model.isDeepSearched {
+                            cell.cacheImageView.alpha = 1
+                        }
+                    })
+                }
             }
-        }
-        
-        let cellFrame = collectionView.convert(cell.frame, to: view)
-        
-        if cellFrame.minY < collectionView.contentInset.top {
-            collectionView.scrollToItem(at: selectedIndexPath, at: .top, animated: false)
-        } else if cellFrame.maxY > view.frame.height - collectionView.contentInset.bottom {
-            collectionView.scrollToItem(at: selectedIndexPath, at: .bottom, animated: false)
+            
+            let cellFrame = collectionView.convert(cell.frame, to: view)
+            
+            if cellFrame.minY < collectionView.contentInset.top {
+                collectionView.scrollToItem(at: selectedIndexPath, at: .top, animated: false)
+            } else if cellFrame.maxY > view.frame.height - collectionView.contentInset.bottom {
+                collectionView.scrollToItem(at: selectedIndexPath, at: .bottom, animated: false)
+            }
         }
     }
     

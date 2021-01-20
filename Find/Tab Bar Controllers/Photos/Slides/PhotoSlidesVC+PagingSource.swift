@@ -61,11 +61,9 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        
         let currentVC = currentViewController
         if completed {
             let index = currentVC.index
-            //            currentVC.returnNumber = self
             currentIndex = index
             
             
@@ -86,44 +84,4 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
         self.updatedIndex?.indexUpdated(to: currentIndex)
         
     }
-    
-    //    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-    //
-    //        let currentVC = currentViewController
-    //        if completed {
-    //            let index = currentVC.index
-    //            currentVC.returnNumber = self
-    //            currentIndex = index
-    //        }
-    //        previousViewControllers.forEach { vc in
-    //            let zoomVC = vc as! PhotoZoomViewController
-    //            zoomVC.scrollView.zoomScale = zoomVC.scrollView.minimumZoomScale
-    //        }
-    //
-    //        self.delegate?.containerViewController(self, indexDidUpdate: self.currentIndex)
-    //
-    //        if !cameFromFind {
-    //            if completed {
-    //                self.changedTerms = currentVC
-    //                changedTerms?.returnTerms(matchToColorsR: matchToColors)
-    //            }
-    //            if photoModels[currentIndex].isHearted == true {
-    //                let newImage = UIImage(systemName: "heart.fill")
-    //                heartButton.setImage(newImage, for: .normal)
-    //                heartButton.tintColor = UIColor(named: "FeedbackGradientRight")
-    //            } else {
-    //                let newImage = UIImage(systemName: "heart")
-    //                heartButton.setImage(newImage, for: .normal)
-    //                heartButton.tintColor = UIColor(hexString: "5287B6")
-    //            }
-    //            if photoModels[currentIndex].isDeepSearched == true {
-    //                cacheButton.setImage(UIImage(named: "YesCachedThin"), for: .normal)
-    //                cacheButton.tintColor = UIColor(named: "FeedbackGradientRight")
-    //            } else {
-    //                cacheButton.setImage(UIImage(named: "NotCachedThin"), for: .normal)
-    //                cacheButton.tintColor = UIColor(hexString: "5287B6")
-    //            }
-    //        }
-    //    }
-    //}
 }

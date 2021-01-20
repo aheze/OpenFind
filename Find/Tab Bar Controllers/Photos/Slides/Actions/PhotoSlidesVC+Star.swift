@@ -10,7 +10,6 @@ import UIKit
 
 extension PhotoSlidesViewController {
     func starPhoto() {
-        print("starring")
         let findPhoto = resultPhotos[currentIndex].findPhoto
         
         if let editableModel = findPhoto.editableModel {
@@ -62,6 +61,12 @@ extension PhotoSlidesViewController {
             editableModel.isTakenLocally = false
             
             findPhoto.editableModel = editableModel
+        }
+        
+        if let photoExists = checkIfPhotoExists?(findPhoto) {
+            if !photoExists {
+                removeCurrentSlide()
+            }
         }
     }
 }

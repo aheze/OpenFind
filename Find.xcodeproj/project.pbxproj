@@ -80,6 +80,7 @@
 		3C71F25E25AF6B8000D22212 /* PhotosVC+Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71F25D25AF6B8000D22212 /* PhotosVC+Star.swift */; };
 		3C71F26225AF6B9900D22212 /* PhotosVC+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71F26125AF6B9900D22212 /* PhotosVC+Cache.swift */; };
 		3C8CFC5C25AAE02D004FF194 /* PhotoSlidesVC+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8CFC5B25AAE02D004FF194 /* PhotoSlidesVC+Actions.swift */; };
+		3C8D58A225B7937C00EA226D /* PhotoSlidesVC+RemoveSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D58A125B7937C00EA226D /* PhotoSlidesVC+RemoveSlide.swift */; };
 		3C8F116B25AD0A160091402B /* SegmentedSlider+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F116A25AD0A160091402B /* SegmentedSlider+Selection.swift */; };
 		3C8F116E25AD5DA80091402B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F116D25AD5DA80091402B /* CustomButton.swift */; };
 		3CB6842C259FF9A700AE0AD6 /* SegmentedSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */; };
@@ -306,6 +307,7 @@
 		3C71F25D25AF6B8000D22212 /* PhotosVC+Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Star.swift"; sourceTree = "<group>"; };
 		3C71F26125AF6B9900D22212 /* PhotosVC+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Cache.swift"; sourceTree = "<group>"; };
 		3C8CFC5B25AAE02D004FF194 /* PhotoSlidesVC+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Actions.swift"; sourceTree = "<group>"; };
+		3C8D58A125B7937C00EA226D /* PhotoSlidesVC+RemoveSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+RemoveSlide.swift"; sourceTree = "<group>"; };
 		3C8F116A25AD0A160091402B /* SegmentedSlider+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SegmentedSlider+Selection.swift"; sourceTree = "<group>"; };
 		3C8F116D25AD5DA80091402B /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedSlider.swift; sourceTree = "<group>"; };
@@ -544,6 +546,7 @@
 			children = (
 				3C8CFC5B25AAE02D004FF194 /* PhotoSlidesVC+Actions.swift */,
 				3C4C96B625B6ABED009FDE8D /* PhotoSlidesVC+Star.swift */,
+				3C8D58A125B7937C00EA226D /* PhotoSlidesVC+RemoveSlide.swift */,
 				3C4C96B125B69038009FDE8D /* InfoView.swift */,
 			);
 			path = Actions;
@@ -1381,6 +1384,7 @@
 				3C389ED3259BA0D5007DB33B /* ListBuilderViewController.swift in Sources */,
 				3C3D47E325A41B9E002B8BBF /* PhotosVC+Cells.swift in Sources */,
 				3C21DEE6259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift in Sources */,
+				3C8D58A225B7937C00EA226D /* PhotoSlidesVC+RemoveSlide.swift in Sources */,
 				3C4DE716259B0EAB0037D104 /* TutorialHeader.swift in Sources */,
 				49B7A33823923EBD0070209F /* PhotoPageContainerViewController.swift in Sources */,
 				3CB6843225A0087700AE0AD6 /* PhotosMigrationController.swift in Sources */,

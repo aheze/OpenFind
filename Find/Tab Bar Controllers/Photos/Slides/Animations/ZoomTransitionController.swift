@@ -33,7 +33,6 @@ class ZoomTransitionController: NSObject {
 
 extension ZoomTransitionController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        print("presenting")
         self.animator.isPresenting = true
         self.animator.fromDelegate = fromDelegate
         self.animator.toDelegate = toDelegate
@@ -67,16 +66,6 @@ extension ZoomTransitionController: UINavigationControllerDelegate {
             self.animator.fromDelegate = fromDelegate
             self.animator.toDelegate = toDelegate
         } else {
-            print("unpurhing")
-            print("simsising")
-            if let photoSlidesVC = fromVC as? PhotoSlidesViewController {
-                if let photoExistsInCollectionView = photoSlidesVC.checkIfPhotoExists?(photoSlidesVC.resultPhotos[photoSlidesVC.currentIndex].findPhoto) {
-                    
-                    print("dimss>  \(photoExistsInCollectionView)")
-                    self.animator.photoExists = photoExistsInCollectionView
-                }
-            }
-            
             self.animator.isPresenting = false
             let tmp = self.fromDelegate
             self.animator.fromDelegate = self.toDelegate

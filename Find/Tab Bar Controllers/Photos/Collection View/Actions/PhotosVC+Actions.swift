@@ -20,10 +20,20 @@ extension PhotosViewController {
         
         dataSource.apply(snapshot, animatingDifferences: true)
     }
+//    func reloadSnapshot(at indexPaths: [IndexPath]) {
+//        var snapshot = Snapshot()
+//        snapshot.appendSections(monthsToDisplay)
+//        monthsToDisplay.forEach { month in
+//            snapshot.appendItems(month.photos, toSection: month)
+//        }
+//        snapshot.rea
+//        
+//        dataSource.apply(snapshot, animatingDifferences: true)
+//    }
     func slidesChanged(at index: Int) {
+        print("slides changed at \(index)")
         let findPhoto = allPhotosToDisplay[index]
         if let indexPath = dataSource.indexPath(for: findPhoto) {
-            print("has indexpath!!")
             if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell {
                 if let model = findPhoto.editableModel {
                     if model.isDeepSearched {
@@ -47,7 +57,7 @@ extension PhotosViewController {
                     cell.shadowImageView.image = nil
                 }
                 sortPhotos(with: currentFilter)
-                applySnapshot()
+                applySnapshot(animatingDifferences: true)
             }
         }
     }
