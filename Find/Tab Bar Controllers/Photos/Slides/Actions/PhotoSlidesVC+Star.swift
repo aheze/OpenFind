@@ -13,6 +13,7 @@ extension PhotoSlidesViewController {
         let findPhoto = resultPhotos[currentIndex].findPhoto
         
         if let editableModel = findPhoto.editableModel {
+            print("has editable model!!!")
             if let realModel = getRealModel?(editableModel) {
                 if realModel.isHearted {
                     do {
@@ -22,9 +23,10 @@ extension PhotoSlidesViewController {
                     } catch {
                         print("Error starring photo \(error)")
                     }
+                    print("make false")
                     editableModel.isHearted = false /// also change the editable model
                     updateActions?(.shouldStar)
-                    findPhotoChanged?(currentIndex)
+                    findPhotoChanged?(findPhoto)
                 } else {
                     do {
                         try realm.write {
@@ -33,9 +35,10 @@ extension PhotoSlidesViewController {
                     } catch {
                         print("Error starring photo \(error)")
                     }
+                    print("make true")
                     editableModel.isHearted = true /// also change the editable model
                     updateActions?(.shouldNotStar)
-                    findPhotoChanged?(currentIndex)
+                    findPhotoChanged?(findPhoto)
                 }
             }
         } else {
@@ -53,7 +56,7 @@ extension PhotoSlidesViewController {
                 print("Error saving model \(error)")
             }
             updateActions?(.shouldStar)
-            findPhotoChanged?(currentIndex)
+            findPhotoChanged?(findPhoto)
             
             let editableModel = EditableHistoryModel()
             editableModel.assetIdentifier = assetIdentifier
@@ -63,10 +66,11 @@ extension PhotoSlidesViewController {
             findPhoto.editableModel = editableModel
         }
         
-        if let photoExists = checkIfPhotoExists?(findPhoto) {
-            if !photoExists {
-                removeCurrentSlide()
-            }
+        if
+            let photoExists = checkIfPhotoExists?(findPhoto),
+            photoExists == false
+        {
+            removeCurrentSlide()
         }
     }
 }

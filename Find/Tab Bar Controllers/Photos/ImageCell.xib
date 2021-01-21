@@ -23,18 +23,18 @@
                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                     <color key="backgroundColor" red="0.67843137254901964" green="0.91764705882352937" blue="1" alpha="0.25" colorSpace="custom" customColorSpace="calibratedRGB"/>
                 </view>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0vG-yK-i3D">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DownShadow" translatesAutoresizingMaskIntoConstraints="NO" id="0vG-yK-i3D">
                     <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WI2-MS-Um0">
-                    <rect key="frame" x="5" y="5" width="20" height="20"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="WI2-MS-Um0">
+                    <rect key="frame" x="5" y="4.5" width="20" height="20"/>
                     <color key="tintColor" name="Gold"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="enp-m7-YOD"/>
                         <constraint firstAttribute="width" constant="20" id="hc5-3x-IWe"/>
                     </constraints>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3xd-Ac-UWi">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CacheActive-Light" translatesAutoresizingMaskIntoConstraints="NO" id="3xd-Ac-UWi">
                     <rect key="frame" x="75" y="5" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="eUU-9X-MZz"/>
@@ -86,7 +86,10 @@
         </view>
     </objects>
     <resources>
+        <image name="CacheActive-Light" width="30" height="30"/>
         <image name="Checkmark" width="512" height="512"/>
+        <image name="DownShadow" width="200" height="100"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <namedColor name="100Blue">
             <color red="0.0" green="0.68199998140335083" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

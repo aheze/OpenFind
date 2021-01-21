@@ -36,9 +36,9 @@ extension PhotosViewController {
                 guard let self = self else { return }
                 self.updateSlideActions?(newAction)
             }
-            slidesViewController.findPhotoChanged = { [weak self] index in
+            slidesViewController.findPhotoChanged = { [weak self] findPhoto in
                 guard let self = self else { return }
-                self.slidesChanged(at: index)
+                self.slidesChanged(findPhoto: findPhoto)
             }
             slidesViewController.checkIfPhotoExists = { [weak self] findPhoto in
                 guard let self = self else { return false }

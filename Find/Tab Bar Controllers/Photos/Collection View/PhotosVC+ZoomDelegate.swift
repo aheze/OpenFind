@@ -16,21 +16,24 @@ extension PhotosViewController: PhotoSlidesUpdatedIndex {
             if let cell = collectionView.cellForItem(at: previousIndexPath) as? ImageCell { /// old index
                 if let previousPhoto = dataSource.itemIdentifier(for: previousIndexPath) {
                     if let model = previousPhoto.editableModel {
-                        if model.isHearted || model.isDeepSearched  {
-                            cell.shadowImageView.alpha = 1
-                        } else {
-                            cell.shadowImageView.alpha = 0
-                        }
-                        if model.isHearted {
-                            cell.starImageView.alpha = 1
-                        } else {
-                            cell.starImageView.alpha = 0
-                        }
-                        if model.isDeepSearched {
-                            cell.cacheImageView.alpha = 1
-                        } else {
-                            cell.cacheImageView.alpha = 0
-                        }
+                        cell.cacheImageView.alpha = model.isDeepSearched ? 1 : 0
+                        cell.starImageView.alpha = model.isHearted ? 1 : 0
+                        cell.shadowImageView.alpha = (model.isDeepSearched || model.isHearted ) ? 1 : 0
+//                        if model.isHearted || model.isDeepSearched  {
+//                            cell.shadowImageView.alpha = 1
+//                        } else {
+//                            cell.shadowImageView.alpha = 0
+//                        }
+//                        if model.isHearted {
+//                            cell.starImageView.alpha = 1
+//                        } else {
+//                            cell.starImageView.alpha = 0
+//                        }
+//                        if model.isDeepSearched {
+//                            cell.cacheImageView.alpha = 1
+//                        } else {
+//                            cell.cacheImageView.alpha = 0
+//                        }
                     }
                 }
             }
@@ -83,16 +86,26 @@ extension PhotosViewController: ZoomAnimatorDelegate {
                     let findPhoto = dataSource.itemIdentifier(for: selectedIndexPath),
                     let model = findPhoto.editableModel
                 {
+                    print("anded--")
+                    print("photo cache : \(model.isDeepSearched)")
+                    print("photo heart : \(model.isHearted)")
+
+                    
                     UIView.animate(withDuration: 0.2, animations: {
-                        if model.isHearted || model.isDeepSearched  {
-                            cell.shadowImageView.alpha = 1
-                        }
-                        if model.isHearted {
-                            cell.starImageView.alpha = 1
-                        }
-                        if model.isDeepSearched {
-                            cell.cacheImageView.alpha = 1
-                        }
+                        cell.cacheImageView.alpha = model.isDeepSearched ? 1 : 0
+                        cell.starImageView.alpha = model.isHearted ? 1 : 0
+                        cell.shadowImageView.alpha = (model.isDeepSearched || model.isHearted ) ? 1 : 0
+//                        if model.isHearted || model.isDeepSearched  {
+//                            cell.shadowImageView.alpha = 1
+//                        }
+//                        if model.isHearted {
+//                            print("making heart")
+//
+//                            cell.starImageView.alpha = 1
+//                        }
+//                        if model.isDeepSearched {
+//                            cell.cacheImageView.alpha = 1
+//                        }
                     })
                 }
             }

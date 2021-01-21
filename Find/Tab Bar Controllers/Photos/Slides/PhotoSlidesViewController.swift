@@ -49,7 +49,7 @@ class PhotoSlidesViewController: UIViewController {
     let realm = try! Realm()
     var getRealModel: ((EditableHistoryModel) -> HistoryModel?)?
     var updateActions: ((ChangeActions) -> Void)? /// switch star/unstar and cache/uncache
-    var findPhotoChanged: ((Int) -> Void)? /// starred/cached photos
+    var findPhotoChanged: ((FindPhoto) -> Void)? /// starred/cached photos
     var checkIfPhotoExists: ((FindPhoto) -> Bool)? /// check if the photo exists in the collection view
     
     // MARK: Transitioning

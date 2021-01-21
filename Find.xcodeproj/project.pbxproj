@@ -22,6 +22,7 @@
 		3C1317F625B3829900FCEB79 /* PhotoFindVC+Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317F525B3829900FCEB79 /* PhotoFindVC+Highlight.swift */; };
 		3C1317F925B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317F825B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift */; };
 		3C16EA71259BE7D600D73755 /* ListsController+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C16EA70259BE7D600D73755 /* ListsController+NavBar.swift */; };
+		3C1FE20625B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE20525B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift */; };
 		3C21DEE6259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */; };
 		3C2858C6259C3E4C00BABBA7 /* TabBar+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */; };
 		3C2858CA259CF00200BABBA7 /* ListsController+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */; };
@@ -250,6 +251,7 @@
 		3C1317F525B3829900FCEB79 /* PhotoFindVC+Highlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+Highlight.swift"; sourceTree = "<group>"; };
 		3C1317F825B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+FindFromCache.swift"; sourceTree = "<group>"; };
 		3C16EA70259BE7D600D73755 /* ListsController+NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+NavBar.swift"; sourceTree = "<group>"; };
+		3C1FE20525B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+SlidesChanged.swift"; sourceTree = "<group>"; };
 		3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListBuilderVC+ErrorChecking.swift"; sourceTree = "<group>"; };
 		3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBar+Lists.swift"; sourceTree = "<group>"; };
 		3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+Selection.swift"; sourceTree = "<group>"; };
@@ -593,6 +595,8 @@
 		3C56C59C25A9562F0006A667 /* Slides */ = {
 			isa = PBXGroup;
 			children = (
+				3CECF4C025A9072300C16A16 /* PhotosVC+PresentSlides.swift */,
+				3C1FE20525B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift */,
 				3C56C59D25A956450006A667 /* PhotoSlidesViewController.swift */,
 				3C4C96B025B6902D009FDE8D /* Actions */,
 				3CFF312725AA496B00D3C56D /* PhotoSlidesVC+Setup.swift */,
@@ -634,7 +638,6 @@
 			children = (
 				3C5B157225A8CD9C00BB8988 /* PhotosVC+Selection.swift */,
 				3C71F25C25AF6B7600D22212 /* Actions */,
-				3CECF4C025A9072300C16A16 /* PhotosVC+PresentSlides.swift */,
 				3C56C59825A943F40006A667 /* PhotosVC+ZoomDelegate.swift */,
 				3CFF312B25AA6F8C00D3C56D /* PhotosVC+CollectionCoordinates.swift */,
 			);
@@ -1348,6 +1351,7 @@
 				3C71F26225AF6B9900D22212 /* PhotosVC+Cache.swift in Sources */,
 				4999AC982353A80A00AB06A7 /* CameraViewController.swift in Sources */,
 				3C6EE6B525A2AB350078462A /* SupportView.swift in Sources */,
+				3C1FE20625B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift in Sources */,
 				49B7A33523923E810070209F /* ZoomDismissalInteractionController.swift in Sources */,
 				49BC782F23C6E473003D9904 /* addHeart.swift in Sources */,
 				3C2C3E9325A1152F002C3D11 /* PhotosMigrationController+Write.swift in Sources */,

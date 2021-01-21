@@ -18,7 +18,44 @@ extension PhotoSlidesViewController {
             let realModel = getRealModel?(editableModel),
             realModel.isDeepSearched
         {
-            print("uncache")
+            let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
+            let clearThisCacheQuestion = NSLocalizedString("clearThisCacheQuestion", comment: "Multifile def=Clear this photo's cache?")
+            let cachingAgainTakeAWhile = NSLocalizedString("cachingAgainTakeAWhile", comment: "Multifile def=Caching again will take a while...")
+            let clear = NSLocalizedString("clear", comment: "Multipurpose def=Clear")
+            
+            let alert = UIAlertController(title: clearThisCacheQuestion, message: cachingAgainTakeAWhile, preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: clear, style: UIAlertAction.Style.destructive, handler: { _ in
+                if realModel.isDeepSearched {
+                    do {
+                        try self.realm.write {
+                            realModel.isDeepSearched = false
+                            self.realm.delete(realModel.contents)
+                        }
+                    } catch {
+                        print("Error starring photo \(error)")
+                    }
+                    editableModel.isDeepSearched = false /// also change the editable model
+                    editableModel.contents.removeAll()
+                    self.updateActions?(.shouldCache)
+                    self.findPhotoChanged?(findPhoto)
+                    
+                    if
+                        let photoExists = self.checkIfPhotoExists?(findPhoto),
+                        photoExists == false
+                    {
+                        self.removeCurrentSlide()
+                    }
+                }
+                
+            }))
+            alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.sourceView = self.view
+                popoverController.sourceRect =  CGRect(x: (self.view.bounds.width / 2) - 40, y: self.view.bounds.height - 80, width: 80, height: 80)
+            }
+            self.present(alert, animated: true, completion: nil)
+            
+            
         } else {
             
             
@@ -59,32 +96,6 @@ extension PhotoSlidesViewController {
             
         }
         
-        
-        //            let assetIdentifier = findPhoto.asset.localIdentifier
-        //            let newModel = HistoryModel()
-        //            newModel.assetIdentifier = assetIdentifier
-        //            newModel.isHearted = true
-        //            newModel.isTakenLocally = false
-        //
-        //            do {
-        //                try realm.write {
-        //                    realm.add(newModel)
-        //                }
-        //            } catch {
-//                print("Error saving model \(error)")
-//            }
-//            updateActions?(.shouldStar)
-//            findPhotoChanged?(currentIndex)
-//
-//            let editableModel = EditableHistoryModel()
-//            editableModel.assetIdentifier = assetIdentifier
-//            editableModel.isHearted = true
-//            editableModel.isTakenLocally = false
-//
-//            findPhoto.editableModel = editableModel
-        
-        
-        
     }
 }
 
@@ -93,15 +104,16 @@ extension PhotoSlidesViewController: ReturnCachedPhotos {
         print("Given: \(photos)")
         
         if returnResult == .completedAll {
-            updateActions?(.shouldNotStar)
-            findPhotoChanged?(currentIndex)
+            updateActions?(.shouldNotCache)
             
-            if
-                let firstFindPhoto = photos.first,
-                let photoExists = checkIfPhotoExists?(firstFindPhoto),
-                photoExists == false {
-                removeCurrentSlide()
+            if let firstFindPhoto = photos.first {
+                findPhotoChanged?(firstFindPhoto)
                 
+                let photoExists = checkIfPhotoExists?(firstFindPhoto)
+                if photoExists == false {
+                    removeCurrentSlide()
+                    
+                }
             }
         }
     }
