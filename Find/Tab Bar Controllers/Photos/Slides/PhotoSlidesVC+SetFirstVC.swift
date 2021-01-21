@@ -34,6 +34,9 @@ extension PhotoSlidesViewController {
                 } else {
                     updateActions?(.shouldCache)
                 }
+            } else {
+                updateActions?(.shouldStar)
+                updateActions?(.shouldCache)
             }
         }
         

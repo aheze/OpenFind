@@ -55,8 +55,6 @@ extension PhotoSlidesViewController {
             } catch {
                 print("Error saving model \(error)")
             }
-            updateActions?(.shouldStar)
-            findPhotoChanged?(findPhoto)
             
             let editableModel = EditableHistoryModel()
             editableModel.assetIdentifier = assetIdentifier
@@ -64,6 +62,9 @@ extension PhotoSlidesViewController {
             editableModel.isTakenLocally = false
             
             findPhoto.editableModel = editableModel
+            
+            updateActions?(.shouldNotStar)
+            findPhotoChanged?(findPhoto)
         }
         
         if
