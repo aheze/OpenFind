@@ -13,7 +13,14 @@ extension PhotosViewController: ReturnCachedPhotos {
     func giveCachedPhotos(photos: [FindPhoto], returnResult: CacheReturn) {
         print("Given: \(photos)")
         
-        applyModelSnapshot(changedItems: photos)
+        var paths = [IndexPath]()
+        for photo in photos {
+            if let path = dataSource.indexPath(for: photo) {
+                paths.append(path)
+            }
+        }
+        reloadPaths(changedPaths: paths)
+        
         sortPhotos(with: currentFilter)
         applySnapshot()
         
@@ -72,12 +79,15 @@ extension PhotosViewController {
             
             SwiftEntryKit.display(entry: cacheController, using: attributes)
         } else {
-            var changedPhotos = [FindPhoto]()
+            var changedIndexPaths = [IndexPath]()
             for findPhoto in selectedPhotos {
                 if let editableModel = findPhoto.editableModel {
                     if let realModel = getRealRealmModel(from: editableModel)  {
                         if realModel.isDeepSearched { /// only unstar if already starred
-                            changedPhotos.append(findPhoto)
+                            
+                            if let indexPath = dataSource.indexPath(for: findPhoto) {
+                                changedIndexPaths.append(indexPath)
+                            }
                             do {
                                 try realm.write {
                                     realModel.isDeepSearched = false
@@ -92,7 +102,7 @@ extension PhotosViewController {
                     }
                 }
             }
-            applyModelSnapshot(changedItems: changedPhotos)
+            reloadPaths(changedPaths: changedIndexPaths)
             sortPhotos(with: currentFilter)
             applySnapshot()
         }

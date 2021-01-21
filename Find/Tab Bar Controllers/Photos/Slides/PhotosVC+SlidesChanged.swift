@@ -69,7 +69,6 @@ extension PhotosViewController: PhotoSlidesUpdatedIndex {
                 }
             }
         }
-        print("nidex up at new? \(newIndex)")
         let currentPhoto = allPhotosToDisplay[newIndex]
         if let newIndexPath = dataSource.indexPath(for: currentPhoto) {
             if let cell = collectionView.cellForItem(at: newIndexPath) as? ImageCell { /// new index

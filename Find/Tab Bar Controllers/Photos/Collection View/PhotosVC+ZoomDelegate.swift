@@ -43,17 +43,6 @@ extension PhotosViewController: ZoomAnimatorDelegate {
                         cell.cacheImageView.alpha = model.isDeepSearched ? 1 : 0
                         cell.starImageView.alpha = model.isHearted ? 1 : 0
                         cell.shadowImageView.alpha = (model.isDeepSearched || model.isHearted ) ? 1 : 0
-//                        if model.isHearted || model.isDeepSearched  {
-//                            cell.shadowImageView.alpha = 1
-//                        }
-//                        if model.isHearted {
-//                            print("making heart")
-//
-//                            cell.starImageView.alpha = 1
-//                        }
-//                        if model.isDeepSearched {
-//                            cell.cacheImageView.alpha = 1
-//                        }
                     })
                 }
             }

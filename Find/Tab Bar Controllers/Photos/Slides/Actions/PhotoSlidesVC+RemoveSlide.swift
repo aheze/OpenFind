@@ -50,8 +50,6 @@ extension PhotoSlidesViewController {
                     self.view.isUserInteractionEnabled = true
                 }
                 
-                
-                print("New index is: \(newIndex)")
                 self.updatedIndex?.indexUpdated(to: newIndex)
             }
         } else {

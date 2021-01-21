@@ -26,16 +26,17 @@ extension PhotosViewController {
             collectionView.scrollToItem(at: selectedIndexPath, at: .centeredVertically, animated: false)
             
             //Reload the items at the newly visible indexPaths
-            collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+//            collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
             
-            let visiblePaths = collectionView.indexPathsForVisibleItems
-            var changedPhotos = [FindPhoto]()
-            for indexPath in visiblePaths {
-                if let findPhoto = dataSource.itemIdentifier(for: indexPath) {
-                    changedPhotos.append(findPhoto)
-                }
-            }
-            applyModelSnapshot(changedItems: changedPhotos)
+//            let visiblePaths = collectionView.indexPathsForVisibleItems
+//            var changedPhotos = [FindPhoto]()
+//            for indexPath in visiblePaths {
+//                if let findPhoto = dataSource.itemIdentifier(for: indexPath) {
+//                    changedPhotos.append(findPhoto)
+//                }
+//            }
+////            applyModelSnapshot(changedItems: changedPhotos)
+//            reloadPaths(changedPaths: <#T##[IndexPath]#>)
             collectionView.layoutIfNeeded()
             
             //Guard against nil values
@@ -76,14 +77,14 @@ extension PhotosViewController {
             //Reload the items at the newly visible indexPaths
 //            collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
             
-            let visiblePaths = collectionView.indexPathsForVisibleItems
-            var changedPhotos = [FindPhoto]()
-            for indexPath in visiblePaths {
-                if let findPhoto = dataSource.itemIdentifier(for: indexPath) {
-                    changedPhotos.append(findPhoto)
-                }
-            }
-            applyModelSnapshot(changedItems: changedPhotos)
+//            let visiblePaths = collectionView.indexPathsForVisibleItems
+//            var changedPhotos = [FindPhoto]()
+//            for indexPath in visiblePaths {
+//                if let findPhoto = dataSource.itemIdentifier(for: indexPath) {
+//                    changedPhotos.append(findPhoto)
+//                }
+//            }
+//            applyModelSnapshot(changedItems: changedPhotos)
             collectionView.layoutIfNeeded()
             
             //Prevent the collectionView from returning a nil value

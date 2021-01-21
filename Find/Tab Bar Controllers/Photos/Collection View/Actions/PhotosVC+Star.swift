@@ -10,14 +10,14 @@ import UIKit
 
 extension PhotosViewController {
     func star(_ shouldStar: Bool) {
-        var changedPhotos = [FindPhoto]()
+        var changedIndexPaths = [IndexPath]()
         if shouldStar {
             for indexPath in indexPathsSelected {
                 if let findPhoto = dataSource.itemIdentifier(for: indexPath) {
                     if let editableModel = findPhoto.editableModel {
                         if let realModel = getRealRealmModel(from: editableModel) {
                             if !realModel.isHearted { /// only star if not starred
-                                changedPhotos.append(findPhoto)
+                                changedIndexPaths.append(indexPath)
                                 do {
                                     try realm.write {
                                         realModel.isHearted = true
@@ -29,7 +29,7 @@ extension PhotosViewController {
                             }
                         }
                     } else {
-                        changedPhotos.append(findPhoto)
+                        changedIndexPaths.append(indexPath)
                         let assetIdentifier = findPhoto.asset.localIdentifier
                         let newModel = HistoryModel()
                         newModel.assetIdentifier = assetIdentifier
@@ -59,7 +59,7 @@ extension PhotosViewController {
                     if let editableModel = findPhoto.editableModel {
                         if let realModel = getRealRealmModel(from: editableModel) {
                             if realModel.isHearted { /// only unstar if already starred
-                                changedPhotos.append(findPhoto)
+                                changedIndexPaths.append(indexPath)
                                 do {
                                     try realm.write {
                                         realModel.isHearted = false
@@ -75,7 +75,7 @@ extension PhotosViewController {
             }
         }
         
-        applyModelSnapshot(changedItems: changedPhotos)
+        reloadPaths(changedPaths: changedIndexPaths)
         sortPhotos(with: currentFilter)
         applySnapshot()
         doneWithSelect()
