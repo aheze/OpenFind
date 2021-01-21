@@ -36,7 +36,7 @@ extension PhotoSlidesViewController {
                     }
                     editableModel.isDeepSearched = false /// also change the editable model
                     editableModel.contents.removeAll()
-                    self.updateActions?(.shouldCache)
+
                     self.findPhotoChanged?(findPhoto)
                     
                     if
@@ -44,6 +44,8 @@ extension PhotoSlidesViewController {
                         photoExists == false
                     {
                         self.removeCurrentSlide()
+                    } else {
+                        self.updateActions?(.shouldCache) /// only change label if still exists
                     }
                 }
                 

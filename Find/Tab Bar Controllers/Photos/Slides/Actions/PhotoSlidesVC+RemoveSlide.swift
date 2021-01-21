@@ -40,10 +40,17 @@ extension PhotoSlidesViewController {
                 viewController.index = newIndex
                 
                 let findPhoto = resultPhotos[newIndex].findPhoto
-                if let editableModel = findPhoto.editableModel, editableModel.isHearted {
-                    updateActions?(.shouldNotStar)
-                } else {
-                    updateActions?(.shouldStar)
+                if let editableModel = findPhoto.editableModel {
+                    if editableModel.isHearted {
+                        updateActions?(.shouldNotStar)
+                    } else {
+                        updateActions?(.shouldStar)
+                    }
+                    if editableModel.isDeepSearched {
+                        updateActions?(.shouldNotCache)
+                    } else {
+                        updateActions?(.shouldCache)
+                    }
                 }
                 self.view.isUserInteractionEnabled = false
                 self.pageViewController.setViewControllers(viewControllers, direction: .reverse, animated: true) { _ in
@@ -59,10 +66,17 @@ extension PhotoSlidesViewController {
             viewController.index = newIndex
             
             let findPhoto = resultPhotos[newIndex].findPhoto
-            if let editableModel = findPhoto.editableModel, editableModel.isHearted {
-                updateActions?(.shouldNotStar)
-            } else {
-                updateActions?(.shouldStar)
+            if let editableModel = findPhoto.editableModel {
+                if editableModel.isHearted {
+                    updateActions?(.shouldNotStar)
+                } else {
+                    updateActions?(.shouldStar)
+                }
+                if editableModel.isDeepSearched {
+                    updateActions?(.shouldNotCache)
+                } else {
+                    updateActions?(.shouldCache)
+                }
             }
             
             self.view.isUserInteractionEnabled = false
