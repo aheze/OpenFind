@@ -112,7 +112,6 @@ extension PhotoSlidesViewController: ReturnCachedPhotos {
                 let photoExists = checkIfPhotoExists?(firstFindPhoto)
                 if photoExists == false {
                     removeCurrentSlide()
-                    
                 }
             }
         }

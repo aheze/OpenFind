@@ -14,6 +14,65 @@ class PhotoForDeletion {
     var findPhoto = FindPhoto()
 }
 extension PhotosViewController {
+    func deleteSinglePhotoFromSlides(findPhoto: FindPhoto) {
+        let photoForDeletion = PhotoForDeletion()
+        photoForDeletion.findPhoto = findPhoto
+        
+        for (monthIndex, month) in allMonths.enumerated() {
+            let samePhotos = month.photos.filter { $0.asset.localIdentifier == findPhoto.asset.localIdentifier}
+            
+            /// same photo in allMonths found, get its index
+            if let samePhoto = samePhotos.first, let itemIndex = month.photos.firstIndex(of: samePhoto) {
+                let indexPath = IndexPath(item: itemIndex, section: monthIndex)
+                photoForDeletion.indexPath = indexPath
+            }
+        }
+        
+        let assets = PHAsset.fetchAssets(withLocalIdentifiers: [findPhoto.asset.localIdentifier], options: nil)
+        PHPhotoLibrary.shared().performChanges {
+            PHAssetChangeRequest.deleteAssets(assets)
+        } completionHandler: { (success, error) in
+            if success {
+                var hasError = false
+                if let editableModel = photoForDeletion.findPhoto.editableModel {
+                    DispatchQueue.main.async {
+                        if let realModel = self.getRealRealmModel(from: editableModel) {
+                            
+                            do {
+                                try self.realm.write {
+                                    self.realm.delete(realModel.contents)
+                                    self.realm.delete(realModel)
+                                }
+                            } catch {
+                                hasError = true
+                                print("Error starring photo \(error)")
+                            }
+                        }
+                    }
+                }
+                if !hasError {
+                    let indexPath = photoForDeletion.indexPath
+                    self.allMonths[indexPath.section].photos.remove(at: indexPath.item)
+                    photoForDeletion.findPhoto.editableModel = nil
+                    
+                    DispatchQueue.main.async {
+                        self.currentSlidesController?.removeCurrentSlide()
+                    }
+                }
+                
+                self.allMonths = self.allMonths.filter { month in
+                    return !month.photos.isEmpty
+                }
+                
+                DispatchQueue.main.async {
+                    self.sortPhotos(with: self.currentFilter)
+                    self.applySnapshot()
+                }
+            }
+        }
+        
+    }
+    
     func deleteSelectedPhotos() {
         var assetIdentifiers = [String]()
         
@@ -69,6 +128,7 @@ extension PhotosViewController {
                     if !hasError {
                         let indexPath = photoToDelete.indexPath
                         self.allMonths[indexPath.section].photos.remove(at: indexPath.item)
+                        photoToDelete.findPhoto.editableModel = nil
                     }
                 }
                 

@@ -21,10 +21,12 @@ extension PhotoSlidesViewController {
             print("star")
             starPhoto()
         case .cache:
-            cachePhoto()
+            
             print("cache")
+            cachePhoto()
         case .delete:
             print("delete")
+            startDeletePhoto()
         case .info:
             let infoVC = InfoViewHoster()
             self.present(infoVC, animated: true)

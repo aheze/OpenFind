@@ -23,6 +23,7 @@
 		3C1317F925B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317F825B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift */; };
 		3C16EA71259BE7D600D73755 /* ListsController+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C16EA70259BE7D600D73755 /* ListsController+NavBar.swift */; };
 		3C1FE20625B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE20525B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift */; };
+		3C1FE20925BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE20825BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift */; };
 		3C21DEE6259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */; };
 		3C2858C6259C3E4C00BABBA7 /* TabBar+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */; };
 		3C2858CA259CF00200BABBA7 /* ListsController+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */; };
@@ -252,6 +253,7 @@
 		3C1317F825B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+FindFromCache.swift"; sourceTree = "<group>"; };
 		3C16EA70259BE7D600D73755 /* ListsController+NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+NavBar.swift"; sourceTree = "<group>"; };
 		3C1FE20525B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+SlidesChanged.swift"; sourceTree = "<group>"; };
+		3C1FE20825BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Delete.swift"; sourceTree = "<group>"; };
 		3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListBuilderVC+ErrorChecking.swift"; sourceTree = "<group>"; };
 		3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBar+Lists.swift"; sourceTree = "<group>"; };
 		3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+Selection.swift"; sourceTree = "<group>"; };
@@ -551,6 +553,7 @@
 				3C8CFC5B25AAE02D004FF194 /* PhotoSlidesVC+Actions.swift */,
 				3C4C96B625B6ABED009FDE8D /* PhotoSlidesVC+Star.swift */,
 				3C8D58A425B7FD7300EA226D /* PhotoSlidesVC+Cache.swift */,
+				3C1FE20825BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift */,
 				3C8D58A125B7937C00EA226D /* PhotoSlidesVC+RemoveSlide.swift */,
 				3C4C96B125B69038009FDE8D /* InfoView.swift */,
 			);
@@ -1372,6 +1375,7 @@
 				4928525A23D617270048EC13 /* ListsController.swift in Sources */,
 				3C1317E225B2581800FCEB79 /* PhotosVC+Finding.swift in Sources */,
 				4990AAE423EDB4EF00FAF37B /* SymbolsViewController.swift in Sources */,
+				3C1FE20925BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift in Sources */,
 				49D985BA2421D97B005F4E92 /* FindModel.swift in Sources */,
 				3C56C5AE25AA42760006A667 /* SlideViewController.swift in Sources */,
 				3CB6843525A013D800AE0AD6 /* ImageCell.swift in Sources */,

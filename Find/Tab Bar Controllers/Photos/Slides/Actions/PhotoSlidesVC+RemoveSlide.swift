@@ -10,7 +10,15 @@ import UIKit
 
 extension PhotoSlidesViewController {
     func removeCurrentSlide() {
-        
+        UIView.animate(withDuration: 0.4) {
+            self.currentViewController.view.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+            self.currentViewController.view.alpha = 0
+        } completion: { _ in
+            self.finishRemovingCurrentSlide()
+        }
+    }
+    
+    func finishRemovingCurrentSlide() {
         let indexBeforeRemoval = currentIndex
         resultPhotos.remove(at: currentIndex)
         
@@ -37,7 +45,13 @@ extension PhotoSlidesViewController {
                 } else {
                     updateActions?(.shouldStar)
                 }
-                self.pageViewController.setViewControllers(viewControllers, direction: .reverse, animated: true, completion: nil)
+                self.view.isUserInteractionEnabled = false
+                self.pageViewController.setViewControllers(viewControllers, direction: .reverse, animated: true) { _ in
+                    self.view.isUserInteractionEnabled = true
+                }
+                
+                
+                print("New index is: \(newIndex)")
                 self.updatedIndex?.indexUpdated(to: newIndex)
             }
         } else {
@@ -52,11 +66,14 @@ extension PhotoSlidesViewController {
             } else {
                 updateActions?(.shouldStar)
             }
-            self.pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+            
+            self.view.isUserInteractionEnabled = false
+            self.pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true) { _ in
+                self.view.isUserInteractionEnabled = true
+            }
             self.updatedIndex?.indexUpdated(to: newIndex)
         }
         
         self.currentIndex = newIndex
-        
     }
 }

@@ -50,6 +50,7 @@ class PhotoSlidesViewController: UIViewController {
     var getRealModel: ((EditableHistoryModel) -> HistoryModel?)?
     var updateActions: ((ChangeActions) -> Void)? /// switch star/unstar and cache/uncache
     var findPhotoChanged: ((FindPhoto) -> Void)? /// starred/cached photos
+    var deletePhotoFromSlides: ((FindPhoto) -> Void)? /// delete photo
     var checkIfPhotoExists: ((FindPhoto) -> Bool)? /// check if the photo exists in the collection view
     
     // MARK: Transitioning

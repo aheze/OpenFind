@@ -45,6 +45,10 @@ extension PhotosViewController {
                 guard let self = self else { return }
                 self.slidesChanged(findPhoto: findPhoto)
             }
+            slidesViewController.deletePhotoFromSlides = { [weak self] findPhoto in
+                guard let self = self else { return }
+                self.deleteSinglePhotoFromSlides(findPhoto: findPhoto)
+            }
             slidesViewController.checkIfPhotoExists = { [weak self] findPhoto in
                 guard let self = self else { return false }
                 if self.allPhotosToDisplay.contains(where: { $0.asset.localIdentifier == findPhoto.asset.localIdentifier }) {

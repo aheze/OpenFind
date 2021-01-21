@@ -50,27 +50,7 @@ extension PhotosViewController {
                         cell?.cacheImageView.alpha = model.isDeepSearched ? 1 : 0
                         cell?.starImageView.alpha = model.isHearted ? 1 : 0
                         cell?.shadowImageView.alpha = (model.isDeepSearched || model.isHearted ) ? 1 : 0
-                        
-                        
-//                        if model.isDeepSearched {
-//                            cell?.cacheImageView.image = UIImage(named: "CacheActive-Light")
-//                        } else {
-//                            cell?.cacheImageView.image = nil
-//                        }
-//                        if model.isHearted {
-//                            cell?.starImageView.image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate)
-//                        } else {
-//                            cell?.starImageView.image = nil
-//                        }
-//                        if model.isDeepSearched || model.isHearted {
-//                            cell?.shadowImageView.image = UIImage(named: "DownShadow")
-//                        } else {
-//                            cell?.shadowImageView.image = nil
-//                        }
                     } else {
-//                        cell?.cacheImageView.image = nil
-//                        cell?.starImageView.image = nil
-//                        cell?.shadowImageView.image = nil
                         cell?.cacheImageView.alpha = 0
                         cell?.starImageView.alpha = 0
                         cell?.shadowImageView.alpha = 0
