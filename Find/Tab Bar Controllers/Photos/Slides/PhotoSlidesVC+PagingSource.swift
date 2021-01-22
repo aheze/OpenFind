@@ -81,6 +81,7 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
                         updateActions?(.shouldCache)
                     }
                 }
+                updateNavigationTitle(to: findPhoto)
             }
         }
         previousViewControllers.forEach { vc in

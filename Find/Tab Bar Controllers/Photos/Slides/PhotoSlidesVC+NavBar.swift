@@ -11,24 +11,7 @@ import SnapKit
 
 extension PhotoSlidesViewController {
     func setNavigationBar() {
-//        self.title = "Photo"
-        
-//        let uiView = UIView()
-//        uiView.backgroundColor = .gray
-//
-//        navigationItem.titleView = uiView
-//
-////        let height = self.navigationController?.navigationBar.frame.size.height ?? 2
-////        print("heig: \(height)")
-//        uiView.snp.makeConstraints { (make) in
-//            make.width.equalTo(80)
-//            make.height.equalTo(44)
-//        }
-        
-        
         makeTitleView()
-        
-        
         
         navigationItem.largeTitleDisplayMode = .never
         
@@ -49,9 +32,6 @@ extension PhotoSlidesViewController {
         contentView.addSubview(titleLabel)
         contentView.addSubview(subtitleLabel)
         
-//        baseView.snp.makeConstraints { (make) in
-//
-//        }
         contentView.backgroundColor = .clear
         
         baseView.backgroundColor = .gray
@@ -61,8 +41,6 @@ extension PhotoSlidesViewController {
         
         titleLabel.text = "January 14"
         subtitleLabel.text = "8:29 PM"
-        
-        
         
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(contentView.snp.top)
@@ -81,12 +59,39 @@ extension PhotoSlidesViewController {
         }
         
         navigationItem.titleView = baseView
-//        self.navigationController?.navigationBar.backgroundColor = .red
-//        print("bounds? \(self.navigationController?.navigationBar.bounds)")
         
-//        baseView.snp.makeConstraints { (make) in
-//            make.top.equalToSuperview()
-//            make.bottom.equalToSuperview()
-//        }
+        self.titleLabel = titleLabel
+        self.subtitleLabel = subtitleLabel
+        
+        updateNavigationTitle(to: resultPhotos[currentIndex].findPhoto)
+    }
+    
+    func updateNavigationTitle(to findPhoto: FindPhoto) {
+        if let dateCreated = findPhoto.asset.creationDate {
+            print("date create was \(dateCreated)")
+            
+            let dateAsString = dateCreated.convertDateToReadableString()
+            
+            let timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "d MMM y"
+            
+
+            timeFormatter.locale = Locale(identifier: "en_US_POSIX")
+            timeFormatter.dateFormat = "h:mm a"
+            timeFormatter.amSymbol = "AM"
+            timeFormatter.pmSymbol = "PM"
+            
+            let timeAsString = timeFormatter.string(from: dateCreated)
+            
+            titleLabel.text = dateAsString
+            subtitleLabel.text = timeAsString
+
+//            let dateString = formatter.string(from: Date())
+            
+            
+//            let dateAsString = dateFormatter.string(from: dateCreated)
+//            print(formatter3.string(from: today))
+            
+        }
     }
 }
