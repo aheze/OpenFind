@@ -31,6 +31,11 @@ class PhotoSlidesViewController: UIViewController {
     var currentIndex = 0
     var firstPlaceholderImage: UIImage? /// from the collection view
     
+    // MARK: Nav bar
+    var findButton: UIBarButtonItem!
+    var titleLabel: UILabel!
+    var subtitleLabel: UILabel!
+    
     // MARK: Finding
     var cameFromFind = false
     var resultPhotos = [ResultPhoto]() /// photos from Finding
@@ -65,9 +70,8 @@ class PhotoSlidesViewController: UIViewController {
         setupDelegates()
         setupGestures()
         setFirstVC()
+        setNavigationBar()
         
-        self.title = "Photo"
-        navigationItem.largeTitleDisplayMode = .never
         
         backBlurView.clipsToBounds = true
         backBlurView.layer.cornerRadius = 6

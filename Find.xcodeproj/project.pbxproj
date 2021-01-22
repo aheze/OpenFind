@@ -24,6 +24,8 @@
 		3C16EA71259BE7D600D73755 /* ListsController+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C16EA70259BE7D600D73755 /* ListsController+NavBar.swift */; };
 		3C1FE20625B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE20525B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift */; };
 		3C1FE20925BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE20825BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift */; };
+		3C1FE20E25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE20D25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift */; };
+		3C1FE21225BA8793004DC9EF /* PhotoSlidesVC+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE21125BA8793004DC9EF /* PhotoSlidesVC+NavBar.swift */; };
 		3C21DEE6259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */; };
 		3C2858C6259C3E4C00BABBA7 /* TabBar+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */; };
 		3C2858CA259CF00200BABBA7 /* ListsController+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */; };
@@ -254,6 +256,8 @@
 		3C16EA70259BE7D600D73755 /* ListsController+NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+NavBar.swift"; sourceTree = "<group>"; };
 		3C1FE20525B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+SlidesChanged.swift"; sourceTree = "<group>"; };
 		3C1FE20825BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Delete.swift"; sourceTree = "<group>"; };
+		3C1FE20D25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+FindBar.swift"; sourceTree = "<group>"; };
+		3C1FE21125BA8793004DC9EF /* PhotoSlidesVC+NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+NavBar.swift"; sourceTree = "<group>"; };
 		3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListBuilderVC+ErrorChecking.swift"; sourceTree = "<group>"; };
 		3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBar+Lists.swift"; sourceTree = "<group>"; };
 		3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+Selection.swift"; sourceTree = "<group>"; };
@@ -528,6 +532,14 @@
 			path = Builder;
 			sourceTree = "<group>";
 		};
+		3C1FE20B25BA8768004DC9EF /* Find */ = {
+			isa = PBXGroup;
+			children = (
+				3C1FE20D25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift */,
+			);
+			path = Find;
+			sourceTree = "<group>";
+		};
 		3C3D47D825A40A41002B8BBF /* Permissions */ = {
 			isa = PBXGroup;
 			children = (
@@ -601,6 +613,8 @@
 				3CECF4C025A9072300C16A16 /* PhotosVC+PresentSlides.swift */,
 				3C1FE20525B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift */,
 				3C56C59D25A956450006A667 /* PhotoSlidesViewController.swift */,
+				3C1FE21125BA8793004DC9EF /* PhotoSlidesVC+NavBar.swift */,
+				3C1FE20B25BA8768004DC9EF /* Find */,
 				3C4C96B025B6902D009FDE8D /* Actions */,
 				3CFF312725AA496B00D3C56D /* PhotoSlidesVC+Setup.swift */,
 				3C56C5A125A95C970006A667 /* PhotoSlidesVC+SetFirstVC.swift */,
@@ -1432,6 +1446,7 @@
 				3C0F5ED225A570F200549040 /* PhotosVC+Realm.swift in Sources */,
 				3C1317E925B264BD00FCEB79 /* PhotosWrapperController.swift in Sources */,
 				49563522243694BC0001E8C6 /* PaperOnboarding.swift in Sources */,
+				3C1FE20E25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift in Sources */,
 				4972B40E23F117C500843537 /* GeneralTableviewCell.swift in Sources */,
 				3C1317F625B3829900FCEB79 /* PhotoFindVC+Highlight.swift in Sources */,
 				495F39012433FF1600A17D93 /* LaunchViewController.swift in Sources */,
@@ -1503,6 +1518,7 @@
 				492A2D2224A3116600F9C4A1 /* TutorialLocalization.swift in Sources */,
 				3C2C3E9925A11CD6002C3D11 /* ANSegmentIndicator.swift in Sources */,
 				3C3DF5E025B4A59100DD7A10 /* PhotoFindVC+Prompt.swift in Sources */,
+				3C1FE21225BA8793004DC9EF /* PhotoSlidesVC+NavBar.swift in Sources */,
 				3C3D47DA25A40A4E002B8BBF /* PhotoPermissionView.swift in Sources */,
 				3C1317ED25B2A73C00FCEB79 /* PhotoFindVC+Setup.swift in Sources */,
 				3C3DF5F625B52A6E00DD7A10 /* PhotoFindVC+PresentSlides.swift in Sources */,
