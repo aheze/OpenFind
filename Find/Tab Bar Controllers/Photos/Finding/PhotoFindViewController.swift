@@ -26,9 +26,7 @@ class PhotoFindViewController: UIViewController {
     var totalCacheResults = 0
     
     // MARK: Fast find from OCR
-//    var fastFinding = false /// currently fast finding or not
     var currentFastFindProcess: UUID?
-//    var numberCurrentlyFastFinding = 0
     var numberFastFound = 0 /// how many fast found so far, for the progress view
     let dispatchGroup = DispatchGroup()
     let dispatchQueue = DispatchQueue(label: "ocrFastFindQueue")

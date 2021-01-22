@@ -11,15 +11,37 @@ import SwiftRichString
 
 //    blurViewHeightC
 extension PhotoSlidesViewController {
-    func changePromptToStarting(startingFilter: PhotoFilter, howManyPhotos: Int, isAllPhotos: Bool) {
+    func changePromptToStarting() {
         slideFindBar?.hasPrompt = false
-        UIView.animate(withDuration: 0.2) {
-            self.slideFindBar?.promptLabel.alpha = 0
+        animatePromptReveal(reveal: false)
+    }
+    
+    func animatePromptReveal(reveal: Bool = true) {
+        slideFindBar?.layoutIfNeeded()
+        print("revealing///")
+        print("height: \(slideFindBar?.promptLabel.bounds.height)")
+        if reveal {
+            let promptHeight = slideFindBar?.promptLabel.bounds.height ?? 0
+            
+            slideFindBar?.blurViewHeightC.constant = 45 + promptHeight + 16
+            
+            UIView.animate(withDuration: 0.2) {
+                self.slideFindBar?.layoutIfNeeded()
+                self.slideFindBar?.promptLabel.alpha = 1
+            }
+        } else {
+            slideFindBar?.blurViewHeightC.constant = 45
+            
+            UIView.animate(withDuration: 0.2) {
+                self.slideFindBar?.layoutIfNeeded()
+                self.slideFindBar?.promptLabel.alpha = 0
+            }
         }
     }
     
     /// photo is cached
     func setPromptToHowManyCacheResults(howMany: Int) {
+       
         let textStyle = Style {
             $0.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             $0.color = UIColor.secondaryLabel
@@ -31,13 +53,14 @@ extension PhotoSlidesViewController {
         }
         
         let resultsInCache = " \(results) in cache. Press ".set(style: textStyle)
-        let toFindFromPhotos = " to find with OCR again.".set(style: textStyle)
+        let toFindFromPhotos = " to find with OCR.".set(style: textStyle)
         
         let nextButtonAttachment = AttributedString(image: Image(named: "ContinueButton"), bounds: "0,-6,76,24")
         
         let attributedText = "\(howMany)".set(style: textStyle) + resultsInCache + nextButtonAttachment! + toFindFromPhotos
         slideFindBar?.promptLabel.attributedText = attributedText
         slideFindBar?.hasPrompt = true
+        animatePromptReveal()
     }
     
     /// photo is not cached
@@ -56,6 +79,7 @@ extension PhotoSlidesViewController {
         
         slideFindBar?.promptLabel.attributedText = attributedText
         slideFindBar?.hasPrompt = true
+        animatePromptReveal()
     }
     
     func setPromptToFastFinding() { /// currently fast finding
@@ -67,6 +91,7 @@ extension PhotoSlidesViewController {
         let attributedText = "Finding with OCR...".set(style: textStyle)
         slideFindBar?.promptLabel.attributedText = attributedText
         slideFindBar?.hasPrompt = true
+        animatePromptReveal()
     }
     
     /// Finished searching cache and uncached photos
@@ -84,5 +109,6 @@ extension PhotoSlidesViewController {
         let attributedText = "\(howMany) \(results)".set(style: textStyle)
         slideFindBar?.promptLabel.attributedText = attributedText
         slideFindBar?.hasPrompt = true
+        animatePromptReveal()
     }
 }

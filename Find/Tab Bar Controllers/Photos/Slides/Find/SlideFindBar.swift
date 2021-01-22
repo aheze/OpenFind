@@ -41,5 +41,7 @@ class SlideFindBar: UIView {
         findBar.searchField.textColor = UIColor.label
         findBar.searchField.tintColor = UIColor(named: "PhotosText")
         findBar.searchField.attributedPlaceholder = NSAttributedString(string: "Type here to find", attributes: [NSAttributedString.Key.foregroundColor : UIColor.label.withAlphaComponent(0.25)])
+        
+        
     }
 }

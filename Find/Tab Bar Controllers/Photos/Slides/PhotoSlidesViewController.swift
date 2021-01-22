@@ -46,6 +46,11 @@ class PhotoSlidesViewController: UIViewController {
     var resultPhotos = [ResultPhoto]() /// photos from Finding
     var matchToColors = [String: [CGColor]]()
     
+    // MARK: Find from cache
+    var numberCurrentlyFindingFromCache = 0 /// how many cache findings are currently going on
+    var deviceWidth = UIScreen.main.bounds.width
+    var totalCacheResults = 0
+    
     // MARK: Finding back button
     @IBOutlet weak var backButtonView: UIView!
     @IBOutlet weak var backBlurView: UIVisualEffectView!

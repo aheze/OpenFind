@@ -41,8 +41,8 @@
                         <constraint firstAttribute="height" constant="35" id="WQO-Tf-U91"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHg-us-Sf8">
-                    <rect key="frame" x="16" y="48" width="42" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHg-us-Sf8">
+                    <rect key="frame" x="16" y="48" width="469" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" systemColor="secondaryLabelColor"/>
                     <nil key="highlightedColor"/>
@@ -59,6 +59,7 @@
                 <constraint firstAttribute="trailing" secondItem="vtS-Xh-R92" secondAttribute="trailing" id="fcX-J2-yDQ"/>
                 <constraint firstItem="xHg-us-Sf8" firstAttribute="top" secondItem="NSH-89-PEK" secondAttribute="bottom" constant="8" id="gIN-gA-hqd"/>
                 <constraint firstItem="NSH-89-PEK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="s2g-kC-AL4"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="xHg-us-Sf8" secondAttribute="trailing" constant="16" id="tAi-Q8-2gt"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="74.637681159420296" y="-165.06696428571428"/>

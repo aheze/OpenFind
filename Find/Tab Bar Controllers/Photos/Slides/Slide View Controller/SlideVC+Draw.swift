@@ -10,11 +10,14 @@ import UIKit
 import AVFoundation
 
 extension SlideViewController {
+    func removeAllHighlights() {
+        drawingView.subviews.forEach({ $0.removeFromSuperview() })
+    }
     func drawHighlights() {
+        removeAllHighlights()
         
         let aspectFrame = AVMakeRect(aspectRatio: imageView.image?.size ?? imageView.frame.size, insideRect: contentView.frame)
         
-        drawingView.subviews.forEach({ $0.removeFromSuperview() })
         for comp in highlights {
             
             let newX = comp.x * (aspectFrame.width) + aspectFrame.origin.x

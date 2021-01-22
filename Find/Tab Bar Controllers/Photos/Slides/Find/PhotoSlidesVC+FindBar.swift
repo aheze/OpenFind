@@ -22,6 +22,8 @@ extension PhotoSlidesViewController {
         }
         view.layoutIfNeeded()
         
+        slideFindBar.findBar.findBarDelegate = self
+        self.slideFindBar = slideFindBar
     }
     
     
@@ -36,19 +38,22 @@ extension PhotoSlidesViewController {
         if findPressed {
             slideFindBarTopC?.update(offset: 0)
             
+            if slideFindBar?.hasPrompt == true {
+                animatePromptReveal(reveal: true)
+            }
+            
             UIView.animate(withDuration: 0.2) {
                 self.view.layoutIfNeeded()
-                if self.slideFindBar?.hasPrompt == true {
-                    self.slideFindBar?.promptLabel.alpha = 1
-                }
+                
                 self.slideFindBar?.alpha = 1
             }
         } else {
             slideFindBarTopC?.update(offset: -45)
+            animatePromptReveal(reveal: false)
             
             UIView.animate(withDuration: 0.3) {
                 self.view.layoutIfNeeded()
-                self.slideFindBar?.promptLabel.alpha = 0
+//                self.slideFindBar?.promptLabel.alpha = 0
                 self.slideFindBar?.alpha = 0
             }
         }

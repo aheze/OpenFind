@@ -134,23 +134,7 @@ extension PhotoFindViewController {
             
             self.resultPhotos = resultPhotos
             
-            DispatchQueue.main.async {
-                
-                self.numberCurrentlyFindingFromCache -= 1
-                
-                if self.numberCurrentlyFindingFromCache == 0 {
-                    self.setPromptToHowManyCacheResults(howMany: totalMatchNumber)
-                    
-                    UIView.animate(withDuration: 0.1, animations: {
-                        self.tableView.alpha = 1
-                        self.progressView.alpha = 0
-                    })
-                    
-                    self.tableView.reloadData()
-                }
-                
-                self.totalCacheResults = totalMatchNumber
-            }
+            
         }
     }
 }

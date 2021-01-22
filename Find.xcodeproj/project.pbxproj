@@ -86,6 +86,9 @@
 		3C6EE6B725A2AB350078462A /* OtherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EE6AF25A2AB350078462A /* OtherView.swift */; };
 		3C71F25E25AF6B8000D22212 /* PhotosVC+Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71F25D25AF6B8000D22212 /* PhotosVC+Star.swift */; };
 		3C71F26225AF6B9900D22212 /* PhotosVC+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71F26125AF6B9900D22212 /* PhotosVC+Cache.swift */; };
+		3C8B648A25BB4F8F008F1535 /* PhotoSlidesVC+FindBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8B648925BB4F8F008F1535 /* PhotoSlidesVC+FindBarDelegate.swift */; };
+		3C8B648D25BB4FDB008F1535 /* PhotoSlidesVC+FindFromCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8B648C25BB4FDB008F1535 /* PhotoSlidesVC+FindFromCache.swift */; };
+		3C8B649025BB51BE008F1535 /* PhotoSlidesVC+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8B648F25BB51BE008F1535 /* PhotoSlidesVC+Draw.swift */; };
 		3C8CFC5C25AAE02D004FF194 /* PhotoSlidesVC+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8CFC5B25AAE02D004FF194 /* PhotoSlidesVC+Actions.swift */; };
 		3C8D58A225B7937C00EA226D /* PhotoSlidesVC+RemoveSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D58A125B7937C00EA226D /* PhotoSlidesVC+RemoveSlide.swift */; };
 		3C8D58A525B7FD7300EA226D /* PhotoSlidesVC+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D58A425B7FD7300EA226D /* PhotoSlidesVC+Cache.swift */; };
@@ -321,6 +324,9 @@
 		3C6EE6AF25A2AB350078462A /* OtherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherView.swift; sourceTree = "<group>"; };
 		3C71F25D25AF6B8000D22212 /* PhotosVC+Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Star.swift"; sourceTree = "<group>"; };
 		3C71F26125AF6B9900D22212 /* PhotosVC+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Cache.swift"; sourceTree = "<group>"; };
+		3C8B648925BB4F8F008F1535 /* PhotoSlidesVC+FindBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+FindBarDelegate.swift"; sourceTree = "<group>"; };
+		3C8B648C25BB4FDB008F1535 /* PhotoSlidesVC+FindFromCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+FindFromCache.swift"; sourceTree = "<group>"; };
+		3C8B648F25BB51BE008F1535 /* PhotoSlidesVC+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Draw.swift"; sourceTree = "<group>"; };
 		3C8CFC5B25AAE02D004FF194 /* PhotoSlidesVC+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Actions.swift"; sourceTree = "<group>"; };
 		3C8D58A125B7937C00EA226D /* PhotoSlidesVC+RemoveSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+RemoveSlide.swift"; sourceTree = "<group>"; };
 		3C8D58A425B7FD7300EA226D /* PhotoSlidesVC+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Cache.swift"; sourceTree = "<group>"; };
@@ -543,6 +549,9 @@
 			children = (
 				3C1FE20D25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift */,
 				3C1FE21B25BB4879004DC9EF /* PhotoSlidesVC+Prompt.swift */,
+				3C8B648925BB4F8F008F1535 /* PhotoSlidesVC+FindBarDelegate.swift */,
+				3C8B648C25BB4FDB008F1535 /* PhotoSlidesVC+FindFromCache.swift */,
+				3C8B648F25BB51BE008F1535 /* PhotoSlidesVC+Draw.swift */,
 				3C1FE21525BB423E004DC9EF /* SlideFindBar.swift */,
 				3C1FE21825BB4246004DC9EF /* SlideFindBar.xib */,
 			);
@@ -1381,6 +1390,7 @@
 				3C1FE20625B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift in Sources */,
 				49B7A33523923E810070209F /* ZoomDismissalInteractionController.swift in Sources */,
 				49BC782F23C6E473003D9904 /* addHeart.swift in Sources */,
+				3C8B648A25BB4F8F008F1535 /* PhotoSlidesVC+FindBarDelegate.swift in Sources */,
 				3C2C3E9325A1152F002C3D11 /* PhotosMigrationController+Write.swift in Sources */,
 				49325C1323CAE84500A771A3 /* StatusView.swift in Sources */,
 				49563521243694BC0001E8C6 /* GestureControl.swift in Sources */,
@@ -1422,6 +1432,7 @@
 				3C8D58A225B7937C00EA226D /* PhotoSlidesVC+RemoveSlide.swift in Sources */,
 				3C4DE716259B0EAB0037D104 /* TutorialHeader.swift in Sources */,
 				49B7A33823923EBD0070209F /* PhotoPageContainerViewController.swift in Sources */,
+				3C8B649025BB51BE008F1535 /* PhotoSlidesVC+Draw.swift in Sources */,
 				3CB6843225A0087700AE0AD6 /* PhotosMigrationController.swift in Sources */,
 				3CE306D6259AC46400F1B2E2 /* TabBar.swift in Sources */,
 				4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */,
@@ -1548,6 +1559,7 @@
 				3C020CE5259FF5A70087AE92 /* ViewController+Migration.swift in Sources */,
 				49D985B824208037005F4E92 /* CachingCancelController.swift in Sources */,
 				49D985B024188CA4005F4E92 /* NewListToolbarCell.swift in Sources */,
+				3C8B648D25BB4FDB008F1535 /* PhotoSlidesVC+FindFromCache.swift in Sources */,
 				490DA75723CBB871000AF57D /* Styles.swift in Sources */,
 				3C1FE21625BB423E004DC9EF /* SlideFindBar.swift in Sources */,
 				4953F3BE2415A14000690E53 /* HistoryFindController.swift in Sources */,
