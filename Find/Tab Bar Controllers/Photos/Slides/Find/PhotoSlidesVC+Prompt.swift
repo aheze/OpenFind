@@ -18,8 +18,6 @@ extension PhotoSlidesViewController {
     
     func animatePromptReveal(reveal: Bool = true) {
         slideFindBar?.layoutIfNeeded()
-        print("revealing///")
-        print("height: \(slideFindBar?.promptLabel.bounds.height)")
         if reveal {
             let promptHeight = slideFindBar?.promptLabel.bounds.height ?? 0
             

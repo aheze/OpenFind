@@ -30,7 +30,6 @@ extension PhotoFindViewController {
             
             
             for findPhoto in self.findPhotos {
-                
                 guard let editableModel = findPhoto.editableModel else { continue }
                   
                 var numberOfMatches = 0 /// how many individual matches
@@ -134,6 +133,23 @@ extension PhotoFindViewController {
             
             self.resultPhotos = resultPhotos
             
+            DispatchQueue.main.async {
+                
+                self.numberCurrentlyFindingFromCache -= 1
+                
+                if self.numberCurrentlyFindingFromCache == 0 {
+                    self.setPromptToHowManyCacheResults(howMany: totalMatchNumber)
+                    
+                    UIView.animate(withDuration: 0.1, animations: {
+                        self.tableView.alpha = 1
+                        self.progressView.alpha = 0
+                    })
+                    
+                    self.tableView.reloadData()
+                }
+                
+                self.totalCacheResults = totalMatchNumber
+            }
             
         }
     }
