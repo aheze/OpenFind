@@ -9,6 +9,7 @@
 import VideoToolbox
 import UIKit
 import SwiftUI
+import SnapKit
 
 var screenBounds: CGRect {
     get {
@@ -395,5 +396,19 @@ func + (left: NSAttributedString, right: NSAttributedString) -> NSAttributedStri
 extension Array where Element: Comparable {
     func containsSameElements(as other: [Element]) -> Bool {
         return self.count == other.count && self.sorted() == other.sorted()
+    }
+}
+
+extension UIView {
+    var safeArea: ConstraintBasicAttributesDSL {
+        
+        #if swift(>=3.2)
+            if #available(iOS 11.0, *) {
+                return self.safeAreaLayoutGuide.snp
+            }
+            return self.snp
+        #else
+            return self.snp
+        #endif
     }
 }

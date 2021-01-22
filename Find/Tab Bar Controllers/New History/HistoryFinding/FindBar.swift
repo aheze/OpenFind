@@ -133,7 +133,6 @@ class FindBar: UIView, UITextFieldDelegate {
         
         clipsToBounds = true
         layer.cornerRadius = 5
-//        layer.backgroundColor = #colorLiteral(red: 0, green: 0.5981545251, blue: 0.937254902, alpha: 1)
         
         Bundle.main.loadNibNamed("FindBar", owner: self, options: nil)
         addSubview(contentView)

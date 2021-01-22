@@ -26,6 +26,9 @@
 		3C1FE20925BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE20825BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift */; };
 		3C1FE20E25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE20D25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift */; };
 		3C1FE21225BA8793004DC9EF /* PhotoSlidesVC+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE21125BA8793004DC9EF /* PhotoSlidesVC+NavBar.swift */; };
+		3C1FE21625BB423E004DC9EF /* SlideFindBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE21525BB423E004DC9EF /* SlideFindBar.swift */; };
+		3C1FE21925BB4246004DC9EF /* SlideFindBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1FE21825BB4246004DC9EF /* SlideFindBar.xib */; };
+		3C1FE21C25BB4879004DC9EF /* PhotoSlidesVC+Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE21B25BB4879004DC9EF /* PhotoSlidesVC+Prompt.swift */; };
 		3C21DEE6259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */; };
 		3C2858C6259C3E4C00BABBA7 /* TabBar+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */; };
 		3C2858CA259CF00200BABBA7 /* ListsController+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */; };
@@ -258,6 +261,9 @@
 		3C1FE20825BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Delete.swift"; sourceTree = "<group>"; };
 		3C1FE20D25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+FindBar.swift"; sourceTree = "<group>"; };
 		3C1FE21125BA8793004DC9EF /* PhotoSlidesVC+NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+NavBar.swift"; sourceTree = "<group>"; };
+		3C1FE21525BB423E004DC9EF /* SlideFindBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideFindBar.swift; sourceTree = "<group>"; };
+		3C1FE21825BB4246004DC9EF /* SlideFindBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlideFindBar.xib; sourceTree = "<group>"; };
+		3C1FE21B25BB4879004DC9EF /* PhotoSlidesVC+Prompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Prompt.swift"; sourceTree = "<group>"; };
 		3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListBuilderVC+ErrorChecking.swift"; sourceTree = "<group>"; };
 		3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBar+Lists.swift"; sourceTree = "<group>"; };
 		3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+Selection.swift"; sourceTree = "<group>"; };
@@ -536,6 +542,9 @@
 			isa = PBXGroup;
 			children = (
 				3C1FE20D25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift */,
+				3C1FE21B25BB4879004DC9EF /* PhotoSlidesVC+Prompt.swift */,
+				3C1FE21525BB423E004DC9EF /* SlideFindBar.swift */,
+				3C1FE21825BB4246004DC9EF /* SlideFindBar.xib */,
 			);
 			path = Find;
 			sourceTree = "<group>";
@@ -1274,6 +1283,7 @@
 				495DAD3624A6B2E500D5F844 /* FindBar.xib in Resources */,
 				3C0F5ED525A5729A00549040 /* NewAssets.xcassets in Resources */,
 				495F7DAA24CBB3970053DE50 /* InfoPlist.strings in Resources */,
+				3C1FE21925BB4246004DC9EF /* SlideFindBar.xib in Resources */,
 				49D985B124188CA4005F4E92 /* NewListToolbarCell.xib in Resources */,
 				3CB6842D259FF9A700AE0AD6 /* SegmentedSlider.xib in Resources */,
 				3C4DE704259AD5670037D104 /* NewColors.xcassets in Resources */,
@@ -1462,6 +1472,7 @@
 				490DA74E23CBB871000AF57D /* UIView+JJFloatingActionButton.swift in Sources */,
 				490DA73F23CBAB7C000AF57D /* NewShutterButton.swift in Sources */,
 				4956351A243694BC0001E8C6 /* PageViewItem.swift in Sources */,
+				3C1FE21C25BB4879004DC9EF /* PhotoSlidesVC+Prompt.swift in Sources */,
 				492EB4F523F61F5A007142CA /* SymbolsSectionHeader.swift in Sources */,
 				4911508B235D1A3E00EC0C04 /* Utilities.swift in Sources */,
 				3CE306D9259AC46400F1B2E2 /* ListsIcon.swift in Sources */,
@@ -1538,6 +1549,7 @@
 				49D985B824208037005F4E92 /* CachingCancelController.swift in Sources */,
 				49D985B024188CA4005F4E92 /* NewListToolbarCell.swift in Sources */,
 				490DA75723CBB871000AF57D /* Styles.swift in Sources */,
+				3C1FE21625BB423E004DC9EF /* SlideFindBar.swift in Sources */,
 				4953F3BE2415A14000690E53 /* HistoryFindController.swift in Sources */,
 				3C5B157325A8CD9C00BB8988 /* PhotosVC+Selection.swift in Sources */,
 				3CE306EA259AC5AF00F1B2E2 /* ViewController.swift in Sources */,

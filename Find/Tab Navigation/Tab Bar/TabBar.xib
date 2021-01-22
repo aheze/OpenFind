@@ -218,9 +218,9 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6W3-WX-fhU" customClass="CustomButton" customModule="Find" customModuleProvider="target">
                     <rect key="frame" x="20" y="11.5" width="25" height="26"/>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                    <color key="tintColor" name="TabIconPhotosMain"/>
+                    <color key="tintColor" name="PhotosText"/>
                     <state key="normal" image="star" catalog="system">
-                        <color key="titleColor" name="TabIconPhotosMain"/>
+                        <color key="titleColor" name="PhotosText"/>
                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
                     </state>
                     <connections>
@@ -230,9 +230,9 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1BX-UY-Tml" customClass="CustomButton" customModule="Find" customModuleProvider="target">
                     <rect key="frame" x="177.5" y="5.5" width="59" height="38"/>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                    <color key="tintColor" name="TabIconPhotosMain"/>
+                    <color key="tintColor" name="PhotosText"/>
                     <state key="normal" title="Cache">
-                        <color key="titleColor" name="TabIconPhotosMain"/>
+                        <color key="titleColor" name="PhotosText"/>
                     </state>
                     <connections>
                         <action selector="cacheButtonPressed:" destination="-1" eventType="touchUpInside" id="CEZ-QC-A5w"/>
@@ -241,9 +241,9 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCf-p6-NPI" customClass="CustomButton" customModule="Find" customModuleProvider="target">
                     <rect key="frame" x="373" y="11.5" width="21" height="26"/>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                    <color key="tintColor" name="TabIconPhotosMain"/>
+                    <color key="tintColor" name="PhotosText"/>
                     <state key="normal" image="trash" catalog="system">
-                        <color key="titleColor" name="TabIconPhotosMain"/>
+                        <color key="titleColor" name="PhotosText"/>
                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
                     </state>
                     <connections>
@@ -274,9 +274,9 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZb-Fp-p7M" customClass="CustomButton" customModule="Find" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="21.5" height="49"/>
                             <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                            <color key="tintColor" name="TabIconPhotosMain"/>
+                            <color key="tintColor" name="PhotosText"/>
                             <state key="normal" image="square.and.arrow.up" catalog="system">
-                                <color key="titleColor" name="TabIconPhotosMain"/>
+                                <color key="titleColor" name="PhotosText"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
                             </state>
                             <connections>
@@ -286,9 +286,9 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOq-qe-6HH" customClass="CustomButton" customModule="Find" customModuleProvider="target">
                             <rect key="frame" x="78" y="0.0" width="25" height="49"/>
                             <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                            <color key="tintColor" name="TabIconPhotosMain"/>
+                            <color key="tintColor" name="PhotosText"/>
                             <state key="normal" image="star" catalog="system">
-                                <color key="titleColor" name="TabIconPhotosMain"/>
+                                <color key="titleColor" name="PhotosText"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
                             </state>
                             <connections>
@@ -298,9 +298,9 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Og5-zd-hSh" customClass="CustomButton" customModule="Find" customModuleProvider="target">
                             <rect key="frame" x="159.5" y="0.0" width="59" height="49"/>
                             <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                            <color key="tintColor" name="TabIconPhotosMain"/>
+                            <color key="tintColor" name="PhotosText"/>
                             <state key="normal" title="Cache">
-                                <color key="titleColor" name="TabIconPhotosMain"/>
+                                <color key="titleColor" name="PhotosText"/>
                             </state>
                             <connections>
                                 <action selector="slideCachePressed:" destination="-1" eventType="touchUpInside" id="gxO-KE-1IQ"/>
@@ -309,9 +309,9 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZU-jK-mEd" customClass="CustomButton" customModule="Find" customModuleProvider="target">
                             <rect key="frame" x="274.5" y="0.0" width="21" height="49"/>
                             <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                            <color key="tintColor" name="TabIconPhotosMain"/>
+                            <color key="tintColor" name="PhotosText"/>
                             <state key="normal" image="trash" catalog="system">
-                                <color key="titleColor" name="TabIconPhotosMain"/>
+                                <color key="titleColor" name="PhotosText"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
                             </state>
                             <connections>
@@ -321,9 +321,9 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXF-bS-4GF" customClass="CustomButton" customModule="Find" customModuleProvider="target">
                             <rect key="frame" x="352" y="0.0" width="22" height="49"/>
                             <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                            <color key="tintColor" name="TabIconPhotosMain"/>
+                            <color key="tintColor" name="PhotosText"/>
                             <state key="normal" image="info.circle" catalog="system">
-                                <color key="titleColor" name="TabIconPhotosMain"/>
+                                <color key="titleColor" name="PhotosText"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
                             </state>
                             <connections>
@@ -359,8 +359,8 @@
         <namedColor name="ListsText">
             <color red="1" green="0.61400002241134644" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="TabIconPhotosMain">
-            <color red="0.0" green="0.77600002288818359" blue="0.030999999493360519" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="PhotosText">
+            <color red="0.0" green="0.60740974378881996" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="placeholderTextColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>

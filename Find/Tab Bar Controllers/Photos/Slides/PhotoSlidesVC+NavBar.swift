@@ -17,7 +17,7 @@ extension PhotoSlidesViewController {
         
         findButton = UIBarButtonItem(title: "Find", style: .plain, target: self, action: #selector(findPressed(sender:)))
         
-        findButton.tintColor = UIColor(named: "TabIconPhotosMain")
+        findButton.tintColor = UIColor(named: "PhotosText")
         
         navigationItem.rightBarButtonItems = [findButton]
     }
@@ -85,13 +85,6 @@ extension PhotoSlidesViewController {
             
             titleLabel.text = dateAsString
             subtitleLabel.text = timeAsString
-
-//            let dateString = formatter.string(from: Date())
-            
-            
-//            let dateAsString = dateFormatter.string(from: dateCreated)
-//            print(formatter3.string(from: today))
-            
         }
     }
 }

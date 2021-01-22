@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import SnapKit
 
 class PhotoSlidesViewController: UIViewController {
     
@@ -37,6 +38,10 @@ class PhotoSlidesViewController: UIViewController {
     var subtitleLabel: UILabel!
     
     // MARK: Finding
+    var slideFindBar: SlideFindBar?
+    var slideFindBarTopC: Constraint?
+    
+    var findPressed = false
     var cameFromFind = false
     var resultPhotos = [ResultPhoto]() /// photos from Finding
     var matchToColors = [String: [CGColor]]()

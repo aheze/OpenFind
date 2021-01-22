@@ -100,7 +100,7 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.tintColor = UIColor(named: "TabIconPhotosMain")
+        navigationController?.navigationBar.tintColor = UIColor(named: "PhotosText")
         
         setupBarButtons()
         getRealmObjects()
