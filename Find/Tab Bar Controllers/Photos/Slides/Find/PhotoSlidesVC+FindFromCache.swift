@@ -9,12 +9,21 @@
 import UIKit
 
 extension PhotoSlidesViewController {
+    func findAfterCached() {
+        if matchToColors.keys.count >= 1 {
+            let resultPhoto = resultPhotos[currentIndex]
+            if let editableModel = resultPhoto.findPhoto.editableModel, editableModel.isDeepSearched {
+                resultPhoto.currentMatchToColors = nil
+                resultPhoto.components.removeAll()
+                findFromCache(resultPhoto: resultPhoto, index: currentIndex)
+            }
+        }
+    }
     func findFromCache(resultPhoto: ResultPhoto, index: Int) {
         
         numberCurrentlyFindingFromCache += 1
         
         var totalMatchNumber = 0
-        
         
         DispatchQueue.global(qos: .userInitiated).async {
             
@@ -55,8 +64,6 @@ extension PhotoSlidesViewController {
                     }
                 }
             }
-            
-            
             
             self.numberCurrentlyFindingFromCache -= 1
             if self.numberCurrentlyFindingFromCache == 0 {

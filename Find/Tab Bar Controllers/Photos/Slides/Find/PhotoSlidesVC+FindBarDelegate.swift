@@ -10,19 +10,14 @@ import UIKit
 
 extension PhotoSlidesViewController: FindBarDelegate {
     func pause(pause: Bool) {
-        print("Pause findbar")
     }
     
     func returnTerms(matchToColorsR: [String : [CGColor]]) {
-        print("returnTerms findbar")
-        print("curre index is: \(currentIndex)")
-        
         self.matchToColors = matchToColorsR
         
         let resultPhoto = resultPhotos[currentIndex]
         resultPhoto.currentMatchToColors = nil
         resultPhoto.components.removeAll()
-        
         if matchToColorsR.keys.count >= 1 {
             
             if let editableModel = resultPhoto.findPhoto.editableModel, editableModel.isDeepSearched {
@@ -41,7 +36,6 @@ extension PhotoSlidesViewController: FindBarDelegate {
     }
     
     func pressedReturn() {
-        print("pressedReturn findbar------------, \(numberCurrentlyFindingFromCache)")
         if numberCurrentlyFindingFromCache == 0 {
             setPromptToFastFinding()
             fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)

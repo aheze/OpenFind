@@ -59,8 +59,6 @@ extension PhotoSlidesViewController {
             
             
         } else {
-            
-            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController
             
@@ -111,8 +109,14 @@ extension PhotoSlidesViewController: ReturnCachedPhotos {
             if let firstFindPhoto = photos.first {
                 findPhotoChanged?(firstFindPhoto)
                 
+                if findPressed {
+                    print("find pressed")
+                    findAfterCached()
+                }
+                
                 let photoExists = checkIfPhotoExists?(firstFindPhoto)
                 if photoExists == false {
+                    print("Cached photo does not exist")
                     removeCurrentSlide()
                 }
             }

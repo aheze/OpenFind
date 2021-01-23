@@ -53,29 +53,24 @@ extension PhotoSlidesViewController {
     
     
     func handleFastDetectedText(request: VNRequest?, error: Error?, resultPhoto: ResultPhoto, indexOfPhoto: Int) {
-        
         numberCurrentlyFastFinding -= 1
         
         guard indexOfPhoto == currentIndex, numberCurrentlyFastFinding == 0 else {
-            print("failed guard, diff photo")
             return
             
         }
-        
         
         guard
             let results = request?.results,
             results.count > 0
         else {
-            
             DispatchQueue.main.async {
-                self.setPromptToFinishedFastFinding(howMany: 0)
-                self.currentViewController.removeAllHighlights()
+                resultPhoto.currentMatchToColors = self.matchToColors
+                self.setPromptToFinishedFastFinding(howMany: resultPhoto.components.count)
+                self.drawHighlights(components: resultPhoto.components)
             }
             return
         }
-        
-    
         
         var contents = [EditableSingleHistoryContent]()
         
@@ -139,8 +134,6 @@ extension PhotoSlidesViewController {
         
         var componentsToAdd = [Component]()
         
-        print("current comps: \(resultPhoto.components)")
-        
         for newFindComponent in fastFoundComponents {
             var smallestDistance = CGFloat(999)
             for findMatch in resultPhoto.components {
@@ -170,8 +163,6 @@ extension PhotoSlidesViewController {
         }
 
     }
-    
-    
 }
 
 
