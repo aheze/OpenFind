@@ -53,9 +53,7 @@ struct RectangleButton: View {
     var color: String
     var body: some View {
         Button(action: {
-//            UserDefaults.standard.set(color, forKey: "highlightColor")
             selectedColor = color
-//            UserDefaults.standard.set(color, forKey: "highlightColor")
         }) {
             Rectangle()
                 .foregroundColor(Color(UIColor(hexString: color)))

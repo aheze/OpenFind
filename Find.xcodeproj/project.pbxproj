@@ -588,7 +588,7 @@
 				3C8D58A425B7FD7300EA226D /* PhotoSlidesVC+Cache.swift */,
 				3C1FE20825BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift */,
 				3C8D58A125B7937C00EA226D /* PhotoSlidesVC+RemoveSlide.swift */,
-				3C4C96B125B69038009FDE8D /* InfoView.swift */,
+				3CCA9B2D25BCBD1F003BD0E3 /* Info */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -729,6 +729,14 @@
 				3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */,
 			);
 			path = Migration;
+			sourceTree = "<group>";
+		};
+		3CCA9B2D25BCBD1F003BD0E3 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				3C4C96B125B69038009FDE8D /* InfoView.swift */,
+			);
+			path = Info;
 			sourceTree = "<group>";
 		};
 		3CDA84F325B250AF00726F91 /* Finding */ = {
