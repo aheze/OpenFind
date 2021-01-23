@@ -39,10 +39,16 @@ extension PhotoSlidesViewController: FindBarDelegate {
     
     func pressedReturn() {
         print("pressedReturn findbar------------")
-//        if numberCurrentlyFindingFromCache == 0 {
-//            setPromptToHowManyFastFound(howMany: 0)
+        if numberCurrentlyFindingFromCache == 0 {
+            
+            
+            setPromptToFastFinding()
+            
+            
+            fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
+            
 //            fastFind()
-//        }
+        }
     }
     
     func triedToEdit() {

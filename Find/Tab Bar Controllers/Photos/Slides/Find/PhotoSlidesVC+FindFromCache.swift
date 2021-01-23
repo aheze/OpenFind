@@ -60,8 +60,8 @@ extension PhotoSlidesViewController {
                 if self.numberCurrentlyFindingFromCache == 0 {
                     
                     if index == self.currentIndex {
+                        resultPhoto.components = components
                         self.setPromptToHowManyCacheResults(howMany: totalMatchNumber)
-                        
                         self.drawHighlights(components: components)
                     }
                 }

@@ -51,6 +51,9 @@ class PhotoSlidesViewController: UIViewController {
     var deviceWidth = UIScreen.main.bounds.width
     var totalCacheResults = 0
     
+    // MARK: Fast find
+    var currentFastFindProcess: UUID?
+    
     // MARK: Finding back button
     @IBOutlet weak var backButtonView: UIView!
     @IBOutlet weak var backBlurView: UIVisualEffectView!
