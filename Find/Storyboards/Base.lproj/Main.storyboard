@@ -3281,27 +3281,10 @@ the App!</string>
                                     <constraint firstAttribute="height" constant="2" id="f0d-I0-C0h"/>
                                 </constraints>
                                 <color key="progressTintColor" name="FeedbackGradientRight"/>
-                                <color key="trackTintColor" name="Gray3"/>
+                                <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </progressView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="50k-Yv-2oR">
-                                <rect key="frame" x="16" y="52" width="396" height="6"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OCR search in progress!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d2z-RA-6HM">
-                                        <rect key="frame" x="105.66666666666669" y="-7.3333333333333357" width="185" height="20.666666666666668"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.56078431370000004" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="d2z-RA-6HM" firstAttribute="centerX" secondItem="50k-Yv-2oR" secondAttribute="centerX" id="Jen-NR-8BB"/>
-                                    <constraint firstItem="d2z-RA-6HM" firstAttribute="centerY" secondItem="50k-Yv-2oR" secondAttribute="centerY" id="Q9P-Sb-rSN"/>
-                                    <constraint firstAttribute="height" constant="6" id="U1w-HK-Iyt"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Gzv-fX-Vyn">
-                                <rect key="frame" x="0.0" y="58" width="428" height="868"/>
+                                <rect key="frame" x="0.0" y="50" width="428" height="876"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="Alc-Nu-G0B">
                                     <rect key="frame" x="0.0" y="0.0" width="428" height="121"/>
@@ -3483,19 +3466,15 @@ the App!</string>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Gzv-fX-Vyn" firstAttribute="leading" secondItem="oow-0C-4Ut" secondAttribute="leading" id="18l-Gv-gBb"/>
+                            <constraint firstItem="Gzv-fX-Vyn" firstAttribute="top" secondItem="2Lg-gS-P4U" secondAttribute="bottom" id="3wf-hs-2Rg"/>
                             <constraint firstItem="7CF-yv-drp" firstAttribute="top" secondItem="2Lg-gS-P4U" secondAttribute="bottom" id="77v-lR-NMx"/>
-                            <constraint firstItem="50k-Yv-2oR" firstAttribute="top" secondItem="7CF-yv-drp" secondAttribute="bottom" id="Eio-nx-vx8"/>
-                            <constraint firstItem="50k-Yv-2oR" firstAttribute="top" secondItem="7CF-yv-drp" secondAttribute="bottom" id="JO3-TJ-DBa"/>
                             <constraint firstAttribute="trailing" secondItem="7CF-yv-drp" secondAttribute="trailing" id="Pv6-x2-Naz"/>
                             <constraint firstAttribute="trailing" secondItem="Gzv-fX-Vyn" secondAttribute="trailing" id="QiA-V1-fed"/>
                             <constraint firstAttribute="bottom" secondItem="Gzv-fX-Vyn" secondAttribute="bottom" id="bRT-59-QgB"/>
-                            <constraint firstItem="50k-Yv-2oR" firstAttribute="leading" secondItem="VFP-vX-BVP" secondAttribute="leading" constant="16" id="dTV-Lt-nB6"/>
                             <constraint firstItem="7CF-yv-drp" firstAttribute="leading" secondItem="oow-0C-4Ut" secondAttribute="leading" id="dow-sd-SxC"/>
                             <constraint firstItem="2Lg-gS-P4U" firstAttribute="top" secondItem="oow-0C-4Ut" secondAttribute="top" id="eZh-Af-FPo"/>
-                            <constraint firstItem="Gzv-fX-Vyn" firstAttribute="top" secondItem="50k-Yv-2oR" secondAttribute="bottom" id="g1o-xq-kjv"/>
                             <constraint firstAttribute="trailing" secondItem="2Lg-gS-P4U" secondAttribute="trailing" id="hyJ-CJ-7S7"/>
                             <constraint firstItem="2Lg-gS-P4U" firstAttribute="leading" secondItem="oow-0C-4Ut" secondAttribute="leading" id="qv4-BG-TZM"/>
-                            <constraint firstItem="VFP-vX-BVP" firstAttribute="trailing" secondItem="50k-Yv-2oR" secondAttribute="trailing" constant="16" id="sBL-wx-XfD"/>
                         </constraints>
                     </view>
                     <connections>
@@ -3504,8 +3483,6 @@ the App!</string>
                         <outlet property="promptLabel" destination="FgX-GJ-ZZY" id="hyu-RO-IzP"/>
                         <outlet property="promptView" destination="Alc-Nu-G0B" id="Q1w-s6-Ig4"/>
                         <outlet property="tableView" destination="Gzv-fX-Vyn" id="RGq-Mk-wxL"/>
-                        <outlet property="warningLabel" destination="d2z-RA-6HM" id="PbV-OK-7Ri"/>
-                        <outlet property="warningView" destination="50k-Yv-2oR" id="tyG-fm-J9n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DjT-E4-7Xz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

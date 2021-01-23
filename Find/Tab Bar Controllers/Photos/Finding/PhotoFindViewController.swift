@@ -38,8 +38,6 @@ class PhotoFindViewController: UIViewController {
     var changePresentationMode: ((Bool) -> Void)? /// notify the parent to change the tab bar
     
     @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var warningView: UIView! /// ocr search in progress
-    @IBOutlet weak var warningLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
     

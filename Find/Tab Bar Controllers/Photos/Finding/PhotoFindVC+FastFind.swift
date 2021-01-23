@@ -26,50 +26,59 @@ extension PhotoFindViewController {
             })
         }
         
+        let photosToFindFrom = self.findPhotos
+        
         dispatchQueue.async {
             self.numberFastFound = 0
             
-            for findPhoto in self.findPhotos {
-                if thisProcessIdentifier == self.currentFastFindProcess {
-                    self.dispatchGroup.enter()
-                    
-                    let options = PHImageRequestOptions()
-                    options.isSynchronous = true
-                    
-                    PHImageManager.default().requestImageDataAndOrientation(for: findPhoto.asset, options: options) { (data, _, _, _) in
-                        if let imageData = data {
-                            let request = VNRecognizeTextRequest { request, error in
-                                let howManyMatches = self.handleFastDetectedText(request: request, error: error, photo: findPhoto, thisProcessIdentifier: thisProcessIdentifier)
-                                fastFindResultsNumber += howManyMatches
+            for findPhoto in photosToFindFrom {
+                var stop = false
+                
+                autoreleasepool {
+                    if thisProcessIdentifier == self.currentFastFindProcess {
+                        self.dispatchGroup.enter()
+                        
+                        let options = PHImageRequestOptions()
+                        options.isSynchronous = true
+                        
+                        PHImageManager.default().requestImageDataAndOrientation(for: findPhoto.asset, options: options) { (data, _, _, _) in
+                            if let imageData = data {
+                                let request = VNRecognizeTextRequest { request, error in
+                                    let howManyMatches = self.handleFastDetectedText(request: request, error: error, photo: findPhoto, thisProcessIdentifier: thisProcessIdentifier)
+                                    fastFindResultsNumber += howManyMatches
+                                }
+                                request.recognitionLevel = .fast
+                                request.recognitionLanguages = ["en_GB"]
+                                
+                                var customFindArray = [String]()
+                                for findWord in self.matchToColors.keys {
+                                    customFindArray.append(findWord)
+                                    customFindArray.append(findWord.lowercased())
+                                    customFindArray.append(findWord.uppercased())
+                                    customFindArray.append(findWord.capitalizingFirstLetter())
+                                }
+                                
+                                request.customWords = customFindArray
+                                
+                                
+                                let imageRequestHandler = VNImageRequestHandler(data: imageData, orientation: .up, options: [:])
+                                do {
+                                    try imageRequestHandler.perform([request])
+                                } catch let error {
+                                    print("Error: \(error)")
+                                }
+                                
+                                self.dispatchSemaphore.wait()
                             }
-                            request.recognitionLevel = .fast
-                            request.recognitionLanguages = ["en_GB"]
-                            
-                            var customFindArray = [String]()
-                            for findWord in self.matchToColors.keys {
-                                customFindArray.append(findWord)
-                                customFindArray.append(findWord.lowercased())
-                                customFindArray.append(findWord.uppercased())
-                                customFindArray.append(findWord.capitalizingFirstLetter())
-                            }
-                            
-                            request.customWords = customFindArray
-                            
-                            
-                            let imageRequestHandler = VNImageRequestHandler(data: imageData, orientation: .up, options: [:])
-                            do {
-                                try imageRequestHandler.perform([request])
-                            } catch let error {
-                                print("Error: \(error)")
-                            }
-                            
-                            self.dispatchSemaphore.wait()
                         }
+                    } else {
+                        stop = true // call this if you need to stop
                     }
-                } else {
-                    break
                 }
+                
+                if stop { break }
             }
+            
         }
         dispatchGroup.notify(queue: dispatchQueue) {
             if thisProcessIdentifier == self.currentFastFindProcess {
@@ -179,7 +188,6 @@ extension PhotoFindViewController {
                     }
                 }
             }
-            
             if hasMatch == true {
                 textToRanges[content.text] = matchRanges
             }
