@@ -27,6 +27,11 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
         leftViewController.resultPhoto = leftResultPhoto
         leftViewController.index = currentViewController.index - 1
         
+//        if let currentMatchToColors = leftResultPhoto.currentMatchToColors, currentMatchToColors != matchToColors {
+//            print("remove savedd LEFT")
+//            leftViewController.prepareToRemoveAllHighlights = true
+//        }
+        
         if cameFromFind {
             leftViewController.cameFromFind = true
             leftViewController.highlights = leftResultPhoto.components
@@ -50,6 +55,13 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
         rightViewController.resultPhoto = rightResultPhoto
         rightViewController.index = currentViewController.index + 1
         
+        
+//        if let currentMatchToColors = rightResultPhoto.currentMatchToColors, currentMatchToColors != matchToColors {
+//            print("remove savedd RIGHT")
+//            rightViewController.prepareToRemoveAllHighlights = true
+//        }
+        
+        
         if cameFromFind {
             rightViewController.cameFromFind = true
             rightViewController.highlights = rightResultPhoto.components
@@ -58,6 +70,33 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
         
         return rightViewController
         
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        print("Pending trans!!")
+        print("curr ind is \(currentIndex)")
+        
+        for pendingViewController in pendingViewControllers {
+            print("pending ..")
+            
+            if let slideViewController = pendingViewController as? SlideViewController {
+                let resultPhoto = resultPhotos[slideViewController.index]
+                if let currentMatchToColors = resultPhoto.currentMatchToColors, currentMatchToColors != matchToColors {
+                    print("remove savedd RIGHT")
+//                    slideViewController.prepareToRemoveAllHighlights = true
+                    slideViewController.removeAllHighlights()
+                }
+                
+                print("slide indexL: \(slideViewController.index)")
+            }
+        }
+        
+//        let rightResultPhoto = resultPhotos[currentIndex + 1]
+//        if let currentMatchToColors = rightResultPhoto.currentMatchToColors, currentMatchToColors != matchToColors {
+//            print("remove savedd RIGHT")
+//            rightViewController.prepareToRemoveAllHighlights = true
+//            pendingViewControllers.removeall
+//        }
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
@@ -88,10 +127,15 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
                 updateNavigationTitle(to: resultPhoto.findPhoto)
                 
                 if findPressed {
-                    if let editableModel = resultPhoto.findPhoto.editableModel, editableModel.isDeepSearched {
-                        findFromCache(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
+                    if let currentMatchToColors = resultPhoto.currentMatchToColors, currentMatchToColors == matchToColors {
+                        print("saved")
+                        setPromptToFinishedFastFinding(howMany: resultPhoto.components.count)
                     } else {
-                        setPromptToContinue()
+                        if let editableModel = resultPhoto.findPhoto.editableModel, editableModel.isDeepSearched {
+                            findFromCache(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
+                        } else {
+                            setPromptToContinue()
+                        }
                     }
                 }
                 

@@ -31,6 +31,8 @@ class SlideViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("loaded view!!!")
+        
         scrollView.delegate = self
         scrollView.contentInsetAdjustmentBehavior = .never
         

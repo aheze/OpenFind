@@ -10,6 +10,7 @@ import UIKit
 
 class ResultPhoto: NSObject {
     var findPhoto = FindPhoto()
+    var currentMatchToColors: [String: [CGColor]]? /// what is currently finding from
     var numberOfMatches = 0
     var descriptionText = ""
     var descriptionHeight = CGFloat(0)

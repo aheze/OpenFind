@@ -18,10 +18,15 @@ extension PhotoSlidesViewController: FindBarDelegate {
         print("curre index is: \(currentIndex)")
         
         self.matchToColors = matchToColorsR
+        
+        let resultPhoto = resultPhotos[currentIndex]
+        resultPhoto.currentMatchToColors = nil
+        resultPhoto.components.removeAll()
+        
         if matchToColorsR.keys.count >= 1 {
             
-            if let editableModel = resultPhotos[currentIndex].findPhoto.editableModel, editableModel.isDeepSearched {
-                findFromCache(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
+            if let editableModel = resultPhoto.findPhoto.editableModel, editableModel.isDeepSearched {
+                findFromCache(resultPhoto: resultPhoto, index: currentIndex)
             } else {
                 setPromptToContinue()
             }

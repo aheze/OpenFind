@@ -12,8 +12,7 @@ import Vision
 
 extension PhotoSlidesViewController {
     func fastFind(resultPhoto: ResultPhoto, index: Int) {
-        let thisProcessIdentifier = UUID()
-        currentFastFindProcess = thisProcessIdentifier
+        numberCurrentlyFastFinding += 1
         
         DispatchQueue.global(qos: .userInitiated).async {
             let options = PHImageRequestOptions()
@@ -22,7 +21,7 @@ extension PhotoSlidesViewController {
             PHImageManager.default().requestImageDataAndOrientation(for: resultPhoto.findPhoto.asset, options: options) { (data, _, _, _) in
                 if let imageData = data {
                     let request = VNRecognizeTextRequest { request, error in
-                        self.handleFastDetectedText(request: request, error: error, resultPhoto: resultPhoto, thisProcessIdentifier: thisProcessIdentifier)
+                        self.handleFastDetectedText(request: request, error: error, resultPhoto: resultPhoto, indexOfPhoto: index)
                     }
                     request.recognitionLevel = .fast
                     request.recognitionLanguages = ["en_GB"]
@@ -53,12 +52,26 @@ extension PhotoSlidesViewController {
     }
     
     
-    func handleFastDetectedText(request: VNRequest?, error: Error?, resultPhoto: ResultPhoto, thisProcessIdentifier: UUID) {
+    func handleFastDetectedText(request: VNRequest?, error: Error?, resultPhoto: ResultPhoto, indexOfPhoto: Int) {
+        
+        numberCurrentlyFastFinding -= 1
+        
+        guard indexOfPhoto == currentIndex, numberCurrentlyFastFinding == 0 else {
+            print("failed guard, diff photo")
+            return
+            
+        }
+        
         
         guard
-            thisProcessIdentifier == currentFastFindProcess,
             let results = request?.results,
-            results.count > 0 else {
+            results.count > 0
+        else {
+            
+            DispatchQueue.main.async {
+                self.setPromptToFinishedFastFinding(howMany: 0)
+                self.currentViewController.removeAllHighlights()
+            }
             return
         }
         
@@ -126,6 +139,8 @@ extension PhotoSlidesViewController {
         
         var componentsToAdd = [Component]()
         
+        print("current comps: \(resultPhoto.components)")
+        
         for newFindComponent in fastFoundComponents {
             var smallestDistance = CGFloat(999)
             for findMatch in resultPhoto.components {
@@ -147,7 +162,7 @@ extension PhotoSlidesViewController {
         }
         
         resultPhoto.components += componentsToAdd
-//        print("ADD MATCHES: \(newMatchesNumber)")
+        resultPhoto.currentMatchToColors = matchToColors
         
         DispatchQueue.main.async {
             self.setPromptToFinishedFastFinding(howMany: resultPhoto.components.count)

@@ -12,8 +12,6 @@ extension PhotoFindViewController {
     func findFromCache() {
         print("set to nil")
         currentFastFindProcess = nil
-        
-        
         totalCacheResults = 0
         var totalMatchNumber = 0
         
