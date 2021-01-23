@@ -47,7 +47,6 @@ extension PhotoSlidesViewController: FindBarDelegate {
     }
     
     func triedToEditWhilePaused() {
-        print("ReturnSortedTerms triedToEditWhilePaused")
     }
     
 }
