@@ -8,8 +8,15 @@
 
 import MobileCoreServices // << for UTI types
 import SwiftUI
+import SwiftEntryKit
 
 class InfoViewHoster: UIViewController {
+    
+    var dateTaken = "January 1, 2020 at 3:46 PM"
+    var origin = "Saved from Find"
+    var isStarred = false
+    var isCached = false
+    var transcript = ""
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -32,6 +39,13 @@ class InfoViewHoster: UIViewController {
         infoView.donePressed = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
+        
+        infoView.dateTaken = dateTaken
+        infoView.origin = origin
+        infoView.isStarred = isStarred
+        infoView.isCached = isCached
+        infoView.transcript = transcript
+        
         
         let hostedInfo = UIHostingController(rootView: infoView)
         
@@ -129,6 +143,54 @@ struct InfoView: View {
                             print("copy")
                             UIPasteboard.general.setValue(transcript,
                                        forPasteboardType: kUTTypePlainText as String)
+                           
+                            let topToast = UIView()
+                            topToast.backgroundColor = UIColor.systemBackground
+                            topToast.layer.cornerRadius = 25
+                            
+                            let contentView = UIView()
+                            let imageView = UIImageView()
+                            let titleLabel = UILabel()
+                            
+                            topToast.addSubview(contentView)
+                            
+                            let configuration = UIImage.SymbolConfiguration(pointSize: 19, weight: .medium, scale: .default)
+                            imageView.image = UIImage(systemName: "doc.on.doc", withConfiguration: configuration)?.withTintColor(UIColor(named: "PhotosText")!, renderingMode: .alwaysOriginal)
+                            
+                            titleLabel.text = "Copied!"
+                            titleLabel.textColor = UIColor(named: "PhotosText")
+                            titleLabel.font = UIFont.systemFont(ofSize: 19, weight: .medium)
+                            
+                            contentView.addSubview(imageView)
+                            contentView.addSubview(titleLabel)
+                            
+                            contentView.snp.makeConstraints { (make) in
+                                make.center.equalToSuperview()
+                            }
+                            
+                            imageView.snp.makeConstraints { (make) in
+                                make.left.equalToSuperview()
+                                make.top.equalToSuperview()
+                                make.bottom.equalToSuperview()
+                                make.width.equalTo(24)
+                                make.height.equalTo(24)
+                            }
+                            
+                            titleLabel.snp.makeConstraints { (make) in
+                                make.left.equalTo(imageView.snp.right).offset(6)
+                                make.centerY.equalToSuperview()
+                                make.right.equalToSuperview()
+                            }
+                            
+                            var attributes = EKAttributes.topToast
+                            attributes.displayDuration = 1.2
+                            attributes.entryInteraction = .dismiss
+                            attributes.shadow = .active(with: .init(color: EKColor(#colorLiteral(red: 0.6370837092, green: 0.6370837092, blue: 0.6370837092, alpha: 1)), opacity: 0.2, radius: 10, offset: CGSize(width: 2, height: 1)))
+                            
+                            attributes.positionConstraints.size = .init(width: .constant(value: 150), height: .constant(value: 50))
+                            
+                            SwiftEntryKit.display(entry: topToast, using: attributes)
+                            
                         }) {
                             Image(systemName: "doc.on.doc")
                                 .foregroundColor(isCached ? Color(UIColor(named: "PhotosText")!) : Color(UIColor.secondaryLabel))

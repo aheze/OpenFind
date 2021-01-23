@@ -28,8 +28,7 @@ extension PhotoSlidesViewController {
             print("delete")
             startDeletePhoto()
         case .info:
-            let infoVC = InfoViewHoster()
-            self.present(infoVC, animated: true)
+            infoPressed()
         }
     }
 }
