@@ -20,17 +20,15 @@ extension PhotoSlidesViewController: FindBarDelegate {
         self.matchToColors = matchToColorsR
         if matchToColorsR.keys.count >= 1 {
             
-            
-            findFromCache(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
+            if let editableModel = resultPhotos[currentIndex].findPhoto.editableModel, editableModel.isDeepSearched {
+                findFromCache(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
+            } else {
+                setPromptToContinue()
+            }
         } else { /// no text entered
             changePromptToStarting()
             currentViewController.removeAllHighlights()
-//            tableView.reloadData()
-//            currentFastFindProcess = nil
-//            self.progressView.alpha = 0
         }
-        
-        
     }
     
     func startedEditing(start: Bool) {
@@ -40,14 +38,8 @@ extension PhotoSlidesViewController: FindBarDelegate {
     func pressedReturn() {
         print("pressedReturn findbar------------, \(numberCurrentlyFindingFromCache)")
         if numberCurrentlyFindingFromCache == 0 {
-            print("ues")
-            
             setPromptToFastFinding()
-            
-            
             fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
-            
-//            fastFind()
         }
     }
     

@@ -49,7 +49,6 @@ class PhotoSlidesViewController: UIViewController {
     // MARK: Find from cache
     var numberCurrentlyFindingFromCache = 0 /// how many cache findings are currently going on
     var deviceWidth = UIScreen.main.bounds.width
-    var totalCacheResults = 0
     
     // MARK: Fast find
     var currentFastFindProcess: UUID?

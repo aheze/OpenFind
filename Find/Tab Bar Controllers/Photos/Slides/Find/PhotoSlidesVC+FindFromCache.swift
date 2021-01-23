@@ -10,12 +10,9 @@ import UIKit
 
 extension PhotoSlidesViewController {
     func findFromCache(resultPhoto: ResultPhoto, index: Int) {
-//        currentFastFindProcess = nil
         
         numberCurrentlyFindingFromCache += 1
-        print("plus 1 \(numberCurrentlyFindingFromCache)")
         
-        totalCacheResults = 0
         var totalMatchNumber = 0
         
         DispatchQueue.global(qos: .userInitiated).async {
@@ -72,10 +69,6 @@ extension PhotoSlidesViewController {
                     }
                 }
             }
-            
-            self.totalCacheResults = totalMatchNumber
-            
-            
         }
         
     }

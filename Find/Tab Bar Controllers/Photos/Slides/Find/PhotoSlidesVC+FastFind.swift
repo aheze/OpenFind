@@ -62,8 +62,7 @@ extension PhotoSlidesViewController {
             return
         }
         
-        
-        var fastFindResultsNumber = 0
+    
         
         var contents = [EditableSingleHistoryContent]()
         
@@ -126,7 +125,6 @@ extension PhotoSlidesViewController {
         }
         
         var componentsToAdd = [Component]()
-        var newMatchesNumber = 0
         
         for newFindComponent in fastFoundComponents {
             var smallestDistance = CGFloat(999)
@@ -144,18 +142,15 @@ extension PhotoSlidesViewController {
             
             if smallestDistance >= 0.008 { ///Bigger, so add it
                 componentsToAdd.append(newFindComponent)
-                newMatchesNumber += 1
             }
             
         }
         
         resultPhoto.components += componentsToAdd
-        resultPhoto.numberOfMatches += newMatchesNumber
-        fastFindResultsNumber += newMatchesNumber
-        print("ADD MATCHES: \(newMatchesNumber)")
+//        print("ADD MATCHES: \(newMatchesNumber)")
         
         DispatchQueue.main.async {
-            self.setPromptToFinishedFastFinding(howMany: fastFindResultsNumber)
+            self.setPromptToFinishedFastFinding(howMany: resultPhoto.components.count)
             self.drawHighlights(components: resultPhoto.components)
         }
 

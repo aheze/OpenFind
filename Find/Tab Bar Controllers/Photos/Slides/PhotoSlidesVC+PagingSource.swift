@@ -68,8 +68,8 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
             
             
             if !cameFromFind {
-                let findPhoto = resultPhotos[currentIndex].findPhoto
-                if let editableModel = findPhoto.editableModel {
+                let resultPhoto = resultPhotos[currentIndex]
+                if let editableModel = resultPhoto.findPhoto.editableModel {
                     if editableModel.isHearted {
                         updateActions?(.shouldNotStar)
                     } else {
@@ -80,8 +80,21 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
                     } else {
                         updateActions?(.shouldCache)
                     }
+                } else {
+                    updateActions?(.shouldStar)
+                    updateActions?(.shouldCache)
                 }
-                updateNavigationTitle(to: findPhoto)
+                
+                updateNavigationTitle(to: resultPhoto.findPhoto)
+                
+                if findPressed {
+                    if let editableModel = resultPhoto.findPhoto.editableModel, editableModel.isDeepSearched {
+                        findFromCache(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
+                    } else {
+                        setPromptToContinue()
+                    }
+                }
+                
             }
         }
         previousViewControllers.forEach { vc in
