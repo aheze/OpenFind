@@ -38,9 +38,9 @@ extension PhotoSlidesViewController: FindBarDelegate {
     }
     
     func pressedReturn() {
-        print("pressedReturn findbar------------")
+        print("pressedReturn findbar------------, \(numberCurrentlyFindingFromCache)")
         if numberCurrentlyFindingFromCache == 0 {
-            
+            print("ues")
             
             setPromptToFastFinding()
             

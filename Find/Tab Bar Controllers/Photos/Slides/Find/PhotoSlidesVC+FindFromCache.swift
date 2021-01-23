@@ -13,13 +13,17 @@ extension PhotoSlidesViewController {
 //        currentFastFindProcess = nil
         
         numberCurrentlyFindingFromCache += 1
+        print("plus 1 \(numberCurrentlyFindingFromCache)")
         
         totalCacheResults = 0
         var totalMatchNumber = 0
         
         DispatchQueue.global(qos: .userInitiated).async {
             
-            guard let editableModel = resultPhoto.findPhoto.editableModel else { return }
+            guard let editableModel = resultPhoto.findPhoto.editableModel else {
+                self.numberCurrentlyFindingFromCache -= 1
+                return
+            }
               
             var numberOfMatches = 0 /// how many individual matches
             
@@ -54,20 +58,23 @@ extension PhotoSlidesViewController {
                 }
             }
             
-            DispatchQueue.main.async {
+            
+            
+            self.numberCurrentlyFindingFromCache -= 1
+            if self.numberCurrentlyFindingFromCache == 0 {
                 
-                self.numberCurrentlyFindingFromCache -= 1
-                if self.numberCurrentlyFindingFromCache == 0 {
+                if index == self.currentIndex {
+                    resultPhoto.components = components
                     
-                    if index == self.currentIndex {
-                        resultPhoto.components = components
+                    DispatchQueue.main.async {
                         self.setPromptToHowManyCacheResults(howMany: totalMatchNumber)
                         self.drawHighlights(components: components)
                     }
                 }
-                
-                self.totalCacheResults = totalMatchNumber
             }
+            
+            self.totalCacheResults = totalMatchNumber
+            
             
         }
         

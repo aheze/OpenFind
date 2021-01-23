@@ -17,6 +17,7 @@ extension PhotoSlidesViewController {
     }
     
     func animatePromptReveal(reveal: Bool = true) {
+        print("aimate reveal!!")
         slideFindBar?.layoutIfNeeded()
         if reveal {
             let promptHeight = slideFindBar?.promptLabel.bounds.height ?? 0
@@ -81,6 +82,7 @@ extension PhotoSlidesViewController {
     }
     
     func setPromptToFastFinding() { /// currently fast finding
+        print("set to fast")
         let textStyle = Style {
             $0.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             $0.color = UIColor.secondaryLabel
