@@ -66,6 +66,7 @@ class PhotosViewController: UIViewController {
     // MARK: Slides
     var updateSlideActions: ((ChangeActions) -> Void)? /// switch star/unstar and cache/uncache
     var findPhotoChanged: (() -> Void)? /// starred/cached photos
+    var hideTabBar: ((Bool) -> Void)?
     
     // MARK: Diffable Data Source
     lazy var dataSource = makeDataSource()
@@ -128,6 +129,13 @@ class PhotosViewController: UIViewController {
         segmentedSliderBottomC.constant = 8 + bottomInset
 
         getSliderCallback()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("appearing..")
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

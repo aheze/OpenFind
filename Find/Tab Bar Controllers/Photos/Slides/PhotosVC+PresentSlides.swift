@@ -57,6 +57,9 @@ extension PhotosViewController {
                 }
                 return false
             }
+            
+            slidesViewController.hideTabBar = self.hideTabBar
+            
             if let currentIndex = allPhotosToDisplay.firstIndex(of: findPhoto) {
                 slidesViewController.currentIndex = currentIndex
             }

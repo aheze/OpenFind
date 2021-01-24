@@ -183,18 +183,18 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HR2-CF-DNb">
-                    <rect key="frame" x="20" y="13" width="48.5" height="23"/>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                    <rect key="frame" x="20" y="12" width="51.5" height="25.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyJ-A4-ML3" customClass="CustomButton" customModule="Find" customModuleProvider="target">
-                    <rect key="frame" x="373" y="11.5" width="21" height="26"/>
+                    <rect key="frame" x="371" y="11" width="23" height="27.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <color key="tintColor" name="ListsText"/>
                     <state key="normal" image="trash" catalog="system">
                         <color key="titleColor" name="ListsText"/>
-                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="21" scale="medium" weight="regular"/>
                     </state>
                     <connections>
                         <action selector="listsDeleteButtonPressed:" destination="-1" eventType="touchUpInside" id="sJM-wi-cEZ"/>
@@ -216,12 +216,12 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6W3-WX-fhU" customClass="CustomButton" customModule="Find" customModuleProvider="target">
-                    <rect key="frame" x="20" y="11.5" width="25" height="26"/>
+                    <rect key="frame" x="20" y="11.5" width="27.5" height="26"/>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <color key="tintColor" name="PhotosText"/>
                     <state key="normal" image="star" catalog="system">
                         <color key="titleColor" name="PhotosText"/>
-                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="21" scale="medium" weight="regular"/>
                     </state>
                     <connections>
                         <action selector="starButtonPressed:" destination="-1" eventType="touchUpInside" id="wDW-N7-S05"/>
@@ -239,12 +239,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCf-p6-NPI" customClass="CustomButton" customModule="Find" customModuleProvider="target">
-                    <rect key="frame" x="373" y="11.5" width="21" height="26"/>
+                    <rect key="frame" x="371" y="11" width="23" height="27.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <color key="tintColor" name="PhotosText"/>
                     <state key="normal" image="trash" catalog="system">
                         <color key="titleColor" name="PhotosText"/>
-                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="21" scale="medium" weight="regular"/>
                     </state>
                     <connections>
                         <action selector="photosDeleteButtonPressed:" destination="-1" eventType="touchUpInside" id="qaO-e9-n2a"/>
@@ -272,31 +272,31 @@
                     <rect key="frame" x="20" y="0.0" width="374" height="49"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZb-Fp-p7M" customClass="CustomButton" customModule="Find" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="21.5" height="49"/>
+                            <rect key="frame" x="0.0" y="0.0" width="23.5" height="49"/>
                             <fontDescription key="fontDescription" type="system" pointSize="21"/>
                             <color key="tintColor" name="PhotosText"/>
                             <state key="normal" image="square.and.arrow.up" catalog="system">
                                 <color key="titleColor" name="PhotosText"/>
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="21" scale="medium" weight="regular"/>
                             </state>
                             <connections>
                                 <action selector="slideSharePressed:" destination="-1" eventType="touchUpInside" id="tis-0w-qfo"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOq-qe-6HH" customClass="CustomButton" customModule="Find" customModuleProvider="target">
-                            <rect key="frame" x="78" y="0.0" width="25" height="49"/>
+                            <rect key="frame" x="77.5" y="0.0" width="27.5" height="49"/>
                             <fontDescription key="fontDescription" type="system" pointSize="21"/>
                             <color key="tintColor" name="PhotosText"/>
                             <state key="normal" image="star" catalog="system">
                                 <color key="titleColor" name="PhotosText"/>
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="21" scale="medium" weight="regular"/>
                             </state>
                             <connections>
                                 <action selector="slideStarPressed:" destination="-1" eventType="touchUpInside" id="S4R-Sy-Jo5"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Og5-zd-hSh" customClass="CustomButton" customModule="Find" customModuleProvider="target">
-                            <rect key="frame" x="159.5" y="0.0" width="59" height="49"/>
+                            <rect key="frame" x="159" y="0.0" width="59" height="49"/>
                             <fontDescription key="fontDescription" type="system" pointSize="21"/>
                             <color key="tintColor" name="PhotosText"/>
                             <state key="normal" title="Cache">
@@ -307,24 +307,24 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZU-jK-mEd" customClass="CustomButton" customModule="Find" customModuleProvider="target">
-                            <rect key="frame" x="274.5" y="0.0" width="21" height="49"/>
+                            <rect key="frame" x="272" y="0.0" width="23" height="49"/>
                             <fontDescription key="fontDescription" type="system" pointSize="21"/>
                             <color key="tintColor" name="PhotosText"/>
                             <state key="normal" image="trash" catalog="system">
                                 <color key="titleColor" name="PhotosText"/>
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="21" scale="medium" weight="regular"/>
                             </state>
                             <connections>
                                 <action selector="slideDeletePressed:" destination="-1" eventType="touchUpInside" id="12v-cS-jdq"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXF-bS-4GF" customClass="CustomButton" customModule="Find" customModuleProvider="target">
-                            <rect key="frame" x="352" y="0.0" width="22" height="49"/>
+                            <rect key="frame" x="349" y="0.0" width="25" height="49"/>
                             <fontDescription key="fontDescription" type="system" pointSize="21"/>
                             <color key="tintColor" name="PhotosText"/>
                             <state key="normal" image="info.circle" catalog="system">
                                 <color key="titleColor" name="PhotosText"/>
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="regular"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="21" scale="medium" weight="regular"/>
                             </state>
                             <connections>
                                 <action selector="slideInfoPressed:" destination="-1" eventType="touchUpInside" id="GIf-An-za5"/>
@@ -360,7 +360,7 @@
             <color red="1" green="0.61400002241134644" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="PhotosText">
-            <color red="0.0" green="0.60740974378881996" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.60699999332427979" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="placeholderTextColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>

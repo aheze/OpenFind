@@ -72,6 +72,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 guard let self = self else { return }
                 self.tabBarView.dimPhotoSlideControls(dim: dim, isPhotosControls: isPhotosControls)
             }
+            viewController.hideTabBar = { [weak self] shouldHide in
+                guard let self = self else { return }
+                
+                UIView.animate(withDuration: 0.2) {
+                    self.tabBarView.alpha = shouldHide ? 0 : 1
+                }
+            }
             
             /// controls in selection
             tabBarView.photoSelectionControlPressed = { action in

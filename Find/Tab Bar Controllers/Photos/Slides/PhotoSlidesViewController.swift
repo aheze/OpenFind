@@ -18,8 +18,6 @@ class PhotoSlidesViewController: UIViewController {
     }
     var currentMode: ScreenMode = .normal
     
-//    weak var deletedPhoto: ZoomDeletedPhoto?
-    
     var pageViewController: UIPageViewController {
         return self.children[0] as! UIPageViewController
     }
@@ -75,7 +73,10 @@ class PhotoSlidesViewController: UIViewController {
     var transitionController = ZoomTransitionController()
     
     // MARK: Gestures
+    var currentScreenMode = ScreenMode.normal
     var panGestureRecognizer: UIPanGestureRecognizer!
+    var singleTapGestureRecognizer: UITapGestureRecognizer!
+    var hideTabBar: ((Bool) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()

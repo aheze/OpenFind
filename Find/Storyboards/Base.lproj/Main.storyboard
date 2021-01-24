@@ -4917,7 +4917,7 @@ the App!</string>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="P4S-UE-ULS" firstAttribute="top" secondItem="OyK-X0-bbG" secondAttribute="top" id="D0d-iy-lQ7"/>
                                             <constraint firstItem="dwe-kN-tFW" firstAttribute="top" secondItem="OyK-X0-bbG" secondAttribute="top" id="LpR-Xj-hAs"/>
@@ -4941,7 +4941,7 @@ the App!</string>
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BRK-R6-gWs"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="BVi-R5-JQF" firstAttribute="top" secondItem="hnb-ZX-XOX" secondAttribute="top" id="Ixk-kh-jhq"/>
                             <constraint firstItem="BVi-R5-JQF" firstAttribute="leading" secondItem="hnb-ZX-XOX" secondAttribute="leading" id="SWR-HI-PRi"/>

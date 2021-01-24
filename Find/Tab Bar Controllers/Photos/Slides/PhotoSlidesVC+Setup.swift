@@ -10,12 +10,15 @@ import UIKit
 
 extension PhotoSlidesViewController {
     func setupDelegates() {
-        self.pageViewController.delegate = self
-        self.pageViewController.dataSource = self
+        pageViewController.delegate = self
+        pageViewController.dataSource = self
     }
     func setupGestures() {
-        self.panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPanWith(gestureRecognizer:)))
-        self.panGestureRecognizer.delegate = self
-        self.pageViewController.view.addGestureRecognizer(self.panGestureRecognizer)
+        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPanWith(gestureRecognizer:)))
+        panGestureRecognizer.delegate = self
+        pageViewController.view.addGestureRecognizer(self.panGestureRecognizer)
+    
+        singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didSingleTapWith(gestureRecognizer:)))
+        pageViewController.view.addGestureRecognizer(self.singleTapGestureRecognizer)
     }
 }
