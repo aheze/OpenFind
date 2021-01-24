@@ -23,6 +23,7 @@ extension PhotosViewController: ZoomAnimatorDelegate {
             } else {
                 currentSlidesController = nil
                 changePresentationMode(presentingSlides: false)
+                self.hideTabBar?(false)
             }
         }
         
@@ -34,10 +35,6 @@ extension PhotosViewController: ZoomAnimatorDelegate {
                     let findPhoto = dataSource.itemIdentifier(for: selectedIndexPath),
                     let model = findPhoto.editableModel
                 {
-                    print("anded--")
-                    print("photo cache : \(model.isDeepSearched)")
-                    print("photo heart : \(model.isHearted)")
-
                     
                     UIView.animate(withDuration: 0.2, animations: {
                         cell.cacheImageView.alpha = model.isDeepSearched ? 1 : 0
