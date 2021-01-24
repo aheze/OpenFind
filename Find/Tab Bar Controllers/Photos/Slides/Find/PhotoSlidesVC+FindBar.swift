@@ -36,6 +36,8 @@ extension PhotoSlidesViewController {
         findPressed.toggle()
         
         if findPressed {
+            findButton.title = "Done"
+            
             slideFindBarTopC?.update(offset: 0)
             
             if slideFindBar?.hasPrompt == true {
@@ -48,12 +50,13 @@ extension PhotoSlidesViewController {
                 self.slideFindBar?.alpha = 1
             }
         } else {
+            findButton.title = "Find"
+            
             slideFindBarTopC?.update(offset: -45)
             animatePromptReveal(reveal: false)
             
             UIView.animate(withDuration: 0.3) {
                 self.view.layoutIfNeeded()
-//                self.slideFindBar?.promptLabel.alpha = 0
                 self.slideFindBar?.alpha = 0
             }
         }

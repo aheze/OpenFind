@@ -16,7 +16,7 @@ extension PhotoSlidesViewController {
         
         case .share:
             print("share")
-            
+            sharePhoto()
         case .star:
             print("star")
             starPhoto()

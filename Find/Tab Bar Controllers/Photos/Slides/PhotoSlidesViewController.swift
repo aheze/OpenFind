@@ -63,6 +63,7 @@ class PhotoSlidesViewController: UIViewController {
     
     // MARK: Actions
     let realm = try! Realm()
+    var imageToShare: UIImage?
     var getRealModel: ((EditableHistoryModel) -> HistoryModel?)?
     var updateActions: ((ChangeActions) -> Void)? /// switch star/unstar and cache/uncache
     var findPhotoChanged: ((FindPhoto) -> Void)? /// starred/cached photos
