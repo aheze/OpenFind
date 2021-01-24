@@ -122,15 +122,6 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
         
     }
     
-    
-    override var prefersStatusBarHidden: Bool {
-        return false
-    }
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
-
     let realm = try! Realm()
     var listCategories: Results<FindList>?
     

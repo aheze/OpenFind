@@ -134,7 +134,6 @@ class PhotosViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("appearing..")
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     

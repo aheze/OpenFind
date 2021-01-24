@@ -18,7 +18,9 @@ extension SlideViewController {
         print("drawing.. \(highlights.count)")
         removeAllHighlights()
         
-        let aspectFrame = AVMakeRect(aspectRatio: imageView.image?.size ?? imageView.frame.size, insideRect: contentView.frame)
+        print("imageive size: \(imageView.frame.size), content frame: \(contentView.frame), content bounds: \(contentView.bounds)")
+        
+        let aspectFrame = AVMakeRect(aspectRatio: imageView.image?.size ?? imageView.bounds.size, insideRect: contentView.bounds)
         
         for comp in highlights {
             
