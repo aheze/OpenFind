@@ -64,7 +64,6 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
     var selectedIconName = "square.grid.2x2"
     
     @IBOutlet weak var collectionView: UICollectionView!
-    let dictOfSymbols = [IndexMatcher: String]()
     
     var sfSymbolArray: [String] = [String]()
     var iconColor: UIColor = UIColor.label

@@ -154,7 +154,6 @@
 		49301BF52402493A00B4780B /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49301BF42402493A00B4780B /* HistoryModel.swift */; };
 		49325C1323CAE84500A771A3 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49325C1223CAE84500A771A3 /* StatusView.swift */; };
 		4952F0C2240B1DD00068564F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4952F0C1240B1DD00068564F /* SearchCell.swift */; };
-		4953F3BE2415A14000690E53 /* HistoryFindController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953F3BD2415A14000690E53 /* HistoryFindController.swift */; };
 		4953F3C0241713A100690E53 /* HistoryFindCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953F3BF241713A000690E53 /* HistoryFindCell.swift */; };
 		4953F3C424171EE200690E53 /* FindBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953F3C324171EE200690E53 /* FindBar.swift */; };
 		4953F3C92417344900690E53 /* ListToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953F3C82417344900690E53 /* ListToolBar.swift */; };
@@ -174,18 +173,13 @@
 		49563524243694BC0001E8C6 /* Configuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49563518243694BB0001E8C6 /* Configuring.swift */; };
 		4956352A2437A4B60001E8C6 /* defaultSeeds.realm in Resources */ = {isa = PBXBuildFile; fileRef = 495635292437A4860001E8C6 /* defaultSeeds.realm */; };
 		49564333244A8FA4002C9245 /* HistorySharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49564332244A8FA4002C9245 /* HistorySharing.swift */; };
-		49564335244A8FBF002C9245 /* HistoryCollectionViewFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49564334244A8FBF002C9245 /* HistoryCollectionViewFiles.swift */; };
 		49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3223D65AA4009308CA /* ListCollectionCell.swift */; };
 		49569B3523D6919E009308CA /* ListsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49569B3423D6919E009308CA /* ListsLayout.swift */; };
 		4957157E2368B022007BF68B /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4957157D2368B022007BF68B /* ViewExtensions.swift */; };
 		49585DCF23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49585DCE23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift */; };
 		495DAD3624A6B2E500D5F844 /* FindBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 495DAD3824A6B2E500D5F844 /* FindBar.xib */; };
-		495DAD3B24A6B34400D5F844 /* HistorySelect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 495DAD3D24A6B34400D5F844 /* HistorySelect.xib */; };
 		495DAD4024A6B37500D5F844 /* ListToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 495DAD4224A6B37500D5F844 /* ListToolBar.xib */; };
 		495DAD4724A81F4600D5F844 /* WhatsNewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495DAD4624A81F4600D5F844 /* WhatsNewConfiguration.swift */; };
-		495ECCA7238CF76C00E7D966 /* NewHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCA6238CF76C00E7D966 /* NewHistoryViewController.swift */; };
-		495ECCA9238CF7BD00E7D966 /* HPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */; };
-		495ECCAB238DB7BD00E7D966 /* TitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495ECCAA238DB7BD00E7D966 /* TitleSupplementaryView.swift */; };
 		495F38F22432B7B700A17D93 /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38F12432B7B700A17D93 /* CreditsViewController.swift */; };
 		495F38FA2432C8FE00A17D93 /* CarteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38F72432C8FB00A17D93 /* CarteViewController.swift */; };
 		495F38FB2432C8FE00A17D93 /* CarteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F38F82432C8FC00A17D93 /* CarteItem.swift */; };
@@ -216,12 +210,6 @@
 		49B7A33423923E810070209F /* ZoomTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33123923E800070209F /* ZoomTransitionController.swift */; };
 		49B7A33523923E810070209F /* ZoomDismissalInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33223923E800070209F /* ZoomDismissalInteractionController.swift */; };
 		49B7A33623923E810070209F /* ZoomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33323923E800070209F /* ZoomAnimator.swift */; };
-		49B7A33823923EBD0070209F /* PhotoPageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33723923EBD0070209F /* PhotoPageContainerViewController.swift */; };
-		49B7A33A23923EE10070209F /* PhotoZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33923923EE00070209F /* PhotoZoomViewController.swift */; };
-		49BC782023C2B0E0003D9904 /* IndexMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC781F23C2B0DF003D9904 /* IndexMatcher.swift */; };
-		49BC782223C3E1BF003D9904 /* TextViewRounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC782123C3E1BF003D9904 /* TextViewRounded.swift */; };
-		49BC782F23C6E473003D9904 /* addHeart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC782E23C6E473003D9904 /* addHeart.swift */; };
-		49BC783623C8275B003D9904 /* HistorySelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC783423C8275B003D9904 /* HistorySelect.swift */; };
 		49D985B024188CA4005F4E92 /* NewListToolbarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985AE24188CA4005F4E92 /* NewListToolbarCell.swift */; };
 		49D985B124188CA4005F4E92 /* NewListToolbarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49D985AF24188CA4005F4E92 /* NewListToolbarCell.xib */; };
 		49D985B4241B374B005F4E92 /* CachingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D985B3241B374B005F4E92 /* CachingViewController.swift */; };
@@ -396,7 +384,6 @@
 		49301BF42402493A00B4780B /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
 		49325C1223CAE84500A771A3 /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		4952F0C1240B1DD00068564F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
-		4953F3BD2415A14000690E53 /* HistoryFindController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFindController.swift; sourceTree = "<group>"; };
 		4953F3BF241713A000690E53 /* HistoryFindCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFindCell.swift; sourceTree = "<group>"; };
 		4953F3C324171EE200690E53 /* FindBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindBar.swift; sourceTree = "<group>"; };
 		4953F3C82417344900690E53 /* ListToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListToolBar.swift; sourceTree = "<group>"; };
@@ -416,7 +403,6 @@
 		49563518243694BB0001E8C6 /* Configuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuring.swift; sourceTree = "<group>"; };
 		495635292437A4860001E8C6 /* defaultSeeds.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = defaultSeeds.realm; sourceTree = "<group>"; };
 		49564332244A8FA4002C9245 /* HistorySharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySharing.swift; sourceTree = "<group>"; };
-		49564334244A8FBF002C9245 /* HistoryCollectionViewFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCollectionViewFiles.swift; sourceTree = "<group>"; };
 		49569B3223D65AA4009308CA /* ListCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionCell.swift; sourceTree = "<group>"; };
 		49569B3423D6919E009308CA /* ListsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsLayout.swift; sourceTree = "<group>"; };
 		4957157D2368B022007BF68B /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
@@ -425,14 +411,9 @@
 		495D9CC724A16AAB009C507C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		495DAD3724A6B2E500D5F844 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FindBar.xib; sourceTree = "<group>"; };
 		495DAD3A24A6B2E900D5F844 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FindBar.strings"; sourceTree = "<group>"; };
-		495DAD3C24A6B34400D5F844 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HistorySelect.xib; sourceTree = "<group>"; };
-		495DAD3F24A6B34E00D5F844 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/HistorySelect.strings"; sourceTree = "<group>"; };
 		495DAD4124A6B37500D5F844 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ListToolBar.xib; sourceTree = "<group>"; };
 		495DAD4424A6B37900D5F844 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ListToolBar.strings"; sourceTree = "<group>"; };
 		495DAD4624A81F4600D5F844 /* WhatsNewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewConfiguration.swift; sourceTree = "<group>"; };
-		495ECCA6238CF76C00E7D966 /* NewHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHistoryViewController.swift; sourceTree = "<group>"; };
-		495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPhotoCell.swift; sourceTree = "<group>"; };
-		495ECCAA238DB7BD00E7D966 /* TitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSupplementaryView.swift; sourceTree = "<group>"; };
 		495F38F12432B7B700A17D93 /* CreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
 		495F38F72432C8FB00A17D93 /* CarteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarteViewController.swift; sourceTree = "<group>"; };
 		495F38F82432C8FC00A17D93 /* CarteItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarteItem.swift; sourceTree = "<group>"; };
@@ -466,12 +447,6 @@
 		49B7A33123923E800070209F /* ZoomTransitionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomTransitionController.swift; sourceTree = "<group>"; };
 		49B7A33223923E800070209F /* ZoomDismissalInteractionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomDismissalInteractionController.swift; sourceTree = "<group>"; };
 		49B7A33323923E800070209F /* ZoomAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomAnimator.swift; sourceTree = "<group>"; };
-		49B7A33723923EBD0070209F /* PhotoPageContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPageContainerViewController.swift; sourceTree = "<group>"; };
-		49B7A33923923EE00070209F /* PhotoZoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoZoomViewController.swift; sourceTree = "<group>"; };
-		49BC781F23C2B0DF003D9904 /* IndexMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexMatcher.swift; sourceTree = "<group>"; };
-		49BC782123C3E1BF003D9904 /* TextViewRounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewRounded.swift; sourceTree = "<group>"; };
-		49BC782E23C6E473003D9904 /* addHeart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addHeart.swift; sourceTree = "<group>"; };
-		49BC783423C8275B003D9904 /* HistorySelect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistorySelect.swift; sourceTree = "<group>"; };
 		49D985AE24188CA4005F4E92 /* NewListToolbarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListToolbarCell.swift; sourceTree = "<group>"; };
 		49D985AF24188CA4005F4E92 /* NewListToolbarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewListToolbarCell.xib; sourceTree = "<group>"; };
 		49D985B3241B374B005F4E92 /* CachingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingViewController.swift; sourceTree = "<group>"; };
@@ -517,6 +492,7 @@
 				3CB6843725A0140200AE0AD6 /* ImageCell.xib */,
 				3C56C59C25A9562F0006A667 /* Slides */,
 				3CDA84F325B250AF00726F91 /* Finding */,
+				3C6DA94125BDF14D00B3CE5B /* Model */,
 			);
 			path = Photos;
 			sourceTree = "<group>";
@@ -529,15 +505,6 @@
 				498332DB243279F900AD083E /* Help */,
 			);
 			path = "Other View Controllers";
-			sourceTree = "<group>";
-		};
-		3C16EA83259BED9A00D73755 /* Animations */ = {
-			isa = PBXGroup;
-			children = (
-				49B7A33723923EBD0070209F /* PhotoPageContainerViewController.swift */,
-				49B7A33923923EE00070209F /* PhotoZoomViewController.swift */,
-			);
-			path = Animations;
 			sourceTree = "<group>";
 		};
 		3C16EA84259BEDC100D73755 /* Builder */ = {
@@ -631,6 +598,8 @@
 				3C4DE715259B0EAB0037D104 /* TutorialHeader.swift */,
 				3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */,
 				3C8F116D25AD5DA80091402B /* CustomButton.swift */,
+				495DAD3824A6B2E500D5F844 /* FindBar.xib */,
+				4953F3C324171EE200690E53 /* FindBar.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -698,6 +667,16 @@
 			path = "Navigation Bar";
 			sourceTree = "<group>";
 		};
+		3C6DA94125BDF14D00B3CE5B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				49D985B92421D97B005F4E92 /* FindModel.swift */,
+				49301BF42402493A00B4780B /* HistoryModel.swift */,
+				49564332244A8FA4002C9245 /* HistorySharing.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		3C6EE6BA25A2AC580078462A /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -751,6 +730,7 @@
 		3CDA84F325B250AF00726F91 /* Finding */ = {
 			isa = PBXGroup;
 			children = (
+				4953F3BF241713A000690E53 /* HistoryFindCell.swift */,
 				3C1317E125B2581800FCEB79 /* PhotosVC+Finding.swift */,
 				3CDA84F525B2519E00726F91 /* PhotoFindViewController.swift */,
 				3C1317E425B259EB00FCEB79 /* PhotoFindVC+Populate.swift */,
@@ -1008,23 +988,6 @@
 			path = SEK;
 			sourceTree = "<group>";
 		};
-		495ECCA5238CF74500E7D966 /* New History */ = {
-			isa = PBXGroup;
-			children = (
-				495ECCA6238CF76C00E7D966 /* NewHistoryViewController.swift */,
-				49BC782A23C6DFB6003D9904 /* HistoryFinding */,
-				49BC783723C8C73E003D9904 /* CollectionViewCells */,
-				49BC781F23C2B0DF003D9904 /* IndexMatcher.swift */,
-				49BC782123C3E1BF003D9904 /* TextViewRounded.swift */,
-				49BC782D23C6E0BA003D9904 /* HistorySelectFloat */,
-				3C16EA83259BED9A00D73755 /* Animations */,
-				49301BF42402493A00B4780B /* HistoryModel.swift */,
-				49564332244A8FA4002C9245 /* HistorySharing.swift */,
-				49564334244A8FBF002C9245 /* HistoryCollectionViewFiles.swift */,
-			);
-			path = "New History";
-			sourceTree = "<group>";
-		};
 		495F38F62432C8D100A17D93 /* Carte */ = {
 			isa = PBXGroup;
 			children = (
@@ -1049,7 +1012,6 @@
 				3C020CE7259FF7400087AE92 /* Photos */,
 				4969373C2353C277009CA41A /* Camera */,
 				4988FC4623BEF82D00199635 /* Lists */,
-				495ECCA5238CF74500E7D966 /* New History */,
 			);
 			path = "Tab Bar Controllers";
 			sourceTree = "<group>";
@@ -1170,37 +1132,6 @@
 				49E9D89424996E1A0006757C /* Localizable.strings */,
 			);
 			path = Find;
-			sourceTree = "<group>";
-		};
-		49BC782A23C6DFB6003D9904 /* HistoryFinding */ = {
-			isa = PBXGroup;
-			children = (
-				4953F3BD2415A14000690E53 /* HistoryFindController.swift */,
-				4953F3BF241713A000690E53 /* HistoryFindCell.swift */,
-				495DAD3824A6B2E500D5F844 /* FindBar.xib */,
-				4953F3C324171EE200690E53 /* FindBar.swift */,
-				49D985B92421D97B005F4E92 /* FindModel.swift */,
-			);
-			path = HistoryFinding;
-			sourceTree = "<group>";
-		};
-		49BC782D23C6E0BA003D9904 /* HistorySelectFloat */ = {
-			isa = PBXGroup;
-			children = (
-				49BC783423C8275B003D9904 /* HistorySelect.swift */,
-				495DAD3D24A6B34400D5F844 /* HistorySelect.xib */,
-				49BC782E23C6E473003D9904 /* addHeart.swift */,
-			);
-			path = HistorySelectFloat;
-			sourceTree = "<group>";
-		};
-		49BC783723C8C73E003D9904 /* CollectionViewCells */ = {
-			isa = PBXGroup;
-			children = (
-				495ECCA8238CF7BD00E7D966 /* HPhotoCell.swift */,
-				495ECCAA238DB7BD00E7D966 /* TitleSupplementaryView.swift */,
-			);
-			path = CollectionViewCells;
 			sourceTree = "<group>";
 		};
 		49D985B2241B3736005F4E92 /* Caching */ = {
@@ -1325,7 +1256,6 @@
 				3C36970C259EEFF500A6544A /* PhotosMigrationView.xib in Resources */,
 				49B7A32D2390823C0070209F /* Colors.xcassets in Resources */,
 				3C4DE6FB259AD3FF0037D104 /* SaveToPhotosButton.xib in Resources */,
-				495DAD3B24A6B34400D5F844 /* HistorySelect.xib in Resources */,
 				495DAD4024A6B37500D5F844 /* ListToolBar.xib in Resources */,
 				4999AC9D2353A81100AB06A7 /* Assets.xcassets in Resources */,
 				4999AC9B2353A80A00AB06A7 /* Main.storyboard in Resources */,
@@ -1409,7 +1339,6 @@
 				3C6EE6B525A2AB350078462A /* SupportView.swift in Sources */,
 				3C1FE20625B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift in Sources */,
 				49B7A33523923E810070209F /* ZoomDismissalInteractionController.swift in Sources */,
-				49BC782F23C6E473003D9904 /* addHeart.swift in Sources */,
 				3C8B648A25BB4F8F008F1535 /* PhotoSlidesVC+FindBarDelegate.swift in Sources */,
 				3C2C3E9325A1152F002C3D11 /* PhotosMigrationController+Write.swift in Sources */,
 				49325C1323CAE84500A771A3 /* StatusView.swift in Sources */,
@@ -1443,7 +1372,6 @@
 				49A8EFAC237A5EFE00328D47 /* SetUpButtons.swift in Sources */,
 				3C71F25E25AF6B8000D22212 /* PhotosVC+Star.swift in Sources */,
 				492A2D2624A4046200F9C4A1 /* BartyCrouch.swift in Sources */,
-				495ECCAB238DB7BD00E7D966 /* TitleSupplementaryView.swift in Sources */,
 				3C2C6F9625AE21BB00958647 /* PhotosVC+Actions.swift in Sources */,
 				3C8F116E25AD5DA80091402B /* CustomButton.swift in Sources */,
 				49301BF52402493A00B4780B /* HistoryModel.swift in Sources */,
@@ -1452,7 +1380,6 @@
 				3C21DEE6259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift in Sources */,
 				3C8D58A225B7937C00EA226D /* PhotoSlidesVC+RemoveSlide.swift in Sources */,
 				3C4DE716259B0EAB0037D104 /* TutorialHeader.swift in Sources */,
-				49B7A33823923EBD0070209F /* PhotoPageContainerViewController.swift in Sources */,
 				3C8B649025BB51BE008F1535 /* PhotoSlidesVC+Draw.swift in Sources */,
 				3CB6843225A0087700AE0AD6 /* PhotosMigrationController.swift in Sources */,
 				3CE306D6259AC46400F1B2E2 /* TabBar.swift in Sources */,
@@ -1478,7 +1405,6 @@
 				3C8D58A525B7FD7300EA226D /* PhotoSlidesVC+Cache.swift in Sources */,
 				3C4C96AB25B5F9DC009FDE8D /* SlideVC+Draw.swift in Sources */,
 				3C4DE6FF259AD3FF0037D104 /* SaveToPhotosButton.swift in Sources */,
-				49BC783623C8275B003D9904 /* HistorySelect.swift in Sources */,
 				495DAD4724A81F4600D5F844 /* WhatsNewConfiguration.swift in Sources */,
 				3C6EE6B625A2AB350078462A /* CameraView.swift in Sources */,
 				49569B3323D65AA4009308CA /* ListCollectionCell.swift in Sources */,
@@ -1525,12 +1451,10 @@
 				3C1317E525B259EB00FCEB79 /* PhotoFindVC+Populate.swift in Sources */,
 				3C8F116B25AD0A160091402B /* SegmentedSlider+Selection.swift in Sources */,
 				4952F0C2240B1DD00068564F /* SearchCell.swift in Sources */,
-				49BC782223C3E1BF003D9904 /* TextViewRounded.swift in Sources */,
 				3C3D47C625A40133002B8BBF /* PhotosVC+PHAssets.swift in Sources */,
 				4956351C243694BC0001E8C6 /* OnboardingContentView.swift in Sources */,
 				495F38FB2432C8FE00A17D93 /* CarteItem.swift in Sources */,
 				3C6EE6B225A2AB350078462A /* HeaderView.swift in Sources */,
-				495ECCA7238CF76C00E7D966 /* NewHistoryViewController.swift in Sources */,
 				4928526023D61F570048EC13 /* ListSelect.swift in Sources */,
 				3C2858C6259C3E4C00BABBA7 /* TabBar+Lists.swift in Sources */,
 				3C020CED259FF7890087AE92 /* PhotosVC+Migration.swift in Sources */,
@@ -1554,13 +1478,11 @@
 				495F38FA2432C8FE00A17D93 /* CarteViewController.swift in Sources */,
 				49563524243694BC0001E8C6 /* Configuring.swift in Sources */,
 				490DA75323CBB871000AF57D /* UIColor+JJFloatingActionButton.swift in Sources */,
-				49B7A33A23923EE10070209F /* PhotoZoomViewController.swift in Sources */,
 				49569B3523D6919E009308CA /* ListsLayout.swift in Sources */,
 				498332DA243279EF00AD083E /* SingleHelp.swift in Sources */,
 				490DA75423CBB871000AF57D /* JJFloatingActionButtonDelegate.swift in Sources */,
 				490DA75823CBB871000AF57D /* JJActionItem.swift in Sources */,
 				4928525623D4BD490048EC13 /* UpdateOrientation.swift in Sources */,
-				49BC782023C2B0E0003D9904 /* IndexMatcher.swift in Sources */,
 				492A2D2224A3116600F9C4A1 /* TutorialLocalization.swift in Sources */,
 				3C2C3E9925A11CD6002C3D11 /* ANSegmentIndicator.swift in Sources */,
 				3C3DF5E025B4A59100DD7A10 /* PhotoFindVC+Prompt.swift in Sources */,
@@ -1578,7 +1500,6 @@
 				490DA75923CBB871000AF57D /* JJCircleView.swift in Sources */,
 				4917CE8123C059F6002EA20B /* StartSceneView.swift in Sources */,
 				3C2858CA259CF00200BABBA7 /* ListsController+Selection.swift in Sources */,
-				495ECCA9238CF7BD00E7D966 /* HPhotoCell.swift in Sources */,
 				49563503243593860001E8C6 /* TutorialViewControllers.swift in Sources */,
 				3C020CE5259FF5A70087AE92 /* ViewController+Migration.swift in Sources */,
 				49D985B824208037005F4E92 /* CachingCancelController.swift in Sources */,
@@ -1586,7 +1507,6 @@
 				3C8B648D25BB4FDB008F1535 /* PhotoSlidesVC+FindFromCache.swift in Sources */,
 				490DA75723CBB871000AF57D /* Styles.swift in Sources */,
 				3C1FE21625BB423E004DC9EF /* SlideFindBar.swift in Sources */,
-				4953F3BE2415A14000690E53 /* HistoryFindController.swift in Sources */,
 				3C5B157325A8CD9C00BB8988 /* PhotosVC+Selection.swift in Sources */,
 				3CE306EA259AC5AF00F1B2E2 /* ViewController.swift in Sources */,
 				4979A39323AF3C4F00B09380 /* FastVisionHandler.swift in Sources */,
@@ -1595,7 +1515,6 @@
 				3CCB840925B0E362000631BA /* PhotosVC+Delete.swift in Sources */,
 				4956351E243694BC0001E8C6 /* PaperOnboardingDelegate.swift in Sources */,
 				4979A39023AF3A4800B09380 /* FastMode.swift in Sources */,
-				49564335244A8FBF002C9245 /* HistoryCollectionViewFiles.swift in Sources */,
 				3C4C96B725B6ABEE009FDE8D /* PhotoSlidesVC+Star.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1610,15 +1529,6 @@
 				495DAD3A24A6B2E900D5F844 /* zh-Hans */,
 			);
 			name = FindBar.xib;
-			sourceTree = "<group>";
-		};
-		495DAD3D24A6B34400D5F844 /* HistorySelect.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				495DAD3C24A6B34400D5F844 /* Base */,
-				495DAD3F24A6B34E00D5F844 /* zh-Hans */,
-			);
-			name = HistorySelect.xib;
 			sourceTree = "<group>";
 		};
 		495DAD4224A6B37500D5F844 /* ListToolBar.xib */ = {

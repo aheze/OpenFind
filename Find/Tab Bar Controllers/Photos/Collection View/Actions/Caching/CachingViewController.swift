@@ -21,7 +21,7 @@ enum CacheReturn {
 protocol ReturnCachedPhotos: class {
     func giveCachedPhotos(photos: [FindPhoto], returnResult: CacheReturn)
 }
-class CachingViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, DoneAnimatingSEK {
+class CachingViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     

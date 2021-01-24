@@ -9,7 +9,6 @@
 import UIKit
 import RealmSwift
 
-//class EditableH
 class HistoryModel: Object {
     @objc dynamic var filePath = ""
     @objc dynamic var isTakenLocally = false /// if photo was saved from Find app
