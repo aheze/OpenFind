@@ -101,6 +101,7 @@
 		3CA9335125BDF42200042C2F /* CameraVC+CameraControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9335025BDF42200042C2F /* CameraVC+CameraControls.swift */; };
 		3CA9335425BDF44D00042C2F /* CameraVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9335325BDF44D00042C2F /* CameraVC+Keyboard.swift */; };
 		3CA9335725BDF4B500042C2F /* CameraVC+ButtonSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9335625BDF4B500042C2F /* CameraVC+ButtonSetup.swift */; };
+		3CA9336A25BE0BD600042C2F /* CameraVC+FindWhenPaused.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9336925BE0BD600042C2F /* CameraVC+FindWhenPaused.swift */; };
 		3CB6842C259FF9A700AE0AD6 /* SegmentedSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */; };
 		3CB6842D259FF9A700AE0AD6 /* SegmentedSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB6842B259FF9A700AE0AD6 /* SegmentedSlider.xib */; };
 		3CB6843225A0087700AE0AD6 /* PhotosMigrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */; };
@@ -322,6 +323,7 @@
 		3CA9335025BDF42200042C2F /* CameraVC+CameraControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+CameraControls.swift"; sourceTree = "<group>"; };
 		3CA9335325BDF44D00042C2F /* CameraVC+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Keyboard.swift"; sourceTree = "<group>"; };
 		3CA9335625BDF4B500042C2F /* CameraVC+ButtonSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+ButtonSetup.swift"; sourceTree = "<group>"; };
+		3CA9336925BE0BD600042C2F /* CameraVC+FindWhenPaused.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+FindWhenPaused.swift"; sourceTree = "<group>"; };
 		3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedSlider.swift; sourceTree = "<group>"; };
 		3CB6842B259FF9A700AE0AD6 /* SegmentedSlider.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentedSlider.xib; sourceTree = "<group>"; };
 		3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationController.swift; sourceTree = "<group>"; };
@@ -693,6 +695,7 @@
 			isa = PBXGroup;
 			children = (
 				3CA9334525BDF2BC00042C2F /* CameraVC+Pause.swift */,
+				3CA9336925BE0BD600042C2F /* CameraVC+FindWhenPaused.swift */,
 			);
 			path = Paused;
 			sourceTree = "<group>";
@@ -1350,6 +1353,7 @@
 				49B7A33623923E810070209F /* ZoomAnimator.swift in Sources */,
 				3C4DE6FE259AD3FF0037D104 /* CacheButton.swift in Sources */,
 				49A8EFAC237A5EFE00328D47 /* SetUpButtons.swift in Sources */,
+				3CA9336A25BE0BD600042C2F /* CameraVC+FindWhenPaused.swift in Sources */,
 				3C71F25E25AF6B8000D22212 /* PhotosVC+Star.swift in Sources */,
 				492A2D2624A4046200F9C4A1 /* BartyCrouch.swift in Sources */,
 				3C2C6F9625AE21BB00958647 /* PhotosVC+Actions.swift in Sources */,

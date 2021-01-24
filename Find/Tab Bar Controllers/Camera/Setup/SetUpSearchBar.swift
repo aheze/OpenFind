@@ -403,6 +403,11 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 sortSearchTerms()
             }
         }
+        
+        if CameraState.isPaused {
+            findWhenPaused()
+        }
+        
         return true
     }
     

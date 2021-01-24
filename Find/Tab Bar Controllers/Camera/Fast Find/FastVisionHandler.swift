@@ -95,6 +95,11 @@ extension CameraViewController {
             numberOfFastMatches = 0
             
         }
+        
+        if waitingToFind {
+            waitingToFind = false
+            findWhenPaused()
+        }
     }
     
     

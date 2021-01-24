@@ -74,6 +74,7 @@ class CameraViewController: UIViewController {
     }
     
     var currentPausedImage: UIImage?
+    var waitingToFind = false /// when changed letters in search bar, but already is finding, wait until finished.
     
     var cameraChanged: ((Bool) -> Void)?
     var savePressed = false
@@ -530,8 +531,11 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             /// 1. Find
             fastFind(in: pixelBuffer)
         }
-        guard captureCompletionBlock != nil,
-            let outputImage = UIImage(pixBuffer: pixelBuffer) else { return }
+        guard
+            captureCompletionBlock != nil,
+            let outputImage = UIImage(pixBuffer: pixelBuffer)
+        else { return }
+        
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if let captureCompletionBlock = self.captureCompletionBlock {

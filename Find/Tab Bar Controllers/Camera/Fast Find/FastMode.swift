@@ -11,17 +11,25 @@ import Vision
 
 extension CameraViewController {
     
-    func fastFind(in pixelBuffer: CVPixelBuffer) {
+    func fastFind(in pixelBuffer: CVPixelBuffer? = nil, orIn cgImage: CGImage? = nil) {
         
         /// busy finding
         busyFastFinding = true
         
         DispatchQueue.global(qos: .userInitiated).async {
-            let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
-            let width = ciImage.extent.width
-            let height = ciImage.extent.height
             
-            self.aspectRatioWidthOverHeight = height / width ///opposite
+            if let pixelBuffer = pixelBuffer {
+                let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
+                let width = ciImage.extent.width
+                let height = ciImage.extent.height
+                
+                self.aspectRatioWidthOverHeight = height / width ///opposite
+            } else if let cgImage = cgImage {
+                let width = cgImage.width
+                let height = cgImage.height
+                
+                self.aspectRatioWidthOverHeight = CGFloat(width) / CGFloat(height)
+            }
             
             let request = VNRecognizeTextRequest { request, error in
                 self.handleFastDetectedText(request: request, error: error)
@@ -43,12 +51,23 @@ extension CameraViewController {
             
             request.recognitionLevel = .fast
             request.recognitionLanguages = ["en_GB", "zh"]
-            let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right)
-            do {
-                try imageRequestHandler.perform([request])
-            } catch let error {
-                self.busyFastFinding = false
-                print("Error: \(error)")
+            
+            if let pixelBuffer = pixelBuffer {
+                let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right)
+                do {
+                    try imageRequestHandler.perform([request])
+                } catch let error {
+                    self.busyFastFinding = false
+                    print("Error: \(error)")
+                }
+            } else if let cgImage = cgImage {
+                let imageRequestHandler = VNImageRequestHandler(cgImage: cgImage, orientation: .up)
+                do {
+                    try imageRequestHandler.perform([request])
+                } catch let error {
+                    self.busyFastFinding = false
+                    print("Error: \(error)")
+                }
             }
         }
     }
