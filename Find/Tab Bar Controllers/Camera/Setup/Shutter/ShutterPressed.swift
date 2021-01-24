@@ -120,36 +120,14 @@ extension CameraViewController {
     
     func preloadImages(imageNames: [String]) {
         
-        for (index, imageName) in imageNames.enumerated() {
-            print("index: \(index)")
-            
-            let splits = imageName.components(separatedBy: "=")
-            print("splits: \(splits)")
-            
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "MMddyy"
-//            guard let dateFromString = dateFormatter.date(from: splits[1]) else { print("Wrong date 1"); return}
-//
-//
-//            let timeFormatter = DateFormatter()
-//            timeFormatter.dateFormat = "HHmmss'-'SSSS"
-//            guard let timeFromString = timeFormatter.date(from: splits[2]) else { print("Wrong date 2"); return}
-//
+        for imageName in imageNames {
             let finalDateFormatter = DateFormatter()
             finalDateFormatter.dateFormat = "'='MMddyy'='HHmmss'-'SSSS"
-            guard let finalDate = finalDateFormatter.date(from: imageName) else { print("Wrong date 3"); continue}
-            
-//            let imageName = "=\(dateFromString)=\(timeFromString)"
-            
-            print("imagename: \(imageName)")
+            guard let finalDate = finalDateFormatter.date(from: imageName) else { continue }
             
             if let image = UIImage(named: imageName) {
                 saveImage(url: self.globalUrl, imageName: imageName, image: image, dateCreated: finalDate)
             }
-            
-//            preloadSave(date: finalDate, dateNameString: imageName, image: UIImage(named: imageName)!)
-            
-           
         }
     }
 }

@@ -14,9 +14,16 @@ extension CameraViewController {
         cameraIcon.isActualButton = true
         cameraIcon.pressed = { [weak self] in
             guard let self = self else { return }
-            CameraState.isOn.toggle()
-            self.cameraIcon.toggle(on: CameraState.isOn)
-            self.cameraChanged?(CameraState.isOn)
+            CameraState.isPaused.toggle()
+            self.cameraIcon.toggle(on: CameraState.isPaused)
+            self.cameraChanged?(CameraState.isPaused)
+            
+            if CameraState.isPaused {
+                self.pauseLivePreview()
+            } else {
+                self.startLivePreview()
+            }
+            
         }
         saveToPhotos.alpha = 0
         saveToPhotos.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)

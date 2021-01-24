@@ -73,6 +73,8 @@ class CameraViewController: UIViewController {
         self.present(settingsVC, animated: true)
     }
     
+    var currentPausedImage: UIImage?
+    
     var cameraChanged: ((Bool) -> Void)?
     var savePressed = false
     var cachePressed = false
@@ -426,10 +428,12 @@ class CameraViewController: UIViewController {
 
         motionManager.startDeviceMotionUpdates(to: .main) {
             [weak self] (data, error) in
-            guard let data = data, error == nil else {
-                return
+            if !CameraState.isPaused {
+                guard let data = data, error == nil else {
+                    return
+                }
+                self?.updateHighlightOrientations(attitude: data.attitude)
             }
-            self?.updateHighlightOrientations(attitude: data.attitude)
         }
         
         /// call to pre load with images
@@ -514,8 +518,6 @@ class CameraViewController: UIViewController {
     }
 }
 
-
-
 extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     // MARK: - Camera Delegate and Setup
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
@@ -523,7 +525,7 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
         }
-        if busyFastFinding == false && allowSearch == true && displayingOrientationError == false && allowSearchFocus == true {
+        if busyFastFinding == false && allowSearch == true && displayingOrientationError == false && allowSearchFocus == true && CameraState.isPaused == false {
             
             /// 1. Find
             fastFind(in: pixelBuffer)

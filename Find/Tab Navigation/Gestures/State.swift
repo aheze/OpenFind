@@ -39,7 +39,7 @@ class ViewControllerState {
 }
 
 class CameraState {
-    static var isOn = false
+    static var isPaused = false
 }
 
 enum ViewControllerType {

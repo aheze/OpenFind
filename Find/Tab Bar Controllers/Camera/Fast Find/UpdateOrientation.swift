@@ -21,6 +21,7 @@ extension CameraViewController {
             let yConversion = Double(8)
             let finalRollDiff = (rollValue - motionXAsOfHighlightStart) * xConversion
             let finalPitchDiff = (pitchValue - motionYAsOfHighlightStart) * yConversion
+            
             for highlight in currentComponents {
                 let theView = highlight.baseView
                 theView?.frame.origin.x += CGFloat(finalRollDiff)
