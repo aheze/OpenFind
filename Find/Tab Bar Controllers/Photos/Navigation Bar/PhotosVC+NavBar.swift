@@ -18,6 +18,9 @@ extension PhotosViewController {
         selectButton.tintColor = UIColor(named: "PhotosText")
         
         navigationItem.rightBarButtonItems = [findButton, selectButton]
+        
+        findButton.isEnabled = false
+        selectButton.isEnabled = false
     }
     @objc func findPressed(sender: UIBarButtonItem) {
         print("Find")

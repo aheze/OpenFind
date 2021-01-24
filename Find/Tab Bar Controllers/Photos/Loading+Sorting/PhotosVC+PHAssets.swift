@@ -102,6 +102,9 @@ extension PhotosViewController {
                         }
                     }
                     DispatchQueue.main.async {
+                        self.findButton.isEnabled = true
+                        self.selectButton.isEnabled = true
+                        
                         var allPhotosToDisplay = [FindPhoto]()
                         for mutableMonth in mutableMonths {
                             for photo in mutableMonth.photos {
