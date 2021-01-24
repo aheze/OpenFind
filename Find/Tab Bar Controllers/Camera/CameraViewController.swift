@@ -22,28 +22,7 @@ protocol ToggleCreateCircle: class {
 protocol UpdateMatchesNumberStats: class {
     func update(to: Int)
 }
-class CameraView: UIView {
-    
-    
-    var videoPreviewLayer: AVCaptureVideoPreviewLayer {
-        guard let layer = layer as? AVCaptureVideoPreviewLayer else {
-            fatalError("Expected `AVCaptureVideoPreviewLayer` type for layer. Check PreviewView.layerClass implementation.")
-        }
-        return layer
-    }
-    var session: AVCaptureSession? {
-        get {
-            return videoPreviewLayer.session
-        }
-        set {
-            videoPreviewLayer.session = newValue
-        }
-    }
-    // MARK: UIView
-    override class var layerClass: AnyClass {
-        return AVCaptureVideoPreviewLayer.self
-    }
-}
+
 
 class CameraViewController: UIViewController {
     
@@ -89,7 +68,6 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var settingsBottomC: NSLayoutConstraint!
     @IBOutlet weak var settingsButton: UIButton!
     @IBAction func settingsButtonPressed(_ sender: Any) {
-//        let settingsVC = UIHostingController(rootView: SettingsView())
         let settingsVC = SettingsViewHoster()
         settingsVC.presentationController?.delegate = self
         self.present(settingsVC, animated: true)
@@ -172,8 +150,6 @@ class CameraViewController: UIViewController {
     
     
     @IBOutlet weak var darkBlurEffect: UIVisualEffectView!
-//    @IBOutlet weak var menuButton: JJFloatingActionButton!
-//    @IBOutlet weak var newShutterButton: NewShutterButton!
     
     let defaults = UserDefaults.standard
     var shouldShowTextDetectIndicator = true
@@ -189,19 +165,15 @@ class CameraViewController: UIViewController {
     
     
     //MARK: Timer and haptic feedback
-//    var hapticFeedbackEnabled = true
     var currentPassCount = 0 /// +1 whenever frame added for AV
     
-    
-    
     //MARK: Toolbar
-    
-    
     let realm = try! Realm()
     var listCategories: Results<FindList>?
     var editableListCategories = [EditableFindList]()
     var currentContentsOfScreen = ""
     var shouldResetHighlights = false
+    
     //MARK: Keyboard
     let toolbar = ListToolBar()
     var toolbarWidthC: Constraint?
@@ -209,17 +181,11 @@ class CameraViewController: UIViewController {
     var toolbarTopC: Constraint?
     var didFinishShouldUpdateHeight = false
     
-    
-    
     //MARK: Search Bar
-    
-//    var removeListMode = true
     var focusingList = EditableFindList()
     
     var allowSearch = true /// orientation disable
     var allowSearchFocus = true /// disable when on different screen
-    
-    
     
     var insertingListsCount = 0
     var isSchedulingList = false
@@ -249,11 +215,8 @@ class CameraViewController: UIViewController {
             dismissWhatsNew(completion: {
                 self.displayWhatsNew()
             })
-            
         }
     }
-    
-    
     
     @IBOutlet weak var newSearchTextField: TextField!
     @IBOutlet weak var searchTextTopC: NSLayoutConstraint! ///starts at 8
@@ -261,32 +224,19 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var searchContentViewHeight: NSLayoutConstraint!
     
     //MARK: Lists
-        
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var listsLabel: UILabel!
-
     @IBOutlet weak var tapToRemoveLabel: UILabel!
-    
     @IBOutlet weak var arrowDownImage: UIImageView!
     
     var selectedLists = [EditableFindList]()
     weak var injectListDelegate: InjectLists?
-//    weak var updateToolbar: UpdateToolbar?
     
-    //MARK: Matches HUD
-    
-    var createdStatusView: Bool = false
     var previousNumberOfMatches: Int = 0
-    //var shouldScale = true
-    var currentNumber = 0
-    var startGettingNearestFeaturePoints = false
     
-//    @IBOutlet weak var numberLabel: UILabel!
-//    @IBOutlet weak var statusView: UIView!
-//    weak var changeDelegate: ChangeStatusValue?
-    weak var toggleCreateDelegate: ToggleCreateCircle?
     
     var blurView = UIVisualEffectView()
+    
     ///Detect if the view controller attempted to dismiss, but didn't
     var hasStartedDismissing = false
     var cancelSeconds = 0
@@ -309,7 +259,6 @@ class CameraViewController: UIViewController {
     
     var highlightColor = "00aeef"
     
-    
     var matchToColors = [String: [CGColor]]()
     
     var currentSearchFindList = EditableFindList()
@@ -319,15 +268,13 @@ class CameraViewController: UIViewController {
     var stringToList = [String: EditableFindList]()
     var aspectRatioWidthOverHeight : CGFloat = 0
     
-    //MARK: Every mode (Universal)
     var statusBarHidden : Bool = false
     var finalTextToFind : String = ""
     let deviceSize = screenBounds.size
-    ///Save the image
     var globalUrl : URL = URL(fileURLWithPath: "")
 
     
-    //MARK: New Camera no Sceneview
+    //MARK: Camera
     var previewTempImageView = UIImageView()
     let avSession = AVCaptureSession()
     var snapshotImageOrientation = UIImage.Orientation.upMirrored
@@ -335,139 +282,10 @@ class CameraViewController: UIViewController {
     var cameraDevice: AVCaptureDevice?
     
     //MARK: Camera Focus allowed views
-//    @IBOutlet weak var menuAllowView: UIView!
-//    @IBOutlet weak var middleAllowView: UIView!
-//    @IBOutlet weak var statusAllowView: UIView!
-//    @IBOutlet weak var stackAllowView: UIStackView!
-//    @IBOutlet weak var controlsView: UIView!
     @IBOutlet weak var cameraView: CameraView!
     let videoDataOutput = AVCaptureVideoDataOutput()
-    func getImageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
-       guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
-           return nil
-       }
-       CVPixelBufferLockBaseAddress(pixelBuffer, .readOnly)
-       let baseAddress = CVPixelBufferGetBaseAddress(pixelBuffer)
-       let width = CVPixelBufferGetWidth(pixelBuffer)
-       let height = CVPixelBufferGetHeight(pixelBuffer)
-       let bytesPerRow = CVPixelBufferGetBytesPerRow(pixelBuffer)
-       let colorSpace = CGColorSpaceCreateDeviceRGB()
-       let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue | CGBitmapInfo.byteOrder32Little.rawValue)
-       guard let context = CGContext(data: baseAddress, width: width, height: height, bitsPerComponent: 8, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) else {
-           return nil
-       }
-       guard let cgImage = context.makeImage() else {
-           return nil
-       }
-       let image = UIImage(cgImage: cgImage, scale: 1, orientation:.right)
-       CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly)
-        return image
-    }
-    private func getCamera() -> AVCaptureDevice? {
-        if let cameraDevice = AVCaptureDevice.default(.builtInDualCamera,
-                                                for: .video, position: .back) {
-            return cameraDevice
-        } else if let cameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
-                                                       for: .video, position: .back) {
-            return cameraDevice
-        } else {
-            print("Missing Camera.")
-            return nil
-        }
-    }
-    private func configureCamera() {
-        cameraView.session = avSession
-        if let cameraDevice = getCamera() {
-            do {
-                let captureDeviceInput = try AVCaptureDeviceInput(device: cameraDevice)
-                if avSession.canAddInput(captureDeviceInput) {
-                    avSession.addInput(captureDeviceInput)
-                }
-            }
-            catch {
-                print("Error occured \(error)")
-                return
-            }
-            avSession.sessionPreset = .photo
-            videoDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "Buffer Queue", qos: .userInteractive, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil))
-            if avSession.canAddOutput(videoDataOutput) {
-                avSession.addOutput(videoDataOutput)
-            }
-            cameraView.videoPreviewLayer.videoGravity = .resizeAspectFill
-            let newBounds = view.layer.bounds
-            cameraView.videoPreviewLayer.bounds = newBounds
-            print(cameraView.videoPreviewLayer.bounds)
-            cameraView.videoPreviewLayer.position = CGPoint(x: newBounds.midX, y: newBounds.midY);
-            avSession.startRunning()
-        }
-    }
-    func startSession() {
-        if !avSession.isRunning {
-            DispatchQueue.global().async {
-                self.avSession.startRunning()
-            }
-        }
-    }
-    func stopSession() {
-        if avSession.isRunning {
-            DispatchQueue.global().async {
-                self.avSession.stopRunning()
-            }
-        }
-    }
     
-    @objc private func _KeyboardFrameChanged(_ notification: Notification){
-        if let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let rect = frame.cgRectValue
-            var shouldFade = false
-            if didFinishShouldUpdateHeight {
-                self.toolbarTopC?.update(offset: rect.origin.y - 80)
-                if rect.width == CGFloat(0) {
-                    shouldFade = true
-                }
-            }
-            if rect.width != CGFloat(0) {
-                self.toolbarWidthC?.update(offset: rect.width)
-                self.toolbarLeftC?.update(offset: rect.origin.x)
-            }
-            UIView.animate(withDuration: 0.6, animations: {
-                if rect.width < screenBounds.size.width {
-                    self.toolbar.layer.cornerRadius = 5
-                } else {
-                    self.toolbar.layer.cornerRadius = 0
-                }
-                if shouldFade == true {
-                    self.toolbar.alpha = 0
-                }
-                self.view.layoutIfNeeded()
-            })
-        }
-    }
-    @objc private func _KeyboardHeightChanged(_ notification: Notification){
-        if let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            UIView.animate(withDuration: 0.5, animations: {
-                let rect = frame.cgRectValue
-                if let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double {
-                    if let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt {
-                        if rect.width == CGFloat(0) {
-                            self.didFinishShouldUpdateHeight = true
-                        } else {
-                            self.didFinishShouldUpdateHeight = false
-                            self.toolbarTopC?.update(offset: rect.origin.y - 80)
-                            UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(rawValue: curve), animations: {
-                                if rect.origin.y == screenBounds.size.height {
-                                    self.toolbar.alpha = 0
-                                } else {
-                                    self.toolbar.alpha = 1
-                                }
-                                self.view.layoutIfNeeded()
-                            }, completion: nil)
-                        }
-                    }
-                }
-            })
-        }
-    }
+    
     
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         viewControllerToPresent.modalPresentationStyle = .pageSheet
@@ -555,7 +373,6 @@ class CameraViewController: UIViewController {
         cameraIcon.makeActiveState()()
         cameraIcon.rimView.layer.borderColor = UIColor.white.cgColor
         
-        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -594,7 +411,6 @@ class CameraViewController: UIViewController {
         
         statsView.layer.cornerRadius = statsView.bounds.width / 2
         settingsView.layer.cornerRadius = settingsView.bounds.width / 2
-        print("cons: \(ConstantVars.shutterBottomDistance)")
         statsBottomC.constant = CGFloat(ConstantVars.tabHeight) + 8
         settingsBottomC.constant = CGFloat(ConstantVars.tabHeight) + 8
         
@@ -603,7 +419,7 @@ class CameraViewController: UIViewController {
         busyFastFinding = false
         
         motionManager.deviceMotionUpdateInterval = 0.01
-       //  initial configuration
+        
         if let deviceMot = motionManager.deviceMotion?.attitude {
             initialAttitude = deviceMot
         }
@@ -625,7 +441,6 @@ class CameraViewController: UIViewController {
         
         whatsNewButton.alpha = 0
         
-        
         if !keyValueVersionStore.has(version: WhatsNew.Version.current()) {
             keyValueVersionStore.set(version: WhatsNew.Version.current())
             
@@ -642,60 +457,8 @@ class CameraViewController: UIViewController {
             
         }
         
-        
         /// 1.2 setup
-        
-        cameraIconHolder.backgroundColor = UIColor.clear
-        cameraIcon.isActualButton = true
-        cameraIcon.pressed = { [weak self] in
-            guard let self = self else { return }
-            CameraState.isOn.toggle()
-            self.cameraIcon.toggle(on: CameraState.isOn)
-            self.cameraChanged?(CameraState.isOn)
-        }
-        saveToPhotos.alpha = 0
-        saveToPhotos.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        cache.alpha = 0
-        cache.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        saveLabel.alpha = 0
-        cacheLabel.alpha = 0
-        
-        saveToPhotos.pressed = { [weak self] in
-            guard let self = self else { return }
-            self.savePressed.toggle()
-            if self.savePressed {
-                UIView.animate(withDuration: Double(Constants.transitionDuration)) {
-                    self.saveToPhotos.photosIcon.makeActiveState(offset: true)()
-                }
-                self.saveLabel.fadeTransition(0.2)
-                self.saveLabel.text = "Saved"
-            } else {
-                UIView.animate(withDuration: Double(Constants.transitionDuration)) {
-                    self.saveToPhotos.photosIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)()
-                }
-                self.saveLabel.fadeTransition(0.2)
-                self.saveLabel.text = "Save"
-            }
-        }
-        cache.pressed = { [weak self] in
-            guard let self = self else { return }
-            self.cachePressed.toggle()
-            if self.cachePressed {
-                self.cache.cacheIcon.animateCheck(percentage: 1)
-                self.cache.cacheIcon.toggleRim(light: true)
-                self.cacheLabel.fadeTransition(0.2)
-                self.cacheLabel.text = "Caching..."
-                self.messageView.showMessage("Caching - 50%", dismissible: false, duration: -1)
-            } else {
-                self.cache.cacheIcon.animateCheck(percentage: 0)
-                self.cache.cacheIcon.toggleRim(light: false)
-                self.cacheLabel.fadeTransition(0.2)
-                self.cacheLabel.text = "Cache"
-                self.messageView.showMessage("Cancelled", dismissible: true, duration: 1)
-            }
-        }
-        
-        
+        setupCameraButtons()
     }
     
     
@@ -748,11 +511,7 @@ class CameraViewController: UIViewController {
         } else {
             shouldHapticFeedback = false
         }
-
-
     }
-
-
 }
 
 

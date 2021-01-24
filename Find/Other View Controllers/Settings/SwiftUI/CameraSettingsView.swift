@@ -49,10 +49,6 @@ struct TextDetectionView: View {
 struct HapticFeedbackView: View {
     @Binding var level: Int
     
-//    @State var none = true
-//    @State var light = false
-//    @State var heavy = false
-    
     var body: some View {
         
         ZStack {
