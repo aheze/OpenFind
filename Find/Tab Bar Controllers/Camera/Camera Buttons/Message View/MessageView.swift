@@ -13,7 +13,10 @@ class MessageView: UIView {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var shadeView: UIView!
+    
+    @IBOutlet weak var labelContainerView: UIView!
     @IBOutlet weak var labelButton: UIButton!
+    @IBOutlet weak var morphingLabel: LTMorphingLabel!
     
     var currentMessageIdentifier: UUID?
     
@@ -32,7 +35,7 @@ class MessageView: UIView {
     
     func resetAlpha() {
         UIView.animate(withDuration: 0.2, animations: {
-            self.labelButton.alpha = 1
+            self.morphingLabel.alpha = 1
         })
     }
     
@@ -55,18 +58,23 @@ class MessageView: UIView {
         containerView.clipsToBounds = true
         containerView.layer.cornerRadius = 8
         
-        self.shadeView.alpha = 0
-        self.labelButton.alpha = 0
-        self.blurView.effect = nil
+        morphingLabel.morphingEffect = LTMorphingEffect.evaporate
+        
+        shadeView.alpha = 0
+        labelContainerView.alpha = 0
+        blurView.effect = nil
     }
+    
     
     func showMessage(_ message: String, dismissible: Bool, duration: Int) {
         let thisMessageIdentifier = UUID()
-        labelButton.setTitle(message, for: .normal)
+//        labelButton.setTitle(message, for: .normal)
+        
+        morphingLabel.text = message
         
         UIView.animate(withDuration: 0.8) {
             self.shadeView.alpha = 1
-            self.labelButton.alpha = 1
+            self.labelContainerView.alpha = 1
             self.blurView.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
         }
         
@@ -81,7 +89,7 @@ class MessageView: UIView {
     }
     func updateMessage(_ message: String) {
         DispatchQueue.main.async {
-            self.labelButton.setTitle(message, for: .normal)
+            self.morphingLabel.text = message
         }
     }
     func hideMessages() {
@@ -89,7 +97,7 @@ class MessageView: UIView {
             self.currentMessageIdentifier = nil
             UIView.animate(withDuration: 0.8) {
                 self.shadeView.alpha = 0
-                self.labelButton.alpha = 0
+                self.labelContainerView.alpha = 0
                 self.blurView.effect = nil
             }
         }

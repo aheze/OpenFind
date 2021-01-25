@@ -105,6 +105,20 @@
 		3CA9336D25BE727D00042C2F /* CameraVC+SaveToPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9336C25BE727D00042C2F /* CameraVC+SaveToPhotos.swift */; };
 		3CA9337025BE802000042C2F /* PhotosVC+ObserveChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9336F25BE802000042C2F /* PhotosVC+ObserveChanges.swift */; };
 		3CA9337525BF2EC900042C2F /* CameraVC+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9337425BF2EC900042C2F /* CameraVC+Cache.swift */; };
+		3CAC4DA525BF52CE00CC7948 /* LTEasing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4D9025BF52CE00CC7948 /* LTEasing.swift */; };
+		3CAC4DA625BF52CE00CC7948 /* LTMorphingLabel+Pixelate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4D9125BF52CE00CC7948 /* LTMorphingLabel+Pixelate.swift */; };
+		3CAC4DA725BF52CF00CC7948 /* LTMorphingLabel+Burn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4D9225BF52CE00CC7948 /* LTMorphingLabel+Burn.swift */; };
+		3CAC4DA825BF52CF00CC7948 /* LTMorphingLabel+Evaporate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4D9325BF52CE00CC7948 /* LTMorphingLabel+Evaporate.swift */; };
+		3CAC4DA925BF52CF00CC7948 /* LTMorphingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4D9425BF52CE00CC7948 /* LTMorphingLabel.swift */; };
+		3CAC4DAA25BF52CF00CC7948 /* LTMorphingLabel+Sparkle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4D9525BF52CE00CC7948 /* LTMorphingLabel+Sparkle.swift */; };
+		3CAC4DAB25BF52CF00CC7948 /* LTEmitterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4D9625BF52CE00CC7948 /* LTEmitterView.swift */; };
+		3CAC4DAC25BF52CF00CC7948 /* LTStringDiffResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4D9725BF52CE00CC7948 /* LTStringDiffResult.swift */; };
+		3CAC4DAD25BF52CF00CC7948 /* LTCharacterDiffResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4D9825BF52CE00CC7948 /* LTCharacterDiffResult.swift */; };
+		3CAC4DAE25BF52CF00CC7948 /* LTCharacterLimbo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4D9925BF52CE00CC7948 /* LTCharacterLimbo.swift */; };
+		3CAC4DAF25BF52CF00CC7948 /* LTMorphingLabel+Fall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4D9A25BF52CE00CC7948 /* LTMorphingLabel+Fall.swift */; };
+		3CAC4DB025BF52CF00CC7948 /* LTMorphingLabel+Anvil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4D9B25BF52CE00CC7948 /* LTMorphingLabel+Anvil.swift */; };
+		3CAC4DB125BF52CF00CC7948 /* LTMorphingEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4D9D25BF52CE00CC7948 /* LTMorphingEffect.swift */; };
+		3CAC4DB625BF52CF00CC7948 /* MorphingText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4DA425BF52CE00CC7948 /* MorphingText.swift */; };
 		3CAD947125BF3831001D5E0A /* CameraVC+CacheFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAD947025BF3831001D5E0A /* CameraVC+CacheFind.swift */; };
 		3CB6842C259FF9A700AE0AD6 /* SegmentedSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */; };
 		3CB6842D259FF9A700AE0AD6 /* SegmentedSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB6842B259FF9A700AE0AD6 /* SegmentedSlider.xib */; };
@@ -331,6 +345,20 @@
 		3CA9336C25BE727D00042C2F /* CameraVC+SaveToPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+SaveToPhotos.swift"; sourceTree = "<group>"; };
 		3CA9336F25BE802000042C2F /* PhotosVC+ObserveChanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+ObserveChanges.swift"; sourceTree = "<group>"; };
 		3CA9337425BF2EC900042C2F /* CameraVC+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Cache.swift"; sourceTree = "<group>"; };
+		3CAC4D9025BF52CE00CC7948 /* LTEasing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTEasing.swift; sourceTree = "<group>"; };
+		3CAC4D9125BF52CE00CC7948 /* LTMorphingLabel+Pixelate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Pixelate.swift"; sourceTree = "<group>"; };
+		3CAC4D9225BF52CE00CC7948 /* LTMorphingLabel+Burn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Burn.swift"; sourceTree = "<group>"; };
+		3CAC4D9325BF52CE00CC7948 /* LTMorphingLabel+Evaporate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Evaporate.swift"; sourceTree = "<group>"; };
+		3CAC4D9425BF52CE00CC7948 /* LTMorphingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTMorphingLabel.swift; sourceTree = "<group>"; };
+		3CAC4D9525BF52CE00CC7948 /* LTMorphingLabel+Sparkle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Sparkle.swift"; sourceTree = "<group>"; };
+		3CAC4D9625BF52CE00CC7948 /* LTEmitterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTEmitterView.swift; sourceTree = "<group>"; };
+		3CAC4D9725BF52CE00CC7948 /* LTStringDiffResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTStringDiffResult.swift; sourceTree = "<group>"; };
+		3CAC4D9825BF52CE00CC7948 /* LTCharacterDiffResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTCharacterDiffResult.swift; sourceTree = "<group>"; };
+		3CAC4D9925BF52CE00CC7948 /* LTCharacterLimbo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTCharacterLimbo.swift; sourceTree = "<group>"; };
+		3CAC4D9A25BF52CE00CC7948 /* LTMorphingLabel+Fall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Fall.swift"; sourceTree = "<group>"; };
+		3CAC4D9B25BF52CE00CC7948 /* LTMorphingLabel+Anvil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Anvil.swift"; sourceTree = "<group>"; };
+		3CAC4D9D25BF52CE00CC7948 /* LTMorphingEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTMorphingEffect.swift; sourceTree = "<group>"; };
+		3CAC4DA425BF52CE00CC7948 /* MorphingText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphingText.swift; sourceTree = "<group>"; };
 		3CAD947025BF3831001D5E0A /* CameraVC+CacheFind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+CacheFind.swift"; sourceTree = "<group>"; };
 		3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedSlider.swift; sourceTree = "<group>"; };
 		3CB6842B259FF9A700AE0AD6 /* SegmentedSlider.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentedSlider.xib; sourceTree = "<group>"; };
@@ -575,8 +603,7 @@
 				3CA9335625BDF4B500042C2F /* CameraVC+ButtonSetup.swift */,
 				3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */,
 				3C4DE6F8259AD3FF0037D104 /* SaveToPhotosButton.swift */,
-				3C4DE6F5259AD3FF0037D104 /* MessageView.xib */,
-				3C4DE6FA259AD3FF0037D104 /* MessageView.swift */,
+				3CAC4D8E25BF514000CC7948 /* Message View */,
 				3C4DE6F9259AD3FF0037D104 /* CacheButton.xib */,
 				3C4DE6F7259AD3FF0037D104 /* CacheButton.swift */,
 				3C4DE6F6259AD3FF0037D104 /* CacheIcon.swift */,
@@ -727,6 +754,45 @@
 				3CAD947025BF3831001D5E0A /* CameraVC+CacheFind.swift */,
 			);
 			path = Caching;
+			sourceTree = "<group>";
+		};
+		3CAC4D8E25BF514000CC7948 /* Message View */ = {
+			isa = PBXGroup;
+			children = (
+				3C4DE6F5259AD3FF0037D104 /* MessageView.xib */,
+				3C4DE6FA259AD3FF0037D104 /* MessageView.swift */,
+				3CAC4D8F25BF52C300CC7948 /* Morphing Label */,
+			);
+			path = "Message View";
+			sourceTree = "<group>";
+		};
+		3CAC4D8F25BF52C300CC7948 /* Morphing Label */ = {
+			isa = PBXGroup;
+			children = (
+				3CAC4D9825BF52CE00CC7948 /* LTCharacterDiffResult.swift */,
+				3CAC4D9925BF52CE00CC7948 /* LTCharacterLimbo.swift */,
+				3CAC4D9025BF52CE00CC7948 /* LTEasing.swift */,
+				3CAC4D9625BF52CE00CC7948 /* LTEmitterView.swift */,
+				3CAC4D9D25BF52CE00CC7948 /* LTMorphingEffect.swift */,
+				3CAC4D9425BF52CE00CC7948 /* LTMorphingLabel.swift */,
+				3CAC4D9B25BF52CE00CC7948 /* LTMorphingLabel+Anvil.swift */,
+				3CAC4D9225BF52CE00CC7948 /* LTMorphingLabel+Burn.swift */,
+				3CAC4D9325BF52CE00CC7948 /* LTMorphingLabel+Evaporate.swift */,
+				3CAC4D9A25BF52CE00CC7948 /* LTMorphingLabel+Fall.swift */,
+				3CAC4D9125BF52CE00CC7948 /* LTMorphingLabel+Pixelate.swift */,
+				3CAC4D9525BF52CE00CC7948 /* LTMorphingLabel+Sparkle.swift */,
+				3CAC4D9725BF52CE00CC7948 /* LTStringDiffResult.swift */,
+				3CAC4DA325BF52CE00CC7948 /* SwiftUI */,
+			);
+			path = "Morphing Label";
+			sourceTree = "<group>";
+		};
+		3CAC4DA325BF52CE00CC7948 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				3CAC4DA425BF52CE00CC7948 /* MorphingText.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		3CB6842F25A0085E00AE0AD6 /* Migration */ = {
@@ -1196,6 +1262,8 @@
 			dependencies = (
 			);
 			name = Find;
+			packageProductDependencies = (
+			);
 			productName = Find;
 			productReference = 4999AC902353A80A00AB06A7 /* Find.app */;
 			productType = "com.apple.product-type.application";
@@ -1225,6 +1293,8 @@
 				"zh-Hans",
 			);
 			mainGroup = 4999AC872353A80A00AB06A7;
+			packageReferences = (
+			);
 			productRefGroup = 4999AC912353A80A00AB06A7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1345,6 +1415,7 @@
 				49B7A33523923E810070209F /* ZoomDismissalInteractionController.swift in Sources */,
 				3C8B648A25BB4F8F008F1535 /* PhotoSlidesVC+FindBarDelegate.swift in Sources */,
 				3C2C3E9325A1152F002C3D11 /* PhotosMigrationController+Write.swift in Sources */,
+				3CAC4DA625BF52CE00CC7948 /* LTMorphingLabel+Pixelate.swift in Sources */,
 				49325C1323CAE84500A771A3 /* StatusView.swift in Sources */,
 				3CA9337025BE802000042C2F /* PhotosVC+ObserveChanges.swift in Sources */,
 				49563521243694BC0001E8C6 /* GestureControl.swift in Sources */,
@@ -1357,6 +1428,7 @@
 				3C5B156B25A7EE7900BB8988 /* NotifyTransition.swift in Sources */,
 				49D985B6241B3847005F4E92 /* CacheCell.swift in Sources */,
 				4956351F243694BC0001E8C6 /* FillAnimationView.swift in Sources */,
+				3CAC4DAB25BF52CF00CC7948 /* LTEmitterView.swift in Sources */,
 				3C6EE6B325A2AB350078462A /* SettingsView.swift in Sources */,
 				4956351B243694BC0001E8C6 /* PageView.swift in Sources */,
 				3C4DE701259AD3FF0037D104 /* MessageView.swift in Sources */,
@@ -1368,6 +1440,7 @@
 				49D985BA2421D97B005F4E92 /* FindModel.swift in Sources */,
 				3C56C5AE25AA42760006A667 /* SlideViewController.swift in Sources */,
 				3CB6843525A013D800AE0AD6 /* ImageCell.swift in Sources */,
+				3CAC4DAA25BF52CF00CC7948 /* LTMorphingLabel+Sparkle.swift in Sources */,
 				3C56C5B125AA43210006A667 /* SlideVC+ScrollView.swift in Sources */,
 				3C020CE9259FF7470087AE92 /* PhotosViewController.swift in Sources */,
 				3C6EE6B125A2AB350078462A /* SettingsComponents.swift in Sources */,
@@ -1377,6 +1450,7 @@
 				3CA9336A25BE0BD600042C2F /* CameraVC+FindWhenPaused.swift in Sources */,
 				3C71F25E25AF6B8000D22212 /* PhotosVC+Star.swift in Sources */,
 				492A2D2624A4046200F9C4A1 /* BartyCrouch.swift in Sources */,
+				3CAC4DA525BF52CE00CC7948 /* LTEasing.swift in Sources */,
 				3C2C6F9625AE21BB00958647 /* PhotosVC+Actions.swift in Sources */,
 				3C8F116E25AD5DA80091402B /* CustomButton.swift in Sources */,
 				49301BF52402493A00B4780B /* HistoryModel.swift in Sources */,
@@ -1387,11 +1461,13 @@
 				3CA9334D25BDF37800042C2F /* CameraView.swift in Sources */,
 				3C4DE716259B0EAB0037D104 /* TutorialHeader.swift in Sources */,
 				3C8B649025BB51BE008F1535 /* PhotoSlidesVC+Draw.swift in Sources */,
+				3CAC4DB125BF52CF00CC7948 /* LTMorphingEffect.swift in Sources */,
 				3CB6843225A0087700AE0AD6 /* PhotosMigrationController.swift in Sources */,
 				3CA9336D25BE727D00042C2F /* CameraVC+SaveToPhotos.swift in Sources */,
 				3CE306D6259AC46400F1B2E2 /* TabBar.swift in Sources */,
 				4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */,
 				4953F3C424171EE200690E53 /* FindBar.swift in Sources */,
+				3CAC4DB025BF52CF00CC7948 /* LTMorphingLabel+Anvil.swift in Sources */,
 				49563520243694BC0001E8C6 /* PaperOnboardingDataSource.swift in Sources */,
 				3C5B157825A8CE7E00BB8988 /* PhotosVC+NavBar.swift in Sources */,
 				4988FC4823BEF89600199635 /* ListModel.swift in Sources */,
@@ -1402,6 +1478,7 @@
 				3CE306E5259AC4B000F1B2E2 /* ButtonTransitions.swift in Sources */,
 				4990AAE623EDB50E00FAF37B /* ColorsViewController.swift in Sources */,
 				3C3D47E025A41AEB002B8BBF /* PhotosVC+Diffable.swift in Sources */,
+				3CAC4DB625BF52CF00CC7948 /* MorphingText.swift in Sources */,
 				4990AAE223EDB4CE00FAF37B /* GeneralViewController.swift in Sources */,
 				3C8B649325BB6EC0008F1535 /* PhotoSlidesVC+FastFind.swift in Sources */,
 				3C369709259EEFE500A6544A /* PhotosMigrationView.swift in Sources */,
@@ -1432,6 +1509,7 @@
 				49F7B1582353FE7E0099FA62 /* Component.swift in Sources */,
 				3C4C96B225B69038009FDE8D /* InfoView.swift in Sources */,
 				4953F3C0241713A100690E53 /* HistoryFindCell.swift in Sources */,
+				3CAC4DA725BF52CF00CC7948 /* LTMorphingLabel+Burn.swift in Sources */,
 				3CFF312825AA496B00D3C56D /* PhotoSlidesVC+Setup.swift in Sources */,
 				3CA9335725BDF4B500042C2F /* CameraVC+ButtonSetup.swift in Sources */,
 				3C16EA71259BE7D600D73755 /* ListsController+NavBar.swift in Sources */,
@@ -1456,12 +1534,14 @@
 				3C8F116B25AD0A160091402B /* SegmentedSlider+Selection.swift in Sources */,
 				4952F0C2240B1DD00068564F /* SearchCell.swift in Sources */,
 				3C3D47C625A40133002B8BBF /* PhotosVC+PHAssets.swift in Sources */,
+				3CAC4DA925BF52CF00CC7948 /* LTMorphingLabel.swift in Sources */,
 				4956351C243694BC0001E8C6 /* OnboardingContentView.swift in Sources */,
 				495F38FB2432C8FE00A17D93 /* CarteItem.swift in Sources */,
 				3C6EE6B225A2AB350078462A /* HeaderView.swift in Sources */,
 				4928526023D61F570048EC13 /* ListSelect.swift in Sources */,
 				3C2858C6259C3E4C00BABBA7 /* TabBar+Lists.swift in Sources */,
 				3C020CED259FF7890087AE92 /* PhotosVC+Migration.swift in Sources */,
+				3CAC4DAD25BF52CF00CC7948 /* LTCharacterDiffResult.swift in Sources */,
 				3C4A8E4925AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift in Sources */,
 				4999AC962353A80A00AB06A7 /* SceneDelegate.swift in Sources */,
 				3CB6842C259FF9A700AE0AD6 /* SegmentedSlider.swift in Sources */,
@@ -1476,8 +1556,10 @@
 				3CA9335425BDF44D00042C2F /* CameraVC+Keyboard.swift in Sources */,
 				49D985B4241B374B005F4E92 /* CachingViewController.swift in Sources */,
 				49F7B1562353FE4B0099FA62 /* BasicSetup.swift in Sources */,
+				3CAC4DAE25BF52CF00CC7948 /* LTCharacterLimbo.swift in Sources */,
 				4991344E236FDF1300B82E46 /* SettingsViewController.swift in Sources */,
 				3C1317F925B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift in Sources */,
+				3CAC4DAC25BF52CF00CC7948 /* LTStringDiffResult.swift in Sources */,
 				3C4B6D7325B23460001F501A /* NavigationViewModifier.swift in Sources */,
 				495F38FA2432C8FE00A17D93 /* CarteViewController.swift in Sources */,
 				49563524243694BC0001E8C6 /* Configuring.swift in Sources */,
@@ -1489,6 +1571,7 @@
 				3C2C3E9925A11CD6002C3D11 /* ANSegmentIndicator.swift in Sources */,
 				3C3DF5E025B4A59100DD7A10 /* PhotoFindVC+Prompt.swift in Sources */,
 				3C1FE21225BA8793004DC9EF /* PhotoSlidesVC+NavBar.swift in Sources */,
+				3CAC4DAF25BF52CF00CC7948 /* LTMorphingLabel+Fall.swift in Sources */,
 				3C3D47DA25A40A4E002B8BBF /* PhotoPermissionView.swift in Sources */,
 				3C1317ED25B2A73C00FCEB79 /* PhotoFindVC+Setup.swift in Sources */,
 				3C3DF5F625B52A6E00DD7A10 /* PhotoFindVC+PresentSlides.swift in Sources */,
@@ -1500,6 +1583,7 @@
 				49913450236FE12400B82E46 /* SettingsViewExtensions.swift in Sources */,
 				3C3DF5FB25B52AA500DD7A10 /* PhotoFindVC+CollectionCoordinates.swift in Sources */,
 				4917CE8123C059F6002EA20B /* StartSceneView.swift in Sources */,
+				3CAC4DA825BF52CF00CC7948 /* LTMorphingLabel+Evaporate.swift in Sources */,
 				3C2858CA259CF00200BABBA7 /* ListsController+Selection.swift in Sources */,
 				49563503243593860001E8C6 /* TutorialViewControllers.swift in Sources */,
 				3C020CE5259FF5A70087AE92 /* ViewController+Migration.swift in Sources */,
@@ -1710,6 +1794,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.5;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

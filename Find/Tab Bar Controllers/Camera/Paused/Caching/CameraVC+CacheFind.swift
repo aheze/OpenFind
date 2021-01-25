@@ -42,7 +42,8 @@ extension CameraViewController {
                 print("progress is: \(progress)")
                 let percent = progress * 100
                 let roundedPercent = percent.rounded()
-                self.messageView.updateMessage("Caching - \(roundedPercent)%")
+//                self.messageView.updateMessage("Caching - \(roundedPercent)%")
+                self.messageView.updateMessage("\(roundedPercent)")
             }
             let imageRequestHandler = VNImageRequestHandler(cgImage: cgImage, orientation: .up)
             do {

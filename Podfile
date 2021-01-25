@@ -23,3 +23,4 @@ post_install do |installer|
     config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
   end
 end
+
