@@ -39,6 +39,11 @@ extension CameraViewController {
                 self.cache.cacheIcon.toggleRim(light: false)
                 self.cacheLabel.fadeTransition(0.2)
                 self.cacheLabel.text = "Cache"
+                
+                self.startedCaching = false
+                self.cachedContents.removeAll()
+                self.currentCachingProcess = nil
+                self.finishedCaching = false
             }
             
         }
@@ -71,18 +76,12 @@ extension CameraViewController {
             self.cachePressed.toggle()
             if self.cachePressed {
                 self.beginCachingPhoto()
-                self.cache.cacheIcon.animateCheck(percentage: 1)
-                self.cache.cacheIcon.toggleRim(light: true)
-                self.cacheLabel.fadeTransition(0.2)
-                self.cacheLabel.text = "Caching..."
-//                self.messageView.showMessage("Caching - 0%", dismissible: false, duration: -1)
-                self.messageView.showMessage("0", dismissible: false, duration: -1)
             } else {
                 self.cache.cacheIcon.animateCheck(percentage: 0)
                 self.cache.cacheIcon.toggleRim(light: false)
                 self.cacheLabel.fadeTransition(0.2)
                 self.cacheLabel.text = "Cache"
-                self.messageView.showMessage("Cancelled", dismissible: true, duration: 1)
+                self.messageView.hideMessages()
             }
         }
     }

@@ -281,6 +281,7 @@ class CameraViewController: UIViewController {
     var cachedContents = [EditableSingleHistoryContent]()
     var currentCachingProcess: UUID?
     var finishedCaching = false
+    var currentProgress = CGFloat(0) /// how much cache is finished
 
     
     //MARK: Camera

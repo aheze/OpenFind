@@ -11,8 +11,27 @@ import Vision
 
 extension CameraViewController {
     func beginCachingPhoto() {
-        if !startedCaching {
+        if startedCaching {
+            if finishedCaching {
+                cache.cacheIcon.animateCheck(percentage: 1)
+                cache.cacheIcon.toggleRim(light: true)
+                cacheLabel.fadeTransition(0.2)
+                cacheLabel.text = "Cached"
+            } else {
+                cache.cacheIcon.animateCheck(percentage: currentProgress)
+                cache.cacheIcon.toggleRim(light: true)
+                cacheLabel.fadeTransition(0.2)
+                cacheLabel.text = "Caching..."
+                messageView.unHideMessages()
+            }
+        } else {
             if let currentImage = currentPausedImage?.cgImage {
+                cache.cacheIcon.animateCheck(percentage: 0)
+                cache.cacheIcon.toggleRim(light: true)
+                cacheLabel.fadeTransition(0.2)
+                cacheLabel.text = "Caching..."
+                messageView.showMessage("0", dismissible: false, duration: -1)
+                
                 cacheFind(in: currentImage)
             }
         }
@@ -49,6 +68,12 @@ extension CameraViewController {
         }
         finishedCaching = true
         cachedContents = contents
-        messageView.hideMessages()
+        if cachePressed {
+            DispatchQueue.main.async {
+                self.messageView.hideMessages()
+                self.cacheLabel.fadeTransition(0.2)
+                self.cacheLabel.text = "Cached"
+            }
+        }
     }
 }

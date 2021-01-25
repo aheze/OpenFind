@@ -68,8 +68,6 @@ class MessageView: UIView {
     
     func showMessage(_ message: String, dismissible: Bool, duration: Int) {
         let thisMessageIdentifier = UUID()
-//        labelButton.setTitle(message, for: .normal)
-        
         morphingLabel.text = message
         
         UIView.animate(withDuration: 0.8) {
@@ -90,6 +88,15 @@ class MessageView: UIView {
     func updateMessage(_ message: String) {
         DispatchQueue.main.async {
             self.morphingLabel.text = message
+        }
+    }
+    func unHideMessages() {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.8) {
+                self.shadeView.alpha = 1
+                self.labelContainerView.alpha = 1
+                self.blurView.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+            }
         }
     }
     func hideMessages() {
