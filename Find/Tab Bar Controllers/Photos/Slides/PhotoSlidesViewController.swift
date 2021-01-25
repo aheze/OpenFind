@@ -49,7 +49,6 @@ class PhotoSlidesViewController: UIViewController {
     var deviceWidth = UIScreen.main.bounds.width
     
     // MARK: Fast find
-//    var currentFastFindProcess: UUID?
     var numberCurrentlyFastFinding = 0
     
     // MARK: Finding back button

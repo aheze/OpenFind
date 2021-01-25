@@ -137,7 +137,6 @@ extension PhotoSlidesViewController {
         for newFindComponent in fastFoundComponents {
             var smallestDistance = CGFloat(999)
             for findMatch in resultPhoto.components {
-                
                 let point1 = CGPoint(x: findMatch.x, y: findMatch.y)
                 let point2 = CGPoint(x: newFindComponent.x, y: newFindComponent.y)
                 let pointDistance = relativeDistance(point1, point2)

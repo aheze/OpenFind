@@ -119,6 +119,9 @@
 		3CAC4DB025BF52CF00CC7948 /* LTMorphingLabel+Anvil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4D9B25BF52CE00CC7948 /* LTMorphingLabel+Anvil.swift */; };
 		3CAC4DB125BF52CF00CC7948 /* LTMorphingEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4D9D25BF52CE00CC7948 /* LTMorphingEffect.swift */; };
 		3CAC4DB625BF52CF00CC7948 /* MorphingText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4DA425BF52CE00CC7948 /* MorphingText.swift */; };
+		3CAC4DCA25BF5E1600CC7948 /* CameraVC+HandleCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4DC925BF5E1600CC7948 /* CameraVC+HandleCache.swift */; };
+		3CAC4DCD25BF5E4900CC7948 /* CameraVC+FinishedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4DCC25BF5E4900CC7948 /* CameraVC+FinishedCache.swift */; };
+		3CAC4DD025BF611100CC7948 /* CameraVC+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4DCF25BF611100CC7948 /* CameraVC+Draw.swift */; };
 		3CAD947125BF3831001D5E0A /* CameraVC+CacheFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAD947025BF3831001D5E0A /* CameraVC+CacheFind.swift */; };
 		3CB6842C259FF9A700AE0AD6 /* SegmentedSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */; };
 		3CB6842D259FF9A700AE0AD6 /* SegmentedSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB6842B259FF9A700AE0AD6 /* SegmentedSlider.xib */; };
@@ -359,6 +362,9 @@
 		3CAC4D9B25BF52CE00CC7948 /* LTMorphingLabel+Anvil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Anvil.swift"; sourceTree = "<group>"; };
 		3CAC4D9D25BF52CE00CC7948 /* LTMorphingEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTMorphingEffect.swift; sourceTree = "<group>"; };
 		3CAC4DA425BF52CE00CC7948 /* MorphingText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphingText.swift; sourceTree = "<group>"; };
+		3CAC4DC925BF5E1600CC7948 /* CameraVC+HandleCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+HandleCache.swift"; sourceTree = "<group>"; };
+		3CAC4DCC25BF5E4900CC7948 /* CameraVC+FinishedCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+FinishedCache.swift"; sourceTree = "<group>"; };
+		3CAC4DCF25BF611100CC7948 /* CameraVC+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Draw.swift"; sourceTree = "<group>"; };
 		3CAD947025BF3831001D5E0A /* CameraVC+CacheFind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+CacheFind.swift"; sourceTree = "<group>"; };
 		3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedSlider.swift; sourceTree = "<group>"; };
 		3CB6842B259FF9A700AE0AD6 /* SegmentedSlider.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentedSlider.xib; sourceTree = "<group>"; };
@@ -752,6 +758,9 @@
 			children = (
 				3CA9337425BF2EC900042C2F /* CameraVC+Cache.swift */,
 				3CAD947025BF3831001D5E0A /* CameraVC+CacheFind.swift */,
+				3CAC4DC925BF5E1600CC7948 /* CameraVC+HandleCache.swift */,
+				3CAC4DCC25BF5E4900CC7948 /* CameraVC+FinishedCache.swift */,
+				3CAC4DCF25BF611100CC7948 /* CameraVC+Draw.swift */,
 			);
 			path = Caching;
 			sourceTree = "<group>";
@@ -1427,6 +1436,7 @@
 				3C6EE6B725A2AB350078462A /* OtherView.swift in Sources */,
 				3C5B156B25A7EE7900BB8988 /* NotifyTransition.swift in Sources */,
 				49D985B6241B3847005F4E92 /* CacheCell.swift in Sources */,
+				3CAC4DCD25BF5E4900CC7948 /* CameraVC+FinishedCache.swift in Sources */,
 				4956351F243694BC0001E8C6 /* FillAnimationView.swift in Sources */,
 				3CAC4DAB25BF52CF00CC7948 /* LTEmitterView.swift in Sources */,
 				3C6EE6B325A2AB350078462A /* SettingsView.swift in Sources */,
@@ -1447,6 +1457,7 @@
 				49B7A33623923E810070209F /* ZoomAnimator.swift in Sources */,
 				3C4DE6FE259AD3FF0037D104 /* CacheButton.swift in Sources */,
 				49A8EFAC237A5EFE00328D47 /* SetUpButtons.swift in Sources */,
+				3CAC4DCA25BF5E1600CC7948 /* CameraVC+HandleCache.swift in Sources */,
 				3CA9336A25BE0BD600042C2F /* CameraVC+FindWhenPaused.swift in Sources */,
 				3C71F25E25AF6B8000D22212 /* PhotosVC+Star.swift in Sources */,
 				492A2D2624A4046200F9C4A1 /* BartyCrouch.swift in Sources */,
@@ -1472,6 +1483,7 @@
 				3C5B157825A8CE7E00BB8988 /* PhotosVC+NavBar.swift in Sources */,
 				4988FC4823BEF89600199635 /* ListModel.swift in Sources */,
 				3C8CFC5C25AAE02D004FF194 /* PhotoSlidesVC+Actions.swift in Sources */,
+				3CAC4DD025BF611100CC7948 /* CameraVC+Draw.swift in Sources */,
 				3CDA84F625B2519E00726F91 /* PhotoFindViewController.swift in Sources */,
 				3C1317F025B3687200FCEB79 /* PhotoFindVC+FindBarDelegate.swift in Sources */,
 				3CE306DB259AC46400F1B2E2 /* CameraIcon.swift in Sources */,

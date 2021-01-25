@@ -251,6 +251,7 @@ class CameraViewController: UIViewController {
     var motionYAsOfHighlightStart = Double(0) ///     Y
     var motionZAsOfHighlightStart = Double(0) ///     Z
     
+    @IBOutlet weak var drawingView: UIView!
     
     //MARK: FAST MODE
     var busyFastFinding = false
@@ -282,6 +283,9 @@ class CameraViewController: UIViewController {
     var currentCachingProcess: UUID?
     var finishedCaching = false
     var currentProgress = CGFloat(0) /// how much cache is finished
+    
+    var numberCurrentlyFindingFromCache = 0 /// how many cache findings are currently going on
+    var highlightsFromCache = [Component]() /// highlights that were from the cache
 
     
     //MARK: Camera

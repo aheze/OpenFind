@@ -43,6 +43,7 @@ extension CameraViewController {
                         component.width = observation.boundingBox.width
                         let lowerCaseComponentText = text.string.lowercased()
                         component.text = lowerCaseComponentText
+                        
                         let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
                         let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
                         let offHalf = offsetWidth / 2
@@ -111,7 +112,6 @@ extension CameraViewController {
             var distToComp = [CGFloat: Component]()
             
             for oldComponent in currentComponents {
-                //                if oldComponent.changed == false {
                 if newComponent.parentList == oldComponent.parentList {
                     let currentCompPoint = CGPoint(x: oldComponent.x, y: oldComponent.y)
                     let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
@@ -121,7 +121,6 @@ extension CameraViewController {
                         distToComp[lowestDist] = oldComponent
                     }
                 }
-                //                }
             }
             if lowestDist <= 15 {
                 guard let oldComp = distToComp[lowestDist] else { print("NO COMP"); return }
@@ -156,6 +155,7 @@ extension CameraViewController {
         }
         currentComponents.removeAll()
         currentComponents = tempComponents
+        print("curr comps ??: \(currentComponents)")
         
         self.updateMatchesNumber(to: self.nextComponents.count)
         
@@ -179,6 +179,8 @@ extension CameraViewController {
         }
         nextComponents.removeAll()
         tempComponents.removeAll()
+        
+        print("curr comps nooooow: \(currentComponents)")
     }
     
     
@@ -233,7 +235,7 @@ extension CameraViewController {
             
             let newView = UIView(frame: CGRect(x: component.x, y: component.y, width: component.width, height: component.height))
             newView.alpha = 0
-            self.view.insertSubview(newView, aboveSubview: self.cameraView)
+            self.drawingView.addSubview(newView)
             
             newView.layer.addSublayer(layer)
             newView.clipsToBounds = false

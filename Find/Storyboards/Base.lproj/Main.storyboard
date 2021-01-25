@@ -229,6 +229,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hag-e5-Sys">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tda-he-8YJ" customClass="PassthroughView" customModule="Find" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="708" width="428" height="218"/>
                                 <subviews>
@@ -612,8 +616,12 @@
                             <constraint firstItem="kV4-Eg-1Ee" firstAttribute="leading" secondItem="oNn-cV-T8L" secondAttribute="leading" constant="8" id="8mP-1w-akg"/>
                             <constraint firstItem="oNn-cV-T8L" firstAttribute="trailing" secondItem="1uu-Wl-x4d" secondAttribute="trailing" constant="16" id="9He-v9-Vjh"/>
                             <constraint firstItem="2JP-1T-MxT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9aW-0c-yNf"/>
+                            <constraint firstAttribute="trailing" secondItem="hag-e5-Sys" secondAttribute="trailing" id="A6D-xl-Boc"/>
+                            <constraint firstItem="hag-e5-Sys" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="BhO-6I-M0A"/>
+                            <constraint firstAttribute="bottom" secondItem="hag-e5-Sys" secondAttribute="bottom" id="FYv-n2-KWS"/>
                             <constraint firstItem="aR3-V6-wml" firstAttribute="top" secondItem="g2Y-bj-01H" secondAttribute="bottom" id="GBX-Q7-5Vo"/>
                             <constraint firstAttribute="trailing" secondItem="aR3-V6-wml" secondAttribute="trailing" constant="32" id="HCn-Z9-h61"/>
+                            <constraint firstItem="hag-e5-Sys" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="JjW-yj-qCg"/>
                             <constraint firstAttribute="trailing" secondItem="Tda-he-8YJ" secondAttribute="trailing" id="Mva-K4-mIZ"/>
                             <constraint firstItem="1uu-Wl-x4d" firstAttribute="top" secondItem="kV4-Eg-1Ee" secondAttribute="bottom" id="Q5U-Jw-MFd"/>
                             <constraint firstItem="Tda-he-8YJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="XFu-Qm-S1l"/>
@@ -640,6 +648,7 @@
                         <outlet property="contentTopC" destination="uYI-qs-zLw" id="d0f-uN-GYJ"/>
                         <outlet property="controlsBlurView" destination="2JP-1T-MxT" id="zlF-Wp-gev"/>
                         <outlet property="darkBlurEffect" destination="SjR-c7-NyL" id="0Wd-Vq-FxN"/>
+                        <outlet property="drawingView" destination="hag-e5-Sys" id="Njx-lY-a9B"/>
                         <outlet property="listsLabel" destination="sbj-0t-kKO" id="bsh-5a-IVV"/>
                         <outlet property="messageView" destination="3X4-Nc-yBe" id="79y-RB-NiK"/>
                         <outlet property="newSearchTextField" destination="eQO-08-qIa" id="53l-JB-69S"/>
@@ -671,7 +680,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-710.14492753623199" y="177.45535714285714"/>
+            <point key="canvasLocation" x="-710.74766355140184" y="176.88984881209504"/>
         </scene>
         <!--Lists Controller-->
         <scene sceneID="AX2-Df-qyN">
