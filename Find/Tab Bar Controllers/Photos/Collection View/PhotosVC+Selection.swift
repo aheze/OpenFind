@@ -112,19 +112,21 @@ extension PhotosViewController {
 }
 extension PhotosViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if selectButtonSelected == true {
-            if !indexPathsSelected.contains(indexPath) {
-                indexPathsSelected.append(indexPath)
-                numberOfSelected += 1
-                if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell {
-                    cell.highlightView.isHidden = false
-                    cell.selectionImageView.isHidden = false
+        if !refreshing {
+            if selectButtonSelected == true {
+                if !indexPathsSelected.contains(indexPath) {
+                    indexPathsSelected.append(indexPath)
+                    numberOfSelected += 1
+                    if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell {
+                        cell.highlightView.isHidden = false
+                        cell.selectionImageView.isHidden = false
+                    }
                 }
+                
+            } else {
+                collectionView.deselectItem(at: indexPath, animated: true)
+                presentFromIndexPath(indexPath: indexPath)
             }
-            
-        } else {
-            collectionView.deselectItem(at: indexPath, animated: true)
-            presentFromIndexPath(indexPath: indexPath)
         }
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

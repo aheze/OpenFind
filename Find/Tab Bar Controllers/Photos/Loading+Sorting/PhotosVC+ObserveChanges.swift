@@ -17,8 +17,6 @@ extension PhotosViewController : PHPhotoLibraryChangeObserver {
     }
     
     func photoLibraryDidChange(_ changeInstance: PHChange) {
-        print("changed!! photo lirbary")
-        
         guard let allPhotos = allPhotos else { return }
         if let changes = changeInstance.changeDetails(for: allPhotos) {
             self.allPhotos = changes.fetchResultAfterChanges

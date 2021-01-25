@@ -16,10 +16,8 @@ extension CameraViewController {
             let pngData = pausedPhoto.pngData()
         else { return }
         
-        
         var photoIdentifier: String?
         PHPhotoLibrary.shared().performChanges({
-//
             let creationRequest = PHAssetCreationRequest.forAsset()
             creationRequest.addResource(with: .photo, data: pngData, options: nil)
             if let identifier = creationRequest.placeholderForCreatedAsset?.localIdentifier {
@@ -42,24 +40,8 @@ extension CameraViewController {
                     } catch {
                         print("Error saving model \(error)")
                     }
-                    
-                    
                 }
-                //                editablePhoto.assetIdentifier = identifier
-//                finishedEditablePhotos.append(editablePhoto)
-            } else {
-//                editablePhotosWithErrors.append(editablePhoto)
-//                let readableError = String(describing: error?.localizedDescription)
-//                errorMessages.append(readableError)
             }
-//
-//            self.dispatchSemaphore.signal() /// signal and animate number completed regardless
-//            DispatchQueue.main.async {
-//                self.savedAnotherImage()
-//            }
         }
-        
-        
-        
     }
 }

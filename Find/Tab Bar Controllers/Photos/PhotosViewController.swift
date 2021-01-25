@@ -33,6 +33,7 @@ class PhotosViewController: UIViewController {
     var photoObjects: Results<HistoryModel>?
     let screenScale = UIScreen.main.scale /// for photo thumbnail
     var refreshNeeded = false
+    var refreshing = false /// currently refreshing data, prevent select cell
     
     // MARK: Photo selection
     var showSelectionControls: ((Bool) -> Void)? /// show or hide
@@ -140,15 +141,14 @@ class PhotosViewController: UIViewController {
         
         if refreshNeeded {
             refreshNeeded = false
-            collectionView.isUserInteractionEnabled = false
-            print("refersh!")
+            refreshing = true
             DispatchQueue.main.async {
                 self.loadImages { (allPhotos, allMonths) in
                     self.allMonths = allMonths
                     self.monthsToDisplay = allMonths
                     self.allPhotosToDisplay = allPhotos
                     self.applySnapshot(animatingDifferences: true)
-                    self.collectionView.isUserInteractionEnabled = true
+                    self.refreshing = false
                 }
             }
         }
