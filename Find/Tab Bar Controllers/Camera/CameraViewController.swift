@@ -275,6 +275,12 @@ class CameraViewController: UIViewController {
     var finalTextToFind : String = ""
     let deviceSize = screenBounds.size
     var globalUrl : URL = URL(fileURLWithPath: "")
+    
+    // MARK: Caching
+    var startedCaching = false
+    var cachedContents = [EditableSingleHistoryContent]()
+    var currentCachingProcess: UUID?
+    var finishedCaching = false
 
     
     //MARK: Camera

@@ -70,11 +70,12 @@ extension CameraViewController {
             guard let self = self else { return }
             self.cachePressed.toggle()
             if self.cachePressed {
+                self.beginCachingPhoto()
                 self.cache.cacheIcon.animateCheck(percentage: 1)
                 self.cache.cacheIcon.toggleRim(light: true)
                 self.cacheLabel.fadeTransition(0.2)
                 self.cacheLabel.text = "Caching..."
-                self.messageView.showMessage("Caching - 50%", dismissible: false, duration: -1)
+                self.messageView.showMessage("Caching - 0%", dismissible: false, duration: -1)
             } else {
                 self.cache.cacheIcon.animateCheck(percentage: 0)
                 self.cache.cacheIcon.toggleRim(light: false)

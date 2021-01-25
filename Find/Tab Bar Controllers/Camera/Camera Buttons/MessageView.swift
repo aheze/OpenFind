@@ -15,7 +15,7 @@ class MessageView: UIView {
     @IBOutlet weak var shadeView: UIView!
     @IBOutlet weak var labelButton: UIButton!
     
-    var messagesShown = 0
+    var currentMessageIdentifier: UUID?
     
     @IBAction func touchDown(_ sender: Any) {
         UIView.animate(withDuration: 0.2, animations: {
@@ -61,8 +61,9 @@ class MessageView: UIView {
     }
     
     func showMessage(_ message: String, dismissible: Bool, duration: Int) {
+        let thisMessageIdentifier = UUID()
         labelButton.setTitle(message, for: .normal)
-        messagesShown += 1
+        
         UIView.animate(withDuration: 0.8) {
             self.shadeView.alpha = 1
             self.labelButton.alpha = 1
@@ -71,22 +72,26 @@ class MessageView: UIView {
         
         if duration >= 0 {
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(duration)) {
-                self.messagesShown -= 1
-                
-                if self.messagesShown == 0 {
+                if thisMessageIdentifier == self.currentMessageIdentifier {
                     self.hideMessages()
                 }
             }
-        } else {
-            self.messagesShown -= 1
         }
         
     }
+    func updateMessage(_ message: String) {
+        DispatchQueue.main.async {
+            self.labelButton.setTitle(message, for: .normal)
+        }
+    }
     func hideMessages() {
-        UIView.animate(withDuration: 0.8) {
-            self.shadeView.alpha = 0
-            self.labelButton.alpha = 0
-            self.blurView.effect = nil
+        DispatchQueue.main.async {
+            self.currentMessageIdentifier = nil
+            UIView.animate(withDuration: 0.8) {
+                self.shadeView.alpha = 0
+                self.labelButton.alpha = 0
+                self.blurView.effect = nil
+            }
         }
     }
 }

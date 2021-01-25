@@ -1,5 +1,5 @@
 //
-//  FastMode.swift
+//  FastFind.swift
 //  Find
 //
 //  Created by Andrew on 12/21/19.
@@ -11,7 +11,9 @@ import Vision
 
 extension CameraViewController {
     
-    func fastFind(in pixelBuffer: CVPixelBuffer? = nil, orIn cgImage: CGImage? = nil) {
+    func fastFind(in pixelBuffer: CVPixelBuffer? = nil, orIn cgImage: CGImage? = nil, caching: Bool = false) {
+        
+        var thisProcessIdentifier: UUID?
         
         /// busy finding
         busyFastFinding = true
@@ -32,7 +34,12 @@ extension CameraViewController {
             }
             
             let request = VNRecognizeTextRequest { request, error in
-                self.handleFastDetectedText(request: request, error: error)
+                if caching {
+                    thisProcessIdentifier = UUID()
+                } else {
+                    
+                    self.handleFastDetectedText(request: request, error: error)
+                }
             }
             
             var customFindArray = [String]()
@@ -42,15 +49,20 @@ extension CameraViewController {
                     customFindArray.append(cont.lowercased())
                     customFindArray.append(cont.uppercased())
                     customFindArray.append(cont.capitalizingFirstLetter())
-                    
                 }
             }
             
             request.customWords = [self.finalTextToFind, self.finalTextToFind.lowercased(), self.finalTextToFind.uppercased(), self.finalTextToFind.capitalizingFirstLetter()] + customFindArray
         
             
-            request.recognitionLevel = .fast
-            request.recognitionLanguages = ["en_GB", "zh"]
+            request.recognitionLevel = caching ? .accurate : .fast
+            request.recognitionLanguages = ["en_GB"]
+            
+            if caching {
+                request.progressHandler = { (_, progress, _) in
+                    print("progress is: \(progress)")
+                }
+            }
             
             if let pixelBuffer = pixelBuffer {
                 let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right)
