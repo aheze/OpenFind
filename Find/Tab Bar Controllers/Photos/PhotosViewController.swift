@@ -32,6 +32,7 @@ class PhotosViewController: UIViewController {
     let realm = try! Realm()
     var photoObjects: Results<HistoryModel>?
     let screenScale = UIScreen.main.scale /// for photo thumbnail
+    var refreshNeeded = false
     
     // MARK: Photo selection
     var showSelectionControls: ((Bool) -> Void)? /// show or hide
@@ -130,11 +131,27 @@ class PhotosViewController: UIViewController {
 
         getSliderCallback()
         
+        startObservingChanges()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        if refreshNeeded {
+            refreshNeeded = false
+            collectionView.isUserInteractionEnabled = false
+            print("refersh!")
+            DispatchQueue.main.async {
+                self.loadImages { (allPhotos, allMonths) in
+                    self.allMonths = allMonths
+                    self.monthsToDisplay = allMonths
+                    self.allPhotosToDisplay = allPhotos
+                    self.applySnapshot(animatingDifferences: true)
+                    self.collectionView.isUserInteractionEnabled = true
+                }
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

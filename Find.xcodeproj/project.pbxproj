@@ -102,6 +102,8 @@
 		3CA9335425BDF44D00042C2F /* CameraVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9335325BDF44D00042C2F /* CameraVC+Keyboard.swift */; };
 		3CA9335725BDF4B500042C2F /* CameraVC+ButtonSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9335625BDF4B500042C2F /* CameraVC+ButtonSetup.swift */; };
 		3CA9336A25BE0BD600042C2F /* CameraVC+FindWhenPaused.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9336925BE0BD600042C2F /* CameraVC+FindWhenPaused.swift */; };
+		3CA9336D25BE727D00042C2F /* CameraVC+SaveToPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9336C25BE727D00042C2F /* CameraVC+SaveToPhotos.swift */; };
+		3CA9337025BE802000042C2F /* PhotosVC+ObserveChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9336F25BE802000042C2F /* PhotosVC+ObserveChanges.swift */; };
 		3CB6842C259FF9A700AE0AD6 /* SegmentedSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */; };
 		3CB6842D259FF9A700AE0AD6 /* SegmentedSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB6842B259FF9A700AE0AD6 /* SegmentedSlider.xib */; };
 		3CB6843225A0087700AE0AD6 /* PhotosMigrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */; };
@@ -324,6 +326,8 @@
 		3CA9335325BDF44D00042C2F /* CameraVC+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Keyboard.swift"; sourceTree = "<group>"; };
 		3CA9335625BDF4B500042C2F /* CameraVC+ButtonSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+ButtonSetup.swift"; sourceTree = "<group>"; };
 		3CA9336925BE0BD600042C2F /* CameraVC+FindWhenPaused.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+FindWhenPaused.swift"; sourceTree = "<group>"; };
+		3CA9336C25BE727D00042C2F /* CameraVC+SaveToPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+SaveToPhotos.swift"; sourceTree = "<group>"; };
+		3CA9336F25BE802000042C2F /* PhotosVC+ObserveChanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+ObserveChanges.swift"; sourceTree = "<group>"; };
 		3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedSlider.swift; sourceTree = "<group>"; };
 		3CB6842B259FF9A700AE0AD6 /* SegmentedSlider.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentedSlider.xib; sourceTree = "<group>"; };
 		3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationController.swift; sourceTree = "<group>"; };
@@ -624,6 +628,7 @@
 		3C5B156F25A8CD3D00BB8988 /* Loading+Sorting */ = {
 			isa = PBXGroup;
 			children = (
+				3CA9336F25BE802000042C2F /* PhotosVC+ObserveChanges.swift */,
 				3C3D47C825A40170002B8BBF /* PhotosVC+Sorting.swift */,
 				3C3D47C525A40133002B8BBF /* PhotosVC+PHAssets.swift */,
 				3C3D47DF25A41AEB002B8BBF /* PhotosVC+Diffable.swift */,
@@ -696,6 +701,7 @@
 			children = (
 				3CA9334525BDF2BC00042C2F /* CameraVC+Pause.swift */,
 				3CA9336925BE0BD600042C2F /* CameraVC+FindWhenPaused.swift */,
+				3CA9336C25BE727D00042C2F /* CameraVC+SaveToPhotos.swift */,
 			);
 			path = Paused;
 			sourceTree = "<group>";
@@ -1326,6 +1332,7 @@
 				3C8B648A25BB4F8F008F1535 /* PhotoSlidesVC+FindBarDelegate.swift in Sources */,
 				3C2C3E9325A1152F002C3D11 /* PhotosMigrationController+Write.swift in Sources */,
 				49325C1323CAE84500A771A3 /* StatusView.swift in Sources */,
+				3CA9337025BE802000042C2F /* PhotosVC+ObserveChanges.swift in Sources */,
 				49563521243694BC0001E8C6 /* GestureControl.swift in Sources */,
 				3CA9335125BDF42200042C2F /* CameraVC+CameraControls.swift in Sources */,
 				3CE306D8259AC46400F1B2E2 /* PhotosIcon.swift in Sources */,
@@ -1367,6 +1374,7 @@
 				3C4DE716259B0EAB0037D104 /* TutorialHeader.swift in Sources */,
 				3C8B649025BB51BE008F1535 /* PhotoSlidesVC+Draw.swift in Sources */,
 				3CB6843225A0087700AE0AD6 /* PhotosMigrationController.swift in Sources */,
+				3CA9336D25BE727D00042C2F /* CameraVC+SaveToPhotos.swift in Sources */,
 				3CE306D6259AC46400F1B2E2 /* TabBar.swift in Sources */,
 				4999AC942353A80A00AB06A7 /* AppDelegate.swift in Sources */,
 				4953F3C424171EE200690E53 /* FindBar.swift in Sources */,

@@ -404,6 +404,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             }
         }
         
+        /// if paused, find
         if CameraState.isPaused {
             findWhenPaused()
         }

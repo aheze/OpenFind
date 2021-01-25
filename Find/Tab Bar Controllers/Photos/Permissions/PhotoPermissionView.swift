@@ -84,51 +84,57 @@ class PhotoPermissionView: UIView {
     
     @available(iOS 14, *)
     func getAdvancedPhotoAccess() {
+        print("getAdvancedPhotoAccess access")
         PHPhotoLibrary.requestAuthorization(for: .readWrite) { (status) in
-            switch status {
-            case .notDetermined:
-                print("not determined")
-                self.permissionAction = .notDetermined
-                self.allowAccessButton.setTitle("Allow Access", for: .normal)
-            case .restricted:
-                print("restricted")
-                self.permissionAction = .restricted
-                self.allowAccessButton.isEnabled = false
-            case .denied:
-                print("denied")
-                self.permissionAction = .goToSettings
-                self.allowAccessButton.setTitle("Go To Settings", for: .normal)
-            case .authorized:
-                self.allowed?(true)
-            case .limited:
-                self.allowed?(false)
-            @unknown default:
-                print("default")
+            DispatchQueue.main.async {
+                switch status {
+                case .notDetermined:
+                    print("not determined")
+                    self.permissionAction = .notDetermined
+                    self.allowAccessButton.setTitle("Allow Access", for: .normal)
+                case .restricted:
+                    print("restricted")
+                    self.permissionAction = .restricted
+                    self.allowAccessButton.isEnabled = false
+                case .denied:
+                    print("denied")
+                    self.permissionAction = .goToSettings
+                    self.allowAccessButton.setTitle("Go To Settings", for: .normal)
+                case .authorized:
+                    self.allowed?(true)
+                case .limited:
+                    self.allowed?(false)
+                @unknown default:
+                    print("default")
+                }
             }
         }
     }
     
     func getPhotoAccess() {
+        print("norm access")
         PHPhotoLibrary.requestAuthorization { (status) in
-            switch status {
-            case .notDetermined:
-                print("not determined")
-                self.permissionAction = .notDetermined
-                self.allowAccessButton.setTitle("Allow Access", for: .normal)
-            case .restricted:
-                print("restricted")
-                self.permissionAction = .restricted
-                self.allowAccessButton.isEnabled = false
-            case .denied:
-                print("denied")
-                self.permissionAction = .goToSettings
-                self.allowAccessButton.setTitle("Go To Settings", for: .normal)
-            case .authorized:
-                self.allowed?(true)
-            case .limited:
-                self.allowed?(false)
-            @unknown default:
-                print("default")
+            DispatchQueue.main.async {
+                switch status {
+                case .notDetermined:
+                    print("not determined")
+                    self.permissionAction = .notDetermined
+                    self.allowAccessButton.setTitle("Allow Access", for: .normal)
+                case .restricted:
+                    print("restricted")
+                    self.permissionAction = .restricted
+                    self.allowAccessButton.isEnabled = false
+                case .denied:
+                    print("denied")
+                    self.permissionAction = .goToSettings
+                    self.allowAccessButton.setTitle("Go To Settings", for: .normal)
+                case .authorized:
+                    self.allowed?(true)
+                case .limited:
+                    self.allowed?(false)
+                @unknown default:
+                    print("default")
+                }
             }
         }
     }
