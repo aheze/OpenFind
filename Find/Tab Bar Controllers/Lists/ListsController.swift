@@ -145,8 +145,8 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
     
     weak var delegate: UIAdaptivePresentationControllerDelegate?
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
         if let layout = collectionView?.collectionViewLayout as? AdaptiveCollectionLayout {
           layout.delegate = self
         }
@@ -157,6 +157,9 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
         setupBarButtons()
         
         let padding = AdaptiveCollectionConfig.cellPadding
+        
+        collectionView.contentInset.left = padding
+        collectionView.contentInset.right = padding
 
         getData()
         collectionView.delaysContentTouches = false
