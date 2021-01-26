@@ -33,7 +33,8 @@ class PhotosViewController: UIViewController {
     let realm = try! Realm()
     var photoObjects: Results<HistoryModel>?
     let screenScale = UIScreen.main.scale /// for photo thumbnail
-    var refreshNeeded = false
+    var refreshNeededAtLoad = false /// refresh when view did appear
+    var refreshNeededAfterDismissPhoto = false /// refresh as soon as dismiss photo slides
     var refreshing = false /// currently refreshing data, prevent select cell
     
     // MARK: Photo selection
@@ -142,8 +143,8 @@ class PhotosViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        if refreshNeeded {
-            refreshNeeded = false
+        if refreshNeededAtLoad {
+            refreshNeededAtLoad = false
             refreshing = true
             DispatchQueue.main.async {
                 self.loadImages { (allPhotos, allMonths) in

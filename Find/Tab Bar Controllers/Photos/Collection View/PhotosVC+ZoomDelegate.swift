@@ -21,9 +21,25 @@ extension PhotosViewController: ZoomAnimatorDelegate {
             if zoomAnimator.finishedDismissing == false {
                 dimSlideControls?(false, false)
             } else {
+                /// finished dismissing
                 currentSlidesController = nil
                 changePresentationMode(presentingSlides: false)
                 self.hideTabBar?(false)
+                
+                if refreshNeededAfterDismissPhoto {
+                    print("need to refresh")
+                    refreshNeededAfterDismissPhoto = false
+                    refreshing = true
+                    DispatchQueue.main.async {
+                        self.loadImages { (allPhotos, allMonths) in
+                            self.allMonths = allMonths
+                            self.monthsToDisplay = allMonths
+                            self.allPhotosToDisplay = allPhotos
+                            self.applySnapshot(animatingDifferences: true)
+                            self.refreshing = false
+                        }
+                    }
+                }
             }
         }
         

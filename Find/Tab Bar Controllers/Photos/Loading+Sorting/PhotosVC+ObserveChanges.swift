@@ -19,7 +19,25 @@ extension PhotosViewController: PHPhotoLibraryChangeObserver {
         guard let allPhotos = allPhotos else { return }
         if let changes = changeInstance.changeDetails(for: allPhotos) {
             self.allPhotos = changes.fetchResultAfterChanges
-            refreshNeeded = true
+            
+            if ViewControllerState.currentVC is PhotosWrapperController {
+                if currentSlidesController != nil {
+                    refreshNeededAfterDismissPhoto = true
+                } else {
+                    refreshing = true
+                    DispatchQueue.main.async {
+                        self.loadImages { (allPhotos, allMonths) in
+                            self.allMonths = allMonths
+                            self.monthsToDisplay = allMonths
+                            self.allPhotosToDisplay = allPhotos
+                            self.applySnapshot(animatingDifferences: true)
+                            self.refreshing = false
+                        }
+                    }
+                }
+            } else {
+                refreshNeededAtLoad = true
+            }
         }
     }
     
