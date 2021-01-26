@@ -144,11 +144,13 @@ extension PhotosViewController {
         if shouldFade {
             block = {
                 self.collectionView.alpha = 0
+                self.segmentedSlider.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
                 self.segmentedSlider.alpha = 0
             }
         } else {
             block = {
                 self.collectionView.alpha = 1
+                self.segmentedSlider.transform = CGAffineTransform.identity
                 self.segmentedSlider.alpha = 1
                 self.activityIndicator?.alpha = 0
             }
