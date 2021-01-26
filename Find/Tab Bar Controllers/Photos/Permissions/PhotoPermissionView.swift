@@ -24,29 +24,29 @@ class PhotoPermissionView: UIView {
     @IBOutlet weak var titleLabel: UILabel! /// Find from Photos
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    var permissionAction = PermissionAction.notDetermined
+    var shouldGoToSettings = false
     
     /// true is full access
     /// false if limited
     var allowed: ((Bool) -> Void)?
     @IBOutlet weak var allowAccessButton: UIButton!
     @IBAction func allowAccessPressed(_ sender: Any) {
-        switch permissionAction {
-        case .notDetermined:
-            if #available(iOS 14, *) {
-                getAdvancedPhotoAccess()
-            } else {
-                getPhotoAccess()
-            }
-        case .goToSettings:
+        if shouldGoToSettings {
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                 return
             }
             if UIApplication.shared.canOpenURL(settingsUrl) {
                 UIApplication.shared.open(settingsUrl)
             }
-        default:
-            print("None of the above")
+        } else {
+            requestAuthorization { allowed in
+                if allowed {
+                    self.allowed?(true)
+                } else {
+                    self.shouldGoToSettings = true
+                    self.allowAccessButton.setTitle("Go To Settings", for: .normal)
+                }
+            }
         }
     }
     
@@ -61,6 +61,7 @@ class PhotoPermissionView: UIView {
     }
     
     private func commonInit() {
+        print("common")
         Bundle.main.loadNibNamed("PhotoPermissionView", owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
@@ -68,72 +69,62 @@ class PhotoPermissionView: UIView {
         
         allowAccessButton.layer.cornerRadius = 12
         
-        switch permissionAction {
+        let status = self.checkAuthorizationStatus()
         
-        case .notDetermined:
-            allowAccessButton.setTitle("Allow Access", for: .normal)
-        case .goToSettings:
-            allowAccessButton.setTitle("Go To Settings", for: .normal)
-        case .restricted:
-            allowAccessButton.isEnabled = false
-            descriptionLabel.text = "Find is unable to access the Photo library"
-        case .allowed, .limited:
-            break
+        if status == .shouldAsk {
+            self.shouldGoToSettings = false
+            self.allowAccessButton.setTitle("Allow Access", for: .normal)
+        } else if status == .shouldGoToSettings {
+            self.shouldGoToSettings = true
+            self.allowAccessButton.setTitle("Go To Settings", for: .normal)
         }
     }
     
-    @available(iOS 14, *)
-    func getAdvancedPhotoAccess() {
-        print("getAdvancedPhotoAccess access")
-        PHPhotoLibrary.requestAuthorization(for: .readWrite) { (status) in
-            DispatchQueue.main.async {
-                switch status {
-                case .notDetermined:
-                    print("not determined")
-                    self.permissionAction = .notDetermined
-                    self.allowAccessButton.setTitle("Allow Access", for: .normal)
-                case .restricted:
-                    print("restricted")
-                    self.permissionAction = .restricted
-                    self.allowAccessButton.isEnabled = false
-                case .denied:
-                    print("denied")
-                    self.permissionAction = .goToSettings
-                    self.allowAccessButton.setTitle("Go To Settings", for: .normal)
-                case .authorized:
-                    self.allowed?(true)
-                case .limited:
-                    self.allowed?(false)
-                @unknown default:
-                    print("default")
-                }
+    
+    func checkAuthorizationStatus() -> PhotoPermissionAction {
+        print("checking")
+        var action = PhotoPermissionAction.shouldGoToSettings
+        if #available(iOS 14, *) {
+            let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+            if status == .authorized || status == .limited {
+                action = .allowed
+            } else if status == .notDetermined {
+                action = .shouldAsk
+            } else {
+                action = .shouldGoToSettings
+            }
+            
+        } else {
+            let status = PHPhotoLibrary.authorizationStatus()
+            if status == .authorized {
+                action = .allowed
+            } else if status == .notDetermined {
+                action = .shouldAsk
+            } else {
+                action = .shouldGoToSettings
             }
         }
+        
+        return action
     }
     
-    func getPhotoAccess() {
-        print("norm access")
-        PHPhotoLibrary.requestAuthorization { (status) in
-            DispatchQueue.main.async {
-                switch status {
-                case .notDetermined:
-                    print("not determined")
-                    self.permissionAction = .notDetermined
-                    self.allowAccessButton.setTitle("Allow Access", for: .normal)
-                case .restricted:
-                    print("restricted")
-                    self.permissionAction = .restricted
-                    self.allowAccessButton.isEnabled = false
-                case .denied:
-                    print("denied")
-                    self.permissionAction = .goToSettings
-                    self.allowAccessButton.setTitle("Go To Settings", for: .normal)
-                case .authorized:
-                    self.allowed?(true)
-                case .limited:
-                    self.allowed?(false)
-                @unknown default:
-                    print("default")
+    func requestAuthorization(completion: @escaping ((Bool) -> Void)) {
+        print("requesting")
+        if #available(iOS 14, *) {
+            
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { (status) in
+                if status == .authorized || status == .limited {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            }
+        } else {
+            PHPhotoLibrary.requestAuthorization { (status) in
+                if status == .authorized {
+                    completion(true)
+                } else {
+                    completion(false)
                 }
             }
         }

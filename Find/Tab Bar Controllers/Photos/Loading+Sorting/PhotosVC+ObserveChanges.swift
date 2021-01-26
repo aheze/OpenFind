@@ -9,8 +9,7 @@
 import UIKit
 import Photos
 
-extension PhotosViewController : PHPhotoLibraryChangeObserver {
-    
+extension PhotosViewController: PHPhotoLibraryChangeObserver {
     
     func startObservingChanges() {
         PHPhotoLibrary.shared().register(self)

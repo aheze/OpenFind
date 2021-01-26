@@ -20,6 +20,7 @@ class PhotosViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: Photo loading
+    var hasPermissions = false
     var hasFullAccess = false
     var allPhotos: PHFetchResult<PHAsset>? = nil
     var allMonths = [Month]() /// all photos
@@ -132,7 +133,9 @@ class PhotosViewController: UIViewController {
 
         getSliderCallback()
         
-        startObservingChanges()
+        if hasPermissions {
+            startObservingChanges()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
