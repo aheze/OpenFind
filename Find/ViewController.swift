@@ -517,5 +517,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         return true
     }
+    func setupFilePath() {
+        guard let url = URL.createFolder(folderName: "historyImages") else {
+            print("no create")
+            return }
+        globalUrl = url
+    }
 }
 

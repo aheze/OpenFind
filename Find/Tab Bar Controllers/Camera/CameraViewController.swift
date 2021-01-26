@@ -162,6 +162,15 @@ class CameraViewController: UIViewController {
     //MARK: Stats
     weak var updateStatsNumber: UpdateMatchesNumberStats?
     var currentNumberOfMatches = 0
+    lazy var statsNavController: StatsNavController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "StatsViewController") as? StatsViewController {
+            let navigationController = StatsNavController(rootViewController: viewController)
+            navigationController.viewController = viewController
+            return navigationController
+        }
+        fatalError()
+    }()
     
     var newNumberOfMatchesFound = 0
     var existingNumberOfMatchesFound = 0

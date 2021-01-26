@@ -12,8 +12,6 @@ import AVFoundation
 
 extension CameraViewController: UIAdaptivePresentationControllerDelegate {
    
-    
-   
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         if cancelTimer != nil {
             cancelTimer!.invalidate()
@@ -29,33 +27,6 @@ extension CameraViewController: UIAdaptivePresentationControllerDelegate {
         injectListDelegate?.resetWithLists(lists: editableListCategories)
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//            stopSession()
-//            switch segue.identifier {
-//            case "goToSettings":
-//                print("prepare settings")
-//                segue.destination.presentationController?.delegate = self
-//                let destinationVC = segue.destination as! SettingsViewController
-//                destinationVC.folderURL = globalUrl
-//                destinationVC.modalPresentationCapturesStatusBarAppearance = true
-//            case "goToNewHistory":
-//                segue.destination.presentationController?.delegate = self
-//                let destinationVC = segue.destination as! NewHistoryViewController
-//                destinationVC.folderURL = globalUrl
-//                destinationVC.highlightColor = highlightColor
-//                destinationVC.modalPresentationCapturesStatusBarAppearance = true
-//            case "goToLists" :
-//                let destinationVC = segue.destination as! ListsController
-//                destinationVC.modalPresentationCapturesStatusBarAppearance = true
-//                segue.destination.presentationController?.delegate = self
-//            default:
-//                    print("default, something wrong")
-//            }
-//
-//            tempResetLists()
-//
-//        }
     func toFast() {
         self.blurScreen(mode: "fast")
     }
@@ -115,76 +86,10 @@ extension CameraViewController: UIAdaptivePresentationControllerDelegate {
             
         }
     }
-//    func setupButtons() {
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedOnce))
-//        tap.numberOfTapsRequired = 1
-//        tap.delegate = self
-//        
-//        
-////        let tapOnStats = UITapGestureRecognizer(target: self, action: #selector(tappedOnStats))
-////        tap.numberOfTapsRequired = 1
-////        tap.delegate = self
-////        statusView.addGestureRecognizer(tapOnStats)
-//        
-//        view.addGestureRecognizer(tap)
-////        view.bringSubviewToFront(numberLabel)
-//        
-//        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
-//        let listImage = UIImage(systemName: "square.grid.2x2.fill", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
-//        let histImage = UIImage(systemName: "photo.fill.on.rectangle.fill", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
-//        let settImage = UIImage(systemName: "gear", withConfiguration: symbolConfiguration)?.withTintColor(UIColor(named: "DarkGray") ?? .black, renderingMode: .alwaysOriginal)
-//        
-//        let photos = NSLocalizedString("photos", comment: "Multipurpose def=Photos")
-//        let lists = NSLocalizedString("lists", comment: "Multipurpose def=Lists")
-//        let settings = NSLocalizedString("settings", comment: "Multipurpose def=Settings")
-//        
-//        let goToNewHistory = menuButton.addItem()
-//        goToNewHistory.tag = 12461
-//        goToNewHistory.titleLabel.text = photos
-//        
-//        
-//        goToNewHistory.imageView.image = histImage
-//        goToNewHistory.action = { item in
-//            self.blurScreenForSheetPresentation()
-//            self.performSegue(withIdentifier: "goToNewHistory", sender: self)
-//        }
-//        let goToLists = menuButton.addItem()
-//        goToLists.tag = 12463
-//        goToLists.titleLabel.text = lists
-//        goToLists.imageView.image = listImage
-//        goToLists.action = { item in
-//            self.blurScreenForSheetPresentation()
-//            self.performSegue(withIdentifier: "goToLists", sender: self)
-//        }
-//        
-//        let goToSett = menuButton.addItem()
-//        goToSett.tag = 12462
-//        goToSett.titleLabel.text = settings
-//        goToSett.imageView.image = settImage
-//        goToSett.action = { item in
-////            print("settings")
-//            self.blurScreenForSheetPresentation()
-//            self.performSegue(withIdentifier: "goToSettings", sender: self)
-//        }
-//        
-//        if let xImage = UIImage(named: "jjXButton") {
-//            menuButton.buttonAnimationConfiguration = .transition(toImage: xImage)
-//            menuButton.overlayView.backgroundColor = UIColor.clear
-//        }
-//    }
-
-    
 }
 extension CameraViewController {
     
     func tappedOnStats() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let statsViewController = storyboard.instantiateViewController(withIdentifier: "StatsViewController") as! StatsViewController
-        statsViewController.view.layer.cornerRadius = 10
-        statsViewController.view.clipsToBounds = true
-        statsViewController.edgesForExtendedLayout = []
-        
-        self.updateStatsNumber = statsViewController
         
         let boldAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .bold)]
         let regularAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .regular)]
@@ -196,7 +101,7 @@ extension CameraViewController {
         let newString = NSMutableAttributedString()
         newString.append(boldText)
         newString.append(regularText)
-        statsViewController.currentlyHowManyMatches.attributedText = newString
+        statsNavController.viewController.currentlyHowManyMatchesText = newString
         
         let currentlySearchingFor = NSLocalizedString("currentlySearchingFor", comment: "Stats def=Currently searching for")
         
@@ -217,7 +122,6 @@ extension CameraViewController {
                 let string = String.localizedStringWithFormat(quotexquote, wordsFinding[0])
                 finalMatchesString = string
              case 2:
-                print("MULTI 2!!!!!!!")
                 let quotexquoteSpaceAndquotexquote = NSLocalizedString("quote %@ quoteSpaceAndquote %@ quote", comment: "Stats def=\"x\" and \"x\"")
                 let string = String.localizedStringWithFormat(quotexquoteSpaceAndquotexquote, wordsFinding[0], wordsFinding[1])
                 finalMatchesString = string
@@ -251,7 +155,7 @@ extension CameraViewController {
             let newMatches = NSMutableAttributedString()
             newMatches.append(regularMatchesText)
             newMatches.append(boldMatchesText)
-            statsViewController.currentSearchingForTheseWords.attributedText = newMatches
+            statsNavController.viewController.currentSearchingForTheseWordsText = newMatches
             
         } else {
             let regularMatchesText = NSAttributedString(string: "\(currentlySearchingFor): ", attributes: regularAttribute)
@@ -262,22 +166,10 @@ extension CameraViewController {
             let newMatches = NSMutableAttributedString()
             newMatches.append(regularMatchesText)
             newMatches.append(boldMatchesText)
-            statsViewController.currentSearchingForTheseWords.attributedText = newMatches
+            statsNavController.viewController.currentSearchingForTheseWordsText = newMatches
         }
     
-        self.present(statsViewController, animated: true)
-//        var attributes = EKAttributes.centerFloat
-//        attributes.displayDuration = .infinity
-//        attributes.entryInteraction = .absorbTouches
-//        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-//        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-//        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-//        attributes.entryBackground = .color(color: .white)
-//        attributes.screenInteraction = .absorbTouches
-//        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
-//        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
-//        attributes.statusBar = .hidden
-//        SwiftEntryKit.display(entry: statsViewController, using: attributes)
+        self.present(statsNavController, animated: true)
         
     }
 //    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {

@@ -26,10 +26,8 @@ struct BarModifier: ViewModifier {
                 navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
                 navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
                 
-                
                 navBarAppearance.backgroundColor = UIColor.black.withAlphaComponent(0.9)
-                    viewController.navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-                
+                viewController.navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
                 
                 viewController.navigationController?.navigationBar.standardAppearance = navBarAppearance
                 

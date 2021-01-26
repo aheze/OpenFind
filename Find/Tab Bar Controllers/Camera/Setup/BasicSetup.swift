@@ -8,20 +8,20 @@
 
 import UIKit
 
-enum CurrentModeToggle {
-    case classic
-    case focused
-    case fast
-}
-
-//MARK: Set Up the floating buttons, classic timer
-
-extension ViewController {
-    func setupFilePath() {
-        guard let url = URL.createFolder(folderName: "historyImages") else {
-            print("no create")
-            return }
-        globalUrl = url
+extension StatsViewController {
+    func setupNavigationBar() {
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithDefaultBackground()
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        
+        
+        navBarAppearance.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        navigationController?.navigationBar.standardAppearance = navBarAppearance
+        
+        navigationController?.navigationBar.barTintColor = UIColor.black.withAlphaComponent(0.9)
+        navigationController?.navigationBar.tintColor = UIColor.white
     }
 }
 

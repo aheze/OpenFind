@@ -9,8 +9,10 @@
 import UIKit
 import SwiftEntryKit
 
+class StatsNavController: UINavigationController {
+    var viewController: StatsViewController!
+}
 class StatsViewController: UIViewController, UpdateMatchesNumberStats {
-    
     
     func update(to: Int) {
         DispatchQueue.main.async {
@@ -29,17 +31,13 @@ class StatsViewController: UIViewController, UpdateMatchesNumberStats {
             self.currentlyHowManyMatches.attributedText = newString
         }
     }
-     
-    @IBAction func xButtonPressed(_ sender: Any) {
-//        SwiftEntryKit.dismiss()
-        self.dismiss(animated: true, completion: nil)
-    }
     
     @IBOutlet weak var justForFun: UILabel!
     
-    
+    var currentlyHowManyMatchesText = NSAttributedString(string: "")
     @IBOutlet weak var currentlyHowManyMatches: UILabel!
     
+    var currentSearchingForTheseWordsText = NSAttributedString(string: "")
     @IBOutlet weak var currentSearchingForTheseWords: UILabel!
     
     @IBOutlet weak var cachesSinceFirstD: UILabel!
@@ -55,12 +53,27 @@ class StatsViewController: UIViewController, UpdateMatchesNumberStats {
     
     var arrayOfEmoji = ["😀", "😃", "😁", "😄", "😌", "😜", "😛", "😏", "🤔", "🥴", "🥱", "😅", "😂", "🤣", "🙃", "😉", "😋", "🤪", "😝", "🤓", "😎", "🤩"]
     
+    @objc func donePressed(sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        currentlyHowManyMatches.attributedText = currentlyHowManyMatchesText
+        currentSearchingForTheseWords.attributedText = currentSearchingForTheseWordsText
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+
+        self.title = "Stats"
+        setupNavigationBar()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePressed(sender:)))
+        doneButton.tintColor = UIColor.white
+        navigationItem.rightBarButtonItems = [doneButton]
+        
         if let randomEmoji = arrayOfEmoji.randomElement() {
             let justForFunStats = NSLocalizedString("justForFunStats", comment: "StatsViewController def=Just for fun")
-//            justForFun.text = "(Just for fun \(randomEmoji))"
             justForFun.text = "(\(justForFunStats) \(randomEmoji))"
         }
         
@@ -70,10 +83,6 @@ class StatsViewController: UIViewController, UpdateMatchesNumberStats {
         
         let settCustomized = defaults.bool(forKey: "customizedSettingsBool")
         let feedbacked = defaults.bool(forKey: "feedbackedAlready")
-        
-//        var cacheS = "s"
-//        var helpS = "s"
-//        var listsS = "s"
         
         let photosPluralLoc = NSLocalizedString("photosPluralLoc", comment: "StatsViewController def=photos")
         let timesPluralLoc = NSLocalizedString("timesPluralLoc", comment: "StatsViewController def=times")
@@ -99,16 +108,10 @@ class StatsViewController: UIViewController, UpdateMatchesNumberStats {
             
         }
         
-//        if cacheCount == 1 { cacheS = "" }
-//        if helpCount == 1 { helpS = "" }
-//        if listsCount == 1 { listsS = "" }
-        
-        
         let boldAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .bold)]
         let regularAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .regular)]
         
         let cacheBold = NSAttributedString(string: "\(cacheCount)", attributes: boldAttribute)
-//        let cacheRegular = NSAttributedString(string: " photo\(cacheS) cached since you first downloaded Find", attributes: regularAttribute)
         
         let cachedSinceYouFirstDownload = NSLocalizedString("cachedSinceYouFirstDownload", comment: "StatsViewController")
         let cacheRegular = NSAttributedString(string: " \(photosPlural) \(cachedSinceYouFirstDownload)", attributes: regularAttribute)
@@ -168,8 +171,6 @@ class StatsViewController: UIViewController, UpdateMatchesNumberStats {
         viewStatsStatus.attributedText = viewStatString
         
     }
-    
-    
 }
 
 extension Bool {

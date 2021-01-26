@@ -124,6 +124,7 @@ struct SettingsView: View {
                                         donePressed?()
                                     }) {
                                         Text("Done")
+                                            .font(Font.system(size: 19, weight: .regular, design: .default))
                                     }
             )
             .configureBar()
