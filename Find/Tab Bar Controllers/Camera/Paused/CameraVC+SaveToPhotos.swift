@@ -10,11 +10,14 @@ import UIKit
 import Photos
 
 extension CameraViewController {
-    func saveImageToPhotos() {
+    func saveImageToPhotos(cachePressed: Bool) {
         guard
             let pausedPhoto = currentPausedImage,
             let pngData = pausedPhoto.pngData()
         else { return }
+        
+        let currentContents = self.cachedContents
+        print("curr count: \(self.cachedContents)")
         
         var photoIdentifier: String?
         PHPhotoLibrary.shared().performChanges({
@@ -33,6 +36,22 @@ extension CameraViewController {
                     let newModel = HistoryModel()
                     newModel.assetIdentifier = identifier
                     newModel.isTakenLocally = true
+                    
+                    if cachePressed {
+                        newModel.isDeepSearched = true
+                        for cachedContent in currentContents {
+                            print("looping")
+                            let newContent = SingleHistoryContent()
+                            newContent.x = Double(cachedContent.x)
+                            newContent.y = Double(cachedContent.y)
+                            newContent.width = Double(cachedContent.width)
+                            newContent.height = Double(cachedContent.height)
+                            newContent.text = cachedContent.text
+                            newModel.contents.append(newContent)
+                        }
+                    }
+                    
+                    
                     do {
                         try self.realm.write {
                             self.realm.add(newModel)

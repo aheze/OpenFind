@@ -22,30 +22,11 @@ extension CameraViewController {
             if CameraState.isPaused {
                 self.pauseLivePreview()
             } else {
-                if self.savePressed {
-                    self.saveImageToPhotos()
-                }
+                self.saveToPhotosIfNeeded()
+                self.resetState()
                 self.startLivePreview()
                 
-                self.savePressed = false
-                UIView.animate(withDuration: Double(Constants.transitionDuration)) {
-                    self.saveToPhotos.photosIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)()
-                }
-                self.saveLabel.fadeTransition(0.2)
-                self.saveLabel.text = "Save"
-                
-                self.cachePressed = false
-                self.cache.cacheIcon.animateCheck(percentage: 0)
-                self.cache.cacheIcon.toggleRim(light: false)
-                self.cacheLabel.fadeTransition(0.2)
-                self.cacheLabel.text = "Cache"
-                
-                self.startedCaching = false
-                self.cachedContents.removeAll()
-                self.currentCachingProcess = nil
-                self.finishedCaching = false
             }
-            
         }
         saveToPhotos.alpha = 0
         saveToPhotos.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
