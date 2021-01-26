@@ -48,7 +48,6 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
     var presentingList: ((Bool) -> Void)? /// update status bar color
 
     let defaults = UserDefaults.standard
-    
     func animateCloseQuickTour(quickTourView: TutorialHeader) {
         defaults.set(true, forKey: "listsViewedBefore")
         
@@ -58,8 +57,7 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
         
         UIView.animate(withDuration: 0.5, animations: {
             quickTourView.layoutIfNeeded()
-            self.collectionView.contentInset = UIEdgeInsets(top: padding, left: padding, bottom: 82, right: padding)
-            self.collectionView.verticalScrollIndicatorInsets.top = 0
+            self.collectionView.contentInset.top = padding
             quickTourView.startTourButton.alpha = 0
             quickTourView.closeButton.alpha = 0
         }) { _ in
@@ -162,7 +160,7 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
 
         getData()
         collectionView.delaysContentTouches = false
-        let defaults = UserDefaults.standard
+        
         let listsViewedBefore = defaults.bool(forKey: "listsViewedBefore")
         
         
@@ -180,9 +178,7 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
                     make.bottom.equalTo(navController.navigationBar.snp.bottom).offset(50)
                 }
                 
-                collectionView.contentInset = UIEdgeInsets(top: padding + 50, left: padding, bottom: 82, right: padding)
-                collectionView.verticalScrollIndicatorInsets.top = 40
-                
+                collectionView.contentInset.top = padding + 50
                 
                 quickTourView.pressed = { [weak self] in
                     
@@ -198,9 +194,12 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
                 }
             }
             
-        } else {
-            collectionView.contentInset = UIEdgeInsets(top: padding, left: padding, bottom: 82, right: padding)
         }
+        
+        let bottomInset = CGFloat(ConstantVars.tabHeight)
+        let bottomSafeAreaHeight = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.bottom ?? 0
+        collectionView.contentInset.bottom = bottomInset
+        collectionView.verticalScrollIndicatorInsets.bottom = bottomInset - CGFloat(bottomSafeAreaHeight)
         
         self.title = "Lists"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -373,7 +372,6 @@ extension ListsController: UICollectionViewDataSource, UICollectionViewDelegate,
             }
         }
         if overFlowCount >= 1 {
-//            textToDisplay += "\n... \(overFlowCount) more"
             let overFlowCountMoreFormat = NSLocalizedString("%d overFlowCountMore",
                                                       comment:"ListsController def=\n... x more")
             

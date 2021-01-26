@@ -98,6 +98,8 @@ class PhotosViewController: UIViewController {
         }
     }
     
+    let defaults = UserDefaults.standard
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         segmentedSlider.indicatorView.frame = segmentedSlider.getIndicatorViewFrame(for: segmentedSlider.currentFilter, withInset: true).1
@@ -107,6 +109,9 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = UIColor(named: "PhotosText")
+        
+        
+        checkTutorial()
         
         setupBarButtons()
         getRealmObjects()
@@ -138,6 +143,7 @@ class PhotosViewController: UIViewController {
         if hasPermissions {
             startObservingChanges()
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

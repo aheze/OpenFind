@@ -409,9 +409,9 @@ class CameraViewController: UIViewController {
                 break
         }
         if hasNotch {
-            normalSearchFieldTopCConstant = 0
+            normalSearchFieldTopCConstant = -6
         } else {
-            normalSearchFieldTopCConstant = 12
+            normalSearchFieldTopCConstant = 6
         }
         contentTopC.constant = normalSearchFieldTopCConstant
         searchContentView.layoutIfNeeded()
