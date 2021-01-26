@@ -60,10 +60,6 @@ extension CameraViewController {
                             newComponent.y = CGFloat(content.y * self.deviceSize.height) - newComponent.height
                             newComponent.text = match
                             
-                            if self.shouldShowTextDetectIndicator {
-                                self.drawFastHighlight(component: newComponent)
-                            }
-                            
                             newComponent.x -= 6
                             newComponent.y -= 3
                             newComponent.width += 12
