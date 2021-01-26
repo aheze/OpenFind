@@ -31,8 +31,6 @@ extension CameraViewController {
                 initialAttitude = currentMotion.attitude
             }
             
-            
-            
             for result in results {
                 if let observation = result as? VNRecognizedTextObservation {
                     for text in observation.topCandidates(1) {
@@ -112,7 +110,6 @@ extension CameraViewController {
                         }
                         
                         if smallestDistance >= 225 { ///Bigger, so add it
-                            print("add it!!!")
                             componentsToAdd.append(nextComponent)
                         }
                     }
