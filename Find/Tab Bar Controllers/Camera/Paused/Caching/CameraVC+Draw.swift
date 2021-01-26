@@ -24,7 +24,7 @@ extension CameraViewController {
                 newLayer.lineWidth = 3
                 newLayer.lineCap = .round
                 
-                guard let colors = self.matchToColors[component.text] else { print("NO COLORS! scalee"); return }
+                guard let colors = self.matchToColors[component.text] else { return }
                 if colors.count > 1 {
                     var newRect = layer.frame
                     newRect.origin.x += 1.5

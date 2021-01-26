@@ -30,6 +30,9 @@ extension CameraViewController {
                 cacheLabel.fadeTransition(0.2)
                 cacheLabel.text = "Caching..."
                 messageView.showMessage("0", dismissible: false, duration: -1)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    self.messageView.showMessage("25", dismissible: false, duration: -1)
+                }
                 
                 cacheFind(in: currentImage)
             }

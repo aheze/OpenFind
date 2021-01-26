@@ -14,6 +14,7 @@ extension CameraViewController {
         cachedContents = contents
         if cachePressed {
             DispatchQueue.main.async {
+                self.messageView.updateMessage("100")
                 self.messageView.hideMessages()
                 self.cacheLabel.fadeTransition(0.2)
                 self.cacheLabel.text = "Cached"

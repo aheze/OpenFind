@@ -64,28 +64,7 @@ struct InfoView: View {
     var origin = "Saved from Find"
     var isStarred = false
     var isCached = false
-    var transcript = """
-    textdsfop sdif osd fsod'pspdf sd'fis d['i sdf[ sdf dsf dsf dsf dsf sdds sd
-                        axWidth: .infinity, alignment: .leading)
-        .padding(EdgeInsets(top: 12, leading: 20, bottom: 2, trailing: 16))
-    
-    Text(isStarred ? LocalizedStringKey("Yes") : LocalizedStringKey("No"))
-        .foregroundColor(Color(UIColor.secondaryLabel))
-        .font(Font(UIFont.systemFont(ofSize: 19, weight: .regular)))
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(EdgeInsets(top: 0, leading: 20, bottom: 2, trailing: 16))
-    
-    Text("Cached?")
-        .font(Font(UIFont.systemFont(ofSize: 19, weight: .bold)))
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(EdgeInsets(top: 12, leading: 20, bottom: 2, trailing: 16))
-    
-    Text(isCached ? LocalizedStringKey("Yes") : LocalizedStringKey("No"))
-        .foregroundColor(Color(UIColor.secondaryLabel))
-        .font(Font(UIFont.systemFont(ofSize: 19, weight: .regular)))
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(EdgeInsets(top: 0, leading: 20, bottom: 2, trailing: 16))
-    """
+    var transcript = ""
     
     var body: some View {
         NavigationView {
@@ -219,7 +198,9 @@ struct InfoView: View {
                                         donePressed?()
                                     }) {
                                         Text("Done")
+                                            .font(Font.system(size: 19, weight: .regular, design: .default))
                                             .foregroundColor(Color(UIColor(named: "PhotosText")!))
+                                        
                                     }
             )
         }
