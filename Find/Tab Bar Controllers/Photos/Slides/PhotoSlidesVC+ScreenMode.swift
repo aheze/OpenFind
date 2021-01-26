@@ -16,11 +16,17 @@ extension PhotoSlidesViewController {
                     self.backButtonView.alpha = 0
                 }
             } else {
-                UIView.animate(withDuration: 0.25) {
-                    self.view.backgroundColor = .black
+                if self.findPressed {
+                    slideFindBarTopC?.update(offset: -45)
                 }
-                self.slideFindBar?.alpha = 0
-                self.navigationController?.setNavigationBarHidden(true, animated: true)
+                UIView.animate(withDuration: 0.25) {
+                    
+                    self.navigationController?.setNavigationBarHidden(true, animated: false)
+                    self.view.backgroundColor = .black
+                    self.view.layoutIfNeeded()
+                    self.slideFindBar?.alpha = 0
+                    
+                }
                 hideTabBar?(true)
             }
             
@@ -30,13 +36,18 @@ extension PhotoSlidesViewController {
                     self.backButtonView.alpha = 1
                 }
             } else {
-                UIView.animate(withDuration: 0.25) {
-                    self.view.backgroundColor = .systemBackground
-                }
                 if self.findPressed {
-                    self.slideFindBar?.alpha = 1
+                    slideFindBarTopC?.update(offset: 0)
                 }
-                self.navigationController?.setNavigationBarHidden(false, animated: true)
+                UIView.animate(withDuration: 0.25) {
+                    self.navigationController?.setNavigationBarHidden(false, animated: false)
+                    self.view.backgroundColor = .systemBackground
+                    self.view.layoutIfNeeded()
+                    if self.findPressed {
+                        self.slideFindBar?.alpha = 1
+                    }
+                }
+                
                 hideTabBar?(false)
             }
         }

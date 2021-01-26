@@ -71,6 +71,7 @@ class PhotosViewController: UIViewController {
     var updateSlideActions: ((ChangeActions) -> Void)? /// switch star/unstar and cache/uncache
     var findPhotoChanged: (() -> Void)? /// starred/cached photos
     var hideTabBar: ((Bool) -> Void)?
+
     
     // MARK: Diffable Data Source
     lazy var dataSource = makeDataSource()

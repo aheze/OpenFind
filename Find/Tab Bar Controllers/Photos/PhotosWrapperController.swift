@@ -111,7 +111,7 @@ class PhotosWrapperController: UIViewController {
         
         UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveLinear) {
             self.navController.view.transform = CGAffineTransform.identity
-            self.navController.view.layer.cornerRadius = 16
+            self.navController.view.layer.cornerRadius = 0
             
             self.navController.viewController.shadeView.alpha = 0
             self.navController.viewController.segmentedSlider.alpha = 1

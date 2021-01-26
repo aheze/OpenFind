@@ -59,6 +59,7 @@ class SlideViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.layoutIfNeeded()
+        print("drawing bounds: \(drawingView.bounds)")
         updateHighlightFrames()
     }
 }

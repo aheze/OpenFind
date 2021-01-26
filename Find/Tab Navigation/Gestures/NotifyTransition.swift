@@ -15,14 +15,24 @@ extension ViewController {
         case is PhotosWrapperController:
             print("ended at photos")
             startCameraShutoff()
+            
+            shouldHaveLightStatusBar = false
         case is CameraViewController:
             print("ended at camera")
             startCamera()
+            
+            shouldHaveLightStatusBar = true
         case is ListsNavController:
             print("ended at lists")
             startCameraShutoff()
+            
+            shouldHaveLightStatusBar = false
         default:
             print("Unknown notified VC")
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.setNeedsStatusBarAppearanceUpdate()
         }
     }
 }

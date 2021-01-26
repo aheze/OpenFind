@@ -397,9 +397,9 @@ class SettingsViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return false
     }
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .lightContent
+//    }
     override func viewDidLoad() {
         
         let topInset = topBlurView.frame.height

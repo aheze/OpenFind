@@ -19,6 +19,7 @@ extension SlideViewController {
         removeAllHighlights()
         
         print("imageive size: \(imageView.frame.size), content frame: \(contentView.frame), content bounds: \(contentView.bounds)")
+        print("drawing bounds: \(drawingView.bounds)")
         
         let aspectFrame = AVMakeRect(aspectRatio: imageView.image?.size ?? imageView.bounds.size, insideRect: contentView.bounds)
         
@@ -46,7 +47,7 @@ extension SlideViewController {
     }
     func updateHighlightFrames() {
         for (highlight, uiView) in drawnHighlights {
-            let aspectFrame = AVMakeRect(aspectRatio: imageView.image?.size ?? imageView.frame.size, insideRect: contentView.frame)
+            let aspectFrame = AVMakeRect(aspectRatio: imageView.image?.size ?? imageView.bounds.size, insideRect: contentView.bounds)
             
             let newX = highlight.x * (aspectFrame.width) + aspectFrame.origin.x
             let newWidth = highlight.width * aspectFrame.width

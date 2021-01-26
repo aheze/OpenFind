@@ -25,6 +25,15 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var globalUrl : URL = URL(fileURLWithPath: "")
     var highlightColor = "00aeef"
     
+    var shouldHaveStatusBar = true
+    var shouldHaveLightStatusBar = true
+    // MARK: Status bar
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return shouldHaveLightStatusBar ? .lightContent : .darkContent
+    }
+    override var prefersStatusBarHidden: Bool {
+        return !shouldHaveStatusBar
+    }
     // MARK: - View Controllers
     
     lazy var photos: PhotosWrapperController = {
@@ -75,8 +84,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             viewController.hideTabBar = { [weak self] shouldHide in
                 guard let self = self else { return }
                 
+                self.shouldHaveStatusBar = !shouldHide
                 UIView.animate(withDuration: 0.2) {
                     self.tabBarView.alpha = shouldHide ? 0 : 1
+                    self.setNeedsStatusBarAppearanceUpdate()
                 }
             }
             
