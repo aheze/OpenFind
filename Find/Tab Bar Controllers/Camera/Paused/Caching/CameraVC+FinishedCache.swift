@@ -10,7 +10,6 @@ import UIKit
 
 extension CameraViewController {
     func finishedCache(with contents: [EditableSingleHistoryContent]) {
-        print("Finsihed, curr count: \(self.currentComponents.count)")
         finishedCaching = true
         cachedContents = contents
         if cachePressed {
@@ -38,12 +37,6 @@ extension CameraViewController {
             let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
             let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
             let offHalf = offsetWidth / 2
-//            let newW = component.width * convertedOriginalWidthOfBigImage
-//            let newH = component.height * self.deviceSize.height
-//            let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
-//            let newY = (component.y * self.deviceSize.height) - newH
-//            let individualCharacterWidth = newW / CGFloat(component.text.count)
-            
             ///Cycle through each block of text. Each cont may be a line long.
             for content in self.cachedContents {
                 
@@ -82,18 +75,14 @@ extension CameraViewController {
                 }
             }
             
-            DispatchQueue.main.async {
-                for subView in self.drawingView.subviews {
-                    subView.removeFromSuperview()
-                }
-            }
+            self.resetHighlights()
             
             self.numberCurrentlyFindingFromCache -= 1
             if self.numberCurrentlyFindingFromCache == 0 {
-                
                 self.highlightsFromCache = components
                 self.currentComponents = components
                 self.drawHighlights(highlights: components)
+                self.updateMatchesNumber(to: components.count)
             }
         }
     }

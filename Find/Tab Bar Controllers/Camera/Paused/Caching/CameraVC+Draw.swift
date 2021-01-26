@@ -60,7 +60,7 @@ extension CameraViewController {
                 
                 let newView = UIView(frame: CGRect(x: component.x, y: component.y, width: component.width, height: component.height))
                 newView.alpha = 0
-                self.view.insertSubview(newView, aboveSubview: self.cameraView)
+                self.drawingView.addSubview(newView)
                 
                 newView.layer.addSublayer(layer)
                 newView.clipsToBounds = false

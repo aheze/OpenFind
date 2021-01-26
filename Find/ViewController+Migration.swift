@@ -11,7 +11,6 @@ import UIKit
 extension ViewController {
     
     func checkIfHistoryImagesExist() {
-        print("checking...")
         do {
             let fileURLs = try FileManager.default.contentsOfDirectory(at: globalUrl, includingPropertiesForKeys: nil)
            
@@ -27,10 +26,7 @@ extension ViewController {
                 photos.navController.viewController.migrationNeeded = true
                 photos.navController.viewController.photosToMigrate = photoArray
                 photos.navController.viewController.folderURL = globalUrl
-//                photos.viewController.showMigrationView()
-                
-                
-//                print("cats: \(photoObjects)")
+
                 print("fol url: \(globalUrl)")
                 print("count: \(photoObjects?.count)")
                 print("has file urls \(fileURLs.count)")
@@ -43,8 +39,6 @@ extension ViewController {
     
     func checkForOldUserDefaults() {
         if UserDefaults.standard.integer(forKey: "hapticFeedbackLevel") == 0 { /// level has not been set yet
-            print("Is 0!!!!")
-            
             if UserDefaults.standard.bool(forKey: "hapticFeedback") == true { /// used to be on
                 UserDefaults.standard.set(2, forKey: "hapticFeedbackLevel")
             } else {

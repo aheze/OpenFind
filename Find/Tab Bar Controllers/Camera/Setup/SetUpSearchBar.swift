@@ -53,21 +53,28 @@ extension CameraViewController: ToolbarButtonPressed, SelectedList, StartedEditi
         if selectedLists.count <= 1 {
             updateListsLayout(toType: "addListsNow")
         }
-
-            let indexP = IndexPath(item: 0, section: 0)
-            searchCollectionView.performBatchUpdates({
-                self.searchCollectionView.insertItems(at: [indexP])
-                self.insertingListsCount += 1
-            }, completion: { _ in
-                self.insertingListsCount -= 1
-                if self.isSchedulingList == true {
-                    if self.insertingListsCount == 0 {
-                        self.isSchedulingList = false
-                        self.updateListsLayout(toType: "doneAndShrink")
-                    }
+        
+        let indexP = IndexPath(item: 0, section: 0)
+        searchCollectionView.performBatchUpdates({
+            self.searchCollectionView.insertItems(at: [indexP])
+            self.insertingListsCount += 1
+        }, completion: { _ in
+            self.insertingListsCount -= 1
+            if self.isSchedulingList == true {
+                if self.insertingListsCount == 0 {
+                    self.isSchedulingList = false
+                    self.updateListsLayout(toType: "doneAndShrink")
                 }
-            })
-            sortSearchTerms()
+            }
+        })
+        sortSearchTerms()
+        if CameraState.isPaused {
+            if !cachedContents.isEmpty {
+                addCacheResults()
+            }
+            findWhenPaused()
+        }
+        
     }
 
     func startedEditing(start: Bool) {
@@ -122,11 +129,9 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
         if searchShrunk == false {
-            print("pressed search cell")
             let list = selectedLists[indexPath.item]
-
+            
             selectedLists.remove(at: indexPath.item)
             searchCollectionView.deleteItems(at: [indexPath])
             
@@ -135,6 +140,12 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             }
             injectListDelegate?.addList(list: list)
             sortSearchTerms()
+            if CameraState.isPaused {
+                if !cachedContents.isEmpty {
+                    addCacheResults()
+                }
+                findWhenPaused()
+            }
         } else {
             newSearchTextField.becomeFirstResponder()
             if selectedLists.count == 0 {
@@ -143,7 +154,6 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 updateListsLayout(toType: "addListsNow")
             }
         }
-
     }
     func loadListsRealm() {
 
@@ -324,8 +334,6 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 self.view.layoutIfNeeded()
             }, completion: nil)
         case "doneAndShrink":
-            print("Done, shrinking lists")
-            
             searchCollectionView.performBatchUpdates({
                 self.searchShrunk = true
             }, completion: { _ in
@@ -334,9 +342,8 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             
             switch selectedLists.count {
             case 0:
-                print("nothing")
+                break
             case 1:
-                print("1")
                 searchTextLeftC.constant = 71
             case 2:
                 searchTextLeftC.constant = 71 + 55 + 8
@@ -344,11 +351,10 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 searchTextLeftC.constant = 197
             default:
                 searchTextLeftC.constant = 197
-                print("search frame: \(newSearchTextField.frame)")
-                let availibleWidth = searchContentView.frame.width - 189
+                let availableWidth = searchContentView.frame.width - 189
                 searchBarLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
-                searchCollectionRightC.constant = availibleWidth
-                print(availibleWidth)
+                searchCollectionRightC.constant = availableWidth
+                print(availableWidth)
             }
             
             searchContentViewHeight.constant = 71
@@ -387,11 +393,12 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {
+            
             let splits = updatedString.components(separatedBy: "\u{2022}")
             let uniqueSplits = splits.uniques
             if uniqueSplits.count != splits.count {
                 updateMatchesNumber(to: 0)
-                resetFastHighlights()
+                resetHighlights()
                 allowSearch = false
                 shouldResetHighlights = true
                 showDuplicateAlert(show: true)
@@ -406,6 +413,10 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         /// if paused, find
         if CameraState.isPaused {
+            if !cachedContents.isEmpty {
+                
+                addCacheResults()
+            }
             findWhenPaused()
         }
         
@@ -447,13 +458,11 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         var cameAcrossShare = [String]()
         var duplicatedStrings = [String]()
         
-        resetFastHighlights()
+        resetHighlights()
         matchToColors.removeAll()
         stringToList.removeAll()
         
         var cameAcrossSearchFieldText = [String]()
-        
-            print("count: \(selectedLists.count)")
         for list in selectedLists {
             for match in list.contents {
                 if !cameAcrossShare.contains(match.lowercased()) {

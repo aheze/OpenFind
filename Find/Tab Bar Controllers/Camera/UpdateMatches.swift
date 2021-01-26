@@ -9,10 +9,7 @@
 import UIKit
 
 extension CameraViewController {
-    
-    
     func updateMatchesNumber(to number: Int) {
-        
         currentNumberOfMatches = number
         updateStatsNumber?.update(to: number)
         

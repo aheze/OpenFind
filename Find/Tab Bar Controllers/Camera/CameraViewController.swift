@@ -325,7 +325,7 @@ class CameraViewController: UIViewController {
                         newSearchTextField.isEnabled = false
                         updateMatchesNumber(to: 0)
                         
-                        resetFastHighlights()
+                        resetHighlights()
                         shouldResetHighlights = true
                         
                         alternateWarningHeightC.constant = 70

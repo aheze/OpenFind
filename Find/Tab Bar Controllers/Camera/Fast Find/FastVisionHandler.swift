@@ -18,7 +18,7 @@ extension CameraViewController {
             
             /// reset the cycle
             busyFastFinding = false
-            resetFastHighlights()
+            resetHighlights()
         } else {
             guard let results = request?.results, results.count > 0 else {
                 busyFastFinding = false
@@ -53,8 +53,6 @@ extension CameraViewController {
                         let newY = (component.y * self.deviceSize.height) - newH
                         let individualCharacterWidth = newW / CGFloat(component.text.count)
                         
-                        //                        print("size: \(self.deviceSize)")
-                        
                         component.x = newX
                         component.y = newY
                         component.width = newW
@@ -80,8 +78,6 @@ extension CameraViewController {
                                     
                                     if let parentList = stringToList[match] {
                                         newComponent.parentList = parentList
-                                    } else {
-                                        print("ERROROROR! NO parent list!")
                                     }
                                     nextComponents.append(newComponent)
                                 }
@@ -92,7 +88,41 @@ extension CameraViewController {
             }
             
             busyFastFinding = false
-            animateFoundFastChange()
+            
+            if CameraState.isPaused {
+                if cachedContents.isEmpty {
+                    drawHighlights(highlights: nextComponents)
+                    self.updateMatchesNumber(to: nextComponents.count)
+                } else {
+                    
+                    var componentsToAdd = [Component]()
+                    
+                    for nextComponent in nextComponents {
+                        var smallestDistance = CGFloat(999)
+                        
+                        for cachedComponent in highlightsFromCache {
+                            let point1 = CGPoint(x: cachedComponent.x + (cachedComponent.width / 2), y: cachedComponent.y + (cachedComponent.height / 2))
+                            let point2 = CGPoint(x: nextComponent.x + (nextComponent.width / 2), y: nextComponent.y + (nextComponent.height / 2))
+                            let pointDistance = relativeDistance(point1, point2)
+                            
+                            if pointDistance < smallestDistance {
+                                smallestDistance = pointDistance
+                            }
+                            
+                        }
+                        
+                        if smallestDistance >= 225 { ///Bigger, so add it
+                            print("add it!!!")
+                            componentsToAdd.append(nextComponent)
+                        }
+                    }
+                    
+                    drawHighlights(highlights: componentsToAdd)
+                    self.updateMatchesNumber(to: componentsToAdd.count + highlightsFromCache.count)
+                }
+            } else {
+                animateFoundFastChange()
+            }
             numberOfFastMatches = 0
             
         }
@@ -155,7 +185,6 @@ extension CameraViewController {
         }
         currentComponents.removeAll()
         currentComponents = tempComponents
-        print("curr comps ??: \(currentComponents)")
         
         self.updateMatchesNumber(to: self.nextComponents.count)
         
@@ -180,7 +209,6 @@ extension CameraViewController {
         nextComponents.removeAll()
         tempComponents.removeAll()
         
-        print("curr comps nooooow: \(currentComponents)")
     }
     
     
@@ -298,31 +326,14 @@ extension CameraViewController {
             self.animateFastChange(layer: layer)
         }
     }
-    func resetFastHighlights() {
+    func resetHighlights() {
+        currentComponents.removeAll()
+        nextComponents.removeAll()
+        tempComponents.removeAll()
+        
         DispatchQueue.main.async {
-            for highlight in self.currentComponents {
-                UIView.animate(withDuration: 0.5, delay: 0.8, animations: {
-                    highlight.baseView?.alpha = 0
-                }, completion: {
-                    _ in highlight.baseView?.removeFromSuperview()
-                    self.currentComponents.remove(object: highlight)
-                })
-            }
-            for secondHighlight in self.nextComponents {
-                UIView.animate(withDuration: 0.5, delay: 0.8, animations: {
-                    secondHighlight.baseView?.alpha = 0
-                }, completion: {
-                    _ in secondHighlight.baseView?.removeFromSuperview()
-                    self.nextComponents.remove(object: secondHighlight)
-                })
-            }
-            for currentHighlight in self.currentComponents {
-                UIView.animate(withDuration: 0.5, delay: 0.8, animations: {
-                    currentHighlight.baseView?.alpha = 0
-                }, completion: {
-                    _ in currentHighlight.baseView?.removeFromSuperview()
-                    self.tempComponents.remove(object: currentHighlight)
-                })
+            for subView in self.drawingView.subviews {
+                subView.removeFromSuperview()
             }
         }
     }
