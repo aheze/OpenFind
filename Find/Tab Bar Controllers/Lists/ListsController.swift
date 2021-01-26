@@ -44,6 +44,8 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
             updateSelectionLabel?(numberOfSelected)
         }
     }
+    
+    var presentingList: ((Bool) -> Void)? /// update status bar color
 
     let defaults = UserDefaults.standard
     
@@ -96,7 +98,6 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
     }
     
     func deleteTheList() { ///Comes from EditListViewController, deletes an existing list.
-        print("Delete Preexisting list")
         if let currentList = listCategories?[currentEditingPresentationPath] {
             do {
                 try realm.write {
@@ -128,7 +129,6 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
     @IBOutlet var noListsDisplay: UIView!
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
     
     var swipedToDismiss = true
     
@@ -422,8 +422,13 @@ extension ListsController: UICollectionViewDataSource, UICollectionViewDelegate,
                     viewController.contents = contents
                     viewController.iconImageName = currentPath.iconImageName
                     viewController.iconColorName = currentPath.iconColorName
+                    
+                    viewController.donePressed = { [weak self] in
+                        self?.presentingList?(false)
+                    }
                 }
                 
+                presentingList?(true)
                 self.present(viewController, animated: true)
             }
         }
@@ -437,7 +442,6 @@ extension ListsController: UICollectionViewDataSource, UICollectionViewDelegate,
                 cell.highlightView.alpha = 0
                 cell.checkmarkView.alpha = 0
             })
-            
         }
     }
 }
@@ -449,7 +453,3 @@ extension String {
         return boundingBox.height
     }
 }
-
-
-
-/// stopped here for localization

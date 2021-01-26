@@ -170,6 +170,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 guard let self = self else { return }
                 self.tabBarView.updateLabel(numberOfSelected: numberSelected)
             }
+            viewController.presentingList = { [weak self] presenting in
+                guard let self = self else { return }
+                self.shouldHaveLightStatusBar = presenting
+                UIView.animate(withDuration: 0.3) {
+                    self.setNeedsStatusBarAppearanceUpdate()
+                }
+            }
             tabBarView.listsDeletePressed = { [weak self] in
                 guard let self = self else { return }
                 viewController.listDeleteButtonPressed()

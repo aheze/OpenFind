@@ -26,6 +26,10 @@ extension ListsController {
             viewController.newListDelegate = self
             viewController.iconColorName = randomizedColor
             viewController.isModalInPresentation = true
+            viewController.donePressed = { [weak self] in
+                self?.presentingList?(false)
+            }
+            presentingList?(true)
             self.present(viewController, animated: true, completion: nil)
         }
     }

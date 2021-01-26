@@ -54,13 +54,14 @@ class ListBuilderViewController: UIViewController {
     weak var finishedEditingList: FinishedEditingList?
     weak var newListDelegate: NewListMade?
     
+    var donePressed: (() -> Void)?
     @IBAction func cancelButtonPressed(_ sender: Any) {
+        donePressed?()
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
         view.endEditing(true)
-        
         
         print("save pressed")
         var newName = generalVC.name
@@ -168,8 +169,8 @@ class ListBuilderViewController: UIViewController {
             print("make new")
             newListDelegate?.madeNewList(name: name, description: descriptionOfList, contents: contents, imageName: iconImageName, imageColor: iconColorName)
         }
+        donePressed?()
         self.dismiss(animated: true, completion: nil)
-        
     }
 }
 
