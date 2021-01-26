@@ -89,7 +89,6 @@ extension CameraViewController {
     }
     
     func checkAuthorizationStatus() -> PhotoPermissionAction {
-        print("ehckinggg")
         var action = PhotoPermissionAction.shouldGoToSettings
         if #available(iOS 14, *) {
             let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)

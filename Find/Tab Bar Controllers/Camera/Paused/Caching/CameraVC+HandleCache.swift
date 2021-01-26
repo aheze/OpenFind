@@ -14,6 +14,8 @@ extension CameraViewController {
         guard thisProcessIdentifier == currentCachingProcess else { return }
         
         guard let results = request?.results, results.count > 0 else {
+            print("no results")
+            finishedCache(with: [EditableSingleHistoryContent]())
             return
         }
         

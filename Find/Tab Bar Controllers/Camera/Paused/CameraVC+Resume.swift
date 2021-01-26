@@ -29,10 +29,12 @@ extension CameraViewController {
         self.cacheLabel.fadeTransition(0.2)
         self.cacheLabel.text = "Cache"
         
+        self.messageView.hideMessages()
         self.startedCaching = false
         self.cachedContents.removeAll()
         self.currentCachingProcess = nil
         self.finishedCaching = false
+        self.currentCachingProcess = nil
     }
     
 }

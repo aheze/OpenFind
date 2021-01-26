@@ -17,6 +17,7 @@ extension CameraViewController {
                 self.messageView.hideMessages()
                 self.cacheLabel.fadeTransition(0.2)
                 self.cacheLabel.text = "Cached"
+                self.cache.cacheIcon.animateCheck(percentage: CGFloat(1))
             }
         }
         

@@ -39,14 +39,16 @@ extension CameraViewController {
             request.recognitionLanguages = ["en_GB"]
             
             request.progressHandler = { (_, progress, _) in
-                self.currentProgress = CGFloat(progress)
-                
-                let percent = progress * 100
-                let roundedPercent = percent.rounded()
-                self.messageView.updateMessage("\(roundedPercent)")
-                if self.cachePressed {
-                    DispatchQueue.main.async {
-                        self.cache.cacheIcon.animateCheck(percentage: CGFloat(progress))
+                if thisProcessIdentifier == self.currentCachingProcess {
+                    self.currentProgress = CGFloat(progress)
+                    
+                    let percent = progress * 100
+                    let roundedPercent = percent.rounded()
+                    self.messageView.updateMessage("\(roundedPercent)")
+                    if self.cachePressed {
+                        DispatchQueue.main.async {
+                            self.cache.cacheIcon.animateCheck(percentage: CGFloat(progress))
+                        }
                     }
                 }
             }
