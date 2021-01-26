@@ -16,6 +16,7 @@ extension CameraViewController {
                 cache.cacheIcon.toggleRim(light: true)
                 cacheLabel.fadeTransition(0.2)
                 cacheLabel.text = "Cached"
+                addCacheResults()
             } else {
                 cache.cacheIcon.animateCheck(percentage: currentProgress)
                 cache.cacheIcon.toggleRim(light: true)

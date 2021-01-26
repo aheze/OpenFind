@@ -69,7 +69,8 @@ extension CameraViewController: ToolbarButtonPressed, SelectedList, StartedEditi
         })
         sortSearchTerms()
         if CameraState.isPaused {
-            if !cachedContents.isEmpty {
+            if !cachedContents.isEmpty, cachePressed {
+                print("cach is allso pressed!!")
                 addCacheResults()
             }
             findWhenPaused()
@@ -141,7 +142,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             injectListDelegate?.addList(list: list)
             sortSearchTerms()
             if CameraState.isPaused {
-                if !cachedContents.isEmpty {
+                if !cachedContents.isEmpty, cachePressed {
                     addCacheResults()
                 }
                 findWhenPaused()
@@ -413,8 +414,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         /// if paused, find
         if CameraState.isPaused {
-            if !cachedContents.isEmpty {
-                
+            if !cachedContents.isEmpty, cachePressed {
                 addCacheResults()
             }
             findWhenPaused()

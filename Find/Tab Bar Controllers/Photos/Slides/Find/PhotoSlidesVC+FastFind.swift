@@ -57,7 +57,6 @@ extension PhotoSlidesViewController {
         
         guard indexOfPhoto == currentIndex, numberCurrentlyFastFinding == 0 else {
             return
-            
         }
         
         guard

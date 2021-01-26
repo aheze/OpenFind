@@ -11,9 +11,7 @@ import Vision
 
 extension CameraViewController {
     
-    func fastFind(in pixelBuffer: CVPixelBuffer? = nil, orIn cgImage: CGImage? = nil, caching: Bool = false) {
-        
-        var thisProcessIdentifier: UUID?
+    func fastFind(in pixelBuffer: CVPixelBuffer? = nil, orIn cgImage: CGImage? = nil) {
         
         /// busy finding
         busyFastFinding = true
@@ -34,12 +32,7 @@ extension CameraViewController {
             }
             
             let request = VNRecognizeTextRequest { request, error in
-                if caching {
-                    thisProcessIdentifier = UUID()
-                } else {
-                    
-                    self.handleFastDetectedText(request: request, error: error)
-                }
+                self.handleFastDetectedText(request: request, error: error)
             }
             
             var customFindArray = [String]()
@@ -53,16 +46,10 @@ extension CameraViewController {
             }
             
             request.customWords = [self.finalTextToFind, self.finalTextToFind.lowercased(), self.finalTextToFind.uppercased(), self.finalTextToFind.capitalizingFirstLetter()] + customFindArray
-        
             
-            request.recognitionLevel = caching ? .accurate : .fast
+            request.recognitionLevel = .fast
             request.recognitionLanguages = ["en_GB"]
             
-            if caching {
-                request.progressHandler = { (_, progress, _) in
-                    print("progress is: \(progress)")
-                }
-            }
             
             if let pixelBuffer = pixelBuffer {
                 let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right)

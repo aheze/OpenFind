@@ -88,10 +88,11 @@ extension CameraViewController {
             busyFastFinding = false
             
             if CameraState.isPaused {
-                if cachedContents.isEmpty {
+                if !cachePressed {
                     drawHighlights(highlights: nextComponents)
                     self.updateMatchesNumber(to: nextComponents.count)
                 } else {
+                    
                     
                     var componentsToAdd = [Component]()
                     
