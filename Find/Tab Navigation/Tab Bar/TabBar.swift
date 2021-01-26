@@ -38,7 +38,6 @@ class TabBarView: PassthroughView {
     @IBOutlet var photosControls: ReceiveTouchView!
     @IBOutlet weak var starButton: CustomButton!
     @IBAction func starButtonPressed(_ sender: Any) {
-        print("starredd!!!!")
         photoSelectionControlPressed?(.star)
     }
     
@@ -338,7 +337,7 @@ class TabBarView: PassthroughView {
                 self.topLineView.alpha = 1
             }
         } else {
-            UIView.animate(withDuration: 0.6) {
+            UIView.animate(withDuration: 0.1) {
                 self.topLineView.alpha = 0
             }
         }

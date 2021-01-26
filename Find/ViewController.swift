@@ -196,47 +196,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var gestures = Gestures()
     
-    // MARK: Gesture error refresh
-    
-    @IBOutlet weak var gestureRefreshButton: UIButton!
-    @IBAction func gestureRefreshButtonPressed(_ sender: Any) {
-        addChild(camera, in: containerView)
-        if let currentVC = ViewControllerState.currentVC {
-            removeChild(currentVC)
-        }
-        ViewControllerState.currentVC = camera
-        ViewControllerState.newVC = nil
-        panGestureRecognizer.isEnabled = false
-        panGestureRecognizer.isEnabled = true
-        panGestureRecognizer.setTranslation(.zero, in: containerView)
-        gestures.completedMove = false
-        gestures.direction = nil
-        gestures.isAnimating = false
-        gestures.totalTranslation = 0
-        gestures.gestureSavedOffset = 0
-        animator?.stopAnimation(true)
-        blurAnimator?.stopAnimation(true)
-        
-        let block = {
-            self.tabBarView.photosIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)()
-            self.tabBarView.listsIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)()
-            self.tabBarView.cameraIcon.makeActiveState()()
-        }
-        block()
-        self.tabBarView.cameraIcon.makeLayerActiveState(duration: Constants.transitionDuration)
-        self.tabBarView.makeLayerActiveState(duration: Constants.transitionDuration)
-        self.tabBarView.hideRealShutter?(false)
-        self.tabBarView.cameraIcon.alpha = 0
-        
-        self.shadeView.alpha = 0
-        self.blurView.effect = nil
-        tabBarView.shadeView.alpha = 1
-        tabBarView.blurView.effect = nil
-        tabBarView.blurBackgroundView.alpha = 0
-        containerView.sendSubviewToBack(camera.view) /// camera view
-        containerView.bringSubviewToFront(blurContainerView)
-    }
-    
     @IBOutlet var panGestureRecognizer: UIPanGestureRecognizer!
     @IBOutlet var longPressGestureRecognizer: UILongPressGestureRecognizer!
     
@@ -507,8 +466,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         shadeView.alpha = 0
         blurView.isHidden = false
         shadeView.isHidden = false
-        
-        gestureRefreshButton.layer.cornerRadius = 12
         
     }
 
