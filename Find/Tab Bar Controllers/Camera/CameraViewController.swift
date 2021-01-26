@@ -294,6 +294,7 @@ class CameraViewController: UIViewController {
     var snapshotImageOrientation = UIImage.Orientation.upMirrored
     private var captureCompletionBlock: ((UIImage) -> Void)?
     var cameraDevice: AVCaptureDevice?
+    var allowedToAccessPhotos = false /// photos permissions
     
     //MARK: Camera Focus allowed views
     @IBOutlet weak var cameraView: CameraView!

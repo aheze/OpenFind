@@ -7,7 +7,13 @@
 //
 
 import UIKit
+import Photos
 
+enum PhotoPermissionAction {
+    case shouldAsk
+    case shouldGoToSettings
+    case allowed
+}
 extension CameraViewController {
     func setupCameraButtons() {
         cameraIconHolder.backgroundColor = UIColor.clear
@@ -37,20 +43,35 @@ extension CameraViewController {
         
         saveToPhotos.pressed = { [weak self] in
             guard let self = self else { return }
-            self.savePressed.toggle()
-            if self.savePressed {
-                UIView.animate(withDuration: Double(Constants.transitionDuration)) {
-                    self.saveToPhotos.photosIcon.makeActiveState(offset: true)()
-                }
-                self.saveLabel.fadeTransition(0.2)
-                self.saveLabel.text = "Saved"
+            
+            let status = self.checkAuthorizationStatus()
+            
+            if status == .allowed {
+                self.savePressed.toggle()
             } else {
-                UIView.animate(withDuration: Double(Constants.transitionDuration)) {
-                    self.saveToPhotos.photosIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)()
+                if status == .shouldAsk {
+                    self.requestAuthorization {
+                        DispatchQueue.main.async {
+                            self.savePressed.toggle()
+                            self.animatePhotosIcon()
+                        }
+                    }
+                } else if status == .shouldGoToSettings {
+                    let alert = UIAlertController(title: "Allow Access to Photo Library", message: "Find needs permission to save photos", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Go to Settings", style: UIAlertAction.Style.default, handler: { _ in
+                        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                            return
+                        }
+                        if UIApplication.shared.canOpenURL(settingsUrl) {
+                            UIApplication.shared.open(settingsUrl)
+                        }
+                    }))
+                    self.present(alert, animated: true, completion: nil)
                 }
-                self.saveLabel.fadeTransition(0.2)
-                self.saveLabel.text = "Save"
             }
+            
+            self.animatePhotosIcon()
         }
         cache.pressed = { [weak self] in
             guard let self = self else { return }
@@ -63,6 +84,48 @@ extension CameraViewController {
                 self.cacheLabel.fadeTransition(0.2)
                 self.cacheLabel.text = "Cache"
                 self.messageView.hideMessages()
+            }
+        }
+    }
+    
+    func checkAuthorizationStatus() -> PhotoPermissionAction {
+        var action = PhotoPermissionAction.shouldGoToSettings
+        if #available(iOS 14, *) {
+            let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+            if status == .authorized || status == .limited {
+                action = .allowed
+            } else if status == .notDetermined {
+                action = .shouldAsk
+            } else {
+                action = .shouldGoToSettings
+            }
+            
+        } else {
+            let status = PHPhotoLibrary.authorizationStatus()
+            if status == .authorized {
+                action = .allowed
+            } else if status == .notDetermined {
+                action = .shouldAsk
+            } else {
+                action = .shouldGoToSettings
+            }
+        }
+        
+        return action
+    }
+    
+    func requestAuthorization(completion: @escaping (() -> Void)) {
+        if #available(iOS 14, *) {
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { (status) in
+                if status == .authorized || status == .limited {
+                    completion()
+                }
+            }
+        } else {
+            PHPhotoLibrary.requestAuthorization { (status) in
+                if status == .authorized {
+                    completion()
+                }
             }
         }
     }

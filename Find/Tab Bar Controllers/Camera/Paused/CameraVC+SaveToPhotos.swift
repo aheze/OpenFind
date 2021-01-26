@@ -10,6 +10,23 @@ import UIKit
 import Photos
 
 extension CameraViewController {
+    func animatePhotosIcon() {
+        
+        if self.savePressed {
+            UIView.animate(withDuration: Double(Constants.transitionDuration)) {
+                self.saveToPhotos.photosIcon.makeActiveState(offset: true)()
+            }
+            self.saveLabel.fadeTransition(0.2)
+            self.saveLabel.text = "Saved"
+        } else {
+            UIView.animate(withDuration: Double(Constants.transitionDuration)) {
+                self.saveToPhotos.photosIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)()
+            }
+            self.saveLabel.fadeTransition(0.2)
+            self.saveLabel.text = "Save"
+        }
+    }
+    
     func saveImageToPhotos(cachePressed: Bool) {
         guard
             let pausedPhoto = currentPausedImage,
@@ -17,7 +34,6 @@ extension CameraViewController {
         else { return }
         
         let currentContents = self.cachedContents
-        print("curr count: \(self.cachedContents)")
         
         var photoIdentifier: String?
         PHPhotoLibrary.shared().performChanges({
@@ -40,7 +56,6 @@ extension CameraViewController {
                     if cachePressed {
                         newModel.isDeepSearched = true
                         for cachedContent in currentContents {
-                            print("looping")
                             let newContent = SingleHistoryContent()
                             newContent.x = Double(cachedContent.x)
                             newContent.y = Double(cachedContent.y)
