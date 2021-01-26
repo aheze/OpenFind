@@ -12,8 +12,4 @@ extension SlideViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return contentView
     }
-    
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        self.delegate?.photoZoomViewController(self, scrollViewDidScroll: scrollView)
-//    }
 }

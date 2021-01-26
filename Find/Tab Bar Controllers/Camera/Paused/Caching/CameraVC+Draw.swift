@@ -18,22 +18,13 @@ extension CameraViewController {
                 layer.frame = CGRect(x: 0, y: 0, width: component.width, height: component.height)
                 layer.cornerRadius = component.height / 3.5
                 
-                let newLayer = CAShapeLayer()
-                newLayer.bounds = layer.frame
-                newLayer.path = UIBezierPath(roundedRect: layer.frame, cornerRadius: component.height / 3.5).cgPath
-                newLayer.lineWidth = 3
-                newLayer.lineCap = .round
+                let rimLayer = CALayer()
+                rimLayer.bounds = layer.frame
+                rimLayer.cornerRadius = component.height / 3.5
+                rimLayer.borderWidth = 3
                 
                 guard let colors = self.matchToColors[component.text] else { return }
                 if colors.count > 1 {
-                    var newRect = layer.frame
-                    newRect.origin.x += 1.5
-                    newRect.origin.y += 1.5
-                    layer.frame.origin.x -= 1.5
-                    layer.frame.origin.y -= 1.5
-                    layer.frame.size.width += 3
-                    layer.frame.size.height += 3
-                    newLayer.path = UIBezierPath(roundedRect: newRect, cornerRadius: component.height / 4.5).cgPath
                     let gradient = CAGradientLayer()
                     gradient.frame = layer.bounds
                     if let gradientColors = self.matchToColors[component.text] {
@@ -45,16 +36,16 @@ extension CameraViewController {
                     gradient.startPoint = CGPoint(x: 0, y: 0.5)
                     gradient.endPoint = CGPoint(x: 1, y: 0.5)
                     
-                    gradient.mask = newLayer
-                    newLayer.fillColor = UIColor.clear.cgColor
-                    newLayer.strokeColor = UIColor.black.cgColor
+                    gradient.mask = rimLayer
+                    rimLayer.backgroundColor = UIColor.clear.cgColor
+                    rimLayer.borderColor = UIColor.black.cgColor
                     
                     layer.addSublayer(gradient)
                 } else {
                     if let firstColor = colors.first {
-                        newLayer.fillColor = firstColor.copy(alpha: 0.3)
-                        newLayer.strokeColor = firstColor
-                        layer.addSublayer(newLayer)
+                        rimLayer.backgroundColor = firstColor.copy(alpha: 0.3)
+                        rimLayer.borderColor = firstColor
+                        layer.addSublayer(rimLayer)
                     }
                 }
                 
@@ -66,9 +57,9 @@ extension CameraViewController {
                 newView.clipsToBounds = false
                 
                 
-                let x = newLayer.bounds.size.width / 2
-                let y = newLayer.bounds.size.height / 2
-                newLayer.position = CGPoint(x: x, y: y)
+                let x = rimLayer.bounds.size.width / 2
+                let y = rimLayer.bounds.size.height / 2
+                rimLayer.position = CGPoint(x: x, y: y)
                 component.baseView = newView
                 component.changed = true
                 
