@@ -112,9 +112,10 @@ extension PhotosViewController {
         self.allPhotosToDisplay = allPhotosToDisplay
         
         if allPhotosToDisplay.isEmpty {
-            print("not empty")
             if let previousFilter = previousFilter {
                 showEmptyView(previously: previousFilter, to: filter)
+            } else {
+                showEmptyView(previously: .all, to: filter)
             }
             findButton.isEnabled = false
             selectButton.isEnabled = false

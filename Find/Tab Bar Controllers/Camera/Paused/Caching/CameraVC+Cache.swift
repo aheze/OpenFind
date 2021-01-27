@@ -10,6 +10,9 @@ import UIKit
 
 extension CameraViewController {
     func beginCachingPhoto() {
+        if let cacheTipView = self.cacheTipView {
+            cacheTipView.dismiss()
+        }
         if startedCaching {
             if finishedCaching {
                 cache.cacheIcon.animateCheck(percentage: 1)
