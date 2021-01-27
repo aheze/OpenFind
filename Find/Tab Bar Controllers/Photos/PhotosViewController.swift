@@ -160,6 +160,7 @@ class PhotosViewController: UIViewController {
                     self.allMonths = allMonths
                     self.monthsToDisplay = allMonths
                     self.allPhotosToDisplay = allPhotos
+                    self.sortPhotos(with: self.currentFilter)
                     self.applySnapshot(animatingDifferences: true)
                     self.refreshing = false
                 }

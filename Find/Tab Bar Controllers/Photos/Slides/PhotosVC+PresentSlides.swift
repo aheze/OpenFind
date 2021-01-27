@@ -16,11 +16,6 @@ extension PhotosViewController {
       
     func configureSlides(navigationController: UINavigationController, slidesViewController: PhotoSlidesViewController) {
         if let indexPath = selectedIndexPath, let findPhoto = dataSource.itemIdentifier(for: indexPath) {
-            
-            print("Presneting!")
-            print("photo cache : \(findPhoto.editableModel?.isDeepSearched)")
-            print("photo heart : \(findPhoto.editableModel?.isHearted)")
-            
             navigationController.delegate = slidesViewController.transitionController
             slidesViewController.transitionController.fromDelegate = self
             slidesViewController.transitionController.toDelegate = slidesViewController

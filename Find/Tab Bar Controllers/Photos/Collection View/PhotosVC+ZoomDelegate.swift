@@ -27,7 +27,6 @@ extension PhotosViewController: ZoomAnimatorDelegate {
                 self.hideTabBar?(false)
                 
                 if refreshNeededAfterDismissPhoto {
-                    print("need to refresh")
                     refreshNeededAfterDismissPhoto = false
                     refreshing = true
                     DispatchQueue.main.async {
@@ -35,6 +34,7 @@ extension PhotosViewController: ZoomAnimatorDelegate {
                             self.allMonths = allMonths
                             self.monthsToDisplay = allMonths
                             self.allPhotosToDisplay = allPhotos
+                            self.sortPhotos(with: self.currentFilter)
                             self.applySnapshot(animatingDifferences: true)
                             self.refreshing = false
                         }
