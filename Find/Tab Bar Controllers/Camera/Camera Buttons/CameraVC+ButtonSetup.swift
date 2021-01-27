@@ -22,8 +22,6 @@ extension CameraViewController {
         cameraIcon.pressed = { [weak self] in
             guard let self = self else { return }
             
-
-            
             CameraState.isPaused.toggle()
             self.cameraIcon.toggle(on: CameraState.isPaused)
             self.cameraChanged?(CameraState.isPaused)

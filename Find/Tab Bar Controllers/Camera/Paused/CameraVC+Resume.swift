@@ -38,10 +38,10 @@ extension CameraViewController {
         
         if let cacheTipView = self.cacheTipView {
             cacheTipView.dismiss()
-            self.cacheTipView = nil
-            self.dismissedCacheTipAlready = false
-            self.howManyTimesFastFoundSincePaused = 0
         }
+        self.cacheTipView = nil
+        self.dismissedCacheTipAlready = false
+        self.howManyTimesFastFoundSincePaused = 0
     }
     
 }
