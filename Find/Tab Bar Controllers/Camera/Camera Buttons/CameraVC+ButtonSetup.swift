@@ -36,9 +36,6 @@ extension CameraViewController {
                     self.showCacheTip()
                 }
             } else {
-                if let cacheTipView = self.cacheTipView {
-                    cacheTipView.dismiss()
-                }
                 self.saveToPhotosIfNeeded()
                 self.resetState()
                 self.startLivePreview()

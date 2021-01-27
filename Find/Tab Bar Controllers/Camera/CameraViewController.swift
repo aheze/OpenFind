@@ -311,6 +311,8 @@ class CameraViewController: UIViewController {
     
     // MARK: Tips
     var cacheTipView: EasyTipView?
+    var howManyTimesFastFoundSincePaused = 0 /// how many times fast found
+    var dismissedCacheTipAlready = false /// if dismissed already, don't show again
     
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         viewControllerToPresent.modalPresentationStyle = .pageSheet

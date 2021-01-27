@@ -25,6 +25,8 @@ extension CameraViewController {
                 
                 self.aspectRatioWidthOverHeight = height / width ///opposite
             } else if let cgImage = cgImage {
+                self.howManyTimesFastFoundSincePaused += 1
+                
                 let width = cgImage.width
                 let height = cgImage.height
                 

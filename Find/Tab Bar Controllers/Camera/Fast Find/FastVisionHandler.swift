@@ -89,10 +89,16 @@ extension CameraViewController {
             
             if CameraState.isPaused {
                 if !cachePressed {
+                    
+                    if self.howManyTimesFastFoundSincePaused >= 6 && nextComponents.count <= 2 {
+                        DispatchQueue.main.async {
+                            self.showCacheTip()
+                        }
+                    }
+                    
                     drawHighlights(highlights: nextComponents)
                     self.updateMatchesNumber(to: nextComponents.count)
                 } else {
-                    
                     
                     var componentsToAdd = [Component]()
                     
@@ -130,9 +136,6 @@ extension CameraViewController {
             findWhenPaused()
         }
     }
-    
-    
-    
     
     func animateFoundFastChange() {
         for newComponent in nextComponents {
@@ -336,7 +339,7 @@ extension CameraViewController {
         }
     }
     func animateFastChange(layer: CAShapeLayer) {
-        view.layer.insertSublayer(layer, above: cameraView.layer)
+        drawingView.layer.addSublayer(layer)
         layer.masksToBounds = true
         let gradient = CAGradientLayer()
         gradient.frame = layer.bounds

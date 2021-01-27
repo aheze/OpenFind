@@ -68,7 +68,6 @@ struct Constants {
     static var iPhoneXTabHeight = 84
     static var iPhone8TabHeight = 50
     static var photoBottomPreviewHeight = CGFloat(60) /// height of the shown portion of the photos vc when finding
-    static var preferences = EasyTipView.Preferences()
 }
 
 struct ConstantVars { /// calculated based on device size

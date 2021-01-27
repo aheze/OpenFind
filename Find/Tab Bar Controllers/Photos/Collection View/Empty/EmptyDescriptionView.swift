@@ -53,7 +53,7 @@ class EmptyDescriptionView: UIView {
                 flipFromRight = true
             case .starred:
                 headerText = "Starred"
-                descriptionText = "Star the photos that you reference to the most"
+                descriptionText = "Star the photos that you view the most"
                 newImage = UIImage(named: "StarredPhotos")
                 if previousFilter != .local {
                     flipFromRight = true
