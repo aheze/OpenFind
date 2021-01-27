@@ -17,7 +17,7 @@ extension ViewController {
     func startCamera() {
         camera.allowSearchFocus = true
         cancelShutoff()
-        camera.startVideo()
+        camera.startSession()
     }
     func cancelShutoff() {
         cameraShutoffTask.cancel()

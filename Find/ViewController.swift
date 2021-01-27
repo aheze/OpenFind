@@ -413,7 +413,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         
         shutoffCamera = {
-            print("Shut off cam!!")
             self.camera.stopSession()
         }
 

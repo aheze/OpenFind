@@ -297,7 +297,8 @@ class CameraViewController: UIViewController {
 
     
     //MARK: Camera
-    var previewTempImageView = UIImageView()
+    @IBOutlet weak var pausedImageView: UIImageView!
+    
     let avSession = AVCaptureSession()
     var snapshotImageOrientation = UIImage.Orientation.upMirrored
     private var captureCompletionBlock: ((UIImage) -> Void)?
@@ -430,7 +431,6 @@ class CameraViewController: UIViewController {
         controlsBlurView.clipsToBounds = true
         controlsBlurView.isHidden = true
         updateMatchesNumber(to: 0)
-        setupTempImageView()
         setupSearchBar()
         
         statsView.layer.cornerRadius = statsView.bounds.width / 2

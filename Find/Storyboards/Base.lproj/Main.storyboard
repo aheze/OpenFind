@@ -229,6 +229,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="20i-dz-JZp">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hag-e5-Sys">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -613,6 +616,7 @@
                         <constraints>
                             <constraint firstItem="g2Y-bj-01H" firstAttribute="leading" secondItem="oNn-cV-T8L" secondAttribute="leading" constant="24" id="4cF-bb-Kkm"/>
                             <constraint firstAttribute="bottom" secondItem="2JP-1T-MxT" secondAttribute="bottom" constant="12" id="5El-mq-7hs"/>
+                            <constraint firstAttribute="trailing" secondItem="20i-dz-JZp" secondAttribute="trailing" id="6cI-uW-wUB"/>
                             <constraint firstItem="kV4-Eg-1Ee" firstAttribute="leading" secondItem="oNn-cV-T8L" secondAttribute="leading" constant="8" id="8mP-1w-akg"/>
                             <constraint firstItem="oNn-cV-T8L" firstAttribute="trailing" secondItem="1uu-Wl-x4d" secondAttribute="trailing" constant="16" id="9He-v9-Vjh"/>
                             <constraint firstItem="2JP-1T-MxT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9aW-0c-yNf"/>
@@ -625,11 +629,14 @@
                             <constraint firstAttribute="trailing" secondItem="Tda-he-8YJ" secondAttribute="trailing" id="Mva-K4-mIZ"/>
                             <constraint firstItem="1uu-Wl-x4d" firstAttribute="top" secondItem="kV4-Eg-1Ee" secondAttribute="bottom" id="Q5U-Jw-MFd"/>
                             <constraint firstItem="Tda-he-8YJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="XFu-Qm-S1l"/>
+                            <constraint firstItem="20i-dz-JZp" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Yhu-wu-UpW"/>
                             <constraint firstItem="1uu-Wl-x4d" firstAttribute="leading" secondItem="oNn-cV-T8L" secondAttribute="leading" constant="16" id="ZAu-k3-Krh"/>
                             <constraint firstItem="aR3-V6-wml" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="32" id="aXk-cF-Csx"/>
                             <constraint firstItem="oNn-cV-T8L" firstAttribute="trailing" secondItem="g2Y-bj-01H" secondAttribute="trailing" constant="24" id="d0C-X3-qPE"/>
+                            <constraint firstItem="20i-dz-JZp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="eIR-0I-FhR"/>
                             <constraint firstItem="g2Y-bj-01H" firstAttribute="top" secondItem="1uu-Wl-x4d" secondAttribute="bottom" id="pao-BQ-xDS"/>
                             <constraint firstAttribute="bottom" secondItem="Tda-he-8YJ" secondAttribute="bottom" id="rn7-2I-qHJ"/>
+                            <constraint firstAttribute="bottom" secondItem="20i-dz-JZp" secondAttribute="bottom" id="uVJ-4J-XuY"/>
                             <constraint firstItem="kV4-Eg-1Ee" firstAttribute="top" secondItem="oNn-cV-T8L" secondAttribute="top" id="uYI-qs-zLw"/>
                             <constraint firstItem="oNn-cV-T8L" firstAttribute="trailing" secondItem="kV4-Eg-1Ee" secondAttribute="trailing" constant="8" id="z0X-1C-qfr"/>
                         </constraints>
@@ -652,6 +659,7 @@
                         <outlet property="listsLabel" destination="sbj-0t-kKO" id="bsh-5a-IVV"/>
                         <outlet property="messageView" destination="3X4-Nc-yBe" id="79y-RB-NiK"/>
                         <outlet property="newSearchTextField" destination="eQO-08-qIa" id="53l-JB-69S"/>
+                        <outlet property="pausedImageView" destination="20i-dz-JZp" id="9cz-pu-sal"/>
                         <outlet property="saveLabel" destination="Myy-mx-RUb" id="hYJ-EW-xc2"/>
                         <outlet property="saveToPhotos" destination="ryG-3Q-0nW" id="vt2-hX-TuL"/>
                         <outlet property="searchBarLayout" destination="4Qm-tc-bOS" id="OXt-hQ-q6Y"/>
