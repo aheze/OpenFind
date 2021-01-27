@@ -8,6 +8,12 @@
 
 import UIKit
 
+extension PhotoSlidesViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        print("dismissed!!!")
+        presentingInfo?(false)
+    }
+}
 extension PhotoSlidesViewController {
     func infoPressed() {
         let currentPhoto = resultPhotos[currentIndex].findPhoto
@@ -56,6 +62,13 @@ extension PhotoSlidesViewController {
         infoVC.isCached = isCached
         infoVC.transcript = transcript
         
+        infoVC.pressedDone = { [weak self] in
+            self?.presentingInfo?(false)
+        }
+        
+        infoVC.presentationController?.delegate = self
+        
+        presentingInfo?(true)
         self.present(infoVC, animated: true)
     }
 }

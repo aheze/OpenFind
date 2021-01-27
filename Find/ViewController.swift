@@ -90,6 +90,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     self.setNeedsStatusBarAppearanceUpdate()
                 }
             }
+            viewController.slidesPresentingInfo = { [weak self] presenting in
+                guard let self = self else { return }
+                self.shouldHaveLightStatusBar = presenting
+                UIView.animate(withDuration: 0.2) {
+                    self.setNeedsStatusBarAppearanceUpdate()
+                }
+            }
             
             /// controls in selection
             tabBarView.photoSelectionControlPressed = { action in

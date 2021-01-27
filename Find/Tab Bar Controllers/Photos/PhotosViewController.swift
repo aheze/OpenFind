@@ -81,6 +81,7 @@ class PhotosViewController: UIViewController {
     typealias Snapshot = NSDiffableDataSourceSnapshot<Month, FindPhoto>
     let cellReuseIdentifier = "ImageCell"
     let headerReuseIdentifier = "PhotoHeader"
+    var slidesPresentingInfo: ((Bool) -> Void)?
    
     // MARK: Nav bar
     var findButton: UIBarButtonItem!

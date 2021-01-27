@@ -26,6 +26,7 @@ class InfoViewHoster: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    var pressedDone: (() -> Void)?
     
     override func loadView() {
         
@@ -37,6 +38,7 @@ class InfoViewHoster: UIViewController {
         var infoView = InfoView()
         
         infoView.donePressed = { [weak self] in
+            self?.pressedDone?()
             self?.dismiss(animated: true, completion: nil)
         }
         
