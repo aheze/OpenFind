@@ -21,13 +21,23 @@ extension CameraViewController {
         cameraIcon.pressed = { [weak self] in
             guard let self = self else { return }
             
+
+            
             CameraState.isPaused.toggle()
             self.cameraIcon.toggle(on: CameraState.isPaused)
             self.cameraChanged?(CameraState.isPaused)
             
             if CameraState.isPaused {
                 self.pauseLivePreview()
+                //            let hasPausedBefore = self.defaults.bool(forKey: "hasPausedBefore")
+                if !false {
+                    //                self.defaults.set(true, forKey: "hasPausedBefore")
+                    self.showCacheTip()
+                }
             } else {
+                if let cacheTipView = self.cacheTipView {
+                    cacheTipView.dismiss()
+                }
                 self.saveToPhotosIfNeeded()
                 self.resetState()
                 self.startLivePreview()

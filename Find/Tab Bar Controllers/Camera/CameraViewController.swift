@@ -12,9 +12,8 @@ import AVFoundation
 import CoreMotion
 import RealmSwift
 import SnapKit
-import SwiftEntryKit
 import WhatsNewKit
-import SwiftUI
+import EasyTipView
 
 protocol ToggleCreateCircle: class {
     func toggle(created: Bool)
@@ -309,7 +308,8 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var cameraView: CameraView!
     let videoDataOutput = AVCaptureVideoDataOutput()
     
-    
+    // MARK: Tips
+    var cacheTipView: EasyTipView?
     
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         viewControllerToPresent.modalPresentationStyle = .pageSheet
