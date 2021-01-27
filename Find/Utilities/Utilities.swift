@@ -110,15 +110,6 @@ class PassthroughView: UIView {
     }
 }
 
-class PassthroughStackView: UIStackView {
-    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        return subviews.contains(where: {
-            $0.alpha != 0
-                && $0.isUserInteractionEnabled
-                && $0.point(inside: self.convert(point, to: $0), with: event)
-        })
-    }
-}
 
 extension UISpringTimingParameters {
     

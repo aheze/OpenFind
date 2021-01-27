@@ -14,7 +14,21 @@ enum TabBarMode {
     case photoSlideControls
     case listsControls /// selection controls for Lists
 }
-class TabBarView: PassthroughView {
+class TabBarView: UIView {
+    
+    var shutterIgnoreFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
+    
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        if bounds.contains(point) {
+            if ViewControllerState.currentVC is CameraViewController {
+                return !shutterIgnoreFrame.contains(point)
+            } else {
+                return true
+            }
+        } else {
+            return false
+        }
+    }
     
     var animatingObjects = 0
     var gestureInterruptedButton = false /// when button animating, then swipe away
@@ -25,17 +39,17 @@ class TabBarView: PassthroughView {
     var changedViewController: ((ViewControllerType) -> Void)?
     var checkIfAnimating: (() -> (Bool))?
     
-    @IBOutlet var contentView: PassthroughView!
-    @IBOutlet weak var containerView: PassthroughView!
+    @IBOutlet var contentView: UIView!
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var containerHeightC: NSLayoutConstraint!
-    @IBOutlet weak var stackView: PassthroughStackView!
+    @IBOutlet weak var stackView: UIStackView!
     
     /// reference view to add selecting buttons
-    @IBOutlet weak var controlsReferenceView: ReceiveTouchView!
+    @IBOutlet weak var controlsReferenceView: UIView!
     
     // MARK: Selection in Photos
     var photoSelectionControlPressed: ((PhotoSlideAction) -> Void)?
-    @IBOutlet var photosControls: ReceiveTouchView!
+    @IBOutlet var photosControls: UIView!
     @IBOutlet weak var starButton: CustomButton!
     @IBAction func starButtonPressed(_ sender: Any) {
         photoSelectionControlPressed?(.star)
@@ -52,7 +66,7 @@ class TabBarView: PassthroughView {
     }
     
     // MARK: Selection in Lists
-    @IBOutlet var listsControls: ReceiveTouchView!
+    @IBOutlet var listsControls: UIView!
     @IBOutlet weak var listsSelectionLabel: UILabel!
     @IBOutlet weak var listsDeleteButton: CustomButton!
     
@@ -62,7 +76,7 @@ class TabBarView: PassthroughView {
     }
     
     // MARK: Photo Slide controls
-    @IBOutlet var photoSlideControls: ReceiveTouchView!
+    @IBOutlet var photoSlideControls: UIView!
     @IBOutlet weak var slideShareButton: CustomButton!
     @IBAction func slideSharePressed(_ sender: Any) {
         photoSlideControlPressed?(.share)
@@ -89,8 +103,6 @@ class TabBarView: PassthroughView {
     }
     
     var photoSlideControlPressed: ((PhotoSlideAction) -> Void)?
-    
-    
     
     
     @IBOutlet weak var topLineView: UIView!

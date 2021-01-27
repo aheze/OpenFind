@@ -138,6 +138,7 @@
 		3CCA9B3F25BCEB37003BD0E3 /* PhotoSlidesVC+ScreenMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCA9B3E25BCEB37003BD0E3 /* PhotoSlidesVC+ScreenMode.swift */; };
 		3CCB840925B0E362000631BA /* PhotosVC+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCB840825B0E362000631BA /* PhotosVC+Delete.swift */; };
 		3CD388BD25C11AB900B67B13 /* CameraVC+Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD388BC25C11AB900B67B13 /* CameraVC+Tips.swift */; };
+		3CD388C125C122BC00B67B13 /* ViewController+ShutterPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD388C025C122BC00B67B13 /* ViewController+ShutterPosition.swift */; };
 		3CDA84F625B2519E00726F91 /* PhotoFindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDA84F525B2519E00726F91 /* PhotoFindViewController.swift */; };
 		3CE306D6259AC46400F1B2E2 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306CE259AC46400F1B2E2 /* TabBar.swift */; };
 		3CE306D7259AC46400F1B2E2 /* PhotosIcon.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE306CF259AC46400F1B2E2 /* PhotosIcon.xib */; };
@@ -387,6 +388,7 @@
 		3CCA9B3E25BCEB37003BD0E3 /* PhotoSlidesVC+ScreenMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+ScreenMode.swift"; sourceTree = "<group>"; };
 		3CCB840825B0E362000631BA /* PhotosVC+Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Delete.swift"; sourceTree = "<group>"; };
 		3CD388BC25C11AB900B67B13 /* CameraVC+Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Tips.swift"; sourceTree = "<group>"; };
+		3CD388C025C122BC00B67B13 /* ViewController+ShutterPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ShutterPosition.swift"; sourceTree = "<group>"; };
 		3CDA84F525B2519E00726F91 /* PhotoFindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFindViewController.swift; sourceTree = "<group>"; };
 		3CE306CE259AC46400F1B2E2 /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		3CE306CF259AC46400F1B2E2 /* PhotosIcon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotosIcon.xib; sourceTree = "<group>"; };
@@ -1211,6 +1213,7 @@
 				495635292437A4860001E8C6 /* defaultSeeds.realm */,
 				3CE306E0259AC4B000F1B2E2 /* State.swift */,
 				3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */,
+				3CD388C025C122BC00B67B13 /* ViewController+ShutterPosition.swift */,
 				3CABD24F25C11870009921EE /* ViewController+Tips.swift */,
 				3C020CE4259FF5A70087AE92 /* ViewController+Migration.swift */,
 				3C5B156625A7ED7A00BB8988 /* ViewController+CameraShutoff.swift */,
@@ -1446,6 +1449,7 @@
 				3CAC4DA625BF52CE00CC7948 /* LTMorphingLabel+Pixelate.swift in Sources */,
 				3CA9337025BE802000042C2F /* PhotosVC+ObserveChanges.swift in Sources */,
 				49563521243694BC0001E8C6 /* GestureControl.swift in Sources */,
+				3CD388C125C122BC00B67B13 /* ViewController+ShutterPosition.swift in Sources */,
 				3CA9335125BDF42200042C2F /* CameraVC+CameraControls.swift in Sources */,
 				3CE306D8259AC46400F1B2E2 /* PhotosIcon.swift in Sources */,
 				3CCA9B3F25BCEB37003BD0E3 /* PhotoSlidesVC+ScreenMode.swift in Sources */,

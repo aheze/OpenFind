@@ -404,6 +404,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        getShutterButtonFrame()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -460,7 +465,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         }
         
-//        tabBarView.
         
         blurView.effect = nil
         shadeView.alpha = 0

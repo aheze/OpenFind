@@ -15,6 +15,7 @@ enum PhotoPermissionAction {
     case allowed
 }
 extension CameraViewController {
+    
     func setupCameraButtons() {
         cameraIconHolder.backgroundColor = UIColor.clear
         cameraIcon.isActualButton = true

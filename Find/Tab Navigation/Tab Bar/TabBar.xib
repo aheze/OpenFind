@@ -19,14 +19,14 @@
                 <outlet property="cameraIcon" destination="10d-KH-We3" id="u8P-Fk-Nbl"/>
                 <outlet property="containerHeightC" destination="0N9-Yw-gol" id="OMf-FW-fwv"/>
                 <outlet property="containerView" destination="sCo-YF-aez" id="RWn-Nl-yDX"/>
-                <outlet property="contentView" destination="iN0-l3-epB" id="CzQ-TV-7XN"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="yXR-jn-dDg"/>
                 <outlet property="controlsReferenceView" destination="gDY-hq-DTd" id="04Y-ao-Meb"/>
-                <outlet property="listsControls" destination="rdg-yk-Rn2" id="1JN-ky-R88"/>
+                <outlet property="listsControls" destination="rdg-yk-Rn2" id="qko-kq-Y5d"/>
                 <outlet property="listsDeleteButton" destination="cyJ-A4-ML3" id="IBJ-g5-kKK"/>
                 <outlet property="listsIcon" destination="Su2-wl-aUw" id="kaa-Mm-Jsc"/>
                 <outlet property="listsSelectionLabel" destination="HR2-CF-DNb" id="fLf-hG-iv4"/>
-                <outlet property="photoSlideControls" destination="5ex-iS-SQb" id="Ich-1W-oqY"/>
-                <outlet property="photosControls" destination="F0d-ei-2Yx" id="4eg-PQ-kg8"/>
+                <outlet property="photoSlideControls" destination="5ex-iS-SQb" id="Pqh-ev-D2N"/>
+                <outlet property="photosControls" destination="F0d-ei-2Yx" id="l0u-xk-TVE"/>
                 <outlet property="photosDeleteButton" destination="FCf-p6-NPI" id="ql2-R1-sQc"/>
                 <outlet property="photosIcon" destination="EOH-Do-hxB" id="ygD-GT-lCx"/>
                 <outlet property="shadeView" destination="bCs-J2-IPj" id="ZOU-Ze-Nfk"/>
@@ -41,7 +41,7 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PassthroughView" customModule="Find" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="447"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -178,7 +178,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-104.34782608695653" y="-237.38839285714283"/>
         </view>
-        <view contentMode="scaleToFill" id="rdg-yk-Rn2" customClass="ReceiveTouchView" customModule="Find" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="rdg-yk-Rn2">
             <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -211,7 +211,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="625" y="-2"/>
         </view>
-        <view contentMode="scaleToFill" id="F0d-ei-2Yx" customClass="ReceiveTouchView" customModule="Find" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="F0d-ei-2Yx">
             <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -264,7 +264,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="625" y="-71"/>
         </view>
-        <view contentMode="scaleToFill" id="5ex-iS-SQb" customClass="ReceiveTouchView" customModule="Find" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="5ex-iS-SQb">
             <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
