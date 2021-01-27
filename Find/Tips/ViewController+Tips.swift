@@ -23,7 +23,21 @@ struct TipViews {
         localTipView2?.dismiss()
         localTipView3?.dismiss()
         currentLocalStep = 0
+        
+        resetToBeginning?()
     }
+    static func finishTutorial() {
+        inTutorial = false
+        
+        localTipView1?.dismiss()
+        localTipView2?.dismiss()
+        localTipView3?.dismiss()
+        currentLocalStep = 0
+        
+        resetToBeginning?()
+    }
+    
+    static var resetToBeginning: (() -> Void)? /// change empty view back to beginning
 }
 extension ViewController {
     func configurePreferences() {

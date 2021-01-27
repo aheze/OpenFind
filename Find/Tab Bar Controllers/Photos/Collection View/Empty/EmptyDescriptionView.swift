@@ -21,10 +21,11 @@ class EmptyDescriptionView: UIView {
     var tutorialActive = false
     @IBOutlet weak var showMeHowButton: UIButton!
     @IBAction func showMeHowPressed(_ sender: Any) {
+        tutorialActive.toggle()
         if tutorialActive {
-            
-        } else {
             showTutorial()
+        } else {
+            stopTutorial()
         }
     }
     
@@ -48,6 +49,12 @@ class EmptyDescriptionView: UIView {
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         headerLabel.morphingEffect = .evaporate
+        
+        TipViews.resetToBeginning = { [weak self] in
+            guard let self = self else { return }
+            self.tutorialActive = false
+            self.makeTutorialButtonEnabled()
+        }
     }
     
     func change(from previousFilter: PhotoFilter, to photoFilter: PhotoFilter) {

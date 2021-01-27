@@ -16,7 +16,7 @@ extension EmptyDescriptionView {
     }
     func stopTutorial() {
         makeTutorialButtonEnabled()
-        
+        TipViews.cancelTutorial()
     }
     
     func makeTutorialButtonEnabled() {
@@ -34,13 +34,5 @@ extension EmptyDescriptionView {
     }
     func makeTutorialButtonCurrentlyActive() { /// stop tutorial
         showMeHowButton.setTitle("Stop tutorial", for: .normal)
-    }
-    
-    func showLocalTutorial() {
-        
-        
-        
-        
-        
     }
 }

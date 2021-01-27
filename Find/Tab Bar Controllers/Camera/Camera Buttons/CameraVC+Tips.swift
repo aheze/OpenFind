@@ -49,8 +49,7 @@ extension CameraViewController: EasyTipViewDelegate {
         }
         
         if tipView == TipViews.localTipView3 {
-            print("cancel it")
-            TipViews.cancelTutorial()
+            TipViews.finishTutorial()
         }
     }
 }
