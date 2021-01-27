@@ -15,6 +15,7 @@ pod 'SPAlert'
 pod 'SwiftyJSON', '~> 4.0'
 pod 'WhatsNewKit'
 pod 'SwiftRichString'
+pod 'EasyTipView', '~> 2.1'
 
 end
 

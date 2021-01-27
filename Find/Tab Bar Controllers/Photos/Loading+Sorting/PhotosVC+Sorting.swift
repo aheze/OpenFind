@@ -54,12 +54,12 @@ extension PhotosViewController {
     func getSliderCallback() {
         segmentedSlider.pressedFilter = { [weak self] filter in
             guard let self = self else { return }
+            self.sortPhotos(from: self.currentFilter, with: filter)
             self.currentFilter = filter
-            self.sortPhotos(with: filter)
             self.applySnapshot(animatingDifferences: true)
         }
     }
-    func sortPhotos(with filter: PhotoFilter) {
+    func sortPhotos(from previousFilter: PhotoFilter? = nil, with filter: PhotoFilter) {
         var allPhotosToDisplay = [FindPhoto]()
         
         switch filter {
@@ -110,5 +110,18 @@ extension PhotosViewController {
         }
         
         self.allPhotosToDisplay = allPhotosToDisplay
+        
+        if allPhotosToDisplay.isEmpty {
+            print("not empty")
+            if let previousFilter = previousFilter {
+                showEmptyView(previously: previousFilter, to: filter)
+            }
+            findButton.isEnabled = false
+            selectButton.isEnabled = false
+        } else {
+            hideEmptyView()
+            findButton.isEnabled = true
+            selectButton.isEnabled = true
+        }
     }
 }

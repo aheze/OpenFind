@@ -37,6 +37,8 @@ class PhotosViewController: UIViewController {
     var refreshNeededAfterDismissPhoto = false /// refresh as soon as dismiss photo slides
     var refreshing = false /// currently refreshing data, prevent select cell
     
+    var emptyDescriptionView: EmptyDescriptionView?
+    
     // MARK: Photo selection
     var showSelectionControls: ((Bool) -> Void)? /// show or hide
     var updateActions: ((ChangeActions) -> Void)? /// switch star/unstar and cache/uncache
