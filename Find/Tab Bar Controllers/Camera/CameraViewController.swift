@@ -13,7 +13,6 @@ import CoreMotion
 import RealmSwift
 import SnapKit
 import WhatsNewKit
-import EasyTipView
 
 protocol ToggleCreateCircle: class {
     func toggle(created: Bool)

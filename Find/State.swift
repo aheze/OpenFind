@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import EasyTipView
 
 enum Direction {
     case up

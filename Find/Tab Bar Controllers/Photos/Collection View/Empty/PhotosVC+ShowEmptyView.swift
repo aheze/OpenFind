@@ -11,12 +11,14 @@ import SnapKit
 
 extension PhotosViewController {
     func showEmptyView(previously: PhotoFilter, to: PhotoFilter) {
+        print("showing!!")
         if let emptyDescriptionView = emptyDescriptionView {
             emptyDescriptionView.change(from: previously, to: to)
             UIView.animate(withDuration: 0.3) {
                 emptyDescriptionView.alpha = 1
             }
         } else {
+            print("new")
             let emptyView = EmptyDescriptionView()
             emptyView.alpha = 0
             view.addSubview(emptyView)
@@ -24,10 +26,13 @@ extension PhotosViewController {
                 make.edges.equalTo(view.safeAreaLayoutGuide)
             }
             
+            print("change: from \(previously) to \(to)")
             emptyView.change(from: previously, to: to)
             UIView.animate(withDuration: 0.3) {
                 emptyView.alpha = 1
             }
+            
+            emptyView.startTutorial = startTutorial
             
             self.emptyDescriptionView = emptyView
         }

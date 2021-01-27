@@ -7,8 +7,24 @@
 //
 
 import UIKit
-import EasyTipView
 
+struct TipViews {
+    static var inTutorial = false
+    
+    static var localTipView1: EasyTipView?
+    static var localTipView2: EasyTipView?
+    static var localTipView3: EasyTipView?
+    static var currentLocalStep = 0 /// what step currently on
+    
+    static func cancelTutorial() {
+        inTutorial = false
+        
+        localTipView1?.dismiss()
+        localTipView2?.dismiss()
+        localTipView3?.dismiss()
+        currentLocalStep = 0
+    }
+}
 extension ViewController {
     func configurePreferences() {
         
@@ -24,9 +40,22 @@ extension ViewController {
         preferences.positioning.bubbleInsets = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
         preferences.animating.dismissTransform = CGAffineTransform(translationX: 0, y: -6).scaledBy(x: 0.6, y: 0.6)
         
-        /*
-         * Optionally you can make these preferences global for all future EasyTipViews
-         */
         EasyTipView.globalPreferences = preferences
+    }
+}
+
+extension ViewController: EasyTipViewDelegate {
+    func easyTipViewDidTap(_ tipView: EasyTipView) {
+        print("tapped")
+    }
+    
+    func easyTipViewDidDismiss(_ tipView: EasyTipView) {
+        print("dismissed")
+        if tipView == TipViews.localTipView1 || tipView == TipViews.localTipView2 {
+            print("yes, dismiss")
+            if TipViews.inTutorial {
+                TipViews.cancelTutorial()
+            }
+        }
     }
 }

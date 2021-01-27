@@ -185,7 +185,7 @@ public extension EasyTipView {
      
      - parameter completion: Completion block to be executed after the EasyTipView is dismissed.
      */
-    func dismiss(withCompletion completion: (() -> ())? = nil){
+    func dismiss(userDismissed: Bool = false, withCompletion completion: (() -> ())? = nil){
         
         let damping = preferences.animating.springDamping
         let velocity = preferences.animating.springVelocity
@@ -195,7 +195,9 @@ public extension EasyTipView {
             self.alpha = self.preferences.animating.dismissFinalAlpha
         }) { (finished) -> Void in
             completion?()
-            self.delegate?.easyTipViewDidDismiss(self)
+            if userDismissed {
+                self.delegate?.easyTipViewDidDismiss(self)
+            }
             self.removeFromSuperview()
             self.transform = CGAffineTransform.identity
         }
@@ -545,7 +547,7 @@ open class EasyTipView: UIView {
     @objc func handleTap() {
         self.delegate?.easyTipViewDidTap(self)
         guard preferences.animating.dismissOnTap else { return }
-        dismiss()
+        dismiss(userDismissed: true)
     }
     
     // MARK:- Drawing -

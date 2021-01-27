@@ -28,6 +28,10 @@ extension CameraViewController {
             
             if CameraState.isPaused {
                 self.pauseLivePreview()
+                
+                if TipViews.currentLocalStep == 2 {
+                    self.startLocalThirdStep()
+                }
                 //            let hasPausedBefore = self.defaults.bool(forKey: "hasPausedBefore")
                 if !false {
                     //                self.defaults.set(true, forKey: "hasPausedBefore")

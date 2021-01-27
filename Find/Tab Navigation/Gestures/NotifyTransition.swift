@@ -20,8 +20,12 @@ extension ViewController {
         case is CameraViewController:
             print("ended at camera")
             startCamera()
-            
             shouldHaveLightStatusBar = true
+            
+            if TipViews.currentLocalStep == 1 {
+                startLocalSecondStep()
+            }
+            
         case is ListsNavController:
             print("ended at lists")
             startCameraShutoff()

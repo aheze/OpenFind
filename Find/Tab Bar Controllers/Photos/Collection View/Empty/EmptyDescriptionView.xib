@@ -15,6 +15,7 @@
                 <outlet property="descriptionLabel" destination="2gt-g2-aYx" id="KRy-IS-5dv"/>
                 <outlet property="headerLabel" destination="fBd-2j-USP" id="3BT-jI-oLx"/>
                 <outlet property="imageView" destination="lr7-Wk-f3a" id="hxa-4j-0Ly"/>
+                <outlet property="showMeHowButton" destination="j7r-dh-mKc" id="BFw-IU-kHb"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -39,19 +40,29 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photos saved from Find will appear here" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gt-g2-aYx">
-                    <rect key="frame" x="64" y="367" width="286" height="45.5"/>
+                    <rect key="frame" x="64" y="369" width="286" height="45.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <color key="textColor" systemColor="secondaryLabelColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j7r-dh-mKc">
+                    <rect key="frame" x="146.5" y="420.5" width="121" height="35"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                    <state key="normal" title="Show me how"/>
+                    <connections>
+                        <action selector="showMeHowPressed:" destination="-1" eventType="touchUpInside" id="tLH-V3-XiS"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fBd-2j-USP" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="BHa-Mc-ID1"/>
-                <constraint firstItem="2gt-g2-aYx" firstAttribute="top" secondItem="fBd-2j-USP" secondAttribute="bottom" id="EVO-Ya-Xrh"/>
+                <constraint firstItem="2gt-g2-aYx" firstAttribute="top" secondItem="fBd-2j-USP" secondAttribute="bottom" constant="2" id="EVO-Ya-Xrh"/>
                 <constraint firstItem="fBd-2j-USP" firstAttribute="top" secondItem="lr7-Wk-f3a" secondAttribute="bottom" constant="12" id="GhM-NV-usW"/>
                 <constraint firstItem="2gt-g2-aYx" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="64" id="Rw2-99-jZ6"/>
+                <constraint firstItem="j7r-dh-mKc" firstAttribute="top" secondItem="2gt-g2-aYx" secondAttribute="bottom" constant="6" id="VR9-jJ-XcF"/>
+                <constraint firstItem="j7r-dh-mKc" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="VcF-M2-wJT"/>
                 <constraint firstItem="lr7-Wk-f3a" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="WJL-7j-usc"/>
                 <constraint firstItem="lr7-Wk-f3a" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="82" id="csK-kN-OWt"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2gt-g2-aYx" secondAttribute="trailing" constant="64" id="ikN-r5-GkG"/>

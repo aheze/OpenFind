@@ -7,19 +7,32 @@
 //
 
 import UIKit
-import EasyTipView
 
 extension CameraViewController {
     func showCacheTip() {
+        if !TipViews.inTutorial {
+            var preferences = EasyTipView.globalPreferences
+            preferences.drawing.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)
+            preferences.drawing.arrowPosition = .bottom
+            if cacheTipView == nil, !dismissedCacheTipAlready {
+                let tipView = EasyTipView(text: "Cache to get more accurate results", preferences: preferences, delegate: self)
+                tipView.show(forView: cache)
+                self.cacheTipView = tipView
+            }
+        }
+    }
+    
+    func startLocalThirdStep() {
+        TipViews.localTipView2?.dismiss()
+        
         var preferences = EasyTipView.globalPreferences
         preferences.drawing.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)
         preferences.drawing.arrowPosition = .bottom
-        print("cache tip view is: \(cacheTipView), dismmised befroe: \(dismissedCacheTipAlready)")
-        if cacheTipView == nil, !dismissedCacheTipAlready {
-            let tipView = EasyTipView(text: "Cache to get more accurate results", preferences: preferences, delegate: self)
-            tipView.show(forView: cache)
-            self.cacheTipView = tipView
-        }
+        let tipView = EasyTipView(text: "Tap here to save", preferences: preferences, delegate: self)
+        tipView.show(forView: saveToPhotos)
+        
+        TipViews.localTipView3 = tipView
+        TipViews.currentLocalStep = 3
     }
 }
 
@@ -33,6 +46,11 @@ extension CameraViewController: EasyTipViewDelegate {
         if tipView == cacheTipView {
             cacheTipView = nil
             dismissedCacheTipAlready = true
+        }
+        
+        if tipView == TipViews.localTipView3 {
+            print("cancel it")
+            TipViews.cancelTutorial()
         }
     }
 }

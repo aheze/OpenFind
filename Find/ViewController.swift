@@ -22,6 +22,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var shadeView: UIView!
     
+    
     var globalUrl : URL = URL(fileURLWithPath: "")
     var highlightColor = "00aeef"
     
@@ -95,6 +96,20 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 self.shouldHaveLightStatusBar = presenting
                 UIView.animate(withDuration: 0.2) {
                     self.setNeedsStatusBarAppearanceUpdate()
+                }
+            }
+            viewController.startTutorial = { [weak self] filter in
+                guard let self = self else { return }
+                switch filter {
+                
+                case .local:
+                    self.startLocalTutorial()
+                case .starred:
+                    print("star")
+                case .cached:
+                    print("star")
+                case .all:
+                    break
                 }
             }
             

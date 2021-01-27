@@ -10,13 +10,25 @@ import UIKit
 
 class EmptyDescriptionView: UIView {
     
+    var startTutorial: ((PhotoFilter) -> Void)?
+    
     @IBOutlet var contentView: UIView!
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var headerLabel: LTMorphingLabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    var currentDisplayedFilter = PhotoFilter.local
+    var tutorialActive = false
+    @IBOutlet weak var showMeHowButton: UIButton!
+    @IBAction func showMeHowPressed(_ sender: Any) {
+        if tutorialActive {
+            
+        } else {
+            showTutorial()
+        }
+    }
+    
+    var currentDisplayedFilter = PhotoFilter.all
     
     
     override init(frame: CGRect) {
@@ -51,6 +63,7 @@ class EmptyDescriptionView: UIView {
                 descriptionText = "Photos saved from Find will appear here"
                 newImage = UIImage(named: "LocalPhotos")
                 flipFromRight = true
+                showMeHowButton.tintColor = UIColor(named: "100Blue")
             case .starred:
                 headerText = "Starred"
                 descriptionText = "Star the photos that you view the most"
@@ -58,6 +71,7 @@ class EmptyDescriptionView: UIView {
                 if previousFilter != .local {
                     flipFromRight = true
                 }
+                showMeHowButton.tintColor = UIColor(named: "Gold")
             case .cached:
                 headerText = "Cached"
                 descriptionText = "Results will appear instantly when finding in cached photos"
@@ -65,6 +79,7 @@ class EmptyDescriptionView: UIView {
                 if previousFilter == .all {
                     flipFromRight = true
                 }
+                showMeHowButton.tintColor = UIColor(named: "100Blue")
             case .all:
                 headerText = ""
                 descriptionText = ""
