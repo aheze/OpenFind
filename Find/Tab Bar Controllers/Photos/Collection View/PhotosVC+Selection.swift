@@ -19,6 +19,9 @@ extension PhotosViewController {
     func selectPressed() {
         if allPhotosToDisplay.count == 0 {
             print("no photos")
+            if TipViews.inTutorial {
+                TipViews.finishTutorial()
+            }
         } else {
             selectButtonSelected.toggle()
             showSelectionControls?(selectButtonSelected)
@@ -26,6 +29,10 @@ extension PhotosViewController {
                 selectButton.title = "Cancel"
                 collectionView.allowsMultipleSelection = true
                 segmentedSlider.showNumberOfSelected(show: true)
+                
+                if TipViews.currentStarStep == 2 || TipViews.currentCacheStep == 2 {
+                    pressedSelectTip?()
+                }
             } else {
                 selectButton.title = "Select"
                 collectionView.allowsMultipleSelection = false
@@ -33,6 +40,10 @@ extension PhotosViewController {
                 deselectAllPhotos()
                 updateActions?(.shouldStar)
                 updateActions?(.shouldCache)
+                
+                if TipViews.currentStarStep == 3 || TipViews.currentCacheStep == 3 {
+                    TipViews.finishTutorial()
+                }
             }
         }
     }

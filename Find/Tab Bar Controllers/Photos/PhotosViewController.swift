@@ -40,6 +40,7 @@ class PhotosViewController: UIViewController {
     // MARK: Tips
     var emptyDescriptionView: EmptyDescriptionView?
     var startTutorial: ((PhotoFilter) -> Void)?
+    var pressedSelectTip: (() -> Void)? /// step 3 of star
     
     // MARK: Photo selection
     var showSelectionControls: ((Bool) -> Void)? /// show or hide

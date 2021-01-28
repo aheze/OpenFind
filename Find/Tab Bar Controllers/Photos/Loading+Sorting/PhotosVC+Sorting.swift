@@ -54,6 +54,7 @@ extension PhotosViewController {
     func getSliderCallback() {
         segmentedSlider.pressedFilter = { [weak self] filter in
             guard let self = self else { return }
+            
             self.sortPhotos(from: self.currentFilter, with: filter)
             self.currentFilter = filter
             self.applySnapshot(animatingDifferences: true)
@@ -103,6 +104,13 @@ extension PhotosViewController {
             }
             self.monthsToDisplay = filteredMonths
         case .all:
+            if TipViews.currentStarStep == 1 {
+                self.startStarSecondStep()
+            }
+            if TipViews.currentCacheStep == 1 {
+                self.startCacheSecondStep()
+            }
+            
             self.monthsToDisplay = self.allMonths
             for month in self.allMonths {
                 allPhotosToDisplay += month.photos

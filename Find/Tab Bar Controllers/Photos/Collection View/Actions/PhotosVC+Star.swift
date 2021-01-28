@@ -10,6 +10,11 @@ import UIKit
 
 extension PhotosViewController {
     func star(_ shouldStar: Bool) {
+        
+        if TipViews.inTutorial {
+            TipViews.finishTutorial()
+        }
+        
         var changedIndexPaths = [IndexPath]()
         if shouldStar {
             for indexPath in indexPathsSelected {

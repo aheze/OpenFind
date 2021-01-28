@@ -11,7 +11,6 @@ import SwiftEntryKit
 
 extension PhotosViewController: ReturnCachedPhotos {
     func giveCachedPhotos(photos: [FindPhoto], returnResult: CacheReturn) {
-        print("Given: \(photos)")
         
         var paths = [IndexPath]()
         for photo in photos {
@@ -29,14 +28,17 @@ extension PhotosViewController: ReturnCachedPhotos {
 
 extension PhotosViewController {
     func cache(_ shouldCache: Bool) {
+        
+        if TipViews.inTutorial {
+            TipViews.finishTutorial()
+        }
+        
         var selectedPhotos = [FindPhoto]()
         for indexPath in indexPathsSelected {
             if let item = dataSource.itemIdentifier(for: indexPath) {
                 selectedPhotos.append(item)
             }
         }
-        
-        print("Should cache: \(shouldCache)")
         
         if shouldCache == true {
             

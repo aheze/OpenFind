@@ -16,23 +16,32 @@ struct TipViews {
     static var localTipView3: EasyTipView?
     static var currentLocalStep = 0 /// what step currently on
     
-    static func cancelTutorial() {
-        inTutorial = false
-        
-        localTipView1?.dismiss()
-        localTipView2?.dismiss()
-        localTipView3?.dismiss()
-        currentLocalStep = 0
-        
-        resetToBeginning?()
-    }
+    static var starTipView1: EasyTipView?
+    static var starTipView2: EasyTipView?
+    static var starTipView3: EasyTipView?
+    static var currentStarStep = 0 /// what step currently on
+    
+    static var cacheTipView1: EasyTipView?
+    static var cacheTipView2: EasyTipView?
+    static var cacheTipView3: EasyTipView?
+    static var currentCacheStep = 0 /// what step currently on
+    
     static func finishTutorial() {
         inTutorial = false
         
         localTipView1?.dismiss()
         localTipView2?.dismiss()
         localTipView3?.dismiss()
+        starTipView1?.dismiss()
+        starTipView2?.dismiss()
+        starTipView3?.dismiss()
+        cacheTipView1?.dismiss()
+        cacheTipView2?.dismiss()
+        cacheTipView3?.dismiss()
+        
         currentLocalStep = 0
+        currentStarStep = 0
+        currentCacheStep = 0
         
         resetToBeginning?()
     }
@@ -65,10 +74,16 @@ extension ViewController: EasyTipViewDelegate {
     
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {
         print("dismissed")
-        if tipView == TipViews.localTipView1 || tipView == TipViews.localTipView2 {
+        if
+            tipView == TipViews.localTipView1 ||
+                tipView == TipViews.localTipView2 ||
+                tipView == TipViews.starTipView1 ||
+                tipView == TipViews.starTipView3 ||
+                tipView == TipViews.cacheTipView1 ||
+                tipView == TipViews.cacheTipView3 {
             print("yes, dismiss")
             if TipViews.inTutorial {
-                TipViews.cancelTutorial()
+                TipViews.finishTutorial()
             }
         }
     }

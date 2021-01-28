@@ -16,20 +16,22 @@ extension EmptyDescriptionView {
     }
     func stopTutorial() {
         makeTutorialButtonEnabled()
-        TipViews.cancelTutorial()
+        TipViews.finishTutorial()
     }
     
     func makeTutorialButtonEnabled() {
-        showMeHowButton.setTitle("Show me how", for: .normal)
-        switch currentDisplayedFilter {
-        case .local:
-            showMeHowButton.tintColor = UIColor(named: "100Blue")
-        case .starred:
-            showMeHowButton.tintColor = UIColor(named: "Gold")
-        case .cached:
-            showMeHowButton.tintColor = UIColor(named: "100Blue")
-        case .all:
-            break
+        DispatchQueue.main.async {
+            self.showMeHowButton.setTitle("Show me how", for: .normal)
+            switch self.currentDisplayedFilter {
+            case .local:
+                self.showMeHowButton.tintColor = UIColor(named: "100Blue")
+            case .starred:
+                self.showMeHowButton.tintColor = UIColor(named: "Gold")
+            case .cached:
+                self.showMeHowButton.tintColor = UIColor(named: "100Blue")
+            case .all:
+                break
+            }
         }
     }
     func makeTutorialButtonCurrentlyActive() { /// stop tutorial

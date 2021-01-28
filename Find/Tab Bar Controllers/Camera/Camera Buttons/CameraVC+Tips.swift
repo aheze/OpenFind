@@ -29,7 +29,7 @@ extension CameraViewController {
         preferences.drawing.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)
         preferences.drawing.arrowPosition = .bottom
         let tipView = EasyTipView(text: "Tap here to save", preferences: preferences, delegate: self)
-        tipView.show(forView: saveToPhotos)
+        tipView.show(forView: saveToPhotos, withinSuperview: view)
         
         TipViews.localTipView3 = tipView
         TipViews.currentLocalStep = 3

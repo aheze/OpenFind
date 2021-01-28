@@ -13,7 +13,7 @@ extension ViewController {
         TipViews.inTutorial = true
         
         var preferences = EasyTipView.globalPreferences
-        preferences.drawing.backgroundColor = UIColor(named: "100Blue")!
+        preferences.drawing.backgroundColor = UIColor(named: "PopTipLocal")!
         preferences.drawing.arrowPosition = .bottom
         
         preferences.drawing.shadowColor = #colorLiteral(red: 0.4207544327, green: 0.4207544327, blue: 0.4207544327, alpha: 1)
@@ -32,10 +32,11 @@ extension ViewController {
         preferences.drawing.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)
         preferences.drawing.arrowPosition = .bottom
         let tipView = EasyTipView(text: "Pause the preview", preferences: preferences, delegate: self)
-        tipView.show(forView: camera.cameraIconHolder)
+        tipView.show(forView: camera.cameraIconHolder, withinSuperview: camera.view)
         
         
         TipViews.localTipView2 = tipView
         TipViews.currentLocalStep = 2
     }
+    
 }

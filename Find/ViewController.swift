@@ -101,15 +101,23 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             viewController.startTutorial = { [weak self] filter in
                 guard let self = self else { return }
                 switch filter {
-                
                 case .local:
                     self.startLocalTutorial()
                 case .starred:
-                    print("star")
+                    self.startStarTutorial()
                 case .cached:
-                    print("star")
+                    self.startCacheTutorial()
                 case .all:
                     break
+                }
+            }
+            viewController.pressedSelectTip = { [weak self] in
+                guard let self = self else { return }
+                print("start thirs")
+                if TipViews.currentStarStep == 2 {
+                    self.startStarThirdStep()
+                } else if TipViews.currentCacheStep == 2 {
+                    self.startCacheThirdStep()
                 }
             }
             
