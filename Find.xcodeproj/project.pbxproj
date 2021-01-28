@@ -51,6 +51,7 @@
 		3C3DF5FB25B52AA500DD7A10 /* PhotoFindVC+CollectionCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3DF5FA25B52AA500DD7A10 /* PhotoFindVC+CollectionCoordinates.swift */; };
 		3C3DF5FF25B52CF000DD7A10 /* PhotoFindVC+ZoomDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3DF5FE25B52CF000DD7A10 /* PhotoFindVC+ZoomDelegate.swift */; };
 		3C42C44625C32B15004DC6E9 /* CameraVC+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C42C44525C32B15004DC6E9 /* CameraVC+Lists.swift */; };
+		3C42C44D25C33D6B004DC6E9 /* FindBar+Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C42C44C25C33D6B004DC6E9 /* FindBar+Lists.swift */; };
 		3C4A8E4925AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */; };
 		3C4B6D7325B23460001F501A /* NavigationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4B6D7225B23460001F501A /* NavigationViewModifier.swift */; };
 		3C4C96AB25B5F9DC009FDE8D /* SlideVC+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4C96AA25B5F9DC009FDE8D /* SlideVC+Draw.swift */; };
@@ -309,6 +310,7 @@
 		3C3DF5FA25B52AA500DD7A10 /* PhotoFindVC+CollectionCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+CollectionCoordinates.swift"; sourceTree = "<group>"; };
 		3C3DF5FE25B52CF000DD7A10 /* PhotoFindVC+ZoomDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+ZoomDelegate.swift"; sourceTree = "<group>"; };
 		3C42C44525C32B15004DC6E9 /* CameraVC+Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Lists.swift"; sourceTree = "<group>"; };
+		3C42C44C25C33D6B004DC6E9 /* FindBar+Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FindBar+Lists.swift"; sourceTree = "<group>"; };
 		3C4A8E4825AE5BDD007D644D /* PhotosVC+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+ActivityIndicator.swift"; sourceTree = "<group>"; };
 		3C4B6D7225B23460001F501A /* NavigationViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModifier.swift; sourceTree = "<group>"; };
 		3C4C96AA25B5F9DC009FDE8D /* SlideVC+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SlideVC+Draw.swift"; sourceTree = "<group>"; };
@@ -659,6 +661,7 @@
 				3C8F116D25AD5DA80091402B /* CustomButton.swift */,
 				495DAD3824A6B2E500D5F844 /* FindBar.xib */,
 				4953F3C324171EE200690E53 /* FindBar.swift */,
+				3C42C44C25C33D6B004DC6E9 /* FindBar+Lists.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1558,6 +1561,7 @@
 				3CFF312525AA490900D3C56D /* PhotoSlidesVC+Gestures.swift in Sources */,
 				3C8D58A525B7FD7300EA226D /* PhotoSlidesVC+Cache.swift in Sources */,
 				3C4C96AB25B5F9DC009FDE8D /* SlideVC+Draw.swift in Sources */,
+				3C42C44D25C33D6B004DC6E9 /* FindBar+Lists.swift in Sources */,
 				3C4DE6FF259AD3FF0037D104 /* SaveToPhotosButton.swift in Sources */,
 				495DAD4724A81F4600D5F844 /* WhatsNewConfiguration.swift in Sources */,
 				3C6EE6B625A2AB350078462A /* CameraSettingsView.swift in Sources */,

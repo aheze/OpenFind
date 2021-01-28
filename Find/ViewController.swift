@@ -214,6 +214,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 print("current lists in vc: \(self.camera.selectedLists)")
                 
                 self.camera.refreshLists()
+                self.photos.photoFindViewController.findBar?.refreshLists()
             }
             tabBarView.listsDeletePressed = { [weak self] in
                 guard let self = self else { return }
