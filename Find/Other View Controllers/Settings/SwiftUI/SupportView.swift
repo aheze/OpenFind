@@ -19,6 +19,11 @@ struct HelpView: View {
     
     let dataSource = URL(string: "https://raw.githubusercontent.com/aheze/FindInfo/DataSource/_data/supportdocs_datasource.json")!
     let options = SupportOptions(
+        categories: [
+            .init(tag: "settings", displayName: "Settings"),
+            .init(tag: "photos", displayName: "Photos"),
+            .init(tag: "lists", displayName: "Lists")
+        ],
         navigationBar: .init(
             title: "Help",
             titleColor: UIColor.white,
@@ -30,7 +35,7 @@ struct HelpView: View {
             placeholder: "Type here to find",
             placeholderColor: UIColor.white.withAlphaComponent(0.75),
             textColor: UIColor.white,
-            tintColor: UIColor.green,
+            tintColor: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1),
             backgroundColor: UIColor.white.withAlphaComponent(0.3),
             clearButtonMode: .whileEditing
         ),
