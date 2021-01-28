@@ -208,11 +208,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 }
             }
             viewController.listsChanged = { [weak self] in
-                print("change")
                 guard let self = self else { return }
-                print("lists changed")
-                print("current lists in vc: \(self.camera.selectedLists)")
-                
                 self.camera.refreshLists()
                 self.photos.photoFindViewController.findBar?.refreshLists()
             }
