@@ -155,6 +155,8 @@ extension ListsController {
             self.collectionView.allowsMultipleSelection = false
             self.deselectAllItems()
             self.addButton.isEnabled = true
+            
+            self.listsChanged?()
         }))
         
         let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")

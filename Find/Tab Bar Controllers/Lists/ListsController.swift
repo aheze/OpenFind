@@ -46,6 +46,7 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
     }
     
     var presentingList: ((Bool) -> Void)? /// update status bar color
+    var listsChanged: (() -> Void)? /// lists refreshed or added/deleted
 
     let defaults = UserDefaults.standard
     func animateCloseQuickTour(quickTourView: TutorialHeader) {
@@ -118,7 +119,8 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
         let alertView = SPAlertView(title: deletedList, message: tapToDismiss, preset: SPAlertPreset.done)
         alertView.duration = 2.6
         alertView.present()
-        
+        print("chaing list")
+        listsChanged?()
     }
     
     let realm = try! Realm()
@@ -236,7 +238,7 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
         collectionView?.performBatchUpdates({
             self.collectionView?.insertItems(at: [indexPath])
         }, completion: nil)
-        
+        listsChanged?()
     }
     func update(index: Int, name: String, description: String, contents: [String], imageName: String, imageColor: String) {
         if let listToEdit = listCategories?[index] {
@@ -256,6 +258,7 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
                 print("Error saving category \(error)")
             }
         }
+        listsChanged?()
         collectionView.reloadData()
     }
 }

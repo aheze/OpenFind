@@ -207,6 +207,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     self.setNeedsStatusBarAppearanceUpdate()
                 }
             }
+            viewController.listsChanged = { [weak self] in
+                print("change")
+                guard let self = self else { return }
+                print("lists changed")
+                print("current lists in vc: \(self.camera.selectedLists)")
+                
+                self.camera.refreshLists()
+            }
             tabBarView.listsDeletePressed = { [weak self] in
                 guard let self = self else { return }
                 viewController.listDeleteButtonPressed()

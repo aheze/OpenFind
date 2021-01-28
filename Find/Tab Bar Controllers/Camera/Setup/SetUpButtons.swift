@@ -22,7 +22,6 @@ extension CameraViewController: UIAdaptivePresentationControllerDelegate {
         
         SwiftEntryKit.dismiss()
         sortSearchTerms()
-//        startVideo()
         loadListsRealm()
         injectListDelegate?.resetWithLists(lists: editableListCategories)
     }

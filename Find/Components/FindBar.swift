@@ -584,6 +584,7 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
                 editList.descriptionOfList = singleL.descriptionOfList
                 editList.iconImageName = singleL.iconImageName
                 editList.iconColorName = singleL.iconColorName
+                editList.dateCreated = singleL.dateCreated
                 editList.orderIdentifier = index
                 var contents = [String]()
                 for singleCont in singleL.contents {

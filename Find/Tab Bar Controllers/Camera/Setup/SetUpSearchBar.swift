@@ -172,6 +172,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 editList.descriptionOfList = singleL.descriptionOfList
                 editList.iconImageName = singleL.iconImageName
                 editList.iconColorName = singleL.iconColorName
+                editList.dateCreated = singleL.dateCreated
                 editList.orderIdentifier = index
                 var contents = [String]()
                 for singleCont in singleL.contents {
@@ -184,24 +185,6 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             }
         }
         searchCollectionView.reloadData()
-    }
-    func tempResetLists() {
-
-        var tempArray = [EditableFindList]()
-        for singleList in selectedLists {
-            tempArray.append(singleList)
-        }
-
-        selectedLists.removeAll()
-        searchCollectionView.reloadData()
-        
-        for temp in tempArray {
-            injectListDelegate?.addList(list: temp)
-        }
-        searchCollectionView.performBatchUpdates({
-            searchCollectionView.reloadData()
-        }, completion: nil)
-        updateListsLayout(toType: "prepareForDisplayNew")
     }
     func setupSearchBar() {
 
@@ -230,7 +213,6 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let onlyPortraitSupported = NSLocalizedString("onlyPortraitSupported", comment: "SetupSearchBar def=Only Portrait view is currently supported.")
         let rotateToPortrait = NSLocalizedString("rotateToPortrait", comment: "SetupSearchBar def=Please rotate your iPad to Portrait view, then relaunch the app.")
         
-//        alternateWarningLabel.text = "Only Portrait view is currently supported.\nPlease rotate your iPad to Portrait view, then relaunch the app."
         alternateWarningLabel.text = "\(onlyPortraitSupported)\n\(rotateToPortrait)"
         
         warningView.alpha = 0

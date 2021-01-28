@@ -29,14 +29,12 @@ protocol StartedEditing: class {
 }
 class ListToolBar: UIView, InjectLists {
     
-    
     var lightMode = false {
         didSet {
             var effect = UIBlurEffect()
             if lightMode == true {
                 
                 /// based on the system, don't force dark
-                
                 effect = UIBlurEffect(style: .systemThickMaterial)
                 
                 removeAllButton.backgroundColor = UIColor(named: "Gray3")
@@ -55,23 +53,17 @@ class ListToolBar: UIView, InjectLists {
         }
     }
     
-   
-    
-    
-    
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     var editableListCategories = [EditableFindList]()
     
     
     weak var pressedButton: ToolbarButtonPressed?
     weak var selectedList: SelectedList?
-//    weak var changedText: ToolbarChangedText?
     weak var startedEditing: StartedEditing?
     
     @IBOutlet var contentView: UIView!
     
     @IBOutlet weak var visualBaseView: UIVisualEffectView!
-    //    @IBOutlet weak var baseView: UIView!
     
     @IBOutlet weak var removeAllButton: UIButton!
     
@@ -94,9 +86,6 @@ class ListToolBar: UIView, InjectLists {
         pressedButton?.buttonPressed(button: .done)
     }
     
-//    func updateToolbar() {
-//
-//    }
     func resetWithLists(lists: [EditableFindList]) {
         editableListCategories = lists
         collectionView.reloadData()
@@ -167,26 +156,24 @@ extension ListToolBar: UICollectionViewDelegate, UICollectionViewDataSource {
         editableListCategories.remove(at: indexPath.item)
         collectionView.deleteItems(at: [indexPath])
     }
-    
-    
 }
-extension ListToolBar {
-        func calculateWhereToInsert(component: EditableFindList) {
-            let componentOrderID = component.orderIdentifier
-            var indexPathToAppendTo = 0
-            for (index, singleComponent) in editableListCategories.enumerated() {
-                ///We are going to check if the singleComponent's order identifier is smaller than componentOrderID.
-                ///If it is smaller, we know we must insert the cell ONE to the right of this indexPath.
-                if singleComponent.orderIdentifier < componentOrderID {
-                    indexPathToAppendTo = index + 1
-                }
-            }
-    //        print("index... \(indexPathToAppendTo)")
-            ///Now that we know where to append the green cell, let's do it!
-            editableListCategories.insert(component, at: indexPathToAppendTo)
-            let newIndexPath = IndexPath(item: indexPathToAppendTo, section: 0)
-            collectionView.insertItems(at: [newIndexPath])
 
+extension ListToolBar {
+    func calculateWhereToInsert(component: EditableFindList) {
+        let componentOrderID = component.orderIdentifier
+        var indexPathToAppendTo = 0
+        for (index, singleComponent) in editableListCategories.enumerated() {
+            ///We are going to check if the singleComponent's order identifier is smaller than componentOrderID.
+            ///If it is smaller, we know we must insert the cell ONE to the right of this indexPath.
+            if singleComponent.orderIdentifier < componentOrderID {
+                indexPathToAppendTo = index + 1
+            }
         }
-     
+        
+        ///Now that we know where to append the green cell, let's do it!
+        editableListCategories.insert(component, at: indexPathToAppendTo)
+        let newIndexPath = IndexPath(item: indexPathToAppendTo, section: 0)
+        collectionView.insertItems(at: [newIndexPath])
+        
+    }
 }
