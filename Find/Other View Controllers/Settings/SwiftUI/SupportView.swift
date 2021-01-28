@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SupportDocs
 
 struct SupportView: View {
     var body: some View {
@@ -15,6 +16,39 @@ struct SupportView: View {
 }
 
 struct HelpView: View {
+    
+    let dataSource = URL(string: "https://raw.githubusercontent.com/aheze/FindInfo/DataSource/_data/supportdocs_datasource.json")!
+    let options = SupportOptions(
+        navigationBar: .init(
+            title: "Help",
+            titleColor: UIColor.white,
+            dismissButtonTitle: "Done",
+            buttonTintColor: UIColor.white,
+            backgroundColor: #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+        ),
+        searchBar: .init(
+            placeholder: "Type here to find",
+            placeholderColor: UIColor.white.withAlphaComponent(0.75),
+            textColor: UIColor.white,
+            tintColor: UIColor.green,
+            backgroundColor: UIColor.white.withAlphaComponent(0.3),
+            clearButtonMode: .whileEditing
+        ),
+        progressBar: .init(
+            foregroundColor: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1),
+            backgroundColor: UIColor.systemBackground
+        ),
+        listStyle: .insetGroupedListStyle,
+        navigationViewStyle: .defaultNavigationViewStyle,
+        other: .init(
+            activityIndicatorStyle: UIActivityIndicatorView.Style.large,
+            error404: URL(string: "https://aheze.github.io/FindInfo/404")!
+        )
+    )
+    @State var helpPresented = false
+    
+    @State var tutorialsPresented = false
+    
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -22,6 +56,7 @@ struct HelpView: View {
                 
                 Button(action: {
                     print("help center")
+                    helpPresented = true
                 }) {
                     HStack(spacing: 0) {
                         Label(text: "Help center")
@@ -42,6 +77,7 @@ struct HelpView: View {
                 
                 Button(action: {
                     print("Tutorials")
+                    tutorialsPresented = true
                 }) {
                     HStack(spacing: 0) {
                         Label(text: "Tutorials")
@@ -60,6 +96,34 @@ struct HelpView: View {
         }
         .background(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)))
         .cornerRadius(12)
+        .sheet(isPresented: $helpPresented, content: {
+            SupportDocsView(dataSourceURL: dataSource, options: options, isPresented: $helpPresented)
+        })
+        .actionSheet(isPresented: $tutorialsPresented, content: {
+            ActionSheet(title: Text("watchTutorial"), message: Text("whichTutorialWatch"), buttons: [
+                .default(Text("generalTutorial")) {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "GeneralTutorialViewController") as! GeneralTutorialViewController
+                    SettingsHoster.viewController?.present(vc, animated: true, completion: nil)
+                },
+                .default(Text("photosTutorial")) {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "HistoryTutorialViewController") as! HistoryTutorialViewController
+                    SettingsHoster.viewController?.present(vc, animated: true, completion: nil)
+                },
+                .default(Text("listsTutorial")) {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "ListsTutorialViewController") as! ListsTutorialViewController
+                    SettingsHoster.viewController?.present(vc, animated: true, completion: nil)
+                },
+                .default(Text("listsBuilderTutorial")) {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "ListsBuilderTutorialViewController") as! ListsBuilderTutorialViewController
+                    SettingsHoster.viewController?.present(vc, animated: true, completion: nil)
+                },
+                .cancel()
+            ])
+        })
     }
 }
 
