@@ -179,7 +179,7 @@ struct FeedbackView: View {
                          Push to the web view when tapped.
                          */
                         WebViewContainer(url: URL(string: "https://forms.gle/agdyoB9PFfnv8cU1A")!, progressBarOptions: SupportOptions.ProgressBar(foregroundColor: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1), backgroundColor: UIColor.clear))
-                        .navigationBarTitle(Text("Report a bugg"), displayMode: .inline)
+                        .navigationBarTitle(Text("Report a bug"), displayMode: .inline)
                         .edgesIgnoringSafeArea([.leading, .bottom, .trailing]) /// Allow the web view to go under the home indicator, on devices similar to the iPhone X.
                 ) {
                     HStack(spacing: 0) {

@@ -20,6 +20,9 @@ extension ViewController {
                 subView.removeFromSuperview()
             }
             self.camera.drawHighlights(highlights: self.camera.currentComponents)
+            
+            self.photos.photoFindViewController.findBar.sortSearchTerms()
+            self.photos.photoFindViewController.tableView?.reloadData()
         }
     }
 }
