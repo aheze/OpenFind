@@ -32,9 +32,9 @@ extension CameraViewController {
                 if TipViews.currentLocalStep == 2 {
                     self.startLocalThirdStep()
                 }
-                //            let hasPausedBefore = self.defaults.bool(forKey: "hasPausedBefore")
-                if !false {
-                    //                self.defaults.set(true, forKey: "hasPausedBefore")
+                let hasPausedBefore = UserDefaults.standard.bool(forKey: "hasPausedBefore")
+                if !hasPausedBefore {
+                    UserDefaults.standard.set(true, forKey: "hasPausedBefore")
                     self.showCacheTip()
                 }
             } else {

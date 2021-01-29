@@ -10,6 +10,13 @@ import UIKit
 import AVFoundation
 import SnapKit
 
+enum LaunchAction {
+    case onboarding
+    case fullScreenStart
+    case needPermissions
+    case denied
+    case restricted
+}
 class LaunchViewController: UIViewController {
     
     let loc = LaunchLocalization()
@@ -26,9 +33,17 @@ class LaunchViewController: UIViewController {
     @IBOutlet weak var allowAccessView: UIView!
     @IBOutlet weak var allowAccessButton: UIButton!
     
+    @IBOutlet weak var allowAccessWidthC: NSLayoutConstraint!
     @IBOutlet weak var allowAccessViewHeightC: NSLayoutConstraint!
     
-    @IBOutlet weak var allowAccessWidthC: NSLayoutConstraint!
+    var innerViewMaxWidth = CGFloat(0)
+    var innerViewMaxHeight = CGFloat(0)
+    var cornersViewMaxWidth = CGFloat(0)
+    var cornersViewMaxHeight = CGFloat(0)
+    
+    let topHeight = CGFloat(70)
+    
+    
     
     @IBOutlet weak var accessDescLabel: UILabel!
     
@@ -50,14 +65,14 @@ class LaunchViewController: UIViewController {
                             self.allowAccessView.alpha = 0
                             self.allowAccessView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
                         }) { _ in
-                            self.drawAnimation(type: "fullScreenStart")
+                            self.drawAnimation(type: .fullScreenStart)
                         }
                     }
                 } else {
                     self.shouldGoToSettings = true
                     self.firstTimeDeny = false
                     DispatchQueue.main.async {
-                        self.drawAnimation(type: "DENIED")
+                        self.drawAnimation(type: .denied)
                     }
                 }
             })
@@ -89,16 +104,18 @@ class LaunchViewController: UIViewController {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
             print("Authourized")
-            self.drawAnimation(type: "fullScreenStart")
+            self.drawAnimation(type: .fullScreenStart)
         case .notDetermined:
             shouldGoToSettings = false
-            self.drawAnimation(type: "needPermissions")
+            self.drawAnimation(type: .needPermissions)
         case .denied:
             firstTimeDeny = true
             shouldGoToSettings = true
-            self.drawAnimation(type: "DENIED")
+            self.drawAnimation(type: .denied)
         case .restricted:
-            self.drawAnimation(type: "Restricted")
+            self.drawAnimation(type: .restricted)
+        @unknown default:
+            fatalError()
         }
     }
     @IBOutlet weak var onboarding: PaperOnboarding!
@@ -123,25 +140,28 @@ class LaunchViewController: UIViewController {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
             print("Authourized")
-            self.drawAnimation(type: "fullScreenStart")
+            self.drawAnimation(type: .fullScreenStart)
         case .notDetermined:
             print("ND")
             shouldGoToSettings = false
-            self.drawAnimation(type: "needPermissions")
+            self.drawAnimation(type: .needPermissions)
         case .denied:
             print("D")
             firstTimeDeny = true
             shouldGoToSettings = true
-            self.drawAnimation(type: "DENIED")
+            self.drawAnimation(type: .denied)
         case .restricted:
             print("R")
-            self.drawAnimation(type: "Restricted")
+            self.drawAnimation(type: .restricted)
+        @unknown default:
+            fatalError()
         }
         
     }
     
-    @IBOutlet weak var onboardingBottomC: NSLayoutConstraint!
+    @IBOutlet weak var onboardingTopC: NSLayoutConstraint!
     @IBOutlet weak var onboardingWidthC: NSLayoutConstraint!
+    @IBOutlet weak var onboardingHeightC: NSLayoutConstraint!
     
     let loadingImages = (0...10).map { UIImage(named: "\($0)")! }
     
@@ -170,9 +190,11 @@ class LaunchViewController: UIViewController {
         
         let defaults = UserDefaults.standard
         let launchedBefore = defaults.bool(forKey: "launchedBefore")
-        if launchedBefore == false {
+//        if launchedBefore == false {
+        
+        if true {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
-                self.drawAnimation(type: "onboarding")
+                self.drawAnimation(type: .onboarding)
             })
         } else {
             onboarding.removeFromSuperview()
@@ -180,22 +202,22 @@ class LaunchViewController: UIViewController {
             case .authorized:
                 print("Authourized")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
-                    self.drawAnimation(type: "fullScreenStart")
+                    self.drawAnimation(type: .fullScreenStart)
                 })
             case .notDetermined:
                 shouldGoToSettings = false
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
-                    self.drawAnimation(type: "needPermissions")
+                    self.drawAnimation(type: .needPermissions)
                 })
             case .denied:
                 firstTimeDeny = true
                 shouldGoToSettings = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
-                    self.drawAnimation(type: "DENIED")
+                    self.drawAnimation(type: .denied)
                 })
             case .restricted:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
-                    self.drawAnimation(type: "Restricted")
+                    self.drawAnimation(type: .restricted)
                 })
             @unknown default:
                 print("unknown default")
@@ -206,18 +228,29 @@ class LaunchViewController: UIViewController {
     let goToSettings = NSLocalizedString("goToSettings", comment: "LaunchViewController def=Go to settings")
     
     
-    func drawAnimation(type:String = "onboarding") {
-        let availibleWidth = view.bounds.width - 60
-        let accessAvailibleWidth = view.bounds.width - 100
+    func drawAnimation(type: LaunchAction) {
+        
+        innerViewMaxWidth = view.bounds.width - CGFloat(70)
+        innerViewMaxHeight = view.bounds.height - CGFloat(topHeight * 2)
+        cornersViewMaxWidth = view.bounds.width - CGFloat(30)
+        cornersViewMaxHeight = view.bounds.height - CGFloat(topHeight * 2 - 40)
+        
+        let restrictedInnerViewWidth = min(500, innerViewMaxWidth)
+        let restrictedInnerViewHeight = min(500 - 40, innerViewMaxHeight)
+        let restrictedCornersViewWidth = min(500, cornersViewMaxWidth)
+        let restrictedCornersViewHeight = min(500, cornersViewMaxHeight)
+        
+        
+        
         UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
             self.baseView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         }) { _ in
             switch type {
-            case "Restricted":
-                self.totalWidthC.constant = availibleWidth
-                self.totalHeightC.constant = availibleWidth
-                self.allowAccessViewHeightC.constant = accessAvailibleWidth
-                self.allowAccessWidthC.constant = accessAvailibleWidth
+            case .restricted:
+                self.totalWidthC.constant = restrictedInnerViewWidth
+                self.totalHeightC.constant = restrictedInnerViewWidth
+                self.allowAccessViewHeightC.constant = restrictedCornersViewWidth
+                self.allowAccessWidthC.constant = restrictedCornersViewWidth
                 
                 self.allowAccessView.isHidden = false
                 UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
@@ -255,11 +288,11 @@ class LaunchViewController: UIViewController {
                 self.accessDescLabel.text = noPermissionToUseCamera
                 self.shouldGoToSettings = true
                 self.allowAccessButton.setTitle(self.goToSettings, for: .normal)
-            case "DENIED":
-                self.totalWidthC.constant = availibleWidth
-                self.totalHeightC.constant = self.view.bounds.height - 60
-                self.allowAccessViewHeightC.constant = self.view.bounds.height - 100
-                self.allowAccessWidthC.constant = accessAvailibleWidth
+            case .denied:
+                self.allowAccessWidthC.constant = restrictedInnerViewWidth
+                self.allowAccessViewHeightC.constant = self.innerViewMaxHeight
+                self.totalWidthC.constant = restrictedCornersViewWidth
+                self.totalHeightC.constant = self.cornersViewMaxHeight
                 
                 UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
                     self.view.layoutIfNeeded()
@@ -294,11 +327,11 @@ class LaunchViewController: UIViewController {
                 })
                 self.allowAccessButton.setTitle(self.goToSettings, for: .normal)
                 
-            case "needPermissions":
-                self.totalWidthC.constant = availibleWidth
-                self.totalHeightC.constant = availibleWidth
-                self.allowAccessViewHeightC.constant = accessAvailibleWidth
-                self.allowAccessWidthC.constant = accessAvailibleWidth
+            case .needPermissions:
+                self.allowAccessWidthC.constant = restrictedInnerViewWidth
+                self.allowAccessViewHeightC.constant = restrictedInnerViewHeight
+                self.totalWidthC.constant = restrictedCornersViewWidth
+                self.totalHeightC.constant = restrictedCornersViewHeight
                 
                 UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
                     self.view.layoutIfNeeded()
@@ -328,7 +361,7 @@ class LaunchViewController: UIViewController {
                     self.bottomRightImageView.startAnimating()
                 })
                 
-            case "onboarding":
+            case .onboarding:
                 
                 self.onboarding.dataSource = self
                 self.onboarding.delegate = self
@@ -336,13 +369,17 @@ class LaunchViewController: UIViewController {
                 self.onboarding.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
                 self.onboarding.layer.cornerRadius = 14
                 self.onboarding.clipsToBounds = true
-                self.onboardingWidthC.constant = accessAvailibleWidth
+                
+                self.onboardingTopC.constant = self.topHeight
+                self.onboardingWidthC.constant = self.innerViewMaxWidth
+                self.onboardingHeightC.constant = self.innerViewMaxHeight
                 
                 self.view.layoutIfNeeded()
                 self.view.bringSubviewToFront(self.skipButton)
                 
-                self.totalWidthC.constant = availibleWidth
-                self.totalHeightC.constant = self.view.bounds.height - 60
+                self.totalWidthC.constant = self.cornersViewMaxWidth
+                self.totalHeightC.constant = self.cornersViewMaxHeight
+                
                 UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
                     self.view.layoutIfNeeded()
                     self.baseView.transform = CGAffineTransform.identity
@@ -372,7 +409,7 @@ class LaunchViewController: UIViewController {
                     self.bottomLeftImageView.startAnimating()
                     self.bottomRightImageView.startAnimating()
                 })
-            case "fullScreenStart":
+            case .fullScreenStart:
                 let finalWidth = self.view.bounds.width
                 let finalHeight = self.view.bounds.height
                 self.totalWidthC.constant = finalWidth
@@ -396,8 +433,6 @@ class LaunchViewController: UIViewController {
                     self.bottomRightImageView.alpha = 0
                     self.view.alpha = 0
                 })
-            default:
-                print("WRONG!!")
             }
         }
     }
@@ -420,7 +455,7 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
         if index == 6 {
             onboardingOnLastPage = true
             getStartedButton.alpha = 0
-            onboardingBottomC.constant = 120
+            onboardingHeightC.constant = self.innerViewMaxHeight - 60
             UIView.animate(withDuration: 0.15, animations: {
                 self.getStartedButton.transform = CGAffineTransform.identity
                 self.view.layoutIfNeeded()
@@ -430,7 +465,7 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
             if onboardingOnLastPage == true {
                 onboardingOnLastPage = false
                 getStartedButton.alpha = 1
-                onboardingBottomC.constant = 50
+                onboardingHeightC.constant = self.innerViewMaxHeight
                 UIView.animate(withDuration: 0.15, animations: {
                     self.view.layoutIfNeeded()
                     self.getStartedButton.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
@@ -449,70 +484,70 @@ extension LaunchViewController {
                                title: loc.welcomeToFind,
                                description: loc.swipeToGetStarted,
                                pageIcon: UIImage(),
-                               color: UIColor(named: "OnboardingGray")!,
-                               titleColor: UIColor.black,
-                               descriptionColor: UIColor.darkGray,
+                               color: UIColor(named: "OnboardBlue")!,
+                               titleColor: UIColor.white,
+                               descriptionColor: UIColor.white,
                                titleFont: UIFont.systemFont(ofSize: 30, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
             OnboardingItemInfo(informationImage: UIImage(named: "Swhatis")!,
                                title: loc.whatIsFind,
                                description: loc.findIsCommandFForCamera,
-                               pageIcon: UIImage(named: "1icon")!,
-                               color: UIColor(named: "OnboardingGray")!,
-                               titleColor: UIColor.black,
-                               descriptionColor: UIColor.darkGray,
+                               pageIcon: UIImage(named: "Page1")!,
+                               color: UIColor(named: "OnboardBlue")!,
+                               titleColor: UIColor.white,
+                               descriptionColor: UIColor.white,
                                titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
             OnboardingItemInfo(informationImage: UIImage(named: "Ssearchfield")!,
                                title: loc.findWords,
                                description: loc.tapSearchField,
-                               pageIcon: UIImage(named: "2icon")!,
-                               color: UIColor(named: "OnboardingGray")!,
-                               titleColor: UIColor.black,
-                               descriptionColor: UIColor.darkGray,
+                               pageIcon: UIImage(named: "Page2")!,
+                               color: UIColor(named: "OnboardBlue")!,
+                               titleColor: UIColor.white,
+                               descriptionColor: UIColor.white,
                                titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
             OnboardingItemInfo(informationImage: UIImage(named: "Slists")!,
-            title: loc.lists,
-            description: loc.makeLists,
-            pageIcon: UIImage(named: "3icon")!,
-            color: UIColor(named: "OnboardingGray")!,
-            titleColor: UIColor.black,
-            descriptionColor: UIColor.darkGray,
-            titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
-            descriptionFont: UIFont.systemFont(ofSize: 17)),
+                               title: loc.lists,
+                               description: loc.makeLists,
+                               pageIcon: UIImage(named: "Page3")!,
+                               color: UIColor(named: "OnboardBlue")!,
+                               titleColor: UIColor.white,
+                               descriptionColor: UIColor.white,
+                               titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
+                               descriptionFont: UIFont.systemFont(ofSize: 17)),
             
             
             OnboardingItemInfo(informationImage: UIImage(named: "Sshutter")!,
                                title: loc.takePhotos,
                                description: loc.tapShutterButton,
-                               pageIcon: UIImage(named: "4icon")!,
-                               color: UIColor(named: "OnboardingGray")!,
-                               titleColor: UIColor.black,
-                               descriptionColor: UIColor.darkGray,
+                               pageIcon: UIImage(named: "Page4")!,
+                               color: UIColor(named: "OnboardBlue")!,
+                               titleColor: UIColor.white,
+                               descriptionColor: UIColor.white,
                                titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
             OnboardingItemInfo(informationImage: UIImage(named: "Smenu")!,
                                title: loc.accessMenu,
                                description: loc.yourPhotosListsAndSettingsHere,
-                               pageIcon: UIImage(named: "5icon")!,
-                               color: UIColor(named: "OnboardingGray")!,
-                               titleColor: UIColor.black,
-                               descriptionColor: UIColor.darkGray,
+                               pageIcon: UIImage(named: "Page5")!,
+                               color: UIColor(named: "OnboardBlue")!,
+                               titleColor: UIColor.white,
+                               descriptionColor: UIColor.white,
                                titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
             OnboardingItemInfo(informationImage: UIImage(named: "Sjitter")!,
                                title: loc.beforeYouStart,
                                description: loc.ensureAccuracy,
-                               pageIcon: UIImage(named: "6icon")!,
-                               color: UIColor(named: "OnboardingGray")!,
-                               titleColor: UIColor.black,
-                               descriptionColor: UIColor.darkGray,
+                               pageIcon: UIImage(named: "Page6")!,
+                               color: UIColor(named: "OnboardBlue")!,
+                               titleColor: UIColor.white,
+                               descriptionColor: UIColor.white,
                                titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17))
             ][index]

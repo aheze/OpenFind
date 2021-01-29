@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         deviceHasNotch = window?.safeAreaInsets.bottom ?? 0 > 0
-        
+        print("has notch? \(deviceHasNotch)")
         if deviceHasNotch {
             ConstantVars.shutterBottomDistance = Constants.framelessShutterBottomDistance
             ConstantVars.tabHeight = Constants.iPhoneXTabHeight
