@@ -8,6 +8,7 @@
 
 import UIKit
 
+var deviceIsRoundPad = false /// iPad with rounded corners
 var deviceHasNotch = false
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -22,6 +23,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         deviceHasNotch = window?.safeAreaInsets.bottom ?? 0 > 0
+        
+        if deviceHasNotch {
+            deviceIsRoundPad = window?.safeAreaInsets.top ?? 30 < 30
+        }
+        
+        
         print("has notch? \(deviceHasNotch)")
         if deviceHasNotch {
             ConstantVars.shutterBottomDistance = Constants.framelessShutterBottomDistance

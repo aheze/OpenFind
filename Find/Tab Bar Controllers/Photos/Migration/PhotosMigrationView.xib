@@ -25,25 +25,25 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotosMigration" translatesAutoresizingMaskIntoConstraints="NO" id="NtJ-wH-LvC">
-                    <rect key="frame" x="24" y="85.5" width="366" height="90"/>
+                    <rect key="frame" x="24" y="195.5" width="366" height="90"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="90" id="3Ai-H0-fiE"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This saves storage and makes it easier for you to manage and find in your photos." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ur-DC-KAn">
-                    <rect key="frame" x="16" y="189.5" width="382" height="45.5"/>
+                    <rect key="frame" x="16" y="299.5" width="382" height="45.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <color key="textColor" systemColor="secondaryLabelColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap here to move your existing photos to the Photos app." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0k-qK-7hT">
-                    <rect key="frame" x="16" y="247" width="382" height="45.5"/>
+                    <rect key="frame" x="16" y="357" width="382" height="45.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <color key="textColor" systemColor="secondaryLabelColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXw-aj-I1k">
-                    <rect key="frame" x="126.5" y="316.5" width="161" height="47"/>
+                    <rect key="frame" x="126.5" y="426.5" width="161" height="47"/>
                     <color key="backgroundColor" name="100Blue"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                     <inset key="contentEdgeInsets" minX="24" minY="12" maxX="24" maxY="12"/>
@@ -55,7 +55,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starting from Find 1.2 (this version), photos taken in Find will be saved to the Photos app." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBt-9I-ok4">
-                    <rect key="frame" x="16" y="16" width="382" height="45.5"/>
+                    <rect key="frame" x="16" y="126" width="382" height="45.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <color key="textColor" systemColor="secondaryLabelColor"/>
                     <nil key="highlightedColor"/>
@@ -78,7 +78,7 @@
                 <constraint firstItem="NtJ-wH-LvC" firstAttribute="top" secondItem="mBt-9I-ok4" secondAttribute="bottom" constant="24" id="qrr-eE-fVz"/>
                 <constraint firstItem="l0k-qK-7hT" firstAttribute="top" secondItem="8ur-DC-KAn" secondAttribute="bottom" constant="12" id="s3R-TF-vwO"/>
                 <constraint firstAttribute="trailing" secondItem="NtJ-wH-LvC" secondAttribute="trailing" constant="24" id="vES-p6-pQi"/>
-                <constraint firstItem="mBt-9I-ok4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="yTA-PF-Fwx"/>
+                <constraint firstItem="mBt-9I-ok4" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="82" id="yTA-PF-Fwx"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="428.26086956521743" y="245.42410714285714"/>

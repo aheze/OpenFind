@@ -399,7 +399,7 @@ class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if deviceHasNotch {
+        if deviceHasNotch && !deviceIsRoundPad {
             normalSearchFieldTopCConstant = -6
         } else {
             normalSearchFieldTopCConstant = 6

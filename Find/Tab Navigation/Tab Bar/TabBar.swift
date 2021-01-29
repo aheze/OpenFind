@@ -487,7 +487,7 @@ class TabBarView: UIView {
     
     func createCurve(with percentage: CGFloat = 1, iPhoneX: Bool = true) -> CGPath {
         let differenceInSize = UIScreen.main.fixedCoordinateSpace.bounds.width - Constants.designedWidth
-        let offset = differenceInSize / 3
+        let offset = min(3, differenceInSize / 3)
         
         let width = bounds.width
         let height = bounds.height
@@ -498,6 +498,7 @@ class TabBarView: UIView {
         let topPointOffset: CGFloat
         let topPointControlOffset: CGFloat
         let middleControlPointOffset: CGFloat
+        
         if iPhoneX {
             verticalMiddle = CGFloat(46) - offset
             topPointOffset = CGFloat(78.5) - offset
