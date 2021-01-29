@@ -28,7 +28,7 @@ class CreditsViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var licensesView: UIView!
     
     @IBAction func licensesButtonPressed(_ sender: Any) {
-        presentLicenses()
+//        presentLicenses()
     }
     
     override func viewDidLoad() {
@@ -80,7 +80,7 @@ class CreditsViewController: UIViewController, UITextViewDelegate {
     }
     
 }
-extension CreditsViewController {
+extension SettingsViewHoster {
     func presentLicenses() {
         let carteViewController = CarteViewController()
                 

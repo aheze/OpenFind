@@ -40,8 +40,8 @@ struct HelpView: View {
             clearButtonMode: .whileEditing
         ),
         progressBar: .init(
-            foregroundColor: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1),
-            backgroundColor: UIColor.systemBackground
+            foregroundColor: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1),
+            backgroundColor: UIColor.clear
         ),
         listStyle: .insetGroupedListStyle,
         navigationViewStyle: .defaultNavigationViewStyle,
@@ -50,6 +50,7 @@ struct HelpView: View {
             error404: URL(string: "https://aheze.github.io/FindInfo/404")!
         )
     )
+    
     @State var helpPresented = false
     
     @State var tutorialsPresented = false
@@ -67,10 +68,6 @@ struct HelpView: View {
                         Label(text: "Help center")
                             .padding(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
                         Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.white)
-                            .font(Font.system(size: 18, weight: .medium))
-                            .padding(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 6))
                         
                     }
                     .padding(EdgeInsets(top: 6, leading: 14, bottom: 6, trailing: 6))
@@ -88,10 +85,6 @@ struct HelpView: View {
                         Label(text: "Tutorials")
                             .padding(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
                         Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.white)
-                            .font(Font.system(size: 18, weight: .medium))
-                            .padding(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 6))
                         
                     }
                     .padding(EdgeInsets(top: 6, leading: 14, bottom: 6, trailing: 6))
@@ -141,6 +134,23 @@ struct FeedbackView: View {
                 
                 Button(action: {
                     print("Rate the app")
+                    if let productURL = URL(string: "https://apps.apple.com/app/id1506500202") {
+                        var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
+
+                        // 2.
+                        components?.queryItems = [
+                          URLQueryItem(name: "action", value: "write-review")
+                        ]
+
+                        // 3.
+                        guard let writeReviewURL = components?.url else {
+                            print("no url")
+                          return
+                        }
+
+                        // 4.
+                        UIApplication.shared.open(writeReviewURL)
+                    }
                 }) {
                     HStack(spacing: 0) {
                         Label(text: "Rate the app")
@@ -162,11 +172,18 @@ struct FeedbackView: View {
                     .fill(Color(UIColor.white.withAlphaComponent(0.3)))
                     .frame(height: 1)
                 
-                Button(action: {
-                    print("I found a bug")
-                }) {
+                NavigationLink(
+                    destination:
+                        
+                        /**
+                         Push to the web view when tapped.
+                         */
+                        WebViewContainer(url: URL(string: "https://forms.gle/agdyoB9PFfnv8cU1A")!, progressBarOptions: SupportOptions.ProgressBar(foregroundColor: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1), backgroundColor: UIColor.clear))
+                        .navigationBarTitle(Text("Report a bugg"), displayMode: .inline)
+                        .edgesIgnoringSafeArea([.leading, .bottom, .trailing]) /// Allow the web view to go under the home indicator, on devices similar to the iPhone X.
+                ) {
                     HStack(spacing: 0) {
-                        Label(text: "I found a bug")
+                        Label(text: "Report a bug")
                             .padding(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
                         Spacer()
                         Image(systemName: "chevron.right")
@@ -182,11 +199,13 @@ struct FeedbackView: View {
                     .fill(Color(UIColor.white.withAlphaComponent(0.3)))
                     .frame(height: 1)
                 
-                Button(action: {
-                    print("I have a suggestion")
-                }) {
+                NavigationLink(
+                    destination:
+                    ContactView()
+                        .navigationBarTitle(Text("Questions & Suggestions"), displayMode: .inline)
+                ) {
                     HStack(spacing: 0) {
-                        Label(text: "I have a suggestion")
+                        Label(text: "Questions & Suggestions")
                             .padding(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
                         Spacer()
                         Image(systemName: "chevron.right")
@@ -198,25 +217,6 @@ struct FeedbackView: View {
                     .padding(EdgeInsets(top: 6, leading: 14, bottom: 6, trailing: 6))
                 }
                 
-                Rectangle()
-                    .fill(Color(UIColor.white.withAlphaComponent(0.3)))
-                    .frame(height: 1)
-                
-                Button(action: {
-                    print("I have a question")
-                }) {
-                    HStack(spacing: 0) {
-                        Label(text: "I have a question")
-                            .padding(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.white)
-                            .font(Font.system(size: 18, weight: .medium))
-                            .padding(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 6))
-                        
-                    }
-                    .padding(EdgeInsets(top: 6, leading: 14, bottom: 6, trailing: 6))
-                }
             }
            
         }

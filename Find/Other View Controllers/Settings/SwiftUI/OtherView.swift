@@ -9,9 +9,10 @@ import SwiftUI
 
 struct OtherView: View {
     @Binding var swipeToNavigateEnabled: Bool
+    @ObservedObject var allSettings: Settings
     var body: some View {
         SwipeToNavigateView(isOn: $swipeToNavigateEnabled)
-        ResetSettingsView()
+        ResetSettingsView(allSettings: allSettings)
         CreditsView()
     }
 }
@@ -45,6 +46,8 @@ struct SwipeToNavigateView: View {
 }
 
 struct ResetSettingsView: View {
+    @ObservedObject var allSettings: Settings
+    @State var resetSettingsSheetPresented = false
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -52,6 +55,7 @@ struct ResetSettingsView: View {
                 
                 Button(action: {
                     print("Reset settings")
+                    resetSettingsSheetPresented = true
                 }) {
                     HStack {
                         Label(text: "Reset")
@@ -64,6 +68,20 @@ struct ResetSettingsView: View {
         }
         .background(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)))
         .cornerRadius(12)
+        .actionSheet(isPresented: $resetSettingsSheetPresented, content: {
+            ActionSheet(title: Text("resetSettings"), message: Text("settingsResetToDefault"), buttons: [
+                .default(Text("reset")) {
+                    allSettings.highlightColor = "00AEEF"
+                    allSettings.showTextDetectIndicator = true
+                    allSettings.hapticFeedbackLevel = 1
+                    allSettings.livePreviewEnabled = true
+                    allSettings.swipeToNavigateEnabled = true
+                    
+                    
+                },
+                .cancel()
+            ])
+        })
     }
 }
 
@@ -94,23 +112,21 @@ struct CreditsView: View {
                     .fill(Color(UIColor.white.withAlphaComponent(0.3)))
                     .frame(height: 1)
                 
-                NavigationLink(destination: Text("Licenses")) {
+                Button(action: {
+                    SettingsHoster.viewController?.presentLicenses()
+                }) {
                     HStack(spacing: 0) {
                         Label(text: "Licenses")
                             .padding(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
                         Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.white)
-                            .font(Font.system(size: 18, weight: .medium))
-                            .padding(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 6))
                         
                     }
                     .padding(EdgeInsets(top: 6, leading: 14, bottom: 6, trailing: 6))
                 }
             }
-           
         }
         .background(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)))
         .cornerRadius(12)
+        
     }
 }

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "MediumIcon.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

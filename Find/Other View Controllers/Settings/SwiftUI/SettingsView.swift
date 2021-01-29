@@ -20,13 +20,13 @@ extension Published {
     }
 }
 struct SettingsHoster {
-    static var viewController: UIViewController?
+    static var viewController: SettingsViewHoster?
 }
 
 class Settings: ObservableObject {
     @Published(key: "highlightColor") var highlightColor = "00AEEF"
     @Published(key: "showTextDetectIndicator") var showTextDetectIndicator = true
-    @Published(key: "hapticFeedbackLevel") var hapticFeedbackLevel = 0
+    @Published(key: "hapticFeedbackLevel") var hapticFeedbackLevel = 1
     @Published(key: "livePreviewEnabled") var livePreviewEnabled = true
     @Published(key: "swipeToNavigateEnabled") var swipeToNavigateEnabled = true
 }
@@ -61,22 +61,6 @@ class SettingsViewHoster: UIViewController {
             self?.dismiss(animated: true, completion: nil)
         }
         
-//        settingsView.tutorialPressed = { [weak self] tutorial in
-//            switch tutorial {
-//            case 0:
-//                print("def")
-//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                let vc = storyboard.instantiateViewController(withIdentifier: "GeneralTutorialViewController") as! GeneralTutorialViewController
-//                self?.present(vc, animated: true, completion: nil)
-//            case 1:
-//                print("def")
-//            case 2:
-//                print("def")
-//            default:
-//                print("def")
-//            }
-//        }
-        
         /**
          Host `supportDocsView` in a view controller.
          */
@@ -99,10 +83,10 @@ class SettingsViewHoster: UIViewController {
 
 struct SettingsView: View {
 
+    
     @ObservedObject var settings = Settings()
     var donePressed: (() -> Void)?
     
-//    var tutorialPressed: ((Int) -> Void)?
     
     var body: some View {
         NavigationView {
@@ -130,7 +114,7 @@ struct SettingsView: View {
                         
                         SectionHeaderView(text: "Other")
                         
-                        OtherView(swipeToNavigateEnabled: $settings.swipeToNavigateEnabled)
+                        OtherView(swipeToNavigateEnabled: $settings.swipeToNavigateEnabled, allSettings: settings)
                             .padding(EdgeInsets(top: 6, leading: 16, bottom: 16, trailing: 16))
                     }
                     
