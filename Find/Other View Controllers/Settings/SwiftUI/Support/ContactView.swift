@@ -41,7 +41,7 @@ struct ContactView: View {
                                 Image("DiscordIcon")
                                     .renderingMode(.template)
                                     .resizable()
-                                        .aspectRatio(contentMode: .fit)
+                                    .aspectRatio(contentMode: .fit)
                                     .frame(width: 60, height: 60)
                                     .foregroundColor(Color.white)
                             }
