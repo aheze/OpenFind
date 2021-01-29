@@ -75,3 +75,10 @@ struct ConstantVars { /// calculated based on device size
     static var photoFilterAvoidFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
     static var tabHeight = 84
 }
+
+struct Defaults {
+    static var highlightColor = UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF"
+    static var showTextDetectIndicator = UserDefaults.standard.bool(forKey: "showTextDetectIndicator")
+    static var hapticFeedbackLevel = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
+    static var swipeToNavigateEnabled = UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled")
+}

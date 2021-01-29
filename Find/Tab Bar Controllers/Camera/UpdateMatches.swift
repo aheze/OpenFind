@@ -16,10 +16,18 @@ extension CameraViewController {
         if number > previousNumberOfMatches {
             if currentPassCount >= 100 {
                 currentPassCount = 0
-                if shouldHapticFeedback {
+                
+                switch Defaults.hapticFeedbackLevel {
+                case 2:
                     let generator = UIImpactFeedbackGenerator(style: .light)
                     generator.prepare()
                     generator.impactOccurred()
+                case 3:
+                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                    generator.prepare()
+                    generator.impactOccurred()
+                default:
+                    break
                 }
             }
         }

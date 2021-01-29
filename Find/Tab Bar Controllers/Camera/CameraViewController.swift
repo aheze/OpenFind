@@ -43,7 +43,6 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var statsBottomC: NSLayoutConstraint!
     @IBOutlet weak var statsButton: UIButton!
     
-    
     @IBAction func statsButtonDown(_ sender: Any) {
         UIView.animate(withDuration: 0.2, animations: {
             self.statsButton.alpha = 0.5
@@ -62,12 +61,16 @@ class CameraViewController: UIViewController {
         })
     }
     
+    var cameBackFromSettings: (() -> Void)?
     @IBOutlet weak var settingsView: UIView!
     @IBOutlet weak var settingsBottomC: NSLayoutConstraint!
     @IBOutlet weak var settingsButton: UIButton!
     @IBAction func settingsButtonPressed(_ sender: Any) {
         let settingsVC = SettingsViewHoster()
         settingsVC.presentationController?.delegate = self
+        settingsVC.dismissed = { [weak self] in
+            self?.cameBackFromSettings?()
+        }
         self.present(settingsVC, animated: true)
     }
     
@@ -151,11 +154,6 @@ class CameraViewController: UIViewController {
     
     
     @IBOutlet weak var darkBlurEffect: UIVisualEffectView!
-    
-    let defaults = UserDefaults.standard
-    var shouldShowTextDetectIndicator = true
-    var shouldHapticFeedback = true
-    
     
     //MARK: Stats
     weak var updateStatsNumber: UpdateMatchesNumberStats?
@@ -267,8 +265,6 @@ class CameraViewController: UIViewController {
     var currentComponents = [Component]()
     var nextComponents = [Component]()
     var numberOfFastMatches: Int = 0
-    
-    var highlightColor = "00aeef"
     
     var matchToColors = [String: [CGColor]]()
     
@@ -389,7 +385,7 @@ class CameraViewController: UIViewController {
         default:
             break
         }
-        print("Warning - Didn't recognise interface orientation (\(orientation))")
+        print("Warning - Didn't recognize interface orientation (\(orientation))")
         return .portrait
     }
     override func viewDidLayoutSubviews() {
@@ -402,15 +398,8 @@ class CameraViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        var hasNotch = false
-        switch deviceType {
-            case "iPhone10,3", "iPhone10,6", "iPhone11,2", "iPhone11,4", "iPhone11,6", "iPhone11,8", "iPhone12,3", "iPhone12,5":
-                hasNotch = true
-            default:
-                break
-        }
-        if hasNotch {
+
+        if deviceHasNotch {
             normalSearchFieldTopCConstant = -6
         } else {
             normalSearchFieldTopCConstant = 6
@@ -424,7 +413,6 @@ class CameraViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(_KeyboardFrameChanged(_:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_KeyboardHeightChanged(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
-        readDefaultsValues()
         
         controlsBlurView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         controlsBlurView.alpha = 0
@@ -518,27 +506,6 @@ class CameraViewController: UIViewController {
                 pow(attitude.pitch, 2))
     }
 
-    func readDefaultsValues() {
-        
-        if let hexString = defaults.string(forKey: "highlightColor") {
-            highlightColor = hexString
-        }
-        
-        let showText = defaults.bool(forKey: "showTextDetectIndicator")
-        let hapFeed = defaults.bool(forKey: "hapticFeedback")
-        
-        if showText {
-            shouldShowTextDetectIndicator = true
-        } else {
-            shouldShowTextDetectIndicator = false
-        }
-        
-        if hapFeed {
-            shouldHapticFeedback = true
-        } else {
-            shouldHapticFeedback = false
-        }
-    }
 }
 
 extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {

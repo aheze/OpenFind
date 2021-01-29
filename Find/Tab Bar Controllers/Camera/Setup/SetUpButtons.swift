@@ -10,82 +10,80 @@ import UIKit
 import SwiftEntryKit
 import AVFoundation
 
-extension CameraViewController: UIAdaptivePresentationControllerDelegate {
-   
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        if cancelTimer != nil {
-            cancelTimer!.invalidate()
-            cancelTimer = nil
-        }
-        
-        readDefaultsValues()
-        
-        SwiftEntryKit.dismiss()
-        sortSearchTerms()
-        loadListsRealm()
-        injectListDelegate?.resetWithLists(lists: editableListCategories)
-    }
-    
-    func toFast() {
-        self.blurScreen(mode: "fast")
-    }
-    @objc func tappedOnce(gr: UITapGestureRecognizer) {
-        
-        
-        let loc: CGPoint = gr.location(in: gr.view)
-        let screenSize = cameraView.videoPreviewLayer.bounds.size
-        let x = loc.y / screenSize.height
-        let y = loc.x / screenSize.width
-        let focusPoint = CGPoint(x: x, y: y)
-
-        let newImageView = UIImageView()
-        newImageView.image = UIImage(named: "FocusRectCamera")
-        let frameRect = CGRect(x: loc.x - 35, y: loc.y - 35, width: 70, height: 70)
-        newImageView.frame = frameRect
-        newImageView.contentMode = .scaleAspectFit
-        cameraView.addSubview(newImageView)
-        newImageView.alpha = 0
-        newImageView.transform = CGAffineTransform(scaleX: 1.35, y: 1.35)
-        
-        UIView.animateKeyframes(withDuration: 0.6, delay: 0, options: .calculationModeCubic, animations: {
-                        UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.25) {
-                            newImageView.alpha = 1
-                            newImageView.transform = CGAffineTransform.identity
-                        }
-
-                        UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.25) {
-                            newImageView.alpha = 0.8
-                        }
-
-                        UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.25) {
-                            newImageView.alpha = 1
-                        }
-
-                        UIView.addKeyframe(withRelativeStartTime: 0.75, relativeDuration: 0.25) {
-                            newImageView.alpha = 0
-                        }
-                    }, completion: { _ in
-                        newImageView.removeFromSuperview()
-                    })
-        
-        if let device = cameraDevice {
-            do {
-                try device.lockForConfiguration()
-
-                device.focusPointOfInterest = focusPoint
-                device.focusMode = .autoFocus
-                device.exposurePointOfInterest = focusPoint
-                device.exposureMode = AVCaptureDevice.ExposureMode.continuousAutoExposure
-                device.unlockForConfiguration()
-            }
-            catch {
-                // just ignore
-            }
-            
-            
-        }
-    }
-}
+//extension CameraViewController: UIAdaptivePresentationControllerDelegate {
+//
+//    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+//        if cancelTimer != nil {
+//            cancelTimer!.invalidate()
+//            cancelTimer = nil
+//        }
+//
+//        SwiftEntryKit.dismiss()
+//        sortSearchTerms()
+//        loadListsRealm()
+//        injectListDelegate?.resetWithLists(lists: editableListCategories)
+//    }
+//
+//    func toFast() {
+//        self.blurScreen(mode: "fast")
+//    }
+//    @objc func tappedOnce(gr: UITapGestureRecognizer) {
+//
+//
+//        let loc: CGPoint = gr.location(in: gr.view)
+//        let screenSize = cameraView.videoPreviewLayer.bounds.size
+//        let x = loc.y / screenSize.height
+//        let y = loc.x / screenSize.width
+//        let focusPoint = CGPoint(x: x, y: y)
+//
+//        let newImageView = UIImageView()
+//        newImageView.image = UIImage(named: "FocusRectCamera")
+//        let frameRect = CGRect(x: loc.x - 35, y: loc.y - 35, width: 70, height: 70)
+//        newImageView.frame = frameRect
+//        newImageView.contentMode = .scaleAspectFit
+//        cameraView.addSubview(newImageView)
+//        newImageView.alpha = 0
+//        newImageView.transform = CGAffineTransform(scaleX: 1.35, y: 1.35)
+//
+//        UIView.animateKeyframes(withDuration: 0.6, delay: 0, options: .calculationModeCubic, animations: {
+//                        UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.25) {
+//                            newImageView.alpha = 1
+//                            newImageView.transform = CGAffineTransform.identity
+//                        }
+//
+//                        UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.25) {
+//                            newImageView.alpha = 0.8
+//                        }
+//
+//                        UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.25) {
+//                            newImageView.alpha = 1
+//                        }
+//
+//                        UIView.addKeyframe(withRelativeStartTime: 0.75, relativeDuration: 0.25) {
+//                            newImageView.alpha = 0
+//                        }
+//                    }, completion: { _ in
+//                        newImageView.removeFromSuperview()
+//                    })
+//
+//        if let device = cameraDevice {
+//            do {
+//                try device.lockForConfiguration()
+//
+//                device.focusPointOfInterest = focusPoint
+//                device.focusMode = .autoFocus
+//                device.exposurePointOfInterest = focusPoint
+//                device.exposureMode = AVCaptureDevice.ExposureMode.continuousAutoExposure
+//                device.unlockForConfiguration()
+//            }
+//            catch {
+//                // just ignore
+//            }
+//
+//
+//        }
+//    }
+//}
 extension CameraViewController {
     
     func tappedOnStats() {

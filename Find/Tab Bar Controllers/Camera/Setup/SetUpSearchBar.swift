@@ -434,13 +434,16 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
 
-    func sortSearchTerms() {
+    func sortSearchTerms(removeExistingHighlights: Bool = true) {
         let lowerCaseFinalText = finalTextToFind.lowercased()
         var arrayOfSearch = lowerCaseFinalText.components(separatedBy: "\u{2022}")
         var cameAcrossShare = [String]()
         var duplicatedStrings = [String]()
         
-        resetHighlights()
+        if removeExistingHighlights {
+            resetHighlights()
+        }
+        
         matchToColors.removeAll()
         stringToList.removeAll()
         
@@ -489,7 +492,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         arrayOfSearch = newSearch
         for match in arrayOfSearch {
             stringToList[match] = currentSearchFindList
-            matchToColors[match] = [UIColor(hexString: highlightColor).cgColor]
+            matchToColors[match] = [UIColor(hexString: Defaults.highlightColor).cgColor]
         }
         for match in duplicatedStrings {
             stringToList[match] = currentListsSharedFindList
@@ -497,7 +500,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         for match in cameAcrossSearchFieldText {
             stringToList[match] = currentSearchAndListSharedFindList
-            let cgColor = UIColor(hexString: highlightColor).cgColor
+            let cgColor = UIColor(hexString: Defaults.highlightColor).cgColor
             matchToColors[match, default: [CGColor]()].append(cgColor)
         }
     }

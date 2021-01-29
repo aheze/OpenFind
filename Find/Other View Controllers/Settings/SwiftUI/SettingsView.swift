@@ -27,7 +27,6 @@ class Settings: ObservableObject {
     @Published(key: "highlightColor") var highlightColor = "00AEEF"
     @Published(key: "showTextDetectIndicator") var showTextDetectIndicator = true
     @Published(key: "hapticFeedbackLevel") var hapticFeedbackLevel = 1
-    @Published(key: "livePreviewEnabled") var livePreviewEnabled = true
     @Published(key: "swipeToNavigateEnabled") var swipeToNavigateEnabled = true
 }
 
@@ -41,6 +40,7 @@ class SettingsViewHoster: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    var dismissed: (() -> Void)?
     
     override func loadView() {
         
@@ -58,6 +58,7 @@ class SettingsViewHoster: UIViewController {
          Set the dismiss button handler.
          */
         settingsView.donePressed = { [weak self] in
+            self?.dismissed?()
             self?.dismiss(animated: true, completion: nil)
         }
         
@@ -102,8 +103,7 @@ struct SettingsView: View {
 
                         CameraSettingsView(
                             textDetectionIsOn: $settings.showTextDetectIndicator,
-                            hapticFeedbackLevel: $settings.hapticFeedbackLevel,
-                            livePreviewEnabled: $settings.livePreviewEnabled
+                            hapticFeedbackLevel: $settings.hapticFeedbackLevel
                         )
                             .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                         

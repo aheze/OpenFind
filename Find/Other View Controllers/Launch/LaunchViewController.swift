@@ -72,10 +72,11 @@ class LaunchViewController: UIViewController {
     @IBAction func skipPressed(_ sender: Any) {
         let defaults = UserDefaults.standard
         defaults.set(true, forKey: "launchedBefore")
-        defaults.set("00AEEF", forKey: "highlightColor")
         
+        defaults.set("00AEEF", forKey: "highlightColor")
         defaults.set(true, forKey: "showTextDetectIndicator")
-        defaults.set(true, forKey: "hapticFeedback")
+        defaults.set(1, forKey: "hapticFeedbackLevel")
+        defaults.set(true, forKey: "swipeToNavigateEnabled")
         
         UIView.animate(withDuration: 0.5, animations: {
             self.onboarding.alpha = 0

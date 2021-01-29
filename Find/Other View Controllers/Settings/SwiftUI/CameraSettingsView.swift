@@ -6,15 +6,14 @@
 //
 
 import SwiftUI
+import Combine
 
 struct CameraSettingsView: View {
     @Binding var textDetectionIsOn: Bool
     @Binding var hapticFeedbackLevel: Int
-    @Binding var livePreviewEnabled: Bool
     var body: some View {
         TextDetectionView(isOn: $textDetectionIsOn)
         HapticFeedbackView(level: $hapticFeedbackLevel)
-        LivePreviewView(isOn: $livePreviewEnabled)
     }
 }
 
@@ -35,6 +34,9 @@ struct TextDetectionView: View {
                     Toggle(isOn: $isOn, label: {
                         Text("Label")
                     }).labelsHidden()
+                    .onReceive(Just(isOn)) { isOn in
+                        Defaults.showTextDetectIndicator = isOn
+                    }
 
                 }
                 .padding(EdgeInsets(top: 6, leading: 14, bottom: 6, trailing: 6))
@@ -58,6 +60,7 @@ struct HapticFeedbackView: View {
                 HStack(spacing: 14) {
                     Button(action: {
                         level = 1
+                        Defaults.hapticFeedbackLevel = 1
                     }) {
                         VStack {
                             RoundedRectangle(cornerRadius: 12)
@@ -71,6 +74,10 @@ struct HapticFeedbackView: View {
                     }
                     Button(action: {
                         level = 2
+                        Defaults.hapticFeedbackLevel = 2
+                        let generator = UIImpactFeedbackGenerator(style: .light)
+                        generator.prepare()
+                        generator.impactOccurred()
                     }) {
                         VStack {
                             RoundedRectangle(cornerRadius: 12)
@@ -82,6 +89,10 @@ struct HapticFeedbackView: View {
                     }
                     Button(action: {
                         level = 3
+                        Defaults.hapticFeedbackLevel = 3
+                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                        generator.prepare()
+                        generator.impactOccurred()
                     }) {
                         VStack {
                             RoundedRectangle(cornerRadius: 12)
@@ -104,31 +115,4 @@ struct HapticFeedbackView: View {
     }
 }
 
-struct LivePreviewView: View {
-    @Binding var isOn: Bool
-    var body: some View {
-        ZStack {
-            VStack(spacing: 0) {
-                HeaderView(text: "Live Preview")
-                
-                HStack(spacing: 0) {
-                    if isOn {
-                        Label(text: "ON")
-                    } else {
-                        Label(text: "OFF")
-                    }
-                    Spacer()
-                    Toggle(isOn: $isOn, label: {
-                        Text("Label")
-                    }).labelsHidden()
-
-                }
-                .padding(EdgeInsets(top: 6, leading: 14, bottom: 6, trailing: 6))
-            }
-           
-        }
-        .background(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)))
-        .cornerRadius(12)
-    }
-}
 

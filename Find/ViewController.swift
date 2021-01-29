@@ -24,7 +24,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     var globalUrl : URL = URL(fileURLWithPath: "")
-    var highlightColor = "00aeef"
     
     var shouldHaveStatusBar = true
     var shouldHaveLightStatusBar = true
@@ -172,6 +171,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     self.panGestureRecognizer.isEnabled = true
                     self.camera.makeInactiveState()
                 }
+            }
+            viewController.cameBackFromSettings = { [weak self] in
+                guard let self = self else { return }
+                print("reading!!!!!!!!")
+                self.readDefaults()
             }
             return viewController
         }
@@ -446,6 +450,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        readDefaults()
         
         shutoffCamera = {
             self.camera.stopSession()

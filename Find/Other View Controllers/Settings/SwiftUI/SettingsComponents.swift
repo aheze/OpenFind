@@ -20,7 +20,7 @@ struct SectionHeaderView: View {
     var text: String
     var body: some View {
         Text(text)
-            .foregroundColor(.white)
+            .foregroundColor(Color.white.opacity(0.75))
             .font(Font(UIFont.systemFont(ofSize: 17, weight: .medium)))
             .padding(EdgeInsets(top: 12, leading: 20, bottom: 0, trailing: 0))
             .frame(maxWidth: .infinity, alignment: .leading)

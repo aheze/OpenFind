@@ -36,7 +36,6 @@ class FindBar: UIView, UITextFieldDelegate {
     var editableListCategories = [EditableFindList]()
     var selectedLists = [EditableFindList]()
     
-    var highlightColor = "00aeef"
     
     var searchDisabled = false
     
@@ -525,11 +524,11 @@ extension FindBar {
             arrayOfSearch = newSearch
             
             for match in arrayOfSearch {
-                matchToColors[match] = [UIColor(hexString: highlightColor).cgColor]
+                matchToColors[match] = [UIColor(hexString: Defaults.highlightColor).cgColor]
             }
             
             for match in cameAcrossSearchFieldText {
-                let cgColor = UIColor(hexString: highlightColor).cgColor
+                let cgColor = UIColor(hexString: Defaults.highlightColor).cgColor
                 matchToColors[match, default: [CGColor]()].append(cgColor)
             }
             

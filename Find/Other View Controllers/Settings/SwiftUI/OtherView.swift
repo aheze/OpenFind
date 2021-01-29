@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct OtherView: View {
     @Binding var swipeToNavigateEnabled: Bool
@@ -34,6 +35,10 @@ struct SwipeToNavigateView: View {
                     Toggle(isOn: $isOn, label: {
                         Text("Label")
                     }).labelsHidden()
+                    .onReceive(Just(isOn)) { isOn in
+                        print("DETECT ON!! \(isOn)")
+                        Defaults.swipeToNavigateEnabled = isOn
+                    }
 
                 }
                 .padding(EdgeInsets(top: 6, leading: 14, bottom: 6, trailing: 6))
@@ -74,10 +79,7 @@ struct ResetSettingsView: View {
                     allSettings.highlightColor = "00AEEF"
                     allSettings.showTextDetectIndicator = true
                     allSettings.hapticFeedbackLevel = 1
-                    allSettings.livePreviewEnabled = true
                     allSettings.swipeToNavigateEnabled = true
-                    
-                    
                 },
                 .cancel()
             ])
