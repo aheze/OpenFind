@@ -81,33 +81,53 @@ extension PhotosViewController {
             
             SwiftEntryKit.display(entry: cacheController, using: attributes)
         } else {
-            var changedIndexPaths = [IndexPath]()
-            for findPhoto in selectedPhotos {
-                if let editableModel = findPhoto.editableModel {
-                    if let realModel = getRealRealmModel(from: editableModel)  {
-                        if realModel.isDeepSearched { /// only unstar if already starred
-                            
-                            if let indexPath = dataSource.indexPath(for: findPhoto) {
-                                changedIndexPaths.append(indexPath)
-                            }
-                            do {
-                                try realm.write {
-                                    realModel.isDeepSearched = false
-                                    realm.delete(realModel.contents)
+            
+            let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
+            let clearThisCacheQuestion = NSLocalizedString("clearThisCacheQuestion", comment: "Multifile def=Clear this photo's cache?")
+            let cachingAgainTakeAWhile = NSLocalizedString("cachingAgainTakeAWhile", comment: "Multifile def=Caching again will take a while...")
+            let clear = NSLocalizedString("clear", comment: "Multipurpose def=Clear")
+            
+            let alert = UIAlertController(title: clearThisCacheQuestion, message: cachingAgainTakeAWhile, preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: clear, style: UIAlertAction.Style.destructive, handler: { _ in
+                var changedIndexPaths = [IndexPath]()
+                for findPhoto in selectedPhotos {
+                    if let editableModel = findPhoto.editableModel {
+                        if let realModel = self.getRealRealmModel(from: editableModel)  {
+                            if realModel.isDeepSearched { /// only unstar if already starred
+                                
+                                if let indexPath = self.dataSource.indexPath(for: findPhoto) {
+                                    changedIndexPaths.append(indexPath)
                                 }
-                            } catch {
-                                print("Error starring photo \(error)")
+                                do {
+                                    try self.realm.write {
+                                        realModel.isDeepSearched = false
+                                        self.realm.delete(realModel.contents)
+                                    }
+                                } catch {
+                                    print("Error starring photo \(error)")
+                                }
+                                editableModel.isDeepSearched = false
+                                editableModel.contents.removeAll()
                             }
-                            editableModel.isDeepSearched = false
-                            editableModel.contents.removeAll()
                         }
                     }
                 }
+                self.reloadPaths(changedPaths: changedIndexPaths)
+                self.sortPhotos(with: self.currentFilter)
+                self.applySnapshot()
+            }))
+            alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.sourceView = self.view
+                popoverController.sourceRect =  CGRect(x: (self.view.bounds.width / 2) - 40, y: self.view.bounds.height - 80, width: 80, height: 80)
             }
-            reloadPaths(changedPaths: changedIndexPaths)
-            sortPhotos(with: currentFilter)
-            applySnapshot()
+            self.present(alert, animated: true, completion: nil)
+            
+            
+            
+            
         }
         doneWithSelect()
     }
+    
 }
