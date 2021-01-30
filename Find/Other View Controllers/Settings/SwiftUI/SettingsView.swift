@@ -158,9 +158,9 @@ struct SettingsView: View {
                                             .font(Font.system(size: 19, weight: .regular, design: .default))
                                     }
             )
-            .navigationViewStyle(StackNavigationViewStyle())
             .configureBar()
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
