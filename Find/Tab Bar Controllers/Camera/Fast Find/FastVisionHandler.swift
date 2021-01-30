@@ -89,15 +89,17 @@ extension CameraViewController {
             
             if CameraState.isPaused {
                 if !cachePressed {
-                    
-                    if self.howManyTimesFastFoundSincePaused >= 6 && nextComponents.count <= 2 {
-                        DispatchQueue.main.async {
+                    DispatchQueue.main.async {
+                        for subView in self.drawingView.subviews {
+                            subView.removeFromSuperview()
+                        }
+                        if self.howManyTimesFastFoundSincePaused >= 6 && self.nextComponents.count <= 2 {
                             self.showCacheTip()
                         }
+                        
+                        self.drawHighlights(highlights: self.nextComponents)
+                        self.updateMatchesNumber(to: self.nextComponents.count)
                     }
-                    
-                    drawHighlights(highlights: nextComponents)
-                    self.updateMatchesNumber(to: nextComponents.count)
                 } else {
                     
                     var componentsToAdd = [Component]()

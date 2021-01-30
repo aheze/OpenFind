@@ -22,24 +22,26 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var shadeView: UIView!
     
-    
+    var isForcingStatusBarHidden = true /// for taking screenshots only
     var globalUrl : URL = URL(fileURLWithPath: "")
     
     var shouldHaveStatusBar = true
     var shouldHaveLightStatusBar = true
     // MARK: Status bar
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        print("sata")
         if traitCollection.userInterfaceStyle == .light {
-            print("Light mode")
             return shouldHaveLightStatusBar ? .lightContent : .darkContent
         } else {
-            print("Dark mode")
             return .lightContent
         }
     }
     override var prefersStatusBarHidden: Bool {
-        return !shouldHaveStatusBar
+        if isForcingStatusBarHidden {
+            self.additionalSafeAreaInsets.top = 20
+            return true
+        } else {
+            return !shouldHaveStatusBar
+        }
     }
     // MARK: - View Controllers
     
