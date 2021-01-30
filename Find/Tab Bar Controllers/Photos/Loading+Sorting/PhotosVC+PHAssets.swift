@@ -14,6 +14,9 @@ import RealmSwift
 extension PhotosViewController {
     func loadImages(completion: @escaping (([FindPhoto], [Month]) -> Void)) {
         
+        
+        checkTutorial()
+        
         if let photos = allPhotos {
             
             var totalMonths = [Month]()

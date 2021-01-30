@@ -29,7 +29,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var shouldHaveLightStatusBar = true
     // MARK: Status bar
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return shouldHaveLightStatusBar ? .lightContent : .darkContent
+        print("sata")
+        if traitCollection.userInterfaceStyle == .light {
+            print("Light mode")
+            return shouldHaveLightStatusBar ? .lightContent : .darkContent
+        } else {
+            print("Dark mode")
+            return .lightContent
+        }
     }
     override var prefersStatusBarHidden: Bool {
         return !shouldHaveStatusBar

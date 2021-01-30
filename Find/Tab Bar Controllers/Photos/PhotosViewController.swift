@@ -41,6 +41,7 @@ class PhotosViewController: UIViewController {
     var emptyDescriptionView: EmptyDescriptionView?
     var startTutorial: ((PhotoFilter) -> Void)?
     var pressedSelectTip: (() -> Void)? /// step 3 of star
+    var quickTourView: TutorialHeader?
     
     // MARK: Photo selection
     var showSelectionControls: ((Bool) -> Void)? /// show or hide
@@ -116,8 +117,6 @@ class PhotosViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = UIColor(named: "PhotosText")
         
-        
-        checkTutorial()
         
         setupBarButtons()
         getRealmObjects()

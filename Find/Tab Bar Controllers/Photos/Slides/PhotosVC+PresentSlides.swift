@@ -10,6 +10,12 @@ import UIKit
 
 extension PhotosViewController {
     func presentFromIndexPath(indexPath: IndexPath) {
+        if let quickTourView = quickTourView {
+            UIView.animate(withDuration: 0.6) {
+                quickTourView.alpha = 0
+            }
+            animateCloseQuickTour(quickTourView: quickTourView)
+        }
         self.selectedIndexPath = indexPath
         self.performSegue(withIdentifier: "ShowSlides", sender: self)
     }

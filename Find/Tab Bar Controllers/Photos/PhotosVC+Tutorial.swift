@@ -15,6 +15,7 @@ extension PhotosViewController {
         if listsViewedBefore == false {
             let quickTourView = TutorialHeader()
             quickTourView.colorView.backgroundColor = UIColor(named: "TabIconPhotosMain")
+            self.quickTourView = quickTourView
             
             if let navController = navigationController {
                 navController.view.insertSubview(quickTourView, belowSubview: navigationController!.navigationBar)
@@ -30,15 +31,17 @@ extension PhotosViewController {
                 collectionView.verticalScrollIndicatorInsets.top = 50
                 
                 quickTourView.pressed = { [weak self] in
-                    
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = storyboard.instantiateViewController(withIdentifier: "HistoryTutorialViewController") as! HistoryTutorialViewController
                     
+                    
+                    self?.defaults.set(true, forKey: "historyViewedBefore")
                     self?.animateCloseQuickTour(quickTourView: quickTourView)
                     self?.present(vc, animated: true, completion: nil)
                 }
                 
                 quickTourView.closed = { [weak self] in
+                    self?.defaults.set(true, forKey: "historyViewedBefore")
                     self?.animateCloseQuickTour(quickTourView: quickTourView)
                 }
             }
@@ -46,8 +49,6 @@ extension PhotosViewController {
         }
     }
     func animateCloseQuickTour(quickTourView: TutorialHeader) {
-        defaults.set(true, forKey: "historyViewedBefore")
-        
         quickTourView.colorViewHeightConst.constant = 0
         
         UIView.animate(withDuration: 0.5, animations: {
