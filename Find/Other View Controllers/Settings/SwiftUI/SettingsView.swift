@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import WhatsNewKit
 
 private var cancellables = [String: AnyCancellable]()
 
@@ -116,6 +117,28 @@ struct SettingsView: View {
                         
                         OtherView(swipeToNavigateEnabled: $settings.swipeToNavigateEnabled, allSettings: settings)
                             .padding(EdgeInsets(top: 6, leading: 16, bottom: 16, trailing: 16))
+                        
+                        HStack {
+                            
+                            Text("Version \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown")")
+                                .foregroundColor(Color.white.opacity(0.75))
+                                .font(Font.system(size: 15, weight: .medium))
+                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 8))
+                            
+                            
+                                Button(action: {
+                                    let (whatsNew, configuration) = WhatsNewConfig.getWhatsNew()
+                                    if let whatsNewPresent = whatsNew {
+                                        let whatsNewViewController = WhatsNewViewController(whatsNew: whatsNewPresent, configuration: configuration)
+                                        SettingsHoster.viewController?.present(whatsNewViewController, animated: true)
+                                    }
+                                }) {
+                                    Text("See what's new")
+                                        .foregroundColor(Color.white.opacity(0.5))
+                                        .font(Font.system(size: 15, weight: .medium))
+                                }
+                        }
+                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0))
                     }
                     
                 }
@@ -135,6 +158,7 @@ struct SettingsView: View {
                                             .font(Font.system(size: 19, weight: .regular, design: .default))
                                     }
             )
+            .navigationViewStyle(StackNavigationViewStyle())
             .configureBar()
         }
     }

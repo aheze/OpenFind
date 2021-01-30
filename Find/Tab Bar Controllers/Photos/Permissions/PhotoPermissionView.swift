@@ -43,8 +43,10 @@ class PhotoPermissionView: UIView {
                 if allowed {
                     self.allowed?(true)
                 } else {
-                    self.shouldGoToSettings = true
-                    self.allowAccessButton.setTitle("Go To Settings", for: .normal)
+                    DispatchQueue.main.async {
+                        self.shouldGoToSettings = true
+                        self.allowAccessButton.setTitle("Go To Settings", for: .normal)
+                    }
                 }
             }
         }

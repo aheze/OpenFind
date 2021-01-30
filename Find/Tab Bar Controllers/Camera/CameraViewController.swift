@@ -25,8 +25,9 @@ protocol UpdateMatchesNumberStats: class {
 class CameraViewController: UIViewController {
     
     let keyValueVersionStore = KeyValueWhatsNewVersionStore(keyValueable: UserDefaults.standard)
-    let updateImportantShouldPresentWhatsNew = false
+    let updateImportantShouldPresentWhatsNew = true
     var shouldPresentWhatsNew = false
+    
     
     // MARK: Tab bar
     @IBOutlet weak var cameraIconHolder: UIView!
@@ -83,77 +84,12 @@ class CameraViewController: UIViewController {
     
     let deviceType = UIDevice.current.modelName
     
-    
     var normalSearchFieldTopCConstant = CGFloat(0)
     var displayingOrientationError = false
     
-    ///PINCHING
-//    @IBOutlet weak var controlsBottomC: NSLayoutConstraint! //15
-    
     @IBOutlet weak var contentTopC: NSLayoutConstraint!
-    //15
-    
-//    @IBOutlet var pinchGesture: UIPinchGestureRecognizer!
-    var shouldPinch = true
-//    @IBAction func pinchGesture(_ sender: UIPinchGestureRecognizer) {
-//        controlsBottomC.constant = 15 - (sender.scale * 50)
-//        contentTopC.constant = normalSearchFieldTopCConstant - (sender.scale * 50)
-//        UIView.animate(withDuration: 0.2, animations: {
-//            self.view.layoutIfNeeded()
-//        })
-//        if sender.state == UIGestureRecognizer.State.ended {
-//            if sender.scale >= 1.3 {
-//                controlsBottomC.constant = -80
-//                contentTopC.constant = -100
-//                searchContentView.isHidden = false
-//                controlsView.isHidden = false
-//
-//                controlsBlurView.isHidden = false
-//                controlsBlurView.alpha = 0
-//                UIView.animate(withDuration: 0.4, animations: {
-//                    self.view.layoutIfNeeded()
-//                    self.searchContentView.alpha = 0
-//                    self.controlsView.alpha = 0
-//
-//                    self.controlsBlurView.alpha = 1
-//                    self.controlsBlurView.transform = CGAffineTransform.identity
-//                }) { _ in
-//                    self.searchContentView.isHidden = true
-//                    self.controlsView.isHidden = true
-//                    self.shouldPinch = true
-//                }
-//            } else {
-//                revealControls()
-//            }
-//        }
-        
-//    }
     @IBOutlet weak var controlsBlurView: UIVisualEffectView!
     
-    @IBAction func showControlsPressed(_ sender: Any) {
-        revealControls()
-    }
-    
-    func revealControls() {
-//        searchContentView.isHidden = false
-//        controlsView.isHidden = false
-//        controlsBlurView.isHidden = true
-//        controlsBottomC.constant = 15
-//        contentTopC.constant = normalSearchFieldTopCConstant
-//        UIView.animate(withDuration: 0.4, animations: {
-//            self.view.layoutIfNeeded()
-//            self.searchContentView.alpha = 1
-//            self.controlsView.alpha = 1
-//            
-//            self.controlsBlurView.alpha = 0
-//            self.controlsBlurView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-//        }) { _ in
-//            self.controlsBlurView.isHidden = true
-//        }
-    }
-    
-    
-    @IBOutlet weak var darkBlurEffect: UIVisualEffectView!
     
     //MARK: Stats
     weak var updateStatsNumber: UpdateMatchesNumberStats?
@@ -462,7 +398,7 @@ class CameraViewController: UIViewController {
             /// not presented yet
             if updateImportantShouldPresentWhatsNew {
                 shouldPresentWhatsNew = true
-                whatsNewHeightC.constant = 32
+                whatsNewHeightC.constant = 28
                 UIView.animate(withDuration: 1.5, animations: {
                     self.whatsNewView.alpha = 1
                     self.whatsNewButton.alpha = 1
