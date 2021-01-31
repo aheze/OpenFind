@@ -169,7 +169,6 @@ class FindBar: UIView, UITextFieldDelegate {
         okButton.isHidden = true
         
         searchField.keyboardAppearance = .default
-        searchField.autocorrectionType = .no
         searchField.rightView = resultsLabel
         searchField.rightViewMode = .always
         searchField.backgroundColor = UIColor.white.withAlphaComponent(0.3)

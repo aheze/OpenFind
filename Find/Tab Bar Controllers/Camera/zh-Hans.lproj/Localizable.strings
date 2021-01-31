@@ -666,3 +666,69 @@
 
 /*GeneralViewController*/
 "shortDescriptionPlaceholder" = "简短的介绍";
+
+/*comment*/
+"camera" = "";
+
+/* No comment provided by engineer. */
+"TutorialLocalization-cameraDescription" = "";
+
+/* No comment provided by engineer. */
+"TutorialLocalization-photosDescription" = "";
+
+/* No comment provided by engineer. */
+"TutorialLocalization-listsDescription" = "";
+
+/* No comment provided by engineer. */
+"PhotosTutorialLocalization-findFromAllPhotos" = "";
+
+/* No comment provided by engineer. */
+"PhotosTutorialLocalization-justTapFind" = "";
+
+/* No comment provided by engineer. */
+"PhotosTutorialLocalization-findFromSelectPhotos" = "";
+
+/* No comment provided by engineer. */
+"PhotosTutorialLocalization-tapSelectTapFind" = "";
+
+/* No comment provided by engineer. */
+"PhotosTutorialLocalization-cacheYourPhotos" = "";
+
+/* No comment provided by engineer. */
+"PhotosTutorialLocalization-resultsWillAppearInstantly" = "";
+
+/* No comment provided by engineer. */
+"ListsTutorialLocalization-makeAList" = "";
+
+/* No comment provided by engineer. */
+"ListsTutorialLocalization-tapThePlusIcon" = "";
+
+/* No comment provided by engineer. */
+"ListsTutorialLocalization-addSomeWords" = "";
+
+/* No comment provided by engineer. */
+"ListsTutorialLocalization-findWillLookForThem" = "";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-listsBuilder" = "";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-listsBuilderDescription" = "";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-addAWord" = "";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-tapThePlaceholder" = "";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-addMoreWords" = "";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-justTapNext" = "";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-deleteAWord" = "";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-swipeLeftOnIt" = "";

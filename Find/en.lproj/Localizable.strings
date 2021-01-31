@@ -91,6 +91,9 @@
 /* Multifile def=Caching done! */
 "cachingDoneExclaim" = "Caching done!";
 
+/*comment*/
+"camera" = "Camera";
+
 /* Multipurpose def=Cancel */
 "cancel" = "Cancel";
 
@@ -274,6 +277,30 @@
 /* Settings def=Lists Builder */
 "listsBuilderTutorial" = "Lists Builder";
 
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-addAWord" = "Add a word";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-addMoreWords" = "Add more words";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-deleteAWord" = "Delete a word";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-justTapNext" = "Just tap next on the keyboard";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-listsBuilder" = "Lists Builder";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-listsBuilderDescription" = "Start making lists";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-swipeLeftOnIt" = "Swipe left on it";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-tapThePlaceholder" = "Tap the placeholder";
+
 /* StatsViewController def=list */
 "listSingularLoc" = "list";
 
@@ -282,6 +309,18 @@
 
 /* Settings def=Lists */
 "listsTutorial" = "Lists";
+
+/* No comment provided by engineer. */
+"ListsTutorialLocalization-addSomeWords" = "Add some words";
+
+/* No comment provided by engineer. */
+"ListsTutorialLocalization-findWillLookForThem" = "Find will look for them when you use the list";
+
+/* No comment provided by engineer. */
+"ListsTutorialLocalization-makeAList" = "Make a new list";
+
+/* No comment provided by engineer. */
+"ListsTutorialLocalization-tapThePlusIcon" = "Tap the plus icon";
 
 /* MultipurposeExtension def=false */
 "locBoolFalse" = "false";
@@ -405,6 +444,24 @@
 
 /* Settings def=Photos */
 "photosTutorial" = "Photos";
+
+/* No comment provided by engineer. */
+"PhotosTutorialLocalization-cacheYourPhotos" = "Cache your photos";
+
+/* No comment provided by engineer. */
+"PhotosTutorialLocalization-findFromAllPhotos" = "To find from all photos";
+
+/* No comment provided by engineer. */
+"PhotosTutorialLocalization-findFromSelectPhotos" = "To find from selected photos";
+
+/* No comment provided by engineer. */
+"PhotosTutorialLocalization-justTapFind" = "Just tap Find";
+
+/* No comment provided by engineer. */
+"PhotosTutorialLocalization-resultsWillAppearInstantly" = "Results will appear instantly for those that are cached";
+
+/* No comment provided by engineer. */
+"PhotosTutorialLocalization-tapSelectTapFind" = "Tap Select, then Find";
 
 /* Stats def=\"x\" */
 "quote %@ quote" = "\"%@\"";
@@ -535,6 +592,15 @@
 /* extensionDate def=Today */
 "todayLoc" = "Today";
 
+/* No comment provided by engineer. */
+"TutorialLocalization-cameraDescription" = "Looks for the text that you enter";
+
+/* No comment provided by engineer. */
+"TutorialLocalization-listsDescription" = "Group words together to find at the same time";
+
+/* No comment provided by engineer. */
+"TutorialLocalization-photosDescription" = "Find from your existing photos";
+
 /* GeneralViewController def=2 duplicates. */
 "twoDuplicates" = "2 duplicates.";
 
@@ -611,7 +677,7 @@
 "youHaveLotsDuplicates" = "You have a lot of duplicate words.";
 
 /* TutorialLocalization def=Your lists will appear above the keyboard, whether you are Finding using the camera or from Photos */
-"yourListsWillAppear" = "Lists will appear above the keyboard, whether you're Finding using the camera or from Photos";
+"yourListsWillAppear" = "Your lists will appear above the keyboard";
 
 /* TutorialLocalization def=Your Photos, Lists, and Settings are here. Check them out! */
 "yourPhotosListsAndSettingsHere" = "Your Photos, Lists, and Settings are here. Check them out!";

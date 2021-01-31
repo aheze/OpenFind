@@ -10,6 +10,7 @@
 		3C020CE5259FF5A70087AE92 /* ViewController+Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C020CE4259FF5A70087AE92 /* ViewController+Migration.swift */; };
 		3C020CE9259FF7470087AE92 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C020CE8259FF7470087AE92 /* PhotosViewController.swift */; };
 		3C020CED259FF7890087AE92 /* PhotosVC+Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C020CEC259FF7890087AE92 /* PhotosVC+Migration.swift */; };
+		3C0A7C9B25C649A70076DBCF /* Onboarding.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0A7C9A25C649A70076DBCF /* Onboarding.xcassets */; };
 		3C0F5ED225A570F200549040 /* PhotosVC+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */; };
 		3C0F5ED525A5729A00549040 /* NewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED425A5729A00549040 /* NewAssets.xcassets */; };
 		3C0F5ED825A62B2600549040 /* PhotosMigrationController+Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED725A62B2600549040 /* PhotosMigrationController+Permissions.swift */; };
@@ -272,6 +273,7 @@
 		3C020CE4259FF5A70087AE92 /* ViewController+Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Migration.swift"; sourceTree = "<group>"; };
 		3C020CE8259FF7470087AE92 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		3C020CEC259FF7890087AE92 /* PhotosVC+Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Migration.swift"; sourceTree = "<group>"; };
+		3C0A7C9A25C649A70076DBCF /* Onboarding.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Onboarding.xcassets; sourceTree = "<group>"; };
 		3C0F5ED125A570F200549040 /* PhotosVC+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Realm.swift"; sourceTree = "<group>"; };
 		3C0F5ED425A5729A00549040 /* NewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NewAssets.xcassets; sourceTree = "<group>"; };
 		3C0F5ED725A62B2600549040 /* PhotosMigrationController+Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosMigrationController+Permissions.swift"; sourceTree = "<group>"; };
@@ -1278,6 +1280,7 @@
 				4969373B2353C25B009CA41A /* Utilities */,
 				4999AC9C2353A81100AB06A7 /* Assets.xcassets */,
 				3C0F5ED425A5729A00549040 /* NewAssets.xcassets */,
+				3C0A7C9A25C649A70076DBCF /* Onboarding.xcassets */,
 				3C4DE703259AD5670037D104 /* NewColors.xcassets */,
 				49B7A32C2390823C0070209F /* Colors.xcassets */,
 				3C2C3E9525A11749002C3D11 /* PreloadImages.xcassets */,
@@ -1332,6 +1335,7 @@
 			buildConfigurationList = 4999ACA42353A81100AB06A7 /* Build configuration list for PBXNativeTarget "Find" */;
 			buildPhases = (
 				6D06741A707392F12B687239 /* [CP] Check Pods Manifest.lock */,
+				3C0A7BBC25C5F3320076DBCF /* BartyCrouch */,
 				4999AC8C2353A80A00AB06A7 /* Sources */,
 				4999AC8D2353A80A00AB06A7 /* Frameworks */,
 				4999AC8E2353A80A00AB06A7 /* Resources */,
@@ -1417,6 +1421,7 @@
 				4999AC9D2353A81100AB06A7 /* Assets.xcassets in Resources */,
 				4999AC9B2353A80A00AB06A7 /* Main.storyboard in Resources */,
 				3C4DE719259B0EB50037D104 /* TutorialHeader.xib in Resources */,
+				3C0A7C9B25C649A70076DBCF /* Onboarding.xcassets in Resources */,
 				3CE306D7259AC46400F1B2E2 /* PhotosIcon.xib in Resources */,
 				4928525C23D61D230048EC13 /* ListsSelect.xib in Resources */,
 			);
@@ -1425,6 +1430,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3C0A7BBC25C5F3320076DBCF /* BartyCrouch */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = BartyCrouch;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which bartycrouch > /dev/null; then\n    bartycrouch update -x\n    bartycrouch lint -x\nelse\n    echo \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi\n";
+		};
 		495F38F52432BECF00A17D93 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

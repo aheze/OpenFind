@@ -8,74 +8,57 @@
 
 import Foundation
 
-class LaunchLocalization {
-    let welcomeToFind = NSLocalizedString("welcomeToFind", comment: "TutorialLocalization def=Welcome to Find")
-    let swipeToGetStarted = NSLocalizedString("swipeToGetStarted", comment: "TutorialLocalization def=Swipe to get started")
+struct LaunchLocalization {
+    static let welcomeToFind = NSLocalizedString("welcomeToFind", comment: "TutorialLocalization def=Welcome to Find")
+    static let swipeToGetStarted = NSLocalizedString("swipeToGetStarted", comment: "TutorialLocalization def=Swipe to get started")
     
-    let whatIsFind = NSLocalizedString("whatIsFind", comment: "TutorialLocalization def=What is Find?")
-    let findIsCommandFForCamera = NSLocalizedString("findIsCommandFForCamera",
-                                 comment: "TutorialLocalization def=Find is Command+F for camera: Find words in books, worksheets, nutrition labels... anywhere that contains text!")
+    static let camera = NSLocalizedString("camera", comment: "comment")
+    static let cameraDescription = NSLocalizedString("TutorialLocalization-cameraDescription", comment: "")
     
-    let findWords = NSLocalizedString("findWords", comment: "TutorialLocalization def=Find words")
-    let tapSearchField = NSLocalizedString("tapSearchField", comment: "TutorialLocalization def=Tap the Search Field at the top of the screen")
-    
-    
-    let lists = NSLocalizedString("locLaunchLists", comment: "TutorialLocalization")
-    let makeLists = NSLocalizedString("locMakeLists", comment: "TutorialLocalization")
+    static let photos = NSLocalizedString("photos", comment: "")
+    static let photosDescription = NSLocalizedString("TutorialLocalization-photosDescription", comment: "")
     
     
-    let takePhotos = NSLocalizedString("takePhotos", comment: "TutorialLocalization def=Take photos")
-    let tapShutterButton = NSLocalizedString("tapShutterButton", comment: "TutorialLocalization def=Tap the shutter button, and they'll appear in Photos, where you can search in them later.")
+    static let lists = NSLocalizedString("lists", comment: "")
+    static let listsDescription = NSLocalizedString("TutorialLocalization-listsDescription", comment: "")
     
-    let accessMenu = NSLocalizedString("accessMenu", comment: "TutorialLocalization def=Access the Menu")
-    let yourPhotosListsAndSettingsHere = NSLocalizedString("yourPhotosListsAndSettingsHere", comment: "TutorialLocalization def=Your Photos, Lists, and Settings are here. Check them out!")
-    
-    let beforeYouStart = NSLocalizedString("beforeYouStart", comment: "TutorialLocalization def=Before you start...")
-    let ensureAccuracy = NSLocalizedString("ensureAccuracy", comment: "TutorialLocalization def=To ensure the most accurate results, please make sure to hold your phone as steady as possible.")
 }
 
-class HistoryTutorialLocalization {
-    let welcomeToPhotos = NSLocalizedString("welcomeToPhotos", comment: "TutorialLocalization def=Photos...")
-    let photosFindAgainAndAgain = NSLocalizedString("photosFindAgainAndAgain", comment: "TutorialLocalization def=...find again and again!")
+struct PhotosTutorialLocalization {
+    static let findFromAllPhotos = NSLocalizedString("PhotosTutorialLocalization-findFromAllPhotos", comment: "")
+    static let justTapFind = NSLocalizedString("PhotosTutorialLocalization-justTapFind", comment: "")
     
-    let selectPhotos = NSLocalizedString("selectPhotos", comment: "TutorialLocalization def=Select photos")
-    let tapSelectButtonAndPopUp = NSLocalizedString("tapSelectButtonAndPopUp",
-                                 comment: "TutorialLocalization def=Tap the select button, and the Action Controls will pop up!")
+    static let findFromSelectPhotos = NSLocalizedString("PhotosTutorialLocalization-findFromSelectPhotos", comment: "")
+    static let tapSelectTapFind = NSLocalizedString("PhotosTutorialLocalization-tapSelectTapFind", comment: "")
     
-    let findFromPhotos = NSLocalizedString("findFromPhotos", comment: "TutorialLocalization def=Find from Photos")
-    let selectAFewPhotos = NSLocalizedString("selectAFewPhotos", comment: "TutorialLocalization def=Select a few photos, tap the Find icon, and enter the text that you want to find!")
-    
-    let cachePhotos = NSLocalizedString("cachePhotos", comment: "TutorialLocalization def=Cache photos")
-    let cachingPhotos = NSLocalizedString("findUsesOCR", comment: "TutorialLocalization def=Caching photos speeds up search results!")
+    static let cacheYourPhotos = NSLocalizedString("PhotosTutorialLocalization-cacheYourPhotos", comment: "")
+    static let resultsWillAppearInstantly = NSLocalizedString("PhotosTutorialLocalization-resultsWillAppearInstantly", comment: "")
 }
 
-class ListsTutorialLocalization {
-    let welcomeToLists = NSLocalizedString("welcomeToLists", comment: "TutorialLocalization def=Lists...")
-    let findMultipleWords = NSLocalizedString("findMultipleWords", comment: "TutorialLocalization def=...find multiple words at the same time!")
+struct ListsTutorialLocalization {
     
-    let makeAList = NSLocalizedString("makeAList", comment: "TutorialLocalization def=Make a list")
-    let tapTheAddButton = NSLocalizedString("tapTheAddButton",
-                                 comment: "TutorialLocalization def=Tap the Add button")
+    static let makeAList = NSLocalizedString("ListsTutorialLocalization-makeAList", comment: "")
+    static let tapThePlusIcon = NSLocalizedString("ListsTutorialLocalization-tapThePlusIcon", comment: "")
     
-    let addSomeMatches = NSLocalizedString("addSomeMatches", comment: "TutorialLocalization def=Add some matches")
-    let findSearchesForMatches = NSLocalizedString("findSearchesForMatches", comment: "TutorialLocalization def=Find searches for your matches when you use the list")
+    static let addSomeWords = NSLocalizedString("ListsTutorialLocalization-addSomeWords", comment: "")
+    static let findWillLookForThem = NSLocalizedString("ListsTutorialLocalization-findWillLookForThem", comment: "")
     
-    let useTheList = NSLocalizedString("useTheList", comment: "TutorialLocalization def=Use the list")
-    let yourListsWillAppear = NSLocalizedString("yourListsWillAppear", comment: "TutorialLocalization def=Your lists will appear above the keyboard, whether you are Finding using the camera or from Photos")
+    static let useTheList = NSLocalizedString("useTheList", comment: "TutorialLocalization def=Use the list")
+    static let yourListsWillAppear = NSLocalizedString("yourListsWillAppear", comment: "TutorialLocalization def=Your lists will appear above the keyboard, whether you are Finding using the camera or from Photos")
 }
 
 
-class ListsBuilderTutorialLocalization {
-    let welcomeToListsBuilder = NSLocalizedString("welcomeToListsBuilder", comment: "TutorialLocalization def=Lists Builder...")
-    let startEasilyMakingLists = NSLocalizedString("startEasilyMakingLists", comment: "TutorialLocalization def=...Start easily making lists!")
+struct ListsBuilderTutorialLocalization {
     
-    let addAMatch = NSLocalizedString("addAMatch", comment: "TutorialLocalization def=Add a match")
-    let matchesAreWhatFindLooksFor = NSLocalizedString("matchesAreWhatFindLooksFor",
-                                 comment: "TutorialLocalization def=Matches are what Find looks for when you use the list. Make one by tapping the placeholder that says 'Match'!")
+    static let listsBuilder = NSLocalizedString("ListsBuilderTutorialLocalization-listsBuilder", comment: "")
+    static let listsBuilderDescription = NSLocalizedString("ListsBuilderTutorialLocalization-listsBuilderDescription", comment: "")
     
-    let addMoreMatches = NSLocalizedString("addMoreMatches", comment: "TutorialLocalization def=Add more matches")
-    let onceYouveTypedInYourFirstMatch = NSLocalizedString("onceYouveTypedInYourFirstMatch", comment: "TutorialLocalization def=Once you've typed in your first match, just tap 'next' on the keyboard! Repeat until satisfied.")
+    static let addAWord = NSLocalizedString("ListsBuilderTutorialLocalization-addAWord", comment: "")
+    static let tapThePlaceholder = NSLocalizedString("ListsBuilderTutorialLocalization-tapThePlaceholder", comment: "")
     
-    let deleteAMatch = NSLocalizedString("deleteAMatch", comment: "TutorialLocalization def=Delete a match")
-    let sometimesYouGotToDeleteAMatch = NSLocalizedString("sometimesYouGotToDeleteAMatch", comment: "TutorialLocalization def=Sometimes you got to delete a match. No feelings hurt, just swipe left and tap 'Delete'!")
+    static let addMoreWords = NSLocalizedString("ListsBuilderTutorialLocalization-addMoreWords", comment: "")
+    static let justTapNext = NSLocalizedString("ListsBuilderTutorialLocalization-justTapNext", comment: "")
+    
+    static let deleteAWord = NSLocalizedString("ListsBuilderTutorialLocalization-deleteAWord", comment: "")
+    static let swipeLeftOnIt = NSLocalizedString("ListsBuilderTutorialLocalization-swipeLeftOnIt", comment: "")
 }

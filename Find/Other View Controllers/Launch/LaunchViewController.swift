@@ -19,8 +19,6 @@ enum LaunchAction {
 }
 class LaunchViewController: UIViewController {
     
-    let loc = LaunchLocalization()
-    
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var topLeftImageView: UIImageView!
     @IBOutlet weak var topRightImageView: UIImageView!
@@ -452,7 +450,7 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
                 self.skipButton.alpha = 0
             })
         }
-        if index == 6 {
+        if index == 3 {
             onboardingOnLastPage = true
             getStartedButton.alpha = 0
             onboardingHeightC.constant = self.innerViewMaxHeight - 60
@@ -480,9 +478,9 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
 extension LaunchViewController {
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
         return [
-            OnboardingItemInfo(informationImage: UIImage(named: "Swelcome")!,
-                               title: loc.welcomeToFind,
-                               description: loc.swipeToGetStarted,
+            OnboardingItemInfo(informationImage: UIImage(named: "Intro1")!,
+                               title: LaunchLocalization.welcomeToFind,
+                               description: LaunchLocalization.swipeToGetStarted,
                                pageIcon: UIImage(),
                                color: UIColor(named: "OnboardBlue")!,
                                titleColor: UIColor.white,
@@ -490,9 +488,9 @@ extension LaunchViewController {
                                titleFont: UIFont.systemFont(ofSize: 30, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
-            OnboardingItemInfo(informationImage: UIImage(named: "Swhatis")!,
-                               title: loc.whatIsFind,
-                               description: loc.findIsCommandFForCamera,
+            OnboardingItemInfo(informationImage: UIImage(named: "Intro2")!,
+                               title: LaunchLocalization.camera,
+                               description: LaunchLocalization.cameraDescription,
                                pageIcon: UIImage(named: "Page1")!,
                                color: UIColor(named: "OnboardBlue")!,
                                titleColor: UIColor.white,
@@ -500,9 +498,9 @@ extension LaunchViewController {
                                titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
-            OnboardingItemInfo(informationImage: UIImage(named: "Ssearchfield")!,
-                               title: loc.findWords,
-                               description: loc.tapSearchField,
+            OnboardingItemInfo(informationImage: UIImage(named: "Intro3")!,
+                               title: LaunchLocalization.photos,
+                               description: LaunchLocalization.photosDescription,
                                pageIcon: UIImage(named: "Page2")!,
                                color: UIColor(named: "OnboardBlue")!,
                                titleColor: UIColor.white,
@@ -510,41 +508,10 @@ extension LaunchViewController {
                                titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
-            OnboardingItemInfo(informationImage: UIImage(named: "Slists")!,
-                               title: loc.lists,
-                               description: loc.makeLists,
+            OnboardingItemInfo(informationImage: UIImage(named: "Intro4")!,
+                               title: LaunchLocalization.lists,
+                               description: LaunchLocalization.listsDescription,
                                pageIcon: UIImage(named: "Page3")!,
-                               color: UIColor(named: "OnboardBlue")!,
-                               titleColor: UIColor.white,
-                               descriptionColor: UIColor.white,
-                               titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
-                               descriptionFont: UIFont.systemFont(ofSize: 17)),
-            
-            
-            OnboardingItemInfo(informationImage: UIImage(named: "Sshutter")!,
-                               title: loc.takePhotos,
-                               description: loc.tapShutterButton,
-                               pageIcon: UIImage(named: "Page4")!,
-                               color: UIColor(named: "OnboardBlue")!,
-                               titleColor: UIColor.white,
-                               descriptionColor: UIColor.white,
-                               titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
-                               descriptionFont: UIFont.systemFont(ofSize: 17)),
-            
-            OnboardingItemInfo(informationImage: UIImage(named: "Smenu")!,
-                               title: loc.accessMenu,
-                               description: loc.yourPhotosListsAndSettingsHere,
-                               pageIcon: UIImage(named: "Page5")!,
-                               color: UIColor(named: "OnboardBlue")!,
-                               titleColor: UIColor.white,
-                               descriptionColor: UIColor.white,
-                               titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
-                               descriptionFont: UIFont.systemFont(ofSize: 17)),
-            
-            OnboardingItemInfo(informationImage: UIImage(named: "Sjitter")!,
-                               title: loc.beforeYouStart,
-                               description: loc.ensureAccuracy,
-                               pageIcon: UIImage(named: "Page6")!,
                                color: UIColor(named: "OnboardBlue")!,
                                titleColor: UIColor.white,
                                descriptionColor: UIColor.white,
@@ -554,7 +521,7 @@ extension LaunchViewController {
     }
     
     func onboardingItemsCount() -> Int {
-        return 7
+        return 4
     }
 }
 

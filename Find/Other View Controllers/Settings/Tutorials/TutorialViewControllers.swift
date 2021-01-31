@@ -7,16 +7,12 @@
 //
 
 import UIKit
-//import paper_onboarding
 import SnapKit
 import SwiftEntryKit
 
 class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, PaperOnboardingDataSource {
     
-    let loc = LaunchLocalization()
-    
     @IBOutlet weak var paperOnboarding: PaperOnboarding!
-    
     
     @IBAction func xPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -41,9 +37,7 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
     }
     
     func onboardingWillTransitonToIndex(_ index: Int) {
-        if index == 6 {
-            //            goButton.isHidden = false
-            //            goButton.alpha = 0
+        if index == 3 {
             UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform.identity
                 self.goButton.alpha = 1
@@ -61,9 +55,9 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
     
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
         return [
-            OnboardingItemInfo(informationImage: UIImage(named: "Swelcome")!,
-                               title: loc.welcomeToFind,
-                               description: loc.swipeToGetStarted,
+            OnboardingItemInfo(informationImage: UIImage(named: "Intro1")!,
+                               title: LaunchLocalization.welcomeToFind,
+                               description: LaunchLocalization.swipeToGetStarted,
                                pageIcon: UIImage(),
                                color: UIColor.systemBackground,
                                titleColor: UIColor.label,
@@ -71,9 +65,9 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
                                titleFont: UIFont.systemFont(ofSize: 30, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
-            OnboardingItemInfo(informationImage: UIImage(named: "Swhatis")!,
-                               title: loc.whatIsFind,
-                               description: loc.findIsCommandFForCamera,
+            OnboardingItemInfo(informationImage: UIImage(named: "Intro2")!,
+                               title: LaunchLocalization.camera,
+                               description: LaunchLocalization.cameraDescription,
                                pageIcon: UIImage(named: "Page1")!,
                                color: UIColor.systemBackground,
                                titleColor: UIColor.label,
@@ -81,9 +75,9 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
                                titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
-            OnboardingItemInfo(informationImage: UIImage(named: "Ssearchfield")!,
-                               title: loc.findWords,
-                               description: loc.tapSearchField,
+            OnboardingItemInfo(informationImage: UIImage(named: "Intro3")!,
+                               title: LaunchLocalization.photos,
+                               description: LaunchLocalization.photosDescription,
                                pageIcon: UIImage(named: "Page2")!,
                                color: UIColor.systemBackground,
                                titleColor: UIColor.label,
@@ -91,41 +85,10 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
                                titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
-            OnboardingItemInfo(informationImage: UIImage(named: "Slists")!,
-                               title: loc.lists,
-                               description: loc.makeLists,
+            OnboardingItemInfo(informationImage: UIImage(named: "Intro4")!,
+                               title: LaunchLocalization.lists,
+                               description: LaunchLocalization.listsDescription,
                                pageIcon: UIImage(named: "Page3")!,
-                               color: UIColor.systemBackground,
-                               titleColor: UIColor.label,
-                               descriptionColor: UIColor.secondaryLabel,
-                               titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
-                               descriptionFont: UIFont.systemFont(ofSize: 17)),
-            
-            
-            OnboardingItemInfo(informationImage: UIImage(named: "Sshutter")!,
-                               title: loc.takePhotos,
-                               description: loc.tapShutterButton,
-                               pageIcon: UIImage(named: "Page4")!,
-                               color: UIColor.systemBackground,
-                               titleColor: UIColor.label,
-                               descriptionColor: UIColor.secondaryLabel,
-                               titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
-                               descriptionFont: UIFont.systemFont(ofSize: 17)),
-            
-            OnboardingItemInfo(informationImage: UIImage(named: "Smenu")!,
-                               title: loc.accessMenu,
-                               description: loc.yourPhotosListsAndSettingsHere,
-                               pageIcon: UIImage(named: "Page5")!,
-                               color: UIColor.systemBackground,
-                               titleColor: UIColor.label,
-                               descriptionColor: UIColor.secondaryLabel,
-                               titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
-                               descriptionFont: UIFont.systemFont(ofSize: 17)),
-            
-            OnboardingItemInfo(informationImage: UIImage(named: "Sjitter")!,
-                               title: loc.beforeYouStart,
-                               description: loc.ensureAccuracy,
-                               pageIcon: UIImage(named: "Page6")!,
                                color: UIColor.systemBackground,
                                titleColor: UIColor.label,
                                descriptionColor: UIColor.secondaryLabel,
@@ -134,14 +97,11 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
         ][index]
     }
     func onboardingItemsCount() -> Int {
-        return 7
+        return 4
     }
 }
 
 class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, PaperOnboardingDataSource {
-    //    let getStartedButton = UIButton()
-    
-    let loc = HistoryTutorialLocalization()
     
     @IBOutlet weak var paperOnboarding: PaperOnboarding!
     
@@ -187,9 +147,9 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
     
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
         return [
-            OnboardingItemInfo(informationImage: UIImage(named: "Hwelcome")!,
-                               title: loc.welcomeToPhotos,
-                               description: loc.photosFindAgainAndAgain,
+            OnboardingItemInfo(informationImage: UIImage(named: "Photos1")!,
+                               title: LaunchLocalization.photos,
+                               description: LaunchLocalization.photosDescription,
                                pageIcon: UIImage(),
                                color: UIColor.systemBackground,
                                titleColor: UIColor.label,
@@ -197,9 +157,9 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
                                titleFont: UIFont.systemFont(ofSize: 30, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
-            OnboardingItemInfo(informationImage: UIImage(named: "Hselect")!,
-                               title: loc.selectPhotos,
-                               description: loc.tapSelectButtonAndPopUp,
+            OnboardingItemInfo(informationImage: UIImage(named: "Photos2")!,
+                               title: PhotosTutorialLocalization.findFromAllPhotos,
+                               description: PhotosTutorialLocalization.justTapFind,
                                pageIcon: UIImage(named: "Page1")!,
                                color: UIColor.systemBackground,
                                titleColor: UIColor.label,
@@ -207,9 +167,9 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
                                titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
-            OnboardingItemInfo(informationImage: UIImage(named: "Hfind")!,
-                               title: loc.findFromPhotos,
-                               description: loc.selectAFewPhotos,
+            OnboardingItemInfo(informationImage: UIImage(named: "Photos3")!,
+                               title: PhotosTutorialLocalization.findFromSelectPhotos,
+                               description: PhotosTutorialLocalization.tapSelectTapFind,
                                pageIcon: UIImage(named: "Page2")!,
                                color: UIColor.systemBackground,
                                titleColor: UIColor.label,
@@ -217,9 +177,9 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
                                titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
-            OnboardingItemInfo(informationImage: UIImage(named: "Hcache")!,
-                               title: loc.cachePhotos,
-                               description: loc.cachingPhotos,
+            OnboardingItemInfo(informationImage: UIImage(named: "Photos4")!,
+                               title: PhotosTutorialLocalization.cacheYourPhotos,
+                               description: PhotosTutorialLocalization.resultsWillAppearInstantly,
                                pageIcon: UIImage(named: "Page3")!,
                                color: UIColor.systemBackground,
                                titleColor: UIColor.label,
@@ -234,8 +194,6 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
     }
 }
 class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, PaperOnboardingDataSource {
-    
-    let loc = ListsTutorialLocalization()
     
     @IBOutlet weak var paperOnboarding: PaperOnboarding!
     
@@ -252,41 +210,33 @@ class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, Pa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("TUTO")
-        
         goButton.layer.cornerRadius = 6
         paperOnboarding.delegate = self
         paperOnboarding.dataSource = self
-        
-        //        goButton.isHidden = true
         goButton.alpha = 0
         goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
     }
     
     func onboardingWillTransitonToIndex(_ index: Int) {
         if index == 3 {
-            //            goButton.alpha = 0
-            //            goButton.isHidden = false
             UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform.identity
                 self.goButton.alpha = 1
             })
         } else {
-            //            goButton.alpha = 1
             UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 self.goButton.alpha = 0
             })
-            
         }
     }
     
     
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
         return [
-            OnboardingItemInfo(informationImage: UIImage(named: "Lwelcome")!,
-                               title: loc.welcomeToLists,
-                               description: loc.findMultipleWords,
+            OnboardingItemInfo(informationImage: UIImage(named: "Lists1")!,
+                               title: LaunchLocalization.lists,
+                               description: LaunchLocalization.listsDescription,
                                pageIcon: UIImage(),
                                color: UIColor.systemBackground,
                                titleColor: UIColor.label,
@@ -294,9 +244,9 @@ class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, Pa
                                titleFont: UIFont.systemFont(ofSize: 30, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
-            OnboardingItemInfo(informationImage: UIImage(named: "LaddList")!,
-                               title: loc.makeAList,
-                               description: loc.tapTheAddButton,
+            OnboardingItemInfo(informationImage: UIImage(named: "Lists2")!,
+                               title: ListsTutorialLocalization.makeAList,
+                               description: ListsTutorialLocalization.tapThePlusIcon,
                                pageIcon: UIImage(named: "Page1")!,
                                color: UIColor.systemBackground,
                                titleColor: UIColor.label,
@@ -304,9 +254,9 @@ class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, Pa
                                titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
-            OnboardingItemInfo(informationImage: UIImage(named: "LaddMatch")!,
-                               title: loc.addSomeMatches,
-                               description: loc.findSearchesForMatches,
+            OnboardingItemInfo(informationImage: UIImage(named: "Lists3")!,
+                               title: ListsTutorialLocalization.addSomeWords,
+                               description: ListsTutorialLocalization.findWillLookForThem,
                                pageIcon: UIImage(named: "Page2")!,
                                color: UIColor.systemBackground,
                                titleColor: UIColor.label,
@@ -314,9 +264,9 @@ class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, Pa
                                titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
-            OnboardingItemInfo(informationImage: UIImage(named: "Luse")!,
-                               title: loc.useTheList,
-                               description: loc.yourListsWillAppear,
+            OnboardingItemInfo(informationImage: UIImage(named: "Lists4")!,
+                               title: ListsTutorialLocalization.useTheList,
+                               description: ListsTutorialLocalization.yourListsWillAppear,
                                pageIcon: UIImage(named: "Page3")!,
                                color: UIColor.systemBackground,
                                titleColor: UIColor.label,
@@ -331,8 +281,6 @@ class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, Pa
     }
 }
 class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDelegate, PaperOnboardingDataSource {
-    
-    let loc = ListsBuilderTutorialLocalization()
     
     @IBOutlet weak var paperOnboarding: PaperOnboarding!
     
@@ -349,27 +297,22 @@ class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("TUTO")
         
         goButton.layer.cornerRadius = 6
         paperOnboarding.delegate = self
         paperOnboarding.dataSource = self
         
-        //        goButton.isHidden = true
         goButton.alpha = 0
         goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
     }
     
     func onboardingWillTransitonToIndex(_ index: Int) {
         if index == 3 {
-            //            goButton.alpha = 0
-            //            goButton.isHidden = false
             UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform.identity
                 self.goButton.alpha = 1
             })
         } else {
-            //            goButton.alpha = 1
             UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 self.goButton.alpha = 0
@@ -381,9 +324,9 @@ class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDeleg
     
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
         return [
-            OnboardingItemInfo(informationImage: UIImage(named: "Bwelcome")!,
-                               title: loc.welcomeToListsBuilder,
-                               description: loc.startEasilyMakingLists,
+            OnboardingItemInfo(informationImage: UIImage(named: "ListsBuilder1")!,
+                               title: ListsBuilderTutorialLocalization.listsBuilder,
+                               description: ListsBuilderTutorialLocalization.listsBuilderDescription,
                                pageIcon: UIImage(),
                                color: UIColor.systemBackground,
                                titleColor: UIColor.label,
@@ -391,9 +334,9 @@ class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDeleg
                                titleFont: UIFont.systemFont(ofSize: 30, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
-            OnboardingItemInfo(informationImage: UIImage(named: "Badd")!,
-                               title: loc.addAMatch,
-                               description: loc.matchesAreWhatFindLooksFor,
+            OnboardingItemInfo(informationImage: UIImage(named: "ListsBuilder2")!,
+                               title: ListsBuilderTutorialLocalization.addAWord,
+                               description: ListsBuilderTutorialLocalization.tapThePlaceholder,
                                pageIcon: UIImage(named: "Page1")!,
                                color: UIColor.systemBackground,
                                titleColor: UIColor.label,
@@ -401,9 +344,9 @@ class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDeleg
                                titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
-            OnboardingItemInfo(informationImage: UIImage(named: "Breturn")!,
-                               title: loc.addMoreMatches,
-                               description: loc.onceYouveTypedInYourFirstMatch,
+            OnboardingItemInfo(informationImage: UIImage(named: "ListsBuilder3")!,
+                               title: ListsBuilderTutorialLocalization.addMoreWords,
+                               description: ListsBuilderTutorialLocalization.justTapNext,
                                pageIcon: UIImage(named: "Page2")!,
                                color: UIColor.systemBackground,
                                titleColor: UIColor.label,
@@ -411,9 +354,9 @@ class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDeleg
                                titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17)),
             
-            OnboardingItemInfo(informationImage: UIImage(named: "Bdelete")!,
-                               title: loc.deleteAMatch,
-                               description: loc.sometimesYouGotToDeleteAMatch,
+            OnboardingItemInfo(informationImage: UIImage(named: "ListsBuilder4")!,
+                               title: ListsBuilderTutorialLocalization.deleteAWord,
+                               description: ListsBuilderTutorialLocalization.swipeLeftOnIt,
                                pageIcon: UIImage(named: "Page3")!,
                                color: UIColor.systemBackground,
                                titleColor: UIColor.label,
