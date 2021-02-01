@@ -55,7 +55,7 @@ extension CameraViewController {
                         component.y = newY
                         component.width = newW
                         component.height = newH
-                        if Defaults.showTextDetectIndicator {
+                        if UserDefaults.standard.bool(forKey: "showTextDetectIndicator") {
                             drawFastHighlight(component: component)
                         }
                         for match in stringToList.keys {

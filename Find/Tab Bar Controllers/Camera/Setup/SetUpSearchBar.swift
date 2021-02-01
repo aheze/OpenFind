@@ -39,6 +39,7 @@ extension CameraViewController: ToolbarButtonPressed, SelectedList, StartedEditi
             }
 
         case .done:
+            temporaryPreventGestures?(false)
             view.endEditing(true)
             if insertingListsCount == 0 {
                 updateListsLayout(toType: "doneAndShrink")
@@ -359,6 +360,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        temporaryPreventGestures?(true)
         if selectedLists.count == 0 {
             updateListsLayout(toType: "onlyTextBox")
         } else {
@@ -366,6 +368,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        temporaryPreventGestures?(false)
         view.endEditing(true)
         if insertingListsCount == 0 {
             updateListsLayout(toType: "doneAndShrink")
@@ -492,7 +495,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         arrayOfSearch = newSearch
         for match in arrayOfSearch {
             stringToList[match] = currentSearchFindList
-            matchToColors[match] = [UIColor(hexString: Defaults.highlightColor).cgColor]
+            matchToColors[match] = [UIColor(hexString: UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF").cgColor]
         }
         for match in duplicatedStrings {
             stringToList[match] = currentListsSharedFindList
@@ -500,7 +503,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         for match in cameAcrossSearchFieldText {
             stringToList[match] = currentSearchAndListSharedFindList
-            let cgColor = UIColor(hexString: Defaults.highlightColor).cgColor
+            let cgColor = UIColor(hexString: UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF").cgColor
             matchToColors[match, default: [CGColor]()].append(cgColor)
         }
     }

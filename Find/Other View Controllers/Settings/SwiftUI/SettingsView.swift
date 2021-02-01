@@ -9,26 +9,24 @@ import SwiftUI
 import Combine
 import WhatsNewKit
 
-private var cancellables = [String: AnyCancellable]()
-
-extension Published {
-    init(wrappedValue defaultValue: Value, key: String) {
-        let value = UserDefaults.standard.object(forKey: key) as? Value ?? defaultValue
-        self.init(initialValue: value)
-        cancellables[key] = projectedValue.sink { val in
-            UserDefaults.standard.set(val, forKey: key)
-        }
-    }
-}
 struct SettingsHoster {
     static var viewController: SettingsViewHoster?
 }
 
+
 class Settings: ObservableObject {
-    @Published(key: "highlightColor") var highlightColor = "00AEEF"
-    @Published(key: "showTextDetectIndicator") var showTextDetectIndicator = true
-    @Published(key: "hapticFeedbackLevel") var hapticFeedbackLevel = 1
-    @Published(key: "swipeToNavigateEnabled") var swipeToNavigateEnabled = true
+    @Published var highlightColor: String { didSet { UserDefaults.standard.set(highlightColor, forKey: "highlightColor") } }
+    @Published var showTextDetectIndicator: Bool { didSet { UserDefaults.standard.set(showTextDetectIndicator, forKey: "showTextDetectIndicator") } }
+    @Published var hapticFeedbackLevel: Int { didSet { UserDefaults.standard.set(hapticFeedbackLevel, forKey: "hapticFeedbackLevel") } }
+    @Published var swipeToNavigateEnabled: Bool { didSet { UserDefaults.standard.set(swipeToNavigateEnabled, forKey: "swipeToNavigateEnabled") } }
+    
+    init() {
+        print("Should show? \(UserDefaults.standard.bool(forKey: "showTextDetectIndicator"))")
+        self.highlightColor = UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF"
+        self.showTextDetectIndicator = UserDefaults.standard.bool(forKey: "showTextDetectIndicator")
+        self.hapticFeedbackLevel = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
+        self.swipeToNavigateEnabled = UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled")
+    }
 }
 
 class SettingsViewHoster: UIViewController {
@@ -161,6 +159,13 @@ struct SettingsView: View {
             .configureBar()
         }
         .navigationViewStyle(StackNavigationViewStyle())
+//        .onAppear {
+//            print("hi? \(UserDefaults.standard.string(forKey: "highlightColor") ?? "000000")")
+//            settings.highlightColor = UserDefaults.standard.string(forKey: "highlightColor") ?? "000000"
+//            settings.showTextDetectIndicator = UserDefaults.standard.bool(forKey: "showTextDetectIndicator")
+//            settings.hapticFeedbackLevel = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
+//            settings.swipeToNavigateEnabled = UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled")
+//        }
     }
 }
 

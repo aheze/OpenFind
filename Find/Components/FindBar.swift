@@ -523,11 +523,11 @@ extension FindBar {
             arrayOfSearch = newSearch
             
             for match in arrayOfSearch {
-                matchToColors[match] = [UIColor(hexString: Defaults.highlightColor).cgColor]
+                matchToColors[match] = [UIColor(hexString: UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF").cgColor]
             }
             
             for match in cameAcrossSearchFieldText {
-                let cgColor = UIColor(hexString: Defaults.highlightColor).cgColor
+                let cgColor = UIColor(hexString: UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF").cgColor
                 matchToColors[match, default: [CGColor]()].append(cgColor)
             }
             

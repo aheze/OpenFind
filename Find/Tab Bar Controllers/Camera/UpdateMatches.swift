@@ -17,7 +17,7 @@ extension CameraViewController {
             if currentPassCount >= 100 {
                 currentPassCount = 0
                 
-                switch Defaults.hapticFeedbackLevel {
+                switch UserDefaults.standard.integer(forKey: "hapticFeedbackLevel") {
                 case 2:
                     let generator = UIImpactFeedbackGenerator(style: .light)
                     generator.prepare()

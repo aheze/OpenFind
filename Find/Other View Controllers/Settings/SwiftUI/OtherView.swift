@@ -35,10 +35,6 @@ struct SwipeToNavigateView: View {
                     Toggle(isOn: $isOn, label: {
                         Text("Label")
                     }).labelsHidden()
-                    .onReceive(Just(isOn)) { isOn in
-                        print("DETECT ON!! \(isOn)")
-                        Defaults.swipeToNavigateEnabled = isOn
-                    }
 
                 }
                 .padding(EdgeInsets(top: 6, leading: 14, bottom: 6, trailing: 6))
@@ -59,7 +55,6 @@ struct ResetSettingsView: View {
                 HeaderView(text: "Reset Settings")
                 
                 Button(action: {
-                    print("Reset settings")
                     resetSettingsSheetPresented = true
                 }) {
                     HStack {
@@ -80,6 +75,10 @@ struct ResetSettingsView: View {
                     allSettings.showTextDetectIndicator = true
                     allSettings.hapticFeedbackLevel = 1
                     allSettings.swipeToNavigateEnabled = true
+//                    UserDefaults.standard.setValue("00AEEF", forKey: "highlightColor")
+//                    UserDefaults.standard.setValue(true, forKey: "showTextDetectIndicator")
+//                    UserDefaults.standard.setValue(1, forKey: "hapticFeedbackLevel")
+//                    UserDefaults.standard.setValue(true, forKey: "swipeToNavigateEnabled")
                 },
                 .cancel()
             ])

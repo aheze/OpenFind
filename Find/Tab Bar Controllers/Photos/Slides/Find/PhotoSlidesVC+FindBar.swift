@@ -59,6 +59,8 @@ extension PhotoSlidesViewController {
                 self.view.layoutIfNeeded()
                 self.slideFindBar?.alpha = 0
             }
+            
+            slideFindBar?.findBar.searchField.resignFirstResponder()
         }
     }
 }

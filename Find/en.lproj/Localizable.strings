@@ -593,10 +593,10 @@
 "todayLoc" = "Today";
 
 /* No comment provided by engineer. */
-"TutorialLocalization-cameraDescription" = "Looks for the text that you enter";
+"TutorialLocalization-cameraDescription" = "Look for text in real time";
 
 /* No comment provided by engineer. */
-"TutorialLocalization-listsDescription" = "Group words together to find at the same time";
+"TutorialLocalization-listsDescription" = "Group words together";
 
 /* No comment provided by engineer. */
 "TutorialLocalization-photosDescription" = "Find from your existing photos";

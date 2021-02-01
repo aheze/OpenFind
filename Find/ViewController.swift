@@ -57,12 +57,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 guard let self = self else { return }
                 
                 if presentingSlides {
-                    self.longPressGestureRecognizer.isEnabled = false
-                    self.panGestureRecognizer.isEnabled = false
+                    self.temporaryPreventGestures(true)
                     self.tabBarView.showPhotoSlideControls(show: true)
                 } else {
-                    self.longPressGestureRecognizer.isEnabled = true
-                    self.panGestureRecognizer.isEnabled = true
+                    self.temporaryPreventGestures(false)
                     self.tabBarView.showPhotoSlideControls(show: false)
                 }
             }
@@ -185,6 +183,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 guard let self = self else { return }
                 print("reading!!!!!!!!")
                 self.readDefaults()
+            }
+            viewController.temporaryPreventGestures = { [weak self] prevent in
+                self?.temporaryPreventGestures(prevent)
             }
             return viewController
         }

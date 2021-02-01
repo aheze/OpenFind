@@ -123,7 +123,6 @@ class LaunchViewController: UIViewController {
         let defaults = UserDefaults.standard
         defaults.set(true, forKey: "launchedBefore")
         defaults.set("00AEEF", forKey: "highlightColor")
-        
         defaults.set(true, forKey: "showTextDetectIndicator")
         defaults.set(true, forKey: "hapticFeedback")
         

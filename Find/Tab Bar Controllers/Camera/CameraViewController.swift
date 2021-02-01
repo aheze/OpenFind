@@ -162,6 +162,7 @@ class CameraViewController: UIViewController {
         }
     }
     
+    var temporaryPreventGestures: ((Bool) -> Void)?
     @IBOutlet weak var newSearchTextField: TextField!
     @IBOutlet weak var searchTextTopC: NSLayoutConstraint! ///starts at 8
     @IBOutlet weak var searchTextLeftC: NSLayoutConstraint!
