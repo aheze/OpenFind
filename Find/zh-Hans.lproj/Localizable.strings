@@ -196,8 +196,12 @@
 /* No comment provided by engineer. */
 "emptyDesc-photosSavedFromFind" = "从Find中保存的照片将出现在这里";
 
+"emptyDesc-showMeHow" = "怎么？";
+
 /* No comment provided by engineer. */
 "emptyDesc-starThePhotosYouView" = "为您查找最多的照片加注星标";
+
+"emptyDesc-stopTutorial" = "停止教程";
 
 /* SingleHelp def=Encountered an error */
 "encounteredError" = "遇到内部错误";
@@ -720,6 +724,9 @@
 
 /* TutorialLocalization def=Your Photos, Lists, and Settings are here. Check them out! */
 "yourPhotosListsAndSettingsHere" = "您的照片，清单和设置在这里。 去看一看！";
+
+/* No comment provided by engineer. */
+"emptyDesc-stopTutorial" = "";
 
 /* TutorialLocalization def=Matches are what Find looks for when you use the list. Make one by tapping the placeholder that says 'Match'! */
 "matchesAreWhatFindLooksFor" = "";

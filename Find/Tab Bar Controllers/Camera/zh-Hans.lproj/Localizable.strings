@@ -774,3 +774,10 @@
 
 /* No comment provided by engineer. */
 "resultsWillAppearInstantly" = "在有快取的照片中查找时，结果将立即显示";
+
+/* No comment provided by engineer. */
+"emptyDesc-stopTutorial" = "";
+
+"emptyDesc-stopTutorial" = "停止教程";
+
+"emptyDesc-showMeHow" = "怎么？";

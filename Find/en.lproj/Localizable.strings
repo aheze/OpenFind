@@ -196,8 +196,12 @@
 /* No comment provided by engineer. */
 "emptyDesc-photosSavedFromFind" = "Photos saved from Find will appear here";
 
+"emptyDesc-showMeHow" = "Show me how";
+
 /* No comment provided by engineer. */
 "emptyDesc-starThePhotosYouView" = "Star the photos that you view the most";
+
+"emptyDesc-stopTutorial" = "Stop tutorial";
 
 /* SingleHelp def=Encountered an error */
 "encounteredError" = "Encountered an error";
@@ -723,3 +727,6 @@
 
 /* TutorialLocalization def=Your Photos, Lists, and Settings are here. Check them out! */
 "yourPhotosListsAndSettingsHere" = "Your Photos, Lists, and Settings are here. Check them out!";
+
+/* No comment provided by engineer. */
+"emptyDesc-stopTutorial" = "";

@@ -12,7 +12,8 @@ extension EmptyDescriptionView {
     func showTutorial() {
         makeTutorialButtonCurrentlyActive()
         startTutorial?(currentDisplayedFilter)
-        showMeHowButton.setTitle("Stop tutorial", for: .normal)
+        let stopTutorial = NSLocalizedString("emptyDesc-stopTutorial", comment: "")
+        showMeHowButton.setTitle(stopTutorial, for: .normal)
     }
     func stopTutorial() {
         makeTutorialButtonEnabled()
@@ -21,7 +22,8 @@ extension EmptyDescriptionView {
     
     func makeTutorialButtonEnabled() {
         DispatchQueue.main.async {
-            self.showMeHowButton.setTitle("Show me how", for: .normal)
+            let showMeHow = NSLocalizedString("emptyDesc-showMeHow", comment: "")
+            self.showMeHowButton.setTitle(showMeHow, for: .normal)
             switch self.currentDisplayedFilter {
             case .local:
                 self.showMeHowButton.tintColor = UIColor(named: "100Blue")
@@ -35,6 +37,7 @@ extension EmptyDescriptionView {
         }
     }
     func makeTutorialButtonCurrentlyActive() { /// stop tutorial
-        showMeHowButton.setTitle("Stop tutorial", for: .normal)
+        let stopTutorial = NSLocalizedString("emptyDesc-stopTutorial", comment: "")
+        showMeHowButton.setTitle(stopTutorial, for: .normal)
     }
 }
