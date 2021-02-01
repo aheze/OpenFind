@@ -22,8 +22,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var shadeView: UIView!
     
-    var isForcingStatusBarHidden = true /// for taking screenshots only
-    var globalUrl : URL = URL(fileURLWithPath: "")
+    var isForcingStatusBarHidden = false /// for taking screenshots only
+    var globalUrl: URL = URL(fileURLWithPath: "")
     
     var shouldHaveStatusBar = true
     var shouldHaveLightStatusBar = true
