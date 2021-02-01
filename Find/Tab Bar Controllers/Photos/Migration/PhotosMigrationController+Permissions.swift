@@ -43,7 +43,7 @@ extension PhotosMigrationController {
             }
         case .goToSettings:
             let alert = UIAlertController(title: "Allow Access to Photo Library", message: "Find needs permission to move your photos", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: "Multipurpose def=Cancel"), style: UIAlertAction.Style.cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Go to Settings", style: UIAlertAction.Style.default, handler: { _ in
                 guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                     return

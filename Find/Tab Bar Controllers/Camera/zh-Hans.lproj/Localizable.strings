@@ -732,3 +732,45 @@
 
 /* No comment provided by engineer. */
 "ListsBuilderTutorialLocalization-swipeLeftOnIt" = "";
+
+/* No comment provided by engineer. */
+"universal-find" = "查找";
+
+/* No comment provided by engineer. */
+"universal-select" = "选择";
+
+/* No comment provided by engineer. */
+"universal-allowAccessToPhotoLibrary" = "允许访问照片应用";
+
+/* No comment provided by engineer. */
+"CameraVC-findNeedsPermissionToSavePhotos" = "Find需要许可来保存照片";
+
+/* No comment provided by engineer. */
+"universal-goToSettings" = "前往设置";
+
+/* No comment provided by engineer. */
+"PhotosMigrationVC+tryAgain" = "再试一次";
+
+/* No comment provided by engineer. */
+"shouldCache" = "制作快取";
+
+/* No comment provided by engineer. */
+"shouldNotCache" = "快取完成";
+
+/* No comment provided by engineer. */
+"caching..." = "";
+
+/* No comment provided by engineer. */
+"local" = "本地存储";
+
+/* No comment provided by engineer. */
+"emptyDesc-photosSavedFromFind" = "从Find中保存的照片将出现在这里";
+
+/* No comment provided by engineer. */
+"starred" = "星标";
+
+/* No comment provided by engineer. */
+"emptyDesc-starThePhotosYouView" = "为您查找最多的照片加注星标";
+
+/* No comment provided by engineer. */
+"resultsWillAppearInstantly" = "在有快取的照片中查找时，结果将立即显示";

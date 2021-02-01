@@ -1,0 +1,14 @@
+/* Class = "UILabel"; text = "Select Photos"; ObjectID = "eqZ-tJ-hU7"; */
+"eqZ-tJ-hU7.text" = "Select Photos";
+
+/* Class = "UILabel"; text = "Starred"; ObjectID = "p3n-4u-CMq"; */
+"p3n-4u-CMq.text" = "星标";
+
+/* Class = "UILabel"; text = "Cached"; ObjectID = "V5Q-5I-JJ7"; */
+"V5Q-5I-JJ7.text" = "快取";
+
+/* Class = "UILabel"; text = "All"; ObjectID = "xy7-tW-Frx"; */
+"xy7-tW-Frx.text" = "所有";
+
+/* Class = "UILabel"; text = "Local"; ObjectID = "Zup-GQ-hYj"; */
+"Zup-GQ-hYj.text" = "本地";

@@ -44,7 +44,7 @@
 "Hc9-i8-kXk.text" = "点按即可去掉";
 
 /* Class = "UILabel"; text = "Use lists to find multiple words at the same time. Make one by clicking the + button. "; ObjectID = "IcC-jV-a0m"; */
-"IcC-jV-a0m.text" = "用清单来同时查找多个词. 点按 \"+\" 按钮来做一个！";
+"IcC-jV-a0m.text" = "用清单来同时查找多个词. 点按 “+” 按钮来做一个！";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "JsY-MP-aZx"; */
 "JsY-MP-aZx.text" = "标题";
@@ -158,19 +158,19 @@
 "3Gd-9Z-dgV.text" = "";
 
 /* Class = "UILabel"; text = "100%"; ObjectID = "8Mn-ME-wh7"; */
-"8Mn-ME-wh7.text" = "";
+"8Mn-ME-wh7.text" = "100%";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "8gt-pB-SwR"; */
 "8gt-pB-SwR.text" = "";
 
 /* Class = "UILabel"; text = "Something went wrong."; ObjectID = "8jr-oe-diC"; */
-"8jr-oe-diC.text" = "";
+"8jr-oe-diC.text" = "出问题了。";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "D0O-zB-X8g"; */
-"D0O-zB-X8g.normalTitle" = "";
+"D0O-zB-X8g.normalTitle" = "取消";
 
 /* Class = "UILabel"; text = "Edit List"; ObjectID = "EJm-mq-t0W"; */
-"EJm-mq-t0W.text" = "";
+"EJm-mq-t0W.text" = "编辑清单";
 
 /* Class = "UITextView"; text = "jlkdfj sldfjlsdk fklsj flshf klhf lskhk dlhg sdlkjhg dkslfhgklds fjghskdlf gh dsflkg"; ObjectID = "ExW-tk-zoV"; */
 "ExW-tk-zoV.text" = "";
@@ -179,43 +179,43 @@
 "FgX-GJ-ZZY.text" = "";
 
 /* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "GVI-ZE-xKU"; */
-"GVI-ZE-xKU.normalTitle" = "";
+"GVI-ZE-xKU.normalTitle" = "确认";
 
 /* Class = "UILabel"; text = "5 Results | Yesterday sdfls dfjs ljs fljs flsf"; ObjectID = "IHa-QS-tl8"; */
 "IHa-QS-tl8.text" = "";
 
 /* Class = "UILabel"; text = "Tap 'Try Again' or"; ObjectID = "Kzn-lF-Gee"; */
-"Kzn-lF-Gee.text" = "";
+"Kzn-lF-Gee.text" = "点按“再试一次”或";
 
 /* Class = "UILabel"; text = "Save"; ObjectID = "Myy-mx-RUb"; */
-"Myy-mx-RUb.text" = "";
+"Myy-mx-RUb.text" = "保存";
 
 /* Class = "UIButton"; normalTitle = "0"; ObjectID = "fK0-3I-lSn"; */
-"fK0-3I-lSn.normalTitle" = "";
+"fK0-3I-lSn.normalTitle" = "0";
 
 /* Class = "UILabel"; text = "Cache"; ObjectID = "ffY-JT-gig"; */
-"ffY-JT-gig.text" = "";
+"ffY-JT-gig.text" = "制作快取";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "gwm-Ba-voS"; */
-"gwm-Ba-voS.normalTitle" = "";
+"gwm-Ba-voS.normalTitle" = "取消";
 
 /* Class = "UIButton"; normalTitle = "Save"; ObjectID = "jCO-rD-51A"; */
-"jCO-rD-51A.normalTitle" = "";
+"jCO-rD-51A.normalTitle" = "保存";
 
 /* Class = "UILabel"; text = "These photos will be moved."; ObjectID = "lOe-HW-5gn"; */
-"lOe-HW-5gn.text" = "";
+"lOe-HW-5gn.text" = "这些照片将被移动。";
 
 /* Class = "UILabel"; text = "Moving"; ObjectID = "lqS-ZQ-kKE"; */
-"lqS-ZQ-kKE.text" = "";
+"lqS-ZQ-kKE.text" = "正在移动";
 
 /* Class = "UIButton"; normalTitle = "manually move"; ObjectID = "sot-Lv-tdU"; */
-"sot-Lv-tdU.normalTitle" = "";
+"sot-Lv-tdU.normalTitle" = "手动移动";
 
 /* Class = "UIButton"; normalTitle = "Back"; ObjectID = "tkG-FL-Vjn"; */
-"tkG-FL-Vjn.normalTitle" = "";
+"tkG-FL-Vjn.normalTitle" = "返回";
 
 /* Class = "UILabel"; text = "Move Photos"; ObjectID = "vF4-q0-Cee"; */
-"vF4-q0-Cee.text" = "";
+"vF4-q0-Cee.text" = "移动照片";
 
 /* Class = "UILabel"; text = "Try switching to a different tab and back."; ObjectID = "yJs-9Y-Vwz"; */
-"yJs-9Y-Vwz.text" = "";
+"yJs-9Y-Vwz.text" = "试一试去其他标签并返回";

@@ -115,11 +115,11 @@ extension CameraViewController {
                 let noWords = NSLocalizedString("noWords", comment: "Stats def=[no words]")
                 finalMatchesString = noWords
              case 1:
-                let quotexquote = NSLocalizedString("quote %@ quote", comment: "Stats def=\"x\"")
+                let quotexquote = NSLocalizedString("quote %@ quote", comment: "Stats def=“x”")
                 let string = String.localizedStringWithFormat(quotexquote, wordsFinding[0])
                 finalMatchesString = string
              case 2:
-                let quotexquoteSpaceAndquotexquote = NSLocalizedString("quote %@ quoteSpaceAndquote %@ quote", comment: "Stats def=\"x\" and \"x\"")
+                let quotexquoteSpaceAndquotexquote = NSLocalizedString("quote %@ quoteSpaceAndquote %@ quote", comment: "Stats def=“x” and “x”")
                 let string = String.localizedStringWithFormat(quotexquoteSpaceAndquotexquote, wordsFinding[0], wordsFinding[1])
                 finalMatchesString = string
                 

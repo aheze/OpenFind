@@ -25,8 +25,6 @@ class FindBar: UIView, UITextFieldDelegate {
     
     let deviceSize = screenBounds.size
     
-    var resultsLabel = UILabel()
-    
     var origCacheNumber = 0
     var totalResultsNumber = 0
     var searchingOnlyInCache = true
@@ -138,9 +136,6 @@ class FindBar: UIView, UITextFieldDelegate {
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         searchField.insets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
-        resultsLabel.textAlignment = .right
-        
-        resultsLabel.text = "                                   "
         loadListsRealm()
         
         
@@ -169,12 +164,8 @@ class FindBar: UIView, UITextFieldDelegate {
         okButton.isHidden = true
         
         searchField.keyboardAppearance = .default
-        searchField.rightView = resultsLabel
-        searchField.rightViewMode = .always
         searchField.backgroundColor = UIColor.white.withAlphaComponent(0.3)
-        searchField.attributedPlaceholder = NSAttributedString(string: "Type here to find", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white.withAlphaComponent(0.75)])
-        
-        resultsLabel.textColor = UIColor.lightGray
+        searchField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("typeHereToFind", comment: ""), attributes: [NSAttributedString.Key.foregroundColor : UIColor.white.withAlphaComponent(0.75)])
         
     }
 }

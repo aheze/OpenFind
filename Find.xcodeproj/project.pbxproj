@@ -105,6 +105,8 @@
 		3C8F116B25AD0A160091402B /* SegmentedSlider+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F116A25AD0A160091402B /* SegmentedSlider+Selection.swift */; };
 		3C8F116E25AD5DA80091402B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F116D25AD5DA80091402B /* CustomButton.swift */; };
 		3C9CE49B25BFBFAC006D989C /* CameraVC+Resume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9CE49A25BFBFAC006D989C /* CameraVC+Resume.swift */; };
+		3CA63F3625C7BA64001C295E /* TabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F3825C7BA64001C295E /* TabBar.xib */; };
+		3CA63F3C25C7BAA6001C295E /* SegmentedSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F3E25C7BAA6001C295E /* SegmentedSlider.xib */; };
 		3CA679B625C38836008A00A4 /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA679B525C38836008A00A4 /* ContactView.swift */; };
 		3CA9334625BDF2BC00042C2F /* CameraVC+Pause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9334525BDF2BC00042C2F /* CameraVC+Pause.swift */; };
 		3CA9334D25BDF37800042C2F /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9334C25BDF37800042C2F /* CameraView.swift */; };
@@ -136,7 +138,6 @@
 		3CAC4DD025BF611100CC7948 /* CameraVC+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4DCF25BF611100CC7948 /* CameraVC+Draw.swift */; };
 		3CAD947125BF3831001D5E0A /* CameraVC+CacheFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAD947025BF3831001D5E0A /* CameraVC+CacheFind.swift */; };
 		3CB6842C259FF9A700AE0AD6 /* SegmentedSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */; };
-		3CB6842D259FF9A700AE0AD6 /* SegmentedSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB6842B259FF9A700AE0AD6 /* SegmentedSlider.xib */; };
 		3CB6843225A0087700AE0AD6 /* PhotosMigrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */; };
 		3CB6843525A013D800AE0AD6 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6843425A013D800AE0AD6 /* ImageCell.swift */; };
 		3CB6843825A0140200AE0AD6 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB6843725A0140200AE0AD6 /* ImageCell.xib */; };
@@ -157,7 +158,6 @@
 		3CE306DA259AC46400F1B2E2 /* CameraIcon.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE306D2259AC46400F1B2E2 /* CameraIcon.xib */; };
 		3CE306DB259AC46400F1B2E2 /* CameraIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306D3259AC46400F1B2E2 /* CameraIcon.swift */; };
 		3CE306DC259AC46400F1B2E2 /* ListsIcon.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE306D4259AC46400F1B2E2 /* ListsIcon.xib */; };
-		3CE306DD259AC46400F1B2E2 /* TabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE306D5259AC46400F1B2E2 /* TabBar.xib */; };
 		3CE306E3259AC4B000F1B2E2 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E0259AC4B000F1B2E2 /* State.swift */; };
 		3CE306E4259AC4B000F1B2E2 /* GestureTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E1259AC4B000F1B2E2 /* GestureTransitions.swift */; };
 		3CE306E5259AC4B000F1B2E2 /* ButtonTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E2259AC4B000F1B2E2 /* ButtonTransitions.swift */; };
@@ -368,6 +368,10 @@
 		3C8F116A25AD0A160091402B /* SegmentedSlider+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SegmentedSlider+Selection.swift"; sourceTree = "<group>"; };
 		3C8F116D25AD5DA80091402B /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		3C9CE49A25BFBFAC006D989C /* CameraVC+Resume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Resume.swift"; sourceTree = "<group>"; };
+		3CA63F3725C7BA64001C295E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TabBar.xib; sourceTree = "<group>"; };
+		3CA63F3B25C7BA6A001C295E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/TabBar.strings"; sourceTree = "<group>"; };
+		3CA63F3D25C7BAA6001C295E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SegmentedSlider.xib; sourceTree = "<group>"; };
+		3CA63F4325C7BAAF001C295E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SegmentedSlider.strings"; sourceTree = "<group>"; };
 		3CA679B525C38836008A00A4 /* ContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
 		3CA9334525BDF2BC00042C2F /* CameraVC+Pause.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Pause.swift"; sourceTree = "<group>"; };
 		3CA9334C25BDF37800042C2F /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -399,7 +403,6 @@
 		3CAC4DCF25BF611100CC7948 /* CameraVC+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Draw.swift"; sourceTree = "<group>"; };
 		3CAD947025BF3831001D5E0A /* CameraVC+CacheFind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+CacheFind.swift"; sourceTree = "<group>"; };
 		3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedSlider.swift; sourceTree = "<group>"; };
-		3CB6842B259FF9A700AE0AD6 /* SegmentedSlider.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentedSlider.xib; sourceTree = "<group>"; };
 		3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationController.swift; sourceTree = "<group>"; };
 		3CB6843425A013D800AE0AD6 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		3CB6843725A0140200AE0AD6 /* ImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
@@ -420,7 +423,6 @@
 		3CE306D2259AC46400F1B2E2 /* CameraIcon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraIcon.xib; sourceTree = "<group>"; };
 		3CE306D3259AC46400F1B2E2 /* CameraIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraIcon.swift; sourceTree = "<group>"; };
 		3CE306D4259AC46400F1B2E2 /* ListsIcon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListsIcon.xib; sourceTree = "<group>"; };
-		3CE306D5259AC46400F1B2E2 /* TabBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBar.xib; sourceTree = "<group>"; };
 		3CE306E0259AC4B000F1B2E2 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		3CE306E1259AC4B000F1B2E2 /* GestureTransitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureTransitions.swift; sourceTree = "<group>"; };
 		3CE306E2259AC4B000F1B2E2 /* ButtonTransitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTransitions.swift; sourceTree = "<group>"; };
@@ -554,7 +556,7 @@
 				3CB6842F25A0085E00AE0AD6 /* Migration */,
 				3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */,
 				3C8F116A25AD0A160091402B /* SegmentedSlider+Selection.swift */,
-				3CB6842B259FF9A700AE0AD6 /* SegmentedSlider.xib */,
+				3CA63F3E25C7BAA6001C295E /* SegmentedSlider.xib */,
 				3CB6843425A013D800AE0AD6 /* ImageCell.swift */,
 				3CB6843725A0140200AE0AD6 /* ImageCell.xib */,
 				3C56C59C25A9562F0006A667 /* Slides */,
@@ -939,7 +941,7 @@
 				3CE306CE259AC46400F1B2E2 /* TabBar.swift */,
 				3C2858C5259C3E4C00BABBA7 /* TabBar+Lists.swift */,
 				3CFF312E25AA79D400D3C56D /* TabBar+Photos.swift */,
-				3CE306D5259AC46400F1B2E2 /* TabBar.xib */,
+				3CA63F3825C7BA64001C295E /* TabBar.xib */,
 				3CE306D0259AC46400F1B2E2 /* PhotosIcon.swift */,
 				3CE306CF259AC46400F1B2E2 /* PhotosIcon.xib */,
 				3CE306D1259AC46400F1B2E2 /* ListsIcon.swift */,
@@ -1397,7 +1399,7 @@
 			files = (
 				3C3D47DD25A40A5B002B8BBF /* PhotoPermissionView.xib in Resources */,
 				4956352A2437A4B60001E8C6 /* defaultSeeds.realm in Resources */,
-				3CE306DD259AC46400F1B2E2 /* TabBar.xib in Resources */,
+				3CA63F3625C7BA64001C295E /* TabBar.xib in Resources */,
 				3C634C7325C0F31D0064CBF8 /* EmptyDescriptionView.xib in Resources */,
 				49E9D89224996E1A0006757C /* Localizable.strings in Resources */,
 				3C2C3E9625A11749002C3D11 /* PreloadImages.xcassets in Resources */,
@@ -1406,7 +1408,7 @@
 				495F7DAA24CBB3970053DE50 /* InfoPlist.strings in Resources */,
 				3C1FE21925BB4246004DC9EF /* SlideFindBar.xib in Resources */,
 				49D985B124188CA4005F4E92 /* NewListToolbarCell.xib in Resources */,
-				3CB6842D259FF9A700AE0AD6 /* SegmentedSlider.xib in Resources */,
+				3CA63F3C25C7BAA6001C295E /* SegmentedSlider.xib in Resources */,
 				3C4DE704259AD5670037D104 /* NewColors.xcassets in Resources */,
 				3CE306DA259AC46400F1B2E2 /* CameraIcon.xib in Resources */,
 				3CB6843825A0140200AE0AD6 /* ImageCell.xib in Resources */,
@@ -1733,6 +1735,24 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		3CA63F3825C7BA64001C295E /* TabBar.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3CA63F3725C7BA64001C295E /* Base */,
+				3CA63F3B25C7BA6A001C295E /* zh-Hans */,
+			);
+			name = TabBar.xib;
+			sourceTree = "<group>";
+		};
+		3CA63F3E25C7BAA6001C295E /* SegmentedSlider.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3CA63F3D25C7BAA6001C295E /* Base */,
+				3CA63F4325C7BAAF001C295E /* zh-Hans */,
+			);
+			name = SegmentedSlider.xib;
+			sourceTree = "<group>";
+		};
 		495DAD3824A6B2E500D5F844 /* FindBar.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

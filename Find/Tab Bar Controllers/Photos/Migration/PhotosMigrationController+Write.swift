@@ -128,7 +128,9 @@ extension PhotosMigrationController {
         if !editablePhotosWithErrors.isEmpty {
             resetProgress()
             tryAgain = true
-            confirmButton.setTitle("Try Again", for: .normal)
+            
+            let tryAgain = NSLocalizedString("PhotosMigrationVC+tryAgain", comment: "")
+            confirmButton.setTitle(tryAgain, for: .normal)
             promptLabel.text = "These photos could not be automatically moved."
             tapTryAgainView.alpha = 1
             tapTryAgainHeightC.constant = 40

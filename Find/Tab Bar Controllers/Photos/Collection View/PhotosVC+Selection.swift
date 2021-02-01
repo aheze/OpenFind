@@ -26,7 +26,7 @@ extension PhotosViewController {
             selectButtonSelected.toggle()
             showSelectionControls?(selectButtonSelected)
             if selectButtonSelected {
-                selectButton.title = "Cancel"
+                selectButton.title = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
                 collectionView.allowsMultipleSelection = true
                 segmentedSlider.showNumberOfSelected(show: true)
                 
@@ -34,7 +34,7 @@ extension PhotosViewController {
                     pressedSelectTip?()
                 }
             } else {
-                selectButton.title = "Select"
+                selectButton.title = NSLocalizedString("universal-select", comment: "")
                 collectionView.allowsMultipleSelection = false
                 segmentedSlider.showNumberOfSelected(show: false)
                 deselectAllPhotos()
@@ -48,11 +48,10 @@ extension PhotosViewController {
         }
     }
     func doneWithSelect() {
-        print("Done")
         selectButtonSelected = false
         showSelectionControls?(selectButtonSelected)
         
-        selectButton.title = "Select"
+        selectButton.title = NSLocalizedString("universal-select", comment: "")
         collectionView.allowsMultipleSelection = false
         segmentedSlider.showNumberOfSelected(show: false)
         deselectAllPhotos()

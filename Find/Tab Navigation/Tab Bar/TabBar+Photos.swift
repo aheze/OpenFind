@@ -88,11 +88,11 @@ extension TabBarView {
                 let starFillImage = UIImage(systemName: "star.fill")
                 starButton.setImage(starFillImage, for: .normal)
             case .shouldCache:
-                let cacheText = "Cache"
-                cacheButton.setTitle(cacheText, for: .normal)
+                let shouldCache = NSLocalizedString("shouldCache", comment: "")
+                cacheButton.setTitle(shouldCache, for: .normal)
             case .shouldNotCache:
-                let cachedText = "Cached"
-                cacheButton.setTitle(cachedText, for: .normal)
+                let shouldNotCache = NSLocalizedString("shouldNotCache", comment: "")
+                cacheButton.setTitle(shouldNotCache, for: .normal)
             }
         } else {
             switch action {
@@ -103,11 +103,11 @@ extension TabBarView {
                 let starFillImage = UIImage(systemName: "star.fill")
                 slideStarButton.setImage(starFillImage, for: .normal)
             case .shouldCache:
-                let cacheText = "Cache"
-                slideCacheButton.setTitle(cacheText, for: .normal)
+                let shouldCache = NSLocalizedString("shouldCache", comment: "")
+                slideCacheButton.setTitle(shouldCache, for: .normal)
             case .shouldNotCache:
-                let cachedText = "Cached"
-                slideCacheButton.setTitle(cachedText, for: .normal)
+                let shouldNotCache = NSLocalizedString("shouldNotCache", comment: "")
+                slideCacheButton.setTitle(shouldNotCache, for: .normal)
             }
         }
     }

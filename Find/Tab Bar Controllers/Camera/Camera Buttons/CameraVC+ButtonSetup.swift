@@ -67,9 +67,12 @@ extension CameraViewController {
                         }
                     }
                 } else if status == .shouldGoToSettings {
-                    let alert = UIAlertController(title: "Allow Access to Photo Library", message: "Find needs permission to save photos", preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
-                    alert.addAction(UIAlertAction(title: "Go to Settings", style: UIAlertAction.Style.default, handler: { _ in
+                    let allowAccessToPhotoLibrary = NSLocalizedString("universal-allowAccessToPhotoLibrary", comment: "")
+                    let findNeedsPermissionToSavePhotos = NSLocalizedString("CameraVC-findNeedsPermissionToSavePhotos", comment: "")
+                    let goToSettings = NSLocalizedString("universal-goToSettings", comment: "")
+                    let alert = UIAlertController(title: allowAccessToPhotoLibrary, message: findNeedsPermissionToSavePhotos, preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: "Multipurpose def=Cancel"), style: UIAlertAction.Style.cancel, handler: nil))
+                    alert.addAction(UIAlertAction(title: goToSettings, style: UIAlertAction.Style.default, handler: { _ in
                         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                             return
                         }
@@ -92,7 +95,7 @@ extension CameraViewController {
                 self.cache.cacheIcon.animateCheck(percentage: 0)
                 self.cache.cacheIcon.toggleRim(light: false)
                 self.cacheLabel.fadeTransition(0.2)
-                self.cacheLabel.text = "Cache"
+                self.cacheLabel.text = NSLocalizedString("shouldCache", comment: "")
                 self.messageView.hideMessages()
             }
         }

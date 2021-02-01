@@ -66,16 +66,16 @@ class EmptyDescriptionView: UIView {
             
             switch photoFilter {
             case .local:
-                headerText = "Local"
-                descriptionText = "Photos saved from Find will appear here"
+                headerText = NSLocalizedString("local", comment: "")
+                descriptionText = NSLocalizedString("emptyDesc-photosSavedFromFind", comment: "")
                 newImage = UIImage(named: "LocalPhotos")
                 flipFromRight = true
                 UIView.animate(withDuration: 0.2) {
                     self.showMeHowButton.tintColor = UIColor(named: "100Blue")
                 }
             case .starred:
-                headerText = "Starred"
-                descriptionText = "Star the photos that you view the most"
+                headerText = NSLocalizedString("starred", comment: "")
+                descriptionText = NSLocalizedString("emptyDesc-starThePhotosYouView", comment: "")
                 newImage = UIImage(named: "StarredPhotos")
                 if previousFilter != .local {
                     flipFromRight = true
@@ -84,8 +84,8 @@ class EmptyDescriptionView: UIView {
                     self.showMeHowButton.tintColor = UIColor(named: "Gold")
                 }
             case .cached:
-                headerText = "Cached"
-                descriptionText = "Results will appear instantly when finding in cached photos"
+                headerText = NSLocalizedString("shouldNotCache", comment: "")
+                descriptionText = NSLocalizedString("resultsWillAppearInstantly", comment: "")
                 newImage = UIImage(named: "CachedPhotos")
                 if previousFilter == .all {
                     flipFromRight = true

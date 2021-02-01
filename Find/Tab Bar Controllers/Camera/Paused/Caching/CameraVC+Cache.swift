@@ -18,13 +18,13 @@ extension CameraViewController {
                 cache.cacheIcon.animateCheck(percentage: 1)
                 cache.cacheIcon.toggleRim(light: true)
                 cacheLabel.fadeTransition(0.2)
-                cacheLabel.text = "Cached"
+                cacheLabel.text = NSLocalizedString("shouldNotCache", comment: "")
                 addCacheResults()
             } else {
                 cache.cacheIcon.animateCheck(percentage: currentProgress)
                 cache.cacheIcon.toggleRim(light: true)
                 cacheLabel.fadeTransition(0.2)
-                cacheLabel.text = "Caching..."
+                cacheLabel.text = NSLocalizedString("caching...", comment: "")
                 messageView.unHideMessages()
             }
         } else {
@@ -32,7 +32,7 @@ extension CameraViewController {
                 cache.cacheIcon.animateCheck(percentage: 0)
                 cache.cacheIcon.toggleRim(light: true)
                 cacheLabel.fadeTransition(0.2)
-                cacheLabel.text = "Caching..."
+                cacheLabel.text = NSLocalizedString("caching...", comment: "")
                 messageView.showMessage("0", dismissible: false, duration: -1)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                     self.messageView.showMessage("25", dismissible: false, duration: -1)

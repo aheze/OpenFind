@@ -10,9 +10,16 @@ import UIKit
 
 extension PhotosViewController {
     func setupBarButtons() {
-        self.title = "Photos"
-        findButton = UIBarButtonItem(title: "Find", style: .plain, target: self, action: #selector(findPressed(sender:)))
-        selectButton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectPressed(sender:)))
+        
+        let photos = NSLocalizedString("welcomeToPhotos", comment: "")
+        self.title = photos
+        
+        
+        let findText = NSLocalizedString("universal-find", comment: "")
+        let selectText = NSLocalizedString("universal-select", comment: "")
+        
+        findButton = UIBarButtonItem(title: findText, style: .plain, target: self, action: #selector(findPressed(sender:)))
+        selectButton = UIBarButtonItem(title: selectText, style: .plain, target: self, action: #selector(selectPressed(sender:)))
         
         findButton.tintColor = UIColor(named: "PhotosText")
         selectButton.tintColor = UIColor(named: "PhotosText")
@@ -23,11 +30,9 @@ extension PhotosViewController {
         selectButton.isEnabled = false
     }
     @objc func findPressed(sender: UIBarButtonItem) {
-        print("Find")
         findPressed()
     }
     @objc func selectPressed(sender: UIBarButtonItem) {
         selectPressed()
-        print("select")
     }
 }

@@ -85,6 +85,9 @@
 /* TutorialLocalization def=Cache photos */
 "cachePhotos" = "Cache photos";
 
+/* No comment provided by engineer. */
+"caching..." = "Caching...";
+
 /* Multifile def=Caching again will take a while... */
 "cachingAgainTakeAWhile" = "Caching again will take a while...";
 
@@ -93,6 +96,9 @@
 
 /*comment*/
 "camera" = "Camera";
+
+/* No comment provided by engineer. */
+"CameraVC-findNeedsPermissionToSavePhotos" = "Find needs permission to save photos";
 
 /* Multipurpose def=Cancel */
 "cancel" = "Cancel";
@@ -186,6 +192,12 @@
 
 /* HistoryFindController def=Duplicates are not allowed */
 "duplicatesNotAllowed" = "Duplicates are not allowed";
+
+/* No comment provided by engineer. */
+"emptyDesc-photosSavedFromFind" = "Photos saved from Find will appear here";
+
+/* No comment provided by engineer. */
+"emptyDesc-starThePhotosYouView" = "Star the photos that you view the most";
 
 /* SingleHelp def=Encountered an error */
 "encounteredError" = "Encountered an error";
@@ -322,6 +334,9 @@
 /* No comment provided by engineer. */
 "ListsTutorialLocalization-tapThePlusIcon" = "Tap the plus icon";
 
+/* No comment provided by engineer. */
+"local" = "Local";
+
 /* MultipurposeExtension def=false */
 "locBoolFalse" = "false";
 
@@ -433,6 +448,9 @@
 /* TutorialLocalization def=...find again and again! */
 "photosFindAgainAndAgain" = "Save it now, find in it later!";
 
+/* No comment provided by engineer. */
+"PhotosMigrationVC+tryAgain" = "Try Again";
+
 /* StatsViewController def=photos */
 "photosPluralLoc" = "photos";
 
@@ -478,6 +496,9 @@
 /* Settings def=Reset Settings */
 "resetSettings" = "Reset Settings";
 
+/* No comment provided by engineer. */
+"resultsWillAppearInstantly" = "Results will appear instantly when finding in cached photos";
+
 /* GeneralViewController def=I'll fix it myself */
 "rightButtonFixItMyself" = "I'll fix it myself";
 
@@ -517,6 +538,12 @@
 /*GeneralViewController*/
 "shortDescriptionPlaceholder" = "Short description";
 
+/* No comment provided by engineer. */
+"shouldCache" = "Cache";
+
+/* No comment provided by engineer. */
+"shouldNotCache" = "Cached";
+
 /* StatsViewController def=since you first downloaded Find */
 "sinceYouFirstDownloadedFind" = "since you first downloaded Find";
 
@@ -534,6 +561,9 @@
 
 /* SymbolsViewController def=Speech */
 "speechLoc" = "Speech";
+
+/* No comment provided by engineer. */
+"starred" = "Starred";
 
 /* HistoryFindController def=Start by typing or selecting a list... */
 "startByTypingOrSelectingAList" = "Start by typing or selecting a list...";
@@ -612,6 +642,18 @@
 
 /* HistoryCollectionViewFiles def=Unheart */
 "unheart" = "Unheart";
+
+/* No comment provided by engineer. */
+"universal-allowAccessToPhotoLibrary" = "Allow Access to Photo Library";
+
+/* No comment provided by engineer. */
+"universal-find" = "Find";
+
+/* No comment provided by engineer. */
+"universal-goToSettings" = "Go to Settings";
+
+/* No comment provided by engineer. */
+"universal-select" = "Select";
 
 /* GeneralViewController def=Untitled */
 "untitledName" = "Untitled";

@@ -85,11 +85,20 @@
 /* TutorialLocalization def=Cache photos */
 "cachePhotos" = "快取照片";
 
+/* No comment provided by engineer. */
+"caching..." = "正在快取。。。";
+
 /* Multifile def=Caching again will take a while... */
 "cachingAgainTakeAWhile" = "再次快取将需要一段时间…";
 
 /* Multifile def=Caching done! */
 "cachingDoneExclaim" = "快取完成！";
+
+/*comment*/
+"camera" = "相机";
+
+/* No comment provided by engineer. */
+"CameraVC-findNeedsPermissionToSavePhotos" = "Find需要许可来保存照片";
 
 /* Multipurpose def=Cancel */
 "cancel" = "取消";
@@ -184,6 +193,12 @@
 /* HistoryFindController def=Duplicates are not allowed */
 "duplicatesNotAllowed" = "不允许重复项";
 
+/* No comment provided by engineer. */
+"emptyDesc-photosSavedFromFind" = "从Find中保存的照片将出现在这里";
+
+/* No comment provided by engineer. */
+"emptyDesc-starThePhotosYouView" = "为您查找最多的照片加注星标";
+
 /* SingleHelp def=Encountered an error */
 "encounteredError" = "遇到内部错误";
 
@@ -274,6 +289,30 @@
 /* Settings def=Lists Builder */
 "listsBuilderTutorial" = "制作清单";
 
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-addAWord" = "加个词";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-addMoreWords" = "加更多词";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-deleteAWord" = "删除一个词";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-justTapNext" = "只需点击键盘上的“next”";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-listsBuilder" = "制作清单";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-listsBuilderDescription" = "点击 “+”，开始制作！";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-swipeLeftOnIt" = "向左滑动";
+
+/* No comment provided by engineer. */
+"ListsBuilderTutorialLocalization-tapThePlaceholder" = "点击占位符";
+
 /* StatsViewController def=list */
 "listSingularLoc" = "清单";
 
@@ -282,6 +321,21 @@
 
 /* Settings def=Lists */
 "listsTutorial" = "清单";
+
+/* No comment provided by engineer. */
+"ListsTutorialLocalization-addSomeWords" = "输入多个词";
+
+/* No comment provided by engineer. */
+"ListsTutorialLocalization-findWillLookForThem" = "当您使用清单时，Find会寻找这些";
+
+/* No comment provided by engineer. */
+"ListsTutorialLocalization-makeAList" = "做清单";
+
+/* No comment provided by engineer. */
+"ListsTutorialLocalization-tapThePlusIcon" = "点按 “+”";
+
+/* No comment provided by engineer. */
+"local" = "本地存储";
 
 /* MultipurposeExtension def=false */
 "locBoolFalse" = "没有";
@@ -300,9 +354,6 @@
 
 /* FindBar def=Matches */
 "matches" = "搜索结果";
-
-/* TutorialLocalization def=Matches are what Find looks for when you use the list. Make one by tapping the placeholder that says 'Match'! */
-"matchesAreWhatFindLooksFor" = "点按 \"搜索词\" 输入一个词";
 
 /* StatsViewController def=matches found currently */
 "matchesFoundCurrently" = "个搜索结果";
@@ -394,6 +445,9 @@
 /* TutorialLocalization def=...find again and again! */
 "photosFindAgainAndAgain" = "先储存，后查找！";
 
+/* No comment provided by engineer. */
+"PhotosMigrationVC+tryAgain" = "再试一次";
+
 /* StatsViewController def=photos */
 "photosPluralLoc" = "照片";
 
@@ -405,6 +459,24 @@
 
 /* Settings def=Photos */
 "photosTutorial" = "照片";
+
+/* No comment provided by engineer. */
+"PhotosTutorialLocalization-cacheYourPhotos" = "快取您的照片";
+
+/* No comment provided by engineer. */
+"PhotosTutorialLocalization-findFromAllPhotos" = "从所有照片中查找";
+
+/* No comment provided by engineer. */
+"PhotosTutorialLocalization-findFromSelectPhotos" = "从一些照片中查找";
+
+/* No comment provided by engineer. */
+"PhotosTutorialLocalization-justTapFind" = "只需点击查找";
+
+/* No comment provided by engineer. */
+"PhotosTutorialLocalization-resultsWillAppearInstantly" = "在有快取的照片中查找时，结果将立即显示";
+
+/* No comment provided by engineer. */
+"PhotosTutorialLocalization-tapSelectTapFind" = "点击“选择”，然后点击“查找”";
 
 /* Stats def=\"x\" */
 "quote %@ quote" = "\"%@\"";
@@ -420,6 +492,9 @@
 
 /* Settings def=Reset Settings */
 "resetSettings" = "重置所有设置";
+
+/* No comment provided by engineer. */
+"resultsWillAppearInstantly" = "在有快取的照片中查找时，结果将立即显示";
 
 /* GeneralViewController def=I'll fix it myself */
 "rightButtonFixItMyself" = "我自己去改";
@@ -460,6 +535,12 @@
 /*GeneralViewController*/
 "shortDescriptionPlaceholder" = "简短的介绍";
 
+/* No comment provided by engineer. */
+"shouldCache" = "制作快取";
+
+/* No comment provided by engineer. */
+"shouldNotCache" = "快取完成";
+
 /* StatsViewController def=since you first downloaded Find */
 "sinceYouFirstDownloadedFind" = "自您首次下载Find以来";
 
@@ -478,11 +559,14 @@
 /* SymbolsViewController def=Speech */
 "speechLoc" = "语言";
 
+/* No comment provided by engineer. */
+"starred" = "星标";
+
 /* HistoryFindController def=Start by typing or selecting a list... */
 "startByTypingOrSelectingAList" = "输入英文或拼音";
 
 /* TutorialLocalization def=...Start easily making lists! */
-"startEasilyMakingLists" = "点击 \"+\"，开始制作！";
+"startEasilyMakingLists" = "点击 “+”，开始制作！";
 
 /* TutorialLocalization def=Swipe to get started */
 "swipeToGetStarted" = "滑动即可开始\n\n⚠️ 当前，Find仅支持英语和拼音。";
@@ -497,10 +581,10 @@
 "tapSelectButtonAndPopUp" = "点击 \"选择\" 按钮，将控制项弹出，然后选择照片";
 
 /* TutorialLocalization def=Tap the shutter button, and they'll appear in Photos, where you can search in them later. */
-"tapShutterButton" = "点按快门，照片会储存在 \"照片\" 里，\n您以后可以在其中进行查找。";
+"tapShutterButton" = "点按快门，照片会储存在 “照片” 里，\n您以后可以在其中进行查找。";
 
 /* TutorialLocalization def=Tap the Add button */
-"tapTheAddButton" = "点击 \"+\"  按钮";
+"tapTheAddButton" = "点击 “+”  按钮";
 
 /* Multipurpose def=Tap to dismiss */
 "tapToDismiss" = "点按可关闭";
@@ -535,6 +619,15 @@
 /* extensionDate def=Today */
 "todayLoc" = "今天";
 
+/* No comment provided by engineer. */
+"TutorialLocalization-cameraDescription" = "实时查找词";
+
+/* No comment provided by engineer. */
+"TutorialLocalization-listsDescription" = "将词分组";
+
+/* No comment provided by engineer. */
+"TutorialLocalization-photosDescription" = "从现有照片中查找";
+
 /* GeneralViewController def=2 duplicates. */
 "twoDuplicates" = "两个重复项";
 
@@ -546,6 +639,18 @@
 
 /* HistoryCollectionViewFiles def=Unheart */
 "unheart" = "不喜欢";
+
+/* No comment provided by engineer. */
+"universal-allowAccessToPhotoLibrary" = "允许访问照片应用";
+
+/* No comment provided by engineer. */
+"universal-find" = "查找";
+
+/* No comment provided by engineer. */
+"universal-goToSettings" = "前往设置";
+
+/* No comment provided by engineer. */
+"universal-select" = "选择";
 
 /* GeneralViewController def=Untitled */
 "untitledName" = "无标题";
@@ -616,71 +721,8 @@
 /* TutorialLocalization def=Your Photos, Lists, and Settings are here. Check them out! */
 "yourPhotosListsAndSettingsHere" = "您的照片，清单和设置在这里。 去看一看！";
 
-/*comment*/
-"camera" = "";
-
-/* No comment provided by engineer. */
-"ListsBuilderTutorialLocalization-addAWord" = "";
-
-/* No comment provided by engineer. */
-"ListsBuilderTutorialLocalization-addMoreWords" = "";
-
-/* No comment provided by engineer. */
-"ListsBuilderTutorialLocalization-deleteAWord" = "";
-
-/* No comment provided by engineer. */
-"ListsBuilderTutorialLocalization-justTapNext" = "";
-
-/* No comment provided by engineer. */
-"ListsBuilderTutorialLocalization-listsBuilder" = "";
-
-/* No comment provided by engineer. */
-"ListsBuilderTutorialLocalization-listsBuilderDescription" = "";
-
-/* No comment provided by engineer. */
-"ListsBuilderTutorialLocalization-swipeLeftOnIt" = "";
-
-/* No comment provided by engineer. */
-"ListsBuilderTutorialLocalization-tapThePlaceholder" = "";
-
-/* No comment provided by engineer. */
-"ListsTutorialLocalization-addSomeWords" = "";
-
-/* No comment provided by engineer. */
-"ListsTutorialLocalization-findWillLookForThem" = "";
-
-/* No comment provided by engineer. */
-"ListsTutorialLocalization-makeAList" = "";
-
-/* No comment provided by engineer. */
-"ListsTutorialLocalization-tapThePlusIcon" = "";
-
-/* No comment provided by engineer. */
-"PhotosTutorialLocalization-cacheYourPhotos" = "";
-
-/* No comment provided by engineer. */
-"PhotosTutorialLocalization-findFromAllPhotos" = "";
-
-/* No comment provided by engineer. */
-"PhotosTutorialLocalization-findFromSelectPhotos" = "";
-
-/* No comment provided by engineer. */
-"PhotosTutorialLocalization-justTapFind" = "";
-
-/* No comment provided by engineer. */
-"PhotosTutorialLocalization-resultsWillAppearInstantly" = "";
-
-/* No comment provided by engineer. */
-"PhotosTutorialLocalization-tapSelectTapFind" = "";
-
-/* No comment provided by engineer. */
-"TutorialLocalization-cameraDescription" = "";
-
-/* No comment provided by engineer. */
-"TutorialLocalization-listsDescription" = "";
-
-/* No comment provided by engineer. */
-"TutorialLocalization-photosDescription" = "";
+/* TutorialLocalization def=Matches are what Find looks for when you use the list. Make one by tapping the placeholder that says 'Match'! */
+"matchesAreWhatFindLooksFor" = "";
 
 /*WhatsNewConfiguration*/
 "whatsNewHistoryIsNowPhotos" = "";

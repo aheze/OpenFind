@@ -10,22 +10,14 @@ import UIKit
 
 extension PhotoSlidesViewController {
     func actionPressed(action: PhotoSlideAction) {
-        print("action! \(action)")
-        
         switch action {
-        
         case .share:
-            print("share")
             sharePhoto()
         case .star:
-            print("star")
             starPhoto()
         case .cache:
-            
-            print("cache")
             cachePhoto()
         case .delete:
-            print("delete")
             startDeletePhoto()
         case .info:
             infoPressed()

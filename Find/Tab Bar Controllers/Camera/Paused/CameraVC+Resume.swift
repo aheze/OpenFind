@@ -27,7 +27,7 @@ extension CameraViewController {
         self.cache.cacheIcon.animateCheck(percentage: 0)
         self.cache.cacheIcon.toggleRim(light: false)
         self.cacheLabel.fadeTransition(0.2)
-        self.cacheLabel.text = "Cache"
+        self.cacheLabel.text = NSLocalizedString("shouldCache", comment: "")
         
         self.messageView.hideMessages()
         self.startedCaching = false

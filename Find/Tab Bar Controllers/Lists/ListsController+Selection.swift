@@ -19,11 +19,11 @@ extension ListsController {
             selectButtonSelected.toggle()
             showSelectionControls?(selectButtonSelected)
             if selectButtonSelected {
-                selectButton.title = "Done"
+                selectButton.title = NSLocalizedString("cancel", comment: "")
                 collectionView.allowsMultipleSelection = true
                 addButton.isEnabled = false
             } else {
-                selectButton.title = "Select"
+                selectButton.title = NSLocalizedString("universal-select", comment: "")
                 collectionView.allowsMultipleSelection = false
                 deselectAllItems()
                 addButton.isEnabled = true
@@ -151,7 +151,7 @@ extension ListsController {
             
             self.selectButtonSelected = false
             self.showSelectionControls?(self.selectButtonSelected)
-            self.selectButton.title = "Select"
+            self.selectButton.title = NSLocalizedString("universal-select", comment: "")
             self.collectionView.allowsMultipleSelection = false
             self.deselectAllItems()
             self.addButton.isEnabled = true

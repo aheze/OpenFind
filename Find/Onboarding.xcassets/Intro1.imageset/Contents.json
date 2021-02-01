@@ -3,10 +3,18 @@
     {
       "filename" : "Intro1.svg",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "Intro1 Copy.svg",
+      "idiom" : "universal",
+      "locale" : "zh-Hans"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "localizable" : true
   }
 }
