@@ -19,13 +19,16 @@ extension CameraViewController {
                 self.saveToPhotos.photosIcon.makeActiveState(offset: true)()
             }
             self.saveLabel.fadeTransition(0.2)
-            self.saveLabel.text = "Saved"
+            
+            let savedText = NSLocalizedString("savedText", comment: "")
+            self.saveLabel.text = savedText
         } else {
             UIView.animate(withDuration: Double(Constants.transitionDuration)) {
                 self.saveToPhotos.photosIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)()
             }
             self.saveLabel.fadeTransition(0.2)
-            self.saveLabel.text = "Save"
+            let saveText = NSLocalizedString("saveText", comment: "")
+            self.saveLabel.text = saveText
         }
     }
     

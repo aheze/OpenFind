@@ -173,6 +173,7 @@
 /* No comment provided by engineer. */
 "Feedback" = "反馈";
 
+/* No comment provided by engineer. */
 "findCouldNotAccess" = "Find无法访问您的照片";
 
 /* No comment provided by engineer. */
@@ -356,6 +357,7 @@
 /* SymbolsViewController def=Nature */
 "natureLoc" = "自然";
 
+/* No comment provided by engineer. */
 "needsPermissionToMovePhotos" = "Find需要许可才能移动您的照片";
 
 "No" = "没有";
@@ -488,6 +490,7 @@
 /* Settings def=Reset Settings */
 "resetSettings" = "重置所有设置";
 
+/* No comment provided by engineer. */
 "restrictedText" = "限制";
 
 /* No comment provided by engineer. */
@@ -510,6 +513,10 @@
 
 /* No comment provided by engineer. */
 "savedFromFind" = "从Find保存";
+
+"savedText" = "已保存";
+
+"saveText" = "保存";
 
 /* EditList def=Icon */
 "secondVCTitle" = "图标";

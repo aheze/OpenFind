@@ -740,8 +740,15 @@
 /* No comment provided by engineer. */
 "imFinished" = "我完成了";
 
+/* No comment provided by engineer. */
 "needsPermissionToMovePhotos" = "Find需要许可才能移动您的照片";
 
+/* No comment provided by engineer. */
 "restrictedText" = "限制";
 
+/* No comment provided by engineer. */
 "findCouldNotAccess" = "Find无法访问您的照片";
+
+"savedText" = "已保存";
+
+"saveText" = "保存";

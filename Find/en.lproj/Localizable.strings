@@ -176,6 +176,7 @@
 /* No comment provided by engineer. */
 "Feedback" = "Feedback";
 
+/* No comment provided by engineer. */
 "findCouldNotAccess" = "Find could not access your photo library";
 
 /* No comment provided by engineer. */
@@ -359,6 +360,7 @@
 /* SymbolsViewController def=Nature */
 "natureLoc" = "Nature";
 
+/* No comment provided by engineer. */
 "needsPermissionToMovePhotos" = "Find needs permission to move your photos";
 
 "No" = "No";
@@ -493,6 +495,7 @@
 /* Settings def=Reset Settings */
 "resetSettings" = "Reset Settings";
 
+/* No comment provided by engineer. */
 "restrictedText" = "Restricted";
 
 /* No comment provided by engineer. */
@@ -515,6 +518,10 @@
 
 /* No comment provided by engineer. */
 "savedFromFind" = "Saved from Find";
+
+"savedText" = "Saved";
+
+"saveText" = "Save";
 
 /* EditList def=Icon */
 "secondVCTitle" = "Icon";
