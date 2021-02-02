@@ -198,7 +198,7 @@ struct InfoView: View {
                                     Button(action: {
                                         donePressed?()
                                     }) {
-                                        Text("Done")
+                                        Text("done")
                                             .font(Font.system(size: 19, weight: .regular, design: .default))
                                             .foregroundColor(Color(UIColor(named: "PhotosText")!))
                                         

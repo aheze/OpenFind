@@ -22,7 +22,7 @@ struct WhatsNewConfig {
         if language.contains("en") {
             whatsNew = WhatsNew(
                 // The Title
-                title: "What's New in\nFind 1.2",
+                title: "What's new in\nFind 1.2",
                 items: [
                     WhatsNew.Item(
                         title: "Refreshed Interface",
@@ -47,27 +47,36 @@ struct WhatsNewConfig {
                     )
                 ]
             )
-            configuration.titleView.secondaryColor = .init(
-                // The start index
-                startIndex: 14,
-                // The length of characters
-                length: 10,
-                // The secondary color to apply
-                color: #colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 1)
-            )
             
             configuration.completionButton.title = "Continue"
         } else {
             whatsNew = WhatsNew(
-                    title: NSLocalizedString("whatsNewInFindNumber", comment: "WhatsNewConfiguration"),
-                    items: [
-                        WhatsNew.Item(
-                            title: NSLocalizedString("whatsNewChineseSupport", comment: "WhatsNewConfiguration"),
-                            subtitle: NSLocalizedString("whatsNewChineseSupportDetails", comment: "WhatsNewConfiguration"),
-                            image: UIImage(systemName: "bubble.left.and.bubble.right.fill")?.withTintColor(#colorLiteral(red: 1, green: 0.2843809529, blue: 0, alpha: 1), renderingMode: .alwaysOriginal)
-                        )
-                    ]
-                )
+                // The Title
+                title: "Find 1.2\n新功能",
+                items: [
+                    WhatsNew.Item(
+                        title: "刷新界面",
+                        subtitle: "我们添加了一个漂亮，干净的标签栏。",
+                        image: UIImage(systemName: "sparkles")?.withTintColor(#colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1), renderingMode: .alwaysOriginal)
+                    ),
+                    
+                    WhatsNew.Item(
+                        title: "重新设计的照片",
+                        subtitle: "Find里的照片现在已链接到“照片”APP，因此您可以从现有照片中查找。",
+                        image: UIImage(systemName: "photo.fill.on.rectangle.fill")?.withTintColor(#colorLiteral(red: 0.2555771952, green: 0.8299632353, blue: 0, alpha: 1), renderingMode: .alwaysOriginal)
+                    ),
+                    WhatsNew.Item(
+                        title: "升级相机",
+                        subtitle: "现在，您可以暂停相机并将制作快取，以获取超准确的结果。",
+                        image: UIImage(systemName: "camera.fill")?.withTintColor(#colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 1), renderingMode: .alwaysOriginal)
+                    ),
+                    WhatsNew.Item(
+                        title: "还有很多很多",
+                        subtitle: "如果要比较Find 1.1和Find 1.2，您会认为它们是两个不同的APP。",
+                        image: UIImage(systemName: "plus.app.fill")?.withTintColor(#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1), renderingMode: .alwaysOriginal)
+                    )
+                ]
+            )
             configuration.completionButton.title = "前往"
         }
         

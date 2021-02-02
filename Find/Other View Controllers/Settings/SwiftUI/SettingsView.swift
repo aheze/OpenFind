@@ -42,6 +42,8 @@ class SettingsViewHoster: UIViewController {
     
     override func loadView() {
         
+        print("curr version: \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String)")
+        
         /**
          Instantiate the base `view`.
          */
@@ -79,41 +81,6 @@ class SettingsViewHoster: UIViewController {
     }
 }
 
-func localize() {
-    NSLocalizedString("General", comment: "")
-    NSLocalizedString("Default Highlight Color", comment: "")
-    NSLocalizedString("Camera", comment: "")
-    NSLocalizedString("Text Detection Indicator", comment: "")
-    
-    NSLocalizedString("ON", comment: "")
-    NSLocalizedString("OFF", comment: "")
-    
-    NSLocalizedString("Haptic Feedback", comment: "")
-    NSLocalizedString("None", comment: "")
-    NSLocalizedString("Light", comment: "")
-    NSLocalizedString("Heavy", comment: "")
-    
-    NSLocalizedString("Support & Feedback", comment: "")
-    NSLocalizedString("Help", comment: "")
-    NSLocalizedString("Help Center", comment: "")
-    NSLocalizedString("Tutorials", comment: "")
-    
-    NSLocalizedString("Feedback", comment: "")
-    NSLocalizedString("Rate the app", comment: "")
-    NSLocalizedString("Report a bug", comment: "")
-    NSLocalizedString("Questions & Suggestions", comment: "")
-    
-    NSLocalizedString("Other", comment: "")
-    NSLocalizedString("Swipe to Navigate", comment: "")
-    NSLocalizedString("Reset Settings", comment: "")
-    NSLocalizedString("Reset", comment: "")
-    
-    NSLocalizedString("Credits", comment: "")
-    NSLocalizedString("People", comment: "")
-    NSLocalizedString("Licenses", comment: "")
-    
-    NSLocalizedString("See what's new", comment: "")
-}
 
 struct SettingsView: View {
 
@@ -150,25 +117,29 @@ struct SettingsView: View {
                         OtherView(swipeToNavigateEnabled: $settings.swipeToNavigateEnabled, allSettings: settings)
                             .padding(EdgeInsets(top: 6, leading: 16, bottom: 16, trailing: 16))
                         
-                        HStack {
+                        HStack(spacing: 0) {
                             
-                            Text("Version \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown")")
+                            Text("Version ")
                                 .foregroundColor(Color.white.opacity(0.75))
                                 .font(Font.system(size: 15, weight: .medium))
-                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 8))
+                            
+                            Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown")
+                                .foregroundColor(Color.white.opacity(0.75))
+                                .font(Font.system(size: 15, weight: .medium))
+                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 12))
                             
                             
-                                Button(action: {
-                                    let (whatsNew, configuration) = WhatsNewConfig.getWhatsNew()
-                                    if let whatsNewPresent = whatsNew {
-                                        let whatsNewViewController = WhatsNewViewController(whatsNew: whatsNewPresent, configuration: configuration)
-                                        SettingsHoster.viewController?.present(whatsNewViewController, animated: true)
-                                    }
-                                }) {
-                                    Text("See what's new")
-                                        .foregroundColor(Color.white.opacity(0.5))
-                                        .font(Font.system(size: 15, weight: .medium))
+                            Button(action: {
+                                let (whatsNew, configuration) = WhatsNewConfig.getWhatsNew()
+                                if let whatsNewPresent = whatsNew {
+                                    let whatsNewViewController = WhatsNewViewController(whatsNew: whatsNewPresent, configuration: configuration)
+                                    SettingsHoster.viewController?.present(whatsNewViewController, animated: true)
                                 }
+                            }) {
+                                Text("See what's new")
+                                    .foregroundColor(Color.white.opacity(0.5))
+                                    .font(Font.system(size: 15, weight: .medium))
+                            }
                         }
                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0))
                     }
@@ -186,7 +157,7 @@ struct SettingsView: View {
                                     Button(action: {
                                         donePressed?()
                                     }) {
-                                        Text("Done")
+                                        Text("done")
                                             .font(Font.system(size: 19, weight: .regular, design: .default))
                                     }
             )
@@ -201,7 +172,6 @@ extension ScrollView {
     public func fixFlickering() -> some View {
         
         return self.fixFlickering { (scrollView) in
-            
             return scrollView
         }
     }

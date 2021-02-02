@@ -498,6 +498,8 @@
 /* Settings def=Send Feedback */
 "sendFeedback" = "Send Feedback";
 
+"Settings" = "Settings";
+
 /* Settings def=Settings will be reset to default. */
 "settingsResetToDefault" = "Settings will be reset to default.";
 
