@@ -583,6 +583,26 @@
 /* StatsViewController def=times */
 "timesPluralLoc" = "times";
 
+"tip-cacheToGetMoreAccurateResults" = "Cache to get more accurate results";
+
+/* No comment provided by engineer. */
+"tip-goToCamera" = "Go to camera";
+
+/* No comment provided by engineer. */
+"tip-pauseThePreview" = "Pause the preview";
+
+/* No comment provided by engineer. */
+"tip-switchToAllPhotos" = "Switch to All Photos";
+
+/* No comment provided by engineer. */
+"tip-tapHereToSave" = "Tap here to save";
+
+"tip-tapSelect" = "Tap Select";
+
+"tip-tapToCacheSelected" = "Tap to cache selected photos";
+
+"tip-tapToStarSelected" = "Tap to star selected photos";
+
 /* extensionDate def=Today */
 "todayLoc" = "Today";
 
@@ -679,6 +699,9 @@
 
 /* TutorialLocalization def=Your lists will appear above the keyboard, whether you are Finding using the camera or from Photos */
 "yourListsWillAppear" = "Your lists will appear above the keyboard";
+
+/* No comment provided by engineer. */
+"tip-tapSelect" = "";
 
 /* No comment provided by engineer. */
 "unitZhang" = "";

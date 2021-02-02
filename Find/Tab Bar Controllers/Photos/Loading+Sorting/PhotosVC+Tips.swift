@@ -22,8 +22,8 @@ extension PhotosViewController {
         
         preferences.positioning.bubbleInsets = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
         
-        let tipView = EasyTipView(text: "Tap Select", preferences: preferences, delegate: self)
-//        tipView.show(forItem: selectButton, withinSuperview: view)
+        let tapSelect = NSLocalizedString("tip-tapSelect", comment: "")
+        let tipView = EasyTipView(text: tapSelect, preferences: preferences, delegate: self)
         tipView.show(forItem: selectButton, withinSuperView: ViewControllerState.currentVC?.view)
         
         TipViews.starTipView2 = tipView
@@ -42,7 +42,9 @@ extension PhotosViewController {
         
         preferences.positioning.bubbleInsets = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
         
-        let tipView = EasyTipView(text: "Tap Select", preferences: preferences, delegate: self)
+        let tapSelect = NSLocalizedString("tip-tapSelect", comment: "")
+        
+        let tipView = EasyTipView(text: tapSelect, preferences: preferences, delegate: self)
         tipView.show(forItem: selectButton, withinSuperView: ViewControllerState.currentVC?.view)
         
         TipViews.cacheTipView2 = tipView

@@ -688,3 +688,26 @@
 "resultsText" = "结果";
 
 "Settings" = "设置";
+
+/* No comment provided by engineer. */
+"tip-tapHereToSave" = "点按来保存";
+
+/* No comment provided by engineer. */
+"tip-switchToAllPhotos" = "转到到所有照片";
+
+/* No comment provided by engineer. */
+"tip-goToCamera" = "转到相机";
+
+/* No comment provided by engineer. */
+"tip-pauseThePreview" = "暂停相机";
+
+/* No comment provided by engineer. */
+"tip-tapSelect" = "";
+
+"tip-tapSelect" = "点按选择";
+
+"tip-tapToStarSelected" = "点按来吧选择的照片加注星标";
+
+"tip-tapToCacheSelected" = "点按来吧选择的照片制作快取";
+
+"tip-cacheToGetMoreAccurateResults" = "制作快取以获得更准确的结果";

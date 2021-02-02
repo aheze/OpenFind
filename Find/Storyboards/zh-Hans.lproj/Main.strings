@@ -50,7 +50,7 @@
 "JsY-MP-aZx.text" = "标题";
 
 /* Class = "UILabel"; text = "Find needs to access the camera to find text. Everything happens offline, so nothing leaves your phone."; ObjectID = "K83-pM-wfg"; */
-"K83-pM-wfg.text" = "Find需要访问您的相机以查找词。您的信息决不离开您的手机（Find不需要上网来工作）。";
+"K83-pM-wfg.text" = "Find需要访问您的相机来查找词。您的信息决不离开您的手机（Find不需要上网来工作）。";
 
 /* Class = "UILabel"; text = "Viewed Stats Status: true"; ObjectID = "Loo-ZW-eJO"; */
 "Loo-ZW-eJO.text" = "查看统计状态：有";

@@ -15,7 +15,9 @@ extension CameraViewController {
             preferences.drawing.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)
             preferences.drawing.arrowPosition = .bottom
             if cacheTipView == nil, !dismissedCacheTipAlready {
-                let tipView = EasyTipView(text: "Cache to get more accurate results", preferences: preferences, delegate: self)
+                
+                let cacheToGetMoreAccurateResults = NSLocalizedString("tip-cacheToGetMoreAccurateResults", comment: "")
+                let tipView = EasyTipView(text: cacheToGetMoreAccurateResults, preferences: preferences, delegate: self)
                 tipView.show(forView: cache)
                 self.cacheTipView = tipView
             }
@@ -28,7 +30,9 @@ extension CameraViewController {
         var preferences = EasyTipView.globalPreferences
         preferences.drawing.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)
         preferences.drawing.arrowPosition = .bottom
-        let tipView = EasyTipView(text: "Tap here to save", preferences: preferences, delegate: self)
+        
+        let tapHereToSave = NSLocalizedString("tip-tapHereToSave", comment: "")
+        let tipView = EasyTipView(text: tapHereToSave, preferences: preferences, delegate: self)
         tipView.show(forView: saveToPhotos, withinSuperview: view)
         
         TipViews.localTipView3 = tipView

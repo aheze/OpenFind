@@ -22,7 +22,8 @@ extension ViewController {
         
         preferences.positioning.bubbleInsets = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
         
-        let tipView = EasyTipView(text: "Switch to All Photos", preferences: preferences, delegate: self)
+        let switchToAllPhotos = NSLocalizedString("tip-switchToAllPhotos", comment: "")
+        let tipView = EasyTipView(text: switchToAllPhotos, preferences: preferences, delegate: self)
         tipView.show(forView: photos.navController.viewController.segmentedSlider.allLabel, withinSuperview: photos.navController.viewController.view)
         
         TipViews.cacheTipView1 = tipView
@@ -42,7 +43,8 @@ extension ViewController {
         preferences.positioning.bubbleInsets = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
         preferences.positioning.contentInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 14)
         
-        let tipView = EasyTipView(text: "Tap to cache selected photos", preferences: preferences, delegate: self)
+        let tapToCacheSelected = NSLocalizedString("tip-tapToCacheSelected", comment: "")
+        let tipView = EasyTipView(text: tapToCacheSelected, preferences: preferences, delegate: self)
         tipView.show(forView: tabBarView.cacheButton)
         
         TipViews.cacheTipView3 = tipView
