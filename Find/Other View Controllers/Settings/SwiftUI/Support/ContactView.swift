@@ -12,10 +12,9 @@ struct ContactView: View {
     var body: some View {
         ZStack {
             Color(#colorLiteral(red: 0.1326085031, green: 0.1326085031, blue: 0.1326085031, alpha: 1)).edgesIgnoringSafeArea(.all)
-            
             ScrollView {
                 VStack {
-                    Text("Got questions or want to learn more about Find? Or something else? Chat with me here!")
+                    Text("gotQuestionsContact")
                         .foregroundColor(Color.white)
                         .font(Font.system(size: 19, weight: .regular))
                         .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))

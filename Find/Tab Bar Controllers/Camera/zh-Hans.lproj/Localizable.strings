@@ -778,6 +778,87 @@
 /* No comment provided by engineer. */
 "emptyDesc-stopTutorial" = "";
 
-"emptyDesc-stopTutorial" = "停止教程";
-
+/* No comment provided by engineer. */
 "emptyDesc-showMeHow" = "怎么？";
+
+"Settings" = "";
+
+/* No comment provided by engineer. */
+"General" = "通用";
+
+/* No comment provided by engineer. */
+"Default Highlight Color" = "默认设置突出颜色";
+
+/* No comment provided by engineer. */
+"Camera" = "相机";
+
+/* No comment provided by engineer. */
+"Text Detection Indicator" = "文字检测指示符";
+
+/* No comment provided by engineer. */
+"ON" = "开";
+
+/* No comment provided by engineer. */
+"OFF" = "关";
+
+/* No comment provided by engineer. */
+"Haptic Feedback" = "触觉反馈";
+
+/* No comment provided by engineer. */
+"None" = "无";
+
+/* No comment provided by engineer. */
+"Light" = "轻";
+
+/* No comment provided by engineer. */
+"Heavy" = "重";
+
+/* No comment provided by engineer. */
+"Support & Feedback" = "支持与反馈";
+
+/* No comment provided by engineer. */
+"Help" = "帮助";
+
+/* No comment provided by engineer. */
+"Help Center" = "帮助中心";
+
+/* No comment provided by engineer. */
+"Tutorials" = "教程";
+
+/* No comment provided by engineer. */
+"Feedback" = "反馈";
+
+/* No comment provided by engineer. */
+"Rate the app" = "评价应用";
+
+/* No comment provided by engineer. */
+"Report a bug" = "报告错误";
+
+/* No comment provided by engineer. */
+"Questions & Suggestions" = "问题与建议";
+
+/* No comment provided by engineer. */
+"Other" = "其他";
+
+/* No comment provided by engineer. */
+"Swipe to Navigate" = "滑动即可浏览";
+
+/* No comment provided by engineer. */
+"Reset Settings" = "重新设置";
+
+/* No comment provided by engineer. */
+"Reset" = "重启";
+
+/* No comment provided by engineer. */
+"Credits" = "致谢";
+
+/* No comment provided by engineer. */
+"People" = "人";
+
+/* No comment provided by engineer. */
+"Licenses" = "执照";
+
+/* No comment provided by engineer. */
+"See what's new" = "查看最新功能";
+
+"gotQuestionsContact" = "有问题或想了解有关Find的信息？ 或者其他事情？ 在这里和我聊天！";

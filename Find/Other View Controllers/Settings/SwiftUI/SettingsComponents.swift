@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Label: View {
-    var text: String
+    var text: LocalizedStringKey
     var body: some View {
         Text(text)
             .foregroundColor(.white)
@@ -17,7 +17,7 @@ struct Label: View {
 }
 /// Header for each section
 struct SectionHeaderView: View {
-    var text: String
+    var text: LocalizedStringKey
     var body: some View {
         Text(text)
             .foregroundColor(Color.white.opacity(0.75))
@@ -27,7 +27,7 @@ struct SectionHeaderView: View {
     }
 }
 struct HeaderView: View {
-    var text: String
+    var text: LocalizedStringKey
     var body: some View {
         Text(text)
             .foregroundColor(.white)

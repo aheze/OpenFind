@@ -98,6 +98,9 @@
 "camera" = "Camera";
 
 /* No comment provided by engineer. */
+"Camera" = "Camera";
+
+/* No comment provided by engineer. */
 "CameraVC-findNeedsPermissionToSavePhotos" = "Find needs permission to save photos";
 
 /* Multipurpose def=Cancel */
@@ -130,6 +133,9 @@
 /* StatsViewController def=created */
 "created" = "created";
 
+/* No comment provided by engineer. */
+"Credits" = "Credits";
+
 /* SymbolsViewController def=Currency */
 "currencyLoc" = "Currency";
 
@@ -138,6 +144,9 @@
 
 /* StatsViewController def=Customized Settings Status */
 "customizedSettingsStatus" = "Customized Settings Status";
+
+/* No comment provided by engineer. */
+"Default Highlight Color" = "Default Highlight Color";
 
 /* Multipurpose def=Delete */
 "delete" = "Delete";
@@ -196,11 +205,13 @@
 /* No comment provided by engineer. */
 "emptyDesc-photosSavedFromFind" = "Photos saved from Find will appear here";
 
+/* No comment provided by engineer. */
 "emptyDesc-showMeHow" = "Show me how";
 
 /* No comment provided by engineer. */
 "emptyDesc-starThePhotosYouView" = "Star the photos that you view the most";
 
+/* No comment provided by engineer. */
 "emptyDesc-stopTutorial" = "Stop tutorial";
 
 /* SingleHelp def=Encountered an error */
@@ -211,6 +222,9 @@
 
 /* NewHistoryViewController def=Entire cache cleared! */
 "entireCacheDeletedExclaim" = "Entire cache cleared!";
+
+/* No comment provided by engineer. */
+"Feedback" = "Feedback";
 
 /* TutorialLocalization def=Find from Photos */
 "findFromPhotos" = "Find from Photos";
@@ -248,11 +262,19 @@
 /* CreditsViewController def=for feedback and being a beta tester, and  */
 "forFeedbackTesterAndSpace" = "for feedback and being a beta tester, and ";
 
+/* No comment provided by engineer. */
+"General" = "General";
+
 /* Settings def=General */
 "generalTutorial" = "General";
 
 /* LaunchViewController def=Go to settings */
 "goToSettings" = "Go to settings";
+
+"gotQuestionsContact" = "Got questions or want to learn more about Find? Or something else? Chat with me here!";
+
+/* No comment provided by engineer. */
+"Haptic Feedback" = "Haptic Feedback";
 
 /* Settings def=Haptic Feedback */
 "hapticFeedback" = "Haptic Feedback";
@@ -260,8 +282,17 @@
 /* HistoryCollectionViewFiles def=Heart */
 "heart" = "Heart";
 
+/* No comment provided by engineer. */
+"Heavy" = "Heavy";
+
 /* Multipurpose def=Help */
 "help" = "Help";
+
+/* No comment provided by engineer. */
+"Help" = "Help";
+
+/* No comment provided by engineer. */
+"Help Center" = "Help center";
 
 /* StatsViewController def=Help pressed */
 "helpPressed" = "Help pressed";
@@ -283,6 +314,12 @@
 
 /* StatsViewController def=Left Feedback Status */
 "leftFeedbackStatus" = "Left Feedback Status";
+
+/* No comment provided by engineer. */
+"Licenses" = "Licenses";
+
+/* No comment provided by engineer. */
+"Light" = "Light";
 
 /* ListsController def=List deleted! */
 "listDeletedExclaim" = "List deleted!";
@@ -386,6 +423,9 @@
 /* FindBar def=No Matches in  */
 "noMatchesInSpace" = "No results in ";
 
+/* No comment provided by engineer. */
+"None" = "None";
+
 /* LaunchViewController def=You don't have permission to use the camera. */
 "noPermissionToUseCamera" = "You don't have permission to use the camera.";
 
@@ -413,6 +453,12 @@
 /* HistoryFindController def=OCR search in progress! */
 "ocrSearchInProgress" = "OCR search in progress!";
 
+/* No comment provided by engineer. */
+"OFF" = "OFF";
+
+/* No comment provided by engineer. */
+"ON" = "ON";
+
 /* TutorialLocalization def=Once you've typed in your first match, just tap 'next' on the keyboard! Repeat until satisfied. */
 "onceYouveTypedInYourFirstMatch" = "Once you've typed in your first word, just tap 'next' on the keyboard! Repeat until satisfied.";
 
@@ -439,6 +485,12 @@
 
 /* EditList def=Untitled */
 "originalListName" = "Untitled";
+
+/* No comment provided by engineer. */
+"Other" = "Other";
+
+/* No comment provided by engineer. */
+"People" = "People";
 
 /* Multifile def=Photo deleted! */
 "photoDeletedExclaim" = "Photo deleted!";
@@ -485,6 +537,9 @@
 /* No comment provided by engineer. */
 "PhotosTutorialLocalization-tapSelectTapFind" = "Tap Select, then Find";
 
+/* No comment provided by engineer. */
+"Questions & Suggestions" = "Questions & Suggestions";
+
 /* Stats def=\"x\" */
 "quote %@ quote" = "\"%@\"";
 
@@ -494,8 +549,20 @@
 /* Stats def=\"x\" and \"x\" */
 "quote %@ quoteSpaceAndquote %@ quote" = "\"%1$@\" and \"%2$@\"";
 
+/* No comment provided by engineer. */
+"Rate the app" = "Rate the app";
+
+/* No comment provided by engineer. */
+"Report a bug" = "Report a bug";
+
 /* Settings def=Reset */
 "reset" = "Reset";
+
+/* No comment provided by engineer. */
+"Reset" = "Reset";
+
+/* No comment provided by engineer. */
+"Reset Settings" = "Reset Settings";
 
 /* Settings def=Reset Settings */
 "resetSettings" = "Reset Settings";
@@ -511,6 +578,9 @@
 
 /* EditList def=Icon */
 "secondVCTitle" = "Icon";
+
+/* No comment provided by engineer. */
+"See what's new" = "See what's new";
 
 /* ListsController def=select */
 "select" = "Select";
@@ -532,6 +602,8 @@
 
 /* Multipurpose def=Settings */
 "settings" = "Settings";
+
+"Settings" = "Settings";
 
 /* Settings def=Settings will be reset to default. */
 "settingsResetToDefault" = "Settings will be reset to default.";
@@ -575,6 +647,12 @@
 /* TutorialLocalization def=...Start easily making lists! */
 "startEasilyMakingLists" = "Start making lists!";
 
+/* No comment provided by engineer. */
+"Support & Feedback" = "Support & Feedback";
+
+/* No comment provided by engineer. */
+"Swipe to Navigate" = "Swipe to Navigate";
+
 /* TutorialLocalization def=Swipe to get started */
 "swipeToGetStarted" = "Swipe to get started";
 
@@ -598,6 +676,9 @@
 
 /* SymbolsViewController def=Tech */
 "techLoc" = "Tech";
+
+/* No comment provided by engineer. */
+"Text Detection Indicator" = "Text Detection Indicator";
 
 /* Settings def=Text Detected Indicator */
 "textDetectedIndicator" = "Text Detection Indicator";
@@ -634,6 +715,9 @@
 
 /* No comment provided by engineer. */
 "TutorialLocalization-photosDescription" = "Find from your existing photos";
+
+/* No comment provided by engineer. */
+"Tutorials" = "Tutorials";
 
 /* GeneralViewController def=2 duplicates. */
 "twoDuplicates" = "2 duplicates.";
@@ -727,6 +811,3 @@
 
 /* TutorialLocalization def=Your Photos, Lists, and Settings are here. Check them out! */
 "yourPhotosListsAndSettingsHere" = "Your Photos, Lists, and Settings are here. Check them out!";
-
-/* No comment provided by engineer. */
-"emptyDesc-stopTutorial" = "";

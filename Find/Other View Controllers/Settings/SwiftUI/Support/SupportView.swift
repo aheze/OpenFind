@@ -61,11 +61,10 @@ struct HelpView: View {
                 HeaderView(text: "Help")
                 
                 Button(action: {
-                    print("help center")
                     helpPresented = true
                 }) {
                     HStack(spacing: 0) {
-                        Label(text: "Help center")
+                        Label(text: "Help Center")
                             .padding(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
                         Spacer()
                         

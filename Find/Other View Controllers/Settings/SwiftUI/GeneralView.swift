@@ -53,9 +53,6 @@ struct RectangleButton: View {
     var color: String
     var body: some View {
         Button(action: {
-//            Defaults.highlightColor = color
-            print("setting, \(color)")
-//            UserDefaults.standard.setValue(color, forKey: "highlightColor")
             selectedColor = color
         }) {
             Rectangle()

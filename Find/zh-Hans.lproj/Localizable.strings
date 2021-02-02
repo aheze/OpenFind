@@ -98,6 +98,9 @@
 "camera" = "相机";
 
 /* No comment provided by engineer. */
+"Camera" = "相机";
+
+/* No comment provided by engineer. */
 "CameraVC-findNeedsPermissionToSavePhotos" = "Find需要许可来保存照片";
 
 /* Multipurpose def=Cancel */
@@ -130,6 +133,9 @@
 /* StatsViewController def=created */
 "created" = "已做成";
 
+/* No comment provided by engineer. */
+"Credits" = "致谢";
+
 /* SymbolsViewController def=Currency */
 "currencyLoc" = "货币";
 
@@ -138,6 +144,9 @@
 
 /* StatsViewController def=Customized Settings Status */
 "customizedSettingsStatus" = "定制设置状态";
+
+/* No comment provided by engineer. */
+"Default Highlight Color" = "默认设置突出颜色";
 
 /* Multipurpose def=Delete */
 "delete" = "删除";
@@ -196,11 +205,13 @@
 /* No comment provided by engineer. */
 "emptyDesc-photosSavedFromFind" = "从Find中保存的照片将出现在这里";
 
+/* No comment provided by engineer. */
 "emptyDesc-showMeHow" = "怎么？";
 
 /* No comment provided by engineer. */
 "emptyDesc-starThePhotosYouView" = "为您查找最多的照片加注星标";
 
+/* No comment provided by engineer. */
 "emptyDesc-stopTutorial" = "停止教程";
 
 /* SingleHelp def=Encountered an error */
@@ -211,6 +222,9 @@
 
 /* NewHistoryViewController def=Entire cache cleared! */
 "entireCacheDeletedExclaim" = "整个快取已清除!";
+
+/* No comment provided by engineer. */
+"Feedback" = "反馈";
 
 /* TutorialLocalization def=Find from Photos */
 "findFromPhotos" = "从照片里找";
@@ -248,11 +262,19 @@
 /* CreditsViewController def=for feedback and being a beta tester, and  */
 "forFeedbackTesterAndSpace" = "做Beta测试，和 ";
 
+/* No comment provided by engineer. */
+"General" = "通用";
+
 /* Settings def=General */
 "generalTutorial" = "常规";
 
 /* LaunchViewController def=Go to settings */
 "goToSettings" = "前往设置";
+
+"gotQuestionsContact" = "有问题或想了解有关Find的信息？ 或者其他事情？ 在这里和我聊天！";
+
+/* No comment provided by engineer. */
+"Haptic Feedback" = "触觉反馈";
 
 /* Settings def=Haptic Feedback */
 "hapticFeedback" = "触觉反馈";
@@ -260,8 +282,17 @@
 /* HistoryCollectionViewFiles def=Heart */
 "heart" = "喜欢";
 
+/* No comment provided by engineer. */
+"Heavy" = "重";
+
 /* Multipurpose def=Help */
 "help" = "帮助中心";
+
+/* No comment provided by engineer. */
+"Help" = "帮助";
+
+/* No comment provided by engineer. */
+"Help Center" = "帮助中心";
 
 /* StatsViewController def=Help pressed */
 "helpPressed" = "前往帮助中心";
@@ -283,6 +314,12 @@
 
 /* StatsViewController def=Left Feedback Status */
 "leftFeedbackStatus" = "留反馈状态";
+
+/* No comment provided by engineer. */
+"Licenses" = "执照";
+
+/* No comment provided by engineer. */
+"Light" = "轻";
 
 /* ListsController def=List deleted! */
 "listDeletedExclaim" = "清单已删除！";
@@ -383,6 +420,9 @@
 /* FindBar def=No Matches in  */
 "noMatchesInSpace" = "没有结果在：";
 
+/* No comment provided by engineer. */
+"None" = "无";
+
 /* LaunchViewController def=You don't have permission to use the camera. */
 "noPermissionToUseCamera" = "您无权使用照相机。";
 
@@ -410,6 +450,12 @@
 /* HistoryFindController def=OCR search in progress! */
 "ocrSearchInProgress" = "正在用OCR查找！";
 
+/* No comment provided by engineer. */
+"OFF" = "关";
+
+/* No comment provided by engineer. */
+"ON" = "开";
+
 /* TutorialLocalization def=Once you've typed in your first match, just tap 'next' on the keyboard! Repeat until satisfied. */
 "onceYouveTypedInYourFirstMatch" = "输入第一个搜索词后，每加一个词，点击盘上的 \"下一项\"！";
 
@@ -436,6 +482,12 @@
 
 /* EditList def=Untitled */
 "originalListName" = "无标题";
+
+/* No comment provided by engineer. */
+"Other" = "其他";
+
+/* No comment provided by engineer. */
+"People" = "人";
 
 /* Multifile def=Photo deleted! */
 "photoDeletedExclaim" = "照片已删除！";
@@ -482,6 +534,9 @@
 /* No comment provided by engineer. */
 "PhotosTutorialLocalization-tapSelectTapFind" = "点击“选择”，然后点击“查找”";
 
+/* No comment provided by engineer. */
+"Questions & Suggestions" = "问题与建议";
+
 /* Stats def=\"x\" */
 "quote %@ quote" = "\"%@\"";
 
@@ -491,8 +546,20 @@
 /* Stats def=\"x\" and \"x\" */
 "quote %@ quoteSpaceAndquote %@ quote" = "\"%@\"和\"%@\"";
 
+/* No comment provided by engineer. */
+"Rate the app" = "评价应用";
+
+/* No comment provided by engineer. */
+"Report a bug" = "报告错误";
+
 /* Settings def=Reset */
 "reset" = "重启";
+
+/* No comment provided by engineer. */
+"Reset" = "重启";
+
+/* No comment provided by engineer. */
+"Reset Settings" = "重新设置";
 
 /* Settings def=Reset Settings */
 "resetSettings" = "重置所有设置";
@@ -508,6 +575,9 @@
 
 /* EditList def=Icon */
 "secondVCTitle" = "图标";
+
+/* No comment provided by engineer. */
+"See what's new" = "查看最新功能";
 
 /* ListsController def=select */
 "select" = "选择";
@@ -529,6 +599,8 @@
 
 /* Multipurpose def=Settings */
 "settings" = "设置";
+
+"Settings" = "设定";
 
 /* Settings def=Settings will be reset to default. */
 "settingsResetToDefault" = "设置将重设为默认值。";
@@ -572,6 +644,12 @@
 /* TutorialLocalization def=...Start easily making lists! */
 "startEasilyMakingLists" = "点击 “+”，开始制作！";
 
+/* No comment provided by engineer. */
+"Support & Feedback" = "支持与反馈";
+
+/* No comment provided by engineer. */
+"Swipe to Navigate" = "滑动即可浏览";
+
 /* TutorialLocalization def=Swipe to get started */
 "swipeToGetStarted" = "滑动即可开始\n\n⚠️ 当前，Find仅支持英语和拼音。";
 
@@ -595,6 +673,9 @@
 
 /* SymbolsViewController def=Tech */
 "techLoc" = "科技类";
+
+/* No comment provided by engineer. */
+"Text Detection Indicator" = "文字检测指示符";
 
 /* Settings def=Text Detected Indicator */
 "textDetectedIndicator" = "文字检测指示";
@@ -631,6 +712,9 @@
 
 /* No comment provided by engineer. */
 "TutorialLocalization-photosDescription" = "从现有照片中查找";
+
+/* No comment provided by engineer. */
+"Tutorials" = "教程";
 
 /* GeneralViewController def=2 duplicates. */
 "twoDuplicates" = "两个重复项";
@@ -722,14 +806,11 @@
 /* TutorialLocalization def=Your lists will appear above the keyboard, whether you are Finding using the camera or from Photos */
 "yourListsWillAppear" = "清单都将出现在键盘上方。";
 
-/* TutorialLocalization def=Your Photos, Lists, and Settings are here. Check them out! */
-"yourPhotosListsAndSettingsHere" = "您的照片，清单和设置在这里。 去看一看！";
-
-/* No comment provided by engineer. */
-"emptyDesc-stopTutorial" = "";
-
 /* TutorialLocalization def=Matches are what Find looks for when you use the list. Make one by tapping the placeholder that says 'Match'! */
 "matchesAreWhatFindLooksFor" = "";
 
 /*WhatsNewConfiguration*/
 "whatsNewHistoryIsNowPhotos" = "";
+
+/* TutorialLocalization def=Your Photos, Lists, and Settings are here. Check them out! */
+"yourPhotosListsAndSettingsHere" = "";

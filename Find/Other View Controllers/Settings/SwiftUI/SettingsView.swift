@@ -21,7 +21,6 @@ class Settings: ObservableObject {
     @Published var swipeToNavigateEnabled: Bool { didSet { UserDefaults.standard.set(swipeToNavigateEnabled, forKey: "swipeToNavigateEnabled") } }
     
     init() {
-        print("Should show? \(UserDefaults.standard.bool(forKey: "showTextDetectIndicator"))")
         self.highlightColor = UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF"
         self.showTextDetectIndicator = UserDefaults.standard.bool(forKey: "showTextDetectIndicator")
         self.hapticFeedbackLevel = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
@@ -80,6 +79,41 @@ class SettingsViewHoster: UIViewController {
     }
 }
 
+func localize() {
+    NSLocalizedString("General", comment: "")
+    NSLocalizedString("Default Highlight Color", comment: "")
+    NSLocalizedString("Camera", comment: "")
+    NSLocalizedString("Text Detection Indicator", comment: "")
+    
+    NSLocalizedString("ON", comment: "")
+    NSLocalizedString("OFF", comment: "")
+    
+    NSLocalizedString("Haptic Feedback", comment: "")
+    NSLocalizedString("None", comment: "")
+    NSLocalizedString("Light", comment: "")
+    NSLocalizedString("Heavy", comment: "")
+    
+    NSLocalizedString("Support & Feedback", comment: "")
+    NSLocalizedString("Help", comment: "")
+    NSLocalizedString("Help Center", comment: "")
+    NSLocalizedString("Tutorials", comment: "")
+    
+    NSLocalizedString("Feedback", comment: "")
+    NSLocalizedString("Rate the app", comment: "")
+    NSLocalizedString("Report a bug", comment: "")
+    NSLocalizedString("Questions & Suggestions", comment: "")
+    
+    NSLocalizedString("Other", comment: "")
+    NSLocalizedString("Swipe to Navigate", comment: "")
+    NSLocalizedString("Reset Settings", comment: "")
+    NSLocalizedString("Reset", comment: "")
+    
+    NSLocalizedString("Credits", comment: "")
+    NSLocalizedString("People", comment: "")
+    NSLocalizedString("Licenses", comment: "")
+    
+    NSLocalizedString("See what's new", comment: "")
+}
 
 struct SettingsView: View {
 
@@ -106,7 +140,7 @@ struct SettingsView: View {
                         )
                             .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                         
-                        SectionHeaderView(text: "Support and Feedback")
+                        SectionHeaderView(text: "Support & Feedback")
                         
                         SupportView()
                             .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
@@ -159,13 +193,6 @@ struct SettingsView: View {
             .configureBar()
         }
         .navigationViewStyle(StackNavigationViewStyle())
-//        .onAppear {
-//            print("hi? \(UserDefaults.standard.string(forKey: "highlightColor") ?? "000000")")
-//            settings.highlightColor = UserDefaults.standard.string(forKey: "highlightColor") ?? "000000"
-//            settings.showTextDetectIndicator = UserDefaults.standard.bool(forKey: "showTextDetectIndicator")
-//            settings.hapticFeedbackLevel = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
-//            settings.swipeToNavigateEnabled = UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled")
-//        }
     }
 }
 
