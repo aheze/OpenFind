@@ -22,6 +22,7 @@ class PhotosViewController: UIViewController {
     // MARK: Photo loading
     var hasPermissions = false
     var hasFullAccess = false
+    var currentlyObservingChanges = false /// if already observing
     var allPhotos: PHFetchResult<PHAsset>? = nil
     var allMonths = [Month]() /// all photos
     var monthsToDisplay = [Month]() /// shown photos, including filters

@@ -249,7 +249,7 @@ class SettingsViewController: UIViewController {
             }
             
             let alertView = SPAlertView(title: deletedAllPhotos, message: self.tapToDismiss, preset: SPAlertPreset.done)
-            alertView.duration = 2.6
+            alertView.duration = 3.6
             alertView.present()
         }))
         alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))
@@ -288,7 +288,7 @@ class SettingsViewController: UIViewController {
                 print("DELETE PRESSED, but ERROR deleting photos...... \(error)")
             }
             let alertView = SPAlertView(title: deletedAllLists, message: self.tapToDismiss, preset: SPAlertPreset.done)
-            alertView.duration = 2.6
+            alertView.duration = 3.6
             alertView.present()
         }))
         alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))

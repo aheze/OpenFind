@@ -118,10 +118,8 @@ extension PhotosViewController {
         }
         
         if permissionAction != .allowed {
-            print("sho1!")
             showPermissionView()
         } else {
-            print("allowed")
             hasPermissions = true
             let fetchOptions = PHFetchOptions()
             fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
@@ -136,7 +134,11 @@ extension PhotosViewController {
                 self.allPhotosToDisplay = allPhotos
                 self.applySnapshot(animatingDifferences: false)
                 self.fadeCollectionView(false, instantly: false)
+                
+                
+                self.startObservingChanges()
             }
+            
         }
     }
     

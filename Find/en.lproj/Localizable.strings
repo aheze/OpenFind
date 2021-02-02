@@ -519,8 +519,10 @@
 /* No comment provided by engineer. */
 "savedFromFind" = "Saved from Find";
 
+/* No comment provided by engineer. */
 "savedText" = "Saved";
 
+/* No comment provided by engineer. */
 "saveText" = "Save";
 
 /* EditList def=Icon */
@@ -636,7 +638,7 @@
 "tip-tapHereToSave" = "Tap here to save";
 
 /* No comment provided by engineer. */
-"tip-tapSelect" = "Tap Select";
+"tip-tapSelect" = "点击选择";
 
 /* No comment provided by engineer. */
 "tip-tapToCacheSelected" = "Tap to cache selected photos";

@@ -12,7 +12,10 @@ import Photos
 extension PhotosViewController: PHPhotoLibraryChangeObserver {
     
     func startObservingChanges() {
-        PHPhotoLibrary.shared().register(self)
+        if !currentlyObservingChanges {
+            PHPhotoLibrary.shared().register(self)
+            currentlyObservingChanges = true
+        }
     }
     
     func photoLibraryDidChange(_ changeInstance: PHChange) {

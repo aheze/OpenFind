@@ -117,7 +117,7 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
         let tapToDismiss = NSLocalizedString("tapToDismiss", comment: "Multipurpose def=Tap to dismiss")
         
         let alertView = SPAlertView(title: deletedList, message: tapToDismiss, preset: SPAlertPreset.done)
-        alertView.duration = 2.6
+        alertView.duration = 3.6
         alertView.present()
         print("chaing list")
         listsChanged?()

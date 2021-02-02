@@ -187,9 +187,7 @@ class LaunchViewController: UIViewController {
         
         let defaults = UserDefaults.standard
         let launchedBefore = defaults.bool(forKey: "launchedBefore")
-//        if launchedBefore == false {
-        
-        if true {
+        if launchedBefore == false {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                 self.drawAnimation(type: .onboarding)
             })
