@@ -61,7 +61,7 @@
 "cachePhotoToView" = "[为照片制作快取以生成成绩单]";
 
 /* No comment provided by engineer. */
-"caching..." = "正在快取。。。";
+"caching..." = "正在快取...";
 
 /* Multifile def=Caching again will take a while... */
 "cachingAgainTakeAWhile" = "再次快取将需要一段时间…";
@@ -580,6 +580,7 @@
 /* StatsViewController def=times */
 "timesPluralLoc" = "次";
 
+/* No comment provided by engineer. */
 "tip-cacheToGetMoreAccurateResults" = "制作快取以获得更准确的结果";
 
 /* No comment provided by engineer. */
@@ -589,15 +590,15 @@
 "tip-pauseThePreview" = "暂停相机";
 
 /* No comment provided by engineer. */
-"tip-switchToAllPhotos" = "转到到所有照片";
+"tip-switchToAllPhotos" = "转到所有照片";
 
 /* No comment provided by engineer. */
 "tip-tapHereToSave" = "点按来保存";
 
-"tip-tapSelect" = "点按选择";
-
+/* No comment provided by engineer. */
 "tip-tapToCacheSelected" = "点按来吧选择的照片制作快取";
 
+/* No comment provided by engineer. */
 "tip-tapToStarSelected" = "点按来吧选择的照片加注星标";
 
 /* extensionDate def=Today */

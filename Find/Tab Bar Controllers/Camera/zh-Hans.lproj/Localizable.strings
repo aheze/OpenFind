@@ -704,10 +704,11 @@
 /* No comment provided by engineer. */
 "tip-tapSelect" = "";
 
-"tip-tapSelect" = "点按选择";
-
+/* No comment provided by engineer. */
 "tip-tapToStarSelected" = "点按来吧选择的照片加注星标";
 
+/* No comment provided by engineer. */
 "tip-tapToCacheSelected" = "点按来吧选择的照片制作快取";
 
+/* No comment provided by engineer. */
 "tip-cacheToGetMoreAccurateResults" = "制作快取以获得更准确的结果";

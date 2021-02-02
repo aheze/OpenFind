@@ -583,6 +583,7 @@
 /* StatsViewController def=times */
 "timesPluralLoc" = "times";
 
+/* No comment provided by engineer. */
 "tip-cacheToGetMoreAccurateResults" = "Cache to get more accurate results";
 
 /* No comment provided by engineer. */
@@ -597,10 +598,13 @@
 /* No comment provided by engineer. */
 "tip-tapHereToSave" = "Tap here to save";
 
+/* No comment provided by engineer. */
 "tip-tapSelect" = "Tap Select";
 
+/* No comment provided by engineer. */
 "tip-tapToCacheSelected" = "Tap to cache selected photos";
 
+/* No comment provided by engineer. */
 "tip-tapToStarSelected" = "Tap to star selected photos";
 
 /* extensionDate def=Today */
@@ -699,9 +703,6 @@
 
 /* TutorialLocalization def=Your lists will appear above the keyboard, whether you are Finding using the camera or from Photos */
 "yourListsWillAppear" = "Your lists will appear above the keyboard";
-
-/* No comment provided by engineer. */
-"tip-tapSelect" = "";
 
 /* No comment provided by engineer. */
 "unitZhang" = "";

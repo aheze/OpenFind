@@ -38,12 +38,10 @@
 		3C2C3E9925A11CD6002C3D11 /* ANSegmentIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */; };
 		3C2C6F9625AE21BB00958647 /* PhotosVC+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */; };
 		3C369709259EEFE500A6544A /* PhotosMigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C369708259EEFE500A6544A /* PhotosMigrationView.swift */; };
-		3C36970C259EEFF500A6544A /* PhotosMigrationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C36970B259EEFF500A6544A /* PhotosMigrationView.xib */; };
 		3C389ED3259BA0D5007DB33B /* ListBuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */; };
 		3C3D47C625A40133002B8BBF /* PhotosVC+PHAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47C525A40133002B8BBF /* PhotosVC+PHAssets.swift */; };
 		3C3D47C925A40170002B8BBF /* PhotosVC+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47C825A40170002B8BBF /* PhotosVC+Sorting.swift */; };
 		3C3D47DA25A40A4E002B8BBF /* PhotoPermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47D925A40A4E002B8BBF /* PhotoPermissionView.swift */; };
-		3C3D47DD25A40A5B002B8BBF /* PhotoPermissionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D47DC25A40A5B002B8BBF /* PhotoPermissionView.xib */; };
 		3C3D47E025A41AEB002B8BBF /* PhotosVC+Diffable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47DF25A41AEB002B8BBF /* PhotosVC+Diffable.swift */; };
 		3C3D47E325A41B9E002B8BBF /* PhotosVC+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47E225A41B9E002B8BBF /* PhotosVC+Cells.swift */; };
 		3C3DF5E025B4A59100DD7A10 /* PhotoFindVC+Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3DF5DF25B4A59100DD7A10 /* PhotoFindVC+Prompt.swift */; };
@@ -107,6 +105,8 @@
 		3CA63F3C25C7BAA6001C295E /* SegmentedSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F3E25C7BAA6001C295E /* SegmentedSlider.xib */; };
 		3CA63F4525C7BB43001C295E /* EmptyDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F4725C7BB43001C295E /* EmptyDescriptionView.xib */; };
 		3CA63F4C25C8ECA6001C295E /* TutorialHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F4E25C8ECA6001C295E /* TutorialHeader.xib */; };
+		3CA63F5325C926A8001C295E /* PhotoPermissionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F5525C926A8001C295E /* PhotoPermissionView.xib */; };
+		3CA63F5A25C9274A001C295E /* PhotosMigrationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F5C25C9274A001C295E /* PhotosMigrationView.xib */; };
 		3CA679B625C38836008A00A4 /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA679B525C38836008A00A4 /* ContactView.swift */; };
 		3CA9334625BDF2BC00042C2F /* CameraVC+Pause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9334525BDF2BC00042C2F /* CameraVC+Pause.swift */; };
 		3CA9334D25BDF37800042C2F /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9334C25BDF37800042C2F /* CameraView.swift */; };
@@ -301,12 +301,10 @@
 		3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSegmentIndicator.swift; sourceTree = "<group>"; };
 		3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Actions.swift"; sourceTree = "<group>"; };
 		3C369708259EEFE500A6544A /* PhotosMigrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationView.swift; sourceTree = "<group>"; };
-		3C36970B259EEFF500A6544A /* PhotosMigrationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotosMigrationView.xib; sourceTree = "<group>"; };
 		3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBuilderViewController.swift; sourceTree = "<group>"; };
 		3C3D47C525A40133002B8BBF /* PhotosVC+PHAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+PHAssets.swift"; sourceTree = "<group>"; };
 		3C3D47C825A40170002B8BBF /* PhotosVC+Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Sorting.swift"; sourceTree = "<group>"; };
 		3C3D47D925A40A4E002B8BBF /* PhotoPermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPermissionView.swift; sourceTree = "<group>"; };
-		3C3D47DC25A40A5B002B8BBF /* PhotoPermissionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPermissionView.xib; sourceTree = "<group>"; };
 		3C3D47DF25A41AEB002B8BBF /* PhotosVC+Diffable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Diffable.swift"; sourceTree = "<group>"; };
 		3C3D47E225A41B9E002B8BBF /* PhotosVC+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Cells.swift"; sourceTree = "<group>"; };
 		3C3DF5DF25B4A59100DD7A10 /* PhotoFindVC+Prompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+Prompt.swift"; sourceTree = "<group>"; };
@@ -374,6 +372,10 @@
 		3CA63F4A25C7BB47001C295E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/EmptyDescriptionView.strings"; sourceTree = "<group>"; };
 		3CA63F4D25C8ECA6001C295E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TutorialHeader.xib; sourceTree = "<group>"; };
 		3CA63F5125C8ECAA001C295E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/TutorialHeader.strings"; sourceTree = "<group>"; };
+		3CA63F5425C926A8001C295E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PhotoPermissionView.xib; sourceTree = "<group>"; };
+		3CA63F5825C926AA001C295E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PhotoPermissionView.strings"; sourceTree = "<group>"; };
+		3CA63F5B25C9274A001C295E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PhotosMigrationView.xib; sourceTree = "<group>"; };
+		3CA63F5F25C9274E001C295E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PhotosMigrationView.strings"; sourceTree = "<group>"; };
 		3CA679B525C38836008A00A4 /* ContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
 		3CA9334525BDF2BC00042C2F /* CameraVC+Pause.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Pause.swift"; sourceTree = "<group>"; };
 		3CA9334C25BDF37800042C2F /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -609,7 +611,7 @@
 			isa = PBXGroup;
 			children = (
 				3C3D47D925A40A4E002B8BBF /* PhotoPermissionView.swift */,
-				3C3D47DC25A40A5B002B8BBF /* PhotoPermissionView.xib */,
+				3CA63F5525C926A8001C295E /* PhotoPermissionView.xib */,
 			);
 			path = Permissions;
 			sourceTree = "<group>";
@@ -879,7 +881,7 @@
 			children = (
 				3C020CEC259FF7890087AE92 /* PhotosVC+Migration.swift */,
 				3C369708259EEFE500A6544A /* PhotosMigrationView.swift */,
-				3C36970B259EEFF500A6544A /* PhotosMigrationView.xib */,
+				3CA63F5C25C9274A001C295E /* PhotosMigrationView.xib */,
 				3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */,
 				3C0F5ED725A62B2600549040 /* PhotosMigrationController+Permissions.swift */,
 				3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */,
@@ -1399,7 +1401,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C3D47DD25A40A5B002B8BBF /* PhotoPermissionView.xib in Resources */,
+				3CA63F5325C926A8001C295E /* PhotoPermissionView.xib in Resources */,
 				4956352A2437A4B60001E8C6 /* defaultSeeds.realm in Resources */,
 				3CA63F3625C7BA64001C295E /* TabBar.xib in Resources */,
 				3CA63F4525C7BB43001C295E /* EmptyDescriptionView.xib in Resources */,
@@ -1418,7 +1420,7 @@
 				3C4DE700259AD3FF0037D104 /* CacheButton.xib in Resources */,
 				4999ACA02353A81100AB06A7 /* LaunchScreen.storyboard in Resources */,
 				3C4DE6FC259AD3FF0037D104 /* MessageView.xib in Resources */,
-				3C36970C259EEFF500A6544A /* PhotosMigrationView.xib in Resources */,
+				3CA63F5A25C9274A001C295E /* PhotosMigrationView.xib in Resources */,
 				49B7A32D2390823C0070209F /* Colors.xcassets in Resources */,
 				3C4DE6FB259AD3FF0037D104 /* SaveToPhotosButton.xib in Resources */,
 				495DAD4024A6B37500D5F844 /* ListToolBar.xib in Resources */,
@@ -1771,6 +1773,24 @@
 				3CA63F5125C8ECAA001C295E /* zh-Hans */,
 			);
 			name = TutorialHeader.xib;
+			sourceTree = "<group>";
+		};
+		3CA63F5525C926A8001C295E /* PhotoPermissionView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3CA63F5425C926A8001C295E /* Base */,
+				3CA63F5825C926AA001C295E /* zh-Hans */,
+			);
+			name = PhotoPermissionView.xib;
+			sourceTree = "<group>";
+		};
+		3CA63F5C25C9274A001C295E /* PhotosMigrationView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3CA63F5B25C9274A001C295E /* Base */,
+				3CA63F5F25C9274E001C295E /* zh-Hans */,
+			);
+			name = PhotosMigrationView.xib;
 			sourceTree = "<group>";
 		};
 		495DAD3824A6B2E500D5F844 /* FindBar.xib */ = {

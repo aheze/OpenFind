@@ -1,0 +1,12 @@
+
+/* Class = "UILabel"; text = "This saves storage and makes it easier for you to manage and find from your photos."; ObjectID = "8ur-DC-KAn"; */
+"8ur-DC-KAn.text" = "这样可以节省存储空间，并使您更容易地管理和查找照片。";
+
+/* Class = "UIButton"; normalTitle = "Move Photos"; ObjectID = "dXw-aj-I1k"; */
+"dXw-aj-I1k.normalTitle" = "移动照片";
+
+/* Class = "UILabel"; text = "Tap here to move your existing photos to the Photos app."; ObjectID = "l0k-qK-7hT"; */
+"l0k-qK-7hT.text" = "点击来把现有照片移到“照片”APP。";
+
+/* Class = "UILabel"; text = "Starting from Find 1.2 (this version), photos taken in Find will be saved to the Photos app."; ObjectID = "mBt-9I-ok4"; */
+"mBt-9I-ok4.text" = "从Find 1.2（此版本）开始，在Find中拍摄的照片将保存到“照片”APP里。";

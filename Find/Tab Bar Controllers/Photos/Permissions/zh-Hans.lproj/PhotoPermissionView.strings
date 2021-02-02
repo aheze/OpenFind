@@ -1,0 +1,9 @@
+
+/* Class = "UILabel"; text = "Find from Photos"; ObjectID = "ClE-D9-iGQ"; */
+"ClE-D9-iGQ.text" = "从照片中查找";
+
+/* Class = "UILabel"; text = "Find needs permission to access the photo library."; ObjectID = "gRA-DZ-dTj"; */
+"gRA-DZ-dTj.text" = "Find需要访问照片库的权限。";
+
+/* Class = "UIButton"; normalTitle = "Allow Access"; ObjectID = "wX4-Yr-Z8Q"; */
+"wX4-Yr-Z8Q.normalTitle" = "允许访问";

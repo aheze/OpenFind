@@ -30,7 +30,7 @@
                         <constraint firstAttribute="height" constant="90" id="3Ai-H0-fiE"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This saves storage and makes it easier for you to manage and find in your photos." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ur-DC-KAn">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This saves storage and makes it easier for you to manage and find from your photos." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ur-DC-KAn">
                     <rect key="frame" x="16" y="299.5" width="382" height="45.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <color key="textColor" systemColor="secondaryLabelColor"/>
