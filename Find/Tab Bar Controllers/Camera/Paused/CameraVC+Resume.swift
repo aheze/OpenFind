@@ -21,7 +21,9 @@ extension CameraViewController {
             self.saveToPhotos.photosIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)()
         }
         self.saveLabel.fadeTransition(0.2)
-        self.saveLabel.text = "Save"
+        
+        let saveText = NSLocalizedString("saveText", comment: "")
+        self.saveLabel.text = saveText
         
         self.cachePressed = false
         self.cache.cacheIcon.animateCheck(percentage: 0)

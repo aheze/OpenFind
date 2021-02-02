@@ -75,10 +75,6 @@ struct ResetSettingsView: View {
                     allSettings.showTextDetectIndicator = true
                     allSettings.hapticFeedbackLevel = 1
                     allSettings.swipeToNavigateEnabled = true
-//                    UserDefaults.standard.setValue("00AEEF", forKey: "highlightColor")
-//                    UserDefaults.standard.setValue(true, forKey: "showTextDetectIndicator")
-//                    UserDefaults.standard.setValue(1, forKey: "hapticFeedbackLevel")
-//                    UserDefaults.standard.setValue(true, forKey: "swipeToNavigateEnabled")
                 },
                 .cancel()
             ])

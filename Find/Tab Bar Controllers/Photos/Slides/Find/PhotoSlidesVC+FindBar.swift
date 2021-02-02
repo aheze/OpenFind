@@ -49,7 +49,8 @@ extension PhotoSlidesViewController {
                 self.slideFindBar?.alpha = 1
             }
         } else {
-            findButton.title = "Find"
+            let findText = NSLocalizedString("universal-find", comment: "")
+            findButton.title = findText
             
             slideFindBarTopC?.update(offset: -45)
             animatePromptReveal(reveal: false)

@@ -61,7 +61,7 @@
 "cachePhotoToView" = "[为照片制作快取以生成成绩单]";
 
 /* No comment provided by engineer. */
-"caching..." = "正在快取...";
+"caching..." = "正在制作快取...";
 
 /* Multifile def=Caching again will take a while... */
 "cachingAgainTakeAWhile" = "再次快取将需要一段时间…";

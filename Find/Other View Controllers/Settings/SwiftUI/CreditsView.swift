@@ -105,9 +105,6 @@ struct PeopleView: View {
                     Button(action: {
                         if let url = URL(string: "https://hkamran.com/") {
                             UIApplication.shared.open(url)
-                            NSLocalizedString("Thanks to", comment: "")
-                            NSLocalizedString("hkamranDesc", comment: "")
-                            NSLocalizedString("winkDesc", comment: "")
                         }
                     }) {
                         HStack(alignment: .top) {
@@ -131,7 +128,7 @@ struct PeopleView: View {
                                     .foregroundColor(.white)
                                     .padding(EdgeInsets(top: 20, leading: 6, bottom: 2, trailing: 20))
                                 
-                                Text("Beta tester")
+                                Text("hkamranDesc")
                                     .font(Font(UIFont.systemFont(ofSize: 19, weight: .regular)))
                                     .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
                                     .padding(EdgeInsets(top: 0, leading: 6, bottom: 6, trailing: 20))
@@ -181,7 +178,7 @@ struct PeopleView: View {
                                     .foregroundColor(.white)
                                     .padding(EdgeInsets(top: 20, leading: 6, bottom: 2, trailing: 20))
                                 
-                                Text("Made the app promo music")
+                                Text("winkDesc")
                                     .fixedSize(horizontal: false, vertical: true)
                                     .font(Font(UIFont.systemFont(ofSize: 19, weight: .regular)))
                                     .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))

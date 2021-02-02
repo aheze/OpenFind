@@ -128,7 +128,7 @@
 "sbj-0t-kKO.text" = "清单";
 
 /* Class = "UILabel"; text = "Caching Photos"; ObjectID = "scZ-On-pSO"; */
-"scZ-On-pSO.text" = "正在启用快取";
+"scZ-On-pSO.text" = "正在制作快取";
 
 /* Class = "UIButton"; normalTitle = "Add Word"; ObjectID = "srB-MK-Y9p"; */
 "srB-MK-Y9p.normalTitle" = "添加搜索词";
