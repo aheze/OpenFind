@@ -712,3 +712,36 @@
 
 /* No comment provided by engineer. */
 "tip-cacheToGetMoreAccurateResults" = "制作快取以获得更准确的结果";
+
+/* No comment provided by engineer. */
+"couldNotBeAutoMoved" = "这些照片无法自动移动";
+
+/* No comment provided by engineer. */
+"somePhotosCouldNotBeMoved" = "有些照片无法移动。";
+
+/* No comment provided by engineer. */
+"okText" = "好";
+
+/* No comment provided by engineer. */
+"finishedMoving" = "完成移动";
+
+/* No comment provided by engineer. */
+"yourPhotosHaveBeenMoved" = "您的照片已移到照片APP。";
+
+/* No comment provided by engineer. */
+"finishedMovingQuestion" = "完成了移动吗？";
+
+/* No comment provided by engineer. */
+"ifYouHaveFinishedMovingPhotos" = "如果您完成把照片移到照片APP，Find将删除现有的副本。";
+
+/* No comment provided by engineer. */
+"noText" = "没有";
+
+/* No comment provided by engineer. */
+"imFinished" = "我完成了";
+
+"needsPermissionToMovePhotos" = "Find需要许可才能移动您的照片";
+
+"restrictedText" = "限制";
+
+"findCouldNotAccess" = "Find无法访问您的照片";

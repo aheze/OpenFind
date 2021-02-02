@@ -40,9 +40,6 @@ class PhotosMigrationController: UIViewController {
         getPermissionsAndWrite()
     }
     
-    // MARK: Get permission
-//    var permissionAction = PermissionAction.notDetermined
-    
     
     // MARK: Error handling views
     
@@ -113,7 +110,6 @@ extension PhotosMigrationController: UICollectionViewDelegate, UICollectionViewD
         let thumbnailSize = CGSize(width: 200 * scale, height: 200 * scale)
         
         let url = folderURL.appendingPathComponent(photo.filePath)
-        print("URL: \(url)")
         cell.imageView.sd_imageTransition = .fade
         cell.imageView.sd_setImage(with: url, placeholderImage: nil, context: [.imageThumbnailPixelSize : thumbnailSize])
         

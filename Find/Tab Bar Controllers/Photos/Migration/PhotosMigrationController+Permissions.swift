@@ -42,9 +42,12 @@ extension PhotosMigrationController {
                 getPhotoAccess()
             }
         case .goToSettings:
-            let alert = UIAlertController(title: "Allow Access to Photo Library", message: "Find needs permission to move your photos", preferredStyle: UIAlertController.Style.alert)
+            let allowAccessText = NSLocalizedString("universal-allowAccessToPhotoLibrary", comment: "")
+            let needsPermissionToMovePhotos = NSLocalizedString("needsPermissionToMovePhotos", comment: "")
+            
+            let alert = UIAlertController(title: allowAccessText, message: needsPermissionToMovePhotos, preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: "Multipurpose def=Cancel"), style: UIAlertAction.Style.cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: "Go to Settings", style: UIAlertAction.Style.default, handler: { _ in
+            alert.addAction(UIAlertAction(title: NSLocalizedString("universal-goToSettings", comment: ""), style: UIAlertAction.Style.default, handler: { _ in
                 guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                     return
                 }
@@ -54,8 +57,12 @@ extension PhotosMigrationController {
             }))
             self.present(alert, animated: true, completion: nil)
         case .restricted:
-            let alert = UIAlertController(title: "Restricted", message: "Find could not access your photo library.", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            let restrictedText = NSLocalizedString("restrictedText", comment: "")
+            let findCouldNotAccess = NSLocalizedString("findCouldNotAccess", comment: "")
+            let okText = NSLocalizedString("okText", comment: "")
+            
+            let alert = UIAlertController(title: restrictedText, message: findCouldNotAccess, preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: okText, style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         case .allowed, .limited:
             writeToPhotos(editablePhotos: editablePhotosToMigrate, baseURL: folderURL)

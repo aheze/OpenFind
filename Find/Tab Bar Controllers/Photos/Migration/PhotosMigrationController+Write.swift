@@ -110,7 +110,6 @@ extension PhotosMigrationController {
         for templatePhoto in finishedEditablePhotos {
             for realPhoto in realPhotos {
                 if realPhoto.dateCreated == templatePhoto.dateCreated {
-                    print("Match!")
                     
                     do {
                         try realm.write {
@@ -131,7 +130,9 @@ extension PhotosMigrationController {
             
             let tryAgain = NSLocalizedString("PhotosMigrationVC+tryAgain", comment: "")
             confirmButton.setTitle(tryAgain, for: .normal)
-            promptLabel.text = "These photos could not be automatically moved."
+            
+            let couldNotBeAutoMoved = NSLocalizedString("couldNotBeAutoMoved", comment: "")
+            promptLabel.text = couldNotBeAutoMoved
             tapTryAgainView.alpha = 1
             tapTryAgainHeightC.constant = 40
             
@@ -144,18 +145,22 @@ extension PhotosMigrationController {
                 }
             }
             
-            let alert = UIAlertController(title: "Some photos could not be moved.", message: errorToShow, preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            
+            let somePhotosCouldNotBeMoved = NSLocalizedString("somePhotosCouldNotBeMoved", comment: "")
+            let okText = NSLocalizedString("okText", comment: "")
+            
+            let alert = UIAlertController(title: somePhotosCouldNotBeMoved, message: errorToShow, preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: okText, style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
             editablePhotosToMigrate = editablePhotosWithErrors
             collectionView.reloadData()
         } else {
-            print("No errors!")
-            print("photos: \(finishedEditablePhotos)")
+            let finishedMoving = NSLocalizedString("finishedMoving", comment: "")
+            let yourPhotosHaveBeenMoved = NSLocalizedString("yourPhotosHaveBeenMoved", comment: "")
             
-            let finishedMovingMessage = "Finished moving"
-            let detailsMessage = "Your photos have been moved to the Photos app."
+            let finishedMovingMessage = finishedMoving
+            let detailsMessage = yourPhotosHaveBeenMoved
             let alertView = SPAlertView(title: finishedMovingMessage, message: detailsMessage, preset: SPAlertPreset.done)
             alertView.duration = 2.6
             alertView.present()
@@ -203,11 +208,15 @@ extension PhotosMigrationController {
             attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
             attributes.screenInteraction = .absorbTouches
             
+            let finishedMovingQuestion = NSLocalizedString("finishedMovingQuestion", comment: "")
+            let ifYouHaveFinishedMovingPhotos = NSLocalizedString("ifYouHaveFinishedMovingPhotos", comment: "")
+            let noText = NSLocalizedString("noText", comment: "")
+            let imFinished = NSLocalizedString("imFinished", comment: "")
             
-            let titleMessage = "Finished moving?"
-            let description = "If you have finished moving your photos to the Photos app, Find will delete the existing copies."
-            let leftButtonTitle = "No"
-            let rightButtonTitle = "I'm finished"
+            let titleMessage = finishedMovingQuestion
+            let description = ifYouHaveFinishedMovingPhotos
+            let leftButtonTitle = noText
+            let rightButtonTitle = imFinished
             
             self.showManualConfirmation(attributes: attributes, titleMessage: titleMessage, desc: description, leftButton: leftButtonTitle, yesButton: rightButtonTitle)
             
@@ -256,12 +265,9 @@ extension PhotosMigrationController {
     }
     
     func deleteErrorPhotos() {
-        print("deleteing error photos..")
         for templatePhoto in editablePhotosToMigrate {
             for realPhoto in realPhotos {
                 if realPhoto.dateCreated == templatePhoto.dateCreated {
-                    print("Error photo match!")
-                    
                     do {
                         try realm.write {
                             realm.delete(realPhoto.contents)

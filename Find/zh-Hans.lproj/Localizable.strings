@@ -102,6 +102,9 @@
 /* No comment provided by engineer. */
 "copied" = "复制！";
 
+/* No comment provided by engineer. */
+"couldNotBeAutoMoved" = "这些照片无法自动移动";
+
 /* StatsViewController def=created */
 "created" = "已做成";
 
@@ -170,6 +173,8 @@
 /* No comment provided by engineer. */
 "Feedback" = "反馈";
 
+"findCouldNotAccess" = "Find无法访问您的照片";
+
 /* No comment provided by engineer. */
 "findingFrom" = "从";
 
@@ -187,6 +192,12 @@
 
 /* SetupSearchBar def=Find is paused | Duplicates are not allowed */
 "findPausedDuplicatesNotAllowed" = "Find暂时暂停 | 不允许重复项";
+
+/* No comment provided by engineer. */
+"finishedMoving" = "完成移动";
+
+/* No comment provided by engineer. */
+"finishedMovingQuestion" = "完成了移动吗？";
 
 /* EditList def=General */
 "firstVCTitle" = "常规";
@@ -231,6 +242,12 @@
 
 /* No comment provided by engineer. */
 "hkamranDesc" = "Beta测试仪";
+
+/* No comment provided by engineer. */
+"ifYouHaveFinishedMovingPhotos" = "如果您完成把照片移到照片APP，Find将删除现有的副本。";
+
+/* No comment provided by engineer. */
+"imFinished" = "我完成了";
 
 /* No comment provided by engineer. */
 "inCachedPhotos" = "在有快取的照片里。点击";
@@ -339,6 +356,8 @@
 /* SymbolsViewController def=Nature */
 "natureLoc" = "自然";
 
+"needsPermissionToMovePhotos" = "Find需要许可才能移动您的照片";
+
 "No" = "没有";
 
 /* GeneralViewController def=No Description */
@@ -353,6 +372,9 @@
 /* LaunchViewController def=You don't have permission to use the camera. */
 "noPermissionToUseCamera" = "您无权使用照相机。";
 
+/* No comment provided by engineer. */
+"noText" = "没有";
+
 /* Stats def=Nothing! You have duplicates, so Find is currently paused. Make sure that there are no duplicates in the Search Bar. */
 "nothingHaveDuplicatesPaused" = "没有！ 您有重复项，因此Find当前已暂停。 确保搜索栏中没有重复项。";
 
@@ -364,6 +386,9 @@
 
 /* No comment provided by engineer. */
 "OFF" = "关";
+
+/* No comment provided by engineer. */
+"okText" = "好";
 
 /* No comment provided by engineer. */
 "ON" = "开";
@@ -382,8 +407,6 @@
 
 /* Open Source Licenses */
 "Open Source Licenses" = "开源许可证";
-
-"Origin" = "起源";
 
 "Origin" = "起源";
 
@@ -465,6 +488,8 @@
 /* Settings def=Reset Settings */
 "resetSettings" = "重置所有设置";
 
+"restrictedText" = "限制";
+
 /* No comment provided by engineer. */
 "results" = "结果";
 
@@ -511,6 +536,9 @@
 
 /* StatsViewController def=since you first downloaded Find */
 "sinceYouFirstDownloadedFind" = "自您首次下载Find以来";
+
+/* No comment provided by engineer. */
+"somePhotosCouldNotBeMoved" = "有些照片无法移动。";
 
 /* Stats def= and \"x\" */
 "spaceAndSpacequote %@ quote" = " 和 \"%@\"";
@@ -706,6 +734,9 @@
 
 /* TutorialLocalization def=Your lists will appear above the keyboard, whether you are Finding using the camera or from Photos */
 "yourListsWillAppear" = "清单都将出现在键盘上方。";
+
+/* No comment provided by engineer. */
+"yourPhotosHaveBeenMoved" = "您的照片已移到照片APP。";
 
 /* No comment provided by engineer. */
 "blankSpace" = "";

@@ -6,7 +6,7 @@
 "dXw-aj-I1k.normalTitle" = "移动照片";
 
 /* Class = "UILabel"; text = "Tap here to move your existing photos to the Photos app."; ObjectID = "l0k-qK-7hT"; */
-"l0k-qK-7hT.text" = "点击来把现有照片移到“照片”APP。";
+"l0k-qK-7hT.text" = "点击来把现有照片移到照片APP。";
 
 /* Class = "UILabel"; text = "Starting from Find 1.2 (this version), photos taken in Find will be saved to the Photos app."; ObjectID = "mBt-9I-ok4"; */
-"mBt-9I-ok4.text" = "从Find 1.2（此版本）开始，在Find中拍摄的照片将保存到“照片”APP里。";
+"mBt-9I-ok4.text" = "从Find 1.2（此版本）开始，在Find中拍摄的照片将保存到照片APP里。";

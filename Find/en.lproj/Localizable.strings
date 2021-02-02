@@ -105,6 +105,9 @@
 /* No comment provided by engineer. */
 "copied" = "Copied!";
 
+/* No comment provided by engineer. */
+"couldNotBeAutoMoved" = "These photos could not be automatically moved.";
+
 /* StatsViewController def=created */
 "created" = "created";
 
@@ -173,6 +176,8 @@
 /* No comment provided by engineer. */
 "Feedback" = "Feedback";
 
+"findCouldNotAccess" = "Find could not access your photo library";
+
 /* No comment provided by engineer. */
 "findingFrom" = "Finding from ";
 
@@ -190,6 +195,12 @@
 
 /* SetupSearchBar def=Find is paused | Duplicates are not allowed */
 "findPausedDuplicatesNotAllowed" = "Find is paused | Duplicates are not allowed";
+
+/* No comment provided by engineer. */
+"finishedMoving" = "Finished moving";
+
+/* No comment provided by engineer. */
+"finishedMovingQuestion" = "Finished moving?";
 
 /* EditList def=General */
 "firstVCTitle" = "General";
@@ -234,6 +245,12 @@
 
 /* No comment provided by engineer. */
 "hkamranDesc" = "Beta tester";
+
+/* No comment provided by engineer. */
+"ifYouHaveFinishedMovingPhotos" = "If you have finished moving your photos to the Photos app, Find will delete the existing copies.";
+
+/* No comment provided by engineer. */
+"imFinished" = "I'm finished";
 
 /* No comment provided by engineer. */
 "inCachedPhotos" = " in cached photos. Press";
@@ -342,6 +359,8 @@
 /* SymbolsViewController def=Nature */
 "natureLoc" = "Nature";
 
+"needsPermissionToMovePhotos" = "Find needs permission to move your photos";
+
 "No" = "No";
 
 /* GeneralViewController def=No Description */
@@ -356,6 +375,9 @@
 /* LaunchViewController def=You don't have permission to use the camera. */
 "noPermissionToUseCamera" = "You don't have permission to use the camera.";
 
+/* No comment provided by engineer. */
+"noText" = "No";
+
 /* Stats def=Nothing! You have duplicates, so Find is currently paused. Make sure that there are no duplicates in the Search Bar. */
 "nothingHaveDuplicatesPaused" = "Nothing! You have duplicates, so Find is currently paused. Make sure that there are no duplicates in the Search Bar.";
 
@@ -367,6 +389,9 @@
 
 /* No comment provided by engineer. */
 "OFF" = "OFF";
+
+/* No comment provided by engineer. */
+"okText" = "Ok";
 
 /* No comment provided by engineer. */
 "ON" = "ON";
@@ -468,6 +493,8 @@
 /* Settings def=Reset Settings */
 "resetSettings" = "Reset Settings";
 
+"restrictedText" = "Restricted";
+
 /* No comment provided by engineer. */
 "results" = "results";
 
@@ -514,6 +541,9 @@
 
 /* StatsViewController def=since you first downloaded Find */
 "sinceYouFirstDownloadedFind" = "since you first downloaded Find";
+
+/* No comment provided by engineer. */
+"somePhotosCouldNotBeMoved" = "Some photos could not be moved.";
 
 /* Stats def= and \"x\" */
 "spaceAndSpacequote %@ quote" = " and \"%@\"";
@@ -703,6 +733,9 @@
 
 /* TutorialLocalization def=Your lists will appear above the keyboard, whether you are Finding using the camera or from Photos */
 "yourListsWillAppear" = "Your lists will appear above the keyboard";
+
+/* No comment provided by engineer. */
+"yourPhotosHaveBeenMoved" = "Your photos have been moved to the Photos app.";
 
 /* No comment provided by engineer. */
 "unitZhang" = "";

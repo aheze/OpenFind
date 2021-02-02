@@ -62,7 +62,7 @@ struct WhatsNewConfig {
                     
                     WhatsNew.Item(
                         title: "重新设计的照片",
-                        subtitle: "Find里的照片现在已链接到“照片”APP，因此您可以从现有照片中查找。",
+                        subtitle: "Find里的照片现在已链接到照片APP，因此您可以从现有照片中查找。",
                         image: UIImage(systemName: "photo.fill.on.rectangle.fill")?.withTintColor(#colorLiteral(red: 0.2555771952, green: 0.8299632353, blue: 0, alpha: 1), renderingMode: .alwaysOriginal)
                     ),
                     WhatsNew.Item(
