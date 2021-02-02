@@ -7,20 +7,11 @@
 /* ListsController def=x lists deleted! */
 "%d lists deleted!" = "%d lists deleted!";
 
-/* FindBar def=x Matches in  */
-"%d MatchesInSpace" = "%d results in ";
-
 /* ListsController def=x Lists Selected */
 "%d numberLists" = "%d Lists Selected";
 
 /* ListsController def=\n... x more */
 "%d overFlowCountMore" = "\n... %d more";
-
-/* NewHistoryViewController def=x caches cleared! */
-"%d photos caches deleted!" = "%d caches cleared!";
-
-/* NewHistoryViewController def=x photos deleted! */
-"%d photos deleted!" = "%d photos deleted!";
 
 /* CachingViewController def=x photos have already been cached.\nWould you like to keep its cache? */
 "%d photosHaveAlreadyBeenCachedWouldYouKeep" = "%d photos have already been cached.\nWould you like to keep its cache?";
@@ -31,23 +22,14 @@
 /* HistoryFindController def=x matches */
 "%d SpaceMatches" = "%d results";
 
-/* TutorialLocalization def=Access the Menu */
-"accessMenu" = "Access the Menu";
+/* No comment provided by engineer. */
+"_in_" = " in ";
+
+/* No comment provided by engineer. */
+"_InCache" = " in cache. Press ";
 
 /* GeneralViewController def=a couple duplicates. */
 "aCoupleDuplicates" = "a couple duplicates.";
-
-/* HistoryCollectionViewFiles def=Actions */
-"actionsLoc" = "Actions";
-
-/* TutorialLocalization def=Add a match */
-"addAMatch" = "Add a word to find";
-
-/* TutorialLocalization def=Add more matches */
-"addMoreMatches" = "Add more words";
-
-/* TutorialLocalization def=Add some matches */
-"addSomeMatches" = "Add words to find";
 
 /* GeneralViewController def=a duplicate. */
 "aDuplicateOriginal" = "a duplicate.";
@@ -58,11 +40,8 @@
 /* Settings def=All your photos and their caches will be deleted. This action can't be undone. */
 "allPhotosAndCachesDeleted" = "All your photos and their caches will be deleted. This action can't be undone.";
 
-/* NewHistoryViewController def=All photos deleted! */
-"allPhotosDeletedExclaim" = "All photos deleted!";
-
-/* HistoryFindController def=All selected photos have already been cached! Search results will appear immediately. */
-"allSelectedPhotosAlreadyCached" = "All selected photos have already been cached! Search results will appear immediately.";
+/* No comment provided by engineer. */
+"allSpace" = "all ";
 
 /* Settings def=All your lists will be deleted. This action can't be undone. */
 "allYourListsDeleted" = "All your lists will be deleted. This action can't be undone.";
@@ -70,29 +49,25 @@
 /* Multipurpose def=and */
 "and" = "and";
 
-/* TutorialLocalization def=Before you start... */
-"beforeYouStart" = "Before you start...";
+/* No comment provided by engineer. */
+"blankSpace" = " ";
 
-/* HistoryCollectionViewFiles def=Cache */
-"cache" = "Cache";
-
-/* NewHistoryViewController def=Cache cleared! */
-"cacheClearedExclaim" = "Cache cleared!";
+"Cached?" = "Cached?";
 
 /*StatsViewController*/
 "cachedSinceYouFirstDownload" = "cached since you first downloaded Find";
 
-/* TutorialLocalization def=Cache photos */
-"cachePhotos" = "Cache photos";
+/* No comment provided by engineer. */
+"cacheOnly" = "Cache";
+
+/* No comment provided by engineer. */
+"cachePhotoToView" = "[Cache photo to generate transcript]";
 
 /* No comment provided by engineer. */
 "caching..." = "Caching...";
 
 /* Multifile def=Caching again will take a while... */
 "cachingAgainTakeAWhile" = "Caching again will take a while...";
-
-/* Multifile def=Caching done! */
-"cachingDoneExclaim" = "Caching done!";
 
 /*comment*/
 "camera" = "Camera";
@@ -121,14 +96,14 @@
 /* Multipurpose def=Clear */
 "clear" = "Clear";
 
-/* PhotoPageContainerViewController def=Cleared this photo's cache! */
-"clearedThisPhotosCacheExclaim" = "Cleared this photo's cache!";
-
 /* Multifile def=Clear this photo's cache? */
 "clearThisCacheQuestion" = "Clear this photo's cache?";
 
 /* Are you sure you want to delete this list? */
 "confirmDeleteList" = "Are you sure you want to delete this list?";
+
+/* No comment provided by engineer. */
+"copied" = "Copied!";
 
 /* StatsViewController def=created */
 "created" = "created";
@@ -145,20 +120,16 @@
 /* StatsViewController def=Customized Settings Status */
 "customizedSettingsStatus" = "Customized Settings Status";
 
+"Date taken" = "Date taken";
+
 /* No comment provided by engineer. */
 "Default Highlight Color" = "Default Highlight Color";
 
 /* Multipurpose def=Delete */
 "delete" = "Delete";
 
-/* NewHistoryViewController def=Clear x photos' caches? */
-"Delete %d caches?" = "Clear %d photos' caches?";
-
 /* ListsController def=Delete x lists? */
 "Delete %d lists?" = "Delete %d lists?";
-
-/* NewHistoryViewController def=Delete x photos? */
-"Delete %d photos?" = "Delete %d photos?";
 
 /* Settings def=Delete All Lists */
 "deleteAllLists" = "Delete All Lists";
@@ -169,12 +140,6 @@
 /* Settings def=Delete All Photos */
 "deleteAllPhotos" = "Delete All Photos";
 
-/* NewHistoryViewController def=Delete ALL photos?! */
-"deleteAllPhotosQuestion" = "Delete ALL photos?!";
-
-/* TutorialLocalization def=Delete a match */
-"deleteAMatch" = "Delete a word";
-
 /* Settings def=Deleted All Lists */
 "deletedAllLists" = "Deleted All Lists";
 
@@ -184,23 +149,11 @@
 /* ListsController def=Deleted list! */
 "deletedList" = "Deleted list!";
 
-/* NewHistoryViewController def=Clear ENTIRE cache?! */
-"deleteEntireCacheQuestion" = "Clear ENTIRE cache?!";
-
 /* ListsController def=Delete this List? */
 "deleteThisListQuestion" = "Delete this List?";
 
-/* Multifile def=Delete photo? */
-"deleteThisPhotoQuestion" = "Delete photo?";
-
-/* NewHistoryViewController def=Deselect All */
-"deselectAllLoc" = "Deselect All";
-
 /* Multipurpose def=Done */
 "done" = "Done";
-
-/* HistoryFindController def=Duplicates are not allowed */
-"duplicatesNotAllowed" = "Duplicates are not allowed";
 
 /* No comment provided by engineer. */
 "emptyDesc-photosSavedFromFind" = "Photos saved from Find will appear here";
@@ -217,41 +170,26 @@
 /* SingleHelp def=Encountered an error */
 "encounteredError" = "Encountered an error";
 
-/* TutorialLocalization def=To ensure the most accurate results, please make sure to hold your phone as steady as possible. */
-"ensureAccuracy" = "To ensure the most accurate results, please make sure to hold your phone as steady as possible.";
-
-/* NewHistoryViewController def=Entire cache cleared! */
-"entireCacheDeletedExclaim" = "Entire cache cleared!";
-
 /* No comment provided by engineer. */
 "Feedback" = "Feedback";
 
-/* TutorialLocalization def=Find from Photos */
-"findFromPhotos" = "Find from Photos";
+/* No comment provided by engineer. */
+"findingFrom" = "Finding from ";
 
-/* HistoryFindController def=Find Help */
-"findHelp" = "Find Help";
+/* No comment provided by engineer. */
+"findingFrom-photos" = "photos ";
 
-/* TutorialLocalization def=Find is Command+F for camera: Find words in books, worksheets, nutrition labels... anywhere that contains text! */
-"findIsCommandFForCamera" = "Find is Command+F for Camera: Find words in books, worksheets, nutrition labels... anywhere that contains text!";
+/* No comment provided by engineer. */
+"findingFromPhotos" = "Finding from photos";
 
-/* Multipurpose def=Find */
-"findLoc" = "Find";
+/* No comment provided by engineer. */
+"findingFromUncachedPhotos" = "Finding from uncached photos";
 
-/* TutorialLocalization def=...find multiple words at the same time! */
-"findMultipleWords" = "Find multiple words at the same time!";
+/* No comment provided by engineer. */
+"findingWithOCR" = "Finding with OCR...";
 
 /* SetupSearchBar def=Find is paused | Duplicates are not allowed */
 "findPausedDuplicatesNotAllowed" = "Find is paused | Duplicates are not allowed";
-
-/* TutorialLocalization def=Find searches for your matches when you use the list */
-"findSearchesForMatches" = "Group commonly used words here";
-
-/* TutorialLocalization def=Caching photos speeds up search results! */
-"findUsesOCR" = "Caching photos speeds up search results!";
-
-/* TutorialLocalization def=Find words */
-"findWords" = "Find words";
 
 /* EditList def=General */
 "firstVCTitle" = "General";
@@ -279,9 +217,6 @@
 /* Settings def=Haptic Feedback */
 "hapticFeedback" = "Haptic Feedback";
 
-/* HistoryCollectionViewFiles def=Heart */
-"heart" = "Heart";
-
 /* No comment provided by engineer. */
 "Heavy" = "Heavy";
 
@@ -297,17 +232,16 @@
 /* StatsViewController def=Help pressed */
 "helpPressed" = "Help pressed";
 
-/* SwiftEntryKitTemplates displayHistoryHelp def=Help */
-"helpTitle" = "Help";
+/* No comment provided by engineer. */
+"hkamranDesc" = "Beta tester";
 
-/* Multipurpose def=History */
-"history" = "History";
+/* No comment provided by engineer. */
+"inCachedPhotos" = " in cached photos. Press";
+
+"Info" = "Info";
 
 /* StatsViewController def=Just for fun */
 "justForFunStats" = "Just for fun";
-
-/* Multifile def=Kept cached photos! */
-"keptCachedPhotos" = "Kept cached photos!";
 
 /* GeneralViewController def=Yes, Delete and save */
 "leftButtonDeleteSave" = "Yes, Delete and save";
@@ -384,20 +318,17 @@
 /* MultipurposeExtension def=true */
 "locBoolTrue" = "true";
 
-/*TutorialLocalization*/
-"locLaunchLists" = "Use lists";
+/* No comment provided by engineer. */
+"lowercaseCached" = "cached";
 
-/*TutorialLocalization*/
-"locMakeLists" = "Group multiple words together into Lists. Find all of them at once!";
+/* No comment provided by engineer. */
+"lowercaseLocal" = "local";
 
-/* TutorialLocalization def=Make a list */
-"makeAList" = "Make a list";
+/* No comment provided by engineer. */
+"lowercasePhotos" = "photos";
 
-/* FindBar def=Matches */
-"matches" = "results";
-
-/* TutorialLocalization def=Matches are what Find looks for when you use the list. Make one by tapping the placeholder that says 'Match'! */
-"matchesAreWhatFindLooksFor" = "Find will look for these words when you use the list. Add one by tapping the placeholder that says 'Word'";
+/* No comment provided by engineer. */
+"lowercaseStarred" = "starred";
 
 /* StatsViewController def=matches found currently */
 "matchesFoundCurrently" = "words found currently";
@@ -411,35 +342,19 @@
 /* SymbolsViewController def=Nature */
 "natureLoc" = "Nature";
 
+"No" = "No";
+
 /* GeneralViewController def=No Description */
 "noDescription" = "No Description";
 
 /* ListsController def=No Lists Created Yet! */
 "noListsCreatedYet" = "No Lists Created Yet!";
 
-/* FindBar def=No Matches */
-"noMatches" = "No results";
-
-/* FindBar def=No Matches in  */
-"noMatchesInSpace" = "No results in ";
-
 /* No comment provided by engineer. */
 "None" = "None";
 
 /* LaunchViewController def=You don't have permission to use the camera. */
 "noPermissionToUseCamera" = "You don't have permission to use the camera.";
-
-/* NewHistoryViewController def=No Photos Taken Yet! */
-"noPhotosTakenYet" = "No Photos Taken Yet!";
-
-/* HistoryFindController def=No results found. */
-"noResultsFound" = "No results found.";
-
-/* HistoryFindController def=No results found in cache. Press Search on the keyboard to continue. */
-"noResultsInCache" = "No results found in cache. Press Search on the keyboard to continue.";
-
-/* Not all photos have been cached, so some search results will not appear immediately. Press 'search' on the keyboard to find using OCR. */
-"notAllSelectedPhotosAlreadyCached" = "Not all photos have been cached, so some search results will not appear immediately. Press 'search' on the keyboard to find using OCR.";
 
 /* Stats def=Nothing! You have duplicates, so Find is currently paused. Make sure that there are no duplicates in the Search Bar. */
 "nothingHaveDuplicatesPaused" = "Nothing! You have duplicates, so Find is currently paused. Make sure that there are no duplicates in the Search Bar.";
@@ -450,26 +365,17 @@
 /* SymbolsViewController def=Numbers */
 "numbersLoc" = "Numbers";
 
-/* HistoryFindController def=OCR search in progress! */
-"ocrSearchInProgress" = "OCR search in progress!";
-
 /* No comment provided by engineer. */
 "OFF" = "OFF";
 
 /* No comment provided by engineer. */
 "ON" = "ON";
 
-/* TutorialLocalization def=Once you've typed in your first match, just tap 'next' on the keyboard! Repeat until satisfied. */
-"onceYouveTypedInYourFirstMatch" = "Once you've typed in your first word, just tap 'next' on the keyboard! Repeat until satisfied.";
-
 /* ListSelect def=One List Selected */
 "oneListSelected" = "One List Selected";
 
 /* Multifile def=1 match */
 "oneMatch" = "1 result";
-
-/* FindBar def=1 Match in  */
-"oneMatchInSpace" = "1 result in ";
 
 /* CachingViewController def=1 photo has already been cached.\nWould you like to keep its cache? */
 "onePhotoHasAlreadyBeenCachedWouldYouKeep" = "1 photo has already been cached.\nWould you like to keep its cache?";
@@ -480,11 +386,9 @@
 /* Open Source Licenses */
 "Open Source Licenses" = "Open Source Licenses";
 
-/* EditList def=No description... */
-"originalDescriptionOfList" = "No description...";
+"Origin" = "Origin";
 
-/* EditList def=Untitled */
-"originalListName" = "Untitled";
+"Origin" = "Origin";
 
 /* No comment provided by engineer. */
 "Other" = "Other";
@@ -492,26 +396,17 @@
 /* No comment provided by engineer. */
 "People" = "People";
 
-/* Multifile def=Photo deleted! */
-"photoDeletedExclaim" = "Photo deleted!";
-
 /* Multipurpose def=Photos */
 "photos" = "Photos";
 
-/* HistorySelect def=Photo Selected */
-"photoSelected" = "Photo Selected";
-
-/* TutorialLocalization def=...find again and again! */
-"photosFindAgainAndAgain" = "Save it now, find in it later!";
+/* No comment provided by engineer. */
+"photosApp" = "Photos app";
 
 /* No comment provided by engineer. */
 "PhotosMigrationVC+tryAgain" = "Try Again";
 
 /* StatsViewController def=photos */
 "photosPluralLoc" = "photos";
-
-/* HistorySelect def=Photos Selected */
-"photosSelected" = "Photos Selected";
 
 /* StatsViewControl6ler def=photo */
 "photosSingularLoc" = "photo";
@@ -536,6 +431,12 @@
 
 /* No comment provided by engineer. */
 "PhotosTutorialLocalization-tapSelectTapFind" = "Tap Select, then Find";
+
+/* No comment provided by engineer. */
+"plainTypeToFind" = "Type here to find";
+
+/* No comment provided by engineer. */
+"pressText" = "Press ";
 
 /* No comment provided by engineer. */
 "Questions & Suggestions" = "Questions & Suggestions";
@@ -568,7 +469,16 @@
 "resetSettings" = "Reset Settings";
 
 /* No comment provided by engineer. */
+"results" = "results";
+
+/* No comment provided by engineer. */
+"resultsText" = "results";
+
+/* No comment provided by engineer. */
 "resultsWillAppearInstantly" = "Results will appear instantly when finding in cached photos";
+
+/* No comment provided by engineer. */
+"resultText" = "result";
 
 /* GeneralViewController def=I'll fix it myself */
 "rightButtonFixItMyself" = "I'll fix it myself";
@@ -576,40 +486,20 @@
 /* SetupSearchBar def=Please rotate your iPad to Portrait view, then relaunch the app. */
 "rotateToPortrait" = "Please rotate your iPad to Portrait view, then relaunch the app.";
 
+/* No comment provided by engineer. */
+"savedFromFind" = "Saved from Find";
+
 /* EditList def=Icon */
 "secondVCTitle" = "Icon";
 
 /* No comment provided by engineer. */
 "See what's new" = "See what's new";
 
-/* ListsController def=select */
-"select" = "Select";
-
-/* TutorialLocalization def=Select a few photos, tap the Find icon, and enter the text that you want to find! */
-"selectAFewPhotos" = "Select a few photos, tap the Find icon, and enter the text that you want to find";
-
-/* NewHistoryViewController def=Select All */
-"selectAllLoc" = "Select All";
-
-/* NewHistoryViewController def=Select */
-"selectLoc" = "Select";
-
-/* TutorialLocalization def=Select photos */
-"selectPhotos" = "Select photos";
-
 /* Settings def=Send Feedback */
 "sendFeedback" = "Send Feedback";
 
-/* Multipurpose def=Settings */
-"settings" = "Settings";
-
-"Settings" = "Settings";
-
 /* Settings def=Settings will be reset to default. */
 "settingsResetToDefault" = "Settings will be reset to default.";
-
-/* HistoryCollectionViewFiles def=Share */
-"shareLoc" = "Share";
 
 /*GeneralViewController*/
 "shortDescriptionPlaceholder" = "Short description";
@@ -623,9 +513,6 @@
 /* StatsViewController def=since you first downloaded Find */
 "sinceYouFirstDownloadedFind" = "since you first downloaded Find";
 
-/* TutorialLocalization def=Sometimes you got to delete a match. No feelings hurt, just swipe left and tap 'Delete'! */
-"sometimesYouGotToDeleteAMatch" = "Sometimes you got to delete a word. No problem, just swipe left and tap 'Delete'";
-
 /* Stats def= and \"x\" */
 "spaceAndSpacequote %@ quote" = " and \"%@\"";
 
@@ -635,17 +522,22 @@
 /* Stats def= matches found currently */
 "spaceMatchesFoundCurrently" = " words found currently";
 
+/* No comment provided by engineer. */
+"spaceOrUnit" = " ";
+
+/* No comment provided by engineer. */
+"spaceOrZhangUnit" = " ";
+
 /* SymbolsViewController def=Speech */
 "speechLoc" = "Speech";
 
 /* No comment provided by engineer. */
 "starred" = "Starred";
 
-/* HistoryFindController def=Start by typing or selecting a list... */
-"startByTypingOrSelectingAList" = "Start by typing or selecting a list...";
+"Starred?" = "Starred?";
 
-/* TutorialLocalization def=...Start easily making lists! */
-"startEasilyMakingLists" = "Start making lists!";
+/* No comment provided by engineer. */
+"statsText" = "Stats";
 
 /* No comment provided by engineer. */
 "Support & Feedback" = "Support & Feedback";
@@ -655,21 +547,6 @@
 
 /* TutorialLocalization def=Swipe to get started */
 "swipeToGetStarted" = "Swipe to get started";
-
-/* TutorialLocalization def=Take photos */
-"takePhotos" = "Take photos";
-
-/* TutorialLocalization def=Tap the Search Field at the top of the screen */
-"tapSearchField" = "Tap the Search Field at the top of the screen";
-
-/* TutorialLocalization def=Tap the select button, and the Action Controls will pop up! */
-"tapSelectButtonAndPopUp" = "Tap the \"Select\" button, and the Action Controls will pop up";
-
-/* TutorialLocalization def=Tap the shutter button, and they'll appear in Photos, where you can search in them later. */
-"tapShutterButton" = "Tap the shutter button to take photos! Save it now, find in it later.";
-
-/* TutorialLocalization def=Tap the Add button */
-"tapTheAddButton" = "Tap the \"+\" button";
 
 /* Multipurpose def=Tap to dismiss */
 "tapToDismiss" = "Tap to dismiss";
@@ -683,11 +560,11 @@
 /* Settings def=Text Detected Indicator */
 "textDetectedIndicator" = "Text Detection Indicator";
 
+/* No comment provided by engineer. */
+"Thanks to" = "Thanks to";
+
 /* CreditsViewController def=Thanks to */
 "thanksTo" = "Thanks to";
-
-/* HistoryFindController def=The Cache */
-"theCache" = "The Cache";
 
 /* Stats def=these words */
 "theseWords" = "these words";
@@ -708,6 +585,14 @@
 "todayLoc" = "Today";
 
 /* No comment provided by engineer. */
+"toFindFromUncachedPhotos" = "to find from uncached photos.";
+
+/* No comment provided by engineer. */
+"toFindWithOCR" = " to find with OCR.";
+
+"Transcript" = "Transcript (beta)";
+
+/* No comment provided by engineer. */
 "TutorialLocalization-cameraDescription" = "Look for text in real time";
 
 /* No comment provided by engineer. */
@@ -725,12 +610,6 @@
 /* SetupSearchBar def=Type here to find... */
 "typeHereToFind" = "Type here to find...";
 
-/* HistoryCollectionViewFiles def=Uncache */
-"uncache" = "Uncache";
-
-/* HistoryCollectionViewFiles def=Unheart */
-"unheart" = "Unheart";
-
 /* No comment provided by engineer. */
 "universal-allowAccessToPhotoLibrary" = "Allow Access to Photo Library";
 
@@ -742,6 +621,9 @@
 
 /* No comment provided by engineer. */
 "universal-select" = "Select";
+
+/* No comment provided by engineer. */
+"unknown" = "Unknown";
 
 /* GeneralViewController def=Untitled */
 "untitledName" = "Untitled";
@@ -761,17 +643,8 @@
 /* TutorialLocalization def=Welcome to Find */
 "welcomeToFind" = "Welcome to Find";
 
-/* TutorialLocalization def=Lists... */
-"welcomeToLists" = "Lists";
-
-/* TutorialLocalization def=Lists Builder... */
-"welcomeToListsBuilder" = "Lists Builder";
-
 /* TutorialLocalization def=Photos... */
 "welcomeToPhotos" = "Photos";
-
-/* TutorialLocalization def=What is Find? */
-"whatIsFind" = "What is Find?";
 
 /*WhatsNewConfiguration*/
 "whatsNewChineseSupport" = "Chinese Availability";
@@ -780,22 +653,18 @@
 "whatsNewChineseSupportDetails" = "We've translated Find into Chinese! However, only English and Pinyin are currently supported as input for our OCR engine.";
 
 /*WhatsNewConfiguration*/
-"whatsNewHistoryIsNowPhotos" = "History is now Photos";
-
-/*WhatsNewConfiguration*/
 "whatsNewInFindNumber" = "What's New in\nFind 1.1.0";
-
-/*WhatsNewConfiguration*/
-"whatsNewWhatsNewScreen" = "What's New Screen";
-
-/*WhatsNewConfiguration*/
-"whatsNewWhatsNewScreenDetails" = "This screen that you're seeing right now is all-new!";
 
 /* Settings def=Which tutorial do you want to watch? */
 "whichTutorialWatch" = "Which tutorial do you want to watch?";
 
+/* No comment provided by engineer. */
+"winkDesc" = "Made the app promo music";
+
 /* GeneralViewController def=Would you like us to delete the duplicates? */
 "wouldYouLikeDeleteDup" = "Would you like us to delete the duplicates?";
+
+"Yes" = "Yes";
 
 /* extensionDate def=Yesterday */
 "yesterdayLoc" = "Yesterday";
@@ -809,5 +678,8 @@
 /* TutorialLocalization def=Your lists will appear above the keyboard, whether you are Finding using the camera or from Photos */
 "yourListsWillAppear" = "Your lists will appear above the keyboard";
 
-/* TutorialLocalization def=Your Photos, Lists, and Settings are here. Check them out! */
-"yourPhotosListsAndSettingsHere" = "Your Photos, Lists, and Settings are here. Check them out!";
+/* No comment provided by engineer. */
+"unitZhang" = "";
+
+/* No comment provided by engineer. */
+"withinAllPhotos-Chinese" = "";

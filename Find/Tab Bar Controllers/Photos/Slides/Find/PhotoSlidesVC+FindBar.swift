@@ -28,7 +28,6 @@ extension PhotoSlidesViewController {
     
     
     @objc func findPressed(sender: UIBarButtonItem) {
-        print("Find")
         if slideFindBarTopC == nil {
             setupFindBar()
         }
@@ -36,7 +35,7 @@ extension PhotoSlidesViewController {
         findPressed.toggle()
         
         if findPressed {
-            findButton.title = "Done"
+            findButton.title = NSLocalizedString("done", comment: "")
             
             slideFindBarTopC?.update(offset: 0)
             

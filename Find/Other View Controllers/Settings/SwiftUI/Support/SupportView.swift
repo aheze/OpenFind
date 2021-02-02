@@ -25,14 +25,14 @@ struct HelpView: View {
             .init(tag: "lists", displayName: "Lists")
         ],
         navigationBar: .init(
-            title: "Help",
+            title: NSLocalizedString("Help Center", comment: ""),
             titleColor: UIColor.white,
-            dismissButtonTitle: "Done",
+            dismissButtonTitle: NSLocalizedString("done", comment: ""),
             buttonTintColor: UIColor.white,
             backgroundColor: #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
         ),
         searchBar: .init(
-            placeholder: "Type here to find",
+            placeholder: NSLocalizedString("plainTypeToFind", comment: ""),
             placeholderColor: UIColor.white.withAlphaComponent(0.75),
             textColor: UIColor.white,
             tintColor: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1),

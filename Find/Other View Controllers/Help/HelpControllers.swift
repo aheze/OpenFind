@@ -74,7 +74,6 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
                         if let data = jsonString.data(using: .utf8) {
                             if let json = try? JSON(data: data) {
                                 for item in json[self.helpJsonKey].arrayValue {
-//                                    print("ITEM: \(item)")
                                     let name = item["name"].stringValue
                                     let urlString = item["url"].stringValue
                                     
@@ -83,7 +82,6 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
                                     newHelpObject.urlPath = urlString
                                     
                                     self.helpObjects.append(newHelpObject)
-                                    print("name: \(name), url: \(urlString)")
                                 }
                             }
                         }

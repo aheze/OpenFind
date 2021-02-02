@@ -1,6 +1,3 @@
-/* The name of the animal */
-"bear" = "bear";
-
 /* GeneralViewController def=\"\(duplicateStringArray[0])\" and \"\(duplicateStringArray[1])\" have duplicates. */
 "%@ and %@ have" = "";
 
@@ -10,17 +7,8 @@
 /* ListController def=x lists deleted! */
 "%d lists deleted!" = "";
 
-/* FindBar def=x Matches in  */
-"%d MatchesInSpace" = "";
-
 /* ListController def=x Lists Selected */
 "%d numberLists" = "";
-
-/* NewHistoryViewController def=x caches cleared! */
-"%d photos caches deleted!" = "";
-
-/* NewHistoryViewController def=x photos deleted! */
-"%d photos deleted!" = "";
 
 /* CachingViewController def=x photos have already been cached.\nWould you like to keep its cache? */
 "%d photosHaveAlreadyBeenCachedWouldYouKeep" = "";
@@ -31,26 +19,8 @@
 /* HistoryFindController def=x matches */
 "%d SpaceMatches" = "";
 
-/* ListController def=\n... x more */
-"@d overFlowCountMore" = "";
-
-/* TutorialLocalization def=Access the Menu */
-"accessMenu" = "";
-
 /* GeneralViewController def=a couple duplicates. */
 "aCoupleDuplicates" = "";
-
-/* HistoryCollectionViewFiles def=Actions */
-"actionsLoc" = "";
-
-/* TutorialLocalization def=Add a match */
-"addAMatch" = "";
-
-/* TutorialLocalization def=Add more matches */
-"addMoreMatches" = "";
-
-/* TutorialLocalization def=Add some matches */
-"addSomeMatches" = "";
 
 /* GeneralViewController def=a duplicate. */
 "aDuplicateOriginal" = "";
@@ -61,35 +31,14 @@
 /* Settings def=All your photos and their caches will be deleted. This action can't be undone. */
 "allPhotosAndCachesDeleted" = "";
 
-/* NewHistoryViewController def=All photos deleted! */
-"allPhotosDeletedExclaim" = "";
-
-/* HistoryFindController def=All selected photos have already been cached! Search results will appear immediately. */
-"allSelectedPhotosAlreadyCached" = "";
-
 /* Settings def=All your lists will be deleted. This action can't be undone. */
 "allYourListsDeleted" = "";
 
 /* Multipurpose def=and */
 "and" = "";
 
-/* TutorialLocalization def=Before you start... */
-"beforeYouStart" = "";
-
-/* HistoryCollectionViewFiles def=Cache */
-"cache" = "";
-
-/* NewHistoryViewController def=Cache cleared! */
-"cacheClearedExclaim" = "";
-
-/* TutorialLocalization def=Cache photos */
-"cachePhotos" = "";
-
 /* Multifile def=Caching again will take a while... */
 "cachingAgainTakeAWhile" = "";
-
-/* Multifile def=Caching done! */
-"cachingDoneExclaim" = "";
 
 /* Multipurpose def=Cancel */
 "cancel" = "";
@@ -108,21 +57,6 @@
 
 /* Multipurpose def=Clear */
 "clear" = "";
-
-/* Settings def=Cleared All Lists */
-"clearedAllLists" = "";
-
-/* Settings def=Cleared History */
-"clearedHistory" = "";
-
-/* PhotoPageContainerViewController def=Cleared this photo's cache! */
-"clearedThisPhotosCacheExclaim" = "";
-
-/* Settings def=Clear History */
-"clearHistory" = "";
-
-/* Settings def=Clear Lists */
-"clearLists" = "";
 
 /* Multifile def=Clear this photo's cache? */
 "clearThisCacheQuestion" = "";
@@ -145,80 +79,26 @@
 /* Multipurpose def=Delete */
 "delete" = "";
 
-/* NewHistoryViewController def=Clear x photos' caches? */
-"Delete %d caches?" = "";
-
 /* ListController def=Delete x lists? */
 "Delete %d lists?" = "";
-
-/* NewHistoryViewController def=Delete x photos? */
-"Delete %d photos?" = "";
 
 /* ListController def=Delete ALL lists?! */
 "deleteAllListsQuestion" = "";
 
-/* NewHistoryViewController def=Delete ALL photos?! */
-"deleteAllPhotosQuestion" = "";
-
-/* TutorialLocalization def=Delete a match */
-"deleteAMatch" = "";
-
 /* ListController def=Deleted list! */
 "deletedList" = "";
-
-/* NewHistoryViewController def=Clear ENTIRE cache?! */
-"deleteEntireCacheQuestion" = "";
 
 /* ListController def=Delete this List? */
 "deleteThisListQuestion" = "";
 
-/* Multifile def=Delete photo? */
-"deleteThisPhotoQuestion" = "";
-
-/* NewHistoryViewController def=Deselect All */
-"deselectAllLoc" = "";
-
 /* Multipurpose def=Done */
 "done" = "";
-
-/* HistoryFindController def=Duplicates are not allowed */
-"duplicatesNotAllowed" = "";
 
 /* SingleHelp def=Encountered an error */
 "encounteredError" = "";
 
-/* TutorialLocalization def=To ensure the most accurate results, please make sure to hold your phone as steady as possible. */
-"ensureAccuracy" = "";
-
-/* NewHistoryViewController def=Entire cache cleared! */
-"entireCacheDeletedExclaim" = "";
-
-/* TutorialLocalization def=Find from History */
-"findFromHistory" = "";
-
-/* HistoryFindController def=Find Help */
-"findHelp" = "";
-
-/* TutorialLocalization def=Find is Command+F for camera: Find words in books, worksheets, nutrition labels... anywhere that contains text! */
-"findIsCommandFForCamera" = "";
-
-/* Multipurpose def=Find */
-"findLoc" = "";
-
-/* TutorialLocalization def=...find multiple words at the same time! */
-"findMultipleWords" = "";
-
 /* SetUpSearchBar def=Find is paused | Duplicates are not allowed */
 "findPausedDuplicatesNotAllowed" = "";
-
-/* TutorialLocalization def=Find searches for your matches when you use the list */
-"findSearchesForMatches" = "";
-
-/* TutorialLocalization def=Caching photos speeds up search results! */
-"findUsesOCR" = "";
-
-/* TutorialLocalization def=Find words */
-"findWords" = "";
 
 /* EditList def=General */
 "firstVCTitle" = "";
@@ -238,29 +118,14 @@
 /* Settings def=Haptic Feedback */
 "hapticFeedback" = "";
 
-/* HistoryCollectionViewFiles def=Heart */
-"heart" = "";
-
 /* Multipurpose def=Help */
 "help" = "";
 
 /* StatsViewController def=Help pressed */
 "helpPressed" = "";
 
-/* SwiftEntryKitTemplates displayHistoryHelp def=Help */
-"helpTitle" = "";
-
-/* Multipurpose def=History */
-"history" = "";
-
-/* Settings def=History */
-"historyTutorial" = "";
-
 /* StatsViewController def=Just for fun */
 "justForFunStats" = "";
-
-/* Multifile def=Kept cached photos! */
-"keptCachedPhotos" = "";
 
 /* GeneralViewController def=Yes, Delete and save */
 "leftButtonDeleteSave" = "";
@@ -292,15 +157,6 @@
 /* MultipurposeExtension def=true */
 "locBoolTrue" = "";
 
-/* TutorialLocalization def=Make a list */
-"makeAList" = "";
-
-/* FindBar def=Matches */
-"matches" = "";
-
-/* TutorialLocalization def=Matches are what Find looks for when you use the list. Make one by tapping the placeholder that says 'Match'! */
-"matchesAreWhatFindLooksFor" = "";
-
 /* StatsViewController def=matches found currently */
 "matchesFoundCurrently" = "";
 
@@ -316,26 +172,8 @@
 /* ListController def=No Lists Created Yet! */
 "noListsCreatedYet" = "";
 
-/* FindBar def=No Matches */
-"noMatches" = "";
-
-/* FindBar def=No Matches in  */
-"noMatchesInSpace" = "";
-
 /* LaunchViewController def=You don't have permission to use the camera. */
 "noPermissionToUseCamera" = "";
-
-/* NewHistoryViewController def=No Photos Taken Yet! */
-"noPhotosTakenYet" = "";
-
-/* HistoryFindController def=No results found. */
-"noResultsFound" = "";
-
-/* HistoryFindController def=No results found in cache. Press Search on the keyboard to continue. */
-"noResultsInCache" = "";
-
-/* Not all photos have been cached, so some search results will not appear immediately. Press 'search' on the keyboard to find using OCR. */
-"notAllSelectedPhotosAlreadyCached" = "";
 
 /* Stats def=Nothing! You have duplicates, so Find is currently paused. Make sure that there are no duplicates in the Search Bar. */
 "nothingHaveDuplicatesPaused" = "";
@@ -346,20 +184,11 @@
 /* SymbolsViewController def=Numbers */
 "numbersLoc" = "";
 
-/* HistoryFindController def=OCR search in progress! */
-"ocrSearchInProgress" = "";
-
-/* TutorialLocalization def=Once you've typed in your first match, just tap 'next' on the keyboard! Repeat until satisfied. */
-"onceYouveTypedInYourFirstMatch" = "";
-
 /* ListSelect def=One List Selected */
 "oneListSelected" = "";
 
 /* Multifile def=1 match */
 "oneMatch" = "";
-
-/* FindBar def=1 Match in  */
-"oneMatchInSpace" = "";
 
 /* CachingViewController def=1 photo has already been cached.\nWould you like to keep its cache? */
 "onePhotoHasAlreadyBeenCachedWouldYouKeep" = "";
@@ -370,38 +199,11 @@
 /* Open Source Licenses */
 "Open Source Licenses" = "";
 
-/* EditList def=No description... */
-"originalDescriptionOfList" = "";
-
-/* EditList def=Untitled */
-"originalListName" = "";
-
-/* HistoryCollectionViewFiles def=Photo Deleted! */
-"photoDeleted" = "";
-
-/* Multifile def=Photo deleted! */
-"photoDeletedExclaim" = "";
-
-/* HistorySelect def=Photo Selected */
-"photoSelected" = "";
-
 /* StatsViewController def=photos */
 "photosPluralLoc" = "";
 
-/* HistorySelect def=Photos Selected */
-"photosSelected" = "";
-
 /* StatsViewController def=photo */
 "photosSingularLoc" = "";
-
-/* Stats def=\"x\" */
-"quote %d quote" = "";
-
-/* Stats def=\"x\",  */
-"quote %d quoteCommaSpace" = "";
-
-/* Stats def=\"x\" and \"x\" */
-"quote %d quoteSpaceAndquote %d quote" = "";
 
 /* Settings def=Reset */
 "reset" = "";
@@ -418,41 +220,14 @@
 /* EditList def=Icon */
 "secondVCTitle" = "";
 
-/* ListController def=select */
-"select" = "";
-
-/* TutorialLocalization def=Select a few photos, tap the Find icon, and enter the text that you want to find! */
-"selectAFewPhotos" = "";
-
-/* NewHistoryViewController def=Select All */
-"selectAllLoc" = "";
-
-/* NewHistoryViewController def=Select */
-"selectLoc" = "";
-
-/* TutorialLocalization def=Select photos */
-"selectPhotos" = "";
-
 /* Settings def=Send Feedback */
 "sendFeedback" = "";
-
-/* Multipurpose def=Settings */
-"settings" = "";
 
 /* Settings def=Settings will be reset to default. */
 "settingsResetToDefault" = "";
 
-/* HistoryCollectionViewFiles def=Share */
-"shareLoc" = "";
-
 /* StatsViewController def=since you first downloaded Find */
 "sinceYouFirstDownloadedFind" = "";
-
-/* TutorialLocalization def=Sometimes you got to delete a match. No feelings hurt, just swipe left and tap 'Delete'! */
-"sometimesYouGotToDeleteAMatch" = "";
-
-/* Stats def= and \"x\" */
-"spaceAndSpacequote %d quote" = "";
 
 /* GeneralViewController def= have duplicates. */
 "spaceHaveDuplicates" = "";
@@ -463,29 +238,8 @@
 /* SymbolsViewController def=Speech */
 "speechLoc" = "";
 
-/* HistoryFindController def=Start by typing or selecting a list... */
-"startByTypingOrSelectingAList" = "";
-
-/* TutorialLocalization def=......Start easily making lists! */
-"startEasilyMakingLists" = "";
-
 /* TutorialLocalization def=Swipe to get started */
 "swipeToGetStarted" = "";
-
-/* TutorialLocalization def=Take photos */
-"takePhotos" = "";
-
-/* TutorialLocalization def=Tap the Search Field at the top of the screen */
-"tapSearchField" = "";
-
-/* TutorialLocalization def=Tap the select button, and the History Controls will pop up! */
-"tapSelectButtonAndPopUp" = "";
-
-/* TutorialLocalization def=Tap the shutter button. Your photos will appear in your History, where you can Find from them again and again and again... */
-"tapShutterButton" = "";
-
-/* TutorialLocalization def=Tap the Add button */
-"tapTheAddButton" = "";
 
 /* Multipurpose def=Tap to dismiss */
 "tapToDismiss" = "";
@@ -498,9 +252,6 @@
 
 /* CreditsViewController def=Thanks to */
 "thanksTo" = "";
-
-/* HistoryFindController def=The Cache */
-"theCache" = "";
 
 /* Stats def=these words */
 "theseWords" = "";
@@ -526,12 +277,6 @@
 /* SetUpSearchBar def=Type here to find... */
 "typeHereToFind" = "";
 
-/* HistoryCollectionViewFiles def=Uncache */
-"uncache" = "";
-
-/* HistoryCollectionViewFiles def=Unheart */
-"unheart" = "";
-
 /* GeneralViewController def=Untitled */
 "untitledName" = "";
 
@@ -550,21 +295,6 @@
 /* TutorialLocalization def=Welcome to Find */
 "welcomeToFind" = "";
 
-/* TutorialLocalization def=History... */
-"welcomeToHistory" = "";
-
-/* TutorialLocalization def=Lists... */
-"welcomeToLists" = "";
-
-/* TutorialLocalization def=Lists Builder... */
-"welcomeToListsBuilder" = "";
-
-/* TutorialLocalization def=What is Find? */
-"whatIsFind" = "";
-
-/* TutorialLocalization def=...where all your photos live! */
-"whereAllYourPhotosLive" = "";
-
 /* Settings def=Which tutorial do you want to watch? */
 "whichTutorialWatch" = "";
 
@@ -580,14 +310,8 @@
 /* GeneralViewController def=You have a lot of duplicate matches. */
 "youHaveLotsDuplicates" = "";
 
-/* TutorialLocalization def=Your History, Lists, and Settings are here. Check it out! */
-"yourHistoryListsAndSettingsHere" = "";
-
 /* TutorialLocalization def=Your lists will appear above the keyboard, whether you are Finding using the camera or from history */
 "yourListsWillAppear" = "";
-
-/* No comment provided by engineer. */
-"onboarding.first-page.header-title" = "";
 
 /* Stats def=\"x\" */
 "quote %@ quote" = "";
@@ -610,23 +334,14 @@
 /* Settings def=Deleted All Photos */
 "deletedAllPhotos" = "";
 
-/* TutorialLocalization def=Find from Photos */
-"findFromPhotos" = "";
-
 /* Multipurpose def=Photos */
 "photos" = "";
-
-/* TutorialLocalization def=...find again and again! */
-"photosFindAgainAndAgain" = "";
 
 /* Settings def=Photos */
 "photosTutorial" = "";
 
 /* TutorialLocalization def=Photos... */
 "welcomeToPhotos" = "";
-
-/* TutorialLocalization def=Your Photos, Lists, and Settings are here. Check them out! */
-"yourPhotosListsAndSettingsHere" = "";
 
 /* Settings def=Delete All Lists */
 "deleteAllLists" = "";
@@ -645,21 +360,6 @@
 
 /*WhatsNewConfiguration*/
 "whatsNewChineseSupportDetails" = "我们把Find翻译成了中文！ 但是，目前仅支持英语和拼音作为我们OCR引擎的输入。";
-
-/*WhatsNewConfiguration*/
-"whatsNewHistoryIsNowPhotos" = "中文翻译";
-
-/*WhatsNewConfiguration*/
-"whatsNewWhatsNewScreen" = "新增功能屏幕";
-
-/*WhatsNewConfiguration*/
-"whatsNewWhatsNewScreenDetails" = "您现在看到的屏幕是全新的！";
-
-/*TutorialLocalization*/
-"locLaunchLists" = "用清单";
-
-/*TutorialLocalization*/
-"locMakeLists" = "将多个单词组合到清单中，一次寻找所有的";
 
 /*GeneralViewController*/
 "nameGeneral" = "名称";
@@ -781,8 +481,6 @@
 /* No comment provided by engineer. */
 "emptyDesc-showMeHow" = "怎么？";
 
-"Settings" = "";
-
 /* No comment provided by engineer. */
 "General" = "通用";
 
@@ -861,4 +559,130 @@
 /* No comment provided by engineer. */
 "See what's new" = "查看最新功能";
 
-"gotQuestionsContact" = "有问题或想了解有关Find的信息？ 或者其他事情？ 在这里和我聊天！";
+/* No comment provided by engineer. */
+"cacheOnly" = "";
+
+"Date taken" = "拍摄日期";
+
+"Origin" = "起源";
+
+"Starred?" = "星标？";
+
+"Cached?" = "快取？";
+
+"Transcript" = "成绩单（测试版）";
+
+"Origin" = "起源";
+
+"Info" = "信息";
+
+/* No comment provided by engineer. */
+"copied" = "复制！";
+
+/* No comment provided by engineer. */
+"unknown" = "未知";
+
+/* No comment provided by engineer. */
+"photosApp" = "照片APP";
+
+/* No comment provided by engineer. */
+"savedFromFind" = "从Find保存";
+
+/* No comment provided by engineer. */
+"cachePhotoToView" = "[为照片制作快取以生成成绩单]";
+
+"gotQuestionsContact" = "有问题或想了解有关Find的信息？ 或者其他东西？ 在这里和我聊天！";
+
+/* No comment provided by engineer. */
+"Thanks to" = "谢谢";
+
+/* No comment provided by engineer. */
+"hkamranDesc" = "Beta测试仪";
+
+/* No comment provided by engineer. */
+"winkDesc" = "作了宣传音乐";
+
+"No" = "没有";
+
+"Yes" = "有";
+
+/* No comment provided by engineer. */
+"plainTypeToFind" = "查找";
+
+/* No comment provided by engineer. */
+"statsText" = "统计";
+
+/* No comment provided by engineer. */
+"results" = "结果";
+
+/* No comment provided by engineer. */
+"toFindWithOCR" = "";
+
+/* No comment provided by engineer. */
+"resultTest" = "结果";
+
+/* No comment provided by engineer. */
+"_InCache" = "在快取里。点击 ";
+
+/* No comment provided by engineer. */
+"pressText" = "点击 ";
+
+/* No comment provided by engineer. */
+"findingWithOCR" = "正在使用OCR查找...";
+
+/* No comment provided by engineer. */
+"blankSpace" = "";
+
+/* No comment provided by engineer. */
+"findingFrom" = "从";
+
+/* No comment provided by engineer. */
+"unitZhang" = "张";
+
+/* No comment provided by engineer. */
+"allSpace" = "所有";
+
+/* No comment provided by engineer. */
+"findingFrom-photos" = "照片中查找";
+
+/* No comment provided by engineer. */
+"withinAllPhotos-Chinese" = "照片中的";
+
+/* No comment provided by engineer. */
+"resultText" = "";
+
+/* No comment provided by engineer. */
+"inCachedPhotos" = "在有快取的照片里。点击";
+
+/* No comment provided by engineer. */
+"toFindFromUncachedPhotos" = "从未快取的照片中查找。";
+
+/* No comment provided by engineer. */
+"spaceOrUnit" = "个";
+
+/* No comment provided by engineer. */
+"_in_" = "在";
+
+/* No comment provided by engineer. */
+"spaceOrZhangUnit" = "张";
+
+/* No comment provided by engineer. */
+"lowercasePhotos" = "照片里";
+
+/* No comment provided by engineer. */
+"lowercaseLocal" = "本地";
+
+/* No comment provided by engineer. */
+"lowercaseStarred" = "有星标";
+
+/* No comment provided by engineer. */
+"lowercaseCached" = "有快取";
+
+/* No comment provided by engineer. */
+"findingFromUncachedPhotos" = "正在从未快取的照片中查找。";
+
+/* No comment provided by engineer. */
+"findingFromPhotos" = "正在从照片中查找。";
+
+/* No comment provided by engineer. */
+"resultsText" = "结果";

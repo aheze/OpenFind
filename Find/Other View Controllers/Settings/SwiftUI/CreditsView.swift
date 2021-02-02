@@ -105,6 +105,9 @@ struct PeopleView: View {
                     Button(action: {
                         if let url = URL(string: "https://hkamran.com/") {
                             UIApplication.shared.open(url)
+                            NSLocalizedString("Thanks to", comment: "")
+                            NSLocalizedString("hkamranDesc", comment: "")
+                            NSLocalizedString("winkDesc", comment: "")
                         }
                     }) {
                         HStack(alignment: .top) {

@@ -18,21 +18,22 @@ extension PhotoSlidesViewController {
     func infoPressed() {
         let currentPhoto = resultPhotos[currentIndex].findPhoto
         
-        var dateCreatedString = "Unknown"
+        let unknown = NSLocalizedString("unknown", comment: "")
+        var dateCreatedString = unknown
         if let dateCreated = currentPhoto.asset.creationDate {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMMM d, yyyy' at 'h:mm a"
             dateCreatedString = dateFormatter.string(from: dateCreated)
         }
         
-        var origin = "Photos app"
+        var origin = NSLocalizedString("photosApp", comment: "")
         var isHearted = false
         var isCached = false
-        var transcript = "[Cache photo to generate transcript]"
+        var transcript = NSLocalizedString("cachePhotoToView", comment: "")
         
         if let editableModel = currentPhoto.editableModel {
             if editableModel.isTakenLocally {
-                origin = "Saved from Find"
+                origin = NSLocalizedString("savedFromFind", comment: "")
             }
             if editableModel.isHearted {
                 isHearted = true

@@ -37,10 +37,11 @@ class SlideFindBar: UIView {
         
         promptLabel.alpha = 0
         
+        let typeHereToFind = NSLocalizedString("typeHereToFind", comment: "SetupSearchBar def=Type here to find...")
         findBar.searchField.backgroundColor = UIColor.systemBackground
         findBar.searchField.textColor = UIColor.label
         findBar.searchField.tintColor = UIColor(named: "PhotosText")
-        findBar.searchField.attributedPlaceholder = NSAttributedString(string: "Type here to find", attributes: [NSAttributedString.Key.foregroundColor : UIColor.label.withAlphaComponent(0.25)])
+        findBar.searchField.attributedPlaceholder = NSAttributedString(string: typeHereToFind, attributes: [NSAttributedString.Key.foregroundColor : UIColor.label.withAlphaComponent(0.25)])
         
         
     }

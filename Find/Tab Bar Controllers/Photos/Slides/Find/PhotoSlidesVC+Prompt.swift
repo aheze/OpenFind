@@ -17,7 +17,6 @@ extension PhotoSlidesViewController {
     }
     
     func animatePromptReveal(reveal: Bool = true) {
-        print("aimate reveal!!")
         slideFindBar?.layoutIfNeeded()
         if reveal {
             let promptHeight = slideFindBar?.promptLabel.bounds.height ?? 0
@@ -46,13 +45,20 @@ extension PhotoSlidesViewController {
             $0.color = UIColor.secondaryLabel
         }
         
-        var results = "results"
+        let resultsText = NSLocalizedString("resultsText", comment: "")
+        let resultText = NSLocalizedString("resultText", comment: "")
+        let inCache = NSLocalizedString("_InCache", comment: "")
+        let toFindWithOCR = NSLocalizedString("toFindWithOCR", comment: "")
+        
+        
+        var results = resultsText
         if howMany == 1 {
-            results = "result"
+            results = resultText
         }
         
-        let resultsInCache = " \(results) in cache. Press ".set(style: textStyle)
-        let toFindFromPhotos = " to find with OCR.".set(style: textStyle)
+        let spaceOrUnit = NSLocalizedString("spaceOrUnit", comment: "")
+        let resultsInCache = "\(spaceOrUnit)\(results)\(inCache)".set(style: textStyle)
+        let toFindFromPhotos = toFindWithOCR.set(style: textStyle)
         
         let nextButtonAttachment = AttributedString(image: Image(named: "ContinueButton"), bounds: "0,-6,76,24")
         
@@ -69,8 +75,11 @@ extension PhotoSlidesViewController {
             $0.color = UIColor.secondaryLabel
         }
         
-        let press = "Press ".set(style: textStyle)
-        let toFindFromPhotos = " to find with OCR".set(style: textStyle)
+        let pressText = NSLocalizedString("pressText", comment: "")
+        let toFindWithOCR = NSLocalizedString("toFindWithOCR", comment: "")
+        
+        let press = pressText.set(style: textStyle)
+        let toFindFromPhotos = toFindWithOCR.set(style: textStyle)
         
         let nextButtonAttachment = AttributedString(image: Image(named: "ContinueButton"), bounds: "0,-6,76,24")
         
@@ -82,13 +91,14 @@ extension PhotoSlidesViewController {
     }
     
     func setPromptToFastFinding() { /// currently fast finding
-        print("set to fast")
         let textStyle = Style {
             $0.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             $0.color = UIColor.secondaryLabel
         }
         
-        let attributedText = "Finding with OCR...".set(style: textStyle)
+        let findingWithOCR = NSLocalizedString("findingWithOCR", comment: "")
+        
+        let attributedText = findingWithOCR.set(style: textStyle)
         slideFindBar?.promptLabel.attributedText = attributedText
         slideFindBar?.hasPrompt = true
         animatePromptReveal()
@@ -101,12 +111,16 @@ extension PhotoSlidesViewController {
             $0.color = UIColor.secondaryLabel
         }
         
-        var results = "results"
+        let resultsText = NSLocalizedString("resultsText", comment: "")
+        let resultText = NSLocalizedString("resultText", comment: "")
+        let spaceOrUnit = NSLocalizedString("spaceOrUnit", comment: "")
+        
+        var results = resultsText
         if howMany == 1 {
-            results = "result"
+            results = resultText
         }
         
-        let attributedText = "\(howMany) \(results)".set(style: textStyle)
+        let attributedText = "\(howMany)\(spaceOrUnit)\(results)".set(style: textStyle)
         slideFindBar?.promptLabel.attributedText = attributedText
         slideFindBar?.hasPrompt = true
         animatePromptReveal()

@@ -65,10 +65,14 @@ class StatsViewController: UIViewController, UpdateMatchesNumberStats {
         
         navigationController?.navigationBar.prefersLargeTitles = true
 
-        self.title = "Stats"
+        let statsText = NSLocalizedString("statsText", comment: "")
+        self.title = statsText
+        
         setupNavigationBar()
         
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePressed(sender:)))
+        let doneText = NSLocalizedString("done", comment: "")
+        
+        let doneButton = UIBarButtonItem(title: doneText, style: .plain, target: self, action: #selector(donePressed(sender:)))
         doneButton.tintColor = UIColor.white
         navigationItem.rightBarButtonItems = [doneButton]
         

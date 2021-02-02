@@ -48,7 +48,6 @@ class InfoViewHoster: UIViewController {
         infoView.isCached = isCached
         infoView.transcript = transcript
         
-        
         let hostedInfo = UIHostingController(rootView: infoView)
         
         self.addChild(hostedInfo)
@@ -117,11 +116,10 @@ struct InfoView: View {
                         .padding(EdgeInsets(top: 0, leading: 20, bottom: 2, trailing: 16))
                     
                     HStack {
-                        Text("Transcript (beta)")
+                        Text("Transcript")
                             .font(Font(UIFont.systemFont(ofSize: 19, weight: .bold)))
                         
                         Button(action: {
-                            print("copy")
                             UIPasteboard.general.setValue(transcript,
                                        forPasteboardType: kUTTypePlainText as String)
                            
@@ -138,7 +136,8 @@ struct InfoView: View {
                             let configuration = UIImage.SymbolConfiguration(pointSize: 19, weight: .medium, scale: .default)
                             imageView.image = UIImage(systemName: "doc.on.doc", withConfiguration: configuration)?.withTintColor(UIColor(named: "PhotosText")!, renderingMode: .alwaysOriginal)
                             
-                            titleLabel.text = "Copied!"
+                            let copied = NSLocalizedString("copied", comment: "")
+                            titleLabel.text = copied
                             titleLabel.textColor = UIColor(named: "PhotosText")
                             titleLabel.font = UIFont.systemFont(ofSize: 19, weight: .medium)
                             
