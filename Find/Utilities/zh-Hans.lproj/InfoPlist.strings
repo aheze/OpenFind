@@ -8,4 +8,4 @@
 
 NSCameraUsageDescription = "使用您的相机来查找文字";
 
-NSPhotoLibraryAddUsageDescription = "添加照片到您的照片库";
+NSPhotoLibraryUsageDescription = "从现有照片中查找";

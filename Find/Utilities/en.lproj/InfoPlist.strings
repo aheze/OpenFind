@@ -9,5 +9,5 @@
 
 NSCameraUsageDescription = "Use your camera to find text";
 
-NSPhotoLibraryAddUsageDescription = "Add photos to your photo library";
+NSPhotoLibraryUsageDescription = "Find from your existing photos";
 
