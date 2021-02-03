@@ -174,8 +174,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     self.camera.makeActiveState()
                 } else {
                     self.tabBarView.makeLayerActiveState(duration: 0.4, show: true)
-                    self.longPressGestureRecognizer.isEnabled = true
-                    self.panGestureRecognizer.isEnabled = true
+                    if UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled") == true {
+                        self.longPressGestureRecognizer.isEnabled = true
+                        self.panGestureRecognizer.isEnabled = true
+                    }
                     self.camera.makeInactiveState()
                 }
             }

@@ -10,9 +10,10 @@ import UIKit
 
 extension ViewController {
     func readDefaults() {
-        print("swipe? \(UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled"))")
-        longPressGestureRecognizer.isEnabled = UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled")
-        panGestureRecognizer.isEnabled = UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled")
+        if !CameraState.isPaused {
+            longPressGestureRecognizer.isEnabled = UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled")
+            panGestureRecognizer.isEnabled = UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled")
+        }
         
         DispatchQueue.main.async {
             self.camera.sortSearchTerms(removeExistingHighlights: false)
@@ -32,9 +33,11 @@ extension ViewController {
             longPressGestureRecognizer.isEnabled = false
             panGestureRecognizer.isEnabled = false
         } else {
-            if UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled") {
-                longPressGestureRecognizer.isEnabled = true
-                panGestureRecognizer.isEnabled = true
+            if !CameraState.isPaused {
+                if UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled") == true {
+                    longPressGestureRecognizer.isEnabled = true
+                    panGestureRecognizer.isEnabled = true
+                }
             }
         }
     }
