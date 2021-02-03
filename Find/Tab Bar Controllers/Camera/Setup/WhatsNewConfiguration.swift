@@ -56,22 +56,22 @@ struct WhatsNewConfig {
                 items: [
                     WhatsNew.Item(
                         title: "刷新界面",
-                        subtitle: "我们添加了一个漂亮，干净的标签栏。",
+                        subtitle: "我们添加了一个标签栏。",
                         image: UIImage(systemName: "sparkles")?.withTintColor(#colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1), renderingMode: .alwaysOriginal)
                     ),
                     
                     WhatsNew.Item(
                         title: "重新设计的照片",
-                        subtitle: "Find里的照片现在已链接到照片APP，因此您可以从现有照片中查找。",
+                        subtitle: "Find里的照片现在已链接到照片APP，因此您可以从那里查找。",
                         image: UIImage(systemName: "photo.fill.on.rectangle.fill")?.withTintColor(#colorLiteral(red: 0.2555771952, green: 0.8299632353, blue: 0, alpha: 1), renderingMode: .alwaysOriginal)
                     ),
                     WhatsNew.Item(
                         title: "升级相机",
-                        subtitle: "现在，您可以暂停相机并将制作快取，以获取超准确的结果。",
+                        subtitle: "您可以暂停相机并立即制作快取，以获得超准确的结果。",
                         image: UIImage(systemName: "camera.fill")?.withTintColor(#colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 1), renderingMode: .alwaysOriginal)
                     ),
                     WhatsNew.Item(
-                        title: "还有很多很多",
+                        title: "还有很多很多...",
                         subtitle: "如果要比较Find 1.1和Find 1.2，您会认为它们是两个不同的APP。",
                         image: UIImage(systemName: "plus.app.fill")?.withTintColor(#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1), renderingMode: .alwaysOriginal)
                     )

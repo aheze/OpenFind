@@ -38,13 +38,13 @@
 "allListsDeletedExclaim" = "所有清单已删除！";
 
 /* Settings def=All your photos and their caches will be deleted. This action can't be undone. */
-"allPhotosAndCachesDeleted" = "您所有的照片和它们的快取将被删除。此操作无法撤消。";
+"allPhotosAndCachesDeleted" = "您全部的照片和它们的快取将被删除。此操作无法撤消。";
 
 /* No comment provided by engineer. */
-"allSpace" = "所有";
+"allSpace" = "全部";
 
 /* Settings def=All your lists will be deleted. This action can't be undone. */
-"allYourListsDeleted" = "您所有的清单将被删除。此操作无法撤消。";
+"allYourListsDeleted" = "您全部的清单将被删除。此操作无法撤消。";
 
 /* Multipurpose def=and */
 "and" = "和";
@@ -58,7 +58,7 @@
 "cacheOnly" = "快取";
 
 /* No comment provided by engineer. */
-"cachePhotoToView" = "[为照片制作快取以生成成绩单]";
+"cachePhotoToView" = "[为照片制作快取以生成记录单]";
 
 /* No comment provided by engineer. */
 "caching..." = "正在制作快取...";
@@ -132,19 +132,19 @@
 "Delete %d lists?" = "删除%d个清单？";
 
 /* Settings def=Delete All Lists */
-"deleteAllLists" = "删除所有清单";
+"deleteAllLists" = "删除全部清单";
 
 /* ListsController def=Delete ALL lists?! */
-"deleteAllListsQuestion" = "删除所有清单？！";
+"deleteAllListsQuestion" = "删除全部清单？！";
 
 /* Settings def=Delete All Photos */
-"deleteAllPhotos" = "删除所有照片";
+"deleteAllPhotos" = "删除全部照片";
 
 /* Settings def=Deleted All Lists */
-"deletedAllLists" = "所有清单已删除！";
+"deletedAllLists" = "全部清单已删除！";
 
 /* Settings def=Deleted All Photos */
-"deletedAllPhotos" = "所有照片已删除！";
+"deletedAllPhotos" = "全部照片已删除！";
 
 /* ListsController def=Deleted list! */
 "deletedList" = "删除了清单！";
@@ -221,10 +221,10 @@
 "gotQuestionsContact" = "有问题或想了解有关Find的信息？ 或者其他东西？ 在这里和我聊天！";
 
 /* No comment provided by engineer. */
-"Haptic Feedback" = "触觉反馈";
+"Haptic Feedback" = "震动反馈";
 
 /* Settings def=Haptic Feedback */
-"hapticFeedback" = "触觉反馈";
+"hapticFeedback" = "震动反馈";
 
 /* No comment provided by engineer. */
 "Heavy" = "重";
@@ -334,7 +334,7 @@
 "locBoolTrue" = "有";
 
 /* No comment provided by engineer. */
-"lowercaseCached" = "有快取";
+"lowercaseCached" = "快取";
 
 /* No comment provided by engineer. */
 "lowercaseLocal" = "本地";
@@ -343,7 +343,7 @@
 "lowercasePhotos" = "照片里";
 
 /* No comment provided by engineer. */
-"lowercaseStarred" = "有星标";
+"lowercaseStarred" = "星标";
 
 /* StatsViewController def=matches found currently */
 "matchesFoundCurrently" = "个搜索结果";
@@ -410,7 +410,7 @@
 /* Open Source Licenses */
 "Open Source Licenses" = "开源许可证";
 
-"Origin" = "起源";
+"Origin" = "来源";
 
 /* No comment provided by engineer. */
 "Other" = "其他";
@@ -440,7 +440,7 @@
 "PhotosTutorialLocalization-cacheYourPhotos" = "快取您的照片";
 
 /* No comment provided by engineer. */
-"PhotosTutorialLocalization-findFromAllPhotos" = "从所有照片中查找";
+"PhotosTutorialLocalization-findFromAllPhotos" = "从全部照片中查找";
 
 /* No comment provided by engineer. */
 "PhotosTutorialLocalization-findFromSelectPhotos" = "从一些照片中查找";
@@ -488,7 +488,7 @@
 "Reset Settings" = "重新设置";
 
 /* Settings def=Reset Settings */
-"resetSettings" = "重置所有设置";
+"resetSettings" = "重置全部设置";
 
 /* No comment provided by engineer. */
 "restrictedText" = "限制";
@@ -627,16 +627,19 @@
 "tip-pauseThePreview" = "暂停相机";
 
 /* No comment provided by engineer. */
-"tip-switchToAllPhotos" = "转到所有照片";
+"tip-switchToAllPhotos" = "转到全部照片";
 
 /* No comment provided by engineer. */
 "tip-tapHereToSave" = "点按来保存";
 
 /* No comment provided by engineer. */
-"tip-tapToCacheSelected" = "点按来吧选择的照片制作快取";
+"tip-tapSelect" = "点击选择";
 
 /* No comment provided by engineer. */
-"tip-tapToStarSelected" = "点按来吧选择的照片加注星标";
+"tip-tapToCacheSelected" = "点按把选择的照片制作快取";
+
+/* No comment provided by engineer. */
+"tip-tapToStarSelected" = "点按把选择的照片加注星标";
 
 /* extensionDate def=Today */
 "todayLoc" = "今天";
@@ -647,7 +650,7 @@
 /* No comment provided by engineer. */
 "toFindWithOCR" = " 来用OCR查找。";
 
-"Transcript" = "成绩单（测试版）";
+"Transcript" = "记录单（测试版）";
 
 /* No comment provided by engineer. */
 "TutorialLocalization-cameraDescription" = "实时查找词";
@@ -665,7 +668,7 @@
 "twoDuplicates" = "两个重复项";
 
 /* SetupSearchBar def=Type here to find... */
-"typeHereToFind" = "输入英文，拼音，或选个清单";
+"typeHereToFind" = "输入英文，拼音，或选清单";
 
 /* No comment provided by engineer. */
 "unitZhang" = "张";
@@ -749,6 +752,3 @@
 
 /* No comment provided by engineer. */
 "blankSpace" = "";
-
-/* No comment provided by engineer. */
-"tip-tapSelect" = "";

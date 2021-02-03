@@ -23,7 +23,7 @@
 "BHm-ND-D9k.text" = "Label";
 
 /* Class = "UILabel"; text = "Text"; ObjectID = "BRC-Yj-hpw"; */
-"BRC-Yj-hpw.text" = "Text";
+"BRC-Yj-hpw.text" = "文字";
 
 /* Class = "UILabel"; text = "Words to Find:"; ObjectID = "CeU-8I-rNo"; */
 "CeU-8I-rNo.text" = "搜索词：";
