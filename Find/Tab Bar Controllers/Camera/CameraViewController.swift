@@ -399,8 +399,6 @@ class CameraViewController: UIViewController {
             patch: 0
         )
         
-        print("has version? \(keyValueVersionStore.has(version: version))")
-        
         if !keyValueVersionStore.has(version: version) {
             keyValueVersionStore.set(version: version)
             
@@ -417,9 +415,9 @@ class CameraViewController: UIViewController {
             
         }
         
-        guard let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else { return }
-        print("Current version: \(currentVersion)")
-        UserDefaults.standard.set(currentVersion, forKey: "CurrentAppVersion")
+        if let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            UserDefaults.standard.set(currentVersion, forKey: "CurrentAppVersion")
+        }
         
         /// 1.2 setup
         setupCameraButtons()
