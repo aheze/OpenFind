@@ -384,8 +384,6 @@ class CameraViewController: UIViewController {
             }
         }
         
-        /// call to pre load with images
-//        preloadAllImages()
         
         whatsNewView.alpha = 0
         whatsNewView.layer.cornerRadius = 6
@@ -393,8 +391,18 @@ class CameraViewController: UIViewController {
         
         whatsNewButton.alpha = 0
         
-        if !keyValueVersionStore.has(version: WhatsNew.Version.current()) {
-            keyValueVersionStore.set(version: WhatsNew.Version.current())
+        
+        // Initialize Version 1.0.0
+        let version = WhatsNew.Version(
+            major: 1,
+            minor: 2,
+            patch: 0
+        )
+        
+        print("has version? \(keyValueVersionStore.has(version: version))")
+        
+        if !keyValueVersionStore.has(version: version) {
+            keyValueVersionStore.set(version: version)
             
             /// not presented yet
             if updateImportantShouldPresentWhatsNew {
@@ -408,6 +416,10 @@ class CameraViewController: UIViewController {
             }
             
         }
+        
+        guard let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else { return }
+        print("Current version: \(currentVersion)")
+        UserDefaults.standard.set(currentVersion, forKey: "CurrentAppVersion")
         
         /// 1.2 setup
         setupCameraButtons()

@@ -10,12 +10,9 @@ import UIKit
 
 extension PhotoFindViewController: FindBarDelegate {
     func pause(pause: Bool) {
-        print("Pause findbar")
     }
     
     func returnTerms(matchToColorsR: [String : [CGColor]]) {
-        print("returnTerms findbar")
-        
         self.matchToColors = matchToColorsR
         if matchToColorsR.keys.count >= 1 {
             findFromCache()
@@ -26,16 +23,12 @@ extension PhotoFindViewController: FindBarDelegate {
             currentFastFindProcess = nil
             self.progressView.alpha = 0
         }
-        
-        
     }
     
     func startedEditing(start: Bool) {
-        print("startedEditing findbar")
     }
     
     func pressedReturn() {
-        print("pressedReturn findbar------------")
         if numberCurrentlyFindingFromCache == 0 {
             setPromptToHowManyFastFound(howMany: 0)
             fastFind()
@@ -43,11 +36,9 @@ extension PhotoFindViewController: FindBarDelegate {
     }
     
     func triedToEdit() {
-        print("triedToEdit findbar")
     }
     
     func triedToEditWhilePaused() {
-        print("ReturnSortedTerms triedToEditWhilePaused")
     }
     
 }

@@ -46,6 +46,3 @@ enum AppStoreReviewManager {
     defaults.set(currentVersion, forKey: "lastReviewRequestAppVersion")
   }
 }
-
-extension CameraViewController {
-}
