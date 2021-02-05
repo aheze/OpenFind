@@ -45,7 +45,9 @@ class PhotoPermissionView: UIView {
                 } else {
                     DispatchQueue.main.async {
                         self.shouldGoToSettings = true
-                        self.allowAccessButton.setTitle("Go To Settings", for: .normal)
+                        
+                        let goToSettings = NSLocalizedString("universal-goToSettings", comment: "")
+                        self.allowAccessButton.setTitle(goToSettings, for: .normal)
                     }
                 }
             }
@@ -78,7 +80,9 @@ class PhotoPermissionView: UIView {
             self.allowAccessButton.setTitle("Allow Access", for: .normal)
         } else if status == .shouldGoToSettings {
             self.shouldGoToSettings = true
-            self.allowAccessButton.setTitle("Go To Settings", for: .normal)
+            
+            let goToSettings = NSLocalizedString("universal-goToSettings", comment: "")
+            self.allowAccessButton.setTitle(goToSettings, for: .normal)
         }
     }
     

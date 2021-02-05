@@ -10,27 +10,6 @@ import UIKit
 import AVFoundation
 
 extension CameraViewController {
-    func getImageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
-            return nil
-        }
-        CVPixelBufferLockBaseAddress(pixelBuffer, .readOnly)
-        let baseAddress = CVPixelBufferGetBaseAddress(pixelBuffer)
-        let width = CVPixelBufferGetWidth(pixelBuffer)
-        let height = CVPixelBufferGetHeight(pixelBuffer)
-        let bytesPerRow = CVPixelBufferGetBytesPerRow(pixelBuffer)
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue | CGBitmapInfo.byteOrder32Little.rawValue)
-        guard let context = CGContext(data: baseAddress, width: width, height: height, bitsPerComponent: 8, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) else {
-            return nil
-        }
-        guard let cgImage = context.makeImage() else {
-            return nil
-        }
-        let image = UIImage(cgImage: cgImage, scale: 1, orientation:.right)
-        CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly)
-        return image
-    }
     func getCamera() -> AVCaptureDevice? {
         if let cameraDevice = AVCaptureDevice.default(.builtInDualCamera,
                                                       for: .video, position: .back) {

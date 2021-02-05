@@ -65,7 +65,6 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var sfSymbolArray: [String] = [String]()
     var iconColor: UIColor = UIColor.label
     
     override func viewDidLoad() {

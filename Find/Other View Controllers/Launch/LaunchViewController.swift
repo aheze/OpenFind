@@ -41,8 +41,6 @@ class LaunchViewController: UIViewController {
     
     let topHeight = CGFloat(70)
     
-    
-    
     @IBOutlet weak var accessDescLabel: UILabel!
     
     var onboardingOnLastPage = false
@@ -101,7 +99,7 @@ class LaunchViewController: UIViewController {
         
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
-            print("Authourized")
+            print("Authorized")
             self.drawAnimation(type: .fullScreenStart)
         case .notDetermined:
             shouldGoToSettings = false
@@ -136,32 +134,26 @@ class LaunchViewController: UIViewController {
         
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
-            print("Authourized")
+            print("Authorized")
             self.drawAnimation(type: .fullScreenStart)
         case .notDetermined:
-            print("ND")
             shouldGoToSettings = false
             self.drawAnimation(type: .needPermissions)
         case .denied:
-            print("D")
             firstTimeDeny = true
             shouldGoToSettings = true
             self.drawAnimation(type: .denied)
         case .restricted:
-            print("R")
             self.drawAnimation(type: .restricted)
         @unknown default:
             fatalError()
         }
-        
     }
     
     @IBOutlet weak var onboardingTopC: NSLayoutConstraint!
     @IBOutlet weak var onboardingWidthC: NSLayoutConstraint!
     @IBOutlet weak var onboardingHeightC: NSLayoutConstraint!
-    
-    let loadingImages = (0...10).map { UIImage(named: "\($0)")! }
-    
+
     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
@@ -179,7 +171,7 @@ class LaunchViewController: UIViewController {
         settingsPictureView.alpha = 0
         
         allowAccessButton.layer.cornerRadius = 6
-        allowAccessView.layer.cornerRadius = 14
+        allowAccessView.layer.cornerRadius = 10
         
         topRightImageView.transform = CGAffineTransform(rotationAngle: CGFloat(-270).degreesToRadians)
         bottomLeftImageView.transform = CGAffineTransform(rotationAngle: CGFloat(-90).degreesToRadians)
@@ -195,7 +187,7 @@ class LaunchViewController: UIViewController {
             onboarding.removeFromSuperview()
             switch AVCaptureDevice.authorizationStatus(for: .video) {
             case .authorized:
-                print("Authourized")
+                print("Authorized")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                     self.drawAnimation(type: .fullScreenStart)
                 })
@@ -220,22 +212,19 @@ class LaunchViewController: UIViewController {
         }
     }
     
-    let goToSettings = NSLocalizedString("goToSettings", comment: "LaunchViewController def=Go to settings")
-    
+    let goToSettings = NSLocalizedString("universal-goToSettings", comment: "")
     
     func drawAnimation(type: LaunchAction) {
         
         innerViewMaxWidth = view.bounds.width - CGFloat(70)
         innerViewMaxHeight = view.bounds.height - CGFloat(topHeight * 2)
-        cornersViewMaxWidth = view.bounds.width - CGFloat(30)
-        cornersViewMaxHeight = view.bounds.height - CGFloat(topHeight * 2 - 40)
+        cornersViewMaxWidth = view.bounds.width - CGFloat(20)
+        cornersViewMaxHeight = view.bounds.height - CGFloat(topHeight * 2 - 50)
         
-        let restrictedInnerViewWidth = min(500, innerViewMaxWidth)
-        let restrictedInnerViewHeight = min(500 - 40, innerViewMaxHeight)
-        let restrictedCornersViewWidth = min(500, cornersViewMaxWidth)
-        let restrictedCornersViewHeight = min(500, cornersViewMaxHeight)
-        
-        
+        let restrictedInnerViewWidth = min(400, innerViewMaxWidth)
+        let restrictedInnerViewHeight = min(400 - 50, innerViewMaxHeight)
+        let restrictedCornersViewWidth = min(400, cornersViewMaxWidth)
+        let restrictedCornersViewHeight = min(400, cornersViewMaxHeight)
         
         UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
             self.baseView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
@@ -256,26 +245,6 @@ class LaunchViewController: UIViewController {
                     
                     self.skipButton.alpha = 0
                     
-                    self.topLeftImageView.image = UIImage(named: "10")
-                    self.topRightImageView.image = UIImage(named: "10")
-                    self.bottomLeftImageView.image = UIImage(named: "10")
-                    self.bottomRightImageView.image = UIImage(named: "10")
-                    self.topLeftImageView.animationImages = self.loadingImages
-                    self.topRightImageView.animationImages = self.loadingImages
-                    self.bottomLeftImageView.animationImages = self.loadingImages
-                    self.bottomRightImageView.animationImages = self.loadingImages
-                    self.topLeftImageView.animationRepeatCount = 1
-                    self.topRightImageView.animationRepeatCount = 1
-                    self.bottomLeftImageView.animationRepeatCount = 1
-                    self.bottomRightImageView.animationRepeatCount = 1
-                    self.topLeftImageView.animationDuration = 0.4
-                    self.topRightImageView.animationDuration = 0.4
-                    self.bottomLeftImageView.animationDuration = 0.4
-                    self.bottomRightImageView.animationDuration = 0.4
-                    self.topLeftImageView.startAnimating()
-                    self.topRightImageView.startAnimating()
-                    self.bottomLeftImageView.startAnimating()
-                    self.bottomRightImageView.startAnimating()
                 })
                 
                 let noPermissionToUseCamera = NSLocalizedString("noPermissionToUseCamera", comment: "LaunchViewController def=You don't have permission to use the camera.")
@@ -295,30 +264,6 @@ class LaunchViewController: UIViewController {
                     self.allowAccessView.transform = CGAffineTransform.identity
                     self.allowAccessView.alpha = 1
                     self.settingsPictureView.alpha = 1
-                    if self.firstTimeDeny {
-                        
-                        self.topLeftImageView.image = UIImage(named: "10")
-                        self.topRightImageView.image = UIImage(named: "10")
-                        self.bottomLeftImageView.image = UIImage(named: "10")
-                        self.bottomRightImageView.image = UIImage(named: "10")
-                        self.topLeftImageView.animationImages = self.loadingImages
-                        self.topRightImageView.animationImages = self.loadingImages
-                        self.bottomLeftImageView.animationImages = self.loadingImages
-                        self.bottomRightImageView.animationImages = self.loadingImages
-                        self.topLeftImageView.animationRepeatCount = 1
-                        self.topRightImageView.animationRepeatCount = 1
-                        self.bottomLeftImageView.animationRepeatCount = 1
-                        self.bottomRightImageView.animationRepeatCount = 1
-                        self.topLeftImageView.animationDuration = 0.4
-                        self.topRightImageView.animationDuration = 0.4
-                        self.bottomLeftImageView.animationDuration = 0.4
-                        self.bottomRightImageView.animationDuration = 0.4
-                        self.topLeftImageView.startAnimating()
-                        self.topRightImageView.startAnimating()
-                        self.bottomLeftImageView.startAnimating()
-                        self.bottomRightImageView.startAnimating()
-                    }
-                    
                 })
                 self.allowAccessButton.setTitle(self.goToSettings, for: .normal)
                 
@@ -333,27 +278,6 @@ class LaunchViewController: UIViewController {
                     self.baseView.transform = CGAffineTransform.identity
                     self.allowAccessView.transform = CGAffineTransform.identity
                     self.allowAccessView.alpha = 1
-                    
-                    self.topLeftImageView.image = UIImage(named: "10")
-                    self.topRightImageView.image = UIImage(named: "10")
-                    self.bottomLeftImageView.image = UIImage(named: "10")
-                    self.bottomRightImageView.image = UIImage(named: "10")
-                    self.topLeftImageView.animationImages = self.loadingImages
-                    self.topRightImageView.animationImages = self.loadingImages
-                    self.bottomLeftImageView.animationImages = self.loadingImages
-                    self.bottomRightImageView.animationImages = self.loadingImages
-                    self.topLeftImageView.animationRepeatCount = 1
-                    self.topRightImageView.animationRepeatCount = 1
-                    self.bottomLeftImageView.animationRepeatCount = 1
-                    self.bottomRightImageView.animationRepeatCount = 1
-                    self.topLeftImageView.animationDuration = 0.4
-                    self.topRightImageView.animationDuration = 0.4
-                    self.bottomLeftImageView.animationDuration = 0.4
-                    self.bottomRightImageView.animationDuration = 0.4
-                    self.topLeftImageView.startAnimating()
-                    self.topRightImageView.startAnimating()
-                    self.bottomLeftImageView.startAnimating()
-                    self.bottomRightImageView.startAnimating()
                 })
                 
             case .onboarding:
@@ -362,7 +286,7 @@ class LaunchViewController: UIViewController {
                 self.onboarding.delegate = self
                 self.onboarding.alpha = 0
                 self.onboarding.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
-                self.onboarding.layer.cornerRadius = 14
+                self.onboarding.layer.cornerRadius = 10
                 self.onboarding.clipsToBounds = true
                 
                 self.onboardingTopC.constant = self.topHeight
@@ -382,27 +306,6 @@ class LaunchViewController: UIViewController {
                     self.onboarding.transform = CGAffineTransform.identity
                     
                     self.skipButton.alpha = 1
-                    
-                    self.topLeftImageView.image = UIImage(named: "10")
-                    self.topRightImageView.image = UIImage(named: "10")
-                    self.bottomLeftImageView.image = UIImage(named: "10")
-                    self.bottomRightImageView.image = UIImage(named: "10")
-                    self.topLeftImageView.animationImages = self.loadingImages
-                    self.topRightImageView.animationImages = self.loadingImages
-                    self.bottomLeftImageView.animationImages = self.loadingImages
-                    self.bottomRightImageView.animationImages = self.loadingImages
-                    self.topLeftImageView.animationRepeatCount = 1
-                    self.topRightImageView.animationRepeatCount = 1
-                    self.bottomLeftImageView.animationRepeatCount = 1
-                    self.bottomRightImageView.animationRepeatCount = 1
-                    self.topLeftImageView.animationDuration = 0.4
-                    self.topRightImageView.animationDuration = 0.4
-                    self.bottomLeftImageView.animationDuration = 0.4
-                    self.bottomRightImageView.animationDuration = 0.4
-                    self.topLeftImageView.startAnimating()
-                    self.topRightImageView.startAnimating()
-                    self.bottomLeftImageView.startAnimating()
-                    self.bottomRightImageView.startAnimating()
                 })
             case .fullScreenStart:
                 let finalWidth = self.view.bounds.width

@@ -13,11 +13,6 @@ enum ToolbarButtonType {
     case newMatch
     case done
 }
-enum ToolbarTextChangeType {
-    case beganEditing
-    case shouldReturn
-    case changedText
-}
 protocol ToolbarButtonPressed: class {
     func buttonPressed(button: ToolbarButtonType)
 }

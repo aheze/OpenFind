@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "StarredPhotos.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "StarredPhotos@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "StarredPhotos@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "StarredPhotos.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

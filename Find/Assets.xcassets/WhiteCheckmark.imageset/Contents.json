@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "WhiteCheckmark.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "WhiteCheckmark@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "WhiteCheckmark@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "Check.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

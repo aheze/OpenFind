@@ -82,8 +82,6 @@ class CameraViewController: UIViewController {
     var savePressed = false
     var cachePressed = false
     
-    let deviceType = UIDevice.current.modelName
-    
     var normalSearchFieldTopCConstant = CGFloat(0)
     var displayingOrientationError = false
     
@@ -105,8 +103,6 @@ class CameraViewController: UIViewController {
     }()
     
     var newNumberOfMatchesFound = 0
-    var existingNumberOfMatchesFound = 0
-    
     
     //MARK: Timer and haptic feedback
     var currentPassCount = 0 /// +1 whenever frame added for AV
@@ -115,7 +111,6 @@ class CameraViewController: UIViewController {
     let realm = try! Realm()
     var listCategories: Results<FindList>?
     var editableListCategories = [EditableFindList]()
-    var currentContentsOfScreen = ""
     var shouldResetHighlights = false
     
     //MARK: Keyboard
@@ -126,7 +121,6 @@ class CameraViewController: UIViewController {
     var didFinishShouldUpdateHeight = false
     
     //MARK: Search Bar
-    var focusingList = EditableFindList()
     
     var allowSearch = true /// orientation disable
     var allowSearchFocus = true /// disable when on different screen
@@ -179,13 +173,7 @@ class CameraViewController: UIViewController {
     
     var previousNumberOfMatches: Int = 0
     
-    
     var blurView = UIVisualEffectView()
-    
-    ///Detect if the view controller attempted to dismiss, but didn't
-    var hasStartedDismissing = false
-    var cancelSeconds = 0
-    var cancelTimer : Timer?
     
     //MARK: Motion and AR Engine
     var motionManager = CMMotionManager()
@@ -197,7 +185,6 @@ class CameraViewController: UIViewController {
     
     //MARK: FAST MODE
     var busyFastFinding = false
-    var startFastFinding = false
     var tempComponents = [Component]()
     var currentComponents = [Component]()
     var nextComponents = [Component]()
@@ -212,7 +199,6 @@ class CameraViewController: UIViewController {
     var stringToList = [String: EditableFindList]()
     var aspectRatioWidthOverHeight : CGFloat = 0
     
-    var statusBarHidden : Bool = false
     var finalTextToFind : String = ""
     let deviceSize = screenBounds.size
     var globalUrl : URL = URL(fileURLWithPath: "")
@@ -232,10 +218,8 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var pausedImageView: UIImageView!
     
     let avSession = AVCaptureSession()
-    var snapshotImageOrientation = UIImage.Orientation.upMirrored
     private var captureCompletionBlock: ((UIImage) -> Void)?
     var cameraDevice: AVCaptureDevice?
-    var allowedToAccessPhotos = false /// photos permissions
     
     //MARK: Camera Focus allowed views
     @IBOutlet weak var cameraView: CameraView!
@@ -445,14 +429,6 @@ class CameraViewController: UIViewController {
             self.cacheLabel.alpha = 0
         }
     }
-    
-    // get magnitude of vector via Pythagorean theorem
-    func getMagnitude(from attitude: CMAttitude) -> Double {
-        return sqrt(pow(attitude.roll, 2) +
-                pow(attitude.yaw, 2) +
-                pow(attitude.pitch, 2))
-    }
-
 }
 
 extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {

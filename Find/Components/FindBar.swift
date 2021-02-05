@@ -25,10 +25,6 @@ class FindBar: UIView, UITextFieldDelegate {
     
     let deviceSize = screenBounds.size
     
-    var origCacheNumber = 0
-    var totalResultsNumber = 0
-    var searchingOnlyInCache = true
-    
     let realm = try! Realm()
     var listCategories: Results<FindList>?
     var editableListCategories = [EditableFindList]()
@@ -167,21 +163,6 @@ class FindBar: UIView, UITextFieldDelegate {
         searchField.backgroundColor = UIColor.white.withAlphaComponent(0.3)
         searchField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("typeHereToFind", comment: ""), attributes: [NSAttributedString.Key.foregroundColor : UIColor.white.withAlphaComponent(0.75)])
         
-    }
-}
-
-
-
-extension FindBar {
-    
-    func disableTextField(_ shouldDisable: Bool) {
-        if shouldDisable {
-            self.searchField.backgroundColor = UIColor(named: "Gray2")
-            self.searchDisabled = true
-        } else {
-            self.searchField.backgroundColor = UIColor(named: "Gray1")
-            self.searchDisabled = false
-        }
     }
 }
 

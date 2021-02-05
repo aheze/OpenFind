@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240px" height="240px" viewBox="0 0 240 240" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Corner</title>
+    <g id="Corner" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <path d="M40,200 L40,100 C40,66.862915 66.862915,40 100,40 L200,40 L200,40" id="Path-3" stroke="#FFFFFF" stroke-width="50"></path>
+    </g>
+</svg>

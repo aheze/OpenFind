@@ -11,21 +11,10 @@ import SwiftEntryKit
 import RealmSwift
 import SPAlert
 
-
-protocol ChangeNumberOfSelectedList: class {
-    func changeLabel(to: Int)
-    func disablePress(disable: Bool)
-}
 class ListsNavController: UINavigationController {
     var viewController: ListsController!
 }
-
-class LayerScrollView: UIScrollView, UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-}
-class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLayoutDelegate, UIAdaptivePresentationControllerDelegate, NewListMade, FinishedEditingList {
+class ListsController: UIViewController, AdaptiveCollectionLayoutDelegate, UIAdaptivePresentationControllerDelegate, NewListMade, FinishedEditingList {
 
     
     // MARK: - Tab bar
@@ -119,7 +108,6 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
         let alertView = SPAlertView(title: deletedList, message: tapToDismiss, preset: SPAlertPreset.done)
         alertView.duration = 3.6
         alertView.present()
-        print("chaing list")
         listsChanged?()
     }
     
@@ -130,10 +118,6 @@ class ListsController: UIViewController, ListDeletePressed, AdaptiveCollectionLa
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var swipedToDismiss = true
-    
-    
-    weak var changeNumberDelegateList: ChangeNumberOfSelectedList?
     var currentEditingPresentationPath = 0
     
     

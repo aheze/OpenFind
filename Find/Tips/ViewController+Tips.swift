@@ -48,32 +48,11 @@ struct TipViews {
     
     static var resetToBeginning: (() -> Void)? /// change empty view back to beginning
 }
-extension ViewController {
-    func configurePreferences() {
-        
-        var preferences = EasyTipView.Preferences()
-        preferences.drawing.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        preferences.drawing.foregroundColor = UIColor.white
-        preferences.drawing.backgroundColor = UIColor.secondaryLabel
-        preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.top
-        
-        preferences.drawing.arrowWidth = 12
-        preferences.drawing.arrowHeight = 6
-        preferences.drawing.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)
-        preferences.positioning.bubbleInsets = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
-        preferences.animating.dismissTransform = CGAffineTransform(translationX: 0, y: -6).scaledBy(x: 0.6, y: 0.6)
-        
-        EasyTipView.globalPreferences = preferences
-    }
-}
-
 extension ViewController: EasyTipViewDelegate {
     func easyTipViewDidTap(_ tipView: EasyTipView) {
-        print("tapped")
     }
     
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {
-        print("dismissed")
         if
             tipView == TipViews.localTipView1 ||
                 tipView == TipViews.localTipView2 ||
@@ -81,7 +60,6 @@ extension ViewController: EasyTipViewDelegate {
                 tipView == TipViews.starTipView3 ||
                 tipView == TipViews.cacheTipView1 ||
                 tipView == TipViews.cacheTipView3 {
-            print("yes, dismiss")
             if TipViews.inTutorial {
                 TipViews.finishTutorial()
             }

@@ -8,12 +8,6 @@
 import UIKit
 import SnapKit
 
-enum TabBarMode {
-    case navigationControls /// navigate between view controllers
-    case photosControls /// selection controls for Photos
-    case photoSlideControls
-    case listsControls /// selection controls for Lists
-}
 class TabBarView: UIView {
     
     var shutterIgnoreFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
@@ -118,7 +112,6 @@ class TabBarView: UIView {
     @IBOutlet weak var cameraIcon: CameraIcon!
     @IBOutlet weak var listsIcon: ListsIcon!
     
-    var layouted = false
     var fillLayer: CAShapeLayer?
     
     override init(frame: CGRect) {

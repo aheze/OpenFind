@@ -25,7 +25,6 @@ class GeneralViewController: UIViewController {
         contents = contentsOfList
     }
     
-    var isEditingText = false
     
     weak var generalDelegate: GetGeneralInfo?
 
@@ -84,37 +83,8 @@ class GeneralViewController: UIViewController {
     var descriptionOfList = ""
     var contents = [String]()
     
-//    func doneWithEditingGeneral() {
-//        view.endEditing(true)
-//        var newName = name
-//        var newDesc = descriptionOfList
-//
-//        let untitledName = NSLocalizedString("untitledName", comment: "GeneralViewController def=Untitled")
-//        let noDescription = NSLocalizedString("noDescription", comment: "GeneralViewController def=No Description")
-//        if newName == "" { newName = untitledName }
-//        if newDesc == "" { newDesc = noDescription }
-//
-//        if overrideDone == true {
-//            generalDelegate?.returnNewGeneral(nameOfList: newName, desc: newDesc, contentsOfList: contents, hasErrors: false, overrideMake: true)
-//            SwiftEntryKit.dismiss()
-//        } else {
-//            let origPoint = CGPoint(x: 0, y: (currentIndexPath * 50) + 500)
-//                let rect = CGRect(origin: origPoint, size: CGSize(width: 50, height: 50))
-//                scrollView.scrollRectToVisible(rect, animated: true)
-//
-//            checkForErrors(contentsArray: contents)
-//            if showDoneAlerts() == false {
-//                print("NO ERRORS!!!!!!++++++++")
-//                generalDelegate?.returnNewGeneral(nameOfList: newName, desc: newDesc, contentsOfList: contents, hasErrors: false, overrideMake: false)
-//            } else {
-//                generalDelegate?.returnNewGeneral(nameOfList: newName, desc: newDesc, contentsOfList: contents, hasErrors: true, overrideMake: false)
-//            }
-//
-//        }
-//    }
 
     func highlightRowsOnError(type: String) { ///Highlight the rows when done is pressed and there is an error
-        print("HIGHLIGHT ROWS, PRESSED DONE")
         
         switch type {
         case "EmptyMatch":
@@ -226,8 +196,6 @@ class GeneralViewController: UIViewController {
         
         let alert = UIAlertController(title: confirmDeleteList, message: cantUndoDeleteList, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: delete, style: UIAlertAction.Style.destructive, handler: { _ in
-            
-//            self.deleteTheList?.deleteList()
             
             self.deleteThisList?()
             

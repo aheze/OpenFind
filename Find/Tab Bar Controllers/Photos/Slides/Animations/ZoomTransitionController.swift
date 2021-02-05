@@ -7,9 +7,6 @@
 //
 
 import UIKit
-protocol RecieveDeleteLast: class {
-    func deletedLastPhoto()
-}
 
 class ZoomTransitionController: NSObject {
     

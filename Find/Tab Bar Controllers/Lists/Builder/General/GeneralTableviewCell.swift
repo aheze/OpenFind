@@ -21,21 +21,12 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
     var indexPath = 0
     
     var overlayView = UIView()
-    var touchedView = false
-    
     
     weak var changedTextDelegate: ChangedTextCell?
     @IBOutlet weak var warningButton: UIButton!
     
     @IBAction func warningPressed(_ sender: Any) {
-        print("Warning Pressed")
-        
-//        if thisRowHasErrors == false {
-            matchTextField.becomeFirstResponder()
-//        } else {
-//            showDescriptions()
-//        }
-//
+        matchTextField.becomeFirstResponder()
     }
     
     @IBOutlet weak var matchTextField: UITextField!

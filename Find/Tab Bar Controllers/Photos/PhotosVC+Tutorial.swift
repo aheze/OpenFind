@@ -57,6 +57,7 @@ extension PhotosViewController {
             self.collectionView.verticalScrollIndicatorInsets.top = 0
             quickTourView.startTourButton.alpha = 0
             quickTourView.closeButton.alpha = 0
+            quickTourView.alpha = 0
         }) { _ in
             quickTourView.removeFromSuperview()
         }

@@ -16,7 +16,7 @@ class PhotoSlidesViewController: UIViewController {
     enum ScreenMode { /// show controls or not
         case full, normal
     }
-    var currentMode: ScreenMode = .normal
+    
     var presentingInfo: ((Bool) -> Void)? /// update status bar color
     
     var pageViewController: UIPageViewController {

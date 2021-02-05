@@ -9,11 +9,6 @@
 import UIKit
 import SwiftRichString
 
-enum PromptType {
-    case starting
-    case finishedSearchingCache
-    case finished
-}
 extension PhotoFindViewController {
     func changePromptToStarting(startingFilter: PhotoFilter, howManyPhotos: Int, isAllPhotos: Bool) {
          

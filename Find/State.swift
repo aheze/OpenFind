@@ -29,7 +29,6 @@ class Gestures {
     var isRubberBanding = false
     
     var transitionAnimatorBlock: (() -> Void)?
-    var transitionAnimatorCompletion: (() -> Void)?
     
 }
 

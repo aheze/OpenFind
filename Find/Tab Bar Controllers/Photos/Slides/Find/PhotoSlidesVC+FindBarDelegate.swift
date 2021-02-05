@@ -32,7 +32,6 @@ extension PhotoSlidesViewController: FindBarDelegate {
     }
     
     func startedEditing(start: Bool) {
-        print("startedEditing findbar")
     }
     
     func pressedReturn() {

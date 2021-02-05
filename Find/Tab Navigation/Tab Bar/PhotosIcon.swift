@@ -12,7 +12,6 @@ class PhotosIcon: UIView {
     var pressed: (() -> Void)?
     
     var newDetailsColor = Constants.detailIconColorDark
-    var newForegroundColor = Constants.foregroundIconColorDark
     var newBackgroundColor = Constants.backgroundIconColorDark
     
     let originalForegroundX = CGFloat(5)

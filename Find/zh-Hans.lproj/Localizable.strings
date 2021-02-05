@@ -215,9 +215,6 @@
 /* Settings def=General */
 "generalTutorial" = "常规";
 
-/* LaunchViewController def=Go to settings */
-"goToSettings" = "前往设置";
-
 "gotQuestionsContact" = "有问题或想了解有关Find的信息？ 或者其他东西？ 在这里和我聊天！";
 
 /* No comment provided by engineer. */

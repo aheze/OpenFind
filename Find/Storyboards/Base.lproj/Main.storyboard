@@ -22,28 +22,28 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nbN-C6-vKS">
                                 <rect key="frame" x="124" y="373" width="180" height="180"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="NKs-Lt-9ZY">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Corner" translatesAutoresizingMaskIntoConstraints="NO" id="NKs-Lt-9ZY">
                                         <rect key="frame" x="120" y="0.0" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="X2f-oo-o1W"/>
                                             <constraint firstAttribute="height" constant="60" id="x0m-F5-Pu1"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="Abb-sR-Ha4">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Corner" translatesAutoresizingMaskIntoConstraints="NO" id="Abb-sR-Ha4">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="02r-yG-xf2"/>
                                             <constraint firstAttribute="width" constant="60" id="lpN-Xg-GRz"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="VbI-4x-JFi">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Corner" translatesAutoresizingMaskIntoConstraints="NO" id="VbI-4x-JFi">
                                         <rect key="frame" x="0.0" y="120" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="NQ5-VX-bIl"/>
                                             <constraint firstAttribute="width" constant="60" id="h9D-HY-S0u"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="gnq-LE-YRE">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Corner" translatesAutoresizingMaskIntoConstraints="NO" id="gnq-LE-YRE">
                                         <rect key="frame" x="120" y="120" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="MVB-xJ-dFE"/>
@@ -96,8 +96,8 @@
                                             <constraint firstAttribute="trailing" secondItem="Lrv-4E-igD" secondAttribute="trailing" id="t1v-hM-H7g"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Find needs to access the camera to find text. Everything happens offline, so nothing leaves your phone." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K83-pM-wfg">
-                                        <rect key="frame" x="16" y="100.66666666666669" width="248" height="113.66666666666669"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Access the camera to find text. Find works offline, so nothing ever leaves your phone." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K83-pM-wfg">
+                                        <rect key="frame" x="16" y="100.66666666666669" width="248" height="91"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -118,7 +118,7 @@
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" image="AccessSettings" translatesAutoresizingMaskIntoConstraints="NO" id="gn8-8L-ybj">
-                                        <rect key="frame" x="0.0" y="218.33333333333337" width="280" height="21.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="195.66666666666669" width="280" height="44.333333333333343"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" name="50Blue"/>
@@ -406,13 +406,14 @@
                                 <rect key="frame" x="16" y="115" width="396" height="0.0"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVF-Pd-XiX">
-                                        <rect key="frame" x="0.0" y="-13.333333333333329" width="396" height="26.666666666666668"/>
+                                        <rect key="frame" x="0.0" y="-9.3333333333333286" width="396" height="19"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="4" maxY="0.0"/>
                                         <state key="normal" title="See What's New in Find!" image="sparkles" catalog="system">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="14" scale="default" weight="medium"/>
                                         </state>
                                         <connections>
                                             <action selector="whatsNewPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nCr-YP-Pi5"/>
@@ -756,9 +757,9 @@
                                                                 <constraint firstAttribute="height" constant="50" id="zmu-sc-8Uz"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="2jy-rC-Kk9">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlueCheck" translatesAutoresizingMaskIntoConstraints="NO" id="2jy-rC-Kk9">
                                                             <rect key="frame" x="155" y="324" width="30" height="30"/>
-                                                            <color key="tintColor" name="FeedbackGradientLeft"/>
+                                                            <color key="tintColor" name="100Blue"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="Gh0-OI-2Me"/>
                                                                 <constraint firstAttribute="width" constant="30" id="eIQ-Nu-nv8"/>
@@ -2656,7 +2657,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z3B-Zf-WwK">
                                         <rect key="frame" x="90" y="16" width="120" height="120"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Leica Sample" translatesAutoresizingMaskIntoConstraints="NO" id="vYj-NL-cGz">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gear" translatesAutoresizingMaskIntoConstraints="NO" id="vYj-NL-cGz">
                                                 <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CacheActive-Light" translatesAutoresizingMaskIntoConstraints="NO" id="COq-hK-Rq4">
@@ -3249,11 +3250,10 @@
         </designable>
     </designables>
     <resources>
-        <image name="0" width="133.33332824707031" height="133.33332824707031"/>
         <image name="AccessSettings" width="820" height="1024"/>
+        <image name="BlueCheck" width="120" height="120"/>
         <image name="CacheActive-Light" width="30" height="30"/>
-        <image name="Checkmark" width="512" height="512"/>
-        <image name="Leica Sample" width="320" height="189.5"/>
+        <image name="Corner" width="240" height="240"/>
         <image name="PhotoPermissions" width="516" height="516"/>
         <image name="arrow.down" catalog="system" width="120" height="128"/>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
@@ -3270,6 +3270,9 @@
         <image name="square.grid.2x2" catalog="system" width="128" height="114"/>
         <image name="trash" catalog="system" width="121" height="128"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
+        <namedColor name="100Blue">
+            <color red="0.0" green="0.68199998140335083" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="100ButtonTint">
             <color red="0.0" green="0.52499997615814209" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

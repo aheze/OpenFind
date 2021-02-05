@@ -218,9 +218,6 @@
 /* Settings def=General */
 "generalTutorial" = "General";
 
-/* LaunchViewController def=Go to settings */
-"goToSettings" = "Go to settings";
-
 "gotQuestionsContact" = "Got questions or want to learn more about Find? Or something else? Chat with me here!";
 
 /* No comment provided by engineer. */
