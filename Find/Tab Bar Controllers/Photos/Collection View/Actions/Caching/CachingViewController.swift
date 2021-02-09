@@ -42,7 +42,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        statusOk = false
+        CachingFinder.statusOk = false
         let cancelling = NSLocalizedString("cancelling", comment: "CachingViewController def=Cancelling...")
         cancelButton.setTitle(cancelling, for: .normal)
     }
@@ -60,20 +60,16 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     let realm = try! Realm()
     var getRealRealmModel: ((EditableHistoryModel) -> HistoryModel?)? /// get real realm managed object
     
-    var aspectRatioWidthOverHeight : CGFloat = 0
-    
-
     // MARK: Track which photos have been cached
-    var numberCached = 0
+//    var numberCached = 0
     var photosToCache = [FindPhoto]()
-    var alreadyCachedPhotos = [FindPhoto]()
+//    var alreadyCachedPhotos = [FindPhoto]()
     
-    let dispatchGroup = DispatchGroup()
-    let dispatchQueue = DispatchQueue(label: "taskQueue")
-    let dispatchSemaphore = DispatchSemaphore(value: 0)
+//    let dispatchGroup = DispatchGroup()
+//    let dispatchQueue = DispatchQueue(label: "taskQueue")
+//    let dispatchSemaphore = DispatchSemaphore(value: 0)
     
-    var statusOk = true ///OK = Running, no cancel
-    var isResuming = false
+//    var statusOk = true ///OK = Running, no cancel
     
     private var gradient: CAGradientLayer!
     private var newGrad: CAGradientLayer!
@@ -142,7 +138,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
             self.tintView.isHidden = false
             self.activityIndicator.isHidden = false
             
-            self.statusOk = true
+            CachingFinder.statusOk = true
             
             let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
             cancelButton.setTitle(cancel, for: .normal)
@@ -193,28 +189,28 @@ extension CachingViewController {
     
     func keepAlreadyCached() {
         DispatchQueue.main.async {
-            self.finishedCache?.giveCachedPhotos(photos: self.alreadyCachedPhotos, returnResult: .keptSome)
+            self.finishedCache?.giveCachedPhotos(photos: CachingFinder.alreadyCachedPhotos, returnResult: .keptSome)
             SwiftEntryKit.dismiss()
+            CachingFinder.resetState()
         }
     }
     func finishedFind() {
         DispatchQueue.main.async {
             self.cancelButton.isEnabled = false
-            self.finishedCache?.giveCachedPhotos(photos: self.alreadyCachedPhotos, returnResult: .completedAll)
+            self.finishedCache?.giveCachedPhotos(photos: CachingFinder.alreadyCachedPhotos, returnResult: .completedAll)
             SwiftEntryKit.dismiss()
+            CachingFinder.resetState()
         }
-        
     }
     func finishedCancelling() {
-        
         var newLabel = ""
-        if numberCached == 1 {
+        if CachingFinder.numberCached == 1 {
             let onePhotoHasAlreadyBeenCachedWouldYouKeep = NSLocalizedString("onePhotoHasAlreadyBeenCachedWouldYouKeep", comment: "CachingViewController def=1 photo has already been cached.\nWould you like to keep its cache?")
             newLabel = onePhotoHasAlreadyBeenCachedWouldYouKeep
         } else {
             let xPhotosHaveAlreadyBeenCachedWouldYouKeep = NSLocalizedString("%d photosHaveAlreadyBeenCachedWouldYouKeep", comment: "CachingViewController def=x photos have already been cached.\nWould you like to keep its cache?")
             
-            let string = String.localizedStringWithFormat(xPhotosHaveAlreadyBeenCachedWouldYouKeep, numberCached)
+            let string = String.localizedStringWithFormat(xPhotosHaveAlreadyBeenCachedWouldYouKeep, CachingFinder.numberCached)
             newLabel = string
         }
         cancelLabel.text = newLabel
@@ -223,205 +219,39 @@ extension CachingViewController {
     }
     
     func startFinding() {
+        activityIndicator.startAnimating()
+        CachingFinder.getRealRealmModel = self.getRealRealmModel
         
-        dispatchQueue.async {
-            self.numberCached = 0
-            var number = 0
-            for findPhoto in self.photosToCache {
-                if self.statusOk == true {
-                    number += 1
-                    let indP = IndexPath(item: number - 1, section: 0)
-                    DispatchQueue.main.async {
-                        self.collectionView.scrollToItem(at: indP, at: .centeredVertically, animated: true)
-                    }
-                    
-                    if let model = findPhoto.editableModel, model.isDeepSearched == true {
-                        self.numberCached += 1
-                        DispatchQueue.main.async {
-                            let xSlashxPhotosCached = NSLocalizedString("%d Slash %d PhotosCached", comment: "CachingViewController def=x/x photos cached")
-                            let string = String.localizedStringWithFormat(xSlashxPhotosCached, self.numberCached, self.photosToCache.count)
-                            self.numberCachedLabel.text = string
-                        }
-                        continue
-                    } else {
-                        self.dispatchGroup.enter()
-                        let options = PHImageRequestOptions()
-                        options.isSynchronous = true
-                        
-                        PHImageManager.default().requestImageDataAndOrientation(for: findPhoto.asset, options: options) { (data, _, _, _) in
-                            if let imageData = data {
-                                let request = VNRecognizeTextRequest { request, error in
-                                    self.handleFastDetectedText(request: request, error: error, photo: findPhoto)
-                                }
-                                request.recognitionLevel = .accurate
-                                request.recognitionLanguages = ["en_GB"]
-                                let imageRequestHandler = VNImageRequestHandler(data: imageData, orientation: .up, options: [:])
-                                do {
-                                    try imageRequestHandler.perform([request])
-                                } catch let error {
-                                    print("Error: \(error)")
-                                }
-                            }
-                        }
-                        
-                        self.dispatchSemaphore.wait()
-                    }
-                    
-                } else {
-                    break
-                }
+        CachingFinder.startedFindingFromNewPhoto = { [weak self] photoIndex in
+            guard let self = self else { return }
+            let indexPath = IndexPath(item: photoIndex - 1, section: 0)
+            DispatchQueue.main.async {
+                self.collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
             }
         }
-        dispatchGroup.notify(queue: dispatchQueue) {
-            print("Finished all requests.")
-            if self.statusOk == false {
-                DispatchQueue.main.async {
-                    self.finishedCancelling()
-                }
-            } else {
-                self.finishedFind()
-            }
-        }
-        
-    }
-    func handleFastDetectedText(request: VNRequest?, error: Error?, photo: FindPhoto) {
-        
-        numberCached += 1
-        DispatchQueue.main.async {
+        CachingFinder.completedAnotherPhoto = { [weak self] numberCached in
+            guard let self = self else { return }
+            
             let xSlashxPhotosCached = NSLocalizedString("%d Slash %d PhotosCached", comment: "CachingViewController def=x/x photos cached")
-            let string = String.localizedStringWithFormat(xSlashxPhotosCached, self.numberCached, self.photosToCache.count)
-            self.numberCachedLabel.text = string
-            
-            guard let results = request?.results, results.count > 0 else {
-                
-                if let editableModel = photo.editableModel {
-                    if let realModel = self.getRealRealmModel?(editableModel) {
-                        do {
-                            try self.realm.write {
-                                realModel.isDeepSearched = true
-                                self.realm.delete(realModel.contents)
-                            }
-                        } catch {
-                            print("Error saving cache. \(error)")
-                        }
-                    }
-                    editableModel.isDeepSearched = true
-                    editableModel.contents.removeAll()
-                } else {
-                    let newModel = HistoryModel()
-                    newModel.assetIdentifier = photo.asset.localIdentifier
-                    newModel.isDeepSearched = true
-                    newModel.isTakenLocally = false
-                    
-                    do {
-                        try self.realm.write {
-                            self.realm.add(newModel)
-                        }
-                    } catch {
-                        print("Error saving model \(error)")
-                    }
-                    
-                    let editableModel = EditableHistoryModel()
-                    editableModel.assetIdentifier = photo.asset.localIdentifier
-                    editableModel.isDeepSearched = true
-                    editableModel.isTakenLocally = false
-                    
-                    photo.editableModel = editableModel
-                }
-                
-                self.alreadyCachedPhotos.append(photo)
-                self.dispatchSemaphore.signal()
-                self.dispatchGroup.leave()
-                return
+            let string = String.localizedStringWithFormat(xSlashxPhotosCached, numberCached, CachingFinder.photosToCache.count)
+            DispatchQueue.main.async {
+                self.numberCachedLabel.text = string
             }
-            
-            var contents = [EditableSingleHistoryContent]()
-            for result in results {
-                if let observation = result as? VNRecognizedTextObservation {
-                    for text in observation.topCandidates(1) {
-                        print("text: \(text.string)")
-                        let origX = observation.boundingBox.origin.x
-                        let origY = 1 - observation.boundingBox.minY
-                        let origWidth = observation.boundingBox.width
-                        let origHeight = observation.boundingBox.height
-                        
-                        let singleContent = EditableSingleHistoryContent()
-                        singleContent.text = text.string
-                        singleContent.x = origX
-                        singleContent.y = origY
-                        singleContent.width = origWidth
-                        singleContent.height = origHeight
-                        contents.append(singleContent)
-                    }
-                }
-                
-            }
-            
-            
-            
-            if let editableModel = photo.editableModel {
-                if let realModel = self.getRealRealmModel?(editableModel) {
-                    if !realModel.isDeepSearched {
-                        do {
-                            try self.realm.write {
-                                realModel.isDeepSearched = true
-                                self.realm.delete(realModel.contents)
-                                
-                                for cont in contents {
-                                    let realmContent = SingleHistoryContent()
-                                    realmContent.text = cont.text
-                                    realmContent.height = Double(cont.height)
-                                    realmContent.width = Double(cont.width)
-                                    realmContent.x = Double(cont.x)
-                                    realmContent.y = Double(cont.y)
-                                    realModel.contents.append(realmContent)
-                                }
-                            }
-                            print("after write")
-                        } catch {
-                            print("Error saving cache. \(error)")
-                        }
-                        editableModel.isDeepSearched = true
-                        editableModel.contents = contents
-                    }
-                }
-            } else {
-                let newModel = HistoryModel()
-                newModel.assetIdentifier = photo.asset.localIdentifier
-                newModel.isDeepSearched = true
-                newModel.isTakenLocally = false
-                
-                do {
-                    try self.realm.write {
-                        self.realm.add(newModel)
-                        
-                        for cont in contents {
-                            let realmContent = SingleHistoryContent()
-                            realmContent.text = cont.text
-                            realmContent.height = Double(cont.height)
-                            realmContent.width = Double(cont.width)
-                            realmContent.x = Double(cont.x)
-                            realmContent.y = Double(cont.y)
-                            newModel.contents.append(realmContent)
-                        }
-                    }
-                } catch {
-                    print("Error saving model \(error)")
-                }
-                
-                let editableModel = EditableHistoryModel()
-                editableModel.assetIdentifier = photo.asset.localIdentifier
-                editableModel.isDeepSearched = true
-                editableModel.isTakenLocally = false
-                editableModel.contents = contents /// set the contents
-                
-                photo.editableModel = editableModel
-            }
-            
-            self.alreadyCachedPhotos.append(photo)
-            self.dispatchSemaphore.signal()
-            self.dispatchGroup.leave()
         }
+        CachingFinder.finishedCancelling = { [weak self] in
+            guard let self = self else { return }
+            
+            self.finishedCancelling()
+        }
+        
+        CachingFinder.finishedFind = { [weak self] in
+            guard let self = self else { return }
+            
+            self.finishedFind()
+        }
+        
+        CachingFinder.load(with: photosToCache)
+        CachingFinder.startFinding()
     }
 }
 extension CachingViewController : UICollectionViewDelegateFlowLayout {
@@ -459,7 +289,7 @@ extension CachingViewController {
         let fillLayer = CAShapeLayer()
         fillLayer.path = pathBigRect.cgPath
         fillLayer.fillRule = CAShapeLayerFillRule.evenOdd
-        fillLayer.fillColor = UIColor(named: "Gray4")?.cgColor
+        fillLayer.fillColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1).cgColor
         
         rimView.layer.addSublayer(fillLayer)
         view.addSubview(rimView)

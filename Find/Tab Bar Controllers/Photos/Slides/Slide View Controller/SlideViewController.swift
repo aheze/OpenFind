@@ -49,8 +49,10 @@ class SlideViewController: UIViewController {
         })
         
         if cameFromFind {
+            print("Came!!!!")
             view.layoutIfNeeded()
             DispatchQueue.main.async {
+                print("high: \(self.highlights)")
                 self.drawHighlights()
             }
         }

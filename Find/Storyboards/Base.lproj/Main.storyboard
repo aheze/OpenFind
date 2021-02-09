@@ -2951,14 +2951,24 @@
                                     <constraint firstAttribute="trailing" secondItem="tkG-FL-Vjn" secondAttribute="trailing" constant="16" id="ujV-om-8CM"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2u8-oc-ier" customClass="MessageView" customModule="Find" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="712" width="428" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Z8z-db-zgy"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xfy-aH-kmF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="2u8-oc-ier" secondAttribute="bottom" constant="100" id="0x2-OW-ltx"/>
+                            <constraint firstAttribute="trailing" secondItem="2u8-oc-ier" secondAttribute="trailing" id="2MB-pn-0n9"/>
                             <constraint firstAttribute="trailing" secondItem="6tX-E6-tlq" secondAttribute="trailing" id="Ldq-qD-lZj"/>
                             <constraint firstItem="6tX-E6-tlq" firstAttribute="leading" secondItem="q1B-6m-Sbl" secondAttribute="leading" id="TBc-5A-J33"/>
                             <constraint firstItem="jB3-ed-Bdr" firstAttribute="leading" secondItem="xfy-aH-kmF" secondAttribute="leading" constant="16" id="Vek-5E-Ey1"/>
                             <constraint firstAttribute="bottom" secondItem="6tX-E6-tlq" secondAttribute="bottom" id="Vii-ur-7Za"/>
+                            <constraint firstItem="2u8-oc-ier" firstAttribute="leading" secondItem="q1B-6m-Sbl" secondAttribute="leading" id="cPC-4h-23V"/>
                             <constraint firstItem="6tX-E6-tlq" firstAttribute="top" secondItem="q1B-6m-Sbl" secondAttribute="top" id="nTh-GN-eQO"/>
                             <constraint firstItem="jB3-ed-Bdr" firstAttribute="top" secondItem="xfy-aH-kmF" secondAttribute="top" constant="16" id="tt4-6u-ERZ"/>
                         </constraints>
@@ -2967,6 +2977,8 @@
                     <connections>
                         <outlet property="backBlurView" destination="tUv-4R-c5U" id="UJj-Lu-739"/>
                         <outlet property="backButtonView" destination="jB3-ed-Bdr" id="qtV-4i-ZG4"/>
+                        <outlet property="messageView" destination="2u8-oc-ier" id="nBw-ai-Qxf"/>
+                        <outlet property="messageViewBottomC" destination="0x2-OW-ltx" id="m3F-xf-k7z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I4j-4R-aY6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

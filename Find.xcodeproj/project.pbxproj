@@ -39,6 +39,7 @@
 		3C2C6F9625AE21BB00958647 /* PhotosVC+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */; };
 		3C369709259EEFE500A6544A /* PhotosMigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C369708259EEFE500A6544A /* PhotosMigrationView.swift */; };
 		3C389ED3259BA0D5007DB33B /* ListBuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */; };
+		3C3B6C7625D30F3D0082B86C /* CachingFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3B6C7525D30F3D0082B86C /* CachingFinder.swift */; };
 		3C3D47C625A40133002B8BBF /* PhotosVC+PHAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47C525A40133002B8BBF /* PhotosVC+PHAssets.swift */; };
 		3C3D47C925A40170002B8BBF /* PhotosVC+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47C825A40170002B8BBF /* PhotosVC+Sorting.swift */; };
 		3C3D47DA25A40A4E002B8BBF /* PhotoPermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D47D925A40A4E002B8BBF /* PhotoPermissionView.swift */; };
@@ -291,6 +292,7 @@
 		3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Actions.swift"; sourceTree = "<group>"; };
 		3C369708259EEFE500A6544A /* PhotosMigrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationView.swift; sourceTree = "<group>"; };
 		3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBuilderViewController.swift; sourceTree = "<group>"; };
+		3C3B6C7525D30F3D0082B86C /* CachingFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingFinder.swift; sourceTree = "<group>"; };
 		3C3D47C525A40133002B8BBF /* PhotosVC+PHAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+PHAssets.swift"; sourceTree = "<group>"; };
 		3C3D47C825A40170002B8BBF /* PhotosVC+Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Sorting.swift"; sourceTree = "<group>"; };
 		3C3D47D925A40A4E002B8BBF /* PhotoPermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPermissionView.swift; sourceTree = "<group>"; };
@@ -1251,6 +1253,7 @@
 			isa = PBXGroup;
 			children = (
 				49D985B3241B374B005F4E92 /* CachingViewController.swift */,
+				3C3B6C7525D30F3D0082B86C /* CachingFinder.swift */,
 				49D985B5241B3847005F4E92 /* CacheCell.swift */,
 			);
 			path = Caching;
@@ -1620,6 +1623,7 @@
 				3CB6842C259FF9A700AE0AD6 /* SegmentedSlider.swift in Sources */,
 				3CAD947125BF3831001D5E0A /* CameraVC+CacheFind.swift in Sources */,
 				3CE306E3259AC4B000F1B2E2 /* State.swift in Sources */,
+				3C3B6C7625D30F3D0082B86C /* CachingFinder.swift in Sources */,
 				49563501243591650001E8C6 /* RateTheApp.swift in Sources */,
 				3C56C5A225A95C970006A667 /* PhotoSlidesVC+SetFirstVC.swift in Sources */,
 				49563523243694BC0001E8C6 /* ConstraintsHelper.swift in Sources */,

@@ -59,40 +59,43 @@ extension PhotoSlidesViewController {
             
             
         } else {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController
-            
-            var attributes = EKAttributes.centerFloat
-            attributes.displayDuration = .infinity
-            attributes.entryInteraction = .absorbTouches
-            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-            attributes.entryBackground = .color(color: .white)
-            attributes.screenInteraction = .absorbTouches
-            
-            let cacheControllerHeight = max(screenBounds.size.height - CGFloat(300), 410)
-            
-            attributes.positionConstraints.size.height = .constant(value: cacheControllerHeight)
-            attributes.positionConstraints.maxSize = .init(width: .constant(value: 450), height: .constant(value: 550))
-            
-            attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
-            attributes.lifecycleEvents.didAppear = {
-                cacheController.doneAnimating()
-            }
-            
-            cacheController.photosToCache = [findPhoto]
-            cacheController.getRealRealmModel = { [weak self] object in
-                guard let self = self else { return nil }
-                if let realObject = self.getRealModel?(object) {
-                    return realObject
-                } else {
-                    return nil
-                }
-            }
-            cacheController.finishedCache = self
-            cacheController.view.layer.cornerRadius = 10
-            
-            SwiftEntryKit.display(entry: cacheController, using: attributes)
+            pageViewController.dataSource = nil
+            pageViewController.dataSource = self
+//            self.datas
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController
+//
+//            var attributes = EKAttributes.centerFloat
+//            attributes.displayDuration = .infinity
+//            attributes.entryInteraction = .absorbTouches
+//            attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
+//            attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
+//            attributes.entryBackground = .color(color: .white)
+//            attributes.screenInteraction = .absorbTouches
+//
+//            let cacheControllerHeight = max(screenBounds.size.height - CGFloat(300), 410)
+//
+//            attributes.positionConstraints.size.height = .constant(value: cacheControllerHeight)
+//            attributes.positionConstraints.maxSize = .init(width: .constant(value: 450), height: .constant(value: 550))
+//
+//            attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+//            attributes.lifecycleEvents.didAppear = {
+//                cacheController.doneAnimating()
+//            }
+//
+//            cacheController.photosToCache = [findPhoto]
+//            cacheController.getRealRealmModel = { [weak self] object in
+//                guard let self = self else { return nil }
+//                if let realObject = self.getRealModel?(object) {
+//                    return realObject
+//                } else {
+//                    return nil
+//                }
+//            }
+//            cacheController.finishedCache = self
+//            cacheController.view.layer.cornerRadius = 10
+//
+//            SwiftEntryKit.display(entry: cacheController, using: attributes)
             
         }
         

@@ -67,7 +67,9 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
                 let resultPhoto = resultPhotos[slideViewController.index]
                 
                 if resultPhoto.currentMatchToColors.map({ $0 != matchToColors }) ?? true {
-                    slideViewController.removeAllHighlights()
+                    if !cameFromFind {
+                        slideViewController.removeAllHighlights()
+                    }
                 }
             }
         }

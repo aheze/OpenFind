@@ -28,8 +28,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             deviceIsRoundPad = window?.safeAreaInsets.top ?? 30 < 30
         }
         
-        
-        print("has notch? \(deviceHasNotch)")
         if deviceHasNotch {
             ConstantVars.shutterBottomDistance = Constants.framelessShutterBottomDistance
             ConstantVars.tabHeight = Constants.iPhoneXTabHeight
@@ -38,7 +36,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             ConstantVars.tabHeight = Constants.iPhone8TabHeight
         }
         
-        print("View scene delegate!, notch: \(deviceHasNotch)")
+        UserDefaults.standard.register(defaults: ["swipeToNavigateEnabled": true])
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

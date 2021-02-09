@@ -63,6 +63,8 @@ class MessageView: UIView {
         shadeView.alpha = 0
         labelContainerView.alpha = 0
         blurView.effect = nil
+        
+        self.isUserInteractionEnabled = false
     }
     
     

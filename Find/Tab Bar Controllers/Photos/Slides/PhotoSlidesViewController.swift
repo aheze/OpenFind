@@ -48,6 +48,8 @@ class PhotoSlidesViewController: UIViewController {
     // MARK: Find from cache
     var numberCurrentlyFindingFromCache = 0 /// how many cache findings are currently going on
     var deviceWidth = UIScreen.main.bounds.width
+    @IBOutlet weak var messageView: MessageView!
+    @IBOutlet weak var messageViewBottomC: NSLayoutConstraint!
     
     // MARK: Fast find
     var numberCurrentlyFastFinding = 0
@@ -94,6 +96,8 @@ class PhotoSlidesViewController: UIViewController {
         if !cameFromFind {
             backButtonView.removeFromSuperview()
         }
+        
+        messageViewBottomC.constant = CGFloat(ConstantVars.tabHeight) + 16
     }
     
     // MARK: Delegate back to PhotosVC

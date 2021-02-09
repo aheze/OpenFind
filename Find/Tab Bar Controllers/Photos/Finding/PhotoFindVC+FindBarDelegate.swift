@@ -22,6 +22,7 @@ extension PhotoFindViewController: FindBarDelegate {
             tableView.reloadData()
             currentFastFindProcess = nil
             self.progressView.alpha = 0
+            self.tableView.alpha = 1
         }
     }
     
