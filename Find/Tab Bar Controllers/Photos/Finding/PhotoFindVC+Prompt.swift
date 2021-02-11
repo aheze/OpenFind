@@ -9,6 +9,12 @@
 import UIKit
 import SwiftRichString
 
+//extension PhotoFindViewController: UITextViewDelegate {
+//    func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+//        <#code#>
+//    }
+//}
+
 extension PhotoFindViewController {
     func changePromptToStarting(startingFilter: PhotoFilter, howManyPhotos: Int, isAllPhotos: Bool) {
          
@@ -74,7 +80,7 @@ extension PhotoFindViewController {
         }
         
         
-        promptLabel.attributedText = attributedText
+        promptTextView.attributedText = attributedText
     }
     func setPromptToHowManyCacheResults(howMany: Int) {
         let textStyle = Style {
@@ -104,7 +110,7 @@ extension PhotoFindViewController {
         let nextButtonAttachment = AttributedString(image: Image(named: "ContinueButton"), bounds: "0,-6,76,24")
         
         let attributedText = "\(howMany)".set(style: textStyle) + resultsInCache + nextButtonAttachment! + toFindFromPhotos
-        promptLabel.attributedText = attributedText
+        promptTextView.attributedText = attributedText
     }
     func setPromptToHowManyFastFound(howMany: Int) { /// how many finished finding
         let textStyle = Style {
@@ -121,7 +127,7 @@ extension PhotoFindViewController {
             attributedText = "\(findingFromPhotos) (\(howMany)/\(findPhotos.count))...".set(style: textStyle)
         }
         
-        promptLabel.attributedText = attributedText
+        promptTextView.attributedText = attributedText
     }
     /// Finished searching cache and uncached photos
     func setPromptToFinishedFastFinding(howMany: Int) {
@@ -144,7 +150,7 @@ extension PhotoFindViewController {
         let lowercasePhotos = NSLocalizedString("lowercasePhotos", comment: "")
         
         let attributedText = "\(howMany)\(spaceOrUnit)\(results)\(_in_)\(resultPhotos.count)\(spaceOrZhangUnit)\(lowercasePhotos)".set(style: textStyle)
-        promptLabel.attributedText = attributedText
+        promptTextView.attributedText = attributedText
     }
 }
 

@@ -2106,28 +2106,29 @@
                                 <rect key="frame" x="0.0" y="50" width="428" height="876"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="Alc-Nu-G0B">
-                                    <rect key="frame" x="0.0" y="0.0" width="428" height="121"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="428" height="171"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelq nwiue qwhqw oiwuolqiwu qw qw qpwiu qwipou qpqwe" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FgX-GJ-ZZY">
-                                            <rect key="frame" x="16" y="6" width="396" height="111"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Labelq nwiue qwhqw oiwuolqiwu qw qw qpwiu qwipou qpqwe" translatesAutoresizingMaskIntoConstraints="NO" id="hr9-ri-1xc">
+                                            <rect key="frame" x="16" y="8" width="396" height="159"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="textColor" systemColor="secondaryLabelColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="continue"/>
+                                        </textView>
                                     </subviews>
                                     <viewLayoutGuide key="safeArea" id="Hj3-NY-9ND"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="FgX-GJ-ZZY" firstAttribute="leading" secondItem="Alc-Nu-G0B" secondAttribute="leading" constant="16" id="73D-zZ-Yi5"/>
-                                        <constraint firstAttribute="trailing" secondItem="FgX-GJ-ZZY" secondAttribute="trailing" constant="16" id="AXk-CP-9dH"/>
-                                        <constraint firstItem="FgX-GJ-ZZY" firstAttribute="top" secondItem="Hj3-NY-9ND" secondAttribute="top" constant="6" id="UcA-e3-zio"/>
-                                        <constraint firstItem="Hj3-NY-9ND" firstAttribute="bottom" secondItem="FgX-GJ-ZZY" secondAttribute="bottom" constant="4" id="nMt-j2-LcF"/>
+                                        <constraint firstItem="hr9-ri-1xc" firstAttribute="leading" secondItem="Hj3-NY-9ND" secondAttribute="leading" constant="16" id="NPt-j5-L94"/>
+                                        <constraint firstItem="hr9-ri-1xc" firstAttribute="top" secondItem="Hj3-NY-9ND" secondAttribute="top" constant="8" id="oTf-hx-5VY"/>
+                                        <constraint firstItem="Hj3-NY-9ND" firstAttribute="bottom" secondItem="hr9-ri-1xc" secondAttribute="bottom" constant="4" id="oX8-aD-6g8"/>
+                                        <constraint firstItem="Hj3-NY-9ND" firstAttribute="trailing" secondItem="hr9-ri-1xc" secondAttribute="trailing" constant="16" id="yv8-pg-XDk"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HFindCell" rowHeight="97.5" id="aMT-Hz-Iax" customClass="HistoryFindCell" customModule="Find" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="149" width="428" height="97.5"/>
+                                        <rect key="frame" x="0.0" y="199" width="428" height="97.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aMT-Hz-Iax" id="X2A-rq-8jB">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="97.5"/>
@@ -2299,7 +2300,7 @@
                     <connections>
                         <outlet property="findBar" destination="4BQ-22-UbH" id="3mF-9R-rcs"/>
                         <outlet property="progressView" destination="7CF-yv-drp" id="m7U-4M-Laq"/>
-                        <outlet property="promptLabel" destination="FgX-GJ-ZZY" id="hyu-RO-IzP"/>
+                        <outlet property="promptTextView" destination="hr9-ri-1xc" id="lGl-6k-QLj"/>
                         <outlet property="promptView" destination="Alc-Nu-G0B" id="Q1w-s6-Ig4"/>
                         <outlet property="tableView" destination="Gzv-fX-Vyn" id="RGq-Mk-wxL"/>
                     </connections>
