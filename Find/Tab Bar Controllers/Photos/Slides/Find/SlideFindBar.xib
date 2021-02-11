@@ -15,7 +15,7 @@
                 <outlet property="blurViewHeightC" destination="dex-0t-5tI" id="jTu-XY-wRP"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="5ZX-tN-oI1"/>
                 <outlet property="findBar" destination="NSH-89-PEK" id="T6k-RL-v9b"/>
-                <outlet property="promptLabel" destination="xHg-us-Sf8" id="SHF-pL-6UW"/>
+                <outlet property="promptTextView" destination="5pf-0P-3vM" id="RD5-QK-ead"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -41,25 +41,26 @@
                         <constraint firstAttribute="height" constant="35" id="WQO-Tf-U91"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHg-us-Sf8">
-                    <rect key="frame" x="16" y="48" width="469" height="20.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Hi" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5pf-0P-3vM">
+                    <rect key="frame" x="16" y="48" width="469" height="36.5"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="textColor" systemColor="secondaryLabelColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="continue"/>
+                </textView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="xHg-us-Sf8" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="52K-R3-ubM"/>
                 <constraint firstItem="vtS-Xh-R92" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="5lW-q5-Gdd"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="5pf-0P-3vM" secondAttribute="trailing" constant="16" id="8Vj-5q-o8s"/>
                 <constraint firstItem="NSH-89-PEK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="AJh-bo-DyO"/>
                 <constraint firstItem="vtS-Xh-R92" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="CMg-0r-cfM"/>
+                <constraint firstItem="5pf-0P-3vM" firstAttribute="top" secondItem="NSH-89-PEK" secondAttribute="bottom" constant="8" id="FZA-LH-OBg"/>
                 <constraint firstAttribute="trailing" secondItem="NSH-89-PEK" secondAttribute="trailing" constant="16" id="fVy-IN-NLx"/>
                 <constraint firstAttribute="trailing" secondItem="vtS-Xh-R92" secondAttribute="trailing" id="fcX-J2-yDQ"/>
-                <constraint firstItem="xHg-us-Sf8" firstAttribute="top" secondItem="NSH-89-PEK" secondAttribute="bottom" constant="8" id="gIN-gA-hqd"/>
+                <constraint firstItem="5pf-0P-3vM" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="gUf-Z0-CdD"/>
                 <constraint firstItem="NSH-89-PEK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="s2g-kC-AL4"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="xHg-us-Sf8" secondAttribute="trailing" constant="16" id="tAi-Q8-2gt"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="74.637681159420296" y="-165.06696428571428"/>

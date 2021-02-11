@@ -36,10 +36,7 @@ extension PhotoSlidesViewController: FindBarDelegate {
     }
     
     func pressedReturn() {
-        if numberCurrentlyFindingFromCache == 0 {
-            setPromptToFastFinding()
-            fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
-        }
+        pressedContinue()
     }
     
     func triedToEdit() {
@@ -49,5 +46,11 @@ extension PhotoSlidesViewController: FindBarDelegate {
     func triedToEditWhilePaused() {
     }
     
+    func pressedContinue() {
+        if numberCurrentlyFindingFromCache == 0 {
+            setPromptToFastFinding()
+            fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
+        }
+    }
 }
 

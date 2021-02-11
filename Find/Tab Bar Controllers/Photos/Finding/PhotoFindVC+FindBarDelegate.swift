@@ -30,16 +30,20 @@ extension PhotoFindViewController: FindBarDelegate {
     }
     
     func pressedReturn() {
-        if numberCurrentlyFindingFromCache == 0 {
-            setPromptToHowManyFastFound(howMany: 0)
-            fastFind()
-        }
+        pressedContinue()
     }
     
     func triedToEdit() {
     }
     
     func triedToEditWhilePaused() {
+    }
+    
+    func pressedContinue() {
+        if numberCurrentlyFindingFromCache == 0 {
+            setPromptToHowManyFastFound(howMany: 0)
+            fastFind()
+        }
     }
     
 }

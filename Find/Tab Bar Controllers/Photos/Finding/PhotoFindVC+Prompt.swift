@@ -9,11 +9,13 @@
 import UIKit
 import SwiftRichString
 
-//extension PhotoFindViewController: UITextViewDelegate {
-//    func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-//        <#code#>
-//    }
-//}
+extension PhotoFindViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        pressedContinue()
+        findBar.searchField.resignFirstResponder()
+        return true
+    }
+}
 
 extension PhotoFindViewController {
     func changePromptToStarting(startingFilter: PhotoFilter, howManyPhotos: Int, isAllPhotos: Bool) {
@@ -76,7 +78,7 @@ extension PhotoFindViewController {
         if let overriddenLastPart = overriddenLastPart {
             attributedText = findingFrom.set(styles: [boldStyle, grayStyle]) + filter.set(styles: [boldStyle, colorStyle]) + overriddenLastPart.set(styles: [boldStyle, grayStyle])
         } else {
-            attributedText = findingFrom.set(styles: [boldStyle, grayStyle]) + number.set(style: boldStyle) + filter.set(styles: [boldStyle, colorStyle]) + photos.set(styles: [boldStyle, grayStyle])
+            attributedText = findingFrom.set(styles: [boldStyle, grayStyle]) + number.set(styles: [boldStyle, grayStyle]) + filter.set(styles: [boldStyle, colorStyle]) + photos.set(styles: [boldStyle, grayStyle])
         }
         
         

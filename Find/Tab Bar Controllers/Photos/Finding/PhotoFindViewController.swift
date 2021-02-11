@@ -13,7 +13,6 @@ class PhotoFindViewController: UIViewController {
     // MARK: Find bar
     @IBOutlet weak var findBar: FindBar!
     @IBOutlet var promptView: UIView!
-//    @IBOutlet weak var promptLabel: UILabel!
     @IBOutlet weak var promptTextView: UITextView!
     
     // MARK: Finding
@@ -49,6 +48,7 @@ class PhotoFindViewController: UIViewController {
         super.viewDidLoad()
         setup()
         promptTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        promptTextView.delegate = self
     }
     
     override func viewDidLayoutSubviews() {

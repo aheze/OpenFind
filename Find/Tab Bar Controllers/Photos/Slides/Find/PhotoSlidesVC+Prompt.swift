@@ -9,7 +9,13 @@
 import UIKit
 import SwiftRichString
 
-//    blurViewHeightC
+extension PhotoSlidesViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        pressedContinue()
+        slideFindBar?.findBar.searchField.resignFirstResponder()
+        return true
+    }
+}
 extension PhotoSlidesViewController {
     func changePromptToStarting() {
         slideFindBar?.hasPrompt = false
@@ -19,20 +25,20 @@ extension PhotoSlidesViewController {
     func animatePromptReveal(reveal: Bool = true) {
         slideFindBar?.layoutIfNeeded()
         if reveal {
-            let promptHeight = slideFindBar?.promptLabel.bounds.height ?? 0
+            let promptHeight = slideFindBar?.promptTextView.bounds.height ?? 0
             
             slideFindBar?.blurViewHeightC.constant = 45 + promptHeight + 16
             
             UIView.animate(withDuration: 0.2) {
                 self.slideFindBar?.layoutIfNeeded()
-                self.slideFindBar?.promptLabel.alpha = 1
+                self.slideFindBar?.promptTextView.alpha = 1
             }
         } else {
             slideFindBar?.blurViewHeightC.constant = 45
             
             UIView.animate(withDuration: 0.2) {
                 self.slideFindBar?.layoutIfNeeded()
-                self.slideFindBar?.promptLabel.alpha = 0
+                self.slideFindBar?.promptTextView.alpha = 0
             }
         }
     }
@@ -63,7 +69,7 @@ extension PhotoSlidesViewController {
         let nextButtonAttachment = AttributedString(image: Image(named: "ContinueButton"), bounds: "0,-6,76,24")
         
         let attributedText = "\(howMany)".set(style: textStyle) + resultsInCache + nextButtonAttachment! + toFindFromPhotos
-        slideFindBar?.promptLabel.attributedText = attributedText
+        slideFindBar?.promptTextView.attributedText = attributedText
         slideFindBar?.hasPrompt = true
         animatePromptReveal()
     }
@@ -85,7 +91,7 @@ extension PhotoSlidesViewController {
         
         let attributedText = press.set(style: textStyle) + nextButtonAttachment! + toFindFromPhotos
         
-        slideFindBar?.promptLabel.attributedText = attributedText
+        slideFindBar?.promptTextView.attributedText = attributedText
         slideFindBar?.hasPrompt = true
         animatePromptReveal()
     }
@@ -99,7 +105,7 @@ extension PhotoSlidesViewController {
         let findingWithOCR = NSLocalizedString("findingWithOCR", comment: "")
         
         let attributedText = findingWithOCR.set(style: textStyle)
-        slideFindBar?.promptLabel.attributedText = attributedText
+        slideFindBar?.promptTextView.attributedText = attributedText
         slideFindBar?.hasPrompt = true
         animatePromptReveal()
     }
@@ -121,7 +127,7 @@ extension PhotoSlidesViewController {
         }
         
         let attributedText = "\(howMany)\(spaceOrUnit)\(results)".set(style: textStyle)
-        slideFindBar?.promptLabel.attributedText = attributedText
+        slideFindBar?.promptTextView.attributedText = attributedText
         slideFindBar?.hasPrompt = true
         animatePromptReveal()
     }

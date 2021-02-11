@@ -18,6 +18,7 @@ extension PhotoSlidesViewController {
             } else {
                 if self.findPressed {
                     slideFindBarTopC?.update(offset: -45)
+                    slideFindBar?.findBar.searchField.resignFirstResponder()
                 }
                 UIView.animate(withDuration: 0.25) {
                     

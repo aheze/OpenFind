@@ -23,6 +23,7 @@ extension PhotoSlidesViewController {
         view.layoutIfNeeded()
         
         slideFindBar.findBar.findBarDelegate = self
+        slideFindBar.promptTextView.delegate = self
         self.slideFindBar = slideFindBar
     }
     
