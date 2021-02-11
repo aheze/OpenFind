@@ -65,6 +65,7 @@ class CachingFinder {
                             if let imageData = data {
                                 
                                 let savedID = currentCachingIdentifier /// save for the current cycle
+                                
                                 let request = VNRecognizeTextRequest { request, error in
                                     self.handleFastDetectedText(request: request, error: error, photo: findPhoto, currentID: savedID)
                                 }
@@ -72,7 +73,9 @@ class CachingFinder {
                                 request.recognitionLanguages = ["en_GB"]
                                 
                                 request.progressHandler = { (_, progress, _) in
-                                    self.reportProgress?(CGFloat(progress))
+                                    if let savedID = savedID, savedID == currentCachingIdentifier {
+                                        self.reportProgress?(CGFloat(progress))
+                                    }
                                 }
                                 
                                 let imageRequestHandler = VNImageRequestHandler(data: imageData, orientation: .up, options: [:])
@@ -93,10 +96,8 @@ class CachingFinder {
             }
         }
         dispatchGroup.notify(queue: dispatchQueue) {
-            print("Finished all requests.")
+            print("Finished caching.")
             if reportProgress == nil {
-                print("reportProgress is nil")
-                
                 if self.statusOk == false {
                     DispatchQueue.main.async {
                         CachingFinder.finishedCancelling?()
@@ -104,8 +105,6 @@ class CachingFinder {
                 } else {
                     CachingFinder.finishedFind?(currentCachingIdentifier)
                 }
-            } else {
-                print("Report progress is not nil")
             }
         }
         
@@ -139,9 +138,6 @@ class CachingFinder {
                     }
                 }
             }
-            
-//            print("Outside ID: \(currentCachingIdentifier)")
-//            print("Report progress? \(reportProgress), currentID: \(currentID)")
             
             if reportProgress == nil && currentID == nil {
                 saveToDisk(photo: photo, contentsToSave: contents)
