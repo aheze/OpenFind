@@ -83,6 +83,7 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
             
             
             if !cameFromFind {
+                temporaryCachingPhoto = nil
                 let resultPhoto = resultPhotos[currentIndex]
                 if let editableModel = resultPhoto.findPhoto.editableModel {
                     if editableModel.isHearted {

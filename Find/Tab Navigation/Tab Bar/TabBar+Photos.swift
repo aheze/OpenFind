@@ -93,6 +93,9 @@ extension TabBarView {
             case .shouldNotCache:
                 let shouldNotCache = NSLocalizedString("shouldNotCache", comment: "")
                 cacheButton.setTitle(shouldNotCache, for: .normal)
+            case .currentlyCaching:
+                print("")
+                break
             }
         } else {
             switch action {
@@ -107,6 +110,9 @@ extension TabBarView {
                 slideCacheButton.setTitle(shouldCache, for: .normal)
             case .shouldNotCache:
                 let shouldNotCache = NSLocalizedString("shouldNotCache", comment: "")
+                slideCacheButton.setTitle(shouldNotCache, for: .normal)
+            case .currentlyCaching:
+                let shouldNotCache = NSLocalizedString("caching...", comment: "")
                 slideCacheButton.setTitle(shouldNotCache, for: .normal)
             }
         }

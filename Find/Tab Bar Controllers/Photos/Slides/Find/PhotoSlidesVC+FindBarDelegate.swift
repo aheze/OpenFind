@@ -13,7 +13,9 @@ extension PhotoSlidesViewController: FindBarDelegate {
     }
     
     func returnTerms(matchToColorsR: [String : [CGColor]]) {
-        self.matchToColors = matchToColorsR
+        
+        currentViewController.removeAllHighlights()
+        matchToColors = matchToColorsR
         
         let resultPhoto = resultPhotos[currentIndex]
         resultPhoto.currentMatchToColors = nil
@@ -27,7 +29,6 @@ extension PhotoSlidesViewController: FindBarDelegate {
             }
         } else { /// no text entered
             changePromptToStarting()
-            currentViewController.removeAllHighlights()
         }
     }
     

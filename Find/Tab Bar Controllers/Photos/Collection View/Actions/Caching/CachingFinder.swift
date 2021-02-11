@@ -19,6 +19,8 @@ class CachingFinder {
     static var finishedCancelling: (() -> Void)?
     static var finishedFind: (() -> Void)?
     
+    static var reportProgress: ((CGFloat) -> Void)?
+    
     static let realm = try! Realm()
     static var getRealRealmModel: ((EditableHistoryModel) -> HistoryModel?)? /// get real realm managed object
     
@@ -64,6 +66,11 @@ class CachingFinder {
                                 }
                                 request.recognitionLevel = .accurate
                                 request.recognitionLanguages = ["en_GB"]
+                                
+                                request.progressHandler = { (_, progress, _) in
+                                    self.reportProgress?(CGFloat(progress))
+                                }
+                                
                                 let imageRequestHandler = VNImageRequestHandler(data: imageData, orientation: .up, options: [:])
                                 do {
                                     try imageRequestHandler.perform([request])

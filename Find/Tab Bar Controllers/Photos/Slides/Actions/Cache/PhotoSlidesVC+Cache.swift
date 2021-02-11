@@ -9,6 +9,12 @@
 import UIKit
 import SwiftEntryKit
 
+class TemporaryCachingPhoto {
+    var cachePressed = false
+    var contents = [EditableSingleHistoryContent]()
+}
+
+
 extension PhotoSlidesViewController {
     func cachePhoto() {
         let findPhoto = resultPhotos[currentIndex].findPhoto
@@ -16,7 +22,8 @@ extension PhotoSlidesViewController {
         if
             let editableModel = findPhoto.editableModel,
             let realModel = getRealModel?(editableModel),
-            realModel.isDeepSearched
+            realModel.isDeepSearched,
+            temporaryCachingPhoto?.cachePressed ?? true
         {
             let cancel = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
             let clearThisCacheQuestion = NSLocalizedString("clearThisCacheQuestion", comment: "Multifile def=Clear this photo's cache?")
@@ -36,7 +43,8 @@ extension PhotoSlidesViewController {
                     }
                     editableModel.isDeepSearched = false /// also change the editable model
                     editableModel.contents.removeAll()
-
+                    
+                    self.temporaryCachingPhoto = nil
                     self.findPhotoChanged?(findPhoto)
                     
                     if
@@ -59,8 +67,18 @@ extension PhotoSlidesViewController {
             
             
         } else {
-            pageViewController.dataSource = nil
-            pageViewController.dataSource = self
+            
+            if let temporaryCachingPhoto = temporaryCachingPhoto, temporaryCachingPhoto.cachePressed {
+                temporaryCachingPhoto.cachePressed = false
+                updateActions?(.shouldCache)
+                messageView.hideMessages()
+            } else {
+                startCaching()
+            }
+            
+            
+            
+            
 //            self.datas
 //            let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //            let cacheController = storyboard.instantiateViewController(withIdentifier: "CachingViewController") as! CachingViewController

@@ -13,6 +13,7 @@ enum ChangeActions {
     case shouldNotStar
     case shouldCache
     case shouldNotCache
+    case currentlyCaching
 }
 
 extension PhotosViewController {

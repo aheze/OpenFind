@@ -72,6 +72,10 @@ class PhotoSlidesViewController: UIViewController {
     var deletePhotoFromSlides: ((FindPhoto) -> Void)? /// delete photo
     var checkIfPhotoExists: ((FindPhoto) -> Bool)? /// check if the photo exists in the collection view
     
+    // MARK: Caching
+    var temporaryCachingPhoto: TemporaryCachingPhoto?
+    var currentProgress = CGFloat(0) /// how much cache is finished
+    
     // MARK: Transitioning
     var transitionController = ZoomTransitionController()
     

@@ -60,16 +60,8 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     let realm = try! Realm()
     var getRealRealmModel: ((EditableHistoryModel) -> HistoryModel?)? /// get real realm managed object
     
-    // MARK: Track which photos have been cached
-//    var numberCached = 0
+    // MARK: Photos to cache
     var photosToCache = [FindPhoto]()
-//    var alreadyCachedPhotos = [FindPhoto]()
-    
-//    let dispatchGroup = DispatchGroup()
-//    let dispatchQueue = DispatchQueue(label: "taskQueue")
-//    let dispatchSemaphore = DispatchSemaphore(value: 0)
-    
-//    var statusOk = true ///OK = Running, no cancel
     
     private var gradient: CAGradientLayer!
     private var newGrad: CAGradientLayer!

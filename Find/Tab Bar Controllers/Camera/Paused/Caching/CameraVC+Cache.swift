@@ -36,8 +36,10 @@ extension CameraViewController {
                 messageView.showMessage("0", dismissible: false, duration: -1)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                     if self.cachePressed {
-                        self.messageView.showMessage("25", dismissible: false, duration: -1)
-                        self.cache.cacheIcon.animateCheck(percentage: 0.25)
+                        if 25 > self.currentProgress {
+                            self.messageView.showMessage("25", dismissible: false, duration: -1)
+                            self.cache.cacheIcon.animateCheck(percentage: 0.25)
+                        }
                     }
                 }
                 
