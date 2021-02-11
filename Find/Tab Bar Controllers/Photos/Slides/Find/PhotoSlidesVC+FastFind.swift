@@ -36,7 +36,6 @@ extension PhotoSlidesViewController {
                     
                     request.customWords = customFindArray
                     
-                    
                     let imageRequestHandler = VNImageRequestHandler(data: imageData, orientation: .up, options: [:])
                     do {
                         try imageRequestHandler.perform([request])

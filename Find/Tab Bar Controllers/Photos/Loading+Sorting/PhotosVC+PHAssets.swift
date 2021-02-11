@@ -93,7 +93,6 @@ extension PhotosViewController {
         
     }
     func fetchAssets() {
-        print("fetghing")
         let status: PHAuthorizationStatus
         if #available(iOS 14, *) {
             status = PHPhotoLibrary.authorizationStatus(for: .readWrite)

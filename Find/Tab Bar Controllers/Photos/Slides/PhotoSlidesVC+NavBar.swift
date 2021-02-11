@@ -68,13 +68,10 @@ extension PhotoSlidesViewController {
     
     func updateNavigationTitle(to findPhoto: FindPhoto) {
         if let dateCreated = findPhoto.asset.creationDate {
-            print("date create was \(dateCreated)")
-            
             let dateAsString = dateCreated.convertDateToReadableString()
             
             let timeFormatter = DateFormatter()
             timeFormatter.dateFormat = "d MMM y"
-            
 
             timeFormatter.locale = Locale(identifier: "en_US_POSIX")
             timeFormatter.dateFormat = "h:mm a"

@@ -10,7 +10,6 @@ import UIKit
 
 extension CameraViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
-        print("will dissssss")
         cameBackFromSettings?()
     }
 }

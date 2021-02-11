@@ -86,7 +86,6 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
                 temporaryCachingPhoto = nil /// reset caching
                 self.currentCachingIdentifier = nil
                 CachingFinder.resetState()
-                print("setting UUID to nil")
                 
                 let resultPhoto = resultPhotos[currentIndex]
                 if let editableModel = resultPhoto.findPhoto.editableModel {

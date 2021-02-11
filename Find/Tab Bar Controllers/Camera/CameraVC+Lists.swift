@@ -39,7 +39,6 @@ extension CameraViewController {
                 
                 for selectedList in selectedLists {
                     if selectedList.dateCreated == realList.dateCreated {
-                        print("list is selected")
                         listIsSelected = true
                         newSelectedLists.append(editableList)
                         break

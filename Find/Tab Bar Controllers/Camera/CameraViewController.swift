@@ -328,7 +328,6 @@ class CameraViewController: UIViewController {
         contentTopC.constant = normalSearchFieldTopCConstant
         searchContentView.layoutIfNeeded()
         
-//        pinchGesture.delegate = self
         self.modalPresentationStyle = .automatic
         
         NotificationCenter.default.addObserver(self, selector: #selector(_KeyboardFrameChanged(_:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
@@ -347,7 +346,6 @@ class CameraViewController: UIViewController {
         settingsView.layer.cornerRadius = settingsView.bounds.width / 2
         statsBottomC.constant = CGFloat(ConstantVars.tabHeight) + 8
         settingsBottomC.constant = CGFloat(ConstantVars.tabHeight) + 8
-        
         
         configureCamera()
         busyFastFinding = false
@@ -375,8 +373,6 @@ class CameraViewController: UIViewController {
         
         whatsNewButton.alpha = 0
         
-        
-        // Initialize Version 1.0.0
         let version = WhatsNew.Version(
             major: 1,
             minor: 2,

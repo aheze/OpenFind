@@ -21,6 +21,7 @@ class CachingFinder {
     
     static var reportProgress: ((CGFloat) -> Void)?
     static var currentCachingIdentifier: UUID?
+    static var customWords = [String]()
     
     static let realm = try! Realm()
     static var getRealRealmModel: ((EditableHistoryModel) -> HistoryModel?)? /// get real realm managed object
@@ -38,8 +39,9 @@ class CachingFinder {
     static var statusOk = true ///OK = Running, no cancel
     
     
-    static func load(with photosToCache: [FindPhoto]) {
+    static func load(with photosToCache: [FindPhoto], customWords: [String] = []) {
         self.photosToCache = photosToCache
+        self.customWords = customWords
     }
     
     static func startFinding() {
@@ -71,6 +73,11 @@ class CachingFinder {
                                 }
                                 request.recognitionLevel = .accurate
                                 request.recognitionLanguages = ["en_GB"]
+                                
+                                if !customWords.isEmpty {
+                                    request.customWords = customWords
+                                }
+                                
                                 
                                 request.progressHandler = { (_, progress, _) in
                                     if let savedID = savedID, savedID == currentCachingIdentifier {
@@ -225,5 +232,6 @@ class CachingFinder {
         
         reportProgress = nil
         currentCachingIdentifier = nil
+        customWords.removeAll()
     }
 }

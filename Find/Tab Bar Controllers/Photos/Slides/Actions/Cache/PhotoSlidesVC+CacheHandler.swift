@@ -18,7 +18,6 @@ extension PhotoSlidesViewController {
         if let cachingPhoto = temporaryCachingPhoto {
             if !cachingPhoto.contents.isEmpty { /// finished already
 
-                print("Saving to disllll")
                 CachingFinder.saveToDisk(photo: currentPhoto, contentsToSave: cachingPhoto.contents)
                 
                 updateActions?(.shouldNotCache)
@@ -36,7 +35,6 @@ extension PhotoSlidesViewController {
             let newUUID = UUID()
             currentCachingIdentifier = newUUID /// set the current identifier
             CachingFinder.currentCachingIdentifier = newUUID
-            print(">>>>>>New ID is: \(newUUID)")
             
             CachingFinder.getRealRealmModel = { [weak self] object in
                 guard let self = self else { return nil }
@@ -50,8 +48,6 @@ extension PhotoSlidesViewController {
                 guard let self = self else { return }
                 
                 if let currentCachingID = self.currentCachingIdentifier {
-                    print("Current identigier inside slides is \(currentCachingID)")
-                    print("returned ID is \(cachingIdentifier)")
                     if cachingIdentifier == currentCachingID {
                         self.finishedCaching()
                     }
@@ -71,7 +67,15 @@ extension PhotoSlidesViewController {
                 
                 self.currentProgress = CGFloat(progress)
             }
-            CachingFinder.load(with: [currentPhoto])
+            
+            var customFindArray = [String]()
+            for key in matchToColors.keys {
+                customFindArray.append(key)
+                customFindArray.append(key.lowercased())
+                customFindArray.append(key.uppercased())
+                customFindArray.append(key.capitalizingFirstLetter())
+            }
+            CachingFinder.load(with: [currentPhoto], customWords: customFindArray)
             CachingFinder.startFinding()
             
             
@@ -89,8 +93,6 @@ extension PhotoSlidesViewController {
             let currentPhoto = self.resultPhotos[self.currentIndex].findPhoto
             
             if let tempPhoto = self.temporaryCachingPhoto {
-                
-                print("Finished, getting..")
                 
                 if let unsavedContents = CachingFinder.unsavedContents {
                     tempPhoto.contents = unsavedContents
