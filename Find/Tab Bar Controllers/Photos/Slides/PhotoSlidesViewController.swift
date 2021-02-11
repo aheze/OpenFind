@@ -73,6 +73,7 @@ class PhotoSlidesViewController: UIViewController {
     var checkIfPhotoExists: ((FindPhoto) -> Bool)? /// check if the photo exists in the collection view
     
     // MARK: Caching
+    var currentCachingIdentifier: UUID?
     var temporaryCachingPhoto: TemporaryCachingPhoto?
     var currentProgress = CGFloat(0) /// how much cache is finished
     

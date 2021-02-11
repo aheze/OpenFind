@@ -209,7 +209,6 @@ extension CachingViewController {
         animateChange(toCancel: true)
         
     }
-    
     func startFinding() {
         activityIndicator.startAnimating()
         CachingFinder.getRealRealmModel = self.getRealRealmModel
@@ -236,7 +235,7 @@ extension CachingViewController {
             self.finishedCancelling()
         }
         
-        CachingFinder.finishedFind = { [weak self] in
+        CachingFinder.finishedFind = { [weak self] _ in
             guard let self = self else { return }
             
             self.finishedFind()

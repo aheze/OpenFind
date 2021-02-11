@@ -31,8 +31,6 @@ class SlideViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("loaded view!!!")
-        
         scrollView.delegate = self
         scrollView.contentInsetAdjustmentBehavior = .never
         
@@ -49,10 +47,8 @@ class SlideViewController: UIViewController {
         })
         
         if cameFromFind {
-            print("Came!!!!")
             view.layoutIfNeeded()
             DispatchQueue.main.async {
-                print("high: \(self.highlights)")
                 self.drawHighlights()
             }
         }
@@ -61,7 +57,6 @@ class SlideViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.layoutIfNeeded()
-        print("drawing bounds: \(drawingView.bounds)")
         updateHighlightFrames()
     }
 }

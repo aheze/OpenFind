@@ -11,8 +11,6 @@ import UIKit
 extension ViewController {
     func getShutterButtonFrame() {
         let frame = camera.cameraIconHolder.convert(camera.cameraIconHolder.bounds, to: tabBarView)
-        print("frame is: \(frame)")
-        
         tabBarView.shutterIgnoreFrame = frame
     }
 }

@@ -17,6 +17,10 @@ extension PhotoSlidesViewController {
         
         if let cachingPhoto = temporaryCachingPhoto {
             if !cachingPhoto.contents.isEmpty { /// finished already
+
+                print("Saving to disllll")
+                CachingFinder.saveToDisk(photo: currentPhoto, contentsToSave: cachingPhoto.contents)
+                
                 updateActions?(.shouldNotCache)
                 findAfterCached()
             } else {
@@ -29,6 +33,11 @@ extension PhotoSlidesViewController {
             temporaryCachingPhoto = TemporaryCachingPhoto()
             temporaryCachingPhoto?.cachePressed = true
             
+            let newUUID = UUID()
+            currentCachingIdentifier = newUUID /// set the current identifier
+            CachingFinder.currentCachingIdentifier = newUUID
+            print(">>>>>>New ID is: \(newUUID)")
+            
             CachingFinder.getRealRealmModel = { [weak self] object in
                 guard let self = self else { return nil }
                 if let realObject = self.getRealModel?(object) {
@@ -37,13 +46,20 @@ extension PhotoSlidesViewController {
                     return nil
                 }
             }
-            CachingFinder.finishedFind = { [weak self] in
+            CachingFinder.finishedFind = { [weak self] cachingIdentifier in
                 guard let self = self else { return }
-                self.finishedCaching()
+                
+                if let currentCachingID = self.currentCachingIdentifier {
+                    print("Current identigier inside slides is \(currentCachingID)")
+                    print("returned ID is \(cachingIdentifier)")
+                    if cachingIdentifier == currentCachingID {
+                        self.finishedCaching()
+                    }
+                }
+                
             }
             CachingFinder.reportProgress = { [weak self] progress in
                 guard let self = self else { return }
-                print("prpg: \(progress), curr: \(self.currentProgress)")
                 
                 if let cachingPhoto = self.temporaryCachingPhoto, cachingPhoto.cachePressed {
                     if progress > self.currentProgress {
@@ -67,34 +83,39 @@ extension PhotoSlidesViewController {
             }
         }
     }
+    
     func finishedCaching() {
         DispatchQueue.main.async {
+            let currentPhoto = self.resultPhotos[self.currentIndex].findPhoto
             
-            
-            if let firstFindPhoto = CachingFinder.alreadyCachedPhotos.first, let tempPhoto = self.temporaryCachingPhoto {
-                if let contents = firstFindPhoto.editableModel?.contents {
-                    tempPhoto.contents = contents
-                }
+            if let tempPhoto = self.temporaryCachingPhoto {
                 
-                if tempPhoto.cachePressed {
-                    print("cach press")
-                    self.pageViewController.dataSource = self
-                    self.messageView.updateMessage("100")
-                    self.messageView.hideMessages()
-                    self.updateActions?(.shouldNotCache)
+                print("Finished, getting..")
+                
+                if let unsavedContents = CachingFinder.unsavedContents {
+                    tempPhoto.contents = unsavedContents
                     
-                    self.findPhotoChanged?(firstFindPhoto)
-                    
-                    if self.findPressed {
-                        print("find pressed")
-                        self.findAfterCached()
+                    if tempPhoto.cachePressed {
+                        
+                        CachingFinder.saveToDisk(photo: currentPhoto, contentsToSave: unsavedContents)
+                        
+                        self.pageViewController.dataSource = self
+                        self.messageView.updateMessage("100")
+                        self.messageView.hideMessages()
+                        self.updateActions?(.shouldNotCache)
+                        
+                        self.findPhotoChanged?(currentPhoto)
+                        
+                        if self.findPressed {
+                            self.findAfterCached()
+                        }
+                        
+                        let photoExists = self.checkIfPhotoExists?(currentPhoto)
+                        if photoExists == false {
+                            self.removeCurrentSlide()
+                        }
                     }
                     
-                    let photoExists = self.checkIfPhotoExists?(firstFindPhoto)
-                    if photoExists == false {
-                        print("Cached photo does not exist")
-                        self.removeCurrentSlide()
-                    }
                 }
             }
         }
