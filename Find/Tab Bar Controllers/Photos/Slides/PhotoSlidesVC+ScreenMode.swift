@@ -14,6 +14,7 @@ extension PhotoSlidesViewController {
             if self.cameFromFind {
                 UIView.animate(withDuration: 0.25) {
                     self.backButtonView.alpha = 0
+                    self.view.backgroundColor = .black
                 }
             } else {
                 if self.findPressed {
@@ -35,6 +36,7 @@ extension PhotoSlidesViewController {
             if self.cameFromFind {
                 UIView.animate(withDuration: 0.25) {
                     self.backButtonView.alpha = 1
+                    self.view.backgroundColor = .systemBackground
                 }
             } else {
                 if self.findPressed {
