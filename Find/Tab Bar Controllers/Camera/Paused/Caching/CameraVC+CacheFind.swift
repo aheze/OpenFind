@@ -41,7 +41,6 @@ extension CameraViewController {
             request.progressHandler = { (_, progress, _) in
                 if thisProcessIdentifier == self.currentCachingProcess {
                     self.currentProgress = CGFloat(progress)
-                    
                     let percent = progress * 100
                     let roundedPercent = Int(percent.rounded())
                     self.messageView.updateMessage("\(roundedPercent)")

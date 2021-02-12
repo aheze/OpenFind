@@ -14,7 +14,6 @@ extension ViewController {
         do {
             let fileURLs = try FileManager.default.contentsOfDirectory(at: globalUrl, includingPropertiesForKeys: nil)
            
-            
             if !fileURLs.isEmpty { /// there are files here
                 photoObjects = realm.objects(HistoryModel.self)
                 
@@ -26,10 +25,6 @@ extension ViewController {
                 photos.navController.viewController.migrationNeeded = true
                 photos.navController.viewController.photosToMigrate = photoArray
                 photos.navController.viewController.folderURL = globalUrl
-
-                print("fol url: \(globalUrl)")
-                print("count: \(photoObjects?.count)")
-                print("has file urls \(fileURLs.count)")
             }
             
         } catch {

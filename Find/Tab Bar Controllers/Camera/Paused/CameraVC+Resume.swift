@@ -38,6 +38,8 @@ extension CameraViewController {
         self.finishedCaching = false
         self.currentCachingProcess = nil
         
+        self.currentProgress = 0
+        
         if let cacheTipView = self.cacheTipView {
             cacheTipView.dismiss()
         }

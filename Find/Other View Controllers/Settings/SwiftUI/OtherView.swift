@@ -73,7 +73,7 @@ struct ResetSettingsView: View {
                 .default(Text("reset")) {
                     allSettings.highlightColor = "00AEEF"
                     allSettings.showTextDetectIndicator = true
-                    allSettings.hapticFeedbackLevel = 1
+                    allSettings.hapticFeedbackLevel = 2
                     allSettings.swipeToNavigateEnabled = true
                 },
                 .cancel()

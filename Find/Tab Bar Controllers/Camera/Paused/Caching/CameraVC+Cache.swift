@@ -34,9 +34,9 @@ extension CameraViewController {
                 cacheLabel.fadeTransition(0.2)
                 cacheLabel.text = NSLocalizedString("caching...", comment: "")
                 messageView.showMessage("0", dismissible: false, duration: -1)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                     if self.cachePressed {
-                        if 25 > self.currentProgress {
+                        if 0.25 > self.currentProgress {
                             self.messageView.showMessage("25", dismissible: false, duration: -1)
                             self.cache.cacheIcon.animateCheck(percentage: 0.25)
                         }
