@@ -150,6 +150,16 @@ extension PhotosViewController: UICollectionViewDelegate {
             }
         }
     }
-    
+    func collectionView(_ collectionView: UICollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
+        // Returning `true` automatically sets `collectionView.allowsMultipleSelection`
+        // to `true`. The app sets it to `false` after the user taps the Done button.
+        
+        if selectButtonSelected {
+            return true
+        } else {
+            return false
+        }
+    }
+
 }
 
