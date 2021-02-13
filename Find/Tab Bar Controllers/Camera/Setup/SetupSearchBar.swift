@@ -1,5 +1,5 @@
 //
-//  SetupRamReel.swift
+//  SetupSearchBar.swift
 //  Find
 //
 //  Created by Andrew on 11/11/19.
@@ -18,7 +18,6 @@ protocol InjectLists: class {
 
 extension CameraViewController: ToolbarButtonPressed, SelectedList, StartedEditing {
   
-    
     func buttonPressed(button: ToolbarButtonType) {
         switch button {
         case .newMatch:

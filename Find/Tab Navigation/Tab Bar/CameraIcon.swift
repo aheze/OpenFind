@@ -75,7 +75,21 @@ class CameraIcon: UIView {
         fillLayer.path = circlePath
         
         rimView.layer.borderWidth = 2
-        rimView.layer.borderColor = UIColor(named: "TabIconDetails-Light")!.cgColor
+        rimView.layer.borderColor = Constants.detailIconColorLight.cgColor
+    }
+    
+    /// For dark mode
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if ViewControllerState.currentVC is CameraViewController {
+            rimView.layer.borderColor = Constants.detailIconColorDark.cgColor
+        } else {
+            if traitCollection.userInterfaceStyle == .dark {
+                rimView.layer.borderColor = Constants.detailIconColorDark.cgColor
+            } else {
+                rimView.layer.borderColor = Constants.detailIconColorLight.cgColor
+            }
+        }
     }
     
     override func layoutSubviews() {
