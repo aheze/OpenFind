@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,7 +16,6 @@
                 <outlet property="doneButton" destination="B5C-dV-QNK" id="fgX-B2-hEq"/>
                 <outlet property="flowLayout" destination="7qj-za-ZLn" id="5l9-Rn-r0Z"/>
                 <outlet property="newMatchButton" destination="oFO-dW-9SD" id="7Jj-bK-nsq"/>
-                <outlet property="removeAllButton" destination="4fF-c0-iRr" id="YBf-Zz-yJQ"/>
                 <outlet property="visualBaseView" destination="Omm-9U-OZP" id="KFc-6b-UeD"/>
             </connections>
         </placeholder>
@@ -29,20 +30,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fF-c0-iRr">
-                                <rect key="frame" x="6" y="6" width="128" height="26"/>
-                                <color key="backgroundColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="26" id="MDj-o4-clf"/>
-                                </constraints>
-                                <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
-                                <state key="normal" title="Remove All Lists">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="removeAllPressed:" destination="-1" eventType="touchUpInside" id="Ojc-ov-Pxm"/>
-                                </connections>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="100100" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="B9B-HN-NIt">
                                 <rect key="frame" x="0.0" y="38" width="414" height="36"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -58,7 +45,7 @@
                                     <outlet property="delegate" destination="-1" id="bUw-TZ-qix"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B5C-dV-QNK">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B5C-dV-QNK">
                                 <rect key="frame" x="355" y="6" width="53" height="26"/>
                                 <color key="backgroundColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -72,8 +59,8 @@
                                     <action selector="donePressed:" destination="-1" eventType="touchUpInside" id="aX6-E5-96U"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFO-dW-9SD">
-                                <rect key="frame" x="140" y="6" width="134" height="26"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFO-dW-9SD">
+                                <rect key="frame" x="6" y="6" width="134" height="26"/>
                                 <color key="backgroundColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="3gA-Jm-Q5R"/>
@@ -92,27 +79,40 @@
                             <constraint firstAttribute="bottom" secondItem="B9B-HN-NIt" secondAttribute="bottom" constant="6" id="BKy-7I-e72"/>
                             <constraint firstItem="B9B-HN-NIt" firstAttribute="top" secondItem="B5C-dV-QNK" secondAttribute="bottom" constant="6" id="BZt-HE-1DY"/>
                             <constraint firstItem="B5C-dV-QNK" firstAttribute="top" secondItem="LOj-fv-sz0" secondAttribute="top" constant="6" id="LdL-uG-gLA"/>
-                            <constraint firstItem="4fF-c0-iRr" firstAttribute="top" secondItem="LOj-fv-sz0" secondAttribute="top" constant="6" id="cgb-U0-SXS"/>
+                            <constraint firstItem="oFO-dW-9SD" firstAttribute="leading" secondItem="LOj-fv-sz0" secondAttribute="leading" constant="6" id="No4-PS-1Hi"/>
                             <constraint firstItem="B9B-HN-NIt" firstAttribute="leading" secondItem="LOj-fv-sz0" secondAttribute="leading" id="jfn-0Q-MfR"/>
                             <constraint firstAttribute="trailing" secondItem="B9B-HN-NIt" secondAttribute="trailing" id="moj-KC-JUI"/>
                             <constraint firstItem="oFO-dW-9SD" firstAttribute="top" secondItem="LOj-fv-sz0" secondAttribute="top" constant="6" id="noZ-ua-eNK"/>
-                            <constraint firstItem="oFO-dW-9SD" firstAttribute="leading" secondItem="4fF-c0-iRr" secondAttribute="trailing" constant="6" id="pyP-jX-DAk"/>
-                            <constraint firstItem="4fF-c0-iRr" firstAttribute="leading" secondItem="LOj-fv-sz0" secondAttribute="leading" constant="6" id="yyD-LS-dGY"/>
                         </constraints>
                     </view>
                     <blurEffect style="systemUltraThinMaterialLight"/>
                 </visualEffectView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p2p-jO-5W8">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="0.5"/>
+                    <color key="backgroundColor" systemColor="placeholderTextColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.25" id="afY-bI-pnT"/>
+                    </constraints>
+                </view>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Omm-9U-OZP" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="4Dd-Dt-vHm"/>
                 <constraint firstItem="Omm-9U-OZP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="7tp-lc-dRo"/>
                 <constraint firstItem="Omm-9U-OZP" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Cmq-8e-7WN"/>
+                <constraint firstItem="p2p-jO-5W8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EaC-Jx-Atf"/>
+                <constraint firstItem="p2p-jO-5W8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="LVp-4E-It1"/>
                 <constraint firstItem="Omm-9U-OZP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="e3V-1M-fBk"/>
+                <constraint firstAttribute="trailing" secondItem="p2p-jO-5W8" secondAttribute="trailing" id="lPh-LV-z4l"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="131.8840579710145" y="357.58928571428572"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="placeholderTextColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

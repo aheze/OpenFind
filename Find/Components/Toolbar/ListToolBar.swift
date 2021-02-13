@@ -9,7 +9,6 @@
 import UIKit
 
 enum ToolbarButtonType {
-    case removeAll
     case newMatch
     case done
 }
@@ -24,29 +23,6 @@ protocol StartedEditing: class {
 }
 class ListToolBar: UIView, InjectLists {
     
-    var lightMode = false {
-        didSet {
-            var effect = UIBlurEffect()
-            if lightMode == true {
-                
-                /// based on the system, don't force dark
-                effect = UIBlurEffect(style: .systemThickMaterial)
-                
-                removeAllButton.backgroundColor = UIColor(named: "Gray3")
-                newMatchButton.backgroundColor = UIColor(named: "Gray3")
-                doneButton.backgroundColor = UIColor(named: "Gray3")
-
-                removeAllButton.setTitleColor(UIColor(named: "PureBlack"), for: .normal)
-                newMatchButton.setTitleColor(UIColor(named: "PureBlack"), for: .normal)
-                doneButton.setTitleColor(UIColor(named: "PureBlack"), for: .normal)
-            } else {
-                
-                effect = UIBlurEffect(style: .systemThickMaterialDark)
-                print("dark mode")
-            }
-            visualBaseView.effect = effect
-        }
-    }
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     var editableListCategories = [EditableFindList]()
@@ -57,21 +33,13 @@ class ListToolBar: UIView, InjectLists {
     weak var startedEditing: StartedEditing?
     
     @IBOutlet var contentView: UIView!
-    
     @IBOutlet weak var visualBaseView: UIVisualEffectView!
     
-    @IBOutlet weak var removeAllButton: UIButton!
-    
     @IBOutlet weak var newMatchButton: UIButton!
-    
     @IBOutlet weak var doneButton: UIButton!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    
-    @IBAction func removeAllPressed(_ sender: Any) {
-        pressedButton?.buttonPressed(button: .removeAll)
-    }
     
     @IBAction func newMatchPressed(_ sender: Any) {
         pressedButton?.buttonPressed(button: .newMatch)
@@ -107,18 +75,47 @@ class ListToolBar: UIView, InjectLists {
         
         flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
-        removeAllButton.layer.cornerRadius = 4
         newMatchButton.layer.cornerRadius = 4
         doneButton.layer.cornerRadius = 4
         
-        var effect = UIBlurEffect()
         contentView.backgroundColor = .clear
+        
+        var effect = UIBlurEffect()
         effect = UIBlurEffect(style: .systemThickMaterialDark)
         visualBaseView.effect = effect
+        
+        
+        setLightMode()
     }
     
     func addList(list: EditableFindList) {
         calculateWhereToInsert(component: list)
+    }
+    
+    func setLightMode() {
+
+        newMatchButton.backgroundColor = UIColor.secondarySystemFill
+        doneButton.backgroundColor = UIColor.secondarySystemFill
+        
+        newMatchButton.setTitleColor(UIColor.label, for: .normal)
+        doneButton.setTitleColor(UIColor.label, for: .normal)
+        
+        let effect = UIBlurEffect(style: .systemThickMaterial)
+        visualBaseView.effect = effect
+        
+    }
+    
+    func forceDarkMode() {
+
+        newMatchButton.backgroundColor = UIColor(named: "DarkSystemFill")
+        doneButton.backgroundColor = UIColor(named: "DarkSystemFill")
+        
+        newMatchButton.setTitleColor(UIColor.white, for: .normal)
+        doneButton.setTitleColor(UIColor.white, for: .normal)
+        
+        let effect = UIBlurEffect(style: .systemThickMaterialDark)
+        visualBaseView.effect = effect
+        
     }
     
 }

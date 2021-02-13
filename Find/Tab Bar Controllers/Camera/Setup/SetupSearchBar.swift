@@ -21,8 +21,6 @@ extension CameraViewController: ToolbarButtonPressed, SelectedList, StartedEditi
     
     func buttonPressed(button: ToolbarButtonType) {
         switch button {
-        case .removeAll:
-            removeAllLists()
         case .newMatch:
             if let selectedRange = newSearchTextField.selectedTextRange {
                 let cursorPosition = newSearchTextField.offset(from: newSearchTextField.beginningOfDocument, to: selectedRange.start)
@@ -241,24 +239,9 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             toolbarLeftC = make.left.equalTo(0).offset(0).constraint
             toolbarTopC = make.top.equalTo(0).offset(deviceSize.height).constraint
         }
-    }
-    
-    func removeAllLists() {
-        var tempArray = [EditableFindList]()
-        for singleList in selectedLists {
-            tempArray.append(singleList)
-        }
         
-        
-        selectedLists.removeAll()
-        searchCollectionView.reloadData()
-        for temp in tempArray {
-            injectListDelegate?.addList(list: temp)
-        }
-        updateListsLayout(toType: "removeListsNow")
-        sortSearchTerms()
+        toolbar.forceDarkMode()
     }
-
     func updateListsLayout(toType: String) {
         
         switch toType {

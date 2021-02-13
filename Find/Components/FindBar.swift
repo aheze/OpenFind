@@ -134,12 +134,9 @@ class FindBar: UIView, UITextFieldDelegate {
         searchField.insets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         loadListsRealm()
         
-        
-        
         let toolbar = ListToolBar()
         toolbar.frame.size = CGSize(width: deviceSize.width, height: 80)
         toolbar.editableListCategories = editableListCategories
-        toolbar.lightMode = true
         injectListDelegate = toolbar
         
         toolbar.pressedButton = self
@@ -147,6 +144,7 @@ class FindBar: UIView, UITextFieldDelegate {
         toolbar.startedEditing = self
         
         searchField.inputAccessoryView = toolbar
+        searchField.inputAccessoryView?.backgroundColor = .clear
         
         collectionView.register(SearchCollectionCell.self, forCellWithReuseIdentifier: "SearchCellid")
         searchField.layer.cornerRadius = 6
@@ -162,7 +160,7 @@ class FindBar: UIView, UITextFieldDelegate {
         searchField.keyboardAppearance = .default
         searchField.backgroundColor = UIColor.white.withAlphaComponent(0.3)
         searchField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("typeHereToFind", comment: ""), attributes: [NSAttributedString.Key.foregroundColor : UIColor.white.withAlphaComponent(0.75)])
-        
+     
     }
 }
 
@@ -334,8 +332,6 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
     
     func buttonPressed(button: ToolbarButtonType) {
         switch button {
-        case .removeAll:
-            removeAllLists()
         case .newMatch:
             if let selectedRange = searchField.selectedTextRange {
                 let cursorPosition = searchField.offset(from: searchField.beginningOfDocument, to: selectedRange.start)
@@ -356,27 +352,6 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
             findBarDelegate?.startedEditing(start: false)
         }
     }
-    func removeAllLists() {
-        for temp in selectedLists {
-            injectListDelegate?.addList(list: temp)
-        }
-        selectedLists.removeAll()
-        collectionView.reloadData()
-        collViewRightC.constant = 0
-        searchLeftC.constant = 0
-        UIView.animate(withDuration: 0.3, animations: {
-            self.layoutIfNeeded()
-        })
-        if hasExpandedAlert == true {
-            warningWidth.constant = searchField.frame.size.width
-            UIView.animate(withDuration: 0.3, animations: {
-                self.layoutIfNeeded()
-            })
-        }
-        
-        sortSearchTerms()
-    }
-    
     func addList(list: EditableFindList) {
         selectedLists.insert(list, at: 0)
         let indP = IndexPath(item: 0, section: 0)
