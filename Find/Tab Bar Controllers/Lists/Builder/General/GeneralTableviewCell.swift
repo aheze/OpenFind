@@ -78,11 +78,7 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
         let doneButton = UIButton()
         inputAView.addSubview(doneButton)
         
-        
-        
         let done = NSLocalizedString("done", comment: "Multipurpose def=Done")
-        
-        
         
         doneButton.setTitle(done, for: .normal)
         doneButton.titleEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
@@ -95,12 +91,9 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
             make.width.equalTo(60)
         }
         
-        
         doneButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         matchTextField.inputAccessoryView = inputAView
     }
-    
-    
     
     @objc func buttonAction(sender: UIButton!) {
         changedTextDelegate?.cellPressedDoneButton()
@@ -113,7 +106,6 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         animateDupRetreat()
         changedTextDelegate?.textFieldStartedEditing(indexPath: indexPath)
-        
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         changedTextDelegate?.textFieldPressedReturn()
@@ -125,8 +117,6 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
         
         return true
     }
-    
-    
 }
 
 extension UITextField {

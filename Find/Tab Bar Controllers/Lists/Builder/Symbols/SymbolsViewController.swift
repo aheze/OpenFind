@@ -15,16 +15,12 @@ protocol GetIconInfo: class {
 class SymbolsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func scrolledHere() {
-        print("scrolled here, \(currentSelectedIndex)")
         collectionView.scrollToItem(at: currentSelectedIndex, at: .centeredVertically, animated: true)
     }
     
     
     func receiveIcon(name: String) {
-        print("icon recieved: \(name)")
-        
         populateSymbols()
-        
         selectedIconName = name
     }
  
@@ -51,10 +47,11 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     lazy var referenceArray: [String] = [techLoc, weatherLoc, speechLoc, natureLoc, currencyLoc, mathLoc, numbersLoc]
     
-    var indexpathToSymbol = [IndexPath: String]()
+    var indexPathToSymbol = [IndexPath: String]()
     var sectionToCount = [Int: Int]()
     
-    private let sectionInsets = UIEdgeInsets(top: 16,
+    let spacing = CGFloat(8)
+    let sectionInsets = UIEdgeInsets(top: 16,
                                              left: 16,
                                              bottom: 16,
                                              right: 16)
@@ -79,18 +76,21 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if currentSelectedIndex != indexPath {
-            
-            if let cell = collectionView.cellForItem(at: currentSelectedIndex) as? SymbolCell {
-                cell.overlayView.alpha = 0
-            }
-            
-            currentSelectedIndex = indexPath
-            
-            selectedIconName = indexpathToSymbol[indexPath] ?? "square.grid.2x2"
-            iconDelegate?.returnNewIcon(iconName: selectedIconName)
-            
-            collectionView.reloadItems(at: [indexPath])
+        
+        currentSelectedIndex = indexPath
+        
+        if let cell = collectionView.cellForItem(at: indexPath) as? SymbolCell {
+            cell.overlayView.alpha = 1
+        }
+        
+        selectedIconName = indexPathToSymbol[indexPath] ?? "square.grid.2x2"
+        iconDelegate?.returnNewIcon(iconName: selectedIconName)
+        
+        
+    }
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: currentSelectedIndex) as? SymbolCell {
+            cell.overlayView.alpha = 0
         }
     }
     
@@ -115,12 +115,9 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
         
         
-        if let name = indexpathToSymbol[indexPath] {
-            let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 12, weight: .semibold)
-            
-            let image = UIImage(systemName: name, withConfiguration: symbolConfiguration)
-            let configuredImage = image?.withTintColor(iconColor, renderingMode: .alwaysOriginal)
-            cell.imageView.image = configuredImage
+        if let name = indexPathToSymbol[indexPath] {
+            let image = UIImage(systemName: name)
+            cell.imageView.image = image
         }
         
         return cell
@@ -131,15 +128,19 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemsPerRow = CGFloat(8)
         
-        let availableWidth = collectionView.frame.width - (sectionInsets.left * (itemsPerRow + 1))
+        let interItemSpacing = spacing * (itemsPerRow - 1)
+        let edgeSpacing = sectionInsets.left * 2
+        
+        
+        let availableWidth = collectionView.frame.width - interItemSpacing - edgeSpacing
         let widthPerItem = (availableWidth / itemsPerRow)
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.left
+        return spacing
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.left
+        return spacing
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 45)
@@ -173,9 +174,8 @@ extension SymbolsViewController {
         sectionToCount[4] = currencyList.count
         sectionToCount[5] = mathList.count
         sectionToCount[6] = numbersList.count
-        //print("we: \(weatherList.count)")
+
         for i in sectionToCount.keys {
-            //print("assasd")
             print(collectionView.numberOfSections)
             if let count = sectionToCount[i] {
                 for j in 0..<count {
@@ -197,9 +197,9 @@ extension SymbolsViewController {
                     case 6:
                         name = numbersList[j]
                     default:
-                        print("weird error NOT tempInt (is 0)")
+                        break
                     }
-                    indexpathToSymbol[indP] = name
+                    indexPathToSymbol[indP] = name
                 }
             }
         }
@@ -210,31 +210,31 @@ extension SymbolsViewController {
 
 extension SymbolsViewController {
     func highlightSelectedSymbol() {
-        var firstOccurance: (Int, Int) = (-1, -1)
-        var hasFound = false
-        let name = selectedIconName
-        for (index, weather) in techList.enumerated() {
-            if weather == name {
-                firstOccurance = (0, index)
-                hasFound = true
+        let arrays = [techList, weatherList, speechList, natureAndHealthList, currencyList, mathList, numbersList]
+        let indexPath = loopOverArrays(arrays: arrays, lookFor: selectedIconName)
+        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredVertically)
+        currentSelectedIndex = indexPath
+    }
+    
+    func loopOverArrays(arrays: [[String]], lookFor: String) -> IndexPath {
+        var indexPath: IndexPath?
+        for (arrayIndex, array) in arrays.enumerated() {
+            if let indexFound = loopOverArray(array: array, lookFor: lookFor) {
+                indexPath = IndexPath(item: indexFound, section: arrayIndex)
+                break
             }
         }
-        if !(hasFound) {
-            for (index, nat) in weatherList.enumerated() {
-//                print(nat)
-                if nat == name {
-                    firstOccurance = (1, index)
-                }
+        return indexPath ?? IndexPath(item: 0, section: 0)
+    }
+    
+    func loopOverArray(array: [String], lookFor: String) -> Int? {
+        var firstIndex: Int?
+        for (index, iconName) in array.enumerated() {
+            if iconName == lookFor {
+                firstIndex = index
+                break
             }
         }
-        if !(hasFound) { for (index, num) in speechList.enumerated() { if num == name { firstOccurance = (2, index) } } }
-        if !(hasFound) { for (index, mat) in natureAndHealthList.enumerated() { if mat == name { firstOccurance = (3, index) } } }
-        if !(hasFound) { for (index, cur) in currencyList.enumerated() { if cur == name { firstOccurance = (4, index) } } }
-        if !(hasFound) { for (index, tec) in mathList.enumerated() { if tec == name { firstOccurance = (5, index) } } }
-        if !(hasFound) { for (index, spe) in numbersList.enumerated() { if spe == name { firstOccurance = (6, index) } } }
-
-        let indP = IndexPath(item: firstOccurance.1, section: firstOccurance.0)
-        collectionView.selectItem(at: indP, animated: false, scrollPosition: .centeredVertically)
-        currentSelectedIndex = indP
+        return firstIndex
     }
 }

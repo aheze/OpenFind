@@ -9,8 +9,5 @@
 import UIKit
 
 class SymbolsSectionHeader: UICollectionReusableView {
-    
-    
     @IBOutlet weak var nameLabel: UILabel!
-    
 }

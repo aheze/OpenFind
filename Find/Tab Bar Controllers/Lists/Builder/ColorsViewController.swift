@@ -8,14 +8,17 @@
 
 import UIKit
 
-
-
 protocol GetColorInfo: class {
     func returnNewColor(colorName: String)
 }
 
-
 class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    let spacing = CGFloat(6)
+    let sectionInsets = UIEdgeInsets(top: 16,
+                                             left: 16,
+                                             bottom: 16,
+                                             right: 16)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,13 +26,9 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
             let indP = IndexPath(item: row, section: 0)
             selectedPath = row
             collectionView.selectItem(at: indP, animated: false, scrollPosition: .centeredVertically)
+            collectionView.contentInset = sectionInsets
         }
     }
-    
-    private let sectionInsets = UIEdgeInsets(top: 8.0,
-    left: 8.0,
-    bottom: 8.0,
-    right: 8.0)
     
     var colorName = "#579f2b"
     var selectedPath = -1
@@ -49,37 +48,49 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
         colorName = colorArray[indexPath.item]
         colorDelegate?.returnNewColor(colorName: colorName)
         selectedPath = indexPath.item
+        
+        if let colorCell = collectionView.cellForItem(at: indexPath) as? ColorCell {
+            colorCell.checkMarkView.alpha = 1
+        }
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        colorName = colorArray[indexPath.item]
+        if let colorCell = collectionView.cellForItem(at: indexPath) as? ColorCell {
+            colorCell.checkMarkView.alpha = 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCellID", for: indexPath) as! ColorCell
-        cell.color = colorArray[indexPath.item]
+        cell.contentView.backgroundColor = UIColor(hexString: colorArray[indexPath.item])
+        cell.contentView.layer.cornerRadius = 6
+        
         if selectedPath == indexPath.item {
-            cell.checkMarkView.isHidden = false
+            cell.checkMarkView.alpha = 1
         } else {
-            cell.checkMarkView.isHidden = true
+            cell.checkMarkView.alpha = 0
         }
         return cell
     }
     func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemsPerRow = CGFloat(5)
-        let paddingSpace = sectionInsets.left * CGFloat(itemsPerRow + 1)
-        let availableWidth = collectionView.frame.width - paddingSpace
-        let widthPerItem = availableWidth / itemsPerRow
+        let totalWidth = collectionView.bounds.width
+        let itemsPerRow = Int(totalWidth / 60)
+        
+        let interItemSpacing = spacing * (CGFloat(itemsPerRow) - 1)
+        let edgeSpacing = sectionInsets.left * 2
+        
+        let availableWidth = collectionView.frame.width - interItemSpacing - edgeSpacing
+        let widthPerItem = availableWidth / CGFloat(itemsPerRow)
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+        return spacing
     }
     func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+        return spacing
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -87,33 +98,5 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
 }
 
 class ColorCell: UICollectionViewCell {
-
     @IBOutlet weak var checkMarkView: UIImageView!
-    var color = "" {
-        didSet {
-            print(color)
-            let contentLength = bounds.size.width
-            let halfContL = contentLength / 2
-            let circlePath = UIBezierPath(arcCenter: CGPoint(x: halfContL, y: halfContL), radius: CGFloat(halfContL), startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
-
-            let shapeLayer = CAShapeLayer()
-            shapeLayer.path = circlePath.cgPath
-
-            shapeLayer.fillColor = UIColor(hexString: color).cgColor
-            contentView.layer.addSublayer(shapeLayer)
-            contentView.bringSubviewToFront(checkMarkView)
-        }
-    }
-    
-    var overlayView = UIView()
-    
-    override var isSelected: Bool {
-        didSet {
-            if (isSelected) {
-                checkMarkView.isHidden = false
-            } else {
-                checkMarkView.isHidden = true
-            }
-        }
-    }
 }

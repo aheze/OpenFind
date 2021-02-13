@@ -19,12 +19,10 @@ protocol DeleteList: class {
 class GeneralViewController: UIViewController {
     
     func receiveGeneral(nameOfList: String, desc: String, contentsOfList: [String]) {
-        print("general recieved")
         name = nameOfList
         descriptionOfList = desc
         contents = contentsOfList
     }
-    
     
     weak var generalDelegate: GetGeneralInfo?
 
@@ -42,15 +40,8 @@ class GeneralViewController: UIViewController {
     
     @IBOutlet weak var tableBottomView: UIView!
     
-    
     @IBOutlet weak var newMatchButton: UIButton!
-    @IBOutlet weak var newMatchPlus: UIButton!
-    
     @IBAction func newMatchPressed(_ sender: Any) {
-        addNewRow(end: true)
-    }
-    
-    @IBAction func newMatchPlusPressed(_ sender: Any) {
         addNewRow(end: true)
     }
     
@@ -64,11 +55,8 @@ class GeneralViewController: UIViewController {
     
     var shouldHighlightRows = false
     
-    
     var generalSpaces = [String: [Int]]()
-    
-    var stringToIndexesError = [String: [Int]]() ///A dictionary of the DUPLICATE rows- not the first occurance. These rows should be deleted.
-    
+    var stringToIndexesError = [String: [Int]]() ///A dictionary of the DUPLICATE rows- not the first occurrence. These rows should be deleted.
     
     var deleteThisList: (() -> Void)?
     
@@ -132,26 +120,9 @@ class GeneralViewController: UIViewController {
             shouldHighlightRows = true
             tableView.reloadRows(at: reloadPaths, with: .none)
         default:
-            print("ERROR!!>>")
+            break
         }
     }
-//    func showWarningIcon() {
-//        checkForErrors(contentsArray: contents)
-//        generalSpaces.removeAll()
-//        for singleSpace in singleSpaceWarning {
-//            //print("singlespace")
-//            generalSpaces["Single", default: [Int]()].append(singleSpace)
-//        }
-//        for startSpace in startSpaceWarning {
-//            //print("Startspace")
-//            generalSpaces["Start", default: [Int]()].append(startSpace)
-//        }
-//        for endSpace in endSpaceWarning {
-//            //print("Endspace")
-//            generalSpaces["End", default: [Int]()].append(endSpace)
-//        }
-//
-//    }
     
     @IBOutlet weak var descDoneButton: UIButton!
     @IBAction func descButtonDonePressed(_ sender: Any) {
@@ -217,42 +188,7 @@ class GeneralViewController: UIViewController {
         
         let help = NSLocalizedString("help", comment: "Multipurpose def=Help")
         helpViewController.title = help
-        
-//        let navigationController = UINavigationController(rootViewController: helpViewController)
-//        navigationController.view.backgroundColor = UIColor.clear
-//        navigationController.navigationBar.tintColor = UIColor.white
-//        navigationController.navigationBar.prefersLargeTitles = true
-//        
-//        let navBarAppearance = UINavigationBarAppearance()
-//        navBarAppearance.configureWithOpaqueBackground()
-//        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-//        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-//        navBarAppearance.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-//        navigationController.navigationBar.standardAppearance = navBarAppearance
-//        navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
-//        
-//        
-//        navigationController.view.layer.cornerRadius = 10
-//        UINavigationBar.appearance().barTintColor = .black
-//        helpViewController.edgesForExtendedLayout = []
-//        
-//        var attributes = EKAttributes.centerFloat
-//        attributes.displayDuration = .infinity
-//        attributes.entryInteraction = .absorbTouches
-//        attributes.scroll = .enabled(swipeable: true, pullbackAnimation: .easeOut)
-//        attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10, offset: .zero))
-//        attributes.screenBackground = .color(color: EKColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3802521008)))
-//        attributes.entryBackground = .color(color: .white)
-//        attributes.screenInteraction = .absorbTouches
-//        attributes.positionConstraints.size.height = .constant(value: screenBounds.size.height - CGFloat(100))
-//        
-//        
-//        attributes.positionConstraints.maxSize = .init(width: .constant(value: 600), height: .constant(value: 800))
-//        
-//        SwiftEntryKit.display(entry: navigationController, using: attributes)
-//        
-//        
-
+   
         let navigationController = UINavigationController(rootViewController: helpViewController)
         navigationController.navigationBar.tintColor = UIColor.white
         navigationController.navigationBar.prefersLargeTitles = true
@@ -274,7 +210,6 @@ class GeneralViewController: UIViewController {
         addingNewMatch = true
         
         if end == false { ///User pressed return to insert
-          //  print("Return INSERT")
             contents.insert("", at: currentIndexPath + 1)
             
             let tableViewHeightAfterAddRow = CGFloat(50 * contents.count)
@@ -285,9 +220,7 @@ class GeneralViewController: UIViewController {
                     self.view.layoutIfNeeded()
                 })
             }
-            
-            
-//            checkForErrors(contentsArray: contents)
+
             currentIndexPath = currentIndexPath + 1
             tableView.insertRows(at: [IndexPath(row: currentIndexPath, section: 0)], with: .automatic)
             
@@ -313,7 +246,6 @@ class GeneralViewController: UIViewController {
             contents.append("")
             let tableViewHeightAfterAddRow = CGFloat(50 * contents.count)
             
-            print("HEIGHT CONT: \(tableViewHeightAfterAddRow)")
             if tableViewHeightAfterAddRow >= 300 {
                 tableViewHeightConstraint.constant = tableViewHeightAfterAddRow
                 UIView.animate(withDuration: 0.75, animations: {
@@ -329,7 +261,6 @@ class GeneralViewController: UIViewController {
         contents.remove(at: row)
         let tableViewHeightAfterAddRow = CGFloat(50 * contents.count)
         
-        print("HEIGHT CONT: \(tableViewHeightAfterAddRow)")
         if tableViewHeightAfterAddRow >= 300 {
             tableViewHeightConstraint.constant = tableViewHeightAfterAddRow
             UIView.animate(withDuration: 0.75, animations: {
@@ -337,15 +268,12 @@ class GeneralViewController: UIViewController {
             })
         }
         
-//        checkForErrors(contentsArray: contents)
         let indP = IndexPath(row: row, section: 0)
         tableView.deleteRows(at: [indP], with: .automatic)
         
-        print("del CURR IND: \(row)....count: \(contents.count)")
         if row == contents.count { ///Cont count is now 1 less because remove
             print("last row")
         } else {
-            print("Not last row")
             let endRange = row...contents.count - 1
             
             var reloadPaths = [IndexPath]()
@@ -360,9 +288,7 @@ class GeneralViewController: UIViewController {
             }
             
             tableView.reloadRows(at: reloadPaths, with: .automatic)
-            
         }
-        
         
         if contents.count == 0 {
             addingNewMatch = true
@@ -380,7 +306,6 @@ class GeneralViewController: UIViewController {
         
         titleField.text = name
         descriptionView.text = descriptionOfList
-        
         
         topView.layer.cornerRadius = 8
         
@@ -530,19 +455,14 @@ extension GeneralViewController: ChangedTextCell {
     }
     func textFieldPressedReturn() {
         addNewRow()
-        let origPoint = CGPoint(x: 0, y: (currentIndexPath * 50) + 250)
-        
         scrollView.setContentOffset(CGPoint(x: 0, y: (currentIndexPath * 50) + 124), animated: true)
     }
     func textFieldChangedText(indexPath: Int, text: String) {
         contents[indexPath] = text
-//        showWarningIcon()
     }
     func textFieldEndedEditing(indexPath: Int, text: String) {
         contents[indexPath] = text
-//        checkForErrors(contentsArray: contents)
     }
-    
 }
 
 extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
@@ -567,20 +487,13 @@ extension GeneralViewController: UITextViewDelegate, UITextFieldDelegate {
             break
         }
     }
-
 }
 
 
 extension GeneralViewController {
     
-    
-    
-    
-
-    
     func fixDuplicates(completion: @escaping () -> Void ) {
         
-        print("dup errors: \(stringToIndexesError)")
         var toDeleteArray = [IndexPath]()
         var toDeleteValues = [Int]()
         for singleDup in stringToIndexesError {
@@ -588,10 +501,8 @@ extension GeneralViewController {
                 let newInd = IndexPath(row: value, section: 0)
                 toDeleteArray.append(newInd)
                 toDeleteValues.append(value)
-                //contents.remove(at: value)
             }
         }
-        //let indexAnimals = [0, 3, 4]
         contents = contents
             .enumerated()
             .filter { !toDeleteValues.contains($0.offset) }
@@ -601,13 +512,8 @@ extension GeneralViewController {
             self.tableView.deleteRows(at: toDeleteArray, with: .automatic)
         }) { _ in
             completion()
-//            self.doneWithEditingGeneral(overrideDone: true)
         }
-        
-        
-        
     }
-    
 }
 
 extension StringProtocol {
@@ -627,18 +533,3 @@ extension BidirectionalCollection {
         return self[i]
     }
 }
-
-
-//extension String {
-//  func removeFirstChars(length: Int) -> String {
-//        if length <= 0 {
-//            return self
-//        } else if let to = self.index(self.startIndex, offsetBy: length, limitedBy: self.endIndex) {
-//            return self.substring(from: to)
-//
-//        } else {
-//            return ""
-//        }
-//    }
-//}
-

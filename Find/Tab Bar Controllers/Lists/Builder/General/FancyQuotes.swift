@@ -19,7 +19,6 @@ extension String {
     }
 }
 
-
 struct Typographizer {
 
     var language: String {
