@@ -49,7 +49,7 @@ class ZoomAnimator: NSObject {
         toReferenceImageView.isHidden = true
         containerView.addSubview(toVC.view)
         
-        let referenceImage = fromReferenceImageView.image!
+        let referenceImage = fromReferenceImageView.image ?? UIImage()
         
         if self.transitionImageView == nil {
             let transitionImageView = UIImageView(image: referenceImage)
