@@ -29,12 +29,12 @@ extension PhotosViewController {
         SDImagePhotosLoader.shared.imageRequestOptions = options
     }
     func makeDataSource() -> DataSource {
-        // 1
+        
         let dataSource = DataSource(
             collectionView: collectionView,
             cellProvider: { (collectionView, indexPath, findPhoto) ->
                 UICollectionViewCell? in
-                // 2
+                
                 let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: self.cellReuseIdentifier,
                     for: indexPath) as? ImageCell
@@ -44,7 +44,7 @@ extension PhotosViewController {
                     let imageLength = cellLength * (self.screenScale + 1)
 
                     cell?.imageView.sd_imageTransition = .fade
-                    cell?.imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: imageLength, height: imageLength)])
+                    cell?.imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: [.fromLoaderOnly, .decodeFirstFrameOnly], context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: imageLength, height: imageLength)])
                     
                     if let model = findPhoto.editableModel {
                         cell?.cacheImageView.alpha = model.isDeepSearched ? 1 : 0
