@@ -79,6 +79,7 @@
 		3C5B156B25A7EE7900BB8988 /* NotifyTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B156A25A7EE7900BB8988 /* NotifyTransition.swift */; };
 		3C5B157325A8CD9C00BB8988 /* PhotosVC+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B157225A8CD9C00BB8988 /* PhotosVC+Selection.swift */; };
 		3C5B157825A8CE7E00BB8988 /* PhotosVC+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B157725A8CE7E00BB8988 /* PhotosVC+NavBar.swift */; };
+		3C5DFFA525D8A9E200250D34 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5DFFA425D8A9E200250D34 /* ShareView.swift */; };
 		3C634C7025C0F3170064CBF8 /* EmptyDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C634C6F25C0F3170064CBF8 /* EmptyDescriptionView.swift */; };
 		3C6DA93F25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6DA93E25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift */; };
 		3C6EE6B025A2AB350078462A /* GeneralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EE6A825A2AB350078462A /* GeneralView.swift */; };
@@ -333,6 +334,7 @@
 		3C5B156A25A7EE7900BB8988 /* NotifyTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTransition.swift; sourceTree = "<group>"; };
 		3C5B157225A8CD9C00BB8988 /* PhotosVC+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Selection.swift"; sourceTree = "<group>"; };
 		3C5B157725A8CE7E00BB8988 /* PhotosVC+NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+NavBar.swift"; sourceTree = "<group>"; };
+		3C5DFFA425D8A9E200250D34 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		3C634C6F25C0F3170064CBF8 /* EmptyDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDescriptionView.swift; sourceTree = "<group>"; };
 		3C6DA93E25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Share.swift"; sourceTree = "<group>"; };
 		3C6EE6A825A2AB350078462A /* GeneralView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralView.swift; sourceTree = "<group>"; };
@@ -768,6 +770,7 @@
 				3C6EE6AE25A2AB350078462A /* CameraSettingsView.swift */,
 				3CA679B925C390A7008A00A4 /* Support */,
 				3C6EE6AF25A2AB350078462A /* OtherView.swift */,
+				3C5DFFA425D8A9E200250D34 /* ShareView.swift */,
 				3C6EE6AC25A2AB350078462A /* CreditsView.swift */,
 			);
 			path = SwiftUI;
@@ -1593,6 +1596,7 @@
 				49A8EFAE237A5F2800328D47 /* SetupSearchBar.swift in Sources */,
 				3C56C5A625A95D120006A667 /* PhotoSlidesVC+PagingSource.swift in Sources */,
 				49301BF32402460000B4780B /* FancyQuotes.swift in Sources */,
+				3C5DFFA525D8A9E200250D34 /* ShareView.swift in Sources */,
 				49F7B1582353FE7E0099FA62 /* Component.swift in Sources */,
 				3C4C96B225B69038009FDE8D /* InfoView.swift in Sources */,
 				4953F3C0241713A100690E53 /* HistoryFindCell.swift in Sources */,

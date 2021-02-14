@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import WhatsNewKit
+import LinkPresentation
 
 struct SettingsHoster {
     static var viewController: SettingsViewHoster?
@@ -42,16 +43,12 @@ class SettingsViewHoster: UIViewController {
     
     override func loadView() {
         
-        print("curr version: \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String)")
         
         /**
          Instantiate the base `view`.
          */
         view = UIView()
-
-        /**
-         Create a `SupportDocsView`.
-         */
+        
         var settingsView = SettingsView()
         
         /**
@@ -62,14 +59,8 @@ class SettingsViewHoster: UIViewController {
             self?.dismiss(animated: true, completion: nil)
         }
         
-        /**
-         Host `supportDocsView` in a view controller.
-         */
         let hostedSettings = UIHostingController(rootView: settingsView)
         
-        /**
-         Embed `hostedSupportDocs`.
-         */
         self.addChild(hostedSettings)
         view.addSubview(hostedSettings.view)
         hostedSettings.view.frame = view.bounds
@@ -80,90 +71,144 @@ class SettingsViewHoster: UIViewController {
         SettingsHoster.viewController = self
     }
 }
+extension SettingsViewHoster {
+    func shareApp() {
+        let link = URL(string: "https://apps.apple.com/app/find-command-f-for-camera/id1506500202")!
+        
+        DispatchQueue.main.async {
+            let activityViewController = UIActivityViewController(activityItems: [link, self], applicationActivities: nil)
+            
+            if let popoverController = activityViewController.popoverPresentationController {
+                popoverController.sourceRect = CGRect(x: self.view.bounds.width / 2, y: self.view.bounds.height / 2 + 200, width: 20, height: 20)
+                popoverController.sourceView = self.view
+            }
+            
+            self.present(activityViewController, animated: true)
+            
+        }
+    }
+}
+
+
+extension SettingsViewHoster: UIActivityItemSource {
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return ""
+    }
+
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+        return nil
+    }
+
+    func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
+        
+        let appIcon = UIImage(named: "AppIconSVG")!
+        let imageProvider = NSItemProvider(object: appIcon)
+        let metadata = LPLinkMetadata()
+        metadata.title = "Find"
+        metadata.originalURL = URL(fileURLWithPath: "apps.apple.com")
+        metadata.imageProvider = imageProvider
+        return metadata
+    }
+}
+
 
 
 struct SettingsView: View {
-
     
     @ObservedObject var settings = Settings()
     var donePressed: (() -> Void)?
     
+    @State var isShowingQR = false
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                ScrollView {
-                    VStack(spacing: 2) {
-                        SectionHeaderView(text: "General")
-                        
-                        GeneralView(selectedHighlightColor: $settings.highlightColor)
+        ZStack {
+            NavigationView {
+                ZStack {
+                    ScrollView {
+                        VStack(spacing: 2) {
+                            SectionHeaderView(text: "General")
+                            
+                            GeneralView(selectedHighlightColor: $settings.highlightColor)
+                                .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                            
+                            SectionHeaderView(text: "Camera")
+                            
+                            CameraSettingsView(
+                                textDetectionIsOn: $settings.showTextDetectIndicator,
+                                hapticFeedbackLevel: $settings.hapticFeedbackLevel
+                            )
                             .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
-                        
-                        SectionHeaderView(text: "Camera")
-
-                        CameraSettingsView(
-                            textDetectionIsOn: $settings.showTextDetectIndicator,
-                            hapticFeedbackLevel: $settings.hapticFeedbackLevel
-                        )
-                            .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
-                        
-                        SectionHeaderView(text: "Support & Feedback")
-                        
-                        SupportView()
-                            .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
-                        
-                        SectionHeaderView(text: "Other")
-                        
-                        OtherView(swipeToNavigateEnabled: $settings.swipeToNavigateEnabled, allSettings: settings)
-                            .padding(EdgeInsets(top: 6, leading: 16, bottom: 16, trailing: 16))
-                        
-                        HStack(spacing: 0) {
                             
-                            Text("Version ")
-                                .foregroundColor(Color.white.opacity(0.75))
-                                .font(Font.system(size: 15, weight: .medium))
+                            SectionHeaderView(text: "Support & Feedback")
                             
-                            Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown")
-                                .foregroundColor(Color.white.opacity(0.75))
-                                .font(Font.system(size: 15, weight: .medium))
-                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 12))
+                            SupportView()
+                                .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                             
+                            SectionHeaderView(text: "Other")
                             
-                            Button(action: {
-                                let (whatsNew, configuration) = WhatsNewConfig.getWhatsNew()
-                                if let whatsNewPresent = whatsNew {
-                                    let whatsNewViewController = WhatsNewViewController(whatsNew: whatsNewPresent, configuration: configuration)
-                                    SettingsHoster.viewController?.present(whatsNewViewController, animated: true)
-                                }
-                            }) {
-                                Text("See what's new")
-                                    .foregroundColor(Color.white.opacity(0.5))
+                            OtherView(swipeToNavigateEnabled: $settings.swipeToNavigateEnabled, allSettings: settings)
+                                .padding(EdgeInsets(top: 6, leading: 16, bottom: 16, trailing: 16))
+                            
+                            ShareView(isShowingQR: $isShowingQR)
+                                .padding(EdgeInsets(top: 6, leading: 16, bottom: 16, trailing: 16))
+                            
+                            HStack(spacing: 0) {
+                                
+                                Text("Version ")
+                                    .foregroundColor(Color.white.opacity(0.75))
                                     .font(Font.system(size: 15, weight: .medium))
-                            }
-                        }
-                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0))
-                    }
-                    
-                }
-                .fixFlickering { scrollView in
-                    scrollView
-                        .background(
-                            VisualEffectView(effect: UIBlurEffect(style: .systemThickMaterialDark))
-                        )
-                }
-            }
-            .navigationBarTitle("Settings")
-            .navigationBarItems(trailing:
-                                    Button(action: {
-                                        donePressed?()
-                                    }) {
-                                        Text("done")
-                                            .font(Font.system(size: 19, weight: .regular, design: .default))
+                                
+                                Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown")
+                                    .foregroundColor(Color.white.opacity(0.75))
+                                    .font(Font.system(size: 15, weight: .medium))
+                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 12))
+                                
+                                
+                                Button(action: {
+                                    let (whatsNew, configuration) = WhatsNewConfig.getWhatsNew()
+                                    if let whatsNewPresent = whatsNew {
+                                        let whatsNewViewController = WhatsNewViewController(whatsNew: whatsNewPresent, configuration: configuration)
+                                        SettingsHoster.viewController?.present(whatsNewViewController, animated: true)
                                     }
-            )
-            .configureBar()
+                                }) {
+                                    Text("See what's new")
+                                        .foregroundColor(Color.white.opacity(0.5))
+                                        .font(Font.system(size: 15, weight: .medium))
+                                }
+                            }
+                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
+                        }
+                        
+                    }
+                    .fixFlickering { scrollView in
+                        scrollView
+                            .background(
+                                VisualEffectView(effect: UIBlurEffect(style: .systemThickMaterialDark))
+                            )
+                    }
+                }
+                .navigationBarTitle("Settings")
+                .navigationBarItems(
+                    trailing:
+                        Button(action: {
+                            donePressed?()
+                        }) {
+                            Text("done")
+                                .font(Font.system(size: 19, weight: .regular, design: .default))
+                        }
+                )
+                .configureBar()
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+            .zIndex(0)
+            
+            if isShowingQR {
+                QRCodeView(isPresented: $isShowingQR)
+                    .edgesIgnoringSafeArea(.all)
+                    .transition(.opacity)
+                    .zIndex(1)
+            }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
@@ -181,17 +226,17 @@ extension ScrollView {
         GeometryReader { geometryWithSafeArea in
             GeometryReader { geometry in
                 configurator(
-                ScrollView<AnyView>(self.axes, showsIndicators: self.showsIndicators) {
-                    AnyView(
-                    VStack {
-                        self.content
+                    ScrollView<AnyView>(self.axes, showsIndicators: self.showsIndicators) {
+                        AnyView(
+                            VStack {
+                                self.content
+                            }
+                            .padding(.top, geometryWithSafeArea.safeAreaInsets.top)
+                            .padding(.bottom, geometryWithSafeArea.safeAreaInsets.bottom)
+                            .padding(.leading, geometryWithSafeArea.safeAreaInsets.leading)
+                            .padding(.trailing, geometryWithSafeArea.safeAreaInsets.trailing)
+                        )
                     }
-                    .padding(.top, geometryWithSafeArea.safeAreaInsets.top)
-                    .padding(.bottom, geometryWithSafeArea.safeAreaInsets.bottom)
-                    .padding(.leading, geometryWithSafeArea.safeAreaInsets.leading)
-                    .padding(.trailing, geometryWithSafeArea.safeAreaInsets.trailing)
-                    )
-                }
                 )
             }
             .edgesIgnoringSafeArea(.all)

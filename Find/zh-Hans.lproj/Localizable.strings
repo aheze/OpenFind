@@ -267,6 +267,8 @@
 /* No comment provided by engineer. */
 "Light" = "轻";
 
+"Link" = "网站链接";
+
 /* ListsController def=List deleted! */
 "listDeletedExclaim" = "清单已删除！";
 
@@ -457,6 +459,8 @@
 /* No comment provided by engineer. */
 "pressText" = "点击 ";
 
+"QR Code" = "二维码";
+
 /* No comment provided by engineer. */
 "Questions & Suggestions" = "问题与建议";
 
@@ -530,6 +534,8 @@
 
 /* Settings def=Settings will be reset to default. */
 "settingsResetToDefault" = "设置将重设为默认值。";
+
+"Share Find" = "分享Find";
 
 /*GeneralViewController*/
 "shortDescriptionPlaceholder" = "简短的介绍";
