@@ -231,7 +231,7 @@
 		4999AC9D2353A81100AB06A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4999AC9C2353A81100AB06A7 /* Assets.xcassets */; };
 		4999ACA02353A81100AB06A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4999AC9E2353A81100AB06A7 /* LaunchScreen.storyboard */; };
 		49A8EFAC237A5EFE00328D47 /* SetupStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A8EFAB237A5EFE00328D47 /* SetupStats.swift */; };
-		49A8EFAE237A5F2800328D47 /* SetuSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A8EFAD237A5F2800328D47 /* SetuSearchBar.swift */; };
+		49A8EFAE237A5F2800328D47 /* SetupSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A8EFAD237A5F2800328D47 /* SetupSearchBar.swift */; };
 		49B7A32D2390823C0070209F /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49B7A32C2390823C0070209F /* Colors.xcassets */; };
 		49B7A33423923E810070209F /* ZoomTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33123923E800070209F /* ZoomTransitionController.swift */; };
 		49B7A33523923E810070209F /* ZoomDismissalInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B7A33223923E800070209F /* ZoomDismissalInteractionController.swift */; };
@@ -498,7 +498,7 @@
 		4999AC9C2353A81100AB06A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4999AC9F2353A81100AB06A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49A8EFAB237A5EFE00328D47 /* SetupStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupStats.swift; sourceTree = "<group>"; };
-		49A8EFAD237A5F2800328D47 /* SetuSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetuSearchBar.swift; sourceTree = "<group>"; };
+		49A8EFAD237A5F2800328D47 /* SetupSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupSearchBar.swift; sourceTree = "<group>"; };
 		49B7A32C2390823C0070209F /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		49B7A33123923E800070209F /* ZoomTransitionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomTransitionController.swift; sourceTree = "<group>"; };
 		49B7A33223923E800070209F /* ZoomDismissalInteractionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomDismissalInteractionController.swift; sourceTree = "<group>"; };
@@ -989,7 +989,7 @@
 			isa = PBXGroup;
 			children = (
 				49A8EFAB237A5EFE00328D47 /* SetupStats.swift */,
-				49A8EFAD237A5F2800328D47 /* SetuSearchBar.swift */,
+				49A8EFAD237A5F2800328D47 /* SetupSearchBar.swift */,
 				4952F0C1240B1DD00068564F /* SearchCell.swift */,
 				495F38FD243302D500A17D93 /* StatsViewController.swift */,
 				49563500243591650001E8C6 /* RateTheApp.swift */,
@@ -1590,7 +1590,7 @@
 				3C1317F625B3829900FCEB79 /* PhotoFindVC+Highlight.swift in Sources */,
 				3CC230EC25C2105200AD04B6 /* EasyTipView.swift in Sources */,
 				495F39012433FF1600A17D93 /* LaunchViewController.swift in Sources */,
-				49A8EFAE237A5F2800328D47 /* SetuSearchBar.swift in Sources */,
+				49A8EFAE237A5F2800328D47 /* SetupSearchBar.swift in Sources */,
 				3C56C5A625A95D120006A667 /* PhotoSlidesVC+PagingSource.swift in Sources */,
 				49301BF32402460000B4780B /* FancyQuotes.swift in Sources */,
 				49F7B1582353FE7E0099FA62 /* Component.swift in Sources */,
