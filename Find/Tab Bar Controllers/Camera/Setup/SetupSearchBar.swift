@@ -239,6 +239,8 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             toolbarLeftC = make.left.equalTo(0).offset(0).constraint
             toolbarTopC = make.top.equalTo(0).offset(deviceSize.height).constraint
         }
+        
+        toolbar.forceDarkMode()
     }
 
     func updateListsLayout(toType: String) {

@@ -22,7 +22,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var shadeView: UIView!
     
-    var isForcingStatusBarHidden = false /// for taking screenshots only
+    
     var globalUrl: URL = URL(fileURLWithPath: "")
     
     var shouldHaveStatusBar = true
@@ -94,14 +94,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 self.shouldHaveStatusBar = !shouldHide
                 UIView.animate(withDuration: 0.2) {
                     self.tabBarView.alpha = shouldHide ? 0 : 1
-                    self.setNeedsStatusBarAppearanceUpdate()
+                    self.updateStatusBar()
                 }
             }
             viewController.slidesPresentingInfo = { [weak self] presenting in
                 guard let self = self else { return }
                 self.shouldHaveLightStatusBar = presenting
                 UIView.animate(withDuration: 0.2) {
-                    self.setNeedsStatusBarAppearanceUpdate()
+                    self.updateStatusBar()
                 }
             }
             viewController.startTutorial = { [weak self] filter in
@@ -220,7 +220,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 guard let self = self else { return }
                 self.shouldHaveLightStatusBar = presenting
                 UIView.animate(withDuration: 0.3) {
-                    self.setNeedsStatusBarAppearanceUpdate()
+                    self.updateStatusBar()
                 }
             }
             viewController.listsChanged = { [weak self] in
@@ -556,3 +556,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 }
 
+extension ViewController {
+    func updateStatusBar() {
+        if !isForcingStatusBarHidden {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
+    }
+}

@@ -323,7 +323,11 @@ class CameraViewController: UIViewController {
         if deviceHasNotch && !deviceIsRoundPad {
             normalSearchFieldTopCConstant = -6
         } else {
-            normalSearchFieldTopCConstant = 6
+            if isForcingStatusBarHidden {
+                normalSearchFieldTopCConstant = -6
+            } else {
+                normalSearchFieldTopCConstant = 6
+            }
         }
         contentTopC.constant = normalSearchFieldTopCConstant
         searchContentView.layoutIfNeeded()

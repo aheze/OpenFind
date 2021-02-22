@@ -36,7 +36,7 @@ extension ViewController {
         }
         
         UIView.animate(withDuration: 0.3) {
-            self.setNeedsStatusBarAppearanceUpdate()
+            self.updateStatusBar()
         }
     }
 }

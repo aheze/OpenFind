@@ -63,6 +63,19 @@ class PhotoSlidesViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    /// Force status bar hidden
+    override var prefersStatusBarHidden: Bool {
+        if isForcingStatusBarHidden {
+            return true
+        } else {
+            if currentScreenMode == .normal {
+                return false
+            } else {
+                return true
+            }
+        }
+    }
+    
     // MARK: Actions
     let realm = try! Realm()
     var imageToShare: UIImage?

@@ -10,6 +10,14 @@ import UIKit
 
 extension PhotoSlidesViewController {
     func changeScreenMode(to: ScreenMode) {
+        if cameFromFind {
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.25) {
+                    self.setNeedsStatusBarAppearanceUpdate()
+                    self.view.layoutIfNeeded()
+                }
+            }
+        }
         if to == .full {
             if self.cameFromFind {
                 UIView.animate(withDuration: 0.25) {
