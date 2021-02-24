@@ -28,20 +28,28 @@ class CustomButton: UIButton {
     }
 
     @objc func touchDown(_ sender: UIButton) {
+        touched?(true)
         fade(true)
     }
     @objc func touchFinish(_ sender: UIButton) {
+        touched?(false)
         fade(false)
     }
+    
+    var touched: ((Bool) -> Void)? /// True if Down
+    var shouldFade = true
+    
     func fade(_ fade: Bool) {
-        if fade {
-            UIView.animate(withDuration: 0.2, animations: {
-                self.alpha = 0.5
-            })
-        } else {
-            UIView.animate(withDuration: 0.2, animations: {
-                self.alpha = 1
-            })
+        if shouldFade {
+            if fade {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.alpha = 0.5
+                })
+            } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.alpha = 1
+                })
+            }
         }
     }
 }

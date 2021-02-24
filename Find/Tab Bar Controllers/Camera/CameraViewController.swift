@@ -42,30 +42,19 @@ class CameraViewController: UIViewController {
     
     @IBOutlet weak var statsView: UIView!
     @IBOutlet weak var statsBottomC: NSLayoutConstraint!
-    @IBOutlet weak var statsButton: UIButton!
     
-    @IBAction func statsButtonDown(_ sender: Any) {
-        UIView.animate(withDuration: 0.2, animations: {
-            self.statsButton.alpha = 0.5
-        })
-    }
-    
+    @IBOutlet weak var statsButton: CustomButton!
+    @IBOutlet weak var statsLabel: LTMorphingLabel!
     @IBAction func statsButtonPressed(_ sender: Any) {
-        UIView.animate(withDuration: 0.2, animations: {
-            self.statsButton.alpha = 1
-        })
         tappedOnStats()
-    }
-    @IBAction func statsButtonCancel(_ sender: Any) {
-        UIView.animate(withDuration: 0.2, animations: {
-            self.statsButton.alpha = 1
-        })
     }
     
     var cameBackFromSettings: (() -> Void)?
     @IBOutlet weak var settingsView: UIView!
     @IBOutlet weak var settingsBottomC: NSLayoutConstraint!
-    @IBOutlet weak var settingsButton: UIButton!
+    
+    @IBOutlet weak var settingsImageView: UIImageView!
+    @IBOutlet weak var settingsButton: CustomButton!
     @IBAction func settingsButtonPressed(_ sender: Any) {
         let settingsVC = SettingsViewHoster()
         settingsVC.presentationController?.delegate = self
@@ -321,7 +310,11 @@ class CameraViewController: UIViewController {
         super.viewDidLoad()
 
         if deviceHasNotch && !deviceIsRoundPad {
-            normalSearchFieldTopCConstant = -6
+            if isForcingStatusBarHidden {
+                normalSearchFieldTopCConstant = -10
+            } else {
+                normalSearchFieldTopCConstant = -6
+            }
         } else {
             if isForcingStatusBarHidden {
                 normalSearchFieldTopCConstant = -6
@@ -350,6 +343,30 @@ class CameraViewController: UIViewController {
         settingsView.layer.cornerRadius = settingsView.bounds.width / 2
         statsBottomC.constant = CGFloat(ConstantVars.tabHeight) + 8
         settingsBottomC.constant = CGFloat(ConstantVars.tabHeight) + 8
+        
+        statsLabel.morphingEffect = .evaporate
+        statsButton.touched = { [weak self] down in
+            if down {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.statsLabel.alpha = 0.5
+                })
+            } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.statsLabel.alpha = 1
+                })
+            }
+        }
+        settingsButton.touched = { [weak self] down in
+            if down {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.settingsImageView.alpha = 0.5
+                })
+            } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.settingsImageView.alpha = 1
+                })
+            }
+        }
         
         configureCamera()
         busyFastFinding = false

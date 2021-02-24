@@ -299,51 +299,66 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m5W-6E-t5W">
                                         <rect key="frame" x="382" y="140" width="38" height="38"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAv-Gj-3md">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAv-Gj-3md" customClass="CustomButton" customModule="Find" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" image="gear"/>
+                                                <state key="normal">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="18" scale="medium" weight="semibold"/>
+                                                </state>
                                                 <connections>
-                                                    <action selector="settingsButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tp4-sl-30Y"/>
+                                                    <action selector="settingsButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rl7-Cc-KYA"/>
                                                 </connections>
                                             </button>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gearshape.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="eP1-5X-V80">
+                                                <rect key="frame" x="8.9999999999999982" y="9.6666666666666661" width="20.333333333333329" height="19.666666666666671"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17" scale="medium" weight="medium"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" name="50Black"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="38" id="5wI-tC-Bbk"/>
                                             <constraint firstAttribute="trailing" secondItem="SAv-Gj-3md" secondAttribute="trailing" id="7Ky-wM-EHc"/>
+                                            <constraint firstItem="eP1-5X-V80" firstAttribute="centerY" secondItem="m5W-6E-t5W" secondAttribute="centerY" id="NaW-Fp-xuV"/>
                                             <constraint firstAttribute="width" constant="38" id="Pyy-SY-MkH"/>
                                             <constraint firstItem="SAv-Gj-3md" firstAttribute="top" secondItem="m5W-6E-t5W" secondAttribute="top" id="WsS-PY-6gQ"/>
                                             <constraint firstItem="SAv-Gj-3md" firstAttribute="leading" secondItem="m5W-6E-t5W" secondAttribute="leading" id="gWa-H0-Gsn"/>
                                             <constraint firstAttribute="bottom" secondItem="SAv-Gj-3md" secondAttribute="bottom" id="iN8-91-aOd"/>
+                                            <constraint firstItem="eP1-5X-V80" firstAttribute="centerX" secondItem="m5W-6E-t5W" secondAttribute="centerX" id="rx5-tm-RgD"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kbt-Wb-Lvr">
                                         <rect key="frame" x="8" y="140" width="38" height="38"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fK0-3I-lSn">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fK0-3I-lSn" customClass="CustomButton" customModule="Find" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                <state key="normal" title="0">
+                                                <state key="normal">
                                                     <color key="titleColor" name="TabIconDetails-Dark"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="statsButtonCancel:" destination="BYZ-38-t0r" eventType="touchDragExit" id="RYB-Cl-Arn"/>
-                                                    <action selector="statsButtonCancel:" destination="BYZ-38-t0r" eventType="touchCancel" id="YUB-WM-CE9"/>
-                                                    <action selector="statsButtonDown:" destination="BYZ-38-t0r" eventType="touchDown" id="5Mb-n5-hB8"/>
-                                                    <action selector="statsButtonDown:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="HxQ-jJ-MZK"/>
                                                     <action selector="statsButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8ip-p7-4h4"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSS-3q-pzT" customClass="LTMorphingLabel" customModule="Find" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" name="50Black"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="38" id="00K-gX-4Qp"/>
                                             <constraint firstItem="fK0-3I-lSn" firstAttribute="top" secondItem="Kbt-Wb-Lvr" secondAttribute="top" id="Bvd-ah-CQH"/>
                                             <constraint firstItem="fK0-3I-lSn" firstAttribute="leading" secondItem="Kbt-Wb-Lvr" secondAttribute="leading" id="IfU-1S-ePO"/>
+                                            <constraint firstAttribute="trailing" secondItem="CSS-3q-pzT" secondAttribute="trailing" id="Mn7-eu-jRm"/>
                                             <constraint firstAttribute="trailing" secondItem="fK0-3I-lSn" secondAttribute="trailing" id="WWq-O1-den"/>
+                                            <constraint firstAttribute="bottom" secondItem="CSS-3q-pzT" secondAttribute="bottom" id="cjg-Jv-7hf"/>
+                                            <constraint firstItem="CSS-3q-pzT" firstAttribute="top" secondItem="Kbt-Wb-Lvr" secondAttribute="top" id="dx4-aI-FRq"/>
                                             <constraint firstAttribute="bottom" secondItem="fK0-3I-lSn" secondAttribute="bottom" id="fs6-Wu-yZm"/>
                                             <constraint firstAttribute="height" constant="38" id="u5T-Qy-gET"/>
+                                            <constraint firstItem="CSS-3q-pzT" firstAttribute="leading" secondItem="Kbt-Wb-Lvr" secondAttribute="leading" id="vn8-Id-u23"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -673,10 +688,12 @@
                         <outlet property="searchTextLeftC" destination="Brv-N5-QH9" id="olD-zQ-Tlw"/>
                         <outlet property="searchTextTopC" destination="tCA-et-4hv" id="xj9-zj-tdH"/>
                         <outlet property="settingsBottomC" destination="Ygo-gn-4JO" id="nzp-3d-xOD"/>
-                        <outlet property="settingsButton" destination="SAv-Gj-3md" id="h2d-no-qa4"/>
+                        <outlet property="settingsButton" destination="SAv-Gj-3md" id="rwC-p2-f2q"/>
+                        <outlet property="settingsImageView" destination="eP1-5X-V80" id="Msi-ML-xar"/>
                         <outlet property="settingsView" destination="m5W-6E-t5W" id="Rts-H9-WAT"/>
                         <outlet property="statsBottomC" destination="7Fo-5n-bn7" id="dUE-5Z-RNb"/>
-                        <outlet property="statsButton" destination="fK0-3I-lSn" id="gz9-hv-HOS"/>
+                        <outlet property="statsButton" destination="fK0-3I-lSn" id="rLB-1b-8xL"/>
+                        <outlet property="statsLabel" destination="CSS-3q-pzT" id="Fw9-6Y-5FU"/>
                         <outlet property="statsView" destination="Kbt-Wb-Lvr" id="QDW-RN-H2z"/>
                         <outlet property="tapToRemoveLabel" destination="Hc9-i8-kXk" id="IQj-Ry-hZp"/>
                         <outlet property="textLabel" destination="BRC-Yj-hpw" id="ZQn-rk-L50"/>
@@ -3250,6 +3267,9 @@
         </scene>
     </scenes>
     <designables>
+        <designable name="CSS-3q-pzT">
+            <size key="intrinsicContentSize" width="11.666666666666666" height="21.666666666666668"/>
+        </designable>
         <designable name="eQO-08-qIa">
             <size key="intrinsicContentSize" width="6" height="33"/>
         </designable>
@@ -3270,6 +3290,7 @@
         <image name="chevron.compact.down" catalog="system" width="128" height="43"/>
         <image name="folder.fill.badge.plus" catalog="system" width="128" height="91"/>
         <image name="gear" width="32" height="32"/>
+        <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="questionmark" catalog="system" width="96" height="128"/>
         <image name="questionmark.circle" catalog="system" width="128" height="121"/>
