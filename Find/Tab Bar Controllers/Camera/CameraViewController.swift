@@ -91,8 +91,6 @@ class CameraViewController: UIViewController {
         fatalError()
     }()
     
-    var newNumberOfMatchesFound = 0
-    
     //MARK: Timer and haptic feedback
     var currentPassCount = 0 /// +1 whenever frame added for AV
     
@@ -177,7 +175,6 @@ class CameraViewController: UIViewController {
     var tempComponents = [Component]()
     var currentComponents = [Component]()
     var nextComponents = [Component]()
-    var numberOfFastMatches: Int = 0
     
     var matchToColors = [String: [CGColor]]()
     
@@ -185,7 +182,7 @@ class CameraViewController: UIViewController {
     var currentListsSharedFindList = EditableFindList()
     var currentSearchAndListSharedFindList = EditableFindList()
     
-    var stringToList = [String: EditableFindList]()
+//    var stringToList = [String: EditableFindList]()
     var aspectRatioWidthOverHeight : CGFloat = 0
     
     var finalTextToFind : String = ""
@@ -241,8 +238,6 @@ class CameraViewController: UIViewController {
                     if orientation != .portrait {
                         displayingOrientationError = true
                         newSearchTextField.isEnabled = false
-                        updateMatchesNumber(to: 0)
-                        
                         resetHighlights()
                         shouldResetHighlights = true
                         

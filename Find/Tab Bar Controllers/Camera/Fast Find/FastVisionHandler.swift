@@ -18,6 +18,8 @@ extension CameraViewController {
             
             /// reset the cycle
             busyFastFinding = false
+            
+            print("Should reset!!")
             resetHighlights()
         } else {
             guard let results = request?.results, results.count > 0 else {
@@ -58,7 +60,7 @@ extension CameraViewController {
                         if UserDefaults.standard.bool(forKey: "showTextDetectIndicator") {
                             drawFastHighlight(component: component)
                         }
-                        for match in stringToList.keys {
+                        for match in matchToColors.keys {
                             if lowerCaseComponentText.contains(match) {
                                 let finalW = individualCharacterWidth * CGFloat(match.count)
                                 
@@ -72,11 +74,7 @@ extension CameraViewController {
                                     newComponent.width = finalW + 12
                                     newComponent.height = newH + 6
                                     newComponent.text = match
-                                    newComponent.changed = false
                                     
-                                    if let parentList = stringToList[match] {
-                                        newComponent.parentList = parentList
-                                    }
                                     nextComponents.append(newComponent)
                                 }
                             }
@@ -87,49 +85,56 @@ extension CameraViewController {
             
             busyFastFinding = false
             
-            if CameraState.isPaused {
-                if !cachePressed {
-                    DispatchQueue.main.async {
-                        for subView in self.drawingView.subviews {
-                            subView.removeFromSuperview()
-                        }
-                        if self.howManyTimesFastFoundSincePaused >= 6 && self.nextComponents.count <= 2 {
-                            self.showCacheTip()
-                        }
-                        
-                        self.drawHighlights(highlights: self.nextComponents)
-                        self.updateMatchesNumber(to: self.nextComponents.count)
-                    }
-                } else {
-                    
-                    var componentsToAdd = [Component]()
-                    
-                    for nextComponent in nextComponents {
-                        var smallestDistance = CGFloat(999)
-                        
-                        for cachedComponent in highlightsFromCache {
-                            let point1 = CGPoint(x: cachedComponent.x + (cachedComponent.width / 2), y: cachedComponent.y + (cachedComponent.height / 2))
-                            let point2 = CGPoint(x: nextComponent.x + (nextComponent.width / 2), y: nextComponent.y + (nextComponent.height / 2))
-                            let pointDistance = relativeDistance(point1, point2)
-                            
-                            if pointDistance < smallestDistance {
-                                smallestDistance = pointDistance
-                            }
-                            
-                        }
-                        
-                        if smallestDistance >= 225 { ///Bigger, so add it
-                            componentsToAdd.append(nextComponent)
-                        }
-                    }
-                    
-                    drawHighlights(highlights: componentsToAdd)
-                    self.updateMatchesNumber(to: componentsToAdd.count + highlightsFromCache.count)
-                }
+            if CameraState.isPaused, cachePressed {
+                addPausedFastResults()
+                
             } else {
                 animateFoundFastChange()
             }
-            numberOfFastMatches = 0
+//                    DispatchQueue.main.async {
+////                        for subView in self.drawingView.subviews {
+////                            subView.removeFromSuperview()
+////                        }
+//                        self.animateFoundFastChange()
+//
+////                        if self.howManyTimesFastFoundSincePaused >= 6 && self.nextComponents.count <= 2 {
+////                            self.showCacheTip()
+////                        }
+////
+////                        self.drawHighlights(highlights: self.nextComponents)
+////                        self.updateMatchesNumber(to: self.nextComponents.count)
+//                    }
+//                } else {
+//                    print("Found fast change")
+//                    animateFoundFastChange()
+////                    var componentsToAdd = [Component]()
+////
+////                    for nextComponent in nextComponents {
+////                        var smallestDistance = CGFloat(999)
+////
+////                        for cachedComponent in highlightsFromCache {
+////                            let point1 = CGPoint(x: cachedComponent.x + (cachedComponent.width / 2), y: cachedComponent.y + (cachedComponent.height / 2))
+////                            let point2 = CGPoint(x: nextComponent.x + (nextComponent.width / 2), y: nextComponent.y + (nextComponent.height / 2))
+////                            let pointDistance = relativeDistance(point1, point2)
+////
+////                            if pointDistance < smallestDistance {
+////                                smallestDistance = pointDistance
+////                            }
+////
+////                        }
+////
+////                        if smallestDistance >= 225 { ///Bigger, so add it
+////                            componentsToAdd.append(nextComponent)
+////                        }
+////                    }
+////
+////                    drawHighlights(highlights: componentsToAdd)
+////                    self.updateMatchesNumber(to: componentsToAdd.count + highlightsFromCache.count)
+//                }
+//            } else {
+                
+//            }
+//            numberOfFastMatches = 0
             
         }
         
@@ -139,13 +144,41 @@ extension CameraViewController {
         }
     }
     
-    func animateFoundFastChange() {
+    func addPausedFastResults() {
         for newComponent in nextComponents {
+            var lowestDist = CGFloat(10000)
+            
+            for oldComponent in currentComponents {
+                
+                if newComponent.text == oldComponent.text {
+                    let currentCompPoint = CGPoint(x: oldComponent.x, y: oldComponent.y)
+                    let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
+                    let distanceBetweenPoints = distance(currentCompPoint, nextCompPoint)
+                    
+                    if distanceBetweenPoints <= lowestDist {
+                        lowestDist = distanceBetweenPoints
+                    }
+                }
+            }
+
+            if lowestDist >= 15 {
+                currentComponents.append(newComponent)
+                scaleInHighlight(component: newComponent)
+            }
+        }
+        nextComponents.removeAll()
+        tempComponents.removeAll()
+    }
+    
+    func animateFoundFastChange() {
+        
+        for newComponent in nextComponents {
+            
             var lowestDist = CGFloat(10000)
             var distToComp = [CGFloat: Component]()
             
             for oldComponent in currentComponents {
-                if newComponent.parentList == oldComponent.parentList {
+                if newComponent.text == oldComponent.text {
                     let currentCompPoint = CGPoint(x: oldComponent.x, y: oldComponent.y)
                     let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
                     let distanceBetweenPoints = distance(currentCompPoint, nextCompPoint) //< 10
@@ -159,7 +192,6 @@ extension CameraViewController {
                 guard let oldComp = distToComp[lowestDist] else { print("NO COMP"); return }
                 let newView = oldComp.baseView
                 tempComponents.append(oldComp)
-                oldComp.changed = true
                 DispatchQueue.main.async {
                     let rect = CGRect(x: newComponent.x, y: newComponent.y, width: newComponent.width, height: newComponent.height)
                     UIView.animate(withDuration: 0.5, animations: {
@@ -206,9 +238,6 @@ extension CameraViewController {
             }
         }
         
-        for curr in currentComponents {
-            curr.changed = false
-        }
         nextComponents.removeAll()
         tempComponents.removeAll()
         
@@ -216,7 +245,6 @@ extension CameraViewController {
     
     
     func scaleInHighlight(component: Component) {
-        newNumberOfMatchesFound += 1
         
         DispatchQueue.main.async {
             
@@ -276,7 +304,6 @@ extension CameraViewController {
             let y = newLayer.bounds.size.height / 2
             newLayer.position = CGPoint(x: x, y: y)
             component.baseView = newView
-            component.changed = true
             
             UIView.animate(withDuration: 0.15, animations: {
                 newView.alpha = 1
@@ -329,7 +356,8 @@ extension CameraViewController {
             self.animateFastChange(layer: layer)
         }
     }
-    func resetHighlights() {
+    func resetHighlights(updateMatchesLabel: Bool = true) {
+        
         currentComponents.removeAll()
         nextComponents.removeAll()
         tempComponents.removeAll()
@@ -338,7 +366,11 @@ extension CameraViewController {
             for subView in self.drawingView.subviews {
                 subView.removeFromSuperview()
             }
+            if updateMatchesLabel {
+                self.updateMatchesNumber(to: 0)
+            }
         }
+        
     }
     func animateFastChange(layer: CAShapeLayer) {
         drawingView.layer.addSublayer(layer)

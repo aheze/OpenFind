@@ -367,7 +367,6 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             let splits = updatedString.components(separatedBy: "\u{2022}")
             let uniqueSplits = splits.uniques
             if uniqueSplits.count != splits.count {
-                updateMatchesNumber(to: 0)
                 resetHighlights()
                 allowSearch = false
                 shouldResetHighlights = true
@@ -404,7 +403,6 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func showDuplicateAlert(show: Bool) {
         
         if show == true {
-            
             warningHeightC.constant = 32
             UIView.animate(withDuration: 0.5, animations: {
                 self.warningView.alpha = 1
@@ -432,7 +430,6 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         
         matchToColors.removeAll()
-        stringToList.removeAll()
         
         var cameAcrossSearchFieldText = [String]()
         for list in selectedLists {
@@ -455,7 +452,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 let matchColor = UIColor(hexString: (list.iconColorName)).cgColor
                 if !duplicatedStrings.contains(match.lowercased()) && !cameAcrossSearchFieldText.contains(match.lowercased()) {
                     matchToColors[match.lowercased()] = [matchColor]
-                    stringToList[match.lowercased()] = list
+//                    stringToList[match.lowercased()] = list
                     
                 } else {
                     if matchToColors[match.lowercased()] == nil {
@@ -478,15 +475,15 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         arrayOfSearch = newSearch
         for match in arrayOfSearch {
-            stringToList[match] = currentSearchFindList
+//            stringToList[match] = currentSearchFindList
             matchToColors[match] = [UIColor(hexString: UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF").cgColor]
         }
-        for match in duplicatedStrings {
-            stringToList[match] = currentListsSharedFindList
-        }
+//        for match in duplicatedStrings {
+//            stringToList[match] = currentListsSharedFindList
+//        }
         
         for match in cameAcrossSearchFieldText {
-            stringToList[match] = currentSearchAndListSharedFindList
+//            stringToList[match] = currentSearchAndListSharedFindList
             let cgColor = UIColor(hexString: UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF").cgColor
             matchToColors[match, default: [CGColor]()].append(cgColor)
         }

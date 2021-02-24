@@ -105,7 +105,6 @@ extension SlideViewController {
         }
         rimLayer.position = CGPoint(x: x, y: y)
         component.baseView = newView
-        component.changed = true
         
         drawnHighlights[originalComponent] = newView
     }

@@ -44,7 +44,7 @@ extension CameraViewController {
         
         if allowSearch == true {
             var wordsFinding = [String]()
-            for list in stringToList.keys {
+            for list in matchToColors.keys {
                 wordsFinding.append(list)
             }
             

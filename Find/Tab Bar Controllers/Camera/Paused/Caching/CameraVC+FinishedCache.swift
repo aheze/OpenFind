@@ -73,7 +73,8 @@ extension CameraViewController {
                 }
             }
             
-            self.resetHighlights()
+            print("Reset from finished cache")
+            self.resetHighlights(updateMatchesLabel: false)
             
             self.numberCurrentlyFindingFromCache -= 1
             if self.numberCurrentlyFindingFromCache == 0 {

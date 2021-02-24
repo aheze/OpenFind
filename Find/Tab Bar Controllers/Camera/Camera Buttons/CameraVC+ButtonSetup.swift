@@ -41,7 +41,7 @@ extension CameraViewController {
                 self.saveToPhotosIfNeeded()
                 self.resetState()
                 self.startLivePreview()
-                
+                self.resetHighlights()
             }
         }
         saveToPhotos.alpha = 0

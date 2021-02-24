@@ -61,7 +61,6 @@ extension CameraViewController {
                 let y = rimLayer.bounds.size.height / 2
                 rimLayer.position = CGPoint(x: x, y: y)
                 component.baseView = newView
-                component.changed = true
                 
                 UIView.animate(withDuration: 0.15, animations: {
                     newView.alpha = 1
