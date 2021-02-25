@@ -86,7 +86,7 @@ class LaunchViewController: UIViewController {
         
         defaults.set("00AEEF", forKey: "highlightColor")
         defaults.set(true, forKey: "showTextDetectIndicator")
-        defaults.set(1, forKey: "hapticFeedbackLevel")
+        defaults.set(2, forKey: "hapticFeedbackLevel")
         defaults.set(true, forKey: "swipeToNavigateEnabled")
         
         UIView.animate(withDuration: 0.5, animations: {

@@ -23,7 +23,6 @@ extension CameraViewController {
         for result in results {
             if let observation = result as? VNRecognizedTextObservation {
                 for text in observation.topCandidates(1) {
-                    print("text: \(text.string)")
                     let origX = observation.boundingBox.origin.x
                     let origY = 1 - observation.boundingBox.minY
                     let origWidth = observation.boundingBox.width

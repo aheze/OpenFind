@@ -33,10 +33,7 @@ extension CameraViewController {
         }
         
         DispatchQueue.main.async {
-//            UIView.transition(with: self.statsButton, duration: 0.1, options: .transitionCrossDissolve, animations: {
-//                self.statsButton.setTitle("\(number)", for: .normal)
-                self.statsLabel.text = "\(number)"
-//            })
+            self.statsLabel.text = "\(number)"
         }
         previousNumberOfMatches = number
     }

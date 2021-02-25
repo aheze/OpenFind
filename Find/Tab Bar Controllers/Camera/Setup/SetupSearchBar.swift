@@ -426,6 +426,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         var duplicatedStrings = [String]()
         
         if removeExistingHighlights {
+            print("resetting from remoceExist")
             resetHighlights()
         }
         

@@ -357,17 +357,16 @@ extension CameraViewController {
         }
     }
     func resetHighlights(updateMatchesLabel: Bool = true) {
-        
         currentComponents.removeAll()
         nextComponents.removeAll()
         tempComponents.removeAll()
         
         DispatchQueue.main.async {
+            if updateMatchesLabel, self.currentComponents.count == 0 { /// make sure is still 0, because async can run late
+                self.updateMatchesNumber(to: 0)
+            }
             for subView in self.drawingView.subviews {
                 subView.removeFromSuperview()
-            }
-            if updateMatchesLabel {
-                self.updateMatchesNumber(to: 0)
             }
         }
         

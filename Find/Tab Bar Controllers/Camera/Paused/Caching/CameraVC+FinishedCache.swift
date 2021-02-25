@@ -73,7 +73,6 @@ extension CameraViewController {
                 }
             }
             
-            print("Reset from finished cache")
             self.resetHighlights(updateMatchesLabel: false)
             
             self.numberCurrentlyFindingFromCache -= 1
@@ -81,7 +80,13 @@ extension CameraViewController {
                 self.highlightsFromCache = components
                 self.currentComponents = components
                 self.drawHighlights(highlights: components)
+                
                 self.updateMatchesNumber(to: components.count)
+                
+                
+                if components.count >= 1 {
+                    AppStoreReviewManager.requestReviewIfAppropriate()
+                }
             }
         }
     }
