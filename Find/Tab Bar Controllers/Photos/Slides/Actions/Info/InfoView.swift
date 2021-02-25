@@ -120,6 +120,11 @@ struct InfoView: View {
                             .font(Font(UIFont.systemFont(ofSize: 19, weight: .bold)))
                         
                         Button(action: {
+                            let generator = UINotificationFeedbackGenerator()
+                            generator.prepare()
+                            generator.notificationOccurred(.success)
+                            
+                            
                             UIPasteboard.general.setValue(transcript,
                                        forPasteboardType: kUTTypePlainText as String)
                            
