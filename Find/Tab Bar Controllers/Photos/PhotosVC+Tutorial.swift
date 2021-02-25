@@ -10,9 +10,9 @@ import UIKit
 
 extension PhotosViewController {
     func checkTutorial() {
-        let listsViewedBefore = defaults.bool(forKey: "historyViewedBefore")
+        let historyViewedBefore = defaults.bool(forKey: "historyViewedBefore")
         
-        if listsViewedBefore == false {
+        if historyViewedBefore == false, quickTourView == nil {
             let quickTourView = TutorialHeader()
             quickTourView.colorView.backgroundColor = UIColor(named: "TabIconPhotosMain")
             self.quickTourView = quickTourView
