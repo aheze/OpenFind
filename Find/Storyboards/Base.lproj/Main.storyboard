@@ -309,10 +309,14 @@
                                                     <action selector="settingsButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rl7-Cc-KYA"/>
                                                 </connections>
                                             </button>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gearshape.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="eP1-5X-V80">
-                                                <rect key="frame" x="8.9999999999999982" y="9.6666666666666661" width="20.333333333333329" height="19.666666666666671"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GearIcon" translatesAutoresizingMaskIntoConstraints="NO" id="eP1-5X-V80">
+                                                <rect key="frame" x="3" y="3" width="32" height="32"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17" scale="medium" weight="medium"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="LVM-F4-DEe"/>
+                                                    <constraint firstAttribute="width" constant="32" id="aul-Xk-RYn"/>
+                                                </constraints>
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium" weight="medium"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" name="50Black"/>
@@ -3282,6 +3286,7 @@
         <image name="BlueCheck" width="120" height="120"/>
         <image name="CacheActive-Light" width="30" height="30"/>
         <image name="Corner" width="240" height="240"/>
+        <image name="GearIcon" width="32" height="32"/>
         <image name="PhotoPermissions" width="516" height="516"/>
         <image name="arrow.down" catalog="system" width="120" height="128"/>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
@@ -3290,7 +3295,6 @@
         <image name="chevron.compact.down" catalog="system" width="128" height="43"/>
         <image name="folder.fill.badge.plus" catalog="system" width="128" height="91"/>
         <image name="gear" width="32" height="32"/>
-        <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="questionmark" catalog="system" width="96" height="128"/>
         <image name="questionmark.circle" catalog="system" width="128" height="121"/>
