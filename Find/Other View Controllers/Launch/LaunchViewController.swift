@@ -19,6 +19,10 @@ enum LaunchAction {
 }
 class LaunchViewController: UIViewController {
     
+    /// Hold the main view controller
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var blueCoverView: UIView!
+    
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var topLeftImageView: UIImageView!
     @IBOutlet weak var topRightImageView: UIImageView!
@@ -153,7 +157,7 @@ class LaunchViewController: UIViewController {
     @IBOutlet weak var onboardingTopC: NSLayoutConstraint!
     @IBOutlet weak var onboardingWidthC: NSLayoutConstraint!
     @IBOutlet weak var onboardingHeightC: NSLayoutConstraint!
-
+    
     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
@@ -226,17 +230,18 @@ class LaunchViewController: UIViewController {
         let restrictedCornersViewWidth = min(400, cornersViewMaxWidth)
         let restrictedCornersViewHeight = min(400, cornersViewMaxHeight)
         
-        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
-            self.baseView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-        }) { _ in
-            switch type {
-            case .restricted:
+        
+        switch type {
+        case .restricted:
+            self.allowAccessView.alpha = 0
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+                self.baseView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            }) { _ in
                 self.totalWidthC.constant = restrictedInnerViewWidth
                 self.totalHeightC.constant = restrictedInnerViewWidth
                 self.allowAccessViewHeightC.constant = restrictedCornersViewWidth
                 self.allowAccessWidthC.constant = restrictedCornersViewWidth
                 
-                self.allowAccessView.isHidden = false
                 UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
                     self.view.layoutIfNeeded()
                     self.baseView.transform = CGAffineTransform.identity
@@ -246,13 +251,20 @@ class LaunchViewController: UIViewController {
                     self.skipButton.alpha = 0
                     
                 })
+            }
+            
+            let noPermissionToUseCamera = NSLocalizedString("noPermissionToUseCamera", comment: "LaunchViewController def=You don't have permission to use the camera.")
+            
+            self.accessDescLabel.text = noPermissionToUseCamera
+            self.shouldGoToSettings = true
+            self.allowAccessButton.setTitle(self.goToSettings, for: .normal)
+        case .denied:
+            
+            
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+                self.baseView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            }) { _ in
                 
-                let noPermissionToUseCamera = NSLocalizedString("noPermissionToUseCamera", comment: "LaunchViewController def=You don't have permission to use the camera.")
-                
-                self.accessDescLabel.text = noPermissionToUseCamera
-                self.shouldGoToSettings = true
-                self.allowAccessButton.setTitle(self.goToSettings, for: .normal)
-            case .denied:
                 self.allowAccessWidthC.constant = restrictedInnerViewWidth
                 self.allowAccessViewHeightC.constant = self.innerViewMaxHeight
                 self.totalWidthC.constant = restrictedCornersViewWidth
@@ -265,30 +277,42 @@ class LaunchViewController: UIViewController {
                     self.allowAccessView.alpha = 1
                     self.settingsPictureView.alpha = 1
                 })
+            }
+            DispatchQueue.main.async {
                 self.allowAccessButton.setTitle(self.goToSettings, for: .normal)
-                
-            case .needPermissions:
+            }
+            
+            
+        case .needPermissions:
+            
+            
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+                self.baseView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            }) { _ in
                 self.allowAccessWidthC.constant = restrictedInnerViewWidth
                 self.allowAccessViewHeightC.constant = restrictedInnerViewHeight
                 self.totalWidthC.constant = restrictedCornersViewWidth
                 self.totalHeightC.constant = restrictedCornersViewHeight
-                
                 UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
                     self.view.layoutIfNeeded()
                     self.baseView.transform = CGAffineTransform.identity
                     self.allowAccessView.transform = CGAffineTransform.identity
                     self.allowAccessView.alpha = 1
                 })
-                
-            case .onboarding:
-                
-                self.onboarding.dataSource = self
-                self.onboarding.delegate = self
-                self.onboarding.alpha = 0
-                self.onboarding.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
-                self.onboarding.layer.cornerRadius = 10
-                self.onboarding.clipsToBounds = true
-                
+            }
+            
+        case .onboarding:
+            
+            self.onboarding.dataSource = self
+            self.onboarding.delegate = self
+            self.onboarding.alpha = 0
+            self.onboarding.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+            self.onboarding.layer.cornerRadius = 10
+            self.onboarding.clipsToBounds = true
+            
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+                self.baseView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            }) { _ in
                 self.onboardingTopC.constant = self.topHeight
                 self.onboardingWidthC.constant = self.innerViewMaxWidth
                 self.onboardingHeightC.constant = self.innerViewMaxHeight
@@ -307,34 +331,51 @@ class LaunchViewController: UIViewController {
                     
                     self.skipButton.alpha = 1
                 })
-            case .fullScreenStart:
+            }
+        case .fullScreenStart:
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController")
+            
+            viewController.modalPresentationCapturesStatusBarAppearance = true
+            
+            
+            self.addChild(viewController, in: self.containerView)
+            
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+                self.baseView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            }) { _ in
                 let finalWidth = self.view.bounds.width
                 let finalHeight = self.view.bounds.height
                 self.totalWidthC.constant = finalWidth
                 self.totalHeightC.constant = finalHeight
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05, execute: {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController")
-                    viewController.modalTransitionStyle = .crossDissolve
-                    viewController.modalPresentationStyle = .overCurrentContext
-                    
-                    viewController.modalPresentationCapturesStatusBarAppearance = true
-                    self.present(viewController, animated: true, completion: nil)
-                })
                 UIView.animate(withDuration: 0.4, animations: {
-                    self.view.layoutIfNeeded()
+                    self.baseView.layoutIfNeeded()
                     self.baseView.transform = CGAffineTransform.identity
-                    self.topLeftImageView.alpha = 0
-                    self.topRightImageView.alpha = 0
-                    self.bottomLeftImageView.alpha = 0
-                    self.bottomRightImageView.alpha = 0
-                    self.view.alpha = 0
-                })
+                    self.fadeEverything()
+                }) { _ in
+                    self.removeEverything()
+                }
             }
         }
     }
     
+    func fadeEverything() {
+        blueCoverView?.alpha = 0
+        baseView?.alpha = 0
+        getStartedButton?.alpha = 0
+        allowAccessView?.alpha = 0
+        skipButton?.alpha = 0
+        onboarding?.alpha = 0
+    }
+    func removeEverything() {
+        blueCoverView?.removeFromSuperview()
+        baseView?.removeFromSuperview()
+        getStartedButton?.removeFromSuperview()
+        allowAccessView?.removeFromSuperview()
+        skipButton?.removeFromSuperview()
+        onboarding?.removeFromSuperview()
+    }
 }
 
 
@@ -417,7 +458,7 @@ extension LaunchViewController {
                                descriptionColor: UIColor.white,
                                titleFont: UIFont.systemFont(ofSize: 22, weight: .bold),
                                descriptionFont: UIFont.systemFont(ofSize: 17))
-            ][index]
+        ][index]
     }
     
     func onboardingItemsCount() -> Int {

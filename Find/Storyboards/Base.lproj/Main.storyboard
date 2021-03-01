@@ -20,6 +20,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f0C-Ch-Jpa">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jVZ-r4-04D">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                <color key="backgroundColor" red="0.0" green="0.5725490196078431" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nbN-C6-vKS">
                                 <rect key="frame" x="124" y="373" width="180" height="180"/>
                                 <subviews>
@@ -181,15 +189,23 @@
                         <color key="backgroundColor" red="0.0" green="0.5725490196078431" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="emv-Ex-wFD" firstAttribute="centerY" secondItem="ksC-RR-T6w" secondAttribute="centerY" id="00c-JH-4Ky"/>
+                            <constraint firstItem="jVZ-r4-04D" firstAttribute="leading" secondItem="ksC-RR-T6w" secondAttribute="leading" id="0i1-fg-aI3"/>
+                            <constraint firstAttribute="trailing" secondItem="f0C-Ch-Jpa" secondAttribute="trailing" id="AI9-vx-CC8"/>
                             <constraint firstItem="cKd-F8-dU4" firstAttribute="centerX" secondItem="ksC-RR-T6w" secondAttribute="centerX" id="CYC-Fj-EID"/>
                             <constraint firstItem="URE-cP-ORh" firstAttribute="leading" secondItem="5bV-af-AkY" secondAttribute="leading" constant="16" id="Exd-wj-uOK"/>
                             <constraint firstItem="5bV-af-AkY" firstAttribute="top" secondItem="ksC-RR-T6w" secondAttribute="top" constant="50" id="PNl-jp-hw4"/>
                             <constraint firstItem="cKd-F8-dU4" firstAttribute="top" secondItem="5bV-af-AkY" secondAttribute="bottom" constant="12" id="Vz7-ns-Y8V"/>
+                            <constraint firstItem="jVZ-r4-04D" firstAttribute="top" secondItem="ksC-RR-T6w" secondAttribute="top" id="XaO-ag-RLg"/>
                             <constraint firstItem="nbN-C6-vKS" firstAttribute="centerX" secondItem="yGw-uc-2KF" secondAttribute="centerX" id="YiI-6Z-BfM"/>
+                            <constraint firstAttribute="trailing" secondItem="jVZ-r4-04D" secondAttribute="trailing" id="cMY-CP-M0c"/>
                             <constraint firstItem="5bV-af-AkY" firstAttribute="centerX" secondItem="ksC-RR-T6w" secondAttribute="centerX" id="dgf-1i-nWc"/>
+                            <constraint firstItem="f0C-Ch-Jpa" firstAttribute="top" secondItem="ksC-RR-T6w" secondAttribute="top" id="ggu-y1-g0m"/>
+                            <constraint firstAttribute="bottom" secondItem="jVZ-r4-04D" secondAttribute="bottom" id="hOY-46-wh2"/>
+                            <constraint firstItem="f0C-Ch-Jpa" firstAttribute="leading" secondItem="ksC-RR-T6w" secondAttribute="leading" id="kFl-X2-9DH"/>
                             <constraint firstItem="5bV-af-AkY" firstAttribute="bottom" secondItem="URE-cP-ORh" secondAttribute="bottom" constant="24" id="m3v-OP-coY"/>
                             <constraint firstItem="emv-Ex-wFD" firstAttribute="centerX" secondItem="yGw-uc-2KF" secondAttribute="centerX" id="rA1-pD-TQ7"/>
                             <constraint firstItem="nbN-C6-vKS" firstAttribute="centerY" secondItem="ksC-RR-T6w" secondAttribute="centerY" id="rMP-FU-lAK"/>
+                            <constraint firstAttribute="bottom" secondItem="f0C-Ch-Jpa" secondAttribute="bottom" id="rOy-pa-m6T"/>
                         </constraints>
                     </view>
                     <connections>
@@ -199,8 +215,10 @@
                         <outlet property="allowAccessViewHeightC" destination="0MD-LM-TZ7" id="R7o-5q-Zkb"/>
                         <outlet property="allowAccessWidthC" destination="FD3-uC-I9c" id="jgd-CL-HZj"/>
                         <outlet property="baseView" destination="nbN-C6-vKS" id="HhP-bM-GBu"/>
+                        <outlet property="blueCoverView" destination="jVZ-r4-04D" id="XID-xp-zaJ"/>
                         <outlet property="bottomLeftImageView" destination="VbI-4x-JFi" id="4vv-hT-rko"/>
                         <outlet property="bottomRightImageView" destination="gnq-LE-YRE" id="pSO-Dn-dFW"/>
+                        <outlet property="containerView" destination="f0C-Ch-Jpa" id="S5y-ET-QLB"/>
                         <outlet property="getStartedButton" destination="cKd-F8-dU4" id="Mlk-Da-6LM"/>
                         <outlet property="onboarding" destination="5bV-af-AkY" id="bmF-RT-R50"/>
                         <outlet property="onboardingHeightC" destination="tde-iq-hHB" id="ANs-It-2Ol"/>
@@ -216,7 +234,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W8v-LT-xad" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2500" y="68"/>
+            <point key="canvasLocation" x="-2500.934579439252" y="67.386609071274307"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="tne-QT-ifu">
