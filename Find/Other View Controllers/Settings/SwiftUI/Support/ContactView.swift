@@ -71,7 +71,7 @@ struct ContactView: View {
                             UIApplication.shared.open(url)
                         }
                     }) {
-                        HStack(spacing: 0) {
+                        HStack(spacing: 0) {        
                             ZStack {
                                 Rectangle()
                                     .fill(
@@ -110,7 +110,8 @@ struct ContactView: View {
                         .cornerRadius(12)
                     }
                     
-                    .padding(EdgeInsets(top: 8, leading: 16, bottom: 32, trailing: 16))
+                    .padding(EdgeInsets(top: 0, leading: 16, bottom: 8, trailing: 16))
+                    
                 }
             }
         }
