@@ -341,6 +341,7 @@ class LaunchViewController: UIViewController {
             
             
             self.addChild(viewController, in: self.containerView)
+            self.containerView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
             
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
                 self.baseView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
@@ -349,10 +350,12 @@ class LaunchViewController: UIViewController {
                 let finalHeight = self.view.bounds.height
                 self.totalWidthC.constant = finalWidth
                 self.totalHeightC.constant = finalHeight
+                
                 UIView.animate(withDuration: 0.4, animations: {
                     self.baseView.layoutIfNeeded()
                     self.baseView.transform = CGAffineTransform.identity
                     self.fadeEverything()
+                    self.containerView.transform = CGAffineTransform.identity
                 }) { _ in
                     self.removeEverything()
                 }
