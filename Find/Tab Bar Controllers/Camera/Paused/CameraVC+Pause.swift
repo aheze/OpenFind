@@ -37,7 +37,6 @@ extension CameraViewController {
     
     func adjustButtonLayout(_ paused: Bool) {
         if paused {
-            
             fullScreenLeftNeighborC.isActive = false
             fullScreenLeftC.isActive = true
             fullScreenBottomC.isActive = false
@@ -53,11 +52,6 @@ extension CameraViewController {
             
             fullScreenTopC.constant = 8
             flashTopC.constant = 8
-            
-            UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveLinear) {
-                self.view.layoutIfNeeded()
-            }
-
         } else {
             fullScreenLeftNeighborC.isActive = true
             fullScreenLeftC.isActive = false
@@ -68,10 +62,10 @@ extension CameraViewController {
             flashRightC.isActive = false
             flashBottomC.isActive = true
             flashTopC.isActive = false
-            
-            UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveLinear) {
-                self.view.layoutIfNeeded()
-            }
+        }
+        
+        UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveLinear) {
+            self.view.layoutIfNeeded()
         }
     }
 }

@@ -53,11 +53,14 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var fullScreenButton: CustomButton!
     @IBOutlet weak var fullScreenImageView: UIImageView!
     
+    var isFullScreen = false
     @IBOutlet weak var fullScreenTopC: NSLayoutConstraint!
     @IBOutlet weak var fullScreenLeftNeighborC: NSLayoutConstraint!
     @IBOutlet weak var fullScreenLeftC: NSLayoutConstraint!
     @IBOutlet weak var fullScreenBottomC: NSLayoutConstraint!
     @IBAction func fullScreenButtonPressed(_ sender: Any) {
+        isFullScreen.toggle()
+        toggleFullScreen(isFullScreen)
     }
     
     
@@ -91,7 +94,8 @@ class CameraViewController: UIViewController {
     var currentPausedImage: UIImage?
     var waitingToFind = false /// when changed letters in search bar, but already is finding, wait until finished.
     
-    var cameraChanged: ((Bool) -> Void)?
+    /// paused, shouldFadeActionButtons
+    var cameraChanged: ((Bool, Bool) -> Void)?
     var savePressed = false
     var cachePressed = false
     
@@ -99,7 +103,18 @@ class CameraViewController: UIViewController {
     var displayingOrientationError = false
     
     @IBOutlet weak var contentTopC: NSLayoutConstraint!
+    
     @IBOutlet weak var controlsBlurView: UIVisualEffectView!
+    @IBOutlet weak var controlsBlurBottomC: NSLayoutConstraint!
+    @IBOutlet weak var showControlsButton: UIButton!
+    @IBAction func showControlsPressed(_ sender: Any) {
+        isFullScreen = false
+        toggleFullScreen(isFullScreen)
+    }
+    
+    
+    @IBOutlet weak var passthroughBottomC: NSLayoutConstraint!
+    
     
     
     //MARK: Stats
@@ -339,6 +354,7 @@ class CameraViewController: UIViewController {
                 normalSearchFieldTopCConstant = 6
             }
         }
+        
         contentTopC.constant = normalSearchFieldTopCConstant
         searchContentView.layoutIfNeeded()
         
@@ -349,10 +365,11 @@ class CameraViewController: UIViewController {
         
         
         controlsBlurView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-        controlsBlurView.alpha = 0
+        controlsBlurView.effect = nil
+        showControlsButton.alpha = 0
         controlsBlurView.layer.cornerRadius = 8
         controlsBlurView.clipsToBounds = true
-        controlsBlurView.isHidden = true
+        
         updateMatchesNumber(to: 0)
         setupSearchBar()
         

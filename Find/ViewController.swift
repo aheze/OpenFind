@@ -164,21 +164,25 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     viewController.cameraIcon.alpha = 1
                 }
             }
-            viewController.cameraChanged = { [weak self] on in
+            viewController.cameraChanged = { [weak self] (paused, shouldFadeButtons) in
                 guard let self = self else { return }
-                self.tabBarView.cameraIcon.toggle(on: on)
-                if on {
+                self.tabBarView.cameraIcon.toggle(on: paused)
+                if paused {
                     self.tabBarView.makeLayerInactiveState(duration: 0.4, hide: true)
                     self.longPressGestureRecognizer.isEnabled = false
                     self.panGestureRecognizer.isEnabled = false
-                    self.camera.makeActiveState()
+                    if shouldFadeButtons {
+                        self.camera.makeActiveState()
+                    }
                 } else {
                     self.tabBarView.makeLayerActiveState(duration: 0.4, show: true)
                     if UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled") == true {
                         self.longPressGestureRecognizer.isEnabled = true
                         self.panGestureRecognizer.isEnabled = true
                     }
-                    self.camera.makeInactiveState()
+                    if shouldFadeButtons {
+                        self.camera.makeInactiveState()
+                    }
                 }
             }
             viewController.cameBackFromSettings = { [weak self] in

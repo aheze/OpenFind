@@ -24,7 +24,7 @@ extension CameraViewController {
             
             CameraState.isPaused.toggle()
             self.cameraIcon.toggle(on: CameraState.isPaused)
-            self.cameraChanged?(CameraState.isPaused)
+            self.cameraChanged?(CameraState.isPaused, true)
             
             if CameraState.isPaused {
                 self.pauseLivePreview()

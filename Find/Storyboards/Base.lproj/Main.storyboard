@@ -708,7 +708,7 @@
                                 </constraints>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2JP-1T-MxT">
-                                <rect key="frame" x="144" y="879" width="140" height="35"/>
+                                <rect key="frame" x="144" y="941" width="140" height="35"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="4uo-B3-Qd7">
                                     <rect key="frame" x="0.0" y="0.0" width="140" height="35"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -724,7 +724,7 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <action selector="showControlsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xDu-Ej-IHC"/>
+                                                <action selector="showControlsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F2E-z1-Cfe"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -735,7 +735,7 @@
                                         <constraint firstItem="u0g-ei-7rm" firstAttribute="leading" secondItem="4uo-B3-Qd7" secondAttribute="leading" id="qfn-Tt-Wz6"/>
                                     </constraints>
                                 </view>
-                                <blurEffect style="regular"/>
+                                <blurEffect style="systemMaterialDark"/>
                             </visualEffectView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oNn-cV-T8L"/>
@@ -743,7 +743,7 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="g2Y-bj-01H" firstAttribute="leading" secondItem="oNn-cV-T8L" secondAttribute="leading" constant="24" id="4cF-bb-Kkm"/>
-                            <constraint firstAttribute="bottom" secondItem="2JP-1T-MxT" secondAttribute="bottom" constant="12" id="5El-mq-7hs"/>
+                            <constraint firstAttribute="bottom" secondItem="2JP-1T-MxT" secondAttribute="bottom" constant="-50" id="5El-mq-7hs"/>
                             <constraint firstAttribute="trailing" secondItem="20i-dz-JZp" secondAttribute="trailing" id="6cI-uW-wUB"/>
                             <constraint firstItem="kV4-Eg-1Ee" firstAttribute="leading" secondItem="oNn-cV-T8L" secondAttribute="leading" constant="8" id="8mP-1w-akg"/>
                             <constraint firstItem="oNn-cV-T8L" firstAttribute="trailing" secondItem="1uu-Wl-x4d" secondAttribute="trailing" constant="16" id="9He-v9-Vjh"/>
@@ -781,6 +781,7 @@
                         <outlet property="cameraIconHolderBottomC" destination="4ix-l7-edU" id="8Hx-0m-tHs"/>
                         <outlet property="cameraView" destination="lVw-3T-6iA" id="tYA-q5-8xb"/>
                         <outlet property="contentTopC" destination="uYI-qs-zLw" id="d0f-uN-GYJ"/>
+                        <outlet property="controlsBlurBottomC" destination="5El-mq-7hs" id="MiL-7T-Eok"/>
                         <outlet property="controlsBlurView" destination="2JP-1T-MxT" id="zlF-Wp-gev"/>
                         <outlet property="drawingView" destination="hag-e5-Sys" id="Njx-lY-a9B"/>
                         <outlet property="flashBottomC" destination="V6B-p4-O4u" id="CHU-nL-VDK"/>
@@ -800,6 +801,7 @@
                         <outlet property="listsLabel" destination="sbj-0t-kKO" id="bsh-5a-IVV"/>
                         <outlet property="messageView" destination="3X4-Nc-yBe" id="79y-RB-NiK"/>
                         <outlet property="newSearchTextField" destination="eQO-08-qIa" id="53l-JB-69S"/>
+                        <outlet property="passthroughBottomC" destination="rn7-2I-qHJ" id="ECP-QK-CQp"/>
                         <outlet property="pausedImageView" destination="20i-dz-JZp" id="9cz-pu-sal"/>
                         <outlet property="saveLabel" destination="Myy-mx-RUb" id="hYJ-EW-xc2"/>
                         <outlet property="saveToPhotos" destination="ryG-3Q-0nW" id="vt2-hX-TuL"/>
@@ -815,6 +817,7 @@
                         <outlet property="settingsButton" destination="SAv-Gj-3md" id="rwC-p2-f2q"/>
                         <outlet property="settingsImageView" destination="eP1-5X-V80" id="Msi-ML-xar"/>
                         <outlet property="settingsView" destination="m5W-6E-t5W" id="Rts-H9-WAT"/>
+                        <outlet property="showControlsButton" destination="u0g-ei-7rm" id="xmv-6q-f8J"/>
                         <outlet property="statsBottomC" destination="7Fo-5n-bn7" id="dUE-5Z-RNb"/>
                         <outlet property="statsButton" destination="fK0-3I-lSn" id="rLB-1b-8xL"/>
                         <outlet property="statsLabel" destination="CSS-3q-pzT" id="Fw9-6Y-5FU"/>
