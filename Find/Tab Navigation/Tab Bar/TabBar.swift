@@ -376,7 +376,7 @@ class TabBarView: UIView {
             CATransaction.commit()
             
             if hide {
-                UIView.animate(withDuration: 0.5) {
+                UIView.animate(withDuration: Double(duration)) {
                     self.contentView.frame.origin.y = self.contentView.bounds.height
                 }
             }

@@ -82,6 +82,7 @@ extension ViewController {
                 blurAnimator?.addAnimations {
                     self.gestures.transitionAnimatorBlock?()
                 }
+                camera.enableButtons(false)
             } else { /// photos to camera
                 startCamera()
                 tabBarView.getBlocks(from: fromVC, to: .camera).0()
@@ -115,6 +116,7 @@ extension ViewController {
                 blurAnimator?.addAnimations {
                     self.gestures.transitionAnimatorBlock?()
                 }
+                camera.enableButtons(false)
             } else { /// lists to camera
                 startCamera()
                 tabBarView.getBlocks(from: fromVC, to: .camera).0()

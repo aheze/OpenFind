@@ -113,6 +113,7 @@ class CameraViewController: UIViewController {
     }
     
     
+    @IBOutlet weak var passthroughView: PassthroughView!
     @IBOutlet weak var passthroughBottomC: NSLayoutConstraint!
     
     
@@ -367,7 +368,7 @@ class CameraViewController: UIViewController {
         controlsBlurView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         controlsBlurView.effect = nil
         showControlsButton.alpha = 0
-        controlsBlurView.layer.cornerRadius = 8
+        controlsBlurView.layer.cornerRadius = controlsBlurView.bounds.height / 2
         controlsBlurView.clipsToBounds = true
         
         updateMatchesNumber(to: 0)

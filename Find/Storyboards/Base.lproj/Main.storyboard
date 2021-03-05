@@ -708,18 +708,18 @@
                                 </constraints>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2JP-1T-MxT">
-                                <rect key="frame" x="144" y="941" width="140" height="35"/>
+                                <rect key="frame" x="141" y="941" width="146" height="35"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="4uo-B3-Qd7">
-                                    <rect key="frame" x="0.0" y="0.0" width="140" height="35"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="146" height="35"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u0g-ei-7rm">
-                                            <rect key="frame" x="0.0" y="0.0" width="140" height="35"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="146" height="35"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="35" id="UWh-ZK-tVQ"/>
-                                                <constraint firstAttribute="width" constant="140" id="kgb-95-LaB"/>
                                             </constraints>
-                                            <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                            <inset key="contentEdgeInsets" minX="16" minY="6" maxX="16" maxY="6"/>
                                             <state key="normal" title="Show Controls">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
@@ -802,6 +802,7 @@
                         <outlet property="messageView" destination="3X4-Nc-yBe" id="79y-RB-NiK"/>
                         <outlet property="newSearchTextField" destination="eQO-08-qIa" id="53l-JB-69S"/>
                         <outlet property="passthroughBottomC" destination="rn7-2I-qHJ" id="ECP-QK-CQp"/>
+                        <outlet property="passthroughView" destination="Tda-he-8YJ" id="1D6-RJ-Q8S"/>
                         <outlet property="pausedImageView" destination="20i-dz-JZp" id="9cz-pu-sal"/>
                         <outlet property="saveLabel" destination="Myy-mx-RUb" id="hYJ-EW-xc2"/>
                         <outlet property="saveToPhotos" destination="ryG-3Q-0nW" id="vt2-hX-TuL"/>

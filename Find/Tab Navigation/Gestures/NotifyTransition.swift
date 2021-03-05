@@ -26,6 +26,8 @@ extension ViewController {
                 startLocalSecondStep()
             }
             
+            camera.enableButtons(true)
+            
         case is ListsNavController:
             print("ended at lists")
             startCameraShutoff()

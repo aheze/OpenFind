@@ -16,6 +16,16 @@ enum PhotoPermissionAction {
 }
 extension CameraViewController {
     
+    func enableButtons(_ enable: Bool) {
+        
+        statsView?.isUserInteractionEnabled = enable
+        fullScreenView?.isUserInteractionEnabled = enable
+        flashView?.isUserInteractionEnabled = enable
+        settingsView?.isUserInteractionEnabled = enable
+        cameraIconHolder?.isUserInteractionEnabled = enable
+        
+    }
+    
     func setupCameraButtons() {
         cameraIconHolder.backgroundColor = UIColor.clear
         cameraIcon.isActualButton = true
