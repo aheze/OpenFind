@@ -376,6 +376,7 @@ class TabBarView: UIView {
             CATransaction.commit()
             
             if hide {
+                self.isUserInteractionEnabled = false
                 UIView.animate(withDuration: Double(duration)) {
                     self.contentView.frame.origin.y = self.contentView.bounds.height
                 }
@@ -403,6 +404,7 @@ class TabBarView: UIView {
             fillLayer.add(animation, forKey: "path")
             
             if show {
+                self.isUserInteractionEnabled = true
                 UIView.animate(withDuration: 0.6) {
                     self.contentView.frame.origin.y = 0
                 }

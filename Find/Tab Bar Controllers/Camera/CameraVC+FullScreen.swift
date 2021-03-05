@@ -26,6 +26,9 @@ extension CameraViewController {
             self.controlsBlurView.effect = fullScreen ? UIBlurEffect(style: .dark) : nil
             self.showControlsButton.alpha = fullScreen ? 1 : 0
         }
-        self.cameraChanged?(fullScreen, false)
+        
+        if !CameraState.isPaused {
+            self.cameraChanged?(fullScreen, false)
+        }
     }
 }
