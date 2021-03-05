@@ -20,6 +20,7 @@ extension CameraViewController {
         cameraView.videoPreviewLayer.connection?.isEnabled = true
         self.showImageView(false)
     }
+    
     func showImageView(_ show: Bool) {
         if show {
             pausedImageView.image = currentPausedImage
@@ -30,6 +31,46 @@ extension CameraViewController {
         } else {
             UIView.animate(withDuration: 0.1) {
                 self.pausedImageView.alpha = 0
+            }
+        }
+    }
+    
+    func adjustButtonLayout(_ paused: Bool) {
+        if paused {
+            
+            fullScreenLeftNeighborC.isActive = false
+            fullScreenLeftC.isActive = true
+            fullScreenBottomC.isActive = false
+            fullScreenTopC.isActive = true
+            
+            flashRightNeighborC.isActive = false
+            flashRightC.isActive = true
+            flashBottomC.isActive = false
+            flashTopC.isActive = true
+            
+            fullScreenLeftC.constant = 8
+            flashRightC.constant = 8
+            
+            fullScreenTopC.constant = 8
+            flashTopC.constant = 8
+            
+            UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveLinear) {
+                self.view.layoutIfNeeded()
+            }
+
+        } else {
+            fullScreenLeftNeighborC.isActive = true
+            fullScreenLeftC.isActive = false
+            fullScreenBottomC.isActive = true
+            fullScreenTopC.isActive = false
+            
+            flashRightNeighborC.isActive = true
+            flashRightC.isActive = false
+            flashBottomC.isActive = true
+            flashTopC.isActive = false
+            
+            UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveLinear) {
+                self.view.layoutIfNeeded()
             }
         }
     }

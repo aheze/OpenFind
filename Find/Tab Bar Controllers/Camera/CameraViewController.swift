@@ -49,6 +49,30 @@ class CameraViewController: UIViewController {
         tappedOnStats()
     }
     
+    @IBOutlet weak var fullScreenView: UIView!
+    @IBOutlet weak var fullScreenButton: CustomButton!
+    @IBOutlet weak var fullScreenImageView: UIImageView!
+    
+    @IBOutlet weak var fullScreenTopC: NSLayoutConstraint!
+    @IBOutlet weak var fullScreenLeftNeighborC: NSLayoutConstraint!
+    @IBOutlet weak var fullScreenLeftC: NSLayoutConstraint!
+    @IBOutlet weak var fullScreenBottomC: NSLayoutConstraint!
+    @IBAction func fullScreenButtonPressed(_ sender: Any) {
+    }
+    
+    
+    @IBOutlet weak var flashView: UIView!
+    @IBOutlet weak var flashButton: CustomButton!
+    @IBOutlet weak var flashImageView: UIImageView!
+    @IBOutlet weak var flashTopC: NSLayoutConstraint!
+    @IBOutlet weak var flashRightNeighborC: NSLayoutConstraint!
+    @IBOutlet weak var flashRightC: NSLayoutConstraint!
+    @IBOutlet weak var flashBottomC: NSLayoutConstraint!
+    @IBAction func flashButtonPressed(_ sender: Any) {
+    }
+    
+    
+    
     var cameBackFromSettings: (() -> Void)?
     @IBOutlet weak var settingsView: UIView!
     @IBOutlet weak var settingsBottomC: NSLayoutConstraint!
@@ -182,7 +206,6 @@ class CameraViewController: UIViewController {
     var currentListsSharedFindList = EditableFindList()
     var currentSearchAndListSharedFindList = EditableFindList()
     
-//    var stringToList = [String: EditableFindList]()
     var aspectRatioWidthOverHeight : CGFloat = 0
     
     var finalTextToFind : String = ""
@@ -198,7 +221,6 @@ class CameraViewController: UIViewController {
     
     var numberCurrentlyFindingFromCache = 0 /// how many cache findings are currently going on
     var highlightsFromCache = [Component]() /// highlights that were from the cache
-
     
     //MARK: Camera
     @IBOutlet weak var pausedImageView: UIImageView!
@@ -335,8 +357,14 @@ class CameraViewController: UIViewController {
         setupSearchBar()
         
         statsView.layer.cornerRadius = statsView.bounds.width / 2
+        fullScreenView.layer.cornerRadius = fullScreenView.bounds.width / 2
+        flashView.layer.cornerRadius = flashView.bounds.width / 2
         settingsView.layer.cornerRadius = settingsView.bounds.width / 2
+        
+        
         statsBottomC.constant = CGFloat(ConstantVars.tabHeight) + 8
+        fullScreenBottomC.constant = CGFloat(ConstantVars.tabHeight) + 8
+        flashBottomC.constant = CGFloat(ConstantVars.tabHeight) + 8
         settingsBottomC.constant = CGFloat(ConstantVars.tabHeight) + 8
         
         statsLabel.morphingEffect = .evaporate
@@ -351,6 +379,31 @@ class CameraViewController: UIViewController {
                 })
             }
         }
+        
+        fullScreenButton.touched = { [weak self] down in
+            if down {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.fullScreenImageView.alpha = 0.5
+                })
+            } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.fullScreenImageView.alpha = 1
+                })
+            }
+        }
+        
+        flashButton.touched = { [weak self] down in
+            if down {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.flashImageView.alpha = 0.5
+                })
+            } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.flashImageView.alpha = 1
+                })
+            }
+        }
+        
         settingsButton.touched = { [weak self] down in
             if down {
                 UIView.animate(withDuration: 0.2, animations: {

@@ -28,6 +28,7 @@ extension CameraViewController {
             
             if CameraState.isPaused {
                 self.pauseLivePreview()
+                self.adjustButtonLayout(true)
                 
                 if TipViews.currentLocalStep == 2 {
                     self.startLocalThirdStep()
@@ -41,6 +42,7 @@ extension CameraViewController {
                 self.saveToPhotosIfNeeded()
                 self.resetState()
                 self.startLivePreview()
+                self.adjustButtonLayout(false)
                 self.resetHighlights()
             }
         }
