@@ -351,7 +351,7 @@ class LaunchViewController: UIViewController {
                 self.totalWidthC.constant = finalWidth
                 self.totalHeightC.constant = finalHeight
                 
-                UIView.animate(withDuration: 0.4, animations: {
+                UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
                     self.baseView.layoutIfNeeded()
                     self.baseView.transform = CGAffineTransform.identity
                     self.fadeEverything()
