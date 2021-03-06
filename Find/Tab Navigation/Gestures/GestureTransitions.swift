@@ -55,6 +55,9 @@ extension ViewController {
     
     func startMoveVC(from fromVC: UIViewController, to toVC: UIViewController, direction: Direction, toOverlay: Bool = true) {
         print("start move view controller from \(fromVC), to \(toVC)")
+        camera.focusGestureRecognizer?.isEnabled = false
+        camera.focusGestureRecognizer?.isEnabled = true
+        
         self.addChild(toVC)
         containerView.addSubview(toVC.view)
         toVC.view.frame = containerView.bounds
