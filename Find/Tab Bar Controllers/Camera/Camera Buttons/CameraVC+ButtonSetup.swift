@@ -37,6 +37,7 @@ extension CameraViewController {
             self.cameraChanged?(CameraState.isPaused, true)
             
             if CameraState.isPaused {
+                self.lockFlashlight(lock: true)
                 self.pauseLivePreview()
                 self.adjustButtonLayout(true)
                 
@@ -49,6 +50,7 @@ extension CameraViewController {
                     self.showCacheTip()
                 }
             } else {
+                self.lockFlashlight(lock: false)
                 self.saveToPhotosIfNeeded()
                 self.resetState()
                 self.startLivePreview()
