@@ -17,6 +17,10 @@ extension CameraViewController {
         }
     }
     func startLivePreview() {
+        /// make sure it's running (can stop when going to app switcher and back)
+        if !avSession.isRunning {
+            self.avSession.startRunning()
+        }
         cameraView.videoPreviewLayer.connection?.isEnabled = true
         self.showImageView(false)
     }
