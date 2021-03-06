@@ -34,4 +34,54 @@ extension CameraViewController {
             self.cameraChanged?(fullScreen, false)
         }
     }
+    
+//    func setupFullScreenConstraints() {
+//        fullScreenLeftNeighborC.isActive = true
+//        fullScreenLeftC.isActive = false
+//        fullScreenBottomC.isActive = true
+//        fullScreenTopC.isActive = false
+//
+//        flashRightNeighborC.isActive = true
+//        flashRightC.isActive = false
+//        flashBottomC.isActive = true
+//        flashTopC.isActive = false
+//    }
+    
+    func adjustButtonLayout(_ paused: Bool, animate: Bool = true) {
+        if paused {
+            fullScreenLeftNeighborC.isActive = false
+            fullScreenLeftC.isActive = true
+            fullScreenBottomC.isActive = false
+            fullScreenTopC.isActive = true
+            
+            flashRightNeighborC.isActive = false
+            flashRightC.isActive = true
+            flashBottomC.isActive = false
+            flashTopC.isActive = true
+            
+            fullScreenLeftC.constant = 8
+            flashRightC.constant = 8
+            
+            fullScreenTopC.constant = 8
+            flashTopC.constant = 8
+        } else {
+            fullScreenLeftNeighborC.isActive = true
+            fullScreenLeftC.isActive = false
+            fullScreenBottomC.isActive = true
+            fullScreenTopC.isActive = false
+            
+            flashRightNeighborC.isActive = true
+            flashRightC.isActive = false
+            flashBottomC.isActive = true
+            flashTopC.isActive = false
+        }
+        
+        if animate {
+            UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveLinear) {
+                self.view.layoutIfNeeded()
+            }
+        } else {
+            self.view.layoutIfNeeded()
+        }
+    }
 }

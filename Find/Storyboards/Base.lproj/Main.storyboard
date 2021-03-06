@@ -486,7 +486,6 @@
                                     <constraint firstAttribute="bottom" secondItem="SIG-Pk-jNK" secondAttribute="bottom" constant="40" id="V6B-p4-O4u"/>
                                     <constraint firstItem="Myy-mx-RUb" firstAttribute="centerX" secondItem="ryG-3Q-0nW" secondAttribute="centerX" id="VR8-0X-25P"/>
                                     <constraint firstItem="9h0-TV-oeH" firstAttribute="centerY" secondItem="LAa-ha-Chc" secondAttribute="centerY" id="XEX-nw-d7u"/>
-                                    <constraint firstItem="SIG-Pk-jNK" firstAttribute="top" secondItem="m5W-6E-t5W" secondAttribute="bottom" id="Xpa-rI-3wD"/>
                                     <constraint firstAttribute="bottom" secondItem="m5W-6E-t5W" secondAttribute="bottom" constant="40" id="Ygo-gn-4JO"/>
                                     <constraint firstItem="ffY-JT-gig" firstAttribute="top" secondItem="9h0-TV-oeH" secondAttribute="bottom" constant="6" id="ZPr-IW-lCg"/>
                                     <constraint firstItem="Myy-mx-RUb" firstAttribute="top" secondItem="ryG-3Q-0nW" secondAttribute="bottom" constant="6" id="cj3-HU-Q8N"/>
@@ -505,7 +504,6 @@
                                         <exclude reference="oGD-mU-2eF"/>
                                         <exclude reference="KEx-Vb-KNO"/>
                                         <exclude reference="OLy-KE-EUn"/>
-                                        <exclude reference="Xpa-rI-3wD"/>
                                     </mask>
                                 </variation>
                             </view>

@@ -401,10 +401,12 @@ class CameraViewController: UIViewController {
         cameraIcon.makeActiveState()()
         cameraIcon.rimView.layer.borderColor = UIColor.white.cgColor
         
+        adjustButtonLayout(CameraState.isPaused, animate: false)
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if deviceHasNotch && !deviceIsRoundPad {
             if isForcingStatusBarHidden {
                 normalSearchFieldTopCConstant = -10
