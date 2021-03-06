@@ -64,6 +64,7 @@ class CameraViewController: UIViewController {
     }
     
     
+    var flashlightOn = false
     @IBOutlet weak var flashView: UIView!
     @IBOutlet weak var flashButton: CustomButton!
     @IBOutlet weak var flashImageView: UIImageView!
@@ -72,9 +73,10 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var flashRightC: NSLayoutConstraint!
     @IBOutlet weak var flashBottomC: NSLayoutConstraint!
     @IBAction func flashButtonPressed(_ sender: Any) {
+        print("pressed")
+        flashlightOn.toggle()
+        toggleFlashlight(flashlightOn)
     }
-    
-    
     
     var cameBackFromSettings: (() -> Void)?
     @IBOutlet weak var settingsView: UIView!
@@ -112,11 +114,8 @@ class CameraViewController: UIViewController {
         toggleFullScreen(isFullScreen)
     }
     
-    
     @IBOutlet weak var passthroughView: PassthroughView!
     @IBOutlet weak var passthroughBottomC: NSLayoutConstraint!
-    
-    
     
     //MARK: Stats
     weak var updateStatsNumber: UpdateMatchesNumberStats?

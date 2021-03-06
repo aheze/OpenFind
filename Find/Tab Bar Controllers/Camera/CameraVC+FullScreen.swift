@@ -13,11 +13,11 @@ extension CameraViewController {
         if fullScreen {
             contentTopC.constant = -100
             passthroughBottomC.constant = -120
-            controlsBlurBottomC.constant = CGFloat(ConstantVars.tabHeight) - 20
+            controlsBlurBottomC.constant = CGFloat(ConstantVars.tabHeight) - 30
         } else {
             contentTopC.constant = normalSearchFieldTopCConstant
             passthroughBottomC.constant = 0
-            controlsBlurBottomC.constant = -50
+            controlsBlurBottomC.constant = -controlsBlurView.bounds.height
         }
         
         UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveLinear) {

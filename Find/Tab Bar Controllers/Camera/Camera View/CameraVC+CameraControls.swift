@@ -25,6 +25,7 @@ extension CameraViewController {
     func configureCamera() {
         cameraView.session = avSession
         if let cameraDevice = getCamera() {
+            self.cameraDevice = cameraDevice
             do {
                 let captureDeviceInput = try AVCaptureDeviceInput(device: cameraDevice)
                 if avSession.canAddInput(captureDeviceInput) {
@@ -43,7 +44,6 @@ extension CameraViewController {
             cameraView.videoPreviewLayer.videoGravity = .resizeAspectFill
             let newBounds = view.layer.bounds
             cameraView.videoPreviewLayer.bounds = newBounds
-            print(cameraView.videoPreviewLayer.bounds)
             cameraView.videoPreviewLayer.position = CGPoint(x: newBounds.midX, y: newBounds.midY);
             avSession.startRunning()
         }
