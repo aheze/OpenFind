@@ -28,6 +28,9 @@ extension ViewController {
             
             camera.enableButtons(true)
             
+            tabBarView.cameraIcon.alpha = 0
+            tabBarView.hideRealShutter?(false)
+            
         case is ListsNavController:
             print("ended at lists")
             startCameraShutoff()

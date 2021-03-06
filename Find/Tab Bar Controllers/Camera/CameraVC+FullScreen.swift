@@ -12,10 +12,10 @@ extension CameraViewController {
     func toggleFullScreen(_ fullScreen: Bool) {
         if fullScreen {
             contentTopC.constant = -searchContentView.bounds.height - view.safeAreaInsets.top
-            passthroughBottomC.constant = -passthroughView.bounds.height - CGFloat(view.safeAreaInsets.bottom)
+            passthroughBottomC.constant = -passthroughView.bounds.height - view.safeAreaInsets.bottom
             controlsBlurBottomC.constant = CGFloat(ConstantVars.tabHeight) - 30
             
-            messageViewBottomC.constant = controlsBlurView.bounds.height + controlsBlurBottomC.constant
+            messageViewBottomC.constant = controlsBlurView.bounds.height + controlsBlurBottomC.constant + view.safeAreaInsets.bottom
         } else {
             contentTopC.constant = normalSearchFieldTopCConstant
             passthroughBottomC.constant = 0
@@ -34,19 +34,6 @@ extension CameraViewController {
             self.cameraChanged?(fullScreen, false)
         }
     }
-    
-//    func setupFullScreenConstraints() {
-//        fullScreenLeftNeighborC.isActive = true
-//        fullScreenLeftC.isActive = false
-//        fullScreenBottomC.isActive = true
-//        fullScreenTopC.isActive = false
-//
-//        flashRightNeighborC.isActive = true
-//        flashRightC.isActive = false
-//        flashBottomC.isActive = true
-//        flashTopC.isActive = false
-//    }
-    
     func adjustButtonLayout(_ paused: Bool, animate: Bool = true) {
         if paused {
             fullScreenLeftNeighborC.isActive = false
