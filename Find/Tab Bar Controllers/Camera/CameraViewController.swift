@@ -131,32 +131,56 @@ class CameraViewController: UIViewController {
         fatalError()
     }()
     
-    //MARK: Timer and haptic feedback
+    // MARK: Camera focusing
+    @IBOutlet var focusGestureRecognizer: UILongPressGestureRecognizer!
+    @IBAction func handleFocusGesture(_ sender: UILongPressGestureRecognizer) {
+        guard sender.state == .ended else { return }
+        let location = sender.location(in: drawingView)
+        let focusPoint = cameraView.videoPreviewLayer.captureDevicePointConverted(fromLayerPoint: location) /// might be reversed horizontally
+        
+        if let device = cameraDevice {
+            do {
+                try device.lockForConfiguration()
+                
+                device.focusPointOfInterest = focusPoint
+                //device.focusMode = .continuousAutoFocus
+                device.focusMode = .autoFocus
+                //device.focusMode = .locked
+                device.exposurePointOfInterest = focusPoint
+                device.exposureMode = AVCaptureDevice.ExposureMode.continuousAutoExposure
+                device.unlockForConfiguration()
+            }
+            catch {
+                // just ignore
+            }
+        }
+    }
+    
+    
+    // MARK: Timer and haptic feedback
     var currentPassCount = 0 /// +1 whenever frame added for AV
     
-    //MARK: Toolbar
+    // MARK: Toolbar
     let realm = try! Realm()
     var listCategories: Results<FindList>?
     var editableListCategories = [EditableFindList]()
     var shouldResetHighlights = false
     
-    //MARK: Keyboard
+    // MARK: Keyboard
     let toolbar = ListToolBar()
     var toolbarWidthC: Constraint?
     var toolbarLeftC: Constraint?
     var toolbarTopC: Constraint?
     var didFinishShouldUpdateHeight = false
     
-    //MARK: Search Bar
+    // MARK: Search Bar
     
     var allowSearch = true /// orientation disable
     var allowSearchFocus = true /// disable when on different screen
-    
     var insertingListsCount = 0
     var isSchedulingList = false
     
     @IBOutlet weak var searchContentView: UIView!
-    
     @IBOutlet weak var searchBarLayout: UICollectionViewFlowLayout!
     
     @IBOutlet weak var searchCollectionView: UICollectionView!
@@ -166,6 +190,7 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var warningView: UIView!
     @IBOutlet weak var warningLabel: UILabel!
     @IBOutlet weak var warningHeightC: NSLayoutConstraint!
+    
     var searchShrunk = true
     
     @IBOutlet weak var alternateWarningView: UIView!

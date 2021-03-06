@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CameraFocusView" customModule="Find" customModuleProvider="target">
+            <connections>
+                <outlet property="bottomLeft" destination="Us5-EF-WPn" id="Yz7-3e-9hc"/>
+                <outlet property="bottomRight" destination="CjM-ga-rpH" id="5JE-aE-VVM"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="ZYI-Sa-Baz"/>
+                <outlet property="topLeft" destination="zzp-9N-5iD" id="uE7-ic-138"/>
+                <outlet property="topRight" destination="xAk-6y-7nX" id="cdh-7V-Nh5"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Corner" translatesAutoresizingMaskIntoConstraints="NO" id="zzp-9N-5iD">
+                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="iOO-vD-cFC"/>
+                        <constraint firstAttribute="height" constant="40" id="qb4-zr-oe3"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Corner" translatesAutoresizingMaskIntoConstraints="NO" id="xAk-6y-7nX">
+                    <rect key="frame" x="60" y="0.0" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="PMh-NE-o1L"/>
+                        <constraint firstAttribute="height" constant="40" id="cas-Bs-ITo"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Corner" translatesAutoresizingMaskIntoConstraints="NO" id="CjM-ga-rpH">
+                    <rect key="frame" x="60" y="60" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="9xE-S6-XVh"/>
+                        <constraint firstAttribute="width" constant="40" id="axH-eK-cwf"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Corner" translatesAutoresizingMaskIntoConstraints="NO" id="Us5-EF-WPn">
+                    <rect key="frame" x="0.0" y="60" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="60r-br-KSB"/>
+                        <constraint firstAttribute="width" constant="40" id="Z2z-Mg-RSh"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemGreenColor"/>
+            <constraints>
+                <constraint firstItem="CjM-ga-rpH" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="043-ds-ij8"/>
+                <constraint firstItem="Us5-EF-WPn" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="1jZ-f9-54e"/>
+                <constraint firstItem="Us5-EF-WPn" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="6OL-o2-Ta1"/>
+                <constraint firstItem="zzp-9N-5iD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="6lN-UK-8fe"/>
+                <constraint firstItem="zzp-9N-5iD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FZS-2s-HjB"/>
+                <constraint firstItem="CjM-ga-rpH" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="LUJ-oV-iN0"/>
+                <constraint firstItem="xAk-6y-7nX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dvy-h2-MXv"/>
+                <constraint firstAttribute="trailing" secondItem="xAk-6y-7nX" secondAttribute="trailing" id="vb9-Wh-usi"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="131.8840579710145" y="97.767857142857139"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Corner" width="240" height="240"/>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

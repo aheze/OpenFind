@@ -106,6 +106,8 @@
 		3C9CE49B25BFBFAC006D989C /* CameraVC+Resume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9CE49A25BFBFAC006D989C /* CameraVC+Resume.swift */; };
 		3C9D5F4E25F2E72F002E93F5 /* CameraVC+FullScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9D5F4D25F2E72F002E93F5 /* CameraVC+FullScreen.swift */; };
 		3C9D5F5125F30394002E93F5 /* CameraVC+Flashlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9D5F5025F30394002E93F5 /* CameraVC+Flashlight.swift */; };
+		3C9D5F5525F31F77002E93F5 /* CameraFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9D5F5425F31F77002E93F5 /* CameraFocusView.swift */; };
+		3C9D5F5825F31F87002E93F5 /* CameraFocusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C9D5F5725F31F87002E93F5 /* CameraFocusView.xib */; };
 		3CA63F3625C7BA64001C295E /* TabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F3825C7BA64001C295E /* TabBar.xib */; };
 		3CA63F3C25C7BAA6001C295E /* SegmentedSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F3E25C7BAA6001C295E /* SegmentedSlider.xib */; };
 		3CA63F4525C7BB43001C295E /* EmptyDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F4725C7BB43001C295E /* EmptyDescriptionView.xib */; };
@@ -363,6 +365,8 @@
 		3C9CE49A25BFBFAC006D989C /* CameraVC+Resume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Resume.swift"; sourceTree = "<group>"; };
 		3C9D5F4D25F2E72F002E93F5 /* CameraVC+FullScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+FullScreen.swift"; sourceTree = "<group>"; };
 		3C9D5F5025F30394002E93F5 /* CameraVC+Flashlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Flashlight.swift"; sourceTree = "<group>"; };
+		3C9D5F5425F31F77002E93F5 /* CameraFocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFocusView.swift; sourceTree = "<group>"; };
+		3C9D5F5725F31F87002E93F5 /* CameraFocusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CameraFocusView.xib; sourceTree = "<group>"; };
 		3CA63F3725C7BA64001C295E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TabBar.xib; sourceTree = "<group>"; };
 		3CA63F3B25C7BA6A001C295E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/TabBar.strings"; sourceTree = "<group>"; };
 		3CA63F3D25C7BAA6001C295E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SegmentedSlider.xib; sourceTree = "<group>"; };
@@ -792,6 +796,15 @@
 			path = Actions;
 			sourceTree = "<group>";
 		};
+		3C9D5F5325F31F6A002E93F5 /* Focusing */ = {
+			isa = PBXGroup;
+			children = (
+				3C9D5F5425F31F77002E93F5 /* CameraFocusView.swift */,
+				3C9D5F5725F31F87002E93F5 /* CameraFocusView.xib */,
+			);
+			path = Focusing;
+			sourceTree = "<group>";
+		};
 		3CA679B925C390A7008A00A4 /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -1173,6 +1186,7 @@
 		4969373C2353C277009CA41A /* Camera */ = {
 			isa = PBXGroup;
 			children = (
+				3C9D5F5325F31F6A002E93F5 /* Focusing */,
 				4999AC972353A80A00AB06A7 /* CameraViewController.swift */,
 				3C84F97A25C3AB1B0066A360 /* CameraVC+Settings.swift */,
 				3C42C44525C32B15004DC6E9 /* CameraVC+Lists.swift */,
@@ -1386,6 +1400,7 @@
 				495F7DAA24CBB3970053DE50 /* InfoPlist.strings in Resources */,
 				3C1FE21925BB4246004DC9EF /* SlideFindBar.xib in Resources */,
 				49D985B124188CA4005F4E92 /* NewListToolbarCell.xib in Resources */,
+				3C9D5F5825F31F87002E93F5 /* CameraFocusView.xib in Resources */,
 				3CA63F3C25C7BAA6001C295E /* SegmentedSlider.xib in Resources */,
 				3C4DE704259AD5670037D104 /* NewColors.xcassets in Resources */,
 				3CE306DA259AC46400F1B2E2 /* CameraIcon.xib in Resources */,
@@ -1678,6 +1693,7 @@
 				3C3DF5F625B52A6E00DD7A10 /* PhotoFindVC+PresentSlides.swift in Sources */,
 				3C6EE6B025A2AB350078462A /* GeneralView.swift in Sources */,
 				4956351D243694BC0001E8C6 /* OnboardingContantViewItem.swift in Sources */,
+				3C9D5F5525F31F77002E93F5 /* CameraFocusView.swift in Sources */,
 				3CFF312F25AA79D400D3C56D /* TabBar+Photos.swift in Sources */,
 				3C5B156725A7ED7A00BB8988 /* ViewController+CameraShutoff.swift in Sources */,
 				495F38FE243302D500A17D93 /* StatsViewController.swift in Sources */,

@@ -255,6 +255,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hag-e5-Sys">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="mTz-Si-ynA" appends="YES" id="XFP-7w-icl"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tda-he-8YJ" customClass="PassthroughView" customModule="Find" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="708" width="428" height="218"/>
@@ -802,6 +806,7 @@
                         <outlet property="flashRightNeighborC" destination="2ir-lM-Zqr" id="CDV-yS-x4g"/>
                         <outlet property="flashTopC" destination="KEx-Vb-KNO" id="sXM-fR-rIA"/>
                         <outlet property="flashView" destination="SIG-Pk-jNK" id="PBC-kO-MUe"/>
+                        <outlet property="focusGestureRecognizer" destination="mTz-Si-ynA" id="ix5-Om-3Lv"/>
                         <outlet property="fullScreenBottomC" destination="i6z-7B-INV" id="6eW-15-W6s"/>
                         <outlet property="fullScreenButton" destination="mDv-cq-xgC" id="7Nh-TM-x9U"/>
                         <outlet property="fullScreenImageView" destination="8a0-8g-y2l" id="310-7r-VpX"/>
@@ -845,6 +850,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.0" id="mTz-Si-ynA">
+                    <connections>
+                        <action selector="handleFocusGesture:" destination="BYZ-38-t0r" id="I7m-Kr-PI6"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-710.74766355140184" y="176.88984881209504"/>
         </scene>
