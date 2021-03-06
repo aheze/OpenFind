@@ -34,6 +34,7 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var cameraIconHolderBottomC: NSLayoutConstraint!
     
     @IBOutlet weak var messageView: MessageView!
+    @IBOutlet weak var messageViewBottomC: NSLayoutConstraint!
     @IBOutlet weak var saveToPhotos: SaveToPhotosButton!
     @IBOutlet weak var cameraIcon: CameraIcon!
     @IBOutlet weak var cache: CacheButton!
@@ -74,7 +75,6 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var flashRightC: NSLayoutConstraint!
     @IBOutlet weak var flashBottomC: NSLayoutConstraint!
     @IBAction func flashButtonPressed(_ sender: Any) {
-        print("pressed")
         flashlightOn.toggle()
         toggleFlashlight(flashlightOn)
     }

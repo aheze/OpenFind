@@ -264,11 +264,18 @@
                                     <outletCollection property="gestureRecognizers" destination="mTz-Si-ynA" appends="YES" id="aC8-dj-eDB"/>
                                 </connections>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3X4-Nc-yBe" customClass="MessageView" customModule="Find" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="720" width="428" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="25e-cO-rHI"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tda-he-8YJ" customClass="PassthroughView" customModule="Find" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="708" width="428" height="218"/>
+                                <rect key="frame" x="0.0" y="780" width="428" height="146"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ryG-3Q-0nW" customClass="SaveToPhotosButton" customModule="Find" customModuleProvider="target">
-                                        <rect key="frame" x="100" y="100" width="60" height="60"/>
+                                        <rect key="frame" x="100" y="28" width="60" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="dMd-Xz-Kvc"/>
@@ -276,7 +283,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LAa-ha-Chc">
-                                        <rect key="frame" x="168" y="84" width="92" height="92"/>
+                                        <rect key="frame" x="168" y="12" width="92" height="92"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4D0-uH-dFZ" customClass="CameraIcon" customModule="Find" customModuleProvider="target">
                                                 <rect key="frame" x="26" y="26" width="40" height="40"/>
@@ -296,7 +303,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9h0-TV-oeH" customClass="CacheButton" customModule="Find" customModuleProvider="target">
-                                        <rect key="frame" x="268" y="100" width="60" height="60"/>
+                                        <rect key="frame" x="268" y="28" width="60" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="4W1-fk-zxa"/>
@@ -304,26 +311,19 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Myy-mx-RUb">
-                                        <rect key="frame" x="114.33333333333333" y="166" width="31.333333333333329" height="17"/>
+                                        <rect key="frame" x="114.33333333333333" y="94" width="31.333333333333329" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" name="75White"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cache" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffY-JT-gig">
-                                        <rect key="frame" x="277.33333333333331" y="166" width="41.333333333333314" height="17"/>
+                                        <rect key="frame" x="277.33333333333331" y="94" width="41.333333333333314" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" name="75White"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3X4-Nc-yBe" customClass="MessageView" customModule="Find" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="16" width="428" height="60"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="25e-cO-rHI"/>
-                                        </constraints>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m5W-6E-t5W">
-                                        <rect key="frame" x="382" y="140" width="38" height="38"/>
+                                        <rect key="frame" x="382" y="68" width="38" height="38"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAv-Gj-3md" customClass="CustomButton" customModule="Find" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
@@ -358,7 +358,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VrD-xe-4tc">
-                                        <rect key="frame" x="54" y="140" width="38" height="38"/>
+                                        <rect key="frame" x="54" y="68" width="38" height="38"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDv-cq-xgC" customClass="CustomButton" customModule="Find" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
@@ -393,7 +393,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SIG-Pk-jNK">
-                                        <rect key="frame" x="336" y="140" width="38" height="38"/>
+                                        <rect key="frame" x="336" y="68" width="38" height="38"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9tP-6a-TE7" customClass="CustomButton" customModule="Find" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
@@ -438,7 +438,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kbt-Wb-Lvr">
-                                        <rect key="frame" x="8" y="140" width="38" height="38"/>
+                                        <rect key="frame" x="8" y="68" width="38" height="38"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fK0-3I-lSn" customClass="CustomButton" customModule="Find" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
@@ -475,14 +475,11 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="ffY-JT-gig" firstAttribute="centerX" secondItem="9h0-TV-oeH" secondAttribute="centerX" id="0G3-SD-jKY"/>
-                                    <constraint firstItem="3X4-Nc-yBe" firstAttribute="top" secondItem="Tda-he-8YJ" secondAttribute="top" constant="16" id="0p1-8O-Jkp"/>
                                     <constraint firstItem="ryG-3Q-0nW" firstAttribute="centerY" secondItem="LAa-ha-Chc" secondAttribute="centerY" id="1hv-al-OAj"/>
-                                    <constraint firstItem="LAa-ha-Chc" firstAttribute="top" secondItem="3X4-Nc-yBe" secondAttribute="bottom" constant="8" id="1wZ-Yw-dqm"/>
                                     <constraint firstItem="m5W-6E-t5W" firstAttribute="leading" secondItem="SIG-Pk-jNK" secondAttribute="trailing" constant="8" id="2ir-lM-Zqr"/>
                                     <constraint firstAttribute="bottom" secondItem="LAa-ha-Chc" secondAttribute="bottom" constant="42" id="4ix-l7-edU"/>
                                     <constraint firstItem="Kbt-Wb-Lvr" firstAttribute="leading" secondItem="Tda-he-8YJ" secondAttribute="leading" constant="8" id="74d-RL-qsa"/>
                                     <constraint firstAttribute="bottom" secondItem="Kbt-Wb-Lvr" secondAttribute="bottom" constant="40" id="7Fo-5n-bn7"/>
-                                    <constraint firstAttribute="trailing" secondItem="3X4-Nc-yBe" secondAttribute="trailing" id="Jny-qG-gWo"/>
                                     <constraint firstItem="SIG-Pk-jNK" firstAttribute="top" secondItem="m5W-6E-t5W" secondAttribute="bottom" id="KEx-Vb-KNO"/>
                                     <constraint firstAttribute="trailing" secondItem="SIG-Pk-jNK" secondAttribute="trailing" constant="54" id="OLy-KE-EUn"/>
                                     <constraint firstItem="LAa-ha-Chc" firstAttribute="centerX" secondItem="Tda-he-8YJ" secondAttribute="centerX" id="UK9-31-ftq"/>
@@ -499,7 +496,7 @@
                                     <constraint firstAttribute="bottom" secondItem="VrD-xe-4tc" secondAttribute="bottom" constant="40" id="i6z-7B-INV"/>
                                     <constraint firstItem="VrD-xe-4tc" firstAttribute="top" secondItem="Kbt-Wb-Lvr" secondAttribute="bottom" id="m21-7T-ciq"/>
                                     <constraint firstItem="VrD-xe-4tc" firstAttribute="leading" secondItem="Tda-he-8YJ" secondAttribute="leading" constant="54" id="oGD-mU-2eF"/>
-                                    <constraint firstItem="3X4-Nc-yBe" firstAttribute="leading" secondItem="Tda-he-8YJ" secondAttribute="leading" id="pzR-nb-ykg"/>
+                                    <constraint firstItem="LAa-ha-Chc" firstAttribute="top" secondItem="Tda-he-8YJ" secondAttribute="top" constant="12" id="xED-BC-y3i"/>
                                     <constraint firstItem="VrD-xe-4tc" firstAttribute="leading" secondItem="Kbt-Wb-Lvr" secondAttribute="trailing" constant="8" id="yxT-N9-O2m"/>
                                 </constraints>
                                 <variation key="default">
@@ -764,6 +761,7 @@
                             <constraint firstAttribute="bottom" secondItem="2JP-1T-MxT" secondAttribute="bottom" constant="-50" id="5El-mq-7hs"/>
                             <constraint firstAttribute="trailing" secondItem="20i-dz-JZp" secondAttribute="trailing" id="6cI-uW-wUB"/>
                             <constraint firstAttribute="trailing" secondItem="Fqs-5I-gTN" secondAttribute="trailing" id="7gd-Ab-4AU"/>
+                            <constraint firstItem="3X4-Nc-yBe" firstAttribute="leading" secondItem="oNn-cV-T8L" secondAttribute="leading" id="7hu-Kt-ZTm"/>
                             <constraint firstItem="kV4-Eg-1Ee" firstAttribute="leading" secondItem="oNn-cV-T8L" secondAttribute="leading" constant="8" id="8mP-1w-akg"/>
                             <constraint firstItem="oNn-cV-T8L" firstAttribute="trailing" secondItem="1uu-Wl-x4d" secondAttribute="trailing" constant="16" id="9He-v9-Vjh"/>
                             <constraint firstItem="2JP-1T-MxT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9aW-0c-yNf"/>
@@ -783,6 +781,8 @@
                             <constraint firstItem="oNn-cV-T8L" firstAttribute="trailing" secondItem="g2Y-bj-01H" secondAttribute="trailing" constant="24" id="d0C-X3-qPE"/>
                             <constraint firstItem="Fqs-5I-gTN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="e4u-Wd-VvY"/>
                             <constraint firstItem="20i-dz-JZp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="eIR-0I-FhR"/>
+                            <constraint firstItem="3X4-Nc-yBe" firstAttribute="trailing" secondItem="oNn-cV-T8L" secondAttribute="trailing" id="eUQ-vQ-Yda"/>
+                            <constraint firstItem="Tda-he-8YJ" firstAttribute="top" secondItem="3X4-Nc-yBe" secondAttribute="bottom" id="gv1-g9-0bM"/>
                             <constraint firstItem="Fqs-5I-gTN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="kFU-zp-NaP"/>
                             <constraint firstItem="g2Y-bj-01H" firstAttribute="top" secondItem="1uu-Wl-x4d" secondAttribute="bottom" id="pao-BQ-xDS"/>
                             <constraint firstAttribute="bottom" secondItem="Tda-he-8YJ" secondAttribute="bottom" id="rn7-2I-qHJ"/>
@@ -825,6 +825,7 @@
                         <outlet property="fullScreenView" destination="VrD-xe-4tc" id="80L-wC-VaJ"/>
                         <outlet property="listsLabel" destination="sbj-0t-kKO" id="bsh-5a-IVV"/>
                         <outlet property="messageView" destination="3X4-Nc-yBe" id="79y-RB-NiK"/>
+                        <outlet property="messageViewBottomC" destination="gv1-g9-0bM" id="7be-LI-Me9"/>
                         <outlet property="newSearchTextField" destination="eQO-08-qIa" id="53l-JB-69S"/>
                         <outlet property="passthroughBottomC" destination="rn7-2I-qHJ" id="ECP-QK-CQp"/>
                         <outlet property="passthroughView" destination="Tda-he-8YJ" id="1D6-RJ-Q8S"/>
