@@ -406,6 +406,14 @@
                                                 </constraints>
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium" weight="medium"/>
                                             </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BUI-dq-eb5" customClass="FlashDisableIcon" customModule="Find" customModuleProvider="target">
+                                                <rect key="frame" x="11" y="11" width="16" height="16"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="16" id="P6U-HW-e7H"/>
+                                                    <constraint firstAttribute="height" constant="16" id="Pj0-RU-0Lg"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" name="50Black"/>
                                         <constraints>
@@ -414,7 +422,9 @@
                                             <constraint firstAttribute="height" constant="38" id="Hbw-Cw-gK0"/>
                                             <constraint firstItem="lk9-VA-4ei" firstAttribute="centerY" secondItem="SIG-Pk-jNK" secondAttribute="centerY" id="JNh-7R-G1B"/>
                                             <constraint firstItem="lk9-VA-4ei" firstAttribute="centerX" secondItem="SIG-Pk-jNK" secondAttribute="centerX" id="Lhd-k7-N9b"/>
+                                            <constraint firstItem="BUI-dq-eb5" firstAttribute="centerY" secondItem="SIG-Pk-jNK" secondAttribute="centerY" id="XYi-dO-lxy"/>
                                             <constraint firstAttribute="bottom" secondItem="9tP-6a-TE7" secondAttribute="bottom" id="Zuc-p3-rMv"/>
+                                            <constraint firstItem="BUI-dq-eb5" firstAttribute="centerX" secondItem="SIG-Pk-jNK" secondAttribute="centerX" id="l40-Rt-cSH"/>
                                             <constraint firstAttribute="width" constant="38" id="mmR-c8-CAp"/>
                                             <constraint firstItem="9tP-6a-TE7" firstAttribute="top" secondItem="SIG-Pk-jNK" secondAttribute="top" id="zUY-6l-uNV"/>
                                         </constraints>
@@ -786,6 +796,7 @@
                         <outlet property="drawingView" destination="hag-e5-Sys" id="Njx-lY-a9B"/>
                         <outlet property="flashBottomC" destination="V6B-p4-O4u" id="CHU-nL-VDK"/>
                         <outlet property="flashButton" destination="9tP-6a-TE7" id="A45-pu-NbJ"/>
+                        <outlet property="flashDisableIcon" destination="BUI-dq-eb5" id="taZ-7u-JVk"/>
                         <outlet property="flashImageView" destination="lk9-VA-4ei" id="h46-Dz-tjk"/>
                         <outlet property="flashRightC" destination="OLy-KE-EUn" id="lJk-V2-oyW"/>
                         <outlet property="flashRightNeighborC" destination="2ir-lM-Zqr" id="CDV-yS-x4g"/>

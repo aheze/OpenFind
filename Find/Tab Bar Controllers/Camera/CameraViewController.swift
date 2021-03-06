@@ -66,6 +66,7 @@ class CameraViewController: UIViewController {
     
     var flashlightOn = false
     @IBOutlet weak var flashView: UIView!
+    @IBOutlet weak var flashDisableIcon: FlashDisableIcon!
     @IBOutlet weak var flashButton: CustomButton!
     @IBOutlet weak var flashImageView: UIImageView!
     @IBOutlet weak var flashTopC: NSLayoutConstraint!
