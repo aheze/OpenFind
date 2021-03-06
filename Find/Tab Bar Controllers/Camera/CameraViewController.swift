@@ -421,6 +421,8 @@ class CameraViewController: UIViewController {
             }
         }
         
+        focusGestureRecognizer.delegate = self
+        
         contentTopC.constant = normalSearchFieldTopCConstant
         searchContentView.layoutIfNeeded()
         

@@ -152,6 +152,7 @@
 		3CC230D425C1F9AA00AD04B6 /* VC+LocalTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230D325C1F9AA00AD04B6 /* VC+LocalTip.swift */; };
 		3CC230EB25C2105200AD04B6 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230E925C2105200AD04B6 /* UIKitExtensions.swift */; };
 		3CC230EC25C2105200AD04B6 /* EasyTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230EA25C2105200AD04B6 /* EasyTipView.swift */; };
+		3CC4593C25F40BBE00D31DCF /* CameraVC+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC4593B25F40BBE00D31DCF /* CameraVC+Gestures.swift */; };
 		3CCA9B3425BCD493003BD0E3 /* PhotoSlidesVC+Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCA9B3325BCD493003BD0E3 /* PhotoSlidesVC+Info.swift */; };
 		3CCA9B3F25BCEB37003BD0E3 /* PhotoSlidesVC+ScreenMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCA9B3E25BCEB37003BD0E3 /* PhotoSlidesVC+ScreenMode.swift */; };
 		3CCB840925B0E362000631BA /* PhotosVC+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCB840825B0E362000631BA /* PhotosVC+Delete.swift */; };
@@ -417,6 +418,7 @@
 		3CC230D325C1F9AA00AD04B6 /* VC+LocalTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+LocalTip.swift"; sourceTree = "<group>"; };
 		3CC230E925C2105200AD04B6 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		3CC230EA25C2105200AD04B6 /* EasyTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyTipView.swift; sourceTree = "<group>"; };
+		3CC4593B25F40BBE00D31DCF /* CameraVC+Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Gestures.swift"; sourceTree = "<group>"; };
 		3CCA9B3325BCD493003BD0E3 /* PhotoSlidesVC+Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Info.swift"; sourceTree = "<group>"; };
 		3CCA9B3E25BCEB37003BD0E3 /* PhotoSlidesVC+ScreenMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+ScreenMode.swift"; sourceTree = "<group>"; };
 		3CCB840825B0E362000631BA /* PhotosVC+Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Delete.swift"; sourceTree = "<group>"; };
@@ -1188,6 +1190,7 @@
 			children = (
 				3C9D5F5325F31F6A002E93F5 /* Focusing */,
 				4999AC972353A80A00AB06A7 /* CameraViewController.swift */,
+				3CC4593B25F40BBE00D31DCF /* CameraVC+Gestures.swift */,
 				3C84F97A25C3AB1B0066A360 /* CameraVC+Settings.swift */,
 				3C42C44525C32B15004DC6E9 /* CameraVC+Lists.swift */,
 				3C9D5F4D25F2E72F002E93F5 /* CameraVC+FullScreen.swift */,
@@ -1536,6 +1539,7 @@
 				4956351B243694BC0001E8C6 /* PageView.swift in Sources */,
 				3C4DE701259AD3FF0037D104 /* MessageView.swift in Sources */,
 				3C56C59E25A956450006A667 /* PhotoSlidesViewController.swift in Sources */,
+				3CC4593C25F40BBE00D31DCF /* CameraVC+Gestures.swift in Sources */,
 				4928525A23D617270048EC13 /* ListsController.swift in Sources */,
 				3C1317E225B2581800FCEB79 /* PhotosVC+Finding.swift in Sources */,
 				4990AAE423EDB4EF00FAF37B /* SymbolsViewController.swift in Sources */,
