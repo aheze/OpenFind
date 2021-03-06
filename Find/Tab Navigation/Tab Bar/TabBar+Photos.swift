@@ -35,9 +35,12 @@ extension TabBarView {
     func showPhotoSlideControls(show: Bool) {
         if show {
             controlsReferenceView.isUserInteractionEnabled = true
-            controlsReferenceView.addSubview(photoSlideControls)
-            photoSlideControls.snp.makeConstraints { (make) in
-                make.edges.equalToSuperview()
+            
+            if !photoSlideControls.isDescendant(of: controlsReferenceView) {
+                controlsReferenceView.addSubview(photoSlideControls)
+                photoSlideControls.snp.makeConstraints { (make) in
+                    make.edges.equalToSuperview()
+                }
             }
             
             photoSlideControls.alpha = 0
@@ -54,7 +57,9 @@ extension TabBarView {
                 self.stackView.alpha = 1
                 self.photoSlideControls.alpha = 0
             } completion: { _ in
-                self.photoSlideControls.removeFromSuperview()
+                if !self.controlsReferenceView.isUserInteractionEnabled {
+                    self.photoSlideControls.removeFromSuperview()
+                }
             }
         }
         
