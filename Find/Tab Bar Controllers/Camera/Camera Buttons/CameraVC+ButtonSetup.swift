@@ -113,6 +113,18 @@ extension CameraViewController {
                 self.messageView.hideMessages()
             }
         }
+        
+        saveLabel.layer.shadowColor = UIColor.black.cgColor
+        saveLabel.layer.shadowRadius = 2.0
+        saveLabel.layer.shadowOpacity = 0.75
+        saveLabel.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        saveLabel.layer.masksToBounds = false
+        
+        cacheLabel.layer.shadowColor = UIColor.black.cgColor
+        cacheLabel.layer.shadowRadius = 2.0
+        cacheLabel.layer.shadowOpacity = 0.75
+        cacheLabel.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        cacheLabel.layer.masksToBounds = false
     }
     
     func checkAuthorizationStatus() -> PhotoPermissionAction {
