@@ -35,6 +35,23 @@ extension CameraViewController {
         }
     }
     
+    func removeFocusRects(_ remove: Bool) {
+        focusView.isUserInteractionEnabled = !remove
+        
+        if remove {
+            UIView.animate(withDuration: 0.2) {
+                for existingFocusView in self.focusView.subviews {
+                    existingFocusView.alpha = 0
+                    existingFocusView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                }
+            } completion: { _ in
+                for existingFocusView in self.focusView.subviews {
+                    existingFocusView.removeFromSuperview()
+                }
+            }
+        }
+    }
+    
     func adjustButtonLayout(_ paused: Bool) {
         if paused {
             fullScreenLeftNeighborC.isActive = false

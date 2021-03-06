@@ -37,9 +37,7 @@ extension CameraViewController {
             self.cameraChanged?(CameraState.isPaused, true)
             
             if CameraState.isPaused {
-                self.lockFlashlight(lock: true)
                 self.pauseLivePreview()
-                self.adjustButtonLayout(true)
                 
                 if TipViews.currentLocalStep == 2 {
                     self.startLocalThirdStep()
@@ -50,13 +48,15 @@ extension CameraViewController {
                     self.showCacheTip()
                 }
             } else {
-                self.lockFlashlight(lock: false)
                 self.saveToPhotosIfNeeded()
                 self.resetState()
                 self.startLivePreview()
-                self.adjustButtonLayout(false)
                 self.resetHighlights()
             }
+            
+            self.removeFocusRects(CameraState.isPaused)
+            self.adjustButtonLayout(CameraState.isPaused)
+            self.lockFlashlight(lock: CameraState.isPaused)
         }
         saveToPhotos.alpha = 0
         saveToPhotos.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)

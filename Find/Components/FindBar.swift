@@ -58,6 +58,7 @@ class FindBar: UIView, UITextFieldDelegate {
             self.warningButton.isHidden = true
             self.okButton.isHidden = false
             self.okButton.alpha = 0
+            
             UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5) {
                 self.warningLabel.alpha = 1
                 self.okButton.alpha = 1
