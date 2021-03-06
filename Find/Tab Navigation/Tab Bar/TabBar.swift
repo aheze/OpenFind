@@ -151,13 +151,13 @@ class TabBarView: UIView {
         photosIcon.pressed = { [weak self] in
             guard let self = self else { return }
             if let currentVC = ViewControllerState.currentVC {
-                let (prep, block) = self.getBlocks(from: currentVC, to: .photos)
+                let (prep, block, completion) = self.getBlocks(from: currentVC, to: .photos)
                 if let block = block {
                     if (self.checkIfAnimating ?? { false })() == false {
                         prep()
                         self.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
                         self.makeLayerInactiveState(duration: Constants.transitionDuration)
-                        self.animate(block: block, completion: {})
+                        self.animate(block: block, completion: completion)
                     }
                     self.changedViewController?(.photos)
                 }
@@ -166,13 +166,13 @@ class TabBarView: UIView {
         cameraIcon.pressed = { [weak self] in
             guard let self = self else { return }
             if let currentVC = ViewControllerState.currentVC {
-                let (prep, block) = self.getBlocks(from: currentVC, to: .camera)
+                let (prep, block, completion) = self.getBlocks(from: currentVC, to: .camera)
                 if let block = block {
                     if (self.checkIfAnimating ?? { false })() == false {
                         prep()
                         self.cameraIcon.makeLayerActiveState(duration: Constants.transitionDuration)
                         self.makeLayerActiveState(duration: Constants.transitionDuration)
-                        self.animate(block: block, completion: {})
+                        self.animate(block: block, completion: completion)
                     }
                     self.changedViewController?(.camera)
                 }
@@ -181,13 +181,13 @@ class TabBarView: UIView {
         listsIcon.pressed = { [weak self] in
             guard let self = self else { return }
             if let currentVC = ViewControllerState.currentVC {
-                let (prep, block) = self.getBlocks(from: currentVC, to: .lists)
+                let (prep, block, completion) = self.getBlocks(from: currentVC, to: .lists)
                 if let block = block {
                     if (self.checkIfAnimating ?? { false })() == false {
                         prep()
                         self.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
                         self.makeLayerInactiveState(duration: Constants.transitionDuration)
-                        self.animate(block: block, completion: {})
+                        self.animate(block: block, completion: completion)
                     }
                     self.changedViewController?(.lists)
                 }
@@ -201,12 +201,12 @@ class TabBarView: UIView {
     }
     
     func getBlocks(from fromVC: UIViewController, to toVCType: ViewControllerType) -> (
-        (() -> Void), (() -> Void)?
+        (() -> Void), (() -> Void)?, (() -> Void)
     ) {
         
         var prep: (() -> Void) = {}
         var block: (() -> Void)? = nil
-//        var completion: (() -> Void) = {}
+        var completion: (() -> Void) = {}
         
         switch toVCType {
         case .photos:
@@ -259,11 +259,11 @@ class TabBarView: UIView {
                     makeOtherInactive()
                     makeActive()
                 }
-//                completion = {
-//                    print("Unhide real shutter 1")
-//                    self.cameraIcon.alpha = 0
-//                    self.hideRealShutter?(false)
-//                }
+                completion = {
+                    print("Unhide real shutter 1")
+                    self.cameraIcon.alpha = 0
+                    self.hideRealShutter?(false)
+                }
 
             case is CameraViewController:
                 print("currently camera")
@@ -280,11 +280,11 @@ class TabBarView: UIView {
                     makeOtherInactive()
                     makeActive()
                 }
-//                completion = {
-//                    print("Unhide real shutter 2")
-//                    self.cameraIcon.alpha = 0
-//                    self.hideRealShutter?(false)
-//                }
+                completion = {
+                    print("Unhide real shutter 2")
+                    self.cameraIcon.alpha = 0
+                    self.hideRealShutter?(false)
+                }
             default:
                 print("could not cast view controller")
             }
@@ -322,7 +322,7 @@ class TabBarView: UIView {
             }
         }
 
-        return (prep, block)
+        return (prep, block, completion)
     }
     
     func animate(block: @escaping (() -> Void), completion: @escaping (() -> Void)) {

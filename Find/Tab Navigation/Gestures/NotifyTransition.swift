@@ -9,7 +9,7 @@
 import UIKit
 
 extension ViewController {
-    func notifyCompletion(finishedAtVC currentVC: UIViewController) {
+    func notifyCompletion(finishedAtVC currentVC: UIViewController, animatedToCamera: Bool = true) {
         print("notifying")
         switch currentVC {
         case is PhotosWrapperController:
@@ -28,8 +28,11 @@ extension ViewController {
             
             camera.enableButtons(true)
             
-            tabBarView.cameraIcon.alpha = 0
-            tabBarView.hideRealShutter?(false)
+            if animatedToCamera {
+                print("Animated to camera, hide shutter")
+                tabBarView.cameraIcon.alpha = 0
+                tabBarView.hideRealShutter?(false)
+            }
             
         case is ListsNavController:
             print("ended at lists")

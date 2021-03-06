@@ -132,7 +132,7 @@ extension ViewController {
                     print("default trans")
                 }
                 
-                notifyCompletion(finishedAtVC: toVC)
+                notifyCompletion(finishedAtVC: toVC, animatedToCamera: false)
             }
             
         } else { /// normal button press
@@ -182,7 +182,7 @@ extension ViewController {
                     print("Could not cast transition vc")
                 }
                 
-                notifyCompletion(finishedAtVC: toVC)
+                notifyCompletion(finishedAtVC: toVC, animatedToCamera: false)
             }
         }
     }

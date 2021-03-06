@@ -227,7 +227,7 @@ extension ViewController {
         )
         
         var block: (() -> Void) = {}
-//        var tabCompletion: (() -> Void) = {}
+        var tabCompletion: (() -> Void) = {}
         
         var finishImmediately = false
         
@@ -238,7 +238,7 @@ extension ViewController {
                 print("ERROR! Is same")
             case is CameraViewController:
                 if favoredDirection == .left { /// completed
-                    let (prep, animations) = tabBarView.getBlocks(from: fromVC, to: .camera)
+                    let (prep, animations, completion) = tabBarView.getBlocks(from: fromVC, to: .camera)
                     prep()
                     tabBarView.animatingObjects += 1
                     tabBarView.cameraIcon.makeLayerActiveState(duration: Constants.transitionDuration)
@@ -247,7 +247,7 @@ extension ViewController {
                         fromVC.view.frame.origin.x = -self.containerView.frame.width
                         animations?()
                     }
-//                    tabCompletion = completion
+                    tabCompletion = completion
                     gestures.framePositionWhenLifted = fromVC.view.frame.origin.x
                     gestures.viewToTrackChanges = fromVC.view
                     
@@ -256,7 +256,7 @@ extension ViewController {
                     }
                     gestures.completedMove = true
                 } else if favoredDirection == .right { /// cancelled
-                    let (_, animations) = tabBarView.getBlocks(from: toVC, to: .photos)
+                    let (_, animations, completion) = tabBarView.getBlocks(from: toVC, to: .photos)
                     tabBarView.animatingObjects += 1
                     tabBarView.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
                     tabBarView.makeLayerInactiveState(duration: Constants.transitionDuration)
@@ -264,7 +264,7 @@ extension ViewController {
                         fromVC.view.frame.origin.x = 0
                         animations?()
                     }
-//                    tabCompletion = completion
+                    tabCompletion = completion
                     gestures.framePositionWhenLifted = fromVC.view.frame.origin.x
                     gestures.viewToTrackChanges = fromVC.view
                     gestures.completedMove = false
@@ -279,7 +279,7 @@ extension ViewController {
             switch toVC {
             case is PhotosWrapperController:
                 if favoredDirection == .right { /// completed
-                    let (prep, animations) = tabBarView.getBlocks(from: fromVC, to: .photos)
+                    let (prep, animations, completion) = tabBarView.getBlocks(from: fromVC, to: .photos)
                     prep()
                     tabBarView.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
                     tabBarView.makeLayerInactiveState(duration: Constants.transitionDuration)
@@ -288,12 +288,12 @@ extension ViewController {
                         toVC.view.frame.origin.x = 0
                         animations?()
                     }
-//                    tabCompletion = completion
+                    tabCompletion = completion
                     gestures.framePositionWhenLifted = toVC.view.frame.origin.x
                     gestures.viewToTrackChanges = toVC.view
                     gestures.completedMove = true
                 } else if favoredDirection == .left { /// canceled
-                    let (_, animations) = tabBarView.getBlocks(from: toVC, to: .camera)
+                    let (_, animations, completion) = tabBarView.getBlocks(from: toVC, to: .camera)
                     tabBarView.animatingObjects += 1
                     tabBarView.cameraIcon.makeLayerActiveState(duration: Constants.transitionDuration)
                     tabBarView.makeLayerActiveState(duration: Constants.transitionDuration)
@@ -301,7 +301,7 @@ extension ViewController {
                         toVC.view.frame.origin.x = -self.containerView.frame.width
                         animations?()
                     }
-//                    tabCompletion = completion
+                    tabCompletion = completion
                     if currentX < -Constants.gesturePadding {
                         finishImmediately = true
                     }
@@ -314,7 +314,7 @@ extension ViewController {
                 print("ERROR! Is same")
             case is ListsNavController:
                 if favoredDirection == .left { /// completed
-                    let (prep, animations) = tabBarView.getBlocks(from: fromVC, to: .lists)
+                    let (prep, animations, completion) = tabBarView.getBlocks(from: fromVC, to: .lists)
                     prep()
                     tabBarView.animatingObjects += 1
                     tabBarView.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
@@ -323,12 +323,12 @@ extension ViewController {
                         toVC.view.frame.origin.x = 0
                         animations?()
                     }
-//                    tabCompletion = completion
+                    tabCompletion = completion
                     gestures.framePositionWhenLifted = toVC.view.frame.origin.x
                     gestures.viewToTrackChanges = toVC.view
                     gestures.completedMove = true
                 } else if favoredDirection == .right { /// cancelled
-                    let (_, animations) = tabBarView.getBlocks(from: toVC, to: .camera)
+                    let (_, animations, completion) = tabBarView.getBlocks(from: toVC, to: .camera)
                     tabBarView.animatingObjects += 1
                     tabBarView.cameraIcon.makeLayerActiveState(duration: Constants.transitionDuration)
                     tabBarView.makeLayerActiveState(duration: Constants.transitionDuration)
@@ -339,7 +339,7 @@ extension ViewController {
                     if currentX > containerView.frame.width + Constants.gesturePadding {
                         finishImmediately = true
                     }
-//                    tabCompletion = completion
+                    tabCompletion = completion
                     gestures.framePositionWhenLifted = toVC.view.frame.origin.x
                     gestures.viewToTrackChanges = toVC.view
                     gestures.completedMove = false
@@ -354,7 +354,7 @@ extension ViewController {
                 print("error! Should not swipe from lists to photos")
             case is CameraViewController:
                 if favoredDirection == .right { /// completed
-                    let (prep, animations) = tabBarView.getBlocks(from: fromVC, to: .camera)
+                    let (prep, animations, completion) = tabBarView.getBlocks(from: fromVC, to: .camera)
                     prep()
                     tabBarView.animatingObjects += 1
                     tabBarView.cameraIcon.makeLayerActiveState(duration: Constants.transitionDuration)
@@ -363,7 +363,7 @@ extension ViewController {
                         fromVC.view.frame.origin.x = self.containerView.frame.width
                         animations?()
                     }
-//                    tabCompletion = completion
+                    tabCompletion = completion
                     gestures.framePositionWhenLifted = fromVC.view.frame.origin.x
                     gestures.viewToTrackChanges = fromVC.view
                     
@@ -372,7 +372,7 @@ extension ViewController {
                     }
                     gestures.completedMove = true
                 } else if favoredDirection == .left { /// cancelled
-                    let (_, animations) = tabBarView.getBlocks(from: toVC, to: .lists)
+                    let (_, animations, completion) = tabBarView.getBlocks(from: toVC, to: .lists)
                     tabBarView.animatingObjects += 1
                     tabBarView.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
                     tabBarView.makeLayerInactiveState(duration: Constants.transitionDuration)
@@ -380,7 +380,7 @@ extension ViewController {
                         fromVC.view.frame.origin.x = 0
                         animations?()
                     }
-//                    tabCompletion = completion
+                    tabCompletion = completion
                     gestures.framePositionWhenLifted = fromVC.view.frame.origin.x
                     gestures.viewToTrackChanges = fromVC.view
                     gestures.completedMove = false
@@ -398,9 +398,9 @@ extension ViewController {
         let completion: (() -> Void) = {
             self.tabBarView.animatingObjects -= 1
             
-//            if self.tabBarView.animatingObjects == 0 || self.tabBarView.gestureInterruptedButton {
-//                tabCompletion()
-//            }
+            if self.tabBarView.animatingObjects == 0 || self.tabBarView.gestureInterruptedButton {
+                tabCompletion()
+            }
             
             if self.tabBarView.animatingObjects == 0 {
                 self.tabBarView.gestureInterruptedButton = false
