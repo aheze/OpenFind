@@ -150,6 +150,7 @@ struct PeopleView: View {
                         .background(Color(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1).withAlphaComponent(0.5)))
                         .cornerRadius(12)
                     }
+                    .buttonStyle(PlainButtonStyle())
                     .padding(EdgeInsets(top: 0, leading: 20, bottom: 4, trailing: 20))
                     
                     Button(action: {
@@ -162,7 +163,9 @@ struct PeopleView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 80, height: 80)
-                                .clipShape(Circle())
+                                .clipShape(
+                                    Circle()
+                                )
                                 .overlay(
                                     Circle()
                                         .strokeBorder(
@@ -201,6 +204,7 @@ struct PeopleView: View {
                         .background(Color(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1).withAlphaComponent(0.5)))
                         .cornerRadius(12)
                     }
+                    .buttonStyle(PlainButtonStyle())
                     .padding(EdgeInsets(top: 4, leading: 20, bottom: 12, trailing: 20))
                     
                 }
