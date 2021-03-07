@@ -414,7 +414,7 @@ class CameraViewController: UIViewController {
             if isForcingStatusBarHidden {
                 normalSearchFieldTopCConstant = -10
             } else {
-                normalSearchFieldTopCConstant = -6
+                normalSearchFieldTopCConstant = -2
             }
         } else {
             if isForcingStatusBarHidden {
