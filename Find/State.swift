@@ -75,7 +75,7 @@ struct ConstantVars { /// calculated based on device size
     static var tabHeight = 84
     
     static var shouldHaveStatusBar = true
-    static var shouldHaveLightStatusBar = true
+    static var shouldHaveLightStatusBar = false
 }
 
 struct Defaults {

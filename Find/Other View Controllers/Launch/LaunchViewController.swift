@@ -177,6 +177,24 @@ class LaunchViewController: UIViewController {
     
     let defaults = UserDefaults.standard
     
+    var appearedBefore = false
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if !appearedBefore {
+            appearedBefore = true
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                ConstantVars.shouldHaveLightStatusBar = true
+                UIView.animate(withDuration: 0.3) {
+                    if !isForcingStatusBarHidden {
+                        self.setNeedsStatusBarAppearanceUpdate()
+                    }
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
