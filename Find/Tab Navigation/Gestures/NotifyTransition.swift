@@ -16,11 +16,11 @@ extension ViewController {
             print("ended at photos")
             startCameraShutoff()
             
-            shouldHaveLightStatusBar = false
+            ConstantVars.shouldHaveLightStatusBar = false
         case is CameraViewController:
             print("ended at camera")
             startCamera()
-            shouldHaveLightStatusBar = true
+            ConstantVars.shouldHaveLightStatusBar = true
             
             if TipViews.currentLocalStep == 1 {
                 startLocalSecondStep()
@@ -38,7 +38,7 @@ extension ViewController {
             print("ended at lists")
             startCameraShutoff()
             
-            shouldHaveLightStatusBar = false
+            ConstantVars.shouldHaveLightStatusBar = false
         default:
             print("Unknown notified VC")
         }

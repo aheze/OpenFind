@@ -19,6 +19,23 @@ enum LaunchAction {
 }
 class LaunchViewController: UIViewController {
     
+    // MARK: Status bar
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if traitCollection.userInterfaceStyle == .light {
+            return ConstantVars.shouldHaveLightStatusBar ? .lightContent : .darkContent
+        } else {
+            return .lightContent
+        }
+    }
+    override var prefersStatusBarHidden: Bool {
+        if isForcingStatusBarHidden {
+            self.additionalSafeAreaInsets.top = 20
+            return true
+        } else {
+            return !ConstantVars.shouldHaveStatusBar
+        }
+    }
+    
     /// Hold the main view controller
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var blueCoverView: UIView!
@@ -337,7 +354,7 @@ class LaunchViewController: UIViewController {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController")
             
-            viewController.modalPresentationCapturesStatusBarAppearance = true
+//            viewController.modalPresentationCapturesStatusBarAppearance = true
             
             
             self.addChild(viewController, in: self.containerView)

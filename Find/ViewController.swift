@@ -22,27 +22,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var shadeView: UIView!
     
-    
     var globalUrl: URL = URL(fileURLWithPath: "")
     
-    var shouldHaveStatusBar = true
-    var shouldHaveLightStatusBar = true
-    // MARK: Status bar
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        if traitCollection.userInterfaceStyle == .light {
-            return shouldHaveLightStatusBar ? .lightContent : .darkContent
-        } else {
-            return .lightContent
-        }
-    }
-    override var prefersStatusBarHidden: Bool {
-        if isForcingStatusBarHidden {
-            self.additionalSafeAreaInsets.top = 20
-            return true
-        } else {
-            return !shouldHaveStatusBar
-        }
-    }
     // MARK: - View Controllers
     
     lazy var photos: PhotosWrapperController = {
@@ -91,7 +72,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             viewController.hideTabBar = { [weak self] shouldHide in
                 guard let self = self else { return }
                 
-                self.shouldHaveStatusBar = !shouldHide
+                ConstantVars.shouldHaveStatusBar = !shouldHide
                 UIView.animate(withDuration: 0.2) {
                     self.tabBarView.alpha = shouldHide ? 0 : 1
                     self.updateStatusBar()
@@ -99,7 +80,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             viewController.slidesPresentingInfo = { [weak self] presenting in
                 guard let self = self else { return }
-                self.shouldHaveLightStatusBar = presenting
+                ConstantVars.shouldHaveLightStatusBar = presenting
                 UIView.animate(withDuration: 0.2) {
                     self.updateStatusBar()
                 }
@@ -222,7 +203,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             viewController.presentingList = { [weak self] presenting in
                 guard let self = self else { return }
-                self.shouldHaveLightStatusBar = presenting
+                ConstantVars.shouldHaveLightStatusBar = presenting
                 UIView.animate(withDuration: 0.3) {
                     self.updateStatusBar()
                 }

@@ -73,6 +73,9 @@ struct ConstantVars { /// calculated based on device size
     static var cameraShutterAvoidFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
     static var photoFilterAvoidFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
     static var tabHeight = 84
+    
+    static var shouldHaveStatusBar = true
+    static var shouldHaveLightStatusBar = true
 }
 
 struct Defaults {
