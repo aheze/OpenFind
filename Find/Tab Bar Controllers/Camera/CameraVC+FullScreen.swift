@@ -28,6 +28,9 @@ extension CameraViewController {
             self.controlsBlurView.transform = fullScreen ? CGAffineTransform.identity : CGAffineTransform(scaleX: 0.7, y: 0.7)
             self.controlsBlurView.effect = fullScreen ? UIBlurEffect(style: .dark) : nil
             self.showControlsButton.alpha = fullScreen ? 1 : 0
+            
+            self.promptContainerView.alpha = fullScreen ? 0 : 1
+            
         }
         
         if !CameraState.isPaused {

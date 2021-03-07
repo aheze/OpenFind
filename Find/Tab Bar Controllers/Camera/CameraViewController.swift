@@ -225,6 +225,9 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var searchCollectionTopC: NSLayoutConstraint!
     @IBOutlet weak var searchCollectionRightC: NSLayoutConstraint!
     
+    // MARK: Prompts
+    @IBOutlet weak var promptContainerView: PassthroughView!
+    
     @IBOutlet weak var warningView: UIView!
     @IBOutlet weak var warningLabel: UILabel!
     @IBOutlet weak var warningHeightC: NSLayoutConstraint!

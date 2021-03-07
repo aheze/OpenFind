@@ -260,7 +260,6 @@ class TabBarView: UIView {
                     makeActive()
                 }
                 completion = {
-                    print("Unhide real shutter 1")
                     self.cameraIcon.alpha = 0
                     self.hideRealShutter?(false)
                 }
@@ -281,7 +280,6 @@ class TabBarView: UIView {
                     makeActive()
                 }
                 completion = {
-                    print("Unhide real shutter 2")
                     self.cameraIcon.alpha = 0
                     self.hideRealShutter?(false)
                 }
