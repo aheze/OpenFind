@@ -262,7 +262,7 @@ class LaunchViewController: UIViewController {
         cornersViewMaxWidth = view.bounds.width - CGFloat(20)
         cornersViewMaxHeight = view.bounds.height - CGFloat(topHeight * 2 - 50)
         
-        let restrictedInnerViewWidth = min(400, innerViewMaxWidth)
+        let restrictedInnerViewWidth = min(400 - 50, innerViewMaxWidth)
         let restrictedInnerViewHeight = min(400 - 50, innerViewMaxHeight)
         let restrictedCornersViewWidth = min(400, cornersViewMaxWidth)
         let restrictedCornersViewHeight = min(400, cornersViewMaxHeight)

@@ -25,18 +25,6 @@ extension PhotosViewController {
             //Scroll the collectionView to the current selectedIndexPath which is offscreen
             collectionView.scrollToItem(at: selectedIndexPath, at: .centeredVertically, animated: false)
             
-            //Reload the items at the newly visible indexPaths
-//            collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
-            
-//            let visiblePaths = collectionView.indexPathsForVisibleItems
-//            var changedPhotos = [FindPhoto]()
-//            for indexPath in visiblePaths {
-//                if let findPhoto = dataSource.itemIdentifier(for: indexPath) {
-//                    changedPhotos.append(findPhoto)
-//                }
-//            }
-////            applyModelSnapshot(changedItems: changedPhotos)
-//            reloadPaths(changedPaths: <#T##[IndexPath]#>)
             collectionView.layoutIfNeeded()
             
             //Guard against nil values
@@ -74,17 +62,6 @@ extension PhotosViewController {
             //Scroll the collectionView to the cell that is currently offscreen
             collectionView.scrollToItem(at: selectedIndexPath, at: .centeredVertically, animated: false)
             
-            //Reload the items at the newly visible indexPaths
-//            collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
-            
-//            let visiblePaths = collectionView.indexPathsForVisibleItems
-//            var changedPhotos = [FindPhoto]()
-//            for indexPath in visiblePaths {
-//                if let findPhoto = dataSource.itemIdentifier(for: indexPath) {
-//                    changedPhotos.append(findPhoto)
-//                }
-//            }
-//            applyModelSnapshot(changedItems: changedPhotos)
             collectionView.layoutIfNeeded()
             
             //Prevent the collectionView from returning a nil value
@@ -100,6 +77,8 @@ extension PhotosViewController {
             guard let guardedCell = (collectionView.cellForItem(at: selectedIndexPath) as? ImageCell) else {
                 return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
             }
+            
+            print("freame!!!!!! \( guardedCell.frame)")
             //The cell was found successfully
             return guardedCell.frame
         }

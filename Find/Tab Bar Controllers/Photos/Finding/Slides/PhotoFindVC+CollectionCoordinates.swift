@@ -32,12 +32,11 @@ extension PhotoFindViewController {
         if cellFrame.minY < self.tableView.contentInset.top {
             return CGRect(x: cellFrame.minX, y: self.tableView.contentInset.top, width: cellFrame.width, height: cellFrame.height - (self.tableView.contentInset.top - cellFrame.minY))
         }
-        let superCellFrame = self.tableView.convert(unconvertedFrame, to: nil)
-        let cellYDiff = superCellFrame.origin.y - cellFrame.origin.y
-        let cellXDiff = superCellFrame.origin.x - cellFrame.origin.x
         
-        cellFrame.origin.y += cellYDiff
-        cellFrame.origin.x += cellXDiff
+        /// Don't convert frame to nil
+        
+        cellFrame.origin.y += self.view.frame.origin.y
+        
         return cellFrame
     }
     
@@ -115,12 +114,12 @@ extension PhotoFindViewController {
                 
                 //Prevent the collectionView from returning a nil value
                 guard let guardedCell = (self.tableView.cellForRow(at: selectedIndexPath) as? HistoryFindCell) else {
-                    return CGRect(x: screenBounds.midX, y: screenBounds.midY + addTopHeight(presenting: presenting), width: 100.0, height: 100.0)
+                    return CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0)
                 }
                 
                 var cellFrame = guardedCell.frame
                 cellFrame.origin.x += 16
-                cellFrame.origin.y += 6 + addTopHeight(presenting: presenting)
+                cellFrame.origin.y += 6
                 cellFrame.size.width = 100
                 cellFrame.size.height -= 12
                 
@@ -130,13 +129,13 @@ extension PhotoFindViewController {
             else {
                 //Prevent the collectionView from returning a nil value
                 guard let guardedCell = (self.tableView.cellForRow(at: selectedIndexPath) as? HistoryFindCell) else {
-                    return CGRect(x: screenBounds.midX, y: screenBounds.midY + addTopHeight(presenting: presenting), width: 100.0, height: 100.0)
+                    return CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0)
                 }
                 //The cell was found successfully
                 //                return guardedCell.frame
                 var cellFrame = guardedCell.frame
                 cellFrame.origin.x += 16
-                cellFrame.origin.y += 6 + addTopHeight(presenting: presenting)
+                cellFrame.origin.y += 6
                 cellFrame.size.width = 100
                 cellFrame.size.height -= 12
                 
@@ -153,30 +152,17 @@ extension PhotoFindViewController {
             
             //Prevent the collectionView from returning a nil value
             guard let guardedCell = (self.tableView.cellForRow(at: selectedIndexPath) as? HistoryFindCell) else {
-                return CGRect(x: screenBounds.midX, y: screenBounds.midY + addTopHeight(presenting: presenting), width: 100.0, height: 100.0)
+                return CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0)
             }
             
-            //            return guardedCell.frame
+            
             var cellFrame = guardedCell.frame
             cellFrame.origin.x += 16
-            cellFrame.origin.y += 6 + addTopHeight(presenting: presenting)
+            cellFrame.origin.y += 6
             cellFrame.size.width = 100
             cellFrame.size.height -= 12
             
             return cellFrame
-        }
-    }
-    func addTopHeight(presenting: Bool) -> CGFloat {
-        print("Add top height! tabl off:\(tableView.contentOffset.y)")
-        
-        if presenting {
-            return 0
-        } else {
-            
-            let topInset = self.view.frame.origin.y + tableView.frame.origin.y - tableView.contentOffset.y
-            print(topInset)
-            
-            return topInset
         }
     }
 }
