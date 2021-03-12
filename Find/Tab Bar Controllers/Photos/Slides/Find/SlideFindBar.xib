@@ -28,6 +28,20 @@
                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="PKe-yD-clO">
                         <rect key="frame" x="0.0" y="0.0" width="501" height="45"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ac-GY-EL7">
+                                <rect key="frame" x="0.0" y="45" width="501" height="0.0"/>
+                                <color key="backgroundColor" systemColor="placeholderTextColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.25" id="ZKc-rh-Nss"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="8Ac-GY-EL7" firstAttribute="leading" secondItem="PKe-yD-clO" secondAttribute="leading" id="6PD-9s-EQS"/>
+                            <constraint firstAttribute="bottom" secondItem="8Ac-GY-EL7" secondAttribute="bottom" id="U2Y-Si-w6O"/>
+                            <constraint firstAttribute="trailing" secondItem="8Ac-GY-EL7" secondAttribute="trailing" id="ZP1-a6-CIz"/>
+                        </constraints>
                     </view>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="dex-0t-5tI"/>
@@ -67,6 +81,9 @@
         </view>
     </objects>
     <resources>
+        <systemColor name="placeholderTextColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
