@@ -25,7 +25,7 @@ extension PhotoFindViewController {
         self.tableView.layoutIfNeeded()
         
         //Get a guarded reference to the cell's frame
-        let unconvertedFrame = getFrameFromCollectionViewCell(for: selectedIndexPath)
+        let unconvertedFrame = getFrameFromCollectionViewCell(for: selectedIndexPath, presenting: zoomAnimator.isPresenting)
         
         var cellFrame = self.tableView.convert(unconvertedFrame, to: self.view)
         
@@ -92,7 +92,8 @@ extension PhotoFindViewController {
     
     //This function prevents the collectionView from accessing a deallocated cell. In the
     //event that the cell for the selectedIndexPath is nil, a default CGRect is returned in its place
-    func getFrameFromCollectionViewCell(for selectedIndexPath: IndexPath) -> CGRect {
+    func getFrameFromCollectionViewCell(for selectedIndexPath: IndexPath, presenting: Bool) -> CGRect {
+
         //Get the currently visible cells from the collectionView
         if let visibleCells = self.tableView.indexPathsForVisibleRows {
             
@@ -114,12 +115,12 @@ extension PhotoFindViewController {
                 
                 //Prevent the collectionView from returning a nil value
                 guard let guardedCell = (self.tableView.cellForRow(at: selectedIndexPath) as? HistoryFindCell) else {
-                    return CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0)
+                    return CGRect(x: screenBounds.midX, y: screenBounds.midY + addTopHeight(presenting: presenting), width: 100.0, height: 100.0)
                 }
                 
                 var cellFrame = guardedCell.frame
                 cellFrame.origin.x += 16
-                cellFrame.origin.y += 6
+                cellFrame.origin.y += 6 + addTopHeight(presenting: presenting)
                 cellFrame.size.width = 100
                 cellFrame.size.height -= 12
                 
@@ -129,13 +130,13 @@ extension PhotoFindViewController {
             else {
                 //Prevent the collectionView from returning a nil value
                 guard let guardedCell = (self.tableView.cellForRow(at: selectedIndexPath) as? HistoryFindCell) else {
-                    return CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0)
+                    return CGRect(x: screenBounds.midX, y: screenBounds.midY + addTopHeight(presenting: presenting), width: 100.0, height: 100.0)
                 }
                 //The cell was found successfully
                 //                return guardedCell.frame
                 var cellFrame = guardedCell.frame
                 cellFrame.origin.x += 16
-                cellFrame.origin.y += 6
+                cellFrame.origin.y += 6 + addTopHeight(presenting: presenting)
                 cellFrame.size.width = 100
                 cellFrame.size.height -= 12
                 
@@ -152,17 +153,30 @@ extension PhotoFindViewController {
             
             //Prevent the collectionView from returning a nil value
             guard let guardedCell = (self.tableView.cellForRow(at: selectedIndexPath) as? HistoryFindCell) else {
-                return CGRect(x: screenBounds.midX, y: screenBounds.midY, width: 100.0, height: 100.0)
+                return CGRect(x: screenBounds.midX, y: screenBounds.midY + addTopHeight(presenting: presenting), width: 100.0, height: 100.0)
             }
             
             //            return guardedCell.frame
             var cellFrame = guardedCell.frame
             cellFrame.origin.x += 16
-            cellFrame.origin.y += 6
+            cellFrame.origin.y += 6 + addTopHeight(presenting: presenting)
             cellFrame.size.width = 100
             cellFrame.size.height -= 12
             
             return cellFrame
+        }
+    }
+    func addTopHeight(presenting: Bool) -> CGFloat {
+        print("Add top height! tabl off:\(tableView.contentOffset.y)")
+        
+        if presenting {
+            return 0
+        } else {
+            
+            let topInset = self.view.frame.origin.y + tableView.frame.origin.y - tableView.contentOffset.y
+            print(topInset)
+            
+            return topInset
         }
     }
 }

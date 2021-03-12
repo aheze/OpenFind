@@ -12,7 +12,6 @@ import UIKit
 extension PhotoFindViewController: PhotoSlidesUpdatedIndex {
     
     func indexUpdated(to newIndex: Int) {
-        print("ind updatedt to \(newIndex)")
         let currentPhoto = resultPhotos[newIndex]
         let indexPath = IndexPath(row: newIndex, section: 0)
         
@@ -61,6 +60,8 @@ extension PhotoFindViewController: PhotoSlidesUpdatedIndex {
 extension PhotoFindViewController: ZoomAnimatorDelegate {
     
     func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
+        print("starting!")
+        zoomAnimator.cameFromFind = true
     }
     
     func transitionDidEndWith(zoomAnimator: ZoomAnimator) {

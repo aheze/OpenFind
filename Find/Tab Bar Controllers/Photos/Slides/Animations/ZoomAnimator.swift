@@ -62,30 +62,45 @@ class ZoomAnimator: NSObject {
         
         fromReferenceImageView.isHidden = true
         
+        if cameFromFind {
+            print("yes!!!! \(transitionImageView)")
+            transitionImageView?.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+            transitionImageView?.layer.cornerRadius = 8
+        }
+        
+        print("animating zoom")
+        
         let finalTransitionSize = calculateZoomInImageFrame(image: referenceImage, forView: toVC.view)
         
-        UIView.animate(withDuration: transitionDuration(using: transitionContext),
-                       delay: 0,
-                       usingSpringWithDamping: 0.8,
-                       initialSpringVelocity: 0,
-                       options: [UIView.AnimationOptions.transitionCrossDissolve],
-                       animations: {
-                        self.transitionImageView?.frame = finalTransitionSize
-                        toVC.view.alpha = 1.0
-                        fromVC.tabBarController?.tabBar.alpha = 0
-        },
-                       completion: { completed in
-                    
-                        self.transitionImageView?.removeFromSuperview()
-                        toReferenceImageView.isHidden = false
-                        fromReferenceImageView.isHidden = false
-                        
-                        self.transitionImageView = nil
-                        
-                        transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-                        self.toDelegate?.transitionDidEndWith(zoomAnimator: self)
-                        self.fromDelegate?.transitionDidEndWith(zoomAnimator: self)
-        })
+        UIView.animate(
+            withDuration: transitionDuration(using: transitionContext),
+            delay: 0,
+            usingSpringWithDamping: 0.8,
+            initialSpringVelocity: 0,
+            options: [UIView.AnimationOptions.transitionCrossDissolve],
+            animations: {
+                self.transitionImageView?.frame = finalTransitionSize
+                
+                if self.cameFromFind {
+                    self.transitionImageView?.layer.cornerRadius = 0
+                }
+                
+                toVC.view.alpha = 1.0
+                fromVC.tabBarController?.tabBar.alpha = 0
+            },
+            completion: { completed in
+                
+                self.transitionImageView?.removeFromSuperview()
+                toReferenceImageView.isHidden = false
+                fromReferenceImageView.isHidden = false
+                
+                self.transitionImageView = nil
+                
+                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                self.toDelegate?.transitionDidEndWith(zoomAnimator: self)
+                self.fromDelegate?.transitionDidEndWith(zoomAnimator: self)
+            }
+        )
     }
     
     fileprivate func animateZoomOutTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -130,13 +145,9 @@ class ZoomAnimator: NSObject {
         
         if cameFromFind {
             transitionImageView?.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
-            containerView.insertSubview(fromVC.view, aboveSubview: toVC.view)
-            containerView.bringSubviewToFront(transitionImageView!)
-            fromReferenceImageView.isHidden = true
-        } else {
-            containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
-            fromReferenceImageView.isHidden = true
         }
+        containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
+        fromReferenceImageView.isHidden = true
         
         let finalTransitionSize = toReferenceImageViewFrame
         

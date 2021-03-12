@@ -56,8 +56,6 @@ extension PhotoFindViewController {
                     }
                 }
             }
-            
-            
             self.present(slidesViewController, animated: true)
         }
     }

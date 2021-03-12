@@ -76,6 +76,8 @@ struct ConstantVars { /// calculated based on device size
     
     static var shouldHaveStatusBar = true
     static var shouldHaveLightStatusBar = false
+    
+    static var launchViewController: UIViewController?
 }
 
 struct Defaults {

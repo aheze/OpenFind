@@ -198,6 +198,8 @@ class LaunchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ConstantVars.launchViewController = self
+        
         skipButton.alpha = 0
         
         getStartedButton.alpha = 0
