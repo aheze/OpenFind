@@ -18,6 +18,7 @@ struct WhatsNewConfig {
         configuration.completionButton.backgroundColor = #colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 1)
         
         
+        
         let language = Locale.preferredLanguages[0]
         if language.contains("en") {
             whatsNew = WhatsNew(
@@ -79,6 +80,13 @@ struct WhatsNewConfig {
             )
             configuration.completionButton.title = "前往"
         }
+        
+        // Initialize DetailButton with title and open website at url
+        let detailButton = WhatsNewViewController.DetailButton(
+            title: "Read more",
+            action: .website(url: "https://www.getfind.app/whatsnew/")
+        )
+        configuration.detailButton = detailButton
         
         return (whatsNew, configuration)
     }

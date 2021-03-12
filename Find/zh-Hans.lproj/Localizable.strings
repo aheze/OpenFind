@@ -100,6 +100,9 @@
 "confirmDeleteList" = "您确定要删除此清单吗？";
 
 /* No comment provided by engineer. */
+"Contact" = "联系";
+
+/* No comment provided by engineer. */
 "copied" = "复制！";
 
 /* No comment provided by engineer. */
@@ -461,9 +464,6 @@
 
 "QR Code" = "二维码";
 
-/* No comment provided by engineer. */
-"Questions & Suggestions" = "问题与建议";
-
 /* Stats def=\"x\" */
 "quote %@ quote" = "\"%@\"";
 
@@ -477,7 +477,7 @@
 "Rate the app" = "评价应用";
 
 /* No comment provided by engineer. */
-"Report a bug" = "报告错误";
+"Report a bug / suggestions" = "报告错误/建议";
 
 /* Settings def=Reset */
 "reset" = "重启";

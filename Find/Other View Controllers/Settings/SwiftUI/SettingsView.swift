@@ -73,7 +73,7 @@ class SettingsViewHoster: UIViewController {
 }
 extension SettingsViewHoster {
     func shareApp() {
-        let link = URL(string: "https://apps.apple.com/app/find-command-f-for-camera/id1506500202")!
+        let link = URL(string: "https://getfind.app/")!
         
         DispatchQueue.main.async {
             let activityViewController = UIActivityViewController(activityItems: [link, self], applicationActivities: nil)
@@ -101,11 +101,11 @@ extension SettingsViewHoster: UIActivityItemSource {
 
     func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
         
-        let appIcon = UIImage(named: "AppIconSVG")!
+        let appIcon = UIImage(named: "AppIconSmall")!
         let imageProvider = NSItemProvider(object: appIcon)
         let metadata = LPLinkMetadata()
         metadata.title = "Find"
-        metadata.originalURL = URL(fileURLWithPath: "apps.apple.com")
+        metadata.originalURL = URL(fileURLWithPath: "getfind.app")
         metadata.imageProvider = imageProvider
         return metadata
     }

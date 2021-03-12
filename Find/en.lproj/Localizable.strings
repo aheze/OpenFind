@@ -103,6 +103,9 @@
 "confirmDeleteList" = "Are you sure you want to delete this list?";
 
 /* No comment provided by engineer. */
+"Contact" = "Contact";
+
+/* No comment provided by engineer. */
 "copied" = "Copied!";
 
 /* No comment provided by engineer. */
@@ -466,9 +469,6 @@
 
 "QR Code" = "QR Code";
 
-/* No comment provided by engineer. */
-"Questions & Suggestions" = "Questions & Suggestions";
-
 /* Stats def=\"x\" */
 "quote %@ quote" = "\"%@\"";
 
@@ -482,7 +482,7 @@
 "Rate the app" = "Rate the app";
 
 /* No comment provided by engineer. */
-"Report a bug" = "Report a bug";
+"Report a bug / suggestions" = "Report a bug / suggestions";
 
 /* Settings def=Reset */
 "reset" = "Reset";
