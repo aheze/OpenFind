@@ -12,7 +12,7 @@ import SwiftEntryKit
 class StatsNavController: UINavigationController {
     var viewController: StatsViewController!
 }
-class StatsViewController: UIViewController, UpdateMatchesNumberStats {
+class StatsViewController: UIViewController {
     
     func update(to: Int) {
         DispatchQueue.main.async {
@@ -28,7 +28,24 @@ class StatsViewController: UIViewController, UpdateMatchesNumberStats {
             
             newString.append(boldText)
             newString.append(regularText)
-            self.currentlyHowManyMatches.attributedText = newString
+            
+            if let matchesLabel = self.currentlyHowManyMatches {
+                
+                
+                matchesLabel.attributedText = newString
+            } else {
+                self.currentlyHowManyMatchesText = newString
+            }
+        }
+    }
+    
+    func updateText(to text: NSAttributedString) {
+        DispatchQueue.main.async {
+            if let textLabel = self.currentSearchingForTheseWords {
+                textLabel.attributedText = text
+            } else {
+                self.currentSearchingForTheseWordsText = text
+            }
         }
     }
     

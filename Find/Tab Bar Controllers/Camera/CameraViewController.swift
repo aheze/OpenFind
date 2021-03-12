@@ -17,11 +17,6 @@ import WhatsNewKit
 protocol ToggleCreateCircle: class {
     func toggle(created: Bool)
 }
-protocol UpdateMatchesNumberStats: class {
-    func update(to: Int)
-}
-
-
 class CameraViewController: UIViewController {
     
     let keyValueVersionStore = KeyValueWhatsNewVersionStore(keyValueable: UserDefaults.standard)
@@ -119,7 +114,7 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var passthroughBottomC: NSLayoutConstraint!
     
     //MARK: Stats
-    weak var updateStatsNumber: UpdateMatchesNumberStats?
+//    weak var updateStatsNumber: UpdateMatchesNumberStats?
     var currentNumberOfMatches = 0
     lazy var statsNavController: StatsNavController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -412,7 +407,7 @@ class CameraViewController: UIViewController {
         
         if deviceHasNotch && !deviceIsRoundPad {
             if isForcingStatusBarHidden {
-                normalSearchFieldTopCConstant = -10
+                normalSearchFieldTopCConstant = -16
             } else {
                 normalSearchFieldTopCConstant = -2
             }

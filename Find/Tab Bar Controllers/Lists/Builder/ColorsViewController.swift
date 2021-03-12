@@ -22,6 +22,11 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /// remove similar color
+        if colorName == "#f6b93b" {
+            colorName = "#f7b731"
+        }
         if let row = colorArray.firstIndex(of: colorName) {
             let indP = IndexPath(item: row, section: 0)
             selectedPath = row
@@ -34,12 +39,16 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
     var selectedPath = -1
     
     weak var colorDelegate: GetColorInfo?
+    
+    /// removed "#f6b93b"
     var colorArray: [String] = [
         "#eb2f06","#e55039","#f7b731","#fed330","#78e08f",
-        "#fc5c65","#fa8231","#f6b93b","#b8e994","#2bcbba",
+        "#fc5c65","#fa8231","#b8e994","#2bcbba",
         "#ff6348","#b71540","#579f2b","#d1d8e0","#778ca3",
         "#e84393","#a55eea","#5352ed","#70a1ff","#40739e",
-        "#45aaf2","#2d98da","#00aeef","#4b6584","#0a3d62"]
+        "#45aaf2","#2d98da","#00aeef","#4b6584","#0a3d62"
+    ]
+    
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return colorArray.count
