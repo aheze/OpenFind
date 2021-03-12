@@ -19,13 +19,13 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>3623</string>
+	<string>3624</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>CameraUsage</string>
+	<string>Use your camera to find text</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>AccessPhotos</string>
+	<string>Find from your existing photos</string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>ConfigurationIntent</string>
