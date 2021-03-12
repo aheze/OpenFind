@@ -35,7 +35,7 @@ struct ContactView: View {
                         startColor: #colorLiteral(red: 1, green: 0.5529411765, blue: 0, alpha: 1),
                         endColor: #colorLiteral(red: 1, green: 0.3411764706, blue: 0, alpha: 1),
                         title: "DM me on Reddit",
-                        subtitle: "aheze#3125",
+                        subtitle: "u/aheze",
                         imageName: "RedditIcon"
                     )
                     .padding(EdgeInsets(top: 0, leading: 16, bottom: 8, trailing: 16))

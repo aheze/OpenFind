@@ -49,6 +49,9 @@
 /* Multipurpose def=and */
 "and" = "和";
 
+/* No comment provided by engineer. */
+"Cached" = "快取";
+
 "Cached?" = "快取？";
 
 /*StatsViewController*/

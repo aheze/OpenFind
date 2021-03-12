@@ -52,6 +52,9 @@
 /* No comment provided by engineer. */
 "blankSpace" = " ";
 
+/* No comment provided by engineer. */
+"Cached" = "Cached";
+
 "Cached?" = "Cached?";
 
 /*StatsViewController*/

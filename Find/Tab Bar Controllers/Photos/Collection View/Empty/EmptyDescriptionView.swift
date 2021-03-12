@@ -84,7 +84,7 @@ class EmptyDescriptionView: UIView {
                     self.showMeHowButton.tintColor = UIColor(named: "Gold")
                 }
             case .cached:
-                headerText = NSLocalizedString("cacheOnly", comment: "")
+                headerText = NSLocalizedString("Cached", comment: "")
                 descriptionText = NSLocalizedString("resultsWillAppearInstantly", comment: "")
                 newImage = UIImage(named: "CachedPhotos")
                 if previousFilter == .all {
