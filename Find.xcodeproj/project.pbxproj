@@ -81,6 +81,13 @@
 		3C5B157825A8CE7E00BB8988 /* PhotosVC+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B157725A8CE7E00BB8988 /* PhotosVC+NavBar.swift */; };
 		3C5DFFA525D8A9E200250D34 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5DFFA425D8A9E200250D34 /* ShareView.swift */; };
 		3C634C7025C0F3170064CBF8 /* EmptyDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C634C6F25C0F3170064CBF8 /* EmptyDescriptionView.swift */; };
+		3C643F1C26057806001E6FA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F1B26057806001E6FA1 /* AppDelegate.swift */; };
+		3C643F1E26057806001E6FA1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F1D26057806001E6FA1 /* SceneDelegate.swift */; };
+		3C643F2026057806001E6FA1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F1F26057806001E6FA1 /* ViewController.swift */; };
+		3C643F2326057806001E6FA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C643F2126057806001E6FA1 /* Main.storyboard */; };
+		3C643F2526057807001E6FA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C643F2426057807001E6FA1 /* Assets.xcassets */; };
+		3C643F2826057807001E6FA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C643F2626057807001E6FA1 /* LaunchScreen.storyboard */; };
+		3C643F2E26057807001E6FA1 /* FindClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = 3C643F1926057806001E6FA1 /* FindClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3C6DA93F25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6DA93E25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift */; };
 		3C6EE6B025A2AB350078462A /* GeneralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EE6A825A2AB350078462A /* GeneralView.swift */; };
 		3C6EE6B125A2AB350078462A /* SettingsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EE6A925A2AB350078462A /* SettingsComponents.swift */; };
@@ -252,7 +259,28 @@
 		9F7EB9AD24508DC95B5FA75F /* Pods_Find.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206C7F74D4ED39BAC2ED69EB /* Pods_Find.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		3C643F2B26057807001E6FA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4999AC882353A80A00AB06A7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C643F1826057806001E6FA1;
+			remoteInfo = FindClip;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
+		3C643F2D26057807001E6FA1 /* Embed App Clips */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/AppClips";
+			dstSubfolderSpec = 16;
+			files = (
+				3C643F2E26057807001E6FA1 /* FindClip.app in Embed App Clips */,
+			);
+			name = "Embed App Clips";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		495D9CD524A16AB2009C507C /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -341,6 +369,15 @@
 		3C5B157725A8CE7E00BB8988 /* PhotosVC+NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+NavBar.swift"; sourceTree = "<group>"; };
 		3C5DFFA425D8A9E200250D34 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		3C634C6F25C0F3170064CBF8 /* EmptyDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDescriptionView.swift; sourceTree = "<group>"; };
+		3C643F1926057806001E6FA1 /* FindClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C643F1B26057806001E6FA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3C643F1D26057806001E6FA1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3C643F1F26057806001E6FA1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3C643F2226057806001E6FA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3C643F2426057807001E6FA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3C643F2726057807001E6FA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3C643F2926057807001E6FA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C643F2A26057807001E6FA1 /* FindClip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FindClip.entitlements; sourceTree = "<group>"; };
 		3C6DA93E25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Share.swift"; sourceTree = "<group>"; };
 		3C6EE6A825A2AB350078462A /* GeneralView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralView.swift; sourceTree = "<group>"; };
 		3C6EE6A925A2AB350078462A /* SettingsComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsComponents.swift; sourceTree = "<group>"; };
@@ -530,6 +567,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3C643F1626057806001E6FA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4999AC8D2353A80A00AB06A7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -758,6 +802,21 @@
 				3CC230CE25C1F82000AD04B6 /* EmptyDescription+Tips.swift */,
 			);
 			path = Empty;
+			sourceTree = "<group>";
+		};
+		3C643F1A26057806001E6FA1 /* FindClip */ = {
+			isa = PBXGroup;
+			children = (
+				3C643F1B26057806001E6FA1 /* AppDelegate.swift */,
+				3C643F1D26057806001E6FA1 /* SceneDelegate.swift */,
+				3C643F1F26057806001E6FA1 /* ViewController.swift */,
+				3C643F2126057806001E6FA1 /* Main.storyboard */,
+				3C643F2426057807001E6FA1 /* Assets.xcassets */,
+				3C643F2626057807001E6FA1 /* LaunchScreen.storyboard */,
+				3C643F2926057807001E6FA1 /* Info.plist */,
+				3C643F2A26057807001E6FA1 /* FindClip.entitlements */,
+			);
+			path = FindClip;
 			sourceTree = "<group>";
 		};
 		3C6DA94125BDF14D00B3CE5B /* Model */ = {
@@ -1243,6 +1302,7 @@
 			isa = PBXGroup;
 			children = (
 				4999AC922353A80A00AB06A7 /* Find */,
+				3C643F1A26057806001E6FA1 /* FindClip */,
 				4999AC912353A80A00AB06A7 /* Products */,
 				F1113DDE71BB4BA2CD714E1A /* Pods */,
 				D0464F2926E9ACFCA3CD293D /* Frameworks */,
@@ -1253,6 +1313,7 @@
 			isa = PBXGroup;
 			children = (
 				4999AC902353A80A00AB06A7 /* Find.app */,
+				3C643F1926057806001E6FA1 /* FindClip.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1327,6 +1388,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3C643F1826057806001E6FA1 /* FindClip */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C643F3126057807001E6FA1 /* Build configuration list for PBXNativeTarget "FindClip" */;
+			buildPhases = (
+				3C643F1526057806001E6FA1 /* Sources */,
+				3C643F1626057806001E6FA1 /* Frameworks */,
+				3C643F1726057806001E6FA1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FindClip;
+			productName = FindClip;
+			productReference = 3C643F1926057806001E6FA1 /* FindClip.app */;
+			productType = "com.apple.product-type.application.on-demand-install-capable";
+		};
 		4999AC8F2353A80A00AB06A7 /* Find */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4999ACA42353A81100AB06A7 /* Build configuration list for PBXNativeTarget "Find" */;
@@ -1339,10 +1417,12 @@
 				495F38F52432BECF00A17D93 /* ShellScript */,
 				EB34CC35153CA0D5614389C5 /* [CP] Embed Pods Frameworks */,
 				495D9CD524A16AB2009C507C /* Embed App Extensions */,
+				3C643F2D26057807001E6FA1 /* Embed App Clips */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3C643F2C26057807001E6FA1 /* PBXTargetDependency */,
 			);
 			name = Find;
 			packageProductDependencies = (
@@ -1357,10 +1437,13 @@
 		4999AC882353A80A00AB06A7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1200;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = Andrew;
 				TargetAttributes = {
+					3C643F1826057806001E6FA1 = {
+						CreatedOnToolsVersion = 12.4;
+					};
 					4999AC8F2353A80A00AB06A7 = {
 						CreatedOnToolsVersion = 11.1;
 					};
@@ -1383,11 +1466,22 @@
 			projectRoot = "";
 			targets = (
 				4999AC8F2353A80A00AB06A7 /* Find */,
+				3C643F1826057806001E6FA1 /* FindClip */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3C643F1726057806001E6FA1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C643F2826057807001E6FA1 /* LaunchScreen.storyboard in Resources */,
+				3C643F2526057807001E6FA1 /* Assets.xcassets in Resources */,
+				3C643F2326057806001E6FA1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4999AC8E2353A80A00AB06A7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1504,6 +1598,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3C643F1526057806001E6FA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C643F2026057806001E6FA1 /* ViewController.swift in Sources */,
+				3C643F1C26057806001E6FA1 /* AppDelegate.swift in Sources */,
+				3C643F1E26057806001E6FA1 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4999AC8C2353A80A00AB06A7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1726,7 +1830,31 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		3C643F2C26057807001E6FA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3C643F1826057806001E6FA1 /* FindClip */;
+			targetProxy = 3C643F2B26057807001E6FA1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		3C643F2126057806001E6FA1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3C643F2226057806001E6FA1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3C643F2626057807001E6FA1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3C643F2726057807001E6FA1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		3CA63F3825C7BA64001C295E /* TabBar.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1838,6 +1966,51 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3C643F2F26057807001E6FA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = FindClip/FindClip.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YA533DMD5J;
+				INFOPLIST_FILE = FindClip/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand.Clip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3C643F3026057807001E6FA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = FindClip/FindClip.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YA533DMD5J;
+				INFOPLIST_FILE = FindClip/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand.Clip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		4999ACA22353A81100AB06A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1962,6 +2135,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7F1B04E9888AAEC98DF2E096 /* Pods-Find.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -1986,6 +2160,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E05C3167AB2FF51F44B12AE3 /* Pods-Find.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YA533DMD5J;
@@ -2006,6 +2181,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3C643F3126057807001E6FA1 /* Build configuration list for PBXNativeTarget "FindClip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C643F2F26057807001E6FA1 /* Debug */,
+				3C643F3026057807001E6FA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4999AC8B2353A80A00AB06A7 /* Build configuration list for PBXProject "Find" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
