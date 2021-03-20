@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Shutter" customModule="FindAppClip1" customModuleProvider="target">
+            <connections>
+                <outlet property="containerView" destination="Ah8-Id-h9H" id="n58-6S-Evg"/>
+                <outlet property="contentView" destination="B9J-X5-Lr6" id="2RO-bs-R0r"/>
+                <outlet property="fillView" destination="rHJ-bd-OJT" id="mqJ-iz-V7e"/>
+                <outlet property="rimView" destination="yQc-3W-qPI" id="0Om-hD-POD"/>
+                <outlet property="touchButton" destination="3XK-Af-eEx" id="7K4-Dk-Svn"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="B9J-X5-Lr6">
+            <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ah8-Id-h9H">
+                    <rect key="frame" x="5" y="5" width="60" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yQc-3W-qPI">
+                            <rect key="frame" x="0.0" y="0.0" width="66" height="66"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rHJ-bd-OJT">
+                            <rect key="frame" x="7" y="7" width="52" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.0" green="0.68235294117647061" blue="0.93725490196078431" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3XK-Af-eEx">
+                    <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
+                    <connections>
+                        <action selector="touchDown:" destination="-1" eventType="touchDown" id="Osm-ER-wDV"/>
+                        <action selector="touchDown:" destination="-1" eventType="touchDragEnter" id="ciy-w8-jwr"/>
+                        <action selector="touchUpCancel:" destination="-1" eventType="touchCancel" id="G9x-VK-cB4"/>
+                        <action selector="touchUpCancel:" destination="-1" eventType="touchDragExit" id="swd-fV-N98"/>
+                        <action selector="touchUpInside:" destination="-1" eventType="touchUpInside" id="FzT-ab-dPY"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="Wum-Tz-WQa"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="3XK-Af-eEx" secondAttribute="trailing" id="4UH-RY-xSl"/>
+                <constraint firstItem="3XK-Af-eEx" firstAttribute="leading" secondItem="B9J-X5-Lr6" secondAttribute="leading" id="9Us-pn-vL5"/>
+                <constraint firstAttribute="bottom" secondItem="3XK-Af-eEx" secondAttribute="bottom" id="MZG-Y4-ntN"/>
+                <constraint firstItem="3XK-Af-eEx" firstAttribute="top" secondItem="B9J-X5-Lr6" secondAttribute="top" id="emw-fg-89Y"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-353.62318840579712" y="-143.97321428571428"/>
+        </view>
+    </objects>
+</document>

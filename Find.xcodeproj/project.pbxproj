@@ -83,11 +83,74 @@
 		3C634C7025C0F3170064CBF8 /* EmptyDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C634C6F25C0F3170064CBF8 /* EmptyDescriptionView.swift */; };
 		3C643F1C26057806001E6FA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F1B26057806001E6FA1 /* AppDelegate.swift */; };
 		3C643F1E26057806001E6FA1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F1D26057806001E6FA1 /* SceneDelegate.swift */; };
-		3C643F2026057806001E6FA1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F1F26057806001E6FA1 /* ViewController.swift */; };
-		3C643F2326057806001E6FA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C643F2126057806001E6FA1 /* Main.storyboard */; };
 		3C643F2526057807001E6FA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C643F2426057807001E6FA1 /* Assets.xcassets */; };
-		3C643F2826057807001E6FA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C643F2626057807001E6FA1 /* LaunchScreen.storyboard */; };
 		3C643F2E26057807001E6FA1 /* FindClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = 3C643F1926057806001E6FA1 /* FindClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3C643F3926057844001E6FA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C643F3726057844001E6FA1 /* LaunchScreen.storyboard */; };
+		3C643F4326057860001E6FA1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F3F26057860001E6FA1 /* Constants.swift */; };
+		3C643F4426057860001E6FA1 /* Positions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F4026057860001E6FA1 /* Positions.swift */; };
+		3C643F4526057860001E6FA1 /* Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F4126057860001E6FA1 /* Gestures.swift */; };
+		3C643F4626057860001E6FA1 /* CurrentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F4226057860001E6FA1 /* CurrentState.swift */; };
+		3C643F5726057872001E6FA1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F4A26057871001E6FA1 /* ViewController.swift */; };
+		3C643F5826057872001E6FA1 /* VC+GestureHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F4B26057871001E6FA1 /* VC+GestureHandlers.swift */; };
+		3C643F5926057872001E6FA1 /* VC+CameraSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F4C26057871001E6FA1 /* VC+CameraSetup.swift */; };
+		3C643F5A26057872001E6FA1 /* VC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F4D26057871001E6FA1 /* VC+Constraints.swift */; };
+		3C643F5B26057872001E6FA1 /* VC+DownloadSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F4E26057871001E6FA1 /* VC+DownloadSetup.swift */; };
+		3C643F5C26057872001E6FA1 /* VC+GestureDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F4F26057871001E6FA1 /* VC+GestureDelegates.swift */; };
+		3C643F5D26057872001E6FA1 /* VC+GestureAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F5026057871001E6FA1 /* VC+GestureAnimations.swift */; };
+		3C643F5E26057872001E6FA1 /* VC+BlurCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F5126057871001E6FA1 /* VC+BlurCamera.swift */; };
+		3C643F5F26057872001E6FA1 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F5326057871001E6FA1 /* NavigationView.swift */; };
+		3C643F6026057872001E6FA1 /* DownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F5426057871001E6FA1 /* DownloadView.swift */; };
+		3C643F6126057872001E6FA1 /* PaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F5626057872001E6FA1 /* PaddedTextField.swift */; };
+		3C643F7926057878001E6FA1 /* FadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F6526057878001E6FA1 /* FadingButton.swift */; };
+		3C643F7A26057878001E6FA1 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F6626057878001E6FA1 /* Utilities.swift */; };
+		3C643F7B26057878001E6FA1 /* FixFlickering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F6726057878001E6FA1 /* FixFlickering.swift */; };
+		3C643F7C26057878001E6FA1 /* LTMorphingLabel+Fall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F6926057878001E6FA1 /* LTMorphingLabel+Fall.swift */; };
+		3C643F7D26057878001E6FA1 /* LTEasing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F6A26057878001E6FA1 /* LTEasing.swift */; };
+		3C643F7E26057878001E6FA1 /* LTEmitterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F6B26057878001E6FA1 /* LTEmitterView.swift */; };
+		3C643F7F26057878001E6FA1 /* LTCharacterLimbo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F6C26057878001E6FA1 /* LTCharacterLimbo.swift */; };
+		3C643F8026057878001E6FA1 /* LTCharacterDiffResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F6D26057878001E6FA1 /* LTCharacterDiffResult.swift */; };
+		3C643F8126057878001E6FA1 /* LTMorphingLabel+Evaporate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F6E26057878001E6FA1 /* LTMorphingLabel+Evaporate.swift */; };
+		3C643F8226057878001E6FA1 /* LTStringDiffResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F6F26057878001E6FA1 /* LTStringDiffResult.swift */; };
+		3C643F8326057878001E6FA1 /* LTMorphingLabel+Burn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F7026057878001E6FA1 /* LTMorphingLabel+Burn.swift */; };
+		3C643F8426057878001E6FA1 /* LTMorphingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F7126057878001E6FA1 /* LTMorphingLabel.swift */; };
+		3C643F8526057878001E6FA1 /* LTMorphingLabel+Anvil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F7226057878001E6FA1 /* LTMorphingLabel+Anvil.swift */; };
+		3C643F8626057878001E6FA1 /* LTMorphingLabel+Sparkle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F7326057878001E6FA1 /* LTMorphingLabel+Sparkle.swift */; };
+		3C643F8726057878001E6FA1 /* LTMorphingLabel+Pixelate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F7426057878001E6FA1 /* LTMorphingLabel+Pixelate.swift */; };
+		3C643F8826057878001E6FA1 /* LTMorphingEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F7526057878001E6FA1 /* LTMorphingEffect.swift */; };
+		3C643F8926057878001E6FA1 /* SpinningWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F7626057878001E6FA1 /* SpinningWheel.swift */; };
+		3C643F8A26057878001E6FA1 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F7726057878001E6FA1 /* Gradient.swift */; };
+		3C643F8B26057878001E6FA1 /* ClearShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F7826057878001E6FA1 /* ClearShadow.swift */; };
+		3C643FB126057884001E6FA1 /* LaunchVC+GoPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F8F26057884001E6FA1 /* LaunchVC+GoPermissions.swift */; };
+		3C643FB226057884001E6FA1 /* LaunchVC+InitialFrames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F9026057884001E6FA1 /* LaunchVC+InitialFrames.swift */; };
+		3C643FB326057884001E6FA1 /* LaunchVC+FramesExpand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F9126057884001E6FA1 /* LaunchVC+FramesExpand.swift */; };
+		3C643FB426057884001E6FA1 /* LaunchVC+GoMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F9226057884001E6FA1 /* LaunchVC+GoMain.swift */; };
+		3C643FB526057884001E6FA1 /* LaunchVC+Determine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F9326057884001E6FA1 /* LaunchVC+Determine.swift */; };
+		3C643FB626057884001E6FA1 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F9426057884001E6FA1 /* LaunchViewController.swift */; };
+		3C643FB726057884001E6FA1 /* LaunchVC+GrantedPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F9526057884001E6FA1 /* LaunchVC+GrantedPermissions.swift */; };
+		3C643FB826057884001E6FA1 /* PermissionsVC+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F9726057884001E6FA1 /* PermissionsVC+Views.swift */; };
+		3C643FB926057884001E6FA1 /* PermissionsVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F9826057884001E6FA1 /* PermissionsVC+Constraints.swift */; };
+		3C643FBA26057884001E6FA1 /* SymbolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F9926057884001E6FA1 /* SymbolsView.swift */; };
+		3C643FBB26057884001E6FA1 /* SymbolView+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F9A26057884001E6FA1 /* SymbolView+Strings.swift */; };
+		3C643FBC26057884001E6FA1 /* SymbolStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C643F9B26057884001E6FA1 /* SymbolStrings.strings */; };
+		3C643FBD26057884001E6FA1 /* PermissionsVC+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F9C26057884001E6FA1 /* PermissionsVC+Gestures.swift */; };
+		3C643FBE26057884001E6FA1 /* PermissionsVC+Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F9D26057884001E6FA1 /* PermissionsVC+Permissions.swift */; };
+		3C643FBF26057884001E6FA1 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F9E26057884001E6FA1 /* PermissionsViewController.swift */; };
+		3C643FC026057884001E6FA1 /* CameraVC+HandleFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643FA026057884001E6FA1 /* CameraVC+HandleFind.swift */; };
+		3C643FC126057884001E6FA1 /* CameraVC+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643FA126057884001E6FA1 /* CameraVC+Buttons.swift */; };
+		3C643FC226057884001E6FA1 /* CameraVC+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643FA226057884001E6FA1 /* CameraVC+Views.swift */; };
+		3C643FC326057884001E6FA1 /* CameraVC+Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643FA326057884001E6FA1 /* CameraVC+Motion.swift */; };
+		3C643FC426057884001E6FA1 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643FA426057884001E6FA1 /* CameraViewController.swift */; };
+		3C643FC526057884001E6FA1 /* FlashDisableIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643FA626057884001E6FA1 /* FlashDisableIcon.swift */; };
+		3C643FC626057884001E6FA1 /* Shutter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643FA726057884001E6FA1 /* Shutter.swift */; };
+		3C643FC726057884001E6FA1 /* Shutter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C643FA826057884001E6FA1 /* Shutter.xib */; };
+		3C643FC826057884001E6FA1 /* CameraVC+SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643FA926057884001E6FA1 /* CameraVC+SearchBar.swift */; };
+		3C643FC926057884001E6FA1 /* CameraVC+Find.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643FAA26057884001E6FA1 /* CameraVC+Find.swift */; };
+		3C643FCA26057884001E6FA1 /* CameraVC+CameraSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643FAC26057884001E6FA1 /* CameraVC+CameraSetup.swift */; };
+		3C643FCB26057884001E6FA1 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643FAD26057884001E6FA1 /* CameraView.swift */; };
+		3C643FCC26057884001E6FA1 /* CameraVC+CameraDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643FAE26057884001E6FA1 /* CameraVC+CameraDelegate.swift */; };
+		3C643FCD26057884001E6FA1 /* CameraVC+Pause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643FAF26057884001E6FA1 /* CameraVC+Pause.swift */; };
+		3C643FCE26057884001E6FA1 /* CameraVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643FB026057884001E6FA1 /* CameraVC+Constraints.swift */; };
+		3C643FD22605788C001E6FA1 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C643FD12605788C001E6FA1 /* Colors.xcassets */; };
 		3C6DA93F25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6DA93E25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift */; };
 		3C6EE6B025A2AB350078462A /* GeneralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EE6A825A2AB350078462A /* GeneralView.swift */; };
 		3C6EE6B125A2AB350078462A /* SettingsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EE6A925A2AB350078462A /* SettingsComponents.swift */; };
@@ -177,6 +240,11 @@
 		3CE306E4259AC4B000F1B2E2 /* GestureTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E1259AC4B000F1B2E2 /* GestureTransitions.swift */; };
 		3CE306E5259AC4B000F1B2E2 /* ButtonTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E2259AC4B000F1B2E2 /* ButtonTransitions.swift */; };
 		3CE306EA259AC5AF00F1B2E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */; };
+		3CEB9C60260589D2007EF9EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CEB9C5F260589D2007EF9EB /* Main.storyboard */; };
+		3CEB9C6726058A07007EF9EB /* CameraFocusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CEB9C6426058A07007EF9EB /* CameraFocusView.xib */; };
+		3CEB9C6826058A07007EF9EB /* CameraVC+Focus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEB9C6526058A07007EF9EB /* CameraVC+Focus.swift */; };
+		3CEB9C6926058A07007EF9EB /* CameraFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEB9C6626058A07007EF9EB /* CameraFocusView.swift */; };
+		3CEB9C6D26058A24007EF9EB /* CameraVC+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEB9C6C26058A24007EF9EB /* CameraVC+Gestures.swift */; };
 		3CECF4C125A9072300C16A16 /* PhotosVC+PresentSlides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECF4C025A9072300C16A16 /* PhotosVC+PresentSlides.swift */; };
 		3CF0421225C251C600E29FA6 /* PhotosVC+Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0421125C251C600E29FA6 /* PhotosVC+Tips.swift */; };
 		3CF0421525C2532B00E29FA6 /* VC+StarTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0421425C2532B00E29FA6 /* VC+StarTip.swift */; };
@@ -372,12 +440,75 @@
 		3C643F1926057806001E6FA1 /* FindClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C643F1B26057806001E6FA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C643F1D26057806001E6FA1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3C643F1F26057806001E6FA1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3C643F2226057806001E6FA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3C643F2426057807001E6FA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3C643F2726057807001E6FA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3C643F2926057807001E6FA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C643F2A26057807001E6FA1 /* FindClip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FindClip.entitlements; sourceTree = "<group>"; };
+		3C643F3726057844001E6FA1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3C643F3F26057860001E6FA1 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3C643F4026057860001E6FA1 /* Positions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Positions.swift; sourceTree = "<group>"; };
+		3C643F4126057860001E6FA1 /* Gestures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gestures.swift; sourceTree = "<group>"; };
+		3C643F4226057860001E6FA1 /* CurrentState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentState.swift; sourceTree = "<group>"; };
+		3C643F4A26057871001E6FA1 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3C643F4B26057871001E6FA1 /* VC+GestureHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VC+GestureHandlers.swift"; sourceTree = "<group>"; };
+		3C643F4C26057871001E6FA1 /* VC+CameraSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VC+CameraSetup.swift"; sourceTree = "<group>"; };
+		3C643F4D26057871001E6FA1 /* VC+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VC+Constraints.swift"; sourceTree = "<group>"; };
+		3C643F4E26057871001E6FA1 /* VC+DownloadSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VC+DownloadSetup.swift"; sourceTree = "<group>"; };
+		3C643F4F26057871001E6FA1 /* VC+GestureDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VC+GestureDelegates.swift"; sourceTree = "<group>"; };
+		3C643F5026057871001E6FA1 /* VC+GestureAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VC+GestureAnimations.swift"; sourceTree = "<group>"; };
+		3C643F5126057871001E6FA1 /* VC+BlurCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VC+BlurCamera.swift"; sourceTree = "<group>"; };
+		3C643F5326057871001E6FA1 /* NavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
+		3C643F5426057871001E6FA1 /* DownloadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadView.swift; sourceTree = "<group>"; };
+		3C643F5626057872001E6FA1 /* PaddedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
+		3C643F6526057878001E6FA1 /* FadingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadingButton.swift; sourceTree = "<group>"; };
+		3C643F6626057878001E6FA1 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		3C643F6726057878001E6FA1 /* FixFlickering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixFlickering.swift; sourceTree = "<group>"; };
+		3C643F6926057878001E6FA1 /* LTMorphingLabel+Fall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Fall.swift"; sourceTree = "<group>"; };
+		3C643F6A26057878001E6FA1 /* LTEasing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTEasing.swift; sourceTree = "<group>"; };
+		3C643F6B26057878001E6FA1 /* LTEmitterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTEmitterView.swift; sourceTree = "<group>"; };
+		3C643F6C26057878001E6FA1 /* LTCharacterLimbo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTCharacterLimbo.swift; sourceTree = "<group>"; };
+		3C643F6D26057878001E6FA1 /* LTCharacterDiffResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTCharacterDiffResult.swift; sourceTree = "<group>"; };
+		3C643F6E26057878001E6FA1 /* LTMorphingLabel+Evaporate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Evaporate.swift"; sourceTree = "<group>"; };
+		3C643F6F26057878001E6FA1 /* LTStringDiffResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTStringDiffResult.swift; sourceTree = "<group>"; };
+		3C643F7026057878001E6FA1 /* LTMorphingLabel+Burn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Burn.swift"; sourceTree = "<group>"; };
+		3C643F7126057878001E6FA1 /* LTMorphingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTMorphingLabel.swift; sourceTree = "<group>"; };
+		3C643F7226057878001E6FA1 /* LTMorphingLabel+Anvil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Anvil.swift"; sourceTree = "<group>"; };
+		3C643F7326057878001E6FA1 /* LTMorphingLabel+Sparkle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Sparkle.swift"; sourceTree = "<group>"; };
+		3C643F7426057878001E6FA1 /* LTMorphingLabel+Pixelate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Pixelate.swift"; sourceTree = "<group>"; };
+		3C643F7526057878001E6FA1 /* LTMorphingEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTMorphingEffect.swift; sourceTree = "<group>"; };
+		3C643F7626057878001E6FA1 /* SpinningWheel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinningWheel.swift; sourceTree = "<group>"; };
+		3C643F7726057878001E6FA1 /* Gradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
+		3C643F7826057878001E6FA1 /* ClearShadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearShadow.swift; sourceTree = "<group>"; };
+		3C643F8F26057884001E6FA1 /* LaunchVC+GoPermissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LaunchVC+GoPermissions.swift"; sourceTree = "<group>"; };
+		3C643F9026057884001E6FA1 /* LaunchVC+InitialFrames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LaunchVC+InitialFrames.swift"; sourceTree = "<group>"; };
+		3C643F9126057884001E6FA1 /* LaunchVC+FramesExpand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LaunchVC+FramesExpand.swift"; sourceTree = "<group>"; };
+		3C643F9226057884001E6FA1 /* LaunchVC+GoMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LaunchVC+GoMain.swift"; sourceTree = "<group>"; };
+		3C643F9326057884001E6FA1 /* LaunchVC+Determine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LaunchVC+Determine.swift"; sourceTree = "<group>"; };
+		3C643F9426057884001E6FA1 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		3C643F9526057884001E6FA1 /* LaunchVC+GrantedPermissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LaunchVC+GrantedPermissions.swift"; sourceTree = "<group>"; };
+		3C643F9726057884001E6FA1 /* PermissionsVC+Views.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PermissionsVC+Views.swift"; sourceTree = "<group>"; };
+		3C643F9826057884001E6FA1 /* PermissionsVC+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PermissionsVC+Constraints.swift"; sourceTree = "<group>"; };
+		3C643F9926057884001E6FA1 /* SymbolsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymbolsView.swift; sourceTree = "<group>"; };
+		3C643F9A26057884001E6FA1 /* SymbolView+Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SymbolView+Strings.swift"; sourceTree = "<group>"; };
+		3C643F9B26057884001E6FA1 /* SymbolStrings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = SymbolStrings.strings; sourceTree = "<group>"; };
+		3C643F9C26057884001E6FA1 /* PermissionsVC+Gestures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PermissionsVC+Gestures.swift"; sourceTree = "<group>"; };
+		3C643F9D26057884001E6FA1 /* PermissionsVC+Permissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PermissionsVC+Permissions.swift"; sourceTree = "<group>"; };
+		3C643F9E26057884001E6FA1 /* PermissionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
+		3C643FA026057884001E6FA1 /* CameraVC+HandleFind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraVC+HandleFind.swift"; sourceTree = "<group>"; };
+		3C643FA126057884001E6FA1 /* CameraVC+Buttons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraVC+Buttons.swift"; sourceTree = "<group>"; };
+		3C643FA226057884001E6FA1 /* CameraVC+Views.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraVC+Views.swift"; sourceTree = "<group>"; };
+		3C643FA326057884001E6FA1 /* CameraVC+Motion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraVC+Motion.swift"; sourceTree = "<group>"; };
+		3C643FA426057884001E6FA1 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		3C643FA626057884001E6FA1 /* FlashDisableIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashDisableIcon.swift; sourceTree = "<group>"; };
+		3C643FA726057884001E6FA1 /* Shutter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shutter.swift; sourceTree = "<group>"; };
+		3C643FA826057884001E6FA1 /* Shutter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Shutter.xib; sourceTree = "<group>"; };
+		3C643FA926057884001E6FA1 /* CameraVC+SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraVC+SearchBar.swift"; sourceTree = "<group>"; };
+		3C643FAA26057884001E6FA1 /* CameraVC+Find.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraVC+Find.swift"; sourceTree = "<group>"; };
+		3C643FAC26057884001E6FA1 /* CameraVC+CameraSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraVC+CameraSetup.swift"; sourceTree = "<group>"; };
+		3C643FAD26057884001E6FA1 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		3C643FAE26057884001E6FA1 /* CameraVC+CameraDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraVC+CameraDelegate.swift"; sourceTree = "<group>"; };
+		3C643FAF26057884001E6FA1 /* CameraVC+Pause.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraVC+Pause.swift"; sourceTree = "<group>"; };
+		3C643FB026057884001E6FA1 /* CameraVC+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraVC+Constraints.swift"; sourceTree = "<group>"; };
+		3C643FD12605788C001E6FA1 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		3C6DA93E25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Share.swift"; sourceTree = "<group>"; };
 		3C6EE6A825A2AB350078462A /* GeneralView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralView.swift; sourceTree = "<group>"; };
 		3C6EE6A925A2AB350078462A /* SettingsComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsComponents.swift; sourceTree = "<group>"; };
@@ -473,6 +604,11 @@
 		3CE306E1259AC4B000F1B2E2 /* GestureTransitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureTransitions.swift; sourceTree = "<group>"; };
 		3CE306E2259AC4B000F1B2E2 /* ButtonTransitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTransitions.swift; sourceTree = "<group>"; };
 		3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3CEB9C5F260589D2007EF9EB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		3CEB9C6426058A07007EF9EB /* CameraFocusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraFocusView.xib; sourceTree = "<group>"; };
+		3CEB9C6526058A07007EF9EB /* CameraVC+Focus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraVC+Focus.swift"; sourceTree = "<group>"; };
+		3CEB9C6626058A07007EF9EB /* CameraFocusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraFocusView.swift; sourceTree = "<group>"; };
+		3CEB9C6C26058A24007EF9EB /* CameraVC+Gestures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraVC+Gestures.swift"; sourceTree = "<group>"; };
 		3CECF4C025A9072300C16A16 /* PhotosVC+PresentSlides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+PresentSlides.swift"; sourceTree = "<group>"; };
 		3CF0421125C251C600E29FA6 /* PhotosVC+Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Tips.swift"; sourceTree = "<group>"; };
 		3CF0421425C2532B00E29FA6 /* VC+StarTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+StarTip.swift"; sourceTree = "<group>"; };
@@ -807,16 +943,169 @@
 		3C643F1A26057806001E6FA1 /* FindClip */ = {
 			isa = PBXGroup;
 			children = (
+				3C643F3E26057860001E6FA1 /* Shared */,
 				3C643F1B26057806001E6FA1 /* AppDelegate.swift */,
 				3C643F1D26057806001E6FA1 /* SceneDelegate.swift */,
-				3C643F1F26057806001E6FA1 /* ViewController.swift */,
-				3C643F2126057806001E6FA1 /* Main.storyboard */,
+				3C643F6426057878001E6FA1 /* Utilities */,
+				3C643F5226057871001E6FA1 /* Download View */,
+				3C643F5526057872001E6FA1 /* Search Bar */,
+				3C643F4926057871001E6FA1 /* View Controller */,
+				3C643F9F26057884001E6FA1 /* Camera View Controller */,
+				3C643F8E26057884001E6FA1 /* Launch */,
+				3C643F9626057884001E6FA1 /* Permissions */,
 				3C643F2426057807001E6FA1 /* Assets.xcassets */,
-				3C643F2626057807001E6FA1 /* LaunchScreen.storyboard */,
+				3C643FD12605788C001E6FA1 /* Colors.xcassets */,
+				3C643F3726057844001E6FA1 /* LaunchScreen.storyboard */,
+				3CEB9C5F260589D2007EF9EB /* Main.storyboard */,
 				3C643F2926057807001E6FA1 /* Info.plist */,
 				3C643F2A26057807001E6FA1 /* FindClip.entitlements */,
 			);
 			path = FindClip;
+			sourceTree = "<group>";
+		};
+		3C643F3E26057860001E6FA1 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				3C643F3F26057860001E6FA1 /* Constants.swift */,
+				3C643F4026057860001E6FA1 /* Positions.swift */,
+				3C643F4126057860001E6FA1 /* Gestures.swift */,
+				3C643F4226057860001E6FA1 /* CurrentState.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		3C643F4926057871001E6FA1 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3C643F4A26057871001E6FA1 /* ViewController.swift */,
+				3C643F4B26057871001E6FA1 /* VC+GestureHandlers.swift */,
+				3C643F4C26057871001E6FA1 /* VC+CameraSetup.swift */,
+				3C643F4D26057871001E6FA1 /* VC+Constraints.swift */,
+				3C643F4E26057871001E6FA1 /* VC+DownloadSetup.swift */,
+				3C643F4F26057871001E6FA1 /* VC+GestureDelegates.swift */,
+				3C643F5026057871001E6FA1 /* VC+GestureAnimations.swift */,
+				3C643F5126057871001E6FA1 /* VC+BlurCamera.swift */,
+			);
+			path = "View Controller";
+			sourceTree = "<group>";
+		};
+		3C643F5226057871001E6FA1 /* Download View */ = {
+			isa = PBXGroup;
+			children = (
+				3C643F5326057871001E6FA1 /* NavigationView.swift */,
+				3C643F5426057871001E6FA1 /* DownloadView.swift */,
+			);
+			path = "Download View";
+			sourceTree = "<group>";
+		};
+		3C643F5526057872001E6FA1 /* Search Bar */ = {
+			isa = PBXGroup;
+			children = (
+				3C643F5626057872001E6FA1 /* PaddedTextField.swift */,
+			);
+			path = "Search Bar";
+			sourceTree = "<group>";
+		};
+		3C643F6426057878001E6FA1 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				3C643F6526057878001E6FA1 /* FadingButton.swift */,
+				3C643F6626057878001E6FA1 /* Utilities.swift */,
+				3C643F6726057878001E6FA1 /* FixFlickering.swift */,
+				3C643F6826057878001E6FA1 /* Morphing Label */,
+				3C643F7626057878001E6FA1 /* SpinningWheel.swift */,
+				3C643F7726057878001E6FA1 /* Gradient.swift */,
+				3C643F7826057878001E6FA1 /* ClearShadow.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		3C643F6826057878001E6FA1 /* Morphing Label */ = {
+			isa = PBXGroup;
+			children = (
+				3C643F6926057878001E6FA1 /* LTMorphingLabel+Fall.swift */,
+				3C643F6A26057878001E6FA1 /* LTEasing.swift */,
+				3C643F6B26057878001E6FA1 /* LTEmitterView.swift */,
+				3C643F6C26057878001E6FA1 /* LTCharacterLimbo.swift */,
+				3C643F6D26057878001E6FA1 /* LTCharacterDiffResult.swift */,
+				3C643F6E26057878001E6FA1 /* LTMorphingLabel+Evaporate.swift */,
+				3C643F6F26057878001E6FA1 /* LTStringDiffResult.swift */,
+				3C643F7026057878001E6FA1 /* LTMorphingLabel+Burn.swift */,
+				3C643F7126057878001E6FA1 /* LTMorphingLabel.swift */,
+				3C643F7226057878001E6FA1 /* LTMorphingLabel+Anvil.swift */,
+				3C643F7326057878001E6FA1 /* LTMorphingLabel+Sparkle.swift */,
+				3C643F7426057878001E6FA1 /* LTMorphingLabel+Pixelate.swift */,
+				3C643F7526057878001E6FA1 /* LTMorphingEffect.swift */,
+			);
+			path = "Morphing Label";
+			sourceTree = "<group>";
+		};
+		3C643F8E26057884001E6FA1 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				3C643F9426057884001E6FA1 /* LaunchViewController.swift */,
+				3C643F8F26057884001E6FA1 /* LaunchVC+GoPermissions.swift */,
+				3C643F9026057884001E6FA1 /* LaunchVC+InitialFrames.swift */,
+				3C643F9126057884001E6FA1 /* LaunchVC+FramesExpand.swift */,
+				3C643F9226057884001E6FA1 /* LaunchVC+GoMain.swift */,
+				3C643F9326057884001E6FA1 /* LaunchVC+Determine.swift */,
+				3C643F9526057884001E6FA1 /* LaunchVC+GrantedPermissions.swift */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		3C643F9626057884001E6FA1 /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				3C643F9926057884001E6FA1 /* SymbolsView.swift */,
+				3C643F9B26057884001E6FA1 /* SymbolStrings.strings */,
+				3C643F9A26057884001E6FA1 /* SymbolView+Strings.swift */,
+				3C643F9E26057884001E6FA1 /* PermissionsViewController.swift */,
+				3C643F9826057884001E6FA1 /* PermissionsVC+Constraints.swift */,
+				3C643F9726057884001E6FA1 /* PermissionsVC+Views.swift */,
+				3C643F9C26057884001E6FA1 /* PermissionsVC+Gestures.swift */,
+				3C643F9D26057884001E6FA1 /* PermissionsVC+Permissions.swift */,
+			);
+			path = Permissions;
+			sourceTree = "<group>";
+		};
+		3C643F9F26057884001E6FA1 /* Camera View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3C643FA426057884001E6FA1 /* CameraViewController.swift */,
+				3C643FAF26057884001E6FA1 /* CameraVC+Pause.swift */,
+				3C643FA026057884001E6FA1 /* CameraVC+HandleFind.swift */,
+				3C643FA126057884001E6FA1 /* CameraVC+Buttons.swift */,
+				3C643FA226057884001E6FA1 /* CameraVC+Views.swift */,
+				3C643FA326057884001E6FA1 /* CameraVC+Motion.swift */,
+				3C643FA926057884001E6FA1 /* CameraVC+SearchBar.swift */,
+				3C643FAA26057884001E6FA1 /* CameraVC+Find.swift */,
+				3C643FB026057884001E6FA1 /* CameraVC+Constraints.swift */,
+				3C643FAB26057884001E6FA1 /* Camera View */,
+				3C643FA526057884001E6FA1 /* Controls */,
+				3CEB9C63260589E7007EF9EB /* Focus */,
+			);
+			path = "Camera View Controller";
+			sourceTree = "<group>";
+		};
+		3C643FA526057884001E6FA1 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				3C643FA626057884001E6FA1 /* FlashDisableIcon.swift */,
+				3C643FA726057884001E6FA1 /* Shutter.swift */,
+				3C643FA826057884001E6FA1 /* Shutter.xib */,
+			);
+			path = Controls;
+			sourceTree = "<group>";
+		};
+		3C643FAB26057884001E6FA1 /* Camera View */ = {
+			isa = PBXGroup;
+			children = (
+				3C643FAC26057884001E6FA1 /* CameraVC+CameraSetup.swift */,
+				3C643FAD26057884001E6FA1 /* CameraView.swift */,
+				3C643FAE26057884001E6FA1 /* CameraVC+CameraDelegate.swift */,
+			);
+			path = "Camera View";
 			sourceTree = "<group>";
 		};
 		3C6DA94125BDF14D00B3CE5B /* Model */ = {
@@ -1036,6 +1325,17 @@
 				3C5B156A25A7EE7900BB8988 /* NotifyTransition.swift */,
 			);
 			path = Gestures;
+			sourceTree = "<group>";
+		};
+		3CEB9C63260589E7007EF9EB /* Focus */ = {
+			isa = PBXGroup;
+			children = (
+				3CEB9C6526058A07007EF9EB /* CameraVC+Focus.swift */,
+				3CEB9C6C26058A24007EF9EB /* CameraVC+Gestures.swift */,
+				3CEB9C6626058A07007EF9EB /* CameraFocusView.swift */,
+				3CEB9C6426058A07007EF9EB /* CameraFocusView.xib */,
+			);
+			path = Focus;
 			sourceTree = "<group>";
 		};
 		3CFBD47D25A4EE94000BCA7D /* Lifecycle */ = {
@@ -1476,9 +1776,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C643F2826057807001E6FA1 /* LaunchScreen.storyboard in Resources */,
+				3C643F3926057844001E6FA1 /* LaunchScreen.storyboard in Resources */,
+				3C643FBC26057884001E6FA1 /* SymbolStrings.strings in Resources */,
+				3C643FC726057884001E6FA1 /* Shutter.xib in Resources */,
+				3CEB9C60260589D2007EF9EB /* Main.storyboard in Resources */,
+				3C643FD22605788C001E6FA1 /* Colors.xcassets in Resources */,
 				3C643F2526057807001E6FA1 /* Assets.xcassets in Resources */,
-				3C643F2326057806001E6FA1 /* Main.storyboard in Resources */,
+				3CEB9C6726058A07007EF9EB /* CameraFocusView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1602,9 +1906,73 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C643F2026057806001E6FA1 /* ViewController.swift in Sources */,
+				3CEB9C6D26058A24007EF9EB /* CameraVC+Gestures.swift in Sources */,
+				3C643F6026057872001E6FA1 /* DownloadView.swift in Sources */,
+				3C643F8926057878001E6FA1 /* SpinningWheel.swift in Sources */,
 				3C643F1C26057806001E6FA1 /* AppDelegate.swift in Sources */,
+				3C643F8126057878001E6FA1 /* LTMorphingLabel+Evaporate.swift in Sources */,
+				3C643F6126057872001E6FA1 /* PaddedTextField.swift in Sources */,
+				3C643F8726057878001E6FA1 /* LTMorphingLabel+Pixelate.swift in Sources */,
+				3C643F7E26057878001E6FA1 /* LTEmitterView.swift in Sources */,
+				3C643FCC26057884001E6FA1 /* CameraVC+CameraDelegate.swift in Sources */,
+				3C643F5B26057872001E6FA1 /* VC+DownloadSetup.swift in Sources */,
+				3C643F7D26057878001E6FA1 /* LTEasing.swift in Sources */,
+				3C643F7926057878001E6FA1 /* FadingButton.swift in Sources */,
+				3C643FB426057884001E6FA1 /* LaunchVC+GoMain.swift in Sources */,
+				3C643FC826057884001E6FA1 /* CameraVC+SearchBar.swift in Sources */,
+				3C643FC426057884001E6FA1 /* CameraViewController.swift in Sources */,
+				3C643FC326057884001E6FA1 /* CameraVC+Motion.swift in Sources */,
+				3C643F8A26057878001E6FA1 /* Gradient.swift in Sources */,
+				3C643FB926057884001E6FA1 /* PermissionsVC+Constraints.swift in Sources */,
+				3C643FC126057884001E6FA1 /* CameraVC+Buttons.swift in Sources */,
+				3C643F5A26057872001E6FA1 /* VC+Constraints.swift in Sources */,
+				3C643FB726057884001E6FA1 /* LaunchVC+GrantedPermissions.swift in Sources */,
+				3C643FBF26057884001E6FA1 /* PermissionsViewController.swift in Sources */,
 				3C643F1E26057806001E6FA1 /* SceneDelegate.swift in Sources */,
+				3C643F7B26057878001E6FA1 /* FixFlickering.swift in Sources */,
+				3C643FC026057884001E6FA1 /* CameraVC+HandleFind.swift in Sources */,
+				3C643F4526057860001E6FA1 /* Gestures.swift in Sources */,
+				3C643F4626057860001E6FA1 /* CurrentState.swift in Sources */,
+				3C643FCE26057884001E6FA1 /* CameraVC+Constraints.swift in Sources */,
+				3C643F8826057878001E6FA1 /* LTMorphingEffect.swift in Sources */,
+				3C643F5E26057872001E6FA1 /* VC+BlurCamera.swift in Sources */,
+				3C643FC926057884001E6FA1 /* CameraVC+Find.swift in Sources */,
+				3CEB9C6926058A07007EF9EB /* CameraFocusView.swift in Sources */,
+				3C643FB626057884001E6FA1 /* LaunchViewController.swift in Sources */,
+				3CEB9C6826058A07007EF9EB /* CameraVC+Focus.swift in Sources */,
+				3C643F8226057878001E6FA1 /* LTStringDiffResult.swift in Sources */,
+				3C643F8626057878001E6FA1 /* LTMorphingLabel+Sparkle.swift in Sources */,
+				3C643FB226057884001E6FA1 /* LaunchVC+InitialFrames.swift in Sources */,
+				3C643FCA26057884001E6FA1 /* CameraVC+CameraSetup.swift in Sources */,
+				3C643FBD26057884001E6FA1 /* PermissionsVC+Gestures.swift in Sources */,
+				3C643FCD26057884001E6FA1 /* CameraVC+Pause.swift in Sources */,
+				3C643F5F26057872001E6FA1 /* NavigationView.swift in Sources */,
+				3C643F8B26057878001E6FA1 /* ClearShadow.swift in Sources */,
+				3C643FB526057884001E6FA1 /* LaunchVC+Determine.swift in Sources */,
+				3C643FB326057884001E6FA1 /* LaunchVC+FramesExpand.swift in Sources */,
+				3C643F5726057872001E6FA1 /* ViewController.swift in Sources */,
+				3C643FC626057884001E6FA1 /* Shutter.swift in Sources */,
+				3C643FBE26057884001E6FA1 /* PermissionsVC+Permissions.swift in Sources */,
+				3C643F4426057860001E6FA1 /* Positions.swift in Sources */,
+				3C643FB826057884001E6FA1 /* PermissionsVC+Views.swift in Sources */,
+				3C643F8426057878001E6FA1 /* LTMorphingLabel.swift in Sources */,
+				3C643F7A26057878001E6FA1 /* Utilities.swift in Sources */,
+				3C643FCB26057884001E6FA1 /* CameraView.swift in Sources */,
+				3C643FBB26057884001E6FA1 /* SymbolView+Strings.swift in Sources */,
+				3C643F7F26057878001E6FA1 /* LTCharacterLimbo.swift in Sources */,
+				3C643F4326057860001E6FA1 /* Constants.swift in Sources */,
+				3C643FC526057884001E6FA1 /* FlashDisableIcon.swift in Sources */,
+				3C643F7C26057878001E6FA1 /* LTMorphingLabel+Fall.swift in Sources */,
+				3C643F5C26057872001E6FA1 /* VC+GestureDelegates.swift in Sources */,
+				3C643F8326057878001E6FA1 /* LTMorphingLabel+Burn.swift in Sources */,
+				3C643F5D26057872001E6FA1 /* VC+GestureAnimations.swift in Sources */,
+				3C643FBA26057884001E6FA1 /* SymbolsView.swift in Sources */,
+				3C643F5926057872001E6FA1 /* VC+CameraSetup.swift in Sources */,
+				3C643FB126057884001E6FA1 /* LaunchVC+GoPermissions.swift in Sources */,
+				3C643FC226057884001E6FA1 /* CameraVC+Views.swift in Sources */,
+				3C643F8026057878001E6FA1 /* LTCharacterDiffResult.swift in Sources */,
+				3C643F5826057872001E6FA1 /* VC+GestureHandlers.swift in Sources */,
+				3C643F8526057878001E6FA1 /* LTMorphingLabel+Anvil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1839,22 +2207,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3C643F2126057806001E6FA1 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3C643F2226057806001E6FA1 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		3C643F2626057807001E6FA1 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3C643F2726057807001E6FA1 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		3CA63F3825C7BA64001C295E /* TabBar.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

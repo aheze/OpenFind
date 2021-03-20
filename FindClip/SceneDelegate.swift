@@ -1,9 +1,8 @@
 //
 //  SceneDelegate.swift
-//  FindClip
+//  FindAppClip1
 //
-//  Created by Zheng on 3/19/21.
-//  Copyright © 2021 Andrew. All rights reserved.
+//  Created by Zheng on 3/12/21.
 //
 
 import UIKit
@@ -18,6 +17,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        Positions.deviceHasNotch = window?.safeAreaInsets.bottom ?? 0 > 0
+        
+        if Positions.deviceHasNotch {
+            Positions.adjustedTopStop = 80
+            Positions.topStop = 70 +  Positions.adjustedTopStop
+            Positions.bottomStop = 70
+        } else {
+            Positions.adjustedTopStop = 70
+            Positions.topStop = 50 + Positions.adjustedTopStop
+            Positions.bottomStop = 50
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
