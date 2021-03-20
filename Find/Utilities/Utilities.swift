@@ -366,3 +366,61 @@ extension UIView {
         #endif
     }
 }
+class GradientView: UIView {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradientLayer.frame = bounds
+        
+        let inset = lineWidth / 2
+        shapeLayer?.path = UIBezierPath(roundedRect: bounds.inset(by: UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)), cornerRadius: cornerRadius).cgPath
+    }
+
+    var cornerRadius = CGFloat(3) {
+        didSet {
+            
+            let inset = lineWidth / 2
+            shapeLayer?.path = UIBezierPath(roundedRect: bounds.inset(by: UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)), cornerRadius: cornerRadius).cgPath
+        }
+    }
+    var colors = [CGColor]() {
+        didSet {
+            gradientLayer.colors = colors
+        }
+    }
+    var lineWidth = CGFloat(3) {
+        didSet {
+            shapeLayer?.lineWidth = lineWidth
+            
+            let inset = lineWidth / 2
+            gradientLayer.frame = self.bounds.inset(by: UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset))
+        }
+    }
+    
+    var shapeLayer: CAShapeLayer?
+    private lazy var gradientLayer: CAGradientLayer = {
+        let inset = lineWidth / 2
+        
+        let l = CAGradientLayer()
+        l.frame = self.bounds
+        l.colors = [#colorLiteral(red: 0.117850464, green: 0.6410203502, blue: 0.9803485577, alpha: 1).cgColor, #colorLiteral(red: 0.2087231564, green: 0.6273328993, blue: 0.8017540564, alpha: 1).cgColor]
+        l.startPoint = CGPoint(x: 0.5, y: 0)
+        l.endPoint = CGPoint(x: 0.5, y: 1)
+        l.cornerRadius = cornerRadius
+        layer.addSublayer(l)
+        
+        let shape = CAShapeLayer()
+        shape.lineWidth = lineWidth
+        shape.path = UIBezierPath(roundedRect: bounds.inset(by: UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)), cornerRadius: cornerRadius).cgPath
+        shape.strokeColor = UIColor.black.cgColor
+        shape.fillColor = UIColor.clear.cgColor
+        l.mask = shape
+        
+        self.shapeLayer = shape
+        
+        shape.masksToBounds = false
+        l.masksToBounds = false
+        layer.masksToBounds = false
+        
+        return l
+    }()
+}

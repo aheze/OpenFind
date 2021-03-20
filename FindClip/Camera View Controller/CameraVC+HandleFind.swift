@@ -84,7 +84,6 @@ extension CameraViewController {
                     }
                 }
                 
-                
                 self.busyFastFinding = false
             }
         } else {

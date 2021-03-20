@@ -20,17 +20,11 @@ extension CameraViewController {
             
             if let pixelBuffer = pixelBuffer {
                 let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
-                let width = ciImage.extent.width
-                let height = ciImage.extent.height
-                
-                self.aspectRatioWidthOverHeight = height / width ///opposite
+                self.pixelBufferSize = CGSize(width: ciImage.extent.height, height: ciImage.extent.width)
             } else if let cgImage = cgImage {
-                self.howManyTimesFastFoundSincePaused += 1
-                
                 let width = cgImage.width
                 let height = cgImage.height
-                
-                self.aspectRatioWidthOverHeight = CGFloat(width) / CGFloat(height)
+                self.pixelBufferSize = CGSize(width: width, height: height)
             }
             
             let request = VNRecognizeTextRequest { request, error in
@@ -71,6 +65,40 @@ extension CameraViewController {
                 }
             }
         }
+    }
+    
+    func getConvertedRect(boundingBox: CGRect, inImage imageSize: CGSize, containedIn containerSize: CGSize) -> CGRect {
+        
+        let rectOfImage: CGRect
+        
+        let imageAspect = imageSize.width / imageSize.height
+        let containerAspect = containerSize.width / containerSize.height
+        
+        if imageAspect > containerAspect { /// image extends left and right
+            let newImageWidth = containerSize.height * imageAspect /// the width of the overflowing image
+            let newX = -(newImageWidth - containerSize.width) / 2
+            rectOfImage = CGRect(x: newX, y: 0, width: newImageWidth, height: containerSize.height)
+            
+        } else { /// image extends top and bottom
+            let newImageHeight = containerSize.width * (1 / imageAspect) /// the width of the overflowing image
+            let newY = -(newImageHeight - containerSize.height) / 2
+            rectOfImage = CGRect(x: 0, y: newY, width: containerSize.width, height: newImageHeight)
+        }
+        
+        let newOriginBoundingBox = CGRect(
+        x: boundingBox.origin.x,
+        y: 1 - boundingBox.origin.y - boundingBox.height,
+        width: boundingBox.width,
+        height: boundingBox.height
+        )
+        
+        var convertedRect = VNImageRectForNormalizedRect(newOriginBoundingBox, Int(rectOfImage.width), Int(rectOfImage.height))
+        
+        /// add the margins
+        convertedRect.origin.x += rectOfImage.origin.x
+        convertedRect.origin.y += rectOfImage.origin.y
+        
+        return convertedRect
     }
 }
 extension String {

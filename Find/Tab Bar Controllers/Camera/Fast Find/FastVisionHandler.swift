@@ -18,124 +18,97 @@ extension CameraViewController {
             
             /// reset the cycle
             busyFastFinding = false
-            
-            print("Should reset!!")
             resetHighlights()
         } else {
-            guard let results = request?.results, results.count > 0 else {
-                busyFastFinding = false
-                return
-            }
-            if let currentMotion = motionManager.deviceMotion {
-                motionXAsOfHighlightStart = Double(0)
-                motionYAsOfHighlightStart = Double(0)
-                motionZAsOfHighlightStart = Double(0)
-                initialAttitude = currentMotion.attitude
+            if currentPassCount >= 80 {
+                canNotify = true
             }
             
-            for result in results {
-                if let observation = result as? VNRecognizedTextObservation {
-                    for text in observation.topCandidates(1) {
-                        let component = Component()
-                        component.x = observation.boundingBox.origin.x
-                        component.y = 1 - observation.boundingBox.origin.y
-                        component.height = observation.boundingBox.height
-                        component.width = observation.boundingBox.width
-                        let lowerCaseComponentText = text.string.lowercased()
-                        component.text = lowerCaseComponentText
-                        
-                        let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
-                        let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
-                        let offHalf = offsetWidth / 2
-                        let newW = component.width * convertedOriginalWidthOfBigImage
-                        let newH = component.height * self.deviceSize.height
-                        let newX = component.x * convertedOriginalWidthOfBigImage - offHalf
-                        let newY = (component.y * self.deviceSize.height) - newH
-                        let individualCharacterWidth = newW / CGFloat(component.text.count)
-                        
-                        component.x = newX
-                        component.y = newY
-                        component.width = newW
-                        component.height = newH
-                        if UserDefaults.standard.bool(forKey: "showTextDetectIndicator") {
-                            drawFastHighlight(component: component)
-                        }
-                        for match in matchToColors.keys {
-                            if lowerCaseComponentText.contains(match) {
-                                let finalW = individualCharacterWidth * CGFloat(match.count)
+            if let results = request?.results, results.count > 0 {
+                
+                if let currentMotion = motionManager.deviceMotion {
+                    motionXAsOfHighlightStart = Double(0)
+                    motionYAsOfHighlightStart = Double(0)
+                    motionZAsOfHighlightStart = Double(0)
+                    initialAttitude = currentMotion.attitude
+                }
+                
+                DispatchQueue.main.async {
+                    
+                    var newComponents = [Component]()
+                    
+                    for result in results {
+                        if let observation = result as? VNRecognizedTextObservation {
+                            let convertedRect = self.getConvertedRect(
+                                boundingBox: observation.boundingBox,
+                                inImage: self.pixelBufferSize,
+                                containedIn: self.cameraView.bounds.size
+                            )
+                            
+                            if UserDefaults.standard.bool(forKey: "showTextDetectIndicator") {
+                                let detectionRect = convertedRect.inset(by: UIEdgeInsets(top: -3, left: -3, bottom: -3, right: -3))
+                                self.animateDetection(rect: detectionRect)
+                            }
+                            
+                            
+                            for text in observation.topCandidates(1) {
                                 
-                                let indicies = component.text.indicesOf(string: match)
-                                for index in indicies {
-                                    let addedWidth = individualCharacterWidth * CGFloat(index)
-                                    let finalX = newX + addedWidth
-                                    let newComponent = Component()
-                                    newComponent.x = finalX - 6
-                                    newComponent.y = newY - 3
-                                    newComponent.width = finalW + 12
-                                    newComponent.height = newH + 6
-                                    newComponent.text = match
-                                    
-                                    nextComponents.append(newComponent)
+                                let individualCharacterWidth = convertedRect.width / CGFloat(text.string.count)
+                                let lowercaseText = text.string.lowercased()
+                                
+                                for match in self.matchToColors.keys {
+                                    if lowercaseText.contains(match) {
+                                        
+                                        let indices = lowercaseText.indicesOf(string: match)
+                                        for index in indices {
+                                            let x = convertedRect.origin.x + (individualCharacterWidth * CGFloat(index))
+                                            let y = convertedRect.origin.y
+                                            let width = (individualCharacterWidth * CGFloat(match.count))
+                                            let height = convertedRect.height
+                                            
+                                            let component = Component()
+                                            component.x = x - 6
+                                            component.y = y - 3
+                                            component.width = width + 12
+                                            component.height = height + 12
+                                            component.text = match.lowercased()
+                                            
+                                            newComponents.append(component)
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
+                    
+                    if newComponents.isEmpty {
+                        self.resetHighlights(updateMatchesLabel: true)
+                    } else {
+                        
+                        if CameraState.isPaused, self.cachePressed {
+                            self.addPausedFastResults(newComponents: newComponents)
+                        } else {
+                            let finalizeNotify = (newComponents.count > self.currentComponents.count && self.canNotify)
+                            self.animateNewHighlights(newComponents: newComponents, shouldScale: finalizeNotify)
+                            
+                            if finalizeNotify {
+                                let generator = UIImpactFeedbackGenerator(style: .medium)
+                                generator.prepare()
+                                generator.impactOccurred()
+                                
+                                self.canNotify = false
+                                self.currentPassCount = 0
+                            }
+                        }
+                    }
+                    
+                    self.busyFastFinding = false
                 }
-            }
-            
-            busyFastFinding = false
-            
-            if CameraState.isPaused, cachePressed {
-                addPausedFastResults()
                 
             } else {
-                animateFoundFastChange()
+                self.resetHighlights(updateMatchesLabel: true)
+                busyFastFinding = false
             }
-//                    DispatchQueue.main.async {
-////                        for subView in self.drawingView.subviews {
-////                            subView.removeFromSuperview()
-////                        }
-//                        self.animateFoundFastChange()
-//
-////                        if self.howManyTimesFastFoundSincePaused >= 6 && self.nextComponents.count <= 2 {
-////                            self.showCacheTip()
-////                        }
-////
-////                        self.drawHighlights(highlights: self.nextComponents)
-////                        self.updateMatchesNumber(to: self.nextComponents.count)
-//                    }
-//                } else {
-//                    print("Found fast change")
-//                    animateFoundFastChange()
-////                    var componentsToAdd = [Component]()
-////
-////                    for nextComponent in nextComponents {
-////                        var smallestDistance = CGFloat(999)
-////
-////                        for cachedComponent in highlightsFromCache {
-////                            let point1 = CGPoint(x: cachedComponent.x + (cachedComponent.width / 2), y: cachedComponent.y + (cachedComponent.height / 2))
-////                            let point2 = CGPoint(x: nextComponent.x + (nextComponent.width / 2), y: nextComponent.y + (nextComponent.height / 2))
-////                            let pointDistance = relativeDistance(point1, point2)
-////
-////                            if pointDistance < smallestDistance {
-////                                smallestDistance = pointDistance
-////                            }
-////
-////                        }
-////
-////                        if smallestDistance >= 225 { ///Bigger, so add it
-////                            componentsToAdd.append(nextComponent)
-////                        }
-////                    }
-////
-////                    drawHighlights(highlights: componentsToAdd)
-////                    self.updateMatchesNumber(to: componentsToAdd.count + highlightsFromCache.count)
-//                }
-//            } else {
-                
-//            }
-//            numberOfFastMatches = 0
-            
         }
         
         if waitingToFind {
@@ -144,189 +117,141 @@ extension CameraViewController {
         }
     }
     
-    func addPausedFastResults() {
-        for newComponent in nextComponents {
-            var lowestDist = CGFloat(10000)
+    func addPausedFastResults(newComponents: [Component]) {
+        for newComponent in newComponents {
+            var lowestDistance = CGFloat(10000)
             
             for oldComponent in currentComponents {
                 
                 if newComponent.text == oldComponent.text {
                     let currentCompPoint = CGPoint(x: oldComponent.x, y: oldComponent.y)
                     let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
-                    let distanceBetweenPoints = distance(currentCompPoint, nextCompPoint)
+                    let distanceBetweenPoints = relativeDistance(currentCompPoint, nextCompPoint)
                     
-                    if distanceBetweenPoints <= lowestDist {
-                        lowestDist = distanceBetweenPoints
+                    if distanceBetweenPoints <= lowestDistance {
+                        lowestDistance = distanceBetweenPoints
                     }
                 }
             }
-
-            if lowestDist >= 15 {
+            
+            if lowestDistance >= 144 {
                 currentComponents.append(newComponent)
-                scaleInHighlight(component: newComponent)
+                scaleInHighlight(component: newComponent, shouldScale: false)
             }
         }
-        nextComponents.removeAll()
-        tempComponents.removeAll()
     }
     
-    func animateFoundFastChange() {
+    func animateNewHighlights(newComponents: [Component], shouldScale: Bool) {
         
-        for newComponent in nextComponents {
+        var animatedComponents = [Component]()
+        var nextComponents = [Component]()
+        
+        for newComponent in newComponents {
             
-            var lowestDist = CGFloat(10000)
-            var distToComp = [CGFloat: Component]()
+            var lowestDistance = CGFloat(10000)
+            var lowestComponent: Component?
             
             for oldComponent in currentComponents {
                 if newComponent.text == oldComponent.text {
                     let currentCompPoint = CGPoint(x: oldComponent.x, y: oldComponent.y)
                     let nextCompPoint = CGPoint(x: newComponent.x, y: newComponent.y)
-                    let distanceBetweenPoints = distance(currentCompPoint, nextCompPoint) //< 10
-                    if distanceBetweenPoints <= lowestDist {
-                        lowestDist = distanceBetweenPoints
-                        distToComp[lowestDist] = oldComponent
+                    let distanceBetweenPoints = relativeDistance(currentCompPoint, nextCompPoint)
+                    if distanceBetweenPoints <= lowestDistance {
+                        lowestDistance = distanceBetweenPoints
+                        lowestComponent = oldComponent
                     }
                 }
-            }
-            if lowestDist <= 15 {
-                guard let oldComp = distToComp[lowestDist] else { print("NO COMP"); return }
-                let newView = oldComp.baseView
-                tempComponents.append(oldComp)
-                DispatchQueue.main.async {
-                    let rect = CGRect(x: newComponent.x, y: newComponent.y, width: newComponent.width, height: newComponent.height)
-                    UIView.animate(withDuration: 0.5, animations: {
-                        newView?.frame = rect
-                    })
-                }
-            } else {
-                scaleInHighlight(component: newComponent)
-            }
-        }
-        for comp in currentComponents {
-            if !tempComponents.contains(comp) {
-                let theView = comp.baseView
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
-                    DispatchQueue.main.async {
-                        UIView.animate(withDuration: 0.2, animations: {
-                            theView?.alpha = 0
-                        }, completion: { _ in
-                            theView?.isHidden = true
-                            theView?.removeFromSuperview()
-                        })
-                    }
-                })
             }
             
-        }
-        currentComponents.removeAll()
-        currentComponents = tempComponents
-        
-        self.updateMatchesNumber(to: self.nextComponents.count)
-        
-        for next in nextComponents {
-            if !tempComponents.contains(next) == true {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
-                    DispatchQueue.main.async {
-                        UIView.animate(withDuration: 0.3, animations: {
-                            next.baseView?.alpha = 0
-                        }, completion: { _ in
-                            next.baseView?.isHidden = true
-                            next.baseView?.removeFromSuperview()
-                        })
-                    }
-                })
+            if
+                lowestDistance <= 144,
+                let lowestComponent = lowestComponent
+            {
+                animatedComponents.append(lowestComponent)
+                
+                let newView = lowestComponent.baseView
+                let rect = CGRect(x: newComponent.x, y: newComponent.y, width: newComponent.width, height: newComponent.height)
+                
+                UIView.animate(withDuration: 0.5) {
+                    newView?.frame = rect
+                }
+                nextComponents.append(lowestComponent)
+            } else {
+                scaleInHighlight(component: newComponent, shouldScale: shouldScale)
+                nextComponents.append(newComponent)
             }
         }
         
-        nextComponents.removeAll()
-        tempComponents.removeAll()
-        
+        for oldComponent in currentComponents {
+            if !animatedComponents.contains(oldComponent) {
+                let baseView = oldComponent.baseView
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    DispatchQueue.main.async {
+                        UIView.animate(withDuration: 0.2) {
+                            baseView?.alpha = 0
+                        } completion: { _ in
+                            baseView?.removeFromSuperview()
+                        }
+                    }
+                }
+            }
+        }
+        currentComponents = nextComponents
     }
     
-    
-    func scaleInHighlight(component: Component) {
-        
+    func scaleInHighlight(component: Component, shouldScale: Bool) {
         DispatchQueue.main.async {
+            let cornerRadius = min(component.height / 3.5, 10)
             
-            let layer = CAShapeLayer()
-            layer.frame = CGRect(x: 0, y: 0, width: component.width, height: component.height)
-            layer.cornerRadius = component.height / 3.5
+            let newView: UIView
             
-            let newLayer = CAShapeLayer()
-            newLayer.bounds = layer.frame
-            newLayer.path = UIBezierPath(roundedRect: layer.frame, cornerRadius: component.height / 3.5).cgPath
-            newLayer.lineWidth = 3
-            newLayer.lineCap = .round
+            guard let colors = self.matchToColors[component.text] else { return }
             
-            guard let colors = self.matchToColors[component.text] else { print("NO COLORS! scalee"); return }
+            
             if colors.count > 1 {
-                var newRect = layer.frame
-                newRect.origin.x += 1.5
-                newRect.origin.y += 1.5
-                layer.frame.origin.x -= 1.5
-                layer.frame.origin.y -= 1.5
-                layer.frame.size.width += 3
-                layer.frame.size.height += 3
-                newLayer.path = UIBezierPath(roundedRect: newRect, cornerRadius: component.height / 4.5).cgPath
-                let gradient = CAGradientLayer()
-                gradient.frame = layer.bounds
+                let gradientView = GradientView()
                 if let gradientColors = self.matchToColors[component.text] {
-                    gradient.colors = gradientColors
+                    gradientView.colors = gradientColors
+                    gradientView.cornerRadius = cornerRadius
+                    
                     if let firstColor = gradientColors.first {
-                        layer.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3).cgColor
+                        gradientView.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3)
                     }
                 }
-                gradient.startPoint = CGPoint(x: 0, y: 0.5)
-                gradient.endPoint = CGPoint(x: 1, y: 0.5)
-                
-                gradient.mask = newLayer
-                newLayer.fillColor = UIColor.clear.cgColor
-                newLayer.strokeColor = UIColor.black.cgColor
-                
-                layer.addSublayer(gradient)
+                newView = gradientView
             } else {
+                newView = UIView()
+                if let gradientColors = self.matchToColors[component.text] {
+                    if let firstColor = gradientColors.first {
+                        newView.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3)
+                    }
+                }
                 if let firstColor = colors.first {
-                    newLayer.fillColor = firstColor.copy(alpha: 0.3)
-                    newLayer.strokeColor = firstColor
-                    layer.addSublayer(newLayer)
+                    newView.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3)
+                    newView.layer.borderColor = firstColor
+                    newView.layer.borderWidth = 3
+                    newView.layer.cornerRadius = cornerRadius
                 }
             }
             
-            let newView = UIView(frame: CGRect(x: component.x, y: component.y, width: component.width, height: component.height))
+            newView.frame = CGRect(x: component.x, y: component.y, width: component.width, height: component.height)
+//            print("rect.. \(CGRect(x: component.x, y: component.y, width: component.width, height: component.height))")
             newView.alpha = 0
-            self.drawingView.addSubview(newView)
-            
-            newView.layer.addSublayer(layer)
-            newView.clipsToBounds = false
-            
-            
-            let x = newLayer.bounds.size.width / 2
-            let y = newLayer.bounds.size.height / 2
-            newLayer.position = CGPoint(x: x, y: y)
             component.baseView = newView
             
-            UIView.animate(withDuration: 0.15, animations: {
-                newView.alpha = 1
-            })
-            if self.nextComponents.count > self.previousNumberOfMatches {
-                let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
-                strokeAnimation.fromValue = 0
-                strokeAnimation.toValue = 1
-                strokeAnimation.duration = 0.3
-                strokeAnimation.autoreverses = false
-                strokeAnimation.repeatCount = 0
-                newLayer.add(strokeAnimation, forKey: "line")
-                self.layerScaleAnimation(layer: newLayer, duration: 0.2, fromValue: 1.2, toValue: 1)
+            self.drawingView.addSubview(newView)
+            
+            if shouldScale {
+                newView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
             }
             
+            UIView.animate(withDuration: 0.15) {
+                newView.alpha = 1
+                if shouldScale {
+                    newView.transform = CGAffineTransform.identity
+                }
+            }
         }
-        self.tempComponents.append(component)
-    }
-    
-    func distance(_ a: CGPoint, _ b: CGPoint) -> CGFloat {
-        let xDist = a.x - b.x
-        let yDist = a.y - b.y
-        return CGFloat(sqrt(xDist * xDist + yDist * yDist))
     }
     
     func layerScaleAnimation(layer: CALayer, duration: CFTimeInterval, fromValue: CGFloat, toValue: CGFloat) {
@@ -340,26 +265,8 @@ extension CameraViewController {
         layer.add(scaleAnimation, forKey: "scale")
         CATransaction.commit()
     }
-    func drawFastHighlight(component: Component) {
-        DispatchQueue.main.async {
-            
-            let newW = component.width
-            let newH = component.height
-            
-            let buffer = CGFloat(3)
-            let doubBuffer = CGFloat(6)
-            let newX = component.x
-            let newY = component.y
-            let layer = CAShapeLayer()
-            layer.frame = CGRect(x: newX - buffer, y: newY, width: newW + doubBuffer, height: newH)
-            layer.cornerRadius = newH / 3.5
-            self.animateFastChange(layer: layer)
-        }
-    }
     func resetHighlights(updateMatchesLabel: Bool = true) {
         currentComponents.removeAll()
-        nextComponents.removeAll()
-        tempComponents.removeAll()
         
         DispatchQueue.main.async {
             if updateMatchesLabel, self.currentComponents.count == 0 { /// make sure is still 0, because async can run late
@@ -371,12 +278,16 @@ extension CameraViewController {
         }
         
     }
-    func animateFastChange(layer: CAShapeLayer) {
+    func animateDetection(rect: CGRect) {
+        let layer = CAShapeLayer()
+        layer.frame = rect
+        layer.cornerRadius = min(rect.height / 5, 10)
+        
         drawingView.layer.addSublayer(layer)
         layer.masksToBounds = true
         let gradient = CAGradientLayer()
         gradient.frame = layer.bounds
-        gradient.colors = [#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor, #colorLiteral(red: 0.7220415609, green: 0.7220415609, blue: 0.7220415609, alpha: 0.3010059932).cgColor, #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor]
+        gradient.colors = [#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor, #colorLiteral(red: 0, green: 0.6823529412, blue: 0.937254902, alpha: 0.1).cgColor, #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor]
         gradient.startPoint = CGPoint(x: -1, y: 0.5)
         gradient.endPoint = CGPoint(x: 0, y: 0.5)
         layer.addSublayer(gradient)
@@ -415,8 +326,8 @@ extension String {
         var searchStartIndex = self.startIndex
         
         while searchStartIndex < self.endIndex,
-            let range = self.range(of: string, range: searchStartIndex..<self.endIndex),
-            !range.isEmpty
+              let range = self.range(of: string, range: searchStartIndex..<self.endIndex),
+              !range.isEmpty
         {
             let index = distance(from: self.startIndex, to: range.lowerBound)
             indices.append(index)

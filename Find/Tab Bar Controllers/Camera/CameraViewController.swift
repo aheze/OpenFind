@@ -273,9 +273,11 @@ class CameraViewController: UIViewController {
     
     //MARK: FAST MODE
     var busyFastFinding = false
-    var tempComponents = [Component]()
     var currentComponents = [Component]()
-    var nextComponents = [Component]()
+    var pixelBufferSize = CGSize(width: 0, height: 0)
+    
+    /// scale + haptic feedback
+    var canNotify = false
     
     var matchToColors = [String: [CGColor]]()
     

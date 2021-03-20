@@ -1073,14 +1073,14 @@
 			isa = PBXGroup;
 			children = (
 				3C643FA426057884001E6FA1 /* CameraViewController.swift */,
+				3C643FB026057884001E6FA1 /* CameraVC+Constraints.swift */,
 				3C643FAF26057884001E6FA1 /* CameraVC+Pause.swift */,
-				3C643FA026057884001E6FA1 /* CameraVC+HandleFind.swift */,
 				3C643FA126057884001E6FA1 /* CameraVC+Buttons.swift */,
 				3C643FA226057884001E6FA1 /* CameraVC+Views.swift */,
 				3C643FA326057884001E6FA1 /* CameraVC+Motion.swift */,
 				3C643FA926057884001E6FA1 /* CameraVC+SearchBar.swift */,
 				3C643FAA26057884001E6FA1 /* CameraVC+Find.swift */,
-				3C643FB026057884001E6FA1 /* CameraVC+Constraints.swift */,
+				3C643FA026057884001E6FA1 /* CameraVC+HandleFind.swift */,
 				3C643FAB26057884001E6FA1 /* Camera View */,
 				3C643FA526057884001E6FA1 /* Controls */,
 				3CEB9C63260589E7007EF9EB /* Focus */,
@@ -1692,8 +1692,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C643F3126057807001E6FA1 /* Build configuration list for PBXNativeTarget "FindClip" */;
 			buildPhases = (
-				3C643F1526057806001E6FA1 /* Sources */,
 				3CEB9C7426058D10007EF9EB /* Increase Build Number */,
+				3C643F1526057806001E6FA1 /* Sources */,
 				3C643F1626057806001E6FA1 /* Frameworks */,
 				3C643F1726057806001E6FA1 /* Resources */,
 			);
@@ -1712,10 +1712,10 @@
 			buildPhases = (
 				6D06741A707392F12B687239 /* [CP] Check Pods Manifest.lock */,
 				3C0A7BBC25C5F3320076DBCF /* BartyCrouch */,
+				495F38F52432BECF00A17D93 /* Increase Build Number */,
 				4999AC8C2353A80A00AB06A7 /* Sources */,
 				4999AC8D2353A80A00AB06A7 /* Frameworks */,
 				4999AC8E2353A80A00AB06A7 /* Resources */,
-				495F38F52432BECF00A17D93 /* Increase Build Number */,
 				EB34CC35153CA0D5614389C5 /* [CP] Embed Pods Frameworks */,
 				495D9CD524A16AB2009C507C /* Embed App Extensions */,
 				3C643F2D26057807001E6FA1 /* Embed App Clips */,
@@ -2347,7 +2347,7 @@
 				CODE_SIGN_ENTITLEMENTS = FindClip/FindClip.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3639;
+				CURRENT_PROJECT_VERSION = 3662;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				INFOPLIST_FILE = FindClip/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -2355,7 +2355,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.6;
+				MARKETING_VERSION = 1.2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2371,7 +2371,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = FindClip/FindClip.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3639;
+				CURRENT_PROJECT_VERSION = 3662;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				INFOPLIST_FILE = FindClip/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -2379,7 +2379,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.6;
+				MARKETING_VERSION = 1.2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2515,6 +2515,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3662;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = Find/Utilities/Info.plist;
@@ -2522,7 +2523,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.6;
+				MARKETING_VERSION = 1.2.7;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2539,13 +2540,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3662;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				INFOPLIST_FILE = Find/Utilities/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.6;
+				MARKETING_VERSION = 1.2.7;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
