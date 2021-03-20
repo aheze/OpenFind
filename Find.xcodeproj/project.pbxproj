@@ -1693,6 +1693,7 @@
 			buildConfigurationList = 3C643F3126057807001E6FA1 /* Build configuration list for PBXNativeTarget "FindClip" */;
 			buildPhases = (
 				3C643F1526057806001E6FA1 /* Sources */,
+				3CEB9C7426058D10007EF9EB /* Increase Build Number */,
 				3C643F1626057806001E6FA1 /* Frameworks */,
 				3C643F1726057806001E6FA1 /* Resources */,
 			);
@@ -1714,7 +1715,7 @@
 				4999AC8C2353A80A00AB06A7 /* Sources */,
 				4999AC8D2353A80A00AB06A7 /* Frameworks */,
 				4999AC8E2353A80A00AB06A7 /* Resources */,
-				495F38F52432BECF00A17D93 /* ShellScript */,
+				495F38F52432BECF00A17D93 /* Increase Build Number */,
 				EB34CC35153CA0D5614389C5 /* [CP] Embed Pods Frameworks */,
 				495D9CD524A16AB2009C507C /* Embed App Extensions */,
 				3C643F2D26057807001E6FA1 /* Embed App Clips */,
@@ -1843,7 +1844,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if which bartycrouch > /dev/null; then\n    bartycrouch update -x\n    bartycrouch lint -x\nelse\n    echo \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi\n";
 		};
-		495F38F52432BECF00A17D93 /* ShellScript */ = {
+		3CEB9C7426058D10007EF9EB /* Increase Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1852,6 +1853,25 @@
 			);
 			inputPaths = (
 			);
+			name = "Increase Build Number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#!/bin/bash\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$((bN += 1))\nbN=$(printf \"%d\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"\n\n";
+		};
+		495F38F52432BECF00A17D93 /* Increase Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Increase Build Number";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -2327,13 +2347,15 @@
 				CODE_SIGN_ENTITLEMENTS = FindClip/FindClip.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3639;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				INFOPLIST_FILE = FindClip/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2349,13 +2371,15 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = FindClip/FindClip.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3639;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				INFOPLIST_FILE = FindClip/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

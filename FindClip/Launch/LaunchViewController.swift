@@ -13,6 +13,9 @@ class LaunchViewController: UIViewController {
     var firstStatusBarLaunch = true
     var makeStatusBarHidden = false
     override var preferredStatusBarStyle: UIStatusBarStyle {
+        if firstStatusBarLaunch {
+            return .default
+        }
         return .lightContent
     }
     override var prefersStatusBarHidden: Bool {
