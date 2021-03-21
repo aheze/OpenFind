@@ -55,8 +55,6 @@ extension CameraViewController {
                             let width = (individualCharacterWidth * CGFloat(match.count))
                             let height = content.height
                             
-                            let addedWidth = individualCharacterWidth * CGFloat(index)
-                            
                             let component = Component()
                             component.x = x - 6
                             component.y = y - 3
@@ -82,7 +80,7 @@ extension CameraViewController {
                 
                 
                 if components.count >= 1 {
-                    AppStoreReviewManager.requestReviewIfAppropriate()
+                    AppStoreReviewManager.increaseReviewActionCount()
                 }
             }
         }

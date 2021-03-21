@@ -52,6 +52,8 @@ extension CameraViewController {
                 self.resetState()
                 self.startLivePreview()
                 self.resetHighlights()
+                
+                AppStoreReviewManager.requestReviewIfPossible()
             }
             
             self.removeFocusRects(CameraState.isPaused)
