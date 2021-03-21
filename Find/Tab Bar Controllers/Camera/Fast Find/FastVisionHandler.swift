@@ -209,7 +209,7 @@ extension CameraViewController {
             
             
             if colors.count > 1 {
-                let gradientView = GradientView()
+                let gradientView = GradientBorderView()
                 if let gradientColors = self.matchToColors[component.text] {
                     gradientView.colors = gradientColors
                     gradientView.cornerRadius = cornerRadius
@@ -235,7 +235,6 @@ extension CameraViewController {
             }
             
             newView.frame = CGRect(x: component.x, y: component.y, width: component.width, height: component.height)
-//            print("rect.. \(CGRect(x: component.x, y: component.y, width: component.width, height: component.height))")
             newView.alpha = 0
             component.baseView = newView
             

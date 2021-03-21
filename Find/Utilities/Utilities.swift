@@ -366,11 +366,11 @@ extension UIView {
         #endif
     }
 }
-class GradientView: UIView {
+class GradientBorderView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = bounds
-        
+
         let inset = lineWidth / 2
         shapeLayer?.path = UIBezierPath(roundedRect: bounds.inset(by: UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)), cornerRadius: cornerRadius).cgPath
     }
@@ -380,6 +380,8 @@ class GradientView: UIView {
             
             let inset = lineWidth / 2
             shapeLayer?.path = UIBezierPath(roundedRect: bounds.inset(by: UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)), cornerRadius: cornerRadius).cgPath
+            
+            layer.cornerRadius = cornerRadius
         }
     }
     var colors = [CGColor]() {
@@ -397,7 +399,7 @@ class GradientView: UIView {
     }
     
     var shapeLayer: CAShapeLayer?
-    private lazy var gradientLayer: CAGradientLayer = {
+    lazy var gradientLayer: CAGradientLayer = {
         let inset = lineWidth / 2
         
         let l = CAGradientLayer()
@@ -421,6 +423,103 @@ class GradientView: UIView {
         l.masksToBounds = false
         layer.masksToBounds = false
         
+        layer.cornerRadius = cornerRadius
         return l
     }()
 }
+
+extension CALayer {
+    func moveTo(point: CGPoint, animated: Bool) {
+        if animated {
+            let animation = CABasicAnimation(keyPath: "position")
+            animation.fromValue = value(forKey: "position")
+            animation.toValue = NSValue(cgPoint: point)
+            animation.fillMode = .forwards
+            self.position = point
+            add(animation, forKey: "position")
+        } else {
+            self.position = point
+        }
+    }
+
+    func resize(to size: CGSize, animated: Bool) {
+        let oldBounds = bounds
+        var newBounds = oldBounds
+        newBounds.size = size
+
+        if animated {
+            let animation = CABasicAnimation(keyPath: "bounds")
+            animation.fromValue = NSValue(cgRect: oldBounds)
+            animation.toValue = NSValue(cgRect: newBounds)
+            animation.fillMode = .forwards
+            self.bounds = newBounds
+            add(animation, forKey: "bounds")
+        } else {
+            self.bounds = newBounds
+        }
+    }
+
+    func resizeAndMove(frame: CGRect, animated: Bool, duration: TimeInterval = 0) {
+        if animated {
+            let positionAnimation = CABasicAnimation(keyPath: "position")
+            positionAnimation.fromValue = value(forKey: "position")
+            positionAnimation.toValue = NSValue(cgPoint: CGPoint(x: frame.midX, y: frame.midY))
+
+            let oldBounds = bounds
+            var newBounds = oldBounds
+            newBounds.size = frame.size
+
+            let boundsAnimation = CABasicAnimation(keyPath: "bounds")
+            boundsAnimation.fromValue = NSValue(cgRect: oldBounds)
+            boundsAnimation.toValue = NSValue(cgRect: newBounds)
+
+            let groupAnimation = CAAnimationGroup()
+            groupAnimation.animations = [positionAnimation, boundsAnimation]
+            groupAnimation.fillMode = .forwards
+            groupAnimation.duration = duration
+            groupAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            self.frame = frame
+            add(groupAnimation, forKey: "frame")
+
+        } else {
+            self.frame = frame
+        }
+    }
+}
+
+//
+//class GradientView: UIView {
+//    var colors:     [CGColor] = [UIColor.blue.cgColor] { didSet { updateColors() }}
+//    var startLocation: Double =   0.05 { didSet { updateLocations() }}
+//    var endLocation:   Double =   0.95 { didSet { updateLocations() }}
+//    var horizontalMode:  Bool =  false { didSet { updatePoints() }}
+//    var diagonalMode:    Bool =  false { didSet { updatePoints() }}
+//
+//    override class var layerClass: AnyClass { CAGradientLayer.self }
+//
+//    var gradientLayer: CAGradientLayer { layer as! CAGradientLayer }
+//
+//    func updatePoints() {
+//        if horizontalMode {
+//            gradientLayer.startPoint = diagonalMode ? .init(x: 1, y: 0) : .init(x: 0, y: 0.5)
+//            gradientLayer.endPoint   = diagonalMode ? .init(x: 0, y: 1) : .init(x: 1, y: 0.5)
+//        } else {
+//            gradientLayer.startPoint = diagonalMode ? .init(x: 0, y: 0) : .init(x: 0.5, y: 0)
+//            gradientLayer.endPoint   = diagonalMode ? .init(x: 1, y: 1) : .init(x: 0.5, y: 1)
+//        }
+//    }
+//    func updateLocations() {
+//        gradientLayer.locations = [startLocation as NSNumber, endLocation as NSNumber]
+//    }
+//    func updateColors() {
+//        gradientLayer.colors = colors
+//    }
+//
+//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//        super.traitCollectionDidChange(previousTraitCollection)
+//        updatePoints()
+//        updateLocations()
+//        updateColors()
+//    }
+//
+//}
