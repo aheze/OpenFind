@@ -13,32 +13,33 @@ extension CameraViewController {
     func handleCachedText(request: VNRequest?, error: Error?, thisProcessIdentifier: UUID) {
         guard thisProcessIdentifier == currentCachingProcess else { return }
         
-        guard let results = request?.results, results.count > 0 else {
-            print("no results")
-            finishedCache(with: [EditableSingleHistoryContent]())
-            return
-        }
-        
         var contents = [EditableSingleHistoryContent]()
-        for result in results {
-            if let observation = result as? VNRecognizedTextObservation {
-                for text in observation.topCandidates(1) {
-                    let origX = observation.boundingBox.origin.x
-                    let origY = 1 - observation.boundingBox.minY
-                    let origWidth = observation.boundingBox.width
-                    let origHeight = observation.boundingBox.height
-                    
-                    let singleContent = EditableSingleHistoryContent()
-                    singleContent.text = text.string
-                    singleContent.x = origX
-                    singleContent.y = origY
-                    singleContent.width = origWidth
-                    singleContent.height = origHeight
-                    contents.append(singleContent)
+        
+        DispatchQueue.main.async {
+            if let results = request?.results, results.count > 0 {
+                for result in results {
+                    if let observation = result as? VNRecognizedTextObservation {
+                        let convertedRect = self.getConvertedRect(
+                            boundingBox: observation.boundingBox,
+                            inImage: self.pixelBufferSize,
+                            containedIn: self.cameraView.bounds.size
+                        )
+                        
+                        for text in observation.topCandidates(1) {
+                            let singleContent = EditableSingleHistoryContent()
+                            singleContent.text = text.string
+                            singleContent.x = convertedRect.origin.x
+                            singleContent.y = convertedRect.origin.y
+                            singleContent.width = convertedRect.width
+                            singleContent.height = convertedRect.height
+                            contents.append(singleContent)
+                        }
+                    }
                 }
             }
+            
+            self.finishedCache(with: contents)
+            
         }
-        
-        finishedCache(with: contents)
     }
 }

@@ -35,10 +35,7 @@ extension CameraViewController {
             var numberOfMatches = 0 /// how many individual matches
             
             var components = [Component]()
-            
-            let convertedOriginalWidthOfBigImage = self.aspectRatioWidthOverHeight * self.deviceSize.height
-            let offsetWidth = convertedOriginalWidthOfBigImage - self.deviceSize.width
-            let offHalf = offsetWidth / 2
+           
             ///Cycle through each block of text. Each cont may be a line long.
             for content in self.cachedContents {
                 
@@ -47,27 +44,27 @@ extension CameraViewController {
                 
                 for match in self.matchToColors.keys {
                     if lowercaseContentText.contains(match) {
-                        let finalW = individualCharacterWidth * CGFloat(match.count)
+
                         let indices = lowercaseContentText.indicesOf(string: match)
                         
                         for index in indices {
                             numberOfMatches += 1
+                            
+                            let x = content.x + (individualCharacterWidth * CGFloat(index))
+                            let y = content.y
+                            let width = (individualCharacterWidth * CGFloat(match.count))
+                            let height = content.height
+                            
                             let addedWidth = individualCharacterWidth * CGFloat(index)
-                            let finalX = CGFloat(content.x) + addedWidth
-                            let newComponent = Component()
                             
-                            newComponent.width = finalW * convertedOriginalWidthOfBigImage
-                            newComponent.height = CGFloat(content.height * self.deviceSize.height)
-                            newComponent.x = finalX * convertedOriginalWidthOfBigImage - offHalf
-                            newComponent.y = CGFloat(content.y * self.deviceSize.height) - newComponent.height
-                            newComponent.text = match
+                            let component = Component()
+                            component.x = x - 6
+                            component.y = y - 3
+                            component.width = width + 12
+                            component.height = height + 12
+                            component.text = match.lowercased()
                             
-                            newComponent.x -= 6
-                            newComponent.y -= 3
-                            newComponent.width += 12
-                            newComponent.height += 6
-                            
-                            components.append(newComponent)
+                            components.append(component)
                         }
                     }
                 }
