@@ -100,14 +100,19 @@ extension CameraViewController {
                                 self.currentPassCount = 0
                             }
                         }
+                        
+                        self.updateMatchesNumber(to: newComponents.count)
                     }
                     
                     self.busyFastFinding = false
                 }
                 
             } else {
-                self.resetHighlights(updateMatchesLabel: true)
+                fadeCurrentComponents(currentComponents: currentComponents)
+                updateMatchesNumber(to: 0)
+                currentComponents.removeAll()
                 busyFastFinding = false
+                
             }
         }
         
@@ -187,10 +192,12 @@ extension CameraViewController {
                 let baseView = oldComponent.baseView
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     DispatchQueue.main.async {
-                        UIView.animate(withDuration: 0.2) {
-                            baseView?.alpha = 0
-                        } completion: { _ in
-                            baseView?.removeFromSuperview()
+                        if baseView?.alpha == 1 {
+                            UIView.animate(withDuration: 0.2) {
+                                baseView?.alpha = 0
+                            } completion: { _ in
+                                baseView?.removeFromSuperview()
+                            }
                         }
                     }
                 }
@@ -264,6 +271,21 @@ extension CameraViewController {
         layer.add(scaleAnimation, forKey: "scale")
         CATransaction.commit()
     }
+    func fadeCurrentComponents(currentComponents: [Component]) {
+        DispatchQueue.main.async {
+            let currentViews = currentComponents.map { $0.baseView }
+            UIView.animate(withDuration: 0.5) {
+                for baseView in currentViews {
+                    baseView?.alpha = 0
+                }
+            } completion: { _ in
+                for baseView in currentViews {
+                    baseView?.removeFromSuperview()
+                }
+            }
+        }
+    }
+    
     func resetHighlights(updateMatchesLabel: Bool = true) {
         currentComponents.removeAll()
         
@@ -275,7 +297,6 @@ extension CameraViewController {
                 subView.removeFromSuperview()
             }
         }
-        
     }
     func animateDetection(rect: CGRect) {
         let layer = CAShapeLayer()

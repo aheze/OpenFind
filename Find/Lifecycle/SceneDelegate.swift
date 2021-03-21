@@ -11,7 +11,7 @@ import UIKit
 var deviceIsRoundPad = false /// iPad with rounded corners
 var deviceHasNotch = false
 
-var isForcingStatusBarHidden = false /// for taking screenshots only
+var isForcingStatusBarHidden = true /// for taking screenshots only
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

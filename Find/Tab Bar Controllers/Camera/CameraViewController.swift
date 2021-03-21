@@ -559,33 +559,6 @@ class CameraViewController: UIViewController {
         setupCameraButtons()
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//
-//        let gradientView = GradientBorderView()
-//        gradientView.frame = CGRect(x: 100, y: 100, width: 200, height: 100)
-//        gradientView.colors = [UIColor.blue.cgColor, UIColor.green.cgColor]
-//        gradientView.cornerRadius = 10
-//
-//        gradientView.backgroundColor = UIColor.blue.withAlphaComponent(0.3)
-//
-//        view.addSubview(gradientView)
-//
-//        var newFrame = gradientView.frame
-//        newFrame.size.width += 100
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//            UIView.animate(withDuration: 1) {
-//
-//                gradientView.frame = newFrame
-////                gradientView.layoutIfNeeded()
-//            }
-////
-////            let gradientFrame = CGRect(origin: .zero, size: newFrame.size)
-////            gradientView.shapeLayer.resizeAndMove(frame: gradientFrame, animated: true, duration: 1)
-//        }
-//    }
-    
     func makeActiveState() {
         UIView.animate(withDuration: 0.4) {
             self.saveToPhotos.alpha = 1

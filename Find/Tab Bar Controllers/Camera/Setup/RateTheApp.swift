@@ -22,25 +22,27 @@ enum AppStoreReviewManager {
     }
     
     static func requestReviewIfPossible() {
-        let defaults = UserDefaults.standard
-        let bundle = Bundle.main
-        
-        let actionCount = defaults.integer(forKey: "reviewWorthyActionCount")
-        guard actionCount >= minimumReviewWorthyActionCount else {
-            return
+        if !isForcingStatusBarHidden {
+            let defaults = UserDefaults.standard
+            let bundle = Bundle.main
+            
+            let actionCount = defaults.integer(forKey: "reviewWorthyActionCount")
+            guard actionCount >= minimumReviewWorthyActionCount else {
+                return
+            }
+            
+            let bundleVersionKey = kCFBundleVersionKey as String
+            let currentVersion = bundle.object(forInfoDictionaryKey: bundleVersionKey) as? String
+            let lastVersion = defaults.string(forKey: "lastReviewRequestAppVersion")
+            
+            guard lastVersion == nil || lastVersion != currentVersion else {
+                return
+            }
+            
+            SKStoreReviewController.requestReview()
+            
+            defaults.set(0, forKey: "reviewWorthyActionCount")
+            defaults.set(currentVersion, forKey: "lastReviewRequestAppVersion")
         }
-        
-        let bundleVersionKey = kCFBundleVersionKey as String
-        let currentVersion = bundle.object(forInfoDictionaryKey: bundleVersionKey) as? String
-        let lastVersion = defaults.string(forKey: "lastReviewRequestAppVersion")
-        
-        guard lastVersion == nil || lastVersion != currentVersion else {
-            return
-        }
-        
-        SKStoreReviewController.requestReview()
-        
-        defaults.set(0, forKey: "reviewWorthyActionCount")
-        defaults.set(currentVersion, forKey: "lastReviewRequestAppVersion")
     }
 }
