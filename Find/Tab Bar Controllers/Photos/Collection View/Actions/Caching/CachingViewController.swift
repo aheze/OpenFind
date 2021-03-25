@@ -85,6 +85,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func doneAnimating() {
+        CachingFinder.resetState()
         startFinding()
     }
     
