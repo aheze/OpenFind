@@ -197,7 +197,7 @@ class CameraViewController: UIViewController {
     let realm = try! Realm()
     var listCategories: Results<FindList>?
     var editableListCategories = [EditableFindList]()
-    var shouldResetHighlights = false
+//    var shouldResetHighlights = false
     
     // MARK: Keyboard
     let toolbar = ListToolBar()
@@ -340,7 +340,6 @@ class CameraViewController: UIViewController {
                         displayingOrientationError = true
                         newSearchTextField.isEnabled = false
                         resetHighlights()
-                        shouldResetHighlights = true
                         
                         alternateWarningHeightC.constant = 70
                         UIView.animate(withDuration: 0.5, animations: {
@@ -353,7 +352,6 @@ class CameraViewController: UIViewController {
                             displayingOrientationError = false
                             newSearchTextField.isEnabled = true
                             
-                            shouldResetHighlights = false
                             alternateWarningHeightC.constant = 0
                             UIView.animate(withDuration: 0.5, animations: {
                                 self.alternateWarningView.alpha = 0

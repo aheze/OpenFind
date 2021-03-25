@@ -369,11 +369,11 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             if uniqueSplits.count != splits.count {
                 resetHighlights()
                 allowSearch = false
-                shouldResetHighlights = true
+//                shouldResetHighlights = true
                 showDuplicateAlert(show: true)
             } else {
                 showDuplicateAlert(show: false)
-                shouldResetHighlights = false
+//                shouldResetHighlights = false
                 allowSearch = true
                 finalTextToFind = updatedString
                 sortSearchTerms()
@@ -395,7 +395,8 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         finalTextToFind = ""
         allowSearch = true
-        shouldResetHighlights = false
+//        shouldResetHighlights = false
+        resetHighlights()
         showDuplicateAlert(show: false)
         sortSearchTerms()
         return true

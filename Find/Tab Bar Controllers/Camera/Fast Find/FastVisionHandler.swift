@@ -14,12 +14,6 @@ import CoreMotion
 extension CameraViewController {
     
     func handleFastDetectedText(request: VNRequest?, error: Error?) {
-        if shouldResetHighlights {
-            
-            /// reset the cycle
-            busyFastFinding = false
-            resetHighlights()
-        } else {
             if currentPassCount >= 80 {
                 canNotify = true
             }
@@ -82,7 +76,8 @@ extension CameraViewController {
                     }
                     
                     if newComponents.isEmpty {
-                        self.resetHighlights(updateMatchesLabel: true)
+                        self.updateMatchesNumber(to: 0)
+                        self.fadeCurrentComponents(currentComponents: self.currentComponents)
                     } else {
                         
                         if CameraState.isPaused, self.cachePressed {
@@ -114,7 +109,7 @@ extension CameraViewController {
                 busyFastFinding = false
                 
             }
-        }
+        
         
         if waitingToFind {
             waitingToFind = false
