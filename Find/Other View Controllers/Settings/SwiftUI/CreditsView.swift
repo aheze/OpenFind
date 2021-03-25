@@ -32,6 +32,13 @@ struct PeopleView: View {
                         .foregroundColor(.white)
                         .font(Font(UIFont.systemFont(ofSize: 24, weight: .medium)))
                     
+                    Text("Hello there! Thanks for checking out Find, really appreciate it!")
+                        .foregroundColor(.white)
+                        .font(Font(UIFont.systemFont(ofSize: 19, weight: .regular)))
+                        .frame(maxWidth: .infinity)
+                        .padding(EdgeInsets(top: 6, leading: 32, bottom: 6, trailing: 32))
+                        .multilineTextAlignment(.center)
+                    
                     HStack(spacing: 14) {
                         Button(action: {
                             if let url = URL(string: "https://aheze.medium.com/") {
@@ -205,7 +212,7 @@ struct PeopleView: View {
                         .cornerRadius(12)
                     }
                     .buttonStyle(PlainButtonStyle())
-                    .padding(EdgeInsets(top: 4, leading: 20, bottom: 12, trailing: 20))
+                    .padding(EdgeInsets(top: 4, leading: 20, bottom: 24, trailing: 20))
                     
                 }
             }
