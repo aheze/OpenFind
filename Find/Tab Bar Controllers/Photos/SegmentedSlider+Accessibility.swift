@@ -21,7 +21,7 @@ extension SegmentedSlider {
         cachedLabel.accessibilityTraits = .button
         
         allLabel.accessibilityHint = "Displays all your photos in the photo gallery"
-        allLabel.accessibilityTraits = .button
+        allLabel.accessibilityTraits = [.button, .selected]
         
     }
 }

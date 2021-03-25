@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>3815</string>
+	<string>3824</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppClip</key>
