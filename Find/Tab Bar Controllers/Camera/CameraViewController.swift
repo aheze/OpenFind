@@ -405,8 +405,6 @@ class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         if deviceHasNotch && !deviceIsRoundPad {
             if isForcingStatusBarHidden {
                 normalSearchFieldTopCConstant = -16
@@ -425,8 +423,6 @@ class CameraViewController: UIViewController {
         
         contentTopC.constant = normalSearchFieldTopCConstant
         searchContentView.layoutIfNeeded()
-        
-        self.modalPresentationStyle = .automatic
         
         NotificationCenter.default.addObserver(self, selector: #selector(_KeyboardFrameChanged(_:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(_KeyboardHeightChanged(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
@@ -555,6 +551,7 @@ class CameraViewController: UIViewController {
         
         /// 1.2 setup
         setupCameraButtons()
+        setupAccessibility()
     }
     
     func makeActiveState() {

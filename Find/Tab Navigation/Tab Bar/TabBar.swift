@@ -198,6 +198,8 @@ class TabBarView: UIView {
         controlsReferenceView.isUserInteractionEnabled = false
         
         dimPhotoSlideControls(dim: true, isPhotosControls: true)
+        
+        setupAccessibility()
     }
     
     func getBlocks(from fromVC: UIViewController, to toVCType: ViewControllerType) -> (

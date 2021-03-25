@@ -15,6 +15,8 @@ extension CameraViewController {
             self.currentPausedImage = image
             self.showImageView(true)
         }
+        cameraIconHolder.accessibilityLabel = "Shutter, play"
+        cameraIconHolder.accessibilityHint = "Starts the camera, removes the Save and Cache buttons, and enables the flashlight to be turned on"
     }
     func startLivePreview() {
         /// make sure it's running (can stop when going to app switcher and back)
@@ -23,6 +25,8 @@ extension CameraViewController {
         }
         cameraView.videoPreviewLayer.connection?.isEnabled = true
         self.showImageView(false)
+        cameraIconHolder.accessibilityLabel = "Shutter, pause"
+        cameraIconHolder.accessibilityHint = "Pauses the camera, shows the Save and Cache buttons, and disables the flashlight"
     }
     
     func showImageView(_ show: Bool) {

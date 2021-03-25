@@ -145,6 +145,8 @@ class SegmentedSlider: UIView {
         
         blurView.layer.borderWidth = 0.1
         blurView.layer.borderColor = UIColor.secondaryLabel.cgColor
+        
+        setupAccessibility()
     }
     
     override func layoutSubviews() {
@@ -162,6 +164,33 @@ class SegmentedSlider: UIView {
             self.indicatorView.bounds = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
             self.indicatorView.center = CGPoint(x: centerX, y: centerY)
         })
+        
+        switch filter {
+        case .local:
+            localLabel.accessibilityTraits = [.button, .selected]
+            
+            starredLabel.accessibilityTraits = .button
+            cachedLabel.accessibilityTraits = .button
+            allLabel.accessibilityTraits = .button
+        case .starred:
+            starredLabel.accessibilityTraits = [.button, .selected]
+            
+            localLabel.accessibilityTraits = .button
+            cachedLabel.accessibilityTraits = .button
+            allLabel.accessibilityTraits = .button
+        case .cached:
+            cachedLabel.accessibilityTraits = [.button, .selected]
+            
+            localLabel.accessibilityTraits = .button
+            starredLabel.accessibilityTraits = .button
+            allLabel.accessibilityTraits = .button
+        case .all:
+            allLabel.accessibilityTraits = [.button, .selected]
+            
+            localLabel.accessibilityTraits = .button
+            starredLabel.accessibilityTraits = .button
+            cachedLabel.accessibilityTraits = .button
+        }
     }
     func animateHighlight(view: UIView, highlight: Bool) {
         if highlight {
