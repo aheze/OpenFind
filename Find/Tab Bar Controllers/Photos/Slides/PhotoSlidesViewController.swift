@@ -90,6 +90,7 @@ class PhotoSlidesViewController: UIViewController {
     var currentCachingIdentifier: UUID?
     var temporaryCachingPhoto: TemporaryCachingPhoto?
     var currentProgress = CGFloat(0) /// how much cache is finished
+    var focusCacheButton: (() -> Void)?
     
     // MARK: Transitioning
     var transitionController = ZoomTransitionController()
@@ -99,6 +100,8 @@ class PhotoSlidesViewController: UIViewController {
     var panGestureRecognizer: UIPanGestureRecognizer!
     var singleTapGestureRecognizer: UITapGestureRecognizer!
     var hideTabBar: ((Bool) -> Void)?
+    @IBOutlet weak var voiceOverSlidesControl: VoiceOverSlidesControl!
+    @IBOutlet weak var voiceOverBottomC: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()

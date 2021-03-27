@@ -94,6 +94,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     self.updateStatusBar()
                 }
             }
+            viewController.focusCacheButton = { [weak self] in
+                guard let self = self else { return }
+                
+                print("FOCUS!!!!")
+                UIAccessibility.post(notification: .screenChanged, argument: self.tabBarView.slideCacheButton)
+            }
             viewController.startTutorial = { [weak self] filter in
                 guard let self = self else { return }
                 switch filter {

@@ -58,7 +58,9 @@ extension PhotoSlidesViewController {
                 }
                 
             }))
-            alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: { _ in
+                self.focusCacheButton?()
+            }))
             if let popoverController = alert.popoverPresentationController {
                 popoverController.sourceView = self.view
                 popoverController.sourceRect =  CGRect(x: (self.view.bounds.width / 2) - 40, y: self.view.bounds.height - 80, width: 80, height: 80)

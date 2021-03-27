@@ -60,6 +60,7 @@ extension PhotosViewController {
             
             slidesViewController.hideTabBar = self.hideTabBar
             slidesViewController.presentingInfo = self.slidesPresentingInfo
+            slidesViewController.focusCacheButton = self.focusCacheButton
             
             if let currentIndex = allPhotosToDisplay.firstIndex(of: findPhoto) {
                 slidesViewController.currentIndex = currentIndex
