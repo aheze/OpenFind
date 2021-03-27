@@ -24,6 +24,9 @@ class TabBarView: UIView {
         }
     }
     
+    // MARK: Accessibility
+    var bottomView: UIView?
+    
     var animatingObjects = 0
     var gestureInterruptedButton = false /// when button animating, then swipe away
     

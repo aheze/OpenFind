@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 extension TabBarView {
     func setupAccessibility() {
@@ -25,5 +26,12 @@ extension TabBarView {
         listsIcon.accessibilityLabel = "Lists"
         listsIcon.accessibilityHint = "Switches to the Lists tab"
         listsIcon.accessibilityTraits = .button
+        
+        backgroundView.isAccessibilityElement = true
+        backgroundView.accessibilityLabel = "Tab bar"
+        
+        if UIAccessibility.isVoiceOverRunning {
+            
+        }
     }
 }
