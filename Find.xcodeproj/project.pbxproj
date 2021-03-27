@@ -848,14 +848,12 @@
 		3C4DE6F3259AD3FF0037D104 /* Camera Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				3CA9335625BDF4B500042C2F /* CameraVC+ButtonSetup.swift */,
-				3CD388BC25C11AB900B67B13 /* CameraVC+Tips.swift */,
 				3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */,
 				3C4DE6F8259AD3FF0037D104 /* SaveToPhotosButton.swift */,
-				3CAC4D8E25BF514000CC7948 /* Message View */,
 				3C4DE6F9259AD3FF0037D104 /* CacheButton.xib */,
 				3C4DE6F7259AD3FF0037D104 /* CacheButton.swift */,
 				3C4DE6F6259AD3FF0037D104 /* CacheIcon.swift */,
+				3CAC4D8E25BF514000CC7948 /* Message View */,
 			);
 			path = "Camera Buttons";
 			sourceTree = "<group>";
@@ -1571,6 +1569,8 @@
 				3C570E1B260CE52200F5AA4D /* CameraVC+Accessibility.swift */,
 				3CA9334B25BDF36D00042C2F /* Camera View */,
 				3C4DE6F3259AD3FF0037D104 /* Camera Buttons */,
+				3CA9335625BDF4B500042C2F /* CameraVC+ButtonSetup.swift */,
+				3CD388BC25C11AB900B67B13 /* CameraVC+Tips.swift */,
 				3CA9334425BDF2AE00042C2F /* Paused */,
 				4979A39123AF3B4B00B09380 /* Fast Find */,
 				4904524B2379072F0046570D /* UpdateMatches.swift */,

@@ -113,6 +113,9 @@ extension CameraViewController {
                 self.cacheLabel.fadeTransition(0.2)
                 self.cacheLabel.text = NSLocalizedString("shouldCache", comment: "")
                 self.messageView.hideMessages()
+                
+                self.cache.accessibilityLabel = "Cache"
+                self.cache.accessibilityHint = "Caches the current paused image. Produces much more accurate results."
             }
         }
         

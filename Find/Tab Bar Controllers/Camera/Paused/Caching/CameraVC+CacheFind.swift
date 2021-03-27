@@ -47,6 +47,8 @@ extension CameraViewController {
                     if self.cachePressed {
                         DispatchQueue.main.async {
                             self.cache.cacheIcon.animateCheck(percentage: CGFloat(progress))
+                            
+                            UIAccessibility.post(notification: .announcement, argument: "\(roundedPercent)%")
                         }
                     }
                 }

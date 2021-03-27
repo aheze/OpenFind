@@ -69,14 +69,22 @@ class ReceiveTouchView: UIView {
     
 }
 class PassthroughView: UIView {
+    var passthroughActive = true
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        return subviews.contains(where: {
-            ($0 is ReceiveTouchView && $0.point(inside: self.convert(point, to: $0), with: event)) || (
-                !$0.isHidden
-                && $0.isUserInteractionEnabled
-                && $0.point(inside: self.convert(point, to: $0), with: event)
-            )
-        })
+        
+        if passthroughActive {
+            
+            return subviews.contains(where: {
+                ($0 is ReceiveTouchView && $0.point(inside: self.convert(point, to: $0), with: event)) || (
+                    !$0.isHidden
+                        && $0.isUserInteractionEnabled
+                        && $0.point(inside: self.convert(point, to: $0), with: event)
+                )
+            })
+        } else {
+            print("Bounds: \(bounds), point: \(point), contains: \(self.bounds.contains(point))")
+            return self.bounds.contains(point)
+        }
     }
 }
 
@@ -292,7 +300,6 @@ extension Date {
             
             /// displays the date as "January 1, 2020"
             /// the ' ' marks indicate a character that you add (in our case, a comma)
-//            dateFormatter.dateFormat = "MMMM d',' yyyy"
             dateFormatter.dateFormat = "MMMM d"
             return dateFormatter.string(from: self)
         }

@@ -23,6 +23,16 @@ class CameraViewController: UIViewController {
     let updateImportantShouldPresentWhatsNew = true
     var shouldPresentWhatsNew = false
     
+    // MARK: Accessibility
+    @IBOutlet weak var statsWidthC: NSLayoutConstraint!
+    @IBOutlet weak var statsHeightC: NSLayoutConstraint!
+    @IBOutlet weak var fullScreenWidthC: NSLayoutConstraint!
+    @IBOutlet weak var fullScreenHeightC: NSLayoutConstraint!
+    @IBOutlet weak var flashWidthC: NSLayoutConstraint!
+    @IBOutlet weak var flashHeightC: NSLayoutConstraint!
+    @IBOutlet weak var settingsWidthC: NSLayoutConstraint!
+    @IBOutlet weak var settingsHeightC: NSLayoutConstraint!
+    var controlsView: UIView?
     
     // MARK: Tab bar
     @IBOutlet weak var cameraIconHolder: UIView!

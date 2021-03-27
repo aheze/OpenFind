@@ -42,11 +42,9 @@ extension CameraViewController {
 
 extension CameraViewController: EasyTipViewDelegate {
     func easyTipViewDidTap(_ tipView: EasyTipView) {
-        print("tapped")
     }
     
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {
-        print("dismissed")
         if tipView == cacheTipView {
             cacheTipView = nil
             dismissedCacheTipAlready = true

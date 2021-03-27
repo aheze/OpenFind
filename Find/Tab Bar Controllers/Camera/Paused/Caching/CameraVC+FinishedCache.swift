@@ -19,6 +19,11 @@ extension CameraViewController {
                 self.cacheLabel.fadeTransition(0.2)
                 self.cacheLabel.text = NSLocalizedString("shouldNotCache", comment: "")
                 self.cache.cacheIcon.animateCheck(percentage: CGFloat(1))
+                
+                self.cache.accessibilityLabel = "Cached"
+                self.cache.accessibilityHint = "Tap to uncache the current paused image"
+                
+                UIAccessibility.post(notification: .announcement, argument: "Caching complete")
             }
         }
         

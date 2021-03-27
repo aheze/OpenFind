@@ -20,12 +20,19 @@ extension CameraViewController {
                 cacheLabel.fadeTransition(0.2)
                 cacheLabel.text = NSLocalizedString("shouldNotCache", comment: "")
                 addCacheResults()
+                
+                self.cache.accessibilityLabel = "Cached"
+                self.cache.accessibilityHint = "Tap to uncache the current paused image"
             } else {
                 cache.cacheIcon.animateCheck(percentage: currentProgress)
                 cache.cacheIcon.toggleRim(light: true)
                 cacheLabel.fadeTransition(0.2)
                 cacheLabel.text = NSLocalizedString("caching...", comment: "")
                 messageView.unHideMessages()
+                
+                cache.accessibilityLabel = "Caching"
+                cache.accessibilityHint = ""
+                UIAccessibility.post(notification: .layoutChanged, argument: self.cache)
             }
         } else {
             if let currentImage = currentPausedImage?.cgImage {
@@ -39,6 +46,9 @@ extension CameraViewController {
                         if 0.25 > self.currentProgress {
                             self.messageView.showMessage("25", dismissible: false, duration: -1)
                             self.cache.cacheIcon.animateCheck(percentage: 0.25)
+                            
+                            UIAccessibility.post(notification: .announcement, argument: "25%")
+                            
                         }
                     }
                 }

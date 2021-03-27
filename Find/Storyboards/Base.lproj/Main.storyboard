@@ -819,20 +819,24 @@
                         <outlet property="flashBottomC" destination="V6B-p4-O4u" id="CHU-nL-VDK"/>
                         <outlet property="flashButton" destination="9tP-6a-TE7" id="A45-pu-NbJ"/>
                         <outlet property="flashDisableIcon" destination="BUI-dq-eb5" id="taZ-7u-JVk"/>
+                        <outlet property="flashHeightC" destination="Hbw-Cw-gK0" id="N7P-D5-dAW"/>
                         <outlet property="flashImageView" destination="lk9-VA-4ei" id="h46-Dz-tjk"/>
                         <outlet property="flashRightC" destination="OLy-KE-EUn" id="lJk-V2-oyW"/>
                         <outlet property="flashRightNeighborC" destination="2ir-lM-Zqr" id="CDV-yS-x4g"/>
                         <outlet property="flashTopC" destination="KEx-Vb-KNO" id="sXM-fR-rIA"/>
                         <outlet property="flashView" destination="SIG-Pk-jNK" id="PBC-kO-MUe"/>
+                        <outlet property="flashWidthC" destination="mmR-c8-CAp" id="55C-pl-W8z"/>
                         <outlet property="focusGestureRecognizer" destination="mTz-Si-ynA" id="ix5-Om-3Lv"/>
                         <outlet property="focusView" destination="Fqs-5I-gTN" id="JNU-n1-pHn"/>
                         <outlet property="fullScreenBottomC" destination="i6z-7B-INV" id="6eW-15-W6s"/>
                         <outlet property="fullScreenButton" destination="mDv-cq-xgC" id="7Nh-TM-x9U"/>
+                        <outlet property="fullScreenHeightC" destination="PpS-pW-isg" id="Rav-Yw-9zb"/>
                         <outlet property="fullScreenImageView" destination="8a0-8g-y2l" id="310-7r-VpX"/>
                         <outlet property="fullScreenLeftC" destination="oGD-mU-2eF" id="pYb-1h-QR6"/>
                         <outlet property="fullScreenLeftNeighborC" destination="yxT-N9-O2m" id="QJr-52-9WM"/>
                         <outlet property="fullScreenTopC" destination="m21-7T-ciq" id="KH2-cP-A8x"/>
                         <outlet property="fullScreenView" destination="VrD-xe-4tc" id="80L-wC-VaJ"/>
+                        <outlet property="fullScreenWidthC" destination="UwY-HU-eay" id="1gP-X3-eHU"/>
                         <outlet property="listsLabel" destination="sbj-0t-kKO" id="bsh-5a-IVV"/>
                         <outlet property="messageView" destination="3X4-Nc-yBe" id="79y-RB-NiK"/>
                         <outlet property="messageViewBottomC" destination="gv1-g9-0bM" id="7be-LI-Me9"/>
@@ -853,13 +857,17 @@
                         <outlet property="searchTextTopC" destination="tCA-et-4hv" id="xj9-zj-tdH"/>
                         <outlet property="settingsBottomC" destination="Ygo-gn-4JO" id="nzp-3d-xOD"/>
                         <outlet property="settingsButton" destination="SAv-Gj-3md" id="rwC-p2-f2q"/>
+                        <outlet property="settingsHeightC" destination="5wI-tC-Bbk" id="jki-Lj-uEd"/>
                         <outlet property="settingsImageView" destination="eP1-5X-V80" id="Msi-ML-xar"/>
                         <outlet property="settingsView" destination="m5W-6E-t5W" id="Rts-H9-WAT"/>
+                        <outlet property="settingsWidthC" destination="Pyy-SY-MkH" id="fIT-Cu-EYr"/>
                         <outlet property="showControlsButton" destination="u0g-ei-7rm" id="xmv-6q-f8J"/>
                         <outlet property="statsBottomC" destination="7Fo-5n-bn7" id="dUE-5Z-RNb"/>
                         <outlet property="statsButton" destination="fK0-3I-lSn" id="rLB-1b-8xL"/>
+                        <outlet property="statsHeightC" destination="u5T-Qy-gET" id="cRR-Fi-DPa"/>
                         <outlet property="statsLabel" destination="CSS-3q-pzT" id="Fw9-6Y-5FU"/>
                         <outlet property="statsView" destination="Kbt-Wb-Lvr" id="QDW-RN-H2z"/>
+                        <outlet property="statsWidthC" destination="00K-gX-4Qp" id="sKU-7z-bJ5"/>
                         <outlet property="tapToRemoveLabel" destination="Hc9-i8-kXk" id="IQj-Ry-hZp"/>
                         <outlet property="textLabel" destination="BRC-Yj-hpw" id="ZQn-rk-L50"/>
                         <outlet property="warningHeightC" destination="bdc-W2-kMf" id="FaV-Sf-qi6"/>
