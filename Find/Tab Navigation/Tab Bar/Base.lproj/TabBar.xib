@@ -16,16 +16,22 @@
                 <outlet property="blurBackgroundView" destination="cg9-qX-9rO" id="3OE-cP-V9f"/>
                 <outlet property="blurView" destination="569-gu-a2G" id="f1U-Ol-9kJ"/>
                 <outlet property="cacheButton" destination="1BX-UY-Tml" id="iV2-H4-I9A"/>
+                <outlet property="cameraButton" destination="dlP-im-RlF" id="EgC-Zr-fQl"/>
+                <outlet property="cameraContainerView" destination="Kc8-UY-zJl" id="zze-Yr-2dc"/>
                 <outlet property="cameraIcon" destination="10d-KH-We3" id="u8P-Fk-Nbl"/>
                 <outlet property="containerHeightC" destination="0N9-Yw-gol" id="OMf-FW-fwv"/>
                 <outlet property="containerView" destination="sCo-YF-aez" id="RWn-Nl-yDX"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="yXR-jn-dDg"/>
                 <outlet property="controlsReferenceView" destination="gDY-hq-DTd" id="04Y-ao-Meb"/>
+                <outlet property="listsButton" destination="pfe-Pp-tZV" id="cOP-nA-0bS"/>
+                <outlet property="listsContainerView" destination="aI9-dP-G91" id="8pt-AT-eu3"/>
                 <outlet property="listsControls" destination="rdg-yk-Rn2" id="qko-kq-Y5d"/>
                 <outlet property="listsDeleteButton" destination="cyJ-A4-ML3" id="IBJ-g5-kKK"/>
                 <outlet property="listsIcon" destination="Su2-wl-aUw" id="kaa-Mm-Jsc"/>
                 <outlet property="listsSelectionLabel" destination="HR2-CF-DNb" id="fLf-hG-iv4"/>
                 <outlet property="photoSlideControls" destination="5ex-iS-SQb" id="Pqh-ev-D2N"/>
+                <outlet property="photosButton" destination="t9e-Wy-Xud" id="45f-AD-6wI"/>
+                <outlet property="photosContainerView" destination="hiB-wH-31z" id="Abv-VS-8BU"/>
                 <outlet property="photosControls" destination="F0d-ei-2Yx" id="l0u-xk-TVE"/>
                 <outlet property="photosDeleteButton" destination="FCf-p6-NPI" id="ql2-R1-sQc"/>
                 <outlet property="photosIcon" destination="EOH-Do-hxB" id="ygD-GT-lCx"/>
@@ -100,35 +106,98 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCo-YF-aez" customClass="PassthroughView" customModule="Find" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="58"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="90" translatesAutoresizingMaskIntoConstraints="NO" id="FmO-hJ-SLz" customClass="PassthroughStackView" customModule="Find" customModuleProvider="target">
-                            <rect key="frame" x="57" y="9" width="300" height="40"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="FmO-hJ-SLz" customClass="PassthroughStackView" customModule="Find" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="9" width="414" height="40"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EOH-Do-hxB" customClass="PhotosIcon" customModule="Find" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hiB-wH-31z">
+                                    <rect key="frame" x="0.0" y="0.0" width="138" height="40"/>
+                                    <subviews>
+                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EOH-Do-hxB" customClass="PhotosIcon" customModule="Find" customModuleProvider="target">
+                                            <rect key="frame" x="49" y="0.0" width="40" height="40"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="8bN-6f-Aat"/>
+                                                <constraint firstAttribute="height" constant="40" id="BLB-Xw-dGJ"/>
+                                            </constraints>
+                                        </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t9e-Wy-Xud" customClass="CustomButton" customModule="Find" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="138" height="40"/>
+                                            <connections>
+                                                <action selector="photosButtonPressed:" destination="-1" eventType="touchUpInside" id="9UF-hX-ydM"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="40" id="8bN-6f-Aat"/>
-                                        <constraint firstAttribute="height" constant="40" id="BLB-Xw-dGJ"/>
+                                        <constraint firstAttribute="bottom" secondItem="t9e-Wy-Xud" secondAttribute="bottom" id="NOS-55-AtB"/>
+                                        <constraint firstItem="t9e-Wy-Xud" firstAttribute="top" secondItem="hiB-wH-31z" secondAttribute="top" id="Ny4-OL-lGZ"/>
+                                        <constraint firstItem="t9e-Wy-Xud" firstAttribute="leading" secondItem="hiB-wH-31z" secondAttribute="leading" id="Pzv-u6-Npf"/>
+                                        <constraint firstItem="EOH-Do-hxB" firstAttribute="centerY" secondItem="hiB-wH-31z" secondAttribute="centerY" id="XTJ-E5-pH8"/>
+                                        <constraint firstItem="EOH-Do-hxB" firstAttribute="centerX" secondItem="hiB-wH-31z" secondAttribute="centerX" id="kyo-dz-vHk"/>
+                                        <constraint firstAttribute="trailing" secondItem="t9e-Wy-Xud" secondAttribute="trailing" id="xai-8b-DgD"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="10d-KH-We3" customClass="CameraIcon" customModule="Find" customModuleProvider="target">
-                                    <rect key="frame" x="130" y="0.0" width="40" height="40"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kc8-UY-zJl">
+                                    <rect key="frame" x="138" y="0.0" width="138" height="40"/>
+                                    <subviews>
+                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="10d-KH-We3" customClass="CameraIcon" customModule="Find" customModuleProvider="target">
+                                            <rect key="frame" x="49" y="0.0" width="40" height="40"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="2ms-Yq-MBo"/>
+                                                <constraint firstAttribute="width" constant="40" id="MSF-Yz-1Bq"/>
+                                            </constraints>
+                                        </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dlP-im-RlF" customClass="CustomButton" customModule="Find" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="138" height="40"/>
+                                            <connections>
+                                                <action selector="cameraButtonPressed:" destination="-1" eventType="touchUpInside" id="lcY-Bt-CkV"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="2ms-Yq-MBo"/>
-                                        <constraint firstAttribute="width" constant="40" id="MSF-Yz-1Bq"/>
+                                        <constraint firstItem="dlP-im-RlF" firstAttribute="leading" secondItem="Kc8-UY-zJl" secondAttribute="leading" id="ExN-Rj-1iQ"/>
+                                        <constraint firstItem="10d-KH-We3" firstAttribute="centerX" secondItem="Kc8-UY-zJl" secondAttribute="centerX" id="LUu-yT-N4F"/>
+                                        <constraint firstAttribute="trailing" secondItem="dlP-im-RlF" secondAttribute="trailing" id="PGF-eO-I5p"/>
+                                        <constraint firstItem="10d-KH-We3" firstAttribute="centerY" secondItem="Kc8-UY-zJl" secondAttribute="centerY" id="U0k-1Y-zwV"/>
+                                        <constraint firstItem="dlP-im-RlF" firstAttribute="top" secondItem="Kc8-UY-zJl" secondAttribute="top" id="rMX-JB-CWT"/>
+                                        <constraint firstAttribute="bottom" secondItem="dlP-im-RlF" secondAttribute="bottom" id="xgP-Rr-48Q"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Su2-wl-aUw" customClass="ListsIcon" customModule="Find" customModuleProvider="target">
-                                    <rect key="frame" x="260" y="0.0" width="40" height="40"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aI9-dP-G91">
+                                    <rect key="frame" x="276" y="0.0" width="138" height="40"/>
+                                    <subviews>
+                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Su2-wl-aUw" customClass="ListsIcon" customModule="Find" customModuleProvider="target">
+                                            <rect key="frame" x="49" y="0.0" width="40" height="40"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="cv3-5i-POm"/>
+                                                <constraint firstAttribute="height" constant="40" id="elV-BP-ARq"/>
+                                            </constraints>
+                                        </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfe-Pp-tZV" customClass="CustomButton" customModule="Find" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="138" height="40"/>
+                                            <connections>
+                                                <action selector="listsButtonPressed:" destination="-1" eventType="touchUpInside" id="4uv-H0-rg6"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="40" id="cv3-5i-POm"/>
-                                        <constraint firstAttribute="height" constant="40" id="elV-BP-ARq"/>
+                                        <constraint firstItem="pfe-Pp-tZV" firstAttribute="leading" secondItem="aI9-dP-G91" secondAttribute="leading" id="2Bg-1Y-niW"/>
+                                        <constraint firstItem="pfe-Pp-tZV" firstAttribute="top" secondItem="aI9-dP-G91" secondAttribute="top" id="2xi-3p-BkP"/>
+                                        <constraint firstItem="Su2-wl-aUw" firstAttribute="centerX" secondItem="aI9-dP-G91" secondAttribute="centerX" id="HqY-bS-yOp"/>
+                                        <constraint firstAttribute="bottom" secondItem="pfe-Pp-tZV" secondAttribute="bottom" id="K6n-tf-ts2"/>
+                                        <constraint firstItem="Su2-wl-aUw" firstAttribute="centerY" secondItem="aI9-dP-G91" secondAttribute="centerY" id="edx-p3-LR2"/>
+                                        <constraint firstAttribute="trailing" secondItem="pfe-Pp-tZV" secondAttribute="trailing" id="hGV-Ys-qX7"/>
                                     </constraints>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="JVn-qj-Ir8"/>
+                            </constraints>
                         </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDY-hq-DTd" customClass="ReceiveTouchView" customModule="Find" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="58"/>
@@ -139,9 +208,10 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="58" id="0N9-Yw-gol"/>
+                        <constraint firstItem="FmO-hJ-SLz" firstAttribute="leading" secondItem="sCo-YF-aez" secondAttribute="leading" id="40x-Gg-Xxw"/>
                         <constraint firstItem="gDY-hq-DTd" firstAttribute="leading" secondItem="sCo-YF-aez" secondAttribute="leading" id="9LD-Nv-mMN"/>
                         <constraint firstItem="FmO-hJ-SLz" firstAttribute="centerY" secondItem="sCo-YF-aez" secondAttribute="centerY" id="DRf-in-W2w"/>
-                        <constraint firstItem="FmO-hJ-SLz" firstAttribute="centerX" secondItem="sCo-YF-aez" secondAttribute="centerX" id="JVv-PW-gAb"/>
+                        <constraint firstAttribute="trailing" secondItem="FmO-hJ-SLz" secondAttribute="trailing" id="Ku2-yV-lgs"/>
                         <constraint firstAttribute="trailing" secondItem="gDY-hq-DTd" secondAttribute="trailing" id="W5j-Zc-FY2"/>
                         <constraint firstItem="gDY-hq-DTd" firstAttribute="top" secondItem="sCo-YF-aez" secondAttribute="top" id="m8O-JU-i0S"/>
                         <constraint firstItem="nzD-zL-CxE" firstAttribute="bottom" secondItem="gDY-hq-DTd" secondAttribute="bottom" id="rcw-Gi-F9C"/>

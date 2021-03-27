@@ -56,7 +56,7 @@ extension ViewController {
                 switch toVC {
                 case is PhotosWrapperController:
                     tabBarView.hideRealShutter?(true)
-                    tabBarView.cameraIcon.alpha = 1
+                    tabBarView.cameraContainerView.alpha = 1
                     let block = {
                         self.tabBarView.cameraIcon.makeNormalState()()
                         self.tabBarView.listsIcon.makeNormalState(details: Constants.detailIconColorLight, foreground: Constants.foregroundIconColorLight, background: Constants.backgroundIconColorLight)()
@@ -90,7 +90,7 @@ extension ViewController {
                     
                     let completion: (() -> Void) = {
                         self.tabBarView.hideRealShutter?(false)
-                        self.tabBarView.cameraIcon.alpha = 0
+                        self.tabBarView.cameraContainerView.alpha = 0
                     }
                     
                     self.shadeView.alpha = 0
@@ -105,7 +105,7 @@ extension ViewController {
                     
                 case is ListsNavController:
                     tabBarView.hideRealShutter?(true)
-                    tabBarView.cameraIcon.alpha = 1
+                    tabBarView.cameraContainerView.alpha = 1
                     let block = {
                         self.tabBarView.photosIcon.makeNormalState(details: Constants.detailIconColorLight, foreground: Constants.foregroundIconColorLight, background: Constants.backgroundIconColorLight)()
                         self.tabBarView.cameraIcon.makeNormalState()()

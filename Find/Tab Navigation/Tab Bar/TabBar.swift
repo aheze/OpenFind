@@ -115,6 +115,60 @@ class TabBarView: UIView {
     @IBOutlet weak var cameraIcon: CameraIcon!
     @IBOutlet weak var listsIcon: ListsIcon!
     
+    @IBOutlet weak var photosContainerView: UIView!
+    @IBOutlet weak var photosButton: CustomButton!
+    @IBAction func photosButtonPressed(_ sender: Any) {
+        if let currentVC = ViewControllerState.currentVC {
+            let (prep, block, completion) = self.getBlocks(from: currentVC, to: .photos)
+            if let block = block {
+                if (self.checkIfAnimating ?? { false })() == false {
+                    prep()
+                    self.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
+                    self.makeLayerInactiveState(duration: Constants.transitionDuration)
+                    self.animate(block: block, completion: completion)
+                }
+                self.changedViewController?(.photos)
+            }
+        }
+    }
+    
+    @IBOutlet weak var cameraContainerView: UIView!
+    @IBOutlet weak var cameraButton: CustomButton!
+    @IBAction func cameraButtonPressed(_ sender: Any) {
+        if let currentVC = ViewControllerState.currentVC {
+            let (prep, block, completion) = self.getBlocks(from: currentVC, to: .camera)
+            if let block = block {
+                if (self.checkIfAnimating ?? { false })() == false {
+                    prep()
+                    self.cameraIcon.makeLayerActiveState(duration: Constants.transitionDuration)
+                    self.makeLayerActiveState(duration: Constants.transitionDuration)
+                    self.animate(block: block, completion: completion)
+                }
+                self.changedViewController?(.camera)
+            }
+        }
+    }
+    
+    
+    @IBOutlet weak var listsContainerView: UIView!
+    @IBOutlet weak var listsButton: CustomButton!
+    @IBAction func listsButtonPressed(_ sender: Any) {
+        if let currentVC = ViewControllerState.currentVC {
+            let (prep, block, completion) = self.getBlocks(from: currentVC, to: .lists)
+            if let block = block {
+                if (self.checkIfAnimating ?? { false })() == false {
+                    prep()
+                    self.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
+                    self.makeLayerInactiveState(duration: Constants.transitionDuration)
+                    self.animate(block: block, completion: completion)
+                }
+                self.changedViewController?(.lists)
+            }
+        }
+    }
+    
+    
+    
     var fillLayer: CAShapeLayer?
     
     override init(frame: CGRect) {
@@ -143,7 +197,7 @@ class TabBarView: UIView {
         }
     
         topLineView.alpha = 0
-        cameraIcon.alpha = 0
+        cameraContainerView.alpha = 0
         shadeView.alpha = 1
         blurView.effect = nil
         blurBackgroundView.alpha = 0
@@ -151,51 +205,42 @@ class TabBarView: UIView {
         let timingParameters = UISpringTimingParameters(damping: 1, response: Constants.transitionDuration)
         tabAnimator = UIViewPropertyAnimator(duration: 0, timingParameters: timingParameters)
         
-        photosIcon.pressed = { [weak self] in
-            guard let self = self else { return }
-            if let currentVC = ViewControllerState.currentVC {
-                let (prep, block, completion) = self.getBlocks(from: currentVC, to: .photos)
-                if let block = block {
-                    if (self.checkIfAnimating ?? { false })() == false {
-                        prep()
-                        self.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
-                        self.makeLayerInactiveState(duration: Constants.transitionDuration)
-                        self.animate(block: block, completion: completion)
-                    }
-                    self.changedViewController?(.photos)
-                }
+        photosButton.touched = { [weak self] down in
+            if down {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.photosIcon.alpha = 0.5
+                })
+            } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.photosIcon.alpha = 1
+                })
             }
         }
-        cameraIcon.pressed = { [weak self] in
-            guard let self = self else { return }
-            if let currentVC = ViewControllerState.currentVC {
-                let (prep, block, completion) = self.getBlocks(from: currentVC, to: .camera)
-                if let block = block {
-                    if (self.checkIfAnimating ?? { false })() == false {
-                        prep()
-                        self.cameraIcon.makeLayerActiveState(duration: Constants.transitionDuration)
-                        self.makeLayerActiveState(duration: Constants.transitionDuration)
-                        self.animate(block: block, completion: completion)
-                    }
-                    self.changedViewController?(.camera)
-                }
+        
+        cameraButton.touched = { [weak self] down in
+            if down {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.cameraIcon.alpha = 0.5
+                })
+            } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.cameraIcon.alpha = 1
+                })
             }
         }
-        listsIcon.pressed = { [weak self] in
-            guard let self = self else { return }
-            if let currentVC = ViewControllerState.currentVC {
-                let (prep, block, completion) = self.getBlocks(from: currentVC, to: .lists)
-                if let block = block {
-                    if (self.checkIfAnimating ?? { false })() == false {
-                        prep()
-                        self.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
-                        self.makeLayerInactiveState(duration: Constants.transitionDuration)
-                        self.animate(block: block, completion: completion)
-                    }
-                    self.changedViewController?(.lists)
-                }
+        
+        listsButton.touched = { [weak self] down in
+            if down {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.listsIcon.alpha = 0.5
+                })
+            } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.listsIcon.alpha = 1
+                })
             }
         }
+        
         self.clipsToBounds = false
         
         controlsReferenceView.isUserInteractionEnabled = false
@@ -225,7 +270,7 @@ class TabBarView: UIView {
                 
                 prep = {
                     self.hideRealShutter?(true)
-                    self.cameraIcon.alpha = 1
+                    self.cameraContainerView.alpha = 1
                 }
                 
                 block = {
@@ -265,7 +310,7 @@ class TabBarView: UIView {
                     makeActive()
                 }
                 completion = {
-                    self.cameraIcon.alpha = 0
+                    self.cameraContainerView.alpha = 0
                     self.hideRealShutter?(false)
                 }
 
@@ -285,7 +330,7 @@ class TabBarView: UIView {
                     makeActive()
                 }
                 completion = {
-                    self.cameraIcon.alpha = 0
+                    self.cameraContainerView.alpha = 0
                     self.hideRealShutter?(false)
                 }
             default:
@@ -310,7 +355,7 @@ class TabBarView: UIView {
                 
                 prep = {
                     self.hideRealShutter?(true)
-                    self.cameraIcon.alpha = 1
+                    self.cameraContainerView.alpha = 1
                 }
                 block = {
                     makeInactive()
@@ -425,10 +470,6 @@ class TabBarView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        let spacingPercentage = 90 / Constants.designedWidth
-        let actualSpacing = spacingPercentage * bounds.width
-        stackView.spacing = actualSpacing
         
         let curvePath: CGPath
         if let _ = ViewControllerState.currentVC as? CameraViewController {

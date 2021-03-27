@@ -30,7 +30,7 @@ extension ViewController {
             
             if animatedToCamera {
                 print("Animated to camera, hide shutter")
-                tabBarView.cameraIcon.alpha = 0
+                tabBarView.cameraContainerView.alpha = 0
                 tabBarView.hideRealShutter?(false)
             }
             

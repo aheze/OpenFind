@@ -12,20 +12,20 @@ import SnapKit
 extension TabBarView {
     func setupAccessibility() {
         
-        photosIcon.isAccessibilityElement = true
-        photosIcon.accessibilityLabel = "Photos"
-        photosIcon.accessibilityHint = "Switches to the Photos tab"
-        photosIcon.accessibilityTraits = .button
+        photosContainerView.isAccessibilityElement = true
+        photosContainerView.accessibilityLabel = "Photos"
+        photosContainerView.accessibilityHint = "Switches to the Photos tab"
+        photosContainerView.accessibilityTraits = .button
         
-        cameraIcon.isAccessibilityElement = true
-        cameraIcon.accessibilityLabel = "Camera"
-        cameraIcon.accessibilityHint = "Switches to the Camera tab. This button animates and morphs into the Shutter button when active."
-        cameraIcon.accessibilityTraits = .button
+        cameraContainerView.isAccessibilityElement = true
+        cameraContainerView.accessibilityLabel = "Camera"
+        cameraContainerView.accessibilityHint = "Switches to the Camera tab. This button animates and morphs into the Shutter button when active."
+        cameraContainerView.accessibilityTraits = .button
         
-        listsIcon.isAccessibilityElement = true
-        listsIcon.accessibilityLabel = "Lists"
-        listsIcon.accessibilityHint = "Switches to the Lists tab"
-        listsIcon.accessibilityTraits = .button
+        listsContainerView.isAccessibilityElement = true
+        listsContainerView.accessibilityLabel = "Lists"
+        listsContainerView.accessibilityHint = "Switches to the Lists tab"
+        listsContainerView.accessibilityTraits = .button
         
         backgroundView.isAccessibilityElement = true
         backgroundView.accessibilityLabel = "Tab bar"
