@@ -42,13 +42,17 @@ class TabBarView: UIView {
     @IBOutlet weak var controlsReferenceView: UIView!
     
     // MARK: Selection in Photos
+    var numberOfSelectedPhotos = 0
     var photoSelectionControlPressed: ((PhotoSlideAction) -> Void)?
     @IBOutlet var photosControls: UIView!
+    
+    var shouldStarSelectedPhotos = true
     @IBOutlet weak var starButton: CustomButton!
     @IBAction func starButtonPressed(_ sender: Any) {
         photoSelectionControlPressed?(.star)
     }
     
+    var shouldCacheSelectedPhotos = true
     @IBOutlet weak var cacheButton: CustomButton!
     @IBAction func cacheButtonPressed(_ sender: Any) {
         photoSelectionControlPressed?(.cache)

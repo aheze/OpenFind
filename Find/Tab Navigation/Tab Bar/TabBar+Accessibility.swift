@@ -45,8 +45,8 @@ extension TabBarView {
         slideInfoButton.accessibilityLabel = "Info"
         
         slideShareButton.accessibilityHint = "Share photo"
-        slideStarButton.accessibilityHint = "Star photo"
-        slideCacheButton.accessibilityHint = "Cache photo"
+        slideStarButton.accessibilityHint = "Tap to star this photo"
+        slideStarButton.accessibilityHint = "Tap to cache this photo"
         slideDeleteButton.accessibilityHint = "Delete photo"
         slideInfoButton.accessibilityHint = "Present info screen"
         
@@ -54,21 +54,5 @@ extension TabBarView {
         listsDeleteButton.accessibilityHint = "Delete selected lists"
         
         updateNumberOfSelectedPhotos(to: 0)
-    }
-    
-    func updateNumberOfSelectedPhotos(to number: Int) {
-        if number == 1 {
-            starButton.accessibilityHint = "Star \(number) selected photo"
-            cacheButton.accessibilityHint = "Cache \(number) selected photo"
-            photosDeleteButton.accessibilityHint = "Delete \(number) selected photo"
-        } else if number == 0 {
-            starButton.accessibilityHint = "Select photos first."
-            cacheButton.accessibilityHint = "Select photos first."
-            photosDeleteButton.accessibilityHint = "Select photos first."
-        } else {
-            starButton.accessibilityHint = "Star \(number) selected photos"
-            cacheButton.accessibilityHint = "Cache \(number) selected photos"
-            photosDeleteButton.accessibilityHint = "Delete \(number) selected photos"
-        }
     }
 }

@@ -94,42 +94,89 @@ extension TabBarView {
             }
         }
     }
+    
+    func updateNumberOfSelectedPhotos(to number: Int) {
+        self.numberOfSelectedPhotos = number
+        
+        let starText = shouldStarSelectedPhotos ? "Star" : "Unstar"
+        let cacheText = shouldCacheSelectedPhotos ? "Cache" : "Uncache"
+        
+        starButton.accessibilityLabel = shouldStarSelectedPhotos ? "Star" : "Starred"
+        cacheButton.accessibilityLabel = shouldCacheSelectedPhotos ? "Cache" : "Cached"
+        
+        if number == 1 {
+            starButton.accessibilityHint = "\(starText) \(number) selected photo"
+            cacheButton.accessibilityHint = "\(cacheText) \(number) selected photo"
+            photosDeleteButton.accessibilityHint = "Delete \(number) selected photo"
+        } else if number == 0 {
+            starButton.accessibilityHint = "Select photos first."
+            cacheButton.accessibilityHint = "Select photos first."
+            photosDeleteButton.accessibilityHint = "Select photos first."
+        } else {
+            starButton.accessibilityHint = "\(starText) \(number) selected photos"
+            cacheButton.accessibilityHint = "\(cacheText) \(number) selected photos"
+            photosDeleteButton.accessibilityHint = "Delete \(number) selected photos"
+        }
+    }
+    
     func updateActions(action: ChangeActions, isPhotosControls: Bool) {
         if isPhotosControls {
             switch action {
             case .shouldStar:
                 let starImage = UIImage(systemName: "star")
                 starButton.setImage(starImage, for: .normal)
+                shouldStarSelectedPhotos = true
             case .shouldNotStar:
                 let starFillImage = UIImage(systemName: "star.fill")
                 starButton.setImage(starFillImage, for: .normal)
+                shouldStarSelectedPhotos = false
             case .shouldCache:
                 let shouldCache = NSLocalizedString("shouldCache", comment: "")
                 cacheButton.setTitle(shouldCache, for: .normal)
+                shouldCacheSelectedPhotos = true
             case .shouldNotCache:
                 let shouldNotCache = NSLocalizedString("shouldNotCache", comment: "")
                 cacheButton.setTitle(shouldNotCache, for: .normal)
+                shouldCacheSelectedPhotos = false
             case .currentlyCaching:
-                print("")
                 break
             }
+            
+            /// refresh accessibility
+            let howManyPhotos = numberOfSelectedPhotos
+            updateNumberOfSelectedPhotos(to: howManyPhotos)
         } else {
             switch action {
             case .shouldStar:
                 let starImage = UIImage(systemName: "star")
                 slideStarButton.setImage(starImage, for: .normal)
+                
+                slideStarButton.accessibilityLabel = "Star"
+                slideStarButton.accessibilityHint = "Tap to star this photo"
             case .shouldNotStar:
                 let starFillImage = UIImage(systemName: "star.fill")
                 slideStarButton.setImage(starFillImage, for: .normal)
+                
+                slideStarButton.accessibilityLabel = "Starred"
+                slideStarButton.accessibilityHint = "Tap to unstar this photo"
             case .shouldCache:
                 let shouldCache = NSLocalizedString("shouldCache", comment: "")
                 slideCacheButton.setTitle(shouldCache, for: .normal)
+                
+                slideCacheButton.accessibilityLabel = "Cache"
+                slideCacheButton.accessibilityHint = "Tap to cache this photo"
             case .shouldNotCache:
                 let shouldNotCache = NSLocalizedString("shouldNotCache", comment: "")
                 slideCacheButton.setTitle(shouldNotCache, for: .normal)
+                
+                slideCacheButton.accessibilityLabel = "Cached"
+                slideCacheButton.accessibilityHint = "Tap to uncache this photo"
             case .currentlyCaching:
                 let shouldNotCache = NSLocalizedString("caching...", comment: "")
                 slideCacheButton.setTitle(shouldNotCache, for: .normal)
+                
+                slideCacheButton.accessibilityLabel = "Caching..."
+                slideCacheButton.accessibilityHint = "Caching currently in progress"
             }
         }
     }
