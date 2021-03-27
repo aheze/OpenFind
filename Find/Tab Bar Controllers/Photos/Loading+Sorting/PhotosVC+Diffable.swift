@@ -40,6 +40,25 @@ extension PhotosViewController {
                     for: indexPath) as? ImageCell
                 
                 if let url = NSURL.sd_URL(with: findPhoto.asset) {
+                    var accessibilityLabel = "Photo."
+                    
+                    if let dateCreated = findPhoto.asset.creationDate {
+                        
+                        let dateDistance = dateCreated.distance(from: Date(), only: .year)
+                        print("date dist: \(dateDistance)")
+                        
+                        let dateFormatter = DateFormatter()
+                        
+                        if dateDistance == 0 {
+                            dateFormatter.dateFormat = "MMMM d' at 'h:mm a"
+                        } else { /// -1 if older by a year
+                            dateFormatter.dateFormat = "MMMM d, yyyy', at 'h:mm a"
+                        }
+                        let dateCreatedString = dateFormatter.string(from: dateCreated)
+                        accessibilityLabel = "\(dateCreatedString)."
+                    }
+                    
+                    
                     let cellLength = cell?.bounds.width ?? 100
                     let imageLength = cellLength * (self.screenScale + 1)
 
@@ -50,6 +69,17 @@ extension PhotosViewController {
                         cell?.cacheImageView.alpha = model.isDeepSearched ? 1 : 0
                         cell?.starImageView.alpha = model.isHearted ? 1 : 0
                         cell?.shadowImageView.alpha = (model.isDeepSearched || model.isHearted ) ? 1 : 0
+                        
+                        if model.isHearted {
+                            accessibilityLabel.append(" Starred")
+                            if model.isDeepSearched {
+                                accessibilityLabel.append(" and Cached.")
+                            } else {
+                                accessibilityLabel.append(".")
+                            }
+                        } else if model.isDeepSearched {
+                            accessibilityLabel.append(" Cached.")
+                        }
                     } else {
                         cell?.cacheImageView.alpha = 0
                         cell?.starImageView.alpha = 0
@@ -63,6 +93,11 @@ extension PhotosViewController {
                         cell?.highlightView.isHidden = true
                         cell?.selectionImageView.isHidden = true
                     }
+                    
+                    cell?.starImageView.isAccessibilityElement = false
+                    cell?.cacheImageView.isAccessibilityElement = false
+                    cell?.accessibilityLabel = accessibilityLabel
+                    cell?.isAccessibilityElement = true
                 }
                 return cell
             })

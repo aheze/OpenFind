@@ -152,6 +152,8 @@ class PhotosViewController: UIViewController {
             startObservingChanges()
         }
         
+        collectionView.isAccessibilityElement = false
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

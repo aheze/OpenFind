@@ -128,11 +128,11 @@ struct PeopleView: View {
                     .padding(EdgeInsets(top: 4, leading: 20, bottom: 4, trailing: 20))
                     
                     PersonWidget(
-                        urlString: "https://google.com",
+                        urlString: "https://twitter.com/atatoprak_",
                         imageName: "Attroprak",
                         name: "atatoprak",
                         description: Text("Tab bar icons"),
-                        urlText: "twitter.com/a"
+                        urlText: "@atatoprak_"
                     )
                     .padding(EdgeInsets(top: 4, leading: 20, bottom: 4, trailing: 20))
                     

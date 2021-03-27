@@ -149,6 +149,28 @@ class SegmentedSlider: UIView {
         setupAccessibility()
     }
     
+    override var accessibilityTraits: UIAccessibilityTraits {
+        get {
+            return .adjustable
+        }
+        set {
+            super.accessibilityTraits = newValue
+        }
+    }
+    
+    override func accessibilityIncrement() {
+        // This causes the picker to move forward one if the user swipes up.
+//        _ = accessibilityScrollForward()
+        print("INC!!!")
+        self.accessibilityValue = ""
+    }
+
+    override func accessibilityDecrement() {
+        // This causes the picker to move back one if the user swipes down.
+//        _ = accessibilityScrollBackward()
+        print("DECCCC!!!")
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         blurView.layer.cornerRadius = blurView.bounds.height / 2
@@ -164,33 +186,6 @@ class SegmentedSlider: UIView {
             self.indicatorView.bounds = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
             self.indicatorView.center = CGPoint(x: centerX, y: centerY)
         })
-        
-        switch filter {
-        case .local:
-            localLabel.accessibilityTraits = [.button, .selected]
-            
-            starredLabel.accessibilityTraits = .button
-            cachedLabel.accessibilityTraits = .button
-            allLabel.accessibilityTraits = .button
-        case .starred:
-            starredLabel.accessibilityTraits = [.button, .selected]
-            
-            localLabel.accessibilityTraits = .button
-            cachedLabel.accessibilityTraits = .button
-            allLabel.accessibilityTraits = .button
-        case .cached:
-            cachedLabel.accessibilityTraits = [.button, .selected]
-            
-            localLabel.accessibilityTraits = .button
-            starredLabel.accessibilityTraits = .button
-            allLabel.accessibilityTraits = .button
-        case .all:
-            allLabel.accessibilityTraits = [.button, .selected]
-            
-            localLabel.accessibilityTraits = .button
-            starredLabel.accessibilityTraits = .button
-            cachedLabel.accessibilityTraits = .button
-        }
     }
     func animateHighlight(view: UIView, highlight: Bool) {
         if highlight {

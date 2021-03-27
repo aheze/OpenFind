@@ -151,6 +151,7 @@ struct SettingsView: View {
                             
                             ShareView(isShowingQR: $isShowingQR)
                                 .padding(EdgeInsets(top: 6, leading: 16, bottom: 16, trailing: 16))
+                                
                             
                             HStack(spacing: 0) {
                                 

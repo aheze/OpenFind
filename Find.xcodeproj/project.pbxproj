@@ -253,6 +253,7 @@
 		3CF0421225C251C600E29FA6 /* PhotosVC+Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0421125C251C600E29FA6 /* PhotosVC+Tips.swift */; };
 		3CF0421525C2532B00E29FA6 /* VC+StarTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0421425C2532B00E29FA6 /* VC+StarTip.swift */; };
 		3CF0421825C2553E00E29FA6 /* VC+CacheTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0421725C2553E00E29FA6 /* VC+CacheTip.swift */; };
+		3CF45F5C260EF1FC00FE949E /* Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF45F5B260EF1FC00FE949E /* Dates.swift */; };
 		3CFF312525AA490900D3C56D /* PhotoSlidesVC+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF312425AA490900D3C56D /* PhotoSlidesVC+Gestures.swift */; };
 		3CFF312825AA496B00D3C56D /* PhotoSlidesVC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF312725AA496B00D3C56D /* PhotoSlidesVC+Setup.swift */; };
 		3CFF312C25AA6F8C00D3C56D /* PhotosVC+CollectionCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF312B25AA6F8C00D3C56D /* PhotosVC+CollectionCoordinates.swift */; };
@@ -621,6 +622,7 @@
 		3CF0421125C251C600E29FA6 /* PhotosVC+Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Tips.swift"; sourceTree = "<group>"; };
 		3CF0421425C2532B00E29FA6 /* VC+StarTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+StarTip.swift"; sourceTree = "<group>"; };
 		3CF0421725C2553E00E29FA6 /* VC+CacheTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+CacheTip.swift"; sourceTree = "<group>"; };
+		3CF45F5B260EF1FC00FE949E /* Dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dates.swift; sourceTree = "<group>"; };
 		3CFF312425AA490900D3C56D /* PhotoSlidesVC+Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Gestures.swift"; sourceTree = "<group>"; };
 		3CFF312725AA496B00D3C56D /* PhotoSlidesVC+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Setup.swift"; sourceTree = "<group>"; };
 		3CFF312B25AA6F8C00D3C56D /* PhotosVC+CollectionCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+CollectionCoordinates.swift"; sourceTree = "<group>"; };
@@ -1551,6 +1553,7 @@
 				492A2D2524A4046200F9C4A1 /* BartyCrouch.swift */,
 				495F7DA624CBACE90053DE50 /* Info.plist */,
 				495F7DAC24CBB3970053DE50 /* InfoPlist.strings */,
+				3CF45F5B260EF1FC00FE949E /* Dates.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -2032,6 +2035,7 @@
 				49D985BA2421D97B005F4E92 /* FindModel.swift in Sources */,
 				3C56C5AE25AA42760006A667 /* SlideViewController.swift in Sources */,
 				3CB6843525A013D800AE0AD6 /* ImageCell.swift in Sources */,
+				3CF45F5C260EF1FC00FE949E /* Dates.swift in Sources */,
 				3CA679B625C38836008A00A4 /* ContactView.swift in Sources */,
 				3CAC4DAA25BF52CF00CC7948 /* LTMorphingLabel+Sparkle.swift in Sources */,
 				3C84F97B25C3AB1B0066A360 /* CameraVC+Settings.swift in Sources */,

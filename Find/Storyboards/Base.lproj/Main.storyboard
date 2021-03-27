@@ -2564,7 +2564,7 @@
                                     <constraint firstAttribute="height" constant="40" id="yTa-ge-OYU"/>
                                 </constraints>
                             </view>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rxq-Q5-k6q">
+                            <view userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rxq-Q5-k6q">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                                 <color key="backgroundColor" name="50Black"/>
                             </view>
