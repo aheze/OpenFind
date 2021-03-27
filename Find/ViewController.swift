@@ -24,6 +24,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var globalUrl: URL = URL(fileURLWithPath: "")
     
+    @IBOutlet weak var somethingWentWrongView: UIView!
+    @IBOutlet weak var somethingWentWrongTitle: UILabel!
+    @IBOutlet weak var somethingWentWrongDescription: UILabel!
+    
+    
     // MARK: - View Controllers
     
     lazy var photos: PhotosWrapperController = {
@@ -512,6 +517,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         blurView.isHidden = false
         shadeView.isHidden = false
         
+        somethingWentWrongView.isAccessibilityElement = false
+        somethingWentWrongTitle.isAccessibilityElement = false
+        somethingWentWrongDescription.isAccessibilityElement = false
     }
 
     /// enable both the long press and pan gesture

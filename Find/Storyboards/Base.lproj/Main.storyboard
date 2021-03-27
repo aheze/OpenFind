@@ -3241,7 +3241,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tvZ-AU-Qkc">
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tvZ-AU-Qkc">
                                 <rect key="frame" x="50" y="426.66666666666669" width="328" height="72.666666666666686"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Something went wrong." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jr-oe-diC">
@@ -3344,6 +3344,9 @@
                         <outlet property="longPressGestureRecognizer" destination="a8A-MY-9So" id="JgE-5k-abv"/>
                         <outlet property="panGestureRecognizer" destination="yok-zd-H7h" id="2AM-HL-pA4"/>
                         <outlet property="shadeView" destination="LMu-lQ-uaz" id="8fi-Zx-WbZ"/>
+                        <outlet property="somethingWentWrongDescription" destination="yJs-9Y-Vwz" id="819-7Y-a4L"/>
+                        <outlet property="somethingWentWrongTitle" destination="8jr-oe-diC" id="LfY-SN-bnf"/>
+                        <outlet property="somethingWentWrongView" destination="tvZ-AU-Qkc" id="S70-va-Ttq"/>
                         <outlet property="tabBarHeightC" destination="CIC-gK-cRx" id="afs-PZ-tYV"/>
                         <outlet property="tabBarView" destination="dUP-Wt-rTn" id="Gub-H5-8PF"/>
                     </connections>
