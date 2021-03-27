@@ -96,8 +96,8 @@ extension PhotosViewController {
                     
                     cell?.starImageView.isAccessibilityElement = false
                     cell?.cacheImageView.isAccessibilityElement = false
-                    cell?.accessibilityLabel = accessibilityLabel
-                    cell?.isAccessibilityElement = true
+                    cell?.imageView.accessibilityLabel = accessibilityLabel
+                    cell?.imageView.isAccessibilityElement = true
                 }
                 return cell
             })

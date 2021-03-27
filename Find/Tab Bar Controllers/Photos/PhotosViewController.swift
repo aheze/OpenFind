@@ -47,6 +47,7 @@ class PhotosViewController: UIViewController {
     // MARK: Photo selection
     var showSelectionControls: ((Bool) -> Void)? /// show or hide
     var updateActions: ((ChangeActions) -> Void)? /// switch star/unstar and cache/uncache
+    var updateNumberOfSelectedPhotos: ((Int) -> Void)? /// update accessibility
     
     /// Whether is in select mode or not
     var selectButtonSelected = false

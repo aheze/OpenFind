@@ -54,21 +54,15 @@ extension PhotosViewController {
         
         selectButton.title = NSLocalizedString("universal-select", comment: "")
         collectionView.allowsMultipleSelection = false
-        segmentedSlider.showNumberOfSelected(show: false)
         deselectAllPhotos()
+        segmentedSlider.showNumberOfSelected(show: false)
         updateActions?(.shouldStar)
         updateActions?(.shouldCache)
     }
     
     func updateSelectionLabel(to numberSelected: Int) {
-        let text: String
-        if numberSelected == 1 {
-            text = "\(numberSelected) Photo Selected"
-        } else {
-            text = "\(numberSelected) Photos Selected"
-        }
-
-        segmentedSlider.numberOfSelectedLabel.text = text
+        segmentedSlider.updateNumberOfSelected(to: numberSelected)
+        updateNumberOfSelectedPhotos?(numberSelected)
     }
     func determineActions() {
         var starredCount = 0

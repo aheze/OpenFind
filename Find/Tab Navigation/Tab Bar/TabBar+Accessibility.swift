@@ -30,8 +30,45 @@ extension TabBarView {
         backgroundView.isAccessibilityElement = true
         backgroundView.accessibilityLabel = "Tab bar"
         
-        if UIAccessibility.isVoiceOverRunning {
-            
+        starButton.accessibilityLabel = "Star"
+        cacheButton.accessibilityLabel = "Cache"
+        photosDeleteButton.accessibilityLabel = "Delete"
+        
+        starButton.accessibilityHint = "Star selected photos"
+        cacheButton.accessibilityHint = "Cache selected photos"
+        photosDeleteButton.accessibilityHint = "Delete selected photos"
+        
+        slideShareButton.accessibilityLabel = "Share"
+        slideStarButton.accessibilityLabel = "Star"
+        slideCacheButton.accessibilityLabel = "Cache"
+        slideDeleteButton.accessibilityLabel = "Delete"
+        slideInfoButton.accessibilityLabel = "Info"
+        
+        slideShareButton.accessibilityHint = "Share photo"
+        slideStarButton.accessibilityHint = "Star photo"
+        slideCacheButton.accessibilityHint = "Cache photo"
+        slideDeleteButton.accessibilityHint = "Delete photo"
+        slideInfoButton.accessibilityHint = "Present info screen"
+        
+        listsDeleteButton.accessibilityLabel = "Delete"
+        listsDeleteButton.accessibilityHint = "Delete selected lists"
+        
+        updateNumberOfSelectedPhotos(to: 0)
+    }
+    
+    func updateNumberOfSelectedPhotos(to number: Int) {
+        if number == 1 {
+            starButton.accessibilityHint = "Star \(number) selected photo"
+            cacheButton.accessibilityHint = "Cache \(number) selected photo"
+            photosDeleteButton.accessibilityHint = "Delete \(number) selected photo"
+        } else if number == 0 {
+            starButton.accessibilityHint = "Select photos first."
+            cacheButton.accessibilityHint = "Select photos first."
+            photosDeleteButton.accessibilityHint = "Select photos first."
+        } else {
+            starButton.accessibilityHint = "Star \(number) selected photos"
+            cacheButton.accessibilityHint = "Cache \(number) selected photos"
+            photosDeleteButton.accessibilityHint = "Delete \(number) selected photos"
         }
     }
 }

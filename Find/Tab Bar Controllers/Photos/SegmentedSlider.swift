@@ -44,6 +44,8 @@ class SegmentedSlider: UIView {
     // MARK: Photos selection
     @IBOutlet var numberOfSelectedView: UIView!
     @IBOutlet weak var numberOfSelectedLabel: UILabel!
+    var showingPhotosSelection = false
+    
     var allowingInteraction = true
     
     
@@ -151,7 +153,7 @@ class SegmentedSlider: UIView {
     
     override var accessibilityTraits: UIAccessibilityTraits {
         get {
-            return .adjustable
+            return showingPhotosSelection ? .none : .adjustable
         }
         set {
             super.accessibilityTraits = newValue
@@ -159,17 +161,19 @@ class SegmentedSlider: UIView {
     }
     override var accessibilityValue: String? {
         get {
-           
-            switch currentFilter {
-            
-            case .local:
-                return "Local"
-            case .starred:
-                return "Starred"
-            case .cached:
-                return "Cached"
-            case .all:
-                return "All"
+            if showingPhotosSelection == false {
+                switch currentFilter {
+                case .local:
+                    return "Local"
+                case .starred:
+                    return "Starred"
+                case .cached:
+                    return "Cached"
+                case .all:
+                    return "All"
+                }
+            } else {
+                return nil
             }
         }
         

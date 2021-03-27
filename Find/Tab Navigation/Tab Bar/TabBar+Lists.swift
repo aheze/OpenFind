@@ -18,14 +18,17 @@ extension TabBarView {
             listsControls.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
             }
+            
+            backgroundView.accessibilityLabel = "Toolbar"
         } else {
             controlsReferenceView.isUserInteractionEnabled = false
             stackView.isHidden = false
             listsControls.removeFromSuperview()
+            
+            backgroundView.accessibilityLabel = "Tab bar"
         }
-        
     }
-    func updateLabel(numberOfSelected: Int) {
+    func updateListsSelectionLabel(numberOfSelected: Int) {
         if numberOfSelected == 0 {
             listsDeleteButton.isEnabled = false
         } else {
@@ -34,9 +37,13 @@ extension TabBarView {
         
         if numberOfSelected == 1 {
             listsSelectionLabel.text = "\(numberOfSelected) List Selected"
+            listsDeleteButton.accessibilityHint = "Delete \(numberOfSelected) selected list"
+        } else if numberOfSelected == 0 {
+            listsSelectionLabel.text = "Select Lists"
+            listsDeleteButton.accessibilityHint = "Select lists first."
         } else {
             listsSelectionLabel.text = "\(numberOfSelected) Lists Selected"
+            listsDeleteButton.accessibilityHint = "Delete \(numberOfSelected) selected lists"
         }
-        
     }
 }

@@ -11,7 +11,7 @@ import AVFoundation
 
 extension SlideViewController {
     func removeAllHighlights() {
-        drawingView.subviews.forEach({ $0.removeFromSuperview() })
+        drawingView?.subviews.forEach({ $0.removeFromSuperview() })
     }
     func drawHighlights() {
         removeAllHighlights()

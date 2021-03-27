@@ -57,6 +57,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     self.panGestureRecognizer.isEnabled = true
                 }
             }
+            viewController.updateNumberOfSelectedPhotos = { [weak self] number in
+                guard let self = self else { return }
+                self.tabBarView.updateNumberOfSelectedPhotos(to: number)
+            }
             viewController.updateActions = { [weak self] action in
                 guard let self = self else { return }
                 self.tabBarView.updateActions(action: action, isPhotosControls: true)
@@ -199,7 +203,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             viewController.updateSelectionLabel = { [weak self] numberSelected in
                 guard let self = self else { return }
-                self.tabBarView.updateLabel(numberOfSelected: numberSelected)
+                self.tabBarView.updateListsSelectionLabel(numberOfSelected: numberSelected)
             }
             viewController.presentingList = { [weak self] presenting in
                 guard let self = self else { return }

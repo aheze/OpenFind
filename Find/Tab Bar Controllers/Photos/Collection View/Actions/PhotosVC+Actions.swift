@@ -52,7 +52,8 @@ extension PhotosViewController {
                     cell.shadowImageView.alpha = 0
                 }
                 
-                cell.accessibilityLabel = accessibilityLabel
+                cell.imageView.accessibilityLabel = accessibilityLabel
+
             }
         }
     }

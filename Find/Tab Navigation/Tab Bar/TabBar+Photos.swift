@@ -25,12 +25,15 @@ extension TabBarView {
             photosControls.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
             }
+            
+            backgroundView.accessibilityLabel = "Toolbar"
         } else {
             controlsReferenceView.isUserInteractionEnabled = false
             stackView.isHidden = false
             photosControls.removeFromSuperview()
+            
+            backgroundView.accessibilityLabel = "Tab bar"
         }
-        
     }
     func showPhotoSlideControls(show: Bool) {
         if show {
@@ -69,9 +72,17 @@ extension TabBarView {
             if dim {
                 photosControls.alpha = 0.5
                 photosControls.isUserInteractionEnabled = false
+                
+                starButton.isEnabled = false
+                cacheButton.isEnabled = false
+                photosDeleteButton.isEnabled = false
             } else {
                 photosControls.alpha = 1
                 photosControls.isUserInteractionEnabled = true
+                
+                starButton.isEnabled = true
+                cacheButton.isEnabled = true
+                photosDeleteButton.isEnabled = true
             }
         } else {
             if dim {
