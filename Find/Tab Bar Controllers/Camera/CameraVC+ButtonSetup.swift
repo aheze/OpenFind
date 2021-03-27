@@ -115,7 +115,7 @@ extension CameraViewController {
                 self.messageView.hideMessages()
                 
                 self.cache.accessibilityLabel = "Cache"
-                self.cache.accessibilityHint = "Caches the current paused image. Produces much more accurate results."
+                self.cache.accessibilityHint = "Caches the current paused image. Produces much more accurate results." 
             }
         }
         

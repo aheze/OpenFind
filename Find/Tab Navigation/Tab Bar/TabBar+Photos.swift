@@ -164,7 +164,7 @@ extension TabBarView {
                 slideCacheButton.setTitle(shouldCache, for: .normal)
                 
                 slideCacheButton.accessibilityLabel = "Cache"
-                slideCacheButton.accessibilityHint = "Tap to cache this photo"
+                slideCacheButton.accessibilityHint = "Cache this photo. Produces much more accurate results during finding."
             case .shouldNotCache:
                 let shouldNotCache = NSLocalizedString("shouldNotCache", comment: "")
                 slideCacheButton.setTitle(shouldNotCache, for: .normal)
@@ -175,7 +175,7 @@ extension TabBarView {
                 let shouldNotCache = NSLocalizedString("caching...", comment: "")
                 slideCacheButton.setTitle(shouldNotCache, for: .normal)
                 
-                slideCacheButton.accessibilityLabel = "Caching..."
+                slideCacheButton.accessibilityLabel = "Caching"
                 slideCacheButton.accessibilityHint = "Caching currently in progress"
             }
         }

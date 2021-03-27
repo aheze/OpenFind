@@ -22,6 +22,7 @@ extension PhotoSlidesViewController {
                 
                 updateActions?(.shouldNotCache)
                 findAfterCached()
+                
             } else {
                 updateActions?(.currentlyCaching)
                 messageView.unHideMessages()
@@ -62,6 +63,8 @@ extension PhotoSlidesViewController {
                         let percent = progress * 100
                         let roundedPercent = Int(percent.rounded())
                         self.messageView.updateMessage("\(roundedPercent)")
+                        
+                        UIAccessibility.post(notification: .announcement, argument: "\(roundedPercent)%")
                     }
                 }
                 
@@ -108,6 +111,8 @@ extension PhotoSlidesViewController {
                         self.messageView.hideMessages()
                         self.updateActions?(.shouldNotCache)
                         
+                        UIAccessibility.post(notification: .announcement, argument: "Caching complete")
+                        
                         self.findPhotoChanged?(currentPhoto)
                         
                         if self.findPressed {
@@ -118,6 +123,7 @@ extension PhotoSlidesViewController {
                         if photoExists == false {
                             self.removeCurrentSlide()
                         }
+                        
                     }
                     
                 }

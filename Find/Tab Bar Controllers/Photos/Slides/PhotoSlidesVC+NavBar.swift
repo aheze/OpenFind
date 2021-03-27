@@ -22,44 +22,35 @@ extension PhotoSlidesViewController {
         navigationItem.rightBarButtonItems = [findButton]
     }
     func makeTitleView() {
-        let baseView = UIView()
-        
-        let contentView = UIView()
         let titleLabel = UILabel()
+        titleLabel.text = ""
+        titleLabel.font = UIFont.systemFont(ofSize: 15)
+        titleLabel.sizeToFit()
+        
         let subtitleLabel = UILabel()
+        subtitleLabel.text = ""
+        subtitleLabel.font = UIFont.systemFont(ofSize: 11)
+        subtitleLabel.textAlignment = .center
+        subtitleLabel.sizeToFit()
         
-        baseView.addSubview(contentView)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(subtitleLabel)
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
+        stackView.distribution = .equalCentering
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.spacing = 2
         
-        contentView.backgroundColor = .clear
+        let width = max(titleLabel.frame.size.width, subtitleLabel.frame.size.width)
+        stackView.frame = CGRect(x: 0, y: 0, width: width, height: 28)
         
-        baseView.backgroundColor = .gray
+        titleLabel.sizeToFit()
+        subtitleLabel.sizeToFit()
         
-        titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        subtitleLabel.font = UIFont.systemFont(ofSize: 11, weight: .regular)
+        navigationItem.titleView = stackView
         
-        titleLabel.text = "January 14"
-        subtitleLabel.text = "8:29 PM"
+        stackView.isAccessibilityElement = true
+        stackView.accessibilityLabel = "Date taken"
         
-        titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView.snp.top)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalTo(subtitleLabel.snp.top)
-        }
-        
-        subtitleLabel.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(contentView.snp.bottom)
-        }
-        
-        contentView.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
-        }
-        
-        navigationItem.titleView = baseView
-        
+        self.navigationTitleStackView = stackView
         self.titleLabel = titleLabel
         self.subtitleLabel = subtitleLabel
         
@@ -82,6 +73,37 @@ extension PhotoSlidesViewController {
             
             titleLabel.text = dateAsString
             subtitleLabel.text = timeAsString
+            
+            navigationTitleStackView?.accessibilityLabel = "\(dateAsString) at \(timeAsString)"
         }
+    }
+}
+
+extension UINavigationItem {
+    func setTitle(title: String, subtitle: String) {
+        
+        let one = UILabel()
+        one.text = title
+        one.font = UIFont.systemFont(ofSize: 17)
+        one.sizeToFit()
+        
+        let two = UILabel()
+        two.text = subtitle
+        two.font = UIFont.systemFont(ofSize: 12)
+        two.textAlignment = .center
+        two.sizeToFit()
+        
+        let stackView = UIStackView(arrangedSubviews: [one, two])
+        stackView.distribution = .equalCentering
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        
+        let width = max(one.frame.size.width, two.frame.size.width)
+        stackView.frame = CGRect(x: 0, y: 0, width: width, height: 35)
+        
+        one.sizeToFit()
+        two.sizeToFit()
+        
+        self.titleView = stackView
     }
 }

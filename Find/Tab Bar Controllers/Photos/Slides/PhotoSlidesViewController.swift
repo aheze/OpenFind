@@ -33,6 +33,7 @@ class PhotoSlidesViewController: UIViewController {
     
     // MARK: Nav bar
     var findButton: UIBarButtonItem!
+    var navigationTitleStackView: UIStackView?
     var titleLabel: UILabel!
     var subtitleLabel: UILabel!
     
@@ -116,6 +117,8 @@ class PhotoSlidesViewController: UIViewController {
         }
         
         messageViewBottomC.constant = CGFloat(ConstantVars.tabHeight) + 16
+        
+        setupAccessibility()
     }
     
     // MARK: Delegate back to PhotosVC
