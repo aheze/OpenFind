@@ -157,18 +157,56 @@ class SegmentedSlider: UIView {
             super.accessibilityTraits = newValue
         }
     }
+    override var accessibilityValue: String? {
+        get {
+           
+            switch currentFilter {
+            
+            case .local:
+                return "Local"
+            case .starred:
+                return "Starred"
+            case .cached:
+                return "Cached"
+            case .all:
+                return "All"
+            }
+        }
+        
+        set {
+            super.accessibilityValue = newValue
+        }
+    }
     
     override func accessibilityIncrement() {
-        // This causes the picker to move forward one if the user swipes up.
-//        _ = accessibilityScrollForward()
-        print("INC!!!")
-        self.accessibilityValue = ""
+        switch currentFilter {
+        
+        case .local:
+            currentFilter = .starred
+        case .starred:
+            currentFilter = .cached
+        case .cached:
+            currentFilter = .all
+        case .all:
+            break
+        }
+        animateChangeSelection(filter: currentFilter)
+        pressedFilter?(currentFilter)
     }
-
+    
     override func accessibilityDecrement() {
-        // This causes the picker to move back one if the user swipes down.
-//        _ = accessibilityScrollBackward()
-        print("DECCCC!!!")
+        switch currentFilter {
+        case .local:
+            break
+        case .starred:
+            currentFilter = .local
+        case .cached:
+            currentFilter = .starred
+        case .all:
+            currentFilter = .cached
+        }
+        animateChangeSelection(filter: currentFilter)
+        pressedFilter?(currentFilter)
     }
     
     override func layoutSubviews() {
