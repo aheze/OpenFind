@@ -45,7 +45,6 @@ extension PhotosViewController {
                     if let dateCreated = findPhoto.asset.creationDate {
                         
                         let dateDistance = dateCreated.distance(from: Date(), only: .year)
-                        print("date dist: \(dateDistance)")
                         
                         let dateFormatter = DateFormatter()
                         

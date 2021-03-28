@@ -78,7 +78,6 @@ extension PhotosViewController {
                 return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
             }
             
-            print("freame!!!!!! \( guardedCell.frame)")
             //The cell was found successfully
             return guardedCell.frame
         }

@@ -21,6 +21,7 @@ class VoiceOverSlidesControl: UIView {
     }
     
     var goToNextPage: ((Bool) -> Void)?
+    var getModelAtIndex: ((Int) -> (EditableHistoryModel?))?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,7 +45,6 @@ class VoiceOverSlidesControl: UIView {
         get {
             return "\(currentIndex + 1) out of \(totalNumberOfPhotos)"
         }
-        
         set {
             super.accessibilityValue = newValue
         }

@@ -12,22 +12,98 @@ extension PhotoSlidesViewController {
     func setupAccessibility() {
         if UIAccessibility.isVoiceOverRunning {
             messageView.isHidden = true
-            voiceOverBottomC.constant = CGFloat(ConstantVars.tabHeight)
+            
+            if cameFromFind {
+                voiceOverBottomC.constant = view.safeAreaInsets.bottom
+            } else {
+                voiceOverBottomC.constant = CGFloat(ConstantVars.tabHeight)
+            }
+            
             
             voiceOverSlidesControl.currentIndex = currentIndex
             voiceOverSlidesControl.totalNumberOfPhotos = resultPhotos.count
+            
             voiceOverSlidesControl.goToNextPage = { [weak self] goToNextPage in
                 guard let self = self else { return }
                 
+                let newIndex: Int
                 if goToNextPage {
                     self.pageViewController.goToNextPage()
+                    newIndex = self.currentIndex + 1
                 } else {
                     self.pageViewController.goToPreviousPage()
+                    newIndex = self.currentIndex - 1
                 }
-                
+
+                self.speakPhotoDescription(at: newIndex)
             }
+            
+            speakPhotoDescription(at: currentIndex)
         } else {
             voiceOverSlidesControl.isHidden = true
+        }
+    }
+    
+    func speakPhotoDescription(at newIndex: Int) {
+        
+        if self.resultPhotos.indices.contains(newIndex) {
+            if let model = self.resultPhotos[newIndex].findPhoto.editableModel {
+                DispatchQueue.global(qos: .userInitiated).async {
+                    
+                    var information = ""
+                    if model.isHearted {
+                        information.append("Starred")
+                        if model.isDeepSearched {
+                            information.append(" and Cached.")
+                        } else {
+                            information.append(".")
+                        }
+                    } else if model.isDeepSearched {
+                        information.append("Cached.")
+                    }
+                    
+                    let pitch = [NSAttributedString.Key.accessibilitySpeechPitch: 1.2]
+                    let string = NSMutableAttributedString()
+                    
+                    var shouldAnnounce = false
+                    if model.isDeepSearched {
+                        var transcript = ""
+                        
+                        for (index, content) in model.contents.enumerated() {
+                            let text = content.text
+                            if index == model.contents.count - 1 {
+                                transcript += text
+                            } else {
+                                transcript += text + "\n"
+                            }
+                        }
+                        
+                        let infoTitle = NSMutableAttributedString(string: "Status: ", attributes: pitch)
+                        let infoString = NSAttributedString(string: information)
+                        let transcriptTitle = NSMutableAttributedString(string: " Cached transcript (\(model.contents.count) lines):\n", attributes: pitch)
+                        let transcriptString = NSAttributedString(string: transcript)
+                        
+                        string.append(infoTitle)
+                        string.append(infoString)
+                        string.append(transcriptTitle)
+                        string.append(transcriptString)
+                        
+                        shouldAnnounce = true
+                    } else if !information.isEmpty {
+                        let infoTitle = NSMutableAttributedString(string: "Status: ", attributes: pitch)
+                        let infoString = NSAttributedString(string: information)
+                        string.append(infoTitle)
+                        string.append(infoString)
+                        shouldAnnounce = true
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.9) {
+                        if shouldAnnounce && self.currentIndex == newIndex {
+                            UIAccessibility.post(notification: .announcement, argument: string)
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -49,6 +125,6 @@ extension UIPageViewController {
             self.delegate?.pageViewController?(self, didFinishAnimating: true, previousViewControllers: [], transitionCompleted: completed)
         }
     }
-
+    
 }
 

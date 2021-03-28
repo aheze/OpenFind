@@ -50,7 +50,6 @@ class ZoomAnimator: NSObject {
         containerView.addSubview(toVC.view)
         
         let referenceImage = fromReferenceImageView.image ?? UIImage()
-        print("from frame: \(fromReferenceImageViewFrame)")
         if self.transitionImageView == nil {
             let transitionImageView = UIImageView(image: referenceImage)
             transitionImageView.contentMode = .scaleAspectFill
@@ -63,12 +62,9 @@ class ZoomAnimator: NSObject {
         fromReferenceImageView.isHidden = true
         
         if cameFromFind {
-            print("yes!!!! \(transitionImageView)")
             transitionImageView?.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
             transitionImageView?.layer.cornerRadius = 8
         }
-        
-        print("animating zoom")
         
         let finalTransitionSize = calculateZoomInImageFrame(image: referenceImage, forView: toVC.view)
         
@@ -150,7 +146,6 @@ class ZoomAnimator: NSObject {
         fromReferenceImageView.isHidden = true
         
         let finalTransitionSize = toReferenceImageViewFrame
-        print("TOOOOOOOO frame: \(toReferenceImageViewFrame)")
         
         UIView.animate(withDuration: transitionDuration(using: transitionContext),
                        delay: 0,
