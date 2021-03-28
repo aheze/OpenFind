@@ -29,6 +29,7 @@ extension TabBarView {
         
         backgroundView.isAccessibilityElement = true
         backgroundView.accessibilityLabel = "Tab bar"
+        backgroundView.accessibilityTraits = UIAccessibilityTraits(rawValue: 0x200000000000)
         
         starButton.accessibilityLabel = "Star"
         cacheButton.accessibilityLabel = "Cache"

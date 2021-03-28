@@ -2591,21 +2591,31 @@
                                     <action selector="collapseButtonPressed:" destination="GiC-Ye-rLJ" eventType="touchUpInside" id="YyI-bw-PIs"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8FW-Cs-46e">
+                                <rect key="frame" x="0.0" y="876" width="428" height="50"/>
+                                <connections>
+                                    <action selector="extendedCollapseButtonPressed:" destination="GiC-Ye-rLJ" eventType="touchUpInside" id="XK2-94-fXw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="y9x-GI-FZm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="JKE-Ij-JZI" firstAttribute="centerX" secondItem="LAd-sS-QXd" secondAttribute="centerX" id="0WO-nk-lsn"/>
+                            <constraint firstAttribute="trailing" secondItem="8FW-Cs-46e" secondAttribute="trailing" id="5Se-1h-iLg"/>
                             <constraint firstItem="Rxq-Q5-k6q" firstAttribute="leading" secondItem="LAd-sS-QXd" secondAttribute="leading" id="6sC-Mk-WTH"/>
                             <constraint firstAttribute="trailing" secondItem="Rxq-Q5-k6q" secondAttribute="trailing" id="76U-Hn-zkM"/>
                             <constraint firstAttribute="trailing" secondItem="0iz-9s-4iE" secondAttribute="trailing" id="CM8-mH-qEP"/>
                             <constraint firstItem="0iz-9s-4iE" firstAttribute="leading" secondItem="LAd-sS-QXd" secondAttribute="leading" id="Cxz-Ho-7I4"/>
+                            <constraint firstItem="8FW-Cs-46e" firstAttribute="top" secondItem="JKE-Ij-JZI" secondAttribute="top" id="FEu-iD-jU0"/>
                             <constraint firstAttribute="bottom" secondItem="0XE-et-vDj" secondAttribute="bottom" constant="94" id="I3k-SL-fnM"/>
                             <constraint firstItem="Rxq-Q5-k6q" firstAttribute="top" secondItem="LAd-sS-QXd" secondAttribute="top" id="P34-Ro-vCe"/>
                             <constraint firstItem="y9x-GI-FZm" firstAttribute="trailing" secondItem="0XE-et-vDj" secondAttribute="trailing" constant="20" id="Pgn-0a-37t"/>
+                            <constraint firstAttribute="bottom" secondItem="8FW-Cs-46e" secondAttribute="bottom" id="csH-pw-hdp"/>
                             <constraint firstItem="0iz-9s-4iE" firstAttribute="top" secondItem="LAd-sS-QXd" secondAttribute="top" id="esD-iD-bTd"/>
                             <constraint firstAttribute="bottom" secondItem="0iz-9s-4iE" secondAttribute="bottom" id="iZz-Ot-JK8"/>
                             <constraint firstAttribute="bottom" secondItem="Rxq-Q5-k6q" secondAttribute="bottom" id="nqO-o5-8Od"/>
+                            <constraint firstItem="8FW-Cs-46e" firstAttribute="leading" secondItem="LAd-sS-QXd" secondAttribute="leading" id="pYl-86-R3w"/>
                             <constraint firstAttribute="bottom" secondItem="JKE-Ij-JZI" secondAttribute="bottom" id="qOW-TJ-edj"/>
                             <constraint firstItem="0XE-et-vDj" firstAttribute="leading" secondItem="y9x-GI-FZm" secondAttribute="leading" constant="20" id="vld-wK-Wse"/>
                         </constraints>
@@ -2613,6 +2623,7 @@
                     <connections>
                         <outlet property="collapseButton" destination="JKE-Ij-JZI" id="xW8-hu-9Ta"/>
                         <outlet property="collectionView" destination="0iz-9s-4iE" id="LLE-S0-QeL"/>
+                        <outlet property="extendedCollapseButton" destination="8FW-Cs-46e" id="a0P-v8-w28"/>
                         <outlet property="segmentedSlider" destination="0XE-et-vDj" id="Dif-0H-LbJ"/>
                         <outlet property="segmentedSliderBottomC" destination="I3k-SL-fnM" id="KJ8-2E-Oeq"/>
                         <outlet property="shadeView" destination="Rxq-Q5-k6q" id="oeq-e3-b0F"/>
@@ -2621,7 +2632,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cyf-3f-e0g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-23" y="-990"/>
+            <point key="canvasLocation" x="-23.831775700934578" y="-990.06479481641475"/>
         </scene>
         <!--Photos Migration Controller-->
         <scene sceneID="8zE-VO-uLX">

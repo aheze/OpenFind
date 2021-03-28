@@ -18,6 +18,7 @@ extension PhotoFindViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HFindCell", for: indexPath) as! HistoryFindCell
+        
         cell.baseView.layer.cornerRadius = 8
         cell.baseView.clipsToBounds = true
         
@@ -84,6 +85,9 @@ extension PhotoFindViewController: UITableViewDelegate, UITableViewDataSource {
         
         var rects = [CGRect]()
         cell.drawingView.subviews.forEach({ $0.removeFromSuperview() })
+        
+        let attributedVoiceOverDescription = NSMutableAttributedString(string: cell.textView.text)
+        
         for range in findModel.descriptionMatchRanges {
             guard let first = range.descriptionRange.first else { continue }
             guard let last = range.descriptionRange.last else { continue }
@@ -98,8 +102,24 @@ extension PhotoFindViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 let newHighlight = addHighlight(text: range.text, rect: rect)
                 cell.drawingView.addSubview(newHighlight)
+                
+                attributedVoiceOverDescription.addAttributes(
+                    [.accessibilitySpeechPitch: 1.2],
+                    range:
+                        NSRange(
+                            location:
+                                range.descriptionRange.first ?? 0,
+                            length: (range.descriptionRange.last ?? 0) - (range.descriptionRange.first ?? 0)
+                        )
+                )
             }
+            
         }
+        
+        cell.textView.isAccessibilityElement = true
+        cell.textView.accessibilityAttributedLabel = attributedVoiceOverDescription
+        cell.textView.accessibilityTraits = .staticText
+        cell.textView.accessibilityValue = ""
         
         return cell
     }

@@ -62,6 +62,7 @@ class PhotosViewController: UIViewController {
             } else {
                 dimSlideControls?(false, true)
             }
+            updateFindButtonHint()
         }
     }
     
@@ -102,6 +103,13 @@ class PhotosViewController: UIViewController {
     
     @IBOutlet weak var collapseButton: UIButton! /// dismiss Finding
     @IBAction func collapseButtonPressed(_ sender: Any) {
+        switchBack?()
+        if selectButtonSelected {
+            showSelectionControls?(true)
+        }
+    }
+    @IBOutlet weak var extendedCollapseButton: UIButton!
+    @IBAction func extendedCollapseButtonPressed(_ sender: Any) {
         switchBack?()
         if selectButtonSelected {
             showSelectionControls?(true)
@@ -155,6 +163,8 @@ class PhotosViewController: UIViewController {
         }
         
         collectionView.isAccessibilityElement = false
+        
+        setupAccessibility()
         
     }
     

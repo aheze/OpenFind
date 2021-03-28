@@ -176,10 +176,13 @@ struct InfoView: View {
                             
                             SwiftEntryKit.display(entry: topToast, using: attributes)
                             
+                            UIAccessibility.post(notification: .announcement, argument: "Copied")
                         }) {
                             Image(systemName: "doc.on.doc")
                                 .foregroundColor(isCached ? Color(UIColor(named: "PhotosText")!) : Color(UIColor.secondaryLabel))
                                 .font(Font.system(size: 19, weight: .bold))
+                                .accessibility(label: Text("Copy"))
+                                .accessibility(hint: Text("Copy the transcript"))
                         }
                         .padding(.leading, 6)
                         .disabled(!isCached)
@@ -199,15 +202,16 @@ struct InfoView: View {
                 }
             }
             .navigationBarTitle("Info")
-            .navigationBarItems(trailing:
-                                    Button(action: {
-                                        donePressed?()
-                                    }) {
-                                        Text("done")
-                                            .font(Font.system(size: 19, weight: .regular, design: .default))
-                                            .foregroundColor(Color(UIColor(named: "PhotosText")!))
-                                        
-                                    }
+            .navigationBarItems(
+                trailing:
+                    Button(action: {
+                        donePressed?()
+                    }) {
+                        Text("done")
+                            .font(Font.system(size: 19, weight: .regular, design: .default))
+                            .foregroundColor(Color(UIColor(named: "PhotosText")!))
+                        
+                    }
             )
         }
     }

@@ -14,11 +14,13 @@ extension CameraViewController {
         drawingView.isAccessibilityElement = true
         drawingView.accessibilityLabel = "Viewfinder"
         drawingView.accessibilityHint = "Highlights will be placed on detected results."
+
+        newSearchTextField.accessibilityTraits = UIAccessibilityTraits(rawValue: 0x200000000000)
         
         cameraIconHolder.isAccessibilityElement = true
         cameraIconHolder.accessibilityLabel = "Shutter, pause"
         cameraIconHolder.accessibilityHint = "Pauses the camera, shows the Save and Cache buttons, and disables the flashlight"
-        cameraIconHolder.accessibilityTraits = [.button]
+        cameraIconHolder.accessibilityTraits = [.button, UIAccessibilityTraits(rawValue: 0x200000000000)]
         
         statsView.isAccessibilityElement = true
         statsView.accessibilityLabel = "Statistics"

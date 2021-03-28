@@ -110,6 +110,7 @@ extension PhotoFindViewController {
         }
         
         let nextButtonAttachment = AttributedString(image: Image(named: "ContinueButton"), bounds: "0,-6,76,24")
+        nextButtonAttachment?.accessibilityLabel = "continue"
         
         let attributedText = "\(howMany)".set(style: textStyle) + resultsInCache + nextButtonAttachment! + toFindFromPhotos
         promptTextView.attributedText = attributedText

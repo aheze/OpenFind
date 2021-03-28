@@ -10,11 +10,17 @@ import UIKit
 
 extension PhotoSlidesViewController {
     func setupAccessibility() {
+        
+        
         if UIAccessibility.isVoiceOverRunning {
             messageView.isHidden = true
             
             if cameFromFind {
                 voiceOverBottomC.constant = view.safeAreaInsets.bottom
+                backButtonView.isAccessibilityElement = true
+                backButtonView.accessibilityLabel = "Back"
+                backButtonView.accessibilityTraits = .button
+                backButtonView.accessibilityHint = "Go back to the Finding screen"
             } else {
                 voiceOverBottomC.constant = CGFloat(ConstantVars.tabHeight)
             }
