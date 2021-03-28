@@ -30,7 +30,7 @@ extension PhotoFindViewController: FindBarDelegate {
     }
     
     func pressedReturn() {
-        pressedContinue()
+        continuePressed(dismissKeyboard: false)
     }
     
     func triedToEdit() {

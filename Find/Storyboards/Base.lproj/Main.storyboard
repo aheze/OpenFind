@@ -2295,7 +2295,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Gzv-fX-Vyn">
                                 <rect key="frame" x="0.0" y="50" width="428" height="876"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="Alc-Nu-G0B">
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="Alc-Nu-G0B" customClass="PromptView" customModule="Find" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="428" height="171"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
@@ -2491,7 +2491,7 @@
                         <outlet property="findBar" destination="4BQ-22-UbH" id="3mF-9R-rcs"/>
                         <outlet property="progressView" destination="7CF-yv-drp" id="m7U-4M-Laq"/>
                         <outlet property="promptTextView" destination="hr9-ri-1xc" id="lGl-6k-QLj"/>
-                        <outlet property="promptView" destination="Alc-Nu-G0B" id="Q1w-s6-Ig4"/>
+                        <outlet property="promptView" destination="Alc-Nu-G0B" id="ubT-c9-7k9"/>
                         <outlet property="tableView" destination="Gzv-fX-Vyn" id="RGq-Mk-wxL"/>
                     </connections>
                 </viewController>

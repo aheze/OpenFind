@@ -12,9 +12,9 @@ extension PhotosViewController {
     func setupAccessibility() {
         if UIAccessibility.isVoiceOverRunning {
             collapseButton.isAccessibilityElement = false
-        } else {
-            extendedCollapseButton.isHidden = true
         }
+        
+        extendedCollapseButton.isHidden = true /// hide when photos active
         
         collapseButton.accessibilityLabel = "Back to Photo Gallery"
         collapseButton.accessibilityHint = "Dismisses the photo finding screen"

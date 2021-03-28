@@ -10,8 +10,6 @@ import UIKit
 
 extension PhotoSlidesViewController {
     func setupAccessibility() {
-        
-        
         if UIAccessibility.isVoiceOverRunning {
             messageView.isHidden = true
             
@@ -68,8 +66,7 @@ extension PhotoSlidesViewController {
                         information.append("Cached.")
                     }
                     
-                    let pitch = [NSAttributedString.Key.accessibilitySpeechPitch: 1.2]
-                    let string = NSMutableAttributedString()
+                    var accessibilityString = [AccessibilityText]()
                     
                     var shouldAnnounce = false
                     if model.isDeepSearched {
@@ -84,28 +81,23 @@ extension PhotoSlidesViewController {
                             }
                         }
                         
-                        let infoTitle = NSMutableAttributedString(string: "Status: ", attributes: pitch)
-                        let infoString = NSAttributedString(string: information)
-                        let transcriptTitle = NSMutableAttributedString(string: " Cached transcript (\(model.contents.count) lines):\n", attributes: pitch)
-                        let transcriptString = NSAttributedString(string: transcript)
-                        
-                        string.append(infoTitle)
-                        string.append(infoString)
-                        string.append(transcriptTitle)
-                        string.append(transcriptString)
+                        accessibilityString.append(AccessibilityText(text: "Status: ", isRaised: true))
+                        accessibilityString.append(AccessibilityText(text: information, isRaised: false))
+                        accessibilityString.append(AccessibilityText(text: " Cached transcript (\(model.contents.count) lines):\n", isRaised: true))
+                        accessibilityString.append(AccessibilityText(text: transcript, isRaised: false))
                         
                         shouldAnnounce = true
                     } else if !information.isEmpty {
-                        let infoTitle = NSMutableAttributedString(string: "Status: ", attributes: pitch)
-                        let infoString = NSAttributedString(string: information)
-                        string.append(infoTitle)
-                        string.append(infoString)
+                        accessibilityString.append(AccessibilityText(text: "Status: ", isRaised: true))
+                        accessibilityString.append(AccessibilityText(text: information, isRaised: false))
+                        accessibilityString.append(AccessibilityText(text: " No cached transcript available. Cache photo to generate.", isRaised: true))
+                        
                         shouldAnnounce = true
                     }
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.9) {
                         if shouldAnnounce && self.currentIndex == newIndex {
-                            UIAccessibility.post(notification: .announcement, argument: string)
+                            UIAccessibility.postAnnouncement(accessibilityString, delay: 0)
                         }
                     }
                 }

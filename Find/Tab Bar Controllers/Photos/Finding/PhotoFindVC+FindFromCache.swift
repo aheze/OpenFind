@@ -89,12 +89,10 @@ extension PhotoFindViewController {
                             let thisCompString = comp.key
                             
                             if descriptionOfPhoto == "" {
-                                existingCount += 3
-                                
-                                descriptionOfPhoto.append("...\(thisCompString)...")
+                                descriptionOfPhoto.append("\(thisCompString)...")
                             } else {
-                                existingCount += 4
-                                descriptionOfPhoto.append("\n...\(thisCompString)...")
+                                existingCount += 1
+                                descriptionOfPhoto.append("\n\(thisCompString)...")
                             }
                             
                             for compRange in comp.value {

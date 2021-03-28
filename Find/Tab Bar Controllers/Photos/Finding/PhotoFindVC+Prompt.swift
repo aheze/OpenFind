@@ -11,14 +11,49 @@ import SwiftRichString
 
 extension PhotoFindViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        pressedContinue()
-        findBar.searchField.resignFirstResponder()
+        continuePressed()
         return true
+    }
+    
+    func continuePressed(dismissKeyboard: Bool = true) {
+        pressedContinue()
+        
+        if dismissKeyboard {
+            findBar.searchField.resignFirstResponder()
+        }
+        
+        UIAccessibility.post(notification: .layoutChanged, argument: promptView)
+    }
+}
+
+struct AccessibilityText {
+    var text = ""
+    var isRaised = false
+}
+extension UIAccessibility {
+    static func postAnnouncement(_ texts: [AccessibilityText], delay: Double = 0.5) {
+        let pitch = [NSAttributedString.Key.accessibilitySpeechPitch: 1.2]
+        let string = NSMutableAttributedString()
+        
+        for text in texts {
+            if text.isRaised {
+                let raisedString = NSMutableAttributedString(string: text.text, attributes: pitch)
+                string.append(raisedString)
+            } else {
+                let normalString = NSAttributedString(string: text.text)
+                string.append(normalString)
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            UIAccessibility.post(notification: .announcement, argument: string)
+        }
     }
 }
 
 extension PhotoFindViewController {
     func changePromptToStarting(startingFilter: PhotoFilter, howManyPhotos: Int, isAllPhotos: Bool) {
+        continueButtonVisible = false
          
         let findingFrom = NSLocalizedString("findingFrom", comment: "")
         
@@ -35,7 +70,6 @@ extension PhotoFindViewController {
         let grayStyle = Style {
             $0.color = UIColor.secondaryLabel
         }
-        
         
         
         var number = isAllPhotos ? all : "\(howManyPhotos)\(unit)\(space)" /// number of all
@@ -77,14 +111,29 @@ extension PhotoFindViewController {
         var attributedText = AttributedString()
         if let overriddenLastPart = overriddenLastPart {
             attributedText = findingFrom.set(styles: [boldStyle, grayStyle]) + filter.set(styles: [boldStyle, colorStyle]) + overriddenLastPart.set(styles: [boldStyle, grayStyle])
+            
+            promptView.accessibilityValue = findingFrom + filter + overriddenLastPart
+            
+            let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+            let summaryString = AccessibilityText(text: findingFrom + filter + overriddenLastPart, isRaised: false)
+            UIAccessibility.postAnnouncement([summaryTitle, summaryString])
         } else {
             attributedText = findingFrom.set(styles: [boldStyle, grayStyle]) + number.set(styles: [boldStyle, grayStyle]) + filter.set(styles: [boldStyle, colorStyle]) + photos.set(styles: [boldStyle, grayStyle])
+            
+            promptView.accessibilityValue = findingFrom + number + filter + photos
+            
+            let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+            let summaryString = AccessibilityText(text: findingFrom + number + filter + photos, isRaised: false)
+            UIAccessibility.postAnnouncement([summaryTitle, summaryString])
         }
-        
         
         promptTextView.attributedText = attributedText
     }
+    
+    
     func setPromptToHowManyCacheResults(howMany: Int) {
+        continueButtonVisible = true
+        
         let textStyle = Style {
             $0.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             $0.color = UIColor.secondaryLabel
@@ -102,20 +151,26 @@ extension PhotoFindViewController {
             results = resultText
         }
         
-        let resultsInCache = " \(results)\(inCachedPhotos) ".set(style: textStyle)
-        var toFindFromPhotos = " \(toFindFromUncachedPhotos)".set(style: textStyle)
+        let resultsInCache = " \(results)\(inCachedPhotos) "
+        var toFindFromPhotos = " \(toFindFromUncachedPhotos)"
         
         if currentFilter == .cached {
-            toFindFromPhotos = toFindWithOCR.set(style: textStyle)
+            toFindFromPhotos = toFindWithOCR
         }
         
         let nextButtonAttachment = AttributedString(image: Image(named: "ContinueButton"), bounds: "0,-6,76,24")
-        nextButtonAttachment?.accessibilityLabel = "continue"
         
-        let attributedText = "\(howMany)".set(style: textStyle) + resultsInCache + nextButtonAttachment! + toFindFromPhotos
+        let attributedText = "\(howMany)".set(style: textStyle) + resultsInCache.set(style: textStyle) + nextButtonAttachment! + toFindFromPhotos.set(style: textStyle)
         promptTextView.attributedText = attributedText
+        promptView.accessibilityValue = "\(howMany)" + resultsInCache + "Continue/Return button on the keyboard or double-tap this label" + toFindFromPhotos
+        
+        let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+        let summaryString = AccessibilityText(text: "\(howMany)" + resultsInCache + "Continue/Return button on the keyboard or double-tap Summary label" + toFindFromPhotos, isRaised: false)
+        UIAccessibility.postAnnouncement([summaryTitle, summaryString])
     }
     func setPromptToHowManyFastFound(howMany: Int) { /// how many finished finding
+        continueButtonVisible = false
+        
         let textStyle = Style {
             $0.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             $0.color = UIColor.secondaryLabel
@@ -128,12 +183,25 @@ extension PhotoFindViewController {
         
         if currentFilter == .cached {
             attributedText = "\(findingFromPhotos) (\(howMany)/\(findPhotos.count))...".set(style: textStyle)
+            promptView.accessibilityValue = "\(findingFromPhotos) (\(howMany) out of \(findPhotos.count))..."
+            
+            let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+            let summaryString = AccessibilityText(text: "\(findingFromPhotos) (\(howMany) out of \(findPhotos.count))...", isRaised: false)
+            UIAccessibility.postAnnouncement([summaryTitle, summaryString])
+        } else {
+            promptView.accessibilityValue = "\(findingFromUncachedPhotos) (\(howMany) out of \(findPhotos.count))..."
+            
+            let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+            let summaryString = AccessibilityText(text: "\(findingFromUncachedPhotos) (\(howMany) out of \(findPhotos.count))...", isRaised: false)
+            UIAccessibility.postAnnouncement([summaryTitle, summaryString])
         }
         
         promptTextView.attributedText = attributedText
     }
     /// Finished searching cache and uncached photos
     func setPromptToFinishedFastFinding(howMany: Int) {
+        continueButtonVisible = false
+        
         let textStyle = Style {
             $0.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             $0.color = UIColor.secondaryLabel
@@ -154,6 +222,11 @@ extension PhotoFindViewController {
         
         let attributedText = "\(howMany)\(spaceOrUnit)\(results)\(_in_)\(resultPhotos.count)\(spaceOrZhangUnit)\(lowercasePhotos)".set(style: textStyle)
         promptTextView.attributedText = attributedText
+        promptView.accessibilityValue = "Completed finding. \(howMany)\(spaceOrUnit)\(results)\(_in_)\(resultPhotos.count)\(spaceOrZhangUnit)\(lowercasePhotos)"
+        
+        let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+        let summaryString = AccessibilityText(text: "Completed finding. \(howMany)\(spaceOrUnit)\(results)\(_in_)\(resultPhotos.count)\(spaceOrZhangUnit)\(lowercasePhotos)", isRaised: false)
+        UIAccessibility.postAnnouncement([summaryTitle, summaryString])
     }
 }
 

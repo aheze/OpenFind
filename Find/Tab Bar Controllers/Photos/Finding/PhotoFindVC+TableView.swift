@@ -119,7 +119,19 @@ extension PhotoFindViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textView.isAccessibilityElement = true
         cell.textView.accessibilityAttributedLabel = attributedVoiceOverDescription
         cell.textView.accessibilityTraits = .staticText
-        cell.textView.accessibilityValue = ""
+        
+        let uninterruptedText = findModel.descriptionText.replacingOccurrences(of: "...", with: " ")
+        
+        let pitch = [NSAttributedString.Key.accessibilitySpeechPitch: 1.2]
+        let string = NSMutableAttributedString()
+        
+        let raisedString = NSMutableAttributedString(string: "Sentences:", attributes: pitch)
+        string.append(raisedString)
+        let normalString = NSAttributedString(string: uninterruptedText)
+        string.append(normalString)
+        
+//        cell.textView.accessibilityValue = "Sentences:\n\(uninterruptedText)"
+        cell.textView.accessibilityAttributedValue = string
         
         return cell
     }

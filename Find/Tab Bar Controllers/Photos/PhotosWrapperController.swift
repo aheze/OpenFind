@@ -103,7 +103,10 @@ class PhotosWrapperController: UIViewController {
         
         pressedFindBefore = true
         
+        navController.viewController.extendedCollapseButton.isHidden = false
+        
         UIAccessibility.post(notification: .screenChanged, argument: navController.viewController.extendedCollapseButton)
+        
     }
     
     func switchBackToPhotos() {
@@ -127,7 +130,10 @@ class PhotosWrapperController: UIViewController {
             self.findShadowView?.alpha = 0
         }
         
+        navController.viewController.extendedCollapseButton.isHidden = true
+        
         UIAccessibility.post(notification: .screenChanged, argument: navController.viewController.findButton)
+        
     }
     
     func addShadows() {
