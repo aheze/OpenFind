@@ -13,6 +13,7 @@ extension CameraViewController {
     func handleCachedText(request: VNRequest?, error: Error?, thisProcessIdentifier: UUID) {
         guard thisProcessIdentifier == currentCachingProcess else { return }
         
+        var rawContents = [EditableSingleHistoryContent]() /// vision coordinates
         var contents = [EditableSingleHistoryContent]()
         
         DispatchQueue.main.async {
@@ -33,12 +34,25 @@ extension CameraViewController {
                             singleContent.width = convertedRect.width
                             singleContent.height = convertedRect.height
                             contents.append(singleContent)
+                            
+                            let origX = observation.boundingBox.origin.x
+                            let origY = 1 - observation.boundingBox.minY
+                            let origWidth = observation.boundingBox.width
+                            let origHeight = observation.boundingBox.height
+                            
+                            let rawContent = EditableSingleHistoryContent()
+                            rawContent.text = text.string
+                            rawContent.x = origX
+                            rawContent.y = origY
+                            rawContent.width = origWidth
+                            rawContent.height = origHeight
+                            rawContents.append(rawContent)
                         }
                     }
                 }
             }
             
-            self.finishedCache(with: contents)
+            self.finishedCache(with: contents, rawContents: rawContents)
             
         }
     }

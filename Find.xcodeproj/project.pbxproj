@@ -752,6 +752,7 @@
 				3C7EAB2B25C0A97800264B63 /* PhotosVC+Tutorial.swift */,
 				3C5B157625A8CE6E00BB8988 /* Navigation Bar */,
 				3C5B157125A8CD8800BB8988 /* Collection View */,
+				49D985B2241B3736005F4E92 /* Caching */,
 				3C5B156F25A8CD3D00BB8988 /* Loading+Sorting */,
 				3C3D47D825A40A41002B8BBF /* Permissions */,
 				3CB6842F25A0085E00AE0AD6 /* Migration */,
@@ -1174,7 +1175,6 @@
 				3C71F25D25AF6B8000D22212 /* PhotosVC+Star.swift */,
 				3C71F26125AF6B9900D22212 /* PhotosVC+Cache.swift */,
 				3CCB840825B0E362000631BA /* PhotosVC+Delete.swift */,
-				49D985B2241B3736005F4E92 /* Caching */,
 			);
 			path = Actions;
 			sourceTree = "<group>";

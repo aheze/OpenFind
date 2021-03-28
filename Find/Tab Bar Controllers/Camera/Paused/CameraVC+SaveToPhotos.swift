@@ -45,7 +45,7 @@ extension CameraViewController {
             let pngData = pausedPhoto.pngData()
         else { return }
         
-        let currentContents = self.cachedContents
+        let currentRawContents = self.rawCachedContents
         
         var photoIdentifier: String?
         PHPhotoLibrary.shared().performChanges({
@@ -67,7 +67,7 @@ extension CameraViewController {
                     
                     if cachePressed {
                         newModel.isDeepSearched = true
-                        for cachedContent in currentContents {
+                        for cachedContent in currentRawContents {
                             let newContent = SingleHistoryContent()
                             newContent.x = Double(cachedContent.x)
                             newContent.y = Double(cachedContent.y)

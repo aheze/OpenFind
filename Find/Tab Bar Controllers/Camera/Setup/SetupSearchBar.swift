@@ -69,7 +69,6 @@ extension CameraViewController: ToolbarButtonPressed, SelectedList, StartedEditi
         sortSearchTerms()
         if CameraState.isPaused {
             if !cachedContents.isEmpty, cachePressed {
-                print("cach is allso pressed!!")
                 addCacheResults()
             }
             findWhenPaused()

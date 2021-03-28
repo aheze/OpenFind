@@ -303,7 +303,8 @@ class CameraViewController: UIViewController {
     
     // MARK: Caching
     var startedCaching = false
-    var cachedContents = [EditableSingleHistoryContent]()
+    var cachedContents = [EditableSingleHistoryContent]() /// for adding find results
+    var rawCachedContents = [EditableSingleHistoryContent]() /// raw vision coordinates to save to disk
     var currentCachingProcess: UUID?
     var finishedCaching = false
     var currentProgress = CGFloat(0) /// how much cache is finished

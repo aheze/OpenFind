@@ -9,9 +9,11 @@
 import UIKit
 
 extension CameraViewController {
-    func finishedCache(with contents: [EditableSingleHistoryContent]) {
+    func finishedCache(with contents: [EditableSingleHistoryContent], rawContents: [EditableSingleHistoryContent]) {
         finishedCaching = true
         cachedContents = contents
+        rawCachedContents = rawContents
+        
         if cachePressed {
             DispatchQueue.main.async {
                 self.messageView.updateMessage("100")

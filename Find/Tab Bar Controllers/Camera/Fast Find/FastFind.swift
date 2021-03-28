@@ -86,10 +86,10 @@ extension CameraViewController {
         }
         
         let newOriginBoundingBox = CGRect(
-        x: boundingBox.origin.x,
-        y: 1 - boundingBox.origin.y - boundingBox.height,
-        width: boundingBox.width,
-        height: boundingBox.height
+            x: boundingBox.origin.x,
+            y: 1 - boundingBox.origin.y - boundingBox.height,
+            width: boundingBox.width,
+            height: boundingBox.height
         )
         
         var convertedRect = VNImageRectForNormalizedRect(newOriginBoundingBox, Int(rectOfImage.width), Int(rectOfImage.height))
