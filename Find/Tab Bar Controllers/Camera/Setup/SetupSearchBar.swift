@@ -17,8 +17,6 @@ protocol InjectLists: class {
 }
 
 extension CameraViewController: ToolbarButtonPressed, SelectedList, StartedEditing {
-  
-    
     func buttonPressed(button: ToolbarButtonType) {
         switch button {
         case .newMatch:
@@ -63,6 +61,15 @@ extension CameraViewController: ToolbarButtonPressed, SelectedList, StartedEditi
                 if self.insertingListsCount == 0 {
                     self.isSchedulingList = false
                     self.updateListsLayout(toType: "doneAndShrink")
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                UIAccessibility.post(notification: .announcement, argument: "Moved to selected lists")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                    if let cell = self.searchCollectionView.cellForItem(at: indexP) {
+                        UIAccessibility.post(notification: .layoutChanged, argument: cell.contentView)
+                    }
                 }
             }
         })
@@ -122,6 +129,35 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 })
             }
 
+            cell.contentView.isAccessibilityElement = true
+            cell.contentView.accessibilityLabel = "Selected list"
+            
+            if searchShrunk {
+                cell.contentView.accessibilityHint = "Double-tap to expand the search bar and view all selected lists."
+            } else {
+                cell.contentView.accessibilityHint = "Double-tap to remove the list. Moves it back to the toolbar."
+            }
+            
+            let colorDescription = list.iconColorName.getDescription()
+            
+            let listName = AccessibilityText(text: list.name, isRaised: false)
+            let iconTitle = AccessibilityText(text: "\nIcon", isRaised: true)
+            let iconString = AccessibilityText(text: list.iconImageName, isRaised: false)
+            let colorTitle = AccessibilityText(text: "\nColor", isRaised: true)
+            let colorString = AccessibilityText(text: "\(colorDescription.0)", isRaised: false)
+            let pitchTitle = AccessibilityText(text: "\nPitch", isRaised: true)
+            let pitchString = AccessibilityText(text: "\(colorDescription.1)", isRaised: false, customPitch: colorDescription.1)
+            
+            let accessibilityLabel = UIAccessibility.makeAttributedText(
+                [
+                    listName,
+                    iconTitle, iconString,
+                    colorTitle, colorString,
+                    pitchTitle, pitchString,
+                ]
+            )
+            
+            cell.contentView.accessibilityAttributedValue = accessibilityLabel
         }
 
         return cell
@@ -222,7 +258,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         warningLabel.text = findPausedDuplicatesNotAllowed
         searchBarLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
-        
+        toolbar.location = .inCamera
         toolbar.pressedButton = self
         toolbar.selectedList = self
         toolbar.startedEditing = self
@@ -368,11 +404,9 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             if uniqueSplits.count != splits.count {
                 resetHighlights()
                 allowSearch = false
-//                shouldResetHighlights = true
                 showDuplicateAlert(show: true)
             } else {
                 showDuplicateAlert(show: false)
-//                shouldResetHighlights = false
                 allowSearch = true
                 finalTextToFind = updatedString
                 sortSearchTerms()
@@ -394,7 +428,6 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         finalTextToFind = ""
         allowSearch = true
-//        shouldResetHighlights = false
         resetHighlights()
         showDuplicateAlert(show: false)
         sortSearchTerms()
@@ -453,7 +486,6 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 let matchColor = UIColor(hexString: (list.iconColorName)).cgColor
                 if !duplicatedStrings.contains(match.lowercased()) && !cameAcrossSearchFieldText.contains(match.lowercased()) {
                     matchToColors[match.lowercased()] = [matchColor]
-//                    stringToList[match.lowercased()] = list
                     
                 } else {
                     if matchToColors[match.lowercased()] == nil {
@@ -476,15 +508,9 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         arrayOfSearch = newSearch
         for match in arrayOfSearch {
-//            stringToList[match] = currentSearchFindList
             matchToColors[match] = [UIColor(hexString: UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF").cgColor]
         }
-//        for match in duplicatedStrings {
-//            stringToList[match] = currentListsSharedFindList
-//        }
-        
         for match in cameAcrossSearchFieldText {
-//            stringToList[match] = currentSearchAndListSharedFindList
             let cgColor = UIColor(hexString: UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF").cgColor
             matchToColors[match, default: [CGColor]()].append(cgColor)
         }

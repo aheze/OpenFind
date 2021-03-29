@@ -12,6 +12,11 @@ enum ToolbarButtonType {
     case newMatch
     case done
 }
+enum ListToolbarLocation {
+    case inCamera
+    case inPhotos
+}
+
 protocol ToolbarButtonPressed: class {
     func buttonPressed(button: ToolbarButtonType)
 }
@@ -22,11 +27,13 @@ protocol StartedEditing: class {
     func startedEditing(start: Bool)
 }
 class ListToolBar: UIView, InjectLists {
+
+    var location = ListToolbarLocation.inPhotos
     
+    @IBOutlet weak var backgroundTapView: UIView!
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     var editableListCategories = [EditableFindList]()
-    
     
     weak var pressedButton: ToolbarButtonPressed?
     weak var selectedList: SelectedList?
@@ -39,7 +46,6 @@ class ListToolBar: UIView, InjectLists {
     @IBOutlet weak var doneButton: UIButton!
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
     
     @IBAction func newMatchPressed(_ sender: Any) {
         pressedButton?.buttonPressed(button: .newMatch)
@@ -84,8 +90,20 @@ class ListToolBar: UIView, InjectLists {
         effect = UIBlurEffect(style: .systemThickMaterialDark)
         visualBaseView.effect = effect
         
-        
         setLightMode()
+        
+        backgroundTapView.isAccessibilityElement = true
+        backgroundTapView.accessibilityLabel = "Toolbar"
+        backgroundTapView.accessibilityTraits = .none
+        
+        newMatchButton.accessibilityHint = "Inserts a bullet point at the cursor. Wherever there is a bullet point, Find will divide the search text into individual words, and look for each of them."
+        
+        if location == .inCamera {
+            doneButton.accessibilityHint = "Dismiss the keyboard and shrink the search bar"
+        } else {
+            doneButton.accessibilityHint = "Dismiss the keyboard"
+        }
+        
     }
     
     func addList(list: EditableFindList) {
@@ -137,6 +155,32 @@ extension ListToolBar: UICollectionViewDelegate, UICollectionViewDataSource {
         let newImage = UIImage(systemName: list.iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor.white, renderingMode: .alwaysOriginal)
         
         cell.imageView.image = newImage
+        
+        cell.contentView.isAccessibilityElement = true
+        cell.contentView.accessibilityLabel = "List"
+        cell.contentView.accessibilityHint = "Double-tap to use the list. Moves it to the Selected Lists container."
+        
+        let colorDescription = list.iconColorName.getDescription()
+        
+        let listName = AccessibilityText(text: list.name, isRaised: false)
+        let iconTitle = AccessibilityText(text: "\nIcon", isRaised: true)
+        let iconString = AccessibilityText(text: list.iconImageName, isRaised: false)
+        let colorTitle = AccessibilityText(text: "\nColor", isRaised: true)
+        let colorString = AccessibilityText(text: "\(colorDescription.0)", isRaised: false)
+        let pitchTitle = AccessibilityText(text: "\nPitch", isRaised: true)
+        let pitchString = AccessibilityText(text: "\(colorDescription.1)", isRaised: false, customPitch: colorDescription.1)
+        
+        let accessibilityLabel = UIAccessibility.makeAttributedText(
+            [
+                listName,
+                iconTitle, iconString,
+                colorTitle, colorString,
+                pitchTitle, pitchString,
+            ]
+        )
+        
+        cell.contentView.accessibilityAttributedValue = accessibilityLabel
+        
         return cell
         
     }
@@ -165,7 +209,18 @@ extension ListToolBar {
         ///Now that we know where to append the green cell, let's do it!
         editableListCategories.insert(component, at: indexPathToAppendTo)
         let newIndexPath = IndexPath(item: indexPathToAppendTo, section: 0)
-        collectionView.insertItems(at: [newIndexPath])
-        
+        collectionView.performBatchUpdates({
+            self.collectionView.insertItems(at: [newIndexPath])
+        }) { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                UIAccessibility.post(notification: .announcement, argument: "Moved back to toolbar")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                    if let cell = self.collectionView.cellForItem(at: newIndexPath) {
+                        UIAccessibility.post(notification: .layoutChanged, argument: cell.contentView)
+                    }
+                }
+            }
+        }
     }
 }

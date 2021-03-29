@@ -17,6 +17,13 @@ extension CameraViewController {
         drawingView.accessibilityHint = "Highlights will be placed on detected results."
 
         newSearchTextField.accessibilityTraits = UIAccessibilityTraits(rawValue: 0x200000000000)
+        newSearchTextField.accessibilityLabel = "Search bar"
+        
+        listsLabel.accessibilityLabel = "Selected Lists"
+        
+        arrowDownImage.isAccessibilityElement = true
+        arrowDownImage.accessibilityLabel = "Down arrow"
+        arrowDownImage.accessibilityTraits = .image
         
         cameraIconHolder.isAccessibilityElement = true
         cameraIconHolder.accessibilityLabel = "Shutter, pause"

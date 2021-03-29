@@ -25,9 +25,9 @@ extension ListBuilderViewController {
         
         let iconTitle = AccessibilityText(text: "Icon", isRaised: true)
         let iconString = AccessibilityText(text: iconImageName, isRaised: false)
-        let colorTitle = AccessibilityText(text: "\n\nColor", isRaised: true)
+        let colorTitle = AccessibilityText(text: "\nColor", isRaised: true)
         let colorString = AccessibilityText(text: "\(colorDescription.0)", isRaised: false)
-        let pitchTitle = AccessibilityText(text: "\n\nPitch", isRaised: true)
+        let pitchTitle = AccessibilityText(text: "\nPitch", isRaised: true)
         let pitchString = AccessibilityText(text: "\(colorDescription.1)", isRaised: false, customPitch: colorDescription.1)
         
         let accessibilityLabel = UIAccessibility.makeAttributedText(

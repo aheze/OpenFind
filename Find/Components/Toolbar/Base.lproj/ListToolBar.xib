@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ListToolBar" customModule="Find" customModuleProvider="target">
             <connections>
+                <outlet property="backgroundTapView" destination="sKh-QQ-aUW" id="tGM-uj-8KB"/>
                 <outlet property="collectionView" destination="B9B-HN-NIt" id="2WG-4J-plP"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="blE-aW-0Jh"/>
                 <outlet property="doneButton" destination="B5C-dV-QNK" id="fgX-B2-hEq"/>
@@ -24,6 +25,10 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sKh-QQ-aUW">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Omm-9U-OZP">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="LOj-fv-sz0">
@@ -87,7 +92,7 @@
                     </view>
                     <blurEffect style="systemUltraThinMaterialLight"/>
                 </visualEffectView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p2p-jO-5W8">
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p2p-jO-5W8">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="0.5"/>
                     <color key="backgroundColor" systemColor="placeholderTextColor"/>
                     <constraints>
@@ -98,12 +103,16 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="sKh-QQ-aUW" secondAttribute="trailing" id="0cA-1y-FaZ"/>
                 <constraint firstItem="Omm-9U-OZP" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="4Dd-Dt-vHm"/>
                 <constraint firstItem="Omm-9U-OZP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="7tp-lc-dRo"/>
                 <constraint firstItem="Omm-9U-OZP" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Cmq-8e-7WN"/>
                 <constraint firstItem="p2p-jO-5W8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EaC-Jx-Atf"/>
                 <constraint firstItem="p2p-jO-5W8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="LVp-4E-It1"/>
+                <constraint firstItem="sKh-QQ-aUW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Oqh-fa-oz6"/>
+                <constraint firstAttribute="bottom" secondItem="sKh-QQ-aUW" secondAttribute="bottom" id="ccD-su-RtP"/>
                 <constraint firstItem="Omm-9U-OZP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="e3V-1M-fBk"/>
+                <constraint firstItem="sKh-QQ-aUW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="lFM-3E-XYw"/>
                 <constraint firstAttribute="trailing" secondItem="p2p-jO-5W8" secondAttribute="trailing" id="lPh-LV-z4l"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
