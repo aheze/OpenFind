@@ -79,8 +79,11 @@ extension ListBuilderViewController {
             let errorString = AccessibilityText(text: matchesPlural, isRaised: false)
             let errorHint = AccessibilityText(text: "\nWords with errors are highlighted.", isRaised: false)
             
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                UIAccessibility.post(notification: .layoutChanged, argument: self.generalVC.wordsHeaderLabel)
+            }
             
-            UIAccessibility.postAnnouncement([errorTitle, errorString, errorHint], delay: 1)
+            UIAccessibility.postAnnouncement([errorTitle, errorString, errorHint], delay: 1.5)
 
             generalVC.highlightRowsOnError(type: "EmptyMatch")
         } else if generalVC.stringToIndexesError.count >= 1 { ///No empty errors. Only duplicates.
@@ -194,7 +197,11 @@ extension ListBuilderViewController {
                     self.generalVC.highlightRowsOnError(type: "Duplicate")
                     SwiftEntryKit.dismiss()
                     
-                    UIAccessibility.postAnnouncement([AccessibilityText(text: "Words with errors are highlighted", isRaised: true, customPitch: 1)])
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                        UIAccessibility.post(notification: .layoutChanged, argument: self.generalVC.wordsHeaderLabel)
+                    }
+                    
+                    UIAccessibility.postAnnouncement([AccessibilityText(text: "Words with errors are highlighted", isRaised: true, customPitch: 1)], delay: 1.5)
                 }
             )
             self.present(alert, animated: true, completion: nil)

@@ -126,6 +126,7 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
         if let name = indexPathToSymbol[indexPath] {
             let image = UIImage(systemName: name)
             cell.imageView.image = image
+            cell.imageView.accessibilityLabel = name
         }
         
         return cell

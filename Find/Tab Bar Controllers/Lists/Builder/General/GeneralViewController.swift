@@ -25,6 +25,7 @@ class GeneralViewController: UIViewController {
     @IBOutlet var descInputView: UIView!
     @IBOutlet var inputButtonsView: UIView!
 
+    @IBOutlet weak var wordsHeaderLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
     
@@ -161,7 +162,8 @@ class GeneralViewController: UIViewController {
         
         titleField.accessibilityLabel = "Name"
         descriptionView.accessibilityLabel = "Description"
-        
+        wordsHeaderLabel.accessibilityTraits = .header
+        wordsHeaderLabel.accessibilityHint = "The words that the list contains"
     }
     
     @IBOutlet weak var bottomDeleteButton: UIButton!
@@ -393,15 +395,24 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("cellfor")
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralTableviewCell") as! GeneralTableCell
         cell.changedTextDelegate = self
         cell.matchTextField.text = contents[indexPath.row]
         cell.indexPath = indexPath.row
-        cell.warningButton.isHidden = true
         
-        let summaryTitle = AccessibilityText(text: "Word to Find", isRaised: false)
+        cell.deleteButton.accessibilityLabel = "Delete"
+        cell.deleteButton.accessibilityHint = "Delete this word"
+        if !UIAccessibility.isVoiceOverRunning {
+            cell.deleteButton.isHidden = true
+        }
+        
+        cell.deletePressed = { [weak self] in
+            guard let self = self else { return }
+            self.deleteRow(row: indexPath.row)
+        }
+        
+        let summaryTitle = AccessibilityText(text: "Word", isRaised: false)
         cell.matchTextField.accessibilityHint = "A word that this list will contain"
         
         var details: AccessibilityText?
@@ -417,9 +428,7 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
             }
         } else {
             if shouldHighlightRows == true {
-                print("show highlight")
                 if emptyStringErrors.contains(indexPath.row) {
-                    print("emp string contains")
                     cell.overlayView.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
                     details = AccessibilityText(text: "Has error: must not be empty", isRaised: true)
                 } else {
@@ -432,7 +441,6 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     
                     if thisRowContains == true {
-                        print("thisRowContainsthisRowContains string contains")
                         cell.overlayView.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
                         details = AccessibilityText(text: "Has error: this is a duplicate", isRaised: true)
                     } else {
@@ -451,7 +459,6 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
         let accessibilityLabel: NSMutableAttributedString
         
         if let details = details {
-            print("yes details!!! \(details)")
             accessibilityLabel = UIAccessibility.makeAttributedText([summaryTitle, details])
         } else {
             accessibilityLabel = UIAccessibility.makeAttributedText([summaryTitle])
@@ -538,19 +545,14 @@ extension GeneralViewController {
             }
         }
         
-        print("oroginal conte: \(contents)")
-        print("To delete: \(toDeleteValues)")
         contents = contents
             .enumerated()
             .filter { !toDeleteValues.contains($0.offset) }
             .map { $0.element }
         
-        
-        print("LATER conte: \(contents)")
         tableView.performBatchUpdates({
             self.tableView.deleteRows(at: toDeleteArray, with: .automatic)
         }) { _ in
-            print("compl[eting!!!!")
             completion()
         }
     }

@@ -173,6 +173,7 @@ extension PhotosViewController {
     
     func showPermissionView() {
         
+        activityIndicator?.isHidden = true
         collectionView.alpha = 0
         
         let permissionView = PhotoPermissionView()
@@ -184,6 +185,7 @@ extension PhotosViewController {
         permissionView.allowed = { [weak self] fullAccess in
             guard let self = self else { return }
             
+            self.activityIndicator?.isHidden = false
             DispatchQueue.main.async {
                 UIView.animate(withDuration: 0.5, animations: {
                     permissionView.alpha = 0

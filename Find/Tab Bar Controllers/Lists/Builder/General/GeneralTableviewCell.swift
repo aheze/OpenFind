@@ -23,10 +23,11 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
     var overlayView = UIView()
     
     weak var changedTextDelegate: ChangedTextCell?
-    @IBOutlet weak var warningButton: UIButton!
     
-    @IBAction func warningPressed(_ sender: Any) {
-        matchTextField.becomeFirstResponder()
+    var deletePressed: (() -> Void)?
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBAction func deletePressed(_ sender: Any) {
+        deletePressed?()
     }
     
     @IBOutlet weak var matchTextField: UITextField!
@@ -72,11 +73,13 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
         
         super.awakeFromNib()
         matchTextField.delegate = self
-        let inputAView = UIView()
-        inputAView.frame = CGRect(x: 0, y: 0, width: contentView.frame.width, height: 50)
-        inputAView.backgroundColor = UIColor(named: "Gray2")
+        
+        let toolbarInputView = UIView()
+        toolbarInputView.frame = CGRect(x: 0, y: 0, width: contentView.frame.width, height: 50)
+        toolbarInputView.backgroundColor = UIColor(named: "Gray2")
+        
         let doneButton = UIButton()
-        inputAView.addSubview(doneButton)
+        toolbarInputView.addSubview(doneButton)
         
         let done = NSLocalizedString("done", comment: "Multipurpose def=Done")
         
@@ -91,8 +94,18 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
             make.width.equalTo(60)
         }
         
+        doneButton.isAccessibilityElement = true
+        doneButton.accessibilityLabel = "Done"
+        doneButton.accessibilityHint = "Dismiss the keyboard"
+        
+        let frame = UIAccessibility.convertToScreenCoordinates(
+            doneButton.bounds.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6)),
+            in: doneButton
+        )
+        doneButton.accessibilityFrame = frame
+        
         doneButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        matchTextField.inputAccessoryView = inputAView
+        matchTextField.inputAccessoryView = toolbarInputView
     }
     
     @objc func buttonAction(sender: UIButton!) {

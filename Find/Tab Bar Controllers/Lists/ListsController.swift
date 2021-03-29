@@ -152,7 +152,6 @@ class ListsController: UIViewController, AdaptiveCollectionLayoutDelegate, UIAda
         
         let listsViewedBefore = defaults.bool(forKey: "listsViewedBefore")
         
-        
         if listsViewedBefore == false {
             let quickTourView = TutorialHeader()
             quickTourView.colorView.backgroundColor = UIColor(named: "TabIconListsMain")

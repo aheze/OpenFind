@@ -46,6 +46,7 @@
 		3C3232E826115C7900A33192 /* PostAnnouncement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232E726115C7900A33192 /* PostAnnouncement.swift */; };
 		3C3232EC26115CA900A33192 /* ListsController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232EB26115CA900A33192 /* ListsController+CollectionView.swift */; };
 		3C3232F0261164A900A33192 /* ColorsVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232EF261164A900A33192 /* ColorsVC+Accessibility.swift */; };
+		3C3232F426118B4000A33192 /* ListBuilderVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232F326118B4000A33192 /* ListBuilderVC+Accessibility.swift */; };
 		3C369709259EEFE500A6544A /* PhotosMigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C369708259EEFE500A6544A /* PhotosMigrationView.swift */; };
 		3C389ED3259BA0D5007DB33B /* ListBuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */; };
 		3C3B6C7625D30F3D0082B86C /* CachingFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3B6C7525D30F3D0082B86C /* CachingFinder.swift */; };
@@ -418,6 +419,7 @@
 		3C3232E726115C7900A33192 /* PostAnnouncement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAnnouncement.swift; sourceTree = "<group>"; };
 		3C3232EB26115CA900A33192 /* ListsController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+CollectionView.swift"; sourceTree = "<group>"; };
 		3C3232EF261164A900A33192 /* ColorsVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorsVC+Accessibility.swift"; sourceTree = "<group>"; };
+		3C3232F326118B4000A33192 /* ListBuilderVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListBuilderVC+Accessibility.swift"; sourceTree = "<group>"; };
 		3C369708259EEFE500A6544A /* PhotosMigrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationView.swift; sourceTree = "<group>"; };
 		3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBuilderViewController.swift; sourceTree = "<group>"; };
 		3C3B6C7525D30F3D0082B86C /* CachingFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingFinder.swift; sourceTree = "<group>"; };
@@ -793,6 +795,7 @@
 			isa = PBXGroup;
 			children = (
 				3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */,
+				3C3232F326118B4000A33192 /* ListBuilderVC+Accessibility.swift */,
 				3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */,
 				490BC3F723FA5FBF004D1433 /* General */,
 				492EB4F323F50C49007142CA /* Symbols */,
@@ -2162,6 +2165,7 @@
 				49301BF32402460000B4780B /* FancyQuotes.swift in Sources */,
 				3C5DFFA525D8A9E200250D34 /* ShareView.swift in Sources */,
 				49F7B1582353FE7E0099FA62 /* Component.swift in Sources */,
+				3C3232F426118B4000A33192 /* ListBuilderVC+Accessibility.swift in Sources */,
 				3C4C96B225B69038009FDE8D /* InfoView.swift in Sources */,
 				4953F3C0241713A100690E53 /* HistoryFindCell.swift in Sources */,
 				3CAC4DA725BF52CF00CC7948 /* LTMorphingLabel+Burn.swift in Sources */,

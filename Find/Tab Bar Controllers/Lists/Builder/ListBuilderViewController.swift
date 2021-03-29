@@ -157,8 +157,9 @@ class ListBuilderViewController: UIViewController {
                 self?.animateCloseQuickTour(quickTourView: quickTourView)
             }
         }
-        
+
         setupPagingVC()
+        setupAccessibility()
     }
     
     
@@ -183,6 +184,7 @@ extension ListBuilderViewController: GetIconInfo, GetColorInfo {
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
         let newImage = UIImage(systemName: iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(hexString: iconColorName), renderingMode: .alwaysOriginal)
         topImageView.image = newImage
+        updateTopImageLabel()
     }
     
     func returnNewColor(colorName: String) {
@@ -190,9 +192,8 @@ extension ListBuilderViewController: GetIconInfo, GetColorInfo {
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 55, weight: .semibold)
         let newImage = UIImage(systemName: iconImageName, withConfiguration: symbolConfiguration)?.withTintColor(UIColor(hexString: iconColorName), renderingMode: .alwaysOriginal)
         topImageView.image = newImage
+        updateTopImageLabel()
     }
-    
-    
     
     func setupPagingVC() {
         

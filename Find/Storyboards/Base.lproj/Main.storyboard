@@ -1715,14 +1715,14 @@
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GeneralTableviewCell" id="zEc-Iy-J2V" customClass="GeneralTableCell" customModule="Find" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="396" height="30.333333969116211"/>
+                                                        <rect key="frame" x="0.0" y="28" width="396" height="27.333333969116211"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zEc-Iy-J2V" id="NSc-Ut-5bE">
-                                                            <rect key="frame" x="0.0" y="0.0" width="396" height="30.333333969116211"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="396" height="27.333333969116211"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Word" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lMV-xk-qWw" customClass="TextField" customModule="Find" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="346" height="30.333333333333332"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="346" height="27.333333333333332"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                     <userDefinedRuntimeAttributes>
@@ -1732,12 +1732,16 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </textField>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tn0-sN-xRW">
-                                                                    <rect key="frame" x="346" y="0.0" width="50" height="30.333333333333332"/>
+                                                                    <rect key="frame" x="346" y="0.0" width="50" height="27.333333333333332"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="50" id="0TZ-3M-TXt"/>
                                                                     </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                                    <state key="normal" image="trash" catalog="system">
+                                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17" scale="medium" weight="medium"/>
+                                                                    </state>
                                                                     <connections>
-                                                                        <action selector="warningPressed:" destination="zEc-Iy-J2V" eventType="touchUpInside" id="CHp-UT-5fC"/>
+                                                                        <action selector="deletePressed:" destination="zEc-Iy-J2V" eventType="touchUpInside" id="vNQ-N9-Yk9"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -1752,8 +1756,8 @@
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                         <connections>
+                                                            <outlet property="deleteButton" destination="tn0-sN-xRW" id="LZo-Lp-fSM"/>
                                                             <outlet property="matchTextField" destination="lMV-xk-qWw" id="lAH-EQ-6fm"/>
-                                                            <outlet property="warningButton" destination="tn0-sN-xRW" id="8Ih-Mi-U7W"/>
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
@@ -1920,6 +1924,7 @@
                         <outlet property="titlesDoneButton" destination="lME-Z5-Sdx" id="1Fj-es-6iv"/>
                         <outlet property="titlesInputView" destination="gze-oT-3YD" id="PXm-Rr-Ah4"/>
                         <outlet property="topView" destination="cip-n1-kC2" id="ycp-BJ-dE7"/>
+                        <outlet property="wordsHeaderLabel" destination="vZ6-oK-Otx" id="cgg-80-YyR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rrM-Al-afG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

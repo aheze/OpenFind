@@ -88,8 +88,14 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
         
         let colorDescription = colorArray[indexPath.item].getDescription()
+        
+        let colorString = AccessibilityText(text: "\(colorDescription.0)\n", isRaised: false)
+        let pitchTitle = AccessibilityText(text: "Pitch", isRaised: true)
+        let pitchString = AccessibilityText(text: "\(colorDescription.1)", isRaised: false, customPitch: colorDescription.1)
+        let accessibilityLabel = UIAccessibility.makeAttributedText([colorString, pitchTitle, pitchString])
+        
         cell.contentView.isAccessibilityElement = true
-        cell.contentView.accessibilityLabel = colorDescription
+        cell.contentView.accessibilityAttributedLabel = accessibilityLabel
         return cell
     }
     func collectionView(_ collectionView: UICollectionView,
