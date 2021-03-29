@@ -212,14 +212,23 @@ extension ListToolBar {
         collectionView.performBatchUpdates({
             self.collectionView.insertItems(at: [newIndexPath])
         }) { _ in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-                UIAccessibility.post(notification: .announcement, argument: "Moved back to toolbar")
-                
+            
+            if self.location == .inCamera {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-                    if let cell = self.collectionView.cellForItem(at: newIndexPath) {
-                        UIAccessibility.post(notification: .layoutChanged, argument: cell.contentView)
+                    UIAccessibility.post(notification: .announcement, argument: "Moved back to toolbar")
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                        if let cell = self.collectionView.cellForItem(at: newIndexPath) {
+                            UIAccessibility.post(notification: .layoutChanged, argument: cell.contentView)
+                        }
                     }
                 }
+            } else {
+                //                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                if let cell = self.collectionView.cellForItem(at: newIndexPath) {
+                    UIAccessibility.post(notification: .layoutChanged, argument: cell.contentView)
+                }
+                //                }
             }
         }
     }

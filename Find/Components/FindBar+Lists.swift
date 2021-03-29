@@ -18,7 +18,6 @@ extension FindBar {
             
             
             for (index, realList) in listCategories.enumerated() {
-                print("list: \(realList.name) --")
                 
                 var listIsSelected = false
                 
@@ -39,7 +38,6 @@ extension FindBar {
                 
                 for selectedList in selectedLists {
                     if selectedList.dateCreated == realList.dateCreated {
-                        print("list is selected")
                         listIsSelected = true
                         newSelectedLists.append(editableList)
                         break

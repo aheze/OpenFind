@@ -161,6 +161,8 @@ class FindBar: UIView, UITextFieldDelegate {
         searchField.keyboardAppearance = .default
         searchField.backgroundColor = UIColor.white.withAlphaComponent(0.3)
         searchField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("typeHereToFind", comment: ""), attributes: [NSAttributedString.Key.foregroundColor : UIColor.white.withAlphaComponent(0.75)])
+        
+        setupAccessibility()
      
     }
 }
@@ -225,6 +227,32 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
         cell.imageView.image = newImage
         cell.layer.cornerRadius = 6
         cell.clipsToBounds = true
+        
+        cell.contentView.isAccessibilityElement = true
+        cell.contentView.accessibilityLabel = "Selected list"
+        
+        cell.contentView.accessibilityHint = "Double-tap to remove the list. Moves it back to the toolbar."
+        
+        let colorDescription = list.iconColorName.getDescription()
+        
+        let listName = AccessibilityText(text: list.name, isRaised: false)
+        let iconTitle = AccessibilityText(text: "\nIcon", isRaised: true)
+        let iconString = AccessibilityText(text: list.iconImageName, isRaised: false)
+        let colorTitle = AccessibilityText(text: "\nColor", isRaised: true)
+        let colorString = AccessibilityText(text: "\(colorDescription.0)", isRaised: false)
+        let pitchTitle = AccessibilityText(text: "\nPitch", isRaised: true)
+        let pitchString = AccessibilityText(text: "\(colorDescription.1)", isRaised: false, customPitch: colorDescription.1)
+        
+        let accessibilityLabel = UIAccessibility.makeAttributedText(
+            [
+                listName,
+                iconTitle, iconString,
+                colorTitle, colorString,
+                pitchTitle, pitchString,
+            ]
+        )
+        
+        cell.contentView.accessibilityAttributedValue = accessibilityLabel
         
         return cell
     }
@@ -356,7 +384,17 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
     func addList(list: EditableFindList) {
         selectedLists.insert(list, at: 0)
         let indP = IndexPath(item: 0, section: 0)
-        collectionView.insertItems(at: [indP])
+        
+//        collectionView.insertItems(at: [indP])
+        collectionView.performBatchUpdates({
+            self.collectionView.insertItems(at: [indP])
+        }, completion: { _ in
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                if let cell = self.collectionView.cellForItem(at: indP) {
+                    UIAccessibility.post(notification: .layoutChanged, argument: cell.contentView)
+                }
+//            }
+        })
         switch selectedLists.count {
         case 1:
             searchLeftC.constant = 35 + 3
@@ -382,7 +420,7 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
     }
     
     func startedEditing(start: Bool) {
-        print("started editing")
+    
     }
     func loadListsRealm() {
         listCategories = realm.objects(FindList.self)

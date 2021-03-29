@@ -27,7 +27,7 @@ extension PhotoFindViewController: UITextViewDelegate {
 }
 
 extension PhotoFindViewController {
-    func changePromptToStarting(startingFilter: PhotoFilter, howManyPhotos: Int, isAllPhotos: Bool) {
+    func changePromptToStarting(startingFilter: PhotoFilter, howManyPhotos: Int, isAllPhotos: Bool, announce: Bool = true) {
         continueButtonVisible = false
          
         let findingFrom = NSLocalizedString("findingFrom", comment: "")
@@ -84,22 +84,28 @@ extension PhotoFindViewController {
         }
         
         var attributedText = AttributedString()
+        
+        print("changed to startin!!! announce? \(announce)")
         if let overriddenLastPart = overriddenLastPart {
             attributedText = findingFrom.set(styles: [boldStyle, grayStyle]) + filter.set(styles: [boldStyle, colorStyle]) + overriddenLastPart.set(styles: [boldStyle, grayStyle])
             
             promptView.accessibilityValue = findingFrom + filter + overriddenLastPart
             
-            let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
-            let summaryString = AccessibilityText(text: findingFrom + filter + overriddenLastPart, isRaised: false)
-            postAnnouncement([summaryTitle, summaryString])
+            if announce {
+                let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+                let summaryString = AccessibilityText(text: findingFrom + filter + overriddenLastPart, isRaised: false)
+                postAnnouncement([summaryTitle, summaryString])
+            }
         } else {
             attributedText = findingFrom.set(styles: [boldStyle, grayStyle]) + number.set(styles: [boldStyle, grayStyle]) + filter.set(styles: [boldStyle, colorStyle]) + photos.set(styles: [boldStyle, grayStyle])
             
             promptView.accessibilityValue = findingFrom + number + filter + photos
             
-            let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
-            let summaryString = AccessibilityText(text: findingFrom + number + filter + photos, isRaised: false)
-            postAnnouncement([summaryTitle, summaryString])
+            if announce {
+                let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+                let summaryString = AccessibilityText(text: findingFrom + number + filter + photos, isRaised: false)
+                postAnnouncement([summaryTitle, summaryString])
+            }
         }
         
         promptTextView.attributedText = attributedText

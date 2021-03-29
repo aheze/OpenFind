@@ -168,6 +168,7 @@
 		3C643FCE26057884001E6FA1 /* CameraVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643FB026057884001E6FA1 /* CameraVC+Constraints.swift */; };
 		3C643FD22605788C001E6FA1 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C643FD12605788C001E6FA1 /* Colors.xcassets */; };
 		3C69186626123B6A00510C08 /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C69186526123B6A00510C08 /* DrawingView.swift */; };
+		3C69186C2612497900510C08 /* FindBar+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C69186B2612497900510C08 /* FindBar+Accessibility.swift */; };
 		3C6DA93F25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6DA93E25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift */; };
 		3C6EE6B025A2AB350078462A /* GeneralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EE6A825A2AB350078462A /* GeneralView.swift */; };
 		3C6EE6B125A2AB350078462A /* SettingsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EE6A925A2AB350078462A /* SettingsComponents.swift */; };
@@ -543,6 +544,7 @@
 		3C643FB026057884001E6FA1 /* CameraVC+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraVC+Constraints.swift"; sourceTree = "<group>"; };
 		3C643FD12605788C001E6FA1 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		3C69186526123B6A00510C08 /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
+		3C69186B2612497900510C08 /* FindBar+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FindBar+Accessibility.swift"; sourceTree = "<group>"; };
 		3C6DA93E25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Share.swift"; sourceTree = "<group>"; };
 		3C6EE6A825A2AB350078462A /* GeneralView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralView.swift; sourceTree = "<group>"; };
 		3C6EE6A925A2AB350078462A /* SettingsComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsComponents.swift; sourceTree = "<group>"; };
@@ -895,6 +897,7 @@
 				3C8F116D25AD5DA80091402B /* CustomButton.swift */,
 				495DAD3824A6B2E500D5F844 /* FindBar.xib */,
 				4953F3C324171EE200690E53 /* FindBar.swift */,
+				3C69186B2612497900510C08 /* FindBar+Accessibility.swift */,
 				3C42C44C25C33D6B004DC6E9 /* FindBar+Lists.swift */,
 			);
 			path = Components;
@@ -2157,6 +2160,7 @@
 				3C6DA93F25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift in Sources */,
 				4972B40E23F117C500843537 /* GeneralTableviewCell.swift in Sources */,
 				3C1317F625B3829900FCEB79 /* PhotoFindVC+Highlight.swift in Sources */,
+				3C69186C2612497900510C08 /* FindBar+Accessibility.swift in Sources */,
 				3CC230EC25C2105200AD04B6 /* EasyTipView.swift in Sources */,
 				495F39012433FF1600A17D93 /* LaunchViewController.swift in Sources */,
 				49A8EFAE237A5F2800328D47 /* SetupSearchBar.swift in Sources */,

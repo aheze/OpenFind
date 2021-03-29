@@ -31,8 +31,7 @@ extension PhotoFindViewController {
         self.findingFromAllPhotos = findingFromAllPhotos
         
         if changedFromBefore || !originalFindPhotoIdentifiers.containsSameElements(as: newFindPhotoIdentifiers) {
-            print("Changed!")
-            changePromptToStarting(startingFilter: currentFilter, howManyPhotos: findPhotos.count, isAllPhotos: findingFromAllPhotos)
+            changePromptToStarting(startingFilter: currentFilter, howManyPhotos: findPhotos.count, isAllPhotos: findingFromAllPhotos, announce: shouldAnnounceStatus)
             currentFastFindProcess = nil
             resultPhotos.removeAll()
             tableView.reloadData()

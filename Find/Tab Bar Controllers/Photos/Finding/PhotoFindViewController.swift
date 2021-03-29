@@ -17,6 +17,7 @@ class PhotoFindViewController: UIViewController {
     @IBOutlet var promptView: PromptView!
     @IBOutlet weak var promptTextView: UITextView!
     var continueButtonVisible = false /// if true, set accessibility activate to true
+    var shouldAnnounceStatus = false
     
     // MARK: Finding
     var matchToColors = [String: [CGColor]]()

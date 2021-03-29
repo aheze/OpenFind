@@ -15,9 +15,10 @@ extension PhotoFindViewController: FindBarDelegate {
     func returnTerms(matchToColorsR: [String : [CGColor]]) {
         self.matchToColors = matchToColorsR
         if matchToColorsR.keys.count >= 1 {
+            shouldAnnounceStatus = true /// set true now, so later on will announce prompt
             findFromCache()
         } else { /// no text entered
-            changePromptToStarting(startingFilter: currentFilter, howManyPhotos: findPhotos.count, isAllPhotos: findingFromAllPhotos)
+            changePromptToStarting(startingFilter: currentFilter, howManyPhotos: findPhotos.count, isAllPhotos: findingFromAllPhotos, announce: shouldAnnounceStatus)
             resultPhotos.removeAll()
             tableView.reloadData()
             currentFastFindProcess = nil
