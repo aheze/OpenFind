@@ -65,8 +65,8 @@ extension CameraViewController {
         cache.accessibilityTraits = [.button]
         
         searchBackgroundView.isAccessibilityElement = true
-        searchBackgroundView.accessibilityLabel = "Search container"
-        searchBackgroundView.accessibilityHint = "Contains the search bar and selected lists"
+        searchBackgroundView.accessibilityLabel = "Search controls"
+        searchBackgroundView.accessibilityHint = "Contains the search bar and all selected lists"
         
         if UIAccessibility.isVoiceOverRunning {
             statsWidthC.constant = 50
@@ -103,6 +103,10 @@ extension CameraViewController {
         }
         
         topContentView.accessibilityElements = [searchBackgroundView, newSearchTextField]
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            UIAccessibility.post(notification: .screenChanged, argument: self.newSearchTextField)
+        }
     }
     
     func setupDrawingView() {
