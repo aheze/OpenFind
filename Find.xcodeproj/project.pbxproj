@@ -169,6 +169,7 @@
 		3C643FD22605788C001E6FA1 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C643FD12605788C001E6FA1 /* Colors.xcassets */; };
 		3C69186626123B6A00510C08 /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C69186526123B6A00510C08 /* DrawingView.swift */; };
 		3C69186C2612497900510C08 /* FindBar+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C69186B2612497900510C08 /* FindBar+Accessibility.swift */; };
+		3C69187026125F6B00510C08 /* HighlightColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C69186F26125F6A00510C08 /* HighlightColor.swift */; };
 		3C6DA93F25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6DA93E25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift */; };
 		3C6EE6B025A2AB350078462A /* GeneralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EE6A825A2AB350078462A /* GeneralView.swift */; };
 		3C6EE6B125A2AB350078462A /* SettingsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EE6A925A2AB350078462A /* SettingsComponents.swift */; };
@@ -545,6 +546,7 @@
 		3C643FD12605788C001E6FA1 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		3C69186526123B6A00510C08 /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 		3C69186B2612497900510C08 /* FindBar+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FindBar+Accessibility.swift"; sourceTree = "<group>"; };
+		3C69186F26125F6A00510C08 /* HighlightColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightColor.swift; sourceTree = "<group>"; };
 		3C6DA93E25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Share.swift"; sourceTree = "<group>"; };
 		3C6EE6A825A2AB350078462A /* GeneralView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralView.swift; sourceTree = "<group>"; };
 		3C6EE6A925A2AB350078462A /* SettingsComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsComponents.swift; sourceTree = "<group>"; };
@@ -1588,6 +1590,7 @@
 				49563504243694BB0001E8C6 /* PaperOnboarding */,
 				49585DCD23ED0C9F003AB768 /* SEK */,
 				4911508A235D1A3E00EC0C04 /* Utilities.swift */,
+				3C69186F26125F6A00510C08 /* HighlightColor.swift */,
 				3C3232E726115C7900A33192 /* PostAnnouncement.swift */,
 				492A2D2524A4046200F9C4A1 /* BartyCrouch.swift */,
 				495F7DA624CBACE90053DE50 /* Info.plist */,
@@ -2085,6 +2088,7 @@
 				49D985BA2421D97B005F4E92 /* FindModel.swift in Sources */,
 				3C56C5AE25AA42760006A667 /* SlideViewController.swift in Sources */,
 				3CB6843525A013D800AE0AD6 /* ImageCell.swift in Sources */,
+				3C69187026125F6B00510C08 /* HighlightColor.swift in Sources */,
 				3C1AB1A6261004B7009B47C0 /* Sound.swift in Sources */,
 				3C5DD06E26104C9300434317 /* PhotoFindVC+Accessibility.swift in Sources */,
 				3CF45F5C260EF1FC00FE949E /* Dates.swift in Sources */,

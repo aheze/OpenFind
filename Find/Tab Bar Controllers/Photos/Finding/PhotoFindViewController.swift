@@ -20,7 +20,7 @@ class PhotoFindViewController: UIViewController {
     var shouldAnnounceStatus = false
     
     // MARK: Finding
-    var matchToColors = [String: [CGColor]]()
+    var matchToColors = [String: [HighlightColor]]()
     var currentFilter = PhotoFilter.all
     var findingFromAllPhotos = false /// if finding from all photos in filter
     

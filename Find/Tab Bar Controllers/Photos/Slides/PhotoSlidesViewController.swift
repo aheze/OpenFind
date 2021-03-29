@@ -44,7 +44,7 @@ class PhotoSlidesViewController: UIViewController {
     var findPressed = false
     var cameFromFind = false
     var resultPhotos = [ResultPhoto]() /// photos from Finding
-    var matchToColors = [String: [CGColor]]()
+    var matchToColors = [String: [HighlightColor]]()
     
     // MARK: Find from cache
     var numberCurrentlyFindingFromCache = 0 /// how many cache findings are currently going on

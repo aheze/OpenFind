@@ -207,28 +207,25 @@ extension CameraViewController {
             
             let newView: UIView
             
-            guard let colors = self.matchToColors[component.text] else { return }
+            guard let componentColors = self.matchToColors[component.text] else { return }
+            let gradientColors = componentColors.map { $0.cgColor }
+            let hexStrings = componentColors.map { $0.hexString }
             
-            
-            if colors.count > 1 {
+            if componentColors.count > 1 {
                 let gradientView = GradientBorderView()
-                if let gradientColors = self.matchToColors[component.text] {
-                    gradientView.colors = gradientColors
-                    gradientView.cornerRadius = cornerRadius
-                    
-                    if let firstColor = gradientColors.first {
-                        gradientView.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3)
-                    }
+                
+                gradientView.colors = gradientColors
+                gradientView.cornerRadius = cornerRadius
+                
+                if let firstColor = gradientColors.first {
+                    gradientView.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3)
                 }
+                
                 newView = gradientView
             } else {
                 newView = UIView()
-                if let gradientColors = self.matchToColors[component.text] {
-                    if let firstColor = gradientColors.first {
-                        newView.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3)
-                    }
-                }
-                if let firstColor = colors.first {
+                
+                if let firstColor = gradientColors.first {
                     newView.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3)
                     newView.layer.borderColor = firstColor
                     newView.layer.borderWidth = 3

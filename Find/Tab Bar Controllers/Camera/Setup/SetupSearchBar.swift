@@ -496,16 +496,19 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         for list in selectedLists {
             for match in list.contents {
                 let matchColor = UIColor(hexString: (list.iconColorName)).cgColor
+                let highlightColor = HighlightColor(cgColor: matchColor, hexString: list.iconColorName)
+                
+                
                 if !duplicatedStrings.contains(match.lowercased()) && !cameAcrossSearchFieldText.contains(match.lowercased()) {
-                    matchToColors[match.lowercased()] = [matchColor]
+                    matchToColors[match.lowercased()] = [highlightColor]
                     
                 } else {
                     if matchToColors[match.lowercased()] == nil {
                             print("NOT CONT")
-                            matchToColors[match.lowercased()] = [matchColor]
+                            matchToColors[match.lowercased()] = [highlightColor]
                     } else {
-                        if !(matchToColors[match.lowercased()]?.contains(matchColor))! {
-                            matchToColors[match.lowercased(), default: [CGColor]()].append(matchColor)
+                        if !(matchToColors[match.lowercased()]?.contains(highlightColor))! {
+                            matchToColors[match.lowercased(), default: [HighlightColor]()].append(highlightColor)
                             print("APPEND")
                         }
                     }
@@ -519,12 +522,21 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             }
         }
         arrayOfSearch = newSearch
+        
         for match in arrayOfSearch {
-            matchToColors[match] = [UIColor(hexString: UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF").cgColor]
+            let colorString = UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF"
+            let cgColor = UIColor(hexString: colorString).cgColor
+            let highlightColor = HighlightColor(cgColor: cgColor, hexString: colorString)
+            
+            matchToColors[match] = [highlightColor]
         }
+        
         for match in cameAcrossSearchFieldText {
-            let cgColor = UIColor(hexString: UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF").cgColor
-            matchToColors[match, default: [CGColor]()].append(cgColor)
+            let colorString = UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF"
+            let cgColor = UIColor(hexString: colorString).cgColor
+            let highlightColor = HighlightColor(cgColor: cgColor, hexString: colorString)
+            
+            matchToColors[match, default: [HighlightColor]()].append(highlightColor)
         }
     }
     func convertToUIImage(buffer: CVPixelBuffer) -> UIImage? {

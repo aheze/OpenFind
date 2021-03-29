@@ -12,7 +12,7 @@ extension PhotoFindViewController: FindBarDelegate {
     func pause(pause: Bool) {
     }
     
-    func returnTerms(matchToColorsR: [String : [CGColor]]) {
+    func returnTerms(matchToColorsR: [String : [HighlightColor]]) {
         self.matchToColors = matchToColorsR
         if matchToColorsR.keys.count >= 1 {
             shouldAnnounceStatus = true /// set true now, so later on will announce prompt

@@ -103,38 +103,35 @@ extension PhotoFindViewController: UITableViewDelegate, UITableViewDataSource {
                 let newHighlight = addHighlight(text: range.text, rect: rect)
                 cell.drawingView.addSubview(newHighlight)
                 
-                attributedVoiceOverDescription.addAttributes(
-                    [.accessibilitySpeechPitch: 1.2],
-                    range:
-                        NSRange(
-                            location:
-                                range.descriptionRange.first ?? 0,
-                            length: (range.descriptionRange.last ?? 0) - (range.descriptionRange.first ?? 0)
-                        )
-                )
+                if
+                    let colors = matchToColors[range.text],
+                    let firstColor = colors.first
+                {
+                    attributedVoiceOverDescription.addAttributes(
+                        [.accessibilitySpeechPitch: firstColor.hexString.getDescription().1],
+                        range:
+                            NSRange(
+                                location:
+                                    range.descriptionRange.first ?? 0,
+                                length: (range.descriptionRange.last ?? 0) - (range.descriptionRange.first ?? 0)
+                            )
+                    )
+                }
             }
-            
         }
         
         cell.textView.isAccessibilityElement = true
-        cell.textView.accessibilityAttributedLabel = attributedVoiceOverDescription
         cell.textView.accessibilityTraits = .staticText
         
         let uninterruptedText = findModel.descriptionText.replacingOccurrences(of: "...", with: " ")
+
+        let excerptTitle = AccessibilityText(text: "Excerpt:", isRaised: true)
+        let excerptString = AccessibilityText(text: uninterruptedText, isRaised: false)
+        let pitchesTitle = AccessibilityText(text: "Emphasizing pitches:", isRaised: true)
         
-//        let pitch = [NSAttributedString.Key.accessibilitySpeechPitch: 1.2]
-//        let string = NSMutableAttributedString()
-//
-//        let raisedString = NSMutableAttributedString(string: "Sentences:", attributes: pitch)
-//        string.append(raisedString)
-//        let normalString = NSAttributedString(string: uninterruptedText)
-//        string.append(normalString)
-        
-        let sentencesTitle = AccessibilityText(text: "Sentences:", isRaised: true)
-        let sentencesString = AccessibilityText(text: uninterruptedText, isRaised: false)
-        
-        let attributedString = UIAccessibility.makeAttributedText([sentencesTitle, sentencesString])
-        cell.textView.accessibilityAttributedValue = attributedString
+        let attributedString = UIAccessibility.makeAttributedText([excerptTitle, excerptString, pitchesTitle])
+        cell.textView.accessibilityAttributedLabel = attributedString + attributedVoiceOverDescription
+        cell.textView.accessibilityValue = ""
         
         return cell
     }

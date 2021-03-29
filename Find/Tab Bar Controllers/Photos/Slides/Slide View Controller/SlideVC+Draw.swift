@@ -69,8 +69,10 @@ extension SlideViewController {
             let gradient = CAGradientLayer()
             gradient.frame = layer.bounds
             if let gradientColors = self.matchToColors[component.text] {
-                gradient.colors = gradientColors
-                if let firstColor = gradientColors.first {
+                let colors = gradientColors.map { $0.cgColor }
+                
+                gradient.colors = colors
+                if let firstColor = colors.first {
                     layer.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3).cgColor
                 }
                 
@@ -85,8 +87,8 @@ extension SlideViewController {
             layer.addSublayer(gradient)
         } else {
             if let firstColor = colors.first {
-                rimLayer.backgroundColor = firstColor.copy(alpha: 0.3)
-                rimLayer.borderColor = firstColor
+                rimLayer.backgroundColor = firstColor.cgColor.copy(alpha: 0.3)
+                rimLayer.borderColor = firstColor.cgColor
                 layer.addSublayer(rimLayer)
             }
         }

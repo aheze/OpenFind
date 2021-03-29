@@ -25,7 +25,7 @@ class SlideViewController: UIViewController {
     // MARK: Drawing
     @IBOutlet weak var drawingView: UIView!
     var highlights = [Component]()
-    var matchToColors = [String: [CGColor]]()
+    var matchToColors = [String: [HighlightColor]]()
     var drawnHighlights = [Component: UIView]() /// the highlights that have already been drawn
     
     override func viewDidLoad() {

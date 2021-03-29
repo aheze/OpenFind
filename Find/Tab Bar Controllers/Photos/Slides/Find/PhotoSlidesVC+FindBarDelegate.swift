@@ -12,7 +12,7 @@ extension PhotoSlidesViewController: FindBarDelegate {
     func pause(pause: Bool) {
     }
     
-    func returnTerms(matchToColorsR: [String : [CGColor]]) {
+    func returnTerms(matchToColorsR: [String : [HighlightColor]]) {
         
         currentViewController.removeAllHighlights()
         matchToColors = matchToColorsR

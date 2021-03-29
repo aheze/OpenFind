@@ -17,7 +17,7 @@ extension PhotoFindViewController {
         newOrigRect.size.height += 2
         
         let newView = UIView(frame: CGRect(x: newOrigRect.origin.x, y: newOrigRect.origin.y, width: newOrigRect.size.width, height: newOrigRect.size.height))
-        guard let colors = matchToColors[text] else { print("NO COLORS!"); return newView}
+        guard let colors = matchToColors[text] else { print("NO COLORS!"); return newView }
         
         let layer = CAShapeLayer()
         layer.frame = CGRect(x: 0, y: 0, width: newOrigRect.size.width, height: newOrigRect.size.height)
@@ -43,7 +43,7 @@ extension PhotoFindViewController {
             gradient.frame = layer.bounds
             gradient.colors = colors
             if let firstColor = colors.first {
-                layer.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3).cgColor
+                layer.backgroundColor = UIColor(cgColor: firstColor.cgColor).withAlphaComponent(0.3).cgColor
             }
             gradient.startPoint = CGPoint(x: 0, y: 0.5)
             gradient.endPoint = CGPoint(x: 1, y: 0.5)
@@ -54,7 +54,7 @@ extension PhotoFindViewController {
         } else {
             layer.addSublayer(newLayer)
             if let firstColor = colors.first {
-                newLayer.fillColor = firstColor.copy(alpha: 0.3)
+                newLayer.fillColor = firstColor.cgColor.copy(alpha: 0.3)
                 layer.addSublayer(newLayer)
             }
         }

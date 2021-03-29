@@ -289,7 +289,7 @@ class CameraViewController: UIViewController {
     /// scale + haptic feedback
     var canNotify = false
     
-    var matchToColors = [String: [CGColor]]()
+    var matchToColors = [String: [HighlightColor]]()
     
     var currentSearchFindList = EditableFindList()
     var currentListsSharedFindList = EditableFindList()
