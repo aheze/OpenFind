@@ -16,7 +16,6 @@ class Component: NSObject {
     var width: CGFloat = 0
     
     var text = ""
-//    var parentList: EditableFindList?
     var colors = ["00aeef"]
     var baseView: UIView?
 }

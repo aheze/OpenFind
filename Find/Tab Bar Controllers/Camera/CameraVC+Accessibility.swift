@@ -12,10 +12,8 @@ extension CameraViewController {
     
     func setupAccessibility() {
         
-        drawingView.isAccessibilityElement = true
-        drawingView.accessibilityLabel = "Viewfinder"
-        drawingView.accessibilityHint = "Highlights will be placed on detected results."
-
+        setupDrawingView()
+        
         newSearchTextField.accessibilityTraits = UIAccessibilityTraits(rawValue: 0x200000000000)
         newSearchTextField.accessibilityLabel = "Search bar"
         
@@ -105,6 +103,25 @@ extension CameraViewController {
         }
         
         topContentView.accessibilityElements = [searchBackgroundView, newSearchTextField]
+    }
+    
+    func setupDrawingView() {
+        drawingView.isAccessibilityElement = true
+        drawingView.accessibilityLabel = "Viewfinder"
+        drawingView.accessibilityHint = "Highlights will be placed on detected results."
+        drawingView.actions = [
+        
+            UIAccessibilityCustomAction(name: "Show transcript overlay") { _ in
+                print("overlay")
+                return true
+            },
+            
+            UIAccessibilityCustomAction(name: "Focus VoiceOver on shutter button") { _ in
+                UIAccessibility.post(notification: .layoutChanged, argument: self.cameraIconHolder)
+                return true
+            }
+        ]
+
     }
     
     func pausedAccessibility(paused: Bool) {

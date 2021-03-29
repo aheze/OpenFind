@@ -73,7 +73,6 @@ class PassthroughView: UIView {
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         
         if passthroughActive {
-            
             return subviews.contains(where: {
                 ($0 is ReceiveTouchView && $0.point(inside: self.convert(point, to: $0), with: event)) || (
                     !$0.isHidden
@@ -82,7 +81,6 @@ class PassthroughView: UIView {
                 )
             })
         } else {
-            print("Bounds: \(bounds), point: \(point), contains: \(self.bounds.contains(point))")
             return self.bounds.contains(point)
         }
     }

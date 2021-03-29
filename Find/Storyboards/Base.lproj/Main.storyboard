@@ -252,7 +252,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="20i-dz-JZp">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hag-e5-Sys">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hag-e5-Sys" customClass="DrawingView" customModule="Find" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
@@ -848,7 +848,7 @@
                         <outlet property="contentTopC" destination="Zxb-vo-H1N" id="WNj-ql-OcY"/>
                         <outlet property="controlsBlurBottomC" destination="5El-mq-7hs" id="MiL-7T-Eok"/>
                         <outlet property="controlsBlurView" destination="2JP-1T-MxT" id="zlF-Wp-gev"/>
-                        <outlet property="drawingView" destination="hag-e5-Sys" id="Njx-lY-a9B"/>
+                        <outlet property="drawingView" destination="hag-e5-Sys" id="xSH-LI-nAp"/>
                         <outlet property="flashBottomC" destination="V6B-p4-O4u" id="CHU-nL-VDK"/>
                         <outlet property="flashButton" destination="9tP-6a-TE7" id="A45-pu-NbJ"/>
                         <outlet property="flashDisableIcon" destination="BUI-dq-eb5" id="taZ-7u-JVk"/>

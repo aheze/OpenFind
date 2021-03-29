@@ -279,7 +279,7 @@ class CameraViewController: UIViewController {
     var motionYAsOfHighlightStart = Double(0) ///     Y
     var motionZAsOfHighlightStart = Double(0) ///     Z
     
-    @IBOutlet weak var drawingView: UIView!
+    @IBOutlet weak var drawingView: DrawingView!
     
     //MARK: FAST MODE
     var busyFastFinding = false
