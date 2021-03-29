@@ -20,10 +20,16 @@ extension CameraViewController {
         newSearchTextField.accessibilityLabel = "Search bar"
         
         listsLabel.accessibilityLabel = "Selected Lists"
+        listsLabel.accessibilityHint = "The current active lists"
+        listsLabel.accessibilityTraits = .header
         
-        arrowDownImage.isAccessibilityElement = true
-        arrowDownImage.accessibilityLabel = "Down arrow"
-        arrowDownImage.accessibilityTraits = .image
+        textLabel.accessibilityLabel = "Text"
+        textLabel.accessibilityHint = "Text to look for"
+        textLabel.accessibilityTraits = .header
+        
+        listsDownIndicatorView.isAccessibilityElement = true
+        listsDownIndicatorView.accessibilityLabel = "Down arrow icon. Double-tap the below lists to remove."
+        listsDownIndicatorView.accessibilityTraits = .staticText
         
         cameraIconHolder.isAccessibilityElement = true
         cameraIconHolder.accessibilityLabel = "Shutter, pause"
@@ -60,6 +66,10 @@ extension CameraViewController {
         cache.accessibilityHint = "Caches the current paused image. Produces much more accurate results."
         cache.accessibilityTraits = [.button]
         
+        searchBackgroundView.isAccessibilityElement = true
+        searchBackgroundView.accessibilityLabel = "Search container"
+        searchBackgroundView.accessibilityHint = "Contains the search bar and selected lists"
+        
         if UIAccessibility.isVoiceOverRunning {
             statsWidthC.constant = 50
             statsHeightC.constant = 50
@@ -90,8 +100,11 @@ extension CameraViewController {
             self.controlsView = controlsView
             
             messageView.isHidden = true
+        } else {
+            searchBackgroundView.isHidden = true
         }
         
+        topContentView.accessibilityElements = [searchBackgroundView, newSearchTextField]
     }
     
     func pausedAccessibility(paused: Bool) {

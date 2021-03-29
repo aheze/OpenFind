@@ -173,6 +173,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             if selectedLists.count == 0 {
                 updateListsLayout(toType: "removeListsNow")
             }
+            
             injectListDelegate?.addList(list: list)
             sortSearchTerms()
             if CameraState.isPaused {
@@ -258,24 +259,27 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         warningLabel.text = findPausedDuplicatesNotAllowed
         searchBarLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
+        let toolbar = ListToolBar()
         toolbar.location = .inCamera
         toolbar.pressedButton = self
         toolbar.selectedList = self
         toolbar.startedEditing = self
+        
         injectListDelegate = toolbar
         loadListsRealm()
+        
         toolbar.frame.size = CGSize(width: deviceSize.width, height: 80)
         toolbar.editableListCategories = editableListCategories
-        toolbar.alpha = 0
-        view.addSubview(toolbar)
-        toolbar.snp.makeConstraints { (make) in
-            make.height.equalTo(80)
-            toolbarWidthC = make.width.equalTo(0).offset(deviceSize.width).constraint
-            toolbarLeftC = make.left.equalTo(0).offset(0).constraint
-            toolbarTopC = make.top.equalTo(0).offset(deviceSize.height).constraint
-        }
+        
+        newSearchTextField.inputAccessoryView = toolbar
+        
+        toolbar.pressedButton = self
+        toolbar.selectedList = self
+        toolbar.startedEditing = self
         
         toolbar.forceDarkMode()
+        
+        self.toolbar = toolbar
     }
 
     func updateListsLayout(toType: String) {
@@ -291,7 +295,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 self.newSearchTextField.backgroundColor = UIColor(named: "OpaqueBlur")
                 self.view.layoutIfNeeded()
             }, completion: nil)
-            
+            topContentView.accessibilityElements = [searchBackgroundView, newSearchTextField]
         case "addListsNow":
             print("pressed a list so now text and lists")
             if searchShrunk == true {
@@ -315,7 +319,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 self.view.layoutIfNeeded()
             }, completion: nil)
             
-            
+            topContentView.accessibilityElements = [searchBackgroundView, listsLabel, listsDownIndicatorView, searchCollectionView, textLabel, newSearchTextField]
         case "removeListsNow":
             print("removed every list so now ONLY TEXT")
             searchTextTopC.constant = 8
@@ -331,6 +335,8 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 self.tapToRemoveLabel.alpha = 0
                 self.view.layoutIfNeeded()
             }, completion: nil)
+            
+            topContentView.accessibilityElements = [searchBackgroundView, newSearchTextField]
         case "prepareForDisplayNew":
             searchTextLeftC.constant = 8
             UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
@@ -371,6 +377,12 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 self.tapToRemoveLabel.alpha = 0
                 self.view.layoutIfNeeded()
             })
+            
+            if selectedLists.count >= 1 {
+                topContentView.accessibilityElements = [searchBackgroundView, searchCollectionView, newSearchTextField]
+            } else {
+                topContentView.accessibilityElements = [searchBackgroundView, newSearchTextField]
+            }
         default:
             print("other")
         }

@@ -34,6 +34,9 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var settingsHeightC: NSLayoutConstraint!
     var controlsView: UIView?
     
+    @IBOutlet weak var topContentView: UIView!
+    @IBOutlet weak var searchBackgroundView: UIView!
+    
     override func accessibilityPerformMagicTap() -> Bool {
         toggleShutter()
         return true
@@ -211,11 +214,7 @@ class CameraViewController: UIViewController {
     var editableListCategories = [EditableFindList]()
     
     // MARK: Keyboard
-    let toolbar = ListToolBar()
-    var toolbarWidthC: Constraint?
-    var toolbarLeftC: Constraint?
-    var toolbarTopC: Constraint?
-    var didFinishShouldUpdateHeight = false
+    var toolbar: ListToolBar?
     
     // MARK: Search Bar
     var allowSearch = true /// orientation disable
@@ -261,6 +260,7 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var searchContentViewHeight: NSLayoutConstraint!
     
     //MARK: Lists
+    @IBOutlet weak var listsDownIndicatorView: UIView!
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var listsLabel: UILabel!
     @IBOutlet weak var tapToRemoveLabel: UILabel!
@@ -434,10 +434,6 @@ class CameraViewController: UIViewController {
         
         contentTopC.constant = normalSearchFieldTopCConstant
         searchContentView.layoutIfNeeded()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(_KeyboardFrameChanged(_:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(_KeyboardHeightChanged(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        
         
         controlsBlurView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         controlsBlurView.effect = nil

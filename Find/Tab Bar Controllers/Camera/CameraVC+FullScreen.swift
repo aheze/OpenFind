@@ -31,6 +31,8 @@ extension CameraViewController {
             
             self.promptContainerView.alpha = fullScreen ? 0 : 1
             
+        } completion: { _ in
+            UIAccessibility.post(notification: .layoutChanged, argument: fullScreen ? self.showControlsButton : self.fullScreenView)
         }
         
         if !CameraState.isPaused {

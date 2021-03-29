@@ -204,7 +204,6 @@
 		3CA9334625BDF2BC00042C2F /* CameraVC+Pause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9334525BDF2BC00042C2F /* CameraVC+Pause.swift */; };
 		3CA9334D25BDF37800042C2F /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9334C25BDF37800042C2F /* CameraView.swift */; };
 		3CA9335125BDF42200042C2F /* CameraVC+CameraControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9335025BDF42200042C2F /* CameraVC+CameraControls.swift */; };
-		3CA9335425BDF44D00042C2F /* CameraVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9335325BDF44D00042C2F /* CameraVC+Keyboard.swift */; };
 		3CA9335725BDF4B500042C2F /* CameraVC+ButtonSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9335625BDF4B500042C2F /* CameraVC+ButtonSetup.swift */; };
 		3CA9336A25BE0BD600042C2F /* CameraVC+FindWhenPaused.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9336925BE0BD600042C2F /* CameraVC+FindWhenPaused.swift */; };
 		3CA9336D25BE727D00042C2F /* CameraVC+SaveToPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9336C25BE727D00042C2F /* CameraVC+SaveToPhotos.swift */; };
@@ -585,7 +584,6 @@
 		3CA9334525BDF2BC00042C2F /* CameraVC+Pause.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Pause.swift"; sourceTree = "<group>"; };
 		3CA9334C25BDF37800042C2F /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		3CA9335025BDF42200042C2F /* CameraVC+CameraControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+CameraControls.swift"; sourceTree = "<group>"; };
-		3CA9335325BDF44D00042C2F /* CameraVC+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Keyboard.swift"; sourceTree = "<group>"; };
 		3CA9335625BDF4B500042C2F /* CameraVC+ButtonSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+ButtonSetup.swift"; sourceTree = "<group>"; };
 		3CA9336925BE0BD600042C2F /* CameraVC+FindWhenPaused.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+FindWhenPaused.swift"; sourceTree = "<group>"; };
 		3CA9336C25BE727D00042C2F /* CameraVC+SaveToPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+SaveToPhotos.swift"; sourceTree = "<group>"; };
@@ -1424,7 +1422,6 @@
 				495F38FD243302D500A17D93 /* StatsViewController.swift */,
 				49563500243591650001E8C6 /* RateTheApp.swift */,
 				495DAD4624A81F4600D5F844 /* WhatsNewConfiguration.swift */,
-				3CA9335325BDF44D00042C2F /* CameraVC+Keyboard.swift */,
 			);
 			path = Setup;
 			sourceTree = "<group>";
@@ -2218,7 +2215,6 @@
 				3CFF312C25AA6F8C00D3C56D /* PhotosVC+CollectionCoordinates.swift in Sources */,
 				3C56C59925A943F40006A667 /* PhotosVC+ZoomDelegate.swift in Sources */,
 				3CA9337525BF2EC900042C2F /* CameraVC+Cache.swift in Sources */,
-				3CA9335425BDF44D00042C2F /* CameraVC+Keyboard.swift in Sources */,
 				49D985B4241B374B005F4E92 /* CachingViewController.swift in Sources */,
 				3CAC4DAE25BF52CF00CC7948 /* LTCharacterLimbo.swift in Sources */,
 				3C1317F925B3830100FCEB79 /* PhotoFindVC+FindFromCache.swift in Sources */,
