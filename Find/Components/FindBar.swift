@@ -119,6 +119,13 @@ class FindBar: UIView, UITextFieldDelegate {
         super.init(frame: .zero)
         setup()
     }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        print("Layout!!!! \(contentView.bounds)")
+        let availableWidth = contentView.bounds.width - (35 + 35 + 35 + 9)
+        collViewRightC.constant = availableWidth
+    }
+    
     private func setup() {
         
         clipsToBounds = true
@@ -175,8 +182,6 @@ class FindBar: UIView, UITextFieldDelegate {
             searchLeftC.constant = 35 + 35 + 35 + 9
         default:
             searchLeftC.constant = 35 + 35 + 35 + 12
-            let availableWidth = contentView.bounds.width - (35 + 35 + 35 + 9)
-            collViewRightC.constant = availableWidth
         }
     }
 }

@@ -546,9 +546,17 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         let shutterArea = CGRect(x: containerView.bounds.width / 2 - 50, y: containerView.bounds.height - 140, width: 100, height: 140)
         let photoFilterArea = photos.navController.viewController.segmentedSlider?.frame ?? CGRect(x: 0, y: 0, width: 0, height: 0)
+        
         if shutterArea.contains(location) || photoFilterArea.contains(location) {
             return false
+        } else if let findCollectionView = photos.photoFindViewController.findBar?.collectionView {
+            let photoFindBarListsCollectionViewLocation = touch.location(in: findCollectionView)
+            
+            if findCollectionView.bounds.contains(photoFindBarListsCollectionViewLocation) {
+                return false
+            }
         }
+        
         return true
     }
     func setupFilePath() {
