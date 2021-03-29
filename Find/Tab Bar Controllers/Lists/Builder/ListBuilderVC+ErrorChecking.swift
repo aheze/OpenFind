@@ -75,6 +75,13 @@ extension ListBuilderViewController {
             showAnAlert = true
             SwiftEntryKitTemplates().displaySEK(message: matchesPlural, backgroundColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), location: .top, duration: CGFloat(0.8))
             
+            let errorTitle = AccessibilityText(text: "Error.", isRaised: true)
+            let errorString = AccessibilityText(text: matchesPlural, isRaised: false)
+            let errorHint = AccessibilityText(text: "\nWords with errors are highlighted.", isRaised: false)
+            
+            
+            UIAccessibility.postAnnouncement([errorTitle, errorString, errorHint], delay: 1)
+
             generalVC.highlightRowsOnError(type: "EmptyMatch")
         } else if generalVC.stringToIndexesError.count >= 1 { ///No empty errors. Only duplicates.
             var titleMessage = ""
@@ -167,45 +174,75 @@ extension ListBuilderViewController {
     }
     
     func showButtonBarMessage(attributes: EKAttributes, titleMessage: String, desc: String, leftButton: String, yesButton: String, image: String = "WhiteWarningShield", specialAction: String = "None") {
-        let displayMode = EKAttributes.DisplayMode.inferred
         
-        let title = EKProperty.LabelContent(text: titleMessage, style: .init(font: UIFont.systemFont(ofSize: 20, weight: .bold), color: .white, displayMode: displayMode))
-        let description = EKProperty.LabelContent(text: desc, style: .init(font: UIFont.systemFont(ofSize: 14, weight: .regular), color: .white,displayMode: displayMode))
-        let image = EKProperty.ImageContent( imageName: image, displayMode: displayMode, size: CGSize(width: 35, height: 35), contentMode: .scaleAspectFit)
-        let simpleMessage = EKSimpleMessage(image: image, title: title, description: description)
-        let buttonFont = UIFont.systemFont(ofSize: 20, weight: .bold)
-        let okButtonLabelStyle = EKProperty.LabelStyle( font: UIFont.systemFont(ofSize: 20, weight: .bold), color: .white, displayMode: displayMode)
-        let okButtonLabel = EKProperty.LabelContent( text: yesButton, style: okButtonLabelStyle)
-        let closeButtonLabelStyle = EKProperty.LabelStyle(font: buttonFont, color: EKColor(#colorLiteral(red: 1, green: 0.9675828359, blue: 0.9005832124, alpha: 1)), displayMode: displayMode)
-        let closeButtonLabel = EKProperty.LabelContent(text: leftButton, style: closeButtonLabelStyle)
-        
-        if specialAction == "None" {
-            let okButton = EKProperty.ButtonContent(
-                label: okButtonLabel,
-                backgroundColor: .clear,
-                highlightedBackgroundColor: SEKColor.Gray.a800.with(alpha: 0.05)
-            ) { [weak self] in
-                self?.generalVC.highlightRowsOnError(type: "Duplicate")
-                SwiftEntryKit.dismiss()
-            }
-            let closeButton = EKProperty.ButtonContent(
-                label: closeButtonLabel,
-                backgroundColor: .clear,
-                highlightedBackgroundColor: SEKColor.Gray.a800.with(alpha: 0.05),
-                displayMode: displayMode
-            ) { [weak self] in
-                self?.generalVC.fixDuplicates {
-                    SwiftEntryKit.dismiss()
-                    self?.returnCompletedList()
+        if UIAccessibility.isVoiceOverRunning {
+            let alert = UIAlertController(title: titleMessage, message: desc, preferredStyle: .alert)
+            
+            /// auto fix
+            alert.addAction(
+                UIAlertAction(title: leftButton, style: .default) { _ in
+                    self.generalVC.fixDuplicates {
+                        SwiftEntryKit.dismiss()
+                        self.returnCompletedList()
+                    }
                 }
-            }
-            let buttonsBarContent = EKProperty.ButtonBarContent( with: closeButton, okButton, separatorColor: SEKColor.Gray.light, buttonHeight: 60, displayMode: displayMode, expandAnimatedly: true )
-            let alertMessage = EKAlertMessage( simpleMessage: simpleMessage, imagePosition: .left, buttonBarContent: buttonsBarContent
             )
-            let contentView = EKAlertMessageView(with: alertMessage)
-            contentView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
-            contentView.layer.cornerRadius = 10
-            SwiftEntryKit.display(entry: contentView, using: attributes)
+            
+            /// fix myself
+            alert.addAction(
+                UIAlertAction(title: yesButton, style: .default) { _ in
+                    self.generalVC.highlightRowsOnError(type: "Duplicate")
+                    SwiftEntryKit.dismiss()
+                    
+                    UIAccessibility.postAnnouncement([AccessibilityText(text: "Words with errors are highlighted", isRaised: true, customPitch: 1)])
+                }
+            )
+            self.present(alert, animated: true, completion: nil)
+            
+        } else {
+            let displayMode = EKAttributes.DisplayMode.inferred
+            
+            let title = EKProperty.LabelContent(text: titleMessage, style: .init(font: UIFont.systemFont(ofSize: 20, weight: .bold), color: .white, displayMode: displayMode))
+            let description = EKProperty.LabelContent(text: desc, style: .init(font: UIFont.systemFont(ofSize: 14, weight: .regular), color: .white,displayMode: displayMode))
+            let image = EKProperty.ImageContent( imageName: image, displayMode: displayMode, size: CGSize(width: 35, height: 35), contentMode: .scaleAspectFit)
+            let simpleMessage = EKSimpleMessage(image: image, title: title, description: description)
+            let buttonFont = UIFont.systemFont(ofSize: 20, weight: .bold)
+            let okButtonLabelStyle = EKProperty.LabelStyle( font: UIFont.systemFont(ofSize: 20, weight: .bold), color: .white, displayMode: displayMode)
+            let okButtonLabel = EKProperty.LabelContent( text: yesButton, style: okButtonLabelStyle)
+            let closeButtonLabelStyle = EKProperty.LabelStyle(font: buttonFont, color: EKColor(#colorLiteral(red: 1, green: 0.9675828359, blue: 0.9005832124, alpha: 1)), displayMode: displayMode)
+            let closeButtonLabel = EKProperty.LabelContent(text: leftButton, style: closeButtonLabelStyle)
+            
+            if specialAction == "None" {
+                let okButton = EKProperty.ButtonContent(
+                    label: okButtonLabel,
+                    backgroundColor: .clear,
+                    highlightedBackgroundColor: SEKColor.Gray.a800.with(alpha: 0.05)
+                ) { [weak self] in
+                    self?.generalVC.highlightRowsOnError(type: "Duplicate")
+                    SwiftEntryKit.dismiss()
+                }
+                let closeButton = EKProperty.ButtonContent(
+                    label: closeButtonLabel,
+                    backgroundColor: .clear,
+                    highlightedBackgroundColor: SEKColor.Gray.a800.with(alpha: 0.05),
+                    displayMode: displayMode
+                ) { [weak self] in
+                    self?.generalVC.fixDuplicates {
+                        SwiftEntryKit.dismiss()
+                        self?.returnCompletedList()
+                    }
+                }
+                let buttonsBarContent = EKProperty.ButtonBarContent( with: closeButton, okButton, separatorColor: SEKColor.Gray.light, buttonHeight: 60, displayMode: displayMode, expandAnimatedly: true )
+                let alertMessage = EKAlertMessage( simpleMessage: simpleMessage, imagePosition: .left, buttonBarContent: buttonsBarContent
+                )
+                let contentView = EKAlertMessageView(with: alertMessage)
+                contentView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
+                contentView.layer.cornerRadius = 10
+                
+                contentView.accessibilityViewIsModal = true
+                
+                SwiftEntryKit.display(entry: contentView, using: attributes)
+            }
         }
     }
 }

@@ -18,7 +18,6 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
         collectionView.scrollToItem(at: currentSelectedIndex, at: .centeredVertically, animated: true)
     }
     
-    
     func receiveIcon(name: String) {
         populateSymbols()
         selectedIconName = name
@@ -74,6 +73,8 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
         populateIndexSym()
         highlightSelectedSymbol()
         
+        collectionView.isAccessibilityElement = false
+        
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -81,6 +82,7 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         if let cell = collectionView.cellForItem(at: indexPath) as? SymbolCell {
             cell.overlayView.alpha = 1
+            cell.imageView.accessibilityTraits = [.image, .selected]
         }
         
         selectedIconName = indexPathToSymbol[indexPath] ?? "square.grid.2x2"
@@ -91,6 +93,7 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: currentSelectedIndex) as? SymbolCell {
             cell.overlayView.alpha = 0
+            cell.imageView.accessibilityTraits = .image
         }
     }
     
@@ -108,10 +111,15 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SymbolCellID", for: indexPath) as! SymbolCell
         cell.overlayView.layer.cornerRadius = 4
         
+        
+        cell.imageView.isAccessibilityElement = true
+        
         if currentSelectedIndex == indexPath {
             cell.overlayView.alpha = 1
+            cell.imageView.accessibilityTraits = [.image, .selected]
         } else {
             cell.overlayView.alpha = 0
+            cell.imageView.accessibilityTraits = .image
         }
         
         
@@ -145,6 +153,7 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 45)
     }
+    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "symbolsSectionHeader", for: indexPath) as! SymbolsSectionHeader
@@ -152,6 +161,10 @@ class SymbolsViewController: UIViewController, UICollectionViewDelegate, UIColle
         sectionName = referenceArray[indexPath.section]
         
         headerView.nameLabel.text = sectionName
+        
+        headerView.isAccessibilityElement = true
+        headerView.accessibilityLabel = sectionName
+        headerView.accessibilityTraits = [.staticText, .header]
         return headerView
     }
 

@@ -1655,7 +1655,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vzx-Hp-TT6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2575" y="564"/>
+            <point key="canvasLocation" x="1950" y="-60"/>
         </scene>
         <!--General View Controller-->
         <scene sceneID="H7Y-s7-B5T">
@@ -2019,7 +2019,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="1317.7570093457944" y="564.36285097192228"/>
+            <point key="canvasLocation" x="694" y="-59"/>
         </scene>
         <!--Symbols View Controller-->
         <scene sceneID="NP5-bi-hpr">
@@ -2124,7 +2124,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fiy-iv-X36" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1942.0289855072465" y="564.50892857142856"/>
+            <point key="canvasLocation" x="1318" y="-59"/>
         </scene>
         <!--Stats View Controller-->
         <scene sceneID="dOx-mM-8vP">

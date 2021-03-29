@@ -10,9 +10,6 @@ import UIKit
 import RealmSwift
 import SwiftEntryKit
 
-protocol GetGeneralInfo: class {
-    func returnFinishedGeneral(nameOfList: String, desc: String, contentsOfList: [String])
-}
 protocol DeleteList: class {
     func deleteList()
 }
@@ -23,8 +20,6 @@ class GeneralViewController: UIViewController {
         descriptionOfList = desc
         contents = contentsOfList
     }
-    
-    weak var generalDelegate: GetGeneralInfo?
 
     @IBOutlet var titlesInputView: UIView!
     @IBOutlet var descInputView: UIView!
@@ -73,7 +68,7 @@ class GeneralViewController: UIViewController {
     
 
     func highlightRowsOnError(type: String) { ///Highlight the rows when done is pressed and there is an error
-        
+        print("highlighting/....")
         switch type {
         case "EmptyMatch":
             var reloadPaths = [IndexPath]()
@@ -85,6 +80,12 @@ class GeneralViewController: UIViewController {
                         cell.overlayView.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
                         cell.animateDupSlide()
                     })
+                    
+                    let errorTitle = AccessibilityText(text: "Has error: this is a duplicate", isRaised: true)
+                    let summaryTitle = AccessibilityText(text: "Word to Find", isRaised: false)
+                    let accessibilityLabel = UIAccessibility.makeAttributedText([errorTitle, summaryTitle])
+                    
+                    cell.matchTextField.accessibilityAttributedLabel = accessibilityLabel
                 } else {
                     reloadPaths.append(indPath)
                 }
@@ -112,6 +113,12 @@ class GeneralViewController: UIViewController {
                         cell.overlayView.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
                         cell.animateDupSlide()
                     })
+                    
+                    let errorTitle = AccessibilityText(text: "Has error: this is a duplicate", isRaised: true)
+                    let summaryTitle = AccessibilityText(text: "Word to Find", isRaised: false)
+                    let accessibilityLabel = UIAccessibility.makeAttributedText([errorTitle, summaryTitle])
+                    
+                    cell.matchTextField.accessibilityAttributedLabel = accessibilityLabel
                 } else {
                     reloadPaths.append(indPath)
                 }
@@ -151,6 +158,9 @@ class GeneralViewController: UIViewController {
                 self.view.layoutIfNeeded()
             })
         }
+        
+        titleField.accessibilityLabel = "Name"
+        descriptionView.accessibilityLabel = "Description"
         
     }
     
@@ -383,10 +393,19 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("cellfor")
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralTableviewCell") as! GeneralTableCell
         cell.changedTextDelegate = self
         cell.matchTextField.text = contents[indexPath.row]
         cell.indexPath = indexPath.row
+        cell.warningButton.isHidden = true
+        
+        let summaryTitle = AccessibilityText(text: "Word to Find", isRaised: false)
+        cell.matchTextField.accessibilityHint = "A word that this list will contain"
+        
+        var details: AccessibilityText?
+        
         if addingNewMatch == true {
             addingNewMatch = false
             cell.matchTextField.becomeFirstResponder()
@@ -398,8 +417,11 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
             }
         } else {
             if shouldHighlightRows == true {
+                print("show highlight")
                 if emptyStringErrors.contains(indexPath.row) {
+                    print("emp string contains")
                     cell.overlayView.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
+                    details = AccessibilityText(text: "Has error: must not be empty", isRaised: true)
                 } else {
                     var thisRowContains = false
                     for intArray in stringToIndexesError.values {
@@ -410,7 +432,9 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     
                     if thisRowContains == true {
+                        print("thisRowContainsthisRowContains string contains")
                         cell.overlayView.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+                        details = AccessibilityText(text: "Has error: this is a duplicate", isRaised: true)
                     } else {
                         cell.overlayView.snp.remakeConstraints{ (make) in
                             make.top.equalToSuperview()
@@ -423,6 +447,16 @@ extension GeneralViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
+        
+        let accessibilityLabel: NSMutableAttributedString
+        
+        if let details = details {
+            print("yes details!!! \(details)")
+            accessibilityLabel = UIAccessibility.makeAttributedText([summaryTitle, details])
+        } else {
+            accessibilityLabel = UIAccessibility.makeAttributedText([summaryTitle])
+        }
+        cell.matchTextField.accessibilityAttributedLabel = accessibilityLabel
         
         return cell
     }
@@ -503,14 +537,20 @@ extension GeneralViewController {
                 toDeleteValues.append(value)
             }
         }
+        
+        print("oroginal conte: \(contents)")
+        print("To delete: \(toDeleteValues)")
         contents = contents
             .enumerated()
             .filter { !toDeleteValues.contains($0.offset) }
             .map { $0.element }
         
+        
+        print("LATER conte: \(contents)")
         tableView.performBatchUpdates({
             self.tableView.deleteRows(at: toDeleteArray, with: .automatic)
         }) { _ in
+            print("compl[eting!!!!")
             completion()
         }
     }

@@ -26,31 +26,6 @@ extension PhotoFindViewController: UITextViewDelegate {
     }
 }
 
-struct AccessibilityText {
-    var text = ""
-    var isRaised = false
-}
-extension UIAccessibility {
-    static func postAnnouncement(_ texts: [AccessibilityText], delay: Double = 0.5) {
-        let pitch = [NSAttributedString.Key.accessibilitySpeechPitch: 1.2]
-        let string = NSMutableAttributedString()
-        
-        for text in texts {
-            if text.isRaised {
-                let raisedString = NSMutableAttributedString(string: text.text, attributes: pitch)
-                string.append(raisedString)
-            } else {
-                let normalString = NSAttributedString(string: text.text)
-                string.append(normalString)
-            }
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            UIAccessibility.post(notification: .announcement, argument: string)
-        }
-    }
-}
-
 extension PhotoFindViewController {
     func changePromptToStarting(startingFilter: PhotoFilter, howManyPhotos: Int, isAllPhotos: Bool) {
         continueButtonVisible = false
@@ -116,7 +91,7 @@ extension PhotoFindViewController {
             
             let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
             let summaryString = AccessibilityText(text: findingFrom + filter + overriddenLastPart, isRaised: false)
-            UIAccessibility.postAnnouncement([summaryTitle, summaryString])
+            postAnnouncement([summaryTitle, summaryString])
         } else {
             attributedText = findingFrom.set(styles: [boldStyle, grayStyle]) + number.set(styles: [boldStyle, grayStyle]) + filter.set(styles: [boldStyle, colorStyle]) + photos.set(styles: [boldStyle, grayStyle])
             
@@ -124,7 +99,7 @@ extension PhotoFindViewController {
             
             let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
             let summaryString = AccessibilityText(text: findingFrom + number + filter + photos, isRaised: false)
-            UIAccessibility.postAnnouncement([summaryTitle, summaryString])
+            postAnnouncement([summaryTitle, summaryString])
         }
         
         promptTextView.attributedText = attributedText
@@ -166,7 +141,7 @@ extension PhotoFindViewController {
         
         let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
         let summaryString = AccessibilityText(text: "\(howMany)" + resultsInCache + "Continue/Return button on the keyboard or double-tap Summary label" + toFindFromPhotos, isRaised: false)
-        UIAccessibility.postAnnouncement([summaryTitle, summaryString])
+        postAnnouncement([summaryTitle, summaryString])
     }
     func setPromptToHowManyFastFound(howMany: Int) { /// how many finished finding
         continueButtonVisible = false
@@ -187,13 +162,13 @@ extension PhotoFindViewController {
             
             let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
             let summaryString = AccessibilityText(text: "\(findingFromPhotos) (\(howMany) out of \(findPhotos.count))...", isRaised: false)
-            UIAccessibility.postAnnouncement([summaryTitle, summaryString])
+            postAnnouncement([summaryTitle, summaryString])
         } else {
             promptView.accessibilityValue = "\(findingFromUncachedPhotos) (\(howMany) out of \(findPhotos.count))..."
             
             let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
             let summaryString = AccessibilityText(text: "\(findingFromUncachedPhotos) (\(howMany) out of \(findPhotos.count))...", isRaised: false)
-            UIAccessibility.postAnnouncement([summaryTitle, summaryString])
+            postAnnouncement([summaryTitle, summaryString])
         }
         
         promptTextView.attributedText = attributedText
@@ -226,7 +201,16 @@ extension PhotoFindViewController {
         
         let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
         let summaryString = AccessibilityText(text: "Completed finding. \(howMany)\(spaceOrUnit)\(results)\(_in_)\(resultPhotos.count)\(spaceOrZhangUnit)\(lowercasePhotos)", isRaised: false)
-        UIAccessibility.postAnnouncement([summaryTitle, summaryString])
+
+        postAnnouncement([summaryTitle, summaryString])
+    }
+    
+    func postAnnouncement(_ accessibilityText: [AccessibilityText]) {
+        if selfPresented?() ?? false {
+            UIAccessibility.postAnnouncement(accessibilityText)
+        } else {
+            print("Currently not active")
+        }
     }
 }
 

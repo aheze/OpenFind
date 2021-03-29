@@ -42,6 +42,10 @@
 		3C2C3E9925A11CD6002C3D11 /* ANSegmentIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */; };
 		3C2C6F9625AE21BB00958647 /* PhotosVC+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */; };
 		3C3232E0261153FB00A33192 /* CameraVC+Shutter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232DF261153FB00A33192 /* CameraVC+Shutter.swift */; };
+		3C3232E426115ACB00A33192 /* ListsController+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232E326115ACB00A33192 /* ListsController+Accessibility.swift */; };
+		3C3232E826115C7900A33192 /* PostAnnouncement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232E726115C7900A33192 /* PostAnnouncement.swift */; };
+		3C3232EC26115CA900A33192 /* ListsController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232EB26115CA900A33192 /* ListsController+CollectionView.swift */; };
+		3C3232F0261164A900A33192 /* ColorsVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232EF261164A900A33192 /* ColorsVC+Accessibility.swift */; };
 		3C369709259EEFE500A6544A /* PhotosMigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C369708259EEFE500A6544A /* PhotosMigrationView.swift */; };
 		3C389ED3259BA0D5007DB33B /* ListBuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */; };
 		3C3B6C7625D30F3D0082B86C /* CachingFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3B6C7525D30F3D0082B86C /* CachingFinder.swift */; };
@@ -410,6 +414,10 @@
 		3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSegmentIndicator.swift; sourceTree = "<group>"; };
 		3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Actions.swift"; sourceTree = "<group>"; };
 		3C3232DF261153FB00A33192 /* CameraVC+Shutter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Shutter.swift"; sourceTree = "<group>"; };
+		3C3232E326115ACB00A33192 /* ListsController+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+Accessibility.swift"; sourceTree = "<group>"; };
+		3C3232E726115C7900A33192 /* PostAnnouncement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAnnouncement.swift; sourceTree = "<group>"; };
+		3C3232EB26115CA900A33192 /* ListsController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListsController+CollectionView.swift"; sourceTree = "<group>"; };
+		3C3232EF261164A900A33192 /* ColorsVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorsVC+Accessibility.swift"; sourceTree = "<group>"; };
 		3C369708259EEFE500A6544A /* PhotosMigrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationView.swift; sourceTree = "<group>"; };
 		3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBuilderViewController.swift; sourceTree = "<group>"; };
 		3C3B6C7525D30F3D0082B86C /* CachingFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingFinder.swift; sourceTree = "<group>"; };
@@ -789,6 +797,7 @@
 				490BC3F723FA5FBF004D1433 /* General */,
 				492EB4F323F50C49007142CA /* Symbols */,
 				4990AAE523EDB50E00FAF37B /* ColorsViewController.swift */,
+				3C3232EF261164A900A33192 /* ColorsVC+Accessibility.swift */,
 			);
 			path = Builder;
 			sourceTree = "<group>";
@@ -1574,6 +1583,7 @@
 				49563504243694BB0001E8C6 /* PaperOnboarding */,
 				49585DCD23ED0C9F003AB768 /* SEK */,
 				4911508A235D1A3E00EC0C04 /* Utilities.swift */,
+				3C3232E726115C7900A33192 /* PostAnnouncement.swift */,
 				492A2D2524A4046200F9C4A1 /* BartyCrouch.swift */,
 				495F7DA624CBACE90053DE50 /* Info.plist */,
 				495F7DAC24CBB3970053DE50 /* InfoPlist.strings */,
@@ -1631,6 +1641,8 @@
 			isa = PBXGroup;
 			children = (
 				4928525923D617270048EC13 /* ListsController.swift */,
+				3C3232EB26115CA900A33192 /* ListsController+CollectionView.swift */,
+				3C3232E326115ACB00A33192 /* ListsController+Accessibility.swift */,
 				3C16EA70259BE7D600D73755 /* ListsController+NavBar.swift */,
 				3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */,
 				3C16EA84259BEDC100D73755 /* Builder */,
@@ -2063,6 +2075,7 @@
 				3C1317E225B2581800FCEB79 /* PhotosVC+Finding.swift in Sources */,
 				4990AAE423EDB4EF00FAF37B /* SymbolsViewController.swift in Sources */,
 				3C1FE20925BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift in Sources */,
+				3C3232F0261164A900A33192 /* ColorsVC+Accessibility.swift in Sources */,
 				49D985BA2421D97B005F4E92 /* FindModel.swift in Sources */,
 				3C56C5AE25AA42760006A667 /* SlideViewController.swift in Sources */,
 				3CB6843525A013D800AE0AD6 /* ImageCell.swift in Sources */,
@@ -2124,6 +2137,7 @@
 				3C8D58A525B7FD7300EA226D /* PhotoSlidesVC+Cache.swift in Sources */,
 				3C4C96AB25B5F9DC009FDE8D /* SlideVC+Draw.swift in Sources */,
 				3C42C44D25C33D6B004DC6E9 /* FindBar+Lists.swift in Sources */,
+				3C3232E826115C7900A33192 /* PostAnnouncement.swift in Sources */,
 				3C4DE6FF259AD3FF0037D104 /* SaveToPhotosButton.swift in Sources */,
 				495DAD4724A81F4600D5F844 /* WhatsNewConfiguration.swift in Sources */,
 				3C6EE6B625A2AB350078462A /* CameraSettingsView.swift in Sources */,
@@ -2144,6 +2158,7 @@
 				495F39012433FF1600A17D93 /* LaunchViewController.swift in Sources */,
 				49A8EFAE237A5F2800328D47 /* SetupSearchBar.swift in Sources */,
 				3C56C5A625A95D120006A667 /* PhotoSlidesVC+PagingSource.swift in Sources */,
+				3C3232EC26115CA900A33192 /* ListsController+CollectionView.swift in Sources */,
 				49301BF32402460000B4780B /* FancyQuotes.swift in Sources */,
 				3C5DFFA525D8A9E200250D34 /* ShareView.swift in Sources */,
 				49F7B1582353FE7E0099FA62 /* Component.swift in Sources */,
@@ -2191,6 +2206,7 @@
 				3CB6842C259FF9A700AE0AD6 /* SegmentedSlider.swift in Sources */,
 				3CAD947125BF3831001D5E0A /* CameraVC+CacheFind.swift in Sources */,
 				3CE306E3259AC4B000F1B2E2 /* State.swift in Sources */,
+				3C3232E426115ACB00A33192 /* ListsController+Accessibility.swift in Sources */,
 				3C3B6C7625D30F3D0082B86C /* CachingFinder.swift in Sources */,
 				49563501243591650001E8C6 /* RateTheApp.swift in Sources */,
 				3C56C5A225A95C970006A667 /* PhotoSlidesVC+SetFirstVC.swift in Sources */,

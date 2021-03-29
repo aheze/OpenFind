@@ -10,6 +10,8 @@ import UIKit
 
 class PhotoFindViewController: UIViewController {
     
+    var selfPresented: (() -> Bool)?
+    
     // MARK: Find bar
     @IBOutlet weak var findBar: FindBar!
     @IBOutlet var promptView: PromptView!

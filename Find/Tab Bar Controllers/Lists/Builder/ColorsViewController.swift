@@ -33,6 +33,8 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
             collectionView.selectItem(at: indP, animated: false, scrollPosition: .centeredVertically)
             collectionView.contentInset = sectionInsets
         }
+        
+        collectionView.isAccessibilityElement = false
     }
     
     var colorName = "#579f2b"
@@ -48,7 +50,6 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
         "#e84393","#a55eea","#5352ed","#70a1ff","#40739e",
         "#45aaf2","#2d98da","#00aeef","#4b6584","#0a3d62"
     ]
-    
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return colorArray.count
@@ -60,24 +61,35 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         if let colorCell = collectionView.cellForItem(at: indexPath) as? ColorCell {
             colorCell.checkMarkView.alpha = 1
+            colorCell.contentView.accessibilityTraits = .selected
         }
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if let colorCell = collectionView.cellForItem(at: indexPath) as? ColorCell {
             colorCell.checkMarkView.alpha = 0
+            colorCell.contentView.accessibilityTraits = .none
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCellID", for: indexPath) as! ColorCell
-        cell.contentView.backgroundColor = UIColor(hexString: colorArray[indexPath.item])
+        
+        let color = UIColor(hexString: colorArray[indexPath.item])
+        
+        cell.contentView.backgroundColor = color
         cell.contentView.layer.cornerRadius = 6
         
         if selectedPath == indexPath.item {
             cell.checkMarkView.alpha = 1
+            cell.contentView.accessibilityTraits = .selected
         } else {
             cell.checkMarkView.alpha = 0
+            cell.contentView.accessibilityTraits = .none
         }
+        
+        let colorDescription = colorArray[indexPath.item].getDescription()
+        cell.contentView.isAccessibilityElement = true
+        cell.contentView.accessibilityLabel = colorDescription
         return cell
     }
     func collectionView(_ collectionView: UICollectionView,

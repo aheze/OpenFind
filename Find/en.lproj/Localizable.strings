@@ -265,7 +265,7 @@
 "justForFunStats" = "Just for fun";
 
 /* GeneralViewController def=Yes, Delete and save */
-"leftButtonDeleteSave" = "Yes, Delete and save";
+"leftButtonDeleteSave" = "Yes, delete and save";
 
 /* StatsViewController def=Left Feedback Status */
 "leftFeedbackStatus" = "Left Feedback Status";

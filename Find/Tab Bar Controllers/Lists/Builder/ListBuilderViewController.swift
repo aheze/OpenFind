@@ -79,6 +79,7 @@ class ListBuilderViewController: UIViewController {
         iconColorName = colorVC.colorName
 
         findAndStoreErrors(contentsArray: generalVC.contents)
+        
         if showDoneAlerts() { /// true = has errors
             print("has errors")
         } else {
@@ -163,7 +164,8 @@ class ListBuilderViewController: UIViewController {
     
     func returnCompletedList() {
         if listBuilderType == .editor {
-            print("is editor")
+            print("is editor, contents???? \(contents)")
+            contents = generalVC.contents
             finishedEditingList?.updateExistingList(name: name, description: descriptionOfList, contents: contents, imageName: iconImageName, imageColor: iconColorName, deleteList: false)
         } else {
             print("make new")
@@ -174,12 +176,7 @@ class ListBuilderViewController: UIViewController {
     }
 }
 
-extension ListBuilderViewController: GetGeneralInfo, GetIconInfo, GetColorInfo {
-    func returnFinishedGeneral(nameOfList: String, desc: String, contentsOfList: [String]) {
-        name = nameOfList
-        descriptionOfList = desc
-        contents = contentsOfList
-    }
+extension ListBuilderViewController: GetIconInfo, GetColorInfo {
     
     func returnNewIcon(iconName: String) {
         iconImageName = iconName
@@ -207,7 +204,6 @@ extension ListBuilderViewController: GetGeneralInfo, GetIconInfo, GetColorInfo {
         symbolVC.title = secondVCTitle
         colorVC.title = thirdVCTitle
         
-        generalVC.generalDelegate = self
         generalVC.deleteThisList = { [weak self] in
             self?.finishedEditingList?.updateExistingList(name: "", description: "", contents: [""], imageName: "", imageColor: "", deleteList: true)
             self?.dismiss(animated: true, completion: nil)

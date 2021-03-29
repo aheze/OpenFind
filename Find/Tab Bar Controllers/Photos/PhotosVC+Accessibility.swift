@@ -24,6 +24,8 @@ extension PhotosViewController {
         updateFindButtonHint()
         
         selectButton.accessibilityHint = "Enable select mode"
+        
+        collectionView.isAccessibilityElement = false
     }
     
     func updateFindButtonHint() {

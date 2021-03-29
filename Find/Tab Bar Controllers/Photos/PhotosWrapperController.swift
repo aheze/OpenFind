@@ -9,6 +9,10 @@
 import UIKit
 import SnapKit
 
+enum PhotoScreen {
+    case photoGallery
+    case finding
+}
 class PhotosNavController: UINavigationController {
     var viewController: PhotosViewController!
 }
@@ -23,12 +27,19 @@ class PhotosWrapperController: UIViewController {
     var findingFromAllPhotos = false
     var hasChangedFromBefore = false
     
+    var activeScreen = PhotoScreen.photoGallery
+    
     lazy var photoFindViewController: PhotoFindViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "PhotoFindViewController") as? PhotoFindViewController {
             viewController.view.clipsToBounds = true
             viewController.view.layer.cornerRadius = 16
             viewController.view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+            
+            viewController.selfPresented = { [weak self] in
+                guard let self = self else { return false }
+                return self.activeScreen == .finding
+            }
             return viewController
         }
         fatalError()
@@ -60,6 +71,7 @@ class PhotosWrapperController: UIViewController {
     }
     
     func switchToFind() {
+        activeScreen = .finding
         
         let topHeight = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.top ?? 0
         let topShownHeight = topHeight + Constants.photoBottomPreviewHeight
@@ -110,9 +122,10 @@ class PhotosWrapperController: UIViewController {
     }
     
     func switchBackToPhotos() {
+        activeScreen = .photoGallery
+        
         navController.viewController.collectionView.isUserInteractionEnabled = true
         photoFindViewController.findBar.searchField.resignFirstResponder()
-        
         
         UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveLinear) {
             self.navController.view.transform = CGAffineTransform.identity

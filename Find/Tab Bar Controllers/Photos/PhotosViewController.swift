@@ -162,8 +162,6 @@ class PhotosViewController: UIViewController {
             startObservingChanges()
         }
         
-        collectionView.isAccessibilityElement = false
-        
         setupAccessibility()
         
     }
