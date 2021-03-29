@@ -142,6 +142,7 @@ class PhotosViewController: UIViewController {
         } else {
             addActivityIndicator()
             fadeCollectionView(true, instantly: true)
+            UIAccessibility.post(notification: .announcement, argument: "Photo gallery loading...")
             fetchAssets()
         }
         

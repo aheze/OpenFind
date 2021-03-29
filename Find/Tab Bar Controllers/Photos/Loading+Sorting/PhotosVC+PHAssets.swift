@@ -159,8 +159,10 @@ extension PhotosViewController {
             }
             completion = {
                 self.activityIndicator?.stopAnimating()
+                UIAccessibility.post(notification: .announcement, argument: "Finished loading")
             }
         }
+        
         if instantly {
             block()
             completion?()
