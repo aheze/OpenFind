@@ -34,6 +34,8 @@ extension ViewController {
                 tabBarView.hideRealShutter?(false)
             }
             
+            UIAccessibility.post(notification: .screenChanged, argument: camera.cameraIconHolder)
+            
         case is ListsNavController:
             print("ended at lists")
             startCameraShutoff()

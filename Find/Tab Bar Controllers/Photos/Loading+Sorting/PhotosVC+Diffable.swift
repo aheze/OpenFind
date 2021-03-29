@@ -97,6 +97,7 @@ extension PhotosViewController {
                     cell?.cacheImageView.isAccessibilityElement = false
                     cell?.imageView.accessibilityLabel = accessibilityLabel
                     cell?.imageView.isAccessibilityElement = true
+                    cell?.imageView.accessibilityTraits = .image
                 }
                 return cell
             })
@@ -118,6 +119,11 @@ extension PhotosViewController {
             let dateAsString = formatter.string(from: section.monthDate)
             
             view?.monthLabel.text = dateAsString
+            
+            view?.isAccessibilityElement = true
+            view?.accessibilityLabel = dateAsString
+            view?.accessibilityTraits = .staticText
+            
             return view
         }
         return dataSource

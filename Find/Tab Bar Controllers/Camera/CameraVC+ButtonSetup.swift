@@ -31,34 +31,7 @@ extension CameraViewController {
         cameraIcon.isActualButton = true
         cameraIcon.pressed = { [weak self] in
             guard let self = self else { return }
-            
-            CameraState.isPaused.toggle()
-            self.cameraIcon.toggle(on: CameraState.isPaused)
-            self.cameraChanged?(CameraState.isPaused, true)
-            
-            if CameraState.isPaused {
-                self.pauseLivePreview()
-                
-                if TipViews.currentLocalStep == 2 {
-                    self.startLocalThirdStep()
-                }
-                let hasPausedBefore = UserDefaults.standard.bool(forKey: "hasPausedBefore")
-                if !hasPausedBefore {
-                    UserDefaults.standard.set(true, forKey: "hasPausedBefore")
-                    self.showCacheTip()
-                }
-            } else {
-                self.saveToPhotosIfNeeded()
-                self.resetState()
-                self.startLivePreview()
-                self.resetHighlights()
-                
-                AppStoreReviewManager.requestReviewIfPossible()
-            }
-            
-            self.removeFocusRects(CameraState.isPaused)
-            self.adjustButtonLayout(CameraState.isPaused)
-            self.lockFlashlight(lock: CameraState.isPaused)
+            self.toggleShutter()
         }
         saveToPhotos.alpha = 0
         saveToPhotos.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)

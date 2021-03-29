@@ -34,6 +34,11 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var settingsHeightC: NSLayoutConstraint!
     var controlsView: UIView?
     
+    override func accessibilityPerformMagicTap() -> Bool {
+        toggleShutter()
+        return true
+    }
+    
     // MARK: Tab bar
     @IBOutlet weak var cameraIconHolder: UIView!
     @IBOutlet weak var cameraIconHolderBottomC: NSLayoutConstraint!
@@ -124,7 +129,6 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var passthroughBottomC: NSLayoutConstraint!
     
     //MARK: Stats
-//    weak var updateStatsNumber: UpdateMatchesNumberStats?
     var currentNumberOfMatches = 0
     lazy var statsNavController: StatsNavController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -198,8 +202,6 @@ class CameraViewController: UIViewController {
         }
     }
     
-    
-    
     // MARK: Timer and haptic feedback
     var currentPassCount = 0 /// +1 whenever frame added for AV
     
@@ -207,7 +209,6 @@ class CameraViewController: UIViewController {
     let realm = try! Realm()
     var listCategories: Results<FindList>?
     var editableListCategories = [EditableFindList]()
-//    var shouldResetHighlights = false
     
     // MARK: Keyboard
     let toolbar = ListToolBar()
@@ -217,7 +218,6 @@ class CameraViewController: UIViewController {
     var didFinishShouldUpdateHeight = false
     
     // MARK: Search Bar
-    
     var allowSearch = true /// orientation disable
     var allowSearchFocus = true /// disable when on different screen
     var insertingListsCount = 0

@@ -22,6 +22,8 @@ extension PhotosViewController {
         extendedCollapseButton.accessibilityHint = "Dismisses the photo finding screen"
         
         updateFindButtonHint()
+        
+        selectButton.accessibilityHint = "Enable select mode"
     }
     
     func updateFindButtonHint() {

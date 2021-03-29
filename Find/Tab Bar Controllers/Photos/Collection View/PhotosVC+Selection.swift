@@ -26,6 +26,7 @@ extension PhotosViewController {
         } else {
             selectButtonSelected.toggle()
             showSelectionControls?(selectButtonSelected)
+            
             if selectButtonSelected {
                 selectButton.title = NSLocalizedString("cancel", comment: "Multipurpose def=Cancel")
                 collectionView.allowsMultipleSelection = true
@@ -34,13 +35,12 @@ extension PhotosViewController {
                 if TipViews.currentStarStep == 2 || TipViews.currentCacheStep == 2 {
                     pressedSelectTip?()
                 }
+                
+                selectButton.accessibilityHint = "Exit select mode"
             } else {
-                selectButton.title = NSLocalizedString("universal-select", comment: "")
-                collectionView.allowsMultipleSelection = false
                 segmentedSlider.showNumberOfSelected(show: false)
                 deselectAllPhotos()
-                updateActions?(.shouldStar)
-                updateActions?(.shouldCache)
+                resetToSelect()
                 
                 if TipViews.currentStarStep == 3 || TipViews.currentCacheStep == 3 {
                     TipViews.finishTutorial()
@@ -50,11 +50,16 @@ extension PhotosViewController {
     }
     func doneWithSelect() {
         selectButtonSelected = false
-        showSelectionControls?(selectButtonSelected)
+        showSelectionControls?(false)
+        deselectAllPhotos()
+        resetToSelect()
         
+        selectButton.accessibilityHint = "Enable select mode"
+    }
+    
+    func resetToSelect() {
         selectButton.title = NSLocalizedString("universal-select", comment: "")
         collectionView.allowsMultipleSelection = false
-        deselectAllPhotos()
         segmentedSlider.showNumberOfSelected(show: false)
         updateActions?(.shouldStar)
         updateActions?(.shouldCache)
@@ -125,6 +130,7 @@ extension PhotosViewController: UICollectionViewDelegate {
                     if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell {
                         cell.highlightView.isHidden = false
                         cell.selectionImageView.isHidden = false
+                        cell.imageView.accessibilityTraits = [.image, .selected]
                     }
                 }
                 
@@ -141,6 +147,7 @@ extension PhotosViewController: UICollectionViewDelegate {
             if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell {
                 cell.highlightView.isHidden = true
                 cell.selectionImageView.isHidden = true
+                cell.imageView.accessibilityTraits = .image
             }
         }
     }

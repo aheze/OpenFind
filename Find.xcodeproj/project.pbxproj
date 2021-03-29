@@ -41,6 +41,7 @@
 		3C2C3E9325A1152F002C3D11 /* PhotosMigrationController+Write.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */; };
 		3C2C3E9925A11CD6002C3D11 /* ANSegmentIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */; };
 		3C2C6F9625AE21BB00958647 /* PhotosVC+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */; };
+		3C3232E0261153FB00A33192 /* CameraVC+Shutter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3232DF261153FB00A33192 /* CameraVC+Shutter.swift */; };
 		3C369709259EEFE500A6544A /* PhotosMigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C369708259EEFE500A6544A /* PhotosMigrationView.swift */; };
 		3C389ED3259BA0D5007DB33B /* ListBuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */; };
 		3C3B6C7625D30F3D0082B86C /* CachingFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3B6C7525D30F3D0082B86C /* CachingFinder.swift */; };
@@ -408,6 +409,7 @@
 		3C2C3E9225A1152F002C3D11 /* PhotosMigrationController+Write.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosMigrationController+Write.swift"; sourceTree = "<group>"; };
 		3C2C3E9825A11CD6002C3D11 /* ANSegmentIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSegmentIndicator.swift; sourceTree = "<group>"; };
 		3C2C6F9525AE21BB00958647 /* PhotosVC+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Actions.swift"; sourceTree = "<group>"; };
+		3C3232DF261153FB00A33192 /* CameraVC+Shutter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Shutter.swift"; sourceTree = "<group>"; };
 		3C369708259EEFE500A6544A /* PhotosMigrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationView.swift; sourceTree = "<group>"; };
 		3C389ED2259BA0D5007DB33B /* ListBuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBuilderViewController.swift; sourceTree = "<group>"; };
 		3C3B6C7525D30F3D0082B86C /* CachingFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingFinder.swift; sourceTree = "<group>"; };
@@ -1595,6 +1597,7 @@
 				3CA9334B25BDF36D00042C2F /* Camera View */,
 				3C4DE6F3259AD3FF0037D104 /* Camera Buttons */,
 				3CA9335625BDF4B500042C2F /* CameraVC+ButtonSetup.swift */,
+				3C3232DF261153FB00A33192 /* CameraVC+Shutter.swift */,
 				3CD388BC25C11AB900B67B13 /* CameraVC+Tips.swift */,
 				3CA9334425BDF2AE00042C2F /* Paused */,
 				4979A39123AF3B4B00B09380 /* Fast Find */,
@@ -2228,6 +2231,7 @@
 				3C7EAB2C25C0A97800264B63 /* PhotosVC+Tutorial.swift in Sources */,
 				3C3DF5FB25B52AA500DD7A10 /* PhotoFindVC+CollectionCoordinates.swift in Sources */,
 				3CABD23D25C10C1D009921EE /* PhotosVC+ShowEmptyView.swift in Sources */,
+				3C3232E0261153FB00A33192 /* CameraVC+Shutter.swift in Sources */,
 				3CAC4DA825BF52CF00CC7948 /* LTMorphingLabel+Evaporate.swift in Sources */,
 				3C2858CA259CF00200BABBA7 /* ListsController+Selection.swift in Sources */,
 				49563503243593860001E8C6 /* TutorialViewControllers.swift in Sources */,

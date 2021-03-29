@@ -9,6 +9,7 @@
 import UIKit
 
 extension CameraViewController {
+    
     func setupAccessibility() {
         
         drawingView.isAccessibilityElement = true
@@ -20,7 +21,7 @@ extension CameraViewController {
         cameraIconHolder.isAccessibilityElement = true
         cameraIconHolder.accessibilityLabel = "Shutter, pause"
         cameraIconHolder.accessibilityHint = "Pauses the camera, shows the Save and Cache buttons, and disables the flashlight"
-        cameraIconHolder.accessibilityTraits = [.button, UIAccessibilityTraits(rawValue: 0x200000000000)]
+        cameraIconHolder.accessibilityTraits = .button
         
         statsView.isAccessibilityElement = true
         statsView.accessibilityLabel = "Statistics"
