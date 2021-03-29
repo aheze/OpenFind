@@ -109,7 +109,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="gXF-Fe-JCy" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="8BO-9z-g6N"/>
+                <constraint firstItem="gXF-Fe-JCy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8BO-9z-g6N"/>
                 <constraint firstItem="u2b-1R-lPC" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="G2v-lT-G0Z"/>
                 <constraint firstItem="u2b-1R-lPC" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="L1M-yz-yPg"/>
                 <constraint firstAttribute="trailing" secondItem="gXF-Fe-JCy" secondAttribute="trailing" id="Nha-Fk-uiY"/>

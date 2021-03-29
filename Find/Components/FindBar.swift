@@ -102,9 +102,6 @@ class FindBar: UIView, UITextFieldDelegate {
     
     @IBOutlet weak var searchLeftC: NSLayoutConstraint! ///16
     @IBOutlet weak var collViewRightC: NSLayoutConstraint!
-    //    @IBOutlet weak var collViewWidthC: NSLayoutConstraint!
-    ///35
-    
     
     var searchActive = false
     
@@ -165,6 +162,23 @@ class FindBar: UIView, UITextFieldDelegate {
         setupAccessibility()
      
     }
+    
+    func changeConstraints() {
+        switch selectedLists.count {
+        case 0:
+            searchLeftC.constant = 0
+        case 1:
+            searchLeftC.constant = 35 + 3
+        case 2:
+            searchLeftC.constant = 35 + 35 + 6
+        case 3:
+            searchLeftC.constant = 35 + 35 + 35 + 9
+        default:
+            searchLeftC.constant = 35 + 35 + 35 + 12
+            let availableWidth = contentView.bounds.width - (35 + 35 + 35 + 9)
+            collViewRightC.constant = availableWidth
+        }
+    }
 }
 
 extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -182,21 +196,8 @@ extension FindBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
                 injectListDelegate?.addList(list: list)
                 
                 sortSearchTerms()
+                changeConstraints()
                 
-                switch selectedLists.count {
-                case 0:
-                    searchLeftC.constant = 0
-                case 1:
-                    searchLeftC.constant = 35 + 3
-                case 2:
-                    searchLeftC.constant = 73 + 3
-                case 3:
-                    searchLeftC.constant = 111 + 3
-                default:
-                    let availableWidth = contentView.frame.width - 123
-                    collViewRightC.constant = availableWidth
-                    searchLeftC.constant = 111 + 3
-                }
                 UIView.animate(withDuration: 0.3, animations: {
                     self.layoutIfNeeded()
                 })
@@ -385,37 +386,27 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
         selectedLists.insert(list, at: 0)
         let indP = IndexPath(item: 0, section: 0)
         
-//        collectionView.insertItems(at: [indP])
         collectionView.performBatchUpdates({
             self.collectionView.insertItems(at: [indP])
         }, completion: { _ in
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                if let cell = self.collectionView.cellForItem(at: indP) {
-                    UIAccessibility.post(notification: .layoutChanged, argument: cell.contentView)
-                }
-//            }
+            if let cell = self.collectionView.cellForItem(at: indP) {
+                UIAccessibility.post(notification: .layoutChanged, argument: cell.contentView)
+            }
         })
-        switch selectedLists.count {
-        case 1:
-            searchLeftC.constant = 35 + 3
-        case 2:
-            searchLeftC.constant = 73 + 3
-        case 3:
-            searchLeftC.constant = 111 + 3
-        default:
-            searchLeftC.constant = 111 + 3
-            let availableWidth = contentView.frame.width - 123
-            collViewRightC.constant = availableWidth
-        }
+        
+        changeConstraints()
+        
         UIView.animate(withDuration: 0.3, animations: {
             self.layoutIfNeeded()
         })
+        
         if hasExpandedAlert == true {
             warningWidth.constant = searchField.frame.size.width
             UIView.animate(withDuration: 0.3, animations: {
                 self.layoutIfNeeded()
             })
         }
+        
         sortSearchTerms()
     }
     
@@ -448,7 +439,6 @@ extension FindBar: ToolbarButtonPressed, SelectedList, StartedEditing {
             }
         }
     }
-    
 }
 
 
