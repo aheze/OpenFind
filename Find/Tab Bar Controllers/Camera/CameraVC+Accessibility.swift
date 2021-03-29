@@ -110,10 +110,11 @@ extension CameraViewController {
     }
     
     func setupDrawingView() {
-        drawingView.isAccessibilityElement = true
-        drawingView.accessibilityLabel = "Viewfinder"
-        drawingView.accessibilityHint = "Highlights will be placed on detected results."
-        drawingView.actions = [
+        
+        drawingBaseView.isAccessibilityElement = true
+        drawingBaseView.accessibilityLabel = "Viewfinder"
+        drawingBaseView.accessibilityHint = "Highlights will be placed on detected results."
+        drawingBaseView.actions = [
         
             UIAccessibilityCustomAction(name: "Show transcript overlay") { _ in
                 print("overlay")
@@ -125,6 +126,22 @@ extension CameraViewController {
                 return true
             }
         ]
+        
+//        drawingView.isAccessibilityElement = true
+//        drawingView.accessibilityLabel = "Viewfinder"
+//        drawingView.accessibilityHint = "Highlights will be placed on detected results."
+//        drawingView.actions = [
+//
+//            UIAccessibilityCustomAction(name: "Show transcript overlay") { _ in
+//                print("overlay")
+//                return true
+//            },
+//
+//            UIAccessibilityCustomAction(name: "Focus VoiceOver on shutter button") { _ in
+//                UIAccessibility.post(notification: .layoutChanged, argument: self.cameraIconHolder)
+//                return true
+//            }
+//        ]
 
     }
     

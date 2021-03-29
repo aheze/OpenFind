@@ -371,7 +371,7 @@ extension UIView {
         #endif
     }
 }
-class GradientBorderView: UIView {
+class GradientBorderView: CustomActionsView {
     override func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = bounds

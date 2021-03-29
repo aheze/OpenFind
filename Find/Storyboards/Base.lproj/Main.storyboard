@@ -244,18 +244,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lVw-3T-6iA" customClass="CameraView" customModule="Find" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <gestureRecognizers/>
-                            </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="20i-dz-JZp">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5qE-M4-Dhz">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hag-e5-Sys" customClass="DrawingView" customModule="Find" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <gestureRecognizers/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lVw-3T-6iA" customClass="CameraView" customModule="Find" customModuleProvider="target">
+                                        <rect key="frame" x="7" y="15" width="414" height="896"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <gestureRecognizers/>
+                                    </view>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="20i-dz-JZp">
+                                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qbO-om-gzX" customClass="CustomActionsView" customModule="Find" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hag-e5-Sys" customClass="DrawingView" customModule="Find" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <gestureRecognizers/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="hag-e5-Sys" firstAttribute="leading" secondItem="5qE-M4-Dhz" secondAttribute="leading" id="3Fx-ee-taa"/>
+                                    <constraint firstItem="hag-e5-Sys" firstAttribute="top" secondItem="5qE-M4-Dhz" secondAttribute="top" id="DYK-ye-Ucz"/>
+                                    <constraint firstItem="20i-dz-JZp" firstAttribute="top" secondItem="5qE-M4-Dhz" secondAttribute="top" id="DiQ-VV-I10"/>
+                                    <constraint firstAttribute="trailing" secondItem="qbO-om-gzX" secondAttribute="trailing" id="FeO-1l-UTa"/>
+                                    <constraint firstItem="qbO-om-gzX" firstAttribute="top" secondItem="5qE-M4-Dhz" secondAttribute="top" id="JA4-3k-7Jg"/>
+                                    <constraint firstItem="20i-dz-JZp" firstAttribute="leading" secondItem="5qE-M4-Dhz" secondAttribute="leading" id="KI8-ij-nly"/>
+                                    <constraint firstAttribute="trailing" secondItem="20i-dz-JZp" secondAttribute="trailing" id="OFd-De-hwY"/>
+                                    <constraint firstItem="qbO-om-gzX" firstAttribute="leading" secondItem="5qE-M4-Dhz" secondAttribute="leading" id="Prd-Ff-Lhs"/>
+                                    <constraint firstAttribute="bottom" secondItem="hag-e5-Sys" secondAttribute="bottom" id="Q4Q-sv-edK"/>
+                                    <constraint firstAttribute="trailing" secondItem="hag-e5-Sys" secondAttribute="trailing" id="WMX-mq-SWH"/>
+                                    <constraint firstAttribute="bottom" secondItem="20i-dz-JZp" secondAttribute="bottom" id="hcC-1f-trW"/>
+                                    <constraint firstAttribute="bottom" secondItem="qbO-om-gzX" secondAttribute="bottom" id="xSJ-2Y-4Qc"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fqs-5I-gTN">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
@@ -806,32 +830,28 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="5qE-M4-Dhz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="18e-Ce-PMc"/>
                             <constraint firstAttribute="bottom" secondItem="2JP-1T-MxT" secondAttribute="bottom" constant="-50" id="5El-mq-7hs"/>
-                            <constraint firstAttribute="trailing" secondItem="20i-dz-JZp" secondAttribute="trailing" id="6cI-uW-wUB"/>
                             <constraint firstAttribute="trailing" secondItem="Fqs-5I-gTN" secondAttribute="trailing" id="7gd-Ab-4AU"/>
                             <constraint firstItem="3X4-Nc-yBe" firstAttribute="leading" secondItem="oNn-cV-T8L" secondAttribute="leading" id="7hu-Kt-ZTm"/>
                             <constraint firstItem="2JP-1T-MxT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9aW-0c-yNf"/>
-                            <constraint firstAttribute="trailing" secondItem="hag-e5-Sys" secondAttribute="trailing" id="A6D-xl-Boc"/>
                             <constraint firstItem="aT4-Yz-YQt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="AXY-tJ-BP8"/>
                             <constraint firstAttribute="bottom" secondItem="Fqs-5I-gTN" secondAttribute="bottom" id="B7F-ZS-jZe"/>
-                            <constraint firstItem="hag-e5-Sys" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="BhO-6I-M0A"/>
-                            <constraint firstAttribute="bottom" secondItem="hag-e5-Sys" secondAttribute="bottom" id="FYv-n2-KWS"/>
-                            <constraint firstItem="hag-e5-Sys" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="JjW-yj-qCg"/>
+                            <constraint firstAttribute="bottom" secondItem="5qE-M4-Dhz" secondAttribute="bottom" id="JSo-Np-qYc"/>
                             <constraint firstAttribute="trailing" secondItem="Tda-he-8YJ" secondAttribute="trailing" id="Mva-K4-mIZ"/>
                             <constraint firstItem="oNn-cV-T8L" firstAttribute="trailing" secondItem="vYl-Ka-gkW" secondAttribute="trailing" id="Tx4-1Z-8ve"/>
                             <constraint firstItem="aT4-Yz-YQt" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="TxK-cJ-bTP"/>
                             <constraint firstItem="Tda-he-8YJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="XFu-Qm-S1l"/>
-                            <constraint firstItem="20i-dz-JZp" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Yhu-wu-UpW"/>
                             <constraint firstItem="vYl-Ka-gkW" firstAttribute="top" secondItem="aT4-Yz-YQt" secondAttribute="bottom" id="dLh-qO-OiP"/>
                             <constraint firstItem="Fqs-5I-gTN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="e4u-Wd-VvY"/>
-                            <constraint firstItem="20i-dz-JZp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="eIR-0I-FhR"/>
                             <constraint firstItem="3X4-Nc-yBe" firstAttribute="trailing" secondItem="oNn-cV-T8L" secondAttribute="trailing" id="eUQ-vQ-Yda"/>
                             <constraint firstAttribute="trailing" secondItem="aT4-Yz-YQt" secondAttribute="trailing" id="eqR-pm-2Ft"/>
                             <constraint firstItem="Tda-he-8YJ" firstAttribute="top" secondItem="3X4-Nc-yBe" secondAttribute="bottom" id="gv1-g9-0bM"/>
                             <constraint firstItem="vYl-Ka-gkW" firstAttribute="leading" secondItem="oNn-cV-T8L" secondAttribute="leading" id="iP4-tG-GUx"/>
                             <constraint firstItem="Fqs-5I-gTN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="kFU-zp-NaP"/>
                             <constraint firstAttribute="bottom" secondItem="Tda-he-8YJ" secondAttribute="bottom" id="rn7-2I-qHJ"/>
-                            <constraint firstAttribute="bottom" secondItem="20i-dz-JZp" secondAttribute="bottom" id="uVJ-4J-XuY"/>
+                            <constraint firstAttribute="trailing" secondItem="5qE-M4-Dhz" secondAttribute="trailing" id="s7t-2c-EBP"/>
+                            <constraint firstItem="5qE-M4-Dhz" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="twa-1S-M5r"/>
                         </constraints>
                     </view>
                     <connections>
@@ -848,6 +868,7 @@
                         <outlet property="contentTopC" destination="Zxb-vo-H1N" id="WNj-ql-OcY"/>
                         <outlet property="controlsBlurBottomC" destination="5El-mq-7hs" id="MiL-7T-Eok"/>
                         <outlet property="controlsBlurView" destination="2JP-1T-MxT" id="zlF-Wp-gev"/>
+                        <outlet property="drawingBaseView" destination="qbO-om-gzX" id="0Yk-4w-SIz"/>
                         <outlet property="drawingView" destination="hag-e5-Sys" id="xSH-LI-nAp"/>
                         <outlet property="flashBottomC" destination="V6B-p4-O4u" id="CHU-nL-VDK"/>
                         <outlet property="flashButton" destination="9tP-6a-TE7" id="A45-pu-NbJ"/>

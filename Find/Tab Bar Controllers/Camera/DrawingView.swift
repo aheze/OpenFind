@@ -8,8 +8,19 @@
 
 import UIKit
 
-class DrawingView: UIView {
+class CustomActionsView: UIView {
+    var actions = [UIAccessibilityCustomAction]()
     
+    override var accessibilityCustomActions: [UIAccessibilityCustomAction]? {
+        get {
+            return actions
+        }
+        set {
+            super.accessibilityCustomActions = newValue
+        }
+    }
+}
+class DrawingView: UIView {
     var actions = [UIAccessibilityCustomAction]()
     
     override var accessibilityCustomActions: [UIAccessibilityCustomAction]? {

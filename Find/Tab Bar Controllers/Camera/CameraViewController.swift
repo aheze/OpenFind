@@ -34,6 +34,8 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var settingsHeightC: NSLayoutConstraint!
     var controlsView: UIView?
     
+    
+    
     @IBOutlet weak var topContentView: UIView!
     @IBOutlet weak var searchBackgroundView: UIView!
     
@@ -279,6 +281,8 @@ class CameraViewController: UIViewController {
     var motionYAsOfHighlightStart = Double(0) ///     Y
     var motionZAsOfHighlightStart = Double(0) ///     Z
     
+    
+    @IBOutlet weak var drawingBaseView: CustomActionsView!
     @IBOutlet weak var drawingView: DrawingView!
     
     //MARK: FAST MODE

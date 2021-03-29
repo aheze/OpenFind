@@ -205,7 +205,7 @@ extension CameraViewController {
         DispatchQueue.main.async {
             let cornerRadius = min(component.height / 3.5, 10)
             
-            let newView: UIView
+            let newView: CustomActionsView
             
             guard let componentColors = self.matchToColors[component.text] else { return }
             let gradientColors = componentColors.map { $0.cgColor }
@@ -223,7 +223,7 @@ extension CameraViewController {
                 
                 newView = gradientView
             } else {
-                newView = UIView()
+                newView = CustomActionsView()
                 
                 if let firstColor = gradientColors.first {
                     newView.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3)
@@ -236,6 +236,21 @@ extension CameraViewController {
             newView.frame = CGRect(x: component.x, y: component.y, width: component.width, height: component.height)
             newView.alpha = 0
             component.baseView = newView
+            
+            newView.isAccessibilityElement = true
+            newView.accessibilityLabel = "Highlight"
+            newView.actions = [
+            
+                UIAccessibilityCustomAction(name: "Show transcript overlay") { _ in
+                    print("overlay")
+                    return true
+                },
+                
+                UIAccessibilityCustomAction(name: "Focus VoiceOver on shutter button") { _ in
+                    UIAccessibility.post(notification: .layoutChanged, argument: self.cameraIconHolder)
+                    return true
+                }
+            ]
             
             self.drawingView.addSubview(newView)
             
