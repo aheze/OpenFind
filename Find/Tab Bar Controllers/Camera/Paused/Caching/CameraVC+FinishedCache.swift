@@ -81,10 +81,9 @@ extension CameraViewController {
             if self.numberCurrentlyFindingFromCache == 0 {
                 self.highlightsFromCache = components
                 self.currentComponents = components
-                self.drawHighlights(highlights: components)
+                self.drawHighlights(highlights: components, shouldScale: true)
                 
-                self.updateMatchesNumber(to: components.count)
-                
+                self.updateMatchesNumber(to: components.count, tapHaptic: true)
                 
                 if components.count >= 1 {
                     AppStoreReviewManager.increaseReviewActionCount()

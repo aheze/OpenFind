@@ -76,12 +76,14 @@ extension CameraViewController {
                     }
                     
                     if newComponents.isEmpty {
-                        self.updateMatchesNumber(to: 0)
+                        self.updateMatchesNumber(to: 0, tapHaptic: false)
                         self.fadeCurrentComponents(currentComponents: self.currentComponents)
                     } else {
                         
                         if CameraState.isPaused, self.cachePressed {
                             self.addPausedFastResults(newComponents: newComponents)
+                            
+                            self.updateMatchesNumber(to: newComponents.count, tapHaptic: false)
                         } else {
                             let finalizeNotify = (newComponents.count > self.currentComponents.count && self.canNotify)
                             self.animateNewHighlights(newComponents: newComponents, shouldScale: finalizeNotify)
@@ -94,9 +96,9 @@ extension CameraViewController {
                                 self.canNotify = false
                                 self.currentPassCount = 0
                             }
+                            
+                            self.updateMatchesNumber(to: newComponents.count, tapHaptic: finalizeNotify)
                         }
-                        
-                        self.updateMatchesNumber(to: newComponents.count)
                     }
                     
                     self.busyFastFinding = false
@@ -104,7 +106,7 @@ extension CameraViewController {
                 
             } else {
                 fadeCurrentComponents(currentComponents: currentComponents)
-                updateMatchesNumber(to: 0)
+                updateMatchesNumber(to: 0, tapHaptic: false)
                 currentComponents.removeAll()
                 busyFastFinding = false
                 
@@ -233,51 +235,17 @@ extension CameraViewController {
                 }
             }
             
+            
+            component.baseView = newView
             newView.frame = CGRect(x: component.x, y: component.y, width: component.width, height: component.height)
             newView.alpha = 0
-            component.baseView = newView
-            
-            newView.isAccessibilityElement = true
-            
-            let text = AccessibilityText(text: component.text, isRaised: false, customPitch: hexStrings.first?.getDescription().1)
-            let highlightText = AccessibilityText(text: "\nHighlight.\n", isRaised: false)
-            let locationTitle = AccessibilityText(text: "Location:", isRaised: true)
-            
-            let drawingBounds = self.drawingView.bounds
-            
-            let xPercent = Int(100 * ((component.x + (component.width / 2)) / drawingBounds.width))
-            let yPercent = Int(100 * ((component.y + (component.height / 2)) / drawingBounds.height))
-            
-            let locationRawString = "\(xPercent) x, \(yPercent) y"
-            
-            let locationString = AccessibilityText(text: locationRawString, isRaised: false)
-            
-            newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text, highlightText, locationTitle, locationString])
-            newView.accessibilityHint = "(0 x, 0 y) is at top-left of screen. (100 x, 100 y) is at bottom-right."
-
-            newView.actions = [
-            
-                UIAccessibilityCustomAction(name: "Show transcript overlay") { _ in
-                    print("overlay")
-                    return true
-                },
-                
-                UIAccessibilityCustomAction(name: "Focus VoiceOver on shutter button") { _ in
-                    UIAccessibility.post(notification: .layoutChanged, argument: self.cameraIconHolder)
-                    return true
-                }
-            ]
-            
             
             self.drawingView.addSubview(newView)
-            
-            let insetBounds = newView.bounds.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6))
-            newView.accessibilityFrame = newView.convert(insetBounds, to: nil)
+            self.addAccessibilityLabel(component: component, newView: newView, hexString: hexStrings.first ?? "")
             
             if shouldScale {
                 newView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
             }
-            
             UIView.animate(withDuration: 0.15) {
                 newView.alpha = 1
                 if shouldScale {
@@ -318,7 +286,7 @@ extension CameraViewController {
         
         DispatchQueue.main.async {
             if updateMatchesLabel, self.currentComponents.count == 0 { /// make sure is still 0, because async can run late
-                self.updateMatchesNumber(to: 0)
+                self.updateMatchesNumber(to: 0, tapHaptic: false)
             }
             for subView in self.drawingView.subviews {
                 subView.removeFromSuperview()

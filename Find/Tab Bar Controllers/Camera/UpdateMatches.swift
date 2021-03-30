@@ -9,33 +9,50 @@
 import UIKit
 
 extension CameraViewController {
-    func updateMatchesNumber(to number: Int) {
+    func updateMatchesNumber(to number: Int, tapHaptic: Bool) {
         currentNumberOfMatches = number
         
         statsNavController.viewController.update(to: number)
+        statsView.accessibilityValue = "\(number) results"
         
-        if number > previousNumberOfMatches {
-            if currentPassCount >= 100 {
-                currentPassCount = 0
-                
-                switch UserDefaults.standard.integer(forKey: "hapticFeedbackLevel") {
-                case 2:
-                    let generator = UIImpactFeedbackGenerator(style: .light)
-                    generator.prepare()
-                    generator.impactOccurred()
-                case 3:
-                    let generator = UIImpactFeedbackGenerator(style: .medium)
-                    generator.prepare()
-                    generator.impactOccurred()
-                default:
-                    break
-                }
+        if statsFocused {
+            
+            if statsShouldAnnounce {
+                UIAccessibility.post(notification: .announcement, argument: "\(number)")
+            }
+            
+            if number == 0 {
+                statsShouldAnnounce = false
+            } else {
+                statsShouldAnnounce = true
+            }
+        }
+        
+        if tapHaptic {
+            switch UserDefaults.standard.integer(forKey: "hapticFeedbackLevel") {
+            case 2:
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.prepare()
+                generator.impactOccurred()
+            case 3:
+                let generator = UIImpactFeedbackGenerator(style: .medium)
+                generator.prepare()
+                generator.impactOccurred()
+            default:
+                break
+            }
+            
+            if CameraState.isPaused {
+                UIAccessibility.post(notification: .announcement, argument: "\(number) results found.")
+            } else {
+                UIAccessibility.post(notification: .announcement, argument: "\(number) results found. Double-tap the shutter to pause.")
             }
         }
         
         DispatchQueue.main.async {
             self.statsLabel.text = "\(number)"
         }
+        
         previousNumberOfMatches = number
     }
 

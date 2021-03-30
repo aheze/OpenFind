@@ -56,7 +56,9 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var saveLabel: UILabel!
     @IBOutlet weak var cacheLabel: UILabel!
     
-    @IBOutlet weak var statsView: UIView!
+    var statsFocused = false
+    var statsShouldAnnounce = false
+    @IBOutlet weak var statsView: StatsView!
     @IBOutlet weak var statsBottomC: NSLayoutConstraint!
     
     @IBOutlet weak var statsButton: CustomButton!
@@ -445,7 +447,7 @@ class CameraViewController: UIViewController {
         controlsBlurView.layer.cornerRadius = controlsBlurView.bounds.height / 2
         controlsBlurView.clipsToBounds = true
         
-        updateMatchesNumber(to: 0)
+        updateMatchesNumber(to: 0, tapHaptic: false)
         setupSearchBar()
         
         statsView.layer.cornerRadius = statsView.bounds.width / 2

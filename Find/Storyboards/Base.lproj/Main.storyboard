@@ -461,7 +461,7 @@
                                             <constraint firstItem="9tP-6a-TE7" firstAttribute="top" secondItem="SIG-Pk-jNK" secondAttribute="top" id="zUY-6l-uNV"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kbt-Wb-Lvr">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kbt-Wb-Lvr" customClass="StatsView" customModule="Find" customModuleProvider="target">
                                         <rect key="frame" x="8" y="68" width="38" height="38"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fK0-3I-lSn" customClass="CustomButton" customModule="Find" customModuleProvider="target">
@@ -922,7 +922,7 @@
                         <outlet property="statsButton" destination="fK0-3I-lSn" id="rLB-1b-8xL"/>
                         <outlet property="statsHeightC" destination="u5T-Qy-gET" id="cRR-Fi-DPa"/>
                         <outlet property="statsLabel" destination="CSS-3q-pzT" id="Fw9-6Y-5FU"/>
-                        <outlet property="statsView" destination="Kbt-Wb-Lvr" id="QDW-RN-H2z"/>
+                        <outlet property="statsView" destination="Kbt-Wb-Lvr" id="jYC-DA-f1Y"/>
                         <outlet property="statsWidthC" destination="00K-gX-4Qp" id="sKU-7z-bJ5"/>
                         <outlet property="tapToRemoveLabel" destination="Hc9-i8-kXk" id="IQj-Ry-hZp"/>
                         <outlet property="textLabel" destination="BRC-Yj-hpw" id="ZQn-rk-L50"/>

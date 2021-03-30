@@ -35,9 +35,14 @@ extension CameraViewController {
         cameraIconHolder.accessibilityTraits = .button
         
         statsView.isAccessibilityElement = true
-        statsView.accessibilityLabel = "Statistics"
-        statsView.accessibilityHint = "Presents the Stats screen"
+        statsView.accessibilityLabel = "Stats"
+        statsView.accessibilityHint = "Presents the Stats screen. Focus to continuously announce how many results there are currently, if more than 0."
+        statsView.accessibilityValue = "0"
         statsView.accessibilityTraits = [.button]
+        statsView.currentlyFocused = { [weak self] focused in
+            guard let self = self else { return }
+            self.statsFocused = focused
+        }
         
         fullScreenView.isAccessibilityElement = true
         fullScreenView.accessibilityLabel = "Full screen"
@@ -126,32 +131,20 @@ extension CameraViewController {
                 return true
             }
         ]
-        
-//        drawingView.isAccessibilityElement = true
-//        drawingView.accessibilityLabel = "Viewfinder"
-//        drawingView.accessibilityHint = "Highlights will be placed on detected results."
-//        drawingView.actions = [
-//
-//            UIAccessibilityCustomAction(name: "Show transcript overlay") { _ in
-//                print("overlay")
-//                return true
-//            },
-//
-//            UIAccessibilityCustomAction(name: "Focus VoiceOver on shutter button") { _ in
-//                UIAccessibility.post(notification: .layoutChanged, argument: self.cameraIconHolder)
-//                return true
-//            }
-//        ]
-
     }
     
     func pausedAccessibility(paused: Bool) {
         if paused {
+            
             controlsView?.accessibilityHint = "Contains Stats, Full Screen, Save, Shutter, Cache, Flashlight, and Settings buttons."
             passthroughView.accessibilityElements = [controlsView, statsView, fullScreenView, saveToPhotos, cameraIconHolder, cache, flashView, settingsView]
             
             cameraIconHolder.accessibilityLabel = "Shutter, play"
             cameraIconHolder.accessibilityHint = "Starts the camera, removes the Save and Cache buttons, and enables the flashlight to be turned on"
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                UIAccessibility.post(notification: .announcement, argument: "\(self.currentNumberOfMatches) results found. Drag your finger over the Viewfinder to explore highlights. Cache for better accuracy.")
+            }
         } else {
             controlsView?.accessibilityHint = "Contains Stats, Full Screen, Shutter, Flashlight, and Settings buttons. When camera is paused, also contains Save and Cache"
             passthroughView.accessibilityElements = [controlsView, statsView, fullScreenView, cameraIconHolder, flashView, settingsView]
