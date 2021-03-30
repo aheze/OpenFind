@@ -9,9 +9,9 @@
 import UIKit
 
 extension CameraViewController {
-    func finishedCache(with contents: [EditableSingleHistoryContent], rawContents: [EditableSingleHistoryContent]) {
+    func finishedCache(with components: [Component], rawContents: [EditableSingleHistoryContent]) {
         finishedCaching = true
-        cachedContents = contents
+        cachedComponents = components
         rawCachedContents = rawContents
         
         if cachePressed {
@@ -44,10 +44,10 @@ extension CameraViewController {
             var components = [Component]()
            
             ///Cycle through each block of text. Each cont may be a line long.
-            for content in self.cachedContents {
+            for cachedComponent in self.cachedComponents {
                 
-                let lowercaseContentText = content.text.lowercased()
-                let individualCharacterWidth = CGFloat(content.width) / CGFloat(lowercaseContentText.count)
+                let lowercaseContentText = cachedComponent.text
+                let individualCharacterWidth = CGFloat(cachedComponent.width) / CGFloat(lowercaseContentText.count)
                 
                 for match in self.matchToColors.keys {
                     if lowercaseContentText.contains(match) {
@@ -57,10 +57,10 @@ extension CameraViewController {
                         for index in indices {
                             numberOfMatches += 1
                             
-                            let x = content.x + (individualCharacterWidth * CGFloat(index))
-                            let y = content.y
+                            let x = cachedComponent.x + (individualCharacterWidth * CGFloat(index))
+                            let y = cachedComponent.y
                             let width = (individualCharacterWidth * CGFloat(match.count))
-                            let height = content.height
+                            let height = cachedComponent.height
                             
                             let component = Component()
                             component.x = x - 6
@@ -68,6 +68,7 @@ extension CameraViewController {
                             component.width = width + 12
                             component.height = height + 12
                             component.text = match.lowercased()
+                            component.transcriptComponent = cachedComponent.transcriptComponent
                             
                             components.append(component)
                         }

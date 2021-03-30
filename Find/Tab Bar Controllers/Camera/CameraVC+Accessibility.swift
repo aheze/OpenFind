@@ -118,11 +118,11 @@ extension CameraViewController {
         
         drawingBaseView.isAccessibilityElement = true
         drawingBaseView.accessibilityLabel = "Viewfinder"
-        drawingBaseView.accessibilityHint = "Highlights will be placed on detected results. Pause the shutter to explore them."
-        drawingBaseView.actions = [
-        
-            UIAccessibilityCustomAction(name: "Show transcript overlay") { _ in
-                print("overlay from base")
+        drawingBaseView.accessibilityHint = "Pause the shutter to explore highlights, then double-tap them to toggle transcript overlay."
+        drawingBaseView.activated = { [weak self] in
+            guard let self = self else { return false }
+            
+            if CameraState.isPaused {
                 self.showingTranscripts.toggle()
                 if self.showingTranscripts {
                     if !self.transcriptsDrawn {
@@ -133,13 +133,10 @@ extension CameraViewController {
                     self.showHighlights()
                 }
                 return true
-            },
-            
-            UIAccessibilityCustomAction(name: "Focus VoiceOver on shutter button") { _ in
-                UIAccessibility.post(notification: .layoutChanged, argument: self.cameraIconHolder)
-                return true
             }
-        ]
+            
+            return false
+        }
     }
     
     func pausedAccessibility(paused: Bool) {

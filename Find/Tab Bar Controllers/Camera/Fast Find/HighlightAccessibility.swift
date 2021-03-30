@@ -39,34 +39,58 @@ extension CameraViewController {
                 DispatchQueue.main.async {
                     newView.isAccessibilityElement = true
                     newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text, highlightText, locationTitle, locationString, overlapString])
-                    newView.accessibilityHint = "(0 x, 0 y) is at top-left of screen. (100 x, 100 y) is at bottom-right."
+
+                    if self.showingTranscripts {
+                        newView.accessibilityHint = "Double-tap to show highlights"
+                    } else {
+                        newView.accessibilityHint = "Double-tap to show transcript overlay"
+                    }
                     
-                    newView.actions = [
+                    newView.activated = { [weak self] in
+                        guard let self = self else { return false }
                         
-                        UIAccessibilityCustomAction(name: "Show transcript overlay") { _ in
-                            print("overlay from higlight")
+                        if CameraState.isPaused {
                             self.showingTranscripts.toggle()
                             if self.showingTranscripts {
                                 if !self.transcriptsDrawn {
-                                    self.drawAllTranscripts()
+                                    self.drawAllTranscripts(focusedTranscript: component.transcriptComponent)
                                 }
-                                self.showTranscripts()
+                                self.showTranscripts(focusedTranscript: component.transcriptComponent)
                             } else {
                                 self.showHighlights()
                             }
-                            return true
-                        },
-                        
-                        UIAccessibilityCustomAction(name: "Focus VoiceOver on shutter button") { _ in
-                            UIAccessibility.post(notification: .layoutChanged, argument: self.cameraIconHolder)
+                            
+                            self.previousActivatedHighlight = component
                             return true
                         }
-                    ]
+                        
+                        return false
+                    }
                     
                     let insetBounds = newView.bounds.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6))
                     newView.accessibilityFrame = newView.convert(insetBounds, to: nil)
                 }
             }
+        }
+    }
+    
+    func updateAccessibilityHints() {
+        if self.showingTranscripts {
+            for highlight in currentComponents {
+                highlight.baseView?.accessibilityHint = "Double-tap to show highlights"
+            }
+            for transcript in currentTranscriptComponents {
+                transcript.baseView?.accessibilityHint = "Double-tap to show highlights"
+            }
+            drawingBaseView.accessibilityHint = "Double-tap to show highlights"
+        } else {
+            for highlight in currentComponents {
+                highlight.baseView?.accessibilityHint = "Double-tap to show transcript overlay"
+            }
+            for transcript in currentTranscriptComponents {
+                transcript.baseView?.accessibilityHint = "Double-tap to show transcript overlay"
+            }
+            drawingBaseView.accessibilityHint = "Double-tap to show transcript overlay"
         }
     }
 }

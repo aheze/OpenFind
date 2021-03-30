@@ -75,6 +75,7 @@ extension CameraViewController {
                                             component.width = width + 12
                                             component.height = height + 12
                                             component.text = match.lowercased()
+                                            component.transcriptComponent = transcriptComponent
                                             
                                             newComponents.append(component)
                                         }

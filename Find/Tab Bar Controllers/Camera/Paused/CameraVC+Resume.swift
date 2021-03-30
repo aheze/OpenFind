@@ -33,7 +33,7 @@ extension CameraViewController {
         
         self.messageView.hideMessages()
         self.startedCaching = false
-        self.cachedContents.removeAll()
+        self.cachedComponents.removeAll()
         self.currentCachingProcess = nil
         self.finishedCaching = false
         self.currentCachingProcess = nil

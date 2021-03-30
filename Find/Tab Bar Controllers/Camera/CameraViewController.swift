@@ -37,7 +37,7 @@ class CameraViewController: UIViewController {
     var showingTranscripts = false
     var transcriptsDrawn = false
     var currentTranscriptComponents = [Component]()
-    
+    var previousActivatedHighlight: Component?
     
     
     @IBOutlet weak var topContentView: UIView!
@@ -313,7 +313,7 @@ class CameraViewController: UIViewController {
     
     // MARK: Caching
     var startedCaching = false
-    var cachedContents = [EditableSingleHistoryContent]() /// for adding find results
+    var cachedComponents = [Component]()
     var rawCachedContents = [EditableSingleHistoryContent]() /// raw vision coordinates to save to disk
     var currentCachingProcess: UUID?
     var finishedCaching = false

@@ -9,15 +9,9 @@
 import UIKit
 
 class CustomActionsView: UIView {
-    var actions = [UIAccessibilityCustomAction]()
-    
-    override var accessibilityCustomActions: [UIAccessibilityCustomAction]? {
-        get {
-            return actions
-        }
-        set {
-            super.accessibilityCustomActions = newValue
-        }
+    var activated: (() -> Bool)?
+    override func accessibilityActivate() -> Bool {
+        return activated?() ?? false
     }
 }
 class DrawingView: UIView {

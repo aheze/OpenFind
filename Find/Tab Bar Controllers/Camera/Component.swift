@@ -18,6 +18,7 @@ class Component: NSObject {
     var text = ""
     var colors = ["00aeef"]
     var baseView: CustomActionsView?
+    var transcriptComponent: Component?
 }
 
 class StatsView: UIView {
