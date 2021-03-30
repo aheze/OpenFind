@@ -34,6 +34,10 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var settingsHeightC: NSLayoutConstraint!
     var controlsView: UIView?
     
+    var showingTranscripts = false
+    var transcriptsDrawn = false
+    var currentTranscriptComponents = [Component]()
+    
     
     
     @IBOutlet weak var topContentView: UIView!

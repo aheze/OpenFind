@@ -168,6 +168,7 @@
 		3C643FCE26057884001E6FA1 /* CameraVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643FB026057884001E6FA1 /* CameraVC+Constraints.swift */; };
 		3C643FD22605788C001E6FA1 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C643FD12605788C001E6FA1 /* Colors.xcassets */; };
 		3C6472362612FE770089DAC6 /* HighlightAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6472352612FE770089DAC6 /* HighlightAccessibility.swift */; };
+		3C64723A261386100089DAC6 /* CameraVC+Transcript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C647239261386100089DAC6 /* CameraVC+Transcript.swift */; };
 		3C69186626123B6A00510C08 /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C69186526123B6A00510C08 /* DrawingView.swift */; };
 		3C69186C2612497900510C08 /* FindBar+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C69186B2612497900510C08 /* FindBar+Accessibility.swift */; };
 		3C69187026125F6B00510C08 /* HighlightColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C69186F26125F6A00510C08 /* HighlightColor.swift */; };
@@ -546,6 +547,7 @@
 		3C643FB026057884001E6FA1 /* CameraVC+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraVC+Constraints.swift"; sourceTree = "<group>"; };
 		3C643FD12605788C001E6FA1 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		3C6472352612FE770089DAC6 /* HighlightAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightAccessibility.swift; sourceTree = "<group>"; };
+		3C647239261386100089DAC6 /* CameraVC+Transcript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Transcript.swift"; sourceTree = "<group>"; };
 		3C69186526123B6A00510C08 /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 		3C69186B2612497900510C08 /* FindBar+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FindBar+Accessibility.swift"; sourceTree = "<group>"; };
 		3C69186F26125F6A00510C08 /* HighlightColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightColor.swift; sourceTree = "<group>"; };
@@ -1614,6 +1616,7 @@
 				3C9D5F4D25F2E72F002E93F5 /* CameraVC+FullScreen.swift */,
 				3C9D5F5025F30394002E93F5 /* CameraVC+Flashlight.swift */,
 				3C570E1B260CE52200F5AA4D /* CameraVC+Accessibility.swift */,
+				3C647239261386100089DAC6 /* CameraVC+Transcript.swift */,
 				3CA9335625BDF4B500042C2F /* CameraVC+ButtonSetup.swift */,
 				3C3232DF261153FB00A33192 /* CameraVC+Shutter.swift */,
 				3CD388BC25C11AB900B67B13 /* CameraVC+Tips.swift */,
@@ -2094,6 +2097,7 @@
 				3C69187026125F6B00510C08 /* HighlightColor.swift in Sources */,
 				3C1AB1A6261004B7009B47C0 /* Sound.swift in Sources */,
 				3C5DD06E26104C9300434317 /* PhotoFindVC+Accessibility.swift in Sources */,
+				3C64723A261386100089DAC6 /* CameraVC+Transcript.swift in Sources */,
 				3CF45F5C260EF1FC00FE949E /* Dates.swift in Sources */,
 				3CA679B625C38836008A00A4 /* ContactView.swift in Sources */,
 				3CAC4DAA25BF52CF00CC7948 /* LTMorphingLabel+Sparkle.swift in Sources */,

@@ -118,11 +118,20 @@ extension CameraViewController {
         
         drawingBaseView.isAccessibilityElement = true
         drawingBaseView.accessibilityLabel = "Viewfinder"
-        drawingBaseView.accessibilityHint = "Highlights will be placed on detected results. Pause shutter to explore."
+        drawingBaseView.accessibilityHint = "Highlights will be placed on detected results. Pause the shutter to explore them."
         drawingBaseView.actions = [
         
             UIAccessibilityCustomAction(name: "Show transcript overlay") { _ in
-                print("overlay")
+                print("overlay from base")
+                self.showingTranscripts.toggle()
+                if self.showingTranscripts {
+                    if !self.transcriptsDrawn {
+                        self.drawAllTranscripts()
+                    }
+                    self.showTranscripts()
+                } else {
+                    self.showHighlights()
+                }
                 return true
             },
             
@@ -147,6 +156,9 @@ extension CameraViewController {
                 }
             }
         
+            if showingTranscripts {
+                drawAllTranscripts()
+            }
         
             controlsView?.accessibilityHint = "Contains Stats, Full Screen, Save, Shutter, Cache, Flashlight, and Settings buttons."
             passthroughView.accessibilityElements = [controlsView, statsView, fullScreenView, saveToPhotos, cameraIconHolder, cache, flashView, settingsView]

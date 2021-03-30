@@ -29,7 +29,10 @@ extension CameraViewController {
             self.saveToPhotosIfNeeded()
             self.resetState()
             self.startLivePreview()
+            
+            /// clear drawing view
             self.resetHighlights()
+            self.resetTranscripts()
             
             AppStoreReviewManager.requestReviewIfPossible()
         }

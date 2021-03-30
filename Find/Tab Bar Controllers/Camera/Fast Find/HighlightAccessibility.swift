@@ -44,7 +44,16 @@ extension CameraViewController {
                     newView.actions = [
                         
                         UIAccessibilityCustomAction(name: "Show transcript overlay") { _ in
-                            print("overlay")
+                            print("overlay from higlight")
+                            self.showingTranscripts.toggle()
+                            if self.showingTranscripts {
+                                if !self.transcriptsDrawn {
+                                    self.drawAllTranscripts()
+                                }
+                                self.showTranscripts()
+                            } else {
+                                self.showHighlights()
+                            }
                             return true
                         },
                         
