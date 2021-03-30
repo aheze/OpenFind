@@ -125,9 +125,6 @@ extension CameraViewController {
             if CameraState.isPaused {
                 self.showingTranscripts.toggle()
                 if self.showingTranscripts {
-                    if !self.transcriptsDrawn {
-                        self.drawAllTranscripts()
-                    }
                     self.showTranscripts()
                 } else {
                     self.showHighlights()
@@ -153,9 +150,7 @@ extension CameraViewController {
                 }
             }
         
-            if showingTranscripts {
-                drawAllTranscripts()
-            }
+            drawAllTranscripts(show: false)
         
             controlsView?.accessibilityHint = "Contains Stats, Full Screen, Save, Shutter, Cache, Flashlight, and Settings buttons."
             passthroughView.accessibilityElements = [controlsView, statsView, fullScreenView, saveToPhotos, cameraIconHolder, cache, flashView, settingsView]

@@ -13,6 +13,11 @@ class CustomActionsView: UIView {
     override func accessibilityActivate() -> Bool {
         return activated?() ?? false
     }
+    
+    var lostFocus: (() -> Void)?
+    override func accessibilityElementDidLoseFocus() {
+        lostFocus?()
+    }
 }
 class DrawingView: UIView {
     var actions = [UIAccessibilityCustomAction]()

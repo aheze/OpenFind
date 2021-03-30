@@ -76,7 +76,6 @@ extension CameraViewController {
                 }
             }
             
-            self.resetHighlights(updateMatchesLabel: false)
             
             self.numberCurrentlyFindingFromCache -= 1
             if self.numberCurrentlyFindingFromCache == 0 {

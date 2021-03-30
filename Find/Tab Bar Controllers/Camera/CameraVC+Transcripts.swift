@@ -15,17 +15,22 @@ extension CameraViewController {
                 subView.removeFromSuperview()
             }
             self.currentTranscriptComponents.removeAll()
-            self.transcriptsDrawn = false
+            self.showingTranscripts = false
         }
     }
-    func drawAllTranscripts(focusedTranscript: Component? = nil) {
-        transcriptsDrawn = true
-        for subView in self.drawingView.subviews {
-            subView.isHidden = true
+    
+    func drawAllTranscripts(focusedTranscript: Component? = nil, show: Bool) {
+        
+        if show {
+            for subView in self.drawingView.subviews {
+                subView.isHidden = true
+            }
         }
+        
         for transcript in currentTranscriptComponents {
-            drawTranscript(component: transcript)
+            drawTranscript(component: transcript, show: show)
         }
+        
         updateAccessibilityHints()
         
         if
@@ -58,7 +63,7 @@ extension CameraViewController {
             }
         }
     }
-    func showHighlights() {
+    func showHighlights(currentTranscript: Component? = nil) {
         DispatchQueue.main.async {
             for subView in self.drawingView.subviews {
                 subView.isHidden = true
@@ -70,18 +75,36 @@ extension CameraViewController {
             
             if
                 let previousHighlight = self.previousActivatedHighlight,
-                let baseView =  previousHighlight.baseView
+                let baseView = previousHighlight.baseView
             {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                     UIAccessibility.post(notification: .layoutChanged, argument: baseView)
                 }
                 self.previousActivatedHighlight = nil
+                
+            } else if let currentTranscript = currentTranscript {
+                print("cuyrrent,. before lsot focus")
+                
+                for component in self.currentComponents {
+                    if component.transcriptComponent == currentTranscript {
+                        print("equals!")
+                        
+                        if let baseView = component.baseView {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                                UIAccessibility.post(notification: .layoutChanged, argument: baseView)
+                            }
+                        }
+                        
+                        break
+                    }
+                }
+                
             }
         }
     }
     
     
-    func drawTranscript(component: Component) {
+    func drawTranscript(component: Component, show: Bool) {
         DispatchQueue.main.async {
             let cornerRadius = min(component.height / 5.5, 10)
             
@@ -95,12 +118,12 @@ extension CameraViewController {
             
             component.baseView = newView
             newView.frame = CGRect(x: component.x, y: component.y, width: component.width, height: component.height)
+            
             self.drawingView.addSubview(newView)
             
             let topContentFrame = self.topContentView.convert(self.topContentView.bounds, to: nil)
             let passthroughFrame = self.passthroughView.convert(self.passthroughView.bounds, to: nil)
             let highlightFrame = newView.convert(newView.bounds, to: nil)
-            
             
             let drawingBounds = self.drawingView.bounds
             
@@ -139,12 +162,9 @@ extension CameraViewController {
                 if CameraState.isPaused {
                     self.showingTranscripts.toggle()
                     if self.showingTranscripts {
-                        if !self.transcriptsDrawn {
-                            self.drawAllTranscripts()
-                        }
                         self.showTranscripts()
                     } else {
-                        self.showHighlights()
+                        self.showHighlights(currentTranscript: component)
                     }
                     
                     return true
@@ -152,6 +172,14 @@ extension CameraViewController {
                 
                 return false
             }
+            
+            newView.lostFocus = { [weak self] in
+                guard let self = self else { return }
+                print("lost focus")
+                self.previousActivatedHighlight = nil
+            }
+            
+            newView.isHidden = !show
         }
     }
 }

@@ -35,7 +35,6 @@ class CameraViewController: UIViewController {
     var controlsView: UIView?
     
     var showingTranscripts = false
-    var transcriptsDrawn = false
     var currentTranscriptComponents = [Component]()
     var previousActivatedHighlight: Component?
     

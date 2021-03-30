@@ -14,7 +14,6 @@ extension CameraViewController {
         guard thisProcessIdentifier == currentCachingProcess else { return }
         
         var rawContents = [EditableSingleHistoryContent]() /// vision coordinates
-//        var contents = [EditableSingleHistoryContent]()
         
         DispatchQueue.main.async {
             var transcriptComponents = [Component]()
@@ -32,6 +31,7 @@ extension CameraViewController {
                                 
                         for text in observation.topCandidates(1) {
                             
+                            print("Con re. \(convertedRect)")
                             let transcriptComponent = Component()
                             transcriptComponent.text = text.string.lowercased()
                             transcriptComponent.x = convertedRect.origin.x
@@ -65,15 +65,12 @@ extension CameraViewController {
                         }
                     }
                 }
-                
-                self.currentTranscriptComponents = transcriptComponents
-                if CameraState.isPaused {
-                    if self.showingTranscripts {
-                        self.drawAllTranscripts()
-                    }
-                }
             }
             
+            self.resetHighlights(updateMatchesLabel: false)
+            
+            self.currentTranscriptComponents = transcriptComponents
+            self.drawAllTranscripts(show: self.showingTranscripts)
             self.finishedCache(with: components, rawContents: rawContents)
             
         }

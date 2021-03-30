@@ -14,119 +14,119 @@ import CoreMotion
 extension CameraViewController {
     
     func handleFastDetectedText(request: VNRequest?, error: Error?) {
-            if currentPassCount >= 80 {
-                canNotify = true
+        if currentPassCount >= 80 {
+            canNotify = true
+        }
+        
+        if let results = request?.results, results.count > 0 {
+            
+            if let currentMotion = motionManager.deviceMotion {
+                motionXAsOfHighlightStart = Double(0)
+                motionYAsOfHighlightStart = Double(0)
+                motionZAsOfHighlightStart = Double(0)
+                initialAttitude = currentMotion.attitude
             }
             
-            if let results = request?.results, results.count > 0 {
+            DispatchQueue.main.async {
                 
-                if let currentMotion = motionManager.deviceMotion {
-                    motionXAsOfHighlightStart = Double(0)
-                    motionYAsOfHighlightStart = Double(0)
-                    motionZAsOfHighlightStart = Double(0)
-                    initialAttitude = currentMotion.attitude
-                }
+                var newComponents = [Component]()
+                var transcriptComponents = [Component]()
                 
-                DispatchQueue.main.async {
-                    
-                    var newComponents = [Component]()
-                    var transcriptComponents = [Component]()
-                    
-                    for result in results {
-                        if let observation = result as? VNRecognizedTextObservation {
-                            let convertedRect = self.getConvertedRect(
-                                boundingBox: observation.boundingBox,
-                                inImage: self.pixelBufferSize,
-                                containedIn: self.cameraView.bounds.size
-                            )
+                for result in results {
+                    if let observation = result as? VNRecognizedTextObservation {
+                        let convertedRect = self.getConvertedRect(
+                            boundingBox: observation.boundingBox,
+                            inImage: self.pixelBufferSize,
+                            containedIn: self.cameraView.bounds.size
+                        )
+                        
+                        if UserDefaults.standard.bool(forKey: "showTextDetectIndicator") {
+                            let detectionRect = convertedRect.inset(by: UIEdgeInsets(top: -3, left: -3, bottom: -3, right: -3))
+                            self.animateDetection(rect: detectionRect)
+                        }
+                        
+                        
+                        for text in observation.topCandidates(1) {
                             
-                            if UserDefaults.standard.bool(forKey: "showTextDetectIndicator") {
-                                let detectionRect = convertedRect.inset(by: UIEdgeInsets(top: -3, left: -3, bottom: -3, right: -3))
-                                self.animateDetection(rect: detectionRect)
-                            }
+                            let individualCharacterWidth = convertedRect.width / CGFloat(text.string.count)
+                            let lowercaseText = text.string.lowercased()
                             
+                            let transcriptComponent = Component()
+                            transcriptComponent.text = lowercaseText
+                            transcriptComponent.x = convertedRect.origin.x
+                            transcriptComponent.y = convertedRect.origin.y
+                            transcriptComponent.width = convertedRect.width
+                            transcriptComponent.height = convertedRect.height
+                            transcriptComponents.append(transcriptComponent)
                             
-                            for text in observation.topCandidates(1) {
-                                
-                                let individualCharacterWidth = convertedRect.width / CGFloat(text.string.count)
-                                let lowercaseText = text.string.lowercased()
-                                
-                                let transcriptComponent = Component()
-                                transcriptComponent.text = lowercaseText
-                                transcriptComponent.x = convertedRect.origin.x
-                                transcriptComponent.y = convertedRect.origin.y
-                                transcriptComponent.width = convertedRect.width
-                                transcriptComponent.height = convertedRect.height
-                                transcriptComponents.append(transcriptComponent)
-                                
-                                for match in self.matchToColors.keys {
-                                    if lowercaseText.contains(match) {
+                            for match in self.matchToColors.keys {
+                                if lowercaseText.contains(match) {
+                                    
+                                    let indices = lowercaseText.indicesOf(string: match)
+                                    for index in indices {
+                                        let x = convertedRect.origin.x + (individualCharacterWidth * CGFloat(index))
+                                        let y = convertedRect.origin.y
+                                        let width = (individualCharacterWidth * CGFloat(match.count))
+                                        let height = convertedRect.height
                                         
-                                        let indices = lowercaseText.indicesOf(string: match)
-                                        for index in indices {
-                                            let x = convertedRect.origin.x + (individualCharacterWidth * CGFloat(index))
-                                            let y = convertedRect.origin.y
-                                            let width = (individualCharacterWidth * CGFloat(match.count))
-                                            let height = convertedRect.height
-                                            
-                                            let component = Component()
-                                            component.x = x - 6
-                                            component.y = y - 3
-                                            component.width = width + 12
-                                            component.height = height + 12
-                                            component.text = match.lowercased()
-                                            component.transcriptComponent = transcriptComponent
-                                            
-                                            newComponents.append(component)
-                                        }
+                                        let component = Component()
+                                        component.x = x - 6
+                                        component.y = y - 3
+                                        component.width = width + 12
+                                        component.height = height + 12
+                                        component.text = match.lowercased()
+                                        component.transcriptComponent = transcriptComponent
+                                        
+                                        newComponents.append(component)
                                     }
                                 }
                             }
                         }
                     }
-                    
-                    self.currentTranscriptComponents = transcriptComponents
-                    if CameraState.isPaused {
-                        if self.showingTranscripts {
-                            self.drawAllTranscripts()
-                        }
-                    }
-                    
-                    if newComponents.isEmpty {
-                        self.updateMatchesNumber(to: 0, tapHaptic: false)
-                        self.fadeCurrentComponents(currentComponents: self.currentComponents)
-                    } else {
-                        
-                        if CameraState.isPaused, self.cachePressed {
-                            self.addPausedFastResults(newComponents: newComponents)
-                            self.updateMatchesNumber(to: newComponents.count, tapHaptic: false)
-                        } else {
-                            let finalizeNotify = (newComponents.count > self.currentComponents.count && self.canNotify)
-                            self.animateNewHighlights(newComponents: newComponents, shouldScale: finalizeNotify)
-                            
-                            if finalizeNotify {
-                                let generator = UIImpactFeedbackGenerator(style: .medium)
-                                generator.prepare()
-                                generator.impactOccurred()
-                                
-                                self.canNotify = false
-                                self.currentPassCount = 0
-                            }
-                            
-                            self.updateMatchesNumber(to: newComponents.count, tapHaptic: finalizeNotify)
-                        }
-                    }
-                    
-                    self.busyFastFinding = false
                 }
                 
-            } else {
-                fadeCurrentComponents(currentComponents: currentComponents)
-                updateMatchesNumber(to: 0, tapHaptic: false)
-                currentComponents.removeAll()
-                busyFastFinding = false
+                self.currentTranscriptComponents = transcriptComponents
+                if CameraState.isPaused {
+                    if self.cachedComponents.isEmpty {
+                        self.drawAllTranscripts(show: self.showingTranscripts)
+                    }
+                }
                 
+                if newComponents.isEmpty {
+                    self.updateMatchesNumber(to: 0, tapHaptic: false)
+                    self.fadeCurrentComponents(currentComponents: self.currentComponents)
+                } else {
+                    
+                    if CameraState.isPaused, self.cachePressed {
+                        self.addPausedFastResults(newComponents: newComponents)
+                        self.updateMatchesNumber(to: newComponents.count, tapHaptic: false)
+                    } else {
+                        let finalizeNotify = (newComponents.count > self.currentComponents.count && self.canNotify)
+                        self.animateNewHighlights(newComponents: newComponents, shouldScale: finalizeNotify)
+                        
+                        if finalizeNotify {
+                            let generator = UIImpactFeedbackGenerator(style: .medium)
+                            generator.prepare()
+                            generator.impactOccurred()
+                            
+                            self.canNotify = false
+                            self.currentPassCount = 0
+                        }
+                        
+                        self.updateMatchesNumber(to: newComponents.count, tapHaptic: finalizeNotify)
+                    }
+                }
+                
+                self.busyFastFinding = false
             }
+            
+        } else {
+            fadeCurrentComponents(currentComponents: currentComponents)
+            updateMatchesNumber(to: 0, tapHaptic: false)
+            currentComponents.removeAll()
+            busyFastFinding = false
+            
+        }
         
         
         if waitingToFind {

@@ -52,14 +52,12 @@ extension CameraViewController {
                         if CameraState.isPaused {
                             self.showingTranscripts.toggle()
                             if self.showingTranscripts {
-                                if !self.transcriptsDrawn {
-                                    self.drawAllTranscripts(focusedTranscript: component.transcriptComponent)
-                                }
                                 self.showTranscripts(focusedTranscript: component.transcriptComponent)
                             } else {
                                 self.showHighlights()
                             }
                             
+                            print("set focus!!!!")
                             self.previousActivatedHighlight = component
                             return true
                         }
