@@ -19,7 +19,7 @@ extension PhotoSlidesViewController {
         
         if cameFromFind {
             viewController.cameFromFind = true
-            viewController.highlights = resultPhoto.components
+//            viewController.highlights = resultPhoto.components
             viewController.matchToColors = matchToColors
         } else {
             let findPhoto = resultPhotos[currentIndex].findPhoto
@@ -31,6 +31,23 @@ extension PhotoSlidesViewController {
                 }
                 if editableModel.isDeepSearched {
                     updateActions?(.shouldNotCache)
+                    
+                    var transcripts = [Component]()
+                    for content in editableModel.contents {
+                        let transcript = Component()
+                        transcript.text = content.text
+                        transcript.x = content.x
+                        transcript.y = content.y
+                        transcript.width = content.width
+                        transcript.height = content.height
+                        transcripts.append(transcript)
+                        print("Appending.")
+                    }
+                    
+                    resultPhotos[currentIndex].transcripts = transcripts
+//                    viewController.currentTranscriptComponents = transcripts
+                    print("set.")
+                    
                 } else {
                     updateActions?(.shouldCache)
                 }

@@ -17,57 +17,34 @@ extension SlideViewController {
         removeAllHighlights()
         
         let aspectFrame = AVMakeRect(aspectRatio: imageView.image?.size ?? imageView.bounds.size, insideRect: contentView.bounds)
-        print("asp: \(aspectFrame)")
-        for component in highlights {
-            
-//            let newX = comp.x * (aspectFrame.width) + aspectFrame.origin.x
-//            let newWidth = comp.width * aspectFrame.width
-//            let newY = comp.y * (aspectFrame.height) + aspectFrame.origin.y
-//            let newHeight = comp.height * aspectFrame.height
-//
-//            let compToScale = Component()
-//            compToScale.x = newX - 6
-//            compToScale.y = newY - 3
-//            compToScale.width = newWidth + 12
-//            compToScale.height = newHeight + 6
-//            compToScale.colors = comp.colors
-//            compToScale.text = comp.text
-            
-//            if newHeight <= 50 {
-//                scaleInHighlight(originalComponent: comp, component: compToScale)
-//            } else {
-//                scaleInHighlight(originalComponent: comp, component: compToScale, unsure: true)
-//            }
-                scaleInHighlight(component: component, aspectFrame: aspectFrame)
+        for component in resultPhoto.components {
+            scaleInHighlight(component: component, aspectFrame: aspectFrame)
         }
     }
     
     func updateHighlightFrames() {
         let aspectFrame = AVMakeRect(aspectRatio: imageView.image?.size ?? imageView.bounds.size, insideRect: contentView.bounds)
         
-        for highlight in highlights {
+        for highlight in resultPhoto.components {
             let newX = highlight.x * (aspectFrame.width) + aspectFrame.origin.x - 6
             let newY = highlight.y * (aspectFrame.height) + aspectFrame.origin.y - 3
             let newWidth = highlight.width * aspectFrame.width + 12
             let newHeight = highlight.height * aspectFrame.height + 6
             
             highlight.baseView?.frame = CGRect(x: newX, y: newY, width: newWidth, height: newHeight)
-            print("up.. \(CGRect(x: newX, y: newY, width: newWidth, height: newHeight))")
+        }
+        
+        for transcript in resultPhoto.transcripts {
+            let x = transcript.x * (aspectFrame.width) + aspectFrame.origin.x
+            let w = transcript.width * aspectFrame.width
+            let h = transcript.height * aspectFrame.height
+            let y = (transcript.y * (aspectFrame.height) + aspectFrame.origin.y) - h
+            
+            transcript.baseView?.frame = CGRect(x: x, y: y, width: w, height: h)
         }
     }
     
     func scaleInHighlight(component: Component, aspectFrame: CGRect) {
-        
-//        var newX = component.x * (aspectFrame.width) + aspectFrame.origin.x
-//        var newY = component.y * (aspectFrame.height) + aspectFrame.origin.y
-//        var newWidth = component.width * aspectFrame.width
-//        var newHeight = component.height * aspectFrame.height
-//
-//        newX = newX - 6
-//        newY = newY - 3
-//        newWidth = newWidth + 12
-//        newHeight = newHeight + 6
-        
         component.printDescription()
         
         let newX = component.x * (aspectFrame.width) + aspectFrame.origin.x - 6

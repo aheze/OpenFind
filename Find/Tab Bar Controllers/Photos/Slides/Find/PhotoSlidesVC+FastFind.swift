@@ -65,7 +65,7 @@ extension PhotoSlidesViewController {
             DispatchQueue.main.async {
                 resultPhoto.currentMatchToColors = self.matchToColors
                 self.setPromptToFinishedFastFinding(howMany: resultPhoto.components.count)
-                self.drawHighlights(components: resultPhoto.components, transcripts: [])
+                self.drawHighlightsAndTranscripts()
             }
             return
         }
@@ -160,7 +160,7 @@ extension PhotoSlidesViewController {
         
         DispatchQueue.main.async {
             self.setPromptToFinishedFastFinding(howMany: resultPhoto.components.count)
-            self.drawHighlights(components: resultPhoto.components, transcripts: transcripts)
+            self.drawHighlightsAndTranscripts()
         }
 
     }

@@ -84,7 +84,7 @@ extension PhotoSlidesViewController {
                     
                     DispatchQueue.main.async {
                         self.setPromptToHowManyCacheResults(howMany: totalMatchNumber)
-                        self.drawHighlights(components: components, transcripts: transcriptComponents)
+                        self.drawHighlightsAndTranscripts()
                     }
                 }
             }

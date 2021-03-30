@@ -25,12 +25,10 @@ class SlideViewController: UIViewController {
     // MARK: Drawing
     @IBOutlet weak var drawingBaseView: CustomActionsView!
     @IBOutlet weak var drawingView: UIView!
-    var highlights = [Component]()
     var matchToColors = [String: [HighlightColor]]()
     
     // MARK: Accessibility
     var showingTranscripts = false
-    var currentTranscriptComponents = [Component]()
     var previousActivatedHighlight: Component?
     
     override func viewDidLoad() {
@@ -60,6 +58,7 @@ class SlideViewController: UIViewController {
         
         setupAccessibility()
         
+        print("about to draw.")
         drawAllTranscripts(show: showingTranscripts)
     }
     

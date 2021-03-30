@@ -15,7 +15,7 @@ extension SlideViewController {
             for subView in self.drawingView.subviews {
                 subView.removeFromSuperview()
             }
-            self.currentTranscriptComponents.removeAll()
+            self.resultPhoto.transcripts.removeAll()
             self.showingTranscripts = false
         }
     }
@@ -29,7 +29,7 @@ extension SlideViewController {
         
         let aspectFrame = AVMakeRect(aspectRatio: self.imageView.image?.size ?? self.imageView.bounds.size, insideRect: self.contentView.bounds)
         
-        for transcript in currentTranscriptComponents {
+        for transcript in resultPhoto.transcripts {
             
             drawTranscript(component: transcript, aspectFrame: aspectFrame, show: show)
         }
@@ -51,7 +51,7 @@ extension SlideViewController {
             for subView in self.drawingView.subviews {
                 subView.isHidden = true
             }
-            for transcript in self.currentTranscriptComponents {
+            for transcript in self.resultPhoto.transcripts {
                 transcript.baseView?.isHidden = false
             }
             
@@ -72,7 +72,7 @@ extension SlideViewController {
             for subView in self.drawingView.subviews {
                 subView.isHidden = true
             }
-            for highlight in self.highlights {
+            for highlight in self.resultPhoto.components {
                 highlight.baseView?.isHidden = false
             }
             
@@ -90,7 +90,7 @@ extension SlideViewController {
             } else if currentTranscript != nil {
                 
                 var found = false
-                for component in self.highlights {
+                for component in self.resultPhoto.components {
                     if component.transcriptComponent == currentTranscript {
                         
                         if let baseView = component.baseView {
@@ -207,21 +207,21 @@ extension SlideViewController {
     
     func updateAccessibilityHints() {
         if self.showingTranscripts {
-            for highlight in highlights {
+            for highlight in resultPhoto.components {
                 highlight.baseView?.accessibilityHint = "Double-tap to show highlights"
             }
-            for transcript in currentTranscriptComponents {
+            for transcript in resultPhoto.transcripts {
                 transcript.baseView?.accessibilityHint = "Double-tap to show highlights"
             }
             drawingBaseView.accessibilityHint = "Showing transcript overlay. Double-tap to show highlights."
         } else {
-            for highlight in highlights {
+            for highlight in resultPhoto.components {
                 highlight.baseView?.accessibilityHint = "Double-tap to show transcript overlay"
             }
-            for transcript in currentTranscriptComponents {
+            for transcript in resultPhoto.transcripts {
                 transcript.baseView?.accessibilityHint = "Double-tap to show transcript overlay"
             }
-            drawingBaseView.accessibilityHint = "Showing \(highlights.count) highlights. Double-tap to show transcript overlay."
+            drawingBaseView.accessibilityHint = "Showing \(resultPhoto.components.count) highlights. Double-tap to show transcript overlay."
         }
     }
 }

@@ -20,24 +20,13 @@ extension SlideViewController {
         drawingBaseView.activated = { [weak self] in
             guard let self = self else { return false }
             
-            if
-                let model = self.resultPhoto.findPhoto.editableModel,
-                model.isDeepSearched
-            {
-                print("yes model")
-                self.showingTranscripts.toggle()
-                if self.showingTranscripts {
-                    self.showTranscripts()
-                } else {
-                    self.showHighlights()
-                }
-                return true
+            self.showingTranscripts.toggle()
+            if self.showingTranscripts {
+                self.showTranscripts()
             } else {
-                
+                self.showHighlights()
             }
-            
-            
-            return false
+            return true
         }
         
         if
