@@ -34,10 +34,19 @@ extension PhotoSlidesViewController {
               
             var numberOfMatches = 0 /// how many individual matches
             
+            var transcriptComponents = [Component]()
             var components = [Component]()
             
             ///Cycle through each block of text. Each cont may be a line long.
             for content in editableModel.contents {
+                
+                let transcript = Component()
+                transcript.x = content.x
+                transcript.y = content.y
+                transcript.width = content.width
+                transcript.height = content.height
+                transcript.text = content.text
+                transcriptComponents.append(transcript)
                 
                 let lowercaseContentText = content.text.lowercased()
                 let individualCharacterWidth = CGFloat(content.width) / CGFloat(lowercaseContentText.count)
@@ -59,6 +68,7 @@ extension PhotoSlidesViewController {
                             newComponent.width = finalW
                             newComponent.height = CGFloat(content.height)
                             newComponent.text = match
+                            newComponent.transcriptComponent = transcript
                             components.append(newComponent)
                         }
                     }
@@ -69,11 +79,12 @@ extension PhotoSlidesViewController {
             if self.numberCurrentlyFindingFromCache == 0 {
                 
                 if index == self.currentIndex {
+                    resultPhoto.transcripts = transcriptComponents
                     resultPhoto.components = components
                     
                     DispatchQueue.main.async {
                         self.setPromptToHowManyCacheResults(howMany: totalMatchNumber)
-                        self.drawHighlights(components: components)
+                        self.drawHighlights(components: components, transcripts: transcriptComponents)
                     }
                 }
             }

@@ -121,7 +121,6 @@ class FindBar: UIView, UITextFieldDelegate {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        print("Layout!!!! \(contentView.bounds)")
         let availableWidth = contentView.bounds.width - (35 + 35 + 35 + 9)
         collViewRightC.constant = availableWidth
     }

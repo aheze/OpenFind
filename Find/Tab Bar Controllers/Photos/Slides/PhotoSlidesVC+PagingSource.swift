@@ -110,7 +110,7 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
                     if matchToColors.keys.count >= 1 {
                         if let currentMatchToColors = resultPhoto.currentMatchToColors, currentMatchToColors == matchToColors {
                             setPromptToFinishedFastFinding(howMany: resultPhoto.components.count) /// cached photo and pressed continue
-                            drawHighlights(components: resultPhoto.components)
+                            drawHighlights(components: resultPhoto.components, transcripts: resultPhoto.transcripts)
                         } else {
                             if let editableModel = resultPhoto.findPhoto.editableModel, editableModel.isDeepSearched {
                                 findFromCache(resultPhoto: resultPhotos[currentIndex], index: currentIndex) /// cached photo, didn't press Continue yet

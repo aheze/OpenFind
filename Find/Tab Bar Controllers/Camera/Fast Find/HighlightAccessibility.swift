@@ -71,24 +71,4 @@ extension CameraViewController {
             }
         }
     }
-    
-    func updateAccessibilityHints() {
-        if self.showingTranscripts {
-            for highlight in currentComponents {
-                highlight.baseView?.accessibilityHint = "Double-tap to show highlights"
-            }
-            for transcript in currentTranscriptComponents {
-                transcript.baseView?.accessibilityHint = "Double-tap to show highlights"
-            }
-            drawingBaseView.accessibilityHint = "Showing transcript overlay. Double-tap to show highlights."
-        } else {
-            for highlight in currentComponents {
-                highlight.baseView?.accessibilityHint = "Double-tap to show transcript overlay"
-            }
-            for transcript in currentTranscriptComponents {
-                transcript.baseView?.accessibilityHint = "Double-tap to show transcript overlay"
-            }
-            drawingBaseView.accessibilityHint = "Showing \(currentNumberOfMatches) highlights. Double-tap to show transcript overlay."
-        }
-    }
 }

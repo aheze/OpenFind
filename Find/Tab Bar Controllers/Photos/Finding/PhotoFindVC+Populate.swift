@@ -15,7 +15,9 @@ class ResultPhoto: NSObject {
     var descriptionText = ""
     var descriptionHeight = CGFloat(0)
     var descriptionMatchRanges = [ArrayOfMatchesInComp]()
+    
     var components = [Component]()
+    var transcripts = [Component]()
 }
 
 extension PhotoFindViewController {

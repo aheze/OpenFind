@@ -65,12 +65,12 @@ extension PhotoSlidesViewController {
             DispatchQueue.main.async {
                 resultPhoto.currentMatchToColors = self.matchToColors
                 self.setPromptToFinishedFastFinding(howMany: resultPhoto.components.count)
-                self.drawHighlights(components: resultPhoto.components)
+                self.drawHighlights(components: resultPhoto.components, transcripts: [])
             }
             return
         }
         
-        var contents = [EditableSingleHistoryContent]()
+        var transcripts = [Component]()
         
         for result in results {
             if let observation = result as? VNRecognizedTextObservation {
@@ -80,13 +80,13 @@ extension PhotoSlidesViewController {
                     let origWidth = observation.boundingBox.width
                     let origHeight = observation.boundingBox.height
                     
-                    let singleContent = EditableSingleHistoryContent()
-                    singleContent.text = text.string
-                    singleContent.x = origX
-                    singleContent.y = origY
-                    singleContent.width = origWidth
-                    singleContent.height = origHeight
-                    contents.append(singleContent)
+                    let transcript = Component()
+                    transcript.text = text.string
+                    transcript.x = origX
+                    transcript.y = origY
+                    transcript.width = origWidth
+                    transcript.height = origHeight
+                    transcripts.append(transcript)
                 }
             }
         }
@@ -94,12 +94,12 @@ extension PhotoSlidesViewController {
         var fastFoundComponents = [Component]()
         var numberOfMatches = 0
         
-        for content in contents {
+        for transcript in transcripts {
             var matchRanges = [ArrayOfMatchesInComp]()
             
-            let lowercaseContentText = content.text.lowercased()
+            let lowercaseContentText = transcript.text.lowercased()
             
-            let individualCharacterWidth = CGFloat(content.width) / CGFloat(lowercaseContentText.count)
+            let individualCharacterWidth = CGFloat(transcript.width) / CGFloat(lowercaseContentText.count)
             for match in self.matchToColors.keys {
                 if lowercaseContentText.contains(match) {
                     let finalW = individualCharacterWidth * CGFloat(match.count)
@@ -108,15 +108,16 @@ extension PhotoSlidesViewController {
                     for index in indices {
                         numberOfMatches += 1
                         let addedWidth = individualCharacterWidth * CGFloat(index)
-                        let finalX = CGFloat(content.x) + addedWidth
+                        let finalX = CGFloat(transcript.x) + addedWidth
                         
                         let newComponent = Component()
                         
                         newComponent.x = finalX
-                        newComponent.y = CGFloat(content.y) - (CGFloat(content.height))
+                        newComponent.y = CGFloat(transcript.y) - (CGFloat(transcript.height))
                         newComponent.width = finalW
-                        newComponent.height = CGFloat(content.height)
+                        newComponent.height = CGFloat(transcript.height)
                         newComponent.text = match
+                        newComponent.transcriptComponent = transcript
                         
                         fastFoundComponents.append(newComponent)
                         
@@ -151,12 +152,15 @@ extension PhotoSlidesViewController {
             
         }
         
+        if resultPhoto.transcripts.isEmpty {
+            resultPhoto.transcripts = transcripts
+        }
         resultPhoto.components += componentsToAdd
         resultPhoto.currentMatchToColors = matchToColors
         
         DispatchQueue.main.async {
             self.setPromptToFinishedFastFinding(howMany: resultPhoto.components.count)
-            self.drawHighlights(components: resultPhoto.components)
+            self.drawHighlights(components: resultPhoto.components, transcripts: transcripts)
         }
 
     }

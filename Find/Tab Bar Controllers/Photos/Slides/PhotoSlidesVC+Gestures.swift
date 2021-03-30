@@ -39,12 +39,14 @@ extension PhotoSlidesViewController {
         }
     }
     @objc func didSingleTapWith(gestureRecognizer: UITapGestureRecognizer) {
-        if self.currentScreenMode == .full {
-            changeScreenMode(to: .normal)
-            self.currentScreenMode = .normal
-        } else {
-            changeScreenMode(to: .full)
-            self.currentScreenMode = .full
+        if !UIAccessibility.isVoiceOverRunning {
+            if self.currentScreenMode == .full {
+                changeScreenMode(to: .normal)
+                self.currentScreenMode = .normal
+            } else {
+                changeScreenMode(to: .full)
+                self.currentScreenMode = .full
+            }
         }
     }
 }

@@ -23,10 +23,15 @@ class SlideViewController: UIViewController {
     var index: Int = 0 /// index of this slide
     
     // MARK: Drawing
+    @IBOutlet weak var drawingBaseView: CustomActionsView!
     @IBOutlet weak var drawingView: UIView!
     var highlights = [Component]()
     var matchToColors = [String: [HighlightColor]]()
-    var drawnHighlights = [Component: UIView]() /// the highlights that have already been drawn
+    
+    // MARK: Accessibility
+    var showingTranscripts = false
+    var currentTranscriptComponents = [Component]()
+    var previousActivatedHighlight: Component?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +57,10 @@ class SlideViewController: UIViewController {
                 self.drawHighlights()
             }
         }
+        
+        setupAccessibility()
+        
+        drawAllTranscripts(show: showingTranscripts)
     }
     
     override func viewDidLayoutSubviews() {

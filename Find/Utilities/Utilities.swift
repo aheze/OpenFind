@@ -492,6 +492,12 @@ extension CALayer {
     }
 }
 
+extension Component {
+    func printDescription() {
+        print("Component: \(self.x)x, \(self.y)y, \(self.width)width, \(self.height)height. Text: \(self.text)")
+    }
+}
+
 //
 //class GradientView: UIView {
 //    var colors:     [CGColor] = [UIColor.blue.cgColor] { didSet { updateColors() }}

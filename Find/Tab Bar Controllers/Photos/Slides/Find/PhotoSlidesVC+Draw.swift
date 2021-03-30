@@ -9,10 +9,12 @@
 import UIKit
 
 extension PhotoSlidesViewController {
-    func drawHighlights(components: [Component]) {
+    func drawHighlights(components: [Component], transcripts: [Component]) {
         currentViewController.highlights = components
+        currentViewController.currentTranscriptComponents = transcripts
         currentViewController.matchToColors = matchToColors
         currentViewController.drawHighlights()
+        currentViewController.drawAllTranscripts(show: currentViewController.showingTranscripts)
     }
 }
 

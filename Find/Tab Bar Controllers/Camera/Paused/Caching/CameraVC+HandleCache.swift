@@ -17,7 +17,6 @@ extension CameraViewController {
         
         DispatchQueue.main.async {
             var transcriptComponents = [Component]()
-            var components = [Component]()
             
             if let results = request?.results, results.count > 0 {
                 
@@ -39,16 +38,6 @@ extension CameraViewController {
                             transcriptComponent.width = convertedRect.width
                             transcriptComponent.height = convertedRect.height
                             transcriptComponents.append(transcriptComponent)
-                            
-//                            let component = Component()
-//                            component.text = text.string.lowercased()
-//                            component.x = convertedRect.origin.x
-//                            component.y = convertedRect.origin.y
-//                            component.width = convertedRect.width
-//                            component.height = convertedRect.height
-//                            component.transcriptComponent = transcriptComponent
-//                            components.append(component)
-                            
                             
                             let origX = observation.boundingBox.origin.x
                             let origY = 1 - observation.boundingBox.minY

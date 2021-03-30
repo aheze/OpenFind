@@ -136,7 +136,6 @@ extension CameraViewController {
             
             return false
         }
-//        self.drawingBaseView.accessibilityElements = nil
     }
     
     func pausedAccessibility(paused: Bool) {
@@ -153,7 +152,6 @@ extension CameraViewController {
                 }
             }
         
-//            drawingBaseView.accessibilityElements = drawingBaseView.subviews.map { $0.isHidden == false }
             drawAllTranscripts(show: false)
         
             controlsView?.accessibilityHint = "Contains Stats, Full Screen, Save, Shutter, Cache, Flashlight, and Settings buttons."
@@ -174,7 +172,6 @@ extension CameraViewController {
             cameraIconHolder.accessibilityHint = "Pauses the camera, shows the Save and Cache buttons, and disables the flashlight"
             
             drawingBaseView.accessibilityHint = "Highlights will be placed on detected results. Pause shutter to explore."
-//            self.drawingBaseView.accessibilityElements = nil
         }
     }
 }

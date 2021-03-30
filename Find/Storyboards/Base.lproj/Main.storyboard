@@ -3484,6 +3484,10 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPermissions" translatesAutoresizingMaskIntoConstraints="NO" id="dwe-kN-tFW">
                                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                                             </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FFG-sy-SXq" customClass="CustomActionsView" customModule="Find" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P4S-UE-ULS">
                                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3491,8 +3495,12 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="FFG-sy-SXq" firstAttribute="leading" secondItem="OyK-X0-bbG" secondAttribute="leading" id="5T9-j2-r8h"/>
                                             <constraint firstItem="P4S-UE-ULS" firstAttribute="top" secondItem="OyK-X0-bbG" secondAttribute="top" id="D0d-iy-lQ7"/>
                                             <constraint firstItem="dwe-kN-tFW" firstAttribute="top" secondItem="OyK-X0-bbG" secondAttribute="top" id="LpR-Xj-hAs"/>
+                                            <constraint firstAttribute="trailing" secondItem="FFG-sy-SXq" secondAttribute="trailing" id="VBT-lb-evH"/>
+                                            <constraint firstAttribute="bottom" secondItem="FFG-sy-SXq" secondAttribute="bottom" id="a8t-nx-z1s"/>
+                                            <constraint firstItem="FFG-sy-SXq" firstAttribute="top" secondItem="OyK-X0-bbG" secondAttribute="top" id="bQ1-mp-zke"/>
                                             <constraint firstAttribute="trailing" secondItem="dwe-kN-tFW" secondAttribute="trailing" id="dDH-4c-hzn"/>
                                             <constraint firstAttribute="bottom" secondItem="P4S-UE-ULS" secondAttribute="bottom" id="isU-2u-scV"/>
                                             <constraint firstItem="P4S-UE-ULS" firstAttribute="leading" secondItem="OyK-X0-bbG" secondAttribute="leading" id="npL-cI-l6t"/>
@@ -3523,6 +3531,7 @@
                     </view>
                     <connections>
                         <outlet property="contentView" destination="OyK-X0-bbG" id="cUC-0p-iPt"/>
+                        <outlet property="drawingBaseView" destination="FFG-sy-SXq" id="JtT-8a-Tz5"/>
                         <outlet property="drawingView" destination="P4S-UE-ULS" id="UPi-DC-K3o"/>
                         <outlet property="imageView" destination="dwe-kN-tFW" id="rcq-Do-wX1"/>
                         <outlet property="scrollView" destination="BVi-R5-JQF" id="gEa-za-oS3"/>

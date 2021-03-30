@@ -1,5 +1,5 @@
 //
-//  CameraVC+Transcripts.swift
+//  SlideVC+Transcripts.swift
 //  Find
 //
 //  Created by Zheng on 3/30/21.
@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import AVFoundation
 
-extension CameraViewController {
+extension SlideViewController {
     func resetTranscripts() {
         DispatchQueue.main.async {
             for subView in self.drawingView.subviews {
@@ -20,15 +21,17 @@ extension CameraViewController {
     }
     
     func drawAllTranscripts(focusedTranscript: Component? = nil, show: Bool) {
-        
         if show {
             for subView in self.drawingView.subviews {
                 subView.isHidden = true
             }
         }
         
+        let aspectFrame = AVMakeRect(aspectRatio: self.imageView.image?.size ?? self.imageView.bounds.size, insideRect: self.contentView.bounds)
+        
         for transcript in currentTranscriptComponents {
-            drawTranscript(component: transcript, show: show)
+            
+            drawTranscript(component: transcript, aspectFrame: aspectFrame, show: show)
         }
         
         updateAccessibilityHints()
@@ -69,7 +72,7 @@ extension CameraViewController {
             for subView in self.drawingView.subviews {
                 subView.isHidden = true
             }
-            for highlight in self.currentComponents {
+            for highlight in self.highlights {
                 highlight.baseView?.isHidden = false
             }
             
@@ -87,7 +90,7 @@ extension CameraViewController {
             } else if currentTranscript != nil {
                 
                 var found = false
-                for component in self.currentComponents {
+                for component in self.highlights {
                     if component.transcriptComponent == currentTranscript {
                         
                         if let baseView = component.baseView {
@@ -110,8 +113,9 @@ extension CameraViewController {
     }
     
     
-    func drawTranscript(component: Component, show: Bool) {
+    func drawTranscript(component: Component, aspectFrame: CGRect, show: Bool) {
         DispatchQueue.main.async {
+            
             let cornerRadius = min(component.height / 5.5, 10)
             
             let transcriptColor = UIColor(hexString: "00AEEF")
@@ -122,18 +126,17 @@ extension CameraViewController {
             newView.layer.borderWidth = 1
             newView.layer.cornerRadius = cornerRadius
             
+            let x = component.x * (aspectFrame.width) + aspectFrame.origin.x
+            let w = component.width * aspectFrame.width
+            let h = component.height * aspectFrame.height
+            let y = (component.y * (aspectFrame.height) + aspectFrame.origin.y) - h
+            
             component.baseView = newView
-            newView.frame = CGRect(x: component.x, y: component.y, width: component.width, height: component.height)
+            newView.frame = CGRect(x: x, y: y, width: w, height: h)
             
             self.drawingView.addSubview(newView)
             
-            let topContentFrame = self.topGroupView.convert(self.topGroupView.bounds, to: nil)
-            let passthroughFrame = self.passthroughGroupView.convert(self.passthroughGroupView.bounds, to: nil)
-            let highlightFrame = newView.convert(newView.bounds, to: nil)
-            
             let drawingBounds = self.drawingView.bounds
-            
-            var overlapString = AccessibilityText(text: "", isRaised: false)
             
             /// speak contents
             var contents = [AccessibilityText]()
@@ -147,13 +150,6 @@ extension CameraViewController {
             }
             
             let contentsTitle = AccessibilityText(text: " \nContains:\n", isRaised: true)
-            
-            /// speak intersection
-            if topContentFrame.intersects(highlightFrame) {
-                overlapString = AccessibilityText(text: "\nPartially covered underneath search controls.", isRaised: false)
-            } else if passthroughFrame.intersects(highlightFrame) {
-                overlapString = AccessibilityText(text: "\nPartially covered underneath camera controls.", isRaised: false)
-            }
             
             let text = AccessibilityText(text: component.text, isRaised: false)
             let highlightText = AccessibilityText(text: " \nOverlay.\n", isRaised: false)
@@ -171,9 +167,9 @@ extension CameraViewController {
             newView.isAccessibilityElement = true
             
             if contents.isEmpty {
-                newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text, highlightText, locationTitle, locationString, overlapString])
+                newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text, highlightText, locationTitle, locationString])
             } else {
-                newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text, highlightText, contentsTitle] + contents + [locationTitle, locationString, overlapString])
+                newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text, highlightText, contentsTitle] + contents + [locationTitle, locationString])
             }
             
             if self.showingTranscripts {
@@ -211,7 +207,7 @@ extension CameraViewController {
     
     func updateAccessibilityHints() {
         if self.showingTranscripts {
-            for highlight in currentComponents {
+            for highlight in highlights {
                 highlight.baseView?.accessibilityHint = "Double-tap to show highlights"
             }
             for transcript in currentTranscriptComponents {
@@ -219,13 +215,13 @@ extension CameraViewController {
             }
             drawingBaseView.accessibilityHint = "Showing transcript overlay. Double-tap to show highlights."
         } else {
-            for highlight in currentComponents {
+            for highlight in highlights {
                 highlight.baseView?.accessibilityHint = "Double-tap to show transcript overlay"
             }
             for transcript in currentTranscriptComponents {
                 transcript.baseView?.accessibilityHint = "Double-tap to show transcript overlay"
             }
-            drawingBaseView.accessibilityHint = "Showing \(currentNumberOfMatches) highlights. Double-tap to show transcript overlay."
+            drawingBaseView.accessibilityHint = "Showing \(highlights.count) highlights. Double-tap to show transcript overlay."
         }
     }
 }

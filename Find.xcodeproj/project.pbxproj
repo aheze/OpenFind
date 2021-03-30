@@ -169,6 +169,8 @@
 		3C643FD22605788C001E6FA1 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C643FD12605788C001E6FA1 /* Colors.xcassets */; };
 		3C6472362612FE770089DAC6 /* HighlightAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6472352612FE770089DAC6 /* HighlightAccessibility.swift */; };
 		3C64723A261386100089DAC6 /* CameraVC+Transcripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C647239261386100089DAC6 /* CameraVC+Transcripts.swift */; };
+		3C6472402613C7490089DAC6 /* SlideVC+Transcripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C64723F2613C7490089DAC6 /* SlideVC+Transcripts.swift */; };
+		3C6472442613C7C90089DAC6 /* SlideVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6472432613C7C90089DAC6 /* SlideVC+Accessibility.swift */; };
 		3C69186626123B6A00510C08 /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C69186526123B6A00510C08 /* DrawingView.swift */; };
 		3C69186C2612497900510C08 /* FindBar+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C69186B2612497900510C08 /* FindBar+Accessibility.swift */; };
 		3C69187026125F6B00510C08 /* HighlightColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C69186F26125F6A00510C08 /* HighlightColor.swift */; };
@@ -548,6 +550,8 @@
 		3C643FD12605788C001E6FA1 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		3C6472352612FE770089DAC6 /* HighlightAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightAccessibility.swift; sourceTree = "<group>"; };
 		3C647239261386100089DAC6 /* CameraVC+Transcripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Transcripts.swift"; sourceTree = "<group>"; };
+		3C64723F2613C7490089DAC6 /* SlideVC+Transcripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SlideVC+Transcripts.swift"; sourceTree = "<group>"; };
+		3C6472432613C7C90089DAC6 /* SlideVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SlideVC+Accessibility.swift"; sourceTree = "<group>"; };
 		3C69186526123B6A00510C08 /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 		3C69186B2612497900510C08 /* FindBar+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FindBar+Accessibility.swift"; sourceTree = "<group>"; };
 		3C69186F26125F6A00510C08 /* HighlightColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightColor.swift; sourceTree = "<group>"; };
@@ -939,6 +943,8 @@
 				3C56C5AD25AA42760006A667 /* SlideViewController.swift */,
 				3C56C5B025AA43210006A667 /* SlideVC+ScrollView.swift */,
 				3C4C96AA25B5F9DC009FDE8D /* SlideVC+Draw.swift */,
+				3C6472432613C7C90089DAC6 /* SlideVC+Accessibility.swift */,
+				3C64723F2613C7490089DAC6 /* SlideVC+Transcripts.swift */,
 			);
 			path = "Slide View Controller";
 			sourceTree = "<group>";
@@ -2179,6 +2185,7 @@
 				3C3232EC26115CA900A33192 /* ListsController+CollectionView.swift in Sources */,
 				49301BF32402460000B4780B /* FancyQuotes.swift in Sources */,
 				3C5DFFA525D8A9E200250D34 /* ShareView.swift in Sources */,
+				3C6472442613C7C90089DAC6 /* SlideVC+Accessibility.swift in Sources */,
 				49F7B1582353FE7E0099FA62 /* Component.swift in Sources */,
 				3C69186626123B6A00510C08 /* DrawingView.swift in Sources */,
 				3C3232F426118B4000A33192 /* ListBuilderVC+Accessibility.swift in Sources */,
@@ -2267,6 +2274,7 @@
 				3C7EAB2C25C0A97800264B63 /* PhotosVC+Tutorial.swift in Sources */,
 				3C3DF5FB25B52AA500DD7A10 /* PhotoFindVC+CollectionCoordinates.swift in Sources */,
 				3CABD23D25C10C1D009921EE /* PhotosVC+ShowEmptyView.swift in Sources */,
+				3C6472402613C7490089DAC6 /* SlideVC+Transcripts.swift in Sources */,
 				3C3232E0261153FB00A33192 /* CameraVC+Shutter.swift in Sources */,
 				3CAC4DA825BF52CF00CC7948 /* LTMorphingLabel+Evaporate.swift in Sources */,
 				3C2858CA259CF00200BABBA7 /* ListsController+Selection.swift in Sources */,

@@ -17,99 +17,103 @@ extension SlideViewController {
         removeAllHighlights()
         
         let aspectFrame = AVMakeRect(aspectRatio: imageView.image?.size ?? imageView.bounds.size, insideRect: contentView.bounds)
-        
-        for comp in highlights {
+        print("asp: \(aspectFrame)")
+        for component in highlights {
             
-            let newX = comp.x * (aspectFrame.width) + aspectFrame.origin.x
-            let newWidth = comp.width * aspectFrame.width
-            let newY = comp.y * (aspectFrame.height) + aspectFrame.origin.y
-            let newHeight = comp.height * aspectFrame.height
+//            let newX = comp.x * (aspectFrame.width) + aspectFrame.origin.x
+//            let newWidth = comp.width * aspectFrame.width
+//            let newY = comp.y * (aspectFrame.height) + aspectFrame.origin.y
+//            let newHeight = comp.height * aspectFrame.height
+//
+//            let compToScale = Component()
+//            compToScale.x = newX - 6
+//            compToScale.y = newY - 3
+//            compToScale.width = newWidth + 12
+//            compToScale.height = newHeight + 6
+//            compToScale.colors = comp.colors
+//            compToScale.text = comp.text
             
-            let compToScale = Component()
-            compToScale.x = newX - 6
-            compToScale.y = newY - 3
-            compToScale.width = newWidth + 12
-            compToScale.height = newHeight + 6
-            compToScale.colors = comp.colors
-            compToScale.text = comp.text
-            
-            if newHeight <= 50 {
-                scaleInHighlight(originalComponent: comp, component: compToScale)
-            } else {
-                scaleInHighlight(originalComponent: comp, component: compToScale, unsure: true)
-            }
+//            if newHeight <= 50 {
+//                scaleInHighlight(originalComponent: comp, component: compToScale)
+//            } else {
+//                scaleInHighlight(originalComponent: comp, component: compToScale, unsure: true)
+//            }
+                scaleInHighlight(component: component, aspectFrame: aspectFrame)
         }
     }
     
     func updateHighlightFrames() {
         let aspectFrame = AVMakeRect(aspectRatio: imageView.image?.size ?? imageView.bounds.size, insideRect: contentView.bounds)
-        for (highlight, uiView) in drawnHighlights {
+        
+        for highlight in highlights {
             let newX = highlight.x * (aspectFrame.width) + aspectFrame.origin.x - 6
-            let newWidth = highlight.width * aspectFrame.width + 12
             let newY = highlight.y * (aspectFrame.height) + aspectFrame.origin.y - 3
+            let newWidth = highlight.width * aspectFrame.width + 12
             let newHeight = highlight.height * aspectFrame.height + 6
             
-            uiView.frame = CGRect(x: newX, y: newY, width: newWidth, height: newHeight)
+            highlight.baseView?.frame = CGRect(x: newX, y: newY, width: newWidth, height: newHeight)
+            print("up.. \(CGRect(x: newX, y: newY, width: newWidth, height: newHeight))")
         }
     }
     
-    func scaleInHighlight(originalComponent: Component, component: Component, unsure: Bool = false) {
-        guard let colors = matchToColors[component.text] else { return }
+    func scaleInHighlight(component: Component, aspectFrame: CGRect) {
         
-        let layer = CALayer()
-        layer.frame = CGRect(x: 0, y: 0, width: component.width, height: component.height)
-        layer.cornerRadius = component.height / 3.5
+//        var newX = component.x * (aspectFrame.width) + aspectFrame.origin.x
+//        var newY = component.y * (aspectFrame.height) + aspectFrame.origin.y
+//        var newWidth = component.width * aspectFrame.width
+//        var newHeight = component.height * aspectFrame.height
+//
+//        newX = newX - 6
+//        newY = newY - 3
+//        newWidth = newWidth + 12
+//        newHeight = newHeight + 6
         
-        let rimLayer = CALayer()
-        rimLayer.bounds = layer.frame
-        rimLayer.cornerRadius = component.height / 3.5
-        rimLayer.borderWidth = 3
+        component.printDescription()
         
-        if colors.count > 1 {            
-            let gradient = CAGradientLayer()
-            gradient.frame = layer.bounds
-            if let gradientColors = self.matchToColors[component.text] {
-                let colors = gradientColors.map { $0.cgColor }
-                
-                gradient.colors = colors
-                if let firstColor = colors.first {
-                    layer.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3).cgColor
-                }
-                
+        let newX = component.x * (aspectFrame.width) + aspectFrame.origin.x - 6
+        let newY = component.y * (aspectFrame.height) + aspectFrame.origin.y - 3
+        let newWidth = component.width * aspectFrame.width + 12
+        let newHeight = component.height * aspectFrame.height + 6
+        
+        let cornerRadius = min(newHeight / 3.5, 10)
+        
+        let newView: CustomActionsView
+        
+        guard let componentColors = self.matchToColors[component.text] else { return }
+        let gradientColors = componentColors.map { $0.cgColor }
+        let hexStrings = componentColors.map { $0.hexString }
+        
+        if componentColors.count > 1 {
+            let gradientView = GradientBorderView()
+            
+            gradientView.colors = gradientColors
+            gradientView.cornerRadius = cornerRadius
+            
+            if let firstColor = gradientColors.first {
+                gradientView.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3)
             }
-            gradient.startPoint = CGPoint(x: 0, y: 0.5)
-            gradient.endPoint = CGPoint(x: 1, y: 0.5)
             
-            gradient.mask = rimLayer
-            rimLayer.backgroundColor = UIColor.clear.cgColor
-            rimLayer.borderColor = UIColor.black.cgColor
-            
-            layer.addSublayer(gradient)
+            newView = gradientView
         } else {
-            if let firstColor = colors.first {
-                rimLayer.backgroundColor = firstColor.cgColor.copy(alpha: 0.3)
-                rimLayer.borderColor = firstColor.cgColor
-                layer.addSublayer(rimLayer)
+            newView = CustomActionsView()
+            
+            if let firstColor = gradientColors.first {
+                newView.backgroundColor = UIColor(cgColor: firstColor).withAlphaComponent(0.3)
+                newView.layer.borderColor = firstColor
+                newView.layer.borderWidth = 3
+                newView.layer.cornerRadius = cornerRadius
             }
         }
         
-        
-        let newView = CustomActionsView(frame: CGRect(x: component.x, y: component.y, width: component.width, height: component.height))
+        component.baseView = newView
+        newView.frame = CGRect(x: newX, y: newY, width: newWidth, height: newHeight)
         
         self.drawingView.addSubview(newView)
         
-        newView.layer.addSublayer(layer)
-        newView.clipsToBounds = false
-        
-        let x = rimLayer.bounds.size.width / 2
-        let y = rimLayer.bounds.size.height / 2
-        
-        if unsure {
+        if newHeight > 50 {
             newView.alpha = 0.4
         }
-        rimLayer.position = CGPoint(x: x, y: y)
-        component.baseView = newView
         
-        drawnHighlights[originalComponent] = newView
+        component.baseView = newView
     }
 }
