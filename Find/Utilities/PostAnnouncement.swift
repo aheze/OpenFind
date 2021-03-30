@@ -12,6 +12,7 @@ struct AccessibilityText {
     var text = ""
     var isRaised = false
     var customPitch: Double? = nil
+    var customPronunciation: String? = nil
 }
 extension UIAccessibility {
     static func postAnnouncement(_ texts: [AccessibilityText], delay: Double = 0.5) {
@@ -31,6 +32,11 @@ extension UIAccessibility {
                 let pitch = [NSAttributedString.Key.accessibilitySpeechPitch: customPitch]
                 let customRaisedString = NSMutableAttributedString(string: text.text, attributes: pitch)
                 string.append(customRaisedString)
+            } else if let customPronunciation = text.customPronunciation {
+                print("custom!!")
+                let pronunciation = [NSAttributedString.Key.accessibilitySpeechIPANotation: NSString(string: customPronunciation)]
+                let customPronunciationString = NSMutableAttributedString(string: text.text, attributes: pronunciation)
+                string.append(customPronunciationString)
             } else if text.isRaised {
                 let raisedString = NSMutableAttributedString(string: text.text, attributes: pitch)
                 string.append(raisedString)
@@ -42,4 +48,6 @@ extension UIAccessibility {
         
         return string
     }
+    
+    
 }

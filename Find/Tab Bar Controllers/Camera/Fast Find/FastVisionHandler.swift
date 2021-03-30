@@ -240,7 +240,21 @@ extension CameraViewController {
             newView.isAccessibilityElement = true
             
             let text = AccessibilityText(text: component.text, isRaised: false, customPitch: hexStrings.first?.getDescription().1)
-            newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text])
+            let highlightText = AccessibilityText(text: "\nHighlight.\n", isRaised: false)
+            let locationTitle = AccessibilityText(text: "Location:", isRaised: true)
+            
+            let drawingBounds = self.drawingView.bounds
+            
+            let xPercent = Int(100 * ((component.x + (component.width / 2)) / drawingBounds.width))
+            let yPercent = Int(100 * ((component.y + (component.height / 2)) / drawingBounds.height))
+            
+            let locationRawString = "\(xPercent) x, \(yPercent) y"
+            
+            let locationString = AccessibilityText(text: locationRawString, isRaised: false)
+            
+            newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text, highlightText, locationTitle, locationString])
+            newView.accessibilityHint = "(0 x, 0 y) is at top-left of screen. (100 x, 100 y) is at bottom-right."
+
             newView.actions = [
             
                 UIAccessibilityCustomAction(name: "Show transcript overlay") { _ in
@@ -254,7 +268,11 @@ extension CameraViewController {
                 }
             ]
             
+            
             self.drawingView.addSubview(newView)
+            
+            let insetBounds = newView.bounds.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6))
+            newView.accessibilityFrame = newView.convert(insetBounds, to: nil)
             
             if shouldScale {
                 newView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)

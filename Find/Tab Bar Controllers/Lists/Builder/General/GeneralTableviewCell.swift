@@ -21,6 +21,7 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
     var indexPath = 0
     
     var overlayView = UIView()
+    var doneButton: UIButton?
     
     weak var changedTextDelegate: ChangedTextCell?
     
@@ -98,14 +99,12 @@ class GeneralTableCell: UITableViewCell, UITextFieldDelegate {
         doneButton.accessibilityLabel = "Done"
         doneButton.accessibilityHint = "Dismiss the keyboard"
         
-        let frame = UIAccessibility.convertToScreenCoordinates(
-            doneButton.bounds.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6)),
-            in: doneButton
-        )
-        doneButton.accessibilityFrame = frame
-        
         doneButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        
+        self.doneButton = doneButton
+        
         matchTextField.inputAccessoryView = toolbarInputView
+        
     }
     
     @objc func buttonAction(sender: UIButton!) {
