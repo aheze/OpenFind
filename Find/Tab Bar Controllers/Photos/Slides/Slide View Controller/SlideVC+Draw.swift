@@ -94,9 +94,8 @@ extension SlideViewController {
         }
         
         
-        let newView = UIView(frame: CGRect(x: component.x, y: component.y, width: component.width, height: component.height))
+        let newView = CustomActionsView(frame: CGRect(x: component.x, y: component.y, width: component.width, height: component.height))
         
-        print("adding... \(newView.frame)")
         self.drawingView.addSubview(newView)
         
         newView.layer.addSublayer(layer)

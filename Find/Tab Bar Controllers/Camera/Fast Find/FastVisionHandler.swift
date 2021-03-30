@@ -241,7 +241,10 @@ extension CameraViewController {
             newView.alpha = 0
             
             self.drawingView.addSubview(newView)
-            self.addAccessibilityLabel(component: component, newView: newView, hexString: hexStrings.first ?? "")
+            
+            if CameraState.isPaused {
+                self.addAccessibilityLabel(component: component, newView: newView, hexString: hexStrings.first ?? "")
+            }
             
             if shouldScale {
                 newView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)

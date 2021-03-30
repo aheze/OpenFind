@@ -118,7 +118,7 @@ extension CameraViewController {
         
         drawingBaseView.isAccessibilityElement = true
         drawingBaseView.accessibilityLabel = "Viewfinder"
-        drawingBaseView.accessibilityHint = "Highlights will be placed on detected results."
+        drawingBaseView.accessibilityHint = "Highlights will be placed on detected results. Pause shutter to explore."
         drawingBaseView.actions = [
         
             UIAccessibilityCustomAction(name: "Show transcript overlay") { _ in
@@ -136,6 +136,18 @@ extension CameraViewController {
     func pausedAccessibility(paused: Bool) {
         if paused {
             
+            for component in currentComponents {
+                if
+                    let baseView = component.baseView,
+                    let componentColors = self.matchToColors[component.text],
+                    let firstHexString = componentColors.first?.hexString
+                {
+                    
+                    self.addAccessibilityLabel(component: component, newView: baseView, hexString: firstHexString)
+                }
+            }
+        
+        
             controlsView?.accessibilityHint = "Contains Stats, Full Screen, Save, Shutter, Cache, Flashlight, and Settings buttons."
             passthroughView.accessibilityElements = [controlsView, statsView, fullScreenView, saveToPhotos, cameraIconHolder, cache, flashView, settingsView]
             
@@ -145,12 +157,15 @@ extension CameraViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
                 UIAccessibility.post(notification: .announcement, argument: "\(self.currentNumberOfMatches) results found. Drag your finger over the Viewfinder to explore highlights. Cache for better accuracy.")
             }
+            drawingBaseView.accessibilityHint = ""
         } else {
             controlsView?.accessibilityHint = "Contains Stats, Full Screen, Shutter, Flashlight, and Settings buttons. When camera is paused, also contains Save and Cache"
             passthroughView.accessibilityElements = [controlsView, statsView, fullScreenView, cameraIconHolder, flashView, settingsView]
             
             cameraIconHolder.accessibilityLabel = "Shutter, pause"
             cameraIconHolder.accessibilityHint = "Pauses the camera, shows the Save and Cache buttons, and disables the flashlight"
+            
+            drawingBaseView.accessibilityHint = "Highlights will be placed on detected results. Pause shutter to explore."
         }
     }
 }
