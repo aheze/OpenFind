@@ -43,12 +43,12 @@ class ColorsViewController: UIViewController, UICollectionViewDelegate, UICollec
     weak var colorDelegate: GetColorInfo?
     
     /// removed "#f6b93b"
-    var colorArray: [String] = [
-        "#eb2f06","#e55039","#f7b731","#fed330","#78e08f",
-        "#fc5c65","#fa8231","#b8e994","#2bcbba",
-        "#ff6348","#b71540","#579f2b","#d1d8e0","#778ca3",
-        "#e84393","#a55eea","#5352ed","#70a1ff","#40739e",
-        "#45aaf2","#2d98da","#00aeef","#4b6584","#0a3d62"
+    let colorArray: [String] = [
+        "#eb2f06", "#e55039", "#f7b731", "#fed330", "#78e08f",
+        "#fc5c65", "#fa8231", "#b8e994", "#2bcbba",
+        "#ff6348", "#b71540", "#00aeef", "579f2b", "#778ca3",
+        "#e84393", "#a55eea", "#5352ed", "#70a1ff", "#40739e",
+        "#45aaf2", "#2d98da", "#d1d8e0", "#4b6584", "#0a3d62"
     ]
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

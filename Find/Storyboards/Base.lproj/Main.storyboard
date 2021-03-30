@@ -3532,17 +3532,6 @@
             <point key="canvasLocation" x="2209" y="-986"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="CSS-3q-pzT">
-            <size key="intrinsicContentSize" width="11.666666666666666" height="21.666666666666668"/>
-        </designable>
-        <designable name="eQO-08-qIa">
-            <size key="intrinsicContentSize" width="6" height="33"/>
-        </designable>
-        <designable name="lMV-xk-qWw">
-            <size key="intrinsicContentSize" width="49" height="27"/>
-        </designable>
-    </designables>
     <resources>
         <image name="AccessSettings" width="820" height="1024"/>
         <image name="BlueCheck" width="120" height="120"/>

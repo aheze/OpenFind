@@ -47,11 +47,11 @@ extension String {
         case "#b71540":
             colorName = "dark red"
             pitch = 0.88
+        case "#00aeef":
+            colorName = "Find blue"
+            pitch = 0.96
         case "#579f2b":
             colorName = "dark green"
-            pitch = 0.96
-        case "#d1d8e0":
-            colorName = "light gray"
             pitch = 1.04
         case "#778ca3":
             colorName = "dark gray"
@@ -77,8 +77,8 @@ extension String {
         case "#2d98da":
             colorName = "dark blue"
             pitch = 1.68
-        case "#00aeef":
-            colorName = "Find blue"
+        case "#d1d8e0":
+            colorName = "light gray"
             pitch = 1.76
         case "#4b6584":
             colorName = "blue-gray"

@@ -1654,10 +1654,10 @@
 				3C3232E326115ACB00A33192 /* ListsController+Accessibility.swift */,
 				3C16EA70259BE7D600D73755 /* ListsController+NavBar.swift */,
 				3C2858C9259CF00200BABBA7 /* ListsController+Selection.swift */,
-				3C16EA84259BEDC100D73755 /* Builder */,
-				49569B3223D65AA4009308CA /* ListCollectionCell.swift */,
 				49569B3423D6919E009308CA /* ListsLayout.swift */,
+				49569B3223D65AA4009308CA /* ListCollectionCell.swift */,
 				4988FC4723BEF89600199635 /* ListModel.swift */,
+				3C16EA84259BEDC100D73755 /* Builder */,
 			);
 			path = Lists;
 			sourceTree = "<group>";

@@ -238,7 +238,9 @@ extension CameraViewController {
             component.baseView = newView
             
             newView.isAccessibilityElement = true
-            newView.accessibilityLabel = "Highlight"
+            
+            let text = AccessibilityText(text: component.text, isRaised: false, customPitch: hexStrings.first?.getDescription().1)
+            newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text])
             newView.actions = [
             
                 UIAccessibilityCustomAction(name: "Show transcript overlay") { _ in
