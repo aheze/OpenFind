@@ -206,22 +206,42 @@ extension SlideViewController {
     }
     
     func updateAccessibilityHints() {
-        if self.showingTranscripts {
-            for highlight in resultPhoto.components {
-                highlight.baseView?.accessibilityHint = "Double-tap to show highlights"
+        if findingActive {
+            if self.showingTranscripts {
+                for highlight in resultPhoto.components {
+                    highlight.baseView?.accessibilityHint = "Double-tap to show highlights"
+                }
+                for transcript in resultPhoto.transcripts {
+                    transcript.baseView?.accessibilityHint = "Double-tap to show highlights"
+                }
+                drawingBaseView.accessibilityHint = "Showing transcript overlay. Double-tap to show highlights."
+            } else {
+                for highlight in resultPhoto.components {
+                    highlight.baseView?.accessibilityHint = "Double-tap to show transcript overlay"
+                }
+                for transcript in resultPhoto.transcripts {
+                    transcript.baseView?.accessibilityHint = "Double-tap to show transcript overlay"
+                }
+                drawingBaseView.accessibilityHint = "Showing \(resultPhoto.components.count) highlights. Double-tap to show transcript overlay."
             }
-            for transcript in resultPhoto.transcripts {
-                transcript.baseView?.accessibilityHint = "Double-tap to show highlights"
-            }
-            drawingBaseView.accessibilityHint = "Showing transcript overlay. Double-tap to show highlights."
         } else {
-            for highlight in resultPhoto.components {
-                highlight.baseView?.accessibilityHint = "Double-tap to show transcript overlay"
+            if self.showingTranscripts {
+                for highlight in resultPhoto.components {
+                    highlight.baseView?.accessibilityHint = "Showing transcript overlay. Double-tap to hide."
+                }
+                for transcript in resultPhoto.transcripts {
+                    transcript.baseView?.accessibilityHint = "Showing transcript overlay. Double-tap to hide."
+                }
+                drawingBaseView.accessibilityHint = "Showing transcript overlay. Double-tap to hide."
+            } else {
+                for highlight in resultPhoto.components {
+                    highlight.baseView?.accessibilityHint = "Double-tap to show transcript overlay"
+                }
+                for transcript in resultPhoto.transcripts {
+                    transcript.baseView?.accessibilityHint = "Double-tap to show transcript overlay"
+                }
+                drawingBaseView.accessibilityHint = "Double-tap to show transcript overlay"
             }
-            for transcript in resultPhoto.transcripts {
-                transcript.baseView?.accessibilityHint = "Double-tap to show transcript overlay"
-            }
-            drawingBaseView.accessibilityHint = "Showing \(resultPhoto.components.count) highlights. Double-tap to show transcript overlay."
         }
     }
 }

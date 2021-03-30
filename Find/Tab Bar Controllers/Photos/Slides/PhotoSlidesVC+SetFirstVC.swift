@@ -19,7 +19,6 @@ extension PhotoSlidesViewController {
         
         if cameFromFind {
             viewController.cameFromFind = true
-//            viewController.highlights = resultPhoto.components
             viewController.matchToColors = matchToColors
         } else {
             let findPhoto = resultPhotos[currentIndex].findPhoto
@@ -34,6 +33,7 @@ extension PhotoSlidesViewController {
                     
                     var transcripts = [Component]()
                     for content in editableModel.contents {
+                        print("Comp... 111")
                         let transcript = Component()
                         transcript.text = content.text
                         transcript.x = content.x
@@ -41,19 +41,20 @@ extension PhotoSlidesViewController {
                         transcript.width = content.width
                         transcript.height = content.height
                         transcripts.append(transcript)
-                        print("Appending.")
                     }
                     
                     resultPhotos[currentIndex].transcripts = transcripts
-//                    viewController.currentTranscriptComponents = transcripts
-                    print("set.")
                     
                 } else {
                     updateActions?(.shouldCache)
+                    
+                    fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
                 }
             } else {
                 updateActions?(.shouldStar)
                 updateActions?(.shouldCache)
+                
+                fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
             }
         }
         

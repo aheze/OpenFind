@@ -23,6 +23,7 @@ class SlideViewController: UIViewController {
     var index: Int = 0 /// index of this slide
     
     // MARK: Drawing
+    var findingActive = false
     @IBOutlet weak var drawingBaseView: CustomActionsView!
     @IBOutlet weak var drawingView: UIView!
     var matchToColors = [String: [HighlightColor]]()
@@ -57,8 +58,6 @@ class SlideViewController: UIViewController {
         }
         
         setupAccessibility()
-        
-        print("about to draw.")
         drawAllTranscripts(show: showingTranscripts)
     }
     

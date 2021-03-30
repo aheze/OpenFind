@@ -99,6 +99,7 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
                         
                         var transcripts = [Component]()
                         for content in editableModel.contents {
+                            print("Comp... 222")
                             let transcript = Component()
                             transcript.text = content.text
                             transcript.x = content.x
@@ -106,19 +107,21 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
                             transcript.width = content.width
                             transcript.height = content.height
                             transcripts.append(transcript)
-                            print("Appending.")
                         }
                         
                         resultPhotos[currentIndex].transcripts = transcripts
-//                        currentVC.currentTranscriptComponents = transcripts
-                        print("set.")
+                        drawHighlightsAndTranscripts()
                         
                     } else {
                         updateActions?(.shouldCache)
+                        
+                        fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
                     }
                 } else {
                     updateActions?(.shouldStar)
                     updateActions?(.shouldCache)
+                    
+                    fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
                 }
                 
                 updateNavigationTitle(to: resultPhoto.findPhoto)
