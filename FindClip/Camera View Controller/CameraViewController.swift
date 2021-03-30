@@ -17,7 +17,7 @@ class CameraViewController: UIViewController {
     
     // MARK: Camera controls
     @IBOutlet weak var controlsBaseView: UIView!
-    @IBOutlet weak var controlsContainer: PassthroughView!
+    @IBOutlet weak var controlsContainer: passthroughGroupView!
     @IBOutlet weak var shutter: Shutter!
     
     @IBOutlet weak var fullScreenView: UIView!

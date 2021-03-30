@@ -84,7 +84,7 @@ extension CameraViewController {
             settingsHeightC.constant = 50
             
             let controlsView = UIView()
-            passthroughView.insertSubview(controlsView, at: 0)
+            passthroughGroupView.insertSubview(controlsView, at: 0)
 
             controlsView.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
@@ -96,9 +96,9 @@ extension CameraViewController {
             controlsView.accessibilityHint = "Contains Stats, Full Screen, Shutter, Flashlight, and Settings buttons. When camera is paused, also contains Save and Cache buttons"
             controlsView.accessibilityTraits = .none
             
-            passthroughView.passthroughActive = false
-            passthroughView.isAccessibilityElement = false
-            passthroughView.accessibilityElements = [controlsView, statsView, fullScreenView, cameraIconHolder, flashView, settingsView]
+            passthroughGroupView.passthroughActive = false
+            passthroughGroupView.isAccessibilityElement = false
+            passthroughGroupView.accessibilityElements = [controlsView, statsView, fullScreenView, cameraIconHolder, flashView, settingsView]
             
             self.controlsView = controlsView
             
@@ -107,11 +107,13 @@ extension CameraViewController {
             searchBackgroundView.isHidden = true
         }
         
-        topContentView.accessibilityElements = [searchBackgroundView, newSearchTextField]
+        topGroupView.accessibilityElements = [searchBackgroundView, newSearchTextField]
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             UIAccessibility.post(notification: .screenChanged, argument: self.newSearchTextField)
         }
+        
+        view.accessibilityElements = [topGroupView, cameraGroupView, passthroughGroupView]
     }
     
     func setupDrawingView() {
@@ -134,6 +136,7 @@ extension CameraViewController {
             
             return false
         }
+//        self.drawingBaseView.accessibilityElements = nil
     }
     
     func pausedAccessibility(paused: Bool) {
@@ -150,10 +153,11 @@ extension CameraViewController {
                 }
             }
         
+//            drawingBaseView.accessibilityElements = drawingBaseView.subviews.map { $0.isHidden == false }
             drawAllTranscripts(show: false)
         
             controlsView?.accessibilityHint = "Contains Stats, Full Screen, Save, Shutter, Cache, Flashlight, and Settings buttons."
-            passthroughView.accessibilityElements = [controlsView, statsView, fullScreenView, saveToPhotos, cameraIconHolder, cache, flashView, settingsView]
+            passthroughGroupView.accessibilityElements = [controlsView, statsView, fullScreenView, saveToPhotos, cameraIconHolder, cache, flashView, settingsView]
             
             cameraIconHolder.accessibilityLabel = "Shutter, play"
             cameraIconHolder.accessibilityHint = "Starts the camera, removes the Save and Cache buttons, and enables the flashlight to be turned on"
@@ -164,12 +168,13 @@ extension CameraViewController {
             drawingBaseView.accessibilityHint = ""
         } else {
             controlsView?.accessibilityHint = "Contains Stats, Full Screen, Shutter, Flashlight, and Settings buttons. When camera is paused, also contains Save and Cache"
-            passthroughView.accessibilityElements = [controlsView, statsView, fullScreenView, cameraIconHolder, flashView, settingsView]
+            passthroughGroupView.accessibilityElements = [controlsView, statsView, fullScreenView, cameraIconHolder, flashView, settingsView]
             
             cameraIconHolder.accessibilityLabel = "Shutter, pause"
             cameraIconHolder.accessibilityHint = "Pauses the camera, shows the Save and Cache buttons, and disables the flashlight"
             
             drawingBaseView.accessibilityHint = "Highlights will be placed on detected results. Pause shutter to explore."
+//            self.drawingBaseView.accessibilityElements = nil
         }
     }
 }

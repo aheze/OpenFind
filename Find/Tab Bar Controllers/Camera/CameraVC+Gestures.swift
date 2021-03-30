@@ -13,7 +13,7 @@ extension CameraViewController: UIGestureRecognizerDelegate {
         
         let location = touch.location(in: focusView)
         
-        let cameraFrame = passthroughView.convert(cameraIconHolder.frame, to: focusView)
+        let cameraFrame = passthroughGroupView.convert(cameraIconHolder.frame, to: focusView)
         if cameraFrame.contains(location) {
             return false
         }

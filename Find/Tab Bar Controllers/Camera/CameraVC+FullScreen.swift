@@ -12,7 +12,7 @@ extension CameraViewController {
     func toggleFullScreen(_ fullScreen: Bool) {
         if fullScreen {
             contentTopC.constant = -searchContentView.bounds.height - view.safeAreaInsets.top
-            passthroughBottomC.constant = -passthroughView.bounds.height - view.safeAreaInsets.bottom
+            passthroughBottomC.constant = -passthroughGroupView.bounds.height - view.safeAreaInsets.bottom
             controlsBlurBottomC.constant = CGFloat(ConstantVars.tabHeight) - 30
             
             messageViewBottomC.constant = controlsBlurView.bounds.height + controlsBlurBottomC.constant + view.safeAreaInsets.bottom

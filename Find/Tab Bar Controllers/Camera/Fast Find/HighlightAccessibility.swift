@@ -13,8 +13,8 @@ extension CameraViewController {
     /// newView = view of highlight component
     func addAccessibilityLabel(component: Component, newView: CustomActionsView, hexString: String) {
         if UIAccessibility.isVoiceOverRunning {
-            let topContentFrame = self.topContentView.convert(self.topContentView.bounds, to: nil)
-            let passthroughFrame = self.passthroughView.convert(self.passthroughView.bounds, to: nil)
+            let topContentFrame = self.topGroupView.convert(self.topGroupView.bounds, to: nil)
+            let passthroughFrame = self.passthroughGroupView.convert(self.passthroughGroupView.bounds, to: nil)
             let highlightFrame = newView.convert(newView.bounds, to: nil)
             
             let drawingBounds = self.drawingView.bounds
@@ -80,7 +80,7 @@ extension CameraViewController {
             for transcript in currentTranscriptComponents {
                 transcript.baseView?.accessibilityHint = "Double-tap to show highlights"
             }
-            drawingBaseView.accessibilityHint = "Double-tap to show highlights"
+            drawingBaseView.accessibilityHint = "Showing transcript overlay. Double-tap to show highlights."
         } else {
             for highlight in currentComponents {
                 highlight.baseView?.accessibilityHint = "Double-tap to show transcript overlay"
@@ -88,7 +88,7 @@ extension CameraViewController {
             for transcript in currentTranscriptComponents {
                 transcript.baseView?.accessibilityHint = "Double-tap to show transcript overlay"
             }
-            drawingBaseView.accessibilityHint = "Double-tap to show transcript overlay"
+            drawingBaseView.accessibilityHint = "Showing \(currentNumberOfMatches) highlights. Double-tap to show transcript overlay."
         }
     }
 }

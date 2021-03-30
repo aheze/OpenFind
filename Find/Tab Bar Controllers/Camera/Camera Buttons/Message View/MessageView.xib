@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -21,7 +19,7 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PassthroughView" customModule="Find" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="passthroughGroupView" customModule="Find" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="244" height="53"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -129,11 +127,6 @@
             <point key="canvasLocation" x="-169.56521739130437" y="388.05803571428572"/>
         </view>
     </objects>
-    <designables>
-        <designable name="0fW-Z6-L95">
-            <size key="intrinsicContentSize" width="10.5" height="20.5"/>
-        </designable>
-    </designables>
     <resources>
         <namedColor name="100White">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

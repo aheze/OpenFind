@@ -34,12 +34,13 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var settingsHeightC: NSLayoutConstraint!
     var controlsView: UIView?
     
+    @IBOutlet weak var cameraGroupView: UIView!
     var showingTranscripts = false
     var currentTranscriptComponents = [Component]()
     var previousActivatedHighlight: Component?
     
     
-    @IBOutlet weak var topContentView: UIView!
+    @IBOutlet weak var topGroupView: UIView!
     @IBOutlet weak var searchBackgroundView: UIView!
     
     override func accessibilityPerformMagicTap() -> Bool {
@@ -135,7 +136,7 @@ class CameraViewController: UIViewController {
         toggleFullScreen(isFullScreen)
     }
     
-    @IBOutlet weak var passthroughView: PassthroughView!
+    @IBOutlet weak var passthroughGroupView: passthroughGroupView!
     @IBOutlet weak var passthroughBottomC: NSLayoutConstraint!
     
     //MARK: Stats
@@ -237,7 +238,7 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var searchCollectionRightC: NSLayoutConstraint!
     
     // MARK: Prompts
-    @IBOutlet weak var promptContainerView: PassthroughView!
+    @IBOutlet weak var promptContainerView: passthroughGroupView!
     
     @IBOutlet weak var warningView: UIView!
     @IBOutlet weak var warningLabel: UILabel!

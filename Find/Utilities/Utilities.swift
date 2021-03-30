@@ -68,7 +68,7 @@ extension NSLayoutConstraint {
 class ReceiveTouchView: UIView {
     
 }
-class PassthroughView: UIView {
+class passthroughGroupView: UIView {
     var passthroughActive = true
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         

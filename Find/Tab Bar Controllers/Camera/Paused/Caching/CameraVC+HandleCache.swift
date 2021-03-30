@@ -40,14 +40,14 @@ extension CameraViewController {
                             transcriptComponent.height = convertedRect.height
                             transcriptComponents.append(transcriptComponent)
                             
-                            let component = Component()
-                            component.text = text.string.lowercased()
-                            component.x = convertedRect.origin.x
-                            component.y = convertedRect.origin.y
-                            component.width = convertedRect.width
-                            component.height = convertedRect.height
-                            component.transcriptComponent = transcriptComponent
-                            components.append(transcriptComponent)
+//                            let component = Component()
+//                            component.text = text.string.lowercased()
+//                            component.x = convertedRect.origin.x
+//                            component.y = convertedRect.origin.y
+//                            component.width = convertedRect.width
+//                            component.height = convertedRect.height
+//                            component.transcriptComponent = transcriptComponent
+//                            components.append(component)
                             
                             
                             let origX = observation.boundingBox.origin.x
@@ -71,7 +71,7 @@ extension CameraViewController {
             
             self.currentTranscriptComponents = transcriptComponents
             self.drawAllTranscripts(show: self.showingTranscripts)
-            self.finishedCache(with: components, rawContents: rawContents)
+            self.finishedCache(with: transcriptComponents, rawContents: rawContents)
             
         }
     }

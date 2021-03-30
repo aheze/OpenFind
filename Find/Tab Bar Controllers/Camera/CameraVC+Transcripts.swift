@@ -51,6 +51,7 @@ extension CameraViewController {
             for transcript in self.currentTranscriptComponents {
                 transcript.baseView?.isHidden = false
             }
+            
             self.updateAccessibilityHints()
             
             if
@@ -71,6 +72,7 @@ extension CameraViewController {
             for highlight in self.currentComponents {
                 highlight.baseView?.isHidden = false
             }
+            
             self.updateAccessibilityHints()
             
             if
@@ -82,23 +84,27 @@ extension CameraViewController {
                 }
                 self.previousActivatedHighlight = nil
                 
-            } else if let currentTranscript = currentTranscript {
-                print("cuyrrent,. before lsot focus")
+            } else if currentTranscript != nil {
                 
+                var found = false
                 for component in self.currentComponents {
                     if component.transcriptComponent == currentTranscript {
-                        print("equals!")
                         
                         if let baseView = component.baseView {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                                 UIAccessibility.post(notification: .layoutChanged, argument: baseView)
                             }
                         }
-                        
+                        found = true
                         break
                     }
                 }
                 
+                if !found {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                        UIAccessibility.post(notification: .layoutChanged, argument: self.drawingBaseView)
+                    }
+                }
             }
         }
     }
@@ -121,13 +127,28 @@ extension CameraViewController {
             
             self.drawingView.addSubview(newView)
             
-            let topContentFrame = self.topContentView.convert(self.topContentView.bounds, to: nil)
-            let passthroughFrame = self.passthroughView.convert(self.passthroughView.bounds, to: nil)
+            let topContentFrame = self.topGroupView.convert(self.topGroupView.bounds, to: nil)
+            let passthroughFrame = self.passthroughGroupView.convert(self.passthroughGroupView.bounds, to: nil)
             let highlightFrame = newView.convert(newView.bounds, to: nil)
             
             let drawingBounds = self.drawingView.bounds
             
             var overlapString = AccessibilityText(text: "", isRaised: false)
+            
+            /// speak contents
+            var contents = [AccessibilityText]()
+            for match in self.matchToColors {
+                if component.text.contains(match.key) {
+                    if let pitch = match.value.first?.hexString.getDescription().1 {
+                        let text = AccessibilityText(text: match.key, isRaised: false, customPitch: pitch)
+                        contents.append(text)
+                    }
+                }
+            }
+            
+            let contentsTitle = AccessibilityText(text: " \nContains:\n", isRaised: true)
+            
+            /// speak intersection
             if topContentFrame.intersects(highlightFrame) {
                 overlapString = AccessibilityText(text: "\nPartially covered underneath search controls.", isRaised: false)
             } else if passthroughFrame.intersects(highlightFrame) {
@@ -135,8 +156,8 @@ extension CameraViewController {
             }
             
             let text = AccessibilityText(text: component.text, isRaised: false)
-            let highlightText = AccessibilityText(text: "\nOverlay.\n", isRaised: false)
-            let locationTitle = AccessibilityText(text: "Location:", isRaised: true)
+            let highlightText = AccessibilityText(text: " \nOverlay.\n", isRaised: false)
+            let locationTitle = AccessibilityText(text: " \nLocation:\n", isRaised: true)
             
             let xPercent = Int(100 * (component.x / drawingBounds.width))
             let yPercent = Int(100 * (component.y / drawingBounds.height))
@@ -148,7 +169,12 @@ extension CameraViewController {
             let locationString = AccessibilityText(text: locationRawString, isRaised: false)
             
             newView.isAccessibilityElement = true
-            newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text, highlightText, locationTitle, locationString, overlapString])
+            
+            if contents.isEmpty {
+                newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text, highlightText, locationTitle, locationString, overlapString])
+            } else {
+                newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text, highlightText, contentsTitle] + contents + [locationTitle, locationString, overlapString])
+            }
             
             if self.showingTranscripts {
                 newView.accessibilityHint = "Double-tap to show highlights"

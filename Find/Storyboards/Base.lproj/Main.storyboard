@@ -295,7 +295,7 @@
                                     <constraint firstAttribute="height" constant="60" id="25e-cO-rHI"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tda-he-8YJ" customClass="PassthroughView" customModule="Find" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tda-he-8YJ" customClass="passthroughGroupView" customModule="Find" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="780" width="428" height="146"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ryG-3Q-0nW" customClass="SaveToPhotosButton" customModule="Find" customModuleProvider="target">
@@ -531,7 +531,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYl-Ka-gkW" customClass="PassthroughView" customModule="Find" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYl-Ka-gkW" customClass="passthroughGroupView" customModule="Find" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="115" width="428" height="100"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1uu-Wl-x4d">
@@ -861,6 +861,7 @@
                         <outlet property="arrowDownImage" destination="y7C-IC-TsC" id="zgr-5p-NYV"/>
                         <outlet property="cache" destination="9h0-TV-oeH" id="eKE-uh-s21"/>
                         <outlet property="cacheLabel" destination="ffY-JT-gig" id="bv9-3p-lnO"/>
+                        <outlet property="cameraGroupView" destination="5qE-M4-Dhz" id="W2F-Y5-oKE"/>
                         <outlet property="cameraIcon" destination="4D0-uH-dFZ" id="BXw-SU-rmR"/>
                         <outlet property="cameraIconHolder" destination="LAa-ha-Chc" id="W7J-aq-3Uh"/>
                         <outlet property="cameraIconHolderBottomC" destination="4ix-l7-edU" id="8Hx-0m-tHs"/>
@@ -897,7 +898,7 @@
                         <outlet property="messageViewBottomC" destination="gv1-g9-0bM" id="7be-LI-Me9"/>
                         <outlet property="newSearchTextField" destination="eQO-08-qIa" id="53l-JB-69S"/>
                         <outlet property="passthroughBottomC" destination="rn7-2I-qHJ" id="ECP-QK-CQp"/>
-                        <outlet property="passthroughView" destination="Tda-he-8YJ" id="1D6-RJ-Q8S"/>
+                        <outlet property="passthroughGroupView" destination="Tda-he-8YJ" id="44C-ue-sXg"/>
                         <outlet property="pausedImageView" destination="20i-dz-JZp" id="9cz-pu-sal"/>
                         <outlet property="promptContainerView" destination="vYl-Ka-gkW" id="Och-gb-8BQ"/>
                         <outlet property="saveLabel" destination="Myy-mx-RUb" id="hYJ-EW-xc2"/>
@@ -926,7 +927,7 @@
                         <outlet property="statsWidthC" destination="00K-gX-4Qp" id="sKU-7z-bJ5"/>
                         <outlet property="tapToRemoveLabel" destination="Hc9-i8-kXk" id="IQj-Ry-hZp"/>
                         <outlet property="textLabel" destination="BRC-Yj-hpw" id="ZQn-rk-L50"/>
-                        <outlet property="topContentView" destination="aT4-Yz-YQt" id="G8T-QF-o1J"/>
+                        <outlet property="topGroupView" destination="aT4-Yz-YQt" id="jtm-RR-jQy"/>
                         <outlet property="warningHeightC" destination="bdc-W2-kMf" id="FaV-Sf-qi6"/>
                         <outlet property="warningLabel" destination="BHm-ND-D9k" id="7bC-8L-ud9"/>
                         <outlet property="warningView" destination="1uu-Wl-x4d" id="L7R-Wb-oAW"/>
@@ -3186,7 +3187,7 @@
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tUv-4R-c5U">
                                         <rect key="frame" x="0.0" y="0.0" width="88.666666666666671" height="39"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="W9A-sZ-kHI">
-                                            <rect key="frame" x="0.0" y="0.0" width="88.666666666666671" height="39"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="89" height="39"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <blurEffect style="prominent"/>
