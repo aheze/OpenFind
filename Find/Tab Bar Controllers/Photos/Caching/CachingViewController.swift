@@ -37,6 +37,7 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
     let rimView = UIView()
     let tintView = UIView()
     
+    @IBOutlet weak var cachingPhotosLabel: UILabel!
     @IBOutlet weak var numberCachedLabel: UILabel!
     @IBOutlet weak var collectionSuperview: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -82,6 +83,8 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
         cancelView.isHidden = true
         backButton.isHidden = true
         activityIndicator.startAnimating()
+        
+        UIAccessibility.post(notification: .screenChanged, argument: cachingPhotosLabel)
     }
     
     func doneAnimating() {

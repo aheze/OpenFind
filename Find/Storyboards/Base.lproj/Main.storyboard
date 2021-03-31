@@ -3153,6 +3153,7 @@
                         <outlet property="activityIndicator" destination="X4F-sC-U3v" id="Hyp-Ej-bgk"/>
                         <outlet property="backButton" destination="sKB-7D-QCp" id="bIa-Pc-3UJ"/>
                         <outlet property="baseView" destination="6GT-YB-6e2" id="goC-vB-cV3"/>
+                        <outlet property="cachingPhotosLabel" destination="scZ-On-pSO" id="42I-bI-3aS"/>
                         <outlet property="cancelButton" destination="1ct-uq-Rkc" id="Ffk-3Q-UW6"/>
                         <outlet property="cancelImageView" destination="vYj-NL-cGz" id="12X-tT-A69"/>
                         <outlet property="cancelLabel" destination="X2y-kb-0Y0" id="SZo-on-L5G"/>

@@ -12,6 +12,10 @@ import SwiftEntryKit
 extension PhotosViewController: ReturnCachedPhotos {
     func giveCachedPhotos(photos: [FindPhoto], returnResult: CacheReturn) {
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            UIAccessibility.post(notification: .announcement, argument: "Caching complete.")
+        }
+        
         var paths = [IndexPath]()
         for photo in photos {
             if let path = dataSource.indexPath(for: photo) {

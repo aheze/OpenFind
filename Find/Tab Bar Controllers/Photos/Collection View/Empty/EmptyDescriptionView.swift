@@ -49,6 +49,7 @@ class EmptyDescriptionView: UIView {
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         headerLabel.morphingEffect = .evaporate
+        headerLabel.accessibilityTraits = .header
         
         TipViews.resetToBeginning = { [weak self] in
             guard let self = self else { return }
