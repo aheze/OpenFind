@@ -16,8 +16,8 @@ extension PhotoSlidesViewController {
         navigationItem.largeTitleDisplayMode = .never
         
         findButton = UIBarButtonItem(title: NSLocalizedString("universal-find", comment: ""), style: .plain, target: self, action: #selector(findPressed(sender:)))
-        
         findButton.tintColor = UIColor(named: "PhotosText")
+        findButton.accessibilityHint = "Find from this photo. Displays a search bar."
         
         navigationItem.rightBarButtonItems = [findButton]
     }

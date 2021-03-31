@@ -74,10 +74,10 @@ extension PhotoSlidesViewController {
         slideFindBar?.hasPrompt = true
         animatePromptReveal()
         
-        slideFindBar?.promptBackgroundView.accessibilityValue = "\(howMany)" + resultsInCache + "Continue/Return button on the keyboard or double-tap this label" + toFindFromPhotos
+        slideFindBar?.promptBackgroundView.accessibilityValue = "\(howMany)" + resultsInCache + "Continue/Return button on the keyboard, or double-tap this label, " + toFindFromPhotos
         
         let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
-        let summaryString = AccessibilityText(text: "\(howMany)" + resultsInCache + "Continue/Return button on the keyboard or double-tap Summary label" + toFindFromPhotos, isRaised: false)
+        let summaryString = AccessibilityText(text: "\(howMany)" + resultsInCache + "Continue/Return button on the keyboard, or double-tap Summary label, " + toFindFromPhotos, isRaised: false)
         postAnnouncement([summaryTitle, summaryString])
     }
     
@@ -104,10 +104,10 @@ extension PhotoSlidesViewController {
         slideFindBar?.hasPrompt = true
         animatePromptReveal()
         
-        slideFindBar?.promptBackgroundView.accessibilityValue = pressText + "Continue/Return button on the keyboard or double-tap this label" + toFindWithOCR
+        slideFindBar?.promptBackgroundView.accessibilityValue = pressText + "Continue/Return button on the keyboard, or double-tap this label, " + toFindWithOCR
         
         let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
-        let summaryString = AccessibilityText(text: pressText + "Continue/Return button on the keyboard or double-tap Summary label" + toFindWithOCR, isRaised: false)
+        let summaryString = AccessibilityText(text: pressText + "Continue/Return button on the keyboard, or double-tap Summary label, " + toFindWithOCR, isRaised: false)
         postAnnouncement([summaryTitle, summaryString])
     }
     

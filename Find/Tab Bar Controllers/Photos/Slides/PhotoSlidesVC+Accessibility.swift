@@ -19,8 +19,12 @@ extension PhotoSlidesViewController {
                 backButtonView.accessibilityLabel = "Back"
                 backButtonView.accessibilityTraits = .button
                 backButtonView.accessibilityHint = "Go back to the Finding screen"
+                
+                view.accessibilityElements = [backButtonView, containerView, voiceOverSlidesControl]
             } else {
                 voiceOverBottomC.constant = CGFloat(ConstantVars.tabHeight)
+                
+                view.accessibilityElements = nil
             }
             
             
@@ -47,7 +51,6 @@ extension PhotoSlidesViewController {
             voiceOverSlidesControl.isHidden = true
         }
         
-        view.accessibilityElements = nil
     }
     
     func speakPhotoDescription(at newIndex: Int) {

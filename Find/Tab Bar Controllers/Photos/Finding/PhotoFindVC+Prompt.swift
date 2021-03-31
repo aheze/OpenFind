@@ -142,10 +142,10 @@ extension PhotoFindViewController {
         
         let attributedText = "\(howMany)".set(style: textStyle) + resultsInCache.set(style: textStyle) + nextButtonAttachment! + toFindFromPhotos.set(style: textStyle)
         promptTextView.attributedText = attributedText
-        promptView.accessibilityValue = "\(howMany)" + resultsInCache + "Continue/Return button on the keyboard or double-tap this label" + toFindFromPhotos
+        promptView.accessibilityValue = "\(howMany)" + resultsInCache + "Continue/Return button on the keyboard, or double-tap this label " + toFindFromPhotos
         
         let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
-        let summaryString = AccessibilityText(text: "\(howMany)" + resultsInCache + "Continue/Return button on the keyboard or double-tap Summary label" + toFindFromPhotos, isRaised: false)
+        let summaryString = AccessibilityText(text: "\(howMany)" + resultsInCache + "Continue/Return button on the keyboard, or double-tap Summary label " + toFindFromPhotos, isRaised: false)
         postAnnouncement([summaryTitle, summaryString])
     }
     func setPromptToHowManyFastFound(howMany: Int) { /// how many finished finding

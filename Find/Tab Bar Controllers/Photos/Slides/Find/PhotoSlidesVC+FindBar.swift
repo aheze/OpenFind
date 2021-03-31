@@ -51,6 +51,7 @@ extension PhotoSlidesViewController {
         
         if findPressed {
             findButton.title = NSLocalizedString("done", comment: "")
+            findButton.accessibilityHint = "Stop finding from this photo. Removes the search bar."
             
             slideFindBarTopC?.update(offset: 0)
             
@@ -76,6 +77,7 @@ extension PhotoSlidesViewController {
         } else {
             let findText = NSLocalizedString("universal-find", comment: "")
             findButton.title = findText
+            findButton.accessibilityHint = "Find from this photo. Displays a search bar."
             
             slideFindBarTopC?.update(offset: -45)
             animatePromptReveal(reveal: false)

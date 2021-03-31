@@ -207,7 +207,7 @@ extension SlideViewController {
     }
     
     func updateAccessibilityHints() {
-        if findingActive {
+        if findingActive || cameFromFind {
             if self.showingTranscripts {
                 for highlight in resultPhoto.components {
                     highlight.baseView?.accessibilityHint = "Double-tap to show highlights"
