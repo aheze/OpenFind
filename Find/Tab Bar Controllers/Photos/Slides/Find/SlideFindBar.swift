@@ -12,7 +12,7 @@ class SlideFindBar: UIView {
     
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var findBar: FindBar!
-    @IBOutlet weak var promptBackgroundView: UIView!
+    @IBOutlet weak var promptBackgroundView: PromptView!
     @IBOutlet weak var promptTextView: UITextView!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var blurViewHeightC: NSLayoutConstraint!
@@ -46,6 +46,7 @@ class SlideFindBar: UIView {
         
         promptBackgroundView.isAccessibilityElement = true
         promptBackgroundView.accessibilityLabel = "Summary"
+        promptBackgroundView.accessibilityTraits = [.header, .updatesFrequently]
     }
 }
 

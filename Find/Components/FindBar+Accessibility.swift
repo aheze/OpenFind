@@ -10,6 +10,7 @@ import UIKit
 
 extension FindBar {
     func setupAccessibility() {
+        searchField.isAccessibilityElement = true
         searchField.accessibilityTraits = UIAccessibilityTraits(rawValue: 0x200000000000)
         searchField.accessibilityLabel = "Search bar"
     }

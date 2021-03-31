@@ -17,13 +17,14 @@ extension SlideViewController {
         removeAllHighlights()
         
         let aspectFrame = AVMakeRect(aspectRatio: imageView.image?.size ?? imageView.bounds.size, insideRect: contentView.bounds)
+        print("aspect frame is \(aspectFrame)")
+        
         for component in resultPhoto.components {
             scaleInHighlight(component: component, aspectFrame: aspectFrame)
         }
     }
     
     func updateHighlightFrames() {
-        print("Updating!!!!!")
         let aspectFrame = AVMakeRect(aspectRatio: imageView.image?.size ?? imageView.bounds.size, insideRect: contentView.bounds)
         
         for highlight in resultPhoto.components {
@@ -36,8 +37,9 @@ extension SlideViewController {
             highlight.baseView?.frame = newFrame
             
             if let baseView = highlight.baseView {
-                let insetFrame = baseView.frame.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6))
-                baseView.accessibilityFrame = insetFrame
+                guard let componentColors = self.matchToColors[highlight.text] else { return }
+                
+                addAccessibilityLabel(component: highlight, newView: baseView, hexString: componentColors.first?.hexString ?? "")
             }
         }
         
@@ -51,14 +53,14 @@ extension SlideViewController {
             transcript.baseView?.frame = newFrame
             
             if let baseView = transcript.baseView {
-                let insetFrame = baseView.frame.inset(by: UIEdgeInsets(top: -3, left: -3, bottom: -3, right: -3))
-                baseView.accessibilityFrame = insetFrame
+//                let insetFrame = baseView.frame.inset(by: UIEdgeInsets(top: -3, left: -3, bottom: -3, right: -3))
+//                baseView.accessibilityFrame = insetFrame
+                self.addTranscriptAccessibility(component: transcript, newView: baseView)
             }
         }
     }
     
     func scaleInHighlight(component: Component, aspectFrame: CGRect) {
-        component.printDescription()
         
         let newX = component.x * (aspectFrame.width) + aspectFrame.origin.x - 6
         let newY = component.y * (aspectFrame.height) + aspectFrame.origin.y - 3
@@ -101,38 +103,40 @@ extension SlideViewController {
         self.drawingView.addSubview(newView)
         
         
-        addAccessibilityLabel(component: component, newView: newView, aspectFrame: aspectFrame, hexString: hexStrings.first ?? "")
+        addAccessibilityLabel(component: component, newView: newView, hexString: hexStrings.first ?? "")
         
         if newHeight > 50 {
             newView.alpha = 0.4
         }
     }
     
-    func addAccessibilityLabel(component: Component, newView: CustomActionsView, aspectFrame: CGRect, hexString: String) {
+    func addAccessibilityLabel(component: Component, newView: CustomActionsView, hexString: String) {
         if UIAccessibility.isVoiceOverRunning {
             
-            let highlightFrame = newView.convert(newView.bounds, to: nil)
-            
             var overlapString = AccessibilityText(text: "", isRaised: false)
-            if let navigationBar = self.navigationController?.navigationBar {
-                
-                let navigationBarFrame = navigationBar.convert(navigationBar.bounds, to: nil)
-                let tabBarFrame = ConstantVars.getTabBarFrame?() ?? CGRect.zero
-                
-                if navigationBarFrame.intersects(highlightFrame) {
-                    overlapString = AccessibilityText(text: "\nPartially covered underneath navigation bar", isRaised: false)
-                } else if tabBarFrame.intersects(highlightFrame) {
-                    overlapString = AccessibilityText(text: "\nPartially covered underneath toolbar", isRaised: false)
+            if !cameFromFind {
+                if let navigationBar = self.navigationController?.navigationBar {
+                    
+                    let navigationBarFrame = navigationBar.convert(navigationBar.bounds, to: nil)
+                    let tabBarFrame = ConstantVars.getTabBarFrame?() ?? CGRect.zero
+                    
+                    if navigationBarFrame.intersects(newView.frame) {
+                        overlapString = AccessibilityText(text: "\nPartially covered underneath navigation bar", isRaised: false)
+                    } else if tabBarFrame.intersects(newView.frame) {
+                        overlapString = AccessibilityText(text: "\nPartially covered underneath toolbar", isRaised: false)
+                    }
                 }
             }
-    
             
             let text = AccessibilityText(text: component.text, isRaised: false, customPitch: hexString.getDescription().1)
             let highlightText = AccessibilityText(text: "\nHighlight.\n", isRaised: false)
             let locationTitle = AccessibilityText(text: "Location:", isRaised: true)
             
-            let xPercent = Int(100 * ((newView.frame.origin.x + (newView.frame.width / 2)) / aspectFrame.width))
-            let yPercent = Int(100 * ((newView.frame.origin.y + (newView.frame.height / 2)) / aspectFrame.height))
+            let xPoint = newView.frame.origin.x + (newView.frame.width / 2)
+            let yPoint = newView.frame.origin.y + (newView.frame.height / 2)
+            
+            let xPercent = Int(100 * (xPoint / contentView.bounds.width))
+            let yPercent = Int(100 * (yPoint / contentView.bounds.height))
             
             let locationRawString = "\(xPercent) x, \(yPercent) y"
             let locationString = AccessibilityText(text: locationRawString, isRaised: false)
@@ -162,8 +166,6 @@ extension SlideViewController {
                     return true
                 }
                 
-//                let insetBounds = newView.bounds.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6))
-//                newView.accessibilityFrame = newView.convert(insetBounds, to: nil)
                 let insetFrame = newView.frame.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6))
                 newView.accessibilityFrame = insetFrame
             }

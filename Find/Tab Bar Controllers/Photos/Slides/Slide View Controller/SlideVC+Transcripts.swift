@@ -136,47 +136,7 @@ extension SlideViewController {
             
             self.drawingView.addSubview(newView)
             
-            let drawingBounds = self.drawingView.bounds
-            
-            /// speak contents
-            var contents = [AccessibilityText]()
-            for match in self.matchToColors {
-                if component.text.contains(match.key) {
-                    if let pitch = match.value.first?.hexString.getDescription().1 {
-                        let text = AccessibilityText(text: match.key, isRaised: false, customPitch: pitch)
-                        contents.append(text)
-                    }
-                }
-            }
-            
-            let contentsTitle = AccessibilityText(text: " \nContains:\n", isRaised: true)
-            
-            let text = AccessibilityText(text: component.text, isRaised: false)
-            let highlightText = AccessibilityText(text: " \nOverlay.\n", isRaised: false)
-            let locationTitle = AccessibilityText(text: " \nLocation:\n", isRaised: true)
-            
-            let xPercent = Int(100 * (x / aspectFrame.width))
-            let yPercent = Int(100 * (y / aspectFrame.height))
-            let wPercent = Int(100 * (w / aspectFrame.width))
-            let hPercent = Int(100 * (h / aspectFrame.height))
-            
-            
-            let locationRawString = "\(xPercent) x, \(yPercent) y, \(wPercent) width, \(hPercent) height."
-            let locationString = AccessibilityText(text: locationRawString, isRaised: false)
-            
-            newView.isAccessibilityElement = true
-            
-//            let insetBounds = newView.bounds.inset(by: UIEdgeInsets(top: -3, left: -3, bottom: -3, right: -3))
-//            newView.accessibilityFrame = newView.convert(insetBounds, to: nil)
-            
-            let insetFrame = newView.frame.inset(by: UIEdgeInsets(top: -3, left: -3, bottom: -3, right: -3))
-            newView.accessibilityFrame = insetFrame
-            
-            if contents.isEmpty {
-                newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text, highlightText, locationTitle, locationString])
-            } else {
-                newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text, highlightText, contentsTitle] + contents + [locationTitle, locationString])
-            }
+            self.addTranscriptAccessibility(component: component, newView: newView)
             
             if self.showingTranscripts {
                 newView.accessibilityHint = "Double-tap to show highlights"
@@ -204,6 +164,45 @@ extension SlideViewController {
             }
             
             newView.isHidden = !show
+        }
+    }
+    
+    func addTranscriptAccessibility(component: Component, newView: UIView) {
+        /// speak contents
+        var contents = [AccessibilityText]()
+        for match in self.matchToColors {
+            if component.text.contains(match.key) {
+                if let pitch = match.value.first?.hexString.getDescription().1 {
+                    let text = AccessibilityText(text: match.key, isRaised: false, customPitch: pitch)
+                    contents.append(text)
+                }
+            }
+        }
+        
+        let contentsTitle = AccessibilityText(text: " \nContains:\n", isRaised: true)
+        
+        let text = AccessibilityText(text: component.text, isRaised: false)
+        let highlightText = AccessibilityText(text: " \nOverlay.\n", isRaised: false)
+        let locationTitle = AccessibilityText(text: " \nLocation:\n", isRaised: true)
+        
+        let xPercent = Int(100 * (newView.frame.origin.x / self.contentView.bounds.width))
+        let yPercent = Int(100 * (newView.frame.origin.y / self.contentView.bounds.height))
+        let wPercent = Int(100 * (newView.bounds.width / self.contentView.bounds.width))
+        let hPercent = Int(100 * (newView.bounds.height / self.contentView.bounds.height))
+        
+        
+        let locationRawString = "\(xPercent) x, \(yPercent) y, \(wPercent) width, \(hPercent) height."
+        let locationString = AccessibilityText(text: locationRawString, isRaised: false)
+        
+        newView.isAccessibilityElement = true
+        
+        let insetFrame = newView.frame.inset(by: UIEdgeInsets(top: -3, left: -3, bottom: -3, right: -3))
+        newView.accessibilityFrame = insetFrame
+        
+        if contents.isEmpty {
+            newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text, highlightText, locationTitle, locationString])
+        } else {
+            newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text, highlightText, contentsTitle] + contents + [locationTitle, locationString])
         }
     }
     

@@ -60,7 +60,6 @@ extension PhotoFindViewController: PhotoSlidesUpdatedIndex {
 extension PhotoFindViewController: ZoomAnimatorDelegate {
     
     func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
-        print("starting!")
         zoomAnimator.cameFromFind = true
     }
     

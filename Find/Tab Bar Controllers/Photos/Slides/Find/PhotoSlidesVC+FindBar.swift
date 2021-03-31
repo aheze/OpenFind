@@ -25,6 +25,20 @@ extension PhotoSlidesViewController {
         slideFindBar.findBar.findBarDelegate = self
         slideFindBar.promptTextView.delegate = self
         self.slideFindBar = slideFindBar
+        
+        
+        slideFindBar.promptBackgroundView.shouldGroupAccessibilityChildren = true
+        slideFindBar.promptBackgroundView.accessibilityValue = "Finding from photos"
+        
+        slideFindBar.promptBackgroundView.activated = { [weak self] in
+            guard let self = self else { return false }
+            
+            if self.continueButtonVisible {
+                self.continuePressed()
+                return true
+            }
+            return false
+        }
     }
     
     

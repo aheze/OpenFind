@@ -15,7 +15,7 @@
                 <outlet property="blurViewHeightC" destination="dex-0t-5tI" id="jTu-XY-wRP"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="5ZX-tN-oI1"/>
                 <outlet property="findBar" destination="NSH-89-PEK" id="T6k-RL-v9b"/>
-                <outlet property="promptBackgroundView" destination="T0s-9U-rZ9" id="ilV-Ya-lU7"/>
+                <outlet property="promptBackgroundView" destination="T0s-9U-rZ9" id="4o7-u3-ctz"/>
                 <outlet property="promptTextView" destination="5pf-0P-3vM" id="RD5-QK-ead"/>
             </connections>
         </placeholder>
@@ -56,7 +56,7 @@
                         <constraint firstAttribute="height" constant="35" id="WQO-Tf-U91"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T0s-9U-rZ9">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T0s-9U-rZ9" customClass="PromptView" customModule="Find" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="40" width="501" height="52.5"/>
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Hi" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5pf-0P-3vM">

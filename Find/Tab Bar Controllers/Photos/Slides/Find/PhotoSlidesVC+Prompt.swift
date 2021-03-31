@@ -45,6 +45,7 @@ extension PhotoSlidesViewController {
     
     /// photo is cached
     func setPromptToHowManyCacheResults(howMany: Int) {
+        continueButtonVisible = true
        
         let textStyle = Style {
             $0.font = UIFont.systemFont(ofSize: 17, weight: .regular)
@@ -77,11 +78,13 @@ extension PhotoSlidesViewController {
         
         let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
         let summaryString = AccessibilityText(text: "\(howMany)" + resultsInCache + "Continue/Return button on the keyboard or double-tap Summary label" + toFindFromPhotos, isRaised: false)
-        UIAccessibility.postAnnouncement([summaryTitle, summaryString])
+        postAnnouncement([summaryTitle, summaryString])
     }
     
     /// photo is not cached
     func setPromptToContinue() {
+        continueButtonVisible = true
+        
         let textStyle = Style {
             $0.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             $0.color = UIColor.secondaryLabel
@@ -105,10 +108,12 @@ extension PhotoSlidesViewController {
         
         let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
         let summaryString = AccessibilityText(text: pressText + "Continue/Return button on the keyboard or double-tap Summary label" + toFindWithOCR, isRaised: false)
-        UIAccessibility.postAnnouncement([summaryTitle, summaryString])
+        postAnnouncement([summaryTitle, summaryString])
     }
     
     func setPromptToFastFinding() { /// currently fast finding
+        continueButtonVisible = false
+        
         let textStyle = Style {
             $0.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             $0.color = UIColor.secondaryLabel
@@ -125,11 +130,13 @@ extension PhotoSlidesViewController {
         
         let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
         let summaryString = AccessibilityText(text: findingWithOCR, isRaised: false)
-        UIAccessibility.postAnnouncement([summaryTitle, summaryString])
+        postAnnouncement([summaryTitle, summaryString])
     }
     
     /// Finished searching cache and uncached photos
     func setPromptToFinishedFastFinding(howMany: Int) {
+        continueButtonVisible = false
+        
         let textStyle = Style {
             $0.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             $0.color = UIColor.secondaryLabel
@@ -149,10 +156,16 @@ extension PhotoSlidesViewController {
         slideFindBar?.hasPrompt = true
         animatePromptReveal()
         
-        slideFindBar?.promptBackgroundView.accessibilityValue = "Completed finding. " + resultsText + spaceOrUnit + resultText
+        slideFindBar?.promptBackgroundView.accessibilityValue = "Completed finding. " + "\(howMany)" + results
         
         let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
         let summaryString = AccessibilityText(text: "Completed finding. " + "\(howMany)" + results, isRaised: false)
-        UIAccessibility.postAnnouncement([summaryTitle, summaryString])
+        postAnnouncement([summaryTitle, summaryString])
+    }
+    
+    func postAnnouncement(_ accessibilityText: [AccessibilityText]) {
+        if findPressed {
+            UIAccessibility.postAnnouncement(accessibilityText)
+        }
     }
 }

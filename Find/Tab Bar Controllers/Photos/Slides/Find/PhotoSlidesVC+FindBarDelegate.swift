@@ -38,14 +38,25 @@ extension PhotoSlidesViewController: FindBarDelegate {
     }
     
     func pressedReturn() {
-        pressedContinue()
+        continuePressed(dismissKeyboard: false)
     }
     
     func triedToEdit() {
-        print("triedToEdit findbar")
     }
     
     func triedToEditWhilePaused() {
+    }
+    
+    func continuePressed(dismissKeyboard: Bool = true) {
+        pressedContinue()
+        
+        if dismissKeyboard {
+            slideFindBar?.findBar.searchField.resignFirstResponder()
+        }
+        
+        if let promptView = slideFindBar?.promptBackgroundView {
+            UIAccessibility.post(notification: .layoutChanged, argument: promptView)
+        }
     }
     
     func pressedContinue() {
@@ -54,5 +65,6 @@ extension PhotoSlidesViewController: FindBarDelegate {
             fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
         }
     }
+    
 }
 

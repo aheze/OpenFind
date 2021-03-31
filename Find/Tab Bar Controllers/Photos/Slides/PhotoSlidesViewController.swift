@@ -41,6 +41,7 @@ class PhotoSlidesViewController: UIViewController {
     // MARK: Finding
     var slideFindBar: SlideFindBar?
     var slideFindBarTopC: Constraint?
+    var continueButtonVisible = false /// if true, set accessibility activate to true
     
     var findPressed = false
     var cameFromFind = false
