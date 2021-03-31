@@ -116,7 +116,8 @@ extension CameraViewController {
             UIAccessibility.post(notification: .screenChanged, argument: self.newSearchTextField)
         }
         
-        view.accessibilityElements = [topGroupView, cameraGroupView, passthroughGroupView]
+//        view.accessibilityElements = [topGroupView, cameraGroupView, passthroughGroupView]
+        view.accessibilityElements = [topGroupView, warningView, alternateWarningView, whatsNewView, cameraGroupView, passthroughGroupView]
     }
     
     func setupDrawingView() {
@@ -164,7 +165,12 @@ extension CameraViewController {
             cameraIconHolder.accessibilityHint = "Starts the camera, removes the Save and Cache buttons, and enables the flashlight to be turned on"
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-                UIAccessibility.post(notification: .announcement, argument: "\(self.currentNumberOfMatches) results found. Drag your finger over the Viewfinder to explore highlights. Cache for better accuracy.")
+                print("Speaking...")
+                if TipViews.currentLocalStep != 2 { /// must not be in a tutorial first
+                    print("tu")
+                    UIAccessibility.post(notification: .announcement, argument: "\(self.currentNumberOfMatches) results found. Drag your finger over the Viewfinder to explore highlights. Cache for better accuracy.")
+                }
+                
             }
             drawingBaseView.accessibilityHint = ""
         } else {

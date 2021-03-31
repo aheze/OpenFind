@@ -24,6 +24,8 @@ extension ViewController {
             
             if TipViews.currentLocalStep == 1 {
                 startLocalSecondStep()
+            } else {
+                UIAccessibility.post(notification: .screenChanged, argument: camera.cameraIconHolder)
             }
             
             camera.enableButtons(true)
@@ -34,7 +36,6 @@ extension ViewController {
                 tabBarView.hideRealShutter?(false)
             }
             
-            UIAccessibility.post(notification: .screenChanged, argument: camera.cameraIconHolder)
             
         case is ListsNavController:
             print("ended at lists")

@@ -24,7 +24,7 @@ extension CameraViewController {
             controlsBlurBottomC.constant = -controlsBlurView.bounds.height
             messageViewBottomC.constant = 0
             
-            view.accessibilityElements = [topGroupView, cameraGroupView, passthroughGroupView]
+            view.accessibilityElements = [topGroupView, warningView, alternateWarningView, whatsNewView, cameraGroupView, passthroughGroupView]
         }
         
         UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveLinear) {

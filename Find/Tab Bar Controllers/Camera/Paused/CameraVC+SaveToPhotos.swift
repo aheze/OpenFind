@@ -14,6 +14,7 @@ extension CameraViewController {
         if TipViews.inTutorial {
             TipViews.finishTutorial()
         }
+        
         if self.savePressed {
             UIView.animate(withDuration: Double(Constants.transitionDuration)) {
                 self.saveToPhotos.photosIcon.makeActiveState(offset: true)()

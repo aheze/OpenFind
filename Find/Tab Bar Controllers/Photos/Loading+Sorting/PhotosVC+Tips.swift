@@ -28,6 +28,16 @@ extension PhotosViewController {
         
         TipViews.starTipView2 = tipView
         TipViews.currentStarStep = 2
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            UIAccessibility.post(notification: .layoutChanged, argument: self.selectButton)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+                let stepText = AccessibilityText(text: "Step 2.", customPitch: 0.7)
+                let instructions = AccessibilityText(text: "Double-tap Select, then select the photos that you want to star.", isRaised: false)
+                UIAccessibility.post(notification: .announcement, argument: UIAccessibility.makeAttributedText([stepText, instructions]))
+            }
+        }
     }
     func startCacheSecondStep() {
         TipViews.cacheTipView1?.dismiss()
@@ -49,6 +59,16 @@ extension PhotosViewController {
         
         TipViews.cacheTipView2 = tipView
         TipViews.currentCacheStep = 2
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            UIAccessibility.post(notification: .layoutChanged, argument: self.selectButton)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+                let stepText = AccessibilityText(text: "Step 2.", customPitch: 0.7)
+                let instructions = AccessibilityText(text: "Double-tap Select, then select the photos that you want to cache", isRaised: false)
+                UIAccessibility.post(notification: .announcement, argument: UIAccessibility.makeAttributedText([stepText, instructions]))
+            }
+        }
     }
 }
 extension PhotosViewController: EasyTipViewDelegate {

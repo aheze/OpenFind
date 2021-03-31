@@ -22,10 +22,20 @@ extension ViewController {
         
         let goToCamera = NSLocalizedString("tip-goToCamera", comment: "")
         let tipView = EasyTipView(text: goToCamera, preferences: preferences, delegate: self)
-        tipView.show(forView: tabBarView.cameraIcon)
+        tipView.show(forView: tabBarView.cameraContainerView)
         
         TipViews.localTipView1 = tipView
         TipViews.currentLocalStep = 1
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            UIAccessibility.post(notification: .layoutChanged, argument: self.tabBarView.cameraContainerView)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+                let stepText = AccessibilityText(text: "Step 1.", customPitch: 0.7)
+                let instructions = AccessibilityText(text: "Double-tap the camera button in the tab bar", isRaised: false)
+                UIAccessibility.post(notification: .announcement, argument: UIAccessibility.makeAttributedText([stepText, instructions]))
+            }
+        }
     }
     func startLocalSecondStep() {
         TipViews.localTipView1?.dismiss()
@@ -41,6 +51,16 @@ extension ViewController {
         
         TipViews.localTipView2 = tipView
         TipViews.currentLocalStep = 2
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            UIAccessibility.post(notification: .layoutChanged, argument: self.camera.cameraIconHolder)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+                let stepText = AccessibilityText(text: "Step 2.", customPitch: 0.7)
+                let instructions = AccessibilityText(text: "Double-tap the shutter to pause", isRaised: false)
+                UIAccessibility.post(notification: .announcement, argument: UIAccessibility.makeAttributedText([stepText, instructions]))
+            }
+        }
     }
     
 }

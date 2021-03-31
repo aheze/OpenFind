@@ -378,9 +378,10 @@ open class EasyTipView: UIView {
     public convenience init (text: String, preferences: Preferences = EasyTipView.globalPreferences, delegate: EasyTipViewDelegate? = nil) {
         self.init(content: .text(text), preferences: preferences, delegate: delegate)
         
-        self.isAccessibilityElement = true
-        self.accessibilityTraits = UIAccessibilityTraits.staticText
-        self.accessibilityLabel = text
+//        self.isAccessibilityElement = true
+//        self.accessibilityTraits = UIAccessibilityTraits.staticText
+//        self.accessibilityLabel = text
+        self.isAccessibilityElement = false
     }
     
     public convenience init (contentView: UIView, preferences: Preferences = EasyTipView.globalPreferences, delegate: EasyTipViewDelegate? = nil) {

@@ -44,6 +44,10 @@ struct TipViews {
         currentCacheStep = 0
         
         resetToBeginning?()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            UIAccessibility.post(notification: .announcement, argument: "Tutorial complete.")
+        }
     }
     
     static var resetToBeginning: (() -> Void)? /// change empty view back to beginning

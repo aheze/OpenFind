@@ -446,7 +446,6 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return true
     }
     func showDuplicateAlert(show: Bool) {
-        
         if show == true {
             warningHeightC.constant = 32
             UIView.animate(withDuration: 0.5, animations: {

@@ -37,6 +37,17 @@ extension CameraViewController {
         
         TipViews.localTipView3 = tipView
         TipViews.currentLocalStep = 3
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            UIAccessibility.post(notification: .layoutChanged, argument: self.saveToPhotos)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+                let stepText = AccessibilityText(text: "Step 3.", customPitch: 0.7)
+                let instructions = AccessibilityText(text: "Double-tap the Save to Photos button", isRaised: false)
+                UIAccessibility.post(notification: .announcement, argument: UIAccessibility.makeAttributedText([stepText, instructions]))
+            }
+        }
+        
     }
 }
 
