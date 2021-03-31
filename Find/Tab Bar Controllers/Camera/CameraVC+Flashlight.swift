@@ -44,6 +44,8 @@ extension CameraViewController {
             print("Torch could not be used")
         }
         
+        flashView.accessibilityValue = on ? "On" : "Off"
+        
         let flashlightImage = on ? UIImage(systemName: "flashlight.on.fill") : UIImage(systemName: "flashlight.off.fill")
         UIView.transition(
             with: flashImageView,

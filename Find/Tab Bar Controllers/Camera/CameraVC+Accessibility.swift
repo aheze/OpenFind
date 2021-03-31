@@ -49,9 +49,12 @@ extension CameraViewController {
         fullScreenView.accessibilityHint = "Hides the search field, tab bar, shutter button, and everything else"
         fullScreenView.accessibilityTraits = [.button]
         
+        showControlsButton.accessibilityHint = "Exit full screen mode"
+        
         flashView.isAccessibilityElement = true
         flashView.accessibilityLabel = "Flashlight"
         flashView.accessibilityHint = "Turns on the flashlight"
+        flashView.accessibilityValue = "Off"
         flashView.accessibilityTraits = [.button]
         
         settingsView.isAccessibilityElement = true

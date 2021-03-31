@@ -16,11 +16,15 @@ extension CameraViewController {
             controlsBlurBottomC.constant = CGFloat(ConstantVars.tabHeight) - 30
             
             messageViewBottomC.constant = controlsBlurView.bounds.height + controlsBlurBottomC.constant + view.safeAreaInsets.bottom
+            
+            view.accessibilityElements = [cameraGroupView, showControlsButton]
         } else {
             contentTopC.constant = normalSearchFieldTopCConstant
             passthroughBottomC.constant = 0
             controlsBlurBottomC.constant = -controlsBlurView.bounds.height
             messageViewBottomC.constant = 0
+            
+            view.accessibilityElements = [topGroupView, cameraGroupView, passthroughGroupView]
         }
         
         UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveLinear) {
