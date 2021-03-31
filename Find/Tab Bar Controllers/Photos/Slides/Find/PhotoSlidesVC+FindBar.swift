@@ -51,6 +51,14 @@ extension PhotoSlidesViewController {
             }
             
             view.accessibilityElements = [slideFindBar, containerView, voiceOverSlidesControl]
+            currentViewController.findingActive = true
+            
+            if !currentViewController.showingTranscripts {
+                for highlight in currentViewController.resultPhoto.components {
+                    highlight.baseView?.isHidden = false
+                }
+            }
+            currentViewController.updateAccessibilityHints()
         } else {
             let findText = NSLocalizedString("universal-find", comment: "")
             findButton.title = findText
@@ -65,6 +73,12 @@ extension PhotoSlidesViewController {
             
             slideFindBar?.findBar.searchField.resignFirstResponder()
             view.accessibilityElements = nil
+            currentViewController.findingActive = false
+            
+            for highlight in currentViewController.resultPhoto.components {
+                highlight.baseView?.isHidden = true
+            }
+            currentViewController.updateAccessibilityHints()
         }
     }
 }

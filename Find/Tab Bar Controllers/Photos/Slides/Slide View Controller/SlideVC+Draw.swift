@@ -23,6 +23,7 @@ extension SlideViewController {
     }
     
     func updateHighlightFrames() {
+        print("Updating./")
         let aspectFrame = AVMakeRect(aspectRatio: imageView.image?.size ?? imageView.bounds.size, insideRect: contentView.bounds)
         
         for highlight in resultPhoto.components {
@@ -31,7 +32,13 @@ extension SlideViewController {
             let newWidth = highlight.width * aspectFrame.width + 12
             let newHeight = highlight.height * aspectFrame.height + 6
             
-            highlight.baseView?.frame = CGRect(x: newX, y: newY, width: newWidth, height: newHeight)
+            let newFrame = CGRect(x: newX, y: newY, width: newWidth, height: newHeight)
+            highlight.baseView?.frame = newFrame
+            
+            let insetBounds = newFrame.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6))
+            if let baseView = highlight.baseView {
+                baseView.accessibilityFrame = view.convert(insetBounds, to: nil)
+            }
         }
         
         for transcript in resultPhoto.transcripts {
@@ -40,7 +47,13 @@ extension SlideViewController {
             let h = transcript.height * aspectFrame.height
             let y = (transcript.y * (aspectFrame.height) + aspectFrame.origin.y) - h
             
-            transcript.baseView?.frame = CGRect(x: x, y: y, width: w, height: h)
+            let newFrame = CGRect(x: x, y: y, width: w, height: h)
+            transcript.baseView?.frame = newFrame
+            
+            let insetBounds = newFrame.inset(by: UIEdgeInsets(top: -3, left: -3, bottom: -3, right: -3))
+            if let baseView = transcript.baseView {
+                baseView.accessibilityFrame = view.convert(insetBounds, to: nil)
+            }
         }
     }
     
@@ -88,14 +101,14 @@ extension SlideViewController {
         self.drawingView.addSubview(newView)
         
         
-        addAccessibilityLabel(component: component, newView: newView, hexString: hexStrings.first ?? "")
+        addAccessibilityLabel(component: component, newView: newView, aspectFrame: aspectFrame, hexString: hexStrings.first ?? "")
         
         if newHeight > 50 {
             newView.alpha = 0.4
         }
     }
     
-    func addAccessibilityLabel(component: Component, newView: CustomActionsView, hexString: String) {
+    func addAccessibilityLabel(component: Component, newView: CustomActionsView, aspectFrame: CGRect, hexString: String) {
         if UIAccessibility.isVoiceOverRunning {
             
             
@@ -113,49 +126,47 @@ extension SlideViewController {
                     overlapString = AccessibilityText(text: "\nPartially covered underneath toolbar", isRaised: false)
                 }
             }
+    
             
-            let drawingBounds = self.drawingView.bounds
-            DispatchQueue.global(qos: .userInitiated).async {
+            let text = AccessibilityText(text: component.text, isRaised: false, customPitch: hexString.getDescription().1)
+            let highlightText = AccessibilityText(text: "\nHighlight.\n", isRaised: false)
+            let locationTitle = AccessibilityText(text: "Location:", isRaised: true)
+            
+            let xPercent = Int(100 * ((newView.frame.origin.x + (newView.frame.width / 2)) / aspectFrame.width))
+            let yPercent = Int(100 * ((newView.frame.origin.y + (newView.frame.height / 2)) / aspectFrame.height))
+            
+            let locationRawString = "\(xPercent) x, \(yPercent) y"
+            let locationString = AccessibilityText(text: locationRawString, isRaised: false)
+            
+            DispatchQueue.main.async {
+                newView.isAccessibilityElement = true
+                newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text, highlightText, locationTitle, locationString, overlapString])
                 
-                let text = AccessibilityText(text: component.text, isRaised: false, customPitch: hexString.getDescription().1)
-                let highlightText = AccessibilityText(text: "\nHighlight.\n", isRaised: false)
-                let locationTitle = AccessibilityText(text: "Location:", isRaised: true)
-                
-                let xPercent = Int(100 * ((component.x + (component.width / 2)) / drawingBounds.width))
-                let yPercent = Int(100 * ((component.y + (component.height / 2)) / drawingBounds.height))
-                
-                let locationRawString = "\(xPercent) x, \(yPercent) y"
-                let locationString = AccessibilityText(text: locationRawString, isRaised: false)
-                
-                DispatchQueue.main.async {
-                    newView.isAccessibilityElement = true
-                    newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text, highlightText, locationTitle, locationString, overlapString])
-
-                    if self.showingTranscripts {
-                        newView.accessibilityHint = "Double-tap to show highlights"
-                    } else {
-                        newView.accessibilityHint = "Double-tap to show transcript overlay"
-                    }
-                    
-                    newView.activated = { [weak self] in
-                        guard let self = self else { return false }
-                        
-                        self.showingTranscripts.toggle()
-                        if self.showingTranscripts {
-                            self.showTranscripts(focusedTranscript: component.transcriptComponent)
-                        } else {
-                            self.showHighlights()
-                        }
-                        
-                        self.previousActivatedHighlight = component
-                        
-                        return true
-                    }
-                    
-                    let insetBounds = newView.bounds.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6))
-                    newView.accessibilityFrame = newView.convert(insetBounds, to: nil)
+                if self.showingTranscripts {
+                    newView.accessibilityHint = "Double-tap to show highlights"
+                } else {
+                    newView.accessibilityHint = "Double-tap to show transcript overlay"
                 }
+                
+                newView.activated = { [weak self] in
+                    guard let self = self else { return false }
+                    
+                    self.showingTranscripts.toggle()
+                    if self.showingTranscripts {
+                        self.showTranscripts(focusedTranscript: component.transcriptComponent)
+                    } else {
+                        self.showHighlights()
+                    }
+                    
+                    self.previousActivatedHighlight = component
+                    
+                    return true
+                }
+                
+                let insetBounds = newView.bounds.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6))
+                newView.accessibilityFrame = newView.convert(insetBounds, to: nil)
             }
+            
         }
     }
 }

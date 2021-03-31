@@ -155,10 +155,10 @@ extension SlideViewController {
             let highlightText = AccessibilityText(text: " \nOverlay.\n", isRaised: false)
             let locationTitle = AccessibilityText(text: " \nLocation:\n", isRaised: true)
             
-            let xPercent = Int(100 * (component.x / drawingBounds.width))
-            let yPercent = Int(100 * (component.y / drawingBounds.height))
-            let wPercent = Int(100 * (component.width / drawingBounds.width))
-            let hPercent = Int(100 * (component.height / drawingBounds.height))
+            let xPercent = Int(100 * (x / aspectFrame.width))
+            let yPercent = Int(100 * (y / aspectFrame.height))
+            let wPercent = Int(100 * (w / aspectFrame.width))
+            let hPercent = Int(100 * (h / aspectFrame.height))
             
             
             let locationRawString = "\(xPercent) x, \(yPercent) y, \(wPercent) width, \(hPercent) height."
