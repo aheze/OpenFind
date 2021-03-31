@@ -23,6 +23,7 @@ extension SlideViewController {
     }
     
     func updateHighlightFrames() {
+        print("Updating!!!!!")
         let aspectFrame = AVMakeRect(aspectRatio: imageView.image?.size ?? imageView.bounds.size, insideRect: contentView.bounds)
         
         for highlight in resultPhoto.components {
@@ -35,8 +36,8 @@ extension SlideViewController {
             highlight.baseView?.frame = newFrame
             
             if let baseView = highlight.baseView {
-                let insetBounds = baseView.bounds.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6))
-                baseView.accessibilityFrame = baseView.convert(insetBounds, to: nil)
+                let insetFrame = baseView.frame.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6))
+                baseView.accessibilityFrame = insetFrame
             }
         }
         
@@ -50,8 +51,8 @@ extension SlideViewController {
             transcript.baseView?.frame = newFrame
             
             if let baseView = transcript.baseView {
-                let insetBounds = baseView.bounds.inset(by: UIEdgeInsets(top: -3, left: -3, bottom: -3, right: -3))
-                baseView.accessibilityFrame = baseView.convert(insetBounds, to: nil)
+                let insetFrame = baseView.frame.inset(by: UIEdgeInsets(top: -3, left: -3, bottom: -3, right: -3))
+                baseView.accessibilityFrame = insetFrame
             }
         }
     }
@@ -110,7 +111,6 @@ extension SlideViewController {
     func addAccessibilityLabel(component: Component, newView: CustomActionsView, aspectFrame: CGRect, hexString: String) {
         if UIAccessibility.isVoiceOverRunning {
             
-            
             let highlightFrame = newView.convert(newView.bounds, to: nil)
             
             var overlapString = AccessibilityText(text: "", isRaised: false)
@@ -162,8 +162,10 @@ extension SlideViewController {
                     return true
                 }
                 
-                let insetBounds = newView.bounds.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6))
-                newView.accessibilityFrame = newView.convert(insetBounds, to: nil)
+//                let insetBounds = newView.bounds.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6))
+//                newView.accessibilityFrame = newView.convert(insetBounds, to: nil)
+                let insetFrame = newView.frame.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6))
+                newView.accessibilityFrame = insetFrame
             }
             
         }

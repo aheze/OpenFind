@@ -10,7 +10,6 @@ import UIKit
 
 extension PhotoFindViewController {
     func findFromCache() {
-        print("set to nil")
         currentFastFindProcess = nil
         totalCacheResults = 0
         var totalMatchNumber = 0
@@ -26,7 +25,6 @@ extension PhotoFindViewController {
         DispatchQueue.global(qos: .userInitiated).async {
             var resultPhotos = [ResultPhoto]()
             
-            
             for findPhoto in self.findPhotos {
                 guard let editableModel = findPhoto.editableModel else { continue }
                   
@@ -38,8 +36,19 @@ extension PhotoFindViewController {
                 var descriptionOfPhoto = ""
                 var textToRanges = [String: [ArrayOfMatchesInComp]]() ///COMPONENT to ranges
                 
+                var transcripts = [Component]()
+                
                 ///Cycle through each block of text. Each cont may be a line long.
                 for content in editableModel.contents {
+                    
+                    let transcript = Component()
+                    transcript.text = content.text
+                    transcript.x = content.x
+                    transcript.y = content.y
+                    transcript.width = content.width
+                    transcript.height = content.height
+                    transcript.text = content.text
+                    transcripts.append(transcript)
                     
                     var matchRanges = [ArrayOfMatchesInComp]()
                     var hasMatch = false /// if this content has a match
@@ -116,6 +125,7 @@ extension PhotoFindViewController {
                     resultPhotos.append(resultPhoto)
                 }
                 
+                resultPhoto.transcripts = transcripts
                 resultPhoto.descriptionMatchRanges = finalRangesObjects
                 resultPhoto.numberOfMatches = numberOfMatches
                 resultPhoto.descriptionText = descriptionOfPhoto

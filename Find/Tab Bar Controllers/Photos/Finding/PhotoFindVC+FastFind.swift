@@ -123,7 +123,7 @@ extension PhotoFindViewController {
             self.setPromptToHowManyFastFound(howMany: self.numberFastFound)
         }
         
-        var contents = [EditableSingleHistoryContent]()
+        var transcripts = [Component]()
         
         for result in results {
             if let observation = result as? VNRecognizedTextObservation {
@@ -134,25 +134,26 @@ extension PhotoFindViewController {
                     let origWidth = observation.boundingBox.width
                     let origHeight = observation.boundingBox.height
                     
-                    let singleContent = EditableSingleHistoryContent()
-                    singleContent.text = text.string
-                    singleContent.x = origX
-                    singleContent.y = origY
-                    singleContent.width = origWidth
-                    singleContent.height = origHeight
-                    contents.append(singleContent)
+                    let transcript = Component()
+                    transcript.text = text.string
+                    transcript.x = origX
+                    transcript.y = origY
+                    transcript.width = origWidth
+                    transcript.height = origHeight
+                    transcripts.append(transcript)
                 }
             }
         }
         
         let resultPhoto = ResultPhoto()
         resultPhoto.findPhoto = photo
+        resultPhoto.transcripts = transcripts
         
         var descriptionOfPhoto = ""
         var textToRanges = [String: [ArrayOfMatchesInComp]]() ///COMPONENT to ranges
         var numberOfMatches = 0
         
-        for content in contents {
+        for content in transcripts {
             var matchRanges = [ArrayOfMatchesInComp]()
             var hasMatch = false
             

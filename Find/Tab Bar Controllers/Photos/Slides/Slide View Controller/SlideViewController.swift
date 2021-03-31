@@ -65,7 +65,6 @@ class SlideViewController: UIViewController {
         super.viewDidLayoutSubviews()
         view.layoutIfNeeded()
         
-        print("layouted.")
         updateHighlightFrames()
     }
 }
