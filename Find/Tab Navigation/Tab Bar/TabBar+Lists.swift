@@ -20,12 +20,14 @@ extension TabBarView {
             }
             
             backgroundView.accessibilityLabel = "Toolbar"
+            contentView.accessibilityElements = [backgroundView, listsSelectionLabel, listsDeleteButton]
         } else {
             controlsReferenceView.isUserInteractionEnabled = false
             stackView.isHidden = false
             listsControls.removeFromSuperview()
             
             backgroundView.accessibilityLabel = "Tab bar"
+            contentView.accessibilityElements = nil
         }
     }
     func updateListsSelectionLabel(numberOfSelected: Int) {
