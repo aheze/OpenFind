@@ -74,7 +74,7 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        print("FIn animate!")
+
         let currentVC = currentViewController
         if completed {
             let index = currentVC.index

@@ -17,7 +17,6 @@ extension SlideViewController {
         removeAllHighlights()
         
         let aspectFrame = AVMakeRect(aspectRatio: imageView.image?.size ?? imageView.bounds.size, insideRect: contentView.bounds)
-        print("aspect frame is \(aspectFrame)")
         
         for component in resultPhoto.components {
             scaleInHighlight(component: component, aspectFrame: aspectFrame)

@@ -56,7 +56,6 @@ class PromptView: UIView {
     }
     
     func commonInit() {
-        print("Common!!!!")
     }
 }
 

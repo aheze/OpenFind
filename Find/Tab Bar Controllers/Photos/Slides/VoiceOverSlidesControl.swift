@@ -13,7 +13,11 @@ class VoiceOverSlidesControl: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var numberLabel: UILabel!
     
-    var currentIndex = 0
+    var currentIndex = 0 {
+        didSet {
+            numberLabel.text = "\(currentIndex + 1)/\(totalNumberOfPhotos)"
+        }
+    }
     var totalNumberOfPhotos = 1 {
         didSet {
             numberLabel.text = "\(currentIndex + 1)/\(totalNumberOfPhotos)"
