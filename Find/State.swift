@@ -78,6 +78,8 @@ struct ConstantVars { /// calculated based on device size
     static var shouldHaveLightStatusBar = false
     
     static var launchViewController: UIViewController?
+    
+    static var getTabBarFrame: (() -> CGRect)?
 }
 
 struct Defaults {

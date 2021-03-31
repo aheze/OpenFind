@@ -53,7 +53,10 @@ extension TabBarView {
             }
             photoSlideControls.isUserInteractionEnabled = true
             
+            backgroundView.accessibilityLabel = "Toolbar"
+            
         } else {
+            
             controlsReferenceView.isUserInteractionEnabled = false
 
             UIView.animate(withDuration: 0.3) {
@@ -64,6 +67,8 @@ extension TabBarView {
                     self.photoSlideControls.removeFromSuperview()
                 }
             }
+            
+            backgroundView.accessibilityLabel = "Tab bar"
         }
         
     }

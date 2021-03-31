@@ -165,6 +165,8 @@ extension SlideViewController {
             let locationString = AccessibilityText(text: locationRawString, isRaised: false)
             
             newView.isAccessibilityElement = true
+            let insetBounds = newView.bounds.inset(by: UIEdgeInsets(top: -3, left: -3, bottom: -3, right: -3))
+            newView.accessibilityFrame = newView.convert(insetBounds, to: nil)
             
             if contents.isEmpty {
                 newView.accessibilityAttributedLabel = UIAccessibility.makeAttributedText([text, highlightText, locationTitle, locationString])
@@ -181,18 +183,14 @@ extension SlideViewController {
             newView.activated = { [weak self] in
                 guard let self = self else { return false }
                 
-                if CameraState.isPaused {
-                    self.showingTranscripts.toggle()
-                    if self.showingTranscripts {
-                        self.showTranscripts()
-                    } else {
-                        self.showHighlights(currentTranscript: component)
-                    }
-                    
-                    return true
+                self.showingTranscripts.toggle()
+                if self.showingTranscripts {
+                    self.showTranscripts()
+                } else {
+                    self.showHighlights(currentTranscript: component)
                 }
                 
-                return false
+                return true
             }
             
             newView.lostFocus = { [weak self] in

@@ -3187,7 +3187,7 @@
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tUv-4R-c5U">
                                         <rect key="frame" x="0.0" y="0.0" width="88.666666666666671" height="39"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="W9A-sZ-kHI">
-                                            <rect key="frame" x="0.0" y="0.0" width="89" height="39"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="88.666666666666671" height="39"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <blurEffect style="prominent"/>
@@ -3252,6 +3252,7 @@
                     <connections>
                         <outlet property="backBlurView" destination="tUv-4R-c5U" id="UJj-Lu-739"/>
                         <outlet property="backButtonView" destination="jB3-ed-Bdr" id="qtV-4i-ZG4"/>
+                        <outlet property="containerView" destination="6tX-E6-tlq" id="CYf-sG-lTn"/>
                         <outlet property="messageView" destination="2u8-oc-ier" id="nBw-ai-Qxf"/>
                         <outlet property="messageViewBottomC" destination="0x2-OW-ltx" id="m3F-xf-k7z"/>
                         <outlet property="voiceOverBottomC" destination="PV2-iw-SFq" id="JRL-wR-hKi"/>

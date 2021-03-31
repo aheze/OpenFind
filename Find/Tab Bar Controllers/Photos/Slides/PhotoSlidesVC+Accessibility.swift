@@ -46,6 +46,8 @@ extension PhotoSlidesViewController {
         } else {
             voiceOverSlidesControl.isHidden = true
         }
+        
+        view.accessibilityElements = nil
     }
     
     func speakPhotoDescription(at newIndex: Int) {

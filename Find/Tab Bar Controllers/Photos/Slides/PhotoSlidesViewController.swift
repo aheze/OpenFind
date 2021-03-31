@@ -19,6 +19,7 @@ class PhotoSlidesViewController: UIViewController {
     
     var presentingInfo: ((Bool) -> Void)? /// update status bar color
     
+    @IBOutlet weak var containerView: UIView!
     var pageViewController: UIPageViewController {
         return self.children[0] as! UIPageViewController
     }

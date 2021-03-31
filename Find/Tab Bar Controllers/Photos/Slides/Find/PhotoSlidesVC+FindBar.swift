@@ -49,6 +49,8 @@ extension PhotoSlidesViewController {
                 
                 self.slideFindBar?.alpha = 1
             }
+            
+            view.accessibilityElements = [slideFindBar, containerView, voiceOverSlidesControl]
         } else {
             let findText = NSLocalizedString("universal-find", comment: "")
             findButton.title = findText
@@ -62,6 +64,7 @@ extension PhotoSlidesViewController {
             }
             
             slideFindBar?.findBar.searchField.resignFirstResponder()
+            view.accessibilityElements = nil
         }
     }
 }

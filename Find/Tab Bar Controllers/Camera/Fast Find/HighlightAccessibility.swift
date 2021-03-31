@@ -57,7 +57,6 @@ extension CameraViewController {
                                 self.showHighlights()
                             }
                             
-                            print("set focus!!!!")
                             self.previousActivatedHighlight = component
                             return true
                         }

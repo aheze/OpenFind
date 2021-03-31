@@ -526,6 +526,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         somethingWentWrongView.isAccessibilityElement = false
         somethingWentWrongTitle.isAccessibilityElement = false
         somethingWentWrongDescription.isAccessibilityElement = false
+        
+        ConstantVars.getTabBarFrame = { [weak self] in
+            guard let self = self else { return .zero }
+            return self.tabBarView.convert(self.tabBarView.bounds, to: nil)
+        }
     }
 
     /// enable both the long press and pan gesture
