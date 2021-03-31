@@ -367,7 +367,11 @@ class CameraViewController: UIViewController {
                             self.alternateWarningView.alpha = 1
                             self.alternateWarningLabel.alpha = 1
                             self.alternateWarningView.layoutIfNeeded()
-                        })
+                        }) { _ in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                                UIAccessibility.post(notification: .layoutChanged, argument: self.warningView)
+                            }
+                        }
                     } else {
                         if displayingOrientationError == true {
                             displayingOrientationError = false
@@ -557,7 +561,11 @@ class CameraViewController: UIViewController {
                     self.whatsNewView.alpha = 1
                     self.whatsNewButton.alpha = 1
                     self.whatsNewView.layoutIfNeeded()
-                })
+                }) { _ in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                        UIAccessibility.post(notification: .layoutChanged, argument: self.warningView)
+                    }
+                }
             }
             
         }

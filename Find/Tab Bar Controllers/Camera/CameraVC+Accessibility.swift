@@ -13,6 +13,7 @@ extension CameraViewController {
     func setupAccessibility() {
         
         setupDrawingView()
+        setupWarningViews()
         
         newSearchTextField.accessibilityTraits = UIAccessibilityTraits(rawValue: 0x200000000000)
         newSearchTextField.accessibilityLabel = "Search bar"
@@ -116,7 +117,7 @@ extension CameraViewController {
             UIAccessibility.post(notification: .screenChanged, argument: self.newSearchTextField)
         }
         
-//        view.accessibilityElements = [topGroupView, cameraGroupView, passthroughGroupView]
+
         view.accessibilityElements = [topGroupView, warningView, alternateWarningView, whatsNewView, cameraGroupView, passthroughGroupView]
     }
     
@@ -140,6 +141,18 @@ extension CameraViewController {
             
             return false
         }
+    }
+    
+    func setupWarningViews() {
+        warningLabel.accessibilityLabel = "Find is paused. Duplicates are not allowed."
+        
+        let onlyPortraitSupported = NSLocalizedString("onlyPortraitSupported", comment: "SetupSearchBar def=Only Portrait view is currently supported.")
+        let rotateToPortrait = NSLocalizedString("rotateToPortrait", comment: "SetupSearchBar def=Please rotate your iPad to Portrait view, then relaunch the app.")
+        
+        alternateWarningLabel.accessibilityLabel = "\(onlyPortraitSupported)\n\(rotateToPortrait)"
+        
+        whatsNewButton.accessibilityLabel = "See what's new in Find!"
+        
     }
     
     func pausedAccessibility(paused: Bool) {

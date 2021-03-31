@@ -453,6 +453,9 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 self.warningLabel.alpha = 1
                 self.view.layoutIfNeeded()
             })
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                UIAccessibility.post(notification: .layoutChanged, argument: self.warningView)
+            }
         } else {
             warningHeightC.constant = 0
             UIView.animate(withDuration: 0.5, animations: {

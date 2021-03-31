@@ -140,10 +140,18 @@ struct QRCodeView: View {
                     .frame(maxWidth: 300, maxHeight: 300)
                     .accessibility(label: Text("QR Code"))
                 
-                Text("getfind.app")
-                    .foregroundColor(Color.white)
-                    .font(.system(size: 21, weight: .medium))
-                    .padding(.bottom, 20)
+                
+                Button(action: {
+                    if let url = URL(string: "https://www.getfind.app/") {
+                        UIApplication.shared.open(url)
+                    }
+                }) {
+                    Text("getfind.app")
+                        .foregroundColor(Color.white)
+                        .font(.system(size: 26, weight: .medium))
+                }
+                .accessibility(hint: Text("Open Find's website in browser"))
+                .padding(.bottom, 20)
                 
                 Button(action: {
                     withAnimation(.easeOut(duration: 0.15)) {
@@ -153,6 +161,7 @@ struct QRCodeView: View {
                     Text("Dismiss")
                         .foregroundColor(Color.white)
                         .font(.system(size: 19, weight: .regular))
+                        .opacity(0.5)
                 }
                 .accessibility(hint: Text("Return to Settings screen"))
             }

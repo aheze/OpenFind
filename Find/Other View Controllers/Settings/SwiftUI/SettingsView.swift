@@ -122,6 +122,10 @@ struct SettingsView: View {
     
     var body: some View {
         ZStack {
+            VisualEffectView(effect: UIBlurEffect(style: .systemThickMaterialDark))
+                .edgesIgnoringSafeArea(.all)
+                .zIndex(0)
+            
             NavigationView {
                 ZStack {
                     ScrollView {
@@ -210,14 +214,15 @@ struct SettingsView: View {
                 .configureBar()
             }
             .navigationViewStyle(StackNavigationViewStyle())
-            .zIndex(0)
+            .zIndex(1)
             .accessibility(hidden: isShowingQR)
+            .opacity(isShowingQR ? 0 : 1)
             
             if isShowingQR {
                 QRCodeView(isPresented: $isShowingQR)
                     .edgesIgnoringSafeArea(.all)
                     .transition(.opacity)
-                    .zIndex(1)
+                    .zIndex(2)
             }
         }
     }
