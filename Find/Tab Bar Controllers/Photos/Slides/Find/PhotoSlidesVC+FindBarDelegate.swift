@@ -14,7 +14,9 @@ extension PhotoSlidesViewController: FindBarDelegate {
     
     func returnTerms(matchToColorsR: [String : [HighlightColor]]) {
         
-        currentViewController.removeAllHighlights()
+        for highlight in currentViewController.resultPhoto.components {
+            highlight.baseView?.removeFromSuperview()
+        }
         matchToColors = matchToColorsR
         
         let resultPhoto = resultPhotos[currentIndex]
