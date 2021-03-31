@@ -23,16 +23,20 @@ struct TextDetectionView: View {
         ZStack {
             VStack(spacing: 0) {
                 HeaderView(text: "Text Detection Indicator")
+                    .accessibility(hint: Text("Flash a temporary blue-gray highlight on top of detected sentences"))
                 
                 HStack(spacing: 0) {
                     if isOn {
                         Label(text: "ON")
+                            .accessibility(hidden: true)
                     } else {
                         Label(text: "OFF")
+                            .accessibility(hidden: true)
                     }
+                    
                     Spacer()
                     Toggle(isOn: $isOn, label: {
-                        Text("Label")
+                        Text("Toggle")
                     }).labelsHidden()
 
                 }
@@ -53,6 +57,7 @@ struct HapticFeedbackView: View {
         ZStack {
             VStack(spacing: 0) {
                 HeaderView(text: "Haptic Feedback")
+                    .accessibility(hint: Text("Vibrate the phone when results are found"))
                 
                 HStack(spacing: 14) {
                     Button(action: {
@@ -68,6 +73,12 @@ struct HapticFeedbackView: View {
                             
                         }
                     }
+                    .accessibility(addTraits:
+                        level == 1
+                            ? [.isButton, .isSelected]
+                            : .isButton
+                    )
+                    
                     Button(action: {
                         level = 2
                         let generator = UIImpactFeedbackGenerator(style: .light)
@@ -82,6 +93,12 @@ struct HapticFeedbackView: View {
                             Label(text: "Light")
                         }
                     }
+                    .accessibility(addTraits:
+                        level == 2
+                            ? [.isButton, .isSelected]
+                            : .isButton
+                    )
+                    
                     Button(action: {
                         level = 3
                         let generator = UIImpactFeedbackGenerator(style: .medium)
@@ -98,6 +115,11 @@ struct HapticFeedbackView: View {
                             
                         }
                     }
+                    .accessibility(addTraits:
+                        level == 3
+                            ? [.isButton, .isSelected]
+                            : .isButton
+                    )
                 }
                 
                 .padding(EdgeInsets(top: 14, leading: 14, bottom: 14, trailing: 14))

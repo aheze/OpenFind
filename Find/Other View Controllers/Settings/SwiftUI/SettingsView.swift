@@ -127,11 +127,15 @@ struct SettingsView: View {
                     ScrollView {
                         VStack(spacing: 2) {
                             SectionHeaderView(text: "General")
+                                .accessibility(addTraits: .isHeader)
+                                .accessibility(hint: Text("Options for the entire app"))
                             
                             GeneralView(selectedHighlightColor: $settings.highlightColor)
                                 .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                             
                             SectionHeaderView(text: "Camera")
+                                .accessibility(addTraits: .isHeader)
+                                .accessibility(hint: Text("Customize the camera's behavior"))
                             
                             CameraSettingsView(
                                 textDetectionIsOn: $settings.showTextDetectIndicator,
@@ -140,11 +144,15 @@ struct SettingsView: View {
                             .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                             
                             SectionHeaderView(text: "Support & Feedback")
+                                .accessibility(addTraits: .isHeader)
+                                .accessibility(hint: Text("Get help and send feedback. I will respond very quickly to everything that is accessibility related."))
                             
                             SupportView()
                                 .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                             
                             SectionHeaderView(text: "Other")
+                                .accessibility(addTraits: .isHeader)
+                                .accessibility(hint: Text("Miscellaneous settings"))
                             
                             OtherView(swipeToNavigateEnabled: $settings.swipeToNavigateEnabled, allSettings: settings)
                                 .padding(EdgeInsets(top: 6, leading: 16, bottom: 16, trailing: 16))
@@ -196,12 +204,14 @@ struct SettingsView: View {
                         }) {
                             Text("done")
                                 .font(Font.system(size: 19, weight: .regular, design: .default))
+                                .accessibility(hint: Text("Return to the camera screen"))
                         }
                 )
                 .configureBar()
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .zIndex(0)
+            .accessibility(hidden: isShowingQR)
             
             if isShowingQR {
                 QRCodeView(isPresented: $isShowingQR)

@@ -71,6 +71,7 @@ struct HelpView: View {
                     }
                     .padding(EdgeInsets(top: 6, leading: 14, bottom: 6, trailing: 6))
                 }
+                .accessibility(hint: Text("Present the help center"))
                 
                 Rectangle()
                     .fill(Color(UIColor.white.withAlphaComponent(0.3)))
@@ -88,6 +89,8 @@ struct HelpView: View {
                     }
                     .padding(EdgeInsets(top: 6, leading: 14, bottom: 6, trailing: 6))
                 }
+                .accessibility(hint: Text("Rewatch the \"Quick Tour\" tutorials"))
+                
             }
            
         }
@@ -132,7 +135,6 @@ struct FeedbackView: View {
                 HeaderView(text: "Feedback")
                 
                 Button(action: {
-                    print("Rate the app")
                     if let productURL = URL(string: "https://apps.apple.com/app/id1506500202") {
                         var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
 
@@ -166,6 +168,7 @@ struct FeedbackView: View {
                         LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9607843161, green: 0.8898058385, blue: 0.001397311632, alpha: 1).withAlphaComponent(0.5)), .clear]), startPoint: .trailing, endPoint: .leading)
                     )
                 }
+                .accessibility(hint: Text("Open the App Store to rate Find. Thanks!"))
                 
                 Rectangle()
                     .fill(Color(UIColor.white.withAlphaComponent(0.3)))
@@ -193,6 +196,7 @@ struct FeedbackView: View {
                     }
                     .padding(EdgeInsets(top: 6, leading: 14, bottom: 6, trailing: 6))
                 }
+                .accessibility(hint: Text("Navigate to a feedback form. Only fill in what you want."))
                 
                 Rectangle()
                     .fill(Color(UIColor.white.withAlphaComponent(0.3)))
@@ -215,6 +219,7 @@ struct FeedbackView: View {
                     }
                     .padding(EdgeInsets(top: 6, leading: 14, bottom: 6, trailing: 6))
                 }
+                .accessibility(hint: Text("Navigate to my contact page"))
                 
             }
            

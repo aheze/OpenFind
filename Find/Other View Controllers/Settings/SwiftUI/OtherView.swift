@@ -24,16 +24,21 @@ struct SwipeToNavigateView: View {
         ZStack {
             VStack(spacing: 0) {
                 HeaderView(text: "Swipe to Navigate")
+                    .accessibility(hint: Text("Allow swiping between tabs. Ignored when VoiceOver is active."))
                 
                 HStack(spacing: 0) {
                     if isOn {
                         Label(text: "ON")
+                            .accessibility(hidden: true)
                     } else {
                         Label(text: "OFF")
+                            .accessibility(hidden: true)
                     }
+                    
                     Spacer()
+                    
                     Toggle(isOn: $isOn, label: {
-                        Text("Label")
+                        Text("Toggle")
                     }).labelsHidden()
 
                 }
@@ -63,6 +68,7 @@ struct ResetSettingsView: View {
                     }
                     .padding(EdgeInsets(top: 12, leading: 14, bottom: 12, trailing: 6))
                 }
+                .accessibility(hint: Text("Resets all settings to default"))
             }
            
         }
@@ -104,6 +110,7 @@ struct CreditsView: View {
                     }
                     .padding(EdgeInsets(top: 6, leading: 14, bottom: 6, trailing: 6))
                 }
+                .accessibility(hint: Text("Navigate to the credits page"))
                 
                 Rectangle()
                     .fill(Color(UIColor.white.withAlphaComponent(0.3)))
@@ -120,6 +127,7 @@ struct CreditsView: View {
                     }
                     .padding(EdgeInsets(top: 6, leading: 14, bottom: 6, trailing: 6))
                 }
+                .accessibility(hint: Text("Present the open-source licenses that Find uses"))
             }
         }
         .background(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)))

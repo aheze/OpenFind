@@ -1586,10 +1586,10 @@
 		496937392353C228009CA41A /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				492A2D2324A3117300F9C4A1 /* Tutorials */,
 				3C6EE6BA25A2AC580078462A /* SwiftUI */,
 				495F38F62432C8D100A17D93 /* Carte */,
 				495F38F12432B7B700A17D93 /* Licenses.swift */,
-				492A2D2324A3117300F9C4A1 /* Tutorials */,
 			);
 			path = Settings;
 			sourceTree = "<group>";

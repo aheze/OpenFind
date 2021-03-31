@@ -35,6 +35,8 @@ struct HeaderView: View {
             .padding(EdgeInsets(top: 10, leading: 14, bottom: 10, trailing: 4))
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(Color(#colorLiteral(red: 0.04306942655, green: 0.04306942655, blue: 0.04306942655, alpha: 0.9)))
+            .accessibility(addTraits: .isHeader)
+            .accessibility(label: Text(text))
     }
 }
 
