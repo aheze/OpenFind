@@ -70,4 +70,12 @@ extension CameraViewController {
             }
         }
     }
+    func updateAccessibilityFrames() {
+        for highlight in currentComponents {
+            if let baseView = highlight.baseView {
+                let insetBounds = baseView.bounds.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6))
+                baseView.accessibilityFrame = baseView.convert(insetBounds, to: nil)
+            }
+        }
+    }
 }

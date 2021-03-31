@@ -31,14 +31,14 @@ extension PhotoSlidesViewController {
             
             UIView.animate(withDuration: 0.2) {
                 self.slideFindBar?.layoutIfNeeded()
-                self.slideFindBar?.promptTextView.alpha = 1
+                self.slideFindBar?.promptBackgroundView.alpha = 1
             }
         } else {
             slideFindBar?.blurViewHeightC.constant = 45
             
             UIView.animate(withDuration: 0.2) {
                 self.slideFindBar?.layoutIfNeeded()
-                self.slideFindBar?.promptTextView.alpha = 0
+                self.slideFindBar?.promptBackgroundView.alpha = 0
             }
         }
     }
@@ -63,15 +63,21 @@ extension PhotoSlidesViewController {
         }
         
         let spaceOrUnit = NSLocalizedString("spaceOrUnit", comment: "")
-        let resultsInCache = "\(spaceOrUnit)\(results)\(inCache)".set(style: textStyle)
-        let toFindFromPhotos = toFindWithOCR.set(style: textStyle)
+        let resultsInCache = "\(spaceOrUnit)\(results)\(inCache)"
+        let toFindFromPhotos = toFindWithOCR
         
         let nextButtonAttachment = AttributedString(image: Image(named: "ContinueButton"), bounds: "0,-6,76,24")
         
-        let attributedText = "\(howMany)".set(style: textStyle) + resultsInCache + nextButtonAttachment! + toFindFromPhotos
+        let attributedText = "\(howMany)".set(style: textStyle) + resultsInCache.set(style: textStyle) + nextButtonAttachment! + toFindFromPhotos.set(style: textStyle)
         slideFindBar?.promptTextView.attributedText = attributedText
         slideFindBar?.hasPrompt = true
         animatePromptReveal()
+        
+        slideFindBar?.promptBackgroundView.accessibilityValue = "\(howMany)" + resultsInCache + "Continue/Return button on the keyboard or double-tap this label" + toFindFromPhotos
+        
+        let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+        let summaryString = AccessibilityText(text: "\(howMany)" + resultsInCache + "Continue/Return button on the keyboard or double-tap Summary label" + toFindFromPhotos, isRaised: false)
+        UIAccessibility.postAnnouncement([summaryTitle, summaryString])
     }
     
     /// photo is not cached
@@ -94,6 +100,12 @@ extension PhotoSlidesViewController {
         slideFindBar?.promptTextView.attributedText = attributedText
         slideFindBar?.hasPrompt = true
         animatePromptReveal()
+        
+        slideFindBar?.promptBackgroundView.accessibilityValue = pressText + "Continue/Return button on the keyboard or double-tap this label" + toFindWithOCR
+        
+        let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+        let summaryString = AccessibilityText(text: pressText + "Continue/Return button on the keyboard or double-tap Summary label" + toFindWithOCR, isRaised: false)
+        UIAccessibility.postAnnouncement([summaryTitle, summaryString])
     }
     
     func setPromptToFastFinding() { /// currently fast finding
@@ -108,6 +120,12 @@ extension PhotoSlidesViewController {
         slideFindBar?.promptTextView.attributedText = attributedText
         slideFindBar?.hasPrompt = true
         animatePromptReveal()
+        
+        slideFindBar?.promptBackgroundView.accessibilityValue = findingWithOCR
+        
+        let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+        let summaryString = AccessibilityText(text: findingWithOCR, isRaised: false)
+        UIAccessibility.postAnnouncement([summaryTitle, summaryString])
     }
     
     /// Finished searching cache and uncached photos
@@ -130,5 +148,11 @@ extension PhotoSlidesViewController {
         slideFindBar?.promptTextView.attributedText = attributedText
         slideFindBar?.hasPrompt = true
         animatePromptReveal()
+        
+        slideFindBar?.promptBackgroundView.accessibilityValue = "Completed finding. " + resultsText + spaceOrUnit + resultText
+        
+        let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+        let summaryString = AccessibilityText(text: "Completed finding. " + "\(howMany)" + results, isRaised: false)
+        UIAccessibility.postAnnouncement([summaryTitle, summaryString])
     }
 }

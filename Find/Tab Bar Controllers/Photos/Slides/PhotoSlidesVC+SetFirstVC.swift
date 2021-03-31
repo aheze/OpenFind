@@ -33,7 +33,6 @@ extension PhotoSlidesViewController {
                     
                     var transcripts = [Component]()
                     for content in editableModel.contents {
-                        print("Comp... 111")
                         let transcript = Component()
                         transcript.text = content.text
                         transcript.x = content.x

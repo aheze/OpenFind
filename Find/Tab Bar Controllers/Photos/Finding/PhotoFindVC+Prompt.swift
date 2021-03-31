@@ -85,7 +85,6 @@ extension PhotoFindViewController {
         
         var attributedText = AttributedString()
         
-        print("changed to startin!!! announce? \(announce)")
         if let overriddenLastPart = overriddenLastPart {
             attributedText = findingFrom.set(styles: [boldStyle, grayStyle]) + filter.set(styles: [boldStyle, colorStyle]) + overriddenLastPart.set(styles: [boldStyle, grayStyle])
             

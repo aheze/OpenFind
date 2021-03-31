@@ -69,36 +69,11 @@ extension PhotoSlidesViewController {
                     }
                     
                     var accessibilityString = [AccessibilityText]()
+                    accessibilityString.append(AccessibilityText(text: "Status: ", isRaised: true))
+                    accessibilityString.append(AccessibilityText(text: information, isRaised: false))
                     
-                    var shouldAnnounce = false
-                    if model.isDeepSearched {
-                        var transcript = ""
-                        
-                        for (index, content) in model.contents.enumerated() {
-                            let text = content.text
-                            if index == model.contents.count - 1 {
-                                transcript += text
-                            } else {
-                                transcript += text + "\n"
-                            }
-                        }
-                        
-                        accessibilityString.append(AccessibilityText(text: "Status: ", isRaised: true))
-                        accessibilityString.append(AccessibilityText(text: information, isRaised: false))
-                        accessibilityString.append(AccessibilityText(text: " Cached transcript (\(model.contents.count) lines):\n", isRaised: true))
-                        accessibilityString.append(AccessibilityText(text: transcript, isRaised: false))
-                        
-                        shouldAnnounce = true
-                    } else if !information.isEmpty {
-                        accessibilityString.append(AccessibilityText(text: "Status: ", isRaised: true))
-                        accessibilityString.append(AccessibilityText(text: information, isRaised: false))
-                        accessibilityString.append(AccessibilityText(text: " No cached transcript available. Cache photo to generate.", isRaised: true))
-                        
-                        shouldAnnounce = true
-                    }
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.9) {
-                        if shouldAnnounce && self.currentIndex == newIndex {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.9) {
+                        if self.currentIndex == newIndex {
                             UIAccessibility.postAnnouncement(accessibilityString, delay: 0)
                         }
                     }

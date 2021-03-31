@@ -12,6 +12,7 @@ class SlideFindBar: UIView {
     
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var findBar: FindBar!
+    @IBOutlet weak var promptBackgroundView: UIView!
     @IBOutlet weak var promptTextView: UITextView!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var blurViewHeightC: NSLayoutConstraint!
@@ -34,7 +35,7 @@ class SlideFindBar: UIView {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        promptTextView.alpha = 0
+        promptBackgroundView.alpha = 0
         promptTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         let typeHereToFind = NSLocalizedString("typeHereToFind", comment: "SetupSearchBar def=Type here to find...")
@@ -43,6 +44,8 @@ class SlideFindBar: UIView {
         findBar.searchField.tintColor = UIColor(named: "PhotosText")
         findBar.searchField.attributedPlaceholder = NSAttributedString(string: typeHereToFind, attributes: [NSAttributedString.Key.foregroundColor : UIColor.label.withAlphaComponent(0.25)])
         
+        promptBackgroundView.isAccessibilityElement = true
+        promptBackgroundView.accessibilityLabel = "Summary"
     }
 }
 

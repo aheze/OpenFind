@@ -21,7 +21,6 @@ class VoiceOverSlidesControl: UIView {
     }
     
     var goToNextPage: ((Bool) -> Void)?
-    var getModelAtIndex: ((Int) -> (EditableHistoryModel?))?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -23,7 +23,6 @@ extension SlideViewController {
     }
     
     func updateHighlightFrames() {
-        print("Updating./")
         let aspectFrame = AVMakeRect(aspectRatio: imageView.image?.size ?? imageView.bounds.size, insideRect: contentView.bounds)
         
         for highlight in resultPhoto.components {
@@ -35,9 +34,9 @@ extension SlideViewController {
             let newFrame = CGRect(x: newX, y: newY, width: newWidth, height: newHeight)
             highlight.baseView?.frame = newFrame
             
-            let insetBounds = newFrame.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6))
             if let baseView = highlight.baseView {
-                baseView.accessibilityFrame = view.convert(insetBounds, to: nil)
+                let insetBounds = baseView.bounds.inset(by: UIEdgeInsets(top: -6, left: -6, bottom: -6, right: -6))
+                baseView.accessibilityFrame = baseView.convert(insetBounds, to: nil)
             }
         }
         
@@ -50,9 +49,9 @@ extension SlideViewController {
             let newFrame = CGRect(x: x, y: y, width: w, height: h)
             transcript.baseView?.frame = newFrame
             
-            let insetBounds = newFrame.inset(by: UIEdgeInsets(top: -3, left: -3, bottom: -3, right: -3))
             if let baseView = transcript.baseView {
-                baseView.accessibilityFrame = view.convert(insetBounds, to: nil)
+                let insetBounds = baseView.bounds.inset(by: UIEdgeInsets(top: -3, left: -3, bottom: -3, right: -3))
+                baseView.accessibilityFrame = baseView.convert(insetBounds, to: nil)
             }
         }
     }

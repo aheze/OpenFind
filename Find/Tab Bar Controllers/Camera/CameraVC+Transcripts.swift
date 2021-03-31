@@ -219,7 +219,7 @@ extension CameraViewController {
             for transcript in currentTranscriptComponents {
                 transcript.baseView?.accessibilityHint = "Double-tap to show highlights"
             }
-            drawingBaseView.accessibilityHint = "Showing transcript overlay. Double-tap to show highlights."
+            drawingBaseView.accessibilityHint = "Showing transcript overlay (\(currentTranscriptComponents.count) detected sentences). Double-tap to show highlights."
         } else {
             for highlight in currentComponents {
                 highlight.baseView?.accessibilityHint = "Double-tap to show transcript overlay"

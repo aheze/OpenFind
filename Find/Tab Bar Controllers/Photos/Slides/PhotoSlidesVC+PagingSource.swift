@@ -29,7 +29,6 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
         
         if cameFromFind {
             leftViewController.cameFromFind = true
-//            leftViewController.highlights = leftResultPhoto.
             leftViewController.matchToColors = matchToColors
         }
         
@@ -52,7 +51,6 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
         
         if cameFromFind {
             rightViewController.cameFromFind = true
-//            rightViewController.highlights = rightResultPhoto.components
             rightViewController.matchToColors = matchToColors
         }
         
@@ -99,7 +97,6 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
                         
                         var transcripts = [Component]()
                         for content in editableModel.contents {
-                            print("Comp... 222")
                             let transcript = Component()
                             transcript.text = content.text
                             transcript.x = content.x

@@ -212,7 +212,7 @@ extension SlideViewController {
                 for transcript in resultPhoto.transcripts {
                     transcript.baseView?.accessibilityHint = "Double-tap to show highlights"
                 }
-                drawingBaseView.accessibilityHint = "Showing transcript overlay. Double-tap to show highlights."
+                drawingBaseView.accessibilityHint = "Showing transcript overlay (\(resultPhoto.transcripts.count) detected sentences). Double-tap to show highlights."
             } else {
                 for highlight in resultPhoto.components {
                     highlight.baseView?.accessibilityHint = "Double-tap to show transcript overlay"
@@ -230,7 +230,7 @@ extension SlideViewController {
                 for transcript in resultPhoto.transcripts {
                     transcript.baseView?.accessibilityHint = "Showing transcript overlay. Double-tap to hide."
                 }
-                drawingBaseView.accessibilityHint = "Showing transcript overlay. Double-tap to hide."
+                drawingBaseView.accessibilityHint = "Showing transcript overlay (\(resultPhoto.transcripts.count) detected sentences). Double-tap to hide."
             } else {
                 for highlight in resultPhoto.components {
                     highlight.baseView?.accessibilityHint = "Double-tap to show transcript overlay"

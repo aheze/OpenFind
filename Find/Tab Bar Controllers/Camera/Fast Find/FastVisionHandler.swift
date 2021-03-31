@@ -117,6 +117,9 @@ extension CameraViewController {
                     }
                 }
                 
+                if UIAccessibility.isVoiceOverRunning {
+                    self.updateAccessibilityFrames()
+                }
                 self.busyFastFinding = false
             }
             
