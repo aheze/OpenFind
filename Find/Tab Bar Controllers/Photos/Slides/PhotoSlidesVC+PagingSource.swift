@@ -74,10 +74,12 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        print("FIn animate!")
         let currentVC = currentViewController
         if completed {
             let index = currentVC.index
             currentIndex = index
+            voiceOverSlidesControl.currentIndex = index
             
             
             if !cameFromFind {
@@ -112,13 +114,17 @@ extension PhotoSlidesViewController: UIPageViewControllerDelegate, UIPageViewCon
                     } else {
                         updateActions?(.shouldCache)
                         
-                        fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
+                        if UIAccessibility.isVoiceOverRunning {
+                            fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
+                        }
                     }
                 } else {
                     updateActions?(.shouldStar)
                     updateActions?(.shouldCache)
                     
-                    fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
+                    if UIAccessibility.isVoiceOverRunning {
+                        fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
+                    }
                 }
                 
                 updateNavigationTitle(to: resultPhoto.findPhoto)

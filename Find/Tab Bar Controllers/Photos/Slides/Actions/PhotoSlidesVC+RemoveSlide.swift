@@ -48,10 +48,36 @@ extension PhotoSlidesViewController {
                     }
                     if editableModel.isDeepSearched {
                         updateActions?(.shouldNotCache)
+                        
+                        var transcripts = [Component]()
+                        for content in editableModel.contents {
+                            let transcript = Component()
+                            transcript.text = content.text
+                            transcript.x = content.x
+                            transcript.y = content.y
+                            transcript.width = content.width
+                            transcript.height = content.height
+                            transcripts.append(transcript)
+                        }
+                        
+                        resultPhotos[currentIndex].transcripts = transcripts
+                        drawHighlightsAndTranscripts()
                     } else {
                         updateActions?(.shouldCache)
+                        
+                        if UIAccessibility.isVoiceOverRunning {
+                            fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
+                        }
+                    }
+                } else {
+                    updateActions?(.shouldStar)
+                    updateActions?(.shouldCache)
+                    
+                    if UIAccessibility.isVoiceOverRunning {
+                        fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
                     }
                 }
+                
                 self.view.isUserInteractionEnabled = false
                 self.pageViewController.setViewControllers(viewControllers, direction: .reverse, animated: true) { _ in
                     self.view.isUserInteractionEnabled = true
@@ -74,8 +100,33 @@ extension PhotoSlidesViewController {
                 }
                 if editableModel.isDeepSearched {
                     updateActions?(.shouldNotCache)
+                    
+                    var transcripts = [Component]()
+                    for content in editableModel.contents {
+                        let transcript = Component()
+                        transcript.text = content.text
+                        transcript.x = content.x
+                        transcript.y = content.y
+                        transcript.width = content.width
+                        transcript.height = content.height
+                        transcripts.append(transcript)
+                    }
+                    
+                    resultPhotos[currentIndex].transcripts = transcripts
+                    drawHighlightsAndTranscripts()
                 } else {
                     updateActions?(.shouldCache)
+                    
+                    if UIAccessibility.isVoiceOverRunning {
+                        fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
+                    }
+                }
+            } else {
+                updateActions?(.shouldStar)
+                updateActions?(.shouldCache)
+                
+                if UIAccessibility.isVoiceOverRunning {
+                    fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
                 }
             }
             
@@ -87,5 +138,8 @@ extension PhotoSlidesViewController {
         }
         
         self.currentIndex = newIndex
+        voiceOverSlidesControl.currentIndex = newIndex
+        voiceOverSlidesControl.totalNumberOfPhotos = resultPhotos.count
+        UIAccessibility.post(notification: .layoutChanged, argument: voiceOverSlidesControl)
     }
 }

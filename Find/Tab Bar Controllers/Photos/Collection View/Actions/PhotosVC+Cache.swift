@@ -124,8 +124,6 @@ extension PhotosViewController {
             self.present(alert, animated: true, completion: nil)
             
             
-            
-            
         }
         doneWithSelect()
     }
