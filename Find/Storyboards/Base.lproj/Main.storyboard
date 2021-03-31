@@ -224,6 +224,7 @@
                         <outlet property="onboardingHeightC" destination="tde-iq-hHB" id="ANs-It-2Ol"/>
                         <outlet property="onboardingTopC" destination="PNl-jp-hw4" id="Osd-mJ-CAn"/>
                         <outlet property="onboardingWidthC" destination="nq2-wL-9yg" id="bRj-9c-hAj"/>
+                        <outlet property="permissionsTitleView" destination="eUw-c3-UBq" id="Ca2-qy-v1G"/>
                         <outlet property="settingsPictureView" destination="gn8-8L-ybj" id="FPb-Ry-HgJ"/>
                         <outlet property="skipButton" destination="URE-cP-ORh" id="BXu-wa-xt7"/>
                         <outlet property="topLeftImageView" destination="Abb-sR-Ha4" id="BDO-hk-Kei"/>

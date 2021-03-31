@@ -25,15 +25,16 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("TUTO")
         
         goButton.layer.cornerRadius = 6
         paperOnboarding.delegate = self
         paperOnboarding.dataSource = self
         
-        //        goButton.isHidden = true
+
         goButton.alpha = 0
         goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        goButton.accessibilityLabel = "Continue"
+        goButton.accessibilityHint = "Finish tutorial"
     }
     
     func onboardingWillTransitonToIndex(_ index: Int) {
@@ -41,23 +42,24 @@ class GeneralTutorialViewController: UIViewController, PaperOnboardingDelegate, 
             UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform.identity
                 self.goButton.alpha = 1
-            })
+            }) { _ in
+                UIAccessibility.post(notification: .layoutChanged, argument: self.goButton)
+            }
         } else {
-            //            goButton.alpha = 1
             UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 self.goButton.alpha = 0
             })
-            
         }
     }
     
     
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
+        let firstDescription = UIAccessibility.isVoiceOverRunning ? "Find text in real life, fast. Swipe up or down on the Page chooser to navigate this tutorial." : LaunchLocalization.swipeToGetStarted 
         return [
             OnboardingItemInfo(informationImage: UIImage(named: "Intro1")!,
                                title: LaunchLocalization.welcomeToFind,
-                               description: LaunchLocalization.swipeToGetStarted,
+                               description: firstDescription,
                                pageIcon: UIImage(),
                                color: UIColor.systemBackground,
                                titleColor: UIColor.label,
@@ -121,22 +123,22 @@ class HistoryTutorialViewController: UIViewController, PaperOnboardingDelegate, 
         paperOnboarding.delegate = self
         paperOnboarding.dataSource = self
         
-        //        goButton.isHidden = true
         goButton.alpha = 0
         goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        goButton.accessibilityLabel = "Continue"
+        goButton.accessibilityHint = "Finish tutorial"
         
     }
     
     func onboardingWillTransitonToIndex(_ index: Int) {
         if index == 3 {
-            //            goButton.alpha = 0
-            //            goButton.isHidden = false
             UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform.identity
                 self.goButton.alpha = 1
-            })
+            }) { _ in
+                UIAccessibility.post(notification: .layoutChanged, argument: self.goButton)
+            }
         } else {
-            //            goButton.alpha = 1
             UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 self.goButton.alpha = 0
@@ -213,8 +215,11 @@ class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, Pa
         goButton.layer.cornerRadius = 6
         paperOnboarding.delegate = self
         paperOnboarding.dataSource = self
+        
         goButton.alpha = 0
         goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        goButton.accessibilityLabel = "Continue"
+        goButton.accessibilityHint = "Finish tutorial"
     }
     
     func onboardingWillTransitonToIndex(_ index: Int) {
@@ -222,7 +227,9 @@ class ListsTutorialViewController: UIViewController, PaperOnboardingDelegate, Pa
             UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform.identity
                 self.goButton.alpha = 1
-            })
+            }) { _ in
+                UIAccessibility.post(notification: .layoutChanged, argument: self.goButton)
+            }
         } else {
             UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
@@ -289,11 +296,9 @@ class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDeleg
         self.dismiss(animated: true, completion: nil)
     }
     
-    
     @IBAction func listsBuilderXPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -304,6 +309,8 @@ class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDeleg
         
         goButton.alpha = 0
         goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        goButton.accessibilityLabel = "Continue"
+        goButton.accessibilityHint = "Finish tutorial"
     }
     
     func onboardingWillTransitonToIndex(_ index: Int) {
@@ -311,7 +318,9 @@ class ListsBuilderTutorialViewController: UIViewController, PaperOnboardingDeleg
             UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform.identity
                 self.goButton.alpha = 1
-            })
+            }) { _ in
+                UIAccessibility.post(notification: .layoutChanged, argument: self.goButton)
+            }
         } else {
             UIView.animate(withDuration: 0.2, animations: {
                 self.goButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)

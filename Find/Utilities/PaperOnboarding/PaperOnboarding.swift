@@ -60,7 +60,7 @@ open class PaperOnboarding: UIView {
     fileprivate var pageViewRadius: CGFloat = 8
 
     fileprivate var fillAnimationView: FillAnimationView?
-    fileprivate var pageView: PageView?
+    var pageView: PageView?
     public fileprivate(set) var gestureControl: GestureControl?
     fileprivate var contentView: OnboardingContentView?
     
@@ -129,12 +129,22 @@ extension PaperOnboarding {
         }
         itemsInfo = createItemsInfo()
         translatesAutoresizingMaskIntoConstraints = false
+        
         fillAnimationView = FillAnimationView.animationViewOnView(self, color: backgroundColor(currentIndex))
+        
         contentView = OnboardingContentView.contentViewOnView(self,
                                                               delegate: self,
                                                               itemsCount: itemsCount,
                                                               bottomConstant: pageViewBottomConstant * -1 - pageViewSelectedRadius)
         pageView = createPageView()
+        pageView?.isAccessibilityElement = true
+        pageView?.accessibilityLabel = "Page chooser"
+        pageView?.goToNewIndex = { [weak self] index in
+            guard let self = self else { return }
+            self.currentIndex(index, animated: true)
+            (self.delegate as? PaperOnboardingDelegate)?.onboardingWillTransitonToIndex(index)
+        }
+        
         gestureControl = GestureControl(view: self, delegate: self)
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
@@ -152,6 +162,7 @@ extension PaperOnboarding {
         guard let pageItem = pageView.hitTest(convertedLocation, with: nil) else { return }
         let index = pageItem.tag - 1
         guard index != currentIndex else { return }
+        
         currentIndex(index, animated: true)
         (delegate as? PaperOnboardingDelegate)?.onboardingWillTransitonToIndex(index)
     }

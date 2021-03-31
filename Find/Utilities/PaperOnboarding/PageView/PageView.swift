@@ -10,6 +10,7 @@ import UIKit
 
 class PageView: UIView {
 
+    var currentSelectedIndex = 0
     var itemsCount = 3
     var itemRadius: CGFloat = 8.0
     var selectedItemRadius: CGFloat = 22.0
@@ -37,6 +38,40 @@ class PageView: UIView {
     }
 
     required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
+    var currentIndex = 0
+    
+    override var accessibilityTraits: UIAccessibilityTraits {
+        get {
+            return .adjustable
+        }
+        set {
+            super.accessibilityTraits = newValue
+        }
+    }
+    override var accessibilityValue: String? {
+        get {
+            return "\(currentIndex + 1) out of \(itemsCount)"
+        }
+        set {
+            super.accessibilityValue = newValue
+        }
+    }
+    
+    var goToNewIndex: ((Int) -> Void)?
+    override func accessibilityIncrement() {
+        if currentIndex < itemsCount - 1 {
+            currentIndex += 1
+            goToNewIndex?(currentIndex)
+        }
+    }
+    
+    override func accessibilityDecrement() {
+        if currentIndex > 0 {
+            currentIndex -= 1
+            goToNewIndex?(currentIndex)
+        }
+    }
 
     override func hitTest(_ point: CGPoint, with _: UIEvent?) -> UIView? {
         guard
@@ -55,7 +90,7 @@ class PageView: UIView {
 // MARK: public
 
 extension PageView {
-
+    
     class func pageViewOnView(_ view: UIView, itemsCount: Int, bottomConstant: CGFloat, radius: CGFloat, selectedRadius: CGFloat, itemColor: @escaping (Int) -> UIColor) -> PageView {
         let pageView = PageView(frame: CGRect.zero,
                                 itemsCount: itemsCount,
@@ -65,11 +100,11 @@ extension PageView {
         pageView.translatesAutoresizingMaskIntoConstraints = false
         pageView.alpha = 0.4
         view.addSubview(pageView)
-
-      let layoutAttribs:[(NSLayoutConstraint.Attribute, Int)] =  [(NSLayoutConstraint.Attribute.left, 0), (NSLayoutConstraint.Attribute.right, 0), (NSLayoutConstraint.Attribute.bottom, Int(bottomConstant))]
-      
+        
+        let layoutAttribs:[(NSLayoutConstraint.Attribute, Int)] =  [(NSLayoutConstraint.Attribute.left, 0), (NSLayoutConstraint.Attribute.right, 0), (NSLayoutConstraint.Attribute.bottom, Int(bottomConstant))]
+        
         // add constraints
-      for (attribute, const) in layoutAttribs {
+        for (attribute, const) in layoutAttribs {
             (view, pageView) >>>- {
                 $0.constant = CGFloat(const)
                 $0.attribute = attribute
@@ -81,15 +116,16 @@ extension PageView {
             $0.constant = 30
             return
         }
-
+        
         return pageView
     }
-
+    
     func currentIndex(_ index: Int, animated: Bool) {
-
+        
         if 0 ..< itemsCount ~= index {
             containerView?.currenteIndex(index, duration: duration * 0.5, animated: animated)
             moveContainerTo(index, animated: animated, duration: duration)
+            currentSelectedIndex = index
         }
     }
 
@@ -130,7 +166,7 @@ extension PageView {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         addSubview(container)
-
+        
         // add constraints
         for attribute in [NSLayoutConstraint.Attribute.top, NSLayoutConstraint.Attribute.bottom] {
             (self, container) >>>- { $0.attribute = attribute; return }

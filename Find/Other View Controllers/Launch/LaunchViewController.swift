@@ -62,6 +62,7 @@ class LaunchViewController: UIViewController {
     
     let topHeight = CGFloat(70)
     
+    @IBOutlet weak var permissionsTitleView: UIView!
     @IBOutlet weak var accessDescLabel: UILabel!
     
     var onboardingOnLastPage = false
@@ -251,6 +252,10 @@ class LaunchViewController: UIViewController {
                 print("unknown default")
             }
         }
+        
+        
+        getStartedButton.accessibilityLabel = "Continue"
+        getStartedButton.accessibilityHint = "Finish tutorial"
     }
     
     let goToSettings = NSLocalizedString("universal-goToSettings", comment: "")
@@ -335,6 +340,8 @@ class LaunchViewController: UIViewController {
                     self.baseView.transform = CGAffineTransform.identity
                     self.allowAccessView.transform = CGAffineTransform.identity
                     self.allowAccessView.alpha = 1
+                    
+                    UIAccessibility.post(notification: .screenChanged, argument: self.permissionsTitleView)
                 })
             }
             
@@ -373,8 +380,6 @@ class LaunchViewController: UIViewController {
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController")
-            
-//            viewController.modalPresentationCapturesStatusBarAppearance = true
             
             
             self.addChild(viewController, in: self.containerView)
@@ -431,6 +436,7 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
                 self.skipButton.alpha = 0
             })
         }
+        
         if index == 3 {
             onboardingOnLastPage = true
             getStartedButton.alpha = 0
@@ -439,7 +445,9 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
                 self.getStartedButton.transform = CGAffineTransform.identity
                 self.view.layoutIfNeeded()
                 self.getStartedButton.alpha = 1
-            })
+            }) { _ in
+                UIAccessibility.post(notification: .layoutChanged, argument: self.getStartedButton)
+            }
         } else {
             if onboardingOnLastPage == true {
                 onboardingOnLastPage = false
@@ -452,16 +460,20 @@ extension LaunchViewController: PaperOnboardingDelegate, PaperOnboardingDataSour
                 })
             }
         }
+        
+
     }
 }
 
 
 extension LaunchViewController {
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
+        let firstDescription = UIAccessibility.isVoiceOverRunning ? "Find text in real life, fast. Swipe up or down on the Page chooser to navigate this tutorial." : LaunchLocalization.swipeToGetStarted 
+        
         return [
             OnboardingItemInfo(informationImage: UIImage(named: "Intro1")!,
                                title: LaunchLocalization.welcomeToFind,
-                               description: LaunchLocalization.swipeToGetStarted,
+                               description: firstDescription,
                                pageIcon: UIImage(),
                                color: UIColor(named: "OnboardBlue")!,
                                titleColor: UIColor.white,
