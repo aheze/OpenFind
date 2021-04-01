@@ -31,15 +31,6 @@ extension CameraViewController {
         let boldAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .bold)]
         let regularAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .regular)]
         
-        let spaceMatchesFoundCurrently = NSLocalizedString("spaceMatchesFoundCurrently", comment: "Stats def= matches found currently")
-        
-//        let boldText = NSAttributedString(string: "\(currentNumberOfMatches)", attributes: boldAttribute)
-//        let regularText = NSAttributedString(string: spaceMatchesFoundCurrently, attributes: regularAttribute)
-//        let newString = NSMutableAttributedString()
-//        newString.append(boldText)
-//        newString.append(regularText)
-//        statsNavController.viewController.currentlyHowManyMatchesText = newString
-        
         let currentlySearchingFor = NSLocalizedString("currentlySearchingFor", comment: "Stats def=Currently searching for")
         
         if allowSearch == true {
@@ -79,7 +70,6 @@ extension CameraViewController {
                 }
              }
             
-            print("fina lstring: \(finalMatchesString)")
             
             let thisWordColon = NSLocalizedString("thisWord", comment: "Stats def=this word")
             let theseWordsColon = NSLocalizedString("theseWords", comment: "Stats def=these words")
@@ -107,7 +97,6 @@ extension CameraViewController {
             let newMatches = NSMutableAttributedString()
             newMatches.append(regularMatchesText)
             newMatches.append(boldMatchesText)
-//            statsNavController.viewController.currentSearchingForTheseWordsText = newMatches
             statsNavController.viewController.updateText(to: newMatches)
         }
     

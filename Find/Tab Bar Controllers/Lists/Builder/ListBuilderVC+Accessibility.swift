@@ -20,6 +20,7 @@ extension ListBuilderViewController {
         
         updateTopImageLabel()
     }
+    
     func updateTopImageLabel() {
         let colorDescription = iconColorName.getDescription()
         

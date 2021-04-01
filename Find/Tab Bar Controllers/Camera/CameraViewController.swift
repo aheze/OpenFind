@@ -576,6 +576,7 @@ class CameraViewController: UIViewController {
         
         /// 1.2 setup
         setupCameraButtons()
+        
         setupAccessibility()
     }
     

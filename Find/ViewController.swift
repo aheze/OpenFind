@@ -531,6 +531,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             guard let self = self else { return .zero }
             return self.tabBarView.convert(self.tabBarView.bounds, to: nil)
         }
+        
+        observeVoiceOverChanges()
     }
 
     /// enable both the long press and pan gesture

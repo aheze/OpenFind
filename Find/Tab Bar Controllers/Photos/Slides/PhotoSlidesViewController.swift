@@ -123,7 +123,11 @@ class PhotoSlidesViewController: UIViewController {
         
         messageViewBottomC.constant = CGFloat(ConstantVars.tabHeight) + 16
         
+        voiceOverSlidesControl.isHidden = true
+        
         setupAccessibility()
+        
+        observeVoiceOverChanges()
     }
     
     // MARK: Delegate back to PhotosVC

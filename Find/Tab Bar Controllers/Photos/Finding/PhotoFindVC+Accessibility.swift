@@ -10,6 +10,7 @@ import UIKit
 
 extension PhotoFindViewController {
     func setupAccessibility() {
+        
         promptView.isAccessibilityElement = true
         promptView.shouldGroupAccessibilityChildren = true
         promptView.accessibilityLabel = "Summary"

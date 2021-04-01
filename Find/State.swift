@@ -89,3 +89,8 @@ struct Defaults {
     static var hapticFeedbackLevel = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
     static var swipeToNavigateEnabled = UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled")
 }
+
+
+struct AccessibilityState {
+    static var cameraDidSetup = false
+}

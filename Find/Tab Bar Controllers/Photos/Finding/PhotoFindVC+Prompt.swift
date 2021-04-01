@@ -171,9 +171,14 @@ extension PhotoFindViewController {
         } else {
             promptView.accessibilityValue = "\(findingFromUncachedPhotos) (\(howMany) out of \(findPhotos.count))..."
             
-            let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
-            let summaryString = AccessibilityText(text: "\(findingFromUncachedPhotos) (\(howMany) out of \(findPhotos.count))...", isRaised: false)
-            postAnnouncement([summaryTitle, summaryString])
+            if howMany < 2 {
+                let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+                let summaryString = AccessibilityText(text: "\(findingFromUncachedPhotos) (\(howMany) out of \(findPhotos.count))...", isRaised: false)
+                postAnnouncement([summaryTitle, summaryString])
+            } else {
+                let summaryString = AccessibilityText(text: "\(howMany) out of \(findPhotos.count)", isRaised: false)
+                postAnnouncement([summaryString])
+            }
         }
         
         promptTextView.attributedText = attributedText

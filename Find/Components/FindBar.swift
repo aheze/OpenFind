@@ -32,9 +32,7 @@ class FindBar: UIView, UITextFieldDelegate {
     
     
     var searchDisabled = false
-    
     var dupPaused = false
-    
     
     @IBOutlet weak var warningView: UIView!
     @IBOutlet weak var warningButton: UIButton!
@@ -165,6 +163,7 @@ class FindBar: UIView, UITextFieldDelegate {
         searchField.backgroundColor = UIColor.white.withAlphaComponent(0.3)
         searchField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("typeHereToFind", comment: ""), attributes: [NSAttributedString.Key.foregroundColor : UIColor.white.withAlphaComponent(0.75)])
         
+
         setupAccessibility()
      
     }

@@ -58,6 +58,7 @@ class SlideViewController: UIViewController {
         }
         
         setupAccessibility()
+        
         drawAllTranscripts(show: showingTranscripts)
     }
     

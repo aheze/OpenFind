@@ -52,8 +52,6 @@ extension SlideViewController {
             transcript.baseView?.frame = newFrame
             
             if let baseView = transcript.baseView {
-//                let insetFrame = baseView.frame.inset(by: UIEdgeInsets(top: -3, left: -3, bottom: -3, right: -3))
-//                baseView.accessibilityFrame = insetFrame
                 self.addTranscriptAccessibility(component: transcript, newView: baseView)
             }
         }

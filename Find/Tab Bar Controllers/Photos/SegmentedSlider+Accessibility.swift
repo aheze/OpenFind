@@ -10,6 +10,7 @@ import UIKit
 
 extension SegmentedSlider {
     func setupAccessibility() {
+        
         self.isAccessibilityElement = true
         self.accessibilityLabel = "Filters"
         self.shouldGroupAccessibilityChildren = true

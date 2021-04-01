@@ -145,7 +145,7 @@ struct ShutterStyleView: View {
         ZStack {
             VStack(spacing: 0) {
                 HeaderView(text: "Shutter Style")
-                    .accessibility(hint: Text("Vibrate the phone when results are found"))
+                    .accessibility(hint: Text("Choose the look of the shutter"))
                 
                 HStack(spacing: 14) {
                     Button(action: {
@@ -184,6 +184,7 @@ struct ShutterStyleView: View {
                             
                         }
                     }
+                    .accessibility(hint: Text("White rimmed circle with translucent-blue fill"))
                     .accessibility(addTraits:
                                     style == 1
                             ? [.isButton, .isSelected]
@@ -225,6 +226,7 @@ struct ShutterStyleView: View {
                             Label(text: "Dark")
                         }
                     }
+                    .accessibility(hint: Text("Translucent-black rimmed circle with translucent-blue fill"))
                     .accessibility(addTraits:
                                     style == 2
                             ? [.isButton, .isSelected]
@@ -262,6 +264,7 @@ struct ShutterStyleView: View {
                             
                         }
                     }
+                    .accessibility(hint: Text("Translucent-blue filled circle"))
                     .accessibility(addTraits:
                                     style == 3
                             ? [.isButton, .isSelected]

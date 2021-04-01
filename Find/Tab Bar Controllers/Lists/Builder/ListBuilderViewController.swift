@@ -159,6 +159,7 @@ class ListBuilderViewController: UIViewController {
         }
 
         setupPagingVC()
+        
         setupAccessibility()
     }
     

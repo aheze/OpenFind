@@ -10,22 +10,21 @@ import UIKit
 
 extension PhotosViewController {
     func setupAccessibility() {
-        if UIAccessibility.isVoiceOverRunning {
-            collapseButton.isAccessibilityElement = false
-        }
         
-        extendedCollapseButton.isHidden = true /// hide when photos active
+        collapseButton?.isAccessibilityElement = false
         
-        collapseButton.accessibilityLabel = "Back to Photo Gallery"
-        collapseButton.accessibilityHint = "Dismisses the photo finding screen"
-        extendedCollapseButton.accessibilityLabel = "Back to Photo Gallery"
-        extendedCollapseButton.accessibilityHint = "Dismisses the photo finding screen"
+        extendedCollapseButton?.isHidden = true /// hide when photos active
+        
+        collapseButton?.accessibilityLabel = "Back to Photo Gallery"
+        collapseButton?.accessibilityHint = "Dismisses the photo finding screen"
+        extendedCollapseButton?.accessibilityLabel = "Back to Photo Gallery"
+        extendedCollapseButton?.accessibilityHint = "Dismisses the photo finding screen"
         
         updateFindButtonHint()
         
-        selectButton.accessibilityHint = "Enable select mode"
+        selectButton?.accessibilityHint = "Enable select mode"
         
-        collectionView.isAccessibilityElement = false
+        collectionView?.isAccessibilityElement = false
     }
     
     func updateFindButtonHint() {
@@ -73,7 +72,7 @@ extension PhotosViewController {
         
         prompt += ". Presents the Finding sheet."
         
-        findButton.accessibilityHint = prompt
+        findButton?.accessibilityHint = prompt
     }
 }
 

@@ -91,6 +91,8 @@ class StatsViewController: UIViewController {
         
         let doneButton = UIBarButtonItem(title: doneText, style: .plain, target: self, action: #selector(donePressed(sender:)))
         doneButton.tintColor = UIColor.white
+        doneButton.accessibilityHint = "Return to the camera screen"
+        
         navigationItem.rightBarButtonItems = [doneButton]
         
         if let randomEmoji = arrayOfEmoji.randomElement() {

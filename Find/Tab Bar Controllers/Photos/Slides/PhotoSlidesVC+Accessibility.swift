@@ -10,47 +10,68 @@ import UIKit
 
 extension PhotoSlidesViewController {
     func setupAccessibility() {
+        
         if UIAccessibility.isVoiceOverRunning {
             messageView.isHidden = true
-            
-            if cameFromFind {
-                voiceOverBottomC.constant = view.safeAreaInsets.bottom
-                backButtonView.isAccessibilityElement = true
-                backButtonView.accessibilityLabel = "Back"
-                backButtonView.accessibilityTraits = .button
-                backButtonView.accessibilityHint = "Go back to the Finding screen"
-                
-                view.accessibilityElements = [backButtonView, containerView, voiceOverSlidesControl]
-            } else {
-                voiceOverBottomC.constant = CGFloat(ConstantVars.tabHeight)
-                
-                view.accessibilityElements = nil
-            }
-            
-            
-            voiceOverSlidesControl.currentIndex = currentIndex
-            voiceOverSlidesControl.totalNumberOfPhotos = resultPhotos.count
-            
-            voiceOverSlidesControl.goToNextPage = { [weak self] goToNextPage in
-                guard let self = self else { return }
-                
-                let newIndex: Int
-                if goToNextPage {
-                    self.pageViewController.goToNextPage()
-                    newIndex = self.currentIndex + 1
-                } else {
-                    self.pageViewController.goToPreviousPage()
-                    newIndex = self.currentIndex - 1
-                }
-
-                self.speakPhotoDescription(at: newIndex)
-            }
-            
-            speakPhotoDescription(at: currentIndex)
-        } else {
-            voiceOverSlidesControl.isHidden = true
+            voiceOverSlidesControl.isHidden = false
         }
         
+        if cameFromFind {
+            voiceOverBottomC.constant = view.safeAreaInsets.bottom
+            backButtonView.isAccessibilityElement = true
+            backButtonView.accessibilityLabel = "Back"
+            backButtonView.accessibilityTraits = .button
+            backButtonView.accessibilityHint = "Go back to the Finding screen"
+            
+            view.accessibilityElements = [backButtonView, containerView, voiceOverSlidesControl]
+        } else {
+            voiceOverBottomC.constant = CGFloat(ConstantVars.tabHeight)
+            
+            view.accessibilityElements = nil
+        }
+        
+        
+        voiceOverSlidesControl.currentIndex = currentIndex
+        voiceOverSlidesControl.totalNumberOfPhotos = resultPhotos.count
+        
+        voiceOverSlidesControl.goToNextPage = { [weak self] goToNextPage in
+            guard let self = self else { return }
+            
+            let newIndex: Int
+            if goToNextPage {
+                self.pageViewController.goToNextPage()
+                newIndex = self.currentIndex + 1
+            } else {
+                self.pageViewController.goToPreviousPage()
+                newIndex = self.currentIndex - 1
+            }
+            
+            self.speakPhotoDescription(at: newIndex)
+        }
+        
+        speakPhotoDescription(at: currentIndex)
+        
+    }
+    
+    func observeVoiceOverChanges() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.voiceOverChanged),
+            name: UIAccessibility.voiceOverStatusDidChangeNotification,
+            object: nil)
+    }
+    
+    @objc func voiceOverChanged() {
+        if UIAccessibility.isVoiceOverRunning {
+            if resultPhotos.indices.contains(currentIndex) {
+                fastFind(resultPhoto: resultPhotos[currentIndex], index: currentIndex)
+            }
+            changeScreenMode(to: .normal)
+            currentScreenMode = .normal
+            currentViewController.updateHighlightFrames()
+            messageView.isHidden = true
+            voiceOverSlidesControl.isHidden = false
+        }
     }
     
     func speakPhotoDescription(at newIndex: Int) {
