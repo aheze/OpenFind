@@ -10,8 +10,10 @@ import SupportDocs
 
 struct SupportView: View {
     var body: some View {
-        HelpView()
-        FeedbackView()
+        VStack(spacing: 20) {
+            HelpView()
+            FeedbackView()
+        }
     }
 }
 

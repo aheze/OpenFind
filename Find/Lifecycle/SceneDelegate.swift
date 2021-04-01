@@ -39,6 +39,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         UserDefaults.standard.register(defaults: ["swipeToNavigateEnabled": true])
+        UserDefaults.standard.register(defaults: ["shutterStyle": 1])
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

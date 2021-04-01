@@ -40,7 +40,6 @@ extension ViewController {
                 UserDefaults.standard.set(1, forKey: "hapticFeedbackLevel")
             }
         }
-        
     }
 }
 

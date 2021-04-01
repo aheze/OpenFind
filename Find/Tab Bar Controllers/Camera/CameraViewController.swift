@@ -422,7 +422,7 @@ class CameraViewController: UIViewController {
         cameraIconHolderBottomC.constant = ConstantVars.shutterBottomDistance
         
         cameraIcon.makeActiveState()()
-        cameraIcon.rimView.layer.borderColor = UIColor.white.cgColor
+//        cameraIcon.rimView.layer.borderColor = UIColor.white.cgColor
         
         adjustButtonLayout(CameraState.isPaused, animate: false)
         

@@ -18,12 +18,14 @@ struct SettingsHoster {
 class Settings: ObservableObject {
     @Published var highlightColor: String { didSet { UserDefaults.standard.set(highlightColor, forKey: "highlightColor") } }
     @Published var showTextDetectIndicator: Bool { didSet { UserDefaults.standard.set(showTextDetectIndicator, forKey: "showTextDetectIndicator") } }
+    @Published var shutterStyle: Int { didSet { UserDefaults.standard.set(shutterStyle, forKey: "shutterStyle") } }
     @Published var hapticFeedbackLevel: Int { didSet { UserDefaults.standard.set(hapticFeedbackLevel, forKey: "hapticFeedbackLevel") } }
     @Published var swipeToNavigateEnabled: Bool { didSet { UserDefaults.standard.set(swipeToNavigateEnabled, forKey: "swipeToNavigateEnabled") } }
     
     init() {
         self.highlightColor = UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF"
         self.showTextDetectIndicator = UserDefaults.standard.bool(forKey: "showTextDetectIndicator")
+        self.shutterStyle = UserDefaults.standard.integer(forKey: "shutterStyle")
         self.hapticFeedbackLevel = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
         self.swipeToNavigateEnabled = UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled")
     }
@@ -143,7 +145,8 @@ struct SettingsView: View {
                             
                             CameraSettingsView(
                                 textDetectionIsOn: $settings.showTextDetectIndicator,
-                                hapticFeedbackLevel: $settings.hapticFeedbackLevel
+                                hapticFeedbackLevel: $settings.hapticFeedbackLevel,
+                                shutterStyle: $settings.shutterStyle
                             )
                             .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                             

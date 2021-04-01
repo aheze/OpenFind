@@ -85,6 +85,7 @@ struct ConstantVars { /// calculated based on device size
 struct Defaults {
     static var highlightColor = UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF"
     static var showTextDetectIndicator = UserDefaults.standard.bool(forKey: "showTextDetectIndicator")
+    static var shutterStyle = UserDefaults.standard.integer(forKey: "shutterStyle")
     static var hapticFeedbackLevel = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
     static var swipeToNavigateEnabled = UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled")
 }

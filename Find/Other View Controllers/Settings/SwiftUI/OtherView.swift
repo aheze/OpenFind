@@ -12,9 +12,11 @@ struct OtherView: View {
     @Binding var swipeToNavigateEnabled: Bool
     @ObservedObject var allSettings: Settings
     var body: some View {
-        SwipeToNavigateView(isOn: $swipeToNavigateEnabled)
-        ResetSettingsView(allSettings: allSettings)
-        CreditsView()
+        VStack(spacing: 20) {
+            SwipeToNavigateView(isOn: $swipeToNavigateEnabled)
+            ResetSettingsView(allSettings: allSettings)
+            CreditsView()
+        }
     }
 }
 
@@ -79,6 +81,7 @@ struct ResetSettingsView: View {
                 .default(Text("reset")) {
                     allSettings.highlightColor = "00AEEF"
                     allSettings.showTextDetectIndicator = true
+                    allSettings.shutterStyle = 1
                     allSettings.hapticFeedbackLevel = 2
                     allSettings.swipeToNavigateEnabled = true
                 },

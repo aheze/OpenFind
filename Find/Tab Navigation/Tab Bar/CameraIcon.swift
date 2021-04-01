@@ -9,13 +9,18 @@ import UIKit
 
 class CameraIcon: UIView {
     
+    var isActiveCameraIcon = false /// is popped out
+    
+    let inactiveFillColor = Constants.backgroundIconColorLight
+    
+    /// configurable
+    var inactiveRimColor = Constants.detailIconColorLight
+    var activeRimColor = UIColor.white
+    
     var isActualButton = false /// if it is actual icon in Camera VC
     var pressed: (() -> Void)?
     
     var offsetNeeded = CGFloat(0) /// offset needed to push shutter up
-    
-    var newDetailsColor = Constants.detailIconColorDark
-    var newBackgroundColor = Constants.backgroundIconColorDark
     
     @IBOutlet var contentView: UIView!
     
@@ -76,25 +81,60 @@ class CameraIcon: UIView {
         
         rimView.layer.borderWidth = 2
         rimView.layer.borderColor = Constants.detailIconColorLight.cgColor
+        
+        updateStyle()
+    }
+    
+    func updateStyle() {
+        print("Updaing. \(UserDefaults.standard.integer(forKey: "shutterStyle"))")
+        switch UserDefaults.standard.integer(forKey: "shutterStyle") {
+        case 2:
+            print("DAK STYLE")
+            inactiveRimColor = Constants.detailIconColorLight
+            activeRimColor = UIColor(named: "50Black")!
+            
+            fillView.transform = CGAffineTransform.identity
+            rimView.layer.borderColor = (isActiveCameraIcon || isActualButton) ? activeRimColor.cgColor : inactiveRimColor.cgColor
+        case 3:
+            print("SOLID  STYLE")
+            inactiveRimColor = UIColor.clear
+            activeRimColor = UIColor.clear
+            
+            fillView.transform = CGAffineTransform(scaleX: 1.36, y: 1.36)
+            rimView.layer.borderColor = (isActiveCameraIcon || isActualButton) ? activeRimColor.cgColor : inactiveRimColor.cgColor
+        default:
+            print("Class  STYLE")
+            inactiveRimColor = Constants.detailIconColorLight
+            activeRimColor = UIColor.white
+            
+            fillView.transform = CGAffineTransform.identity
+            rimView.layer.borderColor = (isActiveCameraIcon || isActualButton) ? activeRimColor.cgColor : inactiveRimColor.cgColor
+        }
+        
+        print("Active rim color is \(activeRimColor)")
     }
     
     /// For dark mode
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        if ViewControllerState.currentVC is CameraViewController {
-            rimView.layer.borderColor = Constants.detailIconColorDark.cgColor
-        } else {
-            if traitCollection.userInterfaceStyle == .dark {
-                rimView.layer.borderColor = Constants.detailIconColorDark.cgColor
-            } else {
-                rimView.layer.borderColor = Constants.detailIconColorLight.cgColor
-            }
-        }
+        print("Did change...")
+        rimView.layer.borderColor = isActiveCameraIcon ? activeRimColor.cgColor : inactiveRimColor.cgColor
+        
+//        if ViewControllerState.currentVC is CameraViewController {
+//            rimView.layer.borderColor = Constants.detailIconColorDark.cgColor
+//        } else {
+//            if traitCollection.userInterfaceStyle == .dark {
+//                rimView.layer.borderColor = Constants.detailIconColorLight.cgColor
+//            } else {
+//                rimView.layer.borderColor = Constants.detailIconColorLight.cgColor
+//            }
+//        }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         rimView.layer.cornerRadius = rimView.frame.width / 2
+        updateStyle()
     }
     
     func makeNormalState() -> (() -> Void) {
@@ -103,7 +143,7 @@ class CameraIcon: UIView {
             
             self.contentView.transform = CGAffineTransform.identity
             self.contentView.center.y = self.contentView.bounds.height / 2 /// default
-            self.fillView.backgroundColor = Constants.backgroundIconColorLight
+            self.fillView.backgroundColor = self.inactiveFillColor
         }
         return block
     }
@@ -120,6 +160,7 @@ class CameraIcon: UIView {
         return block
     }
     func makeLayerInactiveState(duration: CGFloat) {
+        isActiveCameraIcon = false
         if let currentValue = rimView.layer.presentation()?.value(forKeyPath: #keyPath(CALayer.borderColor)) {
             let currentColor = currentValue as! CGColor
             rimView.layer.borderColor = currentColor
@@ -128,13 +169,14 @@ class CameraIcon: UIView {
         let animation = CABasicAnimation(keyPath: #keyPath(CALayer.borderColor))
         animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
         animation.fromValue = rimView.layer.borderColor
-        animation.toValue = Constants.detailIconColorLight.cgColor
+        animation.toValue = inactiveRimColor.cgColor
         animation.duration = Double(duration)
-        rimView.layer.borderColor = Constants.detailIconColorLight.cgColor
+        rimView.layer.borderColor = inactiveRimColor.cgColor
         rimView.layer.add(animation, forKey: "borderColor")
         
     }
     func makeLayerActiveState(duration: CGFloat) {
+        isActiveCameraIcon = true
         if let currentValue = rimView.layer.presentation()?.value(forKeyPath: #keyPath(CALayer.borderColor)) {
             let currentColor = currentValue as! CGColor
             rimView.layer.borderColor = currentColor
@@ -143,9 +185,9 @@ class CameraIcon: UIView {
         let animation = CABasicAnimation(keyPath: #keyPath(CALayer.borderColor))
         animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
         animation.fromValue = rimView.layer.borderColor
-        animation.toValue = UIColor.white.cgColor
+        animation.toValue = activeRimColor.cgColor
         animation.duration = Double(duration)
-        rimView.layer.borderColor = UIColor.white.cgColor
+        rimView.layer.borderColor = activeRimColor.cgColor
         rimView.layer.add(animation, forKey: "borderColor")
     }
     func makePercentageOfActive(percentage: CGFloat) {
@@ -153,8 +195,8 @@ class CameraIcon: UIView {
         let scale = 1 + ((Constants.shutterBoundsLength / self.contentView.bounds.width - 1) * percentage)
         contentView.transform = CGAffineTransform(scaleX: scale, y: scale)
         
-        self.fillView.backgroundColor = [newDetailsColor, UIColor(named: "50Blue")!].intermediate(percentage: percentage)
-        self.rimView.layer.borderColor = [Constants.detailIconColorLight, UIColor.white].intermediate(percentage: percentage).cgColor
+        self.fillView.backgroundColor = [inactiveFillColor, UIColor(named: "50Blue")!].intermediate(percentage: percentage)
+        self.rimView.layer.borderColor = [inactiveRimColor, activeRimColor].intermediate(percentage: percentage).cgColor
     }
     func toggle(on: Bool) {
         if on {

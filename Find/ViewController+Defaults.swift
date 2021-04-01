@@ -24,6 +24,9 @@ extension ViewController {
             
             self.photos.photoFindViewController.findBar.sortSearchTerms()
             self.photos.photoFindViewController.tableView?.reloadData()
+            
+            self.tabBarView.cameraIcon.updateStyle()
+            self.camera.cameraIcon.updateStyle()
         }
     }
     
