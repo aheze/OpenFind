@@ -27,6 +27,7 @@ class CameraIcon: UIView {
     @IBOutlet weak var containerView: UIView! /// contains rim and fill
     @IBOutlet weak var rimView: UIView!
     @IBOutlet weak var fillView: UIView!
+    @IBOutlet weak var fillBorderView: UIView!
     var shapeFillLayer: CAShapeLayer?
     
     @IBOutlet weak var touchButton: UIButton!
@@ -82,28 +83,26 @@ class CameraIcon: UIView {
         rimView.layer.borderWidth = 2
         rimView.layer.borderColor = Constants.detailIconColorLight.cgColor
         
+        fillBorderView.alpha = 0
+        
         updateStyle()
     }
     
     func updateStyle() {
-        print("Updaing. \(UserDefaults.standard.integer(forKey: "shutterStyle"))")
         switch UserDefaults.standard.integer(forKey: "shutterStyle") {
         case 2:
-            print("DAK STYLE")
             inactiveRimColor = Constants.detailIconColorLight
             activeRimColor = UIColor(named: "50Black")!
             
             fillView.transform = CGAffineTransform.identity
             rimView.layer.borderColor = (isActiveCameraIcon || isActualButton) ? activeRimColor.cgColor : inactiveRimColor.cgColor
         case 3:
-            print("SOLID  STYLE")
             inactiveRimColor = UIColor.clear
             activeRimColor = UIColor.clear
             
             fillView.transform = CGAffineTransform(scaleX: 1.36, y: 1.36)
             rimView.layer.borderColor = (isActiveCameraIcon || isActualButton) ? activeRimColor.cgColor : inactiveRimColor.cgColor
         default:
-            print("Class  STYLE")
             inactiveRimColor = Constants.detailIconColorLight
             activeRimColor = UIColor.white
             
@@ -111,29 +110,19 @@ class CameraIcon: UIView {
             rimView.layer.borderColor = (isActiveCameraIcon || isActualButton) ? activeRimColor.cgColor : inactiveRimColor.cgColor
         }
         
-        print("Active rim color is \(activeRimColor)")
     }
     
     /// For dark mode
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        print("Did change...")
         rimView.layer.borderColor = isActiveCameraIcon ? activeRimColor.cgColor : inactiveRimColor.cgColor
-        
-//        if ViewControllerState.currentVC is CameraViewController {
-//            rimView.layer.borderColor = Constants.detailIconColorDark.cgColor
-//        } else {
-//            if traitCollection.userInterfaceStyle == .dark {
-//                rimView.layer.borderColor = Constants.detailIconColorLight.cgColor
-//            } else {
-//                rimView.layer.borderColor = Constants.detailIconColorLight.cgColor
-//            }
-//        }
+        fillBorderView.layer.borderColor = Constants.detailIconColorLight.cgColor
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         rimView.layer.cornerRadius = rimView.frame.width / 2
+        fillBorderView.layer.cornerRadius = fillBorderView.frame.width / 2
         updateStyle()
     }
     

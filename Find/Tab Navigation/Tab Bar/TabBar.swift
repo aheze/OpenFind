@@ -389,12 +389,20 @@ class TabBarView: UIView {
     }
     func showLineView(show: Bool) {
         if show {
+            
+            if UserDefaults.standard.integer(forKey: "shutterStyle") == 3 {
+                self.cameraIcon.fillBorderView.layer.borderWidth = 0.5
+                self.cameraIcon.fillBorderView.layer.borderColor = Constants.detailIconColorLight.cgColor
+            }
             UIView.animate(withDuration: 0.6) {
                 self.topLineView.alpha = 1
+                self.cameraIcon.fillBorderView.alpha = 1
             }
         } else {
+            self.cameraIcon.fillBorderView.layer.borderWidth = 0
             UIView.animate(withDuration: 0.1) {
                 self.topLineView.alpha = 0
+                self.cameraIcon.fillBorderView.alpha = 0
             }
         }
     }
