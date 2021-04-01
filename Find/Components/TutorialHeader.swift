@@ -44,5 +44,8 @@ class TutorialHeader: UIView {
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        startTourButton.accessibilityHint = "Present a quick tutorial"
+        closeButton.accessibilityHint = "Dismiss the tutorial banner"
     }
 }
