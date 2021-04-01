@@ -22,7 +22,7 @@ extension PhotosViewController {
         
         updateFindButtonHint()
         
-        selectButton?.accessibilityHint = "Enable select mode"
+        selectButton?.accessibilityHint = "Enter select mode"
         
         collectionView?.isAccessibilityElement = false
     }

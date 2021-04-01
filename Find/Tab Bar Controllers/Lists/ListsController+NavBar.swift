@@ -19,6 +19,9 @@ extension ListsController {
         addButton.tintColor = UIColor(hexString: randomizedColor)
         navigationItem.rightBarButtonItems = [addButton, selectButton]
         
+        selectButton.accessibilityHint = "Enter select mode"
+        addButton.accessibilityHint = "Make a new list"
+        
         updateSelectionLabel?(0)
     }
     @objc func addPressed(sender: UIBarButtonItem) {

@@ -69,7 +69,6 @@ extension CameraViewController {
                             component.height = height + 12
                             component.text = match.lowercased()
                             component.transcriptComponent = cachedComponent
-                            print("set to \(cachedComponent)")
                             
                             components.append(component)
                         }
@@ -80,6 +79,11 @@ extension CameraViewController {
             
             self.numberCurrentlyFindingFromCache -= 1
             if self.numberCurrentlyFindingFromCache == 0 {
+                DispatchQueue.main.async {
+                    for component in self.currentComponents {
+                        component.baseView?.removeFromSuperview()
+                    }
+                }
                 self.highlightsFromCache = components
                 self.currentComponents = components
                 self.drawHighlights(highlights: components, shouldScale: true)

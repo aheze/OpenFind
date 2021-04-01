@@ -75,11 +75,9 @@ extension PhotoSlidesViewController {
     }
     
     func speakPhotoDescription(at newIndex: Int) {
-        
         if self.resultPhotos.indices.contains(newIndex) {
             if let model = self.resultPhotos[newIndex].findPhoto.editableModel {
                 DispatchQueue.global(qos: .userInitiated).async {
-                    
                     var information = ""
                     if model.isHearted {
                         information.append("Starred")
@@ -96,7 +94,7 @@ extension PhotoSlidesViewController {
                     accessibilityString.append(AccessibilityText(text: "Status: ", isRaised: true))
                     accessibilityString.append(AccessibilityText(text: information, isRaised: false))
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.9) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
                         if self.currentIndex == newIndex {
                             UIAccessibility.postAnnouncement(accessibilityString, delay: 0)
                         }

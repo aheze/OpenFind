@@ -22,6 +22,8 @@ extension ListsController {
                 selectButton.title = NSLocalizedString("cancel", comment: "")
                 collectionView.allowsMultipleSelection = true
                 addButton.isEnabled = false
+                
+                selectButton.accessibilityHint = "Exit select mode"
             } else {
                 selectButton.title = NSLocalizedString("universal-select", comment: "")
                 collectionView.allowsMultipleSelection = false

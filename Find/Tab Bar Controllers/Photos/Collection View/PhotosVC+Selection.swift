@@ -54,7 +54,7 @@ extension PhotosViewController {
         deselectAllPhotos()
         resetToSelect()
         
-        selectButton.accessibilityHint = "Enable select mode"
+        selectButton.accessibilityHint = "Enter select mode"
     }
     
     func resetToSelect() {
