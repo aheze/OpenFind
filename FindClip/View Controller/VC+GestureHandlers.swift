@@ -68,6 +68,7 @@ extension ViewController {
                 
                 self.cameraViewController.morphingLabel.alpha = 1
                 self.cameraViewController.goBackButton.alpha = 0
+                self.downloadCoverView.alpha = 0
                 
                 if CurrentState.currentlyPresenting {
                     self.cameraViewController.controlsBaseView.alpha = 1

@@ -1009,9 +1009,9 @@
 				3C643F3E26057860001E6FA1 /* Shared */,
 				3C643F1B26057806001E6FA1 /* AppDelegate.swift */,
 				3C643F1D26057806001E6FA1 /* SceneDelegate.swift */,
+				3C643F4926057871001E6FA1 /* View Controller */,
 				3C643F5226057871001E6FA1 /* Download View */,
 				3C643F5526057872001E6FA1 /* Search Bar */,
-				3C643F4926057871001E6FA1 /* View Controller */,
 				3C643F9F26057884001E6FA1 /* Camera View Controller */,
 				3C643F8E26057884001E6FA1 /* Launch */,
 				3C643F9626057884001E6FA1 /* Permissions */,
@@ -1041,11 +1041,11 @@
 			isa = PBXGroup;
 			children = (
 				3C643F4A26057871001E6FA1 /* ViewController.swift */,
-				3C643F4B26057871001E6FA1 /* VC+GestureHandlers.swift */,
 				3C643F4C26057871001E6FA1 /* VC+CameraSetup.swift */,
 				3C643F4D26057871001E6FA1 /* VC+Constraints.swift */,
 				3C643F4E26057871001E6FA1 /* VC+DownloadSetup.swift */,
 				3C643F4F26057871001E6FA1 /* VC+GestureDelegates.swift */,
+				3C643F4B26057871001E6FA1 /* VC+GestureHandlers.swift */,
 				3C643F5026057871001E6FA1 /* VC+GestureAnimations.swift */,
 				3C643F5126057871001E6FA1 /* VC+BlurCamera.swift */,
 			);

@@ -40,6 +40,10 @@ extension ViewController {
                 scaleX: 1,
                 y: 1
             )
+            
+            if finalY == 0 {
+                self.downloadCoverView.alpha = 1
+            }
         }
         
         
@@ -70,6 +74,7 @@ extension ViewController {
                     if !CurrentState.presentingOverlay {
                         self.displayOverlay()
                     }
+                    self.downloadCoverView.alpha = 0
                 } else {
                     self.cameraViewController.morphingLabel.finish()
                     self.cameraViewController.morphingLabel.text = "Get the full app"
@@ -77,6 +82,8 @@ extension ViewController {
                     if CurrentState.presentingOverlay {
                         self.dismissOverlay()
                     }
+                    
+                    self.downloadCoverView.alpha = 1
                 }
             }
         })

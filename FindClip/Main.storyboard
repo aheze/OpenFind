@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wjn-iF-bXl">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -13,36 +14,36 @@
             <objects>
                 <viewController storyboardIdentifier="CameraViewController" id="BYZ-38-t0r" customClass="CameraViewController" customModule="FindClip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E0L-aJ-PYC">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mgP-CB-MhV">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CUo-tW-Uqh" customClass="CameraView" customModule="FindClip" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                                 <color key="backgroundColor" name="BlueBackground"/>
                                             </view>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jan-JR-xVP">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                             </imageView>
                                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pKJ-v8-P2i">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ciJ-Yk-taE">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <gestureRecognizers/>
                                             </view>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMU-Os-hYi">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y8f-q8-9k4">
-                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1500"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1500"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1500" id="xS7-5t-biZ"/>
@@ -61,9 +62,9 @@
                                                 </connections>
                                             </scrollView>
                                             <visualEffectView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fF-zd-pHN">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2P6-LT-Dh5">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
                                                 <blurEffect style="systemChromeMaterialDark"/>
@@ -98,10 +99,10 @@
                                         </constraints>
                                     </view>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Chr-ht-gnt">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kgE-hv-A8g">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="500"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="796"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                         </subviews>
@@ -114,7 +115,7 @@
                                         </constraints>
                                     </view>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G65-IN-QPC" customClass="ClearShadow" customModule="FindClip" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="500"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="796"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="opacity">
@@ -126,7 +127,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ahZ-wk-c6u" customClass="ClearShadow" customModule="FindClip" customModuleProvider="target">
-                                        <rect key="frame" x="-40" y="0.0" width="680" height="500"/>
+                                        <rect key="frame" x="-40" y="0.0" width="494" height="796"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="opacity">
@@ -165,10 +166,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B7V-tG-0Ob" customClass="passthroughGroupView" customModule="FindClip" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="440" width="600" height="160"/>
+                                <rect key="frame" x="0.0" y="736" width="414" height="160"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gal-So-5yl">
-                                        <rect key="frame" x="225" y="91" width="150" height="35"/>
+                                        <rect key="frame" x="132" y="91" width="150" height="35"/>
                                         <subviews>
                                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2mr-bl-drh">
                                                 <rect key="frame" x="0.0" y="0.0" width="150" height="35"/>
@@ -207,10 +208,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="USf-mv-K7e" customClass="passthroughGroupView" customModule="FindClip" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="0.0" width="560" height="100"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="100"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3gQ-Io-Boj" customClass="Shutter" customModule="FindClip" customModuleProvider="target">
-                                                <rect key="frame" x="242" y="12" width="76" height="76"/>
+                                                <rect key="frame" x="149" y="12" width="76" height="76"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="76" id="VqB-Zr-8kA"/>
@@ -218,7 +219,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wsf-xk-JKM">
-                                                <rect key="frame" x="332" y="30" width="40" height="40"/>
+                                                <rect key="frame" x="239" y="30" width="40" height="40"/>
                                                 <subviews>
                                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C4J-ls-kyF">
                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -275,7 +276,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sou-2o-Qjc">
-                                                <rect key="frame" x="188" y="30" width="40" height="40"/>
+                                                <rect key="frame" x="95" y="30" width="40" height="40"/>
                                                 <subviews>
                                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HcL-Oi-A7w">
                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -346,26 +347,26 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gvI-Ek-0U2">
-                                <rect key="frame" x="16" y="40" width="568" height="68"/>
+                                <rect key="frame" x="16" y="40" width="382" height="68"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gq4-a2-LBr">
-                                        <rect key="frame" x="0.0" y="0.0" width="568" height="68"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="68"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ZOb-Lh-R1D">
-                                            <rect key="frame" x="0.0" y="0.0" width="568" height="68"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="68"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <blurEffect style="systemChromeMaterialDark"/>
                                     </visualEffectView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="feh-Ku-pmY">
-                                        <rect key="frame" x="0.0" y="0.0" width="568" height="68"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="68"/>
                                         <color key="backgroundColor" name="SearchBackground"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J3l-kc-JbQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="558" height="68"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="372" height="68"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type here to find" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Z9Q-fb-j2N" customClass="PaddedTextField" customModule="FindClip" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="558" height="68"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="372" height="68"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="26"/>
                                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="search"/>
@@ -406,10 +407,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Geg-Cs-nbU">
-                                <rect key="frame" x="0.0" y="510" width="600" height="90"/>
+                                <rect key="frame" x="0.0" y="806" width="414" height="90"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ciZ-86-mgj" customClass="Gradient" customModule="FindClip" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="startColor">
@@ -421,16 +422,16 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lCT-w6-4N3">
-                                        <rect key="frame" x="0.0" y="12" width="600" height="30"/>
+                                        <rect key="frame" x="0.0" y="12" width="414" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get the full app" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJ3-bV-HuE" customClass="LTMorphingLabel" customModule="FindClip" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kSf-bA-xbO" customClass="FadingButton" customModule="FindClip" customModuleProvider="target">
-                                                <rect key="frame" x="225" y="0.0" width="150" height="30"/>
+                                                <rect key="frame" x="132" y="0.0" width="150" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="150" id="61J-2T-yc5"/>
@@ -466,7 +467,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nvI-me-8IV" customClass="FadingButton" customModule="FindClip" customModuleProvider="target">
-                                <rect key="frame" x="273.5" y="488" width="53" height="32"/>
+                                <rect key="frame" x="180.5" y="784" width="53" height="32"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="chevron.compact.down" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="46" scale="default" weight="semibold"/>
@@ -552,23 +553,23 @@
             <objects>
                 <viewController id="wjn-iF-bXl" customClass="LaunchViewController" customModule="FindClip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aVa-Py-ZT5">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kiK-fo-2Um">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GLz-b6-ShB">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L7D-hh-DXC" userLabel="Background">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" name="BlueBackground"/>
                             </view>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g94-DD-IVQ">
-                                <rect key="frame" x="201" y="201" width="198" height="198"/>
+                                <rect key="frame" x="108" y="349" width="198" height="198"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TL" translatesAutoresizingMaskIntoConstraints="NO" id="gcl-Oc-Wmu">
                                         <rect key="frame" x="0.0" y="0.0" width="58" height="58"/>
@@ -650,7 +651,7 @@
                                 </constraints>
                             </view>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BE1-ij-o85">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qVA-xF-Rxg">
                                         <rect key="frame" x="154" y="400" width="106" height="95"/>
@@ -726,17 +727,17 @@
             <objects>
                 <viewController storyboardIdentifier="PermissionsViewController" id="frz-bV-kFo" customClass="PermissionsViewController" customModule="FindClip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Zkh-vC-oHP">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P1o-NJ-PiK">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ldH-sf-qpv">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JkV-dh-gH6">
-                                                <rect key="frame" x="-300" y="-150" width="1200" height="900"/>
+                                                <rect key="frame" x="-300" y="-150" width="1014" height="1196"/>
                                                 <color key="backgroundColor" name="DarkBlue"/>
                                             </view>
                                         </subviews>
@@ -749,28 +750,28 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WxE-ir-SjC">
-                                        <rect key="frame" x="0.0" y="500" width="600" height="100"/>
+                                        <rect key="frame" x="0.0" y="796" width="414" height="100"/>
                                         <color key="backgroundColor" name="DarkBlue"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="ZfU-JU-oG2"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aVX-RO-FZD">
-                                        <rect key="frame" x="0.0" y="260.5" width="600" height="339.5"/>
+                                        <rect key="frame" x="0.0" y="472.5" width="414" height="423.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9oP-zF-yYu">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="5KF-ZQ-XHp"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iy3-c9-Kqg">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="339.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="423.5"/>
                                                 <color key="backgroundColor" name="DarkBlue"/>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y8i-oU-SfY">
-                                                <rect key="frame" x="36" y="32" width="528" height="81.5"/>
+                                                <rect key="frame" x="36" y="32" width="342" height="81.5"/>
                                                 <string key="text">Find text in
 real life, fast.</string>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
@@ -778,25 +779,25 @@ real life, fast.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To look for text, Find needs access to the camera." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jVy-dE-N4w">
-                                                <rect key="frame" x="36" y="129.5" width="528" height="25.5"/>
+                                                <rect key="frame" x="36" y="129.5" width="342" height="50.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Both this app clip and the main app work 100% offline, so nothing ever leaves your phone." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jgw-xF-uNx">
-                                                <rect key="frame" x="36" y="171" width="528" height="50.5"/>
+                                                <rect key="frame" x="36" y="196" width="342" height="75.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera permissions needed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ra3-2C-vOC">
-                                                <rect key="frame" x="182.5" y="-32" width="235" height="21"/>
+                                                <rect key="frame" x="89.5" y="-32" width="235" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pAu-S7-k5a" customClass="GradientButton" customModule="FindClip" customModuleProvider="target">
-                                                <rect key="frame" x="195.5" y="253.5" width="209" height="50"/>
+                                                <rect key="frame" x="102.5" y="303.5" width="209" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
                                                 <inset key="contentEdgeInsets" minX="42" minY="12" maxX="42" maxY="12"/>
                                                 <state key="normal" title="Allow Access">
@@ -834,10 +835,10 @@ real life, fast.</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7lx-aO-VuQ">
-                                        <rect key="frame" x="16" y="100" width="568" height="68"/>
+                                        <rect key="frame" x="16" y="100" width="382" height="68"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Il5-zO-LAq">
-                                                <rect key="frame" x="0.0" y="0.0" width="568" height="68"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="68"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="26"/>
                                                 <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" title="Type here to find">
@@ -917,18 +918,22 @@ real life, fast.</string>
             <objects>
                 <viewController storyboardIdentifier="ViewController" id="S3e-jL-sWD" customClass="ViewController" customModule="FindClip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vbt-A9-oSG">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J4z-MF-uVI">
-                                <rect key="frame" x="0.0" y="100" width="600" height="500"/>
+                                <rect key="frame" x="0.0" y="100" width="414" height="796"/>
+                                <color key="backgroundColor" name="DarkBackground"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ezo-K9-dqU">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" name="DarkBackground"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uyo-sB-qOp">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qIe-0j-3sU">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
@@ -946,13 +951,17 @@ real life, fast.</string>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="J4z-MF-uVI" secondAttribute="bottom" id="08c-Hm-f0c"/>
+                            <constraint firstAttribute="trailing" secondItem="Ezo-K9-dqU" secondAttribute="trailing" id="UAf-hX-oQR"/>
                             <constraint firstAttribute="bottom" secondItem="Uyo-sB-qOp" secondAttribute="bottom" id="ZP5-f2-SX3"/>
                             <constraint firstItem="J4z-MF-uVI" firstAttribute="top" secondItem="Vbt-A9-oSG" secondAttribute="top" constant="100" id="aN5-5W-CfW"/>
                             <constraint firstItem="Uyo-sB-qOp" firstAttribute="leading" secondItem="Vbt-A9-oSG" secondAttribute="leading" id="bvQ-8W-bQf"/>
                             <constraint firstAttribute="trailing" secondItem="J4z-MF-uVI" secondAttribute="trailing" id="gc0-ZI-sSz"/>
+                            <constraint firstItem="Ezo-K9-dqU" firstAttribute="leading" secondItem="Vbt-A9-oSG" secondAttribute="leading" id="gdM-v9-XCN"/>
                             <constraint firstItem="J4z-MF-uVI" firstAttribute="leading" secondItem="Vbt-A9-oSG" secondAttribute="leading" id="haA-W9-KeY"/>
+                            <constraint firstItem="Ezo-K9-dqU" firstAttribute="top" secondItem="Vbt-A9-oSG" secondAttribute="top" id="jMH-ps-xah"/>
                             <constraint firstAttribute="trailing" secondItem="Uyo-sB-qOp" secondAttribute="trailing" id="qJT-hh-vZO"/>
                             <constraint firstItem="Uyo-sB-qOp" firstAttribute="top" secondItem="Vbt-A9-oSG" secondAttribute="top" id="rLe-pF-kDH"/>
+                            <constraint firstAttribute="bottom" secondItem="Ezo-K9-dqU" secondAttribute="bottom" id="vMN-hr-dcY"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="RNy-2s-z57" appends="YES" id="aDc-00-0R6"/>
@@ -962,6 +971,7 @@ real life, fast.</string>
                     <connections>
                         <outlet property="cameraContainerView" destination="Uyo-sB-qOp" id="Red-g9-fTg"/>
                         <outlet property="cameraReferenceView" destination="qIe-0j-3sU" id="3x1-yM-BLx"/>
+                        <outlet property="downloadCoverView" destination="Ezo-K9-dqU" id="21N-7m-gd8"/>
                         <outlet property="downloadReferenceTopC" destination="aN5-5W-CfW" id="PDp-Pt-y79"/>
                         <outlet property="downloadReferenceView" destination="J4z-MF-uVI" id="dSy-2J-D6v"/>
                         <outlet property="longPressGestureRecognizer" destination="4Xe-h2-J52" id="4Jw-sq-SFy"/>
@@ -983,6 +993,14 @@ real life, fast.</string>
             <point key="canvasLocation" x="-655.07246376811599" y="114.50892857142857"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="DJ3-bV-HuE">
+            <size key="intrinsicContentSize" width="117" height="20.5"/>
+        </designable>
+        <designable name="Z9Q-fb-j2N">
+            <size key="intrinsicContentSize" width="191.5" height="33"/>
+        </designable>
+    </designables>
     <resources>
         <image name="BL" width="58" height="58"/>
         <image name="BR" width="58" height="58"/>
