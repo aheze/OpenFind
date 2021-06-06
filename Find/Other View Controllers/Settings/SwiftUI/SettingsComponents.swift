@@ -15,6 +15,14 @@ struct Label: View {
             .font(Font(UIFont.systemFont(ofSize: 19, weight: .regular)))
     }
 }
+struct VerbatimLabel: View {
+    var text: String
+    var body: some View {
+        Text(text)
+            .foregroundColor(.white)
+            .font(Font(UIFont.systemFont(ofSize: 19, weight: .regular)))
+    }
+}
 /// Header for each section
 struct SectionHeaderView: View {
     var text: LocalizedStringKey

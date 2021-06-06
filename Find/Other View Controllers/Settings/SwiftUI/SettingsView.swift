@@ -17,6 +17,7 @@ struct SettingsHoster {
 
 class Settings: ObservableObject {
     @Published var highlightColor: String { didSet { UserDefaults.standard.set(highlightColor, forKey: "highlightColor") } }
+    @Published var recognitionLanguages: [String] { didSet { UserDefaults.standard.set(recognitionLanguages, forKey: "recognitionLanguages") } }
     @Published var showTextDetectIndicator: Bool { didSet { UserDefaults.standard.set(showTextDetectIndicator, forKey: "showTextDetectIndicator") } }
     @Published var shutterStyle: Int { didSet { UserDefaults.standard.set(shutterStyle, forKey: "shutterStyle") } }
     @Published var hapticFeedbackLevel: Int { didSet { UserDefaults.standard.set(hapticFeedbackLevel, forKey: "hapticFeedbackLevel") } }
@@ -24,6 +25,7 @@ class Settings: ObservableObject {
     
     init() {
         self.highlightColor = UserDefaults.standard.string(forKey: "highlightColor") ?? "00AEEF"
+        self.recognitionLanguages = UserDefaults.standard.array(forKey: "recognitionLanguages") as? [String] ?? []
         self.showTextDetectIndicator = UserDefaults.standard.bool(forKey: "showTextDetectIndicator")
         self.shutterStyle = UserDefaults.standard.integer(forKey: "shutterStyle")
         self.hapticFeedbackLevel = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
