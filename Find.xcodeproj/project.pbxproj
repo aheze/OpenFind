@@ -2615,7 +2615,7 @@
 				CURRENT_PROJECT_VERSION = 3791;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
-				INFOPLIST_FILE = Find/Utilities/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Find/Assets and Info/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2639,7 +2639,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3791;
 				DEVELOPMENT_TEAM = YA533DMD5J;
-				INFOPLIST_FILE = Find/Utilities/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Find/Assets and Info/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
