@@ -12,10 +12,10 @@ import SDWebImagePhotosPlugin
 
 extension PhotosViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-      super.viewWillTransition(to: size, with: coordinator)
-      coordinator.animate(alongsideTransition: { context in
-        self.collectionView.collectionViewLayout.invalidateLayout()
-      }, completion: nil)
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { context in
+            self.collectionView.collectionViewLayout.invalidateLayout()
+        }, completion: nil)
     }
     func setupSDWebImage() {
         //Supports HTTP URL as well as Photos URL globally
@@ -39,66 +39,65 @@ extension PhotosViewController {
                     withReuseIdentifier: self.cellReuseIdentifier,
                     for: indexPath) as? ImageCell
                 
-                if let url = NSURL.sd_URL(with: findPhoto.asset) {
-                    var accessibilityLabel = "Photo."
+                let url = NSURL.sd_URL(with: findPhoto.asset)
+                var accessibilityLabel = "Photo."
+                
+                if let dateCreated = findPhoto.asset.creationDate {
                     
-                    if let dateCreated = findPhoto.asset.creationDate {
-                        
-                        let dateDistance = dateCreated.distance(from: Date(), only: .year)
-                        
-                        let dateFormatter = DateFormatter()
-                        
-                        if dateDistance == 0 {
-                            dateFormatter.dateFormat = "MMMM d' at 'h:mm a"
-                        } else { /// -1 if older by a year
-                            dateFormatter.dateFormat = "MMMM d, yyyy', at 'h:mm a"
-                        }
-                        let dateCreatedString = dateFormatter.string(from: dateCreated)
-                        accessibilityLabel = "\(dateCreatedString)."
+                    let dateDistance = dateCreated.distance(from: Date(), only: .year)
+                    
+                    let dateFormatter = DateFormatter()
+                    
+                    if dateDistance == 0 {
+                        dateFormatter.dateFormat = "MMMM d' at 'h:mm a"
+                    } else { /// -1 if older by a year
+                        dateFormatter.dateFormat = "MMMM d, yyyy', at 'h:mm a"
                     }
-                    
-                    
-                    let cellLength = cell?.bounds.width ?? 100
-                    let imageLength = cellLength * (self.screenScale + 1)
-
-                    cell?.imageView.sd_imageTransition = .fade
-                    cell?.imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: [.fromLoaderOnly, .decodeFirstFrameOnly], context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: imageLength, height: imageLength)])
-                    
-                    if let model = findPhoto.editableModel {
-                        cell?.cacheImageView.alpha = model.isDeepSearched ? 1 : 0
-                        cell?.starImageView.alpha = model.isHearted ? 1 : 0
-                        cell?.shadowImageView.alpha = (model.isDeepSearched || model.isHearted ) ? 1 : 0
-                        
-                        if model.isHearted {
-                            accessibilityLabel.append(" Starred")
-                            if model.isDeepSearched {
-                                accessibilityLabel.append(" and Cached.")
-                            } else {
-                                accessibilityLabel.append(".")
-                            }
-                        } else if model.isDeepSearched {
-                            accessibilityLabel.append(" Cached.")
-                        }
-                    } else {
-                        cell?.cacheImageView.alpha = 0
-                        cell?.starImageView.alpha = 0
-                        cell?.shadowImageView.alpha = 0
-                    }
-                    
-                    if self.indexPathsSelected.contains(indexPath) {
-                        cell?.highlightView.isHidden = false
-                        cell?.selectionImageView.isHidden = false
-                    } else {
-                        cell?.highlightView.isHidden = true
-                        cell?.selectionImageView.isHidden = true
-                    }
-                    
-                    cell?.starImageView.isAccessibilityElement = false
-                    cell?.cacheImageView.isAccessibilityElement = false
-                    cell?.imageView.accessibilityLabel = accessibilityLabel
-                    cell?.imageView.isAccessibilityElement = true
-                    cell?.imageView.accessibilityTraits = .image
+                    let dateCreatedString = dateFormatter.string(from: dateCreated)
+                    accessibilityLabel = "\(dateCreatedString)."
                 }
+                
+                
+                let cellLength = cell?.bounds.width ?? 100
+                let imageLength = cellLength * (self.screenScale + 1)
+                
+                cell?.imageView.sd_imageTransition = .fade
+                cell?.imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: [.fromLoaderOnly, .decodeFirstFrameOnly], context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: imageLength, height: imageLength)])
+                
+                if let model = findPhoto.editableModel {
+                    cell?.cacheImageView.alpha = model.isDeepSearched ? 1 : 0
+                    cell?.starImageView.alpha = model.isHearted ? 1 : 0
+                    cell?.shadowImageView.alpha = (model.isDeepSearched || model.isHearted ) ? 1 : 0
+                    
+                    if model.isHearted {
+                        accessibilityLabel.append(" Starred")
+                        if model.isDeepSearched {
+                            accessibilityLabel.append(" and Cached.")
+                        } else {
+                            accessibilityLabel.append(".")
+                        }
+                    } else if model.isDeepSearched {
+                        accessibilityLabel.append(" Cached.")
+                    }
+                } else {
+                    cell?.cacheImageView.alpha = 0
+                    cell?.starImageView.alpha = 0
+                    cell?.shadowImageView.alpha = 0
+                }
+                
+                if self.indexPathsSelected.contains(indexPath) {
+                    cell?.highlightView.isHidden = false
+                    cell?.selectionImageView.isHidden = false
+                } else {
+                    cell?.highlightView.isHidden = true
+                    cell?.selectionImageView.isHidden = true
+                }
+                
+                cell?.starImageView.isAccessibilityElement = false
+                cell?.cacheImageView.isAccessibilityElement = false
+                cell?.imageView.accessibilityLabel = accessibilityLabel
+                cell?.imageView.isAccessibilityElement = true
+                cell?.imageView.accessibilityTraits = .image
                 return cell
             })
         
@@ -131,16 +130,12 @@ extension PhotosViewController {
     func applySnapshot(animatingDifferences: Bool = true) {
         
         hasChangedFromBefore = true
-        print("APPLYING SNAPSHOT-----------------")
-        // 2
+        
         var snapshot = Snapshot()
-        // 3
         snapshot.appendSections(monthsToDisplay)
         monthsToDisplay.forEach { month in
             snapshot.appendItems(month.photos, toSection: month)
         }
-        // 5
-
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
     func configureLayout() {
@@ -171,13 +166,13 @@ extension PhotosViewController {
             
             // Supplementary header view setup
             let headerFooterSize = NSCollectionLayoutSize(
-              widthDimension: .fractionalWidth(1.0),
-              heightDimension: .absolute(40)
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .absolute(40)
             )
             let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
-              layoutSize: headerFooterSize,
-              elementKind: UICollectionView.elementKindSectionHeader,
-              alignment: .top
+                layoutSize: headerFooterSize,
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .top
             )
             section.boundarySupplementaryItems = [sectionHeader]
             sectionHeader.pinToVisibleBounds = true

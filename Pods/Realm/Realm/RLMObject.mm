@@ -29,7 +29,7 @@
 #import "RLMRealm_Private.hpp"
 #import "RLMSchema_Private.h"
 
-#import "object.hpp"
+#import <realm/object-store/object.hpp>
 
 // We declare things in RLMObject which are actually implemented in RLMObjectBase
 // for documentation's sake, which leads to -Wunimplemented-method warnings.
@@ -154,6 +154,10 @@
 
 - (instancetype)freeze {
     return RLMObjectFreeze(self);
+}
+
+- (instancetype)thaw {
+    return RLMObjectThaw(self);
 }
 
 - (BOOL)isFrozen {

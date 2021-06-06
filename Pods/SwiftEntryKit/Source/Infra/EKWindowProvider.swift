@@ -33,6 +33,9 @@ final class EKWindowProvider: EntryPresenterDelegate {
     
     /** A window to go back to when the last entry has been dismissed */
     private var rollbackWindow: SwiftEntryKit.RollbackWindow!
+    
+    /** The main rollback window to be used internally in case `rollbackWindow`'s value is `.main` */
+    private weak var mainRollbackWindow: UIWindow?
 
     /** Entry queueing heuristic  */
     private let entryQueue = EKAttributes.Precedence.QueueingHeuristic.value.heuristic
@@ -77,6 +80,7 @@ final class EKWindowProvider: EntryPresenterDelegate {
         if entryWindow == nil {
             entryVC = EKRootViewController(with: self)
             entryWindow = EKWindow(with: entryVC)
+            mainRollbackWindow = UIApplication.shared.keyWindow
         } else {
             entryVC = rootVC!
         }
@@ -147,22 +151,39 @@ final class EKWindowProvider: EntryPresenterDelegate {
     
     /** Clear all entries immediately and display to the rollback window */
     func displayRollbackWindow() {
+        if #available(iOS 13.0, *) {
+            entryWindow.windowScene = nil
+        }
         entryWindow = nil
         entryView = nil
         switch rollbackWindow! {
         case .main:
-            UIApplication.shared.keyWindow?.makeKeyAndVisible()
+            if let mainRollbackWindow = mainRollbackWindow {
+                mainRollbackWindow.makeKeyAndVisible()
+            } else {
+                UIApplication.shared.keyWindow?.makeKeyAndVisible()
+            }
         case .custom(window: let window):
             window.makeKeyAndVisible()
         }
     }
     
     /** Display a pending entry if there is any inside the queue */
-    func displayPendingEntryIfNeeded() {
+    func displayPendingEntryOrRollbackWindow(dismissCompletionHandler: SwiftEntryKit.DismissCompletionHandler?) {
         if let next = entryQueue.dequeue() {
+            
+            // Execute dismiss handler if needed before dequeuing (potentially) another entry
+            dismissCompletionHandler?()
+            
+            // Show the next entry in queue
             show(entryView: next.view, presentInsideKeyWindow: next.presentInsideKeyWindow, rollbackWindow: next.rollbackWindow)
         } else {
+            
+            // Display the rollback window
             displayRollbackWindow()
+            
+            // As a last step, invoke the dismissal method
+            dismissCompletionHandler?()
         }
     }
     
@@ -198,7 +219,7 @@ final class EKWindowProvider: EntryPresenterDelegate {
         entryWindow?.layoutIfNeeded()
     }
     
-    /** Privately using to prepare the root view controller and show the entry immediately */
+    /** Privately used to prepare the root view controller and show the entry immediately */
     private func show(entryView: EKEntryView, presentInsideKeyWindow: Bool, rollbackWindow: SwiftEntryKit.RollbackWindow) {
         guard let entryVC = prepare(for: entryView.attributes, presentInsideKeyWindow: presentInsideKeyWindow) else {
             return

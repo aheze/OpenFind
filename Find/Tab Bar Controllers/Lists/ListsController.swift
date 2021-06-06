@@ -105,9 +105,8 @@ class ListsController: UIViewController, AdaptiveCollectionLayoutDelegate, UIAda
         let deletedList = NSLocalizedString("deletedList", comment: "ListsController def=Deleted list!")
         let tapToDismiss = NSLocalizedString("tapToDismiss", comment: "Multipurpose def=Tap to dismiss")
         
-        let alertView = SPAlertView(title: deletedList, message: tapToDismiss, preset: SPAlertPreset.done)
-        alertView.duration = 3.6
-        alertView.present()
+        let alertView = SPAlertView(title: deletedList, message: tapToDismiss, preset: .done)
+        alertView.present(duration: 3.6, haptic: .success)
         listsChanged?()
     }
     

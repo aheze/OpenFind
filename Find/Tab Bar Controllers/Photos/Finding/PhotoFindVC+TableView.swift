@@ -74,13 +74,11 @@ extension PhotoFindViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textView.text = findModel.descriptionText
         
         
-        if let url = NSURL.sd_URL(with: findModel.findPhoto.asset) {
-
-            cell.photoImageView.sd_imageTransition = .fade
-            cell.photoImageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue])
-            
-        }
-
+        let url = NSURL.sd_URL(with: findModel.findPhoto.asset)
+        
+        cell.photoImageView.sd_imageTransition = .fade
+        cell.photoImageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue])
+        
         cell.textView.layoutManager.ensureLayout(for: cell.textView.textContainer)
         
         var rects = [CGRect]()

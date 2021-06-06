@@ -18,13 +18,16 @@
 
 #import "RLMAccessor.h"
 
-#import "object_accessor.hpp"
-
+#import "RLMDecimal128_Private.hpp"
+#import "RLMObjectId_Private.hpp"
 #import "RLMUtil.hpp"
+
+#import <realm/object-store/object_accessor.hpp>
 
 @class RLMRealm;
 class RLMClassInfo;
-class RLMObservationInfo;
+class RLMObservationTracker;
+typedef NS_ENUM(NSUInteger, RLMUpdatePolicy);
 
 // realm::util::Optional<id> doesn't work because Objective-C types can't
 // be members of unions with ARC, so this covers the subset of Optional that we
@@ -38,13 +41,17 @@ struct RLMOptionalId {
 
 class RLMAccessorContext {
 public:
+    ~RLMAccessorContext();
+
     // Accessor context interface
-    RLMAccessorContext(RLMAccessorContext& parent, realm::Property const& property);
+    RLMAccessorContext(RLMAccessorContext& parent, realm::Obj const& parent_obj, realm::Property const& property);
 
     id box(realm::List&&);
     id box(realm::Results&&);
     id box(realm::Object&&);
     id box(realm::Obj&&);
+    id box(realm::object_store::Dictionary&&) { REALM_COMPILER_HINT_UNREACHABLE(); }
+    id box(realm::object_store::Set&&) { REALM_COMPILER_HINT_UNREACHABLE(); }
 
     id box(bool v) { return @(v); }
     id box(double v) { return @(v); }
@@ -53,12 +60,15 @@ public:
     id box(realm::StringData v) { return RLMStringDataToNSString(v) ?: NSNull.null; }
     id box(realm::BinaryData v) { return RLMBinaryDataToNSData(v) ?: NSNull.null; }
     id box(realm::Timestamp v) { return RLMTimestampToNSDate(v) ?: NSNull.null; }
+    id box(realm::Decimal128 v) { return v.is_null() ? NSNull.null : [[RLMDecimal128 alloc] initWithDecimal128:v]; }
+    id box(realm::ObjectId v) { return [[RLMObjectId alloc] initWithValue:v]; }
     id box(realm::Mixed v) { return RLMMixedToObjc(v); }
 
     id box(realm::util::Optional<bool> v) { return v ? @(*v) : NSNull.null; }
     id box(realm::util::Optional<double> v) { return v ? @(*v) : NSNull.null; }
     id box(realm::util::Optional<float> v) { return v ? @(*v) : NSNull.null; }
     id box(realm::util::Optional<int64_t> v) { return v ? @(*v) : NSNull.null; }
+    id box(realm::util::Optional<realm::ObjectId> v) { return v ? box(*v) : NSNull.null; }
 
     void will_change(realm::Obj const&, realm::Property const&);
     void will_change(realm::Object& obj, realm::Property const& prop) { will_change(obj.obj(), prop); }
@@ -69,17 +79,26 @@ public:
                                              realm::Property const& prop);
 
     bool is_same_list(realm::List const& list, id v) const noexcept;
+    bool is_same_dictionary(realm::object_store::Dictionary const&, id) const noexcept { REALM_COMPILER_HINT_UNREACHABLE(); }
+    bool is_same_set(realm::object_store::Set const&, id) const noexcept { REALM_COMPILER_HINT_UNREACHABLE(); }
 
     template<typename Func>
-    void enumerate_list(__unsafe_unretained const id v, Func&& func) {
+    void enumerate_collection(__unsafe_unretained const id v, Func&& func) {
         id enumerable = RLMAsFastEnumeration(v) ?: v;
         for (id value in enumerable) {
             func(value);
         }
     }
 
+    template<typename Func>
+    void enumerate_dictionary(__unsafe_unretained const id, Func&&) {
+        REALM_COMPILER_HINT_UNREACHABLE();
+    }
+
     template<typename T>
     T unbox(id v, realm::CreatePolicy = realm::CreatePolicy::Skip, realm::ObjKey = {});
+
+    realm::Obj create_embedded_object();
 
     bool is_null(id v) { return v == NSNull.null; }
     id null_value() { return NSNull.null; }
@@ -90,27 +109,29 @@ public:
 
     // Internal API
     RLMAccessorContext(RLMObjectBase *parentObject, const realm::Property *property = nullptr);
-    RLMAccessorContext(RLMClassInfo& info, bool promote=true);
+    RLMAccessorContext(RLMObjectBase *parentObject, realm::ColKey);
+    RLMAccessorContext(RLMClassInfo& info);
 
     // The property currently being accessed; needed for KVO things for boxing
     // List and Results
     RLMProperty *currentProperty;
 
+    std::pair<realm::Obj, bool>
+    createObject(id value, realm::CreatePolicy policy, bool forceCreate=false, realm::ObjKey existingKey={});
+
 private:
     __unsafe_unretained RLMRealm *const _realm;
     RLMClassInfo& _info;
-    // If true, promote unmanaged RLMObjects passed to box() with create=true
-    // rather than copying them
-    bool _promote_existing = true;
-    // Parent object of the thing currently being processed, for KVO purposes
-    __unsafe_unretained RLMObjectBase *const _parentObject = nil;
+
+    realm::Obj _parentObject;
+    RLMClassInfo* _parentObjectInfo = nullptr;
+    realm::ColKey _colKey;
 
     // Cached default values dictionary to avoid having to call the class method
     // for every property
     NSDictionary *_defaultValues;
 
-    RLMObservationInfo *_observationInfo = nullptr;
-    NSString *_kvoPropertyName = nil;
+    std::unique_ptr<RLMObservationTracker> _observationHelper;
 
     id defaultValue(NSString *key);
     id propertyValue(id obj, size_t propIndex, __unsafe_unretained RLMProperty *const prop);

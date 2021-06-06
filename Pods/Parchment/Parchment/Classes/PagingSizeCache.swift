@@ -4,11 +4,11 @@ import UIKit
 class PagingSizeCache {
   
   var options: PagingOptions
-  var implementsWidthDelegate: Bool = false
-  var widthForPagingItem: ((PagingItem, Bool) -> CGFloat?)?
+  var implementsSizeDelegate: Bool = false
+  var sizeForPagingItem: ((PagingItem, Bool) -> CGFloat?)?
   
-  private var widthCache: [Int: CGFloat] = [:]
-  private var selectedWidthCache: [Int: CGFloat] = [:]
+  private var sizeCache: [Int: CGFloat] = [:]
+  private var selectedSizeCache: [Int: CGFloat] = [:]
   
   init(options: PagingOptions) {
     self.options = options
@@ -37,27 +37,27 @@ class PagingSizeCache {
   }
   
   func clear() {
-    self.widthCache =  [:]
-    self.selectedWidthCache = [:]
+    self.sizeCache =  [:]
+    self.selectedSizeCache = [:]
   }
   
-  func itemWidth(for pagingItem: PagingItem) -> CGFloat {
-    if let width = widthCache[pagingItem.identifier] {
-      return width
+  func itemSize(for pagingItem: PagingItem) -> CGFloat {
+    if let size = sizeCache[pagingItem.identifier] {
+      return size
     } else {
-      let width = widthForPagingItem?(pagingItem, false)
-      widthCache[pagingItem.identifier] = width
-      return width ?? options.estimatedItemWidth
+      let size = sizeForPagingItem?(pagingItem, false)
+      sizeCache[pagingItem.identifier] = size
+      return size ?? options.estimatedItemWidth
     }
   }
   
   func itemWidthSelected(for pagingItem: PagingItem) -> CGFloat {
-    if let width = selectedWidthCache[pagingItem.identifier] {
-      return width
+    if let size = selectedSizeCache[pagingItem.identifier] {
+      return size
     } else {
-      let width = widthForPagingItem?(pagingItem, true)
-      selectedWidthCache[pagingItem.identifier] = width
-      return width ?? options.estimatedItemWidth
+      let size = sizeForPagingItem?(pagingItem, true)
+      selectedSizeCache[pagingItem.identifier] = size
+      return size ?? options.estimatedItemWidth
     }
   }
   

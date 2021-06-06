@@ -72,10 +72,6 @@
 #import "RLMVersion.h"
 #endif
 
-#if REALM_ENABLE_SYNC
-#import <realm/sync/version.hpp>
-#endif
-
 // Declared for RealmSwiftObjectUtil
 @interface NSObject (SwiftVersion)
 + (NSString *)swiftVersion;
@@ -179,9 +175,8 @@ static NSDictionary *RLMAnalyticsPayload() {
     }
 
     NSString *osVersionString = [[NSProcessInfo processInfo] operatingSystemVersionString];
-    Class swiftObjectUtilClass = NSClassFromString(@"RealmSwiftObjectUtil");
-    BOOL isSwift = swiftObjectUtilClass != nil;
-    NSString *swiftVersion = isSwift ? [swiftObjectUtilClass swiftVersion] : @"N/A";
+    Class swiftDecimal128 = NSClassFromString(@"RealmSwiftDecimal128");
+    BOOL isSwift = swiftDecimal128 != nil;
 
     static NSString *kUnknownString = @"unknown";
     NSString *hashedMACAddress = RLMMACAddress() ?: kUnknownString;
@@ -201,9 +196,6 @@ static NSDictionary *RLMAnalyticsPayload() {
                      @"Binding": @"cocoa",
                      @"Language": isSwift ? @"swift" : @"objc",
                      @"Realm Version": REALM_COCOA_VERSION,
-#if REALM_ENABLE_SYNC
-                     @"Sync Version": @(REALM_SYNC_VER_STRING),
-#endif
 #if TARGET_OS_WATCH
                      @"Target OS Type": @"watchos",
 #elif TARGET_OS_TV
@@ -213,7 +205,8 @@ static NSDictionary *RLMAnalyticsPayload() {
 #else
                      @"Target OS Type": @"osx",
 #endif
-                     @"Swift Version": swiftVersion,
+                     @"Clang Version": @__clang_version__,
+                     @"Clang Major Version": @__clang_major__,
                      // Current OS version the app is targetting
                      @"Target OS Version": osVersionString,
                      // Minimum OS version the app is targetting
@@ -222,6 +215,18 @@ static NSDictionary *RLMAnalyticsPayload() {
                      // Host OS version being built on
                      @"Host OS Type": @"osx",
                      @"Host OS Version": RLMOSVersion() ?: kUnknownString,
+
+#ifdef SWIFT_PACKAGE
+                    @"Installation Method": @"Swift Package Manager",
+#elif defined(COCOAPODS)
+                    @"Installation Method": @"CocoaPods",
+#elif defined(CARTHAGE)
+                    @"Installation Method": @"Carthage",
+#elif defined(REALM_IOS_STATIC)
+                    @"Installation Method": @"Static Framework",
+#else
+                    @"Installation Method": @"Other",
+#endif
                  }
           };
 }
@@ -230,14 +235,16 @@ void RLMSendAnalytics() {
     if (getenv("REALM_DISABLE_ANALYTICS") || !RLMIsDebuggerAttached() || RLMIsRunningInPlayground()) {
         return;
     }
-
-
+    NSArray *urlStrings = @[@"https://webhooks.mongodb-realm.com/api/client/v2.0/app/realmsdkmetrics-zmhtm/service/metric_webhook/incoming_webhook/metric?data=%@",
+                            @"https://api.mixpanel.com/track/?data=%@&ip=1"];
     NSData *payload = [NSJSONSerialization dataWithJSONObject:RLMAnalyticsPayload() options:0 error:nil];
-    NSString *url = [NSString stringWithFormat:@"https://api.mixpanel.com/track/?data=%@&ip=1", [payload base64EncodedStringWithOptions:0]];
 
-    // No error handling or anything because logging errors annoyed people for no
-    // real benefit, and it's not clear what else we could do
-    [[NSURLSession.sharedSession dataTaskWithURL:[NSURL URLWithString:url]] resume];
+    for (NSString *urlString in urlStrings) {
+        NSString *formatted = [NSString stringWithFormat:urlString, [payload base64EncodedStringWithOptions:0]];
+        // No error handling or anything because logging errors annoyed people for no
+        // real benefit, and it's not clear what else we could do
+        [[NSURLSession.sharedSession dataTaskWithURL:[NSURL URLWithString:formatted]] resume];
+    }
 }
 
 #else

@@ -9,27 +9,27 @@ import UIKit
 
 extension UIViewController {
     func addChildViewController(_ childViewController: UIViewController, in inView: UIView) {
-        // Add Child View Controller
+        /// Add Child View Controller
         addChild(childViewController)
         
-        // Add Child View as Subview
+        /// Add Child View as Subview
         inView.insertSubview(childViewController.view, at: 0)
         
-        // Configure Child View
+        /// Configure Child View
         childViewController.view.frame = inView.bounds
         childViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        // Notify Child View Controller
+        /// Notify Child View Controller
         childViewController.didMove(toParent: self)
     }
     func removeChildViewController(_ childViewController: UIViewController) {
-        // Notify Child View Controller
+        /// Notify Child View Controller
         childViewController.willMove(toParent: nil)
 
-        // Remove Child View From Superview
+        /// Remove Child View From Superview
         childViewController.view.removeFromSuperview()
 
-        // Notify Child View Controller
+        /// Notify Child View Controller
         childViewController.removeFromParent()
     }
 }

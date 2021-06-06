@@ -26,15 +26,16 @@
 #import "RLMProperty_Private.h"
 #import "RLMQueryUtil.hpp"
 #import "RLMRealm_Private.hpp"
+#import "RLMRealmConfiguration_Private.hpp"
 #import "RLMSchema.h"
 #import "RLMThreadSafeReference_Private.hpp"
 #import "RLMUtil.hpp"
 
-#import "list.hpp"
-#import "results.hpp"
-#import "shared_realm.hpp"
-
+#import <realm/object-store/list.hpp>
+#import <realm/object-store/results.hpp>
+#import <realm/object-store/shared_realm.hpp>
 #import <realm/table_view.hpp>
+
 #import <objc/runtime.h>
 
 @interface RLMManagedArrayHandoverMetadata : NSObject
@@ -177,24 +178,17 @@ template<typename IndexSetFactory>
 static void changeArray(__unsafe_unretained RLMManagedArray *const ar,
                         NSKeyValueChange kind, dispatch_block_t f, IndexSetFactory&& is) {
     translateErrors([&] { ar->_backingList.verify_in_transaction(); });
-    RLMObservationInfo *info = RLMGetObservationInfo(ar->_observationInfo.get(),
-                                                     ar->_backingList.get_parent_object_key(),
-                                                     *ar->_ownerInfo);
-    if (info) {
-        NSIndexSet *indexes = is();
-        info->willChange(ar->_key, kind, indexes);
-        try {
-            f();
-        }
-        catch (...) {
-            info->didChange(ar->_key, kind, indexes);
-            throwError(ar, nil);
-        }
-        info->didChange(ar->_key, kind, indexes);
+
+    RLMObservationTracker tracker(ar->_realm);
+    tracker.trackDeletions();
+    auto obsInfo = RLMGetObservationInfo(ar->_observationInfo.get(),
+                                         ar->_backingList.get_parent_object_key(),
+                                         *ar->_ownerInfo);
+    if (obsInfo) {
+        tracker.willChange(obsInfo, ar->_key, kind, is());
     }
-    else {
-        translateErrors([&] { f(); });
-    }
+
+    translateErrors(f);
 }
 
 static void changeArray(__unsafe_unretained RLMManagedArray *const ar, NSKeyValueChange kind, NSUInteger index, dispatch_block_t f) {
@@ -430,7 +424,7 @@ static void RLMInsertObject(RLMManagedArray *ar, id object, NSUInteger index) {
 - (id)averageOfProperty:(NSString *)property {
     auto column = [self columnForProperty:property];
     auto value = translateErrors(self, [&] { return _backingList.average(column); }, @"averageOfProperty");
-    return value ? @(*value) : nil;
+    return value ? RLMMixedToObjc(*value) : nil;
 }
 
 - (void)deleteObjectsFromRealm {
@@ -438,9 +432,8 @@ static void RLMInsertObject(RLMManagedArray *ar, id object, NSUInteger index) {
         @throw RLMException(@"Cannot delete objects from RLMArray<%@>: only RLMObjects can be deleted.", RLMTypeToString(_type));
     }
     // delete all target rows from the realm
-    RLMTrackDeletions(_realm, ^{
-        translateErrors([&] { _backingList.delete_all(); });
-    });
+    RLMObservationTracker tracker(_realm, true);
+    translateErrors([&] { _backingList.delete_all(); });
 }
 
 - (RLMResults *)sortedResultsUsingDescriptors:(NSArray<RLMSortDescriptor *> *)properties {
@@ -513,9 +506,23 @@ static void RLMInsertObject(RLMManagedArray *ar, id object, NSUInteger index) {
     }
 
     RLMRealm *frozenRealm = [_realm freeze];
-    auto& parentInfo = _ownerInfo->freeze(frozenRealm);
+    auto& parentInfo = _ownerInfo->resolve(frozenRealm);
     return translateRLMResultsErrors([&] {
         return [[self.class alloc] initWithList:_backingList.freeze(frozenRealm->_realm)
+                                     parentInfo:&parentInfo
+                                       property:parentInfo.rlmObjectSchema[_key]];
+    });
+}
+
+- (instancetype)thaw {
+    if (!self.frozen) {
+        return self;
+    }
+
+    RLMRealm *liveRealm = [_realm thaw];
+    auto& parentInfo = _ownerInfo->resolve(liveRealm);
+    return translateRLMResultsErrors([&] {
+        return [[self.class alloc] initWithList:_backingList.freeze(liveRealm->_realm)
                                      parentInfo:&parentInfo
                                        property:parentInfo.rlmObjectSchema[_key]];
     });

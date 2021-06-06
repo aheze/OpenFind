@@ -18,15 +18,17 @@
 
 #import "RLMRealmConfiguration+Sync.h"
 
+#import "RLMBSON_Private.hpp"
 #import "RLMRealmConfiguration_Private.hpp"
 #import "RLMSyncConfiguration_Private.hpp"
-#import "RLMSyncUser_Private.hpp"
-#import "RLMSyncManager_Private.h"
+#import "RLMUser_Private.hpp"
+#import "RLMSyncManager_Private.hpp"
 #import "RLMSyncUtil_Private.hpp"
 #import "RLMUtil.hpp"
 
-#import "sync/sync_config.hpp"
-#import "sync/sync_manager.hpp"
+#import <realm/object-store/sync/sync_manager.hpp>
+#import <realm/object-store/util/bson/bson.hpp>
+#import <realm/sync/config.hpp>
 
 @implementation RLMRealmConfiguration (Sync)
 
@@ -40,23 +42,19 @@
     if (self.config.should_compact_on_launch_function) {
         @throw RLMException(@"Cannot set `syncConfiguration` when `shouldCompactOnLaunch` is set.");
     }
-    RLMSyncUser *user = syncConfiguration.user;
-    if (user.state == RLMSyncUserStateError) {
+    RLMUser *user = syncConfiguration.user;
+    if (user.state == RLMUserStateRemoved) {
         @throw RLMException(@"Cannot set a sync configuration which has an errored-out user.");
     }
 
-    // Ensure sync manager is initialized, if it hasn't already been.
-    [RLMSyncManager sharedManager];
-    NSAssert(user.identity, @"Cannot call this method on a user that doesn't have an identity.");
+    NSAssert(user.identifier, @"Cannot call this method on a user that doesn't have an identifier.");
     self.config.in_memory = false;
     self.config.sync_config = std::make_shared<realm::SyncConfig>([syncConfiguration rawConfiguration]);
-    self.config.schema_mode = realm::SchemaMode::Additive;
 
     if (syncConfiguration.customFileURL) {
         self.config.path = syncConfiguration.customFileURL.path.UTF8String;
     } else {
-        self.config.path = SyncManager::shared().path_for_realm(*[user _syncUser],
-                                                                self.config.sync_config->realm_url());
+        self.config.path = [user pathForPartitionValue:self.config.sync_config->partition_value];
     }
 
     if (!self.config.encryption_key.empty()) {
@@ -64,6 +62,8 @@
         sync_encryption_key = std::array<char, 64>();
         std::copy_n(self.config.encryption_key.begin(), 64, sync_encryption_key->begin());
     }
+
+    [self updateSchemaMode];
 }
 
 - (RLMSyncConfiguration *)syncConfiguration {

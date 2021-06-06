@@ -30,10 +30,9 @@
 #import "RLMSchema_Private.hpp"
 #import "RLMUtil.hpp"
 
-#import "object_store.hpp"
-#import "shared_realm.hpp"
-#import "schema.hpp"
-
+#import <realm/object-store/object_store.hpp>
+#import <realm/object-store/shared_realm.hpp>
+#import <realm/object-store/schema.hpp>
 #import <realm/table.hpp>
 
 using namespace realm;
@@ -93,7 +92,18 @@ using namespace realm;
         }
         return;
     }
-
+    
+    // If a table will be deleted it can still be enumerated during the migration
+    // so that data can be saved or transfered to other tables if necessary.
+    if (!objects && oldObjects) {
+        for (RLMObject *oldObject in oldObjects) {
+            @autoreleasepool {
+                block(oldObject, nil);
+            }
+        }
+        return;
+    }
+    
     if (oldObjects.count == 0 || objects.count == 0) {
         return;
     }
@@ -105,7 +115,7 @@ using namespace realm;
             try {
                 newObj = info.table()->get_object(oldObject->_row.get_key());
             }
-            catch (InvalidKey const&) {
+            catch (KeyNotFound const&) {
                 continue;
             }
             block(oldObject, (id)RLMCreateObjectAccessor(info, std::move(newObj)));

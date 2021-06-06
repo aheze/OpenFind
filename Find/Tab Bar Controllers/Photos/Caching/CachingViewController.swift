@@ -169,13 +169,13 @@ class CachingViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         let findPhoto = photosToCache[indexPath.item]
         
-        if let url = NSURL.sd_URL(with: findPhoto.asset) {
-            let cellLength = cell.bounds.width
-            let imageLength = cellLength * (screenScale + 1)
-
-            cell.imageView.sd_imageTransition = .fade
-            cell.imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: imageLength, height: imageLength)])
-        }
+        let url = NSURL.sd_URL(with: findPhoto.asset)
+        let cellLength = cell.bounds.width
+        let imageLength = cellLength * (screenScale + 1)
+        
+        cell.imageView.sd_imageTransition = .fade
+        cell.imageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: imageLength, height: imageLength)])
+        
         return cell
     }
     
@@ -313,14 +313,13 @@ extension CachingViewController {
         cancelImageView.layer.cornerRadius = 4
         if let firstPhoto = photosToCache.first {
             
-            if let url = NSURL.sd_URL(with: firstPhoto.asset) {
-                let boundsLength = cancelImageView.bounds.width
-                let imageLength = boundsLength * (screenScale + 1)
-
-                cancelImageView.sd_imageTransition = .fade
-                cancelImageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: imageLength, height: imageLength)])
-                
-            }
+            let url = NSURL.sd_URL(with: firstPhoto.asset)
+            let boundsLength = cancelImageView.bounds.width
+            let imageLength = boundsLength * (screenScale + 1)
+            
+            cancelImageView.sd_imageTransition = .fade
+            cancelImageView.sd_setImage(with: url as URL, placeholderImage: nil, options: SDWebImageOptions.fromLoaderOnly, context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.none.rawValue, .imageThumbnailPixelSize : CGSize(width: imageLength, height: imageLength)])
+            
         }
         
         

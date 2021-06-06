@@ -1009,9 +1009,9 @@
 				3C643F3E26057860001E6FA1 /* Shared */,
 				3C643F1B26057806001E6FA1 /* AppDelegate.swift */,
 				3C643F1D26057806001E6FA1 /* SceneDelegate.swift */,
+				3C643F4926057871001E6FA1 /* View Controller */,
 				3C643F5226057871001E6FA1 /* Download View */,
 				3C643F5526057872001E6FA1 /* Search Bar */,
-				3C643F4926057871001E6FA1 /* View Controller */,
 				3C643F9F26057884001E6FA1 /* Camera View Controller */,
 				3C643F8E26057884001E6FA1 /* Launch */,
 				3C643F9626057884001E6FA1 /* Permissions */,
@@ -1041,11 +1041,11 @@
 			isa = PBXGroup;
 			children = (
 				3C643F4A26057871001E6FA1 /* ViewController.swift */,
-				3C643F4B26057871001E6FA1 /* VC+GestureHandlers.swift */,
 				3C643F4C26057871001E6FA1 /* VC+CameraSetup.swift */,
 				3C643F4D26057871001E6FA1 /* VC+Constraints.swift */,
 				3C643F4E26057871001E6FA1 /* VC+DownloadSetup.swift */,
 				3C643F4F26057871001E6FA1 /* VC+GestureDelegates.swift */,
+				3C643F4B26057871001E6FA1 /* VC+GestureHandlers.swift */,
 				3C643F5026057871001E6FA1 /* VC+GestureAnimations.swift */,
 				3C643F5126057871001E6FA1 /* VC+BlurCamera.swift */,
 			);
@@ -1258,6 +1258,44 @@
 				3CAC4DCF25BF611100CC7948 /* CameraVC+Draw.swift */,
 			);
 			path = Caching;
+			sourceTree = "<group>";
+		};
+		3CAA1D35266C7620008F1F16 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */,
+				3CD388C025C122BC00B67B13 /* ViewController+ShutterPosition.swift */,
+				3C020CE4259FF5A70087AE92 /* ViewController+Migration.swift */,
+				3C5B156625A7ED7A00BB8988 /* ViewController+CameraShutoff.swift */,
+				3C84F97725C3A4160066A360 /* ViewController+Defaults.swift */,
+				3C58FC872615642500ED28FE /* ViewController+Accessibility.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		3CAA1D36266C764A008F1F16 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				3C1AB1A5261004B7009B47C0 /* Sound.swift */,
+				492A2D2524A4046200F9C4A1 /* BartyCrouch.swift */,
+				49585DCE23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift */,
+				49563504243694BB0001E8C6 /* PaperOnboarding */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		3CAA1D37266C7684008F1F16 /* Assets and Info */ = {
+			isa = PBXGroup;
+			children = (
+				4999AC9C2353A81100AB06A7 /* Assets.xcassets */,
+				3C0F5ED425A5729A00549040 /* NewAssets.xcassets */,
+				3C0A7C9A25C649A70076DBCF /* Onboarding.xcassets */,
+				3C4DE703259AD5670037D104 /* NewColors.xcassets */,
+				49B7A32C2390823C0070209F /* Colors.xcassets */,
+				495F7DA624CBACE90053DE50 /* Info.plist */,
+				495F7DAC24CBB3970053DE50 /* InfoPlist.strings */,
+			);
+			path = "Assets and Info";
 			sourceTree = "<group>";
 		};
 		3CAC4D8E25BF514000CC7948 /* Message View */ = {
@@ -1547,14 +1585,6 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		49585DCD23ED0C9F003AB768 /* SEK */ = {
-			isa = PBXGroup;
-			children = (
-				49585DCE23ED0CB3003AB768 /* SwiftEntryKitTemplates.swift */,
-			);
-			path = SEK;
-			sourceTree = "<group>";
-		};
 		495F38F62432C8D100A17D93 /* Carte */ = {
 			isa = PBXGroup;
 			children = (
@@ -1597,16 +1627,11 @@
 		4969373B2353C25B009CA41A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				49563504243694BB0001E8C6 /* PaperOnboarding */,
-				49585DCD23ED0C9F003AB768 /* SEK */,
 				4911508A235D1A3E00EC0C04 /* Utilities.swift */,
+				3CF45F5B260EF1FC00FE949E /* Dates.swift */,
 				3C69186F26125F6A00510C08 /* HighlightColor.swift */,
 				3C3232E726115C7900A33192 /* PostAnnouncement.swift */,
-				492A2D2524A4046200F9C4A1 /* BartyCrouch.swift */,
-				495F7DA624CBACE90053DE50 /* Info.plist */,
-				495F7DAC24CBB3970053DE50 /* InfoPlist.strings */,
-				3CF45F5B260EF1FC00FE949E /* Dates.swift */,
-				3C1AB1A5261004B7009B47C0 /* Sound.swift */,
+				3CAA1D36266C764A008F1F16 /* Libraries */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1698,12 +1723,7 @@
 			children = (
 				495635292437A4860001E8C6 /* defaultSeeds.realm */,
 				3CE306E0259AC4B000F1B2E2 /* State.swift */,
-				3CE306E9259AC5AF00F1B2E2 /* ViewController.swift */,
-				3CD388C025C122BC00B67B13 /* ViewController+ShutterPosition.swift */,
-				3C020CE4259FF5A70087AE92 /* ViewController+Migration.swift */,
-				3C5B156625A7ED7A00BB8988 /* ViewController+CameraShutoff.swift */,
-				3C84F97725C3A4160066A360 /* ViewController+Defaults.swift */,
-				3C58FC872615642500ED28FE /* ViewController+Accessibility.swift */,
+				3CAA1D35266C7620008F1F16 /* ViewController */,
 				3CC230D125C1F99300AD04B6 /* Tips */,
 				3CFBD47D25A4EE94000BCA7D /* Lifecycle */,
 				3C4DE714259B0E960037D104 /* Components */,
@@ -1713,11 +1733,7 @@
 				3C16EA81259BED7F00D73755 /* Other View Controllers */,
 				4969373B2353C25B009CA41A /* Utilities */,
 				3C5DD068261021D300434317 /* Sound Effects */,
-				4999AC9C2353A81100AB06A7 /* Assets.xcassets */,
-				3C0F5ED425A5729A00549040 /* NewAssets.xcassets */,
-				3C0A7C9A25C649A70076DBCF /* Onboarding.xcassets */,
-				3C4DE703259AD5670037D104 /* NewColors.xcassets */,
-				49B7A32C2390823C0070209F /* Colors.xcassets */,
+				3CAA1D37266C7684008F1F16 /* Assets and Info */,
 				49E9D89424996E1A0006757C /* Localizable.strings */,
 				3C0CC69D25CE0385008E5737 /* unused.rb */,
 			);

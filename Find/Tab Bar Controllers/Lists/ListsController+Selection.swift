@@ -147,9 +147,8 @@ extension ListsController {
             self.sortLists()
             
             let tapToDismiss = NSLocalizedString("tapToDismiss", comment: "Multipurpose def=Tap to dismiss")
-            let alertView = SPAlertView(title: finishMessage, message: tapToDismiss, preset: SPAlertPreset.done)
-            alertView.duration = 3.6
-            alertView.present()
+            let alertView = SPAlertView(title: finishMessage, message: tapToDismiss, preset: .done)
+            alertView.present(duration: 3.6, haptic: .success)
             
             self.selectButtonSelected = false
             self.showSelectionControls?(self.selectButtonSelected)

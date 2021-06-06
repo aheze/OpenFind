@@ -161,9 +161,8 @@ extension PhotosMigrationController {
             
             let finishedMovingMessage = finishedMoving
             let detailsMessage = yourPhotosHaveBeenMoved
-            let alertView = SPAlertView(title: finishedMovingMessage, message: detailsMessage, preset: SPAlertPreset.done)
-            alertView.duration = 3.6
-            alertView.present()
+            let alertView = SPAlertView(title: finishedMovingMessage, message: detailsMessage, preset: .done)
+            alertView.present(duration: 3.6, haptic: .success)
             resetProgress()
             self.dismiss(animated: true, completion: nil)
             completed?()

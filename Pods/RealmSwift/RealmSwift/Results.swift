@@ -37,6 +37,7 @@ extension Int32: MinMaxType {}
 extension Int64: MinMaxType {}
 extension Date: MinMaxType {}
 extension NSDate: MinMaxType {}
+extension Decimal128: MinMaxType {}
 
 // MARK: AddableType
 
@@ -57,6 +58,7 @@ extension Int8: AddableType {}
 extension Int16: AddableType {}
 extension Int32: AddableType {}
 extension Int64: AddableType {}
+extension Decimal128: AddableType {}
 
 /**
  `Results` is an auto-updating container type in Realm returned from object queries.
@@ -78,7 +80,7 @@ extension Int64: AddableType {}
 
  Results instances cannot be directly instantiated.
  */
-public struct Results<Element: RealmCollectionValue>: Equatable {
+@frozen public struct Results<Element: RealmCollectionValue>: Equatable {
 
     internal let rlmResults: RLMResults<AnyObject>
 
@@ -359,6 +361,10 @@ public struct Results<Element: RealmCollectionValue>: Equatable {
     public func freeze() -> Results {
         return Results(rlmResults.freeze())
     }
+
+    public func thaw() -> Results? {
+        return Results(rlmResults.thaw())
+    }
 }
 
 extension Results: RealmCollection {
@@ -413,7 +419,6 @@ extension Results: AssistedObjectiveCBridgeable {
 
 // MARK: - Codable
 
-#if swift(>=4.1)
 extension Results: Encodable where Element: Encodable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
@@ -422,4 +427,3 @@ extension Results: Encodable where Element: Encodable {
         }
     }
 }
-#endif

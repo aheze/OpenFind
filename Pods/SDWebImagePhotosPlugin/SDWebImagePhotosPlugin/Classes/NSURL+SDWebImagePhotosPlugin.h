@@ -33,7 +33,7 @@
  @param identifier `PHAsset` 's local identifier
  @return A Photos URL
  */
-+ (nullable instancetype)sd_URLWithAssetLocalIdentifier:(nonnull NSString *)identifier;
++ (nonnull instancetype)sd_URLWithAssetLocalIdentifier:(nonnull NSString *)identifier;
 
 /**
  Create a Photos URL with `PHAsset`
@@ -41,6 +41,6 @@
  @param asset `PHAsset` object
  @return A Photos URL
  */
-+ (nullable instancetype)sd_URLWithAsset:(nonnull PHAsset *)asset;
++ (nonnull instancetype)sd_URLWithAsset:(nonnull PHAsset *)asset;
 
 @end

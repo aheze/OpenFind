@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     // MARK: Download
     @IBOutlet weak var downloadReferenceView: UIView!
     
+    @IBOutlet weak var downloadCoverView: UIView!
+    
     // MARK: Camera
     @IBOutlet weak var cameraContainerView: UIView!
     @IBOutlet weak var cameraReferenceView: UIView!
@@ -55,10 +57,30 @@ class ViewController: UIViewController {
         setupConstraints()
         setupCameraView()
         setupDownloadView()
+        downloadCoverView.alpha = 1
         
         longPressGestureRecognizer.delegate = self
         panGestureRecognizer.delegate = self
         blurCamera()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if UIAccessibility.isVoiceOverRunning {
+            let alert = UIAlertController(title: "Get the full app?", message: "This App Clip has limited compatibility with VoiceOver, while the full app is completely optimized for accessibility. Would you like to download the full app instead?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Download the full app", style: UIAlertAction.Style.default, handler: { _ in
+                if let url = URL(string: "https://apps.apple.com/app/find-command-f-for-camera/id1506500202") {
+                    UIApplication.shared.open(url)
+                }
+            }))
+            alert.addAction(UIAlertAction(title: "No thanks", style: UIAlertAction.Style.cancel, handler: nil))
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.sourceView = self.view
+                popoverController.sourceRect =  CGRect(x: (self.view.bounds.width / 2) - 40, y: self.view.bounds.height - 80, width: 80, height: 80)
+            }
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 
 }

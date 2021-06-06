@@ -1,24 +1,24 @@
 PODS:
-  - Parchment (2.4.0)
+  - Parchment (3.0.1)
   - QuickLayout (3.0.0)
-  - Realm (5.1.0):
-    - Realm/Headers (= 5.1.0)
-  - Realm/Headers (5.1.0)
-  - RealmSwift (5.1.0):
-    - Realm (= 5.1.0)
-  - SDWebImage (5.8.1):
-    - SDWebImage/Core (= 5.8.1)
-  - SDWebImage/Core (5.8.1)
-  - SDWebImagePhotosPlugin (1.1.0):
-    - SDWebImage/Core (~> 5.5)
+  - Realm (10.7.6):
+    - Realm/Headers (= 10.7.6)
+  - Realm/Headers (10.7.6)
+  - RealmSwift (10.7.6):
+    - Realm (= 10.7.6)
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
+  - SDWebImagePhotosPlugin (1.2.0):
+    - SDWebImage/Core (~> 5.10)
   - SnapKit (5.0.1)
-  - SPAlert (2.1.4)
+  - SPAlert (3.1.0)
   - SupportDocs (1.1.0)
-  - SwiftEntryKit (1.2.3):
+  - SwiftEntryKit (1.2.7):
     - QuickLayout (= 3.0.0)
   - SwiftRichString (3.7.2)
   - SwiftyJSON (4.3.0)
-  - WhatsNewKit (1.3.4)
+  - WhatsNewKit (1.3.7)
 
 DEPENDENCIES:
   - Parchment
@@ -51,20 +51,20 @@ SPEC REPOS:
     - WhatsNewKit
 
 SPEC CHECKSUMS:
-  Parchment: 002785473861582385db5c6725165353c500198e
+  Parchment: 466a1cfb6151780db8acb4bbedc2d9c6bfa1e2ff
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
-  Realm: bdea546851e37b4cf0a2400cef115c7c26fda488
-  RealmSwift: 70945aa168db93b215c460e9c8ef680261aa28af
-  SDWebImage: e3eae2eda88578db0685a0c88597fdadd9433f05
-  SDWebImagePhotosPlugin: 8ffaf65a06f44a1e5f9ad0bcddf78e515cbe55ef
+  Realm: ed860452717c8db8f4bf832b6807f7f2ce708839
+  RealmSwift: e31c4ddbcc42ac879313d656b86f9ca539f6f4f4
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  SDWebImagePhotosPlugin: 7d52495711a00637da16bbd7098a634f524c8d7e
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  SPAlert: 1a8afa1c6ac86a82ab5b2cfdf7f9a51e68cb6c0c
+  SPAlert: 9d365b0bb371473d25831a575bfe631e3c83cff0
   SupportDocs: 8123646bc65daa23d9d5efda5f836563187c194a
-  SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
+  SwiftEntryKit: 537c92699d6034efb1ef9c32b11e0b37c97aa589
   SwiftRichString: d61b807db1f8834c26fee92b6dd3e1be2dc5af03
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
-  WhatsNewKit: 35f25faa0e17f3ad9b825ba46b13a14279972973
+  WhatsNewKit: c87028c4059dccd113495422801914cc53f6aab0
 
 PODFILE CHECKSUM: 5b99e4a24723ce0d78cf0ff5414539586411d6e8
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

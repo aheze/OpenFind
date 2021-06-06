@@ -66,6 +66,12 @@ public protocol ThreadConfined {
      `Realm.Configuration.maximumNumberOfActiveVersions` for more information.
     */
     func freeze() -> Self
+
+    /**
+     Returns a live (mutable) reference of this object.
+     Will return self if called on an already live object.
+     */
+    func thaw() -> Self?
 }
 
 /**
@@ -85,7 +91,7 @@ public protocol ThreadConfined {
  - see: `ThreadConfined`
  - see: `Realm.resolve(_:)`
  */
-public struct ThreadSafeReference<Confined: ThreadConfined> {
+@frozen public struct ThreadSafeReference<Confined: ThreadConfined> {
     private let swiftMetadata: Any?
 
     /**

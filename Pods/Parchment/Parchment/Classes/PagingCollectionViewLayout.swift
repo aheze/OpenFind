@@ -62,6 +62,10 @@ open class PagingCollectionViewLayout: UICollectionViewLayout, PagingLayout {
     return PagingCellLayoutAttributes.self
   }
   
+  open override var flipsHorizontallyInOppositeLayoutDirection: Bool {
+      return true
+  }
+  
   // MARK: Initializers
   
   public override required init() {
@@ -104,9 +108,9 @@ open class PagingCollectionViewLayout: UICollectionViewLayout, PagingLayout {
     }
   }
   
-  /// Cache used to store the preferred item width for each
-  /// self-sizing cell. PagingItem identifier is used as the key.
-  private var widthCache: [Int: CGFloat] = [:]
+  /// Cache used to store the preferred item size for each self-sizing
+  /// cell. PagingItem identifier is used as the key.
+  private var preferredSizeCache: [Int: CGFloat] = [:]
   
   private(set) var contentInsets: UIEdgeInsets = .zero
   private var contentSize: CGSize = .zero
@@ -157,12 +161,12 @@ open class PagingCollectionViewLayout: UICollectionViewLayout, PagingLayout {
   override open func shouldInvalidateLayout(forPreferredLayoutAttributes preferredAttributes: UICollectionViewLayoutAttributes, withOriginalAttributes originalAttributes: UICollectionViewLayoutAttributes) -> Bool {
     switch options.menuItemSize {
     // Invalidate the layout and update the layout attributes with the
-    // preferred width for each cell. The preferred width is based on
+    // preferred width for each cell. The preferred size is based on
     // the layout constraints in each cell.
     case .selfSizing where originalAttributes is PagingCellLayoutAttributes:
       if preferredAttributes.frame.width != originalAttributes.frame.width {
         let pagingItem = visibleItems.pagingItem(for: originalAttributes.indexPath)
-        widthCache[pagingItem.identifier] = preferredAttributes.frame.width
+        preferredSizeCache[pagingItem.identifier] = preferredAttributes.frame.width
         return true
       }
       return false
@@ -272,8 +276,8 @@ open class PagingCollectionViewLayout: UICollectionViewLayout, PagingLayout {
       let y = adjustedMenuInsets.top
       let pagingItem = visibleItems.pagingItem(for: indexPath)
       
-      if sizeCache.implementsWidthDelegate {
-        var width = sizeCache.itemWidth(for: pagingItem)
+      if sizeCache.implementsSizeDelegate {
+        var width = sizeCache.itemSize(for: pagingItem)
         let selectedWidth = sizeCache.itemWidthSelected(for: pagingItem)
         
         if let currentPagingItem = state.currentPagingItem, currentPagingItem.isEqual(to: pagingItem) {
@@ -290,7 +294,7 @@ open class PagingCollectionViewLayout: UICollectionViewLayout, PagingLayout {
         case let .sizeToFit(minWidth, height):
           attributes.frame = CGRect(x: x, y: y, width: minWidth, height: height)
         case let .selfSizing(estimatedWidth, height):
-          if let actualWidth = widthCache[pagingItem.identifier] {
+          if let actualWidth = preferredSizeCache[pagingItem.identifier] {
             attributes.frame = CGRect(x: x, y: y, width: actualWidth, height: height)
           } else {
             attributes.frame = CGRect(x: x, y: y, width: estimatedWidth, height: height)
@@ -307,7 +311,7 @@ open class PagingCollectionViewLayout: UICollectionViewLayout, PagingLayout {
     if previousFrame.maxX - adjustedMenuInsets.left < view.bounds.width {
       
       switch (options.menuItemSize) {
-      case let .sizeToFit(_, height) where sizeCache.implementsWidthDelegate == false:
+      case let .sizeToFit(_, height) where sizeCache.implementsSizeDelegate == false:
         let insets = adjustedMenuInsets.left + adjustedMenuInsets.right
         let spacing = (options.menuItemSpacing * CGFloat(range.upperBound - 1))
         let width = (view.bounds.width - insets - spacing) / CGFloat(range.upperBound)
@@ -527,7 +531,7 @@ open class PagingCollectionViewLayout: UICollectionViewLayout, PagingLayout {
       y: attributes.center.y - attributes.bounds.midY,
       width: attributes.bounds.width,
       height: attributes.bounds.height)
-    if sizeCache.implementsWidthDelegate {
+    if sizeCache.implementsSizeDelegate {
       let indexPath = IndexPath(item: index, section: 0)
       let pagingItem = visibleItems.pagingItem(for: indexPath)
 

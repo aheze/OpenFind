@@ -42,23 +42,15 @@
 }
 
 + (instancetype)sd_URLWithAssetLocalIdentifier:(NSString *)identifier {
-    if (!identifier) {
-        return nil;
-    }
+    NSParameterAssert(identifier);
     // ph://F2A9F582-BA45-4308-924E-6D146B784A09/L0/001
     NSString *prefix = [NSString stringWithFormat:@"%@://", SDWebImagePhotosScheme];
     return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", prefix, identifier]];
 }
 
 + (instancetype)sd_URLWithAsset:(PHAsset *)asset {
-    if (![asset isKindOfClass:[PHAsset class]]) {
-        return nil;
-    }
+    NSParameterAssert(asset);
     NSString *localIdentifier = asset.localIdentifier;
-    if (!localIdentifier) {
-        return nil;
-    }
-    
     NSURL *url = [self sd_URLWithAssetLocalIdentifier:localIdentifier];
     url.sd_asset = asset;
     

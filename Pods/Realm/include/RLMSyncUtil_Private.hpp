@@ -19,10 +19,9 @@
 #import "RLMSyncUtil_Private.h"
 
 #import "RLMSyncConfiguration_Private.h"
-#import "RLMSyncPermission.h"
 
-#import "sync/sync_manager.hpp"
-#import "realm/util/optional.hpp"
+#import <realm/object-store/sync/sync_manager.hpp>
+#import <realm/util/optional.hpp>
 
 @class RLMSyncErrorResponseModel;
 class CocoaSyncUserContext;

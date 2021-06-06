@@ -22,7 +22,7 @@ import Realm
 /**
  An iterator for a `RealmCollection` instance.
  */
-public struct RLMIterator<Element: RealmCollectionValue>: IteratorProtocol {
+@frozen public struct RLMIterator<Element: RealmCollectionValue>: IteratorProtocol {
     private var generatorBase: NSFastEnumerationIterator
 
     init(collection: RLMCollection) {
@@ -84,7 +84,7 @@ public struct RLMIterator<Element: RealmCollectionValue>: IteratorProtocol {
  }
  ```
  */
-public enum RealmCollectionChange<CollectionType> {
+@frozen public enum RealmCollectionChange<CollectionType> {
     /**
      `.initial` indicates that the initial run of the query has completed (if
      applicable), and the collection can now be used without performing any
@@ -160,12 +160,14 @@ private func arrayType<T>(_ type: T.Type) -> RLMArray<AnyObject> {
     switch type {
     case is Int.Type, is Int8.Type, is Int16.Type, is Int32.Type, is Int64.Type:
         return RLMArray(objectType: .int, optional: true)
-    case is Bool.Type:   return RLMArray(objectType: .bool, optional: true)
-    case is Float.Type:  return RLMArray(objectType: .float, optional: true)
-    case is Double.Type: return RLMArray(objectType: .double, optional: true)
-    case is String.Type: return RLMArray(objectType: .string, optional: true)
-    case is Data.Type:   return RLMArray(objectType: .data, optional: true)
-    case is Date.Type:   return RLMArray(objectType: .date, optional: true)
+    case is Bool.Type:       return RLMArray(objectType: .bool, optional: true)
+    case is Float.Type:      return RLMArray(objectType: .float, optional: true)
+    case is Double.Type:     return RLMArray(objectType: .double, optional: true)
+    case is String.Type:     return RLMArray(objectType: .string, optional: true)
+    case is Data.Type:       return RLMArray(objectType: .data, optional: true)
+    case is Date.Type:       return RLMArray(objectType: .date, optional: true)
+    case is Decimal128.Type: return RLMArray(objectType: .decimal128, optional: true)
+    case is ObjectId.Type:   return RLMArray(objectType: .objectId, optional: true)
     default: fatalError("Unsupported type for List: \(type)?")
     }
 }
@@ -221,6 +223,18 @@ extension Data: RealmCollectionValue {
     /// :nodoc:
     public static func _rlmArray() -> RLMArray<AnyObject> {
         return RLMArray(objectType: .data, optional: false)
+    }
+}
+extension Decimal128: RealmCollectionValue {
+    /// :nodoc:
+    public static func _rlmArray() -> RLMArray<AnyObject> {
+        return RLMArray(objectType: .decimal128, optional: false)
+    }
+}
+extension ObjectId: RealmCollectionValue {
+    /// :nodoc:
+    public static func _rlmArray() -> RLMArray<AnyObject> {
+        return RLMArray(objectType: .objectId, optional: false)
     }
 }
 
@@ -371,7 +385,7 @@ public protocol RealmCollection: RealmCollectionBase, _RealmCollectionEnumerator
 
      - parameter property: The name of a property whose values should be summed.
      */
-    func average(ofProperty property: String) -> Double?
+    func average<T: AddableType>(ofProperty property: String) -> T?
 
 
     // MARK: Key-Value Coding
@@ -487,6 +501,14 @@ public protocol RealmCollection: RealmCollectionBase, _RealmCollectionEnumerator
      `Realm.Configuration.maximumNumberOfActiveVersions` for more information.
     */
     func freeze() -> Self
+
+    /**
+     Returns a live (mutable) version of this frozen collection.
+
+     This method resolves a reference to a live copy of the same frozen collection.
+     If called on a live collection, will return itself.
+    */
+    func thaw() -> Self?
 }
 
 public extension RealmCollection {
@@ -565,7 +587,7 @@ public extension RealmCollection where Element: AddableType {
     /**
      Returns the average of all of the values in the collection.
      */
-    func average() -> Double? {
+    func average<T: AddableType>() -> T? {
         return average(ofProperty: "self")
     }
 }
@@ -580,7 +602,7 @@ public extension RealmCollection where Element: OptionalProtocol, Element.Wrappe
     /**
      Returns the average of all of the values in the collection.
      */
-    func average() -> Double? {
+    func average<T: AddableType>() -> T? {
         return average(ofProperty: "self")
     }
 }
@@ -630,7 +652,7 @@ private class _AnyRealmCollectionBase<T: RealmCollectionValue>: AssistedObjectiv
     func min<T: MinMaxType>(ofProperty property: String) -> T? { fatalError() }
     func max<T: MinMaxType>(ofProperty property: String) -> T? { fatalError() }
     func sum<T: AddableType>(ofProperty property: String) -> T { fatalError() }
-    func average(ofProperty property: String) -> Double? { fatalError() }
+    func average<T: AddableType>(ofProperty property: String) -> T? { fatalError() }
     subscript(position: Int) -> Element { fatalError() }
     func makeIterator() -> RLMIterator<T> { fatalError() }
     var startIndex: Int { fatalError() }
@@ -647,6 +669,7 @@ private class _AnyRealmCollectionBase<T: RealmCollectionValue>: AssistedObjectiv
     func _asNSFastEnumerator() -> Any { fatalError() }
     var isFrozen: Bool { fatalError() }
     func freeze() -> AnyRealmCollection<T> { fatalError() }
+    func thaw() -> AnyRealmCollection<T> { fatalError() }
 }
 
 private final class _AnyRealmCollection<C: RealmCollection>: _AnyRealmCollectionBase<C.Element> {
@@ -699,7 +722,7 @@ private final class _AnyRealmCollection<C: RealmCollection>: _AnyRealmCollection
         return base.sum(ofProperty: property)
     }
 
-    override func average(ofProperty property: String) -> Double? {
+    override func average<T: AddableType>(ofProperty property: String) -> T? {
         return base.average(ofProperty: property)
     }
 
@@ -764,6 +787,10 @@ private final class _AnyRealmCollection<C: RealmCollection>: _AnyRealmCollection
 
     override func freeze() -> AnyRealmCollection<Element> {
         return AnyRealmCollection(base.freeze())
+    }
+
+    override func thaw() -> AnyRealmCollection<Element> {
+        return AnyRealmCollection(base.thaw()!)
     }
 }
 
@@ -917,7 +944,7 @@ public struct AnyRealmCollection<Element: RealmCollectionValue>: RealmCollection
 
      - parameter property: The name of a property whose average value should be calculated.
      */
-    public func average(ofProperty property: String) -> Double? { return base.average(ofProperty: property) }
+    public func average<T: AddableType>(ofProperty property: String) -> T? { return base.average(ofProperty: property) }
 
 
     // MARK: Sequence Support
@@ -1052,8 +1079,8 @@ public struct AnyRealmCollection<Element: RealmCollectionValue>: RealmCollection
      Returns a frozen (immutable) snapshot of this collection.
 
      The frozen copy is an immutable collection which contains the same data as this collection
-    currently contains, but will not update when writes are made to the containing Realm. Unlike
-    live collections, frozen collections can be accessed from any thread.
+     currently contains, but will not update when writes are made to the containing Realm. Unlike
+     live collections, frozen collections can be accessed from any thread.
 
      - warning: This method cannot be called during a write transaction, or when the containing
     Realm is read-only.
@@ -1062,6 +1089,14 @@ public struct AnyRealmCollection<Element: RealmCollectionValue>: RealmCollection
      `Realm.Configuration.maximumNumberOfActiveVersions` for more information.
     */
     public func freeze() -> AnyRealmCollection { return base.freeze() }
+
+    /**
+     Returns a live version of this frozen collection.
+
+     This method resolves a reference to a live copy of the same frozen collection.
+     If called on a live collection, will return itself.
+    */
+    public func thaw() -> AnyRealmCollection? { return base.thaw() }
 }
 
 // MARK: AssistedObjectiveCBridgeable

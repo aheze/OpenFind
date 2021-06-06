@@ -28,15 +28,16 @@
 #import "RLMProperty_Private.h"
 #import "RLMQueryUtil.hpp"
 #import "RLMRealm_Private.hpp"
+#import "RLMRealmConfiguration_Private.hpp"
 #import "RLMSchema_Private.h"
 #import "RLMThreadSafeReference_Private.hpp"
 #import "RLMUtil.hpp"
 
-#import "results.hpp"
-#import "shared_realm.hpp"
+#import <realm/object-store/results.hpp>
+#import <realm/object-store/shared_realm.hpp>
+#import <realm/table_view.hpp>
 
 #import <objc/message.h>
-#import <realm/table_view.hpp>
 
 using namespace realm;
 
@@ -453,7 +454,7 @@ static inline void RLMResultsValidateInWriteTransaction(__unsafe_unretained RLMR
         column = _info->tableColumn(property);
     }
     auto value = translateRLMResultsErrors([&] { return _results.average(column); }, @"averageOfProperty");
-    return value ? @(*value) : nil;
+    return value ? RLMMixedToObjc(*value) : nil;
 }
 
 - (void)deleteObjectsFromRealm {
@@ -467,7 +468,8 @@ static inline void RLMResultsValidateInWriteTransaction(__unsafe_unretained RLMR
             RLMClearTable(*_info);
         }
         else {
-            RLMTrackDeletions(_realm, [&] { _results.clear(); });
+            RLMObservationTracker tracker(_realm, true);
+            _results.clear();
         }
     });
 }
@@ -500,13 +502,25 @@ static inline void RLMResultsValidateInWriteTransaction(__unsafe_unretained RLMR
 
     RLMRealm *frozenRealm = [_realm freeze];
     return translateRLMResultsErrors([&] {
-        return [self.class resultsWithObjectInfo:_info->freeze(frozenRealm)
+        return [self.class resultsWithObjectInfo:_info->resolve(frozenRealm)
                                          results:_results.freeze(frozenRealm->_realm)];
     });
 }
 
 - (BOOL)isFrozen {
     return _realm.frozen;
+}
+
+- (instancetype)thaw {
+    if (!self.frozen) {
+        return self;
+    }
+
+    RLMRealm *liveRealm = [_realm thaw];
+    return translateRLMResultsErrors([&] {
+        return [self.class resultsWithObjectInfo:_info->resolve(liveRealm)
+                                         results:_results.freeze(liveRealm->_realm)];
+    });
 }
 
 // The compiler complains about the method's argument type not matching due to
