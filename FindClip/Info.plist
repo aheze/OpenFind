@@ -20,7 +20,11 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<string>4816</string>
+=======
+	<string>4814</string>
+>>>>>>> 35467022ae5570180f0e087d81ba673b9bae5a0b
 =======
 	<string>4814</string>
 >>>>>>> 35467022ae5570180f0e087d81ba673b9bae5a0b

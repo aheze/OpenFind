@@ -20,7 +20,11 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 <<<<<<< HEAD:Find/Assets and Info/Info.plist
+<<<<<<< HEAD:Find/Assets and Info/Info.plist
 	<string>4816</string>
+=======
+	<string>4814</string>
+>>>>>>> 35467022ae5570180f0e087d81ba673b9bae5a0b:Find/Utilities/Info.plist
 =======
 	<string>4814</string>
 >>>>>>> 35467022ae5570180f0e087d81ba673b9bae5a0b:Find/Utilities/Info.plist
