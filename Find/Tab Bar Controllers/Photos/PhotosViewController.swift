@@ -27,7 +27,9 @@ class PhotosViewController: UIViewController {
     var allMonths = [Month]() /// all photos
     var monthsToDisplay = [Month]() /// shown photos, including filters
     var allPhotosToDisplay = [FindPhoto]() /// shown photos, including filters, but without grouping by month
-    var currentFilter = PhotoFilter.all
+    
+    var photoFilterState = PhotoFilterState()
+    
     var activityIndicator: UIActivityIndicatorView? /// show photo loading
     
     // MARK: Realm photo matching + loading
@@ -39,8 +41,8 @@ class PhotosViewController: UIViewController {
     var refreshing = false /// currently refreshing data, prevent select cell
     
     // MARK: Tips
-    var emptyDescriptionView: EmptyDescriptionView?
-    var startTutorial: ((PhotoFilter) -> Void)?
+//    var emptyDescriptionView: EmptyDescriptionView?
+    var startTutorial: ((PhotoTutorialType) -> Void)?
     var pressedSelectTip: (() -> Void)? /// step 3 of star
     var quickTourView: TutorialHeader?
     
@@ -97,7 +99,7 @@ class PhotosViewController: UIViewController {
     
     // MARK: Finding
     var hasChangedFromBefore = false /// whether photo deleted, cached, or something changed
-    var switchToFind: ((PhotoFilter, [FindPhoto], Bool, Bool) -> Void)? /// filter, photos to find from, is all photos, has changed from before
+    var switchToFind: ((PhotoFilterState, [FindPhoto], Bool, Bool) -> Void)? /// filter, photos to find from, is all photos, has changed from before
     var switchBack: (() -> Void)?
     @IBOutlet weak var shadeView: UIView!
     
@@ -122,7 +124,7 @@ class PhotosViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         /// Also sets the beginning frame
-        segmentedSlider.indicatorView.frame = segmentedSlider.getIndicatorViewFrame(for: segmentedSlider.currentFilter, withInset: true).1
+        segmentedSlider.indicatorView.frame = segmentedSlider.getIndicatorViewFrame(for: segmentedSlider.photoFilterState.currentFilter, withInset: true).1
     }
     
     override func viewDidLoad() {
@@ -178,7 +180,7 @@ class PhotosViewController: UIViewController {
                     self.allMonths = allMonths
                     self.monthsToDisplay = allMonths
                     self.allPhotosToDisplay = allPhotos
-                    self.sortPhotos(with: self.currentFilter)
+                    self.sortPhotos(with: self.photoFilterState)
                     self.applySnapshot(animatingDifferences: true)
                     self.refreshing = false
                 }

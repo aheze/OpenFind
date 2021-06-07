@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400px" height="400px" viewBox="0 0 400 400" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>LocalPhotos</title>
+    <g id="LocalPhotos" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.5">
+        <rect id="Rectangle-Copy-5" stroke="#005EDC" stroke-width="5" fill="#005EDC" x="210" y="210" width="162" height="162" rx="24"></rect>
+        <rect id="Rectangle-Copy-4" stroke="#00AEEF" stroke-width="5" fill="#00AEEF" x="28" y="210" width="162" height="162" rx="24"></rect>
+        <rect id="Rectangle-Copy-6" stroke="#6555FF" stroke-width="5" fill="#6555FF" x="28" y="28" width="162" height="162" rx="24"></rect>
+    </g>
+</svg>

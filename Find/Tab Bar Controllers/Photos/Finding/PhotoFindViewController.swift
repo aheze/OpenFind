@@ -21,7 +21,9 @@ class PhotoFindViewController: UIViewController {
     
     // MARK: Finding
     var matchToColors = [String: [HighlightColor]]()
-    var currentFilter = PhotoFilter.all
+    
+    var photoFilterState = PhotoFilterState()
+    
     var findingFromAllPhotos = false /// if finding from all photos in filter
     
     // MARK: Find from cache

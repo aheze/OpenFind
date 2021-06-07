@@ -27,7 +27,7 @@ extension PhotoFindViewController: UITextViewDelegate {
 }
 
 extension PhotoFindViewController {
-    func changePromptToStarting(startingFilter: PhotoFilter, howManyPhotos: Int, isAllPhotos: Bool, announce: Bool = true) {
+    func changePromptToStarting(startingFilterState: PhotoFilterState, howManyPhotos: Int, isAllPhotos: Bool, announce: Bool = true) {
         continueButtonVisible = false
          
         let findingFrom = NSLocalizedString("findingFrom", comment: "")
@@ -53,59 +53,56 @@ extension PhotoFindViewController {
         
         let filter: String
         let color: UIColor
-        switch startingFilter {
+//        switch startingFilter {
+//
+//        case .local:
+//            filter = "\(NSLocalizedString("lowercaseLocal", comment: ""))\(space)"
+//            color = UIColor(named: "100Blue")!
+//        case .screenshots:
+//            filter = "\(NSLocalizedString("lowercaseScreenshot", comment: ""))\(space)"
+//            color = UIColor(named: "100Purple")!
+//        case .all:
+//            filter = all
+//            color = UIColor(named: "TabIconPhotosMain")!
+//            if isAllPhotos {
+//                number = ""
+//            } else {
+//                let withinAllPhotos = NSLocalizedString("withinAllPhotos-Chinese", comment: "")
+//                if withinAllPhotos != "" { /// English is blank string
+//                    overriddenLastPart = "\(withinAllPhotos)\(howManyPhotos)\(unit)查找"
+//                } else {
+//                    number = "\(howManyPhotos) of "
+//                }
+//            }
+//        }
         
-        case .local:
-            filter = "\(NSLocalizedString("lowercaseLocal", comment: ""))\(space)"
-            color = UIColor(named: "100Blue")!
-        case .starred:
-            filter = "\(NSLocalizedString("lowercaseStarred", comment: ""))\(space)"
-            color = UIColor(named: "Gold")!
-        case .cached:
-            filter = "\(NSLocalizedString("lowercaseCached", comment: ""))\(space)"
-            color = UIColor(named: "100Blue")!
-        case .all:
-            filter = all
-            color = UIColor(named: "TabIconPhotosMain")!
-            if isAllPhotos {
-                number = ""
-            } else {
-                let withinAllPhotos = NSLocalizedString("withinAllPhotos-Chinese", comment: "")
-                if withinAllPhotos != "" { /// English is blank string
-                    overriddenLastPart = "\(withinAllPhotos)\(howManyPhotos)\(unit)查找"
-                } else {
-                    number = "\(howManyPhotos) of "
-                }
-            }
-        }
-        
-        let colorStyle = Style {
-            $0.color = color
-        }
+//        let colorStyle = Style {
+//            $0.color = color
+//        }
         
         var attributedText = AttributedString()
-        
-        if let overriddenLastPart = overriddenLastPart {
-            attributedText = findingFrom.set(styles: [boldStyle, grayStyle]) + filter.set(styles: [boldStyle, colorStyle]) + overriddenLastPart.set(styles: [boldStyle, grayStyle])
-            
-            promptView.accessibilityValue = findingFrom + filter + overriddenLastPart
-            
-            if announce {
-                let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
-                let summaryString = AccessibilityText(text: findingFrom + filter + overriddenLastPart, isRaised: false)
-                postAnnouncement([summaryTitle, summaryString])
-            }
-        } else {
-            attributedText = findingFrom.set(styles: [boldStyle, grayStyle]) + number.set(styles: [boldStyle, grayStyle]) + filter.set(styles: [boldStyle, colorStyle]) + photos.set(styles: [boldStyle, grayStyle])
-            
-            promptView.accessibilityValue = findingFrom + number + filter + photos
-            
-            if announce {
-                let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
-                let summaryString = AccessibilityText(text: findingFrom + number + filter + photos, isRaised: false)
-                postAnnouncement([summaryTitle, summaryString])
-            }
-        }
+//        
+//        if let overriddenLastPart = overriddenLastPart {
+//            attributedText = findingFrom.set(styles: [boldStyle, grayStyle]) + filter.set(styles: [boldStyle, colorStyle]) + overriddenLastPart.set(styles: [boldStyle, grayStyle])
+//            
+//            promptView.accessibilityValue = findingFrom + filter + overriddenLastPart
+//            
+//            if announce {
+//                let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+//                let summaryString = AccessibilityText(text: findingFrom + filter + overriddenLastPart, isRaised: false)
+//                postAnnouncement([summaryTitle, summaryString])
+//            }
+//        } else {
+//            attributedText = findingFrom.set(styles: [boldStyle, grayStyle]) + number.set(styles: [boldStyle, grayStyle]) + filter.set(styles: [boldStyle, colorStyle]) + photos.set(styles: [boldStyle, grayStyle])
+//            
+//            promptView.accessibilityValue = findingFrom + number + filter + photos
+//            
+//            if announce {
+//                let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+//                let summaryString = AccessibilityText(text: findingFrom + number + filter + photos, isRaised: false)
+//                postAnnouncement([summaryTitle, summaryString])
+//            }
+//        }
         
         promptTextView.attributedText = attributedText
     }
@@ -134,9 +131,9 @@ extension PhotoFindViewController {
         let resultsInCache = " \(results)\(inCachedPhotos) "
         var toFindFromPhotos = " \(toFindFromUncachedPhotos)"
         
-        if currentFilter == .cached {
-            toFindFromPhotos = toFindWithOCR
-        }
+//        if currentFilter == .cached {
+//            toFindFromPhotos = toFindWithOCR
+//        }
         
         let nextButtonAttachment = AttributedString(image: Image(named: "ContinueButton"), bounds: "0,-6,76,24")
         
@@ -161,25 +158,25 @@ extension PhotoFindViewController {
         
         var attributedText = "\(findingFromUncachedPhotos) (\(howMany)/\(findPhotos.count))...".set(style: textStyle)
         
-        if currentFilter == .cached {
-            attributedText = "\(findingFromPhotos) (\(howMany)/\(findPhotos.count))...".set(style: textStyle)
-            promptView.accessibilityValue = "\(findingFromPhotos) (\(howMany) out of \(findPhotos.count))..."
-            
-            let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
-            let summaryString = AccessibilityText(text: "\(findingFromPhotos) (\(howMany) out of \(findPhotos.count))...", isRaised: false)
-            postAnnouncement([summaryTitle, summaryString])
-        } else {
-            promptView.accessibilityValue = "\(findingFromUncachedPhotos) (\(howMany) out of \(findPhotos.count))..."
-            
-            if howMany < 2 {
-                let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
-                let summaryString = AccessibilityText(text: "\(findingFromUncachedPhotos) (\(howMany) out of \(findPhotos.count))...", isRaised: false)
-                postAnnouncement([summaryTitle, summaryString])
-            } else {
-                let summaryString = AccessibilityText(text: "\(howMany) out of \(findPhotos.count)", isRaised: false)
-                postAnnouncement([summaryString])
-            }
-        }
+//        if currentFilter == .cached {
+//            attributedText = "\(findingFromPhotos) (\(howMany)/\(findPhotos.count))...".set(style: textStyle)
+//            promptView.accessibilityValue = "\(findingFromPhotos) (\(howMany) out of \(findPhotos.count))..."
+//
+//            let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+//            let summaryString = AccessibilityText(text: "\(findingFromPhotos) (\(howMany) out of \(findPhotos.count))...", isRaised: false)
+//            postAnnouncement([summaryTitle, summaryString])
+//        } else {
+//            promptView.accessibilityValue = "\(findingFromUncachedPhotos) (\(howMany) out of \(findPhotos.count))..."
+//
+//            if howMany < 2 {
+//                let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+//                let summaryString = AccessibilityText(text: "\(findingFromUncachedPhotos) (\(howMany) out of \(findPhotos.count))...", isRaised: false)
+//                postAnnouncement([summaryTitle, summaryString])
+//            } else {
+//                let summaryString = AccessibilityText(text: "\(howMany) out of \(findPhotos.count)", isRaised: false)
+//                postAnnouncement([summaryString])
+//            }
+//        }
         
         promptTextView.attributedText = attributedText
     }

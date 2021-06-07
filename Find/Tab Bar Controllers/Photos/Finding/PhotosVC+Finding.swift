@@ -17,7 +17,7 @@ extension PhotosViewController {
     func findPressed() {
         print("Has changed from before? \(hasChangedFromBefore)")
         if indexPathsSelected.isEmpty {
-            switchToFind?(currentFilter, allPhotosToDisplay, true, hasChangedFromBefore)
+            switchToFind?(photoFilterState, allPhotosToDisplay, true, hasChangedFromBefore)
         } else {
             var findPhotos = [FindPhoto]()
             for indexPath in indexPathsSelected {
@@ -25,7 +25,7 @@ extension PhotosViewController {
                     findPhotos.append(findPhoto)
                 }
             }
-            switchToFind?(currentFilter, findPhotos, false, hasChangedFromBefore)
+            switchToFind?(photoFilterState, findPhotos, false, hasChangedFromBefore)
         }
         
         if selectButtonSelected {

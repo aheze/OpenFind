@@ -24,7 +24,7 @@ extension PhotosViewController: ReturnCachedPhotos {
         }
         reloadPaths(changedPaths: paths)
         
-        sortPhotos(with: currentFilter)
+        sortPhotos(with: photoFilterState)
         applySnapshot()
         
     }
@@ -117,7 +117,7 @@ extension PhotosViewController {
                     }
                 }
                 self.reloadPaths(changedPaths: changedIndexPaths)
-                self.sortPhotos(with: self.currentFilter)
+                self.sortPhotos(with: self.photoFilterState)
                 self.applySnapshot()
             }))
             alert.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))

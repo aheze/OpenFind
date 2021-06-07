@@ -22,7 +22,8 @@ class PhotosWrapperController: UIViewController {
     var photosShadowView: UIView?
     var findShadowView: UIView?
     
-    var currentFilter = PhotoFilter.all
+    var photoFilterState = PhotoFilterState()
+//    var currentFilter = PhotoFilter.all
     var photosToFind = [FindPhoto]()
     var findingFromAllPhotos = false
     var hasChangedFromBefore = false
@@ -51,10 +52,10 @@ class PhotosWrapperController: UIViewController {
         super.viewDidLoad()
         addChild(navController, in: view)
         
-        navController.viewController.switchToFind = { [weak self] (currentFilter, photosToFindFrom, isAllPhotos, hasChangedFromBefore)  in
+        navController.viewController.switchToFind = { [weak self] (photoFilterState, photosToFindFrom, isAllPhotos, hasChangedFromBefore)  in
             guard let self = self else { return }
             print("switching, all? \(isAllPhotos)")
-            self.currentFilter = currentFilter
+            self.photoFilterState = photoFilterState
             self.photosToFind = photosToFindFrom
             self.findingFromAllPhotos = isAllPhotos
             self.hasChangedFromBefore = hasChangedFromBefore
@@ -111,7 +112,7 @@ class PhotosWrapperController: UIViewController {
             self.findShadowView?.alpha = 1
         }
        
-        photoFindViewController.populatePhotos(findPhotos: photosToFind, currentFilter: currentFilter, findingFromAllPhotos: findingFromAllPhotos, changedFromBefore: hasChangedFromBefore)
+        photoFindViewController.populatePhotos(findPhotos: photosToFind, photoFilterState: photoFilterState, findingFromAllPhotos: findingFromAllPhotos, changedFromBefore: hasChangedFromBefore)
         
         pressedFindBefore = true
         

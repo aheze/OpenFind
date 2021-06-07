@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="k1m-0F-sKk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="k1m-0F-sKk">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -1471,7 +1471,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HelpCellID" id="yFP-R7-l4t" customClass="HelpCell" customModule="Find" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="428" height="56.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="24.333333969116211" width="428" height="56.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yFP-R7-l4t" id="r6R-Iu-HlK">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="56.333332061767578"/>
@@ -1774,7 +1774,7 @@
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GeneralTableviewCell" id="zEc-Iy-J2V" customClass="GeneralTableCell" customModule="Find" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="396" height="27.333333969116211"/>
+                                                        <rect key="frame" x="0.0" y="24.333333969116211" width="396" height="27.333333969116211"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zEc-Iy-J2V" id="NSc-Ut-5bE">
                                                             <rect key="frame" x="0.0" y="0.0" width="396" height="27.333333969116211"/>
@@ -2382,7 +2382,7 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HFindCell" rowHeight="97.5" id="aMT-Hz-Iax" customClass="HistoryFindCell" customModule="Find" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="199" width="428" height="97.5"/>
+                                        <rect key="frame" x="0.0" y="195.33333396911621" width="428" height="97.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aMT-Hz-Iax" id="X2A-rq-8jB">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="97.5"/>
@@ -3184,18 +3184,18 @@
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jB3-ed-Bdr">
-                                <rect key="frame" x="16" y="16" width="88.666666666666671" height="39"/>
+                                <rect key="frame" x="16" y="16" width="86.333333333333329" height="39"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tUv-4R-c5U">
-                                        <rect key="frame" x="0.0" y="0.0" width="88.666666666666671" height="39"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="86.333333333333329" height="39"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="W9A-sZ-kHI">
-                                            <rect key="frame" x="0.0" y="0.0" width="88.666666666666671" height="39"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="86" height="39"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <blurEffect style="prominent"/>
                                     </visualEffectView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tkG-FL-Vjn">
-                                        <rect key="frame" x="15.999999999999996" y="8" width="56.666666666666657" height="23"/>
+                                        <rect key="frame" x="16.000000000000004" y="8" width="54.333333333333343" height="23"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <color key="tintColor" name="TabIconPhotosMain"/>
                                         <state key="normal" title="Back" image="chevron.backward" catalog="system">

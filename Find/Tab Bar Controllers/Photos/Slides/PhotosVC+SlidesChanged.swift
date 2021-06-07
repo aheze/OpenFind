@@ -19,7 +19,7 @@ extension PhotosViewController {
             }
         }
         
-        sortPhotos(with: currentFilter)
+        sortPhotos(with: photoFilterState)
         applySnapshot(animatingDifferences: false)
     }
 }

@@ -21,7 +21,7 @@ class ResultPhoto: NSObject {
 }
 
 extension PhotoFindViewController {
-    func populatePhotos(findPhotos: [FindPhoto], currentFilter: PhotoFilter, findingFromAllPhotos: Bool, changedFromBefore: Bool) {
+    func populatePhotos(findPhotos: [FindPhoto], photoFilterState: PhotoFilterState, findingFromAllPhotos: Bool, changedFromBefore: Bool) {
 
         let originalFindPhotoIdentifiers = self.findPhotos.map { $0.asset.localIdentifier }
         let newFindPhotoIdentifiers = findPhotos.map { $0.asset.localIdentifier }
@@ -29,11 +29,11 @@ extension PhotoFindViewController {
         print(originalFindPhotoIdentifiers.containsSameElements(as: newFindPhotoIdentifiers))
         
         self.findPhotos = findPhotos
-        self.currentFilter = currentFilter
+        self.photoFilterState = photoFilterState
         self.findingFromAllPhotos = findingFromAllPhotos
         
         if changedFromBefore || !originalFindPhotoIdentifiers.containsSameElements(as: newFindPhotoIdentifiers) {
-            changePromptToStarting(startingFilter: currentFilter, howManyPhotos: findPhotos.count, isAllPhotos: findingFromAllPhotos, announce: shouldAnnounceStatus)
+            changePromptToStarting(startingFilterState: photoFilterState, howManyPhotos: findPhotos.count, isAllPhotos: findingFromAllPhotos, announce: shouldAnnounceStatus)
             currentFastFindProcess = nil
             resultPhotos.removeAll()
             tableView.reloadData()

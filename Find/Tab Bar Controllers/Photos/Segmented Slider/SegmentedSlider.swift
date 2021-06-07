@@ -7,10 +7,15 @@
 
 import UIKit
 
-enum PhotoFilter {
-    case local
+enum PhotoTutorialType {
     case starred
     case cached
+    case local
+    case screenshots
+}
+enum PhotoFilter {
+    case local
+    case screenshots
     case all
 }
 enum TouchStatus {
@@ -18,11 +23,18 @@ enum TouchStatus {
     case startedInCurrentFilter /// touched down in current label
     case startedOutsideCurrentFilter /// touched down outside of current label
 }
+
+struct PhotoFilterState {
+    var starSelected = false
+    var cacheSelected = false
+    var currentFilter = PhotoFilter.all
+}
 class SegmentedSlider: UIView {
     
-    var pressedFilter: ((PhotoFilter) -> Void)?
+    var pressedFilter: ((PhotoFilterState) -> Void)?
     
-    var currentFilter = PhotoFilter.all
+    var photoFilterState = PhotoFilterState()
+        
     var touchStatus = TouchStatus.notStarted
     
     var currentHoveredFilter: PhotoFilter? /// filter selected via hovering
@@ -30,15 +42,37 @@ class SegmentedSlider: UIView {
     
     @IBOutlet var contentView: UIView!
     
+    /// container for Local Screenshots Cached labels
+    @IBOutlet var slidersView: UIView!
+    
+    /// contains Star + Cache + Container View
+    @IBOutlet var baseView: UIView!
+    @IBOutlet weak var containerView: UIView! /// for baseView
+    
+    @IBOutlet weak var starCacheContainerView: UIView!
+    @IBOutlet weak var starImageView: UIImageView!
+    @IBOutlet weak var cacheImageView: UIImageView!
+    
+    @IBOutlet weak var starButton: CustomButton!
+    @IBAction func starButtonPressed(_ sender: Any) {
+        print("star!!")
+        photoFilterState.starSelected.toggle()
+        pressedFilter?(photoFilterState)
+    }
+    
+    @IBOutlet weak var cacheButton: CustomButton!
+    @IBAction func cacheButtonPressed(_ sender: Any) {
+        print("cache!!")
+        photoFilterState.cacheSelected.toggle()
+        pressedFilter?(photoFilterState)
+    }
     
     @IBOutlet weak var sliderContainerView: UIView! /// contains slider and labels
-    @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var indicatorView: UIView!
     
     @IBOutlet weak var localLabel: PaddedLabel!
-    @IBOutlet weak var starredLabel: PaddedLabel!
-    @IBOutlet weak var cachedLabel: PaddedLabel!
+    @IBOutlet weak var screenshotsLabel: PaddedLabel!
     @IBOutlet weak var allLabel: PaddedLabel!
     
     // MARK: Photos selection
@@ -52,10 +86,10 @@ class SegmentedSlider: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         if allowingInteraction {
-            if let touchPoint = touches.first?.location(in: contentView) {
+            if let touchPoint = touches.first?.location(in: slidersView) {
                 if let (hoveredLabel, hoveredFilter) = getHoveredLabel(touchPoint: touchPoint) as? (UIView, PhotoFilter) {
                     
-                    if hoveredFilter == currentFilter { /// dragging indicator
+                    if hoveredFilter == photoFilterState.currentFilter { /// dragging indicator
                         touchStatus = .startedInCurrentFilter
                         animateScale(shrink: true)
                     } else { /// pressed down on different label
@@ -72,7 +106,7 @@ class SegmentedSlider: UIView {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
         if allowingInteraction {
-            if let touchPoint = touches.first?.location(in: contentView) {
+            if let touchPoint = touches.first?.location(in: slidersView) {
                 if let (hoveredLabel, hoveredFilter) = getHoveredLabel(touchPoint: touchPoint) as? (UIView, PhotoFilter) {
                     
                     if hoveredFilter != currentHoveredFilter { /// dragged to different label
@@ -96,17 +130,16 @@ class SegmentedSlider: UIView {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         if allowingInteraction {
-            if let touchPoint = touches.first?.location(in: contentView) {
+            if let touchPoint = touches.first?.location(in: slidersView) {
                 if let (_, hoveredFilter) = getHoveredLabel(touchPoint: touchPoint) as? (UIView, PhotoFilter) {
-                    if currentFilter != hoveredFilter {
+                    if photoFilterState.currentFilter != hoveredFilter {
                         animateChangeSelection(filter: hoveredFilter)
-                        currentFilter = hoveredFilter
-                        pressedFilter?(hoveredFilter)
+                        photoFilterState.currentFilter = hoveredFilter
+                        pressedFilter?(photoFilterState)
                     }
                 }
                 animateHighlight(view: localLabel, highlight: false)
-                animateHighlight(view: starredLabel, highlight: false)
-                animateHighlight(view: cachedLabel, highlight: false)
+                animateHighlight(view: screenshotsLabel, highlight: false)
                 animateHighlight(view: allLabel, highlight: false)
                 animateScale(shrink: false)
             }
@@ -116,10 +149,9 @@ class SegmentedSlider: UIView {
     func cancelTouch(cancel: Bool) {
         if cancel {
             allowingInteraction = false
-            animateChangeSelection(filter: currentFilter)
+            animateChangeSelection(filter: photoFilterState.currentFilter)
             animateHighlight(view: localLabel, highlight: false)
-            animateHighlight(view: starredLabel, highlight: false)
-            animateHighlight(view: cachedLabel, highlight: false)
+            animateHighlight(view: screenshotsLabel, highlight: false)
             animateHighlight(view: allLabel, highlight: false)
             animateScale(shrink: false)
         } else {
@@ -131,7 +163,7 @@ class SegmentedSlider: UIView {
         super.init(frame: frame)
         commonInit()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         commonInit()
@@ -139,14 +171,45 @@ class SegmentedSlider: UIView {
     
     private func commonInit() {
         Bundle.main.loadNibNamed("SegmentedSlider", owner: self, options: nil)
+        
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        blurView.clipsToBounds = true
+        contentView.addSubview(baseView)
+        baseView.frame = self.bounds
+        baseView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        blurView.layer.borderWidth = 0.1
-        blurView.layer.borderColor = UIColor.secondaryLabel.cgColor
+        containerView.addSubview(slidersView)
+        slidersView.frame = containerView.bounds
+        slidersView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        self.clipsToBounds = true
+        self.layer.borderWidth = 0.1
+        self.layer.borderColor = UIColor.secondaryLabel.cgColor
+        
+        starButton.touched = { [weak self] down in
+            if down {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.starImageView.alpha = 0.5
+                })
+            } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.starImageView.alpha = 1
+                })
+            }
+        }
+        cacheButton.touched = { [weak self] down in
+            if down {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.cacheImageView.alpha = 0.5
+                })
+            } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.cacheImageView.alpha = 1
+                })
+            }
+        }
         
         setupAccessibility()
     }
@@ -162,13 +225,11 @@ class SegmentedSlider: UIView {
     override var accessibilityValue: String? {
         get {
             if showingPhotosSelection == false {
-                switch currentFilter {
+                switch photoFilterState.currentFilter {
                 case .local:
                     return "Local"
-                case .starred:
-                    return "Starred"
-                case .cached:
-                    return "Cached"
+                case .screenshots:
+                    return "Screenshots"
                 case .all:
                     return "All"
                 }
@@ -183,39 +244,34 @@ class SegmentedSlider: UIView {
     }
     
     override func accessibilityIncrement() {
-        switch currentFilter {
-        
+        switch photoFilterState.currentFilter {
         case .local:
-            currentFilter = .starred
-        case .starred:
-            currentFilter = .cached
-        case .cached:
-            currentFilter = .all
+            photoFilterState.currentFilter = .screenshots
+        case .screenshots:
+            photoFilterState.currentFilter = .all
         case .all:
             break
         }
-        animateChangeSelection(filter: currentFilter)
-        pressedFilter?(currentFilter)
+        animateChangeSelection(filter: photoFilterState.currentFilter)
+        pressedFilter?(photoFilterState)
     }
     
     override func accessibilityDecrement() {
-        switch currentFilter {
+        switch photoFilterState.currentFilter {
         case .local:
             break
-        case .starred:
-            currentFilter = .local
-        case .cached:
-            currentFilter = .starred
+        case .screenshots:
+            photoFilterState.currentFilter = .local
         case .all:
-            currentFilter = .cached
+            photoFilterState.currentFilter = .screenshots
         }
-        animateChangeSelection(filter: currentFilter)
-        pressedFilter?(currentFilter)
+        animateChangeSelection(filter: photoFilterState.currentFilter)
+        pressedFilter?(photoFilterState)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        blurView.layer.cornerRadius = blurView.bounds.height / 2
+        self.layer.cornerRadius = self.bounds.height / 2
         indicatorView.layer.cornerRadius = indicatorView.bounds.height / 2
     }
     
@@ -254,8 +310,7 @@ class SegmentedSlider: UIView {
     
     func getHoveredLabel(touchPoint: CGPoint) -> (UIView?, PhotoFilter?) {
         let (localLabel, localFrame) = getIndicatorViewFrame(for: .local, withInset: false)
-        let (starredLabel, starredFrame) = getIndicatorViewFrame(for: .starred, withInset: false)
-        let (cachedLabel, cachedFrame) = getIndicatorViewFrame(for: .cached, withInset: false)
+        let (screenshotsLabel, screenshotsFrame) = getIndicatorViewFrame(for: .screenshots, withInset: false)
         let (allLabel, allFrame) = getIndicatorViewFrame(for: .all, withInset: false)
         
         var hoveredLabel: UIView?
@@ -267,12 +322,9 @@ class SegmentedSlider: UIView {
         case localFrame.contains(anyYTouchPoint):
             hoveredLabel = localLabel
             hoveredFilter = .local
-        case starredFrame.contains(anyYTouchPoint):
-            hoveredLabel = starredLabel
-            hoveredFilter = .starred
-        case cachedFrame.contains(anyYTouchPoint):
-            hoveredLabel = cachedLabel
-            hoveredFilter = .cached
+        case screenshotsFrame.contains(anyYTouchPoint):
+            hoveredLabel = screenshotsLabel
+            hoveredFilter = .screenshots
         case allFrame.contains(anyYTouchPoint):
             hoveredLabel = allLabel
             hoveredFilter = .all
@@ -290,12 +342,9 @@ class SegmentedSlider: UIView {
         case .local:
             labelFrame = localLabel.frame
             label = localLabel
-        case .starred:
-            labelFrame = starredLabel.frame
-            label = starredLabel
-        case .cached:
-            labelFrame = cachedLabel.frame
-            label = cachedLabel
+        case .screenshots:
+            labelFrame = screenshotsLabel.frame
+            label = screenshotsLabel
         case .all:
             labelFrame = allLabel.frame
             label = allLabel

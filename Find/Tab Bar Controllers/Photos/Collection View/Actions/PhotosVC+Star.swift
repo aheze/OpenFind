@@ -81,7 +81,7 @@ extension PhotosViewController {
         }
         
         reloadPaths(changedPaths: changedIndexPaths)
-        sortPhotos(with: currentFilter)
+        sortPhotos(with: photoFilterState)
         applySnapshot()
         doneWithSelect()
         

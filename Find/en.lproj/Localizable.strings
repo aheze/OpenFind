@@ -350,6 +350,8 @@
 /* No comment provided by engineer. */
 "lowercasePhotos" = "photos";
 
+"lowercaseScreenshots" = "screenshots";
+
 /* No comment provided by engineer. */
 "lowercaseStarred" = "starred";
 
@@ -528,6 +530,8 @@
 
 /* No comment provided by engineer. */
 "saveText" = "Save";
+
+"screenshots" = "Screenshots";
 
 /* EditList def=Icon */
 "secondVCTitle" = "Icon";
@@ -751,6 +755,9 @@
 
 /* No comment provided by engineer. */
 "yourPhotosHaveBeenMoved" = "Your photos have been moved to the Photos app.";
+
+/* No comment provided by engineer. */
+"lowercaseScreenshot" = "";
 
 /* No comment provided by engineer. */
 "unitZhang" = "";

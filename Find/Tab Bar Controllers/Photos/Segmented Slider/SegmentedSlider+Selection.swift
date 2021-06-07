@@ -13,9 +13,10 @@ extension SegmentedSlider {
         cancelTouch(cancel: show)
         showingPhotosSelection = show
         if show {
-            contentView.isUserInteractionEnabled = false
-            stackView.isHidden = true
+            baseView.isUserInteractionEnabled = false
+            baseView.isHidden = true
             indicatorView.isHidden = true
+            
             contentView.addSubview(numberOfSelectedView)
             numberOfSelectedView.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
@@ -24,9 +25,10 @@ extension SegmentedSlider {
             self.accessibilityLabel = "Select Photos"
             
         } else {
-            contentView.isUserInteractionEnabled = true
-            stackView.isHidden = false
+            baseView.isUserInteractionEnabled = true
+            baseView.isHidden = false
             indicatorView.isHidden = false
+            
             numberOfSelectedView.removeFromSuperview()
             
             self.accessibilityLabel = "Filters"

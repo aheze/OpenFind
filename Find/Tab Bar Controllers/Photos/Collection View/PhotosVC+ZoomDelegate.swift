@@ -34,7 +34,7 @@ extension PhotosViewController: ZoomAnimatorDelegate {
                             self.allMonths = allMonths
                             self.monthsToDisplay = allMonths
                             self.allPhotosToDisplay = allPhotos
-                            self.sortPhotos(with: self.currentFilter)
+                            self.sortPhotos(with: self.photoFilterState)
                             self.applySnapshot(animatingDifferences: true)
                             self.refreshing = false
                         }

@@ -103,13 +103,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             viewController.startTutorial = { [weak self] filter in
                 guard let self = self else { return }
                 switch filter {
-                case .local:
-                    self.startLocalTutorial()
                 case .starred:
                     self.startStarTutorial()
                 case .cached:
                     self.startCacheTutorial()
-                case .all:
+                case .local:
+                    self.startLocalTutorial()
+                case .screenshots:
                     break
                 }
             }

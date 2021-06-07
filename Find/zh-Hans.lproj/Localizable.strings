@@ -347,6 +347,8 @@
 /* No comment provided by engineer. */
 "lowercasePhotos" = "照片里";
 
+"lowercaseScreenshots" = "截图";
+
 /* No comment provided by engineer. */
 "lowercaseStarred" = "星标";
 
@@ -758,3 +760,8 @@
 
 /* No comment provided by engineer. */
 "blankSpace" = "";
+
+/* No comment provided by engineer. */
+"lowercaseScreenshot" = "";
+
+"screenshots" = "";

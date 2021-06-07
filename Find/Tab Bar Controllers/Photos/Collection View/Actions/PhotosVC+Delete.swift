@@ -65,7 +65,7 @@ extension PhotosViewController {
                 }
                 
                 DispatchQueue.main.async {
-                    self.sortPhotos(with: self.currentFilter)
+                    self.sortPhotos(with: self.photoFilterState)
                     self.applySnapshot()
                 }
             }
@@ -137,7 +137,7 @@ extension PhotosViewController {
                 }
                 
                 DispatchQueue.main.async {
-                    self.sortPhotos(with: self.currentFilter)
+                    self.sortPhotos(with: self.photoFilterState)
                     self.applySnapshot()
                 }
             }
