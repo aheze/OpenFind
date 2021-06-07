@@ -782,12 +782,7 @@
 				3C5B156F25A8CD3D00BB8988 /* Loading+Sorting */,
 				3C3D47D825A40A41002B8BBF /* Permissions */,
 				3CB6842F25A0085E00AE0AD6 /* Migration */,
-				3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */,
-				3C570E81260CF26600F5AA4D /* SegmentedSlider+Accessibility.swift */,
-				3C8F116A25AD0A160091402B /* SegmentedSlider+Selection.swift */,
-				3CA63F3E25C7BAA6001C295E /* SegmentedSlider.xib */,
-				3CB6843425A013D800AE0AD6 /* ImageCell.swift */,
-				3CB6843725A0140200AE0AD6 /* ImageCell.xib */,
+				3CAFC5D1266DBD020093501A /* Segmented Slider */,
 				3C56C59C25A9562F0006A667 /* Slides */,
 				3CDA84F325B250AF00726F91 /* Finding */,
 				3C6DA94125BDF14D00B3CE5B /* Model */,
@@ -971,6 +966,7 @@
 			children = (
 				3C634C6E25C0F3050064CBF8 /* Empty */,
 				3C71F25C25AF6B7600D22212 /* Actions */,
+				3CAFC5D2266DBD0D0093501A /* Image Cell */,
 				3C5B157225A8CD9C00BB8988 /* PhotosVC+Selection.swift */,
 				3C56C59825A943F40006A667 /* PhotosVC+ZoomDelegate.swift */,
 				3CFF312B25AA6F8C00D3C56D /* PhotosVC+CollectionCoordinates.swift */,
@@ -1338,6 +1334,26 @@
 				3CAC4DA425BF52CE00CC7948 /* MorphingText.swift */,
 			);
 			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		3CAFC5D1266DBD020093501A /* Segmented Slider */ = {
+			isa = PBXGroup;
+			children = (
+				3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */,
+				3C570E81260CF26600F5AA4D /* SegmentedSlider+Accessibility.swift */,
+				3C8F116A25AD0A160091402B /* SegmentedSlider+Selection.swift */,
+				3CA63F3E25C7BAA6001C295E /* SegmentedSlider.xib */,
+			);
+			path = "Segmented Slider";
+			sourceTree = "<group>";
+		};
+		3CAFC5D2266DBD0D0093501A /* Image Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3CB6843425A013D800AE0AD6 /* ImageCell.swift */,
+				3CB6843725A0140200AE0AD6 /* ImageCell.xib */,
+			);
+			path = "Image Cell";
 			sourceTree = "<group>";
 		};
 		3CB6842F25A0085E00AE0AD6 /* Migration */ = {
