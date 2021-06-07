@@ -72,7 +72,8 @@ class CachingFinder {
                                     self.handleFastDetectedText(request: request, error: error, photo: findPhoto, currentID: savedID)
                                 }
                                 request.recognitionLevel = .accurate
-                                request.recognitionLanguages = ["en_GB"]
+                                request.recognitionLanguages = Defaults.recognitionLanguages
+                                
                                 
                                 if !customWords.isEmpty {
                                     request.customWords = customWords

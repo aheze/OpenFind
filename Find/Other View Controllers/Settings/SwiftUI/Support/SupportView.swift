@@ -167,7 +167,7 @@ struct FeedbackView: View {
                     }
                     .padding(EdgeInsets(top: 6, leading: 14, bottom: 6, trailing: 6))
                     .background(
-                        LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9607843161, green: 0.8898058385, blue: 0.001397311632, alpha: 1).withAlphaComponent(0.5)), .clear]), startPoint: .trailing, endPoint: .leading)
+                        LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 0.8408149531, blue: 0.001397311632, alpha: 1).withAlphaComponent(0.5)), .clear]), startPoint: .trailing, endPoint: .leading)
                     )
                 }
                 .accessibility(hint: Text("Open the App Store to rate Find. Thanks!"))

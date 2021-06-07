@@ -11,7 +11,8 @@ import SwiftUI
 struct ContactView: View {
     var body: some View {
         ZStack {
-            Color(#colorLiteral(red: 0.1326085031, green: 0.1326085031, blue: 0.1326085031, alpha: 1)).edgesIgnoringSafeArea(.all)
+            Color(.black).brightness(0.1).edgesIgnoringSafeArea(.all)
+            
             ScrollView {
                 VStack {
                     Text("gotQuestionsContact")

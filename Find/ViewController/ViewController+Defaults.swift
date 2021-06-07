@@ -28,6 +28,19 @@ extension ViewController {
             self.tabBarView.cameraIcon.updateStyle()
             self.camera.cameraIcon.updateStyle()
         }
+        
+        do {
+            if let recognitionLanguagesData = UserDefaults.standard.data(forKey: "recognitionLanguages") {
+                let recognitionLanguages = try JSONDecoder().decode([OrderedLanguage].self, from: recognitionLanguagesData)
+                
+                let sorted = recognitionLanguages.sorted { ($0.priority ?? 0) < ($1.priority ?? 0) }
+                let strings = sorted.map { $0.language.getName().1 }
+                Defaults.recognitionLanguages = strings
+                print("strings: \(strings)")
+            }
+        } catch {
+            print("Error decoding: \(error)")
+        }
     }
     
     /// prevent swiping, then reset to defaults

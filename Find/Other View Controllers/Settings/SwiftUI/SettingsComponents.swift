@@ -21,6 +21,7 @@ struct VerbatimLabel: View {
         Text(text)
             .foregroundColor(.white)
             .font(Font(UIFont.systemFont(ofSize: 19, weight: .regular)))
+            .lineLimit(1)
     }
 }
 /// Header for each section

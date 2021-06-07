@@ -38,8 +38,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             ConstantVars.tabHeight = Constants.iPhone8TabHeight
         }
         
-        UserDefaults.standard.register(defaults: ["swipeToNavigateEnabled": true])
-        UserDefaults.standard.register(defaults: ["shutterStyle": 1])
+        UserDefaults.standard.register(
+            defaults: [
+                "swipeToNavigateEnabled": true,
+                "shutterStyle": 1
+            ]
+        )
+        if let encoded = try? JSONEncoder().encode([OrderedLanguage(language: .english, priority: 0)]) {
+            UserDefaults.standard.register(defaults: ["recognitionLanguages": encoded])
+        }
         
     }
 

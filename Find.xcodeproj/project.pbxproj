@@ -1188,7 +1188,6 @@
 			children = (
 				3C6EE6A925A2AB350078462A /* SettingsComponents.swift */,
 				3C6EE6AB25A2AB350078462A /* SettingsView.swift */,
-				3C4B6D7225B23460001F501A /* NavigationViewModifier.swift */,
 				3C6EE6A825A2AB350078462A /* GeneralView.swift */,
 				3CB2CE09266D421200D22AAE /* LanguagesView.swift */,
 				3C6EE6AE25A2AB350078462A /* CameraSettingsView.swift */,
@@ -1196,6 +1195,7 @@
 				3C6EE6AF25A2AB350078462A /* OtherView.swift */,
 				3C5DFFA425D8A9E200250D34 /* ShareView.swift */,
 				3C6EE6AC25A2AB350078462A /* CreditsView.swift */,
+				3C4B6D7225B23460001F501A /* NavigationViewModifier.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -2523,6 +2523,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_ACTIVITY_MODE = "";
+				"DEBUG_ACTIVITY_MODE[sdk=iphonesimulator*]" = disable;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2586,6 +2588,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_ACTIVITY_MODE = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

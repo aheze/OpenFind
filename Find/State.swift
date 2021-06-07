@@ -88,6 +88,7 @@ struct Defaults {
     static var shutterStyle = UserDefaults.standard.integer(forKey: "shutterStyle")
     static var hapticFeedbackLevel = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
     static var swipeToNavigateEnabled = UserDefaults.standard.bool(forKey: "swipeToNavigateEnabled")
+    static var recognitionLanguages = ["en_US"]
 }
 
 

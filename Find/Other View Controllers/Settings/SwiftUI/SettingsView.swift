@@ -126,8 +126,7 @@ struct SettingsView: View {
     
     var body: some View {
         ZStack {
-            VisualEffectView(effect: UIBlurEffect(style: .systemThickMaterialDark))
-                .edgesIgnoringSafeArea(.all)
+            Color(.black).brightness(0.1).edgesIgnoringSafeArea(.all)
                 .zIndex(0)
             
             NavigationView {

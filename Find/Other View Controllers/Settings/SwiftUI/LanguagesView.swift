@@ -38,6 +38,56 @@ enum Language: Int, CaseIterable, Codable {
             return ("Chinese (Traditional)", "zh-Hant")
         }
     }
+    
+    func versionNeeded() -> Int {
+        switch self {
+        case .english:
+            return 13
+        case .french:
+            return 14
+        case .italian:
+            return 14
+        case .german:
+            return 14
+        case .spanish:
+            return 14
+        case .portuguese:
+            return 14
+        case .chineseSim:
+            return 14
+        case .chineseTra:
+            return 14
+        }
+    }
+    
+    func requiresAccurateMode() -> Bool {
+        switch self {
+        case .english:
+            return false
+        case .french:
+            return false
+        case .italian:
+            return false
+        case .german:
+            return false
+        case .spanish:
+            return false
+        case .portuguese:
+            return false
+        case .chineseSim:
+            return true
+        case .chineseTra:
+            return true
+        }
+    }
+}
+
+func deviceVersion() -> Int {
+    if #available(iOS 14, *) {
+        return 14
+    } else {
+        return 13
+    }
 }
 
 struct OrderedLanguage: Codable {
@@ -89,14 +139,14 @@ struct LanguagesView: View {
     
     var body: some View {
         ZStack {
-            Color(.black).brightness(0.1)
+            Color(.black).brightness(0.1).edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .leading) {
-                Text("Languages for the text recognition engine, sorted by priority.")
-                    .padding(.horizontal, 20)
-                    .padding(.top, 10)
-                
                 List {
+                    Text("Languages for the text recognition engine, sorted by priority. For best results, select up to 2.")
+                        .padding(.top, 10)
+                        .listRowBackground(Color(.black).brightness(0.1))
+                    
                     ForEach(languageRows) { languageRow in
                         if let headerType = languageRow.headerType {
                             if #available(iOS 14.0, *) {
@@ -116,9 +166,69 @@ struct LanguagesView: View {
                                     .moveDisabled(true)
                             }
                         } else {
-                            Text(languageRow.orderedLanguage?.language.getName().0 ?? "Language")
+                            
+                            if let language = languageRow.orderedLanguage?.language {
+                                
+                                let versionUpdateNeeded = language.versionNeeded() > deviceVersion()
+                                let requiresAccurate = language.requiresAccurateMode()
+                                
+                                VStack(spacing: 8) {
+                                    HStack {
+                                        Text(language.getName().0)
+                                            .opacity(versionUpdateNeeded ? 0.5 : 1)
+                                        
+                                        Spacer()
+                                        
+                                        if requiresAccurate {
+                                            Button(action: {
+                                                SwiftEntryKitTemplates().displaySEK(
+                                                    message: "Only works when Cached",
+                                                    backgroundColor: #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1),
+                                                    textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+                                                    location: .top,
+                                                    duration: CGFloat(2)
+                                                )
+                                            }) {
+                                                Image(systemName: "exclamationmark")
+                                                    .font(.system(.subheadline))
+                                                    .frame(width: 24, height: 24)
+                                                    .background(Color.green.brightness(-0.2).cornerRadius(12))
+                                            }
+                                            .buttonStyle(PlainButtonStyle())
+                                            .padding(.trailing, 10)
+                                            
+                                        }
+                                        
+                                        if versionUpdateNeeded {
+                                            Button(action: {
+                                                SwiftEntryKitTemplates().displaySEK(
+                                                    message: "Requires software update to iOS \(language.versionNeeded())+",
+                                                    backgroundColor: #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1),
+                                                    textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+                                                    location: .top,
+                                                    duration: CGFloat(2)
+                                                )
+                                            }) {
+                                                Text("iOS \(language.versionNeeded())+")
+                                                    .font(.system(.subheadline))
+                                                    .padding(EdgeInsets(top: 2, leading: 10, bottom: 2, trailing: 8))
+                                                    .frame(height: 24)
+                                                    .background(
+                                                        Color.blue.cornerRadius(12)
+                                                    )
+                                            }
+                                            .buttonStyle(PlainButtonStyle())
+                                        }
+                                    }
+                                }
                                 .listRowBackground(Color(.black))
-                                .listRowInsets(EdgeInsets(top: 0, leading: -24, bottom: 0, trailing: 0))
+                                .moveDisabled(versionUpdateNeeded)
+                                .listRowInsets(
+                                    versionUpdateNeeded
+                                        ? EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                                        : EdgeInsets(top: 0, leading: -24, bottom: 0, trailing: 0)
+                                )
+                            }
                         }
                     }
                     .onMove(perform: move)
@@ -129,7 +239,9 @@ struct LanguagesView: View {
                 
             }
             .foregroundColor(.white)
+    
         }
+        .navigationBarTitle("Recognition Languages", displayMode: .inline)
         .onAppear {
             populateRows(with: readLanguages())
         }

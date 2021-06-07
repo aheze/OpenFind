@@ -49,7 +49,7 @@ extension PhotoFindViewController {
                                 }
                                 request.recognitionLevel = .fast
                                 request.recognitionLanguages = ["en_GB"]
-                                
+                                request.recognitionLanguages = Defaults.recognitionLanguages
                                 var customFindArray = [String]()
                                 for findWord in self.matchToColors.keys {
                                     customFindArray.append(findWord)

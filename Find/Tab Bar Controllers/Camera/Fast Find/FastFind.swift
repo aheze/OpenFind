@@ -44,7 +44,7 @@ extension CameraViewController {
             request.customWords = [self.finalTextToFind, self.finalTextToFind.lowercased(), self.finalTextToFind.uppercased(), self.finalTextToFind.capitalizingFirstLetter()] + customFindArray
             
             request.recognitionLevel = .fast
-            request.recognitionLanguages = ["en_GB"]
+            request.recognitionLanguages = Defaults.recognitionLanguages
             
             
             if let pixelBuffer = pixelBuffer {

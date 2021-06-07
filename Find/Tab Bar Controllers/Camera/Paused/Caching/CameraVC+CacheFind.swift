@@ -36,7 +36,7 @@ extension CameraViewController {
             
             
             request.recognitionLevel = .accurate
-            request.recognitionLanguages = ["en_GB"]
+            request.recognitionLanguages = Defaults.recognitionLanguages
             
             request.progressHandler = { (_, progress, _) in
                 if thisProcessIdentifier == self.currentCachingProcess {

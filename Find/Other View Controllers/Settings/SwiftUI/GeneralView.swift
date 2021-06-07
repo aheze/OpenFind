@@ -108,7 +108,7 @@ struct LanguagesSummaryView: View {
         .background(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)))
         .cornerRadius(12)
         .onAppear {
-            readDefaults()
+            _ = readDefaults()
         }
     }
     

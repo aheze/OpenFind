@@ -137,7 +137,7 @@ class ListsIcon: UIView {
 
         //// Rectangle 2 Drawing
         let bezierPath = UIBezierPath(roundedRect: CGRect(x: 6, y: 5.8, width: 12.8, height: 1.6), cornerRadius: 0.8)
-        bezierPath.fill()
+        
 
         //// Rectangle 3 Drawing
         bezierPath.append(UIBezierPath(roundedRect: CGRect(x: 6, y: 10.6, width: 12.8, height: 1.6), cornerRadius: 0.8))

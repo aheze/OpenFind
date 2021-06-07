@@ -24,7 +24,7 @@ extension PhotoSlidesViewController {
                         self.handleFastDetectedText(request: request, error: error, resultPhoto: resultPhoto, indexOfPhoto: index)
                     }
                     request.recognitionLevel = .fast
-                    request.recognitionLanguages = ["en_GB"]
+                    request.recognitionLanguages = Defaults.recognitionLanguages
                     
                     var customFindArray = [String]()
                     for findWord in self.matchToColors.keys {
