@@ -251,6 +251,7 @@
 		3CCB840925B0E362000631BA /* PhotosVC+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCB840825B0E362000631BA /* PhotosVC+Delete.swift */; };
 		3CCF61F9266EFE1800109C2F /* PhotosVC+EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCF61F8266EFE1800109C2F /* PhotosVC+EmptyView.swift */; };
 		3CCF61FB266EFE1F00109C2F /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCF61FA266EFE1F00109C2F /* EmptyListView.swift */; };
+		3CCF61FD266F0E8A00109C2F /* PhotosVC+Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCF61FC266F0E8A00109C2F /* PhotosVC+Prompt.swift */; };
 		3CD388BD25C11AB900B67B13 /* CameraVC+Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD388BC25C11AB900B67B13 /* CameraVC+Tips.swift */; };
 		3CD388C125C122BC00B67B13 /* ViewController+ShutterPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD388C025C122BC00B67B13 /* ViewController+ShutterPosition.swift */; };
 		3CDA84F625B2519E00726F91 /* PhotoFindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDA84F525B2519E00726F91 /* PhotoFindViewController.swift */; };
@@ -641,6 +642,7 @@
 		3CCB840825B0E362000631BA /* PhotosVC+Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Delete.swift"; sourceTree = "<group>"; };
 		3CCF61F8266EFE1800109C2F /* PhotosVC+EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+EmptyView.swift"; sourceTree = "<group>"; };
 		3CCF61FA266EFE1F00109C2F /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
+		3CCF61FC266F0E8A00109C2F /* PhotosVC+Prompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Prompt.swift"; sourceTree = "<group>"; };
 		3CD388BC25C11AB900B67B13 /* CameraVC+Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Tips.swift"; sourceTree = "<group>"; };
 		3CD388C025C122BC00B67B13 /* ViewController+ShutterPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ShutterPosition.swift"; sourceTree = "<group>"; };
 		3CDA84F525B2519E00726F91 /* PhotoFindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFindViewController.swift; sourceTree = "<group>"; };
@@ -779,6 +781,7 @@
 				3C1317E825B264BD00FCEB79 /* PhotosWrapperController.swift */,
 				3C020CE8259FF7470087AE92 /* PhotosViewController.swift */,
 				3C570E7D260CF24400F5AA4D /* PhotosVC+Accessibility.swift */,
+				3CCF61FC266F0E8A00109C2F /* PhotosVC+Prompt.swift */,
 				3C7EAB2B25C0A97800264B63 /* PhotosVC+Tutorial.swift */,
 				3C5B157625A8CE6E00BB8988 /* Navigation Bar */,
 				3C5B157125A8CD8800BB8988 /* Collection View */,
@@ -2104,6 +2107,7 @@
 				3C3DF5F325B5049900DD7A10 /* PhotoFindVC+FastFind.swift in Sources */,
 				49563519243694BC0001E8C6 /* PageContainer.swift in Sources */,
 				49B7A33423923E810070209F /* ZoomTransitionController.swift in Sources */,
+				3CCF61FD266F0E8A00109C2F /* PhotosVC+Prompt.swift in Sources */,
 				3C71F26225AF6B9900D22212 /* PhotosVC+Cache.swift in Sources */,
 				4999AC982353A80A00AB06A7 /* CameraViewController.swift in Sources */,
 				3C6EE6B525A2AB350078462A /* SupportView.swift in Sources */,

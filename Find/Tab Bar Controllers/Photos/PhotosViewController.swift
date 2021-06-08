@@ -40,12 +40,15 @@ class PhotosViewController: UIViewController {
     var refreshNeededAfterDismissPhoto = false /// refresh as soon as dismiss photo slides
     var refreshing = false /// currently refreshing data, prevent select cell
     
-    // MARK: Tips
+    // MARK: Prompt
+    var promptLabel: UILabel!
     
+    // MARK: Tips
     @IBOutlet weak var emptyListContainerView: UIView!
+    @IBOutlet weak var emptyListContainerTopC: NSLayoutConstraint!
+    
     var photosEmptyViewModel: PhotosEmptyViewModel?
     
-    //    var emptyDescriptionView: EmptyDescriptionView?
     var startTutorial: ((PhotoTutorialType) -> Void)?
     var pressedSelectTip: (() -> Void)? /// step 3 of star
     var quickTourView: TutorialHeader?
@@ -135,6 +138,7 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = UIColor(named: "PhotosText")
+    
         
         setupBarButtons()
         getRealmObjects()
@@ -169,6 +173,7 @@ class PhotosViewController: UIViewController {
         }
         
         setupAccessibility()
+        setupPrompt()
         
         emptyListContainerView.alpha = 0
         

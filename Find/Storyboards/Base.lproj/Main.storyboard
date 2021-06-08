@@ -2695,6 +2695,7 @@
                     <connections>
                         <outlet property="collapseButton" destination="JKE-Ij-JZI" id="xW8-hu-9Ta"/>
                         <outlet property="collectionView" destination="0iz-9s-4iE" id="LLE-S0-QeL"/>
+                        <outlet property="emptyListContainerTopC" destination="1LO-79-rz8" id="9Ou-hw-AiA"/>
                         <outlet property="emptyListContainerView" destination="hzo-eW-WDx" id="QOT-G7-Wyb"/>
                         <outlet property="extendedCollapseButton" destination="8FW-Cs-46e" id="a0P-v8-w28"/>
                         <outlet property="segmentedSlider" destination="0XE-et-vDj" id="Dif-0H-LbJ"/>
@@ -2705,7 +2706,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cyf-3f-e0g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-23.831775700934578" y="-990.06479481641475"/>
+            <point key="canvasLocation" x="-38" y="-866"/>
         </scene>
         <!--Photos Migration Controller-->
         <scene sceneID="8zE-VO-uLX">
@@ -3198,7 +3199,7 @@
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tUv-4R-c5U">
                                         <rect key="frame" x="0.0" y="0.0" width="86.333333333333329" height="39"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="W9A-sZ-kHI">
-                                            <rect key="frame" x="0.0" y="0.0" width="86.333333333333329" height="39"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="86" height="39"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <blurEffect style="prominent"/>
