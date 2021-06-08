@@ -13,50 +13,54 @@ struct EmptyListView: View {
     @ObservedObject var model: PhotosEmptyViewModel
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                ForEach(model.cards) { card in
-                    HStack(alignment: .top, spacing: 10) {
-                        Image(card.type.getName().0)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 80)
-                        
-                        VStack(alignment: .leading, spacing: 4) {
-                            HStack {
-                                Text(card.type.getName().1)
-                                    .font(.system(size: 19, weight: .medium))
-                                Spacer()
-                            }
+        VStack {
+            
+            Text("No photos with your filters")
+                .foregroundColor(Color(.secondaryLabel))
+            
+            ScrollView {
+                VStack(spacing: 16) {
+                    
+                    ForEach(model.cards) { card in
+                        HStack(alignment: .top, spacing: 10) {
+                            Image(card.type.getName().0)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 80)
                             
-                            Text(card.type.getName().2)
-                                .fixedSize(horizontal: false, vertical: true)
-                                .font(.system(size: 16, weight: .regular))
-                                .foregroundColor(Color(.secondaryLabel))
-                                .multilineTextAlignment(.leading)
-                            
-                            
-                            if card.type != .screenshots && card.type != .all {
-                                Button(action: {
-                                }) {
-                                    Text("Show me how")
-                                        .foregroundColor(Color(card.type.getColor()))
+                            VStack(alignment: .leading, spacing: 4) {
+                                HStack {
+                                    Text(card.type.getName().1)
+                                        .font(.system(size: 19, weight: .medium))
+                                    Spacer()
+                                }
+                                
+                                Text(card.type.getName().2)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .font(.system(size: 16, weight: .regular))
+                                    .foregroundColor(Color(.secondaryLabel))
+                                    .multilineTextAlignment(.leading)
+                                
+                                if card.type != .screenshots && card.type != .all {
+                                    Button(action: {
+                                    }) {
+                                        Text("Show me how")
+                                            .foregroundColor(Color(card.type.getColor()))
+                                    }
                                 }
                             }
+                            
                         }
+                        .transition(AnyTransition.scale.combined(with: .opacity))
+                        .padding()
                         
+                        .background(Color(.secondarySystemBackground))
+                        
+                        .cornerRadius(16)
                     }
-                    .transition(AnyTransition.scale.combined(with: .opacity))
-                    .padding()
-                    
-                    .background(Color(.secondarySystemBackground))
-                    
-                    .cornerRadius(16)
                 }
+                .padding(.horizontal, 20)
             }
-            .padding(.horizontal, 20)
-            .clipped()
-            .padding(.top, 20)
         }
     }
 }
