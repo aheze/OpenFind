@@ -7,12 +7,6 @@
 
 import UIKit
 
-enum PhotoTutorialType {
-    case starred
-    case cached
-    case local
-    case screenshots
-}
 enum PhotoFilter {
     case local
     case screenshots
@@ -57,6 +51,12 @@ class SegmentedSlider: UIView {
     @IBAction func starButtonPressed(_ sender: Any) {
         print("star!!")
         photoFilterState.starSelected.toggle()
+        
+        if photoFilterState.starSelected {
+            starImageView.image = UIImage(named: "StarFill")
+        } else {
+            starImageView.image = UIImage(named: "StarRim")
+        }
         pressedFilter?(photoFilterState)
     }
     
@@ -64,6 +64,12 @@ class SegmentedSlider: UIView {
     @IBAction func cacheButtonPressed(_ sender: Any) {
         print("cache!!")
         photoFilterState.cacheSelected.toggle()
+        
+        if photoFilterState.cacheSelected {
+            cacheImageView.image = UIImage(named: "CacheFill")
+        } else {
+            cacheImageView.image = UIImage(named: "CacheRim")
+        }
         pressedFilter?(photoFilterState)
     }
     

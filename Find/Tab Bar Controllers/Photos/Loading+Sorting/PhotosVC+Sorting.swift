@@ -101,7 +101,23 @@ extension PhotosViewController {
             }
             self.monthsToDisplay = filteredMonths
         case .screenshots:
-            break
+            var filteredMonths = self.allMonths
+            for index in 0..<filteredMonths.count {
+                let filteredPhotos = filteredMonths[index].photos.filter { photo in
+                    
+                    let asset = photo.asset
+                    let types = asset.mediaSubtypes
+                    let isScreenshot = types.contains(.photoScreenshot)
+
+                    return isScreenshot && determineIncludedInStarAndCache(filterState, model: photo.editableModel)
+                }
+                filteredMonths[index].photos = filteredPhotos
+                allPhotosToDisplay += filteredPhotos
+            }
+            filteredMonths = filteredMonths.filter { month in
+                return !month.photos.isEmpty
+            }
+            self.monthsToDisplay = filteredMonths
         case .all:
             var filteredMonths = self.allMonths
             for index in 0..<filteredMonths.count {
@@ -183,10 +199,24 @@ extension PhotosViewController {
 //            } else {
 //                showEmptyView(previously: .all, to: filter)
 //            }
+            
+            var types = [PhotoTutorialType]()
+            if filterState.starSelected { types.append(.starred) }
+            if filterState.cacheSelected { types.append(.cached) }
+            switch filterState.currentFilter {
+            case .local:
+                types.append(.local)
+            case .screenshots:
+                types.append(.screenshots)
+            case .all:
+                types.append(.all)
+            }
+            
+            showEmptyView(for: types)
             findButton.isEnabled = false
             selectButton.isEnabled = false
         } else {
-//            hideEmptyView()
+            hideEmptyView()
             findButton.isEnabled = true
             selectButton.isEnabled = true
         }

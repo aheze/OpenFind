@@ -111,6 +111,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     self.startLocalTutorial()
                 case .screenshots:
                     break
+                case .all:
+                    break
                 }
             }
             viewController.pressedSelectTip = { [weak self] in

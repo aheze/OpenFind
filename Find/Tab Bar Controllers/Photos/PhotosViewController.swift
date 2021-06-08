@@ -41,7 +41,11 @@ class PhotosViewController: UIViewController {
     var refreshing = false /// currently refreshing data, prevent select cell
     
     // MARK: Tips
-//    var emptyDescriptionView: EmptyDescriptionView?
+    
+    @IBOutlet weak var emptyListContainerView: UIView!
+    var photosEmptyViewModel: PhotosEmptyViewModel?
+    
+    //    var emptyDescriptionView: EmptyDescriptionView?
     var startTutorial: ((PhotoTutorialType) -> Void)?
     var pressedSelectTip: (() -> Void)? /// step 3 of star
     var quickTourView: TutorialHeader?
@@ -165,6 +169,8 @@ class PhotosViewController: UIViewController {
         }
         
         setupAccessibility()
+        
+        emptyListContainerView.alpha = 0
         
     }
     

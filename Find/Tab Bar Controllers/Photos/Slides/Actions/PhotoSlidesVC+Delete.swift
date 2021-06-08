@@ -13,9 +13,5 @@ extension PhotoSlidesViewController {
         let findPhoto = resultPhotos[currentIndex].findPhoto
         self.deletePhotoFromSlides?(findPhoto)
         
-//        let photoExists = checkIfPhotoExists?(findPhoto)
-//        if photoExists == false {
-//            removeCurrentSlide()
-//        }
     }
 }
