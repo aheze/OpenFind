@@ -96,7 +96,6 @@
 		3C5DD06A261021E700434317 /* TunedMetalicC.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C5DD069261021E500434317 /* TunedMetalicC.m4a */; };
 		3C5DD06E26104C9300434317 /* PhotoFindVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5DD06D26104C9300434317 /* PhotoFindVC+Accessibility.swift */; };
 		3C5DFFA525D8A9E200250D34 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5DFFA425D8A9E200250D34 /* ShareView.swift */; };
-		3C634C7025C0F3170064CBF8 /* EmptyDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C634C6F25C0F3170064CBF8 /* EmptyDescriptionView.swift */; };
 		3C643F1C26057806001E6FA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F1B26057806001E6FA1 /* AppDelegate.swift */; };
 		3C643F1E26057806001E6FA1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643F1D26057806001E6FA1 /* SceneDelegate.swift */; };
 		3C643F2526057807001E6FA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C643F2426057807001E6FA1 /* Assets.xcassets */; };
@@ -203,7 +202,6 @@
 		3C9D5F5825F31F87002E93F5 /* CameraFocusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C9D5F5725F31F87002E93F5 /* CameraFocusView.xib */; };
 		3CA63F3625C7BA64001C295E /* TabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F3825C7BA64001C295E /* TabBar.xib */; };
 		3CA63F3C25C7BAA6001C295E /* SegmentedSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F3E25C7BAA6001C295E /* SegmentedSlider.xib */; };
-		3CA63F4525C7BB43001C295E /* EmptyDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F4725C7BB43001C295E /* EmptyDescriptionView.xib */; };
 		3CA63F4C25C8ECA6001C295E /* TutorialHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F4E25C8ECA6001C295E /* TutorialHeader.xib */; };
 		3CA63F5325C926A8001C295E /* PhotoPermissionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F5525C926A8001C295E /* PhotoPermissionView.xib */; };
 		3CA63F5A25C9274A001C295E /* PhotosMigrationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA63F5C25C9274A001C295E /* PhotosMigrationView.xib */; };
@@ -216,7 +214,6 @@
 		3CA9336D25BE727D00042C2F /* CameraVC+SaveToPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9336C25BE727D00042C2F /* CameraVC+SaveToPhotos.swift */; };
 		3CA9337025BE802000042C2F /* PhotosVC+ObserveChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9336F25BE802000042C2F /* PhotosVC+ObserveChanges.swift */; };
 		3CA9337525BF2EC900042C2F /* CameraVC+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9337425BF2EC900042C2F /* CameraVC+Cache.swift */; };
-		3CABD23D25C10C1D009921EE /* PhotosVC+ShowEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CABD23C25C10C1D009921EE /* PhotosVC+ShowEmptyView.swift */; };
 		3CABD25025C11870009921EE /* ViewController+Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CABD24F25C11870009921EE /* ViewController+Tips.swift */; };
 		3CAC4DA525BF52CE00CC7948 /* LTEasing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4D9025BF52CE00CC7948 /* LTEasing.swift */; };
 		3CAC4DA625BF52CE00CC7948 /* LTMorphingLabel+Pixelate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC4D9125BF52CE00CC7948 /* LTMorphingLabel+Pixelate.swift */; };
@@ -241,7 +238,6 @@
 		3CB6843225A0087700AE0AD6 /* PhotosMigrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */; };
 		3CB6843525A013D800AE0AD6 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6843425A013D800AE0AD6 /* ImageCell.swift */; };
 		3CB6843825A0140200AE0AD6 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB6843725A0140200AE0AD6 /* ImageCell.xib */; };
-		3CC230CF25C1F82000AD04B6 /* EmptyDescription+Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230CE25C1F82000AD04B6 /* EmptyDescription+Tips.swift */; };
 		3CC230D425C1F9AA00AD04B6 /* VC+LocalTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230D325C1F9AA00AD04B6 /* VC+LocalTip.swift */; };
 		3CC230EB25C2105200AD04B6 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230E925C2105200AD04B6 /* UIKitExtensions.swift */; };
 		3CC230EC25C2105200AD04B6 /* EasyTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230EA25C2105200AD04B6 /* EasyTipView.swift */; };
@@ -478,7 +474,6 @@
 		3C5DD069261021E500434317 /* TunedMetalicC.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = TunedMetalicC.m4a; sourceTree = "<group>"; };
 		3C5DD06D26104C9300434317 /* PhotoFindVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+Accessibility.swift"; sourceTree = "<group>"; };
 		3C5DFFA425D8A9E200250D34 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
-		3C634C6F25C0F3170064CBF8 /* EmptyDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDescriptionView.swift; sourceTree = "<group>"; };
 		3C643F1926057806001E6FA1 /* FindClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C643F1B26057806001E6FA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C643F1D26057806001E6FA1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -589,8 +584,6 @@
 		3CA63F3B25C7BA6A001C295E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/TabBar.strings"; sourceTree = "<group>"; };
 		3CA63F3D25C7BAA6001C295E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SegmentedSlider.xib; sourceTree = "<group>"; };
 		3CA63F4325C7BAAF001C295E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SegmentedSlider.strings"; sourceTree = "<group>"; };
-		3CA63F4625C7BB43001C295E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/EmptyDescriptionView.xib; sourceTree = "<group>"; };
-		3CA63F4A25C7BB47001C295E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/EmptyDescriptionView.strings"; sourceTree = "<group>"; };
 		3CA63F4D25C8ECA6001C295E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TutorialHeader.xib; sourceTree = "<group>"; };
 		3CA63F5125C8ECAA001C295E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/TutorialHeader.strings"; sourceTree = "<group>"; };
 		3CA63F5425C926A8001C295E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PhotoPermissionView.xib; sourceTree = "<group>"; };
@@ -606,7 +599,6 @@
 		3CA9336C25BE727D00042C2F /* CameraVC+SaveToPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+SaveToPhotos.swift"; sourceTree = "<group>"; };
 		3CA9336F25BE802000042C2F /* PhotosVC+ObserveChanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+ObserveChanges.swift"; sourceTree = "<group>"; };
 		3CA9337425BF2EC900042C2F /* CameraVC+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Cache.swift"; sourceTree = "<group>"; };
-		3CABD23C25C10C1D009921EE /* PhotosVC+ShowEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+ShowEmptyView.swift"; sourceTree = "<group>"; };
 		3CABD24F25C11870009921EE /* ViewController+Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Tips.swift"; sourceTree = "<group>"; };
 		3CAC4D9025BF52CE00CC7948 /* LTEasing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTEasing.swift; sourceTree = "<group>"; };
 		3CAC4D9125BF52CE00CC7948 /* LTMorphingLabel+Pixelate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Pixelate.swift"; sourceTree = "<group>"; };
@@ -631,7 +623,6 @@
 		3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationController.swift; sourceTree = "<group>"; };
 		3CB6843425A013D800AE0AD6 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		3CB6843725A0140200AE0AD6 /* ImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
-		3CC230CE25C1F82000AD04B6 /* EmptyDescription+Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EmptyDescription+Tips.swift"; sourceTree = "<group>"; };
 		3CC230D325C1F9AA00AD04B6 /* VC+LocalTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+LocalTip.swift"; sourceTree = "<group>"; };
 		3CC230E925C2105200AD04B6 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		3CC230EA25C2105200AD04B6 /* EasyTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyTipView.swift; sourceTree = "<group>"; };
@@ -997,10 +988,6 @@
 		3C634C6E25C0F3050064CBF8 /* Empty */ = {
 			isa = PBXGroup;
 			children = (
-				3CABD23C25C10C1D009921EE /* PhotosVC+ShowEmptyView.swift */,
-				3C634C6F25C0F3170064CBF8 /* EmptyDescriptionView.swift */,
-				3CA63F4725C7BB43001C295E /* EmptyDescriptionView.xib */,
-				3CC230CE25C1F82000AD04B6 /* EmptyDescription+Tips.swift */,
 				3CCF61F8266EFE1800109C2F /* PhotosVC+EmptyView.swift */,
 				3CCF61FA266EFE1F00109C2F /* EmptyListView.swift */,
 			);
@@ -1911,7 +1898,6 @@
 				3CA63F5325C926A8001C295E /* PhotoPermissionView.xib in Resources */,
 				4956352A2437A4B60001E8C6 /* defaultSeeds.realm in Resources */,
 				3CA63F3625C7BA64001C295E /* TabBar.xib in Resources */,
-				3CA63F4525C7BB43001C295E /* EmptyDescriptionView.xib in Resources */,
 				49E9D89224996E1A0006757C /* Localizable.strings in Resources */,
 				495DAD3624A6B2E500D5F844 /* FindBar.xib in Resources */,
 				3C0F5ED525A5729A00549040 /* NewAssets.xcassets in Resources */,
@@ -2236,7 +2222,6 @@
 				3C4C96B225B69038009FDE8D /* InfoView.swift in Sources */,
 				4953F3C0241713A100690E53 /* HistoryFindCell.swift in Sources */,
 				3CAC4DA725BF52CF00CC7948 /* LTMorphingLabel+Burn.swift in Sources */,
-				3C634C7025C0F3170064CBF8 /* EmptyDescriptionView.swift in Sources */,
 				3CFF312825AA496B00D3C56D /* PhotoSlidesVC+Setup.swift in Sources */,
 				3CA9335725BDF4B500042C2F /* CameraVC+ButtonSetup.swift in Sources */,
 				3C16EA71259BE7D600D73755 /* ListsController+NavBar.swift in Sources */,
@@ -2292,7 +2277,6 @@
 				3C9CE49B25BFBFAC006D989C /* CameraVC+Resume.swift in Sources */,
 				3CAC4DAC25BF52CF00CC7948 /* LTStringDiffResult.swift in Sources */,
 				3C4B6D7325B23460001F501A /* NavigationViewModifier.swift in Sources */,
-				3CC230CF25C1F82000AD04B6 /* EmptyDescription+Tips.swift in Sources */,
 				3C9D5F5125F30394002E93F5 /* CameraVC+Flashlight.swift in Sources */,
 				495F38FA2432C8FE00A17D93 /* CarteViewController.swift in Sources */,
 				49563524243694BC0001E8C6 /* Configuring.swift in Sources */,
@@ -2317,7 +2301,6 @@
 				495F38FE243302D500A17D93 /* StatsViewController.swift in Sources */,
 				3C7EAB2C25C0A97800264B63 /* PhotosVC+Tutorial.swift in Sources */,
 				3C3DF5FB25B52AA500DD7A10 /* PhotoFindVC+CollectionCoordinates.swift in Sources */,
-				3CABD23D25C10C1D009921EE /* PhotosVC+ShowEmptyView.swift in Sources */,
 				3C6472402613C7490089DAC6 /* SlideVC+Transcripts.swift in Sources */,
 				3C3232E0261153FB00A33192 /* CameraVC+Shutter.swift in Sources */,
 				3CAC4DA825BF52CF00CC7948 /* LTMorphingLabel+Evaporate.swift in Sources */,
@@ -2368,15 +2351,6 @@
 				3CA63F4325C7BAAF001C295E /* zh-Hans */,
 			);
 			name = SegmentedSlider.xib;
-			sourceTree = "<group>";
-		};
-		3CA63F4725C7BB43001C295E /* EmptyDescriptionView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3CA63F4625C7BB43001C295E /* Base */,
-				3CA63F4A25C7BB47001C295E /* zh-Hans */,
-			);
-			name = EmptyDescriptionView.xib;
 			sourceTree = "<group>";
 		};
 		3CA63F4E25C8ECA6001C295E /* TutorialHeader.xib */ = {
@@ -2480,7 +2454,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.2.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2504,7 +2478,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.2.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2651,7 +2625,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.2.8;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2676,7 +2650,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.2.8;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ktkpiano.FindAppCommand;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -132,7 +132,7 @@ extension PhotosViewController {
                 self.allPhotosToDisplay = allPhotos
                 self.applySnapshot(animatingDifferences: false)
                 self.fadeCollectionView(false, instantly: false)
-                
+                self.updateFindButtonHint()
                 
                 self.startObservingChanges()
             }

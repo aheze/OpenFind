@@ -16,7 +16,7 @@
                 <outlet property="baseView" destination="8DR-E7-i0x" id="mQ9-8g-7yT"/>
                 <outlet property="cacheButton" destination="7f5-r9-npP" id="0TL-v4-Aks"/>
                 <outlet property="cacheImageView" destination="NNh-Vg-XF8" id="lMA-dB-a8h"/>
-                <outlet property="containerView" destination="VfU-Bu-sg4" id="eKY-dK-n1r"/>
+                <outlet property="containerView" destination="VfU-Bu-sg4" id="nB8-GL-di7"/>
                 <outlet property="contentView" destination="E2L-fE-T2b" id="j6b-56-nxZ"/>
                 <outlet property="indicatorView" destination="z3g-Re-Vab" id="NhW-Ik-bsG"/>
                 <outlet property="localLabel" destination="Zup-GQ-hYj" id="8OW-vD-24V"/>
@@ -112,7 +112,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VfU-Bu-sg4">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VfU-Bu-sg4" customClass="SliderCategoriesView" customModule="Find" customModuleProvider="target">
                     <rect key="frame" x="99" y="0.0" width="276" height="42"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>

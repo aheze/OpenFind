@@ -35,42 +35,34 @@ extension PhotoFindViewController {
         continueButtonVisible = false
         
         let findingFrom = "Finding from "
-        var number: String
+        var number = "\(howManyPhotos) "
         var filter = ""
         var folder: String
         
         var combinedPromptString = ""
         
-        if startingFilterState.starSelected || startingFilterState.cacheSelected {
-            if startingFilterState.starSelected && startingFilterState.cacheSelected {
+        if photoFilterState.starSelected || photoFilterState.cacheSelected {
+            if photoFilterState.starSelected && photoFilterState.cacheSelected {
                 filter = "starred + cached "
-            } else if startingFilterState.starSelected {
+            } else if photoFilterState.starSelected {
                 filter = "starred "
             } else {
                 filter = "cached "
             }
         }
         
-        switch startingFilterState.currentFilter {
+        switch photoFilterState.currentFilter {
         case .local:
-            number = "\(howManyPhotos) "
             folder = "local photos"
         case .screenshots:
-            number = "\(howManyPhotos) "
             folder = "screenshots"
         case .all:
+            folder = "photos"
             
             if isAllPhotos {
-                number = ""
+                number = "all \(number)"
             } else {
-                number = "\(howManyPhotos) of "
-            }
-            
-            if filter.isEmpty {
-                folder = "all photos"
-            } else {
-                folder = "all "
-                combinedPromptString = findingFrom + number + folder + filter + "photos"
+                number = "\(number) of all "
             }
         }
         
@@ -106,6 +98,7 @@ extension PhotoFindViewController {
         }
         
         promptTextView.attributedText = attributedText
+        promptView.accessibilityValue = combinedPromptString
     }
     
     
@@ -132,9 +125,9 @@ extension PhotoFindViewController {
         let resultsInCache = " \(results)\(inCachedPhotos) "
         var toFindFromPhotos = " \(toFindFromUncachedPhotos)"
         
-//        if currentFilter == .cached {
-//            toFindFromPhotos = toFindWithOCR
-//        }
+        if photoFilterState.cacheSelected {
+            toFindFromPhotos = toFindWithOCR
+        }
         
         let nextButtonAttachment = AttributedString(image: Image(named: "ContinueButton"), bounds: "0,-6,76,24")
         
@@ -157,29 +150,23 @@ extension PhotoFindViewController {
         let findingFromUncachedPhotos = NSLocalizedString("findingFromUncachedPhotos", comment: "")
         let findingFromPhotos = NSLocalizedString("findingFromPhotos", comment: "")
         
-        var attributedText = "\(findingFromUncachedPhotos) (\(howMany)/\(findPhotos.count))...".set(style: textStyle)
+        var attributedText = photoFilterState.cacheSelected
+            ? "\(findingFromPhotos) (\(howMany)/\(findPhotos.count))...".set(style: textStyle)
+            : "\(findingFromUncachedPhotos) (\(howMany)/\(findPhotos.count))...".set(style: textStyle)
         
-//        if currentFilter == .cached {
-//            attributedText = "\(findingFromPhotos) (\(howMany)/\(findPhotos.count))...".set(style: textStyle)
-//            promptView.accessibilityValue = "\(findingFromPhotos) (\(howMany) out of \(findPhotos.count))..."
-//
-//            let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
-//            let summaryString = AccessibilityText(text: "\(findingFromPhotos) (\(howMany) out of \(findPhotos.count))...", isRaised: false)
-//            postAnnouncement([summaryTitle, summaryString])
-//        } else {
-//            promptView.accessibilityValue = "\(findingFromUncachedPhotos) (\(howMany) out of \(findPhotos.count))..."
-//
-//            if howMany < 2 {
-//                let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
-//                let summaryString = AccessibilityText(text: "\(findingFromUncachedPhotos) (\(howMany) out of \(findPhotos.count))...", isRaised: false)
-//                postAnnouncement([summaryTitle, summaryString])
-//            } else {
-//                let summaryString = AccessibilityText(text: "\(howMany) out of \(findPhotos.count)", isRaised: false)
-//                postAnnouncement([summaryString])
-//            }
-//        }
+        let plainText = photoFilterState.cacheSelected
+            ? "\(findingFromPhotos) (\(howMany) out of \(findPhotos.count))..."
+            : "\(findingFromUncachedPhotos) (\(howMany) out of \(findPhotos.count))..."
+        
+        
+        if howMany % 15 == 0 {
+            let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+            let summaryString = AccessibilityText(text: plainText, isRaised: false)
+            postAnnouncement([summaryTitle, summaryString])
+        }
         
         promptTextView.attributedText = attributedText
+        
     }
     /// Finished searching cache and uncached photos
     func setPromptToFinishedFastFinding(howMany: Int) {

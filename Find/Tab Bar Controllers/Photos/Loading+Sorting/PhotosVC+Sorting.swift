@@ -55,8 +55,8 @@ extension PhotosViewController {
         segmentedSlider.pressedFilter = { [weak self] filterState in
             guard let self = self else { return }
             
-            self.sortPhotos(with: filterState)
             self.photoFilterState = filterState
+            self.sortPhotos(with: filterState)
             self.applySnapshot(animatingDifferences: true)
         }
     }
@@ -158,6 +158,7 @@ extension PhotosViewController {
             }
         }
         
+        print("all pho: \(allPhotosToDisplay.count)")
         self.allPhotosToDisplay = allPhotosToDisplay
         
         if allPhotosToDisplay.isEmpty {
@@ -181,5 +182,7 @@ extension PhotosViewController {
             findButton.isEnabled = true
             selectButton.isEnabled = true
         }
+        
+        updateFindButtonHint()
     }
 }

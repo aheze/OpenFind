@@ -138,7 +138,6 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = UIColor(named: "PhotosText")
-    
         
         setupBarButtons()
         getRealmObjects()

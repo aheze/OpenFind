@@ -41,7 +41,7 @@ class SegmentedSlider: UIView {
     
     /// contains Star + Cache + Container View
     @IBOutlet var baseView: UIView!
-    @IBOutlet weak var containerView: UIView! /// for baseView
+    @IBOutlet weak var containerView: SliderCategoriesView! /// for baseView
     
     @IBOutlet weak var starCacheContainerView: UIView!
     @IBOutlet weak var starImageView: UIImageView!
@@ -49,7 +49,6 @@ class SegmentedSlider: UIView {
     
     @IBOutlet weak var starButton: CustomButton!
     @IBAction func starButtonPressed(_ sender: Any) {
-        print("star!!")
         photoFilterState.starSelected.toggle()
         
         if photoFilterState.starSelected {
@@ -57,12 +56,12 @@ class SegmentedSlider: UIView {
         } else {
             starImageView.image = UIImage(named: "StarRim")
         }
+        starButton.accessibilityValue = photoFilterState.starSelected ? "Active" : "Inactive"
         pressedFilter?(photoFilterState)
     }
     
     @IBOutlet weak var cacheButton: CustomButton!
     @IBAction func cacheButtonPressed(_ sender: Any) {
-        print("cache!!")
         photoFilterState.cacheSelected.toggle()
         
         if photoFilterState.cacheSelected {
@@ -70,6 +69,7 @@ class SegmentedSlider: UIView {
         } else {
             cacheImageView.image = UIImage(named: "CacheRim")
         }
+        cacheButton.accessibilityValue = photoFilterState.cacheSelected ? "Active" : "Inactive"
         pressedFilter?(photoFilterState)
     }
     
@@ -218,61 +218,6 @@ class SegmentedSlider: UIView {
         }
         
         setupAccessibility()
-    }
-    
-    override var accessibilityTraits: UIAccessibilityTraits {
-        get {
-            return showingPhotosSelection ? .none : .adjustable
-        }
-        set {
-            super.accessibilityTraits = newValue
-        }
-    }
-    override var accessibilityValue: String? {
-        get {
-            if showingPhotosSelection == false {
-                switch photoFilterState.currentFilter {
-                case .local:
-                    return "Local"
-                case .screenshots:
-                    return "Screenshots"
-                case .all:
-                    return "All"
-                }
-            } else {
-                return nil
-            }
-        }
-        
-        set {
-            super.accessibilityValue = newValue
-        }
-    }
-    
-    override func accessibilityIncrement() {
-        switch photoFilterState.currentFilter {
-        case .local:
-            photoFilterState.currentFilter = .screenshots
-        case .screenshots:
-            photoFilterState.currentFilter = .all
-        case .all:
-            break
-        }
-        animateChangeSelection(filter: photoFilterState.currentFilter)
-        pressedFilter?(photoFilterState)
-    }
-    
-    override func accessibilityDecrement() {
-        switch photoFilterState.currentFilter {
-        case .local:
-            break
-        case .screenshots:
-            photoFilterState.currentFilter = .local
-        case .all:
-            photoFilterState.currentFilter = .screenshots
-        }
-        animateChangeSelection(filter: photoFilterState.currentFilter)
-        pressedFilter?(photoFilterState)
     }
     
     override func layoutSubviews() {

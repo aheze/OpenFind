@@ -28,48 +28,50 @@ extension PhotosViewController {
     }
     
     func updateFindButtonHint() {
-        var prompt = ""
         
-        let findingFrom = "Find from"
-        let unit = NSLocalizedString("unitZhang", comment: "")
-        let all = NSLocalizedString("allSpace", comment: "")
-        let space = NSLocalizedString("blankSpace", comment: "")
-        let photos = NSLocalizedString("findingFrom-photos", comment: "")
+        let findingFrom = "Find from "
+        var number = "\(numberOfSelected) "
+        var filter = ""
+        var folder: String
         
+        var combinedPromptString = ""
         
-        var number = (numberOfSelected == 0) ? all : "\(numberOfSelected)\(unit)\(space)" /// number of all
+        if photoFilterState.starSelected || photoFilterState.cacheSelected {
+            if photoFilterState.starSelected && photoFilterState.cacheSelected {
+                filter = "starred + cached "
+            } else if photoFilterState.starSelected {
+                filter = "starred "
+            } else {
+                filter = "cached "
+            }
+        }
         
-        var overriddenLastPart: String?
+        if numberOfSelected == 0 {
+            number = "\(allPhotosToDisplay.count) "
+        }
         
-        let filter: String
-//        switch photoFilterState {
-//
-//        case .local:
-//            filter = "\(NSLocalizedString("lowercaseLocal", comment: ""))\(space)"
-//        case .screenshots:
-//            filter = "\(NSLocalizedString("lowercaseScreenshot", comment: ""))\(space)"
-//        case .all:
-//            filter = all
-//            if numberOfSelected == 0 {
-//                number = ""
-//            } else {
-//                let withinAllPhotos = NSLocalizedString("withinAllPhotos-Chinese", comment: "")
-//                if withinAllPhotos != "" { /// English is blank string
-//                    overriddenLastPart = "\(withinAllPhotos)\(numberOfSelected)\(unit)查找"
-//                } else {
-//                    number = "\(numberOfSelected) of "
-//                }
-//            }
-//        }
+        switch photoFilterState.currentFilter {
+        case .local:
+            folder = "local photos"
+        case .screenshots:
+            folder = "screenshots"
+        case .all:
+            folder = "photos"
+            
+            /// is all photos
+            if numberOfSelected == 0 {
+                number = "all \(number) "
+            } else {
+                number = "\(number) of all "
+            }
+        }
         
-//        if let overriddenLastPart = overriddenLastPart {
-//            prompt = findingFrom + filter + overriddenLastPart
-//        } else {
-//            prompt = findingFrom + number + filter + photos
-//        }
+        if combinedPromptString.isEmpty {
+            combinedPromptString = findingFrom + number + filter + folder
+        }
         
-        prompt += ". Presents the Finding sheet."
+        combinedPromptString += ". Presents the Finding sheet."
         
-        findButton?.accessibilityHint = prompt
+        findButton?.accessibilityHint = combinedPromptString
     }
 }
