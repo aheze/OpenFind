@@ -69,7 +69,7 @@ struct PhotoTutorialCard: Identifiable {
     let id = UUID()
     var type: PhotoTutorialType
 }
-enum PhotoTutorialType {
+enum PhotoTutorialType: CaseIterable {
     case starred
     case cached
     case local

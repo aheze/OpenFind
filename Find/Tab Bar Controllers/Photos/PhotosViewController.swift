@@ -173,7 +173,6 @@ class PhotosViewController: UIViewController {
         }
         
         setupAccessibility()
-        setupPrompt()
         
         emptyListContainerView.alpha = 0
         

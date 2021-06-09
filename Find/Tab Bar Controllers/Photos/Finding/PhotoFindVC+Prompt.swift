@@ -26,83 +26,84 @@ extension PhotoFindViewController: UITextViewDelegate {
     }
 }
 
+struct PromptStringAttributes {
+    var range: NSRange
+    var color: UIColor
+}
 extension PhotoFindViewController {
     func changePromptToStarting(startingFilterState: PhotoFilterState, howManyPhotos: Int, isAllPhotos: Bool, announce: Bool = true) {
         continueButtonVisible = false
-         
-        let findingFrom = NSLocalizedString("findingFrom", comment: "")
         
-        let unit = NSLocalizedString("unitZhang", comment: "")
+        let findingFrom = "Finding from "
+        var number: String
+        var filter = ""
+        var folder: String
         
-        let all = NSLocalizedString("allSpace", comment: "")
-        let space = NSLocalizedString("blankSpace", comment: "")
+        var combinedPromptString = ""
         
-        let photos = NSLocalizedString("findingFrom-photos", comment: "")
-        
-        let boldStyle = Style {
-            $0.font = UIFont.systemFont(ofSize: 19, weight: .medium)
+        if startingFilterState.starSelected || startingFilterState.cacheSelected {
+            if startingFilterState.starSelected && startingFilterState.cacheSelected {
+                filter = "starred + cached "
+            } else if startingFilterState.starSelected {
+                filter = "starred "
+            } else {
+                filter = "cached "
+            }
         }
-        let grayStyle = Style {
-            $0.color = UIColor.secondaryLabel
+        
+        switch startingFilterState.currentFilter {
+        case .local:
+            number = "\(howManyPhotos) "
+            folder = "local photos"
+        case .screenshots:
+            number = "\(howManyPhotos) "
+            folder = "screenshots"
+        case .all:
+            
+            if isAllPhotos {
+                number = ""
+            } else {
+                number = "\(howManyPhotos) of "
+            }
+            
+            if filter.isEmpty {
+                folder = "all photos"
+            } else {
+                folder = "all "
+                combinedPromptString = findingFrom + number + folder + filter + "photos"
+            }
         }
         
+        if combinedPromptString.isEmpty {
+            combinedPromptString = findingFrom + number + filter + folder
+        }
         
-        var number = isAllPhotos ? all : "\(howManyPhotos)\(unit)\(space)" /// number of all
+        let attributes: [PromptStringAttributes] = PhotoTutorialType.allCases.compactMap {
+            let typeName = $0.getName().1.lowercased()
+            if let substringRange = combinedPromptString.range(of: typeName) {
+                let nsRange = NSRange(substringRange, in: combinedPromptString)
+                let promptString = PromptStringAttributes(range: nsRange, color: $0.getColor())
+                return promptString
+            }
+            return nil
+        }
         
-        var overriddenLastPart: String?
+        let boldStyle = Style { $0.font = UIFont.systemFont(ofSize: 19, weight: .medium) }
+        let grayStyle = Style { $0.color = UIColor.secondaryLabel }
+        let attributedText = combinedPromptString.set(styles: [boldStyle, grayStyle])
         
-        let filter: String
-        let color: UIColor
-//        switch startingFilter {
-//
-//        case .local:
-//            filter = "\(NSLocalizedString("lowercaseLocal", comment: ""))\(space)"
-//            color = UIColor(named: "100Blue")!
-//        case .screenshots:
-//            filter = "\(NSLocalizedString("lowercaseScreenshot", comment: ""))\(space)"
-//            color = UIColor(named: "100Purple")!
-//        case .all:
-//            filter = all
-//            color = UIColor(named: "TabIconPhotosMain")!
-//            if isAllPhotos {
-//                number = ""
-//            } else {
-//                let withinAllPhotos = NSLocalizedString("withinAllPhotos-Chinese", comment: "")
-//                if withinAllPhotos != "" { /// English is blank string
-//                    overriddenLastPart = "\(withinAllPhotos)\(howManyPhotos)\(unit)查找"
-//                } else {
-//                    number = "\(howManyPhotos) of "
-//                }
-//            }
-//        }
+        for attribute in attributes {
+            let style = Style {
+                $0.color = attribute.color
+            }
+            attributedText.set(styles: [style], range: attribute.range)
+        }
         
-//        let colorStyle = Style {
-//            $0.color = color
-//        }
-        
-        var attributedText = AttributedString()
-//        
-//        if let overriddenLastPart = overriddenLastPart {
-//            attributedText = findingFrom.set(styles: [boldStyle, grayStyle]) + filter.set(styles: [boldStyle, colorStyle]) + overriddenLastPart.set(styles: [boldStyle, grayStyle])
-//            
-//            promptView.accessibilityValue = findingFrom + filter + overriddenLastPart
-//            
-//            if announce {
-//                let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
-//                let summaryString = AccessibilityText(text: findingFrom + filter + overriddenLastPart, isRaised: false)
-//                postAnnouncement([summaryTitle, summaryString])
-//            }
-//        } else {
-//            attributedText = findingFrom.set(styles: [boldStyle, grayStyle]) + number.set(styles: [boldStyle, grayStyle]) + filter.set(styles: [boldStyle, colorStyle]) + photos.set(styles: [boldStyle, grayStyle])
-//            
-//            promptView.accessibilityValue = findingFrom + number + filter + photos
-//            
-//            if announce {
-//                let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
-//                let summaryString = AccessibilityText(text: findingFrom + number + filter + photos, isRaised: false)
-//                postAnnouncement([summaryTitle, summaryString])
-//            }
-//        }
+        if announce {
+            let summaryTitle = AccessibilityText(text: "Summary status:\n", isRaised: true)
+            let summaryString = AccessibilityText(text: combinedPromptString, isRaised: false)
+            postAnnouncement([summaryTitle, summaryString])
+        }
         
         promptTextView.attributedText = attributedText
     }
@@ -219,5 +220,7 @@ extension PhotoFindViewController {
             print("Currently not active")
         }
     }
+    
 }
+
 
