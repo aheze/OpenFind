@@ -10,6 +10,7 @@ import SwiftUI
 
 class PhotosEmptyViewModel: ObservableObject {
     @Published var cards = [PhotoTutorialCard]()
+    var startTutorial: ((PhotoTutorialType) -> Void)?
     
     static var allCards = [
         PhotoTutorialCard(type: .starred),
@@ -39,7 +40,7 @@ extension PhotosViewController {
         UIView.animate(withDuration: 0.3) {
             self.emptyListContainerView.alpha = 1
         }
-        
+        photosEmptyViewModel?.startTutorial = pressedTutorial
         
 //        if let emptyDescriptionView = emptyDescriptionView {
 //            emptyDescriptionView.change(from: previously, to: to)

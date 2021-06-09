@@ -10,6 +10,7 @@ import UIKit
 
 extension ViewController {
     func startCacheTutorial() {
+        TipViews.dismissAll()
         TipViews.inTutorial = true
         
         var preferences = EasyTipView.globalPreferences
@@ -40,7 +41,7 @@ extension ViewController {
         }
     }
     func startCacheThirdStep() {
-        TipViews.cacheTipView2?.dismiss()
+        TipViews.dismissAll()
         
         var preferences = EasyTipView.globalPreferences
         preferences.drawing.backgroundColor = UIColor(named: "PopTipLocal")!

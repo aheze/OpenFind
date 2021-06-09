@@ -13,8 +13,7 @@ struct EmptyListView: View {
     @ObservedObject var model: PhotosEmptyViewModel
     
     var body: some View {
-        VStack {
-            
+        VStack {        
             Text("No photos with your filters")
                 .foregroundColor(Color(.secondaryLabel))
             
@@ -43,6 +42,7 @@ struct EmptyListView: View {
                                 
                                 if card.type != .screenshots && card.type != .all {
                                     Button(action: {
+                                        model.startTutorial?(card.type)
                                     }) {
                                         Text("Show me how")
                                             .foregroundColor(Color(card.type.getColor()))

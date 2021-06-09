@@ -10,6 +10,7 @@ import UIKit
 
 extension ViewController {
     func startStarTutorial() {
+        TipViews.dismissAll()
         TipViews.inTutorial = true
         
         var preferences = EasyTipView.globalPreferences
@@ -38,9 +39,11 @@ extension ViewController {
                 UIAccessibility.post(notification: .announcement, argument: UIAccessibility.makeAttributedText([stepText, instructions]))
             }
         }
+        print("currentStarStep: \(TipViews.currentStarStep)")
     }
+    
     func startStarThirdStep() {
-        TipViews.starTipView2?.dismiss()
+        TipViews.dismissAll()
         
         var preferences = EasyTipView.globalPreferences
         preferences.drawing.backgroundColor = UIColor(named: "PopTipGold")!

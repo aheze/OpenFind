@@ -96,12 +96,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             viewController.focusCacheButton = { [weak self] in
                 guard let self = self else { return }
-                
-                print("FOCUS!!!!")
                 UIAccessibility.post(notification: .screenChanged, argument: self.tabBarView.slideCacheButton)
             }
             viewController.startTutorial = { [weak self] filter in
                 guard let self = self else { return }
+                TipViews.queuingStar = false
+                TipViews.queuingCache = false
+                
                 switch filter {
                 case .starred:
                     self.startStarTutorial()
@@ -117,7 +118,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             viewController.pressedSelectTip = { [weak self] in
                 guard let self = self else { return }
-                print("start thirs")
                 if TipViews.currentStarStep == 2 {
                     self.startStarThirdStep()
                 } else if TipViews.currentCacheStep == 2 {

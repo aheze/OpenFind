@@ -131,75 +131,36 @@ extension PhotosViewController {
                 return !month.photos.isEmpty
             }
             self.monthsToDisplay = filteredMonths
-//            self.monthsToDisplay = self.allMonths
-//            for month in self.allMonths {
-//                allPhotosToDisplay += month.photos
-//            }
+            
+            if TipViews.currentStarStep == 1 {
+                self.startStarSecondStep()
+            }
+            if TipViews.currentCacheStep == 1 {
+                self.startCacheSecondStep()
+            }
         }
         
-//        switch filterState {
-//        case .local:
-//            var filteredMonths = self.allMonths
-//            for index in 0..<filteredMonths.count {
-//                let filteredPhotos = filteredMonths[index].photos.filter { photo in
-//                    return photo.editableModel?.isTakenLocally ?? false
-//                }
-//                filteredMonths[index].photos = filteredPhotos
-//                allPhotosToDisplay += filteredPhotos
-//            }
-//            filteredMonths = filteredMonths.filter { month in
-//                return !month.photos.isEmpty
-//            }
-//            self.monthsToDisplay = filteredMonths
-//        case .starred:
-//            var filteredMonths = self.allMonths
-//            for index in 0..<filteredMonths.count {
-//                let filteredPhotos = filteredMonths[index].photos.filter { photo in
-//                    return photo.editableModel?.isHearted ?? false
-//                }
-//                filteredMonths[index].photos = filteredPhotos
-//                allPhotosToDisplay += filteredPhotos
-//            }
-//            filteredMonths = filteredMonths.filter { month in
-//                return !month.photos.isEmpty
-//            }
-//            self.monthsToDisplay = filteredMonths
-//        case .cached:
-//            var filteredMonths = self.allMonths
-//            for index in 0..<filteredMonths.count {
-//                let filteredPhotos = filteredMonths[index].photos.filter { photo in
-//                    return photo.editableModel?.isDeepSearched ?? false
-//                }
-//                filteredMonths[index].photos = filteredPhotos
-//                allPhotosToDisplay += filteredPhotos
-//            }
-//            filteredMonths = filteredMonths.filter { month in
-//                return !month.photos.isEmpty
-//            }
-//            self.monthsToDisplay = filteredMonths
-//        case .all:
-//            if TipViews.currentStarStep == 1 {
-//                self.startStarSecondStep()
-//            }
-//            if TipViews.currentCacheStep == 1 {
-//                self.startCacheSecondStep()
-//            }
-//
-//            self.monthsToDisplay = self.allMonths
-//            for month in self.allMonths {
-//                allPhotosToDisplay += month.photos
-//            }
-//        }
+        if TipViews.inTutorial {
+            
+            /// star is already deselected, cache left
+            if !filterState.starSelected {
+                if filterState.cacheSelected {
+                    if TipViews.currentStarStep == 0 && TipViews.currentCacheStep == 0 {
+                        removeFilters(type: .cached)
+                    }
+                } else {
+                    if TipViews.queuingStar {
+                        self.startTutorial?(.starred)
+                    } else if TipViews.queuingCache {
+                        self.startTutorial?(.cached)
+                    }
+                }
+            }
+        }
         
         self.allPhotosToDisplay = allPhotosToDisplay
         
         if allPhotosToDisplay.isEmpty {
-//            if let previousFilter = previousFilter {
-//                showEmptyView(previously: previousFilter, to: filter)
-//            } else {
-//                showEmptyView(previously: .all, to: filter)
-//            }
-            
             var types = [PhotoTutorialType]()
             if filterState.starSelected { types.append(.starred) }
             if filterState.cacheSelected { types.append(.cached) }

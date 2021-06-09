@@ -73,5 +73,3 @@ extension PhotosViewController {
         findButton?.accessibilityHint = prompt
     }
 }
-
-
