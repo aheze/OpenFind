@@ -332,6 +332,7 @@ class CameraViewController: UIViewController {
     //MARK: Camera Focus allowed views
     @IBOutlet weak var cameraView: CameraView!
     let videoDataOutput = AVCaptureVideoDataOutput()
+    let photoDataOutput = AVCapturePhotoOutput()
     
     // MARK: Tips
     var cacheTipView: EasyTipView?
@@ -614,18 +615,6 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             
             /// 1. Find
             fastFind(in: pixelBuffer)
-        }
-        guard
-            captureCompletionBlock != nil,
-            let outputImage = UIImage(pixBuffer: pixelBuffer)
-        else { return }
-        
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            if let captureCompletionBlock = self.captureCompletionBlock {
-                captureCompletionBlock(outputImage)
-            }
-            self.captureCompletionBlock = nil
         }
     }
 }

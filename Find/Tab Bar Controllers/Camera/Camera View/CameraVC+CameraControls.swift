@@ -33,13 +33,16 @@ extension CameraViewController {
                 }
             }
             catch {
-                print("Error occured \(error)")
+                print("Error occurred \(error)")
                 return
             }
             avSession.sessionPreset = .photo
             videoDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "Buffer Queue", qos: .userInteractive, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil))
             if avSession.canAddOutput(videoDataOutput) {
                 avSession.addOutput(videoDataOutput)
+            }
+            if avSession.canAddOutput(photoDataOutput) {
+                avSession.addOutput(photoDataOutput)
             }
             cameraView.videoPreviewLayer.videoGravity = .resizeAspectFill
             let newBounds = view.layer.bounds

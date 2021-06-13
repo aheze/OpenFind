@@ -23,21 +23,6 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
                 fastFind(in: pixelBuffer)
             }
         }
-        
-        guard captureCompletionBlock != nil else { return }
-        
-        DispatchQueue.main.async { [weak self] in
-            guard
-                let self = self,
-                let outputImage = UIImage(pixBuffer: pixelBuffer)
-            else { return }
-            
-            if let captureCompletionBlock = self.captureCompletionBlock {
-                captureCompletionBlock(outputImage)
-            }
-            
-            self.captureCompletionBlock = nil
-        }
     }
 }
 

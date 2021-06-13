@@ -30,7 +30,6 @@ extension CameraViewController {
                                 
                         for text in observation.topCandidates(1) {
                             
-                            print("Con re. \(convertedRect)")
                             let transcriptComponent = Component()
                             transcriptComponent.text = text.string.lowercased()
                             transcriptComponent.x = convertedRect.origin.x

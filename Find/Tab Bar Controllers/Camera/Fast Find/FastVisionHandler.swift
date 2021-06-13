@@ -126,11 +126,10 @@ extension CameraViewController {
         } else {
             fadeCurrentComponents(currentComponents: currentComponents)
             updateMatchesNumber(to: 0, tapHaptic: false)
-            currentComponents.removeAll()
-            busyFastFinding = false
-            
+            currentComponents.removeAll() 
         }
         
+        busyFastFinding = false
         
         if waitingToFind {
             waitingToFind = false

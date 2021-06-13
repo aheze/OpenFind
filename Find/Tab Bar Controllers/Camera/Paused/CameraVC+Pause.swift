@@ -7,13 +7,20 @@
 //
 
 import UIKit
+import AVFoundation
 
 extension CameraViewController {
     func pauseLivePreview() {
         cameraView.videoPreviewLayer.connection?.isEnabled = false
-        capturePhoto { image in
-            self.currentPausedImage = image
-            self.showImageView(true)
+        let photoSettings = AVCapturePhotoSettings()
+        
+        let videoPreviewLayerOrientation = cameraView.videoPreviewLayer.connection?.videoOrientation
+        if let photoOutputConnection = photoDataOutput.connection(with: .video) {
+            photoOutputConnection.videoOrientation = videoPreviewLayerOrientation!
+        }
+        if let photoPreviewType = photoSettings.availablePreviewPhotoPixelFormatTypes.first {
+            photoSettings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: photoPreviewType]
+            photoDataOutput.capturePhoto(with: photoSettings, delegate: self)
         }
         pausedAccessibility(paused: true)
     }
@@ -57,5 +64,29 @@ extension CameraViewController {
             }
         }
     }
-   
+}
+
+extension CameraViewController: AVCapturePhotoCaptureDelegate {
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        guard let imageData = photo.fileDataRepresentation() else { return }
+        if let unrotatedImage = UIImage(data: imageData), let image = unrotatedImage.rotated() {
+            
+            self.currentPausedImage = image
+            self.showImageView(true)
+            self.findWhenPaused()
+        }
+    }
+}
+
+extension UIImage {
+    func rotated() -> UIImage? {
+        if (self.imageOrientation == UIImage.Orientation.up ) {
+            return self
+        }
+        UIGraphicsBeginImageContext(self.size)
+        self.draw(in: CGRect(origin: CGPoint.zero, size: self.size))
+        let copy = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return copy
+    }
 }
