@@ -50,9 +50,11 @@ extension PhotosViewController {
     }
     func animateCloseQuickTour(quickTourView: TutorialHeader) {
         quickTourView.colorViewHeightConst.constant = 0
+        emptyListContainerTopC.constant = 0
         
         UIView.animate(withDuration: 0.5, animations: {
             quickTourView.layoutIfNeeded()
+            self.emptyListContainerView.layoutIfNeeded()
             self.collectionView.contentInset.top = 0
             self.collectionView.verticalScrollIndicatorInsets.top = 0
             quickTourView.startTourButton.alpha = 0

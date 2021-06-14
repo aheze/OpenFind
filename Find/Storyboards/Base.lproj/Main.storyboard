@@ -2630,7 +2630,7 @@
                                 </collectionReusableView>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hzo-eW-WDx">
-                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                <rect key="frame" x="0.0" y="44" width="428" height="882"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0XE-et-vDj" customClass="SegmentedSlider" customModule="Find" customModuleProvider="target">
@@ -2670,7 +2670,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="JKE-Ij-JZI" firstAttribute="centerX" secondItem="LAd-sS-QXd" secondAttribute="centerX" id="0WO-nk-lsn"/>
-                            <constraint firstItem="hzo-eW-WDx" firstAttribute="top" secondItem="LAd-sS-QXd" secondAttribute="top" id="1LO-79-rz8"/>
+                            <constraint firstItem="hzo-eW-WDx" firstAttribute="top" secondItem="y9x-GI-FZm" secondAttribute="top" id="1LO-79-rz8"/>
                             <constraint firstAttribute="trailing" secondItem="8FW-Cs-46e" secondAttribute="trailing" id="5Se-1h-iLg"/>
                             <constraint firstItem="Rxq-Q5-k6q" firstAttribute="leading" secondItem="LAd-sS-QXd" secondAttribute="leading" id="6sC-Mk-WTH"/>
                             <constraint firstAttribute="trailing" secondItem="Rxq-Q5-k6q" secondAttribute="trailing" id="76U-Hn-zkM"/>
@@ -3199,7 +3199,7 @@
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tUv-4R-c5U">
                                         <rect key="frame" x="0.0" y="0.0" width="86.333333333333329" height="39"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="W9A-sZ-kHI">
-                                            <rect key="frame" x="0.0" y="0.0" width="86" height="39"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="86.333333333333329" height="39"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <blurEffect style="prominent"/>

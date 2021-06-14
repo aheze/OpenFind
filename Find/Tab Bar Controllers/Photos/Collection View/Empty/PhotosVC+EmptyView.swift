@@ -40,6 +40,12 @@ extension PhotosViewController {
         }
         photosEmptyViewModel?.startTutorial = pressedTutorial
         view.bringSubviewToFront(segmentedSlider)
+        
+        if quickTourView != nil {
+            emptyListContainerTopC.constant = 50
+        } else {
+            emptyListContainerTopC.constant = 0
+        }
     }
     func hideEmptyView() {
         UIView.animate(withDuration: 0.3) {

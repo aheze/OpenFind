@@ -150,15 +150,22 @@ extension PhotosViewController {
                     }
                 } else {
                     if TipViews.queuingStar {
-                        self.startTutorial?(.starred)
+                        if filterState.currentFilter == .all {
+                            self.startStarSecondStep()
+                        } else {
+                            self.startTutorial?(.starred)
+                        }
                     } else if TipViews.queuingCache {
-                        self.startTutorial?(.cached)
+                        if filterState.currentFilter == .all {
+                            self.startCacheSecondStep()
+                        } else {
+                            self.startTutorial?(.cached)
+                        }
                     }
                 }
             }
         }
         
-        print("all pho: \(allPhotosToDisplay.count)")
         self.allPhotosToDisplay = allPhotosToDisplay
         
         if allPhotosToDisplay.isEmpty {
@@ -186,3 +193,5 @@ extension PhotosViewController {
         updateFindButtonHint()
     }
 }
+
+

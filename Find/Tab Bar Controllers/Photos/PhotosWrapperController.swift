@@ -54,7 +54,6 @@ class PhotosWrapperController: UIViewController {
         
         navController.viewController.switchToFind = { [weak self] (photoFilterState, photosToFindFrom, isAllPhotos, hasChangedFromBefore)  in
             guard let self = self else { return }
-            print("switching, all? \(isAllPhotos)")
             self.photoFilterState = photoFilterState
             self.photosToFind = photosToFindFrom
             self.findingFromAllPhotos = isAllPhotos
