@@ -37,13 +37,15 @@ extension CameraViewController {
     func showImageView(_ show: Bool) {
         if show {
             pausedImageView.image = currentPausedImage
+            pausedImageView.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
             UIView.animate(withDuration: 0.2) {
                 self.pausedImageView.alpha = 1
+                self.pausedImageView.transform = CGAffineTransform.identity
             }
-
         } else {
             UIView.animate(withDuration: 0.1) {
                 self.pausedImageView.alpha = 0
+                self.pausedImageView.transform = CGAffineTransform.identity
             }
         }
     }

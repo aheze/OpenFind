@@ -45,9 +45,7 @@ extension CameraViewController {
                 avSession.addOutput(photoDataOutput)
             }
             cameraView.videoPreviewLayer.videoGravity = .resizeAspectFill
-            let newBounds = view.layer.bounds
-            cameraView.videoPreviewLayer.bounds = newBounds
-            cameraView.videoPreviewLayer.position = CGPoint(x: newBounds.midX, y: newBounds.midY);
+            cameraView.videoPreviewLayer.frame = view.layer.bounds
             avSession.startRunning()
         }
     }

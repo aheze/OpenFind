@@ -27,8 +27,12 @@ class CameraIcon: UIView {
     @IBOutlet weak var containerView: UIView! /// contains rim and fill
     @IBOutlet weak var rimView: UIView!
     @IBOutlet weak var fillView: UIView!
+    @IBOutlet weak var fillRimViewContainer: UIView!
     @IBOutlet weak var fillBorderView: UIView!
     var shapeFillLayer: CAShapeLayer?
+    var shapeFillRimContainerLayer: CALayer?
+    var shapeFillRimLayer: CAShapeLayer?
+    var shapeFillRimGradientLayer: CAGradientLayer?
     
     @IBOutlet weak var touchButton: UIButton!
     
@@ -77,8 +81,37 @@ class CameraIcon: UIView {
         shapeFillLayer = fillLayer
         fillView.layer.mask = fillLayer
         
+        let shapeFillRimContainerLayer = CALayer()
+        shapeFillRimContainerLayer.frame = fillRimViewContainer.bounds
+        fillRimViewContainer.layer.addSublayer(shapeFillRimContainerLayer)
+        self.shapeFillRimContainerLayer = shapeFillRimContainerLayer
+        
+        let shapeFillRimLayer = CAShapeLayer()
+        shapeFillRimLayer.fillColor = nil
+        shapeFillRimLayer.strokeColor = #colorLiteral(red: 0.6068297111, green: 0.8473903103, blue: 0.937254902, alpha: 1).cgColor
+        shapeFillRimLayer.lineWidth = 0
+        shapeFillRimLayer.position = CGPoint(x: fillView.bounds.width / 2, y: fillView.bounds.width / 2)
+        shapeFillRimContainerLayer.addSublayer(shapeFillRimLayer)
+        self.shapeFillRimLayer = shapeFillRimLayer
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.type = .conic
+        gradientLayer.colors = [
+            UIColor.clear.cgColor,
+            UIColor.clear.cgColor,
+            UIColor.blue.cgColor,
+            UIColor.blue.cgColor
+        ]
+        gradientLayer.locations = [0, 0.3, 0.7, 0.9]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
+        gradientLayer.frame = fillRimViewContainer.bounds
+        shapeFillRimContainerLayer.mask = gradientLayer
+        self.shapeFillRimGradientLayer = gradientLayer
+        
         let circlePath = createRoundedCircle(circumference: fillView.bounds.width, cornerRadius: fillView.bounds.width / 2)
         fillLayer.path = circlePath
+        shapeFillRimLayer.path = circlePath
         
         rimView.layer.borderWidth = 2
         rimView.layer.borderColor = Constants.detailIconColorLight.cgColor
@@ -95,18 +128,21 @@ class CameraIcon: UIView {
             activeRimColor = UIColor(named: "50Black")!
             
             fillView.transform = CGAffineTransform.identity
+            fillRimViewContainer.transform = CGAffineTransform.identity
             rimView.layer.borderColor = (isActiveCameraIcon || isActualButton) ? activeRimColor.cgColor : inactiveRimColor.cgColor
         case 3:
             inactiveRimColor = UIColor.clear
             activeRimColor = UIColor.clear
             
             fillView.transform = CGAffineTransform(scaleX: 1.36, y: 1.36)
+            fillRimViewContainer.transform = CGAffineTransform(scaleX: 1.36, y: 1.36)
             rimView.layer.borderColor = (isActiveCameraIcon || isActualButton) ? activeRimColor.cgColor : inactiveRimColor.cgColor
         default:
             inactiveRimColor = Constants.detailIconColorLight
             activeRimColor = UIColor.white
             
             fillView.transform = CGAffineTransform.identity
+            fillRimViewContainer.transform = CGAffineTransform.identity
             rimView.layer.borderColor = (isActiveCameraIcon || isActualButton) ? activeRimColor.cgColor : inactiveRimColor.cgColor
         }
         
@@ -196,10 +232,12 @@ class CameraIcon: UIView {
             pathAnimation.toValue = trianglePath
             
             shapeFillLayer?.path = trianglePath
+            shapeFillRimLayer?.path = trianglePath
             pathAnimation.duration = 0.2
             pathAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
             
             shapeFillLayer?.add(pathAnimation, forKey: "pathAnimation")
+            shapeFillRimLayer?.add(pathAnimation, forKey: "pathAnimation")
         } else {
             let circlePath = createRoundedCircle(circumference: fillView.bounds.width, cornerRadius: fillView.bounds.width / 2)
             
@@ -208,10 +246,12 @@ class CameraIcon: UIView {
             pathAnimation.toValue = circlePath
             
             shapeFillLayer?.path = circlePath
+            shapeFillRimLayer?.path = circlePath
             pathAnimation.duration = 0.2
             pathAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
             
             shapeFillLayer?.add(pathAnimation, forKey: "pathAnimation")
+            shapeFillRimLayer?.add(pathAnimation, forKey: "pathAnimation")
         }
     }
     
@@ -252,5 +292,44 @@ class CameraIcon: UIView {
         path.closeSubpath()
         
         return path
+    }
+    
+    func animateLoading(start: Bool) {
+        print("anim")
+        if start {
+            print("start")
+            // We want to animate the strokeEnd property of the circleLayer
+//            let strokeStartAnimation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.strokeStart))
+//            strokeStartAnimation.fromValue = 0
+//            strokeStartAnimation.toValue = 1
+//            strokeStartAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+//            shapeFillRimLayer?.strokeStart = 1
+//
+//            let strokeEndAnimation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.strokeEnd))
+//            strokeEndAnimation.fromValue = 0.5
+//            strokeEndAnimation.toValue =
+//            strokeEndAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+//            shapeFillRimLayer?.strokeEnd = 0.49999
+//
+//            let strokeAnimation = CAAnimationGroup()
+//            strokeAnimation.repeatCount = .infinity
+//            strokeAnimation.duration = 1
+//            strokeAnimation.animations = [strokeStartAnimation, strokeEndAnimation]
+//            shapeFillRimLayer?.add(strokeAnimation, forKey: nil)
+            
+            let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
+            rotation.toValue = Double.pi * 2
+            rotation.duration = 2
+            rotation.repeatCount = .infinity
+            shapeFillRimGradientLayer?.add(rotation, forKey: "rotationAnimation")
+            
+            let widthAnimation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.lineWidth))
+            widthAnimation.fromValue = 0
+            widthAnimation.toValue = 2
+            shapeFillRimLayer?.lineWidth = 2
+            shapeFillRimLayer?.add(widthAnimation, forKey: nil)
+            
+//            shapeFillLayer?.backgroundColor = UIColor.red.cgColor
+        }
     }
 }

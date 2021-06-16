@@ -25,6 +25,7 @@ extension CameraViewController {
                 UserDefaults.standard.set(true, forKey: "hasPausedBefore")
                 self.showCacheTip()
             }
+            self.cameraIcon.animateLoading(start: true)
         } else {
             self.saveToPhotosIfNeeded()
             self.resetState()
