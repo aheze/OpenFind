@@ -501,14 +501,14 @@
                                 <constraints>
                                     <constraint firstItem="ffY-JT-gig" firstAttribute="centerX" secondItem="9h0-TV-oeH" secondAttribute="centerX" id="0G3-SD-jKY"/>
                                     <constraint firstItem="ryG-3Q-0nW" firstAttribute="centerY" secondItem="LAa-ha-Chc" secondAttribute="centerY" id="1hv-al-OAj"/>
-                                    <constraint firstItem="m5W-6E-t5W" firstAttribute="leading" secondItem="SIG-Pk-jNK" secondAttribute="trailing" constant="8" id="2ir-lM-Zqr"/>
+                                    <constraint firstItem="m5W-6E-t5W" firstAttribute="leading" secondItem="SIG-Pk-jNK" secondAttribute="trailing" constant="8" identifier="Flash right neighbor" id="2ir-lM-Zqr"/>
                                     <constraint firstAttribute="bottom" secondItem="LAa-ha-Chc" secondAttribute="bottom" constant="42" id="4ix-l7-edU"/>
                                     <constraint firstItem="Kbt-Wb-Lvr" firstAttribute="leading" secondItem="Tda-he-8YJ" secondAttribute="leading" constant="8" id="74d-RL-qsa"/>
                                     <constraint firstAttribute="bottom" secondItem="Kbt-Wb-Lvr" secondAttribute="bottom" constant="40" id="7Fo-5n-bn7"/>
                                     <constraint firstItem="SIG-Pk-jNK" firstAttribute="top" secondItem="m5W-6E-t5W" secondAttribute="bottom" id="KEx-Vb-KNO"/>
                                     <constraint firstAttribute="trailing" secondItem="SIG-Pk-jNK" secondAttribute="trailing" constant="54" id="OLy-KE-EUn"/>
                                     <constraint firstItem="LAa-ha-Chc" firstAttribute="centerX" secondItem="Tda-he-8YJ" secondAttribute="centerX" id="UK9-31-ftq"/>
-                                    <constraint firstAttribute="bottom" secondItem="SIG-Pk-jNK" secondAttribute="bottom" constant="40" id="V6B-p4-O4u"/>
+                                    <constraint firstAttribute="bottom" secondItem="SIG-Pk-jNK" secondAttribute="bottom" constant="40" identifier="Flash bottom" id="V6B-p4-O4u"/>
                                     <constraint firstItem="Myy-mx-RUb" firstAttribute="centerX" secondItem="ryG-3Q-0nW" secondAttribute="centerX" id="VR8-0X-25P"/>
                                     <constraint firstItem="9h0-TV-oeH" firstAttribute="centerY" secondItem="LAa-ha-Chc" secondAttribute="centerY" id="XEX-nw-d7u"/>
                                     <constraint firstAttribute="bottom" secondItem="m5W-6E-t5W" secondAttribute="bottom" constant="40" id="Ygo-gn-4JO"/>
@@ -517,11 +517,11 @@
                                     <constraint firstItem="9h0-TV-oeH" firstAttribute="leading" secondItem="LAa-ha-Chc" secondAttribute="trailing" constant="8" id="f8H-ls-UMJ"/>
                                     <constraint firstAttribute="trailing" secondItem="m5W-6E-t5W" secondAttribute="trailing" constant="8" id="fDp-pL-h8O"/>
                                     <constraint firstItem="LAa-ha-Chc" firstAttribute="leading" secondItem="ryG-3Q-0nW" secondAttribute="trailing" constant="8" id="hL6-sE-NmD"/>
-                                    <constraint firstAttribute="bottom" secondItem="VrD-xe-4tc" secondAttribute="bottom" constant="40" id="i6z-7B-INV"/>
+                                    <constraint firstAttribute="bottom" secondItem="VrD-xe-4tc" secondAttribute="bottom" constant="40" identifier="Full screen bottom" id="i6z-7B-INV"/>
                                     <constraint firstItem="VrD-xe-4tc" firstAttribute="top" secondItem="Kbt-Wb-Lvr" secondAttribute="bottom" id="m21-7T-ciq"/>
                                     <constraint firstItem="VrD-xe-4tc" firstAttribute="leading" secondItem="Tda-he-8YJ" secondAttribute="leading" constant="54" id="oGD-mU-2eF"/>
                                     <constraint firstItem="LAa-ha-Chc" firstAttribute="top" secondItem="Tda-he-8YJ" secondAttribute="top" constant="12" id="xED-BC-y3i"/>
-                                    <constraint firstItem="VrD-xe-4tc" firstAttribute="leading" secondItem="Kbt-Wb-Lvr" secondAttribute="trailing" constant="8" id="yxT-N9-O2m"/>
+                                    <constraint firstItem="VrD-xe-4tc" firstAttribute="leading" secondItem="Kbt-Wb-Lvr" secondAttribute="trailing" constant="8" identifier="Full screen left neighhbor" id="yxT-N9-O2m"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -3199,7 +3199,7 @@
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tUv-4R-c5U">
                                         <rect key="frame" x="0.0" y="0.0" width="86.333333333333329" height="39"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="W9A-sZ-kHI">
-                                            <rect key="frame" x="0.0" y="0.0" width="86.333333333333329" height="39"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="86" height="39"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <blurEffect style="prominent"/>

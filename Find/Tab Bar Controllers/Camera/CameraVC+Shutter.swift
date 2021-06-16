@@ -39,7 +39,7 @@ extension CameraViewController {
         }
         
         self.removeFocusRects(CameraState.isPaused)
-        self.adjustButtonLayout(CameraState.isPaused)
+        self.adjustButtonLayout(CameraState.isPaused) /// rearrange buttons
         self.lockFlashlight(lock: CameraState.isPaused)
     }
 }

@@ -61,15 +61,15 @@ extension CameraViewController {
             fullScreenTopC.constant = 8
             flashTopC.constant = 8
         } else {
-            fullScreenLeftNeighborC.isActive = true
             fullScreenLeftC.isActive = false
-            fullScreenBottomC.isActive = true
             fullScreenTopC.isActive = false
-            
-            flashRightNeighborC.isActive = true
-            flashRightC.isActive = false
-            flashBottomC.isActive = true
             flashTopC.isActive = false
+            flashRightC.isActive = false
+            
+            fullScreenLeftNeighborC.isActive = true
+            fullScreenBottomC.isActive = true
+            flashBottomC.isActive = true
+            flashRightNeighborC.isActive = true
         }
         
         if animate {
