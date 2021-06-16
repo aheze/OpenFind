@@ -34,19 +34,35 @@ class CameraIcon: UIView {
     var shapeFillRimLayer: CAShapeLayer?
     var shapeFillRimGradientLayer: CAGradientLayer?
     
+    var generator: UIImpactFeedbackGenerator?
     @IBOutlet weak var touchButton: UIButton!
-    
     @IBAction func touchDown(_ sender: Any) {
+        if isActualButton {
+            let level = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
+            if level == 2 || level == 3 {
+                generator = UIImpactFeedbackGenerator(style: .rigid)
+                generator?.prepare()
+                generator?.impactOccurred()
+            }
+        }
         UIView.animate(withDuration: 0.2, animations: {
             self.contentView.alpha = 0.5
             if self.isActualButton {
-                self.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
+                self.containerView.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
             }
         })
     }
     @IBAction func touchUpInside(_ sender: Any) {
         pressed?()
         resetAlpha()
+        if isActualButton {
+            let level = UserDefaults.standard.integer(forKey: "hapticFeedbackLevel")
+            if level == 2 || level == 3 {
+                generator = UIImpactFeedbackGenerator(style: .light)
+                generator?.impactOccurred()
+                generator = nil
+            }
+        }
     }
     @IBAction func touchUpCancel(_ sender: Any) {
         resetAlpha()
@@ -55,7 +71,7 @@ class CameraIcon: UIView {
         UIView.animate(withDuration: 0.2, animations: {
             self.contentView.alpha = 1
             if self.isActualButton {
-                self.transform = CGAffineTransform.identity
+                self.containerView.transform = CGAffineTransform.identity
             }
         })
     }
@@ -108,6 +124,7 @@ class CameraIcon: UIView {
         gradientLayer.frame = fillRimViewContainer.bounds.insetBy(dx: -20, dy: -20)
         shapeFillRimContainerLayer.mask = gradientLayer
         self.shapeFillRimGradientLayer = gradientLayer
+        fillRimViewContainer.alpha = 0
         
         let circlePath = createRoundedCircle(circumference: fillView.bounds.width, cornerRadius: fillView.bounds.width / 2)
         fillLayer.path = circlePath
@@ -119,12 +136,6 @@ class CameraIcon: UIView {
         fillBorderView.alpha = 0
         
         updateStyle()
-        
-        let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
-        rotation.toValue = Double.pi * 2
-        rotation.duration = 2
-        rotation.repeatCount = .infinity
-        shapeFillRimGradientLayer?.add(rotation, forKey: "rotationAnimation")
     }
     
     func updateStyle() {
@@ -309,6 +320,13 @@ class CameraIcon: UIView {
             }
             
             if start {
+                let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
+                rotation.toValue = Double.pi * 2
+                rotation.duration = 0.9
+                rotation.repeatCount = .infinity
+                shapeFillRimGradientLayer?.removeAllAnimations()
+                shapeFillRimGradientLayer?.add(rotation, forKey: "rotationAnimation")
+                
                 let widthAnimation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.lineWidth))
                 widthAnimation.fromValue = shapeFillRimLayer.lineWidth
                 widthAnimation.toValue = 2
@@ -320,6 +338,11 @@ class CameraIcon: UIView {
                 widthAnimation.toValue = 0
                 shapeFillRimLayer.lineWidth = 0
                 shapeFillRimLayer.add(widthAnimation, forKey: nil)
+            }
+            
+            
+            UIView.animate(withDuration: 0.3) {
+                self.fillRimViewContainer.alpha = start ? 1 : 0
             }
         }
     }

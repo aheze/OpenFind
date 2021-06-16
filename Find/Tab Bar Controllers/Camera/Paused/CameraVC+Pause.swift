@@ -81,6 +81,18 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
                 self.findWhenPaused()
                 self.cameraIcon.animateLoading(start: false)
             }
+            switch UserDefaults.standard.integer(forKey: "hapticFeedbackLevel") {
+            case 2:
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.prepare()
+                generator.impactOccurred()
+            case 3:
+                let generator = UIImpactFeedbackGenerator(style: .medium)
+                generator.prepare()
+                generator.impactOccurred()
+            default:
+                break
+            }
         }
     }
 }

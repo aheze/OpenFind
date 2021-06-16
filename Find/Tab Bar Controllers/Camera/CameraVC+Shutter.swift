@@ -35,6 +35,7 @@ extension CameraViewController {
             self.resetHighlights()
             self.resetTranscripts()
             
+            self.cameraIcon.animateLoading(start: false)
             AppStoreReviewManager.requestReviewIfPossible()
         }
         

@@ -625,6 +625,13 @@ extension SettingsViewHoster {
         SOFTWARE.
         """
         
+//        var item17 = CarteItem(name: "Haptica")
+//        item17.licenseText = """
+//
+//        """
+        
+        
+        
         carteViewController.items.append(item1)
         carteViewController.items.append(item2)
         carteViewController.items.append(item3)
