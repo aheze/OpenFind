@@ -323,6 +323,7 @@ class CameraViewController: UIViewController {
     var highlightsFromCache = [Component]() /// highlights that were from the cache
     
     //MARK: Camera
+    var currentlyCapturing = false
     @IBOutlet weak var pausedImageView: UIImageView!
     
     let avSession = AVCaptureSession()

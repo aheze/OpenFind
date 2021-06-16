@@ -105,7 +105,7 @@ class CameraIcon: UIView {
         gradientLayer.locations = [0, 0.3, 0.7, 0.9]
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
-        gradientLayer.frame = fillRimViewContainer.bounds
+        gradientLayer.frame = fillRimViewContainer.bounds.insetBy(dx: -20, dy: -20)
         shapeFillRimContainerLayer.mask = gradientLayer
         self.shapeFillRimGradientLayer = gradientLayer
         
@@ -119,6 +119,12 @@ class CameraIcon: UIView {
         fillBorderView.alpha = 0
         
         updateStyle()
+        
+        let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
+        rotation.toValue = Double.pi * 2
+        rotation.duration = 2
+        rotation.repeatCount = .infinity
+        shapeFillRimGradientLayer?.add(rotation, forKey: "rotationAnimation")
     }
     
     func updateStyle() {
@@ -295,41 +301,26 @@ class CameraIcon: UIView {
     }
     
     func animateLoading(start: Bool) {
-        print("anim")
-        if start {
-            print("start")
-            // We want to animate the strokeEnd property of the circleLayer
-//            let strokeStartAnimation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.strokeStart))
-//            strokeStartAnimation.fromValue = 0
-//            strokeStartAnimation.toValue = 1
-//            strokeStartAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
-//            shapeFillRimLayer?.strokeStart = 1
-//
-//            let strokeEndAnimation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.strokeEnd))
-//            strokeEndAnimation.fromValue = 0.5
-//            strokeEndAnimation.toValue =
-//            strokeEndAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
-//            shapeFillRimLayer?.strokeEnd = 0.49999
-//
-//            let strokeAnimation = CAAnimationGroup()
-//            strokeAnimation.repeatCount = .infinity
-//            strokeAnimation.duration = 1
-//            strokeAnimation.animations = [strokeStartAnimation, strokeEndAnimation]
-//            shapeFillRimLayer?.add(strokeAnimation, forKey: nil)
+        if let shapeFillRimLayer = shapeFillRimLayer {
+            if let currentValue = shapeFillRimLayer.presentation()?.value(forKeyPath: #keyPath(CAShapeLayer.lineWidth)) {
+                let currentLineWidth = currentValue as! CGFloat
+                shapeFillRimLayer.lineWidth = currentLineWidth
+                shapeFillRimLayer.removeAllAnimations()
+            }
             
-            let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
-            rotation.toValue = Double.pi * 2
-            rotation.duration = 2
-            rotation.repeatCount = .infinity
-            shapeFillRimGradientLayer?.add(rotation, forKey: "rotationAnimation")
-            
-            let widthAnimation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.lineWidth))
-            widthAnimation.fromValue = 0
-            widthAnimation.toValue = 2
-            shapeFillRimLayer?.lineWidth = 2
-            shapeFillRimLayer?.add(widthAnimation, forKey: nil)
-            
-//            shapeFillLayer?.backgroundColor = UIColor.red.cgColor
+            if start {
+                let widthAnimation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.lineWidth))
+                widthAnimation.fromValue = shapeFillRimLayer.lineWidth
+                widthAnimation.toValue = 2
+                shapeFillRimLayer.lineWidth = 2
+                shapeFillRimLayer.add(widthAnimation, forKey: nil)
+            } else {
+                let widthAnimation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.lineWidth))
+                widthAnimation.fromValue = shapeFillRimLayer.lineWidth
+                widthAnimation.toValue = 0
+                shapeFillRimLayer.lineWidth = 0
+                shapeFillRimLayer.add(widthAnimation, forKey: nil)
+            }
         }
     }
 }

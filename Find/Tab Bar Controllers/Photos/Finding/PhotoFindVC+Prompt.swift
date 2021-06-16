@@ -62,7 +62,7 @@ extension PhotoFindViewController {
             if isAllPhotos {
                 number = "all \(number)"
             } else {
-                number = "\(number) of all "
+                number = "\(number)of all "
             }
         }
         

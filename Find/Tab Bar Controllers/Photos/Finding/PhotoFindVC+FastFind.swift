@@ -85,9 +85,7 @@ extension PhotoFindViewController {
                 DispatchQueue.main.async {
                     
                     self.setPromptToFinishedFastFinding(howMany: self.totalCacheResults + fastFindResultsNumber)
-                    
                     self.tableView.reloadData()
-                    
                     
                     UIView.animate(withDuration: 0.1, animations: {
                         self.tableView.alpha = 1

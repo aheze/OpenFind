@@ -62,7 +62,7 @@ extension PhotosViewController {
             if numberOfSelected == 0 {
                 number = "all \(number) "
             } else {
-                number = "\(number) of all "
+                number = "\(number)of all "
             }
         }
         

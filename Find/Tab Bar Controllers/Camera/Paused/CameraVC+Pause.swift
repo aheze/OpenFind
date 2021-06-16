@@ -11,6 +11,7 @@ import AVFoundation
 
 extension CameraViewController {
     func pauseLivePreview() {
+        currentlyCapturing = true
         cameraView.videoPreviewLayer.connection?.isEnabled = false
         let photoSettings = AVCapturePhotoSettings()
         
@@ -25,6 +26,7 @@ extension CameraViewController {
         pausedAccessibility(paused: true)
     }
     func startLivePreview() {
+        currentlyCapturing = false
         /// make sure it's running (can stop when going to app switcher and back)
         if !avSession.isRunning {
             self.avSession.startRunning()
@@ -70,12 +72,15 @@ extension CameraViewController {
 
 extension CameraViewController: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-        guard let imageData = photo.fileDataRepresentation() else { return }
-        if let unrotatedImage = UIImage(data: imageData), let image = unrotatedImage.rotated() {
-            
-            self.currentPausedImage = image
-            self.showImageView(true)
-            self.findWhenPaused()
+        if currentlyCapturing {
+            currentlyCapturing = false
+            guard let imageData = photo.fileDataRepresentation() else { return }
+            if let unrotatedImage = UIImage(data: imageData), let image = unrotatedImage.rotated() {
+                self.currentPausedImage = image
+                self.showImageView(true)
+                self.findWhenPaused()
+                self.cameraIcon.animateLoading(start: false)
+            }
         }
     }
 }
