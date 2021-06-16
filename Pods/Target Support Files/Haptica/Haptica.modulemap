@@ -1,0 +1,6 @@
+framework module Haptica {
+  umbrella header "Haptica-umbrella.h"
+
+  export *
+  module * { export * }
+}
