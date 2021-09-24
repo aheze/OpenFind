@@ -36,7 +36,6 @@ extension ViewController {
                 let sorted = recognitionLanguages.sorted { ($0.priority ?? 0) < ($1.priority ?? 0) }
                 let strings = sorted.map { $0.language.getName().1 }
                 Defaults.recognitionLanguages = strings
-                print("strings: \(strings)")
             }
         } catch {
             print("Error decoding: \(error)")

@@ -26,7 +26,6 @@ extension PhotoFindViewController {
         let originalFindPhotoIdentifiers = self.findPhotos.map { $0.asset.localIdentifier }
         let newFindPhotoIdentifiers = findPhotos.map { $0.asset.localIdentifier }
         
-        print(originalFindPhotoIdentifiers.containsSameElements(as: newFindPhotoIdentifiers))
         
         self.findPhotos = findPhotos
         self.photoFilterState = photoFilterState

@@ -67,6 +67,7 @@ struct DownloadView: View {
             }
             .configureBar()
             .navigationTitle("Get the full app")
+            .navigationViewStyle(StackNavigationViewStyle())
         }
     }
     

@@ -15,7 +15,6 @@ extension PhotoFindViewController: UITableViewDelegate, UITableViewDataSource {
         return resultPhotos.count
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HFindCell", for: indexPath) as! HistoryFindCell
         

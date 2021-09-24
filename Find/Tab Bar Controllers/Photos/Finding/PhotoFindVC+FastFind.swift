@@ -256,7 +256,6 @@ extension PhotoFindViewController {
                     existingPhoto.components += componentsToAdd
                     existingPhoto.numberOfMatches += newMatchesNumber
                     fastFindResultsNumber += newMatchesNumber
-                    print("ADD MATCHES: \(newMatchesNumber)")
                     
                 }
             }

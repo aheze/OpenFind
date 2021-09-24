@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 
+
 extension CameraViewController {
     func getCamera() -> AVCaptureDevice? {
         if let cameraDevice = AVCaptureDevice.default(.builtInDualCamera,

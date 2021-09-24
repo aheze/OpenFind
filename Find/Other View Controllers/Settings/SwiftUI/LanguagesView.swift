@@ -182,7 +182,7 @@ struct LanguagesView: View {
                                         if requiresAccurate {
                                             Button(action: {
                                                 SwiftEntryKitTemplates().displaySEK(
-                                                    message: "Only works when Cached",
+                                                    message: "Must be at top of list and only works when Cached",
                                                     backgroundColor: #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1),
                                                     textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
                                                     location: .top,
