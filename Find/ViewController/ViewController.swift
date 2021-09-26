@@ -257,13 +257,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         case .began:
             if gestures.isAnimating {
                 
-                let listsCollectionView = lists.viewController.collectionView
-                listsCollectionView?.isScrollEnabled = false
-                listsCollectionView?.isScrollEnabled = true
-                    
-                let photosCollectionView = photos.navController.viewController.collectionView
-                photosCollectionView?.isScrollEnabled = false
-                photosCollectionView?.isScrollEnabled = true
+                /// temporarily disable scrolling in the collection view/table view
+                stopScroll(lists.viewController.collectionView)
+                stopScroll(photos.navController.viewController.collectionView)
+                stopScroll(photos.photoFindViewController.tableView)
                 
                 animator?.isReversed = false
                 animator?.stopAnimation(true)
@@ -387,16 +384,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     
                     switch ViewControllerState.currentVC {
                     case is PhotosWrapperController:
-                        let photosCollectionView = photos.navController.viewController.collectionView
-                        photosCollectionView?.isScrollEnabled = false
-                        photosCollectionView?.isScrollEnabled = true
+                        stopScroll(photos.navController.viewController.collectionView)
+                        stopScroll(photos.photoFindViewController.tableView)
                         gestures.isRubberBanding = true
                     case is CameraViewController:
                         startMoveVC(from: camera, to: photos, direction: .right, toOverlay: true)
                     case is ListsNavController:
-                        let listsCollectionView = lists.viewController.collectionView
-                        listsCollectionView?.isScrollEnabled = false
-                        listsCollectionView?.isScrollEnabled = true
+                        stopScroll(lists.viewController.collectionView)
                         startMoveVC(from: lists, to: camera, direction: .right, toOverlay: false)
                     default:
                         print("could not cast view controller")
@@ -406,16 +400,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     
                     switch ViewControllerState.currentVC {
                     case is PhotosWrapperController:
-                        let photosCollectionView = photos.navController.viewController.collectionView
-                        photosCollectionView?.isScrollEnabled = false
-                        photosCollectionView?.isScrollEnabled = true
+                        stopScroll(photos.navController.viewController.collectionView)
+                        stopScroll(photos.photoFindViewController.tableView)
                         startMoveVC(from: photos, to: camera, direction: .left, toOverlay: false)
                     case is CameraViewController:
                         startMoveVC(from: camera, to: lists, direction: .left, toOverlay: true)
                     case is ListsNavController:
-                        let listsCollectionView = lists.viewController.collectionView
-                        listsCollectionView?.isScrollEnabled = false
-                        listsCollectionView?.isScrollEnabled = true
+                        stopScroll(lists.viewController.collectionView)
                         gestures.isRubberBanding = true
                     default:
                         print("could not cast view controller")

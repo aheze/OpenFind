@@ -8,6 +8,11 @@
 import UIKit
 
 extension ViewController {
+    func stopScroll(_ scrollView: UIScrollView?) {
+        scrollView?.isScrollEnabled = false
+        scrollView?.isScrollEnabled = true
+    }
+    
     func moveRubberBand(totalValue: CGFloat) {
         if gestures.direction == .left { /// in Lists, hitting right edge
             let safeTotalValue = min(0, totalValue)
