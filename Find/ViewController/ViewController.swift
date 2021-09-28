@@ -125,6 +125,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 }
             }
             
+            
             /// controls in selection
             tabBarView.photoSelectionControlPressed = { action in
                 switch action {
@@ -146,6 +147,21 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             
             let wrapper = PhotosWrapperController()
             wrapper.navController = navigationController
+            
+            wrapper.presentingFindGallery = { [weak self] presenting in
+                guard let self = self else { return }
+                ConstantVars.shouldHaveLightStatusBar = presenting
+                UIView.animate(withDuration: 0.3) {
+                    self.updateStatusBar()
+                }
+            }
+            wrapper.presentingFindSlides = { [weak self] presenting in
+                guard let self = self else { return }
+                ConstantVars.shouldHaveLightStatusBar = !presenting
+                UIView.animate(withDuration: 0.3) {
+                    self.updateStatusBar()
+                }
+            }
             return wrapper
         }
         fatalError()
@@ -190,6 +206,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             viewController.temporaryPreventGestures = { [weak self] prevent in
                 self?.temporaryPreventGestures(prevent)
             }
+
             return viewController
         }
         fatalError()

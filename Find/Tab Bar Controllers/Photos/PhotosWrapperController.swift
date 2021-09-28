@@ -23,12 +23,14 @@ class PhotosWrapperController: UIViewController {
     var findShadowView: UIView?
     
     var photoFilterState = PhotoFilterState()
-//    var currentFilter = PhotoFilter.all
     var photosToFind = [FindPhoto]()
     var findingFromAllPhotos = false
     var hasChangedFromBefore = false
     
     var activeScreen = PhotoScreen.photoGallery
+    
+    var presentingFindGallery: ((Bool) -> Void)? /// update status bar color
+    var presentingFindSlides: ((Bool) -> Void)? /// update status bar color
     
     lazy var photoFindViewController: PhotoFindViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -59,11 +61,13 @@ class PhotosWrapperController: UIViewController {
             self.findingFromAllPhotos = isAllPhotos
             self.hasChangedFromBefore = hasChangedFromBefore
             self.switchToFind()
+            self.presentingFindGallery?(true)
         }
         
         navController.viewController.switchBack = { [weak self] in
             guard let self = self else { return }
             self.switchBackToPhotos()
+            self.presentingFindGallery?(false)
         }
 
         navController.view.clipsToBounds = true

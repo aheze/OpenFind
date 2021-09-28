@@ -20,6 +20,15 @@ extension PhotoSlidesViewController {
         findButton.accessibilityHint = "Find from this photo. Displays a search bar."
         
         navigationItem.rightBarButtonItems = [findButton]
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        if #available(iOS 15.0, *) {
+            navigationController?.navigationBar.compactScrollEdgeAppearance = appearance
+        }
     }
     func makeTitleView() {
         let titleLabel = UILabel()
