@@ -46,7 +46,6 @@ extension URL {
                                                     attributes: nil)
                 } catch {
                     // Creation failed. Print error & return nil
-                    print(error.localizedDescription)
                     return nil
                 }
             }

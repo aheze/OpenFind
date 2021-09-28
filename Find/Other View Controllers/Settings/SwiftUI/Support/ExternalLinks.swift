@@ -34,13 +34,15 @@ struct ExternalLinks: View {
             }) {
                 HStack(spacing: 12) {
                     Image(systemName: "star.fill")
-                        .font(Font.system(size: 24, weight: .medium))
+                        .font(Font.system(size: 20, weight: .medium))
+                        .frame(height: 24)
+                    
                     Text("Rate the App")
+
                     Spacer()
                     Image(systemName: "arrow.up.right")
                 }
                 .foregroundColor(.white)
-                .frame(height: 24)
                 .frame(maxWidth: .infinity)
                 .padding(16)
                 .background(
@@ -52,21 +54,21 @@ struct ExternalLinks: View {
             
             
             Button(action: {
-                if let serverURL = URL(string: "https://apps.apple.com/app/id1506500202") {
+                if let serverURL = URL(string: "https://discord.com/invite/UJpHv8jmN5") {
                     UIApplication.shared.open(serverURL)
                 }
             }) {
                 HStack(spacing: 12) {
-                    Image("Discord")
+                    Image("IconDiscord")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
+                        .frame(height: 24)
                     
                     Text("Join the Discord")
                     Spacer()
                     Image(systemName: "arrow.up.right")
                 }
                 .foregroundColor(.white)
-                .frame(height: 24)
                 .frame(maxWidth: .infinity)
                 .padding(16)
                 .background(

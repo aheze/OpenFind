@@ -190,7 +190,6 @@ extension SymbolsViewController {
         sectionToCount[6] = numbersList.count
 
         for i in sectionToCount.keys {
-            print(collectionView.numberOfSections)
             if let count = sectionToCount[i] {
                 for j in 0..<count {
                     let indP = IndexPath(row: j, section: i)

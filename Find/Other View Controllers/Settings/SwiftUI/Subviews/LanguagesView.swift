@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Introspect
 
 enum Language: Int, CaseIterable, Codable {
     case english = 0
@@ -129,13 +130,13 @@ struct LanguagesView: View {
     
     @State var languageRows = [LanguageRow]()
     var readLanguages: (() -> [OrderedLanguage])
-    
-    init(readLanguages: @escaping (() -> [OrderedLanguage])) {
-        UITableView.appearance().separatorStyle = .none
-        UITableViewCell.appearance().backgroundColor = .clear
-        UITableView.appearance().backgroundColor = .clear
-        self.readLanguages = readLanguages
-    }
+//
+//    init(readLanguages: @escaping (() -> [OrderedLanguage])) {
+//        UITableView.appearance().separatorStyle = .none
+//        UITableViewCell.appearance().backgroundColor = .clear
+//        UITableView.appearance().backgroundColor = .clear
+//        self.readLanguages = readLanguages
+//    }
     
     var body: some View {
         ZStack {
@@ -234,6 +235,11 @@ struct LanguagesView: View {
                     .onMove(perform: move)
                 }
                 .listStyle(PlainListStyle())
+                .introspectTableView { tableView in
+                    tableView.separatorStyle = .none
+                    tableView.backgroundColor = .clear
+                    tableView.backgroundColor = .clear
+                }
                 .environment(\.editMode, .constant(.active))
                 .colorScheme(.dark)
                 

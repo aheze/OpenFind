@@ -240,7 +240,7 @@ extension ViewController {
         case is PhotosWrapperController:
             switch toVC {
             case is PhotosWrapperController:
-                print("ERROR! Is same")
+                break
             case is CameraViewController:
                 if favoredDirection == .left { /// completed
                     let (prep, animations, completion) = tabBarView.getBlocks(from: fromVC, to: .camera)
@@ -316,7 +316,7 @@ extension ViewController {
                     blurAnimator?.isReversed = true
                 }
             case is CameraViewController:
-                print("ERROR! Is same")
+                break
             case is ListsNavController:
                 if favoredDirection == .left { /// completed
                     let (prep, animations, completion) = tabBarView.getBlocks(from: fromVC, to: .lists)

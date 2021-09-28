@@ -21,12 +21,12 @@ struct ContactView: View {
                         .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
                     
                     ContactWidget(
-                        urlString: "https://discord.com/users/743230678795288637",
+                        urlString: "https://discord.com/invite/UJpHv8jmN5",
                         startColor: #colorLiteral(red: 0.4470588235, green: 0.537254902, blue: 0.8549019608, alpha: 1),
                         endColor: #colorLiteral(red: 0.2784313725, green: 0.4392156863, blue: 1, alpha: 1),
                         title: "DM me on Discord",
                         subtitle: "aheze#3125",
-                        imageName: "DiscordIcon"
+                        imageName: "IconDiscord"
                     )
                     .padding(EdgeInsets(top: 0, leading: 16, bottom: 8, trailing: 16))
                     
@@ -37,7 +37,7 @@ struct ContactView: View {
                         endColor: #colorLiteral(red: 1, green: 0.3411764706, blue: 0, alpha: 1),
                         title: "DM me on Reddit",
                         subtitle: "u/aheze",
-                        imageName: "RedditIcon"
+                        imageName: "IconReddit"
                     )
                     .padding(EdgeInsets(top: 0, leading: 16, bottom: 8, trailing: 16))
                     
@@ -47,7 +47,7 @@ struct ContactView: View {
                         endColor: #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1),
                         title: "Email me",
                         subtitle: "aheze@getfind.app",
-                        imageName: "EmailIcon"
+                        imageName: "IconEmail"
                     )
                     .padding(EdgeInsets(top: 0, leading: 16, bottom: 8, trailing: 16))
                     

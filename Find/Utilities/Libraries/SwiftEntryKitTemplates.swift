@@ -38,11 +38,12 @@ class SwiftEntryKitTemplates {
         contentView.backgroundColor = backgroundColor
         contentView.layer.cornerRadius = 8
         let subTitle = UILabel()
+        subTitle.numberOfLines = 0
         subTitle.text = message
         subTitle.textColor = textColor
         contentView.addSubview(subTitle)
         subTitle.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
+            make.edges.equalToSuperview()
         }
         SwiftEntryKit.display(entry: contentView, using: attributes)
     }

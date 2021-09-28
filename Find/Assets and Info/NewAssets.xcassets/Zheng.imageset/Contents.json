@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Zheng.png",
+      "filename" : "aheze-small.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Zheng@2x.png",
+      "filename" : "aheze-small-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Zheng@3x.png",
+      "filename" : "aheze-small-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

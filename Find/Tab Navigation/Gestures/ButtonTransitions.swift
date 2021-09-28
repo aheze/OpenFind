@@ -129,7 +129,7 @@ extension ViewController {
                     tabBarView.animate(block: block, completion: completion)
                     
                 default:
-                    print("default trans")
+                    break
                 }
                 
                 notifyCompletion(finishedAtVC: toVC, animatedToCamera: false)
@@ -179,7 +179,7 @@ extension ViewController {
                     tabBarView.blurView.effect = UIBlurEffect(style: .light)
                     tabBarView.blurBackgroundView.alpha = 1
                 default:
-                    print("Could not cast transition vc")
+                    break
                 }
                 
                 notifyCompletion(finishedAtVC: toVC, animatedToCamera: false)

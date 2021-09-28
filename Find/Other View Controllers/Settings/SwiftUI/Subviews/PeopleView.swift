@@ -28,7 +28,7 @@ struct PeopleView: View {
                         )
                         .padding(EdgeInsets(top: 20, leading: 20, bottom: 6, trailing: 20))
                     
-                    Text("Find by Zheng")
+                    Text("Find by Andrew Zheng")
                         .foregroundColor(.white)
                         .font(Font(UIFont.systemFont(ofSize: 24, weight: .medium)))
                     
@@ -40,57 +40,12 @@ struct PeopleView: View {
                         .multilineTextAlignment(.center)
                     
                     HStack(spacing: 14) {
-                        Button(action: {
-                            if let url = URL(string: "https://aheze.medium.com/") {
-                                UIApplication.shared.open(url)
-                            }
-                        }) {
-                            Image("MediumIcon")
-                                .renderingMode(.template)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.white)
-                        }
+                        ProfileButton(imageName: "IconMedium", link: "https://aheze.medium.com")
+                        ProfileButton(imageName: "IconGitHub", link: "https://github.com/aheze")
+                        ProfileButton(imageName: "IconReddit", link: "https://www.reddit.com/user/aheze")
+                        ProfileButton(imageName: "IconDiscord", link: "https://discord.com/invite/UJpHv8jmN5")
+                        ProfileButton(imageName: "IconEmail", link: "mailto:aheze@getfind.app")
                         
-                        Button(action: {
-                            if let url = URL(string: "https://github.com/aheze") {
-                                UIApplication.shared.open(url)
-                            }
-                        }) {
-                            Image("GitHubIcon")
-                                .renderingMode(.template)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.white)
-                        }
-                        
-                        Button(action: {
-                            if let url = URL(string: "https://www.reddit.com/user/aheze") {
-                                UIApplication.shared.open(url)
-                            }
-                        }) {
-                            Image("RedditIcon")
-                                .renderingMode(.template)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.white)
-                        }
-                        
-                        Button(action: {
-                            if let url = URL(string: "https://discord.com/users/743230678795288637") {
-                                UIApplication.shared.open(url)
-                            }
-                        }) {
-                            Image("DiscordIcon")
-                                .renderingMode(.template)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.white)
-                        }
                     }
                     
                     HStack {
@@ -130,6 +85,26 @@ struct PeopleView: View {
                 }
                 .padding(.bottom, 24)
             }
+        }
+    }
+}
+
+struct ProfileButton: View {
+    var imageName: String
+    var link: String
+    
+    var body: some View {
+        Button(action: {
+            if let url = URL(string: link) {
+                UIApplication.shared.open(url)
+            }
+        }) {
+            Image(imageName)
+                .renderingMode(.template)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 40, height: 40)
+                .foregroundColor(Color.white)
         }
     }
 }

@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     do {
                         try FileManager.default.copyItem(at: bundleRealmPath, to: defaultRealmPath)
                     } catch let error {
-                        print("error copying seeds: \(error)")
+                        print("Error copying seeds: \(error)")
                     }
                 }
             }

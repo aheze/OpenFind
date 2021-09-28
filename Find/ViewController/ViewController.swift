@@ -135,7 +135,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 case .delete:
                     viewController.deleteSelectedPhotos()
                 default:
-                    print("Can't handle action in selection")
+                    break
                 }
             }
             
@@ -185,7 +185,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             viewController.cameBackFromSettings = { [weak self] in
                 guard let self = self else { return }
-                print("reading!!!!!!!!")
                 self.readDefaults()
             }
             viewController.temporaryPreventGestures = { [weak self] prevent in
@@ -240,7 +239,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }()
     
     // MARK: Camera shutoff
-    var cameraShutoffTask = DispatchWorkItem { print("shut") }
+    var cameraShutoffTask = DispatchWorkItem { print("Camera Shutoff") }
     var shutoffCamera: (() -> Void)?
     
     // MARK: Gestures
@@ -393,7 +392,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                         stopScroll(lists.viewController.collectionView)
                         startMoveVC(from: lists, to: camera, direction: .right, toOverlay: false)
                     default:
-                        print("could not cast view controller")
+                        break
                     }
                 } else {
                     gestures.direction = .left
@@ -409,7 +408,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                         stopScroll(lists.viewController.collectionView)
                         gestures.isRubberBanding = true
                     default:
-                        print("could not cast view controller")
+                        break
                     }
                 }
             } else {
@@ -442,9 +441,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 }
             }
         case .cancelled:
-            print("CANCELLED")
+            break
         default:
-            print("default pan")
+            break
         }
     }
     
@@ -561,8 +560,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     func setupFilePath() {
         guard let url = URL.createFolder(folderName: "historyImages") else {
-            print("no create")
-            return }
+            print("Couldn't create images folder")
+            return
+        }
         globalUrl = url
     }
 }

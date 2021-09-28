@@ -232,7 +232,6 @@ class ListsController: UIViewController, AdaptiveCollectionLayoutDelegate, UIAda
                     for cont in contents {
                         listToEdit.contents.append(cont)
                     }
-                    print(listToEdit.contents)
                     listToEdit.iconImageName = imageName
                     listToEdit.iconColorName = imageColor
                 }

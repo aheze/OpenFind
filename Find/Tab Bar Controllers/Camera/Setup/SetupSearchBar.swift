@@ -363,7 +363,6 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 let availableWidth = searchContentView.frame.width - 189
                 searchBarLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
                 searchCollectionRightC.constant = availableWidth
-                print(availableWidth)
             }
             
             searchContentViewHeight.constant = 71

@@ -18,7 +18,6 @@ extension ViewController {
     }
     
     @objc func voiceOverChanged() {
-        print("changed...")
         if UIAccessibility.isVoiceOverRunning {
             if !AccessibilityState.cameraDidSetup {
                 camera.setupAccessibility()

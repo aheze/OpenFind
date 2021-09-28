@@ -39,7 +39,6 @@ extension ViewController {
                 UIAccessibility.post(notification: .announcement, argument: UIAccessibility.makeAttributedText([stepText, instructions]))
             }
         }
-        print("currentStarStep: \(TipViews.currentStarStep)")
     }
     
     func startStarThirdStep() {
