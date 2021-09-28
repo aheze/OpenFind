@@ -2,36 +2,12 @@
 //  ShareView.swift
 //  Find
 //
-//  Created by Zheng on 2/13/21.
+//  Created by Zheng on 9/27/21.
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
 import SwiftUI
 
-struct HeaderViewWithRightText: View {
-    var text: LocalizedStringKey
-    var body: some View {
-        
-        HStack {
-            Text(text)
-                .foregroundColor(.white)
-                .font(Font(UIFont.systemFont(ofSize: 19, weight: .medium)))
-            
-            Spacer()
-            
-            Text(":)")
-                .foregroundColor(.white)
-                .font(Font(UIFont.systemFont(ofSize: 19, weight: .medium)))
-            
-        }
-        .padding(EdgeInsets(top: 10, leading: 14, bottom: 10, trailing: 14))
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(#colorLiteral(red: 0.04306942655, green: 0.04306942655, blue: 0.04306942655, alpha: 0.9)))
-        .accessibility(addTraits: .isHeader)
-        .accessibilityElement(children: .ignore)
-        .accessibility(label: Text("Share Find\n :)"))
-    }
-}
 struct ShareView: View {
     @Binding var isShowingQR: Bool
     
@@ -112,12 +88,6 @@ struct ShareView: View {
         }
         .background(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)))
         .cornerRadius(12)
-    }
-}
-struct ShareView_Previews: PreviewProvider {
-    static var previews: some View {
-        ShareView(isShowingQR: .constant(false))
-            .previewLayout(.fixed(width: 414, height: 200))
     }
 }
 

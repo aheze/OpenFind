@@ -98,11 +98,11 @@ extension SettingsViewHoster: UIActivityItemSource {
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
         return ""
     }
-
+    
     func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
         return nil
     }
-
+    
     func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
         
         let appIcon = UIImage(named: "AppIconSmall")!
@@ -132,42 +132,48 @@ struct SettingsView: View {
             NavigationView {
                 ZStack {
                     ScrollView {
-                        VStack(spacing: 2) {
-                            SectionHeaderView(text: "General")
-                                .accessibility(addTraits: .isHeader)
-                                .accessibility(hint: Text("Options for the entire app"))
+                        VStack(spacing: 16) {
                             
-                            GeneralView(selectedHighlightColor: $settings.highlightColor)
-                                .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
-                            
-                            SectionHeaderView(text: "Camera")
-                                .accessibility(addTraits: .isHeader)
-                                .accessibility(hint: Text("Customize the camera's behavior"))
-                            
-                            CameraSettingsView(
-                                textDetectionIsOn: $settings.showTextDetectIndicator,
-                                hapticFeedbackLevel: $settings.hapticFeedbackLevel,
-                                shutterStyle: $settings.shutterStyle
-                            )
-                            .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
-                            
-                            SectionHeaderView(text: "Support & Feedback")
-                                .accessibility(addTraits: .isHeader)
-                                .accessibility(hint: Text("Get help and send feedback. I will respond very quickly to everything that is accessibility related."))
-                            
-                            SupportView()
-                                .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
-                            
-                            SectionHeaderView(text: "Other")
-                                .accessibility(addTraits: .isHeader)
-                                .accessibility(hint: Text("Miscellaneous settings"))
-                            
-                            OtherView(swipeToNavigateEnabled: $settings.swipeToNavigateEnabled, allSettings: settings)
-                                .padding(EdgeInsets(top: 6, leading: 16, bottom: 16, trailing: 16))
-                            
-                            ShareView(isShowingQR: $isShowingQR)
-                                .padding(EdgeInsets(top: 6, leading: 16, bottom: 16, trailing: 16))
+                            VStack(spacing: 8) {
+                                SectionHeaderView(text: "General")
+                                    .accessibility(addTraits: .isHeader)
+                                    .accessibility(hint: Text("Options for the entire app"))
                                 
+                                GeneralView(selectedHighlightColor: $settings.highlightColor)
+                            }
+                            
+                            VStack(spacing: 8) {
+                                SectionHeaderView(text: "Camera")
+                                    .accessibility(addTraits: .isHeader)
+                                    .accessibility(hint: Text("Customize the camera's behavior"))
+                                
+                                CameraSettingsView(
+                                    textDetectionIsOn: $settings.showTextDetectIndicator,
+                                    hapticFeedbackLevel: $settings.hapticFeedbackLevel,
+                                    shutterStyle: $settings.shutterStyle
+                                )
+                            }
+                            
+                            VStack(spacing: 8) {
+                                SectionHeaderView(text: "Support & Feedback")
+                                    .accessibility(addTraits: .isHeader)
+                                    .accessibility(hint: Text("Get help and send feedback. I will respond very quickly to everything that is accessibility related."))
+                                
+                                SupportView()
+                            }
+                            
+                            VStack(spacing: 8) {
+                                SectionHeaderView(text: "Other")
+                                    .accessibility(addTraits: .isHeader)
+                                    .accessibility(hint: Text("Miscellaneous settings"))
+                                
+                                OtherView(
+                                    swipeToNavigateEnabled: $settings.swipeToNavigateEnabled,
+                                    isShowingQR: $isShowingQR,
+                                    allSettings: settings
+                                )
+                                
+                            }
                             
                             HStack(spacing: 0) {
                                 
@@ -193,8 +199,8 @@ struct SettingsView: View {
                                         .font(Font.system(size: 15, weight: .medium))
                                 }
                             }
-                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
                         }
+                        .edgePadding()
                         
                     }
                     .fixFlickering { scrollView in
@@ -251,10 +257,10 @@ extension ScrollView {
                             VStack {
                                 self.content
                             }
-                            .padding(.top, geometryWithSafeArea.safeAreaInsets.top)
-                            .padding(.bottom, geometryWithSafeArea.safeAreaInsets.bottom)
-                            .padding(.leading, geometryWithSafeArea.safeAreaInsets.leading)
-                            .padding(.trailing, geometryWithSafeArea.safeAreaInsets.trailing)
+                                .padding(.top, geometryWithSafeArea.safeAreaInsets.top)
+                                .padding(.bottom, geometryWithSafeArea.safeAreaInsets.bottom)
+                                .padding(.leading, geometryWithSafeArea.safeAreaInsets.leading)
+                                .padding(.trailing, geometryWithSafeArea.safeAreaInsets.trailing)
                         )
                     }
                 )

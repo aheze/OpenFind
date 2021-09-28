@@ -12,9 +12,10 @@ struct Label: View {
     var body: some View {
         Text(text)
             .foregroundColor(.white)
-            .font(Font(UIFont.systemFont(ofSize: 19, weight: .regular)))
+        
     }
 }
+
 struct VerbatimLabel: View {
     var text: String
     var body: some View {
@@ -31,24 +32,54 @@ struct SectionHeaderView: View {
         Text(text)
             .foregroundColor(Color.white.opacity(0.75))
             .font(Font(UIFont.systemFont(ofSize: 17, weight: .medium)))
-            .padding(EdgeInsets(top: 12, leading: 20, bottom: 0, trailing: 0))
             .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.top, 6)
     }
 }
 struct HeaderView: View {
     var text: LocalizedStringKey
     var body: some View {
         Text(text)
-            .foregroundColor(.white)
-            .font(Font(UIFont.systemFont(ofSize: 19, weight: .medium)))
-            .padding(EdgeInsets(top: 10, leading: 14, bottom: 10, trailing: 4))
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color(#colorLiteral(red: 0.04306942655, green: 0.04306942655, blue: 0.04306942655, alpha: 0.9)))
-            .accessibility(addTraits: .isHeader)
-            .accessibility(label: Text(text))
+            .header(text)
     }
 }
 
+
+struct HeaderViewWithRightText: View {
+    var text: LocalizedStringKey
+    var body: some View {
+        
+        HStack {
+            Text(text)
+                .foregroundColor(.white)
+                .font(Font(UIFont.systemFont(ofSize: 19, weight: .medium)))
+            
+            Spacer()
+            
+            Text(":)")
+                .foregroundColor(.white)
+                .font(Font(UIFont.systemFont(ofSize: 19, weight: .medium)))
+            
+        }
+        .header(text)
+    }
+}
+
+struct HeaderViewVerbatim: View {
+    var text: String
+    var body: some View {
+        Text(verbatim: text)
+            .header(LocalizedStringKey(text))
+    }
+}
+
+struct Line: View {
+    var body: some View {
+        Rectangle()
+            .fill(Color(UIColor.white.withAlphaComponent(0.1)))
+            .frame(height: 1)
+    }
+}
 struct VisualEffectView: UIViewRepresentable {
     var effect: UIVisualEffect?
     func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
