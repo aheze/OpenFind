@@ -8,9 +8,9 @@
 
 
 
-NSCameraUsageDescription = "Use your camera to find text";
+NSCameraUsageDescription = "This permission is required to find text using your camera.";
 
-NSPhotoLibraryAddUsageDescription = "Save photos to your photo library";
+NSPhotoLibraryAddUsageDescription = "This permission is required to save photos to your photo library.";
 
-NSPhotoLibraryUsageDescription = "Save photos to your photo library and find from them";
+NSPhotoLibraryUsageDescription = "By allowing access to your photos, you'll be able to find text in your screenshots, photos saved from Find, and even your entire photo library.";
 

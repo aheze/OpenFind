@@ -19,15 +19,15 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>5098</string>
+	<string>5100</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Use your camera to find text</string>
+	<string>This permission is required to find text using your camera.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Save photos to your photo library</string>
+	<string>This permission is required to save photos to your photo library.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Find from your existing photos</string>
+	<string>By allowing access to your photos, you'll be able to find text in your screenshots, photos saved from Find, and even your entire photo library.</string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>ConfigurationIntent</string>
