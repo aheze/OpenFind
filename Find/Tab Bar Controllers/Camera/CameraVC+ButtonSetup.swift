@@ -132,7 +132,13 @@ extension CameraViewController {
     }
     
     func requestAuthorization(completion: @escaping (() -> Void)) {
-        if #available(iOS 14, *) {
+        if #available(iOS 15, *) {
+            PHPhotoLibrary.requestAuthorization(for: .addOnly) { (status) in
+                if status == .authorized || status == .limited {
+                    completion()
+                }
+            }
+        } else if #available(iOS 14, *) {
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { (status) in
                 if status == .authorized || status == .limited {
                     completion()

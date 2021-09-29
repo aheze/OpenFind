@@ -7,5 +7,5 @@
 */
 
 NSCameraUsageDescription = "使用您的相机来查找文字";
-
-NSPhotoLibraryUsageDescription = "从现有照片中查找";
+NSPhotoLibraryAddUsageDescription = "将照片保存到您的照片库";
+NSPhotoLibraryUsageDescription = "将照片保存到您的照片库，并在其中查找";
