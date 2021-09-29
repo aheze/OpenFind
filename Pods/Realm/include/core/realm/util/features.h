@@ -201,7 +201,9 @@
 #endif
 
 
-// FIXME: Change this to use [[nodiscard]] in C++17.
+#if REALM_HAS_CPP_ATTRIBUTE(nodiscard)
+#define REALM_NODISCARD [[nodiscard]]
+#else
 #if defined(__GNUC__) || defined(__HP_aCC)
 #define REALM_NODISCARD __attribute__((warn_unused_result))
 #elif defined(_MSC_VER)
@@ -209,7 +211,7 @@
 #else
 #define REALM_NODISCARD
 #endif
-
+#endif
 
 /* Thread specific data (only for POD types) */
 #if defined __clang__

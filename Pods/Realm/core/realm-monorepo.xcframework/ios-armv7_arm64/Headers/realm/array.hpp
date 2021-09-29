@@ -1331,8 +1331,8 @@ REALM_NOINLINE bool Array::find_all_will_match(size_t start2, size_t end, size_t
     if constexpr (!std::is_same_v<Callback, std::nullptr_t>)
         end2 = end;
     else {
-        REALM_ASSERT_DEBUG(state->m_match_count < state->m_limit);
-        size_t process = state->m_limit - state->m_match_count;
+        REALM_ASSERT_DEBUG(state->match_count() < state->limit());
+        size_t process = state->limit() - state->match_count();
         end2 = end - start2 > process ? start2 + process : end;
     }
     for (; start2 < end2; start2++)

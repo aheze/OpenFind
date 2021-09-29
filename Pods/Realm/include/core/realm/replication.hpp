@@ -331,12 +331,6 @@ public:
     /// returns \ref hist_None.
     virtual std::unique_ptr<_impl::History> _create_history_read() = 0;
 
-    /// Returns false by default, but must return true if, and only if this
-    /// history object represents a session participant that is a sync
-    /// agent. This is used to enforce the "maximum one sync agent per session"
-    /// constraint.
-    virtual bool is_sync_agent() const noexcept;
-
     ~Replication() override;
 
 protected:
@@ -459,11 +453,6 @@ inline void Replication::interrupt() noexcept
 inline void Replication::clear_interrupt() noexcept
 {
     do_clear_interrupt();
-}
-
-inline bool Replication::is_sync_agent() const noexcept
-{
-    return false;
 }
 
 inline TrivialReplication::TrivialReplication(const std::string& database_file)

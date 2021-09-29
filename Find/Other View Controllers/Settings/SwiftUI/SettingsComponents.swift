@@ -21,7 +21,6 @@ struct VerbatimLabel: View {
     var body: some View {
         Text(text)
             .foregroundColor(.white)
-            .font(Font(UIFont.systemFont(ofSize: 19, weight: .regular)))
             .lineLimit(1)
     }
 }
@@ -31,7 +30,7 @@ struct SectionHeaderView: View {
     var body: some View {
         Text(text)
             .foregroundColor(Color.white.opacity(0.75))
-            .font(Font(UIFont.systemFont(ofSize: 17, weight: .medium)))
+            .font(.callout)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, 6)
     }
@@ -52,13 +51,13 @@ struct HeaderViewWithRightText: View {
         HStack {
             Text(text)
                 .foregroundColor(.white)
-                .font(Font(UIFont.systemFont(ofSize: 19, weight: .medium)))
+                .font(.headline)
             
             Spacer()
             
             Text(":)")
                 .foregroundColor(.white)
-                .font(Font(UIFont.systemFont(ofSize: 19, weight: .medium)))
+                .font(.headline)
             
         }
         .header(text)

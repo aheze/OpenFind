@@ -154,6 +154,13 @@ public:
     typedef typename util::ChooseWidestInt<unsigned, least_unsigned>::type type;
 };
 
+template <typename T>
+struct TypeIdentity {
+    using type = T;
+};
+
+template <typename T>
+using type_identity_t = typename TypeIdentity<T>::type;
 
 } // namespace util
 } // namespace realm

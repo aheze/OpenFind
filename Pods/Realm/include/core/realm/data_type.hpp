@@ -192,6 +192,9 @@ constexpr inline DataType::operator util::Printable() const noexcept
     if (*this == type_OldDateTime) {
         return "type_OldDateTime";
     }
+    if (*this == type_TypeOfValue) {
+        return "type_TypeOfValue";
+    }
     return "type_UNKNOWN";
 }
 

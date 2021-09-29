@@ -38,7 +38,7 @@ namespace _impl {
 
 struct SyncClient {
     SyncClient(std::unique_ptr<util::Logger> logger, SyncClientConfig const& config,
-               std::shared_ptr<const SyncManager> sync_manager)
+               std::weak_ptr<const SyncManager> weak_sync_manager)
         : m_client([&] {
             sync::Client::Config c;
             c.logger = logger.get();
@@ -80,9 +80,12 @@ struct SyncClient {
             }
         }) // Throws
 #if NETWORK_REACHABILITY_AVAILABLE
-        , m_reachability_observer(none, [sync_manager](const NetworkReachabilityStatus status) {
-            if (status != NotReachable)
-                sync_manager->reconnect();
+        , m_reachability_observer(none, [weak_sync_manager](const NetworkReachabilityStatus status) {
+            if (status != NotReachable) {
+                if (auto sync_manager = weak_sync_manager.lock()) {
+                    sync_manager->reconnect();
+                }
+            }
         })
     {
         if (!m_reachability_observer.start_observing())
@@ -90,7 +93,7 @@ struct SyncClient {
     }
 #else
     {
-        static_cast<void>(sync_manager);
+        static_cast<void>(weak_sync_manager);
     }
 #endif
 
@@ -106,9 +109,9 @@ struct SyncClient {
             m_thread.join();
     }
 
-    std::unique_ptr<sync::Session> make_session(std::string path, sync::Session::Config config)
+    std::unique_ptr<sync::Session> make_session(std::shared_ptr<DB> db, sync::Session::Config config)
     {
-        return std::make_unique<sync::Session>(m_client, std::move(path), std::move(config));
+        return std::make_unique<sync::Session>(m_client, std::move(db), std::move(config));
     }
 
     bool decompose_server_url(const std::string& url, sync::ProtocolEnvelope& protocol, std::string& address,

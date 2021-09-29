@@ -70,6 +70,7 @@ public:
     App(const Config& config);
     App(App&&) noexcept = default;
     App& operator=(App&&) noexcept = default;
+    ~App();
 
     const Config& config() const
     {

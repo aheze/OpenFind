@@ -52,6 +52,8 @@ public:
 private:
     class Payload;
     template <typename>
+    class CollectionPayload;
+    template <typename>
     class PayloadImpl;
     std::unique_ptr<Payload> m_payload;
 };

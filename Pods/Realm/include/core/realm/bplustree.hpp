@@ -19,6 +19,7 @@
 #ifndef REALM_BPLUSTREE_HPP
 #define REALM_BPLUSTREE_HPP
 
+#include <realm/aggregate_ops.hpp>
 #include <realm/column_type_traits.hpp>
 #include <realm/decimal128.hpp>
 #include <realm/timestamp.hpp>
@@ -430,6 +431,20 @@ public:
             set(ndx1, tmp2.get());
             set(ndx2, tmp1.get());
         }
+        else if constexpr (std::is_same_v<T, Mixed>) {
+            std::string buf1;
+            std::string buf2;
+            Mixed tmp1 = get(ndx1);
+            Mixed tmp2 = get(ndx2);
+            if (tmp1.is_type(type_String, type_Binary)) {
+                tmp1.use_buffer(buf1);
+            }
+            if (tmp2.is_type(type_String, type_Binary)) {
+                tmp2.use_buffer(buf2);
+            }
+            set(ndx1, tmp2);
+            set(ndx2, tmp1);
+        }
         else {
             T tmp = get(ndx1);
             set(ndx1, get(ndx2));
@@ -564,70 +579,19 @@ protected:
 };
 
 template <class T>
-inline bool bptree_aggregate_not_null(T)
-{
-    return true;
-}
-template <class R, class T>
-inline R bptree_aggregate_value(T val)
-{
-    return val;
-}
-template <class T>
-inline bool bptree_aggregate_not_null(util::Optional<T> val)
-{
-    return !!val;
-}
-template <>
-inline bool bptree_aggregate_not_null(Timestamp val)
-{
-    return !val.is_null();
-}
-inline bool bptree_aggregate_not_null(StringData val)
-{
-    return !val.is_null();
-}
-inline bool bptree_aggregate_not_null(BinaryData val)
-{
-    return !val.is_null();
-}
-template <>
-inline bool bptree_aggregate_not_null(float val)
-{
-    return !null::is_null_float(val);
-}
-template <>
-inline bool bptree_aggregate_not_null(double val)
-{
-    return !null::is_null_float(val);
-}
-template <>
-inline bool bptree_aggregate_not_null(Decimal128 val)
-{
-    return !val.is_null();
-}
-template <class T>
-inline T bptree_aggregate_value(util::Optional<T> val)
-{
-    return *val;
-}
+using SumAggType = typename aggregate_operations::Sum<typename util::RemoveOptional<T>::type>;
 
 template <class T>
-ColumnSumType<T> bptree_sum(const BPlusTree<T>& tree, size_t* return_cnt = nullptr)
+typename SumAggType<T>::ResultType bptree_sum(const BPlusTree<T>& tree, size_t* return_cnt = nullptr)
 {
-    using ResultType = typename AggregateResultType<T, act_Sum>::result_type;
-    ResultType result{};
-    size_t cnt = 0;
+    SumAggType<T> agg;
 
-    auto func = [&result, &cnt](BPlusTreeNode* node, size_t) {
+    auto func = [&agg](BPlusTreeNode* node, size_t) {
         auto leaf = static_cast<typename BPlusTree<T>::LeafNode*>(node);
         size_t sz = leaf->size();
         for (size_t i = 0; i < sz; i++) {
             auto val = leaf->get(i);
-            if (bptree_aggregate_not_null(val)) {
-                result += bptree_aggregate_value<ResultType>(val);
-                cnt++;
-            }
+            agg.accumulate(val);
         }
         return false;
     };
@@ -635,33 +599,28 @@ ColumnSumType<T> bptree_sum(const BPlusTree<T>& tree, size_t* return_cnt = nullp
     tree.traverse(func);
 
     if (return_cnt)
-        *return_cnt = cnt;
+        *return_cnt = agg.items_counted();
 
-    return result;
+    return agg.result();
 }
 
-template <class T>
-ColumnMinMaxType<T> bptree_maximum(const BPlusTree<T>& tree, size_t* return_ndx = nullptr)
+template <class AggType, class T>
+util::Optional<typename util::RemoveOptional<T>::type> bptree_min_max(const BPlusTree<T>& tree,
+                                                                      size_t* return_ndx = nullptr)
 {
-    using ResultType = typename AggregateResultType<T, act_Max>::result_type;
-    ResultType max = std::numeric_limits<ResultType>::lowest();
+    AggType agg;
     if (tree.size() == 0) {
-        return max;
+        return util::none;
     }
 
-    auto func = [&max, return_ndx](BPlusTreeNode* node, size_t offset) {
+    auto func = [&agg, return_ndx](BPlusTreeNode* node, size_t offset) {
         auto leaf = static_cast<typename BPlusTree<T>::LeafNode*>(node);
         size_t sz = leaf->size();
         for (size_t i = 0; i < sz; i++) {
             auto val_or_null = leaf->get(i);
-            if (bptree_aggregate_not_null(val_or_null)) {
-                auto val = bptree_aggregate_value<ResultType>(val_or_null);
-                if (val > max) {
-                    max = val;
-                    if (return_ndx) {
-                        *return_ndx = i + offset;
-                    }
-                }
+            bool found_new_min = agg.accumulate(val_or_null);
+            if (found_new_min && return_ndx) {
+                *return_ndx = i + offset;
             }
         }
         return false;
@@ -669,39 +628,27 @@ ColumnMinMaxType<T> bptree_maximum(const BPlusTree<T>& tree, size_t* return_ndx 
 
     tree.traverse(func);
 
-    return max;
+    return agg.is_null() ? util::none : util::Optional{agg.result()};
 }
 
 template <class T>
-ColumnMinMaxType<T> bptree_minimum(const BPlusTree<T>& tree, size_t* return_ndx = nullptr)
+using MinAggType = typename aggregate_operations::Minimum<typename util::RemoveOptional<T>::type>;
+
+template <class T>
+util::Optional<typename util::RemoveOptional<T>::type> bptree_minimum(const BPlusTree<T>& tree,
+                                                                      size_t* return_ndx = nullptr)
 {
-    using ResultType = typename AggregateResultType<T, act_Max>::result_type;
-    ResultType min = std::numeric_limits<ResultType>::max();
-    if (tree.size() == 0) {
-        return min;
-    }
+    return bptree_min_max<MinAggType<T>, T>(tree, return_ndx);
+}
 
-    auto func = [&min, return_ndx](BPlusTreeNode* node, size_t offset) {
-        auto leaf = static_cast<typename BPlusTree<T>::LeafNode*>(node);
-        size_t sz = leaf->size();
-        for (size_t i = 0; i < sz; i++) {
-            auto val_or_null = leaf->get(i);
-            if (bptree_aggregate_not_null(val_or_null)) {
-                auto val = bptree_aggregate_value<ResultType>(val_or_null);
-                if (val < min) {
-                    min = val;
-                    if (return_ndx) {
-                        *return_ndx = i + offset;
-                    }
-                }
-            }
-        }
-        return false;
-    };
+template <class T>
+using MaxAggType = typename aggregate_operations::Maximum<typename util::RemoveOptional<T>::type>;
 
-    tree.traverse(func);
-
-    return min;
+template <class T>
+util::Optional<typename util::RemoveOptional<T>::type> bptree_maximum(const BPlusTree<T>& tree,
+                                                                      size_t* return_ndx = nullptr)
+{
+    return bptree_min_max<MaxAggType<T>, T>(tree, return_ndx);
 }
 
 template <class T>

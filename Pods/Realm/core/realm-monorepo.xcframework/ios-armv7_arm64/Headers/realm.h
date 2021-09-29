@@ -36,6 +36,14 @@
 #define RLM_API RLM_EXPORT
 #endif // __cplusplus
 
+// Some platforms don't support anonymous unions in structs.
+// RLM_NO_ANON_UNIONS allows definining a member name for unions in structs where
+// RLM_ANON_UNION_MEMBER(name) is used.
+#ifdef RLM_NO_ANON_UNIONS
+#define RLM_ANON_UNION_MEMBER(name) name
+#else
+#define RLM_ANON_UNION_MEMBER(name)
+#endif
 
 typedef struct shared_realm realm_t;
 typedef struct realm_schema realm_schema_t;
@@ -152,7 +160,7 @@ typedef struct realm_value {
         realm_link_t link;
 
         char data[16];
-    };
+    } RLM_ANON_UNION_MEMBER(values);
     realm_value_type_e type;
 } realm_value_t;
 

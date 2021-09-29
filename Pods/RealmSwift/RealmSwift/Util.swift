@@ -67,13 +67,6 @@ internal func gsub(pattern: String, template: String, string: String, error: NSE
                                            withTemplate: template)
 }
 
-internal func cast<U, V>(_ value: U, to: V.Type) -> V {
-    if let v = value as? V {
-        return v
-    }
-    return unsafeBitCast(value, to: to)
-}
-
 extension ObjectBase {
     // Must *only* be used to call Realm Objective-C APIs that are exposed on `RLMObject`
     // but actually operate on `RLMObjectBase`. Do not expose cast value to user.
@@ -82,18 +75,38 @@ extension ObjectBase {
     }
 }
 
+internal func coerceToNil(_ value: Any) -> Any? {
+    if value is NSNull {
+        return nil
+    }
+    // nil in Any is bridged to obj-c as NSNull. In the obj-c code we usually
+    // convert NSNull back to nil, which ends up as Optional<Any>.none
+    if case Optional<Any>.none = value {
+        return nil
+    }
+    return value
+}
+
 // MARK: CustomObjectiveCBridgeable
 
 /// :nodoc:
 public func dynamicBridgeCast<T>(fromObjectiveC x: Any) -> T {
-    if T.self == DynamicObject.self {
+    return failableDynamicBridgeCast(fromObjectiveC: x)!
+}
+
+/// :nodoc:
+@usableFromInline
+internal func failableDynamicBridgeCast<T>(fromObjectiveC x: Any) -> T? {
+    if let value = x as? T {
+        return value
+    } else if T.self == DynamicObject.self {
         return unsafeBitCast(x as AnyObject, to: T.self)
     } else if let bridgeableType = T.self as? CustomObjectiveCBridgeable.Type {
-        return bridgeableType.bridging(objCValue: x) as! T
+        return bridgeableType.bridging(objCValue: x) as? T
     } else if let bridgeableType = T.self as? RealmEnum.Type {
-        return bridgeableType._rlmFromRawValue(x) as! T
+        return bridgeableType._rlmFromRawValue(x).flatMap { $0 as? T }
     } else {
-        return x as! T
+        return x as? T
     }
 }
 
@@ -114,8 +127,8 @@ internal protocol CustomObjectiveCBridgeable {
     var objCValue: Any { get }
 }
 
-// FIXME: needed with swift 3.2
-// Double isn't though?
+// `NSNumber as? Float` fails if the value can't be exactly represented as a float,
+// unlike the other NSNumber conversions
 extension Float: CustomObjectiveCBridgeable {
     internal static func bridging(objCValue: Any) -> Float {
         return (objCValue as! NSNumber).floatValue
@@ -159,11 +172,10 @@ extension Int64: CustomObjectiveCBridgeable {
 }
 extension Optional: CustomObjectiveCBridgeable {
     internal static func bridging(objCValue: Any) -> Optional {
-        if objCValue is NSNull {
+        if objCValue as AnyObject is NSNull {
             return nil
-        } else {
-            return .some(dynamicBridgeCast(fromObjectiveC: objCValue))
         }
+        return failableDynamicBridgeCast(fromObjectiveC: objCValue)
     }
     internal var objCValue: Any {
         if let value = self {
@@ -178,10 +190,24 @@ extension Decimal128: CustomObjectiveCBridgeable {
         if let number = objCValue as? NSNumber {
             return Decimal128(number: number)
         }
+        if let str = objCValue as? String {
+            return (try? Decimal128(string: str)) ?? Decimal128("nan")
+        }
         return objCValue as! Decimal128
     }
     var objCValue: Any {
         return self
+    }
+}
+extension AnyRealmValue: CustomObjectiveCBridgeable {
+    static func bridging(objCValue: Any) -> AnyRealmValue {
+        if let any = objCValue as? RLMValue {
+            return ObjectiveCSupport.convert(value: any)
+        }
+        throwRealmException("objCValue is not bridgeable to AnyRealmValue")
+    }
+    var objCValue: Any {
+        return ObjectiveCSupport.convert(value: self) ?? NSNull()
     }
 }
 

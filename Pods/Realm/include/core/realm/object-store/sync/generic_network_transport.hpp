@@ -91,6 +91,7 @@ enum class ServiceErrorCode {
     auth_error = 47,
     bad_request = 48,
     account_name_in_use = 49,
+    invalid_email_password = 50,
 
     unknown = -1,
     none = 0
@@ -113,7 +114,6 @@ const std::error_category& client_error_category() noexcept;
 std::error_code make_client_error_code(ClientErrorCode) noexcept;
 
 struct AppError {
-
     std::error_code error_code;
     util::Optional<int> http_status_code;
 

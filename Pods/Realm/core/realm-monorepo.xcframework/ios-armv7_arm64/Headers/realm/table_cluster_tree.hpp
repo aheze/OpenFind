@@ -49,7 +49,7 @@ public:
     void enumerate_string_column(ColKey col_key);
 
     // Specialization of ClusterTree interface
-    const Table* get_owning_table() const override
+    const Table* get_owning_table() const noexcept override
     {
         return m_owner;
     }

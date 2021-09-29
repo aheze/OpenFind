@@ -280,6 +280,7 @@ public:
     void append_distinct(DistinctDescriptor distinct);
     void append_limit(LimitDescriptor limit);
     void append(const DescriptorOrdering& other);
+    void append(DescriptorOrdering&& other);
     realm::util::Optional<size_t> get_min_limit() const;
     /// Remove all LIMIT statements from this descriptor ordering, returning the
     /// minimum LIMIT value that existed. If there was no LIMIT statement,

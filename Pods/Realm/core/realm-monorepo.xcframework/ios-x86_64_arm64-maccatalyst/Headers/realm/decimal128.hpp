@@ -59,6 +59,8 @@ public:
     bool is_null() const;
     bool is_nan() const;
 
+    bool to_int(int64_t& i) const;
+
     bool operator==(const Decimal128& rhs) const;
     bool operator!=(const Decimal128& rhs) const;
     bool operator<(const Decimal128& rhs) const;

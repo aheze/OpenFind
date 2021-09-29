@@ -73,6 +73,11 @@ enum Instruction {
     instr_SetInsert = 40, // Insert value into set
     instr_SetErase = 41,  // Erase value from set
     instr_SetClear = 42,  // Remove all values in a set
+
+    // An action involving TypedLinks has occured which caused
+    // the number of backlink columns to change. This can happen
+    // when a TypedLink is created for the first time to a Table.
+    instr_TypedLinkChange = 43,
 };
 
 class TransactLogStream {
@@ -228,6 +233,11 @@ public:
         return true;
     }
 
+    bool typed_link_change(ColKey, TableKey)
+    {
+        return true;
+    }
+
     void parse_complete() {}
 };
 // LCOV_EXCL_STOP (NullInstructionObserver)
@@ -282,6 +292,9 @@ public:
     bool dictionary_insert(size_t dict_ndx, Mixed key);
     bool dictionary_set(size_t dict_ndx, Mixed key);
     bool dictionary_erase(size_t dict_ndx, Mixed key);
+
+    bool typed_link_change(ColKey col, TableKey dest);
+
 
     /// End of methods expected by parser.
 
@@ -386,8 +399,10 @@ public:
     virtual void dictionary_erase(const CollectionBase& dict, size_t dict_ndx, Mixed key);
 
     virtual void create_object(const Table*, GlobalKey);
-    virtual void create_object_with_primary_key(const Table*, GlobalKey, Mixed);
+    virtual void create_object_with_primary_key(const Table*, ObjKey, Mixed);
     virtual void remove_object(const Table*, ObjKey);
+
+    virtual void typed_link_change(const Table*, ColKey, TableKey);
 
     //@{
 
@@ -425,7 +440,7 @@ private:
         CollectionId() = default;
         CollectionId(const CollectionBase& list)
             : table_key(list.get_table()->get_key())
-            , object_key(list.get_key())
+            , object_key(list.get_owner_key())
             , col_id(list.get_col_key())
         {
         }
@@ -953,6 +968,20 @@ inline bool TransactLogEncoder::list_clear(size_t old_list_size)
     return true;
 }
 
+inline void TransactLogConvenientEncoder::typed_link_change(const Table* source_table, ColKey col,
+                                                            TableKey dest_table)
+{
+    select_table(source_table);
+    m_encoder.typed_link_change(col, dest_table);
+}
+
+inline bool TransactLogEncoder::typed_link_change(ColKey col, TableKey dest)
+{
+    append_simple_instr(instr_TypedLinkChange, col, dest);
+    return true;
+}
+
+
 inline TransactLogParser::TransactLogParser()
     : m_input_buffer(1024) // Throws
 {
@@ -1138,6 +1167,13 @@ void TransactLogParser::parse_one(InstructionHandler& handler)
         case instr_RenameGroupLevelTable: {
             TableKey table_key = TableKey(read_int<uint32_t>()); // Throws
             if (!handler.rename_group_level_table(table_key))    // Throws
+                parser_error();
+            return;
+        }
+        case instr_TypedLinkChange: {
+            ColKey col_key = ColKey(read_int<int64_t>());         // Throws
+            TableKey dest_table = TableKey(read_int<uint32_t>()); // Throws
+            if (!handler.typed_link_change(col_key, dest_table))
                 parser_error();
             return;
         }
@@ -1411,6 +1447,13 @@ public:
             m_encoder.set_insert(i - 1);
             append_instruction();
         }
+        return true;
+    }
+
+    bool typed_link_change(ColKey col, TableKey dest)
+    {
+        m_encoder.typed_link_change(col, dest);
+        append_instruction();
         return true;
     }
 

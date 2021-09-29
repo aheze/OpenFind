@@ -20,12 +20,14 @@ namespace sync {
 //
 //   2 Restored erase-always-wins OT behavior.
 //
+//   3 Support for Mixed, TypeLinks, Set, and Dictionary columns.
+//
 //  XX Changes:
-//     - Add support for Mixed and TypedLinks columns.
+//     - TBD
 //
 constexpr int get_current_protocol_version() noexcept
 {
-    return 2;
+    return 3;
 }
 
 constexpr const char* get_websocket_protocol_prefix() noexcept
@@ -207,7 +209,7 @@ enum class ProtocolError {
     bad_authentication           = 203, // Bad user authentication (BIND, REFRESH)
     illegal_realm_path           = 204, // Illegal Realm path (BIND)
     no_such_realm                = 205, // No such Realm (BIND)
-    permission_denied            = 206, // Permission denied (STATE_REQUEST, BIND, REFRESH)
+    permission_denied            = 206, // Permission denied (BIND, REFRESH)
     bad_server_file_ident        = 207, // Bad server file identifier (IDENT) (obsolete!)
     bad_client_file_ident        = 208, // Bad client file identifier (IDENT)
     bad_server_version           = 209, // Bad server version (IDENT, UPLOAD, TRANSACT)
@@ -216,7 +218,7 @@ enum class ProtocolError {
     bad_changeset                = 212, // Bad changeset (UPLOAD)
     superseded                   = 213, // Superseded by new session for same client-side file (deprecated)
     disabled_session             = 213, // Alias for `superseded` (deprecated)
-    partial_sync_disabled        = 214, // Partial sync disabled (BIND, STATE_REQUEST)
+    partial_sync_disabled        = 214, // Partial sync disabled (BIND)
     unsupported_session_feature  = 215, // Unsupported session-level feature
     bad_origin_file_ident        = 216, // Bad origin file identifier (UPLOAD)
     bad_client_file              = 217, // Synchronization no longer possible for client-side file

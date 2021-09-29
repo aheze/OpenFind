@@ -127,6 +127,7 @@ The Columns class encapsulates all this into a simple class that, for any type T
 #ifndef REALM_QUERY_EXPRESSION_HPP
 #define REALM_QUERY_EXPRESSION_HPP
 
+#include <realm/aggregate_ops.hpp>
 #include <realm/array_timestamp.hpp>
 #include <realm/array_binary.hpp>
 #include <realm/array_string.hpp>
@@ -137,6 +138,7 @@ The Columns class encapsulates all this into a simple class that, for any type T
 #include <realm/array_fixed_bytes.hpp>
 #include <realm/column_integer.hpp>
 #include <realm/column_type_traits.hpp>
+#include <realm/dictionary.hpp>
 #include <realm/table.hpp>
 #include <realm/index_string.hpp>
 #include <realm/query.hpp>
@@ -699,7 +701,7 @@ template <class T>
 class Columns;
 template <class T>
 class Value;
-class ConstantStringValue;
+class ConstantMixedValue;
 template <class T>
 class Subexpr2;
 template <class oper, class TLeft = Subexpr, class TRight = Subexpr>
@@ -783,8 +785,12 @@ Query create(L left, const Subexpr2<R>& right)
     }
 
     // Return query_expression.hpp node
-    using ValueType = typename std::conditional_t<std::is_same_v<L, StringData>, ConstantStringValue, Value<L>>;
-    return make_expression<Compare<Cond>>(make_subexpr<ValueType>(left), right.clone());
+    if constexpr (std::is_same_v<L, TypeOfValue>) {
+        return make_expression<Compare<Cond>>(make_subexpr<Value<TypeOfValue>>(left), right.clone());
+    }
+    else {
+        return make_expression<Compare<Cond>>(make_subexpr<ConstantMixedValue>(left), right.clone());
+    }
 }
 
 // All overloads where left-hand-side is Subexpr2<L>:
@@ -1185,6 +1191,29 @@ public:
     {
         return make_subexpr<Value<T>>(*this);
     }
+};
+
+class ConstantMixedValue : public Value<Mixed> {
+public:
+    ConstantMixedValue(const Mixed& val)
+        : Value(val)
+    {
+        begin()->use_buffer(m_buffer);
+    }
+
+    std::unique_ptr<Subexpr> clone() const override
+    {
+        return std::unique_ptr<Subexpr>(new ConstantMixedValue(*this));
+    }
+
+private:
+    ConstantMixedValue(const ConstantMixedValue& other)
+        : Value(other)
+    {
+        begin()->use_buffer(m_buffer);
+    }
+
+    std::string m_buffer;
 };
 
 class ConstantStringValue : public Value<StringData> {
@@ -1709,7 +1738,12 @@ public:
         m_array_ptr = nullptr;
         switch (m_link_types[0]) {
             case col_type_Link:
-                m_array_ptr = LeafPtr(new (&m_storage.m_list) ArrayKey(alloc));
+                if (m_link_column_keys[0].is_dictionary()) {
+                    m_array_ptr = LeafPtr(new (&m_storage.m_dict) ArrayInteger(alloc));
+                }
+                else {
+                    m_array_ptr = LeafPtr(new (&m_storage.m_list) ArrayKey(alloc));
+                }
                 break;
             case col_type_LinkList:
                 m_array_ptr = LeafPtr(new (&m_storage.m_linklist) ArrayList(alloc));
@@ -1804,6 +1838,7 @@ private:
     using LeafPtr = std::unique_ptr<ArrayPayload, PlacementDelete>;
     union Storage {
         typename std::aligned_storage<sizeof(ArrayKey), alignof(ArrayKey)>::type m_list;
+        typename std::aligned_storage<sizeof(ArrayInteger), alignof(ArrayKey)>::type m_dict;
         typename std::aligned_storage<sizeof(ArrayList), alignof(ArrayList)>::type m_linklist;
         typename std::aligned_storage<sizeof(ArrayList), alignof(ArrayList)>::type m_backlink;
     };
@@ -2803,7 +2838,7 @@ private:
 template <typename T>
 class ListColumns;
 template <typename T, typename Operation>
-class ListColumnAggregate;
+class CollectionColumnAggregate;
 namespace aggregate_operations {
 template <typename T>
 class Minimum;
@@ -2950,29 +2985,29 @@ public:
         return TypeOfValueOperator<T>(this->clone());
     }
 
-    ListColumnAggregate<T, aggregate_operations::Minimum<T>> min() const
+    CollectionColumnAggregate<T, aggregate_operations::Minimum<T>> min() const
     {
         return {*this};
     }
 
-    ListColumnAggregate<T, aggregate_operations::Maximum<T>> max() const
+    CollectionColumnAggregate<T, aggregate_operations::Maximum<T>> max() const
     {
         return {*this};
     }
 
-    ListColumnAggregate<T, aggregate_operations::Sum<T>> sum() const
+    CollectionColumnAggregate<T, aggregate_operations::Sum<T>> sum() const
     {
         return {*this};
     }
 
-    ListColumnAggregate<T, aggregate_operations::Average<T>> average() const
+    CollectionColumnAggregate<T, aggregate_operations::Average<T>> average() const
     {
         return {*this};
     }
 
     std::unique_ptr<Subexpr> max_of() override
     {
-        if constexpr (realm::is_any_v<T, Int, Float, Double, Decimal128>) {
+        if constexpr (realm::is_any_v<T, Int, Float, Double, Decimal128, Mixed>) {
             return max().clone();
         }
         else {
@@ -2981,7 +3016,7 @@ public:
     }
     std::unique_ptr<Subexpr> min_of() override
     {
-        if constexpr (realm::is_any_v<T, Int, Float, Double, Decimal128>) {
+        if constexpr (realm::is_any_v<T, Int, Float, Double, Decimal128, Mixed>) {
             return min().clone();
         }
         else {
@@ -2990,7 +3025,7 @@ public:
     }
     std::unique_ptr<Subexpr> sum_of() override
     {
-        if constexpr (realm::is_any_v<T, Int, Float, Double, Decimal128>) {
+        if constexpr (realm::is_any_v<T, Int, Float, Double, Decimal128, Mixed>) {
             return sum().clone();
         }
         else {
@@ -2999,7 +3034,7 @@ public:
     }
     std::unique_ptr<Subexpr> avg_of() override
     {
-        if constexpr (realm::is_any_v<T, Int, Float, Double, Decimal128>) {
+        if constexpr (realm::is_any_v<T, Int, Float, Double, Decimal128, Mixed>) {
             return average().clone();
         }
         else {
@@ -3125,10 +3160,6 @@ public:
         // Not supported for Dictionary
         return {};
     }
-    std::unique_ptr<Subexpr> max_of() override;
-    std::unique_ptr<Subexpr> min_of() override;
-    std::unique_ptr<Subexpr> sum_of() override;
-    std::unique_ptr<Subexpr> avg_of() override;
 
     void evaluate(size_t index, ValueBase& destination) override;
 
@@ -3165,7 +3196,9 @@ public:
 
     std::string description(util::serializer::SerialisationState& state) const override
     {
-        return ColumnListBase::description(state) + std::string(".") + std::string(m_key.get_string());
+        std::ostringstream ostr;
+        ostr << m_key;
+        return ColumnListBase::description(state) + '[' + ostr.str() + ']';
     }
 
     std::unique_ptr<Subexpr> clone() const override
@@ -3228,7 +3261,7 @@ public:
     std::string description(util::serializer::SerialisationState& state) const override
     {
         return state.describe_expression_type(m_comparison_type) + state.describe_columns(m_link_map, m_column_key) +
-               ".keys";
+               ".@keys";
     }
 
     std::unique_ptr<Subexpr> clone() const override
@@ -3400,81 +3433,117 @@ SizeOperator<int64_t> ColumnsCollection<T>::size()
 }
 
 template <typename T, typename Operation>
-class ListColumnAggregate : public Subexpr2<decltype(Operation().result())> {
+class CollectionColumnAggregate : public Subexpr2<decltype(Operation().result())> {
 public:
-
-    ListColumnAggregate(ColumnsCollection<T> column)
-        : m_list(std::move(column))
+    CollectionColumnAggregate(ColumnsCollection<T> column)
+        : m_columns_collection(std::move(column))
     {
+        if (m_columns_collection.m_column_key.is_dictionary()) {
+            m_dictionary_key_type = m_columns_collection.m_link_map.get_target_table()->get_dictionary_key_type(
+                m_columns_collection.m_column_key);
+        }
     }
 
-    ListColumnAggregate(const ListColumnAggregate& other)
-        : m_list(other.m_list)
+    CollectionColumnAggregate(const CollectionColumnAggregate& other)
+        : m_columns_collection(other.m_columns_collection)
+        , m_dictionary_key_type(other.m_dictionary_key_type)
     {
     }
 
     std::unique_ptr<Subexpr> clone() const override
     {
-        return make_subexpr<ListColumnAggregate>(*this);
+        return make_subexpr<CollectionColumnAggregate>(*this);
     }
 
     ConstTableRef get_base_table() const override
     {
-        return m_list.get_base_table();
+        return m_columns_collection.get_base_table();
     }
 
     void set_base_table(ConstTableRef table) override
     {
-        m_list.set_base_table(table);
+        m_columns_collection.set_base_table(table);
     }
 
     void set_cluster(const Cluster* cluster) override
     {
-        m_list.set_cluster(cluster);
+        m_columns_collection.set_cluster(cluster);
     }
 
     void collect_dependencies(std::vector<TableKey>& tables) const override
     {
-        m_list.collect_dependencies(tables);
+        m_columns_collection.collect_dependencies(tables);
     }
 
     void evaluate(size_t index, ValueBase& destination) override
     {
-        Allocator& alloc = m_list.get_alloc();
-        Value<int64_t> list_refs;
-        m_list.get_lists(index, list_refs, 1);
-        size_t sz = list_refs.size();
-        REALM_ASSERT_DEBUG(sz > 0 || list_refs.m_from_link_list);
-        // The result is an aggregate value for each table
-        destination.init_for_links(!list_refs.m_from_link_list, sz);
-        for (size_t i = 0; i < list_refs.size(); i++) {
-            auto list_ref = to_ref(list_refs[i].get_int());
-            Operation op;
-            if (list_ref) {
-                if constexpr (realm::is_any_v<T, ObjectId, Int, Bool, UUID>) {
-                    if (m_list.m_is_nullable_storage) {
-                        accumulate<util::Optional<T>>(op, alloc, list_ref);
+        if (m_dictionary_key_type) {
+            if (m_columns_collection.links_exist()) {
+                std::vector<ObjKey> links = m_columns_collection.m_link_map.get_links(index);
+                auto sz = links.size();
+
+                destination.init_for_links(m_columns_collection.m_link_map.only_unary_links(), sz);
+                for (size_t t = 0; t < sz; t++) {
+                    const Obj obj = m_columns_collection.m_link_map.get_target_table()->get_object(links[t]);
+                    auto dict = obj.get_dictionary(m_columns_collection.m_column_key);
+                    if (dict.size() > 0) {
+                        destination.set(t, do_dictionary_agg(*dict.m_clusters));
+                    }
+                    else {
+                        set_value_for_empty_dictionary(destination, t);
+                    }
+                }
+            }
+            else {
+                if (m_columns_collection.m_leaf_ptr->get(index)) {
+                    Allocator& alloc = m_columns_collection.get_base_table()->get_alloc();
+                    DictionaryClusterTree dict_cluster(static_cast<Array*>(m_columns_collection.m_leaf_ptr),
+                                                       *m_dictionary_key_type, alloc, index);
+                    dict_cluster.init_from_parent();
+                    destination.set(0, do_dictionary_agg(dict_cluster));
+                }
+                else {
+                    set_value_for_empty_dictionary(destination, 0);
+                }
+            }
+        }
+        else {
+            Allocator& alloc = m_columns_collection.get_alloc();
+            Value<int64_t> list_refs;
+            m_columns_collection.get_lists(index, list_refs, 1);
+            size_t sz = list_refs.size();
+            REALM_ASSERT_DEBUG(sz > 0 || list_refs.m_from_link_list);
+            // The result is an aggregate value for each table
+            destination.init_for_links(!list_refs.m_from_link_list, sz);
+            for (size_t i = 0; i < list_refs.size(); i++) {
+                auto list_ref = to_ref(list_refs[i].get_int());
+                Operation op;
+                if (list_ref) {
+                    if constexpr (realm::is_any_v<T, ObjectId, Int, Bool, UUID>) {
+                        if (m_columns_collection.m_is_nullable_storage) {
+                            accumulate<util::Optional<T>>(op, alloc, list_ref);
+                        }
+                        else {
+                            accumulate<T>(op, alloc, list_ref);
+                        }
                     }
                     else {
                         accumulate<T>(op, alloc, list_ref);
                     }
                 }
-                else {
-                    accumulate<T>(op, alloc, list_ref);
+                if (op.is_null()) {
+                    destination.set_null(i);
                 }
-            }
-            if (op.is_null()) {
-                destination.set_null(i);
-            }
-            else {
-                destination.set(i, op.result());
+                else {
+                    destination.set(i, op.result());
+                }
             }
         }
     }
 
     virtual std::string description(util::serializer::SerialisationState& state) const override
     {
-        return m_list.description(state) + util::serializer::value_separator + Operation::description();
+        return m_columns_collection.description(state) + util::serializer::value_separator + Operation::description();
     }
 
 private:
@@ -3496,7 +3565,36 @@ private:
             }
         }
     }
-    ColumnsCollection<T> m_list;
+
+    Mixed do_dictionary_agg(const DictionaryClusterTree& dict_cluster)
+    {
+        if constexpr (std::is_same_v<Operation, aggregate_operations::Maximum<Mixed>>) {
+            return dict_cluster.max();
+        }
+        else if constexpr (std::is_same_v<Operation, aggregate_operations::Minimum<Mixed>>) {
+            return dict_cluster.min();
+        }
+        else if constexpr (std::is_same_v<Operation, aggregate_operations::Average<Mixed>>) {
+            return dict_cluster.avg();
+        }
+        else if constexpr (std::is_same_v<Operation, aggregate_operations::Sum<Mixed>>) {
+            return dict_cluster.sum();
+        }
+        REALM_UNREACHABLE();
+    }
+
+    inline void set_value_for_empty_dictionary(ValueBase& destination, size_t ndx)
+    {
+        if constexpr (std::is_same_v<Operation, aggregate_operations::Sum<Mixed>>) {
+            destination.set(ndx, 0); // the sum of nothing is zero
+        }
+        else {
+            destination.set_null(ndx);
+        }
+    }
+
+    ColumnsCollection<T> m_columns_collection;
+    util::Optional<DataType> m_dictionary_key_type;
 };
 
 template <class Operator>
@@ -3510,20 +3608,17 @@ Query compare(const Subexpr2<Link>& left, const Obj& obj)
         REALM_ASSERT(link_map.get_target_table()->get_key() == obj.get_table()->get_key());
 #ifdef REALM_OLDQUERY_FALLBACK
         if (link_map.get_nb_hops() == 1) {
-            // We can fall back to Query::links_to for != and == operations on links, but only
-            // for == on link lists. This is because negating query.links_to() is equivalent to
-            // to "ALL linklist != row" rather than the "ANY linklist != row" semantics we're after.
-            if (link_map.m_link_types[0] == col_type_Link ||
-                (link_map.m_link_types[0] == col_type_LinkList && std::is_same_v<Operator, Equal>)) {
+            // We can fall back to Query::links_to for != and == operations on links
+            if (link_map.m_link_types[0] == col_type_Link || (link_map.m_link_types[0] == col_type_LinkList)) {
                 ConstTableRef t = column->get_base_table();
                 Query query(t);
 
-                if (std::is_same_v<Operator, NotEqual>) {
-                    // Negate the following `links_to`.
-                    query.Not();
+                if (std::is_same_v<Operator, Equal>) {
+                    return query.equal(link_map.m_link_column_keys[0], obj.get_link());
                 }
-                query.links_to(link_map.m_link_column_keys[0], obj.get_key());
-                return query;
+                else {
+                    return query.not_equal(link_map.m_link_column_keys[0], obj.get_link());
+                }
             }
         }
 #endif
@@ -4013,107 +4108,6 @@ private:
     Query m_query;
     LinkMap m_link_map;
 };
-
-namespace aggregate_operations {
-
-template <typename T, typename Compare>
-class MinMaxAggregateOperator {
-public:
-    void accumulate(T value)
-    {
-        if (!is_nan(value) && (!m_result || Compare()(value, *m_result))) {
-            m_result = value;
-        }
-    }
-
-    bool is_null() const
-    {
-        return !m_result;
-    }
-    T result() const
-    {
-        return *m_result;
-    }
-
-private:
-    util::Optional<T> m_result;
-};
-
-template <typename T>
-class Minimum : public MinMaxAggregateOperator<T, std::less<>> {
-public:
-    static const char* description()
-    {
-        return "@min";
-    }
-};
-
-template <typename T>
-class Maximum : public MinMaxAggregateOperator<T, std::greater<>> {
-public:
-    static const char* description()
-    {
-        return "@max";
-    }
-};
-
-template <typename T>
-class Sum {
-public:
-    void accumulate(T value)
-    {
-        if (!is_nan(value)) {
-            m_result += value;
-        }
-    }
-
-    bool is_null() const
-    {
-        return false;
-    }
-    T result() const
-    {
-        return m_result;
-    }
-    static const char* description()
-    {
-        return "@sum";
-    }
-
-private:
-    T m_result = {};
-};
-
-template <typename T>
-class Average {
-public:
-    using ResultType = typename std::conditional<std::is_same_v<T, Decimal128>, Decimal128, double>::type;
-    void accumulate(T value)
-    {
-        if (!is_nan(value)) {
-            m_count++;
-            m_result += value;
-        }
-    }
-
-    bool is_null() const
-    {
-        return m_count == 0;
-    }
-    ResultType result() const
-    {
-        return m_result / m_count;
-    }
-    static const char* description()
-    {
-        return "@avg";
-    }
-
-private:
-    size_t m_count = 0;
-    ResultType m_result = {};
-};
-} // namespace aggregate_operations
 
 template <class oper, class TLeft>
 class UnaryOperator : public Subexpr2<typename oper::type> {

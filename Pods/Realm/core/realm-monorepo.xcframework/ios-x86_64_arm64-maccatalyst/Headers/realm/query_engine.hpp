@@ -199,9 +199,6 @@ public:
             return;
 
         m_table = table;
-        if (m_condition_column_key != ColKey()) {
-            m_condition_column_name = m_table->get_column_name(m_condition_column_key);
-        }
         if (m_child)
             m_child->set_table(table);
         table_changed();
@@ -307,7 +304,6 @@ public:
 
     std::unique_ptr<ParentNode> m_child;
     std::vector<ParentNode*> m_children;
-    std::string m_condition_column_name;
     mutable ColKey m_condition_column_key = ColKey(); // Column of search criteria
     ArrayPayload* m_source_column = nullptr;
 
@@ -1328,6 +1324,7 @@ public:
         : m_value(v)
         , m_value_is_null(v.is_null())
     {
+        REALM_ASSERT(column.get_type() == col_type_Mixed);
         get_ownership();
         m_condition_column_key = column;
     }
@@ -1373,12 +1370,15 @@ protected:
 
     void get_ownership()
     {
-        if (!m_value_is_null) {
-            if (m_value.get_type() == type_String || m_value.get_type() == type_Binary) {
-                auto bin = m_value.get_binary();
-                OwnedBinaryData tmp(bin.data(), bin.size());
-                m_buffer = std::move(tmp);
-                m_value = Mixed(m_buffer.get());
+        if (m_value.is_type(type_String, type_Binary)) {
+            auto bin = m_value.get_binary();
+            m_buffer = OwnedBinaryData(bin.data(), bin.size());
+            auto tmp = m_buffer.get();
+            if (m_value.is_type(type_String)) {
+                m_value = Mixed(StringData(tmp.data(), tmp.size()));
+            }
+            else {
+                m_value = Mixed(tmp);
             }
         }
     }
@@ -1432,6 +1432,63 @@ protected:
         : MixedNode(from, tr)
     {
     }
+};
+
+template <>
+class MixedNode<Equal> : public MixedNodeBase {
+public:
+    MixedNode<Equal>(Mixed v, ColKey column)
+        : MixedNodeBase(v, column)
+    {
+    }
+    MixedNode<Equal>(const MixedNode<Equal>& other)
+        : MixedNodeBase(other)
+        , m_has_search_index(other.m_has_search_index)
+    {
+    }
+    void init(bool will_query_ranges) override;
+
+    void cluster_changed() override
+    {
+        // If we use searchindex, we do not need further access to clusters
+        if (!m_has_search_index) {
+            MixedNodeBase::cluster_changed();
+        }
+    }
+
+    void table_changed() override
+    {
+        m_has_search_index = m_table.unchecked_ptr()->has_search_index(m_condition_column_key);
+    }
+
+    bool has_search_index() const override
+    {
+        return m_has_search_index;
+    }
+
+    size_t find_first_local(size_t start, size_t end) override;
+
+    virtual std::string describe_condition() const override
+    {
+        return Equal::description();
+    }
+
+    std::unique_ptr<ParentNode> clone() const override
+    {
+        return std::unique_ptr<ParentNode>(new MixedNode<Equal>(*this));
+    }
+
+protected:
+    std::vector<ObjKey> m_index_matches;
+
+    ObjKey m_actual_key;
+    ObjKey m_last_start_key;
+    size_t m_results_start;
+    size_t m_results_ndx;
+    size_t m_results_end;
+    bool m_has_search_index = false;
+
+    void index_based_aggregate(size_t limit, Evaluator evaluator) override;
 };
 
 class StringNodeBase : public ParentNode {
@@ -1753,7 +1810,6 @@ public:
             StringNodeBase::cluster_changed();
         }
     }
-
 
     size_t find_first_local(size_t start, size_t end) override;
 
@@ -2338,35 +2394,30 @@ private:
 };
 
 
-class LinksToNode : public ParentNode {
+class LinksToNodeBase : public ParentNode {
 public:
-    LinksToNode(ColKey origin_column_key, ObjKey target_key)
-        : m_target_keys(1, target_key)
+    LinksToNodeBase(ColKey origin_column_key, ObjKey target_key)
+        : LinksToNodeBase(origin_column_key, std::vector<ObjKey>{target_key})
     {
-        m_dT = 50.0;
-        m_condition_column_key = origin_column_key;
     }
 
-    LinksToNode(ColKey origin_column_key, const std::vector<ObjKey>& target_keys)
+    LinksToNodeBase(ColKey origin_column_key, const std::vector<ObjKey>& target_keys)
         : m_target_keys(target_keys)
     {
         m_dT = 50.0;
         m_condition_column_key = origin_column_key;
-    }
-
-    void table_changed() override
-    {
-        m_column_type = m_table.unchecked_ptr()->get_column_type(m_condition_column_key);
-        REALM_ASSERT(m_column_type == type_Link || m_column_type == type_LinkList);
+        m_column_type = origin_column_key.get_type();
+        REALM_ASSERT(m_column_type == col_type_Link || m_column_type == col_type_LinkList);
+        REALM_ASSERT(!m_target_keys.empty());
     }
 
     void cluster_changed() override
     {
         m_array_ptr = nullptr;
-        if (m_column_type == type_Link) {
+        if (m_column_type == col_type_Link) {
             m_array_ptr = LeafPtr(new (&m_storage.m_list) ArrayKey(m_table.unchecked_ptr()->get_alloc()));
         }
-        else if (m_column_type == type_LinkList) {
+        else if (m_column_type == col_type_LinkList) {
             m_array_ptr = LeafPtr(new (&m_storage.m_linklist) ArrayList(m_table.unchecked_ptr()->get_alloc()));
         }
         m_cluster->init_leaf(this->m_condition_column_key, m_array_ptr.get());
@@ -2377,55 +2428,14 @@ public:
     {
         REALM_ASSERT(m_condition_column_key);
         if (m_target_keys.size() > 1)
-            throw SerialisationError("Serialising a query which links to multiple objects is currently unsupported.");
+            throw SerialisationError("Serializing a query which links to multiple objects is currently unsupported.");
         return state.describe_column(ParentNode::m_table, m_condition_column_key) + " " + describe_condition() + " " +
                util::serializer::print_value(m_target_keys[0]);
     }
 
-    virtual std::string describe_condition() const override
-    {
-        return "==";
-    }
-
-    size_t find_first_local(size_t start, size_t end) override
-    {
-        if (m_column_type == type_LinkList || m_condition_column_key.is_set()) {
-            BPlusTree<ObjKey> links(m_table.unchecked_ptr()->get_alloc());
-            for (size_t i = start; i < end; i++) {
-                if (ref_type ref = static_cast<const ArrayList*>(m_leaf_ptr)->get(i)) {
-                    links.init_from_ref(ref);
-                    for (auto& key : m_target_keys) {
-                        if (key) {
-                            if (links.find_first(key) != not_found)
-                                return i;
-                        }
-                    }
-                }
-            }
-        }
-        else if (m_column_type == type_Link) {
-            for (auto& key : m_target_keys) {
-                if (key) {
-                    // LinkColumn stores link to row N as the integer N + 1
-                    auto pos = static_cast<const ArrayKey*>(m_leaf_ptr)->find_first(key, start, end);
-                    if (pos != realm::npos) {
-                        return pos;
-                    }
-                }
-            }
-        }
-
-        return not_found;
-    }
-
-    std::unique_ptr<ParentNode> clone() const override
-    {
-        return std::unique_ptr<ParentNode>(new LinksToNode(*this));
-    }
-
-private:
+protected:
     std::vector<ObjKey> m_target_keys;
-    DataType m_column_type = type_Link;
+    ColumnType m_column_type;
     using LeafPtr = std::unique_ptr<ArrayPayload, PlacementDelete>;
     union Storage {
         typename std::aligned_storage<sizeof(ArrayKey), alignof(ArrayKey)>::type m_list;
@@ -2435,12 +2445,30 @@ private:
     LeafPtr m_array_ptr;
     const ArrayPayload* m_leaf_ptr = nullptr;
 
-    LinksToNode(const LinksToNode& source)
+    LinksToNodeBase(const LinksToNodeBase& source)
         : ParentNode(source)
         , m_target_keys(source.m_target_keys)
         , m_column_type(source.m_column_type)
     {
     }
+};
+
+template <class TConditionFunction>
+class LinksToNode : public LinksToNodeBase {
+public:
+    using LinksToNodeBase::LinksToNodeBase;
+
+    virtual std::string describe_condition() const override
+    {
+        return TConditionFunction::description();
+    }
+
+    std::unique_ptr<ParentNode> clone() const override
+    {
+        return std::unique_ptr<ParentNode>(new LinksToNode<TConditionFunction>(*this));
+    }
+
+    size_t find_first_local(size_t start, size_t end) override;
 };
 
 } // namespace realm

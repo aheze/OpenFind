@@ -238,7 +238,6 @@ struct LanguagesView: View {
                 .introspectTableView { tableView in
                     tableView.separatorStyle = .none
                     tableView.backgroundColor = .clear
-                    tableView.backgroundColor = .clear
                 }
                 .environment(\.editMode, .constant(.active))
                 .colorScheme(.dark)

@@ -28,6 +28,7 @@
 #include <realm/uuid.hpp>
 #include <realm/util/string_buffer.hpp>
 #include <realm/util/any.hpp>
+#include <realm/mixed.hpp>
 
 namespace realm::query_parser {
 

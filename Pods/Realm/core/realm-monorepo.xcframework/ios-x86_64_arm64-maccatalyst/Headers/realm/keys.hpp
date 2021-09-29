@@ -35,33 +35,28 @@ struct TableKey {
         : value(null_value)
     {
     }
-    explicit TableKey(uint32_t val) noexcept
+    constexpr explicit TableKey(uint32_t val) noexcept
         : value(val)
     {
     }
-    TableKey& operator=(uint32_t val) noexcept
-    {
-        value = val;
-        return *this;
-    }
-    bool operator==(const TableKey& rhs) const noexcept
+    constexpr bool operator==(const TableKey& rhs) const noexcept
     {
         return value == rhs.value;
     }
-    bool operator!=(const TableKey& rhs) const noexcept
+    constexpr bool operator!=(const TableKey& rhs) const noexcept
     {
         return value != rhs.value;
     }
-    bool operator<(const TableKey& rhs) const noexcept
+    constexpr bool operator<(const TableKey& rhs) const noexcept
     {
         return value < rhs.value;
     }
-    bool operator>(const TableKey& rhs) const noexcept
+    constexpr bool operator>(const TableKey& rhs) const noexcept
     {
         return value > rhs.value;
     }
 
-    explicit operator bool() const noexcept
+    constexpr explicit operator bool() const noexcept
     {
         return value != null_value;
     }
@@ -133,11 +128,6 @@ struct ColKey {
     {
         return get_attrs().test(col_attr_Collection);
     }
-    ColKey& operator=(int64_t val) noexcept
-    {
-        value = val;
-        return *this;
-    }
     bool operator==(const ColKey& rhs) const noexcept
     {
         return value == rhs.value;
@@ -201,11 +191,6 @@ struct ObjKey {
     ObjKey get_unresolved() const
     {
         return ObjKey(-2 - value);
-    }
-    ObjKey& operator=(int64_t val) noexcept
-    {
-        value = val;
-        return *this;
     }
     bool operator==(const ObjKey& rhs) const noexcept
     {
@@ -321,6 +306,9 @@ private:
     TableKey m_table_key;
 };
 
+using TableKeyType = decltype(TableKey::value);
+using ObjKeyType = decltype(ObjKey::value);
+
 inline std::ostream& operator<<(std::ostream& os, ObjLink link)
 {
     os << '{' << link.get_table_key() << ',' << link.get_obj_key() << '}';
@@ -347,6 +335,14 @@ struct hash<realm::ObjKey> {
     size_t operator()(realm::ObjKey key) const
     {
         return std::hash<uint64_t>{}(key.value);
+    }
+};
+
+template <>
+struct hash<realm::TableKey> {
+    size_t operator()(realm::TableKey key) const
+    {
+        return std::hash<uint32_t>{}(key.value);
     }
 };
 

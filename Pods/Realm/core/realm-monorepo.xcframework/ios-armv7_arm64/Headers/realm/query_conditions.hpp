@@ -45,17 +45,15 @@ class ClusterKeyArray;
 
 class QueryStateBase {
 public:
-    size_t m_match_count;
-    size_t m_limit;
     int64_t m_minmax_key; // used only for min/max, to save index of current min/max value
     uint64_t m_key_offset;
     const ClusterKeyArray* m_key_values;
     QueryStateBase(size_t limit)
-        : m_match_count(0)
-        , m_limit(limit)
-        , m_minmax_key(-1)
+        : m_minmax_key(-1)
         , m_key_offset(0)
         , m_key_values(nullptr)
+        , m_match_count(0)
+        , m_limit(limit)
     {
     }
     virtual ~QueryStateBase()
@@ -71,7 +69,20 @@ public:
         return false;
     }
 
+    inline size_t match_count() const noexcept
+    {
+        return m_match_count;
+    }
+
+    inline size_t limit() const noexcept
+    {
+        return m_limit;
+    }
+
 protected:
+    size_t m_match_count;
+    size_t m_limit;
+
 private:
     virtual void dyncast();
 };
@@ -98,30 +109,6 @@ public:
         return m_match_count;
     }
 };
-
-namespace aggregate_operations {
-
-template <typename T>
-static bool is_nan(T value)
-{
-    if constexpr (std::is_floating_point_v<T>) {
-        return std::isnan(value);
-    }
-    else {
-        // gcc considers the argument unused if it's only used in one branch of if constexpr
-        static_cast<void>(value);
-        return false;
-    }
-}
-
-template <>
-inline bool is_nan<Decimal128>(Decimal128 value)
-{
-    return value.is_nan();
-}
-
-} // namespace aggregate_operations
-
 
 // Array::VTable only uses the first 4 conditions (enums) in an array of function pointers
 enum { cond_Equal, cond_NotEqual, cond_Greater, cond_Less, cond_VTABLE_FINDER_COUNT, cond_None, cond_LeftNotNull };

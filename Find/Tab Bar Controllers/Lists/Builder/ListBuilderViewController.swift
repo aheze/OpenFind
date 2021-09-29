@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Parchment
 
 protocol FinishedEditingList: class {
     func updateExistingList(name: String, description: String, contents: [String], imageName: String, imageColor: String, deleteList: Bool)

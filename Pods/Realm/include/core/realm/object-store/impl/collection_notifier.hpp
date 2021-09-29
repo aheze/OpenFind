@@ -19,13 +19,11 @@
 #ifndef REALM_BACKGROUND_COLLECTION_HPP
 #define REALM_BACKGROUND_COLLECTION_HPP
 
-#include <realm/object-store/object_changeset.hpp>
-#include <realm/object-store/impl/collection_change_builder.hpp>
+#include <realm/object-store/impl/deep_change_checker.hpp>
 #include <realm/object-store/util/checked_mutex.hpp>
 
 #include <realm/util/assert.hpp>
 #include <realm/version_id.hpp>
-#include <realm/keys.hpp>
 #include <realm/table_ref.hpp>
 
 #include <array>
@@ -33,71 +31,39 @@
 #include <exception>
 #include <functional>
 #include <mutex>
-#include <unordered_map>
 #include <unordered_set>
 
 namespace realm {
-class Realm;
-class Transaction;
-
 namespace _impl {
-class RealmCoordinator;
 
-struct ListChangeInfo {
-    TableKey table_key;
-    int64_t row_key;
-    int64_t col_key;
-    CollectionChangeBuilder* changes;
-};
-
-// FIXME: this should be in core
-using TableKeyType = decltype(TableKey::value);
-using ObjKeyType = decltype(ObjKey::value);
-
-struct TransactionChangeInfo {
-    std::vector<ListChangeInfo> lists;
-    std::unordered_map<TableKeyType, ObjectChangeSet> tables;
-    bool track_all;
-    bool schema_changed;
-};
-
-class DeepChangeChecker {
-public:
-    struct OutgoingLink {
-        int64_t col_key;
-        bool is_list;
-    };
-    struct RelatedTable {
-        TableKey table_key;
-        std::vector<OutgoingLink> links;
-    };
-
-    DeepChangeChecker(TransactionChangeInfo const& info, Table const& root_table,
-                      std::vector<RelatedTable> const& related_tables);
-
-    bool operator()(int64_t obj_key);
-
-    // Recursively add `table` and all tables it links to to `out`, along with
-    // information about the links from them
-    static void find_related_tables(std::vector<RelatedTable>& out, Table const& table);
-
-private:
-    TransactionChangeInfo const& m_info;
-    Table const& m_root_table;
-    const TableKey m_root_table_key;
-    ObjectChangeSet const* const m_root_object_changes;
-    std::unordered_map<TableKeyType, std::unordered_set<ObjKeyType>> m_not_modified;
-    std::vector<RelatedTable> const& m_related_tables;
-
-    struct Path {
-        int64_t obj_key;
-        int64_t col_key;
-        bool depth_exceeded;
-    };
-    std::array<Path, 4> m_current_path;
-
-    bool check_row(Table const& table, ObjKeyType obj_key, size_t depth = 0);
-    bool check_outgoing_links(TableKey table_key, Table const& table, int64_t obj_key, size_t depth = 0);
+// A `NotificationCallback` is added to a collection when observing it.
+// It contains all information necessary in case we need to notify about changes
+// to this collection.
+struct NotificationCallback {
+    // The callback function being invoked when we notify for changes in this collection.
+    CollectionChangeCallback fn;
+    // The pending changes accumulated on the worker thread. This field is
+    // guarded by m_callback_mutex and is written to on the worker thread,
+    // then read from on the target thread.
+    CollectionChangeBuilder accumulated_changes;
+    // The changeset which will actually be passed to `fn`. This field is
+    // not guarded by a lock and can only be accessed on the notifier's
+    // target thread.
+    CollectionChangeBuilder changes_to_deliver;
+    // The filter that this `NotificationCallback` is restricted to.
+    // If not empty, modifications of elements not part of the `key_path_array`
+    // will not invoke a notification.
+    KeyPathArray key_path_array = {};
+    // A unique-per-notifier identifier used to unregister the callback.
+    uint64_t token = 0;
+    // We normally want to skip calling the callback if there's no changes,
+    // but only if we've sent the initial notification (to support the
+    // async query use-case). Not guarded by a mutex and is only readable
+    // on the target thread.
+    bool initial_delivered = false;
+    // Set within a write transaction on the target thread if this callback
+    // should not be called with changes for that write. requires m_callback_mutex.
+    bool skip_next = false;
 };
 
 // A base class for a notifier that keeps a collection up to date and/or
@@ -117,13 +83,27 @@ public:
     // This must be called in the destructor of the collection
     void unregister() noexcept;
 
-    // Add a callback to be called each time the collection changes
-    // This can only be called from the target collection's thread
-    // Returns a token which can be passed to remove_callback()
-    uint64_t add_callback(CollectionChangeCallback callback) REQUIRES(!m_callback_mutex);
-    // Remove a previously added token. The token is no longer valid after
-    // calling this function and must not be used again. This function can be
-    // called from any thread.
+    /**
+     * Add a callback to be called each time the collection changes.
+     * This can only be called from the target collection's thread.
+     *
+     * @param callback The `CollectionChangeCallback` that will be executed when a change happens.
+     * @param key_path_array An array of all key paths that should be filtered for. If a changed
+     *                       table/column combination is not part of the `key_path_array`, no
+     *                       notification will be sent.
+     *
+     * @return A token which can be passed to `remove_callback()`.
+     */
+    uint64_t add_callback(CollectionChangeCallback callback, KeyPathArray key_path_array) REQUIRES(!m_callback_mutex);
+
+    /**
+     * Remove a previously added token.
+     * The token is no longer valid after calling this function and must not be used again.
+     * This function can be called from any thread.
+     *
+     * @param token The token that was genereted and returned from `add_callback` is used in this function
+     *              to identify the callback that is supposed to be removed.
+     */
     void remove_callback(uint64_t token) REQUIRES(!m_callback_mutex);
 
     void suppress_next_notification(uint64_t token) REQUIRES(!m_callback_mutex);
@@ -198,7 +178,6 @@ public:
 
 protected:
     void add_changes(CollectionChangeBuilder change) REQUIRES(!m_callback_mutex);
-    void set_table(ConstTableRef table);
     std::unique_lock<std::mutex> lock_target();
     Transaction& source_shared_group();
     // signal that the underlying source object of the collection has been deleted
@@ -206,11 +185,44 @@ protected:
     void report_collection_root_is_deleted();
 
     bool any_related_table_was_modified(TransactionChangeInfo const&) const noexcept;
+
+    // Creates and returns a `DeepChangeChecker` or `KeyPathChecker` depending on the given KeyPathArray.
     std::function<bool(ObjectChangeSet::ObjectKeyType)> get_modification_checker(TransactionChangeInfo const&,
-                                                                                 ConstTableRef);
+                                                                                 ConstTableRef)
+        REQUIRES(!m_callback_mutex);
+
+    // Creates and returns a `ObjectKeyPathChangeChecker` which behaves slightly different that `DeepChangeChecker`
+    // and `KeyPathChecker` which are used for `Collection`s.
+    std::function<std::vector<int64_t>(ObjectChangeSet::ObjectKeyType)>
+    get_object_modification_checker(TransactionChangeInfo const&, ConstTableRef) REQUIRES(!m_callback_mutex);
+
+    // Returns a vector containing all `KeyPathArray`s from all `NotificationCallback`s attached to this notifier.
+    void recalculate_key_path_array() REQUIRES(m_callback_mutex);
+    // Checks `KeyPathArray` filters on all `m_callbacks` and returns true if at least one key path
+    // filter is attached to each of them.
+    bool any_callbacks_filtered() const noexcept;
+    // Checks `KeyPathArray` filters on all `m_callbacks` and returns true if at least one key path
+    // filter is attached to all of them.
+    bool all_callbacks_filtered() const noexcept;
+
+    void update_related_tables(Table const& table) REQUIRES(m_callback_mutex);
+
+    // A summary of all `KeyPath`s attached to the `m_callbacks`.
+    KeyPathArray m_key_path_array;
 
     // The actual change, calculated in run() and delivered in prepare_handover()
     CollectionChangeBuilder m_change;
+
+    // A vector of all tables related to this table (including itself).
+    std::vector<DeepChangeChecker::RelatedTable> m_related_tables;
+
+    // Due to the keypath filtered notifications we need to update the related tables every time the callbacks do see
+    // a change since the list of related tables is filtered by the key paths used for the notifications.
+    bool m_did_modify_callbacks = true;
+
+    // Currently registered callbacks and a mutex which must always be held
+    // while doing anything with them or m_callback_index
+    util::CheckedMutex m_callback_mutex;
 
 private:
     virtual void do_attach_to(Transaction&) {}
@@ -220,6 +232,13 @@ private:
     {
         return true;
     }
+    // Iterate over m_callbacks and call the given function on each one. This
+    // does fancy locking things to allow fn to drop the lock before invoking
+    // the callback (which must be done to avoid deadlocks).
+    template <typename Fn>
+    void for_each_callback(Fn&& fn) REQUIRES(!m_callback_mutex);
+
+    std::vector<NotificationCallback>::iterator find_callback(uint64_t token);
 
     mutable std::mutex m_realm_mutex;
     std::shared_ptr<Realm> m_realm;
@@ -230,35 +249,14 @@ private:
     bool m_has_run = false;
     bool m_error = false;
     bool m_has_delivered_root_deletion_event = false;
-    std::vector<DeepChangeChecker::RelatedTable> m_related_tables;
 
-    struct Callback {
-        // The actual callback to invoke
-        CollectionChangeCallback fn;
-        // The pending changes accumulated on the worker thread. This field is
-        // guarded by m_callback_mutex and is written to on the worker thread,
-        // then read from on the target thread.
-        CollectionChangeBuilder accumulated_changes;
-        // The changeset which will actually be passed to `fn`. This field is
-        // not guarded by a lock and can only be accessed on the notifier's
-        // target thread.
-        CollectionChangeBuilder changes_to_deliver;
-        // A unique-per-notifier identifier used to unregister the callback.
-        uint64_t token;
-        // We normally want to skip calling the callback if there's no changes,
-        // but only if we've sent the initial notification (to support the
-        // async query use-case). Not guarded by a mutex and is only readable
-        // on the target thread.
-        bool initial_delivered;
-        // Set within a write transaction on the target thread if this callback
-        // should not be called with changes for that write. requires m_callback_mutex.
-        bool skip_next;
-    };
+    // Cached check for if callbacks have keypath filters which can be used
+    // only on the worker thread, but without acquiring the callback mutex
+    bool m_all_callbacks_filtered = false;
+    bool m_any_callbacks_filtered = false;
 
-    // Currently registered callbacks and a mutex which must always be held
-    // while doing anything with them or m_callback_index
-    util::CheckedMutex m_callback_mutex;
-    std::vector<Callback> m_callbacks;
+    // All `NotificationCallback`s added to this `CollectionNotifier` via `add_callback()`.
+    std::vector<NotificationCallback> m_callbacks;
 
     // Cached value for if m_callbacks is empty, needed to avoid deadlocks in
     // run() due to lock-order inversion between m_callback_mutex and m_target_mutex
@@ -269,22 +267,14 @@ private:
     // Iteration variable for looping over callbacks. remove_callback() will
     // sometimes update this to ensure that removing a callback while iterating
     // over the callbacks will not skip an unrelated callback.
-    size_t m_callback_index = -1;
+    size_t m_callback_index GUARDED_BY(m_callback_mutex) = -1;
     // The number of callbacks which were present when the notifier was packaged
     // for delivery which are still present.
     // Updated by packaged_for_delivery and remove_callback(), and used in
     // for_each_callback() to avoid calling callbacks registered during delivery.
-    size_t m_callback_count = -1;
+    size_t m_callback_count GUARDED_BY(m_callback_mutex) = -1;
 
-    uint64_t m_next_token = 0;
-
-    // Iterate over m_callbacks and call the given function on each one. This
-    // does fancy locking things to allow fn to drop the lock before invoking
-    // the callback (which must be done to avoid deadlocks).
-    template <typename Fn>
-    void for_each_callback(Fn&& fn) REQUIRES(!m_callback_mutex);
-
-    std::vector<Callback>::iterator find_callback(uint64_t token);
+    uint64_t m_next_token GUARDED_BY(m_callback_mutex) = 0;
 };
 
 // A smart pointer to a CollectionNotifier that unregisters the notifier when

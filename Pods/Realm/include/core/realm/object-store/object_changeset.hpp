@@ -30,6 +30,10 @@
 
 namespace realm {
 
+/**
+ * An `ObjectChangeSet` holds information about all insertions, modifications and deletions
+ * in a single table.
+ */
 class ObjectChangeSet {
 public:
     using ColKeyType = decltype(realm::ColKey::value);
@@ -52,7 +56,17 @@ public:
     bool deletions_remove(ObjectKeyType obj);
 
     bool insertions_contains(ObjectKeyType obj) const;
-    bool modifications_contains(ObjectKeyType obj) const;
+    /**
+     * Checks if a given object was modified. If the optional filter is provided only those colums
+     * will be looked at.
+     *
+     * @param obj The `ObjectKeyType` that should be checked for changes.
+     * @param filtered_col_keys Optional collection of `ColKey` the check will be restricted to.
+     *
+     * @return True if `obj` is contained in `m_modifications` and `filtered_col_keys` contains
+     *         at least one changed column. False otherwise.
+     */
+    bool modifications_contains(ObjectKeyType obj, const std::vector<ColKey>& filtered_col_keys) const;
     bool deletions_contains(ObjectKeyType obj) const;
     // if the specified object has not been modified, returns nullptr
     // if the object has been modified, returns a pointer to the ObjectSet
@@ -108,6 +122,8 @@ public:
 private:
     ObjectSet m_deletions;
     ObjectSet m_insertions;
+    // `m_modifications` contains one entry per changed object.
+    // It also includes the information about all columns changed in that object.
     ObjectMapToColumnSet m_modifications;
 };
 

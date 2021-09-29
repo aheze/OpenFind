@@ -67,36 +67,6 @@ struct SizeOfList;
 template <class T>
 struct ColumnTypeTraits;
 
-template <class T, Action action>
-struct AggregateResultType {
-    using result_type = T;
-};
-
-template <class T, Action action>
-struct AggregateResultType<util::Optional<T>, action> {
-    using result_type = T;
-};
-
-template <class T>
-struct AggregateResultType<T, act_Average> {
-    using result_type = double;
-};
-
-template <class T>
-struct AggregateResultType<util::Optional<T>, act_Average> {
-    using result_type = double;
-};
-
-template <>
-struct AggregateResultType<Decimal128, act_Average> {
-    using result_type = Decimal128;
-};
-
-template <>
-struct AggregateResultType<float, act_Sum> {
-    using result_type = double;
-};
-
 template <>
 struct ColumnTypeTraits<int64_t> {
     using leaf_type = ArrayInteger;
@@ -152,6 +122,9 @@ struct ColumnTypeTraits<ObjKey> {
 template <>
 struct ColumnTypeTraits<Mixed> {
     using cluster_leaf_type = ArrayMixed;
+    using sum_type = Decimal128;
+    using minmax_type = Mixed;
+    using average_type = Decimal128;
     static constexpr const DataType id = type_Mixed;
     static constexpr const ColumnType column_id = col_type_Mixed;
 };

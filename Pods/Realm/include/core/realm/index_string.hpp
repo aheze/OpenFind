@@ -79,28 +79,27 @@ public:
     {
     }
 
-    ObjKey index_string_find_first(StringData value, const ClusterColumn& column) const;
-    void index_string_find_all(std::vector<ObjKey>& result, StringData value, const ClusterColumn& column,
+    ObjKey index_string_find_first(Mixed value, const ClusterColumn& column) const;
+    void index_string_find_all(std::vector<ObjKey>& result, Mixed value, const ClusterColumn& column,
                                bool case_insensitive = false) const;
-    FindRes index_string_find_all_no_copy(StringData value, const ClusterColumn& column,
-                                          InternalFindResult& result) const;
-    size_t index_string_count(StringData value, const ClusterColumn& column) const;
+    FindRes index_string_find_all_no_copy(Mixed value, const ClusterColumn& column, InternalFindResult& result) const;
+    size_t index_string_count(Mixed value, const ClusterColumn& column) const;
 
 private:
     template <IndexMethod>
-    int64_t from_list(StringData value, InternalFindResult& result_ref, const IntegerColumn& key_values,
+    int64_t from_list(Mixed value, InternalFindResult& result_ref, const IntegerColumn& key_values,
                       const ClusterColumn& column) const;
 
-    void from_list_all(StringData value, std::vector<ObjKey>& result, const IntegerColumn& rows,
+    void from_list_all(Mixed value, std::vector<ObjKey>& result, const IntegerColumn& rows,
                        const ClusterColumn& column) const;
 
     void from_list_all_ins(StringData value, std::vector<ObjKey>& result, const IntegerColumn& rows,
                            const ClusterColumn& column) const;
 
     template <IndexMethod method>
-    int64_t index_string(StringData value, InternalFindResult& result_ref, const ClusterColumn& column) const;
+    int64_t index_string(Mixed value, InternalFindResult& result_ref, const ClusterColumn& column) const;
 
-    void index_string_all(StringData value, std::vector<ObjKey>& result, const ClusterColumn& column) const;
+    void index_string_all(Mixed value, std::vector<ObjKey>& result, const ClusterColumn& column) const;
 
     void index_string_all_ins(StringData value, std::vector<ObjKey>& result, const ClusterColumn& column) const;
 };
@@ -142,7 +141,7 @@ public:
         return m_column_key;
     }
     bool is_nullable() const;
-    StringData get_index_data(ObjKey key, StringConversionBuffer& buffer) const;
+    Mixed get_value(ObjKey key) const;
 
 private:
     const TableClusterTree* m_cluster_tree;
@@ -208,8 +207,6 @@ public:
     FindRes find_all_no_copy(T value, InternalFindResult& result) const;
     template <class T>
     size_t count(T value) const;
-    template <class T>
-    void update_ref(T value, size_t old_row_ndx, size_t new_row_ndx);
 
     void clear();
 
@@ -265,10 +262,10 @@ private:
 
     static IndexArray* create_node(Allocator&, bool is_leaf);
 
-    void insert_with_offset(ObjKey key, StringData value, size_t offset);
+    void insert_with_offset(ObjKey key, StringData index_data, const Mixed& value, size_t offset);
     void insert_row_list(size_t ref, size_t offset, StringData value);
-    void insert_to_existing_list(ObjKey key, StringData value, IntegerColumn& list);
-    void insert_to_existing_list_at_lower(ObjKey key, StringData value, IntegerColumn& list,
+    void insert_to_existing_list(ObjKey key, Mixed value, IntegerColumn& list);
+    void insert_to_existing_list_at_lower(ObjKey key, Mixed value, IntegerColumn& list,
                                           const IntegerColumnIterator& lower);
     key_type get_last_key() const;
 
@@ -291,15 +288,16 @@ private:
     };
 
     // B-Tree functions
-    void TreeInsert(ObjKey obj_key, key_type, size_t offset, StringData value);
-    NodeChange do_insert(ObjKey, key_type, size_t offset, StringData value);
+    void TreeInsert(ObjKey obj_key, key_type, size_t offset, StringData index_data, const Mixed& value);
+    NodeChange do_insert(ObjKey, key_type, size_t offset, StringData index_data, const Mixed& value);
     /// Returns true if there is room or it can join existing entries
-    bool leaf_insert(ObjKey obj_key, key_type, size_t offset, StringData value, bool noextend = false);
+    bool leaf_insert(ObjKey obj_key, key_type, size_t offset, StringData index_data, const Mixed& value,
+                     bool noextend = false);
     void node_insert_split(size_t ndx, size_t new_ref);
     void node_insert(size_t ndx, size_t ref);
     void do_delete(ObjKey key, StringData, size_t offset);
 
-    StringData get(ObjKey key, StringConversionBuffer& buffer) const;
+    Mixed get(ObjKey key) const;
 
     void node_add_key(ref_type ref);
 
@@ -319,8 +317,8 @@ public:
     {
     }
 
-    bool operator()(int64_t key_value, StringData needle);
-    bool operator()(StringData needle, int64_t key_value);
+    bool operator()(int64_t key_value, Mixed needle);
+    bool operator()(Mixed needle, int64_t key_value);
 
 private:
     const ClusterColumn m_column;
@@ -328,117 +326,6 @@ private:
 
 
 // Implementation:
-
-template <class T>
-struct GetIndexData {
-    static StringData get_index_data(Mixed, StringConversionBuffer&)
-    {
-        REALM_ASSERT_RELEASE(false); // LCOV_EXCL_LINE; Index not supported
-        return {};
-    }
-};
-
-template <>
-struct GetIndexData<Timestamp> {
-    static StringData get_index_data(const Timestamp& dt, StringConversionBuffer& buffer);
-};
-
-template <>
-struct GetIndexData<int64_t> {
-    static StringData get_index_data(const int64_t& value, StringConversionBuffer& buffer)
-    {
-        const char* c = reinterpret_cast<const char*>(&value);
-        realm::safe_copy_n(c, sizeof(int64_t), buffer.data());
-        return StringData{buffer.data(), sizeof(int64_t)};
-    }
-};
-
-template <>
-struct GetIndexData<bool> {
-    static StringData get_index_data(const bool& value, StringConversionBuffer& buffer)
-    {
-        int64_t value2 = value ? 1 : 0;
-        const char* c = reinterpret_cast<const char*>(&value2);
-        realm::safe_copy_n(c, sizeof(int64_t), buffer.data());
-        return StringData{buffer.data(), sizeof(int64_t)};
-    }
-};
-
-template <>
-struct GetIndexData<StringData> {
-    static StringData get_index_data(StringData data, StringConversionBuffer&)
-    {
-        return data;
-    }
-};
-
-template <>
-struct GetIndexData<Mixed> {
-    static StringData get_index_data(Mixed value, StringConversionBuffer& buffer)
-    {
-        if (value.is_null()) {
-            return null{};
-        }
-
-        auto hash = value.hash();
-        const char* c = reinterpret_cast<const char*>(&hash);
-        realm::safe_copy_n(c, sizeof(size_t), buffer.data());
-
-        return StringData{buffer.data(), sizeof(size_t)};
-    }
-};
-
-template <>
-struct GetIndexData<null> {
-    static StringData get_index_data(null, StringConversionBuffer&)
-    {
-        return null{};
-    }
-};
-
-template <class T>
-struct GetIndexData<util::Optional<T>> {
-    static StringData get_index_data(const util::Optional<T>& value, StringConversionBuffer& buffer)
-    {
-        if (value)
-            return GetIndexData<T>::get_index_data(*value, buffer);
-        return null{};
-    }
-};
-
-template <>
-struct GetIndexData<ObjectId> {
-    static StringData get_index_data(ObjectId value, StringConversionBuffer& buffer)
-    {
-        memcpy(&buffer, &value, sizeof(ObjectId));
-        return StringData{buffer.data(), sizeof(ObjectId)};
-    }
-};
-
-template <>
-struct GetIndexData<UUID> {
-    static StringData get_index_data(UUID value, StringConversionBuffer& buffer)
-    {
-        const auto bytes = value.to_bytes();
-        std::copy_n(bytes.data(), bytes.size(), buffer.begin());
-        return StringData{buffer.data(), bytes.size()};
-    }
-};
-
-template <>
-struct GetIndexData<const char*> : GetIndexData<StringData> {
-};
-
-// to_str() is used by the integer index. The existing StringIndex is re-used for this
-// by making IntegerColumn convert its integers to strings by calling to_str().
-
-template <class T>
-inline StringData to_str(T&& value, StringConversionBuffer& buffer)
-{
-    return GetIndexData<typename std::remove_reference<T>::type>::get_index_data(value, buffer);
-}
-
-
 inline StringIndex::StringIndex(const ClusterColumn& target_column, Allocator& alloc)
     : m_array(create_node(alloc, true)) // Throws
     , m_target_column(target_column)
@@ -523,8 +410,9 @@ template <class T>
 void StringIndex::insert(ObjKey key, T value)
 {
     StringConversionBuffer buffer;
+    Mixed m(value);
     size_t offset = 0;                                      // First key from beginning of string
-    insert_with_offset(key, to_str(value, buffer), offset); // Throws
+    insert_with_offset(key, m.get_index_data(buffer), m, offset); // Throws
 }
 
 template <class T>
@@ -541,10 +429,8 @@ void StringIndex::insert(ObjKey key, util::Optional<T> value)
 template <class T>
 void StringIndex::set(ObjKey key, T new_value)
 {
-    StringConversionBuffer buffer;
-    StringConversionBuffer buffer2;
-    StringData old_value = get(key, buffer);
-    StringData new_value2 = to_str(new_value, buffer2);
+    Mixed old_value = get(key);
+    Mixed new_value2 = Mixed(new_value);
 
     // Note that insert_with_offset() throws UniqueConstraintViolation.
 
@@ -553,8 +439,10 @@ void StringIndex::set(ObjKey key, T new_value)
         // might find the duplicate if we insert before erasing.
         erase(key); // Throws
 
+        StringConversionBuffer buffer;
         size_t offset = 0;                               // First key from beginning of string
-        insert_with_offset(key, new_value2, offset);     // Throws
+        auto index_data = new_value2.get_index_data(buffer);
+        insert_with_offset(key, index_data, new_value2, offset); // Throws
     }
 }
 
@@ -573,39 +461,27 @@ template <class T>
 ObjKey StringIndex::find_first(T value) const
 {
     // Use direct access method
-    StringConversionBuffer buffer;
-    return m_array->index_string_find_first(to_str(value, buffer), m_target_column);
+    return m_array->index_string_find_first(Mixed(value), m_target_column);
 }
 
 template <class T>
 void StringIndex::find_all(std::vector<ObjKey>& result, T value, bool case_insensitive) const
 {
     // Use direct access method
-    StringConversionBuffer buffer;
-    return m_array->index_string_find_all(result, to_str(value, buffer), m_target_column, case_insensitive);
+    return m_array->index_string_find_all(result, Mixed(value), m_target_column, case_insensitive);
 }
 
 template <class T>
 FindRes StringIndex::find_all_no_copy(T value, InternalFindResult& result) const
 {
-    // Use direct access method
-    StringConversionBuffer buffer;
-    return m_array->index_string_find_all_no_copy(to_str(value, buffer), m_target_column, result);
+    return m_array->index_string_find_all_no_copy(Mixed(value), m_target_column, result);
 }
 
 template <class T>
 size_t StringIndex::count(T value) const
 {
     // Use direct access method
-    StringConversionBuffer buffer;
-    return m_array->index_string_count(to_str(value, buffer), m_target_column);
-}
-
-template <class T>
-void StringIndex::update_ref(T value, size_t old_row_ndx, size_t new_row_ndx)
-{
-    StringConversionBuffer buffer;
-    do_update_ref(to_str(value, buffer), old_row_ndx, new_row_ndx, 0);
+    return m_array->index_string_count(Mixed(value), m_target_column);
 }
 
 inline void StringIndex::destroy() noexcept

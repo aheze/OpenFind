@@ -179,7 +179,7 @@ public:
     {
         return (m_value & prop) != 0;
     }
-    void set(ColumnAttr prop)
+    constexpr void set(ColumnAttr prop)
     {
         m_value |= prop;
     }

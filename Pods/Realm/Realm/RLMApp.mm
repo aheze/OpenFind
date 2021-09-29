@@ -65,11 +65,11 @@ namespace {
 
                 // Convert the RLMResponse to an app:Response and pass downstream to
                 // the object store
-                completion({
-                    .body = response.body.UTF8String,
-                    .headers = bridgingHeaders,
+                completion(app::Response{
                     .http_status_code = static_cast<int>(response.httpStatusCode),
-                    .custom_status_code = static_cast<int>(response.customStatusCode)
+                    .custom_status_code = static_cast<int>(response.customStatusCode),
+                    .headers = bridgingHeaders,
+                    .body = response.body ? response.body.UTF8String : ""
                 });
             }];
         }
@@ -287,6 +287,11 @@ NSError *RLMAppErrorToNSError(realm::app::AppError const& appError) {
 
 static NSMutableDictionary *s_apps = [NSMutableDictionary new];
 static std::mutex& s_appMutex = *new std::mutex();
+
++ (NSArray *)appIds {
+    std::lock_guard<std::mutex> lock(s_appMutex);
+    return s_apps.allKeys;
+}
 
 + (void)resetAppCache {
     std::lock_guard<std::mutex> lock(s_appMutex);

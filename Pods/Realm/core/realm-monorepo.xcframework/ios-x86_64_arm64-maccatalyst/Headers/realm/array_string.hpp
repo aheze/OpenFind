@@ -50,11 +50,6 @@ public:
         return m_arr->is_attached();
     }
 
-    void detach() const
-    {
-        m_arr->detach();
-    }
-
     ref_type get_ref() const
     {
         return m_arr->get_ref();
@@ -92,7 +87,8 @@ public:
         init_from_mem(MemRef(m_alloc.translate(ref), ref, m_alloc));
     }
     void init_from_parent();
-    void destroy();
+    void destroy() noexcept;
+    void detach() noexcept;
 
     size_t size() const;
 

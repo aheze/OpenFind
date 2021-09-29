@@ -1783,7 +1783,7 @@ inline Service::OperQueue<Oper>::OperQueue(OperQueue&& q) noexcept
 }
 
 template <class Oper>
-inline Service::OperQueue<Oper>::~OperQueue<Oper>() noexcept
+inline Service::OperQueue<Oper>::~OperQueue() noexcept
 {
     clear();
 }

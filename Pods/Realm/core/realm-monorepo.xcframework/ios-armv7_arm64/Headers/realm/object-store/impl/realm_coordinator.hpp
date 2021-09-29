@@ -30,7 +30,6 @@
 
 namespace realm {
 class DB;
-class Replication;
 class Schema;
 class StringData;
 class SyncSession;
@@ -178,9 +177,6 @@ public:
     // Deliver any notifications which are ready for the Realm's version
     void process_available_async(Realm& realm) REQUIRES(!m_notifier_mutex);
 
-    // Register a function which is called whenever sync makes a write to the Realm
-    void set_transaction_callback(std::function<void(VersionID, VersionID)>) REQUIRES(!m_transaction_callback_mutex);
-
     // Deliver notifications for the Realm, blocking if some aren't ready yet
     // The calling Realm must be in a write transaction
     void promote_to_write(Realm& realm) REQUIRES(!m_notifier_mutex);
@@ -208,7 +204,6 @@ public:
 private:
     friend Realm::Internal;
     Realm::Config m_config;
-    std::unique_ptr<Replication> m_history;
     std::shared_ptr<DB> m_db;
 
     mutable util::CheckedMutex m_schema_cache_mutex;
@@ -233,8 +228,6 @@ private:
     std::exception_ptr m_async_error;
 
     std::unique_ptr<_impl::ExternalCommitHelper> m_notifier;
-    util::CheckedMutex m_transaction_callback_mutex;
-    std::function<void(VersionID, VersionID)> m_transaction_callback GUARDED_BY(m_transaction_callback_mutex);
 
 #if REALM_ENABLE_SYNC
     std::shared_ptr<SyncSession> m_sync_session;
@@ -245,7 +238,7 @@ private:
     void open_db();
 
     void set_config(const Realm::Config&) REQUIRES(m_realm_mutex, !m_schema_cache_mutex);
-    void create_sync_session(bool force_client_resync);
+    void create_sync_session();
     std::shared_ptr<Realm> do_get_cached_realm(Realm::Config const& config,
                                                std::shared_ptr<util::Scheduler> scheduler = nullptr)
         REQUIRES(m_realm_mutex);

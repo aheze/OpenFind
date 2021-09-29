@@ -69,6 +69,7 @@ command:
   test-catalyst-swift:  tests RealmSwift Mac Catalyst framework
   test-swiftpm:         tests ObjC and Swift macOS frameworks via SwiftPM
   test-swiftui-ios:         tests SwiftUI framework UI tests
+  test-swiftui-server-osx:  tests Server Sync in SwiftUI
   verify:               verifies docs, osx, osx-swift, ios-static, ios-dynamic, ios-swift, ios-device, swiftui-ios in both Debug and Release configurations, swiftlint
   verify-osx-object-server:  downloads the Realm Object Server and runs the Objective-C and Swift integration tests
   docs:                 builds docs in docs/output
@@ -127,12 +128,8 @@ xc() {
 
 xctest() {
   local scheme="$1"
-  local test_plan="$(echo $1 | tr -d ' ')"
-  if (( $(xcode_version_major) < 12 )); then
-    test_plan="${test_plan}Xcode11"
-  fi
-  xc -scheme "$scheme" -testPlan "$test_plan" "${@:2}" build-for-testing
-  xc -scheme "$scheme" -testPlan "$test_plan" "${@:2}" test-without-building
+  xc -scheme "$scheme" "${@:2}" build-for-testing
+  xc -scheme "$scheme" "${@:2}" test-without-building
 }
 
 build_combined() {
@@ -266,9 +263,10 @@ build_docs() {
       --module-version "${version}" \
       --xcodebuild-arguments "${xcodebuild_arguments}" \
       --module "${module}" \
-      --root-url "https://realm.io/docs/${language}/${version}/api/" \
+      --root-url "https://docs.mongodb.com/realm-sdks/${language}/${version}/" \
       --output "docs/${language}_output" \
-      --head "$(cat docs/custom_head.html)"
+      --head "$(cat docs/custom_head.html)" \
+      --exclude 'RealmSwift/Impl/*'
 
     rm Realm/RLMPlatform.h
 }
@@ -360,17 +358,6 @@ download_common() {
         if [ ! -f core/version.txt ]; then
             printf %s "${version}" > core/version.txt
         fi
-
-        # Xcode 11 dsymutil crashes when given debugging symbols created by
-        # Xcode 12. Check if this breaks, and strip them if so.
-        local test_lib=core/realm-monorepo.xcframework/ios-*-simulator/librealm-monorepo.a
-        xcrun clang++ -Wl,-all_load -g -arch x86_64 -shared -target ios13.0 \
-          -isysroot $(xcrun --sdk iphonesimulator --show-sdk-path) -o tmp.dylib \
-          $test_lib -lz -framework Security
-        if ! dsymutil tmp.dylib -o tmp.dSYM 2> /dev/null; then
-            find core -name '*.a' -exec strip -x "{}" \; 2> /dev/null
-        fi
-        rm -r tmp.dylib tmp.dSYM
 
         mv core "${versioned_dir}"
     )
@@ -662,8 +649,7 @@ case "$COMMAND" in
             export ASAN_OPTIONS='check_initialization_order=true:detect_stack_use_after_return=true'
         fi
         xcrun swift package resolve
-        find .build -name views.cpp -delete
-        xcrun swift test --configuration "$(echo "$CONFIGURATION" | tr "[:upper:]" "[:lower:]")" $SANITIZER
+        xcrun swift test -Xcc -g0 --configuration "$(echo "$CONFIGURATION" | tr "[:upper:]" "[:lower:]")" $SANITIZER
         exit 0
         ;;
 
@@ -681,6 +667,11 @@ case "$COMMAND" in
     "test-catalyst-swift")
         export REALM_SDKROOT=iphoneos
         xctest RealmSwift -configuration "$CONFIGURATION" -destination 'platform=macOS,variant=Mac Catalyst' CODE_SIGN_IDENTITY=''
+        exit 0
+        ;;
+
+    "test-swiftui-server-osx")
+        xctest 'SwiftUISyncTestHost' -configuration "$CONFIGURATION" -sdk macosx -destination 'platform=macOS'
         exit 0
         ;;
 
@@ -712,6 +703,7 @@ case "$COMMAND" in
         sh build.sh verify-catalyst
         sh build.sh verify-catalyst-swift
         sh build.sh verify-swiftui-ios
+        sh build.sh verify-swiftui-server-osx
         ;;
 
     "verify-cocoapods")
@@ -789,6 +781,11 @@ case "$COMMAND" in
 
     "verify-swiftui-ios")
         sh build.sh test-swiftui-ios
+        exit 0
+        ;;
+
+    "verify-swiftui-server-osx")
+        sh build.sh test-swiftui-server-osx
         exit 0
         ;;
 
@@ -955,7 +952,7 @@ case "$COMMAND" in
             workspace="${workspace/swift/swift-$REALM_XCODE_VERSION}"
         fi
 
-        examples="Simple TableView Migration Backlink GroupedTableView Encryption"
+        examples="Simple TableView Migration Backlink GroupedTableView Encryption AppClip AppClipParent"
         versions="0 1 2 3 4 5"
         for example in $examples; do
             if [ "$example" = "Migration" ]; then
@@ -1114,8 +1111,10 @@ case "$COMMAND" in
             export REALM_SKIP_PRELAUNCH=1
 
             if [[ "$target" = *"server"* ]] || [[ "$target" = "swiftpm"* ]]; then
+                mkdir .baas
+                mv build/stitch .baas
                 source "$(brew --prefix nvm)/nvm.sh" --no-use
-                nvm install 8.11.2
+                nvm install 13.14.0
                 sh build.sh setup-baas
             fi
 
@@ -1363,10 +1362,11 @@ x.y.z Release notes (yyyy-MM-dd)
 <!-- ### Breaking Changes - ONLY INCLUDE FOR NEW MAJOR version -->
 
 ### Compatibility
-* Realm Studio: 10.0.0 or later.
+* Realm Studio: 11.0.0 or later.
 * APIs are backwards compatible with all previous releases in the 10.x.y series.
-* Carthage release for Swift is built with Xcode 12.5.
+* Carthage release for Swift is built with Xcode 13.0.
 * CocoaPods: 1.10 or later.
+* Xcode: 12.2-13.0.
 
 ### Internal
 * Upgraded realm-core from ? to ?

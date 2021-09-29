@@ -223,25 +223,25 @@ inline size_t Spec::get_public_column_count() const noexcept
 inline ColumnType Spec::get_column_type(size_t ndx) const noexcept
 {
     REALM_ASSERT(ndx < get_column_count());
-    return ColumnType(int(m_types.get(ndx)));
+    return ColumnType(int(m_types.get(ndx) & 0xFFFF));
 }
 
 inline ColumnAttrMask Spec::get_column_attr(size_t ndx) const noexcept
 {
     REALM_ASSERT(ndx < get_column_count());
-    return ColumnAttrMask(m_attr.get(ndx) & 0xFF);
+    return ColumnAttrMask(m_attr.get(ndx));
 }
 
 inline void Spec::set_dictionary_key_type(size_t ndx, DataType key_type)
 {
-    ColumnAttrMask attr = get_column_attr(ndx);
-    m_attr.set(ndx, attr.m_value | (int64_t(key_type) << 8));
+    auto type = m_types.get(ndx);
+    m_types.set(ndx, (type & 0xFFFF) + (int64_t(key_type) << 16));
 }
 
 inline DataType Spec::get_dictionary_key_type(size_t ndx) const
 {
     REALM_ASSERT(ndx < get_column_count());
-    return DataType(int(m_attr.get(ndx) >> 8));
+    return DataType(int(m_types.get(ndx) >> 16));
 }
 
 inline void Spec::set_column_attr(size_t column_ndx, ColumnAttrMask attr)

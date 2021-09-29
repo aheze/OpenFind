@@ -34,6 +34,7 @@
 #include <pthread.h>
 #endif
 
+#include <realm/aggregate_ops.hpp>
 #include <realm/obj_list.hpp>
 #include <realm/table_ref.hpp>
 #include <realm/binary_data.hpp>
@@ -84,10 +85,8 @@ class Query final {
 public:
     Query(ConstTableRef table, ConstTableView* tv = nullptr);
     Query(ConstTableRef table, std::unique_ptr<ConstTableView>);
-    Query(ConstTableRef table, const LnkLst& list);
-    Query(ConstTableRef table, const LnkSet& set);
-    Query(ConstTableRef table, LnkLstPtr&& list);
-    Query(ConstTableRef table, LnkSetPtr&& set);
+    Query(ConstTableRef table, const ObjList& list);
+    Query(ConstTableRef table, LinkCollectionPtr&& list_ptr);
     Query();
     Query(std::unique_ptr<Expression>);
     ~Query() noexcept;
@@ -100,6 +99,8 @@ public:
 
     // Find links that point to a specific target row
     Query& links_to(ColKey column_key, ObjKey target_key);
+    // Find links that point to a specific object (for Mixed columns)
+    Query& links_to(ColKey column_key, ObjLink target_link);
     // Find links that point to specific target objects
     Query& links_to(ColKey column_key, const std::vector<ObjKey>& target_obj);
 
@@ -273,6 +274,10 @@ public:
     Decimal128 maximum_decimal128(ColKey column_key, ObjKey* return_ndx = nullptr) const;
     Decimal128 minimum_decimal128(ColKey column_key, ObjKey* return_ndx = nullptr) const;
     Decimal128 average_decimal128(ColKey column_key, size_t* resultcount = nullptr) const;
+    Decimal128 sum_mixed(ColKey column_key) const;
+    Mixed maximum_mixed(ColKey column_key, ObjKey* return_ndx = nullptr) const;
+    Mixed minimum_mixed(ColKey column_key, ObjKey* return_ndx = nullptr) const;
+    Decimal128 average_mixed(ColKey column_key, size_t* resultcount = nullptr) const;
 
     // Deletion
     size_t remove();
@@ -295,6 +300,13 @@ public:
     bool produces_results_in_table_order() const
     {
         return !m_view;
+    }
+
+    // Get the ObjKey of the object which owns the restricting view, or null
+    // if that is not applicable
+    ObjKey view_owner_obj_key() const noexcept
+    {
+        return m_view ? m_view->get_owning_obj().get_key() : ObjKey{};
     }
 
     // Calls sync_if_needed on the restricting view, if present.
@@ -341,7 +353,8 @@ private:
     template <typename TConditionFunction>
     Query& add_size_condition(ColKey column_key, int64_t value);
 
-    template <typename T, typename R = typename AggregateResultType<T, act_Average>::result_type>
+    template <typename T,
+              typename R = typename aggregate_operations::Average<typename util::RemoveOptional<T>::type>::ResultType>
     R average(ColKey column_key, size_t* resultcount = nullptr) const;
 
     template <typename T>
@@ -382,13 +395,16 @@ private:
     TableRef m_table;
 
     // points to the base class of the restricting view. If the restricting
-    // view is a link view, m_source_link_list is non-zero. If it is a table view,
+    // view is a link view, m_source_collection is non-zero. If it is a table view,
     // m_source_table_view is non-zero.
     ObjList* m_view = nullptr;
 
     // At most one of these can be non-zero, and if so the non-zero one indicates the restricting view.
-    LnkLstPtr m_source_link_list;                  // link lists are owned by the query.
-    LnkSetPtr m_source_link_set;                   // link sets are owned by the query.
+    //
+    // m_source_collection is a pointer to a collection which must also be a ObjList*
+    // this includes: LnkLst, LnkSet, and DictionaryLinkValues. It cannot be a list of primitives because
+    // it is used to populate a query through a collection of objects and there are asserts for this.
+    LinkCollectionPtr m_source_collection;         // collections are owned by the query.
     ConstTableView* m_source_table_view = nullptr; // table views are not refcounted, and not owned by the query.
     std::unique_ptr<ConstTableView> m_owned_source_table_view; // <--- except when indicated here
     std::shared_ptr<DescriptorOrdering> m_ordering;

@@ -116,7 +116,7 @@ struct Property {
 
     bool requires_index() const
     {
-        return is_indexed && !is_primary;
+        return is_indexed || is_primary;
     }
 
     bool type_is_indexable() const noexcept;
@@ -321,12 +321,14 @@ inline bool Property::type_is_indexable() const noexcept
 {
     return !is_collection(type) &&
            (type == PropertyType::Int || type == PropertyType::Bool || type == PropertyType::Date ||
-            type == PropertyType::String || type == PropertyType::ObjectId || type == PropertyType::UUID);
+            type == PropertyType::String || type == PropertyType::ObjectId || type == PropertyType::UUID ||
+            type == PropertyType::Mixed);
 }
 
 inline bool Property::type_is_nullable() const noexcept
 {
-    return !(is_array(type) && type == PropertyType::Object) && type != PropertyType::LinkingObjects;
+    return !((is_array(type) || is_set(type)) && type == PropertyType::Object) &&
+           type != PropertyType::LinkingObjects;
 }
 
 inline std::string Property::type_string() const

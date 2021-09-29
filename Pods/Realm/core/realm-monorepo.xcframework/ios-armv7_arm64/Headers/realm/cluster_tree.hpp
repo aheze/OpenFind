@@ -59,6 +59,11 @@ public:
         return m_size;
     }
 
+    size_t nb_columns() const
+    {
+        return m_root->nb_columns();
+    }
+
     static size_t size_from_ref(ref_type, Allocator& alloc);
 
     void destroy()
@@ -135,7 +140,7 @@ public:
     // Lookup by index
     ClusterNode::State get(size_t ndx, ObjKey& k) const;
     // Get logical index of object identified by k
-    size_t get_ndx(ObjKey k) const;
+    size_t get_ndx(ObjKey k) const noexcept;
     // Find the leaf containing the requested object
     bool get_leaf(ObjKey key, ClusterNode::IteratorState& state) const noexcept;
     // Visit all leaves and call the supplied function. Stop when function returns true.
@@ -149,7 +154,7 @@ public:
     virtual void cleanup_key(ObjKey k) = 0;
     virtual void set_spec(ArrayPayload& arr, ColKey::Idx col_ndx) const = 0;
     virtual bool is_string_enum_type(ColKey::Idx col_ndx) const = 0;
-    virtual const Table* get_owning_table() const = 0;
+    virtual const Table* get_owning_table() const noexcept = 0;
     virtual std::unique_ptr<ClusterNode> get_root_from_parent() = 0;
 
     void dump_objects()

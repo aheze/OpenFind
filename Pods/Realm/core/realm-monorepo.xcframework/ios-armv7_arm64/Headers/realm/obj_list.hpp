@@ -39,6 +39,19 @@ public:
     virtual void sync_if_needed() const = 0;
     virtual void get_dependencies(TableVersions&) const = 0;
     virtual bool is_in_sync() const = 0;
+    virtual LinkCollectionPtr clone_obj_list() const = 0;
+    virtual bool matches(const ObjList&) const
+    {
+        return true;
+    }
+    virtual Obj get_owning_obj() const
+    {
+        return {};
+    }
+    virtual ColKey get_owning_col_key() const
+    {
+        return {};
+    }
 
     // Get the versions of all tables which this list depends on
     TableVersions get_dependency_versions() const

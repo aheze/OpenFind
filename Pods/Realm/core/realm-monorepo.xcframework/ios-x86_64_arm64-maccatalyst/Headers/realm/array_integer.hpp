@@ -368,7 +368,7 @@ size_t ArrayIntNull::find_first(value_type value, size_t start, size_t end) cons
     QueryStateFindFirst state;
     find_impl<cond>(value, start, end, 0, &state, nullptr);
 
-    if (state.m_match_count > 0)
+    if (state.match_count() > 0)
         return to_size_t(state.m_state);
     else
         return not_found;

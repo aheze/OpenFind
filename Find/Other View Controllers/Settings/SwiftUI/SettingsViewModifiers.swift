@@ -35,7 +35,7 @@ struct HeaderModifiers: ViewModifier {
     func body(content: Content) -> some View {
         content
             .foregroundColor(.white)
-            .font(Font(UIFont.systemFont(ofSize: 19, weight: .medium)))
+            .font(.headline)
             .frame(maxWidth: .infinity, alignment: .leading)
             .edgePadding()
             .background(Color.black.opacity(0.75))

@@ -69,12 +69,11 @@ public:
         ColKey idx_access_token;
         // The identities for this user.
         ColKey idx_identities;
-        // The profile for this user.
-        ColKey idx_profile;
         // The current state of this user.
         ColKey idx_state;
         // The device id of this user.
         ColKey idx_device_id;
+        ColKey idx_profile_dump;
     };
 
     // Cannot be set after creation.
@@ -86,6 +85,9 @@ public:
     std::vector<realm::SyncUserIdentity> identities() const;
     void set_identities(std::vector<SyncUserIdentity>);
 
+    void set_state_and_tokens(SyncUser::State state, const std::string& access_token,
+                              const std::string& refresh_token);
+
     std::string refresh_token() const;
     void set_refresh_token(const std::string& token);
 
@@ -95,6 +97,7 @@ public:
     std::string device_id() const;
     void set_device_id(const std::string&);
 
+    SyncUserProfile profile() const;
     void set_user_profile(const SyncUserProfile&);
 
     void set_state(SyncUser::State);
@@ -270,7 +273,6 @@ private:
     SyncFileActionMetadata::Schema m_file_action_schema;
     SyncClientMetadata::Schema m_client_schema;
     SyncClientMetadata::Schema m_current_user_identity_schema;
-    SyncUserMetadata::Schema m_profile_schema;
     SyncAppMetadata::Schema m_app_metadata_schema;
 
     std::string m_client_uuid;

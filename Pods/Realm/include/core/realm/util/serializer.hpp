@@ -33,6 +33,7 @@ struct ColKey;
 struct null;
 class ObjectId;
 struct ObjKey;
+struct ObjLink;
 class StringData;
 class Timestamp;
 class LinkMap;
@@ -67,6 +68,8 @@ template <>
 std::string print_value<>(realm::ObjectId);
 template <>
 std::string print_value<>(realm::ObjKey);
+template <>
+std::string print_value<>(realm::ObjLink);
 template <>
 std::string print_value<>(realm::UUID);
 template <>

@@ -18,9 +18,14 @@
 
 import Realm
 
+/// A tag protocol which marks types that can be used as the partition value
+/// for synchronized Realms.
+public protocol PartitionValue {
+}
+
 /// Protocol representing a BSON value.
 /// - SeeAlso: bsonspec.org
-public protocol BSON: Equatable {
+public protocol BSON: PartitionValue, Equatable {
 }
 
 extension NSNull: BSON {
@@ -56,13 +61,16 @@ extension Decimal128: BSON {
 extension ObjectId: BSON {
 }
 
+extension UUID: BSON {
+}
+
 /// A Dictionary object representing a `BSON` document.
 public typealias Document = Dictionary<String, AnyBSON?>
 
-extension Dictionary: BSON where Key == String, Value == AnyBSON? {
+extension Dictionary: BSON, PartitionValue where Key == String, Value == AnyBSON? {
 }
 
-extension Array: BSON where Element == AnyBSON? {
+extension Array: BSON, PartitionValue where Element == AnyBSON? {
 }
 
 extension NSRegularExpression: BSON {
@@ -127,6 +135,9 @@ extension MinKey: BSON {
     /// - SeeAlso: https://github.com/mongodb/specifications/blob/master/source/bson-decimal128/decimal128.rst
     case decimal128(Decimal128)
 
+    /// A UUID.
+    case uuid(UUID)
+
     /// A BSON minKey.
     case minKey
 
@@ -166,6 +177,8 @@ extension MinKey: BSON {
             self = .datetime(val)
         case let val as Decimal128:
             self = .decimal128(val)
+        case let val as UUID:
+            self = .uuid(val)
         case let val as ObjectId:
             self = .objectId(val)
         case let val as Document:
@@ -180,6 +193,8 @@ extension MinKey: BSON {
             self = .minKey
         case let val as NSRegularExpression:
             self = .regex(val)
+        case let val as AnyBSON:
+            self = val
         default:
             self = .null
         }
@@ -289,6 +304,14 @@ extension MinKey: BSON {
         return t
     }
 
+    /// If this `BSON` is a `.uuid`, return it as a `UUID`. Otherwise, return nil.
+    public var uuidValue: UUID? {
+        guard case let .uuid(s) = self else {
+            return nil
+        }
+        return s
+    }
+
     /// If this `BSON` is a `.null` return true. Otherwise, false.
     public var isNull: Bool {
         return self == .null
@@ -356,18 +379,20 @@ extension MinKey: BSON {
     /// Return this BSON as a `Decimal128` if possible.
     /// This will coerce numeric cases (e.g. `.double`) into a `Decimal128` if such coercion would be lossless.
     public func asDecimal128() -> Decimal128? {
+        let str: String
         switch self {
         case let .decimal128(d):
             return d
         case let .int64(i):
-            return try? Decimal128(string: String(i))
+            str = String(i)
         case let .int32(i):
-            return try? Decimal128(string: String(i))
+            str = String(i)
         case let .double(d):
-            return try? Decimal128(string: String(d))
+            str = String(d)
         default:
             return nil
         }
+        return try? Decimal128(string: str)
     }
 
     /// Return this BSON as a `T` if possible, otherwise nil.

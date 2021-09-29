@@ -199,6 +199,17 @@ public:
         bind_ptr(p).swap(*this);
     }
 
+    void reset(T* p, adopt_tag) noexcept
+    {
+        bind_ptr(p, adopt_tag{}).swap(*this);
+    }
+
+    template <class U>
+    void reset(U* p, adopt_tag) noexcept
+    {
+        bind_ptr(p, adopt_tag{}).swap(*this);
+    }
+
     T* release() noexcept
     {
         T* const p = m_ptr;

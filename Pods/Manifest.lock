@@ -1,19 +1,17 @@
 PODS:
-  - Haptica (3.0.2)
-  - Parchment (3.0.1)
   - QuickLayout (3.0.0)
-  - Realm (10.7.6):
-    - Realm/Headers (= 10.7.6)
-  - Realm/Headers (10.7.6)
-  - RealmSwift (10.7.6):
-    - Realm (= 10.7.6)
+  - Realm (10.15.1):
+    - Realm/Headers (= 10.15.1)
+  - Realm/Headers (10.15.1)
+  - RealmSwift (10.15.1):
+    - Realm (= 10.15.1)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
   - SDWebImagePhotosPlugin (1.2.0):
     - SDWebImage/Core (~> 5.10)
   - SnapKit (5.0.1)
-  - SPAlert (3.1.0)
+  - SPAlert (3.4.0)
   - SupportDocs (1.1.0)
   - SwiftEntryKit (1.2.7):
     - QuickLayout (= 3.0.0)
@@ -22,8 +20,6 @@ PODS:
   - WhatsNewKit (1.3.7)
 
 DEPENDENCIES:
-  - Haptica
-  - Parchment
   - QuickLayout
   - RealmSwift
   - SDWebImage (~> 5.0)
@@ -38,8 +34,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - Haptica
-    - Parchment
     - QuickLayout
     - Realm
     - RealmSwift
@@ -54,21 +48,19 @@ SPEC REPOS:
     - WhatsNewKit
 
 SPEC CHECKSUMS:
-  Haptica: dc206651beeca25ab4744c633fbf0ae4d1e86baf
-  Parchment: 466a1cfb6151780db8acb4bbedc2d9c6bfa1e2ff
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
-  Realm: ed860452717c8db8f4bf832b6807f7f2ce708839
-  RealmSwift: e31c4ddbcc42ac879313d656b86f9ca539f6f4f4
+  Realm: fbcbde2620d51623cc5b18e28f5b165c39abef52
+  RealmSwift: e4bea8e42efad3d543aea23b56504069c6faaea2
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImagePhotosPlugin: 7d52495711a00637da16bbd7098a634f524c8d7e
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  SPAlert: 9d365b0bb371473d25831a575bfe631e3c83cff0
+  SPAlert: 74762cc8a039b8937d7da1b094e30bcbbef45f8d
   SupportDocs: 8123646bc65daa23d9d5efda5f836563187c194a
   SwiftEntryKit: 537c92699d6034efb1ef9c32b11e0b37c97aa589
   SwiftRichString: d61b807db1f8834c26fee92b6dd3e1be2dc5af03
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   WhatsNewKit: c87028c4059dccd113495422801914cc53f6aab0
 
-PODFILE CHECKSUM: 4dbb5a854d428ebb2af1f6776c0c7f6689648ee7
+PODFILE CHECKSUM: b38dc6306ec15c13ba141c4bda5bfc2a54a967c7
 
 COCOAPODS: 1.10.1

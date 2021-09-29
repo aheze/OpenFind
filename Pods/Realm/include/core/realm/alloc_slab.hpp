@@ -571,7 +571,7 @@ private:
     };
     std::vector<MapEntry> m_mappings;
     size_t m_translation_table_size = 0;
-    uint64_t m_mapping_version = 1;
+    std::atomic<uint64_t> m_mapping_version = 1;
     uint64_t m_youngest_live_version = 1;
     std::mutex m_mapping_mutex;
     util::File m_file;

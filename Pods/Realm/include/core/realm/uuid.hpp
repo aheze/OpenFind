@@ -82,6 +82,7 @@ public:
         return m_bytes <= other.m_bytes;
     }
     std::string to_string() const;
+    std::string to_base64() const;
     UUIDBytes to_bytes() const
     {
         return m_bytes;

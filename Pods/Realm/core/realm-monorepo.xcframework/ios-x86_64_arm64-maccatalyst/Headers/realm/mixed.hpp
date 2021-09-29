@@ -168,6 +168,12 @@ public:
         return DataType(m_type - 1);
     }
 
+    template <class... Tail>
+    bool is_type(DataType head, Tail... tail) const noexcept
+    {
+        return _is_type(head, tail...);
+    }
+
     static bool types_are_comparable(const Mixed& l, const Mixed& r);
     static bool data_types_are_comparable(DataType l_type, DataType r_type);
 
@@ -191,8 +197,13 @@ public:
     ObjLink get_link() const;
 
     bool is_null() const;
+    bool accumulate_numeric_to(Decimal128& destination) const;
     bool is_unresolved_link() const;
+    bool is_same_type(const Mixed& b) const;
+    // Will use utf8_compare for strings
     int compare(const Mixed& b) const;
+    // Will compare strings as arrays of signed chars
+    int compare_signed(const Mixed& b) const;
     bool operator==(const Mixed& other) const
     {
         return compare(other) == 0;
@@ -218,6 +229,8 @@ public:
         return compare(other) >= 0;
     }
     size_t hash() const;
+    StringData get_index_data(std::array<char, 16>&) const;
+    void use_buffer(std::string& buf);
 
 protected:
     friend std::ostream& operator<<(std::ostream& out, const Mixed& m);
@@ -236,6 +249,21 @@ protected:
         ObjLink link_val;
         UUID uuid_val;
     };
+
+private:
+    static bool _is_type() noexcept
+    {
+        return false;
+    }
+    bool _is_type(DataType type) const noexcept
+    {
+        return m_type == unsigned(int(type) + 1);
+    }
+    template <class... Tail>
+    bool _is_type(DataType head, Tail... tail) const noexcept
+    {
+        return _is_type(head) || _is_type(tail...);
+    }
 };
 
 // Implementation:
@@ -562,6 +590,8 @@ inline UUID Mixed::get_uuid() const
 template <>
 inline ObjKey Mixed::get<ObjKey>() const noexcept
 {
+    if (get_type() == type_TypedLink)
+        return link_val.get_obj_key();
     REALM_ASSERT(get_type() == type_Link);
     return ObjKey(int_val);
 }
@@ -589,6 +619,11 @@ inline bool Mixed::is_null() const
     return (m_type == 0);
 }
 
+inline bool Mixed::is_same_type(const Mixed& b) const
+{
+    return (m_type == b.m_type);
+}
+
 inline bool Mixed::is_unresolved_link() const
 {
     if (is_null()) {
@@ -606,5 +641,16 @@ inline bool Mixed::is_unresolved_link() const
 std::ostream& operator<<(std::ostream& out, const Mixed& m);
 
 } // namespace realm
+
+namespace std {
+template <>
+struct hash<::realm::Mixed> {
+    inline size_t operator()(const ::realm::Mixed& m) const noexcept
+    {
+        return m.hash();
+    }
+};
+} // namespace std
+
 
 #endif // REALM_MIXED_HPP

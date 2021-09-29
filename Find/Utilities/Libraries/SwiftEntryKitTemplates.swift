@@ -29,21 +29,21 @@ class SwiftEntryKitTemplates {
         attributes.entranceAnimation = .translation
         attributes.exitAnimation = .translation
         attributes.displayDuration = Double(duration)
-        attributes.positionConstraints.size.height = .constant(value: 50)
+        attributes.positionConstraints.size.height = .intrinsic
         attributes.statusBar = .light
         attributes.entryInteraction = .absorbTouches
         attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 8, offset: .zero))
-        //let font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.light)
         let contentView = UIView()
         contentView.backgroundColor = backgroundColor
         contentView.layer.cornerRadius = 8
         let subTitle = UILabel()
         subTitle.numberOfLines = 0
+        subTitle.textAlignment = .center
         subTitle.text = message
         subTitle.textColor = textColor
         contentView.addSubview(subTitle)
         subTitle.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16))
         }
         SwiftEntryKit.display(entry: contentView, using: attributes)
     }

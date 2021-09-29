@@ -45,22 +45,18 @@ import Realm.Private
 
  ```swift
  class Owner: Object {
-     @objc dynamic var name: String = ""
-     let dogs = List<Dog>()
+     @Persisted var name: String
+     @Persisted var dogs: List<Dog>
  }
  class Dog: EmbeddedObject {
-     @objc dynamic var name: String = ""
-     @objc dynamic var adopted: Bool = false
-     let owner = LinkingObjects(fromType: Owner.self, property: "dogs")
+     @Persisted var name: String
+     @Persisted var adopted: Bool
+     @Persisted(originProperty: "dogs") var owner: LinkingObjects<Owner>
  }
  ```
  */
 public typealias EmbeddedObject = RealmSwiftEmbeddedObject
 extension EmbeddedObject: RealmCollectionValue {
-    /// :nodoc:
-    public static func _rlmArray() -> RLMArray<AnyObject> {
-        return RLMArray(objectClassName: className())
-    }
     /// :nodoc:
     public class override final func isEmbedded() -> Bool {
         return true
@@ -128,6 +124,9 @@ extension EmbeddedObject: RealmCollectionValue {
      Override this method to specify the names of properties to ignore. These properties will not be managed by
      the Realm that manages the object.
 
+     - warning: This function is only applicable to legacy property declarations
+                using `@objc`. When using `@Persisted`, any properties not
+                marked with `@Persisted` are automatically ignored.
      - returns: An array of property names to ignore.
      */
     @objc open class func ignoredProperties() -> [String] { return [] }
@@ -137,32 +136,11 @@ extension EmbeddedObject: RealmCollectionValue {
     /// Returns or sets the value of the property with the given name.
     @objc open subscript(key: String) -> Any? {
         get {
-            if realm == nil {
-                return value(forKey: key)
-            }
-            return dynamicGet(key: key)
+            return RLMDynamicGetByName(self, key)
         }
-        set(value) {
-            if realm == nil {
-                setValue(value, forKey: key)
-            } else {
-                RLMDynamicValidatedSet(self, key, value)
-            }
+        set {
+            dynamicSet(object: self, key: key, value: newValue)
         }
-    }
-
-    private func dynamicGet(key: String) -> Any? {
-        let objectSchema = RLMObjectBaseObjectSchema(self)!
-        guard let prop = objectSchema[key] else {
-            throwRealmException("Invalid property name '\(key) for class \(objectSchema.className)")
-        }
-        if let accessor = prop.swiftAccessor {
-            return accessor.get(Unmanaged.passUnretained(self).toOpaque() + ivar_getOffset(prop.swiftIvar!))
-        }
-        if let ivar = prop.swiftIvar, prop.array {
-            return object_getIvar(self, ivar)
-        }
-        return RLMDynamicGet(self, prop)
     }
 
     // MARK: Notifications
@@ -224,8 +202,8 @@ extension EmbeddedObject: RealmCollectionValue {
      :nodoc:
      */
     public func dynamicList(_ propertyName: String) -> List<DynamicObject> {
-        return noWarnUnsafeBitCast(dynamicGet(key: propertyName) as! RLMListBase,
-                                   to: List<DynamicObject>.self)
+        let list = RLMDynamicGetByName(self, propertyName) as! RLMSwiftCollectionBase
+        return List<DynamicObject>(objc: list._rlmCollection as! RLMArray<AnyObject>)
     }
 
     // MARK: Comparison

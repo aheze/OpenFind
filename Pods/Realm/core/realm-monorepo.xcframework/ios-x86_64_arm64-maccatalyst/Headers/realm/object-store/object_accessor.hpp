@@ -93,10 +93,21 @@ struct ValueUpdater {
     template <typename T>
     void operator()(T*)
     {
-        auto new_val = ctx.template unbox<T>(value);
-        if (!policy.diff || obj.get<T>(col) != new_val) {
-            obj.set(col, new_val, is_default);
+        bool attr_changed = !policy.diff;
+        auto new_val = ctx.template unbox<T>(value, policy);
+
+        if (!attr_changed) {
+            auto old_val = obj.get<T>(col);
+
+            if constexpr (std::is_same<T, realm::Mixed>::value) {
+                attr_changed = !new_val.is_same_type(old_val);
+            }
+
+            attr_changed = attr_changed || new_val != old_val;
         }
+
+        if (attr_changed)
+            obj.set(col, new_val, is_default);
     }
 };
 } // namespace
@@ -108,7 +119,7 @@ void Object::set_property_value_impl(ContextType& ctx, const Property& property,
     ctx.will_change(*this, property);
 
     ColKey col{property.column_key};
-    if (is_nullable(property.type) && ctx.is_null(value)) {
+    if (!is_collection(property.type) && is_nullable(property.type) && ctx.is_null(value)) {
         if (!policy.diff || !m_obj.is_null(col)) {
             if (property.type == PropertyType::Object) {
                 if (!is_default)
@@ -149,14 +160,6 @@ void Object::set_property_value_impl(ContextType& ctx, const Property& property,
         ContextType child_ctx(ctx, m_obj, property);
         object_store::Set set(m_realm, m_obj, col);
         set.assign(child_ctx, value, policy);
-        ctx.did_change();
-        return;
-    }
-
-    if (is_dictionary(property.type)) {
-        ContextType child_ctx(ctx, m_obj, property);
-        object_store::Dictionary dict(m_realm, m_obj, col);
-        dict.assign(child_ctx, value, policy);
         ctx.did_change();
         return;
     }

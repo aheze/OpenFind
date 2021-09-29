@@ -20,6 +20,7 @@
 
 #import <realm/obj.hpp>
 #import <realm/object-store/binding_context.hpp>
+#import <realm/object-store/impl/deep_change_checker.hpp>
 #import <realm/table.hpp>
 
 @class RLMObjectBase, RLMRealm, RLMSchema, RLMProperty, RLMObjectSchema;
@@ -29,10 +30,12 @@ class RLMSchemaInfo;
 namespace realm {
     class History;
     class SharedGroup;
+    struct TableKey;
+    struct ColKey;
 }
 
 // RLMObservationInfo stores all of the KVO-related data for RLMObjectBase and
-// RLMArray. There is a one-to-one relationship between observed objects and
+// RLMSet/Array. There is a one-to-one relationship between observed objects and
 // RLMObservationInfo instances, so it could be folded into RLMObjectBase, and
 // is a separate class mostly to avoid making all accessor objects far larger.
 //
@@ -179,3 +182,18 @@ private:
 std::vector<realm::BindingContext::ObserverState> RLMGetObservedRows(RLMSchemaInfo const& schema);
 void RLMWillChange(std::vector<realm::BindingContext::ObserverState> const& observed, std::vector<void *> const& invalidated);
 void RLMDidChange(std::vector<realm::BindingContext::ObserverState> const& observed, std::vector<void *> const& invalidated);
+
+// KeyPathFromString converts a string keypath to a vector of key
+// pairs to be used for deep change checking across links.
+realm::KeyPathArray RLMKeyPathArrayFromStringArray(RLMRealm *realm,
+                                                   RLMClassInfo *info,
+                                                   NSArray<NSString *> *keyPath);
+
+// Used for checking if an `Object` declared with `@StateRealmObject` needs to have
+// it's accessors temporarily removed and added back so that the `Object` can be
+// managed be the Realm.
+[[clang::objc_runtime_visible]]
+@interface RLMSwiftUIKVO : NSObject
++ (BOOL)removeObserversFromObject:(NSObject *)object;
++ (void)addObserversToObject:(NSObject *)object;
+@end

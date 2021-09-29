@@ -31,18 +31,20 @@ public:
     virtual void clear() = 0;
 
     /// Get the min element, according to whatever comparison function is
-    /// meaningful for the collection.
-    virtual Mixed min(size_t* return_ndx = nullptr) const = 0;
+    /// meaningful for the collection, or none if min is not supported for this type.
+    virtual util::Optional<Mixed> min(size_t* return_ndx = nullptr) const = 0;
 
     /// Get the max element, according to whatever comparison function is
-    /// meaningful for the collection.
-    virtual Mixed max(size_t* return_ndx = nullptr) const = 0;
+    /// meaningful for the collection, or none if max is not supported for this type.
+    virtual util::Optional<Mixed> max(size_t* return_ndx = nullptr) const = 0;
 
     /// For collections of arithmetic types, return the sum of all elements.
-    virtual Mixed sum(size_t* return_cnt = nullptr) const = 0;
+    /// For non arithmetic types, returns none.
+    virtual util::Optional<Mixed> sum(size_t* return_cnt = nullptr) const = 0;
 
     /// For collections of arithmetic types, return the average of all elements.
-    virtual Mixed avg(size_t* return_cnt = nullptr) const = 0;
+    /// For non arithmetic types, returns none.
+    virtual util::Optional<Mixed> avg(size_t* return_cnt = nullptr) const = 0;
 
     /// Produce a clone of the collection accessor referring to the same
     /// underlying memory.
@@ -88,7 +90,7 @@ public:
     // Note: virtual..final prevents static override.
 
     /// Get the key of the object that owns this collection.
-    virtual ObjKey get_key() const noexcept final
+    virtual ObjKey get_owner_key() const noexcept final
     {
         return get_obj().get_key();
     }
@@ -162,36 +164,44 @@ inline void check_column_type<ObjKey>(ColKey col)
 template <class T, class = void>
 struct MinHelper {
     template <class U>
-    static Mixed eval(U&, size_t*) noexcept
+    static util::Optional<Mixed> eval(U&, size_t*) noexcept
     {
-        return Mixed{};
+        return util::none;
     }
 };
 
 template <class T>
 struct MinHelper<T, std::void_t<ColumnMinMaxType<T>>> {
     template <class U>
-    static Mixed eval(U& tree, size_t* return_ndx)
+    static util::Optional<Mixed> eval(U& tree, size_t* return_ndx)
     {
-        return Mixed(bptree_minimum<T>(tree, return_ndx));
+        auto optional_min = bptree_minimum<T>(tree, return_ndx);
+        if (optional_min) {
+            return Mixed{*optional_min};
+        }
+        return Mixed{};
     }
 };
 
 template <class T, class Enable = void>
 struct MaxHelper {
     template <class U>
-    static Mixed eval(U&, size_t*) noexcept
+    static util::Optional<Mixed> eval(U&, size_t*) noexcept
     {
-        return Mixed{};
+        return util::none;
     }
 };
 
 template <class T>
 struct MaxHelper<T, std::void_t<ColumnMinMaxType<T>>> {
     template <class U>
-    static Mixed eval(U& tree, size_t* return_ndx)
+    static util::Optional<Mixed> eval(U& tree, size_t* return_ndx)
     {
-        return Mixed(bptree_maximum<T>(tree, return_ndx));
+        auto optional_max = bptree_maximum<T>(tree, return_ndx);
+        if (optional_max) {
+            return Mixed{*optional_max};
+        }
+        return Mixed{};
     }
 };
 
@@ -199,11 +209,11 @@ template <class T, class Enable = void>
 class SumHelper {
 public:
     template <class U>
-    static Mixed eval(U&, size_t* return_cnt) noexcept
+    static util::Optional<Mixed> eval(U&, size_t* return_cnt) noexcept
     {
         if (return_cnt)
             *return_cnt = 0;
-        return Mixed{};
+        return util::none;
     }
 };
 
@@ -211,29 +221,34 @@ template <class T>
 class SumHelper<T, std::void_t<ColumnSumType<T>>> {
 public:
     template <class U>
-    static Mixed eval(U& tree, size_t* return_cnt)
+    static util::Optional<Mixed> eval(U& tree, size_t* return_cnt)
     {
-        return Mixed(bptree_sum<T>(tree, return_cnt));
+        return Mixed{bptree_sum<T>(tree, return_cnt)};
     }
 };
 
 template <class T, class = void>
 struct AverageHelper {
     template <class U>
-    static Mixed eval(U&, size_t* return_cnt) noexcept
+    static util::Optional<Mixed> eval(U&, size_t* return_cnt) noexcept
     {
         if (return_cnt)
             *return_cnt = 0;
-        return Mixed{};
+        return util::none;
     }
 };
 
 template <class T>
 struct AverageHelper<T, std::void_t<ColumnSumType<T>>> {
     template <class U>
-    static Mixed eval(U& tree, size_t* return_cnt)
+    static util::Optional<Mixed> eval(U& tree, size_t* return_cnt)
     {
-        return Mixed(bptree_average<T>(tree, return_cnt));
+        size_t count = 0;
+        auto result = Mixed{bptree_average<T>(tree, &count)};
+        if (return_cnt) {
+            *return_cnt = count;
+        }
+        return count == 0 ? util::none : result;
     }
 };
 
@@ -266,7 +281,8 @@ public:
         return false;
     }
 
-    using Interface::get_key;
+    using Interface::get_owner_key;
+    using Interface::get_table;
     using Interface::get_target_table;
 
 protected:
@@ -294,7 +310,8 @@ protected:
 
     bool operator==(const CollectionBaseImpl& other) const noexcept
     {
-        return get_key() == other.get_key() && get_col_key() == other.get_col_key();
+        return get_table() == other.get_table() && get_owner_key() == other.get_owner_key() &&
+               get_col_key() == other.get_col_key();
     }
 
     bool operator!=(const CollectionBaseImpl& other) const noexcept
@@ -363,10 +380,10 @@ size_t virtual2real(const std::vector<size_t>& vec, size_t ndx) noexcept;
 size_t real2virtual(const std::vector<size_t>& vec, size_t ndx) noexcept;
 
 /// Rebuild the list of unresolved keys for tombstone handling.
-void update_unresolved(std::vector<size_t>& vec, const BPlusTree<ObjKey>& tree);
+void update_unresolved(std::vector<size_t>& vec, const BPlusTree<ObjKey>* tree);
 
 /// Clear the context flag on the tree if there are no more unresolved links.
-void check_for_last_unresolved(BPlusTree<ObjKey>& tree);
+void check_for_last_unresolved(BPlusTree<ObjKey>* tree);
 
 /// Proxy class needed because the ObjList interface clobbers method names from
 /// CollectionBase.
@@ -388,6 +405,8 @@ class ObjCollectionBase : public Interface, public _impl::ObjListProxy {
 public:
     static_assert(std::is_base_of_v<CollectionBase, Interface>);
 
+    using Interface::get_col_key;
+    using Interface::get_obj;
     using Interface::get_table;
     using Interface::is_attached;
     using Interface::size;
@@ -438,7 +457,7 @@ protected:
 
     /// Implementations should return a non-const reference to their internal
     /// `BPlusTree<T>`.
-    virtual BPlusTree<ObjKey>& get_mutable_tree() const = 0;
+    virtual BPlusTree<ObjKey>* get_mutable_tree() const = 0;
 
     /// Calls `do_init_from_parent()` and updates the list of unresolved links.
     bool init_from_parent() const final
@@ -521,6 +540,19 @@ private:
     TableRef proxy_get_target_table() const final
     {
         return Interface::get_target_table();
+    }
+    bool matches(const ObjList& other) const final
+    {
+        return get_owning_obj().get_key() == other.get_owning_obj().get_key() &&
+               get_owning_col_key() == other.get_owning_col_key();
+    }
+    Obj get_owning_obj() const final
+    {
+        return get_obj();
+    }
+    ColKey get_owning_col_key() const final
+    {
+        return get_col_key();
     }
 };
 

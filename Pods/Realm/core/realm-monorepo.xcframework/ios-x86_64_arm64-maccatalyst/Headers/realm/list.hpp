@@ -110,10 +110,10 @@ public:
     Mixed get_any(size_t ndx) const final;
     bool is_null(size_t ndx) const final;
     CollectionBasePtr clone_collection() const final;
-    Mixed min(size_t* return_ndx = nullptr) const final;
-    Mixed max(size_t* return_ndx = nullptr) const final;
-    Mixed sum(size_t* return_cnt = nullptr) const final;
-    Mixed avg(size_t* return_cnt = nullptr) const final;
+    util::Optional<Mixed> min(size_t* return_ndx = nullptr) const final;
+    util::Optional<Mixed> max(size_t* return_ndx = nullptr) const final;
+    util::Optional<Mixed> sum(size_t* return_cnt = nullptr) const final;
+    util::Optional<Mixed> avg(size_t* return_cnt = nullptr) const final;
     void sort(std::vector<size_t>& indices, bool ascending = true) const final;
     void distinct(std::vector<size_t>& indices, util::Optional<bool> sort_order = util::none) const final;
 
@@ -159,6 +159,7 @@ protected:
     void do_set(size_t ndx, T value);
     void do_insert(size_t ndx, T value);
     void do_remove(size_t ndx);
+    void do_clear();
 
     friend class LnkLst;
 
@@ -179,13 +180,14 @@ protected:
 
 // Specialization of Lst<ObjKey>:
 template <>
-void Lst<ObjKey>::clear();
-template <>
 void Lst<ObjKey>::do_set(size_t, ObjKey);
 template <>
 void Lst<ObjKey>::do_insert(size_t, ObjKey);
 template <>
 void Lst<ObjKey>::do_remove(size_t);
+template <>
+void Lst<ObjKey>::do_clear();
+
 extern template class Lst<ObjKey>;
 
 // Specialization of Lst<Mixed>:
@@ -195,6 +197,8 @@ template <>
 void Lst<Mixed>::do_insert(size_t, Mixed);
 template <>
 void Lst<Mixed>::do_remove(size_t);
+template <>
+void Lst<Mixed>::do_clear();
 extern template class Lst<Mixed>;
 
 // Specialization of Lst<ObjLink>:
@@ -263,15 +267,15 @@ public:
     }
 
     // Overriding members of CollectionBase:
-    using CollectionBase::get_key;
+    using CollectionBase::get_owner_key;
     size_t size() const final;
     bool is_null(size_t ndx) const final;
     Mixed get_any(size_t ndx) const final;
     void clear() final;
-    Mixed min(size_t* return_ndx = nullptr) const final;
-    Mixed max(size_t* return_ndx = nullptr) const final;
-    Mixed sum(size_t* return_cnt = nullptr) const final;
-    Mixed avg(size_t* return_cnt = nullptr) const final;
+    util::Optional<Mixed> min(size_t* return_ndx = nullptr) const final;
+    util::Optional<Mixed> max(size_t* return_ndx = nullptr) const final;
+    util::Optional<Mixed> sum(size_t* return_cnt = nullptr) const final;
+    util::Optional<Mixed> avg(size_t* return_cnt = nullptr) const final;
     std::unique_ptr<CollectionBase> clone_collection() const final;
     void sort(std::vector<size_t>& indices, bool ascending = true) const final;
     void distinct(std::vector<size_t>& indices, util::Optional<bool> sort_order = util::none) const final;
@@ -281,6 +285,16 @@ public:
 
     // Overriding members of LstBase:
     std::unique_ptr<LstBase> clone() const
+    {
+        if (get_obj().is_valid()) {
+            return std::make_unique<LnkLst>(get_obj(), get_col_key());
+        }
+        else {
+            return std::make_unique<LnkLst>();
+        }
+    }
+    // Overriding members of ObjList:
+    LinkCollectionPtr clone_obj_list() const
     {
         if (get_obj().is_valid()) {
             return std::make_unique<LnkLst>(get_obj(), get_col_key());
@@ -385,9 +399,9 @@ private:
         return m_list.init_from_parent();
     }
 
-    BPlusTree<ObjKey>& get_mutable_tree() const final
+    BPlusTree<ObjKey>* get_mutable_tree() const final
     {
-        return *m_list.m_tree;
+        return m_list.m_tree.get();
     }
 };
 
@@ -546,6 +560,12 @@ inline void Lst<T>::do_remove(size_t ndx)
     m_tree->erase(ndx);
 }
 
+template <class T>
+inline void Lst<T>::do_clear()
+{
+    m_tree->clear();
+}
+
 
 template <typename U>
 inline Lst<U> Obj::get_list(ColKey col_key) const
@@ -577,7 +597,6 @@ inline LnkLst Obj::get_linklist(StringData col_name) const
 template <class T>
 void Lst<T>::clear()
 {
-    static_assert(!std::is_same_v<T, ObjKey>);
     ensure_created();
     update_if_needed();
     this->ensure_writeable();
@@ -585,7 +604,7 @@ void Lst<T>::clear()
         if (Replication* repl = this->m_obj.get_replication()) {
             repl->list_clear(*this);
         }
-        m_tree->clear();
+        do_clear();
         bump_content_version();
     }
 }
@@ -616,28 +635,28 @@ inline size_t Lst<T>::find_first(const T& value) const
 }
 
 template <class T>
-inline Mixed Lst<T>::min(size_t* return_ndx) const
+inline util::Optional<Mixed> Lst<T>::min(size_t* return_ndx) const
 {
     update_if_needed();
     return MinHelper<T>::eval(*m_tree, return_ndx);
 }
 
 template <class T>
-inline Mixed Lst<T>::max(size_t* return_ndx) const
+inline util::Optional<Mixed> Lst<T>::max(size_t* return_ndx) const
 {
     update_if_needed();
     return MaxHelper<T>::eval(*m_tree, return_ndx);
 }
 
 template <class T>
-inline Mixed Lst<T>::sum(size_t* return_cnt) const
+inline util::Optional<Mixed> Lst<T>::sum(size_t* return_cnt) const
 {
     update_if_needed();
     return SumHelper<T>::eval(*m_tree, return_cnt);
 }
 
 template <class T>
-inline Mixed Lst<T>::avg(size_t* return_cnt) const
+inline util::Optional<Mixed> Lst<T>::avg(size_t* return_cnt) const
 {
     update_if_needed();
     return AverageHelper<T>::eval(*m_tree, return_cnt);
@@ -854,7 +873,8 @@ inline bool LnkLst::is_null(size_t ndx) const
 inline Mixed LnkLst::get_any(size_t ndx) const
 {
     update_if_needed();
-    return m_list.get_any(virtual2real(ndx));
+    auto obj_key = m_list.get(virtual2real(ndx));
+    return ObjLink{get_target_table()->get_key(), obj_key};
 }
 
 inline void LnkLst::clear()
@@ -863,25 +883,25 @@ inline void LnkLst::clear()
     clear_unresolved();
 }
 
-inline Mixed LnkLst::min(size_t* return_ndx) const
+inline util::Optional<Mixed> LnkLst::min(size_t* return_ndx) const
 {
     static_cast<void>(return_ndx);
     REALM_TERMINATE("Not implemented yet");
 }
 
-inline Mixed LnkLst::max(size_t* return_ndx) const
+inline util::Optional<Mixed> LnkLst::max(size_t* return_ndx) const
 {
     static_cast<void>(return_ndx);
     REALM_TERMINATE("Not implemented yet");
 }
 
-inline Mixed LnkLst::sum(size_t* return_cnt) const
+inline util::Optional<Mixed> LnkLst::sum(size_t* return_cnt) const
 {
     static_cast<void>(return_cnt);
     REALM_TERMINATE("Not implemented yet");
 }
 
-inline Mixed LnkLst::avg(size_t* return_cnt) const
+inline util::Optional<Mixed> LnkLst::avg(size_t* return_cnt) const
 {
     static_cast<void>(return_cnt);
     REALM_TERMINATE("Not implemented yet");
@@ -889,7 +909,7 @@ inline Mixed LnkLst::avg(size_t* return_cnt) const
 
 inline std::unique_ptr<CollectionBase> LnkLst::clone_collection() const
 {
-    return get_obj().get_linklist_ptr(get_col_key());
+    return clone_linklist();
 }
 
 inline void LnkLst::sort(std::vector<size_t>& indices, bool ascending) const

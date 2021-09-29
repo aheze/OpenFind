@@ -229,6 +229,11 @@ public:
 
     size_t size() const noexcept;
 
+    static int get_current_file_format_version()
+    {
+        return g_current_file_format_version;
+    }
+
     int get_history_schema_version() noexcept;
 
     Replication* get_replication() const
@@ -242,7 +247,6 @@ public:
     /// GlobalKeys.
     uint64_t get_sync_file_id() const noexcept;
     void set_sync_file_id(uint64_t id);
-    void remove_sync_file_id();
 
     /// Returns the keys for all tables in this group.
     TableKeys get_table_keys() const;
@@ -372,7 +376,7 @@ public:
     /// overwriting a database file that is currently open, which
     /// would cause undefined behaviour.
     ///
-    /// \param file A filesystem path.
+    /// \param path A filesystem path to the file you want to write to.
     ///
     /// \param encryption_key 32-byte key used to encrypt the database file,
     /// or nullptr to disable encryption.
@@ -381,12 +385,14 @@ public:
     /// realm file with free list and history info. The version of the commit
     /// will be set to the value given here.
     ///
+    /// \param write_history Indicates if you want the Sync Client History to
+    /// be written to the file (only relevant for synchronized files).
     /// \throw util::File::AccessError If the file could not be
     /// opened. If the reason corresponds to one of the exception
     /// types that are derived from util::File::AccessError, the
     /// derived exception type is thrown. In particular,
     /// util::File::Exists will be thrown if the file exists already.
-    void write(const std::string& file, const char* encryption_key = nullptr, uint64_t version = 0,
+    void write(const std::string& path, const char* encryption_key = nullptr, uint64_t version = 0,
                bool write_history = true) const;
 
     /// Write this database to a memory buffer.
@@ -730,8 +736,8 @@ private:
 
     void mark_all_table_accessors() noexcept;
 
-    void write(util::File& file, const char* encryption_key, uint_fast64_t version_number, bool write_history) const;
-    void write(std::ostream&, bool pad, uint_fast64_t version_numer, bool write_history) const;
+    void write(util::File& file, const char* encryption_key, uint_fast64_t version_number, TableWriter& writer) const;
+    void write(std::ostream&, bool pad, uint_fast64_t version_numer, TableWriter& writer) const;
 
     std::shared_ptr<metrics::Metrics> get_metrics() const noexcept;
     void set_metrics(std::shared_ptr<metrics::Metrics> other) noexcept;
@@ -810,7 +816,13 @@ private:
     ///
     ///  12 - 19 Room for new file formats in legacy code.
     ///
-    ///  20 New data types: Decimal128 and ObjectId. Embedded tables.
+    ///  20 New data types: Decimal128 and ObjectId. Embedded tables. Search index
+    ///     is removed from primary key columns.
+    ///
+    ///  21 New data types: UUID, Mixed, Set and Dictionary.
+    ///
+    ///  22 Object keys are no longer generated from primary key values. Search index
+    ///     reintroduced.
     ///
     /// IMPORTANT: When introducing a new file format version, be sure to review
     /// the file validity checks in Group::open() and DB::do_open, the file
@@ -818,6 +830,8 @@ private:
     /// Group::get_target_file_format_version_for_session(), and the file format
     /// upgrade logic in Group::upgrade_file_format(), AND the lists of accepted
     /// file formats and the version deletion list residing in "backup_restore.cpp"
+
+    static constexpr int g_current_file_format_version = 22;
 
     int get_file_format_version() const noexcept;
     void set_file_format_version(int) noexcept;
@@ -1137,6 +1151,28 @@ public:
     virtual ref_type write_tables(_impl::OutputStream&) = 0;
     virtual HistoryInfo write_history(_impl::OutputStream&) = 0;
     virtual ~TableWriter() noexcept {}
+
+    void set_group(const Group* g)
+    {
+        m_group = g;
+    }
+
+protected:
+    const Group* m_group = nullptr;
+};
+
+class Group::DefaultTableWriter : public Group::TableWriter {
+public:
+    DefaultTableWriter(bool should_write_history = true)
+        : m_should_write_history(should_write_history)
+    {
+    }
+    ref_type write_names(_impl::OutputStream& out) override;
+    ref_type write_tables(_impl::OutputStream& out) override;
+    HistoryInfo write_history(_impl::OutputStream& out) override;
+
+private:
+    bool m_should_write_history;
 };
 
 inline const Table* Group::do_get_table(size_t ndx) const

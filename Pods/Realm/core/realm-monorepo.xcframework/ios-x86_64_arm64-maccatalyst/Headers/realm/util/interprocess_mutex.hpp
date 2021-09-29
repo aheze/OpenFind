@@ -25,7 +25,6 @@
 #include <realm/utilities.hpp>
 #include <mutex>
 #include <map>
-#include <iostream>
 
 // Enable this only on platforms where it might be needed
 #if REALM_PLATFORM_APPLE || REALM_ANDROID

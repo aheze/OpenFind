@@ -16,73 +16,90 @@
 //
 ////////////////////////////////////////////////////////////////////////////
 
-#ifndef REALM_OS_DICTIONARY_HPP_
-#define REALM_OS_DICTIONARY_HPP_
+#ifndef REALM_OS_DICTIONARY_HPP
+#define REALM_OS_DICTIONARY_HPP
 
 #include <realm/object-store/collection.hpp>
 #include <realm/object-store/object.hpp>
 #include <realm/dictionary.hpp>
 
 namespace realm {
+
+struct DictionaryChangeSet {
+    DictionaryChangeSet(size_t max_keys)
+    {
+        m_string_store.reserve(max_keys);
+    }
+    DictionaryChangeSet()
+        : DictionaryChangeSet(0)
+    {
+    }
+
+    DictionaryChangeSet(const DictionaryChangeSet&);
+    DictionaryChangeSet(DictionaryChangeSet&&) = default;
+
+    DictionaryChangeSet& operator=(const DictionaryChangeSet&);
+    DictionaryChangeSet& operator=(DictionaryChangeSet&&) = default;
+
+    // Keys which were removed from the _old_ dictionary
+    std::vector<Mixed> deletions;
+
+    // Keys in the _new_ dictionary which are new insertions
+    std::vector<Mixed> insertions;
+
+    // Keys of objects/values which were modified
+    std::vector<Mixed> modifications;
+
+    bool collection_root_was_deleted = false;
+
+    void add_deletion(const Mixed& key)
+    {
+        add(deletions, key);
+    }
+    void add_insertion(const Mixed& key)
+    {
+        add(insertions, key);
+    }
+    void add_modification(const Mixed& key)
+    {
+        add(modifications, key);
+    }
+
+private:
+    void add(std::vector<Mixed>& arr, const Mixed& key);
+    std::vector<std::string> m_string_store;
+};
+
 namespace object_store {
 
 class Dictionary : public object_store::Collection {
 public:
     using Iterator = realm::Dictionary::Iterator;
-    Dictionary() noexcept;
-    Dictionary(std::shared_ptr<Realm> r, const Obj& parent_obj, ColKey col);
-    Dictionary(std::shared_ptr<Realm> r, const realm::Dictionary& dict);
-    ~Dictionary() override;
-
-    bool operator==(const Dictionary& rgt) const noexcept
+    using Collection::Collection;
+    Dictionary()
+        : Collection(PropertyType::Dictionary)
     {
-        return *m_dict == *rgt.m_dict;
     }
+
+    bool operator==(const Dictionary& rgt) const noexcept;
+    bool operator!=(const Dictionary& rgt) const noexcept;
 
     template <typename T>
     void insert(StringData key, T value);
     template <typename T>
     T get(StringData key) const;
 
-    void erase(StringData key)
-    {
-        verify_in_transaction();
-        m_dict->erase(key);
-    }
-    void remove_all()
-    {
-        verify_in_transaction();
-        m_dict->clear();
-    }
-
-    Mixed get_any(StringData key)
-    {
-        return m_dict->get(key);
-    }
-    Mixed get_any(size_t ndx) const final
-    {
-        verify_valid_row(ndx);
-        return m_dict->get_any(ndx);
-    }
-    util::Optional<Mixed> try_get_any(StringData key) const
-    {
-        return m_dict->try_get(key);
-    }
-    std::pair<StringData, Mixed> get_pair(size_t ndx) const
-    {
-        verify_valid_row(ndx);
-        auto pair = m_dict->get_pair(ndx);
-        return {pair.first.get_string(), pair.second};
-    }
-
-    size_t find_any(Mixed value) const final
-    {
-        return m_dict->find_any(value);
-    }
-    bool contains(StringData key)
-    {
-        return m_dict->contains(key);
-    }
+    Obj insert_embedded(StringData key);
+    void erase(StringData key);
+    bool try_erase(StringData key);
+    void remove_all();
+    Obj get_object(StringData key);
+    Mixed get_any(StringData key);
+    Mixed get_any(size_t ndx) const final;
+    util::Optional<Mixed> try_get_any(StringData key) const;
+    std::pair<StringData, Mixed> get_pair(size_t ndx) const;
+    size_t find_any(Mixed value) const final;
+    bool contains(StringData key);
 
     template <typename T, typename Context>
     void insert(Context&, StringData key, T&& value, CreatePolicy = CreatePolicy::SetLink);
@@ -95,19 +112,21 @@ public:
 
     Results snapshot() const;
     Dictionary freeze(const std::shared_ptr<Realm>& realm) const;
+    Results get_keys() const;
+    Results get_values() const;
 
-    Iterator begin() const
-    {
-        return m_dict->begin();
-    }
+    using CBFunc = std::function<void(DictionaryChangeSet, std::exception_ptr)>;
+    NotificationToken add_key_based_notification_callback(CBFunc cb, KeyPathArray key_path_array = {}) &;
 
-    Iterator end() const
-    {
-        return m_dict->end();
-    }
+    Iterator begin() const;
+    Iterator end() const;
 
 private:
-    realm::Dictionary* m_dict;
+    realm::Dictionary& dict() const noexcept
+    {
+        REALM_ASSERT_DEBUG(dynamic_cast<realm::Dictionary*>(m_coll_base.get()));
+        return static_cast<realm::Dictionary&>(*m_coll_base);
+    }
 
     template <typename Fn>
     auto dispatch(Fn&&) const;
@@ -118,52 +137,30 @@ private:
 template <typename Fn>
 auto Dictionary::dispatch(Fn&& fn) const
 {
-    // Similar to "switch_on_type", but without the util::Optional
-    // cases. These cases are not supported by Mixed and are not
-    // relevant for Dictionary
-    // FIXME: use switch_on_type
     verify_attached();
-    using PT = PropertyType;
-    auto type = get_type();
-    switch (type & ~PropertyType::Flags) {
-        case PT::Int:
-            return fn((int64_t*)0);
-        case PT::Bool:
-            return fn((bool*)0);
-        case PT::Float:
-            return fn((float*)0);
-        case PT::Double:
-            return fn((double*)0);
-        case PT::String:
-            return fn((StringData*)0);
-        case PT::Data:
-            return fn((BinaryData*)0);
-        case PT::Date:
-            return fn((Timestamp*)0);
-        case PT::Object:
-            return fn((Obj*)0);
-        case PT::ObjectId:
-            return fn((ObjectId*)0);
-        case PT::Decimal:
-            return fn((Decimal128*)0);
-        case PT::UUID:
-            return fn((UUID*)0);
-        default:
-            REALM_COMPILER_HINT_UNREACHABLE();
-    }
+    return switch_on_type(get_type(), std::forward<Fn>(fn));
 }
 
 template <typename T>
 void Dictionary::insert(StringData key, T value)
 {
     verify_in_transaction();
-    m_dict->insert(key, value);
+    dict().insert(key, value);
 }
 
 template <typename T>
 T Dictionary::get(StringData key) const
 {
-    return m_dict->get(key).get<T>();
+    auto res = dict().get(key);
+    if (res.is_null()) {
+        if constexpr (std::is_same_v<T, Decimal128>) {
+            return Decimal128{realm::null()};
+        }
+        else {
+            return T{};
+        }
+    }
+    return res.get<T>();
 }
 
 template <>
@@ -175,6 +172,16 @@ inline Obj Dictionary::get<Obj>(StringData key) const
 template <typename T, typename Context>
 void Dictionary::insert(Context& ctx, StringData key, T&& value, CreatePolicy policy)
 {
+    if (ctx.is_null(value)) {
+        this->insert(key, Mixed());
+        return;
+    }
+    if (m_is_embedded) {
+        validate_embedded(ctx, value, policy);
+        auto obj_key = dict().create_and_insert_linked_object(key).get_key();
+        ctx.template unbox<Obj>(value, policy, obj_key);
+        return;
+    }
     dispatch([&](auto t) {
         this->insert(key, ctx.template unbox<std::decay_t<decltype(*t)>>(value, policy));
     });
@@ -204,21 +211,20 @@ void Dictionary::assign(Context& ctx, T&& values, CreatePolicy policy)
 
     ctx.enumerate_dictionary(values, [&](StringData key, auto&& value) {
         if (policy.diff) {
-            util::Optional<Mixed> old_value = m_dict->try_get(key);
+            util::Optional<Mixed> old_value = dict().try_get(key);
             auto new_value = ctx.template unbox<Mixed>(value);
             if (!old_value || *old_value != new_value) {
-                m_dict->insert(key, new_value);
+                dict().insert(key, new_value);
             }
         }
         else {
             this->insert(ctx, key, value, policy);
         }
     });
-    // FIXME: Remove entries not included in the new value
 }
 
 } // namespace object_store
 } // namespace realm
 
 
-#endif /* REALM_OS_DICTIONARY_HPP_ */
+#endif /* REALM_OS_DICTIONARY_HPP */

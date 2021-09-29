@@ -130,6 +130,7 @@ public:
     typedef util::Optional<std::pair<ConstTableRef, ColKey>> BacklinkOrigin;
     BacklinkOrigin find_backlink_origin(StringData origin_table_name, StringData origin_col_name) const noexcept;
     BacklinkOrigin find_backlink_origin(ColKey backlink_col) const noexcept;
+    std::vector<std::pair<TableKey, ColKey>> get_incoming_link_columns() const noexcept;
     //@}
 
     // Primary key columns
@@ -246,6 +247,7 @@ public:
     // Return key for existing object or return null key.
     ObjKey find_primary_key(Mixed value) const;
     // Return ObjKey for object identified by id. If objects does not exist, return null key
+    // Important: This function must not be called for tables with primary keys.
     ObjKey get_objkey(GlobalKey id) const;
     // Return key for existing object or return unresolved key.
     // Important: This is to be used ONLY by the Sync client. SDKs should NEVER
@@ -280,7 +282,7 @@ public:
     // Get primary key based on ObjKey
     Mixed get_primary_key(ObjKey key);
     // Get logical index for object. This function is not very efficient
-    size_t get_object_ndx(ObjKey key) const
+    size_t get_object_ndx(ObjKey key) const noexcept
     {
         return m_clusters.get_ndx(key);
     }
@@ -302,7 +304,7 @@ public:
     // Invalidate object. To be used by the Sync client.
     // - turns the object into a tombstone if links exist
     // - otherwise works just as remove_object()
-    void invalidate_object(ObjKey key);
+    ObjKey invalidate_object(ObjKey key);
     Obj get_tombstone(ObjKey key) const
     {
         REALM_ASSERT(key.is_unresolved());
@@ -345,7 +347,7 @@ public:
     size_t get_index_in_group() const noexcept;
     TableKey get_key() const noexcept;
 
-    uint32_t allocate_sequence_number();
+    uint64_t allocate_sequence_number();
     // Used by upgrade
     void set_sequence_number(uint64_t seq);
     void set_collision_map(ref_type ref);
@@ -364,20 +366,24 @@ public:
     double sum_float(ColKey col_key) const;
     double sum_double(ColKey col_key) const;
     Decimal128 sum_decimal(ColKey col_key) const;
+    Decimal128 sum_mixed(ColKey col_key) const;
     int64_t maximum_int(ColKey col_key, ObjKey* return_ndx = nullptr) const;
     float maximum_float(ColKey col_key, ObjKey* return_ndx = nullptr) const;
     double maximum_double(ColKey col_key, ObjKey* return_ndx = nullptr) const;
     Decimal128 maximum_decimal(ColKey col_key, ObjKey* return_ndx = nullptr) const;
+    Mixed maximum_mixed(ColKey col_key, ObjKey* return_ndx = nullptr) const;
     Timestamp maximum_timestamp(ColKey col_key, ObjKey* return_ndx = nullptr) const;
     int64_t minimum_int(ColKey col_key, ObjKey* return_ndx = nullptr) const;
     float minimum_float(ColKey col_key, ObjKey* return_ndx = nullptr) const;
     double minimum_double(ColKey col_key, ObjKey* return_ndx = nullptr) const;
     Decimal128 minimum_decimal(ColKey col_key, ObjKey* return_ndx = nullptr) const;
+    Mixed minimum_mixed(ColKey col_key, ObjKey* return_ndx = nullptr) const;
     Timestamp minimum_timestamp(ColKey col_key, ObjKey* return_ndx = nullptr) const;
     double average_int(ColKey col_key, size_t* value_count = nullptr) const;
     double average_float(ColKey col_key, size_t* value_count = nullptr) const;
     double average_double(ColKey col_key, size_t* value_count = nullptr) const;
     Decimal128 average_decimal(ColKey col_key, size_t* value_count = nullptr) const;
+    Decimal128 average_mixed(ColKey col_key, size_t* value_count = nullptr) const;
 
     // Will return pointer to search index accessor. Will return nullptr if no index
     StringIndex* get_search_index(ColKey col) const noexcept
@@ -527,17 +533,12 @@ public:
         return Query(m_own_ref, tv);
     }
 
-    // Perform queries on a LinkView. The returned Query holds a reference to list.
-    Query where(const LnkLst& list) const
+    // Perform queries on a Link Collection. The returned Query holds a reference to collection.
+    Query where(const ObjList& list) const
     {
         return Query(m_own_ref, list);
     }
-
-    // Perform queries on a LnkSet. The returned Query holds a reference to set.
-    Query where(const LnkSet& set) const
-    {
-        return Query(m_own_ref, set);
-    }
+    Query where(const DictionaryLinkValues& dictionary_of_links) const;
 
     Query query(const std::string& query_string, const std::vector<Mixed>& arguments = {}) const;
     Query query(const std::string& query_string, const std::vector<Mixed>& arguments,
@@ -674,7 +675,7 @@ private:
     void migrate_indexes(ColKey pk_col_key);
     void migrate_subspec();
     void create_columns();
-    bool migrate_objects(ColKey pk_col_key); // Returns true if there are no links to migrate
+    bool migrate_objects(); // Returns true if there are no links to migrate
     void migrate_links();
     void finalize_migration(ColKey pk_col_key);
 
@@ -705,6 +706,7 @@ private:
     void erase_root_column(ColKey col_key);
     ColKey do_insert_root_column(ColKey col_key, ColumnType, StringData name, DataType key_type = DataType(0));
     void do_erase_root_column(ColKey col_key);
+    void do_add_search_index(ColKey col_key);
 
     bool has_any_embedded_objects();
     void set_opposite_column(ColKey col_key, TableKey opposite_table, ColKey opposite_column);
@@ -712,9 +714,8 @@ private:
     ColKey find_or_add_backlink_column(ColKey origin_col_key, TableKey origin_table);
     void do_set_primary_key_column(ColKey col_key);
     void validate_column_is_unique(ColKey col_key) const;
-    void rebuild_table_with_pk_column();
 
-    ObjKey get_next_key();
+    ObjKey get_next_valid_key();
     /// Some Object IDs are generated as a tuple of the client_file_ident and a
     /// local sequence number. This function takes the next number in the
     /// sequence for the given table and returns an appropriate globally unique
@@ -822,7 +823,6 @@ private:
     friend class Columns<StringData>;
     friend class ParentNode;
     friend struct util::serializer::SerialisationState;
-    friend class LinksToNode;
     friend class LinkMap;
     friend class LinkView;
     friend class Group;
@@ -833,6 +833,7 @@ private:
     friend class ColKeyIterator;
     friend class Obj;
     friend class LnkLst;
+    friend class Dictionary;
     friend class IncludeDescriptor;
 };
 
@@ -929,6 +930,11 @@ public:
     ConstTableRef get_current_table() const
     {
         return m_current_table;
+    }
+
+    ColKey get_current_col() const
+    {
+        return m_link_cols.back();
     }
 
     LinkChain& link(ColKey link_column)

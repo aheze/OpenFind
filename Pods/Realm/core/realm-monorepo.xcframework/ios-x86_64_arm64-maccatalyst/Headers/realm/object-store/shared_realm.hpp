@@ -187,7 +187,7 @@ public:
         // called with the supplied schema, version and migration function when
         // the Realm is actually opened and not just retrieved from the cache
         util::Optional<Schema> schema;
-        uint64_t schema_version = -1;
+        uint64_t schema_version = uint64_t(-1);
         MigrationFunction migration_function;
 
         DataInitializationFunction initialization_function;
@@ -355,9 +355,11 @@ public:
     // WARNING / FIXME: compact() should NOT be exposed publicly on Windows
     // because it's not crash safe! It may corrupt your database if something fails
     bool compact();
-    // For synchronized realms, the file written will have the client file ident removed.
+    // For synchronized realms, the file written will have the client file ident removed. Furthermore
+    // it is required that all local changes are synchronized with the server before the copy can
+    // be written. This is to be sure that the file can be used as a stating point for a newly
+    // installed application. The function will throw if there are pending uploads.
     void write_copy(StringData path, BinaryData encryption_key);
-    void write_copy_without_client_file_id(StringData path, BinaryData encryption_key, bool allow_overwrite = false);
     OwnedBinaryData write_copy();
 
     void verify_thread() const;
@@ -377,6 +379,26 @@ public:
     {
         return !m_transaction && !m_coordinator;
     }
+
+    /**
+     * Deletes the following files for the given `realm_file_path` if they exist:
+     * - the Realm file itself
+     * - the .management folder
+     * - the .note file
+     * - the .log file and its legacy versions: .log_a and .log_b
+     *
+     * The .lock file for this Realm cannot and will not be deleted as this is unsafe.
+     * If a different process / thread is accessing the Realm at the same time a corrupt state
+     * could be the result and checking for a single process state is not possible here.
+     *
+     * @param realm_file_path The path to the Realm file. All files will be derived from this.
+     * @param[out] did_delete_realm If non-null, set to true if the primary Realm file was deleted.
+     *
+     * @throws PermissionDenied if the operation was not permitted.
+     * @throws AccessError for any other error while trying to delete the file or folder.
+     * @throws DeleteOnOpenRealmException if the function was called on an open Realm.
+     */
+    static void delete_files(const std::string& realm_file_path, bool* did_delete_realm = nullptr);
 
     // returns the file format version upgraded from if an upgrade took place
     util::Optional<int> file_format_upgraded_from_version() const;
@@ -568,6 +590,14 @@ class ClosedRealmException : public std::logic_error {
 public:
     ClosedRealmException()
         : std::logic_error("Cannot access realm that has been closed.")
+    {
+    }
+};
+
+class DeleteOnOpenRealmException : public std::logic_error {
+public:
+    DeleteOnOpenRealmException(const std::string& path)
+        : std::logic_error(util::format("Cannot delete files of an open Realm: '%1' is still in use.", path))
     {
     }
 };

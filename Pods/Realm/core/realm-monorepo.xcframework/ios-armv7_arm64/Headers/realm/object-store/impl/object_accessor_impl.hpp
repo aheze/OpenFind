@@ -216,34 +216,7 @@ public:
 
     util::Any box(Mixed v) const
     {
-        if (!v.is_null()) {
-            switch (v.get_type()) {
-                case type_Int:
-                    return v.get_int();
-                case type_Bool:
-                    return v.get_bool();
-                case type_Float:
-                    return v.get_float();
-                case type_Double:
-                    return v.get_double();
-                case type_String:
-                    return std::string(v.get_string());
-                case type_Binary:
-                    return std::string(v.get_binary());
-                case type_Timestamp:
-                    return v.get_timestamp();
-                case type_ObjectId:
-                    return v.get<ObjectId>();
-                case type_Decimal:
-                    return v.get<Decimal128>();
-                case type_UUID:
-                    return v.get<UUID>();
-                default:
-                    REALM_TERMINATE("not supported");
-                    break;
-            }
-        }
-        return util::none;
+        return v;
     }
 
     // Convert from the boxed type to core types. This needs to be implemented
@@ -386,7 +359,10 @@ inline Mixed CppContext::unbox(util::Any& v, CreatePolicy, ObjKey) const
 {
     if (v.has_value()) {
         const std::type_info& this_type{v.type()};
-        if (this_type == typeid(int)) {
+        if (this_type == typeid(Mixed)) {
+            return util::any_cast<Mixed>(v);
+        }
+        else if (this_type == typeid(int)) {
             return Mixed(util::any_cast<int>(v));
         }
         else if (this_type == typeid(int64_t)) {
@@ -418,7 +394,7 @@ inline Mixed CppContext::unbox(util::Any& v, CreatePolicy, ObjKey) const
             return Mixed(util::any_cast<UUID>(v));
         }
     }
-    return {};
+    return Mixed{};
 }
 
 inline Obj CppContext::create_embedded_object()

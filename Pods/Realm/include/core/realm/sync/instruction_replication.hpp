@@ -70,7 +70,7 @@ public:
     void add_class_with_primary_key(TableKey tk, StringData table_name, DataType pk_type, StringData pk_field,
                                     bool nullable) override;
     void create_object(const Table*, GlobalKey) override;
-    void create_object_with_primary_key(const Table*, GlobalKey, Mixed) override;
+    void create_object_with_primary_key(const Table*, ObjKey, Mixed) override;
     void erase_group_level_table(TableKey table_key, size_t num_tables) override;
     void rename_group_level_table(TableKey table_key, StringData new_name) override;
     void insert_column(const Table*, ColKey col_key, DataType type, StringData name, Table* target_table) override;
@@ -124,7 +124,7 @@ private:
     bool m_short_circuit = false;
 
     ChangesetEncoder m_encoder;
-    DB* m_sg = nullptr;
+    DB* m_db = nullptr;
     Transaction* m_transaction;
 
     // Consistency checks:
