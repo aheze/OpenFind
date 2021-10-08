@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Settings
 
 var deviceIsRoundPad = false /// iPad with rounded corners
 var deviceHasNotch = false
@@ -44,7 +45,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 "shutterStyle": 1
             ]
         )
-        if let encoded = try? JSONEncoder().encode([OrderedLanguage(language: .english, priority: 0)]) {
+        
+        if let encoded = try? JSONEncoder().encode([OrderedLanguage(language: Language.english, priority: 0)]) {
             UserDefaults.standard.register(defaults: ["recognitionLanguages": encoded])
         }
         

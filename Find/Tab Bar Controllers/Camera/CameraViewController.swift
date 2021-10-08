@@ -107,12 +107,7 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var settingsImageView: UIImageView!
     @IBOutlet weak var settingsButton: CustomButton!
     @IBAction func settingsButtonPressed(_ sender: Any) {
-        let settingsVC = SettingsViewHoster()
-        settingsVC.presentationController?.delegate = self
-        settingsVC.dismissed = { [weak self] in
-            self?.cameBackFromSettings?()
-        }
-        self.present(settingsVC, animated: true)
+        setupSettings()
     }
     
     var currentPausedImage: UIImage?

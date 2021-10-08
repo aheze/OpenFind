@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension SettingsViewHoster {
+extension CameraViewController {
     func presentLicenses() {
         let carteViewController = CarteViewController()
                 
@@ -599,13 +599,6 @@ extension SettingsViewHoster {
         OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
         SOFTWARE.
         """
-        
-//        var item17 = CarteItem(name: "Haptica")
-//        item17.licenseText = """
-//
-//        """
-        
-        
         
         carteViewController.items.append(item1)
         carteViewController.items.append(item2)

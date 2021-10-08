@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Settings
 
 extension ViewController {
     func readDefaults() {

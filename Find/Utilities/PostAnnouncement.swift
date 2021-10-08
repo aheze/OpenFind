@@ -48,6 +48,4 @@ extension UIAccessibility {
         
         return string
     }
-    
-    
 }

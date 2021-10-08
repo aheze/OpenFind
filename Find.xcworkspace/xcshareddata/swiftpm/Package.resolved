@@ -2,12 +2,39 @@
   "object": {
     "pins": [
       {
+        "package": "Settings",
+        "repositoryURL": "https://github.com/aheze/Settings.git",
+        "state": {
+          "branch": "main",
+          "revision": "b5ab61e2dfb1219c5772d0c6db2bfeea523ca59f",
+          "version": null
+        }
+      },
+      {
+        "package": "SupportDocs",
+        "repositoryURL": "https://github.com/aheze/SupportDocs",
+        "state": {
+          "branch": null,
+          "revision": "c58f17ad9cf79065a07235bc117ccfad938a446b",
+          "version": "1.1.0"
+        }
+      },
+      {
         "package": "Introspect",
         "repositoryURL": "https://github.com/siteline/SwiftUI-Introspect",
         "state": {
           "branch": "master",
           "revision": "72a509c93166540c0adf8323fd2652daade7f9f6",
           "version": null
+        }
+      },
+      {
+        "package": "WhatsNewKit",
+        "repositoryURL": "https://github.com/SvenTiigi/WhatsNewKit.git",
+        "state": {
+          "branch": null,
+          "revision": "92a9d6f5f6754aba0df972514fd7686f1de03bcc",
+          "version": "1.3.7"
         }
       }
     ]
