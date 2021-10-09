@@ -8,6 +8,7 @@
 
 import UIKit
 import Settings
+import SupportDocs
 
 extension ViewController {
     func readDefaults() {

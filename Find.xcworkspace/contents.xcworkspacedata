@@ -4,6 +4,20 @@
    <FileRef
       location = "group:Find.xcodeproj">
    </FileRef>
+   <Group
+      location = "container:"
+      name = "Frameworks">
+      <FileRef
+         location = "group:Settings/Settings.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "Framework Testing">
+      <FileRef
+         location = "group:SettingsTesting/SettingsTesting.xcodeproj">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
