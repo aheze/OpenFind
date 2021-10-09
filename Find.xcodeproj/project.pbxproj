@@ -36,7 +36,6 @@
 		3C1FE21925BB4246004DC9EF /* SlideFindBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1FE21825BB4246004DC9EF /* SlideFindBar.xib */; };
 		3C1FE21C25BB4879004DC9EF /* PhotoSlidesVC+Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE21B25BB4879004DC9EF /* PhotoSlidesVC+Prompt.swift */; };
 		3C21DEE6259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C21DEE5259BCFFA00F6A9A3 /* ListBuilderVC+ErrorChecking.swift */; };
-		3C22D3822702B0E9001E8474 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 3C22D3812702B0E9001E8474 /* Introspect */; };
 		3C22D3CC2702D578001E8474 /* PagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D3882702D577001E8474 /* PagingViewController.swift */; };
 		3C22D3CD2702D578001E8474 /* PageViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D3892702D577001E8474 /* PageViewManager.swift */; };
 		3C22D3CE2702D578001E8474 /* PagingTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22D38A2702D577001E8474 /* PagingTitleCell.swift */; };
@@ -861,7 +860,6 @@
 			files = (
 				3CC443BE270FFC010018A7A6 /* Settings in Frameworks */,
 				9F7EB9AD24508DC95B5FA75F /* Pods_Find.framework in Frameworks */,
-				3C22D3822702B0E9001E8474 /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2025,7 +2023,6 @@
 			);
 			name = Find;
 			packageProductDependencies = (
-				3C22D3812702B0E9001E8474 /* Introspect */,
 				3CC443BD270FFC010018A7A6 /* Settings */,
 			);
 			productName = Find;
@@ -2061,7 +2058,6 @@
 			);
 			mainGroup = 4999AC872353A80A00AB06A7;
 			packageReferences = (
-				3C22D3802702B0E9001E8474 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				3CC443BC270FFC010018A7A6 /* XCRemoteSwiftPackageReference "Settings" */,
 			);
 			productRefGroup = 4999AC912353A80A00AB06A7 /* Products */;
@@ -2940,14 +2936,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3C22D3802702B0E9001E8474 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		3CC443BC270FFC010018A7A6 /* XCRemoteSwiftPackageReference "Settings" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/aheze/Settings.git";
@@ -2959,11 +2947,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3C22D3812702B0E9001E8474 /* Introspect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3C22D3802702B0E9001E8474 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
-		};
 		3CC443BD270FFC010018A7A6 /* Settings */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3CC443BC270FFC010018A7A6 /* XCRemoteSwiftPackageReference "Settings" */;

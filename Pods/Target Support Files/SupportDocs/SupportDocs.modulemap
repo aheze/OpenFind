@@ -1,6 +1,0 @@
-framework module SupportDocs {
-  umbrella header "SupportDocs-umbrella.h"
-
-  export *
-  module * { export * }
-}

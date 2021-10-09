@@ -12,9 +12,7 @@ pod 'SwiftEntryKit'
 pod 'SnapKit'
 pod 'SPAlert'
 pod 'SwiftyJSON', '~> 4.0'
-pod 'WhatsNewKit'
 pod 'SwiftRichString'
-pod 'SupportDocs'
 
 
 end
