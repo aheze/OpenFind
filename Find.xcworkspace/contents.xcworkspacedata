@@ -6,14 +6,36 @@
    </FileRef>
    <Group
       location = "container:"
-      name = "Frameworks">
+      name = "Camera Frameworks">
+      <FileRef
+         location = "group:LivePreview/LivePreview.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Camera/Camera.xcodeproj">
+      </FileRef>
       <FileRef
          location = "group:Settings/Settings.xcodeproj">
       </FileRef>
    </Group>
    <Group
       location = "container:"
+      name = "General Frameworks">
+      <FileRef
+         location = "group:OCR/OCR.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:SearchBar/SearchBar.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
       name = "Framework Testing">
+      <FileRef
+         location = "group:SearchBarTesting/SearchBarTesting.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:CameraTesting/CameraTesting.xcodeproj">
+      </FileRef>
       <FileRef
          location = "group:SettingsTesting/SettingsTesting.xcodeproj">
       </FileRef>

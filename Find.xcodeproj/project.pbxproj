@@ -153,7 +153,6 @@
 		3C5B156B25A7EE7900BB8988 /* NotifyTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B156A25A7EE7900BB8988 /* NotifyTransition.swift */; };
 		3C5B157325A8CD9C00BB8988 /* PhotosVC+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B157225A8CD9C00BB8988 /* PhotosVC+Selection.swift */; };
 		3C5B157825A8CE7E00BB8988 /* PhotosVC+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B157725A8CE7E00BB8988 /* PhotosVC+NavBar.swift */; };
-		3C5DD06A261021E700434317 /* TunedMetalicC.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C5DD069261021E500434317 /* TunedMetalicC.m4a */; };
 		3C5DD06E26104C9300434317 /* PhotoFindVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5DD06D26104C9300434317 /* PhotoFindVC+Accessibility.swift */; };
 		3C5F1FA527121BB200143BDD /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3C5F1FA427121BB200143BDD /* WhatsNewKit */; };
 		3C5F1FA727121F8900143BDD /* Settings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5F1FA627121F8900143BDD /* Settings.framework */; };
@@ -595,7 +594,6 @@
 		3C5B156A25A7EE7900BB8988 /* NotifyTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTransition.swift; sourceTree = "<group>"; };
 		3C5B157225A8CD9C00BB8988 /* PhotosVC+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Selection.swift"; sourceTree = "<group>"; };
 		3C5B157725A8CE7E00BB8988 /* PhotosVC+NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+NavBar.swift"; sourceTree = "<group>"; };
-		3C5DD069261021E500434317 /* TunedMetalicC.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = TunedMetalicC.m4a; sourceTree = "<group>"; };
 		3C5DD06D26104C9300434317 /* PhotoFindVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+Accessibility.swift"; sourceTree = "<group>"; };
 		3C5F1FA627121F8900143BDD /* Settings.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Settings.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C643F1926057806001E6FA1 /* FindClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1208,14 +1206,6 @@
 				3C5B157725A8CE7E00BB8988 /* PhotosVC+NavBar.swift */,
 			);
 			path = "Navigation Bar";
-			sourceTree = "<group>";
-		};
-		3C5DD068261021D300434317 /* Sound Effects */ = {
-			isa = PBXGroup;
-			children = (
-				3C5DD069261021E500434317 /* TunedMetalicC.m4a */,
-			);
-			path = "Sound Effects";
 			sourceTree = "<group>";
 		};
 		3C634C6E25C0F3050064CBF8 /* Empty */ = {
@@ -1951,7 +1941,6 @@
 				496937382353C219009CA41A /* Tab Bar Controllers */,
 				3C16EA81259BED7F00D73755 /* Other View Controllers */,
 				4969373B2353C25B009CA41A /* Utilities */,
-				3C5DD068261021D300434317 /* Sound Effects */,
 				3CAA1D37266C7684008F1F16 /* Assets and Info */,
 				49E9D89424996E1A0006757C /* Localizable.strings */,
 				3C0CC69D25CE0385008E5737 /* unused.rb */,
@@ -2129,7 +2118,6 @@
 				3CA63F5A25C9274A001C295E /* PhotosMigrationView.xib in Resources */,
 				49B7A32D2390823C0070209F /* Colors.xcassets in Resources */,
 				3C4DE6FB259AD3FF0037D104 /* SaveToPhotosButton.xib in Resources */,
-				3C5DD06A261021E700434317 /* TunedMetalicC.m4a in Resources */,
 				495DAD4024A6B37500D5F844 /* ListToolBar.xib in Resources */,
 				4999AC9D2353A81100AB06A7 /* Assets.xcassets in Resources */,
 				4999AC9B2353A80A00AB06A7 /* Main.storyboard in Resources */,
