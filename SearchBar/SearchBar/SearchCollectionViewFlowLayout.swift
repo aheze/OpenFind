@@ -49,13 +49,14 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             
             let centeredProposedContentOffset = proposedContentOffset.x + ((collectionView?.bounds.width ?? 0) / 2) /// center to the screen
             
+            /// find closest origin (by comparing middle of screen)
+            /// use `full` since it was calculated already - it's the ideal origin and width
             let closestOrigin = cellLayouts.enumerated().min(by: {
                 let firstCenter = $0.element.fullOrigin + ($0.element.fullWidth / 2)
                 let secondCenter = $1.element.fullOrigin + ($1.element.fullWidth / 2)
                 return abs(firstCenter - centeredProposedContentOffset) < abs(secondCenter - centeredProposedContentOffset)
             })!
             
-            print("closest: \(closestOrigin)")
             var targetContentOffset = closestOrigin.element.fullOrigin
             
             if closestOrigin.offset == 0 || closestOrigin.offset == fields.count - 1 {
@@ -75,32 +76,28 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func prepare() { /// configure the cells' frames
         super.prepare()
         
-        
         guard let collectionView = collectionView else { return }
-        
         
         layoutAttributes = []
         
         var contentSize = CGSize.zero
-        var currentCellOrigin = Constants.sidePadding /// origin for each cell
+        
         
         guard let fields = getFields?() else { return }
 
         let widths = fields.map { $0.valueFrameWidth }
         let contentOffset = collectionView.contentOffset.x + Constants.sidePadding
         
-        
-        
-        /// array of each cell's shifting offset
-        var shiftingOffsets = [CGFloat]()
-        
+        // MARK: Calculate shifting for each cell
+        var cellOrigin = Constants.sidePadding /// origin for each cell
+        var shiftingOffsets = [CGFloat]() /// array of each cell's shifting offset
         for index in widths.indices {
             let fullCellWidth = getFullCellWidth?(index) ?? 0
             
-            if currentCellOrigin > contentOffset { /// cell is not yet approached
+            if cellOrigin > contentOffset { /// cell is not yet approached
                 shiftingOffsets.append(0)
             } else {
-                let differenceBetweenContentOffsetAndCell = min(fullCellWidth, contentOffset - currentCellOrigin)
+                let differenceBetweenContentOffsetAndCell = min(fullCellWidth, contentOffset - cellOrigin)
                 let percentage = differenceBetweenContentOffsetAndCell / fullCellWidth
                 let shiftingOffset = percentage * (max(0, fullCellWidth - widths[index]))
                 shiftingOffsets.append(shiftingOffset)
@@ -108,18 +105,16 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             
             var additionalOffset = fullCellWidth
             if index != widths.indices.last { additionalOffset += Constants.cellSpacing }
-            currentCellOrigin += additionalOffset
+            cellOrigin += additionalOffset
         }
         
-        
-        var cellLayouts = [FieldCellLayout]() /// each cell's positioning
+        // MARK: Apply ALL shifting to the start of the collection view
         var fullOrigin = Constants.sidePadding /// origin for each cell, in expanded mode
-        
+        var cellLayouts = [FieldCellLayout]() /// each cell's positioning
         for index in shiftingOffsets.indices {
             let fullCellWidth = getFullCellWidth?(index) ?? 0
             
             let indexPath = IndexPath(item: index, section: 0)
-            
             
             let totalShiftingOffset = shiftingOffsets.dropFirst(index).reduce(0, +)
             let shiftingOffset = shiftingOffsets[index]
@@ -138,14 +133,11 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             fullOrigin += additionalOffset
         }
         
-        
-        
-        contentSize.height = Constants.cellHeight
         contentSize.width = fullOrigin + Constants.sidePadding
+        contentSize.height = Constants.cellHeight
         
         self.contentSize = contentSize
         self.cellLayouts = cellLayouts
-         
     }
     
     /// boilerplate code
