@@ -44,7 +44,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        
+
         if let fields = getFields?() {
             
             let centeredProposedContentOffset = proposedContentOffset.x + ((collectionView?.bounds.width ?? 0) / 2) /// center to the screen
@@ -97,9 +97,20 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             if cellOrigin > contentOffset { /// cell is not yet approached
                 shiftingOffsets.append(0)
             } else {
-                let differenceBetweenContentOffsetAndCell = min(fullCellWidth, contentOffset - cellOrigin)
-                let percentage = differenceBetweenContentOffsetAndCell / fullCellWidth
-                let shiftingOffset = percentage * (max(0, fullCellWidth - widths[index]))
+                
+                /// when the fields stop, the content offset **falls short** of the end of the field.
+                /// so, must account for that my subtracting some padding
+                let sidePadding = Constants.sidePeekPadding - (Constants.sidePadding + Constants.cellSpacing)
+                let adjustedFullWidth = fullCellWidth - sidePadding
+                
+                /// progress of content offset (positive) through the field, until it hits the field's width (`adjustedFullWidth`)
+                let differenceBetweenContentOffsetAndCell = min(adjustedFullWidth, contentOffset - cellOrigin)
+                let percentage = differenceBetweenContentOffsetAndCell / adjustedFullWidth /// fraction
+                
+                /// how much difference between the full width and the normal width, won't change.
+                let differenceBetweenWidthAndFullWidth = max(0, fullCellWidth - widths[index])
+                
+                let shiftingOffset = percentage * differenceBetweenWidthAndFullWidth
                 shiftingOffsets.append(shiftingOffset)
             }
             
@@ -107,6 +118,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             if index != widths.indices.last { additionalOffset += Constants.cellSpacing }
             cellOrigin += additionalOffset
         }
+        
         
         // MARK: Apply ALL shifting to the start of the collection view
         var fullOrigin = Constants.sidePadding /// origin for each cell, in expanded mode
