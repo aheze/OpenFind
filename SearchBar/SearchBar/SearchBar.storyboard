@@ -32,8 +32,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DWo-jK-nxc">
                                         <rect key="frame" x="0.0" y="54" width="414" height="100"/>
                                         <subviews>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fEC-o0-9ha">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                            <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fEC-o0-9ha">
+                                                <rect key="frame" x="100" y="0.0" width="214" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="duJ-Eq-RtT">
                                                     <size key="itemSize" width="128" height="200"/>
@@ -43,7 +43,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="baK-Sm-q0W" customClass="SearchFieldCell" customModule="SearchBar" customModuleProvider="target">
-                                                        <rect key="frame" x="71" y="0.0" width="272" height="100"/>
+                                                        <rect key="frame" x="-29" y="0.0" width="272" height="100"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="GDx-rQ-2PE">
                                                             <rect key="frame" x="0.0" y="0.0" width="272" height="100"/>
@@ -98,8 +98,8 @@
                                         <constraints>
                                             <constraint firstItem="fEC-o0-9ha" firstAttribute="top" secondItem="DWo-jK-nxc" secondAttribute="top" id="O0e-x6-Kuv"/>
                                             <constraint firstAttribute="height" constant="100" id="PJl-mt-CVE"/>
-                                            <constraint firstItem="fEC-o0-9ha" firstAttribute="leading" secondItem="DWo-jK-nxc" secondAttribute="leading" id="RKN-JG-Yfe"/>
-                                            <constraint firstAttribute="trailing" secondItem="fEC-o0-9ha" secondAttribute="trailing" id="U4z-5Y-2SQ"/>
+                                            <constraint firstItem="fEC-o0-9ha" firstAttribute="leading" secondItem="DWo-jK-nxc" secondAttribute="leading" constant="100" id="RKN-JG-Yfe"/>
+                                            <constraint firstAttribute="trailing" secondItem="fEC-o0-9ha" secondAttribute="trailing" constant="100" id="U4z-5Y-2SQ"/>
                                             <constraint firstAttribute="bottom" secondItem="fEC-o0-9ha" secondAttribute="bottom" id="fPM-id-JPn"/>
                                         </constraints>
                                     </view>

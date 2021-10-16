@@ -61,17 +61,40 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         let focusedIndex = widths.enumerated().min( by: { abs($0.1 - contentOffset) < abs($1.1 - contentOffset) } )!
         
         
-        
+        let fullCellWidth = getCellWidth?() ?? 0
         for index in widths.indices {
-            let width = widths[index]
+            let cellOffset = CGFloat(index) * fullCellWidth
+//            print("Offset: \(cellOffset)")
             
+            if cellOffset > contentOffset { /// cell is not yet approached
+                let indexPath = IndexPath(item: index, section: 0)
+                let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+                attributes.frame = CGRect(x: cellOffset, y: 0, width: fullCellWidth, height: Constants.cellHeight)
+                
+                layoutAttributes.append(attributes)
+            } else {
+                let differenceBetweenContentOffsetAndCell = min(fullCellWidth, contentOffset - cellOffset)
+                
+                let percentage = differenceBetweenContentOffsetAndCell / fullCellWidth
+                if index == 1 {
+                    print("Percentage: \(percentage)")
+                }
+                let shiftingOffset = percentage * (max(0, fullCellWidth - widths[index]))
+                
+                
+                let indexPath = IndexPath(item: index, section: 0)
+                let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+                attributes.frame = CGRect(x: cellOffset + shiftingOffset, y: 0, width: fullCellWidth - shiftingOffset, height: Constants.cellHeight)
+                
+                layoutAttributes.append(attributes)
+            }
             
-            let previousWidth = widths[safe: index - 1] ?? width
-            let nextWidth = widths[safe: index + 1] ?? width
-            
-            let totalWidth = widths[0...index].reduce(0, +)
-            let previousTotalWidth = totalWidth - previousWidth
-            let nextTotalWidth = totalWidth + nextWidth
+        }
+        contentSize.height = Constants.cellHeight
+        contentSize.width = CGFloat(widths.count) * fullCellWidth
+        
+        print("Content: \(contentSize)")
+        self.contentSize = contentSize
             
 //            if contentOffset < totalWidth { /// hasn't reached cell yet
 //                if index == 1 {
@@ -122,47 +145,13 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             
             
             
-            let indexPath = IndexPath(item: index, section: 0)
-            let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-            attributes.frame = CGRect(x: offset.x, y: 0, width: width, height: Constants.cellHeight)
-            
-            layoutAttributes.append(attributes)
             
             
-            print("Total width: \(totalWidth)")
-//            print("Prev: \(previousTotalWidth)")
-//            print("Next: \(nextTotalWidth)")
             
-            offset.x += width
-            if index == widths.indices.count - 1 {
-                contentSize.height = Constants.cellHeight
-                contentSize.width = offset.x
-                
-                print("Content: \(contentSize)")
-                self.contentSize = contentSize
-            }
-        }
         
         
         
-//        for itemIndex in 0..<collectionView.numberOfItems(inSection: 0) {
-//            let cellSize = CGSize(width: getCellWidth?() ?? 300, height: 48)
-//            contentSize.height = cellSize.height
-//
-//            let indexPath = IndexPath(item: itemIndex, section: 0)
-//            let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-//
-//            attributes.frame = CGRect(origin: offset, size: cellSize)
-//            layoutAttributes.append(attributes)
-//
-//            let addedOffset = cellSize.width
-//            offset.x += addedOffset
-//        }
         
-        
-//        contentSize.width += offset.x
-//        contentSize.height += offset.y
-//        self.contentSize = contentSize
     }
     
     /// boilerplate code
@@ -174,9 +163,5 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return context
     }
     
-    
-    //    func reset(){
-    //        preparedOnce = false
-    //    }
     
 }

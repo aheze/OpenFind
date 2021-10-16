@@ -40,7 +40,7 @@ extension SearchViewController: UICollectionViewDataSource {
     }
     
     func calculateFrameWidth(text: String) -> CGFloat {
-        return text.width(withConstrainedHeight: 10, font: Constants.fieldFont) + 100
+        return text.width(withConstrainedHeight: 10, font: Constants.fieldFont) + 30
     }
 }
 
