@@ -34,12 +34,31 @@ extension SearchViewController: UICollectionViewDataSource {
     func widthOfExpandedCell(for index: Int) -> Double {
         
         var extraPadding = CGFloat(0)
-        if index != 0 {
+        
+        //        if index == 0 || index == fields.count - 1 {
+        //            extraPadding += (2 * Constants.sidePadding) /// if edges, add side padding
+        //        } else {
+        //            extraPadding += (2 * Constants.sidePeekPadding) /// if inner cell, add peek padding
+        //        }
+        
+        
+        if index == 0 {
+            extraPadding += Constants.sidePadding /// if left edge, add side padding
+        } else {
             extraPadding += Constants.sidePeekPadding
         }
-        if index != fields.count - 1 {
+        if index == fields.count - 1 {
+            extraPadding += Constants.sidePadding /// if right edge, add side padding
+        }else {
             extraPadding += Constants.sidePeekPadding
         }
+        
+        //        if index != 0 {
+        //            extraPadding += Constants.sidePeekPadding
+        //        }
+        //        if index != fields.count - 1 {
+        //            extraPadding += Constants.sidePeekPadding
+        //        }
         
         let fullWidth = searchCollectionView.frame.width
         return fullWidth - extraPadding
