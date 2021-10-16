@@ -56,31 +56,63 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         let contentOffset = collectionView.contentOffset.x + Constants.sidePadding
         
         let fullCellWidth = getCellWidth?() ?? 0
+        
+        /// array of each cell's shifting offset
+        var shiftingOffsets = [CGFloat]()
+        
         for index in widths.indices {
 //            let cellOffset = CGFloat(index) * fullCellWidth
             
             if cellOffset > contentOffset { /// cell is not yet approached
-                let indexPath = IndexPath(item: index, section: 0)
-                let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-                attributes.frame = CGRect(x: cellOffset, y: 0, width: fullCellWidth, height: Constants.cellHeight)
-                
-                layoutAttributes.append(attributes)
+                shiftingOffsets.append(0)
             } else {
+
                 let differenceBetweenContentOffsetAndCell = min(fullCellWidth, contentOffset - cellOffset)
                 let percentage = differenceBetweenContentOffsetAndCell / fullCellWidth
                 let shiftingOffset = percentage * (max(0, fullCellWidth - widths[index]))
-                
-                let indexPath = IndexPath(item: index, section: 0)
-                let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-                attributes.frame = CGRect(x: cellOffset + shiftingOffset, y: 0, width: fullCellWidth - shiftingOffset, height: Constants.cellHeight)
-                
-                layoutAttributes.append(attributes)
+                shiftingOffsets.append(shiftingOffset)
             }
+//                let differenceBetweenContentOffsetAndCell = min(fullCellWidth, contentOffset - cellOffset)
+//                let percentage = differenceBetweenContentOffsetAndCell / fullCellWidth
+//                let shiftingOffset = CGFloat(Int(abs(
+//                    percentage * fullCellWidth - widths[index]
+//                )))
+//                shiftingOffsets.append(shiftingOffset)
+
             
             cellOffset += fullCellWidth
         }
+        
+        print("offsets: \(shiftingOffsets)")
+        
+        cellOffset = Constants.sidePadding
+        for index in shiftingOffsets.indices {
+//            print("Cell offset: \(cellOffset)")
+            
+//            if cellOffset > contentOffset { /// cell is not yet approached
+//                shiftingOffsets.append(0)
+//            } else {
+//                let differenceBetweenContentOffsetAndCell = min(fullCellWidth, contentOffset - cellOffset)
+//                let percentage = differenceBetweenContentOffsetAndCell / fullCellWidth
+//                let shiftingOffset = percentage * (max(0, fullCellWidth - widths[index]))
+//                shiftingOffsets.append(shiftingOffset)
+//            }
+            
+            let indexPath = IndexPath(item: index, section: 0)
+            let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+            
+            let totalShiftingOffset = shiftingOffsets.dropFirst(index).reduce(0, +)
+//            print("total for \(index): \(totalShiftingOffset)")
+            let shiftingOffset = shiftingOffsets[index]
+            print("Cell \(index)'s shifting offset: \(totalShiftingOffset).. total: \(cellOffset + totalShiftingOffset)")
+            attributes.frame = CGRect(x: cellOffset + totalShiftingOffset, y: 0, width: fullCellWidth - shiftingOffset, height: Constants.cellHeight)
+            
+            layoutAttributes.append(attributes)
+            cellOffset += fullCellWidth
+        }
+        
         contentSize.height = Constants.cellHeight
-        contentSize.width = CGFloat(widths.count) * fullCellWidth
+        contentSize.width = cellOffset + Constants.sidePadding
         
         print("Content: \(contentSize)")
         self.contentSize = contentSize

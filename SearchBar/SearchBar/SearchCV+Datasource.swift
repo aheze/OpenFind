@@ -28,15 +28,12 @@ extension SearchViewController: UICollectionViewDataSource {
         let fieldText = field.getText()
         cell.textField.text = fieldText
         
-//        print("Text: \(calculateFrameWidth(text: fieldText))")
-//        fields[indexPath.item].valueFrameWidth = calculateFrameWidth(text: fieldText)
-        
         return cell
     }
     
     func widthOfExpandedCell() -> Double {
-        let fullWidth = view.safeAreaLayoutGuide.layoutFrame.width
-        return fullWidth - Constants.sidePadding
+        let fullWidth = searchCollectionView.frame.width
+        return fullWidth - (2 * Constants.sidePadding)
     }
     
     func calculateFrameWidth(text: String) -> CGFloat {

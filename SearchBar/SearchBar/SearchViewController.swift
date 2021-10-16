@@ -28,10 +28,10 @@ public class SearchViewController: UIViewController {
         fields = [
             Field(value: .string("1. Hello! This is some text.")),
             Field(value: .string("2. Hi.")),
-            Field(value: .string("3. Medium text")),
-            Field(value: .string("4. Longer long long long long long text")),
-            Field(value: .string("5. Medium text")),
-            Field(value: .string("6. Medium text")),
+//            Field(value: .string("3. Medium text")),
+//            Field(value: .string("4. Longer long long long long long text")),
+//            Field(value: .string("5. Text")),
+//            Field(value: .string("6. Some medium text")),
         ]
         
         setupCollectionViews()
@@ -55,8 +55,8 @@ extension SearchViewController {
         let flowLayout = SearchCollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.getCellWidth = { [weak self] in
-//            return self?.widthOfExpandedCell() ?? 300
-            return 300
+            return self?.widthOfExpandedCell() ?? 300
+//            return 300
         }
         flowLayout.getFields = { [weak self] in
             return self?.fields ?? [Field]()
