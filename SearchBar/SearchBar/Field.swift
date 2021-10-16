@@ -5,7 +5,7 @@
 //  Created by Zheng on 10/14/21.
 //
 
-import Foundation
+import UIKit
 
 struct Field {
     var value = Value.string("")
@@ -15,10 +15,22 @@ struct Field {
     var showingDeleteButton = false
     
     
+    /// width of text label
+    var valueFrameWidth = CGFloat(200)
+    
     
     enum Value {
         case string(String)
         case list(List)
+    }
+    
+    func getText() -> String {
+        switch self.value {
+        case .string(let string):
+            return string
+        case .list(let list):
+            return list.name
+        }
     }
 }
 

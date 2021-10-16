@@ -53,16 +53,16 @@
                                                                     <rect key="frame" x="12" y="8" width="248" height="84"/>
                                                                     <subviews>
                                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hAy-QC-IPJ">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="198" height="84"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="248" height="84"/>
                                                                             <color key="backgroundColor" systemColor="tintColor"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <textInputTraits key="textInputTraits"/>
                                                                         </textField>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jR6-5l-yCi">
-                                                                            <rect key="frame" x="198" y="0.0" width="50" height="84"/>
+                                                                            <rect key="frame" x="248" y="0.0" width="0.0" height="84"/>
                                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" constant="50" id="crn-hd-lIB"/>
+                                                                                <constraint firstAttribute="width" id="crn-hd-lIB"/>
                                                                             </constraints>
                                                                         </view>
                                                                     </subviews>

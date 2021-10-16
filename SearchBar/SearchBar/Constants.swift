@@ -8,5 +8,7 @@
 import UIKit
 
 struct Constants {
+    static var cellHeight = CGFloat(100)
     static var sidePadding = CGFloat(100)
+    static var fieldFont = UIFont.preferredFont(forTextStyle: .headline)
 }

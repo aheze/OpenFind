@@ -15,6 +15,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         super.init()
     }
     
+    var getFields: (() -> [Field])?
     var getCellWidth: (() -> CGFloat)?
     
     var preparedOnce: Bool = false
@@ -31,74 +32,10 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         
         /// edge cells don't shrink, but the animation is perfect
-         return layoutAttributes.filter { rect.intersects($0.frame) } /// try deleting this line
+        return layoutAttributes.filter { rect.intersects($0.frame) } /// try deleting this line
         
-        /// edge cells shrink (yay!), but the animation glitches out
-//        return shrinkingEdgeCellAttributes(in: rect)
     }
     
-    /// makes the edge cells slowly shrink as you scroll
-//    func shrinkingEdgeCellAttributes(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-//        guard let collectionView = collectionView else { return nil }
-//
-//        var rectAttributes: [UICollectionViewLayoutAttributes] = []
-//        /// rect of the visible collection view cells
-//        let ogVisibleRect: CGRect = CGRect(origin: collectionView.contentOffset, size: collectionView.frame.size)
-//        var visibleRect: CGRect
-//
-//
-//        visibleRect = ogVisibleRect
-//        rectAttributes = layoutAttributes.filter { rect.intersects($0.frame) }
-//
-//
-//        let leadingCutoff: CGFloat = 10 /// once a cell reaches here, start shrinking it
-//        let trailingCutoff: CGFloat
-//        let paddingInsets: UIEdgeInsets /// apply shrinking even when cell has passed the screen's bounds
-//
-//
-//        trailingCutoff = CGFloat(collectionView.bounds.width - leadingCutoff)
-//        paddingInsets = UIEdgeInsets(top: 0, left: -50, bottom: 0, right: -50)
-//
-//
-//        // Reset transform
-//        for attributes in rectAttributes {
-//            attributes.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-//            attributes.alpha = 0
-//            attributes.zIndex = 0
-//        }
-//
-//        var currentTopCount = 0
-//        for attributes in rectAttributes where visibleRect.inset(by: paddingInsets).contains(attributes.center) {
-//            /// center of each cell, converted to a point inside `visibleRect`
-//
-//            let center = attributes.center.x - visibleRect.origin.x
-//
-//            var offset: CGFloat?
-//            var translation = CGPoint.zero
-//            if center <= leadingCutoff {
-//                offset = leadingCutoff - center /// distance from the cutoff, 0 if exactly on cutoff
-//                translation.x  = pow((offset! / leadingCutoff), 1.5) * leadingCutoff
-//            } else if center >= trailingCutoff {
-//                offset = center - trailingCutoff
-//                translation.x  = -pow((offset! / leadingCutoff), 1.5) * leadingCutoff
-//            }
-//
-//            if let offset = offset {
-//                let alpha = 1 - (pow(offset, 1.1) / 100)
-//                let scale = 1 - (pow(offset, 1.1) / 5000) /// gradually shrink the cell
-//
-//                attributes.alpha = alpha
-//                attributes.zIndex = Int(alpha * 100) /// if alpha is 1, keep on the top
-//                attributes.transform = CGAffineTransform(scaleX: scale, y: scale).translatedBy(x: translation.x, y: translation.y)
-//
-//            } else {
-//                currentTopCount += 1
-//                attributes.alpha = 1
-//                attributes.zIndex = 100 + currentTopCount /// maintain order even when on top
-//            }
-//        }
-//        return rectAttributes
-//    }
     
     /// make the layout (strip vs list) here
     override func prepare() { /// configure the cells' frames
@@ -107,33 +44,125 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         guard let collectionView = collectionView else { return }
         
-        // FIX redundant prepare calls
-        guard !preparedOnce else { return }
-        preparedOnce = true
+        
         layoutAttributes = []
         
         var contentSize = CGSize.zero
         var offset: CGPoint = .zero /// origin for each cell
         
+        guard let fields = getFields?() else { return }
+//        print("Field widths: \(fields.map { $0.valueFrameWidth })")
         
-        for itemIndex in 0..<collectionView.numberOfItems(inSection: 0) {
-            let cellSize = CGSize(width: getCellWidth?() ?? 300, height: 48)
-            contentSize.height = cellSize.height
+        let widths = fields.map { $0.valueFrameWidth }
+        let contentOffset = collectionView.contentOffset.x
+        
+//        print("ContnetOffset: \(collectionView.contentOffset.x)")
+        
+        let focusedIndex = widths.enumerated().min( by: { abs($0.1 - contentOffset) < abs($1.1 - contentOffset) } )!
+        
+        
+        
+        for index in widths.indices {
+            let width = widths[index]
             
-            let indexPath = IndexPath(item: itemIndex, section: 0)
+            
+            let previousWidth = widths[safe: index - 1] ?? width
+            let nextWidth = widths[safe: index + 1] ?? width
+            
+            let totalWidth = widths[0...index].reduce(0, +)
+            let previousTotalWidth = totalWidth - previousWidth
+            let nextTotalWidth = totalWidth + nextWidth
+            
+//            if contentOffset < totalWidth { /// hasn't reached cell yet
+//                if index == 1 {
+//                    //                    print("NOT REAch")
+//
+////                    print("Width: \(totalWidth)")
+//                    /// 0 to this number
+//                    let range = totalWidth - previousTotalWidth
+//                    let zeroedContentOffset = contentOffset - previousTotalWidth
+//
+//                    //                ^cv
+//                    // 0000000 OOOOOOOOOOOOO   OOOOOOO
+//                    // to...
+//                    //         ^cv
+//                    // OOOOOOOOOOOOO   OOOOOOO
+//
+//
+//
+//                    let percentageFull = zeroedContentOffset / range
+//                    let difference = (getCellWidth?() ?? 0) - width
+//
+//                    print("percentageFull: \(percentageFull)")
+//                    print("Diff: \(difference)")
+//
+//                    let indexPath = IndexPath(item: index, section: 0)
+//                    let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+//                    attributes.frame = CGRect(x: offset.x, y: 0, width: width + difference * percentageFull, height: Constants.cellHeight)
+//
+//                    layoutAttributes.append(attributes)
+//
+//                    continue
+////                    let indexPath = IndexPath(item: index, section: 0)
+////                    let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+//////                    attributes.frame =
+////                    layoutAttributes.append(attributes)
+////                    continue
+//
+//
+////                    print("Offset: \(zeroedContentOffset) / \(range)")
+//                }
+//
+//            } else { /// already reached cell
+//                //                if index == 1 {
+//                //                    print("reached!")
+//                //                }
+//            }
+            
+            
+            
+            
+            let indexPath = IndexPath(item: index, section: 0)
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+            attributes.frame = CGRect(x: offset.x, y: 0, width: width, height: Constants.cellHeight)
             
-            attributes.frame = CGRect(origin: offset, size: cellSize)
             layoutAttributes.append(attributes)
             
-            let addedOffset = cellSize.width
-            offset.x += addedOffset
+            
+            print("Total width: \(totalWidth)")
+//            print("Prev: \(previousTotalWidth)")
+//            print("Next: \(nextTotalWidth)")
+            
+            offset.x += width
+            if index == widths.indices.count - 1 {
+                contentSize.height = Constants.cellHeight
+                contentSize.width = offset.x
+                
+                print("Content: \(contentSize)")
+                self.contentSize = contentSize
+            }
         }
         
         
-        contentSize.width += offset.x
-        contentSize.height += offset.y
-        self.contentSize = contentSize
+        
+//        for itemIndex in 0..<collectionView.numberOfItems(inSection: 0) {
+//            let cellSize = CGSize(width: getCellWidth?() ?? 300, height: 48)
+//            contentSize.height = cellSize.height
+//
+//            let indexPath = IndexPath(item: itemIndex, section: 0)
+//            let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+//
+//            attributes.frame = CGRect(origin: offset, size: cellSize)
+//            layoutAttributes.append(attributes)
+//
+//            let addedOffset = cellSize.width
+//            offset.x += addedOffset
+//        }
+        
+        
+//        contentSize.width += offset.x
+//        contentSize.height += offset.y
+//        self.contentSize = contentSize
     }
     
     /// boilerplate code
@@ -146,8 +175,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     
-    func reset(){
-        preparedOnce = false
-    }
+    //    func reset(){
+    //        preparedOnce = false
+    //    }
     
 }

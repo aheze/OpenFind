@@ -30,23 +30,39 @@ open class FieldLayoutAttributes: UICollectionViewLayoutAttributes {
 }
 
 class SearchFieldCell: UICollectionViewCell {
+    
+    var textChanged: ((String) -> Void)?
     @IBOutlet weak var textField: UITextField!
-    
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        print("Awake!")
+//        print("Awake!")
+        
+        textField.delegate = self
+        textField.font = Constants.fieldFont
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
-        print("Applying attributes")
-        if let attributes = layoutAttributes as? FieldLayoutAttributes {
-            
-            print("caster attributes")
-            
+//        print("Applying attributes")
+//        if let attributes = layoutAttributes as? FieldLayoutAttributes {
+//
+//            print("caster attributes")
+//            print(frame.width)
+//        }
+    }
+}
+
+extension SearchFieldCell: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if let text = textField.text,
+            let textRange = Range(range, in: text) {
+            let updatedText = text.replacingCharacters(in: textRange, with: string)
+            textChanged?(updatedText)
         }
+        
+        return true
     }
 }

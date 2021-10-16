@@ -25,8 +25,6 @@ public class SearchViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupCollectionViews()
-        
         fields = [
             Field(
                 value: .string("Hello! This is some text.")
@@ -38,6 +36,10 @@ public class SearchViewController: UIViewController {
                 value: .string("Medium text")
             ),
         ]
+        
+        setupCollectionViews()
+        
+        
     }
 }
 
@@ -47,17 +49,19 @@ extension SearchViewController {
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self
         
+        for index in fields.indices {
+            fields[index].valueFrameWidth = calculateFrameWidth(text: fields[index].getText())
+        }
+        
         let flowLayout = SearchCollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.getCellWidth = { [weak self] in
-            let fullWidth = self?.view.safeAreaLayoutGuide.layoutFrame.width ?? 300
-            return fullWidth - Constants.sidePadding
+            return self?.widthOfExpandedCell() ?? 300
+        }
+        flowLayout.getFields = { [weak self] in
+            return self?.fields ?? [Field]()
         }
         searchCollectionView.setCollectionViewLayout(flowLayout, animated: false)
-    }
-    func widthOfExpandedCell() -> Double {
-        let fullWidth = view.safeAreaLayoutGuide.layoutFrame.width
-        return fullWidth - Constants.sidePadding
     }
 }
 
