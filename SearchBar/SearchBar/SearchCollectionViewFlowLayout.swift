@@ -48,23 +48,16 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         layoutAttributes = []
         
         var contentSize = CGSize.zero
-        var offset: CGPoint = .zero /// origin for each cell
+        var cellOffset = Constants.sidePadding /// origin for each cell
         
         guard let fields = getFields?() else { return }
-//        print("Field widths: \(fields.map { $0.valueFrameWidth })")
-        
+
         let widths = fields.map { $0.valueFrameWidth }
-        let contentOffset = collectionView.contentOffset.x
-        
-//        print("ContnetOffset: \(collectionView.contentOffset.x)")
-        
-        let focusedIndex = widths.enumerated().min( by: { abs($0.1 - contentOffset) < abs($1.1 - contentOffset) } )!
-        
+        let contentOffset = collectionView.contentOffset.x + Constants.sidePadding
         
         let fullCellWidth = getCellWidth?() ?? 0
         for index in widths.indices {
-            let cellOffset = CGFloat(index) * fullCellWidth
-//            print("Offset: \(cellOffset)")
+//            let cellOffset = CGFloat(index) * fullCellWidth
             
             if cellOffset > contentOffset { /// cell is not yet approached
                 let indexPath = IndexPath(item: index, section: 0)
@@ -74,13 +67,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 layoutAttributes.append(attributes)
             } else {
                 let differenceBetweenContentOffsetAndCell = min(fullCellWidth, contentOffset - cellOffset)
-                
                 let percentage = differenceBetweenContentOffsetAndCell / fullCellWidth
-                if index == 1 {
-                    print("Percentage: \(percentage)")
-                }
                 let shiftingOffset = percentage * (max(0, fullCellWidth - widths[index]))
-                
                 
                 let indexPath = IndexPath(item: index, section: 0)
                 let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
@@ -89,69 +77,14 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 layoutAttributes.append(attributes)
             }
             
+            cellOffset += fullCellWidth
         }
         contentSize.height = Constants.cellHeight
         contentSize.width = CGFloat(widths.count) * fullCellWidth
         
         print("Content: \(contentSize)")
         self.contentSize = contentSize
-            
-//            if contentOffset < totalWidth { /// hasn't reached cell yet
-//                if index == 1 {
-//                    //                    print("NOT REAch")
-//
-////                    print("Width: \(totalWidth)")
-//                    /// 0 to this number
-//                    let range = totalWidth - previousTotalWidth
-//                    let zeroedContentOffset = contentOffset - previousTotalWidth
-//
-//                    //                ^cv
-//                    // 0000000 OOOOOOOOOOOOO   OOOOOOO
-//                    // to...
-//                    //         ^cv
-//                    // OOOOOOOOOOOOO   OOOOOOO
-//
-//
-//
-//                    let percentageFull = zeroedContentOffset / range
-//                    let difference = (getCellWidth?() ?? 0) - width
-//
-//                    print("percentageFull: \(percentageFull)")
-//                    print("Diff: \(difference)")
-//
-//                    let indexPath = IndexPath(item: index, section: 0)
-//                    let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-//                    attributes.frame = CGRect(x: offset.x, y: 0, width: width + difference * percentageFull, height: Constants.cellHeight)
-//
-//                    layoutAttributes.append(attributes)
-//
-//                    continue
-////                    let indexPath = IndexPath(item: index, section: 0)
-////                    let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-//////                    attributes.frame =
-////                    layoutAttributes.append(attributes)
-////                    continue
-//
-//
-////                    print("Offset: \(zeroedContentOffset) / \(range)")
-//                }
-//
-//            } else { /// already reached cell
-//                //                if index == 1 {
-//                //                    print("reached!")
-//                //                }
-//            }
-            
-            
-            
-            
-            
-            
-            
-        
-        
-        
-        
+         
     }
     
     /// boilerplate code
