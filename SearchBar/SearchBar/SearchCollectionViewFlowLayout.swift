@@ -7,7 +7,10 @@
 
 import UIKit
 
-
+struct FieldCellLayout {
+    var origin = CGFloat(0)
+    var width = CGFloat(0)
+}
 
 class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
@@ -16,7 +19,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     var getFields: (() -> [Field])?
-    var getCellWidth: (() -> CGFloat)?
+    var getFullCellWidth: ((Int) -> CGFloat)?
+    
+    var origins = [CGFloat]()
     
     var preparedOnce: Bool = false
     
@@ -34,6 +39,58 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         /// edge cells don't shrink, but the animation is perfect
         return layoutAttributes.filter { rect.intersects($0.frame) } /// try deleting this line
         
+    }
+    
+    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+        
+        print("Proposed: \(proposedContentOffset)")
+        
+//        let closestOrigin = origins.min( by: { abs($0 - proposedContentOffset.x) < abs($1 - proposedContentOffset.x) } )!
+//print("Closest: \(closestOrigin)")
+        if let fields = getFields?() {
+            
+            var cellLayouts = [FieldCellLayout]()
+            
+            var currentCellOrigin = Constants.sidePadding /// origin for each cell
+            
+            for index in fields.indices {
+                let fullCellWidth = getFullCellWidth?(index) ?? 0
+                
+                print("Full cell width for \(index): \(fullCellWidth)")
+                var additionalOffset = fullCellWidth
+                if index != fields.indices.last { additionalOffset += Constants.cellSpacing }
+                
+                
+                let cellLayout = FieldCellLayout(origin: currentCellOrigin, width: fullCellWidth)
+                cellLayouts.append(cellLayout)
+                currentCellOrigin += additionalOffset
+            }
+            
+            
+            let centeredProposedContentOffset = proposedContentOffset.x + ((collectionView?.bounds.width ?? 0) / 2)
+            print("Proposed: \(proposedContentOffset.x), new: \(centeredProposedContentOffset)")
+            
+            let closestOrigin = cellLayouts.enumerated().min( by: {
+                let firstCenter = $0.element.origin + ($0.element.width / 2)
+                let secondCenter = $1.element.origin + ($1.element.width / 2)
+                return abs(firstCenter - centeredProposedContentOffset) < abs(secondCenter - centeredProposedContentOffset)
+                
+            } )!
+            print("Closest: \(closestOrigin)")
+            
+            var targetContentOffset = closestOrigin.element.origin
+            
+            if closestOrigin.offset == 0 || closestOrigin.offset == fields.count - 1 {
+                targetContentOffset -= Constants.sidePadding
+            } else {
+                targetContentOffset -= Constants.sidePeekPadding
+            }
+            
+            print("Target: \(targetContentOffset)")
+            return CGPoint(x: targetContentOffset, y: 0)
+        }
+        
+        return proposedContentOffset
     }
     
     
@@ -55,67 +112,61 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         let widths = fields.map { $0.valueFrameWidth }
         let contentOffset = collectionView.contentOffset.x + Constants.sidePadding
         
-        let fullCellWidth = getCellWidth?() ?? 0
+        
         
         /// array of each cell's shifting offset
         var shiftingOffsets = [CGFloat]()
         
         for index in widths.indices {
-//            let cellOffset = CGFloat(index) * fullCellWidth
+            let fullCellWidth = getFullCellWidth?(index) ?? 0
             
             if cellOffset > contentOffset { /// cell is not yet approached
                 shiftingOffsets.append(0)
             } else {
-
                 let differenceBetweenContentOffsetAndCell = min(fullCellWidth, contentOffset - cellOffset)
                 let percentage = differenceBetweenContentOffsetAndCell / fullCellWidth
                 let shiftingOffset = percentage * (max(0, fullCellWidth - widths[index]))
                 shiftingOffsets.append(shiftingOffset)
             }
-//                let differenceBetweenContentOffsetAndCell = min(fullCellWidth, contentOffset - cellOffset)
-//                let percentage = differenceBetweenContentOffsetAndCell / fullCellWidth
-//                let shiftingOffset = CGFloat(Int(abs(
-//                    percentage * fullCellWidth - widths[index]
-//                )))
-//                shiftingOffsets.append(shiftingOffset)
-
             
-            cellOffset += fullCellWidth
+            var additionalOffset = fullCellWidth
+            if index != widths.indices.last { additionalOffset += Constants.cellSpacing }
+            cellOffset += additionalOffset
         }
         
-        print("offsets: \(shiftingOffsets)")
+//        print("offsets: \(shiftingOffsets)")
         
+        
+        var origins = [CGFloat]()
         cellOffset = Constants.sidePadding
+        
         for index in shiftingOffsets.indices {
-//            print("Cell offset: \(cellOffset)")
-            
-//            if cellOffset > contentOffset { /// cell is not yet approached
-//                shiftingOffsets.append(0)
-//            } else {
-//                let differenceBetweenContentOffsetAndCell = min(fullCellWidth, contentOffset - cellOffset)
-//                let percentage = differenceBetweenContentOffsetAndCell / fullCellWidth
-//                let shiftingOffset = percentage * (max(0, fullCellWidth - widths[index]))
-//                shiftingOffsets.append(shiftingOffset)
-//            }
+            let fullCellWidth = getFullCellWidth?(index) ?? 0
             
             let indexPath = IndexPath(item: index, section: 0)
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
             
             let totalShiftingOffset = shiftingOffsets.dropFirst(index).reduce(0, +)
-//            print("total for \(index): \(totalShiftingOffset)")
             let shiftingOffset = shiftingOffsets[index]
-            print("Cell \(index)'s shifting offset: \(totalShiftingOffset).. total: \(cellOffset + totalShiftingOffset)")
-            attributes.frame = CGRect(x: cellOffset + totalShiftingOffset, y: 0, width: fullCellWidth - shiftingOffset, height: Constants.cellHeight)
+//            print("Cell \(index)'s width: \(fullCellWidth - shiftingOffset), shifting offset: \(totalShiftingOffset).. total: \(cellOffset + totalShiftingOffset)")
+            
+            let origin = cellOffset + totalShiftingOffset
+            origins.append(origin)
+            attributes.frame = CGRect(x: origin, y: 0, width: fullCellWidth - shiftingOffset, height: Constants.cellHeight)
             
             layoutAttributes.append(attributes)
-            cellOffset += fullCellWidth
+            
+            var additionalOffset = fullCellWidth
+            if index != widths.indices.last { additionalOffset += Constants.cellSpacing }
+            cellOffset += additionalOffset
         }
         
         contentSize.height = Constants.cellHeight
         contentSize.width = cellOffset + Constants.sidePadding
         
-        print("Content: \(contentSize)")
+//        print("Content: \(contentSize)")
         self.contentSize = contentSize
+        self.origins = origins
          
     }
     

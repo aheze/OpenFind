@@ -31,9 +31,18 @@ extension SearchViewController: UICollectionViewDataSource {
         return cell
     }
     
-    func widthOfExpandedCell() -> Double {
+    func widthOfExpandedCell(for index: Int) -> Double {
+        
+        var extraPadding = CGFloat(0)
+        if index != 0 {
+            extraPadding += Constants.sidePeekPadding
+        }
+        if index != fields.count - 1 {
+            extraPadding += Constants.sidePeekPadding
+        }
+        
         let fullWidth = searchCollectionView.frame.width
-        return fullWidth - (2 * Constants.sidePadding)
+        return fullWidth - extraPadding
     }
     
     func calculateFrameWidth(text: String) -> CGFloat {
