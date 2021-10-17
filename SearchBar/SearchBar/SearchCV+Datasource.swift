@@ -19,10 +19,8 @@ extension SearchViewController: UICollectionViewDataSource {
         
         
         cell.textChanged = { [weak self] text in
-            
             self?.fields[indexPath.item].value = .string(text)
             self?.fields[indexPath.item].valueFrameWidth = self?.calculateFrameWidth(text: text) ?? 0
-            
         }
         
         let fieldText = field.getText()
@@ -34,38 +32,30 @@ extension SearchViewController: UICollectionViewDataSource {
     func widthOfExpandedCell(for index: Int) -> Double {
         
         var extraPadding = CGFloat(0)
-        
-        //        if index == 0 || index == fields.count - 1 {
-        //            extraPadding += (2 * Constants.sidePadding) /// if edges, add side padding
-        //        } else {
-        //            extraPadding += (2 * Constants.sidePeekPadding) /// if inner cell, add peek padding
-        //        }
-        
-        
+
         if index == 0 {
-            extraPadding += Constants.sidePadding /// if left edge, add side padding
+            extraPadding += Constants.sidePadding /// if **left edge**, add side padding
         } else {
             extraPadding += Constants.sidePeekPadding
         }
+        
         if index == fields.count - 1 {
-            extraPadding += Constants.sidePadding /// if right edge, add side padding
-        }else {
+            extraPadding += Constants.sidePadding /// if **right edge**, add side padding
+        } else {
             extraPadding += Constants.sidePeekPadding
         }
-        
-        //        if index != 0 {
-        //            extraPadding += Constants.sidePeekPadding
-        //        }
-        //        if index != fields.count - 1 {
-        //            extraPadding += Constants.sidePeekPadding
-        //        }
         
         let fullWidth = searchCollectionView.frame.width
         return fullWidth - extraPadding
     }
     
     func calculateFrameWidth(text: String) -> CGFloat {
-        return text.width(withConstrainedHeight: 10, font: Constants.fieldFont) + 30
+        let textWidth = text.width(withConstrainedHeight: 10, font: Constants.fieldFont)
+        let leftPaddingWidth = Constants.fieldBaseViewLeftPadding
+        let rightPaddingWidth = Constants.fieldBaseViewRightPadding
+//        let leftViewWidth = Constants.fieldLeftViewWidth
+//        let rightViewWidth = Constants.fieldRightViewWidth
+        return textWidth + leftPaddingWidth + rightPaddingWidth
     }
 }
 

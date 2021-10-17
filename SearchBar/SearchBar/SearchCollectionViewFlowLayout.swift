@@ -44,31 +44,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-
-        if let fields = getFields?() {
-            
-            let centeredProposedContentOffset = proposedContentOffset.x + ((collectionView?.bounds.width ?? 0) / 2) /// center to the screen
-            
-            /// find closest origin (by comparing middle of screen)
-            /// use `full` since it was calculated already - it's the ideal origin and width
-            let closestOrigin = cellLayouts.enumerated().min(by: {
-                let firstCenter = $0.element.fullOrigin + ($0.element.fullWidth / 2)
-                let secondCenter = $1.element.fullOrigin + ($1.element.fullWidth / 2)
-                return abs(firstCenter - centeredProposedContentOffset) < abs(secondCenter - centeredProposedContentOffset)
-            })!
-            
-            var targetContentOffset = closestOrigin.element.fullOrigin
-            
-            if closestOrigin.offset == 0 || closestOrigin.offset == fields.count - 1 {
-                targetContentOffset -= Constants.sidePadding /// if edges, account for side padding
-            } else {
-                targetContentOffset -= Constants.sidePeekPadding /// if inner cell, ignore side padding, instead account for peek padding
-            }
-            
-            return CGPoint(x: targetContentOffset, y: 0)
-        }
-        
-        return proposedContentOffset
+        print("Proposed: \(proposedContentOffset)")
+        return getTargetOffset(for: proposedContentOffset)
     }
     
     
@@ -161,5 +138,28 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return context
     }
     
+    /// get nearest field, then scroll to it (with padding)
+    func getTargetOffset(for point: CGPoint) -> CGPoint {
+        let centeredProposedContentOffset = point.x + ((collectionView?.bounds.width ?? 0) / 2) /// center to the screen
+        
+        /// find closest origin (by comparing middle of screen)
+        /// use `full` since it was calculated already - it's the ideal origin and width
+        let closestOrigin = cellLayouts.enumerated().min(by: {
+            let firstCenter = $0.element.fullOrigin + ($0.element.fullWidth / 2)
+            let secondCenter = $1.element.fullOrigin + ($1.element.fullWidth / 2)
+            return abs(firstCenter - centeredProposedContentOffset) < abs(secondCenter - centeredProposedContentOffset)
+        })!
+        
+        var targetContentOffset = closestOrigin.element.fullOrigin
+        
+        if closestOrigin.offset == 0 {
+            targetContentOffset -= Constants.sidePadding /// if left edge, account for side padding
+        } else {
+            targetContentOffset -= Constants.sidePeekPadding /// if inner cell, ignore side padding, instead account for peek padding
+        }
+        
+        print("Target: \(targetContentOffset)")
+        return CGPoint(x: targetContentOffset, y: 0)
+    }
     
 }
