@@ -53,9 +53,10 @@ extension SearchViewController: UICollectionViewDataSource {
         let textWidth = text.width(withConstrainedHeight: 10, font: Constants.fieldFont)
         let leftPaddingWidth = Constants.fieldBaseViewLeftPadding
         let rightPaddingWidth = Constants.fieldBaseViewRightPadding
+        let textPadding = 2 * Constants.fieldTextSidePadding
 //        let leftViewWidth = Constants.fieldLeftViewWidth
 //        let rightViewWidth = Constants.fieldRightViewWidth
-        return textWidth + leftPaddingWidth + rightPaddingWidth
+        return textWidth + leftPaddingWidth + rightPaddingWidth + textPadding
     }
 }
 

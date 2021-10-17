@@ -7,11 +7,16 @@
 
 import UIKit
 
-struct FieldCellLayout {
-    var origin = CGFloat(0)
-    var width = CGFloat(0)
-    var fullOrigin = CGFloat(0) /// origin when expanded
-    var fullWidth = CGFloat(0) /// width when expanded
+//struct FieldCellLayout {
+//    var origin = CGFloat(0)
+//    var width = CGFloat(0)
+//    var fullOrigin = CGFloat(0) /// origin when expanded
+//    var fullWidth = CGFloat(0) /// width when expanded
+//    var percentageShrunk = CGFloat(0) /// how much percent shrunk
+//}
+struct FieldOffset {
+    var shift = CGFloat(0)
+    var percentage = CGFloat(0)
 }
 
 class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
@@ -23,11 +28,10 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     var getFields: (() -> [Field])?
     var getFullCellWidth: ((Int) -> CGFloat)?
     
-    var cellLayouts = [FieldCellLayout]()
+    /// store the frame of each item
+    /// plus other properties
+    var layoutAttributes = [FieldLayoutAttributes]()
     
-    var preparedOnce: Bool = false
-    
-    var layoutAttributes = [UICollectionViewLayoutAttributes]() /// store the frame of each item
     var contentSize = CGSize.zero /// the scrollable content size of the collection view
     override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
     
@@ -67,12 +71,12 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         // MARK: Calculate shifting for each cell
         var cellOrigin = Constants.sidePadding /// origin for each cell
-        var shiftingOffsets = [CGFloat]() /// array of each cell's shifting offset
+        var fieldOffsets = [FieldOffset]() /// array of each cell's shifting offset + percentage complete
         for index in widths.indices {
             let fullCellWidth = getFullCellWidth?(index) ?? 0
             
             if cellOrigin > contentOffset { /// cell is not yet approached
-                shiftingOffsets.append(0)
+                fieldOffsets.append(FieldOffset(shift: 0, percentage: 0))
             } else {
                 
                 /// when the fields stop, the content offset **falls short** of the end of the field.
@@ -87,8 +91,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 /// how much difference between the full width and the normal width, won't change.
                 let differenceBetweenWidthAndFullWidth = max(0, fullCellWidth - widths[index])
                 
-                let shiftingOffset = percentage * differenceBetweenWidthAndFullWidth
-                shiftingOffsets.append(shiftingOffset)
+                let fieldOffset = FieldOffset(shift: percentage * differenceBetweenWidthAndFullWidth, percentage: percentage)
+                fieldOffsets.append(fieldOffset)
             }
             
             var additionalOffset = fullCellWidth
@@ -99,22 +103,22 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         // MARK: Apply ALL shifting to the start of the collection view
         var fullOrigin = Constants.sidePadding /// origin for each cell, in expanded mode
-        var cellLayouts = [FieldCellLayout]() /// each cell's positioning
-        for index in shiftingOffsets.indices {
+        var layoutAttributes = [FieldLayoutAttributes]() /// each cell's positioning attributes + additional custom properties
+        for index in fieldOffsets.indices {
             let fullCellWidth = getFullCellWidth?(index) ?? 0
             
-            let indexPath = IndexPath(item: index, section: 0)
-            
-            let totalShiftingOffset = shiftingOffsets.dropFirst(index).reduce(0, +)
-            let shiftingOffset = shiftingOffsets[index]
+            let totalShiftingOffset = fieldOffsets.dropFirst(index).reduce(0, { $0 + $1.shift })
+            let fieldOffset = fieldOffsets[index]
             
             let origin = fullOrigin + totalShiftingOffset
-            let width = fullCellWidth - shiftingOffset
-            let cellLayout = FieldCellLayout(origin: origin, width: width, fullOrigin: fullOrigin, fullWidth: fullCellWidth)
-            cellLayouts.append(cellLayout)
+            let width = fullCellWidth - fieldOffset.shift
             
-            let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+            let indexPath = IndexPath(item: index, section: 0)
+            let attributes = FieldLayoutAttributes(forCellWith: indexPath)
             attributes.frame = CGRect(x: origin, y: 0, width: width, height: Constants.cellHeight)
+            attributes.fullOrigin = fullOrigin
+            attributes.fullWidth = fullCellWidth
+            attributes.percentage = fieldOffset.percentage
             layoutAttributes.append(attributes)
             
             var additionalOffset = fullCellWidth
@@ -126,7 +130,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         contentSize.height = Constants.cellHeight
         
         self.contentSize = contentSize
-        self.cellLayouts = cellLayouts
+        self.layoutAttributes = layoutAttributes
     }
     
     /// boilerplate code
@@ -144,7 +148,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         /// find closest origin (by comparing middle of screen)
         /// use `full` since it was calculated already - it's the ideal origin and width
-        let closestOrigin = cellLayouts.enumerated().min(by: {
+        let closestOrigin = layoutAttributes.enumerated().min(by: {
             let firstCenter = $0.element.fullOrigin + ($0.element.fullWidth / 2)
             let secondCenter = $1.element.fullOrigin + ($1.element.fullWidth / 2)
             return abs(firstCenter - centeredProposedContentOffset) < abs(secondCenter - centeredProposedContentOffset)
@@ -160,6 +164,34 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         print("Target: \(targetContentOffset)")
         return CGPoint(x: targetContentOffset, y: 0)
+    }
+    
+}
+
+open class FieldLayoutAttributes: UICollectionViewLayoutAttributes {
+    
+    var fullOrigin = CGFloat(0) /// origin when expanded
+    var fullWidth = CGFloat(0) /// width when expanded
+    var percentage = CGFloat(0) /// percentage shrunk
+    
+    override open func copy(with zone: NSZone?) -> Any {
+        let copy = super.copy(with: zone) as! FieldLayoutAttributes
+        copy.fullOrigin = fullOrigin
+        copy.fullWidth = fullWidth
+        copy.percentage = percentage
+        
+        return copy
+    }
+    
+    override open func isEqual(_ object: Any?) -> Bool {
+        guard let attributes = object as? FieldLayoutAttributes else { return false }
+        guard
+            attributes.fullOrigin == fullOrigin,
+            attributes.fullWidth == fullWidth,
+            attributes.percentage == percentage
+        else { return false }
+    
+        return super.isEqual(object)
     }
     
 }

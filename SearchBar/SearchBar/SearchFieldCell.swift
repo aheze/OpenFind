@@ -7,28 +7,6 @@
 
 import UIKit
 
-open class FieldLayoutAttributes: UICollectionViewLayoutAttributes {
-    
-    open var transitionProgress: CGFloat = 0.0
-    
-    override open func copy(with zone: NSZone?) -> Any {
-        let copy = super.copy(with: zone) as! FieldLayoutAttributes
-        copy.transitionProgress = transitionProgress
-        
-        return copy
-    }
-    
-    override open func isEqual(_ object: Any?) -> Bool {
-        guard let attributes = object as? FieldLayoutAttributes else { return false }
-        guard
-            attributes.transitionProgress == transitionProgress
-        else { return false }
-    
-        return super.isEqual(object)
-    }
-    
-}
-
 class SearchFieldCell: UICollectionViewCell {
     
     var textChanged: ((String) -> Void)?
@@ -74,11 +52,27 @@ class SearchFieldCell: UICollectionViewCell {
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
 //        print("Applying attributes")
-//        if let attributes = layoutAttributes as? FieldLayoutAttributes {
-//
+        if let attributes = layoutAttributes as? FieldLayoutAttributes {
+
 //            print("caster attributes")
 //            print(frame.width)
-//        }
+            
+            /// how much difference between the full width and the normal width, won't change.
+//            let differenceBetweenWidthAndFullWidth = max(0, attributes.fullWidth - frame.width)
+//            let percentage = 1 - (differenceBetweenWidthAndFullWidth / attributes.fullWidth)
+            print("differnece: \(attributes.percentage)")
+            
+            let percentageVisible = 1 - attributes.percentage
+            
+            leftView.alpha = percentageVisible
+            rightView.alpha = percentageVisible
+            
+            leftViewWidthC.constant = percentageVisible * Constants.fieldLeftViewWidth
+            rightViewWidthC.constant = percentageVisible * Constants.fieldRightViewWidth
+            
+//            print(attributes.percentage * Constants.fieldRightViewWidth)
+//            let shiftingOffset = percentage * differenceBetweenWidthAndFullWidth
+        }
     }
 }
 
