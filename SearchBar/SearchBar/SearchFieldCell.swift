@@ -51,16 +51,8 @@ class SearchFieldCell: UICollectionViewCell {
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
-//        print("Applying attributes")
-        if let attributes = layoutAttributes as? FieldLayoutAttributes {
 
-//            print("caster attributes")
-//            print(frame.width)
-            
-            /// how much difference between the full width and the normal width, won't change.
-//            let differenceBetweenWidthAndFullWidth = max(0, attributes.fullWidth - frame.width)
-//            let percentage = 1 - (differenceBetweenWidthAndFullWidth / attributes.fullWidth)
-            print("differnece: \(attributes.percentage)")
+        if let attributes = layoutAttributes as? FieldLayoutAttributes {
             
             let percentageVisible = 1 - attributes.percentage
             
@@ -70,8 +62,6 @@ class SearchFieldCell: UICollectionViewCell {
             leftViewWidthC.constant = percentageVisible * Constants.fieldLeftViewWidth
             rightViewWidthC.constant = percentageVisible * Constants.fieldRightViewWidth
             
-//            print(attributes.percentage * Constants.fieldRightViewWidth)
-//            let shiftingOffset = percentage * differenceBetweenWidthAndFullWidth
         }
     }
 }

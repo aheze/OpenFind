@@ -56,8 +56,6 @@ public class SearchViewController: UIViewController {
 extension SearchViewController {
     func setupCollectionViews() {
         
-        searchCollectionView.layer.borderColor = UIColor.purple.cgColor
-        searchCollectionView.layer.borderWidth = 3
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self
         searchCollectionView.delaysContentTouches = true /// allow scrolling through text fields

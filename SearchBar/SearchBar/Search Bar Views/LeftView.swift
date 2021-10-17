@@ -32,11 +32,8 @@ class LeftView: UIView {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        imageView.image = UIImage(systemName: "plus")
-        buttonView.tapped = { [weak self] in
-            print("tapped!")
-            self?.tapped?()
-        }
+//        imageView.image = UIImage(systemName: "plus")
+        buttonView.tapped = tapped
     }
 }
 

@@ -53,7 +53,7 @@
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cpm-ST-hyT" customClass="LeftView" customModule="SearchBar" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="0.0" width="80" height="84"/>
-                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="80" id="Frp-uL-tFc"/>
                                                                             </constraints>
@@ -66,7 +66,7 @@
                                                                         </textField>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jR6-5l-yCi" customClass="RightView" customModule="SearchBar" customModuleProvider="target">
                                                                             <rect key="frame" x="168" y="0.0" width="80" height="84"/>
-                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="80" id="crn-hd-lIB"/>
                                                                             </constraints>
@@ -87,7 +87,7 @@
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
-                                                            <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                            <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                             <constraints>
                                                                 <constraint firstItem="HYh-gX-fZg" firstAttribute="top" secondItem="GDx-rQ-2PE" secondAttribute="top" constant="8" id="GfO-65-0zq"/>
                                                                 <constraint firstAttribute="bottom" secondItem="HYh-gX-fZg" secondAttribute="bottom" constant="8" id="cgY-HP-IsA"/>
@@ -159,11 +159,11 @@
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
-        <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
