@@ -86,16 +86,16 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             
 //            let adjustedDifference =  Constants.sidePeekPadding - Constants.sidePadding
             
-//            let sidePadding: CGFloat
+            var sidePadding = CGFloat(0)
             let cellOriginWithoutSidePadding: CGFloat
             if index == 0 {
-//                sidePadding =  -Constants.sidePadding
+                sidePadding =  Constants.sidePeekPadding - Constants.sidePadding - Constants.cellSpacing
                 cellOriginWithoutSidePadding = cellOrigin - Constants.sidePadding
             } else {
 //                sidePadding =  -(Constants.sidePadding + Constants.cellSpacing)
                 cellOriginWithoutSidePadding = cellOrigin - Constants.sidePeekPadding + Constants.cellSpacing
             }
-            sidePadding = Constants.sidePeekPadding - Constants.cellSpacing
+//            sidePadding = Constants.sidePeekPadding - Constants.cellSpacing
             
             if cellOriginWithoutSidePadding > contentOffset { /// cell is not yet approached
                 fieldOffsets.append(FieldOffset(fullWidth: fullCellWidth, shift: 0, percentage: 0))
@@ -104,17 +104,17 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             } else {
 //                fieldOffsets.append(FieldOffset(fullWidth: fullCellWidth, shift: 0, percentage: 0))
                 
+                /// for the **first** field only - the other fields
                 /// when the fields stop, the content offset **falls short** of the end of the field.
                 /// so, must account for that my subtracting some padding
-                let shortenedFullWidth = fullCellWidth
-//                - sidePadding
+                let shortenedFullWidth = fullCellWidth - sidePadding
 
                 /// progress of content offset (positive) through the field, until it hits the field's width (`adjustedFullWidth`)
                 let differenceBetweenContentOffsetAndCell = min(shortenedFullWidth, contentOffset - cellOriginWithoutSidePadding)
                 let percentage = differenceBetweenContentOffsetAndCell / shortenedFullWidth /// fraction
 
-                if index == 2 {
-                    print("ContentOffset: \(contentOffset), cell cellOriginWithoutSidePadding: \(cellOriginWithoutSidePadding)")
+                if index == 1 {
+                    print("fullWidth: \(fullCellWidth), ContentOffset: \(contentOffset), cellOridinWout: \(cellOriginWithoutSidePadding)")
 //                    print("< diff: \(differenceBetweenContentOffsetAndCell), adjusted: \(adjustedFullWidth), original: \(fullCellWidth), percentage: \(percentage)")
                 }
 

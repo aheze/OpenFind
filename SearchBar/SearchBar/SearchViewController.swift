@@ -39,7 +39,7 @@ public class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         fields = [
-            Field(value: .string("1. Hello! This is some text.")),
+            Field(value: .string("1. Hello! This is")),
             Field(value: .string("2. Hi.")),
             Field(value: .string("3. Medium text")),
             Field(value: .string("4. Longer long long long long long text")),
