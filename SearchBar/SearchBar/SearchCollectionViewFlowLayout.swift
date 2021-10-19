@@ -98,6 +98,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 /// but subtract the left side gap (`sidePeekPadding` minus the side padding), which the content offset already travelled through
                 sidePadding = Constants.cellSpacing - (Constants.sidePeekPadding - Constants.sidePadding)
                 cellOriginWithoutSidePadding = cellOrigin - Constants.sidePadding
+            } else if index == widths.count - 1 {
+                sidePadding = Constants.cellSpacing - (Constants.sidePeekPadding - Constants.sidePadding)
+                cellOriginWithoutSidePadding = cellOrigin - Constants.sidePeekPadding
             } else {
                 
                 /// next cell is `fullCellWidth` + **cellSpacing** points away
@@ -118,9 +121,11 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
                 let differenceBetweenWidthAndFullWidth = min(0, fullCellWidth - widths[index])
                 
-                if index == 1 {
-                    print("cOff: \(contentOffsetPlusWidth), origin \(cellOriginWithoutSidePadding)... \(contentOffsetPlusWidth - cellOriginWithoutSidePadding))")
-                    print("Percentage: \(percentage), Full: \(fullCellWidth), norma: \(widths[index])")
+                if index == 5 {
+                    print("\nCell width: \(fullCellWidth), sidePadding: \(sidePadding)... total: \(distanceToNextCell)")
+                    print("cOffOrig: \(contentOffset), with added: \(contentOffsetPlusWidth), origin \(cellOriginWithoutSidePadding)... \(contentOffsetPlusWidth - cellOriginWithoutSidePadding))")
+                    print("Percentage: \(percentage)")
+//                    print("Percentage: \(percentage), Full: \(fullCellWidth), norma: \(widths[index])")
 //                    print("Distance: \(distanceUntilApproached), origin: \(cellOriginWithoutSidePadding), cOff: \(contentOffset), diff: \(differenceBetweenWidthAndFullWidth)")
                 }
 
@@ -178,7 +183,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             layoutAttributes.append(attributes)
             
             var additionalOffset = fieldOffset.fullWidth
-            if fullIndex != widths.indices.last { additionalOffset += Constants.cellSpacing } // fix
+            if fullIndex != widths.indices.last { additionalOffset += Constants.cellSpacing }
             fullOrigin += additionalOffset
         }
         func createRightLayoutAttribute(for fullIndex: Int, offsetIndex: Int, offsetArray: [FieldOffset], fullOrigin: inout CGFloat) {
@@ -200,7 +205,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             layoutAttributes.append(attributes)
             
             var additionalOffset = fieldOffset.fullWidth
-            if fullIndex != widths.indices.last { additionalOffset += Constants.cellSpacing } // fix
+            if fullIndex != widths.indices.last { additionalOffset += Constants.cellSpacing } 
             fullOrigin += additionalOffset
         }
         
