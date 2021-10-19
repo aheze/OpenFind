@@ -60,3 +60,9 @@ class ButtonView: UIButton {
         }
     }
 }
+
+extension CGFloat {
+    var int: Int {
+        return Int(self)
+    }
+}

@@ -41,7 +41,10 @@ public class SearchViewController: UIViewController {
         fields = [
             Field(value: .string("1. Hello! This is")),
             Field(value: .string("2. Hi.")),
-            Field(value: .string("3. Medium text")),
+            Field(value: .string("3.a Medium text")),
+            Field(value: .string("3.b Medium text")),
+            Field(value: .string("3.c Medium text")),
+            Field(value: .string("3.d Medium text")),
             Field(value: .string("4. Longer long long long long long text")),
             Field(value: .string("5. Text")),
             Field(value: .string("6. Some medium text")),
