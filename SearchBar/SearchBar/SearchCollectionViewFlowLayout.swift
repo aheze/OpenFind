@@ -109,30 +109,18 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             }
             
             if cellOriginWithoutSidePadding >= contentOffset { /// cell is not yet approached
-//                rightFieldOffsets.append(FieldOffset(fullWidth: fullCellWidth, shift: 0, percentage: 0))
 
                 let distanceToNextCell = fullCellWidth + sidePadding
-                
                 
                 let contentOffsetPlusWidth = contentOffset + distanceToNextCell
                 let distanceUntilApproached = min(distanceToNextCell, contentOffsetPlusWidth - cellOriginWithoutSidePadding)
                 let percentage = 1 - distanceUntilApproached / distanceToNextCell /// fraction
                 
-
                 let differenceBetweenWidthAndFullWidth = min(0, fullCellWidth - widths[index])
                 
-                if index == 5 {
-                    print("\nCell width: \(fullCellWidth), sidePadding: \(sidePadding)... total: \(distanceToNextCell)")
-                    print("cOffOrig: \(contentOffset), with added: \(contentOffsetPlusWidth), origin \(cellOriginWithoutSidePadding)... \(contentOffsetPlusWidth - cellOriginWithoutSidePadding))")
-                    print("Percentage: \(percentage)")
-//                    print("Percentage: \(percentage), Full: \(fullCellWidth), norma: \(widths[index])")
-//                    print("Distance: \(distanceUntilApproached), origin: \(cellOriginWithoutSidePadding), cOff: \(contentOffset), diff: \(differenceBetweenWidthAndFullWidth)")
-                }
-
                 let fieldOffset = FieldOffset(fullWidth: fullCellWidth, shift: percentage * differenceBetweenWidthAndFullWidth, percentage: percentage)
                 rightFieldOffsets.append(fieldOffset)
             } else {
-//                fieldOffsets.append(FieldOffset(fullWidth: fullCellWidth, shift: 0, percentage: 0))
                 
                 /// how much to drag collection view, until the next field's origin reaches this field's origin
                 /// add `sidePadding` to account for cell spacing
