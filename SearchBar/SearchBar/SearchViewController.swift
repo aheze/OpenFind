@@ -59,9 +59,9 @@ public class SearchViewController: UIViewController {
 extension SearchViewController {
     func setupCollectionViews() {
         
-        searchCollectionView.clipsToBounds = false
-        searchCollectionView.layer.borderWidth = 3
-        searchCollectionView.layer.borderColor = UIColor.purple.cgColor
+//        searchCollectionView.clipsToBounds = false
+//        searchCollectionView.layer.borderWidth = 3
+//        searchCollectionView.layer.borderColor = UIColor.purple.cgColor
         
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self
