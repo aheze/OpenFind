@@ -69,7 +69,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         let widths = fields.map { $0.valueFrameWidth }
         
         let contentOffset = collectionView.contentOffset.x
-//        + Constants.sidePadding
         
         // MARK: Calculate shifting for each cell
         var cellOrigin = Constants.sidePadding /// origin for each cell
@@ -103,13 +102,12 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
                 let distanceToNextCell = fullCellWidth + sidePadding
                 
-                let contentOffsetPlusWidth = contentOffset + distanceToNextCell
-                let distanceUntilApproached = max(0, contentOffsetPlusWidth - cellOriginWithoutSidePadding)
-                let percentage = 1 - (distanceUntilApproached / distanceToNextCell) /// 1 when all the way left, 0 when right
+                let contentOffsetPlusWidth = contentOffset + distanceToNextCell /// is the field's origin (once the field is on the right, waiting)
+                let distanceTravelledLeft = max(0, contentOffsetPlusWidth - cellOriginWithoutSidePadding) /// prevent negatives - when the field is way on the right and not yet waiting
+                let percentage = 1 - (distanceTravelledLeft / distanceToNextCell) /// 0 when all the way left, 1 when right
                 
+                /// how much difference between the full width and the normal width, won't change.
                 let differenceBetweenWidthAndFullWidth = fullCellWidth - widths[index]
-                
-                
                 let shift = percentage * differenceBetweenWidthAndFullWidth
                 let fieldOffset = FieldOffset(fullWidth: fullCellWidth, shift: shift, percentage:  percentage)
                 rightFieldOffsets.append(fieldOffset)
@@ -122,17 +120,15 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
                 /// progress of content offset (positive) through the field, until it reaches the next field (`distanceToNextCell`)
                 /// `min` = prevent progress from getting larger than `distanceToNextCell` (end of the cell)
-                let differenceBetweenContentOffsetAndCell = min(distanceToNextCell, contentOffset - cellOriginWithoutSidePadding)
-                let percentage = differenceBetweenContentOffsetAndCell / distanceToNextCell /// fraction
-
+                let distanceTravelledRight = min(distanceToNextCell, contentOffset - cellOriginWithoutSidePadding)
+                let percentage = distanceTravelledRight / distanceToNextCell /// fraction
 
                 /// how much difference between the full width and the normal width, won't change.
-                let differenceBetweenWidthAndFullWidth = max(0, fullCellWidth - widths[index])
-                
+                let differenceBetweenWidthAndFullWidth = fullCellWidth - widths[index]
                 let shift = percentage * differenceBetweenWidthAndFullWidth
-
                 let fieldOffset = FieldOffset(fullWidth: fullCellWidth, shift: shift, percentage: percentage)
                 leftFieldOffsets.append(fieldOffset)
+                
             }
             
             var additionalOffset = fullCellWidth
@@ -145,13 +141,24 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         var fullOrigin = Constants.sidePadding /// origin for each cell, in expanded mode
         var layoutAttributes = [FieldLayoutAttributes]() /// each cell's positioning attributes + additional custom properties
         
-        func createLayoutAttribute(for fullIndex: Int, offsetIndex: Int, offsetArray: [FieldOffset], fullOrigin: inout CGFloat) {
+        func createLayoutAttribute(for fullIndex: Int, offsetIndex: Int, offsetArray: [FieldOffset], fullOrigin: inout CGFloat, leftSide: Bool) {
             
-            let totalShiftingOffset = offsetArray.dropFirst(offsetIndex).reduce(0, { $0 + $1.shift })
             let fieldOffset = offsetArray[offsetIndex]
             
-            let origin = fullOrigin + totalShiftingOffset
-            let width = fieldOffset.fullWidth - fieldOffset.shift
+            let origin: CGFloat
+            let width: CGFloat
+            
+            if leftSide {
+                let totalShiftingOffset = offsetArray.dropFirst(offsetIndex).reduce(0, { $0 + $1.shift })
+                origin = fullOrigin + totalShiftingOffset
+                width = fieldOffset.fullWidth - fieldOffset.shift
+            } else {
+                /// prefix current index directly, so **only add shift of previous fields** - don't add this current fields shift
+                let totalShiftingOffset = offsetArray.prefix(offsetIndex).reduce(0, { $0 + $1.shift })
+                let offset = (offsetIndex == 0) ? 0 : totalShiftingOffset
+                origin = fullOrigin - offset
+                width = fieldOffset.fullWidth - fieldOffset.shift
+            }
             
             let indexPath = IndexPath(item: fullIndex, section: 0)
             let attributes = FieldLayoutAttributes(forCellWith: indexPath)
@@ -166,40 +173,14 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             fullOrigin += additionalOffset
         }
         
-        func createRightLayoutAttribute(for fullIndex: Int, offsetIndex: Int, offsetArray: [FieldOffset], fullOrigin: inout CGFloat) {
-            
-            let totalShiftingOffset = offsetArray.prefix(offsetIndex).reduce(0, { $0 + $1.shift })
-            let fieldOffset = offsetArray[offsetIndex]
-
-            var offset = CGFloat(0)
-            if offsetIndex != 0 {
-                offset = totalShiftingOffset
-            }
-            
-            let origin = fullOrigin - offset
-            let width = fieldOffset.fullWidth - fieldOffset.shift
-            
-            let indexPath = IndexPath(item: fullIndex, section: 0)
-            let attributes = FieldLayoutAttributes(forCellWith: indexPath)
-            attributes.frame = CGRect(x: origin, y: 0, width: width, height: Constants.cellHeight)
-            attributes.fullOrigin = fullOrigin
-            attributes.fullWidth = fieldOffset.fullWidth
-            attributes.percentage = fieldOffset.percentage
-            layoutAttributes.append(attributes)
-            
-            var additionalOffset = fieldOffset.fullWidth
-            if fullIndex != widths.indices.last { additionalOffset += Constants.cellSpacing } 
-            fullOrigin += additionalOffset
-        }
-        
         var currentCellIndex = 0
         for offsetIndex in leftFieldOffsets.indices {
-            createLayoutAttribute(for: currentCellIndex, offsetIndex: offsetIndex, offsetArray: leftFieldOffsets, fullOrigin: &fullOrigin)
+            createLayoutAttribute(for: currentCellIndex, offsetIndex: offsetIndex, offsetArray: leftFieldOffsets, fullOrigin: &fullOrigin, leftSide: true)
             currentCellIndex += 1
         }
 
         for offsetIndex in rightFieldOffsets.indices {
-            createRightLayoutAttribute(for: currentCellIndex, offsetIndex: offsetIndex, offsetArray: rightFieldOffsets, fullOrigin: &fullOrigin)
+            createLayoutAttribute(for: currentCellIndex, offsetIndex: offsetIndex, offsetArray: rightFieldOffsets, fullOrigin: &fullOrigin, leftSide: false)
             currentCellIndex += 1
         }
         
@@ -239,12 +220,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             targetContentOffset -= Constants.sidePeekPadding /// if inner cell, ignore side padding, instead account for peek padding
         }
         
-//        print("---Going to \(targetContentOffset)")
         return CGPoint(x: targetContentOffset, y: 0)
-//        return .zero
     }
-    
-    
 }
 
 open class FieldLayoutAttributes: UICollectionViewLayoutAttributes {
