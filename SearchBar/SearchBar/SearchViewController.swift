@@ -47,7 +47,7 @@ public class SearchViewController: UIViewController {
 //            Field(value: .string("3.d Medium text")),
             Field(value: .string("4. Longer long long long long long text")),
             Field(value: .string("5. Text")),
-            Field(value: .string("6. Some medium text")),
+            Field(value: .addNew)
         ]
         
         setupCollectionViews()
@@ -68,7 +68,7 @@ extension SearchViewController {
         searchCollectionView.delaysContentTouches = true /// allow scrolling through text fields
         
         for index in fields.indices {
-            fields[index].valueFrameWidth = calculateFrameWidth(text: fields[index].getText())
+            fields[index].fieldHuggingWidth = getFieldHuggingWidth(fieldText: fields[index].getText())
         }
         
         _ = searchCollectionViewFlowLayout

@@ -87,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				3C5F1FF42712596900143BDD /* SearchBar.h */,
+				3C5870C227191FDD00573384 /* Field.swift */,
 				3C5870CD2719282600573384 /* Bridge.swift */,
 				3C66B54B2719E60E0059563B /* Constants.swift */,
 				3C5870B8271916CA00573384 /* SearchBar.storyboard */,
@@ -98,7 +99,6 @@
 				3C5870C027191F8400573384 /* SearchCV+Delegate.swift */,
 				3C5870BC27191D0800573384 /* SearchFieldCell.swift */,
 				3C5870C42719223D00573384 /* Utilities.swift */,
-				3C5870C227191FDD00573384 /* Field.swift */,
 			);
 			path = SearchBar;
 			sourceTree = "<group>";

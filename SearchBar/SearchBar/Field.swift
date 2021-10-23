@@ -15,14 +15,16 @@ struct Field {
     var showingDeleteButton = false
     
     
-    /// width of text label
-    var valueFrameWidth = CGFloat(200)
+    /// width of text label + side views, nothing more
+    var fieldHuggingWidth = CGFloat(200)
     
     
     enum Value {
         case string(String)
         case list(List)
+        case addNew
     }
+    
     
     func getText() -> String {
         switch self.value {
@@ -30,6 +32,8 @@ struct Field {
             return string
         case .list(let list):
             return list.name
+        case .addNew:
+            return "Add Word"
         }
     }
 }

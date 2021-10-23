@@ -24,4 +24,6 @@ struct Constants {
     
     static var fieldLeftViewWidth = CGFloat(40)
     static var fieldRightViewWidth = CGFloat(40)
+    
+    static var addWordFieldSnappingDistance = UIScreen.main.bounds.width - (sidePeekPadding * 2)
 }
