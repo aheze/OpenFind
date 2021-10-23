@@ -59,7 +59,10 @@ extension SearchViewController: UICollectionViewDelegate {
         if searchCollectionViewFlowLayout.showingAddWordField {
             searchCollectionViewFlowLayout.showingAddWordField = false
             
-            self.fields.append(Field(value: .addNew))
+            var newField = Field(value: .addNew)
+            newField.fieldHuggingWidth = getFieldHuggingWidth(fieldText: newField.getText())
+            
+            self.fields.append(newField)
             searchCollectionView.reloadData() /// add the new field
             searchCollectionView.layoutIfNeeded() /// important!
             
@@ -70,10 +73,8 @@ extension SearchViewController: UICollectionViewDelegate {
         }
         
         if searchCollectionViewFlowLayout.reachedEndBeforeAddWordField {
-            print("reached")
             searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = true
         } else {
-            print("no r")
             searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = false
         }
     }
