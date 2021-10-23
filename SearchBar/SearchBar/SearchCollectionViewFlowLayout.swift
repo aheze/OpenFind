@@ -63,7 +63,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         guard let collectionView = collectionView else { return }
         let contentOffset = collectionView.contentOffset.x
         currentOffset = contentOffset
-        print("Preparing for \(contentOffset)")
         
         guard let fields = getFields?() else { return }
         let fieldHuggingWidths = fields.map { $0.fieldHuggingWidth } /// array of each field's minimum size

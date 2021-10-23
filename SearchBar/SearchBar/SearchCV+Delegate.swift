@@ -29,61 +29,53 @@ extension SearchViewController: UICollectionViewDelegate {
                         searchCollectionView.isScrollEnabled = false
                         searchCollectionView.showingAddWordField = true
                         
-                        beginningOffset = searchCollectionViewFlowLayout.currentOffset
-                        
+                        let beginningOffset = searchCollectionViewFlowLayout.currentOffset
                         let adjustedTargetOrigin = searchCollectionViewFlowLayout.getTargetOffset(for: CGPoint(x: addWordOrigin, y: 0)).x
-                        targetOffsetDelta = adjustedTargetOrigin - searchCollectionViewFlowLayout.currentOffset
+                        let targetOffsetDelta = adjustedTargetOrigin - searchCollectionViewFlowLayout.currentOffset
                         
-                        print("---")
-                        searchCollectionView.setContentOffset(CGPoint(x: beginningOffset!, y: 0), animated: false)
+                        searchCollectionView.setContentOffset(CGPoint(x: beginningOffset, y: 0), animated: false)
                         
-                        
-                            self.stopDisplayLink() /// make sure to stop a previous running display link
-                            self.startTime = CACurrentMediaTime() // reset start time
-                            
-                            /// create displayLink and add it to the run-loop
-                            let displayLink = CADisplayLink(target: self, selector: #selector(self.displayLinkDidFire))
-                            displayLink.add(to: .main, forMode: .common)
-                            self.displayLink = displayLink
-                        
-                        
+                        let displayLink = CADisplayLink(target: self, selector: #selector(self.displayLinkDidFire))
+                        searchScrollTimer = ScrollTimer(
+                            displayLink: displayLink,
+                            startTime:  CACurrentMediaTime(),
+                            animationLength: 2,
+                            beginningOffset: beginningOffset,
+                            targetOffsetDelta: targetOffsetDelta
+                        )
+                        displayLink.add(to: .main, forMode: .common)
                         
                     }
                 } else {
                     searchCollectionView.showingAddWordField = false
                 }
-//                print("Diff: \(difference).. scrollView.contentOffset.x: \(scrollView.contentOffset.x)")
             }
         }
-        //        print("Sc: \(scrollView.contentOffset), \(scrollView.contentSize), \(searchCollectionViewFlowLayout.layoutAttributes.last?.fullOrigin)")
-        //        if scrollView.contentOffset
 
     }
     
     @objc func displayLinkDidFire(_ displayLink: CADisplayLink) {
         
-        var elapsedTime = CACurrentMediaTime() - startTime
-        
-        if elapsedTime > animationLength {
-            stopDisplayLink()
-            elapsedTime = animationLength /// clamp the elapsed time to the animation length
-            searchCollectionView.isScrollEnabled = true
+        if let timer = searchScrollTimer {
+            var elapsedTime = CACurrentMediaTime() - timer.startTime
+            
+            if elapsedTime > timer.animationLength {
+                stopDisplayLink()
+                elapsedTime = timer.animationLength /// clamp the elapsed time to the animation length
+                searchCollectionView.isScrollEnabled = true
+            }
+            
+            let progress = elapsedTime / timer.animationLength
+            let offset = timer.beginningOffset + (timer.targetOffsetDelta * progress)
+            searchCollectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: false)
         }
-        
-        let progress = elapsedTime / animationLength
-//        print("Progress: \(progress)")
-//        print("B: \(beginningOffset)")
-//        print("T: \(targetOffsetDelta)")
-        let offset = (beginningOffset ?? 0) + ((targetOffsetDelta ?? 0) * progress)
-//        print("O: \(offset)")
-        searchCollectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: false)
         
         /// do your animation logic here
     }
     
     /// invalidate display link if it's non-nil, then set to nil
     func stopDisplayLink() {
-        displayLink?.invalidate()
-        displayLink = nil
+        searchScrollTimer?.displayLink.invalidate()
+        searchScrollTimer = nil
     }
 }
