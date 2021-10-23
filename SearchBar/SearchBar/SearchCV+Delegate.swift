@@ -17,6 +17,11 @@ extension SearchViewController: UICollectionViewDelegate {
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.isTracking {
+            if searchCollectionViewFlowLayout.reachedEndBeforeAddWordField {
+                searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = true
+            } else {
+                searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = false
+            }
             checkToAddField(contentOffset: scrollView.contentOffset)
         }
     }
@@ -35,7 +40,6 @@ extension SearchViewController: UICollectionViewDelegate {
             if difference < Constants.addWordFieldSnappingDistance + padding {
                 /// don't keep on calling below code
                 if !searchCollectionViewFlowLayout.showingAddWordField {
-                    
                     searchCollectionViewFlowLayout.showingAddWordField = true
                     let generator = UIImpactFeedbackGenerator(style: .light)
                     generator.impactOccurred()
@@ -63,6 +67,14 @@ extension SearchViewController: UICollectionViewDelegate {
                 let targetOrigin = self.searchCollectionViewFlowLayout.getTargetOffset(for: CGPoint(x: origin, y: 0))
                 self.searchCollectionView.setContentOffset(targetOrigin, animated: false) /// go to that offset instantly
             }
+        }
+        
+        if searchCollectionViewFlowLayout.reachedEndBeforeAddWordField {
+            print("reached")
+            searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = true
+        } else {
+            print("no r")
+            searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = false
         }
     }
     

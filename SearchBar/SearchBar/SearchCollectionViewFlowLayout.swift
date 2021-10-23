@@ -34,13 +34,21 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     /// plus other properties
     var layoutAttributes = [FieldLayoutAttributes]()
     
-    var contentSize = CGSize.zero /// the scrollable content size of the collection view
-    var contentSizeWithoutAddNew = CGSize.zero
+    /// collection view is about to reach the end (auto-scrolling) or has reached the end
+    var reachedEndBeforeAddWordField = false
+    
+    /// call this from the scroll view delegate when
+    /// 1. finger is down
+    /// 2. `reachedEnd` is true
+    var shouldUseOffsetWithAddNew = false
+
+    /// actual content offset used by `prepare`
     var currentOffset = CGFloat(0)
     
     /// showing (past the point where it will auto-scroll) the last field or not
     var showingAddWordField = false
-    
+   
+    var contentSize = CGSize.zero /// the scrollable content size of the collection view
     override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
     
     /// pass attributes to the collection view flow layout
@@ -196,7 +204,13 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             currentCellIndex += 1
         }
         
-        self.contentSize = CGSize(width: fullOriginWithoutAddNew + Constants.sidePadding, height: Constants.cellHeight)
+        /// set from scrollview delegate
+        if shouldUseOffsetWithAddNew {
+            self.contentSize = CGSize(width: fullOrigin + Constants.sidePadding, height: Constants.cellHeight)
+        } else {
+            self.contentSize = CGSize(width: fullOriginWithoutAddNew + Constants.sidePadding, height: Constants.cellHeight)
+        }
+        
         self.layoutAttributes = layoutAttributes
     }
     
@@ -212,10 +226,13 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     /// get nearest field, then scroll to it (with padding)
     func getTargetOffset(for point: CGPoint) -> CGPoint {
         
+        /// handle end, but not actually swiped
+        
         if
             showingAddWordField,
             let addWordFieldOrigin = layoutAttributes.last?.fullOrigin
         {
+            reachedEndBeforeAddWordField = true
             let targetContentOffset = addWordFieldOrigin - Constants.sidePeekPadding
             return CGPoint(x: targetContentOffset, y: 0)
         } else {
@@ -224,7 +241,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             
             /// find closest origin (by comparing middle of screen)
             /// use `full` since it was calculated already - it's the ideal origin and width
-            let closestOrigin = layoutAttributes.enumerated().min(by: {
+            /// dropLast to prevent focusing on `addNew` field
+            let closestOrigin = layoutAttributes.dropLast().enumerated().min(by: {
                 let firstCenter = $0.element.fullOrigin + ($0.element.fullWidth / 2)
                 let secondCenter = $1.element.fullOrigin + ($1.element.fullWidth / 2)
                 return abs(firstCenter - centeredProposedContentOffset) < abs(secondCenter - centeredProposedContentOffset)
@@ -236,6 +254,12 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 targetContentOffset -= Constants.sidePadding /// if left edge, account for side padding
             } else {
                 targetContentOffset -= Constants.sidePeekPadding /// if inner cell, ignore side padding, instead account for peek padding
+            }
+            
+            if closestOrigin.offset == layoutAttributes.count - 2 { /// last field before "add new" field
+                reachedEndBeforeAddWordField = true
+            } else {
+                reachedEndBeforeAddWordField = false
             }
             
             return CGPoint(x: targetContentOffset, y: 0)
