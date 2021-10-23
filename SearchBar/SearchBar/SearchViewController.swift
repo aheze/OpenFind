@@ -16,17 +16,16 @@ public class SearchViewController: UIViewController {
         flowLayout.scrollDirection = .horizontal
         flowLayout.getFullCellWidth = { [weak self] index in
             return self?.widthOfExpandedCell(for: index) ?? 300
-//            return 300
         }
         flowLayout.getFields = { [weak self] in
             return self?.fields ?? [Field]()
         }
+        
         searchCollectionView.setCollectionViewLayout(flowLayout, animated: false)
         return flowLayout
     }()
     
     
-    var searchScrollTimer: ScrollTimer?
     
     /// base view for everything
     @IBOutlet weak var baseView: UIView!

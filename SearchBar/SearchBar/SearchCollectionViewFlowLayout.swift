@@ -26,6 +26,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         super.init()
     }
     
+    /// get data
     var getFields: (() -> [Field])?
     var getFullCellWidth: ((Int) -> CGFloat)?
     
@@ -36,6 +37,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     var contentSize = CGSize.zero /// the scrollable content size of the collection view
     var currentOffset = CGFloat(0)
     
+    /// showing (past the point where it will auto-scroll) the last field or not
+    var showingAddWordField = false
     
     override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
     
@@ -48,7 +51,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         /// edge cells don't shrink, but the animation is perfect
         return layoutAttributes.filter { rect.intersects($0.frame) } /// try deleting this line
-        
     }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
@@ -60,9 +62,12 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func prepare() { /// configure the cells' frames
         super.prepare()
         
+        
+        
         guard let collectionView = collectionView else { return }
         let contentOffset = collectionView.contentOffset.x
         currentOffset = contentOffset
+        
         
         guard let fields = getFields?() else { return }
         let fieldHuggingWidths = fields.map { $0.fieldHuggingWidth } /// array of each field's minimum size
@@ -199,52 +204,36 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     /// get nearest field, then scroll to it (with padding)
     func getTargetOffset(for point: CGPoint) -> CGPoint {
-        let centeredProposedContentOffset = point.x + ((collectionView?.bounds.width ?? 0) / 2) /// center to the screen
         
-        /// find closest origin (by comparing middle of screen)
-        /// use `full` since it was calculated already - it's the ideal origin and width
-        let closestOrigin = layoutAttributes.enumerated().min(by: {
-            let firstCenter = $0.element.fullOrigin + ($0.element.fullWidth / 2)
-            let secondCenter = $1.element.fullOrigin + ($1.element.fullWidth / 2)
-            return abs(firstCenter - centeredProposedContentOffset) < abs(secondCenter - centeredProposedContentOffset)
-        })!
-        
-        var targetContentOffset = closestOrigin.element.fullOrigin
-        
-        if closestOrigin.offset == 0 {
-            targetContentOffset -= Constants.sidePadding /// if left edge, account for side padding
+        if
+            showingAddWordField,
+            let addWordFieldOrigin = layoutAttributes.last?.fullOrigin
+        {
+            let targetContentOffset = addWordFieldOrigin - Constants.sidePeekPadding
+            return CGPoint(x: targetContentOffset, y: 0)
         } else {
-            targetContentOffset -= Constants.sidePeekPadding /// if inner cell, ignore side padding, instead account for peek padding
+            
+            let centeredProposedContentOffset = point.x + ((collectionView?.bounds.width ?? 0) / 2) /// center to the screen
+            
+            /// find closest origin (by comparing middle of screen)
+            /// use `full` since it was calculated already - it's the ideal origin and width
+            let closestOrigin = layoutAttributes.enumerated().min(by: {
+                let firstCenter = $0.element.fullOrigin + ($0.element.fullWidth / 2)
+                let secondCenter = $1.element.fullOrigin + ($1.element.fullWidth / 2)
+                return abs(firstCenter - centeredProposedContentOffset) < abs(secondCenter - centeredProposedContentOffset)
+            })!
+            
+            var targetContentOffset = closestOrigin.element.fullOrigin
+            
+            if closestOrigin.offset == 0 { /// index 0
+                targetContentOffset -= Constants.sidePadding /// if left edge, account for side padding
+            } else {
+                targetContentOffset -= Constants.sidePeekPadding /// if inner cell, ignore side padding, instead account for peek padding
+            }
+            
+            return CGPoint(x: targetContentOffset, y: 0)
         }
-        
-        return CGPoint(x: targetContentOffset, y: 0)
     }
 }
 
-open class FieldLayoutAttributes: UICollectionViewLayoutAttributes {
-    
-    var fullOrigin = CGFloat(0) /// origin when expanded
-    var fullWidth = CGFloat(0) /// width when expanded
-    var percentage = CGFloat(0) /// percentage shrunk
-    
-    override open func copy(with zone: NSZone?) -> Any {
-        let copy = super.copy(with: zone) as! FieldLayoutAttributes
-        copy.fullOrigin = fullOrigin
-        copy.fullWidth = fullWidth
-        copy.percentage = percentage
-        
-        return copy
-    }
-    
-    override open func isEqual(_ object: Any?) -> Bool {
-        guard let attributes = object as? FieldLayoutAttributes else { return false }
-        guard
-            attributes.fullOrigin == fullOrigin,
-            attributes.fullWidth == fullWidth,
-            attributes.percentage == percentage
-        else { return false }
-    
-        return super.isEqual(object)
-    }
-    
-}
+

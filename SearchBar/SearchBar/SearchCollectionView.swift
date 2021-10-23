@@ -9,8 +9,8 @@ import UIKit
 
 
 class SearchCollectionView: UICollectionView {
-    var showingAddWordField = false
+//    var showingAddWordField = false
     override func scrollRectToVisible(_ rect: CGRect, animated: Bool) {
-        super.scrollRectToVisible(rect, animated: animated)
+//        super.scrollRectToVisible(rect, animated: animated)
     }
 }
