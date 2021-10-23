@@ -35,6 +35,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     var layoutAttributes = [FieldLayoutAttributes]()
     
     var contentSize = CGSize.zero /// the scrollable content size of the collection view
+    var contentSizeWithoutAddNew = CGSize.zero
     var currentOffset = CGFloat(0)
     
     /// showing (past the point where it will auto-scroll) the last field or not
@@ -143,6 +144,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         // MARK: Apply ALL shifting to the start of the collection view
         var fullOrigin = Constants.sidePadding /// origin for each cell, in expanded mode
+        var fullOriginWithoutAddNew = Constants.sidePadding
         var layoutAttributes = [FieldLayoutAttributes]() /// each cell's positioning attributes + additional custom properties
         
         func createLayoutAttribute(for fullIndex: Int, offsetIndex: Int, offsetArray: [FieldOffset], fullOrigin: inout CGFloat, leftSide: Bool) {
@@ -175,6 +177,12 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             var additionalOffset = fieldOffset.fullWidth
             if fullIndex != fieldHuggingWidths.indices.last { additionalOffset += Constants.cellSpacing }
             fullOrigin += additionalOffset
+            
+            if fullIndex != fieldHuggingWidths.indices.last {
+                var additionalOffset = fieldOffset.fullWidth
+                if fullIndex != fieldHuggingWidths.count - 2 { additionalOffset += Constants.cellSpacing } /// don't add cell spacing for last non-AddNew field
+                fullOriginWithoutAddNew += additionalOffset
+            }
         }
         
         var currentCellIndex = 0
@@ -188,8 +196,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             currentCellIndex += 1
         }
         
-        
-        self.contentSize = CGSize(width: fullOrigin + Constants.sidePadding, height: Constants.cellHeight)
+        self.contentSize = CGSize(width: fullOriginWithoutAddNew + Constants.sidePadding, height: Constants.cellHeight)
         self.layoutAttributes = layoutAttributes
     }
     
