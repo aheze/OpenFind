@@ -34,6 +34,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     var layoutAttributes = [FieldLayoutAttributes]()
     
     var contentSize = CGSize.zero /// the scrollable content size of the collection view
+    var currentOffset = CGFloat(0)
+    
+    
     override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
     
     /// pass attributes to the collection view flow layout
@@ -59,6 +62,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         guard let collectionView = collectionView else { return }
         let contentOffset = collectionView.contentOffset.x
+        currentOffset = contentOffset
+        print("Preparing for \(contentOffset)")
         
         guard let fields = getFields?() else { return }
         let fieldHuggingWidths = fields.map { $0.fieldHuggingWidth } /// array of each field's minimum size

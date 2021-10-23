@@ -25,6 +25,14 @@ public class SearchViewController: UIViewController {
         return flowLayout
     }()
     
+    /// for collection view
+    var displayLink: CADisplayLink?
+    var startTime = 0.0
+    let animationLength = 1.0
+    var beginningOffset: CGFloat?
+    var targetOffsetDelta: CGFloat?
+    
+    
     /// base view for everything
     @IBOutlet weak var baseView: UIView!
     
