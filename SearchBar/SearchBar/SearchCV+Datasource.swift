@@ -43,7 +43,7 @@ extension SearchViewController: UICollectionViewDataSource {
             extraPadding += Constants.sidePeekPadding
         }
         
-        if index == fields.count - 1 || index == fields.count {
+        if index == fields.count - 2 || index == fields.count - 1 {
             extraPadding += Constants.sidePadding /// if **right edge**, add side padding
         } else {
             extraPadding += Constants.sidePeekPadding

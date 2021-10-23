@@ -58,26 +58,18 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         super.prepare()
         
         guard let collectionView = collectionView else { return }
-        
-        layoutAttributes = []
-        
-        var contentSize = CGSize.zero
-        
+        let contentOffset = collectionView.contentOffset.x
         
         guard let fields = getFields?() else { return }
-
-        let widths = fields.map { $0.valueFrameWidth }
-        
-        let contentOffset = collectionView.contentOffset.x
+        let fieldHuggingWidths = fields.map { $0.fieldHuggingWidth } /// array of each field's minimum size
         
         // MARK: Calculate shifting for each cell
         var cellOrigin = Constants.sidePadding /// origin for each cell
         
         var leftFieldOffsets = [FieldOffset]() /// array of each cell's shifting offset + percentage complete
         var rightFieldOffsets = [FieldOffset]() /// same, for fields after the focused one
-        
-        
-        for index in widths.indices {
+
+        for index in fieldHuggingWidths.indices {
             let fullCellWidth = getFullCellWidth?(index) ?? 0
             
             var sidePadding = CGFloat(0)
@@ -88,7 +80,11 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 /// but subtract the left side gap (`sidePeekPadding` minus the side padding), which the content offset already travelled through
                 sidePadding = Constants.cellSpacing - (Constants.sidePeekPadding - Constants.sidePadding)
                 cellOriginWithoutSidePadding = cellOrigin - Constants.sidePadding
-            } else if index == widths.count - 1 {
+            } else if index == fieldHuggingWidths.count - 2 {
+                sidePadding = Constants.cellSpacing - (Constants.sidePeekPadding - Constants.sidePadding)
+                cellOriginWithoutSidePadding = cellOrigin - Constants.sidePeekPadding
+                
+            } else if index == fieldHuggingWidths.indices.last { /// add new field cell
                 sidePadding = Constants.cellSpacing - (Constants.sidePeekPadding - Constants.sidePadding)
                 cellOriginWithoutSidePadding = cellOrigin - Constants.sidePeekPadding
             } else {
@@ -107,7 +103,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 let percentage = 1 - (distanceTravelledLeft / distanceToNextCell) /// 0 when all the way left, 1 when right
                 
                 /// how much difference between the full width and the normal width, won't change.
-                let differenceBetweenWidthAndFullWidth = fullCellWidth - widths[index]
+                let differenceBetweenWidthAndFullWidth = fullCellWidth - fieldHuggingWidths[index]
                 let shift = percentage * differenceBetweenWidthAndFullWidth
                 let fieldOffset = FieldOffset(fullWidth: fullCellWidth, shift: shift, percentage:  percentage)
                 rightFieldOffsets.append(fieldOffset)
@@ -124,7 +120,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 let percentage = distanceTravelledRight / distanceToNextCell /// fraction
 
                 /// how much difference between the full width and the normal width, won't change.
-                let differenceBetweenWidthAndFullWidth = fullCellWidth - widths[index]
+                let differenceBetweenWidthAndFullWidth = fullCellWidth - fieldHuggingWidths[index]
                 let shift = percentage * differenceBetweenWidthAndFullWidth
                 let fieldOffset = FieldOffset(fullWidth: fullCellWidth, shift: shift, percentage: percentage)
                 leftFieldOffsets.append(fieldOffset)
@@ -132,10 +128,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             }
             
             var additionalOffset = fullCellWidth
-            if index != widths.indices.last { additionalOffset += Constants.cellSpacing }
+            if index != fieldHuggingWidths.indices.last { additionalOffset += Constants.cellSpacing } /// don't add spacing for last cell
             cellOrigin += additionalOffset
         }
-        
         
         // MARK: Apply ALL shifting to the start of the collection view
         var fullOrigin = Constants.sidePadding /// origin for each cell, in expanded mode
@@ -169,7 +164,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             layoutAttributes.append(attributes)
             
             var additionalOffset = fieldOffset.fullWidth
-            if fullIndex != widths.indices.last { additionalOffset += Constants.cellSpacing }
+            if fullIndex != fieldHuggingWidths.indices.last { additionalOffset += Constants.cellSpacing }
             fullOrigin += additionalOffset
         }
         
@@ -184,10 +179,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             currentCellIndex += 1
         }
         
-        contentSize.width = fullOrigin + Constants.sidePadding
-        contentSize.height = Constants.cellHeight
         
-        self.contentSize = contentSize
+        self.contentSize = CGSize(width: fullOrigin + Constants.sidePadding, height: Constants.cellHeight)
         self.layoutAttributes = layoutAttributes
     }
     
