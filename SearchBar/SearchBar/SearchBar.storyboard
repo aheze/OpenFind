@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -40,76 +39,7 @@
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
-                                                <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="baK-Sm-q0W" customClass="SearchFieldCell" customModule="SearchBar" customModuleProvider="target">
-                                                        <rect key="frame" x="71" y="0.0" width="272" height="100"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="GDx-rQ-2PE">
-                                                            <rect key="frame" x="0.0" y="0.0" width="272" height="100"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HYh-gX-fZg">
-                                                                    <rect key="frame" x="12" y="8" width="248" height="84"/>
-                                                                    <subviews>
-                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cpm-ST-hyT" customClass="LeftView" customModule="SearchBar" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="84"/>
-                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="80" id="Frp-uL-tFc"/>
-                                                                            </constraints>
-                                                                        </view>
-                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hAy-QC-IPJ">
-                                                                            <rect key="frame" x="80" y="0.0" width="88" height="84"/>
-                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                            <textInputTraits key="textInputTraits"/>
-                                                                        </textField>
-                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jR6-5l-yCi" customClass="RightView" customModule="SearchBar" customModuleProvider="target">
-                                                                            <rect key="frame" x="168" y="0.0" width="80" height="84"/>
-                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="80" id="crn-hd-lIB"/>
-                                                                            </constraints>
-                                                                        </view>
-                                                                    </subviews>
-                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <constraints>
-                                                                        <constraint firstItem="Cpm-ST-hyT" firstAttribute="leading" secondItem="HYh-gX-fZg" secondAttribute="leading" id="7eq-cn-5UN"/>
-                                                                        <constraint firstItem="hAy-QC-IPJ" firstAttribute="top" secondItem="HYh-gX-fZg" secondAttribute="top" id="AGH-eO-9RB"/>
-                                                                        <constraint firstItem="hAy-QC-IPJ" firstAttribute="leading" secondItem="Cpm-ST-hyT" secondAttribute="trailing" id="CPf-X6-252"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="jR6-5l-yCi" secondAttribute="bottom" id="D91-2h-6fc"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="Cpm-ST-hyT" secondAttribute="bottom" id="LVW-tK-q9n"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="jR6-5l-yCi" secondAttribute="trailing" id="RNK-Oj-UIb"/>
-                                                                        <constraint firstItem="Cpm-ST-hyT" firstAttribute="top" secondItem="HYh-gX-fZg" secondAttribute="top" id="Vvf-Zt-czD"/>
-                                                                        <constraint firstItem="jR6-5l-yCi" firstAttribute="top" secondItem="HYh-gX-fZg" secondAttribute="top" id="qAQ-HS-RYa"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="hAy-QC-IPJ" secondAttribute="bottom" id="qu6-LD-yMh"/>
-                                                                        <constraint firstItem="jR6-5l-yCi" firstAttribute="leading" secondItem="hAy-QC-IPJ" secondAttribute="trailing" id="wTR-nP-LoG"/>
-                                                                    </constraints>
-                                                                </view>
-                                                            </subviews>
-                                                            <color key="backgroundColor" systemColor="systemGrayColor"/>
-                                                            <constraints>
-                                                                <constraint firstItem="HYh-gX-fZg" firstAttribute="top" secondItem="GDx-rQ-2PE" secondAttribute="top" constant="8" id="GfO-65-0zq"/>
-                                                                <constraint firstAttribute="bottom" secondItem="HYh-gX-fZg" secondAttribute="bottom" constant="8" id="cgY-HP-IsA"/>
-                                                                <constraint firstItem="HYh-gX-fZg" firstAttribute="leading" secondItem="GDx-rQ-2PE" secondAttribute="leading" constant="12" id="gwk-UK-EpY"/>
-                                                                <constraint firstAttribute="trailing" secondItem="HYh-gX-fZg" secondAttribute="trailing" constant="12" id="irC-sD-mfS"/>
-                                                            </constraints>
-                                                        </collectionViewCellContentView>
-                                                        <size key="customSize" width="272" height="100"/>
-                                                        <connections>
-                                                            <outlet property="baseView" destination="HYh-gX-fZg" id="W8P-bA-PHI"/>
-                                                            <outlet property="baseViewBottomC" destination="gwk-UK-EpY" id="Ung-xi-Hhe"/>
-                                                            <outlet property="baseViewLeftC" destination="gwk-UK-EpY" id="2Vx-ZF-NBS"/>
-                                                            <outlet property="baseViewRightC" destination="irC-sD-mfS" id="Mkx-ra-pU3"/>
-                                                            <outlet property="baseViewTopC" destination="GfO-65-0zq" id="MMT-dz-T2e"/>
-                                                            <outlet property="leftView" destination="Cpm-ST-hyT" id="cE1-1N-ehF"/>
-                                                            <outlet property="leftViewWidthC" destination="Frp-uL-tFc" id="8LP-Rd-nWX"/>
-                                                            <outlet property="rightView" destination="jR6-5l-yCi" id="o9G-ya-Yen"/>
-                                                            <outlet property="rightViewWidthC" destination="crn-hd-lIB" id="f54-eH-iQ3"/>
-                                                            <outlet property="textField" destination="hAy-QC-IPJ" id="yui-yb-nA4"/>
-                                                        </connections>
-                                                    </collectionViewCell>
-                                                </cells>
+                                                <cells/>
                                             </collectionView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -158,9 +88,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

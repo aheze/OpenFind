@@ -11,7 +11,8 @@ class SearchFieldCell: UICollectionViewCell {
     
     var textChanged: ((String) -> Void)?
     
-    /// container view
+    
+    /// main content, constraints applied
     @IBOutlet weak var baseView: UIView!
     
     @IBOutlet weak var leftView: LeftView!

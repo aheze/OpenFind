@@ -24,7 +24,7 @@ extension SearchViewController: UICollectionViewDelegate {
     
     func shouldHighlight(_ shouldHighlight: Bool) {
         if shouldHighlight {
-            let generator = UIImpactFeedbackGenerator(style: .light)
+            let generator = UIImpactFeedbackGenerator(style: .medium)
             generator.impactOccurred()
             
             let indexPath = IndexPath(item: fields.count - 1, section: 0)
@@ -34,7 +34,7 @@ extension SearchViewController: UICollectionViewDelegate {
                 }
             }
         } else {
-            let generator = UIImpactFeedbackGenerator(style: .light)
+            let generator = UIImpactFeedbackGenerator(style: .medium)
             generator.impactOccurred()
             
             let indexPath = IndexPath(item: fields.count - 1, section: 0)

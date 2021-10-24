@@ -24,6 +24,7 @@
 		3C5F1FF52712596900143BDD /* SearchBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C5F1FF42712596900143BDD /* SearchBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C66B54C2719E60E0059563B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C66B54B2719E60E0059563B /* Constants.swift */; };
 		3CF7858A27251BD2005C8143 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CF7858927251BD2005C8143 /* Assets.xcassets */; };
+		3CF7858C2725DB30005C8143 /* SearchFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF7858B2725DB30005C8143 /* SearchFieldCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		3C5F1FF42712596900143BDD /* SearchBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchBar.h; sourceTree = "<group>"; };
 		3C66B54B2719E60E0059563B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3CF7858927251BD2005C8143 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3CF7858B2725DB30005C8143 /* SearchFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchFieldCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,8 @@
 		3C58B5E7271BB86E00684211 /* Search Bar Views */ = {
 			isa = PBXGroup;
 			children = (
+				3CF7858B2725DB30005C8143 /* SearchFieldCell.xib */,
+				3C5870BC27191D0800573384 /* SearchFieldCell.swift */,
 				3C58B5E1271BB85B00684211 /* LeftView.xib */,
 				3C58B5E5271BB86800684211 /* LeftView.swift */,
 				3C58B5E3271BB86300684211 /* RightView.xib */,
@@ -92,7 +96,6 @@
 				3C5870C227191FDD00573384 /* Field.swift */,
 				3C5870CD2719282600573384 /* Bridge.swift */,
 				3C66B54B2719E60E0059563B /* Constants.swift */,
-				3C5870BC27191D0800573384 /* SearchFieldCell.swift */,
 				3C5870B8271916CA00573384 /* SearchBar.storyboard */,
 				3C58B5E7271BB86E00684211 /* Search Bar Views */,
 				3C5870BA27191AC800573384 /* SearchViewController.swift */,
@@ -177,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C58B5E4271BB86300684211 /* RightView.xib in Resources */,
+				3CF7858C2725DB30005C8143 /* SearchFieldCell.xib in Resources */,
 				3C5870B9271916CA00573384 /* SearchBar.storyboard in Resources */,
 				3CF7858A27251BD2005C8143 /* Assets.xcassets in Resources */,
 				3C58B5E2271BB85B00684211 /* LeftView.xib in Resources */,

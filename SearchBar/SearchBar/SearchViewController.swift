@@ -76,6 +76,11 @@ extension SearchViewController {
         searchCollectionView.dataSource = self
         searchCollectionView.delaysContentTouches = true /// allow scrolling through text fields
         
+        let bundle = Bundle(identifier: "com.aheze.SearchBar")
+        let nib = UINib(nibName: "SearchFieldCell", bundle: bundle)
+        searchCollectionView.register(nib, forCellWithReuseIdentifier: "Cell")
+        
+        
         for index in fields.indices {
             fields[index].fieldHuggingWidth = getFieldHuggingWidth(fieldText: fields[index].getText())
         }
