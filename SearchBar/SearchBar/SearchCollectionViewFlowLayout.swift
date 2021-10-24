@@ -22,6 +22,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         super.init()
     }
     
+    /// prepared before?
+    var preparedOnce = false
+    
     /// get data
     var getFields: (() -> [Field])?
     var getFullCellWidth: ((Int) -> CGFloat)?
@@ -69,9 +72,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     /// make the layout (strip vs list) here
     override func prepare() { /// configure the cells' frames
         super.prepare()
-        
-        
-        
+
         guard let collectionView = collectionView else { return }
         let contentOffset = collectionView.contentOffset.x
         currentOffset = contentOffset
@@ -102,7 +103,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 cellOriginWithoutSidePadding = cellOrigin - Constants.sidePeekPadding
                 
             } else if index == fieldHuggingWidths.indices.last { /// add new field cell
-//                sidePadding = Constants.cellSpacing - (Constants.sidePeekPadding - Constants.sidePadding)
                 cellOriginWithoutSidePadding = cellOrigin - Constants.sidePeekPadding
             } else {
                 
@@ -238,6 +238,12 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         }
         
         self.layoutAttributes = layoutAttributes
+        
+        if !preparedOnce {
+            preparedOnce = true
+            
+            _ = getTargetOffset(for: CGPoint(x: contentOffset, y: 0))
+        }
     }
     
     /// boilerplate code
@@ -252,9 +258,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     /// get nearest field, then scroll to it (with padding)
     func getTargetOffset(for point: CGPoint) -> CGPoint {
         
-        /// handle end, but not actually swiped
-        
-        if
+        if  /// handle end, but not actually swiped
             showingAddWordField,
             let addWordFieldOrigin = layoutAttributes.last?.fullOrigin
         {
@@ -268,11 +272,13 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             /// find closest origin (by comparing middle of screen)
             /// use `full` since it was calculated already - it's the ideal origin and width
             /// dropLast to prevent focusing on `addNew` field
-            let closestOrigin = layoutAttributes.dropLast().enumerated().min(by: {
+            guard let closestOrigin = layoutAttributes.dropLast().enumerated().min(by: {
                 let firstCenter = $0.element.fullOrigin + ($0.element.fullWidth / 2)
                 let secondCenter = $1.element.fullOrigin + ($1.element.fullWidth / 2)
                 return abs(firstCenter - centeredProposedContentOffset) < abs(secondCenter - centeredProposedContentOffset)
-            })!
+            }) else { /// `layoutAttributes` is empty
+                return point
+            }
             
             var targetContentOffset = closestOrigin.element.fullOrigin
             

@@ -44,13 +44,13 @@ public class SearchViewController: UIViewController {
         
         fields = [
             Field(value: .string("1. Hello! This is")),
-            Field(value: .string("2. Hi.")),
-            Field(value: .string("3.a Medium text")),
+//            Field(value: .string("2. Hi.")),
+//            Field(value: .string("3.a Medium text")),
 //            Field(value: .string("3.b Medium text")),
 //            Field(value: .string("3.c Medium text")),
 //            Field(value: .string("3.d Medium text")),
-            Field(value: .string("4. Longer long long long long long text")),
-            Field(value: .string("5. Text")),
+//            Field(value: .string("4. Longer long long long long long text")),
+//            Field(value: .string("5. Text")),
             Field(value: .addNew)
         ]
         
@@ -66,6 +66,9 @@ extension SearchViewController {
 //        searchCollectionView.layer.borderWidth = 3
 //        searchCollectionView.layer.borderColor = UIColor.purple.cgColor
         
+        /// actually important, when there's only 1 search bar
+        searchCollectionView.alwaysBounceHorizontal = true
+        
         searchCollectionView.decelerationRate = .fast
         searchCollectionView.showsHorizontalScrollIndicator = false
         
@@ -78,6 +81,8 @@ extension SearchViewController {
         }
         
         _ = searchCollectionViewFlowLayout
+
+        
     }
 }
 
