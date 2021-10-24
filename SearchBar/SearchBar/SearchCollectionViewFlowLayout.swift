@@ -14,11 +14,7 @@ import UIKit
 //    var fullWidth = CGFloat(0) /// width when expanded
 //    var percentageShrunk = CGFloat(0) /// how much percent shrunk
 //}
-struct FieldOffset {
-    var fullWidth = CGFloat(0)
-    var shift = CGFloat(0) /// already multiplied by percentage
-    var percentage = CGFloat(0)
-}
+
 
 class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
@@ -29,6 +25,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     /// get data
     var getFields: (() -> [Field])?
     var getFullCellWidth: ((Int) -> CGFloat)?
+    
+    /// pass back data
+    var highlightAddNewField: ((Bool) -> Void)?
     
     /// store the frame of each item
     /// plus other properties
@@ -90,7 +89,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         for index in fieldHuggingWidths.indices {
             let fullCellWidth = getFullCellWidth?(index) ?? 0
             
-            var sidePadding = CGFloat(0)
+            var sidePadding = CGFloat(0) // TODO maybe just coll bounds
             let cellOriginWithoutSidePadding: CGFloat
             if index == 0 {
                 
@@ -103,7 +102,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 cellOriginWithoutSidePadding = cellOrigin - Constants.sidePeekPadding
                 
             } else if index == fieldHuggingWidths.indices.last { /// add new field cell
-                sidePadding = Constants.cellSpacing - (Constants.sidePeekPadding - Constants.sidePadding)
+//                sidePadding = Constants.cellSpacing - (Constants.sidePeekPadding - Constants.sidePadding)
                 cellOriginWithoutSidePadding = cellOrigin - Constants.sidePeekPadding
             } else {
                 
@@ -123,7 +122,33 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 /// how much difference between the full width and the normal width, won't change.
                 let differenceBetweenWidthAndFullWidth = fullCellWidth - fieldHuggingWidths[index]
                 let shift = percentage * differenceBetweenWidthAndFullWidth
-                let fieldOffset = FieldOffset(fullWidth: fullCellWidth, shift: shift, percentage:  percentage)
+                
+                var alpha = CGFloat(1)
+                if index == fieldHuggingWidths.count - 1 {
+                    
+                    /// when hit the edge already
+                    if shouldUseOffsetWithAddNew {
+                        let percentage = distanceTravelledLeft / (Constants.addWordFieldSnappingFactor * distanceToNextCell)
+                        alpha = min(1, percentage)
+                        
+                        /// highlight/tap `true` if percentage > 1
+                        let shouldHighlight = percentage > 1
+                        if shouldHighlight {
+                            if !showingAddWordField { /// don't call too many times
+                                showingAddWordField = shouldHighlight
+                                highlightAddNewField?(shouldHighlight)
+                            }
+                        } else {
+                            if showingAddWordField { /// don't call too many times
+                                showingAddWordField = shouldHighlight
+                                highlightAddNewField?(shouldHighlight)
+                            }
+                        }
+                    } else {
+                        alpha = 0 /// still haven't hit edge, so hide always, even when bouncing
+                    }
+                }
+                let fieldOffset = FieldOffset(fullWidth: fullCellWidth, percentage: percentage, shift: shift, alpha: alpha)
                 rightFieldOffsets.append(fieldOffset)
                 
             } else {
@@ -140,7 +165,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 /// how much difference between the full width and the normal width, won't change.
                 let differenceBetweenWidthAndFullWidth = fullCellWidth - fieldHuggingWidths[index]
                 let shift = percentage * differenceBetweenWidthAndFullWidth
-                let fieldOffset = FieldOffset(fullWidth: fullCellWidth, shift: shift, percentage: percentage)
+                let fieldOffset = FieldOffset(fullWidth: fullCellWidth, percentage: percentage, shift: shift)
                 leftFieldOffsets.append(fieldOffset)
                 
             }
@@ -180,6 +205,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             attributes.fullOrigin = fullOrigin
             attributes.fullWidth = fieldOffset.fullWidth
             attributes.percentage = fieldOffset.percentage
+            attributes.alpha = fieldOffset.alpha
             layoutAttributes.append(attributes)
             
             var additionalOffset = fieldOffset.fullWidth

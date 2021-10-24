@@ -47,6 +47,13 @@ struct List {
     var dateCreated = Date()
 }
 
+struct FieldOffset {
+    var fullWidth = CGFloat(0)
+    var percentage = CGFloat(0)
+    var shift = CGFloat(0) /// already multiplied by percentage
+    var alpha = CGFloat(1) /// percent visible of add new
+}
+
 open class FieldLayoutAttributes: UICollectionViewLayoutAttributes {
     
     var fullOrigin = CGFloat(0) /// origin when expanded

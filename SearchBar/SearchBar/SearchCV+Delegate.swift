@@ -17,62 +17,38 @@ extension SearchViewController: UICollectionViewDelegate {
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.isTracking {
-            if searchCollectionViewFlowLayout.reachedEndBeforeAddWordField {
-                searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = true
-            } else {
-                searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = false
-            }
-            checkToAddField(contentOffset: scrollView.contentOffset)
+            searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = searchCollectionViewFlowLayout.reachedEndBeforeAddWordField
         }
     }
     
-    func checkToAddField(contentOffset: CGPoint) {
-        if let addWordOrigin = searchCollectionViewFlowLayout.layoutAttributes.last?.fullOrigin {
+    
+    func shouldHighlight(_ shouldHighlight: Bool) {
+        if shouldHighlight {
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
             
-            /// Origin of last word field, relative to the left side of the screen
-            let difference = addWordOrigin - contentOffset.x
-            
-            
-            /// if showing field, add some padding to go back
-            let padding = searchCollectionViewFlowLayout.showingAddWordField ? Constants.addWordFieldAntiFlickerPadding : 0
-            
-            
-            if difference < Constants.addWordFieldSnappingDistance + padding {
-                /// don't keep on calling below code
-                if !searchCollectionViewFlowLayout.showingAddWordField {
-                    searchCollectionViewFlowLayout.showingAddWordField = true
-                    let generator = UIImpactFeedbackGenerator(style: .light)
-                    generator.impactOccurred()
-                    
-                    let indexPath = IndexPath(item: fields.count - 1, section: 0)
-                    if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
-                        UIView.animate(withDuration: 0.2) {
-                            cell.contentView.backgroundColor = UIColor.red
-                        }
-                    }
-
+            let indexPath = IndexPath(item: fields.count - 1, section: 0)
+            if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
+                UIView.animate(withDuration: 0.2) {
+                    cell.contentView.backgroundColor = UIColor.red
                 }
-            } else {
-                /// don't keep on calling
-                if searchCollectionViewFlowLayout.showingAddWordField {
-                    searchCollectionViewFlowLayout.showingAddWordField = false
-                    let generator = UIImpactFeedbackGenerator(style: .light)
-                    generator.impactOccurred()
-                    
-                    let indexPath = IndexPath(item: fields.count - 1, section: 0)
-                    if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
-                        UIView.animate(withDuration: 0.2) {
-                            cell.contentView.backgroundColor = UIColor.gray
-                        }
-                    }
+            }
+        } else {
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
+            
+            let indexPath = IndexPath(item: fields.count - 1, section: 0)
+            if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
+                UIView.animate(withDuration: 0.2) {
+                    cell.contentView.backgroundColor = UIColor.gray
                 }
             }
         }
     }
+    
     
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if searchCollectionViewFlowLayout.showingAddWordField {
-            print("r. end")
             let indexPath = IndexPath(item: fields.count - 1, section: 0)
             if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
                 UIView.animate(withDuration: 0.8) {
@@ -106,3 +82,4 @@ extension SearchViewController: UICollectionViewDelegate {
     }
     
 }
+

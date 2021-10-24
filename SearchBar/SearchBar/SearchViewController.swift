@@ -20,7 +20,9 @@ public class SearchViewController: UIViewController {
         flowLayout.getFields = { [weak self] in
             return self?.fields ?? [Field]()
         }
-        
+        flowLayout.highlightAddNewField = { [weak self] shouldHighlight in
+            self?.shouldHighlight(shouldHighlight)
+        }
         searchCollectionView.setCollectionViewLayout(flowLayout, animated: false)
         return flowLayout
     }()
@@ -60,11 +62,12 @@ public class SearchViewController: UIViewController {
 
 extension SearchViewController {
     func setupCollectionViews() {
-        
 //        searchCollectionView.clipsToBounds = false
 //        searchCollectionView.layer.borderWidth = 3
 //        searchCollectionView.layer.borderColor = UIColor.purple.cgColor
+        
         searchCollectionView.decelerationRate = .fast
+        searchCollectionView.showsHorizontalScrollIndicator = false
         
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self

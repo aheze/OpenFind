@@ -25,6 +25,6 @@ struct Constants {
     static var fieldLeftViewWidth = CGFloat(40)
     static var fieldRightViewWidth = CGFloat(40)
     
-    static var addWordFieldSnappingDistance = UIScreen.main.bounds.width - (sidePeekPadding * 2)
-    static var addWordFieldAntiFlickerPadding = CGFloat(8)
+    static var addWordFieldSnappingFactor = CGFloat(0.25) /// percent of screen width needed to swipe left
+    static var addWordFieldAntiFlickerPadding = CGFloat(2)
 }

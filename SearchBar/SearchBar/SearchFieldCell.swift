@@ -57,12 +57,13 @@ class SearchFieldCell: UICollectionViewCell {
             
             let percentageVisible = 1 - attributes.percentage
             
-//            leftView.alpha = percentageVisible
-//            rightView.alpha = percentageVisible
+            leftView.alpha = percentageVisible
+            rightView.alpha = percentageVisible
             
             leftViewWidthC.constant = percentageVisible * Constants.fieldLeftViewWidth
             rightViewWidthC.constant = percentageVisible * Constants.fieldRightViewWidth
             
+        
         }
     }
 }
