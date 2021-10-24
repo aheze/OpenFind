@@ -18,7 +18,7 @@ struct Constants {
     static var fieldCornerRadius = CGFloat(16)
     
     static var fieldBaseViewTopPadding = CGFloat(8)
-    static var fieldBaseViewRightPadding = CGFloat(16)
+    static var fieldBaseViewRightPadding = CGFloat(12)
     static var fieldBaseViewBottomPadding = CGFloat(6)
     static var fieldBaseViewLeftPadding = CGFloat(12)
     
@@ -27,6 +27,10 @@ struct Constants {
     static var fieldLeftViewWidth = CGFloat(40)
     static var fieldRightViewWidth = CGFloat(40)
     
+    static var addWordFieldHuggingWidth = CGFloat(24)
     static var addWordFieldSnappingFactor = CGFloat(0.25) /// percent of screen width needed to swipe left
     static var addWordFieldAntiFlickerPadding = CGFloat(2)
+    
+    
+    static var addTextPlaceholder = "Type here to find"
 }

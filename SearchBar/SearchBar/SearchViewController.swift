@@ -51,13 +51,15 @@ public class SearchViewController: UIViewController {
 //            Field(value: .string("3.d Medium text")),
 //            Field(value: .string("4. Longer long long long long long text")),
 //            Field(value: .string("5. Text")),
-            Field(value: .addNew)
+            Field(value: .addNew(.hugging))
         ]
         
         setupCollectionViews()
         
-        
+
     }
+    
+    
 }
 
 extension SearchViewController {
@@ -81,9 +83,9 @@ extension SearchViewController {
         searchCollectionView.register(nib, forCellWithReuseIdentifier: "Cell")
         
         
-        for index in fields.indices {
-            fields[index].fieldHuggingWidth = getFieldHuggingWidth(fieldText: fields[index].getText())
-        }
+//        for index in fields.indices {
+//            fields[index].fieldHuggingWidth = getFieldHuggingWidth(field: fields[index])
+//        }
         
         _ = searchCollectionViewFlowLayout
 

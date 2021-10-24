@@ -13,18 +13,13 @@ extension SearchViewController: UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+//        print("Fields: \(self.fields)")
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SearchFieldCell else { return UICollectionViewCell() }
         
-        if let field = fields[safe: indexPath.item] {
-            cell.textChanged = { [weak self] text in
-                self?.fields[indexPath.item].value = .string(text)
-                self?.fields[indexPath.item].fieldHuggingWidth = self?.getFieldHuggingWidth(fieldText: text) ?? 0
-            }
-            
-            let fieldText = field.getText()
-            cell.textField.text = fieldText
+        cell.setField(self.fields[indexPath.item]) /// cell can configure itself
+        cell.fieldChanged = { [weak self] field in
+            self?.fields[indexPath.item] = field
         }
         
         return cell
@@ -50,15 +45,7 @@ extension SearchViewController: UICollectionViewDataSource {
         return fullWidth - extraPadding
     }
     
-    func getFieldHuggingWidth(fieldText: String) -> CGFloat {
-        let textWidth = fieldText.width(withConstrainedHeight: 10, font: Constants.fieldFont)
-        let leftPaddingWidth = Constants.fieldBaseViewLeftPadding
-        let rightPaddingWidth = Constants.fieldBaseViewRightPadding
-        let textPadding = 2 * Constants.fieldTextSidePadding
-//        let leftViewWidth = Constants.fieldLeftViewWidth
-//        let rightViewWidth = Constants.fieldRightViewWidth
-        return textWidth + leftPaddingWidth + rightPaddingWidth + textPadding
-    }
+    
 }
 
 extension String {

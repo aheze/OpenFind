@@ -21,7 +21,7 @@ extension SearchViewController: UICollectionViewDelegate {
         }
     }
     
-    
+    /// highlight/unhighlight add new
     func shouldHighlight(_ shouldHighlight: Bool) {
         if shouldHighlight {
             let generator = UIImpactFeedbackGenerator(style: .medium)
@@ -30,7 +30,7 @@ extension SearchViewController: UICollectionViewDelegate {
             let indexPath = IndexPath(item: fields.count - 1, section: 0)
             if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
                 UIView.animate(withDuration: 0.2) {
-                    cell.contentView.backgroundColor = UIColor.blue
+                    cell.showAddNew(true, changeColorOnly: true)
                 }
             }
         } else {
@@ -40,46 +40,63 @@ extension SearchViewController: UICollectionViewDelegate {
             let indexPath = IndexPath(item: fields.count - 1, section: 0)
             if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
                 UIView.animate(withDuration: 0.2) {
-                    cell.contentView.backgroundColor = Constants.fieldBackgroundColor
+                    cell.showAddNew(false, changeColorOnly: true)
                 }
             }
         }
     }
     
-    
+    /// convert "Add New" cell into a normal field
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if searchCollectionViewFlowLayout.showingAddWordField {
-            let indexPath = IndexPath(item: fields.count - 1, section: 0)
-            if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
-                UIView.animate(withDuration: 0.8) {
-                    cell.contentView.backgroundColor = Constants.fieldBackgroundColor
+        if searchCollectionViewFlowLayout.highlightingAddWordField {
+            
+            /// get index of add new cell
+            if let addNewFieldIndex = fields.indices.last {
+                
+                let value = Field.Value.addNew(.animatingToFull)
+                fields[addNewFieldIndex].value = value
+                
+                let indexPath = IndexPath(item: addNewFieldIndex, section: 0)
+                if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
+                    
+                    /// stop other animations
+                    cell.setField(fields[addNewFieldIndex]) 
+                    UIView.animate(withDuration: 0.5) {
+                        cell.showAddNew(false, changeColorOnly: false)
+                    }
                 }
             }
         }
     }
+    
+    /// append a brand-new "Add New" cell
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if searchCollectionViewFlowLayout.showingAddWordField {
-            searchCollectionViewFlowLayout.showingAddWordField = false
+        if searchCollectionViewFlowLayout.highlightingAddWordField {
+            searchCollectionViewFlowLayout.highlightingAddWordField = false
             
-            var newField = Field(value: .addNew)
-            newField.fieldHuggingWidth = getFieldHuggingWidth(fieldText: newField.getText())
+            /// append new "Add New" cell
+            let newField = Field(value: .addNew(.hugging))
+            fields.append(newField)
             
-            self.fields.append(newField)
+            let indexOfLastField = self.fields.count - 2 /// index of the last field (not including "Add New" cell)
+            fields[indexOfLastField].value = .string("")
+            
             searchCollectionView.reloadData() /// add the new field
-            searchCollectionView.layoutIfNeeded() /// important!
+            searchCollectionView.layoutIfNeeded() /// important! **Otherwise, will glitch**
             
-            if let origin = searchCollectionViewFlowLayout.layoutAttributes[safe: self.fields.count - 2]?.fullOrigin { /// the last field that's not the "add new" field
+            if let origin = searchCollectionViewFlowLayout.layoutAttributes[safe: fields.count - 2]?.fullOrigin { /// the last field that's not the "add new" field
                 let targetOrigin = self.searchCollectionViewFlowLayout.getTargetOffset(for: CGPoint(x: origin, y: 0))
                 self.searchCollectionView.setContentOffset(targetOrigin, animated: false) /// go to that offset instantly
             }
-        }
-        
-        if searchCollectionViewFlowLayout.reachedEndBeforeAddWordField {
-            searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = true
-        } else {
-            searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = false
+            
+            /// after scroll view stopped, set the content offset
+            if searchCollectionViewFlowLayout.reachedEndBeforeAddWordField {
+                searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = true
+            } else {
+                searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = false
+            }
         }
     }
-    
 }
+
 

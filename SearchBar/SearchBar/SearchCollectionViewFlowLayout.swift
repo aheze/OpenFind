@@ -48,7 +48,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     var currentOffset = CGFloat(0)
     
     /// showing (past the point where it will auto-scroll) the last field or not
-    var showingAddWordField = false
+    var highlightingAddWordField = false
    
     var contentSize = CGSize.zero /// the scrollable content size of the collection view
     override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
@@ -134,13 +134,13 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                         /// highlight/tap `true` if percentage > 1
                         let shouldHighlight = percentage > 1
                         if shouldHighlight {
-                            if !showingAddWordField { /// don't call too many times
-                                showingAddWordField = shouldHighlight
+                            if !highlightingAddWordField { /// don't call too many times
+                                highlightingAddWordField = shouldHighlight
                                 highlightAddNewField?(shouldHighlight)
                             }
                         } else {
-                            if showingAddWordField { /// don't call too many times
-                                showingAddWordField = shouldHighlight
+                            if highlightingAddWordField { /// don't call too many times
+                                highlightingAddWordField = shouldHighlight
                                 highlightAddNewField?(shouldHighlight)
                             }
                         }
@@ -259,7 +259,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     func getTargetOffset(for point: CGPoint) -> CGPoint {
         
         if  /// handle end, but not actually swiped
-            showingAddWordField,
+            highlightingAddWordField,
             let addWordFieldOrigin = layoutAttributes.last?.fullOrigin
         {
             reachedEndBeforeAddWordField = true

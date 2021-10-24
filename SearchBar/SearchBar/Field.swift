@@ -8,7 +8,17 @@
 import UIKit
 
 struct Field {
-    var value = Value.string("")
+    
+    init(value: Value) {
+        self.value = value
+        fieldHuggingWidth = self.getFieldHuggingWidth()
+    }
+    
+    var value = Value.string("") {
+        didSet {
+            fieldHuggingWidth = self.getFieldHuggingWidth()
+        }
+    }
     
     /// delete button deletes the entire field
     /// clear button is normal, shown when is editing no matter what
@@ -22,20 +32,41 @@ struct Field {
     enum Value {
         case string(String)
         case list(List)
-        case addNew
-    }
-    
-    
-    func getText() -> String {
-        switch self.value {
-        case .string(let string):
-            return string
-        case .list(let list):
-            return list.name
-        case .addNew:
-            return "Add Word"
+        case addNew(AddNewState)
+        
+        func getText() -> String {
+            switch self {
+            case .string(let string):
+                return string
+            case .list(let list):
+                return list.name
+            case .addNew(_):
+                return ""
+            }
         }
     }
+    
+    private func getFieldHuggingWidth() -> CGFloat {
+        if case Field.Value.addNew = self.value {
+            print("is add new")
+            return Constants.addWordFieldHuggingWidth
+        } else {
+            let fieldText = self.value.getText()
+            let finalText = fieldText.isEmpty ? Constants.addTextPlaceholder : fieldText
+
+            let textWidth = finalText.width(withConstrainedHeight: 10, font: Constants.fieldFont)
+            let leftPaddingWidth = Constants.fieldBaseViewLeftPadding
+            let rightPaddingWidth = Constants.fieldBaseViewRightPadding
+            let textPadding = 2 * Constants.fieldTextSidePadding
+            return textWidth + leftPaddingWidth + rightPaddingWidth + textPadding
+        }
+        
+    }
+}
+
+enum AddNewState {
+    case hugging
+    case animatingToFull
 }
 
 struct List {
