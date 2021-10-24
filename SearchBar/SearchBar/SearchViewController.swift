@@ -64,6 +64,7 @@ extension SearchViewController {
 //        searchCollectionView.clipsToBounds = false
 //        searchCollectionView.layer.borderWidth = 3
 //        searchCollectionView.layer.borderColor = UIColor.purple.cgColor
+        searchCollectionView.decelerationRate = .fast
         
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self

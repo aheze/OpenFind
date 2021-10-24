@@ -43,6 +43,14 @@ extension SearchViewController: UICollectionViewDelegate {
                     searchCollectionViewFlowLayout.showingAddWordField = true
                     let generator = UIImpactFeedbackGenerator(style: .light)
                     generator.impactOccurred()
+                    
+                    let indexPath = IndexPath(item: fields.count - 1, section: 0)
+                    if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
+                        UIView.animate(withDuration: 0.2) {
+                            cell.contentView.backgroundColor = UIColor.red
+                        }
+                    }
+
                 }
             } else {
                 /// don't keep on calling
@@ -50,11 +58,29 @@ extension SearchViewController: UICollectionViewDelegate {
                     searchCollectionViewFlowLayout.showingAddWordField = false
                     let generator = UIImpactFeedbackGenerator(style: .light)
                     generator.impactOccurred()
+                    
+                    let indexPath = IndexPath(item: fields.count - 1, section: 0)
+                    if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
+                        UIView.animate(withDuration: 0.2) {
+                            cell.contentView.backgroundColor = UIColor.gray
+                        }
+                    }
                 }
             }
         }
     }
     
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if searchCollectionViewFlowLayout.showingAddWordField {
+            print("r. end")
+            let indexPath = IndexPath(item: fields.count - 1, section: 0)
+            if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
+                UIView.animate(withDuration: 0.8) {
+                    cell.contentView.backgroundColor = UIColor.gray
+                }
+            }
+        }
+    }
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if searchCollectionViewFlowLayout.showingAddWordField {
             searchCollectionViewFlowLayout.showingAddWordField = false

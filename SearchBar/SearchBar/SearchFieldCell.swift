@@ -11,7 +11,7 @@ class SearchFieldCell: UICollectionViewCell {
     
     var textChanged: ((String) -> Void)?
     
-    
+    /// container view
     @IBOutlet weak var baseView: UIView!
     
     @IBOutlet weak var leftView: LeftView!
@@ -31,6 +31,7 @@ class SearchFieldCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        contentView.backgroundColor = UIColor.gray
         
         textField.delegate = self
         textField.font = Constants.fieldFont

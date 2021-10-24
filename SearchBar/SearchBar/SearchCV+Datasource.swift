@@ -25,9 +25,6 @@ extension SearchViewController: UICollectionViewDataSource {
             
             let fieldText = field.getText()
             cell.textField.text = fieldText
-        } else {
-//            cell.textField.text = "Add Word"
-            print("NO!!!!!!!!!!")
         }
         
         return cell
