@@ -10,6 +10,8 @@ import UIKit
 class RightView: UIView {
     
     @IBOutlet var contentView: UIView!
+    @IBOutlet weak var buttonView: ButtonView!
+    @IBOutlet weak var imageView: UIImageView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,5 +29,11 @@ class RightView: UIView {
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        let image = UIImage(systemName: "xmark")
+        imageView.image = image
+        
+        let configuration = UIImage.SymbolConfiguration(font: Constants.fieldFont)
+        imageView.preferredSymbolConfiguration = configuration
     }
 }

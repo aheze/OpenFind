@@ -31,11 +31,13 @@ class SearchFieldCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.backgroundColor = UIColor.gray
+        contentView.backgroundColor = Constants.fieldBackgroundColor
+        contentView.layer.cornerRadius = Constants.fieldCornerRadius
         
         textField.delegate = self
         textField.font = Constants.fieldFont
-        textField.isEnabled = false
+        
+        textField.textColor = .white
         
         baseViewTopC.constant = Constants.fieldBaseViewTopPadding
         baseViewRightC.constant = Constants.fieldBaseViewRightPadding
@@ -48,6 +50,8 @@ class SearchFieldCell: UICollectionViewCell {
         leftView.tapped = { [weak self] in
             print("Tap!")
         }
+        
+        
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
@@ -77,6 +81,10 @@ extension SearchFieldCell: UITextFieldDelegate {
             textChanged?(updatedText)
         }
         
+        return true
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         return true
     }
 }

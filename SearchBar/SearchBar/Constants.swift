@@ -8,12 +8,14 @@
 import UIKit
 
 struct Constants {
-    static var cellHeight = CGFloat(100)
+    static var cellHeight = CGFloat(64)
     static var sidePadding = CGFloat(16)
     static var sidePeekPadding = CGFloat(64) /// extra padding to show nearby cells
     static var cellSpacing = CGFloat(8)
-    static var fieldFont = UIFont.preferredFont(forTextStyle: .headline)
+    static var fieldFont = UIFont.preferredFont(forTextStyle: .title1)
     
+    static var fieldBackgroundColor = UIColor.black.withAlphaComponent(0.5)
+    static var fieldCornerRadius = CGFloat(16)
     
     static var fieldBaseViewTopPadding = CGFloat(8)
     static var fieldBaseViewRightPadding = CGFloat(16)

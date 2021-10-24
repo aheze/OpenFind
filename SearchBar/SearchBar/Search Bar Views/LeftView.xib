@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,19 +22,21 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2y-nd-nLt" customClass="ButtonView" customModule="SearchBar" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vJb-bt-vPb">
-                            <rect key="frame" x="64" y="38" width="24" height="24"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FindIcon" translatesAutoresizingMaskIntoConstraints="NO" id="vJb-bt-vPb">
+                            <rect key="frame" x="34" y="34" width="32" height="32"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="24" id="1b5-vV-rjS"/>
-                                <constraint firstAttribute="height" constant="24" id="fTJ-oj-u8b"/>
+                                <constraint firstAttribute="width" constant="32" id="1b5-vV-rjS"/>
+                                <constraint firstAttribute="height" constant="32" id="fTJ-oj-u8b"/>
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="vJb-bt-vPb" firstAttribute="centerY" secondItem="k2y-nd-nLt" secondAttribute="centerY" id="BsA-KM-ykQ"/>
-                        <constraint firstAttribute="trailing" secondItem="vJb-bt-vPb" secondAttribute="trailing" constant="12" id="u74-bZ-1kG"/>
+                        <constraint firstItem="vJb-bt-vPb" firstAttribute="centerY" secondItem="k2y-nd-nLt" secondAttribute="centerY" id="s6R-If-lCg"/>
+                        <constraint firstItem="vJb-bt-vPb" firstAttribute="centerX" secondItem="k2y-nd-nLt" secondAttribute="centerX" id="tHx-gh-q8m"/>
                     </constraints>
                 </view>
             </subviews>
@@ -52,8 +53,6 @@
         </view>
     </objects>
     <resources>
-        <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <image name="FindIcon" width="24" height="24"/>
     </resources>
 </document>

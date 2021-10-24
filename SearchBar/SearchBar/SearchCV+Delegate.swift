@@ -30,7 +30,7 @@ extension SearchViewController: UICollectionViewDelegate {
             let indexPath = IndexPath(item: fields.count - 1, section: 0)
             if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
                 UIView.animate(withDuration: 0.2) {
-                    cell.contentView.backgroundColor = UIColor.red
+                    cell.contentView.backgroundColor = UIColor.blue
                 }
             }
         } else {
@@ -40,7 +40,7 @@ extension SearchViewController: UICollectionViewDelegate {
             let indexPath = IndexPath(item: fields.count - 1, section: 0)
             if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
                 UIView.animate(withDuration: 0.2) {
-                    cell.contentView.backgroundColor = UIColor.gray
+                    cell.contentView.backgroundColor = Constants.fieldBackgroundColor
                 }
             }
         }
@@ -52,7 +52,7 @@ extension SearchViewController: UICollectionViewDelegate {
             let indexPath = IndexPath(item: fields.count - 1, section: 0)
             if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
                 UIView.animate(withDuration: 0.8) {
-                    cell.contentView.backgroundColor = UIColor.gray
+                    cell.contentView.backgroundColor = Constants.fieldBackgroundColor
                 }
             }
         }
