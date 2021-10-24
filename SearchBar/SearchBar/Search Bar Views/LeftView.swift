@@ -13,6 +13,9 @@ class LeftView: UIView {
     @IBOutlet weak var buttonView: ButtonView!
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var imageViewWidthC: NSLayoutConstraint!
+    @IBOutlet weak var imageViewHeightC: NSLayoutConstraint!
+    
     var tapped: (() -> Void)?
     
     override init(frame: CGRect) {
@@ -32,8 +35,10 @@ class LeftView: UIView {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-//        imageView.image = UIImage(systemName: "plus")
         buttonView.tapped = tapped
+        
+        imageViewWidthC.constant = Constants.fieldIconLength
+        imageViewHeightC.constant = Constants.fieldIconLength
     }
 }
 

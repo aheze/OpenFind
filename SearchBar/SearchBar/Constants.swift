@@ -31,6 +31,7 @@ struct Constants {
     static var addWordFieldSnappingFactor = CGFloat(0.25) /// percent of screen width needed to swipe left
     static var addWordFieldAntiFlickerPadding = CGFloat(2)
     
+    static var fieldIconLength = CGFloat(32)
     
     static var addTextPlaceholder = "Type here to find"
 }

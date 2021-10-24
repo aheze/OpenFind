@@ -13,7 +13,6 @@ extension SearchViewController: UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        print("Fields: \(self.fields)")
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SearchFieldCell else { return UICollectionViewCell() }
         
@@ -21,6 +20,10 @@ extension SearchViewController: UICollectionViewDataSource {
         cell.fieldChanged = { [weak self] field in
             self?.fields[indexPath.item] = field
         }
+        
+        /// setup constraints
+        let (setup, _, _) = cell.showAddNew(true, changeColorOnly: false)
+        setup()
         
         return cell
     }

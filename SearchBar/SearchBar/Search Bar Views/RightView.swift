@@ -13,6 +13,9 @@ class RightView: UIView {
     @IBOutlet weak var buttonView: ButtonView!
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var imageViewWidthC: NSLayoutConstraint!
+    @IBOutlet weak var imageViewHeightC: NSLayoutConstraint!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -31,9 +34,11 @@ class RightView: UIView {
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         let image = UIImage(systemName: "xmark")
-        imageView.image = image
-        
         let configuration = UIImage.SymbolConfiguration(font: Constants.fieldFont)
         imageView.preferredSymbolConfiguration = configuration
+        imageView.image = image
+        
+        imageViewWidthC.constant = Constants.fieldIconLength
+        imageViewHeightC.constant = Constants.fieldIconLength
     }
 }

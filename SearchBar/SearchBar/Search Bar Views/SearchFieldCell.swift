@@ -25,6 +25,16 @@ class SearchFieldCell: UICollectionViewCell {
     @IBOutlet weak var leftViewWidthC: NSLayoutConstraint!
     @IBOutlet weak var rightViewWidthC: NSLayoutConstraint!
     
+    @IBOutlet weak var addNewView: UIView!
+    @IBOutlet weak var addNewViewCenterHorizontallyWithSuperview: NSLayoutConstraint!
+    @IBOutlet weak var addNewViewCenterHorizontallyWithRightC: NSLayoutConstraint!
+    @IBOutlet weak var addNewViewWidthC: NSLayoutConstraint!
+    @IBOutlet weak var addNewViewHeightC: NSLayoutConstraint!
+    @IBOutlet weak var addNewImageView: UIImageView!
+    
+    
+    
+    
     var fieldChanged: ((Field) -> Void)?
     
     /// set field from datasource
@@ -48,20 +58,19 @@ class SearchFieldCell: UICollectionViewCell {
             case .addNew(let addNewState):
                 switch addNewState {
                 case .hugging:
-                    showAddNew(true, changeColorOnly: false)
+                    let (_, animations, completion) = showAddNew(true, changeColorOnly: false)
+                    animations()
+                    completion()
                     return
                 case .animatingToFull:
                     return
                 }
             }
-            showAddNew(false, changeColorOnly: false)
+            let (_, animations, completion) = showAddNew(false, changeColorOnly: false)
+            animations()
+            completion()
         }
     }
-    
-    
-    @IBOutlet weak var addNewView: UIView!
-    @IBOutlet weak var addNewImageView: UIImageView!
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -83,6 +92,9 @@ class SearchFieldCell: UICollectionViewCell {
         baseViewBottomC.constant = Constants.fieldBaseViewBottomPadding
         baseViewLeftC.constant = Constants.fieldBaseViewLeftPadding
         
+        addNewViewWidthC.constant = Constants.fieldIconLength
+        addNewViewHeightC.constant = Constants.fieldIconLength
+        
         leftViewWidthC.constant = 0
         rightViewWidthC.constant = 0
         
@@ -91,8 +103,10 @@ class SearchFieldCell: UICollectionViewCell {
 //        }
         
         
+        let image = UIImage(systemName: "xmark")
         let configuration = UIImage.SymbolConfiguration(font: Constants.fieldFont)
         addNewImageView.preferredSymbolConfiguration = configuration
+        addNewImageView.image = image
         
     }
     
@@ -102,42 +116,68 @@ class SearchFieldCell: UICollectionViewCell {
         if let attributes = layoutAttributes as? FieldLayoutAttributes {
             let percentageVisible = 1 - attributes.percentage
             
-            if case Field.Value.addNew(.hugging) = field.value {
-                leftView.alpha = 0
-                rightView.alpha = 0
-            } else if case Field.Value.addNew(.animatingToFull) = field.value {
-                
-            } else {
-                leftView.alpha = percentageVisible
-                rightView.alpha = percentageVisible
-            }
+            leftView.alpha = percentageVisible
+            rightView.alpha = percentageVisible
             
             leftViewWidthC.constant = percentageVisible * Constants.fieldLeftViewWidth
             rightViewWidthC.constant = percentageVisible * Constants.fieldRightViewWidth
         }
     }
     
-    func showAddNew(_ show: Bool, changeColorOnly: Bool) {
+    func showAddNew(_ show: Bool, changeColorOnly: Bool) -> (() -> Void, () -> Void, () -> Void) {
         
-        contentView.backgroundColor = show ? .blue : Constants.fieldBackgroundColor
+        var setup = { } /// constraints
+        var animationBlock = { }
+        var completion = { } /// cleanup
         
-        if changeColorOnly { return }
-        
-        if show {
-            textField.alpha = 0
-            leftView.alpha = 0
-            rightView.alpha = 0
-            addNewView.alpha = 1
-            addNewView.transform = .identity
+        if changeColorOnly {
+            animationBlock = { [weak self] in
+                self?.contentView.backgroundColor = show ? .blue : Constants.fieldBackgroundColor
+            }
         } else {
-            textField.alpha = 1
-            leftView.alpha = 1
-            rightView.alpha = 1
-            addNewView.alpha = 0
-            addNewView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+            setup = { [weak self] in
+                print("change constraints, show add new: \(show)")
+                
+                if show { /// keep plus button centered
+                    self?.addNewViewCenterHorizontallyWithSuperview.isActive = true
+                    self?.addNewViewCenterHorizontallyWithRightC.isActive = false
+                } else { /// animate plus button to the right
+                    self?.addNewViewCenterHorizontallyWithSuperview.isActive = false
+                    self?.addNewViewCenterHorizontallyWithRightC.isActive = true
+                }
+            }
+            
+            animationBlock = { [weak self] in
+                if show { /// show the plus
+                    self?.addNewView.transform = .identity.rotated(by: 45.degreesToRadians)
+                    self?.textField.alpha = 0
+                    self?.leftView.buttonView.alpha = 0
+                    self?.rightView.buttonView.alpha = 0
+                    self?.contentView.backgroundColor = .blue
+                } else { /// hide the plus, go to normal
+                    self?.addNewView.transform = .identity
+                    self?.textField.alpha = 1
+                    self?.leftView.buttonView.alpha = 1
+                    self?.contentView.backgroundColor = Constants.fieldBackgroundColor
+                }
+                
+                self?.contentView.layoutIfNeeded()
+            }
+            
+            completion = { [weak self] in
+                if show { /// show the plus
+                    self?.rightView.buttonView.alpha = 0
+                    self?.addNewView.alpha = 1
+                } else { /// hide the plus
+                    self?.rightView.buttonView.alpha = 1
+                    self?.addNewView.alpha = 0
+                }
+            }
         }
         
+        return (setup, animationBlock, completion)
     }
+    
 }
 
 extension SearchFieldCell: UITextFieldDelegate {

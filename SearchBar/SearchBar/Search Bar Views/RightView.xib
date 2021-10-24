@@ -12,6 +12,8 @@
                 <outlet property="buttonView" destination="SwR-aI-9wd" id="DyR-SE-DWK"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="Pmu-o2-jnO"/>
                 <outlet property="imageView" destination="JHh-hv-mBy" id="3iS-Ou-TxE"/>
+                <outlet property="imageViewHeightC" destination="gIf-qF-nyl" id="5n7-mk-VV4"/>
+                <outlet property="imageViewWidthC" destination="RPa-Je-1El" id="RK6-m2-urg"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

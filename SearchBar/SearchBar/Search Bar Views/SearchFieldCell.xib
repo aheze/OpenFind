@@ -40,16 +40,18 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v90-ox-xGV">
-                                <rect key="frame" x="308" y="60.5" width="18" height="20"/>
+                                <rect key="frame" x="305" y="58.5" width="24" height="24"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="TZ6-Wt-gjW">
-                                        <rect key="frame" x="0.0" y="2" width="18" height="16"/>
+                                        <rect key="frame" x="0.0" y="2" width="24" height="20"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="Sxc-XY-Xa1"/>
                                     <constraint firstAttribute="bottom" secondItem="TZ6-Wt-gjW" secondAttribute="bottom" id="cxM-k4-osw"/>
+                                    <constraint firstAttribute="height" constant="24" id="fEY-hg-Mh1"/>
                                     <constraint firstAttribute="trailing" secondItem="TZ6-Wt-gjW" secondAttribute="trailing" id="gDB-It-y1M"/>
                                     <constraint firstItem="TZ6-Wt-gjW" firstAttribute="leading" secondItem="v90-ox-xGV" secondAttribute="leading" id="lCa-kQ-sid"/>
                                     <constraint firstItem="TZ6-Wt-gjW" firstAttribute="top" secondItem="v90-ox-xGV" secondAttribute="top" id="mer-on-QXO"/>
@@ -70,7 +72,13 @@
                             <constraint firstItem="v90-ox-xGV" firstAttribute="centerY" secondItem="3YU-hQ-dhy" secondAttribute="centerY" id="oL6-OB-5bn"/>
                             <constraint firstItem="8OT-QC-iKm" firstAttribute="top" secondItem="3YU-hQ-dhy" secondAttribute="top" id="oMz-7c-xgL"/>
                             <constraint firstItem="oQg-Mx-Rfv" firstAttribute="leading" secondItem="8OT-QC-iKm" secondAttribute="trailing" id="pOZ-4x-pS5"/>
+                            <constraint firstItem="v90-ox-xGV" firstAttribute="centerX" secondItem="oQg-Mx-Rfv" secondAttribute="centerX" id="vXb-tt-rEQ"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="vXb-tt-rEQ"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <constraints>
@@ -82,8 +90,12 @@
             </collectionViewCellContentView>
             <size key="customSize" width="658" height="157"/>
             <connections>
-                <outlet property="addNewImageView" destination="TZ6-Wt-gjW" id="4Wz-38-oYV"/>
+                <outlet property="addNewImageView" destination="TZ6-Wt-gjW" id="xpW-gl-Ah7"/>
                 <outlet property="addNewView" destination="v90-ox-xGV" id="RHH-4U-PJT"/>
+                <outlet property="addNewViewCenterHorizontallyWithRightC" destination="vXb-tt-rEQ" id="PiV-kz-iVe"/>
+                <outlet property="addNewViewCenterHorizontallyWithSuperview" destination="0cb-cP-re4" id="8xn-bo-Bmr"/>
+                <outlet property="addNewViewHeightC" destination="fEY-hg-Mh1" id="Gql-RJ-QeA"/>
+                <outlet property="addNewViewWidthC" destination="Sxc-XY-Xa1" id="bYB-ax-duT"/>
                 <outlet property="baseView" destination="3YU-hQ-dhy" id="3EB-GY-jqy"/>
                 <outlet property="baseViewBottomC" destination="QxN-2M-ryv" id="D2D-Gz-DMP"/>
                 <outlet property="baseViewLeftC" destination="VKk-s5-IDu" id="YAZ-Sq-jSJ"/>
