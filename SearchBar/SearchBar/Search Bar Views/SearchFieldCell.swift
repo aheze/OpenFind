@@ -33,6 +33,11 @@ class SearchFieldCell: UICollectionViewCell {
         self.textField.text = field.value.getText()
     }
     
+    func updateField(_ makeChangesTo: ((inout Field) -> Void)) {
+        makeChangesTo(&field)
+        self.fieldChanged?(field)
+    }
+    
     private var field = Field(value: .string("")) {
         didSet {
             switch field.value {
@@ -142,8 +147,10 @@ extension SearchFieldCell: UITextFieldDelegate {
            let textRange = Range(range, in: text) {
             let updatedText = text.replacingCharacters(in: textRange, with: string)
 
-            field.value = .string(updatedText)
-            fieldChanged?(field)
+            updateField {
+                $0.value = .string(updatedText)
+            }
+
         }
         
         return true

@@ -48,7 +48,6 @@ struct Field {
     
     private func getFieldHuggingWidth() -> CGFloat {
         if case Field.Value.addNew = self.value {
-            print("is add new")
             return Constants.addWordFieldHuggingWidth
         } else {
             let fieldText = self.value.getText()
