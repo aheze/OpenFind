@@ -55,16 +55,11 @@ class SearchFieldCell: UICollectionViewCell {
                 break
             case .list(_):
                 break
-            case .addNew(let addNewState):
-                switch addNewState {
-                case .hugging:
-                    let (_, animations, completion) = showAddNew(true, changeColorOnly: false)
-                    animations()
-                    completion()
-                    return
-                case .animatingToFull:
-                    return
-                }
+            case .addNew:
+                let (_, animations, completion) = showAddNew(true, changeColorOnly: false)
+                animations()
+                completion()
+                return
             }
             let (_, animations, completion) = showAddNew(false, changeColorOnly: false)
             animations()
@@ -136,7 +131,6 @@ class SearchFieldCell: UICollectionViewCell {
             }
         } else {
             setup = { [weak self] in
-                print("change constraints, show add new: \(show)")
                 
                 if show { /// keep plus button centered
                     self?.addNewViewCenterHorizontallyWithSuperview.isActive = true
@@ -149,7 +143,7 @@ class SearchFieldCell: UICollectionViewCell {
             
             animationBlock = { [weak self] in
                 if show { /// show the plus
-                    self?.addNewView.transform = .identity.rotated(by: 45.degreesToRadians)
+                    self?.addNewView.transform = .identity.rotated(by: 135.degreesToRadians)
                     self?.textField.alpha = 0
                     self?.leftView.buttonView.alpha = 0
                     self?.rightView.buttonView.alpha = 0

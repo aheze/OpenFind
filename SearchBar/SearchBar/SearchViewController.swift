@@ -51,7 +51,7 @@ public class SearchViewController: UIViewController {
 //            Field(value: .string("3.d Medium text")),
 //            Field(value: .string("4. Longer long long long long long text")),
 //            Field(value: .string("5. Text")),
-            Field(value: .addNew(.hugging))
+            Field(value: .addNew)
         ]
         
         setupCollectionViews()

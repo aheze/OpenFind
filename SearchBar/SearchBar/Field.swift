@@ -32,7 +32,7 @@ struct Field {
     enum Value {
         case string(String)
         case list(List)
-        case addNew(AddNewState)
+        case addNew
         
         func getText() -> String {
             switch self {
@@ -40,7 +40,7 @@ struct Field {
                 return string
             case .list(let list):
                 return list.name
-            case .addNew(_):
+            case .addNew:
                 return ""
             }
         }
@@ -61,11 +61,6 @@ struct Field {
         }
         
     }
-}
-
-enum AddNewState {
-    case hugging
-    case animatingToFull
 }
 
 struct List {

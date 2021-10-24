@@ -57,18 +57,12 @@ extension SearchViewController: UICollectionViewDelegate {
             /// get index of add new cell
             if let addNewFieldIndex = fields.indices.last {
                 
-//                let value = Field.Value.addNew(.animatingToFull)
-//                fields[addNewFieldIndex].value = value
-                
                 let indexPath = IndexPath(item: addNewFieldIndex, section: 0)
                 if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
                     
-                    /// stop other animations
-//                    cell.setField(fields[addNewFieldIndex])
-                    
                     let (setup, animationBlock, completion) = cell.showAddNew(false, changeColorOnly: false)
                     setup()
-                    UIView.animate(withDuration: 0.5) {
+                    UIView.animate(withDuration: 0.4) {
                         animationBlock()
                     } completion: { _ in
                         completion()
@@ -84,7 +78,7 @@ extension SearchViewController: UICollectionViewDelegate {
             searchCollectionViewFlowLayout.highlightingAddWordField = false
             
             /// append new "Add New" cell
-            let newField = Field(value: .addNew(.hugging))
+            let newField = Field(value: .addNew)
             fields.append(newField)
             
             let indexOfLastField = self.fields.count - 2 /// index of the last field (not including "Add New" cell)
