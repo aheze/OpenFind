@@ -32,6 +32,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     /// pass back data
     var highlightAddNewField: ((Bool) -> Void)?
     
+    /// add new field instantly, since it past halfway point
+    var instantlyAddNew: (() -> Void)?
+    
     /// store the frame of each item
     /// plus other properties
     var layoutAttributes = [FieldLayoutAttributes]()
@@ -155,6 +158,10 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                                 highlightingAddWordField = shouldHighlight
                                 highlightAddNewField?(shouldHighlight)
                             }
+                        }
+                        
+                        if distanceTravelledLeft > (collectionView.bounds.width / 2) {
+                            instantlyAddNew?()
                         }
                     } else {
                         alpha = 0 /// still haven't hit edge, so hide always, even when bouncing

@@ -39,6 +39,9 @@ public class SearchViewController: UIViewController {
                 }
             }
         }
+        flowLayout.instantlyAddNew = { [weak self] in
+            self?.convertAddNewCellToRegularCell()
+        }
         searchCollectionView.setCollectionViewLayout(flowLayout, animated: false)
         return flowLayout
     }()
@@ -104,8 +107,20 @@ extension SearchViewController {
 //        }
         
         _ = searchCollectionViewFlowLayout
-
         
+        searchCollectionView.panGestureRecognizer.addTarget(self, action: #selector(handlePan(_:)))
+    }
+    
+    /// convert "Add New" cell into a normal field
+    @objc func handlePan(_ sender: UIPanGestureRecognizer) {
+        switch sender.state {
+        case .ended:
+            if searchCollectionViewFlowLayout.highlightingAddWordField {
+                convertAddNewCellToRegularCell()
+            }
+        default:
+            break
+        }
     }
 }
 

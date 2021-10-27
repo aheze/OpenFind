@@ -77,34 +77,6 @@ extension SearchViewController: UICollectionViewDelegate {
                 }
             }
         }
-    
-        
-//        /// get index of add new cell
-//        if
-//            let addNewFieldIndex = fields.indices.last,
-//            case Field.Value.addNew = fields[addNewFieldIndex].value
-//        {
-////            print("Last is add new!")
-//            convertToRegularCell(index: addNewFieldIndex)
-//        } else if let lastAddNewFieldIndex = fields.indices.last(where: {
-//            if case Field.Value.addNew = fields[$0].value {
-//                return true
-//            } else {
-//                return false
-//            }
-//        }) {
-//            print(". \(lastAddNewFieldIndex) is add new!")
-//            convertToRegularCell(index: lastAddNewFieldIndex)
-//        }
-    }
-    
-    /// convert "Add New" cell into a normal field
-    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print("dragging ended, \(searchCollectionViewFlowLayout.highlightingAddWordField)")
-        if searchCollectionViewFlowLayout.highlightingAddWordField {
-//            searchCollectionViewFlowLayout.highlightingAddWordField = false
-            convertAddNewCellToRegularCell()
-        }
     }
     
     /// append a brand-new "Add New" cell
@@ -112,12 +84,13 @@ extension SearchViewController: UICollectionViewDelegate {
         if searchCollectionViewFlowLayout.highlightingAddWordField {
             searchCollectionViewFlowLayout.highlightingAddWordField = false
             
+            
             /// append new "Add New" cell
             let newField = Field(value: .addNew)
             fields.append(newField)
             
-            let indexOfLastField = self.fields.count - 2 /// index of the last field (not including "Add New" cell)
-            
+            let indexOfLastField = fields.count - 2 /// index of the last field (not including "Add New" cell)
+
             searchCollectionView.reloadData() /// add the new field
             searchCollectionView.layoutIfNeeded() /// important! **Otherwise, will glitch**
             
@@ -126,8 +99,9 @@ extension SearchViewController: UICollectionViewDelegate {
                 cell.textField.becomeFirstResponder()
             }
             
-            if let origin = searchCollectionViewFlowLayout.layoutAttributes[safe: fields.count - 2]?.fullOrigin { /// the last field that's not the "add new" field
+            if let origin = searchCollectionViewFlowLayout.layoutAttributes[safe: indexOfLastField]?.fullOrigin { /// the last field that's not the "add new" field
                 let (targetOrigin, _) = self.searchCollectionViewFlowLayout.getTargetOffsetAndIndex(for: CGPoint(x: origin, y: 0))
+                
                 self.searchCollectionView.setContentOffset(targetOrigin, animated: false) /// go to that offset instantly
             }
             
