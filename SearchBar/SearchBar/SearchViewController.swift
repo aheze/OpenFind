@@ -35,6 +35,7 @@ public class SearchViewController: UIViewController {
                 self.fields[newCellIndex].focused = true
                 if let cell = self.searchCollectionView.cellForItem(at: newCellIndex.indexPath) as? SearchFieldCell {
                     cell.setField(self.fields[newCellIndex]) /// set it right now anyway
+                    cell.textField.becomeFirstResponder()
                 }
             }
         }

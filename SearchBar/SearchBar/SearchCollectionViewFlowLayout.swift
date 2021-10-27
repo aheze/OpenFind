@@ -65,7 +65,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     /// pass attributes to the collection view flow layout
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        print("layoutAttributes: \(layoutAttributes.count), at: \(indexPath.item)")
         return layoutAttributes[safe: indexPath.item]
     }
     
@@ -79,15 +78,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return getTargetOffsetForScrollingThere(for: proposedContentOffset)
     }
     
-    override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attributes = super.layoutAttributesForItem(at: itemIndexPath)
-        print("New: \(attributes)")
-        return attributes
-    }
-    
-    override func finalizeCollectionViewUpdates() {
-        
-    }
     
     
     /// make the layout (strip vs list) here
