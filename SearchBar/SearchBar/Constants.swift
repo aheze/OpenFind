@@ -34,4 +34,5 @@ struct Constants {
     static var fieldIconLength = CGFloat(32)
     
     static var addTextPlaceholder = "Find anything"
+    static var minimumHuggingWidth = CGFloat(36)
 }

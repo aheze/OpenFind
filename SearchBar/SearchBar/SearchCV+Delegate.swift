@@ -54,29 +54,56 @@ extension SearchViewController: UICollectionViewDelegate {
         }
     }
     
-    /// convert "Add New" cell into a normal field
-    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if searchCollectionViewFlowLayout.highlightingAddWordField {
+    func convertAddNewCellToRegularCell() {
+        
+        if
+            let addNewFieldIndex = fields.indices.last,
+            case Field.Value.addNew = fields[addNewFieldIndex].value
+        {
+            fields[addNewFieldIndex].focused = true
+            fields[addNewFieldIndex].value = .string("")
             
-            /// get index of add new cell
-            if let addNewFieldIndex = fields.indices.last {
-                fields[addNewFieldIndex].focused = true
-                fields[addNewFieldIndex].value = .string("")
+            let indexPath = IndexPath(item: addNewFieldIndex, section: 0)
+            if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
+                cell.field = fields[addNewFieldIndex]
+                cell.textField.becomeFirstResponder()
                 
-                let indexPath = IndexPath(item: addNewFieldIndex, section: 0)
-                if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
-                    cell.field = fields[addNewFieldIndex]
-                    cell.textField.becomeFirstResponder()
-                
-                    let (setup, animationBlock, completion) = cell.showAddNew(false, changeColorOnly: false)
-                    setup()
-                    UIView.animate(withDuration: 0.4) {
-                        animationBlock()
-                    } completion: { _ in
-                        completion()
-                    }
+                let (setup, animationBlock, completion) = cell.showAddNew(false, changeColorOnly: false)
+                setup()
+                UIView.animate(withDuration: 0.4) {
+                    animationBlock()
+                } completion: { _ in
+                    completion()
                 }
             }
+        }
+    
+        
+//        /// get index of add new cell
+//        if
+//            let addNewFieldIndex = fields.indices.last,
+//            case Field.Value.addNew = fields[addNewFieldIndex].value
+//        {
+////            print("Last is add new!")
+//            convertToRegularCell(index: addNewFieldIndex)
+//        } else if let lastAddNewFieldIndex = fields.indices.last(where: {
+//            if case Field.Value.addNew = fields[$0].value {
+//                return true
+//            } else {
+//                return false
+//            }
+//        }) {
+//            print(". \(lastAddNewFieldIndex) is add new!")
+//            convertToRegularCell(index: lastAddNewFieldIndex)
+//        }
+    }
+    
+    /// convert "Add New" cell into a normal field
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print("dragging ended, \(searchCollectionViewFlowLayout.highlightingAddWordField)")
+        if searchCollectionViewFlowLayout.highlightingAddWordField {
+//            searchCollectionViewFlowLayout.highlightingAddWordField = false
+            convertAddNewCellToRegularCell()
         }
     }
     
