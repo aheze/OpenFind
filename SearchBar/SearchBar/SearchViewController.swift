@@ -28,13 +28,13 @@ public class SearchViewController: UIViewController {
             if let oldCellIndex = oldCellIndex {
                 self.fields[oldCellIndex].focused = false /// for cellForItemAt later, after cell reloads
                 if let cell = self.searchCollectionView.cellForItem(at: oldCellIndex.indexPath) as? SearchFieldCell {
-                    cell.setField(self.fields[oldCellIndex]) /// set it right now anyway
+                    cell.field = self.fields[oldCellIndex] /// set it right now anyway
                 }
             }
             if let newCellIndex = newCellIndex {
                 self.fields[newCellIndex].focused = true
                 if let cell = self.searchCollectionView.cellForItem(at: newCellIndex.indexPath) as? SearchFieldCell {
-                    cell.setField(self.fields[newCellIndex]) /// set it right now anyway
+                    cell.field = self.fields[newCellIndex] /// set it right now anyway
                     cell.textField.becomeFirstResponder()
                 }
             }

@@ -38,9 +38,25 @@ class SearchFieldCell: UICollectionViewCell {
     var fieldChanged: ((Field) -> Void)?
     
     /// set field from datasource
+    /// ONLY cellForRowAt
     func setField(_ field: Field) {
         self.field = field
         self.textField.text = field.value.getText()
+        
+        switch field.value {
+        case .string(_):
+            break
+        case .list(_):
+            break
+        case .addNew:
+            let (_, animations, completion) = showAddNew(true, changeColorOnly: false)
+            animations()
+            completion()
+            return
+        }
+        let (_, animations, completion) = showAddNew(false, changeColorOnly: false)
+        animations()
+        completion()
     }
     
     func updateField(_ makeChangesTo: ((inout Field) -> Void)) {
@@ -48,23 +64,11 @@ class SearchFieldCell: UICollectionViewCell {
         self.fieldChanged?(field)
     }
     
-    private var field = Field(value: .string("")) {
+    var field = Field(value: .string("")) {
+        
+        /// perform instant updates, no animation
         didSet {
             textField.isEnabled = field.focused
-            switch field.value {
-            case .string(_):
-                break
-            case .list(_):
-                break
-            case .addNew:
-                let (_, animations, completion) = showAddNew(true, changeColorOnly: false)
-                animations()
-                completion()
-                return
-            }
-            let (_, animations, completion) = showAddNew(false, changeColorOnly: false)
-            animations()
-            completion()
         }
     }
     

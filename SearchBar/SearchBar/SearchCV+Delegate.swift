@@ -9,7 +9,6 @@ import UIKit
 
 extension SearchViewController: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Selected.")
         if let origin = searchCollectionViewFlowLayout.layoutAttributes[safe: indexPath.item]?.fullOrigin {
             let targetOrigin = searchCollectionViewFlowLayout.getTargetOffsetForScrollingThere(for: CGPoint(x: origin, y: 0))
             searchCollectionView.setContentOffset(targetOrigin, animated: true)
@@ -58,15 +57,15 @@ extension SearchViewController: UICollectionViewDelegate {
     /// convert "Add New" cell into a normal field
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if searchCollectionViewFlowLayout.highlightingAddWordField {
-            print("Ended dragging!")
             
             /// get index of add new cell
             if let addNewFieldIndex = fields.indices.last {
                 fields[addNewFieldIndex].focused = true
+                fields[addNewFieldIndex].value = .string("")
                 
                 let indexPath = IndexPath(item: addNewFieldIndex, section: 0)
                 if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
-                    cell.setField(fields[addNewFieldIndex])
+                    cell.field = fields[addNewFieldIndex]
                     cell.textField.becomeFirstResponder()
                 
                     let (setup, animationBlock, completion) = cell.showAddNew(false, changeColorOnly: false)
@@ -84,7 +83,6 @@ extension SearchViewController: UICollectionViewDelegate {
     /// append a brand-new "Add New" cell
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if searchCollectionViewFlowLayout.highlightingAddWordField {
-            print("add")
             searchCollectionViewFlowLayout.highlightingAddWordField = false
             
             /// append new "Add New" cell
@@ -92,7 +90,6 @@ extension SearchViewController: UICollectionViewDelegate {
             fields.append(newField)
             
             let indexOfLastField = self.fields.count - 2 /// index of the last field (not including "Add New" cell)
-            fields[indexOfLastField].value = .string("")
             
             searchCollectionView.reloadData() /// add the new field
             searchCollectionView.layoutIfNeeded() /// important! **Otherwise, will glitch**

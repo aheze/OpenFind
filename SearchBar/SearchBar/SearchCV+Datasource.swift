@@ -15,8 +15,6 @@ extension SearchViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SearchFieldCell else { return UICollectionViewCell() }
         
-//        print("Cell for: \(indexPath.item)... \(self.fields[indexPath.item].focused)")
-        
         cell.setField(self.fields[indexPath.item]) /// cell can configure itself
         cell.fieldChanged = { [weak self] field in
             self?.fields[indexPath.item] = field
