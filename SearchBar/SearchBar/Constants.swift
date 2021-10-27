@@ -33,5 +33,5 @@ struct Constants {
     
     static var fieldIconLength = CGFloat(32)
     
-    static var addTextPlaceholder = "Type here to find"
+    static var addTextPlaceholder = "Find anything"
 }

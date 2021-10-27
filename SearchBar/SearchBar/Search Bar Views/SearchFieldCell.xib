@@ -49,30 +49,30 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="Sxc-XY-Xa1"/>
-                                    <constraint firstAttribute="bottom" secondItem="TZ6-Wt-gjW" secondAttribute="bottom" id="cxM-k4-osw"/>
-                                    <constraint firstAttribute="height" constant="24" id="fEY-hg-Mh1"/>
-                                    <constraint firstAttribute="trailing" secondItem="TZ6-Wt-gjW" secondAttribute="trailing" id="gDB-It-y1M"/>
-                                    <constraint firstItem="TZ6-Wt-gjW" firstAttribute="leading" secondItem="v90-ox-xGV" secondAttribute="leading" id="lCa-kQ-sid"/>
-                                    <constraint firstItem="TZ6-Wt-gjW" firstAttribute="top" secondItem="v90-ox-xGV" secondAttribute="top" id="mer-on-QXO"/>
+                                    <constraint firstAttribute="width" constant="24" identifier="Add New WIdth" id="Sxc-XY-Xa1"/>
+                                    <constraint firstAttribute="bottom" secondItem="TZ6-Wt-gjW" secondAttribute="bottom" identifier="Add New View / Image - Bottom" id="cxM-k4-osw"/>
+                                    <constraint firstAttribute="height" constant="24" identifier="Add New Height" id="fEY-hg-Mh1"/>
+                                    <constraint firstAttribute="trailing" secondItem="TZ6-Wt-gjW" secondAttribute="trailing" identifier="Add New View / Image - Right" id="gDB-It-y1M"/>
+                                    <constraint firstItem="TZ6-Wt-gjW" firstAttribute="leading" secondItem="v90-ox-xGV" secondAttribute="leading" identifier="Add New View / Image - Left" id="lCa-kQ-sid"/>
+                                    <constraint firstItem="TZ6-Wt-gjW" firstAttribute="top" secondItem="v90-ox-xGV" secondAttribute="top" identifier="Add New View / Image - Top" id="mer-on-QXO"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="v90-ox-xGV" firstAttribute="centerX" secondItem="3YU-hQ-dhy" secondAttribute="centerX" id="0cb-cP-re4"/>
-                            <constraint firstAttribute="bottom" secondItem="FoT-tx-FJE" secondAttribute="bottom" id="16p-Az-8gA"/>
-                            <constraint firstAttribute="trailing" secondItem="oQg-Mx-Rfv" secondAttribute="trailing" id="1nR-O8-bXu"/>
-                            <constraint firstItem="FoT-tx-FJE" firstAttribute="top" secondItem="3YU-hQ-dhy" secondAttribute="top" id="QUl-Rf-RPR"/>
-                            <constraint firstItem="FoT-tx-FJE" firstAttribute="leading" secondItem="3YU-hQ-dhy" secondAttribute="leading" id="X1C-gT-nng"/>
-                            <constraint firstItem="8OT-QC-iKm" firstAttribute="leading" secondItem="FoT-tx-FJE" secondAttribute="trailing" id="br7-Qw-89x"/>
-                            <constraint firstAttribute="bottom" secondItem="8OT-QC-iKm" secondAttribute="bottom" id="fu9-do-PoE"/>
-                            <constraint firstItem="oQg-Mx-Rfv" firstAttribute="top" secondItem="3YU-hQ-dhy" secondAttribute="top" id="gur-Qf-tve"/>
-                            <constraint firstAttribute="bottom" secondItem="oQg-Mx-Rfv" secondAttribute="bottom" id="kqL-06-Fkk"/>
-                            <constraint firstItem="v90-ox-xGV" firstAttribute="centerY" secondItem="3YU-hQ-dhy" secondAttribute="centerY" id="oL6-OB-5bn"/>
-                            <constraint firstItem="8OT-QC-iKm" firstAttribute="top" secondItem="3YU-hQ-dhy" secondAttribute="top" id="oMz-7c-xgL"/>
-                            <constraint firstItem="oQg-Mx-Rfv" firstAttribute="leading" secondItem="8OT-QC-iKm" secondAttribute="trailing" id="pOZ-4x-pS5"/>
-                            <constraint firstItem="v90-ox-xGV" firstAttribute="centerX" secondItem="oQg-Mx-Rfv" secondAttribute="centerX" id="vXb-tt-rEQ"/>
+                            <constraint firstItem="v90-ox-xGV" firstAttribute="centerX" secondItem="3YU-hQ-dhy" secondAttribute="centerX" identifier="Add New Center X With Superview" id="0cb-cP-re4"/>
+                            <constraint firstAttribute="bottom" secondItem="FoT-tx-FJE" secondAttribute="bottom" identifier="Left View Bottom" id="16p-Az-8gA"/>
+                            <constraint firstAttribute="trailing" secondItem="oQg-Mx-Rfv" secondAttribute="trailing" identifier="Right View Right" id="1nR-O8-bXu"/>
+                            <constraint firstItem="FoT-tx-FJE" firstAttribute="top" secondItem="3YU-hQ-dhy" secondAttribute="top" identifier="Left View Top" id="QUl-Rf-RPR"/>
+                            <constraint firstItem="FoT-tx-FJE" firstAttribute="leading" secondItem="3YU-hQ-dhy" secondAttribute="leading" identifier="Left View Left" id="X1C-gT-nng"/>
+                            <constraint firstItem="8OT-QC-iKm" firstAttribute="leading" secondItem="FoT-tx-FJE" secondAttribute="trailing" identifier="Left View - Text Field" id="br7-Qw-89x"/>
+                            <constraint firstAttribute="bottom" secondItem="8OT-QC-iKm" secondAttribute="bottom" identifier="Text Field Bottom" id="fu9-do-PoE"/>
+                            <constraint firstItem="oQg-Mx-Rfv" firstAttribute="top" secondItem="3YU-hQ-dhy" secondAttribute="top" identifier="Right View Top" id="gur-Qf-tve"/>
+                            <constraint firstAttribute="bottom" secondItem="oQg-Mx-Rfv" secondAttribute="bottom" identifier="Right View Bottom" id="kqL-06-Fkk"/>
+                            <constraint firstItem="v90-ox-xGV" firstAttribute="centerY" secondItem="3YU-hQ-dhy" secondAttribute="centerY" identifier="Add New Center Vertically" id="oL6-OB-5bn"/>
+                            <constraint firstItem="8OT-QC-iKm" firstAttribute="top" secondItem="3YU-hQ-dhy" secondAttribute="top" identifier="Text Field Top" id="oMz-7c-xgL"/>
+                            <constraint firstItem="oQg-Mx-Rfv" firstAttribute="leading" secondItem="8OT-QC-iKm" secondAttribute="trailing" identifier="Text Field - Right View" id="pOZ-4x-pS5"/>
+                            <constraint firstItem="v90-ox-xGV" firstAttribute="centerX" secondItem="oQg-Mx-Rfv" secondAttribute="centerX" identifier="Add New Center Horizontally With Right" id="vXb-tt-rEQ"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -81,6 +81,7 @@
                         </variation>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="3YU-hQ-dhy" secondAttribute="bottom" constant="8" identifier="Base View Bottom" id="QxN-2M-ryv"/>
                     <constraint firstItem="3YU-hQ-dhy" firstAttribute="leading" secondItem="Ide-Nt-j59" secondAttribute="leading" constant="12" identifier="Base View Left" id="VKk-s5-IDu"/>
@@ -92,8 +93,8 @@
             <connections>
                 <outlet property="addNewImageView" destination="TZ6-Wt-gjW" id="xpW-gl-Ah7"/>
                 <outlet property="addNewView" destination="v90-ox-xGV" id="RHH-4U-PJT"/>
-                <outlet property="addNewViewCenterHorizontallyWithRightC" destination="vXb-tt-rEQ" id="PiV-kz-iVe"/>
-                <outlet property="addNewViewCenterHorizontallyWithSuperview" destination="0cb-cP-re4" id="8xn-bo-Bmr"/>
+                <outlet property="addNewViewCenterHorizontallyWithRightC" destination="vXb-tt-rEQ" id="Ahh-s8-xG6"/>
+                <outlet property="addNewViewCenterHorizontallyWithSuperview" destination="0cb-cP-re4" id="om6-Rn-WlB"/>
                 <outlet property="addNewViewHeightC" destination="fEY-hg-Mh1" id="Gql-RJ-QeA"/>
                 <outlet property="addNewViewWidthC" destination="Sxc-XY-Xa1" id="bYB-ax-duT"/>
                 <outlet property="baseView" destination="3YU-hQ-dhy" id="3EB-GY-jqy"/>

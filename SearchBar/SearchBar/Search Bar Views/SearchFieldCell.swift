@@ -50,6 +50,7 @@ class SearchFieldCell: UICollectionViewCell {
     
     private var field = Field(value: .string("")) {
         didSet {
+            textField.isEnabled = field.focused
             switch field.value {
             case .string(_):
                 break
@@ -93,16 +94,14 @@ class SearchFieldCell: UICollectionViewCell {
         leftViewWidthC.constant = 0
         rightViewWidthC.constant = 0
         
-//        leftView.tapped = { [weak self] in
-//            print("Tap!")
-//        }
-        
-        
         let image = UIImage(systemName: "xmark")
         let configuration = UIImage.SymbolConfiguration(font: Constants.fieldFont)
         addNewImageView.preferredSymbolConfiguration = configuration
         addNewImageView.image = image
         
+        //        leftView.tapped = { [weak self] in
+        //            print("Tap!")
+        //        }
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
@@ -133,8 +132,9 @@ class SearchFieldCell: UICollectionViewCell {
             setup = { [weak self] in
                 
                 if show { /// keep plus button centered
-                    self?.addNewViewCenterHorizontallyWithSuperview.isActive = true
+                    
                     self?.addNewViewCenterHorizontallyWithRightC.isActive = false
+                    self?.addNewViewCenterHorizontallyWithSuperview.isActive = true
                 } else { /// animate plus button to the right
                     self?.addNewViewCenterHorizontallyWithSuperview.isActive = false
                     self?.addNewViewCenterHorizontallyWithRightC.isActive = true
@@ -155,7 +155,7 @@ class SearchFieldCell: UICollectionViewCell {
                     self?.contentView.backgroundColor = Constants.fieldBackgroundColor
                 }
                 
-                self?.contentView.layoutIfNeeded()
+                self?.baseView.layoutIfNeeded()
             }
             
             completion = { [weak self] in

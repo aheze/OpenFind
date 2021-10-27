@@ -47,6 +47,16 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     /// actual content offset used by `prepare`
     var currentOffset = CGFloat(0)
     
+    /// old / new
+    var focusedCellIndexChanged: ((Int?, Int?) -> Void)?
+    
+    /// index of focused/expanded cell
+    var focusedCellIndex: Int? {
+        didSet {
+            focusedCellIndexChanged?(oldValue, focusedCellIndex)
+        }
+    }
+    
     /// showing (past the point where it will auto-scroll) the last field or not
     var highlightingAddWordField = false
    
@@ -55,7 +65,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     /// pass attributes to the collection view flow layout
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return layoutAttributes[indexPath.item]
+        print("layoutAttributes: \(layoutAttributes.count), at: \(indexPath.item)")
+        return layoutAttributes[safe: indexPath.item]
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -65,13 +76,24 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        return getTargetOffset(for: proposedContentOffset)
+        return getTargetOffsetForScrollingThere(for: proposedContentOffset)
+    }
+    
+    override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let attributes = super.layoutAttributesForItem(at: itemIndexPath)
+        print("New: \(attributes)")
+        return attributes
+    }
+    
+    override func finalizeCollectionViewUpdates() {
+        
     }
     
     
     /// make the layout (strip vs list) here
     override func prepare() { /// configure the cells' frames
         super.prepare()
+        
 
         guard let collectionView = collectionView else { return }
         let contentOffset = collectionView.contentOffset.x
@@ -242,7 +264,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         if !preparedOnce {
             preparedOnce = true
             
-            _ = getTargetOffset(for: CGPoint(x: contentOffset, y: 0))
+            /// get the target offset
+            _ = getTargetOffsetForScrollingThere(for: CGPoint(x: contentOffset, y: 0))
         }
     }
     
@@ -255,8 +278,15 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return context
     }
     
+    /// convenience - get the target offset, then you must scroll there.
+    func getTargetOffsetForScrollingThere(for point: CGPoint) -> CGPoint {
+        let (targetOffset, focusedIndex) = getTargetOffsetAndIndex(for: point)
+        self.focusedCellIndex = focusedIndex
+        return targetOffset
+    }
+    
     /// get nearest field, then scroll to it (with padding)
-    func getTargetOffset(for point: CGPoint) -> CGPoint {
+    func getTargetOffsetAndIndex(for point: CGPoint) -> (CGPoint, Int?) {
         
         if  /// handle end, but not actually swiped
             highlightingAddWordField,
@@ -264,7 +294,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         {
             reachedEndBeforeAddWordField = true
             let targetContentOffset = addWordFieldOrigin - Constants.sidePeekPadding
-            return CGPoint(x: targetContentOffset, y: 0)
+            return (CGPoint(x: targetContentOffset, y: 0), layoutAttributes.indices.last)
         } else {
             
             let centeredProposedContentOffset = point.x + ((collectionView?.bounds.width ?? 0) / 2) /// center to the screen
@@ -277,7 +307,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 let secondCenter = $1.element.fullOrigin + ($1.element.fullWidth / 2)
                 return abs(firstCenter - centeredProposedContentOffset) < abs(secondCenter - centeredProposedContentOffset)
             }) else { /// `layoutAttributes` is empty
-                return point
+                return (point, nil)
             }
             
             var targetContentOffset = closestOrigin.element.fullOrigin
@@ -294,9 +324,10 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 reachedEndBeforeAddWordField = false
             }
             
-            return CGPoint(x: targetContentOffset, y: 0)
+            return (CGPoint(x: targetContentOffset, y: 0), closestOrigin.offset)
         }
     }
+    
 }
 
 

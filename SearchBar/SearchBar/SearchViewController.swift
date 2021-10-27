@@ -23,6 +23,21 @@ public class SearchViewController: UIViewController {
         flowLayout.highlightAddNewField = { [weak self] shouldHighlight in
             self?.shouldHighlight(shouldHighlight)
         }
+        flowLayout.focusedCellIndexChanged = { [weak self] oldCellIndex, newCellIndex in
+            guard let self = self else { return }
+            if let oldCellIndex = oldCellIndex {
+                self.fields[oldCellIndex].focused = false /// for cellForItemAt later, after cell reloads
+                if let cell = self.searchCollectionView.cellForItem(at: oldCellIndex.indexPath) as? SearchFieldCell {
+                    cell.setField(self.fields[oldCellIndex]) /// set it right now anyway
+                }
+            }
+            if let newCellIndex = newCellIndex {
+                self.fields[newCellIndex].focused = true
+                if let cell = self.searchCollectionView.cellForItem(at: newCellIndex.indexPath) as? SearchFieldCell {
+                    cell.setField(self.fields[newCellIndex]) /// set it right now anyway
+                }
+            }
+        }
         searchCollectionView.setCollectionViewLayout(flowLayout, animated: false)
         return flowLayout
     }()
@@ -54,8 +69,8 @@ public class SearchViewController: UIViewController {
             Field(value: .addNew)
         ]
         
+
         setupCollectionViews()
-        
 
     }
     

@@ -28,6 +28,8 @@ struct Field {
     /// width of text label + side views, nothing more
     var fieldHuggingWidth = CGFloat(200)
     
+    /// if expanded
+    var focused = false
     
     enum Value {
         case string(String)
