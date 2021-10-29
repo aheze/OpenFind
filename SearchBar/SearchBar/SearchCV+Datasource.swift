@@ -15,7 +15,9 @@ extension SearchViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SearchFieldCell else { return UICollectionViewCell() }
         
-        cell.setField(self.fields[indexPath.item]) /// cell can configure itself
+        let field = self.fields[indexPath.item]
+        
+        cell.setField(field) /// cell can configure itself
         cell.fieldChanged = { [weak self] field in
             self?.fields[indexPath.item] = field
         }
@@ -24,13 +26,15 @@ extension SearchViewController: UICollectionViewDataSource {
         let (setup, _, _) = cell.showAddNew(true, changeColorOnly: false)
         setup()
         
+        
+        
         return cell
     }
     
     func widthOfExpandedCell(for index: Int) -> Double {
         
         var extraPadding = CGFloat(0)
-
+        
         if index == 0 {
             extraPadding += Constants.sidePadding /// if **left edge**, add side padding
         } else {

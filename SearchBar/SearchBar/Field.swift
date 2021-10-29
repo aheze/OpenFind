@@ -34,7 +34,7 @@ struct Field {
     enum Value {
         case string(String)
         case list(List)
-        case addNew
+        case addNew(String) /// `String` for input text during add new -> full cell animation
         
         func getText() -> String {
             switch self {
@@ -42,14 +42,15 @@ struct Field {
                 return string
             case .list(let list):
                 return list.name
-            case .addNew:
-                return ""
+            case .addNew(let string):
+                return string
             }
         }
     }
     
     private func getFieldHuggingWidth() -> CGFloat {
-        if case Field.Value.addNew = self.value {
+        
+        if case let .addNew(string) = self.value, string.isEmpty {
             return Constants.addWordFieldHuggingWidth
         } else {
             let fieldText = self.value.getText()

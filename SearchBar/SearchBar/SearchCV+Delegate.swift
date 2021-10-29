@@ -55,13 +55,12 @@ extension SearchViewController: UICollectionViewDelegate {
     }
     
     func convertAddNewCellToRegularCell() {
-        
         if
             let addNewFieldIndex = fields.indices.last,
             case Field.Value.addNew = fields[addNewFieldIndex].value
         {
             fields[addNewFieldIndex].focused = true
-            fields[addNewFieldIndex].value = .string("")
+            fields[addNewFieldIndex].value = .addNew("")
             
             let indexPath = IndexPath(item: addNewFieldIndex, section: 0)
             if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
@@ -86,11 +85,15 @@ extension SearchViewController: UICollectionViewDelegate {
             
             
             /// append new "Add New" cell
-            let newField = Field(value: .addNew)
+            let newField = Field(value: .addNew(""))
             fields.append(newField)
             
             let indexOfLastField = fields.count - 2 /// index of the last field (not including "Add New" cell)
-
+            
+            if case let .addNew(currentString) = fields[indexOfLastField].value {
+                fields[indexOfLastField].value = .string(currentString)
+            }
+            
             searchCollectionView.reloadData() /// add the new field
             searchCollectionView.layoutIfNeeded() /// important! **Otherwise, will glitch**
             

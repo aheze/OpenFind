@@ -134,9 +134,7 @@ class SearchFieldCell: UICollectionViewCell {
             }
         } else {
             setup = { [weak self] in
-                
                 if show { /// keep plus button centered
-                    
                     self?.addNewViewCenterHorizontallyWithRightC.isActive = false
                     self?.addNewViewCenterHorizontallyWithSuperview.isActive = true
                 } else { /// animate plus button to the right

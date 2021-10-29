@@ -39,9 +39,11 @@ public class SearchViewController: UIViewController {
                 }
             }
         }
-        flowLayout.instantlyAddNew = { [weak self] in
-            self?.convertAddNewCellToRegularCell()
-        }
+//        flowLayout.instantlyAddNew = { [weak self] in
+//            print("INT ADDDD")
+//            self?.convertAddNewCellToRegularCell()
+//        }
+        
         searchCollectionView.setCollectionViewLayout(flowLayout, animated: false)
         return flowLayout
     }()
@@ -70,7 +72,7 @@ public class SearchViewController: UIViewController {
 //            Field(value: .string("3.d Medium text")),
 //            Field(value: .string("4. Longer long long long long long text")),
 //            Field(value: .string("5. Text")),
-            Field(value: .addNew)
+            Field(value: .addNew(""))
         ]
         
 
@@ -100,13 +102,7 @@ extension SearchViewController {
         let bundle = Bundle(identifier: "com.aheze.SearchBar")
         let nib = UINib(nibName: "SearchFieldCell", bundle: bundle)
         searchCollectionView.register(nib, forCellWithReuseIdentifier: "Cell")
-        
-        
-//        for index in fields.indices {
-//            fields[index].fieldHuggingWidth = getFieldHuggingWidth(field: fields[index])
-//        }
-        
-        _ = searchCollectionViewFlowLayout
+        _ = searchCollectionViewFlowLayout /// initialize and set up
         
         searchCollectionView.panGestureRecognizer.addTarget(self, action: #selector(handlePan(_:)))
     }
@@ -115,7 +111,9 @@ extension SearchViewController {
     @objc func handlePan(_ sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .ended:
+            print("Dnede!!!!!")
             if searchCollectionViewFlowLayout.highlightingAddWordField {
+                print("Conv now")
                 convertAddNewCellToRegularCell()
             }
         default:
