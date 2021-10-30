@@ -21,6 +21,9 @@
       location = "container:"
       name = "General Frameworks">
       <FileRef
+         location = "group:TabBarController/TabBarController.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:OCR/OCR.xcodeproj">
       </FileRef>
       <FileRef
@@ -30,6 +33,9 @@
    <Group
       location = "container:"
       name = "Framework Testing">
+      <FileRef
+         location = "group:TabBarControllerTesting/TabBarControllerTesting.xcodeproj">
+      </FileRef>
       <FileRef
          location = "group:SearchBarTesting/SearchBarTesting.xcodeproj">
       </FileRef>

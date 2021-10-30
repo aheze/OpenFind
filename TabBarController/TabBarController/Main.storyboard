@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="TabBarViewController" id="Y6W-OH-hqX" customClass="TabBarViewController" customModule="TabBarController" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Q9-bi-u1l" customClass="TabBarView" customModule="TabBarController" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="742" width="414" height="154"/>
+                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="154" id="C0V-dv-94a"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ag-uH-Frh">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="742"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7ag-uH-Frh" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="VcD-8e-dZo"/>
+                            <constraint firstItem="7ag-uH-Frh" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="YuQ-FM-o63"/>
+                            <constraint firstItem="0Q9-bi-u1l" firstAttribute="top" secondItem="7ag-uH-Frh" secondAttribute="bottom" id="fTG-9u-j0H"/>
+                            <constraint firstAttribute="bottom" secondItem="0Q9-bi-u1l" secondAttribute="bottom" id="hTN-1B-Ib5"/>
+                            <constraint firstAttribute="trailing" secondItem="7ag-uH-Frh" secondAttribute="trailing" id="hhx-xm-Uka"/>
+                            <constraint firstItem="0Q9-bi-u1l" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="ljb-lM-dM8"/>
+                            <constraint firstItem="0Q9-bi-u1l" firstAttribute="top" secondItem="7ag-uH-Frh" secondAttribute="bottom" id="pP4-8S-Eeg"/>
+                            <constraint firstAttribute="trailing" secondItem="0Q9-bi-u1l" secondAttribute="trailing" id="wr7-iL-ivZ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contentView" destination="7ag-uH-Frh" id="Wmk-t9-xLo"/>
+                        <outlet property="tabBarHeightC" destination="C0V-dv-94a" id="ck3-7x-HnN"/>
+                        <outlet property="tabBarView" destination="0Q9-bi-u1l" id="kmQ-8M-cI3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="87.723214285714278"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
