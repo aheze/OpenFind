@@ -7,21 +7,10 @@
 
 import SwiftUI
 
-enum TabType {
-    case photos
-    case camera
-    case lists
-    
-    //    var visualAttributes: TabIconVisualAttributes {
-    //        switch self {
-    //        case .photos:
-    //            return .photos(.init())
-    //        case .camera:
-    //            return .camera(.init())
-    //        case .lists:
-    //            return .lists(.init())
-    //        }
-    //    }
+enum TabType: String {
+    case photos = "Photos"
+    case camera = "Camera"
+    case lists = "Lists"
 }
 
 
@@ -30,31 +19,81 @@ enum TabType {
 struct PhotosAttributes {
     struct Inactive {
         var foregroundColor = UIColor.gray.color
+        var backgroundHeight = CGFloat(48)
     }
     struct Active {
         var foregroundColor = UIColor.green.color
+        var backgroundHeight = CGFloat(48)
+    }
+}
+
+struct IconAttributes {
+    var foregroundColor: Color
+    var backgroundHeight: CGFloat
+    
+    struct Photos {
+        static let inactive: IconAttributes = {
+            return IconAttributes(
+                foregroundColor: UIColor.gray.color,
+                backgroundHeight: 48
+            )
+        }()
+        
+        static let active: IconAttributes = {
+            return IconAttributes(
+                foregroundColor: UIColor.green.color,
+                backgroundHeight: 48
+            )
+        }()
+    }
+    
+    struct Lists {
+        static let inactive: IconAttributes = {
+            return IconAttributes(
+                foregroundColor: UIColor.gray.color,
+                backgroundHeight: 48
+            )
+        }()
+        
+        static let active: IconAttributes = {
+            return IconAttributes(
+                foregroundColor: UIColor.yellow.color,
+                backgroundHeight: 48
+            )
+        }()
     }
 }
 
 struct CameraAttributes {
-    struct Inactive {
-        var fillColor = UIColor.gray.color
-        var rimColor = UIColor.darkGray.color
-        var length = CGFloat(26)
-    }
-    struct Active {
-        var fillColor = UIColor.blue.color
-        var rimColor = UIColor.purple.color
-        var length = CGFloat(58)
-    }
+    var fillColor: Color
+    var rimColor: Color
+    var length: CGFloat
+    
+    static let inactive: CameraAttributes = {
+        return CameraAttributes(
+            fillColor: UIColor.gray.color,
+            rimColor: UIColor.darkGray.color,
+            length: CGFloat(26)
+        )
+    }()
+    
+    static let active: CameraAttributes = {
+        return CameraAttributes(
+            fillColor: UIColor.blue.color,
+            rimColor: UIColor.purple.color,
+            length: CGFloat(58)
+        )
+    }()
 }
 
 struct ListsAttributes {
     struct Inactive {
         var foregroundColor = UIColor.gray.color
+        var backgroundHeight = CGFloat(48)
     }
     struct Active {
         var foregroundColor = UIColor.yellow.color
+        var backgroundHeight = CGFloat(48)
     }
 }
 

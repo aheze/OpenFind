@@ -13,12 +13,12 @@ struct TabBarView: View {
     var body: some View {
         VStack {
             HStack(spacing: 0) {
-                PhotosButton(activeTab: $tabViewModel.activeTab)
+                IconButton(activeTab: $tabViewModel.activeTab, tabType: .photos)
                 CameraButton(activeTab: $tabViewModel.activeTab)
-                ListsButton(activeTab: $tabViewModel.activeTab)
+                IconButton(activeTab: $tabViewModel.activeTab, tabType: .lists)
             }
             .padding(.horizontal, 16)
-            .padding(.bottom, 16)
+            .padding(.bottom, 26)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.purple)
@@ -27,13 +27,9 @@ struct TabBarView: View {
     }
 }
 
-struct PhotosButton: View {
+struct IconButton: View {
     @Binding var activeTab: TabType
-    let tabType = TabType.photos
-    
-    var isActive: Bool { return activeTab == tabType }
-    let inactive = PhotosAttributes.Inactive()
-    let active = PhotosAttributes.Active()
+    let tabType: TabType
     
     var body: some View {
         Button {
@@ -41,10 +37,26 @@ struct PhotosButton: View {
                 activeTab = tabType
             }
         } label: {
-            Image("Photos")
-                .foregroundColor(isActive ? active.foregroundColor : inactive.foregroundColor)
+            Image(tabType.rawValue)
+                .foregroundColor(attributes.foregroundColor)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.yellow)
+        }
+    }
+    
+    var attributes: IconAttributes {
+        if tabType == .photos {
+            if activeTab == tabType {
+                return IconAttributes.Photos.active
+            } else {
+                return IconAttributes.Photos.inactive
+            }
+        } else {
+            if activeTab == tabType {
+                return IconAttributes.Lists.active
+            } else {
+                return IconAttributes.Lists.inactive
+            }
         }
     }
 }
@@ -52,10 +64,6 @@ struct PhotosButton: View {
 struct CameraButton: View {
     @Binding var activeTab: TabType
     let tabType = TabType.camera
-    
-    var isActive: Bool { return activeTab == tabType }
-    let inactive = CameraAttributes.Inactive()
-    let active = CameraAttributes.Active()
     
     var body: some View {
         Button {
@@ -65,11 +73,19 @@ struct CameraButton: View {
         } label: {
             Group {
                 Circle()
-                    .fill(isActive ? active.fillColor : inactive.fillColor)
-                    .frame(width: isActive ? active.length : inactive.length, height: isActive ? active.length : inactive.length)
+                    .fill(attributes.fillColor)
+                    .frame(width: attributes.length, height: attributes.length)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.yellow)
+        }
+    }
+    
+    var attributes: CameraAttributes {
+        if activeTab == tabType {
+            return CameraAttributes.active
+        } else {
+            return CameraAttributes.inactive
         }
     }
 }
