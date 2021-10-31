@@ -12,48 +12,51 @@ enum TabType {
     case camera
     case lists
     
-//    var visualAttributes: TabIconVisualAttributes {
-//        switch self {
-//        case .photos:
-//            return .photos(.init())
-//        case .camera:
-//            return .camera(.init())
-//        case .lists:
-//            return .lists(.init())
-//        }
-//    }
+    //    var visualAttributes: TabIconVisualAttributes {
+    //        switch self {
+    //        case .photos:
+    //            return .photos(.init())
+    //        case .camera:
+    //            return .camera(.init())
+    //        case .lists:
+    //            return .lists(.init())
+    //        }
+    //    }
 }
 
 
 /// grouping of all visual properties, for setting active/inactive
 /// also for animations
-//enum TabIconVisualAttributes {
-//    case photos(PhotosAttributes)
-//    case camera(CameraAttributes)
-//    case lists(ListsAttributes)
-    
-    struct PhotosAttributes {
-        var inactiveForegroundColor = UIColor.gray
-        var activeForegroundColor = UIColor.green
-        var imageName = "Photos"
+struct PhotosAttributes {
+    struct Inactive {
+        var foregroundColor = UIColor.gray.color
     }
-    
-    struct CameraAttributes {
-        var inactiveFillColor = UIColor.gray
-        var inactiveRimColor = UIColor.darkGray
-        var inactiveLength = CGFloat(26)
-        
-        var activeFillColor = UIColor.blue
-        var activeRimColor = UIColor.purple
-        var activeLength = CGFloat(58)
+    struct Active {
+        var foregroundColor = UIColor.green.color
     }
-    
-    struct ListsAttributes {
-        var inactiveForegroundColor = UIColor.gray
-        var activeForegroundColor = UIColor.yellow
-        var imageName = "Lists"
+}
+
+struct CameraAttributes {
+    struct Inactive {
+        var fillColor = UIColor.gray.color
+        var rimColor = UIColor.darkGray.color
+        var length = CGFloat(26)
     }
-//}
+    struct Active {
+        var fillColor = UIColor.blue.color
+        var rimColor = UIColor.purple.color
+        var length = CGFloat(58)
+    }
+}
+
+struct ListsAttributes {
+    struct Inactive {
+        var foregroundColor = UIColor.gray.color
+    }
+    struct Active {
+        var foregroundColor = UIColor.yellow.color
+    }
+}
 
 extension UIColor {
     var color: Color {

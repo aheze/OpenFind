@@ -14,7 +14,7 @@ struct TabBarView: View {
         VStack {
             HStack(spacing: 0) {
                 PhotosButton(activeTab: $tabViewModel.activeTab)
-                CameraButton()
+                CameraButton(activeTab: $tabViewModel.activeTab)
                 ListsButton(activeTab: $tabViewModel.activeTab)
             }
             .padding(.horizontal, 16)
@@ -30,14 +30,19 @@ struct TabBarView: View {
 struct PhotosButton: View {
     @Binding var activeTab: TabType
     let tabType = TabType.photos
-    let attributes = PhotosAttributes()
+    
+    var isActive: Bool { return activeTab == tabType }
+    let inactive = PhotosAttributes.Inactive()
+    let active = PhotosAttributes.Active()
     
     var body: some View {
         Button {
-            activeTab = tabType
+            withAnimation {
+                activeTab = tabType
+            }
         } label: {
             Image("Photos")
-                .foregroundColor(activeTab == tabType ? attributes.activeForegroundColor.color : attributes.inactiveForegroundColor.color)
+                .foregroundColor(isActive ? active.foregroundColor : inactive.foregroundColor)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.yellow)
         }
@@ -45,13 +50,26 @@ struct PhotosButton: View {
 }
 
 struct CameraButton: View {
+    @Binding var activeTab: TabType
+    let tabType = TabType.camera
+    
+    var isActive: Bool { return activeTab == tabType }
+    let inactive = CameraAttributes.Inactive()
+    let active = CameraAttributes.Active()
+    
     var body: some View {
         Button {
-            print("Camera!")
+            withAnimation {
+                activeTab = tabType
+            }
         } label: {
-            Image(systemName: "square.grid.2x2")
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color.yellow)
+            Group {
+                Circle()
+                    .fill(isActive ? active.fillColor : inactive.fillColor)
+                    .frame(width: isActive ? active.length : inactive.length, height: isActive ? active.length : inactive.length)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.yellow)
         }
     }
 }
@@ -59,14 +77,19 @@ struct CameraButton: View {
 struct ListsButton: View {
     @Binding var activeTab: TabType
     let tabType = TabType.lists
-    let attributes = ListsAttributes()
+    
+    var isActive: Bool { return activeTab == tabType }
+    let inactive = ListsAttributes.Inactive()
+    let active = ListsAttributes.Active()
     
     var body: some View {
         Button {
-            activeTab = tabType
+            withAnimation {
+                activeTab = tabType
+            }
         } label: {
             Image("Lists")
-                .foregroundColor(activeTab == tabType ? attributes.activeForegroundColor.color : attributes.inactiveForegroundColor.color)
+                .foregroundColor(isActive ? active.foregroundColor : inactive.foregroundColor)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.yellow)
         }
