@@ -16,16 +16,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Q9-bi-u1l" customClass="TabBarView" customModule="TabBarController" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ag-uH-Frh">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Q9-bi-u1l">
                                 <rect key="frame" x="0.0" y="742" width="414" height="154"/>
                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="154" id="C0V-dv-94a"/>
                                 </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ag-uH-Frh">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="742"/>
-                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -33,18 +33,17 @@
                         <constraints>
                             <constraint firstItem="7ag-uH-Frh" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="VcD-8e-dZo"/>
                             <constraint firstItem="7ag-uH-Frh" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="YuQ-FM-o63"/>
-                            <constraint firstItem="0Q9-bi-u1l" firstAttribute="top" secondItem="7ag-uH-Frh" secondAttribute="bottom" id="fTG-9u-j0H"/>
                             <constraint firstAttribute="bottom" secondItem="0Q9-bi-u1l" secondAttribute="bottom" id="hTN-1B-Ib5"/>
                             <constraint firstAttribute="trailing" secondItem="7ag-uH-Frh" secondAttribute="trailing" id="hhx-xm-Uka"/>
                             <constraint firstItem="0Q9-bi-u1l" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="ljb-lM-dM8"/>
-                            <constraint firstItem="0Q9-bi-u1l" firstAttribute="top" secondItem="7ag-uH-Frh" secondAttribute="bottom" id="pP4-8S-Eeg"/>
+                            <constraint firstAttribute="bottom" secondItem="7ag-uH-Frh" secondAttribute="bottom" id="pP4-8S-Eeg"/>
                             <constraint firstAttribute="trailing" secondItem="0Q9-bi-u1l" secondAttribute="trailing" id="wr7-iL-ivZ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="contentView" destination="7ag-uH-Frh" id="Wmk-t9-xLo"/>
+                        <outlet property="tabBarContainerView" destination="0Q9-bi-u1l" id="LXE-NC-OcT"/>
                         <outlet property="tabBarHeightC" destination="C0V-dv-94a" id="ck3-7x-HnN"/>
-                        <outlet property="tabBarView" destination="0Q9-bi-u1l" id="kmQ-8M-cI3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

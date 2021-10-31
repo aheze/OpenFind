@@ -12,9 +12,10 @@
 		3C337936272BBA930055A73A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C337935272BBA930055A73A /* Constants.swift */; };
 		3C337938272BBAB90055A73A /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C337937272BBAB90055A73A /* TabBarViewController.swift */; };
 		3C33795F272BBB970055A73A /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C33795E272BBB970055A73A /* Bridge.swift */; };
-		3C337961272BBC5C0055A73A /* TabBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C337960272BBC5C0055A73A /* TabBarView.xib */; };
-		3C337963272BBC620055A73A /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C337962272BBC620055A73A /* TabBarView.swift */; };
 		3C337965272BBCEB0055A73A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C337964272BBCEB0055A73A /* Utilities.swift */; };
+		3C337967272DA7D60055A73A /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C337966272DA7D60055A73A /* TabBarView.swift */; };
+		3C337969272DA84C0055A73A /* TabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C337968272DA84C0055A73A /* TabViewModel.swift */; };
+		3C33796D272DCD9F0055A73A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C33796C272DCD9F0055A73A /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,9 +25,10 @@
 		3C337935272BBA930055A73A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3C337937272BBAB90055A73A /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		3C33795E272BBB970055A73A /* Bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
-		3C337960272BBC5C0055A73A /* TabBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabBarView.xib; sourceTree = "<group>"; };
-		3C337962272BBC620055A73A /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		3C337964272BBCEB0055A73A /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		3C337966272DA7D60055A73A /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		3C337968272DA84C0055A73A /* TabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewModel.swift; sourceTree = "<group>"; };
+		3C33796C272DCD9F0055A73A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,10 +65,11 @@
 				3C337935272BBA930055A73A /* Constants.swift */,
 				3C33795E272BBB970055A73A /* Bridge.swift */,
 				3C337933272BB9840055A73A /* Main.storyboard */,
+				3C337968272DA84C0055A73A /* TabViewModel.swift */,
 				3C337937272BBAB90055A73A /* TabBarViewController.swift */,
-				3C337960272BBC5C0055A73A /* TabBarView.xib */,
-				3C337962272BBC620055A73A /* TabBarView.swift */,
+				3C337966272DA7D60055A73A /* TabBarView.swift */,
 				3C337964272BBCEB0055A73A /* Utilities.swift */,
+				3C33796C272DCD9F0055A73A /* Assets.xcassets */,
 			);
 			path = TabBarController;
 			sourceTree = "<group>";
@@ -141,7 +144,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C337961272BBC5C0055A73A /* TabBarView.xib in Resources */,
+				3C33796D272DCD9F0055A73A /* Assets.xcassets in Resources */,
 				3C337934272BB9840055A73A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,8 +158,9 @@
 			files = (
 				3C337938272BBAB90055A73A /* TabBarViewController.swift in Sources */,
 				3C337936272BBA930055A73A /* Constants.swift in Sources */,
-				3C337963272BBC620055A73A /* TabBarView.swift in Sources */,
 				3C337965272BBCEB0055A73A /* Utilities.swift in Sources */,
+				3C337967272DA7D60055A73A /* TabBarView.swift in Sources */,
+				3C337969272DA84C0055A73A /* TabViewModel.swift in Sources */,
 				3C33795F272BBB970055A73A /* Bridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
