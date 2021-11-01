@@ -18,13 +18,29 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ag-uH-Frh">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Et1-pl-Idc">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        <connections>
+                                            <action selector="buttonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hFg-Eg-xqo"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Et1-pl-Idc" secondAttribute="trailing" id="B7J-mp-trI"/>
+                                    <constraint firstItem="Et1-pl-Idc" firstAttribute="leading" secondItem="7ag-uH-Frh" secondAttribute="leading" id="UIc-mc-2Qu"/>
+                                    <constraint firstAttribute="bottom" secondItem="Et1-pl-Idc" secondAttribute="bottom" id="fSl-rS-5Wt"/>
+                                    <constraint firstItem="Et1-pl-Idc" firstAttribute="top" secondItem="7ag-uH-Frh" secondAttribute="top" id="ugs-kx-YeN"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Q9-bi-u1l">
-                                <rect key="frame" x="0.0" y="742" width="414" height="154"/>
+                                <rect key="frame" x="0.0" y="496" width="414" height="400"/>
                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="154" id="C0V-dv-94a"/>
+                                    <constraint firstAttribute="height" constant="400" id="C0V-dv-94a"/>
                                 </constraints>
                             </view>
                         </subviews>
