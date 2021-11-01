@@ -34,11 +34,15 @@ public class TabBarViewController: UIViewController {
         
         let tabBarHostingController = UIHostingController(rootView: TabBarView(tabViewModel: tabViewModel))
         addChild(tabBarHostingController, in: tabBarContainerView)
-        tabBarContainerView.clipsToBounds = true
+        tabBarHostingController.view.backgroundColor = .clear
+        tabBarContainerView.backgroundColor = .clear
+        
+
+//        tabBarContainerView.clipsToBounds = true
     }
     
     func setupConstraints() {
-        tabBarHeightC.constant = Constants.tabBarHeight
+        tabBarHeightC.constant = Constants.tabBarShrunkHeight
     }
     
     private func updateTabBar(_ activeTab: TabType) {
@@ -49,7 +53,7 @@ public class TabBarViewController: UIViewController {
             if activeTab == .camera {
                 self.tabBarHeightC.constant = 200
             } else {
-                self.tabBarHeightC.constant = Constants.tabBarHeight
+                self.tabBarHeightC.constant = Constants.tabBarShrunkHeight
             }
         }
     }

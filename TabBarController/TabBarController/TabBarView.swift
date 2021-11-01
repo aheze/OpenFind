@@ -11,18 +11,62 @@ struct TabBarView: View {
     @ObservedObject var tabViewModel: TabViewModel
     
     var body: some View {
-        Color.purple.overlay(
+        Color.clear.overlay(
+            
             VStack {
                 HStack(alignment: .bottom, spacing: 0) {
                     IconButton(activeTab: $tabViewModel.activeTab, tabType: .photos)
                     CameraButton(activeTab: $tabViewModel.activeTab)
                     IconButton(activeTab: $tabViewModel.activeTab, tabType: .lists)
                 }
-                .border(Color.black, width: 5)
-                .padding(.horizontal, 16)
-                .padding(.bottom, 26)
-            }, alignment: .bottom
-        ).edgesIgnoringSafeArea(.all)  
+            }
+                .overlay(
+                    Group {
+                        HStack(alignment: .top, spacing: 0) {
+                            HStack {
+                                ToolbarButton(iconName: "arrow.up.left.and.arrow.down.right")
+                                Spacer()
+                                ToolbarButton(iconName: "bolt.slash.fill")
+                            }
+                            .frame(maxWidth: .infinity)
+                            
+                            Color.clear
+                            
+                            HStack {
+                                ToolbarButton(iconName: "viewfinder")
+                                Spacer()
+                                ToolbarButton(iconName: "gearshape.fill")
+                            }
+                            .frame(maxWidth: .infinity)
+                        }
+                    }
+                        .opacity(tabViewModel.activeTab == .camera ? 1 : 0)
+                        .offset(x: 0, y: tabViewModel.activeTab == .camera ? 0 : -40)
+                )
+            
+                .padding(EdgeInsets(top: 16, leading: 16, bottom: Constants.tabBarBottomPadding, trailing: 16))
+                .background(
+                    Color(tabViewModel.activeTab == .camera ? Constants.tabBarDarkBackgroundColor : Constants.tabBarLightBackgroundColor)
+                )
+            
+            , alignment: .bottom
+        ).edgesIgnoringSafeArea(.all)
+    }
+}
+
+struct ToolbarButton: View {
+    var iconName: String
+    var body: some View {
+        Button {
+            print("Pressed")
+        } label: {
+            Image(systemName: iconName)
+                .foregroundColor(.white)
+                .font(.system(size: 19))
+                .frame(width: 40, height: 40)
+                .background(.white.opacity(0.15))
+                .cornerRadius(20)
+        }
     }
 }
 
@@ -42,7 +86,6 @@ struct IconButton: View {
             }
             .frame(maxWidth: .infinity)
             .frame(height: attributes.backgroundHeight)
-            .background(Color.green)
         }
     }
     
@@ -50,14 +93,18 @@ struct IconButton: View {
         if tabType == .photos {
             if activeTab == tabType {
                 return IconAttributes.Photos.active
+            } else if activeTab == .camera {
+                return IconAttributes.Photos.inactiveDarkBackground
             } else {
-                return IconAttributes.Photos.inactive
+                return IconAttributes.Photos.inactiveLightBackground
             }
         } else {
             if activeTab == tabType {
                 return IconAttributes.Lists.active
+            } else if activeTab == .camera {
+                return IconAttributes.Lists.inactiveDarkBackground
             } else {
-                return IconAttributes.Lists.inactive
+                return IconAttributes.Lists.inactiveLightBackground
             }
         }
     }
@@ -84,7 +131,6 @@ struct CameraButton: View {
             }
             .frame(maxWidth: .infinity)
             .frame(height: attributes.backgroundHeight)
-            .background(Color.yellow)
         }
     }
     

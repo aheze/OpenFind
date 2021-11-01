@@ -26,32 +26,49 @@ struct IconAttributes {
     var backgroundHeight: CGFloat
     
     struct Photos {
-        static let inactive: IconAttributes = {
+        
+        /// when active tab is camera
+        static let inactiveDarkBackground: IconAttributes = {
             return IconAttributes(
-                foregroundColor: UIColor.gray.color,
+                foregroundColor: UIColor.white.color,
                 backgroundHeight: 48
             )
         }()
         
+        static let inactiveLightBackground: IconAttributes = {
+            return IconAttributes(
+                foregroundColor: UIColor(hex: 0x7e7e7e).color,
+                backgroundHeight: 48
+            )
+        }()
+        
+        /// always light background
         static let active: IconAttributes = {
             return IconAttributes(
-                foregroundColor: UIColor.green.color,
+                foregroundColor: UIColor(hex: 0x40C74D).color,
                 backgroundHeight: 48
             )
         }()
     }
     
     struct Lists {
-        static let inactive: IconAttributes = {
+        static let inactiveDarkBackground: IconAttributes = {
             return IconAttributes(
-                foregroundColor: UIColor.gray.color,
+                foregroundColor: UIColor.white.color,
+                backgroundHeight: 48
+            )
+        }()
+        
+        static let inactiveLightBackground: IconAttributes = {
+            return IconAttributes(
+                foregroundColor: UIColor(hex: 0x7e7e7e).color,
                 backgroundHeight: 48
             )
         }()
         
         static let active: IconAttributes = {
             return IconAttributes(
-                foregroundColor: UIColor.yellow.color,
+                foregroundColor: UIColor(hex: 0xFFC600).color,
                 backgroundHeight: 48
             )
         }()
@@ -72,19 +89,19 @@ struct CameraAttributes {
         return CameraAttributes(
             backgroundHeight: 48,
             length: CGFloat(26),
-            fillColor: UIColor.gray.color,
-            rimColor: UIColor.darkGray.color,
+            fillColor: UIColor(hex: 0x7e7e7e).withAlphaComponent(0.5).color,
+            rimColor: UIColor(hex: 0x7e7e7e).color,
             rimWidth: 1
         )
     }()
     
     static let active: CameraAttributes = {
         return CameraAttributes(
-            backgroundHeight: 120,
+            backgroundHeight: 98,
             length: CGFloat(64),
-            fillColor: UIColor.blue.color,
-            rimColor: UIColor.purple.color,
-            rimWidth: 6
+            fillColor: UIColor(hex: 0x00aeef).withAlphaComponent(0.5).color,
+            rimColor: UIColor.white.color,
+            rimWidth: 3
         )
     }()
 }
