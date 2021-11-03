@@ -122,7 +122,7 @@ struct CameraButton: View {
     
     var body: some View {
         Button {
-            withAnimation {
+            withAnimation(.easeOut(duration: 5)) {
                 activeTab = tabType
             }
         } label: {

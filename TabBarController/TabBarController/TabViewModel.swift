@@ -19,6 +19,7 @@ enum TabType: String {
 }
 
 
+
 /// grouping of all visual properties, for setting active/inactive
 /// also for animations
 struct IconAttributes {

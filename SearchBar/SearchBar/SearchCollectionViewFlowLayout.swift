@@ -7,15 +7,6 @@
 
 import UIKit
 
-//struct FieldCellLayout {
-//    var origin = CGFloat(0)
-//    var width = CGFloat(0)
-//    var fullOrigin = CGFloat(0) /// origin when expanded
-//    var fullWidth = CGFloat(0) /// width when expanded
-//    var percentageShrunk = CGFloat(0) /// how much percent shrunk
-//}
-
-
 class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     override init() {
@@ -31,12 +22,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     /// pass back data
     var highlightAddNewField: ((Bool) -> Void)?
-    
-    /// add new field instantly, since it past halfway point
-//    var instantlyAddNew: (() -> Void)?
-    
-    /// currently adding a new field, don't call `instantlyAddNew` again
-//    var addingNewInstantly = false
     
     /// store the frame of each item
     /// plus other properties
@@ -108,7 +93,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         for index in fieldHuggingWidths.indices {
             let fullCellWidth = getFullCellWidth?(index) ?? 0
             
-            var sidePadding = CGFloat(0) // TODO maybe just coll bounds
+            var sidePadding = CGFloat(0)
             let cellOriginWithoutSidePadding: CGFloat
             if index == 0 {
                 
@@ -149,19 +134,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                         let percentage = distanceTravelledLeft / (Constants.addWordFieldSnappingFactor * distanceToNextCell)
                         alpha = min(1, percentage)
                         
-                        
-                        
                         /// highlight/tap `true` if percentage > 1
                         let shouldHighlight = percentage > 1
                         if shouldHighlight {
-                            
-//                            if distanceTravelledLeft > (collectionView.bounds.width / 2) {
-//                                if !addingNewInstantly {
-//                                    addingNewInstantly = true
-//                                    instantlyAddNew?()
-//                                }
-//                            }
-                            
                             if !highlightingAddWordField { /// don't call too many times
                                 highlightingAddWordField = shouldHighlight
                                 highlightAddNewField?(shouldHighlight)
@@ -172,12 +147,11 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                                 highlightAddNewField?(shouldHighlight)
                             }
                         }
-                        
-                        
                     } else {
                         alpha = 0 /// still haven't hit edge, so hide always, even when bouncing
                     }
                 }
+                
                 let fieldOffset = FieldOffset(fullWidth: fullCellWidth, percentage: percentage, shift: shift, alpha: alpha)
                 rightFieldOffsets.append(fieldOffset)
                 
@@ -335,7 +309,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             return (CGPoint(x: targetContentOffset, y: 0), closestOrigin.offset)
         }
     }
-    
 }
 
 

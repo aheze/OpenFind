@@ -11,12 +11,29 @@ import Combine
 
 public class TabBarViewController: UIViewController {
     
+    /// data
+    var tabs: [TabType] = [.photos, .camera, .lists]
+    
+    
     /// big area
     @IBOutlet weak var contentView: UIView!
     
+    /// for the pages
+    @IBOutlet weak var contentCollectionView: UICollectionView!
+    lazy var contentPagingLayout: ContentPagingFlowLayout = {
+        let flowLayout = ContentPagingFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        
+        contentCollectionView.setCollectionViewLayout(flowLayout, animated: false)
+        
+        flowLayout.getTabs = { [weak self] in
+            return self?.tabs ?? [TabType]()
+        }
+        return flowLayout
+    }()
+    
     /// for tab bar (SwiftUI)
     @IBOutlet weak var tabBarContainerView: UIView!
-    
     @IBOutlet weak var tabBarHeightC: NSLayoutConstraint!
     
     private var tabViewModel: TabViewModel!
@@ -36,9 +53,9 @@ public class TabBarViewController: UIViewController {
         addChild(tabBarHostingController, in: tabBarContainerView)
         tabBarHostingController.view.backgroundColor = .clear
         tabBarContainerView.backgroundColor = .clear
+    
         
-
-//        tabBarContainerView.clipsToBounds = true
+        setupCollectionView()
     }
     
     func setupConstraints() {
@@ -60,6 +77,15 @@ public class TabBarViewController: UIViewController {
     
     @IBAction func buttonPressed(_ sender: Any) {
         print("Button Pressed!")
+    }
+    
+    
+    func setupCollectionView() {
+        _ = contentPagingLayout
+        
+        contentCollectionView.backgroundColor = .green
+        contentCollectionView.dataSource = self
+        contentCollectionView.delegate = self
     }
 }
 
