@@ -20,34 +20,39 @@ struct TabBarView: View {
                     IconButton(activeTab: $tabViewModel.activeTab, tabType: .lists)
                 }
             }
-                .overlay(
-                    Group {
-                        HStack(alignment: .top, spacing: 0) {
-                            HStack {
-                                ToolbarButton(iconName: "arrow.up.left.and.arrow.down.right")
-                                Spacer()
-                                ToolbarButton(iconName: "bolt.slash.fill")
-                            }
-                            .frame(maxWidth: .infinity)
-                            
-                            Color.clear
-                            
-                            HStack {
-                                ToolbarButton(iconName: "viewfinder")
-                                Spacer()
-                                ToolbarButton(iconName: "gearshape.fill")
-                            }
-                            .frame(maxWidth: .infinity)
+            .overlay(
+                Group {
+                    HStack(alignment: .top, spacing: 0) {
+                        HStack {
+                            ToolbarButton(iconName: "arrow.up.left.and.arrow.down.right")
+                            Spacer()
+                            ToolbarButton(iconName: "bolt.slash.fill")
                         }
+                        .frame(maxWidth: .infinity)
+                        
+                        Color.clear
+                        
+                        HStack {
+                            ToolbarButton(iconName: "viewfinder")
+                            Spacer()
+                            ToolbarButton(iconName: "gearshape.fill")
+                        }
+                        .frame(maxWidth: .infinity)
                     }
-                        .opacity(tabViewModel.activeTab == .camera ? 1 : 0)
-                        .offset(x: 0, y: tabViewModel.activeTab == .camera ? 0 : -40)
-                )
-            
-                .padding(EdgeInsets(top: 16, leading: 16, bottom: Constants.tabBarBottomPadding, trailing: 16))
-                .background(
-                    Color(tabViewModel.activeTab == .camera ? Constants.tabBarDarkBackgroundColor : Constants.tabBarLightBackgroundColor)
-                )
+                }
+                    .opacity(tabViewModel.activeTab == .camera ? 1 : 0)
+                    .offset(x: 0, y: tabViewModel.activeTab == .camera ? 0 : -40)
+            )
+        
+            .padding(EdgeInsets(top: 16, leading: 16, bottom: Constants.tabBarBottomPadding, trailing: 16))
+            .background(
+                Color(tabViewModel.activeTab == .camera ? Constants.tabBarDarkBackgroundColor : Constants.tabBarLightBackgroundColor)
+            )
+            .overlay(
+                Rectangle()
+                    .fill(Color(UIColor.secondaryLabel))
+                    .frame(height: tabViewModel.activeTab == .camera ? 0 : 0.5)
+                , alignment: .top)
             
             , alignment: .bottom
         ).edgesIgnoringSafeArea(.all)
@@ -87,6 +92,7 @@ struct IconButton: View {
             .frame(maxWidth: .infinity)
             .frame(height: attributes.backgroundHeight)
         }
+        .buttonStyle(IconButtonStyle())
     }
     
     var attributes: IconAttributes {
@@ -132,6 +138,8 @@ struct CameraButton: View {
             .frame(maxWidth: .infinity)
             .frame(height: attributes.backgroundHeight)
         }
+        
+        .buttonStyle(CameraButtonStyle(isShutter: activeTab == tabType))
     }
     
     var attributes: CameraAttributes {
@@ -140,6 +148,31 @@ struct CameraButton: View {
         } else {
             return CameraAttributes.inactive
         }
+    }
+}
+
+struct CameraButtonStyle: ButtonStyle {
+    var isShutter: Bool
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect((isShutter && configuration.isPressed) ? 0.9 : 1)
+            .modifier(FadingButtonModifier(isPressed: !isShutter && configuration.isPressed))
+            .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
+    }
+}
+struct IconButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .modifier(FadingButtonModifier(isPressed: configuration.isPressed))
+            .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
+    }
+}
+  
+struct FadingButtonModifier: ViewModifier {
+    let isPressed: Bool
+    func body(content: Content) -> some View {
+        content
+            .opacity(isPressed ? 0.5 : 1)
     }
 }
 
