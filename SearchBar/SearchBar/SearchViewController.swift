@@ -111,9 +111,7 @@ extension SearchViewController {
     @objc func handlePan(_ sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .ended:
-            print("Dnede!!!!!")
             if searchCollectionViewFlowLayout.highlightingAddWordField {
-                print("Conv now")
                 convertAddNewCellToRegularCell()
             }
         default:

@@ -58,8 +58,7 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         
 
         guard let collectionView = collectionView else { return }
-        let contentOffset = collectionView.contentOffset.x
-        currentOffset = contentOffset
+        
         
         let width = collectionView.bounds.width
         let height = collectionView.bounds.height
@@ -84,7 +83,12 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
             preparedOnce = true
             
             /// get the target offset
+            if let cameraOrigin = layoutAttributes[safe: 1]?.frame.origin {
+                collectionView.contentOffset = cameraOrigin
+            }
         }
+        
+        currentOffset = collectionView.contentOffset.x
     }
     
     /// boilerplate code
@@ -105,6 +109,7 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
 
         let candidateOffsets = layoutAttributes.map { $0.frame.origin }
         let pickedOffsets: [CGPoint]
+        
         switch velocity {
         case _ where velocity < 0:
             pickedOffsets = candidateOffsets.filter( { $0.x < proposedOffset })

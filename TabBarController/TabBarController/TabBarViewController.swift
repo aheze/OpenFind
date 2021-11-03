@@ -89,6 +89,14 @@ public class TabBarViewController: UIViewController {
         
         contentCollectionView.decelerationRate = .fast
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+            let cameraIndex = 1
+            if let origin = contentPagingLayout.layoutAttributes[safe: cameraIndex]?.frame.origin {
+                contentCollectionView.setContentOffset(origin, animated: false)
+            }
+        }
+        
+//        let offset = contentPagingLayout.getTargetOffset(for: <#T##CGPoint#>, velocity: <#T##CGFloat#>)
     }
 }
 

@@ -245,9 +245,11 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         if !preparedOnce {
             preparedOnce = true
-            
+
             /// get the target offset
-            _ = getTargetOffsetForScrollingThere(for: CGPoint(x: contentOffset, y: 0))
+            let targetOffset = getTargetOffsetForScrollingThere(for: CGPoint(x: contentOffset, y: 0))
+            collectionView.contentOffset.x = targetOffset.x
+            currentOffset = targetOffset.x
         }
     }
     
