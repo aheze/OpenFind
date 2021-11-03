@@ -96,17 +96,30 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         return context
     }
     
-//    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-//        return getTargetOffsetForScrollingThere(for: proposedContentOffset)
-//    }
-//
-    /// convenience - get the target offset, then you must scroll there.
-//    func getTargetOffsetForScrollingThere(for point: CGPoint) -> CGPoint {
-//        let (targetOffset, focusedIndex) = getTargetOffsetAndIndex(for: point)
-//        self.focusedCellIndex = focusedIndex
-//        return targetOffset
-//    }
-    
+    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+        return getTargetOffset(for: proposedContentOffset, velocity: velocity.x)
+    }
+
+    func getTargetOffset(for point: CGPoint, velocity: CGFloat) -> CGPoint {
+        let proposedOffset = point.x
+
+        let candidateOffsets = layoutAttributes.map { $0.frame.origin }
+        let pickedOffsets: [CGPoint]
+        switch velocity {
+        case _ where velocity < 0:
+            pickedOffsets = candidateOffsets.filter( { $0.x < proposedOffset })
+        case _ where velocity > 0:
+            pickedOffsets = candidateOffsets.filter( { $0.x > proposedOffset })
+        default:
+            pickedOffsets = candidateOffsets
+        }
+        
+        guard let closestOrigin = pickedOffsets.min(by: {
+            return abs($0.x - proposedOffset) < abs($1.x - proposedOffset)
+        }) else { /// `layoutAttributes` is empty
+            return point
+        }
+        
+        return closestOrigin
+    }
 }
-
-

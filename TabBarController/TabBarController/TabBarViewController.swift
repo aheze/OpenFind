@@ -86,6 +86,9 @@ public class TabBarViewController: UIViewController {
         contentCollectionView.backgroundColor = .green
         contentCollectionView.dataSource = self
         contentCollectionView.delegate = self
+        
+        contentCollectionView.decelerationRate = .fast
+        
     }
 }
 
