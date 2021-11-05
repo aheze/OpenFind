@@ -40,9 +40,13 @@ public class SearchViewController: UIViewController {
             }
         }
         
-        flowLayout.addNewFieldInstantly = { [weak self] in
+        flowLayout.convertAddNewToRegularCellInstantly = { [weak self] completion in
+            
+            /// make it blue first
+            self?.highlight(true, generateHaptics: false, animate: false)
             self?.convertAddNewCellToRegularCell() { [weak self] in
-                self?.convertAddNewCellToRegularCell()
+                self?.addNewCellToRight()
+                completion()
             }
         }
         
@@ -66,7 +70,7 @@ public class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         fields = [
-            Field(value: .string("1. Hello! This is")),
+            Field(value: .string("Search Bar Medium Length")),
 //            Field(value: .string("2. Hi.")),
 //            Field(value: .string("3.a Medium text")),
 //            Field(value: .string("3.b Medium text")),
@@ -114,7 +118,9 @@ extension SearchViewController {
         switch sender.state {
         case .ended:
             if searchCollectionViewFlowLayout.highlightingAddWordField {
-                convertAddNewCellToRegularCell()
+                convertAddNewCellToRegularCell() { [weak self] in
+                    self?.addNewCellToRight()
+                }
             }
         default:
             break

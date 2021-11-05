@@ -23,7 +23,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     /// pass back data
     var highlightAddNewField: ((Bool) -> Void)?
     
-    var addNewFieldInstantly: (() -> Void)?
+    /// fast swipe, instantly convert
+    var convertAddNewToRegularCellInstantly: ((@escaping () -> Void) -> Void)?
+    var convertingInstantly = false /// if in progress of converting
     
     /// store the frame of each item
     /// plus other properties
@@ -69,7 +71,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         let offset = getTargetOffsetForScrollingThere(for: proposedContentOffset, velocity: velocity)
-        print("OFfset is ; \(offset)")
         return offset
     }
     
@@ -133,26 +134,30 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 var alpha = CGFloat(1)
                 if index == fieldHuggingWidths.count - 1 {
                     
-                    /// when hit the edge already
-                    if shouldUseOffsetWithAddNew {
-                        let percentage = distanceTravelledLeft / (Constants.addWordFieldSnappingFactor * distanceToNextCell)
-                        alpha = min(1, percentage)
+                    /// only highlight/unhighlight when cell is not being instantly added
+                    if !convertingInstantly {
                         
-                        /// highlight/tap `true` if percentage > 1
-                        let shouldHighlight = percentage > 1
-                        if shouldHighlight {
-                            if !highlightingAddWordField { /// don't call too many times
-                                highlightingAddWordField = shouldHighlight
-                                highlightAddNewField?(shouldHighlight)
+                        /// when hit the edge already
+                        if shouldUseOffsetWithAddNew {
+                            let percentage = distanceTravelledLeft / (Constants.addWordFieldSnappingFactor * distanceToNextCell)
+                            alpha = min(1, percentage)
+                            
+                            /// highlight/tap `true` if percentage > 1
+                            let shouldHighlight = percentage > 1
+                            if shouldHighlight {
+                                if !highlightingAddWordField { /// don't call too many times
+                                    highlightingAddWordField = true
+                                    highlightAddNewField?(true)
+                                }
+                            } else {
+                                if highlightingAddWordField { /// don't call too many times
+                                    highlightingAddWordField = false
+                                    highlightAddNewField?(false)
+                                }
                             }
                         } else {
-                            if highlightingAddWordField { /// don't call too many times
-                                highlightingAddWordField = shouldHighlight
-                                highlightAddNewField?(shouldHighlight)
-                            }
+                            alpha = 0 /// still haven't hit edge, so hide always, even when bouncing
                         }
-                    } else {
-                        alpha = 0 /// still haven't hit edge, so hide always, even when bouncing
                     }
                 }
                 
@@ -284,14 +289,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             let targetContentOffset = addWordFieldOrigin - Constants.sidePeekPadding
             return (CGPoint(x: targetContentOffset, y: 0), layoutAttributes.indices.last)
         } else {
-            
-            print("--------------------")
-            
             let centeredProposedContentOffset = point.x + ((collectionView?.bounds.width ?? 0) / 2) /// center to the screen
-            
-            let candidates = layoutAttributes.map { $0.fullOrigin }
-            print("Candidates: \(candidates)")
-            
             let pickedAttributes: [FieldLayoutAttributes?]
             
             switch velocity.x {
@@ -329,11 +327,15 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             if let closestAttribute = closestAttribute  {
                 targetContentOffset = closestAttribute.fullOrigin
             } else { /// swiped to the last one. Instantly add it.
-                addNewFieldInstantly?()
+                convertingInstantly = true
+                convertAddNewToRegularCellInstantly?() { [weak self] in
+                    self?.convertingInstantly = false
+                    //                    highlightAddNewField?(false)
+                }
                 
                 if let lastOrigin = layoutAttributes[safe: layoutAttributes.count - 1]?.fullOrigin {
                     targetContentOffset = lastOrigin
-                    closestAttributeIndex = layoutAttributes.count - 2
+                    closestAttributeIndex = layoutAttributes.count - 1 /// make sure the focus is changed
                 }
             }
             
@@ -354,10 +356,5 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
 }
 
-//struct FieldLayoutAttributesCandidate {
-//    var fieldLayoutAttributes: FieldLayoutAttributes
-//    var isCandidate: Bool
-//    var distanceFromTarget = CGFloat(0)
-//}
 
 

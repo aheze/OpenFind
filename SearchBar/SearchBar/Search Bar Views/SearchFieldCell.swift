@@ -52,11 +52,13 @@ class SearchFieldCell: UICollectionViewCell {
             let (_, animations, completion) = showAddNew(true, changeColorOnly: false)
             animations()
             completion()
+            contentView.backgroundColor = Constants.fieldBackgroundColor
             return
         }
         let (_, animations, completion) = showAddNew(false, changeColorOnly: false)
         animations()
         completion()
+        
     }
     
     func updateField(_ makeChangesTo: ((inout Field) -> Void)) {

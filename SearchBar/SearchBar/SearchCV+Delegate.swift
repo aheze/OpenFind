@@ -24,43 +24,38 @@ extension SearchViewController: UICollectionViewDelegate {
         }
     }
     
-    
-    /// append a brand-new "Add New" cell
-    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        print("decelerating")
-        if searchCollectionViewFlowLayout.highlightingAddWordField {
-            searchCollectionViewFlowLayout.highlightingAddWordField = false
-            addNewCellToRight()
-        }
-    }
-    
     /// highlight/unhighlight add new
-    func highlight(_ shouldHighlight: Bool) {
-        print("..../././......Should? \(shouldHighlight)")
-        if shouldHighlight {
+    func highlight(_ shouldHighlight: Bool, generateHaptics: Bool = true, animate: Bool = true) {
+        if generateHaptics {
             let generator = UIImpactFeedbackGenerator(style: .medium)
             generator.impactOccurred()
-            
+        }
+        
+        if shouldHighlight {
             let indexPath = IndexPath(item: fields.count - 1, section: 0)
             if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
-                UIView.animate(withDuration: 0.2) {
-                    let (_, animations, completion) = cell.showAddNew(true, changeColorOnly: true)
+                let (_, animations, _) = cell.showAddNew(true, changeColorOnly: true)
+                
+                if animate {
+                    UIView.animate(withDuration: 0.2) {
+                        animations()
+                    }
+                } else {
                     animations()
-                    completion()
                 }
             }
         } else {
-            let generator = UIImpactFeedbackGenerator(style: .medium)
-            generator.impactOccurred()
-            
             let indexPath = IndexPath(item: fields.count - 1, section: 0)
             if let cell = searchCollectionView.cellForItem(at: indexPath) as? SearchFieldCell {
-                UIView.animate(withDuration: 0.2) {
-                    let (_, animations, completion) = cell.showAddNew(false, changeColorOnly: true)
-                    animations()
-                    completion()
-                }
+                let (_, animations, _) = cell.showAddNew(false, changeColorOnly: true)
                 
+                if animate {
+                    UIView.animate(withDuration: 0.2) {
+                        animations()
+                    }
+                } else {
+                    animations()
+                }
             }
         }
     }
@@ -70,6 +65,7 @@ extension SearchViewController: UICollectionViewDelegate {
             let addNewFieldIndex = fields.indices.last,
             case Field.Value.addNew = fields[addNewFieldIndex].value
         {
+            searchCollectionView.isUserInteractionEnabled = false
             fields[addNewFieldIndex].focused = true
             fields[addNewFieldIndex].value = .addNew("")
             
@@ -80,7 +76,7 @@ extension SearchViewController: UICollectionViewDelegate {
                 
                 let (setup, animationBlock, completion) = cell.showAddNew(false, changeColorOnly: false)
                 setup()
-                UIView.animate(withDuration: 0.4) {
+                UIView.animate(withDuration: 0.6) {
                     animationBlock()
                 } completion: { _ in
                     completion()
@@ -91,6 +87,7 @@ extension SearchViewController: UICollectionViewDelegate {
     }
     
     func addNewCellToRight() {
+        searchCollectionViewFlowLayout.highlightingAddWordField = false
         
         /// append new "Add New" cell
         let newField = Field(value: .addNew(""))
@@ -118,12 +115,11 @@ extension SearchViewController: UICollectionViewDelegate {
         
         /// after scroll view stopped, set the content offset
         if searchCollectionViewFlowLayout.reachedEndBeforeAddWordField {
-            print("REACHED END.")
             searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = true
         } else {
             searchCollectionViewFlowLayout.shouldUseOffsetWithAddNew = false
         }
+        
+        searchCollectionView.isUserInteractionEnabled = true
     }
 }
-
-

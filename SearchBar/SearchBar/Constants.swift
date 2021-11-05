@@ -8,9 +8,9 @@
 import UIKit
 
 struct Constants {
-    static var cellHeight = CGFloat(64)
+    static var cellHeight = CGFloat(60)
     static var sidePadding = CGFloat(16)
-    static var sidePeekPadding = CGFloat(64) /// extra padding to show nearby cells
+    static var sidePeekPadding = CGFloat(48) /// extra padding to show nearby cells
     static var cellSpacing = CGFloat(8)
     static var fieldFont = UIFont.preferredFont(forTextStyle: .title1)
     
