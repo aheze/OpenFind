@@ -23,6 +23,8 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     /// pass back data
     var highlightAddNewField: ((Bool) -> Void)?
     
+    var addNewFieldInstantly: (() -> Void)?
+    
     /// store the frame of each item
     /// plus other properties
     var layoutAttributes = [FieldLayoutAttributes]()
@@ -34,7 +36,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     /// 1. finger is down
     /// 2. `reachedEnd` is true
     var shouldUseOffsetWithAddNew = false
-
+    
     /// actual content offset used by `prepare`
     var currentOffset = CGFloat(0)
     
@@ -50,7 +52,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     /// showing (past the point where it will auto-scroll) the last field or not
     var highlightingAddWordField = false
-   
+    
     var contentSize = CGSize.zero /// the scrollable content size of the collection view
     override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
     
@@ -66,7 +68,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        return getTargetOffsetForScrollingThere(for: proposedContentOffset, velocity: velocity)
+        let offset = getTargetOffsetForScrollingThere(for: proposedContentOffset, velocity: velocity)
+        print("OFfset is ; \(offset)")
+        return offset
     }
     
     
@@ -75,7 +79,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func prepare() { /// configure the cells' frames
         super.prepare()
         
-
+        
         guard let collectionView = collectionView else { return }
         let contentOffset = collectionView.contentOffset.x
         currentOffset = contentOffset
@@ -89,7 +93,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         var leftFieldOffsets = [FieldOffset]() /// array of each cell's shifting offset + percentage complete
         var rightFieldOffsets = [FieldOffset]() /// same, for fields after the focused one
-
+        
         for index in fieldHuggingWidths.indices {
             let fullCellWidth = getFullCellWidth?(index) ?? 0
             
@@ -115,7 +119,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             }
             
             if cellOriginWithoutSidePadding >= contentOffset { /// cell is not yet approached
-
+                
                 let distanceToNextCell = fullCellWidth + sidePadding
                 
                 let contentOffsetPlusWidth = contentOffset + distanceToNextCell /// is the field's origin (once the field is on the right, waiting)
@@ -160,12 +164,12 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 /// how much to drag collection view, until the next field's origin reaches this field's origin
                 /// add `sidePadding` to account for cell spacing
                 let distanceToNextCell = fullCellWidth + sidePadding
-
+                
                 /// progress of content offset (positive) through the field, until it reaches the next field (`distanceToNextCell`)
                 /// `min` = prevent progress from getting larger than `distanceToNextCell` (end of the cell)
                 let distanceTravelledRight = min(distanceToNextCell, contentOffset - cellOriginWithoutSidePadding)
                 let percentage = distanceTravelledRight / distanceToNextCell /// fraction
-
+                
                 /// how much difference between the full width and the normal width, won't change.
                 let differenceBetweenWidthAndFullWidth = fullCellWidth - fieldHuggingWidths[index]
                 let shift = percentage * differenceBetweenWidthAndFullWidth
@@ -228,7 +232,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             createLayoutAttribute(for: currentCellIndex, offsetIndex: offsetIndex, offsetArray: leftFieldOffsets, fullOrigin: &fullOrigin, leftSide: true)
             currentCellIndex += 1
         }
-
+        
         for offsetIndex in rightFieldOffsets.indices {
             createLayoutAttribute(for: currentCellIndex, offsetIndex: offsetIndex, offsetArray: rightFieldOffsets, fullOrigin: &fullOrigin, leftSide: false)
             currentCellIndex += 1
@@ -245,7 +249,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         if !preparedOnce {
             preparedOnce = true
-
+            
             /// get the target offset
             let targetOffset = getTargetOffsetForScrollingThere(for: CGPoint(x: contentOffset, y: 0), velocity: .zero)
             collectionView.contentOffset.x = targetOffset.x
@@ -284,13 +288,12 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             print("--------------------")
             
             let centeredProposedContentOffset = point.x + ((collectionView?.bounds.width ?? 0) / 2) /// center to the screen
-            print("Proposed: \(centeredProposedContentOffset)")
             
             let candidates = layoutAttributes.map { $0.fullOrigin }
             print("Candidates: \(candidates)")
             
             let pickedAttributes: [FieldLayoutAttributes?]
-            print("Velocity: \(velocity.x)")
+            
             switch velocity.x {
             case _ where velocity.x < 0:
                 pickedAttributes = layoutAttributes.map { layoutAttribute in
@@ -303,9 +306,9 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                     return isCandidate ? layoutAttribute : nil
                 }
             default:
-                print("Default")
                 pickedAttributes = layoutAttributes
             }
+            
             /// find closest origin
             /// use `full` since it was calculated already - it's the ideal origin and width
             /// dropLast to prevent focusing on `addNew` field
@@ -313,9 +316,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             for (index, attribute) in pickedAttributes.dropLast().enumerated() {
                 if let layoutAttribute = attribute {
                     let distance = abs(layoutAttribute.fullOrigin + (layoutAttribute.fullWidth / 2) - centeredProposedContentOffset)
-                    print("Distance for index \(index): \(distance).... smaller than \(closestDistance), \(distance < closestDistance)")
                     if distance < closestDistance {
-                        print("-> Smaller.")
                         closestAttribute = layoutAttribute
                         closestAttributeIndex = index
                         closestDistance = distance
@@ -323,13 +324,18 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 }
             }
             
-            guard let closestAttribute = closestAttribute else {
-                return (point, nil)
+            var targetContentOffset = CGFloat(0)
+            
+            if let closestAttribute = closestAttribute  {
+                targetContentOffset = closestAttribute.fullOrigin
+            } else { /// swiped to the last one. Instantly add it.
+                addNewFieldInstantly?()
+                
+                if let lastOrigin = layoutAttributes[safe: layoutAttributes.count - 1]?.fullOrigin {
+                    targetContentOffset = lastOrigin
+                    closestAttributeIndex = layoutAttributes.count - 2
+                }
             }
-            
-            var targetContentOffset = closestAttribute.fullOrigin
-            print("Target: \(targetContentOffset)")
-            
             
             if closestAttributeIndex == 0 { /// index 0
                 targetContentOffset -= Constants.sidePadding /// if left edge, account for side padding

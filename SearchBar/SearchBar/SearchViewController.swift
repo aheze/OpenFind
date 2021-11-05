@@ -21,7 +21,7 @@ public class SearchViewController: UIViewController {
             return self?.fields ?? [Field]()
         }
         flowLayout.highlightAddNewField = { [weak self] shouldHighlight in
-            self?.shouldHighlight(shouldHighlight)
+            self?.highlight(shouldHighlight)
         }
         flowLayout.focusedCellIndexChanged = { [weak self] oldCellIndex, newCellIndex in
             guard let self = self else { return }
@@ -39,10 +39,12 @@ public class SearchViewController: UIViewController {
                 }
             }
         }
-//        flowLayout.instantlyAddNew = { [weak self] in
-//            print("INT ADDDD")
-//            self?.convertAddNewCellToRegularCell()
-//        }
+        
+        flowLayout.addNewFieldInstantly = { [weak self] in
+            self?.convertAddNewCellToRegularCell() { [weak self] in
+                self?.convertAddNewCellToRegularCell()
+            }
+        }
         
         searchCollectionView.setCollectionViewLayout(flowLayout, animated: false)
         return flowLayout
