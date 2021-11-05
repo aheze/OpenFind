@@ -66,7 +66,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        return getTargetOffsetForScrollingThere(for: proposedContentOffset)
+        return getTargetOffsetForScrollingThere(for: proposedContentOffset, velocity: velocity)
     }
     
     
@@ -247,7 +247,7 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             preparedOnce = true
 
             /// get the target offset
-            let targetOffset = getTargetOffsetForScrollingThere(for: CGPoint(x: contentOffset, y: 0))
+            let targetOffset = getTargetOffsetForScrollingThere(for: CGPoint(x: contentOffset, y: 0), velocity: .zero)
             collectionView.contentOffset.x = targetOffset.x
             currentOffset = targetOffset.x
         }
@@ -263,14 +263,14 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     /// convenience - get the target offset, then you must scroll there.
-    func getTargetOffsetForScrollingThere(for point: CGPoint) -> CGPoint {
-        let (targetOffset, focusedIndex) = getTargetOffsetAndIndex(for: point)
+    func getTargetOffsetForScrollingThere(for point: CGPoint, velocity: CGPoint) -> CGPoint {
+        let (targetOffset, focusedIndex) = getTargetOffsetAndIndex(for: point, velocity: velocity)
         self.focusedCellIndex = focusedIndex
         return targetOffset
     }
     
     /// get nearest field, then scroll to it (with padding)
-    func getTargetOffsetAndIndex(for point: CGPoint) -> (CGPoint, Int?) {
+    func getTargetOffsetAndIndex(for point: CGPoint, velocity: CGPoint) -> (CGPoint, Int?) {
         
         if  /// handle end, but not actually swiped
             highlightingAddWordField,
@@ -281,36 +281,77 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             return (CGPoint(x: targetContentOffset, y: 0), layoutAttributes.indices.last)
         } else {
             
-            let centeredProposedContentOffset = point.x + ((collectionView?.bounds.width ?? 0) / 2) /// center to the screen
+            print("--------------------")
             
-            /// find closest origin (by comparing middle of screen)
+            let centeredProposedContentOffset = point.x + ((collectionView?.bounds.width ?? 0) / 2) /// center to the screen
+            print("Proposed: \(centeredProposedContentOffset)")
+            
+            let candidates = layoutAttributes.map { $0.fullOrigin }
+            print("Candidates: \(candidates)")
+            
+            let pickedAttributes: [FieldLayoutAttributes?]
+            print("Velocity: \(velocity.x)")
+            switch velocity.x {
+            case _ where velocity.x < 0:
+                pickedAttributes = layoutAttributes.map { layoutAttribute in
+                    let isCandidate = layoutAttribute.fullOrigin + (layoutAttribute.fullWidth / 2) < centeredProposedContentOffset
+                    return isCandidate ? layoutAttribute : nil
+                }
+            case _ where velocity.x > 0:
+                pickedAttributes = layoutAttributes.map { layoutAttribute in
+                    let isCandidate = layoutAttribute.fullOrigin + (layoutAttribute.fullWidth / 2) > centeredProposedContentOffset
+                    return isCandidate ? layoutAttribute : nil
+                }
+            default:
+                print("Default")
+                pickedAttributes = layoutAttributes
+            }
+            /// find closest origin
             /// use `full` since it was calculated already - it's the ideal origin and width
             /// dropLast to prevent focusing on `addNew` field
-            guard let closestOrigin = layoutAttributes.dropLast().enumerated().min(by: {
-                let firstCenter = $0.element.fullOrigin + ($0.element.fullWidth / 2)
-                let secondCenter = $1.element.fullOrigin + ($1.element.fullWidth / 2)
-                return abs(firstCenter - centeredProposedContentOffset) < abs(secondCenter - centeredProposedContentOffset)
-            }) else { /// `layoutAttributes` is empty
+            var (closestAttribute, closestAttributeIndex, closestDistance): (FieldLayoutAttributes?, Int, CGFloat) = (nil, 0, CGFloat.infinity)
+            for (index, attribute) in pickedAttributes.dropLast().enumerated() {
+                if let layoutAttribute = attribute {
+                    let distance = abs(layoutAttribute.fullOrigin + (layoutAttribute.fullWidth / 2) - centeredProposedContentOffset)
+                    print("Distance for index \(index): \(distance).... smaller than \(closestDistance), \(distance < closestDistance)")
+                    if distance < closestDistance {
+                        print("-> Smaller.")
+                        closestAttribute = layoutAttribute
+                        closestAttributeIndex = index
+                        closestDistance = distance
+                    }
+                }
+            }
+            
+            guard let closestAttribute = closestAttribute else {
                 return (point, nil)
             }
             
-            var targetContentOffset = closestOrigin.element.fullOrigin
+            var targetContentOffset = closestAttribute.fullOrigin
+            print("Target: \(targetContentOffset)")
             
-            if closestOrigin.offset == 0 { /// index 0
+            
+            if closestAttributeIndex == 0 { /// index 0
                 targetContentOffset -= Constants.sidePadding /// if left edge, account for side padding
             } else {
                 targetContentOffset -= Constants.sidePeekPadding /// if inner cell, ignore side padding, instead account for peek padding
             }
             
-            if closestOrigin.offset == layoutAttributes.count - 2 { /// last field before "add new" field
+            if closestAttributeIndex == layoutAttributes.count - 2 { /// last field before "add new" field
                 reachedEndBeforeAddWordField = true
             } else {
                 reachedEndBeforeAddWordField = false
             }
             
-            return (CGPoint(x: targetContentOffset, y: 0), closestOrigin.offset)
+            return (CGPoint(x: targetContentOffset, y: 0), closestAttributeIndex)
         }
     }
 }
+
+//struct FieldLayoutAttributesCandidate {
+//    var fieldLayoutAttributes: FieldLayoutAttributes
+//    var isCandidate: Bool
+//    var distanceFromTarget = CGFloat(0)
+//}
 
 

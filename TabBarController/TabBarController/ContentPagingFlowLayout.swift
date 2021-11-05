@@ -119,12 +119,13 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
             pickedOffsets = candidateOffsets
         }
         
-        guard let closestOrigin = pickedOffsets.min(by: {
-            return abs($0.x - proposedOffset) < abs($1.x - proposedOffset)
+        guard let closestOrigin = pickedOffsets.enumerated().min(by: {
+            return abs($0.element.x - proposedOffset) < abs($1.element.x - proposedOffset)
         }) else { /// `layoutAttributes` is empty
             return point
         }
         
-        return closestOrigin
+        focusedPageIndex = closestOrigin.offset
+        return closestOrigin.element
     }
 }

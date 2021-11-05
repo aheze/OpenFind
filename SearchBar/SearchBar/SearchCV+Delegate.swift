@@ -10,7 +10,7 @@ import UIKit
 extension SearchViewController: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let origin = searchCollectionViewFlowLayout.layoutAttributes[safe: indexPath.item]?.fullOrigin {
-            let targetOrigin = searchCollectionViewFlowLayout.getTargetOffsetForScrollingThere(for: CGPoint(x: origin, y: 0))
+            let targetOrigin = searchCollectionViewFlowLayout.getTargetOffsetForScrollingThere(for: CGPoint(x: origin, y: 0), velocity: .zero)
             searchCollectionView.setContentOffset(targetOrigin, animated: true)
         }
         if let cell = collectionView.cellForItem(at: indexPath) as? SearchFieldCell {
@@ -103,7 +103,7 @@ extension SearchViewController: UICollectionViewDelegate {
             }
             
             if let origin = searchCollectionViewFlowLayout.layoutAttributes[safe: indexOfLastField]?.fullOrigin { /// the last field that's not the "add new" field
-                let (targetOrigin, _) = self.searchCollectionViewFlowLayout.getTargetOffsetAndIndex(for: CGPoint(x: origin, y: 0))
+                let (targetOrigin, _) = self.searchCollectionViewFlowLayout.getTargetOffsetAndIndex(for: CGPoint(x: origin, y: 0), velocity: .zero)
                 
                 self.searchCollectionView.setContentOffset(targetOrigin, animated: false) /// go to that offset instantly
             }
