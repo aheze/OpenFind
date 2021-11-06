@@ -43,7 +43,7 @@ public class SearchViewController: UIViewController {
         flowLayout.convertAddNewToRegularCellInstantly = { [weak self] completion in
             
             /// make it blue first
-            self?.highlight(true, generateHaptics: false, animate: false)
+            self?.highlight(true, generateHaptics: true, animate: false)
             self?.convertAddNewCellToRegularCell() { [weak self] in
                 self?.addNewCellToRight()
                 completion()

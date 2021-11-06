@@ -280,7 +280,6 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     /// get nearest field, then scroll to it (with padding)
     func getTargetOffsetAndIndex(for point: CGPoint, velocity: CGPoint) -> (CGPoint, Int?) {
-        
         if  /// handle end, but not actually swiped
             highlightingAddWordField,
             let addWordFieldOrigin = layoutAttributes.last?.fullOrigin
@@ -289,18 +288,21 @@ class SearchCollectionViewFlowLayout: UICollectionViewFlowLayout {
             let targetContentOffset = addWordFieldOrigin - Constants.sidePeekPadding
             return (CGPoint(x: targetContentOffset, y: 0), layoutAttributes.indices.last)
         } else {
+            
             let centeredProposedContentOffset = point.x + ((collectionView?.bounds.width ?? 0) / 2) /// center to the screen
             let pickedAttributes: [FieldLayoutAttributes?]
             
             switch velocity.x {
             case _ where velocity.x < 0:
                 pickedAttributes = layoutAttributes.map { layoutAttribute in
-                    let isCandidate = layoutAttribute.fullOrigin + (layoutAttribute.fullWidth / 2) < centeredProposedContentOffset
+                    
+                    /// must be `<=` to prevent glitching when swiping left fast on first field
+                    let isCandidate = layoutAttribute.fullOrigin + (layoutAttribute.fullWidth / 2) <= centeredProposedContentOffset
                     return isCandidate ? layoutAttribute : nil
                 }
             case _ where velocity.x > 0:
                 pickedAttributes = layoutAttributes.map { layoutAttribute in
-                    let isCandidate = layoutAttribute.fullOrigin + (layoutAttribute.fullWidth / 2) > centeredProposedContentOffset
+                    let isCandidate = layoutAttribute.fullOrigin + (layoutAttribute.fullWidth / 2) >= centeredProposedContentOffset
                     return isCandidate ? layoutAttribute : nil
                 }
             default:
