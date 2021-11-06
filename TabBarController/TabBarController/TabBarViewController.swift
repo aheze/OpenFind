@@ -82,12 +82,13 @@ public class TabBarViewController: UIViewController {
         case .lists:
             index = 2
         default:
-            index = 1
+            return /// if not a standard tab, that means the user is scrolling. Standard tab set is via SwiftUI
         }
         
         if let attributes = contentPagingLayout.layoutAttributes[safe: index] {
             contentCollectionView.setContentOffset(attributes.frame.origin, animated: false)
         }
+        
     }
     
     @IBAction func buttonPressed(_ sender: Any) {
