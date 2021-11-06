@@ -108,24 +108,33 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         let proposedOffset = point.x
 
         let candidateOffsets = layoutAttributes.map { $0.frame.origin }
-        let pickedOffsets: [CGPoint]
+        var pickedOffsets = [CGPoint]()
         
+        /// prevent scrolling from **photos -> lists** or **lists -> photos**
+        let maxDistance = collectionView?.bounds.width ?? 500
+
         switch velocity {
         case _ where velocity < 0:
-            pickedOffsets = candidateOffsets.filter( { $0.x < proposedOffset })
+            pickedOffsets = candidateOffsets.filter( { $0.x <= proposedOffset })
         case _ where velocity > 0:
-            pickedOffsets = candidateOffsets.filter( { $0.x > proposedOffset })
+            pickedOffsets = candidateOffsets.filter( { $0.x >= proposedOffset })
         default:
             pickedOffsets = candidateOffsets
         }
-        
-        guard let closestOrigin = pickedOffsets.enumerated().min(by: {
+
+        guard var (closestOriginIndex, closestOrigin) = pickedOffsets.enumerated().min(by: {
             return abs($0.element.x - proposedOffset) < abs($1.element.x - proposedOffset)
         }) else { /// `layoutAttributes` is empty
             return point
         }
         
-        focusedPageIndex = closestOrigin.offset
-        return closestOrigin.element
+        let distance = abs(closestOrigin.x - currentOffset)
+        if distance > maxDistance {
+            closestOriginIndex = 1 /// camera
+            closestOrigin = candidateOffsets[closestOriginIndex]
+        }
+        
+        focusedPageIndex = closestOriginIndex
+        return closestOrigin
     }
 }
