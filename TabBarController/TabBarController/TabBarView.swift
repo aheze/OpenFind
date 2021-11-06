@@ -15,9 +15,10 @@ struct TabBarView: View {
             
             VStack {
                 HStack(alignment: .bottom, spacing: 0) {
-                    IconButton(tabType: .photos, tabState: $tabViewModel.tabState)
+//                    IconButton(tabType: .photos, tabViewModel: $tabViewModel)
+                    PhotosButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.photosIconAttributes)
                     CameraButton(tabState: $tabViewModel.tabState)
-                    IconButton(tabType: .lists, tabState: $tabViewModel.tabState)
+                    ListsButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.listsIconAttributes)
                 }
             }
             .overlay(
@@ -40,8 +41,8 @@ struct TabBarView: View {
                         .frame(maxWidth: .infinity)
                     }
                 }
-                    .opacity(tabViewModel.tabState == .camera ? 1 : 0)
-                    .offset(x: 0, y: tabViewModel.tabState == .camera ? 0 : -40)
+                .opacity(tabViewModel.tabState == .camera ? 1 : 0)
+                .offset(x: 0, y: tabViewModel.tabState == .camera ? 0 : -40)
             )
         
             .padding(EdgeInsets(top: 16, leading: 16, bottom: Constants.tabBarBottomPadding, trailing: 16))
@@ -75,46 +76,46 @@ struct ToolbarButton: View {
     }
 }
 
-struct IconButton: View {
-    let tabType: TabState
-    @Binding var tabState: TabState
-
-    var body: some View {
-        Button {
-            withAnimation {
-                tabState = tabType
-            }
-        } label: {
-            Group {
-                Image(tabType.name)
-                    .foregroundColor(attributes.foregroundColor)
-            }
-            .frame(maxWidth: .infinity)
-            .frame(height: attributes.backgroundHeight)
-        }
-        .buttonStyle(IconButtonStyle())
-    }
-
-    var attributes: IconAttributes {
-        if tabState == .photos {
-            if tabState == tabType {
-                return IconAttributes.Photos.active
-            } else if tabState == .camera {
-                return IconAttributes.Photos.inactiveDarkBackground
-            } else {
-                return IconAttributes.Photos.inactiveLightBackground
-            }
-        } else {
-            if tabState == tabType {
-                return IconAttributes.Lists.active
-            } else if tabState == .camera {
-                return IconAttributes.Lists.inactiveDarkBackground
-            } else {
-                return IconAttributes.Lists.inactiveLightBackground
-            }
-        }
-    }
-}
+//struct IconButton: View {
+//    let tabType: TabState
+//    @Binding var tabState: TabState
+//
+//    var body: some View {
+//        Button {
+//            withAnimation {
+//                tabState = tabType
+//            }
+//        } label: {
+//            Group {
+//                Image(tabType.name)
+//                    .foregroundColor(attributes.foregroundColor.color)
+//            }
+//            .frame(maxWidth: .infinity)
+//            .frame(height: attributes.backgroundHeight)
+//        }
+//        .buttonStyle(IconButtonStyle())
+//    }
+//
+//    var attributes: IconAttributes {
+//        if tabState == .photos {
+//            if tabState == tabType {
+//                return IconAttributes.Photos.active
+//            } else if tabState == .camera {
+//                return IconAttributes.Photos.inactiveDarkBackground
+//            } else {
+//                return IconAttributes.Photos.inactiveLightBackground
+//            }
+//        } else {
+//            if tabState == tabType {
+//                return IconAttributes.Lists.active
+//            } else if tabState == .camera {
+//                return IconAttributes.Lists.inactiveDarkBackground
+//            } else {
+//                return IconAttributes.Lists.inactiveLightBackground
+//            }
+//        }
+//    }
+//}
 
 struct CameraButton: View {
     let tabType = TabState.camera
@@ -128,10 +129,10 @@ struct CameraButton: View {
         } label: {
             Group {
                 Circle()
-                    .fill(attributes.fillColor)
+                    .fill(attributes.fillColor.color)
                     .overlay(
                         Circle()
-                            .stroke(attributes.rimColor, lineWidth: attributes.rimWidth)
+                            .stroke(attributes.rimColor.color, lineWidth: attributes.rimWidth)
                     )
                     .frame(width: attributes.length, height: attributes.length)
             }
@@ -150,6 +151,68 @@ struct CameraButton: View {
         }
     }
 }
+
+struct PhotosButton: View {
+    let tabType = TabState.photos
+    @Binding var tabState: TabState
+    let attributes: IconAttributes
+    
+    var body: some View {
+        IconButton(tabType: tabType, tabState: $tabState, attributes: attributes)
+    }
+}
+struct ListsButton: View {
+    let tabType = TabState.lists
+    @Binding var tabState: TabState
+    let attributes: IconAttributes
+    
+    var body: some View {
+        IconButton(tabType: tabType, tabState: $tabState, attributes: attributes)
+    }
+}
+
+struct IconButton: View {
+    let tabType: TabState
+    @Binding var tabState: TabState
+    var attributes: IconAttributes
+
+    var body: some View {
+        Button {
+            withAnimation {
+                tabState = tabType
+            }
+        } label: {
+            Group {
+                Image(tabType.name)
+                    .foregroundColor(attributes.foregroundColor.color)
+            }
+            .frame(maxWidth: .infinity)
+            .frame(height: attributes.backgroundHeight)
+        }
+        .buttonStyle(IconButtonStyle())
+    }
+//
+//    var attributes: IconAttributes {
+//        if tabState == .photos {
+//            if tabState == tabType {
+//                return IconAttributes.Photos.active
+//            } else if tabState == .camera {
+//                return IconAttributes.Photos.inactiveDarkBackground
+//            } else {
+//                return IconAttributes.Photos.inactiveLightBackground
+//            }
+//        } else {
+//            if tabState == tabType {
+//                return IconAttributes.Lists.active
+//            } else if tabState == .camera {
+//                return IconAttributes.Lists.inactiveDarkBackground
+//            } else {
+//                return IconAttributes.Lists.inactiveLightBackground
+//            }
+//        }
+//    }
+}
+
 
 struct CameraButtonStyle: ButtonStyle {
     var isShutter: Bool

@@ -63,7 +63,7 @@ public class TabBarViewController: UIViewController {
     }
     
     private func updateTabBar(_ tabState: TabState) {
-        print("Update to \(tabState)")
+//        print("Update to \(tabState)")
         
         DispatchQueue.main.async {
             if tabState == .camera {
