@@ -18,10 +18,9 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     var preparedOnce = false
     
     /// get data
-    var getTabs: (() -> [TabType])?
+    var getTabs: (() -> [TabState])?
     
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
-    
 
     /// actual content offset used by `prepare`
     var currentOffset = CGFloat(0)
@@ -46,15 +45,11 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         return layoutAttributes.filter { rect.intersects($0.frame) } /// try deleting this line
     }
     
-   
-    
     /// make the layout (strip vs list) here
     override func prepare() { /// configure the cells' frames
         super.prepare()
         
-
         guard let collectionView = collectionView else { return }
-        
         
         let width = collectionView.bounds.width
         let height = collectionView.bounds.height

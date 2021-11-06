@@ -8,17 +8,36 @@
 import SwiftUI
 
 class TabViewModel: ObservableObject {
-    @Published var activeTab = TabType.camera
-
+    @Published var tabState: TabState = TabState.camera
 }
 
-enum TabType: String {
-    case photos = "Photos"
-    case camera = "Camera"
-    case lists = "Lists"
+enum TabState: Equatable {
+    case photos
+    case camera
+    case lists
+    case cameraToPhotos(CGFloat) /// associatedValue is the percentage
+    case cameraToLists(CGFloat)
+    
+    var name: String {
+        switch self {
+        case .photos:
+            return "Photos"
+        case .camera:
+            return "Camera"
+        case .lists:
+            return "Lists"
+        case .cameraToPhotos(_):
+            return ""
+        case .cameraToLists(_):
+            return ""
+        }
+    }
 }
 
-
+//enum TabTransitionState {
+//    case cameraToPhotos(CGFloat) /// associatedValue is the percentage
+//    case cameraToLists(CGFloat)
+//}
 
 /// grouping of all visual properties, for setting active/inactive
 /// also for animations

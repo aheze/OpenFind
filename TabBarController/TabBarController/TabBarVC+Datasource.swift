@@ -17,13 +17,14 @@ extension TabBarViewController: UICollectionViewDataSource {
         
         let tab = tabs[indexPath.item]
         switch tab {
-            
         case .photos:
             cell.backgroundColor = .green
         case .camera:
             cell.backgroundColor = .blue
         case .lists:
             cell.backgroundColor = .yellow
+        default:
+            fatalError()
         }
         
         

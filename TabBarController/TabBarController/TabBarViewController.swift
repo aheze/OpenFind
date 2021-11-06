@@ -12,7 +12,7 @@ import Combine
 public class TabBarViewController: UIViewController {
     
     /// data
-    var tabs: [TabType] = [.photos, .camera, .lists]
+    var tabs: [TabState] = [.photos, .camera, .lists]
     
     
     /// big area
@@ -27,7 +27,7 @@ public class TabBarViewController: UIViewController {
         contentCollectionView.setCollectionViewLayout(flowLayout, animated: false)
         
         flowLayout.getTabs = { [weak self] in
-            return self?.tabs ?? [TabType]()
+            return self?.tabs ?? [TabState]()
         }
         return flowLayout
     }()
@@ -36,15 +36,15 @@ public class TabBarViewController: UIViewController {
     @IBOutlet weak var tabBarContainerView: UIView!
     @IBOutlet weak var tabBarHeightC: NSLayoutConstraint!
     
-    private var tabViewModel: TabViewModel!
+    var tabViewModel: TabViewModel!
     private var cancellable: AnyCancellable?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
         tabViewModel = TabViewModel()
-        cancellable = tabViewModel.$activeTab.sink { [weak self] activeTab in
-            self?.updateTabBar(activeTab)
+        cancellable = tabViewModel.$tabState.sink { [weak self] activeTab in
+            self?.updateTabBar(activeTab ?? .camera)
         }
         
         setupConstraints()
@@ -62,11 +62,11 @@ public class TabBarViewController: UIViewController {
         tabBarHeightC.constant = Constants.tabBarShrunkHeight
     }
     
-    private func updateTabBar(_ activeTab: TabType) {
-        print("Update to \(activeTab)")
+    private func updateTabBar(_ tabState: TabState) {
+        print("Update to \(tabState)")
         
         DispatchQueue.main.async {
-            if activeTab == .camera {
+            if tabState == .camera {
                 self.tabBarHeightC.constant = 200
             } else {
                 self.tabBarHeightC.constant = Constants.tabBarShrunkHeight
@@ -74,13 +74,15 @@ public class TabBarViewController: UIViewController {
         }
         
         let index: Int
-        switch activeTab {
+        switch tabState {
         case .photos:
             index = 0
         case .camera:
             index = 1
         case .lists:
             index = 2
+        default:
+            index = 1
         }
         
         if let attributes = contentPagingLayout.layoutAttributes[safe: index] {
