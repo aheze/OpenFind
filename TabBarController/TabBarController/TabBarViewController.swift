@@ -66,12 +66,25 @@ public class TabBarViewController: UIViewController {
         print("Update to \(activeTab)")
         
         DispatchQueue.main.async {
-            
             if activeTab == .camera {
                 self.tabBarHeightC.constant = 200
             } else {
                 self.tabBarHeightC.constant = Constants.tabBarShrunkHeight
             }
+        }
+        
+        let index: Int
+        switch activeTab {
+        case .photos:
+            index = 0
+        case .camera:
+            index = 1
+        case .lists:
+            index = 2
+        }
+        
+        if let attributes = contentPagingLayout.layoutAttributes[safe: index] {
+            contentCollectionView.setContentOffset(attributes.frame.origin, animated: false)
         }
     }
     

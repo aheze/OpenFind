@@ -30,11 +30,7 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     var focusedPageIndexChanged: ((Int?, Int?) -> Void)?
     
     /// index of focused/expanded cell
-    var focusedPageIndex: Int? {
-        didSet {
-            focusedPageIndexChanged?(oldValue, focusedPageIndex)
-        }
-    }
+    var focusedPageIndex: Int?
    
     var contentSize = CGSize.zero /// the scrollable content size of the collection view
     override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
@@ -101,10 +97,10 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        return getTargetOffset(for: proposedContentOffset, velocity: velocity.x)
+        return getTargetOffset(for: proposedContentOffset, velocity: velocity.x, updatePageIndex: true)
     }
 
-    func getTargetOffset(for point: CGPoint, velocity: CGFloat) -> CGPoint {
+    func getTargetOffset(for point: CGPoint, velocity: CGFloat, updatePageIndex: Bool = false) -> CGPoint {
         let proposedOffset = point.x
 
         let candidateOffsets = layoutAttributes.map { $0.frame.origin }
@@ -134,7 +130,16 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
             closestOrigin = candidateOffsets[closestOriginIndex]
         }
         
-        focusedPageIndex = closestOriginIndex
+        if updatePageIndex {
+            setFocusedPageIndex(closestOriginIndex)
+        }
         return closestOrigin
+    }
+    
+    func setFocusedPageIndex(_ index: Int, notify: Bool = false) {
+        focusedPageIndex = index
+        if notify {
+            focusedPageIndexChanged?(focusedPageIndex, index)
+        }
     }
 }
