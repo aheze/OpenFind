@@ -116,6 +116,10 @@ class SearchFieldCell: UICollectionViewCell {
         if let attributes = layoutAttributes as? FieldLayoutAttributes {
             let percentageVisible = 1 - attributes.percentage
             
+            let scalePercentageVisible = 0.5 + (0.5 * percentageVisible)
+            leftView.imageView.transform = CGAffineTransform(scaleX: scalePercentageVisible, y: scalePercentageVisible)
+            rightView.imageView.transform = CGAffineTransform(scaleX: scalePercentageVisible, y: scalePercentageVisible)
+            
             leftView.alpha = percentageVisible
             rightView.alpha = percentageVisible
             
