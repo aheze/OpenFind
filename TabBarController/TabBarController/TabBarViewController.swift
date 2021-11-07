@@ -116,17 +116,6 @@ public class TabBarViewController: UIViewController {
         contentCollectionView.delegate = self
         contentCollectionView.decelerationRate = .fast
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(willEnterForeground),
-            name: UIApplication.willEnterForegroundNotification,
-            object: nil
-        )
-    }
-    
-    @objc func willEnterForeground() {
-//        print("entered!----")
-        
     }
 }
 
