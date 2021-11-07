@@ -67,39 +67,18 @@ public class TabBarViewController: UIViewController {
         addChild(tabBarHostingController, in: tabBarContainerView)
         tabBarHostingController.view.backgroundColor = .clear
         tabBarContainerView.backgroundColor = .clear
-    
-        
         setupCollectionView()
         
-//        tabBarContainerView.backgroundColor = .red
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-//            self.collectionLeftC.constant = 100
-//            self.contentPagingLayout.invalidateLayout()
-//
-////            UIView.animate(withDuration: 1) {
-////            self.view.layoutIfNeeded()
-////            }
-//
-////            print("Currnet focused index: \(tabViewModel.tabState.index)")
-//            if let savedPageOffset = contentPagingLayout.layoutAttributes[safe: tabViewModel.tabState.index]?.frame.origin {
-//                print("saved: \(savedPageOffset)")
-//                contentCollectionView.setContentOffset(savedPageOffset, animated: true)
-//            }
-//        }
     }
     
+    
     public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        
-//        print("transsss")
-//        print("Currnet \(tabViewModel.tabState) focused index: \(tabViewModel.tabState.index)")
-//
-//        contentPagingLayout.invalidateLayout()
-//        view.layoutIfNeeded()
-//        if let savedPageOffset = contentPagingLayout.layoutAttributes[safe: tabViewModel.tabState.index]?.frame.origin {
-//            print("saved: \(savedPageOffset)")
-//            contentCollectionView.setContentOffset(savedPageOffset, animated: true)
-//        }
+        contentCollectionView.isScrollEnabled = false
+        coordinator.animate { _ in
+        } completion: { [weak self] _ in
+            print("Done rotate")
+            self?.contentCollectionView.isScrollEnabled = true
+        }
     }
     
     @IBOutlet weak var collectionLeftC: NSLayoutConstraint!
@@ -140,7 +119,6 @@ public class TabBarViewController: UIViewController {
         print("Button Pressed!")
     }
     
-//    override func view
     func setupCollectionView() {
         _ = contentPagingLayout
         

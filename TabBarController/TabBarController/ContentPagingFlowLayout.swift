@@ -45,7 +45,6 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     /// make the layout (strip vs list) here
     override func prepare() { /// configure the cells' frames
         super.prepare()
-        print("prepping")
         
         guard let collectionView = collectionView else { return }
         
@@ -78,11 +77,6 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         }
         if isInvalid {
             isInvalid = false
-//            if let cameraOrigin = layoutAttributes[safe: 1]?.frame.origin {
-//                collectionView.contentOffset = cameraOrigin
-//            }
-//            print("/// Changed/// to \(newBounds)")
-            print("indalid")
             if
                 let indexBeforeBoundsChange = getCurrentIndex?(),
                 let targetPageOffset = layoutAttributes[safe: indexBeforeBoundsChange]?.frame.origin
@@ -91,7 +85,7 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
                 if currentOffset != targetPageOffset.x {
                     collectionView.contentOffset = targetPageOffset
                 }
-                print("Offset is currently \(currentOffset), should be: \(targetPageOffset). IUndex: \(indexBeforeBoundsChange)")
+//                print("Offset is currently \(currentOffset), should be: \(targetPageOffset). IUndex: \(indexBeforeBoundsChange)")
             }
         }
         
@@ -108,7 +102,6 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         context.invalidateFlowLayoutAttributes = boundsChanged
         context.invalidateFlowLayoutDelegateMetrics = boundsChanged
         
-        print("B: \(boundsChanged)")
         if boundsChanged {
             isInvalid = true
         }
@@ -116,7 +109,6 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        print("tar===============================================================================")
         return getTargetOffset(for: proposedContentOffset, velocity: velocity.x)
     }
 
