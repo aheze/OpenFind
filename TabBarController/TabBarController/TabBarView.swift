@@ -15,45 +15,37 @@ struct TabBarView: View {
             
             VStack {
                 HStack(alignment: .bottom, spacing: 0) {
-//                    IconButton(tabType: .photos, tabViewModel: $tabViewModel)
                     PhotosButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.photosIconAttributes)
-                    CameraButton(tabState: $tabViewModel.tabState)
+                    CameraButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.cameraIconAttributes)
                     ListsButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.listsIconAttributes)
                 }
             }
-            .overlay(
-                Group {
-                    HStack(alignment: .top, spacing: 0) {
-                        HStack {
-                            ToolbarButton(iconName: "arrow.up.left.and.arrow.down.right")
-                            Spacer()
-                            ToolbarButton(iconName: "bolt.slash.fill")
+                .overlay(
+                    Group {
+                        HStack(alignment: .top, spacing: 0) {
+                            HStack {
+                                ToolbarButton(iconName: "arrow.up.left.and.arrow.down.right")
+                                Spacer()
+                                ToolbarButton(iconName: "bolt.slash.fill")
+                            }
+                            .frame(maxWidth: .infinity)
+                            
+                            Color.clear
+                            
+                            HStack {
+                                ToolbarButton(iconName: "viewfinder")
+                                Spacer()
+                                ToolbarButton(iconName: "gearshape.fill")
+                            }
+                            .frame(maxWidth: .infinity)
                         }
-                        .frame(maxWidth: .infinity)
-                        
-                        Color.clear
-                        
-                        HStack {
-                            ToolbarButton(iconName: "viewfinder")
-                            Spacer()
-                            ToolbarButton(iconName: "gearshape.fill")
-                        }
-                        .frame(maxWidth: .infinity)
                     }
-                }
-                .opacity(tabViewModel.tabState == .camera ? 1 : 0)
-                .offset(x: 0, y: tabViewModel.tabState == .camera ? 0 : -40)
-            )
-        
-            .padding(EdgeInsets(top: 16, leading: 16, bottom: Constants.tabBarBottomPadding, trailing: 16))
-            .background(
-                Color(tabViewModel.tabState == .camera ? Constants.tabBarDarkBackgroundColor : Constants.tabBarLightBackgroundColor)
-            )
-            .overlay(
-                Rectangle()
-                    .fill(Color(UIColor.secondaryLabel))
-                    .frame(height: tabViewModel.tabState == .camera ? 0 : 0.5)
-                , alignment: .top)
+                        .opacity(tabViewModel.tabBarAttributes.toolbarAlpha)
+                        .offset(x: 0, y: tabViewModel.tabBarAttributes.toolbarOffset)
+                )
+                .padding(EdgeInsets(top: 16, leading: 16, bottom: Constants.tabBarBottomPadding, trailing: 16))
+                .background(tabViewModel.tabBarAttributes.backgroundColor.color)
+                .border(Color(UIColor.secondaryLabel).opacity(tabViewModel.tabBarAttributes.topLineAlpha), width: 0.5) /// border is less glitchy than overlay
             
             , alignment: .bottom
         ).edgesIgnoringSafeArea(.all)
@@ -76,51 +68,28 @@ struct ToolbarButton: View {
     }
 }
 
-//struct IconButton: View {
-//    let tabType: TabState
-//    @Binding var tabState: TabState
-//
-//    var body: some View {
-//        Button {
-//            withAnimation {
-//                tabState = tabType
-//            }
-//        } label: {
-//            Group {
-//                Image(tabType.name)
-//                    .foregroundColor(attributes.foregroundColor.color)
-//            }
-//            .frame(maxWidth: .infinity)
-//            .frame(height: attributes.backgroundHeight)
-//        }
-//        .buttonStyle(IconButtonStyle())
-//    }
-//
-//    var attributes: IconAttributes {
-//        if tabState == .photos {
-//            if tabState == tabType {
-//                return IconAttributes.Photos.active
-//            } else if tabState == .camera {
-//                return IconAttributes.Photos.inactiveDarkBackground
-//            } else {
-//                return IconAttributes.Photos.inactiveLightBackground
-//            }
-//        } else {
-//            if tabState == tabType {
-//                return IconAttributes.Lists.active
-//            } else if tabState == .camera {
-//                return IconAttributes.Lists.inactiveDarkBackground
-//            } else {
-//                return IconAttributes.Lists.inactiveLightBackground
-//            }
-//        }
-//    }
-//}
+struct PhotosButton: View {
+    let tabType = TabState.photos
+    @Binding var tabState: TabState
+    let attributes: PhotosIconAttributes
+    
+    var body: some View {
+        IconButton(tabType: tabType, tabState: $tabState) {
+            Group {
+                Image(tabType.name)
+                    .foregroundColor(attributes.foregroundColor.color)
+            }
+            .frame(maxWidth: .infinity)
+            .frame(height: attributes.backgroundHeight)
+        }
+    }
+}
 
 struct CameraButton: View {
     let tabType = TabState.camera
     @Binding var tabState: TabState
-
+    let attributes: CameraIconAttributes
+    
     var body: some View {
         Button {
             withAnimation {
@@ -129,7 +98,7 @@ struct CameraButton: View {
         } label: {
             Group {
                 Circle()
-                    .fill(attributes.fillColor.color)
+                    .fill(attributes.foregroundColor.color)
                     .overlay(
                         Circle()
                             .stroke(attributes.rimColor.color, lineWidth: attributes.rimWidth)
@@ -139,49 +108,18 @@ struct CameraButton: View {
             .frame(maxWidth: .infinity)
             .frame(height: attributes.backgroundHeight)
         }
-
+        
         .buttonStyle(CameraButtonStyle(isShutter: tabState == tabType))
     }
-
-    var attributes: CameraAttributes {
-        if tabState == tabType {
-            return CameraAttributes.active
-        } else {
-            return CameraAttributes.inactive
-        }
-    }
 }
 
-struct PhotosButton: View {
-    let tabType = TabState.photos
-    @Binding var tabState: TabState
-    let attributes: IconAttributes
-    
-    var body: some View {
-        IconButton(tabType: tabType, tabState: $tabState, attributes: attributes)
-    }
-}
 struct ListsButton: View {
     let tabType = TabState.lists
     @Binding var tabState: TabState
-    let attributes: IconAttributes
+    let attributes: ListsIconAttributes
     
     var body: some View {
-        IconButton(tabType: tabType, tabState: $tabState, attributes: attributes)
-    }
-}
-
-struct IconButton: View {
-    let tabType: TabState
-    @Binding var tabState: TabState
-    var attributes: IconAttributes
-
-    var body: some View {
-        Button {
-            withAnimation {
-                tabState = tabType
-            }
-        } label: {
+        IconButton(tabType: tabType, tabState: $tabState) {
             Group {
                 Image(tabType.name)
                     .foregroundColor(attributes.foregroundColor.color)
@@ -189,28 +127,32 @@ struct IconButton: View {
             .frame(maxWidth: .infinity)
             .frame(height: attributes.backgroundHeight)
         }
+    }
+}
+
+struct ContainerView<Content: View>: View {
+    @ViewBuilder var content: Content
+    
+    var body: some View {
+        content
+    }
+}
+
+struct IconButton<Content: View>: View {
+    let tabType: TabState
+    @Binding var tabState: TabState
+    @ViewBuilder var content: Content
+    
+    var body: some View {
+        Button {
+            withAnimation {
+                tabState = tabType
+            }
+        } label: {
+            content
+        }
         .buttonStyle(IconButtonStyle())
     }
-//
-//    var attributes: IconAttributes {
-//        if tabState == .photos {
-//            if tabState == tabType {
-//                return IconAttributes.Photos.active
-//            } else if tabState == .camera {
-//                return IconAttributes.Photos.inactiveDarkBackground
-//            } else {
-//                return IconAttributes.Photos.inactiveLightBackground
-//            }
-//        } else {
-//            if tabState == tabType {
-//                return IconAttributes.Lists.active
-//            } else if tabState == .camera {
-//                return IconAttributes.Lists.inactiveDarkBackground
-//            } else {
-//                return IconAttributes.Lists.inactiveLightBackground
-//            }
-//        }
-//    }
 }
 
 
@@ -230,7 +172,7 @@ struct IconButtonStyle: ButtonStyle {
             .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
     }
 }
-  
+
 struct FadingButtonModifier: ViewModifier {
     let isPressed: Bool
     func body(content: Content) -> some View {

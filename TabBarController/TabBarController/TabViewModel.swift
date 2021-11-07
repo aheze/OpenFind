@@ -10,14 +10,16 @@ import SwiftUI
 class TabViewModel: ObservableObject {
     @Published var tabState: TabState = TabState.camera {
         didSet {
-            photosIconAttributes = tabState.iconAttributes(iconType: .photos)
-            listsIconAttributes = tabState.iconAttributes(iconType: .lists)
-            
-            print("Lists: \(photosIconAttributes)")
+            tabBarAttributes = tabState.tabBarAttributes()
+            photosIconAttributes = tabState.photosIconAttributes()
+            cameraIconAttributes = tabState.cameraIconAttributes()
+            listsIconAttributes = tabState.listsIconAttributes()
         }
     }
-    @Published var photosIconAttributes = IconAttributes.Photos.inactiveDarkBackground
-    @Published var listsIconAttributes = IconAttributes.Lists.inactiveDarkBackground
+    @Published var tabBarAttributes = TabBarAttributes.darkBackground
+    @Published var photosIconAttributes = PhotosIconAttributes.inactiveDarkBackground
+    @Published var cameraIconAttributes = CameraIconAttributes.active
+    @Published var listsIconAttributes = ListsIconAttributes.inactiveDarkBackground
 }
 
 enum TabState: Equatable {
@@ -42,152 +44,258 @@ enum TabState: Equatable {
         }
     }
     
-    /// `iconType` must either be Photos or Lists
-    func iconAttributes(iconType: TabState) -> IconAttributes {
+    func tabBarAttributes() -> TabBarAttributes {
         switch self {
         case .photos:
-            switch iconType {
-            case .photos:
-                return .Photos.active
-            case .lists:
-                return .Lists.inactiveLightBackground
-            default: fatalError("Must pass in Photos or Lists")
-            }
+            return .lightBackground
         case .camera:
-            switch iconType {
-            case .photos:
-                return .Photos.inactiveDarkBackground
-            case .lists:
-                return .Lists.inactiveDarkBackground
-            default: fatalError("Must pass in Photos or Lists")
-            }
+            return .darkBackground
         case .lists:
-            switch iconType {
-            case .photos:
-                return .Photos.inactiveLightBackground
-            case .lists:
-                return .Lists.active
-            default: fatalError("Must pass in Photos or Lists")
-            }
+            return .lightBackground
         case .cameraToPhotos(let transitionProgress):
-            switch iconType {
-            case .photos:
-                return IconAttributes(progress: transitionProgress, from: .Photos.inactiveDarkBackground, to: .Photos.active)
-            case .lists:
-                return IconAttributes(progress: transitionProgress, from: .Lists.inactiveDarkBackground, to: .Lists.inactiveLightBackground)
-            default: fatalError("Must pass in Photos or Lists")
-            }
+            return .init(progress: transitionProgress, from: .darkBackground, to: .lightBackground)
         case .cameraToLists(let transitionProgress):
-            switch iconType {
-            case .photos:
-                return IconAttributes(progress: transitionProgress, from: .Photos.inactiveDarkBackground, to: .Photos.inactiveLightBackground)
-            case .lists:
-                return IconAttributes(progress: transitionProgress, from: .Lists.inactiveDarkBackground, to: .Lists.active)
-            default: fatalError("Must pass in Photos or Lists")
-            }
+            return .init(progress: transitionProgress, from: .darkBackground, to: .lightBackground)
+        }
+    }
+    func photosIconAttributes() -> PhotosIconAttributes {
+        switch self {
+        case .photos:
+            return .active
+        case .camera:
+            return .inactiveDarkBackground
+        case .lists:
+            return .inactiveLightBackground
+        case .cameraToPhotos(let transitionProgress):
+            return .init(progress: transitionProgress, from: .inactiveDarkBackground, to: .active)
+        case .cameraToLists(let transitionProgress):
+            return .init(progress: transitionProgress, from: .inactiveDarkBackground, to: .inactiveLightBackground)
+        }
+    }
+    func cameraIconAttributes() -> CameraIconAttributes {
+        switch self {
+        case .photos:
+            return .inactive
+        case .camera:
+            return .active
+        case .lists:
+            return .inactive
+        case .cameraToPhotos(let transitionProgress):
+            
+            /// camera is opposite (camera to photos, so need to reverse)
+            let cameraProgress = max(0, 1 - transitionProgress)
+            return .init(progress: cameraProgress, from: .inactive, to: .active)
+        case .cameraToLists(let transitionProgress):
+            let cameraProgress = max(0, 1 - transitionProgress)
+            return .init(progress: cameraProgress, from: .inactive, to: .active)
+        }
+    }
+    func listsIconAttributes() -> ListsIconAttributes {
+        switch self {
+        case .photos:
+            return .inactiveLightBackground
+        case .camera:
+            return .inactiveDarkBackground
+        case .lists:
+            return .active
+        case .cameraToPhotos(let transitionProgress):
+            return .init(progress: transitionProgress, from: .inactiveDarkBackground, to: .inactiveLightBackground)
+        case .cameraToLists(let transitionProgress):
+            return .init(progress: transitionProgress, from: .inactiveDarkBackground, to: .active)
         }
     }
 }
 
-/// grouping of all visual properties, for setting active/inactive
-/// also for animations
-struct IconAttributes {
-    /// transition + animation
+/**
+ attributes which can have an intermediate value
+ */
+protocol AnimatableAttributes {
+    init(progress: CGFloat, from fromAttributes: Self, to toAttributes: Self)
+}
+
+struct TabBarAttributes: AnimatableAttributes {
+    
+    /// color of the tab bar
+    var backgroundColor: UIColor
+    
+    /// how much y offset for the camera toolbar
+    var toolbarOffset: CGFloat
+    
+    /// **Note!** fade out quicker than swipe
+    var toolbarAlpha: CGFloat
+    
+    /// alpha of the top divider line
+    var topLineAlpha: CGFloat
+    
+    
+    /// when active tab is camera
+    static let lightBackground: Self = {
+        return .init(
+            backgroundColor: Constants.tabBarLightBackgroundColor,
+            toolbarOffset: -40,
+            toolbarAlpha: 0,
+            topLineAlpha: 1
+        )
+    }()
+    
+    static let darkBackground: Self = {
+        return .init(
+            backgroundColor: Constants.tabBarDarkBackgroundColor,
+            toolbarOffset: 0,
+            toolbarAlpha: 1,
+            topLineAlpha: 0
+        )
+    }()
+}
+
+/// keep normal initializer, so put in extension
+extension TabBarAttributes {
+    init(progress: CGFloat, from fromAttributes: TabBarAttributes, to toAttributes: TabBarAttributes) {
+        let backgroundColor = fromAttributes.backgroundColor.toColor(toAttributes.backgroundColor, percentage: progress)
+        let toolbarOffset = fromAttributes.toolbarOffset + (toAttributes.toolbarOffset - fromAttributes.toolbarOffset) * progress
+        
+        /// move a bit faster for the toolbar
+        let fasterProgress = min(1, progress * Constants.tabBarToolbarAlphaMultiplier)
+        let toolbarAlpha = fromAttributes.toolbarAlpha + (toAttributes.toolbarAlpha - fromAttributes.toolbarAlpha) * fasterProgress
+        
+        let topLineAlpha = fromAttributes.topLineAlpha + (toAttributes.topLineAlpha - fromAttributes.topLineAlpha) * progress
+
+        self.backgroundColor = backgroundColor
+        self.toolbarOffset = toolbarOffset
+        self.toolbarAlpha = toolbarAlpha
+        self.topLineAlpha = topLineAlpha
+    }
+}
+
+struct PhotosIconAttributes: AnimatableAttributes {
     
     var foregroundColor: UIColor
     var backgroundHeight: CGFloat
     
-    struct Photos {
-        
-        /// when active tab is camera
-        static let inactiveDarkBackground: IconAttributes = {
-            return IconAttributes(
-                foregroundColor: UIColor.white,
-                backgroundHeight: 48
-            )
-        }()
-        
-        static let inactiveLightBackground: IconAttributes = {
-            return IconAttributes(
-                foregroundColor: UIColor(hex: 0x7e7e7e),
-                backgroundHeight: 48
-            )
-        }()
-        
-        /// always light background
-        static let active: IconAttributes = {
-            return IconAttributes(
-                foregroundColor: UIColor(hex: 0x40C74D),
-                backgroundHeight: 48
-            )
-        }()
-    }
+    /// when active tab is camera
+    static let inactiveDarkBackground: Self = { /// `Self` could also be `PhotosIconAttributes`
+        return .init(
+            foregroundColor: UIColor.white,
+            backgroundHeight: 48
+        )
+    }()
     
-    struct Lists {
-        static let inactiveDarkBackground: IconAttributes = {
-            return IconAttributes(
-                foregroundColor: UIColor.white,
-                backgroundHeight: 48
-            )
-        }()
-        
-        static let inactiveLightBackground: IconAttributes = {
-            return IconAttributes(
-                foregroundColor: UIColor(hex: 0x7e7e7e),
-                backgroundHeight: 48
-            )
-        }()
-        
-        static let active: IconAttributes = {
-            return IconAttributes(
-                foregroundColor: UIColor(hex: 0xFFC600),
-                backgroundHeight: 48
-            )
-        }()
-    }
+    static let inactiveLightBackground: Self = {
+        return .init(
+            foregroundColor: UIColor(hex: 0x7e7e7e),
+            backgroundHeight: 48
+        )
+    }()
     
-    static func mixAttributes(progress: CGFloat, from: IconAttributes, to: IconAttributes) -> IconAttributes {
-        let foregroundColor = from.foregroundColor.toColor(to.foregroundColor, percentage: progress)
-        let backgroundHeight = from.backgroundHeight + (to.backgroundHeight - from.backgroundHeight) * progress
-        return IconAttributes(foregroundColor: foregroundColor, backgroundHeight: backgroundHeight)
+    /// always light background
+    static let active: Self = {
+        return .init(
+            foregroundColor: UIColor(hex: 0x40C74D),
+            backgroundHeight: 48
+        )
+    }()
+}
+
+/// keep normal initializer, so put in extension
+extension PhotosIconAttributes {
+    init(progress: CGFloat, from fromAttributes: Self, to toAttributes: Self) {
+        let foregroundColor = fromAttributes.foregroundColor.toColor(toAttributes.foregroundColor, percentage: progress)
+        let backgroundHeight = fromAttributes.backgroundHeight + (toAttributes.backgroundHeight - fromAttributes.backgroundHeight) * progress
+        
+        self.foregroundColor = foregroundColor
+        self.backgroundHeight = backgroundHeight
     }
 }
 
-extension IconAttributes {
-    init(progress: CGFloat, from fromAttributes: IconAttributes, to toAttributes: IconAttributes) {
-        self = IconAttributes.mixAttributes(progress: progress, from: fromAttributes, to: toAttributes)
-    }
-}
-
-struct CameraAttributes {
+struct CameraIconAttributes: AnimatableAttributes {
+    
+    /// fill color
+    var foregroundColor: UIColor
+    
+    /// entire background height
     var backgroundHeight: CGFloat
     
     /// length of circle
     var length: CGFloat
-    var fillColor: UIColor
+    
+    /// rim color
     var rimColor: UIColor
+    
+    /// rim width
     var rimWidth: CGFloat
     
     
-    static let inactive: CameraAttributes = {
-        return CameraAttributes(
+    static let inactive: Self = {
+        return .init(
+            foregroundColor: UIColor(hex: 0x7e7e7e).withAlphaComponent(0.5),
             backgroundHeight: 48,
-            length: CGFloat(26),
-            fillColor: UIColor(hex: 0x7e7e7e).withAlphaComponent(0.5),
+            length: 26,
             rimColor: UIColor(hex: 0x7e7e7e),
             rimWidth: 1
         )
     }()
     
-    static let active: CameraAttributes = {
-        return CameraAttributes(
+    static let active: Self = {
+        return .init(
+            foregroundColor: UIColor(hex: 0x00aeef).withAlphaComponent(0.5),
             backgroundHeight: 98,
-            length: CGFloat(64),
-            fillColor: UIColor(hex: 0x00aeef).withAlphaComponent(0.5),
-            rimColor: UIColor.white,
+            length: 64,
+            rimColor: .white,
             rimWidth: 3
         )
     }()
+}
+extension CameraIconAttributes {
+    init(progress: CGFloat, from fromAttributes: Self, to toAttributes: Self) {
+        let foregroundColor = fromAttributes.foregroundColor.toColor(toAttributes.foregroundColor, percentage: progress)
+        let backgroundHeight = fromAttributes.backgroundHeight + (toAttributes.backgroundHeight - fromAttributes.backgroundHeight) * progress
+        let length = fromAttributes.length + (toAttributes.length - fromAttributes.length) * progress
+        let rimColor = fromAttributes.rimColor.toColor(toAttributes.rimColor, percentage: progress)
+        let rimWidth = fromAttributes.rimWidth + (toAttributes.rimWidth - fromAttributes.rimWidth) * progress
+        
+        self.foregroundColor = foregroundColor
+        self.backgroundHeight = backgroundHeight
+        self.length = length
+        self.rimColor = rimColor
+        self.rimWidth = rimWidth
+    }
+}
+
+struct ListsIconAttributes: AnimatableAttributes {
+    var foregroundColor: UIColor
+    var backgroundHeight: CGFloat
+    
+    static let inactiveDarkBackground: ListsIconAttributes = {
+        return .init(
+            foregroundColor: UIColor.white,
+            backgroundHeight: 48
+        )
+    }()
+    
+    static let inactiveLightBackground: ListsIconAttributes = {
+        return .init(
+            foregroundColor: UIColor(hex: 0x7e7e7e),
+            backgroundHeight: 48
+        )
+    }()
+    
+    static let active: ListsIconAttributes = {
+        return .init(
+            foregroundColor: UIColor(hex: 0xFFC600),
+            backgroundHeight: 48
+        )
+    }()
+}
+
+/// keep normal initializer, so put in extension
+extension ListsIconAttributes {
+    init(progress: CGFloat, from fromAttributes: ListsIconAttributes, to toAttributes: ListsIconAttributes) {
+        let foregroundColor = fromAttributes.foregroundColor.toColor(toAttributes.foregroundColor, percentage: progress)
+        let backgroundHeight = fromAttributes.backgroundHeight + (toAttributes.backgroundHeight - fromAttributes.backgroundHeight) * progress
+        
+        self.foregroundColor = foregroundColor
+        self.backgroundHeight = backgroundHeight
+    }
 }
 
 extension UIColor {
@@ -199,87 +307,3 @@ extension UIColor {
 
 
 
-
-
-
-//enum TabTransitionState {
-//    case cameraToPhotos(CGFloat) /// associatedValue is the percentage
-//    case cameraToLists(CGFloat)
-//}
-
-//protocol Attributes {
-//    var foregroundColor: UIColor { get set }
-//    var backgroundHeight: CGFloat { get set }
-//
-//    var secondaryForegroundColor: UIColor { get set }
-//    var circleLength: CGFloat { get set }
-//
-////    var backgroundHeight: CGFloat
-//
-//    /// length of circle
-////    var length: CGFloat
-////    var fillColor: Color
-////    var rimColor: Color
-////    var rimWidth: CGFloat
-//
-//}
-
-
-
-/// switch over the current, actual tab state FOR each individual tab
-//    func attributes(for staticTabState: TabState) -> TransitionAttributes {
-//        switch self {
-//        case .photos:
-//            switch staticTabState {
-//            case .photos:
-//                return TransitionAttributes(progress: 1, targetAttributes: .icon(.Photos.active))
-//            case .camera:
-//                return TransitionAttributes(progress: 1, targetAttributes: .camera(.inactive))
-//            case .lists:
-//                return TransitionAttributes(progress: 1, targetAttributes: .icon(.Lists.inactiveLightBackground))
-//            default: break
-//            }
-//        case .camera:
-//            switch staticTabState {
-//            case .photos:
-//                return TransitionAttributes(progress: 1, targetAttributes: .icon(.Photos.inactiveLightBackground))
-//            case .camera:
-//                return TransitionAttributes(progress: 1, targetAttributes: .camera(.active))
-//            case .lists:
-//                return TransitionAttributes(progress: 1, targetAttributes: .icon(.Lists.inactiveLightBackground))
-//            default: break
-//            }
-//        case .lists:
-//            switch staticTabState {
-//            case .photos:
-//                return TransitionAttributes(progress: 1, targetAttributes: .icon(.Photos.inactiveLightBackground))
-//            case .camera:
-//                return TransitionAttributes(progress: 1, targetAttributes: .camera(.inactive))
-//            case .lists:
-//                return TransitionAttributes(progress: 1, targetAttributes: .icon(.Lists.active))
-//            default: break
-//            }
-//        case .cameraToPhotos(let transitionProgress):
-//            switch staticTabState {
-//            case .photos:
-//                return TransitionAttributes(progress: transitionProgress, targetAttributes: .icon(.Photos.active))
-//            case .camera:
-//                return TransitionAttributes(progress: transitionProgress, targetAttributes: .camera(.inactive))
-//            case .lists:
-//                return TransitionAttributes(progress: transitionProgress, targetAttributes: .icon(.Lists.inactiveLightBackground))
-//            default: break
-//            }
-//        case .cameraToLists(let transitionProgress):
-//            switch staticTabState {
-//            case .photos:
-//                return TransitionAttributes(progress: transitionProgress, targetAttributes: .icon(.Photos.inactiveLightBackground))
-//            case .camera:
-//                return TransitionAttributes(progress: transitionProgress, targetAttributes: .camera(.inactive))
-//            case .lists:
-//                return TransitionAttributes(progress: transitionProgress, targetAttributes: .icon(.Lists.active))
-//            default: break
-//            }
-//        }
-//
-//        fatalError("Fell through, shouldn't have.")
-//    }

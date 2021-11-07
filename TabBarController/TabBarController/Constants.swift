@@ -13,6 +13,9 @@ struct Constants {
     
     static var tabBarDarkBackgroundColor = UIColor(hex: 0x002F3B, alpha: 0.5)
     static var tabBarLightBackgroundColor = UIColor.systemBackground
+    
+    /// make the fade a bit faster
+    static var tabBarToolbarAlphaMultiplier = CGFloat(3.5)
 }
 
 extension UIColor {
