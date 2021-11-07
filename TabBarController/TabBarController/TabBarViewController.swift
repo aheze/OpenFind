@@ -39,6 +39,10 @@ public class TabBarViewController: UIViewController {
             let pages = self?.pages ?? [PageViewController]()
             return pages.map { $0.tabType }
         }
+        flowLayout.getCurrentIndex = { [weak self] in
+            print("State: \(self?.tabViewModel.tabState), index: \(self?.tabViewModel.tabState.index)")
+            return self?.tabViewModel.tabState.index ?? 1
+        }
         return flowLayout
     }()
     
@@ -67,21 +71,35 @@ public class TabBarViewController: UIViewController {
         
         setupCollectionView()
         
-        tabBarContainerView.backgroundColor = .red
+//        tabBarContainerView.backgroundColor = .red
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.collectionLeftC.constant = 100
-            self.contentPagingLayout.invalidateLayout()
-            UIView.animate(withDuration: 1) {
-                self.contentPagingLayout.invalidateLayout()
-                self.view.layoutIfNeeded()
-            }
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+//            self.collectionLeftC.constant = 100
+//            self.contentPagingLayout.invalidateLayout()
+//
+////            UIView.animate(withDuration: 1) {
+////            self.view.layoutIfNeeded()
+////            }
+//
+////            print("Currnet focused index: \(tabViewModel.tabState.index)")
+//            if let savedPageOffset = contentPagingLayout.layoutAttributes[safe: tabViewModel.tabState.index]?.frame.origin {
+//                print("saved: \(savedPageOffset)")
+//                contentCollectionView.setContentOffset(savedPageOffset, animated: true)
+//            }
+//        }
     }
     
     public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        print("transsss")
-        print("Currnet focused index: \(contentPagingLayout.focusedPageIndex)")
+        
+//        print("transsss")
+//        print("Currnet \(tabViewModel.tabState) focused index: \(tabViewModel.tabState.index)")
+//
+//        contentPagingLayout.invalidateLayout()
+//        view.layoutIfNeeded()
+//        if let savedPageOffset = contentPagingLayout.layoutAttributes[safe: tabViewModel.tabState.index]?.frame.origin {
+//            print("saved: \(savedPageOffset)")
+//            contentCollectionView.setContentOffset(savedPageOffset, animated: true)
+//        }
     }
     
     @IBOutlet weak var collectionLeftC: NSLayoutConstraint!

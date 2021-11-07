@@ -31,6 +31,20 @@ public enum TabState: Equatable {
     case cameraToPhotos(CGFloat) /// associatedValue is the percentage
     case cameraToLists(CGFloat)
     
+    var index: Int {
+        switch self {
+        case .photos:
+            return 0
+        case .camera:
+            return 1
+        case .lists:
+            return 2
+        case .cameraToPhotos(_):
+            return 1
+        case .cameraToLists(_):
+            return 1
+        }
+    }
     var name: String {
         switch self {
         case .photos:

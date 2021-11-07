@@ -17,19 +17,16 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     /// prepared before?
     var preparedOnce = false
     
+    var isInvalid = false
+    
     /// get data
     var getTabs: (() -> [TabState])?
+    var getCurrentIndex: (() -> Int)?
     
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
 
     /// actual content offset used by `prepare`
     var currentOffset = CGFloat(0)
-    
-    /// old / new
-    var focusedPageIndexChanged: ((Int?, Int?) -> Void)?
-    
-    /// index of focused/expanded cell
-    var focusedPageIndex: Int?
    
     var contentSize = CGSize.zero /// the scrollable content size of the collection view
     override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
@@ -48,6 +45,7 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     /// make the layout (strip vs list) here
     override func prepare() { /// configure the cells' frames
         super.prepare()
+        print("prepping")
         
         guard let collectionView = collectionView else { return }
         
@@ -78,6 +76,24 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
                 collectionView.contentOffset = cameraOrigin
             }
         }
+        if isInvalid {
+            isInvalid = false
+//            if let cameraOrigin = layoutAttributes[safe: 1]?.frame.origin {
+//                collectionView.contentOffset = cameraOrigin
+//            }
+//            print("/// Changed/// to \(newBounds)")
+            print("indalid")
+            if
+                let indexBeforeBoundsChange = getCurrentIndex?(),
+                let targetPageOffset = layoutAttributes[safe: indexBeforeBoundsChange]?.frame.origin
+            {
+
+                if currentOffset != targetPageOffset.x {
+                    collectionView.contentOffset = targetPageOffset
+                }
+                print("Offset is currently \(currentOffset), should be: \(targetPageOffset). IUndex: \(indexBeforeBoundsChange)")
+            }
+        }
         
         currentOffset = collectionView.contentOffset.x
     }
@@ -89,17 +105,22 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         let context = super.invalidationContext(forBoundsChange: newBounds) as! UICollectionViewFlowLayoutInvalidationContext
         let boundsChanged = newBounds.size != collectionView?.bounds.size
         
-        context.invalidateFlowLayoutAttributes = true
-        context.invalidateFlowLayoutDelegateMetrics = true
+        context.invalidateFlowLayoutAttributes = boundsChanged
+        context.invalidateFlowLayoutDelegateMetrics = boundsChanged
+        
+        print("B: \(boundsChanged)")
+        if boundsChanged {
+            isInvalid = true
+        }
         return context
     }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         print("tar===============================================================================")
-        return getTargetOffset(for: proposedContentOffset, velocity: velocity.x, updatePageIndex: true)
+        return getTargetOffset(for: proposedContentOffset, velocity: velocity.x)
     }
 
-    func getTargetOffset(for point: CGPoint, velocity: CGFloat, updatePageIndex: Bool = false) -> CGPoint {
+    func getTargetOffset(for point: CGPoint, velocity: CGFloat) -> CGPoint {
         let proposedOffset = point.x
 
         var pickedAttributes = [UICollectionViewLayoutAttributes?]()
@@ -142,18 +163,6 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
                 return layoutAttributes[closestAttributeIndex].frame.origin
             }
         }
-        
-        if updatePageIndex {
-            setFocusedPageIndex(closestAttributeIndex)
-        }
-        
         return closestAttribute?.frame.origin ?? point
-    }
-    
-    func setFocusedPageIndex(_ index: Int, notify: Bool = false) {
-        focusedPageIndex = index
-        if notify {
-            focusedPageIndexChanged?(focusedPageIndex, index)
-        }
     }
 }
