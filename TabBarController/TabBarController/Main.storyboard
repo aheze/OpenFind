@@ -82,6 +82,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="collectionLeftC" destination="ykW-p5-2Jm" id="zaI-jv-1Pr"/>
                         <outlet property="contentCollectionView" destination="6kN-Uj-IUK" id="bwQ-U5-oDj"/>
                         <outlet property="contentView" destination="7ag-uH-Frh" id="Wmk-t9-xLo"/>
                         <outlet property="tabBarContainerView" destination="0Q9-bi-u1l" id="LXE-NC-OcT"/>

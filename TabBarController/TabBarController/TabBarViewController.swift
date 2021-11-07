@@ -68,7 +68,23 @@ public class TabBarViewController: UIViewController {
         setupCollectionView()
         
         tabBarContainerView.backgroundColor = .red
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.collectionLeftC.constant = 100
+            self.contentPagingLayout.invalidateLayout()
+            UIView.animate(withDuration: 1) {
+                self.contentPagingLayout.invalidateLayout()
+                self.view.layoutIfNeeded()
+            }
+        }
     }
+    
+    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        print("transsss")
+        print("Currnet focused index: \(contentPagingLayout.focusedPageIndex)")
+    }
+    
+    @IBOutlet weak var collectionLeftC: NSLayoutConstraint!
     
     func setupConstraints() {
         tabBarHeightC.constant = Constants.tabBarShrunkHeight
@@ -106,7 +122,7 @@ public class TabBarViewController: UIViewController {
         print("Button Pressed!")
     }
     
-    
+//    override func view
     func setupCollectionView() {
         _ = contentPagingLayout
         

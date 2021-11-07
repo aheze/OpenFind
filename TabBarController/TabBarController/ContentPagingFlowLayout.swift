@@ -53,8 +53,6 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         
         let width = collectionView.bounds.width
         let height = collectionView.bounds.height
-        print("prep... \(collectionView.bounds.size)")
-        
         
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
         var currentOrigin = CGFloat(0)
@@ -71,7 +69,6 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
 
         
         self.contentSize = CGSize(width: currentOrigin, height: height)
-        print("set cont size to : \(contentSize)")
         self.layoutAttributes = layoutAttributes
         if !preparedOnce {
             preparedOnce = true
@@ -91,8 +88,9 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
         let context = super.invalidationContext(forBoundsChange: newBounds) as! UICollectionViewFlowLayoutInvalidationContext
         let boundsChanged = newBounds.size != collectionView?.bounds.size
-        print("Bounds changed? \(boundsChanged)")
-        context.invalidateFlowLayoutDelegateMetrics = boundsChanged
+        
+        context.invalidateFlowLayoutAttributes = true
+        context.invalidateFlowLayoutDelegateMetrics = true
         return context
     }
     
@@ -104,37 +102,52 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     func getTargetOffset(for point: CGPoint, velocity: CGFloat, updatePageIndex: Bool = false) -> CGPoint {
         let proposedOffset = point.x
 
-        let candidateOffsets = layoutAttributes.map { $0.frame.origin }
-        var pickedOffsets = [CGPoint]()
+        var pickedAttributes = [UICollectionViewLayoutAttributes?]()
         
         /// prevent scrolling from **photos -> lists** or **lists -> photos**
         let maxDistance = collectionView?.bounds.width ?? 500
 
         switch velocity {
         case _ where velocity < 0:
-            pickedOffsets = candidateOffsets.filter( { $0.x <= proposedOffset })
+            pickedAttributes = layoutAttributes.map { layoutAttribute in
+                let isCandidate = layoutAttribute.frame.origin.x <= proposedOffset
+                return isCandidate ? layoutAttribute : nil
+            }
         case _ where velocity > 0:
-            pickedOffsets = candidateOffsets.filter( { $0.x >= proposedOffset })
+            pickedAttributes = layoutAttributes.map { layoutAttribute in
+                let isCandidate = layoutAttribute.frame.origin.x >= proposedOffset
+                return isCandidate ? layoutAttribute : nil
+            }
         default:
-            pickedOffsets = candidateOffsets
-        }
-
-        guard var (closestOriginIndex, closestOrigin) = pickedOffsets.enumerated().min(by: {
-            return abs($0.element.x - proposedOffset) < abs($1.element.x - proposedOffset)
-        }) else { /// `layoutAttributes` is empty
-            return point
+            pickedAttributes = layoutAttributes
         }
         
-        let distance = abs(closestOrigin.x - currentOffset)
-        if distance > maxDistance {
-            closestOriginIndex = 1 /// camera
-            closestOrigin = candidateOffsets[closestOriginIndex]
+        /// find closest origin
+        var (closestAttribute, closestAttributeIndex, closestDistance): (UICollectionViewLayoutAttributes?, Int, CGFloat) = (nil, 0, CGFloat.infinity)
+        for (index, attribute) in pickedAttributes.enumerated() {
+            if let layoutAttribute = attribute {
+                let distance = abs(layoutAttribute.frame.origin.x - proposedOffset)
+                if distance < closestDistance {
+                    closestAttribute = layoutAttribute
+                    closestAttributeIndex = index
+                    closestDistance = distance
+                }
+            }
+        }
+        
+        if let closestAttribute = closestAttribute {
+            let distance = abs(closestAttribute.frame.origin.x - currentOffset)
+            if distance > maxDistance {
+                closestAttributeIndex = 1 /// camera
+                return layoutAttributes[closestAttributeIndex].frame.origin
+            }
         }
         
         if updatePageIndex {
-            setFocusedPageIndex(closestOriginIndex)
+            setFocusedPageIndex(closestAttributeIndex)
         }
-        return closestOrigin
+        
+        return closestAttribute?.frame.origin ?? point
     }
     
     func setFocusedPageIndex(_ index: Int, notify: Bool = false) {
