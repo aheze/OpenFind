@@ -22,6 +22,10 @@ class TabViewModel: ObservableObject {
     @Published var cameraIconAttributes = CameraIconAttributes.active
     @Published var listsIconAttributes = ListsIconAttributes.inactiveDarkBackground
     @Published var animatorProgress = CGFloat(0) /// for blur
+    
+    /// whenever this changes, re-render the tab bar
+    /// need to have this for the blur
+    @Published var renderingUUID = UUID()
 }
 
 public enum TabState: Equatable {

@@ -51,11 +51,13 @@ struct TabBarView: View {
                         VisualEffectView(progress: $tabViewModel.animatorProgress)
                         tabViewModel.tabBarAttributes.backgroundColor.color.opacity(0.5)
                     }
+                        .id(tabViewModel.renderingUUID)
                 )
                 .border(Color(UIColor.secondaryLabel).opacity(tabViewModel.tabBarAttributes.topLineAlpha), width: 0.5) /// border is less glitchy than overlay
             
             , alignment: .bottom
-        ).edgesIgnoringSafeArea(.all)
+        )
+            .edgesIgnoringSafeArea(.all)
     }
 }
 
