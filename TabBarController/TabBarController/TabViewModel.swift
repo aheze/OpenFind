@@ -14,12 +14,19 @@ class TabViewModel: ObservableObject {
             photosIconAttributes = tabState.photosIconAttributes()
             cameraIconAttributes = tabState.cameraIconAttributes()
             listsIconAttributes = tabState.listsIconAttributes()
+            
+            animatorProgress = tabState.getAnimatorProgress()
+            print("P ; \(animatorProgress)")
+//            tabBlurEffectView.updateProgress(percentage: animatorProgress)
+            
         }
     }
     @Published var tabBarAttributes = TabBarAttributes.darkBackground
     @Published var photosIconAttributes = PhotosIconAttributes.inactiveDarkBackground
     @Published var cameraIconAttributes = CameraIconAttributes.active
     @Published var listsIconAttributes = ListsIconAttributes.inactiveDarkBackground
+    
+    @Published var animatorProgress = CGFloat(0)
 }
 
 enum TabState: Equatable {
@@ -44,6 +51,20 @@ enum TabState: Equatable {
         }
     }
     
+    func getAnimatorProgress() -> CGFloat {
+        switch self {
+        case .photos:
+            return 1
+        case .camera:
+            return 0
+        case .lists:
+            return 1
+        case .cameraToPhotos(let transitionProgress):
+            return transitionProgress
+        case .cameraToLists(let transitionProgress):
+            return transitionProgress
+        }
+    }
     func tabBarAttributes() -> TabBarAttributes {
         switch self {
         case .photos:
@@ -104,6 +125,7 @@ enum TabState: Equatable {
             return .init(progress: transitionProgress, from: .inactiveDarkBackground, to: .active)
         }
     }
+    
 }
 
 /**

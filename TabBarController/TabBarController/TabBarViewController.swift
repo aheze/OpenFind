@@ -44,7 +44,7 @@ public class TabBarViewController: UIViewController {
         
         tabViewModel = TabViewModel()
         cancellable = tabViewModel.$tabState.sink { [weak self] activeTab in
-            self?.updateTabBar(activeTab ?? .camera)
+            self?.updateTabBar(activeTab)
         }
         
         setupConstraints()

@@ -44,7 +44,12 @@ struct TabBarView: View {
                         .offset(x: 0, y: tabViewModel.tabBarAttributes.toolbarOffset)
                 )
                 .padding(EdgeInsets(top: 16, leading: 16, bottom: Constants.tabBarBottomPadding, trailing: 16))
-                .background(tabViewModel.tabBarAttributes.backgroundColor.color)
+                .background(
+                    ZStack {
+                        VisualEffectView(progress: $tabViewModel.animatorProgress)
+                        tabViewModel.tabBarAttributes.backgroundColor.color.opacity(0.5)
+                    }
+                )
                 .border(Color(UIColor.secondaryLabel).opacity(tabViewModel.tabBarAttributes.topLineAlpha), width: 0.5) /// border is less glitchy than overlay
             
             , alignment: .bottom

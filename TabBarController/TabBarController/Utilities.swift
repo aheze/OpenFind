@@ -8,9 +8,41 @@
 import SwiftUI
 
 struct VisualEffectView: UIViewRepresentable {
-    var effect: UIVisualEffect?
-    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
-    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
+    @Binding var progress: CGFloat
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> BlurEffectView { BlurEffectView() }
+    func updateUIView(_ uiView: BlurEffectView, context: UIViewRepresentableContext<Self>) {
+        uiView.updateProgress(percentage: progress)
+    }
+}
+
+class BlurEffectView: UIVisualEffectView {
+    
+    var animator = UIViewPropertyAnimator(duration: 1, curve: .linear)
+    
+    override func didMoveToSuperview() {
+        guard let superview = superview else { return }
+        backgroundColor = .clear
+        frame = superview.bounds //Or setup constraints instead
+        setupBlur()
+    }
+    
+    private func setupBlur() {
+        animator.stopAnimation(true)
+        effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+
+        animator.addAnimations { [weak self] in
+            self?.effect = UIBlurEffect(style: .systemThickMaterial)
+        }
+        animator.fractionComplete = 0
+    }
+    
+    func updateProgress(percentage: CGFloat) {
+        animator.fractionComplete = percentage
+    }
+    
+    deinit {
+        animator.stopAnimation(true)
+    }
 }
 
 class ButtonView: UIButton {
