@@ -39,10 +39,7 @@ public class TabBarViewController: UIViewController {
             let pages = self?.pages ?? [PageViewController]()
             return pages.map { $0.tabType }
         }
-        flowLayout.getCurrentIndex = { [weak self] in
-            print("State: \(self?.tabViewModel.tabState), index: \(self?.tabViewModel.tabState.index)")
-            return self?.tabViewModel.tabState.index ?? 1
-        }
+        
         return flowLayout
     }()
     
@@ -69,16 +66,6 @@ public class TabBarViewController: UIViewController {
         tabBarContainerView.backgroundColor = .clear
         setupCollectionView()
         
-    }
-    
-    
-    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        contentCollectionView.isScrollEnabled = false
-        coordinator.animate { _ in
-        } completion: { [weak self] _ in
-            print("Done rotate")
-            self?.contentCollectionView.isScrollEnabled = true
-        }
     }
     
     @IBOutlet weak var collectionLeftC: NSLayoutConstraint!
@@ -110,7 +97,10 @@ public class TabBarViewController: UIViewController {
         }
         
         if let attributes = contentPagingLayout.layoutAttributes[safe: index] {
-            contentCollectionView.setContentOffset(attributes.frame.origin, animated: false)
+            
+            /// use `getTargetOffset` as to set flow layout's focused index correctly (for rotation)
+            let targetOffset = contentPagingLayout.getTargetOffset(for: attributes.frame.origin, velocity: 0)
+            contentCollectionView.setContentOffset(targetOffset, animated: false)
         }
         
     }

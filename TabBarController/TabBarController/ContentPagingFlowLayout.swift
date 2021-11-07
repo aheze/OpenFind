@@ -21,13 +21,17 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     
     /// get data
     var getTabs: (() -> [TabState])?
-    var getCurrentIndex: (() -> Int)?
+    
     
     var layoutAttributes = [UICollectionViewLayoutAttributes]()
 
     /// actual content offset used by `prepare`
     var currentOffset = CGFloat(0)
    
+    /// calculated from `getTargetOffset`
+    var currentIndex = 1
+    
+    
     var contentSize = CGSize.zero /// the scrollable content size of the collection view
     override var collectionViewContentSize: CGSize { return contentSize } /// pass scrollable content size back to the collection view
     
@@ -77,10 +81,7 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         }
         if isInvalid {
             isInvalid = false
-            if
-                let indexBeforeBoundsChange = getCurrentIndex?(),
-                let targetPageOffset = layoutAttributes[safe: indexBeforeBoundsChange]?.frame.origin
-            {
+            if let targetPageOffset = layoutAttributes[safe: currentIndex]?.frame.origin {
 
                 if currentOffset != targetPageOffset.x {
                     collectionView.contentOffset = targetPageOffset
@@ -141,20 +142,22 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
             if let layoutAttribute = attribute {
                 let distance = abs(layoutAttribute.frame.origin.x - proposedOffset)
                 if distance < closestDistance {
-                    closestAttribute = layoutAttribute
                     closestAttributeIndex = index
-                    closestDistance = distance
+                    closestAttribute = layoutAttribute
+                    closestDistance = distance /// for keeping track later
                 }
             }
         }
         
-        if let closestAttribute = closestAttribute {
-            let distance = abs(closestAttribute.frame.origin.x - currentOffset)
+        if let closestAttributeUnwrapped = closestAttribute, velocity != 0 {
+            let distance = abs(closestAttributeUnwrapped.frame.origin.x - currentOffset)
             if distance > maxDistance {
                 closestAttributeIndex = 1 /// camera
-                return layoutAttributes[closestAttributeIndex].frame.origin
+                closestAttribute = layoutAttributes[closestAttributeIndex]
             }
         }
+        
+        currentIndex = closestAttributeIndex
         return closestAttribute?.frame.origin ?? point
     }
 }

@@ -22,6 +22,8 @@ struct TabBarView: View {
             }
                 .overlay(
                     Group {
+                        
+                        
                         HStack(alignment: .top, spacing: 0) {
                             HStack {
                                 ToolbarButton(iconName: "arrow.up.left.and.arrow.down.right")
