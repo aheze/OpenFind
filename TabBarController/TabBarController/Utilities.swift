@@ -96,8 +96,12 @@ extension UIViewController {
         // Add Child View Controller
         addChild(childViewController)
         
+        for subview in inView.subviews {
+            subview.removeFromSuperview()
+        }
+        
         // Add Child View as Subview
-        inView.insertSubview(childViewController.view, at: 0)
+        inView.addSubview(childViewController.view)
         
         // Configure Child View
         childViewController.view.frame = inView.bounds

@@ -12,10 +12,17 @@ class ViewController: UIViewController {
 
     lazy var tabBarViewController: TabBarViewController = {
         
-        let viewController = Bridge.viewController()
-        self.addChild(viewController, in: self.view)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard
+            let photosViewController = storyboard.instantiateViewController(withIdentifier: "PhotosViewController") as? PhotosViewController,
+            let cameraViewController = storyboard.instantiateViewController(withIdentifier: "CameraViewController") as? CameraViewController,
+            let listsViewController = storyboard.instantiateViewController(withIdentifier: "ListsViewController") as? ListsViewController
+        else { fatalError("No view controllers!") }
         
-        return viewController
+        let tabViewController = Bridge.tabViewController([photosViewController, cameraViewController, listsViewController])
+        self.addChild(tabViewController, in: self.view)
+        
+        return tabViewController
     }()
     
     override func viewDidLoad() {
@@ -24,7 +31,18 @@ class ViewController: UIViewController {
         
         _ = tabBarViewController
         
+       
     }
+}
+
+class PhotosViewController: UIViewController, PageViewController {
+    var tabType: TabState = .photos
+}
+class CameraViewController: UIViewController, PageViewController {
+    var tabType: TabState = .camera
+}
+class ListsViewController: UIViewController, PageViewController {
+    var tabType: TabState = .lists
 }
 
 extension UIViewController {

@@ -22,4 +22,19 @@ extension TabBarViewController: UICollectionViewDelegate {
         }
         
     }
+    
+    
+    public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        childControllersManager.addChild(at: indexPath.row, to: self, displayIn: cell.contentView)
+        print("Will display: \(indexPath)")
+        let pageViewController = pages[indexPath.item]
+        addChild(pageViewController, in: cell.contentView)
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let pageViewController = pages[indexPath.item]
+        removeChild(pageViewController)
+//        childControllersManager.remove(at: indexPath.row)
+//        childControllersManager.cleanCachedViewControllers(index: indexPath.row)
+    }
 }

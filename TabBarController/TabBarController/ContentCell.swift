@@ -8,5 +8,4 @@
 import UIKit
 
 class ContentCell: UICollectionViewCell {
-    
 }

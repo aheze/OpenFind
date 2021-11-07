@@ -53,6 +53,8 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         
         let width = collectionView.bounds.width
         let height = collectionView.bounds.height
+        print("prep... \(collectionView.bounds.size)")
+        
         
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
         var currentOrigin = CGFloat(0)
@@ -67,8 +69,9 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
             currentOrigin += width
         }
 
-        self.contentSize = CGSize(width: currentOrigin, height: height)
         
+        self.contentSize = CGSize(width: currentOrigin, height: height)
+        print("set cont size to : \(contentSize)")
         self.layoutAttributes = layoutAttributes
         if !preparedOnce {
             preparedOnce = true
@@ -87,11 +90,14 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool { return true }
     override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
         let context = super.invalidationContext(forBoundsChange: newBounds) as! UICollectionViewFlowLayoutInvalidationContext
-        context.invalidateFlowLayoutDelegateMetrics = newBounds.size != collectionView?.bounds.size
+        let boundsChanged = newBounds.size != collectionView?.bounds.size
+        print("Bounds changed? \(boundsChanged)")
+        context.invalidateFlowLayoutDelegateMetrics = boundsChanged
         return context
     }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+        print("tar===============================================================================")
         return getTargetOffset(for: proposedContentOffset, velocity: velocity.x, updatePageIndex: true)
     }
 

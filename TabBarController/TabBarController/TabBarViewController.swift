@@ -9,11 +9,20 @@ import UIKit
 import SwiftUI
 import Combine
 
+/// make sure all view controllers have a name
+public protocol PageViewController: UIViewController {
+    var tabType: TabState { get set }
+}
 public class TabBarViewController: UIViewController {
+    typealias ViewControllerType = UIViewController
+    
     
     /// data
-    var tabs: [TabState] = [.photos, .camera, .lists]
+    var pages = [PageViewController]()
     
+    required init?(coder aDecoder: NSCoder) {
+       super.init(coder: aDecoder)
+    }
     
     /// big area
     @IBOutlet weak var contentView: UIView!
@@ -27,7 +36,8 @@ public class TabBarViewController: UIViewController {
         contentCollectionView.setCollectionViewLayout(flowLayout, animated: false)
         
         flowLayout.getTabs = { [weak self] in
-            return self?.tabs ?? [TabState]()
+            let pages = self?.pages ?? [PageViewController]()
+            return pages.map { $0.tabType }
         }
         return flowLayout
     }()
@@ -56,6 +66,8 @@ public class TabBarViewController: UIViewController {
     
         
         setupCollectionView()
+        
+        tabBarContainerView.backgroundColor = .red
     }
     
     func setupConstraints() {
@@ -63,7 +75,6 @@ public class TabBarViewController: UIViewController {
     }
     
     private func updateTabBar(_ tabState: TabState) {
-//        print("Update to \(tabState)")
         
         DispatchQueue.main.async {
             if tabState == .camera {
