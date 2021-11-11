@@ -44,7 +44,6 @@ public class TabBarViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        print("load!!!sdasda")
         _ = contentPagingLayout
         contentCollectionView.decelerationRate = .fast
         tabBarHeightC.constant = Constants.tabBarShrunkHeight
