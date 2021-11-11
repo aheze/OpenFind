@@ -6,14 +6,17 @@
 //
 
 
-import UIKit
+import SwiftUI
 
 public struct Bridge {
-    public static var tabViewController: (([PageViewController]) -> TabBarViewController) = { pageViewControllers in
-        let bundle = Bundle(identifier: "com.aheze.TabBarController")
-        let storyboard = UIStoryboard(name: "Main", bundle: bundle)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
-        viewController.pages = pageViewControllers
-        return viewController
+    public static func makeTabViewController<ToolbarView: View>(pageViewControllers: [PageViewController], toolbarView: ToolbarView) -> TabBarController<ToolbarView> {
+        
+        let toolbarController = TabBarController(pages: pageViewControllers, toolbarView: toolbarView)
+//        let bundle = Bundle(identifier: "com.aheze.TabBarController")
+//        let storyboard = UIStoryboard(name: "Main", bundle: bundle)
+//        let viewController = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController<ToolbarView>
+//        viewController.pages = pageViewControllers
+//        viewController.toolbarView = toolbarView
+        return toolbarController
     }
 }

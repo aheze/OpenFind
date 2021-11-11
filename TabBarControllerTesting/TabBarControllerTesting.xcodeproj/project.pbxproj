@@ -15,6 +15,7 @@
 		3C337952272BBB540055A73A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C337950272BBB540055A73A /* LaunchScreen.storyboard */; };
 		3C33795B272BBB650055A73A /* TabBarController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C33795A272BBB650055A73A /* TabBarController.framework */; };
 		3C33795C272BBB650055A73A /* TabBarController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C33795A272BBB650055A73A /* TabBarController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3C430CC8273CB0E700E19B77 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C430CC7273CB0E700E19B77 /* CameraViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +42,7 @@
 		3C337951272BBB540055A73A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3C337953272BBB540055A73A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C33795A272BBB650055A73A /* TabBarController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TabBarController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C430CC7273CB0E700E19B77 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				3C337945272BBB520055A73A /* AppDelegate.swift */,
 				3C337947272BBB520055A73A /* SceneDelegate.swift */,
 				3C337949272BBB520055A73A /* ViewController.swift */,
+				3C430CC7273CB0E700E19B77 /* CameraViewController.swift */,
 				3C33794B272BBB520055A73A /* Main.storyboard */,
 				3C33794E272BBB540055A73A /* Assets.xcassets */,
 				3C337950272BBB540055A73A /* LaunchScreen.storyboard */,
@@ -167,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C33794A272BBB520055A73A /* ViewController.swift in Sources */,
+				3C430CC8273CB0E700E19B77 /* CameraViewController.swift in Sources */,
 				3C337946272BBB520055A73A /* AppDelegate.swift in Sources */,
 				3C337948272BBB520055A73A /* SceneDelegate.swift in Sources */,
 			);

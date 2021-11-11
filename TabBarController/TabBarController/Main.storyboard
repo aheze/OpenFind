@@ -20,14 +20,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ag-uH-Frh">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Et1-pl-Idc">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Hello world"/>
-                                        <connections>
-                                            <action selector="buttonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hFg-Eg-xqo"/>
-                                        </connections>
-                                    </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6kN-Uj-IUK">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -51,13 +43,9 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Et1-pl-Idc" secondAttribute="trailing" id="B7J-mp-trI"/>
                                     <constraint firstAttribute="trailing" secondItem="6kN-Uj-IUK" secondAttribute="trailing" id="QQX-uZ-j2O"/>
-                                    <constraint firstItem="Et1-pl-Idc" firstAttribute="leading" secondItem="7ag-uH-Frh" secondAttribute="leading" id="UIc-mc-2Qu"/>
                                     <constraint firstAttribute="bottom" secondItem="6kN-Uj-IUK" secondAttribute="bottom" id="cL9-pX-yQ6"/>
-                                    <constraint firstAttribute="bottom" secondItem="Et1-pl-Idc" secondAttribute="bottom" id="fSl-rS-5Wt"/>
                                     <constraint firstItem="6kN-Uj-IUK" firstAttribute="top" secondItem="7ag-uH-Frh" secondAttribute="top" id="iru-CP-5hd"/>
-                                    <constraint firstItem="Et1-pl-Idc" firstAttribute="top" secondItem="7ag-uH-Frh" secondAttribute="top" id="ugs-kx-YeN"/>
                                     <constraint firstItem="6kN-Uj-IUK" firstAttribute="leading" secondItem="7ag-uH-Frh" secondAttribute="leading" id="ykW-p5-2Jm"/>
                                 </constraints>
                             </view>
@@ -82,11 +70,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="collectionLeftC" destination="ykW-p5-2Jm" id="zaI-jv-1Pr"/>
-                        <outlet property="contentCollectionView" destination="6kN-Uj-IUK" id="bwQ-U5-oDj"/>
-                        <outlet property="contentView" destination="7ag-uH-Frh" id="Wmk-t9-xLo"/>
-                        <outlet property="tabBarContainerView" destination="0Q9-bi-u1l" id="LXE-NC-OcT"/>
-                        <outlet property="tabBarHeightC" destination="C0V-dv-94a" id="ck3-7x-HnN"/>
+                        <outlet property="contentCollectionView" destination="6kN-Uj-IUK" id="awm-to-dfV"/>
+                        <outlet property="contentView" destination="7ag-uH-Frh" id="bS8-iX-gJf"/>
+                        <outlet property="tabBarContainerView" destination="0Q9-bi-u1l" id="0YJ-Pe-VMW"/>
+                        <outlet property="tabBarHeightC" destination="C0V-dv-94a" id="heD-ME-cxz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

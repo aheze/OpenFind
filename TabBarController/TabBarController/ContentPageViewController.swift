@@ -8,9 +8,7 @@
 import UIKit
 
 class ContentPageViewController: UIViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
 }

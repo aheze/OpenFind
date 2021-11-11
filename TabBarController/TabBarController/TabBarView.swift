@@ -7,9 +7,11 @@
 
 import SwiftUI
 
-struct TabBarView: View {
+/// `CameraToolbarView` is passed in from `CameraViewController`
+struct TabBarView<CameraToolbarView: View>: View {
     @ObservedObject var tabViewModel: TabViewModel
-    
+    @ViewBuilder var cameraToolbarView: CameraToolbarView
+
     var body: some View {
         Color.clear.overlay(
             
@@ -21,27 +23,7 @@ struct TabBarView: View {
                 }
             }
                 .overlay(
-                    Group {
-                        
-                        
-                        HStack(alignment: .top, spacing: 0) {
-                            HStack {
-                                ToolbarButton(iconName: "arrow.up.left.and.arrow.down.right")
-                                Spacer()
-                                ToolbarButton(iconName: "bolt.slash.fill")
-                            }
-                            .frame(maxWidth: .infinity)
-                            
-                            Color.clear
-                            
-                            HStack {
-                                ToolbarButton(iconName: "viewfinder")
-                                Spacer()
-                                ToolbarButton(iconName: "gearshape.fill")
-                            }
-                            .frame(maxWidth: .infinity)
-                        }
-                    }
+                        cameraToolbarView
                         .opacity(tabViewModel.tabBarAttributes.toolbarAlpha)
                         .offset(x: 0, y: tabViewModel.tabBarAttributes.toolbarOffset)
                 )
@@ -51,7 +33,6 @@ struct TabBarView: View {
                         VisualEffectView(progress: $tabViewModel.animatorProgress)
                         tabViewModel.tabBarAttributes.backgroundColor.color.opacity(0.5)
                     }
-                        .id(tabViewModel.renderingUUID)
                 )
                 .border(Color(UIColor.secondaryLabel).opacity(tabViewModel.tabBarAttributes.topLineAlpha), width: 0.5) /// border is less glitchy than overlay
             
@@ -61,21 +42,6 @@ struct TabBarView: View {
     }
 }
 
-struct ToolbarButton: View {
-    var iconName: String
-    var body: some View {
-        Button {
-            print("Pressed")
-        } label: {
-            Image(systemName: iconName)
-                .foregroundColor(.white)
-                .font(.system(size: 19))
-                .frame(width: 40, height: 40)
-                .background(.white.opacity(0.15))
-                .cornerRadius(20)
-        }
-    }
-}
 
 struct PhotosButton: View {
     let tabType = TabState.photos
@@ -139,13 +105,6 @@ struct ListsButton: View {
     }
 }
 
-struct ContainerView<Content: View>: View {
-    @ViewBuilder var content: Content
-    
-    var body: some View {
-        content
-    }
-}
 
 struct IconButton<Content: View>: View {
     let tabType: TabState
@@ -191,30 +150,10 @@ struct FadingButtonModifier: ViewModifier {
 }
 
 
-/// remap `Image` to the current bundle
-struct Image: View {
-    
-    let source: Source
-    enum Source {
-        case assetCatalog(String)
-        case systemIcon(String)
-    }
-    
-    init(_ name: String) { self.source = .assetCatalog(name) }
-    init(systemName: String) { self.source = .systemIcon(systemName) }
-    
-    var body: some View {
-        switch source {
-        case let .assetCatalog(name):
-            SwiftUI.Image(name, bundle: Bundle(identifier: "com.aheze.TabBarController"))
-        case let .systemIcon(name):
-            SwiftUI.Image(systemName: name)
-        }
-    }
-}
-
 struct TabBarView_Previews: PreviewProvider {
     static var previews: some View {
-        TabBarView(tabViewModel: TabViewModel())
+        TabBarView(tabViewModel: TabViewModel()) {
+            Color.clear
+        }
     }
 }

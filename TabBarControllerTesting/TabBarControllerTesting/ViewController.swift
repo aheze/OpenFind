@@ -10,7 +10,7 @@ import TabBarController
 
 class ViewController: UIViewController {
 
-    lazy var tabBarViewController: TabBarViewController = {
+    lazy var tabBarViewController: TabBarController<ToolbarView> = {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard
@@ -19,8 +19,12 @@ class ViewController: UIViewController {
             let listsViewController = storyboard.instantiateViewController(withIdentifier: "ListsViewController") as? ListsViewController
         else { fatalError("No view controllers!") }
         
-        let tabViewController = Bridge.tabViewController([photosViewController, cameraViewController, listsViewController])
-        self.addChild(tabViewController, in: self.view)
+        let tabViewController = Bridge.makeTabViewController(
+            pageViewControllers: [photosViewController, cameraViewController, listsViewController],
+            toolbarView: cameraViewController.toolbar
+        )
+        
+        self.addChild(tabViewController.viewController, in: self.view)
         
         return tabViewController
     }()
@@ -30,16 +34,12 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         _ = tabBarViewController
-        
        
     }
 }
 
 class PhotosViewController: UIViewController, PageViewController {
     var tabType: TabState = .photos
-}
-class CameraViewController: UIViewController, PageViewController {
-    var tabType: TabState = .camera
 }
 class ListsViewController: UIViewController, PageViewController {
     var tabType: TabState = .lists

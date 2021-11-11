@@ -13,18 +13,9 @@ import Combine
 public protocol PageViewController: UIViewController {
     var tabType: TabState { get set }
 }
+
 public class TabBarViewController: UIViewController {
-    typealias ViewControllerType = UIViewController
-    
-    
-    /// data
-    var pages = [PageViewController]()
-    
-    required init?(coder aDecoder: NSCoder) {
-       super.init(coder: aDecoder)
-    }
-    
-    /// big area
+    /// big, general area
     @IBOutlet weak var contentView: UIView!
     
     /// for the pages
@@ -32,50 +23,35 @@ public class TabBarViewController: UIViewController {
     lazy var contentPagingLayout: ContentPagingFlowLayout = {
         let flowLayout = ContentPagingFlowLayout()
         flowLayout.scrollDirection = .horizontal
-        
-        contentCollectionView.setCollectionViewLayout(flowLayout, animated: false)
-        
         flowLayout.getTabs = { [weak self] in
-            let pages = self?.pages ?? [PageViewController]()
+            let pages = self?.getPages?() ?? [PageViewController]()
             return pages.map { $0.tabType }
         }
         
+        contentCollectionView.setCollectionViewLayout(flowLayout, animated: false)
         return flowLayout
     }()
+    
+    /// get data from `TabBarController`
+    var getPages: (() -> [PageViewController])?
+    var scrollViewDidScroll: ((UIScrollView) -> Void)?
+    
     
     /// for tab bar (SwiftUI)
     @IBOutlet weak var tabBarContainerView: UIView!
     @IBOutlet weak var tabBarHeightC: NSLayoutConstraint!
     
-    var tabViewModel: TabViewModel!
-    private var cancellable: AnyCancellable?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tabViewModel = TabViewModel()
-        cancellable = tabViewModel.$tabState.sink { [weak self] activeTab in
-            self?.updateTabBar(activeTab)
-        }
-        
-        setupConstraints()
-        
-        let tabBarHostingController = UIHostingController(rootView: TabBarView(tabViewModel: tabViewModel))
-        addChild(tabBarHostingController, in: tabBarContainerView)
-        tabBarHostingController.view.backgroundColor = .clear
-        tabBarContainerView.backgroundColor = .clear
-        setupCollectionView()
-        
-    }
-    
-    @IBOutlet weak var collectionLeftC: NSLayoutConstraint!
-    
-    func setupConstraints() {
+        print("load!!!sdasda")
+        _ = contentPagingLayout
+        contentCollectionView.decelerationRate = .fast
         tabBarHeightC.constant = Constants.tabBarShrunkHeight
     }
     
-    private func updateTabBar(_ tabState: TabState) {
-        
+    func updateTabBar(_ tabState: TabState) {
+
         DispatchQueue.main.async {
             if tabState == .camera {
                 self.tabBarHeightC.constant = 200
@@ -104,18 +80,7 @@ public class TabBarViewController: UIViewController {
         }
         
     }
-    
-    @IBAction func buttonPressed(_ sender: Any) {
-        print("Button Pressed!")
-    }
-    
-    func setupCollectionView() {
-        _ = contentPagingLayout
-        
-        contentCollectionView.dataSource = self
-        contentCollectionView.delegate = self
-        contentCollectionView.decelerationRate = .fast
-        
-    }
 }
+
+
 
