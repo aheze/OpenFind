@@ -8,9 +8,32 @@
 import UIKit
 import TabBarController
 
+class ToolbarViewModel: ObservableObject {
+    @Published var toolbar = Toolbar.camera(Camera())
+    
+    enum Toolbar {
+        case camera(Camera)
+        case photosSelection
+        case photosDetail
+        case listsSelection
+    }
+    
+    class Camera: ObservableObject {
+        @Published var resultsCount = 0
+        @Published var flashOn = false
+        @Published var focusOn = false
+    }
+
+    class PhotosSelection: ObservableObject {
+        @Published var starOn: Bool = false
+    }
+}
+
 class ViewController: UIViewController {
 
-    lazy var tabBarViewController: TabBarController<ToolbarView> = {
+    var toolbarViewModel: ToolbarViewModel!
+    lazy var tabBarViewController: TabBarController<CameraToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {
+        toolbarViewModel = ToolbarViewModel()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard
@@ -21,7 +44,10 @@ class ViewController: UIViewController {
         
         let tabViewController = Bridge.makeTabViewController(
             pageViewControllers: [photosViewController, cameraViewController, listsViewController],
-            toolbarView: cameraViewController.toolbar
+            cameraToolbarView: cameraViewController.toolbar,
+            photosSelectionToolbarView: photosViewController.selectionToolbar,
+            photosDetailToolbarView: photosViewController.selectionToolbar,
+            listsSelectionToolbarView: photosViewController.selectionToolbar
         )
         
         self.addChild(tabViewController.viewController, in: self.view)
@@ -37,12 +63,13 @@ class ViewController: UIViewController {
        
     }
 }
-
-class PhotosViewController: UIViewController, PageViewController {
-    var tabType: TabState = .photos
-}
 class ListsViewController: UIViewController, PageViewController {
     var tabType: TabState = .lists
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print("Lists loaded")
+    }
 }
 
 extension UIViewController {

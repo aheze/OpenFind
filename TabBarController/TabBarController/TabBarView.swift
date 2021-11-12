@@ -14,7 +14,6 @@ struct TabBarView<CameraToolbarView: View>: View {
 
     var body: some View {
         Color.clear.overlay(
-            
             VStack {
                 HStack(alignment: .bottom, spacing: 0) {
                     PhotosButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.photosIconAttributes)
@@ -38,7 +37,12 @@ struct TabBarView<CameraToolbarView: View>: View {
             
             , alignment: .bottom
         )
-            .edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea(.all)
+        .overlay(
+            Group {
+                
+            }
+        )
     }
 }
 

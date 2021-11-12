@@ -7,8 +7,10 @@
 
 import SwiftUI
 
-//struct TabBarToolbarView: View {
-//    var body: some View {
-//        <#T##Content##AnyView#>
-//    }
-//}
+struct TabBarToolbarView: View {
+    var body: some View {
+        HStack {
+            
+        }
+    }
+}

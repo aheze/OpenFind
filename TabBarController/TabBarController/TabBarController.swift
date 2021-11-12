@@ -9,20 +9,35 @@ import SwiftUI
 import Combine
 
 /// wrapper for `TabBarViewController` - compatible with generics
-public class TabBarController<ToolbarView: View>: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
+public class TabBarController<
+    CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View
+>: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
     
     /// data
     public var pages: [PageViewController]
-    public var toolbarView: ToolbarView
+    public var cameraToolbarView: CameraToolbarView
+    public var photosSelectionToolbarView: PhotosSelectionToolbarView
+    public var photosDetailToolbarView: PhotosDetailToolbarView
+    public var listsSelectionToolbarView: ListsSelectionToolbarView
+    
     public var viewController: TabBarViewController
     
     /// model
     var tabViewModel: TabViewModel!
     private var cancellable: AnyCancellable?
     
-    init(pages: [PageViewController], toolbarView: ToolbarView) {
+    init(
+        pages: [PageViewController],
+        cameraToolbarView: CameraToolbarView,
+        photosSelectionToolbarView: PhotosSelectionToolbarView,
+        photosDetailToolbarView: PhotosDetailToolbarView,
+        listsSelectionToolbarView: ListsSelectionToolbarView
+    ) {
         self.pages = pages
-        self.toolbarView = toolbarView
+        self.cameraToolbarView = cameraToolbarView
+        self.photosSelectionToolbarView = photosSelectionToolbarView
+        self.photosDetailToolbarView = photosDetailToolbarView
+        self.listsSelectionToolbarView = listsSelectionToolbarView
         
         let bundle = Bundle(identifier: "com.aheze.TabBarController")
         let storyboard = UIStoryboard(name: "Main", bundle: bundle)
@@ -42,7 +57,7 @@ public class TabBarController<ToolbarView: View>: NSObject, UICollectionViewDele
             viewController.updateTabBar(activeTab)
         }
         
-        let tabBarView = TabBarView(tabViewModel: tabViewModel, cameraToolbarView: { toolbarView })
+        let tabBarView = TabBarView(tabViewModel: tabViewModel, cameraToolbarView: { cameraToolbarView })
         let tabBarHostingController = UIHostingController(rootView: tabBarView)
         tabBarHostingController.view.backgroundColor = .clear
         viewController.tabBarContainerView.backgroundColor = .clear

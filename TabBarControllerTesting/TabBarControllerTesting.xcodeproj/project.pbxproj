@@ -21,6 +21,7 @@
 		3CE0AB49273E503E0021BD9C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0AB48273E503E0021BD9C /* Constants.swift */; };
 		3CE0AB4B273E526D0021BD9C /* ResultsIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0AB4A273E526D0021BD9C /* ResultsIconView.swift */; };
 		3CE0AB4D273E53900021BD9C /* SettingsIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0AB4C273E53900021BD9C /* SettingsIconView.swift */; };
+		3CE0AB51273F26D40021BD9C /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0AB50273F26D40021BD9C /* PhotosViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,6 +54,7 @@
 		3CE0AB48273E503E0021BD9C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3CE0AB4A273E526D0021BD9C /* ResultsIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsIconView.swift; sourceTree = "<group>"; };
 		3CE0AB4C273E53900021BD9C /* SettingsIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsIconView.swift; sourceTree = "<group>"; };
+		3CE0AB50273F26D40021BD9C /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,8 +91,9 @@
 			children = (
 				3C337945272BBB520055A73A /* AppDelegate.swift */,
 				3C337947272BBB520055A73A /* SceneDelegate.swift */,
-				3C337949272BBB520055A73A /* ViewController.swift */,
 				3CE0AB48273E503E0021BD9C /* Constants.swift */,
+				3C337949272BBB520055A73A /* ViewController.swift */,
+				3CE0AB50273F26D40021BD9C /* PhotosViewController.swift */,
 				3C430CC7273CB0E700E19B77 /* CameraViewController.swift */,
 				3CE0AB4A273E526D0021BD9C /* ResultsIconView.swift */,
 				3CE0AB44273CC21C0021BD9C /* FlashIconView.swift */,
@@ -193,6 +196,7 @@
 				3C337946272BBB520055A73A /* AppDelegate.swift in Sources */,
 				3CE0AB4B273E526D0021BD9C /* ResultsIconView.swift in Sources */,
 				3C337948272BBB520055A73A /* SceneDelegate.swift in Sources */,
+				3CE0AB51273F26D40021BD9C /* PhotosViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

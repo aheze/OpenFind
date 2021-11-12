@@ -9,14 +9,22 @@
 import SwiftUI
 
 public struct Bridge {
-    public static func makeTabViewController<ToolbarView: View>(pageViewControllers: [PageViewController], toolbarView: ToolbarView) -> TabBarController<ToolbarView> {
+    public static func makeTabViewController<CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View>(
+        pageViewControllers: [PageViewController],
+        cameraToolbarView: CameraToolbarView,
+        photosSelectionToolbarView: PhotosSelectionToolbarView,
+        photosDetailToolbarView: PhotosDetailToolbarView,
+        listsSelectionToolbarView: ListsSelectionToolbarView
+    ) -> TabBarController<CameraToolbarView, PhotosSelectionToolbarView, PhotosDetailToolbarView, ListsSelectionToolbarView> {
         
-        let toolbarController = TabBarController(pages: pageViewControllers, toolbarView: toolbarView)
-//        let bundle = Bundle(identifier: "com.aheze.TabBarController")
-//        let storyboard = UIStoryboard(name: "Main", bundle: bundle)
-//        let viewController = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController<ToolbarView>
-//        viewController.pages = pageViewControllers
-//        viewController.toolbarView = toolbarView
+        let toolbarController = TabBarController(
+            pages: pageViewControllers,
+            cameraToolbarView: cameraToolbarView,
+            photosSelectionToolbarView: photosSelectionToolbarView,
+            photosDetailToolbarView: photosDetailToolbarView,
+            listsSelectionToolbarView: listsSelectionToolbarView
+        )
+        
         return toolbarController
     }
 }
