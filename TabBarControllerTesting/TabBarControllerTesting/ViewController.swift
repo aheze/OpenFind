@@ -13,9 +13,9 @@ class ToolbarViewModel: ObservableObject {
     
     enum Toolbar {
         case camera(Camera)
-        case photosSelection
-        case photosDetail
-        case listsSelection
+        case photosSelection(PhotosSelection)
+        case photosDetail(PhotosDetail)
+        case listsSelection(ListsSelection)
     }
     
     class Camera: ObservableObject {
@@ -25,14 +25,20 @@ class ToolbarViewModel: ObservableObject {
     }
 
     class PhotosSelection: ObservableObject {
-        @Published var starOn: Bool = false
+        @Published var starOn = false
+    }
+    class PhotosDetail: ObservableObject {
+        @Published var starOn = false
+    }
+    class ListsSelection: ObservableObject {
+        @Published var selectedCount = 0
     }
 }
 
 class ViewController: UIViewController {
 
     var toolbarViewModel: ToolbarViewModel!
-    lazy var tabBarViewController: TabBarController<CameraToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {
+    lazy var tabBarViewController: TabBarController<ToolbarViewModel, CameraToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {
         toolbarViewModel = ToolbarViewModel()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -44,6 +50,7 @@ class ViewController: UIViewController {
         
         let tabViewController = Bridge.makeTabViewController(
             pageViewControllers: [photosViewController, cameraViewController, listsViewController],
+            toolbarViewModel: toolbarViewModel,
             cameraToolbarView: cameraViewController.toolbar,
             photosSelectionToolbarView: photosViewController.selectionToolbar,
             photosDetailToolbarView: photosViewController.selectionToolbar,

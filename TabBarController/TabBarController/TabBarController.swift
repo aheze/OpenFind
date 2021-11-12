@@ -10,11 +10,12 @@ import Combine
 
 /// wrapper for `TabBarViewController` - compatible with generics
 public class TabBarController<
-    CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View
+    ToolbarViewModel: ObservableObject, CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View
 >: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
     
     /// data
     public var pages: [PageViewController]
+    public var toolbarViewModel: ToolbarViewModel
     public var cameraToolbarView: CameraToolbarView
     public var photosSelectionToolbarView: PhotosSelectionToolbarView
     public var photosDetailToolbarView: PhotosDetailToolbarView
@@ -28,12 +29,14 @@ public class TabBarController<
     
     init(
         pages: [PageViewController],
+        toolbarViewModel: ToolbarViewModel,
         cameraToolbarView: CameraToolbarView,
         photosSelectionToolbarView: PhotosSelectionToolbarView,
         photosDetailToolbarView: PhotosDetailToolbarView,
         listsSelectionToolbarView: ListsSelectionToolbarView
     ) {
         self.pages = pages
+        self.toolbarViewModel = toolbarViewModel
         self.cameraToolbarView = cameraToolbarView
         self.photosSelectionToolbarView = photosSelectionToolbarView
         self.photosDetailToolbarView = photosDetailToolbarView
@@ -57,7 +60,12 @@ public class TabBarController<
             viewController.updateTabBar(activeTab)
         }
         
-        let tabBarView = TabBarView(tabViewModel: tabViewModel, cameraToolbarView: { cameraToolbarView })
+        let tabBarView = TabBarView(
+            tabViewModel: tabViewModel,
+            toolbarViewModel: toolbarViewModel,
+            cameraToolbarView: { cameraToolbarView }
+        )
+        
         let tabBarHostingController = UIHostingController(rootView: tabBarView)
         tabBarHostingController.view.backgroundColor = .clear
         viewController.tabBarContainerView.backgroundColor = .clear

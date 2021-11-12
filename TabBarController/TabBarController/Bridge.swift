@@ -9,16 +9,18 @@
 import SwiftUI
 
 public struct Bridge {
-    public static func makeTabViewController<CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View>(
+    public static func makeTabViewController<ToolbarViewModel: ObservableObject, CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View>(
         pageViewControllers: [PageViewController],
+        toolbarViewModel: ToolbarViewModel,
         cameraToolbarView: CameraToolbarView,
         photosSelectionToolbarView: PhotosSelectionToolbarView,
         photosDetailToolbarView: PhotosDetailToolbarView,
         listsSelectionToolbarView: ListsSelectionToolbarView
-    ) -> TabBarController<CameraToolbarView, PhotosSelectionToolbarView, PhotosDetailToolbarView, ListsSelectionToolbarView> {
+    ) -> TabBarController<ToolbarViewModel, CameraToolbarView, PhotosSelectionToolbarView, PhotosDetailToolbarView, ListsSelectionToolbarView> {
         
         let toolbarController = TabBarController(
             pages: pageViewControllers,
+            toolbarViewModel: toolbarViewModel,
             cameraToolbarView: cameraToolbarView,
             photosSelectionToolbarView: photosSelectionToolbarView,
             photosDetailToolbarView: photosDetailToolbarView,

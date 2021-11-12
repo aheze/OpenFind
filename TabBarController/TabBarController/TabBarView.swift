@@ -8,10 +8,11 @@
 import SwiftUI
 
 /// `CameraToolbarView` is passed in from `CameraViewController`
-struct TabBarView<CameraToolbarView: View>: View {
+struct TabBarView<ToolbarViewModel: ObservableObject, CameraToolbarView: View>: View {
     @ObservedObject var tabViewModel: TabViewModel
+    @ObservedObject var toolbarViewModel: ToolbarViewModel
     @ViewBuilder var cameraToolbarView: CameraToolbarView
-
+    
     var body: some View {
         Color.clear.overlay(
             VStack {
@@ -38,14 +39,41 @@ struct TabBarView<CameraToolbarView: View>: View {
             , alignment: .bottom
         )
         .edgesIgnoringSafeArea(.all)
-        .overlay(
-            Group {
-                
-            }
-        )
     }
 }
 
+struct BackgroundView: View {
+    @ObservedObject var tabViewModel: TabViewModel
+    
+    var body: some View {
+        ZStack {
+            VisualEffectView(progress: $tabViewModel.animatorProgress)
+            tabViewModel.tabBarAttributes.backgroundColor.color.opacity(0.5)
+        }
+        .border( /// border is less glitchy than overlay
+            Color(UIColor.secondaryLabel)
+                .opacity(tabViewModel.tabBarAttributes.topLineAlpha),
+            width: 0.5
+        )
+    }
+}
+//struct BackgroundView: ViewModifier {
+//    @ObservedObject var tabViewModel: TabViewModel
+//
+//    func body(content: Content) -> some View {
+//        content.background(
+//            ZStack {
+//                VisualEffectView(progress: $tabViewModel.animatorProgress)
+//                tabViewModel.tabBarAttributes.backgroundColor.color.opacity(0.5)
+//            }
+//        )
+//            .border( /// border is less glitchy than overlay
+//                Color(UIColor.secondaryLabel)
+//                    .opacity(tabViewModel.tabBarAttributes.topLineAlpha),
+//                width: 0.5
+//            )
+//    }
+//}
 
 struct PhotosButton: View {
     let tabType = TabState.photos
@@ -154,10 +182,10 @@ struct FadingButtonModifier: ViewModifier {
 }
 
 
-struct TabBarView_Previews: PreviewProvider {
-    static var previews: some View {
-        TabBarView(tabViewModel: TabViewModel()) {
-            Color.clear
-        }
-    }
-}
+//struct TabBarView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TabBarView(tabViewModel: TabViewModel(), toolbarViewModel: <#_#>) {
+//            Color.clear
+//        }
+//    }
+//}
