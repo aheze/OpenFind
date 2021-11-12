@@ -12,12 +12,9 @@ class CameraViewController: UIViewController, PageViewController {
     var tabType: TabState = .camera
     var toolbar = ToolbarView()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        
-//            toolbar =
     }
 }
 
