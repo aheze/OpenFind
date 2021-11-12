@@ -8,32 +8,47 @@
 import SwiftUI
 import TabBarController
 
+class CameraState: ObservableObject {
+    @Published var resultsCount = 0
+    @Published var flashOn = false
+    @Published var focusOn = false
+}
+
 class CameraViewController: UIViewController, PageViewController {
     var tabType: TabState = .camera
-    var toolbar = ToolbarView()
+    var cameraState: CameraState!
+    lazy var toolbar: ToolbarView = {
+        self.cameraState = CameraState()
+        toolbar = ToolbarView(cameraState: cameraState)
+        return toolbar
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        
     }
 }
 
 struct ToolbarView: View {
+    @ObservedObject var cameraState: CameraState
+    
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
             HStack {
-                ToolbarButton(iconName: "arrow.up.left.and.arrow.down.right")
+                ResultsIconView(count: $cameraState.resultsCount)
                 Spacer()
-                ToolbarButton(iconName: "bolt.slash.fill")
+                FlashIconView(isOn: $cameraState.flashOn)
             }
             .frame(maxWidth: .infinity)
 
             Color.clear
 
             HStack {
-                ToolbarButton(iconName: "viewfinder")
+                FocusIconView(isOn: $cameraState.focusOn)
                 Spacer()
-                ToolbarButton(iconName: "gearshape.fill")
+                SettingsIconView()
             }
             .frame(maxWidth: .infinity)
         }

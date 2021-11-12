@@ -9,41 +9,48 @@ import SwiftUI
 
 struct FlashIconView: View {
     @Binding var isOn: Bool
+    @State var scaleAnimationActive = false
     
     var body: some View {
         Button {
             withAnimation {
                 isOn.toggle()
             }
-        } label: {
-                Image(systemName: "bolt.fill")
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(.white)
-                    .opacity(isOn ? 1 : 0.5)
-                    .font(.system(size: 19))
-                    .mask(
-                        Rectangle()
-                            .fill(Color.white)
-                            .overlay(
-                                LineShape(progress: isOn ? 0 : 1)
-                                    .stroke(Color.black, style: .init(lineWidth: 5, lineCap: .round))
-                                    .padding(14)
-                            )
-                            .compositingGroup()
-                            .luminanceToAlpha()
-//                            .background(isOn ? Color.clear : Color.black) /// maybe add this to ensure shape is not cut out when `isOn`
-                    )
-                    .overlay(
-                        LineShape(progress: isOn ? 0 : 1)
-                            .stroke(Color.white, style: .init(lineWidth: 2, lineCap: .round))
-                            .padding(14)
-                            .opacity(isOn ? 0 : 1)
-                    )
-                    .background(
-                        Color.white.opacity(0.15)
-                    )
             
-            .cornerRadius(20)
+            /// small scale animation
+            withAnimation(.spring()) { scaleAnimationActive = true }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
+                withAnimation(.easeOut(duration: 0.3)) { scaleAnimationActive = false }
+            }
+        } label: {
+            Image(systemName: "bolt.fill")
+                .frame(width: 40, height: 40)
+                .foregroundColor(isOn ? Color(Constants.activeIconColor) : .white)
+                .opacity(isOn ? 1 : 0.5)
+                .font(.system(size: 19))
+                .mask(
+                    Rectangle()
+                        .fill(Color.white)
+                        .overlay(
+                            LineShape(progress: isOn ? 0 : 1)
+                                .stroke(Color.black, style: .init(lineWidth: 5, lineCap: .round))
+                                .padding(14)
+                        )
+                        .compositingGroup()
+                        .luminanceToAlpha()
+                    //                            .background(isOn ? Color.clear : Color.black) /// maybe add this to ensure shape is not cut out when `isOn`
+                )
+                .overlay(
+                    LineShape(progress: isOn ? 0 : 1)
+                        .stroke(Color.white, style: .init(lineWidth: 2, lineCap: .round))
+                        .padding(14)
+                        .opacity(isOn ? 0 : 1)
+                )
+                .scaleEffect(scaleAnimationActive ? 1.2 : 1)
+                .background(
+                    Color.white.opacity(0.15)
+                )
+                .cornerRadius(20)
         }
     }
 }
