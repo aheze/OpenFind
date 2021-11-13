@@ -8,6 +8,11 @@
 import SwiftUI
 import Combine
 
+public protocol TabBarControllerDelegate: AnyObject {
+    func willBeginNavigatingTo(tab: TabState)
+    func didFinishNavigatingTo(tab: TabState)
+}
+
 /// wrapper for `TabBarViewController` - compatible with generics
 public class TabBarController<
     CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View
@@ -26,6 +31,9 @@ public class TabBarController<
     /// model
     var tabViewModel: TabViewModel!
     private var cancellable: AnyCancellable?
+    
+    /// delegate
+    public weak var delegate: TabBarControllerDelegate?
     
     init(
         pages: [PageViewController],
@@ -84,28 +92,45 @@ public class TabBarController<
         let middle = viewController.contentCollectionView.bounds.width
         let distanceFromMiddle = scrollView.contentOffset.x - middle
         
+        let newTab: TabState
         if distanceFromMiddle < 0 { /// going to Photos
             let percentage = abs(distanceFromMiddle / middle)
             if percentage == 0 { /// still completely at camera, no movement
-                tabViewModel.tabState = .camera
+                newTab = .camera
+                delegate?.didFinishNavigatingTo(tab: .camera)
             } else if percentage == 1 { /// finished at photos
-                tabViewModel.tabState = .photos
+                newTab = .photos
+                delegate?.didFinishNavigatingTo(tab: .photos)
             } else { /// use percentage
-                tabViewModel.tabState = .cameraToPhotos(percentage)
+                newTab = .cameraToPhotos(percentage)
             }
         } else { /// going to Lists
             let percentage = abs(distanceFromMiddle / middle)
             if percentage == 0 {
-                tabViewModel.tabState = .camera
+                newTab = .camera
+                delegate?.didFinishNavigatingTo(tab: .camera)
             } else if percentage == 1 {
-                tabViewModel.tabState = .lists
+                newTab = .lists
+                delegate?.didFinishNavigatingTo(tab: .lists)
             } else {
-                tabViewModel.tabState = .cameraToLists(percentage)
+                newTab = .cameraToLists(percentage)
             }
         }
+        
+        tabViewModel.tabState = newTab
     }
     
     public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        switch indexPath.item {
+        case 0:
+            delegate?.willBeginNavigatingTo(tab: .photos)
+        case 1:
+            delegate?.willBeginNavigatingTo(tab: .camera)
+        case 2:
+            delegate?.willBeginNavigatingTo(tab: .lists)
+        default:
+            break
+        }
         let pageViewController = pages[indexPath.item]
         viewController.addChild(pageViewController, in: cell.contentView)
     }

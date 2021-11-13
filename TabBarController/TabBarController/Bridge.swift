@@ -9,7 +9,7 @@
 import SwiftUI
 
 public struct Bridge {
-    public static func makeTabViewController<CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View>(
+    public static func makeTabController<CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View>(
         pageViewControllers: [PageViewController],
         toolbarViewModel: ToolbarViewModel,
         cameraToolbarView: CameraToolbarView,
@@ -18,7 +18,7 @@ public struct Bridge {
         listsSelectionToolbarView: ListsSelectionToolbarView
     ) -> TabBarController<CameraToolbarView, PhotosSelectionToolbarView, PhotosDetailToolbarView, ListsSelectionToolbarView> {
         
-        let toolbarController = TabBarController(
+        let tabBarController = TabBarController(
             pages: pageViewControllers,
             toolbarViewModel: toolbarViewModel,
             cameraToolbarView: cameraToolbarView,
@@ -27,6 +27,6 @@ public struct Bridge {
             listsSelectionToolbarView: listsSelectionToolbarView
         )
         
-        return toolbarController
+        return tabBarController
     }
 }

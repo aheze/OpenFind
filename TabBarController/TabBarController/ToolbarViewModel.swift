@@ -14,10 +14,6 @@ public class ToolbarViewModel: ObservableObject {
     public init() { }
     
     public enum Toolbar {
-//        case none
-//        case photosSelection(PhotosSelection)
-//        case photosDetail(PhotosDetail)
-//        case listsSelection(ListsSelection)
         case none
         case photosSelection
         case photosDetail

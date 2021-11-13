@@ -37,7 +37,7 @@ class ViewController: UIViewController {
     }()
     
     var toolbarViewModel: ToolbarViewModel!
-    lazy var tabBarViewController: TabBarController<CameraToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {
+    lazy var tabController: TabBarController<CameraToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {
         toolbarViewModel = ToolbarViewModel()
         
         
@@ -54,7 +54,7 @@ class ViewController: UIViewController {
             }
         }
         
-        let tabViewController = Bridge.makeTabViewController(
+        let tabController = Bridge.makeTabController(
             pageViewControllers: [photosViewController, cameraViewController, listsViewController],
             toolbarViewModel: toolbarViewModel,
             cameraToolbarView: cameraViewController.toolbar,
@@ -63,19 +63,32 @@ class ViewController: UIViewController {
             listsSelectionToolbarView: photosViewController.selectionToolbar
         )
         
-        self.addChild(tabViewController.viewController, in: self.view)
+        tabController.delegate = self
         
-        return tabViewController
+        self.addChild(tabController.viewController, in: self.view)
+        
+        return tabController
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        _ = tabBarViewController
+        _ = tabController
        
     }
 }
+
+extension ViewController: TabBarControllerDelegate {
+    func willBeginNavigatingTo(tab: TabState) {
+        print("Will begin to: \(tab)")
+    }
+    
+    func didFinishNavigatingTo(tab: TabState) {
+        print("Arrived at: \(tab)")
+    }
+}
+
 class ListsViewController: UIViewController, PageViewController {
     var tabType: TabState = .lists
     
