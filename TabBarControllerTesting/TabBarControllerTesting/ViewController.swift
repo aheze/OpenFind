@@ -81,20 +81,39 @@ class ViewController: UIViewController {
 
 extension ViewController: TabBarControllerDelegate {
     func willBeginNavigatingTo(tab: TabState) {
-        print("Will begin to: \(tab)")
+        switch tab {
+        case .photos:
+            photosViewController.willBecomeActive()
+            cameraViewController.willBecomeInactive()
+            listsViewController.willBecomeInactive()
+        case .camera:
+            photosViewController.willBecomeInactive()
+            cameraViewController.willBecomeActive()
+            listsViewController.willBecomeInactive()
+        case .lists:
+            photosViewController.willBecomeInactive()
+            cameraViewController.willBecomeInactive()
+            listsViewController.willBecomeActive()
+        default: break
+        }
     }
     
     func didFinishNavigatingTo(tab: TabState) {
-        print("Arrived at: \(tab)")
-    }
-}
-
-class ListsViewController: UIViewController, PageViewController {
-    var tabType: TabState = .lists
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("Lists loaded")
+        switch tab {
+        case .photos:
+            photosViewController.didBecomeActive()
+            cameraViewController.didBecomeInactive()
+            listsViewController.didBecomeInactive()
+        case .camera:
+            photosViewController.didBecomeInactive()
+            cameraViewController.didBecomeActive()
+            listsViewController.didBecomeInactive()
+        case .lists:
+            photosViewController.didBecomeInactive()
+            cameraViewController.didBecomeInactive()
+            listsViewController.didBecomeActive()
+        default: break
+        }
     }
 }
 

@@ -9,6 +9,7 @@ import SwiftUI
 import TabBarController
 
 class PhotosViewController: UIViewController, PageViewController {
+    
     var tabType: TabState = .photos
     var photosSelectionViewModel: ToolbarViewModel.PhotosSelection!
     
@@ -38,17 +39,28 @@ class PhotosViewController: UIViewController, PageViewController {
         photosSelectionViewModel.selectedCount -= 1
     }
     
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Photos loaded")
         
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//            self.activateSelectionToolbar?()
-//        }
+    }
+}
+
+extension PhotosViewController {
+    func willBecomeActive() {
+        
+    }
+    
+    func didBecomeActive() {
+        
+    }
+    
+    func willBecomeInactive() {
+        self.activateSelectionToolbar?(false)
+    }
+    
+    func didBecomeInactive() {
+        
     }
 }
 

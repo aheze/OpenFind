@@ -24,6 +24,24 @@ class CameraViewController: UIViewController, PageViewController {
     }
 }
 
+extension CameraViewController {
+    func willBecomeActive() {
+        
+    }
+    
+    func didBecomeActive() {
+        
+    }
+    
+    func willBecomeInactive() {
+        
+    }
+    
+    func didBecomeInactive() {
+        
+    }
+}
+
 struct CameraToolbarView: View {
     @ObservedObject var viewModel: ToolbarViewModel.Camera
     

@@ -13,6 +13,23 @@ public protocol TabBarControllerDelegate: AnyObject {
     func didFinishNavigatingTo(tab: TabState)
 }
 
+public protocol PageViewController: UIViewController {
+    /// make sure all view controllers have a name
+    var tabType: TabState { get set }
+    
+    /// kind of like `viewWillAppear`
+    func willBecomeActive()
+    
+    /// arrived at this tab
+    func didBecomeActive()
+    
+    /// starting to scroll away
+    func willBecomeInactive()
+    
+    /// arrived at another tab
+    func didBecomeInactive()
+}
+
 /// wrapper for `TabBarViewController` - compatible with generics
 public class TabBarController<
     CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View

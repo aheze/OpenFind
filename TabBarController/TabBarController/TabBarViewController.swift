@@ -9,11 +9,6 @@ import UIKit
 import SwiftUI
 import Combine
 
-/// make sure all view controllers have a name
-public protocol PageViewController: UIViewController {
-    var tabType: TabState { get set }
-}
-
 public class TabBarViewController: UIViewController {
     /// big, general area
     @IBOutlet weak var contentView: UIView!
