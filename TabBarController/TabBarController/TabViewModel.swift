@@ -148,6 +148,12 @@ struct TabBarAttributes: AnimatableAttributes {
     /// color of the tab bar
     var backgroundColor: UIColor
     
+    /// height of the visual background
+    var backgroundHeight: CGFloat
+    
+    /// top padding of everything inside the tab bar
+    var topPadding: CGFloat
+    
     /// how much y offset for the camera toolbar
     var toolbarOffset: CGFloat
     
@@ -157,20 +163,23 @@ struct TabBarAttributes: AnimatableAttributes {
     /// alpha of the top divider line
     var topLineAlpha: CGFloat
     
-    
-    /// when active tab is camera
     static let lightBackground: Self = {
         return .init(
             backgroundColor: Constants.tabBarLightBackgroundColor,
+            backgroundHeight: ConstantVars.tabBarTotalHeight,
+            topPadding: 0,
             toolbarOffset: -40,
             toolbarAlpha: 0,
             topLineAlpha: 1
         )
     }()
     
+    /// when active tab is camera
     static let darkBackground: Self = {
         return .init(
             backgroundColor: Constants.tabBarDarkBackgroundColor,
+            backgroundHeight: ConstantVars.tabBarTotalHeightExpanded,
+            topPadding: 16,
             toolbarOffset: 0,
             toolbarAlpha: 1,
             topLineAlpha: 0
@@ -182,6 +191,8 @@ struct TabBarAttributes: AnimatableAttributes {
 extension TabBarAttributes {
     init(progress: CGFloat, from fromAttributes: TabBarAttributes, to toAttributes: TabBarAttributes) {
         let backgroundColor = fromAttributes.backgroundColor.toColor(toAttributes.backgroundColor, percentage: progress)
+        let backgroundHeight = fromAttributes.backgroundHeight + (toAttributes.backgroundHeight - fromAttributes.backgroundHeight) * progress
+        let topPadding = fromAttributes.topPadding + (toAttributes.topPadding - fromAttributes.topPadding) * progress
         let toolbarOffset = fromAttributes.toolbarOffset + (toAttributes.toolbarOffset - fromAttributes.toolbarOffset) * progress
         
         /// move a bit faster for the toolbar
@@ -191,6 +202,8 @@ extension TabBarAttributes {
         let topLineAlpha = fromAttributes.topLineAlpha + (toAttributes.topLineAlpha - fromAttributes.topLineAlpha) * progress
 
         self.backgroundColor = backgroundColor
+        self.backgroundHeight = backgroundHeight
+        self.topPadding = topPadding
         self.toolbarOffset = toolbarOffset
         self.toolbarAlpha = toolbarAlpha
         self.topLineAlpha = topLineAlpha

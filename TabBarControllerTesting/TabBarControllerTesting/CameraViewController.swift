@@ -20,7 +20,7 @@ class CameraViewController: UIViewController, PageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        print("cam load")
+        print("Camera loaded")
     }
 }
 

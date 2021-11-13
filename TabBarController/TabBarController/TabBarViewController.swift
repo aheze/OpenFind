@@ -46,7 +46,7 @@ public class TabBarViewController: UIViewController {
         super.viewDidLoad()
         _ = contentPagingLayout
         contentCollectionView.decelerationRate = .fast
-        tabBarHeightC.constant = Constants.tabBarShrunkHeight
+//        tabBarHeightC.constant = Constants.tabBarShrunkHeight
     }
     
     func updateTabBar(_ tabState: TabState) {
@@ -55,7 +55,7 @@ public class TabBarViewController: UIViewController {
             if tabState == .camera {
                 self.tabBarHeightC.constant = 200
             } else {
-                self.tabBarHeightC.constant = Constants.tabBarShrunkHeight
+//                self.tabBarHeightC.constant = Constants.tabBarShrunkHeight
             }
         }
         

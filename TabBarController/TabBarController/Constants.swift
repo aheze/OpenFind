@@ -7,15 +7,49 @@
 
 import SwiftUI
 
+public struct ConstantVars {
+    
+    /// default tab bar content height
+    static let tabBarContentHeight = CGFloat(49)
+    
+    /// space under hugging tab bar icons
+    static var tabBarHuggingBottomPadding = CGFloat(0)
+    
+    /// let icons overflow down a bit
+    static var tabBarOverflowingIconsBottomPadding = CGFloat(0)
+    
+    /// light background height
+    static var tabBarTotalHeight = CGFloat(0)
+    
+    /// dark background (camera) height
+    static var tabBarTotalHeightExpanded = CGFloat(0)
+    
+    public static func configure(window: UIWindow?) {
+        let bottomSafeAreaInset = window?.safeAreaInsets.bottom ?? 0
+        let deviceHasNotch = bottomSafeAreaInset > 0
+        
+        if deviceHasNotch {
+            tabBarHuggingBottomPadding = bottomSafeAreaInset
+            tabBarOverflowingIconsBottomPadding = bottomSafeAreaInset - 6
+            tabBarTotalHeight = tabBarContentHeight + bottomSafeAreaInset
+            tabBarTotalHeightExpanded = tabBarTotalHeight + 58 /// 58 works out pretty good
+        } else {
+            tabBarHuggingBottomPadding = bottomSafeAreaInset
+            tabBarOverflowingIconsBottomPadding = bottomSafeAreaInset
+            tabBarTotalHeight = tabBarContentHeight
+            tabBarTotalHeightExpanded = tabBarTotalHeight + 58
+        }
+    }
+}
+
 struct Constants {
-    static var tabBarShrunkHeight = CGFloat(83)
-    static var tabBarBottomPadding = CGFloat(32)
     
     static var tabBarDarkBackgroundColor = UIColor(hex: 0x002F3B, alpha: 0.5)
     static var tabBarLightBackgroundColor = UIColor.systemBackground
     
     /// make the fade a bit faster
     static var tabBarToolbarAlphaMultiplier = CGFloat(3.5)
+    
 }
 
 extension UIColor {

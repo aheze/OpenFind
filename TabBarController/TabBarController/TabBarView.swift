@@ -21,13 +21,12 @@ struct TabBarView<CameraToolbarView: View, PhotosSelectionToolbarView: View, Pho
     var body: some View {
         Color.clear
             .overlay(
-                VStack {
-                    HStack(alignment: .bottom, spacing: 0) {
-                        PhotosButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.photosIconAttributes)
-                        CameraButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.cameraIconAttributes)
-                        ListsButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.listsIconAttributes)
-                    }
+                HStack(alignment: .bottom, spacing: 0) {
+                    PhotosButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.photosIconAttributes)
+                    CameraButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.cameraIconAttributes)
+                    ListsButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.listsIconAttributes)
                 }
+                    .padding(.bottom, ConstantVars.tabBarOverflowingIconsBottomPadding)
                     .opacity(toolbarViewModel.toolbar == .none ? 1 : 0)
                     .overlay(
                         VStack {
@@ -42,13 +41,16 @@ struct TabBarView<CameraToolbarView: View, PhotosSelectionToolbarView: View, Pho
                                 listsSelectionToolbarView
                             }
                         }
+                            .frame(maxHeight: .infinity)
+                            .padding(.bottom, ConstantVars.tabBarHuggingBottomPadding)
                     )
                     .overlay(
                         cameraToolbarView
                             .opacity(tabViewModel.tabBarAttributes.toolbarAlpha)
                             .offset(x: 0, y: tabViewModel.tabBarAttributes.toolbarOffset)
                     )
-                    .padding(EdgeInsets(top: 16, leading: 16, bottom: Constants.tabBarBottomPadding, trailing: 16))
+                    .frame(height: tabViewModel.tabBarAttributes.backgroundHeight, alignment: .bottom)
+                    .padding(.horizontal, 16)
                 
                 /// right after this point is the area of visual tab bar background (what the user sees)
                 
