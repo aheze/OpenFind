@@ -191,7 +191,7 @@ struct TabBarAttributes: AnimatableAttributes {
 extension TabBarAttributes {
     init(progress: CGFloat, from fromAttributes: TabBarAttributes, to toAttributes: TabBarAttributes) {
         let backgroundColor = fromAttributes.backgroundColor.toColor(toAttributes.backgroundColor, percentage: progress)
-        let backgroundHeight = fromAttributes.backgroundHeight + (toAttributes.backgroundHeight - fromAttributes.backgroundHeight) * progress
+        let backgroundHeight = max(ConstantVars.tabBarTotalHeight, fromAttributes.backgroundHeight + (toAttributes.backgroundHeight - fromAttributes.backgroundHeight) * progress)
         let topPadding = fromAttributes.topPadding + (toAttributes.topPadding - fromAttributes.topPadding) * progress
         let toolbarOffset = fromAttributes.toolbarOffset + (toAttributes.toolbarOffset - fromAttributes.toolbarOffset) * progress
         
