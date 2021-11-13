@@ -8,6 +8,27 @@
 
 import UIKit
 
+open class PageLayoutAttributes: UICollectionViewLayoutAttributes {
+    
+    var fullOrigin = CGFloat(0) /// origin when expanded
+    
+    override open func copy(with zone: NSZone?) -> Any {
+        let copy = super.copy(with: zone) as! Self
+        copy.fullOrigin = fullOrigin
+        
+        return copy
+    }
+    
+    override open func isEqual(_ object: Any?) -> Bool {
+        guard let attributes = object as? Self else { return false }
+        guard
+            attributes.fullOrigin == fullOrigin
+        else { return false }
+    
+        return super.isEqual(object)
+    }
+}
+
 class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     
     override init() {
@@ -23,7 +44,7 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     var getTabs: (() -> [TabState])?
     
     
-    var layoutAttributes = [UICollectionViewLayoutAttributes]()
+    var layoutAttributes = [PageLayoutAttributes]()
 
     /// actual content offset used by `prepare`
     var currentOffset = CGFloat(0)
@@ -55,13 +76,23 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         let width = collectionView.bounds.width
         let height = collectionView.bounds.height
         
-        var layoutAttributes = [UICollectionViewLayoutAttributes]()
+        var layoutAttributes = [PageLayoutAttributes]()
         var currentOrigin = CGFloat(0)
         
         guard let tabs = getTabs?() else { return }
         for index in tabs.indices {
-            let rect = CGRect(x: currentOrigin, y: 0, width: width, height: height)
-            let attribute = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: index, section: 0))
+            let attribute = PageLayoutAttributes(forCellWith: IndexPath(item: index, section: 0))
+            
+            let rect: CGRect
+//            if index == 1 {
+//                rect = CGRect(x: collectionView.contentOffset.x, y: 0, width: width, height: height)
+//                attribute.zIndex = 0
+//            } else {
+                rect = CGRect(x: currentOrigin, y: 0, width: width, height: height)
+//                attribute.zIndex = 1
+//            }
+            
+            attribute.fullOrigin = currentOrigin
             attribute.frame = rect
             layoutAttributes.append(attribute)
             
@@ -75,18 +106,18 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
             preparedOnce = true
             
             /// get the target offset
-            if let cameraOrigin = layoutAttributes[safe: 1]?.frame.origin {
-                collectionView.contentOffset = cameraOrigin
+            if let cameraOrigin = layoutAttributes[safe: 1]?.fullOrigin {
+                print("FUll: \(cameraOrigin)")
+                collectionView.contentOffset.x = cameraOrigin
             }
         }
         if isInvalid {
             isInvalid = false
-            if let targetPageOffset = layoutAttributes[safe: currentIndex]?.frame.origin {
-
-                if currentOffset != targetPageOffset.x {
-                    collectionView.contentOffset = targetPageOffset
-                }
-//                print("Offset is currently \(currentOffset), should be: \(targetPageOffset). IUndex: \(indexBeforeBoundsChange)")
+            if
+                let targetPageOffset = layoutAttributes[safe: currentIndex]?.fullOrigin,
+                currentOffset != targetPageOffset
+            {
+                    collectionView.contentOffset.x = targetPageOffset
             }
         }
         
@@ -116,7 +147,7 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     func getTargetOffset(for point: CGPoint, velocity: CGFloat) -> CGPoint {
         let proposedOffset = point.x
 
-        var pickedAttributes = [UICollectionViewLayoutAttributes?]()
+        var pickedAttributes = [PageLayoutAttributes?]()
         
         /// prevent scrolling from **photos -> lists** or **lists -> photos**
         let maxDistance = collectionView?.bounds.width ?? 500
@@ -124,12 +155,12 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         switch velocity {
         case _ where velocity < 0:
             pickedAttributes = layoutAttributes.map { layoutAttribute in
-                let isCandidate = layoutAttribute.frame.origin.x <= proposedOffset
+                let isCandidate = layoutAttribute.fullOrigin <= proposedOffset
                 return isCandidate ? layoutAttribute : nil
             }
         case _ where velocity > 0:
             pickedAttributes = layoutAttributes.map { layoutAttribute in
-                let isCandidate = layoutAttribute.frame.origin.x >= proposedOffset
+                let isCandidate = layoutAttribute.fullOrigin >= proposedOffset
                 return isCandidate ? layoutAttribute : nil
             }
         default:
@@ -137,10 +168,10 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         }
         
         /// find closest origin
-        var (closestAttribute, closestAttributeIndex, closestDistance): (UICollectionViewLayoutAttributes?, Int, CGFloat) = (nil, 0, CGFloat.infinity)
+        var (closestAttribute, closestAttributeIndex, closestDistance): (PageLayoutAttributes?, Int, CGFloat) = (nil, 0, CGFloat.infinity)
         for (index, attribute) in pickedAttributes.enumerated() {
             if let layoutAttribute = attribute {
-                let distance = abs(layoutAttribute.frame.origin.x - proposedOffset)
+                let distance = abs(layoutAttribute.fullOrigin - proposedOffset)
                 if distance < closestDistance {
                     closestAttributeIndex = index
                     closestAttribute = layoutAttribute
@@ -150,7 +181,7 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         }
         
         if let closestAttributeUnwrapped = closestAttribute, velocity != 0 {
-            let distance = abs(closestAttributeUnwrapped.frame.origin.x - currentOffset)
+            let distance = abs(closestAttributeUnwrapped.fullOrigin - currentOffset)
             if distance > maxDistance {
                 closestAttributeIndex = 1 /// camera
                 closestAttribute = layoutAttributes[closestAttributeIndex]
@@ -158,6 +189,6 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         }
         
         currentIndex = closestAttributeIndex
-        return closestAttribute?.frame.origin ?? point
+        return CGPoint(x: closestAttribute?.fullOrigin ?? point.x, y: 0)
     }
 }

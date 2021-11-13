@@ -22,6 +22,7 @@ class TabViewModel: ObservableObject {
     @Published var cameraIconAttributes = CameraIconAttributes.active
     @Published var listsIconAttributes = ListsIconAttributes.inactiveDarkBackground
     @Published var animatorProgress = CGFloat(0) /// for blur
+    var updateTabBarHeight: ((TabState) -> Void)?
 }
 
 public enum TabState: Equatable {

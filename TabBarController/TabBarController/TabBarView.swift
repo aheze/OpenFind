@@ -22,9 +22,9 @@ struct TabBarView<CameraToolbarView: View, PhotosSelectionToolbarView: View, Pho
         Color.clear
             .overlay(
                 HStack(alignment: .bottom, spacing: 0) {
-                    PhotosButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.photosIconAttributes)
-                    CameraButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.cameraIconAttributes)
-                    ListsButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.listsIconAttributes)
+                    PhotosButton(tabViewModel: tabViewModel, attributes: tabViewModel.photosIconAttributes)
+                    CameraButton(tabViewModel: tabViewModel, attributes: tabViewModel.cameraIconAttributes)
+                    ListsButton(tabViewModel: tabViewModel, attributes: tabViewModel.listsIconAttributes)
                 }
                     .padding(.bottom, ConstantVars.tabBarOverflowingIconsBottomPadding)
                     .opacity(toolbarViewModel.toolbar == .none ? 1 : 0)
@@ -59,9 +59,6 @@ struct TabBarView<CameraToolbarView: View, PhotosSelectionToolbarView: View, Pho
                 , alignment: .bottom
             )
             .edgesIgnoringSafeArea(.all)
-            .onAppear {
-                
-            }
     }
 }
 
@@ -82,11 +79,11 @@ struct BackgroundView: View {
 }
 struct PhotosButton: View {
     let tabType = TabState.photos
-    @Binding var tabState: TabState
+    @ObservedObject var tabViewModel: TabViewModel
     let attributes: PhotosIconAttributes
     
     var body: some View {
-        IconButton(tabType: tabType, tabState: $tabState) {
+        IconButton(tabType: tabType, tabViewModel: tabViewModel) {
             Group {
                 Image(tabType.name)
                     .foregroundColor(attributes.foregroundColor.color)
@@ -99,13 +96,16 @@ struct PhotosButton: View {
 
 struct CameraButton: View {
     let tabType = TabState.camera
-    @Binding var tabState: TabState
+    @ObservedObject var tabViewModel: TabViewModel
     let attributes: CameraIconAttributes
     
     var body: some View {
         Button {
-            withAnimation {
-                tabState = tabType
+            withAnimation(.easeOut(duration: 0.3)) {
+                tabViewModel.tabState = tabType
+            }
+            DispatchQueue.main.async {
+                tabViewModel.updateTabBarHeight?(tabType)
             }
         } label: {
             Group {
@@ -120,18 +120,17 @@ struct CameraButton: View {
             .frame(maxWidth: .infinity)
             .frame(height: attributes.backgroundHeight)
         }
-        
-        .buttonStyle(CameraButtonStyle(isShutter: tabState == tabType))
+        .buttonStyle(CameraButtonStyle(isShutter: tabViewModel.tabState == tabType))
     }
 }
 
 struct ListsButton: View {
     let tabType = TabState.lists
-    @Binding var tabState: TabState
+    @ObservedObject var tabViewModel: TabViewModel
     let attributes: ListsIconAttributes
     
     var body: some View {
-        IconButton(tabType: tabType, tabState: $tabState) {
+        IconButton(tabType: tabType, tabViewModel: tabViewModel) {
             Group {
                 Image(tabType.name)
                     .foregroundColor(attributes.foregroundColor.color)
@@ -145,13 +144,16 @@ struct ListsButton: View {
 
 struct IconButton<Content: View>: View {
     let tabType: TabState
-    @Binding var tabState: TabState
+    @ObservedObject var tabViewModel: TabViewModel
     @ViewBuilder var content: Content
     
     var body: some View {
         Button {
-            withAnimation {
-                tabState = tabType
+            withAnimation(.easeOut(duration: 0.3)) {
+                tabViewModel.tabState = tabType
+            }
+            DispatchQueue.main.async {
+                tabViewModel.updateTabBarHeight?(tabType)
             }
         } label: {
             content

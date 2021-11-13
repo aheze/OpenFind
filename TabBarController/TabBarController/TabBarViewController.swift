@@ -44,39 +44,43 @@ public class TabBarViewController: UIViewController {
         //        tabBarHeightC.constant = Constants.tabBarShrunkHeight
     }
     
-    func updateTabBar(_ tabState: TabState) {
-        
+    func updateTabBarHeight(_ tabState: TabState) {
         func changeTabHeight(constant: CGFloat) {
             DispatchQueue.main.async {
                 self.tabBarHeightC.constant = constant
             }
         }
         
+        switch tabState {
+        case .photos:
+            changeTabHeight(constant: ConstantVars.tabBarTotalHeight)
+        case .camera:
+            changeTabHeight(constant: ConstantVars.tabBarTotalHeightExpanded)
+        case .lists:
+            changeTabHeight(constant: ConstantVars.tabBarTotalHeight)
+        default:
+            changeTabHeight(constant: ConstantVars.tabBarTotalHeightExpanded)
+        }
+    }
+    func updateTabContent(_ tabState: TabState) {
         let index: Int
         switch tabState {
         case .photos:
             index = 0
-            changeTabHeight(constant: ConstantVars.tabBarTotalHeight)
         case .camera:
             index = 1
-            changeTabHeight(constant: ConstantVars.tabBarTotalHeightExpanded)
         case .lists:
             index = 2
-            changeTabHeight(constant: ConstantVars.tabBarTotalHeight)
         default:
-            changeTabHeight(constant: ConstantVars.tabBarTotalHeightExpanded)
-            
-            /// if not a standard tab, that means the user is scrolling. Standard tab set is via SwiftUI
-            return
+            return /// if not a standard tab, that means the user is scrolling. Standard tab set is via SwiftUI
         }
         
         if let attributes = contentPagingLayout.layoutAttributes[safe: index] {
             
             /// use `getTargetOffset` as to set flow layout's focused index correctly (for rotation)
-            let targetOffset = contentPagingLayout.getTargetOffset(for: attributes.frame.origin, velocity: 0)
+            let targetOffset = contentPagingLayout.getTargetOffset(for: CGPoint(x: attributes.fullOrigin, y: 0), velocity: 0)
             contentCollectionView.setContentOffset(targetOffset, animated: false)
         }
-        
     }
 }
 

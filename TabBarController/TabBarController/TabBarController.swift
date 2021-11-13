@@ -78,13 +78,24 @@ public class TabBarController<
         super.init()
 
         // MARK: - setup
+        
+        /// make the tab bar the height of the camera
+        viewController.updateTabBarHeight(.camera)
         viewController.getPages = { [weak self] in
             return self?.pages ?? [PageViewController]()
         }
         
         tabViewModel = TabViewModel()
-        cancellable = tabViewModel.$tabState.sink { activeTab in
-            viewController.updateTabBar(activeTab)
+        tabViewModel.updateTabBarHeight = { tabState in
+            viewController.updateTabBarHeight(tabState)
+        }
+        cancellable = tabViewModel.$tabState.sink { [weak self] activeTab in
+            switch activeTab {
+            case .photos, .camera, .lists:
+                self?.delegate?.didFinishNavigatingTo(tab: activeTab)
+            default: break
+            }
+            viewController.updateTabContent(activeTab)
         }
         
         let tabBarView = TabBarView(
@@ -105,6 +116,8 @@ public class TabBarController<
         viewController.contentCollectionView.dataSource = self
     }
     
+    /// called **even** when programmatically set the tab via the icon button...
+    /// so, need to use `updateTabBarHeightAfterScrolling` to check whether the user was scrolling or not.
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let middle = viewController.contentCollectionView.bounds.width
         let distanceFromMiddle = scrollView.contentOffset.x - middle
@@ -114,30 +127,42 @@ public class TabBarController<
             let percentage = abs(distanceFromMiddle / middle)
             if percentage == 0 { /// still completely at camera, no movement
                 newTab = .camera
-                delegate?.didFinishNavigatingTo(tab: .camera)
+                updateTabBarHeightAfterScrolling(scrollView, to: .camera)
             } else if percentage == 1 { /// finished at photos
                 newTab = .photos
-                delegate?.didFinishNavigatingTo(tab: .photos)
+                updateTabBarHeightAfterScrolling(scrollView, to: .photos)
             } else { /// use percentage
                 newTab = .cameraToPhotos(percentage)
+                updateTabBarHeightAfterScrolling(scrollView, to: .camera)
             }
         } else { /// going to Lists
             let percentage = abs(distanceFromMiddle / middle)
             if percentage == 0 {
                 newTab = .camera
-                delegate?.didFinishNavigatingTo(tab: .camera)
+                updateTabBarHeightAfterScrolling(scrollView, to: .camera)
             } else if percentage == 1 {
                 newTab = .lists
-                delegate?.didFinishNavigatingTo(tab: .lists)
+                updateTabBarHeightAfterScrolling(scrollView, to: .lists)
             } else {
                 newTab = .cameraToLists(percentage)
+                updateTabBarHeightAfterScrolling(scrollView, to: .camera)
             }
         }
         
         tabViewModel.tabState = newTab
     }
     
+    /// notify delegate and update tab bar height
+    func updateTabBarHeightAfterScrolling(_ scrollView: UIScrollView, to tab: TabState) {
+        
+        /// only update after **the user** scrolled, since `scrollViewDidScroll` is called even when programmatically setting the content offset
+        if (scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating) {
+            tabViewModel.updateTabBarHeight?(tab)
+        }
+    }
+    
     public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        print("Will display cell at: \(indexPath)")
         switch indexPath.item {
         case 0:
             delegate?.willBeginNavigatingTo(tab: .photos)
