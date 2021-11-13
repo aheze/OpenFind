@@ -14,31 +14,25 @@ struct TabBarView<ToolbarViewModel: ObservableObject, CameraToolbarView: View>: 
     @ViewBuilder var cameraToolbarView: CameraToolbarView
     
     var body: some View {
-        Color.clear.overlay(
-            VStack {
-                HStack(alignment: .bottom, spacing: 0) {
-                    PhotosButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.photosIconAttributes)
-                    CameraButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.cameraIconAttributes)
-                    ListsButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.listsIconAttributes)
-                }
-            }
-                .overlay(
-                        cameraToolbarView
-                        .opacity(tabViewModel.tabBarAttributes.toolbarAlpha)
-                        .offset(x: 0, y: tabViewModel.tabBarAttributes.toolbarOffset)
-                )
-                .padding(EdgeInsets(top: 16, leading: 16, bottom: Constants.tabBarBottomPadding, trailing: 16))
-                .background(
-                    ZStack {
-                        VisualEffectView(progress: $tabViewModel.animatorProgress)
-                        tabViewModel.tabBarAttributes.backgroundColor.color.opacity(0.5)
+        Color.clear
+            .overlay(
+                VStack {
+                    HStack(alignment: .bottom, spacing: 0) {
+                        PhotosButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.photosIconAttributes)
+                        CameraButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.cameraIconAttributes)
+                        ListsButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.listsIconAttributes)
                     }
-                )
-                .border(Color(UIColor.secondaryLabel).opacity(tabViewModel.tabBarAttributes.topLineAlpha), width: 0.5) /// border is less glitchy than overlay
-            
-            , alignment: .bottom
-        )
-        .edgesIgnoringSafeArea(.all)
+                }
+                    .overlay(
+                        cameraToolbarView
+                            .opacity(tabViewModel.tabBarAttributes.toolbarAlpha)
+                            .offset(x: 0, y: tabViewModel.tabBarAttributes.toolbarOffset)
+                    )
+                    .padding(EdgeInsets(top: 16, leading: 16, bottom: Constants.tabBarBottomPadding, trailing: 16))
+                    .background(BackgroundView(tabViewModel: tabViewModel))
+                , alignment: .bottom
+            )
+            .edgesIgnoringSafeArea(.all)
     }
 }
 
