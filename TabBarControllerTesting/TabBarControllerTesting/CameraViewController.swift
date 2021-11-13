@@ -48,21 +48,7 @@ struct CameraToolbarView: View {
     }
 }
 
-struct ToolbarButton: View {
-    var iconName: String
-    var body: some View {
-        Button {
-            print("Pressed")
-        } label: {
-            Image(systemName: iconName)
-                .foregroundColor(.white)
-                .font(.system(size: 19))
-                .frame(width: 40, height: 40)
-                .background(.white.opacity(0.15))
-                .cornerRadius(20)
-        }
-    }
-}
+
 
 
 

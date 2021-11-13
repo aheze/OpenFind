@@ -9,6 +9,7 @@ import UIKit
 
 struct Constants {
     static var activeIconColor = UIColor(hex: 0x8AF9FF)
+    static var iconFont = UIFont.preferredFont(forTextStyle: .title2)
 }
 
 extension UIColor {

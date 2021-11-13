@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,7 +27,6 @@
         <!--Photos View Controller-->
         <scene sceneID="jgJ-MJ-CJW">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pAv-QQ-WAS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="PhotosViewController" id="MiD-9q-rMA" customClass="PhotosViewController" customModule="TabBarControllerTesting" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Js6-To-519">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -35,24 +35,57 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Photos" translatesAutoresizingMaskIntoConstraints="NO" id="jhK-DK-hAp">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79f-1l-cP2">
+                                <rect key="frame" x="144" y="432.5" width="126" height="31"/>
+                                <color key="tintColor" name="Gold"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Select/Deselect"/>
+                                <connections>
+                                    <action selector="button1Pressed:" destination="MiD-9q-rMA" eventType="touchUpInside" id="Y5V-KS-Vp6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wfb-2s-V0I">
+                                <rect key="frame" x="167" y="502.5" width="80" height="31"/>
+                                <color key="tintColor" name="Gold"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Subtract"/>
+                                <connections>
+                                    <action selector="button3Pressed:" destination="MiD-9q-rMA" eventType="touchUpInside" id="ksc-pA-wX1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p5P-iq-Jft">
+                                <rect key="frame" x="182" y="467.5" width="50" height="31"/>
+                                <color key="tintColor" name="Gold"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Add"/>
+                                <connections>
+                                    <action selector="button2Pressed:" destination="MiD-9q-rMA" eventType="touchUpInside" id="gEY-uH-ygU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kFo-5u-98J"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="jhK-DK-hAp" firstAttribute="top" secondItem="Js6-To-519" secondAttribute="top" id="1RP-7Q-qaD"/>
                             <constraint firstAttribute="trailing" secondItem="jhK-DK-hAp" secondAttribute="trailing" id="56E-lE-Q8K"/>
+                            <constraint firstItem="79f-1l-cP2" firstAttribute="centerX" secondItem="Js6-To-519" secondAttribute="centerX" id="6HK-62-Su5"/>
+                            <constraint firstItem="wfb-2s-V0I" firstAttribute="top" secondItem="p5P-iq-Jft" secondAttribute="bottom" constant="4" id="DXz-S9-DjG"/>
+                            <constraint firstItem="p5P-iq-Jft" firstAttribute="centerX" secondItem="Js6-To-519" secondAttribute="centerX" id="GCX-ez-Jdc"/>
                             <constraint firstAttribute="bottom" secondItem="jhK-DK-hAp" secondAttribute="bottom" id="JvD-gs-01J"/>
+                            <constraint firstItem="wfb-2s-V0I" firstAttribute="centerX" secondItem="Js6-To-519" secondAttribute="centerX" id="KGg-Af-exU"/>
                             <constraint firstItem="jhK-DK-hAp" firstAttribute="leading" secondItem="Js6-To-519" secondAttribute="leading" id="W4X-Rq-O0F"/>
+                            <constraint firstItem="p5P-iq-Jft" firstAttribute="top" secondItem="79f-1l-cP2" secondAttribute="bottom" constant="4" id="laB-Nh-0XP"/>
+                            <constraint firstItem="79f-1l-cP2" firstAttribute="centerY" secondItem="Js6-To-519" secondAttribute="centerY" id="rSO-fr-3Iq"/>
                         </constraints>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pAv-QQ-WAS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1243" y="94"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="uZk-mN-Tn9">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HKp-EA-uyr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="CameraViewController" id="DOr-cx-59T" customClass="CameraViewController" customModule="TabBarControllerTesting" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5NM-0V-fIR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -72,13 +105,13 @@
                         </constraints>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HKp-EA-uyr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1880" y="94"/>
         </scene>
         <!--Lists View Controller-->
         <scene sceneID="CGs-ee-Dwm">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XX6-wX-prj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="ListsViewController" id="Ikn-cx-L4u" customClass="ListsViewController" customModule="TabBarControllerTesting" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wL6-km-Pvf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -98,6 +131,7 @@
                         </constraints>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XX6-wX-prj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2509" y="94"/>
         </scene>
@@ -106,6 +140,9 @@
         <image name="Camera" width="4000" height="6000"/>
         <image name="Lists" width="3648" height="5472"/>
         <image name="Photos" width="4000" height="6000"/>
+        <namedColor name="Gold">
+            <color red="1" green="0.77600002288818359" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

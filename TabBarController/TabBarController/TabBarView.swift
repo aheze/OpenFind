@@ -8,10 +8,15 @@
 import SwiftUI
 
 /// `CameraToolbarView` is passed in from `CameraViewController`
-struct TabBarView<ToolbarViewModel: ObservableObject, CameraToolbarView: View>: View {
+struct TabBarView<CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View>: View {
     @ObservedObject var tabViewModel: TabViewModel
     @ObservedObject var toolbarViewModel: ToolbarViewModel
+    
     @ViewBuilder var cameraToolbarView: CameraToolbarView
+    
+    @ViewBuilder var photosSelectionToolbarView: PhotosSelectionToolbarView
+    @ViewBuilder var photosDetailToolbarView: PhotosDetailToolbarView
+    @ViewBuilder var listsSelectionToolbarView: ListsSelectionToolbarView
     
     var body: some View {
         Color.clear
@@ -23,16 +28,38 @@ struct TabBarView<ToolbarViewModel: ObservableObject, CameraToolbarView: View>: 
                         ListsButton(tabState: $tabViewModel.tabState, attributes: tabViewModel.listsIconAttributes)
                     }
                 }
+                    .opacity(toolbarViewModel.toolbar == .none ? 1 : 0)
+                    .overlay(
+                        Group {
+                            switch toolbarViewModel.toolbar {
+                            case .none:
+                                EmptyView()
+                            case .photosSelection:
+                                photosSelectionToolbarView
+                            case .photosDetail:
+                                photosDetailToolbarView
+                            case .listsSelection:
+                                listsSelectionToolbarView
+                            }
+                        }
+                    )
                     .overlay(
                         cameraToolbarView
                             .opacity(tabViewModel.tabBarAttributes.toolbarAlpha)
                             .offset(x: 0, y: tabViewModel.tabBarAttributes.toolbarOffset)
                     )
                     .padding(EdgeInsets(top: 16, leading: 16, bottom: Constants.tabBarBottomPadding, trailing: 16))
+                
+                /// right after this point is the area of visual tab bar background (what the user sees)
+                
                     .background(BackgroundView(tabViewModel: tabViewModel))
+                
                 , alignment: .bottom
             )
             .edgesIgnoringSafeArea(.all)
+            .onAppear {
+                
+            }
     }
 }
 
@@ -51,24 +78,6 @@ struct BackgroundView: View {
         )
     }
 }
-//struct BackgroundView: ViewModifier {
-//    @ObservedObject var tabViewModel: TabViewModel
-//
-//    func body(content: Content) -> some View {
-//        content.background(
-//            ZStack {
-//                VisualEffectView(progress: $tabViewModel.animatorProgress)
-//                tabViewModel.tabBarAttributes.backgroundColor.color.opacity(0.5)
-//            }
-//        )
-//            .border( /// border is less glitchy than overlay
-//                Color(UIColor.secondaryLabel)
-//                    .opacity(tabViewModel.tabBarAttributes.topLineAlpha),
-//                width: 0.5
-//            )
-//    }
-//}
-
 struct PhotosButton: View {
     let tabType = TabState.photos
     @Binding var tabState: TabState
@@ -174,12 +183,3 @@ struct FadingButtonModifier: ViewModifier {
             .opacity(isPressed ? 0.5 : 1)
     }
 }
-
-
-//struct TabBarView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TabBarView(tabViewModel: TabViewModel(), toolbarViewModel: <#_#>) {
-//            Color.clear
-//        }
-//    }
-//}

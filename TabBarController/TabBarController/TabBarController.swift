@@ -10,7 +10,7 @@ import Combine
 
 /// wrapper for `TabBarViewController` - compatible with generics
 public class TabBarController<
-    ToolbarViewModel: ObservableObject, CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View
+    CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View
 >: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
     
     /// data
@@ -35,6 +35,8 @@ public class TabBarController<
         photosDetailToolbarView: PhotosDetailToolbarView,
         listsSelectionToolbarView: ListsSelectionToolbarView
     ) {
+        
+        // MARK: - init first
         self.pages = pages
         self.toolbarViewModel = toolbarViewModel
         self.cameraToolbarView = cameraToolbarView
@@ -50,7 +52,7 @@ public class TabBarController<
         
         super.init()
 
-        
+        // MARK: - setup
         viewController.getPages = { [weak self] in
             return self?.pages ?? [PageViewController]()
         }
@@ -63,7 +65,10 @@ public class TabBarController<
         let tabBarView = TabBarView(
             tabViewModel: tabViewModel,
             toolbarViewModel: toolbarViewModel,
-            cameraToolbarView: { cameraToolbarView }
+            cameraToolbarView: { cameraToolbarView },
+            photosSelectionToolbarView: { photosSelectionToolbarView },
+            photosDetailToolbarView: { photosDetailToolbarView },
+            listsSelectionToolbarView: { listsSelectionToolbarView }
         )
         
         let tabBarHostingController = UIHostingController(rootView: tabBarView)

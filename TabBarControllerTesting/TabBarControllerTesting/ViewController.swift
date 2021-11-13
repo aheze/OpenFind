@@ -8,45 +8,47 @@
 import UIKit
 import TabBarController
 
-class ToolbarViewModel: ObservableObject {
-    @Published var toolbar = Toolbar.camera(Camera())
-    
-    enum Toolbar {
-        case camera(Camera)
-        case photosSelection(PhotosSelection)
-        case photosDetail(PhotosDetail)
-        case listsSelection(ListsSelection)
-    }
-    
-    class Camera: ObservableObject {
-        @Published var resultsCount = 0
-        @Published var flashOn = false
-        @Published var focusOn = false
-    }
-
-    class PhotosSelection: ObservableObject {
-        @Published var starOn = false
-    }
-    class PhotosDetail: ObservableObject {
-        @Published var starOn = false
-    }
-    class ListsSelection: ObservableObject {
-        @Published var selectedCount = 0
-    }
-}
-
 class ViewController: UIViewController {
 
+    lazy var photosViewController: PhotosViewController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "PhotosViewController") as? PhotosViewController {
+            viewController.getActiveToolbarViewModel = { [weak self] in
+                guard let self = self else { return ToolbarViewModel() }
+                return self.toolbarViewModel
+            }
+            return viewController
+        }
+        fatalError()
+    }()
+    lazy var cameraViewController: CameraViewController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "CameraViewController") as? CameraViewController {
+            return viewController
+        }
+        fatalError()
+    }()
+    lazy var listsViewController: ListsViewController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "ListsViewController") as? ListsViewController {
+            return viewController
+        }
+        fatalError()
+    }()
+    
     var toolbarViewModel: ToolbarViewModel!
-    lazy var tabBarViewController: TabBarController<ToolbarViewModel, CameraToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {
+    lazy var tabBarViewController: TabBarController<CameraToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {
         toolbarViewModel = ToolbarViewModel()
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard
-            let photosViewController = storyboard.instantiateViewController(withIdentifier: "PhotosViewController") as? PhotosViewController,
-            let cameraViewController = storyboard.instantiateViewController(withIdentifier: "CameraViewController") as? CameraViewController,
-            let listsViewController = storyboard.instantiateViewController(withIdentifier: "ListsViewController") as? ListsViewController
-        else { fatalError("No view controllers!") }
+        
+        photosViewController.activateSelectionToolbar = { [weak self] activate in
+            guard let self = self else { return }
+            if activate {
+                self.toolbarViewModel.toolbar = .photosSelection
+            } else {
+                self.toolbarViewModel.toolbar = .none
+            }
+        }
         
         let tabViewController = Bridge.makeTabViewController(
             pageViewControllers: [photosViewController, cameraViewController, listsViewController],
