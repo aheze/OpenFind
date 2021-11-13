@@ -72,6 +72,7 @@ struct PhotosSelectionToolbarView: View {
             ToolbarIconButton(iconName: viewModel.starOn ? "star.fill" : "star") {
                 viewModel.starOn.toggle()
             }
+            .disabled(viewModel.selectedCount == 0)
             
             Text("\(viewModel.selectedCount) Photos Selected")
                 .font(.system(.headline))
@@ -79,6 +80,7 @@ struct PhotosSelectionToolbarView: View {
             
             ToolbarIconButton(iconName: "trash") {
             }
+            .disabled(viewModel.selectedCount == 0)
         }
     }
 }

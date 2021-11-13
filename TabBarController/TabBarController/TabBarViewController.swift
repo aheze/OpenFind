@@ -41,16 +41,14 @@ public class TabBarViewController: UIViewController {
         super.viewDidLoad()
         _ = contentPagingLayout
         contentCollectionView.decelerationRate = .fast
-//        tabBarHeightC.constant = Constants.tabBarShrunkHeight
+        //        tabBarHeightC.constant = Constants.tabBarShrunkHeight
     }
     
     func updateTabBar(_ tabState: TabState) {
-
-        DispatchQueue.main.async {
-            if tabState == .camera {
-                self.tabBarHeightC.constant = 200
-            } else {
-//                self.tabBarHeightC.constant = Constants.tabBarShrunkHeight
+        
+        func changeTabHeight(constant: CGFloat) {
+            DispatchQueue.main.async {
+                self.tabBarHeightC.constant = constant
             }
         }
         
@@ -58,12 +56,18 @@ public class TabBarViewController: UIViewController {
         switch tabState {
         case .photos:
             index = 0
+            changeTabHeight(constant: ConstantVars.tabBarTotalHeight)
         case .camera:
             index = 1
+            changeTabHeight(constant: ConstantVars.tabBarTotalHeightExpanded)
         case .lists:
             index = 2
+            changeTabHeight(constant: ConstantVars.tabBarTotalHeight)
         default:
-            return /// if not a standard tab, that means the user is scrolling. Standard tab set is via SwiftUI
+            changeTabHeight(constant: ConstantVars.tabBarTotalHeightExpanded)
+            
+            /// if not a standard tab, that means the user is scrolling. Standard tab set is via SwiftUI
+            return
         }
         
         if let attributes = contentPagingLayout.layoutAttributes[safe: index] {
