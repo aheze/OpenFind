@@ -5,7 +5,7 @@
 //  Created by Zheng on 10/28/21.
 //
 
-import UIKit
+import SwiftUI
 import TabBarController
 
 class ViewController: UIViewController {
@@ -44,9 +44,13 @@ class ViewController: UIViewController {
         photosViewController.activateSelectionToolbar = { [weak self] activate in
             guard let self = self else { return }
             if activate {
-                self.toolbarViewModel.toolbar = .photosSelection
+                withAnimation {
+                    self.toolbarViewModel.toolbar = .photosSelection
+                }
             } else {
-                self.toolbarViewModel.toolbar = .none
+                withAnimation {
+                    self.toolbarViewModel.toolbar = .none
+                }
             }
         }
         

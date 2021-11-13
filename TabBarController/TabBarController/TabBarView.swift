@@ -30,7 +30,7 @@ struct TabBarView<CameraToolbarView: View, PhotosSelectionToolbarView: View, Pho
                 }
                     .opacity(toolbarViewModel.toolbar == .none ? 1 : 0)
                     .overlay(
-                        Group {
+                        VStack {
                             switch toolbarViewModel.toolbar {
                             case .none:
                                 EmptyView()
