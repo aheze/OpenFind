@@ -2,6 +2,24 @@
   "object": {
     "pins": [
       {
+        "package": "SupportDocs",
+        "repositoryURL": "https://github.com/aheze/SupportDocs",
+        "state": {
+          "branch": "main",
+          "revision": "7bbfe645de0cbb931aa71e0aca16bcc36cec75a8",
+          "version": null
+        }
+      },
+      {
+        "package": "Introspect",
+        "repositoryURL": "https://github.com/siteline/SwiftUI-Introspect",
+        "state": {
+          "branch": "master",
+          "revision": "72a509c93166540c0adf8323fd2652daade7f9f6",
+          "version": null
+        }
+      },
+      {
         "package": "WhatsNewKit",
         "repositoryURL": "https://github.com/SvenTiigi/WhatsNewKit",
         "state": {

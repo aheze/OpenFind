@@ -292,6 +292,10 @@
 		3C4D3B712747782D0010FD68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B6E2747782D0010FD68 /* Main.storyboard */; };
 		3C4D3B74274778CA0010FD68 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3A9027476EC70010FD68 /* SharedAssets.xcassets */; };
 		3C4D3B75274778CB0010FD68 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3A9027476EC70010FD68 /* SharedAssets.xcassets */; };
+		3C4D3B78274779D60010FD68 /* SupportDocs in Frameworks */ = {isa = PBXBuildFile; productRef = 3C4D3B77274779D60010FD68 /* SupportDocs */; };
+		3C4D3B7B274779EE0010FD68 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 3C4D3B7A274779EE0010FD68 /* Introspect */; };
+		3C4D3B7D274779F70010FD68 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 3C4D3B7C274779F70010FD68 /* Introspect */; };
+		3C4D3B7F27477A6B0010FD68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B7E27477A6B0010FD68 /* Assets.xcassets */; };
 		3C4DE6FB259AD3FF0037D104 /* SaveToPhotosButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */; };
 		3C4DE6FC259AD3FF0037D104 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F5259AD3FF0037D104 /* MessageView.xib */; };
 		3C4DE6FD259AD3FF0037D104 /* CacheIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F6259AD3FF0037D104 /* CacheIcon.swift */; };
@@ -830,6 +834,7 @@
 		3C4D3B6D2747782D0010FD68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3C4D3B6F2747782D0010FD68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3C4D3B72274778440010FD68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C4D3B7E27477A6B0010FD68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaveToPhotosButton.xib; sourceTree = "<group>"; };
 		3C4DE6F5259AD3FF0037D104 /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
 		3C4DE6F6259AD3FF0037D104 /* CacheIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheIcon.swift; sourceTree = "<group>"; };
@@ -1151,6 +1156,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C4D3B78274779D60010FD68 /* SupportDocs in Frameworks */,
+				3C4D3B7D274779F70010FD68 /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1173,6 +1180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C5F1FA527121BB200143BDD /* WhatsNewKit in Frameworks */,
+				3C4D3B7B274779EE0010FD68 /* Introspect in Frameworks */,
 				9F7EB9AD24508DC95B5FA75F /* Pods_Find.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1554,6 +1562,7 @@
 				3C4D3AD8274776150010FD68 /* Subviews */,
 				3C4D3AC7274776140010FD68 /* Support */,
 				3C4D3ACC274776140010FD68 /* Utilities.swift */,
+				3C4D3B7E27477A6B0010FD68 /* Assets.xcassets */,
 				3C4D3AC5274775F10010FD68 /* Testing */,
 			);
 			path = Settings;
@@ -2623,6 +2632,10 @@
 			dependencies = (
 			);
 			name = Settings;
+			packageProductDependencies = (
+				3C4D3B77274779D60010FD68 /* SupportDocs */,
+				3C4D3B7C274779F70010FD68 /* Introspect */,
+			);
 			productName = Settings;
 			productReference = 3C4D3AFC274776B00010FD68 /* Settings.app */;
 			productType = "com.apple.product-type.application";
@@ -2684,6 +2697,7 @@
 			name = Find;
 			packageProductDependencies = (
 				3C5F1FA427121BB200143BDD /* WhatsNewKit */,
+				3C4D3B7A274779EE0010FD68 /* Introspect */,
 			);
 			productName = Find;
 			productReference = 4999AC902353A80A00AB06A7 /* Find.app */;
@@ -2739,6 +2753,8 @@
 			mainGroup = 4999AC872353A80A00AB06A7;
 			packageReferences = (
 				3C5F1FA327121BB200143BDD /* XCRemoteSwiftPackageReference "WhatsNewKit" */,
+				3C4D3B76274779400010FD68 /* XCRemoteSwiftPackageReference "SupportDocs" */,
+				3C4D3B79274779EE0010FD68 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 4999AC912353A80A00AB06A7 /* Products */;
 			projectDirPath = "";
@@ -2813,6 +2829,7 @@
 				3C4D3B27274776DB0010FD68 /* Assets.xcassets in Resources */,
 				3C4D3B26274776D90010FD68 /* LaunchScreen.storyboard in Resources */,
 				3C4D3B74274778CA0010FD68 /* SharedAssets.xcassets in Resources */,
+				3C4D3B7F27477A6B0010FD68 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4361,6 +4378,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3C4D3B76274779400010FD68 /* XCRemoteSwiftPackageReference "SupportDocs" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aheze/SupportDocs";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		3C4D3B79274779EE0010FD68 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		3C5F1FA327121BB200143BDD /* XCRemoteSwiftPackageReference "WhatsNewKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SvenTiigi/WhatsNewKit";
@@ -4372,6 +4405,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3C4D3B77274779D60010FD68 /* SupportDocs */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C4D3B76274779400010FD68 /* XCRemoteSwiftPackageReference "SupportDocs" */;
+			productName = SupportDocs;
+		};
+		3C4D3B7A274779EE0010FD68 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C4D3B79274779EE0010FD68 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
+		3C4D3B7C274779F70010FD68 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C4D3B79274779EE0010FD68 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
 		3C5F1FA427121BB200143BDD /* WhatsNewKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3C5F1FA327121BB200143BDD /* XCRemoteSwiftPackageReference "WhatsNewKit" */;
