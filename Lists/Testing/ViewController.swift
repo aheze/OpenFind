@@ -9,12 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    lazy var lists: ListsController = {
+        return ListsBridge.makeController()
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    
+        addChild(lists.viewController, in: view)
     }
-
-
 }
 
