@@ -1,6 +1,6 @@
 //
 //  SceneDelegate.swift
-//  SearchBar
+//  Lists
 //
 //  Created by Zheng on 11/18/21.
 //  Copyright © 2021 Andrew. All rights reserved.
