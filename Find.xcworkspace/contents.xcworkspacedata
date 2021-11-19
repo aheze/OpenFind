@@ -35,6 +35,9 @@
       location = "container:"
       name = "General Frameworks">
       <FileRef
+         location = "group:Utilities/Utilities.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:TabBarController/TabBarController.xcodeproj">
       </FileRef>
       <FileRef

@@ -14,7 +14,6 @@
 		3C4D3645274732BB0010FD68 /* FlashIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3642274732BB0010FD68 /* FlashIconView.swift */; };
 		3C4D3646274732BB0010FD68 /* SettingsIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3643274732BB0010FD68 /* SettingsIconView.swift */; };
 		3C4D3647274732BB0010FD68 /* FocusIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3644274732BB0010FD68 /* FocusIconView.swift */; };
-		3C4D3649274732D00010FD68 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3648274732D00010FD68 /* Constants.swift */; };
 		3C5F1FB82712337200143BDD /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C5F1FB72712337200143BDD /* Camera.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C5F206727125C3000143BDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C5F206627125C3000143BDD /* Main.storyboard */; };
 /* End PBXBuildFile section */
@@ -27,8 +26,8 @@
 		3C4D3642274732BB0010FD68 /* FlashIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashIconView.swift; sourceTree = "<group>"; };
 		3C4D3643274732BB0010FD68 /* SettingsIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsIconView.swift; sourceTree = "<group>"; };
 		3C4D3644274732BB0010FD68 /* FocusIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusIconView.swift; sourceTree = "<group>"; };
-		3C4D3648274732D00010FD68 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3C4D364B274735680010FD68 /* TabBarController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TabBarController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C4D3711274741FE0010FD68 /* Constants.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Constants.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C5F1FB42712337200143BDD /* Camera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Camera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C5F1FB72712337200143BDD /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		3C5F206627125C3000143BDD /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -48,6 +47,7 @@
 		3C4D364A274735680010FD68 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3C4D3711274741FE0010FD68 /* Constants.framework */,
 				3C4D364B274735680010FD68 /* TabBarController.framework */,
 			);
 			name = Frameworks;
@@ -76,7 +76,6 @@
 				3C5F1FB72712337200143BDD /* Camera.h */,
 				3C5F206627125C3000143BDD /* Main.storyboard */,
 				3C4D363B274731DD0010FD68 /* Bridge.swift */,
-				3C4D3648274732D00010FD68 /* Constants.swift */,
 				3C4D3637274731BD0010FD68 /* CameraController.swift */,
 				3C4D3639274731C90010FD68 /* CameraViewController.swift */,
 				3C4D3642274732BB0010FD68 /* FlashIconView.swift */,
@@ -175,7 +174,6 @@
 				3C4D36412747329A0010FD68 /* ResultsIconView.swift in Sources */,
 				3C4D363C274731DD0010FD68 /* Bridge.swift in Sources */,
 				3C4D3645274732BB0010FD68 /* FlashIconView.swift in Sources */,
-				3C4D3649274732D00010FD68 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

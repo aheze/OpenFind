@@ -21,7 +21,8 @@
 		3C4D36B927473BA70010FD68 /* Photos.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4D36B727473BA70010FD68 /* Photos.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C4D36BB27473BAA0010FD68 /* Lists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4D36BA27473BAA0010FD68 /* Lists.framework */; };
 		3C4D36BC27473BAA0010FD68 /* Lists.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4D36BA27473BAA0010FD68 /* Lists.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3CE0AB49273E503E0021BD9C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0AB48273E503E0021BD9C /* Constants.swift */; };
+		3C4D36EE274740580010FD68 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4D36ED274740580010FD68 /* Utilities.framework */; };
+		3C4D36EF274740580010FD68 /* Utilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4D36ED274740580010FD68 /* Utilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3C4D36EF274740580010FD68 /* Utilities.framework in Embed Frameworks */,
 				3C33795C272BBB650055A73A /* TabBarController.framework in Embed Frameworks */,
 				3C4D363F2747325E0010FD68 /* Camera.framework in Embed Frameworks */,
 				3C4D36BC27473BAA0010FD68 /* Lists.framework in Embed Frameworks */,
@@ -54,7 +56,7 @@
 		3C4D363D2747325E0010FD68 /* Camera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Camera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C4D36B727473BA70010FD68 /* Photos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Photos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C4D36BA27473BAA0010FD68 /* Lists.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Lists.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3CE0AB48273E503E0021BD9C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3C4D36ED274740580010FD68 /* Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C4D36EE274740580010FD68 /* Utilities.framework in Frameworks */,
 				3C33795B272BBB650055A73A /* TabBarController.framework in Frameworks */,
 				3C4D363E2747325E0010FD68 /* Camera.framework in Frameworks */,
 				3C4D36BB27473BAA0010FD68 /* Lists.framework in Frameworks */,
@@ -94,7 +97,6 @@
 			children = (
 				3C337945272BBB520055A73A /* AppDelegate.swift */,
 				3C337947272BBB520055A73A /* SceneDelegate.swift */,
-				3CE0AB48273E503E0021BD9C /* Constants.swift */,
 				3C337949272BBB520055A73A /* ViewController.swift */,
 				3C33794B272BBB520055A73A /* Main.storyboard */,
 				3C33794E272BBB540055A73A /* Assets.xcassets */,
@@ -107,6 +109,7 @@
 		3C337959272BBB640055A73A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3C4D36ED274740580010FD68 /* Utilities.framework */,
 				3C4D36BA27473BAA0010FD68 /* Lists.framework */,
 				3C4D36B727473BA70010FD68 /* Photos.framework */,
 				3C4D363D2747325E0010FD68 /* Camera.framework */,
@@ -188,7 +191,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C33794A272BBB520055A73A /* ViewController.swift in Sources */,
-				3CE0AB49273E503E0021BD9C /* Constants.swift in Sources */,
 				3C337946272BBB520055A73A /* AppDelegate.swift in Sources */,
 				3C337948272BBB520055A73A /* SceneDelegate.swift in Sources */,
 			);

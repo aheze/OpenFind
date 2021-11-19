@@ -13,3 +13,8 @@ public struct Bridge {
         return camera
     }
 }
+
+public enum Constants {
+    public static var activeIconColor = UIColor.blue
+    public static var iconFont = UIFont.preferredFont(forTextStyle: .title2)
+}
