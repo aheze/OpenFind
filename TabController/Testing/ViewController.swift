@@ -27,16 +27,23 @@ class ViewController: UIViewController {
         photos.viewController.getActiveToolbarViewModel = { [weak self] in
             return self?.toolbarViewModel ?? ToolbarViewModel()
         }
-        photos.viewController.activateSelectionToolbar = { [weak self] activate in
-            print("act? \(activate)")
+        photos.viewController.activateSelectionToolbar = { [weak self] activate, animate in
+//            print("act? \(activate)")
             guard let self = self else { return }
             if activate {
-                withAnimation {
+                if animate {
+                    withAnimation {
+                        self.toolbarViewModel.toolbar = .photosSelection
+                    }
+                } else {
                     self.toolbarViewModel.toolbar = .photosSelection
                 }
             } else {
-                print("don't activate")
-                withAnimation {
+                if animate {
+                    withAnimation {
+                        self.toolbarViewModel.toolbar = .none
+                    }
+                } else {
                     self.toolbarViewModel.toolbar = .none
                 }
             }

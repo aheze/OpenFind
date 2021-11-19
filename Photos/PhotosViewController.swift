@@ -18,16 +18,17 @@ public class PhotosViewController: UIViewController, PageViewController {
     }()
     
     public var getActiveToolbarViewModel: (() -> ToolbarViewModel)?
-    public var activateSelectionToolbar: ((Bool) -> Void)?
+    
+    /// active, animate
+    public var activateSelectionToolbar: ((Bool, Bool) -> Void)?
     
     
     @IBAction func selectPressed(_ sender: Any) {
-        print("slect pressed")
         if let activeToolbarViewModel = getActiveToolbarViewModel?() {
             if activeToolbarViewModel.toolbar == .photosSelection {
-                self.activateSelectionToolbar?(false)
+                self.activateSelectionToolbar?(false, false)
             } else {
-                self.activateSelectionToolbar?(true)
+                self.activateSelectionToolbar?(true, false)
             }
         }
     }
@@ -57,7 +58,8 @@ extension PhotosViewController {
     }
     
     public func willBecomeInactive() {
-        self.activateSelectionToolbar?(false)
+//        print("Becoming inactve.")
+        self.activateSelectionToolbar?(false, true)
     }
     
     public func didBecomeInactive() {

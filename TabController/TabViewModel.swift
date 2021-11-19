@@ -23,6 +23,7 @@ class TabViewModel: ObservableObject {
     @Published var listsIconAttributes = ListsIconAttributes.inactiveDarkBackground
     @Published var animatorProgress = CGFloat(0) /// for blur
     var updateTabBarHeight: ((TabState) -> Void)?
+    var clickedToNewTab: ((TabState) -> Void)?
 }
 
 public enum TabState: Equatable {
@@ -32,60 +33,82 @@ public enum TabState: Equatable {
     case cameraToPhotos(CGFloat) /// associatedValue is the percentage
     case cameraToLists(CGFloat)
     
-    static var progressGoingUpCurrent = false
-    static func notifyBeginChange(current: TabState, new: TabState) -> TabState? {
-        switch current {
-//        case .photos:
-//            if new != .photos {
-//                return .camera
-//            }
-//        case .camera:
-//            switch new {
-//            case .cameraToPhotos(_):
-//                return .photos
-//            case .cameraToLists(_):
-//                return .lists
-//            default: break
-//            }
-//        case .lists:
-//            if new != .lists {
-//                return .camera
-//            }
-        case .cameraToPhotos(let currentProgress):
-            switch new {
-            case .cameraToPhotos(let newProgress):
-                let progressGoingUpNow = newProgress > currentProgress
-                let progressGoingUpCurrent = progressGoingUpCurrent
-                self.progressGoingUpCurrent = progressGoingUpNow
+    /// progress from <camera to photos> or <camera to lists> is going up
+    static var progressGoingUpNow = false
+    
+    static func modifyProgress(current previous: TabState? = nil, new: TabState) {
+        switch new {
+        case .photos:
+            progressGoingUpNow = true
+        case .camera:
+            progressGoingUpNow = false
+        case .lists:
+            progressGoingUpNow = true
+        case .cameraToPhotos(let newProgress):
+            guard let previousTab = previous else { return }
+            switch previousTab {
+            case .cameraToPhotos(let previousProgress):
+//                print("Camera to Photos. New: \(newProgress), prev: \(previousProgress)... \(newProgress > previousProgress)")
                 
-                if !progressGoingUpCurrent && progressGoingUpNow {
+                guard newProgress <= 1 else {
+                    progressGoingUpNow = true
+                    break
+                }
+                progressGoingUpNow = newProgress > previousProgress
+            case .cameraToLists(_):
+                progressGoingUpNow = true
+            default: break
+            }
+            
+        case .cameraToLists(let newProgress):
+            guard let previousTab = previous else { return }
+            switch previousTab {
+            case .cameraToPhotos(_):
+                self.progressGoingUpNow = true
+            case .cameraToLists(let previousProgress):
+                guard newProgress <= 1 else {
+                    progressGoingUpNow = true
+                    break
+                }
+                progressGoingUpNow = newProgress > previousProgress
+            default: break
+            }
+        }
+    }
+    
+    /// detect a change in swiping
+    static func notifyBeginChange(current: TabState, new: TabState) -> TabState? {
+        let progressGoingUpPreviously = progressGoingUpNow
+        modifyProgress(current: current, new: new)
+        
+        
+        
+        switch current {
+        case .cameraToPhotos(_):
+            switch new {
+            case .cameraToPhotos(_):
+                if !progressGoingUpPreviously && progressGoingUpNow {
                     /// previously going to camera, now going to photos
                     return .photos
-                } else if progressGoingUpCurrent && !progressGoingUpNow {
+                } else if progressGoingUpPreviously && !progressGoingUpNow {
                     /// previously going to photos, now going to camera
                     return .camera
                 }
                 
             case .cameraToLists(_):
-                self.progressGoingUpCurrent = true
                 return .lists
             default: break
             }
             
-        case .cameraToLists(let currentProgress):
+        case .cameraToLists(_):
             switch new {
             case .cameraToPhotos(_):
-                self.progressGoingUpCurrent = true
                 return .photos
-            case .cameraToLists(let newProgress):
-                let progressGoingUpNow = newProgress > currentProgress
-                let progressGoingUpCurrent = progressGoingUpCurrent
-                self.progressGoingUpCurrent = progressGoingUpNow
-                
-                if !progressGoingUpCurrent && progressGoingUpNow {
+            case .cameraToLists(_):
+                if !progressGoingUpPreviously && progressGoingUpNow {
                     /// previously going to camera, now going to lists
                     return .lists
-                } else if progressGoingUpCurrent && !progressGoingUpNow {
+                } else if progressGoingUpPreviously && !progressGoingUpNow {
                     /// previously going to lists, now going to camera
                     return .camera
                 }

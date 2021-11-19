@@ -88,13 +88,12 @@ public class TabBarController<
         tabViewModel.updateTabBarHeight = { tabState in
             viewController.updateTabBarHeight(tabState)
         }
-        cancellable = tabViewModel.$tabState.sink { [weak self] activeTab in
-            
-            switch activeTab {
-            case .photos, .camera, .lists:
-                self?.delegate?.didFinishNavigatingTo(tab: activeTab)
-            default: break
-            }
+        tabViewModel.clickedToNewTab = { [weak self] activeTab in
+            TabState.modifyProgress(new: activeTab) /// make sure to modify first, so `willBeginNavigatingTo` will be accurate on swipe
+            self?.delegate?.willBeginNavigatingTo(tab: activeTab) /// always call will begin anyway
+            self?.delegate?.didFinishNavigatingTo(tab: activeTab)
+        }
+        cancellable = tabViewModel.$tabState.sink { activeTab in
             viewController.updateTabContent(activeTab)
         }
         
@@ -115,17 +114,6 @@ public class TabBarController<
         viewController.contentCollectionView.delegate = self
         viewController.contentCollectionView.dataSource = self
     }
-    
-//    switch indexPath.item {
-//case 0:
-//    delegate?.willBeginNavigatingTo(tab: .photos)
-//case 1:
-//    delegate?.willBeginNavigatingTo(tab: .camera)
-//case 2:
-//    delegate?.willBeginNavigatingTo(tab: .lists)
-//default:
-//    break
-//}
     
     /// called **even** when programmatically set the tab via the icon button...
     /// so, need to use `updateTabBarHeightAfterScrolling` to check whether the user was scrolling or not.
@@ -160,9 +148,8 @@ public class TabBarController<
             }
         }
         
-//        print("Current: \(tabViewModel.tabState), new: \(newTab)")
-        if let new = TabState.notifyBeginChange(current: tabViewModel.tabState, new: newTab) {
-            print("____+_+_+_+_New is: \(new)")
+        if let newTab = TabState.notifyBeginChange(current: tabViewModel.tabState, new: newTab) {
+            delegate?.willBeginNavigatingTo(tab: newTab)
         }
         tabViewModel.tabState = newTab
     }
