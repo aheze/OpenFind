@@ -89,6 +89,7 @@ public class TabBarController<
             viewController.updateTabBarHeight(tabState)
         }
         cancellable = tabViewModel.$tabState.sink { [weak self] activeTab in
+            
             switch activeTab {
             case .photos, .camera, .lists:
                 self?.delegate?.didFinishNavigatingTo(tab: activeTab)
@@ -114,6 +115,17 @@ public class TabBarController<
         viewController.contentCollectionView.delegate = self
         viewController.contentCollectionView.dataSource = self
     }
+    
+//    switch indexPath.item {
+//case 0:
+//    delegate?.willBeginNavigatingTo(tab: .photos)
+//case 1:
+//    delegate?.willBeginNavigatingTo(tab: .camera)
+//case 2:
+//    delegate?.willBeginNavigatingTo(tab: .lists)
+//default:
+//    break
+//}
     
     /// called **even** when programmatically set the tab via the icon button...
     /// so, need to use `updateTabBarHeightAfterScrolling` to check whether the user was scrolling or not.
@@ -148,6 +160,10 @@ public class TabBarController<
             }
         }
         
+//        print("Current: \(tabViewModel.tabState), new: \(newTab)")
+        if let new = TabState.notifyBeginChange(current: tabViewModel.tabState, new: newTab) {
+            print("____+_+_+_+_New is: \(new)")
+        }
         tabViewModel.tabState = newTab
     }
     
@@ -161,16 +177,6 @@ public class TabBarController<
     }
     
     public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        switch indexPath.item {
-        case 0:
-            delegate?.willBeginNavigatingTo(tab: .photos)
-        case 1:
-            delegate?.willBeginNavigatingTo(tab: .camera)
-        case 2:
-            delegate?.willBeginNavigatingTo(tab: .lists)
-        default:
-            break
-        }
         let pageViewController = pages[indexPath.item]
         viewController.addChild(pageViewController, in: cell.contentView)
     }

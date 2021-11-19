@@ -766,7 +766,6 @@
 		3C4D37DF2747582D0010FD68 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3C4D37E1274758450010FD68 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3C4D37E3274758570010FD68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3C4D3944274758D50010FD68 /* Find copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Find copy-Info.plist"; path = "/Users/aheze/Desktop/Code/Find Final/Find/Find copy-Info.plist"; sourceTree = "<absolute>"; };
 		3C4D3949274759240010FD68 /* TabController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C4D395D274759510010FD68 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3C4D396327475A650010FD68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -2530,7 +2529,6 @@
 				4999AC912353A80A00AB06A7 /* Products */,
 				F1113DDE71BB4BA2CD714E1A /* Pods */,
 				D0464F2926E9ACFCA3CD293D /* Frameworks */,
-				3C4D3944274758D50010FD68 /* Find copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};

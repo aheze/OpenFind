@@ -18,7 +18,5 @@ class ViewController: UIViewController {
         
         addChild(photos.viewController, in: view)
     }
-
-
 }
 

@@ -32,6 +32,71 @@ public enum TabState: Equatable {
     case cameraToPhotos(CGFloat) /// associatedValue is the percentage
     case cameraToLists(CGFloat)
     
+    static var progressGoingUpCurrent = false
+    static func notifyBeginChange(current: TabState, new: TabState) -> TabState? {
+        switch current {
+//        case .photos:
+//            if new != .photos {
+//                return .camera
+//            }
+//        case .camera:
+//            switch new {
+//            case .cameraToPhotos(_):
+//                return .photos
+//            case .cameraToLists(_):
+//                return .lists
+//            default: break
+//            }
+//        case .lists:
+//            if new != .lists {
+//                return .camera
+//            }
+        case .cameraToPhotos(let currentProgress):
+            switch new {
+            case .cameraToPhotos(let newProgress):
+                let progressGoingUpNow = newProgress > currentProgress
+                let progressGoingUpCurrent = progressGoingUpCurrent
+                self.progressGoingUpCurrent = progressGoingUpNow
+                
+                if !progressGoingUpCurrent && progressGoingUpNow {
+                    /// previously going to camera, now going to photos
+                    return .photos
+                } else if progressGoingUpCurrent && !progressGoingUpNow {
+                    /// previously going to photos, now going to camera
+                    return .camera
+                }
+                
+            case .cameraToLists(_):
+                self.progressGoingUpCurrent = true
+                return .lists
+            default: break
+            }
+            
+        case .cameraToLists(let currentProgress):
+            switch new {
+            case .cameraToPhotos(_):
+                self.progressGoingUpCurrent = true
+                return .photos
+            case .cameraToLists(let newProgress):
+                let progressGoingUpNow = newProgress > currentProgress
+                let progressGoingUpCurrent = progressGoingUpCurrent
+                self.progressGoingUpCurrent = progressGoingUpNow
+                
+                if !progressGoingUpCurrent && progressGoingUpNow {
+                    /// previously going to camera, now going to lists
+                    return .lists
+                } else if progressGoingUpCurrent && !progressGoingUpNow {
+                    /// previously going to lists, now going to camera
+                    return .camera
+                }
+            default: break
+            }
+        default: break
+        }
+        
+        return nil
+    }
+    
     var index: Int {
         switch self {
         case .photos:
@@ -201,7 +266,7 @@ extension TabBarAttributes {
         let toolbarAlpha = fromAttributes.toolbarAlpha + (toAttributes.toolbarAlpha - fromAttributes.toolbarAlpha) * fasterProgress
         
         let topLineAlpha = fromAttributes.topLineAlpha + (toAttributes.topLineAlpha - fromAttributes.topLineAlpha) * progress
-
+        
         self.backgroundColor = backgroundColor
         self.backgroundHeight = backgroundHeight
         self.topPadding = topPadding
@@ -347,7 +412,3 @@ extension UIColor {
         return Color(self)
     }
 }
-
-
-
-

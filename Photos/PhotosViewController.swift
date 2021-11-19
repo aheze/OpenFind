@@ -20,6 +20,26 @@ public class PhotosViewController: UIViewController, PageViewController {
     public var getActiveToolbarViewModel: (() -> ToolbarViewModel)?
     public var activateSelectionToolbar: ((Bool) -> Void)?
     
+    
+    @IBAction func selectPressed(_ sender: Any) {
+        print("slect pressed")
+        if let activeToolbarViewModel = getActiveToolbarViewModel?() {
+            if activeToolbarViewModel.toolbar == .photosSelection {
+                self.activateSelectionToolbar?(false)
+            } else {
+                self.activateSelectionToolbar?(true)
+            }
+        }
+    }
+    @IBAction func addPressed(_ sender: Any) {
+        print("add pressed")
+        photosSelectionViewModel.selectedCount += 1
+    }
+    @IBAction func minusPressed(_ sender: Any) {
+        print("mnus pressed")
+        photosSelectionViewModel.selectedCount -= 1
+    }
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         print("Photos loaded")
@@ -57,7 +77,7 @@ public struct PhotosSelectionToolbarView: View {
             
             Text("\(viewModel.selectedCount) Photos Selected")
                 .font(.system(.headline))
-            .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity)
             
             ToolbarIconButton(iconName: "trash") {
             }

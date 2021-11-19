@@ -24,14 +24,18 @@ class ViewController: UIViewController {
     lazy var tabController: TabBarController<CameraToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {
         toolbarViewModel = ToolbarViewModel()
         
-        
+        photos.viewController.getActiveToolbarViewModel = { [weak self] in
+            return self?.toolbarViewModel ?? ToolbarViewModel()
+        }
         photos.viewController.activateSelectionToolbar = { [weak self] activate in
+            print("act? \(activate)")
             guard let self = self else { return }
             if activate {
                 withAnimation {
                     self.toolbarViewModel.toolbar = .photosSelection
                 }
             } else {
+                print("don't activate")
                 withAnimation {
                     self.toolbarViewModel.toolbar = .none
                 }
@@ -64,10 +68,39 @@ class ViewController: UIViewController {
 extension ViewController: TabBarControllerDelegate{
     
     func willBeginNavigatingTo(tab: TabState) {
-        
+        print("Nav to: \(tab)")
+        switch tab {
+        case .photos:
+            photos.viewController.willBecomeActive()
+            camera.viewController.willBecomeInactive()
+            lists.viewController.willBecomeInactive()
+        case .camera:
+            photos.viewController.willBecomeInactive()
+            camera.viewController.willBecomeActive()
+            lists.viewController.willBecomeInactive()
+        case .lists:
+            photos.viewController.willBecomeInactive()
+            camera.viewController.willBecomeInactive()
+            lists.viewController.willBecomeActive()
+        default: break
+        }
     }
     
     func didFinishNavigatingTo(tab: TabState) {
-        
+        switch tab {
+        case .photos:
+            photos.viewController.didBecomeActive()
+            camera.viewController.didBecomeInactive()
+            lists.viewController.didBecomeInactive()
+        case .camera:
+            photos.viewController.didBecomeInactive()
+            camera.viewController.didBecomeActive()
+            lists.viewController.didBecomeInactive()
+        case .lists:
+            photos.viewController.didBecomeInactive()
+            camera.viewController.didBecomeInactive()
+            lists.viewController.didBecomeActive()
+        default: break
+        }
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 public enum Constants {
-    public static var activeIconColor = UIColor.blue
+    public static var activeIconColor = UIColor(hex: 0x8AF9FF)
     public static var iconFont = UIFont.preferredFont(forTextStyle: .title2)
     
     

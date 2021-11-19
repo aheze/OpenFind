@@ -13,6 +13,7 @@ public class ListsViewController: UIViewController, PageViewController {
         super.viewDidLoad()
     }
 }
+
 extension ListsViewController {
     
     public func willBecomeActive() {
