@@ -130,24 +130,51 @@
 		3C4C96B725B6ABEE009FDE8D /* PhotoSlidesVC+Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4C96B625B6ABED009FDE8D /* PhotoSlidesVC+Star.swift */; };
 		3C4D3797274756470010FD68 /* ContentPagingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3788274756460010FD68 /* ContentPagingFlowLayout.swift */; };
 		3C4D3798274756470010FD68 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378A274756460010FD68 /* TabBarView.swift */; };
-		3C4D3799274756470010FD68 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378B274756470010FD68 /* Constants.swift */; };
-		3C4D379A274756470010FD68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D378C274756470010FD68 /* Main.storyboard */; };
+		3C4D379A274756470010FD68 /* Content.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D378C274756470010FD68 /* Content.storyboard */; };
 		3C4D379B274756470010FD68 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378D274756470010FD68 /* TabBarViewController.swift */; };
 		3C4D379C274756470010FD68 /* TabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378E274756470010FD68 /* TabViewModel.swift */; };
 		3C4D379D274756470010FD68 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378F274756470010FD68 /* ContentCell.swift */; };
 		3C4D379E274756470010FD68 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3790274756470010FD68 /* Bridge.swift */; };
-		3C4D379F274756470010FD68 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3791274756470010FD68 /* Utilities.swift */; };
 		3C4D37A0274756470010FD68 /* TabBarToolbars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3792274756470010FD68 /* TabBarToolbars.swift */; };
 		3C4D37A1274756470010FD68 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3793274756470010FD68 /* TabBarController.swift */; };
 		3C4D37A2274756470010FD68 /* ToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3794274756470010FD68 /* ToolbarViewModel.swift */; };
-		3C4D37A3274756470010FD68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3795274756470010FD68 /* Assets.xcassets */; };
 		3C4D37A4274756470010FD68 /* ContentPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3796274756470010FD68 /* ContentPageViewController.swift */; };
-		3C4D3955274759260010FD68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3954274759260010FD68 /* Assets.xcassets */; };
-		3C4D3958274759260010FD68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3956274759260010FD68 /* LaunchScreen.storyboard */; };
 		3C4D395E274759510010FD68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D395D274759510010FD68 /* Main.storyboard */; };
 		3C4D3961274759A40010FD68 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D37E1274758450010FD68 /* ViewController.swift */; };
 		3C4D3962274759A40010FD68 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D37DF2747582D0010FD68 /* SceneDelegate.swift */; };
 		3C4D396427475A650010FD68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D396327475A650010FD68 /* AppDelegate.swift */; };
+		3C4D39A127475C7C0010FD68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D399727475BF20010FD68 /* AppDelegate.swift */; };
+		3C4D39A227475C7C0010FD68 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D399B27475BF20010FD68 /* SceneDelegate.swift */; };
+		3C4D39A327475C7D0010FD68 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D399A27475BF20010FD68 /* ViewController.swift */; };
+		3C4D39A727475D690010FD68 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* Utilities.swift */; };
+		3C4D39AA27475DAD0010FD68 /* Utilities+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */; };
+		3C4D39AB27475DAD0010FD68 /* Utilities+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */; };
+		3C4D39AD27475DC80010FD68 /* ResultsIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D397F27475BB10010FD68 /* ResultsIconView.swift */; };
+		3C4D39AE27475DC80010FD68 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D398127475BB10010FD68 /* Bridge.swift */; };
+		3C4D39AF27475DC80010FD68 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D398827475BB10010FD68 /* CameraViewController.swift */; };
+		3C4D39B127475DC80010FD68 /* FocusIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D398427475BB10010FD68 /* FocusIconView.swift */; };
+		3C4D39B227475DC80010FD68 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D398527475BB10010FD68 /* CameraController.swift */; };
+		3C4D39B327475DC80010FD68 /* FlashIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D398727475BB10010FD68 /* FlashIconView.swift */; };
+		3C4D39B427475DC80010FD68 /* SettingsIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D397E27475BB10010FD68 /* SettingsIconView.swift */; };
+		3C4D39B527475DE50010FD68 /* ContentPagingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3788274756460010FD68 /* ContentPagingFlowLayout.swift */; };
+		3C4D39B727475DE50010FD68 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378D274756470010FD68 /* TabBarViewController.swift */; };
+		3C4D39B827475DE50010FD68 /* ToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3794274756470010FD68 /* ToolbarViewModel.swift */; };
+		3C4D39B927475DE50010FD68 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378F274756470010FD68 /* ContentCell.swift */; };
+		3C4D39BB27475DE50010FD68 /* TabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378E274756470010FD68 /* TabViewModel.swift */; };
+		3C4D39BC27475DE50010FD68 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D378A274756460010FD68 /* TabBarView.swift */; };
+		3C4D39BD27475DE50010FD68 /* TabBarToolbars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3792274756470010FD68 /* TabBarToolbars.swift */; };
+		3C4D39BE27475DE50010FD68 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3793274756470010FD68 /* TabBarController.swift */; };
+		3C4D39C127475DE50010FD68 /* ContentPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3796274756470010FD68 /* ContentPageViewController.swift */; };
+		3C4D39C227475E2C0010FD68 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* Utilities.swift */; };
+		3C4D39C327475E2C0010FD68 /* Utilities+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */; };
+		3C4D39C627475E8A0010FD68 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C527475E8A0010FD68 /* Constants.swift */; };
+		3C4D39C727475E8A0010FD68 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C527475E8A0010FD68 /* Constants.swift */; };
+		3C4D39C827475E8A0010FD68 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C527475E8A0010FD68 /* Constants.swift */; };
+		3C4D39CA27475EBD0010FD68 /* Utilities+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C927475EBD0010FD68 /* Utilities+UIColor.swift */; };
+		3C4D39CB27475EBD0010FD68 /* Utilities+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C927475EBD0010FD68 /* Utilities+UIColor.swift */; };
+		3C4D39CC27475EBD0010FD68 /* Utilities+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C927475EBD0010FD68 /* Utilities+UIColor.swift */; };
+		3C4D39CD27475F3E0010FD68 /* Content.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D398327475BB10010FD68 /* Content.storyboard */; };
+		3C4D39CE27475F430010FD68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D399927475BF20010FD68 /* Main.storyboard */; };
 		3C4DE6FB259AD3FF0037D104 /* SaveToPhotosButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */; };
 		3C4DE6FC259AD3FF0037D104 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F5259AD3FF0037D104 /* MessageView.xib */; };
 		3C4DE6FD259AD3FF0037D104 /* CacheIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4DE6F6259AD3FF0037D104 /* CacheIcon.swift */; };
@@ -591,39 +618,40 @@
 		3C4C96B625B6ABED009FDE8D /* PhotoSlidesVC+Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Star.swift"; sourceTree = "<group>"; };
 		3C4D3788274756460010FD68 /* ContentPagingFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentPagingFlowLayout.swift; sourceTree = "<group>"; };
 		3C4D378A274756460010FD68 /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
-		3C4D378B274756470010FD68 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		3C4D378C274756470010FD68 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		3C4D378C274756470010FD68 /* Content.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Content.storyboard; sourceTree = "<group>"; };
 		3C4D378D274756470010FD68 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		3C4D378E274756470010FD68 /* TabViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewModel.swift; sourceTree = "<group>"; };
 		3C4D378F274756470010FD68 /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
 		3C4D3790274756470010FD68 /* Bridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
-		3C4D3791274756470010FD68 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		3C4D3792274756470010FD68 /* TabBarToolbars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarToolbars.swift; sourceTree = "<group>"; };
 		3C4D3793274756470010FD68 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		3C4D3794274756470010FD68 /* ToolbarViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarViewModel.swift; sourceTree = "<group>"; };
-		3C4D3795274756470010FD68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C4D3796274756470010FD68 /* ContentPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentPageViewController.swift; sourceTree = "<group>"; };
-		3C4D37AC274756980010FD68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3C4D37AE274756980010FD68 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3C4D37B0274756980010FD68 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3C4D37B3274756980010FD68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3C4D37B5274756990010FD68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3C4D37B8274756990010FD68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		3C4D37BA274756990010FD68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C4D37DF2747582D0010FD68 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3C4D37E1274758450010FD68 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3C4D37E3274758570010FD68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C4D3944274758D50010FD68 /* Find copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Find copy-Info.plist"; path = "/Users/aheze/Desktop/Code/Find Final/Find/Find copy-Info.plist"; sourceTree = "<absolute>"; };
 		3C4D3949274759240010FD68 /* TabController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabController.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C4D394B274759240010FD68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3C4D394D274759240010FD68 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3C4D394F274759240010FD68 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3C4D3952274759240010FD68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3C4D3954274759260010FD68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3C4D3957274759260010FD68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		3C4D3959274759260010FD68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C4D395D274759510010FD68 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3C4D396327475A650010FD68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3C4D396A27475B890010FD68 /* Camera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Camera.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C4D397E27475BB10010FD68 /* SettingsIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsIconView.swift; sourceTree = "<group>"; };
+		3C4D397F27475BB10010FD68 /* ResultsIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsIconView.swift; sourceTree = "<group>"; };
+		3C4D398127475BB10010FD68 /* Bridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
+		3C4D398327475BB10010FD68 /* Content.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Content.storyboard; sourceTree = "<group>"; };
+		3C4D398427475BB10010FD68 /* FocusIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusIconView.swift; sourceTree = "<group>"; };
+		3C4D398527475BB10010FD68 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		3C4D398727475BB10010FD68 /* FlashIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashIconView.swift; sourceTree = "<group>"; };
+		3C4D398827475BB10010FD68 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		3C4D399727475BF20010FD68 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3C4D399827475BF20010FD68 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C4D399927475BF20010FD68 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		3C4D399A27475BF20010FD68 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3C4D399B27475BF20010FD68 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3C4D39A527475D690010FD68 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+UIViewController.swift"; sourceTree = "<group>"; };
+		3C4D39C527475E8A0010FD68 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3C4D39C927475EBD0010FD68 /* Utilities+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+UIColor.swift"; sourceTree = "<group>"; };
 		3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaveToPhotosButton.xib; sourceTree = "<group>"; };
 		3C4DE6F5259AD3FF0037D104 /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
 		3C4DE6F6259AD3FF0037D104 /* CacheIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheIcon.swift; sourceTree = "<group>"; };
@@ -921,6 +949,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3C4D396727475B890010FD68 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C643F1626057806001E6FA1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1173,19 +1208,16 @@
 			isa = PBXGroup;
 			children = (
 				3C4D3790274756470010FD68 /* Bridge.swift */,
-				3C4D378B274756470010FD68 /* Constants.swift */,
+				3C4D378C274756470010FD68 /* Content.storyboard */,
+				3C4D3793274756470010FD68 /* TabBarController.swift */,
+				3C4D378E274756470010FD68 /* TabViewModel.swift */,
+				3C4D3792274756470010FD68 /* TabBarToolbars.swift */,
 				3C4D378F274756470010FD68 /* ContentCell.swift */,
 				3C4D3796274756470010FD68 /* ContentPageViewController.swift */,
 				3C4D3788274756460010FD68 /* ContentPagingFlowLayout.swift */,
-				3C4D378C274756470010FD68 /* Main.storyboard */,
-				3C4D3793274756470010FD68 /* TabBarController.swift */,
-				3C4D3792274756470010FD68 /* TabBarToolbars.swift */,
 				3C4D378A274756460010FD68 /* TabBarView.swift */,
 				3C4D378D274756470010FD68 /* TabBarViewController.swift */,
-				3C4D378E274756470010FD68 /* TabViewModel.swift */,
 				3C4D3794274756470010FD68 /* ToolbarViewModel.swift */,
-				3C4D3791274756470010FD68 /* Utilities.swift */,
-				3C4D3795274756470010FD68 /* Assets.xcassets */,
 				3C4D37A52747565E0010FD68 /* Testing */,
 			);
 			path = TabController;
@@ -1203,32 +1235,50 @@
 			path = Testing;
 			sourceTree = "<group>";
 		};
-		3C4D37AB274756980010FD68 /* TabController */ = {
+		3C4D396527475AB00010FD68 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				3C4D37AC274756980010FD68 /* AppDelegate.swift */,
-				3C4D37AE274756980010FD68 /* SceneDelegate.swift */,
-				3C4D37B0274756980010FD68 /* ViewController.swift */,
-				3C4D37B2274756980010FD68 /* Main.storyboard */,
-				3C4D37B5274756990010FD68 /* Assets.xcassets */,
-				3C4D37B7274756990010FD68 /* LaunchScreen.storyboard */,
-				3C4D37BA274756990010FD68 /* Info.plist */,
+				3C4D398127475BB10010FD68 /* Bridge.swift */,
+				3C4D398527475BB10010FD68 /* CameraController.swift */,
+				3C4D398827475BB10010FD68 /* CameraViewController.swift */,
+				3C4D398727475BB10010FD68 /* FlashIconView.swift */,
+				3C4D398427475BB10010FD68 /* FocusIconView.swift */,
+				3C4D398327475BB10010FD68 /* Content.storyboard */,
+				3C4D397F27475BB10010FD68 /* ResultsIconView.swift */,
+				3C4D397E27475BB10010FD68 /* SettingsIconView.swift */,
+				3C4D399427475BC00010FD68 /* Testing */,
 			);
-			path = TabController;
+			path = Camera;
 			sourceTree = "<group>";
 		};
-		3C4D394A274759240010FD68 /* TabController */ = {
+		3C4D399427475BC00010FD68 /* Testing */ = {
 			isa = PBXGroup;
 			children = (
-				3C4D394B274759240010FD68 /* AppDelegate.swift */,
-				3C4D394D274759240010FD68 /* SceneDelegate.swift */,
-				3C4D394F274759240010FD68 /* ViewController.swift */,
-				3C4D3951274759240010FD68 /* Main.storyboard */,
-				3C4D3954274759260010FD68 /* Assets.xcassets */,
-				3C4D3956274759260010FD68 /* LaunchScreen.storyboard */,
-				3C4D3959274759260010FD68 /* Info.plist */,
+				3C4D399727475BF20010FD68 /* AppDelegate.swift */,
+				3C4D399827475BF20010FD68 /* Info.plist */,
+				3C4D399927475BF20010FD68 /* Main.storyboard */,
+				3C4D399B27475BF20010FD68 /* SceneDelegate.swift */,
+				3C4D399A27475BF20010FD68 /* ViewController.swift */,
 			);
-			path = TabController;
+			path = Testing;
+			sourceTree = "<group>";
+		};
+		3C4D39A427475D5F0010FD68 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				3C4D39A527475D690010FD68 /* Utilities.swift */,
+				3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */,
+				3C4D39C927475EBD0010FD68 /* Utilities+UIColor.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		3C4D39C427475E800010FD68 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				3C4D39C527475E8A0010FD68 /* Constants.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		3C4DE6F3259AD3FF0037D104 /* Camera Buttons */ = {
@@ -2034,11 +2084,12 @@
 		4999AC872353A80A00AB06A7 = {
 			isa = PBXGroup;
 			children = (
+				3C4D39C427475E800010FD68 /* Shared */,
+				3C4D39A427475D5F0010FD68 /* Utilities */,
+				3C4D396527475AB00010FD68 /* Camera */,
 				3C4D3787274755FE0010FD68 /* TabController */,
 				4999AC922353A80A00AB06A7 /* Find */,
 				3C643F1A26057806001E6FA1 /* FindClip */,
-				3C4D37AB274756980010FD68 /* TabController */,
-				3C4D394A274759240010FD68 /* TabController */,
 				4999AC912353A80A00AB06A7 /* Products */,
 				F1113DDE71BB4BA2CD714E1A /* Pods */,
 				D0464F2926E9ACFCA3CD293D /* Frameworks */,
@@ -2052,6 +2103,7 @@
 				4999AC902353A80A00AB06A7 /* Find.app */,
 				3C643F1926057806001E6FA1 /* FindClip.app */,
 				3C4D3949274759240010FD68 /* TabController.app */,
+				3C4D396A27475B890010FD68 /* Camera.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2136,6 +2188,23 @@
 			productReference = 3C4D3949274759240010FD68 /* TabController.app */;
 			productType = "com.apple.product-type.application";
 		};
+		3C4D396927475B890010FD68 /* Camera */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C4D397B27475B8B0010FD68 /* Build configuration list for PBXNativeTarget "Camera" */;
+			buildPhases = (
+				3C4D396627475B890010FD68 /* Sources */,
+				3C4D396727475B890010FD68 /* Frameworks */,
+				3C4D396827475B890010FD68 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Camera;
+			productName = Camera;
+			productReference = 3C4D396A27475B890010FD68 /* Camera.app */;
+			productType = "com.apple.product-type.application";
+		};
 		3C643F1826057806001E6FA1 /* FindClip */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C643F3126057807001E6FA1 /* Build configuration list for PBXNativeTarget "FindClip" */;
@@ -2194,6 +2263,9 @@
 					3C4D3948274759240010FD68 = {
 						CreatedOnToolsVersion = 13.0;
 					};
+					3C4D396927475B890010FD68 = {
+						CreatedOnToolsVersion = 13.0;
+					};
 					3C643F1826057806001E6FA1 = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -2222,6 +2294,7 @@
 				4999AC8F2353A80A00AB06A7 /* Find */,
 				3C643F1826057806001E6FA1 /* FindClip */,
 				3C4D3948274759240010FD68 /* TabController */,
+				3C4D396927475B890010FD68 /* Camera */,
 			);
 		};
 /* End PBXProject section */
@@ -2232,8 +2305,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C4D395E274759510010FD68 /* Main.storyboard in Resources */,
-				3C4D3958274759260010FD68 /* LaunchScreen.storyboard in Resources */,
-				3C4D3955274759260010FD68 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C4D396827475B890010FD68 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C4D39CD27475F3E0010FD68 /* Content.storyboard in Resources */,
+				3C4D39CE27475F430010FD68 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2276,10 +2356,9 @@
 				4999ACA02353A81100AB06A7 /* LaunchScreen.storyboard in Resources */,
 				3C4DE6FC259AD3FF0037D104 /* MessageView.xib in Resources */,
 				3CA63F5A25C9274A001C295E /* PhotosMigrationView.xib in Resources */,
-				3C4D379A274756470010FD68 /* Main.storyboard in Resources */,
+				3C4D379A274756470010FD68 /* Content.storyboard in Resources */,
 				49B7A32D2390823C0070209F /* Colors.xcassets in Resources */,
 				3C4DE6FB259AD3FF0037D104 /* SaveToPhotosButton.xib in Resources */,
-				3C4D37A3274756470010FD68 /* Assets.xcassets in Resources */,
 				495DAD4024A6B37500D5F844 /* ListToolBar.xib in Resources */,
 				4999AC9D2353A81100AB06A7 /* Assets.xcassets in Resources */,
 				4999AC9B2353A80A00AB06A7 /* Main.storyboard in Resources */,
@@ -2374,9 +2453,43 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C4D39CB27475EBD0010FD68 /* Utilities+UIColor.swift in Sources */,
 				3C4D396427475A650010FD68 /* AppDelegate.swift in Sources */,
 				3C4D3962274759A40010FD68 /* SceneDelegate.swift in Sources */,
+				3C4D39AB27475DAD0010FD68 /* Utilities+UIViewController.swift in Sources */,
+				3C4D39A727475D690010FD68 /* Utilities.swift in Sources */,
 				3C4D3961274759A40010FD68 /* ViewController.swift in Sources */,
+				3C4D39C727475E8A0010FD68 /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C4D396627475B890010FD68 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C4D39CC27475EBD0010FD68 /* Utilities+UIColor.swift in Sources */,
+				3C4D39C327475E2C0010FD68 /* Utilities+UIViewController.swift in Sources */,
+				3C4D39B827475DE50010FD68 /* ToolbarViewModel.swift in Sources */,
+				3C4D39C227475E2C0010FD68 /* Utilities.swift in Sources */,
+				3C4D39BD27475DE50010FD68 /* TabBarToolbars.swift in Sources */,
+				3C4D39A127475C7C0010FD68 /* AppDelegate.swift in Sources */,
+				3C4D39C827475E8A0010FD68 /* Constants.swift in Sources */,
+				3C4D39B527475DE50010FD68 /* ContentPagingFlowLayout.swift in Sources */,
+				3C4D39A227475C7C0010FD68 /* SceneDelegate.swift in Sources */,
+				3C4D39B327475DC80010FD68 /* FlashIconView.swift in Sources */,
+				3C4D39BC27475DE50010FD68 /* TabBarView.swift in Sources */,
+				3C4D39AE27475DC80010FD68 /* Bridge.swift in Sources */,
+				3C4D39B127475DC80010FD68 /* FocusIconView.swift in Sources */,
+				3C4D39B227475DC80010FD68 /* CameraController.swift in Sources */,
+				3C4D39B427475DC80010FD68 /* SettingsIconView.swift in Sources */,
+				3C4D39AF27475DC80010FD68 /* CameraViewController.swift in Sources */,
+				3C4D39C127475DE50010FD68 /* ContentPageViewController.swift in Sources */,
+				3C4D39AD27475DC80010FD68 /* ResultsIconView.swift in Sources */,
+				3C4D39B927475DE50010FD68 /* ContentCell.swift in Sources */,
+				3C4D39B727475DE50010FD68 /* TabBarViewController.swift in Sources */,
+				3C4D39BE27475DE50010FD68 /* TabBarController.swift in Sources */,
+				3C4D39BB27475DE50010FD68 /* TabViewModel.swift in Sources */,
+				3C4D39A327475C7D0010FD68 /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2562,6 +2675,7 @@
 				49563520243694BC0001E8C6 /* PaperOnboardingDataSource.swift in Sources */,
 				3C5B157825A8CE7E00BB8988 /* PhotosVC+NavBar.swift in Sources */,
 				4988FC4823BEF89600199635 /* ListModel.swift in Sources */,
+				3C4D39CA27475EBD0010FD68 /* Utilities+UIColor.swift in Sources */,
 				3C8CFC5C25AAE02D004FF194 /* PhotoSlidesVC+Actions.swift in Sources */,
 				3CAC4DD025BF611100CC7948 /* CameraVC+Draw.swift in Sources */,
 				3C22D3E82702D578001E8474 /* PagingMenuPosition.swift in Sources */,
@@ -2583,7 +2697,6 @@
 				3C22D3F22702D578001E8474 /* PagingViewControllerInfiniteDataSource.swift in Sources */,
 				3C22D3D12702D578001E8474 /* PagingCellLayoutAttributes.swift in Sources */,
 				3C8B649325BB6EC0008F1535 /* PhotoSlidesVC+FastFind.swift in Sources */,
-				3C4D379F274756470010FD68 /* Utilities.swift in Sources */,
 				3C369709259EEFE500A6544A /* PhotosMigrationView.swift in Sources */,
 				3C22D3EE2702D578001E8474 /* PagingBorderOptions.swift in Sources */,
 				3CFF312525AA490900D3C56D /* PhotoSlidesVC+Gestures.swift in Sources */,
@@ -2647,6 +2760,7 @@
 				3C42C45025C3465F004DC6E9 /* SingleWebView.swift in Sources */,
 				3CE306D9259AC46400F1B2E2 /* ListsIcon.swift in Sources */,
 				3C3B6C7A25D32FE90082B86C /* PhotoSlidesVC+CacheHandler.swift in Sources */,
+				3C4D39C627475E8A0010FD68 /* Constants.swift in Sources */,
 				495F38FC2432C8FE00A17D93 /* Carte.swift in Sources */,
 				3C4D3797274756470010FD68 /* ContentPagingFlowLayout.swift in Sources */,
 				4904524C2379072F0046570D /* UpdateMatches.swift in Sources */,
@@ -2737,7 +2851,6 @@
 				49563503243593860001E8C6 /* TutorialViewControllers.swift in Sources */,
 				3C020CE5259FF5A70087AE92 /* ViewController+Migration.swift in Sources */,
 				49D985B024188CA4005F4E92 /* NewListToolbarCell.swift in Sources */,
-				3C4D3799274756470010FD68 /* Constants.swift in Sources */,
 				3C8B648D25BB4FDB008F1535 /* PhotoSlidesVC+FindFromCache.swift in Sources */,
 				3C570E1C260CE52200F5AA4D /* CameraVC+Accessibility.swift in Sources */,
 				3C1FE21625BB423E004DC9EF /* SlideFindBar.swift in Sources */,
@@ -2753,6 +2866,7 @@
 				4956351E243694BC0001E8C6 /* PaperOnboardingDelegate.swift in Sources */,
 				4979A39023AF3A4800B09380 /* FastFind.swift in Sources */,
 				3C22D4042702D578001E8474 /* PagingCellViewModel.swift in Sources */,
+				3C4D39AA27475DAD0010FD68 /* Utilities+UIViewController.swift in Sources */,
 				3C4C96B725B6ABEE009FDE8D /* PhotoSlidesVC+Star.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2768,38 +2882,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3C4D37B2274756980010FD68 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3C4D37B3274756980010FD68 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		3C4D37B7274756990010FD68 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3C4D37B8274756990010FD68 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		3C4D3951274759240010FD68 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3C4D3952274759240010FD68 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		3C4D3956274759260010FD68 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3C4D3957274759260010FD68 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		3CA63F3825C7BA64001C295E /* TabBar.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2957,6 +3039,68 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.TabController;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3C4D397C27475B8B0010FD68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YA533DMD5J;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Camera/Testing/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.Camera;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3C4D397D27475B8B0010FD68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YA533DMD5J;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Camera/Testing/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.Camera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -3194,6 +3338,15 @@
 			buildConfigurations = (
 				3C4D395B274759260010FD68 /* Debug */,
 				3C4D395C274759260010FD68 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3C4D397B27475B8B0010FD68 /* Build configuration list for PBXNativeTarget "Camera" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C4D397C27475B8B0010FD68 /* Debug */,
+				3C4D397D27475B8B0010FD68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
