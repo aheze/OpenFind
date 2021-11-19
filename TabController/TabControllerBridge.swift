@@ -1,5 +1,5 @@
 //
-//  Bridge.swift
+//  TabControllerBridge.swift
 //  TabBarController
 //
 //  Created by Zheng on 10/28/21.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public struct Bridge {
+public struct TabControllerBridge {
     public static func makeTabController<CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View>(
         pageViewControllers: [PageViewController],
         toolbarViewModel: ToolbarViewModel,

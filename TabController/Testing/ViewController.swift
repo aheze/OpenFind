@@ -6,21 +6,22 @@
 //  Copyright © 2021 Andrew. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
 class ViewController: UIViewController {
+    
     lazy var photos: PhotosController = {
-        return Photos.Bridge.makeController()
+        return PhotosBridge.makeController()
     }()
     lazy var camera: CameraController = {
-        return Camera.Bridge.makeController()
+        return CameraBridge.makeController()
     }()
     lazy var lists: ListsController = {
-        return Lists.Bridge.makeController()
+        return ListsBridge.makeController()
     }()
     
     var toolbarViewModel: ToolbarViewModel!
-    lazy var tabController: TabBarController<Camera.CameraToolbarView, Photos.PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {
+    lazy var tabController: TabBarController<CameraToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {
         toolbarViewModel = ToolbarViewModel()
         
         
@@ -37,7 +38,7 @@ class ViewController: UIViewController {
             }
         }
         
-        let tabController = Bridge.makeTabController(
+        let tabController = TabControllerBridge.makeTabController(
             pageViewControllers: [photos.viewController, camera.viewController, lists.viewController],
             toolbarViewModel: toolbarViewModel,
             cameraToolbarView: camera.viewController.toolbar,
@@ -56,6 +57,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         print("load!")
         
-        view.backgroundColor = .green
+        _ = tabController
+    }
+}
+
+extension ViewController: TabBarControllerDelegate{
+    
+    func willBeginNavigatingTo(tab: TabState) {
+        
+    }
+    
+    func didFinishNavigatingTo(tab: TabState) {
+        
     }
 }

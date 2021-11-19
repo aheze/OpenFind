@@ -69,7 +69,7 @@ public class TabBarController<
         self.photosDetailToolbarView = photosDetailToolbarView
         self.listsSelectionToolbarView = listsSelectionToolbarView
         
-        let storyboard = UIStoryboard(name: "Content", bundle: nil)
+        let storyboard = UIStoryboard(name: "TabContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
         self.viewController = viewController
         viewController.loadViewIfNeeded() /// needed to initialize outlets

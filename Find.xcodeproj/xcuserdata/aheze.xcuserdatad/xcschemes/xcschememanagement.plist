@@ -9,11 +9,6 @@
 			<key>orderHint</key>
 			<integer>15</integer>
 		</dict>
-		<key>Find copy.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>14</integer>
-		</dict>
 		<key>Find.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -24,6 +19,16 @@
 			<key>orderHint</key>
 			<integer>12</integer>
 		</dict>
+		<key>Lists.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>17</integer>
+		</dict>
+		<key>Photos.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>16</integer>
+		</dict>
 		<key>TabController.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -33,6 +38,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>3C4D37A9274756980010FD68</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3C4D3948274759240010FD68</key>
 		<dict>
 			<key>primary</key>
 			<true/>
