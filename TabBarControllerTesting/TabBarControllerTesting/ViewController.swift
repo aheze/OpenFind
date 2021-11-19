@@ -7,6 +7,7 @@
 
 import SwiftUI
 import TabBarController
+import Camera
 
 class ViewController: UIViewController {
 
@@ -21,12 +22,8 @@ class ViewController: UIViewController {
         }
         fatalError()
     }()
-    lazy var cameraViewController: CameraViewController = {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let viewController = storyboard.instantiateViewController(withIdentifier: "CameraViewController") as? CameraViewController {
-            return viewController
-        }
-        fatalError()
+    lazy var camera: CameraController = {
+        return Camera.Bridge.makeController()
     }()
     lazy var listsViewController: ListsViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -37,7 +34,7 @@ class ViewController: UIViewController {
     }()
     
     var toolbarViewModel: ToolbarViewModel!
-    lazy var tabController: TabBarController<CameraToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {
+    lazy var tabController: TabBarController<Camera.CameraToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {
         toolbarViewModel = ToolbarViewModel()
         
         
@@ -55,9 +52,9 @@ class ViewController: UIViewController {
         }
         
         let tabController = Bridge.makeTabController(
-            pageViewControllers: [photosViewController, cameraViewController, listsViewController],
+            pageViewControllers: [photosViewController, camera.viewController, listsViewController],
             toolbarViewModel: toolbarViewModel,
-            cameraToolbarView: cameraViewController.toolbar,
+            cameraToolbarView: camera.viewController.toolbar,
             photosSelectionToolbarView: photosViewController.selectionToolbar,
             photosDetailToolbarView: photosViewController.selectionToolbar,
             listsSelectionToolbarView: photosViewController.selectionToolbar
@@ -84,15 +81,15 @@ extension ViewController: TabBarControllerDelegate {
         switch tab {
         case .photos:
             photosViewController.willBecomeActive()
-            cameraViewController.willBecomeInactive()
+            camera.viewController.willBecomeInactive()
             listsViewController.willBecomeInactive()
         case .camera:
             photosViewController.willBecomeInactive()
-            cameraViewController.willBecomeActive()
+            camera.viewController.willBecomeActive()
             listsViewController.willBecomeInactive()
         case .lists:
             photosViewController.willBecomeInactive()
-            cameraViewController.willBecomeInactive()
+            camera.viewController.willBecomeInactive()
             listsViewController.willBecomeActive()
         default: break
         }
@@ -102,15 +99,15 @@ extension ViewController: TabBarControllerDelegate {
         switch tab {
         case .photos:
             photosViewController.didBecomeActive()
-            cameraViewController.didBecomeInactive()
+            camera.viewController.didBecomeInactive()
             listsViewController.didBecomeInactive()
         case .camera:
             photosViewController.didBecomeInactive()
-            cameraViewController.didBecomeActive()
+            camera.viewController.didBecomeActive()
             listsViewController.didBecomeInactive()
         case .lists:
             photosViewController.didBecomeInactive()
-            cameraViewController.didBecomeInactive()
+            camera.viewController.didBecomeInactive()
             listsViewController.didBecomeActive()
         default: break
         }

@@ -16,6 +16,8 @@
 		3C33795B272BBB650055A73A /* TabBarController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C33795A272BBB650055A73A /* TabBarController.framework */; };
 		3C33795C272BBB650055A73A /* TabBarController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C33795A272BBB650055A73A /* TabBarController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C430CC8273CB0E700E19B77 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C430CC7273CB0E700E19B77 /* CameraViewController.swift */; };
+		3C4D363E2747325E0010FD68 /* Camera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4D363D2747325E0010FD68 /* Camera.framework */; };
+		3C4D363F2747325E0010FD68 /* Camera.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4D363D2747325E0010FD68 /* Camera.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C80C9A327402F6300E1BFB8 /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C80C9A227402F6300E1BFB8 /* ListsViewController.swift */; };
 		3CE0AB45273CC21C0021BD9C /* FlashIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0AB44273CC21C0021BD9C /* FlashIconView.swift */; };
 		3CE0AB47273E50210021BD9C /* FocusIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0AB46273E50210021BD9C /* FocusIconView.swift */; };
@@ -33,6 +35,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				3C33795C272BBB650055A73A /* TabBarController.framework in Embed Frameworks */,
+				3C4D363F2747325E0010FD68 /* Camera.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -50,6 +53,7 @@
 		3C337953272BBB540055A73A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C33795A272BBB650055A73A /* TabBarController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TabBarController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C430CC7273CB0E700E19B77 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		3C4D363D2747325E0010FD68 /* Camera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Camera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C80C9A227402F6300E1BFB8 /* ListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
 		3CE0AB44273CC21C0021BD9C /* FlashIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashIconView.swift; sourceTree = "<group>"; };
 		3CE0AB46273E50210021BD9C /* FocusIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusIconView.swift; sourceTree = "<group>"; };
@@ -65,6 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C33795B272BBB650055A73A /* TabBarController.framework in Frameworks */,
+				3C4D363E2747325E0010FD68 /* Camera.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +118,7 @@
 		3C337959272BBB640055A73A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3C4D363D2747325E0010FD68 /* Camera.framework */,
 				3C33795A272BBB650055A73A /* TabBarController.framework */,
 			);
 			name = Frameworks;
