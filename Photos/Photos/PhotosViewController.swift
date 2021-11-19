@@ -1,45 +1,27 @@
 //
 //  PhotosViewController.swift
-//  TabBarControllerTesting
+//  Photos
 //
-//  Created by Zheng on 11/12/21.
+//  Created by Zheng on 11/18/21.
 //
 
 import SwiftUI
 import TabBarController
 
-class PhotosViewController: UIViewController, PageViewController {
+public class PhotosViewController: UIViewController, PageViewController {
     
-    var tabType: TabState = .photos
+    public var tabType: TabState = .photos
     var photosSelectionViewModel: ToolbarViewModel.PhotosSelection!
     
-    lazy var selectionToolbar: PhotosSelectionToolbarView = {
+    public lazy var selectionToolbar: PhotosSelectionToolbarView = {
         self.photosSelectionViewModel = .init()
         return PhotosSelectionToolbarView(viewModel: photosSelectionViewModel)
     }()
     
-    var getActiveToolbarViewModel: (() -> ToolbarViewModel)?
-    var activateSelectionToolbar: ((Bool) -> Void)?
+    public var getActiveToolbarViewModel: (() -> ToolbarViewModel)?
+    public var activateSelectionToolbar: ((Bool) -> Void)?
     
-    @IBAction func button1Pressed(_ sender: Any) {
-        if let activeToolbarViewModel = getActiveToolbarViewModel?() {
-            if activeToolbarViewModel.toolbar == .photosSelection {
-                self.activateSelectionToolbar?(false)
-            } else {
-                self.activateSelectionToolbar?(true)
-            }
-        }
-    }
-    @IBAction func button2Pressed(_ sender: Any) {
-        /// add
-        photosSelectionViewModel.selectedCount += 1
-    }
-    @IBAction func button3Pressed(_ sender: Any) {
-        /// subtract
-        photosSelectionViewModel.selectedCount -= 1
-    }
-    
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         print("Photos loaded")
         
@@ -47,27 +29,27 @@ class PhotosViewController: UIViewController, PageViewController {
 }
 
 extension PhotosViewController {
-    func willBecomeActive() {
+    public func willBecomeActive() {
         
     }
     
-    func didBecomeActive() {
+    public func didBecomeActive() {
         
     }
     
-    func willBecomeInactive() {
+    public func willBecomeInactive() {
         self.activateSelectionToolbar?(false)
     }
     
-    func didBecomeInactive() {
+    public func didBecomeInactive() {
         
     }
 }
 
-struct PhotosSelectionToolbarView: View {
+public struct PhotosSelectionToolbarView: View {
     @ObservedObject var viewModel: ToolbarViewModel.PhotosSelection
     
-    var body: some View {
+    public var body: some View {
         HStack {
             ToolbarIconButton(iconName: viewModel.starOn ? "star.fill" : "star") {
                 viewModel.starOn.toggle()

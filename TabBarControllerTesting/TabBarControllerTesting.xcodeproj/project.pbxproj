@@ -17,9 +17,11 @@
 		3C33795C272BBB650055A73A /* TabBarController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C33795A272BBB650055A73A /* TabBarController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C4D363E2747325E0010FD68 /* Camera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4D363D2747325E0010FD68 /* Camera.framework */; };
 		3C4D363F2747325E0010FD68 /* Camera.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4D363D2747325E0010FD68 /* Camera.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3C80C9A327402F6300E1BFB8 /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C80C9A227402F6300E1BFB8 /* ListsViewController.swift */; };
+		3C4D36B827473BA70010FD68 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4D36B727473BA70010FD68 /* Photos.framework */; };
+		3C4D36B927473BA70010FD68 /* Photos.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4D36B727473BA70010FD68 /* Photos.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3C4D36BB27473BAA0010FD68 /* Lists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4D36BA27473BAA0010FD68 /* Lists.framework */; };
+		3C4D36BC27473BAA0010FD68 /* Lists.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4D36BA27473BAA0010FD68 /* Lists.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3CE0AB49273E503E0021BD9C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0AB48273E503E0021BD9C /* Constants.swift */; };
-		3CE0AB51273F26D40021BD9C /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0AB50273F26D40021BD9C /* PhotosViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +33,8 @@
 			files = (
 				3C33795C272BBB650055A73A /* TabBarController.framework in Embed Frameworks */,
 				3C4D363F2747325E0010FD68 /* Camera.framework in Embed Frameworks */,
+				3C4D36BC27473BAA0010FD68 /* Lists.framework in Embed Frameworks */,
+				3C4D36B927473BA70010FD68 /* Photos.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,9 +52,9 @@
 		3C337953272BBB540055A73A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C33795A272BBB650055A73A /* TabBarController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TabBarController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C4D363D2747325E0010FD68 /* Camera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Camera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C80C9A227402F6300E1BFB8 /* ListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
+		3C4D36B727473BA70010FD68 /* Photos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Photos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C4D36BA27473BAA0010FD68 /* Lists.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Lists.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CE0AB48273E503E0021BD9C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		3CE0AB50273F26D40021BD9C /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 			files = (
 				3C33795B272BBB650055A73A /* TabBarController.framework in Frameworks */,
 				3C4D363E2747325E0010FD68 /* Camera.framework in Frameworks */,
+				3C4D36BB27473BAA0010FD68 /* Lists.framework in Frameworks */,
+				3C4D36B827473BA70010FD68 /* Photos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,8 +96,6 @@
 				3C337947272BBB520055A73A /* SceneDelegate.swift */,
 				3CE0AB48273E503E0021BD9C /* Constants.swift */,
 				3C337949272BBB520055A73A /* ViewController.swift */,
-				3CE0AB50273F26D40021BD9C /* PhotosViewController.swift */,
-				3C80C9A227402F6300E1BFB8 /* ListsViewController.swift */,
 				3C33794B272BBB520055A73A /* Main.storyboard */,
 				3C33794E272BBB540055A73A /* Assets.xcassets */,
 				3C337950272BBB540055A73A /* LaunchScreen.storyboard */,
@@ -103,6 +107,8 @@
 		3C337959272BBB640055A73A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3C4D36BA27473BAA0010FD68 /* Lists.framework */,
+				3C4D36B727473BA70010FD68 /* Photos.framework */,
 				3C4D363D2747325E0010FD68 /* Camera.framework */,
 				3C33795A272BBB650055A73A /* TabBarController.framework */,
 			);
@@ -181,12 +187,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C80C9A327402F6300E1BFB8 /* ListsViewController.swift in Sources */,
 				3C33794A272BBB520055A73A /* ViewController.swift in Sources */,
 				3CE0AB49273E503E0021BD9C /* Constants.swift in Sources */,
 				3C337946272BBB520055A73A /* AppDelegate.swift in Sources */,
 				3C337948272BBB520055A73A /* SceneDelegate.swift in Sources */,
-				3CE0AB51273F26D40021BD9C /* PhotosViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

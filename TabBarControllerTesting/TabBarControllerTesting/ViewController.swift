@@ -7,38 +7,28 @@
 
 import SwiftUI
 import TabBarController
+import Photos
 import Camera
+import Lists
 
 class ViewController: UIViewController {
 
-    lazy var photosViewController: PhotosViewController = {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let viewController = storyboard.instantiateViewController(withIdentifier: "PhotosViewController") as? PhotosViewController {
-            viewController.getActiveToolbarViewModel = { [weak self] in
-                guard let self = self else { return ToolbarViewModel() }
-                return self.toolbarViewModel
-            }
-            return viewController
-        }
-        fatalError()
+    lazy var photos: PhotosController = {
+        return Photos.Bridge.makeController()
     }()
     lazy var camera: CameraController = {
         return Camera.Bridge.makeController()
     }()
-    lazy var listsViewController: ListsViewController = {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let viewController = storyboard.instantiateViewController(withIdentifier: "ListsViewController") as? ListsViewController {
-            return viewController
-        }
-        fatalError()
+    lazy var lists: ListsController = {
+        return Lists.Bridge.makeController()
     }()
     
     var toolbarViewModel: ToolbarViewModel!
-    lazy var tabController: TabBarController<Camera.CameraToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {
+    lazy var tabController: TabBarController<Camera.CameraToolbarView, Photos.PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {
         toolbarViewModel = ToolbarViewModel()
         
         
-        photosViewController.activateSelectionToolbar = { [weak self] activate in
+        photos.viewController.activateSelectionToolbar = { [weak self] activate in
             guard let self = self else { return }
             if activate {
                 withAnimation {
@@ -52,12 +42,12 @@ class ViewController: UIViewController {
         }
         
         let tabController = Bridge.makeTabController(
-            pageViewControllers: [photosViewController, camera.viewController, listsViewController],
+            pageViewControllers: [photos.viewController, camera.viewController, lists.viewController],
             toolbarViewModel: toolbarViewModel,
             cameraToolbarView: camera.viewController.toolbar,
-            photosSelectionToolbarView: photosViewController.selectionToolbar,
-            photosDetailToolbarView: photosViewController.selectionToolbar,
-            listsSelectionToolbarView: photosViewController.selectionToolbar
+            photosSelectionToolbarView: photos.viewController.selectionToolbar,
+            photosDetailToolbarView: photos.viewController.selectionToolbar,
+            listsSelectionToolbarView: photos.viewController.selectionToolbar
         )
         
         tabController.delegate = self
@@ -80,17 +70,17 @@ extension ViewController: TabBarControllerDelegate {
     func willBeginNavigatingTo(tab: TabState) {
         switch tab {
         case .photos:
-            photosViewController.willBecomeActive()
+            photos.viewController.willBecomeActive()
             camera.viewController.willBecomeInactive()
-            listsViewController.willBecomeInactive()
+            lists.viewController.willBecomeInactive()
         case .camera:
-            photosViewController.willBecomeInactive()
+            photos.viewController.willBecomeInactive()
             camera.viewController.willBecomeActive()
-            listsViewController.willBecomeInactive()
+            lists.viewController.willBecomeInactive()
         case .lists:
-            photosViewController.willBecomeInactive()
+            photos.viewController.willBecomeInactive()
             camera.viewController.willBecomeInactive()
-            listsViewController.willBecomeActive()
+            lists.viewController.willBecomeActive()
         default: break
         }
     }
@@ -98,17 +88,17 @@ extension ViewController: TabBarControllerDelegate {
     func didFinishNavigatingTo(tab: TabState) {
         switch tab {
         case .photos:
-            photosViewController.didBecomeActive()
+            photos.viewController.didBecomeActive()
             camera.viewController.didBecomeInactive()
-            listsViewController.didBecomeInactive()
+            lists.viewController.didBecomeInactive()
         case .camera:
-            photosViewController.didBecomeInactive()
+            photos.viewController.didBecomeInactive()
             camera.viewController.didBecomeActive()
-            listsViewController.didBecomeInactive()
+            lists.viewController.didBecomeInactive()
         case .lists:
-            photosViewController.didBecomeInactive()
+            photos.viewController.didBecomeInactive()
             camera.viewController.didBecomeInactive()
-            listsViewController.didBecomeActive()
+            lists.viewController.didBecomeActive()
         default: break
         }
     }

@@ -6,15 +6,29 @@
    </FileRef>
    <Group
       location = "container:"
-      name = "Camera Frameworks">
+      name = "Photos Frameworks">
       <FileRef
-         location = "group:LivePreview/LivePreview.xcodeproj">
+         location = "group:Photos/Photos.xcodeproj">
       </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "Camera Frameworks">
       <FileRef
          location = "group:Camera/Camera.xcodeproj">
       </FileRef>
       <FileRef
+         location = "group:LivePreview/LivePreview.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:Settings/Settings.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "Lists Frameworks">
+      <FileRef
+         location = "group:Lists/Lists.xcodeproj">
       </FileRef>
    </Group>
    <Group

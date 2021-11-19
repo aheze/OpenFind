@@ -16,6 +16,5 @@ public class CameraController {
         let viewController = storyboard.instantiateViewController(withIdentifier: "CameraViewController") as! CameraViewController
         self.viewController = viewController
         viewController.loadViewIfNeeded() /// needed to initialize outlets
-    
     }
 }
