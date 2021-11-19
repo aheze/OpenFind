@@ -161,9 +161,7 @@ public class TabBarController<
         }
     }
     
-//    func collec
     public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print("Will display cell at: \(indexPath)")
         switch indexPath.item {
         case 0:
             delegate?.willBeginNavigatingTo(tab: .photos)
@@ -189,7 +187,6 @@ public class TabBarController<
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? ContentCell else { return UICollectionViewCell() }
-        print("Cell for \(indexPath.item)")
         return cell
     }
 }

@@ -38,8 +38,6 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     /// prepared before?
     var preparedOnce = false
     
-    var isInvalid = false
-    
     /// get data
     var getTabs: (() -> [TabState])?
     
@@ -108,17 +106,6 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         self.contentSize = CGSize(width: currentOrigin, height: height)
         self.layoutAttributes = layoutAttributes
         
-        if isInvalid {
-            isInvalid = false
-            print("Invalid, \(currentIndex)")
-            
-            if
-                let targetPageOffset = layoutAttributes[safe: currentIndex]?.fullOrigin,
-                currentOffset != targetPageOffset
-            {
-                    collectionView.contentOffset.x = targetPageOffset
-            }
-        }
         
         currentOffset = collectionView.contentOffset.x
     }
@@ -129,20 +116,22 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
     override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
         let context = super.invalidationContext(forBoundsChange: newBounds) as! UICollectionViewFlowLayoutInvalidationContext
         let boundsChanged = newBounds.size != collectionView?.bounds.size
-        
         context.invalidateFlowLayoutAttributes = boundsChanged
         context.invalidateFlowLayoutDelegateMetrics = boundsChanged
-        
-        if boundsChanged {
-            isInvalid = true
-        }
         return context
     }
     
+    /// called upon finger lift
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         return getTargetOffset(for: proposedContentOffset, velocity: velocity.x)
     }
-
+    
+    /// called after rotation
+    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
+        let attributes = layoutAttributes[safe: currentIndex]
+        return CGPoint(x: attributes?.fullOrigin ?? proposedContentOffset.x, y: 0)
+    }
+    
     func getTargetOffset(for point: CGPoint, velocity: CGFloat) -> CGPoint {
         let proposedOffset = point.x
 
@@ -191,3 +180,5 @@ class ContentPagingFlowLayout: UICollectionViewFlowLayout {
         return CGPoint(x: closestAttribute?.fullOrigin ?? point.x, y: 0)
     }
 }
+
+

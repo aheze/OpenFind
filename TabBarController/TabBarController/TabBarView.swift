@@ -104,7 +104,7 @@ struct CameraButton: View {
             withAnimation(.easeOut(duration: 0.3)) {
                 tabViewModel.tabState = tabType
             }
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 tabViewModel.updateTabBarHeight?(tabType)
             }
         } label: {
@@ -152,7 +152,7 @@ struct IconButton<Content: View>: View {
             withAnimation(.easeOut(duration: 0.3)) {
                 tabViewModel.tabState = tabType
             }
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 tabViewModel.updateTabBarHeight?(tabType)
             }
         } label: {
