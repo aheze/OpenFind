@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RightView" customModule="SearchBar" customModuleProvider="target">
+            <connections>
+                <outlet property="buttonView" destination="SwR-aI-9wd" id="DyR-SE-DWK"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="Pmu-o2-jnO"/>
+                <outlet property="imageView" destination="JHh-hv-mBy" id="3iS-Ou-TxE"/>
+                <outlet property="imageViewHeightC" destination="gIf-qF-nyl" id="5n7-mk-VV4"/>
+                <outlet property="imageViewWidthC" destination="RPa-Je-1El" id="RK6-m2-urg"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SwR-aI-9wd" customClass="ButtonView" customModule="SearchBar" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FindIcon" translatesAutoresizingMaskIntoConstraints="NO" id="JHh-hv-mBy">
+                            <rect key="frame" x="34" y="34" width="32" height="32"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="32" id="RPa-Je-1El"/>
+                                <constraint firstAttribute="height" constant="32" id="gIf-qF-nyl"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="yyL-1t-Aha"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="JHh-hv-mBy" firstAttribute="centerY" secondItem="SwR-aI-9wd" secondAttribute="centerY" id="APl-cA-UZz"/>
+                        <constraint firstItem="JHh-hv-mBy" firstAttribute="centerX" secondItem="SwR-aI-9wd" secondAttribute="centerX" id="QXy-WC-ljH"/>
+                        <constraint firstItem="JHh-hv-mBy" firstAttribute="centerY" secondItem="SwR-aI-9wd" secondAttribute="centerY" id="grQ-7U-Zwl"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="SwR-aI-9wd" secondAttribute="bottom" id="E3U-FO-RR1"/>
+                <constraint firstItem="SwR-aI-9wd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="N5l-OK-tdp"/>
+                <constraint firstItem="SwR-aI-9wd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TSM-V7-mpo"/>
+                <constraint firstAttribute="trailing" secondItem="SwR-aI-9wd" secondAttribute="trailing" id="XJu-dN-Orj"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="132" y="108"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="FindIcon" width="24" height="24"/>
+    </resources>
+</document>

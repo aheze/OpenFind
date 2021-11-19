@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="37u-ag-Aww" customClass="SearchFieldCell" customModule="SearchBar" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="658" height="157"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ide-Nt-j59">
+                <rect key="frame" x="0.0" y="0.0" width="658" height="157"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3YU-hQ-dhy">
+                        <rect key="frame" x="12" y="8" width="634" height="141"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FoT-tx-FJE" customClass="LeftView" customModule="SearchBar" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="80" height="141"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" identifier="Left View Width" id="xUv-fk-h6p"/>
+                                </constraints>
+                            </view>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8OT-QC-iKm">
+                                <rect key="frame" x="80" y="0.0" width="474" height="141"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" name="100Blue"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQg-Mx-Rfv" customClass="RightView" customModule="SearchBar" customModuleProvider="target">
+                                <rect key="frame" x="554" y="0.0" width="80" height="141"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" identifier="Right View Width" id="mL2-CE-mBE"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v90-ox-xGV">
+                                <rect key="frame" x="305" y="58.5" width="24" height="24"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="TZ6-Wt-gjW">
+                                        <rect key="frame" x="0.0" y="2" width="24" height="20"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" identifier="Add New WIdth" id="Sxc-XY-Xa1"/>
+                                    <constraint firstAttribute="bottom" secondItem="TZ6-Wt-gjW" secondAttribute="bottom" identifier="Add New View / Image - Bottom" id="cxM-k4-osw"/>
+                                    <constraint firstAttribute="height" constant="24" identifier="Add New Height" id="fEY-hg-Mh1"/>
+                                    <constraint firstAttribute="trailing" secondItem="TZ6-Wt-gjW" secondAttribute="trailing" identifier="Add New View / Image - Right" id="gDB-It-y1M"/>
+                                    <constraint firstItem="TZ6-Wt-gjW" firstAttribute="leading" secondItem="v90-ox-xGV" secondAttribute="leading" identifier="Add New View / Image - Left" id="lCa-kQ-sid"/>
+                                    <constraint firstItem="TZ6-Wt-gjW" firstAttribute="top" secondItem="v90-ox-xGV" secondAttribute="top" identifier="Add New View / Image - Top" id="mer-on-QXO"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="v90-ox-xGV" firstAttribute="centerX" secondItem="3YU-hQ-dhy" secondAttribute="centerX" identifier="Add New Center X With Superview" id="0cb-cP-re4"/>
+                            <constraint firstAttribute="bottom" secondItem="FoT-tx-FJE" secondAttribute="bottom" identifier="Left View Bottom" id="16p-Az-8gA"/>
+                            <constraint firstAttribute="trailing" secondItem="oQg-Mx-Rfv" secondAttribute="trailing" identifier="Right View Right" id="1nR-O8-bXu"/>
+                            <constraint firstItem="FoT-tx-FJE" firstAttribute="top" secondItem="3YU-hQ-dhy" secondAttribute="top" identifier="Left View Top" id="QUl-Rf-RPR"/>
+                            <constraint firstItem="FoT-tx-FJE" firstAttribute="leading" secondItem="3YU-hQ-dhy" secondAttribute="leading" identifier="Left View Left" id="X1C-gT-nng"/>
+                            <constraint firstItem="8OT-QC-iKm" firstAttribute="leading" secondItem="FoT-tx-FJE" secondAttribute="trailing" identifier="Left View - Text Field" id="br7-Qw-89x"/>
+                            <constraint firstAttribute="bottom" secondItem="8OT-QC-iKm" secondAttribute="bottom" identifier="Text Field Bottom" id="fu9-do-PoE"/>
+                            <constraint firstItem="oQg-Mx-Rfv" firstAttribute="top" secondItem="3YU-hQ-dhy" secondAttribute="top" identifier="Right View Top" id="gur-Qf-tve"/>
+                            <constraint firstAttribute="bottom" secondItem="oQg-Mx-Rfv" secondAttribute="bottom" identifier="Right View Bottom" id="kqL-06-Fkk"/>
+                            <constraint firstItem="v90-ox-xGV" firstAttribute="centerY" secondItem="3YU-hQ-dhy" secondAttribute="centerY" identifier="Add New Center Vertically" id="oL6-OB-5bn"/>
+                            <constraint firstItem="8OT-QC-iKm" firstAttribute="top" secondItem="3YU-hQ-dhy" secondAttribute="top" identifier="Text Field Top" id="oMz-7c-xgL"/>
+                            <constraint firstItem="oQg-Mx-Rfv" firstAttribute="leading" secondItem="8OT-QC-iKm" secondAttribute="trailing" identifier="Text Field - Right View" id="pOZ-4x-pS5"/>
+                            <constraint firstItem="v90-ox-xGV" firstAttribute="centerX" secondItem="oQg-Mx-Rfv" secondAttribute="centerX" identifier="Add New Center Horizontally With Right" id="vXb-tt-rEQ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="vXb-tt-rEQ"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="3YU-hQ-dhy" secondAttribute="bottom" constant="8" identifier="Base View Bottom" id="QxN-2M-ryv"/>
+                    <constraint firstItem="3YU-hQ-dhy" firstAttribute="leading" secondItem="Ide-Nt-j59" secondAttribute="leading" constant="12" identifier="Base View Left" id="VKk-s5-IDu"/>
+                    <constraint firstAttribute="trailing" secondItem="3YU-hQ-dhy" secondAttribute="trailing" constant="12" identifier="Base View Right" id="Yyz-l0-fZZ"/>
+                    <constraint firstItem="3YU-hQ-dhy" firstAttribute="top" secondItem="Ide-Nt-j59" secondAttribute="top" constant="8" identifier="Base View Top" id="bZQ-H4-nxj"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="658" height="157"/>
+            <connections>
+                <outlet property="addNewImageView" destination="TZ6-Wt-gjW" id="xpW-gl-Ah7"/>
+                <outlet property="addNewView" destination="v90-ox-xGV" id="RHH-4U-PJT"/>
+                <outlet property="addNewViewCenterHorizontallyWithRightC" destination="vXb-tt-rEQ" id="Ahh-s8-xG6"/>
+                <outlet property="addNewViewCenterHorizontallyWithSuperview" destination="0cb-cP-re4" id="om6-Rn-WlB"/>
+                <outlet property="addNewViewHeightC" destination="fEY-hg-Mh1" id="Gql-RJ-QeA"/>
+                <outlet property="addNewViewWidthC" destination="Sxc-XY-Xa1" id="bYB-ax-duT"/>
+                <outlet property="baseView" destination="3YU-hQ-dhy" id="3EB-GY-jqy"/>
+                <outlet property="baseViewBottomC" destination="QxN-2M-ryv" id="D2D-Gz-DMP"/>
+                <outlet property="baseViewLeftC" destination="VKk-s5-IDu" id="YAZ-Sq-jSJ"/>
+                <outlet property="baseViewRightC" destination="Yyz-l0-fZZ" id="zFx-XV-zCa"/>
+                <outlet property="baseViewTopC" destination="bZQ-H4-nxj" id="UVe-R5-7xj"/>
+                <outlet property="leftView" destination="FoT-tx-FJE" id="m4I-KL-gCn"/>
+                <outlet property="leftViewWidthC" destination="xUv-fk-h6p" id="6Jl-UK-Nnf"/>
+                <outlet property="rightView" destination="oQg-Mx-Rfv" id="AmE-Fa-ZFr"/>
+                <outlet property="rightViewWidthC" destination="mL2-CE-mBE" id="9nP-nX-pGd"/>
+                <outlet property="textField" destination="8OT-QC-iKm" id="4ZN-7u-odN"/>
+            </connections>
+            <point key="canvasLocation" x="388.40579710144931" y="130.24553571428572"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <namedColor name="100Blue">
+            <color red="0.0" green="0.68199998140335083" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
