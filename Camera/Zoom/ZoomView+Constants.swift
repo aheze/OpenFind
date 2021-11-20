@@ -16,6 +16,9 @@ struct C {
     static let minZoom = CGFloat(0.5)
     static let maxZoom = CGFloat(10)
     
+    static let activationStartDistance = CGFloat(0.12)
+    static let activationRange = CGFloat(0.05)
+    
     static let zoomFactors = [
         ZoomFactor(zoomRange: minZoom..<1, positionRange: 0..<0.25),
         ZoomFactor(zoomRange: 1..<2, positionRange: 0.25..<0.5),

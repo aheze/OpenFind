@@ -8,23 +8,6 @@
 
 import SwiftUI
 
-//struct DotView: View {
-//    var body: some View {
-//        Color.blue.opacity(0.8).background(
-//            HStack {
-//                ForEach(0..<25) { _ in
-//                    Circle()
-//                        .fill(Color.white)
-//                        .frame(width: 5, height: 5)
-//                }
-//            }
-//        )
-//            .drawingGroup() /// make sure circles don't disappear
-//            .clipped()
-//            .border(Color.red, width: 5)
-//    }
-//}
-
 struct DotSpacerView: View {
     var body: some View {
         Color.blue
@@ -32,6 +15,56 @@ struct DotSpacerView: View {
             .border(Color.red, width: 5)
     }
 }
+
+
+struct ZoomFactorView: View {
+    @Binding var zoom: CGFloat
+    let value: CGFloat
+    let activationProgress: CGFloat
+    let isActive: Bool
+    let offset: CGFloat
+    
+    @GestureState private var isTapped = false
+    
+    var body: some View {
+        Button {
+            zoom = value
+        } label: {
+            ZoomFactorContent(text: zoom.string)
+        }
+        .border(Color.green, width: 5)
+        .opacity(isActive ? 1 : 0)
+        
+        .offset(x: isActive ? offset : 0, y: 0)
+        .background(
+//            Color.yellow
+            
+            ZoomFactorContent(text: value.string)
+                .border(Color.yellow, width: 5)
+                .scaleEffect(activationProgress)
+        )
+    }
+//    func isActive() -> Bool {
+//        return activationProgress >= 0.8
+//    }
+}
+
+struct ZoomFactorContent: View {
+    let text: String
+    var body: some View {
+        Text(text)
+            .font(.system(size: 16, weight: .semibold))
+            .foregroundColor(.white)
+            .frame(width: C.zoomFactorLength, height: C.zoomFactorLength)
+            .background(
+                Color(UIColor(hex: 0x002F3B))
+                    .opacity(0.8)
+                    .cornerRadius(16)
+            )
+    }
+}
+
+
 struct ZoomView: View {
     
     @State var zoom: CGFloat = 1
@@ -43,18 +76,39 @@ struct ZoomView: View {
     @State var gestureStarted = false
     @State var keepingExpandedUUID: UUID?
     
+    func getActivationProgress(for zoomFactor: ZoomFactor) -> CGFloat {
+        let lower = zoomFactor.positionRange.lowerBound
+        let positionInSlider = positionInSlider()
+        
+        var percentActivated = CGFloat(1)
+        if positionInSlider < lower {
+            let distanceToActivation = min(C.activationStartDistance, lower - positionInSlider)
+//            print("distance for \(zoomFactor.zoomRange): \(distanceToActivation)")
+            percentActivated = 1 - (C.activationStartDistance - distanceToActivation) / C.activationRange
+//            print("\(zoomFactor.zoomRange) activation: \(percentActivated)")
+        } else if zoomFactor.positionRange.contains(positionInSlider) {
+            
+            let distanceToActivation = min(C.activationStartDistance, positionInSlider - lower)
+            percentActivated = 1 - (C.activationStartDistance - distanceToActivation) / C.activationRange
+            print("\(zoomFactor.zoomRange) DEactivation: \(percentActivated)")
+        }
+        
+        return max(0.001, percentActivated)
+    }
+    
     var body: some View {
         Color.clear.overlay(
             HStack(spacing: C.spacing) {
                 ForEach(C.zoomFactors, id: \.self) { zoomFactor in
                     let isActive = zoomFactor.zoomRange.contains(zoom)
                     
-                    ZoomPresetView(
+                    ZoomFactorView(
                         zoom: $zoom,
                         value: zoomFactor.zoomRange.lowerBound,
-                        isActive: isActive
+                        activationProgress: getActivationProgress(for: zoomFactor),
+                        isActive: isActive,
+                        offset: isActive ? activeZoomFactorOffset(for: zoomFactor) : 0
                     )
-                        .offset(x: isActive ? activeZoomFactorOffset(for: zoomFactor) : 0, y: 0)
                         .zIndex(1)
                     
                     DotSpacerView()
@@ -91,14 +145,8 @@ struct ZoomView: View {
                     .updating($draggingAmount) { value, draggingAmount, transaction in
                         draggingAmount = value.translation.width
                         
-                        /// add current `draggingAmount` to the saved offset
-                        let draggingProgress = savedExpandedOffset + draggingAmount
-                        let sliderTotalTrackWidth = sliderWidth()
-                        
-                        /// drag finger left = negative `draggingProgress
-                        /// so, make `draggingProgress` positive
                         /// This will be from 0 to 1, from slider leftmost to slider rightmost
-                        let positionInSlider = -draggingProgress / sliderTotalTrackWidth
+                        let positionInSlider = positionInSlider()
                         
                         /// get the zoom factor whose position contains the fraction
                         if let zoomFactor = C.zoomFactors.first(where: { $0.positionRange.contains(positionInSlider) }) {
@@ -151,34 +199,6 @@ struct ZoomView: View {
             )
     }
 }
-
-struct ZoomPresetView: View {
-    @Binding var zoom: CGFloat
-    let value: CGFloat
-    let isActive: Bool
-    
-    @GestureState private var isTapped = false
-    
-    var body: some View {
-        Button {
-            zoom = value
-        } label: {
-            Text(String(value.string))
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundColor(.white)
-                .frame(width: C.zoomFactorLength, height: C.zoomFactorLength)
-            //                .scaleEffect(isActive ? 1 : 0.7)
-                .background(
-                    Color(isActive ? UIColor.orange : UIColor(hex: 0x002F3B))
-                        .opacity(0.8)
-                        .cornerRadius(16)
-                    //                        .scaleEffect(isActive ? 1 : 0.5)
-                )
-        }
-        .border(Color.green, width: 5)
-    }
-}
-
 extension ZoomView {
     
     /// width of screen, inset from padding
@@ -232,6 +252,18 @@ extension ZoomView {
         let halfZoomFactorWidth = C.zoomFactorLength / 2
         let padding = halfAvailableScreenWidth - halfZoomFactorWidth
         return padding
+    }
+    
+    /// from 0 to 1, from slider leftmost to slider rightmost
+    func positionInSlider() -> CGFloat {
+        /// add current `draggingAmount` to the saved offset
+        let draggingProgress = savedExpandedOffset + draggingAmount
+        let sliderTotalTrackWidth = sliderWidth()
+        
+        /// drag finger left = negative `draggingProgress
+        /// so, make `draggingProgress` positive
+        let positionInSlider = -draggingProgress / sliderTotalTrackWidth
+        return positionInSlider
     }
     
     /// offset for the active zoom factor
