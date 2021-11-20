@@ -27,7 +27,7 @@ extension CGFloat {
 }
 struct C {
     static var edgePadding = CGFloat(0)
-    static var buttonLength = CGFloat(60)
+    static var buttonLength = CGFloat(80)
     static var spacing = CGFloat(0)
     
     static let minZoom = CGFloat(0.5)
@@ -40,10 +40,8 @@ struct C {
     ]
 }
 struct ZoomFactor: Hashable {
-//    var value: Range<Double>
     var range: Range<CGFloat>
     var positionRange: Range<CGFloat> /// position relative to entire slider
-//    var widthMultiplier: CGFloat /// multiplied by the standard dot width
 }
 
 struct DotView: View {
@@ -83,14 +81,27 @@ struct ZoomView: View {
                         .frame(width: isExpanded ? dotViewWidth(for: zoomRange) : 0)
                 }
             }
-            //                .frame(width: isExpanded ? sliderWidth() : nil, alignment: .leading)
+                .padding(.vertical, 10)
+                .background(
+                    HStack(spacing: C.spacing) {
+                        ForEach(0...C.zoomRanges.count, id: \.self) { index in
+                            Color.blue
+                                .frame(width: sliderWidth() / 4)
+                                .border(Color.white, width: 3)
+                        }
+                    }
+                    , alignment: .leading
+                )
+            
+                .frame(width: isExpanded ? sliderWidth() : nil, alignment: .leading)
                 .border(Color.cyan, width: 3)
+                .clipped()
                 .offset(x: isExpanded ? (expandedOffset + dragAmount + originalLeftOffset()) : 0, y: 0)
             , alignment: .leading)
             .padding(C.edgePadding)
             .background(
                 Color(UIColor(hex: 0x002F3B))
-                    .opacity(0.25)
+//                    .opacity(0.25)
             )
             .cornerRadius(50)
             .onAppear {
@@ -106,30 +117,26 @@ struct ZoomView: View {
                         let sliderTotalTrackWidth = sliderWidth()
                         let fraction = -draggingProgress / sliderTotalTrackWidth
                         
-                        //                        print("Prog: \(draggingProgress) / \(sliderTotalTrackWidth) = \(fraction)")
+                        print("Frac: \(fraction)")
                         
-                        
-                        
-                        if let zoomFactor = C.zoomRanges.first { $0.positionRange.contains(fraction) } {
+                        if let zoomFactor = C.zoomRanges.first(where: { $0.positionRange.contains(fraction) }) {
                             
                             let positionRangeLower = zoomFactor.positionRange.lowerBound
                             let positionRangeUpper = zoomFactor.positionRange.upperBound
                             let zoomPositionInRange = fraction - positionRangeLower
                             let zoomFractionOfPositionRange = zoomPositionInRange / (positionRangeUpper - positionRangeLower)
                             
-                            
-//                            print("Lower: \(positionRangeLower), upper: \(positionRangeUpper)")
-//                            print("Position in range: \(zoomPositionInRange)")
-//                            print("pos: \(zoomFractionOfPositionRange)")
-                            
                             let zoomRange = zoomFactor.range.upperBound - zoomFactor.range.lowerBound
                             let zoom = zoomFactor.range.lowerBound + zoomFractionOfPositionRange * zoomRange
                             DispatchQueue.main.async {
                                 self.zoom = zoom
                             }
-                            print("zoom: \(zoom)")
+                        } else {
+                            DispatchQueue.main.async {
+                                self.zoom = 0
+                            }
                         }
-
+                        
                         
                         if !gestureStarted {
                             DispatchQueue.main.async {
@@ -201,14 +208,16 @@ extension ZoomView {
     
     func dotViewWidth(for zoomFactor: ZoomFactor) -> CGFloat {
         let availableScreenWidth = availableScreenWidth()
-        let factorWidth = C.buttonLength * 3
+        
+        
+        let rightFactorWidth = C.buttonLength
         let spacingWidth = C.spacing * 4
-        let availableWidth = availableScreenWidth - factorWidth - spacingWidth
+        let availableWidth = availableScreenWidth - rightFactorWidth - spacingWidth
         let usedWidth = availableWidth / 2 /// divide by 2, because each DotView is only half of the screen
         
         let normalWidthFactor = 0.25
         let widthFactor = (zoomFactor.positionRange.upperBound - zoomFactor.positionRange.lowerBound) / normalWidthFactor
-        let width = usedWidth * widthFactor
+        let width = (usedWidth * widthFactor) - C.buttonLength
         
         return width
     }
@@ -220,11 +229,11 @@ extension ZoomView {
             var addedWidth = CGFloat(0)
             addedWidth += C.buttonLength
             addedWidth += dotViewWidth(for: zoomFactor)
-            
+            addedWidth += C.spacing * 2
             width += addedWidth
         }
-        
-        width -= (C.buttonLength / 2) /// there is no button at the far right, this is to prevent fraction progress getting too big
+        //        width += C.buttonLength / 2
+        //        width -= (C.buttonLength / 2) /// there is no button at the far right, this is to prevent fraction progress getting too big
         return width
     }
     func originalLeftOffset() -> CGFloat {
@@ -233,13 +242,13 @@ extension ZoomView {
         let total = leftTotalWidth - leftButtonWidth - C.spacing
         return total
     }
-//    func getPositionOfZoomFactor(for zoomFactor: Double) -> CGFloat {
-//        if let zoomFactor = C.zoomRanges.first(where: { $0.range.lowerBound == zoomFactor }) {
-//            let position = zoomFactor.positionPercentage * sliderWidth()
-//            return position
-//        }
-//        return 0
-//    }
+    //    func getPositionOfZoomFactor(for zoomFactor: Double) -> CGFloat {
+    //        if let zoomFactor = C.zoomRanges.first(where: { $0.range.lowerBound == zoomFactor }) {
+    //            let position = zoomFactor.positionPercentage * sliderWidth()
+    //            return position
+    //        }
+    //        return 0
+    //    }
 }
 
 struct ZoomView_Previews: PreviewProvider {
