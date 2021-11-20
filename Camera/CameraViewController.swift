@@ -37,7 +37,7 @@ extension CameraViewController {
     }
     
     public func didBecomeInactive() {
-        
+            
     }
 }
 
