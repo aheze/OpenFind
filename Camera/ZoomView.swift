@@ -26,30 +26,24 @@ extension CGFloat {
     }
 }
 struct C {
-    static var edgePadding = CGFloat(10)
-    static var buttonLength = CGFloat(32)
-    static var spacing = CGFloat(2)
+    static var edgePadding = CGFloat(0)
+    static var buttonLength = CGFloat(60)
+    static var spacing = CGFloat(0)
     
     static let minZoom = CGFloat(0.5)
     static let maxZoom = CGFloat(10)
     
-   
-//    static let zoomRanges = [
-//        0.5: minZoom..<1,
-//        1: 1..<2,
-//        2: 2..<maxZoom,
-//    ]
     static let zoomRanges = [
-        ZoomFactor(value: 0.5, range: minZoom..<1, positionPercentage: 0, widthPercentage: 0.25),
-        ZoomFactor(value: 1, range: 1..<2, positionPercentage: 0.25, widthPercentage: 0.25),
-        ZoomFactor(value: 2, range:2..<maxZoom, positionPercentage: 0.5, widthPercentage: 0.5),
+        ZoomFactor(range: minZoom..<1, positionRange: 0..<0.25),
+        ZoomFactor(range: 1..<2, positionRange: 0.25..<0.5),
+        ZoomFactor(range:2..<maxZoom, positionRange: 0.5..<1),
     ]
 }
 struct ZoomFactor: Hashable {
-    var value: Double
+//    var value: Range<Double>
     var range: Range<CGFloat>
-    var positionPercentage: CGFloat /// position relative to entire slider
-    var widthPercentage: CGFloat
+    var positionRange: Range<CGFloat> /// position relative to entire slider
+//    var widthMultiplier: CGFloat /// multiplied by the standard dot width
 }
 
 struct DotView: View {
@@ -65,121 +59,77 @@ struct DotView: View {
         )
             .drawingGroup() /// make sure circles don't disappear
             .clipped()
+            .border(Color.red, width: 5)
         
     }
 }
 struct ZoomView: View {
     @State var zoom: CGFloat = 1
-    @GestureState var dragAmount = CGSize.zero
+    @GestureState var dragAmount = CGFloat(0)
     
-    
-    @State var isExpanded = false
-    
+    @State var isExpanded = true
     @State var expandedOffset = CGFloat(0)
     
     @State var gestureStarted = false
     @State var keepingExpandedUUID: UUID?
     
-    func dotViewWidth(for zoomFactor: ZoomFactor) -> CGFloat {
-        let totalWidth = sliderWidth()
-        let dotWidthPercentage = zoomFactor.widthPercentage
-        let width = totalWidth * dotWidthPercentage
-        return width
-    }
-    func sliderWidth() -> CGFloat {
-        let totalWidth = UIScreen.main.bounds.width - (C.edgePadding * 2)
-        let numberOfPresets = CGFloat(C.zoomRanges.count)
-        let interPresetSpacing = (numberOfPresets - 1) * C.spacing * 2 /// times 2 because both sides of Dot has spacing
-        let presetLengths = (C.buttonLength * numberOfPresets)
-        let availableWidth = totalWidth - interPresetSpacing - presetLengths
-        let dotViewWidth = availableWidth / (numberOfPresets - 1)
-        
-        let dotViewWidthTotal = dotViewWidth * 4
-        let total = presetLengths + dotViewWidthTotal + interPresetSpacing
-        
-        return total
-        
-    }
-    func sliderLeftWidth() -> CGFloat {
-        let leftTotalWidth = (UIScreen.main.bounds.width / 2) - C.edgePadding
-        let leftButtonWidth = C.buttonLength / 2
-        let total = leftTotalWidth - leftButtonWidth - C.spacing
-        
-        return total
-        
-    }
-    func getPositionOfZoomFactor(for zoomFactor: Double) {
-        
-    }
-    func getOffset(for zoomFactor: Double) -> CGFloat {
-        if let zoomRange = C.zoomRanges.first(where: { $0.value == zoomFactor }) {
-            if isExpanded && zoomRange.range.contains(zoom) {
-                
-                let offset = -(expandedOffset + dragAmount.width)
-                
-                print("Offset for \(zoomFactor) is \(offset)")
-                return offset
-            }
-        }
-        return 0
-    }
-    
-    
     var body: some View {
         Color.clear.overlay(
             HStack(spacing: C.spacing) {
                 ForEach(C.zoomRanges, id: \.self) { zoomRange in
-                    ZoomPresetView(zoom: $zoom, value: zoomRange.value, isActive: zoom == zoomRange.value)
+                    ZoomPresetView(zoom: $zoom, value: zoomRange.range.lowerBound, isActive: zoomRange.range.contains(zoom))
                     
                     DotView()
                         .frame(width: isExpanded ? dotViewWidth(for: zoomRange) : 0)
                 }
-                
-//                ZoomPresetView(zoom: $zoom, value: 0.5, isActive: zoom == 0.5)
-//                    .offset(x: getOffset(for: 0.5), y: 0)
-//
-//                DotView()
-//                    .frame(width: isExpanded ? dotViewWidth() : 0)
-//
-//                ZoomPresetView(zoom: $zoom, value: 1, isActive: zoom == 1)
-//                    .offset(x: getOffset(for: 1), y: 0)
-//
-//                DotView()
-//                    .frame(width: isExpanded ? dotViewWidth() : 0)
-//
-//                ZoomPresetView(zoom: $zoom, value: 2, isActive: zoom == 2)
-//                    .offset(x: getOffset(for: 2), y: 0)
-//
-//                DotView()
-//                    .frame(width: isExpanded ? dotViewWidth() * 2 : 0)
             }
-                .frame(width: isExpanded ? sliderWidth() : nil)
-                .offset(x: isExpanded ? (expandedOffset + dragAmount.width) : 0, y: 0)
-        )
+            //                .frame(width: isExpanded ? sliderWidth() : nil, alignment: .leading)
+                .border(Color.cyan, width: 3)
+                .offset(x: isExpanded ? (expandedOffset + dragAmount + originalLeftOffset()) : 0, y: 0)
+            , alignment: .leading)
             .padding(C.edgePadding)
             .background(
                 Color(UIColor(hex: 0x002F3B))
                     .opacity(0.25)
             )
             .cornerRadius(50)
+            .onAppear {
+                //                expandedOffset = -(originalLeftOffset() + getPositionOfZoomFactor(for: 1))
+                //                expandedOffset = -getPositionOfZoomFactor(for: 1) - originalLeftOffset()
+                print("Origi exp: \(expandedOffset)")
+            }
             .highPriorityGesture(
-                DragGesture()
-                    .updating($dragAmount) { value, state, transaction in
-                        state = value.translation
-                        
-                        let progress = -(expandedOffset + state.width - sliderLeftWidth())
-                        //                        print("Prog: \(progress)")
+                DragGesture(minimumDistance: 0)
+                    .updating($dragAmount) { value, dragAmount, transaction in
+                        dragAmount = value.translation.width
+                        let draggingProgress = expandedOffset + dragAmount
                         let sliderTotalTrackWidth = sliderWidth()
-                        //
-                        //
-                        let fraction = progress / sliderTotalTrackWidth
-//                        print("frac: \(fraction)")
-                        let zoom = C.minZoom + fraction * (C.maxZoom - C.minZoom)
-//                        print("zoom: \(zoom)")
+                        let fraction = -draggingProgress / sliderTotalTrackWidth
                         
-                        DispatchQueue.main.async {
-                            self.zoom = zoom
+                        //                        print("Prog: \(draggingProgress) / \(sliderTotalTrackWidth) = \(fraction)")
+                        
+                        
+                        
+                        if let zoomFactor = C.zoomRanges.first { $0.positionRange.contains(fraction) } {
+                            
+                            let positionRangeLower = zoomFactor.positionRange.lowerBound
+                            let positionRangeUpper = zoomFactor.positionRange.upperBound
+                            let zoomPositionInRange = fraction - positionRangeLower
+                            let zoomFractionOfPositionRange = zoomPositionInRange / (positionRangeUpper - positionRangeLower)
+                            
+                            
+//                            print("Lower: \(positionRangeLower), upper: \(positionRangeUpper)")
+//                            print("Position in range: \(zoomPositionInRange)")
+//                            print("pos: \(zoomFractionOfPositionRange)")
+                            
+                            let zoomRange = zoomFactor.range.upperBound - zoomFactor.range.lowerBound
+                            let zoom = zoomFactor.range.lowerBound + zoomFractionOfPositionRange * zoomRange
+                            DispatchQueue.main.async {
+                                self.zoom = zoom
+                            }
+                            print("zoom: \(zoom)")
                         }
+
                         
                         if !gestureStarted {
                             DispatchQueue.main.async {
@@ -201,16 +151,16 @@ struct ZoomView: View {
                         
                         gestureStarted = false
                         let uuidToCheck = keepingExpandedUUID
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            
-                            /// make sure another swipe hasn't happened yet
-                            if uuidToCheck == keepingExpandedUUID {
-                                keepingExpandedUUID = nil
-                                withAnimation {
-                                    isExpanded = false
-                                }
-                            }
-                        }
+                        //                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        //
+                        //                            /// make sure another swipe hasn't happened yet
+                        //                            if uuidToCheck == keepingExpandedUUID {
+                        //                                keepingExpandedUUID = nil
+                        //                                withAnimation {
+                        //                                    isExpanded = false
+                        //                                }
+                        //                            }
+                        //                        }
                     }
             )
     }
@@ -231,15 +181,65 @@ struct ZoomPresetView: View {
                 .font(.system(size: 16, weight: .semibold))
                 .foregroundColor(.white)
                 .frame(width: C.buttonLength, height: C.buttonLength)
-                .scaleEffect(isActive ? 1 : 0.7)
+            //                .scaleEffect(isActive ? 1 : 0.7)
                 .background(
-                    Color(UIColor(hex: 0x002F3B))
-                        .opacity(0.2)
+                    Color(isActive ? UIColor.orange : UIColor(hex: 0x002F3B))
+                        .opacity(0.8)
                         .cornerRadius(16)
-                        .scaleEffect(isActive ? 1 : 0.8)
+                    //                        .scaleEffect(isActive ? 1 : 0.5)
                 )
         }
+        .border(Color.green, width: 5)
     }
+}
+
+extension ZoomView {
+    func availableScreenWidth() -> CGFloat {
+        let totalWidth = UIScreen.main.bounds.width - (C.edgePadding * 2)
+        return totalWidth
+    }
+    
+    func dotViewWidth(for zoomFactor: ZoomFactor) -> CGFloat {
+        let availableScreenWidth = availableScreenWidth()
+        let factorWidth = C.buttonLength * 3
+        let spacingWidth = C.spacing * 4
+        let availableWidth = availableScreenWidth - factorWidth - spacingWidth
+        let usedWidth = availableWidth / 2 /// divide by 2, because each DotView is only half of the screen
+        
+        let normalWidthFactor = 0.25
+        let widthFactor = (zoomFactor.positionRange.upperBound - zoomFactor.positionRange.lowerBound) / normalWidthFactor
+        let width = usedWidth * widthFactor
+        
+        return width
+    }
+    
+    func sliderWidth() -> CGFloat {
+        
+        var width = CGFloat(0)
+        for zoomFactor in C.zoomRanges {
+            var addedWidth = CGFloat(0)
+            addedWidth += C.buttonLength
+            addedWidth += dotViewWidth(for: zoomFactor)
+            
+            width += addedWidth
+        }
+        
+        width -= (C.buttonLength / 2) /// there is no button at the far right, this is to prevent fraction progress getting too big
+        return width
+    }
+    func originalLeftOffset() -> CGFloat {
+        let leftTotalWidth = (UIScreen.main.bounds.width / 2) - C.edgePadding
+        let leftButtonWidth = C.buttonLength / 2
+        let total = leftTotalWidth - leftButtonWidth - C.spacing
+        return total
+    }
+//    func getPositionOfZoomFactor(for zoomFactor: Double) -> CGFloat {
+//        if let zoomFactor = C.zoomRanges.first(where: { $0.range.lowerBound == zoomFactor }) {
+//            let position = zoomFactor.positionPercentage * sliderWidth()
+//            return position
+//        }
+//        return 0
+//    }
 }
 
 struct ZoomView_Previews: PreviewProvider {
@@ -250,3 +250,4 @@ struct ZoomView_Previews: PreviewProvider {
             .background(Color.gray)
     }
 }
+
