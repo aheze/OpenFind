@@ -15,16 +15,37 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlJ-qC-1i7">
+                                <rect key="frame" x="0.0" y="762" width="414" height="100"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="Y59-dz-ePe"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBrownColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="hlJ-qC-1i7" secondAttribute="bottom" id="9wg-aY-1tg"/>
+                            <constraint firstItem="hlJ-qC-1i7" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="RFP-eq-dgj"/>
+                            <constraint firstAttribute="trailing" secondItem="hlJ-qC-1i7" secondAttribute="trailing" id="aeS-f5-P62"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="zoomContainerHeightC" destination="Y59-dz-ePe" id="3Cz-g1-8Br"/>
+                        <outlet property="zoomContainerView" destination="hlJ-qC-1i7" id="fnx-k0-ahC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="76"/>
+            <point key="canvasLocation" x="131.8840579710145" y="75.669642857142847"/>
         </scene>
     </scenes>
     <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBrownColor">
             <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
