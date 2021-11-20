@@ -8,23 +8,30 @@
 
 import SwiftUI
 
-struct DotView: View {
+//struct DotView: View {
+//    var body: some View {
+//        Color.blue.opacity(0.8).background(
+//            HStack {
+//                ForEach(0..<25) { _ in
+//                    Circle()
+//                        .fill(Color.white)
+//                        .frame(width: 5, height: 5)
+//                }
+//            }
+//        )
+//            .drawingGroup() /// make sure circles don't disappear
+//            .clipped()
+//            .border(Color.red, width: 5)
+//    }
+//}
+
+struct DotSpacerView: View {
     var body: some View {
-        Color.blue.opacity(0.8).background(
-            HStack {
-                ForEach(0..<25) { _ in
-                    Circle()
-                        .fill(Color.white)
-                        .frame(width: 5, height: 5)
-                }
-            }
-        )
-            .drawingGroup() /// make sure circles don't disappear
-            .clipped()
+        Color.blue
+            .opacity(0.8)
             .border(Color.red, width: 5)
     }
 }
-
 struct ZoomView: View {
     
     @State var zoom: CGFloat = 1
@@ -40,21 +47,32 @@ struct ZoomView: View {
         Color.clear.overlay(
             HStack(spacing: C.spacing) {
                 ForEach(C.zoomFactors, id: \.self) { zoomFactor in
-                    ZoomPresetView(zoom: $zoom, value: zoomFactor.zoomRange.lowerBound, isActive: zoomFactor.zoomRange.contains(zoom))
-                    DotView()
+                    let isActive = zoomFactor.zoomRange.contains(zoom)
+                    
+                    ZoomPresetView(
+                        zoom: $zoom,
+                        value: zoomFactor.zoomRange.lowerBound,
+                        isActive: isActive
+                    )
+                        .offset(x: isActive ? activeZoomFactorOffset(for: zoomFactor) : 0, y: 0)
+                        .zIndex(1)
+                    
+                    DotSpacerView()
                         .frame(width: isExpanded ? dotViewWidth(for: zoomFactor) : 0)
+                        .zIndex(0)
                 }
             }
                 .padding(.vertical, 10)
                 .background(
-                    HStack(spacing: C.spacing) {
-                        ForEach(0...C.zoomFactors.count, id: \.self) { index in
-                            Color.blue
-                                .frame(width: sliderWidth() / 4)
-                                .border(Color.white, width: 3)
+                    HStack {
+                        ForEach(0..<80) { _ in
+                            Circle()
+                                .fill(Color.white)
+                                .frame(width: 5, height: 5)
                         }
                     }
-                    , alignment: .leading
+                        .drawingGroup()
+                        .clipped()
                 )
             
                 .frame(width: isExpanded ? sliderWidth() : nil, alignment: .leading)
@@ -215,13 +233,16 @@ extension ZoomView {
         let padding = halfAvailableScreenWidth - halfZoomFactorWidth
         return padding
     }
-    //    func getPositionOfZoomFactor(for zoomFactor: Double) -> CGFloat {
-    //        if let zoomFactor = C.zoomRanges.first(where: { $0.range.lowerBound == zoomFactor }) {
-    //            let position = zoomFactor.positionPercentage * sliderWidth()
-    //            return position
-    //        }
-    //        return 0
-    //    }
+    
+    /// offset for the active zoom factor
+    func activeZoomFactorOffset(for zoomFactor: ZoomFactor) -> CGFloat {
+        let position = zoomFactor.positionRange.lowerBound * sliderWidth()
+        let currentOffset = savedExpandedOffset + draggingAmount
+        
+        /// `currentOffset` is negative, make positive, then subtract `position`
+        let offset = -currentOffset - position
+        return offset
+    }
 }
 
 struct ZoomView_Previews: PreviewProvider {
