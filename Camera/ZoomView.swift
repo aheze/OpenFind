@@ -27,21 +27,24 @@ extension CGFloat {
 }
 struct C {
     static var edgePadding = CGFloat(0)
-    static var buttonLength = CGFloat(80)
+    static var zoomFactorLength = CGFloat(80)
     static var spacing = CGFloat(0)
     
     static let minZoom = CGFloat(0.5)
     static let maxZoom = CGFloat(10)
     
-    static let zoomRanges = [
-        ZoomFactor(range: minZoom..<1, positionRange: 0..<0.25),
-        ZoomFactor(range: 1..<2, positionRange: 0.25..<0.5),
-        ZoomFactor(range:2..<maxZoom, positionRange: 0.5..<1),
+    static let zoomFactors = [
+        ZoomFactor(zoomRange: minZoom..<1, positionRange: 0..<0.25),
+        ZoomFactor(zoomRange: 1..<2, positionRange: 0.25..<0.5),
+        ZoomFactor(zoomRange:2..<maxZoom, positionRange: 0.5..<1),
     ]
 }
 struct ZoomFactor: Hashable {
-    var range: Range<CGFloat>
+    var zoomRange: Range<CGFloat>
     var positionRange: Range<CGFloat> /// position relative to entire slider
+    
+    /// how big `positionRange` is
+    static let normalPositionRange = 0.25
 }
 
 struct DotView: View {
@@ -74,17 +77,16 @@ struct ZoomView: View {
     var body: some View {
         Color.clear.overlay(
             HStack(spacing: C.spacing) {
-                ForEach(C.zoomRanges, id: \.self) { zoomRange in
-                    ZoomPresetView(zoom: $zoom, value: zoomRange.range.lowerBound, isActive: zoomRange.range.contains(zoom))
-                    
+                ForEach(C.zoomFactors, id: \.self) { zoomFactor in
+                    ZoomPresetView(zoom: $zoom, value: zoomFactor.zoomRange.lowerBound, isActive: zoomFactor.zoomRange.contains(zoom))
                     DotView()
-                        .frame(width: isExpanded ? dotViewWidth(for: zoomRange) : 0)
+                        .frame(width: isExpanded ? dotViewWidth(for: zoomFactor) : 0)
                 }
             }
                 .padding(.vertical, 10)
                 .background(
                     HStack(spacing: C.spacing) {
-                        ForEach(0...C.zoomRanges.count, id: \.self) { index in
+                        ForEach(0...C.zoomFactors.count, id: \.self) { index in
                             Color.blue
                                 .frame(width: sliderWidth() / 4)
                                 .border(Color.white, width: 3)
@@ -104,11 +106,6 @@ struct ZoomView: View {
 //                    .opacity(0.25)
             )
             .cornerRadius(50)
-            .onAppear {
-                //                expandedOffset = -(originalLeftOffset() + getPositionOfZoomFactor(for: 1))
-                //                expandedOffset = -getPositionOfZoomFactor(for: 1) - originalLeftOffset()
-                print("Origi exp: \(expandedOffset)")
-            }
             .highPriorityGesture(
                 DragGesture(minimumDistance: 0)
                     .updating($dragAmount) { value, dragAmount, transaction in
@@ -119,15 +116,15 @@ struct ZoomView: View {
                         
                         print("Frac: \(fraction)")
                         
-                        if let zoomFactor = C.zoomRanges.first(where: { $0.positionRange.contains(fraction) }) {
+                        if let zoomFactor = C.zoomFactors.first(where: { $0.positionRange.contains(fraction) }) {
                             
                             let positionRangeLower = zoomFactor.positionRange.lowerBound
                             let positionRangeUpper = zoomFactor.positionRange.upperBound
                             let zoomPositionInRange = fraction - positionRangeLower
                             let zoomFractionOfPositionRange = zoomPositionInRange / (positionRangeUpper - positionRangeLower)
                             
-                            let zoomRange = zoomFactor.range.upperBound - zoomFactor.range.lowerBound
-                            let zoom = zoomFactor.range.lowerBound + zoomFractionOfPositionRange * zoomRange
+                            let zoomRange = zoomFactor.zoomRange.upperBound - zoomFactor.zoomRange.lowerBound
+                            let zoom = zoomFactor.zoomRange.lowerBound + zoomFractionOfPositionRange * zoomRange
                             DispatchQueue.main.async {
                                 self.zoom = zoom
                             }
@@ -187,7 +184,7 @@ struct ZoomPresetView: View {
             Text(String(value.string))
                 .font(.system(size: 16, weight: .semibold))
                 .foregroundColor(.white)
-                .frame(width: C.buttonLength, height: C.buttonLength)
+                .frame(width: C.zoomFactorLength, height: C.zoomFactorLength)
             //                .scaleEffect(isActive ? 1 : 0.7)
                 .background(
                     Color(isActive ? UIColor.orange : UIColor(hex: 0x002F3B))
@@ -201,44 +198,56 @@ struct ZoomPresetView: View {
 }
 
 extension ZoomView {
+    
+    /// width of screen, inset from padding
     func availableScreenWidth() -> CGFloat {
-        let totalWidth = UIScreen.main.bounds.width - (C.edgePadding * 2)
-        return totalWidth
+        let availableWidth = UIScreen.main.bounds.width - (C.edgePadding * 2)
+        return availableWidth
     }
     
+    /// width of a dot view
     func dotViewWidth(for zoomFactor: ZoomFactor) -> CGFloat {
         let availableScreenWidth = availableScreenWidth()
         
+        /// remove the width of the rightmost zoom factor
+        let rightmostZoomFactorWidth = C.zoomFactorLength
         
-        let rightFactorWidth = C.buttonLength
+        /// **(FACTOR)** |-spacing-| OOOOOOOOOO |-spacing-| **(FACTOR)** |-spacing-| OOOOOOOOOO |-spacing-| ~~(removed factor)~~
         let spacingWidth = C.spacing * 4
-        let availableWidth = availableScreenWidth - rightFactorWidth - spacingWidth
-        let usedWidth = availableWidth / 2 /// divide by 2, because each DotView is only half of the screen
         
-        let normalWidthFactor = 0.25
-        let widthFactor = (zoomFactor.positionRange.upperBound - zoomFactor.positionRange.lowerBound) / normalWidthFactor
-        let width = (usedWidth * widthFactor) - C.buttonLength
+        /// width for 2 zoom factors and 2 dot views, combined
+        /// 2x **(FACTOR)** + 2x OOOOOOOOOO
+        let totalContentWidth = availableScreenWidth - rightmostZoomFactorWidth - spacingWidth
         
-        return width
+        /// divide by 2, since there are 2 dot views total
+        let singleContentWidth = totalContentWidth / 2
+        
+        /// how much to multiply the width by
+        /// `upperBound` - `lowerBound` should either be 0.25 or 0.50.
+        let widthMultiplier = (zoomFactor.positionRange.upperBound - zoomFactor.positionRange.lowerBound) / ZoomFactor.normalPositionRange
+        
+        /// minus `zoomFactorLength` from the content, so it's only the dot view now
+        let finalWidth = (singleContentWidth * widthMultiplier) - C.zoomFactorLength
+        return finalWidth
     }
     
     func sliderWidth() -> CGFloat {
         
         var width = CGFloat(0)
-        for zoomFactor in C.zoomRanges {
+        for zoomFactor in C.zoomFactors {
             var addedWidth = CGFloat(0)
-            addedWidth += C.buttonLength
+            addedWidth += C.zoomFactorLength
             addedWidth += dotViewWidth(for: zoomFactor)
             addedWidth += C.spacing * 2
             width += addedWidth
         }
-        //        width += C.buttonLength / 2
-        //        width -= (C.buttonLength / 2) /// there is no button at the far right, this is to prevent fraction progress getting too big
+        //        width += C.zoomFactorLength / 2
+        //        width -= (C.zoomFactorLength / 2) /// there is no button at the far right, this is to prevent fraction progress getting too big
         return width
     }
     func originalLeftOffset() -> CGFloat {
         let leftTotalWidth = (UIScreen.main.bounds.width / 2) - C.edgePadding
-        let leftButtonWidth = C.buttonLength / 2
+        let leftButtonWidth = C.zoomFactorLength / 2
         let total = leftTotalWidth - leftButtonWidth - C.spacing
         return total
     }
