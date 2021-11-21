@@ -9,8 +9,23 @@
 import SwiftUI
 
 struct DotSpacerView: View {
+    var numberOfDots: Int
     var body: some View {
-        Color.clear
+        Color.clear.overlay(
+            HStack(spacing: 0) {
+                ForEach(0..<numberOfDots, id: \.self) { _ in
+                    HStack {
+                        Circle()
+                            .fill(Color.white)
+                            .frame(width: 5, height: 5)
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+            }
+                .drawingGroup()
+                .opacity(0.5)
+        )
+            .clipped()
     }
 }
 
@@ -114,29 +129,12 @@ struct ZoomView: View {
                             )
                                 .zIndex(1)
                             
-                            DotSpacerView()
-                                .frame(width: zoomViewModel.isExpanded ? zoomViewModel.dotViewWidth(for: zoomFactor) : 0, height: 5)
+                            DotSpacerView(numberOfDots: Int(zoomViewModel.dotViewWidth(for: zoomFactor)) / 12)
+                                .frame(width: zoomViewModel.isExpanded ? zoomViewModel.dotViewWidth(for: zoomFactor) : 0, height: 30)
                                 .zIndex(0)
                         }
                     }
                         .frame(width: zoomViewModel.isExpanded ? zoomViewModel.sliderWidth() : nil, alignment: .leading)
-                        .background(
-                            Color.clear.overlay(
-                                HStack {
-                                    ForEach(0..<80) { _ in
-                                        Circle()
-                                            .fill(Color.white)
-                                            .frame(width: 5, height: 5)
-                                    }
-                                }
-                                    .opacity(0.5)
-                                    .drawingGroup()
-                                , alignment: .leading
-                                
-                            )
-                                .clipped()
-                                .opacity(zoomViewModel.isExpanded ? 1 : 0)
-                        )
                         .offset(x: zoomViewModel.isExpanded ? (zoomViewModel.savedExpandedOffset + draggingAmount + zoomViewModel.sliderLeftPadding()) : 0, y: 0)
                     , alignment: zoomViewModel.isExpanded ? .leading : .center
                 )
