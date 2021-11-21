@@ -33,6 +33,7 @@ class ZoomViewModel: ObservableObject {
     @Published var gestureStarted = false
     @Published var keepingExpandedUUID: UUID?
     
+    var allowingButtonPresses = true
     
     /// width of screen, inset from padding
     func availableScreenWidth() -> CGFloat {
@@ -142,6 +143,7 @@ class ZoomViewModel: ObservableObject {
             /// example: `0.5..<1.0` becomes `0.5`
             let zoomRangeWidth = zoomFactor.zoomRange.upperBound - zoomFactor.zoomRange.lowerBound
             let zoom = zoomFactor.zoomRange.lowerBound + fractionOfPositionRange * zoomRangeWidth
+            
             DispatchQueue.main.async { self.zoom = zoom }
         }
     }

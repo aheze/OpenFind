@@ -27,17 +27,14 @@ struct ZoomFactorView: View {
         let isActive = zoomFactor.zoomRange.contains(zoomViewModel.zoom)
         
         /// projection
-        
-        Button {
-            print("pressed!")
-//            zoomViewModel.zoom = zoomFactor.zoomRange.lowerBound
-        } label: {
+        Button(action: activate) {
             ZoomFactorContent(
                 zoomViewModel: zoomViewModel,
                 index: index,
                 text: isActive ? zoomViewModel.zoom.string : zoomFactor.zoomRange.lowerBound.string
             )
         }
+        .disabled(isActive || !zoomViewModel.allowingButtonPresses) /// only press-able when not already pressed
         .scaleEffect(
             zoomViewModel.isExpanded && !isActive ?
             zoomViewModel.getActivationProgress(for: zoomFactor, draggingAmount: draggingAmount)
@@ -46,16 +43,25 @@ struct ZoomFactorView: View {
         .scaleEffect(isActive ? 1 : 0.7)
         .offset(x: zoomViewModel.isExpanded && isActive ? zoomViewModel.activeZoomFactorOffset(for: zoomFactor, draggingAmount: draggingAmount) : 0, y: 0)
         .background(
-            
-            ZoomFactorContent(
-                zoomViewModel: zoomViewModel,
-                index: index,
-                text: zoomFactor.zoomRange.lowerBound.string
-            )
+            Button(action: activate) {
+                ZoomFactorContent(
+                    zoomViewModel: zoomViewModel,
+                    index: index,
+                    text: zoomFactor.zoomRange.lowerBound.string
+                )
+            }
                 .scaleEffect(zoomViewModel.getActivationProgress(for: zoomFactor, draggingAmount: draggingAmount))
                 .scaleEffect(0.7)
-                .opacity(isActive && zoomViewModel.isExpanded ? 1 : 0)
+                .opacity(isActive && zoomViewModel.isExpanded ? 1 : 0) /// show when passed preset and dragging left, increasing zoom value
+                .disabled(!zoomViewModel.allowingButtonPresses)
         )
+    }
+    
+    func activate() {
+        withAnimation {
+            zoomViewModel.zoom = zoomFactor.zoomRange.lowerBound
+            zoomViewModel.savedExpandedOffset = -zoomFactor.positionRange.lowerBound * zoomViewModel.sliderWidth()
+        }
     }
 }
 
@@ -135,8 +141,6 @@ struct ZoomView: View {
                 .cornerRadius(50)
                 .padding(.horizontal, C.containerEdgePadding)
         )
-        
-        
             .onAppear {
                 zoomViewModel.savedExpandedOffset = -C.zoomFactors[1].positionRange.lowerBound * zoomViewModel.sliderWidth()
                 /// This will be from 0 to 1, from slider leftmost to slider rightmost
@@ -144,49 +148,57 @@ struct ZoomView: View {
                 zoomViewModel.setZoom(positionInSlider: positionInSlider)
             }
             .simultaneousGesture(
-                LongPressGesture(minimumDuration: 0.2, maximumDistance: .infinity)
+                LongPressGesture(minimumDuration: zoomViewModel.isExpanded ? 0 : 0.2, maximumDistance: .infinity)
                     .onEnded { _ in
-                        print("dneded!")
+                        withAnimation { zoomViewModel.isExpanded = true }
                     }
-                    .sequenced(before:
-                                DragGesture(minimumDistance: 0)
-                                .updating($draggingAmount) { value, draggingAmount, transaction in
-                                    let offset = zoomViewModel.savedExpandedOffset + value.translation.width
-                                    
-                                    if offset >= 0 {
-                                        draggingAmount = 0
-                                        DispatchQueue.main.async { zoomViewModel.savedExpandedOffset = 0 }
-                                    } else if -offset >= zoomViewModel.sliderWidth() {
-                                        draggingAmount = 0
-                                        DispatchQueue.main.async { zoomViewModel.savedExpandedOffset = -zoomViewModel.sliderWidth() }
-                                    } else {
-                                        draggingAmount = value.translation.width
+                    .sequenced(
+                        before:
+                            DragGesture(minimumDistance: 0)
+                            .updating($draggingAmount) { value, draggingAmount, transaction in
+                                
+                                /// temporary stop button presses to prevent conflicts with the gestures
+                                zoomViewModel.allowingButtonPresses = false
+                                zoomViewModel.allowingButtonPresses = true
+                                
+                                let offset = zoomViewModel.savedExpandedOffset + value.translation.width
+                                
+                                if offset >= 0 {
+                                    draggingAmount = 0
+                                    DispatchQueue.main.async { zoomViewModel.savedExpandedOffset = 0 }
+                                } else if -offset >= zoomViewModel.sliderWidth() {
+                                    draggingAmount = 0
+                                    DispatchQueue.main.async { zoomViewModel.savedExpandedOffset = -zoomViewModel.sliderWidth() }
+                                } else {
+                                    draggingAmount = value.translation.width
+                                }
+                                
+                                
+                                if offset < 0 && -offset < zoomViewModel.sliderWidth() {
+                                    draggingAmount = value.translation.width
+                                }
+                                
+                                /// This will be from 0 to 1, from slider leftmost to slider rightmost
+                                let positionInSlider = zoomViewModel.positionInSlider(draggingAmount: draggingAmount)
+                                zoomViewModel.setZoom(positionInSlider: positionInSlider)
+                                
+                                if !zoomViewModel.gestureStarted {
+                                    DispatchQueue.main.async {
+                                        zoomViewModel.keepingExpandedUUID = UUID()
+                                        zoomViewModel.gestureStarted = true
                                     }
-                                    
-                                    
-                                    if offset < 0 && -offset < zoomViewModel.sliderWidth() {
-                                        draggingAmount = value.translation.width
-                                    }
-                                    /// This will be from 0 to 1, from slider leftmost to slider rightmost
-                                    let positionInSlider = zoomViewModel.positionInSlider(draggingAmount: draggingAmount)
-                                    zoomViewModel.setZoom(positionInSlider: positionInSlider)
-                                    
-                                    if !zoomViewModel.gestureStarted {
-                                        DispatchQueue.main.async {
-                                            zoomViewModel.keepingExpandedUUID = UUID()
-                                            zoomViewModel.gestureStarted = true
-                                        }
-                                    }
-                                    
-                                    if !zoomViewModel.isExpanded {
-                                        DispatchQueue.main.async {
-                                            withAnimation {
-                                                zoomViewModel.isExpanded = true
-                                            }
+                                }
+                                
+                                if !zoomViewModel.isExpanded {
+                                    DispatchQueue.main.async {
+                                        withAnimation {
+                                            zoomViewModel.isExpanded = true
                                         }
                                     }
                                 }
-                                .onEnded { value in
+                            }
+                            .onEnded { value in
+                                if value.translation.width != 0 {
                                     let offset = zoomViewModel.savedExpandedOffset + value.translation.width
                                     if offset >= 0 {
                                         zoomViewModel.savedExpandedOffset = 0
@@ -195,91 +207,27 @@ struct ZoomView: View {
                                     } else {
                                         zoomViewModel.savedExpandedOffset += value.translation.width
                                     }
+                                    
                                     /// This will be from 0 to 1, from slider leftmost to slider rightmost
                                     let positionInSlider = zoomViewModel.positionInSlider(draggingAmount: draggingAmount)
                                     zoomViewModel.setZoom(positionInSlider: positionInSlider)
+                                }
+                                
+                                zoomViewModel.gestureStarted = false
+                                let uuidToCheck = zoomViewModel.keepingExpandedUUID
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                     
-                                    zoomViewModel.gestureStarted = false
-                                    let uuidToCheck = zoomViewModel.keepingExpandedUUID
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                        
-                                        /// make sure another swipe hasn't happened yet
-                                        if uuidToCheck == zoomViewModel.keepingExpandedUUID {
-                                            zoomViewModel.keepingExpandedUUID = nil
-                                            withAnimation {
-                                                zoomViewModel.isExpanded = false
-                                            }
+                                    /// make sure another swipe hasn't happened yet
+                                    if uuidToCheck == zoomViewModel.keepingExpandedUUID {
+                                        zoomViewModel.keepingExpandedUUID = nil
+                                        withAnimation {
+                                            zoomViewModel.isExpanded = false
                                         }
                                     }
                                 }
-                              )
+                            }
+                    )
             )
-        //            .simultaneousGesture(
-        //
-        //                DragGesture(minimumDistance: 0)
-        //                    .updating($draggingAmount) { value, draggingAmount, transaction in
-        //                        let offset = zoomViewModel.savedExpandedOffset + value.translation.width
-        //
-        //                        if offset >= 0 {
-        //                            draggingAmount = 0
-        //                            DispatchQueue.main.async { zoomViewModel.savedExpandedOffset = 0 }
-        //                        } else if -offset >= zoomViewModel.sliderWidth() {
-        //                            draggingAmount = 0
-        //                            DispatchQueue.main.async { zoomViewModel.savedExpandedOffset = -zoomViewModel.sliderWidth() }
-        //                        } else {
-        //                            draggingAmount = value.translation.width
-        //                        }
-        //
-        //
-        //                        if offset < 0 && -offset < zoomViewModel.sliderWidth() {
-        //                            draggingAmount = value.translation.width
-        //                        }
-        //                        /// This will be from 0 to 1, from slider leftmost to slider rightmost
-        //                        let positionInSlider = zoomViewModel.positionInSlider(draggingAmount: draggingAmount)
-        //                        zoomViewModel.setZoom(positionInSlider: positionInSlider)
-        //
-        //                        if !zoomViewModel.gestureStarted {
-        //                            DispatchQueue.main.async {
-        //                                zoomViewModel.keepingExpandedUUID = UUID()
-        //                                zoomViewModel.gestureStarted = true
-        //                            }
-        //                        }
-        //
-        //                        if !zoomViewModel.isExpanded {
-        //                            DispatchQueue.main.async {
-        //                                withAnimation {
-        //                                    zoomViewModel.isExpanded = true
-        //                                }
-        //                            }
-        //                        }
-        //                    }
-        //                    .onEnded { value in
-        //                        let offset = zoomViewModel.savedExpandedOffset + value.translation.width
-        //                        if offset >= 0 {
-        //                            zoomViewModel.savedExpandedOffset = 0
-        //                        } else if -offset >= zoomViewModel.sliderWidth() {
-        //                            zoomViewModel.savedExpandedOffset = -zoomViewModel.sliderWidth()
-        //                        } else {
-        //                            zoomViewModel.savedExpandedOffset += value.translation.width
-        //                        }
-        //                        /// This will be from 0 to 1, from slider leftmost to slider rightmost
-        //                        let positionInSlider = zoomViewModel.positionInSlider(draggingAmount: draggingAmount)
-        //                        zoomViewModel.setZoom(positionInSlider: positionInSlider)
-        //
-        //                        zoomViewModel.gestureStarted = false
-        //                        let uuidToCheck = zoomViewModel.keepingExpandedUUID
-        //                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-        //
-        //                            /// make sure another swipe hasn't happened yet
-        //                            if uuidToCheck == zoomViewModel.keepingExpandedUUID {
-        //                                zoomViewModel.keepingExpandedUUID = nil
-        //                                withAnimation {
-        //                                    zoomViewModel.isExpanded = false
-        //                                }
-        //                            }
-        //                        }
-        //                    }
-        //            )
     }
 }
 

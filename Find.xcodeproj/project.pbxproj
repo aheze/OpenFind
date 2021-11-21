@@ -1254,9 +1254,9 @@
 		3C11996627499A3E00D6AFE3 /* Zoom */ = {
 			isa = PBXGroup;
 			children = (
+				3C11996B2749F81C00D6AFE3 /* ZoomViewModel.swift */,
 				3C67E4EF274840F9001F1B4B /* ZoomView.swift */,
 				3C11996927499A5E00D6AFE3 /* ZoomView+Constants.swift */,
-				3C11996B2749F81C00D6AFE3 /* ZoomViewModel.swift */,
 				3C11996727499A4C00D6AFE3 /* ZoomView+Utilities.swift */,
 			);
 			path = Zoom;
