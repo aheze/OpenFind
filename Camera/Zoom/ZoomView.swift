@@ -37,16 +37,16 @@ struct ZoomFactorView: View {
         
         .offset(x: isActive ? offset : 0, y: 0)
         .background(
-//            Color.yellow
+            //            Color.yellow
             
             ZoomFactorContent(text: value.string)
                 .border(Color.yellow, width: 5)
                 .scaleEffect(activationProgress)
         )
     }
-//    func isActive() -> Bool {
-//        return activationProgress >= 0.8
-//    }
+    //    func isActive() -> Bool {
+    //        return activationProgress >= 0.8
+    //    }
 }
 
 struct ZoomFactorContent: View {
@@ -83,14 +83,10 @@ struct ZoomView: View {
         var percentActivated = CGFloat(1)
         if positionInSlider < lower {
             let distanceToActivation = min(C.activationStartDistance, lower - positionInSlider)
-//            print("distance for \(zoomFactor.zoomRange): \(distanceToActivation)")
             percentActivated = 1 - (C.activationStartDistance - distanceToActivation) / C.activationRange
-//            print("\(zoomFactor.zoomRange) activation: \(percentActivated)")
         } else if zoomFactor.positionRange.contains(positionInSlider) {
-            
             let distanceToActivation = min(C.activationStartDistance, positionInSlider - lower)
             percentActivated = 1 - (C.activationStartDistance - distanceToActivation) / C.activationRange
-            print("\(zoomFactor.zoomRange) DEactivation: \(percentActivated)")
         }
         
         return max(0.001, percentActivated)
@@ -117,21 +113,21 @@ struct ZoomView: View {
                 }
             }
                 .padding(.vertical, 10)
-                .background(
-                    HStack {
-                        ForEach(0..<80) { _ in
-                            Circle()
-                                .fill(Color.white)
-                                .frame(width: 5, height: 5)
-                        }
-                    }
-                        .drawingGroup()
-                        .clipped()
-                )
-            
                 .frame(width: isExpanded ? sliderWidth() : nil, alignment: .leading)
+                .background(
+                    Color.clear.overlay(
+                        HStack {
+                            ForEach(0..<80) { _ in
+                                Circle()
+                                    .fill(Color.white)
+                                    .frame(width: 5, height: 5)
+                            }
+                        }
+                            .drawingGroup(), alignment: .leading
+                        
+                    ).clipped()
+                )
                 .border(Color.cyan, width: 3)
-                .clipped()
                 .offset(x: isExpanded ? (savedExpandedOffset + draggingAmount + sliderLeftPadding()) : 0, y: 0)
             , alignment: .leading)
             .padding(C.edgePadding)
@@ -139,32 +135,32 @@ struct ZoomView: View {
                 Color(UIColor(hex: 0x002F3B))
                 //                    .opacity(0.25)
             )
+            .onAppear {
+                savedExpandedOffset = -C.zoomFactors[1].positionRange.lowerBound * sliderWidth()
+            }
             .cornerRadius(50)
             .highPriorityGesture(
                 DragGesture(minimumDistance: 0)
                     .updating($draggingAmount) { value, draggingAmount, transaction in
-                        draggingAmount = value.translation.width
+                        let offset = savedExpandedOffset + value.translation.width
                         
+                        if offset >= 0 {
+                            draggingAmount = 0
+                            DispatchQueue.main.async { savedExpandedOffset = 0 }
+                        } else if -offset >= sliderWidth() {
+                            draggingAmount = 0
+                            DispatchQueue.main.async { savedExpandedOffset = -sliderWidth() }
+                        } else {
+                            draggingAmount = value.translation.width
+                        }
+                        
+                        
+                        if offset < 0 && -offset < sliderWidth() {
+                            draggingAmount = value.translation.width
+                        }
                         /// This will be from 0 to 1, from slider leftmost to slider rightmost
                         let positionInSlider = positionInSlider()
-                        
-                        /// get the zoom factor whose position contains the fraction
-                        if let zoomFactor = C.zoomFactors.first(where: { $0.positionRange.contains(positionInSlider) }) {
-                            let positionRangeLower = zoomFactor.positionRange.lowerBound
-                            let positionRangeUpper = zoomFactor.positionRange.upperBound
-                            
-                            /// `positionInSlider` is starts all the way from the left of the entire slider, need to start it from the position range
-                            let positionInRange = positionInSlider - positionRangeLower
-                            let fractionOfPositionRange = positionInRange / (positionRangeUpper - positionRangeLower)
-                            
-                            /// example: `0.5..<1.0` becomes `0.5`
-                            let zoomRangeWidth = zoomFactor.zoomRange.upperBound - zoomFactor.zoomRange.lowerBound
-                            let zoom = zoomFactor.zoomRange.lowerBound + fractionOfPositionRange * zoomRangeWidth
-                            
-                            DispatchQueue.main.async { self.zoom = zoom }
-                        } else {
-                            DispatchQueue.main.async { self.zoom = 0 } /// TODO, remove
-                        }
+                        setZoom(positionInSlider: positionInSlider)
                         
                         if !gestureStarted {
                             DispatchQueue.main.async {
@@ -182,7 +178,18 @@ struct ZoomView: View {
                         }
                     }
                     .onEnded { value in
-                        savedExpandedOffset += value.translation.width
+                        let offset = savedExpandedOffset + value.translation.width
+                        if offset >= 0 {
+                            savedExpandedOffset = 0
+                        } else if -offset >= sliderWidth() {
+                            savedExpandedOffset = -sliderWidth()
+                        } else {
+                            savedExpandedOffset += value.translation.width
+                        }
+                        /// This will be from 0 to 1, from slider leftmost to slider rightmost
+                        let positionInSlider = positionInSlider()
+                        setZoom(positionInSlider: positionInSlider)
+                        
                         gestureStarted = false
                         //                        let uuidToCheck = keepingExpandedUUID
                         //                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -274,6 +281,23 @@ extension ZoomView {
         /// `currentOffset` is negative, make positive, then subtract `position`
         let offset = -currentOffset - position
         return offset
+    }
+    
+    func setZoom(positionInSlider: CGFloat) {
+        /// get the zoom factor whose position contains the fraction
+        if let zoomFactor = C.zoomFactors.first(where: { $0.positionRange.contains(positionInSlider) }) {
+            let positionRangeLower = zoomFactor.positionRange.lowerBound
+            let positionRangeUpper = zoomFactor.positionRange.upperBound
+            
+            /// `positionInSlider` is starts all the way from the left of the entire slider, need to start it from the position range
+            let positionInRange = positionInSlider - positionRangeLower
+            let fractionOfPositionRange = positionInRange / (positionRangeUpper - positionRangeLower)
+            
+            /// example: `0.5..<1.0` becomes `0.5`
+            let zoomRangeWidth = zoomFactor.zoomRange.upperBound - zoomFactor.zoomRange.lowerBound
+            let zoom = zoomFactor.zoomRange.lowerBound + fractionOfPositionRange * zoomRangeWidth
+            DispatchQueue.main.async { self.zoom = zoom }
+        }
     }
 }
 

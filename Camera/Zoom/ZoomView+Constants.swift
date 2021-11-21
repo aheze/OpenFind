@@ -20,9 +20,9 @@ struct C {
     static let activationRange = CGFloat(0.05)
     
     static let zoomFactors = [
-        ZoomFactor(zoomRange: minZoom..<1, positionRange: 0..<0.25),
-        ZoomFactor(zoomRange: 1..<2, positionRange: 0.25..<0.5),
-        ZoomFactor(zoomRange:2..<maxZoom, positionRange: 0.5..<1),
+        ZoomFactor(zoomRange: minZoom...1, positionRange: 0...0.25),
+        ZoomFactor(zoomRange: 1.nextUp...2, positionRange: 0.25.nextUp...0.5),
+        ZoomFactor(zoomRange: 2.nextUp...maxZoom, positionRange: 0.5.nextUp...1),
     ]
 }
 
@@ -30,11 +30,11 @@ struct ZoomFactor: Hashable {
     
     /// range of zoom
     /// example: `0.5..<1`
-    var zoomRange: Range<CGFloat>
+    var zoomRange: ClosedRange<CGFloat>
     
     /// position relative to entire slider
     /// example: `0.0..<0.25`
-    var positionRange: Range<CGFloat>
+    var positionRange: ClosedRange<CGFloat>
     
     /// how wide `positionRange` normally is
     static let normalPositionRange = 0.25
