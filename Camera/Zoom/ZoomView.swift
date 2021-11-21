@@ -21,46 +21,53 @@ struct ZoomFactorView: View {
     @Binding var zoom: CGFloat
     let value: CGFloat
     let activationProgress: CGFloat
+    let isExpanded: Bool
     let isActive: Bool
     let offset: CGFloat
     
     @GestureState private var isTapped = false
     
+    
+//    if expanded, must also be active
+    // if not expanded
     var body: some View {
-        Button {
-            zoom = value
-        } label: {
-            ZoomFactorContent(text: zoom.string)
-        }
-        .border(Color.green, width: 5)
-        .opacity(isActive ? 1 : 0)
-        
-        .offset(x: isActive ? offset : 0, y: 0)
-        .background(
-            //            Color.yellow
-            
-            ZoomFactorContent(text: value.string)
-                .border(Color.yellow, width: 5)
-                .scaleEffect(activationProgress)
-        )
+        ZoomFactorContent(text: isActive ? zoom.string : value.string)
+//            .opacity(0)
+//            .opacity(isExpanded ? 1 : 0)
+            .border(
+                Color.blue, width: 5
+            )
+            .scaleEffect(isExpanded || isActive ? 1 : 0.6)
+            .opacity(!isExpanded || isActive ? 1 : 0)
+            .offset(x: offset, y: 0)
+            .background(
+                Button {
+                    print("pressed!")
+                    //                zoom = value
+                } label: {
+                    ZoomFactorContent(text: value.string)
+                        .border(Color.red, width: 5)
+                        .scaleEffect(activationProgress)
+                }
+                    .opacity(isExpanded ? 1 : 0)
+            )
     }
-    //    func isActive() -> Bool {
-    //        return activationProgress >= 0.8
-    //    }
 }
 
 struct ZoomFactorContent: View {
     let text: String
     var body: some View {
-        Text(text)
-            .font(.system(size: 16, weight: .semibold))
-            .foregroundColor(.white)
-            .frame(width: C.zoomFactorLength, height: C.zoomFactorLength)
-            .background(
-                Color(UIColor(hex: 0x002F3B))
-                    .opacity(0.8)
-                    .cornerRadius(16)
-            )
+        ZStack {
+            Color(UIColor(hex: 0x002F3B))
+                .opacity(0.8)
+                .cornerRadius(16)
+            
+            Text(text)
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundColor(.white)
+        }
+        .padding(C.zoomFactorPadding)
+        .frame(width: C.zoomFactorLength, height: C.zoomFactorLength)
     }
 }
 
@@ -70,31 +77,15 @@ struct ZoomView: View {
     @State var zoom: CGFloat = 1
     @GestureState var draggingAmount = CGFloat(0)
     
-    @State var isExpanded = true
+    @State var isExpanded = false
     @State var savedExpandedOffset = CGFloat(0)
     
     @State var gestureStarted = false
     @State var keepingExpandedUUID: UUID?
     
-    func getActivationProgress(for zoomFactor: ZoomFactor) -> CGFloat {
-        let lower = zoomFactor.positionRange.lowerBound
-        let positionInSlider = positionInSlider()
-        
-        var percentActivated = CGFloat(1)
-        if positionInSlider < lower {
-            let distanceToActivation = min(C.activationStartDistance, lower - positionInSlider)
-            percentActivated = 1 - (C.activationStartDistance - distanceToActivation) / C.activationRange
-        } else if zoomFactor.positionRange.contains(positionInSlider) {
-            let distanceToActivation = min(C.activationStartDistance, positionInSlider - lower)
-            percentActivated = 1 - (C.activationStartDistance - distanceToActivation) / C.activationRange
-        }
-        
-        return max(0.001, percentActivated)
-    }
-    
     var body: some View {
         Color.clear.overlay(
-            HStack(spacing: C.spacing) {
+            HStack(spacing: 0) {
                 ForEach(C.zoomFactors, id: \.self) { zoomFactor in
                     let isActive = zoomFactor.zoomRange.contains(zoom)
                     
@@ -102,8 +93,9 @@ struct ZoomView: View {
                         zoom: $zoom,
                         value: zoomFactor.zoomRange.lowerBound,
                         activationProgress: getActivationProgress(for: zoomFactor),
+                        isExpanded: isExpanded,
                         isActive: isActive,
-                        offset: isActive ? activeZoomFactorOffset(for: zoomFactor) : 0
+                        offset: isExpanded && isActive ? activeZoomFactorOffset(for: zoomFactor) : 0
                     )
                         .zIndex(1)
                     
@@ -129,14 +121,17 @@ struct ZoomView: View {
                 )
                 .border(Color.cyan, width: 3)
                 .offset(x: isExpanded ? (savedExpandedOffset + draggingAmount + sliderLeftPadding()) : 0, y: 0)
-            , alignment: .leading)
-            .padding(C.edgePadding)
+            , alignment: isExpanded ? .leading : .center)
+            .padding(.horizontal, C.edgePadding)
             .background(
                 Color(UIColor(hex: 0x002F3B))
-                //                    .opacity(0.25)
+                    .opacity(0.25)
             )
             .onAppear {
                 savedExpandedOffset = -C.zoomFactors[1].positionRange.lowerBound * sliderWidth()
+                /// This will be from 0 to 1, from slider leftmost to slider rightmost
+                let positionInSlider = positionInSlider()
+                setZoom(positionInSlider: positionInSlider)
             }
             .cornerRadius(50)
             .highPriorityGesture(
@@ -191,17 +186,17 @@ struct ZoomView: View {
                         setZoom(positionInSlider: positionInSlider)
                         
                         gestureStarted = false
-                        //                        let uuidToCheck = keepingExpandedUUID
-                        //                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        //
-                        //                            /// make sure another swipe hasn't happened yet
-                        //                            if uuidToCheck == keepingExpandedUUID {
-                        //                                keepingExpandedUUID = nil
-                        //                                withAnimation {
-                        //                                    isExpanded = false
-                        //                                }
-                        //                            }
-                        //                        }
+                        let uuidToCheck = keepingExpandedUUID
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            
+                            /// make sure another swipe hasn't happened yet
+                            if uuidToCheck == keepingExpandedUUID {
+                                keepingExpandedUUID = nil
+                                withAnimation {
+                                    isExpanded = false
+                                }
+                            }
+                        }
                     }
             )
     }
@@ -221,12 +216,10 @@ extension ZoomView {
         /// remove the width of the rightmost zoom factor
         let rightmostZoomFactorWidth = C.zoomFactorLength
         
-        /// **(FACTOR)** |-spacing-| OOOOOOOOOO |-spacing-| **(FACTOR)** |-spacing-| OOOOOOOOOO |-spacing-| ~~(removed factor)~~
-        let spacingWidth = C.spacing * 4
-        
+        /// **(FACTOR)** OOOOOOOOOO **(FACTOR)** OOOOOOOOOO ~~(removed factor)~~
         /// width for 2 zoom factors and 2 dot views, combined
         /// 2x **(FACTOR)** + 2x OOOOOOOOOO
-        let totalContentWidth = availableScreenWidth - rightmostZoomFactorWidth - spacingWidth
+        let totalContentWidth = availableScreenWidth - rightmostZoomFactorWidth
         
         /// divide by 2, since there are 2 dot views total
         let singleContentWidth = totalContentWidth / 2
@@ -243,11 +236,13 @@ extension ZoomView {
     /// width of the entire slider
     func sliderWidth() -> CGFloat {
         var width = CGFloat(0)
-        for zoomFactor in C.zoomFactors {
+        
+        for index in C.zoomFactors.indices {
+            let zoomFactor = C.zoomFactors[index]
+            
             var addedWidth = CGFloat(0)
             addedWidth += C.zoomFactorLength
             addedWidth += dotViewWidth(for: zoomFactor)
-            addedWidth += C.spacing * 2
             width += addedWidth
         }
         return width
@@ -257,6 +252,7 @@ extension ZoomView {
     func sliderLeftPadding() -> CGFloat {
         let halfAvailableScreenWidth = availableScreenWidth() / 2
         let halfZoomFactorWidth = C.zoomFactorLength / 2
+//        let halfSpacing = C.spacing
         let padding = halfAvailableScreenWidth - halfZoomFactorWidth
         return padding
     }
@@ -282,6 +278,23 @@ extension ZoomView {
         let offset = -currentOffset - position
         return offset
     }
+    
+    func getActivationProgress(for zoomFactor: ZoomFactor) -> CGFloat {
+        let lower = zoomFactor.positionRange.lowerBound
+        let positionInSlider = positionInSlider()
+        
+        var percentActivated = CGFloat(1)
+        if positionInSlider < lower {
+            let distanceToActivation = min(C.activationStartDistance, lower - positionInSlider)
+            percentActivated = 1 - (C.activationStartDistance - distanceToActivation) / C.activationRange
+        } else if zoomFactor.positionRange.contains(positionInSlider) {
+            let distanceToActivation = min(C.activationStartDistance, positionInSlider - lower)
+            percentActivated = 1 - (C.activationStartDistance - distanceToActivation) / C.activationRange
+        }
+        
+        return max(0.001, percentActivated)
+    }
+    
     
     func setZoom(positionInSlider: CGFloat) {
         /// get the zoom factor whose position contains the fraction
