@@ -9,6 +9,8 @@
 import UIKit
 
 struct C {
+    static let containerEdgePadding = CGFloat(16)
+    
     static var edgePadding = CGFloat(4)
     static var zoomFactorPadding = CGFloat(4)
     static var zoomFactorLength = CGFloat(44)

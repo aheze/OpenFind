@@ -37,7 +37,8 @@ class ZoomViewModel: ObservableObject {
     /// width of screen, inset from padding
     func availableScreenWidth() -> CGFloat {
         let availableWidth = UIScreen.main.bounds.width - (C.edgePadding * 2)
-        return availableWidth
+        let containerEdgePadding = C.containerEdgePadding * 2
+        return availableWidth - containerEdgePadding
     }
     
     /// width of a dot view
@@ -110,8 +111,8 @@ class ZoomViewModel: ObservableObject {
     func sliderLeftPadding() -> CGFloat {
         let halfAvailableScreenWidth = availableScreenWidth() / 2
         let halfZoomFactorWidth = C.zoomFactorLength / 2
-        //        let halfSpacing = C.spacing
-        let padding = halfAvailableScreenWidth - halfZoomFactorWidth
+        let leftPadding = C.edgePadding
+        let padding = halfAvailableScreenWidth - halfZoomFactorWidth + leftPadding
         return padding
     }
     

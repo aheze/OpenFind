@@ -68,18 +68,6 @@ struct ZoomFactorContent: View {
         }
         .frame(width: C.zoomFactorLength, height: C.zoomFactorLength)
     }
-//    
-//    func getPadding() -> (CGFloat, CGFloat) {
-//        switch index {
-//        case 0:
-//            return (0, C.zoomFactorPadding / 2)
-//        case 1:
-//            return (C.zoomFactorPadding / 2, C.zoomFactorPadding / 2)
-//        case 2:
-//            return (C.zoomFactorPadding / 2, 0)
-//        default: fatalError()
-//        }
-//    }
 }
 
 
@@ -137,6 +125,7 @@ struct ZoomView: View {
                     , alignment: zoomViewModel.isExpanded ? .leading : .center
                 )
                 .cornerRadius(50)
+                .padding(.horizontal, C.containerEdgePadding)
         )
         
         
