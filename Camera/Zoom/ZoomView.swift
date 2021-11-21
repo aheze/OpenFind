@@ -150,7 +150,9 @@ struct ZoomView: View {
             .simultaneousGesture(
                 LongPressGesture(minimumDuration: zoomViewModel.isExpanded ? 0 : 0.2, maximumDistance: .infinity)
                     .onEnded { _ in
+                        print("end..")
                         withAnimation { zoomViewModel.isExpanded = true }
+                        //                        zoomViewModel.startTimeout()
                     }
                     .sequenced(
                         before:
@@ -165,7 +167,7 @@ struct ZoomView: View {
                                         zoomViewModel.allowingButtonPresses = true
                                     }
                                 }
-
+                                
                                 zoomViewModel.update(translation: value.translation.width, draggingAmount: &draggingAmount)
                                 
                             }
@@ -185,19 +187,15 @@ struct ZoomView: View {
                                     zoomViewModel.setZoom(positionInSlider: positionInSlider)
                                 }
                                 
-                                zoomViewModel.gestureStarted = false
-                                let uuidToCheck = zoomViewModel.keepingExpandedUUID
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                    
-                                    /// make sure another swipe hasn't happened yet
-                                    if uuidToCheck == zoomViewModel.keepingExpandedUUID {
-                                        zoomViewModel.keepingExpandedUUID = nil
-                                        withAnimation {
-                                            zoomViewModel.isExpanded = false
-                                        }
-                                    }
-                                }
+                                zoomViewModel.startTimeout()
                             }
+                            .simultaneously( /// if the user pressed down and up without dragging
+                                with:
+                                    TapGesture()
+                                    .onEnded { _ in
+                                        zoomViewModel.startTimeout()
+                                    }
+                            )
                     )
             )
     }

@@ -177,7 +177,6 @@ class ZoomViewModel: ObservableObject {
         return max(0.001, percentActivated)
     }
     
-    
     /// from 0 to 1, from slider leftmost to slider rightmost
     func positionInSlider(draggingAmount: CGFloat) -> CGFloat {
         /// add current `draggingAmount` to the saved offset
@@ -205,6 +204,21 @@ class ZoomViewModel: ObservableObject {
             let zoom = zoomFactor.zoomRange.lowerBound + fractionOfPositionRange * zoomRangeWidth
             
             DispatchQueue.main.async { self.zoom = zoom }
+        }
+    }
+    
+    func startTimeout() {
+        gestureStarted = false
+        let uuidToCheck = keepingExpandedUUID
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            
+            /// make sure another swipe hasn't happened yet
+            if uuidToCheck == self.keepingExpandedUUID {
+                self.keepingExpandedUUID = nil
+                withAnimation {
+                    self.isExpanded = false
+                }
+            }
         }
     }
     
