@@ -24,7 +24,7 @@ public class CameraViewController: UIViewController, PageViewController {
         super.viewDidLoad()
     
         print("Camera loaded")
-        self.zoomViewModel = .init()
+        self.zoomViewModel = .init(containerView: zoomContainerView)
         let zoomView = ZoomView(zoomViewModel: self.zoomViewModel)
         let hostingController = UIHostingController(rootView: zoomView)
         addChild(hostingController, in: zoomContainerView)

@@ -31,12 +31,100 @@ class ZoomViewModel: ObservableObject {
     @Published var keepingExpandedUUID: UUID?
     
     var allowingButtonPresses = true
+    var sliderWidth = CGFloat(0)
+    var sliderLeftPadding = CGFloat(0)
+    
+    var containerView: UIView
+    init(containerView: UIView) {
+        self.containerView = containerView
+        self.updateSliderWidth()
+        self.updateSliderLeftPadding()
+        NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification, object: nil, queue: .main) { [weak self] _ in
+            guard let self = self else { return }
+            let previousSliderWidth = self.sliderWidth
+            let previousProgress = -self.savedExpandedOffset / previousSliderWidth
+
+            self.updateSliderWidth()
+            self.updateSliderLeftPadding()
+            
+            /// recalculate percent offset based on new screen width
+            let savedExpandedOffset = -previousProgress * self.sliderWidth
+            self.savedExpandedOffset = savedExpandedOffset
+        }
+    }
+    
+    func update(translation: CGFloat, draggingAmount: inout CGFloat) {
+        let offset = savedExpandedOffset + translation
+        
+        if offset >= 0 {
+            draggingAmount = 0
+            DispatchQueue.main.async { self.savedExpandedOffset = 0 }
+        } else if -offset >= sliderWidth {
+            draggingAmount = 0
+            DispatchQueue.main.async { self.savedExpandedOffset = -self.sliderWidth }
+        } else {
+            draggingAmount = translation
+        }
+        
+        
+        if offset < 0 && -offset < sliderWidth {
+            draggingAmount = translation
+        }
+        
+        /// This will be from 0 to 1, from slider leftmost to slider rightmost
+        let positionInSlider = positionInSlider(draggingAmount: draggingAmount)
+        setZoom(positionInSlider: positionInSlider)
+        
+        if !gestureStarted {
+            DispatchQueue.main.async {
+                self.keepingExpandedUUID = UUID()
+                self.gestureStarted = true
+            }
+        }
+        
+        if !isExpanded {
+            DispatchQueue.main.async {
+                withAnimation {
+                    self.isExpanded = true
+                }
+            }
+        }
+    }
+    
+    
+    /// width of the entire slider
+    func updateSliderWidth() {
+        var width = CGFloat(0)
+        
+        for index in C.zoomFactors.indices {
+            let zoomFactor = C.zoomFactors[index]
+            
+            var addedWidth = CGFloat(0)
+            addedWidth += C.zoomFactorLength
+            addedWidth += dotViewWidth(for: zoomFactor)
+            width += addedWidth
+        }
+        
+        self.sliderWidth = width
+    }
+    
+    /// have half-screen gap on left side of slider
+    func updateSliderLeftPadding() {
+        let halfAvailableScreenWidth = availableScreenWidth() / 2
+        let halfZoomFactorWidth = C.zoomFactorLength / 2
+        let leftPadding = C.edgePadding
+        let padding = halfAvailableScreenWidth - halfZoomFactorWidth + leftPadding
+        
+        self.sliderLeftPadding = padding
+    }
     
     /// width of screen, inset from padding
     func availableScreenWidth() -> CGFloat {
         let availableWidth = UIScreen.main.bounds.width - (C.edgePadding * 2)
+        let safeArea = containerView.safeAreaInsets
+        let safeAreaHorizontalInset = safeArea.left + safeArea.right
         let containerEdgePadding = C.containerEdgePadding * 2
-        return availableWidth - containerEdgePadding
+        return availableWidth - containerEdgePadding - safeAreaHorizontalInset
     }
     
     /// width of a dot view
@@ -65,7 +153,7 @@ class ZoomViewModel: ObservableObject {
     
     /// offset for the active zoom factor
     func activeZoomFactorOffset(for zoomFactor: ZoomFactor, draggingAmount: CGFloat) -> CGFloat {
-        let position = zoomFactor.positionRange.lowerBound * sliderWidth()
+        let position = zoomFactor.positionRange.lowerBound * sliderWidth
         let currentOffset = savedExpandedOffset + draggingAmount
         
         /// `currentOffset` is negative, make positive, then subtract `position`
@@ -90,42 +178,17 @@ class ZoomViewModel: ObservableObject {
     }
     
     
-    /// width of the entire slider
-    func sliderWidth() -> CGFloat {
-        var width = CGFloat(0)
-        
-        for index in C.zoomFactors.indices {
-            let zoomFactor = C.zoomFactors[index]
-            
-            var addedWidth = CGFloat(0)
-            addedWidth += C.zoomFactorLength
-            addedWidth += dotViewWidth(for: zoomFactor)
-            width += addedWidth
-        }
-        return width
-    }
-    
-    /// have half-screen gap on left side of slider
-    func sliderLeftPadding() -> CGFloat {
-        let halfAvailableScreenWidth = availableScreenWidth() / 2
-        let halfZoomFactorWidth = C.zoomFactorLength / 2
-        let leftPadding = C.edgePadding
-        let padding = halfAvailableScreenWidth - halfZoomFactorWidth + leftPadding
-        return padding
-    }
-    
     /// from 0 to 1, from slider leftmost to slider rightmost
     func positionInSlider(draggingAmount: CGFloat) -> CGFloat {
         /// add current `draggingAmount` to the saved offset
         let draggingProgress = savedExpandedOffset + draggingAmount
-        let sliderTotalTrackWidth = sliderWidth()
+        let sliderTotalTrackWidth = sliderWidth
         
         /// drag finger left = negative `draggingProgress
         /// so, make `draggingProgress` positive
         let positionInSlider = -draggingProgress / sliderTotalTrackWidth
         return positionInSlider
     }
-    
     
     func setZoom(positionInSlider: CGFloat) {
         /// get the zoom factor whose position contains the fraction

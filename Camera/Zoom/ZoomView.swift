@@ -75,7 +75,7 @@ struct ZoomFactorView: View {
     func activate() {
         withAnimation {
             zoomViewModel.zoom = zoomFactor.zoomRange.lowerBound
-            zoomViewModel.savedExpandedOffset = -zoomFactor.positionRange.lowerBound * zoomViewModel.sliderWidth()
+            zoomViewModel.savedExpandedOffset = -zoomFactor.positionRange.lowerBound * zoomViewModel.sliderWidth
             zoomViewModel.isExpanded = false
             zoomViewModel.keepingExpandedUUID = nil
         }
@@ -134,15 +134,15 @@ struct ZoomView: View {
                                 .zIndex(0)
                         }
                     }
-                        .frame(width: zoomViewModel.isExpanded ? zoomViewModel.sliderWidth() : nil, alignment: .leading)
-                        .offset(x: zoomViewModel.isExpanded ? (zoomViewModel.savedExpandedOffset + draggingAmount + zoomViewModel.sliderLeftPadding()) : 0, y: 0)
+                        .frame(width: zoomViewModel.isExpanded ? zoomViewModel.sliderWidth : nil, alignment: .leading)
+                        .offset(x: zoomViewModel.isExpanded ? (zoomViewModel.savedExpandedOffset + draggingAmount + zoomViewModel.sliderLeftPadding) : 0, y: 0)
                     , alignment: zoomViewModel.isExpanded ? .leading : .center
                 )
                 .cornerRadius(50)
                 .padding(.horizontal, C.containerEdgePadding)
         )
             .onAppear {
-                zoomViewModel.savedExpandedOffset = -C.zoomFactors[1].positionRange.lowerBound * zoomViewModel.sliderWidth()
+                zoomViewModel.savedExpandedOffset = -C.zoomFactors[1].positionRange.lowerBound * zoomViewModel.sliderWidth
                 /// This will be from 0 to 1, from slider leftmost to slider rightmost
                 let positionInSlider = zoomViewModel.positionInSlider(draggingAmount: draggingAmount)
                 zoomViewModel.setZoom(positionInSlider: positionInSlider)
@@ -157,6 +157,7 @@ struct ZoomView: View {
                             DragGesture(minimumDistance: 2)
                             .updating($draggingAmount) { value, draggingAmount, transaction in
                                 
+                                
                                 /// temporary stop button presses to prevent conflicts with the gestures
                                 DispatchQueue.main.async {
                                     zoomViewModel.allowingButtonPresses = false
@@ -164,50 +165,17 @@ struct ZoomView: View {
                                         zoomViewModel.allowingButtonPresses = true
                                     }
                                 }
+
+                                zoomViewModel.update(translation: value.translation.width, draggingAmount: &draggingAmount)
                                 
-                                let offset = zoomViewModel.savedExpandedOffset + value.translation.width
-                                
-                                if offset >= 0 {
-                                    draggingAmount = 0
-                                    DispatchQueue.main.async { zoomViewModel.savedExpandedOffset = 0 }
-                                } else if -offset >= zoomViewModel.sliderWidth() {
-                                    draggingAmount = 0
-                                    DispatchQueue.main.async { zoomViewModel.savedExpandedOffset = -zoomViewModel.sliderWidth() }
-                                } else {
-                                    draggingAmount = value.translation.width
-                                }
-                                
-                                
-                                if offset < 0 && -offset < zoomViewModel.sliderWidth() {
-                                    draggingAmount = value.translation.width
-                                }
-                                
-                                /// This will be from 0 to 1, from slider leftmost to slider rightmost
-                                let positionInSlider = zoomViewModel.positionInSlider(draggingAmount: draggingAmount)
-                                zoomViewModel.setZoom(positionInSlider: positionInSlider)
-                                
-                                if !zoomViewModel.gestureStarted {
-                                    DispatchQueue.main.async {
-                                        zoomViewModel.keepingExpandedUUID = UUID()
-                                        zoomViewModel.gestureStarted = true
-                                    }
-                                }
-                                
-                                if !zoomViewModel.isExpanded {
-                                    DispatchQueue.main.async {
-                                        withAnimation {
-                                            zoomViewModel.isExpanded = true
-                                        }
-                                    }
-                                }
                             }
                             .onEnded { value in
                                 if value.translation.width != 0 {
                                     let offset = zoomViewModel.savedExpandedOffset + value.translation.width
                                     if offset >= 0 {
                                         zoomViewModel.savedExpandedOffset = 0
-                                    } else if -offset >= zoomViewModel.sliderWidth() {
-                                        zoomViewModel.savedExpandedOffset = -zoomViewModel.sliderWidth()
+                                    } else if -offset >= zoomViewModel.sliderWidth {
+                                        zoomViewModel.savedExpandedOffset = -zoomViewModel.sliderWidth
                                     } else {
                                         zoomViewModel.savedExpandedOffset += value.translation.width
                                     }
@@ -237,7 +205,7 @@ struct ZoomView: View {
 
 struct ZoomView_Previews: PreviewProvider {
     static var previews: some View {
-        ZoomView(zoomViewModel: ZoomViewModel())
+        ZoomView(zoomViewModel: ZoomViewModel(containerView: UIView()))
             .frame(maxWidth: .infinity)
             .padding(50)
             .background(Color.gray)
