@@ -21,9 +21,12 @@ struct C {
     static let activationStartDistance = CGFloat(0.09)
     static let activationRange = CGFloat(0.06)
     
+    
+    /// how wide `positionRange` normally is
+    static let normalPositionRange = 0.3
     static let zoomFactors = [
-        ZoomFactor(zoomRange: minZoom...1, positionRange: 0...0.25),
-        ZoomFactor(zoomRange: 1.nextUp...2, positionRange: 0.25.nextUp...0.5),
-        ZoomFactor(zoomRange: 2.nextUp...maxZoom, positionRange: 0.5.nextUp...1),
+        ZoomFactor(zoomRange: minZoom...1, positionRange: 0...0.3),
+        ZoomFactor(zoomRange: 1.nextUp...2, positionRange: 0.3.nextUp...0.6),
+        ZoomFactor(zoomRange: 2.nextUp...maxZoom, positionRange: 0.6.nextUp...1),
     ]
 }

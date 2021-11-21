@@ -61,6 +61,8 @@ struct ZoomFactorView: View {
         withAnimation {
             zoomViewModel.zoom = zoomFactor.zoomRange.lowerBound
             zoomViewModel.savedExpandedOffset = -zoomFactor.positionRange.lowerBound * zoomViewModel.sliderWidth()
+            zoomViewModel.isExpanded = false
+            zoomViewModel.keepingExpandedUUID = nil
         }
     }
 }
@@ -154,12 +156,16 @@ struct ZoomView: View {
                     }
                     .sequenced(
                         before:
-                            DragGesture(minimumDistance: 0)
+                            DragGesture(minimumDistance: 2)
                             .updating($draggingAmount) { value, draggingAmount, transaction in
                                 
                                 /// temporary stop button presses to prevent conflicts with the gestures
-                                zoomViewModel.allowingButtonPresses = false
-                                zoomViewModel.allowingButtonPresses = true
+                                DispatchQueue.main.async {
+                                    zoomViewModel.allowingButtonPresses = false
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                                        zoomViewModel.allowingButtonPresses = true
+                                    }
+                                }
                                 
                                 let offset = zoomViewModel.savedExpandedOffset + value.translation.width
                                 

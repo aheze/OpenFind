@@ -4,47 +4,6 @@
 <array>
 	<dict>
 		<key>name</key>
-		<string>Frameworks</string>
-		<key>predicate</key>
-		<dict>
-			<key>predicates</key>
-			<array>
-				<dict>
-					<key>path-components</key>
-					<array>
-						<string>Camera Frameworks</string>
-					</array>
-					<key>rule</key>
-					<string>workspace-location</string>
-				</dict>
-				<dict>
-					<key>path-components</key>
-					<array>
-						<string>General Frameworks</string>
-					</array>
-					<key>rule</key>
-					<string>workspace-location</string>
-				</dict>
-				<dict>
-					<key>path-components</key>
-					<array>
-						<string>Framework Testing</string>
-					</array>
-					<key>rule</key>
-					<string>workspace-location</string>
-				</dict>
-			</array>
-			<key>rule</key>
-			<string>any</string>
-		</dict>
-		<key>source</key>
-		<dict>
-			<key>file-source</key>
-			<string>workspace</string>
-		</dict>
-	</dict>
-	<dict>
-		<key>name</key>
 		<string>Search Bar</string>
 		<key>predicate</key>
 		<dict>
@@ -64,6 +23,58 @@
 					<array>
 						<string>Framework Testing</string>
 						<string>SearchBarTesting.xcodeproj</string>
+					</array>
+					<key>rule</key>
+					<string>workspace-location</string>
+				</dict>
+			</array>
+			<key>rule</key>
+			<string>any</string>
+		</dict>
+		<key>source</key>
+		<dict>
+			<key>file-source</key>
+			<string>workspace</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Camera</string>
+		<key>predicate</key>
+		<dict>
+			<key>predicates</key>
+			<array>
+				<dict>
+					<key>path-components</key>
+					<array>
+						<string>Find.xcodeproj</string>
+						<string>Camera</string>
+					</array>
+					<key>rule</key>
+					<string>workspace-location</string>
+				</dict>
+			</array>
+			<key>rule</key>
+			<string>any</string>
+		</dict>
+		<key>source</key>
+		<dict>
+			<key>file-source</key>
+			<string>workspace</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>TabController</string>
+		<key>predicate</key>
+		<dict>
+			<key>predicates</key>
+			<array>
+				<dict>
+					<key>path-components</key>
+					<array>
+						<string>Find.xcodeproj</string>
+						<string>TabController</string>
 					</array>
 					<key>rule</key>
 					<string>workspace-location</string>

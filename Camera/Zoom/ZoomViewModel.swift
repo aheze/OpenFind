@@ -18,9 +18,6 @@ struct ZoomFactor: Hashable {
     /// position relative to entire slider
     /// example: `0.0..<0.25`
     var positionRange: ClosedRange<CGFloat>
-    
-    /// how wide `positionRange` normally is
-    static let normalPositionRange = 0.25
 }
 
 
@@ -59,7 +56,7 @@ class ZoomViewModel: ObservableObject {
         
         /// how much to multiply the width by
         /// `upperBound` - `lowerBound` should either be 0.25 or 0.50.
-        let widthMultiplier = (zoomFactor.positionRange.upperBound - zoomFactor.positionRange.lowerBound) / ZoomFactor.normalPositionRange
+        let widthMultiplier = (zoomFactor.positionRange.upperBound - zoomFactor.positionRange.lowerBound) / C.normalPositionRange
         
         /// minus `zoomFactorLength` from the content, so it's only the dot view now
         let finalWidth = (singleContentWidth * widthMultiplier) - C.zoomFactorLength
