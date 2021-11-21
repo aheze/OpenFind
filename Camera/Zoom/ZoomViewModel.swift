@@ -210,7 +210,7 @@ class ZoomViewModel: ObservableObject {
     func startTimeout() {
         gestureStarted = false
         let uuidToCheck = keepingExpandedUUID
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + C.timeoutTime) {
             
             /// make sure another swipe hasn't happened yet
             if uuidToCheck == self.keepingExpandedUUID {

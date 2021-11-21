@@ -46,11 +46,17 @@ struct ZoomFactorView: View {
             ZoomFactorContent(
                 zoomViewModel: zoomViewModel,
                 index: index,
-                text: isActive ? zoomViewModel.zoom.string : zoomFactor.zoomRange.lowerBound.string
+                text: isActive ? zoomViewModel.zoom.string : zoomFactor.zoomRange.lowerBound.string,
+                isActive: isActive
             )
         }
         .disabled(isActive || !zoomViewModel.allowingButtonPresses) /// only press-able when not already pressed
         .scaleEffect(
+            zoomViewModel.isExpanded && !isActive ?
+            zoomViewModel.getActivationProgress(for: zoomFactor, draggingAmount: draggingAmount)
+            : 1
+        )
+        .opacity(
             zoomViewModel.isExpanded && !isActive ?
             zoomViewModel.getActivationProgress(for: zoomFactor, draggingAmount: draggingAmount)
             : 1
@@ -62,10 +68,12 @@ struct ZoomFactorView: View {
                 ZoomFactorContent(
                     zoomViewModel: zoomViewModel,
                     index: index,
-                    text: zoomFactor.zoomRange.lowerBound.string
+                    text: zoomFactor.zoomRange.lowerBound.string,
+                    isActive: false
                 )
             }
                 .scaleEffect(zoomViewModel.getActivationProgress(for: zoomFactor, draggingAmount: draggingAmount))
+                .opacity(zoomViewModel.getActivationProgress(for: zoomFactor, draggingAmount: draggingAmount))
                 .scaleEffect(0.7)
                 .opacity(isActive && zoomViewModel.isExpanded ? 1 : 0) /// show when passed preset and dragging left, increasing zoom value
                 .disabled(!zoomViewModel.allowingButtonPresses)
@@ -86,6 +94,7 @@ struct ZoomFactorContent: View {
     @ObservedObject var zoomViewModel: ZoomViewModel
     let index: Int
     let text: String
+    let isActive: Bool
     
     var body: some View {
         ZStack {
@@ -94,8 +103,8 @@ struct ZoomFactorContent: View {
                 .cornerRadius(24)
             
             Text(text)
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundColor(.white)
+                .font(.system(size: 16, weight: isActive ? .semibold : .medium))
+                .foregroundColor(isActive ? Color(Constants.activeIconColor) : .white)
         }
         .frame(width: C.zoomFactorLength, height: C.zoomFactorLength)
     }

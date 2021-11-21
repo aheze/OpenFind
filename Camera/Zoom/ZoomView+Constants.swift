@@ -29,4 +29,6 @@ struct C {
         ZoomFactor(zoomRange: 1.nextUp...2, positionRange: 0.3.nextUp...0.6),
         ZoomFactor(zoomRange: 2.nextUp...maxZoom, positionRange: 0.6.nextUp...1),
     ]
+    
+    static let timeoutTime = CGFloat(1.5)
 }
