@@ -17,6 +17,7 @@
 		3C0F5ED825A62B2600549040 /* PhotosMigrationController+Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F5ED725A62B2600549040 /* PhotosMigrationController+Permissions.swift */; };
 		3C11996827499A4C00D6AFE3 /* ZoomView+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996727499A4C00D6AFE3 /* ZoomView+Utilities.swift */; };
 		3C11996A27499A5E00D6AFE3 /* ZoomView+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996927499A5E00D6AFE3 /* ZoomView+Constants.swift */; };
+		3C11996C2749F81D00D6AFE3 /* ZoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996B2749F81C00D6AFE3 /* ZoomViewModel.swift */; };
 		3C1317E225B2581800FCEB79 /* PhotosVC+Finding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317E125B2581800FCEB79 /* PhotosVC+Finding.swift */; };
 		3C1317E525B259EB00FCEB79 /* PhotoFindVC+Populate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317E425B259EB00FCEB79 /* PhotoFindVC+Populate.swift */; };
 		3C1317E925B264BD00FCEB79 /* PhotosWrapperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317E825B264BD00FCEB79 /* PhotosWrapperController.swift */; };
@@ -644,6 +645,7 @@
 		3C0F5ED725A62B2600549040 /* PhotosMigrationController+Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosMigrationController+Permissions.swift"; sourceTree = "<group>"; };
 		3C11996727499A4C00D6AFE3 /* ZoomView+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ZoomView+Utilities.swift"; sourceTree = "<group>"; };
 		3C11996927499A5E00D6AFE3 /* ZoomView+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ZoomView+Constants.swift"; sourceTree = "<group>"; };
+		3C11996B2749F81C00D6AFE3 /* ZoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomViewModel.swift; sourceTree = "<group>"; };
 		3C1317E125B2581800FCEB79 /* PhotosVC+Finding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Finding.swift"; sourceTree = "<group>"; };
 		3C1317E425B259EB00FCEB79 /* PhotoFindVC+Populate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+Populate.swift"; sourceTree = "<group>"; };
 		3C1317E825B264BD00FCEB79 /* PhotosWrapperController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosWrapperController.swift; sourceTree = "<group>"; };
@@ -1254,6 +1256,7 @@
 			children = (
 				3C67E4EF274840F9001F1B4B /* ZoomView.swift */,
 				3C11996927499A5E00D6AFE3 /* ZoomView+Constants.swift */,
+				3C11996B2749F81C00D6AFE3 /* ZoomViewModel.swift */,
 				3C11996727499A4C00D6AFE3 /* ZoomView+Utilities.swift */,
 			);
 			path = Zoom;
@@ -3116,6 +3119,7 @@
 				3C4D39AE27475DC80010FD68 /* CameraBridge.swift in Sources */,
 				3C4D39B127475DC80010FD68 /* FocusIconView.swift in Sources */,
 				3C4D3A092747667B0010FD68 /* TabBarViewController.swift in Sources */,
+				3C11996C2749F81D00D6AFE3 /* ZoomViewModel.swift in Sources */,
 				3C4D39B227475DC80010FD68 /* CameraController.swift in Sources */,
 				3C4D39B427475DC80010FD68 /* SettingsIconView.swift in Sources */,
 				3C4D3A072747667B0010FD68 /* TabViewModel.swift in Sources */,

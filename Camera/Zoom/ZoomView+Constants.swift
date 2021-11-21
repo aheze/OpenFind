@@ -25,17 +25,3 @@ struct C {
         ZoomFactor(zoomRange: 2.nextUp...maxZoom, positionRange: 0.5.nextUp...1),
     ]
 }
-
-struct ZoomFactor: Hashable {
-    
-    /// range of zoom
-    /// example: `0.5..<1`
-    var zoomRange: ClosedRange<CGFloat>
-    
-    /// position relative to entire slider
-    /// example: `0.0..<0.25`
-    var positionRange: ClosedRange<CGFloat>
-    
-    /// how wide `positionRange` normally is
-    static let normalPositionRange = 0.25
-}

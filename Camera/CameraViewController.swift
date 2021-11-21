@@ -10,7 +10,7 @@ import SwiftUI
 public class CameraViewController: UIViewController, PageViewController {
     public var tabType: TabState = .camera
     var cameraViewModel: ToolbarViewModel.Camera!
-    
+    var zoomViewModel: ZoomViewModel!
     
     @IBOutlet weak var zoomContainerView: UIView!
     @IBOutlet weak var zoomContainerHeightC: NSLayoutConstraint!
@@ -24,7 +24,8 @@ public class CameraViewController: UIViewController, PageViewController {
         super.viewDidLoad()
     
         print("Camera loaded")
-        let zoomView = ZoomView()
+        self.zoomViewModel = .init()
+        let zoomView = ZoomView(zoomViewModel: self.zoomViewModel)
         let hostingController = UIHostingController(rootView: zoomView)
         addChild(hostingController, in: zoomContainerView)
     }
