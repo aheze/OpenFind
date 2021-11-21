@@ -157,28 +157,33 @@ struct ZoomView: View {
                 zoomViewModel.setZoom(positionInSlider: positionInSlider)
             }
             .simultaneousGesture(
-                LongPressGesture(minimumDuration: zoomViewModel.isExpanded ? 0 : 0.2, maximumDistance: .infinity)
-                    .onEnded { _ in
-                        print("end..")
-                        withAnimation { zoomViewModel.isExpanded = true }
-                        //                        zoomViewModel.startTimeout()
+                
+                /// if expanded, immediately keep expanded
+                /// if not, wait 0.3 seconds
+                LongPressGesture(minimumDuration: zoomViewModel.isExpanded ? 0 : 0.5, maximumDistance: .infinity)
+                    .onEnded { _ in /// touched down
+                        zoomViewModel.expand()
                     }
-                    .sequenced(
+                    .simultaneously( /// to cancel button presses after too long
+                        with:
+                            LongPressGesture(minimumDuration: 0.6, maximumDistance: .infinity)
+                            .onEnded { _ in
+                                zoomViewModel.stopButtonPresses()
+                            }
+                    )
+                    .sequenced( /// if the user pressed down and up without dragging
                         before:
+                            TapGesture()
+                            .onEnded { _ in
+                                zoomViewModel.startTimeout()
+                            }
+                                   )
+                    .simultaneously( /// normal drag gesture
+                        with:
                             DragGesture(minimumDistance: 2)
                             .updating($draggingAmount) { value, draggingAmount, transaction in
-                                
-                                
-                                /// temporary stop button presses to prevent conflicts with the gestures
-                                DispatchQueue.main.async {
-                                    zoomViewModel.allowingButtonPresses = false
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                                        zoomViewModel.allowingButtonPresses = true
-                                    }
-                                }
-                                
+                                zoomViewModel.stopButtonPresses()
                                 zoomViewModel.update(translation: value.translation.width, draggingAmount: &draggingAmount)
-                                
                             }
                             .onEnded { value in
                                 if value.translation.width != 0 {
@@ -198,14 +203,8 @@ struct ZoomView: View {
                                 
                                 zoomViewModel.startTimeout()
                             }
-                            .simultaneously( /// if the user pressed down and up without dragging
-                                with:
-                                    TapGesture()
-                                    .onEnded { _ in
-                                        zoomViewModel.startTimeout()
-                                    }
-                            )
                     )
+                
             )
     }
 }

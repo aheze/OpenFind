@@ -74,21 +74,7 @@ class ZoomViewModel: ObservableObject {
         /// This will be from 0 to 1, from slider leftmost to slider rightmost
         let positionInSlider = positionInSlider(draggingAmount: draggingAmount)
         setZoom(positionInSlider: positionInSlider)
-        
-        if !gestureStarted {
-            DispatchQueue.main.async {
-                self.keepingExpandedUUID = UUID()
-                self.gestureStarted = true
-            }
-        }
-        
-        if !isExpanded {
-            DispatchQueue.main.async {
-                withAnimation {
-                    self.isExpanded = true
-                }
-            }
-        }
+        expand()
     }
     
     
@@ -201,12 +187,52 @@ class ZoomViewModel: ObservableObject {
             
             /// example: `0.5..<1.0` becomes `0.5`
             let zoomRangeWidth = zoomFactor.zoomRange.upperBound - zoomFactor.zoomRange.lowerBound
-            let zoom = zoomFactor.zoomRange.lowerBound + fractionOfPositionRange * zoomRangeWidth
+            let newZoom = zoomFactor.zoomRange.lowerBound + fractionOfPositionRange * zoomRangeWidth
+            let previousZoom = self.zoom
             
-            DispatchQueue.main.async { self.zoom = zoom }
+            let roundedPreviousZoom = Double(previousZoom).truncate(places: 1)
+            let roundedNewZoom = Double(newZoom).truncate(places: 1)
+            
+            if
+                roundedNewZoom != roundedPreviousZoom &&
+                    (floor(roundedNewZoom) == roundedNewZoom || roundedNewZoom == C.zoomFactors[0].zoomRange.lowerBound)
+            {
+                let generator = UISelectionFeedbackGenerator()
+                generator.prepare()
+                generator.selectionChanged()
+            }
+            
+            DispatchQueue.main.async {
+                self.zoom = newZoom
+            }
         }
     }
     
+    func stopButtonPresses() {
+        /// temporary stop button presses to prevent conflicts with the gestures
+        DispatchQueue.main.async {
+            self.allowingButtonPresses = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                self.allowingButtonPresses = true
+            }
+        }
+    }
+    func expand() {
+        if !gestureStarted {
+            DispatchQueue.main.async {
+                self.keepingExpandedUUID = UUID()
+                self.gestureStarted = true
+            }
+        }
+        
+        if !isExpanded {
+            DispatchQueue.main.async {
+                withAnimation {
+                    self.isExpanded = true
+                }
+            }
+        }
+    }
     func startTimeout() {
         gestureStarted = false
         let uuidToCheck = keepingExpandedUUID
