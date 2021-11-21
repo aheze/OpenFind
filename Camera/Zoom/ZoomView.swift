@@ -10,9 +10,7 @@ import SwiftUI
 
 struct DotSpacerView: View {
     var body: some View {
-        Color.blue
-            .opacity(0.8)
-            .border(Color.red, width: 5)
+        Color.clear
     }
 }
 
@@ -27,17 +25,9 @@ struct ZoomFactorView: View {
     
     @GestureState private var isTapped = false
     
-    
-//    if expanded, must also be active
-    // if not expanded
     var body: some View {
         ZoomFactorContent(text: isActive ? zoom.string : value.string)
-//            .opacity(0)
-//            .opacity(isExpanded ? 1 : 0)
-            .border(
-                Color.blue, width: 5
-            )
-            .scaleEffect(isExpanded || isActive ? 1 : 0.6)
+            .scaleEffect(isExpanded || isActive ? 1 : 0.8)
             .opacity(!isExpanded || isActive ? 1 : 0)
             .offset(x: offset, y: 0)
             .background(
@@ -46,7 +36,6 @@ struct ZoomFactorView: View {
                     //                zoom = value
                 } label: {
                     ZoomFactorContent(text: value.string)
-                        .border(Color.red, width: 5)
                         .scaleEffect(activationProgress)
                 }
                     .opacity(isExpanded ? 1 : 0)
@@ -84,56 +73,62 @@ struct ZoomView: View {
     @State var keepingExpandedUUID: UUID?
     
     var body: some View {
-        Color.clear.overlay(
-            HStack(spacing: 0) {
-                ForEach(C.zoomFactors, id: \.self) { zoomFactor in
-                    let isActive = zoomFactor.zoomRange.contains(zoom)
+        Color.green.overlay(
+            Color(UIColor(hex: 0x002F3B))
+                .opacity(0.25)
+                .frame(width: isExpanded ? nil : C.zoomFactorLength * 3 + C.edgePadding * 2, height: C.zoomFactorLength + C.edgePadding * 2)
+                .overlay(
                     
-                    ZoomFactorView(
-                        zoom: $zoom,
-                        value: zoomFactor.zoomRange.lowerBound,
-                        activationProgress: getActivationProgress(for: zoomFactor),
-                        isExpanded: isExpanded,
-                        isActive: isActive,
-                        offset: isExpanded && isActive ? activeZoomFactorOffset(for: zoomFactor) : 0
-                    )
-                        .zIndex(1)
-                    
-                    DotSpacerView()
-                        .frame(width: isExpanded ? dotViewWidth(for: zoomFactor) : 0)
-                        .zIndex(0)
-                }
-            }
-                .padding(.vertical, 10)
-                .frame(width: isExpanded ? sliderWidth() : nil, alignment: .leading)
-                .background(
-                    Color.clear.overlay(
-                        HStack {
-                            ForEach(0..<80) { _ in
-                                Circle()
-                                    .fill(Color.white)
-                                    .frame(width: 5, height: 5)
-                            }
+                    HStack(spacing: 0) {
+                        ForEach(C.zoomFactors, id: \.self) { zoomFactor in
+                            let isActive = zoomFactor.zoomRange.contains(zoom)
+                            
+                            ZoomFactorView(
+                                zoom: $zoom,
+                                value: zoomFactor.zoomRange.lowerBound,
+                                activationProgress: getActivationProgress(for: zoomFactor),
+                                isExpanded: isExpanded,
+                                isActive: isActive,
+                                offset: isExpanded && isActive ? activeZoomFactorOffset(for: zoomFactor) : 0
+                            )
+                                .zIndex(1)
+                            
+                            DotSpacerView()
+                                .frame(width: isExpanded ? dotViewWidth(for: zoomFactor) : 0, height: 5)
+                                .zIndex(0)
                         }
-                            .drawingGroup(), alignment: .leading
-                        
-                    ).clipped()
+                    }
+                        .frame(width: isExpanded ? sliderWidth() : nil, alignment: .leading)
+                        .background(
+                            Color.clear.overlay(
+                                HStack {
+                                    ForEach(0..<80) { _ in
+                                        Circle()
+                                            .fill(Color.white)
+                                            .frame(width: 5, height: 5)
+                                    }
+                                }
+                                    .opacity(0.5)
+                                    .drawingGroup()
+                                , alignment: .leading
+                                
+                            )
+                                .clipped()
+                                .opacity(isExpanded ? 1 : 0)
+                        )
+                        .offset(x: isExpanded ? (savedExpandedOffset + draggingAmount + sliderLeftPadding()) : 0, y: 0)
+                    , alignment: isExpanded ? .leading : .center
                 )
-                .border(Color.cyan, width: 3)
-                .offset(x: isExpanded ? (savedExpandedOffset + draggingAmount + sliderLeftPadding()) : 0, y: 0)
-            , alignment: isExpanded ? .leading : .center)
-            .padding(.horizontal, C.edgePadding)
-            .background(
-                Color(UIColor(hex: 0x002F3B))
-                    .opacity(0.25)
-            )
+                .cornerRadius(50)
+        )
+        
+        
             .onAppear {
                 savedExpandedOffset = -C.zoomFactors[1].positionRange.lowerBound * sliderWidth()
                 /// This will be from 0 to 1, from slider leftmost to slider rightmost
                 let positionInSlider = positionInSlider()
                 setZoom(positionInSlider: positionInSlider)
             }
-            .cornerRadius(50)
             .highPriorityGesture(
                 DragGesture(minimumDistance: 0)
                     .updating($draggingAmount) { value, draggingAmount, transaction in
@@ -252,7 +247,7 @@ extension ZoomView {
     func sliderLeftPadding() -> CGFloat {
         let halfAvailableScreenWidth = availableScreenWidth() / 2
         let halfZoomFactorWidth = C.zoomFactorLength / 2
-//        let halfSpacing = C.spacing
+        //        let halfSpacing = C.spacing
         let padding = halfAvailableScreenWidth - halfZoomFactorWidth
         return padding
     }
