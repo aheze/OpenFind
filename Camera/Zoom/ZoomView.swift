@@ -26,8 +26,12 @@ struct ZoomFactorView: View {
     var body: some View {
         let isActive = zoomFactor.zoomRange.contains(zoomViewModel.zoom)
         
-        ZoomFactorContent(text: isActive ? zoomViewModel.zoom.string : zoomFactor.zoomRange.lowerBound.string)
-            .scaleEffect(zoomViewModel.isExpanded || isActive ? 1 : 0.8)
+        ZoomFactorContent(
+            zoomViewModel: zoomViewModel,
+            index: index,
+            text: isActive ? zoomViewModel.zoom.string : zoomFactor.zoomRange.lowerBound.string
+        )
+            .scaleEffect(zoomViewModel.isExpanded || isActive ? 1 : 0.7)
             .opacity(!zoomViewModel.isExpanded || isActive ? 1 : 0)
             .offset(x: zoomViewModel.isExpanded && isActive ? zoomViewModel.activeZoomFactorOffset(for: zoomFactor, draggingAmount: draggingAmount) : 0, y: 0)
             .background(
@@ -35,8 +39,12 @@ struct ZoomFactorView: View {
                     print("pressed!")
                     //                zoom = value
                 } label: {
-                    ZoomFactorContent(text: zoomFactor.zoomRange.lowerBound.string)
-                        .scaleEffect(zoomViewModel.getActivationProgress(for: zoomFactor, draggingAmount: draggingAmount))
+                    ZoomFactorContent(
+                        zoomViewModel: zoomViewModel,
+                        index: index,
+                        text: zoomFactor.zoomRange.lowerBound.string
+                    )
+                    .scaleEffect(zoomViewModel.getActivationProgress(for: zoomFactor, draggingAmount: draggingAmount))
                 }
                     .opacity(zoomViewModel.isExpanded ? 1 : 0)
             )
@@ -44,7 +52,10 @@ struct ZoomFactorView: View {
 }
 
 struct ZoomFactorContent: View {
+    @ObservedObject var zoomViewModel: ZoomViewModel
+    let index: Int
     let text: String
+    
     var body: some View {
         ZStack {
             Color(UIColor(hex: 0x002F3B))
@@ -55,10 +66,20 @@ struct ZoomFactorContent: View {
                 .font(.system(size: 16, weight: .semibold))
                 .foregroundColor(.white)
         }
-        .padding(.horizontal, C.zoomFactorPadding)
         .frame(width: C.zoomFactorLength, height: C.zoomFactorLength)
-
     }
+//    
+//    func getPadding() -> (CGFloat, CGFloat) {
+//        switch index {
+//        case 0:
+//            return (0, C.zoomFactorPadding / 2)
+//        case 1:
+//            return (C.zoomFactorPadding / 2, C.zoomFactorPadding / 2)
+//        case 2:
+//            return (C.zoomFactorPadding / 2, 0)
+//        default: fatalError()
+//        }
+//    }
 }
 
 
@@ -69,19 +90,11 @@ struct ZoomView: View {
     @GestureState var draggingAmount = CGFloat(0)
     
     
-//    @State var zoom: CGFloat = 1
-//
-//    @State var isExpanded = false
-//    @State var savedExpandedOffset = CGFloat(0)
-//
-//    @State var gestureStarted = false
-//    @State var keepingExpandedUUID: UUID?
-    
     var body: some View {
         Color.green.overlay(
             Color(UIColor(hex: 0x002F3B))
                 .opacity(0.25)
-                .frame(width: zoomViewModel.isExpanded ? nil : C.zoomFactorLength * 3, height: C.zoomFactorLength + C.edgePadding * 2)
+                .frame(width: zoomViewModel.isExpanded ? nil : C.zoomFactorLength * 3 + C.edgePadding * 2, height: C.zoomFactorLength + C.edgePadding * 2)
                 .overlay(
                     
                     HStack(spacing: 0) {
