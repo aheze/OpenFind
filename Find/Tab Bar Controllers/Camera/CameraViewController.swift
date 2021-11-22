@@ -614,8 +614,9 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
 }
-extension UIImage {
 
+/// not used
+extension UIImage {
     convenience init?(pixBuffer: CVPixelBuffer) {
         var ciImage = CIImage(cvPixelBuffer: pixBuffer)
         let transform = ciImage.orientationTransform(for: CGImagePropertyOrientation(rawValue: 6)!)
@@ -632,6 +633,7 @@ extension UIImage {
     }
 }
 
+/// not used
 extension UIDevice {
     var modelName: String {
         var systemInfo = utsname()

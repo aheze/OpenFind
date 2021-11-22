@@ -119,10 +119,11 @@ struct ZoomView: View {
     
     
     var body: some View {
-        Color.green.overlay(
-            Color(UIColor(hex: 0x002F3B))
+        Color.clear.overlay(
+            Color(UIColor(hex: 0x0091B6))
                 .opacity(0.25)
                 .frame(width: zoomViewModel.isExpanded ? nil : C.zoomFactorLength * 3 + C.edgePadding * 2, height: C.zoomFactorLength + C.edgePadding * 2)
+                .shadow(color: .white, radius: 3, x: 0, y: 2)
                 .overlay(
                     
                     HStack(spacing: 0) {

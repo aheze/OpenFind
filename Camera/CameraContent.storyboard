@@ -16,6 +16,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="f2R-fd-d7G">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIO-Uj-HK1">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlJ-qC-1i7">
                                 <rect key="frame" x="0.0" y="762" width="414" height="100"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -27,12 +34,22 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBrownColor"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="bIO-Uj-HK1" secondAttribute="bottom" id="1zt-eG-aTU"/>
+                            <constraint firstAttribute="trailing" secondItem="bIO-Uj-HK1" secondAttribute="trailing" id="3ti-Bt-EoY"/>
+                            <constraint firstAttribute="trailing" secondItem="f2R-fd-d7G" secondAttribute="trailing" id="5Yl-dx-Fac"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="hlJ-qC-1i7" secondAttribute="bottom" id="9wg-aY-1tg"/>
+                            <constraint firstItem="bIO-Uj-HK1" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="BaX-Vq-j5W"/>
+                            <constraint firstItem="bIO-Uj-HK1" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="Jfk-Ft-Zbu"/>
+                            <constraint firstAttribute="bottom" secondItem="f2R-fd-d7G" secondAttribute="bottom" id="M6M-Lx-jiD"/>
+                            <constraint firstItem="f2R-fd-d7G" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="MzO-BH-cq6"/>
                             <constraint firstItem="hlJ-qC-1i7" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="RFP-eq-dgj"/>
                             <constraint firstAttribute="trailing" secondItem="hlJ-qC-1i7" secondAttribute="trailing" id="aeS-f5-P62"/>
+                            <constraint firstItem="f2R-fd-d7G" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="bWY-HE-ZV0"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imageView" destination="f2R-fd-d7G" id="ka3-WF-Dh2"/>
+                        <outlet property="livePreviewContainerView" destination="bIO-Uj-HK1" id="Jvd-MQ-Lw8"/>
                         <outlet property="zoomContainerHeightC" destination="Y59-dz-ePe" id="3Cz-g1-8Br"/>
                         <outlet property="zoomContainerView" destination="hlJ-qC-1i7" id="fnx-k0-ahC"/>
                     </connections>
@@ -41,8 +58,47 @@
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="75.669642857142847"/>
         </scene>
+        <!--Live Preview View Controller-->
+        <scene sceneID="x3X-po-kEE">
+            <objects>
+                <viewController storyboardIdentifier="LivePreviewViewController" id="Xzd-1p-40j" customClass="LivePreviewViewController" customModule="Camera" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qaa-Hm-sR8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lJA-7m-wvT" customClass="LivePreviewView" customModule="Camera" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H2x-e3-0Uq">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Xu4-Rh-ON6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="H2x-e3-0Uq" firstAttribute="leading" secondItem="qaa-Hm-sR8" secondAttribute="leading" id="JgG-pT-Yr1"/>
+                            <constraint firstItem="lJA-7m-wvT" firstAttribute="leading" secondItem="qaa-Hm-sR8" secondAttribute="leading" id="Rdb-Ze-vpk"/>
+                            <constraint firstItem="H2x-e3-0Uq" firstAttribute="top" secondItem="qaa-Hm-sR8" secondAttribute="top" id="Vkg-je-AW3"/>
+                            <constraint firstAttribute="trailing" secondItem="H2x-e3-0Uq" secondAttribute="trailing" id="WTF-7x-RT9"/>
+                            <constraint firstAttribute="bottom" secondItem="H2x-e3-0Uq" secondAttribute="bottom" id="e1O-A2-yxT"/>
+                            <constraint firstItem="lJA-7m-wvT" firstAttribute="top" secondItem="qaa-Hm-sR8" secondAttribute="top" id="n37-ef-eOZ"/>
+                            <constraint firstAttribute="bottom" secondItem="lJA-7m-wvT" secondAttribute="bottom" id="tAL-MA-K9F"/>
+                            <constraint firstAttribute="trailing" secondItem="lJA-7m-wvT" secondAttribute="trailing" id="tGY-UV-Ad0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="livePreviewView" destination="lJA-7m-wvT" id="iEw-S1-uFm"/>
+                        <outlet property="pausedImageView" destination="H2x-e3-0Uq" id="1Ru-Er-ubl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V4h-dw-AZt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="847.82608695652175" y="75.669642857142847"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="Image" width="950" height="997"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

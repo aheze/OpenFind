@@ -18,6 +18,12 @@
 		3C11996827499A4C00D6AFE3 /* ZoomView+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996727499A4C00D6AFE3 /* ZoomView+Utilities.swift */; };
 		3C11996A27499A5E00D6AFE3 /* ZoomView+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996927499A5E00D6AFE3 /* ZoomView+Constants.swift */; };
 		3C11996C2749F81D00D6AFE3 /* ZoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11996B2749F81C00D6AFE3 /* ZoomViewModel.swift */; };
+		3C11996E274A385300D6AFE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C11996D274A385200D6AFE3 /* Assets.xcassets */; };
+		3C119971274B32B400D6AFE3 /* LivePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119970274B32B400D6AFE3 /* LivePreviewView.swift */; };
+		3C119973274B32D900D6AFE3 /* LivePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119972274B32D900D6AFE3 /* LivePreviewViewController.swift */; };
+		3C119975274B345000D6AFE3 /* LivePreviewVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119974274B345000D6AFE3 /* LivePreviewVC+Delegate.swift */; };
+		3C119977274B348F00D6AFE3 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119976274B348F00D6AFE3 /* Utilities.swift */; };
+		3C119979274B351700D6AFE3 /* LivePreviewVC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119978274B351700D6AFE3 /* LivePreviewVC+Setup.swift */; };
 		3C1317E225B2581800FCEB79 /* PhotosVC+Finding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317E125B2581800FCEB79 /* PhotosVC+Finding.swift */; };
 		3C1317E525B259EB00FCEB79 /* PhotoFindVC+Populate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317E425B259EB00FCEB79 /* PhotoFindVC+Populate.swift */; };
 		3C1317E925B264BD00FCEB79 /* PhotosWrapperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1317E825B264BD00FCEB79 /* PhotosWrapperController.swift */; };
@@ -149,7 +155,7 @@
 		3C4D39A127475C7C0010FD68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D399727475BF20010FD68 /* AppDelegate.swift */; };
 		3C4D39A227475C7C0010FD68 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D399B27475BF20010FD68 /* SceneDelegate.swift */; };
 		3C4D39A327475C7D0010FD68 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D399A27475BF20010FD68 /* ViewController.swift */; };
-		3C4D39A727475D690010FD68 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* Utilities.swift */; };
+		3C4D39A727475D690010FD68 /* SharedUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* SharedUtilities.swift */; };
 		3C4D39AA27475DAD0010FD68 /* Utilities+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */; };
 		3C4D39AB27475DAD0010FD68 /* Utilities+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */; };
 		3C4D39AD27475DC80010FD68 /* ResultsIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D397F27475BB10010FD68 /* ResultsIconView.swift */; };
@@ -159,7 +165,7 @@
 		3C4D39B227475DC80010FD68 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D398527475BB10010FD68 /* CameraController.swift */; };
 		3C4D39B327475DC80010FD68 /* FlashIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D398727475BB10010FD68 /* FlashIconView.swift */; };
 		3C4D39B427475DC80010FD68 /* SettingsIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D397E27475BB10010FD68 /* SettingsIconView.swift */; };
-		3C4D39C227475E2C0010FD68 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* Utilities.swift */; };
+		3C4D39C227475E2C0010FD68 /* SharedUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* SharedUtilities.swift */; };
 		3C4D39C327475E2C0010FD68 /* Utilities+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */; };
 		3C4D39C627475E8A0010FD68 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C527475E8A0010FD68 /* Constants.swift */; };
 		3C4D39C727475E8A0010FD68 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C527475E8A0010FD68 /* Constants.swift */; };
@@ -240,10 +246,10 @@
 		3C4D3A75274769500010FD68 /* TabControllerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3790274756470010FD68 /* TabControllerBridge.swift */; };
 		3C4D3A77274769660010FD68 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C527475E8A0010FD68 /* Constants.swift */; };
 		3C4D3A78274769660010FD68 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C527475E8A0010FD68 /* Constants.swift */; };
-		3C4D3A792747696F0010FD68 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* Utilities.swift */; };
+		3C4D3A792747696F0010FD68 /* SharedUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* SharedUtilities.swift */; };
 		3C4D3A7A2747696F0010FD68 /* Utilities+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */; };
 		3C4D3A7B2747696F0010FD68 /* Utilities+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C927475EBD0010FD68 /* Utilities+UIColor.swift */; };
-		3C4D3A7C274769700010FD68 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* Utilities.swift */; };
+		3C4D3A7C274769700010FD68 /* SharedUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* SharedUtilities.swift */; };
 		3C4D3A7D274769700010FD68 /* Utilities+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */; };
 		3C4D3A7E274769700010FD68 /* Utilities+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39C927475EBD0010FD68 /* Utilities+UIColor.swift */; };
 		3C4D3A82274769C10010FD68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3A81274769C10010FD68 /* Main.storyboard */; };
@@ -646,6 +652,12 @@
 		3C11996727499A4C00D6AFE3 /* ZoomView+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ZoomView+Utilities.swift"; sourceTree = "<group>"; };
 		3C11996927499A5E00D6AFE3 /* ZoomView+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ZoomView+Constants.swift"; sourceTree = "<group>"; };
 		3C11996B2749F81C00D6AFE3 /* ZoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomViewModel.swift; sourceTree = "<group>"; };
+		3C11996D274A385200D6AFE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3C119970274B32B400D6AFE3 /* LivePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePreviewView.swift; sourceTree = "<group>"; };
+		3C119972274B32D900D6AFE3 /* LivePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePreviewViewController.swift; sourceTree = "<group>"; };
+		3C119974274B345000D6AFE3 /* LivePreviewVC+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LivePreviewVC+Delegate.swift"; sourceTree = "<group>"; };
+		3C119976274B348F00D6AFE3 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		3C119978274B351700D6AFE3 /* LivePreviewVC+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LivePreviewVC+Setup.swift"; sourceTree = "<group>"; };
 		3C1317E125B2581800FCEB79 /* PhotosVC+Finding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Finding.swift"; sourceTree = "<group>"; };
 		3C1317E425B259EB00FCEB79 /* PhotoFindVC+Populate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoFindVC+Populate.swift"; sourceTree = "<group>"; };
 		3C1317E825B264BD00FCEB79 /* PhotosWrapperController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosWrapperController.swift; sourceTree = "<group>"; };
@@ -790,7 +802,7 @@
 		3C4D399927475BF20010FD68 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3C4D399A27475BF20010FD68 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3C4D399B27475BF20010FD68 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3C4D39A527475D690010FD68 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		3C4D39A527475D690010FD68 /* SharedUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedUtilities.swift; sourceTree = "<group>"; };
 		3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+UIViewController.swift"; sourceTree = "<group>"; };
 		3C4D39C527475E8A0010FD68 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3C4D39C927475EBD0010FD68 /* Utilities+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+UIColor.swift"; sourceTree = "<group>"; };
@@ -1262,6 +1274,17 @@
 			path = Zoom;
 			sourceTree = "<group>";
 		};
+		3C11996F274B329E00D6AFE3 /* Live Preview */ = {
+			isa = PBXGroup;
+			children = (
+				3C119970274B32B400D6AFE3 /* LivePreviewView.swift */,
+				3C119972274B32D900D6AFE3 /* LivePreviewViewController.swift */,
+				3C119974274B345000D6AFE3 /* LivePreviewVC+Delegate.swift */,
+				3C119978274B351700D6AFE3 /* LivePreviewVC+Setup.swift */,
+			);
+			path = "Live Preview";
+			sourceTree = "<group>";
+		};
 		3C16EA81259BED7F00D73755 /* Other View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1508,11 +1531,14 @@
 				3C4D398527475BB10010FD68 /* CameraController.swift */,
 				3C4D398827475BB10010FD68 /* CameraViewController.swift */,
 				3C11996627499A3E00D6AFE3 /* Zoom */,
+				3C11996F274B329E00D6AFE3 /* Live Preview */,
 				3C4D398727475BB10010FD68 /* FlashIconView.swift */,
 				3C4D398427475BB10010FD68 /* FocusIconView.swift */,
 				3C4D397F27475BB10010FD68 /* ResultsIconView.swift */,
 				3C4D397E27475BB10010FD68 /* SettingsIconView.swift */,
+				3C119976274B348F00D6AFE3 /* Utilities.swift */,
 				3C4D398327475BB10010FD68 /* CameraContent.storyboard */,
+				3C11996D274A385200D6AFE3 /* Assets.xcassets */,
 				3C4D399427475BC00010FD68 /* Testing */,
 			);
 			path = Camera;
@@ -1533,7 +1559,7 @@
 		3C4D39A427475D5F0010FD68 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				3C4D39A527475D690010FD68 /* Utilities.swift */,
+				3C4D39A527475D690010FD68 /* SharedUtilities.swift */,
 				3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */,
 				3C4D39C927475EBD0010FD68 /* Utilities+UIColor.swift */,
 			);
@@ -2871,6 +2897,7 @@
 			files = (
 				3C4D3A92274771600010FD68 /* SharedAssets.xcassets in Resources */,
 				3C4D39CD27475F3E0010FD68 /* CameraContent.storyboard in Resources */,
+				3C11996E274A385300D6AFE3 /* Assets.xcassets in Resources */,
 				3C4D39CE27475F430010FD68 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3080,7 +3107,7 @@
 				3C4D3A8527476A260010FD68 /* ListsViewController.swift in Sources */,
 				3C4D3A8427476A260010FD68 /* ListsBridge.swift in Sources */,
 				3C4D3A24274767B20010FD68 /* PhotosController.swift in Sources */,
-				3C4D39A727475D690010FD68 /* Utilities.swift in Sources */,
+				3C4D39A727475D690010FD68 /* SharedUtilities.swift in Sources */,
 				3C4D3A26274768810010FD68 /* PhotosBridge.swift in Sources */,
 				3C4D3A1A274767410010FD68 /* ToolbarViewModel.swift in Sources */,
 				3C4D3A23274767AD0010FD68 /* CameraController.swift in Sources */,
@@ -3106,9 +3133,11 @@
 				3C4D3A062747667B0010FD68 /* TabControllerBridge.swift in Sources */,
 				3C4D39CC27475EBD0010FD68 /* Utilities+UIColor.swift in Sources */,
 				3C4D39C327475E2C0010FD68 /* Utilities+UIViewController.swift in Sources */,
+				3C119977274B348F00D6AFE3 /* Utilities.swift in Sources */,
 				3C67E4F0274840F9001F1B4B /* ZoomView.swift in Sources */,
 				3C4D39FF2747667A0010FD68 /* ContentPagingFlowLayout.swift in Sources */,
-				3C4D39C227475E2C0010FD68 /* Utilities.swift in Sources */,
+				3C4D39C227475E2C0010FD68 /* SharedUtilities.swift in Sources */,
+				3C119973274B32D900D6AFE3 /* LivePreviewViewController.swift in Sources */,
 				3C4D39A127475C7C0010FD68 /* AppDelegate.swift in Sources */,
 				3C4D3A022747667A0010FD68 /* TabBarController.swift in Sources */,
 				3C4D39C827475E8A0010FD68 /* Constants.swift in Sources */,
@@ -3121,12 +3150,15 @@
 				3C4D3A092747667B0010FD68 /* TabBarViewController.swift in Sources */,
 				3C11996C2749F81D00D6AFE3 /* ZoomViewModel.swift in Sources */,
 				3C4D39B227475DC80010FD68 /* CameraController.swift in Sources */,
+				3C119971274B32B400D6AFE3 /* LivePreviewView.swift in Sources */,
+				3C119979274B351700D6AFE3 /* LivePreviewVC+Setup.swift in Sources */,
 				3C4D39B427475DC80010FD68 /* SettingsIconView.swift in Sources */,
 				3C4D3A072747667B0010FD68 /* TabViewModel.swift in Sources */,
 				3C4D39AF27475DC80010FD68 /* CameraViewController.swift in Sources */,
 				3C11996827499A4C00D6AFE3 /* ZoomView+Utilities.swift in Sources */,
 				3C4D3A082747667B0010FD68 /* ContentCell.swift in Sources */,
 				3C4D39AD27475DC80010FD68 /* ResultsIconView.swift in Sources */,
+				3C119975274B345000D6AFE3 /* LivePreviewVC+Delegate.swift in Sources */,
 				3C4D39A327475C7D0010FD68 /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3142,7 +3174,7 @@
 				3C4D39F2274766790010FD68 /* ContentPagingFlowLayout.swift in Sources */,
 				3C4D39F5274766790010FD68 /* TabBarController.swift in Sources */,
 				3C4D3A7A2747696F0010FD68 /* Utilities+UIViewController.swift in Sources */,
-				3C4D3A792747696F0010FD68 /* Utilities.swift in Sources */,
+				3C4D3A792747696F0010FD68 /* SharedUtilities.swift in Sources */,
 				3C4D39F0274766590010FD68 /* PhotosController.swift in Sources */,
 				3C4D39F8274766790010FD68 /* TabBarToolbars.swift in Sources */,
 				3C4D39F7274766790010FD68 /* ContentPageViewController.swift in Sources */,
@@ -3169,7 +3201,7 @@
 				3C4D3A6B2747694F0010FD68 /* ContentPageViewController.swift in Sources */,
 				3C4D3A6F2747694F0010FD68 /* TabControllerBridge.swift in Sources */,
 				3C4D3A7D274769700010FD68 /* Utilities+UIViewController.swift in Sources */,
-				3C4D3A7C274769700010FD68 /* Utilities.swift in Sources */,
+				3C4D3A7C274769700010FD68 /* SharedUtilities.swift in Sources */,
 				3C4D3A66274769370010FD68 /* ListsBridge.swift in Sources */,
 				3C4D3A702747694F0010FD68 /* TabViewModel.swift in Sources */,
 				3C4D3A712747694F0010FD68 /* TabBarToolbars.swift in Sources */,

@@ -6,14 +6,25 @@
 //
 
 import SwiftUI
+import Combine
 
 public class CameraViewController: UIViewController, PageViewController {
     public var tabType: TabState = .camera
     var cameraViewModel: ToolbarViewModel.Camera!
     var zoomViewModel: ZoomViewModel!
+    private var cancellable: AnyCancellable?
     
     @IBOutlet weak var zoomContainerView: UIView!
     @IBOutlet weak var zoomContainerHeightC: NSLayoutConstraint!
+    @IBOutlet weak var imageView: UIImageView!
+    
+    @IBOutlet weak var livePreviewContainerView: UIView!
+    lazy var livePreviewViewController: LivePreviewViewController = {
+        let storyboard = UIStoryboard(name: "CameraContent", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "LivePreviewViewController") as! LivePreviewViewController
+        self.addChild(viewController, in: livePreviewContainerView)
+        return viewController
+    }()
     
     public lazy var toolbar: CameraToolbarView = {
         self.cameraViewModel = .init()
@@ -27,7 +38,18 @@ public class CameraViewController: UIViewController, PageViewController {
         self.zoomViewModel = .init(containerView: zoomContainerView)
         let zoomView = ZoomView(zoomViewModel: self.zoomViewModel)
         let hostingController = UIHostingController(rootView: zoomView)
+        zoomContainerView.backgroundColor = .clear
+        hostingController.view.backgroundColor = .clear
         addChild(hostingController, in: zoomContainerView)
+        
+        view.backgroundColor = .black
+        cancellable = zoomViewModel.$zoom.sink { zoom in
+            UIView.animate(withDuration: 0.5) {
+                self.imageView.transform = CGAffineTransform(scaleX: zoom, y: zoom)
+            }
+        }
+        
+        _ = livePreviewViewController
     }
 }
 
@@ -72,3 +94,5 @@ public struct CameraToolbarView: View {
         }
     }
 }
+
+
