@@ -137,6 +137,7 @@ class ZoomViewModel: ObservableObject {
         /// This will be from 0 to 1, from slider leftmost to slider rightmost
         let positionInSlider = positionInSlider(totalOffset: savedExpandedOffset)
         setZoom(positionInSlider: positionInSlider)
+        updateActivationProgress(positionInSlider: positionInSlider)
     }
     
     /// return (`totalExpandedOffset`, `newTranslation`)
@@ -166,7 +167,7 @@ class ZoomViewModel: ObservableObject {
         /// This will be from 0 to 1, from slider leftmost to slider rightmost
         let positionInSlider = positionInSlider(totalOffset: totalExpandedOffset)
         setZoom(positionInSlider: positionInSlider)
-        updateActivationProgress(draggingAmount: newTranslation, savedOffset: newSavedExpandedOffset)
+        updateActivationProgress(positionInSlider: positionInSlider)
         expand()
 
         if ended {
@@ -237,21 +238,18 @@ class ZoomViewModel: ObservableObject {
     }
     
     /// offset for the active zoom factor
-    func activeZoomFactorOffset(for zoomFactor: ZoomFactor, draggingAmount: CGFloat) -> CGFloat {
+    func activeZoomFactorOffset(for zoomFactor: ZoomFactor, totalOffset: CGFloat) -> CGFloat {
         let position = zoomFactor.positionRange.lowerBound * sliderWidth
-        let currentOffset = savedExpandedOffset + draggingAmount
         
-        /// `currentOffset` is negative, make positive, then subtract `position`
-        let offset = -currentOffset - position
+        /// `totalOffset` is negative, make positive, then subtract `position`
+        let offset = -totalOffset - position
         return offset
     }
     
-    func updateActivationProgress(draggingAmount: CGFloat, savedOffset: CGFloat) {
+    func updateActivationProgress(positionInSlider: CGFloat) {
         for index in C.zoomFactors.indices {
             let zoomFactor = C.zoomFactors[index]
             let lower = zoomFactor.positionRange.lowerBound
-
-            let positionInSlider = positionInSlider(totalOffset: draggingAmount + savedExpandedOffset)
 
             var percentActivated = CGFloat(1)
             if positionInSlider < lower {

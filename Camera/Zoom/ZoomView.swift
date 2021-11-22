@@ -41,7 +41,7 @@ struct ZoomFactorView: View {
     var body: some View {
         let isActive = zoomFactor.zoomRange.contains(zoomViewModel.zoom)
         
-        /// projection
+        /// projection to center
         Button(action: activate) {
             ZoomFactorContent(
                 zoomViewModel: zoomViewModel,
@@ -58,7 +58,9 @@ struct ZoomFactorView: View {
             zoomViewModel.isExpanded && !isActive ? zoomFactor.activationProgress : 1
         )
         .scaleEffect(isActive ? 1 : 0.7)
-        .offset(x: zoomViewModel.isExpanded && isActive ? zoomViewModel.activeZoomFactorOffset(for: zoomFactor, draggingAmount: draggingAmount) : 0, y: 0)
+        .offset(x: zoomViewModel.isExpanded && isActive ? zoomViewModel.activeZoomFactorOffset(for: zoomFactor, totalOffset: draggingAmount + zoomViewModel.savedExpandedOffset) : 0, y: 0)
+        
+        /// stays where it is supposed to be, moves with the slider
         .background(
             Button(action: activate) {
                 ZoomFactorContent(
@@ -81,6 +83,7 @@ struct ZoomFactorView: View {
             zoomViewModel.zoom = zoomFactor.zoomRange.lowerBound
             zoomViewModel.zoomLabel = zoomFactor.zoomLabelRange.lowerBound
             zoomViewModel.savedExpandedOffset = -zoomFactor.positionRange.lowerBound * zoomViewModel.sliderWidth
+            zoomViewModel.updateActivationProgress(positionInSlider: zoomViewModel.positionInSlider(totalOffset: zoomViewModel.savedExpandedOffset))
             zoomViewModel.isExpanded = false
             zoomViewModel.keepingExpandedUUID = nil
         }
@@ -96,7 +99,7 @@ struct ZoomFactorContent: View {
     var body: some View {
         ZStack {
             Color(UIColor(hex: 0x002F3B))
-                .opacity(0.8)
+                .opacity(0.5)
                 .cornerRadius(24)
             
             Text(text)
@@ -107,8 +110,6 @@ struct ZoomFactorContent: View {
     }
 }
 
-
-
 struct ZoomView: View {
     
     @ObservedObject var zoomViewModel: ZoomViewModel
@@ -117,8 +118,8 @@ struct ZoomView: View {
     
     var body: some View {
         Color.clear.overlay(
-            Color(UIColor(hex: 0x0091B6))
-                .opacity(0.25)
+            Color(UIColor(hex: 0x002F3B))
+                .opacity(0.15)
                 .frame(width: zoomViewModel.isExpanded ? nil : C.zoomFactorLength * 3 + C.edgePadding * 2, height: C.zoomFactorLength + C.edgePadding * 2)
                 .overlay(
                     

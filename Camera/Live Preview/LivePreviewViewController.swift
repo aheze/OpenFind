@@ -34,7 +34,6 @@ class LivePreviewViewController: UIViewController {
     }
     
     func changeZoom(to zoom: CGFloat) {
-        print("chanmge to \(zoom)")
         do {
             try cameraDevice.lockForConfiguration()
             cameraDevice.ramp(toVideoZoomFactor: zoom, withRate: 200)
