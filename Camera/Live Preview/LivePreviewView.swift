@@ -24,6 +24,7 @@ class LivePreviewView: UIView {
             videoPreviewLayer.session = newValue
         }
     }
+    
     // MARK: UIView
     override class var layerClass: AnyClass {
         return AVCaptureVideoPreviewLayer.self

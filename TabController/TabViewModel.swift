@@ -24,6 +24,16 @@ class TabViewModel: ObservableObject {
     @Published var animatorProgress = CGFloat(0) /// for blur
     var updateTabBarHeight: ((TabState) -> Void)?
     var clickedToNewTab: ((TabState) -> Void)?
+    
+    func goToTab(tabType: TabState) {
+        self.clickedToNewTab?(tabType)
+        withAnimation(.easeOut(duration: 0.3)) {
+            self.tabState = tabType
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.updateTabBarHeight?(tabType)
+        }
+    }
 }
 
 public enum TabState: Equatable {
@@ -35,6 +45,7 @@ public enum TabState: Equatable {
     
     /// progress from <camera to photos> or <camera to lists> is going up
     static var progressGoingUpNow = false
+    
     
     static func modifyProgress(current previous: TabState? = nil, new: TabState) {
         switch new {
@@ -48,8 +59,6 @@ public enum TabState: Equatable {
             guard let previousTab = previous else { return }
             switch previousTab {
             case .cameraToPhotos(let previousProgress):
-//                print("Camera to Photos. New: \(newProgress), prev: \(previousProgress)... \(newProgress > previousProgress)")
-                
                 guard newProgress <= 1 else {
                     progressGoingUpNow = true
                     break
@@ -80,8 +89,6 @@ public enum TabState: Equatable {
     static func notifyBeginChange(current: TabState, new: TabState) -> TabState? {
         let progressGoingUpPreviously = progressGoingUpNow
         modifyProgress(current: current, new: new)
-        
-        
         
         switch current {
         case .cameraToPhotos(_):

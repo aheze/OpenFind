@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 
 public class CameraViewController: UIViewController, PageViewController {
+    
     public var tabType: TabState = .camera
     var cameraViewModel: ToolbarViewModel.Camera!
     var zoomViewModel: ZoomViewModel!
@@ -23,6 +24,10 @@ public class CameraViewController: UIViewController, PageViewController {
         let storyboard = UIStoryboard(name: "CameraContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "LivePreviewViewController") as! LivePreviewViewController
         self.addChild(viewController, in: livePreviewContainerView)
+        
+        viewController.findFromPhotosButtonPressed = { [weak self] in
+            TabControl.moveToOtherTab?(.photos, true)
+        }
         return viewController
     }()
     

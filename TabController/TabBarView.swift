@@ -101,13 +101,7 @@ struct CameraButton: View {
     
     var body: some View {
         Button {
-            tabViewModel.clickedToNewTab?(tabType)
-            withAnimation(.easeOut(duration: 0.3)) {
-                tabViewModel.tabState = tabType
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                tabViewModel.updateTabBarHeight?(tabType)
-            }
+            tabViewModel.goToTab(tabType: tabType)
         } label: {
             Group {
                 Circle()
@@ -150,13 +144,7 @@ struct IconButton<Content: View>: View {
     
     var body: some View {
         Button {
-            tabViewModel.clickedToNewTab?(tabType)
-            withAnimation(.easeOut(duration: 0.3)) {
-                tabViewModel.tabState = tabType
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                tabViewModel.updateTabBarHeight?(tabType)
-            }
+            tabViewModel.goToTab(tabType: tabType)
         } label: {
             content
         }

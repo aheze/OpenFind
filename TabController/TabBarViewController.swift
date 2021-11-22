@@ -62,7 +62,9 @@ public class TabBarViewController: UIViewController {
             changeTabHeight(constant: ConstantVars.tabBarTotalHeightExpanded)
         }
     }
-    func updateTabContent(_ tabState: TabState) {
+    
+    /// animated is TODO, since setting `tabState` triggers the `.sink`, which auto calls this function.
+    func updateTabContent(_ tabState: TabState, animated: Bool) {
         let index: Int
         switch tabState {
         case .photos:

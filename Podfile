@@ -1,21 +1,40 @@
 platform :ios, '13.0'
 
-target 'Find' do
+
+def shared_pods
   use_frameworks!
-#use_modular_headers!
-
-pod 'QuickLayout'
-pod 'RealmSwift'
-pod 'SDWebImage', '~> 5.0'
-pod 'SDWebImagePhotosPlugin'
-pod 'SwiftEntryKit'
-pod 'SnapKit'
-pod 'SPAlert'
-pod 'SwiftyJSON', '~> 4.0'
-pod 'SwiftRichString'
-
-
+  pod 'QuickLayout'
+  pod 'RealmSwift'
+  pod 'SDWebImage', '~> 5.0'
+  pod 'SDWebImagePhotosPlugin'
+  pod 'SwiftEntryKit'
+  pod 'SnapKit'
+  pod 'SPAlert'
+  pod 'SwiftyJSON', '~> 4.0'
+  pod 'SwiftRichString'
 end
+
+
+target 'Find' do
+  shared_pods
+end
+
+target 'TabController' do
+  shared_pods
+end
+
+target 'Photos' do
+  shared_pods
+end
+
+target 'Camera' do
+  shared_pods
+end
+
+target 'Lists' do
+  shared_pods
+end
+
 
 post_install do |installer|
   installer.pods_project.build_configurations.each do |config|

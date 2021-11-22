@@ -9,7 +9,6 @@
 import SwiftUI
 
 class ViewController: UIViewController {
-    
     lazy var photos: PhotosController = {
         return PhotosBridge.makeController()
     }()
@@ -28,7 +27,6 @@ class ViewController: UIViewController {
             return self?.toolbarViewModel ?? ToolbarViewModel()
         }
         photos.viewController.activateSelectionToolbar = { [weak self] activate, animate in
-//            print("act? \(activate)")
             guard let self = self else { return }
             if activate {
                 if animate {
@@ -75,7 +73,6 @@ class ViewController: UIViewController {
 extension ViewController: TabBarControllerDelegate{
     
     func willBeginNavigatingTo(tab: TabState) {
-        print("Nav to: \(tab)")
         switch tab {
         case .photos:
             photos.viewController.willBecomeActive()

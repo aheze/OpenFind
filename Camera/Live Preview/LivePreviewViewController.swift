@@ -16,6 +16,9 @@ class LivePreviewViewController: UIViewController {
     @IBOutlet weak var livePreviewView: LivePreviewView!
     @IBOutlet weak var pausedImageView: UIImageView!
     
+    /// in case no camera was found
+    var findFromPhotosButtonPressed: (() -> Void)?
+    
     let session = AVCaptureSession()
     let videoDataOutput = AVCaptureVideoDataOutput()
     let photoDataOutput = AVCapturePhotoOutput()
@@ -24,6 +27,7 @@ class LivePreviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("load")
         setup()
     }
     

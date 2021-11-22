@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import SnapKit
 
 extension LivePreviewViewController {
     func configureCamera() {
@@ -46,6 +47,15 @@ extension LivePreviewViewController {
             }
             
             session.startRunning()
+        } else {
+            let fallbackView = FallbackView()
+            view.addSubview(fallbackView)
+            fallbackView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+            fallbackView.goToPhotos = { [weak self] in
+                self?.findFromPhotosButtonPressed?()
+            }
         }
     }
     func getCamera() -> AVCaptureDevice? {
@@ -75,6 +85,7 @@ extension LivePreviewViewController {
 //        }
         
         let bestDevice = devices.first
-        return bestDevice
+//        return bestDevice
+        return nil
     }
 }

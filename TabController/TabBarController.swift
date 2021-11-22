@@ -13,6 +13,11 @@ public protocol TabBarControllerDelegate: AnyObject {
     func didFinishNavigatingTo(tab: TabState)
 }
 
+
+enum TabControl {
+    static var moveToOtherTab: ((TabState, Bool) -> Void)?
+}
+
 public protocol PageViewController: UIViewController {
     /// make sure all view controllers have a name
     var tabType: TabState { get set }
@@ -94,7 +99,7 @@ public class TabBarController<
             self?.delegate?.didFinishNavigatingTo(tab: activeTab)
         }
         cancellable = tabViewModel.$tabState.sink { activeTab in
-            viewController.updateTabContent(activeTab)
+            viewController.updateTabContent(activeTab, animated: false)
         }
         
         let tabBarView = TabBarView(
@@ -113,45 +118,54 @@ public class TabBarController<
         
         viewController.contentCollectionView.delegate = self
         viewController.contentCollectionView.dataSource = self
+        
+        TabControl.moveToOtherTab = { [weak self] tabType, animated in
+            self?.tabViewModel.goToTab(tabType: tabType)
+            self?.viewController.updateTabContent(tabType, animated: animated)
+        }
     }
     
     /// called **even** when programmatically set the tab via the icon button...
     /// so, need to use `updateTabBarHeightAfterScrolling` to check whether the user was scrolling or not.
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let middle = viewController.contentCollectionView.bounds.width
-        let distanceFromMiddle = scrollView.contentOffset.x - middle
         
-        let newTab: TabState
-        if distanceFromMiddle < 0 { /// going to Photos
-            let percentage = abs(distanceFromMiddle / middle)
-            if percentage == 0 { /// still completely at camera, no movement
-                newTab = .camera
-                updateTabBarHeightAfterScrolling(scrollView, to: .camera)
-            } else if percentage == 1 { /// finished at photos
-                newTab = .photos
-                updateTabBarHeightAfterScrolling(scrollView, to: .photos)
-            } else { /// use percentage
-                newTab = .cameraToPhotos(percentage)
-                updateTabBarHeightAfterScrolling(scrollView, to: .camera)
+        /// only update after **the user** scrolled, since `scrollViewDidScroll` is called even when programmatically setting the content offset
+        if (scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating) {
+            let middle = viewController.contentCollectionView.bounds.width
+            let distanceFromMiddle = scrollView.contentOffset.x - middle
+            
+            let newTab: TabState
+            if distanceFromMiddle < 0 { /// going to Photos
+                let percentage = abs(distanceFromMiddle / middle)
+                if percentage == 0 { /// still completely at camera, no movement
+                    newTab = .camera
+                    tabViewModel.updateTabBarHeight?(.camera)
+                } else if percentage == 1 { /// finished at photos
+                    newTab = .photos
+                    tabViewModel.updateTabBarHeight?(.photos)
+                } else { /// use percentage
+                    newTab = .cameraToPhotos(percentage)
+                    tabViewModel.updateTabBarHeight?(.camera)
+                }
+            } else { /// going to Lists
+                let percentage = abs(distanceFromMiddle / middle)
+                if percentage == 0 {
+                    newTab = .camera
+                    tabViewModel.updateTabBarHeight?(.camera)
+                } else if percentage == 1 {
+                    newTab = .lists
+                    tabViewModel.updateTabBarHeight?(.lists)
+                } else {
+                    newTab = .cameraToLists(percentage)
+                    tabViewModel.updateTabBarHeight?(.camera)
+                }
             }
-        } else { /// going to Lists
-            let percentage = abs(distanceFromMiddle / middle)
-            if percentage == 0 {
-                newTab = .camera
-                updateTabBarHeightAfterScrolling(scrollView, to: .camera)
-            } else if percentage == 1 {
-                newTab = .lists
-                updateTabBarHeightAfterScrolling(scrollView, to: .lists)
-            } else {
-                newTab = .cameraToLists(percentage)
-                updateTabBarHeightAfterScrolling(scrollView, to: .camera)
+            
+            if let newTab = TabState.notifyBeginChange(current: tabViewModel.tabState, new: newTab) {
+                delegate?.willBeginNavigatingTo(tab: newTab)
             }
+            tabViewModel.tabState = newTab
         }
-        
-        if let newTab = TabState.notifyBeginChange(current: tabViewModel.tabState, new: newTab) {
-            delegate?.willBeginNavigatingTo(tab: newTab)
-        }
-        tabViewModel.tabState = newTab
     }
     
     /// notify delegate and update tab bar height
