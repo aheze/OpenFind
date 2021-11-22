@@ -34,14 +34,14 @@ class LivePreviewViewController: UIViewController {
     }
     
     func changeZoom(to zoom: CGFloat) {
-//        print("chanmge to \(zoom)")
-//        do {
-//            try cameraDevice.lockForConfiguration()
-//            device.unlockForConfiguration()
-//        }
-//        catch {
-//            print("Error focusing \(error)")
-//        }
+        print("chanmge to \(zoom)")
+        do {
+            try cameraDevice.lockForConfiguration()
+            cameraDevice.ramp(toVideoZoomFactor: zoom, withRate: 200)
+            cameraDevice.unlockForConfiguration()
+        } catch {
+            print("Error focusing \(error)")
+        }
 //        cameraDevice.ramp(toVideoZoomFactor: <#T##CGFloat#>, withRate: <#T##Float#>)
     }
 }

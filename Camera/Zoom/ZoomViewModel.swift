@@ -63,6 +63,9 @@ class ZoomViewModel: ObservableObject {
     
     
     func configureZoomFactors(minZoom: CGFloat, maxZoom: CGFloat, switchoverFactors: [NSNumber]) {
+        
+        let limitedMaxZoom = min(40, maxZoom)
+        
         let minimumFactorLabel: Double = 0.5
         let centerFactorLabel: Double = 1
         let maxFactorLabel: Double = UIDevice.modelName.contains("iPhone 13 Pro") ? 3 : 2
@@ -86,13 +89,13 @@ class ZoomViewModel: ObservableObject {
             zoomRanges = [
                 minZoom...1.nextDown,
                 1...2.nextDown,
-                2...maxZoom
+                2...limitedMaxZoom
             ]
         case 2:
             zoomRanges = [
                 minZoom...1.nextDown,
                 1...2.nextDown,
-                2...maxZoom
+                2...limitedMaxZoom
             ]
         case 3:
             let switchoverFactor1 = Double(truncating: switchoverFactors[0])
@@ -101,7 +104,7 @@ class ZoomViewModel: ObservableObject {
             zoomRanges = [
                 minZoom...switchoverFactor1.nextDown,
                 switchoverFactor1...switchoverFactor2.nextDown,
-                switchoverFactor2...maxZoom
+                switchoverFactor2...limitedMaxZoom
             ]
         default:
             break
