@@ -21,13 +21,15 @@ public class CameraViewController: UIViewController, PageViewController {
     
     @IBOutlet weak var livePreviewContainerView: UIView!
     lazy var livePreviewViewController: LivePreviewViewController = {
+        
         let storyboard = UIStoryboard(name: "CameraContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "LivePreviewViewController") as! LivePreviewViewController
-        self.addChild(viewController, in: livePreviewContainerView)
         
         viewController.findFromPhotosButtonPressed = { [weak self] in
             TabControl.moveToOtherTab?(.photos, true)
         }
+        
+        self.addChild(viewController, in: livePreviewContainerView)
         return viewController
     }()
     
@@ -49,13 +51,19 @@ public class CameraViewController: UIViewController, PageViewController {
         addChild(hostingController, in: zoomContainerView)
         zoomContainerView.backgroundColor = .clear
         
-        cancellable = zoomViewModel.$zoom.sink { zoom in
-            UIView.animate(withDuration: 0.5) {
-                self.imageView.transform = CGAffineTransform(scaleX: zoom, y: zoom)
-            }
+        cancellable = zoomViewModel.$zoom.sink { [weak self] zoom in
+            self?.livePreviewViewController.changeZoom(to: zoom)
         }
         
         _ = livePreviewViewController
+        
+        if let camera = livePreviewViewController.cameraDevice {
+            zoomViewModel.configureZoomFactors(
+                minZoom: camera.minAvailableVideoZoomFactor,
+                maxZoom: camera.maxAvailableVideoZoomFactor,
+                switchoverFactors: camera.virtualDeviceSwitchOverVideoZoomFactors
+            )
+        }
     }
     
     func setup() {

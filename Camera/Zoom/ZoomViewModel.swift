@@ -11,18 +11,25 @@ import SwiftUI
 
 struct ZoomFactor: Hashable {
     
-    /// range of zoom
-    /// example: `0.5..<1`
+    /// range of the zoom label (what the user sees)
+    /// example: `0.5...1`
+    var zoomLabelRange: ClosedRange<CGFloat>
+    
+    
+    /// range of actual zoom
+    /// example: `1...2`
     var zoomRange: ClosedRange<CGFloat>
     
     /// position relative to entire slider
-    /// example: `0.0..<0.25`
+    /// example: `0.0..<0.3`
     var positionRange: ClosedRange<CGFloat>
 }
 
 
 class ZoomViewModel: ObservableObject {
-    @Published var zoom: CGFloat = 1
+    @Published var ready = false
+    @Published var zoomLabel: CGFloat = 1
+    @Published var zoom: CGFloat = 2
     
     @Published var isExpanded = false
     @Published var savedExpandedOffset = CGFloat(0)
@@ -37,8 +44,7 @@ class ZoomViewModel: ObservableObject {
     var containerView: UIView
     init(containerView: UIView) {
         self.containerView = containerView
-        self.updateSliderWidth()
-        self.updateSliderLeftPadding()
+
         NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification, object: nil, queue: .main) { [weak self] _ in
             guard let self = self else { return }
             let previousSliderWidth = self.sliderWidth
@@ -51,6 +57,81 @@ class ZoomViewModel: ObservableObject {
             let savedExpandedOffset = -previousProgress * self.sliderWidth
             self.savedExpandedOffset = savedExpandedOffset
         }
+    }
+    
+    
+    func configureZoomFactors(minZoom: CGFloat, maxZoom: CGFloat, switchoverFactors: [NSNumber]) {
+        let minimumFactorLabel: Double = 0.5
+        let centerFactorLabel: Double = 1
+        let maxFactorLabel: Double = UIDevice.modelName.contains("iPhone 13 Pro") ? 3 : 2
+        let maxZoomLabel: Double = 10
+
+        let zoomLabelRanges: [ClosedRange<CGFloat>] = [
+            minimumFactorLabel...centerFactorLabel.nextDown,
+            centerFactorLabel...maxFactorLabel.nextDown,
+            maxFactorLabel...maxZoomLabel
+        ]
+        let positionRanges: [ClosedRange<CGFloat>] = [
+            0...0.3,
+            0.3.nextUp...0.6,
+            0.6.nextUp...1
+        ]
+        var zoomRanges: [ClosedRange<CGFloat>] = []
+        
+        let cameraCount = switchoverFactors.count + 1
+        switch cameraCount {
+        case 1:
+            zoomRanges = [
+                minZoom...1.nextDown,
+                1...2.nextDown,
+                2...maxZoom
+            ]
+        case 2:
+            zoomRanges = [
+                minZoom...1.nextDown,
+                1...2.nextDown,
+                2...maxZoom
+            ]
+        case 3:
+            let switchoverFactor1 = Double(truncating: switchoverFactors[0])
+            let switchoverFactor2 = Double(truncating: switchoverFactors[1])
+            
+            zoomRanges = [
+                minZoom...switchoverFactor1.nextDown,
+                switchoverFactor1...switchoverFactor2.nextDown,
+                switchoverFactor2...maxZoom
+            ]
+        default:
+            break
+        }
+        
+        var zoomFactors = [ZoomFactor]()
+        for index in zoomRanges.indices {
+            let zoomFactor = ZoomFactor(
+                zoomLabelRange: zoomLabelRanges[index],
+                zoomRange: zoomRanges[index],
+                positionRange: positionRanges[index]
+            )
+            zoomFactors.append(zoomFactor)
+        }
+        
+        zoomLabel = centerFactorLabel
+        zoom = zoomRanges[1].lowerBound
+        C.zoomFactors = zoomFactors
+        setup()
+        
+        ready = true
+    }
+    
+    func setup() {
+        self.updateSliderWidth()
+        self.updateSliderLeftPadding()
+        
+        savedExpandedOffset = -(C.zoomFactors[safe: 1]?.positionRange.lowerBound ?? 0) * sliderWidth
+        
+        /// This will be from 0 to 1, from slider leftmost to slider rightmost
+        let positionInSlider = positionInSlider(draggingAmount: 0)
+        setZoom(positionInSlider: positionInSlider)
     }
     
     func update(translation: CGFloat, draggingAmount: inout CGFloat) {
@@ -101,6 +182,7 @@ class ZoomViewModel: ObservableObject {
         let leftPadding = C.edgePadding
         let padding = halfAvailableScreenWidth - halfZoomFactorWidth + leftPadding
         
+        print("left: \(padding)")
         self.sliderLeftPadding = padding
     }
     
@@ -188,14 +270,19 @@ class ZoomViewModel: ObservableObject {
             /// example: `0.5..<1.0` becomes `0.5`
             let zoomRangeWidth = zoomFactor.zoomRange.upperBound - zoomFactor.zoomRange.lowerBound
             let newZoom = zoomFactor.zoomRange.lowerBound + fractionOfPositionRange * zoomRangeWidth
-            let previousZoom = self.zoom
             
-            let roundedPreviousZoom = Double(previousZoom).truncate(places: 1)
-            let roundedNewZoom = Double(newZoom).truncate(places: 1)
+            /// display
+            let zoomLabelRangeWidth = zoomFactor.zoomLabelRange.upperBound - zoomFactor.zoomLabelRange.lowerBound
+            let newZoomLabel = zoomFactor.zoomLabelRange.lowerBound + fractionOfPositionRange * zoomLabelRangeWidth
+            
+            let previousZoomLabel = self.zoomLabel
+            
+            let roundedPreviousZoomLabel = Double(previousZoomLabel).truncate(places: 1)
+            let roundedNewZoomLabel = Double(newZoomLabel).truncate(places: 1)
             
             if
-                roundedNewZoom != roundedPreviousZoom &&
-                    (floor(roundedNewZoom) == roundedNewZoom || roundedNewZoom == C.zoomFactors[0].zoomRange.lowerBound)
+                roundedNewZoomLabel != roundedPreviousZoomLabel &&
+                    (floor(roundedNewZoomLabel) == roundedNewZoomLabel || roundedNewZoomLabel == C.zoomFactors[0].zoomLabelRange.lowerBound)
             {
                 let generator = UISelectionFeedbackGenerator()
                 generator.prepare()
@@ -204,6 +291,7 @@ class ZoomViewModel: ObservableObject {
             
             DispatchQueue.main.async {
                 self.zoom = newZoom
+                self.zoomLabel = newZoomLabel
             }
         }
     }

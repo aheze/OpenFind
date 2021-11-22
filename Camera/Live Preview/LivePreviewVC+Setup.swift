@@ -11,42 +11,14 @@ import AVFoundation
 import SnapKit
 
 extension LivePreviewViewController {
+    
     func configureCamera() {
         if let cameraDevice = getCamera() {
             self.cameraDevice = cameraDevice
-            do {
-                let captureDeviceInput = try AVCaptureDeviceInput(device: cameraDevice)
-                if session.canAddInput(captureDeviceInput) {
-                    session.addInput(captureDeviceInput)
-                }
-            } catch {
-                print("Error occurred: \(error)")
-                return
-            }
-            session.sessionPreset = .photo
-            videoDataOutput.setSampleBufferDelegate(
-                self,
-                queue: DispatchQueue(
-                    label: "Buffer Queue",
-                    qos: .userInteractive,
-                    attributes: .concurrent,
-                    autoreleaseFrequency: .inherit,
-                    target: nil
-                )
-            )
-            if session.canAddOutput(videoDataOutput) {
-                session.addOutput(videoDataOutput)
-            }
             
-            DispatchQueue.main.async {
-                self.livePreviewView.session = self.session
-                let viewBounds = self.view.layer.bounds
-                self.livePreviewView.videoPreviewLayer.bounds = viewBounds
-                self.livePreviewView.videoPreviewLayer.position = CGPoint(x: viewBounds.midX, y: viewBounds.midY)
-                self.livePreviewView.videoPreviewLayer.videoGravity = .resizeAspectFill
+            DispatchQueue.global(qos: .userInteractive).async {
+                self.configureSession()
             }
-            
-            session.startRunning()
         } else {
             let fallbackView = FallbackView()
             view.addSubview(fallbackView)
@@ -57,6 +29,42 @@ extension LivePreviewViewController {
                 self?.findFromPhotosButtonPressed?()
             }
         }
+    }
+    
+    func configureSession() {
+        do {
+            let captureDeviceInput = try AVCaptureDeviceInput(device: cameraDevice)
+            if session.canAddInput(captureDeviceInput) {
+                session.addInput(captureDeviceInput)
+            }
+        } catch {
+            print("Error occurred: \(error)")
+            return
+        }
+        session.sessionPreset = .photo
+        videoDataOutput.setSampleBufferDelegate(
+            self,
+            queue: DispatchQueue(
+                label: "Buffer Queue",
+                qos: .userInteractive,
+                attributes: .concurrent,
+                autoreleaseFrequency: .inherit,
+                target: nil
+            )
+        )
+        if session.canAddOutput(videoDataOutput) {
+            session.addOutput(videoDataOutput)
+        }
+        
+        DispatchQueue.main.async {
+            self.livePreviewView.session = self.session
+            let viewBounds = self.view.layer.bounds
+            self.livePreviewView.videoPreviewLayer.bounds = viewBounds
+            self.livePreviewView.videoPreviewLayer.position = CGPoint(x: viewBounds.midX, y: viewBounds.midY)
+            self.livePreviewView.videoPreviewLayer.videoGravity = .resizeAspectFill
+        }
+        
+        session.startRunning()
     }
     func getCamera() -> AVCaptureDevice? {
         let discoverySession = AVCaptureDevice.DiscoverySession(
@@ -70,21 +78,43 @@ extension LivePreviewViewController {
             position: .back
         )
         let devices = discoverySession.devices
-//        for device in devices {
-//            print("""
-//            ---> Device \(device.uniqueID):
-//            manufacturer: \(device.manufacturer)
-//            name: \(device.localizedName)
-//            isVirtualDevice: \(device.isVirtualDevice)
-//            connect: \(device.isConnected)
-//            constituentDevices: \(device.constituentDevices)
-//            position: \(device.position)
-//
-//            """
-//            )
-//        }
+        //        for device in devices {
+        //            print("""
+        //            ---> Device \(device.uniqueID):
+        //            manufacturer: \(device.manufacturer)
+        //            name: \(device.localizedName)
+        //            isVirtualDevice: \(device.isVirtualDevice)
+        //            connect: \(device.isConnected)
+        //            constituentDevices: \(device.constituentDevices)
+        //            position: \(device.position)
+        //
+        //            """
+        //            )
+        //        }
         
         let bestDevice = devices.first
+//        if let b = bestDevice {
+//            print("""
+//
+//                ---> Device \(b.uniqueID):
+//                minfocus: \(b.minimumFocusDistance)
+//                minzoom: \(b.minAvailableVideoZoomFactor)
+//                maxzoo: \(b.maxAvailableVideoZoomFactor)
+//                fac: \(b.virtualDeviceSwitchOverVideoZoomFactors)
+//                """
+//            )
+//
+//            for device in b.constituentDevices {
+//                print("""
+//                    --->
+//                    lens: \(device.localizedName)
+//                    factors \(device.virtualDeviceSwitchOverVideoZoomFactors)
+//                    videoZoomFactor \(device.videoZoomFactor)
+//                    """
+//                )
+//            }
+//        }
+//
         return bestDevice
     }
 }

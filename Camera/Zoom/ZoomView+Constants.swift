@@ -24,11 +24,9 @@ struct C {
     
     /// how wide `positionRange` normally is
     static let normalPositionRange = 0.3
-    static let zoomFactors = [
-        ZoomFactor(zoomRange: minZoom...1.nextDown, positionRange: 0...0.3),
-        ZoomFactor(zoomRange: 1...2.nextDown, positionRange: 0.3.nextUp...0.6),
-        ZoomFactor(zoomRange: 2...maxZoom, positionRange: 0.6.nextUp...1),
-    ]
+    
     
     static let timeoutTime = CGFloat(1.5)
+    
+    static var zoomFactors = [ZoomFactor]()
 }

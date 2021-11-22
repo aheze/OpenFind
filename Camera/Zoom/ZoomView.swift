@@ -46,7 +46,7 @@ struct ZoomFactorView: View {
             ZoomFactorContent(
                 zoomViewModel: zoomViewModel,
                 index: index,
-                text: isActive ? zoomViewModel.zoom.string : zoomFactor.zoomRange.lowerBound.string,
+                text: isActive ? zoomViewModel.zoomLabel.string : zoomFactor.zoomLabelRange.lowerBound.string,
                 isActive: isActive
             )
         }
@@ -68,7 +68,7 @@ struct ZoomFactorView: View {
                 ZoomFactorContent(
                     zoomViewModel: zoomViewModel,
                     index: index,
-                    text: zoomFactor.zoomRange.lowerBound.string,
+                    text: zoomFactor.zoomLabelRange.lowerBound.string,
                     isActive: false
                 )
             }
@@ -149,13 +149,8 @@ struct ZoomView: View {
                 )
                 .cornerRadius(50)
                 .padding(.horizontal, C.containerEdgePadding)
+                .opacity(zoomViewModel.ready ? 1 : 0)
         )
-            .onAppear {
-                zoomViewModel.savedExpandedOffset = -C.zoomFactors[1].positionRange.lowerBound * zoomViewModel.sliderWidth
-                /// This will be from 0 to 1, from slider leftmost to slider rightmost
-                let positionInSlider = zoomViewModel.positionInSlider(draggingAmount: draggingAmount)
-                zoomViewModel.setZoom(positionInSlider: positionInSlider)
-            }
             .simultaneousGesture(
                 
                 /// if expanded, immediately keep expanded

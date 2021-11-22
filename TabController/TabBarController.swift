@@ -102,7 +102,6 @@ public class TabBarController<
         
         
         cancellable = tabViewModel.$tabState.sink { [weak self] activeTab in
-            print("bt>\(self?.tabViewModel.tabBarAttributes.backgroundHeight)")
             viewController.updateSafeAreaLayoutGuide(bottomHeight: self?.tabViewModel.tabBarAttributes.backgroundHeight ?? 0)
             viewController.updateTabContent(activeTab, animated: false)
         }

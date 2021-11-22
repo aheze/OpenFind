@@ -10,9 +10,7 @@ import UIKit
 import AVFoundation
 
 class LivePreviewViewController: UIViewController {
-    
-//    var currentlyCapturing = false
-    
+
     @IBOutlet weak var livePreviewView: LivePreviewView!
     @IBOutlet weak var pausedImageView: UIImageView!
     
@@ -31,14 +29,20 @@ class LivePreviewViewController: UIViewController {
     }
     
     func setup() {
-        DispatchQueue.global(qos: .userInteractive).async {
-            self.configureCamera()
-        }
+        configureCamera()
         pausedImageView.alpha = 0
     }
     
     func changeZoom(to zoom: CGFloat) {
-        
+        print("chanmge to \(zoom)")
+//        do {
+//            try cameraDevice.lockForConfiguration()
+//            device.unlockForConfiguration()
+//        }
+//        catch {
+//            print("Error focusing \(error)")
+//        }
+//        cameraDevice.ramp(toVideoZoomFactor: <#T##CGFloat#>, withRate: <#T##Float#>)
     }
 }
 
