@@ -85,7 +85,6 @@ extension LivePreviewViewController {
 //        }
         
         let bestDevice = devices.first
-//        return bestDevice
-        return nil
+        return bestDevice
     }
 }

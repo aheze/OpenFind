@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="f2R-fd-d7G">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f2R-fd-d7G">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIO-Uj-HK1">
@@ -37,7 +37,7 @@
                             <constraint firstAttribute="bottom" secondItem="bIO-Uj-HK1" secondAttribute="bottom" id="1zt-eG-aTU"/>
                             <constraint firstAttribute="trailing" secondItem="bIO-Uj-HK1" secondAttribute="trailing" id="3ti-Bt-EoY"/>
                             <constraint firstAttribute="trailing" secondItem="f2R-fd-d7G" secondAttribute="trailing" id="5Yl-dx-Fac"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="hlJ-qC-1i7" secondAttribute="bottom" id="9wg-aY-1tg"/>
+                            <constraint firstItem="hlJ-qC-1i7" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="9wg-aY-1tg"/>
                             <constraint firstItem="bIO-Uj-HK1" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="BaX-Vq-j5W"/>
                             <constraint firstItem="bIO-Uj-HK1" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="Jfk-Ft-Zbu"/>
                             <constraint firstAttribute="bottom" secondItem="f2R-fd-d7G" secondAttribute="bottom" id="M6M-Lx-jiD"/>
@@ -98,7 +98,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image" width="950" height="997"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

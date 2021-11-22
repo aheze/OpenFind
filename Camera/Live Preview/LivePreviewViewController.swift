@@ -27,12 +27,13 @@ class LivePreviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("load")
         setup()
     }
     
     func setup() {
-        configureCamera()
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.configureCamera()
+        }
         pausedImageView.alpha = 0
     }
     

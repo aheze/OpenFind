@@ -98,20 +98,26 @@ public class TabBarController<
             self?.delegate?.willBeginNavigatingTo(tab: activeTab) /// always call will begin anyway
             self?.delegate?.didFinishNavigatingTo(tab: activeTab)
         }
-        cancellable = tabViewModel.$tabState.sink { activeTab in
+        
+        
+        
+        cancellable = tabViewModel.$tabState.sink { [weak self] activeTab in
+            print("bt>\(self?.tabViewModel.tabBarAttributes.backgroundHeight)")
+            viewController.updateSafeAreaLayoutGuide(bottomHeight: self?.tabViewModel.tabBarAttributes.backgroundHeight ?? 0)
             viewController.updateTabContent(activeTab, animated: false)
         }
         
-        let tabBarView = TabBarView(
-            tabViewModel: tabViewModel,
-            toolbarViewModel: toolbarViewModel,
-            cameraToolbarView: { cameraToolbarView },
-            photosSelectionToolbarView: { photosSelectionToolbarView },
-            photosDetailToolbarView: { photosDetailToolbarView },
-            listsSelectionToolbarView: { listsSelectionToolbarView }
+        let tabBarHostingController = UIHostingController(
+            rootView: TabBarView(
+                tabViewModel: tabViewModel,
+                toolbarViewModel: toolbarViewModel,
+                cameraToolbarView: { cameraToolbarView },
+                photosSelectionToolbarView: { photosSelectionToolbarView },
+                photosDetailToolbarView: { photosDetailToolbarView },
+                listsSelectionToolbarView: { listsSelectionToolbarView }
+            )
         )
         
-        let tabBarHostingController = UIHostingController(rootView: tabBarView)
         tabBarHostingController.view.backgroundColor = .clear
         viewController.tabBarContainerView.backgroundColor = .clear
         viewController.addChild(tabBarHostingController, in: viewController.tabBarContainerView)

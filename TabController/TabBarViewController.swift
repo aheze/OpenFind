@@ -35,13 +35,25 @@ public class TabBarViewController: UIViewController {
     /// for tab bar (SwiftUI)
     @IBOutlet weak var tabBarContainerView: UIView!
     @IBOutlet weak var tabBarHeightC: NSLayoutConstraint!
-    
-    
+
     public override func viewDidLoad() {
         super.viewDidLoad()
         _ = contentPagingLayout
         contentCollectionView.decelerationRate = .fast
-        //        tabBarHeightC.constant = Constants.tabBarShrunkHeight
+        
+        
+        
+    }
+    public override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        updateSafeAreaLayoutGuide(bottomHeight: ConstantVars.tabBarTotalHeightExpanded)
+    }
+    func updateSafeAreaLayoutGuide(bottomHeight: CGFloat) {
+        if let pages = getPages?() {
+            for page in pages {
+                page.additionalSafeAreaInsets.bottom = bottomHeight - view.safeAreaInsets.bottom
+            }
+        }
     }
     
     func updateTabBarHeight(_ tabState: TabState) {

@@ -38,16 +38,17 @@ public class CameraViewController: UIViewController, PageViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-    
         print("Camera loaded")
+        
+        setup()
+        
         self.zoomViewModel = .init(containerView: zoomContainerView)
         let zoomView = ZoomView(zoomViewModel: self.zoomViewModel)
         let hostingController = UIHostingController(rootView: zoomView)
-        zoomContainerView.backgroundColor = .clear
         hostingController.view.backgroundColor = .clear
         addChild(hostingController, in: zoomContainerView)
+        zoomContainerView.backgroundColor = .clear
         
-        view.backgroundColor = .black
         cancellable = zoomViewModel.$zoom.sink { zoom in
             UIView.animate(withDuration: 0.5) {
                 self.imageView.transform = CGAffineTransform(scaleX: zoom, y: zoom)
@@ -55,6 +56,11 @@ public class CameraViewController: UIViewController, PageViewController {
         }
         
         _ = livePreviewViewController
+    }
+    
+    func setup() {
+        view.backgroundColor = .black
+//        imageView.image = UIImage(named: "Image")
     }
 }
 
