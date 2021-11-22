@@ -52,14 +52,10 @@ struct ZoomFactorView: View {
         }
         .disabled(isActive || !zoomViewModel.allowingButtonPresses) /// only press-able when not already pressed
         .scaleEffect(
-            zoomViewModel.isExpanded && !isActive ?
-            zoomViewModel.getActivationProgress(for: zoomFactor, draggingAmount: draggingAmount)
-            : 1
+            zoomViewModel.isExpanded && !isActive ? zoomFactor.activationProgress : 1
         )
         .opacity(
-            zoomViewModel.isExpanded && !isActive ?
-            zoomViewModel.getActivationProgress(for: zoomFactor, draggingAmount: draggingAmount)
-            : 1
+            zoomViewModel.isExpanded && !isActive ? zoomFactor.activationProgress : 1
         )
         .scaleEffect(isActive ? 1 : 0.7)
         .offset(x: zoomViewModel.isExpanded && isActive ? zoomViewModel.activeZoomFactorOffset(for: zoomFactor, draggingAmount: draggingAmount) : 0, y: 0)
@@ -72,8 +68,8 @@ struct ZoomFactorView: View {
                     isActive: false
                 )
             }
-                .scaleEffect(zoomViewModel.getActivationProgress(for: zoomFactor, draggingAmount: draggingAmount))
-                .opacity(zoomViewModel.getActivationProgress(for: zoomFactor, draggingAmount: draggingAmount))
+                .scaleEffect(zoomFactor.activationProgress)
+                .opacity(zoomFactor.activationProgress)
                 .scaleEffect(0.7)
                 .opacity(isActive && zoomViewModel.isExpanded ? 1 : 0) /// show when passed preset and dragging left, increasing zoom value
                 .disabled(!zoomViewModel.allowingButtonPresses)
@@ -83,6 +79,7 @@ struct ZoomFactorView: View {
     func activate() {
         withAnimation {
             zoomViewModel.zoom = zoomFactor.zoomRange.lowerBound
+            zoomViewModel.zoomLabel = zoomFactor.zoomLabelRange.lowerBound
             zoomViewModel.savedExpandedOffset = -zoomFactor.positionRange.lowerBound * zoomViewModel.sliderWidth
             zoomViewModel.isExpanded = false
             zoomViewModel.keepingExpandedUUID = nil
@@ -128,7 +125,6 @@ struct ZoomView: View {
                     HStack(spacing: 0) {
                         ForEach(C.zoomFactors.indices, id: \.self) { index in
                             let zoomFactor = C.zoomFactors[index]
-                            
                             
                             ZoomFactorView(
                                 zoomViewModel: zoomViewModel,
@@ -178,24 +174,21 @@ struct ZoomView: View {
                             DragGesture(minimumDistance: 2)
                             .updating($draggingAmount) { value, draggingAmount, transaction in
                                 zoomViewModel.stopButtonPresses()
-                                zoomViewModel.update(translation: value.translation.width, draggingAmount: &draggingAmount)
+                                zoomViewModel.update(translation: value.translation.width, ended: false) { newSavedExpandedOffset, newTranslation in
+                                    DispatchQueue.main.async {
+                                        zoomViewModel.savedExpandedOffset = newSavedExpandedOffset
+                                    }
+                                    draggingAmount = newTranslation
+                                }
                             }
                             .onEnded { value in
-                                if value.translation.width != 0 {
-                                    let offset = zoomViewModel.savedExpandedOffset + value.translation.width
-                                    if offset >= 0 {
-                                        zoomViewModel.savedExpandedOffset = 0
-                                    } else if -offset >= zoomViewModel.sliderWidth {
-                                        zoomViewModel.savedExpandedOffset = -zoomViewModel.sliderWidth
-                                    } else {
-                                        zoomViewModel.savedExpandedOffset += value.translation.width
-                                    }
+                                zoomViewModel.update(translation: value.translation.width, ended: true) { newSavedExpandedOffset, _ in
                                     
-                                    /// This will be from 0 to 1, from slider leftmost to slider rightmost
-                                    let positionInSlider = zoomViewModel.positionInSlider(draggingAmount: draggingAmount)
-                                    zoomViewModel.setZoom(positionInSlider: positionInSlider)
+                                    /// `DispatchQueue` is important! Otherwise, if going too fast, offset won't update.
+                                    DispatchQueue.main.async {
+                                        zoomViewModel.savedExpandedOffset = newSavedExpandedOffset
+                                    }
                                 }
-                                
                                 zoomViewModel.startTimeout()
                             }
                     )
