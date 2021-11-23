@@ -82,6 +82,7 @@ struct ZoomFactorView: View {
         withAnimation {
             zoomViewModel.zoom = zoomFactor.zoomRange.lowerBound
             zoomViewModel.zoomLabel = zoomFactor.zoomLabelRange.lowerBound
+            zoomViewModel.aspectProgress = zoomFactor.aspectRatioRange.lowerBound
             zoomViewModel.savedExpandedOffset = -zoomFactor.positionRange.lowerBound * zoomViewModel.sliderWidth
             zoomViewModel.updateActivationProgress(positionInSlider: zoomViewModel.positionInSlider(totalOffset: zoomViewModel.savedExpandedOffset))
             zoomViewModel.isExpanded = false

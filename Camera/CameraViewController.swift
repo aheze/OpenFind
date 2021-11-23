@@ -13,7 +13,10 @@ public class CameraViewController: UIViewController, PageViewController {
     public var tabType: TabState = .camera
     var cameraViewModel: ToolbarViewModel.Camera!
     var zoomViewModel: ZoomViewModel!
-    private var cancellable: AnyCancellable?
+    
+    
+    private var zoomCancellable: AnyCancellable?
+    private var aspectProgressCancellable: AnyCancellable?
     
     @IBOutlet weak var searchContainerView: UIView!
     @IBOutlet weak var searchContainerHeightC: NSLayoutConstraint!
@@ -35,6 +38,8 @@ public class CameraViewController: UIViewController, PageViewController {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 viewController.updateViewportSize(safeViewFrame: self.safeView.frame)
+                viewController.changeZoom(to: self.zoomViewModel.zoom, animated: false)
+                viewController.changeAspectProgress(to: self.zoomViewModel.aspectProgress)
             }
         }
         
@@ -64,6 +69,10 @@ public class CameraViewController: UIViewController, PageViewController {
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         livePreviewViewController.updateViewportSize(safeViewFrame: safeView.frame)
+        livePreviewViewController.safeViewLeftC.constant = safeView.frame.origin.x
+        livePreviewViewController.safeViewTopC.constant = safeView.frame.origin.y
+        livePreviewViewController.safeViewWidthC.constant = safeView.frame.width
+        livePreviewViewController.safeViewHeightC.constant = safeView.frame.height
     }
     
     func setup() {
@@ -77,9 +86,14 @@ public class CameraViewController: UIViewController, PageViewController {
         addChild(hostingController, in: zoomContainerView)
         zoomContainerView.backgroundColor = .clear
         
-        cancellable = zoomViewModel.$zoom.sink { [weak self] zoom in
-            self?.livePreviewViewController.changeZoom(to: zoom)
+        zoomCancellable = zoomViewModel.$zoom.sink { [weak self] zoom in
+            self?.livePreviewViewController.changeZoom(to: zoom, animated: true)
         }
+        aspectProgressCancellable = zoomViewModel.$aspectProgress.sink { [weak self] aspectProgress in
+            self?.livePreviewViewController.changeAspectProgress(to: aspectProgress)
+        }
+        
+        
         
         _ = livePreviewViewController
         

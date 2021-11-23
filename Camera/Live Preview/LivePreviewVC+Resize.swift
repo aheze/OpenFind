@@ -20,6 +20,18 @@ extension LivePreviewViewController {
 
         /// translation must be first
         livePreviewView.transform = CGAffineTransform(translationX: 0, y: safeViewYOffset).scaledBy(x: scaleHeightFactor, y: scaleHeightFactor)
+        
+        self.imageFitViewRect = imageFitViewRect
+        self.imageFillSafeRect = imageFillSafeRect
+        
+        updateAspectProgressTarget()
+    }
+    
+    func updateAspectProgressTarget() {
+        let viewHeight = view.bounds.height + 60 /// extra padding to offset top and bottom
+        let imageHeight = imageFillSafeRect.height
+        let aspectProgressTarget = viewHeight / imageHeight
+        self.aspectProgressTarget = aspectProgressTarget
     }
     
     func calculateContentRect(imageSize: CGSize, containerSize: CGSize, aspectMode: UIView.ContentMode) -> CGRect {

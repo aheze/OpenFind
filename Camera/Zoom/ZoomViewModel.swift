@@ -15,6 +15,10 @@ struct ZoomFactor: Hashable {
     /// example: `0.5...1`
     var zoomLabelRange: ClosedRange<CGFloat>
     
+    /// 0 = aspect fit
+    /// 1 = aspect fill
+    var aspectRatioRange: ClosedRange<CGFloat>
+    
     
     /// range of actual zoom
     /// example: `1...2`
@@ -32,6 +36,10 @@ class ZoomViewModel: ObservableObject {
     @Published var ready = false
     @Published var zoomLabel: CGFloat = 1
     @Published var zoom: CGFloat = 2
+    
+    /// 0 = aspect fit
+    /// 1 = aspect fill
+    @Published var aspectProgress: CGFloat = 0
     
     @Published var isExpanded = false
     @Published var savedExpandedOffset = CGFloat(0)
@@ -81,23 +89,43 @@ class ZoomViewModel: ObservableObject {
             0.3.nextUp...0.6,
             0.6.nextUp...1
         ]
+        var aspectRatioRanges: [ClosedRange<CGFloat>] = []
         var zoomRanges: [ClosedRange<CGFloat>] = []
         
         let cameraCount = switchoverFactors.count + 1
         switch cameraCount {
         case 1:
+            aspectRatioRanges = [
+                0...1.nextDown,
+                1...1,
+                1...1
+            ]
             zoomRanges = [
-                minZoom...1.nextDown,
+                minZoom...1,
                 1...2.nextDown,
                 2...limitedMaxZoom
             ]
         case 2:
+            aspectRatioRanges = [
+                0...1.nextDown,
+                1...1,
+                1...1
+            ]
+            
+            let switchoverFactor1 = Double(truncating: switchoverFactors[0])
+            
             zoomRanges = [
-                minZoom...1.nextDown,
-                1...2.nextDown,
-                2...limitedMaxZoom
+                minZoom...1,
+                1...switchoverFactor1.nextDown,
+                switchoverFactor1...limitedMaxZoom
             ]
         case 3:
+            aspectRatioRanges = [
+                0...1.nextDown,
+                1...1,
+                1...1
+            ]
+            
             let switchoverFactor1 = Double(truncating: switchoverFactors[0])
             let switchoverFactor2 = Double(truncating: switchoverFactors[1])
             
@@ -114,6 +142,7 @@ class ZoomViewModel: ObservableObject {
         for index in zoomRanges.indices {
             let zoomFactor = ZoomFactor(
                 zoomLabelRange: zoomLabelRanges[index],
+                aspectRatioRange: aspectRatioRanges[index],
                 zoomRange: zoomRanges[index],
                 positionRange: positionRanges[index]
             )
@@ -288,6 +317,9 @@ class ZoomViewModel: ObservableObject {
             let zoomRangeWidth = zoomFactor.zoomRange.upperBound - zoomFactor.zoomRange.lowerBound
             let newZoom = zoomFactor.zoomRange.lowerBound + fractionOfPositionRange * zoomRangeWidth
             
+            let aspectRatioWidth = zoomFactor.aspectRatioRange.upperBound - zoomFactor.aspectRatioRange.lowerBound
+            let newAspectRatio = zoomFactor.aspectRatioRange.lowerBound + fractionOfPositionRange * aspectRatioWidth
+            
             /// display
             let zoomLabelRangeWidth = zoomFactor.zoomLabelRange.upperBound - zoomFactor.zoomLabelRange.lowerBound
             let newZoomLabel = zoomFactor.zoomLabelRange.lowerBound + fractionOfPositionRange * zoomLabelRangeWidth
@@ -308,6 +340,7 @@ class ZoomViewModel: ObservableObject {
             DispatchQueue.main.async {
                 self.zoom = newZoom
                 self.zoomLabel = newZoomLabel
+                self.aspectProgress = newAspectRatio
             }
         }
     }
