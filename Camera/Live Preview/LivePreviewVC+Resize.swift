@@ -11,22 +11,15 @@ import UIKit
 extension LivePreviewViewController {
     func updateViewportSize(safeViewFrame: CGRect) {
         guard let imageSize = imageSize else { return }
-        let imageAspect = imageSize.height / imageSize.width
         
         let imageFitViewRect = calculateContentRect(imageSize: imageSize, containerSize: view.frame.size, aspectMode: .scaleAspectFit)
         let imageFillSafeRect = calculateContentRect(imageSize: imageFitViewRect.size, containerSize: safeViewFrame.size, aspectMode: .scaleAspectFill)
         
-//        print("Fit view: \(imageFitViewRect), fill safe: \(imageFillSafeRect)")
-        
         let scaleHeightFactor = imageFillSafeRect.height / imageFitViewRect.height
-//        let scale =
-        
-//        let contentFitAspect = contentFitRect.height / contentFitRect.width
-//        let scaleFactor = contentFitAspect / imageAspect
-        
         let safeViewYOffset = safeViewFrame.midY - view.frame.midY
-        livePreviewView.transform = .identity
-        livePreviewView.transform = CGAffineTransform(scaleX: scaleHeightFactor, y: scaleHeightFactor).translatedBy(x: 0, y: safeViewYOffset)
+
+        /// translation must be first
+        livePreviewView.transform = CGAffineTransform(translationX: 0, y: safeViewYOffset).scaledBy(x: scaleHeightFactor, y: scaleHeightFactor)
     }
     
     func calculateContentRect(imageSize: CGSize, containerSize: CGSize, aspectMode: UIView.ContentMode) -> CGRect {

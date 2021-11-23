@@ -68,6 +68,7 @@ public class CameraViewController: UIViewController, PageViewController {
     
     func setup() {
         view.backgroundColor = Constants.darkBlueBackground
+        safeView.backgroundColor = .clear
         
         self.zoomViewModel = .init(containerView: zoomContainerView)
         let zoomView = ZoomView(zoomViewModel: self.zoomViewModel)

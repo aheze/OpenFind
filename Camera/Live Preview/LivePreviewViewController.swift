@@ -33,6 +33,12 @@ class LivePreviewViewController: UIViewController {
         super.viewDidLoad()
         setup()
     }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let viewBounds = view.layer.bounds
+        livePreviewView.videoPreviewLayer.bounds = viewBounds
+        livePreviewView.videoPreviewLayer.position = CGPoint(x: viewBounds.midX, y: viewBounds.midY)
+    }
     
     func setup() {
         configureCamera()

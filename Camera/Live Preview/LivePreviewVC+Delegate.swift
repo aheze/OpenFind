@@ -12,8 +12,6 @@ import AVFoundation
 extension LivePreviewViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-        
-//        print("p: \(pixelBuffer)")
         let size = CVImageBufferGetDisplaySize(pixelBuffer)
         if imageSize == nil {
             imageSize = CGSize(width: size.height, height: size.width)
