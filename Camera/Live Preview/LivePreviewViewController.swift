@@ -91,11 +91,12 @@ class LivePreviewViewController: UIViewController {
     func changeAspectProgress(to aspectProgress: CGFloat) {
         let extraProgress = aspectProgressTarget - 1
         let scale = 1 + (extraProgress * aspectProgress)
-        aspectProgressView.transform = CGAffineTransform(scaleX: scale, y: scale)
-        
         let previouslyHitAspectTarget = hitAspectTarget
         hitAspectTarget = scale >= aspectProgressTarget
         
+        UIView.animate(withDuration: 0.3) {
+            self.aspectProgressView.transform = CGAffineTransform(scaleX: scale, y: scale)
+        }
         if previouslyHitAspectTarget != hitAspectTarget {
             UIView.animate(withDuration: 0.6) {
                 self.safeViewContainer.backgroundColor = self.hitAspectTarget ? .blue : .clear

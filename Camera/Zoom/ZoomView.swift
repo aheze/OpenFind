@@ -39,7 +39,7 @@ struct ZoomFactorView: View {
     @GestureState private var isTapped = false
     
     var body: some View {
-        let isActive = zoomFactor.zoomRange.contains(zoomViewModel.zoom)
+        let isActive = zoomFactor.zoomLabelRange.contains(zoomViewModel.zoomLabel)
         
         /// projection to center
         Button(action: activate) {
