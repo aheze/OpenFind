@@ -11,6 +11,7 @@ import AVFoundation
 
 class LivePreviewViewController: UIViewController {
 
+    
     @IBOutlet weak var livePreviewView: LivePreviewView!
     @IBOutlet weak var pausedImageView: UIImageView!
     
@@ -23,6 +24,11 @@ class LivePreviewViewController: UIViewController {
     var cameraDevice: AVCaptureDevice!
     var captureCompletionBlock: ((UIImage) -> Void)?
     
+    var imageSize: CGSize?
+    
+    /// `imageSize` updated, now update the aspect ratio
+    var needSafeViewUpdate: (() -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -31,6 +37,7 @@ class LivePreviewViewController: UIViewController {
     func setup() {
         configureCamera()
         pausedImageView.alpha = 0
+        livePreviewView.backgroundColor = .clear
     }
     
     func changeZoom(to zoom: CGFloat) {
@@ -41,7 +48,6 @@ class LivePreviewViewController: UIViewController {
         } catch {
             print("Error focusing \(error)")
         }
-//        cameraDevice.ramp(toVideoZoomFactor: <#T##CGFloat#>, withRate: <#T##Float#>)
     }
 }
 

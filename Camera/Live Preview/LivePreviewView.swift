@@ -29,4 +29,12 @@ class LivePreviewView: UIView {
     override class var layerClass: AnyClass {
         return AVCaptureVideoPreviewLayer.self
     }
+//    
+//    override var backgroundColor: UIColor? {
+//        get {
+//            return .clear
+//        } set {
+//            
+//        }
+//    }
 }

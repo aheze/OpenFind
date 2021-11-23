@@ -57,15 +57,22 @@ extension LivePreviewViewController {
         }
         
         DispatchQueue.main.async {
-            self.livePreviewView.session = self.session
-            let viewBounds = self.view.layer.bounds
-            self.livePreviewView.videoPreviewLayer.bounds = viewBounds
-            self.livePreviewView.videoPreviewLayer.position = CGPoint(x: viewBounds.midX, y: viewBounds.midY)
-            self.livePreviewView.videoPreviewLayer.videoGravity = .resizeAspectFill
+            self.addSession()
         }
         
         session.startRunning()
     }
+    
+    func addSession() {
+        let viewBounds = view.layer.bounds
+        
+        livePreviewView.session = session
+        livePreviewView.videoPreviewLayer.bounds = viewBounds
+        livePreviewView.videoPreviewLayer.position = CGPoint(x: viewBounds.midX, y: viewBounds.midY)
+        livePreviewView.videoPreviewLayer.videoGravity = .resizeAspect
+        
+    }
+    
     func getCamera() -> AVCaptureDevice? {
         let discoverySession = AVCaptureDevice.DiscoverySession(
             deviceTypes: [
@@ -78,43 +85,7 @@ extension LivePreviewViewController {
             position: .back
         )
         let devices = discoverySession.devices
-        //        for device in devices {
-        //            print("""
-        //            ---> Device \(device.uniqueID):
-        //            manufacturer: \(device.manufacturer)
-        //            name: \(device.localizedName)
-        //            isVirtualDevice: \(device.isVirtualDevice)
-        //            connect: \(device.isConnected)
-        //            constituentDevices: \(device.constituentDevices)
-        //            position: \(device.position)
-        //
-        //            """
-        //            )
-        //        }
-        
         let bestDevice = devices.first
-//        if let b = bestDevice {
-//            print("""
-//
-//                ---> Device \(b.uniqueID):
-//                minfocus: \(b.minimumFocusDistance)
-//                minzoom: \(b.minAvailableVideoZoomFactor)
-//                maxzoo: \(b.maxAvailableVideoZoomFactor)
-//                fac: \(b.virtualDeviceSwitchOverVideoZoomFactors)
-//                """
-//            )
-//
-//            for device in b.constituentDevices {
-//                print("""
-//                    --->
-//                    lens: \(device.localizedName)
-//                    factors \(device.virtualDeviceSwitchOverVideoZoomFactors)
-//                    videoZoomFactor \(device.videoZoomFactor)
-//                    """
-//                )
-//            }
-//        }
-//
         return bestDevice
     }
 }

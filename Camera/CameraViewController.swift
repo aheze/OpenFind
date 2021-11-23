@@ -15,12 +15,15 @@ public class CameraViewController: UIViewController, PageViewController {
     var zoomViewModel: ZoomViewModel!
     private var cancellable: AnyCancellable?
     
+    @IBOutlet weak var searchContainerView: UIView!
+    @IBOutlet weak var searchContainerHeightC: NSLayoutConstraint!
+    
     @IBOutlet weak var zoomContainerView: UIView!
     @IBOutlet weak var zoomContainerHeightC: NSLayoutConstraint!
-    @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var livePreviewContainerView: UIView!
     lazy var livePreviewViewController: LivePreviewViewController = {
+        
         
         let storyboard = UIStoryboard(name: "CameraContent", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "LivePreviewViewController") as! LivePreviewViewController
@@ -28,10 +31,22 @@ public class CameraViewController: UIViewController, PageViewController {
         viewController.findFromPhotosButtonPressed = { [weak self] in
             TabControl.moveToOtherTab?(.photos, true)
         }
+        viewController.needSafeViewUpdate = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                viewController.updateViewportSize(safeViewFrame: self.safeView.frame)
+            }
+        }
         
         self.addChild(viewController, in: livePreviewContainerView)
+        
+        livePreviewContainerView.backgroundColor = .clear
+        viewController.view.backgroundColor = .clear
         return viewController
     }()
+    
+    @IBOutlet weak var safeView: UIView!
+    
     
     public lazy var toolbar: CameraToolbarView = {
         self.cameraViewModel = .init()
@@ -43,6 +58,16 @@ public class CameraViewController: UIViewController, PageViewController {
         print("Camera loaded")
         
         setup()
+        
+    }
+    
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        livePreviewViewController.updateViewportSize(safeViewFrame: safeView.frame)
+    }
+    
+    func setup() {
+        view.backgroundColor = Constants.darkBlueBackground
         
         self.zoomViewModel = .init(containerView: zoomContainerView)
         let zoomView = ZoomView(zoomViewModel: self.zoomViewModel)
@@ -64,11 +89,9 @@ public class CameraViewController: UIViewController, PageViewController {
                 switchoverFactors: camera.virtualDeviceSwitchOverVideoZoomFactors
             )
         }
-    }
-    
-    func setup() {
-        view.backgroundColor = .black
-//        imageView.image = UIImage(named: "Image")
+        
+        searchContainerHeightC.constant = 100
+        
     }
 }
 

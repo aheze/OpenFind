@@ -44,9 +44,14 @@ public class TabBarViewController: UIViewController {
         
         
     }
+    
+    var subviewsWereLayout = false
     public override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        updateSafeAreaLayoutGuide(bottomHeight: ConstantVars.tabBarTotalHeightExpanded)
+        if !subviewsWereLayout {
+            subviewsWereLayout = true
+            updateSafeAreaLayoutGuide(bottomHeight: ConstantVars.tabBarTotalHeightExpanded)
+        }
     }
     func updateSafeAreaLayoutGuide(bottomHeight: CGFloat) {
         if let pages = getPages?() {

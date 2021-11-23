@@ -12,6 +12,7 @@ public enum Constants {
     public static var activeIconColor = UIColor(hex: 0x8AF9FF)
     public static var iconFont = UIFont.preferredFont(forTextStyle: .title2)
     
+    static var darkBlueBackground = UIColor(hex: 0x006186)
     
     static var tabBarDarkBackgroundColor = UIColor(hex: 0x002F3B, alpha: 0.5)
     static var tabBarLightBackgroundColor = UIColor.systemBackground
