@@ -99,7 +99,7 @@ struct ZoomFactorContent: View {
     var body: some View {
         ZStack {
             Color(UIColor(hex: 0x002F3B))
-                .opacity(0.5)
+                .opacity(isActive ? 0.9 : 0.5)
                 .cornerRadius(24)
             
             Text(text)
