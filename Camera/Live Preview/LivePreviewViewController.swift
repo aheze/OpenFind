@@ -22,6 +22,14 @@ class LivePreviewViewController: UIViewController {
     @IBOutlet weak var safeViewWidthC: NSLayoutConstraint!
     @IBOutlet weak var safeViewHeightC: NSLayoutConstraint!
     
+    /// original, unscaled image size (pretty large)
+    var imageSize: CGSize?
+    
+    /// image scaled down to the view
+    var imageFitViewSize = CGSize.zero
+    
+    /// image filling the safe view
+    var imageFillSafeRect = CGRect.zero
     
     /// hugging the image
     /// BUT, will be scaled to different aspect - normal or full screen.
@@ -31,13 +39,20 @@ class LivePreviewViewController: UIViewController {
     @IBOutlet weak var previewFitViewWidthC: NSLayoutConstraint!
     @IBOutlet weak var previewFitViewHeightC: NSLayoutConstraint!
     
+    /// the frame of the scaled preview fit view, relative to `view`
+    /// this basically adds the scale transforms to `previewFitView.frame`
+    var previewFitViewFrame = CGRect.zero
+    
+    var previewFitViewScale = CGAffineTransform.identity
+    /// the frame of the safe view, from `previewFitView`'s bounds
+    var safeViewFrameFromPreviewFit = CGRect.zero
+    
     /// directly in view hierarchy
     @IBOutlet weak var testingView: UIView!
     @IBOutlet weak var testingView2: UIView!
     
     /// should match the frame of the image
     @IBOutlet weak var drawingView: UIView!
-    var drawingViewProjectedFrame = CGRect.zero
     
     /// inside the drawing view, should match the safe view
     @IBOutlet weak var simulatedSafeView: UIView!
@@ -58,10 +73,7 @@ class LivePreviewViewController: UIViewController {
     var cameraDevice: AVCaptureDevice?
     var captureCompletionBlock: ((UIImage) -> Void)?
     
-    var imageSize: CGSize?
     
-    var imageFitViewSize = CGSize.zero
-    var imageFillSafeRect = CGRect.zero
     
     /// `true` = became `.aspectFill`
     var hitAspectTarget = false
@@ -76,10 +88,7 @@ class LivePreviewViewController: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let viewBounds = view.layer.bounds
-        livePreviewView.videoPreviewLayer.bounds = viewBounds
-        livePreviewView.videoPreviewLayer.position = CGPoint(x: viewBounds.midX, y: viewBounds.midY)
-        
+        livePreviewView.videoPreviewLayer.frame = previewFitView.bounds
     }
     
     func setup() {
@@ -93,7 +102,9 @@ class LivePreviewViewController: UIViewController {
         
 //        drawingView.addDebugBorders(.systemOrange)
 //        simulatedSafeView.addDebugBorders(.systemGreen)
-//        testingView.addDebugBorders(.red)
+        livePreviewView.addDebugBorders(.yellow)
+        testingView.addDebugBorders(.red)
+        previewFitView.addDebugBorders(.green)
 //        testingView2.addDebugBorders(.white)
 //        aspectProgressView.addDebugBorders(.systemBlue)
         
@@ -101,40 +112,6 @@ class LivePreviewViewController: UIViewController {
         simulatedSafeView.layer.borderColor = UIColor.systemGreen.cgColor
         simulatedSafeView.layer.borderWidth = 5
         
-    }
-    
-    func changeZoom(to zoom: CGFloat, animated: Bool) {
-        guard let cameraDevice = cameraDevice else { return }
-        do {
-            try cameraDevice.lockForConfiguration()
-            if animated {
-                cameraDevice.ramp(toVideoZoomFactor: zoom, withRate: 200)
-            } else {
-                cameraDevice.videoZoomFactor = zoom
-            }
-            cameraDevice.unlockForConfiguration()
-        } catch {
-            print("Error focusing \(error)")
-        }
-    }
-    
-    func changeAspectProgress(to aspectProgress: CGFloat) {
-        let extraProgress = aspectProgressTarget - 1
-        let scale = 1 + (extraProgress * aspectProgress)
-        let previouslyHitAspectTarget = hitAspectTarget
-        hitAspectTarget = scale >= aspectProgressTarget
-        
-        UIView.animate(withDuration: 0.3) {
-            self.previewFitView.transform = CGAffineTransform(scaleX: scale, y: scale)
-        }
-        
-        if !Debug.tabBarAlwaysTransparent {
-            if previouslyHitAspectTarget != hitAspectTarget {
-                UIView.animate(withDuration: 0.6) {
-                    self.safeViewContainer.backgroundColor = self.hitAspectTarget ? .blue : .clear
-                }
-            }
-        }
     }
 }
 

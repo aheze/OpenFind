@@ -18,5 +18,6 @@ extension UIView {
         self.backgroundColor = color.withAlphaComponent(0.3)
         self.layer.borderColor = color.cgColor
         self.layer.borderWidth = 5
+        superview?.bringSubviewToFront(self)
     }
 }

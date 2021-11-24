@@ -537,6 +537,8 @@
 		3CE9C217274DEA07008C903C /* Utilities+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C216274DEA07008C903C /* Utilities+Constraints.swift */; };
 		3CE9C218274DEAE1008C903C /* Utilities+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C216274DEA07008C903C /* Utilities+Constraints.swift */; };
 		3CE9C219274DEAE2008C903C /* Utilities+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C216274DEA07008C903C /* Utilities+Constraints.swift */; };
+		3CE9C21B274DFC4D008C903C /* LivePreviewVC+Zoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C21A274DFC4D008C903C /* LivePreviewVC+Zoom.swift */; };
+		3CE9C21C274E0076008C903C /* LivePreviewVC+Zoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C21A274DFC4D008C903C /* LivePreviewVC+Zoom.swift */; };
 		3CEB9C60260589D2007EF9EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CEB9C5F260589D2007EF9EB /* Main.storyboard */; };
 		3CEB9C6726058A07007EF9EB /* CameraFocusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CEB9C6426058A07007EF9EB /* CameraFocusView.xib */; };
 		3CEB9C6826058A07007EF9EB /* CameraVC+Focus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEB9C6526058A07007EF9EB /* CameraVC+Focus.swift */; };
@@ -1126,6 +1128,7 @@
 		3CE9C20A274C6931008C903C /* LivePreviewVC+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LivePreviewVC+Resize.swift"; sourceTree = "<group>"; };
 		3CE9C212274DE306008C903C /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		3CE9C216274DEA07008C903C /* Utilities+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+Constraints.swift"; sourceTree = "<group>"; };
+		3CE9C21A274DFC4D008C903C /* LivePreviewVC+Zoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LivePreviewVC+Zoom.swift"; sourceTree = "<group>"; };
 		3CEB9C5F260589D2007EF9EB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3CEB9C6426058A07007EF9EB /* CameraFocusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraFocusView.xib; sourceTree = "<group>"; };
 		3CEB9C6526058A07007EF9EB /* CameraVC+Focus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraVC+Focus.swift"; sourceTree = "<group>"; };
@@ -1340,9 +1343,10 @@
 			isa = PBXGroup;
 			children = (
 				3C119972274B32D900D6AFE3 /* LivePreviewViewController.swift */,
+				3CE9C20A274C6931008C903C /* LivePreviewVC+Resize.swift */,
+				3CE9C21A274DFC4D008C903C /* LivePreviewVC+Zoom.swift */,
 				3C119974274B345000D6AFE3 /* LivePreviewVC+Delegate.swift */,
 				3C119978274B351700D6AFE3 /* LivePreviewVC+Setup.swift */,
-				3CE9C20A274C6931008C903C /* LivePreviewVC+Resize.swift */,
 				3C119970274B32B400D6AFE3 /* LivePreviewView.swift */,
 				3CE9C1E7274B4427008C903C /* FallbackView.swift */,
 				3CE9C1E9274B4432008C903C /* FallbackView.xib */,
@@ -3344,6 +3348,7 @@
 				3C4D3A22274767970010FD68 /* PhotosViewController.swift in Sources */,
 				3C4D3A1C274767410010FD68 /* ContentCell.swift in Sources */,
 				3C4D3A8327476A260010FD68 /* ListsController.swift in Sources */,
+				3CE9C21C274E0076008C903C /* LivePreviewVC+Zoom.swift in Sources */,
 				3C4D3A2A274768C00010FD68 /* FocusIconView.swift in Sources */,
 				3C4D3A1E274767410010FD68 /* TabBarView.swift in Sources */,
 				3C4D3A1B274767410010FD68 /* ContentPagingFlowLayout.swift in Sources */,
@@ -3405,6 +3410,7 @@
 				3C4D39C227475E2C0010FD68 /* SharedUtilities.swift in Sources */,
 				3CE9C1E8274B4427008C903C /* FallbackView.swift in Sources */,
 				3C119973274B32D900D6AFE3 /* LivePreviewViewController.swift in Sources */,
+				3CE9C21B274DFC4D008C903C /* LivePreviewVC+Zoom.swift in Sources */,
 				3CE9C1F6274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
 				3C4D39A127475C7C0010FD68 /* AppDelegate.swift in Sources */,
 				3C4D3A022747667A0010FD68 /* TabBarController.swift in Sources */,

@@ -10,6 +10,7 @@ import UIKit
 
 extension LivePreviewViewController {
     func updateViewportSize(safeViewFrame: CGRect) {
+        print("UP size")
         guard let imageSize = imageSize else { return }
         
         let imageFitViewCenteredRect = calculateContentRect(imageSize: imageSize, containerSize: view.frame.size, aspectMode: .scaleAspectFit)
@@ -22,6 +23,13 @@ extension LivePreviewViewController {
         self.imageFitViewSize = imageFitViewCenteredRect.size
         self.imageFillSafeRect = imageFillSafeRect
         
+        imageFillSafeRect.setAsConstraints(
+            left: previewFitViewLeftC,
+            top: previewFitViewTopC,
+            width: previewFitViewWidthC,
+            height: previewFitViewHeightC
+        )
+        previewFitView.transform = previewFitViewScale
         updateAspectProgressTarget()
     }
     
@@ -37,12 +45,7 @@ extension LivePreviewViewController {
         let imageBottomMultiplier = containerBottomHalfHeight / halfImageHeight
         let imageMultiplier = max(imageTopMultiplier, imageBottomMultiplier)
         
-        imageFillSafeRect.setAsConstraints(
-            left: previewFitViewLeftC,
-            top: previewFitViewTopC,
-            width: previewFitViewWidthC,
-            height: previewFitViewHeightC
-        )
+        
         aspectProgressTarget = imageMultiplier
     }
     

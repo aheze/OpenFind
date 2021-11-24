@@ -94,11 +94,6 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.68235294120000001" blue="0.93725490199999995" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2H0-u4-f7D">
-                                <rect key="frame" x="87" y="384" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iag-aK-WXG">
                                 <rect key="frame" x="87" y="384" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -166,6 +161,11 @@
                                     <constraint firstAttribute="bottom" secondItem="LCq-Pn-AUO" secondAttribute="bottom" id="zIF-6H-d8o"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2H0-u4-f7D">
+                                <rect key="frame" x="87" y="384" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Xu4-Rh-ON6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -198,7 +198,7 @@
                         <outlet property="safeViewTopC" destination="Pfy-p3-Loe" id="ggb-js-Vdv"/>
                         <outlet property="safeViewWidthC" destination="LjV-K0-Ago" id="tDf-7g-wZl"/>
                         <outlet property="simulatedSafeView" destination="62W-yT-yly" id="ACX-3f-3ao"/>
-                        <outlet property="testingView" destination="2H0-u4-f7D" id="kht-g5-rDO"/>
+                        <outlet property="testingView" destination="2H0-u4-f7D" id="YkX-k5-UOH"/>
                         <outlet property="testingView2" destination="Iag-aK-WXG" id="OL0-D7-vqb"/>
                     </connections>
                 </viewController>
