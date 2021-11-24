@@ -41,8 +41,6 @@ public class TabBarViewController: UIViewController {
         _ = contentPagingLayout
         contentCollectionView.decelerationRate = .fast
         
-        
-        
     }
     
     var subviewsWereLayout = false
@@ -98,7 +96,7 @@ public class TabBarViewController: UIViewController {
             
             /// use `getTargetOffset` as to set flow layout's focused index correctly (for rotation)
             let targetOffset = contentPagingLayout.getTargetOffset(for: CGPoint(x: attributes.fullOrigin, y: 0), velocity: 0)
-            contentCollectionView.setContentOffset(targetOffset, animated: false)
+            contentCollectionView.setContentOffset(targetOffset, animated: animated)
         }
     }
 }

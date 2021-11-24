@@ -103,7 +103,7 @@ struct CameraButton: View {
     
     var body: some View {
         Button {
-            tabViewModel.goToTab(tabType: tabType)
+            tabViewModel.changeTabState(newTab: tabType, animation: .clickedTabIcon)
         } label: {
             Group {
                 Circle()
@@ -146,7 +146,7 @@ struct IconButton<Content: View>: View {
     
     var body: some View {
         Button {
-            tabViewModel.goToTab(tabType: tabType)
+            tabViewModel.changeTabState(newTab: tabType, animation: .clickedTabIcon)
         } label: {
             content
         }

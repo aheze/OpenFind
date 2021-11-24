@@ -52,7 +52,6 @@ public class TabBarController<
     
     /// model
     var tabViewModel: TabViewModel!
-    private var cancellable: AnyCancellable?
     
     /// delegate
     public weak var delegate: TabBarControllerDelegate?
@@ -93,17 +92,29 @@ public class TabBarController<
         tabViewModel.updateTabBarHeight = { tabState in
             viewController.updateTabBarHeight(tabState)
         }
-        tabViewModel.clickedToNewTab = { [weak self] activeTab in
-            TabState.modifyProgress(new: activeTab) /// make sure to modify first, so `willBeginNavigatingTo` will be accurate on swipe
-            self?.delegate?.willBeginNavigatingTo(tab: activeTab) /// always call will begin anyway
-            self?.delegate?.didFinishNavigatingTo(tab: activeTab)
+        tabViewModel.tabStateChanged = { [weak self] animation in
+            guard let self = self else { return }
+            let activeTab = self.tabViewModel.tabState
+            
+            viewController.updateSafeAreaLayoutGuide(bottomHeight: self.tabViewModel.tabBarAttributes.backgroundHeight)
+            
+            switch animation {
+            case .fractionalProgress:
+                viewController.updateTabContent(activeTab, animated: false)
+            case .clickedTabIcon:
+                TabState.modifyProgress(new: activeTab) /// make sure to modify first, so `willBeginNavigatingTo` will be accurate on swipe
+                self.delegate?.willBeginNavigatingTo(tab: activeTab) /// always call will begin anyway
+                self.delegate?.didFinishNavigatingTo(tab: activeTab)
+                
+                UIView.animate(withDuration: 0.3) { viewController.view.layoutIfNeeded() }
+                viewController.updateTabContent(activeTab, animated: false)
+            case .animate:
+                UIView.animate(withDuration: 0.3) { viewController.view.layoutIfNeeded() }
+                viewController.updateTabContent(activeTab, animated: true)
+            }
         }
         
-        cancellable = tabViewModel.$tabState.sink { [weak self] activeTab in
-            print("Up \(self?.tabViewModel.tabBarAttributes.backgroundHeight ?? 0)")
-            viewController.updateSafeAreaLayoutGuide(bottomHeight: self?.tabViewModel.tabBarAttributes.backgroundHeight ?? 0)
-            viewController.updateTabContent(activeTab, animated: false)
-        }
+        
         
         let tabBarHostingController = UIHostingController(
             rootView: TabBarView(
@@ -124,8 +135,7 @@ public class TabBarController<
         viewController.contentCollectionView.dataSource = self
         
         TabControl.moveToOtherTab = { [weak self] tabType, animated in
-            self?.tabViewModel.goToTab(tabType: tabType)
-            self?.viewController.updateTabContent(tabType, animated: animated)
+            self?.tabViewModel.changeTabState(newTab: tabType, animation: animated ? .animate : .clickedTabIcon)
         }
     }
     
@@ -168,7 +178,8 @@ public class TabBarController<
             if let newTab = TabState.notifyBeginChange(current: tabViewModel.tabState, new: newTab) {
                 delegate?.willBeginNavigatingTo(tab: newTab)
             }
-            tabViewModel.tabState = newTab
+            tabViewModel.changeTabState(newTab: newTab)
+//            tabViewModel.tabState = newTab
         }
     }
     

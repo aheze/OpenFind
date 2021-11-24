@@ -22,24 +22,36 @@ class TabViewModel: ObservableObject {
     @Published var cameraIconAttributes = CameraIconAttributes.active
     @Published var listsIconAttributes = ListsIconAttributes.inactiveDarkBackground
     @Published var animatorProgress = CGFloat(0) /// for blur
+   
     var updateTabBarHeight: ((TabState) -> Void)?
-    var clickedToNewTab: ((TabState) -> Void)?
     
-    var tabStateChanged: ((Bool) -> Void)?
-    func changeTabState(newTab: TabState, animated: Bool = false) {
-        tabState = newTab
-        tabStateChanged?(animated)
+    var tabStateChanged: ((TabStateChangeAnimation) -> Void)?
+    
+    /// animated = clicked
+    func changeTabState(newTab: TabState, animation: TabStateChangeAnimation = .fractionalProgress) {
+        if animation == .clickedTabIcon || animation == .animate {
+            withAnimation(.easeOut(duration: 0.3)) {
+                tabState = newTab
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.updateTabBarHeight?(newTab)
+            }
+        } else {
+            tabState = newTab
+        }
+        tabStateChanged?(animation)
     }
     
-    func goToTab(tabType: TabState) {
-        self.clickedToNewTab?(tabType)
-        withAnimation(.easeOut(duration: 0.3)) {
-            self.tabState = tabType
-//            change
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            self.updateTabBarHeight?(tabType)
-        }
+    enum TabStateChangeAnimation {
+        
+        /// used when swiping
+        case fractionalProgress
+        
+        /// clicked an icon
+        case clickedTabIcon
+        
+        /// special case, animate transition
+        case animate
     }
 }
 
