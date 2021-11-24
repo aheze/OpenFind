@@ -15,6 +15,7 @@ class LivePreviewViewController: UIViewController {
     
     /// same bounds as `view`, contains the safe view
     @IBOutlet weak var safeViewContainer: UIView!
+    var safeViewFrame = CGRect.zero
     @IBOutlet weak var safeView: UIView!
     
     @IBOutlet weak var safeViewLeftC: NSLayoutConstraint!
@@ -95,22 +96,10 @@ class LivePreviewViewController: UIViewController {
         configureCamera()
         pausedImageView.alpha = 0
         livePreviewView.backgroundColor = .clear
-        previewContentView.mask = safeViewContainer
         
+        previewContentView.mask = safeViewContainer
         safeViewContainer.backgroundColor = Debug.tabBarAlwaysTransparent ? .blue : .clear
         safeView.backgroundColor = .blue
-        
-//        drawingView.addDebugBorders(.systemOrange)
-//        simulatedSafeView.addDebugBorders(.systemGreen)
-        livePreviewView.addDebugBorders(.yellow)
-        testingView.addDebugBorders(.red)
-        previewFitView.addDebugBorders(.green)
-//        testingView2.addDebugBorders(.white)
-//        aspectProgressView.addDebugBorders(.systemBlue)
-        
-        simulatedSafeView.backgroundColor = .systemGreen.withAlphaComponent(0.3)
-        simulatedSafeView.layer.borderColor = UIColor.systemGreen.cgColor
-        simulatedSafeView.layer.borderWidth = 5
         
     }
 }

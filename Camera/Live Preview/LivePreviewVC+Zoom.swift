@@ -26,12 +26,19 @@ extension LivePreviewViewController {
     }
     
     func changeAspectProgress(to aspectProgress: CGFloat) {
-        print("aspect prog")
         
         let extraProgress = aspectProgressTarget - 1
         let scale = 1 + (extraProgress * aspectProgress)
         let previouslyHitAspectTarget = hitAspectTarget
         hitAspectTarget = scale >= aspectProgressTarget
+        
+        let safeViewFrame = updatedSafeViewSize(aspectFill: hitAspectTarget)
+        safeViewFrame.setAsConstraints(
+            left: safeViewLeftC,
+            top: safeViewTopC,
+            width: safeViewWidthC,
+            height: safeViewHeightC
+        )
         
         self.previewFitViewScale = CGAffineTransform(scaleX: scale, y: scale)
         
@@ -50,14 +57,25 @@ extension LivePreviewViewController {
             width: scaledWidth,
             height: scaledHeight
         )
-
-        self.testingView2.frame = previewFitViewFrame
+        self.previewFitViewFrame = previewFitViewFrame
+        
+        let safeViewOriginXFromPreviewFit = safeViewFrame.origin.x - previewFitViewFrame.origin.x
+        let safeViewOriginYFromPreviewFit = safeViewFrame.origin.y - previewFitViewFrame.origin.y
+        let safeViewFrameFromPreviewFit = CGRect(
+            x: safeViewOriginXFromPreviewFit,
+            y: safeViewOriginYFromPreviewFit,
+            width: safeViewFrame.width,
+            height: safeViewFrame.height
+        )
+        self.safeViewFrameFromPreviewFit = safeViewFrameFromPreviewFit
+        
+        self.drawingView.frame = previewFitViewFrame
+        self.simulatedSafeView.frame = safeViewFrameFromPreviewFit
+        
         
         UIView.animate(withDuration: 0.3) {
             self.previewFitView.transform = self.previewFitViewScale
         }
-        
-        self.previewFitViewFrame = previewFitViewFrame
         
         if !Debug.tabBarAlwaysTransparent {
             if previouslyHitAspectTarget != hitAspectTarget {
@@ -68,14 +86,3 @@ extension LivePreviewViewController {
         }
     }
 }
-
-//        print("Frame: \(previewFitViewFrame)")
-//        print("ap: \(imageFillSafeRect.applying(transform))")
-//        previewFitViewFrame.setAsConstraints(
-//            left: previewFitViewLeftC,
-//            top: previewFitViewTopC,
-//            width: previewFitViewWidthC,
-//            height: previewFitViewHeightC
-//        )
-//
-        

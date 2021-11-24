@@ -9,6 +9,10 @@
 import UIKit
 
 struct C {
+    
+    /// padding underneath blue capsule
+    static let bottomPadding = CGFloat(16)
+    
     static let containerEdgePadding = CGFloat(64)
     
     static var edgePadding = CGFloat(4)

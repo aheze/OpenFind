@@ -69,18 +69,14 @@ public class CameraViewController: UIViewController, PageViewController {
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         livePreviewViewController.updateViewportSize(safeViewFrame: safeView.frame)
-        safeView.frame.setAsConstraints(
-            left: livePreviewViewController.safeViewLeftC,
-            top: livePreviewViewController.safeViewTopC,
-            width: livePreviewViewController.safeViewWidthC,
-            height: livePreviewViewController.safeViewHeightC
-        )
+        livePreviewViewController.changeAspectProgress(to: zoomViewModel.aspectProgress)
     }
     
     func setup() {
         view.backgroundColor = Constants.darkBlueBackground
         safeView.backgroundColor = .clear
         
+        zoomContainerHeightC.constant = (C.zoomFactorLength + C.edgePadding * 2) + C.bottomPadding
         self.zoomViewModel = .init(containerView: zoomContainerView)
         let zoomView = ZoomView(zoomViewModel: self.zoomViewModel)
         let hostingController = UIHostingController(rootView: zoomView)

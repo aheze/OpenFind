@@ -25,10 +25,17 @@ class TabViewModel: ObservableObject {
     var updateTabBarHeight: ((TabState) -> Void)?
     var clickedToNewTab: ((TabState) -> Void)?
     
+    var tabStateChanged: ((Bool) -> Void)?
+    func changeTabState(newTab: TabState, animated: Bool = false) {
+        tabState = newTab
+        tabStateChanged?(animated)
+    }
+    
     func goToTab(tabType: TabState) {
         self.clickedToNewTab?(tabType)
         withAnimation(.easeOut(duration: 0.3)) {
             self.tabState = tabType
+//            change
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.updateTabBarHeight?(tabType)
