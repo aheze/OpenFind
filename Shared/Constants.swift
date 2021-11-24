@@ -53,6 +53,7 @@ public struct ConstantVars {
             tabBarTotalHeight = tabBarContentHeight
             tabBarTotalHeightExpanded = tabBarTotalHeight + 58
         }
+        print("ex: \(tabBarTotalHeightExpanded)")
     }
 }
 

@@ -61,7 +61,7 @@ public class CameraViewController: UIViewController, PageViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         print("Camera loaded")
-        
+        print("View bounds: \(view.bounds)")
         setup()
         
     }
@@ -69,10 +69,12 @@ public class CameraViewController: UIViewController, PageViewController {
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         livePreviewViewController.updateViewportSize(safeViewFrame: safeView.frame)
-        livePreviewViewController.safeViewLeftC.constant = safeView.frame.origin.x
-        livePreviewViewController.safeViewTopC.constant = safeView.frame.origin.y
-        livePreviewViewController.safeViewWidthC.constant = safeView.frame.width
-        livePreviewViewController.safeViewHeightC.constant = safeView.frame.height
+        safeView.frame.setAsConstraints(
+            left: livePreviewViewController.safeViewLeftC,
+            top: livePreviewViewController.safeViewTopC,
+            width: livePreviewViewController.safeViewWidthC,
+            height: livePreviewViewController.safeViewHeightC
+        )
     }
     
     func setup() {
@@ -106,7 +108,6 @@ public class CameraViewController: UIViewController, PageViewController {
         }
         
         searchContainerHeightC.constant = 100
-        
     }
 }
 

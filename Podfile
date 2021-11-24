@@ -4,19 +4,22 @@ platform :ios, '13.0'
 def shared_pods
   use_frameworks!
   pod 'QuickLayout'
-  pod 'RealmSwift'
-  pod 'SDWebImage', '~> 5.0'
-  pod 'SDWebImagePhotosPlugin'
-  pod 'SwiftEntryKit'
-  pod 'SnapKit'
   pod 'SPAlert'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SwiftRichString'
+  pod 'SnapKit'
 end
 
+def photos_pods
+  pod 'RealmSwift'
+  pod 'SDWebImage', '~> 5.0'
+  pod 'SDWebImagePhotosPlugin'
+end
 
 target 'Find' do
   shared_pods
+  photos_pods
+  pod 'SwiftEntryKit'
 end
 
 target 'TabController' do
@@ -25,6 +28,7 @@ end
 
 target 'Photos' do
   shared_pods
+  photos_pods
 end
 
 target 'Camera' do

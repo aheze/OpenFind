@@ -529,11 +529,14 @@
 		3CE9C207274B704E008C903C /* Utilities+UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C204274B704E008C903C /* Utilities+UIDevice.swift */; };
 		3CE9C208274B704E008C903C /* Utilities+UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C204274B704E008C903C /* Utilities+UIDevice.swift */; };
 		3CE9C209274B704E008C903C /* Utilities+UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C204274B704E008C903C /* Utilities+UIDevice.swift */; };
-		3CE9C20B274C6931008C903C /* LivePreviewVC+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C20A274C6931008C903C /* LivePreviewVC+Resize.swift */; };
 		3CE9C20C274C6932008C903C /* LivePreviewVC+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C20A274C6931008C903C /* LivePreviewVC+Resize.swift */; };
 		3CE9C20D274C6932008C903C /* LivePreviewVC+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C20A274C6931008C903C /* LivePreviewVC+Resize.swift */; };
-		3CE9C20E274C6932008C903C /* LivePreviewVC+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C20A274C6931008C903C /* LivePreviewVC+Resize.swift */; };
-		3CE9C20F274C6932008C903C /* LivePreviewVC+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C20A274C6931008C903C /* LivePreviewVC+Resize.swift */; };
+		3CE9C213274DE306008C903C /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C212274DE306008C903C /* Debug.swift */; };
+		3CE9C214274DE343008C903C /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C212274DE306008C903C /* Debug.swift */; };
+		3CE9C215274DE344008C903C /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C212274DE306008C903C /* Debug.swift */; };
+		3CE9C217274DEA07008C903C /* Utilities+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C216274DEA07008C903C /* Utilities+Constraints.swift */; };
+		3CE9C218274DEAE1008C903C /* Utilities+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C216274DEA07008C903C /* Utilities+Constraints.swift */; };
+		3CE9C219274DEAE2008C903C /* Utilities+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9C216274DEA07008C903C /* Utilities+Constraints.swift */; };
 		3CEB9C60260589D2007EF9EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CEB9C5F260589D2007EF9EB /* Main.storyboard */; };
 		3CEB9C6726058A07007EF9EB /* CameraFocusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CEB9C6426058A07007EF9EB /* CameraFocusView.xib */; };
 		3CEB9C6826058A07007EF9EB /* CameraVC+Focus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEB9C6526058A07007EF9EB /* CameraVC+Focus.swift */; };
@@ -1121,6 +1124,8 @@
 		3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+UIFont.swift"; sourceTree = "<group>"; };
 		3CE9C204274B704E008C903C /* Utilities+UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+UIDevice.swift"; sourceTree = "<group>"; };
 		3CE9C20A274C6931008C903C /* LivePreviewVC+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LivePreviewVC+Resize.swift"; sourceTree = "<group>"; };
+		3CE9C212274DE306008C903C /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
+		3CE9C216274DEA07008C903C /* Utilities+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+Constraints.swift"; sourceTree = "<group>"; };
 		3CEB9C5F260589D2007EF9EB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3CEB9C6426058A07007EF9EB /* CameraFocusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraFocusView.xib; sourceTree = "<group>"; };
 		3CEB9C6526058A07007EF9EB /* CameraVC+Focus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraVC+Focus.swift"; sourceTree = "<group>"; };
@@ -1621,6 +1626,7 @@
 			children = (
 				3C4D39A527475D690010FD68 /* SharedUtilities.swift */,
 				3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */,
+				3CE9C216274DEA07008C903C /* Utilities+Constraints.swift */,
 				3C4D39C927475EBD0010FD68 /* Utilities+UIColor.swift */,
 				3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */,
 				3CE9C204274B704E008C903C /* Utilities+UIDevice.swift */,
@@ -1632,6 +1638,7 @@
 			isa = PBXGroup;
 			children = (
 				3C4D39C527475E8A0010FD68 /* Constants.swift */,
+				3CE9C212274DE306008C903C /* Debug.swift */,
 				3C4D3A9027476EC70010FD68 /* SharedAssets.xcassets */,
 			);
 			path = Shared;
@@ -3342,9 +3349,11 @@
 				3C4D3A1B274767410010FD68 /* ContentPagingFlowLayout.swift in Sources */,
 				3CE9C1F5274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
 				3CE9C206274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
+				3CE9C218274DEAE1008C903C /* Utilities+Constraints.swift in Sources */,
 				3C4D3A15274767400010FD68 /* ContentPageViewController.swift in Sources */,
 				3CE9C1FC274B4E44008C903C /* LivePreviewViewController.swift in Sources */,
 				3C4D3A19274767410010FD68 /* TabBarViewController.swift in Sources */,
+				3CE9C214274DE343008C903C /* Debug.swift in Sources */,
 				3CE9C201274B4F05008C903C /* ZoomView+Constants.swift in Sources */,
 				3C4D3A1F274767410010FD68 /* TabBarController.swift in Sources */,
 				3C4D396427475A650010FD68 /* AppDelegate.swift in Sources */,
@@ -3386,6 +3395,7 @@
 				3C11996A27499A5E00D6AFE3 /* ZoomView+Constants.swift in Sources */,
 				3C4D3A052747667B0010FD68 /* TabBarToolbars.swift in Sources */,
 				3C4D3A062747667B0010FD68 /* TabControllerBridge.swift in Sources */,
+				3CE9C219274DEAE2008C903C /* Utilities+Constraints.swift in Sources */,
 				3C4D39CC27475EBD0010FD68 /* Utilities+UIColor.swift in Sources */,
 				3C4D39C327475E2C0010FD68 /* Utilities+UIViewController.swift in Sources */,
 				3CE9C207274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
@@ -3409,6 +3419,7 @@
 				3C4D3A092747667B0010FD68 /* TabBarViewController.swift in Sources */,
 				3C11996C2749F81D00D6AFE3 /* ZoomViewModel.swift in Sources */,
 				3C4D39B227475DC80010FD68 /* CameraController.swift in Sources */,
+				3CE9C215274DE344008C903C /* Debug.swift in Sources */,
 				3C119971274B32B400D6AFE3 /* LivePreviewView.swift in Sources */,
 				3C119979274B351700D6AFE3 /* LivePreviewVC+Setup.swift in Sources */,
 				3C4D39B427475DC80010FD68 /* SettingsIconView.swift in Sources */,
@@ -3437,7 +3448,6 @@
 				3C4D39F0274766590010FD68 /* PhotosController.swift in Sources */,
 				3C4D39F8274766790010FD68 /* TabBarToolbars.swift in Sources */,
 				3C4D39F7274766790010FD68 /* ContentPageViewController.swift in Sources */,
-				3CE9C20E274C6932008C903C /* LivePreviewVC+Resize.swift in Sources */,
 				3C4D39DB2747661E0010FD68 /* ViewController.swift in Sources */,
 				3CE9C1F7274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
 				3C4D39F1274766590010FD68 /* PhotosViewController.swift in Sources */,
@@ -3467,7 +3477,6 @@
 				3C4D3A66274769370010FD68 /* ListsBridge.swift in Sources */,
 				3C4D3A702747694F0010FD68 /* TabViewModel.swift in Sources */,
 				3C4D3A712747694F0010FD68 /* TabBarToolbars.swift in Sources */,
-				3CE9C20F274C6932008C903C /* LivePreviewVC+Resize.swift in Sources */,
 				3C4D3A6D2747694F0010FD68 /* ContentCell.swift in Sources */,
 				3CE9C1F8274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
 				3C4D3A69274769370010FD68 /* ListsViewController.swift in Sources */,
@@ -3736,7 +3745,7 @@
 				3C3D47E025A41AEB002B8BBF /* PhotosVC+Diffable.swift in Sources */,
 				3C22D3F92702D578001E8474 /* PagingViewControllerSizeDelegate.swift in Sources */,
 				3CAC4DB625BF52CF00CC7948 /* MorphingText.swift in Sources */,
-				3CE9C20B274C6931008C903C /* LivePreviewVC+Resize.swift in Sources */,
+				3CE9C213274DE306008C903C /* Debug.swift in Sources */,
 				3C1AB19D260FE415009B47C0 /* VoiceOverSlidesControl.swift in Sources */,
 				4990AAE223EDB4CE00FAF37B /* GeneralViewController.swift in Sources */,
 				3CF0421525C2532B00E29FA6 /* VC+StarTip.swift in Sources */,
@@ -3914,6 +3923,7 @@
 				3C22D4042702D578001E8474 /* PagingCellViewModel.swift in Sources */,
 				3C4D39AA27475DAD0010FD68 /* Utilities+UIViewController.swift in Sources */,
 				3C4C96B725B6ABEE009FDE8D /* PhotoSlidesVC+Star.swift in Sources */,
+				3CE9C217274DEA07008C903C /* Utilities+Constraints.swift in Sources */,
 				3CE9C205274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4098,8 +4108,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YA533DMD5J;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TabController/Testing/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Access the camera";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -4111,7 +4123,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.TabController;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.TabControllerTarget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -4130,8 +4142,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YA533DMD5J;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TabController/Testing/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Access the camera";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -4143,7 +4157,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.TabController;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.TabControllerTarget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -4165,6 +4179,7 @@
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Camera/Testing/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Access the camera";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -4176,7 +4191,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.Camera;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.CameraTarget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -4198,6 +4213,7 @@
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Camera/Testing/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Access the camera";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -4209,7 +4225,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.Camera;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.CameraTarget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -4242,7 +4258,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.Photos;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.PhotosTarget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -4275,7 +4291,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.Photos;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.PhotosTarget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -4308,7 +4324,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.Lists;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.ListsTarget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4342,7 +4358,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.Lists;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.ListsTarget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -4373,7 +4389,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.Settings;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.SettingsTarget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -4404,7 +4420,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.Settings;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.SettingsTarget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -4436,7 +4452,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.SearchBar;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.SearchBarTarget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4469,7 +4485,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.SearchBar;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aheze.SearchBarTarget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

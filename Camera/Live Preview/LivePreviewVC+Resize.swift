@@ -12,26 +12,38 @@ extension LivePreviewViewController {
     func updateViewportSize(safeViewFrame: CGRect) {
         guard let imageSize = imageSize else { return }
         
-        let imageFitViewRect = calculateContentRect(imageSize: imageSize, containerSize: view.frame.size, aspectMode: .scaleAspectFit)
-        let imageFillSafeRect = calculateContentRect(imageSize: imageFitViewRect.size, containerSize: safeViewFrame.size, aspectMode: .scaleAspectFill)
+        let imageFitViewCenteredRect = calculateContentRect(imageSize: imageSize, containerSize: view.frame.size, aspectMode: .scaleAspectFit)
+        let imageFillSafeCenteredRect = calculateContentRect(imageSize: imageFitViewCenteredRect.size, containerSize: safeViewFrame.size, aspectMode: .scaleAspectFill)
         
-        let scaleHeightFactor = imageFillSafeRect.height / imageFitViewRect.height
-        let safeViewYOffset = safeViewFrame.midY - view.frame.midY
-
-        /// translation must be first
-        livePreviewView.transform = CGAffineTransform(translationX: 0, y: safeViewYOffset).scaledBy(x: scaleHeightFactor, y: scaleHeightFactor)
+        /// only care about the fill rect - fills the safe area, with gap on left and right
+        var imageFillSafeRect = imageFillSafeCenteredRect
+        imageFillSafeRect.origin.y = safeViewFrame.origin.y
         
-        self.imageFitViewRect = imageFitViewRect
+        self.imageFitViewSize = imageFitViewCenteredRect.size
         self.imageFillSafeRect = imageFillSafeRect
         
         updateAspectProgressTarget()
     }
     
     func updateAspectProgressTarget() {
-        let viewHeight = view.bounds.height + 60 /// extra padding to offset top and bottom
-        let imageHeight = imageFillSafeRect.height
-        let aspectProgressTarget = viewHeight / imageHeight
-        self.aspectProgressTarget = aspectProgressTarget
+        
+        let halfImageHeight = self.imageFillSafeRect.height / 2
+        
+        let containerTopHalfHeight = self.imageFillSafeRect.midY
+        let containerBottomHalfHeight = view.bounds.height - containerTopHalfHeight
+        
+        /// calculate the image's progress to the full view for both top and bottom
+        let imageTopMultiplier = containerTopHalfHeight / halfImageHeight
+        let imageBottomMultiplier = containerBottomHalfHeight / halfImageHeight
+        let imageMultiplier = max(imageTopMultiplier, imageBottomMultiplier)
+        
+        imageFillSafeRect.setAsConstraints(
+            left: previewFitViewLeftC,
+            top: previewFitViewTopC,
+            width: previewFitViewWidthC,
+            height: previewFitViewHeightC
+        )
+        aspectProgressTarget = imageMultiplier
     }
     
     func calculateContentRect(imageSize: CGSize, containerSize: CGSize, aspectMode: UIView.ContentMode) -> CGRect {
@@ -51,7 +63,8 @@ extension LivePreviewViewController {
             (imageAspect < containerAspect) && (aspectMode == .scaleAspectFill) || /// image extends left and right
             (imageAspect >= containerAspect) && (aspectMode == .scaleAspectFit) /// image has gaps left and right
         {
-            let newImageWidth = containerSize.height * imageAspect /// the width of the overflowing image
+            
+            let newImageWidth = containerSize.height * (1 / imageAspect) /// the width of the overflowing image
             let newX = -(newImageWidth - containerSize.width) / 2
             contentRect = CGRect(x: newX, y: 0, width: newImageWidth, height: containerSize.height)
         }

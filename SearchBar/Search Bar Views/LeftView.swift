@@ -29,8 +29,7 @@ class LeftView: UIView {
     }
     
     private func commonInit() {
-        let bundle = Bundle(identifier: "com.aheze.SearchBar")
-        bundle?.loadNibNamed("LeftView", owner: self, options: nil)
+        Bundle.main.loadNibNamed("LeftView", owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

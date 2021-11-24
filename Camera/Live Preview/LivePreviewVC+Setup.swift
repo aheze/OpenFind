@@ -32,6 +32,7 @@ extension LivePreviewViewController {
     }
     
     func configureSession() {
+        guard let cameraDevice = cameraDevice else { return }
         do {
             let captureDeviceInput = try AVCaptureDeviceInput(device: cameraDevice)
             if session.canAddInput(captureDeviceInput) {
@@ -86,6 +87,7 @@ extension LivePreviewViewController {
         )
         let devices = discoverySession.devices
         let bestDevice = devices.first
+        print("Device: \(bestDevice)")
         return bestDevice
     }
 }

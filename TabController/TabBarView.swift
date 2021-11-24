@@ -67,7 +67,9 @@ struct BackgroundView: View {
     
     var body: some View {
         ZStack {
-            VisualEffectView(progress: $tabViewModel.animatorProgress)
+            if Debug.tabBarAlwaysTransparent == false {
+                VisualEffectView(progress: $tabViewModel.animatorProgress)
+            }
             tabViewModel.tabBarAttributes.backgroundColor.color.opacity(0.5)
         }
         .border( /// border is less glitchy than overlay

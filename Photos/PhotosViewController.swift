@@ -13,7 +13,6 @@ public class PhotosViewController: UIViewController, PageViewController {
     var photosSelectionViewModel: ToolbarViewModel.PhotosSelection!
     
     public lazy var selectionToolbar: PhotosSelectionToolbarView = {
-        self.photosSelectionViewModel = .init()
         return PhotosSelectionToolbarView(viewModel: photosSelectionViewModel)
     }()
     
@@ -45,6 +44,7 @@ public class PhotosViewController: UIViewController, PageViewController {
         super.viewDidLoad()
         print("Photos loaded")
         
+        self.photosSelectionViewModel = .init()
     }
 }
 
