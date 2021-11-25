@@ -69,6 +69,11 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hBR-Ob-akW">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
@@ -93,6 +98,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="averageView" destination="hBR-Ob-akW" id="8Vu-4N-eXi"/>
                         <outlet property="debugView0" destination="tJu-Ec-adO" id="W2Y-Dr-How"/>
                         <outlet property="debugView1" destination="AGN-A6-bnM" id="8hM-2f-uqX"/>
                         <outlet property="debugView2" destination="Rcp-Om-HVf" id="5Lo-7S-G9C"/>

@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var imageFitView: UIView!
     
+    @IBOutlet weak var averageView: UIView!
     @IBOutlet weak var debugView0: UIView!
     @IBOutlet weak var debugView1: UIView!
     @IBOutlet weak var debugView2: UIView!
@@ -57,14 +58,12 @@ class ViewController: UIViewController {
         for index in frames.indices {
             self.debugViews[index].frame = frames[index]
         }
-        
-        if let currentImage = engine.currentImage {
-            print("yes")
-            //            engine.beginTracking(with: currentImage)
-            engine.currentImage = nil
+        if let latestPixelBuffer = latestPixelBuffer {
+            engine.beginTracking(with: latestPixelBuffer)
         }
     }
     
+    var latestPixelBuffer: CVPixelBuffer?
     let engine = VisionEngine()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +73,7 @@ class ViewController: UIViewController {
         for debugView in debugViews {
             debugView.addDebugBorders(.green)
         }
+        averageView.addDebugBorders(.blue)
         
         resetFrames()
         for index in frames.indices {
@@ -100,12 +100,15 @@ class ViewController: UIViewController {
         }
         self.frames = frames
     }
+    
+    var count = 0
 }
 
 
 extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
+        self.latestPixelBuffer = pixelBuffer
         let size = CVImageBufferGetDisplaySize(pixelBuffer)
         if imageSize == nil {
             imageSize = CGSize(width: size.height, height: size.width)
@@ -115,20 +118,34 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             engine.beginTracking(with: pixelBuffer)
         }
         
-        engine.updateTracking(with: pixelBuffer) { areas in
-            
-            DispatchQueue.main.async {
-                for index in areas.indices {
-                    var frame = self.frames[index]
-                    let area = areas[index]
+//        if count <= 1 {
+            engine.updateTracking(with: pixelBuffer) { areas in
+                
+                DispatchQueue.main.async {
+                    var frames = [CGRect]()
+                    for index in areas.indices {
+                        var frame = self.frames[index]
+                        let area = areas[index]
+                        
+                        frame.origin.x += area.translation.width
+                        frame.origin.y -= area.translation.height
+                        UIView.animate(withDuration: 0.5) {
+                            self.debugViews[index].frame = frame
+                        }
+                        
+                        frames.append(frame)
+                    }
                     
-                    frame.origin.x += area.translation.height
-                    frame.origin.y += area.translation.width
-                    UIView.animate(withDuration: 0.5) {
-                        self.debugViews[index].frame = frame
+                    let averageFrameX = frames.map { $0.origin.x }.reduce(0, +) / CGFloat(frames.count) + frames[0].width / 2
+                    let averageFrameY = frames.map { $0.origin.y }.reduce(0, +) / CGFloat(frames.count) + frames[0].height / 2
+                    
+                    UIView.animate(withDuration: 0.3) {
+                        self.averageView.center.x = averageFrameX
+                        self.averageView.center.y = averageFrameY
                     }
                 }
             }
-        }
+//            count += 1
+//        }
     }
 }

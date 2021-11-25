@@ -37,7 +37,6 @@ struct Area {
     static var areas = [Area]()
 }
 class VisionEngine {
-//    var currentImage: CVPixelBuffer?
     var currentImage: CGImage?
     var areas = Area.areas
     
@@ -68,14 +67,12 @@ class VisionEngine {
             
             areasWithImages.append(areaWithImage)
         }
-        areasWithImages.removeFirst()
+
         self.areas = areasWithImages
     }
     func updateTracking(with updatedImage: CVPixelBuffer, completion: @escaping (([Area]) -> Void)) {
         guard let currentImage = currentImage else { return }
         let group = DispatchGroup()
-//        let requests: [VNRequest] = areas.indices.map { index in
-        
         
         for index in areas.indices {
             let area = areas[index]
@@ -83,10 +80,8 @@ class VisionEngine {
             
             var targetImage: CGImage
             if let croppedImage = area.image {
-                
                 targetImage = croppedImage
             } else {
-                print("no area")
                 targetImage = currentImage
             }
             
@@ -107,26 +102,31 @@ class VisionEngine {
                 group.leave()
             }
             
-            request.regionOfInterest = CGRect(
-                x: area.rect.origin.x,
-                y: 1 - (area.rect.origin.y + area.rect.height),
-                width: area.rect.width,
-                height: area.rect.height
-            )
+//            request.regionOfInterest = CGRect(
+//                x: area.rect.origin.x,
+//                y: 1 - (area.rect.origin.y + area.rect.height),
+//                width: area.rect.width,
+//                height: area.rect.height
+            //            )
             
-            
-            let handler = VNImageRequestHandler(cvPixelBuffer: updatedImage)
-            do {
-                try handler.perform([request])
-            } catch {
-                print("Error performing request: \(error)")
+            if let updatedCGImage = CGImage.create(pixelBuffer: updatedImage) {
+                let croppingRect = CGRect(
+                    x: area.rect.origin.x * CGFloat(updatedCGImage.width),
+                    y: area.rect.origin.y * CGFloat(updatedCGImage.height),
+                    width: area.rect.width * CGFloat(updatedCGImage.width),
+                    height: area.rect.width * CGFloat(updatedCGImage.height)
+                )
+                if let croppedUpdatedImage = updatedCGImage.cropping(to: croppingRect) {
+                    
+                    let handler = VNImageRequestHandler(cgImage: croppedUpdatedImage)
+                    do {
+                        try handler.perform([request])
+                    } catch {
+                        print("Error performing request: \(error)")
+                    }
+                }
             }
-//            print("interest for \(index): original: \(area.rect) \(request.regionOfInterest)")
-//            return request
         }
-        
-        
-        
         group.notify(queue: .main) {
             print("All done!.. \(self.areas.map { $0.translation })")
             completion(self.areas)
