@@ -74,8 +74,9 @@ class VisionEngine {
         guard let currentImage = currentImage else { return }
         let group = DispatchGroup()
         
-        for index in areas.indices {
-            let area = areas[index]
+        var areasCopy = areas
+        for index in areasCopy.indices {
+            let area = areasCopy[index]
             group.enter()
             
             var targetImage: CGImage
@@ -98,7 +99,7 @@ class VisionEngine {
                 options: [:]
             ) { request, error in
                 let translation = self.processRequestTranslation(area: area, request: request)
-                self.areas[index].translation = translation
+                areasCopy[index].translation = translation
                 group.leave()
             }
             
@@ -124,10 +125,21 @@ class VisionEngine {
                     } catch {
                         print("Error performing request: \(error)")
                     }
+                    
+                    
+                    let up = UIImage(cgImage: updatedCGImage)
+                    let cr = UIImage(cgImage: croppedUpdatedImage)
+                    
+                    areasCopy[index].image = croppedUpdatedImage
+                } else {
+                    print("nope")
                 }
+                
+                
             }
         }
         group.notify(queue: .main) {
+            self.areas = areasCopy
             print("All done!.. \(self.areas.map { $0.translation })")
             completion(self.areas)
         }
