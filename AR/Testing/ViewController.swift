@@ -23,9 +23,7 @@ class ViewController: UIViewController {
     var captureCompletionBlock: ((UIImage) -> Void)?
     
     @IBOutlet weak var livePreviewView: LivePreviewView!
-    
     @IBOutlet weak var imageFitView: UIView!
-    
     @IBOutlet weak var averageView: UIView!
     
     
@@ -41,12 +39,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        imageFitView.addDebugBorders(.blue)
         imageFitView.backgroundColor = .clear
         averageView.addDebugBorders(.systemCyan)
         configureCamera()
     }
-    
     
     var count = 0
 }
@@ -66,33 +62,18 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         }
         
         engine.updateTracking(with: pixelBuffer) { rect in
-//        engine.updateTracking(with: pixelBuffer) { translation in
-            
             DispatchQueue.main.async {
-//                self.updateFrame(with: translation)
                 self.updateFrame(with: rect)
             }
         }
     }
     
     func updateFrame(with rect: CGRect) {
-        
-//        let scaledTranslationX = translation.width * imageFitViewRect.width
-//        let scaledTranslationY = translation.height * imageFitViewRect.height
-        
-        
         UIView.animate(withDuration: 0.3) {
             var transformedRect = rect
             transformedRect.origin.y = 1.0 - rect.origin.y - rect.size.height
-//            var newRect = rect
-//            newRect.origin.y = newRect.origin.y
-            var scaledRect = transformedRect.scaleTo(self.imageFitViewRect)
-            
-//            scaledRect.origin.y = self.imageFitViewRect.height - (scaledRect.origin.y + scaledRect.height)
-            
+            let scaledRect = transformedRect.scaleTo(self.imageFitViewRect)
             self.averageView.frame = scaledRect
-//            self.averageView.center.x += scaledTranslationX
-//            self.averageView.center.y -= scaledTranslationY
         }
     }
 }
