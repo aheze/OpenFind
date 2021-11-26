@@ -27,40 +27,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var imageFitView: UIView!
     
     @IBOutlet weak var averageView: UIView!
-    @IBOutlet weak var debugView0: UIView!
-    @IBOutlet weak var debugView1: UIView!
-    @IBOutlet weak var debugView2: UIView!
-    @IBOutlet weak var debugView3: UIView!
-    @IBOutlet weak var debugView4: UIView!
-    @IBOutlet weak var debugView5: UIView!
-    @IBOutlet weak var debugView6: UIView!
-    @IBOutlet weak var debugView7: UIView!
-    @IBOutlet weak var debugView8: UIView!
-    var debugViews: [UIView] {
-        return [
-            debugView0,
-            debugView1,
-            debugView2,
-            debugView3,
-            debugView4,
-            debugView5,
-            debugView6,
-            debugView7,
-            debugView8
-        ]
-    }
-    
-    
     
     
     @IBAction func resetPressed(_ sender: Any) {
-        print("reset!")
-        for index in frames.indices {
-            self.debugViews[index].frame = frames[index]
-        }
         if let latestPixelBuffer = latestPixelBuffer {
-            engine.beginTracking(with: latestPixelBuffer)
+            engine.beginTracking(with: latestPixelBuffer, boundingBox: CGRect(x: 0.3, y: 0.3, width: 0.4, height: 0.4))
         }
+        resetAverageView()
     }
     
     var latestPixelBuffer: CVPixelBuffer?
@@ -68,38 +41,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imageFitView.addDebugBorders(.blue)
-        
-        for debugView in debugViews {
-            debugView.addDebugBorders(.green)
-        }
-        averageView.addDebugBorders(.blue)
-        
-        resetFrames()
-        for index in frames.indices {
-            self.debugViews[index].frame = frames[index]
-        }
-        
-        
+//        imageFitView.addDebugBorders(.blue)
+        imageFitView.backgroundColor = .clear
+        averageView.addDebugBorders(.systemCyan)
         configureCamera()
     }
     
-    
-    var frames = [CGRect]()
-    func resetFrames() {
-        var frames = [CGRect]()
-        for index in debugViews.indices {
-            let area = Area.areas[index]
-            let scaledRect = CGRect(
-                x: area.rect.origin.x * CGFloat(imageFitView.frame.width),
-                y: area.rect.origin.y * CGFloat(imageFitView.frame.height),
-                width: area.rect.width * CGFloat(imageFitView.frame.width),
-                height: area.rect.width * CGFloat(imageFitView.frame.height)
-            )
-            frames.append(scaledRect)
-        }
-        self.frames = frames
-    }
     
     var count = 0
 }
@@ -111,41 +58,53 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         self.latestPixelBuffer = pixelBuffer
         let size = CVImageBufferGetDisplaySize(pixelBuffer)
         if imageSize == nil {
-            imageSize = CGSize(width: size.height, height: size.width)
+            imageSize = CGSize(width: size.width, height: size.height)
             updateViewportSize()
         }
-        if engine.currentImage == nil {
-            engine.beginTracking(with: pixelBuffer)
+        if engine.previousObservation == nil {
+            engine.beginTracking(with: pixelBuffer, boundingBox: CGRect(x: 0.3, y: 0.3, width: 0.4, height: 0.4))
         }
         
-//        if count <= 1 {
-            engine.updateTracking(with: pixelBuffer) { areas in
-                
-                DispatchQueue.main.async {
-                    var frames = [CGRect]()
-                    for index in areas.indices {
-                        var frame = self.frames[index]
-                        let area = areas[index]
-                        
-                        frame.origin.x += area.translation.width
-                        frame.origin.y -= area.translation.height
-                        UIView.animate(withDuration: 0.5) {
-                            self.debugViews[index].frame = frame
-                        }
-                        
-                        frames.append(frame)
-                    }
-                    
-                    let averageFrameX = frames.map { $0.origin.x }.reduce(0, +) / CGFloat(frames.count) + frames[0].width / 2
-                    let averageFrameY = frames.map { $0.origin.y }.reduce(0, +) / CGFloat(frames.count) + frames[0].height / 2
-                    
-                    UIView.animate(withDuration: 0.3) {
-                        self.averageView.center.x = averageFrameX
-                        self.averageView.center.y = averageFrameY
-                    }
-                }
+        engine.updateTracking(with: pixelBuffer) { rect in
+//        engine.updateTracking(with: pixelBuffer) { translation in
+            
+            DispatchQueue.main.async {
+//                self.updateFrame(with: translation)
+                self.updateFrame(with: rect)
             }
-//            count += 1
-//        }
+        }
+    }
+    
+    func updateFrame(with rect: CGRect) {
+        
+//        let scaledTranslationX = translation.width * imageFitViewRect.width
+//        let scaledTranslationY = translation.height * imageFitViewRect.height
+        
+        
+        UIView.animate(withDuration: 0.3) {
+            var transformedRect = rect
+            transformedRect.origin.y = 1.0 - rect.origin.y - rect.size.height
+//            var newRect = rect
+//            newRect.origin.y = newRect.origin.y
+            var scaledRect = transformedRect.scaleTo(self.imageFitViewRect)
+            
+//            scaledRect.origin.y = self.imageFitViewRect.height - (scaledRect.origin.y + scaledRect.height)
+            
+            self.averageView.frame = scaledRect
+//            self.averageView.center.x += scaledTranslationX
+//            self.averageView.center.y -= scaledTranslationY
+        }
+    }
+}
+
+extension CGRect {
+    func scaleTo(_ newRect: CGRect) -> CGRect {
+        let scaledRect = CGRect(
+            x: self.origin.x * newRect.width,
+            y: self.origin.y * newRect.height,
+            width: self.width * newRect.width,
+            height: self.height * newRect.height
+        )
+        return scaledRect
     }
 }

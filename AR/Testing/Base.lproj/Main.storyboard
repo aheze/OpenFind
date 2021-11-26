@@ -24,51 +24,6 @@
                                 <rect key="frame" x="87" y="384" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tJu-Ec-adO">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AGN-A6-bnM">
-                                        <rect key="frame" x="95" y="39" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rcp-Om-HVf">
-                                        <rect key="frame" x="95" y="39" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OXK-yf-1KR">
-                                        <rect key="frame" x="95" y="39" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KIm-FP-tmv">
-                                        <rect key="frame" x="95" y="39" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bkD-ci-v1Z">
-                                        <rect key="frame" x="95" y="39" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zJy-gz-wk7">
-                                        <rect key="frame" x="95" y="39" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ugD-QB-MNL">
-                                        <rect key="frame" x="95" y="39" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xwp-EI-PiP">
-                                        <rect key="frame" x="95" y="39" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hBR-Ob-akW">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -99,15 +54,6 @@
                     </view>
                     <connections>
                         <outlet property="averageView" destination="hBR-Ob-akW" id="8Vu-4N-eXi"/>
-                        <outlet property="debugView0" destination="tJu-Ec-adO" id="W2Y-Dr-How"/>
-                        <outlet property="debugView1" destination="AGN-A6-bnM" id="8hM-2f-uqX"/>
-                        <outlet property="debugView2" destination="Rcp-Om-HVf" id="5Lo-7S-G9C"/>
-                        <outlet property="debugView3" destination="OXK-yf-1KR" id="1iu-JM-mFf"/>
-                        <outlet property="debugView4" destination="KIm-FP-tmv" id="GiX-hj-oiw"/>
-                        <outlet property="debugView5" destination="bkD-ci-v1Z" id="RLx-aL-oVe"/>
-                        <outlet property="debugView6" destination="zJy-gz-wk7" id="Qay-JZ-Cv0"/>
-                        <outlet property="debugView7" destination="ugD-QB-MNL" id="9t9-x1-Ssy"/>
-                        <outlet property="debugView8" destination="Xwp-EI-PiP" id="xm3-uY-8Nt"/>
                         <outlet property="imageFitView" destination="ea6-1b-fzj" id="iFk-Pz-taT"/>
                         <outlet property="livePreviewView" destination="i8B-oH-oGA" id="pMm-RN-9CG"/>
                     </connections>

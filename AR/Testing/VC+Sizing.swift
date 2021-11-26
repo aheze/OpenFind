@@ -15,15 +15,15 @@ extension ViewController {
             let imageFitViewCenteredRect = self.calculateContentRect(imageSize: imageSize, containerSize: self.view.frame.size, aspectMode: .scaleAspectFit)
             self.imageFitViewRect = imageFitViewCenteredRect
             self.imageFitView.frame = imageFitViewCenteredRect
-//            self.debugView.center = self.getResetDebugCenter()
-            self.resetFrames()
-            for index in self.frames.indices {
-                self.debugViews[index].frame = self.frames[index]
-            }
+            self.resetAverageView()
         }
     }
     
-    func getResetDebugCenter() -> CGPoint {
+    func resetAverageView() {
+        let center = getResetCenter()
+        self.averageView.center = center
+    }
+    func getResetCenter() -> CGPoint {
         return CGPoint(x: imageFitViewRect.width / 2, y: imageFitViewRect.height / 2)
     }
     
