@@ -1,6 +1,6 @@
 //
 //  VisionUtilities.swift
-//  AR
+//  ARVision
 //
 //  Created by Zheng on 11/24/21.
 //  Copyright © 2021 Andrew. All rights reserved.
@@ -34,3 +34,15 @@ extension UIImage {
         self.init(cgImage: cgImage)
     }
 }
+
+extension Optional where Wrapped == Date {
+    func isPastCoolDown(_ coolDownPeriod: CGFloat) -> Bool {
+        if let self = self {
+            return abs(self.timeIntervalSinceNow) > coolDownPeriod
+        } else {
+            return true
+        }
+        
+    }
+}
+

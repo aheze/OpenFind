@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Vision
 
 class ViewController: UIViewController {
     
@@ -22,31 +23,47 @@ class ViewController: UIViewController {
     var cameraDevice: AVCaptureDevice?
     var captureCompletionBlock: ((UIImage) -> Void)?
     
+    var latestPixelBuffer: CVPixelBuffer?
+    let visionEngine = VisionEngine()
+    
+    
     @IBOutlet weak var livePreviewView: LivePreviewView!
     @IBOutlet weak var imageFitView: UIView!
     @IBOutlet weak var averageView: UIView!
     
-    
     @IBAction func resetPressed(_ sender: Any) {
+        print("Reset")
         if let latestPixelBuffer = latestPixelBuffer {
-            engine.beginTracking(with: latestPixelBuffer, boundingBox: CGRect(x: 0.3, y: 0.3, width: 0.4, height: 0.4))
+            if visionEngine.canFind {
+                visionEngine.startToFind(["Hi"], in: latestPixelBuffer)
+            }
         }
         resetAverageView()
     }
     
-    var latestPixelBuffer: CVPixelBuffer?
-    let engine = VisionEngine()
     override func viewDidLoad() {
         super.viewDidLoad()
         
         imageFitView.backgroundColor = .clear
         averageView.addDebugBorders(.systemCyan)
         configureCamera()
+        visionEngine.delegate = self
     }
     
     var count = 0
 }
 
+extension ViewController: VisionEngineDelegate {
+    func textFound(observations: [VNRecognizedTextObservation]) {
+        print("Found! \(observations.map { $0.topCandidates(0).map { $0.string} })")
+    }
+    
+    func cameraMoved(by translation: CGSize) {
+        updateTranslation(with: translation)
+    }
+    
+    
+}
 
 extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
@@ -57,23 +74,17 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             imageSize = CGSize(width: size.width, height: size.height)
             updateViewportSize()
         }
-        if engine.previousObservation == nil {
-            engine.beginTracking(with: pixelBuffer, boundingBox: CGRect(x: 0.3, y: 0.3, width: 0.4, height: 0.4))
-        }
         
-        engine.updateTracking(with: pixelBuffer) { rect in
-            DispatchQueue.main.async {
-                self.updateFrame(with: rect)
-            }
-        }
+        visionEngine.updatePixelBuffer(pixelBuffer)
     }
     
-    func updateFrame(with rect: CGRect) {
+    func updateTranslation(with translation: CGSize) {
+        print("translation: \(translation)")
         UIView.animate(withDuration: 0.3) {
-            var transformedRect = rect
-            transformedRect.origin.y = 1.0 - rect.origin.y - rect.size.height
-            let scaledRect = transformedRect.scaleTo(self.imageFitViewRect)
-            self.averageView.frame = scaledRect
+            let originalCenter = CGPoint(x: self.imageFitViewRect.width / 2, y: self.imageFitViewRect.height / 2)
+//            let originalCenter = CGPoint.zero
+            self.averageView.center.x = originalCenter.x + (translation.width * self.imageFitViewRect.width)
+            self.averageView.center.y = originalCenter.y - (translation.height * self.imageFitViewRect.height)
         }
     }
 }
