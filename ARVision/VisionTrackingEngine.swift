@@ -16,11 +16,11 @@ class VisionTrackingEngine {
     
     var trackingObservations = [UUID : VNDetectedObjectObservation]()
     
-//    var referenceTrackingRect: CGRect?
+    //    var referenceTrackingRect: CGRect?
     
     func beginTracking(with image: CVPixelBuffer, observations: [VNRecognizedTextObservation]) {
         print("staritn new tradking session")
-//        self.referenceTrackingRect = nil
+        //        self.referenceTrackingRect = nil
         
         var trackingObservations = [UUID : VNDetectedObjectObservation]()
         for candidateArea in VisionConstants.highlightCandidateAreas {
@@ -37,66 +37,52 @@ class VisionTrackingEngine {
         startTime = Date()
         requestHandler = VNSequenceRequestHandler()
     }
-    func updateTracking(with updatedImage: CVPixelBuffer, completion: @escaping ((CGSize) -> Void)) {
+    func updateTracking(with updatedImage: CVPixelBuffer, completion: @escaping (([VNDetectedObjectObservation]) -> Void)) {
         let timeSinceLastTracking = Date().seconds(from: startTime ?? Date())
-        guard !busy, timeSinceLastTracking > VisionConstants.debugDelay else { return }
+        print("time: \(timeSinceLastTracking)")
+        guard !busy, timeSinceLastTracking >= VisionConstants.debugDelay else { return }
         busy = true
-        
-        let group = DispatchGroup()
         
         var newTrackingObservations = [UUID : VNDetectedObjectObservation]()
         var trackingRequests = [VNRequest]()
         
-        
+        print("make requests: \(trackingObservations.count)")
         for trackingObservation in trackingObservations {
-            group.enter()
-            
             let request = VNTrackObjectRequest(detectedObjectObservation: trackingObservation.value) { request, error in
-                let newObservation = self.getRequestedObservation(request: request)
-                newTrackingObservations[trackingObservation.key] = newObservation
-                group.leave()
             }
             request.trackingLevel = .accurate
             trackingRequests.append(request)
         }
         
-        print("resustss: \(trackingRequests)")
-        
+        print("perform requests")
         do {
-            try requestHandler?.perform(trackingRequests, on: updatedImage)
+            try requestHandler?.perform(trackingRequests, on: updatedImage, orientation: .up)
         } catch {
             print("Error performing request: \(error)")
             busy = false
         }
-    
-        group.notify(queue: .main) {
-            self.startTime = Date()
-            self.busy = false
-            print("Done!")
-            print("Old: \(self.trackingObservations.values.map { "(\(preciseRound($0.boundingBox.midX)), \(preciseRound($0.boundingBox.midY)))" })")
-            print("New: \(newTrackingObservations.values.map { "(\(preciseRound($0.boundingBox.midX)), \(preciseRound($0.boundingBox.midY)))" })")
-            self.trackingObservations = newTrackingObservations
+        
+        for request in trackingRequests {
+            let observation = getRequestedObservation(request: request)
+            newTrackingObservations[observation.uuid] = observation
         }
         
+        print("done")
+        //        group.notify(queue: .main) {
+        self.startTime = Date()
+        print("Done!")
+        print("Old: \(self.trackingObservations.values.map { "(\(preciseRound($0.boundingBox.midX)), \(preciseRound($0.boundingBox.midY)))" })")
+        print("New: \(newTrackingObservations.values.map { "(\(preciseRound($0.boundingBox.midX)), \(preciseRound($0.boundingBox.midY)))" })")
+        self.trackingObservations = newTrackingObservations
+        self.busy = false
         
+        DispatchQueue.main.async {
+            completion(Array(newTrackingObservations.values))
+        }
         
-//
-//        if self.startTime.isPastCoolDown(Constants.waitTimeUntilTracking) {
-//
-//            DispatchQueue.main.async {
-//                /// make sure it's still the same tracking session
-//                if startTime == self.startTime {
-//                    if let referenceTrackingRect = self.referenceTrackingRect {
-//                        let xDifference = rect.midX - referenceTrackingRect.midX
-//                        let yDifference = rect.midY - referenceTrackingRect.midY
-//                        completion(CGSize(width: xDifference, height: yDifference))
-//                    } else {
-//                        self.referenceTrackingRect = rect
-//                    }
-//                }
-//            }
-//        }
+        //        }
     }
+    
     func getRequestedObservation(request: VNRequest) -> VNDetectedObjectObservation {
         guard
             let results = request.results,

@@ -12,6 +12,7 @@ import Vision
 protocol VisionEngineDelegate: AnyObject {
     func textFound(observations: [VNRecognizedTextObservation])
     func cameraMoved(by translation: CGSize)
+    func drawObservations(_ observations: [VNDetectedObjectObservation])
 }
 class VisionEngine {
     
@@ -55,16 +56,20 @@ class VisionEngine {
         
         
         let startTime = startTime
-        trackingEngine.updateTracking(with: pixelBuffer) { [weak self] translation in
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            
+            self?.trackingEngine.updateTracking(with: pixelBuffer) { observations in
 
-            guard
-                let self = self,
-                startTime == self.startTime
-            else {
-                print("start time diff.. \(startTime) vs before \(self?.startTime)")
-                return
+                self?.delegate?.drawObservations(observations)
+    //            guard
+    //                let self = self,
+    //                startTime == self.startTime
+    //            else {
+    //                print("start time diff.. \(startTime) vs before \(self?.startTime)")
+    //                return
+    //            }
+    //            self.delegate?.cameraMoved(by: translation)
             }
-            self.delegate?.cameraMoved(by: translation)
         }
     }
 }
