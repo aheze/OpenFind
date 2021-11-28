@@ -23,8 +23,8 @@ public enum Constants {
     /// how long to wait until camera tracks
     static var waitTimeUntilTracking = 0.5
     static var defaultTrackingBoundingBox = CGRect(x: 0.2, y: 0.2, width: 0.6, height: 0.6)
-//    static var defaultTrackingBoundingBox = CGRect(x: 0, y: 0.3, width: 1, height: 0.4)
     static var findCoolDownTime = 0.8
+
 }
 
 public struct ConstantVars {

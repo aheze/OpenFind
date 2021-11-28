@@ -21,7 +21,7 @@ class VisionFindingEngine {
         request.customWords = text
         request.recognitionLevel = .fast
         
-        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right)
+        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .up)
         
         startTime = Date()
         do {
@@ -42,6 +42,10 @@ extension VisionFindingEngine {
         }
         
         let observations = results.compactMap { $0 as? VNRecognizedTextObservation }
+        
+//        for observation in observations {
+//            observation.topCandidates(1)
+//        }
         
         startTime = nil
         return observations

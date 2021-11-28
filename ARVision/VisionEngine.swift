@@ -39,20 +39,24 @@ class VisionEngine {
         print("Can find? \(canFind)")
         return canFind
     }
+    
     func startToFind(_ text: [String], in pixelBuffer: CVPixelBuffer) {
+        print("start")
         startTime = Date()
         findingEnding.fastFind(text, in: pixelBuffer) { [weak self] observations in
             guard let self = self else { return }
             self.delegate?.textFound(observations: observations)
+            self.trackingEngine.beginTracking(with: pixelBuffer, observations: observations)
         }
-        trackingEngine.beginTracking(with: pixelBuffer, boundingBox: Constants.defaultTrackingBoundingBox)
+        
     }
     func updatePixelBuffer(_ pixelBuffer: CVPixelBuffer) {
+        _ = VisionConstants.highlightCandidateAreas
+        
         
         let startTime = startTime
         trackingEngine.updateTracking(with: pixelBuffer) { [weak self] translation in
-//            print("reference: \(self?.referenceTrackingRect) vs \(rect)")
-            
+
             guard
                 let self = self,
                 startTime == self.startTime
@@ -61,13 +65,6 @@ class VisionEngine {
                 return
             }
             self.delegate?.cameraMoved(by: translation)
-//            if let referenceTrackingRect = self.referenceTrackingRect {
-//                let xDifference = rect.midX - referenceTrackingRect.midX
-//                let yDifference = rect.midY - referenceTrackingRect.midY
-//                self.delegate?.cameraMoved(by: CGSize(width: xDifference, height: yDifference))
-//            } else {
-//                self.referenceTrackingRect = rect
-//            }
         }
     }
 }

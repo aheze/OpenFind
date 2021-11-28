@@ -499,6 +499,8 @@
 		3CB6843225A0087700AE0AD6 /* PhotosMigrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */; };
 		3CB6843525A013D800AE0AD6 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6843425A013D800AE0AD6 /* ImageCell.swift */; };
 		3CB6843825A0140200AE0AD6 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB6843725A0140200AE0AD6 /* ImageCell.xib */; };
+		3CBEAC0327534B0900D04B39 /* VisionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC0227534B0900D04B39 /* VisionConstants.swift */; };
+		3CBEAC052753554C00D04B39 /* Utilities+Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC042753554C00D04B39 /* Utilities+Dates.swift */; };
 		3CC230D425C1F9AA00AD04B6 /* VC+LocalTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230D325C1F9AA00AD04B6 /* VC+LocalTip.swift */; };
 		3CC230EB25C2105200AD04B6 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230E925C2105200AD04B6 /* UIKitExtensions.swift */; };
 		3CC230EC25C2105200AD04B6 /* EasyTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230EA25C2105200AD04B6 /* EasyTipView.swift */; };
@@ -1124,6 +1126,8 @@
 		3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationController.swift; sourceTree = "<group>"; };
 		3CB6843425A013D800AE0AD6 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		3CB6843725A0140200AE0AD6 /* ImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
+		3CBEAC0227534B0900D04B39 /* VisionConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionConstants.swift; sourceTree = "<group>"; };
+		3CBEAC042753554C00D04B39 /* Utilities+Dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+Dates.swift"; sourceTree = "<group>"; };
 		3CC230D325C1F9AA00AD04B6 /* VC+LocalTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+LocalTip.swift"; sourceTree = "<group>"; };
 		3CC230E925C2105200AD04B6 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		3CC230EA25C2105200AD04B6 /* EasyTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyTipView.swift; sourceTree = "<group>"; };
@@ -1675,8 +1679,9 @@
 			isa = PBXGroup;
 			children = (
 				3C4D39A527475D690010FD68 /* GeneralUtilities.swift */,
-				3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */,
 				3CE9C216274DEA07008C903C /* Utilities+Constraints.swift */,
+				3CBEAC042753554C00D04B39 /* Utilities+Dates.swift */,
+				3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */,
 				3C4D39C927475EBD0010FD68 /* Utilities+UIColor.swift */,
 				3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */,
 				3CE9C204274B704E008C903C /* Utilities+UIDevice.swift */,
@@ -2412,9 +2417,10 @@
 		3CE9C223274EBB70008C903C /* ARVision */ = {
 			isa = PBXGroup;
 			children = (
+				3CBEAC0227534B0900D04B39 /* VisionConstants.swift */,
 				3C4D20A52750A7EB00090AF9 /* VisionEngine.swift */,
-				3C60666E274EC6A9000A5BDE /* VisionTrackingEngine.swift */,
 				3C4D209D2750A48500090AF9 /* VisionFindingEngine.swift */,
+				3C60666E274EC6A9000A5BDE /* VisionTrackingEngine.swift */,
 				3C606675274F5343000A5BDE /* VisionUtilities.swift */,
 				3CE9C238274EBB88008C903C /* Testing */,
 			);
@@ -3753,10 +3759,12 @@
 				3CE9C23B274EBCB1008C903C /* VC+CameraSetup.swift in Sources */,
 				3C4D20A62750A7EB00090AF9 /* VisionEngine.swift in Sources */,
 				3C60666F274EC6A9000A5BDE /* VisionTrackingEngine.swift in Sources */,
+				3CBEAC0327534B0900D04B39 /* VisionConstants.swift in Sources */,
 				3C606670274ECCB9000A5BDE /* Debug.swift in Sources */,
 				3CE9C225274EBB70008C903C /* AppDelegate.swift in Sources */,
 				3CE9C23D274EBD2B008C903C /* VC+Sizing.swift in Sources */,
 				3CE9C239274EBBA1008C903C /* LivePreviewView.swift in Sources */,
+				3CBEAC052753554C00D04B39 /* Utilities+Dates.swift in Sources */,
 				3C606676274F5343000A5BDE /* VisionUtilities.swift in Sources */,
 				3CE9C227274EBB70008C903C /* SceneDelegate.swift in Sources */,
 			);

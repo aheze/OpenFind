@@ -55,7 +55,7 @@ class ViewController: UIViewController {
 
 extension ViewController: VisionEngineDelegate {
     func textFound(observations: [VNRecognizedTextObservation]) {
-        print("Found! \(observations.map { $0.topCandidates(0).map { $0.string} })")
+        print("Found! \(observations.map { $0.topCandidates(1).map { $0.string} })")
     }
     
     func cameraMoved(by translation: CGSize) {
@@ -79,10 +79,8 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     
     func updateTranslation(with translation: CGSize) {
-        print("translation: \(translation)")
         UIView.animate(withDuration: 0.3) {
             let originalCenter = CGPoint(x: self.imageFitViewRect.width / 2, y: self.imageFitViewRect.height / 2)
-//            let originalCenter = CGPoint.zero
             self.averageView.center.x = originalCenter.x + (translation.width * self.imageFitViewRect.width)
             self.averageView.center.y = originalCenter.y - (translation.height * self.imageFitViewRect.height)
         }

@@ -11,63 +11,124 @@ import Vision
 
 class VisionTrackingEngine {
     var requestHandler: VNSequenceRequestHandler?
-    var previousObservation: VNDetectedObjectObservation?
     var startTime: Date?
+    var busy = false
     
+    var trackingObservations = [UUID : VNDetectedObjectObservation]()
     
-    var referenceTrackingRect: CGRect?
+//    var referenceTrackingRect: CGRect?
     
-    func beginTracking(with image: CVPixelBuffer, boundingBox: CGRect) {
+    func beginTracking(with image: CVPixelBuffer, observations: [VNRecognizedTextObservation]) {
         print("staritn new tradking session")
-        self.referenceTrackingRect = nil
+//        self.referenceTrackingRect = nil
+        
+        var trackingObservations = [UUID : VNDetectedObjectObservation]()
+        for candidateArea in VisionConstants.highlightCandidateAreas {
+            if let firstObservation = observations.first(where: {
+                $0.confidence >= 1 &&
+                candidateArea.contains(CGPoint(x: $0.boundingBox.midX, y: $0.boundingBox.midY)) &&
+                $0.confidence >= 1
+            }) {
+                let trackingObservation = VNDetectedObjectObservation(boundingBox: firstObservation.boundingBox)
+                trackingObservations[trackingObservation.uuid] = trackingObservation
+            }
+        }
+        self.trackingObservations = trackingObservations
         startTime = Date()
-        let startObservation = VNDetectedObjectObservation(boundingBox: boundingBox)
-        previousObservation = startObservation
         requestHandler = VNSequenceRequestHandler()
     }
     func updateTracking(with updatedImage: CVPixelBuffer, completion: @escaping ((CGSize) -> Void)) {
-        guard let previousObservation = previousObservation else { return }
-        let startTime = startTime
-        let request = VNTrackObjectRequest(detectedObjectObservation: previousObservation) { request, error in
-            let rect = self.processRequestTranslation(request: request)
-            if self.startTime.isPastCoolDown(Constants.waitTimeUntilTracking) {
-                
-                DispatchQueue.main.async {
-                    /// make sure it's still the same tracking session
-                    if startTime == self.startTime {
-                        if let referenceTrackingRect = self.referenceTrackingRect {
-                            let xDifference = rect.midX - referenceTrackingRect.midX
-                            let yDifference = rect.midY - referenceTrackingRect.midY
-                            completion(CGSize(width: xDifference, height: yDifference))
-                        } else {
-                            self.referenceTrackingRect = rect
-                        }
-                    }
-                }
+        let timeSinceLastTracking = Date().seconds(from: startTime ?? Date())
+        guard !busy, timeSinceLastTracking > VisionConstants.debugDelay else { return }
+        busy = true
+        
+        let group = DispatchGroup()
+        
+        var newTrackingObservations = [UUID : VNDetectedObjectObservation]()
+        var trackingRequests = [VNRequest]()
+        
+        
+        for trackingObservation in trackingObservations {
+            group.enter()
+            
+            let request = VNTrackObjectRequest(detectedObjectObservation: trackingObservation.value) { request, error in
+                let newObservation = self.getRequestedObservation(request: request)
+                newTrackingObservations[trackingObservation.key] = newObservation
+                group.leave()
             }
+            request.trackingLevel = .accurate
+            trackingRequests.append(request)
         }
         
-        request.trackingLevel = .accurate
+        print("resustss: \(trackingRequests)")
         
         do {
-            try requestHandler?.perform([request], on: updatedImage)
+            try requestHandler?.perform(trackingRequests, on: updatedImage)
         } catch {
             print("Error performing request: \(error)")
+            busy = false
+        }
+    
+        group.notify(queue: .main) {
+            self.startTime = Date()
+            self.busy = false
+            print("Done!")
+            print("Old: \(self.trackingObservations.values.map { "(\(preciseRound($0.boundingBox.midX)), \(preciseRound($0.boundingBox.midY)))" })")
+            print("New: \(newTrackingObservations.values.map { "(\(preciseRound($0.boundingBox.midX)), \(preciseRound($0.boundingBox.midY)))" })")
+            self.trackingObservations = newTrackingObservations
         }
         
+        
+        
+//
+//        if self.startTime.isPastCoolDown(Constants.waitTimeUntilTracking) {
+//
+//            DispatchQueue.main.async {
+//                /// make sure it's still the same tracking session
+//                if startTime == self.startTime {
+//                    if let referenceTrackingRect = self.referenceTrackingRect {
+//                        let xDifference = rect.midX - referenceTrackingRect.midX
+//                        let yDifference = rect.midY - referenceTrackingRect.midY
+//                        completion(CGSize(width: xDifference, height: yDifference))
+//                    } else {
+//                        self.referenceTrackingRect = rect
+//                    }
+//                }
+//            }
+//        }
     }
-    func processRequestTranslation(request: VNRequest) -> CGRect {
+    func getRequestedObservation(request: VNRequest) -> VNDetectedObjectObservation {
         guard
             let results = request.results,
             let observation = results.compactMap({ $0 as? VNDetectedObjectObservation }).first
         else {
-            previousObservation = nil
-            startTime = nil
-            return .zero
+            return VNDetectedObjectObservation(boundingBox: .zero)
         }
-        let boundingBox = observation.boundingBox
-        previousObservation = observation
-        return boundingBox
+        return observation
         
+    }
+}
+
+
+
+public enum RoundingPrecision {
+    case ones
+    case tenths
+    case hundredths
+}
+
+// Round to the specific decimal place
+public func preciseRound(
+    _ value: CGFloat,
+    precision: RoundingPrecision = .hundredths) -> Double
+{
+    let double = Double(value)
+    switch precision {
+    case .ones:
+        return round(double)
+    case .tenths:
+        return round(double * 10) / 10.0
+    case .hundredths:
+        return round(double * 100) / 100.0
     }
 }
