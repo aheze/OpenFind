@@ -16,11 +16,8 @@ class VisionTrackingEngine {
     
     var trackingObservations = [UUID : VNDetectedObjectObservation]()
     
-    //    var referenceTrackingRect: CGRect?
-    
     func beginTracking(with image: CVPixelBuffer, observations: [VNRecognizedTextObservation]) {
         print("starting new tracking session")
-        //        self.referenceTrackingRect = nil
         
         var trackingObservations = [UUID : VNDetectedObjectObservation]()
         
@@ -52,9 +49,7 @@ class VisionTrackingEngine {
             var index = 0
             while trackingObservations.count < VisionConstants.maxTrackers {
                 
-                print("count now... : \(trackingObservations.count)")
                 guard let textObservation = availableTextObservations[safe: index] else {
-                    print("breaking")
                     break
                 }
                 
@@ -63,15 +58,12 @@ class VisionTrackingEngine {
                     firstWord: false
                 )
                 let trackingObservation = VNDetectedObjectObservation(boundingBox: lastWordBoundingBox)
-//                trackingObservation.uuid = uuid
                 trackingObservations[trackingObservation.uuid] = trackingObservation
-                //                }
                 
                 index += 1
             }
         }
         
-        print("Obversionat count \(trackingObservations.count)")
         self.trackingObservations = trackingObservations
         startTime = Date()
         requestHandler = VNSequenceRequestHandler()
@@ -79,21 +71,18 @@ class VisionTrackingEngine {
     
     func updateTracking(with updatedImage: CVPixelBuffer, completion: @escaping (([VNDetectedObjectObservation]) -> Void)) {
         let timeSinceLastTracking = Date().seconds(from: startTime ?? Date())
-//        print("time: \(timeSinceLastTracking)")
         guard !busy, timeSinceLastTracking >= VisionConstants.debugDelay else { return }
         busy = true
         
         var newTrackingObservations = [UUID : VNDetectedObjectObservation]()
         var trackingRequests = [VNRequest]()
         
-//        print("make requests: \(trackingObservations.count)")
         for trackingObservation in trackingObservations {
             let request = VNTrackObjectRequest(detectedObjectObservation: trackingObservation.value) { request, error in }
             request.trackingLevel = .accurate
             trackingRequests.append(request)
         }
         
-//        print("perform requests")
         do {
             try requestHandler?.perform(trackingRequests, on: updatedImage, orientation: .up)
         } catch {
@@ -101,35 +90,26 @@ class VisionTrackingEngine {
             busy = false
         }
         
-        print("request count: \(trackingRequests)")
         for request in trackingRequests {
-            let observation = getRequestedObservation(request: request)
-            newTrackingObservations[observation.uuid] = observation
+            if let observation = getRequestedObservation(request: request) {
+                newTrackingObservations[observation.uuid] = observation
+            }
         }
-        print("new re: \(newTrackingObservations.count)")
-        
-//        print("done")
-        //        group.notify(queue: .main) {
         self.startTime = Date()
-//        print("Done!")
-//        print("Old: \(self.trackingObservations.values.map { "(\(preciseRound($0.boundingBox.midX)), \(preciseRound($0.boundingBox.midY)))" })")
-//        print("New: \(newTrackingObservations.values.map { "(\(preciseRound($0.boundingBox.midX)), \(preciseRound($0.boundingBox.midY)))" })")
         self.trackingObservations = newTrackingObservations
         self.busy = false
         
         DispatchQueue.main.async {
             completion(Array(newTrackingObservations.values))
         }
-        
-        //        }
     }
     
-    func getRequestedObservation(request: VNRequest) -> VNDetectedObjectObservation {
+    func getRequestedObservation(request: VNRequest) -> VNDetectedObjectObservation? {
         guard
             let results = request.results,
             let observation = results.compactMap({ $0 as? VNDetectedObjectObservation }).first
         else {
-            return VNDetectedObjectObservation(boundingBox: .zero)
+            return nil
         }
         return observation
         

@@ -11,14 +11,11 @@ import Vision
 
 extension ViewController {
     func drawObservations(_ observations: [VNDetectedObjectObservation]) {
-//        print("darw!")
         for existingSubview in imageFitView.subviews {
-//            print("widt: \(existingSubview.layer.borderWidth)")
             if existingSubview.layer.borderWidth != 1.5 {
                 existingSubview.removeFromSuperview()
             }
         }
-        print("draing--------count: \(observations.count)")
         for observation in observations {
             var adjustedBoundingBox = observation.boundingBox
             
@@ -30,15 +27,6 @@ extension ViewController {
             newView.addDebugBorders(.green, width: 1)
             imageFitView.addSubview(newView)
             
-            print(adjustedBoundingBoxScaled)
         }
-//        for observation in observations {
-//            let scaledRect = observation.boundingBox.scaleTo(imageFitViewRect)
-//
-//            let trackerView = UIView(frame: scaledRect)
-//            trackerView.addDebugBorders(.green)
-//            imageFitView.addSubview(trackerView)
-//        }
-        
     }
 }
