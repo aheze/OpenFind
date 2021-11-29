@@ -21,6 +21,14 @@ struct Tracker {
     var uuid: UUID {
         return objectObservation.uuid
     }
+    
+    var confidence: VNConfidence {
+        return objectObservation.confidence
+    }
+    
+    var boundingBox: CGRect {
+        return objectObservation.boundingBox
+    }
 }
 
 class VisionTrackingEngine {
@@ -110,9 +118,17 @@ class VisionTrackingEngine {
         for request in trackingRequests {
             if let observation = getRequestedObservation(request: request) {
                 let newTracker = Tracker(objectObservation: observation)
-                newTrackers[observation.uuid] = newTracker
+                
+                /// update. or remove
+                if let updatedTracker = getUpdatedTracker(for: newTracker) {
+                    newTrackers[observation.uuid] = updatedTracker
+                }
+                
             }
         }
+        
+//        newTrackers = filterTrackers(trackers: newTrackers)
+        
         self.startTime = Date()
         self.trackers = newTrackers
         self.busy = false

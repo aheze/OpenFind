@@ -10,6 +10,8 @@ import UIKit
 
 struct VisionConstants {
     
+    static var minimumConfidenceForSuccess: Float = 0.5
+    
     static var maxTrackers = 9
     
     /// number of seconds before starting another tracking request

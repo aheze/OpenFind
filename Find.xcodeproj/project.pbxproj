@@ -501,7 +501,7 @@
 		3CB6843825A0140200AE0AD6 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB6843725A0140200AE0AD6 /* ImageCell.xib */; };
 		3CBEAC0327534B0900D04B39 /* VisionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC0227534B0900D04B39 /* VisionConstants.swift */; };
 		3CBEAC052753554C00D04B39 /* Utilities+Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC042753554C00D04B39 /* Utilities+Dates.swift */; };
-		3CBEAC09275356C900D04B39 /* VTE+FilterTrackedObservations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC08275356C900D04B39 /* VTE+FilterTrackedObservations.swift */; };
+		3CBEAC09275356C900D04B39 /* VTE+FilterTrackers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC08275356C900D04B39 /* VTE+FilterTrackers.swift */; };
 		3CBEAC0B2753584800D04B39 /* VC+DrawObservations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC0A2753584700D04B39 /* VC+DrawObservations.swift */; };
 		3CBEAC0D275484D800D04B39 /* VisionFindingUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC0C275484D700D04B39 /* VisionFindingUtilities.swift */; };
 		3CBEAC0E2754867300D04B39 /* GeneralUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* GeneralUtilities.swift */; };
@@ -1134,7 +1134,7 @@
 		3CB6843725A0140200AE0AD6 /* ImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
 		3CBEAC0227534B0900D04B39 /* VisionConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionConstants.swift; sourceTree = "<group>"; };
 		3CBEAC042753554C00D04B39 /* Utilities+Dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+Dates.swift"; sourceTree = "<group>"; };
-		3CBEAC08275356C900D04B39 /* VTE+FilterTrackedObservations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VTE+FilterTrackedObservations.swift"; sourceTree = "<group>"; };
+		3CBEAC08275356C900D04B39 /* VTE+FilterTrackers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VTE+FilterTrackers.swift"; sourceTree = "<group>"; };
 		3CBEAC0A2753584700D04B39 /* VC+DrawObservations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+DrawObservations.swift"; sourceTree = "<group>"; };
 		3CBEAC0C275484D700D04B39 /* VisionFindingUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionFindingUtilities.swift; sourceTree = "<group>"; };
 		3CC230D325C1F9AA00AD04B6 /* VC+LocalTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+LocalTip.swift"; sourceTree = "<group>"; };
@@ -2431,7 +2431,7 @@
 				3C4D209D2750A48500090AF9 /* VisionFindingEngine.swift */,
 				3CBEAC0C275484D700D04B39 /* VisionFindingUtilities.swift */,
 				3C60666E274EC6A9000A5BDE /* VisionTrackingEngine.swift */,
-				3CBEAC08275356C900D04B39 /* VTE+FilterTrackedObservations.swift */,
+				3CBEAC08275356C900D04B39 /* VTE+FilterTrackers.swift */,
 				3C606675274F5343000A5BDE /* VisionUtilities.swift */,
 				3CE9C238274EBB88008C903C /* Testing */,
 			);
@@ -3771,7 +3771,7 @@
 				3CBEAC0B2753584800D04B39 /* VC+DrawObservations.swift in Sources */,
 				3C4D209F2750A6A800090AF9 /* Constants.swift in Sources */,
 				3C4D20A22750A6C700090AF9 /* Utilities+UIColor.swift in Sources */,
-				3CBEAC09275356C900D04B39 /* VTE+FilterTrackedObservations.swift in Sources */,
+				3CBEAC09275356C900D04B39 /* VTE+FilterTrackers.swift in Sources */,
 				3CE9C229274EBB70008C903C /* ViewController.swift in Sources */,
 				3CE9C23B274EBCB1008C903C /* VC+CameraSetup.swift in Sources */,
 				3C4D20A62750A7EB00090AF9 /* VisionEngine.swift in Sources */,
