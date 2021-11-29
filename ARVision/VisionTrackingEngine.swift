@@ -19,42 +19,81 @@ class VisionTrackingEngine {
     //    var referenceTrackingRect: CGRect?
     
     func beginTracking(with image: CVPixelBuffer, observations: [VNRecognizedTextObservation]) {
-        print("staritn new tradking session")
+        print("starting new tracking session")
         //        self.referenceTrackingRect = nil
         
         var trackingObservations = [UUID : VNDetectedObjectObservation]()
+        
+        /// text observations that met the criteria, in case I need more
+        var availableTextObservations = [VNRecognizedTextObservation]()
         for candidateArea in VisionConstants.highlightCandidateAreas {
             if let firstObservation = observations.first(where: {
                 $0.confidence >= 1 &&
                 candidateArea.contains(CGPoint(x: $0.boundingBox.midX, y: $0.boundingBox.midY)) &&
                 $0.confidence >= 1
             }) {
-                let trackingObservation = VNDetectedObjectObservation(boundingBox: firstObservation.boundingBox)
+                
+                /// add it to the available  text observations
+                availableTextObservations.append(firstObservation)
+                
+                /// only use the first word for now
+                let firstWordBoundingBox = VisionFindingUtilities.getWordBoundingBox(
+                    textObservation: firstObservation,
+                    firstWord: true
+                )
+                
+                let trackingObservation = VNDetectedObjectObservation(boundingBox: firstWordBoundingBox)
                 trackingObservations[trackingObservation.uuid] = trackingObservation
             }
         }
+        
+        /// need more trackers!
+        if trackingObservations.count < VisionConstants.maxTrackers {
+            var index = 0
+            while trackingObservations.count < VisionConstants.maxTrackers {
+                
+                print("count now... : \(trackingObservations.count)")
+                guard let textObservation = availableTextObservations[safe: index] else {
+                    print("breaking")
+                    break
+                }
+                
+                let lastWordBoundingBox = VisionFindingUtilities.getWordBoundingBox(
+                    textObservation: textObservation,
+                    firstWord: false
+                )
+                let trackingObservation = VNDetectedObjectObservation(boundingBox: lastWordBoundingBox)
+//                trackingObservation.uuid = uuid
+                trackingObservations[trackingObservation.uuid] = trackingObservation
+                //                }
+                
+                index += 1
+            }
+        }
+        
+        print("Obversionat count \(trackingObservations.count)")
         self.trackingObservations = trackingObservations
         startTime = Date()
         requestHandler = VNSequenceRequestHandler()
     }
+    
     func updateTracking(with updatedImage: CVPixelBuffer, completion: @escaping (([VNDetectedObjectObservation]) -> Void)) {
         let timeSinceLastTracking = Date().seconds(from: startTime ?? Date())
-        print("time: \(timeSinceLastTracking)")
+//        print("time: \(timeSinceLastTracking)")
         guard !busy, timeSinceLastTracking >= VisionConstants.debugDelay else { return }
         busy = true
         
         var newTrackingObservations = [UUID : VNDetectedObjectObservation]()
         var trackingRequests = [VNRequest]()
         
-        print("make requests: \(trackingObservations.count)")
+//        print("make requests: \(trackingObservations.count)")
         for trackingObservation in trackingObservations {
-            let request = VNTrackObjectRequest(detectedObjectObservation: trackingObservation.value) { request, error in
-            }
+            let request = VNTrackObjectRequest(detectedObjectObservation: trackingObservation.value) { request, error in }
             request.trackingLevel = .accurate
             trackingRequests.append(request)
         }
         
-        print("perform requests")
+//        print("perform requests")
         do {
             try requestHandler?.perform(trackingRequests, on: updatedImage, orientation: .up)
         } catch {
@@ -62,17 +101,19 @@ class VisionTrackingEngine {
             busy = false
         }
         
+        print("request count: \(trackingRequests)")
         for request in trackingRequests {
             let observation = getRequestedObservation(request: request)
             newTrackingObservations[observation.uuid] = observation
         }
+        print("new re: \(newTrackingObservations.count)")
         
-        print("done")
+//        print("done")
         //        group.notify(queue: .main) {
         self.startTime = Date()
-        print("Done!")
-        print("Old: \(self.trackingObservations.values.map { "(\(preciseRound($0.boundingBox.midX)), \(preciseRound($0.boundingBox.midY)))" })")
-        print("New: \(newTrackingObservations.values.map { "(\(preciseRound($0.boundingBox.midX)), \(preciseRound($0.boundingBox.midY)))" })")
+//        print("Done!")
+//        print("Old: \(self.trackingObservations.values.map { "(\(preciseRound($0.boundingBox.midX)), \(preciseRound($0.boundingBox.midY)))" })")
+//        print("New: \(newTrackingObservations.values.map { "(\(preciseRound($0.boundingBox.midX)), \(preciseRound($0.boundingBox.midY)))" })")
         self.trackingObservations = newTrackingObservations
         self.busy = false
         

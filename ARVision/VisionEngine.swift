@@ -61,14 +61,14 @@ class VisionEngine {
             self?.trackingEngine.updateTracking(with: pixelBuffer) { observations in
 
                 self?.delegate?.drawObservations(observations)
-    //            guard
-    //                let self = self,
-    //                startTime == self.startTime
-    //            else {
-    //                print("start time diff.. \(startTime) vs before \(self?.startTime)")
-    //                return
-    //            }
-    //            self.delegate?.cameraMoved(by: translation)
+                guard
+                    let self = self,
+                    startTime == self.startTime
+                else {
+                    print("start time diff.. \(startTime) vs before \(self?.startTime)")
+                    return
+                }
+//                self.delegate?.cameraMoved(by: translation)
             }
         }
     }

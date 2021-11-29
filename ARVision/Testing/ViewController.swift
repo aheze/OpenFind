@@ -44,7 +44,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imageFitView.backgroundColor = .clear
+//        imageFitView.backgroundColor = .clear
         averageView.addDebugBorders(.systemCyan)
         configureCamera()
         visionEngine.delegate = self
@@ -55,7 +55,22 @@ class ViewController: UIViewController {
 
 extension ViewController: VisionEngineDelegate {
     func textFound(observations: [VNRecognizedTextObservation]) {
-        print("Found! \(observations.map { $0.topCandidates(1).map { $0.string} })")
+        for subview in imageFitView.subviews {
+            subview.removeFromSuperview()
+        }
+        
+        for observation in observations {
+            var adjustedBoundingBox = observation.boundingBox
+            
+            /// adjust for vision coordinates
+            adjustedBoundingBox.origin.y = 1 - observation.boundingBox.minY - observation.boundingBox.height
+            
+            let adjustedBoundingBoxScaled = adjustedBoundingBox.scaleTo(imageFitViewRect)
+            let newView = UIView(frame: adjustedBoundingBoxScaled)
+            newView.addDebugBorders(.blue, width: 1.5)
+            imageFitView.addSubview(newView)
+        }
+
     }
     
     func cameraMoved(by translation: CGSize) {
