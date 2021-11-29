@@ -10,8 +10,16 @@ import UIKit
 
 struct VisionConstants {
     
-    static var minimumConfidenceForSuccess: Float = 0.5
+    // MARK: Finding
     
+    /// how long to wait between finds
+    static var findCoolDownTime = 0.8
+    
+    
+    // MARK: Tracking
+    static var maximumTimeWithoutConfidence: Float = 1.5
+    static var minimumConfidenceForSuccess: Float = 0.5
+    static var minimumTimeSinceInitialization: Float = 0.2
     static var maxTrackers = 9
     
     /// number of seconds before starting another tracking request

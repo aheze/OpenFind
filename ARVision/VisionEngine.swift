@@ -12,7 +12,7 @@ import Vision
 protocol VisionEngineDelegate: AnyObject {
     func textFound(observations: [VNRecognizedTextObservation])
     func cameraMoved(by translation: CGSize)
-    func drawObservations(_ trackers: [VNDetectedObjectObservation])
+    func drawTrackers(_ trackers: [Tracker])
 }
 class VisionEngine {
     
@@ -32,7 +32,7 @@ class VisionEngine {
             print("Currently finding")
             canFind = false
         }
-        if !startTime.isPastCoolDown(Constants.findCoolDownTime) {
+        if !startTime.isPastCoolDown(VisionConstants.findCoolDownTime) {
             print("Still in cooldown!")
             canFind = false
         }
@@ -49,7 +49,11 @@ class VisionEngine {
             self.delegate?.textFound(observations: observations)
             self.trackingEngine.beginTracking(with: pixelBuffer, observations: observations)
         }
-        
+        trackingEngine.reportTrackerCount = { [weak self] numberOfTrackers in
+            if numberOfTrackers < VisionConstants.maxTrackers {
+                let trackersNeeded = VisionConstants.maxTrackers - numberOfTrackers
+            }
+        }
     }
     func updatePixelBuffer(_ pixelBuffer: CVPixelBuffer) {
         _ = VisionConstants.highlightCandidateAreas
@@ -60,7 +64,8 @@ class VisionEngine {
             
             self?.trackingEngine.updateTracking(with: pixelBuffer) { trackers in
 
-                self?.delegate?.drawObservations(trackers.map { $0.objectObservation })
+//                self?.delegate?.drawObservations(trackers.map { $0.objectObservation })
+                self?.delegate?.drawTrackers(trackers)
                 guard
                     let self = self,
                     startTime == self.startTime

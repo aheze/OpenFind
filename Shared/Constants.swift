@@ -20,10 +20,6 @@ public enum Constants {
     /// make the fade a bit faster
     static var tabBarToolbarAlphaMultiplier = CGFloat(3.5)
     
-    /// how long to wait until camera tracks
-    static var waitTimeUntilTracking = 0.5
-    static var defaultTrackingBoundingBox = CGRect(x: 0.2, y: 0.2, width: 0.6, height: 0.6)
-    static var findCoolDownTime = 0.8
 
 }
 

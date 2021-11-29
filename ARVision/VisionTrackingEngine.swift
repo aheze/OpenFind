@@ -9,36 +9,19 @@
 import UIKit
 import Vision
 
-struct Tracker {
-    let objectObservation: VNDetectedObjectObservation
-    
-    /// the date when the observation's confidence dropper
-    /// wait 1.5 seconds for it to become accurate again.
-    /// - if became accurate, set this to `nil`
-    /// - if not, remove the observation
-    var dateWhenBecameInaccurate: Date?
-    
-    var uuid: UUID {
-        return objectObservation.uuid
-    }
-    
-    var confidence: VNConfidence {
-        return objectObservation.confidence
-    }
-    
-    var boundingBox: CGRect {
-        return objectObservation.boundingBox
-    }
-}
+
 
 class VisionTrackingEngine {
+    
+    /// request more trackers
+    var reportTrackerCount: ((Int) -> Void)?
+    
     var requestHandler: VNSequenceRequestHandler?
     var startTime: Date?
     var busy = false
     
     var trackers = [UUID: Tracker]()
-    
-    
+        
     func beginTracking(with image: CVPixelBuffer, observations: [VNRecognizedTextObservation]) {
         print("starting new tracking session")
         
@@ -63,7 +46,7 @@ class VisionTrackingEngine {
                 )
                 
                 let trackingObservation = VNDetectedObjectObservation(boundingBox: firstWordBoundingBox)
-                let tracker = Tracker(objectObservation: trackingObservation)
+                let tracker = Tracker(objectObservation: trackingObservation, dateInitialized: Date())
                 trackers[tracker.uuid] = tracker
             }
         }
@@ -82,7 +65,7 @@ class VisionTrackingEngine {
                     firstWord: false
                 )
                 let trackingObservation = VNDetectedObjectObservation(boundingBox: lastWordBoundingBox)
-                let tracker = Tracker(objectObservation: trackingObservation)
+                let tracker = Tracker(objectObservation: trackingObservation, dateInitialized: Date())
                 trackers[tracker.uuid] = tracker
                 
                 index += 1
@@ -117,20 +100,19 @@ class VisionTrackingEngine {
         
         for request in trackingRequests {
             if let observation = getRequestedObservation(request: request) {
-                let newTracker = Tracker(objectObservation: observation)
+                let previousTracker = trackers[observation.uuid]
+                let newTracker = Tracker(objectObservation: observation, dateInitialized: previousTracker?.dateInitialized ?? Date())
                 
-                /// update. or remove
+                /// update, or remove
                 if let updatedTracker = getUpdatedTracker(for: newTracker) {
                     newTrackers[observation.uuid] = updatedTracker
                 }
-                
             }
         }
         
-//        newTrackers = filterTrackers(trackers: newTrackers)
-        
         self.startTime = Date()
         self.trackers = newTrackers
+        self.reportTrackerCount?(newTrackers.count)
         self.busy = false
         
         DispatchQueue.main.async {

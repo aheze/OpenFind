@@ -17,18 +17,23 @@ extension VisionTrackingEngine {
         //        var keptObservations = observations
         
         if !VisionConstants.highlightTrackingArea.contains(
-            CGPoint(x: tracker.boundingBox.midX, y: tracker.boundingBox.minY)
+            tracker.boundingBox
         ) {
             return nil /// immediately remove this tracker
         }
         
         var newTracker = tracker
-        if
-            newTracker.dateWhenBecameInaccurate == nil,
-            newTracker.confidence < VisionConstants.minimumConfidenceForSuccess
-        {
+        
+        if let dateWhenBecameInaccurate = newTracker.dateWhenBecameInaccurate {
+            if newTracker.confidence < VisionConstants.minimumConfidenceForSuccess {
+                newTracker.dateWhenBecameInaccurate = nil
+            } else if dateWhenBecameInaccurate.distance(to: Date()) > Double(VisionConstants.maximumTimeWithoutConfidence) {
+                return nil
+            }
+        } else if newTracker.confidence < VisionConstants.minimumConfidenceForSuccess {
             newTracker.dateWhenBecameInaccurate = Date()
         }
+        
         return newTracker
     }
     //    func filterTrackers(trackers: [Tracker]) -> [Tracker] {

@@ -502,11 +502,12 @@
 		3CBEAC0327534B0900D04B39 /* VisionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC0227534B0900D04B39 /* VisionConstants.swift */; };
 		3CBEAC052753554C00D04B39 /* Utilities+Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC042753554C00D04B39 /* Utilities+Dates.swift */; };
 		3CBEAC09275356C900D04B39 /* VTE+FilterTrackers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC08275356C900D04B39 /* VTE+FilterTrackers.swift */; };
-		3CBEAC0B2753584800D04B39 /* VC+DrawObservations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC0A2753584700D04B39 /* VC+DrawObservations.swift */; };
+		3CBEAC0B2753584800D04B39 /* VC+DrawTrackers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC0A2753584700D04B39 /* VC+DrawTrackers.swift */; };
 		3CBEAC0D275484D800D04B39 /* VisionFindingUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC0C275484D700D04B39 /* VisionFindingUtilities.swift */; };
 		3CBEAC0E2754867300D04B39 /* GeneralUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* GeneralUtilities.swift */; };
 		3CBEAC0F2754867400D04B39 /* GeneralUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* GeneralUtilities.swift */; };
 		3CBEAC102754867400D04B39 /* GeneralUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* GeneralUtilities.swift */; };
+		3CBEAC1227549B9600D04B39 /* Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC1127549B9600D04B39 /* Tracking.swift */; };
 		3CC230D425C1F9AA00AD04B6 /* VC+LocalTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230D325C1F9AA00AD04B6 /* VC+LocalTip.swift */; };
 		3CC230EB25C2105200AD04B6 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230E925C2105200AD04B6 /* UIKitExtensions.swift */; };
 		3CC230EC25C2105200AD04B6 /* EasyTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC230EA25C2105200AD04B6 /* EasyTipView.swift */; };
@@ -1135,8 +1136,9 @@
 		3CBEAC0227534B0900D04B39 /* VisionConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionConstants.swift; sourceTree = "<group>"; };
 		3CBEAC042753554C00D04B39 /* Utilities+Dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+Dates.swift"; sourceTree = "<group>"; };
 		3CBEAC08275356C900D04B39 /* VTE+FilterTrackers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VTE+FilterTrackers.swift"; sourceTree = "<group>"; };
-		3CBEAC0A2753584700D04B39 /* VC+DrawObservations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+DrawObservations.swift"; sourceTree = "<group>"; };
+		3CBEAC0A2753584700D04B39 /* VC+DrawTrackers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+DrawTrackers.swift"; sourceTree = "<group>"; };
 		3CBEAC0C275484D700D04B39 /* VisionFindingUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionFindingUtilities.swift; sourceTree = "<group>"; };
+		3CBEAC1127549B9600D04B39 /* Tracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracking.swift; sourceTree = "<group>"; };
 		3CC230D325C1F9AA00AD04B6 /* VC+LocalTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+LocalTip.swift"; sourceTree = "<group>"; };
 		3CC230E925C2105200AD04B6 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		3CC230EA25C2105200AD04B6 /* EasyTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyTipView.swift; sourceTree = "<group>"; };
@@ -2427,6 +2429,7 @@
 			isa = PBXGroup;
 			children = (
 				3CBEAC0227534B0900D04B39 /* VisionConstants.swift */,
+				3CBEAC1127549B9600D04B39 /* Tracking.swift */,
 				3C4D20A52750A7EB00090AF9 /* VisionEngine.swift */,
 				3C4D209D2750A48500090AF9 /* VisionFindingEngine.swift */,
 				3CBEAC0C275484D700D04B39 /* VisionFindingUtilities.swift */,
@@ -2444,7 +2447,7 @@
 				3CE9C224274EBB70008C903C /* AppDelegate.swift */,
 				3CE9C226274EBB70008C903C /* SceneDelegate.swift */,
 				3CE9C228274EBB70008C903C /* ViewController.swift */,
-				3CBEAC0A2753584700D04B39 /* VC+DrawObservations.swift */,
+				3CBEAC0A2753584700D04B39 /* VC+DrawTrackers.swift */,
 				3CE9C23A274EBCB1008C903C /* VC+CameraSetup.swift */,
 				3CE9C23C274EBD2B008C903C /* VC+Sizing.swift */,
 				3CE9C22A274EBB70008C903C /* Main.storyboard */,
@@ -3766,9 +3769,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CBEAC1227549B9600D04B39 /* Tracking.swift in Sources */,
 				3CBEAC0E2754867300D04B39 /* GeneralUtilities.swift in Sources */,
 				3C4D209E2750A48500090AF9 /* VisionFindingEngine.swift in Sources */,
-				3CBEAC0B2753584800D04B39 /* VC+DrawObservations.swift in Sources */,
+				3CBEAC0B2753584800D04B39 /* VC+DrawTrackers.swift in Sources */,
 				3C4D209F2750A6A800090AF9 /* Constants.swift in Sources */,
 				3C4D20A22750A6C700090AF9 /* Utilities+UIColor.swift in Sources */,
 				3CBEAC09275356C900D04B39 /* VTE+FilterTrackers.swift in Sources */,
