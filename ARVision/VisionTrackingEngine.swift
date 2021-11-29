@@ -9,17 +9,32 @@
 import UIKit
 import Vision
 
+struct Tracker {
+    let objectObservation: VNDetectedObjectObservation
+    
+    /// the date when the observation's confidence dropper
+    /// wait 1.5 seconds for it to become accurate again.
+    /// - if became accurate, set this to `nil`
+    /// - if not, remove the observation
+    var dateWhenBecameInaccurate: Date?
+    
+    var uuid: UUID {
+        return objectObservation.uuid
+    }
+}
+
 class VisionTrackingEngine {
     var requestHandler: VNSequenceRequestHandler?
     var startTime: Date?
     var busy = false
     
-    var trackingObservations = [UUID : VNDetectedObjectObservation]()
+    var trackers = [UUID: Tracker]()
+    
     
     func beginTracking(with image: CVPixelBuffer, observations: [VNRecognizedTextObservation]) {
         print("starting new tracking session")
         
-        var trackingObservations = [UUID : VNDetectedObjectObservation]()
+        var trackers = [UUID : Tracker]()
         
         /// text observations that met the criteria, in case I need more
         var availableTextObservations = [VNRecognizedTextObservation]()
@@ -40,14 +55,15 @@ class VisionTrackingEngine {
                 )
                 
                 let trackingObservation = VNDetectedObjectObservation(boundingBox: firstWordBoundingBox)
-                trackingObservations[trackingObservation.uuid] = trackingObservation
+                let tracker = Tracker(objectObservation: trackingObservation)
+                trackers[tracker.uuid] = tracker
             }
         }
         
         /// need more trackers!
-        if trackingObservations.count < VisionConstants.maxTrackers {
+        if trackers.count < VisionConstants.maxTrackers {
             var index = 0
-            while trackingObservations.count < VisionConstants.maxTrackers {
+            while trackers.count < VisionConstants.maxTrackers {
                 
                 guard let textObservation = availableTextObservations[safe: index] else {
                     break
@@ -58,27 +74,28 @@ class VisionTrackingEngine {
                     firstWord: false
                 )
                 let trackingObservation = VNDetectedObjectObservation(boundingBox: lastWordBoundingBox)
-                trackingObservations[trackingObservation.uuid] = trackingObservation
+                let tracker = Tracker(objectObservation: trackingObservation)
+                trackers[tracker.uuid] = tracker
                 
                 index += 1
             }
         }
         
-        self.trackingObservations = trackingObservations
+        self.trackers = trackers
         startTime = Date()
         requestHandler = VNSequenceRequestHandler()
     }
     
-    func updateTracking(with updatedImage: CVPixelBuffer, completion: @escaping (([VNDetectedObjectObservation]) -> Void)) {
+    func updateTracking(with updatedImage: CVPixelBuffer, completion: @escaping (([Tracker]) -> Void)) {
         let timeSinceLastTracking = Date().seconds(from: startTime ?? Date())
         guard !busy, timeSinceLastTracking >= VisionConstants.debugDelay else { return }
         busy = true
         
-        var newTrackingObservations = [UUID : VNDetectedObjectObservation]()
+        var newTrackers = [UUID : Tracker]()
         var trackingRequests = [VNRequest]()
         
-        for trackingObservation in trackingObservations {
-            let request = VNTrackObjectRequest(detectedObjectObservation: trackingObservation.value) { request, error in }
+        for tracker in trackers {
+            let request = VNTrackObjectRequest(detectedObjectObservation: tracker.value.objectObservation) { request, error in }
             request.trackingLevel = .accurate
             trackingRequests.append(request)
         }
@@ -92,15 +109,16 @@ class VisionTrackingEngine {
         
         for request in trackingRequests {
             if let observation = getRequestedObservation(request: request) {
-                newTrackingObservations[observation.uuid] = observation
+                let newTracker = Tracker(objectObservation: observation)
+                newTrackers[observation.uuid] = newTracker
             }
         }
         self.startTime = Date()
-        self.trackingObservations = newTrackingObservations
+        self.trackers = newTrackers
         self.busy = false
         
         DispatchQueue.main.async {
-            completion(Array(newTrackingObservations.values))
+            completion(Array(newTrackers.values))
         }
     }
     

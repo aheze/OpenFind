@@ -12,7 +12,7 @@ import Vision
 protocol VisionEngineDelegate: AnyObject {
     func textFound(observations: [VNRecognizedTextObservation])
     func cameraMoved(by translation: CGSize)
-    func drawObservations(_ observations: [VNDetectedObjectObservation])
+    func drawObservations(_ trackers: [VNDetectedObjectObservation])
 }
 class VisionEngine {
     
@@ -58,9 +58,9 @@ class VisionEngine {
         let startTime = startTime
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             
-            self?.trackingEngine.updateTracking(with: pixelBuffer) { observations in
+            self?.trackingEngine.updateTracking(with: pixelBuffer) { trackers in
 
-                self?.delegate?.drawObservations(observations)
+                self?.delegate?.drawObservations(trackers.map { $0.objectObservation })
                 guard
                     let self = self,
                     startTime == self.startTime
