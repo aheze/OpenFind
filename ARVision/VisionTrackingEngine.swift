@@ -23,7 +23,6 @@ class VisionTrackingEngine {
     var trackers = [UUID: Tracker]()
         
     func beginTracking(with image: CVPixelBuffer, observations: [VNRecognizedTextObservation]) {
-        print("starting new tracking session")
         
         var trackers = [UUID : Tracker]()
         
@@ -31,25 +30,27 @@ class VisionTrackingEngine {
         var availableTextObservations = [VNRecognizedTextObservation]()
         for candidateArea in VisionConstants.highlightCandidateAreas {
             if let firstObservation = observations.first(where: {
-                $0.confidence >= 1 &&
-                candidateArea.contains(CGPoint(x: $0.boundingBox.midX, y: $0.boundingBox.midY)) &&
-                $0.confidence >= 1
+                $0.confidence >= VisionConstants.minimumFindConfidenceForTrackable &&
+                candidateArea.contains(CGPoint(x: $0.boundingBox.midX, y: $0.boundingBox.midY))
             }) {
                 
                 /// add it to the available  text observations
                 availableTextObservations.append(firstObservation)
                 
                 /// only use the first word for now
-                let firstWordBoundingBox = VisionFindingUtilities.getWordBoundingBox(
-                    textObservation: firstObservation,
-                    firstWord: true
+                let middleWordBoundingBox = VisionFindingUtilities.getMiddleWordBoundingBox(
+                    textObservation: firstObservation
                 )
                 
-                let trackingObservation = VNDetectedObjectObservation(boundingBox: firstWordBoundingBox)
+                let trackingObservation = VNDetectedObjectObservation(boundingBox: middleWordBoundingBox.insetBy(dx: 0.005, dy: 0.005))
                 let tracker = Tracker(objectObservation: trackingObservation, dateInitialized: Date())
                 trackers[tracker.uuid] = tracker
             }
         }
+        
+        /// https://stackoverflow.com/a/47681156/14351818
+        trackers = trackers.merging(self.trackers) { last, _ in last }
+        trackers = keepBestTrackers(trackers)
         
         /// need more trackers!
         if trackers.count < VisionConstants.maxTrackers {

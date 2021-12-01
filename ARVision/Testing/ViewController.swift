@@ -55,21 +55,24 @@ class ViewController: UIViewController {
 
 extension ViewController: VisionEngineDelegate {
     func textFound(observations: [VNRecognizedTextObservation]) {
-        for subview in imageFitView.subviews {
-            subview.removeFromSuperview()
-        }
-        
-        for observation in observations {
-            var adjustedBoundingBox = observation.boundingBox
-            
-            /// adjust for vision coordinates
-            adjustedBoundingBox.origin.y = 1 - observation.boundingBox.minY - observation.boundingBox.height
-            
-            let adjustedBoundingBoxScaled = adjustedBoundingBox.scaleTo(imageFitViewRect)
-            let newView = UIView(frame: adjustedBoundingBoxScaled)
-            newView.addDebugBorders(.blue, width: 1.5)
-            imageFitView.addSubview(newView)
-        }
+//        for subview in imageFitView.subviews {
+//            if subview.layer.borderWidth == 1.5 {
+//                subview.removeFromSuperview()
+//            }
+//        }
+//        
+//        for observation in observations {
+//            var adjustedBoundingBox = observation.boundingBox
+//            
+//            /// adjust for vision coordinates
+//            adjustedBoundingBox.origin.y = 1 - observation.boundingBox.minY - observation.boundingBox.height
+//            
+//            let adjustedBoundingBoxScaled = adjustedBoundingBox.scaleTo(imageFitViewRect)
+//            let newView = UIView(frame: adjustedBoundingBoxScaled)
+//            
+//            newView.addDebugBorders(UIColor.yellow, width: 1.5)
+//            imageFitView.addSubview(newView)
+//        }
 
     }
     
@@ -90,6 +93,9 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             updateViewportSize()
         }
         
+        if visionEngine.canFind {
+            visionEngine.startToFind(["Hi"], in: pixelBuffer)
+        }
         visionEngine.updatePixelBuffer(pixelBuffer)
     }
     

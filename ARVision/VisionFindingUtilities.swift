@@ -10,6 +10,26 @@ import UIKit
 import Vision
 
 struct VisionFindingUtilities {
+    static func getMiddleWordBoundingBox(textObservation: VNRecognizedTextObservation) -> CGRect {
+        guard let text = textObservation.topCandidates(1).first?.string else { return textObservation.boundingBox}
+        let separatedWords = text.components(separatedBy: " ")
+        let middleWordIndex = separatedWords.middleIndex
+        let middleWord = separatedWords[safe: middleWordIndex]
+        
+        let middleWordStartingCharacters = separatedWords.prefix(middleWordIndex).joined(separator: "")
+        
+        let wordPercentageOfTotal = Double(middleWord?.count ?? text.count) / Double(text.count)
+        let startingCharactersPercentageOfTotal = Double(middleWordStartingCharacters.count) / Double(text.count)
+        
+        let wordWidth = textObservation.boundingBox.width * wordPercentageOfTotal
+        let wordXOriginOffset = textObservation.boundingBox.width * startingCharactersPercentageOfTotal
+        
+        var wordBoundingBox = textObservation.boundingBox
+        wordBoundingBox.size.width = wordWidth
+        wordBoundingBox.origin.x += wordXOriginOffset
+        return wordBoundingBox
+        
+    }
     static func getWordBoundingBox(textObservation: VNRecognizedTextObservation, firstWord: Bool) -> CGRect {
         let text = textObservation.topCandidates(1).first?.string
         if firstWord {

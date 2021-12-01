@@ -10,12 +10,29 @@ import UIKit
 import Vision
 
 extension VisionTrackingEngine {
+    func keepBestTrackers(_ trackers: [UUID: Tracker]) -> [UUID: Tracker] {
+        guard trackers.count > 0 else { return [:] }
+        let averageConfidence = trackers.map { $0.value.confidence }.reduce(Float(0), +) / Float(trackers.count)
+        
+        var keptTrackers = [UUID: Tracker]()
+        for (uuid, tracker) in trackers {
+            if !keptTrackers.contains(where: {
+
+                let distance = CGPointDistanceSquared(
+                    from: CGPoint(x: $0.value.boundingBox.midX, y: $0.value.boundingBox.midY),
+                    to: CGPoint(x: tracker.boundingBox.midX, y: tracker.boundingBox.midY)
+                )
+
+                return distance <= CGFloat(VisionConstants.trackerMinimumProximitySquared)
+            }) && tracker.confidence >= averageConfidence {
+                keptTrackers[uuid] = tracker
+            }
+        }
+        
+        return keptTrackers
+    }
+    
     func getUpdatedTracker(for tracker: Tracker) -> Tracker? {
-        //        let averageConfidence = trackers.map { $0.confidence }.reduce(Float(0), +) / Float(trackers.count)
-        //        print("average: \(averageConfidence)")
-        
-        //        var keptObservations = observations
-        
         if !VisionConstants.highlightTrackingArea.contains(
             tracker.boundingBox
         ) {
@@ -36,31 +53,4 @@ extension VisionTrackingEngine {
         
         return newTracker
     }
-    //    func filterTrackers(trackers: [Tracker]) -> [Tracker] {
-    //        let averageConfidence = trackers.map { $0.confidence }.reduce(Float(0), +) / Float(trackers.count)
-    //        print("average: \(averageConfidence)")
-    //
-    ////        var keptObservations = observations
-    //
-    //        var newTrackers = [Tracker]()
-    //        for tracker in trackers {
-    //            if !VisionConstants.highlightTrackingArea.contains(
-    //                CGPoint(x: tracker.boundingBox.midX, y: tracker.boundingBox.minY)
-    //            ) {
-    //                continue /// immediately remove this tracker
-    //            }
-    //
-    //            var newTracker = tracker
-    //            if
-    //                newTracker.dateWhenBecameInaccurate == nil,
-    //                newTracker.confidence < averageConfidence
-    //            {
-    //                newTracker.dateWhenBecameInaccurate = Date()
-    //            }
-    //            newTrackers.append(newTracker)
-    //        }
-    //
-    //        return newTrackers
-    //
-    //    }
 }

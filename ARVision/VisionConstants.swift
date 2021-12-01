@@ -13,20 +13,21 @@ struct VisionConstants {
     // MARK: Finding
     
     /// how long to wait between finds
-    static var findCoolDownTime = 0.8
-    
+    static var findCoolDownTime = 1.8
+    static var minimumFindConfidenceForTrackable: Float = 0.4
     
     // MARK: Tracking
     static var maximumTimeWithoutConfidence: Float = 1.5
     static var minimumConfidenceForSuccess: Float = 0.5
     static var minimumTimeSinceInitialization: Float = 0.2
-    static var maxTrackers = 9
+    static var maxTrackers = 12
+    static var trackerMinimumProximitySquared = pow(Float(8) / Float(300), 2)
     
     /// number of seconds before starting another tracking request
     static var debugDelay = 0
     
     /// add highlights somewhere in this area
-    static let highlightCandidateTotalArea = CGRect(x: 0.25, y: 0.3, width: 0.5, height: 0.4)
+    static let highlightCandidateTotalArea = CGRect(x: 0.25, y: 0.1, width: 0.5, height: 0.8)
     
     /// tracking area, if go out, cut it off
     static let highlightTrackingArea = CGRect(x: 0.06, y: 0.06, width: 0.88, height: 0.88)
