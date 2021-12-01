@@ -7,8 +7,8 @@
 
 import UIKit
 
-public struct PhotosBridge {
-    public static func makeController() -> PhotosController {
+struct PhotosBridge {
+    static func makeController() -> PhotosController {
         let photos = PhotosController()
         return photos
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 /// Everything should be false on release
-public enum Debug {
+enum Debug {
     static var tabBarAlwaysTransparent = false
 }
 

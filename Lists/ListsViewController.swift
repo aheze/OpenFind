@@ -7,28 +7,28 @@
 
 import UIKit
 
-public class ListsViewController: UIViewController, PageViewController {
-    public var tabType: TabState = .lists
-    public override func viewDidLoad() {
+class ListsViewController: UIViewController, PageViewController {
+    var tabType: TabState = .lists
+    override func viewDidLoad() {
         super.viewDidLoad()
     }
 }
 
 extension ListsViewController {
     
-    public func willBecomeActive() {
+    func willBecomeActive() {
         
     }
     
-    public func didBecomeActive() {
+    func didBecomeActive() {
         
     }
     
-    public func willBecomeInactive() {
+    func willBecomeInactive() {
         
     }
     
-    public func didBecomeInactive() {
+    func didBecomeInactive() {
         
     }
 }

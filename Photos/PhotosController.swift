@@ -7,8 +7,8 @@
 
 import UIKit
 
-public class PhotosController {
-    public var viewController: PhotosViewController
+class PhotosController {
+    var viewController: PhotosViewController
     
     init() {
         let storyboard = UIStoryboard(name: "PhotosContent", bundle: nil)

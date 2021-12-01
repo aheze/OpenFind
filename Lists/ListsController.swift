@@ -7,8 +7,8 @@
 
 import UIKit
 
-public class ListsController {
-    public var viewController: ListsViewController
+class ListsController {
+    var viewController: ListsViewController
     
     init() {
         let storyboard = UIStoryboard(name: "ListsContent", bundle: nil)

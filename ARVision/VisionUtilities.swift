@@ -15,7 +15,7 @@ extension CGImage {
      - Note: Not all CVPixelBuffer pixel formats support conversion into a
      CGImage-compatible pixel format.
      */
-    public static func create(pixelBuffer: CVPixelBuffer) -> CGImage? {
+    static func create(pixelBuffer: CVPixelBuffer) -> CGImage? {
         var cgImage: CGImage?
         VTCreateCGImageFromCVPixelBuffer(pixelBuffer, options: nil, imageOut: &cgImage)
         return cgImage
@@ -23,7 +23,7 @@ extension CGImage {
 }
 
 extension UIImage {
-    public convenience init?(pixelBuffer: CVPixelBuffer) {
+    convenience init?(pixelBuffer: CVPixelBuffer) {
         var cgImage: CGImage?
         VTCreateCGImageFromCVPixelBuffer(pixelBuffer, options: nil, imageOut: &cgImage)
 

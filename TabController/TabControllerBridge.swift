@@ -8,8 +8,8 @@
 
 import SwiftUI
 
-public struct TabControllerBridge {
-    public static func makeTabController<CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View>(
+struct TabControllerBridge {
+    static func makeTabController<CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View>(
         pageViewControllers: [PageViewController],
         toolbarViewModel: ToolbarViewModel,
         cameraToolbarView: CameraToolbarView,

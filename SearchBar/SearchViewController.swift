@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class SearchViewController: UIViewController {
+class SearchViewController: UIViewController {
     
     var fields = [Field]()
     
@@ -66,7 +66,7 @@ public class SearchViewController: UIViewController {
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var searchCollectionView: SearchCollectionView!
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         fields = [

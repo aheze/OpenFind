@@ -28,9 +28,9 @@ class Settings: ObservableObject {
     }
 }
 
-public class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController {
     
-    public init() {
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -40,7 +40,7 @@ public class SettingsViewController: UIViewController {
     
     var dismissed: (() -> Void)?
     
-    public override func loadView() {
+    override func loadView() {
         
         
         /**
@@ -89,15 +89,15 @@ extension SettingsViewController {
 
 
 extension SettingsViewController: UIActivityItemSource {
-    public func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
         return ""
     }
     
-    public func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
         return nil
     }
     
-    public func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
+    func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
         
         let appIcon = UIImage(named: "AppIconSmall")!
         let imageProvider = NSItemProvider(object: appIcon)
@@ -230,14 +230,14 @@ struct SettingsView: View {
 
 extension ScrollView {
     
-    public func fixFlickering() -> some View {
+    func fixFlickering() -> some View {
         
         return self.fixFlickering { (scrollView) in
             return scrollView
         }
     }
     
-    public func fixFlickering<T: View>(@ViewBuilder configurator: @escaping (ScrollView<AnyView>) -> T) -> some View {
+    func fixFlickering<T: View>(@ViewBuilder configurator: @escaping (ScrollView<AnyView>) -> T) -> some View {
         
         GeometryReader { geometryWithSafeArea in
             GeometryReader { geometry in

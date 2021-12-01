@@ -18,8 +18,11 @@ class VisionEngine {
     
     weak var delegate: VisionEngineDelegate?
     
-    let trackingEngine = VisionTrackingEngine()
+//    let trackingEngine = VisionTrackingEngine()
     let findingEnding = VisionFindingEngine()
+    
+    
+    let visionSamplingEngine = VisionSamplingEngine()
     
     
     // MARK: Tracking
@@ -43,34 +46,62 @@ class VisionEngine {
     
     func startToFind(_ text: [String], in pixelBuffer: CVPixelBuffer) {
         startTime = Date()
-        findingEnding.fastFind(text, in: pixelBuffer) { [weak self] observations in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.delegate?.textFound(observations: observations)
-            }
-            self.trackingEngine.beginTracking(with: pixelBuffer, observations: observations)
+        visionSamplingEngine.start(in: CGRect(x: 0.4, y: 0.4, width: 0.2, height: 0.2))
+//        findingEnding.fastFind(text, in: pixelBuffer) { [weak self] observations in
+//            guard let self = self else { return }
+//            DispatchQueue.main.async {
+//                self.delegate?.textFound(observations: observations)
+//            }
+//            self.trackingEngine.beginTracking(with: pixelBuffer, observations: observations)
+//        }
+//        trackingEngine.reportTrackerCount = { [weak self] numberOfTrackers in
+//            if numberOfTrackers < VisionConstants.maxTrackers {
+//                let trackersNeeded = VisionConstants.maxTrackers - numberOfTrackers
+//            }
+//        }
+    }
+    
+    
+    var canSample: Bool {
+        var canSample = true
+        if visionSamplingEngine.startTime != nil {
+//            print("Currently finding")
+            canSample = false
         }
-        trackingEngine.reportTrackerCount = { [weak self] numberOfTrackers in
-            if numberOfTrackers < VisionConstants.maxTrackers {
-                let trackersNeeded = VisionConstants.maxTrackers - numberOfTrackers
-            }
+        if !visionSamplingEngine.startTime.isPastCoolDown(VisionConstants.findCoolDownTime) {
+//            print("Still in cooldown!")
+            canSample = false
         }
+        
+//        print("Can find? \(canFind)")
+        return canSample
     }
     func updatePixelBuffer(_ pixelBuffer: CVPixelBuffer) {
         _ = VisionConstants.highlightCandidateAreas
         
-        let startTime = startTime
+//        let startTime = startTime
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            
-            self?.trackingEngine.updateTracking(with: pixelBuffer) { trackers in
-                self?.delegate?.drawTrackers(trackers)
-                guard
-                    let self = self,
-                    startTime == self.startTime
-                else {
-                    return
+            self?.visionSamplingEngine.update(pixelBuffer: pixelBuffer, completion: { observations in
+                
+                if self?.canSample ?? false {
+                    DispatchQueue.main.async {
+                        print("observations: \(observations)")
+                        self?.delegate?.textFound(observations: observations)
+                    }
                 }
-            }
+            })
+            
+            
+            
+//            self?.trackingEngine.updateTracking(with: pixelBuffer) { trackers in
+//                self?.delegate?.drawTrackers(trackers)
+//                guard
+//                    let self = self,
+//                    startTime == self.startTime
+//                else {
+//                    return
+//                }
+//            }
         }
     }
 }

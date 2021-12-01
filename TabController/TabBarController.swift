@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-public protocol TabBarControllerDelegate: AnyObject {
+protocol TabBarControllerDelegate: AnyObject {
     func willBeginNavigatingTo(tab: TabState)
     func didFinishNavigatingTo(tab: TabState)
 }
@@ -18,7 +18,7 @@ enum TabControl {
     static var moveToOtherTab: ((TabState, Bool) -> Void)?
 }
 
-public protocol PageViewController: UIViewController {
+protocol PageViewController: UIViewController {
     /// make sure all view controllers have a name
     var tabType: TabState { get set }
     
@@ -36,25 +36,25 @@ public protocol PageViewController: UIViewController {
 }
 
 /// wrapper for `TabBarViewController` - compatible with generics
-public class TabBarController<
+class TabBarController<
     CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View
 >: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
     
     /// data
-    public var pages: [PageViewController]
-    public var toolbarViewModel: ToolbarViewModel
-    public var cameraToolbarView: CameraToolbarView
-    public var photosSelectionToolbarView: PhotosSelectionToolbarView
-    public var photosDetailToolbarView: PhotosDetailToolbarView
-    public var listsSelectionToolbarView: ListsSelectionToolbarView
+    var pages: [PageViewController]
+    var toolbarViewModel: ToolbarViewModel
+    var cameraToolbarView: CameraToolbarView
+    var photosSelectionToolbarView: PhotosSelectionToolbarView
+    var photosDetailToolbarView: PhotosDetailToolbarView
+    var listsSelectionToolbarView: ListsSelectionToolbarView
     
-    public var viewController: TabBarViewController
+    var viewController: TabBarViewController
     
     /// model
     var tabViewModel: TabViewModel!
     
     /// delegate
-    public weak var delegate: TabBarControllerDelegate?
+    weak var delegate: TabBarControllerDelegate?
     
     init(
         pages: [PageViewController],
@@ -141,7 +141,7 @@ public class TabBarController<
     
     /// called **even** when programmatically set the tab via the icon button...
     /// so, need to use `updateTabBarHeightAfterScrolling` to check whether the user was scrolling or not.
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         /// only update after **the user** scrolled, since `scrollViewDidScroll` is called even when programmatically setting the content offset
         if (scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating) {
@@ -192,21 +192,21 @@ public class TabBarController<
         }
     }
     
-    public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let pageViewController = pages[indexPath.item]
         viewController.addChild(pageViewController, in: cell.contentView)
     }
 
-    public func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let pageViewController = pages[indexPath.item]
         viewController.removeChild(pageViewController)
     }
     
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return pages.count
     }
     
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? ContentCell else { return UICollectionViewCell() }
         return cell
     }

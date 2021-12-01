@@ -8,12 +8,11 @@
 import SwiftUI
 import Combine
 
-public class CameraViewController: UIViewController, PageViewController {
-    
-    public var tabType: TabState = .camera
-    var cameraViewModel: ToolbarViewModel.Camera!
+class CameraViewController: UIViewController, PageViewController {
+
+    var tabType: TabState = .camera
+    var cameraViewModel: ToolbarViewModel.Camera
     var zoomViewModel: ZoomViewModel!
-    
     
     private var zoomCancellable: AnyCancellable?
     private var aspectProgressCancellable: AnyCancellable?
@@ -26,47 +25,31 @@ public class CameraViewController: UIViewController, PageViewController {
     
     @IBOutlet weak var livePreviewContainerView: UIView!
     lazy var livePreviewViewController: LivePreviewViewController = {
-        
-        
-        let storyboard = UIStoryboard(name: "CameraContent", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "LivePreviewViewController") as! LivePreviewViewController
-        
-        viewController.findFromPhotosButtonPressed = { [weak self] in
-            TabControl.moveToOtherTab?(.photos, true)
-        }
-        viewController.needSafeViewUpdate = { [weak self] in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                viewController.updateViewportSize(safeViewFrame: self.safeView.frame)
-                viewController.changeZoom(to: self.zoomViewModel.zoom, animated: false)
-                viewController.changeAspectProgress(to: self.zoomViewModel.aspectProgress)
-            }
-        }
-        
-        self.addChild(viewController, in: livePreviewContainerView)
-        
-        livePreviewContainerView.backgroundColor = .clear
-        viewController.view.backgroundColor = .clear
-        return viewController
+        return createLivePreviewViewController()
     }()
     
     @IBOutlet weak var safeView: UIView!
     
-    
-    public lazy var toolbar: CameraToolbarView = {
-        self.cameraViewModel = .init()
+    lazy var toolbar: CameraToolbarView = {
         return CameraToolbarView(viewModel: cameraViewModel)
     }()
     
-    public override func viewDidLoad() {
+    init?(coder: NSCoder, cameraViewModel: ToolbarViewModel.Camera) {
+        self.cameraViewModel = cameraViewModel
+        super.init(coder: coder)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("You must create this view controller with metadata.")
+    }
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         print("Camera loaded")
         print("View bounds: \(view.bounds)")
         setup()
-        
     }
     
-    public override func viewDidLayoutSubviews() {
+    override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         livePreviewViewController.updateViewportSize(safeViewFrame: safeView.frame)
         livePreviewViewController.changeAspectProgress(to: zoomViewModel.aspectProgress)
@@ -108,45 +91,23 @@ public class CameraViewController: UIViewController, PageViewController {
 }
 
 extension CameraViewController {
-    public func willBecomeActive() {
+    func willBecomeActive() {
         
     }
     
-    public func didBecomeActive() {
+    func didBecomeActive() {
         
     }
     
-    public func willBecomeInactive() {
+    func willBecomeInactive() {
         
     }
     
-    public func didBecomeInactive() {
-            
+    func didBecomeInactive() {
+
     }
+    
 }
 
-public struct CameraToolbarView: View {
-    @ObservedObject var viewModel: ToolbarViewModel.Camera
-    
-    public var body: some View {
-        HStack(alignment: .top, spacing: 0) {
-            HStack {
-                ResultsIconView(count: $viewModel.resultsCount)
-                Spacer()
-                FlashIconView(isOn: $viewModel.flashOn)
-            }
-            .frame(maxWidth: .infinity)
-
-            Color.clear
-
-            HStack {
-                FocusIconView(isOn: $viewModel.focusOn)
-                Spacer()
-                SettingsIconView()
-            }
-            .frame(maxWidth: .infinity)
-        }
-    }
-}
 
 

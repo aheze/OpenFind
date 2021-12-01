@@ -9,7 +9,7 @@
 import SwiftUI
 import Introspect
 
-public enum Language: Int, CaseIterable, Codable {
+enum Language: Int, CaseIterable, Codable {
     case english = 0
     case french = 1
     case italian = 2
@@ -19,7 +19,7 @@ public enum Language: Int, CaseIterable, Codable {
     case chineseSim = 6
     case chineseTra = 7
     
-    public func getName() -> (String, String) {
+    func getName() -> (String, String) {
         switch self {
         case .english:
             return ("English", "en-US")
@@ -40,7 +40,7 @@ public enum Language: Int, CaseIterable, Codable {
         }
     }
     
-    public func versionNeeded() -> Int {
+    func versionNeeded() -> Int {
         switch self {
         case .english:
             return 13
@@ -61,7 +61,7 @@ public enum Language: Int, CaseIterable, Codable {
         }
     }
     
-    public func requiresAccurateMode() -> Bool {
+    func requiresAccurateMode() -> Bool {
         switch self {
         case .english:
             return false
@@ -91,14 +91,14 @@ func deviceVersion() -> Int {
     }
 }
 
-public struct OrderedLanguage: Codable {
-    public init(language: Language, priority: Int? = nil) {
+struct OrderedLanguage: Codable {
+    init(language: Language, priority: Int? = nil) {
         self.language = language
         self.priority = priority
     }
     
-    public var language: Language
-    public var priority: Int?
+    var language: Language
+    var priority: Int?
     
 }
 
@@ -122,7 +122,7 @@ enum HeaderType {
     case selected
     case unselected
     
-    public func getName() -> String {
+    func getName() -> String {
         switch self {
         case .selected:
             return "Active"

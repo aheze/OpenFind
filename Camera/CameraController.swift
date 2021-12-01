@@ -7,12 +7,18 @@
 
 import UIKit
 
-public class CameraController {
-    public var viewController: CameraViewController
+class CameraController {
+    var model: ToolbarViewModel.Camera
+    var viewController: CameraViewController
     
-    init() {
+    init(model: ToolbarViewModel.Camera) {
+        self.model = model
+        
         let storyboard = UIStoryboard(name: "CameraContent", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "CameraViewController") as! CameraViewController
+        let viewController = storyboard.instantiateViewController(identifier: "CameraViewController") { coder in
+            CameraViewController(coder: coder, cameraViewModel: model)
+        }
+        
         self.viewController = viewController
         viewController.loadViewIfNeeded() /// needed to initialize outlets
     }

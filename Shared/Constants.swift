@@ -8,9 +8,9 @@
 
 import UIKit
 
-public enum Constants {
-    public static var activeIconColor = UIColor(hex: 0x8AF9FF)
-    public static var iconFont = UIFont.preferredFont(forTextStyle: .title2)
+enum Constants {
+    static var activeIconColor = UIColor(hex: 0x8AF9FF)
+    static var iconFont = UIFont.preferredFont(forTextStyle: .title2)
     
     static var darkBlueBackground = UIColor(hex: 0x006186)
     
@@ -23,7 +23,7 @@ public enum Constants {
 
 }
 
-public struct ConstantVars {
+struct ConstantVars {
     
     /// default tab bar content height
     static let tabBarContentHeight = CGFloat(49)
@@ -40,7 +40,7 @@ public struct ConstantVars {
     /// dark background (camera) height
     static var tabBarTotalHeightExpanded = CGFloat(0)
     
-    public static func configure(window: UIWindow?) {
+    static func configure(window: UIWindow?) {
         let bottomSafeAreaInset = window?.safeAreaInsets.bottom ?? 0
         let deviceHasNotch = bottomSafeAreaInset > 0
         
@@ -55,7 +55,6 @@ public struct ConstantVars {
             tabBarTotalHeight = tabBarContentHeight
             tabBarTotalHeightExpanded = tabBarTotalHeight + 58
         }
-        print("ex: \(tabBarTotalHeightExpanded)")
     }
 }
 

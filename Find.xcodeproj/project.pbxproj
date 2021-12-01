@@ -446,6 +446,11 @@
 		3C6DA93F25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6DA93E25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift */; };
 		3C71F25E25AF6B8000D22212 /* PhotosVC+Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71F25D25AF6B8000D22212 /* PhotosVC+Star.swift */; };
 		3C71F26225AF6B9900D22212 /* PhotosVC+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71F26125AF6B9900D22212 /* PhotosVC+Cache.swift */; };
+		3C7B1D4A27571E8D006525B1 /* VisionSamplingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D4927571E8D006525B1 /* VisionSamplingEngine.swift */; };
+		3C7B1D4C2757E84F006525B1 /* CameraToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D4B2757E84F006525B1 /* CameraToolbarView.swift */; };
+		3C7B1D4D2757E8F9006525B1 /* CameraToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D4B2757E84F006525B1 /* CameraToolbarView.swift */; };
+		3C7B1D6F2757EEFA006525B1 /* CameraVC+LivePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D6E2757EEFA006525B1 /* CameraVC+LivePreview.swift */; };
+		3C7B1D702757EF32006525B1 /* CameraVC+LivePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D6E2757EEFA006525B1 /* CameraVC+LivePreview.swift */; };
 		3C7EAB2C25C0A97800264B63 /* PhotosVC+Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7EAB2B25C0A97800264B63 /* PhotosVC+Tutorial.swift */; };
 		3C84F97825C3A4160066A360 /* ViewController+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F97725C3A4160066A360 /* ViewController+Defaults.swift */; };
 		3C84F97B25C3AB1B0066A360 /* CameraVC+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F97A25C3AB1B0066A360 /* CameraVC+Settings.swift */; };
@@ -1075,6 +1080,9 @@
 		3C6DA93E25BDE71300B3CE5B /* PhotoSlidesVC+Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Share.swift"; sourceTree = "<group>"; };
 		3C71F25D25AF6B8000D22212 /* PhotosVC+Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Star.swift"; sourceTree = "<group>"; };
 		3C71F26125AF6B9900D22212 /* PhotosVC+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Cache.swift"; sourceTree = "<group>"; };
+		3C7B1D4927571E8D006525B1 /* VisionSamplingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionSamplingEngine.swift; sourceTree = "<group>"; };
+		3C7B1D4B2757E84F006525B1 /* CameraToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraToolbarView.swift; sourceTree = "<group>"; };
+		3C7B1D6E2757EEFA006525B1 /* CameraVC+LivePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+LivePreview.swift"; sourceTree = "<group>"; };
 		3C7EAB2B25C0A97800264B63 /* PhotosVC+Tutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Tutorial.swift"; sourceTree = "<group>"; };
 		3C84F97725C3A4160066A360 /* ViewController+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Defaults.swift"; sourceTree = "<group>"; };
 		3C84F97A25C3AB1B0066A360 /* CameraVC+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Settings.swift"; sourceTree = "<group>"; };
@@ -1661,7 +1669,9 @@
 				3C4D398127475BB10010FD68 /* CameraBridge.swift */,
 				3C4D398527475BB10010FD68 /* CameraController.swift */,
 				3C4D398827475BB10010FD68 /* CameraViewController.swift */,
+				3C7B1D6E2757EEFA006525B1 /* CameraVC+LivePreview.swift */,
 				3C11996F274B329E00D6AFE3 /* Live Preview */,
+				3C7B1D4B2757E84F006525B1 /* CameraToolbarView.swift */,
 				3C11996627499A3E00D6AFE3 /* Zoom */,
 				3C4D398727475BB10010FD68 /* FlashIconView.swift */,
 				3C4D398427475BB10010FD68 /* FocusIconView.swift */,
@@ -2434,6 +2444,7 @@
 				3C4D209D2750A48500090AF9 /* VisionFindingEngine.swift */,
 				3CBEAC0C275484D700D04B39 /* VisionFindingUtilities.swift */,
 				3C60666E274EC6A9000A5BDE /* VisionTrackingEngine.swift */,
+				3C7B1D4927571E8D006525B1 /* VisionSamplingEngine.swift */,
 				3CBEAC08275356C900D04B39 /* VTE+FilterTrackers.swift */,
 				3C606675274F5343000A5BDE /* VisionUtilities.swift */,
 				3CE9C238274EBB88008C903C /* Testing */,
@@ -3484,9 +3495,11 @@
 				3CE9C1F5274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
 				3CE9C206274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
 				3CE9C218274DEAE1008C903C /* Utilities+Constraints.swift in Sources */,
+				3C7B1D4D2757E8F9006525B1 /* CameraToolbarView.swift in Sources */,
 				3C4D3A15274767400010FD68 /* ContentPageViewController.swift in Sources */,
 				3CE9C1FC274B4E44008C903C /* LivePreviewViewController.swift in Sources */,
 				3C4D3A19274767410010FD68 /* TabBarViewController.swift in Sources */,
+				3C7B1D702757EF32006525B1 /* CameraVC+LivePreview.swift in Sources */,
 				3CE9C214274DE343008C903C /* Debug.swift in Sources */,
 				3CE9C201274B4F05008C903C /* ZoomView+Constants.swift in Sources */,
 				3C4D3A1F274767410010FD68 /* TabBarController.swift in Sources */,
@@ -3529,7 +3542,9 @@
 				3C11996A27499A5E00D6AFE3 /* ZoomView+Constants.swift in Sources */,
 				3C4D3A052747667B0010FD68 /* TabBarToolbars.swift in Sources */,
 				3C4D3A062747667B0010FD68 /* TabControllerBridge.swift in Sources */,
+				3C7B1D4C2757E84F006525B1 /* CameraToolbarView.swift in Sources */,
 				3CE9C219274DEAE2008C903C /* Utilities+Constraints.swift in Sources */,
+				3C7B1D6F2757EEFA006525B1 /* CameraVC+LivePreview.swift in Sources */,
 				3C4D39CC27475EBD0010FD68 /* Utilities+UIColor.swift in Sources */,
 				3C4D39C327475E2C0010FD68 /* Utilities+UIViewController.swift in Sources */,
 				3CE9C207274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
@@ -3783,6 +3798,7 @@
 				3CBEAC0327534B0900D04B39 /* VisionConstants.swift in Sources */,
 				3C606670274ECCB9000A5BDE /* Debug.swift in Sources */,
 				3CE9C225274EBB70008C903C /* AppDelegate.swift in Sources */,
+				3C7B1D4A27571E8D006525B1 /* VisionSamplingEngine.swift in Sources */,
 				3CE9C23D274EBD2B008C903C /* VC+Sizing.swift in Sources */,
 				3CE9C239274EBBA1008C903C /* LivePreviewView.swift in Sources */,
 				3CBEAC052753554C00D04B39 /* Utilities+Dates.swift in Sources */,

@@ -55,7 +55,7 @@ class TabViewModel: ObservableObject {
     }
 }
 
-public enum TabState: Equatable {
+enum TabState: Equatable {
     case photos
     case camera
     case lists

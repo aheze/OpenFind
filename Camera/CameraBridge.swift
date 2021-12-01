@@ -7,9 +7,9 @@
 
 import UIKit
 
-public struct CameraBridge {
-    public static func makeController() -> CameraController {
-        let camera = CameraController()
+struct CameraBridge {
+    static func makeController(model: ToolbarViewModel.Camera) -> CameraController {
+        let camera = CameraController(model: model)
         return camera
     }
 }

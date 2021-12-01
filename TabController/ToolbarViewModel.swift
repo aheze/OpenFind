@@ -8,36 +8,39 @@
 import SwiftUI
 
 
-public class ToolbarViewModel: ObservableObject {
-    @Published public var toolbar = Toolbar.none
+class ToolbarViewModel: ObservableObject {
+    @Published var toolbar = Toolbar.none
+    var cameraModel = Camera()
     
-    public init() { }
+    init() { }
     
-    public enum Toolbar {
+    enum Toolbar {
         case none
         case photosSelection
         case photosDetail
         case listsSelection
     }
     
-    public class Camera: ObservableObject {
-        @Published public var resultsCount = 0
-        @Published public var flashOn = false
-        @Published public var focusOn = false
-        public init() { }
+    class Camera: ObservableObject {
+        @Published var resultsCount = 0
+        @Published var shutterPaused = false
+        @Published var flashOn = false
+        @Published var focusOn = false
+        init() { }
+        
     }
-    public class PhotosSelection: ObservableObject {
-        @Published public var selectedCount = 0
-        @Published public var starOn = false
-        public init() { }
+    class PhotosSelection: ObservableObject {
+        @Published var selectedCount = 0
+        @Published var starOn = false
+        init() { }
     }
-    public class PhotosDetail: ObservableObject {
-        @Published public var starOn = false
-        @Published public var infoOn = false
-        public init() { }
+    class PhotosDetail: ObservableObject {
+        @Published var starOn = false
+        @Published var infoOn = false
+        init() { }
     }
-    public class ListsSelection: ObservableObject {
-        @Published public var selectedCount = 0
-        public init() { }
+    class ListsSelection: ObservableObject {
+        @Published var selectedCount = 0
+        init() { }
     }
 }

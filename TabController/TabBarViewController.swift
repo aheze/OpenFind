@@ -9,7 +9,7 @@ import UIKit
 import SwiftUI
 import Combine
 
-public class TabBarViewController: UIViewController {
+class TabBarViewController: UIViewController {
     /// big, general area
     @IBOutlet weak var contentView: UIView!
     
@@ -36,7 +36,7 @@ public class TabBarViewController: UIViewController {
     @IBOutlet weak var tabBarContainerView: UIView!
     @IBOutlet weak var tabBarHeightC: NSLayoutConstraint!
 
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         _ = contentPagingLayout
         contentCollectionView.decelerationRate = .fast
@@ -44,7 +44,7 @@ public class TabBarViewController: UIViewController {
     }
     
     var subviewsWereLayout = false
-    public override func viewWillLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         if !subviewsWereLayout {
             subviewsWereLayout = true

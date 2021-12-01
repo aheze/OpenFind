@@ -135,14 +135,14 @@ class VisionTrackingEngine {
 
 
 
-public enum RoundingPrecision {
+enum RoundingPrecision {
     case ones
     case tenths
     case hundredths
 }
 
 // Round to the specific decimal place
-public func preciseRound(
+func preciseRound(
     _ value: CGFloat,
     precision: RoundingPrecision = .hundredths) -> Double
 {

@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-public class PhotosViewController: UIViewController, PageViewController {
+class PhotosViewController: UIViewController, PageViewController {
     
-    public var tabType: TabState = .photos
+    var tabType: TabState = .photos
     var photosSelectionViewModel: ToolbarViewModel.PhotosSelection!
     
-    public lazy var selectionToolbar: PhotosSelectionToolbarView = {
+    lazy var selectionToolbar: PhotosSelectionToolbarView = {
         return PhotosSelectionToolbarView(viewModel: photosSelectionViewModel)
     }()
     
-    public var getActiveToolbarViewModel: (() -> ToolbarViewModel)?
+    var getActiveToolbarViewModel: (() -> ToolbarViewModel)?
     
     /// active, animate
-    public var activateSelectionToolbar: ((Bool, Bool) -> Void)?
+    var activateSelectionToolbar: ((Bool, Bool) -> Void)?
     
     
     @IBAction func selectPressed(_ sender: Any) {
@@ -40,7 +40,7 @@ public class PhotosViewController: UIViewController, PageViewController {
         photosSelectionViewModel.selectedCount -= 1
     }
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         print("Photos loaded")
         
@@ -49,28 +49,28 @@ public class PhotosViewController: UIViewController, PageViewController {
 }
 
 extension PhotosViewController {
-    public func willBecomeActive() {
+    func willBecomeActive() {
         
     }
     
-    public func didBecomeActive() {
+    func didBecomeActive() {
         
     }
     
-    public func willBecomeInactive() {
+    func willBecomeInactive() {
 //        print("Becoming inactve.")
         self.activateSelectionToolbar?(false, true)
     }
     
-    public func didBecomeInactive() {
+    func didBecomeInactive() {
         
     }
 }
 
-public struct PhotosSelectionToolbarView: View {
+struct PhotosSelectionToolbarView: View {
     @ObservedObject var viewModel: ToolbarViewModel.PhotosSelection
     
-    public var body: some View {
+    var body: some View {
         HStack {
             ToolbarIconButton(iconName: viewModel.starOn ? "star.fill" : "star") {
                 viewModel.starOn.toggle()

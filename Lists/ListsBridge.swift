@@ -7,8 +7,8 @@
 
 import UIKit
 
-public struct ListsBridge {
-    public static func makeController() -> ListsController {
+struct ListsBridge {
+    static func makeController() -> ListsController {
         let lists = ListsController()
         return lists
     }

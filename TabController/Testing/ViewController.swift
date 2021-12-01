@@ -9,11 +9,14 @@
 import SwiftUI
 
 class ViewController: UIViewController {
+    
+    @ObservedObject var cameraToolbarModel = ToolbarViewModel.Camera()
+    
     lazy var photos: PhotosController = {
         return PhotosBridge.makeController()
     }()
     lazy var camera: CameraController = {
-        return CameraBridge.makeController()
+        return CameraBridge.makeController(model: cameraToolbarModel)
     }()
     lazy var lists: ListsController = {
         return ListsBridge.makeController()
@@ -64,7 +67,6 @@ class ViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("load!")
         
         _ = tabController
     }

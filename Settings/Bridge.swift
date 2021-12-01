@@ -7,16 +7,16 @@
 
 import UIKit
 
-public struct Bridge {
+struct Bridge {
     
-    public static var dismissed: (() -> Void)?
-    public static var presentTopOfTheList: (() -> Void)?
-    public static var presentRequiresSoftwareUpdate: ((String) -> Void)?
-    public static var presentWhatsNew: (() -> Void)?
-    public static var presentLicenses: (() -> Void)?
-    public static var presentGeneralTutorial: (() -> Void)?
-    public static var presentPhotosTutorial: (() -> Void)?
-    public static var presentListsTutorial: (() -> Void)?
-    public static var presentListsBuilderTutorial: (() -> Void)?
-    public static var presentShareScreen: (() -> Void)?
+    static var dismissed: (() -> Void)?
+    static var presentTopOfTheList: (() -> Void)?
+    static var presentRequiresSoftwareUpdate: ((String) -> Void)?
+    static var presentWhatsNew: (() -> Void)?
+    static var presentLicenses: (() -> Void)?
+    static var presentGeneralTutorial: (() -> Void)?
+    static var presentPhotosTutorial: (() -> Void)?
+    static var presentListsTutorial: (() -> Void)?
+    static var presentListsBuilderTutorial: (() -> Void)?
+    static var presentShareScreen: (() -> Void)?
 }
