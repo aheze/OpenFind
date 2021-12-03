@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct CameraToolbarView: View {
-    @ObservedObject var viewModel: ToolbarViewModel.Camera
+    @ObservedObject var viewModel: CameraViewModel
     
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
@@ -23,7 +23,7 @@ struct CameraToolbarView: View {
             Color.clear
 
             HStack {
-                FlashIconView(isOn: $viewModel.flash)
+                FlashIconView(isOn: $viewModel.flash, isDisabled: $viewModel.shutterOn)
                 Spacer()
                 SettingsIconView()
             }

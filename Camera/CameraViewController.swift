@@ -11,7 +11,7 @@ import Combine
 class CameraViewController: UIViewController, PageViewController {
 
     var tabType: TabState = .camera
-    var cameraViewModel: ToolbarViewModel.Camera
+    var cameraViewModel: CameraViewModel
     var zoomViewModel: ZoomViewModel!
     
     private var zoomCancellable: AnyCancellable?
@@ -34,7 +34,7 @@ class CameraViewController: UIViewController, PageViewController {
         return CameraToolbarView(viewModel: cameraViewModel)
     }()
     
-    init?(coder: NSCoder, cameraViewModel: ToolbarViewModel.Camera) {
+    init?(coder: NSCoder, cameraViewModel: CameraViewModel) {
         self.cameraViewModel = cameraViewModel
         super.init(coder: coder)
     }

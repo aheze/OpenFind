@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FlashIconView: View {
     @Binding var isOn: Bool
+    @Binding var isDisabled: Bool
     @State var scaleAnimationActive = false
     
     var body: some View {
@@ -26,13 +27,13 @@ struct FlashIconView: View {
             Image(systemName: "bolt.fill")
                 .frame(width: 40, height: 40)
                 .foregroundColor(isOn ? Color(Constants.activeIconColor) : .white)
-                .opacity(isOn ? 1 : 0.5)
+                .opacity(isOn && !isDisabled ? 1 : 0.5)
                 .font(.system(size: 19))
                 .mask(
                     Rectangle()
                         .fill(Color.white)
                         .overlay(
-                            LineShape(progress: isOn ? 0 : 1)
+                            LineShape(progress: !isOn || isDisabled ? 1 : 0)
                                 .stroke(Color.black, style: .init(lineWidth: 5, lineCap: .round))
                                 .padding(14)
                         )
@@ -41,10 +42,10 @@ struct FlashIconView: View {
                     //                            .background(isOn ? Color.clear : Color.black) /// maybe add this to ensure shape is not cut out when `isOn`
                 )
                 .overlay(
-                    LineShape(progress: isOn ? 0 : 1)
+                    LineShape(progress: !isOn || isDisabled ? 1 : 0)
                         .stroke(Color.white, style: .init(lineWidth: 2, lineCap: .round))
                         .padding(14)
-                        .opacity(isOn ? 0 : 1)
+                        .opacity(!isOn || isDisabled ? 1 : 0)
                 )
                 .scaleEffect(scaleAnimationActive ? 1.2 : 1)
                 .background(
@@ -52,6 +53,8 @@ struct FlashIconView: View {
                 )
                 .cornerRadius(20)
         }
+        .disabled(isDisabled)
+        
     }
 }
 
@@ -73,7 +76,7 @@ struct LineShape: Shape {
 struct FlashIconViewTester: View {
     @State var isOn = false
     var body: some View {
-        FlashIconView(isOn: $isOn)
+        FlashIconView(isOn: $isOn, isDisabled: .constant(false))
     }
 }
 

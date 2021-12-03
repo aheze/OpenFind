@@ -8,10 +8,10 @@
 import UIKit
 
 class CameraController {
-    var model: ToolbarViewModel.Camera
+    var model: CameraViewModel
     var viewController: CameraViewController
     
-    init(model: ToolbarViewModel.Camera) {
+    init(model: CameraViewModel) {
         self.model = model
         
         let storyboard = UIStoryboard(name: "CameraContent", bundle: nil)

@@ -8,7 +8,7 @@
 import UIKit
 
 struct CameraBridge {
-    static func makeController(model: ToolbarViewModel.Camera) -> CameraController {
+    static func makeController(model: CameraViewModel) -> CameraController {
         let camera = CameraController(model: model)
         return camera
     }

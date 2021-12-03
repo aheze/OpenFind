@@ -11,6 +11,7 @@ import SwiftUI
 struct TabBarView<CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View>: View {
     @ObservedObject var tabViewModel: TabViewModel
     @ObservedObject var toolbarViewModel: ToolbarViewModel
+    @ObservedObject var cameraViewModel: CameraViewModel
     
     @ViewBuilder var cameraToolbarView: CameraToolbarView
     

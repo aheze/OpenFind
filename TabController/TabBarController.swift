@@ -42,7 +42,6 @@ class TabBarController<
     
     /// data
     var pages: [PageViewController]
-    var toolbarViewModel: ToolbarViewModel
     var cameraToolbarView: CameraToolbarView
     var photosSelectionToolbarView: PhotosSelectionToolbarView
     var photosDetailToolbarView: PhotosDetailToolbarView
@@ -51,13 +50,16 @@ class TabBarController<
     var viewController: TabBarViewController
     
     /// model
-    var tabViewModel: TabViewModel!
+    var tabViewModel = TabViewModel()
+    var cameraViewModel: CameraViewModel
+    var toolbarViewModel: ToolbarViewModel
     
     /// delegate
     weak var delegate: TabBarControllerDelegate?
     
     init(
         pages: [PageViewController],
+        cameraViewModel: CameraViewModel,
         toolbarViewModel: ToolbarViewModel,
         cameraToolbarView: CameraToolbarView,
         photosSelectionToolbarView: PhotosSelectionToolbarView,
@@ -67,7 +69,11 @@ class TabBarController<
         
         // MARK: - init first
         self.pages = pages
+        self.cameraViewModel = cameraViewModel
         self.toolbarViewModel = toolbarViewModel
+        
+        
+        
         self.cameraToolbarView = cameraToolbarView
         self.photosSelectionToolbarView = photosSelectionToolbarView
         self.photosDetailToolbarView = photosDetailToolbarView
@@ -120,6 +126,7 @@ class TabBarController<
             rootView: TabBarView(
                 tabViewModel: tabViewModel,
                 toolbarViewModel: toolbarViewModel,
+                cameraViewModel: cameraViewModel,
                 cameraToolbarView: { cameraToolbarView },
                 photosSelectionToolbarView: { photosSelectionToolbarView },
                 photosDetailToolbarView: { photosDetailToolbarView },

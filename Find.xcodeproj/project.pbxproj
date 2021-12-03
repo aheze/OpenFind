@@ -41,6 +41,8 @@
 		3C1D19D92759A3E20064F2C6 /* SnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19D72759A13B0064F2C6 /* SnapshotView.swift */; };
 		3C1D19DA2759A5800064F2C6 /* CameraUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119976274B348F00D6AFE3 /* CameraUtilities.swift */; };
 		3C1D19DB2759A5870064F2C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C11996D274A385200D6AFE3 /* Assets.xcassets */; };
+		3C1D19DD2759B5770064F2C6 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19DC2759B5770064F2C6 /* CameraViewModel.swift */; };
+		3C1D19DE2759B5960064F2C6 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19DC2759B5770064F2C6 /* CameraViewModel.swift */; };
 		3C1FE20625B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE20525B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift */; };
 		3C1FE20925BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE20825BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift */; };
 		3C1FE20E25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE20D25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift */; };
@@ -753,6 +755,7 @@
 		3C1AB19C260FE415009B47C0 /* VoiceOverSlidesControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceOverSlidesControl.swift; sourceTree = "<group>"; };
 		3C1AB1A5261004B7009B47C0 /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		3C1D19D72759A13B0064F2C6 /* SnapshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotView.swift; sourceTree = "<group>"; };
+		3C1D19DC2759B5770064F2C6 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		3C1FE20525B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+SlidesChanged.swift"; sourceTree = "<group>"; };
 		3C1FE20825BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Delete.swift"; sourceTree = "<group>"; };
 		3C1FE20D25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+FindBar.swift"; sourceTree = "<group>"; };
@@ -1667,6 +1670,7 @@
 			isa = PBXGroup;
 			children = (
 				3C4D398327475BB10010FD68 /* CameraContent.storyboard */,
+				3C1D19DC2759B5770064F2C6 /* CameraViewModel.swift */,
 				3C4D398127475BB10010FD68 /* CameraBridge.swift */,
 				3C4D398527475BB10010FD68 /* CameraController.swift */,
 				3C4D398827475BB10010FD68 /* CameraViewController.swift */,
@@ -3533,6 +3537,7 @@
 				3C4D3A21274767890010FD68 /* CameraViewController.swift in Sources */,
 				3CE9C1F9274B4E44008C903C /* LivePreviewView.swift in Sources */,
 				3C4D3A27274768C00010FD68 /* ResultsIconView.swift in Sources */,
+				3C1D19DE2759B5960064F2C6 /* CameraViewModel.swift in Sources */,
 				3C4D3A25274768790010FD68 /* CameraBridge.swift in Sources */,
 				3CE9C203274B4F05008C903C /* ZoomViewModel.swift in Sources */,
 			);
@@ -3568,6 +3573,7 @@
 				3C4D39B327475DC80010FD68 /* FlashIconView.swift in Sources */,
 				3CE9C20D274C6932008C903C /* LivePreviewVC+Resize.swift in Sources */,
 				3C4D3A032747667B0010FD68 /* TabBarView.swift in Sources */,
+				3C1D19DD2759B5770064F2C6 /* CameraViewModel.swift in Sources */,
 				3C4D3A042747667B0010FD68 /* ContentPageViewController.swift in Sources */,
 				3C4D39AE27475DC80010FD68 /* CameraBridge.swift in Sources */,
 				3C4D3A092747667B0010FD68 /* TabBarViewController.swift in Sources */,
