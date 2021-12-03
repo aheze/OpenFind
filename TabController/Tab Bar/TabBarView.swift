@@ -22,7 +22,7 @@ struct TabBarView<PhotosSelectionToolbarView: View, PhotosDetailToolbarView: Vie
             .overlay(
                 HStack(alignment: .bottom, spacing: 0) {
                     PhotosButton(tabViewModel: tabViewModel, attributes: tabViewModel.photosIconAttributes)
-                    CameraButton(tabViewModel: tabViewModel, attributes: tabViewModel.cameraIconAttributes)
+                    CameraButton(tabViewModel: tabViewModel, cameraViewModel: cameraViewModel, attributes: tabViewModel.cameraIconAttributes)
                     ListsButton(tabViewModel: tabViewModel, attributes: tabViewModel.listsIconAttributes)
                 }
                     .padding(.bottom, ConstantVars.tabBarOverflowingIconsBottomPadding)

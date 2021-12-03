@@ -14,6 +14,8 @@ class CameraViewModel: ObservableObject {
     /// set to true when tapped, then set back to false 1 second later
     /// when paused, don't set it back until unpaused
     @Published var snapshotSaved = false
+    
+    /// shutter on/off
     @Published var shutterOn = false {
         didSet {
             withAnimation(.spring()) {
@@ -21,6 +23,8 @@ class CameraViewModel: ObservableObject {
             }
         }
     }
+    
+    
     @Published var flash = false
     @Published var cacheOn = false
     

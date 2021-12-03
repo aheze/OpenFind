@@ -11,17 +11,26 @@ import SwiftUI
 struct CameraButton: View {
     let tabType = TabState.camera
     @ObservedObject var tabViewModel: TabViewModel
+    @ObservedObject var cameraViewModel: CameraViewModel
     let attributes: CameraIconAttributes
     
     var body: some View {
         Button {
-            tabViewModel.changeTabState(newTab: tabType, animation: .clickedTabIcon)
+            
+            /// is current camera
+            if tabViewModel.tabState == tabType {
+                withAnimation(.spring()) {
+                    cameraViewModel.shutterOn.toggle()
+                }
+            } else {
+                tabViewModel.changeTabState(newTab: tabType, animation: .clickedTabIcon)
+            }
         } label: {
             Group {
-                Circle()
+                ShutterShape(progress: cameraViewModel.shutterOn ? 1 : 0)
                     .fill(attributes.foregroundColor.color)
                     .overlay(
-                        Circle()
+                        ShutterShape(progress: cameraViewModel.shutterOn ? 1 : 0)
                             .stroke(attributes.rimColor.color, lineWidth: attributes.rimWidth)
                     )
                     .frame(width: attributes.length, height: attributes.length)
@@ -42,114 +51,102 @@ struct ShutterShape: Shape {
     }
     
     func path(in rect: CGRect) -> Path {
+        let attributes = ShutterShapeAttributes(progress: progress, from: .circle, to: .triangle, multiplier: rect.width)
         var path = Path()
-        let circleRadius = CGFloat(4)
-        let circleCenter = CGPoint(x: rect.width / 2, y: rect.height / 2)
-
-        path.addArc(
-            center: circleCenter,
-            radius: circleRadius,
-            startAngle: .degrees(179.999999),
-            endAngle: .degrees(180),
-            clockwise: true
-        )
         
-        let checkStartX = rect.width / 2 - 4
-        let checkMidX = rect.width / 2 - 0.95
-        let checkEndX = rect.width / 2 + 4
-        path.move(to: CGPoint(x: checkStartX, y: rect.midY))
-        path.addLine(to: CGPoint(x: checkMidX, y: rect.maxY - 1.2))
-        path.addLine(to: CGPoint(x: checkEndX, y: rect.minY + 0.5))
+        path.move(to: attributes.origin)
+        path.addArc(tangent1End: attributes.point1, tangent2End: attributes.point2, radius: attributes.cornerRadius)
+        path.addArc(tangent1End: attributes.point2, tangent2End: attributes.point3, radius: attributes.cornerRadius)
+        path.addArc(tangent1End: attributes.point3, tangent2End: attributes.point1, radius: attributes.cornerRadius)
+        path.addLine(to: attributes.origin)
+        path = path.offsetBy(dx: rect.width / 2, dy: rect.height / 2)
         return path
     }
-    func createRoundedTriangle(circumference: CGFloat) -> CGPath {
-        let cornerRadius = circumference / 10
-        
-        let width = circumference / 2
-        let xLeft = width / 30
-        let yOffset = sqrt(3) * (width / 2)
-        
-        let point1 = CGPoint(x: (-width / 2) - xLeft, y: -yOffset)
-        let point2 = CGPoint(x: width - xLeft, y: 0)
-        let point3 = CGPoint(x: (-width / 2) - xLeft, y: yOffset)
-        
-        let path = CGMutablePath()
-        path.move(to: CGPoint(x: (-width / 2) - xLeft, y: 0))
-        path.addArc(tangent1End: point1, tangent2End: point2, radius: cornerRadius)
-        path.addArc(tangent1End: point2, tangent2End: point3, radius: cornerRadius)
-        path.addArc(tangent1End: point3, tangent2End: point1, radius: cornerRadius)
-        path.closeSubpath()
-        
-        return path
-    }
-    
-//    func createRoundedCircle(circumference: CGFloat, cornerRadius: CGFloat) -> CGPath {
-//        let yOffset = sqrt(3) * (circumference / 2)
-//        
-//        let point1 = CGPoint(x: -circumference / 2, y: -yOffset)
-//        let point2 = CGPoint(x: circumference, y: 0)
-//        let point3 = CGPoint(x: -circumference / 2, y: yOffset)
-//        
-//        let path = CGMutablePath()
-//        path.move(to: CGPoint(x: -circumference / 2, y: 0))
-//        
-//        path.addArc(tangent1End: point1, tangent2End: point2, radius: cornerRadius)
-//        path.addArc(tangent1End: point2, tangent2End: point3, radius: cornerRadius)
-//        path.addArc(tangent1End: point3, tangent2End: point1, radius: cornerRadius)
-//        path.closeSubpath()
-//        
-//        return path
-//    }
-//    func createPath(circumference: CGFloat) {
-//        let triangleCornerRadius = circumference / 10
-//        let triangleYOffset = sqrt(3) * (circumference / 2)
-//        let triangleWidth = circumference / 2
-//        let triangleLeftOffset = triangleWidth / 30
-//        let trianglePoint1 = CGPoint(x: (-triangleWidth / 2) - triangleLeftOffset, y: -triangleYOffset)
-//        let trianglePoint2 = CGPoint(x: triangleWidth - triangleLeftOffset, y: 0)
-//        let trianglePoint3 = CGPoint(x: (-triangleWidth / 2) - triangleLeftOffset, y: triangleYOffset)
-//        
-//        let circleCornerRadius = circumference / 2
-//        
-//        
-//        
-//        let path = CGMutablePath()
-//        path.move(to: CGPoint(x: (-width / 2) - xLeft, y: 0))
-//        path.addArc(tangent1End: point1, tangent2End: point2, radius: cornerRadius)
-//        path.addArc(tangent1End: point2, tangent2End: point3, radius: cornerRadius)
-//        path.addArc(tangent1End: point3, tangent2End: point1, radius: cornerRadius)
-//        path.closeSubpath()
-//        
-//    }
 }
 
-//struct ShutterShapeAttributes: AnimatableAttributes {
-//
-//    let cornerRadius = circumference / 10
-//    let yOffset = sqrt(3) * (circumference / 2)
-//    let width = circumference / 2
-//    let leftOffset = triangleWidth / 30
-//    let point1 = CGPoint(x: (-triangleWidth / 2) - triangleLeftOffset, y: -triangleYOffset)
-//    let point2 = CGPoint(x: triangleWidth - triangleLeftOffset, y: 0)
-//    let point3 = CGPoint(x: (-triangleWidth / 2) - triangleLeftOffset, y: triangleYOffset)
-//
-//    static let triangle: Self = {
-//        return .init(
-//            cornerRadius: Constants.tabBarLightBackgroundColor,
-//            yOffset: ConstantVars.tabBarTotalHeight,
-//            width: 0,
-//            leftOffset: -40,
-//            point1: 0,
-//            point2: CGPoint(x: triangleWidth - triangleLeftOffset, y: 0)
-//            point3: CGPoint(x: (-triangleWidth / 2) - triangleLeftOffset, y: triangleYOffset)
-//        )
-//    }()
-//
-//
-//    init(progress: CGFloat, from fromAttributes: ShutterShapeAttributes, to toAttributes: ShutterShapeAttributes) {
-//        <#code#>
-//    }
-//}
+/// don't conform to protocol, since have custom multiplier function
+struct ShutterShapeAttributes {
+
+    let origin: CGPoint
+    let cornerRadius: CGFloat
+    let yOffset: CGFloat
+    let width: CGFloat
+    let leftOffset: CGFloat
+    let point1: CGPoint
+    let point2: CGPoint
+    let point3: CGPoint
+
+    static let triangle: Self = {
+        let circumference = CGFloat(1) /// set 1 for now, later multiply by the width of the button
+        
+        let cornerRadius = circumference / 6
+        
+        let width = circumference / 1.4
+        let yOffset = sqrt(3) * (width / 2)
+        let leftOffset = width / 22
+        let point1 = CGPoint(x: (-width / 2) - leftOffset, y: -yOffset)
+        let point2 = CGPoint(x: width - leftOffset, y: 0)
+        let point3 = CGPoint(x: (-width / 2) - leftOffset, y: yOffset)
+            
+        return .init(
+            origin: CGPoint(x: (-width / 2) - leftOffset, y: 0),
+            cornerRadius: cornerRadius,
+            yOffset: yOffset,
+            width: width,
+            leftOffset: leftOffset,
+            point1: point1,
+            point2: point2,
+            point3: point3
+        )
+    }()
+
+    static let circle: Self = {
+        let circumference = CGFloat(1) /// set 1 for now, later multiply by the width of the button
+        
+        let cornerRadius = circumference / 2
+        let yOffset = sqrt(3) * (circumference / 2)
+        
+        let point1 = CGPoint(x: -circumference / 2, y: -yOffset)
+        let point2 = CGPoint(x: circumference, y: 0)
+        let point3 = CGPoint(x: -circumference / 2, y: yOffset)
+            
+        return .init(
+            origin: CGPoint(x: -circumference / 2, y: 0),
+            cornerRadius: cornerRadius,
+            yOffset: yOffset,
+            width: 0,
+            leftOffset: 0,
+            point1: point1,
+            point2: point2,
+            point3: point3
+        )
+    }()
+}
+
+extension ShutterShapeAttributes {
+    
+    /// don't conform to protocol, since have custom multiplier
+    init(progress: CGFloat, from fromAttributes: ShutterShapeAttributes, to toAttributes: ShutterShapeAttributes, multiplier: CGFloat) {
+        origin = AnimatableUtilities.mixedValue(from: fromAttributes.origin, to: toAttributes.origin, progress: progress) * multiplier
+        cornerRadius = AnimatableUtilities.mixedValue(from: fromAttributes.cornerRadius, to: toAttributes.cornerRadius, progress: progress) * multiplier
+        yOffset = AnimatableUtilities.mixedValue(from: fromAttributes.yOffset, to: toAttributes.yOffset, progress: progress) * multiplier
+        width = AnimatableUtilities.mixedValue(from: fromAttributes.width, to: toAttributes.width, progress: progress) * multiplier
+        leftOffset = AnimatableUtilities.mixedValue(from: fromAttributes.leftOffset, to: toAttributes.leftOffset, progress: progress) * multiplier
+        point1 = AnimatableUtilities.mixedValue(from: fromAttributes.point1, to: toAttributes.point1, progress: progress) * multiplier
+        point2 = AnimatableUtilities.mixedValue(from: fromAttributes.point2, to: toAttributes.point2, progress: progress) * multiplier
+        point3 = AnimatableUtilities.mixedValue(from: fromAttributes.point3, to: toAttributes.point3, progress: progress) * multiplier
+    }
+}
+
+/// for easier multiplying in `ShutterShapeAttributes`
+extension CGPoint {
+    static func * (left: CGPoint, scalar: CGFloat) -> CGPoint {
+        return CGPoint(x: left.x * scalar, y: left.y * scalar)
+    }
+    static func * (scalar: CGFloat, right: CGPoint) -> CGPoint {
+        return CGPoint(x: right.x * scalar, y: right.y * scalar)
+    }
+}
 
 struct CameraButtonStyle: ButtonStyle {
     var isShutter: Bool
