@@ -16,14 +16,14 @@ struct CameraToolbarView: View {
             HStack {
                 ResultsIconView(count: $viewModel.resultsCount)
                 Spacer()
-                FlashIconView(isOn: $viewModel.flashOn)
+                SnapshotView()
             }
             .frame(maxWidth: .infinity)
 
             Color.clear
 
             HStack {
-                FocusIconView(isOn: $viewModel.focusOn)
+                FlashIconView(isOn: $viewModel.flash)
                 Spacer()
                 SettingsIconView()
             }

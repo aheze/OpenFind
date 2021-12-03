@@ -37,6 +37,10 @@
 		3C1AB199260FE40B009B47C0 /* VoiceOverSlidesControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1AB198260FE40B009B47C0 /* VoiceOverSlidesControl.xib */; };
 		3C1AB19D260FE415009B47C0 /* VoiceOverSlidesControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1AB19C260FE415009B47C0 /* VoiceOverSlidesControl.swift */; };
 		3C1AB1A6261004B7009B47C0 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1AB1A5261004B7009B47C0 /* Sound.swift */; };
+		3C1D19D82759A13B0064F2C6 /* SnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19D72759A13B0064F2C6 /* SnapshotView.swift */; };
+		3C1D19D92759A3E20064F2C6 /* SnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19D72759A13B0064F2C6 /* SnapshotView.swift */; };
+		3C1D19DA2759A5800064F2C6 /* CameraUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C119976274B348F00D6AFE3 /* CameraUtilities.swift */; };
+		3C1D19DB2759A5870064F2C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C11996D274A385200D6AFE3 /* Assets.xcassets */; };
 		3C1FE20625B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE20525B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift */; };
 		3C1FE20925BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE20825BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift */; };
 		3C1FE20E25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE20D25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift */; };
@@ -169,7 +173,6 @@
 		3C4D39AD27475DC80010FD68 /* ResultsIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D397F27475BB10010FD68 /* ResultsIconView.swift */; };
 		3C4D39AE27475DC80010FD68 /* CameraBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D398127475BB10010FD68 /* CameraBridge.swift */; };
 		3C4D39AF27475DC80010FD68 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D398827475BB10010FD68 /* CameraViewController.swift */; };
-		3C4D39B127475DC80010FD68 /* FocusIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D398427475BB10010FD68 /* FocusIconView.swift */; };
 		3C4D39B227475DC80010FD68 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D398527475BB10010FD68 /* CameraController.swift */; };
 		3C4D39B327475DC80010FD68 /* FlashIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D398727475BB10010FD68 /* FlashIconView.swift */; };
 		3C4D39B427475DC80010FD68 /* SettingsIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D397E27475BB10010FD68 /* SettingsIconView.swift */; };
@@ -231,7 +234,6 @@
 		3C4D3A27274768C00010FD68 /* ResultsIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D397F27475BB10010FD68 /* ResultsIconView.swift */; };
 		3C4D3A28274768C00010FD68 /* SettingsIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D397E27475BB10010FD68 /* SettingsIconView.swift */; };
 		3C4D3A29274768C00010FD68 /* FlashIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D398727475BB10010FD68 /* FlashIconView.swift */; };
-		3C4D3A2A274768C00010FD68 /* FocusIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D398427475BB10010FD68 /* FocusIconView.swift */; };
 		3C4D3A53274768FF0010FD68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3A52274768FF0010FD68 /* Assets.xcassets */; };
 		3C4D3A56274768FF0010FD68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3A54274768FF0010FD68 /* LaunchScreen.storyboard */; };
 		3C4D3A5E2747691A0010FD68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3A5B2747691A0010FD68 /* AppDelegate.swift */; };
@@ -750,6 +752,7 @@
 		3C1AB198260FE40B009B47C0 /* VoiceOverSlidesControl.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoiceOverSlidesControl.xib; sourceTree = "<group>"; };
 		3C1AB19C260FE415009B47C0 /* VoiceOverSlidesControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceOverSlidesControl.swift; sourceTree = "<group>"; };
 		3C1AB1A5261004B7009B47C0 /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
+		3C1D19D72759A13B0064F2C6 /* SnapshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotView.swift; sourceTree = "<group>"; };
 		3C1FE20525B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+SlidesChanged.swift"; sourceTree = "<group>"; };
 		3C1FE20825BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Delete.swift"; sourceTree = "<group>"; };
 		3C1FE20D25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+FindBar.swift"; sourceTree = "<group>"; };
@@ -874,7 +877,6 @@
 		3C4D397F27475BB10010FD68 /* ResultsIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsIconView.swift; sourceTree = "<group>"; };
 		3C4D398127475BB10010FD68 /* CameraBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraBridge.swift; sourceTree = "<group>"; };
 		3C4D398327475BB10010FD68 /* CameraContent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CameraContent.storyboard; sourceTree = "<group>"; };
-		3C4D398427475BB10010FD68 /* FocusIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusIconView.swift; sourceTree = "<group>"; };
 		3C4D398527475BB10010FD68 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		3C4D398727475BB10010FD68 /* FlashIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashIconView.swift; sourceTree = "<group>"; };
 		3C4D398827475BB10010FD68 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -1673,9 +1675,9 @@
 				3C11996F274B329E00D6AFE3 /* Live Preview */,
 				3C7B1D4B2757E84F006525B1 /* CameraToolbarView.swift */,
 				3C11996627499A3E00D6AFE3 /* Zoom */,
-				3C4D398727475BB10010FD68 /* FlashIconView.swift */,
-				3C4D398427475BB10010FD68 /* FocusIconView.swift */,
 				3C4D397F27475BB10010FD68 /* ResultsIconView.swift */,
+				3C1D19D72759A13B0064F2C6 /* SnapshotView.swift */,
+				3C4D398727475BB10010FD68 /* FlashIconView.swift */,
 				3C4D397E27475BB10010FD68 /* SettingsIconView.swift */,
 				3C119976274B348F00D6AFE3 /* CameraUtilities.swift */,
 				3C11996D274A385200D6AFE3 /* Assets.xcassets */,
@@ -3113,6 +3115,7 @@
 				3CE9C1FD274B4E47008C903C /* FallbackView.xib in Resources */,
 				3C4D3A9127476EC70010FD68 /* SharedAssets.xcassets in Resources */,
 				3C4D3A8F27476E6A0010FD68 /* Assets.xcassets in Resources */,
+				3C1D19DB2759A5870064F2C6 /* Assets.xcassets in Resources */,
 				3C4D3A8C27476E200010FD68 /* CameraContent.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3489,7 +3492,6 @@
 				3C4D3A1C274767410010FD68 /* ContentCell.swift in Sources */,
 				3C4D3A8327476A260010FD68 /* ListsController.swift in Sources */,
 				3CE9C21C274E0076008C903C /* LivePreviewVC+Zoom.swift in Sources */,
-				3C4D3A2A274768C00010FD68 /* FocusIconView.swift in Sources */,
 				3C4D3A1E274767410010FD68 /* TabBarView.swift in Sources */,
 				3C4D3A1B274767410010FD68 /* ContentPagingFlowLayout.swift in Sources */,
 				3CE9C1F5274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
@@ -3520,7 +3522,9 @@
 				3C4D3A1D274767410010FD68 /* TabBarToolbars.swift in Sources */,
 				3C4D3A28274768C00010FD68 /* SettingsIconView.swift in Sources */,
 				3CE9C202274B4F05008C903C /* ZoomView.swift in Sources */,
+				3C1D19D92759A3E20064F2C6 /* SnapshotView.swift in Sources */,
 				3CE9C1FA274B4E44008C903C /* LivePreviewVC+Setup.swift in Sources */,
+				3C1D19DA2759A5800064F2C6 /* CameraUtilities.swift in Sources */,
 				3C4D3A16274767410010FD68 /* TabControllerBridge.swift in Sources */,
 				3C4D3961274759A40010FD68 /* ViewController.swift in Sources */,
 				3C4D39C727475E8A0010FD68 /* Constants.swift in Sources */,
@@ -3538,6 +3542,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C1D19D82759A13B0064F2C6 /* SnapshotView.swift in Sources */,
 				3C4D3A002747667A0010FD68 /* ToolbarViewModel.swift in Sources */,
 				3C11996A27499A5E00D6AFE3 /* ZoomView+Constants.swift in Sources */,
 				3C4D3A052747667B0010FD68 /* TabBarToolbars.swift in Sources */,
@@ -3565,7 +3570,6 @@
 				3C4D3A032747667B0010FD68 /* TabBarView.swift in Sources */,
 				3C4D3A042747667B0010FD68 /* ContentPageViewController.swift in Sources */,
 				3C4D39AE27475DC80010FD68 /* CameraBridge.swift in Sources */,
-				3C4D39B127475DC80010FD68 /* FocusIconView.swift in Sources */,
 				3C4D3A092747667B0010FD68 /* TabBarViewController.swift in Sources */,
 				3C11996C2749F81D00D6AFE3 /* ZoomViewModel.swift in Sources */,
 				3C4D39B227475DC80010FD68 /* CameraController.swift in Sources */,

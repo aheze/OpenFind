@@ -10,7 +10,7 @@ import SwiftUI
 
 class ViewController: UIViewController {
     
-    @ObservedObject var cameraToolbarModel = ToolbarViewModel.Camera()
+    var cameraToolbarModel = ToolbarViewModel.Camera()
     
     lazy var photos: PhotosController = {
         return PhotosBridge.makeController()

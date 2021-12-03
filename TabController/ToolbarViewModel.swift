@@ -23,11 +23,13 @@ class ToolbarViewModel: ObservableObject {
     
     class Camera: ObservableObject {
         @Published var resultsCount = 0
-        @Published var shutterPaused = false
-        @Published var flashOn = false
-        @Published var focusOn = false
-        init() { }
+        @Published var shutterOn = false
+        @Published var flash = false
+        @Published var cacheOn = false
         
+        /// press the snapshot/camera button
+        var snapshotPressed: (() -> Void)?
+        init() { }
     }
     class PhotosSelection: ObservableObject {
         @Published var selectedCount = 0
