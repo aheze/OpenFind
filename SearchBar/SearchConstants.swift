@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Constants {
+struct SearchConstants {
     static var cellHeight = CGFloat(60)
     static var sidePadding = CGFloat(16)
     static var sidePeekPadding = CGFloat(48) /// extra padding to show nearby cells

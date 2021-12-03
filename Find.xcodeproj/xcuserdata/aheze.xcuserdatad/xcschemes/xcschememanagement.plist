@@ -34,6 +34,11 @@
 			<key>orderHint</key>
 			<integer>21</integer>
 		</dict>
+		<key>Popover.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>24</integer>
+		</dict>
 		<key>SearchBar.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>

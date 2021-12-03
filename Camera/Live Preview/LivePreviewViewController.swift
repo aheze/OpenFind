@@ -102,7 +102,6 @@ class LivePreviewViewController: UIViewController {
         safeViewContainer.backgroundColor = Debug.tabBarAlwaysTransparent ? .blue : .clear
         safeView.backgroundColor = .blue
         
-        previewFitView.addDebugBorders(.green)
     }
 }
 

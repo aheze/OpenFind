@@ -36,8 +36,8 @@ class LeftView: UIView {
         
         buttonView.tapped = tapped
         
-        imageViewWidthC.constant = Constants.fieldIconLength
-        imageViewHeightC.constant = Constants.fieldIconLength
+        imageViewWidthC.constant = SearchConstants.fieldIconLength
+        imageViewHeightC.constant = SearchConstants.fieldIconLength
     }
 }
 

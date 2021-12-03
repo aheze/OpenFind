@@ -33,11 +33,11 @@ class RightView: UIView {
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         let image = UIImage(systemName: "xmark")
-        let configuration = UIImage.SymbolConfiguration(font: Constants.fieldFont)
+        let configuration = UIImage.SymbolConfiguration(font: SearchConstants.fieldFont)
         imageView.preferredSymbolConfiguration = configuration
         imageView.image = image
         
-        imageViewWidthC.constant = Constants.fieldIconLength
-        imageViewHeightC.constant = Constants.fieldIconLength
+        imageViewWidthC.constant = SearchConstants.fieldIconLength
+        imageViewHeightC.constant = SearchConstants.fieldIconLength
     }
 }

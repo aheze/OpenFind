@@ -51,28 +51,19 @@ struct Field {
     private func getFieldHuggingWidth() -> CGFloat {
         
         if case let .addNew(string) = self.value, string.isEmpty {
-            return Constants.addWordFieldHuggingWidth
+            return SearchConstants.addWordFieldHuggingWidth
         } else {
             let fieldText = self.value.getText()
-            let finalText = fieldText.isEmpty ? Constants.addTextPlaceholder : fieldText
+            let finalText = fieldText.isEmpty ? SearchConstants.addTextPlaceholder : fieldText
 
-            let textWidth = finalText.width(withConstrainedHeight: 10, font: Constants.fieldFont)
-            let leftPaddingWidth = Constants.fieldBaseViewLeftPadding
-            let rightPaddingWidth = Constants.fieldBaseViewRightPadding
-            let textPadding = 2 * Constants.fieldTextSidePadding
+            let textWidth = finalText.width(withConstrainedHeight: 10, font: SearchConstants.fieldFont)
+            let leftPaddingWidth = SearchConstants.fieldBaseViewLeftPadding
+            let rightPaddingWidth = SearchConstants.fieldBaseViewRightPadding
+            let textPadding = 2 * SearchConstants.fieldTextSidePadding
             return textWidth + leftPaddingWidth + rightPaddingWidth + textPadding
         }
         
     }
-}
-
-struct List {
-    var name = ""
-    var desc = ""
-    var contents = [String]()
-    var iconImageName = ""
-    var iconColorName = ""
-    var dateCreated = Date()
 }
 
 struct FieldOffset {

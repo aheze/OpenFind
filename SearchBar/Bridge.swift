@@ -8,10 +8,13 @@
 import UIKit
 
 struct Bridge {
-    static var viewController: (() -> SearchViewController) = {
+    static func makeViewController(searchViewModel: SearchViewModel) -> SearchViewController {
         let bundle = Bundle(identifier: "com.aheze.SearchBar")
         let storyboard = UIStoryboard(name: "SearchBar", bundle: bundle)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
+        let viewController = storyboard.instantiateViewController(identifier: "SearchViewController") { coder in
+            return SearchViewController(coder: coder, searchViewModel: searchViewModel)
+        }
+    
             
         return viewController
     }

@@ -9,7 +9,8 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
-    var fields = [Field]()
+    var searchViewModel: SearchViewModel
+//    var fields = [Field]()
     
     lazy var searchCollectionViewFlowLayout: SearchCollectionViewFlowLayout = {
         let flowLayout = SearchCollectionViewFlowLayout()
@@ -18,7 +19,7 @@ class SearchViewController: UIViewController {
             return self?.widthOfExpandedCell(for: index) ?? 300
         }
         flowLayout.getFields = { [weak self] in
-            return self?.fields ?? [Field]()
+            return self?.searchViewModel.fields ?? [Field]()
         }
         flowLayout.highlightAddNewField = { [weak self] shouldHighlight in
             self?.highlight(shouldHighlight)
@@ -26,15 +27,15 @@ class SearchViewController: UIViewController {
         flowLayout.focusedCellIndexChanged = { [weak self] oldCellIndex, newCellIndex in
             guard let self = self else { return }
             if let oldCellIndex = oldCellIndex {
-                self.fields[oldCellIndex].focused = false /// for cellForItemAt later, after cell reloads
+                self.searchViewModel.fields[oldCellIndex].focused = false /// for cellForItemAt later, after cell reloads
                 if let cell = self.searchCollectionView.cellForItem(at: oldCellIndex.indexPath) as? SearchFieldCell {
-                    cell.field = self.fields[oldCellIndex] /// set it right now anyway
+                    cell.field = self.searchViewModel.fields[oldCellIndex] /// set it right now anyway
                 }
             }
             if let newCellIndex = newCellIndex {
-                self.fields[newCellIndex].focused = true
+                self.searchViewModel.fields[newCellIndex].focused = true
                 if let cell = self.searchCollectionView.cellForItem(at: newCellIndex.indexPath) as? SearchFieldCell {
-                    cell.field = self.fields[newCellIndex] /// set it right now anyway
+                    cell.field = self.searchViewModel.fields[newCellIndex] /// set it right now anyway
                     cell.textField.becomeFirstResponder()
                 }
             }
@@ -66,20 +67,29 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var searchCollectionView: SearchCollectionView!
     
+    init?(coder: NSCoder, searchViewModel: SearchViewModel) {
+        self.searchViewModel = searchViewModel
+        super.init(coder: coder)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("You must create this view controller with metadata.")
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fields = [
-            Field(value: .string("Search Bar Medium Length")),
-//            Field(value: .string("2. Hi.")),
-//            Field(value: .string("3.a Medium text")),
-//            Field(value: .string("3.b Medium text")),
-//            Field(value: .string("3.c Medium text")),
-//            Field(value: .string("3.d Medium text")),
-//            Field(value: .string("4. Longer long long long long long text")),
-//            Field(value: .string("5. Text")),
-            Field(value: .addNew(""))
-        ]
+//        fields = [
+//            Field(value: .string("Search Bar Medium Length")),
+////            Field(value: .string("2. Hi.")),
+////            Field(value: .string("3.a Medium text")),
+////            Field(value: .string("3.b Medium text")),
+////            Field(value: .string("3.c Medium text")),
+////            Field(value: .string("3.d Medium text")),
+////            Field(value: .string("4. Longer long long long long long text")),
+////            Field(value: .string("5. Text")),
+//            Field(value: .addNew(""))
+//        ]
         
 
         setupCollectionViews()

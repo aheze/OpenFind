@@ -11,9 +11,12 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var searchContainerView: UIView!
     
+    var searchViewModel = SearchViewModel()
+    var listsViewModel = ListsViewModel()
+    
     lazy var searchViewController: SearchViewController = {
-        
-        let viewController = Bridge.viewController()
+        searchViewModel.availableLists = listsViewModel.lists
+        let viewController = Bridge.makeViewController(searchViewModel: searchViewModel)
         self.addChild(viewController, in: self.searchContainerView)
         return viewController
     }()
@@ -24,6 +27,7 @@ class ViewController: UIViewController {
         
         
         _ = searchViewController
+        
         
     }
     

@@ -52,7 +52,7 @@ class SearchFieldCell: UICollectionViewCell {
             let (_, animations, completion) = showAddNew(true, changeColorOnly: false)
             animations()
             completion()
-            contentView.backgroundColor = Constants.fieldBackgroundColor
+            contentView.backgroundColor = SearchConstants.fieldBackgroundColor
             return
         }
         let (_, animations, completion) = showAddNew(false, changeColorOnly: false)
@@ -77,31 +77,31 @@ class SearchFieldCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.backgroundColor = Constants.fieldBackgroundColor
-        contentView.layer.cornerRadius = Constants.fieldCornerRadius
+        contentView.backgroundColor = SearchConstants.fieldBackgroundColor
+        contentView.layer.cornerRadius = SearchConstants.fieldCornerRadius
         
         textField.delegate = self
-        textField.font = Constants.fieldFont
+        textField.font = SearchConstants.fieldFont
         textField.textColor = .white
         
         textField.attributedPlaceholder = NSAttributedString(
-            string: Constants.addTextPlaceholder,
+            string: SearchConstants.addTextPlaceholder,
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.4)]
         )
         
-        baseViewTopC.constant = Constants.fieldBaseViewTopPadding
-        baseViewRightC.constant = Constants.fieldBaseViewRightPadding
-        baseViewBottomC.constant = Constants.fieldBaseViewBottomPadding
-        baseViewLeftC.constant = Constants.fieldBaseViewLeftPadding
+        baseViewTopC.constant = SearchConstants.fieldBaseViewTopPadding
+        baseViewRightC.constant = SearchConstants.fieldBaseViewRightPadding
+        baseViewBottomC.constant = SearchConstants.fieldBaseViewBottomPadding
+        baseViewLeftC.constant = SearchConstants.fieldBaseViewLeftPadding
         
-        addNewViewWidthC.constant = Constants.fieldIconLength
-        addNewViewHeightC.constant = Constants.fieldIconLength
+        addNewViewWidthC.constant = SearchConstants.fieldIconLength
+        addNewViewHeightC.constant = SearchConstants.fieldIconLength
         
         leftViewWidthC.constant = 0
         rightViewWidthC.constant = 0
         
         let image = UIImage(systemName: "xmark")
-        let configuration = UIImage.SymbolConfiguration(font: Constants.fieldFont)
+        let configuration = UIImage.SymbolConfiguration(font: SearchConstants.fieldFont)
         addNewImageView.preferredSymbolConfiguration = configuration
         addNewImageView.image = image
         
@@ -123,8 +123,8 @@ class SearchFieldCell: UICollectionViewCell {
             leftView.alpha = percentageVisible
             rightView.alpha = percentageVisible
             
-            leftViewWidthC.constant = percentageVisible * Constants.fieldLeftViewWidth
-            rightViewWidthC.constant = percentageVisible * Constants.fieldRightViewWidth
+            leftViewWidthC.constant = percentageVisible * SearchConstants.fieldLeftViewWidth
+            rightViewWidthC.constant = percentageVisible * SearchConstants.fieldRightViewWidth
         }
     }
     
@@ -136,7 +136,7 @@ class SearchFieldCell: UICollectionViewCell {
         
         if changeColorOnly {
             animationBlock = { [weak self] in
-                self?.contentView.backgroundColor = show ? .blue : Constants.fieldBackgroundColor
+                self?.contentView.backgroundColor = show ? .blue : SearchConstants.fieldBackgroundColor
             }
         } else {
             setup = { [weak self] in
@@ -160,7 +160,7 @@ class SearchFieldCell: UICollectionViewCell {
                     self?.addNewView.transform = .identity
                     self?.textField.alpha = 1
                     self?.leftView.buttonView.alpha = 1
-                    self?.contentView.backgroundColor = Constants.fieldBackgroundColor
+                    self?.contentView.backgroundColor = SearchConstants.fieldBackgroundColor
                 }
                 
                 self?.baseView.layoutIfNeeded()

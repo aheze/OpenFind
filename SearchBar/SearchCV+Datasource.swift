@@ -9,17 +9,17 @@ import UIKit
 
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fields.count + 1
+        return searchViewModel.fields.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SearchFieldCell else { return UICollectionViewCell() }
         
-        let field = self.fields[indexPath.item]
+        let field = self.searchViewModel.fields[indexPath.item]
         
         cell.setField(field) /// cell can configure itself
         cell.fieldChanged = { [weak self] field in
-            self?.fields[indexPath.item] = field
+            self?.searchViewModel.fields[indexPath.item] = field
         }
         
         /// setup constraints
@@ -36,19 +36,19 @@ extension SearchViewController: UICollectionViewDataSource {
         var extraPadding = CGFloat(0)
         
         if index == 0 {
-            extraPadding += Constants.sidePadding /// if **left edge**, add side padding
+            extraPadding += SearchConstants.sidePadding /// if **left edge**, add side padding
         } else {
-            extraPadding += Constants.sidePeekPadding
+            extraPadding += SearchConstants.sidePeekPadding
         }
         
-        if index == fields.count - 2 || index == fields.count - 1 {
-            extraPadding += Constants.sidePadding /// if **right edge**, add side padding
+        if index == searchViewModel.fields.count - 2 || index == searchViewModel.fields.count - 1 {
+            extraPadding += SearchConstants.sidePadding /// if **right edge**, add side padding
         } else {
-            extraPadding += Constants.sidePeekPadding
+            extraPadding += SearchConstants.sidePeekPadding
         }
         
         let fullWidth = searchCollectionView.frame.width
-        return max(Constants.minimumHuggingWidth, fullWidth - extraPadding)
+        return max(SearchConstants.minimumHuggingWidth, fullWidth - extraPadding)
     }
     
     
