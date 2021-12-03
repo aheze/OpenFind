@@ -15,8 +15,8 @@ struct SettingsIconView: View {
             
             /// small scale animation
             withAnimation(.spring()) { scaleAnimationActive = true }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
-                withAnimation(.easeOut(duration: 0.3)) { scaleAnimationActive = false }
+            DispatchQueue.main.asyncAfter(deadline: .now() + Constants.toolbarIconDeactivateAnimationDelay) {
+                withAnimation(.easeOut(duration: Constants.toolbarIconDeactivateAnimationSpeed)) { scaleAnimationActive = false }
             }
         } label: {
             Image(systemName: "gearshape.fill")

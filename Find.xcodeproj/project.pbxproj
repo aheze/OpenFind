@@ -1638,7 +1638,6 @@
 				3C4D378C274756470010FD68 /* TabContent.storyboard */,
 				3C4D3790274756470010FD68 /* TabControllerBridge.swift */,
 				3C4D378E274756470010FD68 /* TabViewModel.swift */,
-				3C4D3794274756470010FD68 /* ToolbarViewModel.swift */,
 				3C4D3793274756470010FD68 /* TabBarController.swift */,
 				3C4D378D274756470010FD68 /* TabBarViewController.swift */,
 				3C4D378A274756460010FD68 /* TabBarView.swift */,
@@ -1718,6 +1717,7 @@
 				3C4D39C527475E8A0010FD68 /* Constants.swift */,
 				3CE9C212274DE306008C903C /* Debug.swift */,
 				3C4D3A9027476EC70010FD68 /* SharedAssets.xcassets */,
+				3C4D3794274756470010FD68 /* ToolbarViewModel.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";

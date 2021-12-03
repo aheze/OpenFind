@@ -16,7 +16,7 @@ struct CameraToolbarView: View {
             HStack {
                 ResultsIconView(count: $viewModel.resultsCount)
                 Spacer()
-                SnapshotView()
+                SnapshotView(done: $viewModel.snapshotSaved)
             }
             .frame(maxWidth: .infinity)
 

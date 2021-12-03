@@ -21,6 +21,11 @@ enum Constants {
     static var tabBarToolbarAlphaMultiplier = CGFloat(3.5)
     
 
+    /// how long until scale back
+    static var toolbarIconDeactivateAnimationDelay = CGFloat(0.08)
+    
+    /// scale back speed
+    static var toolbarIconDeactivateAnimationSpeed = CGFloat(0.3)
 }
 
 struct ConstantVars {
@@ -57,6 +62,7 @@ struct ConstantVars {
         }
     }
 }
+
 
 
 

@@ -12,8 +12,8 @@ struct SnapshotConstants {
     static var checkStartTrim = CGFloat(0.675)
 }
 struct SnapshotView: View {
-    @State var scaleAnimationActive = true
-    @State var done = true
+    @Binding var done: Bool
+    @State var scaleAnimationActive = false
     @State var startTrim = CGFloat(0)
     @State var endTrim = SnapshotConstants.checkStartTrim
     
@@ -22,8 +22,8 @@ struct SnapshotView: View {
             
             /// small scale animation
             withAnimation(.spring()) { scaleAnimationActive = true }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
-                withAnimation(.easeOut(duration: 0.3)) { scaleAnimationActive = false }
+            DispatchQueue.main.asyncAfter(deadline: .now() + Constants.toolbarIconDeactivateAnimationDelay) {
+                withAnimation(.easeOut(duration: Constants.toolbarIconDeactivateAnimationSpeed)) { scaleAnimationActive = false }
             }
             
             done.toggle()
@@ -35,9 +35,7 @@ struct SnapshotView: View {
                     endTrim = CGFloat(1)
                 }
             } else {
-                withAnimation(
-                    .spring()
-                ) {
+                withAnimation(.easeOut(duration: Constants.toolbarIconDeactivateAnimationSpeed)) {
                     startTrim = CGFloat(0)
                     endTrim = SnapshotConstants.checkStartTrim
                 }
@@ -45,11 +43,12 @@ struct SnapshotView: View {
         } label: {
             VStack {
                 Image("CameraRim")
+                    .foregroundColor(done ? Color(Constants.activeIconColor) : .white)
                     .overlay(
                         CameraInnerShape()
                             .trim(from: startTrim, to: endTrim)
                             .stroke(
-                                Color.white,
+                                done ? Color(Constants.activeIconColor) : .white,
                                 style: .init(
                                     lineWidth: 1.5,
                                     lineCap: .round,
@@ -68,19 +67,6 @@ struct SnapshotView: View {
                 )
                 .cornerRadius(20)
         }
-        .onAppear {
-            if done {
-                withAnimation(.easeOut(duration: 0.5)) {
-                    startTrim = SnapshotConstants.checkStartTrim
-                    endTrim = CGFloat(1)
-                }
-            } else {
-                withAnimation(.easeOut(duration: 0.5)) {
-                    startTrim = CGFloat(0)
-                    endTrim = SnapshotConstants.checkStartTrim
-                }
-            }
-        }
     }
     
 }
@@ -93,16 +79,7 @@ struct CameraInnerShape: Shape {
     
     func path(in rect: CGRect) -> Path {
         var path = Path()
-//        let circleLength = CGFloat(8)
         let circleRadius = CGFloat(4)
-//        let circleRect = CGRect(
-//            x: rect.width / 2 - circleLength / 2,
-//            y: rect.height / 2 - circleLength / 2,
-//            width: circleLength,
-//            height: circleLength
-//        )
-//        path.addEllipse(in: circleRect)
-        
         let circleCenter = CGPoint(x: rect.width / 2, y: rect.height / 2)
 
         path.addArc(
@@ -124,8 +101,9 @@ struct CameraInnerShape: Shape {
 }
 
 struct SnapshotViewTester: View {
+    @State var done = false
     var body: some View {
-        SnapshotView()
+        SnapshotView(done: $done)
     }
 }
 struct SnapshotView_Previews: PreviewProvider {

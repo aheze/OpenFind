@@ -23,7 +23,17 @@ class ToolbarViewModel: ObservableObject {
     
     class Camera: ObservableObject {
         @Published var resultsCount = 0
-        @Published var shutterOn = false
+        
+        /// set to true when tapped, then set back to false 1 second later
+        /// when paused, don't set it back until unpaused
+        @Published var snapshotSaved = false
+        @Published var shutterOn = false {
+            didSet {
+                withAnimation(.spring()) {
+                    snapshotSaved = false
+                }
+            }
+        }
         @Published var flash = false
         @Published var cacheOn = false
         
