@@ -30,9 +30,6 @@ class CameraViewController: UIViewController, PageViewController {
     
     @IBOutlet weak var safeView: UIView!
     
-    lazy var toolbar: CameraToolbarView = {
-        return CameraToolbarView(viewModel: cameraViewModel)
-    }()
     
     init?(coder: NSCoder, cameraViewModel: CameraViewModel) {
         self.cameraViewModel = cameraViewModel

@@ -8,12 +8,10 @@
 import SwiftUI
 
 /// `CameraToolbarView` is passed in from `CameraViewController`
-struct TabBarView<CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View>: View {
+struct TabBarView<PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View>: View {
     @ObservedObject var tabViewModel: TabViewModel
     @ObservedObject var toolbarViewModel: ToolbarViewModel
     @ObservedObject var cameraViewModel: CameraViewModel
-    
-    @ViewBuilder var cameraToolbarView: CameraToolbarView
     
     @ViewBuilder var photosSelectionToolbarView: PhotosSelectionToolbarView
     @ViewBuilder var photosDetailToolbarView: PhotosDetailToolbarView
@@ -46,7 +44,7 @@ struct TabBarView<CameraToolbarView: View, PhotosSelectionToolbarView: View, Pho
                             .padding(.bottom, ConstantVars.tabBarHuggingBottomPadding)
                     )
                     .overlay(
-                        cameraToolbarView
+                        CameraToolbarView(viewModel: cameraViewModel)
                             .opacity(tabViewModel.tabBarAttributes.toolbarAlpha)
                             .offset(x: 0, y: tabViewModel.tabBarAttributes.toolbarOffset)
                     )

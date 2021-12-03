@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     }()
     
     var toolbarViewModel: ToolbarViewModel!
-    lazy var tabController: TabBarController<CameraToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {
+    lazy var tabController: TabBarController<PhotosSelectionToolbarView, PhotosSelectionToolbarView, PhotosSelectionToolbarView> = {
         toolbarViewModel = ToolbarViewModel()
         
         photos.viewController.getActiveToolbarViewModel = { [weak self] in
@@ -54,7 +54,6 @@ class ViewController: UIViewController {
             pageViewControllers: [photos.viewController, camera.viewController, lists.viewController],
             cameraViewModel: cameraToolbarModel,
             toolbarViewModel: toolbarViewModel,
-            cameraToolbarView: camera.viewController.toolbar,
             photosSelectionToolbarView: photos.viewController.selectionToolbar,
             photosDetailToolbarView: photos.viewController.selectionToolbar,
             listsSelectionToolbarView: photos.viewController.selectionToolbar

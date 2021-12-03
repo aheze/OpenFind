@@ -37,12 +37,13 @@ protocol PageViewController: UIViewController {
 
 /// wrapper for `TabBarViewController` - compatible with generics
 class TabBarController<
-    CameraToolbarView: View, PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View
+    PhotosSelectionToolbarView: View, PhotosDetailToolbarView: View, ListsSelectionToolbarView: View
 >: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
     
     /// data
     var pages: [PageViewController]
-    var cameraToolbarView: CameraToolbarView
+    
+    /// toolbars
     var photosSelectionToolbarView: PhotosSelectionToolbarView
     var photosDetailToolbarView: PhotosDetailToolbarView
     var listsSelectionToolbarView: ListsSelectionToolbarView
@@ -61,7 +62,6 @@ class TabBarController<
         pages: [PageViewController],
         cameraViewModel: CameraViewModel,
         toolbarViewModel: ToolbarViewModel,
-        cameraToolbarView: CameraToolbarView,
         photosSelectionToolbarView: PhotosSelectionToolbarView,
         photosDetailToolbarView: PhotosDetailToolbarView,
         listsSelectionToolbarView: ListsSelectionToolbarView
@@ -73,8 +73,6 @@ class TabBarController<
         self.toolbarViewModel = toolbarViewModel
         
         
-        
-        self.cameraToolbarView = cameraToolbarView
         self.photosSelectionToolbarView = photosSelectionToolbarView
         self.photosDetailToolbarView = photosDetailToolbarView
         self.listsSelectionToolbarView = listsSelectionToolbarView
@@ -127,7 +125,6 @@ class TabBarController<
                 tabViewModel: tabViewModel,
                 toolbarViewModel: toolbarViewModel,
                 cameraViewModel: cameraViewModel,
-                cameraToolbarView: { cameraToolbarView },
                 photosSelectionToolbarView: { photosSelectionToolbarView },
                 photosDetailToolbarView: { photosDetailToolbarView },
                 listsSelectionToolbarView: { listsSelectionToolbarView }
