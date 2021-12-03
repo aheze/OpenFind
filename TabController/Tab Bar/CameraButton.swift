@@ -21,6 +21,7 @@ struct CameraButton: View {
             if tabViewModel.tabState == tabType {
                 withAnimation(.spring()) {
                     cameraViewModel.shutterOn.toggle()
+                    cameraViewModel.shutterPressed?()
                 }
             } else {
                 tabViewModel.changeTabState(newTab: tabType, animation: .clickedTabIcon)
@@ -37,6 +38,7 @@ struct CameraButton: View {
             }
             .frame(maxWidth: .infinity)
             .frame(height: attributes.backgroundHeight)
+            .contentShape(Rectangle())
         }
         .buttonStyle(CameraButtonStyle(isShutter: tabViewModel.tabState == tabType))
     }

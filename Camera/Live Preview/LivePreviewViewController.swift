@@ -35,10 +35,6 @@ class LivePreviewViewController: UIViewController {
     /// hugging the image
     /// BUT, will be scaled to different aspect - normal or full screen.
     @IBOutlet weak var previewFitView: UIView!
-    @IBOutlet weak var previewFitViewLeftC: NSLayoutConstraint!
-    @IBOutlet weak var previewFitViewTopC: NSLayoutConstraint!
-    @IBOutlet weak var previewFitViewWidthC: NSLayoutConstraint!
-    @IBOutlet weak var previewFitViewHeightC: NSLayoutConstraint!
     
     /// the frame of the scaled preview fit view, relative to `view`
     /// this basically adds the scale transforms to `previewFitView.frame`
@@ -89,7 +85,12 @@ class LivePreviewViewController: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        /// need to disable animations, otherwise there is a weird moving
+        CATransaction.begin()
+        CATransaction.setValue(true, forKey: kCATransactionDisableActions)
         livePreviewView.videoPreviewLayer.frame = previewFitView.bounds
+        CATransaction.commit()
     }
     
     func setup() {
@@ -101,6 +102,7 @@ class LivePreviewViewController: UIViewController {
         safeViewContainer.backgroundColor = Debug.tabBarAlwaysTransparent ? .blue : .clear
         safeView.backgroundColor = .blue
         
+        previewFitView.addDebugBorders(.green)
     }
 }
 

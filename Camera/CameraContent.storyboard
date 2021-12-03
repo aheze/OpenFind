@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -100,30 +100,20 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LCq-Pn-AUO">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K21-ot-sl7">
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K21-ot-sl7">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lJA-7m-wvT" customClass="LivePreviewView" customModule="Camera" customModuleProvider="target">
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lJA-7m-wvT" customClass="LivePreviewView" customModule="Camera" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="414" id="9fL-gl-my6"/>
-                                                    <constraint firstAttribute="bottom" secondItem="lJA-7m-wvT" secondAttribute="bottom" id="jYV-17-XHx"/>
-                                                    <constraint firstItem="lJA-7m-wvT" firstAttribute="leading" secondItem="K21-ot-sl7" secondAttribute="leading" id="mWu-km-6vC"/>
-                                                    <constraint firstItem="lJA-7m-wvT" firstAttribute="top" secondItem="K21-ot-sl7" secondAttribute="top" id="q0X-Ka-Lae"/>
-                                                    <constraint firstAttribute="trailing" secondItem="lJA-7m-wvT" secondAttribute="trailing" id="rD6-pr-4f3"/>
-                                                    <constraint firstAttribute="height" constant="896" id="uMV-oy-g3J"/>
-                                                </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="K21-ot-sl7" firstAttribute="leading" secondItem="LCq-Pn-AUO" secondAttribute="leading" id="V7z-Nn-aiX"/>
-                                            <constraint firstItem="K21-ot-sl7" firstAttribute="top" secondItem="LCq-Pn-AUO" secondAttribute="top" id="Zj6-13-0uL"/>
-                                        </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FFO-FX-zYk">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -187,10 +177,6 @@
                         <outlet property="previewContainerView" destination="Tu8-Aa-jnj" id="d4i-iV-uH4"/>
                         <outlet property="previewContentView" destination="LCq-Pn-AUO" id="hL5-xb-a48"/>
                         <outlet property="previewFitView" destination="K21-ot-sl7" id="BOC-yn-WPi"/>
-                        <outlet property="previewFitViewHeightC" destination="uMV-oy-g3J" id="RSi-mo-n7i"/>
-                        <outlet property="previewFitViewLeftC" destination="V7z-Nn-aiX" id="HFL-4A-MNy"/>
-                        <outlet property="previewFitViewTopC" destination="Zj6-13-0uL" id="3o7-md-cbz"/>
-                        <outlet property="previewFitViewWidthC" destination="9fL-gl-my6" id="9FV-pP-FW8"/>
                         <outlet property="safeView" destination="uFW-jC-Sry" id="fZz-OW-6G9"/>
                         <outlet property="safeViewContainer" destination="FFO-FX-zYk" id="9sp-j7-1KV"/>
                         <outlet property="safeViewHeightC" destination="fCk-yr-2VC" id="Vt5-NF-re0"/>

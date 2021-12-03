@@ -20,7 +20,7 @@ extension CameraViewController {
             DispatchQueue.main.async {
                 viewController.updateViewportSize(safeViewFrame: self.safeView.frame)
                 viewController.changeZoom(to: self.zoomViewModel.zoom, animated: false)
-                viewController.changeAspectProgress(to: self.zoomViewModel.aspectProgress)
+                viewController.changeAspectProgress(to: self.zoomViewModel.aspectProgress, animated: false)
             }
         }
         

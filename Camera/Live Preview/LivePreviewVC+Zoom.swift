@@ -25,7 +25,7 @@ extension LivePreviewViewController {
         }
     }
     
-    func changeAspectProgress(to aspectProgress: CGFloat) {
+    func changeAspectProgress(to aspectProgress: CGFloat, animated: Bool) {
         
         let extraProgress = aspectProgressTarget - 1
         let scale = 1 + (extraProgress * aspectProgress)
@@ -73,7 +73,11 @@ extension LivePreviewViewController {
         self.simulatedSafeView.frame = safeViewFrameFromPreviewFit
         
         
-        UIView.animate(withDuration: 0.3) {
+        if animated {
+            UIView.animate(withDuration: 0.3) {
+                self.previewFitView.transform = self.previewFitViewScale
+            }
+        } else {
             self.previewFitView.transform = self.previewFitViewScale
         }
         

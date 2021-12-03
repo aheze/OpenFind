@@ -21,6 +21,7 @@ struct PhotosButton: View {
             }
             .frame(maxWidth: .infinity)
             .frame(height: attributes.backgroundHeight)
+            .contentShape(Rectangle())
         }
     }
 }
@@ -38,6 +39,7 @@ struct ListsButton: View {
             }
             .frame(maxWidth: .infinity)
             .frame(height: attributes.backgroundHeight)
+            .contentShape(Rectangle())
         }
     }
 }

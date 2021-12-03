@@ -49,7 +49,7 @@ class CameraViewController: UIViewController, PageViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         livePreviewViewController.updateViewportSize(safeViewFrame: safeView.frame)
-        livePreviewViewController.changeAspectProgress(to: zoomViewModel.aspectProgress)
+        livePreviewViewController.changeAspectProgress(to: zoomViewModel.aspectProgress, animated: false)
     }
     
     func setup() {
@@ -68,10 +68,13 @@ class CameraViewController: UIViewController, PageViewController {
             self?.livePreviewViewController.changeZoom(to: zoom, animated: true)
         }
         aspectProgressCancellable = zoomViewModel.$aspectProgress.sink { [weak self] aspectProgress in
-            self?.livePreviewViewController.changeAspectProgress(to: aspectProgress)
+            self?.livePreviewViewController.changeAspectProgress(to: aspectProgress, animated: true)
         }
         
-        
+        cameraViewModel.shutterPressed = { [weak self] in
+            guard let self = self else { return }
+            self.livePreviewViewController.livePreviewView.videoPreviewLayer.connection?.isEnabled = !self.cameraViewModel.shutterOn
+        }
         
         _ = livePreviewViewController
         

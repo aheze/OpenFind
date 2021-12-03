@@ -53,6 +53,7 @@ struct FlashIconView: View {
                 )
                 .cornerRadius(20)
         }
+        .brightness(isDisabled ? -0.5 : 0)
         .disabled(isDisabled)
         
     }

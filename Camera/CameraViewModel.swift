@@ -18,9 +18,9 @@ class CameraViewModel: ObservableObject {
     /// shutter on/off
     @Published var shutterOn = false {
         didSet {
-            withAnimation(.spring()) {
-                snapshotSaved = false
-            }
+//            withAnimation(.spring()) {
+//                snapshotSaved = false
+//            }
         }
     }
     
@@ -30,5 +30,6 @@ class CameraViewModel: ObservableObject {
     
     /// press the snapshot/camera button
     var snapshotPressed: (() -> Void)?
+    var shutterPressed: (() -> Void)?
     init() { }
 }
