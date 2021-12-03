@@ -9,11 +9,12 @@
 import SwiftUI
 
 struct SnapshotConstants {
-    static var checkStartTrim = CGFloat(0.675)
+    static var checkStartTrim = CGFloat(0.675) /// I guessed this number - it's the percentage where the circle becomes the checkmark
 }
+
 struct SnapshotView: View {
     @Binding var done: Bool
-    @State var scaleAnimationActive = false
+    @State var scaleAnimationActive = false /// scale up/down animation flag
     @State var startTrim = CGFloat(0)
     @State var endTrim = SnapshotConstants.checkStartTrim
     
@@ -42,7 +43,7 @@ struct SnapshotView: View {
             }
         } label: {
             VStack {
-                Image("CameraRim")
+                Image("CameraRim") /// wim of camera
                     .foregroundColor(done ? Color(Constants.activeIconColor) : .white)
                     .overlay(
                         CameraInnerShape()

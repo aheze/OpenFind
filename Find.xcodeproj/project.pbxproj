@@ -43,6 +43,8 @@
 		3C1D19DB2759A5870064F2C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C11996D274A385200D6AFE3 /* Assets.xcassets */; };
 		3C1D19DD2759B5770064F2C6 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19DC2759B5770064F2C6 /* CameraViewModel.swift */; };
 		3C1D19DE2759B5960064F2C6 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19DC2759B5770064F2C6 /* CameraViewModel.swift */; };
+		3C1D19E12759B7CC0064F2C6 /* IconButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E02759B7CC0064F2C6 /* IconButtons.swift */; };
+		3C1D19E32759B7EC0064F2C6 /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E22759B7EC0064F2C6 /* CameraButton.swift */; };
 		3C1FE20625B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE20525B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift */; };
 		3C1FE20925BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE20825BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift */; };
 		3C1FE20E25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1FE20D25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift */; };
@@ -756,6 +758,8 @@
 		3C1AB1A5261004B7009B47C0 /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		3C1D19D72759A13B0064F2C6 /* SnapshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotView.swift; sourceTree = "<group>"; };
 		3C1D19DC2759B5770064F2C6 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
+		3C1D19E02759B7CC0064F2C6 /* IconButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButtons.swift; sourceTree = "<group>"; };
+		3C1D19E22759B7EC0064F2C6 /* CameraButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButton.swift; sourceTree = "<group>"; };
 		3C1FE20525B9F3B0004DC9EF /* PhotosVC+SlidesChanged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+SlidesChanged.swift"; sourceTree = "<group>"; };
 		3C1FE20825BA0A02004DC9EF /* PhotoSlidesVC+Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+Delete.swift"; sourceTree = "<group>"; };
 		3C1FE20D25BA8787004DC9EF /* PhotoSlidesVC+FindBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoSlidesVC+FindBar.swift"; sourceTree = "<group>"; };
@@ -1452,6 +1456,16 @@
 			path = Builder;
 			sourceTree = "<group>";
 		};
+		3C1D19DF2759B7AB0064F2C6 /* Tab Bar */ = {
+			isa = PBXGroup;
+			children = (
+				3C4D378A274756460010FD68 /* TabBarView.swift */,
+				3C1D19E22759B7EC0064F2C6 /* CameraButton.swift */,
+				3C1D19E02759B7CC0064F2C6 /* IconButtons.swift */,
+			);
+			path = "Tab Bar";
+			sourceTree = "<group>";
+		};
 		3C1FE20B25BA8768004DC9EF /* Find */ = {
 			isa = PBXGroup;
 			children = (
@@ -1643,7 +1657,7 @@
 				3C4D378E274756470010FD68 /* TabViewModel.swift */,
 				3C4D3793274756470010FD68 /* TabBarController.swift */,
 				3C4D378D274756470010FD68 /* TabBarViewController.swift */,
-				3C4D378A274756460010FD68 /* TabBarView.swift */,
+				3C1D19DF2759B7AB0064F2C6 /* Tab Bar */,
 				3C4D3796274756470010FD68 /* ContentPageViewController.swift */,
 				3C4D3788274756460010FD68 /* ContentPagingFlowLayout.swift */,
 				3C4D378F274756470010FD68 /* ContentCell.swift */,
@@ -3499,6 +3513,7 @@
 				3C4D3A1E274767410010FD68 /* TabBarView.swift in Sources */,
 				3C4D3A1B274767410010FD68 /* ContentPagingFlowLayout.swift in Sources */,
 				3CE9C1F5274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
+				3C1D19E12759B7CC0064F2C6 /* IconButtons.swift in Sources */,
 				3CE9C206274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
 				3CE9C218274DEAE1008C903C /* Utilities+Constraints.swift in Sources */,
 				3C7B1D4D2757E8F9006525B1 /* CameraToolbarView.swift in Sources */,
@@ -3536,6 +3551,7 @@
 				3C4D3A29274768C00010FD68 /* FlashIconView.swift in Sources */,
 				3C4D3A21274767890010FD68 /* CameraViewController.swift in Sources */,
 				3CE9C1F9274B4E44008C903C /* LivePreviewView.swift in Sources */,
+				3C1D19E32759B7EC0064F2C6 /* CameraButton.swift in Sources */,
 				3C4D3A27274768C00010FD68 /* ResultsIconView.swift in Sources */,
 				3C1D19DE2759B5960064F2C6 /* CameraViewModel.swift in Sources */,
 				3C4D3A25274768790010FD68 /* CameraBridge.swift in Sources */,

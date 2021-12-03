@@ -257,6 +257,12 @@ enum TabState: Equatable {
 protocol AnimatableAttributes {
     init(progress: CGFloat, from fromAttributes: Self, to toAttributes: Self)
 }
+struct AnimatableUtilities {
+    static func mixedValue(from: CGFloat, to: CGFloat, progress: CGFloat) -> CGFloat {
+        let value = from + (to - from) * progress
+        return value
+    }
+}
 
 struct TabBarAttributes: AnimatableAttributes {
     
@@ -306,15 +312,19 @@ struct TabBarAttributes: AnimatableAttributes {
 extension TabBarAttributes {
     init(progress: CGFloat, from fromAttributes: TabBarAttributes, to toAttributes: TabBarAttributes) {
         let backgroundColor = fromAttributes.backgroundColor.toColor(toAttributes.backgroundColor, percentage: progress)
-        let backgroundHeight = max(ConstantVars.tabBarTotalHeight, fromAttributes.backgroundHeight + (toAttributes.backgroundHeight - fromAttributes.backgroundHeight) * progress)
-        let topPadding = fromAttributes.topPadding + (toAttributes.topPadding - fromAttributes.topPadding) * progress
-        let toolbarOffset = fromAttributes.toolbarOffset + (toAttributes.toolbarOffset - fromAttributes.toolbarOffset) * progress
+        let backgroundHeight = max(
+            ConstantVars.tabBarTotalHeight,
+            AnimatableUtilities.mixedValue(from: fromAttributes.backgroundHeight, to: toAttributes.backgroundHeight, progress: progress)
+        )
+        
+        let topPadding = AnimatableUtilities.mixedValue(from: fromAttributes.topPadding, to: toAttributes.topPadding, progress: progress)
+        
+        let toolbarOffset = AnimatableUtilities.mixedValue(from: fromAttributes.toolbarOffset, to: toAttributes.toolbarOffset, progress: progress)
         
         /// move a bit faster for the toolbar
         let fasterProgress = min(1, progress * Constants.tabBarToolbarAlphaMultiplier)
-        let toolbarAlpha = fromAttributes.toolbarAlpha + (toAttributes.toolbarAlpha - fromAttributes.toolbarAlpha) * fasterProgress
-        
-        let topLineAlpha = fromAttributes.topLineAlpha + (toAttributes.topLineAlpha - fromAttributes.topLineAlpha) * progress
+        let toolbarAlpha = AnimatableUtilities.mixedValue(from: fromAttributes.toolbarAlpha, to: toAttributes.toolbarAlpha, progress: fasterProgress)
+        let topLineAlpha = AnimatableUtilities.mixedValue(from: fromAttributes.topLineAlpha, to: toAttributes.topLineAlpha, progress: progress)
         
         self.backgroundColor = backgroundColor
         self.backgroundHeight = backgroundHeight
