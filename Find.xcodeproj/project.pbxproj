@@ -583,6 +583,9 @@
 		3CB6843225A0087700AE0AD6 /* PhotosMigrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */; };
 		3CB6843525A013D800AE0AD6 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6843425A013D800AE0AD6 /* ImageCell.swift */; };
 		3CB6843825A0140200AE0AD6 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB6843725A0140200AE0AD6 /* ImageCell.xib */; };
+		3CB98A6B275AFAF900A6B1B9 /* PopoverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB98A6A275AFAF900A6B1B9 /* PopoverModel.swift */; };
+		3CB98A6D275B0A0500A6B1B9 /* PopoverContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB98A6C275B0A0500A6B1B9 /* PopoverContainerView.swift */; };
+		3CB98A6F275B150300A6B1B9 /* PopoverContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB98A6E275B150300A6B1B9 /* PopoverContainerViewController.swift */; };
 		3CBEAC0327534B0900D04B39 /* VisionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC0227534B0900D04B39 /* VisionConstants.swift */; };
 		3CBEAC052753554C00D04B39 /* Utilities+Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC042753554C00D04B39 /* Utilities+Dates.swift */; };
 		3CBEAC09275356C900D04B39 /* VTE+FilterTrackers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC08275356C900D04B39 /* VTE+FilterTrackers.swift */; };
@@ -1238,6 +1241,9 @@
 		3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationController.swift; sourceTree = "<group>"; };
 		3CB6843425A013D800AE0AD6 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		3CB6843725A0140200AE0AD6 /* ImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
+		3CB98A6A275AFAF900A6B1B9 /* PopoverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverModel.swift; sourceTree = "<group>"; };
+		3CB98A6C275B0A0500A6B1B9 /* PopoverContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverContainerView.swift; sourceTree = "<group>"; };
+		3CB98A6E275B150300A6B1B9 /* PopoverContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverContainerViewController.swift; sourceTree = "<group>"; };
 		3CBEAC0227534B0900D04B39 /* VisionConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionConstants.swift; sourceTree = "<group>"; };
 		3CBEAC042753554C00D04B39 /* Utilities+Dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+Dates.swift"; sourceTree = "<group>"; };
 		3CBEAC08275356C900D04B39 /* VTE+FilterTrackers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VTE+FilterTrackers.swift"; sourceTree = "<group>"; };
@@ -1564,7 +1570,10 @@
 		3C1D19F3275A9F390064F2C6 /* Popover */ = {
 			isa = PBXGroup;
 			children = (
+				3CB98A6A275AFAF900A6B1B9 /* PopoverModel.swift */,
 				3C1D1A08275A9FB30064F2C6 /* PopoverController.swift */,
+				3CB98A6E275B150300A6B1B9 /* PopoverContainerViewController.swift */,
+				3CB98A6C275B0A0500A6B1B9 /* PopoverContainerView.swift */,
 				3C1D1A0A275AA08D0064F2C6 /* FieldSettingsView.swift */,
 				3C1D1A07275A9F8E0064F2C6 /* Testing */,
 			);
@@ -3668,8 +3677,11 @@
 				3C1D1A27275AA25B0064F2C6 /* Utilities+UIFont.swift in Sources */,
 				3C1D1A25275AA2490064F2C6 /* Constants.swift in Sources */,
 				3C1D1A0E275AA0CE0064F2C6 /* Utilities+SwiftUI.swift in Sources */,
+				3CB98A6D275B0A0500A6B1B9 /* PopoverContainerView.swift in Sources */,
 				3C1D1A2A275AA25B0064F2C6 /* Utilities+Constraints.swift in Sources */,
 				3C1D1A09275A9FB30064F2C6 /* PopoverController.swift in Sources */,
+				3CB98A6F275B150300A6B1B9 /* PopoverContainerViewController.swift in Sources */,
+				3CB98A6B275AFAF900A6B1B9 /* PopoverModel.swift in Sources */,
 				3C1D1A2B275AA25B0064F2C6 /* Utilities+UIColor.swift in Sources */,
 				3C1D1A19275AA16C0064F2C6 /* UIKitViews.swift in Sources */,
 				3C1D1A23275AA21B0064F2C6 /* TabViewModel.swift in Sources */,

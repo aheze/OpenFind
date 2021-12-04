@@ -10,10 +10,11 @@ import SwiftUI
 
 struct FieldSettingsConstants {
     static var sliderHeight = CGFloat(40)
+    static var cornerRadius = CGFloat(12)
 }
 
 struct FieldSettingsView: View {
-    @State var value = CGFloat(1.0)
+    @Binding var configuration: Popover.FieldSettings
     
     var body: some View {
         VStack(spacing: 0) {
@@ -34,15 +35,15 @@ struct FieldSettingsView: View {
                 .foregroundColor(.white)
                 .shadow(color: Color.black.opacity(0.25), radius: 3, x: 0, y: 1)
                 .padding(EdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12))
-                .background(UIColor(hex: 0xaeef).color)
-                .cornerRadius(8)
+                .background(UIColor(hex: configuration.defaultColor).color)
+                .cornerRadius(FieldSettingsConstants.cornerRadius)
                 
                 PaletteView()
-                    .cornerRadius(8)
+                    .cornerRadius(FieldSettingsConstants.cornerRadius)
                 
-                OpacitySlider(value: $value)
+                OpacitySlider(value: $configuration.alpha)
                     .frame(height: FieldSettingsConstants.sliderHeight)
-                    .cornerRadius(8)
+                    .cornerRadius(FieldSettingsConstants.cornerRadius)
             }
             .padding(12)
         }
@@ -53,6 +54,7 @@ struct FieldSettingsView: View {
                 Constants.tabBarDarkBackgroundColor.color.opacity(0.5)
             }
         )
+        .cornerRadius(16)
     }
 }
 
@@ -152,7 +154,7 @@ struct OpacitySlider: View {
 
 struct FieldSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        FieldSettingsView()
+        FieldSettingsView(configuration: .constant(Popover.FieldSettings()))
             .previewLayout(.fixed(width: 250, height: 300))
     }
 }
