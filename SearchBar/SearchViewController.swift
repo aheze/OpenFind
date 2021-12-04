@@ -32,7 +32,7 @@ class SearchViewController: UIViewController {
                     cell.field = self.searchViewModel.fields[oldCellIndex] /// set it right now anyway
                 }
             }
-            if let newCellIndex = newCellIndex {
+            if let newCellIndex = newCellIndex, self.searchViewModel.fields.indices.contains(newCellIndex) {
                 self.searchViewModel.fields[newCellIndex].focused = true
                 if let cell = self.searchCollectionView.cellForItem(at: newCellIndex.indexPath) as? SearchFieldCell {
                     cell.field = self.searchViewModel.fields[newCellIndex] /// set it right now anyway

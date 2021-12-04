@@ -9,18 +9,20 @@ import UIKit
 
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("c: \(searchViewModel.fields.count )")
         return searchViewModel.fields.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SearchFieldCell else { return UICollectionViewCell() }
-        
+        print("cell: \(indexPath)")
         let field = self.searchViewModel.fields[indexPath.item]
         
         cell.setField(field) /// cell can configure itself
         cell.fieldChanged = { [weak self] field in
             self?.searchViewModel.fields[indexPath.item] = field
         }
+        cell.leftView.imageView.tintColor = UIColor(hex: field.text.color)
         
         /// setup constraints
         let (setup, _, _) = cell.showAddNew(true, changeColorOnly: false)

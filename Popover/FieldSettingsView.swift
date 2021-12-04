@@ -14,7 +14,7 @@ struct FieldSettingsConstants {
 }
 
 struct FieldSettingsView: View {
-    @Binding var configuration: Popover.FieldSettings
+    @Binding var configuration: Popover.Configuration.FieldSettings
     
     var body: some View {
         VStack(spacing: 0) {
@@ -154,7 +154,7 @@ struct OpacitySlider: View {
 
 struct FieldSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        FieldSettingsView(configuration: .constant(Popover.FieldSettings()))
+        FieldSettingsView(configuration: .constant(.init()))
             .previewLayout(.fixed(width: 250, height: 300))
     }
 }

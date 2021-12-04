@@ -10,5 +10,8 @@ import UIKit
 
 class SearchViewModel: ObservableObject {
     var availableLists = [List]()
-    var fields = [Field]()
+    var fields = [
+        Field(text: .init(value: .string(""))),
+        Field(text: .init(value: .addNew("")))
+    ]
 }

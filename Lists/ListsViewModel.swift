@@ -15,7 +15,7 @@ class ListsViewModel: ObservableObject {
             desc: "Words",
             contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
             iconImageName: "leaf.fill",
-            iconColorName: "1F7000",
+            iconColorName: 0x1F7000,
             dateCreated: Date()
         ),
         List(
@@ -23,7 +23,7 @@ class ListsViewModel: ObservableObject {
             desc: "Words",
             contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
             iconImageName: "leaf.fill",
-            iconColorName: "004C7F",
+            iconColorName: 0x004C7F,
             dateCreated: Date()
         ),
         List(
@@ -31,7 +31,7 @@ class ListsViewModel: ObservableObject {
             desc: "Words",
             contents: ["Leaf", "Ant", "Stick", "Branch", "Tree"],
             iconImageName: "leaf.fill",
-            iconColorName: "E2AC00",
+            iconColorName: 0xE2AC00,
             dateCreated: Date()
         )
     ]
@@ -44,6 +44,6 @@ struct List {
     var desc = ""
     var contents = [String]()
     var iconImageName = ""
-    var iconColorName = ""
+    var iconColorName: UInt = 0xaeef
     var dateCreated = Date()
 }

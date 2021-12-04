@@ -41,9 +41,9 @@ class SearchFieldCell: UICollectionViewCell {
     /// ONLY cellForRowAt
     func setField(_ field: Field) {
         self.field = field
-        self.textField.text = field.value.getText()
+        self.textField.text = field.text.value.getText()
         
-        switch field.value {
+        switch field.text.value {
         case .string(_):
             break
         case .list(_):
@@ -66,7 +66,7 @@ class SearchFieldCell: UICollectionViewCell {
         self.fieldChanged?(field)
     }
     
-    var field = Field(value: .string("")) {
+    var field = Field(text: .init(value: .string(""))) {
         
         /// perform instant updates, no animation
         didSet {
@@ -190,7 +190,7 @@ extension SearchFieldCell: UITextFieldDelegate {
             let updatedText = text.replacingCharacters(in: textRange, with: string)
 
             updateField {
-                $0.value = .string(updatedText)
+                $0.text.value = .string(updatedText)
             }
 
         }

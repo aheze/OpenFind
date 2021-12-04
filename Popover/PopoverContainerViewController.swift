@@ -43,3 +43,19 @@ class PopoverContainerViewController: UIViewController {
         
     }
 }
+
+/// https://stackoverflow.com/a/4010809/14351818
+class PassThroughView: UIView {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+//        for keepPresentedRects in popovermodel
+        
+        for subview in subviews {
+            let pointIsInsideSubview = subview.point(inside: convert(point, to: subview), with: event)
+            
+            if !subview.isHidden && subview.isUserInteractionEnabled && subview.point(inside: convert(point, to: subview), with: event) {
+                return true
+            }
+        }
+        return false
+    }
+}

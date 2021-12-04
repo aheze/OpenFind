@@ -586,6 +586,25 @@
 		3CB98A6B275AFAF900A6B1B9 /* PopoverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB98A6A275AFAF900A6B1B9 /* PopoverModel.swift */; };
 		3CB98A6D275B0A0500A6B1B9 /* PopoverContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB98A6C275B0A0500A6B1B9 /* PopoverContainerView.swift */; };
 		3CB98A6F275B150300A6B1B9 /* PopoverContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB98A6E275B150300A6B1B9 /* PopoverContainerViewController.swift */; };
+		3CB98A71275B1AE800A6B1B9 /* PopoverUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB98A70275B1AE800A6B1B9 /* PopoverUtilities.swift */; };
+		3CB98A72275B217900A6B1B9 /* SearchBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8327477ABC0010FD68 /* SearchBar.storyboard */; };
+		3CB98A73275B217900A6B1B9 /* SearchCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8127477ABC0010FD68 /* SearchCollectionViewFlowLayout.swift */; };
+		3CB98A74275B217900A6B1B9 /* SearchConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8027477ABC0010FD68 /* SearchConstants.swift */; };
+		3CB98A75275B217900A6B1B9 /* SearchCV+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8627477ABC0010FD68 /* SearchCV+Delegate.swift */; };
+		3CB98A76275B217900A6B1B9 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9027477ABC0010FD68 /* SearchViewController.swift */; };
+		3CB98A77275B217900A6B1B9 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E42759F2320064F2C6 /* SearchViewModel.swift */; };
+		3CB98A78275B217900A6B1B9 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9127477ABC0010FD68 /* Field.swift */; };
+		3CB98A79275B217900A6B1B9 /* SearchCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8227477ABC0010FD68 /* SearchCollectionView.swift */; };
+		3CB98A7A275B217900A6B1B9 /* SearchCV+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchCV+Datasource.swift */; };
+		3CB98A7B275B217900A6B1B9 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8F27477ABC0010FD68 /* Utilities.swift */; };
+		3CB98A7C275B217900A6B1B9 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8E27477ABC0010FD68 /* Bridge.swift */; };
+		3CB98A7D275B219100A6B1B9 /* ListsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E6275A93700064F2C6 /* ListsViewModel.swift */; };
+		3CB98A7E275B22B300A6B1B9 /* LeftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8927477ABC0010FD68 /* LeftView.swift */; };
+		3CB98A7F275B22B300A6B1B9 /* RightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8B27477ABC0010FD68 /* RightView.swift */; };
+		3CB98A80275B22B300A6B1B9 /* SearchFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8827477ABC0010FD68 /* SearchFieldCell.xib */; };
+		3CB98A81275B22B300A6B1B9 /* SearchFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8A27477ABC0010FD68 /* SearchFieldCell.swift */; };
+		3CB98A82275B22B300A6B1B9 /* LeftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8D27477ABC0010FD68 /* LeftView.xib */; };
+		3CB98A83275B22B300A6B1B9 /* RightView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8C27477ABC0010FD68 /* RightView.xib */; };
 		3CBEAC0327534B0900D04B39 /* VisionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC0227534B0900D04B39 /* VisionConstants.swift */; };
 		3CBEAC052753554C00D04B39 /* Utilities+Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC042753554C00D04B39 /* Utilities+Dates.swift */; };
 		3CBEAC09275356C900D04B39 /* VTE+FilterTrackers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC08275356C900D04B39 /* VTE+FilterTrackers.swift */; };
@@ -1244,6 +1263,7 @@
 		3CB98A6A275AFAF900A6B1B9 /* PopoverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverModel.swift; sourceTree = "<group>"; };
 		3CB98A6C275B0A0500A6B1B9 /* PopoverContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverContainerView.swift; sourceTree = "<group>"; };
 		3CB98A6E275B150300A6B1B9 /* PopoverContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverContainerViewController.swift; sourceTree = "<group>"; };
+		3CB98A70275B1AE800A6B1B9 /* PopoverUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverUtilities.swift; sourceTree = "<group>"; };
 		3CBEAC0227534B0900D04B39 /* VisionConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionConstants.swift; sourceTree = "<group>"; };
 		3CBEAC042753554C00D04B39 /* Utilities+Dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+Dates.swift"; sourceTree = "<group>"; };
 		3CBEAC08275356C900D04B39 /* VTE+FilterTrackers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VTE+FilterTrackers.swift"; sourceTree = "<group>"; };
@@ -1575,6 +1595,7 @@
 				3CB98A6E275B150300A6B1B9 /* PopoverContainerViewController.swift */,
 				3CB98A6C275B0A0500A6B1B9 /* PopoverContainerView.swift */,
 				3C1D1A0A275AA08D0064F2C6 /* FieldSettingsView.swift */,
+				3CB98A70275B1AE800A6B1B9 /* PopoverUtilities.swift */,
 				3C1D1A07275A9F8E0064F2C6 /* Testing */,
 			);
 			path = Popover;
@@ -2013,11 +2034,11 @@
 			isa = PBXGroup;
 			children = (
 				3C4D3B8E27477ABC0010FD68 /* Bridge.swift */,
+				3C4D3B9127477ABC0010FD68 /* Field.swift */,
 				3C1D19E42759F2320064F2C6 /* SearchViewModel.swift */,
 				3C4D3B8027477ABC0010FD68 /* SearchConstants.swift */,
 				3C4D3B8327477ABC0010FD68 /* SearchBar.storyboard */,
 				3C4D3B9027477ABC0010FD68 /* SearchViewController.swift */,
-				3C4D3B9127477ABC0010FD68 /* Field.swift */,
 				3C4D3B8727477ABC0010FD68 /* Search Bar Views */,
 				3C4D3B8227477ABC0010FD68 /* SearchCollectionView.swift */,
 				3C4D3B8127477ABC0010FD68 /* SearchCollectionViewFlowLayout.swift */,
@@ -3282,10 +3303,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CB98A72275B217900A6B1B9 /* SearchBar.storyboard in Resources */,
+				3CB98A82275B22B300A6B1B9 /* LeftView.xib in Resources */,
 				3C1D1A01275A9F3B0064F2C6 /* LaunchScreen.storyboard in Resources */,
 				3C1D19FE275A9F3B0064F2C6 /* Assets.xcassets in Resources */,
 				3C1D19FC275A9F390064F2C6 /* Main.storyboard in Resources */,
+				3CB98A80275B22B300A6B1B9 /* SearchFieldCell.xib in Resources */,
 				3C1D1A06275A9F6D0064F2C6 /* SharedAssets.xcassets in Resources */,
+				3CB98A83275B22B300A6B1B9 /* RightView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3672,22 +3697,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CB98A81275B22B300A6B1B9 /* SearchFieldCell.swift in Sources */,
 				3C1D1A28275AA25B0064F2C6 /* Utilities+UIDevice.swift in Sources */,
 				3C1D19F9275A9F390064F2C6 /* ViewController.swift in Sources */,
 				3C1D1A27275AA25B0064F2C6 /* Utilities+UIFont.swift in Sources */,
 				3C1D1A25275AA2490064F2C6 /* Constants.swift in Sources */,
+				3CB98A74275B217900A6B1B9 /* SearchConstants.swift in Sources */,
 				3C1D1A0E275AA0CE0064F2C6 /* Utilities+SwiftUI.swift in Sources */,
 				3CB98A6D275B0A0500A6B1B9 /* PopoverContainerView.swift in Sources */,
+				3CB98A7A275B217900A6B1B9 /* SearchCV+Datasource.swift in Sources */,
 				3C1D1A2A275AA25B0064F2C6 /* Utilities+Constraints.swift in Sources */,
 				3C1D1A09275A9FB30064F2C6 /* PopoverController.swift in Sources */,
+				3CB98A7D275B219100A6B1B9 /* ListsViewModel.swift in Sources */,
+				3CB98A73275B217900A6B1B9 /* SearchCollectionViewFlowLayout.swift in Sources */,
+				3CB98A79275B217900A6B1B9 /* SearchCollectionView.swift in Sources */,
 				3CB98A6F275B150300A6B1B9 /* PopoverContainerViewController.swift in Sources */,
+				3CB98A7C275B217900A6B1B9 /* Bridge.swift in Sources */,
 				3CB98A6B275AFAF900A6B1B9 /* PopoverModel.swift in Sources */,
 				3C1D1A2B275AA25B0064F2C6 /* Utilities+UIColor.swift in Sources */,
 				3C1D1A19275AA16C0064F2C6 /* UIKitViews.swift in Sources */,
+				3CB98A78275B217900A6B1B9 /* Field.swift in Sources */,
 				3C1D1A23275AA21B0064F2C6 /* TabViewModel.swift in Sources */,
+				3CB98A7B275B217900A6B1B9 /* Utilities.swift in Sources */,
+				3CB98A76275B217900A6B1B9 /* SearchViewController.swift in Sources */,
+				3CB98A75275B217900A6B1B9 /* SearchCV+Delegate.swift in Sources */,
 				3C1D19F5275A9F390064F2C6 /* AppDelegate.swift in Sources */,
+				3CB98A77275B217900A6B1B9 /* SearchViewModel.swift in Sources */,
 				3C1D1A10275AA0DB0064F2C6 /* SwiftUIViews.swift in Sources */,
+				3CB98A7E275B22B300A6B1B9 /* LeftView.swift in Sources */,
+				3CB98A7F275B22B300A6B1B9 /* RightView.swift in Sources */,
 				3C1D1A0B275AA08D0064F2C6 /* FieldSettingsView.swift in Sources */,
+				3CB98A71275B1AE800A6B1B9 /* PopoverUtilities.swift in Sources */,
 				3C1D19F7275A9F390064F2C6 /* SceneDelegate.swift in Sources */,
 				3C1D1A29275AA25B0064F2C6 /* Utilities+Dates.swift in Sources */,
 				3C1D1A26275AA25B0064F2C6 /* Utilities+UIViewController.swift in Sources */,

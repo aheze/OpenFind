@@ -9,12 +9,17 @@ import UIKit
 
 struct Field {
     
-    init(value: Value) {
-        self.value = value
+    init(text: Text) {
+        self.text = text
         fieldHuggingWidth = self.getFieldHuggingWidth()
     }
     
-    var value = Value.string("") {
+//    var value = Value.string("") {
+//        didSet {
+//            fieldHuggingWidth = self.getFieldHuggingWidth()
+//        }
+//    }
+    var text = Text(value: .string("")) {
         didSet {
             fieldHuggingWidth = self.getFieldHuggingWidth()
         }
@@ -48,12 +53,42 @@ struct Field {
         }
     }
     
+    struct Text {
+        var value: Value {
+            didSet {
+                switch value {
+                case .string(_):
+                    self.color = 0x00aeef
+                case .list(let list):
+                    self.color = list.iconColorName
+                case .addNew(_):
+                    self.color = 0x00aeef
+                }
+            }
+        }
+        
+        var color: UInt
+        var colorAlpha: CGFloat = 0
+        
+        init(value: Value) {
+            self.value = value
+            switch value {
+            case .string(_):
+                self.color = 0x00aeef
+            case .list(let list):
+                self.color = list.iconColorName
+            case .addNew(_):
+                self.color = 0x00aeef
+            }
+        }
+    }
+    
     private func getFieldHuggingWidth() -> CGFloat {
         
-        if case let .addNew(string) = self.value, string.isEmpty {
+        if case let .addNew(string) = self.text.value, string.isEmpty {
             return SearchConstants.addWordFieldHuggingWidth
         } else {
-            let fieldText = self.value.getText()
+            let fieldText = self.text.value.getText()
             let finalText = fieldText.isEmpty ? SearchConstants.addTextPlaceholder : fieldText
 
             let textWidth = finalText.width(withConstrainedHeight: 10, font: SearchConstants.fieldFont)
@@ -62,9 +97,9 @@ struct Field {
             let textPadding = 2 * SearchConstants.fieldTextSidePadding
             return textWidth + leftPaddingWidth + rightPaddingWidth + textPadding
         }
-        
     }
 }
+
 
 struct FieldOffset {
     var fullWidth = CGFloat(0)
