@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LeftView" customModule="SearchBar" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LeftView" customModule="Popover" customModuleProvider="target">
             <connections>
                 <outlet property="buttonView" destination="k2y-nd-nLt" id="OkZ-Qa-ZMW"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="52U-cG-DAv"/>
-                <outlet property="imageView" destination="vJb-bt-vPb" id="Pss-kZ-m93"/>
-                <outlet property="imageViewHeightC" destination="fTJ-oj-u8b" id="2mp-Y7-9G2"/>
-                <outlet property="imageViewWidthC" destination="1b5-vV-rjS" id="e0B-XV-gie"/>
+                <outlet property="findIconView" destination="Itn-D4-onc" id="C3f-gZ-E4y"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -21,24 +20,22 @@
             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2y-nd-nLt" customClass="ButtonView" customModule="SearchBar" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2y-nd-nLt" customClass="ButtonView" customModule="Popover" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FindIcon" translatesAutoresizingMaskIntoConstraints="NO" id="vJb-bt-vPb">
-                            <rect key="frame" x="34" y="34" width="32" height="32"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Itn-D4-onc" customClass="FindIconView" customModule="Popover" customModuleProvider="target">
+                            <rect key="frame" x="40" y="40" width="20" height="20"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="32" id="1b5-vV-rjS"/>
-                                <constraint firstAttribute="height" constant="32" id="fTJ-oj-u8b"/>
+                                <constraint firstAttribute="height" constant="20" id="Ws3-36-eLv"/>
+                                <constraint firstAttribute="width" constant="20" id="gmS-mV-yFb"/>
                             </constraints>
-                        </imageView>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="vJb-bt-vPb" firstAttribute="centerY" secondItem="k2y-nd-nLt" secondAttribute="centerY" id="BsA-KM-ykQ"/>
-                        <constraint firstItem="vJb-bt-vPb" firstAttribute="centerY" secondItem="k2y-nd-nLt" secondAttribute="centerY" id="s6R-If-lCg"/>
-                        <constraint firstItem="vJb-bt-vPb" firstAttribute="centerX" secondItem="k2y-nd-nLt" secondAttribute="centerX" id="tHx-gh-q8m"/>
+                        <constraint firstItem="Itn-D4-onc" firstAttribute="centerY" secondItem="k2y-nd-nLt" secondAttribute="centerY" id="SXq-Kw-exa"/>
+                        <constraint firstItem="Itn-D4-onc" firstAttribute="centerX" secondItem="k2y-nd-nLt" secondAttribute="centerX" id="WAx-b0-1BN"/>
                     </constraints>
                 </view>
             </subviews>
@@ -55,6 +52,8 @@
         </view>
     </objects>
     <resources>
-        <image name="FindIcon" width="24" height="24"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

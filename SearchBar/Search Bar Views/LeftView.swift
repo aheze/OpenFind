@@ -11,10 +11,9 @@ class LeftView: UIView {
     
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var buttonView: ButtonView!
-    @IBOutlet weak var imageView: UIImageView!
+
+    @IBOutlet weak var findIconView: FindIconView!
     
-    @IBOutlet weak var imageViewWidthC: NSLayoutConstraint!
-    @IBOutlet weak var imageViewHeightC: NSLayoutConstraint!
     
     var tapped: (() -> Void)?
     
@@ -36,8 +35,6 @@ class LeftView: UIView {
         
         buttonView.tapped = tapped
         
-        imageViewWidthC.constant = SearchConstants.fieldIconLength
-        imageViewHeightC.constant = SearchConstants.fieldIconLength
     }
 }
 

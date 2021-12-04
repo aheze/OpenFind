@@ -2083,11 +2083,11 @@
 			isa = PBXGroup;
 			children = (
 				3C4D3B8827477ABC0010FD68 /* SearchFieldCell.xib */,
-				3C4D3B8927477ABC0010FD68 /* LeftView.swift */,
 				3C4D3B8A27477ABC0010FD68 /* SearchFieldCell.swift */,
-				3C4D3B8B27477ABC0010FD68 /* RightView.swift */,
 				3C4D3B8C27477ABC0010FD68 /* RightView.xib */,
+				3C4D3B8B27477ABC0010FD68 /* RightView.swift */,
 				3C4D3B8D27477ABC0010FD68 /* LeftView.xib */,
+				3C4D3B8927477ABC0010FD68 /* LeftView.swift */,
 			);
 			path = "Search Bar Views";
 			sourceTree = "<group>";
