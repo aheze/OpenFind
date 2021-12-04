@@ -14,7 +14,7 @@ struct FieldSettingsConstants {
 }
 
 struct FieldSettingsView: View {
-    @Binding var configuration: Popover.Configuration.FieldSettings
+    @Binding var configuration: PopoverConfiguration.FieldSettings
     
     var body: some View {
         VStack(spacing: 0) {

@@ -37,28 +37,30 @@ class ViewController: UIViewController {
     @IBOutlet weak var wordLabel: UILabel!
     @IBOutlet weak var listLabel: UILabel!
     
-    var fields = [Field()]
+    var fields = [
+        Field(text: .init(value: .string(""))),
+        Field(text: .init(value: .addNew("")))
+    ]
     @IBAction func wordPressed(_ sender: Any) {
-//        popoverModel.popovers.append(
-//            
-//            let binding = Binding(
-//                get: {
-//                    <#code#>
-//                }, set: { <#Value#> in
-//                    <#code#>
-//                }
-//            )
-//            
-//            .fieldSettings(
-//                .init(
-//                    origin: wordLabel.frame.origin,
-//                    keepPresentedRects: [purpleButton.frame],
-//                    defaultColor: 0x00aeef,
-//                    selectedColor: 0x00aeef,
-//                    alpha: 0.5
-//                )
-//            )
-//        )
+        print("Wpr p[resed")
+        
+        let binding = Binding(
+            get: {
+                PopoverConfiguration.FieldSettings(
+                    origin: self.wordLabel.frame.origin,
+                    keepPresentedRects: [self.purpleButton.frame],
+                    defaultColor: 0x00aeef,
+                    selectedColor: self.fields[0].text.color,
+                    alpha: 0.5
+                )
+            }, set: { fieldSettings in
+                self.fields[0].text.color = fieldSettings.selectedColor
+                self.fields[0].text.colorAlpha = fieldSettings.alpha
+            }
+        )
+        
+        let popover = Popover.fieldSettings(binding)
+        popoverModel.popovers.append(popover)
     }
     
     @IBAction func listPressed(_ sender: Any) {

@@ -22,22 +22,25 @@ enum Popover: Identifiable {
         }
     }
     
-    case fieldSettings(Binding<Configuration.FieldSettings>)
-    
-    struct Configuration {
-        struct FieldSettings: PopoverContext {
-            let id = UUID()
-            
-            var origin: CGPoint = .zero
-            var size: CGSize = .zero
-            var keepPresentedRects: [CGRect] = []
-            
-            var defaultColor: UInt = 0
-            var selectedColor: UInt = 0
-            var alpha: CGFloat = 1
-        }
+    case fieldSettings(Binding<PopoverConfiguration.FieldSettings>)
+}
+struct PopoverConfiguration {
+    struct FieldSettings: PopoverContext {
+        let id = UUID()
+        
+        var origin: CGPoint = .zero
+        var size: CGSize = .zero
+        var keepPresentedRects: [CGRect] = []
+        
+        var defaultColor: UInt = 0
+        var selectedColor: UInt = 0
+        var alpha: CGFloat = 1
     }
 }
+//}
+//protocol Popover: Identifiable {
+//
+//}
 protocol PopoverContext: Identifiable {
     
     /// position of the popover

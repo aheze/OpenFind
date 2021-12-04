@@ -13,8 +13,12 @@ class PopoverController {
     var popoverModel: PopoverModel
     var windowScene: UIWindowScene
     
-    lazy var newWindow: UIWindow = {
-        let window = UIWindow(windowScene: windowScene)
+    lazy var newWindow: PopoverContainerWindow = {
+        let window = PopoverContainerWindow(windowScene: windowScene)
+        window.dismiss = { [weak self] in
+            guard let self = self else { return }
+            self.popoverModel.popovers.removeAll()
+        }
         return window
     }()
     

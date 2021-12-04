@@ -22,7 +22,20 @@ struct PopoverContainerView: View {
                 case .fieldSettings(let configuration):
                     FieldSettingsView(configuration: configuration)
                         .writeSize(to: configuration.size)
+                default:
+                    Text("No Enum value set.")
                 }
+//                switch popover.wrappedValue {
+//                case let fieldSettings as PopoverConfiguration.FieldSettings:
+//                    Text("hi")
+//                default:
+//                    Text("huh")
+//                }
+//                switch popover {
+//                case .fieldSettings(let configuration):
+//                    FieldSettingsView(configuration: configuration)
+//                        .writeSize(to: configuration.size)
+//                }
             }
 //            if let fieldSettings = Binding($popoverModel.fieldSettings) {
 //                FieldSettingsView(configuration: fieldSettings)
