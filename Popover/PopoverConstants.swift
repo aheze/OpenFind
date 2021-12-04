@@ -10,4 +10,5 @@ import SwiftUI
 
 struct PopoverConstants {
     static var buttonColor = UIColor(named: "Popover Button Color") ?? .blue
+    static var rubberBandingPower = CGFloat(0.7)
 }

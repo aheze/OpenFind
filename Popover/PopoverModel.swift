@@ -13,7 +13,11 @@ class PopoverModel: ObservableObject {
     @Published var popovers = [Popover]()
 }
 
-enum Popover: Identifiable {
+enum Popover: Identifiable, Equatable {
+    static func == (lhs: Popover, rhs: Popover) -> Bool {
+        lhs.id == rhs.id
+    }
+    
     var id: UUID {
         let context = extractContext()
         return context.id
@@ -62,6 +66,14 @@ struct PopoverConfiguration {
         
         var propertiesChanged: ((Self) -> Void)?
     }
+    struct Tip {
+        var popoverContext = PopoverContext()
+        
+        var text = "No Results"
+        var pressed: (() -> Void)?
+        
+        var propertiesChanged: ((Self) -> Void)?
+    }
 }
 struct PopoverContext: Identifiable {
     var id = UUID()
@@ -76,3 +88,6 @@ struct PopoverContext: Identifiable {
     var keepPresentedRects: [CGRect] = []
     
 }
+
+
+

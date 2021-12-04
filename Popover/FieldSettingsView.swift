@@ -248,7 +248,7 @@ struct OpacitySlider: View {
                             width: FieldSettingsConstants.sliderHeight + value * (proxy.size.width - FieldSettingsConstants.sliderHeight)
                         )
                     , alignment: .leading)
-                .gesture(
+                .highPriorityGesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged { value in
                             self.value = min(max(0, CGFloat(value.location.x / proxy.size.width)), 1)
