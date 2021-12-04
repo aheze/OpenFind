@@ -406,7 +406,7 @@
 		3C4D3B9D27477ABD0010FD68 /* RightView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8C27477ABC0010FD68 /* RightView.xib */; };
 		3C4D3B9E27477ABD0010FD68 /* LeftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8D27477ABC0010FD68 /* LeftView.xib */; };
 		3C4D3B9F27477ABD0010FD68 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8E27477ABC0010FD68 /* Bridge.swift */; };
-		3C4D3BA027477ABD0010FD68 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8F27477ABC0010FD68 /* Utilities.swift */; };
+		3C4D3BA027477ABD0010FD68 /* SearchUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8F27477ABC0010FD68 /* SearchUtilities.swift */; };
 		3C4D3BA127477ABD0010FD68 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9027477ABC0010FD68 /* SearchViewController.swift */; };
 		3C4D3BA227477ABD0010FD68 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9127477ABC0010FD68 /* Field.swift */; };
 		3C4D3BA327477B8A0010FD68 /* Utilities+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A927475DAD0010FD68 /* Utilities+UIViewController.swift */; };
@@ -605,7 +605,7 @@
 		3CB98A78275B217900A6B1B9 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B9127477ABC0010FD68 /* Field.swift */; };
 		3CB98A79275B217900A6B1B9 /* SearchCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8227477ABC0010FD68 /* SearchCollectionView.swift */; };
 		3CB98A7A275B217900A6B1B9 /* SearchCV+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8527477ABC0010FD68 /* SearchCV+Datasource.swift */; };
-		3CB98A7B275B217900A6B1B9 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8F27477ABC0010FD68 /* Utilities.swift */; };
+		3CB98A7B275B217900A6B1B9 /* SearchUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8F27477ABC0010FD68 /* SearchUtilities.swift */; };
 		3CB98A7C275B217900A6B1B9 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8E27477ABC0010FD68 /* Bridge.swift */; };
 		3CB98A7D275B219100A6B1B9 /* ListsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D19E6275A93700064F2C6 /* ListsViewModel.swift */; };
 		3CB98A7E275B22B300A6B1B9 /* LeftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8927477ABC0010FD68 /* LeftView.swift */; };
@@ -1095,7 +1095,7 @@
 		3C4D3B8C27477ABC0010FD68 /* RightView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightView.xib; sourceTree = "<group>"; };
 		3C4D3B8D27477ABC0010FD68 /* LeftView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftView.xib; sourceTree = "<group>"; };
 		3C4D3B8E27477ABC0010FD68 /* Bridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
-		3C4D3B8F27477ABC0010FD68 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		3C4D3B8F27477ABC0010FD68 /* SearchUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUtilities.swift; sourceTree = "<group>"; };
 		3C4D3B9027477ABC0010FD68 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		3C4D3B9127477ABC0010FD68 /* Field.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		3C4DE6F4259AD3FF0037D104 /* SaveToPhotosButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaveToPhotosButton.xib; sourceTree = "<group>"; };
@@ -2058,7 +2058,7 @@
 				3C4D3B8127477ABC0010FD68 /* SearchCollectionViewFlowLayout.swift */,
 				3C4D3B8527477ABC0010FD68 /* SearchCV+Datasource.swift */,
 				3C4D3B8627477ABC0010FD68 /* SearchCV+Delegate.swift */,
-				3C4D3B8F27477ABC0010FD68 /* Utilities.swift */,
+				3C4D3B8F27477ABC0010FD68 /* SearchUtilities.swift */,
 				3C4D3B8427477ABC0010FD68 /* Assets.xcassets */,
 				3C4D3B44274777030010FD68 /* Testing */,
 			);
@@ -3732,7 +3732,7 @@
 				3C1D1A19275AA16C0064F2C6 /* UIKitViews.swift in Sources */,
 				3CB98A78275B217900A6B1B9 /* Field.swift in Sources */,
 				3C1D1A23275AA21B0064F2C6 /* TabViewModel.swift in Sources */,
-				3CB98A7B275B217900A6B1B9 /* Utilities.swift in Sources */,
+				3CB98A7B275B217900A6B1B9 /* SearchUtilities.swift in Sources */,
 				3CB98A76275B217900A6B1B9 /* SearchViewController.swift in Sources */,
 				3CB98A75275B217900A6B1B9 /* SearchCV+Delegate.swift in Sources */,
 				3C1D19F5275A9F390064F2C6 /* AppDelegate.swift in Sources */,
@@ -4003,7 +4003,7 @@
 				3C4D3B9327477ABD0010FD68 /* SearchCollectionViewFlowLayout.swift in Sources */,
 				3C4D3B9727477ABD0010FD68 /* SearchCV+Datasource.swift in Sources */,
 				3C1D1A13275AA0E20064F2C6 /* SwiftUIViews.swift in Sources */,
-				3C4D3BA027477ABD0010FD68 /* Utilities.swift in Sources */,
+				3C4D3BA027477ABD0010FD68 /* SearchUtilities.swift in Sources */,
 				3C4D3BA227477ABD0010FD68 /* Field.swift in Sources */,
 				3C4D3B9427477ABD0010FD68 /* SearchCollectionView.swift in Sources */,
 				3C4D3B67274777E40010FD68 /* AppDelegate.swift in Sources */,

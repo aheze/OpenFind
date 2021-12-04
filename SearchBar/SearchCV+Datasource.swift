@@ -22,7 +22,7 @@ extension SearchViewController: UICollectionViewDataSource {
         cell.fieldChanged = { [weak self] field in
             self?.searchViewModel.fields[indexPath.item] = field
         }
-        cell.leftView.imageView.tintColor = UIColor(hex: field.text.color)
+        cell.leftView.imageView.tintColor = field.text.color
         
         /// setup constraints
         let (setup, _, _) = cell.showAddNew(true, changeColorOnly: false)

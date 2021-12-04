@@ -41,3 +41,21 @@ extension UIColor {
         }
     }
 }
+
+/// get gradient color for search bar field
+extension UIColor {
+    func getFieldColor(for index: Int) -> UIColor {
+        let (h, s, b, a) = self.hsba
+        let gradation = CGFloat(1) / 30
+        let offset = gradation * CGFloat(index)
+        let newHue = h + offset
+        let normalizedHue = newHue.truncatingRemainder(dividingBy: 1)
+        return UIColor(hue: normalizedHue, saturation: s, brightness: b, alpha: a)
+    }
+    
+    var hsba: (h: CGFloat, s: CGFloat, b: CGFloat, a: CGFloat) {
+        var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+        self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+        return (h: h, s: s, b: b, a: a)
+    }
+}

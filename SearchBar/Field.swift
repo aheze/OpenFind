@@ -9,12 +9,12 @@ import UIKit
 
 struct Field {
     
-    init(text: Text) {
+    init(text: Text, index: Int = 0) {
         self.text = text
         fieldHuggingWidth = self.getFieldHuggingWidth()
     }
     
-    var text = Text(value: .string("")) {
+    var text = Text(value: .string(""), colorIndex: 0) {
         didSet {
             fieldHuggingWidth = self.getFieldHuggingWidth()
         }
@@ -53,27 +53,30 @@ struct Field {
             didSet {
                 switch value {
                 case .string(_):
-                    self.color = 0x00aeef
+                    self.color = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
                 case .list(let list):
-                    self.color = list.iconColorName
+                    self.color = UIColor(hex: list.iconColorName)
                 case .addNew(_):
-                    self.color = 0x00aeef
+                    self.color = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
                 }
             }
         }
         
-        var color: UInt
+        var color: UIColor
+        var colorIndex: Int
         var colorAlpha: CGFloat = 1
         
-        init(value: Value) {
+        init(value: Value, colorIndex: Int) {
             self.value = value
+            self.colorIndex = colorIndex
+            
             switch value {
             case .string(_):
-                self.color = 0x00aeef
+                self.color = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
             case .list(let list):
-                self.color = list.iconColorName
+                self.color = UIColor(hex: list.iconColorName)
             case .addNew(_):
-                self.color = 0x00aeef
+                self.color = Constants.defaultHighlightColor.getFieldColor(for: colorIndex)
             }
         }
     }

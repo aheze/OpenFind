@@ -66,7 +66,7 @@ class SearchFieldCell: UICollectionViewCell {
         self.fieldChanged?(field)
     }
     
-    var field = Field(text: .init(value: .string(""))) {
+    var field = Field(text: .init(value: .string(""), colorIndex: 0)) {
         
         /// perform instant updates, no animation
         didSet {

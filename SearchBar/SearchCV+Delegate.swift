@@ -90,7 +90,7 @@ extension SearchViewController: UICollectionViewDelegate {
         searchCollectionViewFlowLayout.highlightingAddWordField = false
         
         /// append new "Add New" cell
-        let newField = Field(text: .init(value: .addNew("")))
+        let newField = Field(text: .init(value: .addNew(""), colorIndex: searchViewModel.fields.count))
         searchViewModel.fields.append(newField)
         
         let indexOfLastField = searchViewModel.fields.count - 2 /// index of the last field (not including "Add New" cell)

@@ -1,5 +1,5 @@
 //
-//  Utilities.swift
+//  SearchUtilities.swift
 //  SearchBar
 //
 //  Created by Zheng on 10/14/21.

@@ -50,8 +50,8 @@ struct PopoverConfiguration {
     struct FieldSettings {
         var popoverContext = PopoverContext()
         
-        var defaultColor: UInt = 0
-        var selectedColor: UInt = 0
+        var defaultColor: UIColor = UIColor(hex: 0x00aeef)
+        var selectedColor: UIColor = UIColor(hex: 0x00aeef)
         var alpha: CGFloat = 1
         
         var propertiesChanged: ((Self) -> Void)?

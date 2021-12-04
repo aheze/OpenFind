@@ -52,7 +52,7 @@ class ViewController: UIViewController {
                 position: self.listLabel.popoverOrigin(anchor: .bottomLeft),
                 keepPresentedRects: [self.purpleButton.frame]
             ),
-            defaultColor: 0x00aeef,
+            defaultColor: self.fields[0].text.color,
             selectedColor: self.fields[0].text.color,
             alpha: self.fields[0].text.colorAlpha
         ) { [weak self] newConfiguration in

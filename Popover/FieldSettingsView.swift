@@ -35,13 +35,13 @@ struct FieldSettingsView: View {
                 .foregroundColor(.white)
                 .shadow(color: Color.black.opacity(0.25), radius: 3, x: 0, y: 1)
                 .padding(EdgeInsets(top: 10, leading: 12, bottom: 8, trailing: 12))
-                .background(UIColor(hex: configuration.defaultColor).color)
+                .background(configuration.defaultColor.color)
                 .cornerRadius(FieldSettingsConstants.cornerRadius)
                 
                 PaletteView()
                     .cornerRadius(FieldSettingsConstants.cornerRadius)
                 
-                OpacitySlider(value: $configuration.alpha, color: UIColor(hex: configuration.selectedColor))
+                OpacitySlider(value: $configuration.alpha, color: configuration.selectedColor)
                     .frame(height: FieldSettingsConstants.sliderHeight)
                     .cornerRadius(FieldSettingsConstants.cornerRadius)
             }
