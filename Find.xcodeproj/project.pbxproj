@@ -539,6 +539,15 @@
 		3C7BAD9A275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
 		3C7BAD9B275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
 		3C7BAD9C275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
+		3C7BAD9E275C10BF0030F0D2 /* PopoverConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD9D275C10BF0030F0D2 /* PopoverConstants.swift */; };
+		3C7BAD9F275C10BF0030F0D2 /* PopoverConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD9D275C10BF0030F0D2 /* PopoverConstants.swift */; };
+		3C7BADA0275C10BF0030F0D2 /* PopoverConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD9D275C10BF0030F0D2 /* PopoverConstants.swift */; };
+		3C7BADA1275C10BF0030F0D2 /* PopoverConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD9D275C10BF0030F0D2 /* PopoverConstants.swift */; };
+		3C7BADA2275C10BF0030F0D2 /* PopoverConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD9D275C10BF0030F0D2 /* PopoverConstants.swift */; };
+		3C7BADA3275C10BF0030F0D2 /* PopoverConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD9D275C10BF0030F0D2 /* PopoverConstants.swift */; };
+		3C7BADA4275C10BF0030F0D2 /* PopoverConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD9D275C10BF0030F0D2 /* PopoverConstants.swift */; };
+		3C7BADA5275C10BF0030F0D2 /* PopoverConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD9D275C10BF0030F0D2 /* PopoverConstants.swift */; };
+		3C7BADA6275C10BF0030F0D2 /* PopoverConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD9D275C10BF0030F0D2 /* PopoverConstants.swift */; };
 		3C7EAB2C25C0A97800264B63 /* PhotosVC+Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7EAB2B25C0A97800264B63 /* PhotosVC+Tutorial.swift */; };
 		3C84F97825C3A4160066A360 /* ViewController+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F97725C3A4160066A360 /* ViewController+Defaults.swift */; };
 		3C84F97B25C3AB1B0066A360 /* CameraVC+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F97A25C3AB1B0066A360 /* CameraVC+Settings.swift */; };
@@ -1213,6 +1222,7 @@
 		3C7B1D4B2757E84F006525B1 /* CameraToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraToolbarView.swift; sourceTree = "<group>"; };
 		3C7B1D6E2757EEFA006525B1 /* CameraVC+LivePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+LivePreview.swift"; sourceTree = "<group>"; };
 		3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+Math.swift"; sourceTree = "<group>"; };
+		3C7BAD9D275C10BF0030F0D2 /* PopoverConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverConstants.swift; sourceTree = "<group>"; };
 		3C7EAB2B25C0A97800264B63 /* PhotosVC+Tutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Tutorial.swift"; sourceTree = "<group>"; };
 		3C84F97725C3A4160066A360 /* ViewController+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Defaults.swift"; sourceTree = "<group>"; };
 		3C84F97A25C3AB1B0066A360 /* CameraVC+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Settings.swift"; sourceTree = "<group>"; };
@@ -1603,6 +1613,7 @@
 			isa = PBXGroup;
 			children = (
 				3CB98A6A275AFAF900A6B1B9 /* PopoverModel.swift */,
+				3C7BAD9D275C10BF0030F0D2 /* PopoverConstants.swift */,
 				3C1D1A08275A9FB30064F2C6 /* PopoverController.swift */,
 				3CB98A84275B28DE00A6B1B9 /* PopoverContainerWindow.swift */,
 				3CB98A6E275B150300A6B1B9 /* PopoverContainerViewController.swift */,
@@ -3738,6 +3749,7 @@
 				3C1D19F5275A9F390064F2C6 /* AppDelegate.swift in Sources */,
 				3CB98A77275B217900A6B1B9 /* SearchViewModel.swift in Sources */,
 				3C1D1A10275AA0DB0064F2C6 /* SwiftUIViews.swift in Sources */,
+				3C7BADA6275C10BF0030F0D2 /* PopoverConstants.swift in Sources */,
 				3CB98A7E275B22B300A6B1B9 /* LeftView.swift in Sources */,
 				3CB98A7F275B22B300A6B1B9 /* RightView.swift in Sources */,
 				3C1D1A0B275AA08D0064F2C6 /* FieldSettingsView.swift in Sources */,
@@ -3760,6 +3772,7 @@
 				3C4D3A22274767970010FD68 /* PhotosViewController.swift in Sources */,
 				3C4D3A1C274767410010FD68 /* ContentCell.swift in Sources */,
 				3C4D3A8327476A260010FD68 /* ListsController.swift in Sources */,
+				3C7BAD9F275C10BF0030F0D2 /* PopoverConstants.swift in Sources */,
 				3CE9C21C274E0076008C903C /* LivePreviewVC+Zoom.swift in Sources */,
 				3C4D3A1E274767410010FD68 /* TabBarView.swift in Sources */,
 				3C4D3A1B274767410010FD68 /* ContentPagingFlowLayout.swift in Sources */,
@@ -3838,6 +3851,7 @@
 				3C4D39C227475E2C0010FD68 /* GeneralUtilities.swift in Sources */,
 				3CE9C1E8274B4427008C903C /* FallbackView.swift in Sources */,
 				3C119973274B32D900D6AFE3 /* LivePreviewViewController.swift in Sources */,
+				3C7BADA0275C10BF0030F0D2 /* PopoverConstants.swift in Sources */,
 				3C1D1A42275AA25F0064F2C6 /* Utilities+SwiftUI.swift in Sources */,
 				3CE9C21B274DFC4D008C903C /* LivePreviewVC+Zoom.swift in Sources */,
 				3CE9C1F6274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
@@ -3879,6 +3893,7 @@
 				3C4D39FC274766790010FD68 /* TabBarViewController.swift in Sources */,
 				3C4D3A77274769660010FD68 /* Constants.swift in Sources */,
 				3C1D19EA275A983D0064F2C6 /* ListsViewModel.swift in Sources */,
+				3C7BADA1275C10BF0030F0D2 /* PopoverConstants.swift in Sources */,
 				3C4D39F3274766790010FD68 /* ToolbarViewModel.swift in Sources */,
 				3C4D39EF274766590010FD68 /* PhotosBridge.swift in Sources */,
 				3C4D39F2274766790010FD68 /* ContentPagingFlowLayout.swift in Sources */,
@@ -3916,6 +3931,7 @@
 				3C4D3A742747694F0010FD68 /* TabBarViewController.swift in Sources */,
 				3C4D3A78274769660010FD68 /* Constants.swift in Sources */,
 				3C1D19E7275A93700064F2C6 /* ListsViewModel.swift in Sources */,
+				3C7BADA2275C10BF0030F0D2 /* PopoverConstants.swift in Sources */,
 				3C4D3A67274769370010FD68 /* ListsController.swift in Sources */,
 				3C4D3A722747694F0010FD68 /* ContentPagingFlowLayout.swift in Sources */,
 				3C4D3A6B2747694F0010FD68 /* ContentPageViewController.swift in Sources */,
@@ -3958,6 +3974,7 @@
 				3C1D1A36275AA25D0064F2C6 /* Utilities+SwiftUI.swift in Sources */,
 				3C4D3B20274776D20010FD68 /* SettingsViewModifiers.swift in Sources */,
 				3C4D3B25274776D20010FD68 /* ResetSettingsView.swift in Sources */,
+				3C7BADA3275C10BF0030F0D2 /* PopoverConstants.swift in Sources */,
 				3C4D3B2A274776E00010FD68 /* ViewController.swift in Sources */,
 				3C1D1A3B275AA25D0064F2C6 /* Utilities+Constraints.swift in Sources */,
 				3C4D3B29274776DF0010FD68 /* SceneDelegate.swift in Sources */,
@@ -4020,6 +4037,7 @@
 				3C4D3B9C27477ABD0010FD68 /* RightView.swift in Sources */,
 				3C4D3BA327477B8A0010FD68 /* Utilities+UIViewController.swift in Sources */,
 				3C1D1A24275AA21F0064F2C6 /* TabViewModel.swift in Sources */,
+				3C7BADA4275C10BF0030F0D2 /* PopoverConstants.swift in Sources */,
 				3C1D19E52759F2320064F2C6 /* SearchViewModel.swift in Sources */,
 				3C4D20A32750A6CB00090AF9 /* Utilities+UIColor.swift in Sources */,
 				3C4D3B9827477ABD0010FD68 /* SearchCV+Delegate.swift in Sources */,
@@ -4111,6 +4129,7 @@
 				3C1D1A2E275AA25B0064F2C6 /* Utilities+UIFont.swift in Sources */,
 				3CBEAC1227549B9600D04B39 /* Tracking.swift in Sources */,
 				3CBEAC0E2754867300D04B39 /* GeneralUtilities.swift in Sources */,
+				3C7BADA5275C10BF0030F0D2 /* PopoverConstants.swift in Sources */,
 				3C4D209E2750A48500090AF9 /* VisionFindingEngine.swift in Sources */,
 				3CBEAC0B2753584800D04B39 /* VC+DrawTrackers.swift in Sources */,
 				3C1D1A15275AA0E20064F2C6 /* SwiftUIViews.swift in Sources */,
@@ -4215,6 +4234,7 @@
 				3CE9C1F4274B4A78008C903C /* Utilities+UIFont.swift in Sources */,
 				49A8EFAC237A5EFE00328D47 /* SetupStats.swift in Sources */,
 				3CF0421225C251C600E29FA6 /* PhotosVC+Tips.swift in Sources */,
+				3C7BAD9E275C10BF0030F0D2 /* PopoverConstants.swift in Sources */,
 				3C22D3D02702D578001E8474 /* PagingView.swift in Sources */,
 				3CAC4DCA25BF5E1600CC7948 /* CameraVC+HandleCache.swift in Sources */,
 				3CA9336A25BE0BD600042C2F /* CameraVC+FindWhenPaused.swift in Sources */,

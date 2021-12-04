@@ -51,13 +51,13 @@ class ViewController: UIViewController {
             ),
             defaultColor: self.fields[0].text.color,
             selectedColor: self.fields[0].text.color,
-            alpha: self.fields[0].text.colorAlpha
-        ) { [weak self] newConfiguration in
+            alpha: self.fields[0].text.colorAlpha,
+            propertiesChanged:  { [weak self] newConfiguration in
                 guard let self = self else { return }
                 self.fields[0].text.color = newConfiguration.selectedColor
                 self.fields[0].text.colorAlpha = newConfiguration.alpha
-    
-        }
+                
+            })
         let popover = Popover.fieldSettings(configuration)
         withAnimation {
             popoverModel.popovers.append(popover)
@@ -74,9 +74,19 @@ class ViewController: UIViewController {
                     self.purpleButton.windowFrame()
                 ]
             ),
+            header: "LIST",
             defaultColor: self.fields[0].text.color,
             selectedColor: self.fields[0].text.color,
-            alpha: self.fields[0].text.colorAlpha
+            alpha: self.fields[0].text.colorAlpha,
+            words: ["Hello", "Other word"],
+            editListPressed: {
+                print("Edit")
+                if let existingFieldSettingsPopoverIndex = self.indexOfExistingFieldPopover() {
+                    withAnimation {
+                        self.popoverModel.popovers.remove(at: existingFieldSettingsPopoverIndex)
+                    }
+                }
+            }
         ) { [weak self] newConfiguration in
                 guard let self = self else { return }
                 self.fields[0].text.color = newConfiguration.selectedColor
@@ -85,13 +95,7 @@ class ViewController: UIViewController {
         }
         
         
-        if let existingFieldSettingsPopoverIndex = popoverModel.popovers.indices.first(where: { index in
-            if case .fieldSettings(_) = popoverModel.popovers[index] {
-                return true
-            } else {
-                return false
-            }
-        }) {
+        if let existingFieldSettingsPopoverIndex = indexOfExistingFieldPopover() {
             withAnimation {
                 
                 /// use same ID for smooth position animation
@@ -107,6 +111,15 @@ class ViewController: UIViewController {
         }
     }
     
+    func indexOfExistingFieldPopover() -> Int? {
+        return popoverModel.popovers.indices.first(where: { index in
+            if case .fieldSettings(_) = popoverModel.popovers[index] {
+                return true
+            } else {
+                return false
+            }
+        })
+    }
     
     @IBAction func tipPressed(_ sender: Any) {
     }
@@ -131,4 +144,5 @@ class ViewController: UIViewController {
 
 
 }
+
 

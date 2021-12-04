@@ -18,35 +18,106 @@ struct FieldSettingsView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Text("WORD")
+            Button {
+                if configuration.showingWords {
+                    withAnimation {
+                        configuration.showingWords = false
+                    }
+                }
+            } label: {
+                HStack(spacing: 4) {
+                    if configuration.showingWords {
+                        Image(systemName: "chevron.backward")
+                    }
+                    
+                    Text(configuration.header)
+                }
                 .foregroundColor(.white)
                 .font(.system(size: 12, weight: .semibold))
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(EdgeInsets(top: 12, leading: 12, bottom: 8, trailing: 12))
+                .padding(EdgeInsets(top: 12, leading: 12, bottom: 0, trailing: 12))
+            }
+            .disabled(!configuration.showingWords)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.bottom, 10)
             
             Line()
             
+            
+            /// main content
             VStack(spacing: 10) {
-                HStack {
-                    Text("Default")
-                    Spacer()
-                    Image(systemName: "checkmark")
+                VStack(spacing: 10) {
+                    Button {
+                        withAnimation {
+                            configuration.selectedColor = configuration.defaultColor
+                        }
+                    } label: {
+                        HStack {
+                            Text("Default")
+                            Spacer()
+                            Image(systemName: "checkmark")
+                                .opacity(configuration.defaultColor == configuration.selectedColor ? 1 : 0)
+                        }
+                        .shadow(color: Color.black.opacity(0.25), radius: 3, x: 0, y: 1)
+                        .modifier(PopoverButtonModifier(backgroundColor: configuration.defaultColor))
+                    }
+                    
+                    
+                    PaletteView(selectedColor: $configuration.selectedColor)
+                        .cornerRadius(FieldSettingsConstants.cornerRadius)
+                    
+                    OpacitySlider(value: $configuration.alpha, color: configuration.selectedColor)
+                        .frame(height: FieldSettingsConstants.sliderHeight)
+                        .cornerRadius(FieldSettingsConstants.cornerRadius)
                 }
-                .foregroundColor(.white)
-                .shadow(color: Color.black.opacity(0.25), radius: 3, x: 0, y: 1)
-                .padding(EdgeInsets(top: 10, leading: 12, bottom: 8, trailing: 12))
-                .background(configuration.defaultColor.color)
-                .cornerRadius(FieldSettingsConstants.cornerRadius)
+                .padding(.horizontal, 12)
                 
-                PaletteView()
-                    .cornerRadius(FieldSettingsConstants.cornerRadius)
-                
-                OpacitySlider(value: $configuration.alpha, color: configuration.selectedColor)
-                    .frame(height: FieldSettingsConstants.sliderHeight)
-                    .cornerRadius(FieldSettingsConstants.cornerRadius)
+                if !configuration.words.isEmpty {
+                    Line()
+                    
+                    VStack {
+                        Button {
+                            withAnimation {
+                                configuration.showingWords = true
+                            }
+                        } label: {
+                            Text("Show Words")
+                                .modifier(PopoverButtonModifier(backgroundColor: PopoverConstants.buttonColor))
+                            
+                        }
+                        
+                        if let editListPressed = configuration.editListPressed {
+                            Button {
+                                editListPressed()
+                            } label: {
+                                Text("Edit List")
+                                    .modifier(PopoverButtonModifier(backgroundColor: PopoverConstants.buttonColor))
+                                
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 12)
+                }
             }
-            .padding(12)
+            .padding(.top, 10)
+            .offset(x: configuration.showingWords ? -180 : 0, y: 0)
+            .opacity(configuration.showingWords ? 0 : 1)
+            .background(
+                ScrollView {
+                    VStack {
+                        ForEach(configuration.words, id: \.self) { word in
+                            let _ = print("word: \(word)")
+                            Text(verbatim: word)
+                                .modifier(PopoverButtonModifier(backgroundColor: PopoverConstants.buttonColor))
+                        }
+                    }
+                    .padding(.top, 10)
+                    .padding(.horizontal, 12)
+                }
+                    .offset(x: configuration.showingWords ? 0 : 180, y: 0)
+                    .opacity(configuration.showingWords ? 1 : 0)
+                , alignment: .top)
         }
+        .padding(.bottom, 12)
         .frame(width: 180)
         .background(
             ZStack {
@@ -58,26 +129,42 @@ struct FieldSettingsView: View {
     }
 }
 
+
+
+struct PopoverButtonModifier: ViewModifier {
+    var backgroundColor: UIColor
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(EdgeInsets(top: 10, leading: 12, bottom: 8, trailing: 12))
+            .background(backgroundColor.color)
+            .cornerRadius(FieldSettingsConstants.cornerRadius)
+    }
+}
+
+
 struct PaletteView: View {
+    @Binding var selectedColor: UIColor
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
-                PaletteButton(colorHex: 0xFF0000)
-                PaletteButton(colorHex: 0xFFB100)
-                PaletteButton(colorHex: 0xFFE600)
-                PaletteButton(colorHex: 0x39DD00)
-                PaletteButton(colorHex: 0x00AEEF)
-                PaletteButton(colorHex: 0x0036FF)
+                PaletteButton(color: UIColor(hex: 0xFF0000), selectedColor: $selectedColor)
+                PaletteButton(color: UIColor(hex: 0xFFB100), selectedColor: $selectedColor)
+                PaletteButton(color: UIColor(hex: 0xFFE600), selectedColor: $selectedColor)
+                PaletteButton(color: UIColor(hex: 0x39DD00), selectedColor: $selectedColor)
+                PaletteButton(color: UIColor(hex: 0x00AEEF), selectedColor: $selectedColor)
+                PaletteButton(color: UIColor(hex: 0x0036FF), selectedColor: $selectedColor)
             }
             .aspectRatio(6, contentMode: .fit)
             
             HStack(spacing: 0) {
-                PaletteButton(colorHex: 0xFF7700)
-                PaletteButton(colorHex: 0xFFD200)
-                PaletteButton(colorHex: 0xE4FF43)
-                PaletteButton(colorHex: 0x00FF93)
-                PaletteButton(colorHex: 0x0091FF)
-                PaletteButton(colorHex: 0x7A00FF)
+                PaletteButton(color: UIColor(hex: 0xFF7700), selectedColor: $selectedColor)
+                PaletteButton(color: UIColor(hex: 0xFFD200), selectedColor: $selectedColor)
+                PaletteButton(color: UIColor(hex: 0xE4FF43), selectedColor: $selectedColor)
+                PaletteButton(color: UIColor(hex: 0x00FF93), selectedColor: $selectedColor)
+                PaletteButton(color: UIColor(hex: 0x0091FF), selectedColor: $selectedColor)
+                PaletteButton(color: UIColor(hex: 0x7A00FF), selectedColor: $selectedColor)
             }
             .aspectRatio(6, contentMode: .fit)
         }
@@ -85,13 +172,22 @@ struct PaletteView: View {
 }
 
 struct PaletteButton: View {
-    let colorHex: UInt
-    //    var selectedColor
+    let color: UIColor
+    @Binding var selectedColor: UIColor
     var body: some View {
         Button {
-            print("\(colorHex) pressed")
+            withAnimation {
+                selectedColor = color
+            }
         } label: {
-            UIColor(hex: colorHex).color
+            color.color
+                .overlay(
+                    Image(systemName: "checkmark")
+                        .foregroundColor(.white)
+                        .font(.system(size: 15, weight: .medium))
+                        .shadow(color: Color.black.opacity(0.25), radius: 3, x: 0, y: 1)
+                        .opacity(color == selectedColor ? 1 : 0)
+                )
         }
     }
 }
@@ -122,7 +218,8 @@ struct OpacitySlider: View {
                         }
                     }
                     
-                    LinearGradient(colors: [.clear, color.color], startPoint: .leading, endPoint: .trailing)
+                    LinearGradient(colors: [.clear, .white], startPoint: .leading, endPoint: .trailing)
+                        .colorMultiply(color.color)
                 }
             )
             
@@ -158,6 +255,7 @@ struct OpacitySlider: View {
                         }
                 )
         }
+        .drawingGroup() /// prevent thumb from disappearing when offset to show words
     }
 }
 

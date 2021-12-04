@@ -50,9 +50,15 @@ struct PopoverConfiguration {
     struct FieldSettings {
         var popoverContext = PopoverContext()
         
+        var header = "WORD"
         var defaultColor: UIColor = UIColor(hex: 0x00aeef)
         var selectedColor: UIColor = UIColor(hex: 0x00aeef)
         var alpha: CGFloat = 1
+        
+        /// lists
+        var words = [String]()
+        var showingWords = false
+        var editListPressed: (() -> Void)?
         
         var propertiesChanged: ((Self) -> Void)?
     }
