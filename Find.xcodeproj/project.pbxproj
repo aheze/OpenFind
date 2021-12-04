@@ -530,6 +530,15 @@
 		3C7B1D4D2757E8F9006525B1 /* CameraToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D4B2757E84F006525B1 /* CameraToolbarView.swift */; };
 		3C7B1D6F2757EEFA006525B1 /* CameraVC+LivePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D6E2757EEFA006525B1 /* CameraVC+LivePreview.swift */; };
 		3C7B1D702757EF32006525B1 /* CameraVC+LivePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B1D6E2757EEFA006525B1 /* CameraVC+LivePreview.swift */; };
+		3C7BAD94275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
+		3C7BAD95275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
+		3C7BAD96275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
+		3C7BAD97275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
+		3C7BAD98275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
+		3C7BAD99275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
+		3C7BAD9A275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
+		3C7BAD9B275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
+		3C7BAD9C275B306C0030F0D2 /* Utilities+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */; };
 		3C7EAB2C25C0A97800264B63 /* PhotosVC+Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7EAB2B25C0A97800264B63 /* PhotosVC+Tutorial.swift */; };
 		3C84F97825C3A4160066A360 /* ViewController+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F97725C3A4160066A360 /* ViewController+Defaults.swift */; };
 		3C84F97B25C3AB1B0066A360 /* CameraVC+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F97A25C3AB1B0066A360 /* CameraVC+Settings.swift */; };
@@ -1203,6 +1212,7 @@
 		3C7B1D4927571E8D006525B1 /* VisionSamplingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionSamplingEngine.swift; sourceTree = "<group>"; };
 		3C7B1D4B2757E84F006525B1 /* CameraToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraToolbarView.swift; sourceTree = "<group>"; };
 		3C7B1D6E2757EEFA006525B1 /* CameraVC+LivePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+LivePreview.swift"; sourceTree = "<group>"; };
+		3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+Math.swift"; sourceTree = "<group>"; };
 		3C7EAB2B25C0A97800264B63 /* PhotosVC+Tutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Tutorial.swift"; sourceTree = "<group>"; };
 		3C84F97725C3A4160066A360 /* ViewController+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Defaults.swift"; sourceTree = "<group>"; };
 		3C84F97A25C3AB1B0066A360 /* CameraVC+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Settings.swift"; sourceTree = "<group>"; };
@@ -1878,6 +1888,7 @@
 				3C4D39C927475EBD0010FD68 /* Utilities+UIColor.swift */,
 				3CE9C1F3274B4A78008C903C /* Utilities+UIFont.swift */,
 				3CE9C204274B704E008C903C /* Utilities+UIDevice.swift */,
+				3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -3733,6 +3744,7 @@
 				3CB98A71275B1AE800A6B1B9 /* PopoverUtilities.swift in Sources */,
 				3C1D19F7275A9F390064F2C6 /* SceneDelegate.swift in Sources */,
 				3C1D1A29275AA25B0064F2C6 /* Utilities+Dates.swift in Sources */,
+				3C7BAD9C275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3CB98A85275B28DE00A6B1B9 /* PopoverContainerWindow.swift in Sources */,
 				3C1D1A26275AA25B0064F2C6 /* Utilities+UIViewController.swift in Sources */,
 				3C1D1A0C275AA0A00064F2C6 /* GeneralUtilities.swift in Sources */,
@@ -3765,6 +3777,7 @@
 				3CE9C214274DE343008C903C /* Debug.swift in Sources */,
 				3CE9C201274B4F05008C903C /* ZoomView+Constants.swift in Sources */,
 				3C4D3A1F274767410010FD68 /* TabBarController.swift in Sources */,
+				3C7BAD95275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3C1D1A1C275AA1710064F2C6 /* UIKitViews.swift in Sources */,
 				3C4D396427475A650010FD68 /* AppDelegate.swift in Sources */,
 				3C4D3962274759A40010FD68 /* SceneDelegate.swift in Sources */,
@@ -3818,6 +3831,7 @@
 				3C4D39CC27475EBD0010FD68 /* Utilities+UIColor.swift in Sources */,
 				3C4D39C327475E2C0010FD68 /* Utilities+UIViewController.swift in Sources */,
 				3CE9C207274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
+				3C7BAD96275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3C119977274B348F00D6AFE3 /* CameraUtilities.swift in Sources */,
 				3C67E4F0274840F9001F1B4B /* ZoomView.swift in Sources */,
 				3C4D39FF2747667A0010FD68 /* ContentPagingFlowLayout.swift in Sources */,
@@ -3871,6 +3885,7 @@
 				3C4D39F5274766790010FD68 /* TabBarController.swift in Sources */,
 				3C1D1A1D275AA1720064F2C6 /* UIKitViews.swift in Sources */,
 				3C4D3A7A2747696F0010FD68 /* Utilities+UIViewController.swift in Sources */,
+				3C7BAD97275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3C4D3A792747696F0010FD68 /* GeneralUtilities.swift in Sources */,
 				3C606674274ECCBB000A5BDE /* Debug.swift in Sources */,
 				3C4D39F0274766590010FD68 /* PhotosController.swift in Sources */,
@@ -3907,6 +3922,7 @@
 				3C4D3A6F2747694F0010FD68 /* TabControllerBridge.swift in Sources */,
 				3C1D1A1E275AA1720064F2C6 /* UIKitViews.swift in Sources */,
 				3C4D3A7D274769700010FD68 /* Utilities+UIViewController.swift in Sources */,
+				3C7BAD98275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3C4D3A7C274769700010FD68 /* GeneralUtilities.swift in Sources */,
 				3C606673274ECCBB000A5BDE /* Debug.swift in Sources */,
 				3C4D3A66274769370010FD68 /* ListsBridge.swift in Sources */,
@@ -3934,6 +3950,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C4D3B16274776D20010FD68 /* SettingsView.swift in Sources */,
+				3C7BAD99275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3C4D3B13274776D20010FD68 /* DefaultColorView.swift in Sources */,
 				3C1D19EB275A983E0064F2C6 /* ListsViewModel.swift in Sources */,
 				3C4D3B1D274776D20010FD68 /* HapticFeedbackView.swift in Sources */,
@@ -3991,6 +4008,7 @@
 				3C4D3B9427477ABD0010FD68 /* SearchCollectionView.swift in Sources */,
 				3C4D3B67274777E40010FD68 /* AppDelegate.swift in Sources */,
 				3C4D3B9A27477ABD0010FD68 /* LeftView.swift in Sources */,
+				3C7BAD9A275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3C1D1A31275AA25C0064F2C6 /* Utilities+SwiftUI.swift in Sources */,
 				3C4D3BA127477ABD0010FD68 /* SearchViewController.swift in Sources */,
 				3C4D3B69274777E40010FD68 /* SceneDelegate.swift in Sources */,
@@ -4099,6 +4117,7 @@
 				3C4D209F2750A6A800090AF9 /* Constants.swift in Sources */,
 				3C4D20A22750A6C700090AF9 /* Utilities+UIColor.swift in Sources */,
 				3CBEAC09275356C900D04B39 /* VTE+FilterTrackers.swift in Sources */,
+				3C7BAD9B275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3CE9C229274EBB70008C903C /* ViewController.swift in Sources */,
 				3CE9C23B274EBCB1008C903C /* VC+CameraSetup.swift in Sources */,
 				3C4D20A62750A7EB00090AF9 /* VisionEngine.swift in Sources */,
@@ -4150,6 +4169,7 @@
 				3CCA9B3F25BCEB37003BD0E3 /* PhotoSlidesVC+ScreenMode.swift in Sources */,
 				49564333244A8FA4002C9245 /* HistorySharing.swift in Sources */,
 				3C22D3E12702D578001E8474 /* UIEdgeInsets.swift in Sources */,
+				3C7BAD94275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3C3D47C925A40170002B8BBF /* PhotosVC+Sorting.swift in Sources */,
 				3C22D3F02702D578001E8474 /* PagingMenuItemSource.swift in Sources */,
 				3C22D3CD2702D578001E8474 /* PageViewManager.swift in Sources */,

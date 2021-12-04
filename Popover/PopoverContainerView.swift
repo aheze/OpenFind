@@ -12,16 +12,19 @@ struct PopoverContainerView: View {
     @ObservedObject var popoverModel: PopoverModel
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .topLeading) {
             Color.blue.opacity(0.25)
-            
-            Text("Hi")
             
             ForEach(popoverModel.popovers) { popover in
                 switch popover {
                 case .fieldSettings(let configuration):
                     FieldSettingsView(configuration: configuration)
-                        .writeSize(to: configuration.size)
+                        .offset(
+                            x: configuration.popoverContext.wrappedValue.origin.x,
+                            y: configuration.popoverContext.wrappedValue.origin.y
+                        )
+//                        .position(x: configuration.wrappedValue.origin.x, y: configuration.wrappedValue.origin.y)
+                        .writeSize(to: configuration.popoverContext.size)
                 default:
                     Text("No Enum value set.")
                 }
@@ -42,6 +45,7 @@ struct PopoverContainerView: View {
 //                    .writeSize(to: fieldSettings.size)
 //            }
         }
+        .edgesIgnoringSafeArea(.all)
         
     }
 }

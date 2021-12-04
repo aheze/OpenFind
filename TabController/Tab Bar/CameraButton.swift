@@ -140,15 +140,6 @@ extension ShutterShapeAttributes {
     }
 }
 
-/// for easier multiplying in `ShutterShapeAttributes`
-extension CGPoint {
-    static func * (left: CGPoint, scalar: CGFloat) -> CGPoint {
-        return CGPoint(x: left.x * scalar, y: left.y * scalar)
-    }
-    static func * (scalar: CGFloat, right: CGPoint) -> CGPoint {
-        return CGPoint(x: right.x * scalar, y: right.y * scalar)
-    }
-}
 
 struct CameraButtonStyle: ButtonStyle {
     var isShutter: Bool

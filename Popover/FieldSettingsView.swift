@@ -34,7 +34,7 @@ struct FieldSettingsView: View {
                 }
                 .foregroundColor(.white)
                 .shadow(color: Color.black.opacity(0.25), radius: 3, x: 0, y: 1)
-                .padding(EdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12))
+                .padding(EdgeInsets(top: 10, leading: 12, bottom: 8, trailing: 12))
                 .background(UIColor(hex: configuration.defaultColor).color)
                 .cornerRadius(FieldSettingsConstants.cornerRadius)
                 
@@ -47,7 +47,8 @@ struct FieldSettingsView: View {
             }
             .padding(12)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(width: 180)
+//        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
             ZStack {
                 VisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark))
@@ -103,6 +104,8 @@ struct OpacitySlider: View {
         GeometryReader { proxy in
             Color(UIColor.systemBackground).overlay(
                 ZStack {
+                    let _ = print("w: \(FieldSettingsConstants.sliderHeight + value * (proxy.size.width - FieldSettingsConstants.sliderHeight))")
+                    
                     VStack(spacing: 0) {
                         ForEach(0..<6) { row in
                             HStack(spacing: 0) {
@@ -125,6 +128,8 @@ struct OpacitySlider: View {
             )
                 .overlay(
                     Color.clear.overlay(
+                        
+                        
                         RoundedRectangle(cornerRadius: 6)
                             .fill(Color.blue)
                             .overlay(

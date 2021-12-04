@@ -25,6 +25,8 @@ struct Field {
         }
     }
     
+    var popoverContext = PopoverContext()
+    
     /// delete button deletes the entire field
     /// clear button is normal, shown when is editing no matter what
     var showingDeleteButton = false

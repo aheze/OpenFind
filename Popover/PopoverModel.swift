@@ -18,19 +18,23 @@ enum Popover: Identifiable {
     var id: UUID {
         switch self {
         case .fieldSettings(let configuration):
-            return configuration.id
+            return configuration.popoverContext.id
         }
     }
-    
+    var frame: CGRect {
+        switch self {
+        case .fieldSettings(let configuration):
+            return CGRect(
+                origin: configuration.popoverContext.wrappedValue.origin,
+                size: configuration.popoverContext.wrappedValue.size
+            )
+        }
+    }
     case fieldSettings(Binding<PopoverConfiguration.FieldSettings>)
 }
 struct PopoverConfiguration {
-    struct FieldSettings: PopoverContext {
-        let id = UUID()
-        
-        var origin: CGPoint = .zero
-        var size: CGSize = .zero
-        var keepPresentedRects: [CGRect] = []
+    struct FieldSettings {
+        var popoverContext = PopoverContext()
         
         var defaultColor: UInt = 0
         var selectedColor: UInt = 0
@@ -41,14 +45,15 @@ struct PopoverConfiguration {
 //protocol Popover: Identifiable {
 //
 //}
-protocol PopoverContext: Identifiable {
+struct PopoverContext: Identifiable {
+    let id = UUID()
     
     /// position of the popover
-    var origin: CGPoint { get set }
+    var origin: CGPoint = .zero
     
     /// calculated from SwiftUI
-    var size: CGSize { get set }
+    var size: CGSize = .zero
     
     /// if click in once of these rects, don't dismiss the popover. Otherwise, dismiss.
-    var keepPresentedRects: [CGRect] { get set }
+    var keepPresentedRects: [CGRect] = []
 }

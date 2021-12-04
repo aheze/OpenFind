@@ -45,22 +45,32 @@ class ViewController: UIViewController {
         print("Wpr p[resed")
         
         let binding = Binding(
-            get: {
-                PopoverConfiguration.FieldSettings(
-                    origin: self.wordLabel.frame.origin,
-                    keepPresentedRects: [self.purpleButton.frame],
+            get: { () -> PopoverConfiguration.FieldSettings in
+                var savedPopoverContext = self.fields[0].popoverContext
+                savedPopoverContext.origin = self.listLabel.convert(
+                    self.listLabel.bounds.origin + CGPoint(x: 0, y: self.listLabel.bounds.height),
+                    to: nil
+                )
+                savedPopoverContext.keepPresentedRects = [self.purpleButton.frame]
+
+                return PopoverConfiguration.FieldSettings(
+                    popoverContext: savedPopoverContext,
                     defaultColor: 0x00aeef,
                     selectedColor: self.fields[0].text.color,
-                    alpha: 0.5
+                    alpha: self.fields[0].text.colorAlpha
                 )
             }, set: { fieldSettings in
                 self.fields[0].text.color = fieldSettings.selectedColor
                 self.fields[0].text.colorAlpha = fieldSettings.alpha
+                self.fields[0].popoverContext = fieldSettings.popoverContext
             }
         )
         
+        print(self.listLabel.frame.origin)
         let popover = Popover.fieldSettings(binding)
-        popoverModel.popovers.append(popover)
+        withAnimation {
+            popoverModel.popovers.append(popover)
+        }
     }
     
     @IBAction func listPressed(_ sender: Any) {
