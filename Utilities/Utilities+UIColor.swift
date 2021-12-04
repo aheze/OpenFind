@@ -46,9 +46,14 @@ extension UIColor {
 extension UIColor {
     func getFieldColor(for index: Int) -> UIColor {
         let (h, s, b, a) = self.hsba
-        let gradation = CGFloat(1) / 30
+        let gradation = CGFloat(1) / 15
         let offset = gradation * CGFloat(index)
-        let newHue = h + offset
+        var newHue = h - offset
+        
+        /// make it go back to positive
+        while newHue <= 0 {
+            newHue += 1
+        }
         let normalizedHue = newHue.truncatingRemainder(dividingBy: 1)
         return UIColor(hue: normalizedHue, saturation: s, brightness: b, alpha: a)
     }
