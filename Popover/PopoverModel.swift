@@ -20,7 +20,16 @@ enum Popover: Identifiable {
     }
     var frame: CGRect {
         let context = extractContext()
-        return CGRect(origin: context.origin, size: context.size)
+        switch context.position.anchor {
+        case .topLeft:
+            return CGRect(origin: context.position.origin - CGPoint(x: 0, y: context.size.height), size: context.size)
+        case .topRight:
+            return CGRect(origin: context.position.origin - CGPoint(x: 0, y: context.size.height), size: context.size)
+        case .bottomLeft:
+            return CGRect(origin: context.position.origin, size: context.size)
+        case .bottomRight:
+            return CGRect(origin: context.position.origin, size: context.size)
+        }
     }
     var keepPresentedRects: [CGRect] {
         let context = extractContext()
@@ -52,7 +61,7 @@ struct PopoverContext: Identifiable {
     let id = UUID()
     
     /// position of the popover
-    var origin: CGPoint = .zero
+    var position: Popover.Position = .init(anchor: .bottomLeft, origin: .zero)
     
     /// calculated from SwiftUI
     var size: CGSize = .zero

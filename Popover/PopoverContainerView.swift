@@ -27,8 +27,8 @@ struct PopoverContainerView: View {
                     
                     FieldSettingsView(configuration: binding)
                         .offset(
-                            x: configuration.popoverContext.origin.x,
-                            y: configuration.popoverContext.origin.y
+                            x: popover.frame.origin.x,
+                            y: popover.frame.origin.y
                         )
                         .writeSize(to: binding.popoverContext.size)
                 }

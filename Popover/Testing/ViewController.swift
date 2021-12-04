@@ -45,10 +45,11 @@ class ViewController: UIViewController {
         print("Word pressed")
         let configuration = PopoverConfiguration.FieldSettings(
             popoverContext: .init(
-                origin: self.listLabel.convert(
-                    self.listLabel.bounds.origin + CGPoint(x: 0, y: self.listLabel.bounds.height),
-                    to: nil
-                ),
+//                origin: self.listLabel.convert(
+//                    self.listLabel.bounds.origin + CGPoint(x: 0, y: self.listLabel.bounds.height),
+//                    to: nil
+//                ),
+                position: self.listLabel.popoverOrigin(anchor: .bottomLeft),
                 keepPresentedRects: [self.purpleButton.frame]
             ),
             defaultColor: 0x00aeef,
