@@ -14,9 +14,12 @@ struct GeometrySizeWriter: View {
 
     var body: some View {
         GeometryReader { proxy -> Color in
-            print("width: \(proxy.size.width), height: \(proxy.size.height)")
-            DispatchQueue.main.async {
-                self.size = proxy.size
+            
+            /// prevent infinite loop
+            if self.size != proxy.size {
+                DispatchQueue.main.async {
+                    self.size = proxy.size
+                }
             }
             return Color.clear
         }

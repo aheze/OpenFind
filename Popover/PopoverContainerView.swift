@@ -15,35 +15,24 @@ struct PopoverContainerView: View {
         ZStack(alignment: .topLeading) {
             Color.blue.opacity(0.25)
             
-            ForEach(popoverModel.popovers) { popover in
+            ForEach(Array(zip(popoverModel.popovers.indices, popoverModel.popovers)), id: \.1.id) { (index, popover) in
                 switch popover {
                 case .fieldSettings(let configuration):
-                    FieldSettingsView(configuration: configuration)
+                    let binding = Binding {
+                        configuration
+                    } set: { newValue in
+                        popoverModel.popovers[index] = .fieldSettings(newValue)
+                        configuration.propertiesChanged?(newValue)
+                    }
+                    
+                    FieldSettingsView(configuration: binding)
                         .offset(
-                            x: configuration.popoverContext.wrappedValue.origin.x,
-                            y: configuration.popoverContext.wrappedValue.origin.y
+                            x: configuration.popoverContext.origin.x,
+                            y: configuration.popoverContext.origin.y
                         )
-//                        .position(x: configuration.wrappedValue.origin.x, y: configuration.wrappedValue.origin.y)
-                        .writeSize(to: configuration.popoverContext.size)
-                default:
-                    Text("No Enum value set.")
+                        .writeSize(to: binding.popoverContext.size)
                 }
-//                switch popover.wrappedValue {
-//                case let fieldSettings as PopoverConfiguration.FieldSettings:
-//                    Text("hi")
-//                default:
-//                    Text("huh")
-//                }
-//                switch popover {
-//                case .fieldSettings(let configuration):
-//                    FieldSettingsView(configuration: configuration)
-//                        .writeSize(to: configuration.size)
-//                }
             }
-//            if let fieldSettings = Binding($popoverModel.fieldSettings) {
-//                FieldSettingsView(configuration: fieldSettings)
-//                    .writeSize(to: fieldSettings.size)
-//            }
         }
         .edgesIgnoringSafeArea(.all)
         

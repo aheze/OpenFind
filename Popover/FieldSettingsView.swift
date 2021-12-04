@@ -48,7 +48,6 @@ struct FieldSettingsView: View {
             .padding(12)
         }
         .frame(width: 180)
-//        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
             ZStack {
                 VisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark))
@@ -101,11 +100,10 @@ struct OpacitySlider: View {
     @Binding var value: CGFloat
     
     var body: some View {
+        
         GeometryReader { proxy in
             Color(UIColor.systemBackground).overlay(
                 ZStack {
-                    let _ = print("w: \(FieldSettingsConstants.sliderHeight + value * (proxy.size.width - FieldSettingsConstants.sliderHeight))")
-                    
                     VStack(spacing: 0) {
                         ForEach(0..<6) { row in
                             HStack(spacing: 0) {
@@ -149,8 +147,6 @@ struct OpacitySlider: View {
                     DragGesture(minimumDistance: 0)
                         .onChanged { value in
                             self.value = min(max(0, CGFloat(value.location.x / proxy.size.width)), 1)
-                            
-                            print("val: \(self.value)")
                         }
                 )
         }

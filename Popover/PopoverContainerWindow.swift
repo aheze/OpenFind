@@ -28,7 +28,7 @@ class PopoverContainerWindow: UIWindow {
         
         for popover in popoverModel.popovers {
             let frame = popover.frame
-            print("fr: \(frame) ?? \(point)")
+            print("frame: \(frame) ?? \(point)")
             if frame.contains(point) {
                 return super.hitTest(point, with: event)
             }

@@ -14,18 +14,11 @@ struct Field {
         fieldHuggingWidth = self.getFieldHuggingWidth()
     }
     
-//    var value = Value.string("") {
-//        didSet {
-//            fieldHuggingWidth = self.getFieldHuggingWidth()
-//        }
-//    }
     var text = Text(value: .string("")) {
         didSet {
             fieldHuggingWidth = self.getFieldHuggingWidth()
         }
     }
-    
-    var popoverContext = PopoverContext()
     
     /// delete button deletes the entire field
     /// clear button is normal, shown when is editing no matter what
@@ -70,7 +63,7 @@ struct Field {
         }
         
         var color: UInt
-        var colorAlpha: CGFloat = 0
+        var colorAlpha: CGFloat = 1
         
         init(value: Value) {
             self.value = value

@@ -42,32 +42,25 @@ class ViewController: UIViewController {
         Field(text: .init(value: .addNew("")))
     ]
     @IBAction func wordPressed(_ sender: Any) {
-        print("Wpr p[resed")
-        
-        let binding = Binding(
-            get: { () -> PopoverConfiguration.FieldSettings in
-                var savedPopoverContext = self.fields[0].popoverContext
-                savedPopoverContext.origin = self.listLabel.convert(
+        print("Word pressed")
+        let configuration = PopoverConfiguration.FieldSettings(
+            popoverContext: .init(
+                origin: self.listLabel.convert(
                     self.listLabel.bounds.origin + CGPoint(x: 0, y: self.listLabel.bounds.height),
                     to: nil
-                )
-                savedPopoverContext.keepPresentedRects = [self.purpleButton.frame]
-
-                return PopoverConfiguration.FieldSettings(
-                    popoverContext: savedPopoverContext,
-                    defaultColor: 0x00aeef,
-                    selectedColor: self.fields[0].text.color,
-                    alpha: self.fields[0].text.colorAlpha
-                )
-            }, set: { fieldSettings in
-                self.fields[0].text.color = fieldSettings.selectedColor
-                self.fields[0].text.colorAlpha = fieldSettings.alpha
-                self.fields[0].popoverContext = fieldSettings.popoverContext
-            }
-        )
-        
-        print(self.listLabel.frame.origin)
-        let popover = Popover.fieldSettings(binding)
+                ),
+                keepPresentedRects: [self.purpleButton.frame]
+            ),
+            defaultColor: 0x00aeef,
+            selectedColor: self.fields[0].text.color,
+            alpha: self.fields[0].text.colorAlpha
+        ) { [weak self] newConfiguration in
+                guard let self = self else { return }
+                self.fields[0].text.color = newConfiguration.selectedColor
+                self.fields[0].text.colorAlpha = newConfiguration.alpha
+    
+        }
+        let popover = Popover.fieldSettings(configuration)
         withAnimation {
             popoverModel.popovers.append(popover)
         }

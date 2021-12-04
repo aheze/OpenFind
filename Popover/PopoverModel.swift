@@ -10,7 +10,6 @@ import Combine
 import SwiftUI
 
 class PopoverModel: ObservableObject {
-//    @Published var fieldSettings: Popover.FieldSettings?
     @Published var popovers = [Popover]()
 }
 
@@ -25,12 +24,14 @@ enum Popover: Identifiable {
         switch self {
         case .fieldSettings(let configuration):
             return CGRect(
-                origin: configuration.popoverContext.wrappedValue.origin,
-                size: configuration.popoverContext.wrappedValue.size
+                origin: configuration.popoverContext.origin,
+                size: configuration.popoverContext.size
             )
         }
     }
-    case fieldSettings(Binding<PopoverConfiguration.FieldSettings>)
+    
+    case fieldSettings(PopoverConfiguration.FieldSettings)
+    
 }
 struct PopoverConfiguration {
     struct FieldSettings {
@@ -39,12 +40,10 @@ struct PopoverConfiguration {
         var defaultColor: UInt = 0
         var selectedColor: UInt = 0
         var alpha: CGFloat = 1
+        
+        var propertiesChanged: ((Self) -> Void)?
     }
 }
-//}
-//protocol Popover: Identifiable {
-//
-//}
 struct PopoverContext: Identifiable {
     let id = UUID()
     
@@ -56,4 +55,5 @@ struct PopoverContext: Identifiable {
     
     /// if click in once of these rects, don't dismiss the popover. Otherwise, dismiss.
     var keepPresentedRects: [CGRect] = []
+    
 }
