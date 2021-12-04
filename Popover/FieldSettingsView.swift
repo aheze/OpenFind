@@ -22,7 +22,7 @@ struct FieldSettingsView: View {
                 .foregroundColor(.white)
                 .font(.system(size: 12, weight: .semibold))
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(12)
+                .padding(EdgeInsets(top: 12, leading: 12, bottom: 8, trailing: 12))
             
             Line()
             
@@ -41,7 +41,7 @@ struct FieldSettingsView: View {
                 PaletteView()
                     .cornerRadius(FieldSettingsConstants.cornerRadius)
                 
-                OpacitySlider(value: $configuration.alpha)
+                OpacitySlider(value: $configuration.alpha, color: UIColor(hex: configuration.selectedColor))
                     .frame(height: FieldSettingsConstants.sliderHeight)
                     .cornerRadius(FieldSettingsConstants.cornerRadius)
             }
@@ -98,6 +98,7 @@ struct PaletteButton: View {
 
 struct OpacitySlider: View {
     @Binding var value: CGFloat
+    let color: UIColor
     
     var body: some View {
         
@@ -121,24 +122,31 @@ struct OpacitySlider: View {
                         }
                     }
                     
-                    LinearGradient(colors: [.clear, Color.blue], startPoint: .leading, endPoint: .trailing)
+                    LinearGradient(colors: [.clear, color.color], startPoint: .leading, endPoint: .trailing)
                 }
             )
+            
+            /// slider thumb
                 .overlay(
                     Color.clear.overlay(
                         
-                        
-                        RoundedRectangle(cornerRadius: 6)
-                            .fill(Color.blue)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 6)
-                                    .strokeBorder(Color.white, lineWidth: 2)
-                            )
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 6)
+                                .fill(UIColor.systemBackground.color)
+                            
+                            RoundedRectangle(cornerRadius: 6)
+                                .fill(color.withAlphaComponent(value).color)
+                            
+                            RoundedRectangle(cornerRadius: 6)
+                                .strokeBorder(Color.white, lineWidth: 2)
+                        }
                             .padding(6)
                             .frame(width: FieldSettingsConstants.sliderHeight, height: FieldSettingsConstants.sliderHeight)
-                        , alignment: .trailing)
-                    
-                    
+                        
+                        /// pin thumb to right of stretching `clear` container
+                        , alignment: .trailing
+                    )
+                    /// set frame of stretching `clear` container
                         .frame(
                             width: FieldSettingsConstants.sliderHeight + value * (proxy.size.width - FieldSettingsConstants.sliderHeight)
                         )

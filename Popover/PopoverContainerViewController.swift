@@ -22,7 +22,6 @@ class PopoverContainerViewController: UIViewController {
     }
     
     override func loadView() {
-        print("loadView")
         
         /**
          Instantiate the base `view`.
