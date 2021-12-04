@@ -58,7 +58,7 @@ struct PopoverConfiguration {
     }
 }
 struct PopoverContext: Identifiable {
-    let id = UUID()
+    var id = UUID()
     
     /// position of the popover
     var position: Popover.Position = .init(anchor: .bottomLeft, origin: .zero)

@@ -114,7 +114,7 @@ struct OpacitySlider: View {
                                     if (offset + column) % 2 == 0 {
                                         Color.clear
                                     } else {
-                                        Color.black.opacity(0.15)
+                                        UIColor.label.color.opacity(0.15)
                                     }
                                 }
                             }

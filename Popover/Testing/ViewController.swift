@@ -19,8 +19,6 @@ class ViewController: UIViewController {
         .filter { $0.activationState == .foregroundActive }
         .first
         
-        print("saved: \(SceneConstants.savedScene)")
-        
         if let windowScene = SceneConstants.savedScene {
             let popoverController = PopoverController(
                 popoverModel: popoverModel,
@@ -29,8 +27,7 @@ class ViewController: UIViewController {
             return popoverController
         }
         
-        fatalError("NO scnee")
-//        return PopoverController(popoverModel: popoverModel, windowScene: view.window!.windowScene!)
+        fatalError("NO scene")
     }()
     
     
@@ -38,19 +35,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var listLabel: UILabel!
     
     var fields = [
-        Field(text: .init(value: .string(""))),
-        Field(text: .init(value: .addNew("")))
+        Field(text: .init(value: .string(""), colorIndex: 0)),
+        Field(text: .init(value: .addNew(""), colorIndex: 1))
     ]
     @IBAction func wordPressed(_ sender: Any) {
         print("Word pressed")
         let configuration = PopoverConfiguration.FieldSettings(
             popoverContext: .init(
-//                origin: self.listLabel.convert(
-//                    self.listLabel.bounds.origin + CGPoint(x: 0, y: self.listLabel.bounds.height),
-//                    to: nil
-//                ),
-                position: self.listLabel.popoverOrigin(anchor: .bottomLeft),
-                keepPresentedRects: [self.purpleButton.frame]
+                position: self.wordLabel.popoverOrigin(anchor: .bottomLeft),
+                keepPresentedRects: [
+                    self.purpleButton.windowFrame(),
+                    self.listButton.windowFrame(),
+                    self.listLabel.windowFrame()
+                ]
             ),
             defaultColor: self.fields[0].text.color,
             selectedColor: self.fields[0].text.color,
@@ -67,7 +64,47 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var listButton: UIButton!
     @IBAction func listPressed(_ sender: Any) {
+        
+        var configuration = PopoverConfiguration.FieldSettings(
+            popoverContext: .init(
+                position: self.listLabel.popoverOrigin(anchor: .bottomLeft),
+                keepPresentedRects: [
+                    self.purpleButton.windowFrame()
+                ]
+            ),
+            defaultColor: self.fields[0].text.color,
+            selectedColor: self.fields[0].text.color,
+            alpha: self.fields[0].text.colorAlpha
+        ) { [weak self] newConfiguration in
+                guard let self = self else { return }
+                self.fields[0].text.color = newConfiguration.selectedColor
+                self.fields[0].text.colorAlpha = newConfiguration.alpha
+    
+        }
+        
+        
+        if let existingFieldSettingsPopoverIndex = popoverModel.popovers.indices.first(where: { index in
+            if case .fieldSettings(_) = popoverModel.popovers[index] {
+                return true
+            } else {
+                return false
+            }
+        }) {
+            withAnimation {
+                
+                /// use same ID for smooth position animation
+                configuration.popoverContext.id = popoverModel.popovers[existingFieldSettingsPopoverIndex].id
+                let popover = Popover.fieldSettings(configuration)
+                popoverModel.popovers[existingFieldSettingsPopoverIndex] = popover
+            }
+        } else {
+            withAnimation {
+                let popover = Popover.fieldSettings(configuration)
+                popoverModel.popovers.append(popover)
+            }
+        }
     }
     
     
@@ -88,7 +125,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("widnow \(view.window?.windowScene)")
         
         _ = popoverController
     }

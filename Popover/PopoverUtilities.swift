@@ -50,7 +50,7 @@ extension Popover {
 extension UIView {
     func popoverOrigin(anchor: Popover.Anchor, offset: CGFloat = 8) -> Popover.Position {
         var point: CGPoint
-        let frameInWindow = self.convert(self.bounds, to: nil)
+        let frameInWindow = windowFrame()
         
         switch anchor {
         case .topLeft:
@@ -64,6 +64,11 @@ extension UIView {
         }
         
         return Popover.Position(anchor: anchor, origin: point)
+    }
+    
+    /// frame in the global window
+    func windowFrame() -> CGRect {
+        return self.convert(bounds, to: nil)
     }
 }
 

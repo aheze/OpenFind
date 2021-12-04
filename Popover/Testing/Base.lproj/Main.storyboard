@@ -11,7 +11,6 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Popover" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -97,11 +96,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="listButton" destination="LJn-R9-ade" id="zvK-hq-sIQ"/>
                         <outlet property="listLabel" destination="WJn-gW-YrJ" id="FdP-a0-PDj"/>
                         <outlet property="purpleButton" destination="gew-an-EDb" id="GHL-dq-UyW"/>
                         <outlet property="wordLabel" destination="kI3-Fj-dir" id="9EU-rF-ogH"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="109.82142857142857"/>
         </scene>
