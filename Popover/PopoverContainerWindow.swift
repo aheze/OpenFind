@@ -27,22 +27,21 @@ class PopoverContainerWindow: UIWindow {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         
         for popover in popoverModel.popovers {
+            
+            /// check if hit a popover
             let frame = popover.frame
-            print("frame: \(frame) ?? \(point)")
             if frame.contains(point) {
                 return super.hitTest(point, with: event)
             }
+            
+            /// check if hit a excluded view - don't dismiss
+            if popover.keepPresentedRects.contains(where: { $0.contains(point) }) {
+                return nil
+            }
         }
         
+        /// otherwise, dismiss and don't pass the event to the popover
         dismiss()
         return nil
-//        let hitView = super.hitTest(point, with: event)
-//
-//        if let passTroughTag = passTroughTag {
-//            if passTroughTag == hitView?.tag {
-//                return nil
-//            }
-//        }
-//        return hitView
     }
 }

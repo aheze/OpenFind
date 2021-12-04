@@ -15,18 +15,22 @@ class PopoverModel: ObservableObject {
 
 enum Popover: Identifiable {
     var id: UUID {
-        switch self {
-        case .fieldSettings(let configuration):
-            return configuration.popoverContext.id
-        }
+        let context = extractContext()
+        return context.id
     }
     var frame: CGRect {
+        let context = extractContext()
+        return CGRect(origin: context.origin, size: context.size)
+    }
+    var keepPresentedRects: [CGRect] {
+        let context = extractContext()
+        return context.keepPresentedRects
+    }
+    
+    func extractContext() -> PopoverContext {
         switch self {
         case .fieldSettings(let configuration):
-            return CGRect(
-                origin: configuration.popoverContext.origin,
-                size: configuration.popoverContext.size
-            )
+            return configuration.popoverContext
         }
     }
     
