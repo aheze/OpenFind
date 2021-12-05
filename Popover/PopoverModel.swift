@@ -23,7 +23,7 @@ struct Popovers {
 class PopoverModel: ObservableObject {
     @Published var popovers = [Popover]()
     
-    @Published private var popoversDraggable = true
+    @Published internal var popoversDraggable = true
     lazy var draggingEnabled = Binding {
         self.popoversDraggable
     } set: { newValue in

@@ -16,7 +16,7 @@ struct FieldSettingsConstants {
 struct FieldSettingsView: View {
     
     @ObservedObject var model: FieldSettingsModel
-    @Binding var stopDraggingGesture: Bool
+    @Binding var draggingEnabled: Bool
     
     var body: some View {
         let _ = print("go: \(model.configuration)")
@@ -68,7 +68,7 @@ struct FieldSettingsView: View {
                     PaletteView(selectedColor: $model.configuration.selectedColor)
                         .cornerRadius(FieldSettingsConstants.cornerRadius)
                     
-                    OpacitySlider(value: $model.configuration.alpha, stopDraggingGesture: $stopDraggingGesture, color: model.configuration.selectedColor)
+                    OpacitySlider(value: $model.configuration.alpha, draggingEnabled: $draggingEnabled, color: model.configuration.selectedColor)
                         .frame(height: FieldSettingsConstants.sliderHeight)
                         .cornerRadius(FieldSettingsConstants.cornerRadius)
                 }
@@ -197,7 +197,7 @@ struct PaletteButton: View {
 
 struct OpacitySlider: View {
     @Binding var value: CGFloat
-    @Binding var stopDraggingGesture: Bool
+    @Binding var draggingEnabled: Bool
     let color: UIColor
     
     var body: some View {
@@ -256,9 +256,9 @@ struct OpacitySlider: View {
                     DragGesture(minimumDistance: 0)
                         .onChanged { value in
                             self.value = min(max(0, CGFloat(value.location.x / proxy.size.width)), 1)
-                            stopDraggingGesture = true
+                            draggingEnabled = false
                         }
-                        .onEnded { _ in stopDraggingGesture = false }
+                        .onEnded { _ in draggingEnabled = true }
                 )
         }
         .drawingGroup() /// prevent thumb from disappearing when offset to show words

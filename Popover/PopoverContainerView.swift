@@ -12,10 +12,9 @@ struct PopoverContainerView: View {
     @ObservedObject var popoverModel: PopoverModel
     @State var selectedPopover: Popover? = nil
     @GestureState var selectedPopoverOffset: CGSize = .zero
-    @State var draggingActiveInsideSelectedPopover = false
     
     var body: some View {
-        let _ = print("changed, rerender")
+
         ZStack(alignment: .topLeading) {
             Color.blue.opacity(0.25)
             
@@ -24,9 +23,7 @@ struct PopoverContainerView: View {
                     popover.context
                 } set: { newValue in
                     popoverModel.popovers[index].context = newValue
-                    //                    configuration.propertiesChanged?(newValue)
                 }
-                let _ = print("changed, \(index)")
                 
                 popover.view
                     .offset(popoverOffset(for: popover))
@@ -60,7 +57,7 @@ struct PopoverContainerView: View {
                             .onEnded { value in
                                 self.selectedPopover = nil
                             }
-                        , including: draggingActiveInsideSelectedPopover ? .subviews : .all
+                        , including: popoverModel.popoversDraggable ? .all : .subviews
                     )
             }
             

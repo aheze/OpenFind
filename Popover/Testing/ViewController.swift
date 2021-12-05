@@ -86,9 +86,16 @@ class ViewController: UIViewController {
 //        }
         
         let model = PopoverModel()
-        let popoverView = AnyView(FieldSettingsView(model: fieldSettingsModel, stopDraggingGesture: model.draggingEnabled))
-        let popover = Popover(view: popoverView)
+        let popoverView = AnyView(FieldSettingsView(model: fieldSettingsModel, draggingEnabled: Popovers.model.draggingEnabled))
+        var popover = Popover(view: popoverView)
+        popover.context.position = self.wordLabel.popoverOrigin(anchor: .bottomLeft)
+        popover.context.dismissMode = .tapOutside([
+            self.purpleButton.windowFrame(),
+            self.listButton.windowFrame(),
+            self.listLabel.windowFrame()
+        ])
         Popovers.model.popovers.append(popover)
+                        
     }
     
     
