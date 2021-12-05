@@ -22,7 +22,9 @@ struct PopoverContainerView: View {
                 let binding = Binding {
                     popover.context
                 } set: { newValue in
-                    popoverModel.popovers[index].context = newValue
+                    if popoverModel.popovers.indices.contains(index) {
+                        popoverModel.popovers[index].context = newValue
+                    }
                 }
                 
                 popover.view

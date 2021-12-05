@@ -146,11 +146,6 @@ class ViewController: UIViewController {
         
 //        _ = popoverController
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        Popovers.setup()
-    }
-
 }
 
 
