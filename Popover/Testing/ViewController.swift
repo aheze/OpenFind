@@ -41,31 +41,6 @@ class ViewController: UIViewController {
 //    var fieldSettingsModel = FieldSettingsModel()
     
     @IBAction func wordPressed(_ sender: Any) {
-        print("Word pressed")
-//        let popover = Popover(context: <#T##PopoverContext#>, view: FieldSettingsView(configuration: <#T##Binding<PopoverConfiguration.FieldSettings>#>, stopDraggingGesture: <#T##Binding<Bool>#>))
-//        let configuration = PopoverConfiguration.FieldSettings(
-//            popoverContext: .init(
-//                position: self.wordLabel.popoverOrigin(anchor: .bottomLeft),
-//                keepPresentedRects: [
-//                    self.purpleButton.windowFrame(),
-//                    self.listButton.windowFrame(),
-//                    self.listLabel.windowFrame()
-//                ]
-//            ),
-//            defaultColor: self.fields[0].text.color,
-//            selectedColor: self.fields[0].text.color,
-//            alpha: self.fields[0].text.colorAlpha,
-//            propertiesChanged:  { [weak self] newConfiguration in
-//                guard let self = self else { return }
-//                self.fields[0].text.color = newConfiguration.selectedColor
-//                self.fields[0].text.colorAlpha = newConfiguration.alpha
-//
-//            })
-//        let popover = Popover.fieldSettings(configuration)
-//        withAnimation {
-//            popoverModel.popovers.append(popover)
-//        }
-        
         let fieldSettingsModel = FieldSettingsModel()
         fieldSettingsModel.configuration = PopoverConfiguration.FieldSettings(
             header: "WORDS",
@@ -76,45 +51,22 @@ class ViewController: UIViewController {
             showingWords: false,
             editListPressed: nil
         )
-//        let configurationBinding = Binding { () -> PopoverConfiguration.FieldSettings in
-////            print("get: \(configuration)")
-//
-//            return configuration
-//        } set: { newValue in
-////            print("new: \(newValue)")
-//            return configuration = newValue
-//        }
         
-        let model = PopoverModel()
         let popoverView = AnyView(FieldSettingsView(model: fieldSettingsModel, draggingEnabled: Popovers.model.draggingEnabled))
         var popover = Popover(view: popoverView)
         popover.context.position = self.wordLabel.popoverOrigin(anchor: .bottomLeft)
-        popover.context.dismissMode = .tapOutside([
-            self.purpleButton.windowFrame(),
-            self.listButton.windowFrame(),
-            self.listLabel.windowFrame()
-        ])
-        Popovers.model.popovers.append(popover)
-                        
+        popover.context.dismissMode = .tapOutside(
+            .init(
+                animation: .spring(),
+                excludedRects: [
+                    self.purpleButton.windowFrame(),
+                    self.listButton.windowFrame(),
+                    self.listLabel.windowFrame()
+                ]
+            )
+        )
+        Popovers.present(popover, animation: .spring())
     }
-    
-    
-//    lazy var configuration = PopoverConfiguration.FieldSettings(
-//        header: "WORDS",
-//        defaultColor: self.fields[0].text.color,
-//        selectedColor: self.fields[0].text.color,
-//        alpha: self.fields[0].text.colorAlpha,
-//        words: [],
-//        showingWords: false,
-//        editListPressed: nil
-//    )
-//    lazy var configurationBinding = Binding { () -> PopoverConfiguration.FieldSettings in
-////            print("get: \(configuration)")
-//        return self.configuration
-//    } set: { newValue in
-////            print("new: \(newValue)")
-//        return self.configuration = newValue
-//    }
     
     @IBOutlet weak var listButton: UIButton!
     @IBAction func listPressed(_ sender: Any) {
@@ -191,9 +143,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
 //        _ = popoverController
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Popovers.setup()
+    }
 
 }
 

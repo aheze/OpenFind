@@ -9,7 +9,7 @@
 import SwiftUI
 
 
-class FieldSettingsModel: ObservableObject {
+class FieldSettingsModel: PopoverState {
     @Published var configuration = PopoverConfiguration.FieldSettings()
 }
 struct PopoverConfiguration {

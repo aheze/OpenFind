@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class PopoverContainerWindow: UIWindow {
 
@@ -57,8 +58,10 @@ class PopoverContainerWindow: UIWindow {
         
         /// otherwise, dismiss and don't pass the event to the popover
         for (index, popover) in popoverModel.popovers.reversed().enumerated() {
-            if case .tapOutside(_) = popover.context.dismissMode {
-                popoverModel.popovers.remove(at: index)
+            if case .tapOutside(let dismissContext) = popover.context.dismissMode {
+                withAnimation(dismissContext.animation) {
+                    popoverModel.popovers.remove(at: index)
+                }
             }
         }
         

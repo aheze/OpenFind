@@ -9,6 +9,7 @@
 import Combine
 import SwiftUI
 
+
 struct Popovers {
     static var window: PopoverContainerWindow?
     static var model: PopoverModel = {
@@ -18,6 +19,15 @@ struct Popovers {
         
         return model
     }()
+    static func setup() {
+        _ = model
+    }
+    
+    static func present(_ popover: Popover, animation: Animation? = nil) {
+        withAnimation(animation) {
+            Popovers.model.popovers.append(popover)
+        }
+    }
 }
 
 class PopoverModel: ObservableObject {
@@ -31,6 +41,9 @@ class PopoverModel: ObservableObject {
     }
 }
 
+class PopoverState: ObservableObject {
+    
+}
 struct PopoverContext: Identifiable {
     var id = UUID()
     
@@ -41,12 +54,16 @@ struct PopoverContext: Identifiable {
     var size: CGSize = .zero
     
     /// if click in once of these rects, don't dismiss the popover. Otherwise, dismiss.
-    var dismissMode: DismissMode = .tapOutside([])
+    var dismissMode: DismissMode = .tapOutside(.init())
     
     
     enum DismissMode {
-        case tapOutside([CGRect])
+        case tapOutside(DismissContext)
         case none
+    }
+    struct DismissContext {
+        var animation: Animation?
+        var excludedRects = [CGRect]()
     }
     
     enum Anchor {
@@ -91,8 +108,8 @@ struct Popover: Identifiable, Equatable {
     }
     
     var keepPresentedRects: [CGRect] {
-        if case let .tapOutside(rects) = context.dismissMode {
-            return rects
+        if case let .tapOutside(dismissContext) = context.dismissMode {
+            return dismissContext.excludedRects
         }
         return []
     }
