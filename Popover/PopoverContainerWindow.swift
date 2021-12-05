@@ -9,16 +9,31 @@
 import UIKit
 
 class PopoverContainerWindow: UIWindow {
-//    var passTroughTag: Int?
 
     var popoverModel: PopoverModel
-    var dismiss: (() -> Void)
     
-    init(scene: UIWindowScene, popoverModel: PopoverModel, dismiss: @escaping (() -> Void)) {
+    init(popoverModel: PopoverModel) {
         self.popoverModel = popoverModel
-        self.dismiss = dismiss
-        super.init(windowScene: scene)
+        
+        if let scene = UIApplication.shared.connectedScenes.filter({$0.activationState == .foregroundActive}).first as? UIWindowScene {
+            print("saved")
+            super.init(windowScene: scene)
+        } else {
+            print("new")
+            super.init(frame: UIScreen.main.bounds)
+        }
+        
+        
+        self.rootViewController = popoverContainerViewController
+        self.windowLevel = .alert
+        self.backgroundColor = .clear
+        self.makeKeyAndVisible()
     }
+    
+    lazy var popoverContainerViewController: PopoverContainerViewController = {
+        let popoverContainerViewController = PopoverContainerViewController(popoverModel: popoverModel)
+        return popoverContainerViewController
+    }()
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -41,7 +56,13 @@ class PopoverContainerWindow: UIWindow {
         }
         
         /// otherwise, dismiss and don't pass the event to the popover
-        dismiss()
+        for (index, popover) in popoverModel.popovers.reversed().enumerated() {
+            if case .tapOutside(_) = popover.context.dismissMode {
+                popoverModel.popovers.remove(at: index)
+            }
+        }
+        
+        
         return nil
     }
 }

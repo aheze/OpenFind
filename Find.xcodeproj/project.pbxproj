@@ -60,7 +60,6 @@
 		3C1D19FE275A9F3B0064F2C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C1D19FD275A9F3B0064F2C6 /* Assets.xcassets */; };
 		3C1D1A01275A9F3B0064F2C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C1D19FF275A9F3B0064F2C6 /* LaunchScreen.storyboard */; };
 		3C1D1A06275A9F6D0064F2C6 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3A9027476EC70010FD68 /* SharedAssets.xcassets */; };
-		3C1D1A09275A9FB30064F2C6 /* PopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A08275A9FB30064F2C6 /* PopoverController.swift */; };
 		3C1D1A0B275AA08D0064F2C6 /* FieldSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A0A275AA08D0064F2C6 /* FieldSettingsView.swift */; };
 		3C1D1A0C275AA0A00064F2C6 /* GeneralUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D39A527475D690010FD68 /* GeneralUtilities.swift */; };
 		3C1D1A0E275AA0CE0064F2C6 /* Utilities+SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A0D275AA0CE0064F2C6 /* Utilities+SwiftUI.swift */; };
@@ -557,6 +556,15 @@
 		3C7BADAE275C12BA0030F0D2 /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BADA7275C12BA0030F0D2 /* TipView.swift */; };
 		3C7BADAF275C12BA0030F0D2 /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BADA7275C12BA0030F0D2 /* TipView.swift */; };
 		3C7BADB0275C12BA0030F0D2 /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BADA7275C12BA0030F0D2 /* TipView.swift */; };
+		3C7BADB4275C71B30030F0D2 /* PopoverConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BADB3275C71B30030F0D2 /* PopoverConfiguration.swift */; };
+		3C7BADB5275C71B30030F0D2 /* PopoverConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BADB3275C71B30030F0D2 /* PopoverConfiguration.swift */; };
+		3C7BADB6275C71B30030F0D2 /* PopoverConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BADB3275C71B30030F0D2 /* PopoverConfiguration.swift */; };
+		3C7BADB7275C71B30030F0D2 /* PopoverConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BADB3275C71B30030F0D2 /* PopoverConfiguration.swift */; };
+		3C7BADB8275C71B30030F0D2 /* PopoverConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BADB3275C71B30030F0D2 /* PopoverConfiguration.swift */; };
+		3C7BADB9275C71B30030F0D2 /* PopoverConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BADB3275C71B30030F0D2 /* PopoverConfiguration.swift */; };
+		3C7BADBA275C71B30030F0D2 /* PopoverConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BADB3275C71B30030F0D2 /* PopoverConfiguration.swift */; };
+		3C7BADBB275C71B30030F0D2 /* PopoverConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BADB3275C71B30030F0D2 /* PopoverConfiguration.swift */; };
+		3C7BADBC275C71B30030F0D2 /* PopoverConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7BADB3275C71B30030F0D2 /* PopoverConfiguration.swift */; };
 		3C7EAB2C25C0A97800264B63 /* PhotosVC+Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7EAB2B25C0A97800264B63 /* PhotosVC+Tutorial.swift */; };
 		3C84F97825C3A4160066A360 /* ViewController+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F97725C3A4160066A360 /* ViewController+Defaults.swift */; };
 		3C84F97B25C3AB1B0066A360 /* CameraVC+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C84F97A25C3AB1B0066A360 /* CameraVC+Settings.swift */; };
@@ -893,7 +901,6 @@
 		3C1D19FD275A9F3B0064F2C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C1D1A00275A9F3B0064F2C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3C1D1A02275A9F3B0064F2C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3C1D1A08275A9FB30064F2C6 /* PopoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverController.swift; sourceTree = "<group>"; };
 		3C1D1A0A275AA08D0064F2C6 /* FieldSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldSettingsView.swift; sourceTree = "<group>"; };
 		3C1D1A0D275AA0CE0064F2C6 /* Utilities+SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+SwiftUI.swift"; sourceTree = "<group>"; };
 		3C1D1A0F275AA0DB0064F2C6 /* SwiftUIViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViews.swift; sourceTree = "<group>"; };
@@ -1233,6 +1240,7 @@
 		3C7BAD93275B306C0030F0D2 /* Utilities+Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+Math.swift"; sourceTree = "<group>"; };
 		3C7BAD9D275C10BF0030F0D2 /* PopoverConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverConstants.swift; sourceTree = "<group>"; };
 		3C7BADA7275C12BA0030F0D2 /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
+		3C7BADB3275C71B30030F0D2 /* PopoverConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverConfiguration.swift; sourceTree = "<group>"; };
 		3C7EAB2B25C0A97800264B63 /* PhotosVC+Tutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Tutorial.swift"; sourceTree = "<group>"; };
 		3C84F97725C3A4160066A360 /* ViewController+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Defaults.swift"; sourceTree = "<group>"; };
 		3C84F97A25C3AB1B0066A360 /* CameraVC+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Settings.swift"; sourceTree = "<group>"; };
@@ -1622,9 +1630,8 @@
 		3C1D19F3275A9F390064F2C6 /* Popover */ = {
 			isa = PBXGroup;
 			children = (
-				3CB98A6A275AFAF900A6B1B9 /* PopoverModel.swift */,
 				3C7BAD9D275C10BF0030F0D2 /* PopoverConstants.swift */,
-				3C1D1A08275A9FB30064F2C6 /* PopoverController.swift */,
+				3CB98A6A275AFAF900A6B1B9 /* PopoverModel.swift */,
 				3CB98A84275B28DE00A6B1B9 /* PopoverContainerWindow.swift */,
 				3CB98A6E275B150300A6B1B9 /* PopoverContainerViewController.swift */,
 				3CB98A6C275B0A0500A6B1B9 /* PopoverContainerView.swift */,
@@ -1641,6 +1648,7 @@
 			children = (
 				3C1D19F4275A9F390064F2C6 /* AppDelegate.swift */,
 				3C1D19F6275A9F390064F2C6 /* SceneDelegate.swift */,
+				3C7BADB3275C71B30030F0D2 /* PopoverConfiguration.swift */,
 				3C1D19F8275A9F390064F2C6 /* ViewController.swift */,
 				3C1D19FA275A9F390064F2C6 /* Main.storyboard */,
 				3C1D19FD275A9F3B0064F2C6 /* Assets.xcassets */,
@@ -3733,6 +3741,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C7BADBC275C71B30030F0D2 /* PopoverConfiguration.swift in Sources */,
 				3CB98A81275B22B300A6B1B9 /* SearchFieldCell.swift in Sources */,
 				3C1D1A28275AA25B0064F2C6 /* Utilities+UIDevice.swift in Sources */,
 				3C1D19F9275A9F390064F2C6 /* ViewController.swift in Sources */,
@@ -3743,7 +3752,6 @@
 				3CB98A6D275B0A0500A6B1B9 /* PopoverContainerView.swift in Sources */,
 				3CB98A7A275B217900A6B1B9 /* SearchCV+Datasource.swift in Sources */,
 				3C1D1A2A275AA25B0064F2C6 /* Utilities+Constraints.swift in Sources */,
-				3C1D1A09275A9FB30064F2C6 /* PopoverController.swift in Sources */,
 				3CB98A7D275B219100A6B1B9 /* ListsViewModel.swift in Sources */,
 				3CB98A73275B217900A6B1B9 /* SearchCollectionViewFlowLayout.swift in Sources */,
 				3CB98A79275B217900A6B1B9 /* SearchCollectionView.swift in Sources */,
@@ -3779,6 +3787,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C7BADB5275C71B30030F0D2 /* PopoverConfiguration.swift in Sources */,
 				3C1D1A45275AA2600064F2C6 /* Utilities+Dates.swift in Sources */,
 				3C4D39CB27475EBD0010FD68 /* Utilities+UIColor.swift in Sources */,
 				3C4D3A22274767970010FD68 /* PhotosViewController.swift in Sources */,
@@ -3857,6 +3866,7 @@
 				3C4D39CC27475EBD0010FD68 /* Utilities+UIColor.swift in Sources */,
 				3C4D39C327475E2C0010FD68 /* Utilities+UIViewController.swift in Sources */,
 				3CE9C207274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
+				3C7BADB6275C71B30030F0D2 /* PopoverConfiguration.swift in Sources */,
 				3C7BAD96275B306C0030F0D2 /* Utilities+Math.swift in Sources */,
 				3C119977274B348F00D6AFE3 /* CameraUtilities.swift in Sources */,
 				3C67E4F0274840F9001F1B4B /* ZoomView.swift in Sources */,
@@ -3927,6 +3937,7 @@
 				3C4D39F1274766590010FD68 /* PhotosViewController.swift in Sources */,
 				3CE9C208274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
 				3C4D39D72747661E0010FD68 /* AppDelegate.swift in Sources */,
+				3C7BADB7275C71B30030F0D2 /* PopoverConfiguration.swift in Sources */,
 				3C1D1A17275AA0E40064F2C6 /* SwiftUIViews.swift in Sources */,
 				3C4D3A7B2747696F0010FD68 /* Utilities+UIColor.swift in Sources */,
 				3C4D39F6274766790010FD68 /* TabBarView.swift in Sources */,
@@ -3966,6 +3977,7 @@
 				3C4D3A69274769370010FD68 /* ListsViewController.swift in Sources */,
 				3CE9C209274B704E008C903C /* Utilities+UIDevice.swift in Sources */,
 				3C4D3A5F2747691A0010FD68 /* ViewController.swift in Sources */,
+				3C7BADB8275C71B30030F0D2 /* PopoverConfiguration.swift in Sources */,
 				3C1D1A16275AA0E30064F2C6 /* SwiftUIViews.swift in Sources */,
 				3C4D3A7E274769700010FD68 /* Utilities+UIColor.swift in Sources */,
 				3C4D3A6E2747694F0010FD68 /* ToolbarViewModel.swift in Sources */,
@@ -3987,6 +3999,7 @@
 				3C1D19EB275A983E0064F2C6 /* ListsViewModel.swift in Sources */,
 				3C7BADAD275C12BA0030F0D2 /* TipView.swift in Sources */,
 				3C4D3B1D274776D20010FD68 /* HapticFeedbackView.swift in Sources */,
+				3C7BADB9275C71B30030F0D2 /* PopoverConfiguration.swift in Sources */,
 				3C4D3B24274776D20010FD68 /* LanguagesSummaryView.swift in Sources */,
 				3C1D1A36275AA25D0064F2C6 /* Utilities+SwiftUI.swift in Sources */,
 				3C4D3B20274776D20010FD68 /* SettingsViewModifiers.swift in Sources */,
@@ -4057,6 +4070,7 @@
 				3C1D1A24275AA21F0064F2C6 /* TabViewModel.swift in Sources */,
 				3C7BADA4275C10BF0030F0D2 /* PopoverConstants.swift in Sources */,
 				3C1D19E52759F2320064F2C6 /* SearchViewModel.swift in Sources */,
+				3C7BADBA275C71B30030F0D2 /* PopoverConfiguration.swift in Sources */,
 				3C4D20A32750A6CB00090AF9 /* Utilities+UIColor.swift in Sources */,
 				3C4D3B9827477ABD0010FD68 /* SearchCV+Delegate.swift in Sources */,
 				3C606671274ECCBA000A5BDE /* Debug.swift in Sources */,
@@ -4167,6 +4181,7 @@
 				3CE9C225274EBB70008C903C /* AppDelegate.swift in Sources */,
 				3C7B1D4A27571E8D006525B1 /* VisionSamplingEngine.swift in Sources */,
 				3C1D1A2D275AA25B0064F2C6 /* Utilities+UIViewController.swift in Sources */,
+				3C7BADBB275C71B30030F0D2 /* PopoverConfiguration.swift in Sources */,
 				3CE9C23D274EBD2B008C903C /* VC+Sizing.swift in Sources */,
 				3CE9C239274EBBA1008C903C /* LivePreviewView.swift in Sources */,
 				3CBEAC052753554C00D04B39 /* Utilities+Dates.swift in Sources */,
@@ -4426,6 +4441,7 @@
 				3C9CE49B25BFBFAC006D989C /* CameraVC+Resume.swift in Sources */,
 				3CAC4DAC25BF52CF00CC7948 /* LTStringDiffResult.swift in Sources */,
 				3C22D3E52702D578001E8474 /* PagingSelectedScrollPosition.swift in Sources */,
+				3C7BADB4275C71B30030F0D2 /* PopoverConfiguration.swift in Sources */,
 				3C22D3F72702D578001E8474 /* PageViewManagerDelegate.swift in Sources */,
 				3C4B6D7325B23460001F501A /* NavigationViewModifier.swift in Sources */,
 				3C9D5F5125F30394002E93F5 /* CameraVC+Flashlight.swift in Sources */,

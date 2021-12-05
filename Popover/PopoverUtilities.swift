@@ -32,23 +32,9 @@ extension View {
     }
 }
 
-extension Popover {
-    enum Anchor {
-        case topLeft
-        case topRight
-        case bottomLeft
-        case bottomRight
-    }
-    
-    struct Position {
-        var anchor: Anchor
-        var origin: CGPoint
-    }
-}
-
 /// convert to popover coordinates
 extension UIView {
-    func popoverOrigin(anchor: Popover.Anchor, offset: CGFloat = 8) -> Popover.Position {
+    func popoverOrigin(anchor: PopoverContext.Anchor, offset: CGFloat = 8) -> PopoverContext.Position {
         var point: CGPoint
         let frameInWindow = windowFrame()
         
@@ -63,7 +49,7 @@ extension UIView {
             point = CGPoint(x: frameInWindow.maxX, y: frameInWindow.maxY + offset)
         }
         
-        return Popover.Position(anchor: anchor, origin: point)
+        return .init(anchor: anchor, origin: point)
     }
     
     /// frame in the global window

@@ -14,30 +14,32 @@ struct FieldSettingsConstants {
 }
 
 struct FieldSettingsView: View {
-    @Binding var configuration: PopoverConfiguration.FieldSettings
+    
+    @ObservedObject var model: FieldSettingsModel
     @Binding var stopDraggingGesture: Bool
     
     var body: some View {
+        let _ = print("go: \(model.configuration)")
         VStack(spacing: 0) {
             Button {
-                if configuration.showingWords {
+                if model.configuration.showingWords {
                     withAnimation {
-                        configuration.showingWords = false
+                        model.configuration.showingWords = false
                     }
                 }
             } label: {
                 HStack(spacing: 4) {
-                    if configuration.showingWords {
+                    if model.configuration.showingWords {
                         Image(systemName: "chevron.backward")
                     }
                     
-                    Text(configuration.header)
+                    Text(model.configuration.header)
                 }
                 .foregroundColor(.white)
                 .font(.system(size: 12, weight: .semibold))
                 .padding(EdgeInsets(top: 12, leading: 12, bottom: 0, trailing: 12))
             }
-            .disabled(!configuration.showingWords)
+            .disabled(!model.configuration.showingWords)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.bottom, 10)
             
@@ -49,36 +51,36 @@ struct FieldSettingsView: View {
                 VStack(spacing: 10) {
                     Button {
                         withAnimation {
-                            configuration.selectedColor = configuration.defaultColor
+                            model.configuration.selectedColor = model.configuration.defaultColor
                         }
                     } label: {
                         HStack {
                             Text("Default")
                             Spacer()
                             Image(systemName: "checkmark")
-                                .opacity(configuration.defaultColor == configuration.selectedColor ? 1 : 0)
+                                .opacity(model.configuration.defaultColor == model.configuration.selectedColor ? 1 : 0)
                         }
                         .shadow(color: Color.black.opacity(0.25), radius: 3, x: 0, y: 1)
-                        .modifier(PopoverButtonModifier(backgroundColor: configuration.defaultColor))
+                        .modifier(PopoverButtonModifier(backgroundColor: model.configuration.defaultColor))
                     }
                     
                     
-                    PaletteView(selectedColor: $configuration.selectedColor)
+                    PaletteView(selectedColor: $model.configuration.selectedColor)
                         .cornerRadius(FieldSettingsConstants.cornerRadius)
                     
-                    OpacitySlider(value: $configuration.alpha, stopDraggingGesture: $stopDraggingGesture, color: configuration.selectedColor)
+                    OpacitySlider(value: $model.configuration.alpha, stopDraggingGesture: $stopDraggingGesture, color: model.configuration.selectedColor)
                         .frame(height: FieldSettingsConstants.sliderHeight)
                         .cornerRadius(FieldSettingsConstants.cornerRadius)
                 }
                 .padding(.horizontal, 12)
                 
-                if !configuration.words.isEmpty {
+                if !model.configuration.words.isEmpty {
                     Line()
                     
                     VStack {
                         Button {
                             withAnimation {
-                                configuration.showingWords = true
+                                model.configuration.showingWords = true
                             }
                         } label: {
                             Text("Show Words")
@@ -86,7 +88,7 @@ struct FieldSettingsView: View {
                             
                         }
                         
-                        if let editListPressed = configuration.editListPressed {
+                        if let editListPressed = model.configuration.editListPressed {
                             Button {
                                 editListPressed()
                             } label: {
@@ -100,12 +102,12 @@ struct FieldSettingsView: View {
                 }
             }
             .padding(.top, 10)
-            .offset(x: configuration.showingWords ? -180 : 0, y: 0)
-            .opacity(configuration.showingWords ? 0 : 1)
+            .offset(x: model.configuration.showingWords ? -180 : 0, y: 0)
+            .opacity(model.configuration.showingWords ? 0 : 1)
             .background(
                 ScrollView {
                     VStack {
-                        ForEach(configuration.words, id: \.self) { word in
+                        ForEach(model.configuration.words, id: \.self) { word in
                             let _ = print("word: \(word)")
                             Text(verbatim: word)
                                 .modifier(PopoverButtonModifier(backgroundColor: PopoverConstants.buttonColor))
@@ -114,8 +116,8 @@ struct FieldSettingsView: View {
                     .padding(.top, 10)
                     .padding(.horizontal, 12)
                 }
-                    .offset(x: configuration.showingWords ? 0 : 180, y: 0)
-                    .opacity(configuration.showingWords ? 1 : 0)
+                    .offset(x: model.configuration.showingWords ? 0 : 180, y: 0)
+                    .opacity(model.configuration.showingWords ? 1 : 0)
                 , alignment: .top)
         }
         .padding(.bottom, 12)
@@ -263,9 +265,9 @@ struct OpacitySlider: View {
     }
 }
 
-struct FieldSettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        FieldSettingsView(configuration: .constant(.init()), stopDraggingGesture: .constant(false))
-            .previewLayout(.fixed(width: 250, height: 300))
-    }
-}
+//struct FieldSettingsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FieldSettingsView(configuration: .constant(.init()), stopDraggingGesture: .constant(false))
+//            .previewLayout(.fixed(width: 250, height: 300))
+//    }
+//}

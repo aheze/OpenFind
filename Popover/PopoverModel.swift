@@ -9,21 +9,75 @@
 import Combine
 import SwiftUI
 
-class PopoverModel: ObservableObject {
-    @Published var popovers = [Popover]()
+struct Popovers {
+    static var window: PopoverContainerWindow?
+    static var model: PopoverModel = {
+        let model = PopoverModel()
+        let window = PopoverContainerWindow(popoverModel: model)
+        Popovers.window = window
+        
+        return model
+    }()
 }
 
-enum Popover: Identifiable, Equatable {
+class PopoverModel: ObservableObject {
+    @Published var popovers = [Popover]()
+    
+    @Published private var popoversDraggable = true
+    lazy var draggingEnabled = Binding {
+        self.popoversDraggable
+    } set: { newValue in
+        self.popoversDraggable = newValue
+    }
+}
+
+struct PopoverContext: Identifiable {
+    var id = UUID()
+    
+    /// position of the popover
+    var position: Position = .init(anchor: .bottomLeft, origin: .zero)
+    
+    /// calculated from SwiftUI
+    var size: CGSize = .zero
+    
+    /// if click in once of these rects, don't dismiss the popover. Otherwise, dismiss.
+    var dismissMode: DismissMode = .tapOutside([])
+    
+    
+    enum DismissMode {
+        case tapOutside([CGRect])
+        case none
+    }
+    
+    enum Anchor {
+        case topLeft
+        case topRight
+        case bottomLeft
+        case bottomRight
+    }
+    
+    struct Position {
+        var anchor: Anchor
+        var origin: CGPoint
+    }
+    
+}
+
+//enum Popover: Identifiable, Equatable {
+struct Popover: Identifiable, Equatable {
+    
+    var context = PopoverContext()
+    var view: AnyView
+    
     static func == (lhs: Popover, rhs: Popover) -> Bool {
         lhs.id == rhs.id
     }
     
     var id: UUID {
-        let context = extractContext()
         return context.id
     }
+    
     var frame: CGRect {
-        let context = extractContext()
         switch context.position.anchor {
         case .topLeft:
             return CGRect(origin: context.position.origin - CGPoint(x: 0, y: context.size.height), size: context.size)
@@ -35,59 +89,17 @@ enum Popover: Identifiable, Equatable {
             return CGRect(origin: context.position.origin, size: context.size)
         }
     }
+    
     var keepPresentedRects: [CGRect] {
-        let context = extractContext()
-        return context.keepPresentedRects
-    }
-    
-    func extractContext() -> PopoverContext {
-        switch self {
-        case .fieldSettings(let configuration):
-            return configuration.popoverContext
+        if case let .tapOutside(rects) = context.dismissMode {
+            return rects
         }
+        return []
     }
     
-    case fieldSettings(PopoverConfiguration.FieldSettings)
-    
 }
-struct PopoverConfiguration {
-    struct FieldSettings {
-        var popoverContext = PopoverContext()
-        
-        var header = "WORD"
-        var defaultColor: UIColor = UIColor(hex: 0x00aeef)
-        var selectedColor: UIColor = UIColor(hex: 0x00aeef)
-        var alpha: CGFloat = 1
-        
-        /// lists
-        var words = [String]()
-        var showingWords = false
-        var editListPressed: (() -> Void)?
-        
-        var propertiesChanged: ((Self) -> Void)?
-    }
-    struct Tip {
-        var popoverContext = PopoverContext()
-        
-        var text = "No Results"
-        var pressed: (() -> Void)?
-        
-        var propertiesChanged: ((Self) -> Void)?
-    }
-}
-struct PopoverContext: Identifiable {
-    var id = UUID()
-    
-    /// position of the popover
-    var position: Popover.Position = .init(anchor: .bottomLeft, origin: .zero)
-    
-    /// calculated from SwiftUI
-    var size: CGSize = .zero
-    
-    /// if click in once of these rects, don't dismiss the popover. Otherwise, dismiss.
-    var keepPresentedRects: [CGRect] = []
-    
-}
+
+
 
 
 
