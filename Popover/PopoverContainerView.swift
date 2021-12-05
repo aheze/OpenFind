@@ -12,6 +12,7 @@ struct PopoverContainerView: View {
     @ObservedObject var popoverModel: PopoverModel
     @State var selectedPopover: Popover? = nil
     @GestureState var selectedPopoverOffset: CGSize = .zero
+    @State var draggingActiveInsideSelectedPopover = false
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -27,7 +28,7 @@ struct PopoverContainerView: View {
                         configuration.propertiesChanged?(newValue)
                     }
                     
-                    FieldSettingsView(configuration: binding)
+                    FieldSettingsView(configuration: binding, stopDraggingGesture: $draggingActiveInsideSelectedPopover)
                         .offset(
                             x: popover.frame.origin.x + (selectedPopover == popover ? selectedPopoverOffset.width : 0),
                             y: popover.frame.origin.y + (selectedPopover == popover ? selectedPopoverOffset.height : 0)
@@ -61,7 +62,7 @@ struct PopoverContainerView: View {
                                 .onEnded { value in
                                     self.selectedPopover = nil
                                 }
-                        )
+                            , including: draggingActiveInsideSelectedPopover ? .subviews : .all)
                 }
             }
         }
