@@ -19,27 +19,26 @@ struct FieldSettingsView: View {
     @Binding var draggingEnabled: Bool
     
     var body: some View {
-        let _ = print("go: \(model.configuration)")
         VStack(spacing: 0) {
             Button {
-                if model.configuration.showingWords {
+                if model.showingWords {
                     withAnimation {
-                        model.configuration.showingWords = false
+                        model.showingWords = false
                     }
                 }
             } label: {
                 HStack(spacing: 4) {
-                    if model.configuration.showingWords {
+                    if model.showingWords {
                         Image(systemName: "chevron.backward")
                     }
                     
-                    Text(model.configuration.header)
+                    Text(model.header)
                 }
                 .foregroundColor(.white)
                 .font(.system(size: 12, weight: .semibold))
                 .padding(EdgeInsets(top: 12, leading: 12, bottom: 0, trailing: 12))
             }
-            .disabled(!model.configuration.showingWords)
+            .disabled(!model.showingWords)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.bottom, 10)
             
@@ -51,36 +50,36 @@ struct FieldSettingsView: View {
                 VStack(spacing: 10) {
                     Button {
                         withAnimation {
-                            model.configuration.selectedColor = model.configuration.defaultColor
+                            model.selectedColor = model.defaultColor
                         }
                     } label: {
                         HStack {
                             Text("Default")
                             Spacer()
                             Image(systemName: "checkmark")
-                                .opacity(model.configuration.defaultColor == model.configuration.selectedColor ? 1 : 0)
+                                .opacity(model.defaultColor == model.selectedColor ? 1 : 0)
                         }
                         .shadow(color: Color.black.opacity(0.25), radius: 3, x: 0, y: 1)
-                        .modifier(PopoverButtonModifier(backgroundColor: model.configuration.defaultColor))
+                        .modifier(PopoverButtonModifier(backgroundColor: model.defaultColor))
                     }
                     
                     
-                    PaletteView(selectedColor: $model.configuration.selectedColor)
+                    PaletteView(selectedColor: $model.selectedColor)
                         .cornerRadius(FieldSettingsConstants.cornerRadius)
                     
-                    OpacitySlider(value: $model.configuration.alpha, draggingEnabled: $draggingEnabled, color: model.configuration.selectedColor)
+                    OpacitySlider(value: $model.alpha, draggingEnabled: $draggingEnabled, color: model.selectedColor)
                         .frame(height: FieldSettingsConstants.sliderHeight)
                         .cornerRadius(FieldSettingsConstants.cornerRadius)
                 }
                 .padding(.horizontal, 12)
                 
-                if !model.configuration.words.isEmpty {
+                if !model.words.isEmpty {
                     Line()
                     
                     VStack {
                         Button {
                             withAnimation {
-                                model.configuration.showingWords = true
+                                model.showingWords = true
                             }
                         } label: {
                             Text("Show Words")
@@ -88,7 +87,7 @@ struct FieldSettingsView: View {
                             
                         }
                         
-                        if let editListPressed = model.configuration.editListPressed {
+                        if let editListPressed = model.editListPressed {
                             Button {
                                 editListPressed()
                             } label: {
@@ -102,12 +101,12 @@ struct FieldSettingsView: View {
                 }
             }
             .padding(.top, 10)
-            .offset(x: model.configuration.showingWords ? -180 : 0, y: 0)
-            .opacity(model.configuration.showingWords ? 0 : 1)
+            .offset(x: model.showingWords ? -180 : 0, y: 0)
+            .opacity(model.showingWords ? 0 : 1)
             .background(
                 ScrollView {
                     VStack {
-                        ForEach(model.configuration.words, id: \.self) { word in
+                        ForEach(model.words, id: \.self) { word in
                             let _ = print("word: \(word)")
                             Text(verbatim: word)
                                 .modifier(PopoverButtonModifier(backgroundColor: PopoverConstants.buttonColor))
@@ -116,8 +115,8 @@ struct FieldSettingsView: View {
                     .padding(.top, 10)
                     .padding(.horizontal, 12)
                 }
-                    .offset(x: model.configuration.showingWords ? 0 : 180, y: 0)
-                    .opacity(model.configuration.showingWords ? 1 : 0)
+                    .offset(x: model.showingWords ? 0 : 180, y: 0)
+                    .opacity(model.showingWords ? 1 : 0)
                 , alignment: .top)
         }
         .padding(.bottom, 12)

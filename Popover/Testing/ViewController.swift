@@ -35,22 +35,30 @@ class ViewController: UIViewController {
     
     var fields = [
         Field(text: .init(value: .string(""), colorIndex: 0)),
-        Field(text: .init(value: .addNew(""), colorIndex: 1))
+        Field(text: .init(value: .list(
+            List(
+                name: "List",
+                desc: "Desc",
+                contents: ["Word", "Branch", "Water", "Dirt"],
+                iconImageName: "plus",
+                iconColorName: 0x00aeef,
+                dateCreated: Date()
+            )
+        ), colorIndex: 1)),
+        Field(text: .init(value: .addNew(""), colorIndex: 2))
     ]
     
-//    var fieldSettingsModel = FieldSettingsModel()
+    //    var fieldSettingsModel = FieldSettingsModel()
     
     @IBAction func wordPressed(_ sender: Any) {
         let fieldSettingsModel = FieldSettingsModel()
-        fieldSettingsModel.configuration = PopoverConfiguration.FieldSettings(
-            header: "WORDS",
-            defaultColor: self.fields[0].text.color,
-            selectedColor: self.fields[0].text.color,
-            alpha: self.fields[0].text.colorAlpha,
-            words: [],
-            showingWords: false,
-            editListPressed: nil
-        )
+        fieldSettingsModel.header = "WORD"
+        fieldSettingsModel.defaultColor = self.fields[0].text.color
+        fieldSettingsModel.selectedColor = self.fields[0].text.color
+        fieldSettingsModel.alpha = self.fields[0].text.colorAlpha
+        fieldSettingsModel.words = []
+        fieldSettingsModel.showingWords = false
+        fieldSettingsModel.editListPressed = nil
         
         let popoverView = AnyView(FieldSettingsView(model: fieldSettingsModel, draggingEnabled: Popovers.model.draggingEnabled))
         var popover = Popover(view: popoverView)
@@ -70,6 +78,54 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var listButton: UIButton!
     @IBAction func listPressed(_ sender: Any) {
+        let fieldSettingsModel = FieldSettingsModel()
+        fieldSettingsModel.header = "LIST"
+        fieldSettingsModel.defaultColor = self.fields[1].text.color
+        fieldSettingsModel.selectedColor = self.fields[1].text.color
+        fieldSettingsModel.alpha = self.fields[1].text.colorAlpha
+        fieldSettingsModel.words = ["Hello", "Other word", "Ice", "Water"]
+
+        fieldSettingsModel.editListPressed = {
+            print("Edit")
+            //            if let existingFieldSettingsPopoverIndex = self.indexOfExistingFieldPopover() {
+            withAnimation {
+                Popovers.model.popovers.remove(at: 0)
+                //                }
+            }
+        }
+        
+        let popoverView = AnyView(FieldSettingsView(model: fieldSettingsModel, draggingEnabled: Popovers.model.draggingEnabled))
+        var popover = Popover(view: popoverView)
+        popover.context.position = self.listLabel.popoverOrigin(anchor: .bottomLeft)
+        popover.context.dismissMode = .tapOutside(
+            .init(
+                animation: .spring(),
+                excludedRects: [
+                    self.purpleButton.windowFrame(),
+                    self.listButton.windowFrame(),
+                    self.listLabel.windowFrame()
+                ]
+            )
+        )
+        //        if let existingFieldSettingsPopoverIndex = indexOfExistingFieldPopover() {
+        if Popovers.model.popovers.indices.contains(0) {
+            
+            withAnimation {
+                
+                /// use same ID for smooth position animation
+                popover.context.id = Popovers.model.popovers[0].id
+                Popovers.model.popovers[0] = popover
+            }
+        } else {
+            Popovers.present(popover, animation: .spring())
+        }
+        //        } else {
+        //            withAnimation {
+        //                let popover = Popover.fieldSettings(configuration)
+        //                popoverModel.popovers.append(popover)
+//            }
+//        }
+//        Popovers.present(popover, animation: .spring())
         
 //        var configuration = PopoverConfiguration.FieldSettings(
 //            popoverContext: .init(
