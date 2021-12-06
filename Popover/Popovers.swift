@@ -19,7 +19,6 @@ struct Popovers {
     }()
     
     static func present(_ popover: Popover) {
-//        print("sa: \(model.safeArea)")
         
         /// make sure the window is set up the first time
         DispatchQueue.main.async {
@@ -34,12 +33,6 @@ struct Popovers {
         Popovers.model.popoversDraggable
     } set: { newValue in
         Popovers.model.popoversDraggable = newValue
-    }
-    
-    static var safeArea = Binding {
-        Popovers.model.safeArea
-    } set: { newValue in
-        Popovers.model.safeArea = newValue
     }
     
 }

@@ -19,7 +19,7 @@ struct PopoverContainerView: View {
             Color.blue.opacity(0.25)
             
             ForEach(Array(zip(popoverModel.popovers.indices, popoverModel.popovers)), id: \.1.id) { (index, popover) in
-                let binding = Binding {
+                let context = Binding {
                     popover.context
                 } set: { newValue in
                     if popoverModel.popovers.indices.contains(index) {
@@ -28,7 +28,8 @@ struct PopoverContainerView: View {
                 }
                 
                 popover.view
-                    .writeSize(to: binding.size)
+                    .opacity(popover.frame != nil ? 1 : 0)
+                    .writeSize(to: context.size)
                     .offset(popoverOffset(for: popover))
                     .animation(.spring(), value: selectedPopover)
                     .transition(
@@ -74,7 +75,9 @@ struct PopoverContainerView: View {
     }
     
     func popoverOffset(for popover: Popover) -> CGSize {
-        let popoverFrame = popover.frame
+        guard let popoverFrame = popover.frame else { return .zero }
+        print("frame is: \(popoverFrame)")
+        
         let offset = CGSize(
             width: popoverFrame.origin.x + ((selectedPopover == popover) ? selectedPopoverOffset.width : 0),
             height: popoverFrame.origin.y + ((selectedPopover == popover) ? selectedPopoverOffset.height : 0)

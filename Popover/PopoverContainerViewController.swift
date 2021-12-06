@@ -23,12 +23,13 @@ class PopoverContainerViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-//        Popovers.safeArea = CGRect(origin: .zero, size: size)
-        print("size: \(size)")
+        
+        /// orientation changed, update views
+        Popovers.model.refresh()
     }
     
     override func loadView() {
-        print("load")
+    
         /**
          Instantiate the base `view`.
          */

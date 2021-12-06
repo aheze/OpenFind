@@ -73,16 +73,12 @@ class ViewController: UIViewController {
 //        )
         popover.attributes.position = .relative(
             .init(
+                containerFrame: { self.view.bounds },
                 popoverAnchor: .right
             )
         )
-//        popover.attributes.position.originFrame = { .relative(CGRect(x: 0, y: 0, width: 0.2, height: 0.2)) }
-//
-//        popover.attributes.position.originAnchor = .bottomLeft
-//        popover.attributes.position.popoverAnchor = .topLeft
-        
         popover.attributes.presentation.animation = .spring()
-        popover.attributes.presentation.transition = .slide
+        popover.attributes.presentation.transition = .opacity
         popover.attributes.dismissal.animation = .spring()
         popover.attributes.dismissal.transition = .opacity
         popover.attributes.dismissal.excludedFrames = {
@@ -92,6 +88,7 @@ class ViewController: UIViewController {
                 self.listLabel.windowFrame()
             ]
         }
+
         Popovers.present(popover)
     }
     
@@ -218,9 +215,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        Popovers.safeArea.wrappedValue 
-        
-//        _ = popoverController
     }
 }
 

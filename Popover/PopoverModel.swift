@@ -12,10 +12,13 @@ import SwiftUI
 class PopoverModel: ObservableObject {
     @Published var popovers = [Popover]()
     
-    @Published var safeArea: CGRect?
-    
     /// must be published so that the `PopoverContainerView` rerenders
     @Published internal var popoversDraggable = true
+    
+    /// force container view to update
+    func refresh() {
+        objectWillChange.send()
+    }
 }
 
 

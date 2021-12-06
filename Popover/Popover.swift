@@ -27,9 +27,14 @@ struct Popover: Identifiable, Equatable {
         return context.id
     }
     
-    var frame: CGRect {
-        let popoverFrame = attributes.position.popoverFrame(popoverSize: context.size)
-        return popoverFrame
+    var frame: CGRect? {
+        if let popoverSize = context.size {
+            print("has size")
+            let popoverFrame = attributes.position.popoverFrame(popoverSize: popoverSize)
+            return popoverFrame
+        }
+        print("no size")
+        return nil
     }
     
     static func == (lhs: Popover, rhs: Popover) -> Bool {
@@ -67,7 +72,7 @@ struct Popover: Identifiable, Equatable {
         var origin: CGPoint = .zero
         
         /// calculated from SwiftUI
-        var size: CGSize = .zero
+        var size: CGSize?
         
     }
     
@@ -87,6 +92,8 @@ struct Popover: Identifiable, Equatable {
         }
         
         struct Relative {
+            var containerFrame: (() -> CGRect) = { .zero }
+            
             var popoverAnchor = Anchor.bottomLeft
         }
         
@@ -163,6 +170,7 @@ struct Popover: Identifiable, Equatable {
             switch self {
             case .absolute(let position):
                 let originFrame = position.originFrame()
+                
                 switch position.originAnchor {
                 case .topLeft:
                     return originFrame.origin
@@ -203,8 +211,8 @@ struct Popover: Identifiable, Equatable {
                     )
                 }
             case .relative(let position):
-                let safeArea = Popovers.model.safeArea ?? UIScreen.main.bounds
-
+                let containerFrame = position.containerFrame()
+                
                 switch position.popoverAnchor {
                 case .topLeft:
                     return CGPoint(
@@ -213,38 +221,38 @@ struct Popover: Identifiable, Equatable {
                     )
                 case .top:
                     return CGPoint(
-                        x: safeArea.width / 2 - popoverSize.width / 2,
+                        x: containerFrame.width / 2 - popoverSize.width / 2,
                         y: 0
                     )
                 case .topRight:
                     return CGPoint(
-                        x: safeArea.width - popoverSize.width,
+                        x: containerFrame.width - popoverSize.width,
                         y: 0
                     )
                 case .right:
                     return CGPoint(
-                        x: safeArea.width - popoverSize.width,
-                        y: safeArea.height / 2 - popoverSize.height / 2
+                        x: containerFrame.width - popoverSize.width,
+                        y: containerFrame.height / 2 - popoverSize.height / 2
                     )
                 case .bottomRight:
                     return CGPoint(
-                        x: safeArea.width - popoverSize.width,
-                        y: safeArea.height - popoverSize.height
+                        x: containerFrame.width - popoverSize.width,
+                        y: containerFrame.height - popoverSize.height
                     )
                 case .bottom:
                     return CGPoint(
-                        x: safeArea.width / 2 - popoverSize.width / 2,
-                        y: safeArea.height - popoverSize.height
+                        x: containerFrame.width / 2 - popoverSize.width / 2,
+                        y: containerFrame.height - popoverSize.height
                     )
                 case .bottomLeft:
                     return CGPoint(
                         x: 0,
-                        y: safeArea.height - popoverSize.height
+                        y: containerFrame.height - popoverSize.height
                     )
                 case .left:
                     return CGPoint(
                         x: 0,
-                        y: safeArea.height / 2 - popoverSize.height / 2
+                        y: containerFrame.height / 2 - popoverSize.height / 2
                     )
                 }
             }
@@ -255,12 +263,12 @@ struct Popover: Identifiable, Equatable {
 //            case .absolute(let rect):
 //                normalizedOriginFrame = rect
 //            case .relative(let rect):
-//                let safeArea = Popovers.model.safeArea ?? UIScreen.main.bounds
+//                let containerFrame = Popovers.model.containerFrame ?? UIScreen.main.bounds
 //                let scaledRect = CGRect(
-//                    x: rect.origin.x * safeArea.width,
-//                    y: rect.origin.y * safeArea.height,
-//                    width: rect.width * safeArea.width,
-//                    height: rect.height * safeArea.height
+//                    x: rect.origin.x * containerFrame.width,
+//                    y: rect.origin.y * containerFrame.height,
+//                    width: rect.width * containerFrame.width,
+//                    height: rect.height * containerFrame.height
 //                )
 //                normalizedOriginFrame = scaledRect
 //            }
