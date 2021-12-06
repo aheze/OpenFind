@@ -96,9 +96,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="holdButton" destination="zC2-rM-Fnl" id="Tes-rf-9tP"/>
                         <outlet property="listButton" destination="LJn-R9-ade" id="zvK-hq-sIQ"/>
                         <outlet property="listLabel" destination="WJn-gW-YrJ" id="FdP-a0-PDj"/>
                         <outlet property="purpleButton" destination="gew-an-EDb" id="GHL-dq-UyW"/>
+                        <outlet property="tipButton" destination="9cV-aS-XBJ" id="0Id-9n-5HB"/>
                         <outlet property="wordLabel" destination="kI3-Fj-dir" id="9EU-rF-ogH"/>
                     </connections>
                 </viewController>

@@ -107,7 +107,6 @@ struct FieldSettingsView: View {
                 ScrollView {
                     VStack {
                         ForEach(model.words, id: \.self) { word in
-                            let _ = print("word: \(word)")
                             Text(verbatim: word)
                                 .modifier(PopoverButtonModifier(backgroundColor: PopoverConstants.buttonColor))
                         }

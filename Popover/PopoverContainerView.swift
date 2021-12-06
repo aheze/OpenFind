@@ -14,7 +14,6 @@ struct PopoverContainerView: View {
     @GestureState var selectedPopoverOffset: CGSize = .zero
     
     var body: some View {
-
         ZStack(alignment: .topLeading) {
             Color.blue.opacity(0.25)
             
@@ -30,6 +29,7 @@ struct PopoverContainerView: View {
                 popover.view
                     .opacity(popover.frame != nil ? 1 : 0)
                     .writeSize(to: context.size)
+//                    .position(<#T##position: CGPoint##CGPoint#>)
                     .offset(popoverOffset(for: popover))
                     .animation(.spring(), value: selectedPopover)
                     .transition(
@@ -75,13 +75,17 @@ struct PopoverContainerView: View {
     }
     
     func popoverOffset(for popover: Popover) -> CGSize {
-        guard let popoverFrame = popover.frame else { return .zero }
-        print("frame is: \(popoverFrame)")
+//        return .init(width: 50, height: 100)
+        guard let popoverFrame = popover.frame else {
+            print("Zero")
+            return .zero
+        }
         
         let offset = CGSize(
             width: popoverFrame.origin.x + ((selectedPopover == popover) ? selectedPopoverOffset.width : 0),
             height: popoverFrame.origin.y + ((selectedPopover == popover) ? selectedPopoverOffset.height : 0)
         )
+        print("Nonzero: \(offset)")
         return offset
     }
 }

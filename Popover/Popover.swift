@@ -24,7 +24,11 @@ struct Popover: Identifiable, Equatable {
     }
     
     var id: UUID {
-        return context.id
+        get {
+            context.id
+        } set {
+            context.id = newValue
+        }
     }
     
     var frame: CGRect? {
@@ -43,6 +47,9 @@ struct Popover: Identifiable, Equatable {
         var position = Position.absolute(.init())
         var presentation = Presentation()
         var dismissal = Dismissal()
+        
+        /// for identifying the popover later. Optional.
+        var tag: String?
         
         struct Presentation {
             var animation: Animation? = .default
