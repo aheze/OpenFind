@@ -73,7 +73,7 @@ class ViewController: UIViewController {
 //        )
         popover.attributes.position = .relative(
             .init(
-                popoverAnchor: .topRight
+                popoverAnchor: .right
             )
         )
 //        popover.attributes.position.originFrame = { .relative(CGRect(x: 0, y: 0, width: 0.2, height: 0.2)) }

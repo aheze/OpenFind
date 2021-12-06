@@ -109,7 +109,7 @@ struct Popover: Identifiable, Equatable {
             switch self {
             case .absolute(let position):
                 popoverAnchor = position.popoverAnchor
-            case .relative(let position):
+            case .relative(_):
                 popoverAnchor = .topLeft /// use top left as origin
             }
             
@@ -218,32 +218,32 @@ struct Popover: Identifiable, Equatable {
                     )
                 case .topRight:
                     return CGPoint(
-                        x: safeArea.width - popoverSize.width / 2,
+                        x: safeArea.width - popoverSize.width,
                         y: 0
                     )
                 case .right:
                     return CGPoint(
-                        x: safeArea.width - popoverSize.width / 2,
+                        x: safeArea.width - popoverSize.width,
                         y: safeArea.height / 2 - popoverSize.height / 2
                     )
                 case .bottomRight:
                     return CGPoint(
-                        x: safeArea.width - popoverSize.width / 2,
-                        y: safeArea.height - popoverSize.height / 2
+                        x: safeArea.width - popoverSize.width,
+                        y: safeArea.height - popoverSize.height
                     )
                 case .bottom:
                     return CGPoint(
                         x: safeArea.width / 2 - popoverSize.width / 2,
-                        y: safeArea.height - popoverSize.height / 2
+                        y: safeArea.height - popoverSize.height
                     )
                 case .bottomLeft:
                     return CGPoint(
                         x: 0,
-                        y: safeArea.height - popoverSize.height / 2
+                        y: safeArea.height - popoverSize.height
                     )
                 case .left:
                     return CGPoint(
-                        x: safeArea.width - popoverSize.width / 2,
+                        x: 0,
                         y: safeArea.height / 2 - popoverSize.height / 2
                     )
                 }
