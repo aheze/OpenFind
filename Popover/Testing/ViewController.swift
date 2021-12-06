@@ -60,15 +60,29 @@ class ViewController: UIViewController {
         fieldSettingsModel.showingWords = false
         fieldSettingsModel.editListPressed = nil
         
-        let popoverView = FieldSettingsView(model: fieldSettingsModel, draggingEnabled: Popovers.model.draggingEnabled)
+        let popoverView = FieldSettingsView(model: fieldSettingsModel, draggingEnabled: Popovers.draggingEnabled)
         var popover = Popover { popoverView }
-        popover.attributes.position.originFrame = wordLabel.popoverOriginFrame()
-        popover.attributes.position.originAnchor = .bottomLeft
-        popover.attributes.position.popoverAnchor = .topLeft
+//        popover.attributes.position.originFrame = wordLabel.popoverOriginFrame()
+        
+//        popover.attributes.position = .absolute(
+//            .init(
+//                originFrame: wordLabel.popoverOriginFrame(),
+//                originAnchor: .bottomLeft,
+//                popoverAnchor: .topLeft
+//            )
+//        )
+        popover.attributes.position = .relative(
+            .init(
+                popoverAnchor: .topRight
+            )
+        )
+//        popover.attributes.position.originFrame = { .relative(CGRect(x: 0, y: 0, width: 0.2, height: 0.2)) }
+//
+//        popover.attributes.position.originAnchor = .bottomLeft
+//        popover.attributes.position.popoverAnchor = .topLeft
         
         popover.attributes.presentation.animation = .spring()
         popover.attributes.presentation.transition = .slide
-//            . = self.wordLabel.popoverOrigin(anchor: .bottomLeft)
         popover.attributes.dismissal.animation = .spring()
         popover.attributes.dismissal.transition = .opacity
         popover.attributes.dismissal.excludedFrames = {
@@ -204,6 +218,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        Popovers.safeArea.wrappedValue 
         
 //        _ = popoverController
     }

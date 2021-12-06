@@ -37,7 +37,7 @@ struct Popover: Identifiable, Equatable {
     }
     
     struct Attributes {
-        var position = Position()
+        var position = Position.absolute(.init())
         var presentation = Presentation()
         var dismissal = Dismissal()
         
@@ -71,15 +71,25 @@ struct Popover: Identifiable, Equatable {
         
     }
     
-    struct Position {
+    enum Position {
         
-        var originFrame: (() -> CGRect) = { .zero }
+        case absolute(Absolute)
+        case relative(Relative)
         
-        /// the side of the origin view which the popover is attached to
-        var originAnchor = Anchor.bottomLeft
+        struct Absolute {
+            var originFrame: (() -> CGRect) = { .zero }
+            
+            /// the side of the origin view which the popover is attached to
+            var originAnchor = Anchor.bottomLeft
+            
+            /// the side of the popover that gets attached to the origin
+            var popoverAnchor = Anchor.topLeft
+        }
         
-        /// the side of the popover that gets attached to the origin
-        var popoverAnchor = Anchor.topLeft
+        struct Relative {
+            var popoverAnchor = Anchor.bottomLeft
+        }
+        
         
         enum Anchor {
             case topLeft
@@ -93,7 +103,15 @@ struct Popover: Identifiable, Equatable {
         }
         
         func popoverFrame(popoverSize: CGSize) -> CGRect {
-            let popoverOrigin = popoverOrigin()
+            let popoverOrigin = popoverOrigin(popoverSize: popoverSize)
+            let popoverAnchor: Anchor
+            
+            switch self {
+            case .absolute(let position):
+                popoverAnchor = position.popoverAnchor
+            case .relative(let position):
+                popoverAnchor = .topLeft /// use top left as origin
+            }
             
             switch popoverAnchor {
             case .topLeft:
@@ -140,47 +158,116 @@ struct Popover: Identifiable, Equatable {
         }
         
         /// get the popover's origin point
-        func popoverOrigin() -> CGPoint {
-            let originFrame = originFrame()
-            switch originAnchor {
-            case .topLeft:
-                return originFrame.origin
-            case .top:
-                return CGPoint(
-                    x: originFrame.origin.x + originFrame.width / 2,
-                    y: originFrame.origin.y
-                )
-            case .topRight:
-                return CGPoint(
-                    x: originFrame.origin.x + originFrame.width,
-                    y: originFrame.origin.y
-                )
-            case .right:
-                return CGPoint(
-                    x: originFrame.origin.x + originFrame.width,
-                    y: originFrame.origin.y + originFrame.height / 2
-                )
-            case .bottomRight:
-                return CGPoint(
-                    x: originFrame.origin.x + originFrame.width,
-                    y: originFrame.origin.y + originFrame.height
-                )
-            case .bottom:
-                return CGPoint(
-                    x: originFrame.origin.x + originFrame.width / 2,
-                    y: originFrame.origin.y + originFrame.height
-                )
-            case .bottomLeft:
-                return CGPoint(
-                    x: originFrame.origin.x,
-                    y: originFrame.origin.y + originFrame.height
-                )
-            case .left:
-                return CGPoint(
-                    x: originFrame.origin.x + originFrame.width,
-                    y: originFrame.origin.y + originFrame.height / 2
-                )
+        /// `popoverSize` is only used for relative positioning
+        func popoverOrigin(popoverSize: CGSize) -> CGPoint {
+            switch self {
+            case .absolute(let position):
+                let originFrame = position.originFrame()
+                switch position.originAnchor {
+                case .topLeft:
+                    return originFrame.origin
+                case .top:
+                    return CGPoint(
+                        x: originFrame.origin.x + originFrame.width / 2,
+                        y: originFrame.origin.y
+                    )
+                case .topRight:
+                    return CGPoint(
+                        x: originFrame.origin.x + originFrame.width,
+                        y: originFrame.origin.y
+                    )
+                case .right:
+                    return CGPoint(
+                        x: originFrame.origin.x + originFrame.width,
+                        y: originFrame.origin.y + originFrame.height / 2
+                    )
+                case .bottomRight:
+                    return CGPoint(
+                        x: originFrame.origin.x + originFrame.width,
+                        y: originFrame.origin.y + originFrame.height
+                    )
+                case .bottom:
+                    return CGPoint(
+                        x: originFrame.origin.x + originFrame.width / 2,
+                        y: originFrame.origin.y + originFrame.height
+                    )
+                case .bottomLeft:
+                    return CGPoint(
+                        x: originFrame.origin.x,
+                        y: originFrame.origin.y + originFrame.height
+                    )
+                case .left:
+                    return CGPoint(
+                        x: originFrame.origin.x + originFrame.width,
+                        y: originFrame.origin.y + originFrame.height / 2
+                    )
+                }
+            case .relative(let position):
+                let safeArea = Popovers.model.safeArea ?? UIScreen.main.bounds
+
+                switch position.popoverAnchor {
+                case .topLeft:
+                    return CGPoint(
+                        x: 0,
+                        y: 0
+                    )
+                case .top:
+                    return CGPoint(
+                        x: safeArea.width / 2 - popoverSize.width / 2,
+                        y: 0
+                    )
+                case .topRight:
+                    return CGPoint(
+                        x: safeArea.width - popoverSize.width / 2,
+                        y: 0
+                    )
+                case .right:
+                    return CGPoint(
+                        x: safeArea.width - popoverSize.width / 2,
+                        y: safeArea.height / 2 - popoverSize.height / 2
+                    )
+                case .bottomRight:
+                    return CGPoint(
+                        x: safeArea.width - popoverSize.width / 2,
+                        y: safeArea.height - popoverSize.height / 2
+                    )
+                case .bottom:
+                    return CGPoint(
+                        x: safeArea.width / 2 - popoverSize.width / 2,
+                        y: safeArea.height - popoverSize.height / 2
+                    )
+                case .bottomLeft:
+                    return CGPoint(
+                        x: 0,
+                        y: safeArea.height - popoverSize.height / 2
+                    )
+                case .left:
+                    return CGPoint(
+                        x: safeArea.width - popoverSize.width / 2,
+                        y: safeArea.height / 2 - popoverSize.height / 2
+                    )
+                }
             }
+            
+            
+//            let normalizedOriginFrame: CGRect
+//            switch originFrame {
+//            case .absolute(let rect):
+//                normalizedOriginFrame = rect
+//            case .relative(let rect):
+//                let safeArea = Popovers.model.safeArea ?? UIScreen.main.bounds
+//                let scaledRect = CGRect(
+//                    x: rect.origin.x * safeArea.width,
+//                    y: rect.origin.y * safeArea.height,
+//                    width: rect.width * safeArea.width,
+//                    height: rect.height * safeArea.height
+//                )
+//                normalizedOriginFrame = scaledRect
+//            }
+            
+            
+            
+            
         }
     }
 }

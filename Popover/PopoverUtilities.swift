@@ -60,6 +60,9 @@ extension UIView {
         return self.convert(bounds, to: nil)
     }
     func popoverOriginFrame() -> (() -> CGRect) {
+        
+        /// return a closure that gets the frame of the view
+        /// it's a closure because view frames can change
         return {
             self.windowFrame()
         }

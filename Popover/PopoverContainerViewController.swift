@@ -21,8 +21,14 @@ class PopoverContainerViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+//        Popovers.safeArea = CGRect(origin: .zero, size: size)
+        print("size: \(size)")
+    }
+    
     override func loadView() {
-        
+        print("load")
         /**
          Instantiate the base `view`.
          */

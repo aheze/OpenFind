@@ -12,13 +12,10 @@ import SwiftUI
 class PopoverModel: ObservableObject {
     @Published var popovers = [Popover]()
     
+    @Published var safeArea: CGRect?
+    
     /// must be published so that the `PopoverContainerView` rerenders
     @Published internal var popoversDraggable = true
-    lazy var draggingEnabled = Binding {
-        self.popoversDraggable
-    } set: { newValue in
-        self.popoversDraggable = newValue
-    }
 }
 
 
