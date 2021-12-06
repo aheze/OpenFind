@@ -28,11 +28,8 @@ struct Popover: Identifiable, Equatable {
     }
     
     var frame: CGRect {
-        print("Size: \(context.size)")
         let popoverFrame = attributes.position.popoverFrame(popoverSize: context.size)
-        print("fr: \(popoverFrame)")
         return popoverFrame
-//        return CGRect(origin: context.origin, size: context.size)
     }
     
     static func == (lhs: Popover, rhs: Popover) -> Bool {
@@ -84,9 +81,6 @@ struct Popover: Identifiable, Equatable {
         /// the side of the popover that gets attached to the origin
         var popoverAnchor = Anchor.topLeft
         
-        
-        var repositioningMode = RepositioningMode.none
-        
         enum Anchor {
             case topLeft
             case top
@@ -96,11 +90,6 @@ struct Popover: Identifiable, Equatable {
             case bottom
             case bottomLeft
             case left
-        }
-        
-        enum RepositioningMode {
-            case keepOnScreen
-            case none
         }
         
         func popoverFrame(popoverSize: CGSize) -> CGRect {
