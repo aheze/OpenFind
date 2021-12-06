@@ -30,6 +30,12 @@ struct PopoverContainerView: View {
                 popover.view
                     .offset(popoverOffset(for: popover))
                     .animation(.spring(), value: selectedPopover)
+                    .transition(
+                        .asymmetric(
+                            insertion: popover.attributes.presentation.transition ?? .opacity,
+                            removal: popover.attributes.dismissal.transition ?? .opacity
+                        )
+                    )
                     .writeSize(to: binding.size)
                     .simultaneousGesture(
                         DragGesture(minimumDistance: 0)

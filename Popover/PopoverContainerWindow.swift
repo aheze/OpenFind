@@ -51,15 +51,23 @@ class PopoverContainerWindow: UIWindow {
             }
             
             /// check if hit a excluded view - don't dismiss
-            if popover.keepPresentedRects.contains(where: { $0.contains(point) }) {
-                return nil
+            
+            switch popover.attributes.dismissal.mode {
+            case .whenTappedOutside:
+                let excludedFrames = popover.attributes.dismissal.excludedFrames()
+                if excludedFrames.contains(where: { $0.contains(point) }) {
+                    return nil
+                }
+            case .none:
+                break
             }
+            
         }
         
         /// otherwise, dismiss and don't pass the event to the popover
         for (index, popover) in popoverModel.popovers.reversed().enumerated() {
-            if case .tapOutside(let dismissContext) = popover.context.dismissMode {
-                withAnimation(dismissContext.animation) {
+            if popover.attributes.dismissal.mode == .whenTappedOutside {
+                withAnimation(popover.attributes.dismissal.animation) {
                     popoverModel.popovers.remove(at: index)
                 }
             }

@@ -9,8 +9,8 @@
 import SwiftUI
 
 
-class FieldSettingsModel: PopoverState {
-//    @Published var configuration = FieldSettings()
+class FieldSettingsModel: ObservableObject {
+
     @Published var header = "WORD"
     @Published var defaultColor: UIColor = UIColor(hex: 0x00aeef)
     @Published var selectedColor: UIColor = UIColor(hex: 0x00aeef)
@@ -22,19 +22,6 @@ class FieldSettingsModel: PopoverState {
     @Published var editListPressed: (() -> Void)?
 }
 
-//struct FieldSettings {
-//
-//    var header = "WORD"
-//    var defaultColor: UIColor = UIColor(hex: 0x00aeef)
-//    var selectedColor: UIColor = UIColor(hex: 0x00aeef)
-//    var alpha: CGFloat = 1
-//
-//    /// lists
-//    var words = [String]()
-//    var showingWords = false
-//    var editListPressed: (() -> Void)?
-//
-//}
 struct Tip {
     
     var text = "No Results"

@@ -60,65 +60,70 @@ class ViewController: UIViewController {
         fieldSettingsModel.showingWords = false
         fieldSettingsModel.editListPressed = nil
         
-        let popoverView = AnyView(FieldSettingsView(model: fieldSettingsModel, draggingEnabled: Popovers.model.draggingEnabled))
-        var popover = Popover(view: popoverView)
-        popover.context.position = self.wordLabel.popoverOrigin(anchor: .bottomLeft)
-        popover.context.dismissMode = .tapOutside(
-            .init(
-                animation: .spring(),
-                excludedRects: [
-                    self.purpleButton.windowFrame(),
-                    self.listButton.windowFrame(),
-                    self.listLabel.windowFrame()
-                ]
-            )
-        )
-        Popovers.present(popover, animation: .spring())
+        let popoverView = FieldSettingsView(model: fieldSettingsModel, draggingEnabled: Popovers.model.draggingEnabled)
+        var popover = Popover { popoverView }
+        popover.attributes.position.originFrame = wordLabel.popoverOriginFrame()
+        popover.attributes.position.originAnchor = .bottomLeft
+        popover.attributes.position.popoverAnchor = .topLeft
+        
+        popover.attributes.presentation.animation = .spring()
+        popover.attributes.presentation.transition = .slide
+//            . = self.wordLabel.popoverOrigin(anchor: .bottomLeft)
+        popover.attributes.dismissal.animation = .spring()
+        popover.attributes.dismissal.transition = .opacity
+        popover.attributes.dismissal.excludedFrames = {
+            [
+                self.purpleButton.windowFrame(),
+                self.listButton.windowFrame(),
+                self.listLabel.windowFrame()
+            ]
+        }
+        Popovers.present(popover)
     }
     
     @IBOutlet weak var listButton: UIButton!
     @IBAction func listPressed(_ sender: Any) {
-        let fieldSettingsModel = FieldSettingsModel()
-        fieldSettingsModel.header = "LIST"
-        fieldSettingsModel.defaultColor = self.fields[1].text.color
-        fieldSettingsModel.selectedColor = self.fields[1].text.color
-        fieldSettingsModel.alpha = self.fields[1].text.colorAlpha
-        fieldSettingsModel.words = ["Hello", "Other word", "Ice", "Water"]
-
-        fieldSettingsModel.editListPressed = {
-            print("Edit")
-            //            if let existingFieldSettingsPopoverIndex = self.indexOfExistingFieldPopover() {
-            withAnimation {
-                Popovers.model.popovers.remove(at: 0)
-                //                }
-            }
-        }
-        
-        let popoverView = AnyView(FieldSettingsView(model: fieldSettingsModel, draggingEnabled: Popovers.model.draggingEnabled))
-        var popover = Popover(view: popoverView)
-        popover.context.position = self.listLabel.popoverOrigin(anchor: .bottomLeft)
-        popover.context.dismissMode = .tapOutside(
-            .init(
-                animation: .spring(),
-                excludedRects: [
-                    self.purpleButton.windowFrame(),
-                    self.listButton.windowFrame(),
-                    self.listLabel.windowFrame()
-                ]
-            )
-        )
-        //        if let existingFieldSettingsPopoverIndex = indexOfExistingFieldPopover() {
-        if Popovers.model.popovers.indices.contains(0) {
-            
-            withAnimation {
-                
-                /// use same ID for smooth position animation
-                popover.context.id = Popovers.model.popovers[0].id
-                Popovers.model.popovers[0] = popover
-            }
-        } else {
-            Popovers.present(popover, animation: .spring())
-        }
+//        let fieldSettingsModel = FieldSettingsModel()
+//        fieldSettingsModel.header = "LIST"
+//        fieldSettingsModel.defaultColor = self.fields[1].text.color
+//        fieldSettingsModel.selectedColor = self.fields[1].text.color
+//        fieldSettingsModel.alpha = self.fields[1].text.colorAlpha
+//        fieldSettingsModel.words = ["Hello", "Other word", "Ice", "Water"]
+//
+//        fieldSettingsModel.editListPressed = {
+//            print("Edit")
+//            //            if let existingFieldSettingsPopoverIndex = self.indexOfExistingFieldPopover() {
+//            withAnimation {
+//                Popovers.model.popovers.remove(at: 0)
+//                //                }
+//            }
+//        }
+//        
+//        let popoverView = FieldSettingsView(model: fieldSettingsModel, draggingEnabled: Popovers.model.draggingEnabled)
+//        var popover = Popover { popoverView }
+//        popover.context.position = self.listLabel.popoverOrigin(anchor: .bottomLeft)
+//        popover.context.dismissMode = .tapOutside(
+//            .init(
+//                animation: .spring(),
+//                excludedRects: [
+//                    self.purpleButton.windowFrame(),
+//                    self.listButton.windowFrame(),
+//                    self.listLabel.windowFrame()
+//                ]
+//            )
+//        )
+//        //        if let existingFieldSettingsPopoverIndex = indexOfExistingFieldPopover() {
+//        if Popovers.model.popovers.indices.contains(0) {
+//            
+//            withAnimation {
+//                
+//                /// use same ID for smooth position animation
+//                popover.context.id = Popovers.model.popovers[0].id
+//                Popovers.model.popovers[0] = popover
+//            }
+//        } else {
+//            Popovers.present(popover, animation: .spring())
+//        }
         //        } else {
         //            withAnimation {
         //                let popover = Popover.fieldSettings(configuration)
