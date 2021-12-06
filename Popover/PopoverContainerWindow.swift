@@ -17,13 +17,10 @@ class PopoverContainerWindow: UIWindow {
         self.popoverModel = popoverModel
         
         if let scene = UIApplication.shared.connectedScenes.filter({$0.activationState == .foregroundActive}).first as? UIWindowScene {
-            print("saved")
             super.init(windowScene: scene)
         } else {
-            print("new")
             super.init(frame: UIScreen.main.bounds)
         }
-        
         
         self.rootViewController = popoverContainerViewController
         self.windowLevel = .alert

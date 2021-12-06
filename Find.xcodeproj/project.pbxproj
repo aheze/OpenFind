@@ -642,6 +642,7 @@
 		3CB98A83275B22B300A6B1B9 /* RightView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4D3B8C27477ABC0010FD68 /* RightView.xib */; };
 		3CB98A85275B28DE00A6B1B9 /* PopoverContainerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB98A84275B28DE00A6B1B9 /* PopoverContainerWindow.swift */; };
 		3CBC41EB275DB50B00FCE2EA /* Popover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBC41EA275DB50B00FCE2EA /* Popover.swift */; };
+		3CBC41ED275DCA0F00FCE2EA /* Popovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBC41EC275DCA0E00FCE2EA /* Popovers.swift */; };
 		3CBEAC0327534B0900D04B39 /* VisionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC0227534B0900D04B39 /* VisionConstants.swift */; };
 		3CBEAC052753554C00D04B39 /* Utilities+Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC042753554C00D04B39 /* Utilities+Dates.swift */; };
 		3CBEAC09275356C900D04B39 /* VTE+FilterTrackers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBEAC08275356C900D04B39 /* VTE+FilterTrackers.swift */; };
@@ -1306,6 +1307,7 @@
 		3CB98A70275B1AE800A6B1B9 /* PopoverUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverUtilities.swift; sourceTree = "<group>"; };
 		3CB98A84275B28DE00A6B1B9 /* PopoverContainerWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverContainerWindow.swift; sourceTree = "<group>"; };
 		3CBC41EA275DB50B00FCE2EA /* Popover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popover.swift; sourceTree = "<group>"; };
+		3CBC41EC275DCA0E00FCE2EA /* Popovers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popovers.swift; sourceTree = "<group>"; };
 		3CBEAC0227534B0900D04B39 /* VisionConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionConstants.swift; sourceTree = "<group>"; };
 		3CBEAC042753554C00D04B39 /* Utilities+Dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities+Dates.swift"; sourceTree = "<group>"; };
 		3CBEAC08275356C900D04B39 /* VTE+FilterTrackers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VTE+FilterTrackers.swift"; sourceTree = "<group>"; };
@@ -1633,6 +1635,7 @@
 			isa = PBXGroup;
 			children = (
 				3C7BAD9D275C10BF0030F0D2 /* PopoverConstants.swift */,
+				3CBC41EC275DCA0E00FCE2EA /* Popovers.swift */,
 				3CBC41EA275DB50B00FCE2EA /* Popover.swift */,
 				3CB98A6A275AFAF900A6B1B9 /* PopoverModel.swift */,
 				3CB98A84275B28DE00A6B1B9 /* PopoverContainerWindow.swift */,
@@ -3765,6 +3768,7 @@
 				3C1D1A2B275AA25B0064F2C6 /* Utilities+UIColor.swift in Sources */,
 				3C1D1A19275AA16C0064F2C6 /* UIKitViews.swift in Sources */,
 				3CB98A78275B217900A6B1B9 /* Field.swift in Sources */,
+				3CBC41ED275DCA0F00FCE2EA /* Popovers.swift in Sources */,
 				3C1D1A23275AA21B0064F2C6 /* TabViewModel.swift in Sources */,
 				3CB98A7B275B217900A6B1B9 /* SearchUtilities.swift in Sources */,
 				3CB98A76275B217900A6B1B9 /* SearchViewController.swift in Sources */,

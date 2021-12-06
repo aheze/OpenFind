@@ -28,7 +28,11 @@ struct Popover: Identifiable, Equatable {
     }
     
     var frame: CGRect {
-        return CGRect(origin: context.origin, size: context.size)
+        print("Size: \(context.size)")
+        let popoverFrame = attributes.position.popoverFrame(popoverSize: context.size)
+        print("fr: \(popoverFrame)")
+        return popoverFrame
+//        return CGRect(origin: context.origin, size: context.size)
     }
     
     static func == (lhs: Popover, rhs: Popover) -> Bool {
@@ -97,6 +101,97 @@ struct Popover: Identifiable, Equatable {
         enum RepositioningMode {
             case keepOnScreen
             case none
+        }
+        
+        func popoverFrame(popoverSize: CGSize) -> CGRect {
+            let popoverOrigin = popoverOrigin()
+            
+            switch popoverAnchor {
+            case .topLeft:
+                return CGRect(
+                    origin: popoverOrigin,
+                    size: popoverSize
+                )
+            case .top:
+                return CGRect(
+                    origin: popoverOrigin - CGPoint(x: popoverSize.width / 2, y: 0),
+                    size: popoverSize
+                )
+            case .topRight:
+                return CGRect(
+                    origin: popoverOrigin - CGPoint(x: popoverSize.width, y: 0),
+                    size: popoverSize
+                )
+            case .right:
+                return CGRect(
+                    origin: popoverOrigin - CGPoint(x: popoverSize.width, y: popoverSize.height / 2),
+                    size: popoverSize
+                )
+            case .bottomRight:
+                return CGRect(
+                    origin: popoverOrigin - CGPoint(x: popoverSize.width, y: popoverSize.height),
+                    size: popoverSize
+                )
+            case .bottom:
+                return CGRect(
+                    origin: popoverOrigin - CGPoint(x: popoverSize.width / 2, y: popoverSize.height),
+                    size: popoverSize
+                )
+            case .bottomLeft:
+                return CGRect(
+                    origin: popoverOrigin - CGPoint(x: 0, y: popoverSize.height),
+                    size: popoverSize
+                )
+            case .left:
+                return CGRect(
+                    origin: popoverOrigin - CGPoint(x: 0, y: popoverSize.height / 2),
+                    size: popoverSize
+                )
+            }
+        }
+        
+        /// get the popover's origin point
+        func popoverOrigin() -> CGPoint {
+            let originFrame = originFrame()
+            switch originAnchor {
+            case .topLeft:
+                return originFrame.origin
+            case .top:
+                return CGPoint(
+                    x: originFrame.origin.x + originFrame.width / 2,
+                    y: originFrame.origin.y
+                )
+            case .topRight:
+                return CGPoint(
+                    x: originFrame.origin.x + originFrame.width,
+                    y: originFrame.origin.y
+                )
+            case .right:
+                return CGPoint(
+                    x: originFrame.origin.x + originFrame.width,
+                    y: originFrame.origin.y + originFrame.height / 2
+                )
+            case .bottomRight:
+                return CGPoint(
+                    x: originFrame.origin.x + originFrame.width,
+                    y: originFrame.origin.y + originFrame.height
+                )
+            case .bottom:
+                return CGPoint(
+                    x: originFrame.origin.x + originFrame.width / 2,
+                    y: originFrame.origin.y + originFrame.height
+                )
+            case .bottomLeft:
+                return CGPoint(
+                    x: originFrame.origin.x,
+                    y: originFrame.origin.y + originFrame.height
+                )
+            case .left:
+                return CGPoint(
+                    x: originFrame.origin.x + originFrame.width,
+                    y: originFrame.origin.y + originFrame.height / 2
+                )
+            }
         }
     }
 }

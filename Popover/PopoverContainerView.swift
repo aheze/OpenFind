@@ -28,6 +28,7 @@ struct PopoverContainerView: View {
                 }
                 
                 popover.view
+                    .writeSize(to: binding.size)
                     .offset(popoverOffset(for: popover))
                     .animation(.spring(), value: selectedPopover)
                     .transition(
@@ -36,7 +37,7 @@ struct PopoverContainerView: View {
                             removal: popover.attributes.dismissal.transition ?? .opacity
                         )
                     )
-                    .writeSize(to: binding.size)
+                    
                     .simultaneousGesture(
                         DragGesture(minimumDistance: 0)
                             .updating($selectedPopoverOffset) { value, draggingAmount, transaction in
@@ -123,13 +124,12 @@ struct PopoverContainerView: View {
     }
     
     func popoverOffset(for popover: Popover) -> CGSize {
-        //        popover.frame.origin.x + ((selectedPopover == popover) ? selectedPopoverOffset.width : 0)
+        let popoverFrame = popover.frame
         let offset = CGSize(
-            width: popover.frame.origin.x + ((selectedPopover == popover) ? selectedPopoverOffset.width : 0),
-            height: popover.frame.origin.y + ((selectedPopover == popover) ? selectedPopoverOffset.height : 0)
+            width: popoverFrame.origin.x + ((selectedPopover == popover) ? selectedPopoverOffset.width : 0),
+            height: popoverFrame.origin.y + ((selectedPopover == popover) ? selectedPopoverOffset.height : 0)
         )
         return offset
-        
     }
 }
 
