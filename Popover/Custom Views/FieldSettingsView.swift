@@ -11,6 +11,12 @@ import SwiftUI
 struct FieldSettingsConstants {
     static var sliderHeight = CGFloat(40)
     static var cornerRadius = CGFloat(12)
+    
+    /// padding outside all items
+    static var padding = CGFloat(12)
+    
+    /// space between items
+    static var spacing = CGFloat(10)
 }
 
 struct FieldSettingsView: View {
@@ -46,8 +52,8 @@ struct FieldSettingsView: View {
             
             
             /// main content
-            VStack(spacing: 10) {
-                VStack(spacing: 10) {
+            VStack(spacing: 0) {
+                FieldSettingsContainer {
                     Button {
                         withAnimation {
                             model.selectedColor = model.defaultColor
@@ -71,54 +77,46 @@ struct FieldSettingsView: View {
                         .frame(height: FieldSettingsConstants.sliderHeight)
                         .cornerRadius(FieldSettingsConstants.cornerRadius)
                 }
-                .padding(.horizontal, 12)
+                Line()
                 
-                if !model.words.isEmpty {
-                    Line()
-                    
-                    VStack {
-                        Button {
-                            withAnimation {
-                                model.showingWords = true
-                            }
-                        } label: {
-                            Text("Show Words")
-                                .modifier(PopoverButtonModifier(backgroundColor: PopoverConstants.buttonColor))
-                            
+                FieldSettingsContainer {
+                    Button {
+                        withAnimation {
+                            model.showingWords = true
                         }
+                    } label: {
+                        Text("Show Words")
+                            .modifier(PopoverButtonModifier(backgroundColor: PopoverConstants.buttonColor))
                         
-                        if let editListPressed = model.editListPressed {
-                            Button {
-                                editListPressed()
-                            } label: {
-                                Text("Edit List")
-                                    .modifier(PopoverButtonModifier(backgroundColor: PopoverConstants.buttonColor))
-                                
-                            }
-                        }
                     }
-                    .padding(.horizontal, 12)
+                    
+                    Button {
+                        model.editListPressed?()
+                    } label: {
+                        Text("Edit List")
+                            .modifier(PopoverButtonModifier(backgroundColor: PopoverConstants.buttonColor))
+                        
+                    }
                 }
+                .clipped()
+                .opacity(model.words.isEmpty ? 0 : 1)
+                .frame(height: model.words.isEmpty ? 0 : nil, alignment: .top)
             }
-            .padding(.top, 10)
             .offset(x: model.showingWords ? -180 : 0, y: 0)
             .opacity(model.showingWords ? 0 : 1)
-            .background(
+            .overlay(
                 ScrollView {
-                    VStack {
+                    FieldSettingsContainer {
                         ForEach(model.words, id: \.self) { word in
                             Text(verbatim: word)
                                 .modifier(PopoverButtonModifier(backgroundColor: PopoverConstants.buttonColor))
                         }
                     }
-                    .padding(.top, 10)
-                    .padding(.horizontal, 12)
                 }
                     .offset(x: model.showingWords ? 0 : 180, y: 0)
                     .opacity(model.showingWords ? 1 : 0)
                 , alignment: .top)
         }
-        .padding(.bottom, 12)
         .frame(width: 180)
         .background(
             ZStack {
@@ -130,7 +128,16 @@ struct FieldSettingsView: View {
     }
 }
 
-
+struct FieldSettingsContainer<Content: View>: View {
+    
+    @ViewBuilder var content: Content
+    var body: some View {
+        VStack(spacing: FieldSettingsConstants.spacing) {
+            content
+        }
+        .padding(FieldSettingsConstants.padding)
+    }
+}
 
 struct PopoverButtonModifier: ViewModifier {
     var backgroundColor: UIColor

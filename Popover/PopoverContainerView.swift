@@ -29,7 +29,6 @@ struct PopoverContainerView: View {
                 popover.view
                     .opacity(popover.frame != nil ? 1 : 0)
                     .writeSize(to: context.size)
-//                    .position(<#T##position: CGPoint##CGPoint#>)
                     .offset(popoverOffset(for: popover))
                     .animation(.spring(), value: selectedPopover)
                     .transition(
@@ -39,7 +38,9 @@ struct PopoverContainerView: View {
                         )
                     )
                     .simultaneousGesture(
-                        DragGesture(minimumDistance: 0)
+                        
+                        /// 1 is enough to allow scroll views to scroll, if one is contained in the popover
+                        DragGesture(minimumDistance: 1)
                             .updating($selectedPopoverOffset) { value, draggingAmount, transaction in
                                 
                                 if selectedPopover == nil {
@@ -75,9 +76,9 @@ struct PopoverContainerView: View {
     }
     
     func popoverOffset(for popover: Popover) -> CGSize {
-//        return .init(width: 50, height: 100)
+
+        /// make sure the frame has been calculated first
         guard let popoverFrame = popover.frame else {
-            print("Zero")
             return .zero
         }
         
@@ -85,7 +86,7 @@ struct PopoverContainerView: View {
             width: popoverFrame.origin.x + ((selectedPopover == popover) ? selectedPopoverOffset.width : 0),
             height: popoverFrame.origin.y + ((selectedPopover == popover) ? selectedPopoverOffset.height : 0)
         )
-        print("Nonzero: \(offset)")
+        
         return offset
     }
 }
