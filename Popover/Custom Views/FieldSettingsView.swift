@@ -100,7 +100,9 @@ struct FieldSettingsView: View {
                 .clipped()
                 .opacity(model.words.isEmpty ? 0 : 1)
                 .frame(height: model.words.isEmpty ? 0 : nil, alignment: .top)
+                
             }
+            .frame(height: model.showingWords ? 100 : nil, alignment: .top)
             .offset(x: model.showingWords ? -180 : 0, y: 0)
             .opacity(model.showingWords ? 0 : 1)
             .overlay(

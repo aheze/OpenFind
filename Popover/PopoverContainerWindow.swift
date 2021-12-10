@@ -42,8 +42,7 @@ class PopoverContainerWindow: UIWindow {
         for popover in popoverModel.popovers {
             
             /// check if hit a popover
-            guard let frame = popover.context.frame else { continue }
-            if frame.contains(point) {
+            if popover.context.frame.contains(point) {
                 return super.hitTest(point, with: event)
             }
             

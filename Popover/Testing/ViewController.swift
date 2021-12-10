@@ -66,21 +66,30 @@ class ViewController: UIViewController {
 //        }
         var popover = Popover(attributes: .init()) {
             popoverView
-        } accessory: {
+        } background: {
             PopoverReader { context in
-                let _ = print("SIze: \(context.size)")
-                Color.red.frame(width: context.size?.width, height: context.size?.width)
+                let _ = print("Word context \(context.isReady): \(context.frame)")
+                
+                Color.red
+                    .offset(x: context.frame.origin.x, y: context.frame.origin.y)
+                    .frame(width: context.frame.width, height: context.frame.height)
             }
-            Color.black.opacity(0.2)
         }
 
-        popover.position = .absolute(
+        popover.position = .relative(
             .init(
-                originFrame: wordLabel.popoverOriginFrame(),
-                originAnchor: .bottomLeft,
-                popoverAnchor: .topLeft
+                containerFrame: { self.view.safeAreaLayoutGuide.layoutFrame },
+                popoverAnchor: .right
             )
         )
+        print("new position set. \(popover.position)")
+//        popover.position = .absolute(
+//            .init(
+//                originFrame: wordLabel.popoverOriginFrame(),
+//                originAnchor: .bottomLeft,
+//                popoverAnchor: .topLeft
+//            )
+//        )
         popover.attributes.presentation.animation = .spring()
         popover.attributes.presentation.transition = .opacity
         popover.attributes.dismissal.animation = .spring()
@@ -109,7 +118,18 @@ class ViewController: UIViewController {
         
         
         let popoverView = FieldSettingsView(model: fieldSettingsModel)
-        var popover = Popover { popoverView }
+//        var popover = Popover { popoverView }
+        var popover = Popover(attributes: .init()) {
+            popoverView
+        } background: {
+            PopoverReader { context in
+                
+                Color.blue
+                    .offset(x: context.frame.origin.x, y: context.frame.origin.y)
+                    .frame(width: context.isReady ? context.frame.width : nil, height: context.isReady ? context.frame.height : nil)
+//                    .animation(.spring(), value: context.frame)
+            }
+        }
         
         fieldSettingsModel.editListPressed = {
             Popovers.dismiss(popover)
@@ -122,7 +142,7 @@ class ViewController: UIViewController {
                 popoverAnchor: .topLeft
             )
         )
-        popover.attributes.presentation.animation = .spring()
+        popover.attributes.presentation.animation = .easeOut(duration: 2)
         popover.attributes.presentation.transition = .opacity
         popover.attributes.dismissal.animation = .spring()
         popover.attributes.dismissal.transition = .opacity
@@ -144,6 +164,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tipButton: UIButton!
     @IBAction func tipPressed(_ sender: Any) {
+        print("tip")
         if let wordPopover = Popovers.popover(tagged: "Field Popover") {
             var newPopover = wordPopover
             newPopover.position = .relative(
@@ -152,7 +173,8 @@ class ViewController: UIViewController {
                     popoverAnchor: .bottom
                 )
             )
-            
+//            newPopover.background.
+            print("repaceingr")
             Popovers.replace(wordPopover, with: newPopover)
         }
     }

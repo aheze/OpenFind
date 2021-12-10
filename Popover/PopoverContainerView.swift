@@ -20,17 +20,23 @@ struct PopoverContainerView: View {
             ForEach(Array(zip(popoverModel.popovers.indices, popoverModel.popovers)), id: \.1.id) { (index, popover) in
                 let context = Binding {
                     popover.context
-                } set: { newValue in
-                    print("set: \(newValue.size)")
+                } set: { newValue, transaction in
+//                    transaction.animation = nil
+//                    print(newValue.)
                     if popoverModel.popovers.indices.contains(index) {
+//                        popoverModel.popovers[index].context = Popover.Context(position: <#T##Popover.Position#>)
+//                            .size = newValue
+//                        popoverModel.popovers[index].context.size = newValue.size
                         popoverModel.popovers[index].context = newValue
                     }
                 }
                 
-                popover.accessory
+                
+                popover.background
+                    .opacity(popover.context.isReady ? 1 : 0)
                 
                 popover.view
-                    .opacity(popover.context.frame != nil ? 1 : 0)
+                    .opacity(popover.context.isReady ? 1 : 0)
                     .writeSize(to: context.size)
                     .offset(popoverOffset(for: popover))
                     .animation(.spring(), value: selectedPopover)
@@ -81,13 +87,11 @@ struct PopoverContainerView: View {
     func popoverOffset(for popover: Popover) -> CGSize {
 
         /// make sure the frame has been calculated first
-        guard let popoverFrame = popover.context.frame else {
-            return .zero
-        }
+        guard popover.context.isReady else { return .zero }
         
         let offset = CGSize(
-            width: popoverFrame.origin.x + ((selectedPopover == popover) ? selectedPopoverOffset.width : 0),
-            height: popoverFrame.origin.y + ((selectedPopover == popover) ? selectedPopoverOffset.height : 0)
+            width: popover.context.frame.origin.x + ((selectedPopover == popover) ? selectedPopoverOffset.width : 0),
+            height: popover.context.frame.origin.y + ((selectedPopover == popover) ? selectedPopoverOffset.height : 0)
         )
         
         return offset

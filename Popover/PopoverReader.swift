@@ -11,13 +11,6 @@ import SwiftUI
 struct PopoverReader<Content: View>: View {
     
     @ViewBuilder var content: (Popover.Context) -> Content
-//    var context: Popover.Context
-
-    
-//    init(content: @escaping (Popover.Context) -> Content) {
-//        self.content = content(context)
-//    }
-
     @EnvironmentObject var context: Popover.Context
 
     var body: some View {

@@ -11,21 +11,16 @@ import SwiftUI
 struct Popover: Identifiable, Equatable {
     
     /// should stay private to the popover
-    var context: Context {
-        didSet {
-            print("change.")
-//            view = view.environmentObject(context)
-        }
-    }
+    var context: Context
     
+    /// convenience
     var position: Position {
-        didSet {
-            print("new p \(position)")
-//            _ = position
-            _ = context.frame
+        get {
+            context.position
+        } set {
+            context.position = newValue
         }
     }
-//    Position.absolute(.init())
     
     var attributes: Attributes
     
@@ -46,7 +41,6 @@ struct Popover: Identifiable, Equatable {
     ) {
         let context = Context(position: position)
         self.context = context
-        self.position = position
         self.attributes = attributes
         self.view = AnyView(view().environmentObject(context))
         self.accessory = AnyView(EmptyView())
@@ -62,7 +56,6 @@ struct Popover: Identifiable, Equatable {
     ) {
         let context = Context(position: position)
         self.context = context
-        self.position = position
         self.attributes = attributes
         self.view = AnyView(view().environmentObject(context))
         self.accessory = AnyView(accessory().environmentObject(context))
@@ -78,7 +71,6 @@ struct Popover: Identifiable, Equatable {
     ) {
         let context = Context(position: position)
         self.context = context
-        self.position = position
         self.attributes = attributes
         self.view = AnyView(view().environmentObject(context))
         self.accessory = AnyView(EmptyView())
@@ -95,7 +87,6 @@ struct Popover: Identifiable, Equatable {
     ) {
         let context = Context(position: position)
         self.context = context
-        self.position = position
         self.attributes = attributes
         self.view = AnyView(view().environmentObject(context))
         self.accessory = AnyView(accessory().environmentObject(context))
@@ -143,27 +134,38 @@ struct Popover: Identifiable, Equatable {
         /// id of the popover
         @Published var id = UUID()
         
-        /// calculated from attributes + SwiftUI resizing
-        @Published var origin: CGPoint = .zero
-        
-        /// calculated from SwiftUI
+        /// calculated from SwiftUI. If this is `nil`, the popover is not yet ready.
         @Published var size: CGSize?
+        {
+            didSet {
+                if let popoverSize = size {
+                    let popoverFrame = position.popoverFrame(popoverSize: popoverSize)
+//                    withAnimation {
+                    print("New: \(popoverFrame)")
+                    frame = popoverFrame
+//                    }
+                }
+            }
+        }
+        
+        var isReady: Bool {
+            return size != nil
+        }
         
         var position: Position
-
+        
         init(position: Position) {
             self.position = position
         }
         
-        var frame: CGRect? {
-            print("size: \(size)")
-            if let popoverSize = size {
-                let popoverFrame = position.popoverFrame(popoverSize: popoverSize)
-                print("popoverFrame: \(popoverFrame)")
-                return popoverFrame
-            }
-            return nil
-        }
+        @Published var frame = CGRect.zero
+//        var frame: CGRect {
+//            if let popoverSize = size {
+//                let popoverFrame = position.popoverFrame(popoverSize: popoverSize)
+//                return popoverFrame
+//            }
+//            return .zero
+//        }
     }
     
     enum Position {
