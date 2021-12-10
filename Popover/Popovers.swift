@@ -65,10 +65,11 @@ struct Popovers {
         return current.indices.first(where: { current[$0] == popover })
     }
     
-    static var draggingEnabled = Binding {
-        Popovers.model.popoversDraggable
-    } set: { newValue in
-        Popovers.model.popoversDraggable = newValue
+    static var draggingEnabled: Bool {
+        get {
+            Popovers.model.popoversDraggable
+        } set {
+            Popovers.model.popoversDraggable = newValue
+        }
     }
-    
 }

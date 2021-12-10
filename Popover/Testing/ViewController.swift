@@ -60,7 +60,7 @@ class ViewController: UIViewController {
         fieldSettingsModel.showingWords = false
         fieldSettingsModel.editListPressed = nil
         
-        let popoverView = FieldSettingsView(model: fieldSettingsModel, draggingEnabled: Popovers.draggingEnabled)
+        let popoverView = FieldSettingsView(model: fieldSettingsModel)
         var popover = Popover { popoverView }
         //        popover.attributes.position.originFrame = wordLabel.popoverOriginFrame()
         
@@ -104,7 +104,7 @@ class ViewController: UIViewController {
         fieldSettingsModel.words = ["Hello", "Other word", "Ice", "Water", "Context", "Popover", "Mud"]
         
         
-        let popoverView = FieldSettingsView(model: fieldSettingsModel, draggingEnabled: Popovers.draggingEnabled)
+        let popoverView = FieldSettingsView(model: fieldSettingsModel)
         var popover = Popover { popoverView }
         
         fieldSettingsModel.editListPressed = {

@@ -17,7 +17,6 @@ struct GeometrySizeWriter: View {
             
             /// prevent infinite loop
             if self.size != proxy.size {
-                print("size: \(proxy.size)")
                 DispatchQueue.main.async {
                     self.size = proxy.size
                 }

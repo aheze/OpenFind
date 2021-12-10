@@ -22,7 +22,6 @@ struct FieldSettingsConstants {
 struct FieldSettingsView: View {
     
     @ObservedObject var model: FieldSettingsModel
-    @Binding var draggingEnabled: Bool
     
     var body: some View {
         VStack(spacing: 0) {
@@ -73,7 +72,7 @@ struct FieldSettingsView: View {
                     PaletteView(selectedColor: $model.selectedColor)
                         .cornerRadius(FieldSettingsConstants.cornerRadius)
                     
-                    OpacitySlider(value: $model.alpha, draggingEnabled: $draggingEnabled, color: model.selectedColor)
+                    OpacitySlider(value: $model.alpha, color: model.selectedColor)
                         .frame(height: FieldSettingsConstants.sliderHeight)
                         .cornerRadius(FieldSettingsConstants.cornerRadius)
                 }
@@ -202,7 +201,6 @@ struct PaletteButton: View {
 
 struct OpacitySlider: View {
     @Binding var value: CGFloat
-    @Binding var draggingEnabled: Bool
     let color: UIColor
     
     var body: some View {
@@ -261,18 +259,20 @@ struct OpacitySlider: View {
                     DragGesture(minimumDistance: 0)
                         .onChanged { value in
                             self.value = min(max(0, CGFloat(value.location.x / proxy.size.width)), 1)
-                            draggingEnabled = false
+                            Popovers.draggingEnabled = false
                         }
-                        .onEnded { _ in draggingEnabled = true }
+                        .onEnded { _ in Popovers.draggingEnabled = true }
                 )
         }
         .drawingGroup() /// prevent thumb from disappearing when offset to show words
     }
 }
 
-//struct FieldSettingsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FieldSettingsView(configuration: .constant(.init()), stopDraggingGesture: .constant(false))
-//            .previewLayout(.fixed(width: 250, height: 300))
-//    }
-//}
+struct FieldSettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        FieldSettingsView(
+            model: FieldSettingsModel()
+        )
+            .previewLayout(.fixed(width: 250, height: 300))
+    }
+}
