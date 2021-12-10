@@ -11,7 +11,17 @@ import SwiftUI
 struct Popover: Identifiable, Equatable {
     
     /// should stay private to the popover
-    var context: Context
+    var context: Context {
+        didSet {
+            print("updated")
+        }
+    }
+//    lazy var contentBinding = Binding {
+//        context
+//    } set: {
+//        context = $0
+//    }
+
     
     /// convenience
     var position: Position {
@@ -27,9 +37,6 @@ struct Popover: Identifiable, Equatable {
     /// the content view
     var view: AnyView
     
-    /// attachments
-    var accessory: AnyView
-    
     /// background
     var background: AnyView
     
@@ -42,55 +49,23 @@ struct Popover: Identifiable, Equatable {
         let context = Context(position: position)
         self.context = context
         self.attributes = attributes
-        self.view = AnyView(view().environmentObject(context))
-        self.accessory = AnyView(EmptyView())
+        self.view = AnyView(view())
         self.background = AnyView(EmptyView())
     }
     
-    /// for a accessory view
-    init<MainContent: View, AccessoryContent: View>(
-        position: Position = Position.absolute(.init()),
-        attributes: Attributes = .init(),
-        @ViewBuilder view: @escaping () -> MainContent,
-        @ViewBuilder accessory: @escaping () -> AccessoryContent
-    ) {
-        let context = Context(position: position)
-        self.context = context
-        self.attributes = attributes
-        self.view = AnyView(view().environmentObject(context))
-        self.accessory = AnyView(accessory().environmentObject(context))
-        self.background = AnyView(EmptyView())
-    }
     
     /// for a background view
     init<MainContent: View, BackgroundContent: View>(
         position: Position = Position.absolute(.init()),
         attributes: Attributes = .init(),
         @ViewBuilder view: @escaping () -> MainContent,
-        @ViewBuilder background: @escaping () -> BackgroundContent
+        @ViewBuilder background: @escaping (Context) -> BackgroundContent
     ) {
         let context = Context(position: position)
         self.context = context
         self.attributes = attributes
-        self.view = AnyView(view().environmentObject(context))
-        self.accessory = AnyView(EmptyView())
-        self.background = AnyView(background().environmentObject(context))
-    }
-    
-    /// for a accessory view AND background
-    init<MainContent: View, BackgroundContent: View, AccessoryContent: View>(
-        position: Position = Position.absolute(.init()),
-        attributes: Attributes = .init(),
-        @ViewBuilder view: @escaping () -> MainContent,
-        @ViewBuilder accessory: @escaping () -> AccessoryContent,
-        @ViewBuilder background: @escaping () -> BackgroundContent
-    ) {
-        let context = Context(position: position)
-        self.context = context
-        self.attributes = attributes
-        self.view = AnyView(view().environmentObject(context))
-        self.accessory = AnyView(accessory().environmentObject(context))
-        self.background = AnyView(background().environmentObject(context))
+        self.view = AnyView(view())
+        self.background = AnyView(background(context))
     }
     
     var id: UUID {
@@ -128,14 +103,13 @@ struct Popover: Identifiable, Equatable {
             }
         }
     }
-    
-    class Context: Identifiable, ObservableObject {
+    struct Context: Identifiable {
         
         /// id of the popover
-        @Published var id = UUID()
+        var id = UUID()
         
         /// calculated from SwiftUI. If this is `nil`, the popover is not yet ready.
-        @Published var size: CGSize?
+        var size: CGSize?
         {
             didSet {
                 if let popoverSize = size {
@@ -158,7 +132,7 @@ struct Popover: Identifiable, Equatable {
             self.position = position
         }
         
-        @Published var frame = CGRect.zero
+        var frame = CGRect.zero
 //        var frame: CGRect {
 //            if let popoverSize = size {
 //                let popoverFrame = position.popoverFrame(popoverSize: popoverSize)
@@ -167,6 +141,44 @@ struct Popover: Identifiable, Equatable {
 //            return .zero
 //        }
     }
+//    class Context: Identifiable, ObservableObject {
+//
+//        /// id of the popover
+//        @Published var id = UUID()
+//
+//        /// calculated from SwiftUI. If this is `nil`, the popover is not yet ready.
+//        @Published var size: CGSize?
+//        {
+//            didSet {
+//                if let popoverSize = size {
+//                    let popoverFrame = position.popoverFrame(popoverSize: popoverSize)
+////                    withAnimation {
+//                    print("New: \(popoverFrame)")
+//                    frame = popoverFrame
+////                    }
+//                }
+//            }
+//        }
+//
+//        var isReady: Bool {
+//            return size != nil
+//        }
+//
+//        var position: Position
+//
+//        init(position: Position) {
+//            self.position = position
+//        }
+//
+//        @Published var frame = CGRect.zero
+////        var frame: CGRect {
+////            if let popoverSize = size {
+////                let popoverFrame = position.popoverFrame(popoverSize: popoverSize)
+////                return popoverFrame
+////            }
+////            return .zero
+////        }
+//    }
     
     enum Position {
         
@@ -259,43 +271,43 @@ extension Popover.Position {
             switch position.popoverAnchor {
             case .topLeft:
                 return CGPoint(
-                    x: 0,
+                    x: containerFrame.origin.x,
                     y: 0
                 )
             case .top:
                 return CGPoint(
-                    x: containerFrame.width / 2 - popoverSize.width / 2,
-                    y: 0
+                    x: containerFrame.origin.x + containerFrame.width / 2 - popoverSize.width / 2,
+                    y: containerFrame.origin.y
                 )
             case .topRight:
                 return CGPoint(
-                    x: containerFrame.width - popoverSize.width,
-                    y: 0
+                    x: containerFrame.origin.x + containerFrame.width - popoverSize.width,
+                    y: containerFrame.origin.y
                 )
             case .right:
                 return CGPoint(
-                    x: containerFrame.width - popoverSize.width,
-                    y: containerFrame.height / 2 - popoverSize.height / 2
+                    x: containerFrame.origin.x + containerFrame.width - popoverSize.width,
+                    y: containerFrame.origin.y + containerFrame.height / 2 - popoverSize.height / 2
                 )
             case .bottomRight:
                 return CGPoint(
-                    x: containerFrame.width - popoverSize.width,
-                    y: containerFrame.height - popoverSize.height
+                    x: containerFrame.origin.x + containerFrame.width - popoverSize.width,
+                    y: containerFrame.origin.y + containerFrame.height - popoverSize.height
                 )
             case .bottom:
                 return CGPoint(
-                    x: containerFrame.width / 2 - popoverSize.width / 2,
-                    y: containerFrame.height - popoverSize.height
+                    x: containerFrame.origin.x + containerFrame.width / 2 - popoverSize.width / 2,
+                    y: containerFrame.origin.y + containerFrame.height - popoverSize.height
                 )
             case .bottomLeft:
                 return CGPoint(
-                    x: 0,
-                    y: containerFrame.height - popoverSize.height
+                    x: containerFrame.origin.x,
+                    y: containerFrame.origin.y + containerFrame.height - popoverSize.height
                 )
             case .left:
                 return CGPoint(
-                    x: 0,
-                    y: containerFrame.height / 2 - popoverSize.height / 2
+                    x: containerFrame.origin.x,
+                    y: containerFrame.origin.y + containerFrame.height / 2 - popoverSize.height / 2
                 )
             }
         }

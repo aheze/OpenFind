@@ -12,7 +12,7 @@ import SwiftUI
 class PopoverModel: ObservableObject {
     @Published var popovers = [Popover]()
     
-    /// must be published so that the `PopoverContainerView` rerenders
+    /// must be published so that the `PopoverContainerView` re-renders
     @Published internal var popoversDraggable = true
     
     /// force container view to update

@@ -8,15 +8,15 @@
 
 import SwiftUI
 
-struct PopoverReader<Content: View>: View {
-    
-    @ViewBuilder var content: (Popover.Context) -> Content
-    @EnvironmentObject var context: Popover.Context
-
-    var body: some View {
-        content(context)
-    }
-}
+//struct PopoverReader<Content: View>: View {
+//    
+//    @ViewBuilder var content: (Popover.Context) -> Content
+////    @EnvironmentObject var context: Popover.Context
+//
+//    var body: some View {
+//        content(context)
+//    }
+//}
 
 struct CustomGeometryReaderView<Content: View>: View {
 

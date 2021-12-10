@@ -26,8 +26,15 @@ struct PopoverContainerView: View {
                     if popoverModel.popovers.indices.contains(index) {
 //                        popoverModel.popovers[index].context = Popover.Context(position: <#T##Popover.Position#>)
 //                            .size = newValue
-//                        popoverModel.popovers[index].context.size = newValue.size
-                        popoverModel.popovers[index].context = newValue
+//                        if let popoverSize = newValue.size {
+//                            let popoverFrame = newValue.position.popoverFrame(popoverSize: popoverSize)
+//        //                    withAnimation {
+//                            print("New: \(popoverFrame)")
+//                            popoverModel.popovers[index].context.frame = popoverFrame
+//        //                    }
+//                        }
+                        popoverModel.popovers[index].context.size = newValue.size
+//                        popoverModel.popovers[index].context = newValue
                     }
                 }
                 

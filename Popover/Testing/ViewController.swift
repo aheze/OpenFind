@@ -61,35 +61,43 @@ class ViewController: UIViewController {
         fieldSettingsModel.editListPressed = nil
         
         let popoverView = FieldSettingsView(model: fieldSettingsModel)
-//        var popover = Popover {
-//            popoverView
-//        }
+        //        var popover = Popover {
+        //            popoverView
+        //        }
         var popover = Popover(attributes: .init()) {
             popoverView
-        } background: {
-            PopoverReader { context in
-                let _ = print("Word context \(context.isReady): \(context.frame)")
-                
-                Color.red
-                    .offset(x: context.frame.origin.x, y: context.frame.origin.y)
-                    .frame(width: context.frame.width, height: context.frame.height)
-            }
+        } background: { context in
+            //            PopoverReader { context in
+            let _ = print("--- Word context \(context.isReady): \(context.frame)")
+            //
+            //                Color.red
+            //                    .offset(x: context.frame.origin.x, y: context.frame.origin.y)
+            //                    .frame(width: context.frame.width, height: context.frame.height)
+            //            }
+            
+            
+            //            PopoverReader {/ context in
+            
+            Color.green.opacity(0.3)
+                .offset(x: context.frame.origin.x, y: context.frame.origin.y)
+                .frame(width: context.isReady ? context.frame.width : nil, height: context.isReady ? context.frame.height : nil)
+            
+            
         }
-
+        
         popover.position = .relative(
             .init(
-                containerFrame: { self.view.safeAreaLayoutGuide.layoutFrame },
-                popoverAnchor: .right
+                containerFrame: {
+                    print("OLD: \(self.view.safeAreaLayoutGuide.layoutFrame)")
+                    
+                    print("NEW: \(self.view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 20, dy: 20))")
+                    
+                    return self.view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 20, dy: 20)
+                },
+                popoverAnchor: .left
             )
         )
         print("new position set. \(popover.position)")
-//        popover.position = .absolute(
-//            .init(
-//                originFrame: wordLabel.popoverOriginFrame(),
-//                originAnchor: .bottomLeft,
-//                popoverAnchor: .topLeft
-//            )
-//        )
         popover.attributes.presentation.animation = .spring()
         popover.attributes.presentation.transition = .opacity
         popover.attributes.dismissal.animation = .spring()
@@ -118,17 +126,17 @@ class ViewController: UIViewController {
         
         
         let popoverView = FieldSettingsView(model: fieldSettingsModel)
-//        var popover = Popover { popoverView }
+        //        var popover = Popover { popoverView }
         var popover = Popover(attributes: .init()) {
             popoverView
-        } background: {
-            PopoverReader { context in
-                
-                Color.blue
-                    .offset(x: context.frame.origin.x, y: context.frame.origin.y)
-                    .frame(width: context.isReady ? context.frame.width : nil, height: context.isReady ? context.frame.height : nil)
-//                    .animation(.spring(), value: context.frame)
-            }
+        } background: { context in
+            //            PopoverReader {/ context in
+            let _ = print("--- List context \(context.isReady): \(context.frame)")
+            Color.blue.opacity(0.3)
+                .offset(x: context.frame.origin.x, y: context.frame.origin.y)
+                .frame(width: context.isReady ? context.frame.width : nil, height: context.isReady ? context.frame.height : nil)
+            //                    .animation(.spring(), value: context.frame)
+            //            }
         }
         
         fieldSettingsModel.editListPressed = {
@@ -173,7 +181,7 @@ class ViewController: UIViewController {
                     popoverAnchor: .bottom
                 )
             )
-//            newPopover.background.
+            //            newPopover.background.
             print("repaceingr")
             Popovers.replace(wordPopover, with: newPopover)
         }
