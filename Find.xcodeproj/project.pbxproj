@@ -622,6 +622,7 @@
 		3CB002312762FA5A00B6A349 /* FieldSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A0A275AA08D0064F2C6 /* FieldSettingsView.swift */; };
 		3CB002322762FA5A00B6A349 /* FieldSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A0A275AA08D0064F2C6 /* FieldSettingsView.swift */; };
 		3CB002332762FA5A00B6A349 /* FieldSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1D1A0A275AA08D0064F2C6 /* FieldSettingsView.swift */; };
+		3CB002352763055A00B6A349 /* PopoverReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB002342763055A00B6A349 /* PopoverReader.swift */; };
 		3CB6842C259FF9A700AE0AD6 /* SegmentedSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */; };
 		3CB6843225A0087700AE0AD6 /* PhotosMigrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */; };
 		3CB6843525A013D800AE0AD6 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6843425A013D800AE0AD6 /* ImageCell.swift */; };
@@ -1305,6 +1306,7 @@
 		3CAC4DCC25BF5E4900CC7948 /* CameraVC+FinishedCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+FinishedCache.swift"; sourceTree = "<group>"; };
 		3CAC4DCF25BF611100CC7948 /* CameraVC+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+Draw.swift"; sourceTree = "<group>"; };
 		3CAD947025BF3831001D5E0A /* CameraVC+CacheFind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraVC+CacheFind.swift"; sourceTree = "<group>"; };
+		3CB002342763055A00B6A349 /* PopoverReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverReader.swift; sourceTree = "<group>"; };
 		3CB6842A259FF9A700AE0AD6 /* SegmentedSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedSlider.swift; sourceTree = "<group>"; };
 		3CB6843125A0087700AE0AD6 /* PhotosMigrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosMigrationController.swift; sourceTree = "<group>"; };
 		3CB6843425A013D800AE0AD6 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
@@ -1649,6 +1651,7 @@
 				3CB98A84275B28DE00A6B1B9 /* PopoverContainerWindow.swift */,
 				3CB98A6E275B150300A6B1B9 /* PopoverContainerViewController.swift */,
 				3CB98A6C275B0A0500A6B1B9 /* PopoverContainerView.swift */,
+				3CB002342763055A00B6A349 /* PopoverReader.swift */,
 				3CB98A70275B1AE800A6B1B9 /* PopoverUtilities.swift */,
 				3CB0022B2762FA5400B6A349 /* Custom Views */,
 				3C1D1A07275A9F8E0064F2C6 /* Testing */,
@@ -3787,6 +3790,7 @@
 				3CBC41ED275DCA0F00FCE2EA /* Popovers.swift in Sources */,
 				3C1D1A23275AA21B0064F2C6 /* TabViewModel.swift in Sources */,
 				3CB98A7B275B217900A6B1B9 /* SearchUtilities.swift in Sources */,
+				3CB002352763055A00B6A349 /* PopoverReader.swift in Sources */,
 				3CB98A76275B217900A6B1B9 /* SearchViewController.swift in Sources */,
 				3CB98A75275B217900A6B1B9 /* SearchCV+Delegate.swift in Sources */,
 				3C1D19F5275A9F390064F2C6 /* AppDelegate.swift in Sources */,

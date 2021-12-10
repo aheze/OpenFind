@@ -21,13 +21,16 @@ struct PopoverContainerView: View {
                 let context = Binding {
                     popover.context
                 } set: { newValue in
+                    print("set: \(newValue.size)")
                     if popoverModel.popovers.indices.contains(index) {
                         popoverModel.popovers[index].context = newValue
                     }
                 }
                 
+                popover.accessory
+                
                 popover.view
-                    .opacity(popover.frame != nil ? 1 : 0)
+                    .opacity(popover.context.frame != nil ? 1 : 0)
                     .writeSize(to: context.size)
                     .offset(popoverOffset(for: popover))
                     .animation(.spring(), value: selectedPopover)
@@ -78,7 +81,7 @@ struct PopoverContainerView: View {
     func popoverOffset(for popover: Popover) -> CGSize {
 
         /// make sure the frame has been calculated first
-        guard let popoverFrame = popover.frame else {
+        guard let popoverFrame = popover.context.frame else {
             return .zero
         }
         

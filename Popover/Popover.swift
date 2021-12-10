@@ -11,16 +11,95 @@ import SwiftUI
 struct Popover: Identifiable, Equatable {
     
     /// should stay private to the popover
-    var context = Context()
+    var context: Context {
+        didSet {
+            print("change.")
+//            view = view.environmentObject(context)
+        }
+    }
     
-    var attributes = Attributes()
+    var position: Position {
+        didSet {
+            print("new p \(position)")
+//            _ = position
+            _ = context.frame
+        }
+    }
+//    Position.absolute(.init())
     
+    var attributes: Attributes
+    
+    /// the content view
     var view: AnyView
     
-    init<Content: View>(context: Context = .init(), attributes: Attributes = .init(), @ViewBuilder view: @escaping () -> Content) {
+    /// attachments
+    var accessory: AnyView
+    
+    /// background
+    var background: AnyView
+    
+    /// normal init
+    init<Content: View>(
+        position: Position = Position.absolute(.init()),
+        attributes: Attributes = .init(),
+        @ViewBuilder view: @escaping () -> Content
+    ) {
+        let context = Context(position: position)
         self.context = context
+        self.position = position
         self.attributes = attributes
-        self.view = AnyView(view())
+        self.view = AnyView(view().environmentObject(context))
+        self.accessory = AnyView(EmptyView())
+        self.background = AnyView(EmptyView())
+    }
+    
+    /// for a accessory view
+    init<MainContent: View, AccessoryContent: View>(
+        position: Position = Position.absolute(.init()),
+        attributes: Attributes = .init(),
+        @ViewBuilder view: @escaping () -> MainContent,
+        @ViewBuilder accessory: @escaping () -> AccessoryContent
+    ) {
+        let context = Context(position: position)
+        self.context = context
+        self.position = position
+        self.attributes = attributes
+        self.view = AnyView(view().environmentObject(context))
+        self.accessory = AnyView(accessory().environmentObject(context))
+        self.background = AnyView(EmptyView())
+    }
+    
+    /// for a background view
+    init<MainContent: View, BackgroundContent: View>(
+        position: Position = Position.absolute(.init()),
+        attributes: Attributes = .init(),
+        @ViewBuilder view: @escaping () -> MainContent,
+        @ViewBuilder background: @escaping () -> BackgroundContent
+    ) {
+        let context = Context(position: position)
+        self.context = context
+        self.position = position
+        self.attributes = attributes
+        self.view = AnyView(view().environmentObject(context))
+        self.accessory = AnyView(EmptyView())
+        self.background = AnyView(background().environmentObject(context))
+    }
+    
+    /// for a accessory view AND background
+    init<MainContent: View, BackgroundContent: View, AccessoryContent: View>(
+        position: Position = Position.absolute(.init()),
+        attributes: Attributes = .init(),
+        @ViewBuilder view: @escaping () -> MainContent,
+        @ViewBuilder accessory: @escaping () -> AccessoryContent,
+        @ViewBuilder background: @escaping () -> BackgroundContent
+    ) {
+        let context = Context(position: position)
+        self.context = context
+        self.position = position
+        self.attributes = attributes
+        self.view = AnyView(view().environmentObject(context))
+        self.accessory = AnyView(accessory().environmentObject(context))
+        self.background = AnyView(background().environmentObject(context))
     }
     
     var id: UUID {
@@ -31,20 +110,11 @@ struct Popover: Identifiable, Equatable {
         }
     }
     
-    var frame: CGRect? {
-        if let popoverSize = context.size {
-            let popoverFrame = attributes.position.popoverFrame(popoverSize: popoverSize)
-            return popoverFrame
-        }
-        return nil
-    }
-    
     static func == (lhs: Popover, rhs: Popover) -> Bool {
         lhs.id == rhs.id
     }
     
     struct Attributes {
-        var position = Position.absolute(.init())
         var presentation = Presentation()
         var dismissal = Dismissal()
         
@@ -66,58 +136,74 @@ struct Popover: Identifiable, Equatable {
                 case none
             }
         }
-        enum Position {
-            
-            case absolute(Absolute)
-            case relative(Relative)
-            
-            struct Absolute {
-                var originFrame: (() -> CGRect) = { .zero }
-                
-                /// the side of the origin view which the popover is attached to
-                var originAnchor = Anchor.bottomLeft
-                
-                /// the side of the popover that gets attached to the origin
-                var popoverAnchor = Anchor.topLeft
+    }
+    
+    class Context: Identifiable, ObservableObject {
+        
+        /// id of the popover
+        @Published var id = UUID()
+        
+        /// calculated from attributes + SwiftUI resizing
+        @Published var origin: CGPoint = .zero
+        
+        /// calculated from SwiftUI
+        @Published var size: CGSize?
+        
+        var position: Position
+
+        init(position: Position) {
+            self.position = position
+        }
+        
+        var frame: CGRect? {
+            print("size: \(size)")
+            if let popoverSize = size {
+                let popoverFrame = position.popoverFrame(popoverSize: popoverSize)
+                print("popoverFrame: \(popoverFrame)")
+                return popoverFrame
             }
-            
-            struct Relative {
-                var containerFrame: (() -> CGRect) = { .zero }
-                
-                var popoverAnchor = Anchor.bottomLeft
-            }
-            
-            
-            enum Anchor {
-                case topLeft
-                case top
-                case topRight
-                case right
-                case bottomRight
-                case bottom
-                case bottomLeft
-                case left
-            }
-            
+            return nil
         }
     }
     
-    struct Context: Identifiable {
+    enum Position {
         
-        /// id of the popover
-        var id = UUID()
+        case absolute(Absolute)
+        case relative(Relative)
         
-        /// calculated from attributes + SwiftUI resizing
-        var origin: CGPoint = .zero
+        struct Absolute {
+            var originFrame: (() -> CGRect) = { .zero }
+            
+            /// the side of the origin view which the popover is attached to
+            var originAnchor = Anchor.bottomLeft
+            
+            /// the side of the popover that gets attached to the origin
+            var popoverAnchor = Anchor.topLeft
+        }
         
-        /// calculated from SwiftUI
-        var size: CGSize?
+        struct Relative {
+            var containerFrame: (() -> CGRect) = { .zero }
+            
+            var popoverAnchor = Anchor.bottomLeft
+        }
+        
+        
+        enum Anchor {
+            case topLeft
+            case top
+            case topRight
+            case right
+            case bottomRight
+            case bottom
+            case bottomLeft
+            case left
+        }
         
     }
 }
 
 /// functions for calculating sizes
-extension Popover.Attributes.Position {
+extension Popover.Position {
     
     /// get the popover's origin point
     /// `popoverSize` is only used for relative positioning

@@ -61,22 +61,26 @@ class ViewController: UIViewController {
         fieldSettingsModel.editListPressed = nil
         
         let popoverView = FieldSettingsView(model: fieldSettingsModel)
-        var popover = Popover { popoverView }
-        //        popover.attributes.position.originFrame = wordLabel.popoverOriginFrame()
-        
-        popover.attributes.position = .absolute(
+//        var popover = Popover {
+//            popoverView
+//        }
+        var popover = Popover(attributes: .init()) {
+            popoverView
+        } accessory: {
+            PopoverReader { context in
+                let _ = print("SIze: \(context.size)")
+                Color.red.frame(width: context.size?.width, height: context.size?.width)
+            }
+            Color.black.opacity(0.2)
+        }
+
+        popover.position = .absolute(
             .init(
                 originFrame: wordLabel.popoverOriginFrame(),
                 originAnchor: .bottomLeft,
                 popoverAnchor: .topLeft
             )
         )
-        //        popover.attributes.position = .relative(
-        //            .init(
-        //                containerFrame: { self.view.bounds },
-        //                popoverAnchor: .left
-        //            )
-        //        )
         popover.attributes.presentation.animation = .spring()
         popover.attributes.presentation.transition = .opacity
         popover.attributes.dismissal.animation = .spring()
@@ -111,7 +115,7 @@ class ViewController: UIViewController {
             Popovers.dismiss(popover)
         }
         
-        popover.attributes.position = .absolute(
+        popover.position = .absolute(
             .init(
                 originFrame: listLabel.popoverOriginFrame(),
                 originAnchor: .bottomLeft,
@@ -142,7 +146,7 @@ class ViewController: UIViewController {
     @IBAction func tipPressed(_ sender: Any) {
         if let wordPopover = Popovers.popover(tagged: "Field Popover") {
             var newPopover = wordPopover
-            newPopover.attributes.position = .relative(
+            newPopover.position = .relative(
                 .init(
                     containerFrame: { self.view.safeAreaLayoutGuide.layoutFrame },
                     popoverAnchor: .bottom
