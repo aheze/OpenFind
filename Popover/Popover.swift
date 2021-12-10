@@ -113,23 +113,10 @@ struct Popover: Identifiable, Equatable {
 //            }
         //        }
         func setSize(_ size: CGSize?, animation: Animation? = nil) {
-            print("Size set: \(size), anim: \(animation)")
-            
-            var popoverFrame = CGRect.zero
-            if let popoverSize = size {
-                popoverFrame = position.popoverFrame(popoverSize: popoverSize)
-            }
-            
-            //            if animated {
+            self.size = size
             withAnimation(animation) {
-                self.size = size
-                self.frame = popoverFrame
+                self.frame = getFrame(from: size)
             }
-            //            } else {
-            //                self.size = size
-            //                self.frame = popoverFrame
-            //            }
-            
         }
         
         var position: Position
@@ -139,6 +126,14 @@ struct Popover: Identifiable, Equatable {
         }
         
         @Published var frame = CGRect.zero
+        
+        func getFrame(from size: CGSize?) -> CGRect {
+            var popoverFrame = CGRect.zero
+            if let popoverSize = size {
+                popoverFrame = position.popoverFrame(popoverSize: popoverSize)
+            }
+            return popoverFrame
+        }
         
         var isReady: Bool {
             return size != nil

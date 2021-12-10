@@ -21,15 +21,15 @@ struct PopoverContainerView: View {
                 
                 let size = Binding<CGSize?> {
                     popover.context.size
-                } set: {
+                } set: { newValue in
+
                     let previousSizeExisted = popover.context.size != nil
-                    if previousSizeExisted {
-                        print("setting, exist")
-//                        popover.context.setSize($0, animation: popover.attributes.presentation.animation)
-                        popover.context.setSize($0)
+                    if previousSizeExisted, newValue != popover.context.size {
+                        popover.context.setSize(newValue, animation: .spring())
                     } else {
-                        print("setting, no exist")
-                        popover.context.setSize($0)
+                        
+                        /// a size hasn't been set yet for the popover
+                        popover.context.setSize(newValue)
                         popoverModel.refresh()
                     }
                     

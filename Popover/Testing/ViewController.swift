@@ -58,7 +58,7 @@ class ViewController: UIViewController {
                 popoverAnchor: .left
             )
         )
-        print("new position set. \(popover.position)")
+        
         popover.attributes.presentation.animation = .spring()
         popover.attributes.presentation.transition = .opacity
         popover.attributes.dismissal.animation = .spring()
@@ -88,12 +88,11 @@ class ViewController: UIViewController {
         
         
         let popoverView = FieldSettingsView(model: fieldSettingsModel)
-        //        var popover = Popover { popoverView }
+        
         var popover = Popover(attributes: .init()) {
             popoverView
         } background: {
             PopoverReader { context in
-                let _ = print("--- List context \(context.isReady): \(context.frame)")
                 Color.blue.opacity(0.3)
                     .offset(x: context.frame.origin.x, y: context.frame.origin.y)
                     .frame(width: context.isReady ? context.frame.width : nil, height: context.isReady ? context.frame.height : nil)
@@ -112,6 +111,7 @@ class ViewController: UIViewController {
             )
         )
         popover.attributes.presentation.animation = .easeOut(duration: 4)
+//        popover.attributes.presentation.animation = .spring()
         popover.attributes.presentation.transition = .opacity
         popover.attributes.dismissal.animation = .spring()
         popover.attributes.dismissal.transition = .opacity

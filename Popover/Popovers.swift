@@ -25,16 +25,16 @@ struct Popovers {
             current.append(popover)
             
             //                let context = current[oldPopoverIndex].context
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                
-//                popover.context.setSize(<#T##size: CGSize?##CGSize?#>)
-//                print("sie: \(popover.context.size)")
-//                if let popoverSize = popover.context.size {
-//                    let popoverFrame = popover.context.position.popoverFrame(popoverSize: popoverSize)
-//                    print("New: \(popoverFrame)")
-//                    popover.context.frame = popoverFrame
-//                }
-//            }
+            //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            
+            //                popover.context.setSize(<#T##size: CGSize?##CGSize?#>)
+            //                print("sie: \(popover.context.size)")
+            //                if let popoverSize = popover.context.size {
+            //                    let popoverFrame = popover.context.position.popoverFrame(popoverSize: popoverSize)
+            //                    print("New: \(popoverFrame)")
+            //                    popover.context.frame = popoverFrame
+            //                }
+            //            }
             //                popover.context = context
         }
     }
@@ -49,14 +49,22 @@ struct Popovers {
     
     static func replace(_ oldPopover: Popover, with newPopover: Popover) {
         if let oldPopoverIndex = index(of: oldPopover) {
-            var popover = newPopover            
-            let context = current[oldPopoverIndex].context
-
-            popover.id = context.id
-            popover.context.setSize(context.size, animation: newPopover.attributes.presentation.animation)
+            var newPopover = newPopover
+            let currentContext = current[oldPopoverIndex].context
+            
+            print("Replacing \(currentContext.size) with \(newPopover.context.size)")
+            
+            
+            newPopover.id = currentContext.id
+            if currentContext.size == newPopover.context.size {
+                newPopover.context.setSize(currentContext.size, animation: newPopover.attributes.presentation.animation)
+            } else {
+//                newPopover.context.setSize(currentContext.size)
+                print("Not the same")
+            }
             
             withAnimation(newPopover.attributes.presentation.animation) {
-                current[oldPopoverIndex] = popover
+                current[oldPopoverIndex] = newPopover
             }
         }
     }
