@@ -19,12 +19,23 @@ struct Popovers {
     }()
     
     static func present(_ popover: Popover) {
-
+        
         /// make sure the window is set up the first time
-        DispatchQueue.main.async {
-            withAnimation(popover.attributes.presentation.animation) {
-                current.append(popover)
-            }
+        withAnimation(popover.attributes.presentation.animation) {
+            current.append(popover)
+            
+            //                let context = current[oldPopoverIndex].context
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                
+//                popover.context.setSize(<#T##size: CGSize?##CGSize?#>)
+//                print("sie: \(popover.context.size)")
+//                if let popoverSize = popover.context.size {
+//                    let popoverFrame = popover.context.position.popoverFrame(popoverSize: popoverSize)
+//                    print("New: \(popoverFrame)")
+//                    popover.context.frame = popoverFrame
+//                }
+//            }
+            //                popover.context = context
         }
     }
     
@@ -38,12 +49,12 @@ struct Popovers {
     
     static func replace(_ oldPopover: Popover, with newPopover: Popover) {
         if let oldPopoverIndex = index(of: oldPopover) {
-            var popover = newPopover
-            popover.id = current[oldPopoverIndex].id
-            
-            /// temporarily use the size of the old popover, to have a smooth animation
-            popover.context.size = current[oldPopoverIndex].context.size
+            var popover = newPopover            
+            let context = current[oldPopoverIndex].context
 
+            popover.id = context.id
+            popover.context.setSize(context.size, animation: newPopover.attributes.presentation.animation)
+            
             withAnimation(newPopover.attributes.presentation.animation) {
                 current[oldPopoverIndex] = popover
             }

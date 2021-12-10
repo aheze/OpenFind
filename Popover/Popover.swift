@@ -11,18 +11,8 @@ import SwiftUI
 struct Popover: Identifiable, Equatable {
     
     /// should stay private to the popover
-    var context: Context {
-        didSet {
-            print("updated")
-        }
-    }
-//    lazy var contentBinding = Binding {
-//        context
-//    } set: {
-//        context = $0
-//    }
+    var context: Context
 
-    
     /// convenience
     var position: Position {
         get {
@@ -59,13 +49,13 @@ struct Popover: Identifiable, Equatable {
         position: Position = Position.absolute(.init()),
         attributes: Attributes = .init(),
         @ViewBuilder view: @escaping () -> MainContent,
-        @ViewBuilder background: @escaping (Context) -> BackgroundContent
+        @ViewBuilder background: @escaping () -> BackgroundContent
     ) {
         let context = Context(position: position)
         self.context = context
         self.attributes = attributes
         self.view = AnyView(view())
-        self.background = AnyView(background(context))
+        self.background = AnyView(background().environmentObject(context))
     }
     
     var id: UUID {
@@ -103,27 +93,43 @@ struct Popover: Identifiable, Equatable {
             }
         }
     }
-    struct Context: Identifiable {
+    
+    
+    class Context: Identifiable, ObservableObject {
         
         /// id of the popover
         var id = UUID()
         
         /// calculated from SwiftUI. If this is `nil`, the popover is not yet ready.
-        var size: CGSize?
-        {
-            didSet {
-                if let popoverSize = size {
-                    let popoverFrame = position.popoverFrame(popoverSize: popoverSize)
+        @Published public private(set) var size: CGSize?
+//        {
+//            didSet {
+//                if let popoverSize = size {
+//                    let popoverFrame = position.popoverFrame(popoverSize: popoverSize)
 //                    withAnimation {
-                    print("New: \(popoverFrame)")
-                    frame = popoverFrame
+//                        frame = popoverFrame
 //                    }
-                }
+//                }
+//            }
+        //        }
+        func setSize(_ size: CGSize?, animation: Animation? = nil) {
+            print("Size set: \(size), anim: \(animation)")
+            
+            var popoverFrame = CGRect.zero
+            if let popoverSize = size {
+                popoverFrame = position.popoverFrame(popoverSize: popoverSize)
             }
-        }
-        
-        var isReady: Bool {
-            return size != nil
+            
+            //            if animated {
+            withAnimation(animation) {
+                self.size = size
+                self.frame = popoverFrame
+            }
+            //            } else {
+            //                self.size = size
+            //                self.frame = popoverFrame
+            //            }
+            
         }
         
         var position: Position
@@ -132,53 +138,14 @@ struct Popover: Identifiable, Equatable {
             self.position = position
         }
         
-        var frame = CGRect.zero
-//        var frame: CGRect {
-//            if let popoverSize = size {
-//                let popoverFrame = position.popoverFrame(popoverSize: popoverSize)
-//                return popoverFrame
-//            }
-//            return .zero
-//        }
+        @Published var frame = CGRect.zero
+        
+        var isReady: Bool {
+            return size != nil
+//            return true
+        }
+        
     }
-//    class Context: Identifiable, ObservableObject {
-//
-//        /// id of the popover
-//        @Published var id = UUID()
-//
-//        /// calculated from SwiftUI. If this is `nil`, the popover is not yet ready.
-//        @Published var size: CGSize?
-//        {
-//            didSet {
-//                if let popoverSize = size {
-//                    let popoverFrame = position.popoverFrame(popoverSize: popoverSize)
-////                    withAnimation {
-//                    print("New: \(popoverFrame)")
-//                    frame = popoverFrame
-////                    }
-//                }
-//            }
-//        }
-//
-//        var isReady: Bool {
-//            return size != nil
-//        }
-//
-//        var position: Position
-//
-//        init(position: Position) {
-//            self.position = position
-//        }
-//
-//        @Published var frame = CGRect.zero
-////        var frame: CGRect {
-////            if let popoverSize = size {
-////                let popoverFrame = position.popoverFrame(popoverSize: popoverSize)
-////                return popoverFrame
-////            }
-////            return .zero
-////        }
-//    }
     
     enum Position {
         

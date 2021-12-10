@@ -11,25 +11,6 @@ import SwiftUI
 
 class ViewController: UIViewController {
     
-    //    lazy var popoverController: PopoverController = {
-    //
-    //        let window = UIApplication.shared
-    //        .connectedScenes
-    //        .filter { $0.activationState == .foregroundActive }
-    //        .first
-    //
-    //        if let windowScene = SceneConstants.savedScene {
-    //            let popoverController = PopoverController(
-    //                popoverModel: popoverModel,
-    //                windowScene: windowScene
-    //            )
-    //            return popoverController
-    //        }
-    //
-    //        fatalError("NO scene")
-    //    }()
-    
-    
     @IBOutlet weak var wordLabel: UILabel!
     @IBOutlet weak var listLabel: UILabel!
     
@@ -48,8 +29,6 @@ class ViewController: UIViewController {
         Field(text: .init(value: .addNew(""), colorIndex: 2))
     ]
     
-    //    var fieldSettingsModel = FieldSettingsModel()
-    
     @IBAction func wordPressed(_ sender: Any) {
         let fieldSettingsModel = FieldSettingsModel()
         fieldSettingsModel.header = "WORD"
@@ -61,39 +40,21 @@ class ViewController: UIViewController {
         fieldSettingsModel.editListPressed = nil
         
         let popoverView = FieldSettingsView(model: fieldSettingsModel)
-        //        var popover = Popover {
-        //            popoverView
-        //        }
+
         var popover = Popover(attributes: .init()) {
             popoverView
-        } background: { context in
-            //            PopoverReader { context in
-            let _ = print("--- Word context \(context.isReady): \(context.frame)")
-            //
-            //                Color.red
-            //                    .offset(x: context.frame.origin.x, y: context.frame.origin.y)
-            //                    .frame(width: context.frame.width, height: context.frame.height)
-            //            }
-            
-            
-            //            PopoverReader {/ context in
-            
-            Color.green.opacity(0.3)
-                .offset(x: context.frame.origin.x, y: context.frame.origin.y)
-                .frame(width: context.isReady ? context.frame.width : nil, height: context.isReady ? context.frame.height : nil)
-            
-            
+        } background: {
+            PopoverReader { context in
+//                let _ = print("--- Word context \(context.isReady): \(context.frame)")
+                Color.green.opacity(0.3)
+                    .offset(x: context.frame.origin.x, y: context.frame.origin.y)
+                    .frame(width: context.isReady ? context.frame.width : nil, height: context.isReady ? context.frame.height : nil)
+            }
         }
         
         popover.position = .relative(
             .init(
-                containerFrame: {
-                    print("OLD: \(self.view.safeAreaLayoutGuide.layoutFrame)")
-                    
-                    print("NEW: \(self.view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 20, dy: 20))")
-                    
-                    return self.view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 20, dy: 20)
-                },
+                containerFrame: { return self.view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 20, dy: 20) },
                 popoverAnchor: .left
             )
         )
@@ -107,7 +68,8 @@ class ViewController: UIViewController {
                 self.purpleButton.windowFrame(),
                 self.listButton.windowFrame(),
                 self.listLabel.windowFrame(),
-                self.tipButton.windowFrame()
+                self.tipButton.windowFrame(),
+                self.holdButton.windowFrame()
             ]
         }
         popover.attributes.tag = "Field Popover"
@@ -129,14 +91,13 @@ class ViewController: UIViewController {
         //        var popover = Popover { popoverView }
         var popover = Popover(attributes: .init()) {
             popoverView
-        } background: { context in
-            //            PopoverReader {/ context in
-            let _ = print("--- List context \(context.isReady): \(context.frame)")
-            Color.blue.opacity(0.3)
-                .offset(x: context.frame.origin.x, y: context.frame.origin.y)
-                .frame(width: context.isReady ? context.frame.width : nil, height: context.isReady ? context.frame.height : nil)
-            //                    .animation(.spring(), value: context.frame)
-            //            }
+        } background: {
+            PopoverReader { context in
+                let _ = print("--- List context \(context.isReady): \(context.frame)")
+                Color.blue.opacity(0.3)
+                    .offset(x: context.frame.origin.x, y: context.frame.origin.y)
+                    .frame(width: context.isReady ? context.frame.width : nil, height: context.isReady ? context.frame.height : nil)
+            }
         }
         
         fieldSettingsModel.editListPressed = {
@@ -150,7 +111,7 @@ class ViewController: UIViewController {
                 popoverAnchor: .topLeft
             )
         )
-        popover.attributes.presentation.animation = .easeOut(duration: 2)
+        popover.attributes.presentation.animation = .easeOut(duration: 4)
         popover.attributes.presentation.transition = .opacity
         popover.attributes.dismissal.animation = .spring()
         popover.attributes.dismissal.transition = .opacity
@@ -172,7 +133,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tipButton: UIButton!
     @IBAction func tipPressed(_ sender: Any) {
-        print("tip")
         if let wordPopover = Popovers.popover(tagged: "Field Popover") {
             var newPopover = wordPopover
             newPopover.position = .relative(
@@ -181,17 +141,35 @@ class ViewController: UIViewController {
                     popoverAnchor: .bottom
                 )
             )
-            //            newPopover.background.
-            print("repaceingr")
             Popovers.replace(wordPopover, with: newPopover)
         }
     }
     
     @IBOutlet weak var holdButton: UIButton!
     @IBAction func holdDown(_ sender: Any) {
+        if let wordPopover = Popovers.popover(tagged: "Field Popover") {
+            var newPopover = wordPopover
+            newPopover.position = .relative(
+                .init(
+                    containerFrame: { self.view.safeAreaLayoutGuide.layoutFrame },
+                    popoverAnchor: .top
+                )
+            )
+            Popovers.replace(wordPopover, with: newPopover)
+        }
     }
     
     @IBAction func holdUp(_ sender: Any) {
+        if let wordPopover = Popovers.popover(tagged: "Field Popover") {
+            var newPopover = wordPopover
+            newPopover.position = .relative(
+                .init(
+                    containerFrame: { self.view.safeAreaLayoutGuide.layoutFrame },
+                    popoverAnchor: .bottom
+                )
+            )
+            Popovers.replace(wordPopover, with: newPopover)
+        }
     }
     
     @IBOutlet weak var purpleButton: UIButton!

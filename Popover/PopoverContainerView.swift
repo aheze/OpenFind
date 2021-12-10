@@ -18,33 +18,29 @@ struct PopoverContainerView: View {
             Color.blue.opacity(0.25)
             
             ForEach(Array(zip(popoverModel.popovers.indices, popoverModel.popovers)), id: \.1.id) { (index, popover) in
-                let context = Binding {
-                    popover.context
-                } set: { newValue, transaction in
-//                    transaction.animation = nil
-//                    print(newValue.)
-                    if popoverModel.popovers.indices.contains(index) {
-//                        popoverModel.popovers[index].context = Popover.Context(position: <#T##Popover.Position#>)
-//                            .size = newValue
-//                        if let popoverSize = newValue.size {
-//                            let popoverFrame = newValue.position.popoverFrame(popoverSize: popoverSize)
-//        //                    withAnimation {
-//                            print("New: \(popoverFrame)")
-//                            popoverModel.popovers[index].context.frame = popoverFrame
-//        //                    }
-//                        }
-                        popoverModel.popovers[index].context.size = newValue.size
-//                        popoverModel.popovers[index].context = newValue
+                
+                let size = Binding<CGSize?> {
+                    popover.context.size
+                } set: {
+                    let previousSizeExisted = popover.context.size != nil
+                    if previousSizeExisted {
+                        print("setting, exist")
+//                        popover.context.setSize($0, animation: popover.attributes.presentation.animation)
+                        popover.context.setSize($0)
+                    } else {
+                        print("setting, no exist")
+                        popover.context.setSize($0)
+                        popoverModel.refresh()
                     }
+                    
                 }
-                
-                
+
                 popover.background
                     .opacity(popover.context.isReady ? 1 : 0)
                 
                 popover.view
                     .opacity(popover.context.isReady ? 1 : 0)
-                    .writeSize(to: context.size)
+                    .writeSize(to: size)
                     .offset(popoverOffset(for: popover))
                     .animation(.spring(), value: selectedPopover)
                     .transition(
@@ -92,7 +88,7 @@ struct PopoverContainerView: View {
     }
     
     func popoverOffset(for popover: Popover) -> CGSize {
-
+//        print("Offset: \(popover.context.frame)")
         /// make sure the frame has been calculated first
         guard popover.context.isReady else { return .zero }
         

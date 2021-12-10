@@ -10,7 +10,11 @@ import Combine
 import SwiftUI
 
 class PopoverModel: ObservableObject {
-    @Published var popovers = [Popover]()
+    @Published var popovers = [Popover]() {
+        didSet {
+//            print("Set.")
+        }
+    }
     
     /// must be published so that the `PopoverContainerView` re-renders
     @Published internal var popoversDraggable = true
