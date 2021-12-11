@@ -19,12 +19,16 @@ struct Popovers {
     }()
     
     static func present(_ popover: Popover) {
+        _ = model
         
         /// make sure the window is set up the first time
-        let transaction = Transaction(animation: popover.attributes.presentation.animation)
-        popover.context.transaction = transaction
-        withTransaction(transaction) {
-            current.append(popover)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            
+            let transaction = Transaction(animation: popover.attributes.presentation.animation)
+            popover.context.transaction = transaction
+            withTransaction(transaction) {
+                current.append(popover)
+            }
         }
     }
     
@@ -41,24 +45,17 @@ struct Popovers {
             var newPopover = newPopover
             let currentContext = current[oldPopoverIndex].context
             
-            print("Replacing \(currentContext.size) with \(newPopover.context.size)")
-            
-            
-            newPopover.id = currentContext.id
-            
             let transaction = Transaction(animation: newPopover.attributes.presentation.animation)
+            
+            /// set this for future animations
             newPopover.context.transaction = transaction
             
-            if currentContext.size == newPopover.context.size {
-                withTransaction(transaction) {
-                    newPopover.context.setSize(currentContext.size)
-                    current[oldPopoverIndex] = newPopover
-                }
-            } else {
+            /// use same ID so that SwiftUI animates the change
+            newPopover.id = currentContext.id
+            
+            withTransaction(transaction) {
                 newPopover.context.setSize(currentContext.size)
-                withTransaction(transaction) {
-                    current[oldPopoverIndex] = newPopover
-                }
+                current[oldPopoverIndex] = newPopover
             }
         }
     }

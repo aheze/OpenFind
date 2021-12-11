@@ -42,8 +42,11 @@ struct FrameRect: ViewModifier {
     let rect: CGRect
     func body(content: Content) -> some View {
         content
+//            .position(x: rect.origin.x, y: rect.origin.y)
+//            .frame(width: 50, height: 50)
             .position(x: rect.origin.x + rect.width / 2, y: rect.origin.y + rect.height / 2)
-            .frame(width: rect.width, height: rect.height)
+//            .offset(x: rect.origin.x, y: rect.origin.y)
+            .frame(width: rect.width, height: rect.height, alignment: .topLeading)
     }
 }
 

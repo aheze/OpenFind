@@ -45,13 +45,8 @@ class ViewController: UIViewController {
             popoverView
         } background: {
             PopoverReader { context in
-//                let _ = print("--- Word context \(context.isReady): \(context.frame)")
-                Color.green.opacity(0.3)
+                Color.green.opacity(0.8)
                     .frame(rect: context.frame.insetBy(dx: -10, dy: -10))
-//                    .position(context.frame.origin)
-//                    .frame(width: 50, height: 50)
-//                    .offset(x: context.frame.origin.x, y: context.frame.origin.y)
-//                    .frame(width: context.frame.width, height: context.frame.height)
             }
         }
         
@@ -95,15 +90,9 @@ class ViewController: UIViewController {
         var popover = Popover(attributes: .init()) {
             popoverView
         } background: {
-            let _ = print("Background change")
             PopoverReader { context in
-                let _ = print("PopoverReader change: \(context.frame) / \(context.size)")
                 Color.blue.opacity(0.8)
-
-//                    .position(context.frame.origin)
-//                    .frame(width: 50, height: 50)
                     .frame(rect: context.frame.insetBy(dx: -10, dy: -10))
-//                    .frame(width: context.frame.width, height: context.frame.height)
             }
         }
         
@@ -118,8 +107,8 @@ class ViewController: UIViewController {
                 popoverAnchor: .topLeft
             )
         )
-        popover.attributes.presentation.animation = .easeOut(duration: 4)
-//        popover.attributes.presentation.animation = .spring()
+        
+        popover.attributes.presentation.animation = .spring()
         popover.attributes.presentation.transition = .opacity
         popover.attributes.dismissal.animation = .spring()
         popover.attributes.dismissal.transition = .opacity
