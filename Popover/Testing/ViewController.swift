@@ -46,7 +46,34 @@ class ViewController: UIViewController {
         } background: {
             PopoverReader { context in
                 Color.green.opacity(0.8)
+                    .cornerRadius(16)
                     .frame(rect: context.frame.insetBy(dx: -10, dy: -10))
+                
+                Circle()
+                    .stroke(Color.white, lineWidth: 6)
+                    .frame(width: 25, height: 25)
+                    .overlay(
+                        Circle()
+                            .fill(Color.blue)
+                    )
+                    .position(self.purpleButton.frame.pointAtAnchor(.bottom))
+                
+                VerticalPathShape(
+                    start: self.purpleButton.frame.pointAtAnchor(.bottom),
+                    end: context.frame.pointAtAnchor(.top),
+                    steepness: 0.5
+                )
+                .stroke(Color.blue, style: StrokeStyle(lineWidth: 4, lineCap: .round))
+                
+                Circle()
+                    .stroke(Color.white, lineWidth: 6)
+                    .frame(width: 25, height: 25)
+                    .overlay(
+                        Circle()
+                            .fill(Color.blue)
+                    )
+                    .position(context.frame.pointAtAnchor(.top))
+                    .zIndex(10)
             }
         }
         

@@ -430,6 +430,7 @@
 		3C570E7E260CF24400F5AA4D /* PhotosVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C570E7D260CF24400F5AA4D /* PhotosVC+Accessibility.swift */; };
 		3C570E82260CF26600F5AA4D /* SegmentedSlider+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C570E81260CF26600F5AA4D /* SegmentedSlider+Accessibility.swift */; };
 		3C58FC882615642500ED28FE /* ViewController+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C58FC872615642500ED28FE /* ViewController+Accessibility.swift */; };
+		3C59D11727644B06000A6750 /* PopoverTemplateViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C59D11627644B06000A6750 /* PopoverTemplateViews.swift */; };
 		3C5B156725A7ED7A00BB8988 /* ViewController+CameraShutoff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B156625A7ED7A00BB8988 /* ViewController+CameraShutoff.swift */; };
 		3C5B156B25A7EE7900BB8988 /* NotifyTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B156A25A7EE7900BB8988 /* NotifyTransition.swift */; };
 		3C5B157325A8CD9C00BB8988 /* PhotosVC+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B157225A8CD9C00BB8988 /* PhotosVC+Selection.swift */; };
@@ -1155,6 +1156,7 @@
 		3C570E7D260CF24400F5AA4D /* PhotosVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Accessibility.swift"; sourceTree = "<group>"; };
 		3C570E81260CF26600F5AA4D /* SegmentedSlider+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SegmentedSlider+Accessibility.swift"; sourceTree = "<group>"; };
 		3C58FC872615642500ED28FE /* ViewController+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Accessibility.swift"; sourceTree = "<group>"; };
+		3C59D11627644B06000A6750 /* PopoverTemplateViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverTemplateViews.swift; sourceTree = "<group>"; };
 		3C5B156625A7ED7A00BB8988 /* ViewController+CameraShutoff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+CameraShutoff.swift"; sourceTree = "<group>"; };
 		3C5B156A25A7EE7900BB8988 /* NotifyTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTransition.swift; sourceTree = "<group>"; };
 		3C5B157225A8CD9C00BB8988 /* PhotosVC+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosVC+Selection.swift"; sourceTree = "<group>"; };
@@ -1652,6 +1654,7 @@
 				3CB98A6E275B150300A6B1B9 /* PopoverContainerViewController.swift */,
 				3CB98A6C275B0A0500A6B1B9 /* PopoverContainerView.swift */,
 				3CB002342763055A00B6A349 /* PopoverReader.swift */,
+				3C59D11627644B06000A6750 /* PopoverTemplateViews.swift */,
 				3CB98A70275B1AE800A6B1B9 /* PopoverUtilities.swift */,
 				3CB0022B2762FA5400B6A349 /* Custom Views */,
 				3C1D1A07275A9F8E0064F2C6 /* Testing */,
@@ -3789,6 +3792,7 @@
 				3CB98A78275B217900A6B1B9 /* Field.swift in Sources */,
 				3CBC41ED275DCA0F00FCE2EA /* Popovers.swift in Sources */,
 				3C1D1A23275AA21B0064F2C6 /* TabViewModel.swift in Sources */,
+				3C59D11727644B06000A6750 /* PopoverTemplateViews.swift in Sources */,
 				3CB98A7B275B217900A6B1B9 /* SearchUtilities.swift in Sources */,
 				3CB002352763055A00B6A349 /* PopoverReader.swift in Sources */,
 				3CB98A76275B217900A6B1B9 /* SearchViewController.swift in Sources */,

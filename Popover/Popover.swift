@@ -102,52 +102,31 @@ struct Popover: Identifiable, Equatable {
         
         /// calculated from SwiftUI. If this is `nil`, the popover is not yet ready.
         @Published public private(set) var size: CGSize?
-//        {
-//            didSet {
-//                if let popoverSize = size {
-//                    let popoverFrame = position.popoverFrame(popoverSize: popoverSize)
-//                    withAnimation {
-//                        frame = popoverFrame
-//                    }
-//                }
-//            }
-        //        }
-        func setSize(_ size: CGSize?) {
-            self.size = size
-//            withAnimation(animation) {
-            self.frame = getFrame(from: size)
-//            }
-        }
-//        func setSize(_ size: CGSize?, animation: Animation? = nil) {
-//            self.size = size
-//            withAnimation(animation) {
-//                self.frame = getFrame(from: size)
-//            }
-//        }
+        
+        /// size + origin
+        @Published public private(set) var frame = CGRect.zero
+        
+        /// for internal animations
+        var transaction: Transaction?
         
         var position: Position
-        
         init(position: Position) {
             self.position = position
         }
         
-        @Published var frame = CGRect.zero
         
-        func getFrame(from size: CGSize?) -> CGRect {
-            var popoverFrame = CGRect.zero
-            if let popoverSize = size {
-                popoverFrame = position.popoverFrame(popoverSize: popoverSize)
-            }
-            return popoverFrame
+        func setSize(_ size: CGSize?) {
+            self.size = size
+            self.frame = getFrame(from: size)
         }
         
-        @Published var isReady = false
-//        var isReady: Bool {
-//            return size != nil
-////            return true
-//        }
-        var transaction: Transaction?
-        
+        func getFrame(from size: CGSize?) -> CGRect {
+            if let size = size {
+                return position.popoverFrame(popoverSize: size)
+            } else {
+                return .zero
+            }
+        }
     }
     
     enum Position {
@@ -193,48 +172,13 @@ extension Popover.Position {
     /// `popoverSize` is only used for relative positioning
     func popoverOrigin(popoverSize: CGSize) -> CGPoint {
         switch self {
+            
+        /// get the point of a rectangle
         case .absolute(let position):
             let originFrame = position.originFrame()
+            return originFrame.pointAtAnchor(position.originAnchor)
             
-            switch position.originAnchor {
-            case .topLeft:
-                return originFrame.origin
-            case .top:
-                return CGPoint(
-                    x: originFrame.origin.x + originFrame.width / 2,
-                    y: originFrame.origin.y
-                )
-            case .topRight:
-                return CGPoint(
-                    x: originFrame.origin.x + originFrame.width,
-                    y: originFrame.origin.y
-                )
-            case .right:
-                return CGPoint(
-                    x: originFrame.origin.x + originFrame.width,
-                    y: originFrame.origin.y + originFrame.height / 2
-                )
-            case .bottomRight:
-                return CGPoint(
-                    x: originFrame.origin.x + originFrame.width,
-                    y: originFrame.origin.y + originFrame.height
-                )
-            case .bottom:
-                return CGPoint(
-                    x: originFrame.origin.x + originFrame.width / 2,
-                    y: originFrame.origin.y + originFrame.height
-                )
-            case .bottomLeft:
-                return CGPoint(
-                    x: originFrame.origin.x,
-                    y: originFrame.origin.y + originFrame.height
-                )
-            case .left:
-                return CGPoint(
-                    x: originFrame.origin.x + originFrame.width,
-                    y: originFrame.origin.y + originFrame.height / 2
-                )
-            }
+        /// inside a rectangle, get the point (relative to the rectangle's outside view)
         case .relative(let position):
             let containerFrame = position.containerFrame()
             
@@ -242,7 +186,7 @@ extension Popover.Position {
             case .topLeft:
                 return CGPoint(
                     x: containerFrame.origin.x,
-                    y: 0
+                    y: containerFrame.origin.y
                 )
             case .top:
                 return CGPoint(

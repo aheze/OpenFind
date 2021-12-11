@@ -18,9 +18,6 @@ struct GeometrySizeWriter: View {
             /// prevent infinite loop
             if self.size != proxy.size {
                 DispatchQueue.main.async {
-//                    withTransaction(transac) {
-//                        self.size = proxy.size
-//                    }
                     self.size = proxy.size
                 }
             }
@@ -45,7 +42,6 @@ struct FrameRect: ViewModifier {
 //            .position(x: rect.origin.x, y: rect.origin.y)
 //            .frame(width: 50, height: 50)
             .position(x: rect.origin.x + rect.width / 2, y: rect.origin.y + rect.height / 2)
-//            .offset(x: rect.origin.x, y: rect.origin.y)
             .frame(width: rect.width, height: rect.height, alignment: .topLeading)
     }
 }
@@ -62,6 +58,50 @@ extension UIView {
         /// it's a closure because view frames can change
         return {
             self.windowFrame()
+        }
+    }
+}
+
+extension CGRect {
+    func pointAtAnchor(_ anchor: Popover.Position.Anchor) -> CGPoint {
+        switch anchor {
+        case .topLeft:
+            return self.origin
+        case .top:
+            return CGPoint(
+                x: self.origin.x + self.width / 2,
+                y: self.origin.y
+            )
+        case .topRight:
+            return CGPoint(
+                x: self.origin.x + self.width,
+                y: self.origin.y
+            )
+        case .right:
+            return CGPoint(
+                x: self.origin.x + self.width,
+                y: self.origin.y + self.height / 2
+            )
+        case .bottomRight:
+            return CGPoint(
+                x: self.origin.x + self.width,
+                y: self.origin.y + self.height
+            )
+        case .bottom:
+            return CGPoint(
+                x: self.origin.x + self.width / 2,
+                y: self.origin.y + self.height
+            )
+        case .bottomLeft:
+            return CGPoint(
+                x: self.origin.x,
+                y: self.origin.y + self.height
+            )
+        case .left:
+            return CGPoint(
+                x: self.origin.x + self.width,
+                y: self.origin.y + self.height / 2
+            )
         }
     }
 }
