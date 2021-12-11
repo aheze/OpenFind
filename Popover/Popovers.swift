@@ -21,21 +21,10 @@ struct Popovers {
     static func present(_ popover: Popover) {
         
         /// make sure the window is set up the first time
-        withAnimation(popover.attributes.presentation.animation) {
+        let transaction = Transaction(animation: popover.attributes.presentation.animation)
+        popover.context.transaction = transaction
+        withTransaction(transaction) {
             current.append(popover)
-            
-            //                let context = current[oldPopoverIndex].context
-            //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            
-            //                popover.context.setSize(<#T##size: CGSize?##CGSize?#>)
-            //                print("sie: \(popover.context.size)")
-            //                if let popoverSize = popover.context.size {
-            //                    let popoverFrame = popover.context.position.popoverFrame(popoverSize: popoverSize)
-            //                    print("New: \(popoverFrame)")
-            //                    popover.context.frame = popoverFrame
-            //                }
-            //            }
-            //                popover.context = context
         }
     }
     
@@ -57,14 +46,23 @@ struct Popovers {
             
             newPopover.id = currentContext.id
             if currentContext.size == newPopover.context.size {
-                newPopover.context.setSize(currentContext.size, animation: newPopover.attributes.presentation.animation)
-            } else {
-//                newPopover.context.setSize(currentContext.size)
-                print("Not the same")
+//                newPopover.context.isReady = true
             }
             
-            withAnimation(newPopover.attributes.presentation.animation) {
-                current[oldPopoverIndex] = newPopover
+            let transaction = Transaction(animation: newPopover.attributes.presentation.animation)
+            newPopover.context.transaction = transaction
+            
+            if currentContext.size == newPopover.context.size {
+
+                withTransaction(transaction) {
+                    newPopover.context.setSize(currentContext.size)
+                    current[oldPopoverIndex] = newPopover
+                }
+            } else {
+                newPopover.context.setSize(currentContext.size)
+                withTransaction(transaction) {
+                    current[oldPopoverIndex] = newPopover
+                }
             }
         }
     }

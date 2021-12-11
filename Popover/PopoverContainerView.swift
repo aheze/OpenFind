@@ -23,23 +23,25 @@ struct PopoverContainerView: View {
                     popover.context.size
                 } set: { newValue in
 
-                    let previousSizeExisted = popover.context.size != nil
-                    if previousSizeExisted, newValue != popover.context.size {
-                        popover.context.setSize(newValue, animation: .spring())
-                    } else {
-                        
-                        /// a size hasn't been set yet for the popover
+                    print("-> Popover size change - Old: \(popover.context.size), New: \(newValue). Ready: \(popover.context.isReady)")
+                    if let transaction = popover.context.transaction {
                         popover.context.setSize(newValue)
-                        popoverModel.refresh()
+                        
+                        withTransaction(transaction) {
+                            if !popover.context.isReady {
+                                popoverModel.refresh()
+                            }
+                            popover.context.isReady = true
+//                            popoverModel.refresh()
+                        }
                     }
-                    
                 }
 
                 popover.background
                     .opacity(popover.context.isReady ? 1 : 0)
                 
                 popover.view
-                    .opacity(popover.context.isReady ? 1 : 0)
+                    .opacity(popover.context.isReady ? 1 : 0.5)
                     .writeSize(to: size)
                     .offset(popoverOffset(for: popover))
                     .animation(.spring(), value: selectedPopover)
@@ -88,9 +90,9 @@ struct PopoverContainerView: View {
     }
     
     func popoverOffset(for popover: Popover) -> CGSize {
-//        print("Offset: \(popover.context.frame)")
+//        print("Offset ready [\(popover.context.isReady)]: \(popover.context.frame)")
         /// make sure the frame has been calculated first
-        guard popover.context.isReady else { return .zero }
+
         
         let offset = CGSize(
             width: popover.context.frame.origin.x + ((selectedPopover == popover) ? selectedPopoverOffset.width : 0),

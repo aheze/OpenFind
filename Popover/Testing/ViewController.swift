@@ -47,8 +47,10 @@ class ViewController: UIViewController {
             PopoverReader { context in
 //                let _ = print("--- Word context \(context.isReady): \(context.frame)")
                 Color.green.opacity(0.3)
-                    .offset(x: context.frame.origin.x, y: context.frame.origin.y)
-                    .frame(width: context.isReady ? context.frame.width : nil, height: context.isReady ? context.frame.height : nil)
+                    .position(context.frame.origin)
+                    .frame(width: 50, height: 50)
+//                    .offset(x: context.frame.origin.x, y: context.frame.origin.y)
+//                    .frame(width: context.isReady ? context.frame.width : nil, height: context.isReady ? context.frame.height : nil)
             }
         }
         
@@ -92,10 +94,14 @@ class ViewController: UIViewController {
         var popover = Popover(attributes: .init()) {
             popoverView
         } background: {
+            let _ = print("Background change")
             PopoverReader { context in
-                Color.blue.opacity(0.3)
-                    .offset(x: context.frame.origin.x, y: context.frame.origin.y)
-                    .frame(width: context.isReady ? context.frame.width : nil, height: context.isReady ? context.frame.height : nil)
+                let _ = print("PopoverReader change: \(context.frame) / \(context.size)")
+                Color.blue.opacity(0.8)
+//                    .offset(x: context.frame.origin.x, y: context.frame.origin.y)
+                    .position(context.frame.origin)
+                    .frame(width: 50, height: 50)
+//                    .frame(width: context.isReady ? context.frame.width : nil, height: context.isReady ? context.frame.height : nil)
             }
         }
         
