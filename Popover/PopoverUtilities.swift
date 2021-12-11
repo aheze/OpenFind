@@ -18,6 +18,9 @@ struct GeometrySizeWriter: View {
             /// prevent infinite loop
             if self.size != proxy.size {
                 DispatchQueue.main.async {
+//                    withTransaction(transac) {
+//                        self.size = proxy.size
+//                    }
                     self.size = proxy.size
                 }
             }
@@ -29,6 +32,18 @@ struct GeometrySizeWriter: View {
 extension View {
     func writeSize(to size: Binding<CGSize?>) -> some View {
         return self.background(GeometrySizeWriter(size: size))
+    }
+    func frame(rect: CGRect) -> some View {
+        return self.modifier(FrameRect(rect: rect))
+    }
+}
+
+struct FrameRect: ViewModifier {
+    let rect: CGRect
+    func body(content: Content) -> some View {
+        content
+            .position(x: rect.origin.x + rect.width / 2, y: rect.origin.y + rect.height / 2)
+            .frame(width: rect.width, height: rect.height)
     }
 }
 

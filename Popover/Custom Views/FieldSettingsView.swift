@@ -27,8 +27,13 @@ struct FieldSettingsView: View {
         VStack(spacing: 0) {
             Button {
                 if model.showingWords {
-                    withAnimation {
+//                    withAnimation {
+//                        model.showingWords = false
+//                    }
+                    let transaction = Transaction(animation: .default)
+                    withTransaction(transaction) {
                         model.showingWords = false
+                        Popovers.refresh(with: transaction)
                     }
                 }
             } label: {
@@ -80,9 +85,15 @@ struct FieldSettingsView: View {
                 
                 FieldSettingsContainer {
                     Button {
-                        withAnimation {
+                        let transaction = Transaction(animation: .default)
+                        withTransaction(transaction) {
                             model.showingWords = true
+                            Popovers.refresh(with: transaction)
                         }
+//                        withAnimation {
+//                            model.showingWords = true
+//                            Popovers.refresh()
+//                        }
                     } label: {
                         Text("Show Words")
                             .modifier(PopoverButtonModifier(backgroundColor: PopoverConstants.buttonColor))

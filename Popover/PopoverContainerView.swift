@@ -22,26 +22,32 @@ struct PopoverContainerView: View {
                 let size = Binding<CGSize?> {
                     popover.context.size
                 } set: { newValue in
-
-                    print("-> Popover size change - Old: \(popover.context.size), New: \(newValue). Ready: \(popover.context.isReady)")
+                
+                    let replacingPopover = newValue != popover.context.size && popover.context.size != nil
+                    print("-> Popover size change - Old: \(popover.context.size), New: \(newValue). Ready: \(popover.context.isReady). Transaction: \(popover.context.transaction != nil)")
                     if let transaction = popover.context.transaction {
-                        popover.context.setSize(newValue)
-                        
-                        withTransaction(transaction) {
-                            if !popover.context.isReady {
-                                popoverModel.refresh()
-                            }
+                        if replacingPopover {
+                            print("Replacing!")
                             popover.context.isReady = true
-//                            popoverModel.refresh()
+                            withTransaction(transaction) {
+                                popover.context.setSize(newValue)
+                                Popovers.refresh(with: transaction)
+                            }
+                            popover.context.transaction = nil
+                        } else {
+                            popover.context.setSize(newValue)
+                            popoverModel.refresh()
+                            popover.context.isReady = true
+                            popover.context.transaction = nil
                         }
                     }
                 }
 
                 popover.background
-                    .opacity(popover.context.isReady ? 1 : 0)
+//                    .opacity(popover.context.isReady ? 1 : 0)
                 
                 popover.view
-                    .opacity(popover.context.isReady ? 1 : 0.5)
+//                    .opacity(popover.context.isReady ? 1 : 0.5)
                     .writeSize(to: size)
                     .offset(popoverOffset(for: popover))
                     .animation(.spring(), value: selectedPopover)
@@ -90,7 +96,7 @@ struct PopoverContainerView: View {
     }
     
     func popoverOffset(for popover: Popover) -> CGSize {
-//        print("Offset ready [\(popover.context.isReady)]: \(popover.context.frame)")
+        print("Offset ready [\(popover.context.isReady)]: \(popover.context.frame)")
         /// make sure the frame has been calculated first
 
         

@@ -45,15 +45,11 @@ struct Popovers {
             
             
             newPopover.id = currentContext.id
-            if currentContext.size == newPopover.context.size {
-//                newPopover.context.isReady = true
-            }
             
             let transaction = Transaction(animation: newPopover.attributes.presentation.animation)
             newPopover.context.transaction = transaction
             
             if currentContext.size == newPopover.context.size {
-
                 withTransaction(transaction) {
                     newPopover.context.setSize(currentContext.size)
                     current[oldPopoverIndex] = newPopover
@@ -75,6 +71,13 @@ struct Popovers {
         }
     }
     
+    /// optional refresh
+    static func refresh(with transaction: Transaction? = nil) {
+        for popover in current {
+            popover.context.transaction = transaction
+        }
+        model.refresh()
+    }
     static func popover(tagged tag: String) -> Popover? {
         return current.first(where: { $0.attributes.tag == tag })
     }
