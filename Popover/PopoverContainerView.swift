@@ -78,7 +78,10 @@ struct PopoverContainerView: View {
                                 } else {
                                     calculatedTransition.height = pow(yTranslation, PopoverConstants.rubberBandingPower)
                                 }
+                                
                                 draggingAmount = calculatedTransition
+                                
+                                popover.context.presentationFrame.origin = popover.context.frame.origin + CGPoint(x: draggingAmount.width, y: draggingAmount.height)
                             }
                             .onEnded { value in
                                 self.selectedPopover = nil

@@ -106,6 +106,9 @@ struct Popover: Identifiable, Equatable {
         /// size + origin
         @Published public private(set) var frame = CGRect.zero
         
+        /// same as frame, but with dragging offset added
+        @Published var presentationFrame = CGRect.zero
+        
         /// for internal animations
         var transaction: Transaction?
         
@@ -118,6 +121,7 @@ struct Popover: Identifiable, Equatable {
         func setSize(_ size: CGSize?) {
             self.size = size
             self.frame = getFrame(from: size)
+            self.presentationFrame = getFrame(from: size)
         }
         
         func getFrame(from size: CGSize?) -> CGRect {

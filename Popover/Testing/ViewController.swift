@@ -47,7 +47,7 @@ class ViewController: UIViewController {
             PopoverReader { context in
                 Color.green.opacity(0.8)
                     .cornerRadius(16)
-                    .frame(rect: context.frame.insetBy(dx: -10, dy: -10))
+                    .frame(rect: context.presentationFrame.insetBy(dx: -10, dy: -10))
                 
                 Circle()
                     .stroke(Color.white, lineWidth: 6)
@@ -64,6 +64,7 @@ class ViewController: UIViewController {
                     steepness: 0.5
                 )
                 .stroke(Color.blue, style: StrokeStyle(lineWidth: 4, lineCap: .round))
+                .zIndex(11)
                 
                 Circle()
                     .stroke(Color.white, lineWidth: 6)
@@ -72,7 +73,7 @@ class ViewController: UIViewController {
                         Circle()
                             .fill(Color.blue)
                     )
-                    .position(context.frame.pointAtAnchor(.top))
+                    .position(context.presentationFrame.pointAtAnchor(.top))
                     .zIndex(10)
             }
         }
