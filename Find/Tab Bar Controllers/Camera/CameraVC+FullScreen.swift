@@ -13,7 +13,7 @@ extension CameraViewController {
         if fullScreen {
             contentTopC.constant = -searchContentView.bounds.height - view.safeAreaInsets.top
             passthroughBottomC.constant = -passthroughGroupView.bounds.height - view.safeAreaInsets.bottom
-            controlsBlurBottomC.constant = CGFloat(ConstantVars.tabHeight) - 30
+            controlsBlurBottomC.constant = CGFloat(FindConstantVars.tabHeight) - 30
             
             messageViewBottomC.constant = controlsBlurView.bounds.height + controlsBlurBottomC.constant + view.safeAreaInsets.bottom
             

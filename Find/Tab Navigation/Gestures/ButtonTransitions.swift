@@ -59,11 +59,11 @@ extension ViewController {
                     tabBarView.cameraContainerView.alpha = 1
                     let block = {
                         self.tabBarView.cameraIcon.makeNormalState()()
-                        self.tabBarView.listsIcon.makeNormalState(details: Constants.detailIconColorLight, foreground: Constants.foregroundIconColorLight, background: Constants.backgroundIconColorLight)()
+                        self.tabBarView.listsIcon.makeNormalState(details: FindConstants.detailIconColorLight, foreground: FindConstants.foregroundIconColorLight, background: FindConstants.backgroundIconColorLight)()
                         self.tabBarView.photosIcon.makeActiveState()()
                     }
-                    self.tabBarView.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
-                    self.tabBarView.makeLayerInactiveState(duration: Constants.transitionDuration)
+                    self.tabBarView.cameraIcon.makeLayerInactiveState(duration: FindConstants.transitionDuration)
+                    self.tabBarView.makeLayerInactiveState(duration: FindConstants.transitionDuration)
                     
                     let completion = { }
                     
@@ -81,12 +81,12 @@ extension ViewController {
                 case is CameraViewController:
                     tabBarView.hideRealShutter?(true)
                     let block = {
-                        self.tabBarView.photosIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)()
-                        self.tabBarView.listsIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)()
+                        self.tabBarView.photosIcon.makeNormalState(details: FindConstants.detailIconColorDark, foreground: FindConstants.foregroundIconColorDark, background: FindConstants.backgroundIconColorDark)()
+                        self.tabBarView.listsIcon.makeNormalState(details: FindConstants.detailIconColorDark, foreground: FindConstants.foregroundIconColorDark, background: FindConstants.backgroundIconColorDark)()
                         self.tabBarView.cameraIcon.makeActiveState()()
                     }
-                    self.tabBarView.cameraIcon.makeLayerActiveState(duration: Constants.transitionDuration)
-                    self.tabBarView.makeLayerActiveState(duration: Constants.transitionDuration)
+                    self.tabBarView.cameraIcon.makeLayerActiveState(duration: FindConstants.transitionDuration)
+                    self.tabBarView.makeLayerActiveState(duration: FindConstants.transitionDuration)
                     
                     let completion: (() -> Void) = {
                         self.tabBarView.hideRealShutter?(false)
@@ -107,12 +107,12 @@ extension ViewController {
                     tabBarView.hideRealShutter?(true)
                     tabBarView.cameraContainerView.alpha = 1
                     let block = {
-                        self.tabBarView.photosIcon.makeNormalState(details: Constants.detailIconColorLight, foreground: Constants.foregroundIconColorLight, background: Constants.backgroundIconColorLight)()
+                        self.tabBarView.photosIcon.makeNormalState(details: FindConstants.detailIconColorLight, foreground: FindConstants.foregroundIconColorLight, background: FindConstants.backgroundIconColorLight)()
                         self.tabBarView.cameraIcon.makeNormalState()()
                         self.tabBarView.listsIcon.makeActiveState()()
                     }
-                    self.tabBarView.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
-                    self.tabBarView.makeLayerInactiveState(duration: Constants.transitionDuration)
+                    self.tabBarView.cameraIcon.makeLayerInactiveState(duration: FindConstants.transitionDuration)
+                    self.tabBarView.makeLayerInactiveState(duration: FindConstants.transitionDuration)
                     
                     let completion = { }
                     

@@ -11,8 +11,8 @@ class PhotosIcon: UIView {
     
     var pressed: (() -> Void)?
     
-    var newDetailsColor = Constants.detailIconColorDark
-    var newBackgroundColor = Constants.backgroundIconColorDark
+    var newDetailsColor = FindConstants.detailIconColorDark
+    var newBackgroundColor = FindConstants.backgroundIconColorDark
     
     let originalForegroundX = CGFloat(5)
     let originalForegroundY = CGFloat(10)
@@ -138,9 +138,9 @@ class PhotosIcon: UIView {
     }
     
     func makePercentageOfDark(percentage: CGFloat) {
-        self.detailsView.backgroundColor = [Constants.detailIconColorLight, Constants.detailIconColorDark].intermediate(percentage: percentage)
-        self.foregroundView.backgroundColor = [Constants.foregroundIconColorLight, Constants.foregroundIconColorDark].intermediate(percentage: percentage)
-        self.backgroundView.backgroundColor = [Constants.backgroundIconColorLight, Constants.backgroundIconColorDark].intermediate(percentage: percentage)
+        self.detailsView.backgroundColor = [FindConstants.detailIconColorLight, FindConstants.detailIconColorDark].intermediate(percentage: percentage)
+        self.foregroundView.backgroundColor = [FindConstants.foregroundIconColorLight, FindConstants.foregroundIconColorDark].intermediate(percentage: percentage)
+        self.backgroundView.backgroundColor = [FindConstants.backgroundIconColorLight, FindConstants.backgroundIconColorDark].intermediate(percentage: percentage)
     }
     
     func makePhotosIconBezier() -> CGPath {

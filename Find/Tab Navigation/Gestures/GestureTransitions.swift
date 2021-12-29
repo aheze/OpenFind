@@ -16,12 +16,12 @@ extension ViewController {
     func moveRubberBand(totalValue: CGFloat) {
         if gestures.direction == .left { /// in Lists, hitting right edge
             let safeTotalValue = min(0, totalValue)
-            let adjustedValue = -pow(-safeTotalValue, Constants.rubberBandingPower)
+            let adjustedValue = -pow(-safeTotalValue, FindConstants.rubberBandingPower)
             ViewControllerState.currentVC?.view.frame.origin.x = adjustedValue
         } else if gestures.direction == .right { /// in Photos, hitting left edge
             
             let safeTotalValue = max(0, totalValue)
-            let adjustedValue = pow(safeTotalValue, Constants.rubberBandingPower)
+            let adjustedValue = pow(safeTotalValue, FindConstants.rubberBandingPower)
             ViewControllerState.currentVC?.view.frame.origin.x = adjustedValue
         }
     }
@@ -29,7 +29,7 @@ extension ViewController {
     func finishMoveRubberBand(totalValue: CGFloat, velocity: CGFloat) {
         
         let maximumTotalValue = min(abs(totalValue), 200)
-        let adjustedValue = pow(maximumTotalValue, Constants.rubberBandingPower)
+        let adjustedValue = pow(maximumTotalValue, FindConstants.rubberBandingPower)
         
         gestures.framePositionWhenLifted = ViewControllerState.currentVC?.view.frame.origin.x ?? 0
         gestures.viewToTrackChanges = ViewControllerState.currentVC?.view
@@ -43,7 +43,7 @@ extension ViewController {
             dy: 0
         )
         
-        let timingParameters = UISpringTimingParameters(damping: 1, response: Constants.transitionDuration, initialVelocity: relativeV)
+        let timingParameters = UISpringTimingParameters(damping: 1, response: FindConstants.transitionDuration, initialVelocity: relativeV)
         animator = UIViewPropertyAnimator(duration: 0, timingParameters: timingParameters)
         animator?.addAnimations {
             ViewControllerState.currentVC?.view.frame.origin.x = 0
@@ -158,22 +158,22 @@ extension ViewController {
             if gestures.toOverlay { /// camera to lists
                 tabBarView.makePercentageOfActive(percentage: max(0, 1 - (maxValue / containerView.frame.width)))
                 tabBarView.cameraIcon.makePercentageOfActive(percentage: max(0, 1 - (maxValue / containerView.frame.width)))
-                tabBarView.listsIcon.makePercentageOfActive(percentage: min(1, maxValue / containerView.frame.width), originalDetails: Constants.detailIconColorDark, originalForeground: Constants.foregroundIconColorDark, originalBackground: Constants.backgroundIconColorDark)
+                tabBarView.listsIcon.makePercentageOfActive(percentage: min(1, maxValue / containerView.frame.width), originalDetails: FindConstants.detailIconColorDark, originalForeground: FindConstants.foregroundIconColorDark, originalBackground: FindConstants.backgroundIconColorDark)
                 tabBarView.photosIcon.makePercentageOfDark(percentage: max(0, 1 - (maxValue / containerView.frame.width)))
                 /// overflow
                 if totalValue <= -containerView.frame.width { /// totalValue is negative
                     let amountOver = totalValue + containerView.frame.width
-                    value = -containerView.frame.width - pow(-amountOver, Constants.rubberBandingPower)
+                    value = -containerView.frame.width - pow(-amountOver, FindConstants.rubberBandingPower)
                 }
                 ViewControllerState.newVC?.view.frame.origin.x = containerView.frame.width + value /// value is negative
             } else { /// photos to camera
                 tabBarView.makePercentageOfActive(percentage: maxValue / containerView.frame.width)
-                tabBarView.photosIcon.makePercentageOfActive(percentage: 1 - (maxValue / containerView.frame.width), originalDetails: Constants.detailIconColorDark, originalForeground: Constants.foregroundIconColorDark, originalBackground: Constants.backgroundIconColorDark)
+                tabBarView.photosIcon.makePercentageOfActive(percentage: 1 - (maxValue / containerView.frame.width), originalDetails: FindConstants.detailIconColorDark, originalForeground: FindConstants.foregroundIconColorDark, originalBackground: FindConstants.backgroundIconColorDark)
                 tabBarView.cameraIcon.makePercentageOfActive(percentage: maxValue / containerView.frame.width)
                 tabBarView.listsIcon.makePercentageOfDark(percentage: min(1, maxValue / containerView.frame.width))
                 /// overflow
                 if totalValue >= 0 {
-                    value = pow(totalValue, Constants.rubberBandingPower)
+                    value = pow(totalValue, FindConstants.rubberBandingPower)
                 }
                 ViewControllerState.currentVC?.view.frame.origin.x = value /// value is negative
             }
@@ -183,21 +183,21 @@ extension ViewController {
             if gestures.toOverlay { /// camera to photos
                 tabBarView.makePercentageOfActive(percentage: max(0, 1 - (maxValue / containerView.frame.width)))
                 tabBarView.cameraIcon.makePercentageOfActive(percentage: max(0, 1 - (maxValue / containerView.frame.width)))
-                tabBarView.photosIcon.makePercentageOfActive(percentage: min(1, maxValue / containerView.frame.width), originalDetails: Constants.detailIconColorDark, originalForeground: Constants.foregroundIconColorDark, originalBackground: Constants.backgroundIconColorDark)
+                tabBarView.photosIcon.makePercentageOfActive(percentage: min(1, maxValue / containerView.frame.width), originalDetails: FindConstants.detailIconColorDark, originalForeground: FindConstants.foregroundIconColorDark, originalBackground: FindConstants.backgroundIconColorDark)
                 tabBarView.listsIcon.makePercentageOfDark(percentage: max(0, 1 - (maxValue / containerView.frame.width)))
                 /// overflow
                 if totalValue >= containerView.frame.width {
                     let amountOver = totalValue - containerView.frame.width
-                    value = containerView.frame.width + pow(amountOver, Constants.rubberBandingPower)
+                    value = containerView.frame.width + pow(amountOver, FindConstants.rubberBandingPower)
                 }
                 ViewControllerState.newVC?.view.frame.origin.x = -containerView.frame.width + value
             } else { /// lists to camera
                 tabBarView.makePercentageOfActive(percentage: maxValue / containerView.frame.width)
-                tabBarView.listsIcon.makePercentageOfActive(percentage: 1 - (maxValue / containerView.frame.width), originalDetails: Constants.detailIconColorDark, originalForeground: Constants.foregroundIconColorDark, originalBackground: Constants.backgroundIconColorDark)
+                tabBarView.listsIcon.makePercentageOfActive(percentage: 1 - (maxValue / containerView.frame.width), originalDetails: FindConstants.detailIconColorDark, originalForeground: FindConstants.foregroundIconColorDark, originalBackground: FindConstants.backgroundIconColorDark)
                 tabBarView.cameraIcon.makePercentageOfActive(percentage: maxValue / containerView.frame.width)
                 tabBarView.photosIcon.makePercentageOfDark(percentage: min(1, maxValue / containerView.frame.width))
                 if totalValue <= 0 {
-                    value = -pow(-totalValue, Constants.rubberBandingPower)
+                    value = -pow(-totalValue, FindConstants.rubberBandingPower)
                 }
                 ViewControllerState.currentVC?.view.frame.origin.x = value
             }
@@ -246,8 +246,8 @@ extension ViewController {
                     let (prep, animations, completion) = tabBarView.getBlocks(from: fromVC, to: .camera)
                     prep()
                     tabBarView.animatingObjects += 1
-                    tabBarView.cameraIcon.makeLayerActiveState(duration: Constants.transitionDuration)
-                    tabBarView.makeLayerActiveState(duration: Constants.transitionDuration)
+                    tabBarView.cameraIcon.makeLayerActiveState(duration: FindConstants.transitionDuration)
+                    tabBarView.makeLayerActiveState(duration: FindConstants.transitionDuration)
                     block = {
                         fromVC.view.frame.origin.x = -self.containerView.frame.width
                         animations?()
@@ -256,15 +256,15 @@ extension ViewController {
                     gestures.framePositionWhenLifted = fromVC.view.frame.origin.x
                     gestures.viewToTrackChanges = fromVC.view
                     
-                    if currentX <= -Constants.gesturePadding {
+                    if currentX <= -FindConstants.gesturePadding {
                         finishImmediately = true
                     }
                     gestures.completedMove = true
                 } else if favoredDirection == .right { /// cancelled
                     let (_, animations, completion) = tabBarView.getBlocks(from: toVC, to: .photos)
                     tabBarView.animatingObjects += 1
-                    tabBarView.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
-                    tabBarView.makeLayerInactiveState(duration: Constants.transitionDuration)
+                    tabBarView.cameraIcon.makeLayerInactiveState(duration: FindConstants.transitionDuration)
+                    tabBarView.makeLayerInactiveState(duration: FindConstants.transitionDuration)
                     block = {
                         fromVC.view.frame.origin.x = 0
                         animations?()
@@ -286,8 +286,8 @@ extension ViewController {
                 if favoredDirection == .right { /// completed
                     let (prep, animations, completion) = tabBarView.getBlocks(from: fromVC, to: .photos)
                     prep()
-                    tabBarView.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
-                    tabBarView.makeLayerInactiveState(duration: Constants.transitionDuration)
+                    tabBarView.cameraIcon.makeLayerInactiveState(duration: FindConstants.transitionDuration)
+                    tabBarView.makeLayerInactiveState(duration: FindConstants.transitionDuration)
                     tabBarView.animatingObjects += 1
                     block = {
                         toVC.view.frame.origin.x = 0
@@ -300,14 +300,14 @@ extension ViewController {
                 } else if favoredDirection == .left { /// canceled
                     let (_, animations, completion) = tabBarView.getBlocks(from: toVC, to: .camera)
                     tabBarView.animatingObjects += 1
-                    tabBarView.cameraIcon.makeLayerActiveState(duration: Constants.transitionDuration)
-                    tabBarView.makeLayerActiveState(duration: Constants.transitionDuration)
+                    tabBarView.cameraIcon.makeLayerActiveState(duration: FindConstants.transitionDuration)
+                    tabBarView.makeLayerActiveState(duration: FindConstants.transitionDuration)
                     block = {
                         toVC.view.frame.origin.x = -self.containerView.frame.width
                         animations?()
                     }
                     tabCompletion = completion
-                    if currentX < -Constants.gesturePadding {
+                    if currentX < -FindConstants.gesturePadding {
                         finishImmediately = true
                     }
                     gestures.framePositionWhenLifted = toVC.view.frame.origin.x
@@ -322,8 +322,8 @@ extension ViewController {
                     let (prep, animations, completion) = tabBarView.getBlocks(from: fromVC, to: .lists)
                     prep()
                     tabBarView.animatingObjects += 1
-                    tabBarView.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
-                    tabBarView.makeLayerInactiveState(duration: Constants.transitionDuration)
+                    tabBarView.cameraIcon.makeLayerInactiveState(duration: FindConstants.transitionDuration)
+                    tabBarView.makeLayerInactiveState(duration: FindConstants.transitionDuration)
                     block = {
                         toVC.view.frame.origin.x = 0
                         animations?()
@@ -335,13 +335,13 @@ extension ViewController {
                 } else if favoredDirection == .right { /// cancelled
                     let (_, animations, completion) = tabBarView.getBlocks(from: toVC, to: .camera)
                     tabBarView.animatingObjects += 1
-                    tabBarView.cameraIcon.makeLayerActiveState(duration: Constants.transitionDuration)
-                    tabBarView.makeLayerActiveState(duration: Constants.transitionDuration)
+                    tabBarView.cameraIcon.makeLayerActiveState(duration: FindConstants.transitionDuration)
+                    tabBarView.makeLayerActiveState(duration: FindConstants.transitionDuration)
                     block = {
                         toVC.view.frame.origin.x = self.containerView.frame.width
                         animations?()
                     }
-                    if currentX > containerView.frame.width + Constants.gesturePadding {
+                    if currentX > containerView.frame.width + FindConstants.gesturePadding {
                         finishImmediately = true
                     }
                     tabCompletion = completion
@@ -362,8 +362,8 @@ extension ViewController {
                     let (prep, animations, completion) = tabBarView.getBlocks(from: fromVC, to: .camera)
                     prep()
                     tabBarView.animatingObjects += 1
-                    tabBarView.cameraIcon.makeLayerActiveState(duration: Constants.transitionDuration)
-                    tabBarView.makeLayerActiveState(duration: Constants.transitionDuration)
+                    tabBarView.cameraIcon.makeLayerActiveState(duration: FindConstants.transitionDuration)
+                    tabBarView.makeLayerActiveState(duration: FindConstants.transitionDuration)
                     block = {
                         fromVC.view.frame.origin.x = self.containerView.frame.width
                         animations?()
@@ -372,15 +372,15 @@ extension ViewController {
                     gestures.framePositionWhenLifted = fromVC.view.frame.origin.x
                     gestures.viewToTrackChanges = fromVC.view
                     
-                    if currentX >= containerView.frame.width + Constants.gesturePadding {
+                    if currentX >= containerView.frame.width + FindConstants.gesturePadding {
                         finishImmediately = true
                     }
                     gestures.completedMove = true
                 } else if favoredDirection == .left { /// cancelled
                     let (_, animations, completion) = tabBarView.getBlocks(from: toVC, to: .lists)
                     tabBarView.animatingObjects += 1
-                    tabBarView.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
-                    tabBarView.makeLayerInactiveState(duration: Constants.transitionDuration)
+                    tabBarView.cameraIcon.makeLayerInactiveState(duration: FindConstants.transitionDuration)
+                    tabBarView.makeLayerInactiveState(duration: FindConstants.transitionDuration)
                     block = {
                         fromVC.view.frame.origin.x = 0
                         animations?()
@@ -469,7 +469,7 @@ extension ViewController {
             
         } else {
             animator?.stopAnimation(true)
-            let timingParameters = UISpringTimingParameters(damping: 1, response: Constants.transitionDuration, initialVelocity: relativeV)
+            let timingParameters = UISpringTimingParameters(damping: 1, response: FindConstants.transitionDuration, initialVelocity: relativeV)
             animator = UIViewPropertyAnimator(duration: 0, timingParameters: timingParameters)
             
             animator?.addAnimations(block)

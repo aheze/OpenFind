@@ -47,7 +47,7 @@ enum ViewControllerType {
     case lists
 }
 
-struct Constants {
+struct FindConstants {
     static var rubberBandingPower = CGFloat(0.7)
     static var shutterBoundsLength = CGFloat(92) /// length of the 40x40 containers
     static var framelessShutterBottomDistance = CGFloat(48 - 10) /// iPhone X
@@ -68,7 +68,7 @@ struct Constants {
     static var photoBottomPreviewHeight = CGFloat(60) /// height of the shown portion of the photos vc when finding
 }
 
-struct ConstantVars { /// calculated based on device size
+struct FindConstantVars { /// calculated based on device size
     static var shutterBottomDistance = CGFloat(0)
     static var cameraShutterAvoidFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
     static var photoFilterAvoidFrame = CGRect(x: 0, y: 0, width: 0, height: 0)

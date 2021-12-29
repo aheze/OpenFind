@@ -22,7 +22,7 @@ class LaunchViewController: UIViewController {
     // MARK: Status bar
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if traitCollection.userInterfaceStyle == .light {
-            return ConstantVars.shouldHaveLightStatusBar ? .lightContent : .darkContent
+            return FindConstantVars.shouldHaveLightStatusBar ? .lightContent : .darkContent
         } else {
             return .lightContent
         }
@@ -32,7 +32,7 @@ class LaunchViewController: UIViewController {
             self.additionalSafeAreaInsets.top = 20
             return true
         } else {
-            return !ConstantVars.shouldHaveStatusBar
+            return !FindConstantVars.shouldHaveStatusBar
         }
     }
     
@@ -187,7 +187,7 @@ class LaunchViewController: UIViewController {
             appearedBefore = true
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                ConstantVars.shouldHaveLightStatusBar = true
+                FindConstantVars.shouldHaveLightStatusBar = true
                 UIView.animate(withDuration: 0.3) {
                     if !isForcingStatusBarHidden {
                         self.setNeedsStatusBarAppearanceUpdate()
@@ -200,7 +200,7 @@ class LaunchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ConstantVars.launchViewController = self
+        FindConstantVars.launchViewController = self
         
         skipButton.alpha = 0
         

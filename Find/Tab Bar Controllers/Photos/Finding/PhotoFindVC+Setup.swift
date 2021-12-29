@@ -17,7 +17,7 @@ extension PhotoFindViewController {
         tableView.dataSource = self
         
         let bottomSafeAreaHeight = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.bottom ?? 0
-        tableView.contentInset.bottom = CGFloat(ConstantVars.tabHeight) + CGFloat(16)
-        tableView.verticalScrollIndicatorInsets.bottom = CGFloat(ConstantVars.tabHeight) - CGFloat(bottomSafeAreaHeight)
+        tableView.contentInset.bottom = CGFloat(FindConstantVars.tabHeight) + CGFloat(16)
+        tableView.verticalScrollIndicatorInsets.bottom = CGFloat(FindConstantVars.tabHeight) - CGFloat(bottomSafeAreaHeight)
     }
 }

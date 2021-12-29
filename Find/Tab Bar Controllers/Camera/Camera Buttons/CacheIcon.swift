@@ -76,7 +76,7 @@ class CacheIcon: UIView {
             let animation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.strokeEnd))
             animation.fromValue = checkLayer.strokeEnd
             animation.toValue = 1 * percentage
-            animation.duration = Double(Constants.transitionDuration)
+            animation.duration = Double(FindConstants.transitionDuration)
             checkLayer.strokeEnd = 1 * percentage
             checkLayer.add(animation, forKey: "lineAnimation")
         }
@@ -99,7 +99,7 @@ class CacheIcon: UIView {
             let animation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.fillColor))
             animation.fromValue = rimLayer.fillColor
             animation.toValue = fillColor
-            animation.duration = Double(Constants.transitionDuration)
+            animation.duration = Double(FindConstants.transitionDuration)
             rimLayer.fillColor = fillColor
             rimLayer.add(animation, forKey: "backgroundColor")
         }

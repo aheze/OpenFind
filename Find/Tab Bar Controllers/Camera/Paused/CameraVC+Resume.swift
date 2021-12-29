@@ -17,8 +17,8 @@ extension CameraViewController {
     }
     func resetState() {
         self.savePressed = false
-        UIView.animate(withDuration: Double(Constants.transitionDuration)) {
-            self.saveToPhotos.photosIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)()
+        UIView.animate(withDuration: Double(FindConstants.transitionDuration)) {
+            self.saveToPhotos.photosIcon.makeNormalState(details: FindConstants.detailIconColorDark, foreground: FindConstants.foregroundIconColorDark, background: FindConstants.backgroundIconColorDark)()
         }
         self.saveLabel.fadeTransition(0.2)
         

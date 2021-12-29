@@ -81,7 +81,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             viewController.hideTabBar = { [weak self] shouldHide in
                 guard let self = self else { return }
                 
-                ConstantVars.shouldHaveStatusBar = !shouldHide
+                FindConstantVars.shouldHaveStatusBar = !shouldHide
                 UIView.animate(withDuration: 0.2) {
                     self.tabBarView.alpha = shouldHide ? 0 : 1
                     self.updateStatusBar()
@@ -89,7 +89,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             viewController.slidesPresentingInfo = { [weak self] presenting in
                 guard let self = self else { return }
-                ConstantVars.shouldHaveLightStatusBar = presenting
+                FindConstantVars.shouldHaveLightStatusBar = presenting
                 UIView.animate(withDuration: 0.2) {
                     self.updateStatusBar()
                 }
@@ -150,14 +150,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             
             wrapper.presentingFindGallery = { [weak self] presenting in
                 guard let self = self else { return }
-                ConstantVars.shouldHaveLightStatusBar = presenting
+                FindConstantVars.shouldHaveLightStatusBar = presenting
                 UIView.animate(withDuration: 0.3) {
                     self.updateStatusBar()
                 }
             }
             wrapper.presentingFindSlides = { [weak self] presenting in
                 guard let self = self else { return }
-                ConstantVars.shouldHaveLightStatusBar = !presenting
+                FindConstantVars.shouldHaveLightStatusBar = !presenting
                 UIView.animate(withDuration: 0.3) {
                     self.updateStatusBar()
                 }
@@ -236,7 +236,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             viewController.presentingList = { [weak self] presenting in
                 guard let self = self else { return }
-                ConstantVars.shouldHaveLightStatusBar = presenting
+                FindConstantVars.shouldHaveLightStatusBar = presenting
                 UIView.animate(withDuration: 0.3) {
                     self.updateStatusBar()
                 }
@@ -306,9 +306,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     if gestures.isRubberBanding {
                         let calculatedPosition: CGFloat
                         if newPosition <= 0 {
-                            calculatedPosition = -pow(-newPosition, 1 / Constants.rubberBandingPower)
+                            calculatedPosition = -pow(-newPosition, 1 / FindConstants.rubberBandingPower)
                         } else {
-                            calculatedPosition = pow(newPosition, 1 / Constants.rubberBandingPower)
+                            calculatedPosition = pow(newPosition, 1 / FindConstants.rubberBandingPower)
                         }
                         gestures.gestureSavedOffset = calculatedPosition
                         
@@ -320,31 +320,31 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                             if gestures.toOverlay { /// camera to lists
                                 /// overflow
                                 if unadjustedTotal <= -containerView.frame.width { /// totalValue is negative
-                                    let calculatedDifference = pow(abs(newPosition), 1 / Constants.rubberBandingPower)
+                                    let calculatedDifference = pow(abs(newPosition), 1 / FindConstants.rubberBandingPower)
                                     adjustedTotal = -containerView.frame.width - calculatedDifference
                                 }
                             } else { /// photos to camera
                                 /// overflow
                                 if newPosition > 0 {
-                                    let calculatedDifference = pow(newPosition, 1 / Constants.rubberBandingPower)
+                                    let calculatedDifference = pow(newPosition, 1 / FindConstants.rubberBandingPower)
                                     adjustedTotal = calculatedDifference
-                                } else if newPosition <= -containerView.frame.width - Constants.gesturePadding { /// swiping right while camera is shown
-                                    adjustedTotal = -containerView.frame.width - Constants.gesturePadding
+                                } else if newPosition <= -containerView.frame.width - FindConstants.gesturePadding { /// swiping right while camera is shown
+                                    adjustedTotal = -containerView.frame.width - FindConstants.gesturePadding
                                 }
                             }
                         } else if gestures.direction == .right {
                             if gestures.toOverlay { /// camera to photos
                                 /// overflow
                                 if newPosition > 0 {
-                                    let calculatedDifference = pow(newPosition, 1 / Constants.rubberBandingPower)
+                                    let calculatedDifference = pow(newPosition, 1 / FindConstants.rubberBandingPower)
                                     adjustedTotal = containerView.frame.width + calculatedDifference
                                 }
                             } else { /// lists to camera
                                 if unadjustedTotal <= 0 {
-                                    let calculatedDifference = pow(abs(newPosition), 1 / Constants.rubberBandingPower)
+                                    let calculatedDifference = pow(abs(newPosition), 1 / FindConstants.rubberBandingPower)
                                     adjustedTotal = -calculatedDifference
-                                } else if unadjustedTotal >= containerView.frame.width + Constants.gesturePadding { /// swiping right while camera is shown
-                                    adjustedTotal = containerView.frame.width + Constants.gesturePadding
+                                } else if unadjustedTotal >= containerView.frame.width + FindConstants.gesturePadding { /// swiping right while camera is shown
+                                    adjustedTotal = containerView.frame.width + FindConstants.gesturePadding
                                 }
                             }
                         }
@@ -383,7 +383,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         switch sender.state {
         case .began:
             if gestures.direction == nil {
-                let timingParameters = UISpringTimingParameters(damping: 1, response: Constants.transitionDuration, initialVelocity: CGVector(dx: 0, dy: 0))
+                let timingParameters = UISpringTimingParameters(damping: 1, response: FindConstants.transitionDuration, initialVelocity: CGVector(dx: 0, dy: 0))
                 blurAnimator = UIViewPropertyAnimator(duration: 0, timingParameters: timingParameters)
             }
             blurAnimator?.pauseAnimation()
@@ -482,7 +482,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         checkIfHistoryImagesExist()
         checkForOldUserDefaults()
         
-        tabBarHeightC.constant =  CGFloat(ConstantVars.tabHeight)
+        tabBarHeightC.constant =  CGFloat(FindConstantVars.tabHeight)
         
         ViewControllerState.currentVC = camera
         
@@ -536,7 +536,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         somethingWentWrongTitle.isAccessibilityElement = false
         somethingWentWrongDescription.isAccessibilityElement = false
         
-        ConstantVars.getTabBarFrame = { [weak self] in
+        FindConstantVars.getTabBarFrame = { [weak self] in
             guard let self = self else { return .zero }
             return self.tabBarView.convert(self.tabBarView.bounds, to: nil)
         }

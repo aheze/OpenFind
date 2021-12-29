@@ -32,11 +32,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         if deviceHasNotch {
-            ConstantVars.shutterBottomDistance = Constants.framelessShutterBottomDistance
-            ConstantVars.tabHeight = Constants.iPhoneXTabHeight
+            FindConstantVars.shutterBottomDistance = FindConstants.framelessShutterBottomDistance
+            FindConstantVars.tabHeight = FindConstants.iPhoneXTabHeight
         } else {
-            ConstantVars.shutterBottomDistance = Constants.framedShutterBottomDistance
-            ConstantVars.tabHeight = Constants.iPhone8TabHeight
+            FindConstantVars.shutterBottomDistance = FindConstants.framedShutterBottomDistance
+            FindConstantVars.tabHeight = FindConstants.iPhone8TabHeight
         }
         
         UserDefaults.standard.register(

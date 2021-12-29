@@ -124,8 +124,8 @@ class TabBarView: UIView {
             if let block = block {
                 if (self.checkIfAnimating ?? { false })() == false {
                     prep()
-                    self.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
-                    self.makeLayerInactiveState(duration: Constants.transitionDuration)
+                    self.cameraIcon.makeLayerInactiveState(duration: FindConstants.transitionDuration)
+                    self.makeLayerInactiveState(duration: FindConstants.transitionDuration)
                     self.animate(block: block, completion: completion)
                 }
                 self.changedViewController?(.photos)
@@ -141,8 +141,8 @@ class TabBarView: UIView {
             if let block = block {
                 if (self.checkIfAnimating ?? { false })() == false {
                     prep()
-                    self.cameraIcon.makeLayerActiveState(duration: Constants.transitionDuration)
-                    self.makeLayerActiveState(duration: Constants.transitionDuration)
+                    self.cameraIcon.makeLayerActiveState(duration: FindConstants.transitionDuration)
+                    self.makeLayerActiveState(duration: FindConstants.transitionDuration)
                     self.animate(block: block, completion: completion)
                 }
                 self.changedViewController?(.camera)
@@ -159,8 +159,8 @@ class TabBarView: UIView {
             if let block = block {
                 if (self.checkIfAnimating ?? { false })() == false {
                     prep()
-                    self.cameraIcon.makeLayerInactiveState(duration: Constants.transitionDuration)
-                    self.makeLayerInactiveState(duration: Constants.transitionDuration)
+                    self.cameraIcon.makeLayerInactiveState(duration: FindConstants.transitionDuration)
+                    self.makeLayerInactiveState(duration: FindConstants.transitionDuration)
                     self.animate(block: block, completion: completion)
                 }
                 self.changedViewController?(.lists)
@@ -203,7 +203,7 @@ class TabBarView: UIView {
         blurView.effect = nil
         blurBackgroundView.alpha = 0
         
-        let timingParameters = UISpringTimingParameters(damping: 1, response: Constants.transitionDuration)
+        let timingParameters = UISpringTimingParameters(damping: 1, response: FindConstants.transitionDuration)
         tabAnimator = UIViewPropertyAnimator(duration: 0, timingParameters: timingParameters)
         
         photosButton.touched = { [weak self] down in
@@ -266,7 +266,7 @@ class TabBarView: UIView {
                 break
             case is CameraViewController:
                 let makeInactive = self.cameraIcon.makeNormalState()
-                let makeOtherInactive = self.listsIcon.makeNormalState(details: Constants.detailIconColorLight, foreground: Constants.foregroundIconColorLight, background: Constants.backgroundIconColorLight)
+                let makeOtherInactive = self.listsIcon.makeNormalState(details: FindConstants.detailIconColorLight, foreground: FindConstants.foregroundIconColorLight, background: FindConstants.backgroundIconColorLight)
                 let makeActive = self.photosIcon.makeActiveState()
                 
                 prep = {
@@ -280,7 +280,7 @@ class TabBarView: UIView {
                     makeActive()
                 }
             case is ListsNavController:
-                let makeInactive = self.listsIcon.makeNormalState(details: Constants.detailIconColorLight, foreground: Constants.foregroundIconColorLight, background: Constants.backgroundIconColorLight)
+                let makeInactive = self.listsIcon.makeNormalState(details: FindConstants.detailIconColorLight, foreground: FindConstants.foregroundIconColorLight, background: FindConstants.backgroundIconColorLight)
                 let makeOtherInactive = self.cameraIcon.makeNormalState()
                 let makeActive = self.photosIcon.makeActiveState()
                 
@@ -297,8 +297,8 @@ class TabBarView: UIView {
             case is PhotosWrapperController:
 
                 
-                let makeInactive = self.photosIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)
-                let makeOtherInactive = self.listsIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)
+                let makeInactive = self.photosIcon.makeNormalState(details: FindConstants.detailIconColorDark, foreground: FindConstants.foregroundIconColorDark, background: FindConstants.backgroundIconColorDark)
+                let makeOtherInactive = self.listsIcon.makeNormalState(details: FindConstants.detailIconColorDark, foreground: FindConstants.foregroundIconColorDark, background: FindConstants.backgroundIconColorDark)
                 let makeActive = self.cameraIcon.makeActiveState()
                 
                 prep = {
@@ -318,8 +318,8 @@ class TabBarView: UIView {
             case is CameraViewController:
                 break
             case is ListsNavController:
-                let makeInactive = self.listsIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)
-                let makeOtherInactive = self.photosIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)
+                let makeInactive = self.listsIcon.makeNormalState(details: FindConstants.detailIconColorDark, foreground: FindConstants.foregroundIconColorDark, background: FindConstants.backgroundIconColorDark)
+                let makeOtherInactive = self.photosIcon.makeNormalState(details: FindConstants.detailIconColorDark, foreground: FindConstants.foregroundIconColorDark, background: FindConstants.backgroundIconColorDark)
                 let makeActive = self.cameraIcon.makeActiveState()
                 
                 prep = {
@@ -340,7 +340,7 @@ class TabBarView: UIView {
         case .lists:
             switch fromVC {
             case is PhotosWrapperController:
-                let makeInactive = self.photosIcon.makeNormalState(details: Constants.detailIconColorLight, foreground: Constants.foregroundIconColorLight, background: Constants.backgroundIconColorLight)
+                let makeInactive = self.photosIcon.makeNormalState(details: FindConstants.detailIconColorLight, foreground: FindConstants.foregroundIconColorLight, background: FindConstants.backgroundIconColorLight)
                 let makeOtherInactive = self.cameraIcon.makeNormalState()
                 let makeActive = self.listsIcon.makeActiveState()
                 
@@ -351,7 +351,7 @@ class TabBarView: UIView {
                 }
             case is CameraViewController:
                 let makeInactive = self.cameraIcon.makeNormalState()
-                let makeOtherInactive = self.photosIcon.makeNormalState(details: Constants.detailIconColorLight, foreground: Constants.foregroundIconColorLight, background: Constants.backgroundIconColorLight)
+                let makeOtherInactive = self.photosIcon.makeNormalState(details: FindConstants.detailIconColorLight, foreground: FindConstants.foregroundIconColorLight, background: FindConstants.backgroundIconColorLight)
                 let makeActive = self.listsIcon.makeActiveState()
                 
                 prep = {
@@ -392,7 +392,7 @@ class TabBarView: UIView {
             
             if UserDefaults.standard.integer(forKey: "shutterStyle") == 3 {
                 self.cameraIcon.fillBorderView.layer.borderWidth = 0.5
-                self.cameraIcon.fillBorderView.layer.borderColor = Constants.detailIconColorLight.cgColor
+                self.cameraIcon.fillBorderView.layer.borderColor = FindConstants.detailIconColorLight.cgColor
             }
             UIView.animate(withDuration: 0.6) {
                 self.topLineView.alpha = 1
@@ -520,10 +520,10 @@ class TabBarView: UIView {
         let cameraIconNormalLength = cameraIcon.bounds.width /// 40
         
         /// y coordinate of normal camera icon (40x40) inside camera bounds  (92x92)
-        let cameraIconNormalInset = (Constants.shutterBoundsLength - cameraIconNormalLength) / 2 /// (92 - 40) / 2 = 26
+        let cameraIconNormalInset = (FindConstants.shutterBoundsLength - cameraIconNormalLength) / 2 /// (92 - 40) / 2 = 26
         
         /// distance from bottom of screen to top of camera icon
-        let distanceFromTargetTopToScreenBottom = ConstantVars.shutterBottomDistance + Constants.shutterBoundsLength - cameraIconNormalInset
+        let distanceFromTargetTopToScreenBottom = FindConstantVars.shutterBottomDistance + FindConstants.shutterBoundsLength - cameraIconNormalInset
         
         /// distance from bottom of screen to **bottom** of target camera icon
         let distanceFromTargetBottomToScreenBottom = distanceFromTargetTopToScreenBottom - cameraIcon.bounds.width
@@ -536,7 +536,7 @@ class TabBarView: UIView {
     }
     
     func createCurve(with percentage: CGFloat = 1, iPhoneX: Bool = true) -> CGPath {
-        let differenceInSize = UIScreen.main.fixedCoordinateSpace.bounds.width - Constants.designedWidth
+        let differenceInSize = UIScreen.main.fixedCoordinateSpace.bounds.width - FindConstants.designedWidth
         let offset = min(3, differenceInSize / 3)
         
         let width = bounds.width

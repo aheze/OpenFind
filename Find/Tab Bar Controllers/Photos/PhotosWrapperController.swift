@@ -78,7 +78,7 @@ class PhotosWrapperController: UIViewController {
         activeScreen = .finding
         
         let topHeight = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.top ?? 0
-        let topShownHeight = topHeight + Constants.photoBottomPreviewHeight
+        let topShownHeight = topHeight + FindConstants.photoBottomPreviewHeight
         let translationNeeded = view.bounds.height - topShownHeight
         
         let findOriginY = topShownHeight + 16

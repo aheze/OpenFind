@@ -16,7 +16,7 @@ extension CameraViewController {
         }
         
         if self.savePressed {
-            UIView.animate(withDuration: Double(Constants.transitionDuration)) {
+            UIView.animate(withDuration: Double(FindConstants.transitionDuration)) {
                 self.saveToPhotos.photosIcon.makeActiveState(offset: true)()
             }
             self.saveLabel.fadeTransition(0.2)
@@ -28,8 +28,8 @@ extension CameraViewController {
             saveToPhotos.accessibilityHint = "Tap to remove the current paused image from the photo library"
             
         } else {
-            UIView.animate(withDuration: Double(Constants.transitionDuration)) {
-                self.saveToPhotos.photosIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)()
+            UIView.animate(withDuration: Double(FindConstants.transitionDuration)) {
+                self.saveToPhotos.photosIcon.makeNormalState(details: FindConstants.detailIconColorDark, foreground: FindConstants.foregroundIconColorDark, background: FindConstants.backgroundIconColorDark)()
             }
             self.saveLabel.fadeTransition(0.2)
             let saveText = NSLocalizedString("saveText", comment: "")

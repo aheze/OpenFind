@@ -16,11 +16,11 @@ extension ViewController {
 
             startCameraShutoff()
             
-            ConstantVars.shouldHaveLightStatusBar = false
+            FindConstantVars.shouldHaveLightStatusBar = false
         case is CameraViewController:
 
             startCamera()
-            ConstantVars.shouldHaveLightStatusBar = true
+            FindConstantVars.shouldHaveLightStatusBar = true
             
             if TipViews.currentLocalStep == 1 {
                 startLocalSecondStep()
@@ -41,7 +41,7 @@ extension ViewController {
 
             startCameraShutoff()
             
-            ConstantVars.shouldHaveLightStatusBar = false
+            FindConstantVars.shouldHaveLightStatusBar = false
         default:
             break
         }

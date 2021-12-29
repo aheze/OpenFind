@@ -25,7 +25,7 @@ extension PhotoSlidesViewController {
             
             view.accessibilityElements = [backButtonView, containerView, voiceOverSlidesControl]
         } else {
-            voiceOverBottomC.constant = CGFloat(ConstantVars.tabHeight)
+            voiceOverBottomC.constant = CGFloat(FindConstantVars.tabHeight)
             
             view.accessibilityElements = nil
         }

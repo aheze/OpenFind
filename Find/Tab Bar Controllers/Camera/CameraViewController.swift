@@ -416,7 +416,7 @@ class CameraViewController: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        cameraIconHolderBottomC.constant = ConstantVars.shutterBottomDistance
+        cameraIconHolderBottomC.constant = FindConstantVars.shutterBottomDistance
         
         cameraIcon.makeActiveState()()
 //        cameraIcon.rimView.layer.borderColor = UIColor.white.cgColor
@@ -461,10 +461,10 @@ class CameraViewController: UIViewController {
         settingsView.layer.cornerRadius = settingsView.bounds.width / 2
         
         
-        statsBottomC.constant = CGFloat(ConstantVars.tabHeight) + 8
-        fullScreenBottomC.constant = CGFloat(ConstantVars.tabHeight) + 8
-        flashBottomC.constant = CGFloat(ConstantVars.tabHeight) + 8
-        settingsBottomC.constant = CGFloat(ConstantVars.tabHeight) + 8
+        statsBottomC.constant = CGFloat(FindConstantVars.tabHeight) + 8
+        fullScreenBottomC.constant = CGFloat(FindConstantVars.tabHeight) + 8
+        flashBottomC.constant = CGFloat(FindConstantVars.tabHeight) + 8
+        settingsBottomC.constant = CGFloat(FindConstantVars.tabHeight) + 8
         
         statsLabel.morphingEffect = .evaporate
         statsButton.touched = { [weak self] down in

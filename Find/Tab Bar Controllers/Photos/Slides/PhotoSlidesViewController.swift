@@ -121,7 +121,7 @@ class PhotoSlidesViewController: UIViewController {
             backButtonView.removeFromSuperview()
         }
         
-        messageViewBottomC.constant = CGFloat(ConstantVars.tabHeight) + 16
+        messageViewBottomC.constant = CGFloat(FindConstantVars.tabHeight) + 16
         
         voiceOverSlidesControl.isHidden = true
         

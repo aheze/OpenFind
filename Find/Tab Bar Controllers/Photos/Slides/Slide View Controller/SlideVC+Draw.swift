@@ -115,7 +115,7 @@ extension SlideViewController {
                 if let navigationBar = self.navigationController?.navigationBar {
                     
                     let navigationBarFrame = navigationBar.convert(navigationBar.bounds, to: nil)
-                    let tabBarFrame = ConstantVars.getTabBarFrame?() ?? CGRect.zero
+                    let tabBarFrame = FindConstantVars.getTabBarFrame?() ?? CGRect.zero
                     
                     if navigationBarFrame.intersects(newView.frame) {
                         overlapString = AccessibilityText(text: "\nPartially covered underneath navigation bar", isRaised: false)

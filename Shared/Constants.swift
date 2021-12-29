@@ -30,7 +30,7 @@ enum Constants {
     static var defaultHighlightColor = UIColor(hex: 0x00aeef)
 }
 
-struct ConstantVars {
+struct FindConstantVars {
     
     /// default tab bar content height
     static let tabBarContentHeight = CGFloat(49)

@@ -11,10 +11,10 @@ class CameraIcon: UIView {
     
     var isActiveCameraIcon = false /// is popped out
     
-    let inactiveFillColor = Constants.backgroundIconColorLight
+    let inactiveFillColor = FindConstants.backgroundIconColorLight
     
     /// configurable
-    var inactiveRimColor = Constants.detailIconColorLight
+    var inactiveRimColor = FindConstants.detailIconColorLight
     var activeRimColor = UIColor.white
     
     var isActualButton = false /// if it is actual icon in Camera VC
@@ -131,7 +131,7 @@ class CameraIcon: UIView {
         shapeFillRimLayer.path = circlePath
         
         rimView.layer.borderWidth = 2
-        rimView.layer.borderColor = Constants.detailIconColorLight.cgColor
+        rimView.layer.borderColor = FindConstants.detailIconColorLight.cgColor
         
         fillBorderView.alpha = 0
         
@@ -141,7 +141,7 @@ class CameraIcon: UIView {
     func updateStyle() {
         switch UserDefaults.standard.integer(forKey: "shutterStyle") {
         case 2:
-            inactiveRimColor = Constants.detailIconColorLight
+            inactiveRimColor = FindConstants.detailIconColorLight
             activeRimColor = UIColor(named: "50Black")!
             
             fillView.transform = CGAffineTransform.identity
@@ -155,7 +155,7 @@ class CameraIcon: UIView {
             fillRimViewContainer.transform = CGAffineTransform(scaleX: 1.36, y: 1.36)
             rimView.layer.borderColor = (isActiveCameraIcon || isActualButton) ? activeRimColor.cgColor : inactiveRimColor.cgColor
         default:
-            inactiveRimColor = Constants.detailIconColorLight
+            inactiveRimColor = FindConstants.detailIconColorLight
             activeRimColor = UIColor.white
             
             fillView.transform = CGAffineTransform.identity
@@ -169,7 +169,7 @@ class CameraIcon: UIView {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         rimView.layer.borderColor = isActiveCameraIcon ? activeRimColor.cgColor : inactiveRimColor.cgColor
-        fillBorderView.layer.borderColor = Constants.detailIconColorLight.cgColor
+        fillBorderView.layer.borderColor = FindConstants.detailIconColorLight.cgColor
     }
     
     override func layoutSubviews() {
@@ -195,7 +195,7 @@ class CameraIcon: UIView {
             guard let self = self else { return }
             self.contentView.center.y = self.contentView.bounds.height / 2 - self.offsetNeeded
 
-            let scale = Constants.shutterBoundsLength / self.contentView.bounds.width
+            let scale = FindConstants.shutterBoundsLength / self.contentView.bounds.width
             self.contentView.transform = CGAffineTransform(scaleX: scale, y: scale)
             self.fillView.backgroundColor = UIColor(named: "50Blue")
         }
@@ -234,7 +234,7 @@ class CameraIcon: UIView {
     }
     func makePercentageOfActive(percentage: CGFloat) {
         contentView.center.y = (self.contentView.bounds.height / 2) - (self.offsetNeeded * percentage)
-        let scale = 1 + ((Constants.shutterBoundsLength / self.contentView.bounds.width - 1) * percentage)
+        let scale = 1 + ((FindConstants.shutterBoundsLength / self.contentView.bounds.width - 1) * percentage)
         contentView.transform = CGAffineTransform(scaleX: scale, y: scale)
         
         self.fillView.backgroundColor = [inactiveFillColor, UIColor(named: "50Blue")!].intermediate(percentage: percentage)
