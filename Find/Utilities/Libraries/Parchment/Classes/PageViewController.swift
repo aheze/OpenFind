@@ -168,7 +168,7 @@ public final class PageViewController: UIViewController {
 
     public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        print("viewWillTransition: ", size)
+
         coordinator.animate(alongsideTransition: { _ in
             self.manager.viewWillTransitionSize()
         })

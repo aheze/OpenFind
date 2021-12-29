@@ -80,7 +80,7 @@ public enum Kerning {
 		case .adobe(let adobeTracking):
 			let AdobeTrackingDivisor: CGFloat = 1000.0
 			if font == nil {
-				print("Missing font for apply tracking; 0 is the fallback.")
+
 			}
 			return (font?.pointSize ?? 0) * (adobeTracking / AdobeTrackingDivisor)
 		}

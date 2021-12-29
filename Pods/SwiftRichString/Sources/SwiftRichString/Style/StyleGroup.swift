@@ -145,7 +145,7 @@ public class StyleXML: StyleProtocol {
             let xmlParser = XMLStringBuilder(styleXML: self, string: attrStr.string)
             return try xmlParser.parse()
         } catch {
-            debugPrint("Failed to generate attributed string from xml: \(error)")
+
             return attrStr
         }
     }

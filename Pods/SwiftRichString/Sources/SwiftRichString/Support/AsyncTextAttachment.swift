@@ -99,7 +99,7 @@ public class AsyncTextAttachment: NSTextAttachment {
             }
             
             guard let data = data, error == nil else {
-                print(error?.localizedDescription as Any)
+
                 return
             }
             

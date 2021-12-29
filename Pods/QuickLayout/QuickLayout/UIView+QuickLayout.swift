@@ -83,7 +83,7 @@ public extension QLView {
                 relation: QLRelation = .equal, ratio: CGFloat = 1.0, offset: CGFloat = 0,
                 priority: QLPriority = .required) -> NSLayoutConstraint? {
         guard isValidForQuickLayout else {
-            print("\(String(describing: self)) Error in func: \(#function)")
+
             return nil
         }
         let constraint = NSLayoutConstraint(item: self, attribute: edge ?? otherEdge, relatedBy: relation, toItem: view, attribute: otherEdge, multiplier: ratio, constant: offset)
@@ -112,7 +112,7 @@ public extension QLView {
                 priority: QLPriority = .required) -> QLMultipleConstraints {
         var constraints: QLMultipleConstraints = [:]
         guard isValidForQuickLayout else {
-            print("\(String(describing: self)) Error in func: \(#function)")
+
             return constraints
         }
         let uniqueEdges = Set(edges)
@@ -142,7 +142,7 @@ public extension QLView {
                            ratio: CGFloat = 1, offset: CGFloat = 0,
                            priority: QLPriority = .required) -> NSLayoutConstraint? {
         guard isValidForQuickLayout else {
-            print("\(String(describing: self)) Error in func: \(#function)")
+
             return nil
         }
         let constraint = NSLayoutConstraint(item: self, attribute: edge, relatedBy: relation, toItem: superview, attribute: edge, multiplier: ratio, constant: offset)
@@ -260,7 +260,7 @@ public extension QLView {
     /** **PRIVATELY USED** to test for validation*/
     var isValidForQuickLayout: Bool {
         guard superview != nil else {
-            print("\(String(describing: self)):\(#function) - superview is unexpectedly nullified")
+
             return false
         }
         if translatesAutoresizingMaskIntoConstraints {

@@ -203,13 +203,13 @@ public extension Array where Element: QLView {
     /** **PRIVATELY USED** to test for validation*/
     var isValidForQuickLayout: Bool {
         guard !isEmpty else {
-            print("\(String(describing: self)) Error in func: \(#function), Views collection is empty!")
+
             return false
         }
         
         for view in self {
             guard view.isValidForQuickLayout else {
-                print("\(String(describing: self)) Error in func: \(#function)")
+
                 return false
             }
         }

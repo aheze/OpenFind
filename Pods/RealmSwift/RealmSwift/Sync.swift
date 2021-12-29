@@ -256,7 +256,7 @@ public typealias Provider = RLMIdentityProvider
 ///
 ///     user.functions.sum([1, 2, 3, 4, 5]) { sum, error in
 ///         guard case let .int64(value) = sum else {
-///             print(error?.localizedDescription)
+
 ///         }
 ///
 ///         assert(value == 15)
@@ -407,7 +407,7 @@ public extension User {
     ///
     ///     user.functions.sum([1, 2, 3, 4, 5]) { sum, error in
     ///         guard case let .int64(value) = sum else {
-    ///             print(error?.localizedDescription)
+
     ///         }
     ///
     ///         assert(value == 15)

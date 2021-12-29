@@ -29,7 +29,7 @@ extension Realm {
      do {
          realm = try Realm()
      } catch Realm.Error.incompatibleLockFile {
-         print("Realm Browser app may be attached to Realm on device?")
+
      }
      ```
     */

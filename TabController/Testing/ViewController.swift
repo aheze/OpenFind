@@ -95,10 +95,10 @@ class ViewController: UIViewController {
 
 extension ViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        print("delegate")
+
         let location = touch.location(in: nil)
         let searchContainerFrame = camera.viewController.searchContainerView.convert(camera.viewController.searchContainerView.bounds, to: nil)
-        print("fr: \(searchContainerFrame)")
+
         if searchContainerFrame.contains(location) {
             return false
         }

@@ -218,7 +218,7 @@ extension Publisher where Output: ThreadConfined {
     ///
     ///     let cancellable = publisher(myObject)
     ///         .subscribe(on: DispatchQueue(label: "background queue")
-    ///         .print()
+
     ///         .threadSafeReference()
     ///         .receive(on: DispatchQueue.main)
     ///         .sink { object in
@@ -250,7 +250,7 @@ extension Publisher {
     ///
     ///     let cancellable = changesetPublisher(myObject)
     ///         .subscribe(on: DispatchQueue(label: "background queue")
-    ///         .print()
+
     ///         .threadSafeReference()
     ///         .receive(on: DispatchQueue.main)
     ///         .sink { objectChange in
@@ -277,7 +277,7 @@ extension Publisher {
     ///
     ///     let cancellable = myCollection.changesetPublisher
     ///         .subscribe(on: DispatchQueue(label: "background queue")
-    ///         .print()
+
     ///         .threadSafeReference()
     ///         .receive(on: DispatchQueue.main)
     ///         .sink { collectionChange in
@@ -304,7 +304,7 @@ extension Publisher {
     ///
     ///     let cancellable = myCollection.changesetPublisher
     ///         .subscribe(on: DispatchQueue(label: "background queue")
-    ///         .print()
+
     ///         .threadSafeReference()
     ///         .receive(on: DispatchQueue.main)
     ///         .sink { collectionChange in
