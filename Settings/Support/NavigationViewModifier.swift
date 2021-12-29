@@ -2,11 +2,13 @@
 //  NavigationViewModifier.swift
 //  Find
 //
-//  Created by Zheng on 1/15/21.
-//  Copyright © 2021 Andrew. All rights reserved.
+//  Created by A. Zheng (github.com/aheze) on 12/28/21.
+//  Copyright © 2021 A. Zheng. All rights reserved.
 //
+    
 
 import SwiftUI
+
 
 /**
  ViewModifier that applies SupportOptions' `NavigationBar` and `SearchBar` configurations.

@@ -23,8 +23,6 @@ extension CVPixelBuffer {
     func toCGImage() -> CGImage? {
         var cgImage: CGImage?
         VTCreateCGImageFromCVPixelBuffer(self, options: nil, imageOut: &cgImage)
-        
-        if cgImage == nil {
         return cgImage
     }
 }
@@ -100,32 +98,6 @@ extension UISpringTimingParameters {
         self.init(mass: 1, stiffness: stiffness, damping: damp, initialVelocity: initialVelocity)
     }
     
-}
-extension UIViewController {
-    func addChild(_ childViewController: UIViewController, in inView: UIView) {
-        // Add Child View Controller
-        addChild(childViewController)
-        
-        // Add Child View as Subview
-        inView.insertSubview(childViewController.view, at: 0)
-        
-        // Configure Child View
-        childViewController.view.frame = inView.bounds
-        childViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        // Notify Child View Controller
-        childViewController.didMove(toParent: self)
-    }
-    func removeChild(_ childViewController: UIViewController) {
-        // Notify Child View Controller
-        childViewController.willMove(toParent: nil)
-
-        // Remove Child View From Superview
-        childViewController.view.removeFromSuperview()
-
-        // Notify Child View Controller
-        childViewController.removeFromParent()
-    }
 }
 
 infix operator >!<
@@ -228,25 +200,7 @@ extension Array where Element: Hashable {
     }
 }
 
-extension UIColor {
-    convenience init(hexString: String) {
-        let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-        var int = UInt64()
-        Scanner(string: hex).scanHexInt64(&int)
-        let a, r, g, b: UInt64
-        switch hex.count {
-        case 3: // RGB (12-bit)
-            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
-        case 6: // RGB (24-bit)
-            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
-        case 8: // ARGB (32-bit)
-            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
-        default:
-            (a, r, g, b) = (255, 0, 0, 0)
-        }
-        self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
-    }
-}
+
 
 func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
     Binding(

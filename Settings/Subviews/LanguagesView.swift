@@ -136,20 +136,13 @@ struct LanguagesView: View {
     
     @State var languageRows = [LanguageRow]()
     var readLanguages: (() -> [OrderedLanguage])
-//
-//    init(readLanguages: @escaping (() -> [OrderedLanguage])) {
-//        UITableView.appearance().separatorStyle = .none
-//        UITableViewCell.appearance().backgroundColor = .clear
-//        UITableView.appearance().backgroundColor = .clear
-//        self.readLanguages = readLanguages
-//    }
-    
+
     var body: some View {
         ZStack {
             Color(.black).brightness(0.1).edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .leading) {
-                List {
+                SwiftUI.List {
                     Text("Languages for the text recognition engine, sorted by priority. For best results, select up to 2.")
                         .padding(.top, 10)
                         .listRowBackground(Color(.black).brightness(0.1))
@@ -188,7 +181,7 @@ struct LanguagesView: View {
                                         
                                         if requiresAccurate {
                                             Button(action: {
-                                                Bridge.presentTopOfTheList?()
+                                                Settings.Bridge.presentTopOfTheList?()
                                             }) {
                                                 Image(systemName: "exclamationmark")
                                                     .font(.system(.subheadline))
@@ -202,7 +195,7 @@ struct LanguagesView: View {
                                         
                                         if versionUpdateNeeded {
                                             Button(action: {
-                                                Bridge.presentRequiresSoftwareUpdate?("\(language.versionNeeded()))")
+                                                Settings.Bridge.presentRequiresSoftwareUpdate?("\(language.versionNeeded()))")
                                             }) {
                                                 Text("iOS \(language.versionNeeded())+")
                                                     .font(.system(.subheadline))

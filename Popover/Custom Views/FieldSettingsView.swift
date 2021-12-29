@@ -10,7 +10,6 @@ import SwiftUI
 import Popovers
 
 class FieldSettingsModel: ObservableObject {
-
     @Published var header = "WORD"
     @Published var defaultColor: UIColor = UIColor(hex: 0x00aeef)
     @Published var selectedColor: UIColor = UIColor(hex: 0x00aeef)
@@ -140,7 +139,7 @@ struct FieldSettingsView: View {
         .background(
             ZStack {
                 VisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark))
-                Constants.tabBarDarkBackgroundColor.color.opacity(0.5)
+                UIColor(hex: 0x002F3B, alpha: 0.5).color.opacity(0.5)
             }
         )
         .cornerRadius(16)

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Settings
 import SupportDocs
 import WhatsNewKit
 

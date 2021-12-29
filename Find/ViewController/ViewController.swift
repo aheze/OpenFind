@@ -256,7 +256,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }()
     
     // MARK: Camera shutoff
-    var cameraShutoffTask = DispatchWorkItem {
+    var cameraShutoffTask = DispatchWorkItem { }
     var shutoffCamera: (() -> Void)?
     
     // MARK: Gestures

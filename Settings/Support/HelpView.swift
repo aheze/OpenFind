@@ -88,16 +88,16 @@ struct HelpView: View {
         .actionSheet(isPresented: $tutorialsPresented, content: {
             ActionSheet(title: Text("watchTutorial"), message: Text("whichTutorialWatch"), buttons: [
                 .default(Text("generalTutorial")) {
-                    Bridge.presentGeneralTutorial?()
+                    Settings.Bridge.presentGeneralTutorial?()
                 },
                 .default(Text("photosTutorial")) {
-                    Bridge.presentPhotosTutorial?()
+                    Settings.Bridge.presentPhotosTutorial?()
                 },
                 .default(Text("listsTutorial")) {
-                    Bridge.presentListsTutorial?()
+                    Settings.Bridge.presentListsTutorial?()
                 },
                 .default(Text("listsBuilderTutorial")) {
-                    Bridge.presentListsBuilderTutorial?()
+                    Settings.Bridge.presentListsBuilderTutorial?()
                 },
                 .cancel()
             ])

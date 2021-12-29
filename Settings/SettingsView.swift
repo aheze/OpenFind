@@ -54,7 +54,7 @@ class SettingsViewController: UIViewController {
          Set the dismiss button handler.
          */
         settingsView.donePressed = { [weak self] in
-            Bridge.dismissed?()
+            Settings.Bridge.dismissed?()
             self?.dismiss(animated: true, completion: nil)
         }
         
@@ -182,7 +182,7 @@ struct SettingsView: View {
                                 
                                 
                                 Button(action: {
-                                    Bridge.presentWhatsNew?()
+                                    Settings.Bridge.presentWhatsNew?()
                                 }) {
                                     Text("See what's new")
                                         .foregroundColor(Color.white.opacity(0.5))

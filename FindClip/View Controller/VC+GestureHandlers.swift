@@ -142,7 +142,7 @@ extension ViewController {
         case .cancelled:
             animator?.stopAnimation(true)
         default:
-
+            break
         }
     }
 }

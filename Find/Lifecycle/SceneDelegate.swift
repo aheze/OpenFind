@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Settings
 import SupportDocs
 
 var deviceIsRoundPad = false /// iPad with rounded corners

@@ -15,15 +15,15 @@ class ViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             
-            Bridge.presentTopOfTheList = {}
-            Bridge.presentRequiresSoftwareUpdate = { versionString in }
-            Bridge.presentWhatsNew = {}
-            Bridge.presentLicenses = {}
-            Bridge.presentGeneralTutorial = {}
-            Bridge.presentPhotosTutorial = {}
-            Bridge.presentListsTutorial = {}
-            Bridge.presentListsBuilderTutorial = {}
-            Bridge.presentShareScreen = {}
+            Settings.Bridge.presentTopOfTheList = {}
+            Settings.Bridge.presentRequiresSoftwareUpdate = { versionString in }
+            Settings.Bridge.presentWhatsNew = {}
+            Settings.Bridge.presentLicenses = {}
+            Settings.Bridge.presentGeneralTutorial = {}
+            Settings.Bridge.presentPhotosTutorial = {}
+            Settings.Bridge.presentListsTutorial = {}
+            Settings.Bridge.presentListsBuilderTutorial = {}
+            Settings.Bridge.presentShareScreen = {}
             
             let vc = SettingsViewController()
             self.present(vc, animated: true)

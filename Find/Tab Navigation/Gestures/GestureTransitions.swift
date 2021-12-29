@@ -276,9 +276,9 @@ extension ViewController {
                     blurAnimator?.isReversed = true
                 }
             case is ListsNavController:
-
+                break
             default:
-
+                break
             }
         case is CameraViewController:
             switch toVC {
@@ -351,12 +351,12 @@ extension ViewController {
                     blurAnimator?.isReversed = true
                 }
             default:
-
+                break
             }
         case is ListsNavController:
             switch toVC {
             case is PhotosWrapperController:
-
+                break
             case is CameraViewController:
                 if favoredDirection == .right { /// completed
                     let (prep, animations, completion) = tabBarView.getBlocks(from: fromVC, to: .camera)
@@ -392,12 +392,12 @@ extension ViewController {
                     blurAnimator?.isReversed = true
                 }
             case is ListsNavController:
-
+                break
             default:
-
+                break
             }
         default:
-
+            break
         }
         
         let completion: (() -> Void) = {

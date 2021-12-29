@@ -30,7 +30,7 @@ extension PhotosMigrationController {
         case .limited:
             permissionAction = .limited
         @unknown default:
-
+            break
         }
         
         switch permissionAction {

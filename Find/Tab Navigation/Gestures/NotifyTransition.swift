@@ -43,7 +43,7 @@ extension ViewController {
             
             ConstantVars.shouldHaveLightStatusBar = false
         default:
-
+            break
         }
         
         UIView.animate(withDuration: 0.3) {

@@ -58,7 +58,7 @@ extension Color: ColorConvertible {
 	/// Initialize a new color from HEX string representation.
 	///
 	/// - Parameter hexString: hex string
-	public convenience init(hexString: String) {
+	convenience init(hexString: String) {
 		let hexString = hexString.trimmingCharacters(in: .whitespacesAndNewlines)
 		let scanner   = Scanner(string: hexString)
 		
@@ -80,7 +80,7 @@ extension Color: ColorConvertible {
 	/// - Parameters:
 	///   - hex: hex value
 	///   - alphaChannel: `true` to include alpha channel, `false` to make it opaque.
-	public convenience init(hex: UInt32, useAlpha alphaChannel: Bool = false) {
+	convenience init(hex: UInt32, useAlpha alphaChannel: Bool = false) {
 		let mask = UInt32(0xFF)
 		
 		let r = hex >> (alphaChannel ? 24 : 16) & mask

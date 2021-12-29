@@ -44,7 +44,7 @@ extension PermissionsViewController {
         case .cancelled:
             animator?.stopAnimation(true)
         default:
-
+            break
         }
     }
     

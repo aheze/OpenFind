@@ -383,7 +383,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 topGroupView.accessibilityElements = [searchBackgroundView, newSearchTextField]
             }
         default:
-
+            break
         }
         
     }

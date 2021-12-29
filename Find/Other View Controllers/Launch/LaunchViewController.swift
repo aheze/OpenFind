@@ -250,7 +250,7 @@ class LaunchViewController: UIViewController {
                     self.drawAnimation(type: .restricted)
                 })
             @unknown default:
-
+                break
             }
         }
         

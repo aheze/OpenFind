@@ -18,7 +18,7 @@ struct ShareView: View {
             HStack(spacing: 14) {
                 Button(action: {
                     
-                    Bridge.presentShareScreen?()
+                    Settings.Bridge.presentShareScreen?()
                     
                     let generator = UIImpactFeedbackGenerator(style: .medium)
                     generator.prepare()

@@ -263,7 +263,7 @@ class TabBarView: UIView {
         case .photos:
             switch fromVC {
             case is PhotosWrapperController:
-
+                break
             case is CameraViewController:
                 let makeInactive = self.cameraIcon.makeNormalState()
                 let makeOtherInactive = self.listsIcon.makeNormalState(details: Constants.detailIconColorLight, foreground: Constants.foregroundIconColorLight, background: Constants.backgroundIconColorLight)
@@ -290,7 +290,7 @@ class TabBarView: UIView {
                     makeActive()
                 }
             default:
-
+                break
             }
         case .camera:
             switch fromVC {
@@ -316,7 +316,7 @@ class TabBarView: UIView {
                 }
 
             case is CameraViewController:
-
+                break
             case is ListsNavController:
                 let makeInactive = self.listsIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)
                 let makeOtherInactive = self.photosIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)
@@ -335,7 +335,7 @@ class TabBarView: UIView {
                     self.hideRealShutter?(false)
                 }
             default:
-
+                break
             }
         case .lists:
             switch fromVC {
@@ -365,9 +365,9 @@ class TabBarView: UIView {
                 }
 
             case is ListsNavController:
-
+                break
             default:
-
+                break
             }
         }
 

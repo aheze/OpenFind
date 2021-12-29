@@ -32,7 +32,7 @@ struct CreditsView: View {
                 Line()
                 
                 Button(action: {
-                    Bridge.presentLicenses?()
+                    Settings.Bridge.presentLicenses?()
                 }) {
                     HStack {
                         Label(text: "Licenses")
