@@ -69,7 +69,7 @@ class GeneralViewController: UIViewController {
     
 
     func highlightRowsOnError(type: String) { ///Highlight the rows when done is pressed and there is an error
-        print("highlighting/....")
+
         switch type {
         case "EmptyMatch":
             var reloadPaths = [IndexPath]()
@@ -284,7 +284,7 @@ class GeneralViewController: UIViewController {
         tableView.deleteRows(at: [indP], with: .automatic)
         
         if row == contents.count { ///Cont count is now 1 less because remove
-            print("last row")
+
         } else {
             let endRange = row...contents.count - 1
             

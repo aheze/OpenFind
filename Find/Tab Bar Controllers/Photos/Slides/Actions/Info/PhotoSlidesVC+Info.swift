@@ -10,7 +10,7 @@ import UIKit
 
 extension PhotoSlidesViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        print("dismissed!!!")
+
         presentingInfo?(false)
     }
 }

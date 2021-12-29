@@ -112,7 +112,7 @@ extension PhotosViewController {
         case .limited:
             permissionAction = .allowed
         @unknown default:
-            print("unknown default")
+
         }
         
         if permissionAction != .allowed {

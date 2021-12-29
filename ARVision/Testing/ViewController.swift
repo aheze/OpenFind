@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var averageView: UIView!
     
     @IBAction func resetPressed(_ sender: Any) {
-        print("Reset")
+
         if let latestPixelBuffer = latestPixelBuffer {
             if visionEngine.canFind {
                 visionEngine.startToFind(["Hi"], in: latestPixelBuffer)

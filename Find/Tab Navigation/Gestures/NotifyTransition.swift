@@ -10,15 +10,15 @@ import UIKit
 
 extension ViewController {
     func notifyCompletion(finishedAtVC currentVC: UIViewController, animatedToCamera: Bool = true) {
-        print("notifying")
+
         switch currentVC {
         case is PhotosWrapperController:
-            print("ended at photos")
+
             startCameraShutoff()
             
             ConstantVars.shouldHaveLightStatusBar = false
         case is CameraViewController:
-            print("ended at camera")
+
             startCamera()
             ConstantVars.shouldHaveLightStatusBar = true
             
@@ -31,19 +31,19 @@ extension ViewController {
             camera.enableButtons(true)
             
             if animatedToCamera {
-                print("Animated to camera, hide shutter")
+
                 tabBarView.cameraContainerView.alpha = 0
                 tabBarView.hideRealShutter?(false)
             }
             
             
         case is ListsNavController:
-            print("ended at lists")
+
             startCameraShutoff()
             
             ConstantVars.shouldHaveLightStatusBar = false
         default:
-            print("Unknown notified VC")
+
         }
         
         UIView.animate(withDuration: 0.3) {

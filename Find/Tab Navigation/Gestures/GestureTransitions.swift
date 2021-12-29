@@ -59,7 +59,7 @@ extension ViewController {
     }
     
     func startMoveVC(from fromVC: UIViewController, to toVC: UIViewController, direction: Direction, toOverlay: Bool = true) {
-        print("start move view controller from \(fromVC), to \(toVC)")
+
         camera.focusGestureRecognizer?.isEnabled = false
         camera.focusGestureRecognizer?.isEnabled = true
         
@@ -205,8 +205,8 @@ extension ViewController {
     }
     
     func finishMoveVC(currentX: CGFloat, velocity: CGFloat, from fromVC: UIViewController, to toVC: UIViewController, instantly: Bool = false) {
-        print("Finishing from \(fromVC) to \(toVC)")
-        print("Current is \(ViewControllerState.currentVC) and new is \(ViewControllerState.newVC)")
+
+
         animator = nil
         
         let decelerationRate = UIScrollView.DecelerationRate.normal.rawValue
@@ -276,9 +276,9 @@ extension ViewController {
                     blurAnimator?.isReversed = true
                 }
             case is ListsNavController:
-                print("error! Should not swipe from photos to lists")
+
             default:
-                print("Could not cast in finish vc - photos")
+
             }
         case is CameraViewController:
             switch toVC {
@@ -351,12 +351,12 @@ extension ViewController {
                     blurAnimator?.isReversed = true
                 }
             default:
-                print("Could not cast in finish vc - camera")
+
             }
         case is ListsNavController:
             switch toVC {
             case is PhotosWrapperController:
-                print("error! Should not swipe from lists to photos")
+
             case is CameraViewController:
                 if favoredDirection == .right { /// completed
                     let (prep, animations, completion) = tabBarView.getBlocks(from: fromVC, to: .camera)
@@ -392,12 +392,12 @@ extension ViewController {
                     blurAnimator?.isReversed = true
                 }
             case is ListsNavController:
-                print("ERROR! Is same")
+
             default:
-                print("Could not cast in finish vc - lists")
+
             }
         default:
-            print("Could not case in finish vc")
+
         }
         
         let completion: (() -> Void) = {
@@ -422,9 +422,9 @@ extension ViewController {
                 
                 self.blurAnimator?.isReversed = false
                 
-                print("Current view controller: \(ViewControllerState.currentVC)")
+
             } else {
-                print("Did not complete move")
+
                 toVC.willMove(toParent: nil)
                 toVC.view.removeFromSuperview()
                 toVC.removeFromParent()
@@ -481,7 +481,7 @@ extension ViewController {
             animator?.startAnimation()
             blurAnimator?.continueAnimation(withTimingParameters: timingParameters, durationFactor: 1)
         }
-        print("Starting final animation...")
+
     }
     
     /// Distance traveled after decelerating to zero velocity at a constant rate.

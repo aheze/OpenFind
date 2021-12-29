@@ -45,7 +45,7 @@ extension PhotosViewController {
                                 }
                             } catch {
                                 hasError = true
-                                print("Error starring photo \(error)")
+
                             }
                         }
                     }
@@ -120,7 +120,7 @@ extension PhotosViewController {
                                     }
                                 } catch {
                                     hasError = true
-                                    print("Error starring photo \(error)")
+
                                 }
                             }
                         }

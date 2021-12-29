@@ -53,7 +53,7 @@ extension CameraViewController {
                     try imageRequestHandler.perform([request])
                 } catch let error {
                     self.busyFastFinding = false
-                    print("Error: \(error)")
+
                 }
             } else if let cgImage = cgImage {
                 let imageRequestHandler = VNImageRequestHandler(cgImage: cgImage, orientation: .up)
@@ -61,7 +61,7 @@ extension CameraViewController {
                     try imageRequestHandler.perform([request])
                 } catch let error {
                     self.busyFastFinding = false
-                    print("Error: \(error)")
+
                 }
             }
         }

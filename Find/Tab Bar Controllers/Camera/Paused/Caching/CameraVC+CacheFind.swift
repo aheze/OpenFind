@@ -58,7 +58,7 @@ extension CameraViewController {
                 try imageRequestHandler.perform([request])
             } catch let error {
                 self.busyFastFinding = false
-                print("Error: \(error)")
+
             }
         }
     }

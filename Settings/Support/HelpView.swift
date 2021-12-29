@@ -67,7 +67,7 @@ struct HelpView: View {
             Line()
             
             Button(action: {
-                print("Tutorials")
+
                 tutorialsPresented = true
             }) {
                 HStack(spacing: 0) {

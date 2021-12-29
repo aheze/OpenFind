@@ -27,7 +27,7 @@ class VisionFindingEngine {
         do {
             try imageRequestHandler.perform([request])
         } catch let error {
-            print("Error finding text: \(error)")
+
         }
     }
 }

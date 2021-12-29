@@ -39,7 +39,7 @@ extension CameraViewController {
                 wordsFinding.append(list)
             }
             
-            print("Finding words: \(wordsFinding)")
+
             
             var finalMatchesString = ""
             

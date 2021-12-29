@@ -85,7 +85,7 @@ extension CameraViewController {
                             self.realm.add(newModel)
                         }
                     } catch {
-                        print("Error saving model \(error)")
+
                     }
                 }
             }

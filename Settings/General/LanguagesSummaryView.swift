@@ -59,7 +59,7 @@ struct LanguagesSummaryView: View {
                 return recognitionLanguages
             }
         } catch {
-            print("Error decoding: \(error)")
+
         }
         return [OrderedLanguage]()
     }

@@ -138,7 +138,7 @@ extension ListsController {
                     self.realm.delete(tempLists)
                 }
             } catch {
-                print("error deleting category \(error)")
+
             }
             self.collectionView.deleteItems(at: arrayOfIndexPaths)
             self.indexPathsSelected.removeAll()

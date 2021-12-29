@@ -108,7 +108,7 @@ extension PhotosViewController {
                                         self.realm.delete(realModel.contents)
                                     }
                                 } catch {
-                                    print("Error starring photo \(error)")
+
                                 }
                                 editableModel.isDeepSearched = false
                                 editableModel.contents.removeAll()

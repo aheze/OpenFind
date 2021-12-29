@@ -90,7 +90,7 @@ class CachingFinder {
                                 do {
                                     try imageRequestHandler.perform([request])
                                 } catch let error {
-                                    print("Error: \(error)")
+
                                 }
                             }
                         }
@@ -104,7 +104,7 @@ class CachingFinder {
             }
         }
         dispatchGroup.notify(queue: dispatchQueue) {
-            print("Finished caching.")
+
             if reportProgress == nil {
                 if self.statusOk == false {
                     DispatchQueue.main.async {
@@ -180,7 +180,7 @@ class CachingFinder {
                             }
                         }
                     } catch {
-                        print("Error saving cache. \(error)")
+
                     }
                     editableModel.isDeepSearched = true
                     editableModel.contents = contentsToSave
@@ -207,7 +207,7 @@ class CachingFinder {
                     }
                 }
             } catch {
-                print("Error saving model \(error)")
+
             }
             
             let editableModel = EditableHistoryModel()

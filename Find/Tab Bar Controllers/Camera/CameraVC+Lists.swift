@@ -18,7 +18,7 @@ extension CameraViewController {
             
             
             for (index, realList) in listCategories.enumerated() {
-                print("list: \(realList.name) --")
+
                 
                 var listIsSelected = false
                 

@@ -119,7 +119,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var purpleButton: UIButton!
     @IBAction func purpleButtonPressed(_ sender: Any) {
-        print("purple pressed")
+
     }
     
     

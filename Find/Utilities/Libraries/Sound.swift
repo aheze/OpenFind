@@ -133,7 +133,7 @@ open class Sound {
                 let player = try Sound.playerClass.init(contentsOf: url)
                 myPlayers.append(player)
             } catch {
-                print("SwiftySound initialization error: \(error)")
+
             }
         }
         if myPlayers.count == 0 {
@@ -365,7 +365,7 @@ extension AVAudioPlayer: Player, AVAudioPlayerDelegate {
     }
 
     public func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
-        print("SwiftySound playback error: \(String(describing: error))")
+
     }
 
 }

@@ -204,7 +204,7 @@ extension PhotoFindViewController {
         if selfPresented?() ?? false {
             UIAccessibility.postAnnouncement(accessibilityText)
         } else {
-            print("Currently not active")
+
         }
     }
     

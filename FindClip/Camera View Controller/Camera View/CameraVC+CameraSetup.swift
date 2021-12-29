@@ -19,7 +19,7 @@ extension CameraViewController {
                 }
             }
             catch {
-                print("Error occured \(error)")
+
                 return
             }
             avSession.sessionPreset = .photo
@@ -40,7 +40,7 @@ extension CameraViewController {
             
             avSession.startRunning()
         } else {
-            print("No camera.")
+
             DispatchQueue.main.async {
                 self.cameraFinishedSetup?()
             }
@@ -54,7 +54,7 @@ extension CameraViewController {
                                                              for: .video, position: .back) {
             return cameraDevice
         } else {
-            print("Missing Camera.")
+
             return nil
         }
     }

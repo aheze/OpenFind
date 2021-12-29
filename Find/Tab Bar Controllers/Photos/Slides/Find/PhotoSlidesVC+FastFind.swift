@@ -40,7 +40,7 @@ extension PhotoSlidesViewController {
                     do {
                         try imageRequestHandler.perform([request])
                     } catch let error {
-                        print("Error: \(error)")
+
                     }
                     
                 }

@@ -57,7 +57,7 @@ struct VisionConstants {
             }
         }
         
-        print("candidates: \(candidates)")
+
         return candidates
     }()
 }

@@ -17,7 +17,7 @@ extension PhotoFindViewController {
         newOrigRect.size.height += 2
         
         let newView = UIView(frame: CGRect(x: newOrigRect.origin.x, y: newOrigRect.origin.y, width: newOrigRect.size.width, height: newOrigRect.size.height))
-        guard let colors = matchToColors[text] else { print("NO COLORS!"); return newView }
+        guard let colors = matchToColors[text] else {
         
         let layer = CAShapeLayer()
         layer.frame = CGRect(x: 0, y: 0, width: newOrigRect.size.width, height: newOrigRect.size.height)

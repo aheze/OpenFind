@@ -24,7 +24,7 @@ extension LivePreviewViewController {
             }
             cameraDevice.unlockForConfiguration()
         } catch {
-            print("Error focusing \(error)")
+
         }
     }
     

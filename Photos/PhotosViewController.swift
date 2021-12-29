@@ -32,17 +32,17 @@ class PhotosViewController: UIViewController, PageViewController {
         }
     }
     @IBAction func addPressed(_ sender: Any) {
-        print("add pressed")
+
         photosSelectionViewModel.selectedCount += 1
     }
     @IBAction func minusPressed(_ sender: Any) {
-        print("mnus pressed")
+
         photosSelectionViewModel.selectedCount -= 1
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Photos loaded")
+
         
         self.photosSelectionViewModel = .init()
     }
@@ -58,7 +58,7 @@ extension PhotosViewController {
     }
     
     func willBecomeInactive() {
-//        print("Becoming inactve.")
+
         self.activateSelectionToolbar?(false, true)
     }
     

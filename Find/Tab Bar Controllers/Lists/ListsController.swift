@@ -92,7 +92,7 @@ class ListsController: UIViewController, AdaptiveCollectionLayoutDelegate, UIAda
                     realm.delete(currentList)
                 }
             } catch {
-                print("error deleting category \(error)")
+
             }
             let indP = IndexPath(item: currentEditingPresentationPath, section: 0)
             sortLists()
@@ -209,7 +209,7 @@ class ListsController: UIViewController, AdaptiveCollectionLayoutDelegate, UIAda
                 realm.add(findList)
             }
         } catch {
-            print("Error saving category \(error)")
+
         }
         sortLists()
         
@@ -236,7 +236,7 @@ class ListsController: UIViewController, AdaptiveCollectionLayoutDelegate, UIAda
                     listToEdit.iconColorName = imageColor
                 }
             } catch {
-                print("Error saving category \(error)")
+
             }
         }
         listsChanged?()

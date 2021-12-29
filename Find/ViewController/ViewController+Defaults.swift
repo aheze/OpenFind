@@ -40,7 +40,7 @@ extension ViewController {
                 Defaults.recognitionLanguages = strings
             }
         } catch {
-            print("Error decoding: \(error)")
+
         }
     }
     

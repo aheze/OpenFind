@@ -143,7 +143,7 @@ extension PhotosViewController {
 }
 extension PhotosViewController: EasyTipViewDelegate {
     func easyTipViewDidTap(_ tipView: EasyTipView) {
-        print("tapped")
+
     }
     
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {

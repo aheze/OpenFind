@@ -32,15 +32,15 @@ class VisionEngine {
     var canFind: Bool {
         var canFind = true
         if findingEnding.startTime != nil {
-//            print("Currently finding")
+
             canFind = false
         }
         if !startTime.isPastCoolDown(VisionConstants.findCoolDownTime) {
-//            print("Still in cooldown!")
+
             canFind = false
         }
         
-//        print("Can find? \(canFind)")
+
         return canFind
     }
     
@@ -65,15 +65,15 @@ class VisionEngine {
     var canSample: Bool {
         var canSample = true
         if visionSamplingEngine.startTime != nil {
-//            print("Currently finding")
+
             canSample = false
         }
         if !visionSamplingEngine.startTime.isPastCoolDown(VisionConstants.findCoolDownTime) {
-//            print("Still in cooldown!")
+
             canSample = false
         }
         
-//        print("Can find? \(canFind)")
+
         return canSample
     }
     func updatePixelBuffer(_ pixelBuffer: CVPixelBuffer) {
@@ -85,7 +85,7 @@ class VisionEngine {
                 
                 if self?.canSample ?? false {
                     DispatchQueue.main.async {
-                        print("observations: \(observations)")
+
                         self?.delegate?.textFound(observations: observations)
                     }
                 }

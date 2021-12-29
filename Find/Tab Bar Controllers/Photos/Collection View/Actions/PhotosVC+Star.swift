@@ -28,7 +28,7 @@ extension PhotosViewController {
                                         realModel.isHearted = true
                                     }
                                 } catch {
-                                    print("Error starring photo \(error)")
+
                                 }
                                 editableModel.isHearted = true /// also change the editable model
                             }
@@ -46,7 +46,7 @@ extension PhotosViewController {
                                 realm.add(newModel)
                             }
                         } catch {
-                            print("Error saving model \(error)")
+
                         }
                         
                         let editableModel = EditableHistoryModel()
@@ -70,7 +70,7 @@ extension PhotosViewController {
                                         realModel.isHearted = false
                                     }
                                 } catch {
-                                    print("Error starring photo \(error)")
+
                                 }
                                 editableModel.isHearted = false /// also change the editable model
                             }

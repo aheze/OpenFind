@@ -95,7 +95,7 @@ class VisionTrackingEngine {
         do {
             try requestHandler?.perform(trackingRequests, on: updatedImage, orientation: .up)
         } catch {
-            print("Error performing request: \(error)")
+
             busy = false
         }
         

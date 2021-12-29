@@ -263,7 +263,7 @@ class TabBarView: UIView {
         case .photos:
             switch fromVC {
             case is PhotosWrapperController:
-                print("nothing, in photos")
+
             case is CameraViewController:
                 let makeInactive = self.cameraIcon.makeNormalState()
                 let makeOtherInactive = self.listsIcon.makeNormalState(details: Constants.detailIconColorLight, foreground: Constants.foregroundIconColorLight, background: Constants.backgroundIconColorLight)
@@ -290,12 +290,12 @@ class TabBarView: UIView {
                     makeActive()
                 }
             default:
-                print("could not cast view controller")
+
             }
         case .camera:
             switch fromVC {
             case is PhotosWrapperController:
-                print("currently photos, to camera")
+
                 
                 let makeInactive = self.photosIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)
                 let makeOtherInactive = self.listsIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)
@@ -316,7 +316,7 @@ class TabBarView: UIView {
                 }
 
             case is CameraViewController:
-                print("currently camera")
+
             case is ListsNavController:
                 let makeInactive = self.listsIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)
                 let makeOtherInactive = self.photosIcon.makeNormalState(details: Constants.detailIconColorDark, foreground: Constants.foregroundIconColorDark, background: Constants.backgroundIconColorDark)
@@ -335,7 +335,7 @@ class TabBarView: UIView {
                     self.hideRealShutter?(false)
                 }
             default:
-                print("could not cast view controller")
+
             }
         case .lists:
             switch fromVC {
@@ -365,9 +365,9 @@ class TabBarView: UIView {
                 }
 
             case is ListsNavController:
-                print("currently lists")
+
             default:
-                print("could not cast view controller")
+
             }
         }
 

@@ -28,7 +28,7 @@ extension ViewController {
                 session.addInput(captureDeviceInput)
             }
         } catch {
-            print("Error occurred: \(error)")
+
             return
         }
         session.sessionPreset = .photo

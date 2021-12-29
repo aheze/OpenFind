@@ -19,7 +19,7 @@ extension CameraViewController {
                                                              for: .video, position: .back) {
             return cameraDevice
         } else {
-            print("Missing Camera.")
+
             return nil
         }
     }
@@ -34,7 +34,7 @@ extension CameraViewController {
                 }
             }
             catch {
-                print("Error occurred \(error)")
+
                 return
             }
             avSession.sessionPreset = .photo

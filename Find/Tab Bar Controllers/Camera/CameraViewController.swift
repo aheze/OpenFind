@@ -165,7 +165,7 @@ class CameraViewController: UIViewController {
                 device.unlockForConfiguration()
             }
             catch {
-                print("Error focusing \(error)")
+
             }
         }
         
@@ -411,7 +411,7 @@ class CameraViewController: UIViewController {
         default:
             break
         }
-        print("Warning - Didn't recognize interface orientation (\(orientation))")
+
         return .portrait
     }
     override func viewDidLayoutSubviews() {

@@ -15,7 +15,7 @@ extension PhotosViewController {
         collapseButton.alpha = 0
     }
     func findPressed() {
-        print("Has changed from before? \(hasChangedFromBefore)")
+
         if indexPathsSelected.isEmpty {
             switchToFind?(photoFilterState, allPhotosToDisplay, true, hasChangedFromBefore)
         } else {

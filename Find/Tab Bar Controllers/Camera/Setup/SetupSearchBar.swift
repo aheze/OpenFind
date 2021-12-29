@@ -297,7 +297,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             }, completion: nil)
             topGroupView.accessibilityElements = [searchBackgroundView, newSearchTextField]
         case "addListsNow":
-            print("pressed a list so now text and lists")
+
             if searchShrunk == true {
                 searchShrunk = false
                 searchCollectionRightC.constant = 0
@@ -321,7 +321,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
             
             topGroupView.accessibilityElements = [searchBackgroundView, listsLabel, listsDownIndicatorView, searchCollectionView, textLabel, newSearchTextField]
         case "removeListsNow":
-            print("removed every list so now ONLY TEXT")
+
             searchTextTopC.constant = 8
             searchCollectionTopC.constant = 8
             searchContentViewHeight.constant = 71
@@ -383,7 +383,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 topGroupView.accessibilityElements = [searchBackgroundView, newSearchTextField]
             }
         default:
-            print("other")
+
         }
         
     }
@@ -504,12 +504,12 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
                     
                 } else {
                     if matchToColors[match.lowercased()] == nil {
-                            print("NOT CONT")
+
                             matchToColors[match.lowercased()] = [highlightColor]
                     } else {
                         if !(matchToColors[match.lowercased()]?.contains(highlightColor))! {
                             matchToColors[match.lowercased(), default: [HighlightColor]()].append(highlightColor)
-                            print("APPEND")
+
                         }
                     }
                 }

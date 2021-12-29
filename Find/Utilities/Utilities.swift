@@ -24,7 +24,7 @@ extension CVPixelBuffer {
         var cgImage: CGImage?
         VTCreateCGImageFromCVPixelBuffer(self, options: nil, imageOut: &cgImage)
         
-        if cgImage == nil { print("Error: Converting CVPixelBuffer to CGImage failed.") }
+        if cgImage == nil {
         return cgImage
     }
 }
@@ -493,6 +493,6 @@ extension CALayer {
 
 extension Component {
     func printDescription() {
-        print("Component: \(self.x)x, \(self.y)y, \(self.width)width, \(self.height)height. Text: \(self.text)")
+
     }
 }

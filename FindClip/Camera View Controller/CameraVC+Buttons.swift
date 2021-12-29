@@ -97,7 +97,7 @@ extension CameraViewController {
             device.torchMode = on ? .on : .off
             device.unlockForConfiguration()
         } catch {
-            print("Torch could not be used: \(error)")
+
         }
         
         let flashlightImage = on ? UIImage(systemName: "flashlight.on.fill") : UIImage(systemName: "flashlight.off.fill")

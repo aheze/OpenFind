@@ -25,12 +25,12 @@ class StatsView: UIView {
     
     var currentlyFocused: ((Bool) -> Void)?
     override func accessibilityElementDidBecomeFocused() {
-        print("focused")
+
         currentlyFocused?(true)
     }
     
     override func accessibilityElementDidLoseFocus() {
-        print("Lost focused")
+
         currentlyFocused?(false)
     }
 }

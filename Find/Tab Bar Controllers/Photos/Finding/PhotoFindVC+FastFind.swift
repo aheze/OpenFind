@@ -65,7 +65,7 @@ extension PhotoFindViewController {
                                 do {
                                     try imageRequestHandler.perform([request])
                                 } catch let error {
-                                    print("Error: \(error)")
+
                                 }
                                 
                                 self.dispatchSemaphore.wait()

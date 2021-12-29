@@ -33,7 +33,7 @@ extension UIAccessibility {
                 let customRaisedString = NSMutableAttributedString(string: text.text, attributes: pitch)
                 string.append(customRaisedString)
             } else if let customPronunciation = text.customPronunciation {
-                print("custom!!")
+
                 let pronunciation = [NSAttributedString.Key.accessibilitySpeechIPANotation: NSString(string: customPronunciation)]
                 let customPronunciationString = NSMutableAttributedString(string: text.text, attributes: pronunciation)
                 string.append(customPronunciationString)

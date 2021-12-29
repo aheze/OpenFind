@@ -122,7 +122,7 @@ class LaunchViewController: UIViewController {
         
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
-            print("Authorized")
+
             self.drawAnimation(type: .fullScreenStart)
         case .notDetermined:
             shouldGoToSettings = false
@@ -157,7 +157,7 @@ class LaunchViewController: UIViewController {
         
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
-            print("Authorized")
+
             self.drawAnimation(type: .fullScreenStart)
         case .notDetermined:
             shouldGoToSettings = false
@@ -230,7 +230,7 @@ class LaunchViewController: UIViewController {
             onboarding.removeFromSuperview()
             switch AVCaptureDevice.authorizationStatus(for: .video) {
             case .authorized:
-                print("Authorized")
+
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                     self.drawAnimation(type: .fullScreenStart)
                 })
@@ -250,7 +250,7 @@ class LaunchViewController: UIViewController {
                     self.drawAnimation(type: .restricted)
                 })
             @unknown default:
-                print("unknown default")
+
             }
         }
         

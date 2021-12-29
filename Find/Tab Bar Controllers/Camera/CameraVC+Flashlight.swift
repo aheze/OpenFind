@@ -32,7 +32,7 @@ extension CameraViewController {
             let device = cameraDevice,
             device.hasTorch
         else {
-            print("No device")
+
             return
         }
         
@@ -41,7 +41,7 @@ extension CameraViewController {
             device.torchMode = on ? .on : .off
             device.unlockForConfiguration()
         } catch {
-            print("Torch could not be used")
+
         }
         
         flashView.accessibilityValue = on ? "On" : "Off"

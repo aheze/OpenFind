@@ -52,7 +52,7 @@ extension PhotosViewController {
                 
                 viewController.completed = { [weak self] in
                     guard let self = self else { return }
-                    print("Completed!")
+
                     
 //                    collectionView.
 //                    applySnapshot(animatingDifferences: false)

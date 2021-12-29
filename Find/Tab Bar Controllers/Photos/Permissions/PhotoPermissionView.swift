@@ -65,7 +65,7 @@ class PhotoPermissionView: UIView {
     }
     
     private func commonInit() {
-        print("common")
+
         Bundle.main.loadNibNamed("PhotoPermissionView", owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
@@ -88,7 +88,7 @@ class PhotoPermissionView: UIView {
     
     
     func checkAuthorizationStatus() -> PhotoPermissionAction {
-        print("checking")
+
         var action = PhotoPermissionAction.shouldGoToSettings
         if #available(iOS 14, *) {
             let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
@@ -115,7 +115,7 @@ class PhotoPermissionView: UIView {
     }
     
     func requestAuthorization(completion: @escaping ((Bool) -> Void)) {
-        print("requesting")
+
         if #available(iOS 14, *) {
             
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { (status) in

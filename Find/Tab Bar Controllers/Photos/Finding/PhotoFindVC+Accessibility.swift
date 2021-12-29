@@ -34,7 +34,7 @@ class PromptView: UIView {
     var activated: (() -> Bool)?
     
     override func accessibilityActivate() -> Bool {
-        print("Activate??")
+
         return activated?() ?? false
     }
     override var accessibilityCustomActions: [UIAccessibilityCustomAction]? {

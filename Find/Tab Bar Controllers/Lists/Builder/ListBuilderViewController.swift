@@ -62,7 +62,7 @@ class ListBuilderViewController: UIViewController {
     @IBAction func saveButtonPressed(_ sender: Any) {
         view.endEditing(true)
         
-        print("save pressed")
+
         var newName = generalVC.name
         var newDesc = generalVC.descriptionOfList
         
@@ -80,9 +80,9 @@ class ListBuilderViewController: UIViewController {
         findAndStoreErrors(contentsArray: generalVC.contents)
         
         if showDoneAlerts() { /// true = has errors
-            print("has errors")
+
         } else {
-            print("No errors")
+
             returnCompletedList()
         }
     }
@@ -165,11 +165,11 @@ class ListBuilderViewController: UIViewController {
     
     func returnCompletedList() {
         if listBuilderType == .editor {
-            print("is editor, contents???? \(contents)")
+
             contents = generalVC.contents
             finishedEditingList?.updateExistingList(name: name, description: descriptionOfList, contents: contents, imageName: iconImageName, imageColor: iconColorName, deleteList: false)
         } else {
-            print("make new")
+
             newListDelegate?.madeNewList(name: name, description: descriptionOfList, contents: contents, imageName: iconImageName, imageColor: iconColorName)
         }
         donePressed?()

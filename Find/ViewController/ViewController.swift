@@ -256,7 +256,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }()
     
     // MARK: Camera shutoff
-    var cameraShutoffTask = DispatchWorkItem { print("Camera Shutoff") }
+    var cameraShutoffTask = DispatchWorkItem {
     var shutoffCamera: (() -> Void)?
     
     // MARK: Gestures
@@ -577,7 +577,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     func setupFilePath() {
         guard let url = URL.createFolder(folderName: "historyImages") else {
-            print("Couldn't create images folder")
+
             return
         }
         globalUrl = url

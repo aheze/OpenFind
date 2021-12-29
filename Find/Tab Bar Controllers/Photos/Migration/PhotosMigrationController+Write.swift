@@ -116,7 +116,7 @@ extension PhotosMigrationController {
                             realPhoto.assetIdentifier = templatePhoto.assetIdentifier
                         }
                     } catch {
-                        print("Error saving asset identifier or removing photo. \(error)")
+
                     }
                     let fullUrl = folderURL.appendingPathComponent(realPhoto.filePath)
                     deletePhotoAtPath(fullUrl: fullUrl)
@@ -273,7 +273,7 @@ extension PhotosMigrationController {
                             realm.delete(realPhoto)
                         }
                     } catch {
-                        print("Error saving asset identifier or removing photo. \(error)")
+
                     }
                     let fullUrl = folderURL.appendingPathComponent(realPhoto.filePath)
                     deletePhotoAtPath(fullUrl: fullUrl)
@@ -286,7 +286,7 @@ extension PhotosMigrationController {
             do {
                 try FileManager.default.removeItem(at: fullUrl)
             } catch {
-                print("error deleting file. \(error)")
+
             }
         }
     }

@@ -106,7 +106,7 @@ class SearchFieldCell: UICollectionViewCell {
         addNewImageView.image = image
         
         //        leftView.tapped = { [weak self] in
-        //            print("Tap!")
+        
         //        }
     }
     

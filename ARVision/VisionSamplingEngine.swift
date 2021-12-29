@@ -17,7 +17,7 @@ class VisionSamplingEngine {
     
     var startTime: Date?
     func update(pixelBuffer: CVPixelBuffer, completion: @escaping (([VNRecognizedTextObservation]) -> Void)) {
-        print("up")
+
         startTime = Date()
         let request = VNRecognizeTextRequest { request, error in
             let observations = self.textFound(request: request)
@@ -35,7 +35,7 @@ class VisionSamplingEngine {
         do {
             try imageRequestHandler.perform([request])
         } catch let error {
-            print("Error finding text: \(error)")
+
         }
         
         

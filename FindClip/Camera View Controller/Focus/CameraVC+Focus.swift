@@ -29,7 +29,7 @@ extension CameraViewController {
                 device.unlockForConfiguration()
             }
             catch {
-                print("Error focusing \(error)")
+
             }
         }
         

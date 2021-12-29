@@ -12,7 +12,7 @@ struct ExternalLinks: View {
     var body: some View {
         VStack {
             Button(action: {
-                print("Rate the app")
+
                 
                 if let productURL = URL(string: "https://apps.apple.com/app/id1506500202") {
                     var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
@@ -24,7 +24,7 @@ struct ExternalLinks: View {
                     
                     // 3.
                     guard let writeReviewURL = components?.url else {
-                        print("no url")
+
                         return
                     }
                     

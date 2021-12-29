@@ -39,7 +39,7 @@ extension PhotoSlidesViewController {
                             self.realm.delete(realModel.contents)
                         }
                     } catch {
-                        print("Error starring photo \(error)")
+
                     }
                     editableModel.isDeepSearched = false /// also change the editable model
                     editableModel.contents.removeAll()

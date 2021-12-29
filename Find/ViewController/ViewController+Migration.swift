@@ -28,7 +28,7 @@ extension ViewController {
             }
             
         } catch {
-            print("Error while enumerating files \(error.localizedDescription)")
+
         }
     }
     

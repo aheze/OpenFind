@@ -154,7 +154,7 @@ struct Typographizer {
         } catch {
                 if self.isDebugModeEnabled {
                     #if DEBUG
-                        print("Typographizer iterator triggered an error.")
+
                         abort()
                     #endif
                 } else {
@@ -167,7 +167,7 @@ struct Typographizer {
         #if DEBUG
             if let startTime = startTime {
                 let endTime = Date().timeIntervalSince(startTime)
-                print("Typographizing took \(NSString(format:"%.8f", endTime)) seconds")
+
             }
         #endif
 

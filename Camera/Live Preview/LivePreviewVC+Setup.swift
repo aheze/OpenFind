@@ -39,7 +39,7 @@ extension LivePreviewViewController {
                 session.addInput(captureDeviceInput)
             }
         } catch {
-            print("Error occurred: \(error)")
+
             return
         }
         session.sessionPreset = .photo
@@ -87,7 +87,7 @@ extension LivePreviewViewController {
         )
         let devices = discoverySession.devices
         let bestDevice = devices.first
-        print("Device: \(bestDevice)")
+
         return bestDevice
     }
 }

@@ -19,7 +19,7 @@ enum ChangeActions {
 extension PhotosViewController {
     func selectPressed() {
         if allPhotosToDisplay.count == 0 {
-            print("no photos")
+
             if TipViews.inTutorial {
                 TipViews.finishTutorial()
             }

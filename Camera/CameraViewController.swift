@@ -46,8 +46,8 @@ class CameraViewController: UIViewController, PageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Camera loaded")
-        print("View bounds: \(view.bounds)")
+
+
         setup()
     }
     

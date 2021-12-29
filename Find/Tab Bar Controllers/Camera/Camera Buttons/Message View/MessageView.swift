@@ -26,7 +26,7 @@ class MessageView: UIView {
         })
     }
     @IBAction func touchUpInside(_ sender: Any) {
-        print("Message view pressed")
+
         resetAlpha()
     }
     @IBAction func touchUpCancel(_ sender: Any) {

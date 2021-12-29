@@ -10,7 +10,7 @@ import UIKit
 
 extension LivePreviewViewController {
     func updateViewportSize(safeViewFrame: CGRect) {
-        print("update size: \(safeViewFrame)")
+
         guard let imageSize = imageSize else { return }
         self.safeViewFrame = safeViewFrame
         

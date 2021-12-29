@@ -13,7 +13,7 @@ extension PhotoSlidesViewController {
         let findPhoto = resultPhotos[currentIndex].findPhoto
         
         if let editableModel = findPhoto.editableModel {
-            print("has editable model!!!")
+
             if let realModel = getRealModel?(editableModel) {
                 if realModel.isHearted {
                     do {
@@ -21,9 +21,9 @@ extension PhotoSlidesViewController {
                             realModel.isHearted = false
                         }
                     } catch {
-                        print("Error starring photo \(error)")
+
                     }
-                    print("make false")
+
                     editableModel.isHearted = false /// also change the editable model
                     updateActions?(.shouldStar)
                     findPhotoChanged?(findPhoto)
@@ -33,9 +33,9 @@ extension PhotoSlidesViewController {
                             realModel.isHearted = true
                         }
                     } catch {
-                        print("Error starring photo \(error)")
+
                     }
-                    print("make true")
+
                     editableModel.isHearted = true /// also change the editable model
                     updateActions?(.shouldNotStar)
                     findPhotoChanged?(findPhoto)
@@ -53,7 +53,7 @@ extension PhotoSlidesViewController {
                     realm.add(newModel)
                 }
             } catch {
-                print("Error saving model \(error)")
+
             }
             
             let editableModel = EditableHistoryModel()

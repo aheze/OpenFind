@@ -113,7 +113,7 @@ class DefaultHelpController: UIViewController, UITableViewDelegate, UITableViewD
     @objc func closeTapped() {
 //        SwiftEntryKit.dismiss()
         if let pvc = self.navigationController?.presentationController {
-            print("has presentation controller, Navigation")
+
             pvc.delegate?.presentationControllerDidDismiss?(pvc)
         }
         self.dismiss(animated: true, completion: nil)

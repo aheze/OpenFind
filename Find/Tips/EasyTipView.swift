@@ -503,7 +503,7 @@ open class EasyTipView: UIView {
                 if isFrameValid(newFrame, forRefViewFrame: refViewFrame, withinSuperviewFrame: superviewFrame) {
                     
                     if position != .any {
-                        print("[EasyTipView - Info] The arrow position you chose <\(position)> could not be applied. Instead, position <\(value)> has been applied! Please specify position <\(ArrowPosition.any)> if you want EasyTipView to choose a position for you.")
+
                     }
                     
                     frame = newFrame

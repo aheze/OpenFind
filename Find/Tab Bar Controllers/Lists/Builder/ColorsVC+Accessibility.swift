@@ -99,7 +99,7 @@ extension UIColor {
         var (h, s, b, a) : (CGFloat, CGFloat, CGFloat, CGFloat) = (0,0,0,0)
         _ = self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
         
-        print("HSB range- h: \(h), s: \(s), v: \(b)")
+
         
         var colorTitle = ""
         

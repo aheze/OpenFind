@@ -207,7 +207,7 @@ extension CameraViewController {
             
             newView.lostFocus = { [weak self] in
                 guard let self = self else { return }
-                print("lost focus")
+
                 self.previousActivatedHighlight = nil
             }
             

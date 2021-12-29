@@ -22,7 +22,7 @@ class HistorySharing: UIActivityItemProvider {
             let data = Data()
             try data.write(to: temporaryURL)
         } catch let error {
-            print("error saving file with error", error)
+
         }
         super.init(placeholderItem: temporaryURL)
     }
@@ -34,7 +34,7 @@ class HistorySharing: UIActivityItemProvider {
                 let data = try Data(contentsOf: newFileUrl)
                 try data.write(to: temporaryURL)
             } catch let error {
-                print("error saving file with error", error)
+
             }
             return temporaryURL
         }
